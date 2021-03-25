@@ -34,8 +34,7 @@ import android.net.wifi.WifiEnterpriseConfig.Phase2;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.IBinder;
-import android.security.Credentials;
-import android.security.KeyStore;
+import android.security.keystore.KeyProperties;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.text.Editable;
@@ -61,7 +60,6 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -72,6 +70,7 @@ import com.android.net.module.util.ProxyUtils;
 import com.android.settings.ProxySelector;
 import com.android.settings.R;
 import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.utils.AndroidKeystoreAliasLoader;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.Utils;
 import com.android.settingslib.utils.ThreadUtils;
@@ -80,7 +79,7 @@ import com.android.settingslib.wifi.AccessPoint;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -167,7 +166,6 @@ public class WifiConfigController implements TextWatcher,
     private String mUseSystemCertsString;
     private String mDoNotProvideEapUserCertString;
 
-    private ScrollView mDialogContainer;
     private Spinner mSecuritySpinner;
     @VisibleForTesting Spinner mEapMethodSpinner;
     @VisibleForTesting Spinner mEapSimSpinner;    // For EAP-SIM, EAP-AKA and EAP-AKA-PRIME.
@@ -275,7 +273,6 @@ public class WifiConfigController implements TextWatcher,
             mContext.getString(R.string.wifi_do_not_provide_eap_user_cert);
 
         mSsidScanButton = (ImageButton) mView.findViewById(R.id.ssid_scanner_button);
-        mDialogContainer = mView.findViewById(R.id.dialog_scrollview);
         mIpSettingsSpinner = (Spinner) mView.findViewById(R.id.ip_settings);
         mIpSettingsSpinner.setOnItemSelectedListener(this);
         mProxySettingsSpinner = (Spinner) mView.findViewById(R.id.proxy_settings);
@@ -536,8 +533,9 @@ public class WifiConfigController implements TextWatcher,
         } else {
             enabled = ipAndProxyFieldsAreValid();
         }
-        if ((mAccessPointSecurity == AccessPoint.SECURITY_EAP ||
-                mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B)
+        if ((mAccessPointSecurity == AccessPoint.SECURITY_EAP
+                || mAccessPointSecurity == AccessPoint.SECURITY_EAP_WPA3_ENTERPRISE
+                || mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B)
                 && mEapCaCertSpinner != null
                 && mView.findViewById(R.id.l_ca_cert).getVisibility() != View.GONE) {
             String caCertSelection = (String) mEapCaCertSpinner.getSelectedItem();
@@ -553,8 +551,9 @@ public class WifiConfigController implements TextWatcher,
                 enabled = false;
             }
         }
-        if ((mAccessPointSecurity == AccessPoint.SECURITY_EAP ||
-                mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B)
+        if ((mAccessPointSecurity == AccessPoint.SECURITY_EAP
+                || mAccessPointSecurity == AccessPoint.SECURITY_EAP_WPA3_ENTERPRISE
+                || mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B)
                 && mEapUserCertSpinner != null
                 && mView.findViewById(R.id.l_user_cert).getVisibility() != View.GONE
                 && mEapUserCertSpinner.getSelectedItem().equals(mUnspecifiedCertString)) {
@@ -651,10 +650,13 @@ public class WifiConfigController implements TextWatcher,
                 break;
 
             case AccessPoint.SECURITY_EAP:
+            case AccessPoint.SECURITY_EAP_WPA3_ENTERPRISE:
             case AccessPoint.SECURITY_EAP_SUITE_B:
                 if (mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B) {
                     // allowedSuiteBCiphers will be set according to certificate type
                     config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP_SUITE_B);
+                } else if (mAccessPointSecurity == AccessPoint.SECURITY_EAP_WPA3_ENTERPRISE) {
+                    config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP_WPA3_ENTERPRISE);
                 } else {
                     config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP);
                 }
@@ -1031,15 +1033,17 @@ public class WifiConfigController implements TextWatcher,
         if (refreshCertificates) {
             loadSims();
 
+            final AndroidKeystoreAliasLoader androidKeystoreAliasLoader =
+                    getAndroidKeystoreAliasLoader();
             loadCertificates(
                     mEapCaCertSpinner,
-                    Credentials.CA_CERTIFICATE,
+                    androidKeystoreAliasLoader.getCaCertAliases(),
                     null /* noCertificateString */,
                     false /* showMultipleCerts */,
                     true /* showUsePreinstalledCertOption */);
             loadCertificates(
                     mEapUserCertSpinner,
-                    Credentials.USER_PRIVATE_KEY,
+                    androidKeystoreAliasLoader.getKeyCertAliases(),
                     mDoNotProvideEapUserCertString,
                     false /* showMultipleCerts */,
                     false /* showUsePreinstalledCertOption */);
@@ -1122,10 +1126,13 @@ public class WifiConfigController implements TextWatcher,
                 } else if (caCerts.length == 1) {
                     setSelection(mEapCaCertSpinner, caCerts[0]);
                 } else {
+                    final AndroidKeystoreAliasLoader androidKeystoreAliasLoader =
+                            getAndroidKeystoreAliasLoader();
+
                     // Reload the cert spinner with an extra "multiple certificates added" item.
                     loadCertificates(
                             mEapCaCertSpinner,
-                            Credentials.CA_CERTIFICATE,
+                            androidKeystoreAliasLoader.getCaCertAliases(),
                             null /* noCertificateString */,
                             true /* showMultipleCerts */,
                             true /* showUsePreinstalledCertOption */);
@@ -1444,8 +1451,8 @@ public class WifiConfigController implements TextWatcher,
     }
 
     @VisibleForTesting
-    KeyStore getKeyStore() {
-        return KeyStore.getInstance();
+    AndroidKeystoreAliasLoader getAndroidKeystoreAliasLoader() {
+        return new AndroidKeystoreAliasLoader(KeyProperties.NAMESPACE_WIFI);
     }
 
     @VisibleForTesting
@@ -1489,7 +1496,7 @@ public class WifiConfigController implements TextWatcher,
     @VisibleForTesting
     void loadCertificates(
             Spinner spinner,
-            String prefix,
+            Collection<String> choices,
             String noCertificateString,
             boolean showMultipleCerts,
             boolean showUsePreinstalledCertOption) {
@@ -1504,14 +1511,8 @@ public class WifiConfigController implements TextWatcher,
             certs.add(mUseSystemCertsString);
         }
 
-        String[] certificateNames = null;
-        try {
-            certificateNames = getKeyStore().list(prefix, android.os.Process.WIFI_UID);
-        } catch (Exception e) {
-            Log.e(TAG, "can't get the certificate list from KeyStore");
-        }
-        if (certificateNames != null && certificateNames.length != 0) {
-            certs.addAll(Arrays.stream(certificateNames)
+        if (choices != null && choices.size() != 0) {
+            certs.addAll(choices.stream()
                     .filter(certificateName -> {
                         for (String undesired : UNDESIRED_CERTIFICATES) {
                             if (certificateName.startsWith(undesired)) {
@@ -1694,9 +1695,14 @@ public class WifiConfigController implements TextWatcher,
         if (mWifiManager.isWpa3SaeSupported()) {
             spinnerAdapter.add(mContext.getString(R.string.wifi_security_sae));
             mSecurityInPosition[idx++] = AccessPoint.SECURITY_SAE;
+            spinnerAdapter.add(mContext.getString(R.string.wifi_security_eap_wpa_wpa2));
+            mSecurityInPosition[idx++] = AccessPoint.SECURITY_EAP;
+            spinnerAdapter.add(mContext.getString(R.string.wifi_security_eap_wpa3));
+            mSecurityInPosition[idx++] = AccessPoint.SECURITY_EAP_WPA3_ENTERPRISE;
+        } else {
+            spinnerAdapter.add(mContext.getString(R.string.wifi_security_eap));
+            mSecurityInPosition[idx++] = AccessPoint.SECURITY_EAP;
         }
-        spinnerAdapter.add(mContext.getString(R.string.wifi_security_eap));
-        mSecurityInPosition[idx++] = AccessPoint.SECURITY_EAP;
         if (mWifiManager.isWpa3SuiteBSupported()) {
             spinnerAdapter.add(mContext.getString(R.string.wifi_security_eap_suiteb));
             mSecurityInPosition[idx++] = AccessPoint.SECURITY_EAP_SUITE_B;

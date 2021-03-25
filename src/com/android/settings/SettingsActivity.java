@@ -311,6 +311,7 @@ public class SettingsActivity extends SettingsBaseActivity
         mMainSwitch = findViewById(R.id.switch_bar);
         if (mMainSwitch != null) {
             mMainSwitch.setMetricsTag(getMetricsTag());
+            mMainSwitch.setTranslationZ(findViewById(R.id.main_content).getTranslationZ() + 1);
         }
 
         // see if we should show Back/Next buttons

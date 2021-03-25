@@ -102,8 +102,7 @@
 
     <!-- Disclaimer for camera based rotate [CHAR_LIMIT=NONE] -->
     <string name="smart_rotate_text_headline">
-        Face based Autorotate uses the front camera to see if and how someone is looking at the screen. It allows
-        for reading while lying down and images are never stored or sent to Google.&lt;br>&lt;br>
+        Face Detection uses the front-facing camera to improve Auto-Rotate accuracy. Images are never stored or sent to Google.&lt;br>&lt;br>
        &lt;a href="<xliff:g example="http://www.google.com" id="url">http://support.google.com/mobile?p=telephony_rtt</xliff:g>">Learn more&lt;/a>
     </string>
     <string name="font_size_preview_text_headline">Sample text</string>
@@ -895,13 +894,21 @@
     <!-- message shown in summary field when no fingerprints are registered -->
     <string name="security_settings_fingerprint_preference_summary_none"></string>
     <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature[CHAR LIMIT=29] -->
-    <string name="security_settings_fingerprint_enroll_introduction_title">Unlock with fingerprint</string>
-    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature, when fingerprint unlock is disabed by device admin [CHAR LIMIT=40] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Set up your fingerprint</string>
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature, when fingerprint unlock is disabled by device admin [CHAR LIMIT=40] -->
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled">Use your fingerprint</string>
     <!-- Introduction detail message shown in fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_enroll_introduction_message">Just touch the fingerprint sensor to unlock your phone, authorize purchases, or sign in to apps. Be careful whose fingerprints you add. Even one added print can do any of these things.</string>
+    <!-- Introduction title shown in the bottom of fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_enroll_introduction_footer_title_1">You\u2019re in control</string>
+    <!-- Introduction title shown in the bottom of fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_enroll_introduction_footer_title_2">Keep in mind</string>
     <!-- Introduction detail message shown in the bottom of fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_enroll_introduction_bottom_message">Your fingerprint may be less secure than a strong pattern or PIN.</string>
+    <string name="security_settings_fingerprint_enroll_introduction_footer_message_1">The data recorded by Fingerprint is stored securely and never leaves your phone. You can delete your data anytime in Settings.</string>
+    <!-- Introduction detail message shown in the bottom of fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_enroll_introduction_footer_message_2">Your fingerprint may be less secure than a strong pattern or PIN.</string>
+    <!-- Introduction detail message shown in the bottom of fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_enroll_introduction_footer_message_3" product="default">Your phone will occasionally use your recent fingerprint images to create improved fingerprint models.</string>
     <!-- Introduction detail message shown in fingerprint enrollment dialog, when fingerprint unlock is disabled by device admin [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled">Use your fingerprint to unlock your phone or approve purchases.\n\nNote: You can\u2019t use your fingerprint to unlock this device. For more information, contact your organization\u2019s admin.</string>
     <!-- Introduction detail message shown in fingerprint enrollment screen in setup wizard. [CHAR LIMIT=NONE]-->
@@ -910,8 +917,12 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel">Cancel</string>
     <!-- Button text to cancel enrollment [CHAR LIMIT=30] -->
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks">No thanks</string>
+    <!-- Button text to skip enrollment [CHAR LIMIT=30] -->
+    <string name="security_settings_fingerprint_enroll_introduction_skip">Skip</string>
     <!-- Button text to continue to the next screen from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_introduction_continue">Continue</string>
+    <!-- Button text to agree the consent and continue to the next screen from the introduction [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_enroll_introduction_agree">Agree</string>
     <!-- Button text to cancel enrollment from the introduction (this string variant is used while in setup wizard) [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup">Skip</string>
     <!-- Button text to continue to the next screen from the introduction (this string variant is used while in setup wizard) [CHAR LIMIT=22] -->
@@ -944,10 +955,12 @@
     <string name="cancel_lock_screen_dialog_button_label">Cancel</string>
     <!-- Introduction title shown in fingerprint enrollment dialog to locate the sensor [CHAR LIMIT=29] -->
     <string name="security_settings_fingerprint_enroll_find_sensor_title">Touch the sensor</string>
+    <!-- Introduction title shown in fingerprint enrollment dialog to locate the sensor [CHAR LIMIT=60] -->
+    <string name="security_settings_udfps_enroll_find_sensor_title">Touch &amp; hold the fingerprint icon</string>
     <!-- Message shown in fingerprint enrollment dialog to locate the sensor -->
     <string name="security_settings_fingerprint_enroll_find_sensor_message">It\u2019s on the back of your phone. Use your index finger.</string>
     <!-- Message shown in fingerprint enrollment dialog to locate the sensor [CHAR LIMIT=NONE]-->
-    <string name="security_settings_udfps_enroll_find_sensor_message">It\u2019s on the screen. Look for the fingerprint with a glowing circle.</string>
+    <string name="security_settings_udfps_enroll_find_sensor_message">The fingerprint sensor is on your screen. Move your finger across the screen to find it.</string>
     <!-- Content description of graphic that shows where the fingerprint of the device is [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description">Illustration with device and fingerprint sensor location</string>
     <!-- Label text shown in fingerprint dialog for renaming a fingerprint template [CHAR LIMIT=22] -->
@@ -960,10 +973,18 @@
     <string name="security_settings_fingerprint_enroll_start_title">Touch the sensor</string>
     <!-- Message shown in fingerprint enrollment dialog to begin enrollment [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_enroll_start_message">Put your finger on the sensor and lift after you feel a vibration</string>
+    <!-- Message shown in fingerprint enrollment dialog to begin enrollment [CHAR LIMIT=NONE] -->
+    <string name="security_settings_udfps_enroll_start_message">Each time you touch, keep your finger on the icon until you feel a vibration</string>
     <!-- Title shown in fingerprint enrollment dialog to repeat touching the fingerprint sensor [CHAR LIMIT=40] -->
     <string name="security_settings_fingerprint_enroll_repeat_title">Lift, then touch again</string>
+    <!-- Title shown in fingerprint enrollment dialog to repeat touching the fingerprint sensor [CHAR LIMIT=40] -->
+    <string name="security_settings_udfps_enroll_title_one_more_time">One more time</string>
+    <!-- Title shown in fingerprint enrollment dialog to repeat touching the fingerprint sensor [CHAR LIMIT=60] -->
+    <string name="security_settings_udfps_enroll_repeat_title_touch_icon">Touch the fingerprint icon as it moves</string>
     <!-- Message shown in fingerprint enrollment dialog to repeat touching the fingerprint sensor [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_enroll_repeat_message">Keep lifting your finger to add the different parts of your fingerprint</string>
+    <!-- Message shown in fingerprint enrollment dialog to repeat touching the fingerprint sensor [CHAR LIMIT=NONE] -->
+    <string name="security_settings_udfps_enroll_repeat_message">This helps capture your full fingerprint</string>
     <!-- Title shown in fingerprint enrollment dialog once enrollment is completed [CHAR LIMIT=29] -->
     <string name="security_settings_fingerprint_enroll_finish_title">Fingerprint added</string>
     <!-- Message shown in fingerprint enrollment dialog once enrollment is completed -->
@@ -3041,7 +3062,7 @@
     <!-- [CHAR LIMIT=NONE] Display settings screen, setting description for the always-on ambient display feature. -->
     <string name="doze_always_on_summary">Increased battery usage</string>
     <!-- [CHAR LIMIT=30] Display and accessibility settings screens, setting option name to force bold text. -->
-    <string name="force_bold_text">Bold Text</string>
+    <string name="force_bold_text">Bold text</string>
     <!-- [CHAR LIMIT=30] Sound & display settings screen, setting option name to change font size -->
     <string name="title_font_size">Font size</string>
     <!-- Summary for Font size. Lets the user know that this will make text larger or smaller. Appears in the accessibility portion of setup wizard. [CHAR LIMIT=NONE] -->
@@ -3414,6 +3435,22 @@
     <string name="storage_internal_title">Device storage</string>
     <!-- Section header above list of external storage devices [CHAR LIMIT=30]-->
     <string name="storage_external_title">Portable storage</string>
+
+    <!-- Label for the settings activity for controlling apps that can schedule alarms [CHAR LIMIT=30] -->
+    <string name="alarms_and_reminders_label">Alarms and reminders</string>
+    <!-- Label for the switch to toggler the permission for scheduling alarms [CHAR LIMIT=50] -->
+    <string name="alarms_and_reminders_switch_title">Allow to set alarms or reminders</string>
+    <!-- Title for the setting screen for controlling apps that can schedule alarms [CHAR LIMIT=30] -->
+    <string name="alarms_and_reminders_title">Alarms and reminders</string>
+    <!-- Description that appears below the alarms_and_reminders switch [CHAR LIMIT=NONE] -->
+    <string name="alarms_and_reminders_footer_title">
+        Allow this app to schedule alarms or other timing based events.
+        This will allow the app to wake up and run even when you are not using the device.
+        Note that revoking this permission may cause the app to malfunction, specifically any alarms
+        that the app has scheduled will no longer work.
+    </string>
+    <!-- Keywords for setting screen for controlling apps that can schedule alarms [CHAR LIMIT=100] -->
+    <string name="keywords_alarms_and_reminders">schedule, alarm, reminder, event</string>
 
     <!-- Summary of a single storage volume, constrasting available and total storage space. [CHAR LIMIT=48]-->
     <string name="storage_volume_summary"><xliff:g id="used" example="1.2GB">%1$s</xliff:g> used of <xliff:g id="total" example="32GB">%2$s</xliff:g></string>
@@ -4025,7 +4062,7 @@
     <string name="managed_profile_location_switch_title">Location for work profile</string>
     <!-- [CHAR LIMIT=30] Location settings screen. It's a link that directs the user to a page that
       shows the location permission setting for each installed app -->
-    <string name="location_app_level_permissions">App access to location</string>
+    <string name="location_app_level_permissions">Manage location permissions</string>
     <!-- Summary for app permission on Location settings page when location is off [CHAR LIMIT=NONE] -->
     <string name="location_app_permission_summary_location_off">Location is off</string>
     <!--
@@ -4050,7 +4087,9 @@
             apps have access to location</item>
     </plurals>
     <!-- [CHAR LIMIT=50] Location settings screen, sub category for recent location access -->
-    <string name="location_category_recent_location_access">Recent location access</string>
+    <string name="location_category_recent_location_access">Past 24 hour access</string>
+    <!-- Location settings screen, displayed when there're more than three recent location access apps [CHAR LIMIT=30] -->
+    <string name="location_recent_location_access_see_all">See all</string>
     <!-- [CHAR LIMIT=30] Location settings screen, button to bring the user to view the details of recent location access -->
     <string name="location_recent_location_access_view_details">View details</string>
     <!-- Location settings screen, displayed when there's no recent app accessing location
@@ -4063,8 +4102,6 @@
     <string name="location_high_battery_use">High battery use</string>
     <!-- [CHAR LIMIT=30] Location settings screen, recent location requests low battery use-->
     <string name="location_low_battery_use">Low battery use</string>
-    <!-- [CHAR LIMIT=60] Wireless background scanning settings screen, screen title -->
-    <string name="location_scanning_screen_title">Wi\u2011Fi and Bluetooth scanning</string>
     <!-- [CHAR LIMIT=130] Preference title for Wi-Fi always scanning -->
     <string name="location_scanning_wifi_always_scanning_title">Wi\u2011Fi scanning</string>
     <!-- Preference description text for Wi-Fi always scanning -->
@@ -4073,11 +4110,13 @@
     <string name="location_scanning_bluetooth_always_scanning_title">Bluetooth scanning</string>
     <!-- Description text for Bluetooth always scanning -->
     <string name="location_scanning_bluetooth_always_scanning_description">Allow apps and services to scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services.</string>
+    <!-- [CHAR LIMIT=60] Location Services screen, screen title -->
+    <string name="location_services_screen_title">Location Services</string>
     <!-- [CHAR LIMIT=50] Location settings screen, sub category for location services for managed profile -->
     <string name="managed_profile_location_services">Location services for work</string>
 
     <!-- [CHAR LIMIT=60] Location settings screen, screen title -->
-    <string name="location_time_zone_detection_screen_title">Location time zone detection</string>
+    <string name="location_time_zone_detection_screen_title">Use location to set time zone</string>
     <!-- [CHAR LIMIT=50] Location settings screen, title for the setting that control whether the
          device can use its location for time zone detection. -->
     <string name="location_time_zone_detection_enabled_title">Location time zone detection</string>
@@ -4091,7 +4130,7 @@
     <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is not
          applicable due to other settings like the "automatic time zone detection enabled" setting
          being set to "off". -->
-    <string name="location_time_zone_detection_auto_is_off">Automatic time zone detection is disabled</string>
+    <string name="location_time_zone_detection_auto_is_off">Automatic time zone is off</string>
     <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is not
          applicable for the user for unspecified reasons. More specific messages are used when there
          is a clear reason. -->
@@ -4522,13 +4561,13 @@
     <!-- Manage applications, restore updated system application to factory version -->
     <string name="app_factory_reset">Uninstall updates</string>
     <!-- Manage applications, individual application info screen, screen, message text under Launch by default heading. This is present if the app is set as a default for some actions. -->
-    <string name="auto_launch_enable_text">You\u2019ve chosen to launch this app by default for some actions.</string>
+    <string name="auto_launch_enable_text">Some activities you\u2019ve selected open in this app by default.</string>
     <!-- Manage applications, individual application info screen, screen, message text under Launch by default heading. This is present if the app was given user permission to create widgets. -->
     <string name="always_allow_bind_appwidgets_text">You\u2019ve chosen to allow this app to create widgets and access their data.</string>
     <!-- Manage applications, individual application screen, text under Launch by default heading if the app is NOT a default for actions -->
     <string name="auto_launch_disable_text">No defaults set.</string>
     <!-- Manage applications, individual application screen, button label under Launch by default heading.  This is used to clear any default actions that may be assigned to this app.  -->
-    <string name="clear_activities">Clear defaults</string>
+    <string name="clear_activities">Clear default preferences</string>
     <!-- Manage applications, individual application info screen, screen, message text under screen compatibility heading -->
     <string name="screen_compatibility_text">This app may not be designed for your screen. You can control how it
             adjusts to your screen here.</string>
@@ -5021,6 +5060,8 @@
     <string name="captions_category_title">Captions</string>
     <!-- Title for the accessibility preference category of audio services and settings. [CHAR LIMIT=50] -->
     <string name="audio_category_title">Audio</string>
+    <!-- Title for the accessibility preference category of general services and settings. [CHAR LIMIT=50] -->
+    <string name="general_category_title">General</string>
     <!-- Title for the accessibility preference category of display services and settings. [CHAR LIMIT=50] -->
     <string name="display_category_title">Display</string>
     <!-- Title for the accessibility text options page. [CHAR LIMIT=50] -->
@@ -5354,7 +5395,7 @@
     <string name="daltonizer_mode_tritanomaly_summary">Blue-yellow</string>
 
     <!-- Title for the accessibility preference and switch of the Reduce Brightness feature. [CHAR LIMIT=NONE] -->
-    <string name="reduce_bright_colors_preference_title">Reduce Brightness</string>
+    <string name="reduce_bright_colors_preference_title">Reduce brightness</string>
     <!-- Summary for the accessibility preference to configure Reduce Brightness feature. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_preference_summary" product="default">Make screen darker than your phone\u2019s minimum brightness</string>
     <!-- Summary for the accessibility preference to configure Reduce Brightness feature. [CHAR LIMIT=NONE] -->
@@ -7360,6 +7401,8 @@
     <string name="help_uri_printing" translatable="false"></string>
     <!-- Help URI, About phone [DO NOT TRANSLATE] -->
     <string name="help_uri_about" translatable="false"></string>
+    <!-- Help URI, manage apps that can set alarms and reminders [DO NOT TRANSLATE] -->
+    <string name="help_uri_alarms_and_reminders" translatable="false"></string>
 
     <!-- Help URL, WiFi [DO NOT TRANSLATE] -->
     <string name="help_url_wifi" translatable="false"></string>
@@ -7556,9 +7599,6 @@
     <string name="mms_message_title">MMS messages</string>
     <!-- Summary of multimedia messaging service settings.  [CHAR LIMIT=100] -->
     <string name="mms_message_summary">Send &amp; receive when mobile data is off</string>
-
-    <!-- Cell broacast receiver package name [DO NOT TRANSLATE] -->
-    <string name="cell_broadcast_receiver_package">com.android.cellbroadcastreceiver.module</string>
 
     <!-- Title of a preference for whether to allow data during calls that is shown when mobile
          data is turned off. This is needed for some multi-SIM scenarios, because the SIM that is
@@ -8817,8 +8857,10 @@
     <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
     <string name="notifications_sent_never">Never</string>
 
-    <!-- Sound & notification > Advanced section: Title for managing notification listeners option. [CHAR LIMIT=30] -->
-    <string name="manage_notification_access_title">Notification access</string>
+    <!-- Sound & notification > Advanced section: Title for managing notification listeners option. [CHAR LIMIT=60] -->
+    <string name="manage_notification_access_title">Device &amp; app notifications</string>
+
+    <string name="manage_notification_access_summary">Control which notifications show on your apps and devices</string>
 
     <!-- Notification Access section: Indicates that the work profile admin doesn't allow this
          notification listener to access work profile notifications [CHAR LIMIT=100] -->
@@ -8877,26 +8919,19 @@
     <string name="notification_listener_disable_warning_confirm">Turn off</string>
     <string name="notification_listener_disable_warning_cancel">Cancel</string>
     <string name="notification_listener_type_title">Allowed notification types</string>
-    <string name="notif_type_ongoing">Important ongoing notifications</string>
-    <string name="notif_type_conversation">Conversation notifications</string>
-    <string name="notif_type_alerting">Alerting notifications</string>
-    <string name="notif_type_silent">Silent notifications</string>
-
-    <!-- Per notification listener, launches a list of apps whose notifications this listener cannot see -->
-    <string name="notif_listener_excluded_title">Apps that are not bridged to this listener</string>
-
-    <!-- Per notification listener, when the listener can see notifications from all apps -->
-    <string name="notif_listener_excluded_summary_zero">All apps are bridged</string>
-
-    <!-- Per notification listener, a summary of how many apps this listener cannot see
-     notifications from -->
-    <plurals name="notif_listener_excluded_summary_nonzero">
-        <item quantity="one">%d app is not bridged</item>
-        <item quantity="other">%d apps are not bridged</item>
-    </plurals>
+    <string name="notif_type_ongoing">Real-time</string>
+    <string name="notif_type_ongoing_summary">Real-time communication from apps in use, navigation, phone calls, and more</string>
+    <string name="notif_type_conversation">Conversations</string>
+    <string name="notif_type_conversation_summary">SMS and other communications</string>
+    <string name="notif_type_alerting">Default</string>
+    <string name="notif_type_alerting_summary">Notifications that may ring or vibrate based on settings</string>
+    <string name="notif_type_silent">Silent</string>
+    <string name="notif_type_silent_summary">Notifications that never make sound or vibrations</string>
 
     <!-- Per notification listener, a list of apps whose notifications this listener cannot see -->
-    <string name="notif_listener_excluded_app_title">Bridged apps</string>
+    <string name="notif_listener_excluded_app_title">See all apps</string>
+    <string name="notif_listener_excluded_app_summary">Change notification settings for each app that can send notifications</string>
+    <string name="notif_listener_excluded_app_screen_title">Apps shown on device</string>
 
     <!-- Title for managing VR (virtual reality) helper services. [CHAR LIMIT=50] -->
     <string name="vr_listeners_title">VR helper services</string>
@@ -9712,9 +9747,46 @@
     <!-- Category name for App Launch -->
     <string name="app_launch_domain_links_title">Opening links</string>
     <string name="app_launch_open_domain_urls_title">Open supported links</string>
+    <!-- Preference title for Supported links open in this app. [CHAR LIMIT=60] -->
+    <string name="app_launch_top_intro_message">Supported links open in this app</string>
+    <!-- Preference title for Links to open in this app. [CHAR LIMIT=60] -->
+    <string name="app_launch_links_category">Links to open in this app</string>
+
     <string name="app_launch_open_domain_urls_summary">Open without asking</string>
     <string name="app_launch_supported_domain_urls_title">Supported links</string>
-    <string name="app_launch_other_defaults_title">Other defaults</string>
+
+    <string name="app_launch_other_defaults_title">Other default preferences</string>
+    <!-- Preference title for Add link [CHAR LIMIT=60] -->
+    <string name="app_launch_add_link">Add link</string>
+    <!-- Footer for Open by default. [CHAR LIMIT=NONE] -->
+    <string name="app_launch_footer">An app can verify links to automatically open in the app. <annotation id="url">Learn more</annotation></string>
+
+    <!-- Title, message and button for verified links dialog. -->
+    <plurals name="app_launch_verified_links_title">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> verified link</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> verified links</item>
+    </plurals>
+    <plurals name="app_launch_verified_links_message">
+        <item quantity="one">This link is verified and automatically opens in this app.</item>
+        <item quantity="other">These links are verified and automatically open in this app.</item>
+    </plurals>
+    <!-- OK button for verified links dialog. [CHAR LIMIT=20] -->
+    <string name="app_launch_dialog_ok">OK</string>
+
+    <!-- Title for Checking other supported links dialog. [CHAR LIMIT=50] -->
+    <string name="app_launch_checking_links_title">Checking for other supported links\u2026</string>
+    <!-- Cancel button for Checking other supported links dialog. [CHAR LIMIT=20] -->
+    <string name="app_launch_dialog_cancel">Cancel</string>
+
+    <!-- Title and button for supported links dialog. -->
+    <plurals name="app_launch_supported_links_title">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> supported link</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> supported links</item>
+    </plurals>
+    <!-- Add button for supported links dialog. [CHAR LIMIT=20] -->
+    <string name="app_launch_supported_links_add">Add</string>
+    <!-- The subtext of the link title in supported links dialog. [CHAR LIMIT=30] -->
+    <string name="app_launch_supported_links_subtext">Opens in <xliff:g id="app_label" example="Reddit">%s</xliff:g></string>
 
     <!-- Summary for app storage preference -->
     <string name="storage_summary_format"><xliff:g id="size" example="30.00MB">%1$s</xliff:g> used in <xliff:g id="storage_type" example="internal memory">%2$s</xliff:g></string>
@@ -10483,8 +10555,8 @@
     <string name="disabled_by_policy_title_screen_capture">Screenshot not allowed</string>
     <!-- Title for dialog displayed to tell user that the app was suspended by an admin [CHAR LIMIT=50] -->
     <string name="disabled_by_policy_title_suspend_packages">Can’t open this app</string>
-    <!-- Shown when the user tries to change a settings locked by an admin [CHAR LIMIT=200] -->
-    <string name="default_admin_support_msg">If you have questions, contact your IT admin</string>
+    <!-- Dialog title. This dialog lets a user know that a specific setting is blocked by their credit provider. Since the user purchased the device from the credit provider, the credit provider controls what they can access. [CHAR LIMIT=50] -->
+    <string name="disabled_by_policy_title_financed_device">Blocked by your credit provider</string>
     <!-- Shown in dialog to allow user to see more information about the device admin [CHAR LIMIT=30] -->
     <string name="admin_support_more_info">More details</string>
     <!-- Shown in admin details page to warn user about policies the admin can set in a work profile. [CHAR LIMIT=NONE] -->
@@ -11525,8 +11597,10 @@
     <!-- AutoFill strings -->
     <!-- Preference label for choosing auto-fill service. [CHAR LIMIT=60] -->
     <string name="autofill_app">Autofill service</string>
+    <!-- Preference category for showing auto-fill services with saved passwords. [CHAR LIMIT=60] -->
+    <string name="autofill_passwords">Passwords</string>
     <!-- Keywords for the auto-fill feature. [CHAR LIMIT=NONE] -->
-    <string name="autofill_keywords">auto, fill, autofill</string>
+    <string name="autofill_keywords">auto, fill, autofill, password</string>
 
     <!-- Message of the warning dialog for setting the auto-fill app. [CHAR_LIMIT=NONE] -->
     <string name="autofill_confirmation_message">
@@ -12171,7 +12245,7 @@
     <string name="carrier_settings_euicc">Carrier</string>
     <!-- Mobile network settings screen, a string showing the version of carrier settings for this
          subscription [CHAR LIMIT=NONE] -->
-    <string name="carrier_settings_version">Settings version</string>
+    <string name="carrier_settings_version">Carrier settings version</string>
 
     <!-- Mobile network settings screen, name for call settings category [CHAR LIMIT=NONE] -->
     <string name="call_category">Calling</string>
@@ -12722,10 +12796,8 @@
     <string name="provider_internet_settings">Internet</string>
     <!-- Provider Model: SIMs controls settings screen, item title to go into the SIMs settings -->
     <string name="provider_network_settings_title">SIMs</string>
-    <!-- Provider Model: Airplane mode networks controls settings screen -->
-    <string name="airplane_safe_networks">Show airplane mode networks</string>
-    <!-- Provider Model: Summary for showing airplane mode networks-->
-    <string name="airplane_safe_networks_summary">Find and connect to networks in airplane mode.</string>
+    <!-- Provider Model: Summary for Wi-Fi switch [CHAR LIMIT=NONE] -->
+    <string name="wifi_switch_summary">Find and connect to Wi\u2011Fi networks</string>
     <!-- Provider Model: List of synonyms for the airplane-safe networks, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_airplane_safe_networks">airplane, airplane-safe</string>
     <!-- Provider Model: Calls and SMS controllers settings screen, item title to go into the Calls and SMS settings -->
@@ -12763,10 +12835,8 @@
     <string name="view_airplane_safe_networks">View airplane mode networks</string>
     <!-- Text of message for viewing the networks that are available in airplane mode. [CHAR LIMIT=60] -->
     <string name="viewing_airplane_mode_networks">Viewing airplane mode networks</string>
-    <!-- Slice title text for turning on networks (e.g. Wi-Fi). [CHAR LIMIT=40] -->
-    <string name="turn_on_networks">Turn on networks</string>
-    <!-- Slice title text for turning off networks (e.g. Wi-Fi). [CHAR LIMIT=40] -->
-    <string name="turn_off_networks">Turn off networks</string>
+    <!-- Slice title text for turning on the Wi-Fi networks. [CHAR LIMIT=40] -->
+    <string name="turn_on_wifi">Turn on Wi\u2011Fi</string>
     <!-- Title for interrupting the voice call alert. [CHAR_LIMIT=NONE] -->
     <string name="reset_your_internet_title">Reset your internet?</string>
     <!-- Description for interrupting the voice call alert. [CHAR_LIMIT=NONE] -->
@@ -12865,6 +12935,8 @@
     <string name="adaptive_battery_main_switch_title" translatable="false">Use adaptive battery</string>
     <!-- Do not translate. Title for adaptive brightness main switch preferences. [CHAR LIMIT=50] -->
     <string name="adaptive_brightness_main_switch_title" translatable="false">Use adaptive brightness</string>
+    <!-- Do not translate. Title for wifi calling main switch preferences. [CHAR LIMIT=50] -->
+    <string name="wifi_calling_main_switch_title" translatable="false">Use Wi-Fi calling</string>
 
     <!-- Default preference title for showing all apps on device [CHAR_LIMIT=50]-->
     <string name="default_see_all_apps_title">See all apps</string>
@@ -12894,6 +12966,11 @@
     <!-- Alert Dialog text when user didn't input the phone number [CHAR LIMIT=50]-->
     <string name="smart_forwarding_missing_alert_dialog_text">OK</string>
 
-    <!-- Enable 2G: Title for if user wants to enable 2G [CHAR LIMIT=40] -->
+    <!-- Title for toggle if user wants to enable 2G [CHAR LIMIT=40] -->
     <string name="enable_2g_title">Allow 2G</string>
+    <!-- Title for toggle if user wants to enable 2G [CHAR LIMIT=NONE] -->
+    <string name="enable_2g_summary">Use 2G cellular connections. For emergency calls, 2G is always turned on.</string>
+
+    <!-- Label for extra app info settings for a specific app [CHAR LIMIT=40] -->
+    <string name="extra_app_info_label" translatable="false"></string>
 </resources>
