@@ -332,6 +332,15 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
         return device.getBondState() == BluetoothDevice.BOND_BONDED && device.isConnected();
     }
 
+    /**
+     * Update the attributes of {@link Preference}.
+     */
+    public void refreshPreference() {
+        for (Preference preference : mPreferenceMap.values()) {
+            ((BluetoothDevicePreference) preference).onPreferenceAttributesChanged();
+        }
+    }
+
     public boolean isGroupDevice(CachedBluetoothDevice cachedDevice) {
         return mGroupUtils.isGroupDevice(cachedDevice);
     }
