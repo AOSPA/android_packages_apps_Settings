@@ -32,7 +32,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-
 /**
  * Provide an interface for testing out the Wifi API
  */
@@ -65,7 +64,7 @@ public class WifiAPITest extends SettingsPreferenceFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mWifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
+        mWifiManager = getSystemService(WifiManager.class);
     }
 
     @Override

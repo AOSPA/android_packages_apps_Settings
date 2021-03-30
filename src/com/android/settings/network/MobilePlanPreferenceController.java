@@ -47,7 +47,6 @@ import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 
 import java.util.List;
 
-
 public class MobilePlanPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnCreate, OnSaveInstanceState {
 
@@ -74,9 +73,9 @@ public class MobilePlanPreferenceController extends AbstractPreferenceController
             MobilePlanPreferenceHost host) {
         super(context);
         mHost = host;
-        mCm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        mTm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        mCm = context.getSystemService(ConnectivityManager.class);
+        mTm = context.getSystemService(TelephonyManager.class);
+        mUserManager = context.getSystemService(UserManager.class);
         mIsSecondaryUser = !mUserManager.isAdminUser();
     }
 

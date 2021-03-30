@@ -23,7 +23,7 @@
 
     <Preference
         android:key="all_app_infos"
-        android:title="@string/applications_settings"
+        android:title="@string/all_apps"
         android:summary="@string/summary_placeholder"
         android:order="-999"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
@@ -65,6 +65,16 @@
     <PreferenceCategory
         android:key="dashboard_tile_placeholder"
         android:order="10"/>
+
+    <Preference
+        android:key="hibernated_apps"
+        android:title="@string/unused_apps"
+        android:summary="@string/summary_placeholder"
+        android:order="15"
+        settings:keywords="app_hibernation_key"
+        settings:controller="com.android.settings.applications.HibernatedAppsPreferenceController">
+        <intent android:action="android.intent.action.MANAGE_UNUSED_APPS"/>
+    </Preference>
 
     <Preference
         android:key="special_access_v2"

@@ -15,10 +15,10 @@
  */
 package com.android.settings.datetime;
 
-import static android.app.time.TimeZoneCapabilities.CAPABILITY_NOT_ALLOWED;
-import static android.app.time.TimeZoneCapabilities.CAPABILITY_NOT_APPLICABLE;
-import static android.app.time.TimeZoneCapabilities.CAPABILITY_NOT_SUPPORTED;
-import static android.app.time.TimeZoneCapabilities.CAPABILITY_POSSESSED;
+import static android.app.time.Capabilities.CAPABILITY_NOT_ALLOWED;
+import static android.app.time.Capabilities.CAPABILITY_NOT_APPLICABLE;
+import static android.app.time.Capabilities.CAPABILITY_NOT_SUPPORTED;
+import static android.app.time.Capabilities.CAPABILITY_POSSESSED;
 
 import android.app.time.TimeManager;
 import android.app.time.TimeZoneCapabilities;
@@ -31,7 +31,8 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -43,18 +44,48 @@ import java.util.concurrent.Executor;
  * screen.
  */
 public class LocationTimeZoneDetectionPreferenceController
-        extends BasePreferenceController
+        extends TogglePreferenceController
         implements LifecycleObserver, OnStart, OnStop, TimeManager.TimeZoneDetectorListener {
+
+    private static final String TAG = "location_time_zone_detection";
 
     private final TimeManager mTimeManager;
     private final LocationManager mLocationManager;
     private TimeZoneCapabilitiesAndConfig mTimeZoneCapabilitiesAndConfig;
+    private InstrumentedPreferenceFragment mFragment;
     private Preference mPreference;
 
-    public LocationTimeZoneDetectionPreferenceController(Context context, String key) {
-        super(context, key);
+    public LocationTimeZoneDetectionPreferenceController(Context context) {
+        super(context, TAG);
         mTimeManager = context.getSystemService(TimeManager.class);
         mLocationManager = context.getSystemService(LocationManager.class);
+    }
+
+    void setFragment(InstrumentedPreferenceFragment fragment) {
+        mFragment = fragment;
+    }
+
+    @Override
+    public boolean isChecked() {
+        TimeZoneCapabilitiesAndConfig capabilitiesAndConfig =
+                mTimeManager.getTimeZoneCapabilitiesAndConfig();
+        TimeZoneConfiguration configuration = capabilitiesAndConfig.getConfiguration();
+        return configuration.isGeoDetectionEnabled();
+    }
+
+    @Override
+    public boolean setChecked(boolean isChecked) {
+        if (isChecked && !mLocationManager.isLocationEnabled()) {
+            new LocationToggleDisabledDialogFragment(mContext)
+                    .show(mFragment.getFragmentManager(), TAG);
+            // Toggle status is not updated.
+            return false;
+        } else {
+            TimeZoneConfiguration configuration = new TimeZoneConfiguration.Builder()
+                    .setGeoDetectionEnabled(isChecked)
+                    .build();
+            return mTimeManager.updateTimeZoneConfiguration(configuration);
+        }
     }
 
     @Override
@@ -126,10 +157,10 @@ public class LocationTimeZoneDetectionPreferenceController
                 summaryResId = R.string.location_time_zone_detection_not_applicable;
             }
         } else if (configureGeoDetectionEnabledCapability == CAPABILITY_POSSESSED) {
-            boolean isGeoDetectionEnabled = configuration.isGeoDetectionEnabled();
-            summaryResId = isGeoDetectionEnabled
-                    ? R.string.location_time_zone_detection_on
-                    : R.string.location_time_zone_detection_off;
+            // If capability is possessed, toggle status already tells all the information needed.
+            // Returning null will make previous text stick on toggling.
+            // See AbstractPreferenceController#refreshSummary.
+            return "";
         } else {
             // This is unexpected: getAvailabilityStatus() should ensure that the UI element isn't
             // even shown for known cases, or the capability is unknown.
