@@ -44,7 +44,6 @@ import com.android.settingslib.bluetooth.PbapServerProfile;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.List;
-import android.util.Log;
 /**
  * This class adds switches for toggling the individual profiles that a Bluetooth device
  * supports, such as "Phone audio", "Media audio", "Contact sharing", etc.
@@ -63,11 +62,9 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     private LocalBluetoothManager mManager;
     private LocalBluetoothProfileManager mProfileManager;
     private CachedBluetoothDevice mCachedDevice;
-    private String BC_PROFILE_CLASS = "com.android.settingslib.bluetooth.BCProfile";
 
     @VisibleForTesting
     PreferenceCategory mProfilesContainer;
-    private Class<?> mBCProfileClass = null;
 
     private PreferenceFragmentCompat mFragment;
     private boolean mIsGroupDevice = false;
@@ -89,12 +86,6 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         mIsGroupDevice = mGroupUtils.isGroupDevice(mCachedDevice);
         if (mIsGroupDevice) {
             mGroupId = mGroupUtils.getGroupId(mCachedDevice);
-        }
-        try {
-            mBCProfileClass = Class.forName(BC_PROFILE_CLASS);
-        } catch (ClassNotFoundException ex) {
-            Log.e(TAG, "no BCProfileClass: exists");
-            mBCProfileClass = null;
         }
     }
 
@@ -139,9 +130,6 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             profilePref.setChecked(device.getPhonebookAccessPermission()
                     == BluetoothDevice.ACCESS_ALLOWED);
         } else if (profile instanceof PanProfile) {
-            profilePref.setChecked(profile.getConnectionStatus(device) ==
-                    BluetoothProfile.STATE_CONNECTED);
-        } else if (mBCProfileClass != null && mBCProfileClass.isInstance(profile)) {
             profilePref.setChecked(profile.getConnectionStatus(device) ==
                     BluetoothProfile.STATE_CONNECTED);
         } else {
