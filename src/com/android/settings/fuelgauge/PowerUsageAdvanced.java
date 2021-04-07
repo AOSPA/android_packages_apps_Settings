@@ -50,7 +50,6 @@ public class PowerUsageAdvanced extends PowerUsageBase {
 
     @VisibleForTesting
     BatteryHistoryPreference mHistPref;
-    private BatteryUtils mBatteryUtils;
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
     private BatteryAppListPreferenceController mBatteryAppListPreferenceController;
     @VisibleForTesting
@@ -64,7 +63,6 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         mHistPref = (BatteryHistoryPreference) findPreference(KEY_BATTERY_GRAPH);
         mPowerUsageFeatureProvider = FeatureFactory.getFactory(context)
                 .getPowerUsageFeatureProvider(context);
-        mBatteryUtils = BatteryUtils.getInstance(context);
 
         // init the summary so other preferences won't have unnecessary move
         updateHistPrefSummary(context);
@@ -142,6 +140,11 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     }
 
     @Override
+    protected boolean isBatteryHistoryNeeded() {
+        return true;
+    }
+
+    @Override
     protected void refreshUi(@BatteryUpdateType int refreshType) {
         final Context context = getContext();
         if (context == null) {
@@ -150,7 +153,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         updatePreference(mHistPref);
         updateHistPrefSummary(context);
 
-        mBatteryAppListPreferenceController.refreshAppListGroup(mStatsHelper, mShowAllApps);
+        mBatteryAppListPreferenceController.refreshAppListGroup(mBatteryUsageStats, mShowAllApps);
     }
 
     private void updateHistPrefSummary(Context context) {

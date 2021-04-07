@@ -32,6 +32,7 @@
         android:title="@string/location_recent_location_access_see_all"
         android:icon="@drawable/ic_chevron_right_24dp"
         android:fragment="com.android.settings.location.RecentLocationAccessSeeAllFragment"
+        settings:controller="com.android.settings.location.RecentLocationAccessSeeAllButtonPreferenceController"
         settings:searchable="false"/>
 
             <CheckBoxPreference
@@ -81,9 +82,8 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory
+    <com.android.settingslib.widget.FooterPreference
+        android:title="@string/location_settings_footer"
         android:key="location_footer"
-        android:layout="@layout/preference_category_no_label"
-        settings:allowDividerAbove="false"
-        settings:controller="com.android.settings.location.LocationFooterPreferenceController"/>
+        android:selectable="false"/>
 </PreferenceScreen>

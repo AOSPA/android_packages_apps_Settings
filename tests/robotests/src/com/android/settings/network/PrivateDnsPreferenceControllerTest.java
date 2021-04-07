@@ -60,8 +60,8 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -125,7 +125,7 @@ public class PrivateDnsPreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         mContentResolver = mContext.getContentResolver();
         mShadowContentResolver = Shadow.extract(mContentResolver);
-        when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
+        when(mContext.getSystemService(ConnectivityManager.class))
                 .thenReturn(mConnectivityManager);
         doNothing().when(mConnectivityManager).registerDefaultNetworkCallback(
                 mCallbackCaptor.capture(), nullable(Handler.class));

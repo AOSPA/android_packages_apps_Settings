@@ -28,7 +28,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.wifi.WifiDialog2;
-import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.wifitrackerlib.WifiEntry;
 
 /**
@@ -46,7 +45,7 @@ public class WifiPrivacyPreferenceController2 extends BasePreferenceController i
     public WifiPrivacyPreferenceController2(Context context) {
         super(context, KEY_WIFI_PRIVACY);
 
-        mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        mWifiManager = context.getSystemService(WifiManager.class);
     }
 
     public void setWifiEntry(WifiEntry wifiEntry) {

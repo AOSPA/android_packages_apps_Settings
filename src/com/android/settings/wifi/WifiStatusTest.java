@@ -45,7 +45,6 @@ import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.List;
 
-
 /**
  * Show the current status details of Wifi related fields
  */
@@ -117,7 +116,7 @@ public class WifiStatusTest extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mWifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
+        mWifiManager = getSystemService(WifiManager.class);
 
         mWifiStateFilter = new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION);
         mWifiStateFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);

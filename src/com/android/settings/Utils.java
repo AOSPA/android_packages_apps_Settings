@@ -55,6 +55,7 @@ import android.graphics.drawable.VectorDrawable;
 import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.net.ConnectivityManager;
+import android.net.LinkAddress;
 import android.net.LinkProperties;
 import android.net.Network;
 import android.net.wifi.WifiManager;
@@ -116,7 +117,6 @@ import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.widget.ActionBarShadowController;
 
-import java.net.InetAddress;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -167,6 +167,9 @@ public final class Utils extends com.android.settingslib.Utils {
      */
     public static final String PROPERTY_LOCATION_INDICATOR_SETTINGS_ENABLED =
             "location_indicator_settings_enabled";
+
+    /** Whether or not app hibernation is enabled on the device **/
+    public static final String PROPERTY_APP_HIBERNATION_ENABLED = "app_hibernation_enabled";
 
     /**
      * Finds a matching activity for a preference's intent. If a matching
@@ -258,13 +261,13 @@ public final class Utils extends com.android.settingslib.Utils {
 
     private static String formatIpAddresses(LinkProperties prop) {
         if (prop == null) return null;
-        final Iterator<InetAddress> iter = prop.getAllAddresses().iterator();
+        final Iterator<LinkAddress> iter = prop.getAllLinkAddresses().iterator();
         // If there are no entries, return null
         if (!iter.hasNext()) return null;
         // Concatenate all available addresses, comma separated
         String addresses = "";
         while (iter.hasNext()) {
-            addresses += iter.next().getHostAddress();
+            addresses += iter.next().getAddress().getHostAddress();
             if (iter.hasNext()) addresses += "\n";
         }
         return addresses;
