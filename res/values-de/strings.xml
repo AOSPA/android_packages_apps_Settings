@@ -52,6 +52,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Lege fest, wie groß Text angezeigt wird."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Verkleinern"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Vergrößern"</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="1150797732067921015">"„Automatisch drehen“ verwenden"</string>
+    <string name="smart_rotate_text_headline" msgid="9147653205505671866">"Das gesichtsbasierte automatische Drehen verwendet die Frontkamera, um zu erkennen, ob und wie jemand den Bildschirm ansieht. Die Funktion erleichtert das Lesen im Liegen. Die für diese Funktion verwendeten Bilder werden nicht gespeichert oder an Google gesendet.&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;Weitere Informationen&lt;/a&gt;"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Beispieltext"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Der Zauberer von Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Kapitel 11: Die wundervolle Smaragdstadt von Oz"</string>
@@ -1173,6 +1175,10 @@
     <string name="search_settings" msgid="7573686516434589771">"Suche"</string>
     <string name="display_settings" msgid="7197750639709493852">"Display"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Bildschirm automatisch drehen"</string>
+    <string name="auto_rotate_option_off" msgid="2788096269396290731">"Aus"</string>
+    <string name="auto_rotate_option_on" msgid="5776678230808498171">"An"</string>
+    <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"An – gesichtsbasiert"</string>
+    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Gesichtserkennung aktivieren"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Farben"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Natürlich"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Verstärkt"</string>
@@ -2133,9 +2139,11 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"Du kannst dieses Gerät an deine Bedürfnisse anpassen. Die Bedienungshilfen kannst du später in den Einstellungen ändern."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Schriftgröße ändern"</string>
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Screenreader"</string>
-    <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Audiodienste und Text auf dem Bildschirm"</string>
+    <string name="captions_category_title" msgid="574490148949400274">"Untertitel"</string>
+    <string name="audio_category_title" msgid="5283853679967605826">"Audio"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Bildschirm"</string>
     <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Text und Anzeige"</string>
+    <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Bildschirm dunkler machen"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Interaktionssteuerung"</string>
     <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"Hilfe beim Tippen"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Systemsteuerelemente"</string>
@@ -2275,6 +2283,7 @@
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"Aus"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"Fehler. Tippen, um weitere Informationen zu erhalten."</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Dieser Dienst funktioniert nicht."</string>
+    <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Tastenkombinationen für Bedienungshilfen"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"In Schnelleinstellungen anzeigen"</string>
     <string name="daltonizer_type" msgid="1715154680803795947">"Korrekturmodus"</string>
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"Deuteranomalie"</string>
@@ -2284,6 +2293,15 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"Rot-Grün-Sehschwäche"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"Rot-Grün-Sehschwäche"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Blau-Gelb-Sehschwäche"</string>
+    <string name="reduce_bright_colors_preference_title" msgid="5249275952895378507">"Helligkeit verringern"</string>
+    <string name="reduce_bright_colors_preference_summary" product="default" msgid="3824406431092247331">"Das Display dunkler machen als die niedrigste Helligkeit deines Smartphones"</string>
+    <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="867454382618040359">"Das Display dunkler machen als die niedrigste Helligkeit deines Tablets"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="7098993556258805657">"Mache dein Display dunkler, um beim Lesen die Augen zu schonen.&lt;br/&gt;&lt;br/&gt; Dies kann sinnvoll sein, wenn: &lt;ol&gt; &lt;li&gt; die niedrigste Standardhelligkeit in deinem Smartphone immer noch zu hell ist&lt;/li&gt; &lt;li&gt; du dein Smartphone in dunklen Umgebungen nutzt, wie z. B. nachts oder in einem dunklen Raum vor dem Schlafengehen&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Mache dein Display dunkler, um beim Lesen die Augen zu schonen.&lt;br/&gt;&lt;br/&gt; Dies kann sinnvoll sein, wenn: &lt;ol&gt; &lt;li&gt; die niedrigste Standardhelligkeit in deinem Tablet immer noch zu hell ist&lt;/li&gt; &lt;li&gt; du dein Tablet in dunklen Umgebungen nutzt, wie z. B. nachts oder in einem dunklen Raum vor dem Schlafengehen&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensität"</string>
+    <string name="reduce_bright_colors_intensity_preference_start_label" msgid="109739628110493358">"Etwas dunkler"</string>
+    <string name="reduce_bright_colors_intensity_preference_end_label" msgid="8686269714092663507">"Am dunkelsten"</string>
+    <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Nach dem Neustart des Geräts beibehalten"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="other">Kurz (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> Sekunden)</item>
       <item quantity="one">Kurz (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> Sekunde)</item>
@@ -2437,8 +2455,7 @@
     <string name="bluetooth_on_time" msgid="8424625554628450028">"WLAN-Aktivzeit"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"Akkunutzung"</string>
     <string name="history_details_title" msgid="8628584613889559355">"Verlaufsdetails"</string>
-    <!-- no translation found for advanced_battery_preference_title (6518802648205311326) -->
-    <skip />
+    <string name="advanced_battery_preference_title" msgid="6518802648205311326">"Akkunutzung anzeigen"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"Akkunutzung"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Details"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Energieverbrauch anpassen"</string>
@@ -3080,11 +3097,10 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"Nutzer löschen"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"Löschen"</string>
     <string name="user_guest" msgid="4545590092001460388">"Gast"</string>
-    <string name="user_clear_guest_menu" msgid="4864362688187480452">"Gästedaten löschen"</string>
-    <string name="user_exit_guest_menu" msgid="5064400453222497734">"Gastsitzung beenden"</string>
-    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"Gastsitzung beenden?"</string>
+    <string name="user_exit_guest_title" msgid="2653103120908427236">"Gast entfernen"</string>
+    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"Gast entfernen?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Alle Apps und Daten in dieser Sitzung werden gelöscht."</string>
-    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"Sitzung beenden"</string>
+    <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Entfernen"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Telefonieren zulassen"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Telefonieren &amp; SMS zulassen"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Nutzer löschen"</string>
@@ -3663,6 +3679,13 @@
     <string name="notif_type_conversation" msgid="3014259738224129504">"Unterhaltungsbenachrichtigungen"</string>
     <string name="notif_type_alerting" msgid="2300039323822104165">"Warnbenachrichtigungen"</string>
     <string name="notif_type_silent" msgid="2514763073653979199">"Lautlose Benachrichtigungen"</string>
+    <string name="notif_listener_excluded_title" msgid="639103158747320529">"Apps, die für diesen Listener nicht überbrückt sind"</string>
+    <string name="notif_listener_excluded_summary_zero" msgid="5152444145866958400">"Alle Apps sind überbrückt"</string>
+    <plurals name="notif_listener_excluded_summary_nonzero" formatted="false" msgid="3218891004546748617">
+      <item quantity="other">%d Apps sind nicht überbrückt</item>
+      <item quantity="one">%d App ist nicht überbrückt</item>
+    </plurals>
+    <string name="notif_listener_excluded_app_title" msgid="8102477888511595023">"Überbrückte Apps"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR-Hilfsdienste"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Keine installierte App hat die Ausführung als VR-Hilfedienst angefordert."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"VR-Dienstzugriff für <xliff:g id="SERVICE">%1$s</xliff:g> erlauben?"</string>
@@ -4096,6 +4119,7 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Dateiübertragung"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Dateien auf ein anderes Gerät übertragen"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
+    <string name="usb_transcode_files" msgid="5999760694155541693">"Exportierte Medien transcodieren"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Fotos oder Dateien übertragen, falls MTP nicht unterstützt wird (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"USB-Tethering"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
@@ -4103,8 +4127,8 @@
     <string name="usb_use" msgid="6783183432648438528">"Verwendungszweck für USB-Verbindung"</string>
     <string name="usb_default_label" msgid="3372838450371060750">"Standard-USB-Konfiguration"</string>
     <string name="usb_default_info" msgid="167172599497085266">"Wenn ein anderes Gerät verbunden und dein Smartphone entsperrt ist, werden diese Einstellungen angewendet. Stell nur Verbindungen zu vertrauenswürdigen Geräten her."</string>
-    <!-- no translation found for usb_power_title (5602112548385798646) -->
-    <skip />
+    <string name="usb_power_title" msgid="5602112548385798646">"Optionen für Ein-/Aus-Taste"</string>
+    <string name="usb_file_transfer_title" msgid="2261577861371481478">"Optionen zur Dateiübertragung"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB-Einstellungen"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"Gerät, das die USB-Verbindung steuert"</string>
@@ -4323,7 +4347,8 @@
       <item quantity="one">1 Beschränkung</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"Dein Mobilfunkanbieter berechnet die Datennutzung eventuell anders als das Gerät"</string>
-    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"Beinhaltet keine Daten, die in Mobilfunkanbieter-Netzwerken verwendet werden"</string>
+    <!-- no translation found for non_carrier_data_usage_warning (4707184871368847697) -->
+    <skip />
     <string name="data_used_template" msgid="8229342096562327646">"Verbrauchte Daten: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Datenwarnung festlegen"</string>
     <string name="data_warning" msgid="2925054658166062884">"Warnlimit für mobile Daten"</string>
@@ -4916,8 +4941,24 @@
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Nimm die SIM heraus und lege sie dann wieder ein. Sollte das Problem weiterhin bestehen, starte das Gerät neu."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Versuche, die SIM noch einmal zu aktivieren. Sollte das Problem weiterhin bestehen, starte das Gerät neu."</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Netzwerkaktivierung"</string>
+    <!-- no translation found for sim_switch_channel_id (4927038626791837861) -->
+    <skip />
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ist aktiviert"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Tippe, um die SIM-Einstellungen zu aktualisieren"</string>
+    <string name="switch_to_removable_notification" msgid="7640342063449806296">"Zu <xliff:g id="CARRIER_NAME">%1$s</xliff:g> gewechselt"</string>
+    <string name="switch_to_removable_notification_no_carrier_name" msgid="7384856964036215338">"Zu einem anderen Mobilfunkanbieter gewechselt"</string>
+    <string name="network_changed_notification_text" msgid="2407908598496951243">"Dein Mobilfunknetz hat sich geändert"</string>
+    <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"Andere SIM-Karte einrichten"</string>
+    <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"Du kannst die aktive SIM-Karte auswählen oder zwei SIM-Karten gleichzeitig verwenden"</string>
+    <string name="choose_sim_title" msgid="4804689675237716286">"Nummer für die Nutzung auswählen"</string>
+    <string name="choose_sim_text" msgid="8056651794100746697">"<xliff:g id="NUMBER">%1$d</xliff:g> Nummern sind auf diesem Gerät verfügbar, es kann aber jeweils nur eine verwendet werden"</string>
+    <string name="choose_sim_activating" msgid="9035902671985449448">"Wird aktiviert<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
+    <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"Kann momentan nicht aktiviert werden"</string>
+    <string name="choose_sim_item_summary_unknown" msgid="7854314795485227568">"Unbekannte Nummer"</string>
+    <string name="switch_sim_dialog_title" msgid="5407316878973237773">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> verwenden?"</string>
+    <string name="switch_sim_dialog_text" msgid="7530186862171635464">"Für mobile Daten, Anrufe und SMS wird <xliff:g id="CARRIER_NAME">%1$s</xliff:g> verwendet."</string>
+    <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Keine aktiven SIM-Karten verfügbar"</string>
+    <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Wenn du mobile Daten, Anruffunktionen und SMS später einrichten möchtest, kannst du das in deinen Netzwerkeinstellungen tun"</string>
     <string name="sim_card_label" msgid="5632157635124050923">"SIM-Karte"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Diese heruntergeladene SIM löschen?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Wenn du diese SIM löschst, wird der <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>-Dienst von diesem Gerät entfernt.\n\nDer Mobilfunkvertrag bei <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> wird dadurch nicht gekündigt."</string>
@@ -4944,10 +4985,8 @@
     <string name="mobile_data_ap_mode_disabled" msgid="6067959496888990983">"Im Flugmodus nicht verfügbar"</string>
     <string name="force_desktop_mode" msgid="1336913605091334238">"Desktop-Modus erzwingen"</string>
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"Experiementellen Desktop-Modus auf sekundären Bildschirmen erzwingen"</string>
-    <!-- no translation found for enable_non_resizable_multi_window (6832903754625404477) -->
-    <skip />
-    <!-- no translation found for enable_non_resizable_multi_window_summary (3275763753261901999) -->
-    <skip />
+    <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Mehrfenstermodus für nicht änderbare Größe aktivieren"</string>
+    <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Erlaubt Mehrfenstermodus für Apps mit nicht änderbarer Größe"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Erzwingen des dunklen Modus außer Kraft setzen"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"Apps werden nicht gezwungen, den dunklen Modus zu verwenden"</string>
     <string name="enable_blurs_on_windows_title" msgid="4218144213800778872">"Weichzeichnen aktivieren"</string>
@@ -4999,7 +5038,7 @@
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Notrufe über WLAN-Telefonie werden von deinem Mobilfunkanbieter nicht unterstützt.\nDas Gerät wechselt automatisch zu einem Mobilfunknetz, um einen Notruf abzusetzen.\nNotrufe sind nur in Bereichen mit Mobilfunkabdeckung möglich."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Für Anrufe WLAN verwenden, um die Qualität zu verbessern"</string>
     <string name="backup_calling_settings_title" msgid="519714752900364326">"Back-up für Anrufe"</string>
-    <string name="backup_calling_setting_summary" msgid="451295393447465830">"Wenn <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> nicht verfügbar ist, kannst du über deine SIM für mobile Daten <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g>-Anrufe starten und annehmen."</string>
+    <string name="backup_calling_setting_summary" msgid="599493254305348733">"Wenn <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> oder Roaming nicht verfügbar ist, kannst du über deine SIM für mobile Daten <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g>-Anrufe starten und annehmen."</string>
     <string name="keywords_backup_calling" msgid="8592800915478816800">"Back-up für Anrufe"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Eingehende MMS"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"MMS kann nicht gesendet werden"</string>
@@ -5069,23 +5108,24 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"Flug, Flugzeug, flugsicher"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Anrufe &amp; SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"WLAN-Anrufe"</string>
-    <!-- no translation found for calls_sms_wfc_summary (3940529919408667336) -->
-    <skip />
-    <!-- no translation found for calls_sms_footnote (8051604228144899434) -->
-    <skip />
+    <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"Anrufe über WLAN starten und empfangen"</string>
+    <string name="calls_sms_footnote" msgid="1003530944232362815">"Mit WLAN-Telefonie kannst du Anrufe über WLANs ohne Mobilfunkanbieter starten und empfangen. "<annotation id="url">"Weitere Informationen"</annotation></string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Anrufe"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"bevorzugt"</string>
-    <string name="calls_sms_calls_preferred" msgid="252913858812799809">"Anrufe bevorzugt"</string>
-    <string name="calls_sms_sms_preferred" msgid="5826706870873784062">"SMS bevorzugt"</string>
+    <string name="calls_sms_calls_preferred" msgid="9004261125829377885">"bevorzugt für Anrufe"</string>
+    <string name="calls_sms_sms_preferred" msgid="3855778890660922711">"bevorzugt für SMS"</string>
     <string name="calls_sms_unavailable" msgid="4055729705246556529">"nicht verfügbar"</string>
+    <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"Momentan nicht verfügbar"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"Keine SIM-Karte"</string>
-    <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Einstellungen"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8635896466814033405) -->
+    <skip />
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Mit öffentlichen Netzwerken verbinden"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"netzwerkverbindung, internet, kabellos, drahtlos, daten, wlan, w-lan, mobilfunk, mobil, mobilfunkanbieter, 4g, 3g, 2g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Flugmodus-Netzwerke anzeigen"</string>
     <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"Flugmodus-Netzwerke werden angezeigt"</string>
-    <string name="turn_off_airplane_mode" msgid="7141986366534514443">"Flugmodus deaktivieren"</string>
+    <string name="turn_on_networks" msgid="7786747178388835577">"Netzwerke aktivieren"</string>
+    <string name="turn_off_networks" msgid="886012600238121672">"Netzwerke deaktivieren"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"Internetverbindung zurücksetzen?"</string>
     <string name="reset_internet_text" product="default" msgid="8797910368942544453">"Dadurch wird dein Telefongespräch beendet"</string>
     <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"Dadurch wird dein Telefongespräch beendet"</string>
@@ -5093,8 +5133,7 @@
     <string name="fix_connectivity" msgid="2781433603228089501">"Konnektivitätsprobleme beheben"</string>
     <string name="airplane_mode_network_available" msgid="1059499681300395240">"Im Flugmodus verfügbare Netzwerke"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"Trenne das Ethernetkabel, um das Netzwerk zu wechseln"</string>
-    <!-- no translation found for cannot_switch_networks_while_connected (3867944849171754777) -->
-    <skip />
+    <string name="airplane_mode_network_panel_title" msgid="6385046104863403604">"Flugmodus-Netzwerke"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Verbunden"</string>
     <string name="mobile_data_off_summary" msgid="3841411571485837651">"Keine automatische Verbindung mit dem Internet"</string>
@@ -5116,28 +5155,18 @@
     <string name="category_name_others" msgid="2366006298768550310">"Sonstige"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Allgemein"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Alle Apps anzeigen"</string>
-    <!-- no translation found for smart_forwarding_title (8368634861971949799) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_summary_enabled (3341062878373185604) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_summary_disabled (5033880700091914809) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_ongoing_title (962226849074401228) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_ongoing_text (2189209372407117114) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_title (1859891191023516080) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_text (5370431503707373653) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_not_activated_text (997396203001257904) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_input_mdn_title (5105463748849841763) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_input_mdn_dialog_title (7542216086697868415) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_missing_mdn_text (2907314684242542226) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_missing_alert_dialog_text (7870419247987316112) -->
+    <string name="smart_forwarding_title" msgid="8368634861971949799">"Intelligente Weiterleitung"</string>
+    <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Intelligente Weiterleitung aktiviert"</string>
+    <string name="smart_forwarding_summary_disabled" msgid="5033880700091914809">"Intelligente Weiterleitung deaktiviert"</string>
+    <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"Anrufeinstellungen"</string>
+    <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"Einstellungen werden aktualisiert…"</string>
+    <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"Fehler bei Anrufeinstellungen"</string>
+    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"Netz- oder SIM-Kartenfehler."</string>
+    <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"SIM ist nicht aktiviert."</string>
+    <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"Telefonnummern eingeben"</string>
+    <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Telefonnummer eingeben"</string>
+    <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Telefonnummer fehlt."</string>
+    <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
+    <!-- no translation found for enable_2g_title (8184757884636162942) -->
     <skip />
 </resources>

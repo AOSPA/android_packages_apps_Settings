@@ -52,6 +52,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"ეკრანზე ტექსტის დაპატარავება ან გადიდება."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"დაპატარავება"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"გადიდება"</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="1150797732067921015">"ავტომატური შეტრიალების გამოყენება"</string>
+    <string name="smart_rotate_text_headline" msgid="9147653205505671866">"სახის მიხედვით ავტომატური შეტრიალება იყენებს წინა კამერას იმისთვის, რომ გაიგოს, უყურებს თუ არა ვინმე ეკრანს და როგორ. ის იძლევა დაწოლილ მდგომარეობაში წაკითხვის საშუალებას და სურათები არასოდეს ინახება და არ ეგზავნება Google-ს.&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;შეიტყვეთ მეტი&lt;/a&gt;"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"ტექსტის ნიმუში"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"ოზის საოცარი ჯადოქარი"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"თავი 11: ოზის ზურმუხტის ქალაქი"</string>
@@ -1172,6 +1174,10 @@
     <string name="search_settings" msgid="7573686516434589771">"ძიება"</string>
     <string name="display_settings" msgid="7197750639709493852">"ეკრანი"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"ეკრანის ავტოროტაცია"</string>
+    <string name="auto_rotate_option_off" msgid="2788096269396290731">"გამორთული"</string>
+    <string name="auto_rotate_option_on" msgid="5776678230808498171">"ჩართული"</string>
+    <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"ჩართული — სახის მიხედვით"</string>
+    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"სახის ამოცნობის ჩართვა"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"ფერები"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"ბუნებრივი"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"გაძლიერებული"</string>
@@ -2132,9 +2138,11 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"ამ მოწყობილობის მორგება თქვენი საჭიროებების შესაბამისად შეგიძლიათ. მარტივი წვდომის ამ პარამეტრების მოგვიანებით შეცვლა პარამეტრებიდან არის შესაძლებელი."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"შრიფტის ზომის შეცვლა"</string>
     <string name="screen_reader_category_title" msgid="6195867428854871553">"ეკრანის წამკითხველები"</string>
-    <string name="audio_and_captions_category_title" msgid="5049122378290004050">"აუდიო და ეკრანზე გამოტანილი ტექსტი"</string>
+    <string name="captions_category_title" msgid="574490148949400274">"სუბტიტრები"</string>
+    <string name="audio_category_title" msgid="5283853679967605826">"აუდიო"</string>
     <string name="display_category_title" msgid="6638191682294461408">"ეკრანი"</string>
     <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"ტექსტი და ჩვენება"</string>
+    <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"ეკრანის მუქი რეჟიმის ჩართვა"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"ინტერაქციის მართვის საშუალებები"</string>
     <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"შეხებით აირჩიეთ დახმარება"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"სისტემის მართვის საშუალებები"</string>
@@ -2274,6 +2282,7 @@
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"გამორთული"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"არ მუშაობს. შეეხეთ ინფორმაციის მისაღებად."</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"ეს სერვისი გაუმართავად მუშაობს."</string>
+    <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"მარტივი წვდომის მალსახმობები"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"სწრაფ პარამეტრებში ჩვენება"</string>
     <string name="daltonizer_type" msgid="1715154680803795947">"შესწორების რეჟიმი"</string>
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"დეიტერანომალია"</string>
@@ -2283,6 +2292,15 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"წითელი-მწვანე"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"წითელი-მწვანე"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"ლურჯი-ყვითელი"</string>
+    <string name="reduce_bright_colors_preference_title" msgid="5249275952895378507">"სიკაშკაშის შემცირება"</string>
+    <string name="reduce_bright_colors_preference_summary" product="default" msgid="3824406431092247331">"დააყენეთ ტელეფონის ეკრანის მინიმალურ სიკაშკაშეზე უფრო მუქი რეჟიმი"</string>
+    <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="867454382618040359">"დააყენეთ ტაბლეტის ეკრანის მინიმალურ სიკაშკაშეზე უფრო მუქი რეჟიმი"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="7098993556258805657">"დააყენეთ მუქი რეჟიმი და გაიმარტივეთ კითხვა.&lt;br/&gt;&lt;br/&gt; ეს დაგეხმარებათ, როცა: &lt;ol&gt; &lt;li&gt; თქვენი ეკრანის ნაგულისხმევი მინიმალური სიკაშკაშე მაინც ძალიან მაღალია&lt;/li&gt; &lt;li&gt; თქვენ თქვენს ტელეფონს ბნელ გარემოში იყენებთ, მაგალითად, ღამით ან ბნელ ოთახში ძილის წინ&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"დააყენეთ მუქი რეჟიმი და გაიმარტივეთ კითხვა.&lt;br/&gt;&lt;br/&gt; ეს დაგეხმარებათ, როცა: &lt;ol&gt; &lt;li&gt; თქვენი ტაბლეტის ნაგულისხმევი მინიმალური სიკაშკაშე მაინც ძალიან მაღალია&lt;/li&gt; &lt;li&gt; თქვენ თქვენს ტაბლეტს ბნელ გარემოში იყენებთ, მაგალითად, ღამით ან ბნელ ოთახში ძილის წინ&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"ინტენსივობა"</string>
+    <string name="reduce_bright_colors_intensity_preference_start_label" msgid="109739628110493358">"ოდნავ მუქი"</string>
+    <string name="reduce_bright_colors_intensity_preference_end_label" msgid="8686269714092663507">"ყველაზე მუქი"</string>
+    <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"შენარჩუნება მოწყობილობის ხელახლა ჩართვის შემდეგაც"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="other">ხანმოკლე (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> წამი)</item>
       <item quantity="one">ხანმოკლე (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> წამი)</item>
@@ -2436,8 +2454,7 @@
     <string name="bluetooth_on_time" msgid="8424625554628450028">"Wi‑Fi მუშაობის დრო"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"ბატარეის მოხმარება"</string>
     <string name="history_details_title" msgid="8628584613889559355">"ისტორიის დეტალები"</string>
-    <!-- no translation found for advanced_battery_preference_title (6518802648205311326) -->
-    <skip />
+    <string name="advanced_battery_preference_title" msgid="6518802648205311326">"ბატარეის მოხმარების ნახვა"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"ბატარეის მოხმარება"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"გამოყენების დეტალები"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"ენერგიის მოხმარების მორგება"</string>
@@ -3079,11 +3096,10 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"მომხმარებლის წაშლა"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"წაშლა"</string>
     <string name="user_guest" msgid="4545590092001460388">"სტუმარი"</string>
-    <string name="user_clear_guest_menu" msgid="4864362688187480452">"სტუმრის მონაცემების გასუფთავება"</string>
-    <string name="user_exit_guest_menu" msgid="5064400453222497734">"სტუმრის სესიის დასრულება"</string>
-    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"დასრულდეს სტუმრის სესია?"</string>
+    <string name="user_exit_guest_title" msgid="2653103120908427236">"სტუმრის ამოშლა"</string>
+    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"სტუმრის ამოშლა?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"ამ სესიის ყველა აპი და მონაცემი წაიშლება."</string>
-    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"სესიის დასრულება"</string>
+    <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"ამოშლა"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"სატელეფონო ზარების ჩართვა"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"სატელ. ზარების და SMS-ის ჩართვა"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"მომხმარებლის წაშლა"</string>
@@ -3662,6 +3678,13 @@
     <string name="notif_type_conversation" msgid="3014259738224129504">"მიმოწერის შეტყობინებები"</string>
     <string name="notif_type_alerting" msgid="2300039323822104165">"გამაფრთხილებელი შეტყობინებები"</string>
     <string name="notif_type_silent" msgid="2514763073653979199">"ჩუმი შეტყობინებები"</string>
+    <string name="notif_listener_excluded_title" msgid="639103158747320529">"აპები, რომლებიც ამ მსმენელთან დაკავშირებული არ არის"</string>
+    <string name="notif_listener_excluded_summary_zero" msgid="5152444145866958400">"ყველა აპი დაკავშირებულია"</string>
+    <plurals name="notif_listener_excluded_summary_nonzero" formatted="false" msgid="3218891004546748617">
+      <item quantity="other">%d აპი დაკავშირებული არ არის</item>
+      <item quantity="one">%d აპი დაკავშირებული არ არის</item>
+    </plurals>
+    <string name="notif_listener_excluded_app_title" msgid="8102477888511595023">"დაკავშირებული აპები"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"ვირტუალური რეალობის დამხმარე სერვისები"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"ვირტუალური სერვისის დამხმარე სერვისად გაშვება არცერთ დაინსტალირებულ აპს არ მოუთხოვია."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"გსურთ ვირტუალური რეალობის სერვისისთვის <xliff:g id="SERVICE">%1$s</xliff:g>-ზე წვდომის დაშვება?"</string>
@@ -4095,6 +4118,7 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"ფაილის გადაცემა"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"ფაილების სხვა მოწყობილობაზე გადაცემა"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
+    <string name="usb_transcode_files" msgid="5999760694155541693">"ექსპორტირებული მედიის ტრანსკოდირება"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"გადაიტანეთ ფოტოები ან ფაილები, თუ MTP არ არის მხარდაჭერილი (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"USB ტეტერინგი"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
@@ -4102,8 +4126,8 @@
     <string name="usb_use" msgid="6783183432648438528">"USB-ს გამოყენება"</string>
     <string name="usb_default_label" msgid="3372838450371060750">"ნაგულისხმევი USB კონფიგურაცია"</string>
     <string name="usb_default_info" msgid="167172599497085266">"მოცემული პარამეტრები იმოქმედებს, როცა დაკავშირებულია სხვა მოწყობილობა, თქვენი ტელეფონი კი განბლოკილია. დაუკავშირდით მხოლოდ სანდო მოწყობილობებს."</string>
-    <!-- no translation found for usb_power_title (5602112548385798646) -->
-    <skip />
+    <string name="usb_power_title" msgid="5602112548385798646">"ელკვების ვარიანტები"</string>
+    <string name="usb_file_transfer_title" msgid="2261577861371481478">"ფაილის გადატანის ვარიანტები"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB პარამეტრები"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB იმართება"</string>
@@ -4322,7 +4346,8 @@
       <item quantity="one">1 შეზღუდვა</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"ოპერატორი თქვენ მიერ მოხმარებულ ინტერნეტს შეიძლება მოწყობილობისგან განსხვავებულად ითვლიდეს"</string>
-    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"გამორიცხავს მონაცემებს, რომლებსაც ოპერატორის ქსელები იყენებს"</string>
+    <!-- no translation found for non_carrier_data_usage_warning (4707184871368847697) -->
+    <skip />
     <string name="data_used_template" msgid="8229342096562327646">"გამოყენებულია <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"მონაც. გაფრთხილების დაყენება"</string>
     <string name="data_warning" msgid="2925054658166062884">"მოხმარების შესახებ გაფრთხილება"</string>
@@ -4915,8 +4940,24 @@
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"ამოიღეთ SIM ბარათი და მოათავსეთ ის ხელახლა. თუ პრობლემა არ მოგვარდა, გადატვირთეთ მოწყობილობა."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"ცადეთ, ხელახლა ჩართოთ SIM ბარათი. თუ პრობლემა არ მოგვარდა, გადატვირთეთ მოწყობილობა."</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"ქსელის გააქტიურება"</string>
+    <!-- no translation found for sim_switch_channel_id (4927038626791837861) -->
+    <skip />
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> აქტიურია"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"შეეხეთ SIM-ბარათის პარამეტრების გასაახლებლად"</string>
+    <string name="switch_to_removable_notification" msgid="7640342063449806296">"გადართულია <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-ზე"</string>
+    <string name="switch_to_removable_notification_no_carrier_name" msgid="7384856964036215338">"გადართულია სხვა ოპერატორზე"</string>
+    <string name="network_changed_notification_text" msgid="2407908598496951243">"თქვენი მობილური ქსელი შეცვლილია"</string>
+    <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"დააყენეთ სხვა SIM ბარათი"</string>
+    <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"აირჩიეთ გააქტიურებული SIM ბარათი ან ერთდროულად ისარგებლეთ 2 SIM ბარათით"</string>
+    <string name="choose_sim_title" msgid="4804689675237716286">"აირჩიეთ გამოსაყენებელი ნომერი"</string>
+    <string name="choose_sim_text" msgid="8056651794100746697">"ამ მოწყობილობაზე ხელმისაწვდომია <xliff:g id="NUMBER">%1$d</xliff:g> ნომერი, თუმცა ყოველ ჯერზე შესაძლებელია მხოლოდ ერთის გამოყენება"</string>
+    <string name="choose_sim_activating" msgid="9035902671985449448">"მიმდინარეობს გააქტიურება<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
+    <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"ამჟამად გააქტიურება ვერ ხერხდება"</string>
+    <string name="choose_sim_item_summary_unknown" msgid="7854314795485227568">"უცნობი ნომერი"</string>
+    <string name="switch_sim_dialog_title" msgid="5407316878973237773">"გსურთ, გამოიყენოთ <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
+    <string name="switch_sim_dialog_text" msgid="7530186862171635464">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> გამოყენებული იქნება მობილური ინტერნეტის, ზარებისა და SMS-ებისთვის."</string>
+    <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"აქტიური SIM ბარათები ხელმისაწვდომი არ არის"</string>
+    <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"მობილური ინტერნეტის, ზარის ფუნქციებისა და SMS-ების მოგვიანებით გამოსაყენებლად, გადადით თქვენი ქსელის პარამეტრებზე"</string>
     <string name="sim_card_label" msgid="5632157635124050923">"SIM ბარათი"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"ამოიშალოს ეს ჩამოტვირთული SIM ბარათი?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"ამ SIM ბარათის ამოშლა მოწყობილობიდან <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>-ის სერვისს ამოიღებს.\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>-ის სერვისი არ გაუქმდება."</string>
@@ -4943,10 +4984,8 @@
     <string name="mobile_data_ap_mode_disabled" msgid="6067959496888990983">"თვითმფრინავის რეჟიმში მიუწვდომელია"</string>
     <string name="force_desktop_mode" msgid="1336913605091334238">"დესკტოპის რეჟიმის იძულებით გააქტიურება"</string>
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"დესკტოპის ექსპერიმენტული რეჟიმის იძულებით გააქტიურება მეორეულ ეკრანებზე"</string>
-    <!-- no translation found for enable_non_resizable_multi_window (6832903754625404477) -->
-    <skip />
-    <!-- no translation found for enable_non_resizable_multi_window_summary (3275763753261901999) -->
-    <skip />
+    <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"ფიქსირებული ზომის აპის ჩართვა მრავალი ფანჯრის რეჟიმში"</string>
+    <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"ეს პარამეტრი საშუალებას იძლევა, აპი ზომის შეუცვლელად გამოჩნდეს მრავალი ფანჯრის რეჟიმში"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"გამუქების იძულების უგულებელყოფა"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"უგულებელყოფს გამუქების ყოველთვის იძულების ფუნქციას"</string>
     <string name="enable_blurs_on_windows_title" msgid="4218144213800778872">"გაბუნდოვნების ჩართვა"</string>
@@ -4998,7 +5037,7 @@
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"გადაუდებელი ზარების Wi‑Fi დარეკვის საშუალებით შესრულება არ არის მხარდაჭერილი თქვენი ოპერატორის მიერ.\nგადაუდებელი ზარის განსახორციელებლად მოწყობილობა ავტომატურად გადაერთვება ფიჭურ ქსელზე.\nგადაუდებელი ზარები მხოლოდ იმ არეალებშია შესაძლებელი, სადაც ფიჭური კავშირგაბმულობა არსებობს."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"ხარისხის გასაუმჯობესებლად ზარებისთვის Wi‑Fi გამოიყენეთ"</string>
     <string name="backup_calling_settings_title" msgid="519714752900364326">"დარეკვის სარეზერვო ხერხი"</string>
-    <string name="backup_calling_setting_summary" msgid="451295393447465830">"თუ <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> მიუწვდომელია, <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g> ზარების განსახორციელებლად და მისაღებად გამოიყენეთ თქვენი მობილური ინტერნეტის SIM."</string>
+    <string name="backup_calling_setting_summary" msgid="599493254305348733">"თუ <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> მიუწვდომელი არის ან როუმინგზეა, <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g> ზარებისთვის გამოიყენეთ თქვენი მობილური ინტერნეტის SIM."</string>
     <string name="keywords_backup_calling" msgid="8592800915478816800">"დარეკვის სარეზერვო ხერხი"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"შემომავალი MMS შეტყობინება"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"MMS შეტყობინების გაგზავნა ვერ ხერხდება"</string>
@@ -5068,23 +5107,24 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"თვითმფრინავი, თვითმფრინავისთვის უსაფრთხო"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"ზარები და SMS-ები"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi-Fi დარეკვა"</string>
-    <!-- no translation found for calls_sms_wfc_summary (3940529919408667336) -->
-    <skip />
-    <!-- no translation found for calls_sms_footnote (8051604228144899434) -->
-    <skip />
+    <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"დარეკეთ ან მიიღეთ ზარები Wi‑Fi ქსელის მეშვეობით"</string>
+    <string name="calls_sms_footnote" msgid="1003530944232362815">"Wi‑Fi დარეკვა საშუალებას გაძლევთ, დარეკოთ ან მიიღოთ ზარები არაოპერატორი Wi‑Fi ქსელების მეშვეობით. "<annotation id="url">"შეიტყვეთ მეტი"</annotation></string>
     <string name="calls_preference_title" msgid="7536882032182563800">"ზარები"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"უპირატესი"</string>
-    <string name="calls_sms_calls_preferred" msgid="252913858812799809">"უპირატესია ზარები"</string>
-    <string name="calls_sms_sms_preferred" msgid="5826706870873784062">"უპირატესია SMS"</string>
+    <string name="calls_sms_calls_preferred" msgid="9004261125829377885">"უპირატესობა მიენიჭოს დარეკვისას"</string>
+    <string name="calls_sms_sms_preferred" msgid="3855778890660922711">"უპირატესობა მიენიჭოს SMS-შეტყობინებებისთვის"</string>
     <string name="calls_sms_unavailable" msgid="4055729705246556529">"მიუწვდომელი"</string>
+    <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"დროებით მიუწვდომელია"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"SIM არ არის"</string>
-    <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"პრიორიტეტები"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8635896466814033405) -->
+    <skip />
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"საჯარო ქსელებთან დაკავშირება"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"ქსელთან კავშირი, ინტერნეტი, უსადენო, მონაცემები, wifi, wi-fi, wi fi, ფიჭური, მობილური, ფიჭური ოპერატორი, 4g, 3g, 2g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"თვითმფრინავის რეჟიმის ქსელების ნახვა"</string>
     <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"თვითმფრინავის რეჟიმის ქსელების ნახვა"</string>
-    <string name="turn_off_airplane_mode" msgid="7141986366534514443">"თვითმფრინავის რეჟიმის გამორთვა"</string>
+    <string name="turn_on_networks" msgid="7786747178388835577">"ქსელების ჩართვა"</string>
+    <string name="turn_off_networks" msgid="886012600238121672">"ქსელების გამორთვა"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"გსურთ ინტერნეტის გადაყენება?"</string>
     <string name="reset_internet_text" product="default" msgid="8797910368942544453">"ეს თქვენი ზარის შეწყვეტას გამოიწვევს"</string>
     <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"ეს თქვენი ზარის შეწყვეტას გამოიწვევს"</string>
@@ -5092,8 +5132,7 @@
     <string name="fix_connectivity" msgid="2781433603228089501">"კავშირის გასწორება"</string>
     <string name="airplane_mode_network_available" msgid="1059499681300395240">"თვითმფრინავის რეჟიმის ქსელები ხელმისაწვდომია"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"ქსელების გადასართავად, გაწყვიტეთ ethernet-თან კავშირი"</string>
-    <!-- no translation found for cannot_switch_networks_while_connected (3867944849171754777) -->
-    <skip />
+    <string name="airplane_mode_network_panel_title" msgid="6385046104863403604">"თვითმფრინავის რეჟიმის ქსელები"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"დაკავშირებული"</string>
     <string name="mobile_data_off_summary" msgid="3841411571485837651">"ინტერნეტს ავტომატურად არ დაუკავშირდება"</string>
@@ -5115,28 +5154,18 @@
     <string name="category_name_others" msgid="2366006298768550310">"სხვა"</string>
     <string name="category_name_general" msgid="7737273712848115886">"ზოგადი"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"ყველა აპის ნახვა"</string>
-    <!-- no translation found for smart_forwarding_title (8368634861971949799) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_summary_enabled (3341062878373185604) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_summary_disabled (5033880700091914809) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_ongoing_title (962226849074401228) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_ongoing_text (2189209372407117114) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_title (1859891191023516080) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_text (5370431503707373653) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_not_activated_text (997396203001257904) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_input_mdn_title (5105463748849841763) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_input_mdn_dialog_title (7542216086697868415) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_missing_mdn_text (2907314684242542226) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_missing_alert_dialog_text (7870419247987316112) -->
+    <string name="smart_forwarding_title" msgid="8368634861971949799">"გონიერი გადამისამართება"</string>
+    <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"გონიერი გადამისამართება ჩართულია"</string>
+    <string name="smart_forwarding_summary_disabled" msgid="5033880700091914809">"გონიერი გადამისამართება გათიშულია"</string>
+    <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"ზარის პარამეტრები"</string>
+    <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"მიმდინარეობს პარამეტრების განახლება…"</string>
+    <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"ზარის პარამეტრების შეცდომა"</string>
+    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"მოხდა ქსელის ან SIM ბარათის შეცდომა."</string>
+    <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"SIM ბარათი გააქტიურებული არ არის."</string>
+    <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"შეიყვანეთ ტელეფონის ნომრები"</string>
+    <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"შეიყვანეთ ტელეფონის ნომერი"</string>
+    <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"ტელეფონის ნომერი აკლია."</string>
+    <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"კარგი"</string>
+    <!-- no translation found for enable_2g_title (8184757884636162942) -->
     <skip />
 </resources>

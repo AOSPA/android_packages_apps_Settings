@@ -52,6 +52,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Дэлгэц дээрх текстийг томруулах, жижигрүүлэх."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Жижигрүүлэх"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Томруулах"</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="1150797732067921015">"Автоматаар эргүүлэхийг ашиглах"</string>
+    <string name="smart_rotate_text_headline" msgid="9147653205505671866">"Царайнд суурилсан Автоматаар эргүүлэх тохиргоо хэн нэгнийг дэлгэц рүү харж байгаа эсэх болон хэрхэн харж байгааг харахын тулд урд талын камерыг ашигладаг. Энэ нь хэвтэнгээ унших болон зургийг Google.&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;Learn more&lt;/a&gt;-д хадгалахгүй, илгээхгүй байх боломж олгодог"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Жишээ текст"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Озын Гайхамшигт шидтэн"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Бүлэг 11: Озын Гайхамшигт Маргад эрдэнийн хот"</string>
@@ -1172,6 +1174,10 @@
     <string name="search_settings" msgid="7573686516434589771">"Хайх"</string>
     <string name="display_settings" msgid="7197750639709493852">"Дэлгэц"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Дэлгэцийг автоматаар эргүүлэх"</string>
+    <string name="auto_rotate_option_off" msgid="2788096269396290731">"Унтраалттай"</string>
+    <string name="auto_rotate_option_on" msgid="5776678230808498171">"Асаалттай"</string>
+    <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Асаалттай - Царайнд суурилсан"</string>
+    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Царай илрүүлэхийг идэвхжүүлэх"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Өнгө"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Байгалийн"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Өдөөсөн"</string>
@@ -2132,9 +2138,11 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"Та энэ төхөөрөмжийг өөрийнхөө шаардлагад нийцүүлэн тохируулах боломжтой. Эдгээр сонголтуудыг дараа нь Тохиргоо хэсэгт өөрчлөх боломжтой."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Фонтын хэмжээг өөрчлөх"</string>
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Дэлгэц уншигч"</string>
-    <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Аудио &amp; дэлгэцийн текст"</string>
+    <string name="captions_category_title" msgid="574490148949400274">"Тайлбар"</string>
+    <string name="audio_category_title" msgid="5283853679967605826">"Аудио"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Дэлгэц"</string>
     <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Текст болон дэлгэц"</string>
+    <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Дэлгэцийг бараан болгох"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Харилцан үйлдлийн хяналт"</string>
     <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"Товшилтын тусламж"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Системийн хяналт"</string>
@@ -2274,6 +2282,7 @@
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"Унтраалттай"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"Ажиллахгүй байна. Мэдээлэл авахын тулд товшино уу."</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Энэ үйлчилгээ буруу ажиллаж байна."</string>
+    <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Хандалтын товчлол"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Шуурхай Тохиргоонд харуулах"</string>
     <string name="daltonizer_type" msgid="1715154680803795947">"Залруулгын горим"</string>
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"Дьютераномаль"</string>
@@ -2283,6 +2292,15 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"Улаан-ногоон"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"Улаан-ногоон"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Цэнхэр-шар"</string>
+    <string name="reduce_bright_colors_preference_title" msgid="5249275952895378507">"Гэрэлтүүлгийг багасгах"</string>
+    <string name="reduce_bright_colors_preference_summary" product="default" msgid="3824406431092247331">"Дэлгэцийг таны утасны хамгийн бага гэрэлтүүлгээс бараан болгох"</string>
+    <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="867454382618040359">"Дэлгэцийг таны таблетын хамгийн бага гэрэлтүүлгээс бараан болгох"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="7098993556258805657">"Дэлгэцээ бараан болгож, уншихад илүү тухтай болгоорой.&lt;br/&gt;&lt;br/&gt; Энэ нь дараах тохиолдолд хэрэгтэй байж болно: &lt;ol&gt; &lt;li&gt; Таны утасны өгөгдмөл хамгийн бага гэрэлтүүлэг хэт тод хэвээр байх үед&lt;/li&gt; &lt;li&gt; Та шөнө, эсвэл орондоо орохоосоо өмнө харанхуй өрөөнд байх зэргээр харанхуй нөхцөл байдалд утсаа ашиглаж байгаа үед&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Дэлгэцээ бараан болгож, уншихад илүү тухтай болгоорой.&lt;br/&gt;&lt;br/&gt; Энэ нь дараах тохиолдолд хэрэгтэй байж болно: &lt;ol&gt; &lt;li&gt; Таны таблетын өгөгдмөл хамгийн бага гэрэлтүүлэг хэт тод хэвээр байх үед&lt;/li&gt; &lt;li&gt; Та шөнө, эсвэл орондоо орохоосоо өмнө харанхуй өрөөнд байх зэргээр харанхуй нөхцөл байдалд таблетаа ашиглаж байгаа үед&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Нэвчилт"</string>
+    <string name="reduce_bright_colors_intensity_preference_start_label" msgid="109739628110493358">"Бага зэрэг бараан"</string>
+    <string name="reduce_bright_colors_intensity_preference_end_label" msgid="8686269714092663507">"Хамгийн бараан"</string>
+    <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Төхөөрөмжийг дахин эхлүүлсний дараа асаалттай байлгах"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="other">Богино (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунд)</item>
       <item quantity="one">Богино (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> секунд)</item>
@@ -2436,8 +2454,7 @@
     <string name="bluetooth_on_time" msgid="8424625554628450028">"Wi-Fi цагтаа"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"Батарей ашиглалт"</string>
     <string name="history_details_title" msgid="8628584613889559355">"Түүхийн мэдээлэл"</string>
-    <!-- no translation found for advanced_battery_preference_title (6518802648205311326) -->
-    <skip />
+    <string name="advanced_battery_preference_title" msgid="6518802648205311326">"Батарей ашиглалтыг харах"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"Батарей ашиглалт"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Ашиглалтын мэдээлэл"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Цэнэг ашиглалтыг тохируулах"</string>
@@ -3079,11 +3096,10 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"Хэрэглэгчийг устгах"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"Устгах"</string>
     <string name="user_guest" msgid="4545590092001460388">"Зочин"</string>
-    <string name="user_clear_guest_menu" msgid="4864362688187480452">"Зочны өгөгдлийг арилгах"</string>
-    <string name="user_exit_guest_menu" msgid="5064400453222497734">"Зочны сургалтыг дуусгах"</string>
-    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"Зочны сургалтыг дуусгах уу?"</string>
+    <string name="user_exit_guest_title" msgid="2653103120908427236">"Зочныг хасах"</string>
+    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"Зочныг хасах уу?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Энэ сешний бүх апп болон дата устах болно."</string>
-    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"Сургалтыг дуусгах"</string>
+    <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Хасах"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Утасны дуудлага авах"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Утасны дуудлага &amp; SMS авах"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Хэрэглэгчийг устгах"</string>
@@ -3258,7 +3274,7 @@
     <string name="keywords_time_zone" msgid="6402919157244589055">"цагийн бүс"</string>
     <string name="keywords_draw_overlay" msgid="3170036145197260392">"Чатны толгой, систем, сэрэмжлүүлэг, цонх, харилцах цонх, дэлгэц, бусад хэрэглээний программ дээр, нээх"</string>
     <string name="keywords_flashlight" msgid="2133079265697578183">"Гэрэлтүүлэгч, Гэрэл, Гар чийдэн"</string>
-    <string name="keywords_change_wifi_state" msgid="7573039644328488165">"wifi, wi-fi, унтраах/асаах, хяналт"</string>
+    <string name="keywords_change_wifi_state" msgid="7573039644328488165">"wifi, wi-fi, асаах/унтраах, хяналт"</string>
     <string name="keywords_more_mobile_networks" msgid="5041272719326831744">"үүрэн холбоо, үүрэн холбооны оператор, утасгүй интернэт, дата, 4g, 3g, 2g, lte"</string>
     <string name="keywords_wifi_calling" msgid="4319184318421027136">"wifi, wi-fi, залгах, дуудлага"</string>
     <string name="keywords_display" msgid="874738809280751745">"дэлгэц, мэдрэгчтэй дэлгэц"</string>
@@ -3662,6 +3678,13 @@
     <string name="notif_type_conversation" msgid="3014259738224129504">"Харилцан ярианы мэдэгдэл"</string>
     <string name="notif_type_alerting" msgid="2300039323822104165">"Сэрэмжлүүлэх мэдэгдэл"</string>
     <string name="notif_type_silent" msgid="2514763073653979199">"Чимээгүй мэдэгдэл"</string>
+    <string name="notif_listener_excluded_title" msgid="639103158747320529">"Энэ сонсогчийн гүүргүй аппууд"</string>
+    <string name="notif_listener_excluded_summary_zero" msgid="5152444145866958400">"Бүх апп гүүртэй байна"</string>
+    <plurals name="notif_listener_excluded_summary_nonzero" formatted="false" msgid="3218891004546748617">
+      <item quantity="other">%d апп гүүргүй байна</item>
+      <item quantity="one">%d апп гүүргүй байна</item>
+    </plurals>
+    <string name="notif_listener_excluded_app_title" msgid="8102477888511595023">"Гүүртэй аппууд"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR туслагч үйлчилгээ"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Суулгасан апп-с VR туслагч үйлчилгээгээр ажиллах хүсэлт гаргаагүй байна."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"VR үйлчилгээг <xliff:g id="SERVICE">%1$s</xliff:g>-д хандахыг зөвшөөрөх үү?"</string>
@@ -4095,6 +4118,7 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Файл дамжуулалт"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Файлыг өөр төхөөрөмж рүү шилжүүлэх"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
+    <string name="usb_transcode_files" msgid="5999760694155541693">"Экспорт хийсэн медиаг хөрвүүлэх"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"MTP дэмждэггүй бол зураг, файл илгээх (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"USB модем болгох"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
@@ -4102,8 +4126,8 @@
     <string name="usb_use" msgid="6783183432648438528">"USB-г ашиглах"</string>
     <string name="usb_default_label" msgid="3372838450371060750">"Өгөгдмөл USB тохируулга"</string>
     <string name="usb_default_info" msgid="167172599497085266">"Эдгээр тохиргоо нь нөгөө төхөөрөмжийг холбосон бөгөөд таны утасны түгжээг тайлсан үед хэрэгжинэ. Зөвхөн итгэмжлэгдсэн төхөөрөмжид холбогдоно уу."</string>
-    <!-- no translation found for usb_power_title (5602112548385798646) -->
-    <skip />
+    <string name="usb_power_title" msgid="5602112548385798646">"Асаах/унтраах сонголт"</string>
+    <string name="usb_file_transfer_title" msgid="2261577861371481478">"Файл дамжуулах сонголт"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB сонголт"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB-г дараахаар хянасан"</string>
@@ -4322,7 +4346,8 @@
       <item quantity="one">1 хязгаарлалт</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"Оператор компанийн дата тооцоололт нь төхөөрөмжийн тооцоололтоос өөр байж болно"</string>
-    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"Оператор компанийн сүлжээгээр ашигласан өгөгдлийг оруулдаггүй"</string>
+    <!-- no translation found for non_carrier_data_usage_warning (4707184871368847697) -->
+    <skip />
     <string name="data_used_template" msgid="8229342096562327646">"<xliff:g id="ID_1">%1$s</xliff:g> ашигласан"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Датаны сануулгыг тохируулах"</string>
     <string name="data_warning" msgid="2925054658166062884">"Дата хэрэглээний сануулга"</string>
@@ -4915,8 +4940,24 @@
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"SIM-г салгаад, дахин хийнэ үү. Хэрэв асуудал үргэлжилсээр байвал төхөөрөмжөө дахин эхлүүлнэ үү."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"SIM-г дахин асааж үзнэ үү. Хэрэв асуудал үргэлжилсээр байвал төхөөрөмжөө дахин эхлүүлнэ үү."</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Сүлжээг идэвхжүүлэх"</string>
+    <!-- no translation found for sim_switch_channel_id (4927038626791837861) -->
+    <skip />
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> идэвхтэй байна"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"SIM-н тохиргоог шинэчлэхийн тулд товшино уу"</string>
+    <string name="switch_to_removable_notification" msgid="7640342063449806296">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> руу сэлгэсэн"</string>
+    <string name="switch_to_removable_notification_no_carrier_name" msgid="7384856964036215338">"Өөр оператор компани руу сэлгэсэн"</string>
+    <string name="network_changed_notification_text" msgid="2407908598496951243">"Таны мобайл сүлжээг өөрчилсөн"</string>
+    <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"Нөгөө SIM-ээ тохируулна уу"</string>
+    <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"Идэвхтэй SIM-ээ сонгож эсвэл 2 SIM-г зэрэг ашиглана уу"</string>
+    <string name="choose_sim_title" msgid="4804689675237716286">"Ашиглах дугаараа сонгоно уу"</string>
+    <string name="choose_sim_text" msgid="8056651794100746697">"Энэ төхөөрөмжид <xliff:g id="NUMBER">%1$d</xliff:g> дугаар боломжтой байгаа хэдий ч нэг удаад зөвхөн нэгийг нь ашиглах боломжтой"</string>
+    <string name="choose_sim_activating" msgid="9035902671985449448">"Идэвхжүүлж байна<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
+    <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"Одоогоор идэвхжүүлэх боломжгүй байна"</string>
+    <string name="choose_sim_item_summary_unknown" msgid="7854314795485227568">"Тодорхойгүй дугаар"</string>
+    <string name="switch_sim_dialog_title" msgid="5407316878973237773">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>-г ашиглах уу?"</string>
+    <string name="switch_sim_dialog_text" msgid="7530186862171635464">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>-г мобайл дата, дуудлага болон SMS-д ашиглана."</string>
+    <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Идэвхтэй SIM байхгүй байна"</string>
+    <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Мобайл дата, дуудлагын онцлогууд болон SMS-г дараа ашиглахын тулд сүлжээнийхээ тохиргоонд очно уу"</string>
     <string name="sim_card_label" msgid="5632157635124050923">"SIM карт"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Энэ татаж авсан SIM-г устгах уу?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Энэ SIM-г устгаснаар <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>-н үйлчилгээг энэ төхөөрөмжөөс хасна.\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>-н үйлчилгээг цуцлахгүй."</string>
@@ -4943,10 +4984,8 @@
     <string name="mobile_data_ap_mode_disabled" msgid="6067959496888990983">"Нислэгийн горимд боломжгүй"</string>
     <string name="force_desktop_mode" msgid="1336913605091334238">"Дэлгэцийн горимыг хүчлэх"</string>
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"Дэлгэцийн туршилтын горимыг хоёрдогч дэлгэцэд хүчлэх"</string>
-    <!-- no translation found for enable_non_resizable_multi_window (6832903754625404477) -->
-    <skip />
-    <!-- no translation found for enable_non_resizable_multi_window_summary (3275763753261901999) -->
-    <skip />
+    <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Хэмжээг өөрчлөх боломжгүй аппуудыг олон цонхонд идэвхжүүлэх"</string>
+    <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Хэмжээг нь өөрчлөх боломжгүй аппуудыг олон цонхонд байхыг нь зөвшөөрнө"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Хүчээр бүдгэрүүлэхийг дарах"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"Хүчээр бүдэгрүүлэх онцлогийг байнга асаалттай байхаар дардаг"</string>
     <string name="enable_blurs_on_windows_title" msgid="4218144213800778872">"Бүдгэрүүлэлтийг идэвхжүүлэх"</string>
@@ -4998,7 +5037,7 @@
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Таны оператор компани Wi‑Fi Дуудлагаар яаралтай дуудлага хийхийг дэмждэггүй.\nЭнэ төхөөрөмж яаралтай дуудлага хийхийн тулд үүрэн сүлжээ рүү автоматаар сэлгэнэ.\nЯаралтай дуудлагыг зөвхөн үүрэн сүлжээтэй газар хийх боломжтой."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Чанарыг сайжруулахын тулд Wi-Fi-г дуудлагад ашиглах"</string>
     <string name="backup_calling_settings_title" msgid="519714752900364326">"Дуудлагыг нөөцлөх"</string>
-    <string name="backup_calling_setting_summary" msgid="451295393447465830">"Хэрэв <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> боломжгүй байвал <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g>-н дуудлага хийх болон хүлээн авахын тулд мобайл датаны SIM-ээ ашиглана уу."</string>
+    <string name="backup_calling_setting_summary" msgid="599493254305348733">"Хэрэв <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> боломжгүй эсвэл роуминг хийж байвал <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g>-н дуудлагад мобайл датаны SIM-ээ ашиглана уу."</string>
     <string name="keywords_backup_calling" msgid="8592800915478816800">"дуудлагыг нөөцлөх"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Ирж буй мультимедиа мессеж"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"Мультимедиа мессеж илгээх боломжгүй"</string>
@@ -5068,23 +5107,24 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"нислэг, нислэг аюулгүй"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Дуудлага, SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi-Fi дуудлага"</string>
-    <!-- no translation found for calls_sms_wfc_summary (3940529919408667336) -->
-    <skip />
-    <!-- no translation found for calls_sms_footnote (8051604228144899434) -->
-    <skip />
+    <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"Wi-Fi-р дуудлага хийх болон хүлээн авах"</string>
+    <string name="calls_sms_footnote" msgid="1003530944232362815">"Wi-Fi дуудлагын тусламжтайгаар дуудлагыг оператор компанийн бус Wi-Fi сүлжээгээр хийж мөн хүлээн авдаг. "<annotation id="url">"Нэмэлт мэдээлэл авах"</annotation></string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Дуудлага"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"сонгосон"</string>
-    <string name="calls_sms_calls_preferred" msgid="252913858812799809">"дуудлагыг сонгосон"</string>
-    <string name="calls_sms_sms_preferred" msgid="5826706870873784062">"SMS-г сонгосон"</string>
+    <string name="calls_sms_calls_preferred" msgid="9004261125829377885">"дуудлагад сонгосон"</string>
+    <string name="calls_sms_sms_preferred" msgid="3855778890660922711">"SMS-д сонгосон"</string>
     <string name="calls_sms_unavailable" msgid="4055729705246556529">"боломжгүй"</string>
+    <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"Түр хугацаанд боломжгүй"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"SIM байхгүй"</string>
-    <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Сонголт"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8635896466814033405) -->
+    <skip />
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Олон нийтийн Wi-Fi сүлжээнд холбогдох"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"сүлжээний холболт, интернэт, утасгүй интернэт, дата, wifi, wi-fi, wi fi, үүрэн холбоо, мобайл, үүрэн холбооны оператор, 4g, 3g, 2g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Нислэгийн горимын сүлжээг харах"</string>
     <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"Нислэгийн горимын сүлжээг харж байна"</string>
-    <string name="turn_off_airplane_mode" msgid="7141986366534514443">"Нислэгийн горимыг унтраах"</string>
+    <string name="turn_on_networks" msgid="7786747178388835577">"Сүлжээг асаах"</string>
+    <string name="turn_off_networks" msgid="886012600238121672">"Сүлжээг унтраах"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"Интернэтээ шинэчлэх үү?"</string>
     <string name="reset_internet_text" product="default" msgid="8797910368942544453">"Энэ нь таны утасны дуудлагыг дуусгана"</string>
     <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"Энэ нь таны утасны дуудлагыг дуусгана"</string>
@@ -5092,8 +5132,7 @@
     <string name="fix_connectivity" msgid="2781433603228089501">"Холболтыг засах"</string>
     <string name="airplane_mode_network_available" msgid="1059499681300395240">"Нислэгийн горимын сүлжээ боломжтой"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"Сүлжээг сэлгэхийн тулд этернэтийг салгана уу"</string>
-    <!-- no translation found for cannot_switch_networks_while_connected (3867944849171754777) -->
-    <skip />
+    <string name="airplane_mode_network_panel_title" msgid="6385046104863403604">"Нислэгийн горимын сүлжээ"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Холбогдсон"</string>
     <string name="mobile_data_off_summary" msgid="3841411571485837651">"Интернэт автоматаар холбогдохгүй"</string>
@@ -5115,28 +5154,18 @@
     <string name="category_name_others" msgid="2366006298768550310">"Бусад"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Ерөнхий"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Бүх аппыг харах"</string>
-    <!-- no translation found for smart_forwarding_title (8368634861971949799) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_summary_enabled (3341062878373185604) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_summary_disabled (5033880700091914809) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_ongoing_title (962226849074401228) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_ongoing_text (2189209372407117114) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_title (1859891191023516080) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_text (5370431503707373653) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_not_activated_text (997396203001257904) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_input_mdn_title (5105463748849841763) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_input_mdn_dialog_title (7542216086697868415) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_missing_mdn_text (2907314684242542226) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_missing_alert_dialog_text (7870419247987316112) -->
+    <string name="smart_forwarding_title" msgid="8368634861971949799">"Ухаалаг шилжүүлэлт"</string>
+    <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Ухаалаг шилжүүлэлтийг идэвхжүүлсэн"</string>
+    <string name="smart_forwarding_summary_disabled" msgid="5033880700091914809">"Ухаалаг шилжүүлэлтийг идэвхгүй болгосон"</string>
+    <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"Дуудлагын тохиргоо"</string>
+    <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"Тохиргоог шинэчилж байна..."</string>
+    <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"Дуудлагын тохиргооны алдаа гарлаа"</string>
+    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"Сүлжээ эсвэл SIM картын алдаа гарлаа."</string>
+    <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"Sim-г идэвхжүүлээгүй байна."</string>
+    <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"Утасны дугаарууд оруулна уу"</string>
+    <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Утасны дугаар оруулна уу"</string>
+    <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Утасны дугаар дутуу байна."</string>
+    <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
+    <!-- no translation found for enable_2g_title (8184757884636162942) -->
     <skip />
 </resources>

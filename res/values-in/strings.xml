@@ -52,6 +52,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Buat teks di layar jadi lebih kecil atau lebih besar."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Buat lebih kecil"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Buat lebih besar"</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="1150797732067921015">"Gunakan Putar Otomatis"</string>
+    <string name="smart_rotate_text_headline" msgid="9147653205505671866">"Putar Otomatis berbasis deteksi wajah menggunakan kamera depan untuk melihat apakah dan bagaimana seseorang melihat ke layar. Fitur ini memungkinkan Anda membaca sambil berbaring dan gambar tidak akan disimpan atau dikirim ke Google.&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;Pelajari lebih lanjut&lt;/a&gt;"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Teks contoh"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Penyihir Oz yang Menakjubkan"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Bab 11: Oz, Kota Zamrud yang Menakjubkan"</string>
@@ -1172,6 +1174,10 @@
     <string name="search_settings" msgid="7573686516434589771">"Telusuri"</string>
     <string name="display_settings" msgid="7197750639709493852">"Tampilan"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Rotasi layar otomatis"</string>
+    <string name="auto_rotate_option_off" msgid="2788096269396290731">"Nonaktif"</string>
+    <string name="auto_rotate_option_on" msgid="5776678230808498171">"Aktif"</string>
+    <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Aktif - Berbasis deteksi wajah"</string>
+    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Aktifkan Deteksi Wajah"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Warna"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Alami"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Ditingkatkan"</string>
@@ -2132,9 +2138,11 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"Anda dapat menyesuaikan perangkat ini sesuai kebutuhan. Fitur aksesibilitas ini dapat diubah nanti di Setelan."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Ubah ukuran font"</string>
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Pembaca layar"</string>
-    <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Audio &amp; teks di layar"</string>
+    <string name="captions_category_title" msgid="574490148949400274">"Teks"</string>
+    <string name="audio_category_title" msgid="5283853679967605826">"Audio"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Tampilan"</string>
     <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Teks dan tampilan"</string>
+    <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Buat layar lebih gelap"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Kontrol interaksi"</string>
     <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"Bantuan ketuk"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Kontrol sistem"</string>
@@ -2274,6 +2282,7 @@
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"Nonaktif"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"Tidak berfungsi. Ketuk untuk melihat infonya."</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Layanan ini tidak berfungsi."</string>
+    <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Pintasan aksesibilitas"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Tampilkan di Setelan Cepat"</string>
     <string name="daltonizer_type" msgid="1715154680803795947">"Mode koreksi"</string>
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"Deuteranomali"</string>
@@ -2283,6 +2292,15 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"Merah-hijau"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"Merah-hijau"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Biru-kuning"</string>
+    <string name="reduce_bright_colors_preference_title" msgid="5249275952895378507">"Kurangi Kecerahan"</string>
+    <string name="reduce_bright_colors_preference_summary" product="default" msgid="3824406431092247331">"Membuat layar lebih gelap daripada kecerahan minimum ponsel"</string>
+    <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="867454382618040359">"Membuat layar lebih gelap daripada kecerahan minimum tablet"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="7098993556258805657">"Buat layar lebih gelap agar Anda lebih nyaman membaca.&lt;br/&gt;&lt;br/&gt; Ini berguna saat: &lt;ol&gt; &lt;li&gt; Kecerahan minimum default ponsel masih terlalu cerah&lt;/li&gt; &lt;li&gt; Anda menggunakan ponsel di lingkungan yang gelap, seperti saat malam hari atau di kamar yang gelap sebelum tidur&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Buat layar lebih gelap agar Anda lebih nyaman membaca.&lt;br/&gt;&lt;br/&gt; Ini berguna saat: &lt;ol&gt; &lt;li&gt; Kecerahan minimum default tablet masih terlalu cerah&lt;/li&gt; &lt;li&gt; Anda menggunakan tablet di lingkungan yang gelap, seperti saat malam hari atau di kamar yang gelap sebelum tidur&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensitas"</string>
+    <string name="reduce_bright_colors_intensity_preference_start_label" msgid="109739628110493358">"Sedikit lebih gelap"</string>
+    <string name="reduce_bright_colors_intensity_preference_end_label" msgid="8686269714092663507">"Paling gelap"</string>
+    <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Tetap aktif setelah perangkat dimulai ulang"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="other">Singkat (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> detik)</item>
       <item quantity="one">Singkat (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> detik)</item>
@@ -2436,8 +2454,7 @@
     <string name="bluetooth_on_time" msgid="8424625554628450028">"Wi-Fi berdasarkan waktu"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"Penggunaan baterai"</string>
     <string name="history_details_title" msgid="8628584613889559355">"Detail histori"</string>
-    <!-- no translation found for advanced_battery_preference_title (6518802648205311326) -->
-    <skip />
+    <string name="advanced_battery_preference_title" msgid="6518802648205311326">"Tampilkan penggunaan baterai"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"Penggunaan baterai"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Detail penggunaan"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Sesuaikan penggunaan daya"</string>
@@ -3079,11 +3096,10 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"Hapus pengguna"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"Hapus"</string>
     <string name="user_guest" msgid="4545590092001460388">"Tamu"</string>
-    <string name="user_clear_guest_menu" msgid="4864362688187480452">"Hapus data tamu"</string>
-    <string name="user_exit_guest_menu" msgid="5064400453222497734">"Akhiri sesi tamu"</string>
-    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"Akhiri sesi tamu?"</string>
+    <string name="user_exit_guest_title" msgid="2653103120908427236">"Hapus tamu"</string>
+    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"Hapus tamu?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Semua aplikasi dan data di sesi ini akan dihapus."</string>
-    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"Akhiri sesi"</string>
+    <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Hapus"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Aktifkan panggilan telepon"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Aktifkan panggilan telepon &amp; SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Hapus pengguna"</string>
@@ -3662,6 +3678,13 @@
     <string name="notif_type_conversation" msgid="3014259738224129504">"Notifikasi percakapan"</string>
     <string name="notif_type_alerting" msgid="2300039323822104165">"Notifikasi bersuara"</string>
     <string name="notif_type_silent" msgid="2514763073653979199">"Notifikasi senyap"</string>
+    <string name="notif_listener_excluded_title" msgid="639103158747320529">"Aplikasi yang tidak dihubungkan ke pemroses ini"</string>
+    <string name="notif_listener_excluded_summary_zero" msgid="5152444145866958400">"Semua aplikasi telah dihubungkan"</string>
+    <plurals name="notif_listener_excluded_summary_nonzero" formatted="false" msgid="3218891004546748617">
+      <item quantity="other">%d aplikasi tidak dihubungkan</item>
+      <item quantity="one">%d aplikasi tidak dihubungkan</item>
+    </plurals>
+    <string name="notif_listener_excluded_app_title" msgid="8102477888511595023">"Aplikasi yang terhubung"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Layanan bantuan VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Tidak ada aplikasi terinstall yang meminta dijalankan sebagai layanan bantuan VR"</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Izinkan akses layanan VR untuk <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4095,6 +4118,7 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Transfer File"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Mentransfer file ke perangkat lain"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
+    <string name="usb_transcode_files" msgid="5999760694155541693">"Lakukan transcoding media yang diekspor"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Mentransfer foto atau file jika MTP tidak didukung (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"Tethering USB"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
@@ -4102,8 +4126,8 @@
     <string name="usb_use" msgid="6783183432648438528">"Gunakan USB untuk"</string>
     <string name="usb_default_label" msgid="3372838450371060750">"Konfigurasi USB default"</string>
     <string name="usb_default_info" msgid="167172599497085266">"Ketika perangkat lain terhubung dan ponsel Anda terbuka kuncinya, setelan ini akan berlaku. Hanya hubungkan ke perangkat yang dipercaya."</string>
-    <!-- no translation found for usb_power_title (5602112548385798646) -->
-    <skip />
+    <string name="usb_power_title" msgid="5602112548385798646">"Opsi daya"</string>
+    <string name="usb_file_transfer_title" msgid="2261577861371481478">"Opsi transfer file"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"Preferensi USB"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB dikontrol oleh"</string>
@@ -4322,7 +4346,8 @@
       <item quantity="one">1 pembatasan</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"Perhitungan data oleh operator dapat berbeda dengan perhitungan perangkat"</string>
-    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"Mengecualikan data yang digunakan oleh jaringan operator"</string>
+    <!-- no translation found for non_carrier_data_usage_warning (4707184871368847697) -->
+    <skip />
     <string name="data_used_template" msgid="8229342096562327646">"<xliff:g id="ID_1">%1$s</xliff:g> digunakan"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Setel peringatan penggunaan data"</string>
     <string name="data_warning" msgid="2925054658166062884">"Peringatan penggunaan data"</string>
@@ -4915,8 +4940,24 @@
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Keluarkan SIM, lalu masukkan lagi. Jika masalah berlanjut, mulai ulang perangkat."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Coba aktifkan SIM lagi. Jika masalah berlanjut, mulai ulang perangkat."</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Aktivasi jaringan"</string>
+    <!-- no translation found for sim_switch_channel_id (4927038626791837861) -->
+    <skip />
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> aktif"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Ketuk untuk memperbarui setelan SIM"</string>
+    <string name="switch_to_removable_notification" msgid="7640342063449806296">"Dialihkan ke <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="switch_to_removable_notification_no_carrier_name" msgid="7384856964036215338">"Dialihkan ke operator lain"</string>
+    <string name="network_changed_notification_text" msgid="2407908598496951243">"Jaringan seluler Anda telah berubah"</string>
+    <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"Siapkan SIM lainnya"</string>
+    <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"Pilih SIM yang aktif atau gunakan 2 SIM sekaligus"</string>
+    <string name="choose_sim_title" msgid="4804689675237716286">"Pilih nomor yang akan digunakan"</string>
+    <string name="choose_sim_text" msgid="8056651794100746697">"Tersedia <xliff:g id="NUMBER">%1$d</xliff:g> nomor di perangkat ini, tetapi hanya satu nomor yang dapat digunakan dalam satu waktu"</string>
+    <string name="choose_sim_activating" msgid="9035902671985449448">"Mengaktifkan <xliff:g id="ELLIPSIS">…</xliff:g>"</string>
+    <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"Tidak dapat diaktifkan sekarang"</string>
+    <string name="choose_sim_item_summary_unknown" msgid="7854314795485227568">"Nomor tidak dikenal"</string>
+    <string name="switch_sim_dialog_title" msgid="5407316878973237773">"Gunakan <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
+    <string name="switch_sim_dialog_text" msgid="7530186862171635464">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> akan digunakan untuk data seluler, panggilan, dan SMS."</string>
+    <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Tidak ada SIM aktif yang tersedia"</string>
+    <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Untuk menggunakan data seluler, fitur panggilan, dan SMS di lain waktu, buka setelan jaringan"</string>
     <string name="sim_card_label" msgid="5632157635124050923">"Kartu SIM"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Hapus SIM yang didownload ini?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Menghapus SIM ini akan menghapus layanan <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> dari perangkat ini.\n\nLayanan untuk <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> tidak akan dibatalkan."</string>
@@ -4943,10 +4984,8 @@
     <string name="mobile_data_ap_mode_disabled" msgid="6067959496888990983">"Tidak tersedia selama mode pesawat"</string>
     <string name="force_desktop_mode" msgid="1336913605091334238">"Paksa mode desktop"</string>
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"Paksa mode desktop eksperimental di tampilan sekunder"</string>
-    <!-- no translation found for enable_non_resizable_multi_window (6832903754625404477) -->
-    <skip />
-    <!-- no translation found for enable_non_resizable_multi_window_summary (3275763753261901999) -->
-    <skip />
+    <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Aktifkan ukuran tidak dapat diubah di multi-aplikasi"</string>
+    <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Mengizinkan aplikasi yang ukurannya tidak dapat diubah di multi-aplikasi"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Aktifkan paksa SmartDark"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"Memaksa fitur SmartDark agar selalu aktif"</string>
     <string name="enable_blurs_on_windows_title" msgid="4218144213800778872">"Aktifkan blur"</string>
@@ -4998,7 +5037,7 @@
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Panggilan darurat melalui Panggilan Wi‑Fi tidak didukung oleh operator Anda.\nPerangkat beralih ke jaringan seluler secara otomatis untuk melakukan panggilan darurat.\nPanggilan darurat hanya dapat dilakukan dengan cakupan seluler."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Gunakan Wi‑Fi untuk melakukan panggilan dengan kualitas lebih baik"</string>
     <string name="backup_calling_settings_title" msgid="519714752900364326">"Panggilan cadangan"</string>
-    <string name="backup_calling_setting_summary" msgid="451295393447465830">"Jika <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> tidak tersedia, gunakan data seluler SIM untuk melakukan dan menerima panggilan telepon <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g>."</string>
+    <string name="backup_calling_setting_summary" msgid="599493254305348733">"Jika <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> tidak tersedia atau sedang roaming, gunakan SIM data seluler untuk panggilan <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g>."</string>
     <string name="keywords_backup_calling" msgid="8592800915478816800">"panggilan cadangan"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Pesan MMS masuk"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"Tidak dapat mengirim pesan MMS"</string>
@@ -5068,23 +5107,24 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"pesawat, aman di pesawat"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Panggilan Telepon dan SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Panggilan Wi-Fi"</string>
-    <!-- no translation found for calls_sms_wfc_summary (3940529919408667336) -->
-    <skip />
-    <!-- no translation found for calls_sms_footnote (8051604228144899434) -->
-    <skip />
+    <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"Melakukan dan menerima panggilan melalui Wi‑Fi"</string>
+    <string name="calls_sms_footnote" msgid="1003530944232362815">"Dengan panggilan Wi-Fi, panggilan dilakukan dan diterima melalui jaringan Wi-Fi non-operator. "<annotation id="url">"Pelajari lebih lanjut"</annotation></string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Panggilan Telepon"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"pilihan"</string>
-    <string name="calls_sms_calls_preferred" msgid="252913858812799809">"panggilan pilihan"</string>
-    <string name="calls_sms_sms_preferred" msgid="5826706870873784062">"SMS pilihan"</string>
+    <string name="calls_sms_calls_preferred" msgid="9004261125829377885">"dipilih untuk panggilan"</string>
+    <string name="calls_sms_sms_preferred" msgid="3855778890660922711">"dipilih untuk SMS"</string>
     <string name="calls_sms_unavailable" msgid="4055729705246556529">"tidak tersedia"</string>
+    <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"Tidak tersedia untuk sementara"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"Tidak ada SIM"</string>
-    <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Preferensi"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8635896466814033405) -->
+    <skip />
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Hubungkan ke jaringan publik"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"koneksi jaringan, internet, nirkabel, data, wifi, wi-fi, wi fi, seluler, (perangkat) seluler, operator seluler, 4g, 3g, 2g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Tampilkan jaringan mode pesawat"</string>
     <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"Menampilkan jaringan yang tersedia dalam mode pesawat"</string>
-    <string name="turn_off_airplane_mode" msgid="7141986366534514443">"Nonaktifkan mode pesawat"</string>
+    <string name="turn_on_networks" msgid="7786747178388835577">"Aktifkan jaringan"</string>
+    <string name="turn_off_networks" msgid="886012600238121672">"Nonaktifkan jaringan"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"Reset internet?"</string>
     <string name="reset_internet_text" product="default" msgid="8797910368942544453">"Tindakan ini akan mengakhiri panggilan telepon"</string>
     <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"Tindakan ini akan mengakhiri panggilan telepon"</string>
@@ -5092,8 +5132,7 @@
     <string name="fix_connectivity" msgid="2781433603228089501">"Perbaiki konektivitas"</string>
     <string name="airplane_mode_network_available" msgid="1059499681300395240">"Jaringan dalam mode pesawat tersedia"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"Untuk beralih jaringan, lepaskan kabel ethernet"</string>
-    <!-- no translation found for cannot_switch_networks_while_connected (3867944849171754777) -->
-    <skip />
+    <string name="airplane_mode_network_panel_title" msgid="6385046104863403604">"Jaringan dalam mode pesawat"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Terhubung"</string>
     <string name="mobile_data_off_summary" msgid="3841411571485837651">"Internet tidak akan terhubung secara otomatis"</string>
@@ -5115,28 +5154,18 @@
     <string name="category_name_others" msgid="2366006298768550310">"Lainnya"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Umum"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Lihat semua aplikasi"</string>
-    <!-- no translation found for smart_forwarding_title (8368634861971949799) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_summary_enabled (3341062878373185604) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_summary_disabled (5033880700091914809) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_ongoing_title (962226849074401228) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_ongoing_text (2189209372407117114) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_title (1859891191023516080) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_text (5370431503707373653) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_not_activated_text (997396203001257904) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_input_mdn_title (5105463748849841763) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_input_mdn_dialog_title (7542216086697868415) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_missing_mdn_text (2907314684242542226) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_missing_alert_dialog_text (7870419247987316112) -->
+    <string name="smart_forwarding_title" msgid="8368634861971949799">"Smart Forwarding"</string>
+    <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Smart Forwarding Diaktifkan"</string>
+    <string name="smart_forwarding_summary_disabled" msgid="5033880700091914809">"Smart Forwarding Dinonaktifkan"</string>
+    <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"Setelan Panggilan"</string>
+    <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"Memperbarui Setelan ..."</string>
+    <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"Error Setelan panggilan"</string>
+    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"Error jaringan atau kartu SIM."</string>
+    <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"Sim tidak diaktifkan."</string>
+    <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"Masukkan Nomor telepon"</string>
+    <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Masukkan Nomor telepon"</string>
+    <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Tidak ada nomor telepon."</string>
+    <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"Oke"</string>
+    <!-- no translation found for enable_2g_title (8184757884636162942) -->
     <skip />
 </resources>

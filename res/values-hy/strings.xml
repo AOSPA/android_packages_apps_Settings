@@ -52,6 +52,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Փոփոխեք տեքստի չափը։"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Փոքրացնել"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Մեծացնել"</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="1150797732067921015">"Օգտագործել ինքնապտտումը"</string>
+    <string name="smart_rotate_text_headline" msgid="9147653205505671866">"Դիմաճանաչման հիման վրա ինքնապտտման ռեժիմում սարքն օգտագործում է առջևի տեսախցիկը, որպեսզի հետևի՝ արդյոք ինչ-որ մեկը նայում է էկրանին և ինչպես է նայում։ Այս գործառույթը թույլ է տալիս կարդալ պառկած դիրքում, և պատկերները երբեք չեն պահվում և չեն ուղարկվում Google-ին։&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;Իմանալ ավելին&lt;/a&gt;"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Տեքստի նմուշ"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Օզի կախարդը"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Գլուխ 11. Օզի հրաշալի Զմրուխտե քաղաքը"</string>
@@ -1172,6 +1174,10 @@
     <string name="search_settings" msgid="7573686516434589771">"Որոնել"</string>
     <string name="display_settings" msgid="7197750639709493852">"Էկրան"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Ավտոմատ պտտել էկրանը"</string>
+    <string name="auto_rotate_option_off" msgid="2788096269396290731">"Անջատել"</string>
+    <string name="auto_rotate_option_on" msgid="5776678230808498171">"Միացնել"</string>
+    <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Միաց․ – Դիմաճանաչման հիման վրա"</string>
+    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Միացնել դիմաճանաչումը"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Գույներ"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Բնական"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Պայծառ"</string>
@@ -2132,9 +2138,11 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"Օգտվեք հատուկ հնարավորություններից՝ հարմար աշխատանքի համար։ Այս գործառույթները կարող եք փոփոխել սարքի կարգավորումներում։"</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Փոխեք տառաչափը"</string>
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Էկրանի ընթերցիչներ"</string>
-    <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Աուդիո և էկրանի տեքստ"</string>
+    <string name="captions_category_title" msgid="574490148949400274">"Ենթագրեր"</string>
+    <string name="audio_category_title" msgid="5283853679967605826">"Աուդիո"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Էկրան"</string>
     <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Տեքստ և էկրան"</string>
+    <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Էկրանի մգացում"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Կառավարման տարրեր"</string>
     <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"Հպեք օգնության կոճակին"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Համակարգի կառավարման տարրեր"</string>
@@ -2274,6 +2282,7 @@
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"Անջատված է"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"Չի աշխատում: Տեղեկությունների համար հպեք:"</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Այս ծառայությունը նորմալ չի աշխատում:"</string>
+    <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Հատուկ գործառույթների դյուրանցումներ"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Ցույց տալ Արագ կարգավորումներում"</string>
     <string name="daltonizer_type" msgid="1715154680803795947">"Շտկման ռեժիմը"</string>
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"Դեյտերանոմալիա"</string>
@@ -2283,6 +2292,15 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"Կարմիր-կանաչ"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"Կարմիր-կանաչ"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Կապույտ-դեղին"</string>
+    <string name="reduce_bright_colors_preference_title" msgid="5249275952895378507">"Նվազեցնել պայծառությունը"</string>
+    <string name="reduce_bright_colors_preference_summary" product="default" msgid="3824406431092247331">"Ավելի մգացրեք հեռախոսի էկրանը, քան նվազագույն պայծառության դեպքում"</string>
+    <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="867454382618040359">"Ավելի մգացրեք պլանշետի էկրանը, քան նվազագույն պայծառության դեպքում"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="7098993556258805657">"Ավելի մգացրեք էկրանը՝ հարմար կարդալու համար։&lt;br/&gt;&lt;br/&gt; Դա կարող է օգնել, երբ. &lt;ol&gt; &lt;li&gt; Նվազագույն պայծառության ժամանակ հեռախոսի էկրանը դեռ շատ պայծառ է։t&lt;/li&gt; &lt;li&gt; Դուք օգտագործում եք հեռախոսը մթության մեջ, օրինակ, գիշերը կամ մութ սենյակում՝ քնելուց առաջ։&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Ավելի մգացրեք էկրանը՝ հարմար կարդալու համար։&lt;br/&gt;&lt;br/&gt; Դա կարող է օգնել, երբ. &lt;ol&gt; &lt;li&gt; Նվազագույն պայծառության ժամանակ պլանշետի էկրանը դեռ շատ պայծառ է։t&lt;/li&gt; &lt;li&gt; Դուք օգտագործում եք պլանշետը մթության մեջ, օրինակ, գիշերը կամ մութ սենյակում՝ քնելուց առաջ։&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Ինտենսիվություն"</string>
+    <string name="reduce_bright_colors_intensity_preference_start_label" msgid="109739628110493358">"Թեթևակի մուգ"</string>
+    <string name="reduce_bright_colors_intensity_preference_end_label" msgid="8686269714092663507">"Շատ մուգ"</string>
+    <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Չանջատել սարքի գործարկումից հետո"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="one">Կարճ (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> վայրկյան)</item>
       <item quantity="other">Կարճ (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> վայրկյան)</item>
@@ -2436,8 +2454,7 @@
     <string name="bluetooth_on_time" msgid="8424625554628450028">"Wi‑Fi-ը ժամանակին"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"Մարտկոցի օգտագործում"</string>
     <string name="history_details_title" msgid="8628584613889559355">"Պատմության մանրամասները"</string>
-    <!-- no translation found for advanced_battery_preference_title (6518802648205311326) -->
-    <skip />
+    <string name="advanced_battery_preference_title" msgid="6518802648205311326">"Դիտել մարտկոցի օգտագործումը"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"Մարտկոցի օգտագործում"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Օգտագործման մանրամասները"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Կարգավորել հոսանքի օգտագործումը"</string>
@@ -3079,11 +3096,10 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"Ջնջել օգտատիրոջը"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"Ջնջել"</string>
     <string name="user_guest" msgid="4545590092001460388">"Հյուր"</string>
-    <string name="user_clear_guest_menu" msgid="4864362688187480452">"Մաքրել հյուրի տվյալները"</string>
-    <string name="user_exit_guest_menu" msgid="5064400453222497734">"Ավարտել հյուրի աշխատաշրջանը"</string>
-    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"Ավարտե՞լ հյուրի աշխատաշրջանը"</string>
+    <string name="user_exit_guest_title" msgid="2653103120908427236">"Հեռացնել հյուրին"</string>
+    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"Հեռացնե՞լ հյուրին:"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Այս աշխատաշրջանի բոլոր ծրագրերն ու տվյալները կջնջվեն:"</string>
-    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"Ավարտել աշխատաշրջանը"</string>
+    <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Հեռացնել"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Միացնել հեռախոսազանգերը"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Միացնել զանգերն ու SMS-ները"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Ջնջել օգտատիրոջը"</string>
@@ -3662,6 +3678,13 @@
     <string name="notif_type_conversation" msgid="3014259738224129504">"Զրույցների ծանուցումներ"</string>
     <string name="notif_type_alerting" msgid="2300039323822104165">"Նախազգուշացնող ծանուցումներ"</string>
     <string name="notif_type_silent" msgid="2514763073653979199">"Անձայն ծանուցումներ"</string>
+    <string name="notif_listener_excluded_title" msgid="639103158747320529">"Հավելվածներ, որոնք կամրջված չեն այս ունկնդրիչի հետ"</string>
+    <string name="notif_listener_excluded_summary_zero" msgid="5152444145866958400">"Բոլոր հավելվածները կամրջված են"</string>
+    <plurals name="notif_listener_excluded_summary_nonzero" formatted="false" msgid="3218891004546748617">
+      <item quantity="one">%d հավելված կամրջված չէ</item>
+      <item quantity="other">%d հավելված կամրջված չէ</item>
+    </plurals>
+    <string name="notif_listener_excluded_app_title" msgid="8102477888511595023">"Կամրջված հավելվածներ"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR օգնության ծառայություններ"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Տեղադրված հավելվածներից ոչ մեկը որպես VR օգնության ծառայություն գործարկվելու հարցում չի ուղարկել:"</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Թույլատրե՞լ VR ծառայությանն օգտագործել <xliff:g id="SERVICE">%1$s</xliff:g> ծառայությունը:"</string>
@@ -4095,6 +4118,7 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Ֆայլերի փոխանցում"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Փոխանցել ֆայլեր մեկ այլ սարքին"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP ռեժիմ"</string>
+    <string name="usb_transcode_files" msgid="5999760694155541693">"Արտահանված մուլտիմեդիայի վերակոդավորում"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Լուսանկարների կամ ֆայլերի փոխանցում, եթե MTP-ն չի աջակցվում (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"USB մոդեմ"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
@@ -4102,8 +4126,8 @@
     <string name="usb_use" msgid="6783183432648438528">"USB-ի աշխատանքի ռեժիմը"</string>
     <string name="usb_default_label" msgid="3372838450371060750">"USB-ի կանխադրված կարգավորումներ"</string>
     <string name="usb_default_info" msgid="167172599497085266">"Այս կարգավորումները կկիրառվեն, երբ դուք միանաք այլ սարքի և ապակողպեք ձեր հեռախոսը: Միացեք միայն վստահելի սարքերի:"</string>
-    <!-- no translation found for usb_power_title (5602112548385798646) -->
-    <skip />
+    <string name="usb_power_title" msgid="5602112548385798646">"Սնուցման ընտրանքներ"</string>
+    <string name="usb_file_transfer_title" msgid="2261577861371481478">"Ֆայլերի փոխանցման տարբերակներ"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB-ի կարգավորումներ"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB-ն վերահսկող սարքը"</string>
@@ -4322,7 +4346,8 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> սահմանափակում</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"Օպերատորի վիճակագրությունը կարող է տարբերվել սարքի տվյալներից։"</string>
-    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"Չեն հետագծվում այն ցանցերի տվյալները, որոնք սպասարկվում են օպերատորների կողմից"</string>
+    <!-- no translation found for non_carrier_data_usage_warning (4707184871368847697) -->
+    <skip />
     <string name="data_used_template" msgid="8229342096562327646">"Օգտագործվել է <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Նախազգուշացում դնել"</string>
     <string name="data_warning" msgid="2925054658166062884">"Նախազգուշացում"</string>
@@ -4915,8 +4940,24 @@
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Հանեք, այնուհետև նորից տեղադրեք SIM քարտը։ Եթե խնդիրը չվերանա, վերագործարկեք սարքը։"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Փորձեք նորից միացնել SIM քարտը։ Եթե խնդիրը չվերանա, վերագործարկեք սարքը։"</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Ցանցի ակտիվացում"</string>
+    <!-- no translation found for sim_switch_channel_id (4927038626791837861) -->
+    <skip />
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ցանցն ակտիվ է"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Հպեք՝ SIM քարտի կարգավորումները թարմացնելու համար"</string>
+    <string name="switch_to_removable_notification" msgid="7640342063449806296">"Միացել է <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-ի ցանցին"</string>
+    <string name="switch_to_removable_notification_no_carrier_name" msgid="7384856964036215338">"Միացել է այլ օպերատորի ցանցի"</string>
+    <string name="network_changed_notification_text" msgid="2407908598496951243">"Բջջային ցանցը փոխվել է"</string>
+    <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"Կարգավորեք մյուս SIM քարտը"</string>
+    <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"Ընտրեք ձեր ակտիվ SIM քարտը կամ օգտագործեք միաժամանակ երկուսը"</string>
+    <string name="choose_sim_title" msgid="4804689675237716286">"Ընտրեք համար"</string>
+    <string name="choose_sim_text" msgid="8056651794100746697">"Սարքում հասանելի է <xliff:g id="NUMBER">%1$d</xliff:g> համար, սակայն միաժամանակ կարող եք օգտագործել միայն մեկը"</string>
+    <string name="choose_sim_activating" msgid="9035902671985449448">"Ակտիվացում<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
+    <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"Չհաջողվեց ակտիվացնել պրոֆիլը"</string>
+    <string name="choose_sim_item_summary_unknown" msgid="7854314795485227568">"Անհայտ համար"</string>
+    <string name="switch_sim_dialog_title" msgid="5407316878973237773">"Միացնե՞լ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ծառայությունը"</string>
+    <string name="switch_sim_dialog_text" msgid="7530186862171635464">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>-ի հեռախոսահամարը կօգտագործվի բջջային ինտերնետի, զանգերի և SMS-ների համար։"</string>
+    <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Ակտիվ SIM քարտեր չկան"</string>
+    <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Բջջային թրաֆիկը, զանգերի գործառույթները և SMS-ներն ավելի ուշ օգտագործելու համար անցեք ցանցի կարգավորումներ"</string>
     <string name="sim_card_label" msgid="5632157635124050923">"SIM քարտ"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Ջնջե՞լ այս ներբեռնված SIM քարտը"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Այս SIM-ը ջնջելու դեպքում <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>-ի ծառայությունը կհեռացվի սարքից։\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>-ի ծառայությունը չի չեղարկվի։"</string>
@@ -4943,10 +4984,8 @@
     <string name="mobile_data_ap_mode_disabled" msgid="6067959496888990983">"Անհասանելի է ավիառեժիմում"</string>
     <string name="force_desktop_mode" msgid="1336913605091334238">"Աշխատասեղանի ռեժիմի հարկադրված միացում"</string>
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"Աշխատասեղանի փորձնական ռեժիմի հարկադրված միացում լրացուցիչ էկրանների վրա"</string>
-    <!-- no translation found for enable_non_resizable_multi_window (6832903754625404477) -->
-    <skip />
-    <!-- no translation found for enable_non_resizable_multi_window_summary (3275763753261901999) -->
-    <skip />
+    <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Միացնել չփոփոխվող մասշտաբը բազմապատուհան ռեժիմում"</string>
+    <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Թույլ է տալիս հավելվածները բացել չփոփոխվող մասշտաբով բազմապատուհան ռեժիմում"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Չեղարկել մուգ ռեժիմի պարտադիր միացումը"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"Չեղարկում է մուգ ռեժիմի պարտադիր միացման գործառույթը"</string>
     <string name="enable_blurs_on_windows_title" msgid="4218144213800778872">"Միացնել շաղումը"</string>
@@ -4998,7 +5037,7 @@
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Ձեր օպերատորի ցանցում հնարավոր չէ շտապ կանչեր անել «Զանգեր Wi-Fi-ով» գործառույթի միջոցով:\nՇտապ կանչ կատարելու համար սարքն ավտոմատ կանցնի բջջային ցանցին:\nՇտապ կանչեր կարող եք անել միայն այն տարածքներում, որտեղ կա բջջային ցանցի ծածկույթ:"</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Միացեք Wi‑Fi ցանցի՝ զանգերի որակը լավացնելու համար"</string>
     <string name="backup_calling_settings_title" msgid="519714752900364326">"Զանգելու պահեստային տարբերակ"</string>
-    <string name="backup_calling_setting_summary" msgid="451295393447465830">"Եթե <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g>-ն անհասանելի է, օգտագործեք բջջային ինտերնետի SIM քարտը՝ <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g>-ով զանգեր կատարելու և ստանալու համար։"</string>
+    <string name="backup_calling_setting_summary" msgid="599493254305348733">"Եթե <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g>-ն անհասանելի է, օգտագործեք բջջային ինտերնետի SIM քարտը՝ <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g>-ով զանգեր կատարելու և ստանալու համար։"</string>
     <string name="keywords_backup_calling" msgid="8592800915478816800">"զանգելու պահեստային տարբերակ"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Մուտքային MMS հաղորդագրություն"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"Չհաջողվեց ուղարկել MMS հաղորդագրությունը"</string>
@@ -5068,23 +5107,24 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"ինքնաթիռ, ինքնաթիռում անվտանգ"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Զանգեր և SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Զանգեր Wi-Fi-ով"</string>
-    <!-- no translation found for calls_sms_wfc_summary (3940529919408667336) -->
-    <skip />
-    <!-- no translation found for calls_sms_footnote (8051604228144899434) -->
-    <skip />
+    <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"Կատարեք և ստացեք զանգեր Wi-Fi-ի միջոցով"</string>
+    <string name="calls_sms_footnote" msgid="1003530944232362815">"«Զանգեր Wi-Fi-ով» գործառույթը թույլ է տալիս ստանալ և կատարել զանգեր ոչ բջջային ցանցերի (օրինակ՝ Wi‑Fi ցանցերի) միջոցով։ "<annotation id="url">"Իմանալ ավելին"</annotation></string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Զանգեր"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"նախընտրելի"</string>
-    <string name="calls_sms_calls_preferred" msgid="252913858812799809">"նախընտրելի զանգեր"</string>
-    <string name="calls_sms_sms_preferred" msgid="5826706870873784062">"նախընտրելի SMS-ներ"</string>
+    <string name="calls_sms_calls_preferred" msgid="9004261125829377885">"զանգերի համար"</string>
+    <string name="calls_sms_sms_preferred" msgid="3855778890660922711">"SMS-ների համար"</string>
     <string name="calls_sms_unavailable" msgid="4055729705246556529">"անհասանելի է"</string>
+    <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"Ժամանակավորապես անհասանելի է"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"SIM քարտ չկա"</string>
-    <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Կարգավորումներ"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8635896466814033405) -->
+    <skip />
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Միանալ հանրային ցանցերին"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"կապ, համացանց, անլար, ինտերնետ, wifi, wi-fi, wi fi, բջջային, շարժական, բջջային օպերատոր, 4g, 3g, 2g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Ցանցեր, որոնք անվտանգ են ինքնաթիռում"</string>
     <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"Ցուցադրվում են ցանցերը, որոնք անվտանգ են ինքնաթիռում"</string>
-    <string name="turn_off_airplane_mode" msgid="7141986366534514443">"Անջատել ավիառեժիմը"</string>
+    <string name="turn_on_networks" msgid="7786747178388835577">"Միացնել ցանցերը"</string>
+    <string name="turn_off_networks" msgid="886012600238121672">"Անջատել ցանցերը"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"Վերակայե՞լ ինտերնետ կապը"</string>
     <string name="reset_internet_text" product="default" msgid="8797910368942544453">"Զանգը կավարտվի"</string>
     <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"Զանգը կավարտվի"</string>
@@ -5092,8 +5132,7 @@
     <string name="fix_connectivity" msgid="2781433603228089501">"Շտկել կապի խնդիրը"</string>
     <string name="airplane_mode_network_available" msgid="1059499681300395240">"Ավիառեժիմում հասանելի ցանցեր"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"Այլ ցանցի անցնելու համար անջատեք Ethernet-ը"</string>
-    <!-- no translation found for cannot_switch_networks_while_connected (3867944849171754777) -->
-    <skip />
+    <string name="airplane_mode_network_panel_title" msgid="6385046104863403604">"Ցանցեր, որոնք անվտանգ են ինքնաթիռում"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Միացած է"</string>
     <string name="mobile_data_off_summary" msgid="3841411571485837651">"Չհաջողվեց ավտոմատ միանալ համացանցին"</string>
@@ -5115,28 +5154,18 @@
     <string name="category_name_others" msgid="2366006298768550310">"Այլ"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Ընդհանուր"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Դիտել բոլոր հավելվածները"</string>
-    <!-- no translation found for smart_forwarding_title (8368634861971949799) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_summary_enabled (3341062878373185604) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_summary_disabled (5033880700091914809) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_ongoing_title (962226849074401228) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_ongoing_text (2189209372407117114) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_title (1859891191023516080) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_text (5370431503707373653) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_not_activated_text (997396203001257904) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_input_mdn_title (5105463748849841763) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_input_mdn_dialog_title (7542216086697868415) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_missing_mdn_text (2907314684242542226) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_missing_alert_dialog_text (7870419247987316112) -->
+    <string name="smart_forwarding_title" msgid="8368634861971949799">"Խելացի վերահասցեավորում"</string>
+    <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Խելացի վերահասցեավորումը միացված է"</string>
+    <string name="smart_forwarding_summary_disabled" msgid="5033880700091914809">"Խելացի վերահասցեավորումն անջատված է"</string>
+    <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"Զանգերի կարգավորումներ"</string>
+    <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"Կարգավորումները թարմացվում են…"</string>
+    <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"Զանգի կարգավորումների սխալ"</string>
+    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"Ցանցի կամ SIM քարտի սխալ"</string>
+    <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"SIM քարտն ակտիվացված չէ։"</string>
+    <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"Մուտքագրեք հեռախոսահամարներ"</string>
+    <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Մուտքագրեք հեռախոսահամար"</string>
+    <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Հեռախոսահամարը նշված չէ։"</string>
+    <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"Եղավ"</string>
+    <!-- no translation found for enable_2g_title (8184757884636162942) -->
     <skip />
 </resources>

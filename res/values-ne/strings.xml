@@ -52,6 +52,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"स्क्रिनमा भएको पाठलाई अझै सानो वा ठुलो बनाउनुहोस्।"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"अझ सानो बनाउनुहोस्"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"अझ ठुलो बनाउनुहोस्"</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="1150797732067921015">"स्वतः रोटेट हुने सुविधा प्रयोग गर्नुहोस्"</string>
+    <string name="smart_rotate_text_headline" msgid="9147653205505671866">"अनुहारमा आधारित स्वतः रोटेट हुने सुविधाले कुनै व्यक्तिले स्क्रिनमा हेरेका छन् कि छैनन् र हेरेका छन् भने कसरी हेरेका छन् भन्ने कुरा हेर्न अगाडिको क्यामेरा प्रयोग गर्छ। यसले सुतेर पढ्ने अनुमति दिन्छ र फोटोहरू कहिल्यै पनि भण्डारण गरिँदैनन् वा Google मा पठाइँदैनन्।&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;Learn more&lt;/a&gt;"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"नमूना पाठ"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"दि वन्डरफुल विजार्ड अफ ओज"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"अध्याय ११: दि वन्डरफुल एमरल्ड सिटी अफ ओज"</string>
@@ -1172,6 +1174,10 @@
     <string name="search_settings" msgid="7573686516434589771">"खोज्नुहोस्"</string>
     <string name="display_settings" msgid="7197750639709493852">"प्रदर्शन"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"स्वतःघुम्ने स्क्रिन"</string>
+    <string name="auto_rotate_option_off" msgid="2788096269396290731">"अफ छ"</string>
+    <string name="auto_rotate_option_on" msgid="5776678230808498171">"अन छ"</string>
+    <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"अन छ - अनुहारमा आधारित"</string>
+    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"अनुहार पत्ता लगाउने सुविधा अन गर्नुहोस्"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"रङहरू"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"प्राकृतिक"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"बुस्ट गरिएको"</string>
@@ -2132,9 +2138,11 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"तपाईंले आफ्नो आवश्यकताहरूसँग मेल खाने बनाउन यस यन्त्रलाई आफू अनुकूल गर्न सक्नुहुन्छ। यी पहुँच सुविधाहरू सेटिङमा पछि परिवर्तन गर्न सकिने छ।"</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"फन्ट साइज बदल्नुहोस्"</string>
     <string name="screen_reader_category_title" msgid="6195867428854871553">"स्क्रिन रिडरहरू"</string>
-    <string name="audio_and_captions_category_title" msgid="5049122378290004050">"अडियो तथा स्क्रिनमा देखिने पाठ सन्देश"</string>
+    <string name="captions_category_title" msgid="574490148949400274">"क्याप्सनहरू"</string>
+    <string name="audio_category_title" msgid="5283853679967605826">"अडियो"</string>
     <string name="display_category_title" msgid="6638191682294461408">"प्रदर्शन"</string>
     <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"पाठ तथा डिस्प्ले"</string>
+    <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"स्क्रिन अझ अँध्यारो बनाउनुहोस्"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"अन्तर्क्रियाका नियन्त्रणहरू"</string>
     <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"सहायता प्राप्त गर्न ट्याप गर्नुहोस्"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"प्रणालीका नियन्त्रणहरू"</string>
@@ -2274,6 +2282,7 @@
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"निष्क्रिय"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"काम गर्दै छैन। जानकारीका लागि ट्याप गर्नुहोस्।"</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"यो सेवाले राम्ररी काम गरिरहेको छैन।"</string>
+    <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"सर्वसुलभ सुविधाका सर्टकटहरू"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"द्रुत सेटिङमा देखाउनुहोस्"</string>
     <string name="daltonizer_type" msgid="1715154680803795947">"सुधार मोड"</string>
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"ड्युटेरानोमेली"</string>
@@ -2283,6 +2292,15 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"रातो-हरियो"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"रातो-हरियो"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"निलो-पहेँलो"</string>
+    <string name="reduce_bright_colors_preference_title" msgid="5249275952895378507">"स्क्रिनको चमक घटाउनुहोस्"</string>
+    <string name="reduce_bright_colors_preference_summary" product="default" msgid="3824406431092247331">"आफ्नो फोनको स्क्रिनको चमक घटाएर न्यूनतम चमकभन्दा पनि कम गर्नुहोस्"</string>
+    <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="867454382618040359">"आफ्नो ट्याब्लेटको स्क्रिनको चमक घटाएर न्यूनतम चमकभन्दा पनि कम गर्नुहोस्"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="7098993556258805657">"स्क्रिनमा भएको पाठ पढ्न अझ सजिलो होस् भन्नाका खातिर आफ्नो स्क्रिन अझ अँध्यारो बनाउनुहोस्।&lt;br/&gt;&lt;br/&gt; निम्न अवस्थाहरूमा यसो गर्नु उपयोगी हुन सक्छ: &lt;ol&gt; &lt;li&gt; तपाईंको फोनको स्क्रिनको न्यूनतम पूर्वनिर्धारित चमक अझै पनि धेरै उज्यालो छ&lt;/li&gt; &lt;li&gt; तपाईं आफ्नो फोन राति वा सुत्नुअघि अँध्यारो कोठा जस्ता अँध्यारो ठाउँमा प्रयोग गर्दै हुनुहुन्छ&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"स्क्रिनमा भएको पाठ पढ्न अझ सजिलो होस् भन्नाका खातिर आफ्नो स्क्रिन अझ अँध्यारो बनाउनुहोस्।&lt;br/&gt;&lt;br/&gt; निम्न अवस्थाहरूमा यसो गर्नु उपयोगी हुन सक्छ: &lt;ol&gt; &lt;li&gt; तपाईंको ट्याब्लेटको स्क्रिनको न्यूनतम पूर्वनिर्धारित चमक अझै पनि धेरै उज्यालो छ&lt;/li&gt; &lt;li&gt; तपाईं आफ्नो ट्याब्लेट राति वा सुत्नुअघि अँध्यारो कोठा जस्ता अँध्यारो ठाउँमा प्रयोग गर्दै हुनुहुन्छ&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"स्क्रिनको चमकको स्तर"</string>
+    <string name="reduce_bright_colors_intensity_preference_start_label" msgid="109739628110493358">"हल्का अँध्यारो"</string>
+    <string name="reduce_bright_colors_intensity_preference_end_label" msgid="8686269714092663507">"सबैभन्दा अँध्यारो"</string>
+    <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"यन्त्र रिस्टार्ट भएपछि अन राखियोस्"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="other">छोटो (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> सेकेन्ड)</item>
       <item quantity="one">छोटो (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> सेकेन्ड)</item>
@@ -2436,8 +2454,7 @@
     <string name="bluetooth_on_time" msgid="8424625554628450028">"समयमा Wi-Fi"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"ब्याट्रीको प्रयोग"</string>
     <string name="history_details_title" msgid="8628584613889559355">"इतिहास विवरणहरू"</string>
-    <!-- no translation found for advanced_battery_preference_title (6518802648205311326) -->
-    <skip />
+    <string name="advanced_battery_preference_title" msgid="6518802648205311326">"ब्याट्रीको उपयोगसम्बन्धी जानकारी हेर्नु…"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"ब्याट्रीको प्रयोग"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"विवरणहरू प्रयोग गर्नुहोस्"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"उर्जा प्रयोग मिलाउनुहोस्"</string>
@@ -3079,11 +3096,10 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"प्रयोगकर्ता मेटाउनुहोस्"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"मेट्नुहोस्"</string>
     <string name="user_guest" msgid="4545590092001460388">"अतिथि"</string>
-    <string name="user_clear_guest_menu" msgid="4864362688187480452">"अतिथि मोडको डेटा हटाउनुहोस्"</string>
-    <string name="user_exit_guest_menu" msgid="5064400453222497734">"अतिथिको सत्र अन्त्य गर्नुहोस्"</string>
-    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"अतिथिको सत्र अन्त्य गर्ने हो?"</string>
+    <string name="user_exit_guest_title" msgid="2653103120908427236">"अतिथि हटाउनुहोस्"</string>
+    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"अतिथि हटाउने हो?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"यस सत्रमा सबै एपहरू र डेटा मेटाइनेछ।"</string>
-    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"सत्र अन्त्य गर्नुहोस्"</string>
+    <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"हटाउनुहोस्"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"फोन गर्ने सेवा सक्रिय गर्नुहोस्"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"फोन कल तथा SMS सक्षम पार्नुहोस्"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"प्रयोगकर्ता मेटाउनुहोस्"</string>
@@ -3662,6 +3678,13 @@
     <string name="notif_type_conversation" msgid="3014259738224129504">"कुराकानीसम्बन्धी सूचनाहरू"</string>
     <string name="notif_type_alerting" msgid="2300039323822104165">"कम्पन वा आवाजसहितका सूचनाहरू"</string>
     <string name="notif_type_silent" msgid="2514763073653979199">"साइलेन्ट सूचनाहरू"</string>
+    <string name="notif_listener_excluded_title" msgid="639103158747320529">"ती एपहरूको सूची जसबाट प्राप्त सूचनाहरू यी प्रयोगकर्ता देख्नुहुन्न"</string>
+    <string name="notif_listener_excluded_summary_zero" msgid="5152444145866958400">"सबै एपहरू लिंक गरिएका छन्"</string>
+    <plurals name="notif_listener_excluded_summary_nonzero" formatted="false" msgid="3218891004546748617">
+      <item quantity="other">%d वटा एपहरू लिंक गरिएका छैनन्</item>
+      <item quantity="one">%d एप लिंक गरिएको छैन</item>
+    </plurals>
+    <string name="notif_listener_excluded_app_title" msgid="8102477888511595023">"लिंक गरिएका एपहरू"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR का सहायक सेवाहरू"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"कुनै पनि स्थापित एपहरूले VR का सहायक सेवाहरूको रूपमा चल्नका लागि अनुरोध गरेका छैनन्।"</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"<xliff:g id="SERVICE">%1$s</xliff:g> लाई VR को सेवामा पहुँचका लागि अनुमति दिने हो?"</string>
@@ -4095,6 +4118,7 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"फाइल स्थानान्तरण"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"फाइलहरूलाई अर्को यन्त्रमा स्थानान्तरण गर्नुहोस्"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
+    <string name="usb_transcode_files" msgid="5999760694155541693">"एक्स्पोर्ट गरिएका मिडिया ट्रान्सकोड गरियोस्"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"यदि MTP ले (PTP) समर्थित गर्दैन भने तस्विर वा फाइलहरू ट्रान्सफर गर्नुहोस्"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"USB टेदरिङ"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
@@ -4102,8 +4126,8 @@
     <string name="usb_use" msgid="6783183432648438528">"निम्नका लागि USB प्रयोग गर्नुहोस्"</string>
     <string name="usb_default_label" msgid="3372838450371060750">"USB को पूर्वनिर्धारित कन्फिगरेसन"</string>
     <string name="usb_default_info" msgid="167172599497085266">"अर्को यन्त्र जडान भएको र तपाईंको फोन अनलक भएको खण्डमा यी सेटिङहरू लागू हुने छन्‌। विश्वसनीय यन्त्रहरूमा मात्र जडान गर्नुहोस्‌।"</string>
-    <!-- no translation found for usb_power_title (5602112548385798646) -->
-    <skip />
+    <string name="usb_power_title" msgid="5602112548385798646">"पावर बटनसम्बन्धी विकल्पहरू"</string>
+    <string name="usb_file_transfer_title" msgid="2261577861371481478">"फाइल सार्ने विकल्पहरू"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB का प्राथमिकताहरू"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"निम्नमध्ये USB नियन्त्रण गर्ने चिज"</string>
@@ -4322,7 +4346,8 @@
       <item quantity="one">१ वटा बन्देज</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"वाहकको डेटाको हिसाब-किताब राख्ने कार्य तपाईँको यन्त्रको हिसाब-किताब राख्ने कार्य भन्दा फरक हुन सक्छ"</string>
-    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"यस विवरणमा सेवा प्रदायकको नेटवर्कले प्रयोग गरेको डेटा समावेश गरिएको छैन"</string>
+    <!-- no translation found for non_carrier_data_usage_warning (4707184871368847697) -->
+    <skip />
     <string name="data_used_template" msgid="8229342096562327646">"<xliff:g id="ID_1">%1$s</xliff:g> प्रयोग गरियो"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"डेटाबारे चेतावनी सेट गर्नुहोस्"</string>
     <string name="data_warning" msgid="2925054658166062884">"डेटाबारे चेतावनी"</string>
@@ -4915,8 +4940,24 @@
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"SIM बाहिर झिकेर फेरि हाल्नुहोस्। अझै समस्या रहिरह्यो भने आफ्नो यन्त्र रिस्टार्ट गर्नुहोस्।"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"फेरि SIM सक्रिय गरी हेर्नुहोस्। अझै समस्या रहिरह्यो भने आफ्नो यन्त्र रिस्टार्ट गर्नुहोस्।"</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"नेटवर्क सक्रिय गर्ने प्रक्रिया"</string>
+    <!-- no translation found for sim_switch_channel_id (4927038626791837861) -->
+    <skip />
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> सक्रिय छ"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"SIM का सेटिङ परिवर्तन गर्न ट्याप गर्नुहोस्"</string>
+    <string name="switch_to_removable_notification" msgid="7640342063449806296">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> प्रयोग गर्न थालियो"</string>
+    <string name="switch_to_removable_notification_no_carrier_name" msgid="7384856964036215338">"अर्को सेवा प्रदायक प्रयोग गर्न थालियो"</string>
+    <string name="network_changed_notification_text" msgid="2407908598496951243">"तपाईंको मोबाइल नेटवर्क बदलिएको छ"</string>
+    <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"आफ्नो अर्को SIM सेटअप गर्नुहोस्"</string>
+    <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"आफ्नो सक्रिय SIM छनौट गर्नुहोस् वा एकैसाथ २ वटा SIM प्रयोग गर्नुहोस्"</string>
+    <string name="choose_sim_title" msgid="4804689675237716286">"प्रयोग गर्ने नम्बर छनौट गर्नुहोस्"</string>
+    <string name="choose_sim_text" msgid="8056651794100746697">"यो यन्त्रमा <xliff:g id="NUMBER">%1$d</xliff:g> वटा नम्बर उपलब्ध छन् तर तपाईं एक पटकमा एउटा नम्बर मात्र प्रयोग गर्न सक्नुहुन्छ"</string>
+    <string name="choose_sim_activating" msgid="9035902671985449448">"<xliff:g id="ELLIPSIS">…</xliff:g> सक्रिय गरिँदै छ"</string>
+    <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"अहिले नै सक्रिय गर्न सकिएन"</string>
+    <string name="choose_sim_item_summary_unknown" msgid="7854314795485227568">"अज्ञात नम्बर"</string>
+    <string name="switch_sim_dialog_title" msgid="5407316878973237773">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> प्रयोग गर्ने हो?"</string>
+    <string name="switch_sim_dialog_text" msgid="7530186862171635464">"मोबाइल डेटा, कल र SMS का लागि <xliff:g id="CARRIER_NAME">%1$s</xliff:g> प्रयोग गरिने छ।"</string>
+    <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"कुनै पनि सक्रिय SIM उपलब्ध छैन"</string>
+    <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"पछि मोबाइल डेटा, कल गर्ने सुविधा र SMS सेवा प्रयोग गर्नु परेमा आफ्नो नेटवर्कका सेटिङमा जानुहोस्"</string>
     <string name="sim_card_label" msgid="5632157635124050923">"SIM कार्ड"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"डाउनलोड गरिएको यो SIM मेटाउने हो?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"तपाईंले यो SIM मेटाउनुभयो भने यस यन्त्रबाट <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> सेवा हटाइने छ।\n\n <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> को सेवा भने रद्द गरिने छैन।"</string>
@@ -4943,10 +4984,8 @@
     <string name="mobile_data_ap_mode_disabled" msgid="6067959496888990983">"हवाइजहाज मोडमा हुँदा मोबाइल डेटा उपलब्ध हुँदैन"</string>
     <string name="force_desktop_mode" msgid="1336913605091334238">"डेस्कटप मोडमा बल गर्नुहोस्"</string>
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"सहायक प्रदर्शनहरूमा प्रयोगात्मक डेस्कटप मोडमा जोड दिनुहोस्‌"</string>
-    <!-- no translation found for enable_non_resizable_multi_window (6832903754625404477) -->
-    <skip />
-    <!-- no translation found for enable_non_resizable_multi_window_summary (3275763753261901999) -->
-    <skip />
+    <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"विन्डोको आकार मिलाउन नसकिने एपहरू एकभन्दा बढी विन्डोमा खोल्ने विकल्प अन गर्नुहोस्"</string>
+    <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"विन्डोको आकार मिलाउन नसकिने एपहरू एकभन्दा बढी विन्डोमा खोल्न दिन्छ"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"force-dark ओभरराइड गर्नुहोस्"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"force-dark सुविधा सधैँ सक्रिय हुन बल गर्छ"</string>
     <string name="enable_blurs_on_windows_title" msgid="4218144213800778872">"अस्पष्ट पार्ने सुविधा सक्षम पार्नुहोस्"</string>
@@ -4998,7 +5037,7 @@
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"तपाईंको सेवा प्रदायकले Wi‑Fi मार्फत आपत्‌कालीन कल गर्ने सुविधा समर्थन गदैन। \nअपतकालीन कल गर्नका लागि उक्त यन्त्रले स्वतः सेलुलर नेटवर्क प्रयोग गर्छ।\n सेलुलर नेटवर्कको कभरेज राम्रो भएका क्षेत्रमा मात्र अपतकालीन कल गर्न सम्भव हुन्छ।"</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"कलको गुणस्तर सुधार्न Wi‑Fi प्रयोग गरी कल गर्नुहोस्"</string>
     <string name="backup_calling_settings_title" msgid="519714752900364326">"ब्याकअप कलिङ"</string>
-    <string name="backup_calling_setting_summary" msgid="451295393447465830">"<xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> उपलब्ध नभएका खण्डमा <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g> मार्फत कलहरू गर्न र प्राप्त गर्न मोबाइल डेटा सेवा भएको SIM प्रयोग गर्नुहोस्।"</string>
+    <string name="backup_calling_setting_summary" msgid="599493254305348733">"<xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> प्रयोग गरी रोमिङ सुविधा चलाउन नमिल्ने भएमा कल गर्न <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g> को मोबाइल डेटा SIM प्रयोग गर्नुहोस्।"</string>
     <string name="keywords_backup_calling" msgid="8592800915478816800">"ब्याकअप कलिङ"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"आगमन MMS सन्देश"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"MMS सन्देश पठाउन सकिएन"</string>
@@ -5068,23 +5107,24 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"हवाइजहाज, हवाइजहाजका सुरक्षित नेटवर्क"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"कल तथा SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi-Fi कलिङ"</string>
-    <!-- no translation found for calls_sms_wfc_summary (3940529919408667336) -->
-    <skip />
-    <!-- no translation found for calls_sms_footnote (8051604228144899434) -->
-    <skip />
+    <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"Wi‑Fi मार्फत कल गर्नुहोस् र कल उठाउनुहोस्"</string>
+    <string name="calls_sms_footnote" msgid="1003530944232362815">"Wi-Fi कलिङका सहायताले टेलिफोन कम्पनीको सेवा प्रयोग नगरिकन Wi-Fi नेटवर्कमार्फत कल गर्न र कल उठाउन सकिन्छ। "<annotation id="url">"थप जान्नुहोस्"</annotation></string>
     <string name="calls_preference_title" msgid="7536882032182563800">"कलहरू"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"यो SIM कार्ड प्रयोग गरियोस्"</string>
-    <string name="calls_sms_calls_preferred" msgid="252913858812799809">"यो SIM कार्ड कल गर्न प्रयोग गरियोस्"</string>
-    <string name="calls_sms_sms_preferred" msgid="5826706870873784062">"यो SIM कार्ड SMS पठाउन प्रयोग गरियोस्"</string>
+    <string name="calls_sms_calls_preferred" msgid="9004261125829377885">"कल गर्नका लागि प्रयोग गरिने"</string>
+    <string name="calls_sms_sms_preferred" msgid="3855778890660922711">"SMS पठाउनका लागि प्रयोग गरिने"</string>
     <string name="calls_sms_unavailable" msgid="4055729705246556529">"उपलब्ध छैन"</string>
+    <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"केही समयका लागि अनुपलब्ध छ"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"SIM कार्ड छैन"</string>
-    <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"प्राथमिकताहरू"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8635896466814033405) -->
+    <skip />
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"सार्वजनिक Wi-Fi नेटवर्कमा कनेक्ट गरियोस्"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"नेटवर्क कनेक्सन, इन्टरनेट, वायरलेस, डेटा, wifi, wi-fi, wi fi, सेलुलर, मोबाइल, सेल सेवा प्रदायक, 4g, 3g, 2g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"हवाइजहाज मोड अन गरिएका नेटवर्क हेर्नुहोस्"</string>
     <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"हवाइजहाज मोडमा काम गर्ने नेटवर्कहरू देखाइँदै छन्"</string>
-    <string name="turn_off_airplane_mode" msgid="7141986366534514443">"हवाइजहाज मोड अफ गर्नुहोस्"</string>
+    <string name="turn_on_networks" msgid="7786747178388835577">"इन्टरनेट अन गर्नुहोस्"</string>
+    <string name="turn_off_networks" msgid="886012600238121672">"इन्टरनेट अफ गर्नुहोस्"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"इन्टनेट रिसेट गर्ने हो?"</string>
     <string name="reset_internet_text" product="default" msgid="8797910368942544453">"तपाईंले यसो गर्नुभयो भने तपाईंको फोन कल अन्त्य हुने छ"</string>
     <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"तपाईंले यसो गर्नुभयो भने तपाईंको फोन कल अन्त्य हुने छ"</string>
@@ -5092,8 +5132,7 @@
     <string name="fix_connectivity" msgid="2781433603228089501">"कनेक्टिभिटीसम्बन्धी समस्या समाधान गर्नुहोस्"</string>
     <string name="airplane_mode_network_available" msgid="1059499681300395240">"हवाइजहाज मोडमा काम गर्ने नेटवर्कहरू उपलब्ध छन्"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"नेटवर्क बदल्न इथरनेट डिस्कनेक्ट गर्नुहोस्"</string>
-    <!-- no translation found for cannot_switch_networks_while_connected (3867944849171754777) -->
-    <skip />
+    <string name="airplane_mode_network_panel_title" msgid="6385046104863403604">"हवाइजहाज मोडमा चल्ने नेटवर्कहरू"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"इन्टरनेटमा कनेक्ट गरिएको छ"</string>
     <string name="mobile_data_off_summary" msgid="3841411571485837651">"इन्टरनेट स्वतः कनेक्ट हुँदैन"</string>
@@ -5115,28 +5154,18 @@
     <string name="category_name_others" msgid="2366006298768550310">"अन्य"</string>
     <string name="category_name_general" msgid="7737273712848115886">"सामान्य"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"सबै एपहरू हेर्नुहोस्"</string>
-    <!-- no translation found for smart_forwarding_title (8368634861971949799) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_summary_enabled (3341062878373185604) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_summary_disabled (5033880700091914809) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_ongoing_title (962226849074401228) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_ongoing_text (2189209372407117114) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_title (1859891191023516080) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_text (5370431503707373653) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_not_activated_text (997396203001257904) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_input_mdn_title (5105463748849841763) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_input_mdn_dialog_title (7542216086697868415) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_missing_mdn_text (2907314684242542226) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_missing_alert_dialog_text (7870419247987316112) -->
+    <string name="smart_forwarding_title" msgid="8368634861971949799">"स्मार्ट फर्वार्डिङ"</string>
+    <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"स्मार्ट फर्वार्डिङ अन गरियो"</string>
+    <string name="smart_forwarding_summary_disabled" msgid="5033880700091914809">"स्मार्ट फर्वार्डिङ अफ गरियो"</string>
+    <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"कलसम्बन्धी सेटिङ"</string>
+    <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"सेटिङ अपडेट गरिँदै छ…"</string>
+    <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"कलसम्बन्धी सेटिङमा त्रुटि भयो"</string>
+    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"नेटवर्क वा SIM कार्डसम्बन्धी त्रुटि भयो।"</string>
+    <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"SIM सक्रिय गरिएको छैन।"</string>
+    <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"फोन नम्बरहरू हाल्नुहोस्"</string>
+    <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"फोन नम्बर हाल्नुहोस्"</string>
+    <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"फोन नम्बर हालिएको छैन।"</string>
+    <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"ठिक छ"</string>
+    <!-- no translation found for enable_2g_title (8184757884636162942) -->
     <skip />
 </resources>
