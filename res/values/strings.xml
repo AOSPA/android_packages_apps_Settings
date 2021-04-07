@@ -945,6 +945,43 @@
     <!-- Body text of dialog shown when the user tries to skip setting up fingerprint after adding lock screen during initial setup [CHAR LIMIT=NONE] -->
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text">Fingerprint setup only takes a minute or two. If you skip this, you can add your fingerprint later in settings.</string>
     <!-- Title of dialog shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so [CHAR LIMIT=30]-->
+
+    <!-- Introduction detail message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup">When you see this icon, use your fingerprint for authentication, like when you sign in to apps or approve a purchase</string>
+    <!-- Introduction subtitle message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1">Keep in mind</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1">Using your fingerprint to unlock your phone may be less secure than a strong pattern or PIN</string>
+    <!-- Introduction subtitle message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2">How it works</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">Fingerprint Unlock creates a unique model of your fingerprint to recognize you during authentication. To create this fingerprint model during setup, you will take images of your fingerprint from different positions.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">The phone will also use images from your interactions with Fingerprint Unlock to update your fingerprint model. Your fingerprint images and model are stored securely on your phone and never leave the phone. All processing occurs securely on your phone.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">You can delete your fingerprint images and model, or turn off Fingerprint Unlock at any time in Settings. Fingerprint images and models are stored on the phone until you delete them.</string>
+    <!-- Introduction detail message shown in fingerprint enrollment introduction to learn more about fingerprint [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more"></string>
+
+    <!-- Acquire message received during fingerprint enrollment to inform the user to change the position of their finger. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting">Change the position of your finger slightly each time</string>
+    <!-- Acquire message received during fingerprint enrollment to inform the user to cover the fingerprint sensor. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected">Cover the icon with the center of your fingerprint</string>
+    <!-- Acquire message received during fingerprint enrollment to inform the user this fingerprint has already been added. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_acquire_already_enrolled">This fingerprint has already been added</string>
+    <!-- Acquire message received during fingerprint enrollment to inform the user to clean the screen near the fingerprint sensor. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_acquire_clean_sensor">Clean your screen near the sensor and try again</string>
+    <!-- Acquire message received during fingerprint enrollment to inform the user to lift their finger. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast">Lift your finger after you feel a vibration</string>
+    <!-- Acquire message received during fingerprint enrollment to inform the user to try better lighting. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright">Move somewhere with gentler lighting and try again</string>
+    <!-- Acquire message received during fingerprint enrollment to inform the user they've reached the maximum number of enrollments. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_error_max_attempts">You\u2019ve reached the maximum number of attempts</string>
+
+    <!-- Message shown in fingerprint security settings home screen. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_home_screen">Use your fingerprint to unlock your phone or for authentication, like when you sign in to apps or approve a purchase</string>
+
+    <!-- Title of dialog shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so [CHAR LIMIT=30]-->
     <string name="lock_screen_intro_skip_title">Skip screen lock?</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so, including loss of factory reset protection. (tablet) [CHAR LIMIT=NONE] -->
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet">Device protection features won\u2019t be turned on. You won\u2019t be able to prevent others from using this tablet if it\u2019s lost, stolen or reset.</string>
@@ -1077,6 +1114,9 @@
 
     <!-- Message shown in a dialog which asks the user to confirm when a single fingerprint gets deleted. [CHAR LIMIT=NONE]-->
     <string name="fingerprint_delete_message">Do you want to delete this fingerprint?</string>
+
+    <!-- Message shown in a dialog which asks the user to confirm when a single fingerprint gets deleted. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_v2_delete_message">This deletes the fingerprint images and model associated with \'<xliff:g id="fingerprint_id" example="Fingerprint 2">%1$s</xliff:g>\' that are stored on your device</string>
 
     <!-- Message shown in a dialog which asks the user to confirm when the last fingerprint gets deleted by him. [CHAR LIMIT=NONE]-->
     <string name="fingerprint_last_delete_message">You won\'t be able to use your fingerprints to
@@ -1739,7 +1779,7 @@
     <!-- Bluetooth settings. Text displayed when Bluetooth is off and device list is empty [CHAR LIMIT=50]-->
     <string name="bluetooth_empty_list_bluetooth_off">When Bluetooth is turned on, your device can communicate with other nearby Bluetooth devices.</string>
     <!-- Bluetooth settings. Text displayed when Bluetooth is off and bluetooth scanning is turned on [CHAR LIMIT=NONE] -->
-    <string name="bluetooth_scanning_on_info_message">When Bluetooth is turned on, your device can communicate with other nearby Bluetooth devices.\n\nTo improve device experience, apps and services can still scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services. you can change this in <annotation id="link">scanning settings</annotation>.</string>
+    <string name="bluetooth_scanning_on_info_message">When Bluetooth is turned on, your device can communicate with other nearby Bluetooth devices.\n\nTo improve device experience, apps and services can still scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services. you can change this in <annotation id="link">Bluetooth scanning settings</annotation>.</string>
     <!-- Message to describe "BLE scan always available feature" when Bluetooth is off. The
       place-holders "LINK_BEGIN" and "LINK_END" must NOT be translated. They mark a link to bring
       the user to "scanning settings" screen. -->
@@ -1996,13 +2036,13 @@
     <!-- Message to describe "Wi-Fi scan always available feature" when Wi-Fi is off and Wi-Fi
       scanning is on. The place-holders "LINK_BEGIN" and "LINK_END" must NOT be translated. They
       mark a link to bring the user to "scanning settings" screen. -->
-    <string name="wifi_scan_notify_text">To improve location accuracy, apps and services can still scan for Wi\u2011Fi networks at any time, even when Wi\u2011Fi is off. This can be used, for example, to improve location-based features and services. You can change this in <xliff:g id="link_begin">LINK_BEGIN</xliff:g>scanning settings<xliff:g id="link_end">LINK_END</xliff:g>.</string>
+    <string name="wifi_scan_notify_text">To improve location accuracy, apps and services can still scan for Wi\u2011Fi networks at any time, even when Wi\u2011Fi is off. This can be used, for example, to improve location-based features and services. You can change this in <xliff:g id="link_begin">LINK_BEGIN</xliff:g>Wi\u2011Fi scanning settings<xliff:g id="link_end">LINK_END</xliff:g>.</string>
     <!-- Message to describe "Wi-Fi scan always available feature" when Wi-Fi is off and Wi-Fi
       scanning is also off. The place-holders "LINK_BEGIN" and "LINK_END" must NOT be translated.
       They mark a link to bring the user to "scanning settings" screen. -->
     <string name="wifi_scan_notify_text_scanning_off">To improve location accuracy,
         turn on Wi-Fi scanning in
-        <xliff:g id="link_begin">LINK_BEGIN</xliff:g>scanning
+        <xliff:g id="link_begin">LINK_BEGIN</xliff:g>Wi\u2011Fi scanning
         settings<xliff:g id="link_end">LINK_END</xliff:g>.</string>
     <!-- Wifi scan always mode checkbox text -->
     <string name="wifi_scan_notify_remember_choice">Don\u2019t show again</string>
@@ -5899,6 +5939,8 @@
     <string name="history_details_title">History details</string>
     <!-- Preference title for advanced battery usage [CHAR LIMIT=40] -->
     <string name="advanced_battery_preference_title">View battery usage</string>
+    <!-- Preference summary for advanced battery usage [CHAR LIMIT=40] -->
+    <string name="advanced_battery_preference_summary">View usage for past 24 hours</string>
 
     <!-- Activity title for battery usage details for an app. or power consumer -->
     <string name="battery_details_title">Battery usage</string>
@@ -6035,7 +6077,7 @@
     <string name="battery_auto_restriction_summary">Detect when apps drain battery</string>
 
     <!-- Summary for battery manager when it is on -->
-    <string name="battery_manager_on" product="default">On / Detecting when apps drain battery</string>
+    <string name="battery_manager_summary">Detecting when apps drain battery</string>
 
     <!-- Summary for battery manager when it is off -->
     <string name="battery_manager_off">Off</string>
@@ -6300,6 +6342,9 @@
 
     <!-- Battery saver: Label for preference to indicate there is a routine based schedule [CHAR_LIMIT=40] -->
     <string name="battery_saver_auto_routine">Based on your routine</string>
+
+    <!-- Battery saver: Summary for preference to indicate there is a routine based schedule [CHAR_LIMIT=40] -->
+    <string name="battery_saver_pref_auto_routine_summary">Will turn on based on your routine</string>
 
     <!-- Battery saver: Label for preference to indicate there is a percentage based schedule [CHAR_LIMIT=40] -->
     <string name="battery_saver_auto_percentage">Based on percentage</string>
@@ -6668,7 +6713,7 @@
 
     <!-- Message displayed to let the user know that some of the options are disabled by admin. [CHAR LIMIT=NONE] -->
     <string name="admin_disabled_other_options">Other options are disabled by your admin</string>
-    <string name="admin_more_details">More details</string>
+    <string name="admin_more_details">Learn more</string>
     <string name="notification_log_title">Notification log</string>
 
     <string name="notification_history_title">Notification history</string>
@@ -12902,6 +12947,12 @@
 
     <!-- Power menu setting privacy no secure screen lock set [CHAR_LIMIT=NONE] -->
     <string name="power_menu_privacy_not_secure">To use, first set a screen lock</string>
+
+    <!-- Power menu setting use long press power to invoke assistant. [CHAR_LIMIT=NONE] -->
+    <string name="power_menu_long_press_for_assist">Hold for Assistant</string>
+
+    <!-- Power menu setting use log press power to invoke assistant summary. [CHAR_LIMIT=NONE] -->
+    <string name="power_menu_long_press_for_assist_summary">Trigger the Assistant by holding the power button</string>
 
     <!-- Device controls toggle name [CHAR LIMIT=60] -->
     <string name="device_controls_setting_toggle">Show device controls</string>
