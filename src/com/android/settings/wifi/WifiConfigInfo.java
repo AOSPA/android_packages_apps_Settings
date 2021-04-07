@@ -26,7 +26,6 @@ import com.android.settings.R;
 
 import java.util.List;
 
-
 /**
  * Configuration details saved by the user on the WifiSettings screen
  */
@@ -39,7 +38,7 @@ public class WifiConfigInfo extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mWifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
+        mWifiManager = getSystemService(WifiManager.class);
         setContentView(R.layout.wifi_config_info);
         mConfigList = (TextView) findViewById(R.id.config_list);
     }

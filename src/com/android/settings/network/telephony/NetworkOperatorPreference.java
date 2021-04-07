@@ -181,10 +181,7 @@ public class NetworkOperatorPreference extends Preference {
     public OperatorInfo getOperatorInfo() {
         return new OperatorInfo(Objects.toString(mCellId.getOperatorAlphaLong(), ""),
                 Objects.toString(mCellId.getOperatorAlphaShort(), ""),
-                getOperatorNumeric(),
-                // Send accessNetworkType as a parameter.
-                // This is converted to RadioAccessNetwork in the Telephony Framework.
-                getAccessNetworkType());
+                getOperatorNumeric(), getAccessNetworkTypeFromCellInfo(mCellInfo));
     }
 
     private int getIconIdForCell(CellInfo ci) {
@@ -229,6 +226,25 @@ public class NetworkOperatorPreference extends Preference {
         return null;
     }
 
+    private int getAccessNetworkTypeFromCellInfo(CellInfo ci) {
+        if (ci instanceof CellInfoGsm) {
+            return AccessNetworkType.GERAN;
+        }
+        if (ci instanceof CellInfoCdma) {
+            return AccessNetworkType.CDMA2000;
+        }
+        if ((ci instanceof CellInfoWcdma) || (ci instanceof CellInfoTdscdma)) {
+            return AccessNetworkType.UTRAN;
+        }
+        if (ci instanceof CellInfoLte) {
+            return AccessNetworkType.EUTRAN;
+        }
+        if (ci instanceof CellInfoNr) {
+            return AccessNetworkType.NGRAN;
+        }
+        return AccessNetworkType.UNKNOWN;
+    }
+
     private void updateIcon(int level) {
         if (!mIsAdvancedScanSupported || level < 0 || level >= NUM_SIGNAL_STRENGTH_BINS) {
             return;
@@ -236,27 +252,5 @@ public class NetworkOperatorPreference extends Preference {
         final Context context = getContext();
         setIcon(MobileNetworkUtils.getSignalStrengthIcon(context, level, NUM_SIGNAL_STRENGTH_BINS,
                 getIconIdForCell(mCellInfo), false));
-    }
-
-    public int getAccessNetworkType() {
-        int cellInfoType = mCellId == null ? CellInfo.TYPE_UNKNOWN : mCellId.getType();
-        int ant;
-        switch (cellInfoType) {
-            case CellInfo.TYPE_GSM:     ant = AccessNetworkType.GERAN;
-                                        break;
-            case CellInfo.TYPE_LTE:     ant = AccessNetworkType.EUTRAN;
-                                        break;
-            case CellInfo.TYPE_WCDMA:   // fallthrough
-            case CellInfo.TYPE_TDSCDMA: ant = AccessNetworkType.UTRAN;
-                                        break;
-            case CellInfo.TYPE_NR:      ant = AccessNetworkType.NGRAN;
-                                        break;
-            default:                    ant = AccessNetworkType.UNKNOWN;
-        }
-
-        Log.d(TAG, "AccessNetworkType: " + AccessNetworkType.toString(ant)
-                + " (" + ant + ")"
-                + ", mCellId: " + mCellId.toString());
-        return ant;
     }
 }
