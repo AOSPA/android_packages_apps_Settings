@@ -114,8 +114,8 @@ public class NetworkSelectSettings extends DashboardFragment {
                 .createForSubscriptionId(mSubId);
         mNetworkScanHelper = new NetworkScanHelper(
                 getContext(), mTelephonyManager, mCallback, mNetworkScanExecutor);
-        PersistableBundle bundle = (getContext().getSystemService(
-                CarrierConfigManager.class)).getConfigForSubId(mSubId);
+        PersistableBundle bundle = ((CarrierConfigManager) getContext().getSystemService(
+                Context.CARRIER_CONFIG_SERVICE)).getConfigForSubId(mSubId);
         if (bundle != null) {
             mShow4GForLTE = bundle.getBoolean(
                     CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL);
