@@ -16,6 +16,7 @@ package com.android.settings.core;
 import android.content.Context;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 
 import com.android.settings.overlay.FeatureFactory;
@@ -60,6 +61,15 @@ public abstract class TogglePreferenceController extends BasePreferenceControlle
             ((TwoStateButtonPreference) preference).setChecked(isChecked());
         } else {
             refreshSummary(preference);
+        }
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        Preference preference = screen.findPreference(getPreferenceKey());
+        if (preference != null) {
+            preference.setOnPreferenceChangeListener(this);
         }
     }
 

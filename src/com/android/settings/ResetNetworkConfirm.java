@@ -89,6 +89,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
 
         @Override
         protected Boolean doInBackground(Void... params) {
+            boolean isResetSucceed = true;
             ConnectivityManager connectivityManager = (ConnectivityManager)
                     mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
             if (connectivityManager != null) {
@@ -102,6 +103,10 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
             }
 
             p2pFactoryReset(mContext);
+
+            if (mEraseEsim) {
+                isResetSucceed = RecoverySystem.wipeEuiccData(mContext, mPackageName);
+            }
 
             TelephonyManager telephonyManager = (TelephonyManager)
                     mContext.getSystemService(TelephonyManager.class)
@@ -134,11 +139,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
             }
 
             restoreDefaultApn(mContext);
-            if (mEraseEsim) {
-                return RecoverySystem.wipeEuiccData(mContext, mPackageName);
-            } else {
-                return true;
-            }
+            return isResetSucceed;
         }
 
         @Override

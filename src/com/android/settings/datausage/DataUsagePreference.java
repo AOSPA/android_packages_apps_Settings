@@ -59,9 +59,13 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
             final DataUsageController.DataUsageInfo usageInfo =
                     controller.getDataUsageInfo(mTemplate);
             setTitle(mTitleRes);
-            setSummary(getContext().getString(R.string.data_usage_template,
-                    DataUsageUtils.formatDataUsage(getContext(), usageInfo.usageLevel),
-                    usageInfo.period));
+            if (usageInfo != null) {
+                setSummary(getContext().getString(R.string.data_usage_template,
+                       DataUsageUtils.formatDataUsage(getContext(), usageInfo.usageLevel),
+                        usageInfo.period));
+            } else {
+                setSummary(getContext().getString(R.string.device_info_default));
+            }
         }
         final long usageLevel = controller.getHistoricalUsageLevel(template);
         if (usageLevel > 0L) {
