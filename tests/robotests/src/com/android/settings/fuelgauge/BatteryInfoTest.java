@@ -63,7 +63,7 @@ import java.util.concurrent.TimeUnit;
 public class BatteryInfoTest {
 
     private static final String STATUS_CHARGING_NO_TIME = "50% - charging";
-    private static final String STATUS_CHARGING_TIME = "50% - 0 min until charged";
+    private static final String STATUS_CHARGING_TIME = "50% - 0 min left until full";
     private static final String STATUS_NOT_CHARGING = "Not charging";
     private static final long REMAINING_TIME_NULL = -1;
     private static final long REMAINING_TIME = 2;
@@ -72,7 +72,7 @@ public class BatteryInfoTest {
     private static final String BATTERY_RUN_OUT_PREFIX = "Battery may run out by";
     private static final long TEST_CHARGE_TIME_REMAINING = TimeUnit.MINUTES.toMicros(1);
     private static final String TEST_CHARGE_TIME_REMAINING_STRINGIFIED =
-            "1 min left until charged";
+            "1 min left until full";
     private static final String TEST_BATTERY_LEVEL_10 = "10%";
     private static final String FIFTEEN_MIN_FORMATTED = "15 min";
     private static final Estimate MOCK_ESTIMATE = new Estimate(
@@ -135,7 +135,7 @@ public class BatteryInfoTest {
                 mBatteryUsageStats, SystemClock.elapsedRealtime() * 1000, true /* shortString */);
 
         assertThat(info.discharging).isEqualTo(false);
-        assertThat(info.chargeLabel.toString()).isEqualTo("50% - 1 min until charged");
+        assertThat(info.chargeLabel.toString()).isEqualTo("50% - 1 min left until full");
     }
 
     @Test
