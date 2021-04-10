@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016-2021 Paranoid Android
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="pa_version">Verze Paranoid Android</string>
+    <string name="swipe_to_screenshot_title">Přejetím pořídit snímek obrazovky</string>
+    <string name="swipe_to_screenshot_summary">Pořízení snímku obrazovky přejetím tří prstů dolů</string>
+    <string name="prevent_ringing_option_cycle">Přepínání mezi režimy</string>
+    <string name="prevent_ringing_option_cycle_summary">Zap. (přepínání mezi režimy)</string>
+    <string name="icon_manager_title">Správce ikon</string>
+    <string name="icon_manager_summary">Ovládejte viditelnost ikon stavového řádku</string>
+    <string name="global_actions_advanced_reboot_title">Povolit rozšířený restart</string>
+    <string name="global_actions_advanced_reboot_summary">Zobrazit možnosti pro režim recovery a bootloader</string>
+    <string name="immersive_navigation_title">Navigace přes celou obrazovku</string>
+    <string name="adaptive_playback_screen_title">Adaptivní přehrávání</string>
+    <string name="adaptive_playback_disabled_summary">Vypnuto</string>
+    <string name="adaptive_playback_timeout_title">Použít tento časový limit</string>
+    <string name="adaptive_playback_timeout_none">Bez časového limitu</string>
+    <string name="adaptive_playback_timeout_none_summary">Zap. (bez časového limitu)</string>
+    <string name="adaptive_playback_timeout_30_secs">30 sekund</string>
+    <string name="adaptive_playback_timeout_30_secs_summary">Zap. (30 sekund)</string>
+    <string name="adaptive_playback_timeout_1_min">1 minuta</string>
+    <string name="adaptive_playback_timeout_1_min_summary">Zap. (1 minuta)</string>
+    <string name="adaptive_playback_timeout_2_min">2 minuty</string>
+    <string name="adaptive_playback_timeout_2_min_summary">Zap. (2 minuty)</string>
+    <string name="adaptive_playback_timeout_5_min">5 minut</string>
+    <string name="adaptive_playback_timeout_5_min_summary">Zap. (5 minut)</string>
+    <string name="adaptive_playback_timeout_10_min">10 minut</string>
+    <string name="adaptive_playback_timeout_10_min_summary">Zap. (10 minut)</string>
+    <string name="power_button_torch_title">Rychlá svítilna</string>
+    <string name="power_button_torch_summary">Když je obrazovka vypnutá, dlouhým stiskem tlačítka napájení zapnete svítilnu</string>
+    <string name="volume_button_music_control_title">Ovládání přehrávání</string>
+    <string name="volume_button_music_control_summary">Pokud je obrazovka vypnutá, dlouhím stisknutí tlačítek hlasitosti přeskočíte skladby</string>
+    <string name="pulse_ambient_light_title">Oznámení na okrajích</string>
+    <string name="pulse_ambient_light_summary">Rozsvítit boční okraje obrazovky po přijetí oznámení</string>
+    <string name="ambient_notification_light_accent_title">Systémová barva zvýraznění</string>
+    <string name="ambient_notification_light_color_automatic_title">Barva oznámení</string>
+    <string name="pulse_ambient_light_color">Při pulzování se použije</string>
+    <string name="security_settings_fingerprint_enroll_find_sensor_message_cm" product="tablet">Vyhledejte snímač otisku prstů <xliff:g id="sensor_location">%1$s</xliff:g> na tabletu.</string>
+    <string name="security_settings_fingerprint_enroll_find_sensor_message_cm" product="device">Vyhledejte snímač otisku prstů <xliff:g id="sensor_location">%1$s</xliff:g> na zařízení.</string>
+    <string name="security_settings_fingerprint_enroll_find_sensor_message_cm" product="default">Vyhledejte snímač otisku prstů <xliff:g id="sensor_location">%1$s</xliff:g> na telefonu.</string>
+    <string name="security_settings_fingerprint_sensor_location_back">vzadu</string>
+    <string name="security_settings_fingerprint_sensor_location_front">vpředu</string>
+    <string name="security_settings_fingerprint_sensor_location_left">vlevo</string>
+    <string name="security_settings_fingerprint_sensor_location_right">vpravo</string>
+    <string name="dc_dimming_title">DC tlumení</string>
+    <string name="dc_dimming_info">Snižuje namáhání očí v\u00a0šeru a\u00a0ve tmě, ale může mít za následek sníženou kvalitu obrazu a\u00a0špatné podání barev.</string>
+    <string name="dc_dimming_auto_mode_title">Plán</string>
+    <string name="dc_dimming_mode_brightness">Zapnout, když je jas pod prahovou hodnotou</string>
+    <string name="dc_dimming_mode_full">Závisí na čase a jasu</string>
+    <string name="dc_dimming_brightness_title">Prahová hodnota jasu</string>
+    <string name="dc_dimming_brightness_disabled">Zakázáno</string>
+    <string name="dc_dimming_restore_auto_mode">Obnovit automatický režim</string>
+    <string name="dc_dimming_brightness_info">Aktivovat DC tlumení pouze v případě, že je průměrný jas pod prahovou hodnotou</string>
+    <string name="dc_dimming_off_auto_mode_auto">Zapne se automaticky</string>
+    <string name="dc_dimming_on_auto_mode_auto">Vypne se automaticky</string>
+    <string name="keywords_display_dc_dimming">dc tlumení, blikání, oko, námaha</string>
+    <string name="quick_gestures_title">Rychlá gesta</string>
+    <string name="offscreen_gesture_title">Gesta při vypnuté obrazovce</string>
+    <string name="offscreen_gesture_summary">Pro provedení akcí nakreslete vzory nebo klepněte na obrazovku</string>
+    <string name="keywords_gestures">kreslení prstem a klepnutí na dotykovou obrazovku</string>
+    <string name="gestures_double_tap">Dvojí poklepání</string>
+    <string name="gestures_single_tap">Jedno klepnutí</string>
+    <string name="gestures_draw_v">Nakreslení V</string>
+    <string name="gestures_draw_inverse_v">Nakreslení obráceného V</string>
+    <string name="gestures_draw_o">Nakreslení O</string>
+    <string name="gestures_draw_m">Nakreslení M</string>
+    <string name="gestures_draw_w">Nakreslení W</string>
+    <string name="gestures_draw_s">Nakreslení S</string>
+    <string name="gestures_draw_arrow_left">Nakreslení &lt;</string>
+    <string name="gestures_draw_arrow_right">Nakreslení &gt;</string>
+    <string name="gestures_one_finger_swipe_up">Přejetí jedním prstem nahoru</string>
+    <string name="gestures_one_finger_swipe_right">Přejetí jedním prstem doprava</string>
+    <string name="gestures_one_finger_swipe_down">Přejetí jedním prstem dolů</string>
+    <string name="gestures_one_finger_swipe_left">Přejetí jedním prstem doleva</string>
+    <string name="gestures_two_finger_swipe">Přejetí dvěma prsty</string>
+    <string name="gestures_disabled">Zakázáno</string>
+    <string name="gestures_wake_device">Probudit zařízení</string>
+    <string name="gestures_pulse_ambient_display">Pulzování při Ambientním displeji</string>
+    <string name="gestures_toggle_flashlight">Zapnout svítilnu</string>
+    <string name="gestures_toggle_airplane_mode">Zapnout režim letadlo</string>
+    <string name="gestures_play_pause_music">Přehrávat/pozastavit skladbu</string>
+    <string name="gestures_next_music">Další skladba</string>
+    <string name="gestures_previous_music">Předchozí skladba</string>
+    <string name="gestures_open_camera">Spustit fotoaparát</string>
+    <string name="gestures_open_dialer">Spustit vytáčení</string>
+    <string name="applock_title">Zámek aplikací</string>
+    <string name="applock_locked">Zamčeno</string>
+    <string name="applock_unlocked">Odemčeno</string>
+    <string name="applock_locked_apps">Uzamčené aplikace</string>
+    <string name="applock_unlocked_apps">Odemčené aplikace</string>
+    <string name="applock_show_only_on_wake">Ověřit pouze jednou</string>
+    <string name="applock_show_only_on_wake_on_summary">Po ověření zůstane aplikace odemknutá, dokud se nevypne obrazovka</string>
+    <string name="applock_show_only_on_wake_off_summary">Po ověření zůstane aplikace odemknutá po dobu 15 sekund od jejího ukončení</string>
+    <string name="applock_notification_info">Obsah oznámení můžete zobrazit nebo skrýt pro jednotlivé aplikace klepnutím na ikonu oznámení zobrazenou v\u00a0předvolbách každé zamčené aplikace</string>
+    <string name="applock_show_notif">Obsah oznámení je zobrazován</string>
+    <string name="applock_hide_notif">Obsah oznámení je skrýván</string>
+    <string name="applock_setup">Nastavit zámek aplikací</string>
+    <string name="applock_overlay_summary">Tato funkce není k dispozici, protože tato aplikace je uzamčena</string>
+    <plurals name="applock_summary">
+        <item quantity="one">1 aplikace uzamčena</item>
+        <item quantity="few">%d aplikace uzamčeny</item>
+        <item quantity="many">%d aplikací uzamčeno</item>
+        <item quantity="other">%d aplikací uzamčeno</item>
+    </plurals>
+    <string name="keywords_applock_settings">uzamknout aplikaci, uzamykání aplikace, uzamčení aplikace, zámek aplikací</string>
+</resources>
