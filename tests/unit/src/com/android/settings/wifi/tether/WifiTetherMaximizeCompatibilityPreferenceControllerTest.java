@@ -34,6 +34,8 @@ import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.settings.testutils.ResourcesUtils;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -52,29 +54,30 @@ public class WifiTetherMaximizeCompatibilityPreferenceControllerTest {
     @Mock
     private WifiTetherBasePreferenceController.OnTetherConfigUpdateListener mListener;
 
+    private Context mContext;
     private WifiTetherMaximizeCompatibilityPreferenceController mController;
     private SwitchPreference mPreference;
     private SoftApConfiguration mConfig;
 
     @Before
     public void setUp() {
-        final Context context = spy(ApplicationProvider.getApplicationContext());
+        mContext = spy(ApplicationProvider.getApplicationContext());
         mConfig = new SoftApConfiguration.Builder()
                 .setSsid("test_Ssid")
                 .setPassphrase(null, SoftApConfiguration.SECURITY_TYPE_OPEN)
                 .setBridgedModeOpportunisticShutdownEnabled(true)
                 .build();
-        doReturn(mWifiManager).when(context).getSystemService(Context.WIFI_SERVICE);
+        doReturn(mWifiManager).when(mContext).getSystemService(Context.WIFI_SERVICE);
         doReturn(true).when(mWifiManager).isBridgedApConcurrencySupported();
         doReturn(mConfig).when(mWifiManager).getSoftApConfiguration();
 
-        mController = new WifiTetherMaximizeCompatibilityPreferenceController(context, mListener);
+        mController = new WifiTetherMaximizeCompatibilityPreferenceController(mContext, mListener);
         if (Looper.myLooper() == null) {
             Looper.prepare();
         }
-        final PreferenceManager preferenceManager = new PreferenceManager(context);
-        final PreferenceScreen screen = preferenceManager.createPreferenceScreen(context);
-        mPreference = new SwitchPreference(context);
+        final PreferenceManager preferenceManager = new PreferenceManager(mContext);
+        final PreferenceScreen screen = preferenceManager.createPreferenceScreen(mContext);
+        mPreference = new SwitchPreference(mContext);
         mPreference.setKey(WifiTetherMaximizeCompatibilityPreferenceController.PREF_KEY);
         screen.addPreference(mPreference);
         mController.displayPreference(screen);
@@ -102,6 +105,26 @@ public class WifiTetherMaximizeCompatibilityPreferenceControllerTest {
         mController.updateDisplay();
 
         assertThat(mPreference.isEnabled()).isEqualTo(false);
+    }
+
+    @Test
+    public void updateDisplay_notSupportedBridgedApConcurrency_setSingleApSummary() {
+        doReturn(false).when(mWifiManager).isBridgedApConcurrencySupported();
+
+        mController.updateDisplay();
+
+        assertThat(mPreference.getSummary()).isEqualTo(ResourcesUtils.getResourcesString(mContext,
+                "wifi_hotspot_maximize_compatibility_single_ap_summary"));
+    }
+
+    @Test
+    public void updateDisplay_supportedBridgedApConcurrency_setDualApSummary() {
+        doReturn(true).when(mWifiManager).isBridgedApConcurrencySupported();
+
+        mController.updateDisplay();
+
+        assertThat(mPreference.getSummary()).isEqualTo(ResourcesUtils.getResourcesString(mContext,
+                "wifi_hotspot_maximize_compatibility_dual_ap_summary"));
     }
 
     @Test
@@ -145,7 +168,7 @@ public class WifiTetherMaximizeCompatibilityPreferenceControllerTest {
                 .build();
         doReturn(config).when(mWifiManager).getSoftApConfiguration();
 
-        assertThat(mController.isMaximizeCompatibilityEnabled()).isEqualTo(false);
+        assertThat(mController.isMaximizeCompatibilityEnabled()).isEqualTo(true);
     }
 
     @Test
@@ -156,7 +179,7 @@ public class WifiTetherMaximizeCompatibilityPreferenceControllerTest {
                 .build();
         doReturn(config).when(mWifiManager).getSoftApConfiguration();
 
-        assertThat(mController.isMaximizeCompatibilityEnabled()).isEqualTo(true);
+        assertThat(mController.isMaximizeCompatibilityEnabled()).isEqualTo(false);
     }
 
     @Test
@@ -167,7 +190,7 @@ public class WifiTetherMaximizeCompatibilityPreferenceControllerTest {
                 .build();
         doReturn(config).when(mWifiManager).getSoftApConfiguration();
 
-        assertThat(mController.isMaximizeCompatibilityEnabled()).isEqualTo(true);
+        assertThat(mController.isMaximizeCompatibilityEnabled()).isEqualTo(false);
     }
 
     @Test
@@ -200,7 +223,8 @@ public class WifiTetherMaximizeCompatibilityPreferenceControllerTest {
         SoftApConfiguration.Builder builder = new SoftApConfiguration.Builder();
         mController.setupMaximizeCompatibility(builder);
 
-        assertThat(builder.build().getBand()).isEqualTo(SoftApConfiguration.BAND_2GHZ);
+        assertThat(builder.build().getBand())
+                .isEqualTo(SoftApConfiguration.BAND_2GHZ | SoftApConfiguration.BAND_5GHZ);
     }
 
     @Test
@@ -211,7 +235,6 @@ public class WifiTetherMaximizeCompatibilityPreferenceControllerTest {
         SoftApConfiguration.Builder builder = new SoftApConfiguration.Builder();
         mController.setupMaximizeCompatibility(builder);
 
-        assertThat(builder.build().getBand())
-                .isEqualTo(SoftApConfiguration.BAND_2GHZ | SoftApConfiguration.BAND_5GHZ);
+        assertThat(builder.build().getBand()).isEqualTo(SoftApConfiguration.BAND_2GHZ);
     }
 }
