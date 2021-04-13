@@ -137,9 +137,9 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
         if ((TelephonyManager.CALL_STATE_IDLE != mCallState) || isEcbmEnabled) {
             Log.d(TAG, "update: disable switchbar, isEcbmEnabled=" + isEcbmEnabled +
                     ", mCallState=" + mCallState);
-            mSwitchBar.setEnabled(false);
+            mSwitchBar.setSwitchBarEnabled(false);
         } else {
-            mSwitchBar.setEnabled(true);
+            mSwitchBar.setSwitchBarEnabled(true);
         }
 
         // For eSIM, we always want the toggle. If telephony stack support disabling a pSIM
