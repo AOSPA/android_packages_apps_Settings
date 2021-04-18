@@ -55,6 +55,7 @@ import android.graphics.drawable.VectorDrawable;
 import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.net.ConnectivityManager;
+import android.net.LinkAddress;
 import android.net.LinkProperties;
 import android.net.Network;
 import android.net.wifi.WifiManager;
@@ -116,7 +117,6 @@ import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.widget.ActionBarShadowController;
 
-import java.net.InetAddress;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -167,6 +167,9 @@ public final class Utils extends com.android.settingslib.Utils {
      */
     public static final String PROPERTY_LOCATION_INDICATOR_SETTINGS_ENABLED =
             "location_indicator_settings_enabled";
+
+    /** Whether or not app hibernation is enabled on the device **/
+    public static final String PROPERTY_APP_HIBERNATION_ENABLED = "app_hibernation_enabled";
 
     /**
      * Finds a matching activity for a preference's intent. If a matching
@@ -258,13 +261,13 @@ public final class Utils extends com.android.settingslib.Utils {
 
     private static String formatIpAddresses(LinkProperties prop) {
         if (prop == null) return null;
-        final Iterator<InetAddress> iter = prop.getAllAddresses().iterator();
+        final Iterator<LinkAddress> iter = prop.getAllLinkAddresses().iterator();
         // If there are no entries, return null
         if (!iter.hasNext()) return null;
         // Concatenate all available addresses, comma separated
         String addresses = "";
         while (iter.hasNext()) {
-            addresses += iter.next().getHostAddress();
+            addresses += iter.next().getAddress().getHostAddress();
             if (iter.hasNext()) addresses += "\n";
         }
         return addresses;
@@ -896,17 +899,6 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
-     * Return whether or not the user should have a SIM Cards option in Settings.
-     */
-    public static boolean showSimCardTile(Context context) {
-        boolean isPrimaryCardEnabled = SystemProperties.getBoolean(
-                "persist.vendor.radio.primarycard", false);
-        final TelephonyManager tm =
-                (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        return isPrimaryCardEnabled && (tm.getSimCount() > 1);
-    }
-
-    /**
      * Tries to initalize a volume with the given bundle. If it is a valid, private, and readable
      * {@link VolumeInfo}, it is returned. If it is not valid, null is returned.
      */
@@ -1114,24 +1106,6 @@ public final class Utils extends com.android.settingslib.Utils {
         }
         return true;
      }
-
-    /**
-     * Checks whether SimSettings apk exists on the device. If yes, returns true, else
-     * returns false.
-     */
-    public static boolean isSimSettingsApkAvailable() {
-        IExtTelephony extTelephony =
-                IExtTelephony.Stub.asInterface(ServiceManager.getService("qti.radio.extphone"));
-        try {
-            if (extTelephony != null &&
-                    extTelephony.isVendorApkAvailable("com.qualcomm.qti.simsettings")) {
-                return true;
-            }
-        } catch (RemoteException e) {
-            Log.e(TAG, "Got exception in isSimSettingsApkAvailable.", e);
-        }
-        return false;
-    }
 
     /**
      * check whether NetworkSetting apk exist in system, if yes, return true, else

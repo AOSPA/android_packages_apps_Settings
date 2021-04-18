@@ -44,6 +44,7 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.util.FeatureFlagUtils;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -54,6 +55,7 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.settings.AirplaneModeEnabler;
 import com.android.settings.R;
 import com.android.settings.datausage.DataUsagePreference;
 import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
@@ -88,6 +90,10 @@ public class NetworkProviderSettingsTest {
     @Mock
     private WifiManager mWifiManager;
     @Mock
+    private UserManager mUserManager;
+    @Mock
+    private AirplaneModeEnabler mAirplaneModeEnabler;
+    @Mock
     private DataUsagePreference mDataUsagePreference;
     private Context mContext;
     private NetworkProviderSettings mNetworkProviderSettings;
@@ -98,8 +104,7 @@ public class NetworkProviderSettingsTest {
     @Mock
     private ConnectivitySubsystemsRecoveryManager mConnectivitySubsystemsRecoveryManager;
     @Mock
-    private ViewAirplaneModeNetworksLayoutPreferenceController
-            mViewAirplaneModeNetworksButtonPreference;
+    private Preference mAirplaneModeMsgPreference;
     @Mock
     private LayoutPreference mResetInternetPreference;
     @Mock
@@ -115,6 +120,8 @@ public class NetworkProviderSettingsTest {
         doReturn(mPreferenceManager).when(mNetworkProviderSettings).getPreferenceManager();
         doReturn(mPowerManager).when(mContext).getSystemService(PowerManager.class);
         doReturn(mWifiManager).when(mContext).getSystemService(WifiManager.class);
+        doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
+        when(mUserManager.hasBaseUserRestriction(any(), any())).thenReturn(true);
         doReturn(mContext).when(mPreferenceManager).getContext();
         mNetworkProviderSettings.mAddWifiNetworkPreference = new AddWifiNetworkPreference(mContext);
         mNetworkProviderSettings.mSavedNetworksPreference = new Preference(mContext);
@@ -122,6 +129,10 @@ public class NetworkProviderSettingsTest {
                 new Preference(mContext);
         mNetworkProviderSettings.mWifiPickerTracker = mMockWifiPickerTracker;
         mNetworkProviderSettings.mWifiManager = mWifiManager;
+        mNetworkProviderSettings.mResetInternetPreference = mResetInternetPreference;
+        mNetworkProviderSettings.mAirplaneModeMsgPreference = mAirplaneModeMsgPreference;
+        mNetworkProviderSettings.mAirplaneModeEnabler = mAirplaneModeEnabler;
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL, false);
     }
 
     @Test
@@ -417,27 +428,35 @@ public class NetworkProviderSettingsTest {
     }
 
     @Test
-    public void onSubsystemRestartOperationBegin_showResetInternetHideApmNetworks() {
-        mNetworkProviderSettings.mResetInternetPreference = mResetInternetPreference;
-        mNetworkProviderSettings.mViewAirplaneModeNetworksButtonPreference =
-                mViewAirplaneModeNetworksButtonPreference;
-
+    public void onSubsystemRestartOperationBegin_showResetInternetHideApmMsg() {
         mNetworkProviderSettings.onSubsystemRestartOperationBegin();
 
         verify(mResetInternetPreference).setVisible(true);
-        verify(mViewAirplaneModeNetworksButtonPreference).setVisible(false);
+        verify(mAirplaneModeMsgPreference).setVisible(false);
     }
 
     @Test
-    public void onSubsystemRestartOperationEnd_showApmNetworksHideResetInternet() {
-        mNetworkProviderSettings.mResetInternetPreference = mResetInternetPreference;
-        mNetworkProviderSettings.mViewAirplaneModeNetworksButtonPreference =
-                mViewAirplaneModeNetworksButtonPreference;
-        doReturn(true).when(mViewAirplaneModeNetworksButtonPreference).isAvailable();
+    public void onSubsystemRestartOperationEnd_showApmMsgHideResetInternet() {
+        doReturn(true).when(mAirplaneModeEnabler).isAirplaneModeOn();
 
         mNetworkProviderSettings.onSubsystemRestartOperationEnd();
 
         verify(mResetInternetPreference).setVisible(false);
-        verify(mViewAirplaneModeNetworksButtonPreference).setVisible(true);
+        verify(mAirplaneModeMsgPreference).setVisible(true);
+    }
+
+    @Test
+    public void onAirplaneModeChanged_apmIsOn_showApmMsg() {
+        mNetworkProviderSettings.onAirplaneModeChanged(true);
+
+        verify(mAirplaneModeMsgPreference).setVisible(true);
+    }
+
+
+    @Test
+    public void onAirplaneModeChanged_apmIsOff_hideApmMsg() {
+        mNetworkProviderSettings.onAirplaneModeChanged(false);
+
+        verify(mAirplaneModeMsgPreference).setVisible(false);
     }
 }

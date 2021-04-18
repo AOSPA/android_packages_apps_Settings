@@ -207,22 +207,22 @@ public class NetworkProviderWorkerTest {
 
     @Test
     @UiThreadTest
-    public void onServiceStateChanged_notifyPhoneStateListener_callUpdateSlice() {
+    public void onServiceStateChanged_notifyTelephonyCallback_callUpdateSlice() {
         mMockNetworkProviderWorker.onSlicePinned();
         mMockNetworkProviderWorker.receiveNotification(false);
 
-        mMockNetworkProviderWorker.mPhoneStateListener.onServiceStateChanged(new ServiceState());
+        mMockNetworkProviderWorker.mTelephonyCallback.onServiceStateChanged(new ServiceState());
 
         assertThat(mMockNetworkProviderWorker.hasNotification()).isTrue();
     }
 
     @Test
     @UiThreadTest
-    public void onDisplayInfoChanged_notifyPhoneStateListener_callUpdateSlice() {
+    public void onDisplayInfoChanged_notifyTelephonyCallback_callUpdateSlice() {
         mMockNetworkProviderWorker.onSlicePinned();
         mMockNetworkProviderWorker.receiveNotification(false);
 
-        mMockNetworkProviderWorker.mPhoneStateListener.onDisplayInfoChanged(
+        mMockNetworkProviderWorker.mTelephonyCallback.onDisplayInfoChanged(
                 new TelephonyDisplayInfo(14, 0));
 
         assertThat(mMockNetworkProviderWorker.hasNotification()).isTrue();
@@ -230,11 +230,11 @@ public class NetworkProviderWorkerTest {
 
     @Test
     @UiThreadTest
-    public void onDataConnectionStateChanged_notifyPhoneStateListener_callUpdateSlice() {
+    public void onDataConnectionStateChanged_notifyTelephonyCallback_callUpdateSlice() {
         mMockNetworkProviderWorker.onSlicePinned();
         mMockNetworkProviderWorker.receiveNotification(false);
 
-        mMockNetworkProviderWorker.mPhoneStateListener.onDataConnectionStateChanged(
+        mMockNetworkProviderWorker.mTelephonyCallback.onDataConnectionStateChanged(
                 TelephonyManager.DATA_DISCONNECTED, TelephonyManager.NETWORK_TYPE_LTE);
 
         assertThat(mMockNetworkProviderWorker.hasNotification()).isTrue();
@@ -261,24 +261,24 @@ public class NetworkProviderWorkerTest {
     }
 
     @Test
-    public void isEthernetConnected_connectedEthernet_shouldBeTrue() {
+    public void getInternetType_connectedEthernet_returnInternetEthernet() {
         mMockNetworkProviderWorker.onInternetTypeChanged(INTERNET_ETHERNET);
 
-        assertThat(mMockNetworkProviderWorker.isEthernetConnected()).isTrue();
+        assertThat(mMockNetworkProviderWorker.getInternetType()).isEqualTo(INTERNET_ETHERNET);
     }
 
     @Test
-    public void isEthernetConnected_connectedWifi_shouldBeFalse() {
+    public void getInternetType_connectedWifi_returnInternetWifi() {
         mMockNetworkProviderWorker.onInternetTypeChanged(INTERNET_WIFI);
 
-        assertThat(mMockNetworkProviderWorker.isEthernetConnected()).isFalse();
+        assertThat(mMockNetworkProviderWorker.getInternetType()).isEqualTo(INTERNET_WIFI);
     }
 
     @Test
-    public void isEthernetConnected_connectedCarrier_shouldBeFalse() {
+    public void getInternetType__connectedCarrier_returnInternetCellular() {
         mMockNetworkProviderWorker.onInternetTypeChanged(INTERNET_CELLULAR);
 
-        assertThat(mMockNetworkProviderWorker.isEthernetConnected()).isFalse();
+        assertThat(mMockNetworkProviderWorker.getInternetType()).isEqualTo(INTERNET_CELLULAR);
     }
 
     public class MockNetworkProviderWorker extends NetworkProviderWorker {

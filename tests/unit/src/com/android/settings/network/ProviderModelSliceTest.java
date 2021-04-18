@@ -22,7 +22,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -42,7 +41,6 @@ import android.telephony.TelephonyManager;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceProvider;
-import androidx.slice.builders.GridRowBuilder;
 import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.SliceAction;
 import androidx.slice.widget.SliceLiveData;
@@ -97,12 +95,6 @@ public class ProviderModelSliceTest {
     private WifiSliceItem mMockWifiSliceItem3;
     @Mock
     ListBuilder.RowBuilder mMockCarrierRowBuild;
-    @Mock
-    ListBuilder.HeaderBuilder mMockHeader;
-    @Mock
-    GridRowBuilder mMockGridRowBuilderNonCarrierNetworkUnavailable;
-    @Mock
-    GridRowBuilder mMockGridRowBuilderAllNetworkUnavailable;
 
     private FakeFeatureFactory mFeatureFactory;
     @Mock
@@ -147,35 +139,7 @@ public class ProviderModelSliceTest {
 
     @Test
     @UiThreadTest
-    public void getSlice_noWorkerAndNoCarrier_getOneHeaderOneGridRowWithAllNetworkUnavailable() {
-        mWifiList.clear();
-        mMockProviderModelSlice = new MockProviderModelSlice(mContext, null);
-        mockHelperCondition(false, false, false, null);
-
-        final Slice slice = mMockProviderModelSlice.getSlice();
-
-        assertThat(slice).isNotNull();
-        verify(mListBuilder, times(1)).setHeader(mMockHeader);
-        verify(mListBuilder, times(1)).addGridRow(mMockGridRowBuilderAllNetworkUnavailable);
-    }
-
-    @Test
-    @UiThreadTest
-    public void getSlice_noWifiAndNoCarrier_getOneHeaderOneGridRowWithAllNetworkUnavailable() {
-        mWifiList.clear();
-        mMockNetworkProviderWorker.updateSelfResults(null);
-        mockHelperCondition(false, false, false, null);
-
-        final Slice slice = mMockProviderModelSlice.getSlice();
-
-        assertThat(slice).isNotNull();
-        verify(mListBuilder, times(1)).setHeader(mMockHeader);
-        verify(mListBuilder, times(1)).addGridRow(mMockGridRowBuilderAllNetworkUnavailable);
-    }
-
-    @Test
-    @UiThreadTest
-    public void getSlice_noWifiAndHasCarrierNoData_oneCarrierOneGridRowWithAllNetworkUnavailable() {
+    public void getSlice_noWifiAndHasCarrierNoData_oneCarrier() {
         mWifiList.clear();
         mMockNetworkProviderWorker.updateSelfResults(null);
         mockHelperCondition(false, true, false, null);
@@ -184,12 +148,11 @@ public class ProviderModelSliceTest {
 
         assertThat(slice).isNotNull();
         verify(mListBuilder, times(1)).addRow(mMockCarrierRowBuild);
-        verify(mListBuilder, times(1)).addGridRow(mMockGridRowBuilderAllNetworkUnavailable);
     }
 
     @Test
     @UiThreadTest
-    public void getSlice_noWifiAndNoCarrier_oneCarrierOneGridRowWithNonCarrierNetworkUnavailable() {
+    public void getSlice_noWifiAndNoCarrier_oneCarrier() {
         mWifiList.clear();
         mMockProviderModelSlice = new MockProviderModelSlice(mContext, null);
         mockHelperCondition(false, true, true, null);
@@ -198,7 +161,6 @@ public class ProviderModelSliceTest {
 
         assertThat(slice).isNotNull();
         verify(mListBuilder, times(1)).addRow(mMockCarrierRowBuild);
-        verify(mListBuilder, times(1)).addGridRow(mMockGridRowBuilderNonCarrierNetworkUnavailable);
     }
 
     @Test
@@ -264,7 +226,7 @@ public class ProviderModelSliceTest {
 
     @Test
     @UiThreadTest
-    public void getSlice_connectedEthernet_getOneEthernetAndOneCarrierAndTwoWiFi() {
+    public void getSlice_haveEthernetAndCarrierAndTwoDisconnectedWifi_getFourRow() {
         mWifiList.clear();
         mockWifiItemCondition(mMockWifiSliceItem1, "wifi1", "wifi1",
                 WifiEntry.CONNECTED_STATE_DISCONNECTED, "wifi1_key", true);
@@ -273,10 +235,32 @@ public class ProviderModelSliceTest {
                 WifiEntry.CONNECTED_STATE_DISCONNECTED, "wifi2_key", true);
         mWifiList.add(mMockWifiSliceItem2);
         mMockNetworkProviderWorker.updateSelfResults(mWifiList);
-        when(mProviderModelSliceHelper.isAirplaneModeEnabled()).thenReturn(false);
-        when(mProviderModelSliceHelper.hasCarrier()).thenReturn(true);
-        when(mProviderModelSliceHelper.isDataSimActive()).thenReturn(true);
-        when(mMockNetworkProviderWorker.isEthernetConnected()).thenReturn(true);
+        mockHelperCondition(false, true, true, null);
+        when(mMockNetworkProviderWorker.getInternetType())
+                .thenReturn(InternetUpdater.INTERNET_ETHERNET);
+
+        final Slice slice = mMockProviderModelSlice.getSlice();
+
+        assertThat(slice).isNotNull();
+        assertThat(mMockProviderModelSlice.hasCreateEthernetRow()).isTrue();
+        verify(mListBuilder, times(1)).addRow(mMockCarrierRowBuild);
+        verify(mListBuilder, times(4)).addRow(any(ListBuilder.RowBuilder.class));
+    }
+
+    @Test
+    @UiThreadTest
+    public void getSlice_haveEthernetAndCarrierAndConnectedWifiAndDisconnectedWifi_getFourRow() {
+        mWifiList.clear();
+        mockWifiItemCondition(mMockWifiSliceItem1, "wifi1", "wifi1",
+                WifiEntry.CONNECTED_STATE_CONNECTED, "wifi1_key", true);
+        mWifiList.add(mMockWifiSliceItem1);
+        mockWifiItemCondition(mMockWifiSliceItem2, "wifi2", "wifi2",
+                WifiEntry.CONNECTED_STATE_DISCONNECTED, "wifi2_key", true);
+        mWifiList.add(mMockWifiSliceItem2);
+        mMockNetworkProviderWorker.updateSelfResults(mWifiList);
+        mockHelperCondition(false, true, true, mWifiList.get(0));
+        when(mMockNetworkProviderWorker.getInternetType())
+                .thenReturn(InternetUpdater.INTERNET_ETHERNET);
 
         final Slice slice = mMockProviderModelSlice.getSlice();
 
@@ -311,19 +295,6 @@ public class ProviderModelSliceTest {
 
     private void mockBuilder() {
         SliceAction mockSliceAction = getPrimarySliceAction();
-        when(mMockHeader.getTitle()).thenReturn("mockHeader");
-        when(mMockHeader.getPrimaryAction()).thenReturn(mockSliceAction);
-        when(mProviderModelSliceHelper.createHeader(anyString())).thenReturn(mMockHeader);
-
-        int resId = ResourcesUtils.getResourcesId(mContext, "string",
-                "non_carrier_network_unavailable");
-        when(mProviderModelSliceHelper.createMessageGridRow(eq(resId), anyString())).thenReturn(
-                mMockGridRowBuilderNonCarrierNetworkUnavailable);
-        resId = ResourcesUtils.getResourcesId(mContext, "string",
-                "all_network_unavailable");
-        when(mProviderModelSliceHelper.createMessageGridRow(eq(resId), anyString())).thenReturn(
-                mMockGridRowBuilderAllNetworkUnavailable);
-
         when(mMockCarrierRowBuild.getTitle()).thenReturn("mockRow");
         when(mMockCarrierRowBuild.getPrimaryAction()).thenReturn(mockSliceAction);
         when(mProviderModelSliceHelper.createCarrierRow(anyString())).thenReturn(

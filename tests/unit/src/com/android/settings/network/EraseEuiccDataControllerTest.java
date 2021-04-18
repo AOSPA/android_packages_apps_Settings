@@ -18,8 +18,6 @@ package com.android.settings.network;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.spy;
-
 import android.content.Context;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -45,7 +43,7 @@ public class EraseEuiccDataControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_byDefault_true() {
+    public void getAvailabilityStatus_returnAVAILABLE_UNSEARCHABLE() {
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE_UNSEARCHABLE);
     }

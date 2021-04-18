@@ -32,6 +32,13 @@
         android:order="100"
         android:fragment="com.android.settings.emergency.EmergencyGestureSettings"
         settings:controller="com.android.settings.emergency.EmergencyGestureEntrypointPreferenceController" />
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="more_settings"
+        android:layout="@layout/more_settings_button"
+        android:order="180"
+        android:selectable="false"
+        settings:allowDividerBelow="true"
+        settings:controller="com.android.settings.emergency.MoreSettingsPreferenceController" />
     <com.android.settingslib.RestrictedPreference
         android:key="app_and_notif_cell_broadcast_settings"
         android:title="@string/cell_broadcast_settings"
@@ -39,7 +46,7 @@
         settings:useAdminDisabledSummary="true">
         <intent
             android:action="android.intent.action.MAIN"
-            android:targetPackage="@string/cell_broadcast_receiver_package"
+            android:targetPackage="@string/config_cell_broadcast_receiver_package"
             android:targetClass="com.android.cellbroadcastreceiver.CellBroadcastSettings"/>
     </com.android.settingslib.RestrictedPreference>
 </PreferenceScreen>

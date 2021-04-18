@@ -43,7 +43,6 @@ import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.network.telephony.NetworkSelectSettings;
 import com.android.settings.network.telephony.TelephonyBasePreferenceController;
 
-
 /**
  * Preference controller for "Open network select"
  */
@@ -66,7 +65,7 @@ public class OpenNetworkSelectPagePreferenceController extends
         mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
         mAllowedNetworkTypesListener = new AllowedNetworkTypesListener(
                 context.getMainExecutor());
-        mAllowedNetworkTypesListener.setAllowedNetworkTypesChangedListener(
+        mAllowedNetworkTypesListener.setAllowedNetworkTypesListener(
                 () -> updatePreference());
         mSubscriptionsListener = new SubscriptionsChangeListener(context, this);
 

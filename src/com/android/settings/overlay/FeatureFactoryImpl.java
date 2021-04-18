@@ -29,6 +29,8 @@ import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.accounts.AccountFeatureProviderImpl;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProviderImpl;
+import com.android.settings.applications.appinfo.ExtraAppInfoFeatureProvider;
+import com.android.settings.applications.appinfo.ExtraAppInfoFeatureProviderImpl;
 import com.android.settings.aware.AwareFeatureProvider;
 import com.android.settings.aware.AwareFeatureProviderImpl;
 import com.android.settings.biometrics.face.FaceFeatureProvider;
@@ -43,6 +45,8 @@ import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProviderImpl;
+import com.android.settings.fuelgauge.BatterySettingsFeatureProvider;
+import com.android.settings.fuelgauge.BatterySettingsFeatureProviderImpl;
 import com.android.settings.fuelgauge.BatteryStatusFeatureProvider;
 import com.android.settings.fuelgauge.BatteryStatusFeatureProviderImpl;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
@@ -59,6 +63,8 @@ import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.search.SearchFeatureProviderImpl;
 import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.security.SecurityFeatureProviderImpl;
+import com.android.settings.security.SecuritySettingsFeatureProvider;
+import com.android.settings.security.SecuritySettingsFeatureProviderImpl;
 import com.android.settings.slices.SlicesFeatureProvider;
 import com.android.settings.slices.SlicesFeatureProviderImpl;
 import com.android.settings.users.UserFeatureProvider;
@@ -84,6 +90,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private SuggestionFeatureProvider mSuggestionFeatureProvider;
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
     private BatteryStatusFeatureProvider mBatteryStatusFeatureProvider;
+    private BatterySettingsFeatureProvider mBatterySettingsFeatureProvider;
     private AssistGestureFeatureProvider mAssistGestureFeatureProvider;
     private UserFeatureProvider mUserFeatureProvider;
     private SlicesFeatureProvider mSlicesFeatureProvider;
@@ -94,6 +101,8 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private AwareFeatureProvider mAwareFeatureProvider;
     private FaceFeatureProvider mFaceFeatureProvider;
     private WifiTrackerLibProvider mWifiTrackerLibProvider;
+    private ExtraAppInfoFeatureProvider mExtraAppInfoFeatureProvider;
+    private SecuritySettingsFeatureProvider mSecuritySettingsFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -124,6 +133,14 @@ public class FeatureFactoryImpl extends FeatureFactory {
                     context.getApplicationContext());
         }
         return mBatteryStatusFeatureProvider;
+    }
+
+    @Override
+    public BatterySettingsFeatureProvider getBatterySettingsFeatureProvider(Context context) {
+        if (mBatterySettingsFeatureProvider == null) {
+            mBatterySettingsFeatureProvider = new BatterySettingsFeatureProviderImpl(context);
+        }
+        return mBatterySettingsFeatureProvider;
     }
 
     @Override
@@ -290,5 +307,21 @@ public class FeatureFactoryImpl extends FeatureFactory {
             mWifiTrackerLibProvider = new WifiTrackerLibProviderImpl();
         }
         return mWifiTrackerLibProvider;
+    }
+
+    @Override
+    public ExtraAppInfoFeatureProvider getExtraAppInfoFeatureProvider() {
+        if (mExtraAppInfoFeatureProvider == null) {
+            mExtraAppInfoFeatureProvider = new ExtraAppInfoFeatureProviderImpl();
+        }
+        return mExtraAppInfoFeatureProvider;
+    }
+
+    @Override
+    public SecuritySettingsFeatureProvider getSecuritySettingsFeatureProvider() {
+        if (mSecuritySettingsFeatureProvider == null) {
+            mSecuritySettingsFeatureProvider = new SecuritySettingsFeatureProviderImpl();
+        }
+        return mSecuritySettingsFeatureProvider;
     }
 }

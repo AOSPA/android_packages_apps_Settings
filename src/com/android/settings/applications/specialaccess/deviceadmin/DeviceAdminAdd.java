@@ -16,6 +16,8 @@
 
 package com.android.settings.applications.specialaccess.deviceadmin;
 
+import static android.app.admin.DevicePolicyManager.DEVICE_OWNER_TYPE_FINANCED;
+
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AppOpsManager;
@@ -69,6 +71,7 @@ import com.android.settings.users.UserDialogs;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.settingslib.collapsingtoolbar.CollapsingToolbarBaseActivity;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -77,7 +80,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class DeviceAdminAdd extends Activity {
+/**
+ * A confirmation screen for enabling administractor.
+ */
+public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
     static final String TAG = "DeviceAdminAdd";
 
     static final int DIALOG_WARNING = 1;
@@ -661,7 +667,11 @@ public class DeviceAdminAdd extends Activity {
                     mAdminWarning.setText(R.string.admin_profile_owner_user_message);
                 } else {
                     // Show device owner description.
-                    mAdminWarning.setText(R.string.admin_device_owner_message);
+                    if (isFinancedDevice()) {
+                        mAdminWarning.setText(R.string.admin_financed_message);
+                    } else {
+                        mAdminWarning.setText(R.string.admin_device_owner_message);
+                    }
                 }
                 mActionButton.setText(R.string.remove_device_admin);
                 mActionButton.setEnabled(false);
@@ -757,6 +767,11 @@ public class DeviceAdminAdd extends Activity {
         UserInfo info = um.getUserInfo(
                 UserHandle.getUserId(adminInfo.getActivityInfo().applicationInfo.uid));
         return info != null ? info.isManagedProfile() : false;
+    }
+
+    private boolean isFinancedDevice() {
+        return mDPM.isDeviceManaged() && mDPM.getDeviceOwnerType(
+                mDPM.getDeviceOwnerComponentOnAnyUser()) == DEVICE_OWNER_TYPE_FINANCED;
     }
 
     /**

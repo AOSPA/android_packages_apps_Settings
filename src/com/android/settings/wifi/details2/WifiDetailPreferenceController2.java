@@ -42,6 +42,7 @@ import android.net.NetworkInfo;
 import android.net.NetworkRequest;
 import android.net.RouteInfo;
 import android.net.Uri;
+import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -63,7 +64,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
-import com.android.net.module.util.NetUtils;
+import com.android.net.module.util.Inet4AddressUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.FeatureFlags;
@@ -99,7 +100,6 @@ import com.android.wifitrackerlib.WifiEntry.WifiEntryCallback;
 import java.net.Inet4Address;
 import java.net.Inet6Address;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.ZonedDateTime;
@@ -156,6 +156,8 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     static final String KEY_IPV6_CATEGORY = "ipv6_category";
     @VisibleForTesting
     static final String KEY_IPV6_ADDRESSES_PREF = "ipv6_addresses";
+    @VisibleForTesting
+    static final String KEY_WIFI_TYPE_PREF = "type";
 
     private final WifiEntry mWifiEntry;
     private final ConnectivityManager mConnectivityManager;
@@ -187,6 +189,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     private Preference mGatewayPref;
     private Preference mSubnetPref;
     private Preference mDnsPref;
+    private Preference mTypePref;
     private PreferenceCategory mIpv6Category;
     private Preference mIpv6AddressPref;
     private Lifecycle mLifecycle;
@@ -383,6 +386,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         mGatewayPref = screen.findPreference(KEY_GATEWAY_PREF);
         mSubnetPref = screen.findPreference(KEY_SUBNET_MASK_PREF);
         mDnsPref = screen.findPreference(KEY_DNS_PREF);
+        mTypePref = screen.findPreference(KEY_WIFI_TYPE_PREF);
 
         mIpv6Category = screen.findPreference(KEY_IPV6_CATEGORY);
         mIpv6AddressPref = screen.findPreference(KEY_IPV6_ADDRESSES_PREF);
@@ -553,6 +557,8 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         refreshEapSimSubscription();
         // MAC Address Pref
         refreshMacAddress();
+        // Wifi Type
+        refreshWifiType();
     }
 
     private void refreshRssiViews() {
@@ -750,6 +756,36 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         }
     }
 
+    private void refreshWifiType() {
+        final ConnectedInfo connectedInfo = mWifiEntry.getConnectedInfo();
+        if (connectedInfo == null) {
+            mTypePref.setVisible(false);
+            return;
+        }
+
+        final int typeString = getWifiStandardTypeString(connectedInfo.wifiStandard);
+        if (typeString != -1) {
+            mTypePref.setSummary(typeString);
+            mTypePref.setVisible(true);
+        } else {
+            mTypePref.setVisible(false);
+        }
+    }
+
+    private int getWifiStandardTypeString(int wifiStandardType) {
+        Log.d(TAG, "Wifi Type " + wifiStandardType);
+        switch (wifiStandardType) {
+            case ScanResult.WIFI_STANDARD_11AX:
+                return R.string.wifi_type_11AX;
+            case ScanResult.WIFI_STANDARD_11AC:
+                return R.string.wifi_type_11AC;
+            case ScanResult.WIFI_STANDARD_11N:
+                return R.string.wifi_type_11N;
+            default:
+                return -1;
+        }
+    }
+
     private int getMacAddressTitle() {
         if (mWifiEntry.getPrivacy() == WifiEntry.PRIVACY_RANDOMIZED_MAC) {
             return mWifiEntry.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTED
@@ -845,7 +881,8 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         // Find IPv4 default gateway.
         String gateway = null;
         for (RouteInfo routeInfo : mLinkProperties.getRoutes()) {
-            if (routeInfo.isIPv4Default() && routeInfo.hasGateway()) {
+            if (routeInfo.hasGateway() && routeInfo.isDefaultRoute()
+                    && routeInfo.getDestination().getAddress() instanceof Inet4Address) {
                 gateway = routeInfo.getGateway().getHostAddress();
                 break;
             }
@@ -873,10 +910,8 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
 
     private static String ipv4PrefixLengthToSubnetMask(int prefixLength) {
         try {
-            InetAddress all = InetAddress.getByAddress(
-                    new byte[]{(byte) 255, (byte) 255, (byte) 255, (byte) 255});
-            return NetUtils.getNetworkPart(all, prefixLength).getHostAddress();
-        } catch (UnknownHostException e) {
+            return Inet4AddressUtils.getPrefixMaskAsInet4Address(prefixLength).getHostAddress();
+        } catch (IllegalArgumentException e) {
             return null;
         }
     }

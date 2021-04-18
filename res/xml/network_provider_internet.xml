@@ -18,8 +18,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="network_provider_and_internet_screen"
-    android:title="@string/network_dashboard_title"
-    settings:initialExpandedChildrenCount="5">
+    android:title="@string/network_dashboard_title">
 
     <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.network.NetworkProviderSettings"
@@ -61,15 +60,6 @@
         settings:controller="com.android.settings.network.AirplaneModePreferenceController"
         settings:userRestriction="no_airplane_mode"/>
 
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="airplane_safe_networks"
-        android:title="@string/airplane_safe_networks"
-        android:icon="@drawable/ic_airplane_safe_networks_24dp"
-        android:summary="@string/airplane_safe_networks_summary"
-        android:order="-4"
-        settings:userRestriction="no_airplane_mode"
-        settings:keywords="@string/keywords_airplane_safe_networks" />
-
     <com.android.settingslib.RestrictedPreference
         android:key="manage_mobile_plan"
         android:title="@string/manage_mobile_plan_title"
@@ -108,7 +98,7 @@
         android:order="10"
         android:fragment="com.android.settings.datausage.DataSaverSummary"/>
 
-    <com.android.settingslib.RestrictedPreference
+    <com.android.settings.vpn2.VpnInfoPreference
         android:fragment="com.android.settings.vpn2.VpnSettings"
         android:key="vpn_settings"
         android:title="@string/vpn_settings_title"

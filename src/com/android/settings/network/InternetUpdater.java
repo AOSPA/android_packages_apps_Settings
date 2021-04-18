@@ -32,8 +32,8 @@ import android.net.ConnectivityManager;
 import android.net.ConnectivityManager.NetworkCallback;
 import android.net.Network;
 import android.net.NetworkCapabilities;
-import android.net.NetworkCapabilities.Transport;
 import android.net.wifi.WifiManager;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.Lifecycle;
@@ -55,27 +55,45 @@ public class InternetUpdater implements AirplaneModeEnabler.OnAirplaneModeChange
 
     private static final String TAG = "InternetUpdater";
 
-    private OnInternetTypeChangedListener mOnInternetTypeChangedListener;
+    private InternetChangeListener mListener;
 
-    /** Interface that handles the internet type changed callback */
-    public interface OnInternetTypeChangedListener {
+    /** Interface that handles the internet updater callback */
+    public interface InternetChangeListener {
         /**
          * Called when internet type is changed.
          *
          * @param internetType the internet type
          */
-        void onInternetTypeChanged(@InternetType int internetType);
+        default void onInternetTypeChanged(@InternetType int internetType) {};
+
+        /**
+         * Called when airplane mode state is changed.
+         */
+        default void onAirplaneModeChanged(boolean isAirplaneModeOn) {};
+
+        /**
+         * Called when Wi-Fi enabled is changed.
+         */
+        default void onWifiEnabledChanged(boolean enabled) {};
     }
 
     /**
-     * Indicates this internet is unavailable type in airplane mode on.
+     * Indicates the internet is off when airplane mode is on.
      */
-    public static final int INTERNET_APM = 0;
+    public static final int INTERNET_OFF = 0;
 
     /**
-     * Indicates this internet uses an airplane mode network type.
+     * Indicates this internet is not connected (includes no networks connected) or network(s)
+     * available.
+     *
+     * Examples include:
+     * <p>When airplane mode is turned off, and some networks (Wi-Fi, Mobile-data) are turned on,
+     * but no network can access the Internet.
+     *
+     * <p>When the airplane mode is turned on, and the WiFi is also turned on, but the WiFi is not
+     * connected or cannot access the Internet.
      */
-    public static final int INTERNET_APM_NETWORKS = 1;
+    public static final int INTERNET_NETWORKS_AVAILABLE = 1;
 
     /**
      * Indicates this internet uses a Wi-Fi network type.
@@ -94,8 +112,8 @@ public class InternetUpdater implements AirplaneModeEnabler.OnAirplaneModeChange
 
     @Retention(RetentionPolicy.SOURCE)
     @android.annotation.IntDef(prefix = { "INTERNET_" }, value = {
-            INTERNET_APM,
-            INTERNET_APM_NETWORKS,
+            INTERNET_OFF,
+            INTERNET_NETWORKS_AVAILABLE,
             INTERNET_WIFI,
             INTERNET_CELLULAR,
             INTERNET_ETHERNET,
@@ -111,7 +129,9 @@ public class InternetUpdater implements AirplaneModeEnabler.OnAirplaneModeChange
     AirplaneModeEnabler mAirplaneModeEnabler;
 
     @VisibleForTesting
-    @Transport int mTransport;
+    boolean mInternetAvailable;
+    @VisibleForTesting
+    int mTransport;
     private static Map<Integer, Integer> sTransportMap = new HashMap<>();
     static {
         sTransportMap.put(TRANSPORT_WIFI, INTERNET_WIFI);
@@ -120,41 +140,36 @@ public class InternetUpdater implements AirplaneModeEnabler.OnAirplaneModeChange
     }
 
     private NetworkCallback mNetworkCallback = new NetworkCallback() {
+        public void onCapabilitiesChanged(@NonNull Network network,
+                @NonNull NetworkCapabilities networkCapabilities) {
+            updateInternetAvailable(networkCapabilities);
+        }
+
         @Override
-        public void onAvailable(@NonNull Network network) {
-            if (network == null) {
-                return;
-            }
-            final NetworkCapabilities networkCapabilities =
-                    mConnectivityManager.getNetworkCapabilities(network);
-            if (networkCapabilities == null) {
-                return;
-            }
-            for (@Transport int transport : networkCapabilities.getTransportTypes()) {
-                if (sTransportMap.containsKey(transport)) {
-                    mTransport = transport;
-                    break;
-                }
-            }
-            update();
+        public void onLost(@NonNull Network network) {
+            mInternetAvailable = false;
+            updateInternetType();
         }
     };
 
     private final BroadcastReceiver mWifiStateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            update();
+            fetchActiveNetwork();
+            if (mListener != null) {
+                mListener.onWifiEnabledChanged(mWifiManager.isWifiEnabled());
+            }
         }
     };
 
-    public InternetUpdater(Context context, Lifecycle lifecycle,
-            OnInternetTypeChangedListener listener) {
+    public InternetUpdater(Context context, Lifecycle lifecycle, InternetChangeListener listener) {
         mContext = context;
         mAirplaneModeEnabler = new AirplaneModeEnabler(mContext, this);
         mConnectivityManager = mContext.getSystemService(ConnectivityManager.class);
         mWifiManager = mContext.getSystemService(WifiManager.class);
         mWifiStateFilter = new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION);
-        mOnInternetTypeChangedListener = listener;
+        mListener = listener;
+        fetchActiveNetwork();
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
@@ -178,18 +193,63 @@ public class InternetUpdater implements AirplaneModeEnabler.OnAirplaneModeChange
 
     @Override
     public void onAirplaneModeChanged(boolean isAirplaneModeOn) {
-        update();
+        fetchActiveNetwork();
+        if (mListener != null) {
+            mListener.onAirplaneModeChanged(isAirplaneModeOn);
+        }
+    }
+
+    private void fetchActiveNetwork() {
+        Network activeNetwork = mConnectivityManager.getActiveNetwork();
+        if (activeNetwork == null) {
+            mInternetAvailable = false;
+            updateInternetType();
+            return;
+        }
+
+        NetworkCapabilities activeNetworkCapabilities =
+                mConnectivityManager.getNetworkCapabilities(activeNetwork);
+        if (activeNetworkCapabilities == null) {
+            mInternetAvailable = false;
+            updateInternetType();
+            return;
+        }
+
+        updateInternetAvailable(activeNetworkCapabilities);
     }
 
     @VisibleForTesting
-    void update() {
-        if (mAirplaneModeEnabler.isAirplaneModeOn()) {
-            mInternetType = mWifiManager.isWifiEnabled() ? INTERNET_APM_NETWORKS : INTERNET_APM;
-        } else {
-            mInternetType = sTransportMap.get(mTransport);
+    void updateInternetAvailable(@NonNull NetworkCapabilities capabilities) {
+        boolean internetAvailable = false;
+        if (capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)) {
+            for (int transport : capabilities.getTransportTypes()) {
+                if (sTransportMap.containsKey(transport)) {
+                    mTransport = transport;
+                    internetAvailable = true;
+                    Log.i(TAG, "Detect an internet available network with transport type: "
+                            + mTransport);
+                    break;
+                }
+            }
         }
-        if (mOnInternetTypeChangedListener != null) {
-            mOnInternetTypeChangedListener.onInternetTypeChanged(mInternetType);
+        mInternetAvailable = internetAvailable;
+        updateInternetType();
+    }
+
+    @VisibleForTesting
+    void updateInternetType() {
+        @InternetType int internetType = INTERNET_NETWORKS_AVAILABLE;
+        if (mInternetAvailable) {
+            internetType = sTransportMap.get(mTransport);
+        } else if (mAirplaneModeEnabler.isAirplaneModeOn()
+                && mWifiManager.getWifiState() != WifiManager.WIFI_STATE_ENABLED) {
+            internetType = INTERNET_OFF;
+        }
+        mInternetType = internetType;
+
+        if (mListener != null) {
+            mListener.onInternetTypeChanged(mInternetType);
         }
     }
 
@@ -198,5 +258,19 @@ public class InternetUpdater implements AirplaneModeEnabler.OnAirplaneModeChange
      */
     public @InternetType int getInternetType() {
         return mInternetType;
+    }
+
+    /**
+     * Return ture when the airplane mode is on.
+     */
+    public boolean isAirplaneModeOn() {
+        return mAirplaneModeEnabler.isAirplaneModeOn();
+    }
+
+    /**
+     * Return ture when the Wi-Fi is enabled.
+     */
+    public boolean isWifiEnabled() {
+        return mWifiManager.isWifiEnabled();
     }
 }

@@ -20,6 +20,7 @@ import com.android.settings.AllInOneTetherSettings;
 import com.android.settings.DisplaySettings;
 import com.android.settings.IccLockSettings;
 import com.android.settings.MainClear;
+import com.android.settings.MainClearConfirm;
 import com.android.settings.Settings;
 import com.android.settings.TestingSettings;
 import com.android.settings.TetherSettings;
@@ -39,10 +40,12 @@ import com.android.settings.applications.AppDashboardFragment;
 import com.android.settings.applications.ProcessStatsSummary;
 import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.UsageAccessDetails;
+import com.android.settings.applications.appinfo.AlarmsAndRemindersDetails;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.applications.appinfo.DrawOverlayDetails;
 import com.android.settings.applications.appinfo.ExternalSourcesDetails;
 import com.android.settings.applications.appinfo.ManageExternalStorageDetails;
+import com.android.settings.applications.appinfo.MediaManagementAppsDetails;
 import com.android.settings.applications.appinfo.WriteSettingsDetails;
 import com.android.settings.applications.appops.BackgroundCheckSummary;
 import com.android.settings.applications.assist.ManageAssist;
@@ -112,8 +115,8 @@ import com.android.settings.inputmethod.UserDictionaryList;
 import com.android.settings.inputmethod.UserDictionarySettings;
 import com.android.settings.language.LanguageAndInputSettings;
 import com.android.settings.localepicker.LocaleListEditor;
+import com.android.settings.location.LocationServices;
 import com.android.settings.location.LocationSettings;
-import com.android.settings.location.ScanningSettings;
 import com.android.settings.network.MobileNetworkListFragment;
 import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.network.NetworkProviderSettings;
@@ -202,7 +205,7 @@ public class SettingsGateway {
             NotificationStation.class.getName(),
             LocationSettings.class.getName(),
             PrivacyDashboardFragment.class.getName(),
-            ScanningSettings.class.getName(),
+            LocationServices.class.getName(),
             SecuritySettings.class.getName(),
             UsageAccessDetails.class.getName(),
             PrivacySettings.class.getName(),
@@ -284,6 +287,7 @@ public class SettingsGateway {
             WifiAPITest.class.getName(),
             WifiInfo.class.getName(),
             MainClear.class.getName(),
+            MainClearConfirm.class.getName(),
             ResetDashboardFragment.class.getName(),
             NightDisplaySettings.class.getName(),
             ManageDomainUrls.class.getName(),
@@ -317,7 +321,9 @@ public class SettingsGateway {
             InteractAcrossProfilesSettings.class.getName(),
             InteractAcrossProfilesDetails.class.getName(),
             MediaControlsSettings.class.getName(),
-            NetworkProviderSettings.class.getName()
+            NetworkProviderSettings.class.getName(),
+            AlarmsAndRemindersDetails.class.getName(),
+            MediaManagementAppsDetails.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {
@@ -339,7 +345,6 @@ public class SettingsGateway {
             // Home page > Network & Internet
             Settings.WifiSettingsActivity.class.getName(),
             Settings.DataUsageSummaryActivity.class.getName(),
-            Settings.SimSettingsActivity.class.getName(),
             Settings.NetworkProviderSettingsActivity.class.getName(),
             // Home page > Connected devices
             Settings.BluetoothSettingsActivity.class.getName(),

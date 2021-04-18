@@ -128,8 +128,15 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     @Override
     protected void initSettingsPreference() {
+        // If the device doesn't support magnification area, it should hide the settings preference.
+        if (!getContext().getResources().getBoolean(
+                com.android.internal.R.bool.config_magnification_area)) {
+            return;
+        }
         mSettingsPreference = new Preference(getPrefContext());
         mSettingsPreference.setTitle(R.string.accessibility_menu_item_settings);
+        // TODO(b/177371954): "magnification area" should be brought up to the highest level of the
+        // settings UI so that it appears below "shortcut" to replace "settings.
         mSettingsPreference.setFragment(MagnificationSettingsFragment.class.getName());
         mSettingsPreference.setPersistent(false);
 
@@ -219,27 +226,23 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             return context.getText(R.string.switch_off_text);
         }
 
-        final int shortcutType = PreferredShortcuts.retrieveUserShortcutType(context,
+        final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(context,
                 MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.SOFTWARE);
-        int resId = R.string.accessibility_shortcut_edit_summary_software;
-        if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
-            resId = AccessibilityUtil.isTouchExploreEnabled(context)
-                    ? R.string.accessibility_shortcut_edit_dialog_title_software_gesture_talkback
-                    : R.string.accessibility_shortcut_edit_dialog_title_software_gesture;
-        }
-        final CharSequence softwareTitle = context.getText(resId);
 
-        List<CharSequence> list = new ArrayList<>();
-        if ((shortcutType & UserShortcutType.SOFTWARE) == UserShortcutType.SOFTWARE) {
+        final List<CharSequence> list = new ArrayList<>();
+        final CharSequence softwareTitle = context.getText(
+                R.string.accessibility_shortcut_edit_summary_software);
+
+        if (hasShortcutType(shortcutTypes, UserShortcutType.SOFTWARE)) {
             list.add(softwareTitle);
         }
-        if ((shortcutType & UserShortcutType.HARDWARE) == UserShortcutType.HARDWARE) {
+        if (hasShortcutType(shortcutTypes, UserShortcutType.HARDWARE)) {
             final CharSequence hardwareTitle = context.getText(
                     R.string.accessibility_shortcut_hardware_keyword);
             list.add(hardwareTitle);
         }
 
-        if ((shortcutType & UserShortcutType.TRIPLETAP) == UserShortcutType.TRIPLETAP) {
+        if (hasShortcutType(shortcutTypes, UserShortcutType.TRIPLETAP)) {
             final CharSequence tripleTapTitle = context.getText(
                     R.string.accessibility_shortcut_triple_tap_keyword);
             list.add(tripleTapTitle);
@@ -304,8 +307,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     @Override
     protected void onInstallSwitchPreferenceToggleSwitch() {
-        super.onInstallSwitchPreferenceToggleSwitch();
-        mToggleServiceDividerSwitchPreference.setVisible(false);
+        mToggleServiceSwitchPreference.setVisible(false);
     }
 
     @Override

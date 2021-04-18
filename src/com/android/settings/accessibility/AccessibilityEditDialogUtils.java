@@ -16,7 +16,10 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.ItemInfoArrayAdapter.ItemInfo;
+
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
@@ -24,25 +27,35 @@ import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.text.style.ImageSpan;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.IntDef;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 
 import com.android.settings.R;
+import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.utils.AnnotationSpan;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.List;
+
 
 /**
  * Utility class for creating the edit dialog.
@@ -57,15 +70,13 @@ public class AccessibilityEditDialogUtils {
     @IntDef({
          DialogType.EDIT_SHORTCUT_GENERIC,
          DialogType.EDIT_SHORTCUT_MAGNIFICATION,
-         DialogType.EDIT_MAGNIFICATION_MODE,
          DialogType.EDIT_MAGNIFICATION_SWITCH_SHORTCUT,
     })
 
     private @interface DialogType {
         int EDIT_SHORTCUT_GENERIC = 0;
         int EDIT_SHORTCUT_MAGNIFICATION = 1;
-        int EDIT_MAGNIFICATION_MODE = 2;
-        int EDIT_MAGNIFICATION_SWITCH_SHORTCUT = 3;
+        int EDIT_MAGNIFICATION_SWITCH_SHORTCUT = 2;
     }
 
     /**
@@ -97,23 +108,6 @@ public class AccessibilityEditDialogUtils {
             CharSequence dialogTitle, DialogInterface.OnClickListener listener) {
         final AlertDialog alertDialog = createDialog(context,
                 DialogType.EDIT_SHORTCUT_MAGNIFICATION, dialogTitle, listener);
-        alertDialog.show();
-        setScrollIndicators(alertDialog);
-        return alertDialog;
-    }
-
-    /**
-     * Method to show the magnification mode dialog in Magnification.
-     *
-     * @param context A valid context
-     * @param dialogTitle The title of magnify mode dialog
-     * @param listener The listener to determine the action of magnify mode dialog
-     * @return A magnification mode dialog in Magnification
-     */
-    public static AlertDialog showMagnificationModeDialog(Context context,
-            CharSequence dialogTitle, DialogInterface.OnClickListener listener) {
-        final AlertDialog alertDialog = createDialog(context,
-                DialogType.EDIT_MAGNIFICATION_MODE, dialogTitle, listener);
         alertDialog.show();
         setScrollIndicators(alertDialog);
         return alertDialog;
@@ -159,11 +153,21 @@ public class AccessibilityEditDialogUtils {
      */
     private static void setScrollIndicators(AlertDialog dialog) {
         final ScrollView scrollView = dialog.findViewById(R.id.container_layout);
-        scrollView.setScrollIndicators(
+        setScrollIndicators(scrollView);
+    }
+
+    /**
+     * Sets the scroll indicators for dialog view. The indicators appear while content view is
+     * out of vision for vertical scrolling.
+     *
+     * @param view The view contains customized dialog content. Usually it is {@link ScrollView} or
+     *             {@link AbsListView}
+     */
+    private static void setScrollIndicators(@NonNull View view) {
+        view.setScrollIndicators(
                 View.SCROLL_INDICATOR_TOP | View.SCROLL_INDICATOR_BOTTOM,
                 View.SCROLL_INDICATOR_TOP | View.SCROLL_INDICATOR_BOTTOM);
     }
-
     private static void setEditShortcutButtonsListener(AlertDialog dialog,
             View.OnClickListener listener) {
         final View contentView = dialog.findViewById(R.id.container_layout);
@@ -208,12 +212,6 @@ public class AccessibilityEditDialogUtils {
                 initMagnifyShortcut(context, contentView);
                 initAdvancedWidget(contentView);
                 break;
-            case DialogType.EDIT_MAGNIFICATION_MODE:
-                contentView = inflater.inflate(
-                        R.layout.accessibility_edit_magnification_mode, null);
-                initMagnifyFullScreen(context, contentView);
-                initMagnifyWindowScreen(context, contentView);
-                break;
             case DialogType.EDIT_MAGNIFICATION_SWITCH_SHORTCUT:
                 contentView = inflater.inflate(
                         R.layout.accessibility_edit_magnification_shortcut, null);
@@ -225,25 +223,6 @@ public class AccessibilityEditDialogUtils {
         return contentView;
     }
 
-    private static void initMagnifyFullScreen(Context context, View view) {
-        final View dialogView = view.findViewById(R.id.magnify_full_screen);
-        final CharSequence title = context.getText(
-                R.string.accessibility_magnification_area_settings_full_screen);
-        setupShortcutWidget(dialogView, title, R.drawable.accessibility_magnification_full_screen);
-    }
-
-    private static void initMagnifyWindowScreen(Context context, View view) {
-        final View dialogView = view.findViewById(R.id.magnify_window_screen);
-        final CharSequence title = context.getText(
-                R.string.accessibility_magnification_area_settings_window_screen);
-        setupShortcutWidget(dialogView, title,
-                R.drawable.accessibility_magnification_window_screen);
-    }
-
-    private static void setupShortcutWidget(View view, CharSequence titleText, int imageResId) {
-        setupShortcutWidget(view, titleText, null, imageResId);
-    }
-
     private static void setupShortcutWidget(View view, CharSequence titleText,
             CharSequence summaryText, int imageResId) {
         final CheckBox checkBox = view.findViewById(R.id.checkbox);
@@ -253,6 +232,8 @@ public class AccessibilityEditDialogUtils {
             summary.setVisibility(View.GONE);
         } else {
             summary.setText(summaryText);
+            summary.setMovementMethod(LinkMovementMethod.getInstance());
+            summary.setFocusable(false);
         }
         final ImageView image = view.findViewById(R.id.image);
         image.setImageResource(imageResId);
@@ -260,10 +241,13 @@ public class AccessibilityEditDialogUtils {
 
     private static void initSoftwareShortcut(Context context, View view) {
         final View dialogView = view.findViewById(R.id.software_shortcut);
+        final CharSequence title = context.getText(
+                R.string.accessibility_shortcut_edit_dialog_title_software);
         final TextView summary = dialogView.findViewById(R.id.summary);
         final int lineHeight = summary.getLineHeight();
-        setupShortcutWidget(dialogView, retrieveTitle(context),
-                retrieveSummary(context, lineHeight), retrieveImageResId(context));
+
+        setupShortcutWidget(dialogView, title, retrieveSummary(context, lineHeight),
+                retrieveImageResId(context));
     }
 
     private static void initHardwareShortcut(Context context, View view) {
@@ -297,35 +281,28 @@ public class AccessibilityEditDialogUtils {
         });
     }
 
-    private static CharSequence retrieveTitle(Context context) {
-        int resId = R.string.accessibility_shortcut_edit_dialog_title_software;
-        if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
-            resId = AccessibilityUtil.isTouchExploreEnabled(context)
-                    ? R.string.accessibility_shortcut_edit_dialog_title_software_gesture_talkback
-                    : R.string.accessibility_shortcut_edit_dialog_title_software_gesture;
-        }
-        return context.getText(resId);
-    }
-
     private static CharSequence retrieveSummary(Context context, int lineHeight) {
-        if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
-            final int resId = AccessibilityUtil.isTouchExploreEnabled(context)
-                    ? R.string.accessibility_shortcut_edit_dialog_summary_software_gesture_talkback
-                    : R.string.accessibility_shortcut_edit_dialog_summary_software_gesture;
-            return context.getText(resId);
-        }
-        return getSummaryStringWithIcon(context, lineHeight);
+        return AccessibilityUtil.isFloatingMenuEnabled(context)
+                ? getSummaryStringWithLink(context) : getSummaryStringWithIcon(context, lineHeight);
     }
 
     private static int retrieveImageResId(Context context) {
-        // TODO(b/142531156): Use vector drawable instead of temporal png file to avoid distorted.
-        int resId = R.drawable.accessibility_shortcut_type_software;
-        if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
-            resId = AccessibilityUtil.isTouchExploreEnabled(context)
-                    ? R.drawable.accessibility_shortcut_type_software_gesture_talkback
-                    : R.drawable.accessibility_shortcut_type_software_gesture;
-        }
-        return resId;
+        return AccessibilityUtil.isFloatingMenuEnabled(context)
+                ? R.drawable.accessibility_shortcut_type_software_floating
+                : R.drawable.accessibility_shortcut_type_software;
+    }
+
+    private static CharSequence getSummaryStringWithLink(Context context) {
+        final View.OnClickListener linkListener = v -> new SubSettingLauncher(context)
+                .setDestination(AccessibilityButtonFragment.class.getName())
+                .setSourceMetricsCategory(
+                        SettingsEnums.SWITCH_SHORTCUT_DIALOG_ACCESSIBILITY_BUTTON_SETTINGS)
+                .launch();
+        final AnnotationSpan.LinkInfo linkInfo = new AnnotationSpan.LinkInfo(
+                AnnotationSpan.LinkInfo.DEFAULT_ANNOTATION, linkListener);
+
+        return AnnotationSpan.linkify(context.getText(
+                R.string.accessibility_shortcut_edit_dialog_summary_software_floating), linkInfo);
     }
 
     private static SpannableString getSummaryStringWithIcon(Context context, int lineHeight) {
@@ -343,7 +320,6 @@ public class AccessibilityEditDialogUtils {
         spannableMessage.setSpan(
                 imageSpan, indexIconStart, indexIconEnd,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
         return spannableMessage;
     }
 
@@ -365,5 +341,53 @@ public class AccessibilityEditDialogUtils {
         final int colorResId = typedArray.getResourceId(0, 0);
         typedArray.recycle();
         return colorResId;
+    }
+
+    /**
+     * Creates a dialog with the given view.
+     *
+     * @param context A valid context
+     * @param dialogTitle The title of the dialog
+     * @param customView The customized view
+     * @param listener This listener will be invoked when the positive button in the dialog is
+     *                 clicked
+     * @return the {@link Dialog} with the given view
+     */
+    public static Dialog createCustomDialog(Context context, CharSequence dialogTitle,
+            View customView, DialogInterface.OnClickListener listener) {
+        final AlertDialog alertDialog = new AlertDialog.Builder(context)
+                .setView(customView)
+                .setTitle(dialogTitle)
+                .setCancelable(true)
+                .setPositiveButton(R.string.save, listener)
+                .setNegativeButton(R.string.cancel, null)
+                .create();
+        if (customView instanceof ScrollView || customView instanceof AbsListView) {
+            setScrollIndicators(customView);
+        }
+        return alertDialog;
+    }
+
+    /**
+     * Creates a single choice {@link ListView} with given {@link ItemInfo} list.
+     *
+     * @param context A context.
+     * @param itemInfoList A {@link ItemInfo} list.
+     * @param itemListener The listener will be invoked when the item is clicked.
+     */
+    @NonNull
+    public static ListView createSingleChoiceListView(@NonNull Context context,
+            @NonNull List<? extends ItemInfo> itemInfoList,
+            @Nullable AdapterView.OnItemClickListener itemListener) {
+        final ListView list = new ListView(context);
+        // Set an id to save its state.
+        list.setId(android.R.id.list);
+        list.setDivider(/* divider= */ null);
+        list.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        final ItemInfoArrayAdapter
+                adapter = new ItemInfoArrayAdapter(context, itemInfoList);
+        list.setAdapter(adapter);
+        list.setOnItemClickListener(itemListener);
+        return list;
     }
 }

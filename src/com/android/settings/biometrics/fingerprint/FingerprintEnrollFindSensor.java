@@ -68,13 +68,21 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
                         .build()
         );
 
-        setHeaderText(R.string.security_settings_fingerprint_enroll_find_sensor_title);
+        if (mCanAssumeUdfps) {
+            setHeaderText(R.string.security_settings_udfps_enroll_find_sensor_title);
+            setDescriptionText(R.string.security_settings_udfps_enroll_find_sensor_message);
+        } else {
+            setHeaderText(R.string.security_settings_fingerprint_enroll_find_sensor_title);
+            setDescriptionText(R.string.security_settings_fingerprint_enroll_find_sensor_message);
+        }
 
         // This is an entry point for SetNewPasswordController, e.g.
         // adb shell am start -a android.app.action.SET_NEW_PASSWORD
         if (mToken == null && BiometricUtils.containsGatekeeperPasswordHandle(getIntent())) {
             final FingerprintManager fpm = getSystemService(FingerprintManager.class);
             fpm.generateChallenge(mUserId, (sensorId, challenge) -> {
+                mChallenge = challenge;
+                mSensorId = sensorId;
                 mToken = BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId, challenge);
                 BiometricUtils.removeGatekeeperPasswordHandle(this, getIntent());
 
@@ -104,7 +112,11 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
 
     protected int getContentView() {
         if (mCanAssumeUdfps) {
-            return R.layout.udfps_enroll_find_sensor_layout;
+            if (BiometricUtils.isReverseLandscape(getApplicationContext())) {
+                return R.layout.udfps_enroll_find_sensor_land;
+            } else {
+                return R.layout.udfps_enroll_find_sensor_layout;
+            }
         }
         return R.layout.fingerprint_enroll_find_sensor;
     }

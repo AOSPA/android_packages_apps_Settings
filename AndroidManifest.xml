@@ -19,6 +19,8 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
     <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED" />
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.HARDWARE_TEST" />
@@ -105,6 +107,7 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.READ_DREAM_STATE" />
     <uses-permission android:name="android.permission.READ_DREAM_SUPPRESSION" />
+    <uses-permission android:name="android.permission.MANAGE_APP_HIBERNATION" />
 
     <application android:label="@string/settings_label"
             android:icon="@drawable/ic_launcher_settings"
@@ -395,12 +398,15 @@
                   android:exported="true"
                   android:permission="android.permission.NETWORK_STACK"
                   android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight">
+            <!-- TODO: Consider removing below two intent filters.
+                 It seems like below two intent filters can be removed because when the notification
+                 is clicked, this activity will be launched anyway. -->
             <intent-filter>
-                <action android:name="android.net.conn.PROMPT_UNVALIDATED" />
+                <action android:name="android.net.action.PROMPT_UNVALIDATED" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.net.conn.PROMPT_LOST_VALIDATION" />
+                <action android:name="android.net.action.PROMPT_LOST_VALIDATION" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -953,7 +959,7 @@
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.display.SmartAutoRotatePreferenceFragment" />
+                android:value="com.android.settings.DisplaySettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -987,6 +993,23 @@
                 android:value="true" />
             <meta-data android:name="com.android.settings.summary"
                 android:resource="@string/qtifeedback_settings_subtitle" />
+        </activity>
+
+        <activity
+            android:name="Settings$SmartAutoRotateSettingsActivity"
+            android:label="@string/accelerometer_title"
+            android:icon="@drawable/ic_homepage_notification"
+            android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.AUTO_ROTATE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter android:priority="32">
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.display.SmartAutoRotatePreferenceFragment" />
         </activity>
 
         <activity
@@ -1241,7 +1264,6 @@
 
         <activity android:name=".applications.InstalledAppOpenByDefaultActivity"
                   android:label="@string/application_info_label"
-                  android:permission="android.permission.OPEN_APP_OPEN_BY_DEFAULT_SETTINGS"
                   android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.APP_OPEN_BY_DEFAULT_SETTINGS" />
@@ -1302,6 +1324,7 @@
         <activity
             android:name=".notification.history.NotificationHistoryActivity"
             android:exported="true"
+            android:theme="@style/Theme.SubSettings"
             android:label="@string/notification_history_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.NOTIFICATION_HISTORY" />
@@ -1345,7 +1368,7 @@
         </activity>
         <activity
             android:name="Settings$ScanningSettingsActivity"
-            android:label="@string/location_scanning_screen_title"
+            android:label="@string/location_services_screen_title"
             android:icon="@drawable/ic_homepage_location"
             android:exported="true"
             android:configChanges="orientation|keyboardHidden|screenSize">
@@ -1354,7 +1377,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.location.ScanningSettings" />
+                android:value="com.android.settings.location.LocationServices" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -1497,6 +1520,7 @@
         <activity android:name=".applications.specialaccess.deviceadmin.DeviceAdminAdd"
                   android:label="@string/device_admin_add_title"
                   android:exported="true"
+                  android:theme="@style/Theme.SubSettings"
                   android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.app.action.ADD_DEVICE_ADMIN" />
@@ -1978,7 +2002,7 @@
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.deviceinfo.StorageSettings" />
+                android:value="com.android.settings.deviceinfo.StorageDashboardFragment" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -2832,8 +2856,13 @@
         </activity>
 
         <!-- Show channel-level notification settings (channel passed in as extras) -->
-        <activity android:name="Settings$ChannelNotificationSettingsActivity"
+        <activity android:name=".notification.app.ChannelPanelActivity"
                   android:label="@string/notification_channel_title"
+                  android:theme="@style/Theme.Panel"
+                  android:launchMode="singleInstance"
+                  android:excludeFromRecents="true"
+                  android:noHistory="true"
+                  android:configChanges="orientation|keyboardHidden|screenSize"
                   android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.CHANNEL_NOTIFICATION_SETTINGS" />
@@ -2914,27 +2943,11 @@
             android:grantUriPermissions="true"
             android:exported="false"/>
 
-        <activity
-            android:name="Settings$SimSettingsActivity"
-            android:exported="true"
-            android:label="@string/sim_settings_title"
-            android:icon="@drawable/ic_settings_sim"
-            android:parentActivityName="Settings">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.order" android:value="-2"/>
-            <meta-data android:name="com.android.settings.category"
-                android:value="com.android.settings.category.ia.wireless" />
-            <meta-data android:name="com.android.settings.summary"
-                android:resource="@string/summary_empty"/>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.sim.SimSettings" />
-        </activity>
+        <provider
+            android:name=".emergency.EmergencyActionContentProvider"
+            android:authorities="com.android.settings.emergency"
+            android:permission="android.permission.CALL_PRIVILEGED"
+            android:exported="true"/>
 
         <activity
             android:name=".wifi.RequestToggleWiFiActivity"
@@ -3117,6 +3130,33 @@
         </activity>
 
         <activity
+            android:name="Settings$AlarmsAndRemindersActivity"
+            android:exported="true"
+            android:label="@string/alarms_and_reminders_label">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.REQUEST_SCHEDULE_EXACT_ALARM" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.manageapplications.ManageApplications" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
+        <activity
+            android:name="Settings$AlarmsAndRemindersAppActivity"
+            android:exported="true"
+            android:label="@string/alarms_and_reminders_label">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.REQUEST_SCHEDULE_EXACT_ALARM" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.appinfo.AlarmsAndRemindersDetails" />
+        </activity>
+
+        <activity
             android:name="Settings$ManageExternalSourcesActivity"
             android:exported="true"
             android:label="@string/install_other_apps">
@@ -3179,6 +3219,33 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.appinfo.ManageExternalStorageDetails" />
+        </activity>
+
+        <activity
+            android:name="Settings$MediaManagementAppsActivity"
+            android:exported="true"
+            android:label="@string/media_management_apps_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.REQUEST_MANAGE_MEDIA" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.manageapplications.ManageApplications" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
+        <activity
+            android:name="Settings$AppMediaManagementAppsActivity"
+            android:exported="true"
+            android:label="@string/media_management_apps_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.REQUEST_MANAGE_MEDIA" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.appinfo.MediaManagementAppsDetails" />
         </activity>
 
         <!-- Keep compatibility with old WebView-picker implementation -->
@@ -3756,6 +3823,25 @@
             android:theme="@style/Theme.SubSettings.Base"
             android:exported="true"
             android:launchMode="singleTask">
+        </activity>
+
+        <activity android:name="Settings$FactoryResetActivity"
+                  android:permission="android.permission.BACKUP"
+                  android:label="@string/main_clear_title"
+                  android:exported="true"
+                  android:theme="@style/SudThemeGlif.Light">
+            <intent-filter>
+                <action android:name="com.android.settings.action.FACTORY_RESET"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.MainClear"/>
+        </activity>
+
+        <activity android:name="Settings$FactoryResetConfirmActivity"
+                  android:label="@string/main_clear_confirm_title"
+                  android:exported="false"
+                  android:theme="@style/SudThemeGlif.Light">
         </activity>
 
        <activity android:name=".network.telephony.UserPLMNListActivity"

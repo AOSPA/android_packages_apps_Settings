@@ -81,6 +81,11 @@
         settings:controller="com.android.settings.applications.appinfo.AppDataUsagePreferenceController" />
 
     <Preference
+        android:key="extra_app_info_settings"
+        android:title="@string/extra_app_info_label"
+        settings:controller="com.android.settings.applications.appinfo.ExtraAppInfoPreferenceController" />
+
+    <Preference
         android:key="time_spent_in_app"
         android:title="@string/time_spent_in_app_pref_title"
         settings:controller="com.android.settings.applications.appinfo.TimeSpentInAppPreferenceController" />
@@ -128,6 +133,19 @@
         android:key="default_sms_app"
         android:title="@string/sms_application_title"
         android:summary="@string/summary_placeholder" />
+
+    <PreferenceCategory
+        android:key="app_hibernation_info"
+        android:title="@string/unused_apps"
+        settings:controller=
+            "com.android.settings.applications.appinfo.AppHibernationPreferenceCategoryController">
+
+        <SwitchPreference
+            android:key="hibernation_switch"
+            android:title="@string/unused_apps_switch"
+            settings:controller=
+                "com.android.settings.applications.appinfo.HibernationSwitchPreferenceController" />
+    </PreferenceCategory>
 
     <!-- Advanced apps settings -->
     <PreferenceCategory

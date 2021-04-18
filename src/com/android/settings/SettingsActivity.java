@@ -33,8 +33,6 @@ import android.content.res.Resources.Theme;
 import android.graphics.drawable.Icon;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.RemoteException;
-import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
@@ -65,7 +63,6 @@ import com.android.settings.core.gateway.SettingsGateway;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.Utils;
 import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.core.instrumentation.Instrumentable;
@@ -78,9 +75,6 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.codeaurora.internal.IExtTelephony;
-
 
 public class SettingsActivity extends SettingsBaseActivity
         implements PreferenceManager.OnPreferenceTreeClickListener,
@@ -317,6 +311,7 @@ public class SettingsActivity extends SettingsBaseActivity
         mMainSwitch = findViewById(R.id.switch_bar);
         if (mMainSwitch != null) {
             mMainSwitch.setMetricsTag(getMetricsTag());
+            mMainSwitch.setTranslationZ(findViewById(R.id.main_content).getTranslationZ() + 1);
         }
 
         // see if we should show Back/Next buttons
@@ -603,19 +598,6 @@ public class SettingsActivity extends SettingsBaseActivity
 
         Log.d(LOG_TAG, "Switching to fragment " + fragmentName);
 
-        if (fragmentName.equals("com.android.settings.sim.SimSettings")) {
-            if(Utils.isSimSettingsApkAvailable()) {
-                Log.i(LOG_TAG, "switchToFragment, launch simSettings");
-                Intent provisioningIntent =
-                        new Intent("com.android.settings.sim.SIM_SUB_INFO_SETTINGS");
-                if (!getPackageManager().queryIntentActivities(provisioningIntent, 0).isEmpty()) {
-                    startActivity(provisioningIntent);
-                }
-            }
-            finish();
-            return null;
-        }
-
         if (validate && !isValidFragment(fragmentName)) {
             throw new IllegalArgumentException("Invalid fragment for this activity: "
                     + fragmentName);
@@ -675,12 +657,7 @@ public class SettingsActivity extends SettingsBaseActivity
                 isAdmin) || somethingChanged;
 
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
-                        Settings.SimSettingsActivity.class.getName()),
-                Utils.showSimCardTile(this), isAdmin)
-                || somethingChanged;
-
-        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
-                        Settings.PowerUsageSummaryActivity.class.getName()),
+                Settings.PowerUsageSummaryActivity.class.getName()),
                 mBatteryPresent, isAdmin) || somethingChanged;
 
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,

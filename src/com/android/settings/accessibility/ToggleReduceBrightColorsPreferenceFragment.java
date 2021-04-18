@@ -29,13 +29,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.SwitchPreference;
 
 import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.widget.SeekBarPreference;
+import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ import java.util.List;
 /** Settings for reducing brightness. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePreferenceFragment {
+
     private static final String REDUCE_BRIGHT_COLORS_ACTIVATED_KEY =
             Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED;
     private static final String KEY_INTENSITY = "rbc_intensity";
@@ -73,42 +75,32 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
         mSettingsContentObserver = new SettingsContentObserver(mHandler, enableServiceFeatureKeys) {
             @Override
             public void onChange(boolean selfChange, Uri uri) {
-                    updateSwitchBarToggleSwitch();
+                updateSwitchBarToggleSwitch();
             }
         };
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+        final View view = super.onCreateView(inflater, container, savedInstanceState);
+        // Parent sets the title when creating the view, so set it after calling super
+        mToggleServiceSwitchPreference.setTitle(R.string.reduce_bright_colors_switch_title);
+        updateGeneralCategoryOrder();
+        return view;
+    }
+
+    private void updateGeneralCategoryOrder() {
+        final PreferenceCategory generalCategory = findPreference(KEY_GENERAL_CATEGORY);
+        final SeekBarPreference intensity = findPreference(KEY_INTENSITY);
+        getPreferenceScreen().removePreference(intensity);
+        intensity.setOrder(mShortcutPreference.getOrder() - 2);
+        generalCategory.addPreference(intensity);
+        final SwitchPreference persist = findPreference(KEY_PERSIST);
+        getPreferenceScreen().removePreference(persist);
+        persist.setOrder(mShortcutPreference.getOrder() - 1);
+        generalCategory.addPreference(persist);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        updatePreferenceOrder();
-    }
-
-    /** Customizes the order by preference key. */
-    private List<String> getPreferenceOrderList() {
-        final List<String> lists = new ArrayList<>();
-        lists.add(KEY_USE_SERVICE_PREFERENCE);
-        lists.add(KEY_INTENSITY);
-        lists.add(KEY_GENERAL_CATEGORY);
-        lists.add(KEY_PERSIST);
-        lists.add(KEY_INTRODUCTION_CATEGORY);
-        return lists;
-    }
-
-    private void updatePreferenceOrder() {
-        final List<String> lists = getPreferenceOrderList();
-        final PreferenceScreen preferenceScreen = getPreferenceScreen();
-        preferenceScreen.setOrderingAsAdded(false);
-
-        final int size = lists.size();
-        for (int i = 0; i < size; i++) {
-            final Preference preference = preferenceScreen.findPreference(lists.get(i));
-            if (preference != null) {
-                preference.setOrder(i);
-            }
-        }
     }
 
     @Override
@@ -151,24 +143,13 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
     @Override
     protected void onRemoveSwitchPreferenceToggleSwitch() {
         super.onRemoveSwitchPreferenceToggleSwitch();
-        mToggleServiceDividerSwitchPreference.setOnPreferenceClickListener(
+        mToggleServiceSwitchPreference.setOnPreferenceClickListener(
                 /* onPreferenceClickListener= */ null);
     }
 
     @Override
-    protected void updateToggleServiceTitle(SwitchPreference switchPreference) {
+    protected void updateToggleServiceTitle(SettingsMainSwitchPreference switchPreference) {
         switchPreference.setTitle(R.string.reduce_bright_colors_preference_title);
-    }
-
-    @Override
-    protected void onInstallSwitchPreferenceToggleSwitch() {
-        super.onInstallSwitchPreferenceToggleSwitch();
-        updateSwitchBarToggleSwitch();
-        mToggleServiceDividerSwitchPreference.setOnPreferenceClickListener((preference) -> {
-            boolean checked = ((SwitchPreference) preference).isChecked();
-            onPreferenceToggled(mPreferenceKey, checked);
-            return false;
-        });
     }
 
     @Override
@@ -177,15 +158,16 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
                 mComponentName);
     }
 
-    private void updateSwitchBarToggleSwitch() {
+    @Override
+    protected void updateSwitchBarToggleSwitch() {
         final boolean checked = Settings.Secure.getInt(getContentResolver(),
                 REDUCE_BRIGHT_COLORS_ACTIVATED_KEY, OFF) == ON;
         mRbcIntensityPreferenceController.updateState(getPreferenceScreen()
                 .findPreference(KEY_INTENSITY));
         mRbcPersistencePreferenceController.updateState(getPreferenceScreen()
                 .findPreference(KEY_PERSIST));
-        if (mToggleServiceDividerSwitchPreference.isChecked() != checked) {
-            mToggleServiceDividerSwitchPreference.setChecked(checked);
+        if (mToggleServiceSwitchPreference.isChecked() != checked) {
+            mToggleServiceSwitchPreference.setChecked(checked);
         }
     }
 
