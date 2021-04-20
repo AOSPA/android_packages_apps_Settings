@@ -27,12 +27,13 @@ import android.os.Looper;
 import android.provider.Settings;
 import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionManager.OnSubscriptionsChangedListener;
+import android.util.Log;
 
 import com.android.internal.telephony.TelephonyIntents;
 
 /** Helper class for listening to changes in availability of telephony subscriptions */
 public class SubscriptionsChangeListener extends ContentObserver {
-
+    private static final String TAG = "SubscriptionsChangeListener";
     public interface SubscriptionsChangeListenerClient {
         void onAirplaneModeChanged(boolean airplaneModeEnabled);
         void onSubscriptionsChanged();
@@ -44,6 +45,7 @@ public class SubscriptionsChangeListener extends ContentObserver {
     private OnSubscriptionsChangedListener mSubscriptionsChangedListener;
     private Uri mAirplaneModeSettingUri;
     private BroadcastReceiver mBroadcastReceiver;
+    private boolean isReceiverRegistered = false;
 
     public SubscriptionsChangeListener(Context context, SubscriptionsChangeListenerClient client) {
         super(new Handler(Looper.getMainLooper()));
@@ -68,6 +70,7 @@ public class SubscriptionsChangeListener extends ContentObserver {
     }
 
     public void start() {
+        Log.d(TAG, "Start");
         mSubscriptionManager.addOnSubscriptionsChangedListener(
                 mContext.getMainExecutor(), mSubscriptionsChangedListener);
         mContext.getContentResolver()
@@ -75,12 +78,16 @@ public class SubscriptionsChangeListener extends ContentObserver {
         final IntentFilter radioTechnologyChangedFilter = new IntentFilter(
                 TelephonyIntents.ACTION_RADIO_TECHNOLOGY_CHANGED);
         mContext.registerReceiver(mBroadcastReceiver, radioTechnologyChangedFilter);
+        isReceiverRegistered = true;
     }
 
     public void stop() {
         mSubscriptionManager.removeOnSubscriptionsChangedListener(mSubscriptionsChangedListener);
         mContext.getContentResolver().unregisterContentObserver(this);
-        mContext.unregisterReceiver(mBroadcastReceiver);
+        if(isReceiverRegistered) {
+            mContext.unregisterReceiver(mBroadcastReceiver);
+            isReceiverRegistered = false;
+        }
     }
 
     public boolean isAirplaneModeOn() {

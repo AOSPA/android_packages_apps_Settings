@@ -53,6 +53,7 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
     private SubscriptionInfo mSubInfo = null;
     private Context mContext;
     private int mCallState;
+    private boolean isReceiverRegistered = false;
 
 
     public MobileNetworkSwitchController(Context context, String preferenceKey) {
@@ -67,6 +68,7 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
         IntentFilter filter = new IntentFilter();
         filter.addAction(TelephonyManager.ACTION_PHONE_STATE_CHANGED);
         mContext.registerReceiver(mIntentReceiver, filter);
+        isReceiverRegistered = true;
         mCallState = mTelephonyManager.getCallState();
     }
 
@@ -88,7 +90,10 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
 
     @OnLifecycleEvent(ON_DESTROY)
     public void onDestroy() {
-        mContext.unregisterReceiver(mIntentReceiver);
+        if(isReceiverRegistered) {
+            mContext.unregisterReceiver(mIntentReceiver);
+            isReceiverRegistered = false;
+        }
     }
 
     @Override
