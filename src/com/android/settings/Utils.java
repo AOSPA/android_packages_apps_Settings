@@ -1107,27 +1107,6 @@ public final class Utils extends com.android.settingslib.Utils {
         return true;
      }
 
-    /**
-     * check whether NetworkSetting apk exist in system, if yes, return true, else
-     * return false.
-     */
-    public static boolean isNetworkSettingsApkAvailable() {
-        // check whether the target handler exist in system
-        IExtTelephony extTelephony =
-                IExtTelephony.Stub.asInterface(ServiceManager.getService("qti.radio.extphone"));
-        try {
-            if (extTelephony != null &&
-                    extTelephony.isVendorApkAvailable("com.qualcomm.qti.networksetting")) {
-                // Use Vendor NetworkSetting to handle the selection intent
-                return true;
-            }
-        } catch (RemoteException e) {
-            // Use aosp NetworkSetting to handle the selection intent
-            Log.e(TAG, "Got exception in isNetworkSettingsApkAvailable.", e);
-        }
-        return false;
-    }
-
     public static boolean isAdvancedPlmnScanSupported() {
         boolean propVal = false;
         IExtTelephony extTelephony = IExtTelephony.Stub
