@@ -97,8 +97,18 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     public void setLevels(int[] levels) {
         // We should provide trapezoid count + 1 data to draw all trapezoids.
         mLevels = levels.length == mTrapezoidCount + 1 ? levels : null;
-        setClickable(mLevels != null);
+        setClickable(false);
         invalidate();
+        if (mLevels == null) {
+            return;
+        }
+        // Sets the chart is clickable if there is at least one valid item in it.
+        for (int index = 0; index < mLevels.length - 1; index++) {
+            if (mLevels[index] != 0 && mLevels[index + 1] != 0) {
+                setClickable(true);
+                break;
+            }
+        }
     }
 
     /** Sets the selected group index to draw highlight effect. */
@@ -145,6 +155,11 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             return;
         }
         final int trapezoidIndex = getTrapezoidIndex(mTouchUpEvent.getX());
+        // Ignores the click event if the level is zero.
+        if (trapezoidIndex == SELECTED_INDEX_INVALID
+                || (trapezoidIndex >= 0 && mLevels[trapezoidIndex] == 0)) {
+            return;
+        }
         // Selects all if users click the same trapezoid item two times.
         if (trapezoidIndex == mSelectedIndex) {
             setSelectedIndex(SELECTED_INDEX_ALL);
@@ -255,7 +270,8 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     private int getTrapezoidIndex(float x) {
         for (int index = 0; index < mTrapezoidSlot.length; index++) {
             final TrapezoidSlot slot = mTrapezoidSlot[index];
-            if (x >= slot.mLeft && x <= slot.mRight) {
+            if (x >= slot.mLeft - mTrapezoidHOffset
+                    && x <= slot.mRight + mTrapezoidHOffset) {
                 return index;
             }
         }

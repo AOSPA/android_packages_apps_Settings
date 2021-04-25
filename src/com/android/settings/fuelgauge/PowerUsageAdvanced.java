@@ -17,6 +17,8 @@ import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpd
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
@@ -55,6 +57,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     final BatteryHistoryLoaderCallbacks mBatteryHistoryLoaderCallbacks =
             new BatteryHistoryLoaderCallbacks();
 
+    private boolean mIsChartDataLoaded = false;
     private boolean mIsChartGraphEnabled = false;
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
     private BatteryChartPreferenceController mBatteryChartPreferenceController;
@@ -63,13 +66,14 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        refreshFeatureFlag(getContext());
+        final Context context = getContext();
+        refreshFeatureFlag(context);
         mHistPref = (BatteryHistoryPreference) findPreference(KEY_BATTERY_GRAPH);
-        // Removes chart graph preference if the chart design is disabled.
-        if (!mIsChartGraphEnabled) {
-            removePreference(KEY_BATTERY_GRAPH);
+        if (mIsChartGraphEnabled) {
+            setBatteryChartPreferenceController();
+        } else {
+           updateHistPrefSummary(context);
         }
-        setBatteryChartPreferenceController();
     }
 
     @Override
@@ -93,6 +97,13 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.power_usage_advanced;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // Resets the flag to reload usage data in onResume() callback.
+        mIsChartDataLoaded = false;
     }
 
     @Override
@@ -128,6 +139,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         }
         updatePreference(mHistPref);
         if (mBatteryAppListPreferenceController != null && mBatteryUsageStats != null) {
+            updateHistPrefSummary(context);
             mBatteryAppListPreferenceController.refreshAppListGroup(
                     mBatteryUsageStats, /* showAllApps */true);
         }
@@ -141,11 +153,24 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         final Bundle bundle = new Bundle();
         bundle.putInt(KEY_REFRESH_TYPE, refreshType);
         // Uses customized battery history loader if chart design is enabled.
-        if (mIsChartGraphEnabled) {
+        if (mIsChartGraphEnabled && !mIsChartDataLoaded) {
+            mIsChartDataLoaded = true;
             getLoaderManager().restartLoader(LOADER_BATTERY_USAGE_STATS, bundle,
-                    mBatteryHistoryLoaderCallbacks);
-        } else {
+                mBatteryHistoryLoaderCallbacks);
+        } else if (!mIsChartGraphEnabled) {
             super.restartBatteryStatsLoader(refreshType);
+        }
+    }
+
+    private void updateHistPrefSummary(Context context) {
+        final Intent batteryIntent =
+                context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        final boolean plugged = batteryIntent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) != 0;
+        if (mPowerUsageFeatureProvider.isEnhancedBatteryPredictionEnabled(context) && !plugged) {
+            mHistPref.setBottomSummary(
+                    mPowerUsageFeatureProvider.getAdvancedUsageScreenInfoString());
+        } else {
+            mHistPref.hideBottomSummary();
         }
     }
 
