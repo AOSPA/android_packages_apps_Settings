@@ -295,6 +295,11 @@
             android:summary="@string/mobile_data_always_on_summary" />
 
         <SwitchPreference
+            android:key="smart_dds_switch"
+            android:title="@string/smart_dds_switch"
+            android:summary="@string/smart_dds_switch_summary" />
+
+        <SwitchPreference
             android:key="tethering_hardware_offload"
             android:title="@string/tethering_hardware_offload"
             android:summary="@string/tethering_hardware_offload_summary" />
