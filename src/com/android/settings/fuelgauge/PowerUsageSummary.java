@@ -29,6 +29,7 @@ import android.provider.Settings.Global;
 import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -51,6 +52,8 @@ import java.util.List;
 public class PowerUsageSummary extends PowerUsageBase implements
         BatteryTipPreferenceController.BatteryTipListener {
 
+    private static final String KEY_BATTERY_ERROR = "battery_help_message";
+
     static final String TAG = "PowerUsageSummary";
 
     @VisibleForTesting
@@ -70,9 +73,11 @@ public class PowerUsageSummary extends PowerUsageBase implements
     @VisibleForTesting
     BatteryHeaderPreferenceController mBatteryHeaderPreferenceController;
     @VisibleForTesting
+    BatteryTipPreferenceController mBatteryTipPreferenceController;
+    @VisibleForTesting
     boolean mNeedUpdateBatteryTip;
     @VisibleForTesting
-    BatteryTipPreferenceController mBatteryTipPreferenceController;
+    Preference mHelpPreference;
 
     @VisibleForTesting
     final ContentObserver mSettingsObserver = new ContentObserver(new Handler()) {
@@ -94,6 +99,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
                 @Override
                 public void onLoadFinished(Loader<BatteryInfo> loader, BatteryInfo batteryInfo) {
                     mBatteryHeaderPreferenceController.updateHeaderPreference(batteryInfo);
+                    mBatteryHeaderPreferenceController.updateHeaderByBatteryTips(
+                            mBatteryTipPreferenceController.getCurrentBatteryTip(), batteryInfo);
                     mBatteryInfo = batteryInfo;
                 }
 
@@ -115,6 +122,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
                 public void onLoadFinished(Loader<List<BatteryTip>> loader,
                         List<BatteryTip> data) {
                     mBatteryTipPreferenceController.updateBatteryTips(data);
+                    mBatteryHeaderPreferenceController.updateHeaderByBatteryTips(
+                            mBatteryTipPreferenceController.getCurrentBatteryTip(), mBatteryInfo);
                 }
 
                 @Override
@@ -148,8 +157,14 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
         mBatteryUtils = BatteryUtils.getInstance(getContext());
 
+        mHelpPreference = findPreference(KEY_BATTERY_ERROR);
+        mHelpPreference.setVisible(false);
+
         if (Utils.isBatteryPresent(getContext())) {
             restartBatteryInfoLoader();
+        } else {
+            // Present help preference when battery is unavailable.
+            mHelpPreference.setVisible(true);
         }
         mBatteryTipPreferenceController.restoreInstanceState(icicle);
         updateBatteryTipFlag(icicle);
