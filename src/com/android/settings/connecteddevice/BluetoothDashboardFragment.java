@@ -109,7 +109,7 @@ public class BluetoothDashboardFragment extends DashboardFragment {
         if (mBroadcastPropertyChecked == false) {
             int advAudioMask = SystemProperties.getInt(BLUETOOTH_ADV_AUDIO_MASK_PROP, 0);
             mBroadcastEnabled = (((advAudioMask & BROADCAST_MASK) == BROADCAST_MASK) &&
-                SystemProperties.getBoolean(BLUETOOTH_BROADCAST_UI_PROP, false));
+                SystemProperties.getBoolean(BLUETOOTH_BROADCAST_UI_PROP, true));
             mBroadcastPropertyChecked = true;
         }
 
