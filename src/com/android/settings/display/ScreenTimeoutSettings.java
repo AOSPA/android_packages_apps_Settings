@@ -111,9 +111,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         mPrivacyPreference.setLayoutResource(R.layout.preference_footer);
         mPrivacyManager = SensorPrivacyManager.getInstance(context);
         mPrivacyManager.addSensorPrivacyListener(CAMERA,
-                enabled -> {
-                    mAdaptiveSleepController.updatePreference();
-                });
+                (sensor, enabled) -> mAdaptiveSleepController.updatePreference());
     }
 
     @Override
@@ -157,6 +155,16 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
                     new RadioButtonPreference(getPrefContext());
             bindPreference(pref, info.getKey(), info, defaultKey);
             screen.addPreference(pref);
+        }
+
+        final long selectedTimeout = Long.parseLong(defaultKey);
+        final long maxTimeout = getMaxScreenTimeout(getContext());
+        if (!candidateList.isEmpty() && (selectedTimeout > maxTimeout)) {
+            // The selected time out value is longer than the max timeout allowed by the admin.
+            // Select the largest value from the list by default.
+            final RadioButtonPreference preferenceWithLargestTimeout =
+                    (RadioButtonPreference) screen.getPreference(candidateList.size() - 1);
+            preferenceWithLargestTimeout.setChecked(true);
         }
 
         if (isScreenAttentionAvailable(getContext())) {

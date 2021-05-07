@@ -55,6 +55,12 @@
             android:title="@string/security_settings_face_preference_title"
             android:summary="@string/summary_placeholder"
             settings:keywords="@string/keywords_face_settings" />
+
+        <Preference
+            android:key="biometric_settings"
+            android:title="@string/security_settings_biometric_preference_title"
+            android:summary="@string/summary_placeholder"
+            settings:keywords="@string/keywords_biometric_settings" />
     </PreferenceCategory>
 
     <!-- work profile security section -->
@@ -91,6 +97,11 @@
             android:title="@string/security_settings_face_preference_title"
             android:summary="@string/summary_placeholder" />
 
+        <Preference
+            android:key="biometric_settings_profile"
+            android:title="@string/security_settings_biometric_preference_title"
+            android:summary="@string/summary_placeholder" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -108,6 +119,12 @@
         <Preference
             android:key="enterprise_privacy"
             android:title="@string/enterprise_privacy_settings"
+            android:summary="@string/summary_placeholder"
+            android:fragment="com.android.settings.enterprise.EnterprisePrivacySettings" />
+
+        <Preference
+            android:key="financed_privacy"
+            android:title="@string/financed_privacy_settings"
             android:summary="@string/summary_placeholder"
             android:fragment="com.android.settings.enterprise.EnterprisePrivacySettings" />
 
