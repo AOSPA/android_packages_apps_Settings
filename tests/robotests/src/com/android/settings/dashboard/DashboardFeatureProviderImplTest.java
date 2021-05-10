@@ -285,7 +285,7 @@ public class DashboardFeatureProviderImplTest {
     }
 
     @Test
-    public void bindPreference_noSummary_shouldSetSummaryToPlaceholder() {
+    public void bindPreference_noSummary_shouldSetNullSummary() {
         final Preference preference = new Preference(RuntimeEnvironment.application);
         mActivityInfo.metaData.remove(META_DATA_PREFERENCE_SUMMARY);
 
@@ -295,8 +295,7 @@ public class DashboardFeatureProviderImplTest {
                 MetricsEvent.VIEW_UNKNOWN, preference, tile, null /*key */,
                 Preference.DEFAULT_ORDER);
 
-        assertThat(preference.getSummary())
-                .isEqualTo(RuntimeEnvironment.application.getString(R.string.summary_placeholder));
+        assertThat(preference.getSummary()).isNull();
     }
 
     @Test
@@ -672,33 +671,6 @@ public class DashboardFeatureProviderImplTest {
                 .startActivityForResultAsUser(any(Intent.class), anyInt(), argument.capture());
         assertThat(argument.getValue().getIdentifier()).isEqualTo(0);
         verify(mActivity, never()).getSupportFragmentManager();
-    }
-
-    @Test
-    public void bindPreference_silkyHomeEnabled_shouldNotBindHomepageTileSummary() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, true);
-        final Preference preference = new Preference(RuntimeEnvironment.application);
-        final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
-
-        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mForceRoundedIcon,
-                MetricsEvent.VIEW_UNKNOWN, preference, tile, null /*key */,
-                Preference.DEFAULT_ORDER);
-
-        assertThat(preference.getSummary()).isNull();
-    }
-
-    @Test
-    public void bindPreference_silkyHomeEnabled_shouldBindSubpageTileSummary() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, true);
-        final Preference preference = new Preference(RuntimeEnvironment.application);
-        final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_SYSTEM);
-
-        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mForceRoundedIcon,
-                MetricsEvent.VIEW_UNKNOWN, preference, tile, null /*key */,
-                Preference.DEFAULT_ORDER);
-
-        assertThat(preference.getSummary()).isEqualTo(
-                mContext.getText(R.string.about_settings_summary));
     }
 
     @Test
