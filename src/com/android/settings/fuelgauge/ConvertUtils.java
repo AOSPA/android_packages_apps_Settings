@@ -15,13 +15,10 @@ package com.android.settings.fuelgauge;
 
 import android.annotation.IntDef;
 import android.content.ContentValues;
-import android.os.BatteryConsumer;
-import android.os.BatteryUsageStats;
 import android.content.Context;
-import android.os.SystemBatteryConsumer;
-import android.os.UidBatteryConsumer;
-import android.os.UserBatteryConsumer;
+import android.os.BatteryUsageStats;
 import android.os.UserHandle;
+import android.text.format.DateUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -29,6 +26,7 @@ import androidx.annotation.VisibleForTesting;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -46,6 +44,8 @@ public final class ConvertUtils {
     private static final Map<String, BatteryHistEntry> EMPTY_BATTERY_MAP = new HashMap<>();
     private static final BatteryHistEntry EMPTY_BATTERY_HIST_ENTRY =
         new BatteryHistEntry(new ContentValues());
+    // Maximum total time value for each slot cumulative data at most 2 hours.
+    private static final float TOTAL_TIME_THRESHOLD = DateUtils.HOUR_IN_MILLIS * 2;
 
     @VisibleForTesting
     static double PERCENTAGE_OF_TOTAL_THRESHOLD = 1f;
@@ -79,61 +79,46 @@ public final class ConvertUtils {
 
     private ConvertUtils() {}
 
-    /** Gets consumer type from {@link BatteryConsumer}. */
-    @ConsumerType
-    public static int getConsumerType(BatteryConsumer consumer) {
-        if (consumer instanceof UidBatteryConsumer) {
-            return CONSUMER_TYPE_UID_BATTERY;
-        } else if (consumer instanceof UserBatteryConsumer) {
-            return CONSUMER_TYPE_USER_BATTERY;
-        } else if (consumer instanceof SystemBatteryConsumer) {
-            return CONSUMER_TYPE_SYSTEM_BATTERY;
-        } else {
-          return CONSUMER_TYPE_UNKNOWN;
-        }
-    }
-
-    /** Gets battery drain type for {@link SystemBatteryConsumer}. */
-    public static int getDrainType(BatteryConsumer consumer) {
-        if (consumer instanceof SystemBatteryConsumer) {
-            return ((SystemBatteryConsumer) consumer).getDrainType();
-        }
-        return INVALID_DRAIN_TYPE;
-    }
-
     public static ContentValues convert(
             BatteryEntry entry,
             BatteryUsageStats batteryUsageStats,
             int batteryLevel,
             int batteryStatus,
             int batteryHealth,
+            long bootTimestamp,
             long timestamp) {
         final ContentValues values = new ContentValues();
         if (entry != null && batteryUsageStats != null) {
-            values.put("uid", Long.valueOf(entry.getUid()));
-            values.put("userId",
+            values.put(BatteryHistEntry.KEY_UID, Long.valueOf(entry.getUid()));
+            values.put(BatteryHistEntry.KEY_USER_ID,
                 Long.valueOf(UserHandle.getUserId(entry.getUid())));
-            values.put("appLabel", entry.getLabel());
-            values.put("packageName", entry.getDefaultPackageName());
-            values.put("isHidden", Boolean.valueOf(entry.isHidden()));
-            values.put("totalPower",
+            values.put(BatteryHistEntry.KEY_APP_LABEL, entry.getLabel());
+            values.put(BatteryHistEntry.KEY_PACKAGE_NAME,
+                entry.getDefaultPackageName());
+            values.put(BatteryHistEntry.KEY_IS_HIDDEN, Boolean.valueOf(entry.isHidden()));
+            values.put(BatteryHistEntry.KEY_TOTAL_POWER,
                 Double.valueOf(batteryUsageStats.getConsumedPower()));
-            values.put("consumePower", Double.valueOf(entry.getConsumedPower()));
-            values.put("percentOfTotal", Double.valueOf(entry.percent));
-            values.put("foregroundUsageTimeInMs",
+            values.put(BatteryHistEntry.KEY_CONSUME_POWER,
+                Double.valueOf(entry.getConsumedPower()));
+            values.put(BatteryHistEntry.KEY_PERCENT_OF_TOTAL,
+                Double.valueOf(entry.percent));
+            values.put(BatteryHistEntry.KEY_FOREGROUND_USAGE_TIME,
                 Long.valueOf(entry.getTimeInForegroundMs()));
-            values.put("backgroundUsageTimeInMs",
+            values.put(BatteryHistEntry.KEY_BACKGROUND_USAGE_TIME,
                 Long.valueOf(entry.getTimeInBackgroundMs()));
-            values.put("drainType", getDrainType(entry.getBatteryConsumer()));
-            values.put("consumerType", getConsumerType(entry.getBatteryConsumer()));
+            values.put(BatteryHistEntry.KEY_DRAIN_TYPE,
+                Integer.valueOf(entry.getPowerComponentId()));
+            values.put(BatteryHistEntry.KEY_CONSUMER_TYPE,
+                Integer.valueOf(entry.getConsumerType()));
         } else {
-            values.put("packageName", FAKE_PACKAGE_NAME);
+            values.put(BatteryHistEntry.KEY_PACKAGE_NAME, FAKE_PACKAGE_NAME);
         }
-        values.put("timestamp", Long.valueOf(timestamp));
-        values.put("zoneId", TimeZone.getDefault().getID());
-        values.put("batteryLevel", Integer.valueOf(batteryLevel));
-        values.put("batteryStatus", Integer.valueOf(batteryStatus));
-        values.put("batteryHealth", Integer.valueOf(batteryHealth));
+        values.put(BatteryHistEntry.KEY_BOOT_TIMESTAMP, Long.valueOf(bootTimestamp));
+        values.put(BatteryHistEntry.KEY_TIMESTAMP, Long.valueOf(timestamp));
+        values.put(BatteryHistEntry.KEY_ZONE_ID, TimeZone.getDefault().getID());
+        values.put(BatteryHistEntry.KEY_BATTERY_LEVEL, Integer.valueOf(batteryLevel));
+        values.put(BatteryHistEntry.KEY_BATTERY_STATUS, Integer.valueOf(batteryStatus));
+        values.put(BatteryHistEntry.KEY_BATTERY_HEALTH, Integer.valueOf(batteryHealth));
         return values;
     }
 
@@ -164,30 +149,12 @@ public final class ConvertUtils {
             final Context context,
             final int timeSlotSize,
             final long[] batteryHistoryKeys,
-            final Map<Long, List<BatteryHistEntry>> batteryHistoryMap,
-            final boolean purgeLowPercentageData) {
-        final Map<Integer, List<BatteryDiffEntry>> resultMap = new HashMap<>();
-        // Generates a temporary map to calculate diff usage data, which converts the inputted
-        // List<BatteryDiffEntry> into Map<String, BatteryHistEntry> with the key comes from
-        // the BatteryHistEntry.getKey() method.
-        final Map<Long, Map<String, BatteryHistEntry>> newBatteryHistoryMap = new HashMap<>();
-        for (int index = 0; index < batteryHistoryKeys.length; index++) {
-            final Long timestamp = Long.valueOf(batteryHistoryKeys[index]);
-            final List<BatteryHistEntry> entries = batteryHistoryMap.get(timestamp);
-            if (entries == null || entries.isEmpty()) {
-                continue;
-            }
-            final Map<String, BatteryHistEntry> slotBatteryHistDataMap = new HashMap<>();
-            for (BatteryHistEntry entry : entries) {
-                // Excludes auto-generated fake BatteryHistEntry data,
-                // which is used to record battery level and status purpose only.
-                if (!FAKE_PACKAGE_NAME.equals(entry.mPackageName)) {
-                    slotBatteryHistDataMap.put(entry.getKey(), entry);
-                }
-            }
-            newBatteryHistoryMap.put(timestamp, slotBatteryHistDataMap);
+            final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap,
+            final boolean purgeLowPercentageAndFakeData) {
+        if (batteryHistoryMap == null || batteryHistoryMap.isEmpty()) {
+            return new HashMap<>();
         }
-
+        final Map<Integer, List<BatteryDiffEntry>> resultMap = new HashMap<>();
         // Each time slot usage diff data =
         //     Math.abs(timestamp[i+2] data - timestamp[i+1] data) +
         //     Math.abs(timestamp[i+1] data - timestamp[i] data);
@@ -200,16 +167,24 @@ public final class ConvertUtils {
                 Long.valueOf(batteryHistoryKeys[index * timestampStride + 1]);
             final Long nextTwoTimestamp =
                 Long.valueOf(batteryHistoryKeys[index * timestampStride + 2]);
-
             // Fetches BatteryHistEntry data from corresponding time slot.
             final Map<String, BatteryHistEntry> currentBatteryHistMap =
-                newBatteryHistoryMap.getOrDefault(currentTimestamp, EMPTY_BATTERY_MAP);
+                batteryHistoryMap.getOrDefault(currentTimestamp, EMPTY_BATTERY_MAP);
             final Map<String, BatteryHistEntry> nextBatteryHistMap =
-                newBatteryHistoryMap.getOrDefault(nextTimestamp, EMPTY_BATTERY_MAP);
+                batteryHistoryMap.getOrDefault(nextTimestamp, EMPTY_BATTERY_MAP);
             final Map<String, BatteryHistEntry> nextTwoBatteryHistMap =
-                newBatteryHistoryMap.getOrDefault(nextTwoTimestamp, EMPTY_BATTERY_MAP);
+                batteryHistoryMap.getOrDefault(nextTwoTimestamp, EMPTY_BATTERY_MAP);
+            // We should not get the empty list since we have at least one fake data to record
+            // the battery level and status in each time slot, the empty list is used to
+            // represent there is no enough data to apply interpolation arithmetic.
+            if (currentBatteryHistMap.isEmpty()
+                    || nextBatteryHistMap.isEmpty()
+                    || nextTwoBatteryHistMap.isEmpty()) {
+                resultMap.put(Integer.valueOf(index), new ArrayList<BatteryDiffEntry>());
+                continue;
+            }
 
-            // Collects all keys in these three time slot records as population.
+            // Collects all keys in these three time slot records as all populations.
             final Set<String> allBatteryHistEntryKeys = new HashSet<>();
             allBatteryHistEntryKeys.addAll(currentBatteryHistMap.keySet());
             allBatteryHistEntryKeys.addAll(nextBatteryHistMap.keySet());
@@ -229,27 +204,25 @@ public final class ConvertUtils {
                 final BatteryHistEntry nextTwoEntry =
                     nextTwoBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
                 // Cumulative values is a specific time slot for a specific app.
-                final long foregroundUsageTimeInMs =
+                long foregroundUsageTimeInMs =
                     getDiffValue(
                         currentEntry.mForegroundUsageTimeInMs,
                         nextEntry.mForegroundUsageTimeInMs,
                         nextTwoEntry.mForegroundUsageTimeInMs);
-                final long backgroundUsageTimeInMs =
+                long backgroundUsageTimeInMs =
                     getDiffValue(
                         currentEntry.mBackgroundUsageTimeInMs,
                         nextEntry.mBackgroundUsageTimeInMs,
                         nextTwoEntry.mBackgroundUsageTimeInMs);
-                final double consumePower =
+                double consumePower =
                     getDiffValue(
                         currentEntry.mConsumePower,
                         nextEntry.mConsumePower,
                         nextTwoEntry.mConsumePower);
-                totalConsumePower += consumePower;
-
                 // Excludes entry since we don't have enough data to calculate.
                 if (foregroundUsageTimeInMs == 0
-                    && backgroundUsageTimeInMs == 0
-                    && consumePower == 0) {
+                        && backgroundUsageTimeInMs == 0
+                        && consumePower == 0) {
                     continue;
                 }
                 final BatteryHistEntry selectedBatteryEntry =
@@ -257,6 +230,23 @@ public final class ConvertUtils {
                 if (selectedBatteryEntry == null) {
                     continue;
                 }
+                // Force refine the cumulative value since it may introduce deviation
+                // error since we will apply the interpolation arithmetic.
+                final float totalUsageTimeInMs =
+                    foregroundUsageTimeInMs + backgroundUsageTimeInMs;
+                if (totalUsageTimeInMs > TOTAL_TIME_THRESHOLD) {
+                    final float ratio = TOTAL_TIME_THRESHOLD / totalUsageTimeInMs;
+                    Log.w(TAG, String.format("abnormal usage time %d|%d for:\n%s",
+                          Duration.ofMillis(foregroundUsageTimeInMs).getSeconds(),
+                          Duration.ofMillis(backgroundUsageTimeInMs).getSeconds(),
+                          currentEntry));
+                    foregroundUsageTimeInMs =
+                        Math.round(foregroundUsageTimeInMs * ratio);
+                    backgroundUsageTimeInMs =
+                        Math.round(backgroundUsageTimeInMs * ratio);
+                    consumePower = consumePower * ratio;
+                }
+                totalConsumePower += consumePower;
                 batteryDiffEntryList.add(
                     new BatteryDiffEntry(
                         context,
@@ -271,8 +261,8 @@ public final class ConvertUtils {
             }
         }
         insert24HoursData(BatteryChartView.SELECTED_INDEX_ALL, resultMap);
-        if (purgeLowPercentageData) {
-            purgeLowPercentageData(resultMap);
+        if (purgeLowPercentageAndFakeData) {
+            purgeLowPercentageAndFakeData(resultMap);
         }
         return resultMap;
     }
@@ -309,13 +299,15 @@ public final class ConvertUtils {
         indexedUsageMap.put(Integer.valueOf(desiredIndex), resultList);
     }
 
-    private static void purgeLowPercentageData(
+    // Removes low percentage data and fake usage data, which will be zero value.
+    private static void purgeLowPercentageAndFakeData(
             final Map<Integer, List<BatteryDiffEntry>> indexedUsageMap) {
         for (List<BatteryDiffEntry> entries : indexedUsageMap.values()) {
             final Iterator<BatteryDiffEntry> iterator = entries.iterator();
             while (iterator.hasNext()) {
                 final BatteryDiffEntry entry = iterator.next();
-                if (entry.getPercentOfTotal() < PERCENTAGE_OF_TOTAL_THRESHOLD) {
+                if (entry.getPercentOfTotal() < PERCENTAGE_OF_TOTAL_THRESHOLD
+                        || FAKE_PACKAGE_NAME.equals(entry.getPackageName())) {
                     iterator.remove();
                 }
             }

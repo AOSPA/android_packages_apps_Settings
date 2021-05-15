@@ -18,9 +18,11 @@ package com.android.settings.deviceinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.fail;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.app.usage.StorageStatsManager;
@@ -28,12 +30,12 @@ import android.content.Context;
 import android.icu.text.NumberFormat;
 import android.os.storage.VolumeInfo;
 import android.text.format.Formatter;
-import android.util.FeatureFlagUtils;
 
 import androidx.preference.Preference;
+import androidx.test.core.app.ApplicationProvider;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.settings.R;
-import com.android.settings.core.FeatureFlags;
+import com.android.settings.testutils.ResourcesUtils;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
 
 import org.junit.Before;
@@ -41,14 +43,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class TopLevelStoragePreferenceControllerTest {
 
     @Mock
@@ -62,13 +64,12 @@ public class TopLevelStoragePreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = RuntimeEnvironment.application;
+        mContext = ApplicationProvider.getApplicationContext();
         mVolumes = new ArrayList<>();
         mVolumes.add(mock(VolumeInfo.class, RETURNS_DEEP_STUBS));
         when(mStorageManagerVolumeProvider.getVolumes()).thenReturn(mVolumes);
 
-        mController = new TopLevelStoragePreferenceController(mContext, "test_key");
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, false);
+        mController = spy(new TopLevelStoragePreferenceController(mContext, "test_key"));
     }
 
     @Test
@@ -82,22 +83,26 @@ public class TopLevelStoragePreferenceControllerTest {
         when(mStorageManagerVolumeProvider
                 .getFreeBytes(nullable(StorageStatsManager.class), nullable(VolumeInfo.class)))
                 .thenReturn(0L);
-        ReflectionHelpers.setField(mController,
-                "mStorageManagerVolumeProvider", mStorageManagerVolumeProvider);
+        when(mController.getStorageManagerVolumeProvider())
+                .thenReturn(mStorageManagerVolumeProvider);
         final String percentage = NumberFormat.getPercentInstance().format(1);
-        final String freeSpace = Formatter.formatFileSize(RuntimeEnvironment.application, 0);
+        final String freeSpace = Formatter.formatFileSize(mContext, 0);
         final Preference preference = new Preference(mContext);
 
-        mController.updateState(preference);
+        // Wait for asynchronous thread to finish, otherwise test will flake.
+        Future thread = mController.refreshSummaryThread(preference);
+        try {
+            thread.get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            fail("Exception during automatic selection");
+        }
 
-        assertThat(preference.getSummary()).isEqualTo(
-                mContext.getString(R.string.storage_summary, percentage, freeSpace));
-    }
 
-    @Test
-    public void refreshSummary_silkyHomeEnabled_shouldBeNull() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, true);
-
-        assertThat(mController.getSummary()).isNull();
+        // Sleep for 5 seconds because a function is executed on the main thread from within
+        // the background thread.
+        TimeUnit.SECONDS.sleep(5);
+        assertThat(preference.getSummary()).isEqualTo(ResourcesUtils.getResourcesString(
+                mContext, "storage_summary", percentage, freeSpace));
     }
 }
