@@ -23,6 +23,9 @@ import android.util.SparseIntArray;
 import com.android.internal.os.BatterySipper;
 import com.android.settingslib.fuelgauge.Estimate;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * Feature Provider used in power usage
  */
@@ -124,4 +127,14 @@ public interface PowerUsageFeatureProvider {
      * Checks whether smart battery feature is supported in this device
      */
     boolean isSmartBatterySupported();
+
+    /**
+     * Checks whether we should enable chart graph design or not.
+     */
+    boolean isChartGraphEnabled(Context context);
+
+    /**
+     * Returns battery history data with corresponding timestamp key.
+     */
+    Map<Long, List<BatteryHistEntry>> getBatteryHistory(Context context);
 }

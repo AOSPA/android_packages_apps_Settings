@@ -27,15 +27,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserManager;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
-import com.android.settings.password.PasswordUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -52,12 +49,6 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
     @VisibleForTesting
     BluetoothProgressCategory mAvailableDevicesCategory;
     @VisibleForTesting
-    String mLaunchPackage;
-    @VisibleForTesting
-    String mLaunchClass;
-    @VisibleForTesting
-    String mCallingAppPackageName;
-    @VisibleForTesting
     Context mContext;
 
     private boolean mNeedAuth;
@@ -73,8 +64,6 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
         mNeedAuth = intent.getBooleanExtra(BluetoothDevicePicker.EXTRA_NEED_AUTH, false);
         setFilter(intent.getIntExtra(BluetoothDevicePicker.EXTRA_FILTER_TYPE,
                 BluetoothDevicePicker.FILTER_TYPE_ALL));
-        mLaunchPackage = intent.getStringExtra(BluetoothDevicePicker.EXTRA_LAUNCH_PACKAGE);
-        mLaunchClass = intent.getStringExtra(BluetoothDevicePicker.EXTRA_LAUNCH_CLASS);
         mAvailableDevicesCategory = (BluetoothProgressCategory) findPreference(KEY_BT_DEVICE_LIST);
     }
 
@@ -94,8 +83,6 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
         getActivity().setTitle(getString(R.string.device_picker));
         UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
         mScanAllowed = !um.hasUserRestriction(DISALLOW_CONFIG_BLUETOOTH);
-        mCallingAppPackageName = PasswordUtils.getCallingAppPackageName(
-                getActivity().getActivityToken());
         mContext = getContext();
         setHasOptionsMenu(true);
     }
@@ -201,18 +188,10 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
 
     private void sendDevicePickedIntent(BluetoothDevice device) {
         android.util.Log.d("Devicepicker", "sendDevicePickedIntent");
-        if (!TextUtils.equals(mCallingAppPackageName, mLaunchPackage)) {
-            Log.w(TAG, "sendDevicePickedIntent() launch package name is not equivalent to"
-                    + " calling package name!");
-            return;
-        }
-
         Intent intent = new Intent(BluetoothDevicePicker.ACTION_DEVICE_SELECTED);
         intent.putExtra(BluetoothDevice.EXTRA_DEVICE, device);
-        if (mLaunchPackage != null && mLaunchClass != null) {
-            intent.setClassName(mLaunchPackage, mLaunchClass);
-        }
         intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
+
         mContext.sendBroadcast(intent, Manifest.permission.BLUETOOTH_ADMIN);
     }
 }

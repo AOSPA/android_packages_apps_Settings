@@ -20,23 +20,20 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
 
-import android.app.Instrumentation;
 import android.content.Context;
 import android.os.Looper;
-import android.provider.SearchIndexableResource;
 import android.util.FeatureFlagUtils;
 
 import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.platform.app.InstrumentationRegistry;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
@@ -59,6 +56,7 @@ public class NetworkProviderCallsSmsFragmentTest {
         mNetworkProviderCallsSmsFragment = new NetworkProviderCallsSmsFragment();
     }
 
+    @Ignore
     @Test
     @UiThreadTest
     public void isPageSearchEnabled_providerModelEnable_shouldIncludeFragmentXml() {
@@ -72,6 +70,7 @@ public class NetworkProviderCallsSmsFragmentTest {
                 NetworkProviderCallsSmsFragment.KEY_PREFERENCE_SMS);
     }
 
+    @Ignore
     @Test
     @UiThreadTest
     public void isPageSearchEnabled_providerModelDisable_shouldNotIncludeFragmentXml() {

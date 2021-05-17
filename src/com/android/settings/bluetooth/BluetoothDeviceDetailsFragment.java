@@ -216,7 +216,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         if (mBAPropertyChecked == false) {
             int advAudioMask = SystemProperties.getInt(BLUETOOTH_ADV_AUDIO_MASK_PROP, 0);
             mBAEnabled = (((advAudioMask & BA_MASK) == BA_MASK) &&
-                SystemProperties.getBoolean(BLUETOOTH_BROADCAST_UI_PROP, false));
+                SystemProperties.getBoolean(BLUETOOTH_BROADCAST_UI_PROP, true));
             mBAPropertyChecked = true;
         }
         if (mBAEnabled == false) {

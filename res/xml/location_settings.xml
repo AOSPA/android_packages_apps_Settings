@@ -27,20 +27,6 @@
         settings:controller=
             "com.android.settings.location.RecentLocationAccessPreferenceController"/>
 
-    <Preference
-        android:key="recent_location_access_see_all_button"
-        android:title="@string/location_recent_location_access_see_all"
-        android:icon="@drawable/ic_chevron_right_24dp"
-        android:fragment="com.android.settings.location.RecentLocationAccessSeeAllFragment"
-        settings:controller="com.android.settings.location.RecentLocationAccessSeeAllButtonPreferenceController"
-        settings:searchable="false"/>
-
-            <CheckBoxPreference
-                android:key="assisted_gps"
-                android:title="@string/assisted_gps"
-                android:summaryOn="@string/assisted_gps_enabled"
-                android:summaryOff="@string/assisted_gps_disabled"
-                settings:controller="com.android.settings.location.AgpsPreferenceController"/>
     <PreferenceCategory
         android:key="location_advanced_settings"
         android:layout="@layout/preference_category_no_label"
@@ -60,6 +46,7 @@
         <Preference
             android:key="app_level_permissions"
             android:title="@string/location_app_level_permissions"
+            android:icon="@drawable/ic_chevron_right_24dp"
             settings:controller="com.android.settings.location.AppLocationPermissionPreferenceController">
             <intent android:action="android.intent.action.MANAGE_PERMISSION_APPS">
                 <extra android:name="android.intent.extra.PERMISSION_NAME"
@@ -70,13 +57,15 @@
         <Preference
             android:fragment="com.android.settings.location.LocationServices"
             android:key="location_services"
-            android:title="@string/location_services_screen_title"
+            android:icon="@drawable/ic_chevron_right_24dp"
+            android:title="@string/location_services_preference_title"
             settings:controller="com.android.settings.location.LocationServicesPreferenceController"/>
 
     </PreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference
-        android:title="@string/location_settings_footer"
+        android:title="@string/location_settings_footer_location_on"
         android:key="location_footer"
-        android:selectable="false"/>
+        android:selectable="false"
+        settings:controller="com.android.settings.location.LocationSettingsFooterPreferenceController"/>
 </PreferenceScreen>

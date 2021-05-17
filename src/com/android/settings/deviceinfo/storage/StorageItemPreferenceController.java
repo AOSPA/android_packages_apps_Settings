@@ -45,8 +45,8 @@ import com.android.settings.Utils;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.deviceinfo.PrivateVolumeSettings.SystemInfoFragment;
 import com.android.settings.deviceinfo.StorageItemPreference;
+import com.android.settings.deviceinfo.storage.StorageUtils.SystemInfoFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -230,6 +230,8 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     }
 
     private boolean isValidPublicVolume() {
+        // Stub volume is a volume that is maintained by external party such as the ChromeOS
+        // processes in ARC++.
         return mVolume != null
                 && (mVolume.getType() == VolumeInfo.TYPE_PUBLIC
                 || mVolume.getType() == VolumeInfo.TYPE_STUB)

@@ -292,6 +292,12 @@
     <dimen name="accessibility_layout_margin_start_end">16dp</dimen>
     <dimen name="accessibility_button_preference_padding_top_bottom">18dp</dimen>
     <dimen name="accessibility_imageview_size">176dp</dimen>
+    <!-- The margin between two Textviews-->
+    <dimen name="accessibility_textview_layout_margin_bottom">24dp</dimen>
+
+    <!-- Accessibility icon -->
+    <dimen name="accessibility_icon_size">32dp</dimen>
+    <dimen name="accessibility_icon_foreground_size">18dp</dimen>
 
     <!-- Restricted icon in switch bar -->
     <dimen name="restricted_icon_margin_end">16dp</dimen>
@@ -318,19 +324,6 @@
     <dimen name="select_dialog_padding_start">20dp</dimen>
     <dimen name="select_dialog_item_margin_start">12dp</dimen>
     <dimen name="select_dialog_summary_padding_bottom">8dp</dimen>
-
-    <!-- Padding between the donut and the storage summary. -->
-    <dimen name="storage_summary_padding_end">16dp</dimen>
-    <!-- Text size of the big number in the donut. -->
-    <dimen name="storage_donut_view_percent_text_size">45sp</dimen>
-    <!-- Text size of the percentage sign in the donut. -->
-    <dimen name="storage_donut_view_percent_sign_size">20sp</dimen>
-    <!-- Text size of the label text in the donut. -->
-    <dimen name="storage_donut_view_label_text_size">21sp</dimen>
-    <!-- Text size of the label text in the donut if the label text is long. -->
-    <dimen name="storage_donut_view_shrunken_label_text_size">10sp</dimen>
-    <!-- The width of the storage summary donut -->
-    <dimen name="storage_donut_thickness">4dp</dimen>
 
     <!-- Battery meter view size -->
     <dimen name="battery_meter_width">66dp</dimen>
@@ -446,4 +439,11 @@
 
     <!--  Choose SIM Activity dimens  -->
     <dimen name="subtitle_bottom_padding">24dp</dimen>
+
+    <!-- Battery usage chart view component -->
+    <dimen name="chartview_divider_width">1dp</dimen>
+    <dimen name="chartview_divider_height">4dp</dimen>
+    <dimen name="chartview_trapezoid_radius">3dp</dimen>
+    <dimen name="chartview_trapezoid_margin_start">1dp</dimen>
+    <dimen name="chartview_trapezoid_margin_bottom">2dp</dimen>
 </resources>

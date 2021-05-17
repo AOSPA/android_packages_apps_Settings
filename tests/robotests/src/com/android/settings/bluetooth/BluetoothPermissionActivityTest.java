@@ -16,10 +16,7 @@
 
 package com.android.settings.bluetooth;
 
-import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
@@ -49,32 +46,13 @@ public class BluetoothPermissionActivityTest {
     }
 
     @Test
-    public void callingPackageIsEqualToReturnPackage_sendBroadcastToReturnPackage() {
-        mActivity.mReturnPackage = "com.android.settings";
-        mActivity.mReturnClass = "com.android.settings.bluetooth.BluetoothPermissionActivity";
-        mActivity.mCallingAppPackageName = "com.android.settings";
+    public void sendBroadcastWithPermission() {
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
         ReflectionHelpers.setField(mActivity, "mBase", mContext);
 
         mActivity.sendReplyIntentToReceiver(true, true);
 
         verify(mContext).sendBroadcast(intentCaptor.capture(),
-                eq("android.permission.BLUETOOTH_ADMIN"));
-        assertThat(intentCaptor.getValue().getComponent().getPackageName())
-                .isEqualTo("com.android.settings");
-    }
-
-    @Test
-    public void callingPackageIsNotEqualToReturnPackage_broadcastNotSend() {
-        mActivity.mReturnPackage = "com.fake.settings";
-        mActivity.mReturnClass = "com.android.settings.bluetooth.BluetoothPermissionActivity";
-        mActivity.mCallingAppPackageName = "com.android.settings";
-        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
-        ReflectionHelpers.setField(mActivity, "mBase", mContext);
-
-        mActivity.sendReplyIntentToReceiver(true, true);
-
-        verify(mContext, never()).sendBroadcast(intentCaptor.capture(),
                 eq("android.permission.BLUETOOTH_ADMIN"));
     }
 }

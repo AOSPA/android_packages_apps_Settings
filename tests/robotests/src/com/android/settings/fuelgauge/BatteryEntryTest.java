@@ -20,6 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -27,7 +28,6 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.os.BatteryConsumer;
 import android.os.Handler;
 import android.os.Process;
 import android.os.SystemBatteryConsumer;
@@ -177,8 +177,7 @@ public class BatteryEntryTest {
         final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application, mockHandler,
                 mockUserManager, mSystemBatteryConsumer, false, null, null);
 
-        when(mSystemBatteryConsumer.getUsageDurationMillis(BatteryConsumer.TIME_COMPONENT_USAGE))
-                .thenReturn(100L);
+        when(mSystemBatteryConsumer.getUsageDurationMillis()).thenReturn(100L);
 
         assertThat(entry.getTimeInForegroundMs()).isEqualTo(100L);
     }
@@ -199,7 +198,7 @@ public class BatteryEntryTest {
         final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application, mockHandler,
                 mockUserManager, mSystemBatteryConsumer, false, null, null);
 
-        when(mSystemBatteryConsumer.getUsageDurationMillis(BatteryConsumer.TIME_COMPONENT_USAGE))
+        when(mSystemBatteryConsumer.getUsageDurationMillis())
                 .thenReturn(100L);
 
         assertThat(entry.getTimeInBackgroundMs()).isEqualTo(0);
@@ -235,6 +234,7 @@ public class BatteryEntryTest {
 
     @Test
     public void getKey_UserBatteryConsumer_returnUserId() {
+        doReturn(mockUserManager).when(mMockContext).getSystemService(UserManager.class);
         final BatteryEntry entry = createUserBatteryConsumer(2);
         final String key = entry.getKey();
         assertThat(key).isEqualTo("U|2");

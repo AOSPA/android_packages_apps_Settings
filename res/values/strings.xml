@@ -695,10 +695,27 @@
     </plurals>
     <!-- Location settings, loading the number of apps which have location permission [CHAR LIMIT=30] -->
     <string name="location_settings_loading_app_permission_stats">Loading\u2026</string>
-    <!-- Location settings footer warning text [CHAR LIMIT=NONE] -->
-    <string name="location_settings_footer">
+    <!-- Location settings footer warning text when location is on [CHAR LIMIT=NONE] -->
+    <string name="location_settings_footer_location_on">
         Location may use sources like GPS, Wi\u2011Fi, mobile networks, and sensors to help estimate
         your device\u2019s location.
+
+        &lt;br>&lt;br>Apps with the Nearby devices permission can determine the
+        relative position of connected devices.
+
+        &lt;br>&lt;br>&lt;a href="<xliff:g example="http://www.google.com" id="url">
+        https://support.google.com/android/answer/3467281</xliff:g>">Learn more&lt;/a>
+    </string>
+    <!-- Location settings footer warning text when location is off [CHAR LIMIT=NONE] -->
+    <string name="location_settings_footer_location_off">
+        Location access is off for apps and services. Your device location may still be sent to
+        emergency responders when you call or text an emergency number.
+
+        &lt;br>&lt;br>Apps with the Nearby devices permission can determine the relative
+        position of connected devices.
+
+        &lt;br>&lt;br>&lt;a href="<xliff:g example="http://www.google.com"
+        id="url"> https://support.google.com/android/answer/3467281</xliff:g>">Learn more&lt;/a>
     </string>
 
     <!-- Main Settings screen setting option title for the item to take you to the accounts screen [CHAR LIMIT=22] -->
@@ -733,26 +750,8 @@
     <string name="security_dashboard_summary">Screen lock, fingerprint</string>
     <!-- Summary for Security settings when fingerprint is not supported [CHAR LIMIT=NONE]-->
     <string name="security_dashboard_summary_no_fingerprint">Screen lock</string>
-
-    <!-- Biometric enrollment for devices with multiple sensors --><skip />
-    <!-- Introduction title shown in biometric enrollment screen for devices that have both fingerprint and face. [CHAR LIMIT=60] -->
-    <string name="multi_biometric_enroll_title">Unlock your phone securely with your face and fingerprint</string>
-    <!-- Introduction subtitle shown in the biometric enrollment screen. [CHAR LIMIT=60] -->
-    <string name="multi_biometric_enroll_subtitle">You can also sign in to apps and confirm payments</string>
-    <!-- Section description preceding the biometric sensors available for the user to select for enrollment. [CHAR LIMIT=40] -->
-    <string name="multi_biometric_enroll_setup_with">Set up unlock with:</string>
-    <!-- Title for a preference containing a checkbox which if selected will allow the user to proceed to set up face unlock. [CHAR LIMIT=32] -->
-    <string name="multi_biometric_enroll_face_unlock_title">Face unlock</string>
-    <!-- Description for a preference containing a checkbox which if selected will allow the user to set up face unlock. [CHAR LIMIT=40] -->
-    <string name="multi_biometric_enroll_face_unlock_description">Make unlocking your phone a breeze</string>
-    <!-- Title for a preference containing a checkbox which if selected will allow the user to proceed to set up fingerprint unlock. [CHAR LIMIT=32] -->
-    <string name="multi_biometric_enroll_fingerprint_unlock_title">Fingerprint</string>
-    <!-- Description for a preference containing a checkbox which if selected will allow the user to set up fingerprint unlock. [CHAR LIMIT=40] -->
-    <string name="multi_biometric_enroll_fingerprint_unlock_description">Save time unlocking phone in your pocket</string>
-    <!-- Button for skipping biometric enrollment. [CHAR LIMIT=30] -->
-    <string name="multi_biometric_enroll_skip">Skip</string>
-    <!-- Button for starting biometric enrollment. [CHAR LIMIT=30] -->
-    <string name="multi_biometric_enroll_next">Next</string>
+    <!-- Summary for Security settings when biometric unlock is supported [CHAR LIMIT=NONE] -->
+    <string name="security_dashboard_summary_biometric">Screen lock, biometric unlock, app security</string>
 
     <!-- Face enrollment and settings --><skip />
     <!-- Message shown in summary field when face unlock is set up. [CHAR LIMIT=40] -->
@@ -979,7 +978,23 @@
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts">You\u2019ve reached the maximum number of attempts</string>
 
     <!-- Message shown in fingerprint security settings home screen. [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_v2_home_screen">Use your fingerprint to unlock your phone or for authentication, like when you sign in to apps or approve a purchase</string>
+    <string name="security_settings_fingerprint_v2_home_screen">Use your fingerprint to unlock your phone or for authentication, like when you sign in to apps or approve a purchase\n\n<annotation id="url">Learn more</annotation></string>
+
+    <!-- Biometric settings --><skip />
+    <!-- Title shown for menu item that launches biometric settings. [CHAR LIMIT=66] -->
+    <string name="security_settings_biometric_preference_title">Face &amp; fingerprint unlock</string>
+    <!-- Message shown in summary field of biometric settings. [CHAR LIMIT=66] -->
+    <string name="security_settings_biometric_preference_summary">Face and fingerprint</string>
+    <!-- Introduction shown in face and fingerprint page to introduce the biometric feature. [CHAR LIMIT=NONE]-->
+    <string name="biometric_settings_intro">When you set up face unlock and fingerprint, your phone will ask for your fingerprint when you wear a mask or are in a dark area.</string>
+    <!-- Biometric category title - biometric options for unlocking the device. [CHAR LIMIT=50] -->
+    <string name="biometric_settings_category_ways_to_unlock">Ways to unlock</string>
+    <!-- Biometric category title - configuration options for using biometric to unlock the device or authenticate in apps. [CHAR LIMIT=50] -->
+    <string name="biometric_settings_category_ways_to_use">Use face and fingerprint to</string>
+    <!-- Text shown on a toggle which allows or disallows the device to use biometric for unlocking the device. [CHAR LIMIT=20] -->
+    <string name="biometric_settings_use_biometric_unlock_phone">Unlocking your phone</string>
+    <!-- Text shown on a toggle which allows or disallows the device to use biometric for authentication. [CHAR LIMIT=30] -->
+    <string name="biometric_settings_use_biometric_for_apps">Authentication in apps</string>
 
     <!-- Title of dialog shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so [CHAR LIMIT=30]-->
     <string name="lock_screen_intro_skip_title">Skip screen lock?</string>
@@ -1305,8 +1320,17 @@
     <!--  Title for security picker to choose the unlock method: None/Pattern/PIN/Password [CHAR LIMIT=22] -->
     <string name="lock_settings_picker_title">Choose screen lock</string>
 
-    <!--  Title for security picker to choose the profile unlock method: None/Pattern/PIN/Password [CHAR LIMIT=22] -->
-    <string name="lock_settings_picker_title_profile">Choose work lock</string>
+    <!--  Screen title. This title is asking the user to choose a type of screen lock for their device, such as a pattern, PIN, or password. [CHAR LIMIT=27] -->
+    <string name="lock_settings_picker_new_lock_title">Choose a screen lock</string>
+
+    <!--  Screen title. This title is asking the user to choose a new screen lock for their device, such as a pattern, PIN, or password. [CHAR LIMIT=27] -->
+    <string name="lock_settings_picker_update_lock_title">Choose a new screen lock</string>
+
+    <!--  Screen title. This title is asking the user to choose a type of screen lock (such as a pattern, PIN, or password) that they need to enter to use their work apps. [CHAR LIMIT=27] -->
+    <string name="lock_settings_picker_new_profile_lock_title">Choose a lock for work apps</string>
+
+    <!--  Screen title. This title is asking the user to choose a new screen lock (such as a pattern, PIN, or password) that they need to enter to use their work apps. [CHAR LIMIT=27] -->
+    <string name="lock_settings_picker_update_profile_lock_title">Choose a new work lock</string>
 
     <!--  Title for security picker in setup wizard to choose the unlock method: None/Pattern/PIN/Password (tablet) [CHAR LIMIT=22] -->
     <string name="setup_lock_settings_picker_title" product="tablet">Protect your tablet</string>
@@ -1327,6 +1351,12 @@
 
     <!-- Message shown in screen lock picker while setting up the backup/fallback screen lock method for biometrics. Users can choose to use this method to unlock the screen instead of biometrics, or when biometrics are not accepted. [CHAR LIMIT=80] [BACKUP_MESSAGE_ID=2799884038398627882] -->
     <string name="lock_settings_picker_biometric_message">Choose your backup screen lock method</string>
+
+    <!-- Text shown on the screen lock menu. This text is letting the user know that their IT admin can't reset their screen lock if they forget it, and they can choose to set another lock that would be specifically for their work apps. The place-holders "LINK_BEGIN" and "LINK_END" must NOT be translated. They mark a link to bring the user to enroll a work profile screen lock instead. [CHAR LIMIT=100] -->
+    <string name="lock_settings_picker_admin_restricted_personal_message">This lock can\u2019t be reset by your IT admin. <xliff:g id="link_begin" example="">LINK_BEGIN</xliff:g>Set a separate work lock instead<xliff:g id="link_end" example="">LINK_END</xliff:g></string>
+
+    <!-- Message shown in screen lock picker for setting up a work profile screen lock. [CHAR LIMIT=80] -->
+    <string name="lock_settings_picker_profile_message">If you forget this lock, ask your IT admin to reset it</string>
 
     <!-- Label for button in screen lock settings, allowing users to choose other types of screen locks. [CHAR LIMIT=40] -->
     <string name="setup_lock_settings_options_button_label">Screen lock options</string>
@@ -2518,9 +2548,11 @@
     <!-- Summary for the toggle to turn off hotspot automatically [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_auto_off_summary">When no devices are connected</string>
     <!-- Title for the toggle to enable/disable the maximize compatibility [CHAR LIMIT=NONE]-->
-    <string name="wifi_hotspot_maximize_compatibility">Maximize compatibility</string>
-    <!-- Summary for the toggle to show the maximize compatibility warning message [CHAR LIMIT=NONE]-->
-    <string name="wifi_hotspot_maximize_compatibility_summary">This may reduce speed for devices connected to this hotspot and use more power</string>
+    <string name="wifi_hotspot_maximize_compatibility">Extend compatibility</string>
+    <!-- Summary for the toggle to show the maximize compatibility warning message in single AP device [CHAR LIMIT=NONE]-->
+    <string name="wifi_hotspot_maximize_compatibility_single_ap_summary">Helps other devices find this hotspot. Reduces hotspot connection speed.</string>
+    <!-- Summary for the toggle to show the maximize compatibility warning message in dual AP device [CHAR LIMIT=NONE]-->
+    <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary">Helps other devices find this hotspot. Increases battery usage.</string>
 
     <!-- Summary text when turning hotspot on -->
     <string name="wifi_tether_starting">Turning hotspot on\u2026</string>
@@ -2987,6 +3019,12 @@
     <string name="adaptive_sleep_contextual_slice_title">Turn on screen attention</string>
     <!-- Description about the contextual adaptive sleep card [CHAR LIMIT=NONE]-->
     <string name="adaptive_sleep_contextual_slice_summary">Keep screen on when looking at it</string>
+    <!-- auto_rotate settings screen, title about the camera privacy lock enabled [CHAR LIMIT=NONE]-->
+    <string name="auto_rotate_camera_lock_title">Camera is locked</string>
+    <!-- Description feature's privacy sensitive details to make sure users understand what feature users, what it saves/sends etc [CHAR LIMIT=NONE]-->
+    <string name="auto_rotate_camera_lock_summary">Camera must be unlocked for Face Detection</string>
+    <!-- screen_timeout settings screen, summary about the camera being disabled [CHAR LIMIT=NONE]-->
+    <string name="adaptive_sleep_camera_lock_summary">Camera must be unlocked for Screen Attention</string>
     <!-- auto_rotate settings screen, title about the required permission is missing [CHAR LIMIT=NONE]-->
     <string name="auto_rotate_summary_no_permission">Camera access is required for Face Detection. Tap to manage permissions for Device Personalization Services</string>
     <!-- auto_rotate settings screen, text for the camera permission button [CHAR LIMIT=NONE]-->
@@ -3442,11 +3480,6 @@
     <string name="sd_format_summary" product="default">Erases all data on the SD card, such as music and photos</string>
     <!-- SD card status when it is mounted as read only. Will be appended to size, starts with an unbreakable space -->
 
-    <!-- Title of dialog asking user to confirm before clearing all caches. [CHAR LIMIT=48] -->
-    <string name="memory_clear_cache_title">Clear cached data?</string>
-    <!-- Message of dialog asking user to confirm before clearing all caches. [CHAR LIMIT=48] -->
-    <string name="memory_clear_cache_message">This will clear cached data for all apps.</string>
-
     <!-- SD card & phone storage settings item summary that will result in the phone connected to PC and MTP/PTP enabled.   [CHAR LIMIT=80] -->
     <string name="mtp_ptp_mode_summary">MTP or PTP function is active</string>
 
@@ -3498,8 +3531,6 @@
     <string name="storage_menu_forget">Forget</string>
     <!-- Storage setting.  Menu option for setting up a storage device [CHAR LIMIT=30]-->
     <string name="storage_menu_set_up">Set up</string>
-    <!-- Storage setting.  Menu option for exploring a storage device [CHAR LIMIT=30]-->
-    <string name="storage_menu_explore">Explore</string>
     <!-- Storage setting. Menu option for using the deletion helper. [CHAR LIMIT=30] -->
     <string name="storage_menu_free">Free up space</string>
     <!-- Storage setting. Menu option for accessing the storage manager settings. [CHAR LIMIT=30] -->
@@ -3536,14 +3567,10 @@
     <!-- Section header above list of external storage devices [CHAR LIMIT=30]-->
     <string name="storage_external_title">Portable storage</string>
 
-    <!-- Summary of a single storage volume, constrasting available and total storage space. [CHAR LIMIT=48]-->
-    <string name="storage_volume_summary"><xliff:g id="used" example="1.2GB">%1$s</xliff:g> used of <xliff:g id="total" example="32GB">%2$s</xliff:g></string>
     <!-- Summary of a single storage volume used space. [CHAR LIMIT=24] -->
     <string name="storage_size_large"><xliff:g id="number" example="128">^1</xliff:g><small><small> <xliff:g id="unit" example="KB">^2</xliff:g></small></small></string>
     <!-- Summary of a single storage volume total space. [CHAR LIMIT=48]-->
     <string name="storage_volume_used">Used of <xliff:g id="total" example="32GB">%1$s</xliff:g></string>
-    <!-- Summary of a single storage volume total space. [CHAR LIMIT=48]-->
-    <string name="storage_volume_used_total">Total used of <xliff:g id="total" example="32GB">%1$s</xliff:g></string>
 
     <!-- Toast informing that storage mount operation was successful. [CHAR LIMIT=64]-->
     <string name="storage_mount_success"><xliff:g id="name" example="SD card">%1$s</xliff:g> is mounted</string>
@@ -3571,10 +3598,6 @@
     <string name="storage_dialog_unmountable">This <xliff:g id="name" example="SD card">^1</xliff:g> is corrupted.
 \n\nTo use this <xliff:g id="name" example="SD card">^1</xliff:g>, you have to set it up first.</string>
 
-    <!-- Dialog body informing user about an unsupported storage device. [CHAR LIMIT=NONE]-->
-    <string name="storage_dialog_unsupported">This device doesn\u2019t support this <xliff:g id="name" example="SD card">^1</xliff:g>.
-\n\nTo use this <xliff:g id="name" example="SD card">^1</xliff:g> with this device, you have to set it up first.</string>
-
     <!-- Body of dialog informing user about consequences of formatting an internal storage device [CHAR LIMIT=NONE]-->
     <string name="storage_internal_format_details">After formatting, you can use this <xliff:g id="name" example="SD card">^1</xliff:g> in other devices.
 \n\nAll data on this <xliff:g id="name" example="SD card">^1</xliff:g> will be erased. Consider backing up first.
@@ -3598,33 +3621,10 @@
     <!-- Body of dialog confirming that user wants to forget an internal storage device [CHAR LIMIT=NONE]-->
     <string name="storage_internal_forget_confirm">All the apps, photos, and data stored on this <xliff:g id="name" example="SD card">^1</xliff:g> will be lost forever.</string>
 
-    <!-- Item title describing storage used by apps [CHAR LIMIT=48]-->
-    <string name="storage_detail_apps">Apps</string>
     <!-- Item title describing storage used by images [CHAR LIMIT=48]-->
     <string name="storage_detail_images">Images</string>
-    <!-- Item title describing storage used by videos [CHAR LIMIT=48]-->
-    <string name="storage_detail_videos">Videos</string>
-    <!-- Item title describing storage used by audio [CHAR LIMIT=48]-->
-    <string name="storage_detail_audio">Audio</string>
-    <!-- Item title describing storage used by cached data [CHAR LIMIT=48]-->
-    <string name="storage_detail_cached">Cached data</string>
-    <!-- Item title describing storage used by other data [CHAR LIMIT=48]-->
-    <string name="storage_detail_other">Other</string>
-    <!-- Item title describing internal storage used by the Android System [CHAR LIMIT=48]-->
-    <string name="storage_detail_system">System</string>
-    <!-- Item title that will launch a file explorer [CHAR LIMIT=48]-->
-    <string name="storage_detail_explore">Explore <xliff:g id="name" example="SD card">^1</xliff:g></string>
-
-    <!-- Body of dialog informing user about other files on a storage device [CHAR LIMIT=NONE]-->
-    <string name="storage_detail_dialog_other">Other includes shared files saved by apps, files downloaded from the internet or Bluetooth, Android files, and so on.
-\n\nTo see the visible contents of this <xliff:g id="name" example="SD card">^1</xliff:g>, tap Explore.</string>
-
     <!-- Body of dialog informing user about the storage used by the Android System [CHAR LIMIT=NONE]-->
     <string name="storage_detail_dialog_system">System includes files used to run Android version <xliff:g id="version" example="8.0">%s</xliff:g></string>
-
-    <!-- Body of dialog informing user about other users on a storage device [CHAR LIMIT=NONE]-->
-    <string name="storage_detail_dialog_user"><xliff:g id="user" example="Guest user">^1</xliff:g> may have saved photos, music, apps, or other data, using <xliff:g id="size" example="1.2 GB">^2</xliff:g> of storage.
-\n\nTo view details, switch to <xliff:g id="user" example="Guest user">^1</xliff:g>.</string>
 
     <!-- Title of wizard step prompting user to setup a storage device [CHAR LIMIT=32] -->
     <string name="storage_wizard_init_title">Set up your <xliff:g id="name" example="SD card">^1</xliff:g></string>
@@ -4146,7 +4146,7 @@
     <string name="managed_profile_location_switch_title">Location for work profile</string>
     <!-- [CHAR LIMIT=30] Location settings screen. It's a link that directs the user to a page that
       shows the location permission setting for each installed app -->
-    <string name="location_app_level_permissions">Manage location permissions</string>
+    <string name="location_app_level_permissions">App location permissions</string>
     <!-- Summary for app permission on Location settings page when location is off [CHAR LIMIT=NONE] -->
     <string name="location_app_permission_summary_location_off">Location is off</string>
     <!--
@@ -4194,6 +4194,8 @@
     <string name="location_scanning_bluetooth_always_scanning_title">Bluetooth scanning</string>
     <!-- Description text for Bluetooth always scanning -->
     <string name="location_scanning_bluetooth_always_scanning_description">Allow apps and services to scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services.</string>
+    <!-- [CHAR LIMIT=60] Location Services preference title -->
+    <string name="location_services_preference_title">Location services</string>
     <!-- [CHAR LIMIT=60] Location Services screen, screen title -->
     <string name="location_services_screen_title">Location Services</string>
     <!-- [CHAR LIMIT=50] Location settings screen, sub category for location services for managed profile -->
@@ -4320,10 +4322,19 @@
     <string name="settings_safetylegal_activity_loading">Loading\u2026</string>
 
     <!-- Lock Pattern settings -->
-    <!-- Header on first screen of choose password/PIN flow [CHAR LIMIT=40] -->
-    <string name="lockpassword_choose_your_screen_lock_header">Set screen lock</string>
-    <!-- Message on first screen of choose password flow [CHAR LIMIT=NONE] -->
-    <string name="lockpassword_choose_your_password_message">For security, set password</string>
+    <!-- Header on first screen of choose device password flow [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_password_header">Set a password</string>
+    <!-- Header on first screen of choose work profile password flow [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_profile_password_header">Set a work password</string>
+    <!-- Header on first screen of choose device PIN flow [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_pin_header">Set a PIN</string>
+    <!-- Header on first screen of choose work profile PIN flow [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_profile_pin_header">Set a work PIN</string>
+    <!-- Header on first screen of choose device pattern flow [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_pattern_header">Set a pattern</string>
+    <!-- Header on first screen of choose work profile pattern flow [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_profile_pattern_header">Set a work pattern</string>
+
     <!-- Header on first screen of choose password/PIN as backup for fingerprint flow. If this string cannot be translated in under 40 characters, please translate "Set fingerprint backup" [CHAR LIMIT=40] -->
     <string name="lockpassword_choose_your_password_header_for_fingerprint">To use fingerprint, set password</string>
     <!-- Header on first screen of choose pattern as backup for fingerprint flow. If this string cannot be translated in under 40 characters, please translate "Set fingerprint backup" [CHAR LIMIT=40] -->
@@ -4332,10 +4343,10 @@
     <string name="lockpassword_choose_your_pin_message">For security, set PIN</string>
     <!-- Header on first screen of choose password/PIN as backup for fingerprint flow. If this string cannot be translated in under 40 characters, please translate "Set fingerprint backup" [CHAR LIMIT=40] -->
     <string name="lockpassword_choose_your_pin_header_for_fingerprint">To use fingerprint, set PIN</string>
-    <!-- Message on first screen of choose pattern flow [CHAR LIMIT=NONE] -->
-    <string name="lockpassword_choose_your_pattern_message">For security, set pattern</string>
     <!-- Header on password confirm screen [CHAR LIMIT=40] -->
     <string name="lockpassword_confirm_your_password_header">Re-enter your password</string>
+    <!-- Header on work profile password confirm screen [CHAR LIMIT=40] -->
+    <string name="lockpassword_reenter_your_profile_password_header">Re-enter your work password</string>
     <!-- Header on password confirm screen for the work profile [CHAR LIMIT=40] -->
     <string name="lockpassword_confirm_your_work_password_header">Enter your work password</string>
     <!-- Header on pattern confirm screen [CHAR LIMIT=30] -->
@@ -4344,6 +4355,8 @@
     <string name="lockpassword_confirm_your_work_pattern_header">Enter your work pattern</string>
     <!-- Header on password confirm screen [CHAR LIMIT=40] -->
     <string name="lockpassword_confirm_your_pin_header">Re-enter your PIN</string>
+    <!-- Header on work profile password confirm screen [CHAR LIMIT=40] -->
+    <string name="lockpassword_reenter_your_profile_pin_header">Re-enter your work PIN</string>
     <!-- Header on password confirm screen for the work profile [CHAR LIMIT=40] -->
     <string name="lockpassword_confirm_your_work_pin_header">Enter your work PIN</string>
     <!-- Header on password confirm screen if second password doesn't match the first. [CHAR LIMIT=30] -->
@@ -5510,7 +5523,7 @@
     <!-- Summary shown for tritanomaly (blue-yellow color blindness) [CHAR LIMIT=45] -->
     <string name="daltonizer_mode_tritanomaly_summary">Blue-yellow</string>
 
-    <!-- Title for the accessibility preference of the Reduce Brightness feature. [CHAR LIMIT=NONE] -->
+    <!-- Title for the accessibility preference of the Extra Dim/Reduce Brightness feature that dims your screen. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_preference_title">Extra dim</string>
     <!-- Title for the activation switch of the Reduce Brightness feature. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_switch_title">Make screen extra dim</string>
@@ -5752,14 +5765,53 @@
     <!-- Title for the prompt shown as a placeholder if no accessibility services are installed. [CHAR LIMIT=50] -->
     <string name="accessibility_no_services_installed">No services installed</string>
 
-    <!-- Title for the acccessibility shortcut's summary if no service is selected for use with the shortcut. [CHAR LIMIT=50] -->
+    <!-- Title for the accessibility shortcut's summary if no service is selected for use with the shortcut. [CHAR LIMIT=50] -->
     <string name="accessibility_no_service_selected">No service selected</string>
 
     <!-- Default description for an accessibility service if the latter doesn't provide one. [CHAR LIMIT=NONE] -->
     <string name="accessibility_service_default_description">No description provided.</string>
 
-    <!-- Accessibility settings: button for lauching settings for an accessibility service -->
+    <!-- Accessibility settings: button for launching settings for an accessibility service -->
     <string name="settings_button">Settings</string>
+
+    <!-- List of synonyms used in the settings search bar to find the “Extra Dim” setting, which dims your screen. Title name is located at strings/reduce_bright_colors_preference_title. [CHAR LIMIT=NONE] -->
+    <string name="keywords_reduce_bright_colors">light sensitivity, photophobia, dark theme, migraine, headache, reading mode, night mode, reduce brightness, white point</string>
+    <!-- List of synonyms used in the settings search bar to find the “Accessibility”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_accessibility">Ease of use, ease of access, assistance, assistive</string>
+    <!-- List of synonyms used in the settings search bar to find the “Magnification”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_magnification">Window Magnifier, Zoom, Magnification, Low vision, Enlarge, make bigger</string>
+    <!-- List of synonyms used in the settings search bar to find the “TalkBack”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_talkback">Screen reader, Voice Over, VoiceOver, Voice Assistance, Blind, Low Vision, TTS, text to speech, spoken feedback</string>
+    <!-- List of synonyms used in the settings search bar to find the “Live Caption”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_live_caption">Captions, closed captions, CC, Live Transcribe, hard of hearing, hearing loss, CART, speech to text, subtitle</string>
+    <!-- List of synonyms used in the settings search bar to find the “Live Transcribe”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_live_transcribe">Captions, closed captions, CC, Live Caption, hard of hearing, hearing loss, CART, speech to text, subtitle</string>
+    <!-- List of synonyms used in the settings search bar to find the “Sound Notifications”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_sound_notifications">Notifications, hard of hearing, hearing loss, notify</string>
+    <!-- List of synonyms used in the settings search bar to find the “Sound Amplifier”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_sound_amplifier">PSAP, amplify, sound amplification, hard of hearing, hearing loss, amplification</string>
+    <!-- List of synonyms used in the settings search bar to find the “Display size”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_display_size">screen size, large screen</string>
+    <!-- List of synonyms used in the settings search bar to find the “Bold text”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_bold_text">High contrast, low vision, bold font, bold face</string>
+    <!-- List of synonyms used in the settings search bar to find the “Select to Speak”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_select_to_speak">Hear text, read aloud, speak screen, screen reader</string>
+    <!-- List of synonyms used in the settings search bar to find the “Color correction”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_color_correction">adjust color </string>
+    <!-- List of synonyms used in the settings search bar to find the “Color inversion”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_color_inversion">turn screen dark, turn screen light</string>
+    <!-- List of synonyms used in the settings search bar to find the “Accessibility Menu”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_accessibility_menu">motor, quick menu, assistive menu, touch, dexterity</string>
+    <!-- List of synonyms used in the settings search bar to find the “Switch Access”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_switch_access">motor, switch, hand, AT, assistive technology, paralysis, ALS, scanning, step scanning</string>
+    <!-- List of synonyms used in the settings search bar to find the “Autoclick(dwell timing)”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_auto_click">motor, mouse</string>
+    <!-- List of synonyms used in the settings search bar to find the “Hearing aids”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_hearing_aids">hard of hearing, hearing loss</string>
+    <!-- List of synonyms used in the settings search bar to find the “Real-time text (RTT)”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_rtt">hard of hearing, hearing loss, captions, Teletype, tty</string>
+    <!-- List of synonyms used in the settings search bar to find the “Voice Access”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_voice_access">voice, voice control, motor, hand, mic, microphone, dictation, talk, control</string>
 
     <!-- Printing settings -->
     <skip />
@@ -5873,6 +5925,11 @@
     <!-- Display time remaining until battery is charged [CHAR_LIMIT=60] -->
     <string name="power_charge_remaining"><xliff:g id="until_charged">%1$s</xliff:g> to charge</string>
 
+    <!-- Description of battery state and remaining time (e.g. Charging rapidly • 1hr 23 min left until full)-->
+    <string name="battery_state_and_duration" translatable="false"><xliff:g id="state">%1$s</xliff:g> • <xliff:g id="time">%2$s</xliff:g></string>
+    <!-- Summary for the low battery state [CHAR LIMIT=NONE] -->
+    <string name="low_battery_summary">Low battery</string>
+
     <!-- Title for the background activity setting, which allows a user to control whether an app can run in the background [CHAR_LIMIT=40] -->
     <string name="background_activity_title">Background restriction</string>
     <!-- Summary for the background activity [CHAR_LIMIT=120] -->
@@ -5887,6 +5944,21 @@
     <string name="background_activity_warning_dialog_text">If you limit background activity for an app, it may misbehave</string>
     <!-- Dialog message when app can't been restricted because it is not optimized [CHAR_LIMIT=120] -->
     <string name="background_activity_disabled_dialog_text">Since this app is not set to optimize battery, you can\u2019t restrict it.\n\nTo restrict the app, first turn on battery optimization.</string>
+
+    <!-- Title for the battery unrestricted settings [CHAR_LIMIT=40] -->
+    <string name="manager_battery_usage_unrestricted_title">Unrestricted</string>
+    <!-- Title for the battery optimized settings [CHAR_LIMIT=40] -->
+    <string name="manager_battery_usage_optimized_title">Optimized</string>
+    <!-- Summary for the battery unrestricted settings [CHAR_LIMIT=NONE] -->
+    <string name="manager_battery_usage_unrestricted_summary">Allow battery usage in background without restrictions. May use more battery.</string>
+    <!-- Summary for the battery optimized settings [CHAR_LIMIT=NONE] -->
+    <string name="manager_battery_usage_optimized_summary">Optimize based on your usage. Recommended for most apps.</string>
+    <!-- Summary for the battery restricted settings [CHAR_LIMIT=NONE] -->
+    <string name="manager_battery_usage_restricted_summary">Restrict battery usage while in background. App may not work as expected. Notifications may be delayed.</string>
+    <!-- Footer for the manage battery usage page [CHAR_LIMIT=NONE] -->
+    <string name="manager_battery_usage_footer">Changing how an app uses your battery can affect its performance.</string>
+    <!-- Footer for the manage battery usage page when app is limited to specific option (e.g This app requires restricted battery usage) [CHAR_LIMIT=NONE] -->
+    <string name="manager_battery_usage_footer_limited">This app requires <xliff:g id="state" example="restricted">%1$s</xliff:g> battery usage.</string>
 
     <!-- Title for the screen usage in power use UI [CHAR_LIMIT=60] -->
     <string name="device_screen_usage">Screen usage since full charge</string>
@@ -5960,15 +6032,11 @@
     <!-- Summary for the battery summary tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_summary_summary" product="device">Device has typical background battery usage</string>
     <!-- Title for the low battery tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_low_battery_title">Low battery capacity</string>
+    <string name="battery_tip_low_battery_title">Battery level low</string>
     <!-- Summary for the low battery tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_low_battery_summary">Battery can\'t provide good battery life</string>
+    <string name="battery_tip_low_battery_summary">Turn on Battery Saver to extend battery life</string>
     <!-- Title for the smart battery tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_smart_battery_title" product="default">Improve your phone\'s battery life</string>
-    <!-- Title for the smart battery tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_smart_battery_title" product="tablet">Improve your tablet\'s battery life</string>
-    <!-- Title for the smart battery tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_smart_battery_title" product="device">Improve your device\'s battery life</string>
+    <string name="battery_tip_smart_battery_title">Improve battery life</string>
     <!-- Summary for the smart battery tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_smart_battery_summary">Turn on Battery Manager</string>
     <!-- Title for the early heads up tip [CHAR LIMIT=NONE] -->
@@ -5980,17 +6048,13 @@
     <!-- Summary when early heads up is solved [CHAR LIMIT=NONE] -->
     <string name="battery_tip_early_heads_up_done_summary">Some features may be limited</string>
     <!-- Title for the battery high usage tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_high_usage_title" product="default">Phone used more than usual</string>
-    <!-- Title for the battery high usage tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_high_usage_title" product="tablet">Tablet used more than usual</string>
-    <!-- Title for the battery high usage tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_high_usage_title" product="device">Device used more than usual</string>
-    <!-- Summary for the battery high usage tip, which presents battery may run out earlier [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_high_usage_summary">Battery may run out earlier than usual</string>
+    <string name="battery_tip_high_usage_title">Higher battery usage</string>
+    <!-- Summary for the battery high usage tip, which presents apps with highest usage [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_high_usage_summary">See apps with highest usage</string>
     <!-- Title for the battery limited temporarily tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_limited_temporarily_title">Optimizing for battery health</string>
     <!-- Summary for the battery limited temporarily tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_limited_temporarily_summary">Battery limited temporarily. Tap to learn more.</string>
+    <string name="battery_tip_limited_temporarily_summary">Battery limited temporarily. Learn more.</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
     <string name="battery_tip_dialog_message" product="default">Your phone has been used more than usual. Your battery may run out sooner than expected.\n\nTop apps by battery usage:</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
@@ -6091,9 +6155,9 @@
     <string name="battery_header_title_alternate"><xliff:g id="number" example="88">^1</xliff:g><small> <font size="20"><xliff:g id="unit" example="%">%</xliff:g></font></small></string>
 
     <!-- Summary for top level battery tile if battery is not present. [CHAR LIMIT=NONE] -->
-    <string name="battery_missing_message">Problem reading your battery meter</string>
-    <!-- Summary to battery page if battery is not present. [CHAR LIMIT=NONE] -->
-    <string name="battery_missing_help_message">Problem reading your battery meter. Tap to <annotation id="url">learn more</annotation></string>
+    <string name="battery_missing_message">Can’t update battery info</string>
+    <!-- Help text if battery is not present. [CHAR LIMIT=NONE] -->
+    <string name="battery_missing_link_message"></string>
 
     <!-- Title for force stop dialog [CHAR LIMIT=30] -->
     <string name="dialog_stop_title">Stop app?</string>
@@ -6305,6 +6369,39 @@
     <!-- Title for the battery management group [CHAR LIMIT=40] -->
     <string name ="battery_detail_manage_title">Manage battery usage</string>
 
+    <!-- Description for battery total and background usage time for an app, i.e. 1 hr 15 min total • 39 min background for past 24 hr. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
+    <string name="battery_total_and_background_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • <xliff:g id="time" example="39 min">^2</xliff:g> background for past 24 hr</string>
+    <!-- Description for battery total and background usage time in a time period for an app, i.e. 1 hr 15 min total • 39 min background for 12 am-2 am. Note: ^1, ^2 and ^3 should be used in all translations [CHAR LIMIT=120] -->
+    <string name="battery_total_and_background_usage_with_period"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • <xliff:g id="time" example="39 min">^2</xliff:g> background for <xliff:g id="time_period" example="12 am-2 am">^3</xliff:g></string>
+
+    <!-- Description for battery total usage time is less than a minute for an app [CHAR LIMIT=120] -->
+    <string name="battery_total_usage_less_minute">Total less than a minute for past 24 hr</string>
+    <!-- Description for battery total usage time is less than a minute in a time period for an app, i.e. Total less than a minute for 12 am-2 am. Note: ^1 should be used in all translations[CHAR LIMIT=120] -->
+    <string name="battery_total_usage_less_minute_with_period">Total less than a minute for <xliff:g id="time_period" example="12 am-2 am">^1</xliff:g></string>
+
+    <!-- Description for battery background usage time is less than a minute for an app [CHAR LIMIT=120] -->
+    <string name="battery_background_usage_less_minute">Background less than a minute for past 24 hr</string>
+    <!-- Description for battery background usage time is less than a minute in a time period for an app, i.e. Background less than a minute for 12 am-2 am. Note: ^1 should be used in all translations[CHAR LIMIT=120] -->
+    <string name="battery_background_usage_less_minute_with_period">Background less than a minute for <xliff:g id="time_period" example="12 am-2 am">^1</xliff:g></string>
+
+    <!-- Description for battery total usage time for an app, i.e. 1 hr 15 min total for past 24 hr. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
+    <string name="battery_total_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total for past 24 hr</string>
+    <!-- Description for battery total usage time in a time period for an app, i.e. 1 hr 15 min total for 12 am-2 am. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
+    <string name="battery_total_usage_with_period"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total for <xliff:g id="time_period" example="12 am-2 am">^2</xliff:g></string>
+
+    <!-- Description for battery background usage time for an app, i.e. 1 hr 15 min background for past 24 hr. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
+    <string name="battery_background_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> background for past 24 hr</string>
+    <!-- Description for battery background usage time in a time period for an app, i.e. 1 hr 15 min background for 12 am-2 am. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
+    <string name="battery_background_usage_with_period"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> background for <xliff:g id="time_period" example="12 am-2 am">^2</xliff:g></string>
+
+    <!-- Description for battery total usage with background usage time less than a minute for an app, i.e. 1 hr 15 min total • background less than a minute for past 24 hr. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
+    <string name="battery_total_usage_and_background_less_minute_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • background less than a minute for past 24 hr</string>
+    <!-- Description for battery total usage with background usage time less than a minute in a time period for an app, i.e. 1 hr 15 min total • background less than a minute for 12 am-2 am. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
+    <string name="battery_total_usage_and_background_less_minute_usage_with_period"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • background less than a minute for <xliff:g id="time_period" example="12 am-2 am">^2</xliff:g></string>
+
+    <!-- Description for no any battery usage for past 24 hr [CHAR LIMIT=120] -->
+    <string name="battery_not_usage">No usage for past 24 hr</string>
+
     <!-- Graph subtext displayed to user when enhanced battery estimate is being used [CHAR LIMIT=120] -->
     <string name="advanced_battery_graph_subtext">Battery left estimate is based on your device usage</string>
 
@@ -6394,6 +6491,30 @@
     <!-- [CHAR_LIMIT=NONE] Battery percentage: Description for preference -->
     <string name="battery_percentage_description">Show battery percentage in status bar</string>
 
+    <!-- [CHAR_LIMIT=NONE] Battery usage main screen chart graph hint -->
+    <string name="battery_usage_chart_graph_hint">Battery level for past 24 hr</string>
+    <!-- [CHAR_LIMIT=NONE] Battery app usage section header for past 24 hour -->
+    <string name="battery_app_usage_for_past_24">App usage for past 24 hr</string>
+    <!-- [CHAR_LIMIT=NONE] Battery system usage section header for past 24 hour -->
+    <string name="battery_system_usage_for_past_24">System usage for past 24 hr</string>
+    <!-- [CHAR_LIMIT=NONE] Battery system usage section header -->
+    <string name="battery_system_usage_for">System usage for</string>
+    <!-- [CHAR_LIMIT=NONE] Battery app usage section header -->
+    <string name="battery_app_usage_for">App usage for</string>
+    <!-- [CHAR_LIMIT=NONE] Battery usage section header for a specific time slot -->
+    <string name="battery_usage_time_am">am</string>
+    <!-- [CHAR_LIMIT=NONE] Battery usage section header for a specific time slot -->
+    <string name="battery_usage_time_pm">pm</string>
+    <!-- [CHAR_LIMIT=NONE] Battery usage item for total usage time less than a minute -->
+    <string name="battery_usage_total_less_than_one_minute">Total: less than a min</string>
+    <!-- [CHAR_LIMIT=NONE] Battery usage item for total background time less than a minute -->
+    <string name="battery_usage_background_less_than_one_minute">Background: less than a min</string>
+    <!-- [CHAR_LIMIT=NONE] Battery usage item for total usage time -->
+    <string name="battery_usage_for_total_time">Total: <xliff:g id="time">%s</xliff:g></string>
+    <!-- [CHAR_LIMIT=NONE] Battery usage item for background usage time -->
+    <string name="battery_usage_for_background_time">Background: <xliff:g id="time">%s</xliff:g></string>
+    <!-- [CHAR_LIMIT=NONE] Battery usage main screen footer contentt -->
+    <string name="battery_usage_screen_footer">Battery usage data is approximate</string>
     <!-- Process Stats strings -->
     <skip />
 
@@ -6539,8 +6660,10 @@
     <string name="vpn_settings_title">VPN</string>
     <!-- Title of preference to enter the VPN settings activity [CHAR LIMIT=30] -->
     <string name="vpn_settings_insecure_single">Not secure</string>
-    <!-- Title of preference to enter the VPN settings activity [CHAR LIMIT=30] -->
-    <string name="vpn_settings_insecure_multiple"><xliff:g id="vpn_count" example="1">%d</xliff:g> not secure</string>
+    <!-- Title of preference to enter the VPN settings activity, if there are multiple vpns but only 1 insecure vpn [CHAR LIMIT=60] -->
+    <string name="vpn_settings_single_insecure_multiple_total"><xliff:g id="vpn_count" example="1">%d</xliff:g> not secure</string>
+    <!-- Title of preference to enter the VPN settings activity, if there are multiple vpns and multiple insecure vpns [CHAR LIMIT=60] -->
+    <string name="vpn_settings_multiple_insecure_multiple_total"><xliff:g id="vpn_count" example="1">%d</xliff:g> not secure</string>
 
     <!-- Title of Adaptive connectivity. Adaptive connectivity is a feature which automatically manages network connections for better battery life and performance. [CHAR LIMIT=60] -->
     <string name="adaptive_connectivity_title">Adaptive connectivity</string>
@@ -6618,6 +6741,11 @@
     <string name="certificate_management_app_description">Certificates installed by this app identify you to the apps and URLs below</string>
     <!-- Label for button to remove the credential management app [CHAR LIMIT=30] -->
     <string name="remove_credential_management_app">Remove</string>
+    <!-- List item found in the credential management app's authentication policy [CHAR LIMIT=NONE] -->
+    <plurals name="number_of_urls">
+        <item quantity="one"><xliff:g id="number">%d</xliff:g> URL</item>
+        <item quantity="other"><xliff:g id="number">%d</xliff:g> URLs</item>
+    </plurals>
 
     <!-- Sound settings screen, setting check box label -->
     <string name="emergency_tone_title">Emergency dialing signal</string>
@@ -7196,9 +7324,9 @@
     <!-- Preference summary for app not supporting always-on VPN [CHAR LIMIT=40] -->
     <string name="vpn_always_on_summary_not_supported">Not supported by this app</string>
     <!-- Preference summary for a VPN app that is set to be always-on. [CHAR LIMIT=40]  -->
-    <string name="vpn_always_on_summary_active">Always-on active</string>
+    <string name="vpn_always_on_summary_active">Always on</string>
     <!-- Preference summary for a VPN app that has an insecure type. [CHAR LIMIT=40]  -->
-    <string name="vpn_insecure_summary">not secure VPN</string>
+    <string name="vpn_insecure_summary">Not secure</string>
     <!-- Preference title for the toggle that controls whether to force all network connections to
         go through VPN. [CHAR LIMIT=40] -->
     <string name="vpn_require_connection">Block connections without VPN</string>
@@ -7207,7 +7335,7 @@
     <string name="vpn_require_connection_title">Require VPN connection?</string>
 
     <!-- Dialog subtitle warning for a VPN app that has an insecure type. [CHAR LIMIT=100]  -->
-    <string name="vpn_insecure_dialog_subtitle">This VPN is not secure. Update to an IKEv2 VPN</string>
+    <string name="vpn_insecure_dialog_subtitle">Not secure. Update to an IKEv2 VPN</string>
 
     <!-- Summary describing the always-on VPN feature. [CHAR LIMIT=NONE] -->
     <string name="vpn_lockdown_summary">Select a VPN profile to always remain connected to. Network traffic will only be allowed when connected to this VPN.</string>
@@ -7923,7 +8051,7 @@
     <!-- Toast shown when an app in the work profile attempts to open notification settings. The apps in the work profile cannot access notification settings. [CHAR LIMIT=NONE] -->
     <string name="notification_settings_work_profile">Notification access is not available for apps in the work profile.</string>
     <!-- Title for setting tile leading to saved autofill passwords, autofill, and account settings [CHAR LIMIT=40]-->
-    <string name="account_dashboard_title">Passwords and accounts</string>
+    <string name="account_dashboard_title">Passwords &amp; accounts</string>
     <!-- Summary for setting tile leading to saved autofill passwords, autofill, and account settings [CHAR LIMIT=NONE]-->
     <string name="account_dashboard_default_summary">Saved passwords, autofill, synced accounts</string>
     <!-- Title for setting tile leading to setting UI which allows user set default app to
@@ -7968,7 +8096,7 @@
     <string name="keywords_wifi_calling">wifi, wi-fi, call, calling</string>
     <string name="keywords_display">screen, touchscreen</string>
     <string name="keywords_display_brightness_level">dim screen, touchscreen, battery, bright</string>
-    <string name="keywords_display_night_display">dim screen, night, tint, night shift, brightness, screen color, colour, color</string>
+    <string name="keywords_display_night_display">dim screen, night, tint, night shift, brightness, screen color, colour, color, light sensitivity, photophobia, make darker, darken, dark mode, migraine</string>
     <string name="keywords_display_wallpaper">background, personalize, customize display</string>
     <string name="keywords_display_font_size">text size</string>
     <!-- Search keyword for "Cast" settings [CHAR_LIMIT=NONE]-->
@@ -8008,6 +8136,7 @@
     <string name="keywords_backup">backup, back up</string>
     <string name="keywords_assist_gesture_launch">gesture</string>
     <string name="keywords_face_unlock">face, unlock, auth, sign in</string>
+    <string name="keywords_biometric_unlock">face, unlock, auth, sign in, fingerprint, biometric</string>
     <string name="keywords_imei_info">imei, meid, min, prl version, imei sv</string>
     <string name="keywords_sim_status">network, mobile network state, service state, signal strength, mobile network type, roaming, iccid, eid</string>
     <string name="keywords_model_and_hardware">serial number, hardware version</string>
@@ -8032,6 +8161,9 @@
 
     <!-- Search keyword for fingerprint settings. [CHAR_LIMIT=NONE]-->
     <string name="keywords_fingerprint_settings">fingerprint, add fingerprint</string>
+
+    <!-- Search keyword for biometric settings. [CHAR_LIMIT=NONE]-->
+    <string name="keywords_biometric_settings">face, fingerprint, add fingerprint</string>
 
     <!-- Search keywords for adaptive brightness setting [CHAR LIMIT=NONE]-->
     <string name="keywords_display_auto_brightness">dim screen, touchscreen, battery, smart brightness, dynamic brightness, Auto brightness</string>
@@ -8094,7 +8226,7 @@
     <string name="keywords_add_language">add language, add a language</string>
 
     <!-- List of synonyms for the font size, used to match in settings search [CHAR LIMIT=NONE] -->
-    <string name="keywords_font_size">text size</string>
+    <string name="keywords_font_size">text size, large print, large font, large text, low vision, make text bigger, font enlarger, font enlargement</string>
 
     <!-- Option title for the default sound, context based on screen -->
     <string name="default_sound">Default sound</string>
@@ -8510,7 +8642,7 @@
     <string name="work_use_personal_sounds_title">Use personal profile sounds</string>
 
     <!--  Work Sound: Summary for the switch that enables syncing of personal ringtones to work profile. [CHAR LIMIT=160] -->
-    <string name="work_use_personal_sounds_summary">Sounds are the same for work and personal profiles</string>
+    <string name="work_use_personal_sounds_summary">Use the same sounds as your personal profile</string>
 
     <!-- Work Sounds: Title for the option defining the work phone ringtone. [CHAR LIMIT=60] -->
     <string name="work_ringtone_title">Work phone ringtone</string>
@@ -8525,13 +8657,13 @@
     <string name="work_sound_same_as_personal">Same as personal profile</string>
 
     <!-- Work Sound: Title for dialog shown when enabling sync with personal sounds. [CHAR LIMIT=60] -->
-    <string name="work_sync_dialog_title">Replace sounds?</string>
+    <string name="work_sync_dialog_title">Use personal profile sounds?</string>
 
     <!-- Work Sound: Confirm action text for dialog shown when overriding work notification sounds with personal sounds. [CHAR LIMIT=30] -->
-    <string name="work_sync_dialog_yes">Replace</string>
+    <string name="work_sync_dialog_yes">Confirm</string>
 
     <!-- Work Sound: Message for dialog shown when using the same sounds for work events as for personal events (notifications / ringtones / alarms). [CHAR LIMIT=none] -->
-    <string name="work_sync_dialog_message">Your personal profile sounds will be used for your work profile</string>
+    <string name="work_sync_dialog_message">Your work profile will use the same sounds as your personal profile</string>
 
     <!-- Sound installation: Title for the dialog to confirm that a new sound will be installed to the Ringtones, Notifications, or Alarms folder. [CHAR LIMIT=50] -->
     <string name="ringtones_install_custom_sound_title">Add custom sound?</string>
@@ -9020,8 +9152,10 @@
         <item quantity="other">%d apps can read notifications</item>
     </plurals>
 
-    <!-- Title for Notification Assistant Picker screen [CHAR LIMIT=30]-->
-    <string name="notification_assistant_title">Adaptive Notifications</string>
+    <!-- Title for Notification Assistant setting  [CHAR LIMIT=30]-->
+    <string name="notification_assistant_title">Enhanced notifications</string>
+    <!-- Summary of Notification Assistant provided features [CHAR LIMIT=NONE]-->
+    <string name="notification_assistant_summary">Get suggested actions, replies, and more</string>
 
     <!-- Label for no NotificationAssistantService [CHAR_LIMIT=NONE] -->
     <string name="no_notification_assistant">None</string>
@@ -9037,12 +9171,13 @@
     <string name="notification_assistant_security_warning_title">Allow notification access for
          <xliff:g id="service" example="NotificationAssistant">%1$s</xliff:g>?</string>
     <!-- Summary for a warning message about security implications of enabling a notification
-          listener, displayed as a dialog message. [CHAR LIMIT=NONE] -->
+          assistant, displayed as a dialog message. [CHAR LIMIT=NONE] -->
     <string name="notification_assistant_security_warning_summary">
-        <xliff:g id="notification_assistant_name" example="Notification Assistant">%1$s</xliff:g> will be able to read all notifications,
-        including personal information such as contact names and the text of messages you receive.
-        This app will also be able to dismiss notifications or take action on buttons in notifications, including answering phone calls.
-        \n\nThis will also give the app the ability to turn Do Not Disturb on or off and change related settings.
+        Enhanced notifications replaced Android Adaptive Notifications in Android 12.
+        This feature shows suggested actions and replies, and organizes your notifications.
+        \n\nEnhanced notifications can access notification content, including personal information
+        like contact names and messages. This feature can also dismiss or respond to notifications,
+        such as answering phone calls and controlling Do Not Disturb.
     </string>
 
     <!-- Title for a warning message about security implications of enabling a notification
@@ -9071,11 +9206,16 @@
     <string name="notif_type_alerting_summary">Notifications that may ring or vibrate based on settings</string>
     <string name="notif_type_silent">Silent</string>
     <string name="notif_type_silent_summary">Notifications that never make sound or vibrations</string>
+    <!-- category header for apps allowed to read notifications. [CHAR LIMIT=45] -->
+    <string name="notification_listener_allowed">Allowed</string>
+    <!-- category header for apps not allowed to read notifications. [CHAR LIMIT=45] -->
+    <string name="notification_listener_not_allowed">Not allowed</string>
 
     <!-- Per notification listener, a list of apps whose notifications this listener cannot see -->
     <string name="notif_listener_excluded_app_title">See all apps</string>
     <string name="notif_listener_excluded_app_summary">Change notification settings for each app that can send notifications</string>
     <string name="notif_listener_excluded_app_screen_title">Apps shown on device</string>
+    <string name="notif_listener_not_migrated">This app doesn\u2019t support enhanced settings</string>
 
     <!-- Title for managing VR (virtual reality) helper services. [CHAR LIMIT=50] -->
     <string name="vr_listeners_title">VR helper services</string>
@@ -9756,6 +9896,11 @@
     <string name="switch_on_text">On</string>
     <string name="switch_off_text">Off</string>
 
+
+    <!-- The subtext when screen pinning feature is enabled. [CHAR LIMIT=28] -->
+    <string name="screen_pinning_switch_on_text">On</string>
+    <!-- The subtext when screen pinning feature is disabled. [CHAR LIMIT=28] -->
+    <string name="screen_pinning_switch_off_text">Off</string>
     <!-- [CHAR LIMIT=28] Screen pinning title -->
     <string name="screen_pinning_title">App pinning</string>
     <!-- [CHAR LIMIT=none] Screen pinning introduction -->
@@ -9919,6 +10064,8 @@
     </plurals>
     <!-- OK button for verified links dialog. [CHAR LIMIT=20] -->
     <string name="app_launch_dialog_ok">OK</string>
+    <!-- Info icon description of the verified links. [CHAR LIMIT=NONE] -->
+    <string name="app_launch_verified_links_info_description">Show verified links list</string>
 
     <!-- Title for Checking other supported links dialog. [CHAR LIMIT=50] -->
     <string name="app_launch_checking_links_title">Checking for other supported links\u2026</string>
@@ -10011,6 +10158,12 @@
 
     <!-- Runtime permissions preference summary, which describes what the permission manager does. [CHAR LIMIT=NONE] -->
     <string name="runtime_permissions_summary_control_app_access">Control app access to your data</string>
+
+    <!-- Permissions usage title [CHAR LIMIT=NONE] -->
+    <string name="permissions_usage_title">Privacy dashboard</string>
+
+    <!-- Permissions usage summary, which describes what the permissions usage does [CHAR LIMIT=NONE] -->
+    <string name="permissions_usage_summary">Show which apps recently used permissions</string>
 
     <!-- Label for showing apps that have not been used for months. [CHAR LIMIT=40]-->
     <string name="unused_apps">Unused apps</string>
@@ -10545,9 +10698,9 @@
     <!-- Media management apps settings title [CHAR LIMIT=40] -->
     <string name="media_management_apps_title">Media management apps</string>
     <!-- Label for a setting which controls whether an app can manage media files [CHAR LIMIT=45] -->
-    <string name="media_management_apps_toggle_label">Allow app to manage media files</string>
+    <string name="media_management_apps_toggle_label">Allow app to manage media</string>
     <!-- Description for a setting which controls whether an app can manage media files [CHAR LIMIT=NONE] -->
-    <string name="media_management_apps_description">If allowed, this app can modify or delete media files on this device or connected storage device without asking you. App must have permission to access files and media.</string>
+    <string name="media_management_apps_description">If allowed, this app can modify or delete media files created with other apps without asking you. App must have permission to access files and media.</string>
     <!-- Search keywords for media management apps settings [CHAR_LIMIT=NONE] -->
     <string name="keywords_media_management_apps">Media, File, Management, Manager, Manage, Edit, Editor, App, Application, Program</string>
 
@@ -11497,19 +11650,22 @@
     <string name="emergency_gesture_screen_title">Emergency SOS</string>
 
     <!-- Preference title to enable feature for calling emergency services at panic/distress moments[CHAR_LIMIT=60]-->
-    <string name="emergency_gesture_switchbar_title">Use emergency SOS</string>
+    <string name="emergency_gesture_switchbar_title">Use Emergency SOS</string>
 
     <!-- Preference summary to enable feature for calling emergency services at panic/distress moments[CHAR_LIMIT=60]-->
     <string name="emergency_gesture_entrypoint_summary">Managed by <xliff:g id="app_name" example="Emergency Info">%1$s</xliff:g></string>
 
     <!-- Preference summary to enable feature for calling emergency services at panic/distress moments[CHAR_LIMIT=NONE]-->
-    <string name="emergency_gesture_screen_summary">Start the actions below by pressing the power button quickly 5 times or more</string>
+    <string name="emergency_gesture_screen_summary">Press the Power button quickly 5 times or more to start the actions below</string>
 
     <!-- Preference title to enable generating noisy sound before calling emergency services at panic/distress moments[CHAR_LIMIT=60]-->
     <string name="emergency_gesture_sound_setting_title">Play countdown alarm</string>
 
     <!-- Preference summary to enable generating noisy sound before calling emergency services at panic/distress moments[CHAR_LIMIT=NONE]-->
-    <string name="emergency_gesture_sound_setting_summary">Play a loud sound before notifying for help</string>
+    <string name="emergency_gesture_sound_setting_summary">Play a loud sound when Emergency SOS is starting</string>
+
+    <!-- Preference category title listing a phone number to call during emergency gesture [CHAR_LIMIT=60]-->
+    <string name="emergency_gesture_category_call_for_help_title">Notify for help</string>
 
     <!-- Preference title listing a phone number to call during emergency gesture [CHAR_LIMIT=60]-->
     <string name="emergency_gesture_call_for_help_title">Call for help</string>
@@ -11523,7 +11679,7 @@
     <!-- Notes explaining limitations for emergency gesture number override [CHAR_LIMIT=NONE]-->
     <string name="emergency_gesture_number_override_notes">
         If you enter a non-emergency number:\n
-        • Your device must be unlocked to use emergency SOS\n
+        • Your device must be unlocked to use Emergency SOS\n
         • Your call may not be answered
     </string>
 
@@ -11803,7 +11959,7 @@
     <!-- Summary of a single storage volume used space. [CHAR LIMIT=24] -->
     <string name="storage_usage_summary"><xliff:g id="number" example="128">%1$s</xliff:g> <xliff:g id="unit" example="KB">%2$s</xliff:g> used</string>
     <!-- Summary of a single storage volume total space. [CHAR LIMIT=24] -->
-    <string name="storage_total_summary">Total <xliff:g id="number" example="128">%1$s</xliff:g> <xliff:g id="unit" example="KB">%2$s</xliff:g></string>
+    <string name="storage_total_summary"><xliff:g id="number" example="128">%1$s</xliff:g> <xliff:g id="unit" example="KB">%2$s</xliff:g> total</string>
 
     <!-- Label for button allow user to remove the instant app from the device. -->
     <string name="clear_instant_app_data">Clear app</string>
@@ -12584,6 +12740,8 @@
     <string name="sim_action_restart_text">To get started, restart your device. Then you can add another SIM.</string>
     <!-- Button on a dialog to confirm SIM operations. [CHAR LIMIT=30] -->
     <string name="sim_action_continue">Continue</string>
+    <!-- Button on a dialog to confirm SIM operations. [CHAR LIMIT=30] -->
+    <string name="sim_action_yes">Yes</string>
     <!-- User confirms reboot the phone. [CHAR LIMIT=30] -->
     <string name="sim_action_reboot">Restart</string>
     <!-- Button on a dialog to reject SIM operations. [CHAR LIMIT=30] -->
@@ -12897,9 +13055,6 @@
     <!-- Developer settings: text for the bug report handler selection toast shown if an invalid bug report handler was chosen. [CHAR LIMIT=NONE] -->
     <string name="select_invalid_bug_report_handler_toast_text">This choice is no longer valid. Try again.</string>
 
-    <!-- Device controls name sentence case [CHAR LIMIT=40] -->
-    <string name="device_controls_sentence">Device controls</string>
-
     <!-- Device controls name lower case [CHAR LIMIT=40] -->
     <string name="quick_controls_lower">device controls</string>
 
@@ -12917,12 +13072,6 @@
 
     <!-- Power menu setting option cards and passes [CHAR LIMIT=NONE] -->
     <string name="power_menu_cards_passes">Show cards &amp; passes</string>
-
-    <!-- Power menu setting option device controls [CHAR LIMIT=NONE] -->
-    <string name="power_menu_device_controls">Show device controls</string>
-
-    <!-- Power menu setting option cards, passes, device controls [CHAR LIMIT=NONE] -->
-    <string name="power_menu_cards_passes_device_controls">Show cards, passes, and device controls</string>
 
     <!-- Power menu setting lock screen category name [CHAR LIMIT=40] -->
     <string name="power_menu_lock_screen_category">Lock screen</string>
@@ -13094,6 +13243,12 @@
     <string name="to_switch_networks_disconnect_ethernet">To switch networks, disconnect ethernet</string>
     <!-- Panel subtitle for Wi-Fi turned on. [CHAR LIMIT=60] -->
     <string name="wifi_is_turned_on_subtitle">Wi\u2011Fi is turned on</string>
+    <!-- Title for merged carrier Wi-Fi offload toggle. [CHAR LIMIT=NONE] -->
+    <string name="carrier_wifi_offload_title">W+ connections</string>
+    <!-- Summary for merged carrier Wi-Fi offload toggle. [CHAR LIMIT=NONE] -->
+    <string name="carrier_wifi_offload_summary">Allow Google Fi to use W+ networks to improve speed and coverage</string>
+    <!-- Title for merged carrier Wi-Fi network information. [CHAR LIMIT=NONE] -->
+    <string name="carrier_wifi_network_title">W+ network</string>
 
     <!-- Summary text separator for preferences including a short description
          (eg. "Connected / 5G"). [CHAR LIMIT=50] -->
@@ -13122,28 +13277,28 @@
     <string name="apps_dashboard_title">Apps</string>
 
     <!-- Bluetooth message permission alert for notification content [CHAR LIMIT=none] -->
-    <string name="bluetooth_message_access_notification_content">Untrusted device wants to access your messages. Tap for details.</string>
+    <string name="bluetooth_message_access_notification_content">A device wants to access your messages. Tap for details.</string>
     <!-- Bluetooth message permission alert for dialog title [CHAR LIMIT=none] -->
     <string name="bluetooth_message_access_dialog_title">Allow access to messages?</string>
     <!-- Bluetooth message permission alert for dialog content [CHAR LIMIT=none] -->
-    <string name="bluetooth_message_access_dialog_content">An untrusted Bluetooth device, <xliff:g id="device_name" example="My device">%1$s</xliff:g>, wants to access your messages.\n\nYou haven\u2019t connected to <xliff:g id="device_name" example="My device">%2$s</xliff:g> before.</string>
+    <string name="bluetooth_message_access_dialog_content">A Bluetooth device, <xliff:g id="device_name" example="My device">%1$s</xliff:g>, wants to access your messages.\n\nYou haven\u2019t connected to <xliff:g id="device_name" example="My device">%2$s</xliff:g> before.</string>
     <!-- Bluetooth phonebook permission alert for notification content [CHAR LIMIT=none] -->
-    <string name="bluetooth_phonebook_access_notification_content">Untrusted device wants to access your contacts and call log. Tap for details.</string>
+    <string name="bluetooth_phonebook_access_notification_content">A device wants to access your contacts and call log. Tap for details.</string>
     <!-- Bluetooth phonebook permission alert for dialog title [CHAR LIMIT=none] -->
     <string name="bluetooth_phonebook_access_dialog_title">Allow access to contacts and call log?</string>
     <!-- Bluetooth phonebook permission alert for dialog content [CHAR LIMIT=none] -->
-    <string name="bluetooth_phonebook_access_dialog_content">An untrusted Bluetooth device, <xliff:g id="device_name" example="My device">%1$s</xliff:g>, wants to access your contacts and call log. This includes data about incoming and outgoing calls.\n\nYou haven\u2019t connected to <xliff:g id="device_name" example="My device">%2$s</xliff:g> before.</string>
+    <string name="bluetooth_phonebook_access_dialog_content">A Bluetooth device, <xliff:g id="device_name" example="My device">%1$s</xliff:g>, wants to access your contacts and call log. This includes data about incoming and outgoing calls.\n\nYou haven\u2019t connected to <xliff:g id="device_name" example="My device">%2$s</xliff:g> before.</string>
 
     <!-- Brightness category name in Display Settings [CHAR LIMIT=none] -->
     <string name="category_name_brightness">Brightness</string>
     <!-- Lock screen category name in Display Settings [CHAR LIMIT=none] -->
-    <string name="category_name_lock_display">Lock Display</string>
+    <string name="category_name_lock_display">Lock display</string>
     <!-- Appearance category name in Display Settings [CHAR LIMIT=none] -->
     <string name="category_name_appearance">Appearance</string>
     <!-- Color category name in Display Settings [CHAR LIMIT=none] -->
     <string name="category_name_color">Color</string>
     <!-- Name of Other display controls category in Display Settings [CHAR LIMIT=none] -->
-    <string name="category_name_display_controls">Other Display Controls</string>
+    <string name="category_name_display_controls">Other display controls</string>
     <!-- Others category name [CHAR LIMIT=none] -->
     <string name="category_name_others">Others</string>
     <!-- General category name [CHAR LIMIT=none] -->
@@ -13230,4 +13385,16 @@
 
     <!-- All apps screen title, entry name on Apps page for the user to go to the all apps page. [CHAR LIMIT=30] -->
     <string name="all_apps">All apps</string>
+
+    <!-- Label for button to not allow grant the permission for remote devices. [CHAR_LIMIT=50] -->
+    <string name="request_manage_bluetooth_permission_dont_allow">Don\u2019t allow</string>
+
+    <!-- Title for UWB preference [CHAR_LIMIT=60] -->
+    <string name="uwb_settings_title">Ultra-WideBand (UWB)</string>
+
+    <!-- Summary for UWB preference. [CHAR_LIMIT=NONE]-->
+    <string name="uwb_settings_summary">Helps identify the relative position of nearby devices that have UWB</string>
+
+    <!-- Summary for UWB preference when airplane mode is disabled. [CHAR_LIMIT=NONE]-->
+    <string name="uwb_settings_summary_airplane_mode">Turn off Airplane mode to use UWB. </string>
 </resources>

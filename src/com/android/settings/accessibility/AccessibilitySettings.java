@@ -84,10 +84,6 @@ public class AccessibilitySettings extends DashboardFragment {
             CATEGORY_INTERACTION_CONTROL, CATEGORY_DOWNLOADED_SERVICES
     };
 
-    // Preferences
-    private static final String DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN =
-            "magnification_preference_screen";
-
     // Extras passed to sub-fragments.
     static final String EXTRA_PREFERENCE_KEY = "preference_key";
     static final String EXTRA_CHECKED = "checked";
@@ -115,7 +111,7 @@ public class AccessibilitySettings extends DashboardFragment {
         @Override
         public void run() {
             if (getActivity() != null) {
-                updateServicePreferences();
+                onContentChanged();
             }
         }
     };
@@ -146,7 +142,8 @@ public class AccessibilitySettings extends DashboardFragment {
         }
     };
 
-    private final SettingsContentObserver mSettingsContentObserver;
+    @VisibleForTesting
+    final SettingsContentObserver mSettingsContentObserver;
 
     private final Map<String, PreferenceCategory> mCategoryToPrefCategoryMap =
             new ArrayMap<>();
@@ -155,18 +152,8 @@ public class AccessibilitySettings extends DashboardFragment {
     private final Map<ComponentName, PreferenceCategory> mPreBundledServiceComponentToCategoryMap =
             new ArrayMap<>();
 
-    private Preference mDisplayMagnificationPreferenceScreen;
-
-    /**
-     * Check if the color transforms are color accelerated. Some transforms are experimental only
-     * on non-accelerated platforms due to the performance implications.
-     *
-     * @param context The current context
-     */
-    public static boolean isColorTransformAccelerated(Context context) {
-        return context.getResources()
-                .getBoolean(com.android.internal.R.bool.config_setColorTransformAccelerated);
-    }
+    private boolean mNeedPreferencesUpdate = false;
+    private boolean mIsForeground = true;
 
     public AccessibilitySettings() {
         // Observe changes to anything that the shortcut can toggle, so we can reflect updates
@@ -183,7 +170,7 @@ public class AccessibilitySettings extends DashboardFragment {
         mSettingsContentObserver = new SettingsContentObserver(mHandler, shortcutFeatureKeys) {
             @Override
             public void onChange(boolean selfChange, Uri uri) {
-                updateAllPreferences();
+                onContentChanged();
             }
         };
     }
@@ -199,13 +186,6 @@ public class AccessibilitySettings extends DashboardFragment {
     }
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-        initializeAllPreferences();
-        updateAllPreferences();
-    }
-
-    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         use(AccessibilityHearingAidPreferenceController.class)
@@ -213,18 +193,33 @@ public class AccessibilitySettings extends DashboardFragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        initializeAllPreferences();
+        updateAllPreferences();
+        registerContentMonitors();
+    }
 
-        mSettingsPackageMonitor.register(getActivity(), getActivity().getMainLooper(), false);
-        mSettingsContentObserver.register(getContentResolver());
+    @Override
+    public void onStart() {
+        if (mNeedPreferencesUpdate) {
+            updateAllPreferences();
+            mNeedPreferencesUpdate = false;
+        }
+        mIsForeground = true;
+        super.onStart();
     }
 
     @Override
     public void onStop() {
-        mSettingsPackageMonitor.unregister();
-        mSettingsContentObserver.unregister(getContentResolver());
+        mIsForeground = false;
         super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        unregisterContentMonitors();
+        super.onDestroy();
     }
 
     @Override
@@ -300,20 +295,41 @@ public class AccessibilitySettings extends DashboardFragment {
                 context.getContentResolver(), Settings.Global.APPLY_RAMPING_RINGER, 0) == 1;
     }
 
+    @VisibleForTesting
+    void onContentChanged() {
+        // If the fragment is visible then update preferences immediately, else set the flag then
+        // wait for the fragment to show up to update preferences.
+        if (mIsForeground) {
+            updateAllPreferences();
+        } else {
+            mNeedPreferencesUpdate = true;
+        }
+    }
+
     private void initializeAllPreferences() {
         for (int i = 0; i < CATEGORIES.length; i++) {
             PreferenceCategory prefCategory = findPreference(CATEGORIES[i]);
             mCategoryToPrefCategoryMap.put(CATEGORIES[i], prefCategory);
         }
-
-        // Display magnification.
-        mDisplayMagnificationPreferenceScreen = findPreference(
-                DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN);
     }
 
-    private void updateAllPreferences() {
+    @VisibleForTesting
+    void updateAllPreferences() {
         updateSystemPreferences();
         updateServicePreferences();
+    }
+
+    private void registerContentMonitors() {
+        final Context context = getActivity();
+
+        mSettingsPackageMonitor.register(context, context.getMainLooper(), /* externalStorage= */
+                false);
+        mSettingsContentObserver.register(getContentResolver());
+    }
+
+    private void unregisterContentMonitors() {
+        mSettingsPackageMonitor.unregister();
+        mSettingsContentObserver.unregister(getContentResolver());
     }
 
     protected void updateServicePreferences() {
@@ -501,6 +517,7 @@ public class AccessibilitySettings extends DashboardFragment {
          *                          installed accessibility services
          * @return The list of {@link RestrictedPreference}
          */
+        @VisibleForTesting
         List<RestrictedPreference> createAccessibilityServicePreferenceList(
                 List<AccessibilityServiceInfo> installedServices) {
 
@@ -566,6 +583,7 @@ public class AccessibilitySettings extends DashboardFragment {
          *                           installed accessibility shortcuts
          * @return The list of {@link RestrictedPreference}
          */
+        @VisibleForTesting
         List<RestrictedPreference> createAccessibilityActivityPreferenceList(
                 List<AccessibilityShortcutInfo> installedShortcuts) {
             final Set<ComponentName> enabledServices =

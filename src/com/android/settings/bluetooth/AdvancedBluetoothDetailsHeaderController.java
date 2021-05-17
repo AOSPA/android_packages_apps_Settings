@@ -85,6 +85,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
     private static final int RIGHT_DEVICE_ID = 2;
     private static final int CASE_DEVICE_ID = 3;
     private static final int MAIN_DEVICE_ID = 4;
+    private static final float HALF_ALPHA = 0.5f;
 
     @VisibleForTesting
     LayoutPreference mLayoutPreference;
@@ -289,10 +290,15 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         } else {
             if (deviceId == MAIN_DEVICE_ID) {
                 linearLayout.setVisibility(View.VISIBLE);
-                batterySummaryView.setText(com.android.settings.Utils.formatPercentage(
-                        bluetoothDevice.getBatteryLevel()));
-                batterySummaryView.setVisibility(View.VISIBLE);
                 linearLayout.findViewById(R.id.bt_battery_icon).setVisibility(View.GONE);
+                int level = bluetoothDevice.getBatteryLevel();
+                if (level != BluetoothDevice.BATTERY_LEVEL_UNKNOWN
+                        && level != BluetoothDevice.BATTERY_LEVEL_BLUETOOTH_OFF) {
+                    batterySummaryView.setText(com.android.settings.Utils.formatPercentage(level));
+                    batterySummaryView.setVisibility(View.VISIBLE);
+                } else {
+                    batterySummaryView.setVisibility(View.GONE);
+                }
             } else {
                 // Hide it if it doesn't have battery information
                 linearLayout.setVisibility(View.GONE);
@@ -359,7 +365,12 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
             final TextView textView = linearLayout.findViewById(R.id.bt_battery_prediction);
             if (estimateReady == 1) {
                 textView.setVisibility(View.VISIBLE);
-                textView.setText(StringUtil.formatElapsedTime(mContext, batteryEstimate, false));
+                textView.setText(
+                        StringUtil.formatElapsedTime(
+                                mContext,
+                                batteryEstimate,
+                                /* withSeconds */ false,
+                                /* collapseTimeUnit */  false));
             } else {
                 textView.setVisibility(View.GONE);
             }
@@ -420,10 +431,12 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
     @VisibleForTesting
     void updateIcon(ImageView imageView, String iconUri) {
         if (mIconCache.containsKey(iconUri)) {
+            imageView.setAlpha(1f);
             imageView.setImageBitmap(mIconCache.get(iconUri));
             return;
         }
 
+        imageView.setAlpha(HALF_ALPHA);
         ThreadUtils.postOnBackgroundThread(() -> {
             final Uri uri = Uri.parse(iconUri);
             try {
@@ -434,6 +447,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                         mContext.getContentResolver(), uri);
                 ThreadUtils.postOnMainThread(() -> {
                     mIconCache.put(iconUri, bitmap);
+                    imageView.setAlpha(1f);
                     imageView.setImageBitmap(bitmap);
                 });
             } catch (IOException e) {
