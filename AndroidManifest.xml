@@ -3471,6 +3471,24 @@
             </intent-filter>/>
         </receiver>
 
+       <activity android:name=".network.telephony.UserPLMNListActivity"
+           android:exported="true"
+           android:label="@string/uplmn_settings_title"
+           android:configChanges="orientation|screenSize|keyboardHidden">
+           <intent-filter>
+               <action android:name="android.intent.action.MAIN" />
+           </intent-filter>
+       </activity>
+
+        <activity android:name=".network.telephony.UserPLMNEditorActivity"
+            android:exported="true"
+            android:label="@string/uplmn_settings_title"
+            android:configChanges="orientation|screenSize|keyboardHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>
