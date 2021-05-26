@@ -54,6 +54,7 @@ import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import com.android.settings.R;
+import com.android.settings.network.AllowedNetworkTypesListener;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 
 
@@ -67,10 +68,10 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
     Preference mPreference;
     private PhoneCallStateListener mPhoneStateListener;
     private TelephonyManager mTelephonyManager;
+    private AllowedNetworkTypesListener mAllowedNetworkTypesListener;
     @VisibleForTesting
     Integer mCallState;
 
-    private ContentObserver mPreferredNetworkModeObserver;
     private ContentObserver mSubsidySettingsObserver;
     /*
      * Indicates whether this SUB has NR capability or not.
@@ -92,15 +93,6 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
     };
     public Enabled5GPreferenceController(Context context, String key) {
         super(context, key);
-        mPreferredNetworkModeObserver = new ContentObserver(new Handler(Looper.getMainLooper())) {
-            @Override
-            public void onChange(boolean selfChange) {
-                if (mPreference != null) {
-                    Log.d(TAG, "mPreferredNetworkModeObserver#onChange");
-                    updateState(mPreference);
-                }
-            }
-        };
     }
 
     public Enabled5GPreferenceController init(int subId) {
@@ -119,7 +111,19 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
                 TelephonyManager.NETWORK_TYPE_BITMASK_NR);
         mIsDualNrSupported =
                 PrimaryCardAndSubsidyLockUtils.isDual5gSupported(mTelephonyManager);
+        if (mAllowedNetworkTypesListener == null) {
+            mAllowedNetworkTypesListener = new AllowedNetworkTypesListener(
+                    mContext.getMainExecutor());
+            mAllowedNetworkTypesListener.setAllowedNetworkTypesListener(
+                    () -> updatePreference());
+        }
         return this;
+    }
+
+    private void updatePreference() {
+        if (mPreference != null) {
+            updateState(mPreference);
+        }
     }
 
     @Override
@@ -150,26 +154,26 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
 
     @Override
     public void onStart() {
-        mContext.getContentResolver().registerContentObserver(
-                Settings.Global.getUriFor(Settings.Global.PREFERRED_NETWORK_MODE + mSubId), true,
-                mPreferredNetworkModeObserver);
         mContext.registerReceiver(mDefaultDataChangedReceiver,
                 new IntentFilter(TelephonyIntents.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED));
         if (mPhoneStateListener != null) {
             mPhoneStateListener.register(mContext, mSubId);
         }
+        if (mAllowedNetworkTypesListener != null) {
+            mAllowedNetworkTypesListener.register(mContext, mSubId);
+        }
     }
 
     @Override
     public void onStop() {
-        if (mPreferredNetworkModeObserver != null) {
-            mContext.getContentResolver().unregisterContentObserver(mPreferredNetworkModeObserver);
-        }
         if (mDefaultDataChangedReceiver != null) {
             mContext.unregisterReceiver(mDefaultDataChangedReceiver);
         }
         if (mPhoneStateListener != null) {
             mPhoneStateListener.unregister();
+        }
+        if (mAllowedNetworkTypesListener != null) {
+            mAllowedNetworkTypesListener.unregister(mContext, mSubId);
         }
     }
 
@@ -179,9 +183,7 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
         final SwitchPreference switchPreference = (SwitchPreference) preference;
         switchPreference.setVisible(isAvailable());
         long preferredNetworkBitMask = MobileNetworkUtils.getRafFromNetworkType(
-                Settings.Global.getInt(mContext.getContentResolver(),
-                    Settings.Global.PREFERRED_NETWORK_MODE + mSubId,
-                    TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE));
+                getAllowedNetworkMode());
         switchPreference.setChecked(isNrNetworkModeType(preferredNetworkBitMask));
         switchPreference.setEnabled(isCallStateIdle());
     }
@@ -191,32 +193,32 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
         if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
             return false;
         }
-        int preNetworkMode = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.PREFERRED_NETWORK_MODE + mSubId,
-                TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE);
+        int oldNetworkMode = getAllowedNetworkMode();
         long newNetworkBitMask;
-        if (TelephonyManager.NETWORK_MODE_NR_ONLY != preNetworkMode) {
-            long preNetworkBitMask = MobileNetworkUtils.getRafFromNetworkType(preNetworkMode);
+        if (TelephonyManager.NETWORK_MODE_NR_ONLY != oldNetworkMode) {
+            long oldNetworkBitMask = MobileNetworkUtils.getRafFromNetworkType(oldNetworkMode);
             newNetworkBitMask = isChecked ?
-                (preNetworkBitMask | TelephonyManager.NETWORK_TYPE_BITMASK_NR)
-                : (preNetworkBitMask & ~TelephonyManager.NETWORK_TYPE_BITMASK_NR);
+                (oldNetworkBitMask | TelephonyManager.NETWORK_TYPE_BITMASK_NR)
+                : (oldNetworkBitMask & ~TelephonyManager.NETWORK_TYPE_BITMASK_NR);
         } else {
             newNetworkBitMask = MobileNetworkUtils
                 .getRafFromNetworkType(TelephonyManager.NETWORK_MODE_LTE_ONLY);
         }
-        if (mTelephonyManager.setPreferredNetworkTypeBitmask(newNetworkBitMask)) {
-            Log.d(TAG, "setPreferredNetworkTypeBitmask");
-            return true;
-        }
-        return false;
+        mTelephonyManager.setAllowedNetworkTypesForReason(
+                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER, newNetworkBitMask);
+        return true;
+    }
+
+    private int getAllowedNetworkMode() {
+        return MobileNetworkUtils.getNetworkTypeFromRaf(
+                (int) mTelephonyManager.getAllowedNetworkTypesForReason(
+                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER));
     }
 
     @Override
     public boolean isChecked(){
         long preNetworkBitMask = MobileNetworkUtils.getRafFromNetworkType(
-                Settings.Global.getInt(mContext.getContentResolver(),
-                    Settings.Global.PREFERRED_NETWORK_MODE + mSubId,
-                    TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE));
+                getAllowedNetworkMode());
         return isNrNetworkModeType(preNetworkBitMask);
     }
 
