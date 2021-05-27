@@ -954,6 +954,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">The phone will also use images from your interactions with Fingerprint Unlock to update your fingerprint model. Images used to create your fingerprint model are never stored, but the fingerprint model is stored securely on your phone and never leaves the phone. All processing occurs securely on your phone.</string>
     <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">You can delete your fingerprint model, or turn off Fingerprint Unlock at any time in Settings. Fingerprint models are stored on the phone until you delete them.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5">Your phone can be unlocked when you don\u2019t intend to, like if someone holds it up to your finger.</string>
     <!-- Introduction detail message shown in fingerprint enrollment introduction to learn more about fingerprint [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more"></string>
 
@@ -2133,7 +2135,7 @@
     <!-- Wi-Fi settings. text displayed when Wi-Fi is off and network list is empty [CHAR LIMIT=50]-->
     <string name="wifi_empty_list_wifi_off">To see available networks, turn Wi\u2011Fi on.</string>
     <!-- Wi-Fi settings. text displayed when Wi-Fi is on and network list is empty [CHAR LIMIT=50]-->
-    <string name="wifi_empty_list_wifi_on">Searching for Wi\u2011Fi networks\u2026</string>
+    <string name="wifi_empty_list_wifi_on">Searching for networks\u2026</string>
     <!-- Wifi Settings. text displayed when user has restriction DISALLOW_CONFIG_WIFI [CHAR LIMIT=NONE]-->
     <string name="wifi_empty_list_user_restricted">You don\u2019t have permission to change the Wi\u2011Fi network.</string>
     <!-- Wi-Fi settings. content description for more button [CHAR LIMIT=50]-->
@@ -5299,18 +5301,20 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback">Swipe up from the bottom of the screen with 3 fingers.\n\nTo switch between features, swipe up with 3 fingers and hold.</string>
     <!-- Summary for software shortcut in accessibility edit shortcut dialog when user had enabled the accessibility floating button mode (Floating over other apps). [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating"><annotation id="link">Customize accessibility button</annotation></string>
+    <!-- Summary for footer to show help link. [CHAR LIMIT=NONE] -->
+    <string name="footer_learn_more"><annotation id="link">Learn more</annotation></string>
     <!-- Title for hardware shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_title_hardware">Hold volume keys</string>
     <!-- Part of list to compose user's accessibility shortcut list. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_hardware_keyword">hold volume keys</string>
     <!-- Summary for hardware shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_dialog_summary_hardware">Press &amp; hold both volume keys</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_hardware">Press &amp; hold both volume keys.</string>
     <!-- Title for triple tap shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap">Triple-tap screen</string>
     <!-- Part of list to compose user's accessibility shortcut list. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_triple_tap_keyword">triple-tap screen</string>
     <!-- Summary for triple tap shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap">Quickly tap screen 3 times. This shortcut may slow down your device.</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap">Quickly tap screen 3 times. This shortcut may slow down your device</string>
     <!-- Title for the accessibility edit shortcut dialog to save the preference when user clicks it. [CHAR LIMIT=20] -->
     <string name="accessibility_shortcut_edit_dialog_title_advance">Advanced</string>
     <!-- Summary text appearing on the accessibility preference screen to enable screen magnification from the nav bar when the feature is enabled, but the accessibility button is not configured correctly for the feature to be used [CHAR LIMIT=none] -->
@@ -6013,8 +6017,10 @@
     <string name="history_details_title">History details</string>
     <!-- Preference title for advanced battery usage [CHAR LIMIT=40] -->
     <string name="advanced_battery_preference_title">View battery usage</string>
-    <!-- Preference summary for advanced battery usage [CHAR LIMIT=40] -->
-    <string name="advanced_battery_preference_summary">View usage for past 24 hours</string>
+    <!-- Preference summary for advanced battery usage, for past 24 hours [CHAR LIMIT=40] -->
+    <string name="advanced_battery_preference_summary_with_hours">View usage for past 24 hours</string>
+    <!-- Preference summary for advanced battery usage, from last full charge [CHAR LIMIT=40] -->
+    <string name="advanced_battery_preference_summary">View usage from last full charge</string>
 
     <!-- Activity title for battery usage details for an app. or power consumer -->
     <string name="battery_details_title">Battery usage</string>
@@ -6046,7 +6052,7 @@
     <!-- Summary for the early hedas up tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_early_heads_up_summary">Battery may run out earlier than usual</string>
     <!-- Title when early heads up is solved [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_early_heads_up_done_title">Battery Saver is on</string>
+    <string name="battery_tip_early_heads_up_done_title">Battery Saver on</string>
     <!-- Summary when early heads up is solved [CHAR LIMIT=NONE] -->
     <string name="battery_tip_early_heads_up_done_summary">Some features may be limited</string>
     <!-- Title for the battery high usage tip [CHAR LIMIT=NONE] -->
@@ -6372,9 +6378,9 @@
     <string name ="battery_detail_manage_title">Manage battery usage</string>
 
     <!-- Description for battery total and background usage time for an app, i.e. 1 hr 15 min total • 39 min background for past 24 hr. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
-    <string name="battery_total_and_bg_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • <xliff:g id="time" example="39 min">^2</xliff:g> background for past 24 hr</string>
+    <string name="battery_total_and_bg_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • <xliff:g id="time" example="39 min">^2</xliff:g> background\nfor past 24 hr</string>
     <!-- Description for battery total and background usage time in a time period for an app, i.e. 1 hr 15 min total • 39 min background for 12 am-2 am. Note: ^1, ^2 and ^3 should be used in all translations [CHAR LIMIT=120] -->
-    <string name="battery_total_and_bg_usage_with_period"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • <xliff:g id="time" example="39 min">^2</xliff:g> background for <xliff:g id="time_period" example="12 am-2 am">^3</xliff:g></string>
+    <string name="battery_total_and_bg_usage_with_period"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • <xliff:g id="time" example="39 min">^2</xliff:g> background\nfor <xliff:g id="time_period" example="12 am-2 am">^3</xliff:g></string>
 
     <!-- Description for battery total usage time is less than a minute for an app [CHAR LIMIT=120] -->
     <string name="battery_total_usage_less_minute">Total less than a minute for past 24 hr</string>
@@ -6397,9 +6403,9 @@
     <string name="battery_bg_usage_with_period"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> background for <xliff:g id="time_period" example="12 am-2 am">^2</xliff:g></string>
 
     <!-- Description for battery total usage with background usage time less than a minute for an app, i.e. 1 hr 15 min total • background less than a minute for past 24 hr. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
-    <string name="battery_total_usage_and_bg_less_minute_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • background less than a minute for past 24 hr</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • background less than a minute\nfor past 24 hr</string>
     <!-- Description for battery total usage with background usage time less than a minute in a time period for an app, i.e. 1 hr 15 min total • background less than a minute for 12 am-2 am. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
-    <string name="battery_total_usage_and_bg_less_minute_usage_with_period"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • background less than a minute for <xliff:g id="time_period" example="12 am-2 am">^2</xliff:g></string>
+    <string name="battery_total_usage_and_bg_less_minute_usage_with_period"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • background less than a minute\nfor <xliff:g id="time_period" example="12 am-2 am">^2</xliff:g></string>
 
     <!-- Description for no any battery usage for past 24 hr [CHAR LIMIT=120] -->
     <string name="battery_not_usage">No usage for past 24 hr</string>
@@ -6517,6 +6523,8 @@
     <string name="battery_usage_for_background_time">Background: <xliff:g id="time">%s</xliff:g></string>
     <!-- [CHAR_LIMIT=NONE] Battery usage main screen footer contentt -->
     <string name="battery_usage_screen_footer">Battery usage data is approximate and doesn\'t measure usage when phone is charging</string>
+    <!-- [CHAR_LIMIT=NONE] Accessibility content description for battery chart view. -->
+    <string name="battery_usage_chart">Battery usage chart</string>
     <!-- Process Stats strings -->
     <skip />
 
@@ -8101,6 +8109,9 @@
     <string name="keywords_display_cast_screen">project, cast, Screen mirroring, Screen sharing, mirroring, share screen, screen casting</string>
     <string name="keywords_storage">space, disk, hard drive, device usage</string>
     <string name="keywords_battery">power usage, charge</string>
+    <string name="keywords_battery_usage">view battery usage, battery usage, power usage</string>
+    <string name="keywords_battery_saver">battery saver, power saver, saver</string>
+    <string name="keywords_battery_adaptive_preferences">adaptive preferences, adaptive battery</string>
     <string name="keywords_spell_checker">spelling, dictionary, spellcheck, auto-correct</string>
     <string name="keywords_voice_input">recognizer, input, speech, speak, language, hands-free, hand free, recognition, offensive, word, audio, history, bluetooth headset</string>
     <string name="keywords_text_to_speech_output">rate, language, default, speak, speaking, tts, accessibility, screen reader, blind</string>
@@ -11407,6 +11418,9 @@
 
     <!-- [CHAR LIMIT=60] Summary string on dark theme explaining why the toggle is disabled while the setting is still on-->
     <string name="dark_ui_mode_disabled_summary_dark_theme_on">Temporarily disabled due to Battery Saver</string>
+
+    <!-- [CHAR LIMIT=60] Summary string for screen attention explaining why the toggle is disabled by battery saver-->
+    <string name="ambient_camera_summary_battery_saver_on">Temporarily disabled due to Battery Saver</string>
 
     <!-- [CHAR LIMIT=60] Summary string on dark theme explaining why the toggle is disabled while the setting is off-->
     <string name="dark_ui_mode_disabled_summary_dark_theme_off">Temporarily turned on due to Battery Saver</string>

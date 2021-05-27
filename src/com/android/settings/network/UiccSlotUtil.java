@@ -29,6 +29,7 @@ import com.google.common.collect.ImmutableList;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.Arrays;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -69,6 +70,9 @@ public class UiccSlotUtil {
         if (slotInfos == null) {
             return ImmutableList.of();
         }
+        slotInfos = Arrays.stream(slotInfos)
+                .filter(s -> (s != null))
+                .toArray(UiccSlotInfo[]::new);
         return ImmutableList.copyOf(slotInfos);
     }
 
@@ -92,22 +96,24 @@ public class UiccSlotUtil {
             Log.i(TAG, "Multiple active slots supported. Not calling switchSlots.");
             return;
         }
-        UiccSlotInfo[] slots = telMgr.getUiccSlotsInfo();
+        ImmutableList<UiccSlotInfo> slots = getSlotInfos(telMgr);
+        int length = slots.size();
         if (slotId == INVALID_PHYSICAL_SLOT_ID) {
-            for (int i = 0; i < slots.length; i++) {
-                if (slots[i].isRemovable()
-                        && !slots[i].getIsActive()
-                        && slots[i].getCardStateInfo() != UiccSlotInfo.CARD_STATE_INFO_ERROR
-                        && slots[i].getCardStateInfo() != UiccSlotInfo.CARD_STATE_INFO_RESTRICTED) {
+            for (int i = 0; i < length; i++) {
+                UiccSlotInfo slotInfo = slots.get(i);
+                if (slotInfo.isRemovable()
+                        && !slotInfo.getIsActive()
+                        && slotInfo.getCardStateInfo() != UiccSlotInfo.CARD_STATE_INFO_ERROR
+                        && slotInfo.getCardStateInfo() != UiccSlotInfo.CARD_STATE_INFO_RESTRICTED) {
                     performSwitchToRemovableSlot(i, context);
                     return;
                 }
             }
         } else {
-            if (slotId >= slots.length || !slots[slotId].isRemovable()) {
+            if (slotId >= length || !slots.get(slotId).isRemovable()) {
                 throw new UiccSlotsException("The given slotId is not a removable slot: " + slotId);
             }
-            if (!slots[slotId].getIsActive()) {
+            if (!slots.get(slotId).getIsActive()) {
                 performSwitchToRemovableSlot(slotId, context);
             }
         }
