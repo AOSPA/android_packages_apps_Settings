@@ -171,7 +171,7 @@
             android:title="@string/call_category"
             settings:controller="com.android.settings.network.telephony.CallingPreferenceCategoryController">
 
-            <PreferenceScreen
+            <Preference
                 android:key="wifi_calling"
                 android:title="@string/wifi_calling_settings_title"
                 android:summary="@string/wifi_calling_summary"
@@ -181,7 +181,7 @@
                         android:targetClass="com.android.settings.Settings$WifiCallingSettingsActivity">
                     <extra android:name="show_drawer_menu" android:value="true"/>
                 </intent>
-            </PreferenceScreen>
+            </Preference>
 
             <SwitchPreference
                 android:key="video_calling_key"
@@ -242,14 +242,14 @@
             settings:allowDividerAbove="true"
             settings:controller="com.android.settings.network.telephony.ApnPreferenceController"/>
 
-        <PreferenceScreen
+        <Preference
             android:key="uplmn_settings_key"
             android:persistent="false"
             android:title="@string/uplmn_settings_title"
             android:summary="@string/uplmn_settings_summary"
             settings:allowDividerAbove="true"
             settings:controller="com.android.settings.network.telephony.UserPLMNPreferenceController">
-        </PreferenceScreen>
+        </Preference>
 
         <Preference
             android:key="carrier_settings_key"
