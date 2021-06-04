@@ -49,6 +49,7 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
     private int mBandIndex;
     private int mSecurityType;
     private boolean isVendorDualApSupported;
+    private int mConcurrentBandSupported;
     private final Context mContext;
     private boolean m5GHzSupported;
     private boolean m6GHzSupported;
@@ -188,8 +189,12 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
         // change the list option if AP+AP is supproted and selected security type is not OWE
         if (isVendorDualApSupported && mSecurityType != SoftApConfiguration.SECURITY_TYPE_OWE &&
             (is5GhzBandSupported())) {
-            bandEntries.add(String.valueOf(SoftApConfiguration.BAND_DUAL));
-            bandSummaries.add(mContext.getString(R.string.wifi_ap_choose_vendor_dual_band));
+            mConcurrentBandSupported = isConcurrentBandSupported();
+            if (mConcurrentBandSupported == -1 ||
+                (((mConcurrentBandSupported >> (14 - 1)) & 1) > 0)) {
+                bandEntries.add(String.valueOf(SoftApConfiguration.BAND_DUAL));
+                bandSummaries.add(mContext.getString(R.string.wifi_ap_choose_vendor_dual_band));
+            }
         }
         mBandEntries = bandEntries.toArray(new String[bandEntries.size()]);
         mBandSummaries = bandSummaries.toArray(new String[bandSummaries.size()]);
@@ -214,6 +219,10 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
             return false;
         }
         return true;
+    }
+
+    private int isConcurrentBandSupported() {
+        return mWifiManager.isConcurrentBandSupported();
     }
 
     public int getBandIndex() {
