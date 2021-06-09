@@ -102,6 +102,7 @@ android_library {
         "ims-common",
         "app-compat-annotations",
         "telephony-ext",
+        "extphonelib",
     ],
 }
 
@@ -128,6 +129,9 @@ android_app {
     optimize: {
         proguard_flags_files: ["proguard.flags"],
     },
+    libs: [
+        "extphonelib"
+    ],
 }
 
 android_library_import {
