@@ -19,18 +19,18 @@ package com.android.settings.deviceinfo;
 import android.content.Context;
 import android.os.storage.StorageManager;
 import android.text.format.Formatter;
-import android.util.FeatureFlagUtils;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.FeatureFlags;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.text.NumberFormat;
+import java.util.concurrent.Future;
 
 public class TopLevelStoragePreferenceController extends BasePreferenceController {
 
@@ -50,19 +50,19 @@ public class TopLevelStoragePreferenceController extends BasePreferenceControlle
 
     @Override
     protected void refreshSummary(Preference preference) {
-        // Remove homepage summaries for silky home.
-        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)) {
-            return;
-        }
-
         if (preference == null) {
             return;
         }
 
-        ThreadUtils.postOnBackgroundThread(() -> {
+        refreshSummaryThread(preference);
+    }
+
+    @VisibleForTesting
+    protected Future refreshSummaryThread(Preference preference) {
+        return ThreadUtils.postOnBackgroundThread(() -> {
             final NumberFormat percentageFormat = NumberFormat.getPercentInstance();
             final PrivateStorageInfo info = PrivateStorageInfo.getPrivateStorageInfo(
-                    mStorageManagerVolumeProvider);
+                    getStorageManagerVolumeProvider());
             final double privateUsedBytes = info.totalBytes - info.freeBytes;
 
             ThreadUtils.postOnMainThread(() -> {
@@ -71,5 +71,11 @@ public class TopLevelStoragePreferenceController extends BasePreferenceControlle
                         Formatter.formatFileSize(mContext, info.freeBytes)));
             });
         });
+    }
+
+
+    @VisibleForTesting
+    protected StorageManagerVolumeProvider getStorageManagerVolumeProvider() {
+        return mStorageManagerVolumeProvider;
     }
 }

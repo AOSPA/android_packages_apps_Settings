@@ -28,6 +28,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.hardware.SensorPrivacyManager;
+import android.os.PowerManager;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.service.attention.AttentionService;
@@ -49,10 +50,11 @@ public class AdaptiveSleepPreferenceController {
     public static final String PREFERENCE_KEY = "adaptive_sleep";
     private static final int DEFAULT_VALUE = 0;
     private final SensorPrivacyManager mPrivacyManager;
-    private RestrictionUtils mRestrictionUtils;
-    private PackageManager mPackageManager;
-    private Context mContext;
-    private MetricsFeatureProvider mMetricsFeatureProvider;
+    private final RestrictionUtils mRestrictionUtils;
+    private final PackageManager mPackageManager;
+    private final Context mContext;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
+    private final PowerManager mPowerManager;
 
     @VisibleForTesting
     RestrictedSwitchPreference mPreference;
@@ -62,6 +64,7 @@ public class AdaptiveSleepPreferenceController {
         mRestrictionUtils = restrictionUtils;
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
         mPrivacyManager = SensorPrivacyManager.getInstance(context);
+        mPowerManager = context.getSystemService(PowerManager.class);
         mPreference = new RestrictedSwitchPreference(context);
         mPreference.setTitle(R.string.adaptive_sleep_title);
         mPreference.setSummary(R.string.adaptive_sleep_description);
@@ -91,22 +94,44 @@ public class AdaptiveSleepPreferenceController {
     }
 
     /**
-     *  Updates the appearance of the preference.
+     * Updates the appearance of the preference.
      */
     public void updatePreference() {
+        initializePreference();
         final EnforcedAdmin enforcedAdmin = mRestrictionUtils.checkIfRestrictionEnforced(mContext,
                 UserManager.DISALLOW_CONFIG_SCREEN_TIMEOUT);
         if (enforcedAdmin != null) {
             mPreference.setDisabledByAdmin(enforcedAdmin);
         } else {
-            mPreference.setEnabled(hasSufficientPermission(mPackageManager) && !isCameraLocked());
+            mPreference.setEnabled(hasSufficientPermission(mPackageManager) && !isCameraLocked()
+                    && !isPowerSaveMode());
+        }
+    }
+
+    @VisibleForTesting
+    void initializePreference() {
+        if (mPreference == null) {
+            mPreference = new RestrictedSwitchPreference(mContext);
+            mPreference.setTitle(R.string.adaptive_sleep_title);
+            mPreference.setSummary(R.string.adaptive_sleep_description);
+            mPreference.setChecked(isChecked());
+            mPreference.setKey(PREFERENCE_KEY);
+            mPreference.setOnPreferenceChangeListener((preference, value) -> {
+                final boolean isChecked = (Boolean) value;
+                mMetricsFeatureProvider.action(mContext,
+                        SettingsEnums.ACTION_SCREEN_ATTENTION_CHANGED,
+                        isChecked);
+                Settings.Secure.putInt(mContext.getContentResolver(),
+                        Settings.Secure.ADAPTIVE_SLEEP, isChecked ? 1 : DEFAULT_VALUE);
+                return true;
+            });
         }
     }
 
     @VisibleForTesting
     boolean isChecked() {
         return hasSufficientPermission(mContext.getPackageManager()) && !isCameraLocked()
-                && Settings.Secure.getInt(mContext.getContentResolver(),
+                && !isPowerSaveMode() && Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.ADAPTIVE_SLEEP, DEFAULT_VALUE)
                 != DEFAULT_VALUE;
     }
@@ -118,6 +143,11 @@ public class AdaptiveSleepPreferenceController {
     @VisibleForTesting
     boolean isCameraLocked() {
         return mPrivacyManager.isSensorPrivacyEnabled(CAMERA);
+    }
+
+    @VisibleForTesting
+    boolean isPowerSaveMode() {
+        return mPowerManager.isPowerSaveMode();
     }
 
     public static int isControllerAvailable(Context context) {

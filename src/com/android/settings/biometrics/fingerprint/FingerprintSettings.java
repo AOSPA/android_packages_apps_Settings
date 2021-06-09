@@ -601,12 +601,15 @@ public class FingerprintSettings extends SubSettings {
                 mLaunchedConfirm = false;
                 if (resultCode == RESULT_FINISHED || resultCode == RESULT_OK) {
                     if (data != null && BiometricUtils.containsGatekeeperPasswordHandle(data)) {
-                        mFingerprintManager.generateChallenge(mUserId, (sensorId, challenge) -> {
-                            mToken = BiometricUtils.requestGatekeeperHat(getActivity(), data,
-                                    mUserId, challenge);
-                            mChallenge = challenge;
-                            BiometricUtils.removeGatekeeperPasswordHandle(getActivity(), data);
-                            updateAddPreference();
+                        mFingerprintManager.generateChallenge(mUserId,
+                                (sensorId, userId, challenge) -> {
+                                    mToken = BiometricUtils.requestGatekeeperHat(getActivity(),
+                                            data,
+                                            mUserId, challenge);
+                                    mChallenge = challenge;
+                                    BiometricUtils.removeGatekeeperPasswordHandle(getActivity(),
+                                            data);
+                                    updateAddPreference();
                         });
                     } else {
                         Log.d(TAG, "Data null or GK PW missing");
@@ -685,9 +688,7 @@ public class FingerprintSettings extends SubSettings {
                 // TODO: This should be cleaned up. ChooseLockGeneric should provide a way of
                 //  specifying arguments/requests, instead of relying on callers setting extras.
                 intent.setClassName(SETTINGS_PACKAGE_NAME, ChooseLockGeneric.class.getName());
-                intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
-                        DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
-                intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS,
+                intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_INSECURE_OPTIONS,
                         true);
                 intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE, true);

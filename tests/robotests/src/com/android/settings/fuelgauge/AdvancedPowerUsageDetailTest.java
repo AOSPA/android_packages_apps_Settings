@@ -47,6 +47,7 @@ import androidx.loader.app.LoaderManager;
 import androidx.preference.Preference;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowActivityManager;
@@ -80,8 +81,10 @@ public class AdvancedPowerUsageDetailTest {
     private static final String SUMMARY = "summary";
     private static final String[] PACKAGE_NAME = {"com.android.app"};
     private static final String USAGE_PERCENT = "16%";
+    private static final String SLOT_TIME = "12 am-2 am";
     private static final int ICON_ID = 123;
     private static final int UID = 1;
+    private static final int POWER_MAH = 150;
     private static final long BACKGROUND_TIME_MS = 100;
     private static final long FOREGROUND_ACTIVITY_TIME_MS = 123;
     private static final long FOREGROUND_SERVICE_TIME_MS = 444;
@@ -117,6 +120,8 @@ public class AdvancedPowerUsageDetailTest {
     @Mock
     private BatteryOptimizeUtils mBatteryOptimizeUtils;
     private Context mContext;
+    private Preference mForegroundPreference;
+    private Preference mBackgroundPreference;
     private Preference mFooterPreference;
     private RadioButtonPreference mRestrictedPreference;
     private RadioButtonPreference mOptimizePreference;
@@ -166,6 +171,7 @@ public class AdvancedPowerUsageDetailTest {
 
         mFragment.mHeaderPreference = mHeaderPreference;
         mFragment.mState = mState;
+        mFragment.enableTriState = true;
         mFragment.mBatteryUtils = new BatteryUtils(RuntimeEnvironment.application);
         mFragment.mBatteryOptimizeUtils = mBatteryOptimizeUtils;
         mAppEntry.info = mock(ApplicationInfo.class);
@@ -190,10 +196,14 @@ public class AdvancedPowerUsageDetailTest {
                 nullable(UserHandle.class));
         doAnswer(callable).when(mActivity).startActivity(captor.capture());
 
+        mForegroundPreference = new Preference(mContext);
+        mBackgroundPreference = new Preference(mContext);
         mFooterPreference = new Preference(mContext);
         mRestrictedPreference = new RadioButtonPreference(mContext);
         mOptimizePreference = new RadioButtonPreference(mContext);
         mUnrestrictedPreference = new RadioButtonPreference(mContext);
+        mFragment.mForegroundPreference = mForegroundPreference;
+        mFragment.mBackgroundPreference = mBackgroundPreference;
         mFragment.mFooterPreference = mFooterPreference;
         mFragment.mRestrictedPreference = mRestrictedPreference;
         mFragment.mOptimizePreference = mOptimizePreference;
@@ -203,6 +213,17 @@ public class AdvancedPowerUsageDetailTest {
     @After
     public void reset() {
         ShadowEntityHeaderController.reset();
+    }
+
+    @Test
+    public void testGetPreferenceScreenResId_returnNewLayout() {
+        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(R.xml.power_usage_detail);
+    }
+
+    @Test
+    public void testGetPreferenceScreenResId_disableTriState_returnLegacyLayout() {
+        mFragment.enableTriState = false;
+        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(R.xml.power_usage_detail_legacy);
     }
 
     @Test
@@ -264,7 +285,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testInitHeader_backgroundTwoMinutesForegroundZero_hasCorrectSummary() {
+    public void testInitHeader_backgroundTwoMinForegroundZero_hasCorrectSummary() {
         final long backgroundTimeTwoMinutes = 120000;
         final long foregroundTimeZero = 0;
         Bundle bundle = new Bundle(2);
@@ -281,7 +302,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testInitHeader_backgroundLessThanAMinutesForegroundZero_hasCorrectSummary() {
+    public void testInitHeader_backgroundLessThanAMinForegroundZero_hasCorrectSummary() {
         final long backgroundTimeLessThanAMinute = 59999;
         final long foregroundTimeZero = 0;
         Bundle bundle = new Bundle(2);
@@ -299,7 +320,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testInitHeader_totalUsageLessThanAMinutes_hasCorrectSummary() {
+    public void testInitHeader_totalUsageLessThanAMin_hasCorrectSummary() {
         final long backgroundTimeLessThanHalfMinute = 20000;
         final long foregroundTimeLessThanHalfMinute = 20000;
         Bundle bundle = new Bundle(2);
@@ -318,7 +339,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testInitHeader_TotalAMinutesBackgroundLessThanAMinutes_hasCorrectSummary() {
+    public void testInitHeader_TotalAMinutesBackgroundLessThanAMin_hasCorrectSummary() {
         final long backgroundTimeZero = 59999;
         final long foregroundTimeTwoMinutes = 1;
         Bundle bundle = new Bundle(2);
@@ -335,7 +356,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testInitHeader_TotalAMinutesBackgroundZero_hasCorrectSummary() {
+    public void testInitHeader_TotalAMinBackgroundZero_hasCorrectSummary() {
         final long backgroundTimeZero = 0;
         final long foregroundTimeAMinutes = 60000;
         Bundle bundle = new Bundle(2);
@@ -352,7 +373,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testInitHeader_foregroundTwoMinutesBackgroundFourMinutes_hasCorrectSummary() {
+    public void testInitHeader_foregroundTwoMinBackgroundFourMin_hasCorrectSummary() {
         final long backgroundTimeFourMinute = 240000;
         final long foregroundTimeTwoMinutes = 120000;
         Bundle bundle = new Bundle(2);
@@ -365,6 +386,79 @@ public class AdvancedPowerUsageDetailTest {
         verify(mEntityHeaderController).setSummary(captor.capture());
         assertThat(captor.getValue().toString())
                 .isEqualTo("6 min total • 4 min background for past 24 hr");
+    }
+
+    @Test
+    public void testInitHeader_totalUsageLessThanAMinWithSlotTime_hasCorrectSummary() {
+        final long backgroundTimeLessThanHalfMinute = 20000;
+        final long foregroundTimeLessThanHalfMinute = 20000;
+        Bundle bundle = new Bundle(2);
+        bundle.putLong(
+                AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeLessThanHalfMinute);
+        bundle.putLong(
+                AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeLessThanHalfMinute);
+        bundle.putString(AdvancedPowerUsageDetail.EXTRA_SLOT_TIME, SLOT_TIME);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("Total less than a minute for 12 am-2 am");
+    }
+
+    @Test
+    public void testInitHeader_TotalAMinBackgroundLessThanAMinWithSlotTime_hasCorrectSummary() {
+        final long backgroundTimeZero = 59999;
+        final long foregroundTimeTwoMinutes = 1;
+        Bundle bundle = new Bundle(2);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeZero);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeTwoMinutes);
+        bundle.putString(AdvancedPowerUsageDetail.EXTRA_SLOT_TIME, SLOT_TIME);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("1 min total • background less than a minute for 12 am-2 am");
+    }
+
+    @Test
+    public void testInitHeader_TotalAMinBackgroundZeroWithSlotTime_hasCorrectSummary() {
+        final long backgroundTimeZero = 0;
+        final long foregroundTimeAMinutes = 60000;
+        Bundle bundle = new Bundle(2);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeZero);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeAMinutes);
+        bundle.putString(AdvancedPowerUsageDetail.EXTRA_SLOT_TIME, SLOT_TIME);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("1 min total for 12 am-2 am");
+    }
+
+    @Test
+    public void testInitHeader_foregroundTwoMinBackgroundFourMinWithSlotTime_hasCorrectSummary() {
+        final long backgroundTimeFourMinute = 240000;
+        final long foregroundTimeTwoMinutes = 120000;
+        Bundle bundle = new Bundle(2);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeFourMinute);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeTwoMinutes);
+        bundle.putString(AdvancedPowerUsageDetail.EXTRA_SLOT_TIME, SLOT_TIME);
+        when(mFragment.getArguments()).thenReturn(bundle);
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("6 min total • 4 min background for 12 am-2 am");
     }
 
     @Test
@@ -455,32 +549,52 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testInitPreference_isValidPackageName_hasCorrectString() {
-        when(mBatteryOptimizeUtils.isValidPackageName()).thenReturn(false);
+    public void testInitPreference_hasCorrectSummary() {
+        Bundle bundle = new Bundle(4);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, BACKGROUND_TIME_MS);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, FOREGROUND_TIME_MS);
+        bundle.putString(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_PERCENT, USAGE_PERCENT);
+        bundle.putInt(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_AMOUNT, POWER_MAH);
+        when(mFragment.getArguments()).thenReturn(bundle);
 
-        mFragment.initPreference();
+        doReturn(mContext.getText(R.string.battery_used_for)).when(mFragment).getText(
+                R.string.battery_used_for);
+        doReturn(mContext.getText(R.string.battery_active_for)).when(mFragment).getText(
+                R.string.battery_active_for);
 
-        assertThat(mFooterPreference.getTitle().toString())
-                .isEqualTo("This app requires Optimized battery usage.");
+        mFragment.initPreference(mContext);
+
+        assertThat(mForegroundPreference.getSummary().toString()).isEqualTo("Used for 0 min");
+        assertThat(mBackgroundPreference.getSummary().toString()).isEqualTo("Active for 0 min");
     }
 
     @Test
-    public void testInitPreference_isSystemOrDefaultApp_hasCorrectString() {
+    public void testInitPreferenceForTriState_isValidPackageName_hasCorrectString() {
+        when(mBatteryOptimizeUtils.isValidPackageName()).thenReturn(false);
+
+        mFragment.initPreferenceForTriState(mContext);
+
+        assertThat(mFooterPreference.getTitle().toString())
+                .isEqualTo("This app requires optimized battery usage.");
+    }
+
+    @Test
+    public void testInitPreferenceForTriState_isSystemOrDefaultApp_hasCorrectString() {
         when(mBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
         when(mBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(true);
 
-        mFragment.initPreference();
+        mFragment.initPreferenceForTriState(mContext);
 
         assertThat(mFooterPreference.getTitle()
-                .toString()).isEqualTo("This app requires Unrestricted battery usage.");
+                .toString()).isEqualTo("This app requires unrestricted battery usage.");
     }
 
     @Test
-    public void testInitPreference_hasCorrectString() {
+    public void testInitPreferenceForTriState_hasCorrectString() {
         when(mBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
         when(mBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(false);
 
-        mFragment.initPreference();
+        mFragment.initPreferenceForTriState(mContext);
 
         assertThat(mFooterPreference.getTitle().toString())
                 .isEqualTo("Changing how an app uses your battery can affect its performance.");

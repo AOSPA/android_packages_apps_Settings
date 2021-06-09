@@ -50,12 +50,14 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.accessibility.AccessibilityEditDialogUtils.DialogType;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.accessibility.AccessibilityUtils;
-import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.OnMainSwitchChangeListener;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -87,7 +89,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     private static final String DRAWABLE_FOLDER = "drawable";
     protected static final String KEY_USE_SERVICE_PREFERENCE = "use_service";
     protected static final String KEY_GENERAL_CATEGORY = "general_categories";
-    protected static final String KEY_INTRODUCTION_CATEGORY = "introduction_categories";
+    protected static final String KEY_HTML_DESCRIPTION_PREFERENCE = "html_description";
     private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
     protected static final String KEY_SAVED_USER_SHORTCUT_TYPE = "shortcut_type";
     protected static final String KEY_ANIMATED_IMAGE = "animated_image";
@@ -222,8 +224,11 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             case DialogEnums.EDIT_SHORTCUT:
                 final CharSequence dialogTitle = getPrefContext().getString(
                         R.string.accessibility_shortcut_title, mPackageName);
+                final int dialogType = WizardManagerHelper.isAnySetupWizard(getIntent())
+                        ? DialogType.EDIT_SHORTCUT_GENERIC_SUW : DialogType.EDIT_SHORTCUT_GENERIC;
                 dialog = AccessibilityEditDialogUtils.showEditShortcutDialog(
-                        getPrefContext(), dialogTitle, this::callOnAlertDialogCheckboxClicked);
+                        getPrefContext(), dialogType, dialogTitle,
+                        this::callOnAlertDialogCheckboxClicked);
                 setupEditShortcutDialog(dialog);
                 return dialog;
             case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
@@ -305,6 +310,11 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     }
 
     @Override
+    public int getHelpResource() {
+        return 0;
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         removeActionBarToggleSwitch();
@@ -380,10 +390,10 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     /** Customizes the order by preference key. */
     protected List<String> getPreferenceOrderList() {
         final List<String> lists = new ArrayList<>();
-        lists.add(KEY_USE_SERVICE_PREFERENCE);
         lists.add(KEY_ANIMATED_IMAGE);
+        lists.add(KEY_USE_SERVICE_PREFERENCE);
         lists.add(KEY_GENERAL_CATEGORY);
-        lists.add(KEY_INTRODUCTION_CATEGORY);
+        lists.add(KEY_HTML_DESCRIPTION_PREFERENCE);
         return lists;
     }
 
@@ -495,42 +505,65 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         generalCategory.addPreference(mSettingsPreference);
     }
 
-    private void initIntroductionCategory() {
-        final PreferenceCategory introductionCategory = new PreferenceCategory(getPrefContext());
-        final CharSequence title =
-                getString(R.string.accessibility_introduction_title, mPackageName);
-        introductionCategory.setKey(KEY_INTRODUCTION_CATEGORY);
-        introductionCategory.setTitle(title);
-
-        getPreferenceScreen().addPreference(introductionCategory);
-    }
-
     private void initHtmlTextPreference() {
         if (TextUtils.isEmpty(mHtmlDescription)) {
             return;
         }
+        final PreferenceScreen screen = getPreferenceScreen();
+        final CharSequence htmlDescription = Html.fromHtml(mHtmlDescription.toString(),
+                Html.FROM_HTML_MODE_COMPACT, mImageGetter, /* tagHandler= */ null);
+        final String iconContentDescription =
+                getString(R.string.accessibility_introduction_title, mPackageName);
 
-        initIntroductionCategory();
-
-        final HtmlTextPreference htmlTextPreference = new HtmlTextPreference(getPrefContext());
-        htmlTextPreference.setSummary(mHtmlDescription);
-        htmlTextPreference.setImageGetter(mImageGetter);
-        htmlTextPreference.setSelectable(false);
-
-        final PreferenceCategory introductionCategory = findPreference(KEY_INTRODUCTION_CATEGORY);
-        introductionCategory.addPreference(htmlTextPreference);
+        final AccessibilityFooterPreference htmlFooterPreference =
+                new AccessibilityFooterPreference(screen.getContext());
+        htmlFooterPreference.setKey(KEY_HTML_DESCRIPTION_PREFERENCE);
+        htmlFooterPreference.setSummary(htmlDescription);
+        // Only framework tools support help link
+        if (getHelpResource() != 0) {
+            htmlFooterPreference.appendHelpLink(getHelpResource());
+            htmlFooterPreference.setLinkEnabled(true);
+        } else {
+            htmlFooterPreference.setLinkEnabled(false);
+        }
+        htmlFooterPreference.setIconContentDescription(iconContentDescription);
+        screen.addPreference(htmlFooterPreference);
     }
 
     private void initFooterPreference() {
         if (!TextUtils.isEmpty(mDescription)) {
-            createFooterPreference(mDescription);
+            createFooterPreference(getPreferenceScreen(), mDescription,
+                    getString(R.string.accessibility_introduction_title, mPackageName));
         }
 
         if (TextUtils.isEmpty(mHtmlDescription) && TextUtils.isEmpty(mDescription)) {
             final CharSequence defaultDescription =
                     getText(R.string.accessibility_service_default_description);
-            createFooterPreference(defaultDescription);
+            createFooterPreference(getPreferenceScreen(), defaultDescription,
+                    getString(R.string.accessibility_introduction_title, mPackageName));
         }
+    }
+
+
+    /**
+     * Creates {@link AccessibilityFooterPreference} and append into {@link PreferenceScreen}
+     *
+     * @param screen The preference screen to add the footer preference
+     * @param summary The summary of the preference summary.
+     * @param iconContentDescription The content description of icon in the footer.
+     */
+    @VisibleForTesting
+    void createFooterPreference(PreferenceScreen screen, CharSequence summary,
+            String iconContentDescription) {
+        final AccessibilityFooterPreference footerPreference =
+                new AccessibilityFooterPreference(screen.getContext());
+        footerPreference.setSummary(summary);
+        footerPreference.setIconContentDescription(iconContentDescription);
+        if (getHelpResource() != 0) {
+            footerPreference.appendHelpLink(getHelpResource());
+            footerPreference.setLinkEnabled(true);
+        }
+        screen.addPreference(footerPreference);
     }
 
     @VisibleForTesting
@@ -705,12 +738,6 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     @Override
     public void onSettingsClicked(ShortcutPreference preference) {
         showDialog(DialogEnums.EDIT_SHORTCUT);
-    }
-
-    private void createFooterPreference(CharSequence title) {
-        final PreferenceScreen preferenceScreen = getPreferenceScreen();
-        preferenceScreen.addPreference(new FooterPreference.Builder(getActivity()).setTitle(
-                title).build());
     }
 
     /**

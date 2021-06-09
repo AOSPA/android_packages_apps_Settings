@@ -82,7 +82,7 @@ public class StorageAsyncLoader
                     }
                 });
         for (int i = 0, userCount = infos.size(); i < userCount; i++) {
-            UserInfo info = infos.get(i);
+            final UserInfo info = infos.get(i);
             result.put(info.id, getStorageResultForUser(info.id));
         }
         return result;
@@ -109,7 +109,7 @@ public class StorageAsyncLoader
             final long dataSize = stats.getDataBytes();
             final long cacheQuota = mStatsManager.getCacheQuotaBytes(mUuid, app.uid);
             final long cacheBytes = stats.getCacheBytes();
-            long blamedSize = dataSize;
+            long blamedSize = dataSize + stats.getCodeBytes();
             // Technically, we could overages as freeable on the storage settings screen.
             // If the app is using more cache than its quota, we would accidentally subtract the
             // overage from the system size (because it shows up as unused) during our attribution.
@@ -118,10 +118,11 @@ public class StorageAsyncLoader
                 blamedSize = blamedSize - cacheBytes + cacheQuota;
             }
 
-            // This isn't quite right because it slams the first user by user id with the whole code
-            // size, but this ensures that we count all apps seen once.
-            if (!mSeenPackages.contains(app.packageName)) {
-                blamedSize += stats.getCodeBytes();
+            // Code bytes may share between different profiles. To know all the duplicate code size
+            // and we can get a reasonable system size in StorageItemPreferenceController.
+            if (mSeenPackages.contains(app.packageName)) {
+                result.duplicateCodeSize += stats.getCodeBytes();
+            } else {
                 mSeenPackages.add(app.packageName);
             }
 
@@ -130,13 +131,28 @@ public class StorageAsyncLoader
                     result.gamesSize += blamedSize;
                     break;
                 case CATEGORY_AUDIO:
+                    // TODO(b/170918505): Should revamp audio size calculation with the data
+                    // from media provider.
                     result.musicAppsSize += blamedSize;
+                    result.musicAppsSize -= stats.getCodeBytes();
+
+                    result.otherAppsSize += blamedSize;
                     break;
                 case CATEGORY_VIDEO:
+                    // TODO(b/170918505): Should revamp video size calculation with the data
+                    // from media provider.
                     result.videoAppsSize += blamedSize;
+                    result.videoAppsSize -= stats.getCodeBytes();
+
+                    result.otherAppsSize += blamedSize;
                     break;
                 case CATEGORY_IMAGE:
+                    // TODO(b/170918505): Should revamp image size calculation with the data
+                    // from media provider.
                     result.photosAppsSize += blamedSize;
+                    result.photosAppsSize -= stats.getCodeBytes();
+
+                    result.otherAppsSize += blamedSize;
                     break;
                 default:
                     // The deprecated game flag does not set the category.
@@ -171,6 +187,7 @@ public class StorageAsyncLoader
         public long videoAppsSize;
         public long otherAppsSize;
         public long cacheSize;
+        public long duplicateCodeSize;
         public StorageStatsSource.ExternalStorageStats externalStats;
     }
 

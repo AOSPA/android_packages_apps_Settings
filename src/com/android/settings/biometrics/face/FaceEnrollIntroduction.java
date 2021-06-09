@@ -110,13 +110,10 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
             mFooterBarMixin.getPrimaryButton().setEnabled(false);
             // We either block on generateChallenge, or need to gray out the "next" button until
             // the challenge is ready. Let's just do this for now.
-            mFaceManager.generateChallenge((sensorId, challenge) -> {
+            mFaceManager.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
                 mToken = BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId, challenge);
                 mSensorId = sensorId;
                 mChallenge = challenge;
-                if (BiometricUtils.isMultiBiometricEnrollmentFlow(this)) {
-                    BiometricUtils.removeGatekeeperPasswordHandle(this, getIntent());
-                }
                 mFooterBarMixin.getPrimaryButton().setEnabled(true);
             });
         }
@@ -199,10 +196,10 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     protected void getChallenge(GenerateChallengeCallback callback) {
         mFaceManager = Utils.getFaceManagerOrNull(this);
         if (mFaceManager == null) {
-            callback.onChallengeGenerated(0, 0L);
+            callback.onChallengeGenerated(0, 0, 0L);
             return;
         }
-        mFaceManager.generateChallenge(callback::onChallengeGenerated);
+        mFaceManager.generateChallenge(mUserId, callback::onChallengeGenerated);
     }
 
     @Override

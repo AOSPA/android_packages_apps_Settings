@@ -42,8 +42,12 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.DialogCreatable;
 import com.android.settings.R;
+import com.android.settings.accessibility.AccessibilityEditDialogUtils.DialogType;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +59,8 @@ import java.util.StringJoiner;
  * and does not have toggle bar to turn on service to use.
  */
 public class ToggleScreenMagnificationPreferenceFragment extends
-        ToggleFeaturePreferenceFragment {
+        ToggleFeaturePreferenceFragment implements
+        MagnificationModePreferenceController.DialogHelper {
     // TODO(b/147021230): Move duplicated functions with android/internal/accessibility into util.
     private TouchExplorationStateChangeListener mTouchExplorationStateChangeListener;
 
@@ -66,6 +71,9 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     private static final char COMPONENT_NAME_SEPARATOR = ':';
     private static final TextUtils.SimpleStringSplitter sStringColonSplitter =
             new TextUtils.SimpleStringSplitter(COMPONENT_NAME_SEPARATOR);
+
+    private MagnificationModePreferenceController mModePreferenceController;
+    private DialogCreatable mDialogDelegate;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -108,6 +116,12 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     @Override
     public Dialog onCreateDialog(int dialogId) {
+        if (mDialogDelegate != null) {
+            final Dialog dialog = mDialogDelegate.onCreateDialog(dialogId);
+            if (dialog != null) {
+                return dialog;
+            }
+        }
         final AlertDialog dialog;
         switch (dialogId) {
             case DialogEnums.GESTURE_NAVIGATION_TUTORIAL:
@@ -116,9 +130,11 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             case DialogEnums.MAGNIFICATION_EDIT_SHORTCUT:
                 final CharSequence dialogTitle = getPrefContext().getString(
                         R.string.accessibility_shortcut_title, mPackageName);
-                dialog = AccessibilityEditDialogUtils.showMagnificationEditShortcutDialog(
-                                getPrefContext(), dialogTitle,
-                                this::callOnAlertDialogCheckboxClicked);
+                final int dialogType = WizardManagerHelper.isAnySetupWizard(getIntent())
+                        ? DialogType.EDIT_SHORTCUT_MAGNIFICATION_SUW
+                        : DialogType.EDIT_SHORTCUT_MAGNIFICATION;
+                dialog = AccessibilityEditDialogUtils.showEditShortcutDialog(getPrefContext(),
+                        dialogType, dialogTitle, this::callOnAlertDialogCheckboxClicked);
                 setupMagnificationEditShortcutDialog(dialog);
                 return dialog;
             default:
@@ -134,14 +150,28 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             return;
         }
         mSettingsPreference = new Preference(getPrefContext());
-        mSettingsPreference.setTitle(R.string.accessibility_menu_item_settings);
-        // TODO(b/177371954): "magnification area" should be brought up to the highest level of the
-        // settings UI so that it appears below "shortcut" to replace "settings.
-        mSettingsPreference.setFragment(MagnificationSettingsFragment.class.getName());
+        mSettingsPreference.setTitle(R.string.accessibility_magnification_mode_title);
+        mSettingsPreference.setKey(MagnificationModePreferenceController.PREF_KEY);
         mSettingsPreference.setPersistent(false);
 
         final PreferenceCategory generalCategory = findPreference(KEY_GENERAL_CATEGORY);
         generalCategory.addPreference(mSettingsPreference);
+
+        mModePreferenceController = new MagnificationModePreferenceController(getContext(),
+                MagnificationModePreferenceController.PREF_KEY);
+        mModePreferenceController.setDialogHelper(this);
+        getSettingsLifecycle().addObserver(mModePreferenceController);
+        mModePreferenceController.displayPreference(getPreferenceScreen());
+    }
+
+    @Override
+    public void showDialog(int dialogId) {
+        super.showDialog(dialogId);
+    }
+
+    @Override
+    public void setDialogDelegate(DialogCreatable delegate) {
+        mDialogDelegate = delegate;
     }
 
     @Override
@@ -271,6 +301,11 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     @Override
+    public int getHelpResource() {
+        return R.string.help_url_magnification;
+    }
+
+    @Override
     public int getMetricsCategory() {
         // TODO: Distinguish between magnification modes
         return SettingsEnums.ACCESSIBILITY_TOGGLE_SCREEN_MAGNIFICATION;
@@ -278,6 +313,13 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     @Override
     public int getDialogMetricsCategory(int dialogId) {
+        if (mDialogDelegate != null) {
+            final int category = mDialogDelegate.getDialogMetricsCategory(dialogId);
+            if (category != 0) {
+                return category;
+            }
+        }
+
         switch (dialogId) {
             case DialogEnums.GESTURE_NAVIGATION_TUTORIAL:
                 return SettingsEnums.DIALOG_TOGGLE_SCREEN_MAGNIFICATION_GESTURE_NAVIGATION;

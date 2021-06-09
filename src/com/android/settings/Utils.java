@@ -49,6 +49,7 @@ import android.content.res.Resources.NotFoundException;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.drawable.AdaptiveIconDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
@@ -99,6 +100,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TabWidget;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.core.graphics.drawable.IconCompat;
@@ -112,10 +114,12 @@ import androidx.preference.PreferenceGroup;
 import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.profileselector.ProfileFragmentBridge;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.widget.ActionBarShadowController;
+import com.android.settingslib.widget.AdaptiveIcon;
 
 import java.util.Iterator;
 import java.util.List;
@@ -170,6 +174,9 @@ public final class Utils extends com.android.settingslib.Utils {
 
     /** Whether or not app hibernation is enabled on the device **/
     public static final String PROPERTY_APP_HIBERNATION_ENABLED = "app_hibernation_enabled";
+
+    /** Whether or not Settings Shared Axis transition is enabled */
+    public static final String SETTINGS_SHARED_AXIS_ENABLED = "settings_shared_axis_enabled";
 
     /**
      * Finds a matching activity for a preference's intent. If a matching
@@ -474,6 +481,19 @@ public final class Utils extends com.android.settingslib.Utils {
             }
         }
         return UserHandle.USER_NULL;
+    }
+
+    /** Returns user ID of current user, throws IllegalStateException if it's not available. */
+    public static int getCurrentUserId(UserManager userManager, boolean isWorkProfile)
+            throws IllegalStateException {
+        if (isWorkProfile) {
+            final UserHandle managedUserHandle = getManagedProfile(userManager);
+            if (managedUserHandle == null) {
+                throw new IllegalStateException("Work profile user ID is not available.");
+            }
+            return managedUserHandle.getIdentifier();
+        }
+        return UserHandle.myUserId();
     }
 
     /**
@@ -982,15 +1002,36 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
-     * Sets the preference icon with a drawable that is scaled down to to avoid crashing Settings if
-     * it's too big.
+     * Gets the adaptive icon with a drawable that wrapped with an adaptive background using {@code
+     * backgroundColor} if it is not a {@link AdaptiveIconDrawable}
+     *
+     * If the given {@code icon} is too big, it will be auto scaled down to to avoid crashing
+     * Settings.
      */
-    public static void setSafeIcon(Preference pref, Drawable icon) {
+    public static Drawable getAdaptiveIcon(Context context, Drawable icon,
+            @ColorInt int backgroundColor) {
+        Drawable adaptiveIcon = getSafeIcon(icon);
+
+        if (!(adaptiveIcon instanceof AdaptiveIconDrawable)) {
+            adaptiveIcon = new AdaptiveIcon(context, adaptiveIcon);
+            ((AdaptiveIcon) adaptiveIcon).setBackgroundColor(backgroundColor);
+        }
+
+        return adaptiveIcon;
+    }
+
+    /**
+     * Gets the icon with a drawable that is scaled down to to avoid crashing Settings if it's too
+     * big and not a {@link VectorDrawable}.
+     */
+    public static Drawable getSafeIcon(Drawable icon) {
         Drawable safeIcon = icon;
+
         if ((icon != null) && !(icon instanceof VectorDrawable)) {
             safeIcon = getSafeDrawable(icon, 500, 500);
         }
-        pref.setIcon(safeIcon);
+
+        return safeIcon;
     }
 
     /**
@@ -1000,7 +1041,7 @@ public final class Utils extends com.android.settingslib.Utils {
      * @param maxWidth maximum width, in pixels.
      * @param maxHeight maximum height, in pixels.
      */
-    public static Drawable getSafeDrawable(Drawable original, int maxWidth, int maxHeight) {
+    private static Drawable getSafeDrawable(Drawable original, int maxWidth, int maxHeight) {
         final int actualWidth = original.getMinimumWidth();
         final int actualHeight = original.getMinimumHeight();
 
@@ -1246,5 +1287,13 @@ public final class Utils extends com.android.settingslib.Utils {
 
     public static boolean isProviderModelEnabled(Context context) {
         return FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL);
+    }
+
+    public static boolean isPageTransitionEnabled(Context context) {
+        final boolean isSilkyHome = FeatureFlagUtils.isEnabled(context, FeatureFlags.SILKY_HOME);
+        final boolean isTransitionEnabled = Settings.Global.getInt(context.getContentResolver(),
+                SETTINGS_SHARED_AXIS_ENABLED, 0) == 1;
+
+        return isSilkyHome && isTransitionEnabled;
     }
 }

@@ -40,6 +40,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.network.AllowedNetworkTypesListener;
 import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 
 /**
@@ -50,13 +51,13 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
 
     private static final String LOG_TAG = "PreferredNetworkMode";
     private CarrierConfigManager mCarrierConfigManager;
-    private ContentObserver mPreferredNetworkModeObserver;
     private ContentObserver mSubsidySettingsObserver;
     private TelephonyManager mTelephonyManager;
     private PersistableBundle mPersistableBundle;
     private boolean mIsGlobalCdma;
     private Preference mPreference;
     private PhoneCallStateListener mPhoneStateListener;
+    private AllowedNetworkTypesListener mAllowedNetworkTypesListener;
     @VisibleForTesting
     Integer mCallState;
 
@@ -77,15 +78,6 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
                     if (PrimaryCardAndSubsidyLockUtils.DBG) {
                         Log.d(LOG_TAG, "mSubsidySettingsObserver#onChange");
                     }
-                    updateState(mPreference);
-                }
-            }
-        };
-        mPreferredNetworkModeObserver = new ContentObserver(new Handler(Looper.getMainLooper())) {
-            @Override
-            public void onChange(boolean selfChange) {
-                if (mPreference != null) {
-                    Log.d(LOG_TAG, "mPreferredNetworkModeObserver#onChange");
                     updateState(mPreference);
                 }
             }
@@ -126,9 +118,9 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
                     Settings.Secure.getUriFor(PrimaryCardAndSubsidyLockUtils.SUBSIDY_STATUS), false,
                     mSubsidySettingsObserver);
         }
-        mContext.getContentResolver().registerContentObserver(
-                Settings.Global.getUriFor(Settings.Global.PREFERRED_NETWORK_MODE + mSubId), true,
-                mPreferredNetworkModeObserver);
+        if (mAllowedNetworkTypesListener != null) {
+            mAllowedNetworkTypesListener.register(mContext, mSubId);
+        }
     }
 
     @OnLifecycleEvent(ON_STOP)
@@ -139,8 +131,8 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
         if (mSubsidySettingsObserver != null) {
             mContext.getContentResolver().unregisterContentObserver(mSubsidySettingsObserver);
         }
-        if (mPreferredNetworkModeObserver != null) {
-            mContext.getContentResolver().unregisterContentObserver(mPreferredNetworkModeObserver);
+        if (mAllowedNetworkTypesListener != null) {
+            mAllowedNetworkTypesListener.unregister(mContext, mSubId);
         }
     }
 
@@ -186,7 +178,20 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
         mIsGlobalCdma = mTelephonyManager.isLteCdmaEvdoGsmWcdmaEnabled()
                 && carrierConfig.getBoolean(CarrierConfigManager.KEY_SHOW_CDMA_CHOICES_BOOL);
 
+        if (mAllowedNetworkTypesListener == null) {
+            mAllowedNetworkTypesListener = new AllowedNetworkTypesListener(
+                    mContext.getMainExecutor());
+            mAllowedNetworkTypesListener.setAllowedNetworkTypesListener(
+                    () -> updatePreference());
+        }
+
         lifecycle.addObserver(this);
+    }
+
+    private void updatePreference() {
+        if (mPreference != null) {
+            updateState(mPreference);
+        }
     }
 
     private int getPreferredNetworkMode() {

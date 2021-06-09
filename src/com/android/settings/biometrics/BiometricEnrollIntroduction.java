@@ -126,7 +126,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     public abstract void onClick(LinkSpan span);
 
     protected interface GenerateChallengeCallback {
-        void onChallengeGenerated(int sensorId, long challenge);
+        void onChallengeGenerated(int sensorId, int userId, long challenge);
     }
 
     @Override
@@ -222,9 +222,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
 
     private void launchChooseLock() {
         Intent intent = BiometricUtils.getChooseLockIntent(this, getIntent());
-        intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
-                DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
-        intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS, true);
+        intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_INSECURE_OPTIONS, true);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE, true);
         intent.putExtra(getExtraKeyForBiometric(), true);
         if (mUserId != UserHandle.USER_NULL) {
@@ -263,7 +261,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                 updatePasswordQuality();
                 overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
                 getNextButton().setEnabled(false);
-                getChallenge(((sensorId, challenge) -> {
+                getChallenge(((sensorId, userId, challenge) -> {
                     mSensorId = sensorId;
                     mChallenge = challenge;
                     mToken = BiometricUtils.requestGatekeeperHat(this, data, mUserId, challenge);
@@ -279,7 +277,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
             if (resultCode == RESULT_OK && data != null) {
                 overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
                 getNextButton().setEnabled(false);
-                getChallenge(((sensorId, challenge) -> {
+                getChallenge(((sensorId, userId, challenge) -> {
                     mSensorId = sensorId;
                     mChallenge = challenge;
                     mToken = BiometricUtils.requestGatekeeperHat(this, data, mUserId, challenge);
