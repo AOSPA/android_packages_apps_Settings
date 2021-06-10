@@ -27,7 +27,6 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
 package com.android.settings.development;
 
 import android.content.Context;
@@ -78,4 +77,3 @@ public class WifiCoverageExtendPreferenceController extends DeveloperOptionsPref
         ((SwitchPreference) mPreference).setChecked(false);
     }
 }
-*/
