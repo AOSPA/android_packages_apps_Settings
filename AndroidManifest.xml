@@ -6,6 +6,9 @@
 
     <original-package android:name="com.android.settings" />
 
+    <protected-broadcast
+            android:name="com.qualcomm.qti.telephonyservice.SMART_DDS_SWITCH_TOGGLED" />
+
     <uses-permission android:name="android.permission.REQUEST_NETWORK_SCORES" />
     <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />

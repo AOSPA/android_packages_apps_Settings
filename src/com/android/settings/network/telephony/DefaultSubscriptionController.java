@@ -21,6 +21,7 @@ import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.provider.Settings;
 import android.sysprop.TelephonyProperties;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
@@ -214,7 +215,15 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         }
         if (TextUtils.equals(getPreferenceKey(), LIST_DATA_PREFERENCE_KEY)) {
             boolean isEcbmEnabled = TelephonyProperties.in_ecm_mode().orElse(false);
-            mPreference.setEnabled(isCallStateIdle() && !isEcbmEnabled);
+            int isSmartDdsEnabled = Settings.Global.getInt(mContext.getContentResolver(),
+                    Settings.Global.SMART_DDS_SWITCH, 0);
+            if (isSmartDdsEnabled == 0) {
+                mPreference.setEnabled(isCallStateIdle() && !isEcbmEnabled);
+            } else {
+                mPreference.setEnabled(false);
+                mPreference.setSummary("Smart DDS switch is on");
+            }
+
         } else {
             if (isAskEverytimeSupported()) {
                 // Add the extra "Ask every time" value at the end.
