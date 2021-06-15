@@ -52,6 +52,9 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
     private boolean m6GHzSupported;
     private String mCountryCode;
 
+    // Dual Band (2G + 5G)
+    public static final int BAND_BOTH_2G_5G = 1 << 4;
+
     public WifiTetherApBandPreferenceController(Context context,
             OnTetherConfigUpdateListener listener) {
         super(context, listener);
@@ -70,7 +73,10 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
             mBandIndex = SoftApConfiguration.BAND_2GHZ;
             Log.d(TAG, "Updating band index to BAND_2GHZ because no config");
         } else if (is5GhzBandSupported() || is6GhzBandSupported()) {
-            mBandIndex = validateSelection(config.getBand());
+            if (config.getBands().length == 2)
+                mBandIndex = BAND_BOTH_2G_5G;
+            else
+                mBandIndex = validateSelection(config.getBand());
             Log.d(TAG, "Updating band index to " + mBandIndex);
         } else {
             mWifiManager.setSoftApConfiguration(
@@ -88,7 +94,7 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
             preference.setEnabled(false);
             preference.setSummary(R.string.wifi_ap_choose_2G);
         } else {
-            preference.setValue(Integer.toString(config.getBand()));
+            preference.setValue(Integer.toString(mBandIndex));
             preference.setSummary(getConfigSummary());
         }
     }
@@ -99,7 +105,7 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
                 return mBandSummaries[0];
             case BAND_5GHZ:
             case BAND_6GHZ:
-            // case SoftApConfiguration.BAND_DUAL: // This is not yet supported.
+            case BAND_BOTH_2G_5G:
                 final ListPreference preference = (ListPreference) mPreference;
                 return mBandSummaries[preference.findIndexOfValue(String.valueOf(mBandIndex))];
             default:
@@ -161,6 +167,12 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
             bandEntries.add(String.valueOf(BAND_6GHZ));
             bandSummaries.add(mContext.getString(R.string.wifi_ap_prefer_6G));
         }
+        // Add Dual AP bands
+        if (is5GhzBandSupported() && mWifiManager.isBridgedApConcurrencySupported()) {
+            bandEntries.add(String.valueOf(BAND_BOTH_2G_5G));
+            bandSummaries.add(mContext.getString(R.string.wifi_ap_choose_vendor_dual_band));
+        }
+
         mBandEntries = bandEntries.toArray(new String[bandEntries.size()]);
         mBandSummaries = bandSummaries.toArray(new String[bandSummaries.size()]);
     }

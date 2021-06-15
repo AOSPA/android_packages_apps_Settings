@@ -18,6 +18,7 @@ package com.android.settings.wifi.tether;
 
 import static android.net.TetheringManager.ACTION_TETHER_STATE_CHANGED;
 import static android.net.wifi.WifiManager.WIFI_AP_STATE_CHANGED_ACTION;
+import static com.android.settings.wifi.tether.WifiTetherApBandPreferenceController.BAND_BOTH_2G_5G;
 
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
@@ -219,7 +220,13 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                     mPasswordPreferenceController.getPasswordValidated(securityType),
                     securityType);
         }
-        configBuilder.setBand(mApBandPreferenceController.getBandIndex());
+        if (mApBandPreferenceController.getBandIndex() == BAND_BOTH_2G_5G) {
+            int[] dualBands = new int[] {
+                    SoftApConfiguration.BAND_2GHZ, SoftApConfiguration.BAND_5GHZ};
+            configBuilder.setBands(dualBands);
+        } else {
+            configBuilder.setBand(mApBandPreferenceController.getBandIndex());
+        }
         return configBuilder.build();
     }
 
