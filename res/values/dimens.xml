@@ -118,12 +118,6 @@
     <!-- Dashboard foreground image inset (from background edge to foreground edge) -->
     <dimen name="dashboard_tile_foreground_image_inset">6dp</dimen>
 
-    <!-- Homepage image tile size -->
-    <dimen name="homepage_image_size">48dp</dimen>
-
-    <!-- Homepage foreground image inset (from background edge to foreground edge) -->
-    <dimen name="homepage_foreground_image_inset">12dp</dimen>
-
     <!-- Preference icon foreground image inset (from background edge to foreground edge) -->
     <dimen name="preference_icon_foreground_image_inset">12dp</dimen>
 
@@ -190,9 +184,6 @@
     <dimen name="sim_content_padding">24dip</dimen>
     <!-- Sim Card Name length -->
     <integer name="sim_name_length">32</integer>
-
-    <!-- Height of a user icon view -->
-    <dimen name="user_icon_view_height">56dp</dimen>
 
     <!-- CheckBoxPreference -->
     <dimen name="checkbox_widget_min_width">58dip</dimen>
@@ -271,8 +262,9 @@
 
     <!-- Admin support contact details dialog. -->
     <dimen name="admin_details_dialog_padding">24dp</dimen>
-    <dimen name="admin_details_dialog_title_bottom_padding">20dp</dimen>
-    <dimen name="admin_details_dialog_icon_size">48dp</dimen>
+    <dimen name="admin_details_dialog_padding_bottom">32dp</dimen>
+    <dimen name="admin_details_dialog_title_bottom_padding">16dp</dimen>
+    <dimen name="admin_details_dialog_icon_size">32dp</dimen>
     <dimen name="admin_details_dialog_link_padding_top">36dp</dimen>
     <dimen name="admin_details_dialog_learn_more_button_top_margin">24dp</dimen>
     <dimen name="admin_details_dialog_learn_more_button_padding">8dp</dimen>
@@ -401,8 +393,6 @@
 
     <!-- Elevation of bluetooth icon -->
     <dimen name="bt_icon_elevation">4dp</dimen>
-
-    <dimen name="two_target_min_width">80dp</dimen>
 
     <!-- Maximum height for SliceView, override on slices/view/src/main/res/values/dimens.xml -->
     <dimen name="abc_slice_large_height">1800dp</dimen>

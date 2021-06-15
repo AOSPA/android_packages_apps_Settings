@@ -426,6 +426,13 @@ public class NetworkSelectSettings extends DashboardFragment {
             if (networkList == null || networkList.size() == 0) {
                 return;
             }
+            // Due to the aggregation of cell between carriers, it's possible to get CellIdentity
+            // containing forbidden PLMN.
+            // Getting current network from ServiceState is no longer a good idea.
+            // Add an additional rule to avoid from showing forbidden PLMN to the user.
+            if (mForbiddenPlmns == null) {
+                updateForbiddenPlmns();
+            }
 
             Set<CellIdentity> cellIdentitySet = new HashSet<CellIdentity>();
             for (NetworkRegistrationInfo regInfo : networkList) {
@@ -442,8 +449,14 @@ public class NetworkSelectSettings extends DashboardFragment {
             }
 
             for (CellIdentity cellIdentity : cellIdentitySet) {
+                if (cellIdentity == null) {
+                    continue;
+                }
                 final NetworkOperatorPreference pref = new NetworkOperatorPreference(
                         getPrefContext(), cellIdentity, mForbiddenPlmns, mShow4GForLTE);
+                if (pref.isForbiddenNetwork()) {
+                    continue;
+                }
                 pref.setSummary(R.string.network_connected);
                 // Update the signal strength icon, since the default signalStrength value
                 // would be zero

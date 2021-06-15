@@ -416,8 +416,13 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     @Override
     public void onResume() {
-        final Activity activity = getActivity();
         super.onResume();
+
+        // Disable the animation of the preference list
+        final RecyclerView prefListView = getListView();
+        if (prefListView != null) {
+            prefListView.setItemAnimator(null);
+        }
 
         // Because RestrictedSettingsFragment's onResume potentially requests authorization,
         // which changes the restriction state, recalculate it.
@@ -1168,9 +1173,11 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        MenuItem item = menu.add(0, MENU_FIX_CONNECTIVITY, 0, R.string.fix_connectivity);
-        item.setIcon(R.drawable.ic_repair_24dp);
-        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        if (!mAirplaneModeEnabler.isAirplaneModeOn()) {
+            MenuItem item = menu.add(0, MENU_FIX_CONNECTIVITY, 0, R.string.fix_connectivity);
+            item.setIcon(R.drawable.ic_repair_24dp);
+            item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        }
         super.onCreateOptionsMenu(menu, inflater);
     }
 
