@@ -413,10 +413,7 @@ public class ApnSettings extends RestrictedSettingsFragment
                     pref.setSummary(apn);
                 }
 
-                boolean selectable = ((type == null) || !type.equals("mms"));
-                if (isVoLTEEnabled && selectable && Utils.isSupportCTPA(appContext)) {
-                    selectable = ((type == null) || !type.equals("ims"));
-                }
+                final boolean selectable = ((type == null) || type.contains("default"));
                 pref.setSelectable(selectable);
                 if (selectable) {
                     if ((mSelectedKey != null) && mSelectedKey.equals(key)) {
