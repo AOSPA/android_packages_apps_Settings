@@ -58,7 +58,6 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
     public WifiTetherApBandPreferenceController(Context context,
             OnTetherConfigUpdateListener listener) {
         super(context, listener);
-        final SoftApConfiguration config = mWifiManager.getSoftApConfiguration();
         mContext = context;
 
         syncBandSupportAndCountryCode();
@@ -73,9 +72,18 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
             mBandIndex = SoftApConfiguration.BAND_2GHZ;
             Log.d(TAG, "Updating band index to BAND_2GHZ because no config");
         } else if (is5GhzBandSupported() || is6GhzBandSupported()) {
-            if (config.getBands().length == 2)
-                mBandIndex = BAND_BOTH_2G_5G;
-            else
+            if (config.getBands().length == 2) {
+                if (config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_OWE) {
+                    mWifiManager.setSoftApConfiguration(
+                            new SoftApConfiguration.Builder(config)
+                                .setBand(SoftApConfiguration.BAND_2GHZ)
+                                .build());
+                    mBandIndex = SoftApConfiguration.BAND_2GHZ;
+                    Log.d(TAG, "Dual band not supported with OWE, updating band index to 2GHz");
+                } else {
+                    mBandIndex = BAND_BOTH_2G_5G;
+                }
+            } else
                 mBandIndex = validateSelection(config.getBand());
             Log.d(TAG, "Updating band index to " + mBandIndex);
         } else {
@@ -151,6 +159,7 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
 
     @VisibleForTesting
     void updatePreferenceEntries() {
+        final SoftApConfiguration config = mWifiManager.getSoftApConfiguration();
         Resources res = mContext.getResources();
         ArrayList<String> bandEntries =  new ArrayList<String>();
         ArrayList<String> bandSummaries =  new ArrayList<String>();
@@ -168,7 +177,8 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
             bandSummaries.add(mContext.getString(R.string.wifi_ap_prefer_6G));
         }
         // Add Dual AP bands
-        if (is5GhzBandSupported() && mWifiManager.isBridgedApConcurrencySupported()) {
+        if (is5GhzBandSupported() && mWifiManager.isBridgedApConcurrencySupported()
+                && (config != null) && (config.getSecurityType() != SoftApConfiguration.SECURITY_TYPE_OWE)) {
             bandEntries.add(String.valueOf(BAND_BOTH_2G_5G));
             bandSummaries.add(mContext.getString(R.string.wifi_ap_choose_vendor_dual_band));
         }

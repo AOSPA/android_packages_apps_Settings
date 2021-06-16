@@ -76,6 +76,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     private WifiManager mWifiManager;
     private boolean mRestartWifiApAfterConfigChange;
     private boolean mUnavailable;
+    private boolean wasApBandPrefUpdated = false;
 
     @VisibleForTesting
     TetherChangeReceiver mTetherChangeReceiver;
@@ -206,6 +207,19 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         }
         mWifiManager.setSoftApConfiguration(config);
 
+        if (mSecurityPreferenceController.isOweDualSapSupported()) {
+            if ((config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_OWE)
+                   && (mApBandPreferenceController.getBandIndex() == BAND_BOTH_2G_5G)) {
+                mApBandPreferenceController.updatePreferenceEntries();
+                mApBandPreferenceController.updateDisplay();
+                wasApBandPrefUpdated = true;
+            } else if (wasApBandPrefUpdated) {
+                mApBandPreferenceController.updatePreferenceEntries();
+                mApBandPreferenceController.updateDisplay();
+                wasApBandPrefUpdated = false;
+            }
+        }
+
         if (context instanceof WifiTetherSecurityPreferenceController) {
             reConfigInitialExpandedChildCount();
         }
@@ -215,15 +229,23 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         final SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder();
         final int securityType = mSecurityPreferenceController.getSecurityType();
         configBuilder.setSsid(mSSIDPreferenceController.getSSID());
-        if (securityType != SoftApConfiguration.SECURITY_TYPE_OPEN) {
+        if (securityType == SoftApConfiguration.SECURITY_TYPE_OPEN
+              || securityType == SoftApConfiguration.SECURITY_TYPE_OWE) {
+            configBuilder.setPassphrase(null, securityType);
+        } else {
             configBuilder.setPassphrase(
                     mPasswordPreferenceController.getPasswordValidated(securityType),
                     securityType);
         }
         if (mApBandPreferenceController.getBandIndex() == BAND_BOTH_2G_5G) {
-            int[] dualBands = new int[] {
-                    SoftApConfiguration.BAND_2GHZ, SoftApConfiguration.BAND_5GHZ};
-            configBuilder.setBands(dualBands);
+            // Fallback to 2G band if user selected OWE+Dual band
+            if (securityType == SoftApConfiguration.SECURITY_TYPE_OWE) {
+                configBuilder.setBand(SoftApConfiguration.BAND_2GHZ);
+            } else {
+                int[] dualBands = new int[] {
+                       SoftApConfiguration.BAND_2GHZ, SoftApConfiguration.BAND_5GHZ};
+                configBuilder.setBands(dualBands);
+            }
         } else {
             configBuilder.setBand(mApBandPreferenceController.getBandIndex());
         }
