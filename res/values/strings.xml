@@ -867,8 +867,6 @@
     <!-- Button text in face settings which lets the user enroll their face [CHAR LIMIT=40] -->
     <string name="security_settings_face_settings_enroll">Set up Face Unlock</string>
     <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_settings_top_intro">Use Face Unlock to unlock your device, sign in to apps, and confirm payments.</string>
-    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_settings_footer">Use your face to unlock your phone or for authentication in apps, like when you sign in or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face.\n\nYour phone can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
     <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_settings_footer_attention_not_supported">Use your face to unlock your phone or for authentication in apps, like when you sign in or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour phone can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
@@ -919,8 +917,6 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_message_3" product="default">Your phone will occasionally use your recent fingerprint images to create improved fingerprint models.</string>
     <!-- Introduction detail message shown in fingerprint enrollment dialog, when fingerprint unlock is disabled by device admin [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled">Use your fingerprint to unlock your phone or approve purchases.\n\nNote: You can\u2019t use your fingerprint to unlock this device. For more information, contact your organization\u2019s admin.</string>
-    <!-- Introduction detail message shown in fingerprint enrollment screen in setup wizard. [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_enroll_introduction_message_setup">Use your fingerprint to unlock your phone or approve purchases.\n\nNote: Your fingerprint may be less secure than a strong pattern or PIN.</string>
     <!-- Button text to cancel enrollment from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_introduction_cancel">Cancel</string>
     <!-- Button text to cancel enrollment [CHAR LIMIT=30] -->
@@ -2029,10 +2025,12 @@
     <string name="wifi_display_listen_channel" translatable="false">Listen channel</string>
     <!-- Wifi Display settings. The dropdown menu title for choosing operating channel during certification process. [CHAR LIMIT=40] -->
     <string name="wifi_display_operating_channel" translatable="false">Operating channel</string>
-    <!-- Wifi 2.4GHz is used as an universal itendifier for 2.4GHz band -->
+    <!-- Wifi 2.4GHz is used as a universal identifier for 2.4GHz band -->
     <string name="wifi_band_24ghz">2.4 GHz</string>
-    <!-- Wifi Internal 5GHz as an universal itendifier for 5GHz band -->
+    <!-- Wifi Internal 5GHz as a universal identifier for 5GHz band -->
     <string name="wifi_band_5ghz">5 GHz</string>
+    <!-- Wifi 6GHz is used as a universal identifier for 6GHz band [CHAR LIMIT=40] -->
+    <string name="wifi_band_6ghz">6 GHz</string>
     <!-- Wifi Internal 60GHz as an universal identifier for 60GHz band -->
     <string name="wifi_band_60ghz">60 GHz</string>
     <!-- Wifi Sign in text for button [CHAR LIMIT = 40]-->
@@ -3081,7 +3079,7 @@
     <!-- Display settings screen, peak refresh rate settings summary [CHAR LIMIT=NONE] -->
     <string name="peak_refresh_rate_summary">Automatically raises the refresh rate from 60 to 90 Hz for some content. Increases battery usage.</string>
     <!-- Display developer settings: Force to the highest refresh rate [CHAR LIMIT=NONE] -->
-    <string name="force_high_refresh_rate_toggle">Force 90 Hz refresh rate</string>
+    <string name="force_high_refresh_rate_toggle">Force peak refresh rate</string>
     <!-- Display developer settings: Force to the highest refresh rate description [CHAR LIMIT=NONE]-->
     <string name="force_high_refresh_rate_desc">Highest refresh rate for improved touch responsiveness &amp; animation quality. Increases battery usage.</string>
     <!-- Display settings screen, setting option name to enable adaptive sleep [CHAR LIMIT=30] -->
@@ -3218,8 +3216,8 @@
     <string name="wallpaper_settings_title">Wallpaper</string>
     <!-- Styles & Wallpapers settings title [CHAR LIMIT=30] -->
     <string name="style_and_wallpaper_settings_title">Wallpaper &amp; style</string>
-    <!-- Summary for the top level Styles & wallpapers Settings [CHAR LIMIT=NONE]-->
-    <string name="wallpaper_dashboard_summary">Colors, app grid</string>
+    <!-- Summary for the top level wallpapers settings [CHAR LIMIT=NONE]-->
+    <string name="wallpaper_dashboard_summary">Home, lock screen</string>
     <!-- Wallpaper settings summary when default wallpaper is used [CHAR LIMIT=NONE] -->
     <string name="wallpaper_settings_summary_default">Default</string>
     <!-- Wallpaper settings summary when wallpaper has been updated [CHAR LIMIT=NONE] -->
@@ -5229,7 +5227,7 @@
     <!-- Settings title for accessibility settings screen -->
     <string name="accessibility_settings_title">Accessibility settings</string>
     <!-- Summary for Accessibility settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
-    <string name="accessibility_settings_summary">Screen readers, display, interaction controls</string>
+    <string name="accessibility_settings_summary">Display, interaction, audio</string>
     <!-- Settings title for a brief version of Vision-Related Accessibility Settings. Displayed in Setup Wizard only. [CHAR LIMIT=35] -->
     <string name="vision_settings_title">Vision Settings</string>
     <!-- Settings description for a brief version of Vision-Related Accessibility Settings. Tells the user that they can adjust these settings now to help them through the remainder of the Setup Wizard and that they can later be changed in Settings. Displayed in Setup Wizard only. [CHAR LIMIT=none] -->
@@ -5370,18 +5368,24 @@
     <string name="accessibility_shortcut_title"><xliff:g id="service" example="Select to Speak">%1$s</xliff:g> shortcut</string>
     <!-- Title for software shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_summary_software">Accessibility button</string>
+    <!-- Title for software shortcut gesture in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_summary_software_gesture">Accessibility gesture</string>
     <!-- Title for software shortcut in gesture mode in accessibility edit shortcut dialog while using gesture navigation is enabled. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture">Swipe up with 2 fingers</string>
     <!-- Title for software shortcut in gesture mode in accessibility edit shortcut dialog while using gesture navigation and touch exploration are enabled. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback">Swipe up with 3 fingers</string>
     <!-- Summary for accessibility shortcut preference for software shortcut type. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_title_software">Tap accessibility button</string>
+    <!-- Summary for accessibility shortcut preference for software shortcut gesture type. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture">Use accessibility gesture</string>
     <!-- Summary for software shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_summary_software">Tap the accessibility button <xliff:g id="accessibility_icon" example="[Icon]">%s</xliff:g> at the bottom of your screen.\n\nTo switch between features, touch &amp; hold the accessibility button.</string>
     <!-- Summary for software shortcut in gesture mode in accessibility edit shortcut dialog while using gesture navigation is enabled. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture">Swipe up from the bottom of the screen with 2 fingers.\n\nTo switch between features, swipe up with 2 fingers and hold.</string>
     <!-- Summary for software shortcut in gesture mode in accessibility edit shortcut dialog while using gesture navigation and touch exploration are enabled [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback">Swipe up from the bottom of the screen with 3 fingers.\n\nTo switch between features, swipe up with 3 fingers and hold.</string>
+    <!-- Summary for software shortcut in accessibility edit shortcut dialog when user had enabled the accessibility gesture mode. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_dialog_customize_software_gesture"><annotation id="link">Customize accessibility gesture</annotation></string>
     <!-- Summary for software shortcut in accessibility edit shortcut dialog when user had enabled the accessibility floating button mode (Floating over other apps). [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating"><annotation id="link">Customize accessibility button</annotation></string>
     <!-- Footer to show help link content description. [CHAR LIMIT=NONE] -->
@@ -5416,10 +5420,16 @@
     <string name="accessibility_shortcut_description">Allow feature shortcut to turn on from the lock screen. Hold both volume keys for a few seconds.</string>
     <!-- Title for the accessibility button page. [CHAR LIMIT=35] -->
     <string name="accessibility_button_title">Accessibility button</string>
+    <!-- Title for the accessibility button & gesture page. [CHAR LIMIT=35] -->
+    <string name="accessibility_button_gesture_title">Accessibility button &amp; gesture</string>
+    <!-- Intro for the accessibility button page. [CHAR LIMIT=100] -->
+    <string name="accessibility_button_intro">Using the accessibility button. The gesture isn\u2019t available with 3-button navigation.</string>
     <!-- Summary text for the accessibility button preference. [CHAR LIMIT=50] -->
     <string name="accessibility_button_summary">Quickly access accessibility features</string>
     <!-- Description for the accessibility button page. Explain how this page works. [CHAR LIMIT=NONE] -->
     <string name="accessibility_button_description">Quickly access accessibility features from any screen. \n\nTo get started, go to accessibility settings and select a feature. Tap on the shortcut and select the accessibility button.</string>
+    <!-- Title for the button or gesture of the accessibility button. [CHAR LIMIT=35] -->
+    <string name="accessibility_button_or_gesture_title">Use button or gesture</string>
     <!-- Title for the location of the accessibility button. [CHAR LIMIT=35] -->
     <string name="accessibility_button_location_title">Location</string>
     <!-- Title for the size of the accessibility button. [CHAR LIMIT=35] -->
@@ -6034,6 +6044,8 @@
     <string name="manager_battery_usage_unrestricted_title">Unrestricted</string>
     <!-- Title for the battery optimized settings [CHAR_LIMIT=40] -->
     <string name="manager_battery_usage_optimized_title">Optimized</string>
+    <!-- Title for the battery restricted settings [CHAR_LIMIT=40] -->
+    <string name="manager_battery_usage_restricted_title">Restricted</string>
     <!-- Summary for the battery unrestricted settings [CHAR_LIMIT=NONE] -->
     <string name="manager_battery_usage_unrestricted_summary">Allow battery usage in background without restrictions. May use more battery.</string>
     <!-- Summary for the battery optimized settings [CHAR_LIMIT=NONE] -->
@@ -6839,9 +6851,9 @@
     <string name="cert_not_installed">Certificate not installed</string>
 
     <!-- Title of screen shown to the user when an app requests to manage the user's KeyChain credentials [CHAR LIMIT=NONE] -->
-    <string name="request_manage_credentials_title">Allow <xliff:g id="app_name" example="Ping">%s</xliff:g> to install certificates on this device?</string>
+    <string name="request_manage_credentials_title">Allow <b><xliff:g id="app_name" example="Ping">^1</xliff:g></b> to install certificates on this device?</string>
     <!-- Description of screen shown to the user when an app requests to manage the user's KeyChain credentials [CHAR LIMIT=NONE] -->
-    <string name="request_manage_credentials_description">These certificates will identify you to the apps and URLs below</string>
+    <string name="request_manage_credentials_description">These certificates will verify you by sharing your device\u2019s unique ID with the apps and URLs below</string>
     <!-- Label for button to not allow an app to manage the user's KeyChain credentials [CHAR_LIMIT=50] -->
     <string name="request_manage_credentials_dont_allow">Don\u2019t allow</string>
     <!-- Label for button to allow an app to manage the user's KeyChain credentials [CHAR_LIMIT=50] -->
@@ -6853,7 +6865,9 @@
     <!-- Summary if there is no certificate management app [CHAR_LIMIT=NONE] -->
     <string name="no_certificate_management_app">None</string>
     <!-- Summary of preference if there is a certificate management app [CHAR LIMIT=NONE] -->
-    <string name="certificate_management_app_description">Certificates installed by this app identify you to the apps and URLs below</string>
+    <string name="certificate_management_app_description">Certificates will verify you when you use the apps and URLs below</string>
+    <!-- Label for button to uninstall all certificates installed by the credential management app [CHAR LIMIT=30] -->
+    <string name="uninstall_certs_credential_management_app">Uninstall certificates</string>
     <!-- Label for button to remove the credential management app [CHAR LIMIT=30] -->
     <string name="remove_credential_management_app">Remove</string>
     <!-- List item found in the credential management app's authentication policy [CHAR LIMIT=NONE] -->
@@ -7730,7 +7744,7 @@
     <string name="help_label">Help &amp; feedback</string>
 
     <!-- Summary text for support setting tile [CHAR LIMIT=None] -->
-    <string name="support_summary">Help articles, phone &amp; chat, getting started</string>
+    <string name="support_summary">Help articles, phone &amp; chat</string>
 
     <!-- Help URI, Default [DO NOT TRANSLATE] -->
     <string name="help_uri_default" translatable="false"></string>
@@ -8128,15 +8142,15 @@
 
     <!-- Title for setting tile leading to network and Internet settings [CHAR LIMIT=40]-->
     <string name="network_dashboard_title">Network &amp; internet</string>
-    <!-- Summary for Network and Internet settings, explaining it contains mobile network setting [CHAR LIMIT=NONE]-->
-    <string name="network_dashboard_summary_mobile">mobile</string>
-    <!-- Summary for Network and Internet settings, explaining it contains network data usage setting [CHAR LIMIT=NONE]-->
-    <string name="network_dashboard_summary_data_usage">data usage</string>
-    <!-- Summary for Network and Internet settings, explaining it contains hotspot (tethering) setting [CHAR LIMIT=NONE]-->
-    <string name="network_dashboard_summary_hotspot">hotspot</string>
+    <!-- Summary for Network and Internet settings, explaining it contains mobile, wifi setting and data usage settings [CHAR LIMIT=NONE]-->
+    <string name="network_dashboard_summary_mobile">Mobile, Wi\u2011Fi, hotspot</string>
+    <!-- Summary for Network and Internet settings, explaining it contains wifi and data usage setting [CHAR LIMIT=NONE]-->
+    <string name="network_dashboard_summary_no_mobile">Wi\u2011Fi, hotspot</string>
 
     <!-- Title for setting tile leading to Connected devices settings [CHAR LIMIT=40]-->
     <string name="connected_devices_dashboard_title">Connected devices</string>
+    <!-- Summary for Connected devices settings, explaining default settings under it [CHAR LIMIT=NONE]-->
+    <string name="connected_devices_dashboard_default_summary">Bluetooth, pairing</string>
     <!-- Summary for Connected devices settings, explaning a few important settings under it [CHAR LIMIT=NONE]-->
     <string name="connected_devices_dashboard_summary">Bluetooth, driving mode, NFC</string>
     <!-- Summary for Connected devices settings, explaning a few important settings under it [CHAR LIMIT=NONE]-->
@@ -8919,7 +8933,10 @@
 
     <!-- Bubble feature settings: Description for toggle when bubbles are turned on in notification settings [CHAR LIMIT=100] -->
     <string name="notifications_bubble_setting_on_summary">On / Conversations can appear as floating icons</string>
-
+    <!-- Bubble feature settings: Title of the toggle to turn bubbles on and off [CHAR LIMIT=100] -->
+    <string name="notifications_bubble_setting_title">Allow apps to show bubbles</string>
+    <!-- Bubble feature settings: Description shown with the toggle to turn bubbles on and off [CHAR LIMIT=NONE]-->
+    <string name="notifications_bubble_setting_description">Some conversations will appear as floating icons on top of other apps</string>
     <!-- Bubble app settings: option allowing all conversations from an app to bubble if the app sends bubbles [CHAR LIMIT=60]-->
     <string name="bubble_app_setting_all">All conversations can bubble</string>
     <!-- Bubble app settings: option allowing only user selected conversations from an app to bubble if the app sends bubbles [CHAR LIMIT=60] -->
@@ -10529,13 +10546,15 @@
         Allowing <xliff:g id="app_name" example="Settings">%1$s</xliff:g> to always run in the background may reduce battery life.
         \n\nYou can change this later from Settings > Apps &amp; notifications.</string>
     <!-- Summary of power usage for an app [CHAR LIMIT=NONE] -->
-    <string name="battery_summary"><xliff:g id="percentage" example="2">%1$s</xliff:g> use for past 24 hours</string>
-
-    <!-- Title of a group of settings that let you manage settings that affect battery life [CHAR LIMIT=60] -->
-    <string name="battery_power_management">Power management</string>
+    <string name="battery_summary"><xliff:g id="percentage" example="2">%1$s</xliff:g> use since last full charge</string>
+    <!-- Summary of power usage for an app within past 24 hr[CHAR LIMIT=NONE] -->
+    <string name="battery_summary_24hr"><xliff:g id="percentage" example="2">%1$s</xliff:g> use for past 24 hours</string>
 
     <!-- Summary for app with no battery usage [CHAR LIMIT=NONE] -->
-    <string name="no_battery_summary">No battery use for past 24 hours</string>
+    <string name="no_battery_summary">No battery use since last full charge</string>
+
+    <!-- Summary for app with no battery usage for past 24 hours [CHAR LIMIT=NONE] -->
+    <string name="no_battery_summary_24hr">No battery use for past 24 hours</string>
 
     <!-- Link to an apps notification settings [CHAR LIMIT=50] -->
     <string name="app_notification_preferences">App settings</string>
@@ -10954,7 +10973,7 @@
     <!-- Summary of display with screen sleep timeout [CHAR LIMIT=NONE] -->
     <string name="display_summary">Sleep after <xliff:g id="timeout_description" example="10 minutes">%1$s</xliff:g> of inactivity</string>
     <!-- Summary for Display settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
-    <string name="display_dashboard_summary">Screen timeout, font size</string>
+    <string name="display_dashboard_summary">Dark theme, font size, brightness</string>
 
     <!-- Example summary of display used in Setup Wizard preview screen [CHAR LIMIT=NONE] -->
     <string name="display_summary_example">Sleep after 10 minutes of inactivity</string>
@@ -11686,7 +11705,7 @@
     <!-- Title text for swiping from bottom corners to invoke the digital assistant app. [CHAR LIMIT=60] -->
     <string name="assistant_corner_gesture_title">Swipe to invoke assistant</string>
     <!-- Summary text for swiping from bottom corners to invoke the digital assistant app. [CHAR LIMIT=NONE] -->
-    <string name="assistant_corner_gesture_summary">Swipe up from a bottom corner corner to invoke digital assistant app.</string>
+    <string name="assistant_corner_gesture_summary">Swipe up from a bottom corner to invoke digital assistant app.</string>
 
     <!-- Content description for the Information icon [CHAR LIMIT=30] -->
     <string name="information_label">Information</string>
@@ -11726,7 +11745,7 @@
     <string name="swipe_bottom_to_notifications_summary">Swipe down on the bottom edge of the screen to show your notifications.\nYou can\'t use one-handed mode when this feature is turned on.</string>
 
     <!-- Preference and settings suggestion title text for one handed [CHAR LIMIT=60] -->
-    <string name="one_handed_title">One-Handed mode</string>
+    <string name="one_handed_title">One-handed mode</string>
     <!-- Preference Switch for enabling one handed [CHAR LIMIT=60] -->
     <string name="one_handed_mode_enabled">Use one-handed mode</string>
     <!-- Preference Switch for app taps to exit one handed [CHAR LIMIT=60] -->
@@ -11741,6 +11760,19 @@
     <string name="one_handed_timeout_long">12 seconds</string>
     <!-- Search keywords for "One-Handed" settings [CHAR_LIMIT=NONE] -->
     <string name="keywords_one_handed">reachability</string>
+    <!-- Category title for one handed swipe down [CHAR_LIMIT=60] -->
+    <string name="one_handed_mode_swipe_down_category">Swipe down to</string>
+    <!-- One-handed mode Intro Text [CHAR_LIMIT=NONE] -->
+    <string name="one_handed_mode_intro_text">To use one handed mode, swipe down from the bottom edge of the screen. To use this feature, make sure gesture navigation is turned on in system navigation settings.</string>
+    <!-- One-handed mode pull down screen into reach action title [CHAR_LIMIT=60] -->
+    <string name="one_handed_action_pull_down_screen_title">Pull screen into reach</string>
+    <!-- One-handed mode pull down screen into reach action title [CHAR_LIMIT=NONE] -->
+    <string name="one_handed_action_pull_down_screen_summary">The top of the screen will move into reach of your thumb.</string>
+    <!-- One-handed mode show notification action [CHAR_LIMIT=60] -->
+    <string name="one_handed_action_show_notification_title">Show notifications</string>
+    <!-- One-handed mode show notification action [CHAR_LIMIT=NONE] -->
+    <string name="one_handed_action_show_notification_summary">Notification and settings will appear.</string>
+    <!-- One-handed mode Intro text for gesture navigation [CHAR_LIMIT=NONE] -->
 
     <!-- Summary text for ambient display double tap [CHAR LIMIT=NONE]-->
     <string name="ambient_display_summary">To check time, notifications, and other info, double-tap your screen.</string>
@@ -13296,7 +13328,7 @@
     <!-- Provider Model: Calls and SMS controllers settings screen, item title to go into the Calls and SMS settings -->
     <string name="calls_and_sms">Calls &amp; SMS</string>
     <!-- Provider Model: Name for call settings category [CHAR LIMIT=NONE] -->
-    <string name="calls_and_sms_category">Wi\u2011Fi Calling</string>
+    <string name="calls_and_sms_category">Wi\u2011Fi calling</string>
     <!-- Provider Model: Summary for calling preference -->
     <string name="calls_sms_wfc_summary">Make and receive calls over Wi\u2011Fi</string>
     <!-- Provider Model: Label for footnote on calling preference -->
@@ -13459,8 +13491,6 @@
     <string name="adaptive_brightness_main_switch_title">Use adaptive brightness</string>
     <!-- Title for wifi calling main switch preferences. [CHAR LIMIT=50] -->
     <string name="wifi_calling_main_switch_title">Use Wi‑Fi calling</string>
-    <!-- Title for Bubbles main switch preferences. [CHAR LIMIT=50] -->
-    <string name="bubbles_main_switch_title">Use Bubbles</string>
     <!-- Title for Screen saver main switch preferences. [CHAR LIMIT=50] -->
     <string name="screen_saver_main_switch_title">Use screen saver</string>
 
@@ -13534,6 +13564,27 @@
     <string name="game_settings_title">Game settings</string>
     <!-- Summary for Game settings entry. [CHAR_LIMIT=NONE] -->
     <string name="game_settings_summary">Turn on Game Dashboard shortcut, etc</string>
+
+    <!-- Bluetooth sim card permission alert for notification title [CHAR LIMIT=none] -->
+    <string name="bluetooth_sim_card_access_notification_title">SIM card access request</string>
+    <!-- Bluetooth sim card permission alert for notification content [CHAR LIMIT=none] -->
+    <string name="bluetooth_sim_card_access_notification_content">A device wants to access your SIM card. Tap for details.</string>
+    <!-- Bluetooth sim card permission alert for dialog title [CHAR LIMIT=none] -->
+    <string name="bluetooth_sim_card_access_dialog_title">Allow access to SIM card?</string>
+    <!-- Bluetooth sim card permission alert for dialog content [CHAR LIMIT=none] -->
+    <string name="bluetooth_sim_card_access_dialog_content">A Bluetooth device, <xliff:g id="device_name" example="My device">%1$s</xliff:g>, wants to access data on your SIM card. This includes your contacts.\n\nWhile connected, <xliff:g id="device_name" example="My device">%2$s</xliff:g> will receive all calls made to <xliff:g id="phone_number" example="0912345678">%3$s</xliff:g>.</string>
+    <!-- Bluetooth connect permission alert for notification title [CHAR LIMIT=none] -->
+    <string name="bluetooth_connect_access_notification_title">Bluetooth device available</string>
+    <!-- Bluetooth connect permission alert for notification content [CHAR LIMIT=none] -->
+    <string name="bluetooth_connect_access_notification_content">A device wants to connect. Tap for details.</string>
+    <!-- Bluetooth connect permission alert for dialog title [CHAR LIMIT=none] -->
+    <string name="bluetooth_connect_access_dialog_title">Connect to Bluetooth device?</string>
+    <!-- Bluetooth connect permission alert for dialog content [CHAR LIMIT=none] -->
+    <string name="bluetooth_connect_access_dialog_content"><xliff:g id="device_name" example="My device">%1$s</xliff:g> wants to connect to this phone.\n\nYou haven\u2019t connected to <xliff:g id="device_name" example="My device">%2$s</xliff:g> before.</string>
+    <!-- Strings for Dialog don't connect button -->
+    <string name="bluetooth_connect_access_dialog_negative">Don\u2019t connect</string>
+    <!-- Strings for Dialog connect button -->
+    <string name="bluetooth_connect_access_dialog_positive">Connect</string>
     <!-- Title of selecting NR mode in developer options settings [CHAR LIMIT=NONE]-->
     <string name="prefer_5G_nr_mode_title">Prefer 5G NR Mode</string>
     <!-- Summary of selecting NR mode in developer options settings [CHAR LIMIT=NONE]-->
