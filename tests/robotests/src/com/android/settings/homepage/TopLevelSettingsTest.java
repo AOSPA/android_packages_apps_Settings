@@ -18,14 +18,22 @@ package com.android.settings.homepage;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.util.FeatureFlagUtils;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.core.FeatureFlags;
+import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,6 +51,11 @@ public class TopLevelSettingsTest {
         mContext = RuntimeEnvironment.application;
         mSettings = spy(new TopLevelSettings());
         when(mSettings.getContext()).thenReturn(mContext);
+        final FakeFeatureFactory featureFactory = FakeFeatureFactory.setupForTest();
+        when(featureFactory.dashboardFeatureProvider
+                .getTilesForCategory(nullable(String.class)))
+                .thenReturn(null);
+        mSettings.onAttach(mContext);
     }
 
     @Test
@@ -51,15 +64,19 @@ public class TopLevelSettingsTest {
     }
 
     @Test
-    public void getPreferenceScreenResId_silkyHomeDisabled_defaultSettings() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, false);
-        assertThat(mSettings.getPreferenceScreenResId()).isEqualTo(R.xml.top_level_settings);
-    }
+    public void onCreatePreferences_shouldTintPreferenceIcon() {
+        final Preference preference = new Preference(mContext);
+        preference.setTitle(R.string.network_dashboard_title);
+        final Drawable icon = spy(mContext.getDrawable(R.drawable.ic_settings_wireless));
+        preference.setIcon(icon);
+        final PreferenceScreen screen = spy(new PreferenceScreen(mContext, null /* attrs */));
+        doReturn(1).when(screen).getPreferenceCount();
+        doReturn(preference).when(screen).getPreference(anyInt());
+        doReturn(screen).when(mSettings).getPreferenceScreen();
+        doReturn(0).when(mSettings).getPreferenceScreenResId();
 
-    @Test
-    public void getPreferenceScreenResId_silkyHomeEnabled_groupedSettings() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, true);
-        assertThat(mSettings.getPreferenceScreenResId()).isEqualTo(
-                R.xml.top_level_settings_grouped);
+        mSettings.onCreatePreferences(new Bundle(), "rootKey");
+
+        verify(icon).setTint(anyInt());
     }
 }

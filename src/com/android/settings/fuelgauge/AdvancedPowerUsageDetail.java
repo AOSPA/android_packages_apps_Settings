@@ -25,10 +25,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.text.Html;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
@@ -44,11 +44,14 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.EntityHeaderController;
+import com.android.settingslib.HelpUtils;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.utils.StringUtil;
+import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.widget.RadioButtonPreference;
 
@@ -102,7 +105,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     @VisibleForTesting
     Preference mBackgroundPreference;
     @VisibleForTesting
-    Preference mFooterPreference;
+    FooterPreference mFooterPreference;
     @VisibleForTesting
     RadioButtonPreference mRestrictedPreference;
     @VisibleForTesting
@@ -261,6 +264,12 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         initHeader();
         if (enableTriState) {
             initPreferenceForTriState(getContext());
+            final String packageName = mBatteryOptimizeUtils.getPackageName();
+            FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
+                .action(
+                    getContext(),
+                    SettingsEnums.OPEN_APP_BATTERY_USAGE,
+                    packageName);
         } else {
             initPreference(getContext());
         }
@@ -343,7 +352,13 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
             //Present default string to normal app.
             footerString = context.getString(R.string.manager_battery_usage_footer);
         }
-        mFooterPreference.setTitle(Html.fromHtml(footerString, Html.FROM_HTML_MODE_COMPACT));
+        mFooterPreference.setTitle(footerString);
+        mFooterPreference.setLearnMoreAction(v ->
+                startActivityForResult(HelpUtils.getHelpIntent(context,
+                        context.getString(R.string.help_url_app_usage_settings),
+                        /*backupContext=*/ ""), /*requestCode=*/ 0));
+        mFooterPreference.setLearnMoreContentDescription(
+                context.getString(R.string.manager_battery_usage_link_a11y));
     }
 
     @Override
@@ -410,9 +425,30 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
     @Override
     public void onRadioButtonClicked(RadioButtonPreference selected) {
-        updatePreferenceState(mUnrestrictedPreference, selected.getKey());
-        updatePreferenceState(mOptimizePreference, selected.getKey());
-        updatePreferenceState(mRestrictedPreference, selected.getKey());
+        final String selectedKey = selected.getKey();
+        updatePreferenceState(mUnrestrictedPreference, selectedKey);
+        updatePreferenceState(mOptimizePreference, selectedKey);
+        updatePreferenceState(mRestrictedPreference, selectedKey);
+
+        // Logs metric.
+        int metricCategory = 0;
+        if (selectedKey.equals(mUnrestrictedPreference.getKey())) {
+            metricCategory = SettingsEnums.ACTION_APP_BATTERY_USAGE_UNRESTRICTED;
+        } else if (selectedKey.equals(mOptimizePreference.getKey())) {
+            metricCategory = SettingsEnums.ACTION_APP_BATTERY_USAGE_OPTIMIZED;
+        } else if (selectedKey.equals(mRestrictedPreference.getKey())) {
+            metricCategory = SettingsEnums.ACTION_APP_BATTERY_USAGE_RESTRICTED;
+        }
+        if (metricCategory != 0) {
+            FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
+                .action(
+                    getContext(),
+                    metricCategory,
+                    new Pair(ConvertUtils.METRIC_KEY_PACKAGE,
+                            mBatteryOptimizeUtils.getPackageName()),
+                    new Pair(ConvertUtils.METRIC_KEY_BATTERY_USAGE,
+                            getArguments().getString(EXTRA_POWER_USAGE_PERCENT)));
+        }
     }
 
     private void updatePreferenceState(RadioButtonPreference preference, String selectedKey) {
@@ -436,13 +472,18 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
             long foregroundTimeMs, long backgroundTimeMs, String slotTime) {
         final long totalTimeMs = foregroundTimeMs + backgroundTimeMs;
         final CharSequence usageTimeSummary;
+        final PowerUsageFeatureProvider powerFeatureProvider =
+                FeatureFactory.getFactory(getContext()).getPowerUsageFeatureProvider(getContext());
 
         if (totalTimeMs == 0) {
-            usageTimeSummary = getText(R.string.battery_not_usage);
+            usageTimeSummary = getText(powerFeatureProvider.isChartGraphEnabled(getContext())
+                    ? R.string.battery_not_usage_24hr : R.string.battery_not_usage);
         } else if (slotTime == null) {
-            // Shows summary text with past 24 hr if slot time is null.
-            usageTimeSummary =
-                    getAppPast24HrActiveSummary(foregroundTimeMs, backgroundTimeMs, totalTimeMs);
+            // Shows summary text with past 24 hr or full charge if slot time is null.
+            usageTimeSummary = powerFeatureProvider.isChartGraphEnabled(getContext())
+                    ? getAppPast24HrActiveSummary(foregroundTimeMs, backgroundTimeMs, totalTimeMs)
+                    : getAppFullChargeActiveSummary(
+                            foregroundTimeMs, backgroundTimeMs, totalTimeMs);
         } else {
             // Shows summary text with slot time.
             usageTimeSummary = getAppActiveSummaryWithSlotTime(
@@ -451,7 +492,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         return usageTimeSummary;
     }
 
-    private CharSequence getAppPast24HrActiveSummary(
+    private CharSequence getAppFullChargeActiveSummary(
             long foregroundTimeMs, long backgroundTimeMs, long totalTimeMs) {
         // Shows background summary only if we don't have foreground usage time.
         if (foregroundTimeMs == 0 && backgroundTimeMs != 0) {
@@ -481,6 +522,49 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         } else {
             return TextUtils.expandTemplate(
                     getText(R.string.battery_total_and_bg_usage),
+                    StringUtil.formatElapsedTime(
+                            getContext(),
+                            totalTimeMs,
+                            /* withSeconds */ false,
+                            /* collapseTimeUnit */ false),
+                    StringUtil.formatElapsedTime(
+                            getContext(),
+                            backgroundTimeMs,
+                            /* withSeconds */ false,
+                            /* collapseTimeUnit */ false));
+        }
+    }
+
+    private CharSequence getAppPast24HrActiveSummary(
+            long foregroundTimeMs, long backgroundTimeMs, long totalTimeMs) {
+        // Shows background summary only if we don't have foreground usage time.
+        if (foregroundTimeMs == 0 && backgroundTimeMs != 0) {
+            return backgroundTimeMs < DateUtils.MINUTE_IN_MILLIS
+                    ? getText(R.string.battery_bg_usage_less_minute_24hr)
+                    : TextUtils.expandTemplate(getText(R.string.battery_bg_usage_24hr),
+                            StringUtil.formatElapsedTime(
+                                    getContext(),
+                                    backgroundTimeMs,
+                                    /* withSeconds */ false,
+                                    /* collapseTimeUnit */ false));
+        // Shows total usage summary only if total usage time is small.
+        } else if (totalTimeMs < DateUtils.MINUTE_IN_MILLIS) {
+            return getText(R.string.battery_total_usage_less_minute_24hr);
+        // Shows different total usage summary when background usage time is small.
+        } else if (backgroundTimeMs < DateUtils.MINUTE_IN_MILLIS) {
+            return TextUtils.expandTemplate(
+                    getText(backgroundTimeMs == 0
+                            ? R.string.battery_total_usage_24hr
+                            : R.string.battery_total_usage_and_bg_less_minute_usage_24hr),
+                    StringUtil.formatElapsedTime(
+                            getContext(),
+                            totalTimeMs,
+                            /* withSeconds */ false,
+                            /* collapseTimeUnit */ false));
+        // Shows default summary.
+        } else {
+            return TextUtils.expandTemplate(
+                    getText(R.string.battery_total_and_bg_usage_24hr),
                     StringUtil.formatElapsedTime(
                             getContext(),
                             totalTimeMs,

@@ -17,7 +17,6 @@
 package com.android.settings.accessibility;
 
 import android.content.ComponentName;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -35,8 +34,10 @@ import com.android.settings.display.FontSizePreferenceFragmentForSetupWizard;
 import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settingslib.core.instrumentation.Instrumentable;
+import com.android.settingslib.transition.SettingsTransitionHelper;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
+import com.google.android.setupdesign.util.ThemeHelper;
 
 public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivity {
 
@@ -92,6 +93,7 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
                         : Instrumentable.METRICS_CATEGORY_UNKNOWN)
                 .setExtras(SetupWizardUtils.copyLifecycleExtra(getIntent().getExtras(),
                         new Bundle()))
+                .setTransitionType(SettingsTransitionHelper.TransitionType.TRANSITION_FADE)
                 .launch();
         return true;
     }
@@ -99,7 +101,8 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
     @Override
     protected void onCreate(Bundle savedState) {
         super.onCreate(savedState);
-
+        setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+        ThemeHelper.trySetDynamicColor(this);
         tryLaunchFontSizeSettings();
         findViewById(R.id.content_parent).setFitsSystemWindows(false);
     }
@@ -118,18 +121,12 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
                     .setArguments(args)
                     .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
                     .setExtras(SetupWizardUtils.copyLifecycleExtra(getIntent().getExtras(),
-                            new Bundle()));
+                            new Bundle()))
+                    .setTransitionType(SettingsTransitionHelper.TransitionType.TRANSITION_FADE);
 
             Log.d(LOG_TAG, "Launch font size settings");
             subSettingLauncher.launch();
             finish();
         }
-    }
-
-    @Override
-    protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
-        final int new_resid = SetupWizardUtils.getTheme(this, getIntent());
-        theme.applyStyle(R.style.SetupWizardPartnerResource, true);
-        super.onApplyThemeResource(theme, new_resid, first);
     }
 }

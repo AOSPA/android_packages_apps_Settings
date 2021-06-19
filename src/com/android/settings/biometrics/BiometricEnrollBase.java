@@ -20,7 +20,6 @@ import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 
 import android.annotation.Nullable;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -38,6 +37,7 @@ import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.GlifLayout;
+import com.google.android.setupdesign.util.ThemeHelper;
 
 /**
  * Base activity for all biometric enrollment steps.
@@ -100,6 +100,8 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+        ThemeHelper.trySetDynamicColor(this);
         mChallenge = getIntent().getLongExtra(EXTRA_KEY_CHALLENGE, -1L);
         mSensorId = getIntent().getIntExtra(EXTRA_KEY_SENSOR_ID, -1);
         // Don't need to retrieve the HAT if it already exists. In some cases, the extras do not
@@ -120,13 +122,6 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
             mSensorId = savedInstanceState.getInt(EXTRA_KEY_SENSOR_ID);
         }
         mUserId = getIntent().getIntExtra(Intent.EXTRA_USER_ID, UserHandle.myUserId());
-    }
-
-    @Override
-    protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
-        final int new_resid = SetupWizardUtils.getTheme(this, getIntent());
-        theme.applyStyle(R.style.SetupWizardPartnerResource, true);
-        super.onApplyThemeResource(theme, new_resid, first);
     }
 
     @Override
@@ -175,20 +170,28 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
                 layoutTitle.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
             }
             getLayout().setHeaderText(title);
+            getLayout().getHeaderTextView().setContentDescription(title);
             setTitle(title);
         }
     }
 
     protected void setHeaderText(int resId) {
         setHeaderText(resId, false /* force */);
+        getLayout().getHeaderTextView().setContentDescription(getText(resId));
     }
 
     protected void setHeaderText(CharSequence title) {
         getLayout().setHeaderText(title);
+        getLayout().getHeaderTextView().setContentDescription(title);
     }
 
     protected void setDescriptionText(int resId) {
-        getLayout().setDescriptionText(resId);
+        CharSequence previousDescription = getLayout().getDescriptionText();
+        CharSequence description = getString(resId);
+        // Prevent a11y for re-reading the same string
+        if (!TextUtils.equals(previousDescription, description)) {
+            getLayout().setDescriptionText(resId);
+        }
     }
 
     protected void setDescriptionText(CharSequence descriptionText) {

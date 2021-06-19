@@ -191,12 +191,13 @@ public class AppLaunchSettings extends AppInfoBase implements
             return;
         }
         final Activity activity = getActivity();
+        final String summary = activity.getString(R.string.app_launch_top_intro_message);
         final Preference pref = EntityHeaderController
                 .newInstance(activity, this, null /* header */)
                 .setRecyclerView(getListView(), getSettingsLifecycle())
                 .setIcon(Utils.getBadgedIcon(mContext, mPackageInfo.applicationInfo))
                 .setLabel(mPackageInfo.applicationInfo.loadLabel(mPm))
-                .setSummary("" /* summary */)  // no version number
+                .setSummary(summary)  // add intro text
                 .setIsInstantApp(AppUtils.isInstant(mPackageInfo.applicationInfo))
                 .setPackageName(mPackageName)
                 .setUid(mPackageInfo.applicationInfo.uid)
@@ -311,6 +312,7 @@ public class AppLaunchSettings extends AppInfoBase implements
     /** Initialize add link preference */
     private void initAddLinkPreference() {
         mAddLinkPreference = findPreference(ADD_LINK_PREF_KEY);
+        mAddLinkPreference.setVisible(isAddLinksShown());
         mAddLinkPreference.setEnabled(isAddLinksNotEmpty());
         mAddLinkPreference.setOnPreferenceClickListener(preference -> {
             final int stateNoneLinksNo = getLinksNumber(DOMAIN_STATE_NONE);
@@ -324,6 +326,10 @@ public class AppLaunchSettings extends AppInfoBase implements
 
     private boolean isAddLinksNotEmpty() {
         return getLinksNumber(DOMAIN_STATE_NONE) > 0;
+    }
+
+    private boolean isAddLinksShown() {
+        return (isAddLinksNotEmpty() || getLinksNumber(DOMAIN_STATE_SELECTED) > 0);
     }
 
     private void showProgressDialogFragment() {

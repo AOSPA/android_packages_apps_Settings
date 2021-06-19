@@ -14,7 +14,8 @@
      limitations under the License.
 -->
 
-<resources>
+<resources
+    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
 
     <style name="Transparent">
         <item name="alertDialogTheme">@style/Theme.AlertDialog</item>
@@ -92,6 +93,10 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
+    <style name="Theme.LocalePickerWithRegionActivity" parent="Theme.Settings">
+        <item name="android:textColorHint">?android:attr/textColorSecondary</item>
+    </style>
+
     <style name="ThemeOverlay.SwitchBar.Settings.Base" parent="@*android:style/ThemeOverlay.DeviceDefault.ActionBar">
         <item name="android:elevation">1dp</item>
         <item name="switchBarMarginStart">@dimen/switchbar_subsettings_margin_start</item>
@@ -125,7 +130,8 @@
 
     <style name="Theme.AlertDialog.Base" parent="@style/Theme.AppCompat.DayNight.Dialog.Alert">
         <item name="colorAccent">@*android:color/accent_device_default_light</item>
-        <item name="android:colorBackground">@color/dialog_background</item>
+        <item name="android:colorError">@color/settings_dialog_colorError</item>
+        <item name="android:colorBackground">?androidprv:attr/colorSurface</item>
     </style>
 
     <style name="Theme.AlertDialog" parent="Theme.AlertDialog.Base">

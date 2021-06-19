@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2021 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License
+ * limitations under the License.
  */
 
 package com.android.settings.biometrics.face;
@@ -23,6 +23,7 @@ import android.hardware.face.FaceManager;
 import android.hardware.face.FaceSensorPropertiesInternal;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -41,8 +42,11 @@ import com.google.android.setupdesign.template.RequireScrollMixin;
 
 import java.util.List;
 
+/**
+ * Provides introductory info about face unlock and prompts the user to agree before starting face
+ * enrollment.
+ */
 public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
-
     private static final String TAG = "FaceEnrollIntroduction";
 
     private FaceManager mFaceManager;
@@ -66,6 +70,13 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        final ImageView iconGlasses = findViewById(R.id.icon_glasses);
+        final ImageView iconLooking = findViewById(R.id.icon_looking);
+        final ImageView iconSecurity = findViewById(R.id.icon_security);
+        iconGlasses.getBackground().setColorFilter(getIconColorFilter());
+        iconLooking.getBackground().setColorFilter(getIconColorFilter());
+        iconSecurity.getBackground().setColorFilter(getIconColorFilter());
+
         mFaceManager = Utils.getFaceManagerOrNull(this);
         mFaceFeatureProvider = FeatureFactory.getFactory(getApplicationContext())
                 .getFaceFeatureProvider();
@@ -75,14 +86,14 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                 new FooterButton.Builder(this)
                         .setText(R.string.security_settings_face_enroll_introduction_no_thanks)
                         .setListener(this::onSkipButtonClick)
-                        .setButtonType(FooterButton.ButtonType.SKIP)
-                        .setTheme(R.style.SudGlifButton_Secondary)
-                        .build()
-        );
+                        .setButtonType(FooterButton.ButtonType.NEXT)
+                        .setTheme(R.style.SudGlifButton_Primary)
+                        .build(),
+                true /* usePrimaryStyle */);
 
         FooterButton.Builder nextButtonBuilder = new FooterButton.Builder(this)
                 .setText(R.string.security_settings_face_enroll_introduction_agree)
-                .setButtonType(FooterButton.ButtonType.NEXT)
+                .setButtonType(FooterButton.ButtonType.OPT_IN)
                 .setTheme(R.style.SudGlifButton_Primary);
         if (maxFacesEnrolled()) {
             nextButtonBuilder.setListener(this::onNextButtonClick);
@@ -96,13 +107,6 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                     R.string.security_settings_face_enroll_introduction_more,
                     this::onNextButtonClick);
         }
-
-        final TextView footer2 = findViewById(R.id.face_enroll_introduction_footer_part_2);
-        final int footer2TextResource =
-                mFaceFeatureProvider.isAttentionSupported(getApplicationContext())
-                        ? R.string.security_settings_face_enroll_introduction_footer_part_2
-                        : R.string.security_settings_face_settings_footer_attention_not_supported;
-        footer2.setText(footer2TextResource);
 
         // This path is an entry point for SetNewPasswordController, e.g.
         // adb shell am start -a android.app.action.SET_NEW_PASSWORD
