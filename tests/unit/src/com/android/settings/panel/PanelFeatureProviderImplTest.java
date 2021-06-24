@@ -27,11 +27,8 @@ import android.provider.Settings;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.settings.testutils.FeatureFlagUtilsRule;
-
 import org.junit.Before;
 import org.junit.Ignore;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -39,9 +36,6 @@ import org.junit.runner.RunWith;
 public class PanelFeatureProviderImplTest {
 
     private static final String TEST_PACKAGENAME = "com.test.packagename";
-
-    @Rule
-    public final FeatureFlagUtilsRule mFeatureFlagUtilsRule = new FeatureFlagUtilsRule();
 
     private Context mContext;
     private PanelFeatureProviderImpl mProvider;
@@ -71,26 +65,5 @@ public class PanelFeatureProviderImplTest {
         final PanelContent panel = mProvider.getPanel(mContext, mBundle);
 
         assertThat(panel).isInstanceOf(VolumePanel.class);
-    }
-
-    @Test
-    public void getPanel_wifi_returnsWifiPanelWhenProviderModelDisable() {
-        mFeatureFlagUtilsRule.setProviderModelEnabled(false);
-        mBundle.putString(KEY_PANEL_TYPE_ARGUMENT, Settings.Panel.ACTION_WIFI);
-
-        final PanelContent panel = mProvider.getPanel(mContext, mBundle);
-
-        assertThat(panel).isInstanceOf(WifiPanel.class);
-    }
-
-    @Ignore
-    @Test
-    public void getPanel_wifi_returnsInternetConnectivityPanelWhenProviderModelDisable() {
-        mFeatureFlagUtilsRule.setProviderModelEnabled(true);
-        mBundle.putString(KEY_PANEL_TYPE_ARGUMENT, Settings.Panel.ACTION_WIFI);
-
-        final PanelContent panel = mProvider.getPanel(mContext, mBundle);
-
-        assertThat(panel).isInstanceOf(InternetConnectivityPanel.class);
     }
 }
