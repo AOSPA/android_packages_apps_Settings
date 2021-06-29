@@ -13,15 +13,12 @@
  */
 package com.android.settings.display;
 
-import static android.content.Intent.ACTION_SHOW_BRIGHTNESS_DIALOG;
-
 import static com.android.settingslib.display.BrightnessUtils.GAMMA_SPACE_MAX;
 import static com.android.settingslib.display.BrightnessUtils.GAMMA_SPACE_MIN;
 import static com.android.settingslib.display.BrightnessUtils.convertLinearToGammaFloat;
 
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
 import android.database.ContentObserver;
 import android.hardware.display.BrightnessInfo;
 import android.hardware.display.DisplayManager;
@@ -34,7 +31,6 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.Settings.System;
 import android.service.vr.IVrManager;
-import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -42,13 +38,11 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.core.SettingsBaseActivity;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
-import com.android.settingslib.transition.SettingsTransitionHelper;
 
 import java.text.NumberFormat;
 
@@ -83,12 +77,10 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
 
     private final DisplayListener mDisplayListener = new DisplayListener() {
         @Override
-        public void onDisplayAdded(int displayId) {
-        }
+        public void onDisplayAdded(int displayId) {}
 
         @Override
-        public void onDisplayRemoved(int displayId) {
-        }
+        public void onDisplayRemoved(int displayId) {}
 
         @Override
         public void onDisplayChanged(int displayId) {
@@ -146,18 +138,6 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
     public void onStop() {
         mContentResolver.unregisterContentObserver(mBrightnessObserver);
         mDisplayManager.unregisterDisplayListener(mDisplayListener);
-    }
-
-    @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
-            return false;
-        }
-        final Intent intent = new Intent(ACTION_SHOW_BRIGHTNESS_DIALOG);
-        intent.putExtra(SettingsBaseActivity.EXTRA_PAGE_TRANSITION_TYPE,
-                SettingsTransitionHelper.TransitionType.TRANSITION_NONE);
-        mContext.startActivity(intent);
-        return true;
     }
 
     private void updatedSummary(Preference preference) {

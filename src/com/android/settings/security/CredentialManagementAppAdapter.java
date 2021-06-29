@@ -21,7 +21,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.security.AppUriAuthenticationPolicy;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,13 +85,11 @@ public class CredentialManagementAppAdapter extends RecyclerView.Adapter<Recycle
                 ApplicationInfo applicationInfo =
                         mPackageManager.getApplicationInfo(mCredentialManagerPackage, 0);
                 mAppIconView.setImageDrawable(mPackageManager.getApplicationIcon(applicationInfo));
-                mTitleView.setText(TextUtils.expandTemplate(
-                        mContext.getText(R.string.request_manage_credentials_title),
+                mTitleView.setText(mContext.getString(R.string.request_manage_credentials_title,
                         applicationInfo.loadLabel(mPackageManager)));
             } catch (PackageManager.NameNotFoundException e) {
                 mAppIconView.setImageDrawable(null);
-                mTitleView.setText(TextUtils.expandTemplate(
-                        mContext.getText(R.string.request_manage_credentials_title),
+                mTitleView.setText(mContext.getString(R.string.request_manage_credentials_title,
                         mCredentialManagerPackage));
             }
         }

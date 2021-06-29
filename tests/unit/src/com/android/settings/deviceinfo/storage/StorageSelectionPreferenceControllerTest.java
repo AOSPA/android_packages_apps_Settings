@@ -18,8 +18,6 @@ package com.android.settings.deviceinfo.storage;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.mock;
-
 import android.content.Context;
 import android.os.Looper;
 import android.os.storage.StorageManager;
@@ -35,7 +33,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,20 +47,9 @@ public class StorageSelectionPreferenceControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        if (Looper.myLooper() == null) {
-            Looper.prepare();
-        }
         mContext = ApplicationProvider.getApplicationContext();
         mStorageManager = mContext.getSystemService(StorageManager.class);
         mController = new StorageSelectionPreferenceController(mContext, PREFERENCE_KEY);
-
-        final PreferenceManager preferenceManager = new PreferenceManager(mContext);
-        final PreferenceScreen preferenceScreen =
-                preferenceManager.createPreferenceScreen(mContext);
-        final SettingsSpinnerPreference spinnerPreference = new SettingsSpinnerPreference(mContext);
-        spinnerPreference.setKey(PREFERENCE_KEY);
-        preferenceScreen.addPreference(spinnerPreference);
-        mController.displayPreference(preferenceScreen);
     }
 
     @Test
@@ -84,6 +70,16 @@ public class StorageSelectionPreferenceControllerTest {
 
     @Test
     public void setSelectedStorageEntry_primaryStorage_correctSelectedAdapterItem() {
+        if (Looper.myLooper() == null) {
+            Looper.prepare();
+        }
+        final PreferenceManager preferenceManager = new PreferenceManager(mContext);
+        final PreferenceScreen preferenceScreen =
+                preferenceManager.createPreferenceScreen(mContext);
+        final SettingsSpinnerPreference spinnerPreference = new SettingsSpinnerPreference(mContext);
+        spinnerPreference.setKey(PREFERENCE_KEY);
+        preferenceScreen.addPreference(spinnerPreference);
+        mController.displayPreference(preferenceScreen);
         final StorageEntry primaryStorageEntry =
                 StorageEntry.getDefaultInternalStorageEntry(mContext);
         mController.setStorageEntries(mStorageManager.getVolumes().stream()
@@ -94,27 +90,6 @@ public class StorageSelectionPreferenceControllerTest {
 
         assertThat((StorageEntry) mController.mSpinnerPreference.getSelectedItem())
                 .isEqualTo(primaryStorageEntry);
-    }
-
-    @Test
-    public void setStorageEntries_1StorageEntry_preferenceInvisible() {
-        final List<StorageEntry> storageEntries = new ArrayList<>();
-        storageEntries.add(mock(StorageEntry.class));
-
-        mController.setStorageEntries(storageEntries);
-
-        assertThat(mController.mSpinnerPreference.isVisible()).isFalse();
-    }
-
-    @Test
-    public void setStorageEntries_2StorageEntries_preferenceVisible() {
-        final List<StorageEntry> storageEntries = new ArrayList<>();
-        storageEntries.add(mock(StorageEntry.class));
-        storageEntries.add(mock(StorageEntry.class));
-
-        mController.setStorageEntries(storageEntries);
-
-        assertThat(mController.mSpinnerPreference.isVisible()).isTrue();
     }
 }
 

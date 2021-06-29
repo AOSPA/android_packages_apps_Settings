@@ -21,10 +21,7 @@ import android.app.Activity;
 import android.app.admin.DevicePolicyEventLogger;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -40,9 +37,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
@@ -88,7 +83,6 @@ public class RequestManageCredentials extends Activity {
     private KeyChain.KeyChainConnection mKeyChainConnection;
 
     private boolean mDisplayingButtonPanel = false;
-    private boolean mIsLandscapeMode = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -120,8 +114,6 @@ public class RequestManageCredentials extends Activity {
                 .setStrings(mCredentialManagerPackage)
                 .write();
         setContentView(R.layout.request_manage_credentials);
-        mIsLandscapeMode = getResources().getConfiguration().orientation
-                == Configuration.ORIENTATION_LANDSCAPE;
 
         mKeyChainTread = new HandlerThread("KeyChainConnection");
         mKeyChainTread.start();
@@ -142,9 +134,6 @@ public class RequestManageCredentials extends Activity {
                         getNumberOfAuthenticationPolicyUris(mAuthenticationPolicy))
                 .write();
 
-        if (mIsLandscapeMode) {
-            loadHeader();
-        }
         loadRecyclerView();
         loadButtons();
         loadExtendedFloatingActionButton();
@@ -204,7 +193,7 @@ public class RequestManageCredentials extends Activity {
 
         CredentialManagementAppAdapter recyclerViewAdapter = new CredentialManagementAppAdapter(
                 this, mCredentialManagerPackage, mAuthenticationPolicy.getAppAndUriMappings(),
-                /* include header= */ !mIsLandscapeMode, /* include expander= */ false);
+                /* include header= */ true, /* include expander= */ false);
         mRecyclerView.setAdapter(recyclerViewAdapter);
     }
 
@@ -225,31 +214,10 @@ public class RequestManageCredentials extends Activity {
     private void loadExtendedFloatingActionButton() {
         mExtendedFab = findViewById(R.id.extended_fab);
         mExtendedFab.setOnClickListener(v -> {
-            final int position = mIsLandscapeMode
-                    ? mAuthenticationPolicy.getAppAndUriMappings().size() - 1
-                    : mAuthenticationPolicy.getAppAndUriMappings().size();
-            mRecyclerView.scrollToPosition(position);
+            mRecyclerView.scrollToPosition(mAuthenticationPolicy.getAppAndUriMappings().size());
             mExtendedFab.hide();
             showButtonPanel();
         });
-    }
-
-    private void loadHeader() {
-        final ImageView mAppIconView = findViewById(R.id.credential_management_app_icon);
-        final TextView mTitleView = findViewById(R.id.credential_management_app_title);
-        try {
-            ApplicationInfo applicationInfo =
-                    getPackageManager().getApplicationInfo(mCredentialManagerPackage, 0);
-            mAppIconView.setImageDrawable(getPackageManager().getApplicationIcon(applicationInfo));
-            mTitleView.setText(TextUtils.expandTemplate(
-                    getText(R.string.request_manage_credentials_title),
-                    applicationInfo.loadLabel(getPackageManager())));
-        } catch (PackageManager.NameNotFoundException e) {
-            mAppIconView.setImageDrawable(null);
-            mTitleView.setText(TextUtils.expandTemplate(
-                    getText(R.string.request_manage_credentials_title),
-                    mCredentialManagerPackage));
-        }
     }
 
     private void setOrUpdateCredentialManagementAppAndFinish() {

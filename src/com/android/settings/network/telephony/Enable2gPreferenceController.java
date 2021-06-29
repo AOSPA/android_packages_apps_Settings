@@ -80,7 +80,7 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
                 && carrierConfig != null
                 && !carrierConfig.getBoolean(CarrierConfigManager.KEY_HIDE_ENABLE_2G)
                 && mTelephonyManager.isRadioInterfaceCapabilitySupported(
-                    mTelephonyManager.CAPABILITY_USES_ALLOWED_NETWORK_TYPES_BITMASK);
+                    mTelephonyManager.CAPABILITY_ALLOWED_NETWORK_TYPES_USED);
         return visible ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 

@@ -20,7 +20,6 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
@@ -54,16 +53,6 @@ public class ExtraAppInfoPreferenceController extends BasePreferenceController {
     @Override
     public CharSequence getSummary() {
         return mExtraAppInfoFeatureProvider.getSummary(mContext);
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        if (mExtraAppInfoFeatureProvider != null) {
-            final Preference preference = screen.findPreference(getPreferenceKey());
-            preference.setEnabled(mExtraAppInfoFeatureProvider.isEnabled(preference.getContext()));
-        }
     }
 
     /**

@@ -98,25 +98,6 @@ public class LongPressPowerButtonPreferenceControllerTest {
                 Settings.Global.POWER_BUTTON_LONG_PRESS, -1)).isEqualTo(8);
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.KEY_CHORD_POWER_VOLUME_UP, -1)).isEqualTo(
-                LongPressPowerButtonPreferenceController.KEY_CHORD_POWER_VOLUME_UP_NO_ACTION);
-    }
-
-    @Test
-    public void preferenceUnchecked_muteChordDefault_longPressPowerSettingSetToDefaultValue() {
-        // Value out of range chosen deliberately.
-        when(mResources.getInteger(
-                com.android.internal.R.integer.config_longPressOnPowerBehavior))
-                .thenReturn(8);
-        when(mResources.getInteger(
-                com.android.internal.R.integer.config_keyChordPowerVolumeUp))
-                .thenReturn(
-                LongPressPowerButtonPreferenceController.KEY_CHORD_POWER_VOLUME_UP_MUTE_TOGGLE);
-
-        mController.onPreferenceChange(null, false);
-        assertThat(Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.POWER_BUTTON_LONG_PRESS, -1)).isEqualTo(8);
-        assertThat(Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.KEY_CHORD_POWER_VOLUME_UP, -1)).isEqualTo(
                 LongPressPowerButtonPreferenceController.KEY_CHORD_POWER_VOLUME_UP_MUTE_TOGGLE);
     }
 
@@ -134,9 +115,8 @@ public class LongPressPowerButtonPreferenceControllerTest {
                 LongPressPowerButtonPreferenceController.LONG_PRESS_POWER_SHUT_OFF);
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.KEY_CHORD_POWER_VOLUME_UP, -1)).isEqualTo(
-                LongPressPowerButtonPreferenceController.KEY_CHORD_POWER_VOLUME_UP_NO_ACTION);
+                LongPressPowerButtonPreferenceController.KEY_CHORD_POWER_VOLUME_UP_MUTE_TOGGLE);
     }
-
 
     @Test
     public void preferenceUnchecked_assistDefaultGlobalActionsEnabled_setGlobalActions() {
@@ -156,6 +136,6 @@ public class LongPressPowerButtonPreferenceControllerTest {
                 LongPressPowerButtonPreferenceController.LONG_PRESS_POWER_GLOBAL_ACTIONS);
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.KEY_CHORD_POWER_VOLUME_UP, -1)).isEqualTo(
-                LongPressPowerButtonPreferenceController.KEY_CHORD_POWER_VOLUME_UP_NO_ACTION);
+                LongPressPowerButtonPreferenceController.KEY_CHORD_POWER_VOLUME_UP_MUTE_TOGGLE);
     }
 }

@@ -82,6 +82,9 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
     protected void initViews() {
         super.initViews();
 
+        setDescriptionText(
+                R.string.security_settings_fingerprint_enroll_introduction_message_setup);
+
         FooterButton nextButton = getNextButton();
         nextButton.setText(
                 this, R.string.security_settings_fingerprint_enroll_introduction_continue_setup);

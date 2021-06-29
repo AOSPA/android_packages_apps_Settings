@@ -32,20 +32,23 @@ import com.android.settingslib.widget.BannerMessagePreference;
 public class AdaptiveSleepBatterySaverPreferenceController {
 
     @VisibleForTesting
-    BannerMessagePreference mPreference;
+    final BannerMessagePreference mPreference;
     private final PowerManager mPowerManager;
-    private final Context mContext;
 
     public AdaptiveSleepBatterySaverPreferenceController(Context context) {
+        mPreference = new BannerMessagePreference(context);
+        mPreference.setTitle(R.string.ambient_camera_summary_battery_saver_on);
+        mPreference.setPositiveButtonText(R.string.disable_text);
         mPowerManager = context.getSystemService(PowerManager.class);
-        mContext = context;
+        mPreference.setPositiveButtonOnClickListener(p -> {
+            mPowerManager.setPowerSaveModeEnabled(false);
+        });
     }
 
     /**
      * Adds the controlled preference to the provided preference screen.
      */
     public void addToScreen(PreferenceScreen screen) {
-        initializePreference();
         screen.addPreference(mPreference);
         updateVisibility();
     }
@@ -63,17 +66,6 @@ public class AdaptiveSleepBatterySaverPreferenceController {
      * Refreshes the visibility of the preference.
      */
     public void updateVisibility() {
-        initializePreference();
         mPreference.setVisible(isPowerSaveMode());
-    }
-
-    private void initializePreference() {
-        if (mPreference == null) {
-            mPreference = new BannerMessagePreference(mContext);
-            mPreference.setTitle(R.string.ambient_camera_summary_battery_saver_on);
-            mPreference.setPositiveButtonText(R.string.disable_text);
-            mPreference.setPositiveButtonOnClickListener(
-                    p -> mPowerManager.setPowerSaveModeEnabled(false));
-        }
     }
 }

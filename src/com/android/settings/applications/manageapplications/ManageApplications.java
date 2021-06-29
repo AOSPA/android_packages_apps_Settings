@@ -55,6 +55,7 @@ import android.os.UserManager;
 import android.preference.PreferenceFrameLayout;
 import android.text.TextUtils;
 import android.util.ArraySet;
+import android.util.FeatureFlagUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -111,6 +112,7 @@ import com.android.settings.applications.appinfo.ExternalSourcesDetails;
 import com.android.settings.applications.appinfo.ManageExternalStorageDetails;
 import com.android.settings.applications.appinfo.MediaManagementAppsDetails;
 import com.android.settings.applications.appinfo.WriteSettingsDetails;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
@@ -121,6 +123,7 @@ import com.android.settings.notification.app.AppNotificationSettings;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settings.wifi.AppStateChangeWifiStateBridge;
 import com.android.settings.wifi.ChangeWifiStateDetails;
+import com.android.settingslib.HelpUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
@@ -394,7 +397,11 @@ public class ManageApplications extends InstrumentedFragment
             return mRootView;
         }
 
-        mRootView = inflater.inflate(R.layout.manage_applications_apps, null);
+        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.SILKY_HOME)) {
+            mRootView = inflater.inflate(R.layout.manage_applications_apps_v2, null);
+        } else {
+            mRootView = inflater.inflate(R.layout.manage_applications_apps, null);
+        }
         mLoadingContainer = mRootView.findViewById(R.id.loading_container);
         mListContainer = mRootView.findViewById(R.id.list_container);
         if (mListContainer != null) {
@@ -434,7 +441,7 @@ public class ManageApplications extends InstrumentedFragment
         final Activity activity = getActivity();
         final FrameLayout pinnedHeader = mRootView.findViewById(R.id.pinned_header);
         mSpinnerHeader = activity.getLayoutInflater()
-                .inflate(R.layout.manage_apps_filter_spinner, pinnedHeader, false);
+                .inflate(R.layout.apps_filter_spinner, pinnedHeader, false);
         mFilterSpinner = mSpinnerHeader.findViewById(R.id.filter_spinner);
         mFilterAdapter = new FilterSpinnerAdapter(this);
         mFilterSpinner.setAdapter(mFilterAdapter);
@@ -653,6 +660,10 @@ public class ManageApplications extends InstrumentedFragment
         final Activity activity = getActivity();
         if (activity == null) {
             return;
+        }
+        // TODO(b/176883483): Remove the help menu if this feature rolled out
+        if (!FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.SILKY_HOME)) {
+            HelpUtils.prepareHelpMenuItem(activity, menu, getHelpResource(), getClass().getName());
         }
         mOptionsMenu = menu;
         inflater.inflate(R.menu.manage_apps, menu);
@@ -1411,8 +1422,9 @@ public class ManageApplications extends InstrumentedFragment
             // Bind the data efficiently with the holder
             final ApplicationsState.AppEntry entry = mEntries.get(position);
             synchronized (entry) {
+                holder.setTitle(entry.label);
                 mState.ensureLabelDescription(entry);
-                holder.setTitle(entry.label, entry.labelDescription);
+                holder.itemView.setContentDescription(entry.labelDescription);
                 mState.ensureIcon(entry);
                 holder.setIcon(entry.icon);
                 updateSummary(holder, entry);

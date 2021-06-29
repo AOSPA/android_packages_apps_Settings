@@ -19,7 +19,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="security_dashboard_page"
-    android:title="@string/security_settings_title">
+    android:title="@string/security_settings_title"
+    settings:initialExpandedChildrenCount="9">
 
     <!-- security_settings_status.xml -->
     <PreferenceCategory
@@ -43,19 +44,19 @@
             android:summary="@string/summary_placeholder"
             settings:keywords="@string/keywords_lockscreen" />
 
-        <com.android.settingslib.RestrictedPreference
+        <Preference
             android:key="fingerprint_settings"
             android:title="@string/security_settings_fingerprint_preference_title"
             android:summary="@string/summary_placeholder"
             settings:keywords="@string/keywords_fingerprint_settings" />
 
-        <com.android.settingslib.RestrictedPreference
+        <Preference
             android:key="face_settings"
             android:title="@string/security_settings_face_preference_title"
             android:summary="@string/summary_placeholder"
             settings:keywords="@string/keywords_face_settings" />
 
-        <com.android.settingslib.RestrictedPreference
+        <Preference
             android:key="biometric_settings"
             android:title="@string/security_settings_biometric_preference_title"
             android:summary="@string/summary_placeholder"

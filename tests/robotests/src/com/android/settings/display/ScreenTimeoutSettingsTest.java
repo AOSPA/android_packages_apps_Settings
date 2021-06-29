@@ -75,9 +75,6 @@ public class ScreenTimeoutSettingsTest {
     AdaptiveSleepCameraStatePreferenceController mAdaptiveSleepCameraStatePreferenceController;
 
     @Mock
-    AdaptiveSleepBatterySaverPreferenceController mAdaptiveSleepBatterySaverPreferenceController;
-
-    @Mock
     Preference mDisableOptionsPreference;
 
     @Before
@@ -106,8 +103,6 @@ public class ScreenTimeoutSettingsTest {
         mSettings.mAdaptiveSleepPermissionController = mPermissionPreferenceController;
         mSettings.mAdaptiveSleepCameraStatePreferenceController =
                 mAdaptiveSleepCameraStatePreferenceController;
-        mSettings.mAdaptiveSleepBatterySaverPreferenceController =
-                mAdaptiveSleepBatterySaverPreferenceController;
     }
 
     @Test

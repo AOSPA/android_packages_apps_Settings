@@ -21,7 +21,6 @@ import android.content.Context;
 
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
-import com.android.settings.applications.GameSettingsFeatureProvider;
 import com.android.settings.applications.appinfo.ExtraAppInfoFeatureProvider;
 import com.android.settings.aware.AwareFeatureProvider;
 import com.android.settings.biometrics.face.FaceFeatureProvider;
@@ -81,7 +80,6 @@ public class FakeFeatureFactory extends FeatureFactory {
     public WifiTrackerLibProvider wifiTrackerLibProvider;
     public ExtraAppInfoFeatureProvider extraAppInfoFeatureProvider;
     public SecuritySettingsFeatureProvider securitySettingsFeatureProvider;
-    public GameSettingsFeatureProvider gameSettingsFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -121,7 +119,6 @@ public class FakeFeatureFactory extends FeatureFactory {
         wifiTrackerLibProvider = mock(WifiTrackerLibProvider.class);
         extraAppInfoFeatureProvider = mock(ExtraAppInfoFeatureProvider.class);
         securitySettingsFeatureProvider = mock(SecuritySettingsFeatureProvider.class);
-        gameSettingsFeatureProvider = mock(GameSettingsFeatureProvider.class);
     }
 
     @Override
@@ -252,10 +249,5 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public SecuritySettingsFeatureProvider getSecuritySettingsFeatureProvider() {
         return securitySettingsFeatureProvider;
-    }
-
-    @Override
-    public GameSettingsFeatureProvider getGameSettingsFeatureProvider() {
-        return gameSettingsFeatureProvider;
     }
 }

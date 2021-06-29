@@ -45,6 +45,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings.Global;
+import android.util.FeatureFlagUtils;
 
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
@@ -53,9 +54,9 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockscreenCredential;
 import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollBase;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
 import com.android.settings.search.SearchFeatureProvider;
-import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowStorageManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
@@ -64,11 +65,11 @@ import com.android.settingslib.widget.FooterPreference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.shadows.ShadowPersistentDataBlockManager;
@@ -80,10 +81,8 @@ import org.robolectric.shadows.ShadowPersistentDataBlockManager;
                 ShadowPersistentDataBlockManager.class,
                 ShadowStorageManager.class,
                 ShadowUserManager.class,
-                ShadowUtils.class,
-                ShadowInteractionJankMonitor.class
+                ShadowUtils.class
         })
-@Ignore("b/179136903: Tests failed with collapsing toolbar, plan to figure out root cause later.")
 public class ChooseLockGenericTest {
 
     private ChooseLockGenericFragment mFragment;
@@ -93,6 +92,7 @@ public class ChooseLockGenericTest {
     public void setUp() {
         Global.putInt(application.getContentResolver(), Global.DEVICE_PROVISIONED, 1);
         mFragment = new ChooseLockGenericFragment();
+        FeatureFlagUtils.setEnabled(RuntimeEnvironment.application, FeatureFlags.SILKY_HOME, false);
     }
 
     @After

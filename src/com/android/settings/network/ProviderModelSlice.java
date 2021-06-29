@@ -22,12 +22,9 @@ import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 import static com.android.settings.slices.CustomSliceRegistry.PROVIDER_MODEL_SLICE_URI;
 
 import android.annotation.ColorInt;
-import android.app.PendingIntent;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.telephony.SubscriptionManager;
@@ -37,7 +34,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
-import androidx.slice.builders.SliceAction;
 
 import com.android.settings.R;
 import com.android.settings.SubSettings;
@@ -46,7 +42,6 @@ import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.network.telephony.NetworkProviderWorker;
 import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBackgroundWorker;
-import com.android.settings.slices.SliceBroadcastReceiver;
 import com.android.settings.slices.SliceBuilderUtils;
 import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wifi.slice.WifiSlice;
@@ -64,7 +59,6 @@ import java.util.stream.Collectors;
 public class ProviderModelSlice extends WifiSlice {
 
     private static final String TAG = "ProviderModelSlice";
-
     private final ProviderModelSliceHelper mHelper;
 
     public ProviderModelSlice(Context context) {
@@ -153,26 +147,13 @@ public class ProviderModelSlice extends WifiSlice {
             final List<WifiSliceItem> disconnectedWifiList = wifiList.stream()
                     .filter(wifiSliceItem -> wifiSliceItem.getConnectedState()
                             != WifiEntry.CONNECTED_STATE_CONNECTED)
-                    .limit(maxListSize - 1)
+                    .limit(maxListSize)
                     .collect(Collectors.toList());
             for (WifiSliceItem item : disconnectedWifiList) {
                 listBuilder.addRow(getWifiSliceItemRow(item));
             }
-            listBuilder.addRow(getSeeAllRow());
         }
         return listBuilder.build();
-    }
-
-    @Override
-    public PendingIntent getBroadcastIntent(Context context) {
-        final Intent intent = new Intent(getUri().toString())
-                // The FLAG_RECEIVER_FOREGROUND flag is necessary to avoid the intent delay of
-                // the first sending after the device restarts
-                .addFlags(Intent.FLAG_RECEIVER_FOREGROUND)
-                .setData(getUri())
-                .setClass(context, SliceBroadcastReceiver.class);
-        return PendingIntent.getBroadcast(context, 0 /* requestCode */, intent,
-                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
     }
 
     /**
@@ -266,31 +247,6 @@ public class ProviderModelSlice extends WifiSlice {
         return rowBuilder
                 .setTitle(mContext.getText(R.string.ethernet))
                 .setSubtitle(mContext.getText(R.string.to_switch_networks_disconnect_ethernet));
-    }
-
-    protected ListBuilder.RowBuilder getSeeAllRow() {
-        final CharSequence title = mContext.getText(R.string.previous_connected_see_all);
-        final IconCompat icon = getSeeAllIcon();
-        return new ListBuilder.RowBuilder()
-                .setTitleItem(icon, ListBuilder.ICON_IMAGE)
-                .setTitle(title)
-                .setPrimaryAction(getPrimaryAction(icon, title));
-    }
-
-    protected IconCompat getSeeAllIcon() {
-        final Drawable drawable = mContext.getDrawable(R.drawable.ic_arrow_forward);
-        if (drawable != null) {
-            drawable.setTint(
-                    Utils.getColorAttrDefaultColor(mContext, android.R.attr.colorControlNormal));
-            return Utils.createIconWithDrawable(drawable);
-        }
-        return Utils.createIconWithDrawable(new ColorDrawable(Color.TRANSPARENT));
-    }
-
-    protected SliceAction getPrimaryAction(IconCompat icon, CharSequence title) {
-        final PendingIntent intent = PendingIntent.getActivity(mContext, 0 /* requestCode */,
-                getIntent(), PendingIntent.FLAG_IMMUTABLE /* flags */);
-        return SliceAction.createDeeplink(intent, icon, ListBuilder.ICON_IMAGE, title);
     }
 
     @Override

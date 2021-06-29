@@ -18,8 +18,6 @@ package com.android.settings.security;
 
 import android.content.Context;
 import android.os.UserManager;
-import android.security.keystore.KeyProperties;
-import android.security.keystore2.AndroidKeyStoreLoadStoreParameter;
 
 import androidx.preference.PreferenceScreen;
 
@@ -37,7 +35,6 @@ public class ResetCredentialsPreferenceController extends RestrictedEncryptionPr
     private static final String KEY_RESET_CREDENTIALS = "credentials_reset";
 
     private final KeyStore mKeyStore;
-    private final KeyStore mWifiKeyStore;
 
     private RestrictedPreference mPreference;
 
@@ -48,19 +45,8 @@ public class ResetCredentialsPreferenceController extends RestrictedEncryptionPr
             keyStore = KeyStore.getInstance("AndroidKeyStore");
             keyStore.load(null);
         } catch (Exception e) {
-            keyStore = null;
         }
         mKeyStore = keyStore;
-        keyStore = null;
-        if (context.getUser().isSystem()) {
-            try {
-                keyStore = KeyStore.getInstance("AndroidKeyStore");
-                keyStore.load(new AndroidKeyStoreLoadStoreParameter(KeyProperties.NAMESPACE_WIFI));
-            } catch (Exception e) {
-                keyStore = null;
-            }
-        }
-        mWifiKeyStore = keyStore;
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
@@ -82,11 +68,9 @@ public class ResetCredentialsPreferenceController extends RestrictedEncryptionPr
         if (mPreference != null && !mPreference.isDisabledByAdmin()) {
             boolean isEnabled = false;
             try {
-                isEnabled = (mKeyStore != null
-                        && mKeyStore.aliases().hasMoreElements())
-                        || (mWifiKeyStore != null
-                        && mWifiKeyStore.aliases().hasMoreElements());
-
+                if (mKeyStore != null) {
+                    isEnabled = mKeyStore.aliases().hasMoreElements();
+                }
             } catch (KeyStoreException e) {
                 // If access to keystore fails, treat as disabled.
             }

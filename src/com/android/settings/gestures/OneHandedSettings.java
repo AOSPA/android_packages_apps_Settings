@@ -17,28 +17,31 @@
 package com.android.settings.gestures;
 
 import android.app.settings.SettingsEnums;
-import android.content.ComponentName;
 import android.content.Context;
-import android.os.Bundle;
 import android.os.UserHandle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
-import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.settings.R;
-import com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.search.SearchIndexable;
 
 /**
- * Fragment for One-handed mode settings
- *
- * <p>The child {@link AccessibilityShortcutPreferenceFragment} shows the actual UI for
- * providing basic accessibility shortcut service setup.
+ * The Fragment for one-handed mode settings.
  */
-public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
-    private static final String ONE_HANDED_SHORTCUT_KEY = "one_handed_shortcuts_preference";
-    private String mFeatureName;
+@SearchIndexable
+public class OneHandedSettings extends DashboardFragment {
+
+    private static final String TAG = "OneHandedSettings";
+
+    @Override
+    public int getMetricsCategory() {
+        return SettingsEnums.SETTINGS_ONE_HANDED;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
+    }
 
     @Override
     protected void updatePreferenceStates() {
@@ -47,57 +50,8 @@ public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
     }
 
     @Override
-    public int getDialogMetricsCategory(int dialogId) {
-        final int dialogMetrics = super.getDialogMetricsCategory(dialogId);
-        return dialogMetrics == SettingsEnums.ACTION_UNKNOWN ? SettingsEnums.SETTINGS_ONE_HANDED
-                : dialogMetrics;
-    }
-
-    @Override
-    public int getMetricsCategory() {
-        return SettingsEnums.SETTINGS_ONE_HANDED;
-    }
-
-    @Override
-    protected String getShortcutPreferenceKey() {
-        return ONE_HANDED_SHORTCUT_KEY;
-    }
-
-    @Override
-    protected boolean showGeneralCategory() {
-        return true;
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
-    }
-
-    @Override
-    protected ComponentName getComponentName() {
-        return AccessibilityShortcutController.ONE_HANDED_COMPONENT_NAME;
-    }
-
-    @Override
-    protected CharSequence getLabelName() {
-        return mFeatureName;
-    }
-
-    @Override
     protected int getPreferenceScreenResId() {
         return R.xml.one_handed_settings;
-    }
-
-    @Override
-    protected String getLogTag() {
-        return null;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        mFeatureName = getContext().getString(R.string.one_handed_title);
-        super.onCreate(savedInstanceState);
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

@@ -411,7 +411,6 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mSummary = view.findViewById(R.id.sud_layout_subtitle);
 
         mTextureView = view.findViewById(R.id.preview_view);
         mTextureView.setSurfaceTextureListener(this);

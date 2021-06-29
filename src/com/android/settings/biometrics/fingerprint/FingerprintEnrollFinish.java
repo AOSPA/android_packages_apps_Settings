@@ -153,7 +153,6 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
         intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
         intent.putExtra(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, mChallenge);
         startActivity(intent);
-        overridePendingTransition(R.anim.sud_slide_back_in, R.anim.sud_slide_back_out);
     }
 
     private void onAddAnotherButtonClick(View view) {

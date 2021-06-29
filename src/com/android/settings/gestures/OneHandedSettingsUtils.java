@@ -26,8 +26,6 @@ import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.provider.Settings;
 
-import androidx.annotation.VisibleForTesting;
-
 /**
  * The Util to query one-handed mode settings config
  */
@@ -36,10 +34,6 @@ public class OneHandedSettingsUtils {
     static final String SUPPORT_ONE_HANDED_MODE = "ro.support_one_handed_mode";
     static final int OFF = 0;
     static final int ON = 1;
-    static final Uri ONE_HANDED_MODE_ENABLED_URI =
-            Settings.Secure.getUriFor(Settings.Secure.ONE_HANDED_MODE_ENABLED);
-    static final Uri SHOW_NOTIFICATION_ENABLED_URI =
-            Settings.Secure.getUriFor(Settings.Secure.SWIPE_BOTTOM_TO_NOTIFICATION_ENABLED);
 
     public enum OneHandedTimeout {
         NEVER(0), SHORT(4), MEDIUM(8), LONG(12);
@@ -183,48 +177,6 @@ public class OneHandedSettingsUtils {
     }
 
     /**
-     * Set NavigationBar mode flag to Settings provider.
-     * @param context App context
-     * @param value Navigation bar mode:
-     *  0 = 3 button
-     *  1 = 2 button
-     *  2 = fully gestural
-     * @return true if the value was set, false on database errors.
-     */
-    @VisibleForTesting
-    public boolean setNavigationBarMode(Context context, String value) {
-        return Settings.Secure.putStringForUser(context.getContentResolver(),
-                Settings.Secure.NAVIGATION_MODE, value, UserHandle.myUserId());
-    }
-
-    /**
-     * Get NavigationBar mode flag from Settings provider.
-     * @param context App context
-     * @return Navigation bar mode:
-     *  0 = 3 button
-     *  1 = 2 button
-     *  2 = fully gestural
-     */
-    public static int getNavigationBarMode(Context context) {
-        return Settings.Secure.getIntForUser(context.getContentResolver(),
-                Settings.Secure.NAVIGATION_MODE, 2 /* fully gestural */, sCurrentUserId);
-    }
-
-    /**
-     * Check if One-handed mode settings controllers can enabled or disabled.
-     * @param context App context
-     * @return true if controllers are able to enabled, false otherwise.
-     *
-     * Note: For better UX experience, just disabled controls that let users know to use
-     * this feature, they need to make sure gesture navigation is turned on in system
-     * navigation settings.
-     */
-    public static boolean canEnableController(Context context) {
-        return (OneHandedSettingsUtils.isOneHandedModeEnabled(context)
-                && OneHandedSettingsUtils.getNavigationBarMode(context) != 0 /* 3-button mode */);
-    }
-
-    /**
      * Registers callback for observing Settings.Secure.ONE_HANDED_MODE_ENABLED state.
      * @param callback for state changes
      */
@@ -244,6 +196,9 @@ public class OneHandedSettingsUtils {
     private final class SettingsObserver extends ContentObserver {
         private TogglesCallback mCallback;
 
+        private final Uri mOneHandedEnabledAware = Settings.Secure.getUriFor(
+                Settings.Secure.ONE_HANDED_MODE_ENABLED);
+
         SettingsObserver(Handler handler) {
             super(handler);
         }
@@ -254,8 +209,7 @@ public class OneHandedSettingsUtils {
 
         public void observe() {
             final ContentResolver resolver = mContext.getContentResolver();
-            resolver.registerContentObserver(ONE_HANDED_MODE_ENABLED_URI, true, this);
-            resolver.registerContentObserver(SHOW_NOTIFICATION_ENABLED_URI, true, this);
+            resolver.registerContentObserver(mOneHandedEnabledAware, true, this);
         }
 
         @Override

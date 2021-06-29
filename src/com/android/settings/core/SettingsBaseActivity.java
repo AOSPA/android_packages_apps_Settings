@@ -31,6 +31,7 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.ArraySet;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -49,7 +50,6 @@ import com.android.settings.dashboard.CategoryManager;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.transition.SettingsTransitionHelper;
-import com.android.settingslib.transition.SettingsTransitionHelper.TransitionType;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.resources.TextAppearanceConfig;
@@ -62,11 +62,6 @@ import java.util.Map;
 import java.util.Set;
 
 public class SettingsBaseActivity extends FragmentActivity {
-
-    /**
-     * What type of page transition should be apply.
-     */
-    public static final String EXTRA_PAGE_TRANSITION_TYPE = "page_transition_type";
 
     protected static final boolean DEBUG_TIMING = false;
     private static final String TAG = "SettingsBaseActivity";
@@ -82,7 +77,6 @@ public class SettingsBaseActivity extends FragmentActivity {
 
     protected CollapsingToolbarLayout mCollapsingToolbarLayout;
     private int mCategoriesUpdateTaskCount;
-    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -112,10 +106,10 @@ public class SettingsBaseActivity extends FragmentActivity {
             final int appliedTheme = ThemeHelper.isSetupWizardDayNightEnabled(this)
                     ? R.style.SubSettings_SetupWizard : R.style.SudThemeGlifV3_Light;
             setTheme(appliedTheme);
-            ThemeHelper.trySetDynamicColor(this);
         }
 
-        if (isToolbarEnabled() && !isAnySetupWizard) {
+        if (FeatureFlagUtils.isEnabled(this, FeatureFlags.SILKY_HOME)
+                && isToolbarEnabled() && !isAnySetupWizard) {
             super.setContentView(R.layout.collapsing_toolbar_base_layout);
             mCollapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
         } else {
@@ -136,48 +130,59 @@ public class SettingsBaseActivity extends FragmentActivity {
     }
 
     @Override
-    public void setActionBar(@androidx.annotation.Nullable Toolbar toolbar) {
-        super.setActionBar(toolbar);
-
-        mToolbar = toolbar;
-    }
-
-    @Override
     public boolean onNavigateUp() {
         if (!super.onNavigateUp()) {
-            finishAfterTransition();
+            finish();
         }
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        final int id = item.getItemId();
-        if (id == android.R.id.home) {
-            // Make the up button behave the same as the back button.
-            finishAfterTransition();
-            return true;
+    public void startActivity(Intent intent) {
+        if (!Utils.isPageTransitionEnabled(this)) {
+            super.startActivity(intent);
+            return;
         }
-        return super.onOptionsItemSelected(item);
+        super.startActivity(intent, getActivityOptionsBundle());
+    }
+
+    @Override
+    public void startActivity(Intent intent, @androidx.annotation.Nullable Bundle options) {
+        if (!Utils.isPageTransitionEnabled(this)) {
+            super.startActivity(intent, options);
+            return;
+        }
+        if (options != null) {
+            super.startActivity(intent, getMergedBundleForTransition(options));
+            return;
+        }
+        super.startActivity(intent, getActivityOptionsBundle());
+    }
+
+    @Override
+    public void startActivityForResult(Intent intent, int requestCode) {
+        // startActivity() will eventually calls startActivityForResult() with requestCode -1.
+        // Adding this condition to avoid multiple calls.
+        if (!Utils.isPageTransitionEnabled(this) || requestCode == DEFAULT_REQUEST) {
+            super.startActivityForResult(intent, requestCode);
+            return;
+        }
+        super.startActivityForResult(intent, requestCode, getActivityOptionsBundle());
     }
 
     @Override
     public void startActivityForResult(Intent intent, int requestCode,
             @androidx.annotation.Nullable Bundle options) {
-        final int transitionType = getTransitionType(intent);
-        if (Utils.isPageTransitionEnabled(this) &&
-                transitionType == TransitionType.TRANSITION_SHARED_AXIS) {
-            super.startActivityForResult(intent, requestCode,
-                    createActivityOptionsBundleForTransition(options));
+        if (!Utils.isPageTransitionEnabled(this) || requestCode == DEFAULT_REQUEST) {
+            super.startActivityForResult(intent, requestCode, options);
             return;
         }
-
-        super.startActivityForResult(intent, requestCode, options);
-        if (transitionType == TransitionType.TRANSITION_SLIDE) {
-            overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
-        } else if (transitionType == TransitionType.TRANSITION_FADE) {
-            overridePendingTransition(android.R.anim.fade_in, R.anim.sud_stay);
+        if (options != null) {
+            super.startActivityForResult(intent, requestCode,
+                    getMergedBundleForTransition(options));
+            return;
         }
+        super.startActivityForResult(intent, requestCode, getActivityOptionsBundle());
     }
 
     @Override
@@ -187,8 +192,7 @@ public class SettingsBaseActivity extends FragmentActivity {
             super.startActivityForResultAsUser(intent, requestCode, userHandle);
             return;
         }
-        super.startActivityForResultAsUser(intent, requestCode,
-                createActivityOptionsBundleForTransition(null),
+        super.startActivityForResultAsUser(intent, requestCode, getActivityOptionsBundle(),
                 userHandle);
     }
 
@@ -207,10 +211,6 @@ public class SettingsBaseActivity extends FragmentActivity {
 
     @Override
     protected void onPause() {
-        // For accessibility activities launched from setup wizard.
-        if (getTransitionType(getIntent()) == TransitionType.TRANSITION_FADE) {
-            overridePendingTransition(R.anim.sud_stay, android.R.anim.fade_out);
-        }
         unregisterReceiver(mPackageReceiver);
         super.onPause();
     }
@@ -240,6 +240,17 @@ public class SettingsBaseActivity extends FragmentActivity {
     @Override
     public void setContentView(View view, ViewGroup.LayoutParams params) {
         ((ViewGroup) findViewById(R.id.content_frame)).addView(view, params);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        final int id = item.getItemId();
+        if (id == android.R.id.home) {
+            // Make the up button behave the same as the back button.
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -330,26 +341,20 @@ public class SettingsBaseActivity extends FragmentActivity {
         }
     }
 
-    private int getTransitionType(Intent intent) {
-        return intent.getIntExtra(EXTRA_PAGE_TRANSITION_TYPE,
-                SettingsTransitionHelper.TransitionType.TRANSITION_SHARED_AXIS);
+    private Bundle getActivityOptionsBundle() {
+        final Toolbar toolbar = findViewById(R.id.action_bar);
+        return ActivityOptions.makeSceneTransitionAnimation(this, toolbar,
+                "shared_element_view").toBundle();
     }
 
-    @androidx.annotation.Nullable
-    private Bundle createActivityOptionsBundleForTransition(
-            @androidx.annotation.Nullable Bundle options) {
-        if (mToolbar == null) {
-            Log.w(TAG, "setActionBar(Toolbar) is not called. Cannot apply settings transition!");
-            return options;
+    private Bundle getMergedBundleForTransition(@NonNull Bundle options) {
+        final Bundle mergedBundle = new Bundle();
+        mergedBundle.putAll(options);
+        final Bundle activityOptionsBundle = getActivityOptionsBundle();
+        if (activityOptionsBundle != null) {
+            mergedBundle.putAll(activityOptionsBundle);
         }
-        final Bundle transitionOptions = ActivityOptions.makeSceneTransitionAnimation(this,
-                mToolbar, "shared_element_view").toBundle();
-        if (options == null) {
-            return transitionOptions;
-        }
-        final Bundle mergedOptions = new Bundle(options);
-        mergedOptions.putAll(transitionOptions);
-        return mergedOptions;
+        return mergedBundle;
     }
 
     public interface CategoryListener {

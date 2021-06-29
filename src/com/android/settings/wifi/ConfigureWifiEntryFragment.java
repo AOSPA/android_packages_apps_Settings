@@ -128,13 +128,6 @@ public class ConfigureWifiEntryFragment extends InstrumentedFragment implements 
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        mUiController.showSecurityFields(
-            /* refreshEapMethods */ false, /* refreshCertificates */ true);
-    }
-
-    @Override
     public void onViewStateRestored(Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
         mUiController.updatePassword();

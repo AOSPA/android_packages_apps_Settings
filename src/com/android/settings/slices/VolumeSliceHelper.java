@@ -111,21 +111,17 @@ public class VolumeSliceHelper {
 
     private static void handleStreamChanged(Context context, Intent intent) {
         final int inputType = intent.getIntExtra(AudioManager.EXTRA_VOLUME_STREAM_TYPE, -1);
-        synchronized (sRegisteredUri) {
-            for (Map.Entry<Uri, Integer> entry : sRegisteredUri.entrySet()) {
-                if (entry.getValue() == inputType) {
-                    context.getContentResolver().notifyChange(entry.getKey(), null /* observer */);
-                    break;
-                }
+        for (Map.Entry<Uri, Integer> entry : sRegisteredUri.entrySet()) {
+            if (entry.getValue() == inputType) {
+                context.getContentResolver().notifyChange(entry.getKey(), null /* observer */);
+                break;
             }
         }
     }
 
     private static void notifyAllStreamsChanged(Context context) {
-        synchronized (sRegisteredUri) {
-            sRegisteredUri.forEach((uri, audioStream) -> {
-                context.getContentResolver().notifyChange(uri, null /* observer */);
-            });
-        }
+        sRegisteredUri.forEach((uri, audioStream) -> {
+            context.getContentResolver().notifyChange(uri, null /* observer */);
+        });
     }
 }

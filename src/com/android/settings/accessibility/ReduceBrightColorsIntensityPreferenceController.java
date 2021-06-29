@@ -28,7 +28,6 @@ import com.android.settings.widget.SeekBarPreference;
 /** PreferenceController for feature intensity. */
 public class ReduceBrightColorsIntensityPreferenceController extends SliderPreferenceController {
 
-    private static final int INVERSE_PERCENTAGE_BASE = 100;
     private final ColorDisplayManager mColorDisplayManager;
 
     public ReduceBrightColorsIntensityPreferenceController(Context context, String key) {
@@ -67,24 +66,21 @@ public class ReduceBrightColorsIntensityPreferenceController extends SliderPrefe
 
     @Override
     public int getSliderPosition() {
-        return INVERSE_PERCENTAGE_BASE - mColorDisplayManager.getReduceBrightColorsStrength();
+        return mColorDisplayManager.getReduceBrightColorsStrength();
     }
 
     @Override
     public boolean setSliderPosition(int position) {
-        return mColorDisplayManager.setReduceBrightColorsStrength(
-                INVERSE_PERCENTAGE_BASE - position);
+        return mColorDisplayManager.setReduceBrightColorsStrength(position);
     }
 
     @Override
     public int getMax() {
-        return INVERSE_PERCENTAGE_BASE
-                - ColorDisplayManager.getMinimumReduceBrightColorsStrength(mContext);
+        return ColorDisplayManager.getMaximumReduceBrightColorsStrength(mContext);
     }
 
     @Override
     public int getMin() {
-        return INVERSE_PERCENTAGE_BASE
-                - ColorDisplayManager.getMaximumReduceBrightColorsStrength(mContext);
+        return ColorDisplayManager.getMinimumReduceBrightColorsStrength(mContext);
     }
 }

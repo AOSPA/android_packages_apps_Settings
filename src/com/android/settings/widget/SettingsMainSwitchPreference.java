@@ -16,13 +16,10 @@
 
 package com.android.settings.widget;
 
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.widget.Switch;
 
 import androidx.core.content.res.TypedArrayUtils;
 import androidx.preference.PreferenceViewHolder;
@@ -30,7 +27,7 @@ import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.widget.SettingsMainSwitchBar.OnBeforeCheckedChangeListener;
-import com.android.settingslib.RestrictedPreferenceHelper;
+import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import java.util.ArrayList;
@@ -41,9 +38,7 @@ import java.util.List;
  * This component is used as the main switch of the page
  * to enable or disable the prefereces on the page.
  */
-public class SettingsMainSwitchPreference extends TwoStatePreference implements
-        OnMainSwitchChangeListener {
-
+public class SettingsMainSwitchPreference extends TwoStatePreference {
     private final List<OnBeforeCheckedChangeListener> mBeforeCheckedChangeListeners =
             new ArrayList<>();
     private final List<OnMainSwitchChangeListener> mSwitchChangeListeners = new ArrayList<>();
@@ -51,8 +46,8 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
     private SettingsMainSwitchBar mMainSwitchBar;
     private CharSequence mTitle;
     private boolean mIsVisible;
-    private EnforcedAdmin mEnforcedAdmin;
-    private RestrictedPreferenceHelper mRestrictedHelper;
+
+    private RestrictedLockUtils.EnforcedAdmin mEnforcedAdmin;
 
     public SettingsMainSwitchPreference(Context context) {
         super(context);
@@ -79,25 +74,22 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 
-        holder.setDividerAllowedAbove(false);
+        holder.setDividerAllowedAbove(true);
         holder.setDividerAllowedBelow(false);
 
-        if (mRestrictedHelper != null) {
-            mEnforcedAdmin = mRestrictedHelper.checkRestrictionEnforced();
-        }
         mMainSwitchBar = (SettingsMainSwitchBar) holder.findViewById(R.id.main_switch_bar);
-        if (mIsVisible) {
-            mMainSwitchBar.show();
-            updateStatus(isChecked());
-            registerListenerToSwitchBar();
-        } else {
+
+        mMainSwitchBar.show();
+        updateStatus(isChecked());
+        registerListenerToSwitchBar();
+
+        if (!mIsVisible) {
             mMainSwitchBar.hide();
         }
     }
 
     private void init(Context context, AttributeSet attrs) {
         setLayoutResource(R.layout.preference_widget_main_switch);
-        mSwitchChangeListeners.add(this);
         mIsVisible = true;
 
         if (attrs != null) {
@@ -111,8 +103,6 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
                 setTitle(title.toString());
             }
             a.recycle();
-
-            mRestrictedHelper = new RestrictedPreferenceHelper(context, this, attrs);
         }
     }
 
@@ -139,17 +129,13 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
         }
     }
 
-    @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
-        super.setChecked(isChecked);
-    }
-
     /**
      * Update the switch status of preference
      */
     public void updateStatus(boolean checked) {
         setChecked(checked);
         if (mMainSwitchBar != null) {
+            mMainSwitchBar.setChecked(checked);
             mMainSwitchBar.setTitle(mTitle);
             mMainSwitchBar.setDisabledByAdmin(mEnforcedAdmin);
             mMainSwitchBar.show();
@@ -244,7 +230,7 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
      * Otherwise, calls setEnabled which will enables the entire view including
      * the text and switch.
      */
-    public void setDisabledByAdmin(EnforcedAdmin admin) {
+    public void setDisabledByAdmin(RestrictedLockUtils.EnforcedAdmin admin) {
         mEnforcedAdmin = admin;
         if (mMainSwitchBar != null) {
             mMainSwitchBar.setDisabledByAdmin(mEnforcedAdmin);

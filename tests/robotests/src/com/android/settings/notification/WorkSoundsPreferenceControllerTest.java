@@ -23,7 +23,9 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.os.UserHandle;
+import android.util.FeatureFlagUtils;
 
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.testutils.shadow.ShadowAudioHelper;
 
 import org.junit.After;
@@ -54,6 +56,7 @@ public class WorkSoundsPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_supportWorkProfileSound_shouldReturnAvailable() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, true);
         ShadowAudioHelper.setIsSingleVolume(false);
         ShadowAudioHelper.setManagedProfileId(UserHandle.USER_CURRENT);
 

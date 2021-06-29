@@ -17,32 +17,42 @@
 package com.android.settings.gestures;
 
 import android.content.Context;
-import android.provider.Settings;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.widget.SettingsMainSwitchPreferenceController;
 
 /**
- * Preference controller for One-handed mode shortcut settings
- */
-public class OneHandedEnablePreferenceController extends BasePreferenceController {
+ * The controller to handle one-handed mode enable or disable state.
+ **/
+public class OneHandedEnablePreferenceController extends SettingsMainSwitchPreferenceController {
 
-    private static final String ONE_HANDED_ENABLED = Settings.Secure.ONE_HANDED_MODE_ENABLED;
-
-    public OneHandedEnablePreferenceController(Context context, String preferenceKey) {
-        super(context, preferenceKey);
+    public OneHandedEnablePreferenceController(Context context, String key) {
+        super(context, key);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return OneHandedSettingsUtils.isSupportOneHandedMode() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return OneHandedSettingsUtils.isSupportOneHandedMode()
+                ? BasePreferenceController.AVAILABLE
+                : BasePreferenceController.UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public boolean setChecked(boolean isChecked) {
+        OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, isChecked);
+        OneHandedSettingsUtils.setSwipeDownNotificationEnabled(mContext, !isChecked);
+        return true;
+    }
+
+    @Override
+    public boolean isChecked() {
+        return OneHandedSettingsUtils.isOneHandedModeEnabled(mContext);
     }
 
     @Override
     public CharSequence getSummary() {
         return mContext.getText(
-                OneHandedSettingsUtils.isOneHandedModeEnabled(mContext)
-                        ? R.string.gesture_setting_on : R.string.gesture_setting_off);
+                isChecked() ? R.string.gesture_setting_on : R.string.gesture_setting_off);
     }
-
 }

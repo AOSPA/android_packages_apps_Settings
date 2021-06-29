@@ -53,8 +53,6 @@ import com.android.settings.R;
 import com.android.settingslib.animation.AppearAnimationUtils;
 import com.android.settingslib.animation.DisappearAnimationUtils;
 
-import com.google.android.setupdesign.GlifLayout;
-
 import java.util.ArrayList;
 
 public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
@@ -105,13 +103,14 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         private AsyncTask<?, ?, ?> mPendingLockCheck;
         private CredentialCheckResultTracker mCredentialCheckResultTracker;
         private boolean mDisappearing = false;
+        private TextView mHeaderTextView;
+        private TextView mDetailsTextView;
         private CountDownTimer mCountdownTimer;
         private boolean mIsAlpha;
         private InputMethodManager mImm;
         private AppearAnimationUtils mAppearAnimationUtils;
         private DisappearAnimationUtils mDisappearAnimationUtils;
         private boolean mIsManagedProfile;
-        private GlifLayout mGlifLayout;
 
         // required constructor for fragments
         public ConfirmLockPasswordFragment() {
@@ -131,12 +130,18 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                             : R.layout.confirm_lock_password,
                     container,
                     false);
-            mGlifLayout = view.findViewById(R.id.setup_wizard_layout);
+
             mPasswordEntry = (ImeAwareEditText) view.findViewById(R.id.password_entry);
             mPasswordEntry.setOnEditorActionListener(this);
             // EditText inside ScrollView doesn't automatically get focus.
             mPasswordEntry.requestFocus();
             mPasswordEntryInputDisabler = new TextViewInputDisabler(mPasswordEntry);
+
+            mHeaderTextView = (TextView) view.findViewById(R.id.headerText);
+            if (mHeaderTextView == null) {
+                mHeaderTextView = view.findViewById(R.id.suc_layout_title);
+            }
+            mDetailsTextView = (TextView) view.findViewById(R.id.sud_layout_description);
             mErrorTextView = (TextView) view.findViewById(R.id.errorText);
             mIsAlpha = DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC == storedQuality
                     || DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC == storedQuality
@@ -163,8 +168,8 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                 if (TextUtils.isEmpty(detailsMessage)) {
                     detailsMessage = getString(getDefaultDetails());
                 }
-                mGlifLayout.setHeaderText(headerMessage);
-                mGlifLayout.setDescriptionText(detailsMessage);
+                mHeaderTextView.setText(headerMessage);
+                mDetailsTextView.setText(detailsMessage);
             }
             int currentType = mPasswordEntry.getInputType();
             if (mIsAlpha) {
@@ -189,7 +194,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                     110, 1f /* translationScale */,
                     0.5f /* delayScale */, AnimationUtils.loadInterpolator(
                             getContext(), android.R.interpolator.fast_out_linear_in));
-            setAccessibilityTitle(mGlifLayout.getHeaderText());
+            setAccessibilityTitle(mHeaderTextView.getText());
 
             mCredentialCheckResultTracker = (CredentialCheckResultTracker) getFragmentManager()
                     .findFragmentByTag(FRAGMENT_TAG_CHECK_LOCK_RESULT);
@@ -273,8 +278,8 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         @Override
         public void prepareEnterAnimation() {
             super.prepareEnterAnimation();
-            mGlifLayout.getHeaderTextView().setAlpha(0f);
-            mGlifLayout.getDescriptionTextView().setAlpha(0f);
+            mHeaderTextView.setAlpha(0f);
+            mDetailsTextView.setAlpha(0f);
             mCancelButton.setAlpha(0f);
             if (mForgotButton != null) {
                 mForgotButton.setAlpha(0f);
@@ -285,8 +290,8 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
         private View[] getActiveViews() {
             ArrayList<View> result = new ArrayList<>();
-            result.add(mGlifLayout.getHeaderTextView());
-            result.add(mGlifLayout.getDescriptionTextView());
+            result.add(mHeaderTextView);
+            result.add(mDetailsTextView);
             if (mCancelButton.getVisibility() == View.VISIBLE) {
                 result.add(mCancelButton);
             }

@@ -109,30 +109,24 @@ public class LocationSettingsFooterPreferenceControllerTest {
         assertThat(mController.isAvailable()).isTrue();
     }
 
-    /**
-     * Display the footer even without the injected string.
-     */
     @Test
-    public void isAvailable_noSystemApp_returnsTrue() {
+    public void isAvailable_noSystemApp_returnsFalse() {
         final List<ResolveInfo> testResolveInfos = new ArrayList<>();
         testResolveInfos.add(
                 getTestResolveInfo(/*isSystemApp*/ false, /*hasRequiredMetadata*/ true));
         when(mPackageManager.queryBroadcastReceivers(any(Intent.class), anyInt()))
                 .thenReturn(testResolveInfos);
-        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.isAvailable()).isFalse();
     }
 
-    /**
-     * Display the footer even without the injected string.
-     */
     @Test
-    public void isAvailable_noRequiredMetadata_returnsTrue() {
+    public void isAvailable_noRequiredMetadata_returnsFalse() {
         final List<ResolveInfo> testResolveInfos = new ArrayList<>();
         testResolveInfos.add(
                 getTestResolveInfo(/*isSystemApp*/ true, /*hasRequiredMetadata*/ false));
         when(mPackageManager.queryBroadcastReceivers(any(Intent.class), anyInt()))
                 .thenReturn(testResolveInfos);
-        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
@@ -160,8 +154,7 @@ public class LocationSettingsFooterPreferenceControllerTest {
         mController.onLocationModeChanged(/* mode= */ 0, /* restricted= */ false);
         ArgumentCaptor<CharSequence> title = ArgumentCaptor.forClass(CharSequence.class);
         verify(mFooterPreference, times(2)).setTitle(title.capture());
-
-        assertThat(title.getValue().toString()).contains(
+        assertThat(title.getValue().toString()).isEqualTo(
                 Html.fromHtml(mContext.getString(
                         R.string.location_settings_footer_location_off)).toString());
     }
@@ -178,7 +171,7 @@ public class LocationSettingsFooterPreferenceControllerTest {
         mController.onLocationModeChanged(/* mode= */ 1, /* restricted= */ false);
         ArgumentCaptor<CharSequence> title = ArgumentCaptor.forClass(CharSequence.class);
         verify(mFooterPreference, times(2)).setTitle(title.capture());
-        assertThat(title.getValue().toString()).doesNotContain(
+        assertThat(title.getValue().toString()).isNotEqualTo(
                 Html.fromHtml(mContext.getString(
                         R.string.location_settings_footer_location_off)).toString());
     }

@@ -16,8 +16,6 @@
 
 package com.android.settings.widget;
 
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.util.AttributeSet;
@@ -49,7 +47,7 @@ public class SettingsMainSwitchBar extends MainSwitchBar {
     }
 
     private ImageView mRestrictedIcon;
-    private EnforcedAdmin mEnforcedAdmin;
+    private RestrictedLockUtils.EnforcedAdmin mEnforcedAdmin;
     private boolean mDisabledByAdmin;
 
     private final MetricsFeatureProvider mMetricsFeatureProvider;
@@ -89,7 +87,7 @@ public class SettingsMainSwitchBar extends MainSwitchBar {
      * If admin is not null, disables the text and switch but keeps the view clickable (unless the
      * switch is disabled for other reasons). Otherwise, calls setEnabled.
      */
-    public void setDisabledByAdmin(EnforcedAdmin admin) {
+    public void setDisabledByAdmin(RestrictedLockUtils.EnforcedAdmin admin) {
         mEnforcedAdmin = admin;
         if (admin != null) {
             super.setEnabled(true);

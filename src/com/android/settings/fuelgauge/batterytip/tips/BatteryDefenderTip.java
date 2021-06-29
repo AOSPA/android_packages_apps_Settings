@@ -16,7 +16,6 @@
 
 package com.android.settings.fuelgauge.batterytip.tips;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Parcel;
 
@@ -58,8 +57,7 @@ public class BatteryDefenderTip extends BatteryTip {
 
     @Override
     public void log(Context context, MetricsFeatureProvider metricsFeatureProvider) {
-        metricsFeatureProvider.action(context, SettingsEnums.ACTION_BATTERY_DEFENDER_TIP,
-                mState);
+        // TODO(b/173985153): Add logging enums for Battery Defender.
     }
 
     public static final Creator CREATOR = new Creator() {

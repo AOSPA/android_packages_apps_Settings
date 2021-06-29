@@ -39,11 +39,6 @@ public class ExtraAppInfoFeatureProviderImpl implements
     }
 
     @Override
-    public boolean isEnabled(Context context) {
-        return false;
-    }
-
-    @Override
     public String getSummary(Context context) {
         return "";
     }

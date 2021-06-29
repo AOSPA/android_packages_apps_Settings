@@ -20,8 +20,6 @@ import android.content.Context;
 import android.os.UserHandle;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.widget.RestrictedAppPreference;
 
@@ -32,7 +30,7 @@ import java.util.Map;
  * Retrieve the Location Services used in work profile user.
  */
 public class LocationInjectedServicesForWorkPreferenceController extends
-        LocationInjectedServiceBasePreferenceController {
+        LocationInjectedServicesPreferenceController {
     private static final String TAG = "LocationWorkPrefCtrl";
 
     public LocationInjectedServicesForWorkPreferenceController(Context context, String key) {
@@ -40,10 +38,10 @@ public class LocationInjectedServicesForWorkPreferenceController extends
     }
 
     @Override
-    protected void injectLocationServices(PreferenceScreen screen) {
-        final PreferenceCategory categoryLocationServices =
-                screen.findPreference(getPreferenceKey());
+    public void updateState(Preference preference) {
+        mCategoryLocationServices.removeAll();
         final Map<Integer, List<Preference>> prefs = getLocationServices();
+        boolean show = false;
         for (Map.Entry<Integer, List<Preference>> entry : prefs.entrySet()) {
             for (Preference pref : entry.getValue()) {
                 if (pref instanceof RestrictedAppPreference) {
@@ -51,8 +49,11 @@ public class LocationInjectedServicesForWorkPreferenceController extends
                 }
             }
             if (entry.getKey() != UserHandle.myUserId()) {
-                LocationSettings.addPreferencesSorted(entry.getValue(), categoryLocationServices);
+                LocationSettings.addPreferencesSorted(entry.getValue(),
+                        mCategoryLocationServices);
+                show = true;
             }
         }
+        mCategoryLocationServices.setVisible(show);
     }
 }

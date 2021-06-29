@@ -57,7 +57,6 @@ public class SeekBarPreference extends RestrictedPreference
     private SeekBar mSeekBar;
     private boolean mShouldBlink;
     private int mAccessibilityRangeInfoType = AccessibilityNodeInfo.RangeInfo.RANGE_TYPE_INT;
-    private CharSequence mOverrideSeekBarStateDescription;
     private CharSequence mSeekBarContentDescription;
     private CharSequence mSeekBarStateDescription;
 
@@ -162,9 +161,6 @@ public class SeekBarPreference extends RestrictedPreference
                     info.setRangeInfo(AccessibilityNodeInfo.RangeInfo.obtain(
                                     mAccessibilityRangeInfoType, rangeInfo.getMin(),
                                     rangeInfo.getMax(), rangeInfo.getCurrent()));
-                }
-                if (mOverrideSeekBarStateDescription != null) {
-                    info.setStateDescription(mOverrideSeekBarStateDescription);
                 }
             }
         });
@@ -350,13 +346,6 @@ public class SeekBarPreference extends RestrictedPreference
         if (mSeekBar != null) {
             mSeekBar.setStateDescription(stateDescription);
         }
-    }
-
-    /**
-     * Overrides the state description of {@link SeekBar} with given content.
-     */
-    public void overrideSeekBarStateDescription(CharSequence stateDescription) {
-        mOverrideSeekBarStateDescription = stateDescription;
     }
 
     @Override

@@ -92,7 +92,6 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
                         }
                     }
                 }
-                button.announceForAccessibility(mContext.getString(R.string.recent_convos_removed));
             } catch (RemoteException e) {
                 Slog.w(TAG, "Could not clear recents", e);
             }
@@ -104,14 +103,26 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
     public void updateState(Preference preference) {
         PreferenceCategory pref = (PreferenceCategory) preference;
         // Load conversations
-        try {
-            mConversations = mPs.getRecentConversations().getList();
-        } catch (RemoteException e) {
-            Slog.w(TAG, "Could get recents", e);
-        }
-        Collections.sort(mConversations, mConversationComparator);
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... unused) {
+                try {
+                    mConversations = mPs.getRecentConversations().getList();
+                } catch (RemoteException e) {
+                    Slog.w(TAG, "Could get recents", e);
+                }
+                Collections.sort(mConversations, mConversationComparator);
+                return null;
+            }
 
-        populateList(mConversations, pref);
+            @Override
+            protected void onPostExecute(Void unused) {
+                if (mContext == null) {
+                    return;
+                }
+                populateList(mConversations, pref);
+            }
+        }.execute();
 
     }
 
@@ -141,9 +152,9 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
         int order = 100;
         boolean hasClearable = false;
         for (ConversationChannel conversation : conversations) {
-            if (conversation.getNotificationChannel().getImportance() == IMPORTANCE_NONE
-                    || (conversation.getNotificationChannelGroup() != null
-                    && conversation.getNotificationChannelGroup().isBlocked())) {
+            if (conversation.getParentNotificationChannel().getImportance() == IMPORTANCE_NONE
+                    || (conversation.getParentNotificationChannelGroup() != null
+                    && conversation.getParentNotificationChannelGroup().isBlocked())) {
                 continue;
             }
             RecentConversationPreference pref =
@@ -167,8 +178,6 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
             pref.setOnClearClickListener(() -> {
                 try {
                     mPs.removeRecentConversation(pkg, UserHandle.getUserId(uid), conversationId);
-                    pref.getClearView().announceForAccessibility(
-                            mContext.getString(R.string.recent_convo_removed));
                     parent.removePreference(pref);
                 } catch (RemoteException e) {
                     Slog.w(TAG, "Could not clear recent", e);
@@ -181,12 +190,12 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
         pref.setSummary(getSummary(conversation));
         pref.setIcon(mBackend.getConversationDrawable(mContext, conversation.getShortcutInfo(),
                 pkg, uid, false));
-        pref.setKey(conversation.getNotificationChannel().getId()
+        pref.setKey(conversation.getParentNotificationChannel().getId()
                 + ":" + conversationId);
         pref.setOnPreferenceClickListener(preference -> {
             mBackend.createConversationNotificationChannel(
                     pkg, uid,
-                    conversation.getNotificationChannel(),
+                    conversation.getParentNotificationChannel(),
                     conversationId);
             getSubSettingLauncher(conversation, pref.getTitle()).launch();
             return true;
@@ -196,11 +205,11 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
     }
 
     CharSequence getSummary(ConversationChannel conversation) {
-        return conversation.getNotificationChannelGroup() == null
-                ? conversation.getNotificationChannel().getName()
+        return conversation.getParentNotificationChannelGroup() == null
+                ? conversation.getParentNotificationChannel().getName()
                 : mContext.getString(R.string.notification_conversation_summary,
-                        conversation.getNotificationChannel().getName(),
-                        conversation.getNotificationChannelGroup().getName());
+                        conversation.getParentNotificationChannel().getName(),
+                        conversation.getParentNotificationChannelGroup().getName());
     }
 
     CharSequence getTitle(ConversationChannel conversation) {
@@ -215,7 +224,7 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
         channelArgs.putString(AppInfoBase.ARG_PACKAGE_NAME,
                 conversation.getShortcutInfo().getPackage());
         channelArgs.putString(Settings.EXTRA_CHANNEL_ID,
-                conversation.getNotificationChannel().getId());
+                conversation.getParentNotificationChannel().getId());
         channelArgs.putString(Settings.EXTRA_CONVERSATION_ID,
                 conversation.getShortcutInfo().getId());
 
@@ -237,8 +246,8 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
                             o2.getShortcutInfo().getLabel());
 
                     if (labelComparison == 0) {
-                        return o1.getNotificationChannel().getId().compareTo(
-                                o2.getNotificationChannel().getId());
+                        return o1.getParentNotificationChannel().getId().compareTo(
+                                o2.getParentNotificationChannel().getId());
                     }
 
                     return labelComparison;

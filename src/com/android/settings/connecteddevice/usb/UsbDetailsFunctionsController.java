@@ -76,8 +76,6 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mProfilesContainer = screen.findPreference(getPreferenceKey());
-        refresh(/* connected */ false, /* functions */ mUsbBackend.getDefaultUsbFunctions(),
-                /* powerRole */ 0, /* dataRole */ 0);
     }
 
     /**
@@ -89,7 +87,6 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
             pref = new RadioButtonPreference(mProfilesContainer.getContext());
             pref.setKey(key);
             pref.setTitle(titleId);
-            pref.setSingleLineTitle(false);
             pref.setOnClickListener(this);
             mProfilesContainer.addPreference(pref);
         }

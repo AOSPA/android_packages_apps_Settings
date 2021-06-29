@@ -47,7 +47,6 @@ public class StorageUsageProgressBarPreferenceController extends BasePreferenceC
     long mTotalBytes;
     private UsageProgressBarPreference mUsageProgressBarPreference;
     private StorageEntry mStorageEntry;
-    boolean mIsUpdateStateFromSelectedStorageEntry;
 
     public StorageUsageProgressBarPreferenceController(Context context, String key) {
         super(context, key);
@@ -69,6 +68,7 @@ public class StorageUsageProgressBarPreferenceController extends BasePreferenceC
     @Override
     public void displayPreference(PreferenceScreen screen) {
         mUsageProgressBarPreference = screen.findPreference(getPreferenceKey());
+        getStorageStatsAndUpdateUi();
     }
 
     private void getStorageStatsAndUpdateUi() {
@@ -101,18 +101,12 @@ public class StorageUsageProgressBarPreferenceController extends BasePreferenceC
             if (mUsageProgressBarPreference == null) {
                 return;
             }
-            mIsUpdateStateFromSelectedStorageEntry = true;
             ThreadUtils.postOnMainThread(() -> updateState(mUsageProgressBarPreference));
         });
     }
 
     @Override
     public void updateState(Preference preference) {
-        if (!mIsUpdateStateFromSelectedStorageEntry) {
-            // Returns here to avoid jank by unnecessary UI update.
-            return;
-        }
-        mIsUpdateStateFromSelectedStorageEntry = false;
         mUsageProgressBarPreference.setUsageSummary(
                 getStorageSummary(R.string.storage_usage_summary, mUsedBytes));
         mUsageProgressBarPreference.setTotalSummary(

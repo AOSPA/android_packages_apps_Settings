@@ -39,6 +39,7 @@ import androidx.lifecycle.OnLifecycleEvent;
 import com.android.settings.R;
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.net.URISyntaxException;
@@ -58,7 +59,6 @@ public class AvatarViewMixin implements LifecycleObserver {
     private static final String METHOD_GET_ACCOUNT_AVATAR = "getAccountAvatar";
     private static final String KEY_AVATAR_BITMAP = "account_avatar";
     private static final String KEY_ACCOUNT_NAME = "account_name";
-    private static final String KEY_AVATAR_ICON = "avatar_icon";
     private static final String EXTRA_ACCOUNT_NAME = "extra.accountName";
 
     private final Context mContext;
@@ -105,8 +105,11 @@ public class AvatarViewMixin implements LifecycleObserver {
                 return;
             }
 
-            FeatureFactory.getFactory(mContext).getMetricsFeatureProvider()
-                    .logSettingsTileClick(KEY_AVATAR_ICON, SettingsEnums.SETTINGS_HOMEPAGE);
+            final MetricsFeatureProvider metricsFeatureProvider = FeatureFactory.getFactory(
+                    mContext).getMetricsFeatureProvider();
+            metricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                    SettingsEnums.CLICK_ACCOUNT_AVATAR, SettingsEnums.SETTINGS_HOMEPAGE,
+                    null /* key */, Integer.MIN_VALUE /* value */);
 
             // Here may have two different UI while start the activity.
             // It will display adding account UI when device has no any account.

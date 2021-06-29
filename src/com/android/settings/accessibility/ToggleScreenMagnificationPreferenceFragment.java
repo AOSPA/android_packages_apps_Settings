@@ -17,7 +17,6 @@
 package com.android.settings.accessibility;
 
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME;
-import static com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums;
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
@@ -45,9 +44,8 @@ import androidx.preference.PreferenceCategory;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.DialogCreatable;
 import com.android.settings.R;
-import com.android.settings.accessibility.AccessibilityDialogUtils.DialogType;
+import com.android.settings.accessibility.AccessibilityEditDialogUtils.DialogType;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
-import com.android.settings.utils.LocaleUtils;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
@@ -89,7 +87,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         mPackageName = getString(R.string.accessibility_screen_magnification_title);
         mImageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
                 .authority(getPrefContext().getPackageName())
-                .appendPath(String.valueOf(R.raw.accessibility_magnification_banner))
+                .appendPath(String.valueOf(R.drawable.accessibility_magnification_banner))
                 .build();
         mTouchExplorationStateChangeListener = isTouchExplorationEnabled -> {
             removeDialog(DialogEnums.EDIT_SHORTCUT);
@@ -135,7 +133,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 final int dialogType = WizardManagerHelper.isAnySetupWizard(getIntent())
                         ? DialogType.EDIT_SHORTCUT_MAGNIFICATION_SUW
                         : DialogType.EDIT_SHORTCUT_MAGNIFICATION;
-                dialog = AccessibilityDialogUtils.showEditShortcutDialog(getPrefContext(),
+                dialog = AccessibilityEditDialogUtils.showEditShortcutDialog(getPrefContext(),
                         dialogType, dialogTitle, this::callOnAlertDialogCheckboxClicked);
                 setupMagnificationEditShortcutDialog(dialog);
                 return dialog;
@@ -284,9 +282,10 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         if (list.isEmpty()) {
             list.add(softwareTitle);
         }
+        final String joinStrings = TextUtils.join(/* delimiter= */", ", list);
 
         return CaseMap.toTitle().wholeString().noLowercase().apply(Locale.getDefault(), /* iter= */
-                null, LocaleUtils.getConcatenatedString(list));
+                null, joinStrings);
     }
 
     @Override

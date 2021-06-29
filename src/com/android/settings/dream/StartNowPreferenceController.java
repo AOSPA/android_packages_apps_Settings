@@ -59,10 +59,8 @@ public class StartNowPreferenceController extends SettingsMainSwitchPreferenceCo
     @Override
     public boolean setChecked(boolean isChecked) {
         if (isChecked) {
-            if (mSwitchPreference != null) {
-                mMetricsFeatureProvider.logClickedPreference(mSwitchPreference,
-                        mSwitchPreference.getExtras().getInt(DashboardFragment.CATEGORY));
-            }
+            mMetricsFeatureProvider.logClickedPreference(mSwitchPreference,
+                    mSwitchPreference.getExtras().getInt(DashboardFragment.CATEGORY));
             mBackend.startDreaming();
         }
         return true;

@@ -54,7 +54,7 @@ public class NetworkProviderWorker extends WifiScanWorker implements
         DataConnectivityListener.Client, InternetUpdater.InternetChangeListener,
         SubscriptionsChangeListener.SubscriptionsChangeListenerClient {
     private static final String TAG = "NetworkProviderWorker";
-    private static final int PROVIDER_MODEL_DEFAULT_EXPANDED_ROW_COUNT = 5;
+    private static final int PROVIDER_MODEL_DEFAULT_EXPANDED_ROW_COUNT = 4;
     private DataContentObserver mMobileDataObserver;
     private SignalStrengthListener mSignalStrengthListener;
     private SubscriptionsChangeListener mSubscriptionsListener;
@@ -97,7 +97,6 @@ public class NetworkProviderWorker extends WifiScanWorker implements
 
     @Override
     protected void onSlicePinned() {
-        Log.d(TAG, "onSlicePinned");
         mMobileDataObserver.register(mContext, mDefaultDataSubid);
         mSubscriptionsListener.start();
         mDataEnabledListener.start(mDefaultDataSubid);
@@ -109,7 +108,6 @@ public class NetworkProviderWorker extends WifiScanWorker implements
 
     @Override
     protected void onSliceUnpinned() {
-        Log.d(TAG, "onSliceUnpinned");
         mMobileDataObserver.unregister(mContext);
         mSubscriptionsListener.stop();
         mDataEnabledListener.stop();
@@ -140,11 +138,10 @@ public class NetworkProviderWorker extends WifiScanWorker implements
     @Override
     public void onSubscriptionsChanged() {
         int defaultDataSubId = getDefaultDataSubscriptionId();
+        Log.d(TAG, "onSubscriptionsChanged: defaultDataSubId:" + defaultDataSubId);
         if (mDefaultDataSubid == defaultDataSubId) {
-            Log.d(TAG, "onSubscriptionsChanged: no change");
             return;
         }
-        Log.d(TAG, "onSubscriptionsChanged: defaultDataSubId:" + defaultDataSubId);
         if (SubscriptionManager.isUsableSubscriptionId(defaultDataSubId)) {
             mTelephonyManager.unregisterTelephonyCallback(mTelephonyCallback);
             mMobileDataObserver.unregister(mContext);
@@ -152,7 +149,7 @@ public class NetworkProviderWorker extends WifiScanWorker implements
             mSignalStrengthListener.updateSubscriptionIds(Collections.singleton(defaultDataSubId));
             mTelephonyManager = mTelephonyManager.createForSubscriptionId(defaultDataSubId);
             mTelephonyManager.registerTelephonyCallback(mHandler::post, mTelephonyCallback);
-            mMobileDataObserver.register(mContext, defaultDataSubId);
+            mMobileDataObserver.register(mContext, mDefaultDataSubid);
             mConfig = getConfig(mContext);
         } else {
             mSignalStrengthListener.updateSubscriptionIds(Collections.emptySet());
@@ -192,13 +189,11 @@ public class NetworkProviderWorker extends WifiScanWorker implements
 
         public DataContentObserver(Handler handler, NetworkProviderWorker backgroundWorker) {
             super(handler);
-            Log.d(TAG, "DataContentObserver: init");
             mNetworkProviderWorker = backgroundWorker;
         }
 
         @Override
         public void onChange(boolean selfChange) {
-            Log.d(TAG, "DataContentObserver: onChange");
             mNetworkProviderWorker.updateSlice();
         }
 
@@ -210,7 +205,6 @@ public class NetworkProviderWorker extends WifiScanWorker implements
          */
         public void register(Context context, int subId) {
             final Uri uri = MobileDataContentObserver.getObservableUri(context, subId);
-            Log.d(TAG, "DataContentObserver: register uri:" + uri);
             context.getContentResolver().registerContentObserver(uri, false, this);
         }
 
@@ -220,7 +214,6 @@ public class NetworkProviderWorker extends WifiScanWorker implements
          * @param context the Context object.
          */
         public void unregister(Context context) {
-            Log.d(TAG, "DataContentObserver: unregister");
             context.getContentResolver().unregisterContentObserver(this);
         }
     }
@@ -261,7 +254,7 @@ public class NetworkProviderWorker extends WifiScanWorker implements
         String iconKey = getIconKey(telephonyDisplayInfo);
         int resId = mapIconSets(config).get(iconKey).dataContentDescription;
         if (mWifiPickerTrackerHelper != null
-                && mWifiPickerTrackerHelper.isCarrierNetworkActive()) {
+                && mWifiPickerTrackerHelper.isActiveCarrierNetwork()) {
             MobileIconGroup carrierMergedWifiIconGroup = TelephonyIcons.CARRIER_MERGED_WIFI;
             resId = carrierMergedWifiIconGroup.dataContentDescription;
             return resId != 0

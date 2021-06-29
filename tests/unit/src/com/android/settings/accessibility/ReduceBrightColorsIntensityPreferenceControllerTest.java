@@ -84,7 +84,7 @@ public class ReduceBrightColorsIntensityPreferenceControllerTest {
         assertThat(
                 Settings.Secure.getInt(mContext.getContentResolver(),
                         Settings.Secure.REDUCE_BRIGHT_COLORS_LEVEL, 0))
-                .isEqualTo(80);
+                .isEqualTo(20);
     }
 
     @Test
@@ -92,10 +92,8 @@ public class ReduceBrightColorsIntensityPreferenceControllerTest {
         when(mResources.getInteger(
                 R.integer.config_reduceBrightColorsStrengthMax)).thenReturn(90);
         when(mResources.getInteger(
-                R.integer.config_reduceBrightColorsStrengthMin)).thenReturn(15);
-        assertThat(mPreferenceController.getMax()).isEqualTo(85);
-        assertThat(mPreferenceController.getMin()).isEqualTo(10);
+                R.integer.config_reduceBrightColorsStrengthMin)).thenReturn(10);
         assertThat(mPreferenceController.getMax() - mPreferenceController.getMin())
-                .isEqualTo(75);
+                .isEqualTo(80);
     }
 }

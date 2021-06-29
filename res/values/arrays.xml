@@ -281,6 +281,7 @@
         <item>Do not verify</item>
         <item>Request certificate status</item>
         <item>Require certificate status</item>
+        <item>Require all non-trusted certificate statuses</item>
     </string-array>
 
     <!-- Wi-Fi AP band settings.  Either 2.4GHz or 5GHz prefer. -->
@@ -533,18 +534,6 @@
         <item>4</item>
         <!-- Do not translate. -->
         <item>20</item>
-    </string-array>
-
-    <string-array name="preferred_5g_network_mode_choices">
-        <item>NSA Mode</item>
-        <item>SA Mode</item>
-        <item>NSA + SA Mode</item>
-    </string-array>
-
-    <string-array name="preferred_5g_network_mode_values" translatable="false">
-        <item>"1"</item>
-        <item>"2"</item>
-        <item>"0"</item>
     </string-array>
 
     <!-- MVNO Info used in APN editor -->
@@ -1007,21 +996,6 @@
         <item>1</item>
         <!-- Navigation bar -->
         <item>0</item>
-    </string-array>
-
-    <!-- Titles for the accessibility button or gesture. [CHAR LIMIT=35] -->
-    <string-array name="accessibility_button_gesture_selector_titles">
-        <item>Button</item>
-        <item>Gesture</item>
-    </string-array>
-
-    <!-- Values for the accessibility button or gesture. -->
-    <!-- Should Keep in sync with Settings.Secure.ACCESSIBILITY_BUTTON_MODE_* -->
-    <string-array name="accessibility_button_gesture_selector_values" translatable="false">
-        <!-- Button -->
-        <item>1</item>
-        <!-- Gesture -->
-        <item>2</item>
     </string-array>
 
     <!-- Titles for the accessibility button size. [CHAR LIMIT=35] -->

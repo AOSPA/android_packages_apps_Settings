@@ -36,12 +36,7 @@ public interface ExtraAppInfoFeatureProvider {
     void setPackageName(String packageName);
 
     /**
-     * Checks if enabled
-     */
-    boolean isEnabled(Context context);
-
-    /**
-     * Gets the summary name
+     * gets the summary name
      */
     String getSummary(Context context);
 }

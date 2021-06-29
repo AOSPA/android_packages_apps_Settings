@@ -72,10 +72,8 @@ public class CarrierWifiTogglePreferenceControllerTest {
         mController.init(mock(Lifecycle.class), SUB_ID);
         mController.mIsProviderModelEnabled = true;
         mController.mIsCarrierProvisionWifiEnabled = true;
-        doReturn(true).when(mWifiPickerTrackerHelper).isCarrierNetworkActive();
         doReturn(SSID).when(mWifiPickerTrackerHelper).getCarrierNetworkSsid();
         mController.mWifiPickerTrackerHelper = mWifiPickerTrackerHelper;
-
         if (Looper.myLooper() == null) {
             Looper.prepare();
         }
@@ -89,7 +87,6 @@ public class CarrierWifiTogglePreferenceControllerTest {
         mNetworkPreference.setKey(
                 CarrierWifiTogglePreferenceController.CARRIER_WIFI_NETWORK_PREF_KEY);
         mScreen.addPreference(mNetworkPreference);
-        mController.mCarrierNetworkPreference = mNetworkPreference;
     }
 
     @Test
@@ -142,9 +139,8 @@ public class CarrierWifiTogglePreferenceControllerTest {
     }
 
     @Test
-    public void displayPreference_carrierNetworkActive_showCarrierNetwork() {
-        doReturn(true).when(mWifiPickerTrackerHelper).isCarrierNetworkActive();
-        doReturn(SSID).when(mWifiPickerTrackerHelper).getCarrierNetworkSsid();
+    public void displayPreference_carrierNetworkEnabled_showCarrierNetwork() {
+        doReturn(true).when(mWifiPickerTrackerHelper).isCarrierNetworkEnabled(SUB_ID);
 
         mController.displayPreference(mScreen);
 
@@ -154,8 +150,8 @@ public class CarrierWifiTogglePreferenceControllerTest {
     }
 
     @Test
-    public void displayPreference_carrierNetworkInactive_hideCarrierNetwork() {
-        doReturn(false).when(mWifiPickerTrackerHelper).isCarrierNetworkActive();
+    public void displayPreference_carrierNetworkDisabled_hideCarrierNetwork() {
+        doReturn(false).when(mWifiPickerTrackerHelper).isCarrierNetworkEnabled(SUB_ID);
 
         mController.displayPreference(mScreen);
 
@@ -164,48 +160,24 @@ public class CarrierWifiTogglePreferenceControllerTest {
     }
 
     @Test
-    public void onWifiStateChanged_carrierNetworkActive_shouldSetSummary() {
-        doReturn(true).when(mWifiPickerTrackerHelper).isCarrierNetworkActive();
-        doReturn(SSID).when(mWifiPickerTrackerHelper).getCarrierNetworkSsid();
-        mNetworkPreference.setVisible(false);
+    public void onWifiStateChanged_carrierNetworkVisible_shouldSetSummary() {
+        mController.mCarrierNetworkPreference = mNetworkPreference;
+        mNetworkPreference.setVisible(true);
         mNetworkPreference.setSummary(null);
 
         mController.onWifiEntriesChanged();
 
-        assertThat(mNetworkPreference.isVisible()).isEqualTo(true);
         assertThat(mNetworkPreference.getSummary()).isEqualTo(SSID);
     }
 
     @Test
-    public void onWifiStateChanged_carrierNetworkInactive_shouldHideNetwork() {
-        doReturn(false).when(mWifiPickerTrackerHelper).isCarrierNetworkActive();
+    public void onWifiEntriesChanged_carrierNetworkVisible_shouldSetSummary() {
+        mController.mCarrierNetworkPreference = mNetworkPreference;
         mNetworkPreference.setVisible(true);
-
-        mController.onWifiEntriesChanged();
-
-        assertThat(mNetworkPreference.isVisible()).isEqualTo(false);
-    }
-
-    @Test
-    public void onWifiEntriesChanged_carrierNetworkActive_shouldSetSummary() {
-        doReturn(true).when(mWifiPickerTrackerHelper).isCarrierNetworkActive();
-        doReturn(SSID).when(mWifiPickerTrackerHelper).getCarrierNetworkSsid();
-        mNetworkPreference.setVisible(false);
         mNetworkPreference.setSummary(null);
 
         mController.onWifiEntriesChanged();
 
-        assertThat(mNetworkPreference.isVisible()).isEqualTo(true);
         assertThat(mNetworkPreference.getSummary()).isEqualTo(SSID);
-    }
-
-    @Test
-    public void onWifiEntriesChanged_carrierNetworkInactive_shouldHideNetwork() {
-        doReturn(false).when(mWifiPickerTrackerHelper).isCarrierNetworkActive();
-        mNetworkPreference.setVisible(true);
-
-        mController.onWifiEntriesChanged();
-
-        assertThat(mNetworkPreference.isVisible()).isEqualTo(false);
     }
 }

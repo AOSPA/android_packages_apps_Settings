@@ -25,6 +25,7 @@
 
         <Preference
             android:key="memory"
+            android:icon="@drawable/ic_settings_memory"
             android:title="@string/memory_settings_title"
             android:summary="@string/summary_placeholder"
             android:fragment="com.android.settings.applications.ProcessStatsSummary" />
@@ -263,11 +264,6 @@
         android:title="@string/debug_networking_category"
         android:order="400">
 
-        <com.android.settings.widget.AddPreference
-            android:key="prefer_5G_nr_mode"
-            android:title="@string/prefer_5G_nr_mode_title"
-            settings:controller="com.android.settings.development.Prefer5GNetworkSummaryController"/>
-
         <SwitchPreference
             android:key="wifi_display_certification"
             android:title="@string/wifi_display_certification"
@@ -299,11 +295,6 @@
             android:summary="@string/mobile_data_always_on_summary" />
 
         <SwitchPreference
-            android:key="smart_dds_switch"
-            android:title="@string/smart_dds_switch"
-            android:summary="@string/smart_dds_switch_summary" />
-
-        <SwitchPreference
             android:key="tethering_hardware_offload"
             android:title="@string/tethering_hardware_offload"
             android:summary="@string/tethering_hardware_offload_summary" />
@@ -311,6 +302,7 @@
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="default_usb_configuration"
             android:fragment="com.android.settings.connecteddevice.usb.UsbDefaultFragment"
+            android:icon="@drawable/ic_usb"
             android:title="@string/usb_default_label"/>
 
         <SwitchPreference
@@ -505,7 +497,8 @@
 
         <SwitchPreference
             android:key="enable_blurs_on_windows"
-            android:title="@string/window_blurs"/>
+            android:title="@string/enable_blurs_on_windows_title"
+            android:summary="@string/enable_blurs_on_windows_summary" />
 
         <SwitchPreference
             android:key="force_msaa"

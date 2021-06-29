@@ -160,9 +160,9 @@ public class RecentConversationsPreferenceControllerTest {
                 true);
 
         assertThat(mController.getSummary(ccw).toString()).contains(
-                ccw.getNotificationChannelGroup().getName());
+                ccw.getParentNotificationChannelGroup().getName());
         assertThat(mController.getSummary(ccw).toString()).contains(
-                ccw.getNotificationChannel().getName());
+                ccw.getParentNotificationChannel().getName());
     }
 
     @Test
@@ -175,7 +175,7 @@ public class RecentConversationsPreferenceControllerTest {
                 true);
 
         assertThat(mController.getSummary(ccw).toString()).isEqualTo(
-                ccw.getNotificationChannel().getName());
+                ccw.getParentNotificationChannel().getName());
     }
 
     @Test
@@ -207,7 +207,7 @@ public class RecentConversationsPreferenceControllerTest {
                 ccw.getShortcutInfo().getPackage());
         assertThat(extras.getInt(AppInfoBase.ARG_PACKAGE_UID)).isEqualTo(ccw.getUid());
         assertThat(extras.getString(Settings.EXTRA_CHANNEL_ID)).isEqualTo(
-                ccw.getNotificationChannel().getId());
+                ccw.getParentNotificationChannel().getId());
         assertThat(extras.getString(Settings.EXTRA_CONVERSATION_ID)).isEqualTo(
                 ccw.getShortcutInfo().getId());
     }
@@ -230,7 +230,7 @@ public class RecentConversationsPreferenceControllerTest {
             // expected since it tries to launch an activity
         }
         verify(mBackend).createConversationNotificationChannel(
-                si.getPackage(), ccw.getUid(), ccw.getNotificationChannel(), si.getId());
+                si.getPackage(), ccw.getUid(), ccw.getParentNotificationChannel(), si.getId());
     }
 
     @Test

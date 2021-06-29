@@ -144,17 +144,13 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
                                 R.string.bluetooth_message_access_notification_content);
                         break;
                     case BluetoothDevice.REQUEST_TYPE_SIM_ACCESS:
-                        title = context.getString(
-                                R.string.bluetooth_sim_card_access_notification_title);
-                        message = context.getString(
-                                R.string.bluetooth_sim_card_access_notification_content,
+                        title = context.getString(R.string.bluetooth_sap_request);
+                        message = context.getString(R.string.bluetooth_sap_acceptance_dialog_text,
                                 deviceAlias, deviceAlias);
                         break;
                     default:
-                        title = context.getString(
-                                R.string.bluetooth_connect_access_notification_title);
-                        message = context.getString(
-                                R.string.bluetooth_connect_access_notification_content,
+                        title = context.getString(R.string.bluetooth_connection_permission_request);
+                        message = context.getString(R.string.bluetooth_connection_dialog_text,
                                 deviceAlias, deviceAlias);
                         break;
                 }

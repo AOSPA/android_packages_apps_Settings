@@ -78,12 +78,10 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeature
         // Settings animated image.
         final int animatedImageRes = arguments.getInt(
                 AccessibilitySettings.EXTRA_ANIMATED_IMAGE_RES);
-        if (animatedImageRes > 0) {
-            mImageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
-                    .authority(mComponentName.getPackageName())
-                    .appendPath(String.valueOf(animatedImageRes))
-                    .build();
-        }
+        mImageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(mComponentName.getPackageName())
+                .appendPath(String.valueOf(animatedImageRes))
+                .build();
 
         // Settings html description.
         mHtmlDescription = arguments.getCharSequence(AccessibilitySettings.EXTRA_HTML_DESCRIPTION);

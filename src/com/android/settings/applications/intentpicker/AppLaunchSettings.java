@@ -46,6 +46,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.ClearDefaultsPreference;
+import com.android.settings.utils.AnnotationSpan;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.widget.FooterPreference;
@@ -72,6 +73,8 @@ public class AppLaunchSettings extends AppInfoBase implements
             "open_by_default_selected_links_category";
     private static final String OTHER_DETAILS_PREF_CATEGORY_KEY = "app_launch_other_defaults";
 
+    // Url and Uri
+    private static final String ANNOTATION_URL = "url";
     private static final String LEARN_MORE_URI =
             "https://developer.android.com/training/app-links/verify-site-associations";
 
@@ -188,13 +191,12 @@ public class AppLaunchSettings extends AppInfoBase implements
             return;
         }
         final Activity activity = getActivity();
-        final String summary = activity.getString(R.string.app_launch_top_intro_message);
         final Preference pref = EntityHeaderController
                 .newInstance(activity, this, null /* header */)
                 .setRecyclerView(getListView(), getSettingsLifecycle())
                 .setIcon(Utils.getBadgedIcon(mContext, mPackageInfo.applicationInfo))
                 .setLabel(mPackageInfo.applicationInfo.loadLabel(mPm))
-                .setSummary(summary)  // add intro text
+                .setSummary("" /* summary */)  // no version number
                 .setIsInstantApp(AppUtils.isInstant(mPackageInfo.applicationInfo))
                 .setPackageName(mPackageName)
                 .setUid(mPackageInfo.applicationInfo.uid)
@@ -309,7 +311,6 @@ public class AppLaunchSettings extends AppInfoBase implements
     /** Initialize add link preference */
     private void initAddLinkPreference() {
         mAddLinkPreference = findPreference(ADD_LINK_PREF_KEY);
-        mAddLinkPreference.setVisible(isAddLinksShown());
         mAddLinkPreference.setEnabled(isAddLinksNotEmpty());
         mAddLinkPreference.setOnPreferenceClickListener(preference -> {
             final int stateNoneLinksNo = getLinksNumber(DOMAIN_STATE_NONE);
@@ -323,10 +324,6 @@ public class AppLaunchSettings extends AppInfoBase implements
 
     private boolean isAddLinksNotEmpty() {
         return getLinksNumber(DOMAIN_STATE_NONE) > 0;
-    }
-
-    private boolean isAddLinksShown() {
-        return (isAddLinksNotEmpty() || getLinksNumber(DOMAIN_STATE_SELECTED) > 0);
     }
 
     private void showProgressDialogFragment() {
@@ -353,22 +350,16 @@ public class AppLaunchSettings extends AppInfoBase implements
     }
 
     private void initFooter() {
+        // learn more
+        final AnnotationSpan.LinkInfo linkInfo =
+                new AnnotationSpan.LinkInfo(ANNOTATION_URL, v -> {
+                    final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(LEARN_MORE_URI));
+                    mContext.startActivity(intent);
+                });
         final CharSequence footerText = mContext.getText(R.string.app_launch_footer);
         final FooterPreference footerPreference = (FooterPreference) findPreference(
                 FOOTER_PREF_KEY);
-        footerPreference.setTitle(footerText);
-        // learn more
-        footerPreference.setLearnMoreAction(view -> {
-            final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(LEARN_MORE_URI));
-            mContext.startActivity(intent);
-        });
-        final String learnMoreContentDescription = mContext.getString(
-                R.string.footer_learn_more_content_description, getLabelName());
-        footerPreference.setLearnMoreContentDescription(learnMoreContentDescription);
-    }
-
-    private String getLabelName() {
-        return mContext.getString(R.string.launch_by_default);
+        footerPreference.setTitle(AnnotationSpan.linkify(footerText, linkInfo));
     }
 
     private boolean isClearDefaultsEnabled() {

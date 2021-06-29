@@ -20,6 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.settings.DisplaySettings;
 import com.android.settings.backup.UserBackupSettingsActivity;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.usb.UsbDetailsFragment;
@@ -35,6 +36,7 @@ import com.android.settings.notification.zen.ZenModeRestrictNotificationsSetting
 import com.android.settings.security.SecuritySettings;
 import com.android.settings.security.screenlock.ScreenLockSettings;
 import com.android.settings.system.SystemDashboardFragment;
+import com.android.settings.wallpaper.WallpaperSuggestionActivity;
 import com.android.settings.wifi.WifiSettings;
 
 import org.junit.Test;
@@ -47,6 +49,13 @@ public class CustomSiteMapRegistryTest {
     public void shouldContainScreenLockSettingsPairs() {
         assertThat(CustomSiteMapRegistry.CUSTOM_SITE_MAP.get(ScreenLockSettings.class.getName()))
                 .isEqualTo(SecuritySettings.class.getName());
+    }
+
+    @Test
+    public void shouldContainWallpaperSuggestionActivityPairs() {
+        assertThat(CustomSiteMapRegistry.CUSTOM_SITE_MAP.get(
+                WallpaperSuggestionActivity.class.getName()))
+                .isEqualTo(DisplaySettings.class.getName());
     }
 
     @Test
