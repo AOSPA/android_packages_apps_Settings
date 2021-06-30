@@ -169,8 +169,18 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         return WifiPickerTracker.isVerboseLoggingEnabled();
     }
 
+    private boolean mIsViewLoading;
+    private final Runnable mRemoveLoadingRunnable = () -> {
+        if (mIsViewLoading) {
+            setLoading(false, false);
+            mIsViewLoading = false;
+        }
+    };
+
+    private boolean mIsWifiEntryListStale = true;
     private final Runnable mUpdateWifiEntryPreferencesRunnable = () -> {
         updateWifiEntryPreferences();
+        getView().postDelayed(mRemoveLoadingRunnable, 10);
     };
     private final Runnable mHideProgressBarRunnable = () -> {
         setProgressBarVisible(false);
@@ -244,11 +254,22 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        final Activity activity = getActivity();
-        if (activity != null) {
-            mProgressHeader = setPinnedHeaderView(R.layout.progress_header)
-                    .findViewById(R.id.progress_bar_animation);
-            setProgressBarVisible(false);
+        Activity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
+
+        mProgressHeader = setPinnedHeaderView(R.layout.progress_header)
+                .findViewById(R.id.progress_bar_animation);
+        setProgressBarVisible(false);
+
+        mWifiManager = activity.getSystemService(WifiManager.class);
+        if (mWifiManager != null) {
+            setLoading(true, false);
+            mIsViewLoading = true;
+            if (!mWifiManager.isWifiEnabled()) {
+                getView().postDelayed(mRemoveLoadingRunnable, 100);
+            }
         }
     }
 
@@ -331,12 +352,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         mWifiPickerTracker = mWifiPickerTrackerHelper.getWifiPickerTracker();
         mInternetUpdater = new InternetUpdater(getContext(), getSettingsLifecycle(), this);
 
-        final Activity activity = getActivity();
-
-        if (activity != null) {
-            mWifiManager = getActivity().getSystemService(WifiManager.class);
-        }
-
         mConnectListener = new WifiConnectListener(getActivity());
 
         mSaveListener = new WifiManager.ActionListener() {
@@ -416,8 +431,13 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     @Override
     public void onResume() {
-        final Activity activity = getActivity();
         super.onResume();
+
+        // Disable the animation of the preference list
+        final RecyclerView prefListView = getListView();
+        if (prefListView != null) {
+            prefListView.setItemAnimator(null);
+        }
 
         // Because RestrictedSettingsFragment's onResume potentially requests authorization,
         // which changes the restriction state, recalculate it.
@@ -432,6 +452,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     @Override
     public void onStop() {
+        mIsWifiEntryListStale = true;
         getView().removeCallbacks(mUpdateWifiEntryPreferencesRunnable);
         getView().removeCallbacks(mHideProgressBarRunnable);
         mAirplaneModeEnabler.stop();
@@ -693,7 +714,12 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     @Override
     public void onWifiEntriesChanged() {
-        updateWifiEntryPreferencesDelayed();
+        if (mIsWifiEntryListStale) {
+            mIsWifiEntryListStale = false;
+            updateWifiEntryPreferences();
+        } else {
+            updateWifiEntryPreferencesDelayed();
+        }
         changeNextButtonState(mWifiPickerTracker.getConnectedWifiEntry() != null);
 
         // Edit the Wi-Fi network of specified SSID.
@@ -1168,9 +1194,11 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        MenuItem item = menu.add(0, MENU_FIX_CONNECTIVITY, 0, R.string.fix_connectivity);
-        item.setIcon(R.drawable.ic_repair_24dp);
-        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        if (!mAirplaneModeEnabler.isAirplaneModeOn()) {
+            MenuItem item = menu.add(0, MENU_FIX_CONNECTIVITY, 0, R.string.fix_connectivity);
+            item.setIcon(R.drawable.ic_repair_24dp);
+            item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        }
         super.onCreateOptionsMenu(menu, inflater);
     }
 

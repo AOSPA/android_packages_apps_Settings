@@ -35,7 +35,6 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -49,7 +48,6 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesDetailsPreferenceController;
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureDetailPreferenceController;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -111,6 +109,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
     private PackageInfo mPackageInfo;
     private int mUserId;
     private String mPackageName;
+    private int mUid;
 
     private DevicePolicyManager mDpm;
     private UserManager mUserManager;
@@ -166,9 +165,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
         use(AppStoragePreferenceController.class).setParentFragment(this);
         use(AppVersionPreferenceController.class).setParentFragment(this);
         use(InstantAppDomainsPreferenceController.class).setParentFragment(this);
-        if (FeatureFlagUtils.isEnabled(context, FeatureFlags.SILKY_HOME)) {
-            use(ExtraAppInfoPreferenceController.class).setPackageName(packageName);
-        }
+        use(ExtraAppInfoPreferenceController.class).setPackageName(packageName);
 
         final HibernationSwitchPreferenceController appHibernationSettings =
                 use(HibernationSwitchPreferenceController.class);
@@ -200,8 +197,14 @@ public class AppInfoDashboardFragment extends DashboardFragment
         acrossProfiles.setPackageName(packageName);
         acrossProfiles.setParentFragment(this);
 
+        final AlarmsAndRemindersDetailPreferenceController alarmsAndReminders =
+                use(AlarmsAndRemindersDetailPreferenceController.class);
+        alarmsAndReminders.setPackageName(packageName);
+        alarmsAndReminders.setParentFragment(this);
+
         use(AdvancedAppInfoPreferenceCategoryController.class).setChildren(Arrays.asList(
-                writeSystemSettings, drawOverlay, pip, externalSource, acrossProfiles));
+                writeSystemSettings, drawOverlay, pip, externalSource, acrossProfiles,
+                alarmsAndReminders));
     }
 
     @Override
@@ -258,9 +261,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
 
     @Override
     protected int getPreferenceScreenResId() {
-        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.SILKY_HOME)) {
-            return R.xml.app_info_settings_v2;
-        }
         return R.xml.app_info_settings;
     }
 
@@ -297,7 +297,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
                 (SettingsActivity) getActivity(), this, lifecycle, packageName, mState,
                 REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN);
         controllers.add(mAppButtonsPreferenceController);
-        controllers.add(new AppBatteryPreferenceController(context, this, packageName, lifecycle));
+        controllers.add(new AppBatteryPreferenceController(
+                context, this, packageName, getUid(), lifecycle));
         controllers.add(new AppMemoryPreferenceController(context, this, lifecycle));
         controllers.add(new DefaultHomeShortcutPreferenceController(context, packageName));
         controllers.add(new DefaultBrowserShortcutPreferenceController(context, packageName));
@@ -306,11 +307,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
         controllers.add(new DefaultSmsShortcutPreferenceController(context, packageName));
 
         return controllers;
-    }
-
-    @Override
-    protected boolean isParalleledControllers() {
-        return true;
     }
 
     void addToCallbackList(Callback callback) {
@@ -568,13 +564,29 @@ public class AppInfoDashboardFragment extends DashboardFragment
         final Bundle args = getArguments();
         mPackageName = (args != null) ? args.getString(ARG_PACKAGE_NAME) : null;
         if (mPackageName == null) {
-            final Intent intent = (args == null) ?
+            final Intent intent = args == null ?
                     getActivity().getIntent() : (Intent) args.getParcelable("intent");
             if (intent != null) {
                 mPackageName = intent.getData().getSchemeSpecificPart();
             }
         }
         return mPackageName;
+    }
+
+    private int getUid() {
+        if (mUid > 0) {
+            return mUid;
+        }
+        final Bundle args = getArguments();
+        mUid = (args != null) ? args.getInt(ARG_PACKAGE_UID) : -1;
+        if (mUid <= 0) {
+            final Intent intent = args == null
+                    ? getActivity().getIntent() : (Intent) args.getParcelable("intent");
+            if (intent != null && intent.getExtras() != null) {
+                mUid = intent.getIntExtra("uId", -1);
+            }
+        }
+        return mUid;
     }
 
     @VisibleForTesting

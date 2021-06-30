@@ -36,6 +36,7 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.telephony.MccTable;
+import com.android.settings.R;
 import com.android.settings.network.telephony.DeleteEuiccSubscriptionDialogActivity;
 import com.android.settings.network.telephony.ToggleSubscriptionDialogActivity;
 import com.android.settingslib.DeviceInfoUtils;
@@ -53,6 +54,7 @@ import java.util.stream.Stream;
 
 public class SubscriptionUtil {
     private static final String TAG = "SubscriptionUtil";
+    private static final String PROFILE_GENERIC_DISPLAY_NAME = "CARD";
     private static List<SubscriptionInfo> sAvailableResultsForTesting;
     private static List<SubscriptionInfo> sActiveResultsForTesting;
 
@@ -256,7 +258,10 @@ public class SubscriptionUtil {
                 .map(i -> {
                     DisplayInfo info = new DisplayInfo();
                     info.subscriptionInfo = i;
-                    info.originalName = i.getDisplayName().toString().trim();
+                    String displayName = i.getDisplayName().toString();
+                    info.originalName = TextUtils.equals(displayName, PROFILE_GENERIC_DISPLAY_NAME)
+                            ? context.getResources().getString(R.string.sim_card)
+                            : displayName.trim();
                     return info;
                 });
 
@@ -343,7 +348,6 @@ public class SubscriptionUtil {
      *
      * @return map of active subscription ids to diaplay names.
      */
-    @VisibleForTesting
     public static CharSequence getUniqueSubscriptionDisplayName(
             SubscriptionInfo info, Context context) {
         if (info == null) {
@@ -584,5 +588,57 @@ public class SubscriptionUtil {
             }
         }
         return null;
+    }
+
+    public static CharSequence getDefaultSimConfig(Context context, int subId) {
+        boolean isDefaultCall = subId == getDefaultVoiceSubscriptionId();
+        boolean isDefaultSms = subId == getDefaultSmsSubscriptionId();
+        boolean isDefaultData = subId == getDefaultDataSubscriptionId();
+
+        if (!isDefaultData && !isDefaultCall && !isDefaultSms) {
+            return null;
+        }
+
+        final StringBuilder defaultConfig = new StringBuilder();
+        if (isDefaultData) {
+            defaultConfig.append(
+                    getResForDefaultConfig(context, R.string.default_active_sim_mobile_data))
+                    .append(", ");
+        }
+
+        if (isDefaultCall) {
+            defaultConfig.append(getResForDefaultConfig(context, R.string.default_active_sim_calls))
+                    .append(", ");
+        }
+
+        if (isDefaultSms) {
+            defaultConfig.append(getResForDefaultConfig(context, R.string.default_active_sim_sms))
+                    .append(", ");
+        }
+
+        // Do not add ", " for the last config.
+        defaultConfig.setLength(defaultConfig.length() - 2);
+
+        final String summary = context.getResources().getString(
+                R.string.sim_category_default_active_sim,
+                defaultConfig);
+
+        return summary;
+    }
+
+    private static String getResForDefaultConfig(Context context, int resId) {
+        return context.getResources().getString(resId);
+    }
+
+    private static int getDefaultVoiceSubscriptionId() {
+        return SubscriptionManager.getDefaultVoiceSubscriptionId();
+    }
+
+    private static int getDefaultSmsSubscriptionId() {
+        return SubscriptionManager.getDefaultSmsSubscriptionId();
+    }
+
+    private static int getDefaultDataSubscriptionId() {
+        return SubscriptionManager.getDefaultDataSubscriptionId();
     }
 }

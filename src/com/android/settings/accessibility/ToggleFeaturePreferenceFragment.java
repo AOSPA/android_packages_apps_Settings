@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums;
+
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
@@ -50,17 +52,17 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.accessibility.AccessibilityEditDialogUtils.DialogType;
+import com.android.settings.accessibility.AccessibilityDialogUtils.DialogType;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
+import com.android.settings.utils.LocaleUtils;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settings.widget.SettingsMainSwitchPreference;
+import com.android.settingslib.HelpUtils;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -88,7 +90,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
 
     private static final String DRAWABLE_FOLDER = "drawable";
     protected static final String KEY_USE_SERVICE_PREFERENCE = "use_service";
-    protected static final String KEY_GENERAL_CATEGORY = "general_categories";
+    public static final String KEY_GENERAL_CATEGORY = "general_categories";
     protected static final String KEY_HTML_DESCRIPTION_PREFERENCE = "html_description";
     private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
     protected static final String KEY_SAVED_USER_SHORTCUT_TYPE = "shortcut_type";
@@ -134,7 +136,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         setupDefaultShortcutIfNecessary(getPrefContext());
         final int resId = getPreferenceScreenResId();
         if (resId <= 0) {
-            PreferenceScreen preferenceScreen = getPreferenceManager().createPreferenceScreen(
+            final PreferenceScreen preferenceScreen = getPreferenceManager().createPreferenceScreen(
                     getPrefContext());
             setPreferenceScreen(preferenceScreen);
         }
@@ -226,7 +228,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
                         R.string.accessibility_shortcut_title, mPackageName);
                 final int dialogType = WizardManagerHelper.isAnySetupWizard(getIntent())
                         ? DialogType.EDIT_SHORTCUT_GENERIC_SUW : DialogType.EDIT_SHORTCUT_GENERIC;
-                dialog = AccessibilityEditDialogUtils.showEditShortcutDialog(
+                dialog = AccessibilityDialogUtils.showEditShortcutDialog(
                         getPrefContext(), dialogType, dialogTitle,
                         this::callOnAlertDialogCheckboxClicked);
                 setupEditShortcutDialog(dialog);
@@ -252,56 +254,6 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             default:
                 return SettingsEnums.ACTION_UNKNOWN;
         }
-    }
-
-    /** Denotes the dialog emuns for show dialog */
-    @Retention(RetentionPolicy.SOURCE)
-    protected @interface DialogEnums {
-
-        /** OPEN: Settings > Accessibility > Any toggle service > Shortcut > Settings. */
-        int EDIT_SHORTCUT = 1;
-
-        /** OPEN: Settings > Accessibility > Magnification > Shortcut > Settings. */
-        int MAGNIFICATION_EDIT_SHORTCUT = 1001;
-
-        /**
-         * OPEN: Settings > Accessibility > Downloaded toggle service > Toggle use service to
-         * enable service.
-         */
-        int ENABLE_WARNING_FROM_TOGGLE = 1002;
-
-        /** OPEN: Settings > Accessibility > Downloaded toggle service > Shortcut checkbox. */
-        int ENABLE_WARNING_FROM_SHORTCUT = 1003;
-
-        /**
-         * OPEN: Settings > Accessibility > Downloaded toggle service > Shortcut checkbox
-         * toggle.
-         */
-        int ENABLE_WARNING_FROM_SHORTCUT_TOGGLE = 1004;
-
-        /**
-         * OPEN: Settings > Accessibility > Downloaded toggle service > Toggle use service to
-         * disable service.
-         */
-        int DISABLE_WARNING_FROM_TOGGLE = 1005;
-
-        /**
-         * OPEN: Settings > Accessibility > Magnification > Toggle user service in button
-         * navigation.
-         */
-        int ACCESSIBILITY_BUTTON_TUTORIAL = 1006;
-
-        /**
-         * OPEN: Settings > Accessibility > Magnification > Toggle user service in gesture
-         * navigation.
-         */
-        int GESTURE_NAVIGATION_TUTORIAL = 1007;
-
-        /**
-         * OPEN: Settings > Accessibility > Downloaded toggle service > Toggle user service > Show
-         * launch tutorial.
-         */
-        int LAUNCH_ACCESSIBILITY_TUTORIAL = 1008;
     }
 
     @Override
@@ -519,14 +471,25 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
                 new AccessibilityFooterPreference(screen.getContext());
         htmlFooterPreference.setKey(KEY_HTML_DESCRIPTION_PREFERENCE);
         htmlFooterPreference.setSummary(htmlDescription);
+        htmlFooterPreference.setContentDescription(
+                generateFooterContentDescription(htmlDescription));
+
         // Only framework tools support help link
         if (getHelpResource() != 0) {
-            htmlFooterPreference.appendHelpLink(getHelpResource());
+            htmlFooterPreference.setLearnMoreAction(view -> {
+                final Intent helpIntent = HelpUtils.getHelpIntent(
+                        getContext(), getContext().getString(getHelpResource()),
+                        getContext().getClass().getName());
+                view.startActivityForResult(helpIntent, 0);
+            });
+
+            final String learnMoreContentDescription = getPrefContext().getString(
+                    R.string.footer_learn_more_content_description, mPackageName);
+            htmlFooterPreference.setLearnMoreContentDescription(learnMoreContentDescription);
             htmlFooterPreference.setLinkEnabled(true);
         } else {
             htmlFooterPreference.setLinkEnabled(false);
         }
-        htmlFooterPreference.setIconContentDescription(iconContentDescription);
         screen.addPreference(htmlFooterPreference);
     }
 
@@ -558,14 +521,33 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         final AccessibilityFooterPreference footerPreference =
                 new AccessibilityFooterPreference(screen.getContext());
         footerPreference.setSummary(summary);
-        footerPreference.setIconContentDescription(iconContentDescription);
+        footerPreference.setContentDescription(
+                generateFooterContentDescription(summary));
+
+        // Only framework tools support help link
         if (getHelpResource() != 0) {
-            footerPreference.appendHelpLink(getHelpResource());
-            footerPreference.setLinkEnabled(true);
+            footerPreference.setLearnMoreAction(view -> {
+                final Intent helpIntent = HelpUtils.getHelpIntent(
+                        getContext(), getContext().getString(getHelpResource()),
+                        getContext().getClass().getName());
+                view.startActivityForResult(helpIntent, 0);
+            });
+
+            final String learnMoreContentDescription = getPrefContext().getString(
+                    R.string.footer_learn_more_content_description, mPackageName);
+            footerPreference.setLearnMoreContentDescription(learnMoreContentDescription);
         }
         screen.addPreference(footerPreference);
     }
 
+    private CharSequence generateFooterContentDescription(CharSequence footerContent) {
+        final StringBuffer sb = new StringBuffer();
+        sb.append(getPrefContext().getString(
+                R.string.accessibility_introduction_title, mPackageName))
+                .append("\n\n")
+                .append(footerContent);
+        return sb;
+    }
     @VisibleForTesting
     void setupEditShortcutDialog(Dialog dialog) {
         final View dialogSoftwareView = dialog.findViewById(R.id.software_shortcut);
@@ -659,10 +641,9 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         if (list.isEmpty()) {
             list.add(softwareTitle);
         }
-        final String joinStrings = TextUtils.join(/* delimiter= */", ", list);
 
         return CaseMap.toTitle().wholeString().noLowercase().apply(Locale.getDefault(), /* iter= */
-                null, joinStrings);
+                null, LocaleUtils.getConcatenatedString(list));
     }
 
     /**

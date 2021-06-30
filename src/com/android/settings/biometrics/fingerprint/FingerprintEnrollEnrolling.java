@@ -37,6 +37,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.accessibility.AccessibilityEvent;
+import android.view.accessibility.AccessibilityManager;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import android.widget.ProgressBar;
@@ -52,6 +54,7 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.List;
 
@@ -109,6 +112,9 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     @Nullable private AnimatedVectorDrawable mIconBackgroundBlinksDrawable;
     private boolean mRestoring;
     private Vibrator mVibrator;
+    private boolean mIsSetupWizard;
+    private AccessibilityManager mAccessibilityManager;
+    private boolean mIsAccessibilityEnabled;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +124,9 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         final List<FingerprintSensorPropertiesInternal> props =
                 fingerprintManager.getSensorPropertiesInternal();
         mCanAssumeUdfps = props.size() == 1 && props.get(0).isAnyUdfpsType();
+
+        mAccessibilityManager = getSystemService(AccessibilityManager.class);
+        mIsAccessibilityEnabled = mAccessibilityManager.isEnabled();
 
         if (mCanAssumeUdfps) {
             if (BiometricUtils.isReverseLandscape(getApplicationContext())) {
@@ -131,7 +140,12 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
             setDescriptionText(R.string.security_settings_fingerprint_enroll_start_message);
         }
 
-        setHeaderText(R.string.security_settings_fingerprint_enroll_repeat_title);
+        mIsSetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
+        if (mCanAssumeUdfps) {
+            updateTitleAndDescription();
+        } else {
+            setHeaderText(R.string.security_settings_fingerprint_enroll_repeat_title);
+        }
 
         mErrorText = findViewById(R.id.error_text);
         mProgressBar = findViewById(R.id.fingerprint_progress_bar);
@@ -275,17 +289,36 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     private void updateTitleAndDescription() {
         if (mSidecar == null || mSidecar.getEnrollmentSteps() == -1) {
             if (mCanAssumeUdfps) {
+                // setHeaderText(R.string.security_settings_fingerprint_enroll_udfps_title);
+                // Don't use BiometricEnrollBase#setHeaderText, since that invokes setTitle,
+                // which gets announced for a11y upon entering the page. For UDFPS, we want to
+                // announce a different string for a11y upon entering the page.
+                getLayout().setHeaderText(
+                        R.string.security_settings_fingerprint_enroll_udfps_title);
                 setDescriptionText(R.string.security_settings_udfps_enroll_start_message);
+
+                final CharSequence description = getString(
+                        R.string.security_settings_udfps_enroll_a11y);
+                getLayout().getHeaderTextView().setContentDescription(description);
+                setTitle(description);
             } else {
                 setDescriptionText(R.string.security_settings_fingerprint_enroll_start_message);
             }
         } else if (mCanAssumeUdfps && !isCenterEnrollmentComplete()) {
-            setHeaderText(R.string.security_settings_udfps_enroll_title_one_more_time);
+            if (mIsSetupWizard) {
+                setHeaderText(R.string.security_settings_udfps_enroll_title_one_more_time);
+            } else {
+                setHeaderText(R.string.security_settings_fingerprint_enroll_repeat_title);
+            }
             setDescriptionText(R.string.security_settings_udfps_enroll_start_message);
         } else {
             if (mCanAssumeUdfps) {
-                setHeaderText(R.string.security_settings_udfps_enroll_repeat_title_touch_icon);
-                setDescriptionText(R.string.security_settings_udfps_enroll_repeat_message);
+                setHeaderText(R.string.security_settings_fingerprint_enroll_repeat_title);
+                if (mIsAccessibilityEnabled) {
+                    setDescriptionText(R.string.security_settings_udfps_enroll_repeat_a11y_message);
+                } else {
+                    setDescriptionText(R.string.security_settings_udfps_enroll_repeat_message);
+                }
             } else {
                 setDescriptionText(R.string.security_settings_fingerprint_enroll_repeat_message);
             }
@@ -328,6 +361,18 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         if (!mCanAssumeUdfps) {
             mErrorText.removeCallbacks(mTouchAgainRunnable);
             mErrorText.postDelayed(mTouchAgainRunnable, HINT_TIMEOUT_DURATION);
+        } else {
+            if (mIsAccessibilityEnabled) {
+                final int percent = (int) (((float)(steps - remaining) / (float) steps) * 100);
+                CharSequence cs = getString(
+                        R.string.security_settings_udfps_enroll_progress_a11y_message, percent);
+                AccessibilityEvent e = AccessibilityEvent.obtain();
+                e.setEventType(AccessibilityEvent.TYPE_ANNOUNCEMENT);
+                e.setClassName(getClass().getName());
+                e.setPackageName(getPackageName());
+                e.getText().add(cs);
+                mAccessibilityManager.sendAccessibilityEvent(e);
+            }
         }
     }
 

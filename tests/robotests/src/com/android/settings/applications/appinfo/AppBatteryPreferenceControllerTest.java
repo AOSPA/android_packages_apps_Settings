@@ -39,6 +39,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.SettingsActivity;
+import com.android.settings.fuelgauge.BatteryDiffEntry;
 import com.android.settings.fuelgauge.BatteryUtils;
 
 import org.junit.Before;
@@ -76,6 +77,8 @@ public class AppBatteryPreferenceControllerTest {
     private PackageManager mPackageManager;
     @Mock
     private LoaderManager mLoaderManager;
+    @Mock
+    private BatteryDiffEntry mBatteryDiffEntry;
 
     private Context mContext;
     private AppInfoDashboardFragment mFragment;
@@ -96,7 +99,11 @@ public class AppBatteryPreferenceControllerTest {
         when(mOtherUidBatteryConsumer.getUid()).thenReturn(OTHER_UID);
 
         mController = spy(new AppBatteryPreferenceController(
-            RuntimeEnvironment.application, mFragment, "package1", null /* lifecycle */));
+                RuntimeEnvironment.application,
+                mFragment,
+                "package1" /* packageName */,
+                0 /* uId */,
+                null /* lifecycle */));
         mController.mBatteryUtils = mBatteryUtils;
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mBatteryPreference);
     }
@@ -144,6 +151,29 @@ public class AppBatteryPreferenceControllerTest {
         mController.updateBattery();
 
         assertThat(mBatteryPreference.getSummary()).isEqualTo("60% use since last full charge");
+    }
+
+    @Test
+    public void updateBatteryWithDiffEntry_noConsumePower_summaryNo() {
+        mController.displayPreference(mScreen);
+        mController.mIsChartGraphEnabled = true;
+
+        mController.updateBatteryWithDiffEntry();
+
+        assertThat(mBatteryPreference.getSummary()).isEqualTo("No battery use for past 24 hours");
+    }
+
+    @Test
+    public void updateBatteryWithDiffEntry_withConsumePower_summaryPercent() {
+        mController.displayPreference(mScreen);
+        mController.mIsChartGraphEnabled = true;
+        mBatteryDiffEntry.mConsumePower = 1;
+        mController.mBatteryDiffEntry = mBatteryDiffEntry;
+        when(mBatteryDiffEntry.getPercentOfTotal()).thenReturn(60.0);
+
+        mController.updateBatteryWithDiffEntry();
+
+        assertThat(mBatteryPreference.getSummary()).isEqualTo("60% use for past 24 hours");
     }
 
     @Test
