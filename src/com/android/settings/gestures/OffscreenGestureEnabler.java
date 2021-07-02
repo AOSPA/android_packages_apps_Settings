@@ -41,7 +41,7 @@ public class OffscreenGestureEnabler implements SwitchWidgetController.OnSwitchC
         }
 
         final boolean enabled = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.GESTURES_ENABLED, 0, UserHandle.USER_CURRENT) != 0;
+                Settings.System.GESTURES_ENABLED, 1, UserHandle.USER_CURRENT) != 0;
         mSwitchWidgetController.setChecked(enabled);
         mSwitchWidgetController.setupView();
         mListener = listener;

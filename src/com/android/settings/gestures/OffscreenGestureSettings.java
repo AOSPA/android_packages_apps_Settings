@@ -121,7 +121,7 @@ public class OffscreenGestureSettings extends SettingsPreferenceFragment impleme
         super.onCreatePreferences(savedInstanceState, rootKey);
 
         final boolean enabled = Settings.System.getIntForUser(getContext().getContentResolver(),
-                Settings.System.GESTURES_ENABLED, 0, UserHandle.USER_CURRENT) != 0;
+                Settings.System.GESTURES_ENABLED, 1, UserHandle.USER_CURRENT) != 0;
         for (String gestureKey : sGesturesKeyCodes.keySet()) {
             if (getResources().getInteger(sGesturesKeyCodes.get(gestureKey)) > 0) {
                 ListPreference pref = findPreference(gestureKey);
