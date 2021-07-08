@@ -45,6 +45,8 @@ import androidx.preference.PreferenceScreen;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import co.aospa.settings.display.ColorBalancePreferenceController;
+
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.RadioButtonPickerFragment;
@@ -223,6 +225,21 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment {
             mViewPager.setCurrentItem(mPageList.size() - 1, true);
         }
         updateIndicator(mViewPager.getCurrentItem());
+    }
+
+    @Override
+    public void updateCandidates() {
+        super.updateCandidates();
+
+        PreferenceScreen screen = getPreferenceScreen();
+        getPreferenceManager().inflateFromResource(screen.getContext(), R.xml.color_mode_settings,
+                screen);
+
+        for (int channel = 0; channel < 3; channel++) {
+            ColorBalancePreferenceController controller = new ColorBalancePreferenceController(
+                    screen.getContext(), ColorBalancePreferenceController.channelToKey(channel));
+            controller.displayPreference(screen);
+        }
     }
 
     @Override
