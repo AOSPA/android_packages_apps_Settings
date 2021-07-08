@@ -6,6 +6,9 @@
 
     <original-package android:name="com.android.settings" />
 
+    <protected-broadcast
+            android:name="com.qualcomm.qti.telephonyservice.SMART_DDS_SWITCH_TOGGLED" />
+
     <uses-permission android:name="android.permission.REQUEST_NETWORK_SCORES" />
     <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
@@ -108,6 +111,7 @@
     <uses-permission android:name="android.permission.READ_DREAM_STATE" />
     <uses-permission android:name="android.permission.READ_DREAM_SUPPRESSION" />
     <uses-permission android:name="android.permission.MANAGE_APP_HIBERNATION" />
+    <uses-permission android:name="com.qualcomm.qti.permission.USE_EXT_TELEPHONY_SERVICE" />
 
     <application android:label="@string/settings_label"
             android:icon="@drawable/ic_launcher_settings"
@@ -182,6 +186,7 @@
 
         <activity android:name=".Settings$CreateShortcutActivity"
                   android:exported="true"
+                  android:theme="@style/Theme.SubSettings"
                   android:label="@string/settings_shortcut">
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
@@ -472,6 +477,7 @@
 
         <activity android:name="Settings$FaceSettingsActivity"
             android:label="@string/security_settings_face_preference_title"
+            android:theme="@style/Theme.SubSettings"
             android:exported="true"
             android:icon="@drawable/ic_face_header">
             <intent-filter>
@@ -539,12 +545,12 @@
         <activity android:name=".network.telephony.ToggleSubscriptionDialogActivity"
                   android:exported="false"
                   android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
-                  android:theme="@style/Theme.AlertDialog" />
+                  android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight" />
 
         <activity android:name=".network.telephony.DeleteEuiccSubscriptionDialogActivity"
                   android:exported="false"
                   android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
-                  android:theme="@style/Theme.AlertDialog" />
+                  android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight" />
 
         <activity
             android:name="Settings$TetherSettingsActivity"
@@ -676,7 +682,8 @@
         <activity android:name=".localepicker.LocalePickerWithRegionActivity"
                   android:excludeFromRecents="true"
                   android:configChanges="orientation|keyboardHidden|screenSize"
-                  android:exported="false">
+                  android:exported="false"
+                  android:theme="@style/Theme.LocalePickerWithRegionActivity">
         </activity>
 
         <activity
@@ -709,7 +716,8 @@
         <activity
             android:name="Settings$ManageAssistActivity"
             android:exported="true"
-            android:label="@string/assist_and_voice_input_title">
+            android:label="@string/assist_and_voice_input_title"
+            android:theme="@style/Theme.SubSettings">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.VOICE_INPUT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1104,6 +1112,20 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
+        <activity
+            android:name=".Settings$LockScreenSettingsActivity"
+            android:label="@string/lockscreen_settings_title"
+            android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.LOCK_SCREEN_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.security.LockscreenDashboardFragment" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
@@ -2129,6 +2151,8 @@
                        android:value="com.android.settings.category.ia.system" />
             <meta-data android:name="com.android.settings.summary"
                        android:resource="@string/summary_empty"/>
+            <meta-data android:name="com.android.settings.icon"
+                       android:resource="@drawable/ic_settings_development" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.development.DevelopmentSettingsDashboardFragment" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -2460,7 +2484,7 @@
 
         <activity
             android:name="com.android.settings.accounts.AddAccountSettings"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:theme="@style/Theme.SubSettings"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"
             android:label="@string/header_add_an_account">
@@ -2598,6 +2622,8 @@
                        android:value="com.android.settings.category.ia.system" />
             <meta-data android:name="com.android.settings.summary_uri"
                        android:value="content://com.android.settings.dashboard.SummaryProvider/user" />
+            <meta-data android:name="com.android.settings.icon"
+                       android:resource="@drawable/ic_settings_multiuser" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.users.UserSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -2917,6 +2943,7 @@
 
         <!-- Confirmation dialog for enabling notification access from CompanionDeviceManager -->
         <activity android:name=".notification.NotificationAccessConfirmationActivity"
+                  android:taskAffinity=".notification.NotificationAccessConfirmationActivity"
                   android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert" />
 
         <receiver android:name="com.android.settingslib.bluetooth.BluetoothDiscoverableTimeoutReceiver"
@@ -3199,7 +3226,7 @@
         </activity>
 
         <activity android:name=".enterprise.ActionDisabledByAdminDialog"
-                android:theme="@style/Transparent"
+                  android:theme="@style/Theme.AlertDialog"
                 android:taskAffinity="com.android.settings.enterprise"
                 android:excludeFromRecents="true"
                 android:exported="true"
@@ -3301,6 +3328,8 @@
             <!-- Tell Settings app which category it belongs to -->
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.system" />
+            <meta-data android:name="com.android.settings.icon"
+                       android:resource="@drawable/ic_settings_backup" />
             <meta-data android:name="com.android.settings.order" android:value="-60"/>
         </activity>
 
@@ -3328,15 +3357,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="package" />
             </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".Settings$AppAndNotificationDashboardActivity"
-            android:label="@string/app_and_notification_dashboard_title"
-            android:icon="@drawable/ic_homepage_apps"
-            android:exported="true">
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.applications.AppAndNotificationDashboardFragment"/>
         </activity>
 
         <activity
@@ -3729,6 +3749,7 @@
             android:name="Settings$GestureNavigationSettingsActivity"
             android:label="@string/gesture_settings_activity_title"
             android:exported="true"
+            android:theme="@style/Theme.SubSettings"
             android:enabled="true">
             <intent-filter android:priority="32">
                 <action android:name="android.intent.action.MAIN" />
@@ -3799,14 +3820,14 @@
             android:exported="false"
             android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
             android:launchMode="singleInstance"
-            android:theme="@style/Theme.AlertDialog" />
+            android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight" />
 
         <activity
             android:name=".sim.DsdsDialogActivity"
             android:exported="false"
             android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
             android:launchMode="singleInstance"
-            android:theme="@style/Theme.AlertDialog" />
+            android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight" />
 
         <service android:name=".sim.SimNotificationService"
                  android:permission="android.permission.BIND_JOB_SERVICE" />

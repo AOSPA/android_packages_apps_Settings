@@ -47,17 +47,6 @@ public class OneHandedEnablePreferenceControllerTest {
     }
 
     @Test
-    public void setChecked_setBoolean_checkIsTrueOrFalse() {
-        mController.setChecked(false);
-        assertThat(OneHandedSettingsUtils.isOneHandedModeEnabled(mContext)).isFalse();
-        assertThat(OneHandedSettingsUtils.isSwipeDownNotificationEnabled(mContext)).isTrue();
-
-        mController.setChecked(true);
-        assertThat(OneHandedSettingsUtils.isOneHandedModeEnabled(mContext)).isTrue();
-        assertThat(OneHandedSettingsUtils.isSwipeDownNotificationEnabled(mContext)).isFalse();
-    }
-
-    @Test
     public void getAvailabilityStatus_setSupportOneHandedModeProperty_shouldAvailable() {
         SystemProperties.set(OneHandedSettingsUtils.SUPPORT_ONE_HANDED_MODE, "true");
 

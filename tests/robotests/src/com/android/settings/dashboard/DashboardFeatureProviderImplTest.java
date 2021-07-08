@@ -55,7 +55,6 @@ import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.util.FeatureFlagUtils;
 import android.util.Pair;
 
 import androidx.fragment.app.FragmentActivity;
@@ -66,7 +65,6 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowTileUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
@@ -146,7 +144,6 @@ public class DashboardFeatureProviderImplTest {
                 .thenReturn(new ResolveInfo());
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mImpl = new DashboardFeatureProviderImpl(mContext);
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, false);
     }
 
     @Test
@@ -671,19 +668,5 @@ public class DashboardFeatureProviderImplTest {
                 .startActivityForResultAsUser(any(Intent.class), anyInt(), argument.capture());
         assertThat(argument.getValue().getIdentifier()).isEqualTo(0);
         verify(mActivity, never()).getSupportFragmentManager();
-    }
-
-    @Test
-    @Config(qualifiers = "mcc999")
-    public void bindPreference_specificHomepageTile_shouldOverridePosition() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, true);
-        final Preference preference = new Preference(RuntimeEnvironment.application);
-        final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
-
-        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mForceRoundedIcon,
-                MetricsEvent.VIEW_UNKNOWN, preference, tile, null /*key */,
-                Preference.DEFAULT_ORDER);
-
-        assertThat(preference.getOrder()).isEqualTo(100);
     }
 }

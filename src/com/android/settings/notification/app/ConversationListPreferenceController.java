@@ -63,20 +63,18 @@ public abstract class ConversationListPreferenceController extends AbstractPrefe
 
     protected void populateList(List<ConversationChannelWrapper> conversations,
             PreferenceGroup containerGroup) {
-        // TODO: if preference has children, compare with newly loaded list
+        containerGroup.setVisible(false);
         containerGroup.removeAll();
         if (conversations != null) {
             populateConversations(conversations, containerGroup);
         }
 
-        if (containerGroup.getPreferenceCount() == 0) {
-            containerGroup.setVisible(false);
-        } else {
-            containerGroup.setVisible(true);
+        if (containerGroup.getPreferenceCount() != 0) {
             Preference summaryPref = getSummaryPreference();
             if (summaryPref != null) {
                 containerGroup.addPreference(summaryPref);
             }
+            containerGroup.setVisible(true);
         }
     }
 

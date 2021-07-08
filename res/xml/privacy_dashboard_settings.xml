@@ -19,16 +19,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="privacy_dashboard_page"
-    android:title="@string/privacy_dashboard_title"
-    settings:initialExpandedChildrenCount="4">
-
+    android:title="@string/privacy_dashboard_title">
 
     <!-- Work Policy info -->
     <Preference
         android:key="work_policy_info"
         android:title="@string/work_policy_privacy_settings"
         android:summary="@string/work_policy_privacy_settings_summary"
-        settings:allowDividerAbove="true"
         settings:controller="com.android.settings.privacy.WorkPolicyInfoPreferenceController"/>
 
     <!-- Connected work and personal apps -->
@@ -43,19 +40,8 @@
     <Preference
         android:key="privacy_accessibility_usage"
         android:title="@string/accessibility_usage_title"
-        settings:allowDividerAbove="true"
         settings:controller="com.android.settings.privacy.AccessibilityUsagePreferenceController">
         <intent android:action="android.intent.action.REVIEW_ACCESSIBILITY_SERVICES"/>
-    </Preference>
-
-    <!-- App permissions -->
-    <Preference
-        android:key="privacy_manage_perms"
-        android:title="@string/app_permissions"
-        android:summary="@string/runtime_permissions_summary_control_app_access"
-        settings:allowDividerAbove="true"
-        settings:searchable="false">
-        <intent android:action="android.intent.action.MANAGE_PERMISSIONS"/>
     </Preference>
 
     <!-- Permissions usage -->
@@ -67,6 +53,29 @@
         settings:controller="com.android.settings.privacy.PrivacyHubPreferenceController">
         <intent android:action="android.intent.action.REVIEW_PERMISSION_USAGE"/>
     </Preference>
+
+    <!-- App permissions -->
+    <Preference
+        android:key="privacy_manage_perms"
+        android:title="@string/app_permissions"
+        android:summary="@string/runtime_permissions_summary_control_app_access"
+        settings:searchable="false">
+        <intent android:action="android.intent.action.MANAGE_PERMISSIONS"/>
+    </Preference>
+
+    <!-- Camera toggle -->
+    <SwitchPreference
+        android:key="privacy_camera_toggle"
+        android:title="@string/camera_toggle_title"
+        android:summary="@string/sensor_toggle_description"
+        settings:controller="com.android.settings.privacy.CameraToggleController"/>
+
+    <!-- Microphone toggle -->
+    <SwitchPreference
+        android:key="privacy_mic_toggle"
+        android:title="@string/mic_toggle_title"
+        android:summary="@string/sensor_toggle_description"
+        settings:controller="com.android.settings.privacy.MicToggleController"/>
 
     <!-- Show passwords -->
     <SwitchPreference

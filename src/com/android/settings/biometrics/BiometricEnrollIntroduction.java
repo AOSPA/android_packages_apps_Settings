@@ -18,6 +18,8 @@ package com.android.settings.biometrics;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -25,15 +27,23 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
+import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
+import com.google.android.setupdesign.GlifLayout;
 import com.google.android.setupdesign.span.LinkSpan;
+import com.google.android.setupdesign.template.RequireScrollMixin;
+import com.google.android.setupdesign.util.DynamicColorPalette;
 
 /**
  * Abstract base class for the intro onboarding activity for biometric enrollment.
@@ -51,6 +61,8 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     private TextView mErrorText;
     protected boolean mConfirmingCredentials;
     protected boolean mNextClicked;
+
+    @Nullable private PorterDuffColorFilter mIconColorFilter;
 
     /**
      * @return true if the biometric is disabled by a device administrator
@@ -172,6 +184,29 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                 launchConfirmLock(getConfirmLockTitleResId());
             }
         }
+
+        final GlifLayout layout = getLayout();
+        mFooterBarMixin = layout.getMixin(FooterBarMixin.class);
+        mFooterBarMixin.setPrimaryButton(getPrimaryFooterButton());
+        mFooterBarMixin.setSecondaryButton(getSecondaryFooterButton(), true /* usePrimaryStyle */);
+        mFooterBarMixin.getSecondaryButton().setVisibility(View.INVISIBLE);
+
+        final RequireScrollMixin requireScrollMixin = layout.getMixin(RequireScrollMixin.class);
+        requireScrollMixin.requireScrollWithButton(this, getPrimaryFooterButton(),
+                getMoreButtonTextRes(), this::onNextButtonClick);
+        requireScrollMixin.setOnRequireScrollStateChangedListener(
+                scrollNeeded -> {
+                    // Update text of primary button from "More" to "Agree".
+                    final int primaryButtonTextRes = scrollNeeded
+                            ? getMoreButtonTextRes()
+                            : getAgreeButtonTextRes();
+                    getPrimaryFooterButton().setText(this, primaryButtonTextRes);
+
+                    // Show secondary button once scroll is completed.
+                    if (!scrollNeeded) {
+                        getSecondaryFooterButton().setVisibility(View.VISIBLE);
+                    }
+                });
     }
 
     @Override
@@ -317,4 +352,26 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
             setDescriptionText(getDescriptionResDisabledByAdmin());
         }
     }
+
+    @NonNull
+    protected PorterDuffColorFilter getIconColorFilter() {
+        if (mIconColorFilter == null) {
+            mIconColorFilter = new PorterDuffColorFilter(
+                    DynamicColorPalette.getColor(this, DynamicColorPalette.ColorType.ACCENT),
+                    PorterDuff.Mode.SRC_IN);
+        }
+        return mIconColorFilter;
+    }
+
+    @NonNull
+    protected abstract FooterButton getPrimaryFooterButton();
+
+    @NonNull
+    protected abstract FooterButton getSecondaryFooterButton();
+
+    @StringRes
+    protected abstract int getAgreeButtonTextRes();
+
+    @StringRes
+    protected abstract int getMoreButtonTextRes();
 }

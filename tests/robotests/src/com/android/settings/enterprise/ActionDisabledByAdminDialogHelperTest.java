@@ -21,7 +21,6 @@ import static android.app.admin.DevicePolicyManager.DEVICE_OWNER_TYPE_FINANCED;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
@@ -31,7 +30,6 @@ import static org.mockito.Mockito.verify;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
-import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.os.Process;
 import android.os.UserHandle;
@@ -43,8 +41,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
-import com.android.settings.Settings;
-import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminAdd;
 import com.android.settings.testutils.CustomActivity;
 import com.android.settings.testutils.shadow.ShadowActivity;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
@@ -69,6 +65,11 @@ import org.robolectric.shadows.ShadowProcess;
         ShadowActivity.class
 })
 public class ActionDisabledByAdminDialogHelperTest {
+    private static final ComponentName ADMIN_COMPONENT =
+            new ComponentName("some.package.name", "some.package.name.SomeClass");
+    private static final int USER_ID = 123;
+    private static final EnforcedAdmin ENFORCED_ADMIN =
+            new EnforcedAdmin(ADMIN_COMPONENT, UserHandle.of(USER_ID));
     private ActionDisabledByAdminDialogHelper mHelper;
     private Activity mActivity;
     private org.robolectric.shadows.ShadowActivity mActivityShadow;
@@ -78,32 +79,6 @@ public class ActionDisabledByAdminDialogHelperTest {
         mActivity = Robolectric.setupActivity(CustomActivity.class);
         mActivityShadow = Shadow.extract(mActivity);
         mHelper = new ActionDisabledByAdminDialogHelper(mActivity);
-    }
-
-    @Test
-    public void testShowAdminPoliciesWithComponent() {
-        final int userId = 123;
-        final ComponentName component = new ComponentName("some.package.name",
-                "some.package.name.SomeClass");
-        final EnforcedAdmin admin = new EnforcedAdmin(component, UserHandle.of(userId));
-
-        mHelper.showAdminPolicies(admin, mActivity);
-
-        final Intent intent = mActivityShadow.getNextStartedActivity();
-        assertTrue(
-                intent.getBooleanExtra(DeviceAdminAdd.EXTRA_CALLED_FROM_SUPPORT_DIALOG, false));
-        assertEquals(component,
-                intent.getParcelableExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN));
-    }
-
-    @Test
-    public void testShowAdminPoliciesWithoutComponent() {
-        final int userId = 123;
-        final EnforcedAdmin admin = new EnforcedAdmin(null, UserHandle.of(userId));
-        mHelper.showAdminPolicies(admin, mActivity);
-        final Intent intent = mActivityShadow.getNextStartedActivity();
-        assertEquals(intent.getComponent(), new ComponentName(mActivity,
-                Settings.DeviceAdminSettingsActivity.class.getName()));
     }
 
     @Test
@@ -150,6 +125,7 @@ public class ActionDisabledByAdminDialogHelperTest {
         final ViewGroup view = new FrameLayout(mActivity);
         final TextView textView = createAdminSupportDialogTitleTextView(view, mActivity);
         setupFinancedDevice(dpmShadow);
+        mHelper = new ActionDisabledByAdminDialogHelper(mActivity);
 
         mHelper.setAdminSupportTitle(view, null);
 
@@ -196,7 +172,8 @@ public class ActionDisabledByAdminDialogHelperTest {
         mHelper.setAdminSupportDetails(mActivity, view, admin);
 
         assertNotNull(admin.component);
-        assertEquals("", Shadows.shadowOf(textView).innerText());
+        assertEquals(mActivity.getString(R.string.default_admin_support_msg),
+                Shadows.shadowOf(textView).innerText());
     }
 
     @Test
@@ -217,30 +194,27 @@ public class ActionDisabledByAdminDialogHelperTest {
         mHelper.setAdminSupportDetails(mActivity, textView, admin);
 
         assertNull(admin.component);
-        assertEquals("", Shadows.shadowOf(textView).innerText());
+        assertEquals(mActivity.getString(R.string.default_admin_support_msg),
+                Shadows.shadowOf(textView).innerText());
     }
 
     @Test
     public void testMaybeSetLearnMoreButton() {
-        final UserManager userManager = RuntimeEnvironment.application.getSystemService(
-                UserManager.class);
-        final ShadowUserManager userManagerShadow = Shadow.extract(userManager);
-        final ComponentName component = new ComponentName("some.package.name",
-                "some.package.name.SomeClass");
-        mHelper.mEnforcedAdmin = new EnforcedAdmin(component, UserHandle.of(123));
-
+        UserManager userManager = RuntimeEnvironment.application
+                .getSystemService(UserManager.class);
+        ShadowUserManager userManagerShadow = Shadow.extract(userManager);
         // Set up for shadow call.
-        userManagerShadow.getSameProfileGroupIds().put(123, 0);
+        userManagerShadow.getSameProfileGroupIds().put(USER_ID, 0);
 
         // Test that the button is shown when user IDs are in the same profile group
         AlertDialog.Builder builder = mock(AlertDialog.Builder.class);
-        mHelper.maybeSetLearnMoreButton(builder);
+        mHelper.prepareDialogBuilder(builder, /* restriction= */ null, ENFORCED_ADMIN);
         verify(builder).setNeutralButton(anyInt(), any());
 
         // Test that the button is not shown when user IDs are not in the same profile group
         userManagerShadow.getSameProfileGroupIds().clear();
         builder = mock(AlertDialog.Builder.class);
-        mHelper.maybeSetLearnMoreButton(builder);
+        mHelper.prepareDialogBuilder(builder, /* restriction= */ null, ENFORCED_ADMIN);
         verify(builder, never()).setNeutralButton(anyInt(), any());
     }
 
