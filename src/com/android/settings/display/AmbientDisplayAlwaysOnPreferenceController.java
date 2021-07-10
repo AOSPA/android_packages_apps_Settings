@@ -15,6 +15,8 @@
  */
 package com.android.settings.display;
 
+import static android.provider.Settings.System.SCREEN_OFF_FOD;
+
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.display.AmbientDisplayConfiguration;
@@ -69,12 +71,24 @@ public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreference
 
     @Override
     public boolean isChecked() {
+        if (Settings.System.getIntForUser(mContext.getContentResolver(),
+            SCREEN_OFF_FOD, OFF, UserHandle.USER_CURRENT) != OFF) {
+            return !getConfig().alwaysOnEnabled(MY_USER);
+        }
         return getConfig().alwaysOnEnabled(MY_USER);
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
         int enabled = isChecked ? ON : OFF;
+        try {
+            if (Settings.System.getIntForUser(mContext.getContentResolver(),
+                    SCREEN_OFF_FOD, OFF) != OFF && enabled == ON) {
+                Settings.System.putInt(mContext.getContentResolver(), SCREEN_OFF_FOD, OFF);
+            }
+        } catch (Settings.SettingNotFoundException e) {
+            //do nothing
+        }
         Settings.Secure.putInt(
                 mContext.getContentResolver(), Settings.Secure.DOZE_ALWAYS_ON, enabled);
         return true;

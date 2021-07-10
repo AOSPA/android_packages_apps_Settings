@@ -40,4 +40,10 @@
         android:key="power_button_instantly_locks"
         android:title="@string/lockpattern_settings_enable_power_button_instantly_locks" />
 
+    <!-- screen-off fod -->
+    <SwitchPreference
+        android:key="screen_off_fod"
+        android:title="@string/screen_off_fod_title"
+        android:summary="@string/screen_off_fod_summary"
+        settings:controller="com.android.settings.security.ScreenOffFODPreferenceController"/>
 </PreferenceScreen>
