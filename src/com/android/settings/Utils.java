@@ -178,9 +178,6 @@ public final class Utils extends com.android.settingslib.Utils {
     public static final String PROPERTY_HIBERNATION_TARGETS_PRE_S_APPS =
             "app_hibernation_targets_pre_s_apps";
 
-    /** Whether or not Settings Shared Axis transition is enabled */
-    public static final String SETTINGS_SHARED_AXIS_ENABLED = "settings_shared_axis_enabled";
-
     /**
      * Finds a matching activity for a preference's intent. If a matching
      * activity is not found, it will remove the preference.
@@ -1298,10 +1295,5 @@ public final class Utils extends com.android.settingslib.Utils {
 
     public static boolean isProviderModelEnabled(Context context) {
         return FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL);
-    }
-
-    public static boolean isPageTransitionEnabled(Context context) {
-        return Settings.Global.getInt(context.getContentResolver(),
-                SETTINGS_SHARED_AXIS_ENABLED, 0) == 1;
     }
 }
