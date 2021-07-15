@@ -30,8 +30,6 @@ import android.telephony.TelephonyManager;
 import android.telephony.TelephonyScanManager;
 import android.util.Log;
 
-import org.codeaurora.internal.IExtTelephony;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -122,7 +120,6 @@ public class NetworkScanHelper {
     private final LegacyIncrementalScanBroadcastReceiver mLegacyIncrScanReceiver;
     private Context mContext;
     private NetworkScan mNetworkScanRequester;
-    private IExtTelephony mExtTelephony;
     private IntentFilter filter =
             new IntentFilter("qualcomm.intent.action.ACTION_INCREMENTAL_NW_SCAN_IND");
 
@@ -200,15 +197,8 @@ public class NetworkScanHelper {
             }
         } else if (type == NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS_LEGACY) {
             mContext.registerReceiver(mLegacyIncrScanReceiver, filter);
-            boolean success = false;
-            mExtTelephony = IExtTelephony.Stub
-                    .asInterface(ServiceManager.getService("qti.radio.extphone"));
-            try {
-                success = mExtTelephony.performIncrementalScan(mTelephonyManager.getSlotIndex());
-            } catch (RemoteException | NullPointerException ex) {
-                Log.e(TAG, "performIncrementalScan Exception: ", ex);
-            }
-
+            boolean success = TelephonyUtils.performIncrementalScan(
+                    mContext, mTelephonyManager.getSlotIndex());
             Log.d(TAG, "success: " + success);
             if (!success) {
                 onError(NetworkScan.ERROR_RADIO_INTERFACE_ERROR);
@@ -228,17 +218,14 @@ public class NetworkScanHelper {
         }
 
         try {
-            if (mExtTelephony != null) {
-                int slotIndex = mTelephonyManager.getSlotIndex();
-                if (slotIndex >= 0 && slotIndex < mTelephonyManager.getActiveModemCount()) {
-                    mExtTelephony.abortIncrementalScan(slotIndex);
-                } else {
-                    Log.d(TAG, "slotIndex is invalid, skipping abort");
-                }
-                mExtTelephony = null;
-                mContext.unregisterReceiver(mLegacyIncrScanReceiver);
+            int slotIndex = mTelephonyManager.getSlotIndex();
+            if (slotIndex >= 0 && slotIndex < mTelephonyManager.getActiveModemCount()) {
+                TelephonyUtils.abortIncrementalScan(mContext, slotIndex);
+            } else {
+                Log.d(TAG, "slotIndex is invalid, skipping abort");
             }
-        } catch (RemoteException | NullPointerException ex) {
+            mContext.unregisterReceiver(mLegacyIncrScanReceiver);
+        } catch (NullPointerException ex) {
             Log.e(TAG, "abortIncrementalScan Exception: ", ex);
         } catch (IllegalArgumentException ex) {
             Log.e(TAG, "IllegalArgumentException");

@@ -28,6 +28,7 @@ import android.os.ServiceManager;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -107,16 +108,13 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
         int simState = mTelephonyManager.getSimState();
         boolean screenState = simState != TelephonyManager.SIM_STATE_ABSENT;
         if (screenState) {
-            int provStatus = CARD_NOT_PROVISIONED;
-            IExtTelephony extTelephony = IExtTelephony.Stub
-                    .asInterface(ServiceManager.getService("qti.radio.extphone"));
-            try {
-                provStatus = extTelephony.getCurrentUiccCardProvisioningStatus(mPhoneId);
-            } catch (RemoteException | NullPointerException ex) {
-                Log.e(LOG_TAG, "getUiccCardProvisioningStatus: " + mPhoneId + ", Exception: ", ex);
+            SubscriptionManager subscriptionManager = ((SubscriptionManager) getContext().
+                    getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE));
+            SubscriptionInfo subInfo = subscriptionManager.getActiveSubscriptionInfo(mSubId);
+            Log.d(LOG_TAG, "subInfo: " + subInfo + ", mSubId: " + mSubId);
+            if (subInfo != null && !subInfo.areUiccApplicationsEnabled()) {
+                screenState = false;
             }
-            screenState = provStatus != CARD_NOT_PROVISIONED;
-            Log.d(LOG_TAG, "Provisioning Status: " + provStatus + ", screenState: " + screenState);
         }
         Log.d(LOG_TAG, "Setting screen state to: " + screenState);
         getPreferenceScreen().setEnabled(screenState);

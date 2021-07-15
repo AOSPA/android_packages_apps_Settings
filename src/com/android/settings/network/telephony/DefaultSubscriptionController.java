@@ -389,10 +389,7 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
             final SubscriptionInfo sir = mManager
                     .getActiveSubscriptionInfoForSimSlotIndex(i);
             if (sir != null) {
-                int subStatus = PrimaryCardAndSubsidyLockUtils.getUiccCardProvisioningStatus(i);
-                if (subStatus == PrimaryCardAndSubsidyLockUtils.CARD_PROVISIONED) {
-                    mSelectableSubs.add(sir);
-                }
+                mSelectableSubs.add(sir);
             }
         }
     }

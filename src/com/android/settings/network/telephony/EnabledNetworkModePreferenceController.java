@@ -59,7 +59,6 @@ public class EnabledNetworkModePreferenceController extends
 
     private static final String LOG_TAG = "EnabledNetworkMode";
     private AllowedNetworkTypesListener mAllowedNetworkTypesListener;
-    private ContentObserver mSubsidySettingsObserver;
     private Preference mPreference;
     private PreferenceScreen mPreferenceScreen;
     private TelephonyManager mTelephonyManager;
@@ -69,13 +68,6 @@ public class EnabledNetworkModePreferenceController extends
     private PhoneCallStateListener mPhoneStateListener;
     @VisibleForTesting
     Integer mCallState;
-
-    // Local cache for Primary Card and Subsidy Lock related vendor properties. Reading these
-    // properties are a costly affair since they involve two IPC calls, an AIDL and another HIDL.
-    // So we cache these and reuse them as and when applicable.
-    boolean mIsPrimaryCardEnabled = false;
-    boolean mIsPrimaryCardLWEnabled = false;
-    boolean mIsSubsidyLockFeatureEnabled = false;
 
     public EnabledNetworkModePreferenceController(Context context, String key) {
         super(context, key);
@@ -108,20 +100,14 @@ public class EnabledNetworkModePreferenceController extends
     @OnLifecycleEvent(ON_START)
     public void onStart() {
         mSubscriptionsListener.start();
-        if (mAllowedNetworkTypesListener == null || mSubsidySettingsObserver == null) {
+        if (mAllowedNetworkTypesListener == null) {
             return;
         }
         if (mPhoneStateListener != null) {
             mPhoneStateListener.register(mContext, mSubId);
         }
 
-        loadPrimaryCardAndSubsidyLockValues();
         mAllowedNetworkTypesListener.register(mContext, mSubId);
-        if (mIsSubsidyLockFeatureEnabled) {
-            mContext.getContentResolver().registerContentObserver(
-                    Settings.Secure.getUriFor(PrimaryCardAndSubsidyLockUtils.SUBSIDY_STATUS), false,
-                    mSubsidySettingsObserver);
-        }
     }
 
     @OnLifecycleEvent(ON_STOP)
@@ -134,9 +120,6 @@ public class EnabledNetworkModePreferenceController extends
             mPhoneStateListener.unregister();
         }
         mAllowedNetworkTypesListener.unregister(mContext, mSubId);
-        if (mSubsidySettingsObserver != null) {
-            mContext.getContentResolver().unregisterContentObserver(mSubsidySettingsObserver);
-        }
     }
 
     @Override
@@ -190,19 +173,6 @@ public class EnabledNetworkModePreferenceController extends
                     mContext.getMainExecutor());
             mAllowedNetworkTypesListener.setAllowedNetworkTypesListener(
                     () -> updatePreference());
-        }
-        if (mSubsidySettingsObserver == null) {
-            mSubsidySettingsObserver = new ContentObserver(new Handler(Looper.getMainLooper())) {
-                @Override
-                public void onChange(boolean selfChange) {
-                    if (mPreference != null) {
-                        if (PrimaryCardAndSubsidyLockUtils.DBG) {
-                            Log.d(LOG_TAG, "mSubsidySettingsObserver#onChange");
-                        }
-                        updateState(mPreference);
-                    }
-                }
-            };
         }
 
         lifecycle.addObserver(this);
@@ -427,69 +397,6 @@ public class EnabledNetworkModePreferenceController extends
                 default:
                     throw new IllegalArgumentException("Not supported enabled network types.");
             }
-
-            /* TODO(b/151744192) - Update Primary Card and Subsidy Lock for 75867d8f634ce62f4787dbf2aef71312308dd415
-            // Primary Card Feature
-            // If the current SIM is not the primary card
-            //     1. If PrimaryCardL_W is enabled, restrict mode selection to GSM and WCDMA options.
-            //     2. If the current mode is GSM_only, disable the network mode preference on the UI.
-            final int currentPrimarySlot = Settings.Global.getInt(mContext.getContentResolver(),
-                    PrimaryCardAndSubsidyLockUtils.CONFIG_CURRENT_PRIMARY_SUB,
-                    SubscriptionManager.INVALID_SIM_SLOT_INDEX);
-
-            boolean isCurrentPrimarySlotValid = currentPrimarySlot >= 0
-                    && currentPrimarySlot < mTelephonyManager.getActiveModemCount();
-
-            int currentPhoneId = SubscriptionManager.getPhoneId(mSubId);
-
-            Log.d(LOG_TAG, "currentPrimarySlot: " + currentPrimarySlot
-                    + ", isCurrentPrimarySlotValid: " + isCurrentPrimarySlotValid
-                    + ", currentPhoneId: " + currentPhoneId);
-
-            if (mIsPrimaryCardEnabled) {
-                if (PrimaryCardAndSubsidyLockUtils.DBG) {
-                    Log.d(LOG_TAG, "isPrimaryCardEnabled: true");
-                }
-                if (isCurrentPrimarySlotValid
-                        && currentPhoneId != currentPrimarySlot) {
-                    if (mIsPrimaryCardLWEnabled) {
-                        Log.d(LOG_TAG, "Primary card LW is enabled");
-                        preference.setEntries(R.array.enabled_networks_gsm_wcdma_choices);
-                        preference.setEntryValues(R.array.enabled_networks_gsm_wcdma_values);
-                    } else if (getPreferredNetworkMode() == TelephonyManager.NETWORK_MODE_GSM_ONLY) {
-                        Log.d(LOG_TAG, "Network mode is GSM only, disabling the preference");
-                        preference.setEnabled(false);
-                    }
-                }
-            }
-
-            // Subsidy Lock Feature
-            // If subsidy is unlocked,
-            //     1. Change the entries in the network mode choices for the primary sub.
-            //     2. Disable the network mode preference on the UI for the non-primary sub.
-            if (PrimaryCardAndSubsidyLockUtils.DBG) {
-                Log.d(LOG_TAG, "isSubsidyLockFeatureEnabled: " + mIsSubsidyLockFeatureEnabled);
-                Log.d(LOG_TAG, "isSubsidyUnlocked: "
-                        + PrimaryCardAndSubsidyLockUtils.isSubsidyUnlocked(mContext));
-            }
-
-            if (mIsSubsidyLockFeatureEnabled
-                    && PrimaryCardAndSubsidyLockUtils.isSubsidyUnlocked(mContext)) {
-                if (PrimaryCardAndSubsidyLockUtils.DBG) {
-                    Log.d(LOG_TAG, "Subsidy is unlocked");
-                }
-                if (isCurrentPrimarySlotValid) {
-                    if (currentPhoneId == currentPrimarySlot) {
-                        Log.d(LOG_TAG, "Primary sub, change to subsidy choices");
-                        preference.setEntries(R.array.enabled_networks_subsidy_locked_choices);
-                        preference.setEntryValues(R.array.enabled_networks_subsidy_locked_values);
-                    } else {
-                        Log.d(LOG_TAG, "Non-primary sub, disable the preference");
-                        preference.setEnabled(false);
-                    }
-                }
-            }
-            */
         }
 
         private int getPreferredNetworkMode() {
@@ -969,19 +876,6 @@ public class EnabledNetworkModePreferenceController extends
     @Override
     public void onSubscriptionsChanged() {
         mBuilder.updateConfig();
-    }
-
-    private void loadPrimaryCardAndSubsidyLockValues() {
-        Log.d(LOG_TAG, "loadPrimaryCardAndSubsidyLockValues");
-        mIsPrimaryCardEnabled = PrimaryCardAndSubsidyLockUtils.isPrimaryCardEnabled();
-        mIsPrimaryCardLWEnabled = PrimaryCardAndSubsidyLockUtils.isPrimaryCardLWEnabled();
-        mIsSubsidyLockFeatureEnabled = PrimaryCardAndSubsidyLockUtils.isSubsidyLockFeatureEnabled();
-
-        if (PrimaryCardAndSubsidyLockUtils.DBG) {
-            Log.d(LOG_TAG, "mIsPrimaryCardEnabled: " + mIsPrimaryCardEnabled);
-            Log.d(LOG_TAG, "mIsPrimaryCardLWEnabled: " + mIsPrimaryCardLWEnabled);
-            Log.d(LOG_TAG, "mIsSubsidyLockFeatureEnabled: " + mIsSubsidyLockFeatureEnabled);
-        }
     }
 
     private boolean isCallStateIdle() {

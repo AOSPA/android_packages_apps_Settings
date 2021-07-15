@@ -102,7 +102,12 @@ public class NetworkSelectSettings extends DashboardFragment {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-        mIsAdvancedScanSupported = Utils.isAdvancedPlmnScanSupported();
+        if (TelephonyUtils.isServiceConnected()) {
+            mIsAdvancedScanSupported = TelephonyUtils.isAdvancedPlmnScanSupported(
+                    getContext());
+        } else {
+            Log.d(TAG, "ExtTelephonyService is not connected!!! ");
+        }
         Log.d(TAG, "mIsAdvancedScanSupported: " + mIsAdvancedScanSupported);
         mSubId = getArguments().getInt(Settings.EXTRA_SUB_ID);
 
