@@ -214,6 +214,6 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
         }
         intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
 
-        mContext.sendBroadcast(intent, Manifest.permission.BLUETOOTH_ADMIN);
+        mContext.sendBroadcast(intent, Manifest.permission.BLUETOOTH_CONNECT);
     }
 }

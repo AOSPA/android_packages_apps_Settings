@@ -576,14 +576,14 @@ public class SettingsActivity extends SettingsBaseActivity
     /**
      * Switch to a specific Fragment with taking care of validation, Title and BackStack
      */
-    private Fragment switchToFragment(String fragmentName, Bundle args, boolean validate,
+    private void switchToFragment(String fragmentName, Bundle args, boolean validate,
             int titleResId, CharSequence title) {
         if (fragmentName.equals(getString(R.string.qtifeedback_intent_action))){
              final Intent newIntent = new Intent(getString(R.string.qtifeedback_intent_action));
              newIntent.addCategory("android.intent.category.DEFAULT");
              startActivity(newIntent);
              finish();
-             return null;
+             return;
         }
 
         Log.d(LOG_TAG, "Switching to fragment " + fragmentName);
@@ -593,6 +593,9 @@ public class SettingsActivity extends SettingsBaseActivity
                     + fragmentName);
         }
         Fragment f = Utils.getTargetFragment(this, fragmentName, args);
+        if (f == null) {
+            return;
+        }
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main_content, f);
         if (titleResId > 0) {
@@ -603,7 +606,6 @@ public class SettingsActivity extends SettingsBaseActivity
         transaction.commitAllowingStateLoss();
         getSupportFragmentManager().executePendingTransactions();
         Log.d(LOG_TAG, "Executed frag manager pendingTransactions");
-        return f;
     }
 
     private void updateTilesList() {
