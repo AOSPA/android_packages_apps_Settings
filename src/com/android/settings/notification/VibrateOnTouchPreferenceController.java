@@ -22,6 +22,7 @@ import android.content.Context;
 import android.os.Vibrator;
 import android.provider.Settings.System;
 
+import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -36,7 +37,8 @@ public class VibrateOnTouchPreferenceController extends SettingPrefController {
             TYPE_SYSTEM, KEY_VIBRATE_ON_TOUCH, System.HAPTIC_FEEDBACK_ENABLED, 0) {
             @Override
             public boolean isApplicable(Context context) {
-                return hasHaptic(context);
+                return hasHaptic(context) && !context.getResources().getBoolean(
+                        R.bool.config_vibration_supports_multiple_intensities);
             }
         };
 
