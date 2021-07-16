@@ -21,6 +21,13 @@
     android:title="@string/vibration_preferences"
     settings:keywords="@string/keywords_vibration_preferences">
 
+    <!-- Vibrate on touch -->
+    <SwitchPreference
+        android:key="vibrate_on_touch"
+        android:title="@string/vibrate_on_touch_title"
+        android:summary="@string/vibrate_on_touch_summary"
+        settings:keywords="@string/keywords_vibrate_on_touch"/>
+
     <!-- Also vibrate for calls -->
     <Preference
         android:fragment="com.android.settings.sound.VibrateForCallsPreferenceFragment"
@@ -44,7 +51,7 @@
     <PreferenceCategory
         android:key="ringtone_vibration_pattern"
         android:title="@string/ringtone_vibration_pattern"
-        settings:allowDividerAbove="true">
+        settings:allowDividerAbove="false" >
 
         <com.android.settingslib.widget.RadioButtonPreference
             android:key="pattern_dzzz_dzzz"
