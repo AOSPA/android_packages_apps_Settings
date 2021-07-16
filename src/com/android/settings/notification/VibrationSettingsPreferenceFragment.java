@@ -35,10 +35,14 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.RadioButtonPreference;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static android.provider.Settings.System.HAPTIC_FEEDBACK_INTENSITY;
@@ -248,6 +252,23 @@ public class VibrationSettingsPreferenceFragment extends DashboardFragment
     @Override
     protected String getLogTag() {
         return TAG;
+    }
+
+    @Override
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context, this, getSettingsLifecycle());
+    }
+
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
+            VibrationSettingsPreferenceFragment fragment, Lifecycle lifecycle) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+
+        final VibrateOnTouchPreferenceController vibrateOnTouchPreferenceController =
+                new VibrateOnTouchPreferenceController(context, fragment, lifecycle);
+
+        controllers.add(vibrateOnTouchPreferenceController);
+
+        return controllers;
     }
 
     private void updateVibrationPattern(int val) {
