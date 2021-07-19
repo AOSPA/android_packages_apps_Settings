@@ -48,6 +48,8 @@ import com.android.internal.telephony.OperatorInfo;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.SubscriptionsChangeListener;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.ThreadUtils;
@@ -63,7 +65,8 @@ import java.util.concurrent.Executors;
 /**
  * "Choose network" settings UI for the Settings app.
  */
-public class NetworkSelectSettings extends DashboardFragment {
+public class NetworkSelectSettings extends DashboardFragment implements
+         SubscriptionsChangeListener.SubscriptionsChangeListenerClient {
 
     private static final String TAG = "NetworkSelectSettings";
 
@@ -85,6 +88,8 @@ public class NetworkSelectSettings extends DashboardFragment {
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     @VisibleForTesting
     TelephonyManager mTelephonyManager;
+    SubscriptionManager mSubscriptionManager;
+    private SubscriptionsChangeListener mSubscriptionsChangeListener;
     private List<String> mForbiddenPlmns;
     private boolean mShow4GForLTE = false;
     private NetworkScanHelper mNetworkScanHelper;
@@ -117,6 +122,8 @@ public class NetworkSelectSettings extends DashboardFragment {
         mSelectedPreference = null;
         mTelephonyManager = getContext().getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
+        mSubscriptionManager = getContext().getSystemService(SubscriptionManager.class);
+        mSubscriptionsChangeListener = new SubscriptionsChangeListener(getContext(), this);
         mNetworkScanHelper = new NetworkScanHelper(
                 getContext(), mTelephonyManager, mCallback, mNetworkScanExecutor);
         PersistableBundle bundle = ((CarrierConfigManager) getContext().getSystemService(
@@ -146,6 +153,7 @@ public class NetworkSelectSettings extends DashboardFragment {
     public void onStart() {
         Log.d(TAG, "onStart()");
         super.onStart();
+        mSubscriptionsChangeListener.start();
 
         updateForbiddenPlmns();
         if (isProgressBarVisible()) {
@@ -172,6 +180,7 @@ public class NetworkSelectSettings extends DashboardFragment {
     @Override
     public void onStop() {
         Log.d(TAG, "onStop() mWaitingForNumberOfScanResults: " + mWaitingForNumberOfScanResults);
+        mSubscriptionsChangeListener.stop();
         super.onStop();
         if (mWaitingForNumberOfScanResults <= 0) {
             stopNetworkQuery();
@@ -213,6 +222,27 @@ public class NetworkSelectSettings extends DashboardFragment {
         }
 
         return true;
+    }
+
+    @Override
+    public void onAirplaneModeChanged(boolean airplaneModeEnabled) {
+    }
+
+    @Override
+    public void onSubscriptionsChanged() {
+        boolean isActiveSubscriptionId = mSubscriptionManager.isActiveSubscriptionId(mSubId);
+        Log.d(TAG, "onSubscriptionsChanged, mSubId: " + mSubId
+                + ", isActive: " + isActiveSubscriptionId);
+
+        if (!isActiveSubscriptionId) {
+            // The current subscription is no longer active, possibly because the SIM was removed.
+            // Finish the activity.
+            final Activity activity = getActivity();
+            if (activity != null && !activity.isFinishing() && !activity.isDestroyed()) {
+                Log.d(TAG, "Calling finish");
+                activity.finish();
+            }
+        }
     }
 
     @Override
