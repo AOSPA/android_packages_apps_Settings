@@ -36,6 +36,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.ims.ImsConfig;
 import com.android.settings.R;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -153,6 +154,9 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
                     break;
                 case ImsMmTelManager.WIFI_MODE_WIFI_PREFERRED:
                     resId = com.android.internal.R.string.wfc_mode_wifi_preferred_summary;
+                    break;
+                case ImsConfig.WfcModeFeatureValueConstants.IMS_PREFERRED:
+                    resId = com.android.internal.R.string.wfc_mode_ims_preferred_summary;
                     break;
                 default:
                     break;
