@@ -48,6 +48,8 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
     private int mSecurityValue;
     @VisibleForTesting
     boolean mIsWpa3Supported = true;
+    boolean mIsOweSapSupported = true;
+    boolean mIsDualSapSupported = false;
 
     public WifiTetherSecurityPreferenceController(Context context,
             OnTetherConfigUpdateListener listener) {
@@ -60,6 +62,7 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
             mSecurityMap.put(Integer.parseInt(securityValues[i]), securityNames[i]);
         }
         mWifiManager.registerSoftApCallback(context.getMainExecutor(), this);
+        mIsDualSapSupported = mWifiManager.isBridgedApConcurrencySupported();
     }
 
     @Override
@@ -78,9 +81,14 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
             return;
         }
         final ListPreference preference = (ListPreference) mPreference;
-        // If the device is not support WPA3 then remove the WPA3 options.
+        // If the device does not support WPA3 /OWE then remove the WPA3 /OWE options.
         if (!mIsWpa3Supported && mSecurityMap.keySet()
                 .removeIf(key -> key > SoftApConfiguration.SECURITY_TYPE_WPA2_PSK)) {
+            preference.setEntries(mSecurityMap.values().stream().toArray(CharSequence[]::new));
+            preference.setEntryValues(mSecurityMap.keySet().stream().map(Integer::toBinaryString)
+                    .toArray(CharSequence[]::new));
+        } else if (!(mIsDualSapSupported && mIsOweSapSupported) && mSecurityMap.keySet()
+                .removeIf(key -> key > SoftApConfiguration.SECURITY_TYPE_WPA3_SAE)) {
             preference.setEntries(mSecurityMap.values().stream().toArray(CharSequence[]::new));
             preference.setEntryValues(mSecurityMap.keySet().stream().map(Integer::toBinaryString)
                     .toArray(CharSequence[]::new));
@@ -111,8 +119,17 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
         if (!isWpa3Supported) {
             Log.i(PREF_KEY, "WPA3 SAE is not supported on this device");
         }
-        if (mIsWpa3Supported != isWpa3Supported) {
+
+        final boolean isOweSupported =
+                softApCapability.areFeaturesSupported(SoftApCapability.SOFTAP_FEATURE_WPA3_OWE);
+        if (!isOweSupported) {
+            Log.i(PREF_KEY, "OWE not supported.");
+        }
+
+        if (mIsWpa3Supported != isWpa3Supported
+                || mIsOweSapSupported != isOweSupported) {
             mIsWpa3Supported = isWpa3Supported;
+            mIsOweSapSupported = isOweSupported;
             updateDisplay();
         }
         mWifiManager.unregisterSoftApCallback(this);
@@ -120,5 +137,9 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
 
     public int getSecurityType() {
         return mSecurityValue;
+    }
+
+    public boolean isOweDualSapSupported() {
+        return mIsDualSapSupported && mIsOweSapSupported;
     }
 }
