@@ -261,6 +261,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        Context context = getContext();
+        SmartDdsSwitchPreferenceController.getInstance(context).cleanUp();
         unregisterReceivers();
 
         final BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
@@ -510,7 +512,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new WifiScanThrottlingPreferenceController(context));
         controllers.add(new WifiEnhancedMacRandomizationPreferenceController(context));
         controllers.add(new MobileDataAlwaysOnPreferenceController(context));
-        controllers.add(new SmartDdsSwitchPreferenceController(context));
+        controllers.add(SmartDdsSwitchPreferenceController.getInstance(context));
         controllers.add(new TetheringHardwareAccelPreferenceController(context));
         controllers.add(new BluetoothDeviceNoNamePreferenceController(context));
         controllers.add(new BluetoothAbsoluteVolumePreferenceController(context));
