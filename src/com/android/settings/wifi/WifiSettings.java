@@ -827,7 +827,10 @@ public class WifiSettings extends RestrictedSettingsFragment
             mWifiEntryPreferenceCategory.addPreference(pref);
         } else {
             // Continuing showing progress bar for an additional delay to overlap with animation
-            getView().postDelayed(mHideProgressBarRunnable, 1700 /* delay millis */);
+            final View view = getView();
+            if (null != view) {
+                view.postDelayed(mHideProgressBarRunnable, 1700 /* delay millis */);
+            }
         }
 
         mAddWifiNetworkPreference.setOrder(index++);
