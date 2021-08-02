@@ -28,6 +28,7 @@ import android.os.ServiceManager;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -44,7 +45,7 @@ import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
 import com.android.settings.datausage.BillingCyclePreferenceController;
 import com.android.settings.datausage.DataUsageSummaryPreferenceController;
-import com.android.settings.network.ActiveSubsciptionsListener;
+import com.android.settings.network.ActiveSubscriptionsListener;
 import com.android.settings.network.CarrierWifiTogglePreferenceController;
 import com.android.settings.network.telephony.cdma.CdmaSubscriptionPreferenceController;
 import com.android.settings.network.telephony.cdma.CdmaSystemSelectPreferenceController;
@@ -88,9 +89,9 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
     private UserManager mUserManager;
     private String mClickedPrefKey;
 
-    private ActiveSubsciptionsListener mActiveSubsciptionsListener;
+    private ActiveSubscriptionsListener mActiveSubscriptionsListener;
     private boolean mDropFirstSubscriptionChangeNotify;
-    private int mActiveSubsciptionsListenerCount;
+    private int mActiveSubscriptionsListenerCount;
 
     private final BroadcastReceiver mSimStateReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
@@ -107,16 +108,13 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
         int simState = mTelephonyManager.getSimState();
         boolean screenState = simState != TelephonyManager.SIM_STATE_ABSENT;
         if (screenState) {
-            int provStatus = CARD_NOT_PROVISIONED;
-            IExtTelephony extTelephony = IExtTelephony.Stub
-                    .asInterface(ServiceManager.getService("qti.radio.extphone"));
-            try {
-                provStatus = extTelephony.getCurrentUiccCardProvisioningStatus(mPhoneId);
-            } catch (RemoteException | NullPointerException ex) {
-                Log.e(LOG_TAG, "getUiccCardProvisioningStatus: " + mPhoneId + ", Exception: ", ex);
+            SubscriptionManager subscriptionManager = ((SubscriptionManager) getContext().
+                    getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE));
+            SubscriptionInfo subInfo = subscriptionManager.getActiveSubscriptionInfo(mSubId);
+            Log.d(LOG_TAG, "subInfo: " + subInfo + ", mSubId: " + mSubId);
+            if (subInfo != null && !subInfo.areUiccApplicationsEnabled()) {
+                screenState = false;
             }
-            screenState = provStatus != CARD_NOT_PROVISIONED;
-            Log.d(LOG_TAG, "Provisioning Status: " + provStatus + ", screenState: " + screenState);
         }
         Log.d(LOG_TAG, "Setting screen state to: " + screenState);
         getPreferenceScreen().setEnabled(screenState);
@@ -267,8 +265,8 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
         super.onResume();
         // TODO: remove log after fixing b/182326102
         Log.d(LOG_TAG, "onResume() subId=" + mSubId);
-        if (mActiveSubsciptionsListener == null) {
-            mActiveSubsciptionsListener = new ActiveSubsciptionsListener(
+        if (mActiveSubscriptionsListener == null) {
+            mActiveSubscriptionsListener = new ActiveSubscriptionsListener(
                     getContext().getMainLooper(), getContext(), mSubId) {
                 public void onChanged() {
                     onSubscriptionDetailChanged();
@@ -276,7 +274,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
             };
             mDropFirstSubscriptionChangeNotify = true;
         }
-        mActiveSubsciptionsListener.start();
+        mActiveSubscriptionsListener.start();
 
         Context context = getContext();
         if (context != null) {
@@ -293,21 +291,21 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
             Log.d(LOG_TAG, "Callback during onResume()");
             return;
         }
-        mActiveSubsciptionsListenerCount++;
-        if (mActiveSubsciptionsListenerCount != 1) {
+        mActiveSubscriptionsListenerCount++;
+        if (mActiveSubscriptionsListenerCount != 1) {
             return;
         }
 
         ThreadUtils.postOnMainThread(() -> {
-            mActiveSubsciptionsListenerCount = 0;
+            mActiveSubscriptionsListenerCount = 0;
             redrawPreferenceControllers();
         });
     }
 
     @Override
     public void onDestroy() {
-        if (mActiveSubsciptionsListener != null) {
-            mActiveSubsciptionsListener.stop();
+        if (mActiveSubscriptionsListener != null) {
+            mActiveSubscriptionsListener.stop();
         }
         super.onDestroy();
     }

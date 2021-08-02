@@ -25,16 +25,18 @@ import android.telephony.AccessNetworkConstants.AccessNetworkType;
 import android.telephony.CellInfo;
 import android.telephony.NetworkScan;
 import android.telephony.NetworkScanRequest;
+import android.telephony.PhoneCapability;
 import android.telephony.RadioAccessSpecifier;
 import android.telephony.TelephonyManager;
 import android.telephony.TelephonyScanManager;
 import android.util.Log;
 
-import org.codeaurora.internal.IExtTelephony;
+import androidx.annotation.VisibleForTesting;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.Executor;
@@ -110,10 +112,14 @@ public class NetworkScanHelper {
     public static final int NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS_LEGACY = 2;
 
     /** The constants below are used in the async network scan. */
-    private static final boolean INCREMENTAL_RESULTS = true;
-    private static final int SEARCH_PERIODICITY_SEC = 5;
-    private static final int MAX_SEARCH_TIME_SEC = 254;
-    private static final int INCREMENTAL_RESULTS_PERIODICITY_SEC = 3;
+    @VisibleForTesting
+    static final boolean INCREMENTAL_RESULTS = true;
+    @VisibleForTesting
+    static final int SEARCH_PERIODICITY_SEC = 5;
+    @VisibleForTesting
+    static final int MAX_SEARCH_TIME_SEC = 254;
+    @VisibleForTesting
+    static final int INCREMENTAL_RESULTS_PERIODICITY_SEC = 3;
 
     private final NetworkScanCallback mNetworkScanCallback;
     private final TelephonyManager mTelephonyManager;
@@ -122,7 +128,6 @@ public class NetworkScanHelper {
     private final LegacyIncrementalScanBroadcastReceiver mLegacyIncrScanReceiver;
     private Context mContext;
     private NetworkScan mNetworkScanRequester;
-    private IExtTelephony mExtTelephony;
     private IntentFilter filter =
             new IntentFilter("qualcomm.intent.action.ACTION_INCREMENTAL_NW_SCAN_IND");
 
@@ -137,7 +142,8 @@ public class NetworkScanHelper {
                 new LegacyIncrementalScanBroadcastReceiver(mContext, mInternalNetworkScanCallback);
     }
 
-    private NetworkScanRequest createNetworkScanForPreferredAccessNetworks() {
+    @VisibleForTesting
+    NetworkScanRequest createNetworkScanForPreferredAccessNetworks() {
         long networkTypeBitmap3gpp = mTelephonyManager.getPreferredNetworkTypeBitmask()
                 & TelephonyManager.NETWORK_STANDARDS_FAMILY_BITMASK_3GPP;
 
@@ -160,10 +166,17 @@ public class NetworkScanHelper {
             radioAccessSpecifiers.add(
                     new RadioAccessSpecifier(AccessNetworkType.EUTRAN, null, null));
         }
+        // If a device supports 5G stand-alone then the code below should be re-enabled; however
+        // a device supporting only non-standalone mode cannot perform PLMN selection and camp on
+        // a 5G network, which means that it shouldn't scan for 5G at the expense of battery as
+        // part of the manual network selection process.
+        //
         if (networkTypeBitmap3gpp == 0
-               || (networkTypeBitmap3gpp & TelephonyManager.NETWORK_CLASS_BITMASK_5G) != 0) {
+                || (hasNrSaCapability()
+                && (networkTypeBitmap3gpp & TelephonyManager.NETWORK_CLASS_BITMASK_5G) != 0)) {
             radioAccessSpecifiers.add(
                     new RadioAccessSpecifier(AccessNetworkType.NGRAN, null, null));
+            Log.d(TAG, "radioAccessSpecifiers add NGRAN.");
         }
 
         return new NetworkScanRequest(
@@ -200,15 +213,8 @@ public class NetworkScanHelper {
             }
         } else if (type == NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS_LEGACY) {
             mContext.registerReceiver(mLegacyIncrScanReceiver, filter);
-            boolean success = false;
-            mExtTelephony = IExtTelephony.Stub
-                    .asInterface(ServiceManager.getService("qti.radio.extphone"));
-            try {
-                success = mExtTelephony.performIncrementalScan(mTelephonyManager.getSlotIndex());
-            } catch (RemoteException | NullPointerException ex) {
-                Log.e(TAG, "performIncrementalScan Exception: ", ex);
-            }
-
+            boolean success = TelephonyUtils.performIncrementalScan(
+                    mContext, mTelephonyManager.getSlotIndex());
             Log.d(TAG, "success: " + success);
             if (!success) {
                 onError(NetworkScan.ERROR_RADIO_INTERFACE_ERROR);
@@ -228,17 +234,14 @@ public class NetworkScanHelper {
         }
 
         try {
-            if (mExtTelephony != null) {
-                int slotIndex = mTelephonyManager.getSlotIndex();
-                if (slotIndex >= 0 && slotIndex < mTelephonyManager.getActiveModemCount()) {
-                    mExtTelephony.abortIncrementalScan(slotIndex);
-                } else {
-                    Log.d(TAG, "slotIndex is invalid, skipping abort");
-                }
-                mExtTelephony = null;
-                mContext.unregisterReceiver(mLegacyIncrScanReceiver);
+            int slotIndex = mTelephonyManager.getSlotIndex();
+            if (slotIndex >= 0 && slotIndex < mTelephonyManager.getActiveModemCount()) {
+                TelephonyUtils.abortIncrementalScan(mContext, slotIndex);
+            } else {
+                Log.d(TAG, "slotIndex is invalid, skipping abort");
             }
-        } catch (RemoteException | NullPointerException ex) {
+            mContext.unregisterReceiver(mLegacyIncrScanReceiver);
+        } catch (NullPointerException ex) {
             Log.e(TAG, "abortIncrementalScan Exception: ", ex);
         } catch (IllegalArgumentException ex) {
             Log.e(TAG, "IllegalArgumentException");
@@ -255,6 +258,12 @@ public class NetworkScanHelper {
 
     private void onError(int errCode) {
         mNetworkScanCallback.onError(errCode);
+    }
+
+    private boolean hasNrSaCapability() {
+        return Arrays.stream(
+                mTelephonyManager.getPhoneCapability().getDeviceNrCapabilities())
+                .anyMatch(i -> i == PhoneCapability.DEVICE_NR_CAPABILITY_SA);
     }
 
     private final class NetworkScanCallbackImpl extends TelephonyScanManager.NetworkScanCallback {

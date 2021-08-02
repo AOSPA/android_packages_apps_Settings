@@ -36,10 +36,8 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
@@ -55,7 +53,6 @@ import androidx.preference.PreferenceManager;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.applications.manageapplications.ManageApplications;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.SubSettingLauncher;
@@ -70,7 +67,6 @@ import com.android.settingslib.core.instrumentation.SharedPreferencesLogger;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.drawer.DashboardCategory;
 
-import com.google.android.material.transition.platform.MaterialSharedAxis;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.ArrayList;
@@ -580,14 +576,14 @@ public class SettingsActivity extends SettingsBaseActivity
     /**
      * Switch to a specific Fragment with taking care of validation, Title and BackStack
      */
-    private Fragment switchToFragment(String fragmentName, Bundle args, boolean validate,
+    private void switchToFragment(String fragmentName, Bundle args, boolean validate,
             int titleResId, CharSequence title) {
         if (fragmentName.equals(getString(R.string.qtifeedback_intent_action))){
              final Intent newIntent = new Intent(getString(R.string.qtifeedback_intent_action));
              newIntent.addCategory("android.intent.category.DEFAULT");
              startActivity(newIntent);
              finish();
-             return null;
+             return;
         }
 
         Log.d(LOG_TAG, "Switching to fragment " + fragmentName);
@@ -597,6 +593,9 @@ public class SettingsActivity extends SettingsBaseActivity
                     + fragmentName);
         }
         Fragment f = Utils.getTargetFragment(this, fragmentName, args);
+        if (f == null) {
+            return;
+        }
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main_content, f);
         if (titleResId > 0) {
@@ -607,7 +606,6 @@ public class SettingsActivity extends SettingsBaseActivity
         transaction.commitAllowingStateLoss();
         getSupportFragmentManager().executePendingTransactions();
         Log.d(LOG_TAG, "Executed frag manager pendingTransactions");
-        return f;
     }
 
     private void updateTilesList() {
@@ -704,7 +702,7 @@ public class SettingsActivity extends SettingsBaseActivity
         if (somethingChanged) {
             Log.d(LOG_TAG, "Enabled state changed for some tiles, reloading all categories "
                     + changedList.toString());
-            updateCategories();
+            mCategoryMixin.updateCategories();
         } else {
             Log.d(LOG_TAG, "No enabled state changed, skipping updateCategory call");
         }

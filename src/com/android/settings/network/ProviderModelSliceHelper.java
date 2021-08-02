@@ -80,8 +80,7 @@ public class ProviderModelSliceHelper {
     public boolean hasCarrier() {
         if (isAirplaneModeEnabled()
                 || mSubscriptionManager == null || mTelephonyManager == null
-                || mSubscriptionManager.getDefaultDataSubscriptionId()
-                == mSubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+                || mSubscriptionManager.getActiveSubscriptionIdList().length <= 0) {
             return false;
         }
         return true;
@@ -264,7 +263,7 @@ public class ProviderModelSliceHelper {
         return summary;
     }
 
-    private String getMobileTitle() {
+    protected String getMobileTitle() {
         String title = mContext.getText(R.string.mobile_data_settings_title).toString();
         if (mSubscriptionManager == null) {
             return title;

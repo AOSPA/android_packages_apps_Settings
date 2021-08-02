@@ -178,9 +178,6 @@ public final class Utils extends com.android.settingslib.Utils {
     public static final String PROPERTY_HIBERNATION_TARGETS_PRE_S_APPS =
             "app_hibernation_targets_pre_s_apps";
 
-    /** Whether or not Settings Shared Axis transition is enabled */
-    public static final String SETTINGS_SHARED_AXIS_ENABLED = "settings_shared_axis_enabled";
-
     /**
      * Finds a matching activity for a preference's intent. If a matching
      * activity is not found, it will remove the preference.
@@ -1156,19 +1153,6 @@ public final class Utils extends com.android.settingslib.Utils {
             return false;
         }
         return true;
-     }
-
-    public static boolean isAdvancedPlmnScanSupported() {
-        boolean propVal = false;
-        IExtTelephony extTelephony = IExtTelephony.Stub
-                .asInterface(ServiceManager.getService("qti.radio.extphone"));
-        try {
-            propVal = extTelephony
-                    .getPropertyValueBool("persist.vendor.radio.enableadvancedscan", true);
-        } catch (RemoteException | NullPointerException ex) {
-            Log.e(TAG, "isAdvancedPlmnScanSupported Exception: ", ex);
-        }
-        return propVal;
     }
 
     public static boolean isSupportCTPA(Context context) {
@@ -1236,13 +1220,17 @@ public final class Utils extends com.android.settingslib.Utils {
                 == ProfileSelectFragment.ProfileType.PERSONAL : false;
         final boolean isWork = args != null ? args.getInt(ProfileSelectFragment.EXTRA_PROFILE)
                 == ProfileSelectFragment.ProfileType.WORK : false;
-        if (activity.getSystemService(UserManager.class).getUserProfiles().size() > 1
-                && ProfileFragmentBridge.FRAGMENT_MAP.get(fragmentName) != null
-                && !isWork && !isPersonal) {
-            f = Fragment.instantiate(activity, ProfileFragmentBridge.FRAGMENT_MAP.get(fragmentName),
-                    args);
-        } else {
-            f = Fragment.instantiate(activity, fragmentName, args);
+        try {
+            if (activity.getSystemService(UserManager.class).getUserProfiles().size() > 1
+                    && ProfileFragmentBridge.FRAGMENT_MAP.get(fragmentName) != null
+                    && !isWork && !isPersonal) {
+                f = Fragment.instantiate(activity,
+                        ProfileFragmentBridge.FRAGMENT_MAP.get(fragmentName), args);
+            } else {
+                f = Fragment.instantiate(activity, fragmentName, args);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Unable to get target fragment", e);
         }
         return f;
     }
@@ -1298,10 +1286,5 @@ public final class Utils extends com.android.settingslib.Utils {
 
     public static boolean isProviderModelEnabled(Context context) {
         return FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL);
-    }
-
-    public static boolean isPageTransitionEnabled(Context context) {
-        return Settings.Global.getInt(context.getContentResolver(),
-                SETTINGS_SHARED_AXIS_ENABLED, 0) == 1;
     }
 }

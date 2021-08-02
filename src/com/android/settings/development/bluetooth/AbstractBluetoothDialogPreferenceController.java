@@ -165,7 +165,7 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
             return null;
         }
         if (codecStatus.getCodecConfig().getCodecType() >=
-            BluetoothCodecConfig.SOURCE_CODEC_TYPE_MAX) {
+            BluetoothCodecConfig.SOURCE_QVA_CODEC_TYPE_MAX) {
             Log.d(TAG,"Invalid codec type");
             return null;
         }
