@@ -177,7 +177,8 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
             bandSummaries.add(mContext.getString(R.string.wifi_ap_prefer_6G));
         }
         // Add Dual AP bands
-        if (is5GhzBandSupported() && mWifiManager.isBridgedApConcurrencySupported()
+        if (is5GhzBandSupported()
+                && (mWifiManager.isBridgedApConcurrencySupported() || isVendorLegacyDualBandSupported())
                 && (config != null) && (config.getSecurityType() != SoftApConfiguration.SECURITY_TYPE_OWE)) {
             bandEntries.add(String.valueOf(BAND_BOTH_2G_5G));
             bandSummaries.add(mContext.getString(R.string.wifi_ap_choose_vendor_dual_band));
@@ -210,5 +211,10 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
 
     public int getBandIndex() {
         return mBandIndex;
+    }
+
+    private boolean isVendorLegacyDualBandSupported() {
+        return mContext.getResources().getBoolean(
+                     com.android.internal.R.bool.config_wifi_dual_sap_mode_enabled);
     }
 }
