@@ -53,15 +53,17 @@ public class VibrationPatternPreferenceController extends AbstractPreferenceCont
 
     private static final long[] SIMPLE_VIBRATION_PATTERN = {
         0, // No delay before starting
-        800, // How long to vibrate
-        800, // How long to wait before vibrating again
+        1000, // How long to vibrate
+        1000, // How long to wait before vibrating again
+        1000, // How long to vibrate
+        1000, // How long to wait before vibrating again
     };
 
     private static final long[] DZZZ_DA_VIBRATION_PATTERN = {
         0, // No delay before starting
         500, // How long to vibrate
         200, // Delay
-        20, // How long to vibrate
+        70, // How long to vibrate
         720, // How long to wait before vibrating again
     };
 
@@ -77,11 +79,9 @@ public class VibrationPatternPreferenceController extends AbstractPreferenceCont
 
     private static final long[] DA_DA_DZZZ_VIBRATION_PATTERN = {
         0, // No delay before starting
-        30, // How long to vibrate
+        70, // How long to vibrate
         80, // Delay
-        30, // How long to vibrate
-        80, // Delay
-        50,  // How long to vibrate
+        70, // How long to vibrate
         180, // Delay
         600,  // How long to vibrate
         1050, // How long to wait before vibrating again
@@ -95,18 +95,6 @@ public class VibrationPatternPreferenceController extends AbstractPreferenceCont
         150, // Delay
         20,  // How long to vibrate
         1050, // How long to wait before vibrating again
-    };
-
-    private static final int[] NINE_ELEMENTS_VIBRATION_AMPLITUDE = {
-        0, // No delay before starting
-        255, // Vibrate full amplitude
-        0, // No amplitude while waiting
-        255,
-        0,
-        255,
-        0,
-        255,
-        0,
     };
 
     private static final int[] SEVEN_ELEMENTS_VIBRATION_AMPLITUDE = {
@@ -125,12 +113,6 @@ public class VibrationPatternPreferenceController extends AbstractPreferenceCont
         0, // No amplitude while waiting
         255,
         0,
-    };
-
-    private static final int[] SIMPLE_VIBRATION_AMPLITUDE = {
-        0, // No delay before starting
-        255, // Vibrate full amplitude
-        0, // No amplitude while waiting
     };
 
     public VibrationPatternPreferenceController(Context context) {
@@ -185,7 +167,7 @@ public class VibrationPatternPreferenceController extends AbstractPreferenceCont
                 break;
             case 3:
                 effect = vibrationEffectProxy.createWaveform(DA_DA_DZZZ_VIBRATION_PATTERN,
-                        NINE_ELEMENTS_VIBRATION_AMPLITUDE, -1);
+                        SEVEN_ELEMENTS_VIBRATION_AMPLITUDE, -1);
                 break;
             case 4:
                 effect = vibrationEffectProxy.createWaveform(DA_DZZZ_DA_VIBRATION_PATTERN,
@@ -193,7 +175,7 @@ public class VibrationPatternPreferenceController extends AbstractPreferenceCont
                 break;
             default:
                 effect = vibrationEffectProxy.createWaveform(SIMPLE_VIBRATION_PATTERN,
-                        SIMPLE_VIBRATION_AMPLITUDE, -1);
+                        FIVE_ELEMENTS_VIBRATION_AMPLITUDE, -1);
                 break;
         }
         vibrator.vibrate(effect, VIBRATION_ATTRIBUTES);
