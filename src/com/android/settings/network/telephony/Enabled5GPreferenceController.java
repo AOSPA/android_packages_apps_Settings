@@ -33,6 +33,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.database.ContentObserver;
 import android.os.Handler;
 import android.os.Looper;
@@ -64,6 +65,8 @@ import com.android.settings.network.telephony.MobileNetworkUtils;
 public class Enabled5GPreferenceController extends TelephonyTogglePreferenceController
          implements LifecycleObserver, OnStart, OnStop {
     private static final String TAG = "Enable5g";
+    private static final int NETWORK_MODE_TYPE_INVALID = -1;
+    private static final String USER_SELECTED_NW_MODE_KEY = "user_selected_network_type_";
 
     Preference mPreference;
     private PhoneCallStateListener mPhoneStateListener;
@@ -81,6 +84,9 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
      * Indicates whether NR can be registered on both SUBs at the same time.
      */
     private boolean mIsDualNrSupported = false;
+
+    private SharedPreferences mSharedPreferences;
+    private boolean mChangedBy5gToggle = false;
 
     private final BroadcastReceiver mDefaultDataChangedReceiver = new BroadcastReceiver() {
         @Override
@@ -114,11 +120,22 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
             mAllowedNetworkTypesListener = new AllowedNetworkTypesListener(
                     mContext.getMainExecutor());
             mAllowedNetworkTypesListener.setAllowedNetworkTypesListener(
-                    () -> updatePreference());
+                    () -> update());
         }
+        mSharedPreferences = mContext.getSharedPreferences(mContext.getPackageName(),
+                mContext.MODE_PRIVATE);
         return this;
     }
 
+    private void update() {
+        Log.d(TAG, "update.");
+        updatePreference();
+        //if user select network mode from prefered network list, then reset cache to invalid.
+        if (!mChangedBy5gToggle) {
+            cachePreviousSelectedNwType(NETWORK_MODE_TYPE_INVALID);
+        }
+        mChangedBy5gToggle = false;
+    }
     private void updatePreference() {
         if (mPreference != null) {
             updateState(mPreference);
@@ -196,16 +213,66 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
         long newNetworkBitMask;
         if (TelephonyManager.NETWORK_MODE_NR_ONLY != oldNetworkMode) {
             long oldNetworkBitMask = MobileNetworkUtils.getRafFromNetworkType(oldNetworkMode);
-            newNetworkBitMask = isChecked ?
-                (oldNetworkBitMask | TelephonyManager.NETWORK_TYPE_BITMASK_NR)
-                : (oldNetworkBitMask & ~TelephonyManager.NETWORK_TYPE_BITMASK_NR);
+            if (isChecked) {
+                long networkTypeBitmap4g = oldNetworkBitMask
+                        & TelephonyManager.NETWORK_CLASS_BITMASK_4G;
+                long networkTypeBitmap3g = oldNetworkBitMask
+                        & TelephonyManager.NETWORK_CLASS_BITMASK_3G;
+                if (networkTypeBitmap4g == 0 && networkTypeBitmap3g == 0) {
+                    //Enable from 2G to 5G.
+                    //Use NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA as default value
+                    //with LTE
+                    oldNetworkBitMask = MobileNetworkUtils.getRafFromNetworkType(
+                            TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA);
+                    cachePreviousSelectedNwType(oldNetworkMode);
+                } else if(networkTypeBitmap4g == 0) {
+                    //Enable from 3G to 5G.
+                    //For EVDO only, map to TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO
+                    //as no proper mapping value include LTE.
+                    if (oldNetworkMode == TelephonyManager.NETWORK_MODE_EVDO_NO_CDMA) {
+                            oldNetworkBitMask = MobileNetworkUtils.getRafFromNetworkType(
+                                TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO);
+                    } else {
+                        oldNetworkBitMask = oldNetworkBitMask
+                            | TelephonyManager.NETWORK_TYPE_BITMASK_LTE;
+                    }
+                    cachePreviousSelectedNwType(oldNetworkMode);
+                } else {
+                    cachePreviousSelectedNwType(NETWORK_MODE_TYPE_INVALID);
+                }
+            }
+            int userSelectedNwMode = getPreviousSelectedNwType();
+            if ((userSelectedNwMode != NETWORK_MODE_TYPE_INVALID) && !isChecked) {
+                Log.d(TAG, "userSelectedNwMode: " + userSelectedNwMode);
+                newNetworkBitMask = MobileNetworkUtils
+                        .getRafFromNetworkType(userSelectedNwMode);
+                cachePreviousSelectedNwType(NETWORK_MODE_TYPE_INVALID);
+            } else {
+                newNetworkBitMask = isChecked ?
+                        (oldNetworkBitMask | TelephonyManager.NETWORK_TYPE_BITMASK_NR)
+                        : (oldNetworkBitMask & ~TelephonyManager.NETWORK_TYPE_BITMASK_NR);
+            }
         } else {
             newNetworkBitMask = MobileNetworkUtils
-                .getRafFromNetworkType(TelephonyManager.NETWORK_MODE_LTE_ONLY);
+                    .getRafFromNetworkType(TelephonyManager.NETWORK_MODE_LTE_ONLY);
         }
         mTelephonyManager.setAllowedNetworkTypesForReason(
                 TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER, newNetworkBitMask);
+        mChangedBy5gToggle = true;
         return true;
+    }
+
+    private void cachePreviousSelectedNwType(int oldNetworkMode) {
+        Log.d(TAG, "cachePreviousSelectedNwType: " + oldNetworkMode);
+        int slotId = SubscriptionManager.getSlotIndex(mSubId);
+        mSharedPreferences.edit()
+                .putInt(USER_SELECTED_NW_MODE_KEY + slotId, oldNetworkMode).apply();
+    }
+
+    private int getPreviousSelectedNwType() {
+        int slotId = SubscriptionManager.getSlotIndex(mSubId);
+        return mSharedPreferences.getInt(USER_SELECTED_NW_MODE_KEY
+                + slotId, NETWORK_MODE_TYPE_INVALID);
     }
 
     private int getAllowedNetworkMode() {
