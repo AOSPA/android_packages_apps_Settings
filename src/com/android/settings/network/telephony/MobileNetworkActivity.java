@@ -247,22 +247,15 @@ public class MobileNetworkActivity extends SettingsBaseActivity
      */
     @VisibleForTesting
     SubscriptionInfo getSubscription() {
-        List<SubscriptionAnnotation> subList =
-                (new SelectableSubscriptions(this, true)).call();
-        SubscriptionAnnotation currentSubInfo = null;
         if (mCurSubscriptionId != SUB_ID_NULL) {
-            currentSubInfo = subList.stream()
-                    .filter(SubscriptionAnnotation::isDisplayAllowed)
-                    .filter(subAnno -> (subAnno.getSubscriptionId() == mCurSubscriptionId))
-                    .findFirst().orElse(null);
+            return getSubscriptionForSubId(mCurSubscriptionId);
         }
-        if (currentSubInfo == null) {
-            currentSubInfo = subList.stream()
-                    .filter(SubscriptionAnnotation::isDisplayAllowed)
-                    .filter(SubscriptionAnnotation::isActive)
-                    .findFirst().orElse(null);
+        final List<SubscriptionInfo> subInfos = getProxySubscriptionManager()
+                .getActiveSubscriptionsInfo();
+        if (CollectionUtils.isEmpty(subInfos)) {
+            return null;
         }
-        return (currentSubInfo == null) ? null : currentSubInfo.getSubInfo();
+        return subInfos.get(0);
     }
 
     @VisibleForTesting
