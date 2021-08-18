@@ -92,6 +92,9 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
         if (mPhoneStateListener != null) {
             mPhoneStateListener.register(mContext, mSubId);
         }
+        if (mAllowedNetworkTypesListener != null) {
+            mAllowedNetworkTypesListener.register(mContext, mSubId);
+        }
 
     }
 
@@ -99,6 +102,9 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
     public void onStop() {
         if (mPhoneStateListener != null) {
             mPhoneStateListener.unregister();
+        }
+        if (mAllowedNetworkTypesListener != null) {
+            mAllowedNetworkTypesListener.unregister(mContext, mSubId);
         }
     }
 
