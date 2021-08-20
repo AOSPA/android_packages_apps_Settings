@@ -213,7 +213,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                 mApBandPreferenceController.updatePreferenceEntries();
                 mApBandPreferenceController.updateDisplay();
                 wasApBandPrefUpdated = true;
-            } else if (wasApBandPrefUpdated) {
+            } else if (wasApBandPrefUpdated
+                   && config.getSecurityType() != SoftApConfiguration.SECURITY_TYPE_OWE) {
                 mApBandPreferenceController.updatePreferenceEntries();
                 mApBandPreferenceController.updateDisplay();
                 wasApBandPrefUpdated = false;
