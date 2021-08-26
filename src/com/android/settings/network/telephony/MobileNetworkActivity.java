@@ -19,6 +19,7 @@ package com.android.settings.network.telephony;
 import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
 
 import android.app.ActionBar;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserManager;
@@ -43,6 +44,8 @@ import com.android.settings.R;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.helper.SelectableSubscriptions;
+import com.android.settings.network.helper.SubscriptionAnnotation;
 
 import java.util.List;
 
@@ -129,15 +132,13 @@ public class MobileNetworkActivity extends SettingsBaseActivity
                 : ((startIntent != null)
                 ? startIntent.getIntExtra(Settings.EXTRA_SUB_ID, SUB_ID_NULL)
                 : SUB_ID_NULL);
+        // perform registration after mCurSubscriptionId been configured.
+        registerActiveSubscriptionsListener();
 
         final SubscriptionInfo subscription = getSubscription();
         maybeShowContactDiscoveryDialog(subscription);
 
-        // Since onChanged() will take place immediately when addActiveSubscriptionsListener(),
-        // perform registration after mCurSubscriptionId been configured.
-        registerActiveSubscriptionsListener();
-
-        updateSubscriptions(subscription, savedInstanceState);
+        updateSubscriptions(subscription, null);
     }
 
     @VisibleForTesting
@@ -289,7 +290,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         final Fragment fragment = new MobileNetworkSettings();
         fragment.setArguments(bundle);
         fragmentTransaction.replace(R.id.content_frame, fragment, fragmentTag);
-        fragmentTransaction.commit();
+        fragmentTransaction.commitAllowingStateLoss();
     }
 
     private void removeContactDiscoveryDialog(int subId) {

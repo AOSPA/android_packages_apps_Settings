@@ -371,6 +371,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         super.onStart();
 
         mWifiEnabler = createWifiEnabler();
+        mWifiManager.allowConnectOnPartialScanResults(true);
 
         if (mIsRestricted) {
             restrictUi();
@@ -425,6 +426,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     public void onStop() {
         getView().removeCallbacks(mUpdateWifiEntryPreferencesRunnable);
         getView().removeCallbacks(mHideProgressBarRunnable);
+        mWifiManager.allowConnectOnPartialScanResults(false);
         mIsWifiEntryListStale = true;
         super.onStop();
     }
@@ -827,7 +829,10 @@ public class WifiSettings extends RestrictedSettingsFragment
             mWifiEntryPreferenceCategory.addPreference(pref);
         } else {
             // Continuing showing progress bar for an additional delay to overlap with animation
-            getView().postDelayed(mHideProgressBarRunnable, 1700 /* delay millis */);
+            final View view = getView();
+            if (null != view) {
+                view.postDelayed(mHideProgressBarRunnable, 1700 /* delay millis */);
+            }
         }
 
         mAddWifiNetworkPreference.setOrder(index++);

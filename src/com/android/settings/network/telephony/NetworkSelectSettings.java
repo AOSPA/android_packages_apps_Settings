@@ -48,6 +48,8 @@ import com.android.internal.telephony.OperatorInfo;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.SubscriptionsChangeListener;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.ThreadUtils;
@@ -63,7 +65,8 @@ import java.util.concurrent.Executors;
 /**
  * "Choose network" settings UI for the Settings app.
  */
-public class NetworkSelectSettings extends DashboardFragment {
+public class NetworkSelectSettings extends DashboardFragment implements
+         SubscriptionsChangeListener.SubscriptionsChangeListenerClient {
 
     private static final String TAG = "NetworkSelectSettings";
 
@@ -73,6 +76,7 @@ public class NetworkSelectSettings extends DashboardFragment {
     private static final int EVENT_NETWORK_SCAN_COMPLETED = 4;
 
     private static final String PREF_KEY_NETWORK_OPERATORS = "network_operators_preference";
+    private static final int MIN_NUMBER_OF_SCAN_REQUIRED = 2;
 
     @VisibleForTesting
     PreferenceCategory mPreferenceCategory;
@@ -85,6 +89,8 @@ public class NetworkSelectSettings extends DashboardFragment {
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     @VisibleForTesting
     TelephonyManager mTelephonyManager;
+    SubscriptionManager mSubscriptionManager;
+    private SubscriptionsChangeListener mSubscriptionsChangeListener;
     private List<String> mForbiddenPlmns;
     private boolean mShow4GForLTE = false;
     private NetworkScanHelper mNetworkScanHelper;
@@ -95,8 +101,8 @@ public class NetworkSelectSettings extends DashboardFragment {
     private long mRequestIdManualNetworkSelect;
     private long mRequestIdManualNetworkScan;
     private long mWaitingForNumberOfScanResults;
-
-    private static final int MIN_NUMBER_OF_SCAN_REQUIRED = 2;
+    @VisibleForTesting
+    boolean mIsAggregationEnabled = false;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -117,6 +123,8 @@ public class NetworkSelectSettings extends DashboardFragment {
         mSelectedPreference = null;
         mTelephonyManager = getContext().getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
+        mSubscriptionManager = getContext().getSystemService(SubscriptionManager.class);
+        mSubscriptionsChangeListener = new SubscriptionsChangeListener(getContext(), this);
         mNetworkScanHelper = new NetworkScanHelper(
                 getContext(), mTelephonyManager, mCallback, mNetworkScanExecutor);
         PersistableBundle bundle = ((CarrierConfigManager) getContext().getSystemService(
@@ -128,6 +136,11 @@ public class NetworkSelectSettings extends DashboardFragment {
 
         mMetricsFeatureProvider = FeatureFactory
                 .getFactory(getContext()).getMetricsFeatureProvider();
+
+        mIsAggregationEnabled = getContext().getResources().getBoolean(
+                R.bool.config_network_selection_list_aggregation_enabled);
+        Log.d(TAG, "init: mUseNewApi:" + mUseNewApi
+                + " ,mIsAggregationEnabled:" + mIsAggregationEnabled);
     }
 
     @Override
@@ -146,6 +159,7 @@ public class NetworkSelectSettings extends DashboardFragment {
     public void onStart() {
         Log.d(TAG, "onStart()");
         super.onStart();
+        mSubscriptionsChangeListener.start();
 
         updateForbiddenPlmns();
         if (isProgressBarVisible()) {
@@ -172,6 +186,7 @@ public class NetworkSelectSettings extends DashboardFragment {
     @Override
     public void onStop() {
         Log.d(TAG, "onStop() mWaitingForNumberOfScanResults: " + mWaitingForNumberOfScanResults);
+        mSubscriptionsChangeListener.stop();
         super.onStop();
         if (mWaitingForNumberOfScanResults <= 0) {
             stopNetworkQuery();
@@ -213,6 +228,27 @@ public class NetworkSelectSettings extends DashboardFragment {
         }
 
         return true;
+    }
+
+    @Override
+    public void onAirplaneModeChanged(boolean airplaneModeEnabled) {
+    }
+
+    @Override
+    public void onSubscriptionsChanged() {
+        boolean isActiveSubscriptionId = mSubscriptionManager.isActiveSubscriptionId(mSubId);
+        Log.d(TAG, "onSubscriptionsChanged, mSubId: " + mSubId
+                + ", isActive: " + isActiveSubscriptionId);
+
+        if (!isActiveSubscriptionId) {
+            // The current subscription is no longer active, possibly because the SIM was removed.
+            // Finish the activity.
+            final Activity activity = getActivity();
+            if (activity != null && !activity.isFinishing() && !activity.isDestroyed()) {
+                Log.d(TAG, "Calling finish");
+                activity.finish();
+            }
+        }
     }
 
     @Override
@@ -260,7 +296,7 @@ public class NetworkSelectSettings extends DashboardFragment {
                         stopNetworkQuery();
                     }
 
-                    mCellInfoList = new ArrayList<>(results);
+                    mCellInfoList = doAggregation(results);
                     Log.d(TAG, "CellInfoList size: " +  mCellInfoList.size());
                     Log.d(TAG, "CellInfoList: " + CellInfoUtil.cellInfoListToString(mCellInfoList));
                     if (mCellInfoList != null && mCellInfoList.size() != 0) {
@@ -324,6 +360,31 @@ public class NetworkSelectSettings extends DashboardFragment {
             return;
         }
     };
+
+    @VisibleForTesting
+    List<CellInfo> doAggregation(List<CellInfo> cellInfoListInput) {
+        if (!mIsAggregationEnabled) {
+            Log.d(TAG, "no aggregation");
+            return new ArrayList<>(cellInfoListInput);
+        }
+        ArrayList<CellInfo> aggregatedList = new ArrayList<>();
+        for (CellInfo cellInfo : cellInfoListInput) {
+            String plmn = CellInfoUtil.getNetworkTitle(cellInfo.getCellIdentity(),
+                    CellInfoUtil.getCellIdentityMccMnc(cellInfo.getCellIdentity()));
+            Class className = cellInfo.getClass();
+
+            if (aggregatedList.stream().anyMatch(
+                    item -> {
+                        String itemPlmn = CellInfoUtil.getNetworkTitle(item.getCellIdentity(),
+                                CellInfoUtil.getCellIdentityMccMnc(item.getCellIdentity()));
+                        return itemPlmn.equals(plmn) && item.getClass().equals(className);
+                    })) {
+                continue;
+            }
+            aggregatedList.add(cellInfo);
+        }
+        return aggregatedList;
+    }
 
     private final NetworkScanHelper.NetworkScanCallback mCallback =
             new NetworkScanHelper.NetworkScanCallback() {

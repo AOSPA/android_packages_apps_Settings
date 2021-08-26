@@ -53,7 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Rapetisser"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Agrandir"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Utiliser la rotation automatique"</string>
-    <string name="smart_rotate_text_headline" msgid="8947678366129076364">"La technologie de détection du visage utilise l\'appareil photo avant pour améliorer la précision de la rotation automatique. Les images ne sont jamais conservées ni envoyées à Google.&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;En savoir plus à propos de l\'écran à rotation automatique&lt;/a&gt;"</string>
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"La technologie de détection du visage utilise l\'appareil photo avant pour améliorer la précision de la rotation automatique. Les images sont jamais stockées ni envoyées à Google."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Exemple de texte"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Le Magicien d\'Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Chapitre 11 : La merveilleuse cité d\'émeraude d\'Oz"</string>
@@ -203,7 +203,7 @@
     <string name="sdcard_settings_scanning_status" product="default" msgid="3297316465982471437">"Recherche de fichiers multimédia sur la carte SD…"</string>
     <string name="sdcard_settings_read_only_status" product="nosdcard" msgid="3444648373391629840">"Mémoire USB en lecture seule"</string>
     <string name="sdcard_settings_read_only_status" product="default" msgid="4338796260718910164">"Carte SD installée en lecture seule"</string>
-    <string name="skip_label" msgid="6380034601349015895">"Passer"</string>
+    <string name="skip_label" msgid="6380034601349015895">"Ignorer"</string>
     <string name="next_label" msgid="1248293387735652187">"Suivant"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Langues"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Supprimer"</string>
@@ -288,8 +288,6 @@
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Ajouter texte sur écr. de verr."</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Activer les widgets"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"Désactivé par l\'administrateur"</string>
-    <string name="lockdown_settings_title" msgid="8988970335658365075">"Afficher l\'option de verrouillage"</string>
-    <string name="lockdown_settings_summary" msgid="5857509790740495057">"Affichez l\'option de l\'interrupteur qui désactive Smart Lock, le déverrouillage par reconnaissance faciale, le déverrouillage par empreinte digitale et les notifications sur l\'écran de verrouillage"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"Verr. écran en cas de perte de confiance"</string>
     <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"Si cette fonction est activée, l\'appareil sera verrouillé lorsque le dernier agent de confiance perd sa marque de confiance"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Aucun"</string>
@@ -356,6 +354,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -916,19 +916,19 @@
     <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"Autoriser ART à vérifier le code à octets pour les applications débogables"</string>
     <string name="show_refresh_rate" msgid="5742688821872354973">"Afficher le taux d\'actualisation"</string>
     <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Afficher le taux d\'actualisation actuel"</string>
-    <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_quick_toggle_summary" product="tablet" msgid="3622326550467939809">"Autoriser l\'échange de données lorsque la tablette touche un appareil NFC"</string>
-    <string name="nfc_quick_toggle_summary" product="default" msgid="1460871052409162980">"Autoriser l\'échange de données lorsque le téléphone touche un appareil NFC"</string>
-    <string name="nfc_disclaimer_title" msgid="3696580694485048039">"Activer la fonction NFC"</string>
-    <string name="nfc_disclaimer_content" msgid="8256675597551036207">"La technologie NFC échange des données entre cet appareil et d\'autres appareils ou cibles à proximité, tels que les terminaux de paiement, les lecteurs d\'accès et les annonces ou les balises interactifs"</string>
-    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Déverrouillage de l\'appareil requis pour utiliser la fonctionnalité NFC"</string>
-    <string name="nfc_secure_toggle_summary" product="default" msgid="407654335737959071">"Autoriser l\'utilisation de la technologie NFC uniquement lorsque l\'écran est déverrouillé"</string>
+    <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"CCP"</string>
+    <string name="nfc_quick_toggle_summary" product="tablet" msgid="3622326550467939809">"Autoriser l\'échange de données lorsque la tablette touche un appareil CCP"</string>
+    <string name="nfc_quick_toggle_summary" product="default" msgid="1460871052409162980">"Autoriser l\'échange de données lorsque le téléphone touche un appareil CCP"</string>
+    <string name="nfc_disclaimer_title" msgid="3696580694485048039">"Activer la technologie CCP"</string>
+    <string name="nfc_disclaimer_content" msgid="8256675597551036207">"La technologie CCP échange des données entre cet appareil et d\'autres appareils ou cibles à proximité, tels que les terminaux de paiement, les lecteurs d\'accès et les annonces ou les balises interactifs"</string>
+    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Déverrouillage de l\'appareil requis pour utiliser la fonctionnalité CCP"</string>
+    <string name="nfc_secure_toggle_summary" product="default" msgid="407654335737959071">"Autoriser l\'utilisation de la technologie CCP uniquement lorsque l\'écran est déverrouillé"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
-    <string name="android_beam_on_summary" msgid="6067720758437490896">"Prêt à partager le contenu de l\'application par NFC"</string>
+    <string name="android_beam_on_summary" msgid="6067720758437490896">"Prêt à partager le contenu de l\'application par CCP"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"Désactivé"</string>
-    <string name="nfc_disabled_summary" msgid="8737797364522502351">"Non accessible, car la NFC est désactivée"</string>
+    <string name="nfc_disabled_summary" msgid="8737797364522502351">"Non accessible, car la CCP est désactivée"</string>
     <string name="android_beam_label" msgid="7168565080321110094">"Android Beam"</string>
-    <string name="android_beam_explained" msgid="5684416131846701256">"Lorsque cette fonctionnalité est activée, vous pouvez partager le contenu d\'une application avec un appareil compatible NFC en rapprochant les appareils. Vous pouvez, par exemple, partager des pages Web, des vidéos YouTube, des contacts et plus encore.\n\nIl vous suffit de rapprocher les appareils (en les plaçant généralement dos à dos), puis de toucher votre écran. L\'application détermine le contenu à transférer."</string>
+    <string name="android_beam_explained" msgid="5684416131846701256">"Lorsque cette fonctionnalité est activée, vous pouvez partager le contenu d\'une application avec un appareil compatible CCP en rapprochant les appareils. Vous pouvez, par exemple, partager des pages Web, des vidéos YouTube, des contacts et plus encore.\n\nIl vous suffit de rapprocher les appareils (en les plaçant généralement dos à dos), puis de toucher votre écran. L\'application détermine le contenu à transférer."</string>
     <string name="wifi_quick_toggle_title" msgid="2737097538432862807">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="4957267477820468553">"Activer le Wi-Fi"</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi-Fi"</string>
@@ -1855,7 +1855,7 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Recherche d\'appareils Bluetooth"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Autoriser les applications et les services à rechercher les appareils à proximité en tout temps, même lorsque le Bluetooth est désactivé. Cette autorisation peut permettre, par exemple, d\'améliorer les fonctionnalités et les services basés sur la localisation."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Services de localisation"</string>
-    <string name="location_services_screen_title" msgid="9204334551361202877">"Services de localisation"</string>
+    <string name="location_services_screen_title" msgid="5640002489976602476">"Services de localisation"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Services de localisation pour le travail"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Utiliser la position pour définir le fuseau horaire"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"La position de l\'appareil est nécessaire"</string>
@@ -2389,7 +2389,7 @@
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Délai de pression"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Inversion des couleurs"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Utiliser l\'inversion des couleurs"</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"L\'inversion des couleurs assombrit les écrans lumineux.&lt;br/&gt;&lt;br/&gt; Remarque : &lt;ol&gt; &lt;li&amp;gtL\'inversion des couleurs éclaircit aussi les écrans sombres.&lt;/li&gt; &lt;li&gt;Les couleurs changeront dans les éléments multimédias et les images.&lt;/li&gt; &lt;li&gt;Le thème sombre peut être utilisé pour afficher un arrière-plan sombre. Le thème sombre fonctionne avec les applications prises en charge. L\'inversion des couleurs fonctionne avec toutes les applications.&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"L\'inversion des couleurs assombrit les écrans lumineux.&lt;br/&gt;&lt;br/&gt; Remarque : &lt;ol&gt; &lt;li&gt; L\'inversion des couleurs éclaircit aussi les écrans sombres.&lt;/li&gt; &lt;li&gt; Les couleurs changeront dans les éléments multimédias et les images.&lt;/li&gt; &lt;li&gt; Le thème sombre peut être utilisé pour afficher un arrière-plan sombre. Le thème sombre fonctionne avec les applications prises en charge. L\'inversion des couleurs fonctionne avec toutes les applications.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Clic automatique (temps d\'arrêt)"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"Le clic automatique fonctionne avec une souris connectée. Vous pouvez configurer votre souris de façon à ce qu\'un clic s\'effectue automatiquement lorsque le curseur s\'immobilise pendant un certain temps."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"Désactivé"</string>
@@ -2451,8 +2451,8 @@
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Activer la réduction suppl. de la luminosité"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Assombrir l\'écran de votre téléphone au-delà de sa luminosité minimale"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Assombrir l\'écran de votre tablette au-delà de sa luminosité minimale"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Rendez l\'écran plus sombre pour qu\'il soit plus facile à lire.&lt;br/&gt;&lt;br/&gt; Cela peut être pratique dans certains cas : &lt;ol&gt; &lt;li&gt; La luminosité minimale par défaut de votre téléphone est quand même trop intense&lt;/li&gt; &lt;li&gt; Vous utilisez votre téléphone dans un environnement sombre, comme la nuit ou dans une salle sombre avant d\'aller vous coucher&lt;/li&gt; &lt;/ol&gt;"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Assombrissez votre écran pour qu\'il soit plus facile à lire.&lt;br/&gt;&lt;br/&gt; Cela peut être pratique dans certains cas : &lt;ol&gt; &lt;li&gt; La luminosité minimale par défaut de votre tablette est quand même trop intense&lt;/li&gt; &lt;li&gt; Vous utilisez votre tablette dans un environnement sombre, comme la nuit ou dans une salle sombre avant d\'aller vous coucher&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Rendez l\'écran plus sombre pour qu\'il soit plus facile à lire.&lt;br/&gt;&lt;br/&gt; Cela peut être pratique dans certains cas : &lt;ol&gt; &lt;li&gt; La luminosité minimale par défaut de votre téléphone est quand même trop intense&lt;/li&gt; &lt;li&gt; Vous utilisez votre téléphone dans un environnement sombre, comme la nuit ou dans une salle sombre avant d\'aller vous coucher&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Assombrissez votre écran pour qu\'il soit plus facile à lire.&lt;br/&gt;&lt;br/&gt; Cela peut être pratique dans certains cas : &lt;ol&gt; &lt;li&gt; La luminosité minimale par défaut de votre tablette est quand même trop intense&lt;/li&gt; &lt;li&gt; Vous utilisez votre tablette dans un environnement sombre, comme la nuit ou dans une salle sombre avant d\'aller vous coucher&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensité"</string>
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Diminuer"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"Augmenter"</string>
@@ -2614,7 +2614,7 @@
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Optimiser en fonction de votre usage. Ce réglage est recommandé pour la plupart des applications."</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Restreindre l\'utilisation de la pile lors du fonctionnement en arrière-plan. L\'application pourrait ne pas fonctionner comme prévu. Les notifications pourraient être retardées."</string>
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"La modification de la manière dont une application utilise la pile peut avoir une incidence sur ses performances."</string>
-    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"Cette application nécessite une utilisation de la pile <xliff:g id="STATE">%1$s</xliff:g>."</string>
+    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"Cette application nécessite une utilisation de la pile sans <xliff:g id="STATE">%1$s</xliff:g>."</string>
     <string name="manager_battery_usage_unrestricted_only" msgid="3646162131339418216">"aucune restriction"</string>
     <string name="manager_battery_usage_optimized_only" msgid="7121785281913056432">"optimisée"</string>
     <string name="manager_battery_usage_link_a11y" msgid="374918091821438564">"En savoir plus à propos des options d\'utilisation de la pile"</string>
@@ -2642,7 +2642,7 @@
     <string name="advanced_battery_title" msgid="3005993394776555079">"Utilisation de la pile"</string>
     <string name="history_details_title" msgid="8628584613889559355">"Détails de l\'historique"</string>
     <string name="advanced_battery_preference_title" msgid="3017771848679952419">"Autonomie de la pile"</string>
-    <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Voyez l\'utilisation des 24 dernières heures"</string>
+    <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Voir utilisation des dernières 24 heures"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Voir utilisation depuis dernière recharge"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"Utilisation de la pile"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Détails d\'utilisation"</string>
@@ -3424,8 +3424,8 @@
     <string name="restriction_wifi_config_summary" msgid="920419010472168694">"Autoriser les modifications des paramètres du Wi‑Fi et des données cellulaires"</string>
     <string name="restriction_bluetooth_config_title" msgid="220586273589093821">"Bluetooth"</string>
     <string name="restriction_bluetooth_config_summary" msgid="7558879931011271603">"Autoriser les modifications des associations et des paramètres Bluetooth"</string>
-    <string name="restriction_nfc_enable_title" msgid="525512312298242911">"NFC"</string>
-    <string name="restriction_nfc_enable_summary_config" msgid="8065688740509581028">"Autoriser l\'échange de données lorsque cet appareil (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>) touche un autre appareil NFC"</string>
+    <string name="restriction_nfc_enable_title" msgid="525512312298242911">"CCP"</string>
+    <string name="restriction_nfc_enable_summary_config" msgid="8065688740509581028">"Autoriser l\'échange de données lorsque cet appareil (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>) touche un autre appareil CCP"</string>
     <string name="restriction_nfc_enable_summary" product="tablet" msgid="6397567147629410131">"Autoriser l\'échange de données lorsque la tablette est en contact avec un autre appareil"</string>
     <string name="restriction_nfc_enable_summary" product="default" msgid="3331800894734678808">"Autoriser l\'échange de données lorsque le téléphone est en contact avecun autre appareil"</string>
     <string name="restriction_location_enable_title" msgid="4872281754836538066">"Position"</string>
@@ -3483,15 +3483,15 @@
     <string name="network_dashboard_summary_no_mobile" msgid="4022575916334910790">"Wi-Fi, point d\'accès"</string>
     <string name="connected_devices_dashboard_title" msgid="19868275519754895">"Appareils connectés"</string>
     <string name="connected_devices_dashboard_default_summary" msgid="7211769956193710397">"Bluetooth, association"</string>
-    <string name="connected_devices_dashboard_summary" msgid="6927727617078296491">"Bluetooth, mode Voiture, NFC"</string>
+    <string name="connected_devices_dashboard_summary" msgid="6927727617078296491">"Bluetooth, mode Voiture, CCP"</string>
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="8424794257586524040">"Bluetooth, mode Voiture"</string>
-    <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"Bluetooth, NFC"</string>
+    <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"Bluetooth, CCP"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"Bluetooth"</string>
-    <string name="connected_devices_dashboard_android_auto_summary" msgid="8179090809275818804">"Bluetooth, Android Auto, mode Voiture, NFC"</string>
+    <string name="connected_devices_dashboard_android_auto_summary" msgid="8179090809275818804">"Bluetooth, Android Auto, mode Voiture, CCP"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"Bluetooth, Android Auto, mode Voiture"</string>
-    <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
+    <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, CCP"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
-    <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Non accessible parce que la fonctionnalité NFC est désactivée"</string>
+    <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Non accessible parce que la technologie CCP est désactivée"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Pour l\'utiliser, installez d\'abord une application de paiement"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"Applis et notifications"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Applications récentes, applications par défaut"</string>
@@ -4257,7 +4257,7 @@
     </plurals>
     <string name="app_launch_supported_links_add" msgid="3271247750388016131">"Ajouter"</string>
     <string name="app_launch_supported_links_subtext" msgid="4268004019469184113">"S\'ouvre dans <xliff:g id="APP_LABEL">%s</xliff:g>"</string>
-    <string name="storage_summary_format" msgid="5721782272185284276">"<xliff:g id="SIZE">%1$s</xliff:g> utilisé dans <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
+    <string name="storage_summary_format" msgid="5721782272185284276">"<xliff:g id="SIZE">%1$s</xliff:g> utilisé(s) dans <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="979243131665635278">"stockage interne"</string>
     <string name="storage_type_external" msgid="125078274000280821">"stockage externe"</string>
     <string name="data_summary_format" msgid="8802057788950096650">"<xliff:g id="SIZE">%1$s</xliff:g> utilisés depuis <xliff:g id="DATE">%2$s</xliff:g>"</string>
@@ -4409,7 +4409,7 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Transfert de fichiers"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Transférer des fichiers vers un autre appareil"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
-    <string name="usb_transcode_files" msgid="2441954752105119109">"Convertir des vidéos en format AVC"</string>
+    <string name="usb_transcode_files" msgid="2441954752105119109">"Convertir des vidéos au format AVC"</string>
     <string name="usb_transcode_files_summary" msgid="307102635711961513">"Les vidéos joueront sur un plus grand nombre de lecteurs multimédias, mais la qualité peut être réduite"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Transferer des photos ou des fichiers si MTP n\'est pas pris en charge (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"Partage de connexion par USB"</string>
@@ -5355,7 +5355,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"CONTINUER"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"NON MERCI"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"Lieu"</string>
-    <string name="wfc_disclaimer_location_desc_text" msgid="2799241640320172899">"Il se peut que votre fournisseur de services recueille votre position pour vous fournir ce service.\n\nVeuillez consulter la politique de confidentialité de votre fournisseur de services."</string>
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"Votre fournisseur de services peut collecter les données relatives à votre position lorsque vous utilisez ce service en lien avec les appels d\'urgence.\n\nConsultez la politique de confidentialité de votre fournisseur de services pour obtenir plus de détails."</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"Vous risquez de perdre l\'accès au temps ou aux données restants. Communiquez avec votre fournisseur de services avant de procéder au retrait."</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"capture de contenu, contenu de l\'application"</string>
     <string name="content_capture" msgid="868372905432812238">"Contenu de l\'application"</string>
@@ -5508,7 +5508,7 @@
     <string name="do_not_disturb_main_switch_title_on" msgid="6965566556539821313">"Désactiver maintenant"</string>
     <string name="do_not_disturb_main_switch_title_off" msgid="7088088515823752545">"Activer maintenant"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Utiliser le mode Éclairage nocturne"</string>
-    <string name="nfc_main_switch_title" msgid="6295839988954817432">"Utiliser la connectivité NFC"</string>
+    <string name="nfc_main_switch_title" msgid="6295839988954817432">"Utiliser la technologie CCP"</string>
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"Utiliser le gestionnaire de pile adaptatif"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Utiliser la luminosité adaptative"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Utiliser les appels Wi-Fi"</string>

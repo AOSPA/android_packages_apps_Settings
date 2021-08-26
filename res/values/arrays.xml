@@ -229,6 +229,8 @@
         <!-- Do not translate. -->
         <item>@string/wifi_security_wpa2</item>
         <!-- Do not translate. -->
+        <item>@string/wifi_security_owe</item>
+        <!-- Do not translate. -->
         <item>@string/wifi_security_none</item>
     </string-array>
 
@@ -240,6 +242,8 @@
         <item>2</item>
         <!-- Do not translate. -->
         <item>1</item>
+        <!-- Do not translate. -->
+        <item>4</item>
         <!-- Do not translate. -->
         <item>0</item>
     </string-array>
@@ -1606,8 +1610,6 @@
     <!-- An allowlist which packages won't show summary in battery usage screen.
          [CHAR LIMIT=NONE] -->
     <string-array name="allowlist_hide_summary_in_battery_usage" translatable="false">
-        <!-- Google -->
-        <item>"com.google.android.googlequicksearchbox"</item>
     </string-array>
 
     <!-- An allowlist which packages won't show entry in battery usage screen.
