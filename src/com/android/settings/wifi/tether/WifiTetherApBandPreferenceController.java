@@ -180,8 +180,12 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
         if (is5GhzBandSupported()
                 && (mWifiManager.isBridgedApConcurrencySupported() || isVendorLegacyDualBandSupported())
                 && (config != null) && (config.getSecurityType() != SoftApConfiguration.SECURITY_TYPE_OWE)) {
-            bandEntries.add(String.valueOf(BAND_BOTH_2G_5G));
-            bandSummaries.add(mContext.getString(R.string.wifi_ap_choose_vendor_dual_band));
+            /* isConcurrentBandSupported indicates Concurrent band support
+             * for HW_SUPPORTED_FEATURES.*/
+            if (mWifiManager.isConcurrentBandSupported()) {
+                bandEntries.add(String.valueOf(BAND_BOTH_2G_5G));
+                bandSummaries.add(mContext.getString(R.string.wifi_ap_choose_vendor_dual_band));
+            }
         }
 
         mBandEntries = bandEntries.toArray(new String[bandEntries.size()]);
