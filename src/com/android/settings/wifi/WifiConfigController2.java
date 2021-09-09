@@ -708,8 +708,10 @@ public class WifiConfigController2 implements TextWatcher,
 
                 if (config.enterpriseConfig.isAuthenticationSimBased()
                         && mActiveSubscriptionInfos.size() > 0) {
-                    config.carrierId = mActiveSubscriptionInfos
-                            .get(mEapSimSpinner.getSelectedItemPosition()).getCarrierId();
+                    SubscriptionInfo subInfo =  mActiveSubscriptionInfos
+                            .get(mEapSimSpinner.getSelectedItemPosition());
+                    config.carrierId = subInfo.getCarrierId();
+                    config.subscriptionId = subInfo.getSubscriptionId();
                 }
 
                 String caCert = (String) mEapCaCertSpinner.getSelectedItem();
