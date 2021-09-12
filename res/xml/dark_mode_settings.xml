@@ -25,11 +25,6 @@
         android:title="@string/dark_ui_text"
         settings:searchable="false"/>
 
-    <com.android.settingslib.widget.MainSwitchPreference
-        android:key="dark_ui_activated"
-        android:title="@string/dark_theme_main_switch_title"
-        settings:controller="com.android.settings.display.darkmode.DarkModeActivationPreferenceController"/>
-
     <co.aospa.framework.preference.SecureSettingSwitchPreference
         android:key="system_black_theme"
         android:title="@string/system_black_theme_title"
@@ -40,6 +35,21 @@
         android:key="dark_ui_location_off"
         android:title="@string/twilight_mode_location_off_dialog_message"
         settings:controller="com.android.settings.display.TwilightLocationPreferenceController"/>
+    
+    <com.android.settingslib.widget.LayoutPreference
+        android:selectable="false"	
+        android:key="screen_display"
+        android:layout="@layout/darkmode_image_preview"
+        settings:allowDividerBelow="false"
+        settings:controller="com.android.settings.DisplayImagePreference"/>       
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="dark_ui_activated"
+        android:title="@string/dark_ui_title"
+        android:selectable="false"
+        android:layout="@layout/dark_ui_activation_button"
+        settings:allowDividerBelow="false"
+        settings:controller="com.android.settings.display.darkmode.DarkModeActivationPreferenceController"/>
 
     <DropDownPreference
         android:key="dark_ui_auto_mode"
@@ -48,6 +58,7 @@
         android:entries="@array/dark_ui_scheduler_preference_titles"
         android:entryValues="@array/dark_ui_scheduler_preference_titles"
         settings:controller="com.android.settings.display.darkmode.DarkModeScheduleSelectorController"
+        settings:iconSpaceReserved="false" 
         settings:keywords="@string/keywords_dark_ui_mode"/>
 
     <Preference
