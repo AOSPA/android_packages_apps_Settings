@@ -250,7 +250,11 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             highQualityAudioPref.setKey(HIGH_QUALITY_AUDIO_PREF_TAG);
             highQualityAudioPref.setVisible(false);
             highQualityAudioPref.setOnPreferenceClickListener(clickedPref -> {
+                highQualityAudioPref.setEnabled(false);
                 boolean enable = ((SwitchPreference) clickedPref).isChecked();
+                if ((a2dp.isMandatoryCodec(device) && !enable) ||
+                     (!a2dp.isMandatoryCodec(device) && enable))
+                     highQualityAudioPref.setEnabled(true);
                 a2dp.setHighQualityAudioEnabled(mCachedDevice.getDevice(), enable);
                 return true;
             });
@@ -303,6 +307,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             if (a2dp.isEnabled(device) && a2dp.supportsHighQualityAudio(device)) {
                 highQualityPref.setTitle(a2dp.getHighQualityAudioOptionLabel(device));
                 highQualityPref.setChecked(a2dp.isHighQualityAudioEnabled(device));
+                highQualityPref.setEnabled(true);
             }
         }
     }
