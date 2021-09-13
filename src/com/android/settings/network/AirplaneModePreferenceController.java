@@ -21,8 +21,12 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.ContentObserver;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.SettingsSlicesContract;
+import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
 import androidx.annotation.VisibleForTesting;
@@ -34,10 +38,13 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.AirplaneModeEnabler;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+
+import java.io.IOException;
 
 public class AirplaneModePreferenceController extends TogglePreferenceController
         implements LifecycleObserver, OnStart, OnStop, OnDestroy,
@@ -167,6 +174,74 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
     public void onAirplaneModeChanged(boolean isAirplaneModeOn) {
         if (mAirplaneModePreference != null) {
             mAirplaneModePreference.setChecked(isAirplaneModeOn);
+        }
+    }
+
+    /**
+     * According to slice framework, need override this function and provide background
+     * worker class to support slice's dynamic update.
+     */
+    @Override
+    public Class<? extends SliceBackgroundWorker> getBackgroundWorkerClass() {
+        return AirplaneModeSliceWorker.class;
+    }
+
+    /**
+     * Register content observer for URI Settings.Global.AIRPLANE_MODE_ON.
+     * If changed, notify airplane mode slice do rebind.
+     */
+    public static class AirplaneModeSliceWorker extends SliceBackgroundWorker<Void> {
+        private AirplaneModeContentObserver mContentObserver;
+
+        public AirplaneModeSliceWorker(Context context, Uri uri) {
+            super(context, uri);
+            final Handler handler = new Handler(Looper.getMainLooper());
+            mContentObserver = new AirplaneModeContentObserver(handler, this);
+        }
+
+        @Override
+        protected void onSlicePinned() {
+            mContentObserver.register(getContext());
+        }
+
+        @Override
+        protected void onSliceUnpinned() {
+            mContentObserver.unRegister(getContext());
+        }
+
+        @Override
+        public void close() throws IOException {
+            mContentObserver = null;
+        }
+
+        public void updateSlice() {
+            notifySliceChange();
+        }
+
+        public class AirplaneModeContentObserver extends ContentObserver {
+            private final AirplaneModeSliceWorker mSliceBackgroundWorker;
+
+            public AirplaneModeContentObserver(Handler handler,
+                                               AirplaneModeSliceWorker backgroundWorker) {
+                super(handler);
+                mSliceBackgroundWorker = backgroundWorker;
+            }
+
+            @Override
+            public void onChange(boolean selfChange) {
+                mSliceBackgroundWorker.updateSlice();
+            }
+
+            public void register(Context context) {
+                final Uri airplaneModeUri = Settings.Global.getUriFor(
+                        Settings.Global.AIRPLANE_MODE_ON);
+                context.getContentResolver().registerContentObserver(airplaneModeUri,
+                        false, this);
+            }
+
+            public void unRegister(Context context) {
+                context.getContentResolver().unregisterContentObserver(this);
+            }
         }
     }
 }
