@@ -208,6 +208,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
             mSwitchBarController.stopTether();
         }
         mWifiManager.setSoftApConfiguration(config);
+        use(WifiTetherAutoOffPreferenceController.class).updateDisplay();
 
         if (mSecurityPreferenceController.isOweDualSapSupported()) {
             if ((config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_OWE)
