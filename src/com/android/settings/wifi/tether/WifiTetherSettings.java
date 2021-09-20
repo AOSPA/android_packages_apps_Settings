@@ -57,6 +57,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     private static final String KEY_WIFI_TETHER_SCREEN = "wifi_tether_settings_screen";
     private static final int EXPANDED_CHILD_COUNT_WITH_SECURITY_NON = 3;
     private static final int EXPANDED_CHILD_COUNT_DEFAULT = 4;
+    private static boolean mWasApBand6GHzSelected = false;
+    private static final int BAND_6GHZ = SoftApConfiguration.BAND_6GHZ | SoftApConfiguration.BAND_2GHZ;
 
     @VisibleForTesting
     static final String KEY_WIFI_TETHER_NETWORK_NAME = "wifi_tether_network_name";
@@ -191,7 +193,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
 
     @Override
     public void onTetherConfigUpdated(AbstractPreferenceController context) {
-        final SoftApConfiguration config = buildNewConfig();
+        SoftApConfiguration config = buildNewConfig();
         mPasswordPreferenceController.setSecurityType(config.getSecurityType());
 
         /**
@@ -213,13 +215,25 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                 mApBandPreferenceController.updatePreferenceEntries();
                 mApBandPreferenceController.updateDisplay();
                 wasApBandPrefUpdated = true;
-            } else if (wasApBandPrefUpdated) {
+            } else if (wasApBandPrefUpdated
+                   && config.getSecurityType() != SoftApConfiguration.SECURITY_TYPE_OWE) {
                 mApBandPreferenceController.updatePreferenceEntries();
                 mApBandPreferenceController.updateDisplay();
                 wasApBandPrefUpdated = false;
             }
         }
 
+        if (mApBandPreferenceController.getBandIndex() == BAND_6GHZ
+                && (mWasApBand6GHzSelected == false)) {
+            mSecurityPreferenceController.updateDisplay();
+            mWasApBand6GHzSelected = true;
+            config = buildNewConfig();
+            mWifiManager.setSoftApConfiguration(config);
+        } else if (mApBandPreferenceController.getBandIndex() != BAND_6GHZ
+                &&(mWasApBand6GHzSelected == true)) {
+            mSecurityPreferenceController.updateDisplay();
+            mWasApBand6GHzSelected = false;
+        }
         if (context instanceof WifiTetherSecurityPreferenceController) {
             reConfigInitialExpandedChildCount();
         }
