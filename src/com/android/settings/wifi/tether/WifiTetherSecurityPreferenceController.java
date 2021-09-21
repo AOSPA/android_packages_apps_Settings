@@ -22,6 +22,7 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
 
     private static final String PREF_KEY = "wifi_tether_security";
     private static final String TAG = "WifiTetherSecurityPreferenceController";
+    private static final int BIT_DEVICE_DBS_CAPABLE = 13; /* QCA_WLAN_VENDOR_FEATURE_CONCURRENT_BAND_SESSIONS */
 
     private String[] mSecurityEntries;
     private String[] mSecurityValues;
@@ -30,6 +31,7 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
     private boolean mDualSoftApSupported;
     private boolean mSaeSapSupprted;
     private boolean mOweSapSupprted;
+    private boolean mConcurrentBandSupported;
     final Context mContext;
 
     private WifiManager.SoftApCallback mSoftApCallback = new WifiManager.SoftApCallback() {
@@ -49,13 +51,13 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
             if (capability.areFeaturesSupported(SoftApCapability.SOFTAP_FEATURE_WPA3_OWE))
                 mOweSapSupprted = true;
 
-
             if (mSaeSapSupprted) {
                 // Add SAE security type
                 securityValues.add(String.valueOf(SoftApConfiguration.SECURITY_TYPE_WPA3_SAE_TRANSITION));
                 securityEntries.add(mContext.getString(R.string.wifi_security_sae));
             }
-            if (mOweSapSupprted && mDualSoftApSupported) {
+
+            if (mOweSapSupprted && mDualSoftApSupported && isConcurrentBandSupported()) {
                 // Add OWE security type
                 securityValues.add(String.valueOf(SoftApConfiguration.SECURITY_TYPE_OWE));
                 securityEntries.add(mContext.getString(R.string.wifi_security_owe));
@@ -140,5 +142,17 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
 
     public boolean isOweSapSupported() {
         return mOweSapSupprted;
+    }
+
+    private boolean isConcurrentBandSupported() {
+        if (mConcurrentBandSupported) return true;
+
+        /* isConcurrentBandSupported gives mask of supported features.
+         * BIT_DEVICE_DBS_CAPABLE indicates Concurrent band support */
+        int concurrentBandFlags = mWifiManager.isConcurrentBandSupported();
+        mConcurrentBandSupported = (concurrentBandFlags > 0
+                && ((concurrentBandFlags >> BIT_DEVICE_DBS_CAPABLE) & 1) > 0);
+
+        return mConcurrentBandSupported;
     }
 }
