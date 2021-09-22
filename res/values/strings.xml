@@ -1994,6 +1994,11 @@
     <!-- Bluetooth developer settings: Maximum number of connected audio devices -->
     <string name="bluetooth_max_connected_audio_devices_dialog_title">Select maximum number of connected Bluetooth audio devices</string>
 
+    <!-- Nfc developer settings: The title of the setting. [CHAR LIMIT=60] -->
+    <string name="nfc_stack_debuglog_title">NFC stack debug log</string>
+    <!-- Nfc developer settings: The description of the setting. -->
+    <string name="nfc_stack_debuglog_summary">Increase NFC stack logging level</string>
+
     <!-- Wifi Display settings. The title of the screen. [CHAR LIMIT=40] -->
     <string name="wifi_display_settings_title">Cast</string>
     <!-- Wifi Display settings. The keywords of the setting. [CHAR LIMIT=NONE] -->
@@ -5304,8 +5309,18 @@
     <string name="select_to_speak_summary">Tap items on your screen to hear them read aloud</string>
     <!-- Title for the accessibility preference screen to enable video captioning. [CHAR LIMIT=35] -->
     <string name="accessibility_captioning_title">Caption preferences</string>
+    <!-- Title for accessibility captioning footer. [CHAR LIMIT=60] -->
+    <string name="accessibility_captioning_about_title">About caption preferences</string>
+    <!-- Accessibility captioning footer link content description [CHAR LIMIT=NONE] -->
+    <string name="accessibility_captioning_footer_learn_more_content_description">Learn more about caption preferences</string>
     <!-- Title for the accessibility preference screen to enable screen magnification. [CHAR LIMIT=35] -->
     <string name="accessibility_screen_magnification_title">Magnification</string>
+    <!-- Title for accessibility shortcut preference for magnification. [CHAR LIMIT=60] -->
+    <string name="accessibility_screen_magnification_shortcut_title">Magnification shortcut</string>
+    <!-- Title for screen magnification footer. [CHAR LIMIT=60] -->
+    <string name="accessibility_screen_magnification_about_title">About magnification</string>
+    <!-- Screen magnification footer link content description [CHAR LIMIT=NONE] -->
+    <string name="accessibility_screen_magnification_footer_learn_more_content_description">Learn more about magnification</string>
     <!-- Title for the accessibility preference screen to edit magnification area. [CHAR LIMIT=35] -->
     <string name="accessibility_magnification_mode_title">Magnification type</string>
     <!-- Message for the accessibility preference screen to edit magnification area dialog. [CHAR LIMIT=none] -->
@@ -5456,14 +5471,20 @@
     <string name="accessibility_button_title">Accessibility button</string>
     <!-- Title for the accessibility button & gesture page. [CHAR LIMIT=35] -->
     <string name="accessibility_button_gesture_title">Accessibility button &amp; gesture</string>
+    <!-- Title for the accessibility button footer. [CHAR LIMIT=35] -->
+    <string name="accessibility_button_about_title">About accessibility button</string>
+    <!-- Title for the accessibility button & gesture footer. [CHAR LIMIT=55] -->
+    <string name="accessibility_button_gesture_about_title">About accessibility button &amp; gesture</string>
+    <!-- Accessibility button & gestures footer link content description [CHAR LIMIT=NONE] -->
+    <string name="accessibility_button_gesture_footer_learn_more_content_description">Learn more about accessibility button &amp; gesture</string>
     <!-- Intro for the accessibility button page. [CHAR LIMIT=100] -->
     <string name="accessibility_button_intro">Using the accessibility button. The gesture isn\u2019t available with 3-button navigation.</string>
     <!-- Summary text for the accessibility button preference. [CHAR LIMIT=50] -->
     <string name="accessibility_button_summary">Quickly access accessibility features</string>
     <!-- Description for the accessibility button in gesture navigation. Explain how this page works. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_button_gesture_description">Quickly access accessibility features from any screen.\n\nTo get started, go to accessibility settings and select a feature. Tap on the shortcut and select the accessibility button.\n\nTo use the accessibility button in the navigation bar instead, switch to 2-button navigation or 3-button navigation.</string>
+    <string name="accessibility_button_gesture_description">Quickly access accessibility features from any screen.\n\nTo get started, go to accessibility settings and select a feature. Tap on the shortcut and select the accessibility button or gesture.</string>
     <!-- Description for the accessibility button page. Explain how this page works. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_button_description">Quickly access accessibility features from any screen. \n\nTo get started, go to accessibility settings and select a feature. Tap on the shortcut and select the accessibility button.</string>
+    <string name="accessibility_button_description">Quickly access accessibility features from any screen.\n\nTo get started, go to accessibility settings and select a feature. Tap on the shortcut and select the accessibility button.</string>
     <!-- Title for the button or gesture of the accessibility button. [CHAR LIMIT=35] -->
     <string name="accessibility_button_or_gesture_title">Use button or gesture</string>
     <!-- Title for the location of the accessibility button. [CHAR LIMIT=35] -->
@@ -5517,6 +5538,10 @@
     <string name="accessibility_timeout_2mins">2 minutes</string>
     <!-- Title for accessibility settings timeout item. [CHAR LIMIT=43] -->
     <string name="accessibility_setting_item_control_timeout_title">Time to take action (Accessibility timeout)</string>
+    <!-- Title for accessibility timeout footer. [CHAR LIMIT=65] -->
+    <string name="accessibility_control_timeout_about_title">About time to take action (Accessibility timeout)</string>
+    <!-- Accessibility timeout footer link content description [CHAR LIMIT=NONE] -->
+    <string name="accessibility_control_timeout_footer_learn_more_content_description">Learn more about time to take action (Accessibility timeout)</string>
     <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
     <string name="accessibility_control_timeout_preference_title">Time to take action</string>
     <!-- Descriptive text for accessibility preference to accessibility control timeout. [CHAR LIMIT=NONE] -->
@@ -5528,6 +5553,8 @@
     <string name="accessibility_display_inversion_preference_title">Color inversion</string>
     <!-- Used in the accessibility service settings to control turning display color inversion on/off entirely. [CHAR LIMIT=NONE] -->
     <string name="accessibility_display_inversion_switch_title">Use color inversion</string>
+    <!-- Title for accessibility shortcut preference for color inversion. [CHAR LIMIT=60] -->
+    <string name="accessibility_display_inversion_shortcut_title">Color inversion shortcut</string>
     <!-- Subtitle for the accessibility preference to configure display color inversion. [CHAR LIMIT=NONE] -->
     <string name="accessibility_display_inversion_preference_subtitle">
         <![CDATA[Color inversion turns light screens dark.<br/><br/>
@@ -5541,6 +5568,10 @@
     </string>
     <!-- Title for accessibility preference for configuring feature that performs click action soon after mouse/trackpad pointer stops moving. [CHAR LIMIT=NONE] -->
     <string name="accessibility_autoclick_preference_title">Autoclick (dwell timing)</string>
+    <!-- Title for accessibility dwell timing footer. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_autoclick_about_title">About autoclick (dwell timing)</string>
+    <!-- Accessibility dwell timing footer link content description [CHAR LIMIT=NONE] -->
+    <string name="accessibility_autoclick_footer_learn_more_content_description">Learn more about autoclick (dwell timing)</string>
     <!-- Footer text to explain what autoclick does -->
     <string name="accessibility_autoclick_description">Autoclick works with a connected mouse. You can set the mouse cursor to click automatically when the cursor stops moving for a certain amount of time.</string>
     <!-- Option heading to leave the auto click requirement for accessibility users at its default level. [CHAR LIMIT=50] -->
@@ -5579,6 +5610,16 @@
     <string name="accessibility_service_primary_open_title">Open <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g></string>
     <!-- Used in the Color correction settings screen to control turning on/off the feature entirely [CHAR LIMIT=60] -->
     <string name="accessibility_daltonizer_primary_switch_title">Use color correction</string>
+    <!-- Title for accessibility shortcut preference for color correction. [CHAR LIMIT=60] -->
+    <string name="accessibility_daltonizer_shortcut_title">Color correction shortcut</string>
+    <!-- Title for Color correction footer. [CHAR LIMIT=35] -->
+    <string name="accessibility_daltonizer_about_title">About color correction</string>
+    <!-- Color inversion footer link content description [CHAR LIMIT=NONE] -->
+    <string name="accessibility_daltonizer_footer_learn_more_content_description">Learn more about color correction</string>
+    <!-- Title for Color inversion footer. [CHAR LIMIT=35] -->
+    <string name="accessibility_color_inversion_about_title">About color inversion</string>
+    <!-- Color correction footer link content description [CHAR LIMIT=NONE] -->
+    <string name="accessibility_color_inversion_footer_learn_more_content_description">Learn more about color inversion</string>
     <!-- Title for Captions settings screen to control turning on/off the feature entirely [CHAR LIMIT=60] -->
     <string name="accessibility_caption_primary_switch_title">Show captions</string>
     <!-- Summary for Captions settings screen to control turning on/off the feature entirely [CHAR LIMIT=NONE] -->
@@ -5658,6 +5699,10 @@
     <string name="reduce_bright_colors_preference_title">Extra dim</string>
     <!-- Title for the activation switch of the Reduce Brightness feature. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_switch_title">Make screen extra dim</string>
+    <!-- Title for accessibility shortcut preference for Reduce Brightness. [CHAR LIMIT=60] -->
+    <string name="reduce_bright_colors_shortcut_title">Extra dim shortcut</string>
+    <!-- Title for Reduce Brightness feature footer. [CHAR LIMIT=35] -->
+    <string name="reduce_bright_colors_about_title">About extra dim</string>
     <!-- Summary for the accessibility preference to configure Reduce Brightness feature. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_preference_summary" product="default">Dim screen beyond your phone\u2019s minimum brightness</string>
     <!-- Summary for the accessibility preference to configure Reduce Brightness feature. [CHAR LIMIT=NONE] -->
@@ -11410,7 +11455,7 @@
     <!-- Title for switch to allow app unrestricted data usage [CHAR LIMIT=30] -->
     <string name="unrestricted_app_title">Unrestricted data usage</string>
 
-    <!-- Title for switch to allow app unrestricted data usage [CHAR LIMIT=30] -->
+    <!-- Title for switch to allow app unrestricted data usage [CHAR LIMIT=75] -->
     <string name="unrestricted_app_summary">Allow unrestricted data access when Data Saver is on</string>
 
     <!-- Button to switch the default home app [CHAR LIMIT=60] -->
@@ -11809,6 +11854,8 @@
     <string name="one_handed_title">One-handed mode</string>
     <!-- Preference Switch for enabling one handed [CHAR LIMIT=60] -->
     <string name="one_handed_mode_enabled">Use one-handed mode</string>
+    <!-- Title for accessibility shortcut preference for enabling one handed. [CHAR LIMIT=60] -->
+    <string name="one_handed_mode_shortcut_title">One-handed mode shortcut</string>
     <!-- Search keywords for "One-Handed" settings [CHAR_LIMIT=NONE] -->
     <string name="keywords_one_handed">reachability</string>
     <!-- Category title for one handed swipe down [CHAR_LIMIT=60] -->
@@ -12972,6 +13019,8 @@
     <string name="sim_action_reboot">Restart</string>
     <!-- Button on a dialog to reject SIM operations. [CHAR LIMIT=30] -->
     <string name="sim_action_no_thanks">No thanks</string>
+    <!-- Button text to cancel operations proposed by a sim operation dialog [CHAR LIMIT=20] -->
+    <string name="sim_action_cancel">Cancel</string>
     <!-- Button which will disconnect the user from one mobile network and immediately connect to another. [CHAR LIMIT=30] -->
     <string name="sim_switch_button">Switch</string>
     <!-- Title of DSDS activation failure dialog [CHAR LIMIT=40] -->
@@ -13364,6 +13413,11 @@
     <!-- Developer settings: app freezer title [CHAR LIMIT=50]-->
     <string name="cached_apps_freezer">Suspend execution for cached apps</string>
 
+    <!-- Developer settings - Shared data: label to indicate that the shared data never expires [CHAR LIMIT=80] -->
+    <string name="blob_never_expires_text">Never expires.</string>
+    <!-- Developer settings - Shared data: label to indicate that the lease acquired by an app never expires [CHAR LIMIT=80] -->
+    <string name="accessor_never_expires_text">Lease never expires.</string>
+
     <!-- Title for allowing screen overlays on Settings app. [CHAR LIMIT=50]-->
     <string name="overlay_settings_title">Allow screen overlays on Settings</string>
     <!-- Summary for allowing screen overlays on Settings app. [CHAR LIMIT=NONE]-->
@@ -13429,8 +13483,6 @@
     <string name="calls_sms_no_sim">No SIM</string>
     <!-- Network & internet preferences title [CHAR LIMIT=NONE] -->
     <string name="network_and_internet_preferences_title">Network preferences</string>
-    <!-- Network & internet preferences summary [CHAR LIMIT=NONE] -->
-    <string name="network_and_internet_preferences_summary">Connect to public networks</string>
     <!-- Search keywords for "Internet" settings [CHAR_LIMIT=NONE] -->
     <string name="keywords_internet">network connection, internet, wireless, data, wifi, wi-fi, wi fi, cellular, mobile, cell carrier, 4g, 3g, 2g, lte</string>
     <!-- Slice title text for turning on the Wi-Fi networks. [CHAR LIMIT=40] -->
@@ -13463,8 +13515,10 @@
     <string name="carrier_wifi_network_title">W+ network</string>
     <!-- Provider Model: title of SIM category -->
     <string name="sim_category_title">SIM</string>
-    <!-- Provider Model: title of Downloaded category. [CHAR LIMIT=50] -->
+    <!-- Provider Model: title of Downloaded SIM category. [CHAR LIMIT=50] -->
     <string name="downloaded_sim_category_title">DOWNLOADED SIM</string>
+    <!-- Provider Model: title of Downloaded SIMs category. [CHAR LIMIT=50] -->
+    <string name="downloaded_sims_category_title">DOWNLOADED SIMS</string>
     <!-- Provider Model: summary of Active in SIM category. [CHAR LIMIT=50] -->
     <string name="sim_category_active_sim">Active</string>
     <!-- Provider Model: summary of Inactive in SIM category. [CHAR LIMIT=50] -->
@@ -13678,4 +13732,194 @@
     <string name="nr_sa">SA</string>
     <string name="prefer_vonr_mode_title">Enable/Disable VoNR</string>
     <string name="prefer_vonr_mode_summary">Enable or disable VoNR</string>
+
+    <!-- Title for the button to edit The Android Resource Economy settings. "TARE" is the name of
+    the feature that contains the AlarmManager and JobScheduler policies which are both android
+    APIs. AlarmManager and JobScheduler are the names of Android system services and cannot be
+    translated. "TARE" is not translatable. [CHAR LIMIT=NONE] -->
+    <string name="tare_title" translatable="false">TARE</string>
+    <!-- TARE settings title in developer options; "TARE" is the name of the feature and cannot be
+     translated. [CHAR LIMIT=40] -->
+    <string name="tare_settings">TARE Settings</string>
+    <!-- Allows user to revert the TARE settings to their default values [CHAR LIMIT=40] -->
+    <string name="tare_revert">Revert to Default Settings</string>
+    <!-- Allows user to view AlarmManager policy factors. Alarm in this context is referring to the
+    possible alarm cases in the AlarmManager policy. AlarmManager is the name of an Android system
+    service and cannot be translated. [CHAR LIMIT=40]-->
+    <string name="tare_alarmmanager" translatable="false">AlarmManager</string>
+    <!-- Allows user to view JobScheduler policy factors. JobScheduler is the name of an Android
+    system service and cannot be translated.[CHAR LIMIT=40]-->
+    <string name="tare_jobscheduler" translatable="false">JobScheduler</string>
+    <!-- Toast notifying the developer that settings were reverted to their default values in
+    TARE [CHAR LIMIT=40]-->
+    <string name="tare_settings_reverted_toast">Settings reverted to default.</string>
+    <!-- Title for the TARE policy factor that determines the maximum credits an app can have in one
+    battery life cycle. Satiated means battery is fully charged; If this is not easily translatable,
+    translate "maximum balance when device is fully charged" instead. [CHAR LIMIT=40]-->
+    <string name="tare_max_satiated_balance">Maximum Satiated Balance</string>
+    <!-- Title for the TARE policy factor that determines the maximum credits in circulation between
+    all the apps [CHAR LIMIT=40]-->
+    <string name="tare_max_circulation">Maximum Circulation</string>
+    <!-- Title for the TARE policy factor that determines the minimum credits an app can have in one
+    battery life cycle. Satiated means battery is fully charged; If this is not easily translatable,
+    translate "minimum balance when device is fully charged" instead. [CHAR LIMIT=40]-->
+    <string name="tare_min_satiated_balance">Minimum Satiated Balance</string>
+    <!-- Title for the various modifiers that alter the cost of TARE tasks based on battery status
+    (charging, power save mode, etc.) [CHAR LIMIT=40]-->
+    <string name="tare_modifiers">Modifiers</string>
+    <!-- Title for the various TARE policy's action's cost to produce and price paid by
+    apps [CHAR LIMIT=40]-->
+    <string name="tare_actions">Actions</string>
+    <!-- Title for the instant, ongoing, and max rewards apps can obtain for different actions that
+    benefit the user. [CHAR LIMIT=40]-->
+    <string name="tare_rewards">Rewards</string>
+    <!-- Title for the Allow While Idle Exact Wakeup Alarm set via
+    AlarmManager.setExactAndAllowWhileIdle() [CHAR LIMIT=40]-->
+    <string name="tare_wakeup_exact_idle" translatable="false">
+        Allow While Idle Exact Wakeup Alarm</string>
+    <!-- Title for the Allow While Idle Inexact Wakeup Alarm set via
+    AlarmManager.setAndAllowWhileIdle() [CHAR LIMIT=40]-->
+    <string name="tare_wakeup_inexact_idle" translatable="false">
+        Allow While Idle Inexact Wakeup Alarm</string>
+    <!-- Title for the Exact Wakeup Alarm set via AlarmManager.setExact() [CHAR LIMIT=40]-->
+    <string name="tare_wakeup_exact" translatable="false">Exact Wakeup Alarm</string>
+    <!-- Title for the Inexact Wakeup Alarm set via AlarmManager.set() [CHAR LIMIT=40]-->
+    <string name="tare_wakeup_inexact" translatable="false">Inexact Wakeup Alarm</string>
+    <!-- Title for the Allow While Idle Exact NonWakeup Alarm set via
+    AlarmManager.setExactAndAllowWhileIdle() [CHAR LIMIT=40]-->
+    <string name="tare_nonwakeup_exact_idle" translatable="false">
+        Allow While Idle Exact NonWakeup Alarm</string>
+    <!-- Title for the Exact NonWakeup Alarm set via AlarmManager.setExact() [CHAR LIMIT=40]-->
+    <string name="tare_nonwakeup_exact" translatable="false">Exact NonWakeup Alarm</string>
+    <!-- Title for the Allow While Idle Inexact NonWakeup Alarm set via
+    AlarmManager.setAndAllowWhileIdle() [CHAR LIMIT=40]-->
+    <string name="tare_nonwakeup_inexact_idle" translatable="false">
+        Allow While Idle Inexact NonWakeup Alarm</string>
+    <!-- Title for the Inexact NonWakeup Alarm set via AlarmManager.set() [CHAR LIMIT=40]-->
+    <string name="tare_nonwakeup_inexact" translatable="false">Inexact NonWakeup Alarm</string>
+    <!-- Title for the AlarmClock alarm set via AlarmManager.setAlarmClock() [CHAR LIMIT=40]-->
+    <string name="tare_alarm_clock" translatable="false">AlarmClock</string>
+    <!-- Exempted apps are those apps exempted from most power saving features. [CHAR LIMIT=40]-->
+    <string name="tare_exempted">Exempted</string>
+    <!-- A headless system app is a preinstalled app that does not have any activities/UI that the
+    user can interact with. [CHAR LIMIT=40]-->
+    <string name="tare_headless_app">Headless System App</string>
+    <!-- Other apps are those apps interacted with by users that are not exempted or headless
+    system apps. [CHAR LIMIT=40]-->
+    <string name="tare_other_app">Other App</string>
+    <!-- Top activity means an app is in the TOP android process state and is thus visible to the
+    user[CHAR LIMIT=40]-->
+    <string name="tare_top_activity">Top Activity</string>
+    <!-- An event type denoting that a notification was viewed by the user, as defined in
+    UsageEvents.java [CHAR LIMIT=40]-->
+    <string name="tare_notification_seen">Notification Seen</string>
+    <!-- An event type denoting that a notification was viewed by the user within 15 minutes
+    [CHAR LIMIT=40]-->
+    <string name="tare_notification_seen_15_min">Notification Seen Within 15 Minutes</string>
+    <!-- An event type denoting that a notification was interacted with in some way by the user
+    [CHAR LIMIT=40]-->
+    <string name="tare_notification_interaction">Notification Interaction</string>
+    <!-- An event type denoting that an app's widget was interacted with in some way by the user
+    [CHAR LIMIT=40]-->
+    <string name="tare_widget_interaction">Widget Interaction</string>
+    <!-- An event type denoting that an app was interacted with in some way by the user
+    [CHAR LIMIT=40]-->
+    <string name="tare_other_interaction">Other User Interaction</string>
+    <!-- Title for the initiation of a max priority job by an app as defined in the JobScheduler
+     API [CHAR LIMIT=40]-->
+    <string name="tare_job_max_start">Job Max Start</string>
+    <!-- Title for the process of carrying out of a max priority job by an app as defined in the
+    JobScheduler API [CHAR LIMIT=40]-->
+    <string name="tare_job_max_running">Job Max Running</string>
+    <!-- Title for the initiation of a high priority job by an app as defined in the JobScheduler
+    API [CHAR LIMIT=40]-->
+    <string name="tare_job_high_start">Job High Start</string>
+    <!-- Title for the process of carrying out of a high priority job by an app as defined in the
+    JobScheduler API [CHAR LIMIT=40]-->
+    <string name="tare_job_high_running">Job High Running</string>
+    <!-- Title for the initiation of a default priority job by an app as defined in the JobScheduler
+    API [CHAR LIMIT=40]-->
+    <string name="tare_job_default_start">Job Default Start</string>
+    <!-- Title for the process of carrying out of a default priority job by an app as defined in the
+    JobScheduler API [CHAR LIMIT=40]-->
+    <string name="tare_job_default_running">Job Default Running</string>
+    <!-- Title for the initiation of a low priority job by an app as defined in the JobScheduler
+    API [CHAR LIMIT=40]-->
+    <string name="tare_job_low_start">Job Low Start</string>
+    <!-- Title for the process of carrying out of a low priority job by an app as defined in the
+    JobScheduler API [CHAR LIMIT=40]-->
+    <string name="tare_job_low_running">Job Low Running</string>
+    <!-- Title for the initiation of a minimum priority job by an app as defined in the JobScheduler
+    API [CHAR LIMIT=40]-->
+    <string name="tare_job_min_start">Job Min Start</string>
+    <!-- Title for the process of carrying out of a minimum priority job by an app as defined in the
+    JobScheduler API [CHAR LIMIT=40]-->
+    <string name="tare_job_min_running">Job Min Running</string>
+    <!-- Title for the penalty an app receives for letting a job use the maximum execution time and
+     time out [CHAR LIMIT=40]-->
+    <string name="tare_job_timeout_penalty">Job Timeout Penalty</string>
+    <!-- Titles for the minimum satiated credit balances for different types of apps
+    (per battery cycle). Satiated means battery is fully charged. [CHAR LIMIT=40]-->
+    <string-array name="tare_min_satiated_balance_subfactors" translatable="false">
+        <item>@string/tare_exempted</item>
+        <item>@string/tare_headless_app</item>
+        <item>@string/tare_other_app</item>
+    </string-array>
+    <!-- Various modifier subfactors that alter the cost of TARE tasks depending on what battery
+    state the device is in [CHAR LIMIT=40]-->
+    <string-array name="tare_modifiers_subfactors">
+        <item>Charging</item>
+        <!-- Doze refers to the Android Doze feature -->
+        <item>Doze</item>
+        <item>Power Save Mode</item>
+        <!-- An app's process state is the internal level of an app's process inside the system -->
+        <item>Process State</item>
+    </string-array>
+    <!-- Various AlarmManager alarms with different costs to produce and price paid by apps
+    if they want to produce these alarms. Alarm in this context refers to the possible alarm cases
+    in AlarmManager. [CHAR LIMIT=40]-->
+    <string-array name="tare_alarm_manager_actions" translatable="false">
+        <item>@string/tare_wakeup_exact_idle</item>
+        <item>@string/tare_wakeup_inexact_idle</item>
+        <item>@string/tare_wakeup_exact</item>
+        <item>@string/tare_wakeup_inexact</item>
+        <item>@string/tare_nonwakeup_exact_idle</item>
+        <item>@string/tare_nonwakeup_exact</item>
+        <item>@string/tare_nonwakeup_inexact_idle</item>
+        <item>@string/tare_nonwakeup_inexact</item>
+        <item>@string/tare_alarm_clock</item>
+    </string-array>
+    <!-- Titles for the different rewards apps could obtain for actions that benefit the user;
+    each has instant, ongoing, and max credit rewards apps could gain [CHAR LIMIT=40]-->
+    <string-array name="tare_rewards_subfactors" translatable="false">
+        <item>@string/tare_top_activity</item>
+        <item>@string/tare_notification_seen</item>
+        <item>@string/tare_notification_seen_15_min</item>
+        <item>@string/tare_notification_interaction</item>
+        <item>@string/tare_widget_interaction</item>
+        <item>@string/tare_other_interaction</item>
+    </string-array>
+    <!-- Various JobScheduler tasks with different costs to produce and willingness to pay by apps
+    if they want to carry out these different tasks [CHAR LIMIT=40]-->
+    <string-array name="tare_job_scheduler_actions" translatable="false">
+        <item>@string/tare_job_max_start</item>
+        <item>@string/tare_job_max_running</item>
+        <item>@string/tare_job_high_start</item>
+        <item>@string/tare_job_high_running</item>
+        <item>@string/tare_job_default_start</item>
+        <item>@string/tare_job_default_running</item>
+        <item>@string/tare_job_low_start</item>
+        <item>@string/tare_job_low_running</item>
+        <item>@string/tare_job_min_start</item>
+        <item>@string/tare_job_min_running</item>
+        <item>@string/tare_job_timeout_penalty</item>
+    </string-array>
+    <!-- Array used to populate dropdown menu with the different policies in the TARE
+    settings [CHAR LIMIT=40]-->
+    <string-array name="tare_policies" translatable="false">
+        <item>@string/tare_alarmmanager</item>
+        <item>@string/tare_jobscheduler</item>
+    </string-array>
+    <!-- TARE dialog button to proceed with a value change [CHAR LIMIT=none] -->
+    <string name="tare_dialog_confirm_button_title">Confirm</string>
 </resources>

@@ -886,6 +886,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="6993526033095292609">"Tandaan ang mga setting"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maximum na nakakonektang mga Bluetooth audio device"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Piliin ang maximum na bilang ng mga nakakonektang Bluetooth audio device"</string>
+    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Log ng pag-debug ng stack ng NFC"</string>
+    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Pataasin ang antas ng pag-log ng stack ng NFC"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"I-cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"mirror"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"I-enable ang wireless display"</string>
@@ -2286,7 +2288,12 @@
     <string name="talkback_summary" msgid="5820927220378864281">"Screen reader na pangunahing nakalaan para sa mga taong bulag at malabo ang paningin"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Mag-tap ng mga item sa iyong screen upang marinig ang mga ito na binabasa nang malakas"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Mga kagustuhan sa caption"</string>
+    <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"Tungkol sa mga kagustuhan sa caption"</string>
+    <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Matuto pa tungkol sa mga kagustuhan sa caption"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Pag-magnify"</string>
+    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Shortcut ng pag-magnify"</string>
+    <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Tungkol sa pag-magnify"</string>
+    <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"Matuto pa tungkol sa pag-magnify"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Uri ng pag-magnify"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"I-magnify ang iyong buong screen o ang partikular na bahagi, o magpalipat-lipat sa dalawang opsyon"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Full screen"</string>
@@ -2355,10 +2362,13 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Payagang mag-on ang shortcut ng feature mula sa lock screen. Pindutin nang matagal ang parehong volume key nang ilang segundo."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Button ng accessibility"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Button ng accessibility at galaw"</string>
+    <string name="accessibility_button_about_title" msgid="3581116105084067926">"Tungkol sa button ng accessibility"</string>
+    <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"Tungkol sa button ng accessibility at paggalaw"</string>
+    <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Matuto pa tungkol sa button ng accessibility at paggalaw"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Paggamit sa button ng accessibility. Hindi available ang galaw sa 3-button na navigaton."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Madaling i-access ang mga feature ng accessibility"</string>
-    <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"Mabilis na i-access ang mga feature ng pagiging naa-access mula sa anumang screen.\n\nPara magsimula, pumunta sa mga setting ng accessibility at pumili ng feature. Mag-tap sa shortcut at piliin ang button o galaw ng accessibility.\n\nPara gamitin na lang ang button ng accessibility sa navigation bar, lumipat sa 2-button na navigation o 3-button na navigation."</string>
-    <string name="accessibility_button_description" msgid="7372405202698400339">"Mabilis na i-access ang mga feature sa pagiging naa-access mula sa anumang screen. \n\nPara magsimula, pumunta sa mga setting ng accessibility at pumili ng feature. I-tap ang shortcut at piliin ang button ng accessibility."</string>
+    <string name="accessibility_button_gesture_description" msgid="785178810659647474">"Mabilis na i-access ang mga feature ng pagiging naa-access mula sa anumang screen. \n\nPara magsimula, pumunta sa mga setting ng pagiging naa-access at pumili ng feature. I-tap ang shortcut at piliin ang button o galaw ng pagiging accessible."</string>
+    <string name="accessibility_button_description" msgid="3664784100487881054">"Mabilis na i-access ang mga feature ng pagiging naa-access mula sa anumang screen.\n\nPara magsimula, pumunta sa mga setting ng pagiging accessible at pumili ng feature. I-tap ang shortcut at piliin ang button ng pagiging accessible."</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Gamitin ang button o galaw"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Lokasyon"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Laki"</string>
@@ -2384,13 +2394,18 @@
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 minuto"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 minuto"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Tagal ng aksyon (Timeout ng accessibility)"</string>
+    <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"Tungkol sa tagal ng aksyon (Timeout ng accessibility)"</string>
+    <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"Matuto pa tungkol sa tagal ng aksyon (Timeout ng accessibility)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Tagal ng pag-aksyon"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Piliin kung gaano katagal ipapakita ang mga mensaheng humihiling sa iyong umaksyon, ngunit pansamantala lang makikita.\n\nHindi lahat ng app ay sumusuporta sa setting na ito."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Pindutin nang matagal ang delay"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Pag-invert ng kulay"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Gamitin ang pag-invert ng kulay"</string>
+    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Shortcut ng pag-invert ng kulay"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"Pinapadilim ng pag-invert ng kulay ang maliliwanag na screen.&lt;br/&gt;&lt;br/&gt; Tandaan: &lt;ol&gt; &lt;li&gt; Pinapaliwanag din ng pag-invert ng kulay ang madidilim na screen.&lt;/li&gt; &lt;li&gt; Magbabago ang mga kulay ng media at mga larawan.&lt;/li&gt; &lt;li&gt; Puwedeng gamitin ang Madilim na tema para maging madilim ang background. Gumagana ang madilim na tema sa mga sinusuportahang app. Gumagana ang pag-invert ng kulay sa lahat ng app.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Awtomatikong pag-click (oras ng pananatili)"</string>
+    <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Tungkol sa autoclick (dwell timing)"</string>
+    <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Matuto pa tungkol sa awtomatikong pag-click (oras ng pananatili)"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"Gumagana ang awtomatikong pag-click sa konektadong mouse. Puwede mong itakdang awtomatikong mag-click ang cursor ng mouse kapag huminto sa paggalaw ang cursor sa loob ng partikular na tagal ng oras."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"I-off"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Maikli"</string>
@@ -2410,6 +2425,11 @@
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Gamitin ang <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Buksan ang <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Gumamit ng pagtatama ng kulay"</string>
+    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Shortcut ng pagtatama ng kulay"</string>
+    <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"Tungkol sa pagtatama ng kulay"</string>
+    <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Matuto pa tungkol sa pagtatama ng kulay"</string>
+    <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Tungkol sa pag-invert ng kulay"</string>
+    <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Matuto pa tungkol sa pag-invert ng kulay"</string>
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"Ipakita ang mga caption"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"Para sa sinusuportahang app lang"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Laki at istilo ng caption"</string>
@@ -2449,6 +2469,8 @@
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Asul-dilaw"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Extra dim"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Gawing extra dim ang screen"</string>
+    <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Shortcut ng extra dim"</string>
+    <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Tungkol sa extra dim"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Padilimin ang screen nang lampas sa minimum na liwanag ng iyong telepono"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Padilimin ang screen nang lampas sa minimum na liwanag ng iyong tablet"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Gawing mas madilim ang iyong screen para maging mas kumportableng magbasa.&lt;br/&gt;&lt;br/&gt; Puwede itong makatulong kapag: &lt;ol&gt; &lt;li&gt; Masyado pa ring maliwanag ang default na minimum na liwanag ng iyong telepono&lt;/li&gt; &lt;li&gt; Ginagamit mo ang iyong telepono sa madidilim na sitwasyon, halimbawa, kapag gabi o sa madilim na kuwarto bago matulog&lt;/li&gt; &lt;/ol&gt;"</string>
@@ -4840,6 +4862,7 @@
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Mag-double tap upang suriin ang device"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"One-hand mode"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Gumamit ng one-handed mode"</string>
+    <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"Shortcut sa one-handed mode"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"reachability"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Mag-swipe pababa para"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Gamitin ang shortcut sa"</string>
@@ -5271,6 +5294,7 @@
     <string name="sim_action_yes" msgid="8076556020131395515">"Oo"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"I-restart"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"Huwag na lang"</string>
+    <string name="sim_action_cancel" msgid="2668099867029610910">"Kanselahin"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Lumipat"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Hindi ma-activate ang SIM"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Alisin ang SIM at ilagay ito ulit. Kung magpapatuloy ang problema, i-restart ang iyong device."</string>
@@ -5415,6 +5439,8 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"Kapag gumagamit ng 2 SIM, magiging limitado sa 4G ang tablet na ito. "<annotation id="url">"Matuto pa"</annotation></string>
     <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"Kapag gumagamit ng 2 SIM, magiging limitado sa 4G ang device na ito. "<annotation id="url">"Matuto pa"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Suspindihin: pag-execute para sa naka-cache na app"</string>
+    <string name="blob_never_expires_text" msgid="7293376386620106623">"Hindi kailanman nag-e-expire."</string>
+    <string name="accessor_never_expires_text" msgid="4647624492147788340">"Hindi kailanman nag-e-expire ang lease."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Payagan ang pag-overlay sa screen sa Mga Setting"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Payagang mag-overlay sa mga screen ng Mga Setting ang mga app na puwedeng lumabas sa ibabaw ng ibang app"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
@@ -5445,7 +5471,6 @@
     <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"Pansamantalang hindi available"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"Walang SIM"</string>
     <string name="network_and_internet_preferences_title" msgid="8635896466814033405">"Mga kagustuhan sa network"</string>
-    <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Kumonekta sa mga pampublikong network"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"koneksyon ng network, internet, wireless, data, wifi, wi-fi, wi fi, cellular, mobile, cell carrier, 4g, 3g, 2g, lte"</string>
     <string name="turn_on_wifi" msgid="4868116014727533668">"I-on ang Wi-Fi"</string>
     <string name="turn_off_wifi" msgid="8861028501067400694">"I-off ang Wi-Fi"</string>
@@ -5463,6 +5488,7 @@
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"W+ network"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
     <string name="downloaded_sim_category_title" msgid="8611467223348446658">"NA-DOWNLOAD NA SIM"</string>
+    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"MGA NA-DOWNLOAD NA SIM"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Aktibo"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Hindi aktibo"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Default para sa <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -5550,4 +5576,39 @@
     <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"Gustong kumonekta ng <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> sa teleponong ito.\n\nHindi ka pa nakakakonekta sa <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> dati."</string>
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Huwag kumonekta"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Kumonekta"</string>
+    <string name="tare_settings" msgid="3788654800004869077">"Mga Setting ng TARE"</string>
+    <string name="tare_revert" msgid="3855325741125236638">"Bumalik sa Mga Default na Setting"</string>
+    <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Ibinalik sa default ang mga setting."</string>
+    <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Max na Balanse Kapag Ganap na Na-charge"</string>
+    <string name="tare_max_circulation" msgid="1119152898303214809">"Maximum na Pag-ikot"</string>
+    <string name="tare_min_satiated_balance" msgid="8038047539584856564">"Min na Balanse Kapag Ganap na Na-charge"</string>
+    <string name="tare_modifiers" msgid="8919975635360280820">"Mga Modifier"</string>
+    <string name="tare_actions" msgid="4573323466443513639">"Mga Pagkilos"</string>
+    <string name="tare_rewards" msgid="602131401590928885">"Mga Reward"</string>
+    <string name="tare_exempted" msgid="223247432456678980">"Hindi Kasama"</string>
+    <string name="tare_headless_app" msgid="6523878455829211651">"Headless System App"</string>
+    <string name="tare_other_app" msgid="4361184813378127700">"Ibang App"</string>
+    <string name="tare_top_activity" msgid="7266560655483385757">"Nangungunang Aktibidad"</string>
+    <string name="tare_notification_seen" msgid="7829963536020087742">"Nakita ang Notification"</string>
+    <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Nakita ang Notification sa loob ng 15Min"</string>
+    <string name="tare_notification_interaction" msgid="3806204222322830129">"Interaction sa Notification"</string>
+    <string name="tare_widget_interaction" msgid="2260701564089214184">"Interaction sa Widget"</string>
+    <string name="tare_other_interaction" msgid="8069163421115212751">"Interaction ng Ibang User"</string>
+    <string name="tare_job_max_start" msgid="1586399578665940836">"Sinimulan: Trabaho (Max na Priyoridad)"</string>
+    <string name="tare_job_max_running" msgid="2897217372986518495">"Gumagana: Trabaho (Max na Priyoridad)"</string>
+    <string name="tare_job_high_start" msgid="7464143754932031022">"Sinimulan: Trabaho (Mataas na Priyoridad)"</string>
+    <string name="tare_job_high_running" msgid="6541171046405088669">"Gumagana: Trabaho (Mataas na Priyoridad)"</string>
+    <string name="tare_job_default_start" msgid="6744427210148953151">"Sinimulan: Trabaho (Default na Priyoridad)"</string>
+    <string name="tare_job_default_running" msgid="8429081804128945217">"Gumagana: Trabaho (Default na Priyoridad)"</string>
+    <string name="tare_job_low_start" msgid="4605440035856891746">"Sinimulan: Trabaho (Mababang Priyoridad)"</string>
+    <string name="tare_job_low_running" msgid="831668616902849604">"Gumagana: Trabaho (Mababang Priyoridad)"</string>
+    <string name="tare_job_min_start" msgid="6508233901992538188">"Sinimulan: Trabaho (Min na Priyoridad)"</string>
+    <string name="tare_job_min_running" msgid="6167128996320622604">"Gumagana: Trabaho (Min na Priyoridad)"</string>
+    <string name="tare_job_timeout_penalty" msgid="7644332836795492506">"Penalty sa Timeout ng Trabaho"</string>
+  <string-array name="tare_modifiers_subfactors">
+    <item msgid="3325940509857535498">"Pag-charge"</item>
+    <item msgid="658627268149681677">"Pag-doze"</item>
+    <item msgid="1599558140284643834">"Power Save Mode"</item>
+    <item msgid="588427840913221601">"Status ng Pagproseso"</item>
+  </string-array>
 </resources>

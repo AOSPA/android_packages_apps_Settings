@@ -66,12 +66,13 @@ import com.android.settings.wifi.AddNetworkFragment;
 import com.android.settings.wifi.AddWifiNetworkPreference;
 import com.android.settings.wifi.ConfigureWifiEntryFragment;
 import com.android.settings.wifi.ConnectedWifiEntryPreference;
+import com.android.settings.wifi.LongPressWifiEntryPreference;
 import com.android.settings.wifi.WifiConfigUiBase2;
 import com.android.settings.wifi.WifiConnectListener;
 import com.android.settings.wifi.WifiDialog2;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settings.wifi.WifiUtils;
-import com.android.settings.wifi.details2.WifiNetworkDetailsFragment2;
+import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtils;
@@ -80,7 +81,6 @@ import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.LayoutPreference;
-import com.android.settingslib.wifi.LongPressWifiEntryPreference;
 import com.android.settingslib.wifi.WifiSavedConfigUtils;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
@@ -710,6 +710,11 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
             Log.i(TAG, "onWifiStateChanged called with wifi state: " + wifiState);
         }
 
+        if (isFinishingOrDestroyed()) {
+            Log.w(TAG, "onWifiStateChanged shouldn't run when fragment is finishing or destroyed");
+            return;
+        }
+
         switch (wifiState) {
             case WifiManager.WIFI_STATE_ENABLED:
                 updateWifiEntryPreferences();
@@ -924,11 +929,11 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
                         : context.getText(R.string.pref_title_network_details);
 
         final Bundle bundle = new Bundle();
-        bundle.putString(WifiNetworkDetailsFragment2.KEY_CHOSEN_WIFIENTRY_KEY, wifiEntry.getKey());
+        bundle.putString(WifiNetworkDetailsFragment.KEY_CHOSEN_WIFIENTRY_KEY, wifiEntry.getKey());
 
         new SubSettingLauncher(context)
                 .setTitleText(title)
-                .setDestination(WifiNetworkDetailsFragment2.class.getName())
+                .setDestination(WifiNetworkDetailsFragment.class.getName())
                 .setArguments(bundle)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .launch();
@@ -961,12 +966,10 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     @VisibleForTesting
     void setAdditionalSettingsSummaries() {
-        if (!FeatureFlagUtils.isEnabled(getContext(), FeatureFlagUtils.SETTINGS_PROVIDER_MODEL)) {
-            mConfigureWifiSettingsPreference.setSummary(getString(
-                    isWifiWakeupEnabled()
-                            ? R.string.wifi_configure_settings_preference_summary_wakeup_on
-                            : R.string.wifi_configure_settings_preference_summary_wakeup_off));
-        }
+        mConfigureWifiSettingsPreference.setSummary(getString(
+                isWifiWakeupEnabled()
+                        ? R.string.wifi_configure_settings_preference_summary_wakeup_on
+                        : R.string.wifi_configure_settings_preference_summary_wakeup_off));
 
         final int numSavedNetworks = mWifiPickerTracker.getNumSavedNetworks();
         final int numSavedSubscriptions = mWifiPickerTracker.getNumSavedSubscriptions();
@@ -981,6 +984,11 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     private String getSavedNetworkSettingsSummaryText(
             int numSavedNetworks, int numSavedSubscriptions) {
+        if (getResources() == null) {
+            Log.w(TAG, "getSavedNetworkSettingsSummaryText shouldn't run if resource is not ready");
+            return null;
+        }
+
         if (numSavedSubscriptions == 0) {
             return getResources().getQuantityString(R.plurals.wifi_saved_access_points_summary,
                     numSavedNetworks, numSavedNetworks);
@@ -1082,7 +1090,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @Override
     public void onScan(WifiDialog2 dialog, String ssid) {
         // Launch QR code scanner to join a network.
-        startActivityForResult(WifiDppUtils.getEnrolleeQrCodeScannerIntent(ssid),
+        startActivityForResult(
+                WifiDppUtils.getEnrolleeQrCodeScannerIntent(dialog.getContext(), ssid),
                 REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER);
     }
 
@@ -1174,7 +1183,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     private void launchConfigNewNetworkFragment(WifiEntry wifiEntry) {
         final Bundle bundle = new Bundle();
-        bundle.putString(WifiNetworkDetailsFragment2.KEY_CHOSEN_WIFIENTRY_KEY,
+        bundle.putString(WifiNetworkDetailsFragment.KEY_CHOSEN_WIFIENTRY_KEY,
                 wifiEntry.getKey());
         new SubSettingLauncher(getContext())
                 .setTitleText(wifiEntry.getTitle())
