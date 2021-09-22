@@ -12714,6 +12714,12 @@
     <!-- Mobile network setting screen, summary of Mobile data switch preference when the network
          is unavailable, the preference selection will be disabled. [CHAR LIMIT=NONE] -->
     <string name="mobile_data_settings_summary_unavailable">No SIM card available</string>
+    <!-- Mobile network setting screen, summary of Mobile data switch preference of default data
+         SUB when the call is ongoing on non-default data SUB, the preference selection will be
+         disabled. [CHAR LIMIT=NONE] -->
+    <string name="mobile_data_settings_summary_default_data_unavailable">
+        Data will automatically switch to this carrier after call ends
+    </string>
 
     <!-- Mobile network settings screen, title of item showing the name of the default subscription
     that will be used for data. This only appears in multi-SIM mode. [CHAR LIMIT=NONE] -->
