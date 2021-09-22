@@ -69,6 +69,10 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
             mMobileDataContentObserver.setOnMobileDataChangedListener(() -> refreshPreference());
         }
         mMobileDataContentObserver.register(mContext, mSubId);
+        final int defaultDataSub = SubscriptionManager.getDefaultDataSubscriptionId();
+        if (defaultDataSub != mSubId) {
+            mMobileDataContentObserver.register(mContext, defaultDataSub);
+        }
     }
 
     @OnLifecycleEvent(ON_PAUSE)
@@ -106,6 +110,14 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
     public int getAvailabilityStatus(int subId) {
         if (!SubscriptionManager.isValidSubscriptionId(subId)
                 || SubscriptionManager.getDefaultDataSubscriptionId() == subId) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+        boolean isDefDataEnabled = mManager.createForSubscriptionId(
+                SubscriptionManager.getDefaultDataSubscriptionId())
+                .isDataEnabled();
+        // Do not show 'Data during calls' preference when mobile data switch
+        // for the DDS sub is turned off.
+        if (!isDefDataEnabled) {
             return CONDITIONALLY_UNAVAILABLE;
         }
         return AVAILABLE;
