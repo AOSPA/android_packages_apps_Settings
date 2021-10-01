@@ -886,6 +886,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="6993526033095292609">"Kom ihåg inställningarna"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maxantal för ljudenheter anslutna via Bluetooth"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Välj ett maxantal för ljudenheter anslutna via Bluetooth"</string>
+    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Felsökningslogg för NFC-stack"</string>
+    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Öka loggningsnivå för NFC-stack"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Casta"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"spegling"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Aktivera wifi-skärmdelning"</string>
@@ -2286,7 +2288,12 @@
     <string name="talkback_summary" msgid="5820927220378864281">"Skärmläsaren är främst avsedd för blinda eller personer med nedsatt syn"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Tryck på objekt på skärmen om du vill höra dem upplästa"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Inställningar för textning"</string>
+    <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"Om inställningar för textning"</string>
+    <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Läs mer om inställningar för textning"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Förstoring"</string>
+    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Genväg till förstoring"</string>
+    <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Om förstoring"</string>
+    <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"Läs mer om förstoring"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Förstoringstyp"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"Förstora hela skärmen, ett visst område eller växla mellan båda alternativen"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Hela skärmen"</string>
@@ -2355,10 +2362,13 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Tillåt att genvägen för funktionen aktiveras från låsskärmen. Håll båda volymknapparna nedtryckta i ett par sekunder."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Tillgänglighetsknapp"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Tillgänglighetsknapp och rörelse"</string>
+    <string name="accessibility_button_about_title" msgid="3581116105084067926">"Om tillgänglighetsknappen"</string>
+    <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"Om tillgänglighetsknappen och tillgänglighetsrörelsen"</string>
+    <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Läs mer om tillgänglighetsknappen och tillgänglighetsrörelsen"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Använda tillgänglighetsknappen. Rörelsen är inte tillgänglig med navigering med tre knappar."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Kom snabbt åt tillgänglighetsfunktioner"</string>
-    <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"Kom snabbt åt tillgänglighetsfunktioner från alla skärmar.\n\nKom igång genom att öppna tillgänglighetsinställningarna och välj en funktion. Tryck på genvägen och välj tillgänglighetsknappen.\n\nOm du vill använda tillgänglighetsknappen i navigeringsfältet i stället byter du till navigering med två knappar eller navigering med tre knappar."</string>
-    <string name="accessibility_button_description" msgid="7372405202698400339">"Kom snabbt åt tillgänglighetsfunktioner från alla skärmar. \n\nKom igång genom att öppna tillgänglighetsinställningarna och välj en funktion. Tryck på genvägen och välj tillgänglighetsknappen."</string>
+    <string name="accessibility_button_gesture_description" msgid="785178810659647474">"Kom snabbt åt tillgänglighetsfunktioner från alla skärmar.\n\nKom igång genom att öppna tillgänglighetsinställningarna och välj en funktion. Tryck på genvägen och välj tillgänglighetsknappen eller rörelsen."</string>
+    <string name="accessibility_button_description" msgid="3664784100487881054">"Kom snabbt åt tillgänglighetsfunktioner från alla skärmar.\n\nKom igång genom att öppna tillgänglighetsinställningarna och välj en funktion. Tryck på genvägen och välj tillgänglighetsknappen."</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Använda knapp eller rörelse"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Läge"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Storlek"</string>
@@ -2384,13 +2394,18 @@
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 minut"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 minuter"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Väntetid för åtgärd (tillgänglighet)"</string>
+    <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"Om väntetid för åtgärd (tillgänglighet)"</string>
+    <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"Läs mer om väntetid för åtgärd (tillgänglighet)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Tidsperiod för åtgärder"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Ställ in hur lång tid som tillfälliga meddelanden som ber dig att vidta åtgärder ska visas.\n\nDet är inte alla appar som har stöd för inställningen."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Fördröjning för tryck och håll ned"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Inverterade färger"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Använd inverterade färger"</string>
+    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Genväg till inverterade färger"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"Med inverterade färger blir ljusa skärmar mörka.&lt;br/&gt;&lt;br/&gt; Obs! &lt;ol&gt; &lt;li&gt; Inverterade färger gör även mörka skärmar ljusa.&lt;/li&gt; &lt;li&gt; Färger ändras i media och bilder.&lt;/li&gt; &lt;li&gt; Du kan även använda Mörkt tema för att göra bakgrunden mörk. Mörkt tema fungerar med appar som stöds. Inverterade färger fungerar i alla appar.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Automatiskt klick (hovringstid)"</string>
+    <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Om automatiskt klick (hovringstid)"</string>
+    <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Läs mer om automatiskt klick (hovringstid)"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"Automatiskt klick fungerar med en ansluten mus. Du kan ställa in muspekaren så att den klickar automatiskt när markören har varit stilla en viss tid."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"Av"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Kort"</string>
@@ -2410,6 +2425,11 @@
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Använd <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Öppna <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Använd färgkorrigering"</string>
+    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Genväg till färgkorrigering"</string>
+    <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"Om färgkorrigering"</string>
+    <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Läs mer om färgkorrigering"</string>
+    <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Om inverterade färger"</string>
+    <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Läs mer om inverterade färger"</string>
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"Visa textning"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"Endast för app som stöds"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Textstorlek och stil"</string>
@@ -2449,6 +2469,8 @@
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Gul–blå"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Extradimmat"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Gör skärmen extradimmad"</string>
+    <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Genväg till extradimmat"</string>
+    <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Om extradimmat"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Gör skärmen mer dimmad än telefonens lägsta ljusstyrka"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Gör skärmen mer dimmad än surfplattans lägsta ljusstyrka"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Dimma skärmen ytterligare så att det blir behagligare att läsa.&lt;br/&gt;&lt;br/&gt; Detta kan vara användbart när &lt;ol&gt; &lt;li&gt; telefonens lägsta ljusstyrka fortfarande är för ljus&lt;/li&gt; &lt;li&gt; du använder telefonen i mörker, t.ex. på natten eller i ett mörkt rum innan du ska sova.&lt;/li&gt; &lt;/ol&gt;"</string>
@@ -4840,6 +4862,7 @@
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Tryck snabbt två gånger för att kolla enheten"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"Enhandsläge"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Använd enhandsläge"</string>
+    <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"Genväg till enhandsläge"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"nåbarhet"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Svep nedåt för att"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Använd genvägen till följande:"</string>
@@ -5271,6 +5294,7 @@
     <string name="sim_action_yes" msgid="8076556020131395515">"Ja"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"Starta om"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"Nej tack"</string>
+    <string name="sim_action_cancel" msgid="2668099867029610910">"Avbryt"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Byt"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Det gick inte att aktivera SIM-kortet"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Ta ut SIM-kortet och sätt i det igen. Starta om enheten om problemet kvarstår."</string>
@@ -5415,6 +5439,8 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"Om du använder två SIM-kort kan du bara använda 4G på surfplattan. "<annotation id="url">"Läs mer"</annotation></string>
     <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"Om du använder två SIM-kort kan du bara använda 4G på enheten. "<annotation id="url">"Läs mer"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Hindra körning av cachelagrade appar"</string>
+    <string name="blob_never_expires_text" msgid="7293376386620106623">"Obegränsad giltighet."</string>
+    <string name="accessor_never_expires_text" msgid="4647624492147788340">"Lånetiden upphör aldrig."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Tillåt skärmöverlagring på Inställningar"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Tillåt att appar som får visas ovanpå andra appar överlagras på skärmar med inställningar"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
@@ -5445,7 +5471,6 @@
     <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"Inte tillgängligt just nu"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"Inget SIM-kort"</string>
     <string name="network_and_internet_preferences_title" msgid="8635896466814033405">"Nätverksinställningar"</string>
-    <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Anslut till offentliga nätverk"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"nätverksanslutning, internet, trådlös, data, wifi, wi-fi, wi fi, mobil, telefon, mobiloperatör, 4g, 3g, 2g, lte"</string>
     <string name="turn_on_wifi" msgid="4868116014727533668">"Aktivera wifi"</string>
     <string name="turn_off_wifi" msgid="8861028501067400694">"Stäng av wifi"</string>
@@ -5463,6 +5488,7 @@
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"W+-nätverk"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
     <string name="downloaded_sim_category_title" msgid="8611467223348446658">"NEDLADDAT SIM-KORT"</string>
+    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"NEDLADDADE SIM-KORT"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Aktiv"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Inaktiv"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Standardinställning för <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -5550,4 +5576,39 @@
     <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> vill ansluta till den här telefonen.\n\nDu har inte anslutit till <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> tidigare."</string>
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Anslut inte"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Anslut"</string>
+    <string name="tare_settings" msgid="3788654800004869077">"Inställningar för TARE"</string>
+    <string name="tare_revert" msgid="3855325741125236638">"Återställ standardinställningarna"</string>
+    <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Standardinställningarna har återställts"</string>
+    <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Högsta saldo vid fulladdad enhet"</string>
+    <string name="tare_max_circulation" msgid="1119152898303214809">"Högsta saldo i omlopp"</string>
+    <string name="tare_min_satiated_balance" msgid="8038047539584856564">"Lägsta saldo vid fulladdad enhet"</string>
+    <string name="tare_modifiers" msgid="8919975635360280820">"Modifierare"</string>
+    <string name="tare_actions" msgid="4573323466443513639">"Åtgärder"</string>
+    <string name="tare_rewards" msgid="602131401590928885">"Belöningar"</string>
+    <string name="tare_exempted" msgid="223247432456678980">"Undantagna"</string>
+    <string name="tare_headless_app" msgid="6523878455829211651">"Systemapp utan grafiskt användargränssnitt"</string>
+    <string name="tare_other_app" msgid="4361184813378127700">"Annan app"</string>
+    <string name="tare_top_activity" msgid="7266560655483385757">"Toppaktivitet"</string>
+    <string name="tare_notification_seen" msgid="7829963536020087742">"Aviseringen har setts"</string>
+    <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Aviseringen sågs inom 15 minuter"</string>
+    <string name="tare_notification_interaction" msgid="3806204222322830129">"Interaktion med avisering"</string>
+    <string name="tare_widget_interaction" msgid="2260701564089214184">"Widgetinteraktion"</string>
+    <string name="tare_other_interaction" msgid="8069163421115212751">"Annan användarinteraktion"</string>
+    <string name="tare_job_max_start" msgid="1586399578665940836">"Start av jobb med högsta prioritet"</string>
+    <string name="tare_job_max_running" msgid="2897217372986518495">"Körning av jobb med högsta prioritet"</string>
+    <string name="tare_job_high_start" msgid="7464143754932031022">"Start av jobb med hög prioritet"</string>
+    <string name="tare_job_high_running" msgid="6541171046405088669">"Körning av jobb med hög prioritet"</string>
+    <string name="tare_job_default_start" msgid="6744427210148953151">"Start av jobb med standardprioritet"</string>
+    <string name="tare_job_default_running" msgid="8429081804128945217">"Körning av jobb med standardprioritet"</string>
+    <string name="tare_job_low_start" msgid="4605440035856891746">"Start av jobb med låg prioritet"</string>
+    <string name="tare_job_low_running" msgid="831668616902849604">"Körning av jobb med låg prioritet"</string>
+    <string name="tare_job_min_start" msgid="6508233901992538188">"Start av jobb med lägsta prioritet"</string>
+    <string name="tare_job_min_running" msgid="6167128996320622604">"Körning av jobb med lägsta prioritet"</string>
+    <string name="tare_job_timeout_penalty" msgid="7644332836795492506">"Påföljd vid uppnådd tidsgräns för jobb"</string>
+  <string-array name="tare_modifiers_subfactors">
+    <item msgid="3325940509857535498">"Laddning"</item>
+    <item msgid="658627268149681677">"Slummerfunktion"</item>
+    <item msgid="1599558140284643834">"Strömsparläge"</item>
+    <item msgid="588427840913221601">"Processtatus"</item>
+  </string-array>
 </resources>

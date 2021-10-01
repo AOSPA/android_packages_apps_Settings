@@ -886,6 +886,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="6993526033095292609">"Ricorda impostazioni"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Numero max dispositivi audio Bluetooth connessi"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Seleziona il numero massimo di dispositivi audio Bluetooth connessi"</string>
+    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Log di debug stack NFC"</string>
+    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Aumenta livello di logging stack NFC"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Trasmissione"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"mirroring"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Attiva display wireless"</string>
@@ -2286,7 +2288,12 @@
     <string name="talkback_summary" msgid="5820927220378864281">"Lo screen reader è rivolto principalmente a utenti non vedenti o con problemi di vista"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Tocca gli elementi sullo schermo per ascoltarne la lettura ad alta voce"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Preferenze sottotitoli"</string>
+    <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"Informazioni sulle preferenze relative ai sottotitoli"</string>
+    <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Scopri di più sulle preferenze relative ai sottotitoli"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Ingrandimento"</string>
+    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Scorciatoia per l\'ingrandimento"</string>
+    <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Informazioni sull\'ingrandimento"</string>
+    <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"Scopri di più sull\'ingrandimento"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Tipo di ingrandimento"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"Ingrandisci l\'intero schermo, un\'area specifica o passa da un\'opzione all\'altra"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Schermo intero"</string>
@@ -2355,10 +2362,13 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Consenti di attivare la scorciatoia alla funzionalità dalla schermata di blocco. Tieni premuti entrambi i tasti del volume per qualche secondo."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Pulsante Accessibilità"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Gesto e pulsante Accessibilità"</string>
+    <string name="accessibility_button_about_title" msgid="3581116105084067926">"Info sul pulsante Accessibilità"</string>
+    <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"Informazioni sul gesto e sul pulsante Accessibilità"</string>
+    <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Scopri di più sul gesto e sul pulsante Accessibilità"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Viene usato il pulsante Accessibilità. Gesto non disponibile con la navigazione con tre pulsanti."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Accedi rapidamente alle funzioni di accessibilità"</string>
-    <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"Accedi rapidamente alle funzioni di accessibilità da qualsiasi schermata.\n\nPer iniziare, vai alle impostazioni di accessibilità e seleziona una funzione. Tocca la scorciatoia e seleziona il pulsante Accessibilità.\n\nInvece per utilizzare il pulsante Accessibilità nella barra di navigazione, passa alla navigazione con due pulsanti o alla navigazione con tre pulsanti."</string>
-    <string name="accessibility_button_description" msgid="7372405202698400339">"Accedi rapidamente alle funzioni di accessibilità da qualsiasi schermata. \n\nPer iniziare, vai alle impostazioni di accessibilità e seleziona una funzione. Tocca la scorciatoia e seleziona il pulsante Accessibilità."</string>
+    <string name="accessibility_button_gesture_description" msgid="785178810659647474">"Accedi rapidamente alle funzioni di accessibilità da qualsiasi schermata.\n\nPer iniziare, vai alle impostazioni di accessibilità e seleziona una funzione. Tocca la scorciatoia e seleziona il gesto o il pulsante Accessibilità."</string>
+    <string name="accessibility_button_description" msgid="3664784100487881054">"Accedi rapidamente alle funzioni di accessibilità da qualsiasi schermata.\n\nPer iniziare, vai alle impostazioni di accessibilità e seleziona una funzione. Tocca la scorciatoia e seleziona il pulsante Accessibilità."</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Usa il pulsante o il gesto"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Posizione"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Dimensioni"</string>
@@ -2384,13 +2394,18 @@
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 minuto"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 minuti"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Tempo per agire (timeout Accessibilità)"</string>
+    <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"Informazioni su Tempo per agire (timeout Accessibilità)"</string>
+    <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"Scopri di più su Tempo per agire (timeout Accessibilità)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Tempo per agire"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Scegli per quanto tempo lasciare visibili i messaggi che ti chiedono di eseguire delle operazioni e che vengono mostrati solo temporaneamente.\n\nNon tutte le app supportano questa impostazione."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Ritardo pressione prolungata"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Inversione dei colori"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Usa Inversione dei colori"</string>
+    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Scorciatoia per l\'inversione dei colori"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"L\'inversione dei colori rende scure le schermate chiare.&lt;br/&gt;&lt;br/&gt; Nota: &lt;ol&gt; &lt;li&gt; L\'inversione dei colori rende anche chiare le schermate scure.&lt;/li&gt; &lt;li&gt; I colori vengono modificati nei contenuti multimediali e nelle immagini.&lt;/li&gt; &lt;li&gt; Puoi anche usare il tema scuro per mostrare uno sfondo scuro. Il tema scuro funziona solo con app supportate. L\'inversione dei colori funziona invece in tutte le app.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Clic automatico (tempo di interazione)"</string>
+    <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Info su Clic aut. (tempo interaz.)"</string>
+    <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Scopri di più su Clic automatico (tempo di interazione)"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"La funzione Clic automatico richiede un mouse collegato. Puoi configurare il puntatore del mouse per fare clic automaticamente quando rimane fermo per un determinato periodo di tempo."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"Off"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Breve"</string>
@@ -2410,6 +2425,11 @@
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Usa <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Apri <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Usa Correzione del colore"</string>
+    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Scorciatoia per la correzione del colore"</string>
+    <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"Info sulla correzione del colore"</string>
+    <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Scopri di più sulla correzione del colore"</string>
+    <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Info sull\'inversione dei colori"</string>
+    <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Scopri di più sull\'inversione dei colori"</string>
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"Mostra sottotitoli"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"Solo per app supportate"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Stile e dimensioni sottotitoli"</string>
@@ -2449,6 +2469,8 @@
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Blu-giallo"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Attenuazione extra"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Usa l\'attenuazione extra per lo schermo"</string>
+    <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Scorciatoia per l\'attenuazione extra"</string>
+    <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Info sull\'attenuazione extra"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Usa luminosità dello schermo inferiore alla luminosità minima del telefono"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Usa luminosità dello schermo inferiore alla luminosità minima del tablet"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Riduci la luminosità dello schermo per facilitare la lettura.&lt;br/&gt;&lt;br/&gt; Può essere utile quando: &lt;ol&gt; &lt;li&gt; La luminosità minima predefinita del telefono è ancora troppo chiara&lt;/li&gt; &lt;li&gt; Usi il telefono al buio, ad esempio di notte o in una stanza buia prima di andare a letto&lt;/li&gt; &lt;/ol&gt;"</string>
@@ -4840,6 +4862,7 @@
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Tocca due volte il dispositivo per controllare le notifiche"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"Modalità one-hand"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Usa modalità one-hand"</string>
+    <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"Scorciatoia modalità one-hand"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"accessibilità one-hand"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Scorri verso il basso per"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Utilizza la scorciatoia per"</string>
@@ -5271,6 +5294,7 @@
     <string name="sim_action_yes" msgid="8076556020131395515">"Sì"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"Riavvia"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"No grazie"</string>
+    <string name="sim_action_cancel" msgid="2668099867029610910">"Annulla"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Cambia"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Impossibile attivare la SIM"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Rimuovi la SIM e inseriscila di nuovo. Se il problema persiste, riavvia il dispositivo."</string>
@@ -5415,6 +5439,8 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"Se vengono usate due SIM, questo tablet può usare soltanto la rete 4G. "<annotation id="url">"Ulteriori informazioni"</annotation></string>
     <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"Se vengono usate due SIM, questo dispositivo può usare soltanto la rete 4G. "<annotation id="url">"Ulteriori informazioni"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Sospendi esecuzione app memorizzate nella cache"</string>
+    <string name="blob_never_expires_text" msgid="7293376386620106623">"Senza scadenza."</string>
+    <string name="accessor_never_expires_text" msgid="4647624492147788340">"Il noleggio non ha scadenza."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Consenti gli overlay schermo sulle Impostazioni"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Consenti alle app visualizzabili sopra altre app di sovrapporre le schermate Impostazioni"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Contenuti multimediali"</string>
@@ -5445,7 +5471,6 @@
     <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"Momentaneamente non disponibile"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"Nessuna SIM rilevata"</string>
     <string name="network_and_internet_preferences_title" msgid="8635896466814033405">"Preferenze di rete"</string>
-    <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Connetti a reti pubbliche"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"connessione rete, internet, wireless, dati, wifi, wi-fi, wi fi, cellulare, dispositivo mobile, operatore cellulare, 4g, 3g, 2g, lte"</string>
     <string name="turn_on_wifi" msgid="4868116014727533668">"Attiva Wi‑Fi"</string>
     <string name="turn_off_wifi" msgid="8861028501067400694">"Disattiva il Wi-Fi"</string>
@@ -5463,6 +5488,7 @@
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"Rete W+"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
     <string name="downloaded_sim_category_title" msgid="8611467223348446658">"SIM SCARICATA"</string>
+    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"SIM SCARICATE"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Attiva"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Non attiva"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" /Predefinita per: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -5550,4 +5576,39 @@
     <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> vorrebbe connettersi a questo telefono.\n\nNon hai mai effettuato la connessione al dispositivo <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Non connettere"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Connetti"</string>
+    <string name="tare_settings" msgid="3788654800004869077">"Impostazioni TARE"</string>
+    <string name="tare_revert" msgid="3855325741125236638">"Ripristina le impostazioni predefinite"</string>
+    <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Impostazioni predefinite ripristinate."</string>
+    <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Saldo massimo con batteria carica"</string>
+    <string name="tare_max_circulation" msgid="1119152898303214809">"Circolazione massima"</string>
+    <string name="tare_min_satiated_balance" msgid="8038047539584856564">"Saldo minimo con batteria carica"</string>
+    <string name="tare_modifiers" msgid="8919975635360280820">"Modificatori"</string>
+    <string name="tare_actions" msgid="4573323466443513639">"Azioni"</string>
+    <string name="tare_rewards" msgid="602131401590928885">"Premi"</string>
+    <string name="tare_exempted" msgid="223247432456678980">"Esenti"</string>
+    <string name="tare_headless_app" msgid="6523878455829211651">"App di sistema headless"</string>
+    <string name="tare_other_app" msgid="4361184813378127700">"Un\'altra app"</string>
+    <string name="tare_top_activity" msgid="7266560655483385757">"Prima attività"</string>
+    <string name="tare_notification_seen" msgid="7829963536020087742">"Notifica visualizzata"</string>
+    <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Notifica visualizzata entro 15 minuti"</string>
+    <string name="tare_notification_interaction" msgid="3806204222322830129">"Interazione con una notifica"</string>
+    <string name="tare_widget_interaction" msgid="2260701564089214184">"Interazione con un widget"</string>
+    <string name="tare_other_interaction" msgid="8069163421115212751">"Un\'altra interazione dell\'utente"</string>
+    <string name="tare_job_max_start" msgid="1586399578665940836">"Inizio processo massima priorità"</string>
+    <string name="tare_job_max_running" msgid="2897217372986518495">"Esecuzione processo massima priorità"</string>
+    <string name="tare_job_high_start" msgid="7464143754932031022">"Inizio processo priorità elevata"</string>
+    <string name="tare_job_high_running" msgid="6541171046405088669">"Esecuzione processo priorità elevata"</string>
+    <string name="tare_job_default_start" msgid="6744427210148953151">"Inizio processo priorità predefinita"</string>
+    <string name="tare_job_default_running" msgid="8429081804128945217">"Esecuzione processo priorità predefinita"</string>
+    <string name="tare_job_low_start" msgid="4605440035856891746">"Inizio processo bassa priorità"</string>
+    <string name="tare_job_low_running" msgid="831668616902849604">"Esecuzione processo bassa priorità"</string>
+    <string name="tare_job_min_start" msgid="6508233901992538188">"Inizio processo priorità minima"</string>
+    <string name="tare_job_min_running" msgid="6167128996320622604">"Esecuzione processo priorità minima"</string>
+    <string name="tare_job_timeout_penalty" msgid="7644332836795492506">"Penalità per timeout processo"</string>
+  <string-array name="tare_modifiers_subfactors">
+    <item msgid="3325940509857535498">"In carica"</item>
+    <item msgid="658627268149681677">"Sospensione"</item>
+    <item msgid="1599558140284643834">"Modalità di risparmio energetico"</item>
+    <item msgid="588427840913221601">"Stato processo"</item>
+  </string-array>
 </resources>
