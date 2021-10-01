@@ -886,6 +886,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="6993526033095292609">"ቅንብሮች አስታውስ"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"ከፍተኛው የተገናኙ የብሉቱዝ ኦዲዮ መሣሪያዎች ብዛት"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"ከፍተኛው የተገናኙ የብሉቱዝ ኦዲዮ መሣሪያዎች ብዛትን ይምረጡ"</string>
+    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"የኤንኤፍሲ ቁልል የስህተት አርም ምዝግብ ማስታወሻ"</string>
+    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"የኤንኤፍሲ ቁልል የምዝግብ ማስታወሻ ደረጃን ይጨምሩ"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"መስታወት"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"ገመድ-አልባ ማሳየትን ያንቁ"</string>
@@ -2286,7 +2288,12 @@
     <string name="talkback_summary" msgid="5820927220378864281">"በዋነኝነት ማየት የተሳናቸው ወይም የማየት ችሎታቸው ዝቅተኛ ለሆኑ ሰዎች የሆነ የማያ ገጽ አንባቢ"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"በማያ ገጽዎ ላይ ያሉ ንጥሎች ጮክ ተብለው ሲነበቡ ለማዳመጥ መታ ያድርጓቸው"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"የመግለጫ ጽሑፍ ምርጫዎች"</string>
+    <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"ስለመግለጫ ጽሑፍ ምርጫዎች"</string>
+    <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"ስለመግለጫ ጽሑፍ ምርጫዎች የበለጠ ይወቁ"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"ማጉላት"</string>
+    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"የማጉላት አቋራጭ"</string>
+    <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"ስለማጉላት"</string>
+    <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"ስለማጉላት የበለጠ ይወቁ"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"የማጉላት ዓይነት"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"የእርስዎን ሙሉ ገጽ እይታ፣ አንድ የተወሰነ ቦታ ያጉሉ ወይም በሁለቱም አማራጮች መካከል ይቀያይሩ"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"ሙሉ ማያ ገጽ"</string>
@@ -2355,10 +2362,13 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"ከመቆለፊያ ማያ ገጽ ለማብራት እንዲችሉ ለባሕሪ አቋራጭ ይፍቀዱ። ሁለቱንም የድምፅ ቁልፎች ለጥቂት ሰከንዶች ይያዙ።"</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"የተደራሽነት አዝራር"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"የተደራሽነት አዝራር እና የእጅ ምልክት"</string>
+    <string name="accessibility_button_about_title" msgid="3581116105084067926">"ስለተደራሽነት አዝራር"</string>
+    <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"ስለተደራሽነት አዝራር እና ምልክት"</string>
+    <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"ስለተደራሽነት አዝራር እና ምልክት የበለጠ ይወቁ"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"የተደራሽነት አዝራርን መጠቀም። የእጅ ምልክቱ በባለ3-አዝራር ዳሰሳ አይገኝም።"</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"የተደራሽነት ባህሪያትን በፍጥነት ይድረሱባቸው"</string>
-    <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"የተደራሽነት ባህሪያትን ከማንኛውም ማያ ገጽ ሆነው በፍጥነት ይድረሱ።\n\nለመጀመር ወደ የተደራሽነት ቅንብሮች ይሂዱ እና አንድ ባህሪ ይምረጡ። በአቋራጩ ላይ መታ ያድርጉ እና የተደራሽነት አዝራሩን ይምረጡ።\n\nበምትኩ በአሰሳ አሞሌው ውስጥ የተደራሽነት አዝራሩን ለመጠቀም ወደ 2-አዝራር አሰሳ ወይም 3-አዝራር አሰሳ ይቀይሩ።"</string>
-    <string name="accessibility_button_description" msgid="7372405202698400339">"የተደራሽነት ባህሪያትን ከማንኛውም ማያ ገጽ በፍጥነት ይድረሱ። \n\nለመጀመር ወደ የተደራሽነት ቅንብሮች ይሂዱ እና አንድ ባህሪ ይምረጡ። በአቋራጩ ላይ መታ ያድርጉ እና የተደራሽነት አዝራሩን ይምረጡ።"</string>
+    <string name="accessibility_button_gesture_description" msgid="785178810659647474">"የተደራሽነት ባህሪያትን ከማንኛውም ማያ ገጽ ሆነው በፍጥነት ይድረሱ።\n\nለመጀመር ወደ የተደራሽነት ቅንብሮች ይሂዱ እና አንድ ባህሪ ይምረጡ። በአቋራጩ ላይ መታ ያድርጉ እና የተደራሽነት አዝራሩን ወይም ምልክት ይምረጡ።"</string>
+    <string name="accessibility_button_description" msgid="3664784100487881054">"የተደራሽነት ባህሪያትን ከማንኛውም ማያ ገጽ ሆነው በፍጥነት ይድረሱ።\n\nለመጀመር ወደ የተደራሽነት ቅንብሮች ይሂዱ እና አንድ ባህሪ ይምረጡ። በአቋራጩ ላይ መታ ያድርጉ እና የተደራሽነት አዝራሩን ይምረጡ።"</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"አዝራርን ወይም የእጅ ምልክትን ይጠቀሙ"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"አካባቢ"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"መጠን"</string>
@@ -2384,13 +2394,18 @@
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 ደቂቃ"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 ደቂቃዎች"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"እርምጃ መውሰጃ ጊዜ (ተደራሽነት ጊዜው አብቅቷል)"</string>
+    <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"ስለእርምጃ መውሰጃ ጊዜ (የተደራሽነት ጊዜው አብቅቷል)"</string>
+    <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"ስለእርምጃ መውሰጃ ጊዜ (ተደራሽነት ጊዜው አብቅቷል) የበለጠ ይወቁ"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"እርምጃ መውሰጃ ጊዜ"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"እርስዎ እርምጃ እንዲወስዱ የሚጠይቁ ሆኖም ግን ለጊዜው ብቻ የሚታዩ መልዕክቶች ምን ያክል ጊዜ መታየት እንዳለባቸው ይምረጡ።\n\nይህን ቅንብር ሁሉም መተግበሪያዎች አይደሉም የሚደግፉት።"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"የመንካት እና ይዞ ማቆየት"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"ተቃራኒ ቀለም"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"የቀለም ግልበጣን ተጠቀም"</string>
+    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"የተቃራኒ ቀለም አቋራጭ"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"ቀለም ግልበጣ የፈኩ ማያ ገጾችን ጨለማ ያደርጓቸው።&lt;br/&gt;&lt;br/&gt; ማስታወሻ፦ &lt;ol&gt; &lt;li&gt; ቀለም ግልበጣ እንዲሁም ጨለማ ማያ ገጾችን የፈኩ ያደርጓቸዋል።&lt;/li&gt; &lt;li&gt; ቀለሞች በሚዲያ እና ምስሎች ውስጥ ይቀየራሉ።&lt;/li&gt; &lt;li&gt; ጨለማ ጀርባን ለማሳየት ጨለማ ገጽታ ሥራ ላይ መዋል ይችላል። ጨለማ ገጽታ ከሚደገፉ መተግበሪያዎች ጋር ይሠራል። ቀለም ግልበጣ በሁሉም መተግበሪያዎች ላይ ይሰራል።&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"በራስ-ሰር ጠቅ አድርግ (መቆያ ጊዜ)"</string>
+    <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"ስለራስ-ሰር ጠቅ ማድረግ (መቆያ ጊዜ)"</string>
+    <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"ስለራስ-ሰር ጠቅ ማድረግ (መቆያ ጊዜ) የበለጠ ይወቁ"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"ራስ-ሰር ጠቅታ ከተገናኘ መዳፊት ጋር ይሠራል። ለተወሰነ ያህል ጊዜ ጠቋሚው መንቀሳቀስ ሲያቆም የመዳፊት ጠቋሚውን በራስ-ሰር ጠቅ እንዲያደርግ አድርገው ሊያቀናብሩት ይችላሉ።"</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"ጠፍቷል"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"አጭር"</string>
@@ -2410,6 +2425,11 @@
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>ን ይጠቀሙ"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>ን ክፈት"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"የቀለም ማስተካከያን ተጠቀም"</string>
+    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"የቀለም ማስተካከያ አቋራጭ"</string>
+    <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"ስለቀለም ማስተካከያ"</string>
+    <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"ስለቀለም ማስተካከያ የበለጠ ይወቁ"</string>
+    <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"ስለተቃራኒ ቀለም"</string>
+    <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"ስለተቃራኒ ቀለም የበለጠ ይወቁ"</string>
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"መግለጫ ጽሑፎችን አሳይ"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"ለሚደገፍ መተግበሪያ ብቻ"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"የመግለጫ ጽሑፍ መጠን እና ቅጥ"</string>
@@ -2449,6 +2469,8 @@
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"ሰማያዊ-ቢጫ"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"ተጨማሪ ደብዛዛ"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"ማያ ተጨማሪ ደብዛዛ ያድርጉ"</string>
+    <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"የተጨማሪ ደብዛዛ አቋራጭ"</string>
+    <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"ስለተጨማሪ ደብዛዛ"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"ከስልክዎ ዝቅተኛ ብሩህነት ባሻገር ማያ ገጹን ደብዛዛ ያድርጉ"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"ከጡባዊዎ አነስተኛ ብሩህነት ባሻገር ማያ ገጹን ደብዛዛ ያድርጉ"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"ለማንበብ የበለጠ ምቾት እንዲኖርዎ ማያ ገጽዎን የበለጠ ደብዛዛ ያድርጉት።&lt;br/&gt;&lt;br/&gt; ይህ ጠቃሚ ሊሆን የሚችለው፦ &lt;ol&gt; &lt;li&gt; የስልክዎ ነባሪ ዝቅተኛ ብሩህነት አሁንም በጣም ብሩህ ሲሆን&lt;/li&gt; &lt;li&gt; ስልክዎን በጨለማ ሁኔታዎች ውስጥ ሲጠቀሙ፣ ለምሳሌ ማታ ላይ ወይም በጨለማ ክፍል ውስጥ ከመተኛትዎ በፊት&lt;/li&gt; &lt;/ol&gt;"</string>
@@ -4840,6 +4862,7 @@
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"መሣሪያውን ለመመልከት ሁለቴ መታ ያድርጉ"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"የአንድ እጅ ሁነታ"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"የአንድ እጅ ሁነታን ይጠቀሙ"</string>
+    <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"ባለአንድ እጅ ሁነታ አቋራጭ"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"ተደራሽነት"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"ታች ያንሸራትቱ ወደ"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"አቋራጩን ለሚከተለው ዓላማ ይጠቀሙ"</string>
@@ -5271,6 +5294,7 @@
     <string name="sim_action_yes" msgid="8076556020131395515">"አዎ"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"ዳግም አስነሳ"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"አይ፣ አመሰግናለሁ"</string>
+    <string name="sim_action_cancel" msgid="2668099867029610910">"ይቅር"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"ማብሪያ/ማጥፊያ"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"ሲምን ማግበር አልተቻለም"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"ሲሙን ያስወጡትና እንደገና ያስገቡት። ችግሩ ከቀጠለ መሣሪያዎን ዳግም ያስነሱት።"</string>
@@ -5415,6 +5439,8 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"2 ሲሞችን በሚጠቀሙበት ጊዜ ይህ ጡባዊ በ4ጂ ይገደባል። "<annotation id="url">"የበለጠ ለመረዳት"</annotation></string>
     <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"2 ሲሞችን በሚጠቀሙበት ጊዜ ይህ መሣሪያ በ4ጂ ይገደባል። "<annotation id="url">"የበለጠ ለመረዳት"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"ለተሸጎጡ መተግበሪያዎች አፈጻጸምን አግድ"</string>
+    <string name="blob_never_expires_text" msgid="7293376386620106623">"የአገልግሎት ጊዜው መቼም አያበቃም።"</string>
+    <string name="accessor_never_expires_text" msgid="4647624492147788340">"ኪራይ መቼም የአገልግሎት ጊዜው አያበቃም።"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"በቅንብሮች ላይ የማያ ገጽ ተደራቢዎችን ይፍቀዱ"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"የቅንብሮች ማያ ገጾችን ለመደራረብ በሌሎች መተግበሪያዎች ላይ የሚያሳዩ መተግበሪያዎችን ይፍቀዱ"</string>
     <string name="media_controls_title" msgid="403271085636252597">"ሚዲያ"</string>
@@ -5445,7 +5471,6 @@
     <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"ለጊዜው አይገኝም"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"SIM የለም"</string>
     <string name="network_and_internet_preferences_title" msgid="8635896466814033405">"የአውታረ መረብ ምርጫዎች"</string>
-    <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"ከይፋዊ አውታረ መረቦች ጋር አገናኝ"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"የአውታረ መረብ ግንኙነት በይነመረብ፣ ገመድ-አልባ፣ ውሂብ፣ wifi፣ wi-fi፣ wi fi፣ ተንቀሳቃሽ ስልክ፣ ሞባይል፣ የተንቀሳቃሽ ስልክ አገልግሎት አቅራቢ፣ 4ጂ፣ 3ጂ፣ 2ጂ፣ lte፣ ኤልቲኢ"</string>
     <string name="turn_on_wifi" msgid="4868116014727533668">"Wi-Fi ያብሩ"</string>
     <string name="turn_off_wifi" msgid="8861028501067400694">"Wi-Fiን አጥፋ"</string>
@@ -5463,6 +5488,7 @@
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"W+ አውታረ መረብ"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"ሲም"</string>
     <string name="downloaded_sim_category_title" msgid="8611467223348446658">"የወረደ ሲም"</string>
+    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"የወረዱ ሲሞች"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"ንቁ"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"ያልነቃ"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / ለ<xliff:g id="ID_1">%1$s</xliff:g> ነባሪ"</string>
@@ -5550,4 +5576,39 @@
     <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> ከዚህ ስልክ ጋር መገናኘት ይፈልጋል።\n\nከዚህ በፊት ከ<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ጋር አልተገናኙም።"</string>
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"አታገናኝ"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"አገናኝ"</string>
+    <string name="tare_settings" msgid="3788654800004869077">"የTARE ቅንብሮች"</string>
+    <string name="tare_revert" msgid="3855325741125236638">"ወደ ነባሪ ቅንብሮች አድህር"</string>
+    <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"ቅንብሮች ወደ ነባሪ አድህረዋል።"</string>
+    <string name="tare_max_satiated_balance" msgid="3914973999573150340">"መሣሪያው ኃይል ሲሞላ ያለው ከፍተኛ ቀሪ ሒሳብ"</string>
+    <string name="tare_max_circulation" msgid="1119152898303214809">"ከፍተኛ ዝውውር"</string>
+    <string name="tare_min_satiated_balance" msgid="8038047539584856564">"መሣሪያው ኃይል ሲሞላ ያለው ዝቅተኛ ቀሪ ሒሳብ"</string>
+    <string name="tare_modifiers" msgid="8919975635360280820">"ቀያሪዎች"</string>
+    <string name="tare_actions" msgid="4573323466443513639">"እርምጃዎች"</string>
+    <string name="tare_rewards" msgid="602131401590928885">"ሽልማቶች"</string>
+    <string name="tare_exempted" msgid="223247432456678980">"ያልተካተተ"</string>
+    <string name="tare_headless_app" msgid="6523878455829211651">"በይነገጽ-አልባ የስርዓት መተግበሪያ"</string>
+    <string name="tare_other_app" msgid="4361184813378127700">"ሌላ መተግበሪያ"</string>
+    <string name="tare_top_activity" msgid="7266560655483385757">"ከፍተኛ እንቅስቃሴ"</string>
+    <string name="tare_notification_seen" msgid="7829963536020087742">"የማሳወቂያ ታይቷል"</string>
+    <string name="tare_notification_seen_15_min" msgid="832174185809497764">"ማሳወቂያ በ15 ደቂቃዎች ውስጥ ታይቷል"</string>
+    <string name="tare_notification_interaction" msgid="3806204222322830129">"የማሳወቂያ መስተጋብር"</string>
+    <string name="tare_widget_interaction" msgid="2260701564089214184">"የምግብር መስተጋብር"</string>
+    <string name="tare_other_interaction" msgid="8069163421115212751">"ሌላ የተጠቃሚ መስተጋብር"</string>
+    <string name="tare_job_max_start" msgid="1586399578665940836">"የሥራ ከፍተኛ ጅምር"</string>
+    <string name="tare_job_max_running" msgid="2897217372986518495">"የሥራ ከፍተኛ ማሄድ"</string>
+    <string name="tare_job_high_start" msgid="7464143754932031022">"የሥራ ከፍተኛ ጅምር"</string>
+    <string name="tare_job_high_running" msgid="6541171046405088669">"የሥራ ከፍተኛ ማሄድ"</string>
+    <string name="tare_job_default_start" msgid="6744427210148953151">"የሥራ ነባሪ ጅምር"</string>
+    <string name="tare_job_default_running" msgid="8429081804128945217">"የሥራ ነባሪ ማሄድ"</string>
+    <string name="tare_job_low_start" msgid="4605440035856891746">"የሥራ ዝቅተኛ ጅምር"</string>
+    <string name="tare_job_low_running" msgid="831668616902849604">"የሥራ ዝቅተኛ ማሄድ"</string>
+    <string name="tare_job_min_start" msgid="6508233901992538188">"የሥራ ዝቅተኛ ጅምር"</string>
+    <string name="tare_job_min_running" msgid="6167128996320622604">"የሥራ ዝቅተኛ ማሄድ"</string>
+    <string name="tare_job_timeout_penalty" msgid="7644332836795492506">"የሥራ የእረፍት ጊዜ ቅጣት"</string>
+  <string-array name="tare_modifiers_subfactors">
+    <item msgid="3325940509857535498">"ኃይል በመሙላት ላይ"</item>
+    <item msgid="658627268149681677">"ባትሪ አጠቃቀም"</item>
+    <item msgid="1599558140284643834">"የኃይል ቁጠባ ሁነታ"</item>
+    <item msgid="588427840913221601">"የሂደት ሁኔታ"</item>
+  </string-array>
 </resources>

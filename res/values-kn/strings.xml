@@ -886,6 +886,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="6993526033095292609">"ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ನೆನಪಿನಲ್ಲಿಡು"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"ಗರಿಷ್ಠ ಸಂಪರ್ಕಿತ ಬ್ಲೂಟೂತ್ ಆಡಿಯೋ ಸಾಧನಗಳು"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"ಸಂಪರ್ಕಿತ ಬ್ಲೂಟೂತ್ ಆಡಿಯೋ ಸಾಧನಗಳ ಗರಿಷ್ಠ ಸಂಖ್ಯೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ"</string>
+    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"NFC ಸ್ಟ್ಯಾಕ್ ಡೀಬಗ್‌ಲಾಗ್"</string>
+    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"NFC ಸ್ಟ್ಯಾಕ್ ಲಾಗಿಂಗ್ ಹಂತವನ್ನು ಹೆಚ್ಚಿಸಿ"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"ಬಿತ್ತರಿಸುವಿಕೆ"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"ಕನ್ನಡಿ"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"ವೈರ್‌ಲೆಸ್ ಪ್ರದರ್ಶನ ಸಕ್ರಿಯಗೊಳಿಸಿ"</string>
@@ -2286,7 +2288,12 @@
     <string name="talkback_summary" msgid="5820927220378864281">"ಸ್ಕ್ರೀನ್‌ರೀಡರ್ ಮುಖ್ಯವಾಗಿ ದೃಷ್ಟಿಹೀನತೆ ಮತ್ತು ಕಡಿಮೆ ದೃಷ್ಟಿ ಹೊಂದಿರುವವರಿಗೆ ಸಹಾಯ ಮಾಡುತ್ತದೆ"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"ದೊಡ್ಡದಾಗಿ ಓದಲು ನಿಮ್ಮ ಸ್ಕ್ರೀನ್‌ ಮೇಲಿನ ಐಟಂಗಳನ್ನು ಟ್ಯಾಪ್ ಮಾಡಿ"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"ಶೀರ್ಷಿಕೆ ಆದ್ಯತೆಗಳು"</string>
+    <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"ಶೀರ್ಷಿಕೆ ಆದ್ಯತೆಗಳ ಕುರಿತು"</string>
+    <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"ಶೀರ್ಷಿಕೆ ಆದ್ಯತೆಗಳ ಕುರಿತು ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"ಹಿಗ್ಗಿಸುವಿಕೆ"</string>
+    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"ಹಿಗ್ಗಿಸುವಿಕೆಯ ಶಾರ್ಟ್‌ಕಟ್"</string>
+    <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"ಹಿಗ್ಗಿಸುವಿಕೆ ಕುರಿತು"</string>
+    <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"ಹಿಗ್ಗಿಸುವಿಕೆ ಕುರಿತು ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"ಹಿಗ್ಗಿಸುವಿಕೆಯ ವಿಧಾನ"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"ನಿಮ್ಮ ಪೂರ್ಣ ಸ್ಕ್ರೀನ್‌ ಅಥವಾ ನಿರ್ದಿಷ್ಟ ಪ್ರದೇಶವನ್ನು ಹಿಗ್ಗಿಸಿ ಅಥವಾ ಈ ಎರಡು ಆಯ್ಕೆಗಳ ನಡುವೆ ಬದಲಾಯಿಸಿ"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"ಪೂರ್ಣ ಸ್ಕ್ರೀನ್"</string>
@@ -2355,10 +2362,13 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"ಲಾಕ್ ಪರದೆಯಿಂದ ಆನ್ ಮಾಡಲು, ವೈಶಿಷ್ಟ್ಯ ಶಾರ್ಟ್‌ಕಟ್ ಅನ್ನು ಅನುಮತಿಸಿ. ಎರಡೂ ವಾಲ್ಯೂಮ್ ಕೀಗಳನ್ನು ಕೆಲವು ಸೆಕೆಂಡುಗಳ ಕಾಲ ಹಿಡಿದುಕೊಳ್ಳಿ."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"ಪ್ರವೇಶಿಸುವಿಕೆ ಬಟನ್"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"ಪ್ರವೇಶಿಸುವಿಕೆ ಬಟನ್ ಮತ್ತು ಗೆಸ್ಚರ್"</string>
+    <string name="accessibility_button_about_title" msgid="3581116105084067926">"ಪ್ರವೇಶಿಸುವಿಕೆ ಬಟನ್ ಕುರಿತು"</string>
+    <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"ಪ್ರವೇಶಿಸುವಿಕೆ ಬಟನ್ ಮತ್ತು ಗೆಸ್ಚರ್ ಕುರಿತು"</string>
+    <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"ಪ್ರವೇಶಿಸುವಿಕೆ ಬಟನ್ ಮತ್ತು ಗೆಸ್ಚರ್ ಕುರಿತು ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"ಪ್ರವೇಶಿಸುವಿಕೆ ಬಟನ್ ಬಳಸಿ. 3-ಬಟನ್ ನ್ಯಾವಿಗೇಶನ್‌ನ ಜೊತೆಗೆ ಗೆಸ್ಚರ್ ಲಭ್ಯವಿಲ್ಲ."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"ಪ್ರವೇಶಿಸುವಿಕೆ ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ತ್ವರಿತವಾಗಿ ಪ್ರವೇಶಿಸಿ"</string>
-    <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"ಯಾವುದಾದರೂ ಸ್ಕ್ರೀನ್‌ನಲ್ಲಿ ಪ್ರವೇಶಿಸುವಿಕೆ ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ತ್ವರಿತವಾಗಿ ಪ್ರವೇಶಿಸಿ.\n\nಪ್ರಾರಂಭಿಸಲು, ಪ್ರವೇಶಿಸುವಿಕೆ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಹೋಗಿ ಮತ್ತು ವೈಶಿಷ್ಟ್ಯವನ್ನು ಆಯ್ಕೆಮಾಡಿ. ಶಾರ್ಟ್‌ಕಟ್ ಮೇಲೆ ಟ್ಯಾಪ್ ಮಾಡಿ ಹಾಗೂ ಪ್ರವೇಶಿಸುವಿಕೆ ಬಟನ್ ಆಯ್ಕೆಮಾಡಿ.\n\nಬದಲಿಗೆ ನ್ಯಾವಿಗೇಶನ್ ಬಾರ್‌ನಲ್ಲಿ ಪ್ರವೇಶಿಸುವಿಕೆ ಬಟನ್ ಅನ್ನು ಬಳಸಲು, 2-ಬಟನ್ ನ್ಯಾವಿಗೇಶನ್ ಅಥವಾ 3-ಬಟನ್ ನ್ಯಾವಿಗೇಶನ್‌ಗೆ ಬದಲಾಯಿಸಿ."</string>
-    <string name="accessibility_button_description" msgid="7372405202698400339">"ಯಾವುದಾದರೂ ಸ್ಕ್ರೀನ್‌ನಲ್ಲಿ ಪ್ರವೇಶಿಸುವಿಕೆ ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ತ್ವರಿತವಾಗಿ ಪ್ರವೇಶಿಸಿ. \n\nಪ್ರಾರಂಭಿಸಲು, ಪ್ರವೇಶಿಸುವಿಕೆ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಹೋಗಿ ಮತ್ತು ವೈಶಿಷ್ಟ್ಯವನ್ನು ಆಯ್ಕೆಮಾಡಿ. ಶಾರ್ಟ್‌ಕಟ್ ಮೇಲೆ ಟ್ಯಾಪ್ ಮಾಡಿ ಹಾಗೂ ಪ್ರವೇಶಿಸುವಿಕೆ ಬಟನ್ ಆಯ್ಕೆಮಾಡಿ."</string>
+    <string name="accessibility_button_gesture_description" msgid="785178810659647474">"ಯಾವುದಾದರೂ ಸ್ಕ್ರೀನ್‌ನಲ್ಲಿ ಪ್ರವೇಶಿಸುವಿಕೆ ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ತ್ವರಿತವಾಗಿ ಪ್ರವೇಶಿಸಿ.\n\nಪ್ರಾರಂಭಿಸಲು, ಪ್ರವೇಶಿಸುವಿಕೆ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಹೋಗಿ ಮತ್ತು ವೈಶಿಷ್ಟ್ಯವನ್ನು ಆಯ್ಕೆಮಾಡಿ. ಶಾರ್ಟ್‌ಕಟ್‌ನಲ್ಲಿ ಟ್ಯಾಪ್ ಮಾಡಿ ಮತ್ತು ಪ್ರವೇಶಿಸುವಿಕೆ ಬಟನ್ ಅಥವಾ ಗೆಸ್ಚರ್ ಅನ್ನು ಆಯ್ಕೆಮಾಡಿ."</string>
+    <string name="accessibility_button_description" msgid="3664784100487881054">"ಯಾವುದಾದರೂ ಸ್ಕ್ರೀನ್‌ನಲ್ಲಿ ಪ್ರವೇಶಿಸುವಿಕೆ ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ತ್ವರಿತವಾಗಿ ಪ್ರವೇಶಿಸಿ.\n\nಪ್ರಾರಂಭಿಸಲು, ಪ್ರವೇಶಿಸುವಿಕೆ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಹೋಗಿ ಮತ್ತು ವೈಶಿಷ್ಟ್ಯವನ್ನು ಆಯ್ಕೆಮಾಡಿ. ಶಾರ್ಟ್‌ಕಟ್ ಮೇಲೆ ಟ್ಯಾಪ್ ಮಾಡಿ ಹಾಗೂ ಪ್ರವೇಶಿಸುವಿಕೆ ಬಟನ್ ಆಯ್ಕೆಮಾಡಿ."</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"ಬಟನ್ ಅಥವಾ ಗೆಸ್ಚರ್ ಬಳಸಿ"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"ಸ್ಥಳ"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"ಗಾತ್ರ"</string>
@@ -2384,13 +2394,18 @@
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 ನಿಮಿಷ"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 ನಿಮಿಷಗಳು"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"ಕ್ರಮ ಕೈಗೊಳ್ಳುವ ಸಮಯ (ಪ್ರವೇಶಿಸುವ ಅವಧಿ ಮೀರಿದೆ)"</string>
+    <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"ಕ್ರಮ ಕೈಗೊಳ್ಳುವ ಸಮಯದ ಕುರಿತು (ಪ್ರವೇಶಿಸುವ ಅವಧಿ ಮೀರಿದೆ)"</string>
+    <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"ಕ್ರಮ ಕೈಗೊಳ್ಳುವ ಸಮಯದ ಕುರಿತು ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ (ಪ್ರವೇಶಿಸುವ ಅವಧಿ ಮೀರಿದೆ)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"ಕ್ರಮ ಕೈಗೊಳ್ಳುವ ಸಮಯ"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"ನೀವು ಕ್ರಮ ಕೈಗೊಳ್ಳಬೇಕೆಂದು ನಿಮಗೆ ಹೇಳುವ ಸಂದೇಶಗಳನ್ನು ಎಷ್ಟು ಸಮಯದ ಕಾಲ ತೋರಿಸಬೇಕು ಎಂಬುದನ್ನು ಆಯ್ಕೆಮಾಡಿ.\n\nಎಲ್ಲಾ ಆ್ಯಪ್‌ಗಳು ಈ ಸೆಟ್ಟಿಂಗ್ ಅನ್ನು ಬೆಂಬಲಿಸುವುದಿಲ್ಲ."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"ಸ್ಪರ್ಶ ಮತ್ತು ಹಿಡಿದಿಟ್ಟುಕೊಳ್ಳುವಿಕೆ ವಿಳಂಬ"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"ಕಲರ್ ಇನ್‍‍ವರ್ಶನ್"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"ಕಲರ್ ಇನ್‌ವರ್ಶನ್ ಅನ್ನು ಬಳಸಿ"</string>
+    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"ಕಲರ್ ಇನ್‌ವರ್ಶನ್ ಶಾರ್ಟ್‌ಕಟ್"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"ಕಲರ್ ಇನ್ವರ್ಶನ್ ಫೀಚರ್, ತಿಳಿ ಬಣ್ಣದ ಪರದೆಗಳನ್ನು ಗಾಢ ಬಣ್ಣಕ್ಕೆ ಪರಿವರ್ತಿಸುತ್ತದೆ.&lt;br/&gt;&lt;br/&gt; ಗಮನಿಸಿ: &lt;ol&gt; &lt;li&gt; ಕಲರ್ ಇನ್ವರ್ಶನ್ ಫೀಚರ್, ಗಾಢ ಬಣ್ಣದ ಪರದೆಗಳನ್ನು ತಿಳಿ ಬಣ್ಣಗಳಿಗೂ ಪರಿವರ್ತಿಸುತ್ತದೆ.&lt;/li&gt; &lt;li&gt; ಮಾಧ್ಯಮ ಹಾಗೂ ಚಿತ್ರಗಳಲ್ಲಿ ಬಣ್ಣಗಳು ಬದಲಾಗುತ್ತವೆ.&lt;/li&gt; &lt;li&gt; ಗಾಢ ಬಣ್ಣದ ಹಿನ್ನೆಲೆಯನ್ನು ಪ್ರದರ್ಶಿಸಲು ಡಾರ್ಕ್ ಥೀಮ್ ಅನ್ನು ಬಳಸಬಹುದು. ಬೆಂಬಲಿತ ಆ್ಯಪ್‌ಗಳಲ್ಲಿ ಡಾರ್ಕ್ ಥೀಮ್ ಕೆಲಸ ಮಾಡುತ್ತದೆ. ಕಲರ್ ಇನ್ವರ್ಶನ್, ಎಲ್ಲಾ ಆ್ಯಪ್‌ಗಳಲ್ಲಿ ಕೆಲಸ ಮಾಡುತ್ತದೆ.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"ಸ್ವಯಂ-ಕ್ಲಿಕ್ (ಡ್ವೆಲ್ ಟೈಮ್)"</string>
+    <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"ಸ್ವಯಂ-ಕ್ಲಿಕ್ ಕುರಿತು (ತಂಗಿದ ಸಮಯ)"</string>
+    <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"ಸ್ವಯಂ-ಕ್ಲಿಕ್ ಕುರಿತು ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ (ತಂಗಿದ ಸಮಯ)"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"ಸ್ವಯಂ-ಕ್ಲಿಕ್ ಕಾರ್ಯವು ಕನೆಕ್ಟ್ ಮಾಡಿದ ಮೌಸ್‌ನಿಂದ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ. ನೀವು ಸ್ವಲ್ಪ ಸಮಯದವರೆಗೆ ಮೌಸ್ ಬಳಕೆಯನ್ನು ನಿಲ್ಲಿಸಿದ ನಂತರ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಕ್ಲಿಕ್ ಆಗುವ ರೀತಿ ಮೌಸ್ ಕರ್ಸರ್ ಅನ್ನು ನೀವು ಹೊಂದಿಸಬಹುದು."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"ಆಫ್"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"ಚಿಕ್ಕದು"</string>
@@ -2410,6 +2425,11 @@
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> ಅನ್ನು ಬಳಸಿ"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> ಅನ್ನು ತೆರೆಯಿರಿ"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"ಬಣ್ಣ ತಿದ್ದುಪಡಿಯನ್ನು ಬಳಸಿ"</string>
+    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"ಕಲರ್ ಕರೆಕ್ಷನ್ ಶಾರ್ಟ್‌ಕಟ್"</string>
+    <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"ಕಲರ್ ಕರೆಕ್ಷನ್ ಕುರಿತು"</string>
+    <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"ಕಲರ್ ಕರೆಕ್ಷನ್ ಕುರಿತು ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ"</string>
+    <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"ಕಲರ್ ಇನ್‌ವರ್ಶನ್ ಕುರಿತು"</string>
+    <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"ಕಲರ್ ಇನ್‌ವರ್ಶನ್ ಕುರಿತು ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ"</string>
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"ಶೀರ್ಷಿಕೆಗಳನ್ನು ತೋರಿಸಿ"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"ಬೆಂಬಲಿತ ಆ್ಯಪ್‌ಗೆ ಮಾತ್ರ"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"ಶೀರ್ಷಿಕೆಯ ಗಾತ್ರ ಮತ್ತು ಶೈಲಿ"</string>
@@ -2449,6 +2469,8 @@
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"ನೀಲಿ-ಹಳದಿ"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"ಇನ್ನಷ್ಟು ಮಬ್ಬು"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"ಸ್ಕ್ರೀನ್ ಅನ್ನು ಇನ್ನಷ್ಟು ಮಬ್ಬಾಗಿಸಿ"</string>
+    <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"ಇನ್ನಷ್ಟು ಮಬ್ಬಾಗಿಸುವ ಶಾರ್ಟ್‌ಕಟ್"</string>
+    <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"ಇನ್ನಷ್ಟು ಮಬ್ಬಾಗಿಸುವ ಕುರಿತು"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"ನಿಮ್ಮ ಫೋನ್‌ನ ಕನಿಷ್ಠ ಪ್ರಖರತೆಗಿಂತ ಮಬ್ಬಾಗಿಸಿ"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"ನಿಮ್ಮ ಟ್ಯಾಬ್ಲೆಟ್‌ನ ಕನಿಷ್ಠ ಪ್ರಖರತೆಗಿಂತ ಮಬ್ಬಾಗಿಸಿ"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"ಓದುವುದನ್ನು ಹೆಚ್ಚು ಆರಾಮದಾಯಕವಾಗಿಸಲು ನಿಮ್ಮ ಸ್ಕ್ರೀನ್ ಅನ್ನು ಮಬ್ಬಾಗಿಸಿ.&lt;br/&gt;&lt;br/&gt;ಇದರಿಂದ ಈ ಕೆಳಗಿನ ಸಂದರ್ಭಗಳಲ್ಲಿ ಅನುಕೂಲವಾಗುತ್ತದೆ: &lt;ol&gt; &lt;li&gt; ನಿಮ್ಮ ಫೋನ್‌ನ ಡೀಫಾಲ್ಟ್ ಕನಿಷ್ಠ ಪ್ರಖರತೆ ಬಹಳ ಪ್ರಖರವಾಗಿದ್ದಾಗ&lt;/li&gt; &lt;li&gt; ನೀವು ರಾತ್ರಿ ವೇಳೆ ಅಥವಾ ಮಲಗುವ ಮೊದಲು ಕತ್ತಲೆ ಕೋಣೆಯಲ್ಲಿ, ಇಂತಹ ಕತ್ತಲಿರುವ ಸಂದರ್ಭಗಳಲ್ಲಿ ನಿಮ್ಮ ಫೋನ್ ಅನ್ನು ಬಳಸುತ್ತಿರುವಾಗ&lt;/li&gt; &lt;/ol&gt;"</string>
@@ -4840,6 +4862,7 @@
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"ಸಾಧನವನ್ನು ಪರಿಶೀಲಿಸಲು ಡಬಲ್ ಟ್ಯಾಪ್ ಮಾಡಿ"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"ಒಂದು ಕೈ ಮೋಡ್‌"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"ಒಂದು ಕೈ ಮೋಡ್ ಬಳಸಿ"</string>
+    <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"ಒಂದು ಕೈ ಮೋಡ್ ಶಾರ್ಟ್‌ಕಟ್"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"ಒಂದೇ ಕೈಯಲ್ಲಿ ಆ್ಯಕ್ಸೆಸ್"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"ಕೆಳಕ್ಕೆ ಸ್ವೈಪ್ ಮಾಡಿ"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"ಇವುಗಳಿಗಾಗಿ ಶಾರ್ಟ್‌ಕಟ್ ಅನ್ನು ಬಳಸಿ"</string>
@@ -5271,6 +5294,7 @@
     <string name="sim_action_yes" msgid="8076556020131395515">"ಹೌದು"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"ಮರುಪ್ರಾರಂಭಿಸಿ"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"ಬೇಡ"</string>
+    <string name="sim_action_cancel" msgid="2668099867029610910">"ರದ್ದುಮಾಡಿ"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"ಬದಲಿಸಿ"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"ಸಿಮ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"ಸಿಮ್ ಅನ್ನು ತೆಗೆದುಹಾಕಿ ಹಾಗೂ ಅದನ್ನು ಮತ್ತೆ ಸೇರಿಸಿ. ಸಮಸ್ಯೆ ಮುಂದುವರಿದರೆ, ನಿಮ್ಮ ಸಾಧನವನ್ನು ಮರುಪ್ರಾರಂಭಿಸಿ."</string>
@@ -5415,6 +5439,8 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"2 ಸಿಮ್‌ಗಳನ್ನು ಬಳಸುವಾಗ, ಈ ಟ್ಯಾಬ್ಲೆಟ್‌‌ 4G ಗೆ ಸೀಮಿತವಾಗಿರುತ್ತದೆ. "<annotation id="url">"ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ"</annotation></string>
     <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"2 ಸಿಮ್‌ಗಳನ್ನು ಬಳಸುವಾಗ, ಈ ಸಾಧನವು 4G ಗೆ ಸೀಮಿತವಾಗಿರುತ್ತದೆ. "<annotation id="url">"ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"ಕ್ಯಾಶ್ ಮಾಡಿದ ಆ್ಯಪ್‌ನ ಕಾರ್ಯಗತಗೊಳಿಸುವಿಕೆ ಅಮಾನತು ಮಾಡಿ"</string>
+    <string name="blob_never_expires_text" msgid="7293376386620106623">"ಎಂದಿಗೂ ಅಂತ್ಯಗೊಳ್ಳುವುದಿಲ್ಲ."</string>
+    <string name="accessor_never_expires_text" msgid="4647624492147788340">"ಲೀಸ್ ಎಂದಿಗೂ ಅಂತ್ಯಗೊಳ್ಳುವುದಿಲ್ಲ."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"ಸೆಟ್ಟಿಂಗ್‌ಗಳಲ್ಲಿ ಸ್ಕ್ರೀನ್ ಓವರ್‌ಲೇಗಳನ್ನು ಅನುಮತಿಸಿ"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"ಸೆಟ್ಟಿಂಗ್‌ಗಳ ಸ್ಕ್ರೀನ್‌ಗಳನ್ನು ಓವರ್‌ಲೇ ಮಾಡಲು ಇತರ ಆ್ಯಪ್‌ಗಳಲ್ಲಿ ಡಿಸ್‌ಪ್ಲೇ ಮಾಡಬಹುದಾದ ಆ್ಯಪ್‌ಗಳನ್ನು ಅನುಮತಿಸಿ"</string>
     <string name="media_controls_title" msgid="403271085636252597">"ಮಾಧ್ಯಮ"</string>
@@ -5445,7 +5471,6 @@
     <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"ತಾತ್ಕಾಲಿಕವಾಗಿ ಲಭ್ಯವಿಲ್ಲ"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"ಯಾವುದೇ ಸಿಮ್ ಇಲ್ಲ"</string>
     <string name="network_and_internet_preferences_title" msgid="8635896466814033405">"ನೆಟ್‌ವರ್ಕ್ ಪ್ರಾಶಸ್ತ್ಯಗಳು"</string>
-    <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"ಸಾರ್ವಜನಿಕ ನೆಟ್‌ವರ್ಕ್‌ಗಳಿಗೆ ಕನೆಕ್ಟ್ ಮಾಡಿ"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"ನೆಟ್‌ವರ್ಕ್ ಕನೆಕ್ಷನ್, ಇಂಟರ್ನೆಟ್, ವೈರ್‌ಲೆಸ್, ಡೇಟಾ, ವೈಫೈ, ವೈ-ಫೈ, ವೈ ಫೈ, ಸೆಲ್ಯುಲಾರ್, ಮೊಬೈಲ್, ಸೆಲ್ ವಾಹಕ, 4g, 3g, 2g, LTE"</string>
     <string name="turn_on_wifi" msgid="4868116014727533668">"ವೈ-ಫೈ ಆನ್‌ ಮಾಡಿ"</string>
     <string name="turn_off_wifi" msgid="8861028501067400694">"ವೈ-ಫೈ ಆಫ್ ಮಾಡಿ"</string>
@@ -5463,6 +5488,7 @@
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"W+ ನೆಟ್‌ವರ್ಕ್"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"ಸಿಮ್"</string>
     <string name="downloaded_sim_category_title" msgid="8611467223348446658">"ಡೌನ್‌ಲೋಡ್ ಮಾಡಿರುವ ಸಿಮ್"</string>
+    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"ಡೌನ್‌ಲೋಡ್ ಮಾಡಲಾದ ಸಿಮ್‌ಗಳು"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"ಸಕ್ರಿಯವಾಗಿದೆ"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"ನಿಷ್ಕ್ರಿಯವಾಗಿದೆ"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / <xliff:g id="ID_1">%1$s</xliff:g> ಗಾಗಿ ಡೀಫಾಲ್ಟ್ ಆಗಿದೆ"</string>
@@ -5550,4 +5576,39 @@
     <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"ಈ ಫೋನ್ ಅನ್ನು ಸಂಪರ್ಕಿಸಲು <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> ಬಯಸುತ್ತದೆ.\n\nನೀವು ಈ ಮೊದಲು <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ಗೆ ಕನೆಕ್ಟ್ ಆಗಿರಲಿಲ್ಲ."</string>
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"ಕನೆಕ್ಟ್ ಮಾಡಬೇಡಿ"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"ಕನೆಕ್ಟ್ ಮಾಡಿ"</string>
+    <string name="tare_settings" msgid="3788654800004869077">"TARE ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
+    <string name="tare_revert" msgid="3855325741125236638">"ಡೀಫಾಲ್ಟ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಹಿಂತಿರುಗಿ"</string>
+    <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"ಸೆಟ್ಟಿಂಗ್ ಡೀಫಾಲ್ಟ್‌ಗೆ ಹಿಂತಿರುಗಿಸಲಾಗಿದೆ."</string>
+    <string name="tare_max_satiated_balance" msgid="3914973999573150340">"ಗರಿಷ್ಠ ಬ್ಯಾಟರಿ ಬ್ಯಾಲೆನ್ಸ್"</string>
+    <string name="tare_max_circulation" msgid="1119152898303214809">"ಗರಿಷ್ಠ ಹಂಚಿಕೆ"</string>
+    <string name="tare_min_satiated_balance" msgid="8038047539584856564">"ಕನಿಷ್ಠ ಬ್ಯಾಟರಿ ಬ್ಯಾಲೆನ್ಸ್"</string>
+    <string name="tare_modifiers" msgid="8919975635360280820">"ಮಾರ್ಪಡಿಸುವಿಕೆಗಳು"</string>
+    <string name="tare_actions" msgid="4573323466443513639">"ಕ್ರಿಯೆಗಳು"</string>
+    <string name="tare_rewards" msgid="602131401590928885">"ರಿವಾರ್ಡ್‌ಗಳು"</string>
+    <string name="tare_exempted" msgid="223247432456678980">"ವಿನಾಯಿತಿ ನೀಡಲಾಗಿದೆ"</string>
+    <string name="tare_headless_app" msgid="6523878455829211651">"ಹೆಡ್‌ಲೆಸ್ ಸಿಸ್ಟಂ ಆ್ಯಪ್"</string>
+    <string name="tare_other_app" msgid="4361184813378127700">"ಇತರ ಆ್ಯಪ್‌"</string>
+    <string name="tare_top_activity" msgid="7266560655483385757">"ಉನ್ನತ ಚಟುವಟಿಕೆ"</string>
+    <string name="tare_notification_seen" msgid="7829963536020087742">"ಅಧಿಸೂಚನೆಯನ್ನು ನೋಡಲಾಗಿದೆ"</string>
+    <string name="tare_notification_seen_15_min" msgid="832174185809497764">"ಅಧಿಸೂಚನೆಯನ್ನು 15 ನಿಮಿಷಗಳಲ್ಲಿ ನೋಡಲಾಗಿದೆ"</string>
+    <string name="tare_notification_interaction" msgid="3806204222322830129">"ಅಧಿಸೂಚನೆ ಸಂವಹನ"</string>
+    <string name="tare_widget_interaction" msgid="2260701564089214184">"ವಿಜೆಟ್ ಸಂವಹನ"</string>
+    <string name="tare_other_interaction" msgid="8069163421115212751">"ಇತರ ಬಳಕೆದಾರರ ಸಂವಹನ"</string>
+    <string name="tare_job_max_start" msgid="1586399578665940836">"ಗರಿಷ್ಠ ಆದ್ಯತೆ ಕೆಲಸವನ್ನು ಪ್ರಾರಂಭಿಸುತ್ತದೆ"</string>
+    <string name="tare_job_max_running" msgid="2897217372986518495">"ಗರಿಷ್ಠ ಆದ್ಯತೆಯ ಕೆಲಸ ನಡೆಯುತ್ತಿದೆ"</string>
+    <string name="tare_job_high_start" msgid="7464143754932031022">"ಆದ್ಯತೆಯ ಕೆಲಸವನ್ನು ಪ್ರಾರಂಭಿಸುತ್ತದೆ"</string>
+    <string name="tare_job_high_running" msgid="6541171046405088669">"ಆದ್ಯತೆಯ ಕೆಲಸ ಚಾಲನೆಯಲ್ಲಿದೆ"</string>
+    <string name="tare_job_default_start" msgid="6744427210148953151">"ಡೀಫಾಲ್ಟ್ ಕೆಲಸವನ್ನು ಪ್ರಾರಂಭಿಸುತ್ತದೆ"</string>
+    <string name="tare_job_default_running" msgid="8429081804128945217">"ಡೀಫಾಲ್ಟ್ ಕೆಲಸ ಚಾಲನೆಯಲ್ಲಿದೆ"</string>
+    <string name="tare_job_low_start" msgid="4605440035856891746">"ಕಡಿಮೆ ಆದ್ಯತೆಯ ಕೆಲಸವನ್ನು ಪ್ರಾರಂಭಿಸುತ್ತದೆ"</string>
+    <string name="tare_job_low_running" msgid="831668616902849604">"ಕಡಿಮೆ ಆದ್ಯತೆಯ ಕೆಲಸ ನಡೆಯುತ್ತಿದೆ"</string>
+    <string name="tare_job_min_start" msgid="6508233901992538188">"ಕನಿಷ್ಠ ಆದ್ಯತೆಯ ಕೆಲಸವನ್ನು ಪ್ರಾರಂಭಿಸುತ್ತದೆ"</string>
+    <string name="tare_job_min_running" msgid="6167128996320622604">"ಕನಿಷ್ಠ ಆದ್ಯತೆಯ ಕೆಲಸ ನಡೆಯುತ್ತಿದೆ"</string>
+    <string name="tare_job_timeout_penalty" msgid="7644332836795492506">"ಉದ್ಯೋಗದ ಅವಧಿ ಮೀರಿದ ದಂಡ"</string>
+  <string-array name="tare_modifiers_subfactors">
+    <item msgid="3325940509857535498">"ಚಾರ್ಜಿಂಗ್ ಆಗುತ್ತಿದೆ"</item>
+    <item msgid="658627268149681677">"ಡೋಸ್"</item>
+    <item msgid="1599558140284643834">"ಪವರ್ ಸೇವ್ ಮೋಡ್"</item>
+    <item msgid="588427840913221601">"ಪ್ರಕ್ರಿಯೆ ಸ್ಥಿತಿ"</item>
+  </string-array>
 </resources>

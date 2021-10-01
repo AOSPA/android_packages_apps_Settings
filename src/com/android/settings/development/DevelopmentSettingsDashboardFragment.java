@@ -508,7 +508,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new WifiCoverageExtendPreferenceController(context));
         controllers.add(new WifiVerboseLoggingPreferenceController(context));
         controllers.add(new WifiScanThrottlingPreferenceController(context));
-        controllers.add(new WifiEnhancedMacRandomizationPreferenceController(context));
+        controllers.add(new WifiNonPersistentMacRandomizationPreferenceController(context));
         controllers.add(new MobileDataAlwaysOnPreferenceController(context));
         controllers.add(new SmartDdsSwitchPreferenceController(context));
         controllers.add(new TetheringHardwareAccelPreferenceController(context));
@@ -519,6 +519,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BluetoothMapVersionPreferenceController(context));
         controllers.add(new BluetoothA2dpHwOffloadPreferenceController(context, fragment));
         controllers.add(new BluetoothMaxConnectedAudioDevicesPreferenceController(context));
+        controllers.add(new NfcStackDebugLogPreferenceController(context));
         controllers.add(new ShowTapsPreferenceController(context));
         controllers.add(new PointerLocationPreferenceController(context));
         controllers.add(new ShowSurfaceUpdatesPreferenceController(context));

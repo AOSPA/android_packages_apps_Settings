@@ -886,6 +886,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="6993526033095292609">"Kumbuka mipangilio"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Kima cha juu zaidi cha vifaa vya sauti vya Bluetooth vilivyounganishwa"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Chagua kima cha juu zaidi cha vifaa vya sauti vya Bluetooth vilivyounganishwa"</string>
+    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Kumbukumbu ya utatuzi wa rafu za NFC"</string>
+    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Ongeza kiwango cha kuweka kumbukumbu ya rafu za NFC"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Tuma"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"kioo"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Washa kuonyesha skrini bila kutumia waya"</string>
@@ -2286,7 +2288,12 @@
     <string name="talkback_summary" msgid="5820927220378864281">"Kisoma skrini hasa kwa watu wenye upofu na wenye matatizo ya kuona"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Gusa vipengee kwenye skrini yako ili usikie vikisomwa kwa sauti"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Mapendeleo ya manukuu"</string>
+    <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"Kuhusu mapendeleo ya manukuu"</string>
+    <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Pata maelezo zaidi kuhusu mapendeleo ya manukuu"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Ukuzaji"</string>
+    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Njia ya mkato ya ukuzaji"</string>
+    <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Kuhusu ukuzaji"</string>
+    <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"Pata maelezo zaidi kuhusu ukuzaji"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Aina ya ukuzaji"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"Kuza skrini yako nzima, sehemu mahususi au ubadilishe kati ya chaguo zote mbili"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Skrini nzima"</string>
@@ -2355,10 +2362,13 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Ruhusu kipengele cha njia ya mkato ya kufikia vipengele kiwake kwenye skrini iliyofungwa. Shikilia vitufe vyote viwili vya sauti kwa sekunde chache."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Kitufe cha zana za ufikivu"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Ishara na kitufe cha zana za ufikivu"</string>
+    <string name="accessibility_button_about_title" msgid="3581116105084067926">"Kuhusu kitufe cha zana za ufikivu"</string>
+    <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"Kuhusu ishara na kitufe cha zana za ufikivu"</string>
+    <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Pata maelezo zaidi kuhusu ishara na kitufe cha zana za ufikivu"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Kutumia kitufe cha zana za ufikivu. Ishara haipatikani kwenye usogezaji kwa kutumia vitufe 3."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Fikia vipengele vya ufikivu haraka"</string>
-    <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"Fikia vipengele vya ufikivu haraka kwenye skrini yoyote.\n\nIli uanze, nenda kwenye mipangilio ya ufikivu na uchague kipengele. Gusa njia ya mkato na uchague kitufe cha zana za ufikivu.\n\nIli utumie kitufe cha zana za ufikivu katika sehemu ya viungo muhimu badala yake, badili ili utumie usogezaji kwa kutumia vitufe 2 au usogezaji kwa kutumia vitufe 3."</string>
-    <string name="accessibility_button_description" msgid="7372405202698400339">"Fikia vipengele vya ufikivu haraka kwenye skrini yoyote. \n\nIli uanze, nenda kwenye mipangilio ya ufikivu na uchague kipengele. Gusa njia ya mkato na uchague kitufe cha zana za ufikivu."</string>
+    <string name="accessibility_button_gesture_description" msgid="785178810659647474">"Fikia vipengele vya ufikivu haraka kwenye skrini yoyote.\n\nIli uanze, nenda kwenye mipangilio ya ufikivu na uchague kipengele. Gusa njia ya mkato na uchague kitufe cha zana za ufikivu au ishara."</string>
+    <string name="accessibility_button_description" msgid="3664784100487881054">"Fikia vipengele vya ufikivu haraka kwenye skrini yoyote.\n\nIli uanze, nenda kwenye mipangilio ya ufikivu na uchague kipengele. Gusa njia ya mkato na uchague kitufe cha zana za ufikivu."</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Tumia ishara au kitufe"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Mahali"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Ukubwa"</string>
@@ -2384,13 +2394,18 @@
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"Dakika 1"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"Dakika 2"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Chukua hatua (Muda wa Ufikivu umekwisha)"</string>
+    <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"Kuhusu muda wa kuchukua hatua (Kuisha kwa muda wa ufikivu)"</string>
+    <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"Pata maelezo zaidi kuhusu muda wa kuchukua hatua (Kuisha kwa muda wa ufikivu)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Wakati wa kuchukua hatua"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Chagua muda ambao ungependa kuonyesha ujumbe unaokuomba uchukue hatua, unaoonekana kwa muda mfupi.\n\nBaadhi ya programu hazitumii mipangilio hii."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Muda wa kugusa na kushikilia"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Ugeuzaji rangi"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Tumia ugeuzaji rangi"</string>
+    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Njia ya mkato ya ugeuzaji rangi"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"Ugeuzaji rangi hubadilisha skrini zenye mwangaza kuwa nyeusi.&lt;br/&gt;&lt;br/&gt; Kumbuka: &lt;ol&gt; &lt;li&gt; Ugeuzaji rangi pia hubadilisha skrini nyeusi kuwa za mwangaza.&lt;/li&gt; &lt;li&gt; Rangi zitabadilika kwenye maudhui na picha.&lt;/li&gt; &lt;li&gt; Mandhari meusi yanaweza kutumika kuonyesha mandharinyuma meusi. Mandhari meusi hufanya kazi kwenye programu zinazotumika. Ugeuzaji rangi hufanya kazi kwenye programu zote.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Kubofya kiotomatiki (muda wa kuchukua hatua)"</string>
+    <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Kuhusu kubofya kiotomatiki (kuchukua hatua baada ya kiteuzi kusimama)"</string>
+    <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Pata maelezo zaidi kuhusu kubofya kiotomatiki (kuchukua hatua baada ya kiteuzi kusimama)"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"Kubofya kiotomatiki hufanya kazi na kipanya kilichounganishwa. Unaweza kuweka mipangilio ili kiteuzi cha kipanya kibofye kiotomatiki kiteuzi kinaposimama kwa muda fulani."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"Kimezimwa"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Kifupi"</string>
@@ -2410,6 +2425,11 @@
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Tumia <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Fungua <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Tumia kipengele cha usahihishaji wa rangi"</string>
+    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Njia ya mkato ya usahihishaji wa rangi"</string>
+    <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"Kuhusu usahihishaji wa rangi"</string>
+    <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Pata maelezo zaidi kuhusu usahihishaji wa rangi"</string>
+    <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Kuhusu ugeuzaji rangi"</string>
+    <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Pata maelezo zaidi kuhusu ugeuzaji rangi"</string>
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"Onyesha manukuu"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"Kwa ajili ya programu zinazotumika pekee"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Muundo na ukubwa wa manukuu"</string>
@@ -2449,6 +2469,8 @@
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Bluu-manjano"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Kipunguza mwangaza zaidi"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Punguza mwangaza wa skrini zaidi"</string>
+    <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Njia ya mkato ya kupunguza mwangaza zaidi"</string>
+    <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Kuhusu kipunguza mwangaza zaidi"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Punguza mwangaza wa skrini zaidi ya kiwango cha chini cha ung\'aavu wa simu yako"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Punguza mwangaza wa skrini zaidi ya kiwango cha chini cha ung\'aavu wa kompyuta yako kibao"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Punguza mwangaza wa skrini yako zaidi ili uweze kusoma bila tatizo.&lt;br/&gt;&lt;br/&gt; Hali hii inaweza kukusaidia wakati: &lt;ol&gt; &lt;li&gt; Ung\'aavu chaguomsingi wa kiwango cha chini kwenye simu yako bado una mwangaza mkubwa&lt;/li&gt; &lt;li&gt; Unatumia simu yako katika hali zenye giza, kama vile usiku au katika chumba chenye giza kabla ya kulala&lt;/li&gt; &lt;/ol&gt;"</string>
@@ -4840,6 +4862,7 @@
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Gusa mara mbili ili uangalie kifaa"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"Hali ya kutumia kwa mkono mmoja"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Tumia hali ya kutumia kwa mkono mmoja"</string>
+    <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"Njia ya mkato ya hali ya kutumia kwa mkono mmoja"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"uwezo wa kufikia"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Telezesha kidole chini ili"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Tumia njia ya mkato kutekeleza"</string>
@@ -5272,6 +5295,7 @@
     <string name="sim_action_yes" msgid="8076556020131395515">"Ndiyo"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"Zima kisha uwashe"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"Hapana"</string>
+    <string name="sim_action_cancel" msgid="2668099867029610910">"Ghairi"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Badilisha"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Imeshindwa kuanza kutumia SIM"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Ondoa SIM na uiweke tena. Iwapo tatizo litaendelea, zima kisha uwashe kifaa chako."</string>
@@ -5416,6 +5440,8 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"Unapotumia SIM mbili, kompyuta hii kibao itatumia 4G pekee. "<annotation id="url">"Pata maelezo zaidi"</annotation></string>
     <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"Unapotumia SIM mbili, kifaa hiki kitatumia 4G pekee. "<annotation id="url">"Pata maelezo zaidi"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Simamisha utekelezaji kwa programu zilizowekwa kwenye akiba"</string>
+    <string name="blob_never_expires_text" msgid="7293376386620106623">"Muda wa matumizi hauna kikomo."</string>
+    <string name="accessor_never_expires_text" msgid="4647624492147788340">"Muda wa kukodisha hauna kikomo."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Ruhusu programu zinazowekelewa juu ya nyingine kwenye Mipangilio"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Ruhusu programu zinazoweza kuonyeshwa juu ya programu nyingine ziwekelewe juu ya skrini za Mipangilio"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Maudhui"</string>
@@ -5446,7 +5472,6 @@
     <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"Haipatikani kwa muda"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"Hakuna SIM"</string>
     <string name="network_and_internet_preferences_title" msgid="8635896466814033405">"Mapendeleo ya mtandao"</string>
-    <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Unganisha kwenye mitandao ya umma"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"muunganisho wa mtandao, intaneti, isiyotumia waya, data, wifi, wi-fi, wi fi, mtandao wa simu, vifaa vya mkononi, mtoa huduma za vifaa vya mkononi, 4g, 3g, 2g, lte"</string>
     <string name="turn_on_wifi" msgid="4868116014727533668">"Washa Wi-Fi"</string>
     <string name="turn_off_wifi" msgid="8861028501067400694">"Zima Wi-Fi"</string>
@@ -5464,6 +5489,7 @@
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"Mtandao wa W+"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
     <string name="downloaded_sim_category_title" msgid="8611467223348446658">"SIM ILIYOPAKULIWA"</string>
+    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"SIM ZILIZOPAKULIWA"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Inatumika"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Haitumiki"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Chaguomsingi ya <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -5551,4 +5577,39 @@
     <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> kinataka kuunganishwa kwenye simu hii.\n\nHujawahi kuunganisha kwenye <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Usiunganishe"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Unganisha"</string>
+    <string name="tare_settings" msgid="3788654800004869077">"Mipangilio ya TARE"</string>
+    <string name="tare_revert" msgid="3855325741125236638">"Rejesha Mipangilio Chaguomsingi"</string>
+    <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Umerejesha mipangilio chaguomsingi."</string>
+    <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Salio la Juu Wakati Kifaa Kimejaa Chaji"</string>
+    <string name="tare_max_circulation" msgid="1119152898303214809">"Usambazaji wa Kiwango cha Juu Zaidi"</string>
+    <string name="tare_min_satiated_balance" msgid="8038047539584856564">"Salio la Chini Wakati Kifaa Kimejaa Chaji"</string>
+    <string name="tare_modifiers" msgid="8919975635360280820">"Virekebishi"</string>
+    <string name="tare_actions" msgid="4573323466443513639">"Vitendo"</string>
+    <string name="tare_rewards" msgid="602131401590928885">"Zawadi"</string>
+    <string name="tare_exempted" msgid="223247432456678980">"Zilizoruhusiwa kutofuata kanuni"</string>
+    <string name="tare_headless_app" msgid="6523878455829211651">"Programu ya Mfumo Isiyo na Mada"</string>
+    <string name="tare_other_app" msgid="4361184813378127700">"Programu Nyingine"</string>
+    <string name="tare_top_activity" msgid="7266560655483385757">"Shughuli Maarufu"</string>
+    <string name="tare_notification_seen" msgid="7829963536020087742">"Ameona Arifa"</string>
+    <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Mtumiaji Aliona Arifa Ndani ya Dakika 15"</string>
+    <string name="tare_notification_interaction" msgid="3806204222322830129">"Matumizi ya Arifa"</string>
+    <string name="tare_widget_interaction" msgid="2260701564089214184">"Matumizi ya Wijeti"</string>
+    <string name="tare_other_interaction" msgid="8069163421115212751">"Matumizi Mengine ya Mtumiaji"</string>
+    <string name="tare_job_max_start" msgid="1586399578665940836">"Kuanzisha Kazi ya Kipaumbele cha Juu Zaidi"</string>
+    <string name="tare_job_max_running" msgid="2897217372986518495">"Kufanya Kazi ya Kipaumbele cha Juu Zaidi"</string>
+    <string name="tare_job_high_start" msgid="7464143754932031022">"Kuanzisha Kazi ya Kipaumbele cha Juu"</string>
+    <string name="tare_job_high_running" msgid="6541171046405088669">"Kufanya Kazi ya Kipaumbele cha Juu"</string>
+    <string name="tare_job_default_start" msgid="6744427210148953151">"Kuanzisha Kazi Chaguomsingi"</string>
+    <string name="tare_job_default_running" msgid="8429081804128945217">"Kufanya Kazi Chaguomsingi"</string>
+    <string name="tare_job_low_start" msgid="4605440035856891746">"Kuanzisha Kazi ya Kipaumbele cha Chini"</string>
+    <string name="tare_job_low_running" msgid="831668616902849604">"Kufanya Kazi ya Kipaumbele cha Chini"</string>
+    <string name="tare_job_min_start" msgid="6508233901992538188">"Kuanzisha Kazi ya Kipaumbele cha Chini Zaidi"</string>
+    <string name="tare_job_min_running" msgid="6167128996320622604">"Kufanya Kazi ya Kipaumbele cha Chini Zaidi"</string>
+    <string name="tare_job_timeout_penalty" msgid="7644332836795492506">"Adhabu ya Kuchelewesha Kazi"</string>
+  <string-array name="tare_modifiers_subfactors">
+    <item msgid="3325940509857535498">"Inachaji"</item>
+    <item msgid="658627268149681677">"Sinzia"</item>
+    <item msgid="1599558140284643834">"Hali ya Kiokoa Betri"</item>
+    <item msgid="588427840913221601">"Hali ya Kuchakata"</item>
+  </string-array>
 </resources>
