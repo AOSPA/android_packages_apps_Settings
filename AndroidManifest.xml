@@ -112,8 +112,12 @@
     <uses-permission android:name="android.permission.READ_DREAM_SUPPRESSION" />
     <uses-permission android:name="android.permission.MANAGE_APP_HIBERNATION" />
     <uses-permission android:name="com.qualcomm.qti.permission.USE_EXT_TELEPHONY_SERVICE" />
+    <uses-permission android:name="android.permission.LAUNCH_TWO_PANE_SETTINGS_DEEP_LINK" />
+    <uses-permission android:name="android.permission.ALLOW_PLACE_IN_TWO_PANE_SETTINGS" />
 
-    <application android:label="@string/settings_label"
+    <application
+            android:name=".SettingsApplication"
+            android:label="@string/settings_label"
             android:icon="@drawable/ic_launcher_settings"
             android:theme="@style/Theme.Settings"
             android:hardwareAccelerated="true"
@@ -127,6 +131,7 @@
 
         <uses-library android:name="org.apache.http.legacy" />
         <uses-library android:name="com.qti.extphone.extphonelib"/>
+
         <!-- Settings -->
 
         <activity android:name=".homepage.SettingsHomepageActivity"
@@ -135,7 +140,7 @@
                   android:taskAffinity="com.android.settings.root"
                   android:launchMode="singleTask"
                   android:exported="true"
-                  android:configChanges="keyboard|keyboardHidden">
+                  android:configChanges="keyboard|keyboardHidden|screenSize|screenLayout">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -171,6 +176,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <meta-data android:name="android.app.shortcuts" android:resource="@xml/shortcuts"/>
+        </activity-alias>
+
+        <!-- Alias for SettingsHomepageActivity which works for deep link page in 2-panel. -->
+        <activity-alias android:name="DeepLinkHomepageActivity"
+                android:label="@string/settings_label_launcher"
+                android:exported="true"
+                android:permission="android.permission.LAUNCH_TWO_PANE_SETTINGS_DEEP_LINK"
+                android:targetActivity=".homepage.SettingsHomepageActivity">
+            <intent-filter>
+                <action android:name="android.settings.SETTINGS_LARGE_SCREEN_DEEP_LINK" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity-alias>
 
         <receiver android:name=".SettingsInitialize"
@@ -1754,11 +1771,6 @@
         </activity>
 
         <activity
-            android:name=".SettingsTutorialDialogWrapperActivity"
-            android:theme="@style/Theme.AlertDialog"
-            android:exported="false"/>
-
-        <activity
             android:name="Settings$TextToSpeechSettingsActivity"
             android:exported="true"
             android:label="@string/tts_settings">
@@ -2230,6 +2242,8 @@
 
         <activity android:name=".development.AppPicker"
                   android:label="@string/select_application" />
+
+        <activity android:name=".development.AdbQrCodeActivity" />
 
         <activity android:name=".development.DSULoader"
                   android:label="Select DSU Package"

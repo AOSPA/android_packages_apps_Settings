@@ -52,12 +52,14 @@ import androidx.preference.PreferenceManager;
 
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
+import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.gateway.SettingsGateway;
 import com.android.settings.dashboard.DashboardFeatureProvider;
+import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wfd.WifiDisplaySettings;
@@ -231,6 +233,12 @@ public class SettingsActivity extends SettingsBaseActivity
     protected void onCreate(Bundle savedState) {
         super.onCreate(savedState);
         Log.d(LOG_TAG, "Starting onCreate");
+
+        if (launchHomepageForTwonPaneDeepLink()) {
+            finish();
+            return;
+        }
+
         long startTime = System.currentTimeMillis();
 
         final FeatureFactory factory = FeatureFactory.getFactory(this);
@@ -250,17 +258,11 @@ public class SettingsActivity extends SettingsBaseActivity
         // Getting Intent properties can only be done after the super.onCreate(...)
         final String initialFragmentName = getInitialFragmentName(intent);
 
-        // This is a "Sub Settings" when:
-        // - this is a real SubSettings
-        // - or :settings:show_fragment_as_subsetting is passed to the Intent
-        final boolean isSubSettings = this instanceof SubSettings ||
-                intent.getBooleanExtra(EXTRA_SHOW_FRAGMENT_AS_SUBSETTING, false);
-
         // If this is a sub settings, then apply the SubSettings Theme for the ActionBar content
         // insets.
         // If this is in setup flow, don't apply theme. Because light theme needs to be applied
         // in SettingsBaseActivity#onCreate().
-        if (isSubSettings && !WizardManagerHelper.isAnySetupWizard(getIntent())) {
+        if (isSubSettings(intent) && !WizardManagerHelper.isAnySetupWizard(getIntent())) {
             setTheme(R.style.Theme_SubSettings);
         }
 
@@ -347,6 +349,64 @@ public class SettingsActivity extends SettingsBaseActivity
         if (DEBUG_TIMING) {
             Log.d(LOG_TAG, "onCreate took " + (System.currentTimeMillis() - startTime) + " ms");
         }
+    }
+
+    private boolean isSubSettings(Intent intent) {
+        return this instanceof SubSettings ||
+            intent.getBooleanExtra(EXTRA_SHOW_FRAGMENT_AS_SUBSETTING, false);
+    }
+
+    /** Returns true if the Activity is started by a deep link intent for large screen devices. */
+    private boolean launchHomepageForTwonPaneDeepLink() {
+        final Intent intent = getIntent();
+        if (!shouldShowTwoPaneDeepLink(intent)) {
+            return false;
+        }
+
+        // It's a deep link intent, SettingsHomepageActivity will set SplitPairRule and start it.
+        final Intent trampolineIntent =
+                new Intent(android.provider.Settings.ACTION_SETTINGS_LARGE_SCREEN_DEEP_LINK);
+        trampolineIntent.replaceExtras(intent);
+        trampolineIntent.putExtra(
+                android.provider.Settings.EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_URI,
+                intent.toUri(Intent.URI_INTENT_SCHEME));
+        trampolineIntent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+        startActivity(trampolineIntent);
+
+        return true;
+    }
+
+    private boolean shouldShowTwoPaneDeepLink(Intent intent) {
+        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this)) {
+            return false;
+        }
+
+        // Only starts trampoline for deep links. Should return false for all the cases that
+        // Settings app starts SettingsActivity or SubSetting by itself.
+        if (intent.getAction() == null) {
+            // Other apps should send deep link intent which matches intent filter of the Activity.
+            return false;
+        }
+
+        if (isSubSettings(intent)) {
+            return false;
+        }
+
+        if (intent.getBooleanExtra(SettingsHomepageActivity.EXTRA_IS_FROM_SETTINGS_HOMEPAGE,
+                /* defaultValue */ false)) {
+            return false;
+        }
+
+        if (TextUtils.equals(intent.getAction(), Intent.ACTION_CREATE_SHORTCUT)) {
+            // Returns false to show full screen for Intent.ACTION_CREATE_SHORTCUT because
+            // - Launcher startActivityForResult for Intent.ACTION_CREATE_SHORTCUT and activity
+            //   stack starts from launcher, CreateShortcutActivity will not follows SplitPaitRule
+            //   registered by Settings.
+            // - There is no CreateShortcutActivity entry point from Settings app UI.
+            return false;
+        }
+
+        return true;
     }
 
     /** Returns the initial fragment name that the activity will launch. */

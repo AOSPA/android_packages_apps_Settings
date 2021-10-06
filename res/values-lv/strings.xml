@@ -63,8 +63,8 @@
     <string name="sdcard_setting" product="nosdcard" msgid="6071836464978826249">"USB krātuve"</string>
     <string name="sdcard_setting" product="default" msgid="3713462184783824923">"SD karte"</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
-    <string name="bluetooth_is_discoverable" msgid="4798961627677790935">"Redzams visām blakus esošām Bluetooth ier. (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
-    <string name="bluetooth_is_discoverable_always" msgid="8122823110652921674">"Redzams visām blakus esošām Bluetooth ierīcēm"</string>
+    <string name="bluetooth_is_discoverable" msgid="4798961627677790935">"Redzams visām tuvumā esošām Bluetooth ier. (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
+    <string name="bluetooth_is_discoverable_always" msgid="8122823110652921674">"Redzams visām tuvumā esošām Bluetooth ierīcēm"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="6181960579190879601">"Nav redzams citām Bluetooth ierīcēm"</string>
     <string name="bluetooth_only_visible_to_paired_devices" msgid="3574936359739213455">"Redzams tikai pārī savienotām ierīcēm"</string>
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Redzamības noildze"</string>
@@ -357,6 +357,7 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
     <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
@@ -400,6 +401,7 @@
     <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"Sejas modelis tiks neatgriezeniski un droši izdzēsts.\n\nPēc izdzēšanas jums būs jāizmanto pirksta nospiedums, PIN, kombinācija vai parole, lai autorizētu tālruni vai veiktu autentifikāciju lietotnēs."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Izmantot tālruņa atbloķēšanai autorizāciju pēc sejas"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Pirkstu nospiedumi"</string>
+    <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Pirksta nospiedums darbam"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Nospiedumu pārvaldība"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Nospieduma lietošana"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Pievienot pirksta nospiedumu"</string>
@@ -454,9 +456,11 @@
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Seja un pirksta nospiedums ir pievienots"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"Ja iestatīsiet autorizāciju pēc sejas un autorizāciju ar pirksta nospiedumu, tālrunī tiks pieprasīts pirksta nospiedums, kad valkāsiet masku vai atradīsieties tumšā vietā."</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"Atbloķēšanas iespējas"</string>
-    <string name="biometric_settings_category_ways_to_use" msgid="2730401752914580200">"Autorizācija pēc sejas un ar pirksta nospiedumu:"</string>
-    <string name="biometric_settings_use_biometric_unlock_phone" msgid="2002278066540969480">"Tālruņa atbloķēšana"</string>
-    <string name="biometric_settings_use_biometric_for_apps" msgid="5251210618011579314">"Autentifikācija lietotnēs"</string>
+    <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"Tālruņa atbloķēšana"</string>
+    <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"Lietotnēs verificēt jūsu identitāti"</string>
+    <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Izmantojot autorizāciju pēc sejas"</string>
+    <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Izmantojot autorizāciju ar pirksta nospiedumu"</string>
+    <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Izmantojot seju/pirksta nospiedumu"</string>
     <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Atdodiet tālruni atpakaļ vienam no vecākiem."</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"Labi"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Vai izlaist ekrāna bloķēšanu?"</string>
@@ -488,8 +492,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Vēlreiz…"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Atkārtota pieskaršanās pirksta nospieduma ikonai"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Atkārtoti uzlieciet pirkstu, lai pievienotu dažādas pirksta nospieduma daļas."</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Pieskarieties pirksta nospieduma ikonai un turiet to ikreiz, kad tā pārvietojas. Tādējādi varat tvert visu pirksta nospiedumu."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Tādējādi varat tvert visu pirksta nospiedumu."</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Pieskarieties pirksta nospieduma ikonai un turiet to ikreiz, kad tā pārvietojas. Tādējādi tiks tverts plašāks pirksta nospiedums."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Novietojiet pirksta galu uz sensora"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Visbeidzot, novietojiet pirksta sānus"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Novietojiet pirksta sānu uz sensora un turiet, pēc tam novietojiet otru pirksta sānu."</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Tādējādi tiks tverts plašāks pirksta nospiedums."</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Pirksta nospieduma reģistrēšana: <xliff:g id="PERCENTAGE">%d</xliff:g> procenti"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Pirksta nospiedums pievienots"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Tagad varat izmantot pirksta nospiedumu, lai autorizētu tālruni vai apstiprinātu savu identitāti, piemēram, pierakstoties lietotnēs."</string>
@@ -567,15 +574,6 @@
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Jūs nevarēsiet izmantot pirksta nospiedumu, lai autorizētu tālruni vai apstiprinātu savu identitāti lietotnēs."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Jūs nevarēsiet izmantot pirksta nospiedumu, lai atbloķētu darba profilu, autorizētu pirkumus vai pierakstītos darba lietotnēs."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Jā, noņemt"</string>
-    <string name="security_settings_biometrics_title" msgid="9156091890323967944">"Autorizācija pēc sejas un pirksta nosp."</string>
-    <string name="security_settings_biometrics_summary_none" msgid="7832260410376805323">"Pieskarieties, lai iestatītu"</string>
-    <string name="security_settings_biometrics_summary_face" msgid="531544670908824943">"Tikai seja"</string>
-    <string name="security_settings_biometrics_summary_fingerprint" msgid="6815851804705508275">"Tikai pirksta nospiedums"</string>
-    <string name="security_settings_biometrics_summary_both" msgid="7328638955127876021">"Seja un pirksta nospiedums"</string>
-    <string name="security_settings_biometrics_description" msgid="1669340998063178097">"Ja iestatīsiet autorizāciju pēc sejas un pirksta nospieduma, tālrunī tiks pieprasīts pirksta nospiedums, kad valkāsiet masku vai atradīsieties tumšā vietā"</string>
-    <string name="security_settings_biometrics_types_category" msgid="4875227478250058267">"Atbloķēšanas iespējas"</string>
-    <string name="security_settings_biometrics_preferences_category" msgid="8289089775173952237">"Sejas vai pirksta nospieduma lietojums"</string>
-    <string name="security_settings_biometrics_preference_use_with_apps" msgid="4068551659594090167">"Autentifikācija lietotnēs"</string>
     <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"Šifrējums"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="7484150746479958376">"Šifrēt planšetdatoru"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="8302873664348463041">"Šifrēt tālruni"</string>
@@ -838,6 +836,7 @@
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"Iespējams, šis PIN būs jāievada arī otrā ierīcē."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"Iespējams, šī ieejas atslēga būs jāievada arī otrā ierīcē."</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">"Lai savienotu pārī ar:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Pārliecinieties, ka tiek rādīta šī ieejas atslēga:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"Apstipriniet, lai savienotu pārī ar koordinēto kopu."</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1068123527866596779">"No:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Vai savienot pārī ar šo ierīci?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="8672803845151786521">"Lai izveidotu savienojumu pārī ar ierīci <xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>, ierakstiet tajā atslēgu <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> un pēc tam nospiediet ievadīšanas taustiņu."</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Atļaut piekļuvi jūsu kontaktpersonām un zvanu vēsturei"</string>
@@ -871,6 +870,7 @@
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"Nevarēja izveidot savienojumu. Mēģiniet vēlreiz."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Ierīces dati"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Ierīces Bluetooth adrese: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Ierīces Bluetooth adrese:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Vai aizmirst ierīci?"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"Noņemt saistījumu"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Vai atvienot lietotni?"</string>
@@ -2281,7 +2281,7 @@
     <string name="gadget_picker_title" msgid="7615902510050731400">"Izvēlēties sīkrīku"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"Izvēlēties logrīku"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="3537968409832846255">"Vai izveidot logrīku un atļaut piekļuvi?"</string>
-    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5694218981358874429">"Pēc logrīka izveidošanas <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> var piekļūt visiem tajā attēlotajiem datiem."</string>
+    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"Kad būsiet izveidojis logrīku, lietojumprogramma varēs piekļūt visam attēlotajam saturam.\n\nLietojumprogramma: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nLogrīks: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"Vienmēr ļaut <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> veidot logrīkus un piekļūt to datiem."</string>
     <string name="usage_stats_label" msgid="6523644917803320085">"Lietojuma statistika"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"Lietojuma statistika"</string>
@@ -2694,7 +2694,7 @@
     <string name="bluetooth_on_time" msgid="8424625554628450028">"Wi-Fi uz laiku"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"Akumulatora lietojums"</string>
     <string name="history_details_title" msgid="8628584613889559355">"Vēstures dati"</string>
-    <string name="advanced_battery_preference_title" msgid="3017771848679952419">"Akumulatora lietojums"</string>
+    <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Akumulatora lietojums"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Skatīt lietojumu pēdējo 24 stundu laikā"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Skatīt lietojumu kopš pēdējās pilnās uzlādes"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"Akumulatora lietojums"</string>
@@ -2718,6 +2718,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Skatiet lietotnes, kas patērē visvairāk akumulatora enerģijas"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Uzlāde īslaicīgi ierobežota"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Akumulatora enerģijas taupīšana. Uzziniet vairāk."</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Atsākt uzlādi"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Noteiktos apstākļos, piemēram, augstā temperatūrā un ilgos uzlādes periodos, uzlādes līmenis var tikt ierobežots līdz <xliff:g id="PERCENT">%1$s</xliff:g>, lai palīdzētu uzturēt akumulatoru darba kārtībā.\n\nKad šie apstākļi vairs nepastāv, jūsu tālrunis tiek automātiski uzlādēts kā parasti."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Noteiktos apstākļos, piemēram, augstā temperatūrā un ilgos uzlādes periodos, uzlādes līmenis var tikt ierobežots līdz <xliff:g id="PERCENT">%1$s</xliff:g>, lai palīdzētu uzturēt akumulatoru darba kārtībā.\n\nKad šie apstākļi vairs nepastāv, jūsu planšetdators tiek automātiski uzlādēts kā parasti."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Tā kā jūsu tālrunis tiek izmantots vairāk nekā parasti, akumulators var izlādēties ātrāk.\n\nTālāk norādītas lietotnes, kas izmanto visvairāk akumulatora enerģijas."</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Tā kā jūsu planšetdators tiek izmantots vairāk nekā parasti, akumulators var izlādēties ātrāk.\n\nTālāk norādītas lietotnes, kas izmanto visvairāk akumulatora enerģijas."</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Tā kā jūsu ierīce tiek izmantota vairāk nekā parasti, akumulators var izlādēties ātrāk.\n\nTālāk norādītas lietotnes, kas izmanto visvairāk akumulatora enerģijas."</string>
@@ -2934,8 +2937,6 @@
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Sistēmas lietojums pēdējo 24 h laikā"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Sistēmas izmantojums: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Lietotnes izmantojums: <xliff:g id="SLOT">%s</xliff:g>"</string>
-    <string name="battery_usage_time_am" msgid="7783773965475697655">"priekšpusdienā"</string>
-    <string name="battery_usage_time_pm" msgid="1534468528902328570">"pēcpusdienā"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Kopā: mazāk par minūti"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Fonā: mazāk par minūti"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Kopā: <xliff:g id="TIME">%s</xliff:g>"</string>
@@ -3416,6 +3417,8 @@
     <string name="application_restrictions" msgid="276179173572729205">"Lietotņu un satura atļaušana"</string>
     <string name="apps_with_restrictions_header" msgid="5277698582872267931">"Lietojumprogrammas ar ierobežojumiem"</string>
     <string name="apps_with_restrictions_settings_button" msgid="2648355133416902221">"Izvērst lietojumprogr. iestat."</string>
+    <string name="user_choose_copy_apps_to_another_user" msgid="5914037067347012870">"Instalējamo lietotņu izvēle"</string>
+    <string name="user_copy_apps_menu_title" msgid="5354300105759670300">"Pieejamo lietotņu instalēšana"</string>
     <string name="nfc_payment_settings_title" msgid="2043139180030485500">"Bezkontakta maksājumi"</string>
     <string name="nfc_payment_how_it_works" msgid="3658253265242662010">"Plašāka informācija"</string>
     <string name="nfc_payment_no_apps" msgid="6840001883471438798">"Maksājiet veikalos, izmantojot savu tālruni"</string>
@@ -3461,8 +3464,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"Paplašinātas zvanu iespējas"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G zvani"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Lietojiet LTE pakalpojumus, lai uzlabotu balss un cita veida saziņu (ieteicams)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Lietojiet 4G pakalpojumus, lai uzlabotu balss un cita veida saziņu (ieteicams)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"Izmantojiet LTE pakalpojumus, lai uzlabotu balss zvanus (ieteicams)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"Izmantojiet 4G pakalpojumus, lai uzlabotu balss zvanus (ieteicams)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"Izmantojiet 5G balss zvaniem"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Sūtīt kontaktpersonu informāciju operatoram"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Sūtīt jūsu kontaktpersonu tālruņa numurus, lai nodrošinātu uzlabotās funkcijas"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Vai sūtīt kontaktpersonu informāciju operatoram <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
@@ -3657,6 +3662,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"akumulatora enerģijas taupīšanas režīms, fiksēts, saglabāties, enerģijas taupīšanas režīms, akumulators"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"darbību secība, grafiks, akumulatora enerģijas taupīšanas režīms, enerģijas taupīšanas režīms, akumulators, automātiski, procenti"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"VoLTE, paplašinātas zvanu iespējas, 4G zvani"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, paplašinātas zvanu iespējas, 5g zvani"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"pievienot valodu, valodas pievienošana"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"teksta lielums, lieli burti, lieli fonti, liels teksts, vājredzība, padarīt tekstu lielāku, fontu palielinātājs, fontu palielināšana"</string>
     <string name="default_sound" msgid="6604374495015245195">"Noklusējuma skaņa"</string>
@@ -3682,6 +3688,7 @@
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"Vienmēr vibrēt"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Vispirms vibrēt, tad pakāpeniski zvanīt"</string>
     <string name="other_sound_settings" msgid="5468360269346162072">"Citas skaņas"</string>
+    <string name="spatial_audio_title" msgid="6591051622375191603">"Telpiskais audio"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Numura sast. tastatūras skaņas"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Ekrāna bloķēšanas skaņa"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Uzlādes skaņas un vibrācija"</string>
@@ -3992,7 +3999,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Vai atļaut pakalpojumam <xliff:g id="SERVICE">%1$s</xliff:g> piekļūt paziņojumiem?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Android adaptīvie paziņojumi ir aizstāti ar funkciju “Uzlabotie paziņojumi” operētājsistēmā Android 12. Šī funkcija parāda ieteiktās darbības un atbildes, kā arī kārto jūsu paziņojumus. \n\nFunkcija “Uzlabotie paziņojumi” var piekļūt paziņojumu saturam, tostarp personas informācijai, piemēram, kontaktpersonu vārdiem un ziņojumiem. Šī funkcija var arī noraidīt paziņojumus vai atbildēt uz tiem, piemēram, atbildēt uz tālruņa zvaniem vai pārvaldīt funkciju “Netraucēt”."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Vai atļaut pakalpojumam <xliff:g id="SERVICE">%1$s</xliff:g> piekļūt paziņojumiem?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> varēs lasīt visus paziņojumus, tostarp personas informāciju, piemēram, kontaktpersonu vārdu un saņemtās īsziņas. Šī lietotne varēs arī noraidīt paziņojumus vai izmantot paziņojumos esošās pogas darbību veikšanai, tostarp atbildēt uz tālruņa zvaniem. \n\nLietotne varēs arī ieslēgt vai izslēgt režīmu “Netraucēt” un mainīt saistītos iestatījumus."</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> varēs lasīt visus paziņojumus, tostarp personas informāciju, piemēram, kontaktpersonu vārdu un saņemtās īsziņas. Šī lietotne varēs arī atlikt vai noraidīt paziņojumus vai izmantot paziņojumos esošās pogas darbību veikšanai, tostarp atbildēt uz tālruņa zvaniem. \n\nLietotne varēs arī ieslēgt vai izslēgt režīmu “Netraucēt” un mainīt saistītos iestatījumus."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Izslēdzot paziņojumu piekļuvi lietotnei <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, iespējams, tiks izslēgta arī piekļuve režīmam “Netraucēt”."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Izslēgt"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Atcelt"</string>
@@ -5513,6 +5520,10 @@
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Aktivizējiet Asistentu, turot barošanas pogu."</string>
     <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Barošanas un ārkārtas izvēlne:\nvienlaikus nospiediet barošanas un skaļuma palielināšanas pogu."</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Zvana signāla novēršana:\nsaīsne ir pieejama skaļuma izvēlnē."</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Nospiešanas un turēšanas ilgums"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Pielāgojiet jutīgumu, izvēloties, cik ilgi nospiest un turēt barošanas pogu."</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Īsi"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Ilgi"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Rādīt maku"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Atļaut piekļuvi makam no bloķēšanas ekrāna un ātrajiem iestatījumiem"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Rādīt ierīču vadīklas"</string>
@@ -5654,7 +5665,10 @@
     <string name="mic_toggle_title" msgid="265145278323852547">"Piekļuve mikrofonam"</string>
     <string name="sensor_toggle_description" msgid="8248823248606795411">"Visām lietotnēm un pakalpojumiem"</string>
     <string name="game_settings_title" msgid="1028178627743422090">"Spēļu iestatījumi"</string>
-    <string name="game_settings_summary" msgid="2548056479103747555">"Spēļu informācijas paneļa saīsnes ieslēgšana u.c."</string>
+    <string name="game_settings_summary" msgid="8623110986485071064">"Ieslēdziet spēļu informācijas paneļa saīsni un citas funkcijas"</string>
+    <string name="previous_page_content_description" msgid="6438292457923282991">"Iepriekšējā"</string>
+    <string name="next_page_content_description" msgid="1641835099813416294">"Nākamā"</string>
+    <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Krāsas priekšskatījums"</string>
     <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"SIM kartes piekļuves pieprasījums"</string>
     <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Kāda ierīce pieprasa piekļuvi jūsu SIM kartei. Pieskarieties, lai skatītu detalizētu informāciju."</string>
     <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Vai atļaut piekļuvi SIM kartei?"</string>
@@ -5700,4 +5714,5 @@
     <item msgid="1599558140284643834">"Enerģijas taupīšanas režīms"</item>
     <item msgid="588427840913221601">"Apstrādes statuss"</item>
   </string-array>
+    <string name="tare_dialog_confirm_button_title" msgid="9179397559760203348">"Apstiprināt"</string>
 </resources>

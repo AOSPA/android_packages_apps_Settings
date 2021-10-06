@@ -61,7 +61,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.profileselector.ProfileSelectDialog;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.PrimarySwitchPreference;
+import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.drawer.ActivityTile;
 import com.android.settingslib.drawer.CategoryKey;
@@ -421,20 +421,25 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         ProfileSelectDialog.updateUserHandlesIfNeeded(mContext, tile);
         mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
 
+        //TODO(b/201970810): Add test cases.
+        if (tile.isNewTask(mContext)) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+
         if (tile.userHandle == null || tile.isPrimaryProfileOnly()) {
-            activity.startActivityForResult(intent, 0);
+            activity.startActivity(intent);
         } else if (tile.userHandle.size() == 1) {
-            activity.startActivityForResultAsUser(intent, 0, tile.userHandle.get(0));
+            activity.startActivityAsUser(intent, tile.userHandle.get(0));
         } else {
             final UserHandle userHandle = intent.getParcelableExtra(EXTRA_USER);
             if (userHandle != null && tile.userHandle.contains(userHandle)) {
-                activity.startActivityForResultAsUser(intent, 0, userHandle);
+                activity.startActivityAsUser(intent, userHandle);
                 return;
             }
 
             final List<UserHandle> resolvableUsers = getResolvableUsers(intent, tile);
             if (resolvableUsers.size() == 1) {
-                activity.startActivityForResultAsUser(intent, 0, resolvableUsers.get(0));
+                activity.startActivityAsUser(intent, resolvableUsers.get(0));
                 return;
             }
 

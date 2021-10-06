@@ -43,6 +43,7 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -138,6 +139,7 @@ public class FaceStatusPreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     public void updateState_parentalConsentRequired_preferenceDisabled() {
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
 

@@ -84,8 +84,8 @@ public class UnrestrictedPreferenceControllerTest {
     @Test
     public void testUpdateState_isUnrestrictedStates_prefChecked() {
         when(mockBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
-        when(mockBatteryOptimizeUtils.getAppUsageState()).thenReturn(
-                BatteryOptimizeUtils.AppUsageState.UNRESTRICTED);
+        when(mockBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(
+                BatteryOptimizeUtils.MODE_UNRESTRICTED);
 
         mController.updateState(mPreference);
 
@@ -102,12 +102,22 @@ public class UnrestrictedPreferenceControllerTest {
     }
 
     @Test
+    public void testUpdateState_isAllowlistedExceptIdleApp_prefDisabled() {
+        when(mockBatteryOptimizeUtils.isAllowlistedExceptIdleApp()).thenReturn(true);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.isChecked()).isFalse();
+        assertThat(mPreference.isEnabled()).isFalse();
+    }
+
+    @Test
     public void testHandlePreferenceTreeClick_samePrefKey_verifyAction() {
         mPreference.setKey(mController.KEY_UNRESTRICTED_PREF);
         mController.handlePreferenceTreeClick(mPreference);
 
-        verify(mockBatteryOptimizeUtils).setAppUsageState(
-                BatteryOptimizeUtils.AppUsageState.UNRESTRICTED);
+        verify(mockBatteryOptimizeUtils).setAppOptimizationMode(
+                BatteryOptimizeUtils.MODE_UNRESTRICTED);
     }
 
     @Test

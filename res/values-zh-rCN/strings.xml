@@ -354,6 +354,7 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
     <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
@@ -397,6 +398,7 @@
     <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"系统会安全地永久删除脸部模型。\n\n脸部模型删除后，如需解锁手机或在应用内进行身份验证，您将需要使用指纹、PIN 码、图案或密码。"</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"使用人脸解锁功能解锁手机"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"指纹"</string>
+    <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"工作资料指纹"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"管理指纹"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"将指纹用于以下用途："</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"添加指纹"</string>
@@ -450,9 +452,11 @@
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"已添加面孔和一个指纹"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"在设置人脸解锁和指纹解锁时，如果您戴着口罩或所在区域光线较暗，手机会要求您提供指纹"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"解锁方式"</string>
-    <string name="biometric_settings_category_ways_to_use" msgid="2730401752914580200">"面孔和指纹的用途"</string>
-    <string name="biometric_settings_use_biometric_unlock_phone" msgid="2002278066540969480">"解锁手机"</string>
-    <string name="biometric_settings_use_biometric_for_apps" msgid="5251210618011579314">"应用内身份验证"</string>
+    <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"解锁手机"</string>
+    <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"在应用中验证您的身份"</string>
+    <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"刷脸"</string>
+    <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"使用指纹"</string>
+    <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"刷脸或使用指纹"</string>
     <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"请将手机交回给您的家长"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"确定"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"要跳过屏幕锁定设置步骤吗？"</string>
@@ -484,8 +488,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"再试一次"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"跟随指纹图标重复轻触指纹传感器"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"不时地移开手指，以便传感器更完整地记录下您的指纹"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"每次指纹图标移动时，请轻触并按住它。这样做有助于获取您的完整指纹。"</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"这样做有助于获取您的完整指纹"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"每次指纹图标移动时，请轻触并按住它。这有助于捕获您更完整的指纹。"</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"将指尖放在传感器上"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"最后，放上手指边缘"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"将指纹的一侧放在传感器上并按住，然后切换另一侧"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"这有助于捕获您更完整的指纹"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"指纹注册进度为百分之 <xliff:g id="PERCENTAGE">%d</xliff:g>"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"指纹已添加"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"现在您可以使用指纹来解锁手机或验证自己的身份，例如在登录应用时"</string>
@@ -563,15 +570,6 @@
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"您将无法使用指纹来解锁手机或在应用中验证自己的身份。"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"您将无法使用指纹来解锁自己的工作资料、对购买交易进行授权或登录工作应用。"</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"是，移除"</string>
-    <string name="security_settings_biometrics_title" msgid="9156091890323967944">"人脸解锁和指纹解锁"</string>
-    <string name="security_settings_biometrics_summary_none" msgid="7832260410376805323">"点按即可进行设置"</string>
-    <string name="security_settings_biometrics_summary_face" msgid="531544670908824943">"仅注册了人脸"</string>
-    <string name="security_settings_biometrics_summary_fingerprint" msgid="6815851804705508275">"仅注册了指纹"</string>
-    <string name="security_settings_biometrics_summary_both" msgid="7328638955127876021">"人脸和指纹"</string>
-    <string name="security_settings_biometrics_description" msgid="1669340998063178097">"在设置人脸解锁和指纹解锁时，如果您戴着口罩或所在区域光线较暗，手机会要求您提供指纹"</string>
-    <string name="security_settings_biometrics_types_category" msgid="4875227478250058267">"解锁方式"</string>
-    <string name="security_settings_biometrics_preferences_category" msgid="8289089775173952237">"将人脸或指纹用于"</string>
-    <string name="security_settings_biometrics_preference_use_with_apps" msgid="4068551659594090167">"应用内身份验证"</string>
     <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"加密"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="7484150746479958376">"加密平板电脑"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="8302873664348463041">"加密手机"</string>
@@ -821,6 +819,7 @@
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"您可能还需要在另一设备上输入此PIN码。"</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"您可能还需要在另一台设备上输入此密钥。"</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">"要与以下设备配对：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;请确保其显示的配对密钥为：&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"确认与协调组配对"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1068123527866596779">"来自：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;要与此设备配对吗？"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="8672803845151786521">"要与 <xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> 设备配对，请在该设备上键入：<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>，然后按回车键。"</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"允许访问您的通讯录和通话记录"</string>
@@ -854,6 +853,7 @@
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"无法连接，请重试。"</string>
     <string name="device_details_title" msgid="1155622417516195481">"设备详细信息"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"设备的蓝牙地址：<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"设备的蓝牙地址：\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"要与该设备取消配对吗？"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"取消关联"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"要取消与该应用的关联吗？"</string>
@@ -2042,7 +2042,7 @@
       <item quantity="one">1 项</item>
     </plurals>
     <string name="clear_uri_btn_text" msgid="4828117421162495134">"取消访问权限"</string>
-    <string name="controls_label" msgid="8671492254263626383">"控件"</string>
+    <string name="controls_label" msgid="8671492254263626383">"控制"</string>
     <string name="force_stop" msgid="2681771622136916280">"强行停止"</string>
     <string name="total_size_label" msgid="2052185048749658866">"总计"</string>
     <string name="application_size_label" msgid="6407051020651716729">"应用大小"</string>
@@ -2189,7 +2189,7 @@
     <string name="hardkeyboard_category" msgid="8729780593378161071">"物理键盘设置"</string>
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"按空格键两次可插入句号"</string>
     <string name="show_password" msgid="7101900779571040117">"显示密码"</string>
-    <string name="show_password_summary" msgid="9025960283785111619">"输入时短暂显示这些字符"</string>
+    <string name="show_password_summary" msgid="9025960283785111619">"输入时短暂显示字符"</string>
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"此拼写检查工具可能会收集您键入的所有文字，包括密码和信用卡号等个人数据。它源自应用“<xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>”。要使用此拼写检查工具吗？"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"设置"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"语言"</string>
@@ -2257,7 +2257,7 @@
     <string name="gadget_picker_title" msgid="7615902510050731400">"选择小工具"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"选择微件"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="3537968409832846255">"是否允许该应用创建微件并查看其数据？"</string>
-    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5694218981358874429">"当您创建微件后，“<xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>”将能查看其显示的所有数据。"</string>
+    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"当您创建微件后，应用可以访问显示的所有内容。\n\n应用：<xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\n微件：<xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"始终允许“<xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>”创建微件并查看其数据"</string>
     <string name="usage_stats_label" msgid="6523644917803320085">"使用情况统计数据"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"使用情况统计数据"</string>
@@ -2663,7 +2663,7 @@
     <string name="bluetooth_on_time" msgid="8424625554628450028">"WLAN开启时间"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"电池使用情况"</string>
     <string name="history_details_title" msgid="8628584613889559355">"详细电量使用记录"</string>
-    <string name="advanced_battery_preference_title" msgid="3017771848679952419">"电池用量"</string>
+    <string name="advanced_battery_preference_title" msgid="3790901207877260883">"电池用量"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"查看过去 24 小时的使用情况"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"查看自上次充满电后的使用情况"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"电池用量"</string>
@@ -2687,6 +2687,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"查看耗电量较高的应用"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"充电暂时受限"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"旨在延长电池使用寿命。了解详情。"</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"继续充电"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"在某些情况下（例如高温和长时间充电时），手机可能会限制充电量，充电到 <xliff:g id="PERCENT">%1$s</xliff:g> 时便暂停充电。这样有助于使电池保持良好状态。\n\n这类情况结束时，手机会自动恢复正常充电。"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"在某些情况下（例如高温和长时间充电时），平板电脑可能会限制充电量，充电到 <xliff:g id="PERCENT">%1$s</xliff:g> 时便暂停充电。这样有助于使电池保持良好状态。\n\n这类情况结束时，平板电脑会自动恢复正常充电。"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"您的手机的使用强度比平时高，因此电池电量的耗尽速度可能会比平时要快。\n\n耗电量较高的应用："</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"您的平板电脑的使用强度比平时高，因此电池电量的耗尽速度可能会比平时要快。\n\n耗电量较高的应用："</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"您的设备的使用强度比平时高，因此电池电量的耗尽速度可能会比平时要快。\n\n耗电量较高的应用："</string>
@@ -2896,8 +2899,6 @@
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"过去 24 小时内的系统耗电量"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"<xliff:g id="SLOT">%s</xliff:g>的系统耗电量"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"<xliff:g id="SLOT">%s</xliff:g>的应用耗电量"</string>
-    <string name="battery_usage_time_am" msgid="7783773965475697655">"上午"</string>
-    <string name="battery_usage_time_pm" msgid="1534468528902328570">"下午"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"总计：不到 1 分钟"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"后台：不到 1 分钟"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"总计：<xliff:g id="TIME">%s</xliff:g>"</string>
@@ -3372,6 +3373,8 @@
     <string name="application_restrictions" msgid="276179173572729205">"允许应用和内容"</string>
     <string name="apps_with_restrictions_header" msgid="5277698582872267931">"受限应用"</string>
     <string name="apps_with_restrictions_settings_button" msgid="2648355133416902221">"展开应用设置"</string>
+    <string name="user_choose_copy_apps_to_another_user" msgid="5914037067347012870">"选择要安装的应用"</string>
+    <string name="user_copy_apps_menu_title" msgid="5354300105759670300">"安装可用应用"</string>
     <string name="nfc_payment_settings_title" msgid="2043139180030485500">"感应式付款"</string>
     <string name="nfc_payment_how_it_works" msgid="3658253265242662010">"工作方式"</string>
     <string name="nfc_payment_no_apps" msgid="6840001883471438798">"使用手机在商店内付款"</string>
@@ -3417,8 +3420,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"高级通话"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G 通话"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"使用 LTE 服务改进语音和其他通信功能（推荐）"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"使用 4G 服务改善语音和其他通讯方式的质量（推荐）"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"使用 LTE 服务提升语音通话质量（推荐）"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"使用 4G 服务提升语音通话质量（推荐）"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"使用 5G 网络进行语音通话"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"将联系人电话号码发送给运营商"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"发送联系人电话号码，以使用增强功能"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"要将联系人电话号码发送给<xliff:g id="CARRIER">%1$s</xliff:g>吗？"</string>
@@ -3614,6 +3619,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"省电模式, 固定式, 保留, 节省电量, 电池"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"日常安排, 日程, 省电模式, 节省电量, 电池, 自动, 百分比"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"VoLTE, 高级通话, 4G 通话"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, 高级通话, 5g 通话, advanced calling, 5g calling"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"添加语言, 添加一种语言"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"文字大小, 大字版, 大字体, 大文字, 弱视, 放大文字, 字体放大工具, 字体放大, text size, large print, large font, large text, low vision, make text bigger, font enlarger, font enlargement"</string>
     <string name="default_sound" msgid="6604374495015245195">"默认铃声"</string>
@@ -3639,6 +3645,7 @@
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"一律振动"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"先振动再响铃（铃声逐渐增大）"</string>
     <string name="other_sound_settings" msgid="5468360269346162072">"其他提示音"</string>
+    <string name="spatial_audio_title" msgid="6591051622375191603">"空间音频"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"拨号键盘提示音"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"屏幕锁定提示音"</string>
     <string name="call_connected_tones_title" msgid="1999293510400911558">"通话接通提示音"</string>
@@ -3946,7 +3953,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"要向<xliff:g id="SERVICE">%1$s</xliff:g>授予通知使用权吗？"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"在 Android 12 中，增强型通知功能取代了 Android 自适应通知功能。增强型通知功能可以显示建议的操作和回复，并可将通知整理得井井有条。\n\n增强型通知功能可以访问通知内容，包括联系人名称和消息等个人信息。该功能还可以关闭或响应通知，例如接听来电以及控制勿扰模式。"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"要向<xliff:g id="SERVICE">%1$s</xliff:g>授予通知使用权吗？"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>将可读取所有通知（包括联系人姓名和您收到的消息内容等个人信息），而且还能关闭通知或触发通知中的按钮（包括接听来电）。\n\n此外，该应用将因此能够开启或关闭“勿扰”模式并更改相关设置。"</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"“<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>”将可读取所有通知（包括联系人姓名和您收到的消息内容等个人信息），而且还能暂停/关闭通知或触发通知中的按钮（包括接听来电）。\n\n该应用因此还能开启或关闭“勿扰”模式，并可以更改相关设置。"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"如果您停用<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>的通知使用权，勿扰模式的使用权可能也会遭到停用。"</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"停用"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"取消"</string>
@@ -4645,7 +4652,7 @@
     <string name="color_temperature_toast" msgid="7611532183532407342">"要应用颜色更改，请关闭屏幕"</string>
     <string name="camera_laser_sensor_switch" msgid="7097842750947187671">"相机激光传感器"</string>
     <string name="ota_disable_automatic_update" msgid="1953894421412420231">"系统自动更新"</string>
-    <string name="ota_disable_automatic_update_summary" msgid="7803279951533276841">"重启设备时应用更新"</string>
+    <string name="ota_disable_automatic_update_summary" msgid="7803279951533276841">"设备重启时执行更新"</string>
     <string name="usage" msgid="287782903846013936">"流量消耗"</string>
     <string name="cellular_data_usage" msgid="5874156338825285334">"移动数据用量"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"应用的流量使用情况"</string>
@@ -5441,6 +5448,10 @@
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"长按电源按钮即可启动 Google 助理"</string>
     <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"“电源和急救信息”菜单：\n同时按电源按钮和音量调高按钮。"</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"阻止响铃：\n音量菜单中提供了快捷方式。"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"按住电源按钮的持续时间"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"通过选择按住电源按钮的持续时间来调节灵敏度"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"短"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"长"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"显示电子钱包"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"允许从锁定屏幕和快捷设置使用电子钱包"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"显示设备控制器"</string>
@@ -5579,10 +5590,13 @@
     <string name="uwb_settings_summary" msgid="3074271396764672268">"有助于确定附近支持超宽带 (UWB) 的设备的相对位置"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"会关闭飞行模式，以使用超宽带 (UWB)"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"摄像头使用权限"</string>
-    <string name="mic_toggle_title" msgid="265145278323852547">"麦克风访问权限"</string>
+    <string name="mic_toggle_title" msgid="265145278323852547">"麦克风使用权限"</string>
     <string name="sensor_toggle_description" msgid="8248823248606795411">"适用于所有应用和服务"</string>
     <string name="game_settings_title" msgid="1028178627743422090">"游戏设置"</string>
-    <string name="game_settings_summary" msgid="2548056479103747555">"开启游戏信息中心快捷方式等"</string>
+    <string name="game_settings_summary" msgid="8623110986485071064">"开启游戏信息中心快捷方式等"</string>
+    <string name="previous_page_content_description" msgid="6438292457923282991">"上一页"</string>
+    <string name="next_page_content_description" msgid="1641835099813416294">"下一页"</string>
+    <string name="colors_viewpager_content_description" msgid="2591751086138259565">"颜色预览"</string>
     <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"SIM 卡访问请求"</string>
     <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"有一部设备想访问您的 SIM 卡。点按可了解详情。"</string>
     <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"要允许访问 SIM 卡吗？"</string>
@@ -5631,4 +5645,5 @@
     <item msgid="1599558140284643834">"节能模式"</item>
     <item msgid="588427840913221601">"进程状态"</item>
   </string-array>
+    <string name="tare_dialog_confirm_button_title" msgid="9179397559760203348">"确认"</string>
 </resources>

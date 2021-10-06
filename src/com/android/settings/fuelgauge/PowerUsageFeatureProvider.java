@@ -21,10 +21,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.util.SparseIntArray;
 
-import com.android.internal.os.BatterySipper;
 import com.android.settingslib.fuelgauge.Estimate;
 
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Feature Provider used in power usage
@@ -54,12 +54,7 @@ public interface PowerUsageFeatureProvider {
     /**
      * Check whether it is type service
      */
-    boolean isTypeService(BatterySipper sipper);
-
-    /**
-     * Check whether it is type system
-     */
-    boolean isTypeSystem(BatterySipper sipper);
+    boolean isTypeService(int uid);
 
     /**
      * Check whether it is type system
@@ -139,6 +134,11 @@ public interface PowerUsageFeatureProvider {
     boolean isChartGraphSlotsEnabled(Context context);
 
     /**
+     * Gets a intent for one time bypass charge limited to resume charging.
+     */
+    Intent getResumeChargeIntent();
+
+    /**
      * Returns battery history data with corresponding timestamp key.
      */
     Map<Long, Map<String, BatteryHistEntry>> getBatteryHistory(Context context);
@@ -147,4 +147,19 @@ public interface PowerUsageFeatureProvider {
      * Returns {@link Uri} to monitor battery history data is update.
      */
     Uri getBatteryHistoryUri();
+
+    /**
+     * Returns {@link Set} for hidding applications background usage time.
+     */
+    Set<CharSequence> getHideBackgroundUsageTimeSet(Context context);
+
+    /**
+     * Returns package names for hidding application in the usage screen.
+     */
+    CharSequence[] getHideApplicationEntries(Context context);
+
+    /**
+     * Returns package names for hidding summary in the usage screen.
+     */
+    CharSequence[] getHideApplicationSummary(Context context);
 }
