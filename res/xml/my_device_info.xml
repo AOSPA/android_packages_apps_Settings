@@ -63,31 +63,6 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/my_device_info_legal_category_title">
-
-        <!-- Legal information -->
-        <Preference
-            android:key="legal_container"
-            android:order="15"
-            android:title="@string/legal_information"
-            android:fragment="com.android.settings.LegalSettings"/>
-
-        <!-- Regulatory labels -->
-        <Preference
-            android:key="regulatory_info"
-            android:order="16"
-            android:title="@string/regulatory_labels">
-            <intent android:action="android.settings.SHOW_REGULATORY_INFO"/>
-        </Preference>
-
-        <!-- Safety & regulatory manual -->
-        <Preference
-            android:key="safety_info"
-            android:order="17"
-            android:title="@string/safety_and_regulatory_info"/>
-    </PreferenceCategory>
-
-    <PreferenceCategory
         android:key="device_detail_category"
         android:selectable="false"
         android:title="@string/my_device_info_device_details_category_title">
@@ -229,4 +204,32 @@
         android:selectable="false"
         settings:allowDividerAbove="true"
         settings:enableCopying="true"/>
+
+    <PreferenceCategory
+        android:title="@string/my_device_info_legal_category_title">
+
+        <!-- Legal information -->
+        <Preference
+            android:key="legal_container"
+            android:order="15"
+            android:title="@string/legal_information"
+            android:fragment="com.android.settings.LegalSettings"/>
+
+        <!-- Regulatory labels -->
+        <Preference
+            android:key="regulatory_info"
+            android:order="16"
+            android:title="@string/regulatory_labels">
+            <intent android:action="android.settings.SHOW_REGULATORY_INFO"/>
+        </Preference>
+
+        <!-- Safety & regulatory manual -->
+        <Preference
+            android:key="safety_info"
+            android:order="17"
+            android:title="@string/safety_and_regulatory_info">
+            <intent android:action="android.settings.SHOW_SAFETY_AND_REGULATORY_INFO"/>
+        </Preference>
+    </PreferenceCategory>
+
 </PreferenceScreen>
