@@ -21,6 +21,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
@@ -32,10 +33,15 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.network.MobileDataContentObserver;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Preference controller for "Mobile data"
@@ -56,6 +62,7 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
     boolean mNeedDialog;
 
     private WifiPickerTrackerHelper mWifiPickerTrackerHelper;
+    private AnotherSubCallStateListener mCallStateListener;
 
     public MobileDataPreferenceController(Context context, String key) {
         super(context, key);
@@ -81,6 +88,10 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
     public void onStart() {
         if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             mDataContentObserver.register(mContext, mSubId);
+            // Listen if voice call is on nDDS SUB.
+            if (mSubId == mSubscriptionManager.getDefaultDataSubscriptionId()) {
+                mCallStateListener.register(mContext, mSubId);
+            }
         }
     }
 
@@ -88,6 +99,7 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
     public void onStop() {
         if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             mDataContentObserver.unRegister(mContext);
+            mCallStateListener.unregister();
         }
     }
 
@@ -132,8 +144,14 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
             preference.setEnabled(false);
             preference.setSummary(R.string.mobile_data_settings_summary_auto_switch);
         } else {
-            preference.setEnabled(true);
-            preference.setSummary(R.string.mobile_data_settings_summary);
+            if (!mCallStateListener.isIdle()) {
+                preference.setEnabled(false);
+                preference.setSummary(
+                        R.string.mobile_data_settings_summary_default_data_unavailable);
+            } else {
+                preference.setEnabled(true);
+                preference.setSummary(R.string.mobile_data_settings_summary);
+            }
         }
 
         if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
@@ -154,6 +172,10 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
         mSubId = subId;
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
+        mCallStateListener =
+                new AnotherSubCallStateListener(mTelephonyManager,
+                        mSubscriptionManager,
+                        ()-> updateState(mPreference));
     }
 
     public void setWifiPickerTrackerHelper(WifiPickerTrackerHelper helper) {
@@ -184,5 +206,54 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
         final MobileDataDialogFragment dialogFragment = MobileDataDialogFragment.newInstance(type,
                 mSubId);
         dialogFragment.show(mFragmentManager, DIALOG_TAG);
+    }
+
+    private static class AnotherSubCallStateListener extends TelephonyCallback
+        implements TelephonyCallback.CallStateListener {
+        private Runnable mRunnable;
+        private int mState = TelephonyManager.CALL_STATE_IDLE;
+        private Map<Integer, AnotherSubCallStateListener> mCallbacks;
+        private TelephonyManager mTelephonyManager;
+        private SubscriptionManager mSubscriptionManager;
+
+        public AnotherSubCallStateListener(TelephonyManager tm, SubscriptionManager sm,
+                Runnable runnable) {
+            mTelephonyManager = tm;
+            mSubscriptionManager = sm;
+            mRunnable = runnable;
+            mCallbacks = new TreeMap<>();
+        }
+
+        public void register(Context context, int subId) {
+            final List<SubscriptionInfo> subs =
+                    SubscriptionUtil.getActiveSubscriptions(mSubscriptionManager);
+            for (SubscriptionInfo subInfo : subs) {
+                if (subInfo.getSubscriptionId() != subId) {
+                    mTelephonyManager.createForSubscriptionId(subInfo.getSubscriptionId())
+                            .registerTelephonyCallback(context.getMainExecutor(), this);
+                    mCallbacks.put(subInfo.getSubscriptionId(), this);
+                }
+            }
+        }
+
+        public void unregister() {
+            for (int subId : mCallbacks.keySet()) {
+                mTelephonyManager.createForSubscriptionId(subId)
+                        .unregisterTelephonyCallback(mCallbacks.get(subId));
+            }
+            mCallbacks.clear();
+        }
+
+        public boolean isIdle() {
+            return mState == TelephonyManager.CALL_STATE_IDLE;
+        }
+
+        @Override
+        public void onCallStateChanged(int state) {
+            mState = state;
+            if (mRunnable != null) {
+                mRunnable.run();
+            }
+        }
     }
 }

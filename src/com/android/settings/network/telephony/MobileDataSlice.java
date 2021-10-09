@@ -69,7 +69,15 @@ public class MobileDataSlice implements CustomSliceable {
     public MobileDataSlice(Context context) {
         mContext = context;
         mSubscriptionManager = mContext.getSystemService(SubscriptionManager.class);
-        mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
+
+        // Fix: make sure using the same subId when get and set mobile data status
+        final int defaultSubId = getDefaultSubscriptionId(mSubscriptionManager);
+        if (SubscriptionManager.INVALID_SUBSCRIPTION_ID != defaultSubId) {
+            mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
+                    .createForSubscriptionId(defaultSubId);
+        } else {
+            mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
+        }
     }
 
     @Override

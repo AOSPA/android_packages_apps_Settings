@@ -103,7 +103,8 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
         final Preference multiSimPreference = createNewPreference(screen.getContext());
         multiSimPreference.setOrder(order);
         multiSimPreference.setKey(key);
-        screen.addPreference(multiSimPreference);
+        final PreferenceCategory category = screen.findPreference(KEY_PREFERENCE_CATEGORY);
+        category.addPreference(multiSimPreference);
         if (isCDMAPhone) {
             multiSimPreference.setTitle(getTitleForCdmaPhone(slotNumber));
             multiSimPreference.setSummary(mTelephonyManager.getMeid(slotNumber));
