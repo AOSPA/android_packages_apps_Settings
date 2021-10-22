@@ -378,7 +378,6 @@ public class WifiSettings extends RestrictedSettingsFragment
         super.onStart();
 
         mWifiEnabler = createWifiEnabler();
-        mWifiManager.allowConnectOnPartialScanResults(true);
 
         if (mIsRestricted) {
             restrictUi();
@@ -433,7 +432,6 @@ public class WifiSettings extends RestrictedSettingsFragment
     public void onStop() {
         getView().removeCallbacks(mUpdateWifiEntryPreferencesRunnable);
         getView().removeCallbacks(mHideProgressBarRunnable);
-        mWifiManager.allowConnectOnPartialScanResults(false);
         mIsWifiEntryListStale = true;
         super.onStop();
     }
