@@ -98,7 +98,7 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
             removePreferenceIfNecessary(bluetoothDevices, cachedManager);
             for (BluetoothDevice device : bluetoothDevices) {
                 final CachedBluetoothDevice cachedDevice = cachedManager.findDevice(device);
-                if (cachedDevice != null) {
+                if (cachedDevice != null && !cachedManager.isSubDevice(device)) {
                     update(cachedDevice);
                 }
             }

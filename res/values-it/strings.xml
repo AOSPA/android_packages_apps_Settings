@@ -354,6 +354,7 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
     <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
@@ -397,6 +398,7 @@
     <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"Il modello del volto verrà eliminato in modo definitivo e sicuro.\n\nDopo l\'eliminazione dovrai usare l\'impronta, il PIN, la sequenza o la password per sbloccare il telefono o eseguire l\'autenticazione nelle app."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Usa lo sblocco con il volto per sbloccare il tuo telefono"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Impronta"</string>
+    <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Impronta per lavoro"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Gestisci impronte digitali"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Utilizza l\'impronta per"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Aggiungi impronta"</string>
@@ -450,9 +452,11 @@
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Impronta e volto aggiunti"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"Se hai configurato lo sblocco con il volto e con l\'impronta, il telefono ti chiederà l\'impronta se indossi una mascherina o ti trovi in un luogo buio"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"Modi per sbloccare"</string>
-    <string name="biometric_settings_category_ways_to_use" msgid="2730401752914580200">"Usa il volto e l\'impronta per"</string>
-    <string name="biometric_settings_use_biometric_unlock_phone" msgid="2002278066540969480">"Sblocco del telefono"</string>
-    <string name="biometric_settings_use_biometric_for_apps" msgid="5251210618011579314">"Autenticazione nelle app"</string>
+    <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"Sblocca il telefono"</string>
+    <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"Conferma la tua identità nelle tue app"</string>
+    <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Con riconoscimento facciale"</string>
+    <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Con impronta"</string>
+    <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Con riconoscimento facciale o impronta"</string>
     <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Ripassa il telefono a uno dei tuoi genitori"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Ignorare il blocco schermo?"</string>
@@ -484,8 +488,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Ancora una volta"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Segui l\'icona dell\'impronta"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Solleva ripetutamente il dito per aggiungere le varie parti dell\'impronta."</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Tocca e tieni premuto ogni volta che l\'icona dell\'impronta si sposta. Questa operazione consente di acquisire la tua impronta completa."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Questa operazione consente di acquisire la tua impronta completa"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Tocca e tieni premuto ogni volta che l\'icona dell\'impronta si sposta. In questo modo è più facile acquisire più parti dell\'impronta."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Appoggia la punta del dito sul sensore"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Infine, appoggia i lati del dito"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Appoggia un lato del dito sul sensore e tieni premuto, quindi passa all\'altro lato"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"In questo modo è più facile acquisire più parti dell\'impronta"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registrazione dell\'impronta al <xliff:g id="PERCENTAGE">%d</xliff:g> percento"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Impronta aggiunta"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Ora puoi usare l\'impronta per sbloccare il telefono o per verificare la tua identità, ad esempio per accedere alle app"</string>
@@ -563,15 +570,6 @@
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Non potrai usare la tua impronta per sbloccare il telefono o verificare la tua identità nelle app."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Non potrai utilizzare la tua impronta per sbloccare il profilo di lavoro, autorizzare gli acquisti o accedere alle app di lavoro."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Sì, rimuovi"</string>
-    <string name="security_settings_biometrics_title" msgid="9156091890323967944">"Sblocco con il volto e l\'impronta"</string>
-    <string name="security_settings_biometrics_summary_none" msgid="7832260410376805323">"Tocca per configurare"</string>
-    <string name="security_settings_biometrics_summary_face" msgid="531544670908824943">"Solo volto"</string>
-    <string name="security_settings_biometrics_summary_fingerprint" msgid="6815851804705508275">"Solo impronta"</string>
-    <string name="security_settings_biometrics_summary_both" msgid="7328638955127876021">"Volto e impronta"</string>
-    <string name="security_settings_biometrics_description" msgid="1669340998063178097">"Quando configuri lo sblocco con il volto e l\'impronta, se indossi una maschera o l\'illuminazione è scarsa il telefono ti chiede l\'impronta"</string>
-    <string name="security_settings_biometrics_types_category" msgid="4875227478250058267">"Modi per sbloccare"</string>
-    <string name="security_settings_biometrics_preferences_category" msgid="8289089775173952237">"Usa il volto o l\'impronta per"</string>
-    <string name="security_settings_biometrics_preference_use_with_apps" msgid="4068551659594090167">"Autenticazione nelle app"</string>
     <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"Crittografia"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="7484150746479958376">"Cripta tablet"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="8302873664348463041">"Cripta telefono"</string>
@@ -821,6 +819,7 @@
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"Potrebbe inoltre essere necessario digitare questo PIN sull\'altro dispositivo."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"Potrebbe inoltre essere necessario digitare questa passkey sull\'altro dispositivo."</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">"Per l\'accoppiamento con:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Assicurati che sia visualizzata questa passkey:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"Conferma per eseguire l\'accoppiamento con il set coordinato"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1068123527866596779">"Da:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Accoppiare con questo dispositivo?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="8672803845151786521">"Per eseguire l\'accoppiamento con <xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>, digita sul dispositivo <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, quindi premi A capo o Invio."</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Consenti l\'accesso ai tuoi contatti e alla cronologia chiamate"</string>
@@ -854,6 +853,7 @@
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"Connessione non riuscita. Riprova."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Dettagli dispositivo"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Indirizzo Bluetooth del dispositivo: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Indirizzo Bluetooth del dispositivo:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Eliminare il dispositivo?"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"Rimuovi associazione"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Vuoi scollegare l\'app?"</string>
@@ -1433,7 +1433,7 @@
     <string name="doze_always_on_title" msgid="7326245192352868477">"Mostra sempre ora e informazioni"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"Maggiore utilizzo della batteria"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"Testo in grassetto"</string>
-    <string name="title_font_size" msgid="570613010306330622">"Dimensioni carattere"</string>
+    <string name="title_font_size" msgid="570613010306330622">"Dimensione carattere"</string>
     <string name="short_summary_font_size" msgid="184712645848458143">"Ingrandisci o riduci il testo"</string>
     <string name="sim_lock_settings" msgid="4493069398250139205">"Impostazioni blocco SIM"</string>
     <string name="sim_lock_settings_category" msgid="4280307997492851625">"Blocco della scheda SIM"</string>
@@ -2257,7 +2257,7 @@
     <string name="gadget_picker_title" msgid="7615902510050731400">"Scegli gadget"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"Scegli widget"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="3537968409832846255">"Creare il widget e consentire l\'accesso?"</string>
-    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5694218981358874429">"Dopo che avrai creato il widget, <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> potrà accedere a tutti i relativi dati."</string>
+    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"Dopo che avrai creato il widget, l\'applicazione potrà accedere a tutti i contenuti visualizzati.\n\nApplicazione: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nWidget: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"Consenti sempre a <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> di creare widget e accedere ai relativi dati"</string>
     <string name="usage_stats_label" msgid="6523644917803320085">"Statistiche di utilizzo"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"Statistiche di utilizzo"</string>
@@ -2663,7 +2663,7 @@
     <string name="bluetooth_on_time" msgid="8424625554628450028">"Tempo accensione Wi‑Fi"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"Utilizzo batteria"</string>
     <string name="history_details_title" msgid="8628584613889559355">"Dettagli cronologia"</string>
-    <string name="advanced_battery_preference_title" msgid="3017771848679952419">"Utilizzo della batteria"</string>
+    <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Utilizzo batteria"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Visualizza utilizzo delle ultime 24 ore"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Utilizzo dall\'ultima ricarica completa"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"Utilizzo batteria"</string>
@@ -2687,6 +2687,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Scopri le app con il massimo utilizzo"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Ricarica momentaneamente limitata"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Per preservare la batteria. Scopri di più."</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Riprendi la ricarica"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"In alcune condizioni, ad esempio in caso di temperature elevate e lunghi periodi di ricarica, è possibile che la ricarica venga momentaneamente interrotta al raggiungimento di una percentuale pari a <xliff:g id="PERCENT">%1$s</xliff:g> per preservare meglio l\'integrità della batteria.\n\nQuando queste condizioni non sono più presenti, viene ripristinata automaticamente la normale ricarica del telefono."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"In alcune condizioni, ad esempio in caso di temperature elevate e lunghi periodi di ricarica, è possibile che la ricarica venga momentaneamente interrotta al raggiungimento di una percentuale pari a <xliff:g id="PERCENT">%1$s</xliff:g> per preservare meglio l\'integrità della batteria.\n\nQuando queste condizioni non sono più presenti, viene ripristinata automaticamente la normale ricarica del tablet."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Poiché hai utilizzato il telefono più del solito, la batteria potrebbe esaurirsi prima del previsto.\n\nApp che consumano maggiormente la batteria:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Poiché hai utilizzato il tablet più del solito, la batteria potrebbe esaurirsi prima del previsto.\n\nApp che consumano maggiormente la batteria:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Poiché hai utilizzato il dispositivo più del solito, la batteria potrebbe esaurirsi prima del previsto.\n\nApp che consumano maggiormente la batteria:"</string>
@@ -2896,8 +2899,6 @@
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Utilizzo da parte del sistema nelle ultime 24 ore"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Utilizzo da parte del sistema per <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Utilizzo da parte delle app per <xliff:g id="SLOT">%s</xliff:g>"</string>
-    <string name="battery_usage_time_am" msgid="7783773965475697655">"AM"</string>
-    <string name="battery_usage_time_pm" msgid="1534468528902328570">"PM"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Totale: meno di un minuto"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Background: meno di un minuto"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Totale: <xliff:g id="TIME">%s</xliff:g>"</string>
@@ -3372,6 +3373,8 @@
     <string name="application_restrictions" msgid="276179173572729205">"Consenti app e contenuti"</string>
     <string name="apps_with_restrictions_header" msgid="5277698582872267931">"Applicazioni con limitazioni"</string>
     <string name="apps_with_restrictions_settings_button" msgid="2648355133416902221">"Espandi impostazioni per app"</string>
+    <string name="user_choose_copy_apps_to_another_user" msgid="5914037067347012870">"Scegli le app da installare"</string>
+    <string name="user_copy_apps_menu_title" msgid="5354300105759670300">"Installa le app disponibili"</string>
     <string name="nfc_payment_settings_title" msgid="2043139180030485500">"Pagamenti contactless"</string>
     <string name="nfc_payment_how_it_works" msgid="3658253265242662010">"Come funziona"</string>
     <string name="nfc_payment_no_apps" msgid="6840001883471438798">"Paga con il tuo telefono nei negozi"</string>
@@ -3417,8 +3420,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"Chiamate avanzate"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"Chiamate 4G"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Usa i servizi LTE per migliorare le comunicazioni vocali e di altro tipo (consigliato)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Usa i servizi 4G per migliorare le comunicazioni vocali e di altro tipo (consigliato)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"Usa i servizi LTE per migliorare le chiamate vocali (consigliato)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"Usa i servizi 4G per migliorare le chiamate vocali (consigliato)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"Usa 5G per le chiamate vocali"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Invia contatti all\'operatore"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Invia i numeri di telefono dei tuoi contatti per fornire funzionalità avanzate"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Vuoi inviare i contatti a <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
@@ -3612,6 +3617,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"risparmio energetico, fisso, costante, risparmiare batteria, batteria"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"routine, programmazione, risparmio energetico, risparmiare batteria, batteria, automatico, percento"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, chiamate avanzate, chiamate 4g"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, chiamate avanzate, chiamate 5g"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"aggiungere lingua, aggiungere una lingua"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"dimensioni del testo, stampa grande, carattere grande, testo grande, ipovedente, ingrandimento del testo, ingranditore di carattere, ingrandimento di carattere"</string>
     <string name="default_sound" msgid="6604374495015245195">"Suono predefinito"</string>
@@ -3637,6 +3643,7 @@
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"Vibrazione sempre attiva"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Prima vibrazione, poi squillo graduale"</string>
     <string name="other_sound_settings" msgid="5468360269346162072">"Altri suoni"</string>
+    <string name="spatial_audio_title" msgid="6591051622375191603">"Audio spaziale"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Toni tastierino"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Suono blocco schermo"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Suoni e vibrazione ricarica"</string>
@@ -3943,7 +3950,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Consentire a <xliff:g id="SERVICE">%1$s</xliff:g> di accedere alle notifiche?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Le notifiche adattive sono state sostituite dalle notifiche avanzate in Android 12. Questa funzionalità mostra risposte e azioni suggerite e organizza le tue notifiche. \n\nLe notifiche avanzate possono accedere ai contenuti delle notifiche, incluse le informazioni personali, come i nomi dei contatti e i messaggi. Questa funzionalità può anche ignorare le notifiche o rispondervi, ad esempio accettando le telefonate, e controllare la modalità Non disturbare."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Consentire a <xliff:g id="SERVICE">%1$s</xliff:g> di accedere alle notifiche?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> potrà leggere tutte le notifiche, incluse le informazioni personali quali i nomi dei contatti e il testo dei messaggi ricevuti. Questa app potrà inoltre ignorare le notifiche o agire sui pulsanti nelle notifiche, tra cui la risposta alle chiamate. \n\nL\'app potrà anche attivare o disattivare la funzione Non disturbare e modificare le relative impostazioni."</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> potrà leggere tutte le notifiche, incluse le informazioni personali quali i nomi dei contatti e il testo dei messaggi ricevuti. Questa app potrà inoltre posticipare o ignorare le notifiche oppure agire sui pulsanti nelle notifiche, ad esempio rispondere alle telefonate. \n\nL\'app potrà anche attivare o disattivare la funzionalità Non disturbare e modificare le relative impostazioni."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Se disattivi l\'accesso alle notifiche per <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, potrebbe essere disattivato anche l\'accesso alla funzione Non disturbare."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Disattiva"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Annulla"</string>
@@ -5424,6 +5431,10 @@
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Attiva l\'assistente tenendo premuto il tasto di accensione"</string>
     <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Menu accensione ed emergenze:\npremi contemporaneamente il tasto di accensione e il tasto alza il volume"</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Disattiva suoneria:\nscorciatoia disponibile nel menu del volume."</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Durata pressione"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Regola la sensibilità scegliendo la durata della pressione del tasto di accensione"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Breve"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Lunga"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Mostra portafoglio"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Consenti l\'accesso al portafoglio dalla schermata di blocco e dalle impostazioni rapide"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Mostra controlli dei dispositivi"</string>
@@ -5565,7 +5576,10 @@
     <string name="mic_toggle_title" msgid="265145278323852547">"Accesso al microfono"</string>
     <string name="sensor_toggle_description" msgid="8248823248606795411">"Per tutte le app e tutti i servizi"</string>
     <string name="game_settings_title" msgid="1028178627743422090">"Impostazioni di gioco"</string>
-    <string name="game_settings_summary" msgid="2548056479103747555">"Viene attivata la scorciatoia del Pannello di gioco e non solo"</string>
+    <string name="game_settings_summary" msgid="8623110986485071064">"Viene attivata la scorciatoia del Pannello di gioco e non solo"</string>
+    <string name="previous_page_content_description" msgid="6438292457923282991">"Indietro"</string>
+    <string name="next_page_content_description" msgid="1641835099813416294">"Avanti"</string>
+    <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Anteprima colore"</string>
     <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Richiesta di accesso alla scheda SIM"</string>
     <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Un dispositivo vuole accedere alla tua scheda SIM. Tocca per conoscere i dettagli."</string>
     <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Consentire l\'accesso alla scheda SIM?"</string>
@@ -5611,4 +5625,5 @@
     <item msgid="1599558140284643834">"Modalità di risparmio energetico"</item>
     <item msgid="588427840913221601">"Stato processo"</item>
   </string-array>
+    <string name="tare_dialog_confirm_button_title" msgid="9179397559760203348">"Conferma"</string>
 </resources>

@@ -60,28 +60,32 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected void onCancelButtonClick(View view) {
-        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST)) {
+        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST,
+                "cancel")) {
             super.onCancelButtonClick(view);
         }
     }
 
     @Override
     protected void onSkipButtonClick(View view) {
-        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST)) {
+        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST,
+                "skip")) {
             super.onSkipButtonClick(view);
         }
     }
 
     @Override
     protected void onEnrollmentSkipped(@Nullable Intent data) {
-        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST)) {
+        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST,
+                "skipped")) {
             super.onEnrollmentSkipped(data);
         }
     }
 
     @Override
     protected void onFinishedEnrolling(@Nullable Intent data) {
-        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST)) {
+        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST,
+                "finished")) {
             super.onFinishedEnrolling(data);
         }
     }
@@ -107,6 +111,14 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         inControlTitle.setText(getInControlTitle());
         howMessage.setText(getHowMessage());
         inControlMessage.setText(getInControlMessage());
+
+        // Set up and show the "less secure" info section if necessary.
+        if (getResources().getBoolean(R.bool.config_face_intro_show_less_secure)) {
+            final LinearLayout infoRowLessSecure = findViewById(R.id.info_row_less_secure);
+            final ImageView iconLessSecure = findViewById(R.id.icon_less_secure);
+            infoRowLessSecure.setVisibility(View.VISIBLE);
+            iconLessSecure.getBackground().setColorFilter(getIconColorFilter());
+        }
 
         // Set up and show the "require eyes" info section if necessary.
         if (getResources().getBoolean(R.bool.config_face_intro_show_require_eyes)) {

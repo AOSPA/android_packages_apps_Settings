@@ -128,7 +128,7 @@
         settings:controller="com.android.settings.sound.VibrateForCallsPreferenceController"
         settings:keywords="@string/keywords_vibrate_for_calls"/>
 
-    <com.android.settings.widget.PrimarySwitchPreference
+    <com.android.settingslib.PrimarySwitchPreference
         android:key="gesture_prevent_ringing_sound"
         android:title="@string/gesture_prevent_ringing_sound_title"
         android:order="-80"
@@ -153,6 +153,13 @@
         android:persistent="false"
         android:ringtoneType="alarm"
         android:order="-60"/>
+
+    <!-- Spatial audio -->
+    <SwitchPreference
+        android:key="spatial_audio"
+        android:title="@string/spatial_audio_title"
+        android:order="-55"
+        settings:controller="com.android.settings.notification.SpatialAudioPreferenceController"/>
 
     <!-- Dial pad tones -->
     <SwitchPreference

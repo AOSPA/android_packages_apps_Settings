@@ -17,8 +17,6 @@
 
 package com.android.settings.fuelgauge;
 
-import static com.android.settings.fuelgauge.BatteryOptimizeUtils.AppUsageState.RESTRICTED;
-
 import android.content.Context;
 import android.util.Log;
 
@@ -57,7 +55,11 @@ public class RestrictedPreferenceController extends AbstractPreferenceController
             Log.d(TAG, "is system or default app, disable pref");
             ((SelectorWithWidgetPreference) preference).setChecked(false);
             preference.setEnabled(false);
-        } else if (mBatteryOptimizeUtils.getAppUsageState() == RESTRICTED) {
+        } else if (mBatteryOptimizeUtils.isAllowlistedExceptIdleApp()) {
+            Log.d(TAG, "in allow list not idle app, disable perf");
+            preference.setEnabled(false);
+        } else if (mBatteryOptimizeUtils.getAppOptimizationMode()
+                == BatteryOptimizeUtils.MODE_RESTRICTED) {
             Log.d(TAG, "is restricted states");
             ((SelectorWithWidgetPreference) preference).setChecked(true);
         } else {
@@ -81,7 +83,7 @@ public class RestrictedPreferenceController extends AbstractPreferenceController
             return false;
         }
 
-        mBatteryOptimizeUtils.setAppUsageState(RESTRICTED);
+        mBatteryOptimizeUtils.setAppOptimizationMode(BatteryOptimizeUtils.MODE_RESTRICTED);
         Log.d(TAG, "Set restricted");
         return true;
     }

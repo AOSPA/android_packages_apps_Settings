@@ -354,6 +354,7 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
     <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
@@ -397,6 +398,7 @@
     <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"Вашиот модел на лице ќе биде трајно и безбедно избришан.\n\nПо бришењето, ќе ви треба отпечаток, PIN, шема или лозинка за да го отклучите телефонот или за проверка во апликации."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Користете „Отклучување со лик“ за отклучување на телефонот"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Отпечаток"</string>
+    <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Отпечаток за работен профил"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Управување отпечатоци"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Користи отпечаток за"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Додајте отпечаток"</string>
@@ -450,9 +452,11 @@
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Ликот и отпечатокот се додадени"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"Кога ќе поставите „Отклучување со лик“ и „Отклучување со отпечаток на прст“, телефонот ќе го побара вашиот отпечаток кога носите маска или сте на темно место"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"Начини на отклучување"</string>
-    <string name="biometric_settings_category_ways_to_use" msgid="2730401752914580200">"Користете лик и отпечаток за"</string>
-    <string name="biometric_settings_use_biometric_unlock_phone" msgid="2002278066540969480">"Отклучување телефон"</string>
-    <string name="biometric_settings_use_biometric_for_apps" msgid="5251210618011579314">"Проверка во апликации"</string>
+    <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"Отклучувајте го телефонот"</string>
+    <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"Потврдете дека сте вие во апликации"</string>
+    <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"со користење лик"</string>
+    <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"со користење отпечаток"</string>
+    <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"со користење лик или отпечаток"</string>
     <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Дај му го телефонот на родителот"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"Во ред"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Прескокни заклучување екран?"</string>
@@ -484,8 +488,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Уште еднаш"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Следете ја иконата за отпечаток"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Подигнувајте го прстот за да ги додадете различните делови од отпечатокот"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Допрете и задржете секој пат кога иконата за отпечаток ќе се премести. Ова помага да се сними целиот отпечаток."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Ова помага да се сними целиот отпечаток"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Допрете и задржете секој пат кога иконата за отпечаток ќе се премести. Ова помага за да се сними повеќе од отпечатокот."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Поставете го врвот на прстот на сензорот"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"За крај, поставете ги рабовите на прстот"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Поставете го отпечаток странично на сензорот и задржете, а потоа направете исто со другата страна"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Ова помага за да се сними повеќе од отпечатокот"</string>
     <!-- String.format failed for translation -->
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
@@ -565,15 +572,6 @@
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Нема да може да го користите отпечатокот за да го отклучувате телефонот или да потврдувате дека сте вие во апликациите."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Нема да може да го користите отпечатокот за да го отклучувате работниот профил, да овластувате купувања или да се најавувате на работните апликации."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Отстрани"</string>
-    <string name="security_settings_biometrics_title" msgid="9156091890323967944">"Отклучување со лик и отпечаток на прст"</string>
-    <string name="security_settings_biometrics_summary_none" msgid="7832260410376805323">"Допрете за поставување"</string>
-    <string name="security_settings_biometrics_summary_face" msgid="531544670908824943">"Само лик"</string>
-    <string name="security_settings_biometrics_summary_fingerprint" msgid="6815851804705508275">"Само отпечаток"</string>
-    <string name="security_settings_biometrics_summary_both" msgid="7328638955127876021">"Лик и отпечаток"</string>
-    <string name="security_settings_biometrics_description" msgid="1669340998063178097">"Кога ќе поставите отклучување со лик и отпечаток на прст, телефонот ќе го побара вашиот отпечаток кога носите маска или сте на темно место"</string>
-    <string name="security_settings_biometrics_types_category" msgid="4875227478250058267">"Начини на отклучување"</string>
-    <string name="security_settings_biometrics_preferences_category" msgid="8289089775173952237">"Користи лик или отпечаток за"</string>
-    <string name="security_settings_biometrics_preference_use_with_apps" msgid="4068551659594090167">"Проверка во апликации"</string>
     <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"Шифрирање"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="7484150746479958376">"Шифрирај таблет"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="8302873664348463041">"Шифрирање на телефонот"</string>
@@ -823,6 +821,7 @@
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"Можеби ќе треба да го внесе овој PIN и на другиот уред."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"Може ќе треба да ја внесете лозинката и на другиот уред."</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">"За да се спари со:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Проверете дали се прикажува оваа лозинка:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"Потврдете за спарување со координираниот комплет"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1068123527866596779">"Од:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Спари се со овој уред?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="8672803845151786521">"За да се спари со:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Напишете на него:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, потоа притиснете „Врати“ или „Внеси“."</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Дозволете пристап до вашите контакти и историјата на повици"</string>
@@ -856,6 +855,7 @@
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"Не може да се поврзе. Обидете се повторно."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Детали за уредот"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Адреса на Bluetooth на уредот: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Адреса на Bluetooth на уредот:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Да се заборави уредот?"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"Отстрани асоцијација"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Да се прекине врската со апликацијата?"</string>
@@ -2259,7 +2259,7 @@
     <string name="gadget_picker_title" msgid="7615902510050731400">"Избери украсна програма"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"Избери виџет"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="3537968409832846255">"Создади виџет и дозволи пристап?"</string>
-    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5694218981358874429">"Откако ќе создадете виџет, <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> може да пристапи кон сите податоци што ги прикажува."</string>
+    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"Откако ќе го создадете виџетот, апликацијата може да пристапи до сѐ што е прикажано.\n\nАпликација: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nВиџет: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"Дозволи <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> да создава виџети и секогаш да пристапува кон нивните податоци"</string>
     <string name="usage_stats_label" msgid="6523644917803320085">"Статистика на користење"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"Статистика на користење"</string>
@@ -2665,7 +2665,7 @@
     <string name="bluetooth_on_time" msgid="8424625554628450028">"Wi-Fi на време"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"Користење на батеријата"</string>
     <string name="history_details_title" msgid="8628584613889559355">"Детали на историја"</string>
-    <string name="advanced_battery_preference_title" msgid="3017771848679952419">"Користење на батеријата"</string>
+    <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Користење на батеријата"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Прикажи користење во минатите 24 часа"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Прикажи користење од последното целосно полнење"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"Користење на батеријата"</string>
@@ -2689,6 +2689,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Прегледајте ги апликациите со најголемо користење"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Полнењето е привремено ограничено"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"За да се заштеди батеријата. Дознајте повеќе."</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Продолжи со полнење"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"При одредени услови, како високи температури и долги периоди на полнење, полнењето може да се ограничи на <xliff:g id="PERCENT">%1$s</xliff:g> за да помогне да се зачува состојбата на батеријата.\n\nКога таквите услови ќе завршат, вашиот телефон автоматски ќе се полни нормално."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"При одредени услови, како високи температури и долги периоди на полнење, полнењето може да се ограничи на <xliff:g id="PERCENT">%1$s</xliff:g> за да помогне да се зачува состојбата на батеријата.\n\nКога таквите услови ќе завршат, вашиот таблет автоматски ќе се полни нормално."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Бидејќи сте го користеле телефонот повеќе од вообичаено, батеријата може да ви се потроши порано од обично.\n\nАпликации што најмногу ја користат батеријата:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Бидејќи сте го користеле таблетот повеќе од вообичаено, батеријата може да ви се потроши порано од обично.\n\nАпликации што најмногу ја користат батеријата:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Бидејќи сте го користеле уредот повеќе од вообичаено, батеријата може да ви се потроши порано од обично.\n\nАпликации што најмногу ја користат батеријата:"</string>
@@ -2898,8 +2901,6 @@
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Користење на системот во минатите 24 часа"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Користење на системот за <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Користење на апликацијата за <xliff:g id="SLOT">%s</xliff:g>"</string>
-    <string name="battery_usage_time_am" msgid="7783773965475697655">"прет."</string>
-    <string name="battery_usage_time_pm" msgid="1534468528902328570">"попл."</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Вкупно: помалку од една минута"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Заднина: помалку од една минута"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Вкупно: <xliff:g id="TIME">%s</xliff:g>"</string>
@@ -3374,6 +3375,8 @@
     <string name="application_restrictions" msgid="276179173572729205">"Дозволи апликации и содржина"</string>
     <string name="apps_with_restrictions_header" msgid="5277698582872267931">"Апликации со ограничувања"</string>
     <string name="apps_with_restrictions_settings_button" msgid="2648355133416902221">"Прошири поставки за апликација"</string>
+    <string name="user_choose_copy_apps_to_another_user" msgid="5914037067347012870">"Изберете апликации што ќе се инсталираат"</string>
+    <string name="user_copy_apps_menu_title" msgid="5354300105759670300">"Инсталирајте достапни апликации"</string>
     <string name="nfc_payment_settings_title" msgid="2043139180030485500">"Плаќања без контакт"</string>
     <string name="nfc_payment_how_it_works" msgid="3658253265242662010">"Како функционира"</string>
     <string name="nfc_payment_no_apps" msgid="6840001883471438798">"Плаќајте со телефонот во продавници"</string>
@@ -3419,8 +3422,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"Напредно повикување"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"Повици преку 4G"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Користете ги LTE-услугите за да ја подобрите гласовната и другите видови комуникација (препорачано)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Користете ги услугите 4G за да ја подобрите гласовната и другите видови комуникација (препорачано)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"Користете ги LTE-услугите за да ги подобрите гласовните повици (препорачано)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"Користете ги 4G-услугите за да ги подобрите гласовните повици (препорачано)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"Користете 5G за гласовни повици"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Испраќајте ги контактите кај операторот"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Испраќајте ги телефонските броеви на контактите за да се обезбедат подобрени функции"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Да се испраќаат контакти кај <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
@@ -3614,6 +3619,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"штедач на батерија, леплив, упорен, штедач на енергија, батерија"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"рутина, распоред, штедач на батерија, штедач на енергија, батерија, автоматски, процент"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, напредно повикување, повикување преку 4G"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"Vo5G, VoNR, напредно повикување, повикување преку 5G"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"додај јазик, додај некој јазик"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"големина на текст, големи букви, голем фонт, голем текст, слаб вид, зголемување текст, фонт, зголеми, зголеми фонт"</string>
     <string name="default_sound" msgid="6604374495015245195">"Стандарден звук"</string>
@@ -3639,6 +3645,7 @@
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"Вибрирај"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Прво вибрирај, па ѕвони постепено"</string>
     <string name="other_sound_settings" msgid="5468360269346162072">"Други звуци"</string>
+    <string name="spatial_audio_title" msgid="6591051622375191603">"Просторен звук"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Тонови на тастатура за бирање"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Звук за заклучување екран"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Звуци и вибрации при полнење"</string>
@@ -3945,7 +3952,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Да му се дозволи пристап до известувања на <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"„Подобрените известувања“ ги заменија „Адаптивните известувања на Android“ во Android 12. Оваа функција прикажува предложени дејства и одговори и ги организира вашите известувања. \n\n„Подобрените известувања“ може да пристапуваат до содржините од известувањата, вклучително и личните податоци, како што се имињата на контактите и пораките. Функцијава може и да ги отфрла или да одговара на известувањата, како на пример, да одговара на телефонски повици и да го контролира режимот „Не вознемирувај“."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Да се дозволи пристап на <xliff:g id="SERVICE">%1$s</xliff:g> до известувањата?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ќе може да ги чита сите известувања, вклучувајќи ги личните податоци како што се имињата на контактите и текстот од пораките што ги примате. Ќе може и да отфрла известувања или да ги користи копчињата во известувањата, вклучително и да одговара на телефонски повици. \n\nОва ќе ѝ овозможи на апликацијата да го вклучува и исклучува „Не вознемирувај“ и да ги менува поврзаните поставки."</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ќе може да ги чита сите известувања, вклучително и личните податоци, како што се имињата на контактите и текстот од пораките што ги примате. Ќе може да одложува или отфрла известувања или да ги користи копчињата во известувањата, вклучително и да одговара на телефонски повици. \n\nОва ќе ѝ овозможи на апликацијата да го вклучува и исклучува „Не вознемирувај“ и да ги менува поврзаните поставки."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Ако го исклучите пристапот на <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> до известувањата, пристапот до „Не вознемирувај“ може исто така да се исклучи."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Исклучи"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Откажи"</string>
@@ -5426,6 +5433,10 @@
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Стартувајте го „Помошникот“ со задржување на копчето за вклучување"</string>
     <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Мени на копчето за вклучување и за итни случаи:\nпритиснете ги копчињата за вклучување и зголемување на звукот истовремено."</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Спречете ѕвонење:\nкратенката е достапна во менито за јачина на звук."</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Времетраење на притискање и задржување"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Приспособете ја чувствителноста со бирање колку долго треба да го притиснете и задржите копчето за вклучување"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Кратко"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Долго"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Прикажувај паричник"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Овозможете пристап до паричникот од заклучен екран и „Брзи поставки“"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Прикажувај контроли за уреди"</string>
@@ -5567,7 +5578,10 @@
     <string name="mic_toggle_title" msgid="265145278323852547">"Пристап до микрофонот"</string>
     <string name="sensor_toggle_description" msgid="8248823248606795411">"За сите апликации и услуги"</string>
     <string name="game_settings_title" msgid="1028178627743422090">"Поставки за игри"</string>
-    <string name="game_settings_summary" msgid="2548056479103747555">"Вклучете ја кратенката за „Контролната табла за игри“ итн."</string>
+    <string name="game_settings_summary" msgid="8623110986485071064">"Вклучете кратенка за „Контролната табла за игри“ и друго"</string>
+    <string name="previous_page_content_description" msgid="6438292457923282991">"Претходна"</string>
+    <string name="next_page_content_description" msgid="1641835099813416294">"Следна"</string>
+    <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Преглед на бојата"</string>
     <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Барање за пристап до SIM-картичката"</string>
     <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Даден уред сака да пристапи до вашата SIM-картичка. Допрете за детали."</string>
     <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Да се дозволи пристап до SIM-картичката?"</string>
@@ -5613,4 +5627,5 @@
     <item msgid="1599558140284643834">"Режим за заштеда на енергија"</item>
     <item msgid="588427840913221601">"Состојба на процес"</item>
   </string-array>
+    <string name="tare_dialog_confirm_button_title" msgid="9179397559760203348">"Потврдете"</string>
 </resources>

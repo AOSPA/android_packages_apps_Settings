@@ -354,6 +354,7 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
     <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
@@ -397,6 +398,7 @@
     <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"သင်၏မျက်နှာနမူနာကို လုံခြုံစွာ အပြီးဖျက်လိုက်ပါမည်။\n\nဖျက်ပြီးသည့်အခါ သင့်ဖုန်းလော့ခ်ဖွင့်ရန် (သို့) အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် လက်ဗွေ၊ ပင်နံပါတ်၊ ပုံစံ၊ (သို့) စကားဝှက်ကို လိုအပ်ပါမည်။"</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"သင့်ဖုန်းကို လော့ခ်ဖွင့်ရန် မျက်နှာပြ လော့ခ်ဖွင့်ခြင်း အသုံးပြုပါ"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"လက်ဗွေ"</string>
+    <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"အလုပ်ပရိုဖိုင် လက်ဗွေ"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"လက်ဗွေရာများ စီမံရန်"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"လက်ဗွေ သုံးရန်"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"လက်ဗွေထည့်သွင်းမည်"</string>
@@ -450,9 +452,11 @@
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"မျက်နှာနှင့် လက်ဗွေ ထည့်ပြီးပါပြီ"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"မျက်နှာပြ လော့ခ်ဖွင့်ခြင်းနှင့် လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်းကို ထည့်သွင်းသည့်အခါ သင်နှာခေါင်းစည်း တပ်ဆင်ထားလျှင် (သို့) မှောင်သောနေရာသို့ ရောက်နေလျှင် သင်၏ဖုန်းက သင့်လက်ဗွေကို တောင်းပါမည်"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"သော့ဖွင့်ရန် နည်းလမ်းများ"</string>
-    <string name="biometric_settings_category_ways_to_use" msgid="2730401752914580200">"မျက်နှာနှင့် လက်ဗွေ သုံးခြင်း"</string>
-    <string name="biometric_settings_use_biometric_unlock_phone" msgid="2002278066540969480">"ဖုန်းကို ဖွင့်ခြင်း"</string>
-    <string name="biometric_settings_use_biometric_for_apps" msgid="5251210618011579314">"အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်း"</string>
+    <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"သင့်ဖုန်းကို ဖွင့်ရန်"</string>
+    <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"အက်ပ်များတွင် သင်ဖြစ်ကြောင်း အတည်ပြုရန်"</string>
+    <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"မျက်နှာသုံးခြင်း"</string>
+    <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"လက်ဗွေသုံးခြင်း"</string>
+    <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"မျက်နှာ (သို့) လက်ဗွေ သုံးခြင်း"</string>
     <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"သင့်မိဘအား ဤဖုန်း ပြန်ပေးလိုက်ပါ"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"ဖန်သားပြင်လော့ခ် ကျော်မလား။"</string>
@@ -484,8 +488,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"နောက်တစ်ကြိမ်"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"လက်ဗွေသင်္ကေတကို ထပ်တို့ပါ"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"လက်ဗွေ၏ အစိတ်အပိုင်းအမျိုးမျိုးကို ထည့်ရန်အတွက် သင့်လက်ချောင်းကို အကြိမ်ကြိမ် ပြန်မြှောက်ပါ"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"လက်ဗွေသင်္ကေတ ရွေ့သွားတိုင်း တို့ထိ၍ ဖိထားပါ။ ၎င်းက သင်၏လက်ဗွေအပြည့်အစုံကို သိမ်းယူရာတွင် ကူညီပေးသည်။"</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"၎င်းက သင်၏လက်ဗွေအပြည့်အစုံကို သိမ်းယူရာတွင် ကူညီပေးသည်"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"လက်ဗွေသင်္ကေတ ရွေ့သွားတိုင်း တို့ထိ၍ ဖိထားပါ။ ၎င်းက သင့်လက်ဗွေကို ပိုမိုဖမ်းယူပေးသည်။"</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"အာရုံခံကိရိယာပေါ်တွင် သင့်လက်ချောင်း၏ထိပ်ကို တင်ပါ"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"နောက်ဆုံးအနေဖြင့် သင့်လက်ချောင်း၏ အစွန်းများကို တင်ပါ"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"အာရုံခံကိရိယာပေါ်တွင် သင့်လက်ဗွေ၏ဘေးခြမ်းကို တင်ပြီးဖိထားပါ။ ထို့နောက် အခြားတစ်ဘက်သို့ ပြောင်းပါ"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"၎င်းက သင့်လက်ဗွေကို ပိုမိုဖမ်းယူပေးသည်"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"လက်ဗွေ စာရင်းသွင်းခြင်း <xliff:g id="PERCENTAGE">%d</xliff:g> ရာခိုင်နှုန်း"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"လက်ဗွေကို ထည့်ပြီးပါပြီ"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"အက်ပ်များသို့ လက်မှတ်ထိုးဝင်သောအခါကဲ့သို့ သင်ဖြစ်ကြောင်း အတည်ပြုရန်အတွက် (သို့) သင့်ဖုန်းကို လော့ခ်ဖွင့်ရန်အတွက် သင့်လက်ဗွေကို ယခု သုံးနိုင်သည်။"</string>
@@ -563,15 +570,6 @@
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"အက်ပ်များတွင် သင်ဖြစ်ကြောင်းအတည်ပြုရန်အတွက် (သို့) သင့်ဖုန်းကို လော့ခ်ဖွင့်ရန်အတွက် သင့်လက်ဗွေကို အသုံးပြု၍ရတော့မည် မဟုတ်ပါ။"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"သင်၏အလုပ်ပရိုဖိုင်ကို လော့ခ်ဖွင့်ရန်၊ ဝယ်ယူမှုများကို ခွင့်ပြုရန် (သို့) အလုပ်သုံးအက်ပ်များသို့ လက်မှတ်ထိုးဝင်ရန်တို့အတွက် သင့်လက်ဗွေကို အသုံးပြု၍ရတော့မည် မဟုတ်ပါ။"</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"ဖယ်ရှားပါ"</string>
-    <string name="security_settings_biometrics_title" msgid="9156091890323967944">"မျက်နှာနှင့် လက်ဗွေသုံးလော့ခ်ဖွင့်ခြင်း"</string>
-    <string name="security_settings_biometrics_summary_none" msgid="7832260410376805323">"စနစ်ထည့်သွင်းရန် တို့ပါ"</string>
-    <string name="security_settings_biometrics_summary_face" msgid="531544670908824943">"မျက်နှာကိုသာ သုံးမည်"</string>
-    <string name="security_settings_biometrics_summary_fingerprint" msgid="6815851804705508275">"လက်ဗွေကိုသာ သုံးမည်"</string>
-    <string name="security_settings_biometrics_summary_both" msgid="7328638955127876021">"မျက်နှာနှင့် လက်ဗွေ"</string>
-    <string name="security_settings_biometrics_description" msgid="1669340998063178097">"မျက်နှာပြ လော့ခ်ဖွင့်ခြင်းနှင့် လက်ဗွေသုံးလော့ခ်ဖွင့်ခြင်းကို စနစ်ထည့်သွင်းသည့်အခါ သင်နှာခေါင်းစည်း တပ်ဆင်ထားလျှင် (သို့) မှောင်သောနေရာသို့ ရောက်နေလျှင် သင်၏ဖုန်းက သင့်လက်ဗွေကို တောင်းပါမည်"</string>
-    <string name="security_settings_biometrics_types_category" msgid="4875227478250058267">"သော့ဖွင့်ရန် နည်းလမ်းများ"</string>
-    <string name="security_settings_biometrics_preferences_category" msgid="8289089775173952237">"မျက်နှာ (သို့) လက်ဗွေ သုံးခြင်း"</string>
-    <string name="security_settings_biometrics_preference_use_with_apps" msgid="4068551659594090167">"အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်း"</string>
     <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"အသွင်ဝှက်ခြင်း"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="7484150746479958376">"တက်ပလက်ကိုလျှို့ဝှက်အသွင်ပြောင်းရန်"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="8302873664348463041">"ဖုန်းကို အသွင်ဝှက်ထားခြင်း"</string>
@@ -821,6 +819,7 @@
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"ဤပင်နံပါတ်ကို အခြား စက်ပစ္စည်းတွင်လည်း ရိုက်ထည့်ရန် လိုအပ်နိုင်သည်။"</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"ဤ ဖြတ်သန်းခွင့်ကုဒ်ကို အခြား စက်ပစ္စည်းတွင်လည်း ရိုက်ထည့်ရန် လိုအပ်နိုင်သည်။"</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">":&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;များနှင့်တွဲချိတ်စေရန် &lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;ဖြတ်သန်းခွင့်ကီးပြသစေရန် သေချာပါစေ"</string>
+    <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"ချိတ်ဆက်ထားသည့်အစီအစဉ်အတိုင်း တွဲချိတ်ရန်အတည်ပြုပါ"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1068123527866596779">":&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;မှ ဤစက်နှင့်တွဲချိတ်မည်လား"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="8672803845151786521">":<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>နှင့်ချိတ်တွဲရန်:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>ကိုရိုက်ထည့်ကာ, Return သို့မဟုတ် Enterကိုနှိပ်ပါ"</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"သင်၏ အဆက်အသွယ်များနှင့် ယခင်ခေါ်ဆိုမှုမှတ်တမ်းသို့ ဝင်ခွင့်ပြုပါ"</string>
@@ -854,6 +853,7 @@
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"ချိတ်ဆက်မရပါ။ ထပ်လုပ်ကြည့်ပါ။"</string>
     <string name="device_details_title" msgid="1155622417516195481">"စက်အသေးစိတ်များ"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"စက်ပစ္စည်း၏ ဘလူးတုသ်လိပ်စာ- <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"စက်၏ ဘလူးတုသ်လိပ်စာ-\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"စက်ပစ္စည်းကို ပယ်ဖျက်လိုပါသလား။"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"အဖွဲ့ကို ဖယ်ရှားရန်"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"အက်ပ် ချိတ်ဆက်မှုဖြုတ်မလား။"</string>
@@ -2257,7 +2257,7 @@
     <string name="gadget_picker_title" msgid="7615902510050731400">"ဂါဂျစ်အား ရွေးချယ်မည်"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"ဝဒ်ဂျစ်အား ရွေးရန်"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="3537968409832846255">"ဝဒ်ဂျက်ဖန်တီး၍ သုံးစွဲခွင့်ပြုမည်လား ?"</string>
-    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5694218981358874429">"သင် ဝဒ်ဂျက်ကို ဖန်တီးပြီးသောအခါ၊  <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> သည် ဖော်ပြထားသော အချက်အလက်များအားလုံးကို သုံးစွဲနိုင်သည်"</string>
+    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"ဝိဂျက်ပြုလုပ်ပြီးပါက ပြသထားသမျှကို အပလီကေးရှင်းက ဝင်ကြည့်နိုင်သည်။\n\nအပလီကေးရှင်း- <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nဝိဂျက်- <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"<xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> ကို ဝဒ်ဂျက်များဖန်တီးရန်နှင့် ၎င်းတို့၏ အချက်အလက်များကို ရယူရန် အမြဲခွင့်ပြုသည်။"</string>
     <string name="usage_stats_label" msgid="6523644917803320085">"အသုံးပြုမှု၏ ကိန်းဂဏန်းအချက်အလက်"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"အသုံးပြုမှု၏ ကိန်းဂဏန်းအချက်အလက်"</string>
@@ -2638,7 +2638,7 @@
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"အက်ပ်၏ဘက်ထရီအသုံးပြုပုံကို ပြောင်းခြင်းက ၎င်း၏စွမ်းဆောင်ရည်အပေါ် သက်ရောက်မှုရှိနိုင်သည်။"</string>
     <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"ဤအက်ပ်သည် <xliff:g id="STATE">%1$s</xliff:g> ဘက်ထရီ အသုံးပြုမှု လိုအပ်သည်။"</string>
     <string name="manager_battery_usage_unrestricted_only" msgid="3646162131339418216">"အကန့်အသတ်မဲ့"</string>
-    <string name="manager_battery_usage_optimized_only" msgid="7121785281913056432">"ပိုကောင်းအောင်လုပ်ခြင်း"</string>
+    <string name="manager_battery_usage_optimized_only" msgid="7121785281913056432">"သင့်မြတ်အောင် ဆောင်ရွက်ရန်"</string>
     <string name="manager_battery_usage_link_a11y" msgid="374918091821438564">"ဘက်ထရီ အသုံးပြုမှုဆိုင်ရာ ရွေးချယ်စရာများအကြောင်း ပိုမိုလေ့လာပါ"</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"အားအပြည့်သွင်းကတည်းက မျက်နှာပြင်သုံးမှု"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"အားအပြည့်သွင်းပြီးသည့် အချိန်မှစ၍ ဘက်ထရီအသုံးပြုမှု"</string>
@@ -2663,7 +2663,7 @@
     <string name="bluetooth_on_time" msgid="8424625554628450028">"အချိန်ကိုက်ဝိုင်ဖိုင်"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"ဘက်ထရီ အသုံးပြုမှု"</string>
     <string name="history_details_title" msgid="8628584613889559355">"မှတ်တမ်းအသေးစိတ်များ"</string>
-    <string name="advanced_battery_preference_title" msgid="3017771848679952419">"ဘက်ထရီ အသုံးပြုမှု"</string>
+    <string name="advanced_battery_preference_title" msgid="3790901207877260883">"ဘက်ထရီ အသုံးပြုမှု"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"ပြီးခဲ့သော ၂၄ နာရီအတွင်း အသုံးပြုမှုကြည့်ရန်"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"နောက်ဆုံး အားအပြည့်သွင်းပြီးချိန်က အသုံးပြုမှုကို ပြသသည်"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"ဘက်ထရီ အသုံးပြုမှု"</string>
@@ -2687,6 +2687,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"အများဆုံးသုံးသည့် အက်ပ်များ ကြည့်ပါ"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"အားသွင်းခြင်းကို လောလောဆယ် ကန့်သတ်ထားသည်"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"သင့် ဘက်ထရီသက်တမ်းကို ထိန်းသိမ်းရန် ဖြစ်သည်။ ပိုမိုလေ့လာရန်။"</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"ဆက်အားသွင်းရန်"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"အရမ်းပူချိန်နှင့် ကြာမြင့်စွာအားသွင်းရခြင်း စသည့် အခြေအနေများတွင် ဘက်ထရီသက်တမ်း ပိုကြာစေရန် <xliff:g id="PERCENT">%1$s</xliff:g> အထိသာ အားသွင်းရန် ကန့်သတ်နိုင်သည်။\n\n၎င်းအခြေအနေများ မရှိတော့ပါက ဖုန်းကို အလိုအလျောက် ပုံမှန်အားပြန်သွင်းပါမည်။"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"အရမ်းပူနေချိန်နှင့် ကြာမြင့်စွာအားသွင်းရခြင်း စသည့် အခြေအနေများတွင် ဘက်ထရီသက်တမ်း ပိုကြာစေရန် <xliff:g id="PERCENT">%1$s</xliff:g> အထိသာ အားသွင်းရန် ကန့်သတ်နိုင်သည်။\n\n၎င်းအခြေအနေများ မရှိတော့ပါက တက်ဘလက်ကို အလိုအလျောက် ပုံမှန်အားပြန်သွင်းပါမည်။"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"သင့်ဖုန်းကို ပုံမှန်ထက်ပိုအသုံးပြုထားသောကြောင့် သင်၏ဘက်ထရီသည် သာမန်ထက် အကုန်မြန်နိုင်ပါသည်။\n\nဘက်ထရီအများဆုံးသုံးသည့် အက်ပ်များ-"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"သင့်တက်ဘလက်ကို ပုံမှန်ထက်ပိုအသုံးပြုထားသောကြောင့် သင်၏ဘက်ထရီသည် သာမန်ထက် အကုန်မြန်နိုင်ပါသည်။\n\nဘက်ထရီအများဆုံးသုံးသည့် အက်ပ်များ-"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"သင့်စက်ကို ပုံမှန်ထက်ပိုအသုံးပြုထားသောကြောင့် သင်၏ဘက်ထရီသည် သာမန်ထက် အကုန်မြန်နိုင်ပါသည်။\n\nဘက်ထရီအများဆုံးသုံးသည့် အက်ပ်များ-"</string>
@@ -2896,8 +2899,6 @@
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"ပြီးခဲ့သော ၂၄ နာရီအတွင်း စနစ်အသုံးပြုမှု"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"<xliff:g id="SLOT">%s</xliff:g> အတွက် စနစ်အသုံးပြုမှု"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"<xliff:g id="SLOT">%s</xliff:g> အတွက် အက်ပ်အသုံးပြုမှု"</string>
-    <string name="battery_usage_time_am" msgid="7783773965475697655">"နံနက်"</string>
-    <string name="battery_usage_time_pm" msgid="1534468528902328570">"ညနေ"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"စုစုပေါင်း- တစ်မိနစ်ထက် နည်းသည်"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"နောက်ခံအချိန်- တစ်မိနစ်ထက် နည်းသည်"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"စုစုပေါင်း- <xliff:g id="TIME">%s</xliff:g>"</string>
@@ -3372,6 +3373,8 @@
     <string name="application_restrictions" msgid="276179173572729205">"အပလီကေးရှင်းနှင့် ပါရှိချက်များကို ခွင့်ပြုရန်"</string>
     <string name="apps_with_restrictions_header" msgid="5277698582872267931">"ကန့်သတ်ချက်များရှိသော အပလီကေးရှင်းများ"</string>
     <string name="apps_with_restrictions_settings_button" msgid="2648355133416902221">"အပလီကေးရှင်းဆက်တင်းများကိုချဲ့ပြပါ"</string>
+    <string name="user_choose_copy_apps_to_another_user" msgid="5914037067347012870">"ထည့်သွင်းရန် အက်ပ်များရွေးခြင်း"</string>
+    <string name="user_copy_apps_menu_title" msgid="5354300105759670300">"ရနိုင်သောအက်ပ်များကို ထည့်သွင်းပါ"</string>
     <string name="nfc_payment_settings_title" msgid="2043139180030485500">"ထိတွေ့မှုမဲ့ ငွေပေးချေခြင်း"</string>
     <string name="nfc_payment_how_it_works" msgid="3658253265242662010">"အလုပ်လုပ်ပုံ"</string>
     <string name="nfc_payment_no_apps" msgid="6840001883471438798">"စတိုးဆိုင်များတွင် သင်၏ ဖုန်းဖြင့် ငွေပေးချေပါ"</string>
@@ -3417,8 +3420,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"အဆင့်မြင့်ဖုန်းခေါ်ဆိုခြင်း"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G ခေါ်ဆိုမှု"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"အသံခေါ်ဆိုမှုနှင့် အခြားဆက်သွယ်ရေးများ ပိုကောင်းစေရန် LTE ဝန်ဆောင်မှုများ အသုံးပြုပါ (အကြံပြုထားသည်)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"အသံခေါ်ဆိုမှုနှင့် အခြားဆက်သွယ်ရေးများ ပိုကောင်းစေရန် 4G ဝန်ဆောင်မှုများ အသုံးပြုပါ (အကြံပြုထားသည်)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"အသံခေါ်ဆိုမှု ပိုကောင်းစေရန် LTE ဝန်ဆောင်မှုများ အသုံးပြုပါ (အကြံပြုထားသည်)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"အသံခေါ်ဆိုမှု ပိုကောင်းစေရန် 4G ဝန်ဆောင်မှုများ အသုံးပြုပါ (အကြံပြုထားသည်)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"အသံခေါ်ဆိုမှုများအတွက် 5G ကိုသုံးပါ"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"အဆက်အသွယ်များကို ဝန်ဆောင်မှုပေးသူထံ ပို့ရန်"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"အဆင့်မြင့် ဝန်ဆောင်မှုများပေးရန် သင့်အဆက်အသွယ်များ၏ ဖုန်းနံပါတ်များကို ပို့သည်"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"အဆက်အသွယ်များကို <xliff:g id="CARRIER">%1$s</xliff:g> ထံ ပို့မလား။"</string>
@@ -3612,6 +3617,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"ဘက်ထရီ အားထိန်း၊ ကပ်ခွာ၊ အမြဲရှိသည်၊ ပါဝါချွေတာစနစ်၊ ဘက်ထရီ"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"ပုံမှန်အစီအစဉ်၊ အချိန်ဇယား၊ ဘက်ထရီအားထိန်း၊ ပါဝါချွေတာစနစ်၊ ဘက်ထရီ၊ အလိုအလျောက်၊ ရာခိုင်နှုန်း"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte၊ အဆင့်မြင့် ခေါ်ဆိုခြင်း၊ 4g ခေါ်ဆိုခြင်း"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g၊ vonr၊ အဆင့်မြင့် ဖုန်းခေါ်ဆိုမှု၊ 5g ဖုန်းခေါ်ဆိုမှု"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"ဘာသာစကားထည့်ရန်၊ ဘာသာစကားတစ်ခုကို ထည့်ပါ"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"စာသားအရွယ်အစား၊ ပုံနှိပ်အကြီး၊ ဖောင့်အကြီး၊ စာသားအကြီး၊ အမြင်အာရုံချို့တဲ့ခြင်း၊ စာသားကို ပိုကြီးအောင်လုပ်ခြင်း၊ ဖောင့်ပိုကြီးအောင် ချဲ့ခြင်း၊ ဖောင့် ပုံကြီးချဲ့ခြင်း"</string>
     <string name="default_sound" msgid="6604374495015245195">"ပုံသေ အသံ"</string>
@@ -3637,6 +3643,7 @@
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"အမြဲတမ်း တုန်ခါပါ"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"အရင်တုန်ခါပြီးမှ အသံမြည်ပါ"</string>
     <string name="other_sound_settings" msgid="5468360269346162072">"အခြားအသံများ"</string>
+    <string name="spatial_audio_title" msgid="6591051622375191603">"စပေရှယ် အသံ"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"ဖုန်းဒိုင်ခွက် အသံ"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"မျက်နှာပြင်လော့ခ်ချသံ"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"အားသွင်းသံများနှင့် တုန်ခါမှု"</string>
@@ -3846,7 +3853,7 @@
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"လော့ခ်ချထားစဉ် အရေးကြီးသည့် အကြောင်းအရာကို ပြရန်"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"အရေးကြီးသည့် အလုပ်ပရိုဖိုင် အကြောင်းကြားချက်များ"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"လော့ခ်ချထားစဉ် အရေးကြီးသည့် အလုပ်ပရိုဖိုင် အကြောင်းအရာကို ပြရန်"</string>
-    <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"အကြောင်းကြားချက်ပါ အရာအားလုံး ပြပါ"</string>
+    <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"အကြောင်းကြားချက်ပါ အရာအားလုံး ပြသည်"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"လော့ခ်ဖွင့်မှသာ သတိထားရသော အကြောင်းအရာကို ပြပါ"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"အကြောင်းကြားချက်များ လုံးဝမပြပါနှင့်"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"လော့ခ်မျက်နှာပြင်ကို မည်သို့ပြသစေလိုပါသလဲ။"</string>
@@ -3943,7 +3950,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"<xliff:g id="SERVICE">%1$s</xliff:g> အတွက် အကြောင်းကြားချက် သုံးခွင့်ပေးမလား။"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Android 12 တွင် ‘Android အလိုက်သင့် အကြောင်းကြားချက်များ’ ကို အဆင့်မြင့် အကြောင်းကြားချက်များဖြင့် အစားထိုးထားသည်။ ဤဝန်ဆောင်မှုက အကြံပြုထားသော လုပ်ဆောင်ချက်နှင့် ပြန်စာများကို ပြပေးပြီး သင်၏အကြောင်းကြားချက်များကို စီစဉ်ပေးသည်။ \n\nအဆင့်မြင့် အကြောင်းကြားချက်များက အဆက်အသွယ်အမည်နှင့် မက်ဆေ့ဂျ်များကဲ့သို့ ကိုယ်ရေးကိုယ်တာအချက်အလက်များ အပါအဝင် အကြောင်းကြားချက် အကြောင်းအရာကို သုံးနိုင်သည်။ ဤဝန်ဆောင်မှုက ဖုန်းခေါ်ဆိုမှုများ ဖြေခြင်းနှင့် ‘မနှောင့်ယှက်ရ’ ကို ထိန်းချုပ်ခြင်းကဲ့သို့ အကြောင်းကြားချက်များကို ပယ်နိုင်သည် (သို့) တုံ့ပြန်နိုင်သည်။"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g> အတွက် အကြောင်းကြားချက် သုံးခွင့်ပေးမလား။"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> သည် အဆက်အသွယ်အမည်များနှင့် သင်လက်ခံရရှိသော စာတိုမက်ဆေ့ဂျ်များကဲ့သို့သော ကိုယ်ရေးကိုယ်တာ အချက်အလက်များအပါအဝင် အကြောင်းကြားချက်များအားလုံးကို ဖတ်နိုင်ပါမည်။ ဤအက်ပ်သည် အကြောင်းကြားချက်များကို ပယ်ခြင်း သို့မဟုတ် ဖုန်းခေါ်ဆိုမှုများ ဖြေခြင်းအပါအဝင် အကြောင်းကြားချက်များရှိ ခလုတ်များ နှိပ်ခြင်းကိုလည်း ပြုလုပ်နိုင်သည်။ \n\n၎င်းသည် အက်ပ်အား \'မနှောင့်ယှက်ရ\' ကို ဖွင့်ခွင့်/ပိတ်ခွင့် ပေးသည့်အပြင် ဆက်စပ်နေသော ဆက်တင်များကိုလည်း ပြောင်းခွင့်ပေးသည်။"</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> သည် အဆက်အသွယ်အမည်များနှင့် သင်လက်ခံရရှိသော စာတိုမက်ဆေ့ဂျ်များကဲ့သို့သော ကိုယ်ရေး အချက်အလက်များအပါအဝင် အကြောင်းကြားချက်အားလုံးကို ဖတ်နိုင်ပါမည်။ ဤအက်ပ်သည် အကြောင်းကြားချက်များကို ဆိုင်းငံ့ခြင်း (သို့) ပယ်ခြင်း သို့မဟုတ် ဖုန်းခေါ်ဆိုမှုများ ဖြေခြင်းအပါအဝင် အကြောင်းကြားချက်များရှိ ခလုတ်များ နှိပ်ခြင်းကိုလည်း ပြုလုပ်နိုင်သည်။ \n\n၎င်းသည် အက်ပ်ကို ‘မနှောင့်ယှက်ရ’ အား ပိတ်ခွင့်ပေးသည့်အပြင် ဆက်စပ်နေသော ဆက်တင်များကိုလည်း ပြောင်းခွင့်ပေးသည်။"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> အတွက် အကြောင်းကြားချက် အသုံးပြုခွင့်ကို ပိတ်လိုက်လျှင် \'မနှောင့်ယှက်ရ\' ကို အသုံးပြုခွင့်လည်း ပိတ်သွားပါမည်။"</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"ပိတ်ရန်"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"မလုပ်တော့"</string>
@@ -4642,7 +4649,7 @@
     <string name="color_temperature_toast" msgid="7611532183532407342">"အရောင်ပြောင်းလဲမှု ပြုလုပ်ရန်၊ မျက်နှာပြင်ကိုပိတ်ပါ"</string>
     <string name="camera_laser_sensor_switch" msgid="7097842750947187671">"Camera လေဆာ အာရုံခံကိရိယာ"</string>
     <string name="ota_disable_automatic_update" msgid="1953894421412420231">"အလိုအလျောက် စနစ်အပ်ဒိတ်များ"</string>
-    <string name="ota_disable_automatic_update_summary" msgid="7803279951533276841">"စက်ပစ္စည်းပြန်လည်စတင်သည့်အခါ အပ်ဒိတ်များကို ထည့်သွင်းပါ"</string>
+    <string name="ota_disable_automatic_update_summary" msgid="7803279951533276841">"စက်ပစ္စည်းပြန်လည်စတင်သည့်အခါ အပ်ဒိတ်များကို ထည့်သွင်းသည်"</string>
     <string name="usage" msgid="287782903846013936">"အသုံးပြုမှု"</string>
     <string name="cellular_data_usage" msgid="5874156338825285334">"မိုဘိုင်းဒေတာ အသုံးပြုမှု"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"အက်ပ်ဒေတာ သုံးစွဲမှု"</string>
@@ -5424,6 +5431,10 @@
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"ဖွင့်ပိတ်ခလုတ်ကို ဖိထားခြင်းဖြင့် Assistant ကိုဖွင့်ပါ"</string>
     <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"ပါဝါနှင့် အရေးပေါ် မီနူး-\n‘ဖွင့်ပိတ်ခလုတ်’ နှင့် ‘အသံချဲ့ခလုတ်’ ကို တစ်ပြိုင်တည်းနှိပ်ပါ။"</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"အသံမြည်ခြင်းကို ပိတ်ရန်-\nအသံထိန်း မီနူးတွင် ဖြတ်လမ်းလင့်ခ် ရနိုင်သည်။"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"ကြာချိန်ကို နှိပ်၍ဖိထားပါ"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"ဖွင့်ပိတ်ခလုတ်အား မည်မျှကြာကြာနှိပ်၍ ဖိထားရမည်ကို ရွေးပြီး အာရုံခံနိုင်စွမ်းကို ချိန်ညှိပါ"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"အတို"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"အရှည်"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Wallet ပြရန်"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"လော့ခ်မျက်နှာပြင်နှင့် အမြန် ဆက်တင်များမှ Wallet သို့ ဝင်သုံးခွင့်ပြုသည်"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"စက်ထိန်းစနစ် ပြရန်"</string>
@@ -5565,7 +5576,10 @@
     <string name="mic_toggle_title" msgid="265145278323852547">"မိုက်ခရိုဖုန်းသုံးခွင့်"</string>
     <string name="sensor_toggle_description" msgid="8248823248606795411">"အက်ပ်နှင့် ဝန်ဆောင်မှုအားလုံးအတွက်"</string>
     <string name="game_settings_title" msgid="1028178627743422090">"ဂိမ်း ဆက်တင်များ"</string>
-    <string name="game_settings_summary" msgid="2548056479103747555">"ဂိမ်းဒက်ရှ်ဘုတ် ဖြတ်လမ်းလင့်ခ်ကို ဖွင့်ခြင်း စသည်"</string>
+    <string name="game_settings_summary" msgid="8623110986485071064">"ဂိမ်းဒက်ရှ်ဘုတ် ဖြတ်လမ်းလင့်ခ် ဖွင့်ခြင်းနှင့် အခြား"</string>
+    <string name="previous_page_content_description" msgid="6438292457923282991">"ယခင်"</string>
+    <string name="next_page_content_description" msgid="1641835099813416294">"ရှေ့သို့"</string>
+    <string name="colors_viewpager_content_description" msgid="2591751086138259565">"အရောင် အစမ်းကြည့်ရှုခြင်း"</string>
     <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"ဆင်းမ်ကတ်သုံးခွင့် တောင်းဆိုချက်"</string>
     <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"စက်တစ်ခုက သင့်ဆင်းမ်ကတ်ကို သုံးခွင့်ရလိုသည်။ အသေးစိတ်အချက်အလက်များအတွက် တို့ပါ။"</string>
     <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"ဆင်းမ်ကတ်ကို သုံးခွင့်ပြုမလား။"</string>
@@ -5611,4 +5625,5 @@
     <item msgid="1599558140284643834">"ပါဝါချွေတာမုဒ်"</item>
     <item msgid="588427840913221601">"လုပ်ဆောင်မှု အခြေအနေ"</item>
   </string-array>
+    <string name="tare_dialog_confirm_button_title" msgid="9179397559760203348">"အတည်ပြုရန်"</string>
 </resources>

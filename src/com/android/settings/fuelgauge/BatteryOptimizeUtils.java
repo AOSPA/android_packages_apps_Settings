@@ -16,6 +16,7 @@
 
 package com.android.settings.fuelgauge;
 
+import android.annotation.IntDef;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.util.Log;
@@ -23,6 +24,9 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /** A utility class for application usage operation. */
 public class BatteryOptimizeUtils {
@@ -32,21 +36,26 @@ public class BatteryOptimizeUtils {
     @VisibleForTesting AppOpsManager mAppOpsManager;
     @VisibleForTesting BatteryUtils mBatteryUtils;
     @VisibleForTesting PowerAllowlistBackend mPowerAllowListBackend;
+    @VisibleForTesting int mMode;
+    @VisibleForTesting boolean mAllowListed;
+
     private final String mPackageName;
     private final int mUid;
 
-    private int mMode;
-    private boolean mAllowListed;
+    // Optimization modes.
+    static final int MODE_UNKNOWN = 0;
+    static final int MODE_RESTRICTED = 1;
+    static final int MODE_UNRESTRICTED = 2;
+    static final int MODE_OPTIMIZED = 3;
 
-    /**
-     * Usage type of application.
-     */
-    public enum AppUsageState {
-        UNKNOWN,
-        RESTRICTED,
-        UNRESTRICTED,
-        OPTIMIZED,
-    }
+    @IntDef(prefix = {"MODE_"}, value = {
+        MODE_UNKNOWN,
+        MODE_RESTRICTED,
+        MODE_UNRESTRICTED,
+        MODE_OPTIMIZED,
+    })
+    @Retention(RetentionPolicy.SOURCE)
+    static @interface OptimizationMode {}
 
     public BatteryOptimizeUtils(Context context, int uid, String packageName) {
         mUid = uid;
@@ -59,36 +68,48 @@ public class BatteryOptimizeUtils {
         mAllowListed = mPowerAllowListBackend.isAllowlisted(mPackageName);
     }
 
-    public AppUsageState getAppUsageState() {
-        refreshState();
-        if (!mAllowListed && mMode == AppOpsManager.MODE_IGNORED) {
-            return AppUsageState.RESTRICTED;
-        } else if (mAllowListed && mMode == AppOpsManager.MODE_ALLOWED) {
-            return AppUsageState.UNRESTRICTED;
-        } else if (!mAllowListed && mMode == AppOpsManager.MODE_ALLOWED) {
-            return AppUsageState.OPTIMIZED;
+    /** Gets the {@link OptimizationMode} based on mode and allowed list. */
+    @OptimizationMode
+    public static int getAppOptimizationMode(int mode, boolean isAllowListed) {
+        if (!isAllowListed && mode == AppOpsManager.MODE_IGNORED) {
+            return MODE_RESTRICTED;
+        } else if (isAllowListed && mode == AppOpsManager.MODE_ALLOWED) {
+            return MODE_UNRESTRICTED;
+        } else if (!isAllowListed && mode == AppOpsManager.MODE_ALLOWED) {
+            return MODE_OPTIMIZED;
         } else {
-            Log.d(TAG, "get unknown app usage state.");
-            return AppUsageState.UNKNOWN;
+            return MODE_UNKNOWN;
         }
     }
 
-    public void setAppUsageState(AppUsageState state) {
-        switch (state) {
-            case RESTRICTED:
+    /** Gets the {@link OptimizationMode} for associated app. */
+    @OptimizationMode
+    public int getAppOptimizationMode() {
+        refreshState();
+        return getAppOptimizationMode(mMode, mAllowListed);
+    }
+
+    /** Sets the {@link OptimizationMode} for associated app. */
+    public void setAppOptimizationMode(@OptimizationMode int mode) {
+        if (getAppOptimizationMode(mMode, mAllowListed) == mode) {
+            Log.w(TAG, "set the same optimization mode for: " + mPackageName);
+            return;
+        }
+        switch (mode) {
+            case MODE_RESTRICTED:
                 mBatteryUtils.setForceAppStandby(mUid, mPackageName, AppOpsManager.MODE_IGNORED);
                 mPowerAllowListBackend.removeApp(mPackageName);
                 break;
-            case UNRESTRICTED:
+            case MODE_UNRESTRICTED:
                 mBatteryUtils.setForceAppStandby(mUid, mPackageName, AppOpsManager.MODE_ALLOWED);
                 mPowerAllowListBackend.addApp(mPackageName);
                 break;
-            case OPTIMIZED:
+            case MODE_OPTIMIZED:
                 mBatteryUtils.setForceAppStandby(mUid, mPackageName, AppOpsManager.MODE_ALLOWED);
                 mPowerAllowListBackend.removeApp(mPackageName);
                 break;
             default:
-                Log.d(TAG, "set unknown app usage state.");
+                Log.d(TAG, "set unknown app optimization mode.");
         }
     }
 
@@ -107,6 +128,13 @@ public class BatteryOptimizeUtils {
 
         return mPowerAllowListBackend.isSysAllowlisted(mPackageName)
                 || mPowerAllowListBackend.isDefaultActiveApp(mPackageName);
+    }
+
+    /**
+     * Return {@code true} if this package is in allow list except idle app.
+     */
+    public boolean isAllowlistedExceptIdleApp() {
+        return mPowerAllowListBackend.isAllowlistedExceptIdle(mPackageName);
     }
 
     String getPackageName() {

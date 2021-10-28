@@ -84,6 +84,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 public class MobileNetworkUtils {
 
@@ -258,9 +260,16 @@ public class MobileNetworkUtils {
     public static boolean showEuiccSettings(Context context) {
         long timeForAccess = SystemClock.elapsedRealtime();
         try {
-            return ((Future<Boolean>) ThreadUtils.postOnBackgroundThread(()
-                    -> showEuiccSettingsDetecting(context))).get();
-        } catch (ExecutionException | InterruptedException exception) {
+            Boolean isShow = ((Future<Boolean>) ThreadUtils.postOnBackgroundThread(() -> {
+                        try {
+                            return showEuiccSettingsDetecting(context);
+                        } catch (Exception threadException) {
+                            Log.w(TAG, "Accessing Euicc failure", threadException);
+                        }
+                        return Boolean.FALSE;
+                    })).get(3, TimeUnit.SECONDS);
+            return ((isShow != null) && isShow.booleanValue());
+        } catch (ExecutionException | InterruptedException | TimeoutException exception) {
             timeForAccess = SystemClock.elapsedRealtime() - timeForAccess;
             Log.w(TAG, "Accessing Euicc takes too long: +" + timeForAccess + "ms");
         }
@@ -279,7 +288,7 @@ public class MobileNetworkUtils {
         final ContentResolver cr = context.getContentResolver();
         final boolean esimIgnoredDevice =
                 Arrays.asList(TextUtils.split(SystemProperties.get(KEY_ESIM_CID_IGNORE, ""), ","))
-                        .contains(SystemProperties.get(KEY_CID, null));
+                        .contains(SystemProperties.get(KEY_CID));
         final boolean enabledEsimUiByDefault =
                 SystemProperties.getBoolean(KEY_ENABLE_ESIM_UI_BY_DEFAULT, true);
         final boolean euiccProvisioned =
@@ -459,28 +468,23 @@ public class MobileNetworkUtils {
             return false;
         }
 
-        final int networkMode = getNetworkTypeFromRaf(
-                (int) telephonyManager.getAllowedNetworkTypesForReason(
-                        TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER));
-        if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO
-                && isWorldMode(context, subId)) {
-            return false;
-        }
-        if (shouldSpeciallyUpdateGsmCdma(context, subId)) {
-            return false;
-        }
-
-        if (isGsmBasicOptions(context, subId)) {
-            return true;
-        }
-
         if (isWorldMode(context, subId)) {
+            final int networkMode = getNetworkTypeFromRaf(
+                    (int) telephonyManager.getAllowedNetworkTypesForReason(
+                            TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER));
+            if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO) {
+                return false;
+            }
+            if (shouldSpeciallyUpdateGsmCdma(context, subId)) {
+                return false;
+            }
+
             if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA) {
                 return true;
             }
         }
 
-        return false;
+        return isGsmBasicOptions(context, subId);
     }
 
     /**
@@ -573,6 +577,9 @@ public class MobileNetworkUtils {
      */
     @VisibleForTesting
     static boolean shouldSpeciallyUpdateGsmCdma(Context context, int subId) {
+        if (!isWorldMode(context, subId)) {
+            return false;
+        }
         final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(subId);
         final int networkMode = getNetworkTypeFromRaf(
@@ -585,7 +592,7 @@ public class MobileNetworkUtils {
                 || networkMode
                 == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA
                 || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA) {
-            if (!isTdscdmaSupported(context, subId) && isWorldMode(context, subId)) {
+            if (!isTdscdmaSupported(context, subId)) {
                 return true;
             }
         }

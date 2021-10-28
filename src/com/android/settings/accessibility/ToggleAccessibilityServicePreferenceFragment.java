@@ -38,6 +38,7 @@ import android.content.pm.ServiceInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.os.UserHandle;
 import android.os.storage.StorageManager;
 import android.provider.Settings;
@@ -54,6 +55,7 @@ import androidx.annotation.Nullable;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
@@ -66,6 +68,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     private static final String TAG = "ToggleAccessibilityServicePreferenceFragment";
     private static final int ACTIVITY_REQUEST_CONFIRM_CREDENTIAL_FOR_WEAKER_ENCRYPTION = 1;
+    private static final String KEY_HAS_LOGGED = "has_logged";
     private LockPatternUtils mLockPatternUtils;
     private AtomicBoolean mIsDialogShown = new AtomicBoolean(/* initialValue= */ false);
 
@@ -81,10 +84,20 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     private Dialog mDialog;
     private BroadcastReceiver mPackageRemovedReceiver;
+    private boolean mDisabledStateLogged = false;
+    private long mStartTimeMillsForLogging = 0;
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.ACCESSIBILITY_SERVICE;
+        // Retrieve from getArguments() directly because this function will be executed from
+        // onAttach(), but variable mComponentName only available after onProcessArguments()
+        // which comes from onCreateView().
+        final ComponentName componentName = getArguments().getParcelable(
+                AccessibilitySettings.EXTRA_COMPONENT_NAME);
+
+        return FeatureFactory.getFactory(getActivity().getApplicationContext())
+                .getAccessibilityMetricsFeatureProvider()
+                .getDownloadedFeatureMetricsCategory(componentName);
     }
 
     @Override
@@ -98,6 +111,11 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mLockPatternUtils = new LockPatternUtils(getPrefContext());
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(KEY_HAS_LOGGED)) {
+                mDisabledStateLogged = savedInstanceState.getBoolean(KEY_HAS_LOGGED);
+            }
+        }
     }
 
     @Override
@@ -119,9 +137,20 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        if (mStartTimeMillsForLogging > 0) {
+            outState.putBoolean(KEY_HAS_LOGGED, mDisabledStateLogged);
+        }
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     public void onPreferenceToggled(String preferenceKey, boolean enabled) {
         ComponentName toggledService = ComponentName.unflattenFromString(preferenceKey);
         logAccessibilityServiceEnabled(toggledService, enabled);
+        if (!enabled) {
+            logDisabledState(toggledService.getPackageName());
+        }
         AccessibilityUtils.setAccessibilityServiceState(getPrefContext(), toggledService, enabled);
     }
 
@@ -396,6 +425,8 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         // Get Accessibility service name.
         mPackageName = getAccessibilityServiceInfo().getResolveInfo().loadLabel(
                 getPackageManager());
+
+        mStartTimeMillsForLogging = arguments.getLong(AccessibilitySettings.EXTRA_TIME_FOR_LOGGING);
     }
 
     private void onDialogButtonFromDisableToggleClicked(DialogInterface dialog, int which) {
@@ -556,6 +587,15 @@ public class ToggleAccessibilityServicePreferenceFragment extends
             setOnDismissListener(
                     dialog -> mIsDialogShown.compareAndSet(/* expect= */ true, /* update= */
                             false));
+        }
+    }
+
+    private void logDisabledState(String packageName) {
+        if (mStartTimeMillsForLogging > 0 && !mDisabledStateLogged) {
+            AccessibilityStatsLogUtils.logDisableNonA11yCategoryService(
+                    packageName,
+                    SystemClock.elapsedRealtime() - mStartTimeMillsForLogging);
+            mDisabledStateLogged = true;
         }
     }
 }

@@ -76,8 +76,8 @@ public class OptimizedPreferenceControllerTest {
     @Test
     public void testUpdateState_isOptimizedStates_prefChecked() {
         when(mockBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
-        when(mockBatteryOptimizeUtils.getAppUsageState()).thenReturn(
-                BatteryOptimizeUtils.AppUsageState.OPTIMIZED);
+        when(mockBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(
+                BatteryOptimizeUtils.MODE_OPTIMIZED);
 
         mController.updateState(mPreference);
 
@@ -94,12 +94,22 @@ public class OptimizedPreferenceControllerTest {
     }
 
     @Test
+    public void testUpdateState_isAllowlistedExceptIdleApp_prefEnabled() {
+        when(mockBatteryOptimizeUtils.isAllowlistedExceptIdleApp()).thenReturn(true);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.isEnabled()).isTrue();
+        assertThat(mPreference.isChecked()).isTrue();
+    }
+
+    @Test
     public void testHandlePreferenceTreeClick_samePrefKey_verifyAction() {
         mPreference.setKey(mController.KEY_OPTIMIZED_PREF);
         mController.handlePreferenceTreeClick(mPreference);
 
-        verify(mockBatteryOptimizeUtils).setAppUsageState(
-                BatteryOptimizeUtils.AppUsageState.OPTIMIZED);
+        verify(mockBatteryOptimizeUtils).setAppOptimizationMode(
+                BatteryOptimizeUtils.MODE_OPTIMIZED);
     }
 
     @Test
