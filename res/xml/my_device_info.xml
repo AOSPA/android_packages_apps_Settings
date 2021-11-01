@@ -66,6 +66,17 @@
         android:selectable="false"
         android:title="@string/my_device_info_device_details_category_title">
 
+        <!-- Model & hardware -->
+        <Preference
+            android:key="device_model"
+            android:order="10"
+            android:title="@string/model_info"
+            android:summary="@string/summary_placeholder"
+            android:fragment="com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFragment"
+            settings:enableCopying="true"
+            settings:keywords="@string/keywords_model_and_hardware"
+            settings:controller="com.android.settings.deviceinfo.HardwareInfoPreferenceController"/>
+
         <!-- SIM status -->
         <Preference
             android:key="sim_status"
@@ -74,17 +85,6 @@
             settings:keywords="@string/keywords_sim_status"
             android:summary="@string/summary_placeholder"
             settings:enableCopying="true"/>
-
-        <!-- Model & hardware -->
-        <Preference
-            android:key="device_model"
-            android:order="31"
-            android:title="@string/model_info"
-            android:summary="@string/summary_placeholder"
-            android:fragment="com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFragment"
-            settings:enableCopying="true"
-            settings:keywords="@string/keywords_model_and_hardware"
-            settings:controller="com.android.settings.deviceinfo.HardwareInfoPreferenceController"/>
     </PreferenceCategory>
 
     <PreferenceCategory
