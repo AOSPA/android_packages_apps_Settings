@@ -307,7 +307,8 @@
         <SwitchPreference
             android:key="smart_dds_switch"
             android:title="@string/smart_dds_switch"
-            android:summary="@string/smart_dds_switch_summary" />
+            android:summary="@string/smart_dds_switch_summary"
+            android:enabled="false" />
 
         <SwitchPreference
             android:key="tethering_hardware_offload"
