@@ -599,6 +599,8 @@ public class ApnSettings extends RestrictedSettingsFragment
                 return ServiceState.RIL_RADIO_TECHNOLOGY_IWLAN;
             case TelephonyManager.NETWORK_TYPE_LTE_CA:
                 return ServiceState.RIL_RADIO_TECHNOLOGY_LTE_CA;
+            case TelephonyManager.NETWORK_TYPE_NR:
+                return ServiceState.RIL_RADIO_TECHNOLOGY_NR;
             default:
                 return ServiceState.RIL_RADIO_TECHNOLOGY_UNKNOWN;
         }
