@@ -18,6 +18,7 @@ package com.android.settings.network.telephony;
 
 import android.content.Context;
 import android.os.PersistableBundle;
+import android.os.RemoteException;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -33,6 +34,9 @@ import com.android.settings.R;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
 
+import com.qti.extphone.ExtTelephonyManager;
+import com.qti.extphone.ServiceCallback;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -44,6 +48,9 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
     private static final String LOG_TAG = "BackupCallingPrefCtrl";
 
     private Preference mPreference;
+    private Context mContext;
+    private ExtTelephonyManager mExtTelephonyManager;
+    private boolean mServiceConnected = false;
 
     /**
      * Class constructor of backup calling.
@@ -53,7 +60,28 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
      **/
     public BackupCallingPreferenceController(Context context, String key) {
         super(context, key);
+        mContext = context.getApplicationContext();
+        mExtTelephonyManager = ExtTelephonyManager.getInstance(mContext);
+        mExtTelephonyManager.connectService(mExtTelManagerServiceCallback);
     }
+
+    private ServiceCallback mExtTelManagerServiceCallback = new ServiceCallback() {
+
+        // Since ExtTelephony service is called from TelephonyComponentFactory,
+        // onConnected() is called even before mExtTelephonyManager.connectService
+        // as per ExtTelephonyManager#connectService()
+        @Override
+        public void onConnected() {
+            Log.d(LOG_TAG, "mExtTelManagerServiceCallback: service connected");
+            mServiceConnected = true;
+        }
+
+        @Override
+        public void onDisconnected() {
+            Log.d(LOG_TAG, "mExtTelManagerServiceCallback: service disconnected");
+            mServiceConnected = false;
+        }
+    };
 
     /**
      * Initialization based on given subscription id.
@@ -76,7 +104,7 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
         if (subInfo == null) {  // given subId is not actives
             return CONDITIONALLY_UNAVAILABLE;
         }
-        return (subIdList.size() > 1) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return (subIdList.size() == 1) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     /**
@@ -152,6 +180,22 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
     }
 
     protected boolean isCrossSimEnabledByPlatform(Context context, int subscriptionId) {
+        if (!mServiceConnected) {
+            Log.d(LOG_TAG, "ExtTelephony service is not connected");
+            return false;
+        }
+
+        try {
+            if (!mExtTelephonyManager.isEpdgOverCellularDataSupported(
+                    SubscriptionManager.getPhoneId(subscriptionId))) {
+                Log.d(LOG_TAG, "Not supported by platform. subId = " + subscriptionId);
+                return false;
+            }
+        } catch(RemoteException ex) {
+            Log.d(LOG_TAG, "isEpdgOverCellularDataSupported Exception" + ex);
+            return false;
+        }
+
         // TODO : Change into API which created for accessing
         //        com.android.ims.ImsManager#isCrossSimEnabledByPlatform()
         if ((new WifiCallingQueryImsState(context, subscriptionId)).isWifiCallingSupported()) {
