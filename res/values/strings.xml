@@ -221,8 +221,6 @@
     <string name="bluetooth_notif_message">Tap to pair with <xliff:g id="device_name">%1$s</xliff:g>.</string>
     <!-- Item in bluetooth settings screen, used to show the list of received files [CHAR LIMIT=30] -->
     <string name="bluetooth_show_received_files">Received files</string>
-    <!-- Item in bluetooth settings screen, used to show the list of Files received via Bluetooth [CHAR LIMIT=NONE] -->
-    <string name="bluetooth_show_files_received_via_bluetooth">Files received via Bluetooth</string>
 
     <!-- Title for contextual Bluetooth devices card when Bluetooth is off [CHAR LIMIT=NONE]-->
     <string name="bluetooth_devices_card_off_title">Bluetooth is off</string>
@@ -6343,6 +6341,8 @@
 
     <!-- Summary for battery manager when it is on -->
     <string name="battery_manager_summary">Detecting when apps drain battery</string>
+    <!-- Summary for battery manager when it is on. [CHAR LIMIT=NONE] -->
+    <string name="battery_manager_summary_unsupported">Detecting when apps drain battery</string>
 
     <!-- Summary for battery manager when it is off -->
     <string name="battery_manager_off">Off</string>
@@ -11858,7 +11858,7 @@
     <string name="back_sensitivity_dialog_title">Back Sensitivity</string>
 
     <!-- Title for the screen to show all the gesture navigation settings [CHAR LIMIT=80] -->
-    <string name="gesture_settings_activity_title">Gesture Settings</string>
+    <string name="gesture_settings_activity_title">Gesture Navigation Sensitivity</string>
 
     <!-- Keywords for the gesture navigation settings. [CHAR LIMIT=NONE] -->
     <string name="keywords_gesture_navigation_settings">gesture navigation, back sensitivity, back gesture</string>
