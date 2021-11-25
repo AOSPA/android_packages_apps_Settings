@@ -218,7 +218,9 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
             int isSmartDdsEnabled = Settings.Global.getInt(mContext.getContentResolver(),
                     Settings.Global.SMART_DDS_SWITCH, 0);
             if (isSmartDdsEnabled == 0) {
-                mPreference.setEnabled(isCallStateIdle() && !isEcbmEnabled);
+                mPreference.setEnabled(isCallStateIdle() && !isEcbmEnabled &&
+                        (!TelephonyUtils.isSubsidyFeatureEnabled(mContext) ||
+                        TelephonyUtils.allowUsertoSetDDS(mContext)));
             } else {
                 mPreference.setEnabled(false);
                 mPreference.setSummary("Smart DDS switch is on");

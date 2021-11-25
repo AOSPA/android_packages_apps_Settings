@@ -120,6 +120,13 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
         if (!isDefDataEnabled) {
             return CONDITIONALLY_UNAVAILABLE;
         }
+
+        if (TelephonyUtils.isSubsidyFeatureEnabled(mContext) &&
+                !TelephonyUtils.isSubsidySimCard(mContext,
+                SubscriptionManager.getSlotIndex(mSubId))) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+
         return AVAILABLE;
     }
 
