@@ -97,6 +97,11 @@
             android:summary="@string/doze_summary"
             settings:controller="com.android.settings.display.AmbientDisplayNotificationsPreferenceController" />
 
+        <SwitchPreference
+            android:key="pocket_judge"
+            android:title="@string/proximity_wake_title"
+            android:summary="@string/proximity_wake_summary" />
+
     </PreferenceCategory>
 
     <!-- Work profile settings are at the bottom with high order value to avoid users thinking that
