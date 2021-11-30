@@ -149,7 +149,13 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
                 preference.setSummary(
                         R.string.mobile_data_settings_summary_default_data_unavailable);
             } else {
-                preference.setEnabled(true);
+                if (TelephonyUtils.isSubsidyFeatureEnabled(mContext) &&
+                        !TelephonyUtils.isSubsidySimCard(mContext,
+                        mSubscriptionManager.getSlotIndex(mSubId))) {
+                    preference.setEnabled(false);
+                } else {
+                    preference.setEnabled(true);
+                }
                 preference.setSummary(R.string.mobile_data_settings_summary);
             }
         }
