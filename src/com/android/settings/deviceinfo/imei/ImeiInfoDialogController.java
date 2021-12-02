@@ -32,6 +32,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
+import com.android.settings.network.telephony.TelephonyUtils;
+
+import com.qti.extphone.QtiImeiInfo;
 
 public class ImeiInfoDialogController {
 
@@ -70,6 +73,7 @@ public class ImeiInfoDialogController {
     private final TelephonyManager mTelephonyManager;
     private final SubscriptionInfo mSubscriptionInfo;
     private final int mSlotId;
+    private QtiImeiInfo mQtiImeiInfo[];
 
     public ImeiInfoDialogController(@NonNull ImeiInfoDialogFragment dialog, int slotId) {
         mDialog = dialog;
@@ -86,6 +90,23 @@ public class ImeiInfoDialogController {
         } else {
             mTelephonyManager = null;
         }
+        mQtiImeiInfo = TelephonyUtils.getImeiInfo();
+    }
+
+    private String getImei(int slot) {
+        String imei = null;
+        if (mQtiImeiInfo != null) {
+            for (int i = 0; i < mQtiImeiInfo.length; i++) {
+                if (mQtiImeiInfo[i].getSlotId() == slot) {
+                    imei = mQtiImeiInfo[i].getImei();
+                    break;
+                }
+            }
+        }
+        if (TextUtils.isEmpty(imei)) {
+            imei = mTelephonyManager.getImei(slot);
+        }
+        return imei;
     }
 
     /**
@@ -122,7 +143,7 @@ public class ImeiInfoDialogController {
                     (mSubscriptionInfo == null && isSimPresent(mSlotId))) {
             // Show IMEI for LTE device
             mDialog.setText(ID_IMEI_VALUE,
-                    getTextAsDigits(mTelephonyManager.getImei(mSlotId)));
+                    getTextAsDigits(getImei(mSlotId)));
             mDialog.setText(ID_IMEI_SV_VALUE,
                     getTextAsDigits(mTelephonyManager.getDeviceSoftwareVersion(mSlotId)));
         } else {
@@ -132,7 +153,7 @@ public class ImeiInfoDialogController {
     }
 
     private void updateDialogForGsmPhone() {
-        mDialog.setText(ID_IMEI_VALUE, getTextAsDigits(mTelephonyManager.getImei(mSlotId)));
+        mDialog.setText(ID_IMEI_VALUE, getTextAsDigits(getImei(mSlotId)));
         mDialog.setText(ID_IMEI_SV_VALUE,
                 getTextAsDigits(mTelephonyManager.getDeviceSoftwareVersion(mSlotId)));
         // device is not CDMA, do not display CDMA features
