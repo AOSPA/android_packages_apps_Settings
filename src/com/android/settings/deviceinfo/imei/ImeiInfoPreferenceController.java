@@ -23,6 +23,8 @@ import android.os.UserManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
@@ -32,8 +34,11 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.network.telephony.TelephonyUtils;
 import com.android.settings.slices.Sliceable;
 import com.android.settings.Utils;
+
+import com.qti.extphone.QtiImeiInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,16 +49,21 @@ import java.util.List;
 public class ImeiInfoPreferenceController extends BasePreferenceController {
 
     private static final String KEY_PREFERENCE_CATEGORY = "device_detail_category";
+    private static final String TAG = "ImeiInfoPreferenceController";
 
     private final boolean mIsMultiSim;
     private final TelephonyManager mTelephonyManager;
     private final List<Preference> mPreferenceList = new ArrayList<>();
     private Fragment mFragment;
+    private QtiImeiInfo mQtiImeiInfo[];
 
     public ImeiInfoPreferenceController(Context context, String key) {
         super(context, key);
         mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         mIsMultiSim = mTelephonyManager.getPhoneCount() > 1;
+        if (mIsMultiSim) {
+            TelephonyUtils.connectExtTelephonyService(context);
+        }
     }
 
     public void setHost(Fragment fragment) {
@@ -110,7 +120,7 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
             multiSimPreference.setSummary(mTelephonyManager.getMeid(slotNumber));
         } else {
             multiSimPreference.setTitle(getTitleForGsmPhone(slotNumber));
-            multiSimPreference.setSummary(mTelephonyManager.getImei(slotNumber));
+            multiSimPreference.setSummary(getImei(slotNumber));
         }
     }
 
@@ -126,7 +136,7 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
             multiSimPreference.setSummary(mTelephonyManager.getMeid(slotNumber));
         } else {
             multiSimPreference.setTitle(getTitleForGsmPhone(slotNumber));
-            multiSimPreference.setSummary(mTelephonyManager.getImei(slotNumber));
+            multiSimPreference.setSummary(getImei(slotNumber));
         }
     }
 
@@ -135,6 +145,8 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
         if (preference == null) {
             return;
         }
+        Log.d(TAG, "updateState");
+        mQtiImeiInfo = TelephonyUtils.getImeiInfo();
         int size = mPreferenceList.size();
         for (int i = 0; i < size; i++) {
             Preference pref = mPreferenceList.get(i);
@@ -156,7 +168,7 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
             }
         }
         return phoneType == PHONE_TYPE_CDMA ? mTelephonyManager.getMeid(simSlot)
-                : mTelephonyManager.getImei(simSlot);
+                : getImei(simSlot);
     }
 
     @Override
@@ -195,9 +207,49 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
         preference.setSummary(getSummary(simSlot));
     }
 
+    private boolean isPrimaryImeiSlot(int slot) {
+        boolean primaryImeiSlotStatus = false;
+        if (mQtiImeiInfo == null) {
+            mQtiImeiInfo = TelephonyUtils.getImeiInfo();
+        }
+        if (mQtiImeiInfo != null) {
+            for (int i = 0; i < mQtiImeiInfo.length; i++) {
+                if (mQtiImeiInfo[i].getSlotId() == slot &&
+                        mQtiImeiInfo[i].getImeiType() == QtiImeiInfo.IMEI_TYPE_PRIMARY) {
+                    primaryImeiSlotStatus = true;
+                    break;
+                }
+            }
+        }
+        return primaryImeiSlotStatus;
+    }
+
+    private String getImei(int slot) {
+        String imei = null;
+        if (mQtiImeiInfo == null) {
+            mQtiImeiInfo = TelephonyUtils.getImeiInfo();
+        }
+        if (mQtiImeiInfo != null) {
+            for (int i = 0; i < mQtiImeiInfo.length; i++) {
+                if (mQtiImeiInfo[i].getSlotId() == slot) {
+                    imei = mQtiImeiInfo[i].getImei();
+                    break;
+                }
+            }
+        }
+        if (TextUtils.isEmpty(imei)) {
+            imei = mTelephonyManager.getImei(slot);
+        }
+        return imei;
+    }
+
     private CharSequence getTitleForGsmPhone(int simSlot) {
-        return mIsMultiSim ? mContext.getString(R.string.imei_multi_sim, simSlot + 1)
+        CharSequence title = mIsMultiSim ? mContext.getString(R.string.imei_multi_sim, simSlot + 1)
                 : mContext.getString(R.string.status_imei);
+        if (mIsMultiSim && isPrimaryImeiSlot(simSlot)) {
+            title += " (Primary)";
+        }
+        return title;
     }
 
     private CharSequence getTitleForCdmaPhone(int simSlot) {
