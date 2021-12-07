@@ -56,7 +56,6 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     private static final IntentFilter TETHER_STATE_CHANGE_FILTER;
     private static final String KEY_WIFI_TETHER_SCREEN = "wifi_tether_settings_screen";
     private static final int EXPANDED_CHILD_COUNT_WITH_SECURITY_NON = 3;
-    private static final int EXPANDED_CHILD_COUNT_DEFAULT = 4;
     private static boolean mWasApBand6GHzSelected = false;
     private static final int BAND_6GHZ = SoftApConfiguration.BAND_6GHZ | SoftApConfiguration.BAND_2GHZ;
 
@@ -235,9 +234,6 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
             mSecurityPreferenceController.updateDisplay();
             mWasApBand6GHzSelected = false;
         }
-        if (context instanceof WifiTetherSecurityPreferenceController) {
-            reConfigInitialExpandedChildCount();
-        }
     }
 
     private SoftApConfiguration buildNewConfig() {
@@ -333,13 +329,6 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                     startTether();
                 }
             }
-        }
-    }
-
-    private void reConfigInitialExpandedChildCount() {
-        final PreferenceGroup screen = getPreferenceScreen();
-        if (screen != null) {
-            screen.setInitialExpandedChildrenCount(getInitialExpandedChildCount());
         }
     }
 }
