@@ -46,6 +46,14 @@
             android:key="immersive_navigation"
             android:title="@string/immersive_navigation_title"
             android:summary="@string/immersive_navigation_summary" />
+
+        <com.android.settings.widget.LabeledSeekBarPreference
+            android:key="gesture_navbar_length_preference"
+            android:title="@string/gesture_navbar_length_preference_title"
+            android:max="2"
+            android:selectable="true"
+            settings:textStart="@string/gesture_navbar_length_preference_short_label"
+            settings:textEnd="@string/gesture_navbar_length_preference_long_label"/>
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -77,4 +85,3 @@
         settings:searchable="false"/>
 
 </PreferenceScreen>
-
