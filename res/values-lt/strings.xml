@@ -2138,7 +2138,7 @@
     <string name="internal_storage" msgid="999496851424448809">"Vidinė atmint."</string>
     <string name="recompute_size" msgid="1098091228370999128">"Iš naujo apskaičiuojamas dydis..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Ištrinti programos duomenis?"</string>
-    <string name="clear_data_dlg_text" msgid="7870723948123690332">"Visi šios programos duomenys bus visam laikui ištrinti. Tai taikoma visiems failams, nustatymams, paskyroms, duomenims ir kt."</string>
+    <string name="clear_data_dlg_text" msgid="1107610960337399006">"Šios programos duomenys bus visam laikui ištrinti. Įtraukiami failai, nustatymai, duomenų bazės ir kiti programos duomenys."</string>
     <string name="dlg_ok" msgid="1421350367857960997">"Gerai"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"Atšaukti"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
@@ -2937,6 +2937,7 @@
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"Iš viso <xliff:g id="TIME_0">^1</xliff:g> • Naudota fone mažiau nei minutę\nper <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
     <string name="battery_not_usage" msgid="1472275761547230196">"Nenaudota nuo pastarojo visiško įkrovimo"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Nenaudota per pastarąsias 24 val."</string>
+    <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Likęs akumuliatoriaus veikimo laikas numatytas pagal tai, kaip naudojate įrenginį"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Liko laiko (numatyta)"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Iki visiško įkrovimo"</string>
@@ -4207,6 +4208,7 @@
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"Pokalbiai, kurie gali trikdyti"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Visi pokalbiai"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Svarbiausi pokalbiai"</string>
+    <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"prioritetiniai pokalbiai"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Nėra"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Nė vieno}=1{1 pokalbis}one{# pokalbis}few{# pokalbiai}many{# pokalbio}other{# pokalbių}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Kas gali trikdyti"</string>
@@ -4231,6 +4233,7 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Bet kas"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Kontaktai"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Žvaigždutėmis pažymėti kontaktai"</string>
+    <string name="zen_mode_from_some" msgid="3708450042225044524">"Keli žmonės arba pokalbiai"</string>
     <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"Iš žvaigždute pažymėtų kontaktų ir pakartotinai skambinančiųjų"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"Iš kontaktų ir pakartotinai skambinančiųjų"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"Tik iš pakartotinai skambinančiųjų"</string>
@@ -5448,8 +5451,7 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Netinkamas tinklo režimas (<xliff:g id="NETWORKMODEID">%1$d</xliff:g>). Nepaisyti."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Prieigos taškų pavadinimai"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Nepasiekiama, kai prisijungta prie „<xliff:g id="CARRIER">%1$s</xliff:g>“"</string>
-    <!-- no translation found for see_more (8436037008285546409) -->
-    <skip />
+    <string name="see_more" msgid="8436037008285546409">"Nustatymai"</string>
     <string name="see_less" msgid="2642392725363552793">"Žr. mažiau"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"Įjungti „<xliff:g id="CARRIER_NAME">%1$s</xliff:g>“?"</string>
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Įjungti SIM kortelę?"</string>
@@ -5685,8 +5687,7 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"skambučiai"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"mobiliojo ryšio duomenys"</string>
-    <!-- no translation found for wifi_scan_notify_message (4130641837826688879) -->
-    <skip />
+    <string name="wifi_scan_notify_message" msgid="4130641837826688879">"Kad pagerintų įrenginio funkcijas, programos ir paslaugos vis tiek gali bet kada nuskaityti ieškodamos „Wi‑Fi“ tinklų, net jei „Wi‑Fi“ išjungtas. Tai gali būti naudojama siekiant pagerinti pagal vietovę teikiamas funkcijas ir paslaugas. Tai galite pakeisti „Wi-Fi“ nuskaitymo nustatymuose. "<annotation id="link">"Pakeisti"</annotation></string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Prisijungta"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Nėra ryšio"</string>
@@ -5755,7 +5756,10 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Norėdami naudoti UWB, išjunkite lėktuvo režimą"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Prieiga prie fotoaparato"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Prieiga prie mikrofono"</string>
-    <string name="sensor_toggle_description" msgid="8248823248606795411">"Visoms programoms ir paslaugoms"</string>
+    <!-- no translation found for cam_toggle_description (9212762204005146404) -->
+    <skip />
+    <!-- no translation found for mic_toggle_description (484139688645092237) -->
+    <skip />
     <string name="game_settings_title" msgid="1028178627743422090">"Žaidimų nustatymai"</string>
     <string name="game_settings_summary" msgid="8623110986485071064">"Įjunkite žaidimų informacijos suvestinės spartųjį klavišą ir kt."</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"Ankstesnis"</string>

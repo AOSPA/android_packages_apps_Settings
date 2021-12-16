@@ -2090,7 +2090,7 @@
     <string name="internal_storage" msgid="999496851424448809">"Belső tárhely"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Méret újraszámítása..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Törli az alkalmazás adatait?"</string>
-    <string name="clear_data_dlg_text" msgid="7870723948123690332">"Az alkalmazás minden adatát véglegesen törölni fogja. Ez magában foglalja az összes fájlt, beállítást, fiókot, adatbázist stb."</string>
+    <string name="clear_data_dlg_text" msgid="1107610960337399006">"Az alkalmazás adatai véglegesen törlődnek. Így törlődni fognak a fájlok, a beállítások, az adatbázisok és az egyéb alkalmazásadatok is."</string>
     <string name="dlg_ok" msgid="1421350367857960997">"OK"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"Mégse"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
@@ -2861,6 +2861,7 @@
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"Összesen <xliff:g id="TIME_0">^1</xliff:g> • kevesebb, mint egy percig\na háttérben a következő időintervallumban: <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
     <string name="battery_not_usage" msgid="1472275761547230196">"Nincs használat az utolsó teljes feltöltés óta"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Nem volt használatban az elmúlt 24 órában"</string>
+    <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Az akkumulátor becsült töltöttsége az eszközhasználaton alapszik"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Becsült hátralévő idő"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"A teljes feltöltésig"</string>
@@ -4101,6 +4102,7 @@
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"Azok a beszélgetések, amelyeknél engedélyezve van a megszakítás"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Az összes beszélgetés"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Elsődleges beszélgetések"</string>
+    <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"fontos beszélgetések"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Nincs"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Nincs}=1{1 beszélgetés}other{# beszélgetés}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Megszakítás engedélyezve"</string>
@@ -4125,6 +4127,7 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Bárki"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Névjegyek"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Csillagozott névjegyek"</string>
+    <string name="zen_mode_from_some" msgid="3708450042225044524">"Néhány személy vagy beszélgetés"</string>
     <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"A csillaggal megjelölt névjegyektől és az ismétlődő hívóktól"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"A névjegyektől és az ismétlődő hívóktól"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"Csak az ismétlődő hívóktól"</string>
@@ -5274,8 +5277,7 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Érvénytelen hálózati mód: <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Figyelmen kívül hagyás."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Hozzáférési pontok nevei"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Nem hozzáférhető, amikor a következőhöz csatlakozik: <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <!-- no translation found for see_more (8436037008285546409) -->
-    <skip />
+    <string name="see_more" msgid="8436037008285546409">"Beállítások"</string>
     <string name="see_less" msgid="2642392725363552793">"Kevesebb megjelenítése"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"Bekapcsolja a következőt: <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Bekapcsolja a SIM-et?"</string>
@@ -5507,8 +5509,7 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"hívások"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"mobiladatok"</string>
-    <!-- no translation found for wifi_scan_notify_message (4130641837826688879) -->
-    <skip />
+    <string name="wifi_scan_notify_message" msgid="4130641837826688879">"Az eszközhasználati élmény javítása érdekében az alkalmazások és a szolgáltatások továbbra is bármikor kereshetnek Wi-Fi-hálózatokat, még akkor is, ha a Wi-Fi ki van kapcsolva. Ez például a helyalapú funkciók és szolgáltatások javítására használható. A funkciót a „Wi-Fi scanning settings” (Wi-Fi-keresési beállítások) részben módosíthatja. "<annotation id="link">"Módosítás"</annotation></string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> (<xliff:g id="NETWORKMODE">%2$s</xliff:g>)"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Csatlakozva"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Nincs kapcsolat"</string>
@@ -5577,7 +5578,8 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Kapcsolja ki a Repülős üzemmódot az UWB használatához"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Hozzáférés a kamerához"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Hozzáférés a mikrofonhoz"</string>
-    <string name="sensor_toggle_description" msgid="8248823248606795411">"Minden alkalmazásnál és szolgáltatásnál"</string>
+    <string name="cam_toggle_description" msgid="9212762204005146404">"Alkalmazásoknál és szolgáltatásoknál"</string>
+    <string name="mic_toggle_description" msgid="484139688645092237">"Alkalmazásoknál és szolgáltatásoknál. Ha ki van kapcsolva ez a beállítás, segélyhívó szám hívásakor a rendszer továbbra is megoszthatja a mikrofonadatokat."</string>
     <string name="game_settings_title" msgid="1028178627743422090">"Játékbeállítások"</string>
     <string name="game_settings_summary" msgid="8623110986485071064">"Játékok irányítópultja-gyorsparancs bekapcsolása stb."</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"Előző"</string>

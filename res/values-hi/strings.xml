@@ -2090,7 +2090,7 @@
     <string name="internal_storage" msgid="999496851424448809">"मोबाइल मेमोरी"</string>
     <string name="recompute_size" msgid="1098091228370999128">"आकार फिर से परिकलित कर रहा है…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"ऐप्लिकेशन डेटा मिटाना चाहते हैं?"</string>
-    <string name="clear_data_dlg_text" msgid="7870723948123690332">"इस ऐप्लिकेशन का पूरा डेटा हमेशा के लिए मिटा दिया जाएगा. इसमें सभी फ़ाइलें, सेटिंग, खाते, डेटाबेस वगैरह शामिल हैं."</string>
+    <string name="clear_data_dlg_text" msgid="1107610960337399006">"इस ऐप्लिकेशन का डेटा हमेशा के लिए मिटा दिया जाएगा. इसमें फ़ाइलें, सेटिंग, डेटाबेस, और ऐप्लिकेशन का दूसरा डेटा शामिल है."</string>
     <string name="dlg_ok" msgid="1421350367857960997">"ठीक है"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"रद्द करें"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
@@ -2861,6 +2861,7 @@
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"बैटरी का कुल इस्तेमाल <xliff:g id="TIME_0">^1</xliff:g> तक हुआ • <xliff:g id="TIME_PERIOD">^2</xliff:g> के बीच\nबैकग्राउंड में बैटरी का इस्तेमाल एक मिनट से भी कम हुआ"</string>
     <string name="battery_not_usage" msgid="1472275761547230196">"पिछली बार पूरी चार्ज होने के बाद, बैटरी का इस्तेमाल नहीं हुआ"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"पिछले 24 घंटे में, बैटरी का इस्तेमाल नहीं हुआ"</string>
+    <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"डिवाइस के इस्तेमाल के हिसाब से अनुमान लगाया गया है कि फ़ोन की बैटरी और कितनी देर चलेगी"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"अनुमानित बचा हुआ समय"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"पूरी तरह चार्ज होने तक"</string>
@@ -4101,6 +4102,7 @@
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"वे बातचीत जो \'परेशान न करें\' मोड को बायपास कर सकती हैं"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"सभी बातचीत"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"प्राथमिकता वाली बातचीत"</string>
+    <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"अहम बातचीत"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"कोई भी नहीं"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{कोई बातचीत नहीं}=1{1 बातचीत}one{# बातचीत}other{# बातचीत}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"वे कॉल और मैसेज जो \'परेशान न करें\' मोड को बायपास कर सकते हैं"</string>
@@ -4125,6 +4127,7 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"कोई भी"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"संपर्क"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"स्टार के निशान वाले संपर्क"</string>
+    <string name="zen_mode_from_some" msgid="3708450042225044524">"कुछ लोग या बातचीत"</string>
     <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"तारे के निशान वाले संपर्कों और बार-बार कॉल करने वाले लोगों के कॉल"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"सिर्फ़ संपर्कों और बार-बार कॉल करने वाले लोगों के कॉल"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"सिर्फ़ बार-बार कॉल करने वाले लोगों के कॉल"</string>
@@ -5575,7 +5578,10 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"यूडब्ल्यूबी की सुविधा का इस्तेमाल करने के लिए, हवाई जहाज़ मोड बंद करें"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"कैमरे का ऐक्सेस"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"माइक्रोफ़ोन का ऐक्सेस"</string>
-    <string name="sensor_toggle_description" msgid="8248823248606795411">"सभी ऐप्लिकेशन और सेवाओं के लिए"</string>
+    <!-- no translation found for cam_toggle_description (9212762204005146404) -->
+    <skip />
+    <!-- no translation found for mic_toggle_description (484139688645092237) -->
+    <skip />
     <string name="game_settings_title" msgid="1028178627743422090">"गेम की सेटिंग"</string>
     <string name="game_settings_summary" msgid="8623110986485071064">"गेम डैशबोर्ड का शॉर्टकट और अन्य सुविधाएं चालू करें"</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"पीछे जाएं"</string>
