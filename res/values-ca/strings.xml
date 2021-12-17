@@ -628,7 +628,7 @@
     <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"Bloqueig de pantalla"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_immediately" msgid="5799070517574360310">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / Immediatament després d\'activar el repòs"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_after_timeout" msgid="4572132216801894216">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / <xliff:g id="TIMEOUT_STRING">%2$s</xliff:g> després d\'activar el repòs"</string>
-    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="7631371082326055429">"Bloqueig del perfil professional"</string>
+    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="7631371082326055429">"Bloqueig perfil treball"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="4746783679112447948">"Canvi pantalla bloq."</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="6023813780512501969">"Canvia o desactiva la seguretat de contrasenyes, PIN o patrons"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="1699993191343299179">"Trieu un mètode per bloquejar la pantalla"</string>
@@ -2090,7 +2090,7 @@
     <string name="internal_storage" msgid="999496851424448809">"Emmagatzematge intern"</string>
     <string name="recompute_size" msgid="1098091228370999128">"S\'està tornant a calcular la mida..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Vols suprimir les dades de l\'aplicació?"</string>
-    <string name="clear_data_dlg_text" msgid="7870723948123690332">"Se suprimiran totes les dades d\'aquesta aplicació permanentment. Això inclou tots els fitxers, les opcions de configuració, els comptes, les bases de dades, etc."</string>
+    <string name="clear_data_dlg_text" msgid="1107610960337399006">"Les dades d\'aquesta aplicació se suprimiran permanentment. Això inclou fitxers, opcions de configuració, bases de dades i altres dades de l\'aplicació."</string>
     <string name="dlg_ok" msgid="1421350367857960997">"D\'acord"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"Cancel·la"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
@@ -2520,7 +2520,7 @@
     <string name="captioning_foreground_opacity" msgid="1395843080697567189">"Opacitat del text"</string>
     <string name="captioning_edge_color" msgid="6035818279902597518">"Color de contorn"</string>
     <string name="captioning_edge_type" msgid="5281259280060811506">"Tipus de contorn"</string>
-    <string name="captioning_typeface" msgid="285325623518361407">"Tipus de lletra"</string>
+    <string name="captioning_typeface" msgid="285325623518361407">"Família de fonts"</string>
     <string name="captioning_preview_text" msgid="4973475065545995704">"Els subtítols es mostraran així"</string>
     <string name="captioning_preview_characters" msgid="7854812443613580460">"Aa"</string>
     <string name="locale_default" msgid="8948077172250925164">"Predeterminat"</string>
@@ -2861,6 +2861,7 @@
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"<xliff:g id="TIME_0">^1</xliff:g> en total • Menys d\'1 minut en segon pla\nentre <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
     <string name="battery_not_usage" msgid="1472275761547230196">"Sense ús des de la darrera càrrega completa"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Sense ús durant les 24 darreres hores"</string>
+    <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"L\'estimació de la bateria restant es basa en l\'ús del teu dispositiu"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Temps estimat restant"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Fins a completar la càrrega"</string>
@@ -4101,6 +4102,7 @@
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"Converses que et poden interrompre"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Totes les converses"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Converses prioritàries"</string>
+    <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"converses prioritàries"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Cap"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Cap}=1{1 conversa}other{# converses}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Qui et pot interrompre"</string>
@@ -4125,6 +4127,7 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Tothom"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Contactes"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Contactes destacats"</string>
+    <string name="zen_mode_from_some" msgid="3708450042225044524">"Algunes persones o converses"</string>
     <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"De contactes destacats i trucades repetides"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"De contactes i trucades repetides"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"Només de trucades repetides"</string>
@@ -5274,8 +5277,7 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"El mode de xarxa <xliff:g id="NETWORKMODEID">%1$d</xliff:g> no és vàlid. Ignora."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Noms de punts d\'accés"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"No està disponible quan està connectat a <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <!-- no translation found for see_more (8436037008285546409) -->
-    <skip />
+    <string name="see_more" msgid="8436037008285546409">"Configuració"</string>
     <string name="see_less" msgid="2642392725363552793">"Mostra\'n menys"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"Vols activar <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Vols activar la SIM?"</string>
@@ -5507,8 +5509,7 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"trucades"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"dades mòbils"</string>
-    <!-- no translation found for wifi_scan_notify_message (4130641837826688879) -->
-    <skip />
+    <string name="wifi_scan_notify_message" msgid="4130641837826688879">"Per millorar l\'experiència del dispositiu, les aplicacions i els serveis poden cercar xarxes Wi‑Fi en qualsevol moment, fins i tot quan la Wi‑Fi estigui desactivada. Aquesta opció es pot utilitzar, per exemple, per millorar les funcions i els serveis basats en la ubicació, i pots canviar-la a la configuració de cerca de xarxes Wi‑Fi. "<annotation id="link">"Canvia-la"</annotation>"."</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Connectat"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Sense connexió"</string>
@@ -5577,7 +5578,10 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Desactiva el mode d\'avió per utilitzar la banda ultraampla"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Accés a la càmera"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Accés al micròfon"</string>
-    <string name="sensor_toggle_description" msgid="8248823248606795411">"Per a tots els serveis i aplicacions"</string>
+    <!-- no translation found for cam_toggle_description (9212762204005146404) -->
+    <skip />
+    <!-- no translation found for mic_toggle_description (484139688645092237) -->
+    <skip />
     <string name="game_settings_title" msgid="1028178627743422090">"Configuració de jocs"</string>
     <string name="game_settings_summary" msgid="8623110986485071064">"Activa la drecera al tauler de joc i més"</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"Anterior"</string>

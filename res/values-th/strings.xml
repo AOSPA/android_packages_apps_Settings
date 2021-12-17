@@ -2090,7 +2090,7 @@
     <string name="internal_storage" msgid="999496851424448809">"ที่เก็บข้อมูลภายใน"</string>
     <string name="recompute_size" msgid="1098091228370999128">"กำลังคำนวณขนาดใหม่..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"ลบข้อมูลในแอปหรือไม่"</string>
-    <string name="clear_data_dlg_text" msgid="7870723948123690332">"ระบบจะลบข้อมูลทั้งหมดของแอปนี้โดยถาวร ซึ่งรวมถึงไฟล์ การตั้งค่า บัญชี ฐานข้อมูล ฯลฯ"</string>
+    <string name="clear_data_dlg_text" msgid="1107610960337399006">"ระบบจะลบข้อมูลของแอปนี้อย่างถาวร ซึ่งรวมถึงไฟล์ การตั้งค่า ฐานข้อมูล และข้อมูลแอปอื่นๆ"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"ตกลง"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"ยกเลิก"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
@@ -2861,6 +2861,7 @@
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"ใช้งานรวม <xliff:g id="TIME_0">^1</xliff:g> • ใช้งานเบื้องหลังไม่ถึง 1 นาที\nในช่วง <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
     <string name="battery_not_usage" msgid="1472275761547230196">"ไม่มีการใช้งานตั้งแต่ชาร์จเต็มครั้งล่าสุด"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"ไม่มีการใช้งานในช่วง 24 ชม. ที่ผ่านมา"</string>
+    <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"ค่าประมาณแบตเตอรี่ที่เหลืออิงตามการใช้งานอุปกรณ์ของคุณ"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"เวลาที่เหลือโดยประมาณ"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"จนกว่าจะชาร์จเต็ม"</string>
@@ -4101,6 +4102,7 @@
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"การสนทนาที่รบกวนคุณได้"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"การสนทนาทั้งหมด"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"การสนทนาสำคัญ"</string>
+    <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"การสนทนาสำคัญ"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"ไม่มี"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{ไม่มี}=1{การสนทนา 1 รายการ}other{การสนทนา # รายการ}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"ผู้ที่รบกวนคุณได้"</string>
@@ -4125,6 +4127,7 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"ทุกคน"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"รายชื่อติดต่อ"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"รายชื่อติดต่อที่ติดดาว"</string>
+    <string name="zen_mode_from_some" msgid="3708450042225044524">"บางคนหรือบางบทสนทนา"</string>
     <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"จากรายชื่อติดต่อที่ติดดาวและผู้โทรซ้ำ"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"จากรายชื่อติดต่อและผู้โทรซ้ำ"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"จากผู้โทรซ้ำเท่านั้น"</string>
@@ -5274,8 +5277,7 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"โหมดเครือข่ายไม่ถูกต้อง <xliff:g id="NETWORKMODEID">%1$d</xliff:g> ไม่สนใจ"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"ชื่อจุดเข้าใช้งาน"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"ใช้ไม่ได้เมื่อเชื่อมต่อกับ <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <!-- no translation found for see_more (8436037008285546409) -->
-    <skip />
+    <string name="see_more" msgid="8436037008285546409">"การตั้งค่า"</string>
     <string name="see_less" msgid="2642392725363552793">"ดูน้อยลง"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"ต้องการเปิดใช้ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ไหม"</string>
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"ต้องการเปิดใช้ซิมใช่ไหม"</string>
@@ -5507,8 +5509,7 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"การโทร"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"อินเทอร์เน็ตมือถือ"</string>
-    <!-- no translation found for wifi_scan_notify_message (4130641837826688879) -->
-    <skip />
+    <string name="wifi_scan_notify_message" msgid="4130641837826688879">"เพื่อปรับปรุงประสบการณ์การใช้อุปกรณ์ แอปและบริการต่างๆ จะยังคงสแกนหาเครือข่าย Wi‑Fi ได้ทุกเมื่อแม้ว่า Wi‑Fi จะปิดอยู่ การตั้งค่านี้ใช้เพื่อทำสิ่งต่างๆ เช่น ปรับปรุงฟีเจอร์และบริการที่อิงตามตำแหน่ง คุณเปลี่ยนตัวเลือกนี้ได้ในการตั้งค่าการสแกนหา Wi-Fi "<annotation id="link">"เปลี่ยน"</annotation></string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"เชื่อมต่อแล้ว"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"ไม่มีการเชื่อมต่อ"</string>
@@ -5577,7 +5578,10 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"ปิดโหมดบนเครื่องบินเพื่อใช้ UWB"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"สิทธิ์เข้าถึงกล้อง"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"สิทธิ์เข้าถึงไมโครโฟน"</string>
-    <string name="sensor_toggle_description" msgid="8248823248606795411">"สำหรับแอปและบริการทั้งหมด"</string>
+    <!-- no translation found for cam_toggle_description (9212762204005146404) -->
+    <skip />
+    <!-- no translation found for mic_toggle_description (484139688645092237) -->
+    <skip />
     <string name="game_settings_title" msgid="1028178627743422090">"การตั้งค่าเกม"</string>
     <string name="game_settings_summary" msgid="8623110986485071064">"เปิดทางลัดสำหรับแดชบอร์ดเกมและอื่นๆ"</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"ก่อนหน้า"</string>
