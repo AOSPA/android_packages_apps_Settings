@@ -2138,7 +2138,7 @@
     <string name="internal_storage" msgid="999496851424448809">"Pamięć wewnętrzna"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Przeliczanie rozmiaru..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Usunąć dane aplikacji?"</string>
-    <string name="clear_data_dlg_text" msgid="7870723948123690332">"Wszystkie dane tej aplikacji zostaną trwale usunięte. Dotyczy to wszystkich plików, ustawień, kont, baz danych itd."</string>
+    <string name="clear_data_dlg_text" msgid="1107610960337399006">"Dane tej aplikacji zostaną trwale usunięte. Dotyczy to plików, ustawień, baz danych i innych danych aplikacji."</string>
     <string name="dlg_ok" msgid="1421350367857960997">"OK"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"Anuluj"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
@@ -2937,6 +2937,7 @@
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"Łącznie <xliff:g id="TIME_0">^1</xliff:g> • w tle mniej niż minutę\nw okresie <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
     <string name="battery_not_usage" msgid="1472275761547230196">"Brak użycia od ostatniego pełnego naładowania"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Brak wykorzystania w ciągu ostatnich 24 godzin"</string>
+    <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Pozostały czas pracy na baterii jest szacowany na podstawie wykorzystania urządzenia"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Szacowany pozostały czas"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Do pełnego naładowania"</string>
@@ -4207,6 +4208,7 @@
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"Rozmowy, które mogą ignorować tryb Nie przeszkadzać"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Wszystkie rozmowy"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Rozmowy priorytetowe"</string>
+    <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"rozmowy priorytetowe"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Brak"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Brak}=1{1 rozmowa}few{# rozmowy}many{# rozmów}other{# rozmowy}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Osoby, które mogą ignorować tryb Nie przeszkadzać"</string>
@@ -4231,6 +4233,7 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Wszyscy"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Kontakty"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Kontakty oznaczone gwiazdką"</string>
+    <string name="zen_mode_from_some" msgid="3708450042225044524">"Niektóre osoby lub rozmowy"</string>
     <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"Od kontaktów oznaczonych gwiazdką i dzwoniących powtórnie"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"Od kontaktów i dzwoniących powtórnie"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"Tylko od dzwoniących powtórnie"</string>
@@ -5684,8 +5687,7 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"połączenia"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS-y"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"mobilna transmisja danych"</string>
-    <!-- no translation found for wifi_scan_notify_message (4130641837826688879) -->
-    <skip />
+    <string name="wifi_scan_notify_message" msgid="4130641837826688879">"Aby zapewnić Ci większy komfort korzystania z urządzenia, aplikacje i usługi mogą nadal w każdym momencie wyszukiwać sieci Wi-Fi, nawet gdy Wi-Fi jest wyłączone. Może to np. pomóc usprawnić działanie funkcji i usług związanych z lokalizacją. Możesz to zmienić opcję w ustawieniach skanowania Wi-Fi. "<annotation id="link">"Zmień"</annotation>"."</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Połączono"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Brak połączenia"</string>
@@ -5754,7 +5756,10 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Aby użyć UWB, wyłącz tryb samolotowy"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Dostęp do aparatu"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Dostęp do mikrofonu"</string>
-    <string name="sensor_toggle_description" msgid="8248823248606795411">"Dla wszystkich aplikacji i usług"</string>
+    <!-- no translation found for cam_toggle_description (9212762204005146404) -->
+    <skip />
+    <!-- no translation found for mic_toggle_description (484139688645092237) -->
+    <skip />
     <string name="game_settings_title" msgid="1028178627743422090">"Ustawienia gier"</string>
     <string name="game_settings_summary" msgid="8623110986485071064">"Włączanie skrótu do panelu gier i więcej ustawień"</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"Wstecz"</string>

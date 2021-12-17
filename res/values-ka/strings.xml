@@ -2090,7 +2090,7 @@
     <string name="internal_storage" msgid="999496851424448809">"შიდა მეხსიერება"</string>
     <string name="recompute_size" msgid="1098091228370999128">"ზომის გადათვლა…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"წაიშალოს აპის მონაცემები?"</string>
-    <string name="clear_data_dlg_text" msgid="7870723948123690332">"აპის მონაცემები, მათ შორის ყველა ფაილი, პარამეტრი, ანგარიში, მონაცემთა ბაზა და ა.შ. სამუდამოდ წაიშლება."</string>
+    <string name="clear_data_dlg_text" msgid="1107610960337399006">"ამ აპის მონაცემები სამუდამოდ წაიშლება. ეს ეხება ფაილებს, პარამეტრებს, მონაცემთა ბაზებსა და აპის სხვა მონაცემებს."</string>
     <string name="dlg_ok" msgid="1421350367857960997">"კარგი"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"გაუქმება"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
@@ -2861,6 +2861,7 @@
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"სულ <xliff:g id="TIME_0">^1</xliff:g> • ფონურად წუთზე ნაკლები\n<xliff:g id="TIME_PERIOD">^2</xliff:g> პერიოდის განმავლობაში"</string>
     <string name="battery_not_usage" msgid="1472275761547230196">"ბოლო სრული დატენვის შემდეგ მოხმარება არ ფიქსირდება"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"ბოლო 24 საათში გამოყენება არ მომხდარა"</string>
+    <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"ბატარეის მუშაობის დარჩენილი ხანგრძლივობის მიახლოებითი ვარაუდი თქვენი მოწყობილობის მოხმარებას ეყრდნობა"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"სავარაუდო დარჩენილი დრო"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"სრულ დატენვამდე"</string>
@@ -4101,6 +4102,7 @@
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"საუბრები, რომლებსაც შეწყვეტა შეუძლია"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"ყველა საუბარი"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"პრიორიტეტული საუბრები"</string>
+    <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"პრიორიტეტული საუბრები"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"არცერთი"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{არცერთი}=1{1 მიმოწერა}other{# მიმოწერა}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"ვის შეუძლია შეწყვეტა"</string>
@@ -4125,6 +4127,7 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"ნებისმიერი"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"კონტაქტები"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"ვარსკვლავით მონიშნული კონტაქტები"</string>
+    <string name="zen_mode_from_some" msgid="3708450042225044524">"ზოგი ადამიანი ან საუბარი"</string>
     <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"ვარსკვლავით მონიშნული კონტაქტები და განმეორებითი ზარები"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"კონტაქტები და განმეორებითი ზარები"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"მხოლოდ განმეორებითი ზარები"</string>
@@ -5274,8 +5277,7 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"ქსელის რეჟიმი (<xliff:g id="NETWORKMODEID">%1$d</xliff:g>) არასწორია. იგნორირება."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"წვდომის წერტილების სახელები"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"მიუწვდომელია, როცა დაკავშირებულია <xliff:g id="CARRIER">%1$s</xliff:g>-თან"</string>
-    <!-- no translation found for see_more (8436037008285546409) -->
-    <skip />
+    <string name="see_more" msgid="8436037008285546409">"პარამეტრები"</string>
     <string name="see_less" msgid="2642392725363552793">"ნაკლების ნახვა"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"გსურთ <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-ის ჩართვა?"</string>
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"გსურთ SIM-ის ჩართვა?"</string>
@@ -5576,7 +5578,8 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"UWB-ის გამოსაყენებლად გამორთეთ თვითმფრინავის რეჟიმი"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"კამერაზე წვდომა"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"მიკროფონზე წვდომა"</string>
-    <string name="sensor_toggle_description" msgid="8248823248606795411">"ყველა აპისა და სერვისისთვის"</string>
+    <string name="cam_toggle_description" msgid="9212762204005146404">"აპებისა და სერვისებისთვის"</string>
+    <string name="mic_toggle_description" msgid="484139688645092237">"აპებისა და სერვისებისთვის. მიკროფონის მონაცემები, შესაძლოა, მაინც გაზიარდეს გადაუდებელი დახმარების სამსახურის ნომერზე დარეკვისას, როცა ეს პარამეტრი გამორთულია."</string>
     <string name="game_settings_title" msgid="1028178627743422090">"თამაშის პარამეტრები"</string>
     <string name="game_settings_summary" msgid="8623110986485071064">"ჩართეთ თამაშების დაფის მალსახმობი და სხვა"</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"წინა"</string>
