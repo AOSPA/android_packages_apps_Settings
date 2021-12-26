@@ -97,6 +97,7 @@ android_library {
         "android.hardware.dumpstate-V1.1-java",
         "lottie",
         "powerusagefeaturegoogle",
+        "gamemode-settingsgoogle",
     ],
 
     libs: [
@@ -162,5 +163,11 @@ filegroup {
 java_import {
     name: "powerusagefeaturegoogle",
     jars: ["libs/powerusagefeaturegoogle.jar"],
+    sdk_version: "current",
+}
+
+java_import {
+    name: "gamemode-settingsgoogle",
+    jars: ["libs/gamemode.jar"],
     sdk_version: "current",
 }
