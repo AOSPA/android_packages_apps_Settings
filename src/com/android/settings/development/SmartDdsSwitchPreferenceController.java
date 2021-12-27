@@ -30,39 +30,115 @@ THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
 package com.android.settings.development;
 
 import android.content.Context;
-import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.os.RemoteException;
-import android.os.UserHandle;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+import com.android.settings.R;
+
+import com.qti.extphone.Client;
+import com.qti.extphone.ExtPhoneCallbackBase;
+import com.qti.extphone.ExtTelephonyManager;
+import com.qti.extphone.ServiceCallback;
+import com.qti.extphone.Token;
 
 public class SmartDdsSwitchPreferenceController extends DeveloperOptionsPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
-    private static final String TAG = "SMART_DDS_SWITCH";
+    private final String TAG = "SmartDdsSwitchPreferenceController";
 
-    public static final String ACTION_SMART_DDS_SWITCH_TOGGLED =
-            "com.qualcomm.qti.telephonyservice.SMART_DDS_SWITCH_TOGGLED";
-    private static final String SMART_DDS_SWITCH_TOGGLE_VALUE = "smartDdsSwitchValue";
+    private final int EVENT_SET_DEFAULT_TOGGLE_STATE_RESPONSE = 1;
 
-    private static final int SETTING_VALUE_ON = 1;
-    private static final int SETTING_VALUE_OFF = 0;
+    private final int SETTING_VALUE_ON = 1;
+    private final int SETTING_VALUE_OFF = 0;
 
+    private static SmartDdsSwitchPreferenceController mInstance;
+    private Client mClient;
     private Context mContext;
+    private String mPackageName;
     private final TelephonyManager mTelephonyManager;
+    private ExtTelephonyManager mExtTelephonyManager;
+    private boolean mFeatureAvailable = false;
+    private boolean mServiceConnected = false;
+    private boolean mSwitchEnabled = false;
 
-    public SmartDdsSwitchPreferenceController(Context context) {
+    private SmartDdsSwitchPreferenceController(Context context) {
         super(context);
-        mContext = context;
-        mTelephonyManager = context.getSystemService(TelephonyManager.class);
+        Log.d(TAG, "Constructor");
+        mContext = context.getApplicationContext();
+        mPackageName = mContext.getPackageName();
+        mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
+        mExtTelephonyManager = ExtTelephonyManager.getInstance(mContext);
+        mExtTelephonyManager.connectService(mExtTelManagerServiceCallback);
     }
+
+    public static SmartDdsSwitchPreferenceController getInstance(Context context) {
+        if (mInstance == null) {
+            mInstance = new SmartDdsSwitchPreferenceController(context);
+        }
+        return mInstance;
+    }
+
+    public void cleanUp() {
+        Log.d(TAG, "Disconnecting ExtTelephonyService");
+        mExtTelephonyManager.disconnectService();
+        mInstance = null;
+    }
+
+    private ServiceCallback mExtTelManagerServiceCallback = new ServiceCallback() {
+        @Override
+        public void onConnected() {
+            Log.d(TAG, "mExtTelManagerServiceCallback: service connected");
+            mServiceConnected = true;
+            mClient = mExtTelephonyManager.registerCallback(mPackageName, mCallback);
+            Log.d(TAG, "Client = " + mClient);
+        }
+
+        @Override
+        public void onDisconnected() {
+            Log.d(TAG, "mExtTelManagerServiceCallback: service disconnected");
+            mServiceConnected = false;
+            mClient = null;
+        }
+    };
+
+    private ExtPhoneCallbackBase mCallback = new ExtPhoneCallbackBase() {
+        @Override
+        public void setSmartDdsSwitchToggleResponse(Token token, boolean result) throws
+                RemoteException {
+            Log.d(TAG, "setSmartDdsSwitchToggleResponse: token = " + token + " result = " + result);
+            if (result) {
+                mHandler.sendMessage(mHandler.obtainMessage(
+                        EVENT_SET_DEFAULT_TOGGLE_STATE_RESPONSE));
+            }
+        }
+    };
+
+    private Handler mHandler = new Handler(Looper.getMainLooper()) {
+        @Override
+        public void handleMessage(Message msg) {
+            switch(msg.what) {
+                case EVENT_SET_DEFAULT_TOGGLE_STATE_RESPONSE: {
+                    Log.d(TAG, "EVENT_SET_DEFAULT_TOGGLE_STATE_RESPONSE");
+                    String defaultSummary = mContext.getResources().getString(
+                            R.string.smart_dds_switch_summary);
+                    updateUi(defaultSummary, true);
+                    putSwitchValue(mSwitchEnabled ? SETTING_VALUE_ON : SETTING_VALUE_OFF);
+                    break;
+                }
+                default:
+                    Log.e(TAG, "Unsupported action");
+            }
+        }
+    };
 
     @Override
     public String getPreferenceKey() {
@@ -71,31 +147,67 @@ public class SmartDdsSwitchPreferenceController extends DeveloperOptionsPreferen
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final boolean isEnabled = (Boolean) newValue;
-        Intent intent = new Intent(ACTION_SMART_DDS_SWITCH_TOGGLED);
-        intent.putExtra(SMART_DDS_SWITCH_TOGGLE_VALUE, isEnabled);
-        Log.d(TAG, "onPreferenceChange: isEnabled = " + isEnabled);
-        mContext.sendBroadcastAsUser(intent, UserHandle.SYSTEM,
-                "android.permission.MODIFY_PHONE_STATE");
-        putSwitchValue(isEnabled ? SETTING_VALUE_ON : SETTING_VALUE_OFF);
-        return true;
+        mSwitchEnabled = (Boolean) newValue;
+        Log.d(TAG, "onPreferenceChange: isEnabled = " + mSwitchEnabled);
+        // Temporarily update the text and disable the button until the response is received
+        String waitSummary = mContext.getResources().getString(
+                R.string.smart_dds_switch_wait_summary);
+        updateUi(waitSummary, false);
+        if (mServiceConnected && mClient != null) {
+            try {
+                mExtTelephonyManager.setSmartDdsSwitchToggle(mSwitchEnabled, mClient);
+                return true;
+            } catch (Exception e) {
+                Log.e(TAG, "Exception " + e);
+                return false;
+            }
+        } else {
+            Log.e(TAG, "ExtTelephonyManager service not connected");
+            return false;
+        }
     }
 
     @Override
     public void updateState(Preference preference) {
-        final int smartDdsSwitch = getSwitchValue();
-        ((SwitchPreference) mPreference).setChecked(smartDdsSwitch != SETTING_VALUE_OFF);
+        if (mPreference != null) {
+            final int smartDdsSwitch = getSwitchValue();
+            ((SwitchPreference) mPreference).setChecked(smartDdsSwitch != SETTING_VALUE_OFF);
+        }
+        if (mServiceConnected) {
+            try {
+                mFeatureAvailable = mExtTelephonyManager.isSmartDdsSwitchFeatureAvailable();
+            } catch (Exception e) {
+                Log.e(TAG, "Exception " + e);
+            }
+            Log.d(TAG, "mFeatureAvailable: " + mFeatureAvailable);
+            if (mFeatureAvailable) {
+                String defaultSummary = mContext.getResources().getString(
+                        R.string.smart_dds_switch_summary);
+                updateUi(defaultSummary, true);
+            } else {
+                Log.d(TAG, "Feature unavailable");
+                preference.setVisible(false);
+            }
+        } else {
+            Log.d(TAG, "Service not connected");
+        }
+    }
+
+    private void updateUi(String summary, boolean enable) {
+        Log.d(TAG, "updateUi enable: " + enable);
+        if (mPreference != null) {
+            ((SwitchPreference) mPreference).setVisible(true);
+            ((SwitchPreference) mPreference).setSummary(summary);
+            ((SwitchPreference) mPreference).setEnabled(enable);
+        }
     }
 
     @Override
     public boolean isAvailable() {
         // Only show the toggle if more than one phone is active
-        if (mTelephonyManager != null) {
-            return mTelephonyManager.getActiveModemCount() > 1;
-        } else {
-            Log.e(TAG, "mTelephonyManager null");
-            return false;
-        }
+        int numActiveModemCount = mTelephonyManager.getActiveModemCount();
+        Log.d(TAG, "numActiveModemCount: " + numActiveModemCount);
+        return numActiveModemCount > 1;
     }
 
     private void putSwitchValue(int state) {
