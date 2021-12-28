@@ -39,6 +39,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.qti.extphone.ExtTelephonyManager;
+import com.qti.extphone.QtiImeiInfo;
 import com.qti.extphone.ServiceCallback;
 
 import org.codeaurora.internal.IExtTelephony;
@@ -186,6 +187,16 @@ public final class TelephonyUtils {
             Log.e(TAG, "isSubsidySimCard: , Exception: ", ex);
         }
         return isSubsidySim;
+    }
+
+    public static QtiImeiInfo[] getImeiInfo() {
+        QtiImeiInfo[] qtiImeiInfo = null;
+        if (isServiceConnected()) {
+            qtiImeiInfo = mExtTelephonyManager.getImeiInfo();
+        } else {
+            Log.e(TAG, "getImeiInfo: ExtTelephony Service not connected!");
+        }
+        return qtiImeiInfo;
     }
 
     public static void connectExtTelephonyService(Context context) {
