@@ -29,6 +29,7 @@ import androidx.window.embedding.SplitController;
 import androidx.window.embedding.SplitPairFilter;
 import androidx.window.embedding.SplitPairRule;
 import androidx.window.embedding.SplitPlaceholderRule;
+import androidx.window.embedding.SplitRule;
 
 import com.android.settings.Settings;
 import com.android.settings.SubSettings;
@@ -41,7 +42,7 @@ import java.util.Set;
 /** A class to initialize split rules for activity embedding. */
 public class ActivityEmbeddingRulesController {
 
-    private static final String TAG = "ActivityEmbeddingCtrl ";
+    private static final String TAG = "ActivityEmbeddingCtrl";
     private final Context mContext;
     private final SplitController mSplitController;
 
@@ -63,13 +64,6 @@ public class ActivityEmbeddingRulesController {
 
         // Set a placeholder for home page.
         registerHomepagePlaceholderRule();
-        // Set subsettings rule.
-        registerTwoPanePairRule(mContext,
-                getComponentName(Settings.class),
-                getComponentName(SubSettings.class),
-                null /* secondaryIntentAction */,
-                true /* finishPrimaryWithSecondary */,
-                true /* finishSecondaryWithPrimary */);
     }
 
     /** Register a SplitPairRule for 2-pane. */
@@ -78,19 +72,75 @@ public class ActivityEmbeddingRulesController {
             ComponentName secondaryComponent,
             String secondaryIntentAction,
             boolean finishPrimaryWithSecondary,
-            boolean finishSecondaryWithPrimary) {
+            boolean finishSecondaryWithPrimary,
+            boolean clearTop) {
+        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(context)) {
+            return;
+        }
         final Set<SplitPairFilter> filters = new HashSet<>();
         filters.add(new SplitPairFilter(primaryComponent, secondaryComponent,
                 secondaryIntentAction));
 
         SplitController.getInstance().registerRule(new SplitPairRule(filters,
-                finishPrimaryWithSecondary,
-                finishSecondaryWithPrimary,
-                true /* clearTop */,
+                finishPrimaryWithSecondary ? SplitRule.FINISH_ADJACENT : SplitRule.FINISH_NEVER,
+                finishSecondaryWithPrimary ? SplitRule.FINISH_ADJACENT : SplitRule.FINISH_NEVER,
+                clearTop,
                 ActivityEmbeddingUtils.getMinCurrentScreenSplitWidthPx(context),
                 ActivityEmbeddingUtils.getMinSmallestScreenSplitWidthPx(context),
                 ActivityEmbeddingUtils.SPLIT_RATIO,
                 LayoutDirection.LOCALE));
+    }
+
+    /**
+     * Register a new SplitPairRule for Settings home. Because homepage is able to be opened by
+     * {@link Settings} or {@link SettingsHomepageActivity}, we register split rule twice for
+     * two cases.
+     */
+    public static void registerTwoPanePairRuleForSettingsHome(Context context,
+            ComponentName secondaryComponent,
+            String secondaryIntentAction,
+            boolean clearTop) {
+
+        registerTwoPanePairRule(
+                context,
+                getComponentName(context, Settings.class),
+                secondaryComponent,
+                secondaryIntentAction,
+                true /* finishPrimaryWithSecondary */,
+                true /* finishSecondaryWithPrimary */,
+                clearTop);
+
+        registerTwoPanePairRule(
+                context,
+                new ComponentName(Utils.SETTINGS_PACKAGE_NAME,
+                        SettingsHomepageActivity.ALIAS_DEEP_LINK),
+                secondaryComponent,
+                secondaryIntentAction,
+                true /* finishPrimaryWithSecondary */,
+                true /* finishSecondaryWithPrimary */,
+                clearTop);
+
+        registerTwoPanePairRule(
+                context,
+                getComponentName(context, SettingsHomepageActivity.class),
+                secondaryComponent,
+                secondaryIntentAction,
+                true /* finishPrimaryWithSecondary */,
+                true /* finishSecondaryWithPrimary */,
+                clearTop);
+    }
+
+    /** Register a SplitPairRule for SubSettings if the device supports 2-pane. */
+    public static void registerSubSettingsPairRule(Context context, boolean clearTop) {
+        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(context)) {
+            return;
+        }
+
+        registerTwoPanePairRuleForSettingsHome(
+                context,
+                getComponentName(context, SubSettings.class),
+                null /* secondaryIntentAction */,
+                clearTop);
     }
 
     private void registerHomepagePlaceholderRule() {
@@ -105,6 +155,8 @@ public class ActivityEmbeddingRulesController {
         final SplitPlaceholderRule placeholderRule = new SplitPlaceholderRule(
                 activityFilters,
                 intent,
+                true /* stickyPlaceholder */,
+                SplitRule.FINISH_ADJACENT,
                 ActivityEmbeddingUtils.getMinCurrentScreenSplitWidthPx(mContext),
                 ActivityEmbeddingUtils.getMinSmallestScreenSplitWidthPx(mContext),
                 ActivityEmbeddingUtils.SPLIT_RATIO,
@@ -119,11 +171,6 @@ public class ActivityEmbeddingRulesController {
                 null /* intentAction */));
     }
 
-    private void addActivityFilter(Set<ActivityFilter> activityFilters, Intent intent) {
-        activityFilters.add(new ActivityFilter(new ComponentName("*" /* pkg */, "*" /* cls */),
-                intent.getAction()));
-    }
-
     private void addActivityFilter(Set<ActivityFilter> activityFilters,
             ComponentName componentName) {
         activityFilters.add(new ActivityFilter(componentName, null /* intentAction */));
@@ -131,6 +178,12 @@ public class ActivityEmbeddingRulesController {
 
     @NonNull
     private ComponentName getComponentName(Class<? extends Activity> activityClass) {
-        return new ComponentName(mContext.getPackageName(), activityClass.getName());
+        return getComponentName(mContext, activityClass);
+    }
+
+    @NonNull
+    private static ComponentName getComponentName(Context context,
+            Class<? extends Activity> activityClass) {
+        return new ComponentName(context.getPackageName(), activityClass.getName());
     }
 }

@@ -16,7 +16,6 @@
 
 package com.android.settings.widget;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
@@ -34,11 +33,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.Utils;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
+import com.android.settings.homepage.SettingsHomepageActivity;
 
 /**
  *  Adapter for highlighting top level preferences
  */
-public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapter {
+public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapter implements
+        SettingsHomepageActivity.HomepageLoadedListener {
 
     private static final String TAG = "HighlightableTopLevelAdapter";
 
@@ -54,22 +55,23 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
     final int mIconColorHighlight;
 
     private final Context mContext;
-    private final Activity mActivity;
+    private final SettingsHomepageActivity mHomepageActivity;
     private final RecyclerView mRecyclerView;
     private final int mNormalBackgroundRes;
     private String mHighlightKey;
     private String mPreviousHighlightKey;
     private int mHighlightPosition = RecyclerView.NO_POSITION;
+    private int mScrollPosition = RecyclerView.NO_POSITION;
     private boolean mHighlightNeeded;
     private boolean mScrolled;
 
-    public HighlightableTopLevelPreferenceAdapter(Activity activity,
+    public HighlightableTopLevelPreferenceAdapter(SettingsHomepageActivity homepageActivity,
             PreferenceGroup preferenceGroup, RecyclerView recyclerView, String key) {
         super(preferenceGroup);
         mRecyclerView = recyclerView;
         mHighlightKey = key;
         mContext = preferenceGroup.getContext();
-        mActivity = activity;
+        mHomepageActivity = homepageActivity;
         final TypedValue outValue = new TypedValue();
         mContext.getTheme().resolveAttribute(android.R.attr.selectableItemBackground,
                 outValue, true /* resolveRefs */);
@@ -115,7 +117,7 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
      * A function can highlight a specific setting in recycler view.
      */
     public void requestHighlight() {
-        if (mRecyclerView == null || TextUtils.isEmpty(mHighlightKey)) {
+        if (mRecyclerView == null) {
             return;
         }
 
@@ -135,9 +137,11 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
             return;
         }
 
+        // Scroll before highlight if needed.
         final boolean highlightNeeded = isHighlightNeeded();
         if (highlightNeeded) {
-            scrollToPositionIfNeeded(position);
+            mScrollPosition = position;
+            scroll();
         }
 
         // Turn on/off highlight when screen split mode is changed.
@@ -189,21 +193,29 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
         requestHighlight();
     }
 
-    private void scrollToPositionIfNeeded(int position) {
-        if (mScrolled || position < 0) {
+    @Override
+    public void onHomepageLoaded() {
+        scroll();
+    }
+
+    private void scroll() {
+        if (mScrolled || mScrollPosition < 0) {
+            return;
+        }
+
+        if (mHomepageActivity.registerHomepageLoadedListenerIfNeeded(this)) {
             return;
         }
 
         // Only when the recyclerView is loaded, it can be scrolled
-        final View view = mRecyclerView.getChildAt(position);
+        final View view = mRecyclerView.getChildAt(mScrollPosition);
         if (view == null) {
-            mRecyclerView.postDelayed(() -> scrollToPositionIfNeeded(position),
-                    DELAY_HIGHLIGHT_DURATION_MILLIS);
+            mRecyclerView.postDelayed(() -> scroll(), DELAY_HIGHLIGHT_DURATION_MILLIS);
             return;
         }
 
         mScrolled = true;
-        Log.d(TAG, "Scroll to position " + position);
+        Log.d(TAG, "Scroll to position " + mScrollPosition);
         // Scroll to the top to reset the position.
         mRecyclerView.nestedScrollBy(0, -mRecyclerView.getHeight());
 
@@ -236,6 +248,6 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
     }
 
     private boolean isHighlightNeeded() {
-        return ActivityEmbeddingUtils.isTwoPaneResolution(mActivity);
+        return ActivityEmbeddingUtils.isTwoPaneResolution(mHomepageActivity);
     }
 }

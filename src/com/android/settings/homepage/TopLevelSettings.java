@@ -36,6 +36,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
@@ -98,6 +99,10 @@ public class TopLevelSettings extends DashboardFragment implements
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
+        // Register SplitPairRule for SubSettings.
+        ActivityEmbeddingRulesController.registerSubSettingsPairRule(getContext(),
+                true /* clearTop */);
+
         setHighlightPreferenceKey(preference.getKey());
         return super.onPreferenceTreeClick(preference);
     }
@@ -179,6 +184,15 @@ public class TopLevelSettings extends DashboardFragment implements
         }
     }
 
+    /** Disable highlight on the menu entry */
+    public void disableMenuHighlight() {
+        if (mTopLevelAdapter == null) {
+            return;
+        }
+        mHighlightedPreferenceKey = null;
+        mTopLevelAdapter.highlightPreference(mHighlightedPreferenceKey, /* scrollNeeded= */ false);
+    }
+
     @Override
     protected boolean shouldForceRoundedIcon() {
         return getContext().getResources()
@@ -187,7 +201,8 @@ public class TopLevelSettings extends DashboardFragment implements
 
     @Override
     protected RecyclerView.Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
-        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(getContext())) {
+        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(getContext())
+                || !(getActivity() instanceof SettingsHomepageActivity)) {
             return super.onCreateAdapter(preferenceScreen);
         }
 
@@ -197,7 +212,8 @@ public class TopLevelSettings extends DashboardFragment implements
 
         Log.d(TAG, "onCreateAdapter, pref key: " + mHighlightedPreferenceKey);
         mTopLevelAdapter = new HighlightableTopLevelPreferenceAdapter(
-                getActivity(), preferenceScreen, getListView(), mHighlightedPreferenceKey);
+                (SettingsHomepageActivity) getActivity(), preferenceScreen, getListView(),
+                mHighlightedPreferenceKey);
         return mTopLevelAdapter;
     }
 
