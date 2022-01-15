@@ -27,6 +27,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.ArraySet;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.View;
@@ -54,6 +55,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
 import java.net.URISyntaxException;
+import java.util.Set;
 
 /** Settings homepage activity */
 public class SettingsHomepageActivity extends FragmentActivity implements
@@ -61,8 +63,14 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
     private static final String TAG = "SettingsHomepageActivity";
 
+    // Additional extra of Settings#ACTION_SETTINGS_LARGE_SCREEN_DEEP_LINK.
     // Put true value to the intent when startActivity for a deep link intent from this Activity.
     public static final String EXTRA_IS_FROM_SETTINGS_HOMEPAGE = "is_from_settings_homepage";
+
+    // Additional extra of Settings#ACTION_SETTINGS_LARGE_SCREEN_DEEP_LINK.
+    // Set & get Uri of the Intent separately to prevent failure of Intent#ParseUri.
+    public static final String EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_DATA =
+            "settings_large_screen_deep_link_intent_data";
 
     // An alias class name of SettingsHomepageActivity.
     public static final String ALIAS_DEEP_LINK = "com.android.settings.DeepLinkHomepageActivity";
@@ -73,10 +81,29 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     private View mHomepageView;
     private View mSuggestionView;
     private CategoryMixin mCategoryMixin;
+    private Set<HomepageLoadedListener> mLoadedListeners;
 
-    @Override
-    public CategoryMixin getCategoryMixin() {
-        return mCategoryMixin;
+    /** A listener receiving homepage loaded events. */
+    public interface HomepageLoadedListener {
+        /** Called when the homepage is loaded. */
+        void onHomepageLoaded();
+    }
+
+    /**
+     *  Try to register a {@link HomepageLoadedListener}. If homepage is already loaded, the
+     *  listener will not be notified.
+     *
+     *  @return Whether the listener should be registered.
+     */
+    public boolean registerHomepageLoadedListenerIfNeeded(HomepageLoadedListener listener) {
+        if (mHomepageView == null) {
+            return false;
+        } else {
+            if (!mLoadedListeners.contains(listener)) {
+                mLoadedListeners.add(listener);
+            }
+            return true;
+        }
     }
 
     /**
@@ -88,20 +115,30 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             return;
         }
         Log.i(TAG, "showHomepageWithSuggestion: " + showSuggestion);
+        final View homepageView = mHomepageView;
         mSuggestionView.setVisibility(showSuggestion ? View.VISIBLE : View.GONE);
-        mHomepageView.setVisibility(View.VISIBLE);
         mHomepageView = null;
+
+        mLoadedListeners.forEach(listener -> listener.onHomepageLoaded());
+        mLoadedListeners.clear();
+        homepageView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public CategoryMixin getCategoryMixin() {
+        return mCategoryMixin;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((SettingsApplication) getApplication()).setHomeActivity(this);
+        setHomeActivity();
         setContentView(R.layout.settings_homepage_container);
 
         final View appBar = findViewById(R.id.app_bar_container);
         appBar.setMinimumHeight(getSearchBoxHeight());
         initHomepageContainer();
+        mLoadedListeners = new ArraySet<>();
 
         final Toolbar toolbar = findViewById(R.id.search_action_bar);
         FeatureFactory.getFactory(this).getSearchFeatureProvider()
@@ -152,6 +189,10 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         launchDeepLinkIntentToRight();
     }
 
+    protected void setHomeActivity() {
+        ((SettingsApplication) getApplication()).setHomeActivity(this);
+    }
+
     private void showSuggestionFragment() {
         final Class<? extends Fragment> fragment = FeatureFactory.getFactory(this)
                 .getSuggestionFeatureProvider(this).getContextualSuggestionFragment();
@@ -162,7 +203,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         mSuggestionView = findViewById(R.id.suggestion_content);
         mHomepageView = findViewById(R.id.settings_homepage_container);
         // Hide the homepage for preparing the suggestion.
-        mHomepageView.setVisibility(View.GONE);
+        mHomepageView.setVisibility(View.INVISIBLE);
         // Schedule a timer to show the homepage and hide the suggestion on timeout.
         mHomepageView.postDelayed(() -> showHomepageWithSuggestion(false),
                 HOMEPAGE_LOADING_TIMEOUT_MS);
@@ -232,21 +273,31 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         targetIntent.replaceExtras(intent);
 
         targetIntent.putExtra(EXTRA_IS_FROM_SETTINGS_HOMEPAGE, true);
+        targetIntent.putExtra(SettingsActivity.EXTRA_IS_FROM_SLICE, false);
+
+        targetIntent.setData(intent.getParcelableExtra(
+                SettingsHomepageActivity.EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_DATA));
 
         // Set 2-pane pair rule for the deep link page.
         ActivityEmbeddingRulesController.registerTwoPanePairRule(this,
-                new ComponentName(Utils.SETTINGS_PACKAGE_NAME, ALIAS_DEEP_LINK),
+                getDeepLinkComponent(),
                 targetComponentName,
                 targetIntent.getAction(),
                 true /* finishPrimaryWithSecondary */,
-                true /* finishSecondaryWithPrimary */);
+                true /* finishSecondaryWithPrimary */,
+                true /* clearTop*/);
         ActivityEmbeddingRulesController.registerTwoPanePairRule(this,
                 new ComponentName(Settings.class.getPackageName(), Settings.class.getName()),
                 targetComponentName,
                 targetIntent.getAction(),
                 true /* finishPrimaryWithSecondary */,
-                true /* finishSecondaryWithPrimary */);
+                true /* finishSecondaryWithPrimary */,
+                true /* clearTop*/);
         startActivity(targetIntent);
+    }
+
+    protected ComponentName getDeepLinkComponent() {
+        return new ComponentName(Utils.SETTINGS_PACKAGE_NAME, ALIAS_DEEP_LINK);
     }
 
     private String getHighlightMenuKey() {

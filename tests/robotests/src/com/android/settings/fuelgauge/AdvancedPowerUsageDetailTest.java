@@ -792,14 +792,38 @@ public class AdvancedPowerUsageDetailTest {
         assertThat(mOptimizePreference.isChecked()).isTrue();
         assertThat(mRestrictedPreference.isChecked()).isFalse();
         assertThat(mUnrestrictedPreference.isChecked()).isFalse();
+    }
+
+    @Test
+    public void testOnPause_optimizationModeChanged_logPreference() {
+        final int mode = BatteryOptimizeUtils.MODE_RESTRICTED;
+        mFragment.mOptimizationMode = mode;
+        when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(mode);
+        mOptimizePreference.setKey(KEY_PREF_OPTIMIZED);
+
+        mFragment.onRadioButtonClicked(mOptimizePreference);
+        mFragment.onPause();
+
         verify(mMetricsFeatureProvider)
-            .action(
-                mContext,
-                SettingsEnums.ACTION_APP_BATTERY_USAGE_OPTIMIZED,
-                (Pair<Integer, Object>[]) new Pair[] {
-                    new Pair(ConvertUtils.METRIC_KEY_PACKAGE, null),
-                    new Pair(ConvertUtils.METRIC_KEY_BATTERY_USAGE, "app label")
-                });
+                .action(
+                        SettingsEnums.OPEN_APP_BATTERY_USAGE,
+                        SettingsEnums.ACTION_APP_BATTERY_USAGE_OPTIMIZED,
+                        SettingsEnums.OPEN_APP_BATTERY_USAGE,
+                        /* package name*/ "none",
+                        /* consumed battery */ 0);
+    }
+
+    @Test
+    public void testOnPause_optimizationModeIsNotChanged_notInvokeLogging() {
+        final int mode = BatteryOptimizeUtils.MODE_OPTIMIZED;
+        mFragment.mOptimizationMode = mode;
+        when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(mode);
+        mOptimizePreference.setKey(KEY_PREF_OPTIMIZED);
+
+        mFragment.onRadioButtonClicked(mOptimizePreference);
+        mFragment.onPause();
+
+        verifyZeroInteractions(mMetricsFeatureProvider);
     }
 
     @Test
@@ -831,7 +855,7 @@ public class AdvancedPowerUsageDetailTest {
                 .thenReturn(BatteryOptimizeUtils.MODE_UNRESTRICTED);
         mFragment.mEnableTriState = false;
 
-        mFragment.notifyBackupManager();
+        mFragment.onPause();
 
         verifyZeroInteractions(mBackupManager);
     }

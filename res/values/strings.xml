@@ -1937,9 +1937,6 @@
     <!-- Bluetooth device details companion apps. The body of confirmation dialog for remove association. [CHAR LIMIT=60] -->
     <string name="bluetooth_companion_app_body"><xliff:g id="app_name" example="App Name">%1$s</xliff:g> app will no longer connect to your <xliff:g id="device_name" example="Device Name">%2$s</xliff:g></string>
 
-    <!--  Bluetooth device details. The body of a confirmation dialog for unpairing a paired device. [CHAR LIMIT=NONE] -->
-    <string name="bluetooth_untethered_unpair_dialog_body"><xliff:g id="device_name" example="Jack's headphone">%1$s</xliff:g> will no longer be paired with any device linked to this account</string>
-
     <!--  Bluetooth device details. In the confirmation dialog for unpairing a paired device, this is the label on the button that will complete the unpairing action. -->
     <string name="bluetooth_unpair_dialog_forget_confirm_button">Forget device</string>
     <!-- Bluetooth device details companion apps. In the confirmation dialog for removing an associated app, this is the label on the button that will complete the disassociate action. [CHAR LIMIT=80] -->
@@ -6414,8 +6411,8 @@
     <string name="power_wifi">Wi\u2011Fi</string>
     <!-- Label for power consumed by Bluetooth -->
     <string name="power_bluetooth">Bluetooth</string>
-    <!-- Label for power consumed by Mobile network idle -->
-    <string name="power_cell">Mobile network standby</string>
+    <!-- Label for power consumed by Mobile network -->
+    <string name="power_cell">Mobile network</string>
     <!-- Label for power consumed by Calling -->
     <string name="power_phone">Voice calls</string>
     <!-- Label for power consumed when Idle -->
@@ -9131,6 +9128,10 @@
     <!-- Configure notifications: Title for determining which notifications appear on the lock screen [CHAR LIMIT=60] -->
     <string name="lock_screen_notifs_title">Notifications on lock screen</string>
 
+    <!-- Configure notifications: summary for lockscreen notifications: all notifications shown
+    regardless of noisiness [CHAR LIMIT=60] -->
+    <string name="lock_screen_notifs_show_all_summary">Show conversations, default, and silent</string>
+
     <!-- Configure notifications: Value for lockscreen notifications: all notifications shown
     regardless of noisiness [CHAR LIMIT=60] -->
     <string name="lock_screen_notifs_show_all">Show conversations, default, and silent</string>
@@ -9382,11 +9383,11 @@
     <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
     <plurals name="notifications_sent_daily">
         <item quantity="one">~<xliff:g id="number">%d</xliff:g> notification per day</item>
-        <item quantity="other">~<xliff:g id="number">%d</xliff:g> notifications per day</item>
+        <item quantity="other">~<xliff:g id="number">%,d</xliff:g> notifications per day</item>
     </plurals>
     <plurals name="notifications_sent_weekly">
         <item quantity="one">~<xliff:g id="number">%d</xliff:g> notification per week</item>
-        <item quantity="other">~<xliff:g id="number">%d</xliff:g> notifications per week</item>
+        <item quantity="other">~<xliff:g id="number">%,d</xliff:g> notifications per week</item>
     </plurals>
     <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
     <string name="notifications_sent_never">Never</string>
@@ -9446,10 +9447,17 @@
           listener, displayed as a dialog message. [CHAR LIMIT=NONE] -->
     <string name="notification_listener_security_warning_summary">
         <xliff:g id="notification_listener_name">%1$s</xliff:g> will be able to read all notifications,
-        including personal information such as contact names and the text of messages you receive.
+        including personal information such as contact names, photos, and the text of messages you receive.
         This app will also be able to snooze or dismiss notifications or take action on buttons in notifications, including answering phone calls.
         \n\nThis will also give the app the ability to turn Do Not Disturb on or off and change related settings.
     </string>
+    <string name="nls_warning_prompt"><xliff:g id="notification_listener_name">%1$s</xliff:g> will be able to:</string>
+    <string name="nls_feature_read_title">Read your notifications</string>
+    <string name="nls_feature_read_summary">It can read your notifications, including personal information such as contacts, messages, and photos.</string>
+    <string name="nls_feature_reply_title">Reply to messages</string>
+    <string name="nls_feature_reply_summary">It can reply to messages and take action on buttons in notifications, including snoozing or dismissing notifications and answering calls.</string>
+    <string name="nls_feature_settings_title">Change settings</string>
+    <string name="nls_feature_settings_summary">It can turn Do Not Disturb on or off and change related settings.</string>
     <string name="notification_listener_disable_warning_summary">
         If you turn off notification access for <xliff:g id="notification_listener_name">%1$s</xliff:g>, Do Not Disturb access may also be turned off.
     </string>
@@ -13007,7 +13015,7 @@
     <string name="qtifeedback_activity">com.qti.smq.ui.QtiFeedbackActivity</string>
 
     <!-- See more items in contextual homepage [CHAR LIMIT=30]-->
-    <string name="see_more">Settings</string>
+    <string name="see_more">See more</string>
     <!-- See less items in contextual homepage [CHAR LIMIT=30]-->
     <string name="see_less">See less</string>
 
@@ -13418,6 +13426,11 @@
     <string name="lockscreen_privacy_wallet_setting_toggle">Show wallet</string>
     <!-- Wallet (formerly Cards and passes) summary [CHAR LIMIT=NONE] -->
     <string name="lockscreen_privacy_wallet_summary">Allow access to wallet from lock screen and quick settings</string>
+
+    <!-- QR Code Scanner toggle name [CHAR LIMIT=60] -->
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle">Show QR Code Scanner</string>
+    <!-- QR Code Scanner summary [CHAR LIMIT=NONE] -->
+    <string name="lockscreen_privacy_qr_code_scanner_summary">Allow access to QR code scanner from lock screen</string>
 
     <!-- Device controls toggle name [CHAR LIMIT=60] -->
     <string name="lockscreen_privacy_controls_setting_toggle">Show device controls</string>
