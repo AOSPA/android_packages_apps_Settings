@@ -29,6 +29,7 @@ import android.telecom.TelecomManager;
 import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.view.View;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -70,6 +71,7 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
     private static final ComponentName PSTN_CONNECTION_SERVICE_COMPONENT =
             new ComponentName("com.android.phone",
                     "com.android.services.telephony.TelephonyConnectionService");
+    private boolean mIsRtlMode;
 
     protected TelephonyManager mTelephonyManager;
 
@@ -85,7 +87,8 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         super(context, preferenceKey);
         mManager = context.getSystemService(SubscriptionManager.class);
         mChangeListener = new SubscriptionsChangeListener(context, this);
-
+        mIsRtlMode = context.getResources().getConfiguration().getLayoutDirection()
+                == View.LAYOUT_DIRECTION_RTL;
         mTelephonyManager = (TelephonyManager) mContext
                 .getSystemService(Context.TELEPHONY_SERVICE);
         mPhoneCount = mTelephonyManager.getPhoneCount();
@@ -345,6 +348,10 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
             updateEntries();
             refreshSummary(mPreference);
         }
+    }
+
+    boolean isRtlMode() {
+        return mIsRtlMode;
     }
 
     private void registerPhoneStateListener() {

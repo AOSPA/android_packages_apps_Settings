@@ -23,6 +23,7 @@ import android.util.SparseIntArray;
 import com.android.internal.os.BatterySipper;
 import com.android.settingslib.fuelgauge.Estimate;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -138,7 +139,17 @@ public interface PowerUsageFeatureProvider {
     boolean isChartGraphSlotsEnabled(Context context);
 
     /**
+     * Gets a intent for one time bypass charge limited to resume charging.
+     */
+    Intent getResumeChargeIntent();
+
+    /**
      * Returns battery history data with corresponding timestamp key.
      */
     Map<Long, Map<String, BatteryHistEntry>> getBatteryHistory(Context context);
+
+    /**
+     * Returns {@link List} for hidding applications background usage time.
+     */
+    List<CharSequence> getHideBackgroundUsageTimeList(Context context);
 }
