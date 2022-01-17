@@ -217,11 +217,14 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
             }
         }
         if (TextUtils.equals(getPreferenceKey(), LIST_DATA_PREFERENCE_KEY)) {
-            boolean isEcbmEnabled = TelephonyProperties.in_ecm_mode().orElse(false);
+            boolean isEcbmEnabled = mTelephonyManager.getEmergencyCallbackMode();
+            boolean isScbmEnabled = TelephonyProperties.in_scbm().orElse(false);
+
             int isSmartDdsEnabled = Settings.Global.getInt(mContext.getContentResolver(),
                     Settings.Global.SMART_DDS_SWITCH, 0);
+
             if (isSmartDdsEnabled == 0) {
-                mPreference.setEnabled(isCallStateIdle() && !isEcbmEnabled &&
+                mPreference.setEnabled(isCallStateIdle() && !isEcbmEnabled && !isScbmEnabled &&
                         (!TelephonyUtils.isSubsidyFeatureEnabled(mContext) ||
                         TelephonyUtils.allowUsertoSetDDS(mContext)));
             } else {
