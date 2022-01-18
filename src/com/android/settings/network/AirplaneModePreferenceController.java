@@ -17,6 +17,7 @@ package com.android.settings.network;
 
 import static android.provider.SettingsSlicesContract.KEY_AIRPLANE_MODE;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -44,6 +45,8 @@ import com.android.settingslib.core.lifecycle.events.OnDestroy;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
+import com.qti.extphone.ExtTelephonyManager;
+
 import java.io.IOException;
 
 public class AirplaneModePreferenceController extends TogglePreferenceController
@@ -51,6 +54,7 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
         AirplaneModeEnabler.OnAirplaneModeChangedListener {
 
     public static final int REQUEST_CODE_EXIT_ECM = 1;
+    public static final int REQUEST_CODE_EXIT_SCBM = 2;
 
     /**
      * Uri for Airplane mode Slice.
@@ -86,17 +90,25 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (KEY_AIRPLANE_MODE.equals(preference.getKey())
-                && mAirplaneModeEnabler.isInEcmMode()) {
-            // In ECM mode launch ECM app dialog
-            if (mFragment != null) {
-                mFragment.startActivityForResult(
-                        new Intent(TelephonyManager.ACTION_SHOW_NOTICE_ECM_BLOCK_OTHERS, null),
-                        REQUEST_CODE_EXIT_ECM);
+        if (KEY_AIRPLANE_MODE.equals(preference.getKey())) {
+            if(mAirplaneModeEnabler.isInEcmMode()) {
+                // In ECM mode launch ECM app dialog
+                if (mFragment != null) {
+                    mFragment.startActivityForResult(
+                            new Intent(TelephonyManager.ACTION_SHOW_NOTICE_ECM_BLOCK_OTHERS, null),
+                            REQUEST_CODE_EXIT_ECM);
+                }
+                return true;
+            } else if(mAirplaneModeEnabler.isInScbm()) {
+                // In SCBM mode launch SCBM app dialog
+                if (mFragment != null) {
+                    mFragment.startActivityForResult(
+                            new Intent(ExtTelephonyManager.ACTION_SHOW_NOTICE_SCM_BLOCK_OTHERS,
+                            null), REQUEST_CODE_EXIT_SCBM);
+                }
+                return true;
             }
-            return true;
         }
-
         return false;
     }
 
@@ -151,7 +163,12 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
         if (requestCode == REQUEST_CODE_EXIT_ECM) {
             final boolean isChoiceYes = data.getBooleanExtra(EXIT_ECM_RESULT, false);
             // Set Airplane mode based on the return value and checkbox state
-            mAirplaneModeEnabler.setAirplaneModeInECM(isChoiceYes,
+            mAirplaneModeEnabler.setAirplaneModeInEmergencyMode(isChoiceYes,
+                    mAirplaneModePreference.isChecked());
+        } else if (requestCode == REQUEST_CODE_EXIT_SCBM) {
+            final boolean isChoiceYes = resultCode == Activity.RESULT_OK;
+            // Set Airplane mode based on the return value and checkbox state
+            mAirplaneModeEnabler.setAirplaneModeInEmergencyMode(isChoiceYes,
                     mAirplaneModePreference.isChecked());
         }
     }
