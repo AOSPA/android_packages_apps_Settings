@@ -135,10 +135,11 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
             }
         }
 
-        boolean isEcbmEnabled = TelephonyProperties.in_ecm_mode().orElse(false);
-        if ((TelephonyManager.CALL_STATE_IDLE != mCallState) || isEcbmEnabled) {
+        boolean isEcbmEnabled = mTelephonyManager.getEmergencyCallbackMode();
+        boolean isScbmEnabled = TelephonyProperties.in_scbm().orElse(false);
+        if ((TelephonyManager.CALL_STATE_IDLE != mCallState) || isEcbmEnabled || isScbmEnabled) {
             Log.d(TAG, "update: disable switchbar, isEcbmEnabled=" + isEcbmEnabled +
-                    ", mCallState=" + mCallState);
+                    ", isScbmEnabled=" + isScbmEnabled + ", mCallState=" + mCallState);
             mSwitchBar.setSwitchBarEnabled(false);
         } else {
             mSwitchBar.setSwitchBarEnabled(true);
