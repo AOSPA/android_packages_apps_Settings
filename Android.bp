@@ -67,7 +67,10 @@ android_library {
         "btadva_settings_java_defaults",
     ],
 
-    srcs: ["src/**/*.java"],
+    srcs: [
+        "src/**/*.java",
+        "src/**/*.kt",
+    ],
 
     static_libs: [
         "androidx-constraintlayout_constraintlayout",
