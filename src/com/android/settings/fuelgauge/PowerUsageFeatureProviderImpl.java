@@ -26,6 +26,8 @@ import com.android.internal.os.BatterySipper;
 import com.android.internal.util.ArrayUtils;
 import com.android.settingslib.fuelgauge.Estimate;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider {
@@ -164,7 +166,17 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
+    public Intent getResumeChargeIntent() {
+        return null;
+    }
+
+    @Override
     public Map<Long, Map<String, BatteryHistEntry>> getBatteryHistory(Context context) {
         return null;
+    }
+
+    @Override
+    public List<CharSequence> getHideBackgroundUsageTimeList(Context context) {
+        return new ArrayList<>();
     }
 }
