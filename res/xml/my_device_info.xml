@@ -42,15 +42,6 @@
             settings:controller="com.android.settings.deviceinfo.DeviceNamePreferenceController"
             settings:enableCopying="true"/>
 
-        <!-- Account name -->
-        <Preference
-            android:key="branded_account"
-            android:order="2"
-            android:title="@string/my_device_info_account_preference_title"
-            android:summary="@string/summary_placeholder"
-            settings:enableCopying="true"
-            settings:controller="com.android.settings.deviceinfo.BrandedAccountPreferenceController"/>
-
         <!-- Android version -->
         <Preference
             android:key="firmware_version"
@@ -68,6 +59,15 @@
             android:summary="@string/summary_placeholder"
             android:fragment="com.android.settings.deviceinfo.firmwareversion.FirmwareVersionSettings"
             settings:controller="com.android.settings.deviceinfo.firmwareversion.ParanoidAndroidVersionPreferenceController"/>
+
+        <!-- Account name -->
+        <Preference
+            android:key="branded_account"
+            android:order="5"
+            android:title="@string/my_device_info_account_preference_title"
+            android:summary="@string/summary_placeholder"
+            settings:enableCopying="true"
+            settings:controller="com.android.settings.deviceinfo.BrandedAccountPreferenceController"/>
     </PreferenceCategory>
 
     <PreferenceCategory
