@@ -16,17 +16,6 @@
 
 package com.android.settings.homepage;
 
-import android.content.ComponentName;
-
 /** Activity for Slices to launch Settings deep link page */
 public class SliceDeepLinkHomepageActivity extends SettingsHomepageActivity {
-    @Override
-    protected void setHomeActivity() {
-        // do not overwrite homepage activity in SettingsApplication
-    }
-
-    @Override
-    protected ComponentName getDeepLinkComponent() {
-        return new ComponentName(getApplicationContext(), getClass());
-    }
 }

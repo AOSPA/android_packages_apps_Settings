@@ -894,7 +894,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Ваш планшет більше не буде підключено до пристрою <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Ваш пристрій більше не буде підключено до пристрою <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Додаток <xliff:g id="APP_NAME">%1$s</xliff:g> більше не буде зв’язаний із вашим пристроєм \"<xliff:g id="DEVICE_NAME">%2$s</xliff:g>\""</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> більше не буде підключено до інших пристроїв, зв’язаних із цим обліковим записом"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Забути пристрій"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Від’єднати додаток"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"Підключ. до…"</string>
@@ -1274,7 +1273,8 @@
     <string name="wifi_calling_mode_wifi_only_summary" msgid="3155660680014892641">"Телефонувати через Wi-Fi. У разі втрати з’єднання з Wi-Fi виклик буде завершено."</string>
     <string name="wifi_calling_off_explanation" msgid="6295526820826322895">"Якщо ввімкнути Дзвінки через Wi-Fi, ваш телефон зможе спрямовувати дзвінки через мережі Wi-Fi або мережу оператора, залежно від налаштувань і потужності сигналу. Перш ніж увімкнути цю функцію, уточніть в оператора вартість послуги й інші деталі.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
-    <string name="emergency_address_title" msgid="3490633500025717573">"Екстрена адреса"</string>
+    <!-- no translation found for emergency_address_title (8102786488994263815) -->
+    <skip />
     <string name="emergency_address_summary" msgid="3022628750270626473">"Використовується як адреса, коли ви телефонуєте в екстрені служби через Wi-Fi"</string>
     <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"Докладніше"</annotation>" про приватний DNS-сервер"</string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"Увімкнено"</string>
@@ -1877,7 +1877,7 @@
     <string name="mobile_connect_to_internet" msgid="8162654404357069060">"Під’єднайтеся до Інтернету"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Останні запити на геодані"</string>
     <string name="location_recent_location_requests_see_all" msgid="7918405176741692524">"Показати всі"</string>
-    <string name="location_category_location_services" msgid="8163798686832434284">"Служби локації"</string>
+    <string name="location_category_location_services" msgid="8163798686832434284">"Геолокація"</string>
     <string name="location_title" msgid="5819154746934945021">"Моє місцезнах."</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Геодані для робочого профілю"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Доступ додатків до геоданих"</string>
@@ -1899,8 +1899,8 @@
     <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"Дозволити додаткам і сервісам будь-коли шукати мережі Wi-Fi, навіть якщо Wi-Fi вимкнено. Це може покращити роботу функцій і сервісів, які використовують геодані."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Шукати пристрої Bluetooth"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Дозволити додаткам і сервісам будь-коли шукати пристрої поруч, навіть якщо Bluetooth вимкнено. Це може покращити роботу функцій і сервісів, які використовують геодані."</string>
-    <string name="location_services_preference_title" msgid="604317859531782159">"Служби локації"</string>
-    <string name="location_services_screen_title" msgid="5640002489976602476">"Служби локації"</string>
+    <string name="location_services_preference_title" msgid="604317859531782159">"Геолокація"</string>
+    <string name="location_services_screen_title" msgid="5640002489976602476">"Геолокація"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Служби локації для роботи"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Визначати часовий пояс за місцезнаходженням"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"Потрібен доступ до геоданих пристрою"</string>
@@ -2371,7 +2371,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Утримуйте клавіші гучності, щоб відкрити"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Тричі торкніться екрана, щоб відкрити"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Використовуйте жест"</string>
-    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Спробуйте новий жест для спеціальних можливостей"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Використовувати жест спеціальних можливостей"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Щоб використовувати цю функцію, натисніть кнопку спеціальних можливостей <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> унизу екрана.\n\nЩоб переключитися між функціями, натисніть і утримуйте кнопку спеціальних можливостей."</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="2551777208185138391">"Щоб використовувати цю функцію, натисніть кнопку спеціальних можливостей на екрані."</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Щоб використовувати цю функцію, натисніть і утримуйте обидві клавіші гучності."</string>
@@ -2847,7 +2847,7 @@
     <string name="power_camera" msgid="4778315081581293923">"Камера"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wi‑Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
-    <string name="power_cell" msgid="5507921058696341513">"Мобільна мережа в режимі очікування"</string>
+    <string name="power_cell" msgid="7793805106954398186">"Мобільна мережа"</string>
     <string name="power_phone" msgid="2768396619208561670">"Голос. дзвінки"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"Режим очікув."</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"Режим очікування"</string>
@@ -3328,7 +3328,8 @@
     <string name="vpn_connect_to" msgid="216709261691085594">"Під’єднатися до профілю <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"Відключити цю мережу VPN?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"Відключити"</string>
-    <string name="vpn_version" msgid="41856553718304367">"Версія <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <!-- no translation found for vpn_version (6344167191984400976) -->
+    <skip />
     <string name="vpn_forget_long" msgid="729132269203870205">"Забути мережу VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"Замінити наявну мережу VPN?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"Увімкнути постійну мережу VPN?"</string>
@@ -3937,6 +3938,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Заблокований екран, екран блокування, пропустити, обходити"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Коли робочий профіль заблоковано"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Сповіщення на заблокованому екрані"</string>
+    <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Показувати розмови (за умовчанням і беззвучні)"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Показувати розмови (за умовчанням і беззвучні)"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Приховати беззвучні розмови та сповіщення"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Не показувати сповіщення"</string>
@@ -4019,16 +4021,16 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Усі сповіщення від додатка <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Адаптивні сповіщення"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="one">~<xliff:g id="NUMBER_1">%d</xliff:g> сповіщення на день</item>
-      <item quantity="few">~<xliff:g id="NUMBER_1">%d</xliff:g> сповіщення на день</item>
-      <item quantity="many">~<xliff:g id="NUMBER_1">%d</xliff:g> сповіщень на день</item>
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> сповіщення на день</item>
+      <item quantity="one">~<xliff:g id="NUMBER_1">%,d</xliff:g> сповіщення на день</item>
+      <item quantity="few">~<xliff:g id="NUMBER_1">%,d</xliff:g> сповіщення на день</item>
+      <item quantity="many">~<xliff:g id="NUMBER_1">%,d</xliff:g> сповіщень на день</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> сповіщення на день</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="one">~<xliff:g id="NUMBER_1">%d</xliff:g> сповіщення на тиждень</item>
-      <item quantity="few">~<xliff:g id="NUMBER_1">%d</xliff:g> сповіщення на тиждень</item>
-      <item quantity="many">~<xliff:g id="NUMBER_1">%d</xliff:g> сповіщень на тиждень</item>
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> сповіщення на тиждень</item>
+      <item quantity="one">~<xliff:g id="NUMBER_1">%,d</xliff:g> сповіщення на тиждень</item>
+      <item quantity="few">~<xliff:g id="NUMBER_1">%,d</xliff:g> сповіщення на тиждень</item>
+      <item quantity="many">~<xliff:g id="NUMBER_1">%,d</xliff:g> сповіщень на тиждень</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> сповіщення на тиждень</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Ніколи"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Сповіщення додатків і пристроїв"</string>
@@ -4049,7 +4051,14 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Надати додатку <xliff:g id="SERVICE">%1$s</xliff:g> доступ до сповіщень?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"В Android 12 адаптивні сповіщення замінено на покращені. Ця функція допомагає впорядковувати сповіщення й показує в них пропоновані дії та відповіді. \n\nПокращені сповіщення надають доступ до вмісту сповіщень, зокрема до такої особистої інформації, як повідомлення й імена контактів. Ця функція може автоматично закривати сповіщення чи реагувати на них, наприклад відповідати на телефонні дзвінки або керувати режимом \"Не турбувати\"."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Надати додатку <xliff:g id="SERVICE">%1$s</xliff:g> доступ для сповіщень?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> зможе переглядати всі сповіщення, зокрема з особистою інформацією, такою як імена контактів і текст отриманих повідомлень. Цей додаток також зможе відкладати й закривати сповіщення або виконувати дії з кнопками в них, зокрема відповідати на виклики. \n\nКрім того, додаток зможе вмикати й вимикати режим \"Не турбувати\" та змінювати пов’язані з ним налаштування."</string>
+    <string name="notification_listener_security_warning_summary" msgid="4317764112725749020">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> зможе переглядати всі сповіщення, зокрема з особистою інформацією, такою як імена контактів, фотографії та текст отриманих повідомлень. Цей додаток також зможе відкладати й закривати сповіщення або виконувати дії з кнопками в них, зокрема відповідати на дзвінки. \n\nКрім того, додаток зможе вмикати й вимикати режим \"Не турбувати\" та змінювати пов’язані з ним налаштування."</string>
+    <string name="nls_warning_prompt" msgid="9143226910825830619">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> зможе виконувати наведені нижче дії."</string>
+    <string name="nls_feature_read_title" msgid="7629713268744220437">"Читати сповіщення"</string>
+    <string name="nls_feature_read_summary" msgid="1064698238110273593">"Може переглядати ваші сповіщення, зокрема з особистою інформацією, такою як імена контактів, текст повідомлень і фотографії."</string>
+    <string name="nls_feature_reply_title" msgid="7925455553821362039">"Відповідати на повідомлення"</string>
+    <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Може відповідати на повідомлення та виконувати дії з кнопками в сповіщеннях, зокрема відкладати або закривати їх і відповідати на дзвінки."</string>
+    <string name="nls_feature_settings_title" msgid="8208164329853194414">"Змінювати налаштування"</string>
+    <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Може вмикати й вимикати режим \"Не турбувати\" та змінювати пов’язані з ним налаштування."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Якщо ви вимкнете доступ додатка <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> до сповіщень, доступ до режиму \"Не турбувати\" також буде вимкнено."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Вимкнути"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Скасувати"</string>
@@ -5014,10 +5023,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Цифровий помічник"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Провести пальцем, щоб викликати цифрового помічника"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Щоб викликати цифрового помічника, проведіть пальцем угору від нижнього кута екрана."</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"Щоб викликати помічника, утримуйте кнопку головного екрана"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Щоб викликати цифрового помічника, натисніть і утримуйте кнопку головного екрана."</string>
     <string name="information_label" msgid="6939310810756569298">"Інформація"</string>
     <string name="low_label" msgid="6525629096999711220">"Низька"</string>
     <string name="high_label" msgid="357503396626018487">"Висока"</string>
@@ -5026,11 +5033,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Через високу чутливість можуть не працювати жести з боків екрана в додатку."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Чутливість країв екрана"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"Чутливість навігації за допомогою жестів"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Навігація за допомогою кнопок"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"навігація за допомогою жестів, чутливість країв екрана, жест \"назад\""</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"навігація, кнопка головного екрана"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Двічі торкнутися, щоб перевірити сповіщення"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Двічі торкніться, щоб перевірити планшет"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Двічі торкніться, щоб перевірити пристрій"</string>
@@ -5459,7 +5464,7 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Недійсний режим мережі: <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ігнорувати."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Імена точок доступу"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Недоступно, коли підключено до оператора <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="see_more" msgid="8436037008285546409">"Налаштування"</string>
+    <string name="see_more" msgid="7499355691042812723">"Докладніше"</string>
     <string name="see_less" msgid="2642392725363552793">"Показати менше"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"Увімкнути оператора <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Увімкнути SIM-карту?"</string>
@@ -5626,8 +5631,12 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Довго"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Показати гаманець"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Дозволити доступ до гаманця із заблокованого екрана та швидких налаштувань"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1314577678356895256">"Показати сканер QR-коду"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Дозволити доступ до сканера QR-коду на заблокованому екрані"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Показувати елементи керування пристроями"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Доступ до елементів керування на заблокованому екрані"</string>
+    <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Показувати двосторонній годинник за наявності"</string>
+    <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Дворядковий годинник"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
@@ -5656,7 +5665,6 @@
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Вимкнено"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Інтернет"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM-карти"</string>
-    <string name="wifi_switch_summary" msgid="3577154777754849024">"Шукати мережі Wi‑Fi та підключатися до них"</string>
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"літак, безпечний у літаку"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Дзвінки та SMS"</string>
     <string name="calls_and_sms_category" msgid="3788238090898237767">"Дзвінки через Wi-Fi"</string>

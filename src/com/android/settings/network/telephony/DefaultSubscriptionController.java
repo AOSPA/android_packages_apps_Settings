@@ -196,7 +196,7 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         final ArrayList<CharSequence> displayNames = new ArrayList<>();
         final ArrayList<CharSequence> subscriptionIds = new ArrayList<>();
 
-        if (Utils.isProviderModelEnabled(mContext) && mSelectableSubs.size() == 1) {
+        if (mSelectableSubs.size() == 1) {
             mPreference.setEnabled(false);
             mPreference.setSummary(SubscriptionUtil.getUniqueSubscriptionDisplayName(
                     mSelectableSubs.get(0), mContext));
@@ -241,6 +241,7 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
             }
         }
 
+        mPreference.setEnabled(true);
         mPreference.setEntries(displayNames.toArray(new CharSequence[0]));
         mPreference.setEntryValues(subscriptionIds.toArray(new CharSequence[0]));
 

@@ -860,7 +860,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Surfplattan kopplas bort från <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Enheten kopplas bort från <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Appen <xliff:g id="APP_NAME">%1$s</xliff:g> blir inte längre ansluten till <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> kopplas inte längre till någon enhet som har länkats till det här kontot"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Glöm enhet"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Koppla från appen"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"Anslut till…"</string>
@@ -1234,7 +1233,8 @@
     <string name="wifi_calling_mode_wifi_only_summary" msgid="3155660680014892641">"Ring via Wi‑Fi. Samtalet avslutas om wifi-anslutningen wifi bryts."</string>
     <string name="wifi_calling_off_explanation" msgid="6295526820826322895">"När wifi-samtal har aktiverats kan mobilen dirigera samtal via wifi-nätverk eller operatörens nätverk, beroende på dina inställningar och vilken signal som är starkast. Innan du aktiverar funktionen frågar du operatören om eventuella avgifter och annan information.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
-    <string name="emergency_address_title" msgid="3490633500025717573">"Adress för nödfall"</string>
+    <!-- no translation found for emergency_address_title (8102786488994263815) -->
+    <skip />
     <string name="emergency_address_summary" msgid="3022628750270626473">"Används som din plats om du ringer nödsamtal via Wi‑Fi"</string>
     <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"Läs mer"</annotation>" om privata DNS-funktioner"</string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"På"</string>
@@ -2323,7 +2323,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Öppna genom att hålla ned volymknapparna"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Öppna genom att trycka snabbt tre gånger"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Öppna med rörelse"</string>
-    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Använd en ny tillgänglighetsrörelse"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Använda tillgänglighetsrörelser"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Tryck på tillgänglighetsknappen <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> längst ned på skärmen om du vill använda denna funktion.\n\nByt funktion genom att hålla in tillgänglighetsknappen."</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="2551777208185138391">"Tryck på tillgänglighetsknappen på skärmen om du vill använda den här funktionen."</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Håll båda volymknapparna nedtryckta om du vill använda den här funktionen."</string>
@@ -2685,7 +2685,7 @@
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Högre batteriförbrukning"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Se appar med högst batteriförbrukning"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Laddning har begränsats tillfälligt"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"För att spara batteri. Läs mer."</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Detta bevarar batteriets livslängd. Läs mer."</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Återuppta laddning"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Under vissa omständigheter, till exempel vid höga temperaturer och långa laddningsperioder, kan laddningen begränsas till <xliff:g id="PERCENT">%1$s</xliff:g> för att bevara batteriets livslängd.\n\nTelefonen återgår automatiskt till normal laddning när det är möjligt."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Under vissa omständigheter, till exempel vid höga temperaturer och långa laddningsperioder, kan laddningen begränsas till <xliff:g id="PERCENT">%1$s</xliff:g> för att bevara batteriets livslängd.\n\nSurfplattan återgår automatiskt till normal laddning när det är möjligt."</string>
@@ -2771,7 +2771,7 @@
     <string name="power_camera" msgid="4778315081581293923">"Kamera"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wifi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
-    <string name="power_cell" msgid="5507921058696341513">"Strömsparläge för mobilnätverk"</string>
+    <string name="power_cell" msgid="7793805106954398186">"Mobilnätverk"</string>
     <string name="power_phone" msgid="2768396619208561670">"Röstsamtal"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"Surfplattan är inaktiv"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"Telefonen är inaktiv"</string>
@@ -3248,7 +3248,8 @@
     <string name="vpn_connect_to" msgid="216709261691085594">"Anslut till <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"Vill du koppla från VPN?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"Koppla från"</string>
-    <string name="vpn_version" msgid="41856553718304367">"Version <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <!-- no translation found for vpn_version (6344167191984400976) -->
+    <skip />
     <string name="vpn_forget_long" msgid="729132269203870205">"Glöm VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"Vill du byta ut befintligt VPN?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"Vill du ange Always-on VPN?"</string>
@@ -3847,6 +3848,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Låsskärm, Hoppa över, Kringgå"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"När jobbprofilen är låst"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Aviseringar på låsskärmen"</string>
+    <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Visa konversationer, standard och ljudlösa"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Visa konversationer, standard och ljudlösa"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Dölj ljudlösa konversationer och aviseringar"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Visa inga aviseringar"</string>
@@ -3927,11 +3929,11 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Alla aviseringar från <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Anpassade aviseringar"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="other">ca <xliff:g id="NUMBER_1">%d</xliff:g> aviseringar om dagen</item>
+      <item quantity="other">ca <xliff:g id="NUMBER_1">%,d</xliff:g> aviseringar om dagen</item>
       <item quantity="one">ca <xliff:g id="NUMBER_0">%d</xliff:g> avisering om dagen</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="other">Ca <xliff:g id="NUMBER_1">%d</xliff:g> aviseringar i veckan</item>
+      <item quantity="other">Ca <xliff:g id="NUMBER_1">%,d</xliff:g> aviseringar i veckan</item>
       <item quantity="one">Ca <xliff:g id="NUMBER_0">%d</xliff:g> avisering i veckan</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Aldrig"</string>
@@ -3951,7 +3953,14 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Vill du tillåta åtkomst till aviseringar för <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Förbättrade aviseringar har ersatt Anpassade aviseringar för Android i Android 12. Den här funktionen visar förslag på åtgärder och svar och organiserar dina aviseringar. \n\nFörbättrade aviseringar har åtkomst till allt innehåll i aviseringar, inklusive personliga uppgifter som namn på kontakter och meddelanden. Funktionen kan även ignorera aviseringar eller utföra åtgärder utifrån dem, till exempel svara på telefonsamtal och styra Stör ej."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Vill du tillåta åtkomst till aviseringar för <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan läsa alla aviseringar, inklusive personliga uppgifter som namn på kontaktpersoner och texten i mottagna meddelanden. Appen kan även skjuta upp och stänga aviseringar eller använda åtgärdsknappar i aviseringar för att t.ex. svara på telefonsamtal. \n\nAppen kan också aktivera eller inaktivera Stör ej och ändra relaterade inställningar."</string>
+    <string name="notification_listener_security_warning_summary" msgid="4317764112725749020">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan läsa alla aviseringar, inklusive personliga uppgifter som namn på kontaktpersoner, foton och texten i mottagna meddelanden. Appen kan även skjuta upp och stänga aviseringar eller använda åtgärdsknappar i aviseringar för att t.ex. svara på telefonsamtal. \n\nAppen kan också aktivera eller inaktivera Stör ej och ändra relaterade inställningar."</string>
+    <string name="nls_warning_prompt" msgid="9143226910825830619">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan:"</string>
+    <string name="nls_feature_read_title" msgid="7629713268744220437">"Läsa dina aviseringar"</string>
+    <string name="nls_feature_read_summary" msgid="1064698238110273593">"Den kan läsa dina aviseringar, inklusive personliga uppgifter som kontakter, meddelanden och foton."</string>
+    <string name="nls_feature_reply_title" msgid="7925455553821362039">"Svara på meddelanden"</string>
+    <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Den kan svara på meddelanden och använda åtgärdsknappar i aviseringar, inklusive att skjuta upp eller stänga aviseringar och svara på samtal."</string>
+    <string name="nls_feature_settings_title" msgid="8208164329853194414">"Ändra inställningar"</string>
+    <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Den kan aktivera/inaktivera Stör ej och ändra relaterade inställningar."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Om du inaktiverar aviseringsåtkomst för <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan åtkomsten till Stör ej också inaktiveras."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Inaktivera"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Avbryt"</string>
@@ -4858,10 +4867,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Digital assistent"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Aktivera assistenten genom att svepa"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Svep uppåt från något av de nedre hörnen för att aktivera appen digital assistent."</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"Håll nere hemknappen för att anropa assistenten"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Håll hemknappen nedtryckt för att anropa den digitala assistentappen."</string>
     <string name="information_label" msgid="6939310810756569298">"Information"</string>
     <string name="low_label" msgid="6525629096999711220">"Låg"</string>
     <string name="high_label" msgid="357503396626018487">"Hög"</string>
@@ -4870,11 +4877,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Om känsligheten höjs kan konflikter med apprörelser längs skärmens kant uppstå."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Känslighet för tillbaka-rörelsen"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"Känslighet för navigering med rörelser"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Navigering med knappar"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"navigering med rörelser, känslighet för bakåtrörelsen, bakåtrörelse"</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"navigering, hemknappen"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Tryck snabbt två gånger för att kolla telefonen"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Tryck snabbt två gånger för att kolla surfplattan"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Tryck snabbt två gånger för att kolla enheten"</string>
@@ -5285,7 +5290,7 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Ogiltigt nätverksläge: <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignorera."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Åtkomstpunktens namn (APN)"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Inte tillgänglig vid anslutning till <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="see_more" msgid="8436037008285546409">"Inställningar"</string>
+    <string name="see_more" msgid="7499355691042812723">"Visa mer"</string>
     <string name="see_less" msgid="2642392725363552793">"Visa färre"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"Vill du aktivera <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Vill du aktivera SIM-kortet?"</string>
@@ -5448,8 +5453,12 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Lång"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Visa Wallet"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Tillåt åtkomst till Wallet från låsskärmen och snabbinställningar"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1314577678356895256">"Visa QR-skanner"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Ge åtkomst till QR-skanner från låsskärmen"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Visa enhetsstyrning"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Få åtkomst till kontroller när skärmen är låst"</string>
+    <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Visa klocka på två rader när så är möjligt"</string>
+    <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Klocka på två rader"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
@@ -5478,7 +5487,6 @@
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Av"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM-kort"</string>
-    <string name="wifi_switch_summary" msgid="3577154777754849024">"Hitta och anslut till wifi-nätverk"</string>
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"flygplan, flygplanssäker"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Samtal och sms"</string>
     <string name="calls_and_sms_category" msgid="3788238090898237767">"Wifi-samtal"</string>

@@ -61,20 +61,13 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        if (Utils.isProviderModelEnabled(getContext())) {
-            return R.xml.network_provider_internet;
-        } else {
-            return R.xml.network_and_internet;
-        }
+        return R.xml.network_provider_internet;
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        if (!Utils.isProviderModelEnabled(context)) {
-            use(MultiNetworkHeaderController.class).init(getSettingsLifecycle());
-        }
         use(AirplaneModePreferenceController.class).setFragment(this);
         getSettingsLifecycle().addObserver(use(AllInOneTetherPreferenceController.class));
     }
@@ -103,16 +96,8 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         TelephonyUtils.connectExtTelephonyService(context);
         final MobilePlanPreferenceController mobilePlanPreferenceController =
                 new MobilePlanPreferenceController(context, mobilePlanHost);
-        final WifiPrimarySwitchPreferenceController wifiPreferenceController =
-                Utils.isProviderModelEnabled(context)
-                        ? null
-                        : new WifiPrimarySwitchPreferenceController(
-                                context,
-                                metricsFeatureProvider);
         final InternetPreferenceController internetPreferenceController =
-                Utils.isProviderModelEnabled(context)
-                        ? new InternetPreferenceController(context, lifecycle)
-                        : null;
+                new InternetPreferenceController(context, lifecycle);
 
         final VpnPreferenceController vpnPreferenceController =
                 new VpnPreferenceController(context);
@@ -121,9 +106,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
         if (lifecycle != null) {
             lifecycle.addObserver(mobilePlanPreferenceController);
-            if (wifiPreferenceController != null) {
-                lifecycle.addObserver(wifiPreferenceController);
-            }
             lifecycle.addObserver(vpnPreferenceController);
             lifecycle.addObserver(privateDnsPreferenceController);
         }
@@ -135,9 +117,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         controllers.add(vpnPreferenceController);
         controllers.add(new ProxyPreferenceController(context));
         controllers.add(mobilePlanPreferenceController);
-        if (wifiPreferenceController != null) {
-            controllers.add(wifiPreferenceController);
-        }
         if (internetPreferenceController != null) {
             controllers.add(internetPreferenceController);
         }

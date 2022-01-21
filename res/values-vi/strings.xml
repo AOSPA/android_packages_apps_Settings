@@ -862,7 +862,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Máy tính bảng của bạn sẽ không được ghép nối với <xliff:g id="DEVICE_NAME">%1$s</xliff:g> nữa"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Thiết bị của bạn sẽ không được ghép nối với <xliff:g id="DEVICE_NAME">%1$s</xliff:g> nữa"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Ứng dụng <xliff:g id="APP_NAME">%1$s</xliff:g> sẽ không kết nối với <xliff:g id="DEVICE_NAME">%2$s</xliff:g> nữa"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sẽ không được ghép nối với bất kỳ thiết bị nào liên kết với tài khoản này"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Xóa thiết bị"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Ngắt kết nối ứng dụng"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"Kết nối với…"</string>
@@ -1236,7 +1235,8 @@
     <string name="wifi_calling_mode_wifi_only_summary" msgid="3155660680014892641">"Gọi qua Wi‑Fi. Nếu mất Wi‑Fi, cuộc gọi sẽ kết thúc."</string>
     <string name="wifi_calling_off_explanation" msgid="6295526820826322895">"Khi bạn bật tính năng gọi qua Wi-Fi, điện thoại có thể định tuyến cuộc gọi qua mạng Wi-Fi hoặc mạng của nhà mạng, tùy thuộc vào tùy chọn của bạn và tín hiệu nào mạnh hơn. Trước khi bật tính năng này, hãy hỏi nhà mạng của bạn về cước phí và các chi tiết khác.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
-    <string name="emergency_address_title" msgid="3490633500025717573">"Địa chỉ khẩn cấp"</string>
+    <!-- no translation found for emergency_address_title (8102786488994263815) -->
+    <skip />
     <string name="emergency_address_summary" msgid="3022628750270626473">"Dùng làm vị trí của bạn khi bạn thực hiện cuộc gọi khẩn cấp qua Wi‑Fi"</string>
     <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"Tìm hiểu thêm"</annotation>" về tính năng DNS riêng"</string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"Đang bật"</string>
@@ -2325,7 +2325,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Giữ các phím âm lượng để mở"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Nhấn 3 lần vào màn hình để mở"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Dùng cử chỉ để mở"</string>
-    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Dùng cử chỉ hỗ trợ tiếp cận mới"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Sử dụng cử chỉ hỗ trợ tiếp cận"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Để sử dụng tính năng này, hãy nhấn vào nút hỗ trợ tiếp cận <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> ở cuối màn hình.\n\nĐể chuyển đổi giữa các tính năng, hãy chạm và giữ nút hỗ trợ tiếp cận."</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="2551777208185138391">"Để sử dụng tính năng này, hãy nhấn vào nút hỗ trợ tiếp cận trên màn hình."</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Để sử dụng tính năng này, hãy nhấn và giữ cả hai phím âm lượng."</string>
@@ -2686,7 +2686,7 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Một số tính năng có thể bị hạn chế"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Mức sử dụng pin cao"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Xem các ứng dụng có mức sử dụng pin cao nhất"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Khả năng sạc tạm thời bị hạn chế"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Chức năng sạc tạm thời bị hạn chế"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Để kéo dài tuổi thọ pin. Tìm hiểu thêm."</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Tiếp tục sạc"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Trong một số điều kiện, chẳng hạn như nhiệt độ cao và thời gian sạc lâu, mức sạc có thể bị hạn chế ở <xliff:g id="PERCENT">%1$s</xliff:g> để duy trì độ bền của pin.\n\nKhi các điều kiện đó chấm dứt, điện thoại của bạn sẽ tự động sạc như bình thường."</string>
@@ -2773,7 +2773,7 @@
     <string name="power_camera" msgid="4778315081581293923">"Máy ảnh"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wi‑Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
-    <string name="power_cell" msgid="5507921058696341513">"Mạng di động ở chế độ chờ"</string>
+    <string name="power_cell" msgid="7793805106954398186">"Mạng di động"</string>
     <string name="power_phone" msgid="2768396619208561670">"Cuộc gọi thoại"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"Máy tính bảng ở chế độ rảnh"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"Điện thoại ở chế độ rảnh"</string>
@@ -3250,7 +3250,8 @@
     <string name="vpn_connect_to" msgid="216709261691085594">"Kết nối với <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"Ngắt kết nối VPN này?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"Ngắt kết nối"</string>
-    <string name="vpn_version" msgid="41856553718304367">"Phiên bản <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <!-- no translation found for vpn_version (6344167191984400976) -->
+    <skip />
     <string name="vpn_forget_long" msgid="729132269203870205">"Xóa VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"Thay thế VPN hiện có?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"Đặt VPN luôn bật?"</string>
@@ -3849,6 +3850,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Khóa màn hình, Màn hình khóa, Bỏ qua"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Khi hồ sơ công việc bị khóa"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Thông báo trên màn hình khóa"</string>
+    <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Hiện thông báo cuộc trò chuyện, mặc định và im lặng"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Hiện các cuộc trò chuyện ở chế độ mặc định và im lặng"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Ẩn các thông báo và cuộc trò chuyện ở chế độ im lặng"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Không hiện bất kỳ thông báo nào"</string>
@@ -3929,11 +3931,11 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Tất cả thông báo của <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Thông báo thích ứng"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> thông báo mỗi ngày</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> thông báo mỗi ngày</item>
       <item quantity="one">~<xliff:g id="NUMBER_0">%d</xliff:g> thông báo mỗi ngày</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> thông báo mỗi tuần</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> thông báo mỗi tuần</item>
       <item quantity="one">~<xliff:g id="NUMBER_0">%d</xliff:g> thông báo mỗi tuần</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Không bao giờ"</string>
@@ -3953,7 +3955,14 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Cho phép <xliff:g id="SERVICE">%1$s</xliff:g> truy cập thông báo?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Thông báo nâng cao đã thay thế Thông báo thích ứng trên Android trong Android 12. Tính năng này hiển thị những thao tác và câu trả lời đề xuất, đồng thời sắp xếp các thông báo của bạn. \n\nThông báo nâng cao có thể đọc mọi nội dung thông báo, bao gồm cả thông tin cá nhân như tên của người liên hệ và tin nhắn. Tính năng này cũng có thể đóng hoặc phản hồi các thông báo, chẳng hạn như trả lời cuộc gọi điện thoại, đồng thời có thể kiểm soát chế độ Không làm phiền."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Cho phép <xliff:g id="SERVICE">%1$s</xliff:g> truy cập thông báo?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> có thể đọc mọi thông báo, bao gồm thông tin cá nhân như tên của người liên hệ và nội dung của thông báo mà bạn nhận được. Ứng dụng này cũng có thể tạm ẩn hoặc đóng các thông báo hoặc thao tác với các nút trong thông báo, bao gồm cả trả lời cuộc gọi điện thoại. \n\nNgoài ra, việc này còn cho phép ứng dụng bật hoặc tắt chế độ Không làm phiền và thay đổi các chế độ cài đặt liên quan."</string>
+    <string name="notification_listener_security_warning_summary" msgid="4317764112725749020">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> có thể đọc mọi thông báo, bao gồm cả thông tin cá nhân như tên của người liên hệ, ảnh và nội dung của thông báo mà bạn nhận được. Ứng dụng này cũng có thể tạm ẩn hoặc loại bỏ các thông báo hoặc thao tác với các nút trong thông báo, bao gồm cả trả lời cuộc gọi điện thoại. \n\nNgoài ra, việc này còn cho phép ứng dụng bật hoặc tắt chế độ Không làm phiền và thay đổi các chế độ cài đặt liên quan."</string>
+    <string name="nls_warning_prompt" msgid="9143226910825830619">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> sẽ có thể:"</string>
+    <string name="nls_feature_read_title" msgid="7629713268744220437">"Đọc thông báo"</string>
+    <string name="nls_feature_read_summary" msgid="1064698238110273593">"Ứng dụng này có thể đọc các thông báo của bạn, bao gồm cả thông tin cá nhân như người liên hệ, tin nhắn và ảnh."</string>
+    <string name="nls_feature_reply_title" msgid="7925455553821362039">"Trả lời tin nhắn"</string>
+    <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Ứng dụng này có thể trả lời tin nhắn và thao tác với các nút trong thông báo, bao gồm cả tạm ẩn hoặc loại bỏ thông báo và trả lời cuộc gọi."</string>
+    <string name="nls_feature_settings_title" msgid="8208164329853194414">"Thay đổi các chế độ cài đặt"</string>
+    <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Ứng dụng này có thể bật hoặc tắt chế độ Không làm phiền và thay đổi các chế độ cài đặt liên quan."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Nếu bạn tắt quyền truy cập thông báo của <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, quyền truy cập chế độ Không làm phiền cũng có thể bị tắt."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Tắt"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Hủy"</string>
@@ -4860,10 +4869,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Trợ lý kỹ thuật số"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Vuốt để gọi trợ lý"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Vuốt lên từ góc dưới cùng để gọi ứng dụng trợ lý kỹ thuật số."</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"Giữ nút Màn hình chính để gọi trợ lý"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Nhấn và giữ nút Màn hình chính để gọi ứng dụng trợ lý kỹ thuật số."</string>
     <string name="information_label" msgid="6939310810756569298">"Thông tin"</string>
     <string name="low_label" msgid="6525629096999711220">"Thấp"</string>
     <string name="high_label" msgid="357503396626018487">"Cao"</string>
@@ -4872,11 +4879,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Độ nhạy cao hơn có thể xung đột với những cử chỉ trong ứng dụng dọc theo các cạnh màn hình."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Độ nhạy với cử chỉ quay lại"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"Độ nhạy của thao tác bằng cử chỉ"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Thao tác bằng nút"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"thao tác bằng cử chỉ, độ nhạy với cử chỉ quay lại, cử chỉ quay lại"</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"thao tác, nút màn hình chính"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Nhấn đúp để kiểm tra điện thoại"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Nhấn đúp để kiểm tra máy tính bảng"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Nhấn đúp để kiểm tra thiết bị"</string>
@@ -5287,7 +5292,7 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Chế độ mạng <xliff:g id="NETWORKMODEID">%1$d</xliff:g> không hợp lệ. Bỏ qua."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Tên điểm truy cập"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Không sử dụng được khi kết nối với <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="see_more" msgid="8436037008285546409">"Cài đặt"</string>
+    <string name="see_more" msgid="7499355691042812723">"Xem thêm"</string>
     <string name="see_less" msgid="2642392725363552793">"Ẩn bớt"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"Bật <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Bật SIM?"</string>
@@ -5450,8 +5455,12 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Dài"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Hiện ví"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Cho phép truy cập vào ví từ màn hình khóa và phần cài đặt nhanh"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1314577678356895256">"Hiện Trình quét mã QR"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Cho phép truy cập vào trình quét mã QR từ màn hình khoá"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Hiện các nút điều khiển thiết bị"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Truy cập vào các nút điều khiển khi thiết bị đang khóa"</string>
+    <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Hiện đồng hồ kép khi có"</string>
+    <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Đồng hồ kép"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
@@ -5480,7 +5489,6 @@
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Đang tắt"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM"</string>
-    <string name="wifi_switch_summary" msgid="3577154777754849024">"Tìm và kết nối với mạng Wi-Fi"</string>
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"máy bay, an toàn trên máy bay"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Cuộc gọi và tin nhắn SMS"</string>
     <string name="calls_and_sms_category" msgid="3788238090898237767">"Gọi qua Wi-Fi"</string>

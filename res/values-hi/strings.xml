@@ -860,7 +860,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"आपका टैबलेट अब <xliff:g id="DEVICE_NAME">%1$s</xliff:g> के साथ युग्मित नहीं रहेगा"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"आपका डिवाइस अब <xliff:g id="DEVICE_NAME">%1$s</xliff:g> से नहीं जुड़ा रहेगा"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"<xliff:g id="APP_NAME">%1$s</xliff:g> ऐप्लिकेशन अब आपके <xliff:g id="DEVICE_NAME">%2$s</xliff:g> डिवाइस से कनेक्ट नहीं होगा"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"इस खाते से लिंक काेई भी डिवाइस अब <xliff:g id="DEVICE_NAME">%1$s</xliff:g> के साथ जुड़ा नहीं रहेगा"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"डिवाइस भूलें"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"ऐप्लिकेशन डिसकनेक्ट करें"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"इससे कनेक्‍ट करें…"</string>
@@ -1234,7 +1233,8 @@
     <string name="wifi_calling_mode_wifi_only_summary" msgid="3155660680014892641">"वाई-फ़ाई के ज़रिए कॉल करें. वाई-फ़ाई रुक जाने पर कॉल खत्म हो जाएगी."</string>
     <string name="wifi_calling_off_explanation" msgid="6295526820826322895">"वाई-फ़ाई कॉलिंग चालू होने पर, आपका फ़ोन वाई-फ़ाई या मोबाइल और इंटरनेट सेवा देने वाली कंपनी के नेटवर्क से कॉल कर सकता है. यह आपकी सेटिंग और इस बात पर निर्भर करेगा कि इनमें से किस सिग्नल का प्रदर्शन बेहतर है. इस सुविधा को चालू करने से पहले, शुल्क और दूसरी जानकारी पाने के लिए मोबाइल और इंटरनेट सेवा देने वाली कंपनी से बात करें. <xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
-    <string name="emergency_address_title" msgid="3490633500025717573">"आपातकालीन पता"</string>
+    <!-- no translation found for emergency_address_title (8102786488994263815) -->
+    <skip />
     <string name="emergency_address_summary" msgid="3022628750270626473">"जब आप वाई-फ़ाई पर आपातकालीन कॉल करते हैं, तब आपकी मौजूदा जगह को आपके पते के तौर पर इस्तेमाल किया जाता है"</string>
     <string name="private_dns_help_message" msgid="851221502063782306">"निजी डीएनएस की सुविधाओं के बारे में "<annotation id="url">"ज़्यादा जानें"</annotation></string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"चालू है"</string>
@@ -2323,7 +2323,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"खोलने के लिए, आवाज़ कम-ज़्यादा करने वाले दोनों बटन दबाकर रखें"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"खोलने के लिए स्क्रीन पर तीन बार टैप करें"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"इसे खोलने के लिए हाथ के जेस्चर का इस्तेमाल करें"</string>
-    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"सुलभता वाले नए जेस्चर इस्तेमाल करें"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"सुलभता से जुड़े हाथ के जेस्चर का इस्तेमाल करें"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"इस सुविधा का इस्तेमाल करने के लिए, स्क्रीन पर सबसे नीचे मौजूद सुलभता बटन <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> पर टैप करें.\n\nएक सुविधा से दूसरी सुविधा पर जाने के लिए, सुलभता बटन को दबाकर रखें."</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="2551777208185138391">"इस सुविधा का इस्तेमाल करने के लिए, स्क्रीन पर मौजूद सुलभता बटन पर टैप करें."</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"इस सुविधा का इस्तेमाल करने के लिए, आवाज़ कम-ज़्यादा करने वाले दोनों बटन दबाकर रखें."</string>
@@ -2684,7 +2684,7 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"हो सकता है कि कुछ सुविधाओं का पूरा इस्तेमाल न किया जा सके"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"सबसे ज़्यादा बैटरी खर्च"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"सबसे ज़्यादा बैटरी खर्च करने वाले ऐप्लिकेशन देखें"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"चार्जिंग कुछ समय के लिए सीमित की गई"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"कुछ समय के लिए चार्जिंग रोक दी गई"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"बैटरी कम खर्च करने के लिए. ज़्यादा जानें."</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"चार्जिंग फिर से शुरू करें"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"लंबे समय तक चार्ज करने और ज़्यादा गर्म होने जैसी कुछ स्थितियों में, बैटरी की परफ़ॉर्मेंस को बेहतर बनाए रखने के लिए, हो सकता है कि वह <xliff:g id="PERCENT">%1$s</xliff:g> तक ही चार्ज हो पाए.\n\nइन स्थितियों के बदल जाने पर, आपका फ़ोन अपने-आप सामान्य रूप से चार्ज होने लगेगा."</string>
@@ -2771,7 +2771,7 @@
     <string name="power_camera" msgid="4778315081581293923">"कैमरा"</string>
     <string name="power_wifi" msgid="4614007837288250325">"वाई-फ़ाई"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"ब्लूटूथ"</string>
-    <string name="power_cell" msgid="5507921058696341513">"मोबाइल नेटवर्क स्टैंडबाय"</string>
+    <string name="power_cell" msgid="7793805106954398186">"मोबाइल नेटवर्क"</string>
     <string name="power_phone" msgid="2768396619208561670">"ध्‍वनि कॉल"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"टैबलेट इस्तेमाल नहीं किया जा रहा"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"फ़ोन इस्तेमाल नहीं किया जा रहा"</string>
@@ -3248,7 +3248,8 @@
     <string name="vpn_connect_to" msgid="216709261691085594">" <xliff:g id="PROFILE">%s</xliff:g> से कनेक्ट करें"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"इस VPN को डिसकनेक्ट करना चाहते हैं?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"डिसकनेक्ट करें"</string>
-    <string name="vpn_version" msgid="41856553718304367">"वर्शन <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <!-- no translation found for vpn_version (6344167191984400976) -->
+    <skip />
     <string name="vpn_forget_long" msgid="729132269203870205">"वीपीएन भूल जाएं"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"मौजूदा VPN को बदलें?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"हमेशा-चालू VPN सेट करें?"</string>
@@ -3847,6 +3848,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"लॉक स्क्रीन, लॉकस्क्रीन, छोड़ें, बायपास"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"वर्क प्रोफ़ाइल लॉक होने पर"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"लॉक स्क्रीन पर दिखने वाली सूचनाएं"</string>
+    <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"बातचीत, डिफ़ॉल्ट, और साइलेंट मोड पर सेट की गई सूचनाएं दिखाएं"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"बातचीत, डिफ़ॉल्ट, और साइलेंट मोड पर सेट की गई सूचनाएं दिखाएं"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"साइलेंट मोड पर सेट की गई सूचनाएं और बातचीत छिपाएं"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"कोई भी सूचना न दिखाएं"</string>
@@ -3927,12 +3929,12 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g> की सभी सूचनाएं"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"ज़रूरत के हिसाब से सूचनाएं"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="one">रोज़~<xliff:g id="NUMBER_1">%d</xliff:g> सूचना</item>
-      <item quantity="other">रोज़ ~<xliff:g id="NUMBER_1">%d</xliff:g> सूचनाएं</item>
+      <item quantity="one">रोज़~<xliff:g id="NUMBER_1">%,d</xliff:g> सूचना</item>
+      <item quantity="other">रोज़ ~<xliff:g id="NUMBER_1">%,d</xliff:g> सूचनाएं</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="one">हर हफ़्ते ~<xliff:g id="NUMBER_1">%d</xliff:g> सूचना</item>
-      <item quantity="other">हर हफ़्ते ~<xliff:g id="NUMBER_1">%d</xliff:g> सूचनाएं</item>
+      <item quantity="one">हर हफ़्ते ~<xliff:g id="NUMBER_1">%,d</xliff:g> सूचना</item>
+      <item quantity="other">हर हफ़्ते ~<xliff:g id="NUMBER_1">%,d</xliff:g> सूचनाएं</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"कभी नहीं"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"डिवाइस और ऐप्लिकेशन की सूचनाएं"</string>
@@ -3951,7 +3953,14 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"क्या आप <xliff:g id="SERVICE">%1$s</xliff:g> के लिए सूचना ऐक्सेस करने की अनुमति देना चाहते हैं?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Android 12 में, ज़रूरत के हिसाब से सूचनाएं पाने की सुविधा की जगह अब \'बेहतर सूचनाएं\' सुविधा काम करेगी. यह सुविधा आपको कार्रवाइयों और जवाबों के सुझाव दिखाती है. साथ ही, आपके डिवाइस पर मिलने वाली सूचनाओं को व्यवस्थित करती है. \n\n\'बेहतर सूचनाएं\' सुविधा, डिवाइस पर मिलने वाली सभी सूचनाओं का कॉन्टेंट ऐक्सेस कर सकती है. इसमें आपकी निजी जानकारी, जैसे कि संपर्कों के नाम और मैसेज शामिल हैं. यह सुविधा, सूचनाओं को खारिज कर सकती है या उनका जवाब भी दे सकती है, जैसे कि फ़ोन कॉल का जवाब देना और \'परेशान न करें\' को कंट्रोल करना."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"क्या आप <xliff:g id="SERVICE">%1$s</xliff:g> के लिए सूचना को ऐक्सेस करने की अनुमति देना चाहते हैं?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, आपकी हर सूचना को पढ़ पाएगा. इसमें आपकी निजी जानकारी, जैसे कि संपर्कों के नाम और आपको मिलने वाले मैसेज शामिल हैं. यह ऐप्लिकेशन, सूचनाओं में मौजूद बटन से कार्रवाई कर सकता है या सूचनाओं को स्नूज़ (थोड़ी देर के लिए बंद करना) या खारिज भी कर सकता है. इसमें, फ़ोन कॉल का जवाब देना भी शामिल है. \n\nइससे यह ऐप्लिकेशन, \'परेशान न करें\' मोड को चालू या बंद कर पाएगा और इससे जुड़ी सेटिंग में बदलाव कर पाएगा."</string>
+    <string name="notification_listener_security_warning_summary" msgid="4317764112725749020">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, आपकी सभी सूचनाओं को पढ़ पाएगा. इसमें आपकी निजी जानकारी, जैसे कि संपर्कों के नाम, फ़ोटो, और आपको मिलने वाले मैसेज शामिल हैं. यह ऐप्लिकेशन, सूचनाओं में मौजूद बटन से कार्रवाई कर सकता है या सूचनाओं को स्नूज़ (थोड़ी देर के लिए बंद करना) या खारिज भी कर सकता है. इसमें, फ़ोन कॉल का जवाब देना भी शामिल है. \n\nइससे यह ऐप्लिकेशन \'परेशान न करें\' को चालू या बंद कर पाएगा या इससे जुड़ी सेटिंग में बदलाव कर पाएगा."</string>
+    <string name="nls_warning_prompt" msgid="9143226910825830619">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ये काम कर पाएगा:"</string>
+    <string name="nls_feature_read_title" msgid="7629713268744220437">"आपकी सूचनाओं को पढ़ सकती है"</string>
+    <string name="nls_feature_read_summary" msgid="1064698238110273593">"यह सुविधा आपकी सूचनाओं को पढ़ सकती है. इनमें आपकी निजी जानकारी, जैसे कि संपर्कों के नाम, आपको मिलने वाले मैसेज, और फ़ोटो शामिल हैं."</string>
+    <string name="nls_feature_reply_title" msgid="7925455553821362039">"मैसेज का जवाब देना"</string>
+    <string name="nls_feature_reply_summary" msgid="4492543411395565556">"यह सुविधा मैसेज के जवाब दे सकती है और सूचनाओं में मौजूद बटन से कार्रवाई कर सकती है. जैसे, सूचनाओं को स्नूज़ (थोड़ी देर के लिए बंद करना) या उन्हें खारिज करना और फ़ोन कॉल का जवाब देना."</string>
+    <string name="nls_feature_settings_title" msgid="8208164329853194414">"सेटिंग में बदलाव करें"</string>
+    <string name="nls_feature_settings_summary" msgid="3770028705648985689">"यह सुविधा \'परेशान न करें\' को चालू या बंद कर सकती है और इससे जुड़ी सेटिंग में बदलाव कर सकती है."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"अगर आप <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> के लिए सूचना का ऐक्सेस बंद करते हैं, तो \'परेशान न करें\' सेवा का ऐक्सेस भी बंद हो सकता है."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"बंद करें"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"रद्द करें"</string>
@@ -4858,10 +4867,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"डिजिटल असिस्टेंट"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"असिस्टेंट को चालू करने के लिए स्वाइप करें"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"डिजिटल असिस्टेंट ऐप्लिकेशन चालू करने के लिए, स्क्रीन पर नीचे वाले कोने से ऊपर की ओर स्वाइप करें."</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"असिस्टेंट को चालू करने के लिए, होम बटन को दबाकर रखें"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"डिजिटल असिस्टेंट ऐप्लिकेशन चालू करने के लिए, होम बटन को दबाकर रखें."</string>
     <string name="information_label" msgid="6939310810756569298">"जानकारी"</string>
     <string name="low_label" msgid="6525629096999711220">"कम"</string>
     <string name="high_label" msgid="357503396626018487">"ज़्यादा"</string>
@@ -4870,11 +4877,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"सेंसिटिविटी बढ़ाने से, ऐप्लिकेशन के लिए इस्तेमाल किए जाने वाले, हाथ के कुछ ऐसे जेस्चर (हाव-भाव) पर असर पड़ सकता है जो स्क्रीन के किनारों पर होते हैं."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"बैक सेंसिटिविटी"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"जेस्चर वाले नेविगेशन से जुड़ी संवेदनशीलता"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"दो और तीन बटन वाले नेविगेशन की सभी सेटिंग"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"हाथ के जेस्चर (स्पर्श) वाला नेविगेशन, बैक सेंसिटिविटी, पीछे जाने का जेस्चर"</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"नेविगेशन, होम बटन"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"फ़ोन देखने के लिए दो बार टैप करें"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"टैबलेट देखने के लिए दो बार छूएं"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"डिवाइस देखने के लिए दो बार छूएं"</string>
@@ -5285,7 +5290,7 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"गलत नेटवर्क मोड <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. अनदेखा करें."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"ऐक्सेस पॉइंट नेम"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> से कनेक्ट होने पर उपलब्ध नहीं है"</string>
-    <string name="see_more" msgid="8436037008285546409">"सेटिंग"</string>
+    <string name="see_more" msgid="7499355691042812723">"ज़्यादा देखें"</string>
     <string name="see_less" msgid="2642392725363552793">"कम देखें"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"क्या आप <xliff:g id="CARRIER_NAME">%1$s</xliff:g> चालू करना चाहते हैं?"</string>
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"क्या आप सिम चालू करना चाहते हैं?"</string>
@@ -5448,8 +5453,12 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"ज़्यादा समय के लिए"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"वॉलेट दिखाएं"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"लॉक स्क्रीन और फटाफट सेटिंग से वॉलेट ऐक्सेस करने की अनुमति दें"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1314577678356895256">"क्यूआर कोड स्कैनर दिखाएं"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"क्यूआर कोड स्कैनर को लॉक स्क्रीन से ऐक्सेस करने की अनुमति दें"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"डिवाइस कंट्रोल दिखाएं"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"स्क्रीन लॉक होने पर कंट्रोल को ऐक्सेस करें"</string>
+    <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"उपलब्ध होने पर, दो समय क्षेत्र वाली घड़ी दिखाएं"</string>
+    <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"दो समय क्षेत्र वाली घड़ी"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
@@ -5478,7 +5487,6 @@
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"बंद है"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"इंटरनेट"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"सिम"</string>
-    <string name="wifi_switch_summary" msgid="3577154777754849024">"वाई-फ़ाई नेटवर्क ढूंढकर, उनसे कनेक्ट करता है"</string>
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"हवाई जहाज़, हवाई जहाज़ सुरक्षित नेटवर्क"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"कॉल और एसएमएस"</string>
     <string name="calls_and_sms_category" msgid="3788238090898237767">"वाई-फ़ाई कॉलिंग"</string>

@@ -40,7 +40,8 @@ import androidx.annotation.VisibleForTesting;
 import androidx.window.embedding.SplitController;
 
 import com.android.settings.Settings.CreateShortcutActivity;
-import com.android.settings.homepage.SettingsHomepageActivity;
+import com.android.settings.homepage.DeepLinkHomepageActivity;
+import com.android.settings.search.SearchStateReceiver;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
@@ -67,7 +68,7 @@ public class SettingsInitialize extends BroadcastReceiver {
         managedProfileSetup(context, pm, broadcast, userInfo);
         webviewSettingSetup(context, pm, userInfo);
         ThreadUtils.postOnBackgroundThread(() -> refreshExistingShortcuts(context));
-        enableTwoPaneDeepLinkActivityIfNecessary(pm, broadcast);
+        enableTwoPaneDeepLinkActivityIfNecessary(pm, context);
     }
 
     private void managedProfileSetup(Context context, final PackageManager pm, Intent broadcast,
@@ -148,12 +149,16 @@ public class SettingsInitialize extends BroadcastReceiver {
         shortcutManager.updateShortcuts(updates);
     }
 
-    private void enableTwoPaneDeepLinkActivityIfNecessary(PackageManager pm, Intent intent) {
-        final ComponentName deepLinkHome = new ComponentName(Utils.SETTINGS_PACKAGE_NAME,
-                SettingsHomepageActivity.ALIAS_DEEP_LINK);
+    private void enableTwoPaneDeepLinkActivityIfNecessary(PackageManager pm, Context context) {
+        final ComponentName deepLinkHome = new ComponentName(context,
+                DeepLinkHomepageActivity.class);
+        final ComponentName searchStateReceiver = new ComponentName(context,
+                SearchStateReceiver.class);
         final int enableState = SplitController.getInstance().isSplitSupported()
                 ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
                 : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
         pm.setComponentEnabledSetting(deepLinkHome, enableState, PackageManager.DONT_KILL_APP);
+        pm.setComponentEnabledSetting(searchStateReceiver, enableState,
+                PackageManager.DONT_KILL_APP);
     }
 }

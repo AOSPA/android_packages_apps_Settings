@@ -40,7 +40,6 @@ import java.util.List;
 public class NetworkProviderCallsSmsFragmentTest {
 
     private Context mContext;
-    private NetworkProviderCallsSmsFragment mNetworkProviderCallsSmsFragment;
     private List<String> mPreferenceKeyList;
 
     @Before
@@ -52,15 +51,12 @@ public class NetworkProviderCallsSmsFragmentTest {
         if (Looper.myLooper() == null) {
             Looper.prepare();
         }
-
-        mNetworkProviderCallsSmsFragment = new NetworkProviderCallsSmsFragment();
     }
 
     @Ignore
     @Test
     @UiThreadTest
-    public void isPageSearchEnabled_providerModelEnable_shouldIncludeFragmentXml() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL, true);
+    public void isPageSearchEnabled_shouldIncludeFragmentXml() {
         mPreferenceKeyList =
                 NetworkProviderCallsSmsFragment.SEARCH_INDEX_DATA_PROVIDER
                         .getNonIndexableKeys(mContext);
@@ -68,19 +64,5 @@ public class NetworkProviderCallsSmsFragmentTest {
                 NetworkProviderCallsSmsFragment.KEY_PREFERENCE_CALLS);
         assertThat(mPreferenceKeyList).doesNotContain(
                 NetworkProviderCallsSmsFragment.KEY_PREFERENCE_SMS);
-    }
-
-    @Ignore
-    @Test
-    @UiThreadTest
-    public void isPageSearchEnabled_providerModelDisable_shouldNotIncludeFragmentXml() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL, false);
-        mPreferenceKeyList =
-                NetworkProviderCallsSmsFragment.SEARCH_INDEX_DATA_PROVIDER
-                        .getNonIndexableKeys(mContext);
-        assertThat(mPreferenceKeyList).contains(NetworkProviderCallsSmsFragment
-                .KEY_PREFERENCE_CALLS);
-        assertThat(mPreferenceKeyList).contains(NetworkProviderCallsSmsFragment
-                .KEY_PREFERENCE_SMS);
     }
 }
