@@ -20,6 +20,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
@@ -31,6 +32,7 @@ import androidx.preference.PreferenceGroupAdapter;
 import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.homepage.SettingsHomepageActivity;
@@ -45,39 +47,38 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
 
     static final long DELAY_HIGHLIGHT_DURATION_MILLIS = 100L;
 
-    @VisibleForTesting
-    final int mHighlightColor;
-    final int mTitleColorNormal;
-    final int mTitleColorHighlight;
-    final int mSummaryColorNormal;
-    final int mSummaryColorHighlight;
-    final int mIconColorNormal;
-    final int mIconColorHighlight;
+    private final int mTitleColorNormal;
+    private final int mTitleColorHighlight;
+    private final int mSummaryColorNormal;
+    private final int mSummaryColorHighlight;
+    private final int mIconColorNormal;
+    private final int mIconColorHighlight;
 
     private final Context mContext;
     private final SettingsHomepageActivity mHomepageActivity;
     private final RecyclerView mRecyclerView;
     private final int mNormalBackgroundRes;
+    private final int mHighlightBackgroundRes;
     private String mHighlightKey;
-    private String mPreviousHighlightKey;
     private int mHighlightPosition = RecyclerView.NO_POSITION;
     private int mScrollPosition = RecyclerView.NO_POSITION;
     private boolean mHighlightNeeded;
     private boolean mScrolled;
+    private SparseArray<PreferenceViewHolder> mViewHolders;
 
     public HighlightableTopLevelPreferenceAdapter(SettingsHomepageActivity homepageActivity,
             PreferenceGroup preferenceGroup, RecyclerView recyclerView, String key) {
         super(preferenceGroup);
         mRecyclerView = recyclerView;
         mHighlightKey = key;
+        mViewHolders = new SparseArray<>();
         mContext = preferenceGroup.getContext();
         mHomepageActivity = homepageActivity;
         final TypedValue outValue = new TypedValue();
         mContext.getTheme().resolveAttribute(android.R.attr.selectableItemBackground,
                 outValue, true /* resolveRefs */);
         mNormalBackgroundRes = outValue.resourceId;
-        mHighlightColor = Utils.getColorAttrDefaultColor(mContext,
-                com.android.internal.R.attr.colorAccentSecondaryVariant);
+        mHighlightBackgroundRes = R.drawable.homepage_highlighted_item_background;
         mTitleColorNormal = Utils.getColorAttrDefaultColor(mContext,
                 android.R.attr.textColorPrimary);
         mTitleColorHighlight = Utils.getColorAttrDefaultColor(mContext,
@@ -93,6 +94,7 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
+        mViewHolders.put(position, holder);
         updateBackground(holder, position);
     }
 
@@ -121,9 +123,9 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
             return;
         }
 
+        final int previousPosition = mHighlightPosition;
         if (TextUtils.isEmpty(mHighlightKey)) {
             // De-highlight previous preference.
-            final int previousPosition = mHighlightPosition;
             mHighlightPosition = RecyclerView.NO_POSITION;
             mScrolled = true;
             if (previousPosition >= 0) {
@@ -146,10 +148,14 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
 
         // Turn on/off highlight when screen split mode is changed.
         if (highlightNeeded != mHighlightNeeded) {
-            Log.d(TAG, "Highlight change needed: " + highlightNeeded);
+            Log.d(TAG, "Highlight needed change: " + highlightNeeded);
             mHighlightNeeded = highlightNeeded;
             mHighlightPosition = position;
             notifyItemChanged(position);
+            if (!highlightNeeded) {
+                // De-highlight to prevent a flicker
+                removeHighlightAt(previousPosition);
+            }
             return;
         }
 
@@ -157,7 +163,6 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
             return;
         }
 
-        final int previousPosition = mHighlightPosition;
         mHighlightPosition = position;
         Log.d(TAG, "Request highlight position " + position);
         Log.d(TAG, "Is highlight needed: " + highlightNeeded);
@@ -179,17 +184,8 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
      * preference is clicked.
      */
     public void highlightPreference(String key, boolean scrollNeeded) {
-        mPreviousHighlightKey = mHighlightKey;
         mHighlightKey = key;
         mScrolled = !scrollNeeded;
-        requestHighlight();
-    }
-
-    /**
-     * A function that restores the previous highlighted setting.
-     */
-    public void restorePreviousHighlight() {
-        mHighlightKey = mPreviousHighlightKey;
         requestHighlight();
     }
 
@@ -203,7 +199,7 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
             return;
         }
 
-        if (mHomepageActivity.registerHomepageLoadedListenerIfNeeded(this)) {
+        if (mHomepageActivity.addHomepageLoadedListener(this)) {
             return;
         }
 
@@ -225,9 +221,20 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
         }
     }
 
+    private void removeHighlightAt(int position) {
+        if (position >= 0) {
+            // De-highlight the existing preference view holder at an early stage
+            final PreferenceViewHolder holder = mViewHolders.get(position);
+            if (holder != null) {
+                removeHighlightBackground(holder);
+            }
+            notifyItemChanged(position);
+        }
+    }
+
     private void addHighlightBackground(PreferenceViewHolder holder) {
         final View v = holder.itemView;
-        v.setBackgroundColor(mHighlightColor);
+        v.setBackgroundResource(mHighlightBackgroundRes);
         ((TextView) v.findViewById(android.R.id.title)).setTextColor(mTitleColorHighlight);
         ((TextView) v.findViewById(android.R.id.summary)).setTextColor(mSummaryColorHighlight);
         final Drawable drawable = ((ImageView) v.findViewById(android.R.id.icon)).getDrawable();

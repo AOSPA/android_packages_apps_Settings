@@ -860,7 +860,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Ձեր պլանշետը <xliff:g id="DEVICE_NAME">%1$s</xliff:g> սարքի հետ այլևս զուգակցված չի լինի"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Ձեր սարքը <xliff:g id="DEVICE_NAME">%1$s</xliff:g> սարքի հետ այլևս զուգակցված չի լինի"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"<xliff:g id="APP_NAME">%1$s</xliff:g> հավելվածն այլևս չի միանա <xliff:g id="DEVICE_NAME">%2$s</xliff:g> սարքին"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"Այս հաշվին կապված բոլոր սարքերը կանջատվեն «<xliff:g id="DEVICE_NAME">%1$s</xliff:g>» սարքից"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Մոռանալ սարքը"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Անջատել"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"Միացում…"</string>
@@ -1234,7 +1233,8 @@
     <string name="wifi_calling_mode_wifi_only_summary" msgid="3155660680014892641">"Զանգ Wi-Fi-ի միջոցով։ Եթե Wi‑Fi կապն ընդհատվի, զանգը կավարտվի։"</string>
     <string name="wifi_calling_off_explanation" msgid="6295526820826322895">"Երբ «Զանգեր Wi-Fi-ով» գործառույթը միացված է, հեռախոսը կարող է ուղարկել զանգերը Wi-Fi ցանցերի կամ ձեր օպերատորի ցանցի միջոցով՝ կախված ձեր նախընտրություններից և ազդանշանի ուժգնությունից: Մինչ այս գործառույթը միացնելը՝ տեղեկացեք վճարների և այլ մանրամասների մասին ձեր օպերատորից:<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
-    <string name="emergency_address_title" msgid="3490633500025717573">"Արտակարգ իրավիճակների հասցե"</string>
+    <!-- no translation found for emergency_address_title (8102786488994263815) -->
+    <skip />
     <string name="emergency_address_summary" msgid="3022628750270626473">"Օգտագործվում է որպես ձեր հասցեն, երբ Wi‑Fi-ի միջոցով շտապ կանչ եք կատարում"</string>
     <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"Մանրամասն"</annotation>" մասնավոր DNS սերվերի մասին"</string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"Միացված է"</string>
@@ -2323,7 +2323,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Բացելու համար սեղմած պահեք ձայնի կոճակները"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Բացելու համար երեք անգամ հպեք էկրանին"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Բացեք ձեռքի շարժումով"</string>
-    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Օգտագործեք հատուկ գործառույթների նոր ժեստը"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Հատուկ գործառույթների ժեստի օգտագործում"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Այս գործառույթն օգտագործելու համար էկրանի ներքևում հպեք «Հատուկ գործառույթներ» <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> կոճակին։\n\nՄի գործառույթից մյուսին անցնելու համար հպեք «Հատուկ գործառույթներ» կոճակին և պահեք։"</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="2551777208185138391">"Այս գործառույթն օգտագործելու համար հպեք ձեր էկրանի «Հատուկ գործառույթներ» կոճակին։"</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Այս գործառույթն օգտագործելու համար սեղմեք և պահեք ձայնի ուժգնության երկու կոճակները։"</string>
@@ -2771,7 +2771,7 @@
     <string name="power_camera" msgid="4778315081581293923">"Տեսախցիկ"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wi‑Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
-    <string name="power_cell" msgid="5507921058696341513">"Բջջային ցանցի սպասման կարգավիճակ"</string>
+    <string name="power_cell" msgid="7793805106954398186">"Բջջային ցանց"</string>
     <string name="power_phone" msgid="2768396619208561670">"Ձայնային զանգեր"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"Սպասման ռեժիմ"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"Սպասման ռեժիմ"</string>
@@ -3248,7 +3248,8 @@
     <string name="vpn_connect_to" msgid="216709261691085594">"Միանալ <xliff:g id="PROFILE">%s</xliff:g>-ին"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"Անջատե՞լ այս VPN-ը:"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"Անջատել"</string>
-    <string name="vpn_version" msgid="41856553718304367">"Տարբերակ <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <!-- no translation found for vpn_version (6344167191984400976) -->
+    <skip />
     <string name="vpn_forget_long" msgid="729132269203870205">"Մոռանալ VPN-ը"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"Փոխարինե՞լ ընթացիկ VPN-ը:"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"Սահմանե՞լ որպես «միշտ միացված» VPN:"</string>
@@ -3847,6 +3848,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Էկրանի կողպում, կողպէկրան, բաց թողնել, շրջանցել"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Երբ պրոֆիլն արգելափակված է"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Ծանուցումներ կողպէկրանին"</string>
+    <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Ցուցադրել զրույցները, կանխադրված և անձայն"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Ցուցադրել զրույցները, կանխադրված և անձայն"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Թաքցնել անձայն զրույցներն ու ծանուցումները"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Ոչ մի ծանուցում չցուցադրել"</string>
@@ -3951,7 +3953,14 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Հասանելի դարձնե՞լ ծանուցումները <xliff:g id="SERVICE">%1$s</xliff:g> հավելվածին"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Android 12-ում ընդլայնված ծանուցումները փոխարինում են Android-ի հարմարվող ծանուցումներին։ Այս գործառույթը դասավորում է ձեր բոլոր ծանուցումները և առաջարկում գործողություններ և պատասխաններ։ \n\nԸնդլայնված ծանուցումներին հասանելի է բոլոր ծանուցումների պարունակությունը, ներառյալ անձնական տվյալները, օրինակ՝ կոնտակտների անուններն ու հաղորդագրությունները։ Այս գործառույթը կարող է նաև փակել ծանուցումները կամ սեղմել դրանցում առկա կոճակները, այդ թվում՝ պատասխանել հեռախոսազանգերի և կառավարել «Չանհանգստացնել» ռեժիմը։"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Թույլատրե՞լ <xliff:g id="SERVICE">%1$s</xliff:g>-ին օգտագործել ծանուցումները"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> հավելվածը կկարողանա կարդալ բոլոր ծանուցումները, ներառյալ անձնական տվյալները, օրինակ՝ կոնտակտների անուններն ու հաղորդագրությունները: Այն նաև կկարողանա հետաձգել և փակել ծանուցումները կամ ակտիվացնել դրանցում առկա կոճակները, այդ թվում՝ պատասխանել հեռախոսազանգերի: \n\nԲացի այդ, հավելվածը կարող է միացնել կամ անջատել «Չանհանգստացնել» ռեժիմը և փոփոխել առնչվող կարգավորումները:"</string>
+    <string name="notification_listener_security_warning_summary" msgid="4317764112725749020">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> հավելվածը կկարողանա կարդալ բոլոր ծանուցումները, ներառյալ անձնական տվյալները, օրինակ՝ կոնտակտների անունները, հաղորդագրություններն ու լուսանկարները։ Այն նաև կկարողանա հետաձգել և փակել ծանուցումները կամ ակտիվացնել դրանցում առկա կոճակները, այդ թվում՝ պատասխանել հեռախոսազանգերի։ \n\nԲացի այդ, հավելվածը կարող է միացնել կամ անջատել «Չանհանգստացնել» ռեժիմը և փոփոխել առնչվող կարգավորումները։"</string>
+    <string name="nls_warning_prompt" msgid="9143226910825830619">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> հավելվածը կկարողանա՝"</string>
+    <string name="nls_feature_read_title" msgid="7629713268744220437">"Կարդալ ձեր ծանուցումները"</string>
+    <string name="nls_feature_read_summary" msgid="1064698238110273593">"Այն կարող է կարդալ ձեր ծանուցումները, ներառյալ անձնական տվյալները, օրինակ՝ կոնտակտների անունները, հաղորդագրություններն ու լուսանկարները։"</string>
+    <string name="nls_feature_reply_title" msgid="7925455553821362039">"Պատասխանել հաղորդագրություններին"</string>
+    <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Այն կարող է պատասխանել հաղորդագրություններին և ակտիվացնել ծանուցումներում առկա կոճակները, այդ թվում՝ հետաձգել կամ փակել ծանուցումները և պատասխանել հեռախոսազանգերին։"</string>
+    <string name="nls_feature_settings_title" msgid="8208164329853194414">"Փոխել կարգավորումները"</string>
+    <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Այն կարող է միացնել կամ անջատել «Չանհանգստացնել» ռեժիմը և փոփոխել առնչվող կարգավորումները։"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Եթե անջատեք ծանուցումները <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> օգտատիրոջ համար, «Չանհանգստացնել» գործառույթը նույնպես կարող է անջատվել:"</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Անջատել"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Չեղարկել"</string>
@@ -4858,10 +4867,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Թվային օգնական"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Մատը սահեցնել՝ թվային օգնականը գործարկելու համար"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Թվային օգնականը գործարկելու համար մատը ներքևի անկյունից սահեցրեք վերև։"</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"Սեղմած պահեք գլխավոր էկրանի կոճակը՝ օգնականին կանչելու համար"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Սեղմեք և պահեք գլխավոր էկրանի կոճակը՝ թվային օգնական հավելվածը կանչելու համար։"</string>
     <string name="information_label" msgid="6939310810756569298">"Տեղեկություններ"</string>
     <string name="low_label" msgid="6525629096999711220">"Ցածր"</string>
     <string name="high_label" msgid="357503396626018487">"Բարձր"</string>
@@ -4870,11 +4877,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Բարձր զգայունությունը կարող է խանգարել ժեստերի աշխատանքին էկրանի եզրերին:"</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Էկրանի եզրերի զգայունությունը"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"Ժեստերով նավիգացիայի զգայունություն"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Կոճակների միջոցով նավիգացիա"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"ժեստերով նավիգացիա, հետ գնալու ժեստի զգայունություն, հետ գնալու ժեստ"</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"նավիգացիա, գլխավոր էկրանի կոճակ"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Կրկնակի հպել՝ հեռախոսը ստուգելու համար"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Կրկնակի հպեք՝ պլանշետը ստուգելու համար"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Կրկնակի հպեք՝ սարքը ստուգելու համար"</string>
@@ -5285,7 +5290,7 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Ցանցի անվավեր ռեժիմ՝ <xliff:g id="NETWORKMODEID">%1$d</xliff:g>։ Փակել։"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Մուտքի կետերի անունները"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Հասանելի չէ <xliff:g id="CARRIER">%1$s</xliff:g>-ին միանալու դեպքում"</string>
-    <string name="see_more" msgid="8436037008285546409">"Կարգավորումներ"</string>
+    <string name="see_more" msgid="7499355691042812723">"Տեսնել ավելին"</string>
     <string name="see_less" msgid="2642392725363552793">"Տեսնել ավելի քիչ"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"Միացնե՞լ <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-ը"</string>
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Միացնե՞լ SIM քարտը"</string>
@@ -5448,8 +5453,12 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Երկար"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Ցուցադրել դրամապանակը"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Հասանելի դարձնել դրամապանակը կողպէկրանին և արագ կարգավորումներում"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1314577678356895256">"Ցույց տալ QR կոդերի սկաները"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Հասանելի դարձնել QR կոդերի սկաները կողպէկրանին"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Ցուցադրել սարքերի կառավարման տարրերը"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Թույլատրեք կառավարման տարրերը կողպէկրանին"</string>
+    <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Առկայության դեպքում ցույց տալ երկտող ժամացույցը"</string>
+    <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Երկտող ժամացույց"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
@@ -5478,7 +5487,6 @@
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Անջատված է"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Ինտերնետ"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM քարտեր"</string>
-    <string name="wifi_switch_summary" msgid="3577154777754849024">"Գտնել և միանալ Wi-Fi ցանցերի"</string>
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"ինքնաթիռ, ինքնաթիռում անվտանգ"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Զանգեր և SMS"</string>
     <string name="calls_and_sms_category" msgid="3788238090898237767">"Զանգեր Wi-Fi-ով"</string>

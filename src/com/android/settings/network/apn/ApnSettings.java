@@ -361,6 +361,8 @@ public class ApnSettings extends RestrictedSettingsFragment
         final StringBuilder where =
                 new StringBuilder("NOT (type='ia' AND (apn=\"\" OR apn IS NULL)) AND "
                 + "user_visible!=0");
+        // Remove Emergency type, users should not mess with that
+        where.append(" AND NOT (type='emergency')");
 
         int phoneId = SubscriptionManager.getPhoneId(subId);
         Context appContext = getActivity().getApplicationContext();

@@ -122,6 +122,10 @@ public class NetworkSelectSettingsTest {
 
         public TargetClass(NetworkSelectSettingsTest env) {
             mTestEnv = env;
+
+            Bundle bundle = new Bundle();
+            bundle.putInt(Settings.EXTRA_SUB_ID, SUB_ID);
+            setArguments(bundle);
         }
 
         @Override
@@ -179,11 +183,6 @@ public class NetworkSelectSettingsTest {
         @Override
         protected boolean enableAggregation(Context context) {
             return mTestEnv.mIsAggregationEnabled;
-        }
-
-        @Override
-        protected int getSubId() {
-            return SUB_ID;
         }
     }
 
@@ -264,6 +263,20 @@ public class NetworkSelectSettingsTest {
                 createLteCellInfo(true, 123, "123", "232", "CarrierA"),
                 createGsmCellInfo(false, 123, "123", "232", "CarrierB"),
                 createLteCellInfo(false, 1234, "123", "232", "CarrierB"));
+        assertThat(mNetworkSelectSettings.doAggregation(testList)).isEqualTo(expected);
+    }
+
+    @Test
+    public void doAggregation_hasDuplicateItemsDiffMccMncCase3_removeSamePlmnRatItem() {
+        mNetworkSelectSettings.onCreateInitialization();
+        List<CellInfo> testList = Arrays.asList(
+                createLteCellInfo(false, 123, "123", "232", "CarrierA"),
+                createLteCellInfo(false, 124, "123", "233", "CarrierA"),
+                createLteCellInfo(true, 125, "123", "234", "CarrierA"),
+                createGsmCellInfo(false, 126, "456", "232", "CarrierA"));
+        List<CellInfo> expected = Arrays.asList(
+                createLteCellInfo(true, 125, "123", "234", "CarrierA"),
+                createGsmCellInfo(false, 126, "456", "232", "CarrierA"));
         assertThat(mNetworkSelectSettings.doAggregation(testList)).isEqualTo(expected);
     }
 

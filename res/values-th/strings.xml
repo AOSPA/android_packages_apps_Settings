@@ -860,7 +860,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"แท็บเล็ตของคุณจะไม่จับคู่กับ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> อีกต่อไป"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"อุปกรณ์ของคุณจะไม่จับคู่กับ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> อีกต่อไป"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"แอป <xliff:g id="APP_NAME">%1$s</xliff:g> จะไม่เชื่อมต่อกับ <xliff:g id="DEVICE_NAME">%2$s</xliff:g> อีก"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> จะไม่จับคู่กับอุปกรณ์ที่ลิงก์กับบัญชีนี้อีกต่อไป"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"ไม่จำอุปกรณ์"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"ยกเลิกการเชื่อมต่อแอป"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"เชื่อมต่อกับ…"</string>
@@ -1234,7 +1233,8 @@
     <string name="wifi_calling_mode_wifi_only_summary" msgid="3155660680014892641">"โทรผ่าน Wi-Fi สายจะตัดหากสัญญาณ Wi‑Fi ขาดหาย"</string>
     <string name="wifi_calling_off_explanation" msgid="6295526820826322895">"เมื่อเปิดการโทรผ่าน Wi-Fi โทรศัพท์จะกำหนดเส้นทางการโทรผ่านเครือข่าย Wi-Fi หรือเครือข่ายของผู้ให้บริการได้ ทั้งนี้ขึ้นอยู่กับค่ากำหนดของคุณและสัญญาณฝั่งที่แรงกว่า โปรดสอบถามค่าธรรมเนียมและรายละเอียดอื่นๆ กับผู้ให้บริการก่อนที่จะเปิดฟีเจอร์นี้<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
-    <string name="emergency_address_title" msgid="3490633500025717573">"ที่อยู่ฉุกเฉิน"</string>
+    <!-- no translation found for emergency_address_title (8102786488994263815) -->
+    <skip />
     <string name="emergency_address_summary" msgid="3022628750270626473">"ใช้เป็นตำแหน่งของคุณเมื่อโทรหาหมายเลขฉุกเฉินผ่าน Wi-Fi"</string>
     <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"ดูข้อมูลเพิ่มเติม"</annotation>"เกี่ยวกับฟีเจอร์ของ DNS ส่วนตัว"</string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"เปิด"</string>
@@ -2323,7 +2323,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"กดปุ่มปรับระดับเสียงเพื่อเปิด"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"แตะหน้าจอ 3 ครั้งเพื่อเปิด"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"ใช้ท่าทางสัมผัสเพื่อเปิด"</string>
-    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"ใช้ท่าทางสัมผัสการช่วยเหลือพิเศษแบบใหม่"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"ใช้ท่าทางสัมผัสการช่วยเหลือพิเศษ"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"หากต้องการใช้ฟีเจอร์นี้ ให้แตะปุ่มการช่วยเหลือพิเศษ <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> ที่ด้านล่างของหน้าจอ\n\nหากต้องการสลับระหว่างฟีเจอร์ต่างๆ ให้แตะปุ่มการช่วยเหลือพิเศษค้างไว้"</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="2551777208185138391">"หากต้องการใช้ฟีเจอร์นี้ ให้แตะปุ่มการช่วยเหลือพิเศษบนหน้าจอ"</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"หากต้องการใช้ฟีเจอร์นี้ ให้กดปุ่มปรับระดับเสียงทั้ง 2 ปุ่มค้างไว้"</string>
@@ -2771,7 +2771,7 @@
     <string name="power_camera" msgid="4778315081581293923">"กล้องถ่ายรูป"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wi-Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"บลูทูธ"</string>
-    <string name="power_cell" msgid="5507921058696341513">"สแตนด์บายเครือข่ายมือถือ"</string>
+    <string name="power_cell" msgid="7793805106954398186">"เครือข่ายมือถือ"</string>
     <string name="power_phone" msgid="2768396619208561670">"การโทรด้วยเสียง"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"ไม่มีการใช้งานแท็บเล็ต"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"ไม่มีการใช้งานโทรศัพท์"</string>
@@ -3248,7 +3248,8 @@
     <string name="vpn_connect_to" msgid="216709261691085594">"เชื่อมต่อกับ <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"ยกเลิกการเชื่อมต่อ VPN นี้ไหม"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"ยกเลิกการเชื่อมต่อ"</string>
-    <string name="vpn_version" msgid="41856553718304367">"เวอร์ชัน <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <!-- no translation found for vpn_version (6344167191984400976) -->
+    <skip />
     <string name="vpn_forget_long" msgid="729132269203870205">"ลืม VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"แทนที่ VPN ที่มีอยู่หรือไม่"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"ตั้งค่า VPN แบบเปิดตลอดเวลาหรือไม่"</string>
@@ -3847,6 +3848,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"หน้าจอล็อก, ข้าม, เลี่ยง"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"เมื่อโปรไฟล์งานล็อกอยู่"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"การแจ้งเตือนบนหน้าจอล็อก"</string>
+    <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"แสดงการสนทนา ค่าเริ่มต้น และการแจ้งเตือนที่ปิดเสียง"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"แสดงการสนทนา ค่าเริ่มต้น และการแจ้งเตือนที่ปิดเสียง"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"ซ่อนการสนทนาและการแจ้งเตือนแบบเงียบ"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"ไม่ต้องแสดงการแจ้งเตือนใดๆ"</string>
@@ -3927,11 +3929,11 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"การแจ้งเตือนทั้งหมดของ <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"การแจ้งเตือนแบบปรับอัตโนมัติ"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="other">การแจ้งเตือนประมาณ <xliff:g id="NUMBER_1">%d</xliff:g> ครั้งต่อวัน</item>
+      <item quantity="other">การแจ้งเตือนประมาณ <xliff:g id="NUMBER_1">%,d</xliff:g> ครั้งต่อวัน</item>
       <item quantity="one">การแจ้งเตือนประมาณ <xliff:g id="NUMBER_0">%d</xliff:g> ครั้งต่อวัน</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="other">การแจ้งเตือนประมาณ <xliff:g id="NUMBER_1">%d</xliff:g> ครั้งต่อสัปดาห์</item>
+      <item quantity="other">การแจ้งเตือนประมาณ <xliff:g id="NUMBER_1">%,d</xliff:g> ครั้งต่อสัปดาห์</item>
       <item quantity="one">การแจ้งเตือนประมาณ <xliff:g id="NUMBER_0">%d</xliff:g> ครั้งต่อสัปดาห์</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"ไม่เลย"</string>
@@ -3951,7 +3953,14 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"อนุญาตให้ <xliff:g id="SERVICE">%1$s</xliff:g> เข้าถึงการแจ้งเตือนไหม"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"การแจ้งเตือนที่เพิ่มประสิทธิภาพมาแทนที่การแจ้งเตือนแบบปรับอัตโนมัติของ Android ใน Android 12 ฟีเจอร์นี้จะแสดงการดำเนินการและการตอบกลับที่แนะนำ ตลอดจนจัดระเบียบการแจ้งเตือน \n\nการแจ้งเตือนที่เพิ่มประสิทธิภาพจะเข้าถึงเนื้อหาของการแจ้งเตือนได้ ซึ่งรวมถึงข้อมูลส่วนบุคคล เช่น ชื่อผู้ติดต่อและข้อความ ฟีเจอร์นี้ยังปิดหรือตอบสนองต่อการแจ้งเตือนได้ด้วย เช่น การรับสายโทรศัพท์และการควบคุมโหมดห้ามรบกวน"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"อนุญาตให้ <xliff:g id="SERVICE">%1$s</xliff:g> เข้าถึงการแจ้งเตือนไหม"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> จะอ่านการแจ้งเตือนทั้งหมดได้ รวมถึงข้อมูลส่วนบุคคล เช่น ชื่อผู้ติดต่อและข้อความที่คุณได้รับ นอกจากนี้ยังสามารถเลื่อนหรือปิดการแจ้งเตือน หรือดำเนินการกับปุ่มต่างๆ ในการแจ้งเตือนได้ด้วย เช่น การรับสายเรียกเข้า \n\nการเปิดใช้ยังทำให้แอปนี้เปิดหรือปิดฟีเจอร์ห้ามรบกวนและเปลี่ยนแปลงการตั้งค่าที่เกี่ยวข้องได้"</string>
+    <string name="notification_listener_security_warning_summary" msgid="4317764112725749020">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> จะอ่านการแจ้งเตือนทั้งหมดได้ รวมถึงข้อมูลส่วนบุคคล เช่น ชื่อผู้ติดต่อ รูปภาพ และข้อความที่คุณได้รับ นอกจากนี้ยังสามารถเลื่อนหรือปิดการแจ้งเตือน หรือดำเนินการกับปุ่มต่างๆ ในการแจ้งเตือนได้ด้วย เช่น การรับสายเรียกเข้า \n\nการเปิดใช้ยังทำให้แอปนี้เปิดหรือปิดฟีเจอร์ห้ามรบกวนและเปลี่ยนแปลงการตั้งค่าที่เกี่ยวข้องได้"</string>
+    <string name="nls_warning_prompt" msgid="9143226910825830619">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> จะทำสิ่งต่อไปนี้ได้"</string>
+    <string name="nls_feature_read_title" msgid="7629713268744220437">"อ่านการแจ้งเตือนของคุณ"</string>
+    <string name="nls_feature_read_summary" msgid="1064698238110273593">"แอปจะอ่านการแจ้งเตือนของคุณได้ รวมถึงข้อมูลส่วนบุคคล เช่น รายชื่อติดต่อ ข้อความ และรูปภาพ"</string>
+    <string name="nls_feature_reply_title" msgid="7925455553821362039">"ตอบกลับข้อความ"</string>
+    <string name="nls_feature_reply_summary" msgid="4492543411395565556">"แอปจะตอบกลับข้อความและดำเนินการกับปุ่มต่างๆ ในการแจ้งเตือนได้ รวมถึงเลื่อนหรือปิดการแจ้งเตือนและรับสาย"</string>
+    <string name="nls_feature_settings_title" msgid="8208164329853194414">"เปลี่ยนการตั้งค่า"</string>
+    <string name="nls_feature_settings_summary" msgid="3770028705648985689">"แอปจะเปิดหรือปิดฟีเจอร์ห้ามรบกวนและเปลี่ยนแปลงการตั้งค่าที่เกี่ยวข้องได้"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"หากคุณปิดการเข้าถึงการแจ้งเตือนสำหรับ <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> การเข้าถึง \"ห้ามรบกวน\" อาจปิดไปด้วย"</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"ปิด"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"ยกเลิก"</string>
@@ -4858,10 +4867,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"ผู้ช่วยดิจิทัล"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"ปัดเพื่อเรียกใช้ผู้ช่วย"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"ปัดขึ้นจากมุมด้านล่างเพื่อเรียกใช้แอปผู้ช่วยดิจิทัล"</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"กดปุ่มหน้าแรกค้างไว้เพื่อเรียกใช้ผู้ช่วย"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"กดปุ่มหน้าแรกค้างไว้เพื่อเรียกใช้แอปผู้ช่วยดิจิทัล"</string>
     <string name="information_label" msgid="6939310810756569298">"ข้อมูล"</string>
     <string name="low_label" msgid="6525629096999711220">"ต่ำ"</string>
     <string name="high_label" msgid="357503396626018487">"สูง"</string>
@@ -4870,11 +4877,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"ความไวที่สูงขึ้นอาจขัดแย้งกับท่าทางสัมผัสของแอปที่บริเวณขอบหน้าจอ"</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"ความไวต่อการเลื่อนกลับ"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"ความไวของการนำทางด้วยท่าทางสัมผัส"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"การไปยังส่วนต่างๆ ด้วยปุ่ม"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"การนำทางด้วยท่าทางสัมผัส ความไวต่อการเลื่อนกลับ ท่าทางสัมผัสการย้อนกลับ"</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"การไปยังส่วนต่างๆ, ปุ่มหน้าแรก"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"แตะสองครั้งเพื่อดูโทรศัพท์"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"แตะ 2 ครั้งเพื่อตรวจสอบแท็บเล็ต"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"แตะ 2 ครั้งเพื่อตรวจสอบอุปกรณ์"</string>
@@ -5285,7 +5290,7 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"โหมดเครือข่ายไม่ถูกต้อง <xliff:g id="NETWORKMODEID">%1$d</xliff:g> ไม่สนใจ"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"ชื่อจุดเข้าใช้งาน"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"ใช้ไม่ได้เมื่อเชื่อมต่อกับ <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="see_more" msgid="8436037008285546409">"การตั้งค่า"</string>
+    <string name="see_more" msgid="7499355691042812723">"ดูเพิ่ม"</string>
     <string name="see_less" msgid="2642392725363552793">"ดูน้อยลง"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"ต้องการเปิดใช้ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ไหม"</string>
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"ต้องการเปิดใช้ซิมใช่ไหม"</string>
@@ -5448,8 +5453,12 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"นาน"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"แสดง Wallet"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"อนุญาตให้เข้าถึง Wallet จากหน้าจอล็อกและการตั้งค่าด่วน"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1314577678356895256">"แสดงเครื่องมือสแกนคิวอาร์โค้ด"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"อนุญาตให้เข้าถึงเครื่องมือสแกนคิวอาร์โค้ดจากหน้าจอล็อก"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"แสดงระบบควบคุมอุปกรณ์"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"เข้าถึงระบบควบคุมเมื่อล็อก"</string>
+    <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"แสดงนาฬิกาแบบสองบรรทัดเมื่อเป็นไปได้"</string>
+    <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"นาฬิกาแบบสองบรรทัด"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
@@ -5478,7 +5487,6 @@
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"ปิด"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"อินเทอร์เน็ต"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"ซิม"</string>
-    <string name="wifi_switch_summary" msgid="3577154777754849024">"ค้นหาและเชื่อมต่อกับเครือข่าย Wi-Fi"</string>
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"เครื่องบิน, ใช้บนเครื่องบินได้อย่างปลอดภัย"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"การโทรและ SMS"</string>
     <string name="calls_and_sms_category" msgid="3788238090898237767">"การโทรผ่าน Wi-Fi"</string>

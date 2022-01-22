@@ -862,7 +862,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"你的平板電腦將與「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」解除配對"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"你的裝置將與「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」解除配對"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"「<xliff:g id="APP_NAME">%1$s</xliff:g>」應用程式將與「<xliff:g id="DEVICE_NAME">%2$s</xliff:g>」解除連結"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」將與任何已連結到這個帳戶的裝置解除配對"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"移除裝置"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"解除連結應用程式"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"連線到…"</string>
@@ -1236,7 +1235,8 @@
     <string name="wifi_calling_mode_wifi_only_summary" msgid="3155660680014892641">"透過 Wi-Fi 進行通話。如果 Wi‑Fi 連線中斷，通話即會結束。"</string>
     <string name="wifi_calling_off_explanation" msgid="6295526820826322895">"開啟 Wi-Fi 通話功能之後，你的手機可依據你的偏好設定，透過 Wi-Fi 網路或你電信業者的網路通話 (選擇訊號較強者)。開啟這項功能前，請先與你的電信業者詢問費用與其他細節。<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
-    <string name="emergency_address_title" msgid="3490633500025717573">"緊急地址"</string>
+    <!-- no translation found for emergency_address_title (8102786488994263815) -->
+    <skip />
     <string name="emergency_address_summary" msgid="3022628750270626473">"當你透過 Wi‑Fi 網路撥打緊急電話時，系統會判定你位於這個地址"</string>
     <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"進一步瞭解"</annotation>"私人 DNS 功能"</string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"已開啟"</string>
@@ -2325,7 +2325,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"按住音量調高鍵和調低鍵即可開啟"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"輕觸螢幕三下即可開啟"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"使用手勢啟用無障礙服務"</string>
-    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"使用全新的無障礙手勢"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"使用無障礙手勢"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"如要使用這項功能，請輕觸螢幕底部的無障礙工具按鈕 <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>。\n\n如要切換不同的功能，請按住無障礙工具按鈕。"</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="2551777208185138391">"如要使用這項功能，請輕觸畫面上的無障礙工具按鈕。"</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"如要使用這項功能，請同時按住音量調高鍵和調低鍵。"</string>
@@ -2686,7 +2686,7 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"部分功能可能受到限制"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"電池用量較高的應用程式"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"查看電池用量最高的應用程式"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"充電功能暫時受到限制"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"已暫時限制充電"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"這是為了延長電池壽命。瞭解詳情。"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"繼續充電"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"在高溫和長時間充電等特定情況下，手機可能會將充電量限制在 <xliff:g id="PERCENT">%1$s</xliff:g> 以延長電池壽命。\n\n當上述情況解除後，手機就會自動正常充電。"</string>
@@ -2773,7 +2773,7 @@
     <string name="power_camera" msgid="4778315081581293923">"相機"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wi‑Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"藍牙"</string>
-    <string name="power_cell" msgid="5507921058696341513">"行動網路待命中"</string>
+    <string name="power_cell" msgid="7793805106954398186">"行動網路"</string>
     <string name="power_phone" msgid="2768396619208561670">"語音通話"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"平板電腦閒置"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"手機閒置"</string>
@@ -3250,7 +3250,8 @@
     <string name="vpn_connect_to" msgid="216709261691085594">"連線到「<xliff:g id="PROFILE">%s</xliff:g>」"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"要中斷這個 VPN 連線嗎？"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"中斷連線"</string>
-    <string name="vpn_version" msgid="41856553718304367">"版本 <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <!-- no translation found for vpn_version (6344167191984400976) -->
+    <skip />
     <string name="vpn_forget_long" msgid="729132269203870205">"清除 VPN 設定檔"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"要取代現有的 VPN 嗎？"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"要設定永久連線的 VPN 嗎？"</string>
@@ -3849,6 +3850,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"螢幕鎖定, 鎖定螢幕, 略過, 規避"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"當工作資料夾遭鎖定時"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"螢幕鎖定畫面上的通知"</string>
+    <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"顯示對話通知、預設通知和已設為靜音的通知"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"顯示對話通知、預設通知和已設為靜音的通知"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"隱藏已設為靜音的對話和通知"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"不要顯示任何通知"</string>
@@ -3929,11 +3931,11 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"「<xliff:g id="APP_NAME">%1$s</xliff:g>」的所有通知"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"自動調整通知"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="other">每天大約 <xliff:g id="NUMBER_1">%d</xliff:g> 則通知</item>
+      <item quantity="other">每天大約 <xliff:g id="NUMBER_1">%,d</xliff:g> 則通知</item>
       <item quantity="one">每天大約 <xliff:g id="NUMBER_0">%d</xliff:g> 則通知</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="other">每週大約 <xliff:g id="NUMBER_1">%d</xliff:g> 則通知</item>
+      <item quantity="other">每週大約 <xliff:g id="NUMBER_1">%,d</xliff:g> 則通知</item>
       <item quantity="one">每週大約 <xliff:g id="NUMBER_0">%d</xliff:g> 則通知</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"永遠不要"</string>
@@ -3953,7 +3955,14 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"要允許<xliff:g id="SERVICE">%1$s</xliff:g>存取通知嗎？"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"在 Android 12 中，加強型通知功能已取代 Android 自動調整通知。這項功能可以顯示建議的操作和回覆內容，也可以幫你整理通知訊息。\n\n加強型通知功能可存取通知內容，包括聯絡人名稱和訊息內文等個人資訊。此外，這項功能還能關閉或回覆通知，例如接聽來電及控管「零打擾」功能。"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"要授予「<xliff:g id="SERVICE">%1$s</xliff:g>」通知存取權嗎？"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"「<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>」將可讀取所有通知 (例如聯絡人姓名和你收到的訊息文字等個人資訊)，也可延後或關閉通知或操作通知中的按鈕，包括接聽電話。\n\n此外，這個應用程式還可開啟或關閉「零打擾」功能及變更相關設定。"</string>
+    <string name="notification_listener_security_warning_summary" msgid="4317764112725749020">"「<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>」將可讀取所有通知 (包括聯絡人姓名、相片和你收到的訊息文字等個人資訊)，也可延後或關閉通知或操作通知中的按鈕 (包括接聽電話)。\n\n此外，這個應用程式還可開啟或關閉「零打擾」功能及變更相關設定。"</string>
+    <string name="nls_warning_prompt" msgid="9143226910825830619">"「<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>」將可執行以下操作："</string>
+    <string name="nls_feature_read_title" msgid="7629713268744220437">"讀取通知"</string>
+    <string name="nls_feature_read_summary" msgid="1064698238110273593">"可讀取你的通知，包括聯絡人、訊息和相片等個人資訊。"</string>
+    <string name="nls_feature_reply_title" msgid="7925455553821362039">"回覆訊息"</string>
+    <string name="nls_feature_reply_summary" msgid="4492543411395565556">"可回覆訊息及操作通知中的按鈕，包括延後或關閉通知以及接聽電話。"</string>
+    <string name="nls_feature_settings_title" msgid="8208164329853194414">"變更設定"</string>
+    <string name="nls_feature_settings_summary" msgid="3770028705648985689">"可開啟或關閉「零打擾」功能及變更相關設定。"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"如果你停用「<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>」的通知存取權，「零打擾」模式的存取權可能也會一併遭到停用。"</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"關閉"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"取消"</string>
@@ -4860,10 +4869,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"數位助理"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"滑動即可啟動數位助理應用程式"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"如要啟動數位助理應用程式，請從底部的任一角落向上滑動。"</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"按住主畫面按鈕即可叫用數位助理"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"按住主畫面按鈕即可叫用數位助理應用程式。"</string>
     <string name="information_label" msgid="6939310810756569298">"資訊"</string>
     <string name="low_label" msgid="6525629096999711220">"低"</string>
     <string name="high_label" msgid="357503396626018487">"高"</string>
@@ -4872,11 +4879,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"如果你調高敏感度，可能會影響螢幕邊緣的應用程式手勢操作。"</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"系統偵測「返回」手勢的敏感度"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"手勢操作靈敏度"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"按鈕操作"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"手勢操作, 系統偵測「返回」手勢的敏感度,「返回」手勢"</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"操作設定, 主畫面按鈕"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"輕觸兩下手機即可喚醒螢幕"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"輕觸兩下平板電腦即可查看"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"輕觸兩下裝置即可查看"</string>
@@ -5287,7 +5292,7 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"網路模式 <xliff:g id="NETWORKMODEID">%1$d</xliff:g> 無效。忽略。"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"存取點名稱"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"無法在連線到「<xliff:g id="CARRIER">%1$s</xliff:g>」時使用"</string>
-    <string name="see_more" msgid="8436037008285546409">"設定"</string>
+    <string name="see_more" msgid="7499355691042812723">"顯示更多"</string>
     <string name="see_less" msgid="2642392725363552793">"顯示較少"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"要啟用「<xliff:g id="CARRIER_NAME">%1$s</xliff:g>」嗎？"</string>
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"要啟用 SIM 卡嗎？"</string>
@@ -5450,8 +5455,12 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"長"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"顯示電子錢包"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"允許從螢幕鎖定畫面和快速設定選單中使用電子錢包"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1314577678356895256">"顯示 QR 圖碼掃描器"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"允許從螢幕鎖定畫面使用 QR 圖碼掃描器"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"顯示裝置控制"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"在鎖定畫面上顯示控制項"</string>
+    <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"顯示雙行時鐘 (如果可用的話)"</string>
+    <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"雙行時鐘"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
@@ -5480,7 +5489,6 @@
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"關閉"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"網際網路"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM 卡"</string>
-    <string name="wifi_switch_summary" msgid="3577154777754849024">"尋找 Wi-Fi 網路並建立連線"</string>
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"飛航, 飛航安全"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"通話和簡訊"</string>
     <string name="calls_and_sms_category" msgid="3788238090898237767">"Wi-Fi 通話"</string>

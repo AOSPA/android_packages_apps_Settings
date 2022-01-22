@@ -102,7 +102,7 @@ public class UiccSlotUtil {
             for (int i = 0; i < length; i++) {
                 UiccSlotInfo slotInfo = slots.get(i);
                 if (slotInfo.isRemovable()
-                        && !slotInfo.getIsActive()
+                        && !slotInfo.getPorts().stream().findFirst().get().isActive()
                         && slotInfo.getCardStateInfo() != UiccSlotInfo.CARD_STATE_INFO_ERROR
                         && slotInfo.getCardStateInfo() != UiccSlotInfo.CARD_STATE_INFO_RESTRICTED) {
                     performSwitchToRemovableSlot(i, context);
@@ -113,7 +113,7 @@ public class UiccSlotUtil {
             if (slotId >= length || !slots.get(slotId).isRemovable()) {
                 throw new UiccSlotsException("The given slotId is not a removable slot: " + slotId);
             }
-            if (!slots.get(slotId).getIsActive()) {
+            if (!slots.get(slotId).getPorts().stream().findFirst().get().isActive()) {
                 performSwitchToRemovableSlot(slotId, context);
             }
         }
