@@ -19,6 +19,7 @@ package com.android.settings.network.telephony;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -123,7 +124,7 @@ public class NetworkSelectSettings extends DashboardFragment implements
             Log.d(TAG, "ExtTelephonyService is not connected!!! ");
         }
         Log.d(TAG, "mIsAdvancedScanSupported: " + mIsAdvancedScanSupported);
-        mSubId = getArguments().getInt(Settings.EXTRA_SUB_ID);
+        mSubId = getSubId();
 
         mPreferenceCategory = getPreferenceCategory(PREF_KEY_NETWORK_OPERATORS);
         mStatusMessagePreference = new Preference(getContext());
@@ -144,7 +145,7 @@ public class NetworkSelectSettings extends DashboardFragment implements
         mMetricsFeatureProvider = getMetricsFeatureProvider(getContext());
         mIsAggregationEnabled = enableAggregation(getContext());
         Log.d(TAG, "init: mUseNewApi:" + mUseNewApi
-                + " ,mIsAggregationEnabled:" + mIsAggregationEnabled);
+                + " ,mIsAggregationEnabled:" + mIsAggregationEnabled + " ,mSubId:" + mSubId);
     }
 
     @Keep
@@ -196,6 +197,18 @@ public class NetworkSelectSettings extends DashboardFragment implements
     @VisibleForTesting
     protected void enablePreferenceScreen(boolean enable) {
         getPreferenceScreen().setEnabled(enable);
+    }
+
+    @Keep
+    @VisibleForTesting
+    protected int getSubId() {
+        int subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+        Intent intent = getActivity().getIntent();
+        if (intent != null) {
+            subId = intent.getIntExtra(Settings.EXTRA_SUB_ID,
+                    SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        }
+        return subId;
     }
 
     @Override
