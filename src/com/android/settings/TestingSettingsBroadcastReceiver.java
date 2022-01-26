@@ -35,7 +35,7 @@ public class TestingSettingsBroadcastReceiver extends BroadcastReceiver {
                 && intent.getAction().equals(TelephonyManager.ACTION_SECRET_CODE)) {
             Intent i = new Intent(Intent.ACTION_MAIN);
             i.setClass(context, TestingSettingsActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             context.startActivity(i);
         }
     }

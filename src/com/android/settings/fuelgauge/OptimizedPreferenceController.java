@@ -57,10 +57,6 @@ public class OptimizedPreferenceController extends AbstractPreferenceController
             Log.d(TAG, "is system or default app, disable pref");
             ((SelectorWithWidgetPreference) preference).setChecked(false);
             preference.setEnabled(false);
-        } else if (mBatteryOptimizeUtils.isAllowlistedExceptIdleApp()) {
-            Log.d(TAG, "in allow list not idle app, optimized states only");
-            preference.setEnabled(true);
-            ((SelectorWithWidgetPreference) preference).setChecked(true);
         } else if (mBatteryOptimizeUtils.getAppOptimizationMode()
                 == BatteryOptimizeUtils.MODE_OPTIMIZED) {
             Log.d(TAG, "is optimized states");
@@ -77,12 +73,6 @@ public class OptimizedPreferenceController extends AbstractPreferenceController
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!KEY_OPTIMIZED_PREF.equals(preference.getKey())) {
-            return false;
-        }
-
-        mBatteryOptimizeUtils.setAppOptimizationMode(BatteryOptimizeUtils.MODE_OPTIMIZED);
-        Log.d(TAG, "Set optimized");
-        return true;
+        return getPreferenceKey().equals(preference.getKey());
     }
 }

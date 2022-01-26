@@ -355,18 +355,19 @@ public class MobileNetworkUtils {
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             return false;
         }
-        final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class)
-                .createForSubscriptionId(subId);
+
         final PersistableBundle carrierConfig = context.getSystemService(
                 CarrierConfigManager.class).getConfigForSubId(subId);
-
-
-        if (telephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_CDMA) {
-            return true;
-        } else if (carrierConfig != null
+        if (carrierConfig != null
                 && !carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL)
                 && carrierConfig.getBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL)) {
+            return true;
+        }
+
+        final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class)
+                .createForSubscriptionId(subId);
+        if (telephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_CDMA) {
             return true;
         }
 
@@ -420,17 +421,18 @@ public class MobileNetworkUtils {
     }
 
     private static boolean isGsmBasicOptions(Context context, int subId) {
-        final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class)
-                .createForSubscriptionId(subId);
         final PersistableBundle carrierConfig = context.getSystemService(
                 CarrierConfigManager.class).getConfigForSubId(subId);
-
-        if (telephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_GSM) {
-            return true;
-        } else if (carrierConfig != null
+        if (carrierConfig != null
                 && !carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL)
                 && carrierConfig.getBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL)) {
+            return true;
+        }
+
+        final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class)
+                .createForSubscriptionId(subId);
+        if (telephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_GSM) {
             return true;
         }
 
@@ -507,12 +509,15 @@ public class MobileNetworkUtils {
         if (carrierConfig.getBoolean(CarrierConfigManager.KEY_SUPPORT_TDSCDMA_BOOL)) {
             return true;
         }
+        final String[] numericArray = carrierConfig.getStringArray(
+                CarrierConfigManager.KEY_SUPPORT_TDSCDMA_ROAMING_NETWORKS_STRING_ARRAY);
+        if (numericArray == null) {
+            return false;
+        }
         final ServiceState serviceState = telephonyManager.getServiceState();
         final String operatorNumeric =
                 (serviceState != null) ? serviceState.getOperatorNumeric() : null;
-        final String[] numericArray = carrierConfig.getStringArray(
-                CarrierConfigManager.KEY_SUPPORT_TDSCDMA_ROAMING_NETWORKS_STRING_ARRAY);
-        if (numericArray == null || operatorNumeric == null) {
+        if (operatorNumeric == null) {
             return false;
         }
         for (String numeric : numericArray) {

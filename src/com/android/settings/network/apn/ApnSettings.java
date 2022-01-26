@@ -340,7 +340,7 @@ public class ApnSettings extends RestrictedSettingsFragment
 
     @Override
     public EnforcedAdmin getRestrictionEnforcedAdmin() {
-        final UserHandle user = UserHandle.of(mUserManager.getUserHandle());
+        final UserHandle user = UserHandle.of(mUserManager.getProcessUserId());
         if (mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS, user)
                 && !mUserManager.hasBaseUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS,
                         user)) {
@@ -599,6 +599,8 @@ public class ApnSettings extends RestrictedSettingsFragment
                 return ServiceState.RIL_RADIO_TECHNOLOGY_IWLAN;
             case TelephonyManager.NETWORK_TYPE_LTE_CA:
                 return ServiceState.RIL_RADIO_TECHNOLOGY_LTE_CA;
+            case TelephonyManager.NETWORK_TYPE_NR:
+                return ServiceState.RIL_RADIO_TECHNOLOGY_NR;
             default:
                 return ServiceState.RIL_RADIO_TECHNOLOGY_UNKNOWN;
         }

@@ -55,9 +55,6 @@ public class RestrictedPreferenceController extends AbstractPreferenceController
             Log.d(TAG, "is system or default app, disable pref");
             ((SelectorWithWidgetPreference) preference).setChecked(false);
             preference.setEnabled(false);
-        } else if (mBatteryOptimizeUtils.isAllowlistedExceptIdleApp()) {
-            Log.d(TAG, "in allow list not idle app, disable perf");
-            preference.setEnabled(false);
         } else if (mBatteryOptimizeUtils.getAppOptimizationMode()
                 == BatteryOptimizeUtils.MODE_RESTRICTED) {
             Log.d(TAG, "is restricted states");
@@ -79,12 +76,6 @@ public class RestrictedPreferenceController extends AbstractPreferenceController
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!KEY_RESTRICTED_PREF.equals(preference.getKey())) {
-            return false;
-        }
-
-        mBatteryOptimizeUtils.setAppOptimizationMode(BatteryOptimizeUtils.MODE_RESTRICTED);
-        Log.d(TAG, "Set restricted");
-        return true;
+        return getPreferenceKey().equals(preference.getKey());
     }
 }

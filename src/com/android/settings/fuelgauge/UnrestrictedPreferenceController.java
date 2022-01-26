@@ -53,9 +53,6 @@ public class UnrestrictedPreferenceController extends AbstractPreferenceControll
         if (mBatteryOptimizeUtils.isSystemOrDefaultApp()) {
             Log.d(TAG, "is system or default app, unrestricted states only");
             ((SelectorWithWidgetPreference) preference).setChecked(true);
-        } else if (mBatteryOptimizeUtils.isAllowlistedExceptIdleApp()) {
-            Log.d(TAG, "in allow list not idle app, disable perf");
-            preference.setEnabled(false);
         } else if (mBatteryOptimizeUtils.getAppOptimizationMode()
                 == BatteryOptimizeUtils.MODE_UNRESTRICTED) {
             Log.d(TAG, "is unrestricted states");
@@ -77,12 +74,6 @@ public class UnrestrictedPreferenceController extends AbstractPreferenceControll
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!KEY_UNRESTRICTED_PREF.equals(preference.getKey())) {
-            return false;
-        }
-
-        mBatteryOptimizeUtils.setAppOptimizationMode(BatteryOptimizeUtils.MODE_UNRESTRICTED);
-        Log.d(TAG, "Set unrestricted");
-        return true;
+        return getPreferenceKey().equals(preference.getKey());
     }
 }

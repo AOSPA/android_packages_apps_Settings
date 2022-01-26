@@ -434,7 +434,7 @@ public final class Utils extends com.android.settingslib.Utils {
     public static UserHandle getManagedProfile(UserManager userManager) {
         final List<UserHandle> userProfiles = userManager.getUserProfiles();
         for (UserHandle profile : userProfiles) {
-            if (profile.getIdentifier() == userManager.getUserHandle()) {
+            if (profile.getIdentifier() == userManager.getProcessUserId()) {
                 continue;
             }
             final UserInfo userInfo = userManager.getUserInfo(profile.getIdentifier());
@@ -1283,6 +1283,14 @@ public final class Utils extends com.android.settingslib.Utils {
     @ColorInt
     public static int getHomepageIconColor(Context context) {
         return getColorAttrDefaultColor(context, android.R.attr.textColorSecondary);
+    }
+
+    /**
+     * Returns the highlight color of homepage preference icons.
+     */
+    @ColorInt
+    public static int getHomepageIconColorHighlight(Context context) {
+        return getColorAttrDefaultColor(context, android.R.attr.textColorSecondaryInverse);
     }
 
     public static boolean isProviderModelEnabled(Context context) {

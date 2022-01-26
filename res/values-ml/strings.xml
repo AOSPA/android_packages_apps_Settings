@@ -98,7 +98,6 @@
     <string name="bluetooth_notif_title" msgid="1196532269131348647">"ജോടിയാക്കൽ അഭ്യർത്ഥന"</string>
     <string name="bluetooth_notif_message" msgid="5584717784198086653">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> എന്ന ഉപകരണവുമായി ജോടിയാക്കാൻ ടാപ്പുചെയ്യുക."</string>
     <string name="bluetooth_show_received_files" msgid="685424727760622632">"സ്വീകരിച്ച ഫയലുകള്‍"</string>
-    <string name="bluetooth_show_files_received_via_bluetooth" msgid="7097860463458492953">"Bluetooth വഴി സ്വീകരിച്ച ഫയലുകൾ"</string>
     <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"Bluetooth ഓഫാണ്"</string>
     <string name="bluetooth_devices_card_off_summary" msgid="2276527382891105858">"അത് ഓണാക്കാൻ ടാപ്പ് ചെയ്യുക"</string>
     <string name="device_picker" msgid="2427027896389445414">"ബ്ലൂടൂത്തുപകരണം തിരഞ്ഞെടുക്കൂ"</string>
@@ -2091,7 +2090,7 @@
     <string name="internal_storage" msgid="999496851424448809">"ആന്തരിക സ്റ്റോറേജ്"</string>
     <string name="recompute_size" msgid="1098091228370999128">"വലുപ്പം വീണ്ടും കണക്കാക്കുന്നു..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"ആപ്പ് ഡാറ്റ ഇല്ലാതാക്കണോ?"</string>
-    <string name="clear_data_dlg_text" msgid="7870723948123690332">"ഈ ആപ്പിന്‍റെ എല്ലാ ഡാറ്റയും ശാശ്വതമായി ഇല്ലാതാക്കും. ഫയലുകൾ, ക്രമീകരണങ്ങൾ, അക്കൗണ്ടുകൾ, ഡാറ്റാബേസുകൾ തുടങ്ങിയവയെല്ലാം ഇതിൽ ഉൾപ്പെടും."</string>
+    <string name="clear_data_dlg_text" msgid="1107610960337399006">"ഈ ആപ്പിന്റെ ഡാറ്റ ശാശ്വതമായി ഇല്ലാതാക്കും. ഇതിൽ ഫയലുകളും ക്രമീകരണവും ഡാറ്റാബേസുകളും മറ്റ് ആപ്പ് ഡാറ്റയും ഉൾപ്പെടുന്നു."</string>
     <string name="dlg_ok" msgid="1421350367857960997">"ശരി"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"റദ്ദാക്കുക"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
@@ -2739,6 +2738,7 @@
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"ബാറ്ററി മാനേജർ ഉപയോഗിക്കുക"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"ആപ്പുകൾ ബാറ്ററി ഉപയോഗിച്ചുതീർക്കുമ്പോൾ കണ്ടെത്തുക"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"ആപ്പുകൾ എപ്പോഴാണ് ബാറ്ററി വേഗത്തിൽ കുറയ്ക്കുന്നതെന്ന് കണ്ടെത്തുന്നു"</string>
+    <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"ആപ്പുകൾ എപ്പോഴാണ് ബാറ്ററി വേഗത്തിൽ കുറയ്ക്കുന്നതെന്ന് കണ്ടെത്തുന്നു"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"ഓഫ്"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="other">%1$d ആപ്പുകൾ പരിമിതപ്പെടുത്തി</item>
@@ -2861,6 +2861,7 @@
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"ആകെ <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_PERIOD">^2</xliff:g> വരെയുള്ള\nപശ്ചാത്തല ഉപയോഗം ഒരു മിനിറ്റിൽ താഴെയാണ്"</string>
     <string name="battery_not_usage" msgid="1472275761547230196">"അവസാനം പൂർണ്ണമായി ചാർജ് ആയതിന് ശേഷം ഉപയോഗിച്ചിട്ടില്ല"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"കഴിഞ്ഞ 24 മണിക്കൂറിനിടെ ഉപയോഗിച്ചിട്ടില്ല"</string>
+    <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"നിങ്ങളുടെ ഉപകരണ ഉപയോഗത്തെ അടിസ്ഥാനമാക്കിയുള്ളതാണ് ബാക്കിയുള്ള ബാറ്ററിയുടെ ഏകദേശക്കണക്ക്"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"അവശേഷിക്കുന്ന ഏകദേശ സമയം"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"പൂർണ്ണമായി ചാർജ്ജുചെയ്യുന്നത് വരെ"</string>
@@ -4101,6 +4102,7 @@
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"തടസ്സപ്പെടുത്താൻ കഴിയുന്ന സംഭാഷണങ്ങൾ"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"എല്ലാ സംഭാഷണങ്ങളും"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"മുൻഗണനാ സംഭാഷണം"</string>
+    <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"മുൻഗണനയുള്ള സംഭാഷണങ്ങൾ"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"ഒന്നും വേണ്ട"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{ഒന്നുമില്ല}=1{ഒരു സംഭാഷണം}other{# സംഭാഷണങ്ങൾ}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"തടസ്സപ്പെടുത്താൻ കഴിയുന്നത് ആർക്ക്"</string>
@@ -4125,6 +4127,7 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"ആർക്കും വിളിക്കാം"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"കോൺടാക്റ്റുകൾ"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"നക്ഷത്രചിഹ്നമിട്ടവ"</string>
+    <string name="zen_mode_from_some" msgid="3708450042225044524">"ചില ആളുകളോ സംഭാഷണങ്ങളോ"</string>
     <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"നക്ഷത്രമിട്ടിട്ടുള്ള കോൺടാക്‌റ്റുകളിൽ നിന്നും ആവർത്തിച്ച് വിളിക്കുന്നവരിൽ നിന്നും"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"കോൺടാക്‌റ്റുകളിൽ നിന്നും ആവർത്തിച്ച് വിളിക്കുന്നവരിൽ നിന്നും"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"ആവർത്തിച്ച് വിളിക്കുന്നവരിൽ നിന്ന് മാത്രം"</string>
@@ -4855,6 +4858,10 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"ഡിജിറ്റൽ അസിസ്‌റ്റന്റ്"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"അസിസ്‌റ്റന്റ് ആപ്പ് പ്രവർത്തനക്ഷമമാക്കാൻ സ്വൈപ്പ് ചെയ്യുക"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"ഡിജിറ്റൽ അസിസ്‌റ്റന്റ് ആപ്പ് പ്രവർത്തനക്ഷമമാക്കാൻ താഴെ മൂലയിൽ നിന്ന് മുകളിലേക്ക് സ്വൈപ്പ് ചെയ്യുക."</string>
+    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
+    <skip />
+    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
+    <skip />
     <string name="information_label" msgid="6939310810756569298">"വിവരങ്ങൾ"</string>
     <string name="low_label" msgid="6525629096999711220">"കുറഞ്ഞത്"</string>
     <string name="high_label" msgid="357503396626018487">"ഉയർന്നത്"</string>
@@ -4862,8 +4869,12 @@
     <string name="right_edge" msgid="1505309103265829121">"വലത്തേയറ്റം"</string>
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"ഉയർന്ന സെൻസിറ്റിവിറ്റി സ്‌ക്രീനിന്റെ വശങ്ങളിൽ ആപ്പുമായി ബന്ധപ്പെട്ട് നടത്തുന്ന എന്തെങ്കിലും ജെസ്ച്ചറുകളിൽ പൊരുത്തക്കേട് വരുത്തിയേക്കാം."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"ബാക്ക് സെൻസിറ്റിവിറ്റി"</string>
-    <string name="gesture_settings_activity_title" msgid="6047431928567911330">"ജെസ്‍ച്ചർ ക്രമീകരണം"</string>
+    <string name="gesture_settings_activity_title" msgid="2025828425762595733">"ജെസ്ച്ചർ നാവിഗേഷൻ സെൻസിറ്റിവിറ്റി"</string>
+    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
+    <skip />
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"വിരൽചലന നാവിഗേഷൻ, ബാക്ക് സെൻസിറ്റിവിറ്റി, തിരികെ പോകാനുള്ള വിരൽചലനം"</string>
+    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
+    <skip />
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"ഫോൺ പരിശോധിക്കുന്നതിന്, ഡബിൾ ടാപ്പ് ചെയ്യുക"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"ടാബ്‌ലെറ്റ് പരിശോധിക്കുന്നതിന്, രണ്ടുതവണ ടാപ്പുചെയ്യുക"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"ഉപകരണം പരിശോധിക്കുന്നതിന്, രണ്ടുതവണ ടാപ്പുചെയ്യുക"</string>
@@ -5274,7 +5285,7 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"നെറ്റ്‍വര്‍ക്ക് മോഡ് <xliff:g id="NETWORKMODEID">%1$d</xliff:g> അസാധുവാണ്. അവഗണിക്കുക."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"ആക്‌സസ് പോയിന്റ് പേരുകൾ"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> എന്നതിലേക്ക് കണക്‌റ്റ് ചെയ്‌തിരിക്കുമ്പോൾ ലഭ്യമല്ല"</string>
-    <string name="see_more" msgid="7499355691042812723">"കൂടുതൽ കാണുക"</string>
+    <string name="see_more" msgid="8436037008285546409">"ക്രമീകരണം"</string>
     <string name="see_less" msgid="2642392725363552793">"കുറച്ച് കാണുക"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ഓണാക്കണോ?"</string>
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"SIM ഓണാക്കണോ?"</string>
@@ -5506,6 +5517,7 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"കോളുകൾ"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"മൊബൈൽ ഡാറ്റ"</string>
+    <string name="wifi_scan_notify_message" msgid="4130641837826688879">"ഉപകരണ അനുഭവം മെച്ചപ്പെടുത്താൻ, വൈഫൈ ഓഫാക്കിയിരിക്കുമ്പോൾ പോലും ആപ്പുകൾക്കും സേവനങ്ങൾക്കും വൈഫൈ നെറ്റ്‌വർക്കുകൾ കണ്ടെത്താൻ ഏത് സമയത്തും സ്‌കാൻ ചെയ്യാനാകും. ഉദാഹരണത്തിന്, ലൊക്കേഷൻ അധിഷ്‌ഠിത ഫീച്ചറുകളും സേവനങ്ങളും മെച്ചപ്പെടുത്താൻ ഇത് ഉപയോഗിക്കാം. നിങ്ങൾക്ക് ഇത് വൈഫൈ സ്‌കാനിംഗ് ക്രമീകരണത്തിൽ മാറ്റാം. "<annotation id="link">"മാറ്റുക"</annotation></string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"കണക്റ്റ് ചെയ്തു"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"കണക്ഷനില്ല"</string>
@@ -5574,7 +5586,8 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"UWB ഉപയോഗിക്കാൻ ഫ്ലൈറ്റ് മോഡ് ഓഫാക്കുക"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"ക്യാമറ ആക്‌സസ്"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"മൈക്രോഫോൺ ആക്‌സസ്"</string>
-    <string name="sensor_toggle_description" msgid="8248823248606795411">"എല്ലാ ആപ്പുകൾക്കും സേവനങ്ങൾക്കും"</string>
+    <string name="cam_toggle_description" msgid="9212762204005146404">"ആപ്പുകൾക്കും സേവനങ്ങൾക്കും"</string>
+    <string name="mic_toggle_description" msgid="484139688645092237">"ആപ്പുകൾക്കും സേവനങ്ങൾക്കും. ഈ ക്രമീകരണം ഓഫാണെങ്കിൽ, നിങ്ങൾ അടിയന്തര നമ്പറിൽ വിളിക്കുമ്പോഴും മൈക്രോഫോൺ ഡാറ്റ തുടർന്നും പങ്കിടും."</string>
     <string name="game_settings_title" msgid="1028178627743422090">"ഗെയിം ക്രമീകരണം"</string>
     <string name="game_settings_summary" msgid="8623110986485071064">"ഗെയിം ഡാഷ്ബോർഡ് ഷോർട്ട്കട്ടും മറ്റും ഓണാക്കുക"</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"മുമ്പത്തേത്"</string>

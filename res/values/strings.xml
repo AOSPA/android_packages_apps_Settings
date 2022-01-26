@@ -221,8 +221,6 @@
     <string name="bluetooth_notif_message">Tap to pair with <xliff:g id="device_name">%1$s</xliff:g>.</string>
     <!-- Item in bluetooth settings screen, used to show the list of received files [CHAR LIMIT=30] -->
     <string name="bluetooth_show_received_files">Received files</string>
-    <!-- Item in bluetooth settings screen, used to show the list of Files received via Bluetooth [CHAR LIMIT=NONE] -->
-    <string name="bluetooth_show_files_received_via_bluetooth">Files received via Bluetooth</string>
 
     <!-- Title for contextual Bluetooth devices card when Bluetooth is off [CHAR LIMIT=NONE]-->
     <string name="bluetooth_devices_card_off_title">Bluetooth is off</string>
@@ -1938,9 +1936,6 @@
     <string name="bluetooth_unpair_dialog_body" product="device">Your device will no longer be paired with <xliff:g id="device_name">%1$s</xliff:g></string>
     <!-- Bluetooth device details companion apps. The body of confirmation dialog for remove association. [CHAR LIMIT=60] -->
     <string name="bluetooth_companion_app_body"><xliff:g id="app_name" example="App Name">%1$s</xliff:g> app will no longer connect to your <xliff:g id="device_name" example="Device Name">%2$s</xliff:g></string>
-
-    <!--  Bluetooth device details. The body of a confirmation dialog for unpairing a paired device. [CHAR LIMIT=NONE] -->
-    <string name="bluetooth_untethered_unpair_dialog_body"><xliff:g id="device_name" example="Jack's headphone">%1$s</xliff:g> will no longer be paired with any device linked to this account</string>
 
     <!--  Bluetooth device details. In the confirmation dialog for unpairing a paired device, this is the label on the button that will complete the unpairing action. -->
     <string name="bluetooth_unpair_dialog_forget_confirm_button">Forget device</string>
@@ -4860,7 +4855,7 @@
     <!-- Manage applications, individual application screen, confirmation dialog title. Displays when user selects to "Clear data". -->
     <string name="clear_data_dlg_title">Delete app data?</string>
     <!-- Manage applications, individual application screen, confirmation dialog message. Displays when user selects to "Clear data". It warns the user of the consequences of clearing the data for an app. -->
-    <string name="clear_data_dlg_text">All this app\u2019s data will be deleted permanently. This includes all files, settings, accounts, databases, etc.</string>
+    <string name="clear_data_dlg_text">This app\u2019s data will be permanently deleted. This includes files, settings, databases, and other app data.</string>
     <!-- Manage applications, individual application screen, confirmation dialog button. Displays when user selects to "Clear data". Goes through with the clearing of the data. -->
     <string name="dlg_ok">OK</string>
     <!-- Manage applications, individual application screen, confirmation dialog button. Displays when user selects to "Clear data". -->
@@ -6343,6 +6338,8 @@
 
     <!-- Summary for battery manager when it is on -->
     <string name="battery_manager_summary">Detecting when apps drain battery</string>
+    <!-- Summary for battery manager when it is on. [CHAR LIMIT=NONE] -->
+    <string name="battery_manager_summary_unsupported">Detecting when apps drain battery</string>
 
     <!-- Summary for battery manager when it is off -->
     <string name="battery_manager_off">Off</string>
@@ -6414,8 +6411,8 @@
     <string name="power_wifi">Wi\u2011Fi</string>
     <!-- Label for power consumed by Bluetooth -->
     <string name="power_bluetooth">Bluetooth</string>
-    <!-- Label for power consumed by Mobile network idle -->
-    <string name="power_cell">Mobile network standby</string>
+    <!-- Label for power consumed by Mobile network -->
+    <string name="power_cell">Mobile network</string>
     <!-- Label for power consumed by Calling -->
     <string name="power_phone">Voice calls</string>
     <!-- Label for power consumed when Idle -->
@@ -6618,6 +6615,8 @@
     <string name="battery_not_usage">No usage from last full charge</string>
     <!-- Description for no any battery usage for past 24 hr [CHAR LIMIT=120] -->
     <string name="battery_not_usage_24hr">No usage for past 24 hr</string>
+    <!-- Description for no usage time but have battery usage [CHAR LIMIT=120] -->
+    <string name="battery_usage_without_time"></string>
 
     <!-- Graph subtext displayed to user when enhanced battery estimate is being used [CHAR LIMIT=120] -->
     <string name="advanced_battery_graph_subtext">Battery left estimate is based on your device usage</string>
@@ -9129,6 +9128,10 @@
     <!-- Configure notifications: Title for determining which notifications appear on the lock screen [CHAR LIMIT=60] -->
     <string name="lock_screen_notifs_title">Notifications on lock screen</string>
 
+    <!-- Configure notifications: summary for lockscreen notifications: all notifications shown
+    regardless of noisiness [CHAR LIMIT=60] -->
+    <string name="lock_screen_notifs_show_all_summary">Show conversations, default, and silent</string>
+
     <!-- Configure notifications: Value for lockscreen notifications: all notifications shown
     regardless of noisiness [CHAR LIMIT=60] -->
     <string name="lock_screen_notifs_show_all">Show conversations, default, and silent</string>
@@ -9380,11 +9383,11 @@
     <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
     <plurals name="notifications_sent_daily">
         <item quantity="one">~<xliff:g id="number">%d</xliff:g> notification per day</item>
-        <item quantity="other">~<xliff:g id="number">%d</xliff:g> notifications per day</item>
+        <item quantity="other">~<xliff:g id="number">%,d</xliff:g> notifications per day</item>
     </plurals>
     <plurals name="notifications_sent_weekly">
         <item quantity="one">~<xliff:g id="number">%d</xliff:g> notification per week</item>
-        <item quantity="other">~<xliff:g id="number">%d</xliff:g> notifications per week</item>
+        <item quantity="other">~<xliff:g id="number">%,d</xliff:g> notifications per week</item>
     </plurals>
     <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
     <string name="notifications_sent_never">Never</string>
@@ -9444,10 +9447,17 @@
           listener, displayed as a dialog message. [CHAR LIMIT=NONE] -->
     <string name="notification_listener_security_warning_summary">
         <xliff:g id="notification_listener_name">%1$s</xliff:g> will be able to read all notifications,
-        including personal information such as contact names and the text of messages you receive.
+        including personal information such as contact names, photos, and the text of messages you receive.
         This app will also be able to snooze or dismiss notifications or take action on buttons in notifications, including answering phone calls.
         \n\nThis will also give the app the ability to turn Do Not Disturb on or off and change related settings.
     </string>
+    <string name="nls_warning_prompt"><xliff:g id="notification_listener_name">%1$s</xliff:g> will be able to:</string>
+    <string name="nls_feature_read_title">Read your notifications</string>
+    <string name="nls_feature_read_summary">It can read your notifications, including personal information such as contacts, messages, and photos.</string>
+    <string name="nls_feature_reply_title">Reply to messages</string>
+    <string name="nls_feature_reply_summary">It can reply to messages and take action on buttons in notifications, including snoozing or dismissing notifications and answering calls.</string>
+    <string name="nls_feature_settings_title">Change settings</string>
+    <string name="nls_feature_settings_summary">It can turn Do Not Disturb on or off and change related settings.</string>
     <string name="notification_listener_disable_warning_summary">
         If you turn off notification access for <xliff:g id="notification_listener_name">%1$s</xliff:g>, Do Not Disturb access may also be turned off.
     </string>
@@ -9869,6 +9879,8 @@
     <string name="zen_mode_conversations_section_title">Conversations that can interrupt</string>
     <string name="zen_mode_from_all_conversations">All conversations</string>
     <string name="zen_mode_from_important_conversations">Priority conversations</string>
+    <!-- [CHAR LIMIT=40] Version of the above for "priority conversations" when it is a non-first member of a list -->
+    <string name="zen_mode_from_important_conversations_second">priority conversations</string>
     <string name="zen_mode_from_no_conversations">None</string>
     <!-- [CHAR LIMIT=NONE] Zen mode settings: Number of conversations allowed to bypass DND -->
     <string name="zen_mode_conversations_count">
@@ -9942,6 +9954,8 @@
     <string name="zen_mode_from_contacts">Contacts</string>
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: From starred contacts only -->
     <string name="zen_mode_from_starred">Starred contacts</string>
+    <!-- [CHAR LIMIT=40] Zen mode settings: Messages option values: From some people (but not all or none), may be contacts or conversations -->
+    <string name="zen_mode_from_some">Some people or conversations</string>
 
     <!-- Do not disturb settings, calls summary [CHAR LIMIT=100]-->
     <string name="zen_calls_summary_starred_repeat">From starred contacts and repeat callers</string>
@@ -11838,6 +11852,11 @@
     <!-- Summary text for swiping from bottom corners to invoke the digital assistant app. [CHAR LIMIT=NONE] -->
     <string name="assistant_corner_gesture_summary">Swipe up from a bottom corner to invoke digital assistant app.</string>
 
+    <!-- Title text for holding a long press on Home button to invoke the digital assistant app. [CHAR LIMIT=60] -->
+    <string name="assistant_long_press_home_gesture_title">Hold Home to invoke assistant</string>
+    <!-- Summary text for holding a long press on Home button to invoke the digital assistant app. [CHAR LIMIT=NONE] -->
+    <string name="assistant_long_press_home_gesture_summary">Press and hold the Home button to invoke digital assistant app.</string>
+
     <!-- Content description for the Information icon [CHAR LIMIT=30] -->
     <string name="information_label">Information</string>
 
@@ -11858,10 +11877,16 @@
     <string name="back_sensitivity_dialog_title">Back Sensitivity</string>
 
     <!-- Title for the screen to show all the gesture navigation settings [CHAR LIMIT=80] -->
-    <string name="gesture_settings_activity_title">Gesture Settings</string>
+    <string name="gesture_settings_activity_title">Gesture Navigation Sensitivity</string>
+
+    <!-- Title for the screen to show all the 2- and 3-button navigation settings. [CHAR LIMIT=80] -->
+    <string name="button_navigation_settings_activity_title">Button navigation</string>
 
     <!-- Keywords for the gesture navigation settings. [CHAR LIMIT=NONE] -->
     <string name="keywords_gesture_navigation_settings">gesture navigation, back sensitivity, back gesture</string>
+
+    <!-- Keywords for the 2-/3-button navigation settings. [CHAR LIMIT=NONE] -->
+    <string name="keywords_button_navigation_settings">navigation, home button</string>
 
     <!-- Preference and settings suggestion title text for ambient display double tap (phone) [CHAR LIMIT=60]-->
     <string name="ambient_display_title" product="default">Double-tap to check phone</string>
@@ -13402,6 +13427,11 @@
     <!-- Wallet (formerly Cards and passes) summary [CHAR LIMIT=NONE] -->
     <string name="lockscreen_privacy_wallet_summary">Allow access to wallet from lock screen and quick settings</string>
 
+    <!-- QR Code Scanner toggle name [CHAR LIMIT=60] -->
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle">Show QR Code Scanner</string>
+    <!-- QR Code Scanner summary [CHAR LIMIT=NONE] -->
+    <string name="lockscreen_privacy_qr_code_scanner_summary">Allow access to QR code scanner from lock screen</string>
+
     <!-- Device controls toggle name [CHAR LIMIT=60] -->
     <string name="lockscreen_privacy_controls_setting_toggle">Show device controls</string>
     <!-- Device controls summary [CHAR LIMIT=NONE] -->
@@ -13566,6 +13596,9 @@
     <string name="default_active_sim_sms">SMS</string>
     <!-- Provider Model: summary of default mobile data. [CHAR LIMIT=50] -->
     <string name="default_active_sim_mobile_data">mobile data</string>
+    <!-- Provider Model: Message to describe "Wi-Fi scan always available feature" when Wi-Fi is off and Wi-Fi
+    scanning is on. To mark a link to bring the user to "scanning settings" screen. [CHAR LIMIT=NONE]-->
+    <string name="wifi_scan_notify_message">To improve device experience, apps and services can still scan for Wi\u2011Fi networks at any time, even when Wi\u2011Fi is off. This can be used, for example, to improve location-based features and services. You can change this in Wi\u2011Fi scanning settings. <annotation id="link">Change</annotation></string>
 
     <!-- Summary text separator for preferences including a short description
          (eg. "Connected / 5G"). [CHAR LIMIT=50] -->
@@ -13729,8 +13762,10 @@
     <string name="camera_toggle_title">Camera access</string>
     <!-- Label for the camera use toggle [CHAR LIMIT=40] -->
     <string name="mic_toggle_title">Microphone access</string>
-    <!-- Describes what is affected by the camera or mic toggle [CHAR LIMIT=NONE] -->
-    <string name="sensor_toggle_description">For all apps and services</string>
+    <!-- Describes what is affected by the camera toggle [CHAR LIMIT=NONE] -->
+    <string name="cam_toggle_description">For apps and services</string>
+    <!-- Describes what is affected by the mic toggle [CHAR LIMIT=NONE] -->
+    <string name="mic_toggle_description">For apps and services. If this setting is off, microphone data may still be shared when you call an emergency number.</string>
 
     <!-- Title for Game settings entry. [CHAR_LIMIT=NONE] -->
     <string name="game_settings_title">Game settings</string>

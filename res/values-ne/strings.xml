@@ -98,7 +98,6 @@
     <string name="bluetooth_notif_title" msgid="1196532269131348647">"जोडी पार्ने अनुरोध"</string>
     <string name="bluetooth_notif_message" msgid="5584717784198086653">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>सँग जोड्न ट्याप गर्नुहोस्।"</string>
     <string name="bluetooth_show_received_files" msgid="685424727760622632">"प्राप्त गरिएका फाइलहरू"</string>
-    <string name="bluetooth_show_files_received_via_bluetooth" msgid="7097860463458492953">"ब्लुटुथमार्फत प्राप्त फाइलहरू"</string>
     <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"ब्लुटुथ निष्क्रिय छ"</string>
     <string name="bluetooth_devices_card_off_summary" msgid="2276527382891105858">"यसलाई सक्रिय गर्न ट्याप गर्नुहोस्"</string>
     <string name="device_picker" msgid="2427027896389445414">"ब्लुटुथ उपकरण छान्नुहोस्"</string>
@@ -2091,7 +2090,7 @@
     <string name="internal_storage" msgid="999496851424448809">"आन्तरिक भण्डारण"</string>
     <string name="recompute_size" msgid="1098091228370999128">"आकार पुनःगणना गर्दै ..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"एपको डेटा मेटाउन चाहनुहुन्छ?"</string>
-    <string name="clear_data_dlg_text" msgid="7870723948123690332">"यस एपका सम्पूर्ण डेटाहरू स्थायी रूपमा मेटाइने छ। यसमा सम्पूर्ण फाइल, सेटिङ, खाताहरू, डेटाबेस आदि पर्दछन्।"</string>
+    <string name="clear_data_dlg_text" msgid="1107610960337399006">"यो एपका डेटा सदाका लागि मेटाइने छ। यसमा फाइल, सेटिङ, डेटाबेस र एपका अन्य डेटा पर्छन्।"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"ठिक छ"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"रद्द गर्नुहोस्"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
@@ -2739,6 +2738,7 @@
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"ब्याट्री प्रबन्धकको प्रयोग गर्नुहोस्"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"एपहरूले ब्याट्रीको चार्ज घटाउँदा थाहा पाउनुहोस्"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"विभिन्न एपहरूले कति बेला ब्याट्री धेरै प्रयोग गर्छन् भन्ने कुरा पत्ता लगाइँदै छ"</string>
+    <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"विभिन्न एपहरूले कति बेला ब्याट्री धेरै प्रयोग गर्छन् भन्ने कुरा पत्ता लगाइँदै छ"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"निष्क्रिय छ"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="other">%1$d एपहरूमा प्रतिबन्ध लगाइयो</item>
@@ -2861,6 +2861,7 @@
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"कुल <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_PERIOD">^2</xliff:g> मा एक मिनेटभन्दा कम समय\nब्याकग्राउन्डमा प्रयोग गरियो"</string>
     <string name="battery_not_usage" msgid="1472275761547230196">"पछिल्लो पटक पूर्ण चार्ज भएदेखि ब्याट्री प्रयोग गरिएको छैन"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"पछिल्लो २४ घन्टामा ब्याट्री प्रयोग गरिएन"</string>
+    <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"बाँकी रहेको ब्याट्रीको प्रतिशतको अनुमान तपाईंको डिभाइसको प्रयोगमा आधारित हुन्छ"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"अनुमानित बाँकी समय"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"पूर्ण चार्ज नभएसम्म"</string>
@@ -4101,6 +4102,7 @@
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"यो सेटिङ लागू नहुने वार्तालाप"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"सबै वार्तालापहरू"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"महत्वपूर्ण वार्तालापहरू"</string>
+    <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"महत्त्वपूर्ण वार्तालापहरू"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"कुनै पनि होइन"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{कुनै पनि वार्तालाप होइन}=1{एउटा वार्तालाप}other{# वटा वार्तालाप}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"यो सेटिङ लागू नहुने व्यक्तिहरू"</string>
@@ -4125,6 +4127,7 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"जोसुकै"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"सम्पर्क ठेगानाहरू"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"ताराङ्कित सम्पर्क ठेगानाहरू"</string>
+    <string name="zen_mode_from_some" msgid="3708450042225044524">"केही मान्छे वा वार्तालापहरू"</string>
     <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"ताराङ्कित सम्पर्क ठेगाना तथा बारम्बार कल गर्ने व्यक्तिका कलहरू"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"सम्पर्क ठेगानामा भएका तथा बारम्बार कल गर्ने व्यक्तिका कलहरू"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"बारम्बार कल गर्ने व्यक्तिका कलहरू मात्र"</string>
@@ -4855,6 +4858,10 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"डिजिटल सहायक"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"स्वाइप गर्दा सहायक सुरु होस्"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"डिजिटल सहायक एप चलाउन थाल्न स्क्रिनको फेदको कुनाबाट माथितिर स्वाइप गर्नुहोस्।"</string>
+    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
+    <skip />
+    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
+    <skip />
     <string name="information_label" msgid="6939310810756569298">"जानकारी"</string>
     <string name="low_label" msgid="6525629096999711220">"न्यून"</string>
     <string name="high_label" msgid="357503396626018487">"उच्च"</string>
@@ -4862,8 +4869,12 @@
     <string name="right_edge" msgid="1505309103265829121">"दायाँ किनारा"</string>
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"स्क्रिनका किनारामा एपको इसारा राखिएको छ भने स्क्रिनको संवेदनशीलता उच्च बनाउँदा उक्त इसारासँग बाझिन सक्छ।"</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"पछाडिको भागको संवेदनशीलता"</string>
-    <string name="gesture_settings_activity_title" msgid="6047431928567911330">"इसारासम्बन्धी सेटिङहरू"</string>
+    <string name="gesture_settings_activity_title" msgid="2025828425762595733">"इसारामार्फत गरिने नेभिगेसनको संवेदनशीलता"</string>
+    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
+    <skip />
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"इसारामार्फत गरिने नेभिगेसन, पृष्ठभागको संवेदनशीलता, पृष्ठभागको इसारा"</string>
+    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
+    <skip />
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"फोनको जाँच गर्न डबल-ट्याप गर्नुहोस्"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"ट्याब्लेटको जाँच गर्न डबल-ट्याप गर्नुहोस्"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"डिभाइसको जाँच गर्न डबल-ट्याप गर्नुहोस्"</string>
@@ -5274,7 +5285,7 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"अमान्य नेटवर्क मोड <xliff:g id="NETWORKMODEID">%1$d</xliff:g>। बेवास्ता गर्नुहोस्।"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"एक्सेस पोइन्ट नामहरू"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> मा जडान हुँदा उपलब्ध छैन"</string>
-    <string name="see_more" msgid="7499355691042812723">"थप हेर्नुहोस्"</string>
+    <string name="see_more" msgid="8436037008285546409">"सेटिङ"</string>
     <string name="see_less" msgid="2642392725363552793">"कम हेर्नुहोस्"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> अन गर्ने हो?"</string>
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"SIM सक्रिय गर्ने हो?"</string>
@@ -5506,6 +5517,7 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"कलहरू"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"मोबाइल डेटा"</string>
+    <string name="wifi_scan_notify_message" msgid="4130641837826688879">"डिभाइस प्रयोगको अनुभवमा सुधार गर्न, एप तथा सेवाहरूले अझै पनि जुनसुकै बेला (Wi‑Fi अफ भएका बेलामा पनि) Wi‑Fi नेटवर्क खोज्न सक्छन्। यसलाई लोकेसनमा आधारित सुविधा तथा सेवाहरूमा सुधार गर्ने जस्ता कार्यहरू गर्नका लागि प्रयोग गर्न सकिन्छ। तपाईं यसलाई Wi-Fi स्क्यानिङका सेटिङमा गई परिवर्तन गर्न सक्नुहुन्छ। "<annotation id="link">"बदल्नुहोस्"</annotation></string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"इन्टरनेटमा कनेक्ट गरिएको छ"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"इन्टरनेट छैन"</string>
@@ -5574,7 +5586,8 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"UWB प्रयोग गर्न हवाइजहाज मोड अफ गर्नुहोस्"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"क्यामेरा प्रयोग गर्ने अनुमति"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"माइक्रोफोन प्रयोग गर्ने अनुमति"</string>
-    <string name="sensor_toggle_description" msgid="8248823248606795411">"सबै एप र सेवाहरूका लागि"</string>
+    <string name="cam_toggle_description" msgid="9212762204005146404">"एप र सेवाहरूका लागि"</string>
+    <string name="mic_toggle_description" msgid="484139688645092237">"एप र सेवाहरूका लागि। यो सेटिङ अफ गरिएको अवस्थामा तपाईंले आपत्‍कालीन नम्बरमा कल गर्नुभयो भने माइक्रोफोनसम्बन्धी डेटा अझै पनि सेयर गरिन सक्छ।"</string>
     <string name="game_settings_title" msgid="1028178627743422090">"गेमका सेटिङ"</string>
     <string name="game_settings_summary" msgid="8623110986485071064">"गेम ड्यासबोर्डको सर्टकटलगायतका सुविधा अन गर्नुहोस्"</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"अघिल्लो"</string>

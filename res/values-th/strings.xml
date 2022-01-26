@@ -98,7 +98,6 @@
     <string name="bluetooth_notif_title" msgid="1196532269131348647">"คำขอจับคู่อุปกรณ์"</string>
     <string name="bluetooth_notif_message" msgid="5584717784198086653">"แตะเพื่อจับคู่กับ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_show_received_files" msgid="685424727760622632">"ไฟล์ที่ได้รับ"</string>
-    <string name="bluetooth_show_files_received_via_bluetooth" msgid="7097860463458492953">"ไฟล์ที่ได้รับทางบลูทูธ"</string>
     <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"บลูทูธปิดอยู่"</string>
     <string name="bluetooth_devices_card_off_summary" msgid="2276527382891105858">"แตะเพื่อเปิด"</string>
     <string name="device_picker" msgid="2427027896389445414">"เลือกอุปกรณ์บลูทูธ"</string>
@@ -2091,7 +2090,7 @@
     <string name="internal_storage" msgid="999496851424448809">"ที่เก็บข้อมูลภายใน"</string>
     <string name="recompute_size" msgid="1098091228370999128">"กำลังคำนวณขนาดใหม่..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"ลบข้อมูลในแอปหรือไม่"</string>
-    <string name="clear_data_dlg_text" msgid="7870723948123690332">"ระบบจะลบข้อมูลทั้งหมดของแอปนี้โดยถาวร ซึ่งรวมถึงไฟล์ การตั้งค่า บัญชี ฐานข้อมูล ฯลฯ"</string>
+    <string name="clear_data_dlg_text" msgid="1107610960337399006">"ระบบจะลบข้อมูลของแอปนี้อย่างถาวร ซึ่งรวมถึงไฟล์ การตั้งค่า ฐานข้อมูล และข้อมูลแอปอื่นๆ"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"ตกลง"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"ยกเลิก"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
@@ -2739,6 +2738,7 @@
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"ใช้ตัวจัดการแบตเตอรี่"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"ตรวจจับเมื่อแอปทำให้แบตเตอรี่หมดเร็ว"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"ตรวจจับเมื่อแอปทำให้แบตเตอรี่หมดเร็ว"</string>
+    <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"ตรวจจับเมื่อแอปทำให้แบตเตอรี่หมดเร็ว"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"ปิด"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="other">จำกัดแอป %1$d แอป</item>
@@ -2861,6 +2861,7 @@
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"ใช้งานรวม <xliff:g id="TIME_0">^1</xliff:g> • ใช้งานเบื้องหลังไม่ถึง 1 นาที\nในช่วง <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
     <string name="battery_not_usage" msgid="1472275761547230196">"ไม่มีการใช้งานตั้งแต่ชาร์จเต็มครั้งล่าสุด"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"ไม่มีการใช้งานในช่วง 24 ชม. ที่ผ่านมา"</string>
+    <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"ค่าประมาณแบตเตอรี่ที่เหลืออิงตามการใช้งานอุปกรณ์ของคุณ"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"เวลาที่เหลือโดยประมาณ"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"จนกว่าจะชาร์จเต็ม"</string>
@@ -4101,6 +4102,7 @@
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"การสนทนาที่รบกวนคุณได้"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"การสนทนาทั้งหมด"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"การสนทนาสำคัญ"</string>
+    <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"การสนทนาสำคัญ"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"ไม่มี"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{ไม่มี}=1{การสนทนา 1 รายการ}other{การสนทนา # รายการ}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"ผู้ที่รบกวนคุณได้"</string>
@@ -4125,6 +4127,7 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"ทุกคน"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"รายชื่อติดต่อ"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"รายชื่อติดต่อที่ติดดาว"</string>
+    <string name="zen_mode_from_some" msgid="3708450042225044524">"บางคนหรือบางบทสนทนา"</string>
     <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"จากรายชื่อติดต่อที่ติดดาวและผู้โทรซ้ำ"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"จากรายชื่อติดต่อและผู้โทรซ้ำ"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"จากผู้โทรซ้ำเท่านั้น"</string>
@@ -4855,6 +4858,10 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"ผู้ช่วยดิจิทัล"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"ปัดเพื่อเรียกใช้ผู้ช่วย"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"ปัดขึ้นจากมุมด้านล่างเพื่อเรียกใช้แอปผู้ช่วยดิจิทัล"</string>
+    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
+    <skip />
+    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
+    <skip />
     <string name="information_label" msgid="6939310810756569298">"ข้อมูล"</string>
     <string name="low_label" msgid="6525629096999711220">"ต่ำ"</string>
     <string name="high_label" msgid="357503396626018487">"สูง"</string>
@@ -4862,8 +4869,12 @@
     <string name="right_edge" msgid="1505309103265829121">"ขอบขวา"</string>
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"ความไวที่สูงขึ้นอาจขัดแย้งกับท่าทางสัมผัสของแอปที่บริเวณขอบหน้าจอ"</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"ความไวต่อการเลื่อนกลับ"</string>
-    <string name="gesture_settings_activity_title" msgid="6047431928567911330">"การตั้งค่าท่าทางสัมผัส"</string>
+    <string name="gesture_settings_activity_title" msgid="2025828425762595733">"ความไวของการนำทางด้วยท่าทางสัมผัส"</string>
+    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
+    <skip />
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"การนำทางด้วยท่าทางสัมผัส ความไวต่อการเลื่อนกลับ ท่าทางสัมผัสการย้อนกลับ"</string>
+    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
+    <skip />
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"แตะสองครั้งเพื่อดูโทรศัพท์"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"แตะ 2 ครั้งเพื่อตรวจสอบแท็บเล็ต"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"แตะ 2 ครั้งเพื่อตรวจสอบอุปกรณ์"</string>
@@ -5274,7 +5285,7 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"โหมดเครือข่ายไม่ถูกต้อง <xliff:g id="NETWORKMODEID">%1$d</xliff:g> ไม่สนใจ"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"ชื่อจุดเข้าใช้งาน"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"ใช้ไม่ได้เมื่อเชื่อมต่อกับ <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="see_more" msgid="7499355691042812723">"ดูเพิ่ม"</string>
+    <string name="see_more" msgid="8436037008285546409">"การตั้งค่า"</string>
     <string name="see_less" msgid="2642392725363552793">"ดูน้อยลง"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"ต้องการเปิดใช้ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ไหม"</string>
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"ต้องการเปิดใช้ซิมใช่ไหม"</string>
@@ -5506,6 +5517,7 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"การโทร"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"อินเทอร์เน็ตมือถือ"</string>
+    <string name="wifi_scan_notify_message" msgid="4130641837826688879">"เพื่อปรับปรุงประสบการณ์การใช้อุปกรณ์ แอปและบริการต่างๆ จะยังคงสแกนหาเครือข่าย Wi‑Fi ได้ทุกเมื่อแม้ว่า Wi‑Fi จะปิดอยู่ การตั้งค่านี้ใช้เพื่อทำสิ่งต่างๆ เช่น ปรับปรุงฟีเจอร์และบริการที่อิงตามตำแหน่ง คุณเปลี่ยนตัวเลือกนี้ได้ในการตั้งค่าการสแกนหา Wi-Fi "<annotation id="link">"เปลี่ยน"</annotation></string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"เชื่อมต่อแล้ว"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"ไม่มีการเชื่อมต่อ"</string>
@@ -5574,7 +5586,8 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"ปิดโหมดบนเครื่องบินเพื่อใช้ UWB"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"สิทธิ์เข้าถึงกล้อง"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"สิทธิ์เข้าถึงไมโครโฟน"</string>
-    <string name="sensor_toggle_description" msgid="8248823248606795411">"สำหรับแอปและบริการทั้งหมด"</string>
+    <string name="cam_toggle_description" msgid="9212762204005146404">"สำหรับแอปและบริการ"</string>
+    <string name="mic_toggle_description" msgid="484139688645092237">"สำหรับแอปและบริการ หากปิดการตั้งค่านี้ ระบบอาจยังคงแชร์ข้อมูลไมโครโฟนเมื่อคุณโทรหาหมายเลขฉุกเฉิน"</string>
     <string name="game_settings_title" msgid="1028178627743422090">"การตั้งค่าเกม"</string>
     <string name="game_settings_summary" msgid="8623110986485071064">"เปิดทางลัดสำหรับแดชบอร์ดเกมและอื่นๆ"</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"ก่อนหน้า"</string>

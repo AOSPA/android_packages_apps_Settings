@@ -98,7 +98,6 @@
     <string name="bluetooth_notif_title" msgid="1196532269131348647">"Paringsforespørsel"</string>
     <string name="bluetooth_notif_message" msgid="5584717784198086653">"Trykk for å koble sammen med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="685424727760622632">"Mottatte filer"</string>
-    <string name="bluetooth_show_files_received_via_bluetooth" msgid="7097860463458492953">"Filer mottatt via Bluetooth"</string>
     <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"Bluetooth er av"</string>
     <string name="bluetooth_devices_card_off_summary" msgid="2276527382891105858">"Trykk for å slå det på"</string>
     <string name="device_picker" msgid="2427027896389445414">"Velg Bluetooth-enhet"</string>
@@ -2053,8 +2052,8 @@
     <string name="uninstall_text" msgid="315764653029060126">"Avinstaller"</string>
     <string name="uninstall_all_users_text" msgid="5924715251087176474">"Avinstaller for alle brukere"</string>
     <string name="install_text" msgid="4558333621516996473">"Installer"</string>
-    <string name="disable_text" msgid="5146002260857428005">"Slå av"</string>
-    <string name="enable_text" msgid="8570798764647110430">"Slå på"</string>
+    <string name="disable_text" msgid="5146002260857428005">"Deaktiver"</string>
+    <string name="enable_text" msgid="8570798764647110430">"Aktivér"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Tøm lagring"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Avinstaller oppdateringer"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Noen aktiviteter du har valgt, åpnes som standard i denne appen."</string>
@@ -2091,7 +2090,7 @@
     <string name="internal_storage" msgid="999496851424448809">"Intern lagring"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Beregner størrelse på nytt…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Vil du slette appdataene?"</string>
-    <string name="clear_data_dlg_text" msgid="7870723948123690332">"Alle data i appen slettes permanent. Dette omfatter alle filer, innstillinger, kontoer, databaser osv."</string>
+    <string name="clear_data_dlg_text" msgid="1107610960337399006">"Dataene i denne appen slettes permanent. Dette inkluderer filer, innstillinger, databaser og andre appdata."</string>
     <string name="dlg_ok" msgid="1421350367857960997">"OK"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"Avbryt"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
@@ -2739,6 +2738,7 @@
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Bruk batteristyring"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Oppdag når apper har for høyt batteriforbruk"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"Registrerer når apper har for høyt batteriforbruk"</string>
+    <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"Registrerer når apper har for høyt batteriforbruk"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"Av"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="other">%1$d apper er begrenset</item>
@@ -2861,6 +2861,7 @@
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"<xliff:g id="TIME_0">^1</xliff:g> totalt • mindre enn et minutt i bakgrunnen\ni perioden <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
     <string name="battery_not_usage" msgid="1472275761547230196">"Ingen bruk siden sist batteriet var fulladet"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Ingen bruk de siste 24 timene"</string>
+    <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Beregnet gjenværende batteritid er basert på måten du bruker enheten på"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Anslått tid som er igjen"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Til det er fulladet"</string>
@@ -3280,8 +3281,8 @@
     <string name="vpn_missing_cert" msgid="5397309964971068272">"Et sertifikat mangler. Prøv å redigere profilen."</string>
     <string name="trusted_credentials_system_tab" msgid="675362923690364722">"System"</string>
     <string name="trusted_credentials_user_tab" msgid="4978365619630094339">"Bruker"</string>
-    <string name="trusted_credentials_disable_label" msgid="6649583220519447947">"Slå av"</string>
-    <string name="trusted_credentials_enable_label" msgid="5551204878588237991">"Slå på"</string>
+    <string name="trusted_credentials_disable_label" msgid="6649583220519447947">"Deaktiver"</string>
+    <string name="trusted_credentials_enable_label" msgid="5551204878588237991">"Aktivér"</string>
     <string name="trusted_credentials_remove_label" msgid="8296330919329489422">"Avinstaller"</string>
     <string name="trusted_credentials_trust_label" msgid="4841047312274452474">"Angi som pålitelig"</string>
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Vil du slå på systemets CA-sertifikat?"</string>
@@ -4101,6 +4102,7 @@
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"Samtaler som kan forstyrre"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Alle samtaler"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Prioriterte samtaler"</string>
+    <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"prioriterte samtaler"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Ingen"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Ingen}=1{1 samtale}other{# samtaler}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Hvem kan forstyrre?"</string>
@@ -4125,6 +4127,7 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Alle"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Kontakter"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Stjernemerkede kontakter"</string>
+    <string name="zen_mode_from_some" msgid="3708450042225044524">"Noen folk eller samtaler"</string>
     <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"Fra stjernemerkede kontakter og gjentatte oppringere"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"Fra kontakter og gjentatte oppringere"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"Bare fra gjentatte oppringere"</string>
@@ -4855,6 +4858,10 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Digital assistent"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Sveip for å kalle opp assistenten"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Sveip opp fra et av de nederste hjørnene for å kalle opp den digitale assistenten."</string>
+    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
+    <skip />
+    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
+    <skip />
     <string name="information_label" msgid="6939310810756569298">"Informasjon"</string>
     <string name="low_label" msgid="6525629096999711220">"Lav"</string>
     <string name="high_label" msgid="357503396626018487">"Høy"</string>
@@ -4862,8 +4869,12 @@
     <string name="right_edge" msgid="1505309103265829121">"Høyre kant"</string>
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Høyere følsomhet kan komme i konflikt med eventuelle appbevegelser langs kantene av skjermen."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Følsomhet for tilbakebevegelsen"</string>
-    <string name="gesture_settings_activity_title" msgid="6047431928567911330">"Valg for bevegelser"</string>
+    <string name="gesture_settings_activity_title" msgid="2025828425762595733">"Sensitivitet for navigasjon med bevegelser"</string>
+    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
+    <skip />
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"navigasjon med bevegelser, følsomhet for tilbakebevegelsen, tilbakebevegelse"</string>
+    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
+    <skip />
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Dobbelttrykk for å sjekke telefonen"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Dobbelttrykk for å sjekke nettbrettet"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Dobbelttrykk for å sjekke enheten"</string>
@@ -5274,7 +5285,7 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Ugyldig nettverksmodus (<xliff:g id="NETWORKMODEID">%1$d</xliff:g>). Ignorer."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Navn på tilgangspunkt"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Utilgjengelig når du er koblet til <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="see_more" msgid="7499355691042812723">"Se flere"</string>
+    <string name="see_more" msgid="8436037008285546409">"Innstillinger"</string>
     <string name="see_less" msgid="2642392725363552793">"Se mindre"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"Vil du slå på <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Vil du slå på SIM-kortet?"</string>
@@ -5506,6 +5517,7 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"anrop"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"mobildata"</string>
+    <string name="wifi_scan_notify_message" msgid="4130641837826688879">"For å forbedre brukeropplevelsen på enheten kan apper og tjenester søke etter Wi-Fi-nettverk når som helst – også når Wi-Fi er slått av. Dette kan for eksempel brukes til å forbedre posisjonsbaserte funksjoner og tjenester. Du kan endre dette i innstillingene for Wi-Fi-skanning. "<annotation id="link">"Endre"</annotation></string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Tilkoblet"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Ingen tilkobling"</string>
@@ -5574,7 +5586,8 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Slå av flymodus for å bruke UWB"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Kameratilgang"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Mikrofontilgang"</string>
-    <string name="sensor_toggle_description" msgid="8248823248606795411">"For alle apper og tjenester"</string>
+    <string name="cam_toggle_description" msgid="9212762204005146404">"For apper og tjenester"</string>
+    <string name="mic_toggle_description" msgid="484139688645092237">"For apper og tjenester. Hvis denne innstillingen er av, kan mikrofondata fremdeles deles når du ringer et nødnummer."</string>
     <string name="game_settings_title" msgid="1028178627743422090">"Spillinnstillinger"</string>
     <string name="game_settings_summary" msgid="8623110986485071064">"Slå på Spilloversikt-snarveien med mer"</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"Forrige"</string>

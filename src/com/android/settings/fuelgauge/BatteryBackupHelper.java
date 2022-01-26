@@ -29,8 +29,8 @@ import android.content.pm.ParceledListSlice;
 import android.content.pm.UserInfo;
 import android.os.Build;
 import android.os.IDeviceIdleController;
-import android.os.RemoteException;
 import android.os.ParcelFileDescriptor;
+import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -230,7 +230,7 @@ public final class BatteryBackupHelper implements BackupHelper {
                 mBatteryOptimizeUtils != null
                         ? mBatteryOptimizeUtils /*testing only*/
                         : new BatteryOptimizeUtils(mContext, uid, packageName);
-        batteryOptimizeUtils.setAppOptimizationMode(mode);
+        batteryOptimizeUtils.setAppUsageState(mode);
         Log.d(TAG, String.format("restore:%s mode=%d", packageName, mode));
     }
 
@@ -263,9 +263,7 @@ public final class BatteryBackupHelper implements BackupHelper {
     private boolean isSystemOrDefaultApp(String packageName) {
         final PowerAllowlistBackend powerAllowlistBackend = getPowerAllowlistBackend();
         return powerAllowlistBackend.isSysAllowlisted(packageName)
-                || powerAllowlistBackend.isDefaultActiveApp(packageName)
-                // Optimize mode only for app which is in the allow list not idle app.
-                || powerAllowlistBackend.isAllowlistedExceptIdle(packageName);
+                || powerAllowlistBackend.isDefaultActiveApp(packageName);
     }
 
     private List<ApplicationInfo> getInstalledApplications() {

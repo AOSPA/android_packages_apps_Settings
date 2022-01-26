@@ -98,7 +98,6 @@
     <string name="bluetooth_notif_title" msgid="1196532269131348647">"សំណើ​ផ្គូផ្គង"</string>
     <string name="bluetooth_notif_message" msgid="5584717784198086653">"ប៉ះដើម្បីផ្គូផ្គងជាមួយ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ។"</string>
     <string name="bluetooth_show_received_files" msgid="685424727760622632">"ឯកសារ​ដែល​បានទទួល"</string>
-    <string name="bluetooth_show_files_received_via_bluetooth" msgid="7097860463458492953">"ឯកសារ​ដែលបាន​ទទួល​តាម​រយៈ​ប៊្លូធូស"</string>
     <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"ប៊្លូធូស​ត្រូវបានបិទ"</string>
     <string name="bluetooth_devices_card_off_summary" msgid="2276527382891105858">"ចុចដើម្បី​បើកប៊្លូធូស"</string>
     <string name="device_picker" msgid="2427027896389445414">"ជ្រើស​ឧបករណ៍​ប៊្លូ​ធូ​ស"</string>
@@ -2091,7 +2090,7 @@
     <string name="internal_storage" msgid="999496851424448809">"ឧបករណ៍​ខាង​ក្នុង"</string>
     <string name="recompute_size" msgid="1098091228370999128">"កំពុង​គណនា​ទំហំ​ឡើងវិញ…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"លុប​ទិន្នន័យ​កម្មវិធី?"</string>
-    <string name="clear_data_dlg_text" msgid="7870723948123690332">"ទិន្នន័យ​របស់​កម្មវិធី​នេះ​ទាំងអស់​នឹង​ត្រូវ​បាន​លុប​ជា​អចិន្ត្រៃយ៍។ ទិន្នន័យទាំងនេះរួមមាន ឯកសារ​ទាំងអស់ ការ​កំណត់ គណនី មូលដ្ឋាន​ទិន្នន័យ ។ល។"</string>
+    <string name="clear_data_dlg_text" msgid="1107610960337399006">"ទិន្នន័យ​របស់កម្មវិធីនេះ​នឹងត្រូវបានលុប​ជាអចិន្ត្រៃយ៍។ ទិន្នន័យនេះ​រួមមាន​ឯកសារ ការកំណត់ មូលដ្ឋាន​ទិន្នន័យ និង​ទិន្នន័យកម្មវិធី​ផ្សេងទៀត។"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"យល់​ព្រម​"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"បោះ​បង់​"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
@@ -2739,6 +2738,7 @@
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"ប្រើ​កម្មវិធី​គ្រប់គ្រង​ថ្ម"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"រកឃើញនៅពេលកម្មវិធី​ធ្វើឱ្យឆាប់អស់ថ្ម"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"កំពុងរកមើល នៅពេលកម្មវិធី​ធ្វើឱ្យឆាប់អស់ថ្ម"</string>
+    <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"កំពុងរកមើល នៅពេលកម្មវិធី​ធ្វើឱ្យឆាប់អស់ថ្ម"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"បិទ"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="other">កម្មវិធី %1$d ត្រូវបាន​ដាក់កំហិត</item>
@@ -2861,6 +2861,7 @@
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"សរុប <xliff:g id="TIME_0">^1</xliff:g> • ប្រើនៅ​ផ្ទៃខាងក្រោយ​តិចជាងមួយនាទី\nសម្រាប់ <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
     <string name="battery_not_usage" msgid="1472275761547230196">"មិនមាន​ការប្រើប្រាស់ទេ​តាំងពី​សាកថ្មពេញ​លើកចុងក្រោយ"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"មិនមាន​ការប្រើប្រាស់ទេ​ក្នុងរយៈពេល 24 ម៉ោងចុងក្រោយ"</string>
+    <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"ការ​ប៉ាន់ស្មាន​អំពី​កម្រិត​ថ្ម​ដែល​នៅសល់​គឺ​ផ្អែក​លើ​ការ​ប្រើប្រាស់​ឧបករណ៍​របស់​អ្នក"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"រយៈពេល​នៅ​សល់​ប៉ាន់​ស្មាន"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"ទៀតទើបសាកថ្មពេញ"</string>
@@ -4101,6 +4102,7 @@
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"ការសន្ទនា​ដែលអាច​ផ្អាក"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"ការសន្ទនា​ទាំងអស់"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"ការសន្ទនា​អាទិភាព"</string>
+    <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"ការសន្ទនា​អាទិភាព"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"គ្មាន"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{គ្មាន}=1{ការ​សន្ទនា 1}other{ការសន្ទនា #}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"អ្នកដែល​អាច​ផ្អាកបាន"</string>
@@ -4125,6 +4127,7 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"គ្រប់គ្នា"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"ទំនាក់ទំនង"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"ទំនាក់ទំនង​មាន​ផ្កាយ"</string>
+    <string name="zen_mode_from_some" msgid="3708450042225044524">"ការសន្ទនា ឬមនុស្ស​មួយចំនួន"</string>
     <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"ពីទំនាក់​ទំនងមានផ្កាយ និង​អ្នកហៅ​ទូរសព្ទ​ដដែលៗ"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"ពីទំនាក់​ទំនង និង​អ្នកហៅ​ទូរសព្ទ​ដដែលៗ"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"ពីអ្នកហៅ​ទូរសព្ទ​ដដែលៗតែ​ប៉ុណ្ណោះ"</string>
@@ -4855,6 +4858,10 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"ជំនួយការ​ឌីជីថល"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"អូសដើម្បី​ប្រើជំនួយការ"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"អូសឡើងលើ​ពីជ្រុងខាងក្រោម ដើម្បីចាប់ផ្ដើមកម្មវិធីជំនួយការ​ឌីជីថល។"</string>
+    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
+    <skip />
+    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
+    <skip />
     <string name="information_label" msgid="6939310810756569298">"ព័ត៌មាន"</string>
     <string name="low_label" msgid="6525629096999711220">"ទាប"</string>
     <string name="high_label" msgid="357503396626018487">"ខ្ពស់"</string>
@@ -4862,8 +4869,12 @@
     <string name="right_edge" msgid="1505309103265829121">"គែម​ខាង​ស្ដាំ"</string>
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"រំញោចកាន់តែ​ខ្ពស់​អាចប៉ះពាល់ជាមួយ​ចលនាកម្មវិធីទាំងឡាយ​​នៅតាមគែមអេក្រង់។"</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"រំញោចថយក្រោយ"</string>
-    <string name="gesture_settings_activity_title" msgid="6047431928567911330">"ការកំណត់​ចលនា"</string>
+    <string name="gesture_settings_activity_title" msgid="2025828425762595733">"កម្រិតរំញោចនៃ​ការរុករក​ដោយប្រើចលនា"</string>
+    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
+    <skip />
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"ការរុករក​ដោយប្រើចលនា រំញោច​ថយក្រោយ ចលនា​ថយក្រោយ"</string>
+    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
+    <skip />
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"ចុចពីរដងដើម្បីពិនិត្យទូរសព្ទ"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"ប៉ះពីរដងដើម្បីពិនិត្យថេប្លេត"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"ប៉ះពីរដងដើម្បីពិនិត្យឧបករណ៍"</string>
@@ -5274,7 +5285,7 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"មុខងារបណ្ដាញ​មិនត្រឹមត្រូវ <xliff:g id="NETWORKMODEID">%1$d</xliff:g>។ សូមកុំអើពើ។"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"ឈ្មោះ​ចំណុច​ចូល​ប្រើប្រាស់"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"មិន​អាច​ប្រើបាន​ទេ នៅពេលភ្ជាប់ <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="see_more" msgid="7499355691042812723">"មើលច្រើន​ទៀត"</string>
+    <string name="see_more" msgid="8436037008285546409">"ការកំណត់"</string>
     <string name="see_less" msgid="2642392725363552793">"​មើល​តិច​ជាង"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"បើក <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ឬ?"</string>
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"បើកស៊ីមឬ?"</string>
@@ -5506,6 +5517,7 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"ការហៅទូរសព្ទ"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"ទិន្នន័យ​ទូរសព្ទចល័ត"</string>
+    <string name="wifi_scan_notify_message" msgid="4130641837826688879">"ដើម្បីធ្វើឱ្យ​បទពិសោធន៍ប្រើប្រាស់​ឧបករណ៍ប្រសើរឡើង កម្មវិធី និង​សេវាកម្ម​នៅតែ​អាច​ស្កេនរក​បណ្តាញ Wi-Fi បានគ្រប់ពេល ទោះបីជានៅពេលបិទ Wi-Fi ក៏ដោយ។ សកម្មភាពនេះ​អាចត្រូវបានប្រើ ដើម្បី​កែលម្អ​មុខងារ និងសេវាកម្មដែល​ផ្អែកលើ​ទីតាំង​ជាដើម។ អ្នក​អាចប្ដូរវាបាន​នៅក្នុង​ការកំណត់​ការស្កេន Wi‑Fi។ "<annotation id="link">"ប្ដូរ"</annotation></string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"បានភ្ជាប់"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"មិនមាន​ការតភ្ជាប់ទេ"</string>
@@ -5574,7 +5586,8 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"បិទមុខងារ​ពេលជិះយន្តហោះ ដើម្បីប្រើ UWB"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"ការចូលប្រើ​កាមេរ៉ា"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"ការចូលប្រើ​មីក្រូហ្វូន"</string>
-    <string name="sensor_toggle_description" msgid="8248823248606795411">"សម្រាប់កម្មវិធី និងសេវាកម្មទាំងអស់"</string>
+    <string name="cam_toggle_description" msgid="9212762204005146404">"សម្រាប់កម្មវិធី និងសេវាកម្ម"</string>
+    <string name="mic_toggle_description" msgid="484139688645092237">"សម្រាប់កម្មវិធី និងសេវាកម្ម។ ប្រសិនបើបិទការកំណត់នេះ ទិន្នន័យមីក្រូហ្វូននៅតែអាចត្រូវបានចែករំលែកដដែល នៅពេលអ្នកហៅទៅលេខសង្គ្រោះបន្ទាន់។"</string>
     <string name="game_settings_title" msgid="1028178627743422090">"ការកំណត់​ហ្គេម"</string>
     <string name="game_settings_summary" msgid="8623110986485071064">"បើក​ផ្លូវកាត់ផ្ទាំងគ្រប់គ្រងហ្គេម និងអ្វីៗជាច្រើនទៀត"</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"មុន"</string>

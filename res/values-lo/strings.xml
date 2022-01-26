@@ -98,7 +98,6 @@
     <string name="bluetooth_notif_title" msgid="1196532269131348647">"ຄຳຮ້ອງຂໍການຈັບຄູ່"</string>
     <string name="bluetooth_notif_message" msgid="5584717784198086653">"ແຕະເພື່ອຈັບຄູ່ກັບ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="685424727760622632">"ໄຟລ໌ທີ່ຮັບແລ້ວ"</string>
-    <string name="bluetooth_show_files_received_via_bluetooth" msgid="7097860463458492953">"ໄຟລ໌ທີ່ໄດ້ຮັບຜ່ານ Bluetooth"</string>
     <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"Bluetooth ປິດຢູ່"</string>
     <string name="bluetooth_devices_card_off_summary" msgid="2276527382891105858">"ແຕະເພື່ອເປີດໃຊ້ມັນ"</string>
     <string name="device_picker" msgid="2427027896389445414">"ເລືອກ​ອຸ​ປະ​ກອນ Bluetooth"</string>
@@ -2091,7 +2090,7 @@
     <string name="internal_storage" msgid="999496851424448809">"ພື້ນທີ່ຈັດເກັບຂໍ້ມູນພາຍໃນ"</string>
     <string name="recompute_size" msgid="1098091228370999128">"ກຳລັງຄຳນວນຂະໜາດຄືນໃໝ່..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"ລຶບຂໍ້ມູນແອັບບໍ່?"</string>
-    <string name="clear_data_dlg_text" msgid="7870723948123690332">"ຂໍ້ມູນທັງໝົດຂອງແອັບນີ້ຈະຖືກລຶບອອກຖາວອນ ເຊິ່ງຮວມເຖິງໄຟລ໌, ການຕັ້ງຄ່າ, ບັນຊີ, ຖານຂໍ້ມູນ ແລະ ອື່ນໆທັງໝົດນຳ."</string>
+    <string name="clear_data_dlg_text" msgid="1107610960337399006">"ຂໍ້ມູນຂອງແອັບນີ້ຈະຖືກລຶບອອກຖາວອນ. ນີ້ຮວມເຖິງໄຟລ໌, ການຕັ້ງຄ່າ, ຖານຂໍ້ມູນ ແລະ ຂໍ້ມູນແອັບອື່ນໆນຳ"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"ຕົກລົງ"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"ຍົກເລີກ"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
@@ -2739,6 +2738,7 @@
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"ໃຊ້ຕົວຈັດການແບັດເຕີຣີ"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"ກວດສອບເມື່ອແອັບໃຊ້ແບັດເຕີຣີຫຼາຍເກີນໄປ"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"ການກວດຫາເມື່ອແອັບໃຊ້ແບັດເຕີຣີໝົດໄວ"</string>
+    <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"ການກວດຫາເມື່ອແອັບໃຊ້ແບັດເຕີຣີໝົດໄວ"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"ປິດ"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="other">ຈຳກັດ %1$d ແແອັບແລ້ວ</item>
@@ -2861,6 +2861,7 @@
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"ຮວມ <xliff:g id="TIME_0">^1</xliff:g> • ພື້ນຫຼັງໜ້ອຍກວ່າໜຶ່ງນາທີ\nສຳລັບ <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
     <string name="battery_not_usage" msgid="1472275761547230196">"ບໍ່ມີການນຳໃຊ້ຫຼັງຈາກສາກເຕັມຫຼ້າສຸດ"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"ບໍ່ມີການນຳໃຊ້ໃນຮອບ 24 ຊມ ທີ່ຜ່ານມາ"</string>
+    <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"ການປະເມີນໄລຍະເວລາແບັດເຕີຣີທີ່ເຫຼືອແມ່ນອ້າງອີງຈາກການນຳໃຊ້ອຸປະກອນຂອງທ່ານ"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"ເວລາທີ່ເຫຼືອໂດຍປະມານ"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"ຈົນກວ່າຈະສາກເຕັມ"</string>
@@ -4101,6 +4102,7 @@
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"ການສົນທະນາທີ່ສາມາດລົບກວນໄດ້"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"ການສົນທະນາທັງໝົດ"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"ການສົນທະນາສຳຄັນ"</string>
+    <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"ການສົນທະນາສຳຄັນ"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"ບໍ່ມີ"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{ບໍ່ມີ}=1{1 ການສົນທະນາ}other{# ການສົນທະນາ}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"ໃຜທີ່ສາມາດລົບກວນໄດ້"</string>
@@ -4125,6 +4127,7 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"ທຸກຄົນ"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"ລາຍຊື່ຜູ້ຕິດຕໍ່"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"ລາຍຊື່ຜູ້ຕິດຕໍ່ທີ່ຕິດດາວ"</string>
+    <string name="zen_mode_from_some" msgid="3708450042225044524">"ບາງຄົນ ຫຼື ບາງການສົນທະນາ"</string>
     <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"ຈາກລາຍຊື່ຜູ້ຕິດຕໍ່ທີ່ຕິດດາວໄວ້ ແລະ ຜູ້ໂທຊ້ຳ"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"ຈາກລາຍຊື່ຜູ້ຕິດຕໍ່ ແລະ ຜູ້ໂທຊ້ຳ"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"ຈາກຜູ້ໂທຊ້ຳເທົ່ານັ້ນ"</string>
@@ -4855,6 +4858,10 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"ຜູ້ຊ່ວຍດິຈິຕອນ"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"ປັດເພື່ອເອີ້ນໃຊ້ຜູ້ຊ່ວຍ"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"ປັດຂຶ້ນຈາກມຸມລຸ່ມສຸດເພື່ອເອີ້ນໃຊ້ແອັບຜູ້ຊ່ວຍດິຈິຕອນ."</string>
+    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
+    <skip />
+    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
+    <skip />
     <string name="information_label" msgid="6939310810756569298">"ຂໍ້ມູນ"</string>
     <string name="low_label" msgid="6525629096999711220">"ຕ່ຳ"</string>
     <string name="high_label" msgid="357503396626018487">"ສູງ"</string>
@@ -4862,8 +4869,12 @@
     <string name="right_edge" msgid="1505309103265829121">"ຂອບຂວາ"</string>
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"ຄວາມລະອຽດອ່ອນທີ່ສູງຂຶ້ນອາດຂັດແຍ່ງກັບທ່າທາງແອັບໃດໆທີ່ມີຢູ່ຂອບຈໍ."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"ຄວາມລະອຽດອ່ອນກັບຫຼັງ"</string>
-    <string name="gesture_settings_activity_title" msgid="6047431928567911330">"ການຕັ້ງຄ່າທ່າທາງ"</string>
+    <string name="gesture_settings_activity_title" msgid="2025828425762595733">"ຄວາມລະອຽດອ່ອນຂອງການນຳທາງແບບທ່າທາງ"</string>
+    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
+    <skip />
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"ການນຳທາງທ່າທາງ, ຄວາມລະອຽດອ່ອນທາງຫຼັງ, ທ່າທາງທາງຫຼັງ"</string>
+    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
+    <skip />
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"ແຕະສອງເທື່ອເພື່ອກວດສອບໂທລະສັບ"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"ແຕະສອງເທືື່ອເພື່ອກວດສອບແທັບເລັດ"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"ແຕະສອງເທືື່ອເພື່ອກວດສອບອຸປະກອນ"</string>
@@ -5274,7 +5285,7 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"ໂໝດເຄືອຂ່າຍ <xliff:g id="NETWORKMODEID">%1$d</xliff:g> ບໍ່ຖືກຕ້ອງ. ບໍ່ສົນໃຈ."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"ຊື່ເອດເຊສພອຍ (APN)"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"ບໍ່ສາມາດໃຊ້ໄດ້ເມື່ອເຊື່ອມຕໍ່ກັບ <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="see_more" msgid="7499355691042812723">"ເບິ່ງເພີ່ມເຕີມ"</string>
+    <string name="see_more" msgid="8436037008285546409">"ການຕັ້ງຄ່າ"</string>
     <string name="see_less" msgid="2642392725363552793">"​​ເບິ່ງ​ໜ້ອຍ​ລົງ"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"ເປີດໃຊ້ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ບໍ?"</string>
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"ເປີດໃຊ້ຊິມບໍ?"</string>
@@ -5506,6 +5517,7 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"ການໂທ"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"ອິນເຕີເນັດມືຖື"</string>
+    <string name="wifi_scan_notify_message" msgid="4130641837826688879">"ເພື່ອປັບປຸງປະສົບການອຸປະກອນ, ແອັບ ແລະ ບໍລິການຍັງຄົງສາມາດສະແກນຫາເຄືອຂ່າຍ Wi‑Fi ຕອນໃດກໍໄດ້, ເຖິງແມ່ນວ່າຈະປິດ Wi‑Fi ໄວ້ກໍຕາມ. ສິ່ງນີ້ສາມາດໃຊ້ເພື່ອປັບປຸງຄຸນສົມບັດ ແລະ ບໍລິການທີ່ອ້າງອີງສະຖານທີ່ໄດ້. ທ່ານສາມາດປ່ຽນສິ່ງນີ້ໄດ້ໃນການຕັ້ງຄ່າການສະແກນ Wi‑Fi. "<annotation id="link">"ປ່ຽນ"</annotation>"."</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"ເຊື່ອມຕໍ່ແລ້ວ"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"ບໍ່ມີການເຊື່ອມຕໍ່"</string>
@@ -5574,7 +5586,8 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"ປິດໂໝດຢູ່ໃນຍົນເພື່ອໃຊ້ UWB"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"ການເຂົ້າເຖິງກ້ອງຖ່າຍຮູບ"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"ການເຂົ້າເຖິງໄມໂຄຣໂຟນ"</string>
-    <string name="sensor_toggle_description" msgid="8248823248606795411">"ສຳລັບແອັບ ແລະ ບໍລິການທັງໝົດ"</string>
+    <string name="cam_toggle_description" msgid="9212762204005146404">"ສຳລັບແອັບ ແລະ ບໍລິການ"</string>
+    <string name="mic_toggle_description" msgid="484139688645092237">"ສຳລັບແອັບ ແລະ ບໍລິການ. ຫາກປິດການຕັ້ງຄ່ານີ້ໄວ້, ຂໍ້ມູນໄມໂຄຣໂຟນອາດຍັງຄົງຖືກແບ່ງປັນໃນເວລາທີ່ທ່ານໂທຫາເບີໂທສຸກເສີນ."</string>
     <string name="game_settings_title" msgid="1028178627743422090">"ການຕັ້ງຄ່າເກມ"</string>
     <string name="game_settings_summary" msgid="8623110986485071064">"ເປີດໃຊ້ທາງລັດແຜງໜ້າປັດເກມ ແລະ ອື່ນໆ"</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"ກ່ອນໜ້າ"</string>

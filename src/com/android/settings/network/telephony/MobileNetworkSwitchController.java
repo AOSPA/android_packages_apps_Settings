@@ -107,7 +107,7 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
             // mSubscriptionManager#isSubscriptionEnabled
             int phoneId = mSubscriptionManager.getSlotIndex(mSubId);
             Log.d(TAG, "displayPreference: mSubId=" + mSubId + ", mSubInfo=" + mSubInfo);
-            if ((mSubInfo != null && (mSubInfo.areUiccApplicationsEnabled() != isChecked))) {
+            if (mSubscriptionManager.isActiveSubscriptionId(mSubId) != isChecked) {
                 SubscriptionUtil.startToggleSubscriptionDialogActivity(mContext, mSubId, isChecked);
                 return true;
             }
@@ -151,8 +151,9 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
         } else {
             mSwitchBar.show();
             Log.d(TAG, "update(): mSubId=" + mSubId +
-                    ", areUiccApplicationsEnabled=" + mSubInfo.areUiccApplicationsEnabled());
-            mSwitchBar.setCheckedInternal(mSubInfo.areUiccApplicationsEnabled());
+                    ", isActiveSubscriptionId=" +
+                    mSubscriptionManager.isActiveSubscriptionId(mSubId));
+            mSwitchBar.setCheckedInternal(mSubscriptionManager.isActiveSubscriptionId(mSubId));
         }
     }
 

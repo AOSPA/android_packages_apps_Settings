@@ -39,10 +39,11 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.qti.extphone.ExtTelephonyManager;
+import com.qti.extphone.QtiImeiInfo;
 import com.qti.extphone.ServiceCallback;
 
 import org.codeaurora.internal.IExtTelephony;
-
+import java.util.Optional;
 
 /**
  * Add static utility functions to get information about Primary Card and Subsidy Lock features.
@@ -56,6 +57,9 @@ public final class TelephonyUtils {
 
     private static final String PROPERTY_ADVANCED_SCAN  = "persist.vendor.radio.enableadvancedscan";
 
+    private static final String PROPERTY_SUBSIDY_DEVICE  = "persist.vendor.radio.subsidydevice";
+    private static final String ALLOW_USER_SELECT_DDS = "allow_user_select_dds";
+
     // Modem version prefix tag
     private static final String MODEM_VERSION_PREFIX_HI_TAG = "MPSS.HI."; // Himalaya
     private static final String MODEM_VERSION_PREFIX_DE_TAG = "MPSS.DE."; // Denali
@@ -67,6 +71,7 @@ public final class TelephonyUtils {
 
     private static ExtTelephonyManager mExtTelephonyManager;
     private static boolean mIsServiceBound;
+    private static Optional<Boolean> mIsSubsidyFeatureEnabled = Optional.empty();
 
     private TelephonyUtils() {
     }
@@ -145,6 +150,53 @@ public final class TelephonyUtils {
             }
         }
         return false;
+    }
+
+    public static boolean isSubsidyFeatureEnabled(Context context) {
+        if (!mIsSubsidyFeatureEnabled.isPresent()) {
+            if (!mIsServiceBound) {
+                Log.e(TAG, "isSubsidyFeatureEnabled: ExtTelephony Service not connected!");
+                connectExtTelephonyService(context);
+            }
+
+            try {
+                mIsSubsidyFeatureEnabled =
+                        Optional.of(mExtTelephonyManager.getPropertyValueBool(
+                        PROPERTY_SUBSIDY_DEVICE, false));
+            } catch (NullPointerException ex) {
+                Log.e(TAG, "isSubsidyFeatureEnabled: , Exception: ", ex);
+            }
+        }
+        return mIsSubsidyFeatureEnabled.get();
+    }
+
+    public static boolean allowUsertoSetDDS(Context context) {
+        return Settings.Global.getInt(context.getContentResolver(), ALLOW_USER_SELECT_DDS, 0) == 1;
+    }
+
+    public static boolean isSubsidySimCard(Context context, int slotId) {
+        boolean isSubsidySim = false;
+        if (!mIsServiceBound) {
+            Log.e(TAG, "isSubsidySimCard: ExtTelephony Service not connected!");
+            connectExtTelephonyService(context);
+        }
+
+        try {
+            isSubsidySim = mExtTelephonyManager.isPrimaryCarrierSlotId(slotId);
+        } catch (NullPointerException ex) {
+            Log.e(TAG, "isSubsidySimCard: , Exception: ", ex);
+        }
+        return isSubsidySim;
+    }
+
+    public static QtiImeiInfo[] getImeiInfo() {
+        QtiImeiInfo[] qtiImeiInfo = null;
+        if (isServiceConnected()) {
+            qtiImeiInfo = mExtTelephonyManager.getImeiInfo();
+        } else {
+            Log.e(TAG, "getImeiInfo: ExtTelephony Service not connected!");
+        }
+        return qtiImeiInfo;
     }
 
     public static void connectExtTelephonyService(Context context) {

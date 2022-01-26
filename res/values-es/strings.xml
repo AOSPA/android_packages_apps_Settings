@@ -98,7 +98,6 @@
     <string name="bluetooth_notif_title" msgid="1196532269131348647">"Solicitud de vinculación"</string>
     <string name="bluetooth_notif_message" msgid="5584717784198086653">"Toca para emparejar con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="685424727760622632">"Archivos recibidos"</string>
-    <string name="bluetooth_show_files_received_via_bluetooth" msgid="7097860463458492953">"Archivos recibidos por Bluetooth"</string>
     <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"El Bluetooth está desactivado"</string>
     <string name="bluetooth_devices_card_off_summary" msgid="2276527382891105858">"Toca para activarlo"</string>
     <string name="device_picker" msgid="2427027896389445414">"Seleccionar dispositivo Bluetooth"</string>
@@ -1554,8 +1553,8 @@
     <string name="sd_eject_summary" product="default" msgid="5151243312587186226">"Desconectar la tarjeta SD para extraerla de forma segura"</string>
     <string name="sd_insert_summary" product="nosdcard" msgid="9164545135649775664">"Inserta USB para activar almacenamiento"</string>
     <string name="sd_insert_summary" product="default" msgid="5949168259622002192">"Insertar una tarjeta SD para el montaje"</string>
-    <string name="sd_mount" product="nosdcard" msgid="8305985249945415150">"Activar almacenamiento USB"</string>
-    <string name="sd_mount" product="default" msgid="5279813999455776169">"Activar tarjeta SD"</string>
+    <string name="sd_mount" product="nosdcard" msgid="8305985249945415150">"Montar almacenamiento USB"</string>
+    <string name="sd_mount" product="default" msgid="5279813999455776169">"Montar tarjeta SD"</string>
     <string name="sd_mount_summary" product="nosdcard" msgid="2190410240845521205"></string>
     <string name="sd_mount_summary" product="default" msgid="2190410240845521205"></string>
     <string name="sd_format" product="nosdcard" msgid="8657427883364711513">"Borrar almacenamiento USB"</string>
@@ -1578,7 +1577,7 @@
     <string name="storage_low_title" msgid="8002650511493419567">"No queda espacio de almacenamiento"</string>
     <string name="storage_low_summary" msgid="7341022293583384506">"Es posible que algunas funciones del sistema, como la sincronización, no funcionen correctamente. Prueba a eliminar o a desactivar elementos para liberar espacio (por ejemplo, aplicaciones o contenido multimedia)."</string>
     <string name="storage_menu_rename" msgid="8549835371429159336">"Cambiar nombre"</string>
-    <string name="storage_menu_mount" msgid="4760531872302820569">"Activar"</string>
+    <string name="storage_menu_mount" msgid="4760531872302820569">"Montar"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Expulsar"</string>
     <string name="storage_menu_format" msgid="5454870642788909443">"Formatear"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Formatear como portátil"</string>
@@ -1605,13 +1604,13 @@
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_volume_used" msgid="5031288167242496837">"En uso de <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_mount_success" msgid="393972242641313135">"<xliff:g id="NAME">%1$s</xliff:g> se ha activado"</string>
-    <string name="storage_mount_failure" msgid="3667915814876418011">"Error al activar <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="storage_mount_failure" msgid="3667915814876418011">"Error al montar <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_unmount_success" msgid="6406298575402936148">"<xliff:g id="NAME">%1$s</xliff:g> se ha expulsado de forma segura"</string>
     <string name="storage_unmount_failure" msgid="3796912279003790607">"No se ha podido expulsar <xliff:g id="NAME">%1$s</xliff:g> de forma segura"</string>
     <string name="storage_format_success" msgid="3028114521294256851">"<xliff:g id="NAME">%1$s</xliff:g> se ha formateado"</string>
     <string name="storage_format_failure" msgid="2042691589726261987">"Error al formatear <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_rename_title" msgid="5911285992205282312">"Cambiar nombre de almacenamiento"</string>
-    <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Este dispositivo de almacenamiento (<xliff:g id="NAME_0">^1</xliff:g>) se ha extraído de forma segura, pero sigue estando disponible. \n\nPara utilizar el dispositivo (<xliff:g id="NAME_1">^1</xliff:g>), debes activarlo."</string>
+    <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Este dispositivo de almacenamiento (<xliff:g id="NAME_0">^1</xliff:g>) se ha extraído de forma segura, pero sigue estando disponible. \n\nPara utilizar el dispositivo (<xliff:g id="NAME_1">^1</xliff:g>), debes montarlo."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Este dispositivo de almacenamiento (<xliff:g id="NAME_0">^1</xliff:g>) está dañado. \n\nPara utilizar el dispositivo (<xliff:g id="NAME_1">^1</xliff:g>), debes configurarlo."</string>
     <string name="storage_internal_format_details" msgid="8922023528848861812">"Después de formatear la unidad, puedes utilizar tu <xliff:g id="NAME_0">^1</xliff:g> en otros dispositivos. \n\nTe recomendamos que hagas una copia de seguridad de los datos de tu <xliff:g id="NAME_1">^1</xliff:g>, ya que se borrarán cuando se formatee. \n\n"<b>"Copia de seguridad de fotos y de otro contenido multimedia"</b>" \nMueve tus archivos multimedia a otro espacio de almacenamiento del dispositivo o transfiérelos a un ordenador con un cable USB. \n\n"<b>"Copia de seguridad de aplicaciones"</b>" \nSe desinstalarán todas las aplicaciones almacenadas en tu <xliff:g id="NAME_6">^1</xliff:g> y se borrarán sus datos. Para conservarlas, muévelas a otro espacio de almacenamiento del dispositivo."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Al extraer tu <xliff:g id="NAME_0">^1</xliff:g>, las aplicaciones almacenadas en esta unidad dejarán de funcionar y los archivos multimedia guardados en ella no estarán disponibles hasta que se vuelva a insertar."</b>" \n\nTu <xliff:g id="NAME_1">^1</xliff:g> se ha formateado para que solo funcione en este dispositivo."</string>
@@ -2091,7 +2090,7 @@
     <string name="internal_storage" msgid="999496851424448809">"Almacenamiento interno"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Recalculando tamaño…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"¿Eliminar datos de la aplicación?"</string>
-    <string name="clear_data_dlg_text" msgid="7870723948123690332">"Todos los datos de esta aplicación se eliminarán de forma permanente. Esto incluye todos los archivos, ajustes, cuentas, bases de datos, etc."</string>
+    <string name="clear_data_dlg_text" msgid="1107610960337399006">"Los datos de esta aplicación se eliminarán de forma permanente, incluidos los archivos, ajustes, bases de datos y otros datos relacionados con ella."</string>
     <string name="dlg_ok" msgid="1421350367857960997">"Aceptar"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"Cancelar"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
@@ -2739,6 +2738,7 @@
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Utilizar el gestor de batería"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Detectar el consumo de batería de las aplicaciones"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"Detectando cuándo consumen batería las aplicaciones"</string>
+    <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"Detectando cuándo consumen batería las aplicaciones"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"Desactivado"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="other">%1$d aplicaciones restringidas</item>
@@ -2861,6 +2861,7 @@
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"<xliff:g id="TIME_0">^1</xliff:g> en total • menos de 1 minuto en segundo plano\ndurante <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
     <string name="battery_not_usage" msgid="1472275761547230196">"Sin uso desde la última carga completa"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Sin uso durante las últimas 24 horas"</string>
+    <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"La estimación de la batería restante se basa en el uso de tu dispositivo"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Tiempo restante estimado"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Hasta completar la carga"</string>
@@ -4101,6 +4102,7 @@
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"Conversaciones que pueden interrumpirte"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Todas las conversaciones"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Conversaciones prioritarias"</string>
+    <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"conversaciones prioritarias"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Ninguna"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Ninguna}=1{1 conversación}other{# conversaciones}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Quién puede interrumpirte"</string>
@@ -4125,6 +4127,7 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Todo el mundo"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Contactos"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Contactos destacados"</string>
+    <string name="zen_mode_from_some" msgid="3708450042225044524">"Algunas personas o conversaciones"</string>
     <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"De contactos destacados y de personas que insisten"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"De contactos y de personas que insisten"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"Solo de personas que insisten"</string>
@@ -4857,6 +4860,10 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Asistente digital"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Deslizar para abrir asistente"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Desliza el dedo desde una de las esquinas inferiores de la pantalla para abrir una aplicación de asistente digital."</string>
+    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
+    <skip />
+    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
+    <skip />
     <string name="information_label" msgid="6939310810756569298">"Información"</string>
     <string name="low_label" msgid="6525629096999711220">"Baja"</string>
     <string name="high_label" msgid="357503396626018487">"Alta"</string>
@@ -4864,8 +4871,12 @@
     <string name="right_edge" msgid="1505309103265829121">"Borde derecho"</string>
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Una sensibilidad más alta puede entrar en conflicto con los gestos de aplicaciones específicas que se hacen en los bordes de la pantalla."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Sensibilidad del gesto Atrás"</string>
-    <string name="gesture_settings_activity_title" msgid="6047431928567911330">"Ajustes de gestos"</string>
+    <string name="gesture_settings_activity_title" msgid="2025828425762595733">"Sensibilidad de la navegación por gestos"</string>
+    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
+    <skip />
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"navegación por gestos, sensibilidad del gesto para volver, gesto para volver"</string>
+    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
+    <skip />
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Doble toque para consultar el teléfono"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Doble toque para consultar el tablet"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Doble toque para consultar el dispositivo"</string>
@@ -5276,7 +5287,7 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"El modo de red <xliff:g id="NETWORKMODEID">%1$d</xliff:g> no es válido. Ignorar."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nombres de puntos de acceso"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"No está disponible cuando se está conectado a <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="see_more" msgid="7499355691042812723">"Ver más"</string>
+    <string name="see_more" msgid="8436037008285546409">"Ajustes"</string>
     <string name="see_less" msgid="2642392725363552793">"Ver menos"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"¿Activar <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"¿Activar tarjeta SIM?"</string>
@@ -5508,6 +5519,7 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"llamadas"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"datos móviles"</string>
+    <string name="wifi_scan_notify_message" msgid="4130641837826688879">"Para mejorar la experiencia con el dispositivo, las aplicaciones y los servicios podrán buscar redes Wi‑Fi en cualquier momento aunque la conexión Wi-Fi esté desactivada. De este modo, se pueden mejorar los servicios y las funciones basados en la ubicación, por ejemplo. Puedes cambiarlo en los ajustes de búsqueda de redes Wi-Fi. "<annotation id="link">"Cambiar"</annotation></string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Conectado"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Sin conexión"</string>
@@ -5576,7 +5588,8 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Desactiva el modo avión para usar la banda ultraancha"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Acceso a la cámara"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Acceso al micrófono"</string>
-    <string name="sensor_toggle_description" msgid="8248823248606795411">"Para todas las aplicaciones y servicios"</string>
+    <string name="cam_toggle_description" msgid="9212762204005146404">"Para aplicaciones y servicios"</string>
+    <string name="mic_toggle_description" msgid="484139688645092237">"Para aplicaciones y servicios. Si este ajuste está desactivado, puede que los datos del micrófono se compartan cuando llames a un número de emergencia."</string>
     <string name="game_settings_title" msgid="1028178627743422090">"Ajustes de juego"</string>
     <string name="game_settings_summary" msgid="8623110986485071064">"Activa el acceso directo al Panel de juego y más"</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"Anterior"</string>

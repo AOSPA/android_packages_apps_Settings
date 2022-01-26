@@ -438,6 +438,21 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
+    public void testInitHeader_noUsageTimeButConsumedPower_hasEmptySummary() {
+        Bundle bundle = new Bundle(3);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, /* value */ 0);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, /* value */ 0);
+        bundle.putInt(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_AMOUNT, /* value */ 10);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString()).isEmpty();
+    }
+
+    @Test
     public void testInitHeader_backgroundTwoMinForegroundZero_hasCorrectSummary() {
         final long backgroundTimeTwoMinutes = 120000;
         final long foregroundTimeZero = 0;
@@ -746,16 +761,6 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testInitPreferenceForTriState_isAllowlistedExceptIdleApp_hasCorrectString() {
-        when(mBatteryOptimizeUtils.isAllowlistedExceptIdleApp()).thenReturn(true);
-
-        mFragment.initPreferenceForTriState(mContext);
-
-        assertThat(mFooterPreference.getTitle().toString())
-                .isEqualTo("This app requires optimized battery usage.");
-    }
-
-    @Test
     public void testInitPreferenceForTriState_isSystemOrDefaultApp_hasCorrectString() {
         when(mBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
         when(mBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(true);
@@ -787,14 +792,38 @@ public class AdvancedPowerUsageDetailTest {
         assertThat(mOptimizePreference.isChecked()).isTrue();
         assertThat(mRestrictedPreference.isChecked()).isFalse();
         assertThat(mUnrestrictedPreference.isChecked()).isFalse();
+    }
+
+    @Test
+    public void testOnPause_optimizationModeChanged_logPreference() {
+        final int mode = BatteryOptimizeUtils.MODE_RESTRICTED;
+        mFragment.mOptimizationMode = mode;
+        when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(mode);
+        mOptimizePreference.setKey(KEY_PREF_OPTIMIZED);
+
+        mFragment.onRadioButtonClicked(mOptimizePreference);
+        mFragment.onPause();
+
         verify(mMetricsFeatureProvider)
-            .action(
-                mContext,
-                SettingsEnums.ACTION_APP_BATTERY_USAGE_OPTIMIZED,
-                (Pair<Integer, Object>[]) new Pair[] {
-                    new Pair(ConvertUtils.METRIC_KEY_PACKAGE, null),
-                    new Pair(ConvertUtils.METRIC_KEY_BATTERY_USAGE, "app label")
-                });
+                .action(
+                        SettingsEnums.OPEN_APP_BATTERY_USAGE,
+                        SettingsEnums.ACTION_APP_BATTERY_USAGE_OPTIMIZED,
+                        SettingsEnums.OPEN_APP_BATTERY_USAGE,
+                        /* package name*/ "none",
+                        /* consumed battery */ 0);
+    }
+
+    @Test
+    public void testOnPause_optimizationModeIsNotChanged_notInvokeLogging() {
+        final int mode = BatteryOptimizeUtils.MODE_OPTIMIZED;
+        mFragment.mOptimizationMode = mode;
+        when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(mode);
+        mOptimizePreference.setKey(KEY_PREF_OPTIMIZED);
+
+        mFragment.onRadioButtonClicked(mOptimizePreference);
+        mFragment.onPause();
+
+        verifyZeroInteractions(mMetricsFeatureProvider);
     }
 
     @Test
@@ -826,7 +855,7 @@ public class AdvancedPowerUsageDetailTest {
                 .thenReturn(BatteryOptimizeUtils.MODE_UNRESTRICTED);
         mFragment.mEnableTriState = false;
 
-        mFragment.notifyBackupManager();
+        mFragment.onPause();
 
         verifyZeroInteractions(mBackupManager);
     }
