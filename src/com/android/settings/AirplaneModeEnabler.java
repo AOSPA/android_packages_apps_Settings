@@ -20,6 +20,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Looper;
+import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.telephony.PhoneStateListener;
@@ -140,6 +141,10 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
         }
     }
 
+    public boolean isInScbm() {
+        return SystemProperties.getBoolean("ril.inscbm", false);
+    }
+
     /**
      * Check the status of ECM mode
      *
@@ -167,9 +172,9 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
     }
 
     public void setAirplaneMode(boolean isAirplaneModeOn) {
-        if (isInEcmMode()) {
-            // In ECM mode, do not update database at this point
-            Log.d(LOG_TAG, "ECM airplane mode=" + isAirplaneModeOn);
+        if (isInEcmMode() || isInScbm()) {
+            // In Emergency mode, do not update database at this point
+            Log.d(LOG_TAG, "Emergency mode airplane mode=" + isAirplaneModeOn);
         } else {
             mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_AIRPLANE_TOGGLE,
                     isAirplaneModeOn);
@@ -177,9 +182,11 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
         }
     }
 
-    public void setAirplaneModeInECM(boolean isECMExit, boolean isAirplaneModeOn) {
-        Log.d(LOG_TAG, "Exist ECM=" + isECMExit + ", with airplane mode=" + isAirplaneModeOn);
-        if (isECMExit) {
+    public void setAirplaneModeInEmergencyMode(boolean isEmergencyModeExit,
+            boolean isAirplaneModeOn) {
+        Log.d(LOG_TAG, "Exist Emergency Mode=" + isEmergencyModeExit +
+                ", with airplane mode=" + isAirplaneModeOn);
+        if (isEmergencyModeExit) {
             // update database based on the current checkbox state
             setAirplaneModeOn(isAirplaneModeOn);
         } else {
