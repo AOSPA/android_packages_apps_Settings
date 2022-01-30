@@ -42,6 +42,7 @@ import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.appinfo.AlarmsAndRemindersDetails;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
+import com.android.settings.applications.appinfo.AppLocaleDetails;
 import com.android.settings.applications.appinfo.DrawOverlayDetails;
 import com.android.settings.applications.appinfo.ExternalSourcesDetails;
 import com.android.settings.applications.appinfo.ManageExternalStorageDetails;
@@ -151,6 +152,7 @@ import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.privacy.PrivacyDashboardFragment;
 import com.android.settings.security.CryptKeeperSettings;
 import com.android.settings.security.LockscreenDashboardFragment;
+import com.android.settings.security.SecurityAdvancedSettings;
 import com.android.settings.security.SecuritySettings;
 import com.android.settings.shortcut.CreateShortcut;
 import com.android.settings.sound.MediaControlsSettings;
@@ -216,6 +218,7 @@ public class SettingsGateway {
             PrivacyDashboardFragment.class.getName(),
             LocationServices.class.getName(),
             SecuritySettings.class.getName(),
+            SecurityAdvancedSettings.class.getName(),
             UsageAccessDetails.class.getName(),
             PrivacySettings.class.getName(),
             DeviceAdminSettings.class.getName(),
@@ -335,7 +338,8 @@ public class SettingsGateway {
             MediaManagementAppsDetails.class.getName(),
             AutoBrightnessSettings.class.getName(),
             OneHandedSettings.class.getName(),
-            MobileNetworkSettings.class.getName()
+            MobileNetworkSettings.class.getName(),
+            AppLocaleDetails.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {
