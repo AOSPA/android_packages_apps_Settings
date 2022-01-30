@@ -18,20 +18,29 @@ package com.android.settings.security;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Intent;
+import android.provider.DeviceConfig;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
+import com.android.settings.safetycenter.SafetyCenterStatus;
 import com.android.settings.testutils.FakeFeatureFactory;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.MockitoAnnotations;
 
 @RunWith(AndroidJUnit4.class)
@@ -48,6 +57,8 @@ public class SecurityDashboardActivityTest {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory mFeatureFactory = FakeFeatureFactory.setupForTest();
         mSecuritySettingsFeatureProvider = mFeatureFactory.getSecuritySettingsFeatureProvider();
+        DeviceConfig.resetToDefaults(android.provider.Settings.RESET_MODE_PACKAGE_DEFAULTS,
+                DeviceConfig.NAMESPACE_PRIVACY);
         mDefaultIntent = new Intent();
         mDefaultIntent.setAction(android.provider.Settings.ACTION_SECURITY_SETTINGS);
         mDefaultIntent.setClass(InstrumentationRegistry.getInstrumentation().getTargetContext(),
@@ -56,15 +67,22 @@ public class SecurityDashboardActivityTest {
         InstrumentationRegistry.getInstrumentation().runOnMainSync(() -> {
             try {
                 mActivity =
-                        (Settings.SecurityDashboardActivity) InstrumentationRegistry
+                        spy((Settings.SecurityDashboardActivity) InstrumentationRegistry
                                 .getInstrumentation().newActivity(
                                         getClass().getClassLoader(),
                                         Settings.SecurityDashboardActivity.class.getName(),
-                                        mDefaultIntent);
+                                        mDefaultIntent));
             } catch (Exception e) {
                 throw new RuntimeException(e); // nothing to do
             }
         });
+        doNothing().when(mActivity).startActivity(any(Intent.class));
+    }
+
+    @After
+    public void tearDown() {
+        DeviceConfig.resetToDefaults(android.provider.Settings.RESET_MODE_PACKAGE_DEFAULTS,
+                DeviceConfig.NAMESPACE_PRIVACY);
     }
 
     @Test
@@ -103,5 +121,33 @@ public class SecurityDashboardActivityTest {
                 .thenReturn(ALTERNATIVE_FRAGMENT_CLASSNAME);
 
         assertThat(mActivity.isValidFragment(ALTERNATIVE_FRAGMENT_CLASSNAME)).isTrue();
+    }
+
+    @Test
+    public void onCreate_whenSafetyCenterEnabled_redirectsToSafetyCenter() {
+        DeviceConfig.setProperty(
+                DeviceConfig.NAMESPACE_PRIVACY,
+                SafetyCenterStatus.SAFETY_CENTER_IS_ENABLED,
+                /* value = */ Boolean.toString(true),
+                /* makeDefault = */ false);
+        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+
+        mActivity.handleSafetyCenterRedirection();
+
+        verify(mActivity).startActivity(intentCaptor.capture());
+        assertThat(intentCaptor.getValue().getAction()).isEqualTo(Intent.ACTION_SAFETY_CENTER);
+    }
+
+    @Test
+    public void onCreate_whenSafetyCenterDisabled_doesntRedirectToSafetyCenter() {
+        DeviceConfig.setProperty(
+                DeviceConfig.NAMESPACE_PRIVACY,
+                SafetyCenterStatus.SAFETY_CENTER_IS_ENABLED,
+                /* value = */ Boolean.toString(false),
+                /* makeDefault = */ false);
+
+        mActivity.handleSafetyCenterRedirection();
+
+        verify(mActivity, times(0)).startActivity(any());
     }
 }

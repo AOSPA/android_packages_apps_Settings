@@ -1255,6 +1255,15 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again">Lift finger, then touch sensor again</string>
     <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
     <string name="security_settings_fingerprint_bad_calibration">Can\u2019t use fingerprint sensor. Visit a repair provider</string>
+    <!-- Title for Advanced Security Settings [CHAR LIMIT=60] -->
+    <string name="security_advanced_settings">Advanced settings</string>
+    <!-- String for summary to be shown in Advanced settings tile in Security page, when there is a work profile set up on the device. Smart Lock is a brand name. [CHAR_LIMIT=NONE] -->
+    <string name="security_advanced_settings_work_profile_settings_summary">Work profile lock, Smart Lock</string>
+    <!-- String for summary to be shown in Advanced settings tile in Security page, when there is no work profile set up on the device. Smart Lock is a brand name. [CHAR_LIMIT=NONE] -->
+    <string name="security_advanced_settings_no_work_profile_settings_summary">Smart Lock and more</string>
+    <!-- Search keywords for Advanced settings in Security page. [CHAR_LIMIT=NONE] -->
+    <string name="security_advanced_settings_keywords">Advanced settings</string>
+
 
     <!-- Text shown when "Add fingerprint" button is disabled -->
     <string name="fingerprint_add_max">You can add up to <xliff:g id="count" example="5">%d</xliff:g> fingerprints</string>
@@ -3299,6 +3308,8 @@
     <string name="screensaver_settings_when_to_dream">When to start</string>
     <!-- Dream settings screen, action label, current selected screen saver -->
     <string name="screensaver_settings_current">Current screen saver</string>
+    <!-- Dream settings screen, button label to start dreaming [CHAR LIMIT=30] -->
+    <string name="screensaver_settings_dream_start">Start now</string>
     <!-- Dream settings screen, button label for settings for a specific screensaver -->
     <string name="screensaver_settings_button">Settings</string>
     <!-- Sound & display settings screen, setting option name to change whether the screen adjusts automatically based on lighting conditions -->
@@ -5348,13 +5359,13 @@
     <!-- Message of the magnification mode option to choose the magnification mode. [CHAR LIMIT=none] -->
     <string name="accessibility_magnification_area_settings_mode_switch_summary">Tap the switch button to move between both options</string>
     <!-- Title for the accessibility magnification switch shortcut dialog. [CHAR LIMIT=48] -->
-    <string name="accessibility_magnification_switch_shortcut_title">This may slow down your keyboard</string>
+    <string name="accessibility_magnification_switch_shortcut_title">Switch to accessibility button?</string>
     <!-- Message for the accessibility magnification switch shortcut dialog. [CHAR LIMIT=none] -->
-    <string name="accessibility_magnification_switch_shortcut_message">When using triple-tap to magnify part of your screen, you may notice issues over the keyboard.\n\nTo avoid this, you can change your magnification shortcut from triple-tap to another option.\n<annotation id="link">Change setting</annotation></string>
-    <!-- Title for the switch shortcut button in accessibility switch shortcut dialog to confirm the action. [CHAR LIMIT=45] -->
-    <string name="accessibility_magnification_switch_shortcut_positive_button">Continue anyway</string>
-    <!-- Title for the cancel button in accessibility switch shortcut dialog to go back to edit. [CHAR LIMIT=54] -->
-    <string name="accessibility_magnification_switch_shortcut_negative_button">Cancel</string>
+    <string name="accessibility_magnification_switch_shortcut_message">Using triple-tap to magnify part of your screen causes typing and other delays.\n\nThe accessibility button floats on your screen over other apps. Tap it to magnify.</string>
+    <!-- Title for the switch shortcut button in accessibility switch shortcut dialog to change the config shortcut value. [CHAR LIMIT=45] -->
+    <string name="accessibility_magnification_switch_shortcut_positive_button">Switch to accessibility button</string>
+    <!-- Title for the cancel button in accessibility switch shortcut dialog to keep the config shortcut value. [CHAR LIMIT=54] -->
+    <string name="accessibility_magnification_switch_shortcut_negative_button">Use triple-tap</string>
     <!-- Title for the accessibility preference screen to enable screen magnification settings. [CHAR LIMIT=35] -->
     <string name="accessibility_magnification_service_settings_title">Magnification settings</string>
     <!-- Title for the accessibility preference screen to enable triple-tap gesture screen magnification. [CHAR LIMIT=35] -->
@@ -5603,11 +5614,17 @@
     <!-- Description for the seekbar that adjust auto click time. [CHAR_LIMIT=NONE] -->
     <string name="accessibility_autoclick_seekbar_desc">Auto click time</string>
     <!-- Title for accessibility preference screen for configuring vibrations. -->
-    <string name="accessibility_vibration_settings_title">Vibration &amp; haptic strength</string>
-    <!-- Title for accessibility preference for configuring notification vibrations. -->
-    <string name="accessibility_notification_vibration_title">Notification vibration</string>
+    <string name="accessibility_vibration_settings_title">Vibration &amp; haptics</string>
+    <!-- Title for the category of preferences to configure device vibrations related to calls. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_call_vibration_category_title">Calls</string>
+    <!-- Title for the category of preferences to configure device vibrations related to notifications and alarms. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_notification_alarm_vibration_category_title">Notifications and alarms</string>
+    <!-- Title for the category of preferences to configure device vibrations triggered by user interaction with the device. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_interactive_haptics_category_title">Interactive haptics</string>
     <!-- Title for accessibility preference for configuring ring vibrations. [CHAR LIMIT=NONE] -->
     <string name="accessibility_ring_vibration_title">Ring vibration</string>
+    <!-- Title for accessibility preference for configuring notification vibrations. -->
+    <string name="accessibility_notification_vibration_title">Notification vibration</string>
     <!-- Title for accessibility preference for configuring touch feedback vibrations. -->
     <string name="accessibility_touch_vibration_title">Touch feedback</string>
     <!-- Used in the accessibility service settings to control turning on/off the service entirely [CHAR LIMIT=60] -->
@@ -8321,8 +8338,6 @@
     <string name="keywords_wifi_notify_open_networks">Wi\u2011Fi notification, wifi notification</string>
     <!-- Search keyword for "Wi-fi data usage" settings. [CHAR_LIMIT=NONE]-->
     <string name="keywords_wifi_data_usage">data usage</string>
-    <!-- Search keyword for "Vibrate on touch" settings. [CHAR_LIMIT=NONE]-->
-    <string name="keywords_vibrate_on_touch">Stop vibration, tap, keyboard</string>
     <!-- Search keyword for "Time format" settings. [CHAR_LIMIT=NONE]-->
     <string name="keywords_time_format">Use 24-hour format</string>
     <!-- Search keyword for "Files" settings under Settings > Storage. [CHAR_LIMIT=NONE]-->
@@ -8458,11 +8473,12 @@
 
     <!-- List of synonyms for touch vibration setting (where you get a haptic response for touching things on the screen), used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_touch_vibration">haptics, vibrate, screen, sensitivity</string>
-
     <!-- List of synonyms for ring vibration setting (changes whether your phone vibrates when it rings), used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_ring_vibration">haptics, vibrate, phone, call, sensitivity, ring</string>
     <!-- List of synonyms for notification vibration setting (changes whether your phone vibrates when it shows a notification), used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_notification_vibration">haptics, vibrate, sensitivity</string>
+    <!-- List of synonyms for vibration and haptics setting, used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_vibration">haptics, vibrate, vibration</string>
     <!-- Battery Saver: Search terms for sticky battery saver preference [CHAR_LIMIT=NONE] -->
     <string name="keywords_battery_saver_sticky">battery saver, sticky, persist, power saver, battery</string>
     <!-- Battery Saver: Search terms for battery saver schedule preference. Feel free to add additional terms when translating if appropriate [CHAR_LIMIT=NONE] -->
@@ -8479,6 +8495,9 @@
 
     <!-- List of synonyms for the font size, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_font_size">text size, large print, large font, large text, low vision, make text bigger, font enlarger, font enlargement</string>
+
+    <!-- List of synonyms for the always show time and info [CHAR LIMIT=NONE] -->
+    <string name="keywords_always_show_time_info">always on display</string>
 
     <!-- Option title for the default sound, context based on screen -->
     <string name="default_sound">Default sound</string>
@@ -8576,12 +8595,6 @@
 
     <!-- Sound: Other sounds: Title for the option enabling touch sounds. [CHAR LIMIT=30] -->
     <string name="touch_sounds_title">Touch sounds</string>
-
-    <!-- Sound: Other sounds: Title for the option enabling haptic feedback on touch. [CHAR LIMIT=30] -->
-    <string name="vibrate_on_touch_title">Touch vibration</string>
-
-    <!-- Sound: Other sounds: Preference summary to the option enabling haptic feedback on touch. -->
-    <string name="vibrate_on_touch_summary">Haptic feedback for tap, keyboard, and more</string>
 
     <!-- Sound: Other sounds: Title for the option enabling dock audio media. [CHAR LIMIT=50] -->
     <string name="dock_audio_media_title">Dock speaker plays</string>
@@ -13061,7 +13074,7 @@
     <!-- Status message indicating the device is in the process of disconnecting from one mobile network and immediately connecting to another. [CHAR_LIMIT=NONE] -->
     <string name="sim_action_enabling_sim_without_carrier_name">Connecting to network&#8230;</string>
     <!-- Text of progress dialog indicating the subscription switch is in progress. [CHAR_LIMIT=NONE] -->
-    <string name="sim_action_switch_sub_dialog_progress">Switching to <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g></string>
+    <string name="sim_action_switch_sub_dialog_progress">Switching to <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g> for calls and messages&#8230;</string>
     <!-- Title of error message indicating that the device could not disconnect from one mobile network and immediately connect to another. [CHAR_LIMIT=NONE] -->
     <string name="sim_action_enable_sim_fail_title">Can\u2019t switch carrier</string>
     <!-- Body text of error message indicating the device could not disconnect from one mobile network and immediately connect to another, due to an unspecified issue. [CHAR_LIMIT=NONE] -->
@@ -13450,9 +13463,9 @@
     <string name="lockscreen_privacy_wallet_summary">Allow access to wallet from lock screen and quick settings</string>
 
     <!-- QR Code Scanner toggle name [CHAR LIMIT=60] -->
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle">Show QR Code Scanner</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle">Show QR Scanner</string>
     <!-- QR Code Scanner summary [CHAR LIMIT=NONE] -->
-    <string name="lockscreen_privacy_qr_code_scanner_summary">Allow access to QR code scanner from lock screen</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary">Allow access to QR scanner from lock screen</string>
 
     <!-- Device controls toggle name [CHAR LIMIT=60] -->
     <string name="lockscreen_privacy_controls_setting_toggle">Show device controls</string>
@@ -13720,8 +13733,6 @@
     <string name="adaptive_brightness_main_switch_title">Use adaptive brightness</string>
     <!-- Title for wifi calling main switch preferences. [CHAR LIMIT=50] -->
     <string name="wifi_calling_main_switch_title">Use Wi‑Fi calling</string>
-    <!-- Title for Screen saver main switch preferences. [CHAR LIMIT=50] -->
-    <string name="screen_saver_main_switch_title">Use screen saver</string>
 
     <!-- Default preference title for showing all apps on device [CHAR_LIMIT=50]-->
     <string name="default_see_all_apps_title">See all apps</string>
@@ -13754,7 +13765,10 @@
     <!-- Title for toggle if user wants to enable 2G [CHAR LIMIT=40] -->
     <string name="enable_2g_title">Allow 2G</string>
     <!-- Title for toggle if user wants to enable 2G [CHAR LIMIT=NONE] -->
-    <string name="enable_2g_summary">Use 2G cellular connections. For emergency calls, 2G is always turned on.</string>
+    <string name="enable_2g_summary">2G is less secure, but may improve your connection in some locations. For emergency calls, 2G is always allowed.</string>
+    <!-- Title for if toggle access is disabled by carrier [CHAR LIMIT=NONE] -->
+    <string name="enable_2g_summary_disabled_carrier"><xliff:g id="carrier_name_2g" example="Google Fi">%1$s</xliff:g> requires 2G to be available</string>
+
 
     <!-- Label for extra app info settings for a specific app [CHAR LIMIT=40] -->
     <string name="extra_app_info_label" translatable="false"></string>
