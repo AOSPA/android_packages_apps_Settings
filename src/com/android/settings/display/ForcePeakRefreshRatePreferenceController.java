@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.development;
+package com.android.settings.display;
 
 import android.content.Context;
 import android.hardware.display.DisplayManager;
@@ -29,9 +29,9 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+import com.android.settings.core.TogglePreferenceController;
 
-public class ForcePeakRefreshRatePreferenceController extends DeveloperOptionsPreferenceController
+public class ForcePeakRefreshRatePreferenceController extends TogglePreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     @VisibleForTesting
@@ -94,15 +94,6 @@ public class ForcePeakRefreshRatePreferenceController extends DeveloperOptionsPr
         } else {
             return false;
         }
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchDisabled() {
-        super.onDeveloperOptionsSwitchDisabled();
-        Settings.System.putFloat(mContext.getContentResolver(),
-            Settings.System.MIN_REFRESH_RATE, NO_CONFIG);
-
-        ((SwitchPreference) mPreference).setChecked(false);
     }
 
     @VisibleForTesting
