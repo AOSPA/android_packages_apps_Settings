@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.development;
+package com.android.settings.display;
 
 import android.content.Context;
 import android.hardware.display.DisplayManager;
@@ -29,9 +29,9 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+import com.android.settings.core.TogglePreferenceController;
 
-public class ForcePeakRefreshRatePreferenceController extends DeveloperOptionsPreferenceController
+public class ForcePeakRefreshRatePreferenceController extends TogglePreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     @VisibleForTesting
@@ -45,6 +45,8 @@ public class ForcePeakRefreshRatePreferenceController extends DeveloperOptionsPr
 
     private static final String TAG = "ForcePeakRefreshRateCtr";
     private static final String PREFERENCE_KEY = "pref_key_peak_refresh_rate";
+
+    private Preference mPreference;
 
     public ForcePeakRefreshRatePreferenceController(Context context) {
         super(context);
@@ -75,34 +77,29 @@ public class ForcePeakRefreshRatePreferenceController extends DeveloperOptionsPr
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final boolean isEnabled = (Boolean) newValue;
+    public boolean setChecked(boolean isChecked) {
         forcePeakRefreshRate(isEnabled);
 
         return true;
     }
 
     @Override
-    public void updateState(Preference preference) {
-        ((SwitchPreference) mPreference).setChecked(isForcePeakRefreshRateEnabled());
+    public boolean isChecked() {
+        return isForcePeakRefreshRateEnabled();
     }
 
     @Override
-    public boolean isAvailable() {
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_display;
+    }
+
+    @Override
+    public int getAvailabilityStatus() {
         if (mContext.getResources().getBoolean(R.bool.config_show_smooth_display)) {
-            return mPeakRefreshRate > DEFAULT_REFRESH_RATE;
+            return mPeakRefreshRate > DEFAULT_REFRESH_RATE ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
         } else {
-            return false;
+            return UNSUPPORTED_ON_DEVICE;
         }
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchDisabled() {
-        super.onDeveloperOptionsSwitchDisabled();
-        Settings.System.putFloat(mContext.getContentResolver(),
-            Settings.System.MIN_REFRESH_RATE, NO_CONFIG);
-
-        ((SwitchPreference) mPreference).setChecked(false);
     }
 
     @VisibleForTesting
