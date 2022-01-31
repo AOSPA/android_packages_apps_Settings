@@ -115,7 +115,7 @@
     <PreferenceCategory
         android:title="@string/category_name_display_controls">
 
-        <Preference
+        <com.android.settings.widget.PrimarySwitchPreference
             android:key="auto_rotate"
             android:title="@string/accelerometer_title"
             android:fragment="com.android.settings.display.SmartAutoRotatePreferenceFragment"
