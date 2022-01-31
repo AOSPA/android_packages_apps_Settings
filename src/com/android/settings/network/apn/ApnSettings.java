@@ -306,7 +306,8 @@ public class ApnSettings extends RestrictedSettingsFragment
             return;
         }
 
-        getActivity().registerReceiver(mReceiver, mIntentFilter);
+        getActivity().registerReceiver(mReceiver, mIntentFilter,
+                Context.RECEIVER_EXPORTED_UNAUDITED);
 
         restartPhoneStateListener(mSubId);
 
