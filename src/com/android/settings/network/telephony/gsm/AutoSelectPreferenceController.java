@@ -43,6 +43,7 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.network.AllowedNetworkTypesListener;
+import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.SubscriptionsChangeListener;
 import com.android.settings.network.telephony.Enhanced4gBasePreferenceController;
 import com.android.settings.network.telephony.MobileNetworkUtils;
@@ -212,8 +213,8 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
         mSubId = subId;
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
-        final PersistableBundle carrierConfig = mContext.getSystemService(
-                CarrierConfigManager.class).getConfigForSubId(mSubId);
+        final PersistableBundle carrierConfig =
+                CarrierConfigCache.getInstance(mContext).getConfigForSubId(mSubId);
         mOnlyAutoSelectInHome = carrierConfig != null
                 ? carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_ONLY_AUTO_SELECT_IN_HOME_NETWORK_BOOL)

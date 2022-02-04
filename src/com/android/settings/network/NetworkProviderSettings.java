@@ -309,9 +309,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         mAddWifiNetworkPreference = new AddWifiNetworkPreference(getPrefContext());
         mDataUsagePreference = findPreference(PREF_KEY_DATA_USAGE);
         mDataUsagePreference.setVisible(DataUsageUtils.hasWifiRadio(getContext()));
-        mDataUsagePreference.setTemplate(
-                NetworkTemplate.buildTemplateWifi(NetworkTemplate.WIFI_NETWORKID_ALL,
-                null /* subscriberId */), 0 /*subId*/, null /*service*/);
+        mDataUsagePreference.setTemplate(new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI)
+                        .build(), 0 /*subId*/, null /*service*/);
         mResetInternetPreference = findPreference(PREF_KEY_RESET_INTERNET);
         if (mResetInternetPreference != null) {
             mResetInternetPreference.setVisible(false);
@@ -566,7 +565,9 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         }
 
         if (mSelectedWifiEntry.canDisconnect()) {
-            menu.add(Menu.NONE, MENU_ID_SHARE, 0 /* order */, R.string.share);
+            if (mSelectedWifiEntry.canShare()) {
+                menu.add(Menu.NONE, MENU_ID_SHARE, 0 /* order */, R.string.share);
+            }
             menu.add(Menu.NONE, MENU_ID_DISCONNECT, 1 /* order */,
                     R.string.wifi_disconnect_button_text);
         }

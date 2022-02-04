@@ -16,8 +16,6 @@
 
 package com.android.settings.security;
 
-import static com.android.settings.security.EncryptionStatusPreferenceController.PREF_KEY_ENCRYPTION_SECURITY_PAGE;
-
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -27,10 +25,9 @@ import com.android.settings.biometrics.combination.CombinedBiometricProfileStatu
 import com.android.settings.biometrics.face.FaceProfileStatusPreferenceController;
 import com.android.settings.biometrics.fingerprint.FingerprintProfileStatusPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.enterprise.EnterprisePrivacyPreferenceController;
-import com.android.settings.enterprise.FinancedPrivacyPreferenceController;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.safetycenter.SafetyCenterStatus;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.security.trustagent.ManageTrustAgentsPreferenceController;
 import com.android.settings.security.trustagent.TrustAgentListPreferenceController;
 import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -52,6 +49,10 @@ public class SecurityAdvancedSettings extends DashboardFragment {
     private static final String TAG = "SecurityAdvancedSettings";
     private static final String WORK_PROFILE_SECURITY_CATEGORY = "security_category_profile";
 
+    /** Used in case of old Security settings when SafetyCenter is disabled */
+    private static final String CATEGORY_SECURITY_LEGACY_ADVANCED_SETTINGS =
+            "com.android.settings.category.ia.legacy_advanced_security";
+
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.SECURITY_ADVANCED;
@@ -59,7 +60,19 @@ public class SecurityAdvancedSettings extends DashboardFragment {
 
     @Override
     public String getCategoryKey() {
-        return CategoryKey.CATEGORY_SECURITY_ADVANCED_SETTINGS;
+        if (SafetyCenterStatus.isEnabled()) {
+            return CategoryKey.CATEGORY_SECURITY_ADVANCED_SETTINGS;
+        } else {
+            final SecuritySettingsFeatureProvider securitySettingsFeatureProvider =
+                    FeatureFactory.getFactory(getContext())
+                            .getSecuritySettingsFeatureProvider();
+
+            if (securitySettingsFeatureProvider.hasAlternativeSecuritySettingsFragment()) {
+                return securitySettingsFeatureProvider.getAlternativeAdvancedSettingsCategoryKey();
+            } else {
+                return CATEGORY_SECURITY_LEGACY_ADVANCED_SETTINGS;
+            }
+        }
     }
 
     @Override
@@ -96,13 +109,6 @@ public class SecurityAdvancedSettings extends DashboardFragment {
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle, DashboardFragment host) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new EnterprisePrivacyPreferenceController(context));
-        controllers.add(new FinancedPrivacyPreferenceController(context));
-        controllers.add(new ManageTrustAgentsPreferenceController(context));
-        controllers.add(new ScreenPinningPreferenceController(context));
-        controllers.add(new SimLockPreferenceController(context));
-        controllers.add(new EncryptionStatusPreferenceController(context,
-                PREF_KEY_ENCRYPTION_SECURITY_PAGE));
         controllers.add(new TrustAgentListPreferenceController(context, host, lifecycle));
 
         final List<AbstractPreferenceController> profileSecurityControllers = new ArrayList<>();

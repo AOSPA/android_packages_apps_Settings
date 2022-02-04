@@ -37,6 +37,7 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.wifi.WifiEnterpriseRestrictionUtils;
+import com.android.settingslib.wifi.WifiUtils;
 
 import java.util.List;
 
@@ -141,9 +142,9 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
                             }
 
                             // Only show the number of clients when state is on
-                            mPreference.setSummary(extendWifiSummary + mContext.getResources()
-                                    .getQuantityString(R.plurals.wifi_tether_connected_summary,
-                                                       clients.size(), clients.size()));
+                            mPreference.setSummary(extendWifiSummary +
+                                    WifiUtils.getWifiTetherSummaryForConnectedDevices(mContext,
+                                            clients.size()));
                         }
                     }
                 });

@@ -814,8 +814,8 @@ public class UserSettings extends SettingsPreferenceFragment
         }
         try {
             getContext().getSystemService(UserManager.class)
-                    .removeUserOrSetEphemeral(UserHandle.myUserId(),
-                            /* evenWhenDisallowed= */ false);
+                    .removeUserWhenPossible(UserHandle.of(UserHandle.myUserId()),
+                            /* overrideDevicePolicy= */ false);
             ActivityManager.getService().switchUser(UserHandle.USER_SYSTEM);
         } catch (RemoteException re) {
             Log.e(TAG, "Unable to remove self user");
@@ -1251,7 +1251,10 @@ public class UserSettings extends SettingsPreferenceFragment
             }
             return true;
         } else if (pref == mAddSupervisedUser) {
+            mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_USER_SUPERVISED_ADD);
+            Trace.beginSection("UserSettings.addSupervisedUser");
             onAddSupervisedUserClicked();
+            Trace.endSection();
             return true;
         } else if (pref == mAddGuest) {
             mAddGuest.setEnabled(false); // prevent multiple tap issue
