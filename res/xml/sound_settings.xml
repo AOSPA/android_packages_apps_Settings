@@ -89,6 +89,14 @@
         android:order="-140"
         settings:controller="com.android.settings.notification.NotificationVolumePreferenceController"/>
 
+    <!-- Per-app volume -->
+    <SwitchPreference
+        android:key="app_volume"
+        android:title="@string/app_volume_title"
+        android:summary="@string/app_volume_summary"
+        android:order="-135"
+        android:defaultValue="false" />
+
     <!-- TODO(b/174964721): make this a PrimarySwitchPreference -->
     <!-- Interruptions -->
     <com.android.settingslib.RestrictedPreference
@@ -216,7 +224,6 @@
         <SwitchPreference
           android:key="call_connected_tones"
           android:title="@string/call_connected_tones_title" />
-
 
     <Preference
         android:key="sound_work_settings"
