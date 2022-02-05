@@ -41,6 +41,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.network.AllowedNetworkTypesListener;
+import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 
 /**
@@ -50,9 +51,8 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
         implements ListPreference.OnPreferenceChangeListener, LifecycleObserver {
 
     private static final String LOG_TAG = "PreferredNetworkMode";
-    private CarrierConfigManager mCarrierConfigManager;
+    private CarrierConfigCache mCarrierConfigCache;
     private TelephonyManager mTelephonyManager;
-    private PersistableBundle mPersistableBundle;
     private boolean mIsGlobalCdma;
     private Preference mPreference;
     private PhoneCallStateListener mPhoneStateListener;
@@ -62,12 +62,12 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
 
     public PreferredNetworkModePreferenceController(Context context, String key) {
         super(context, key);
-        mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
+        mCarrierConfigCache = CarrierConfigCache.getInstance(context);
     }
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
+        final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(subId);
         boolean visible;
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             visible = false;
@@ -142,7 +142,7 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
         if (mPhoneStateListener == null) {
             mPhoneStateListener = new PhoneCallStateListener();
         }
-        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
+        final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(mSubId);
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
 
