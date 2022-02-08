@@ -657,7 +657,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     /** Called when the state of Wifi has changed. */
     @Override
     public void onWifiStateChanged() {
-        if (mIsRestricted) {
+        if (mIsRestricted || isFinishingOrDestroyed()) {
             return;
         }
         final int wifiState = mWifiPickerTracker.getWifiState();
