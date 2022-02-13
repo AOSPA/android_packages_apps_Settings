@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.gestures;
+package com.android.settings.sound;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
