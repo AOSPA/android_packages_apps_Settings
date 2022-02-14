@@ -22,6 +22,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.provider.DeviceConfig;
+import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -66,6 +67,8 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
 
     private static final String KEY_PROFILES_GROUP = "bluetooth_profiles";
     private static final String KEY_BOTTOM_PREFERENCE = "bottom_preference";
+    private static final String BLUETOOTH_PROFILE_CONFIRM_DIALOG_PROP =
+             "persist.vendor.service.bt.profile_confirm_dialog";
     private static final int ORDINAL = 99;
 
     @VisibleForTesting
@@ -89,6 +92,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     private GroupUtils mGroupUtils;
     private LocalBluetoothProfile mProfile;
     private SwitchPreference mProfilePref;
+    private boolean mIsProfileConfirmDialogSupported = false;
 
     public BluetoothDetailsProfilesController(Context context, PreferenceFragmentCompat fragment,
             LocalBluetoothManager manager, CachedBluetoothDevice device, Lifecycle lifecycle) {
@@ -104,6 +108,8 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         if (mIsGroupDevice) {
             mGroupId = mGroupUtils.getGroupId(mCachedDevice);
         }
+        mIsProfileConfirmDialogSupported =
+                SystemProperties.getBoolean(BLUETOOTH_PROFILE_CONFIRM_DIALOG_PROP, false);
     }
 
     @Override
@@ -292,7 +298,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             }
         }
         mProfilePref = (SwitchPreference) preference;
-        if (mIsGroupDevice) {
+        if (mIsGroupDevice && mIsProfileConfirmDialogSupported) {
             showProfileConfirmDialog();
         } else {
             enableOrDisableProfile();
