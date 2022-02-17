@@ -108,6 +108,7 @@ import com.android.settings.applications.AppStorageSettings;
 import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.appinfo.AlarmsAndRemindersDetails;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
+import com.android.settings.applications.appinfo.AppLocaleDetails;
 import com.android.settings.applications.appinfo.DrawOverlayDetails;
 import com.android.settings.applications.appinfo.ExternalSourcesDetails;
 import com.android.settings.applications.appinfo.ManageExternalStorageDetails;
@@ -231,6 +232,7 @@ public class ManageApplications extends InstrumentedFragment
     public static final int LIST_MANAGE_EXTERNAL_STORAGE = 11;
     public static final int LIST_TYPE_ALARMS_AND_REMINDERS = 12;
     public static final int LIST_TYPE_MEDIA_MANAGEMENT_APPS = 13;
+    public static final int LIST_TYPE_APPS_LOCAL = 14;
 
     // List types that should show instant apps.
     public static final Set<Integer> LIST_TYPES_WITH_INSTANT = new ArraySet<>(Arrays.asList(
@@ -272,8 +274,7 @@ public class ManageApplications extends InstrumentedFragment
 
         Intent intent = activity.getIntent();
         Bundle args = getArguments();
-        int screenTitle = intent.getIntExtra(
-                SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, R.string.all_apps);
+        final int screenTitle = getTitleResId(intent, args);
         String className = args != null ? args.getString(EXTRA_CLASSNAME) : null;
         if (className == null) {
             className = intent.getComponent().getClassName();
@@ -290,49 +291,38 @@ public class ManageApplications extends InstrumentedFragment
             mSortOrder = R.id.sort_order_size;
         } else if (className.equals(UsageAccessSettingsActivity.class.getName())) {
             mListType = LIST_TYPE_USAGE_ACCESS;
-            screenTitle = R.string.usage_access;
         } else if (className.equals(HighPowerApplicationsActivity.class.getName())) {
             mListType = LIST_TYPE_HIGH_POWER;
             // Default to showing system.
             mShowSystem = true;
-            screenTitle = R.string.high_power_apps;
         } else if (className.equals(OverlaySettingsActivity.class.getName())) {
             mListType = LIST_TYPE_OVERLAY;
-            screenTitle = R.string.system_alert_window_settings;
 
             reportIfRestrictedSawIntent(intent);
         } else if (className.equals(WriteSettingsActivity.class.getName())) {
             mListType = LIST_TYPE_WRITE_SETTINGS;
-            screenTitle = R.string.write_settings;
         } else if (className.equals(ManageExternalSourcesActivity.class.getName())) {
             mListType = LIST_TYPE_MANAGE_SOURCES;
-            screenTitle = R.string.install_other_apps;
         } else if (className.equals(GamesStorageActivity.class.getName())) {
             mListType = LIST_TYPE_GAMES;
             mSortOrder = R.id.sort_order_size;
         } else if (className.equals(Settings.ChangeWifiStateActivity.class.getName())) {
             mListType = LIST_TYPE_WIFI_ACCESS;
-            screenTitle = R.string.change_wifi_state_title;
         } else if (className.equals(Settings.ManageExternalStorageActivity.class.getName())) {
             mListType = LIST_MANAGE_EXTERNAL_STORAGE;
-            screenTitle = R.string.manage_external_storage_title;
         }  else if (className.equals(Settings.MediaManagementAppsActivity.class.getName())) {
             mListType = LIST_TYPE_MEDIA_MANAGEMENT_APPS;
-            screenTitle = R.string.media_management_apps_title;
         } else if (className.equals(Settings.AlarmsAndRemindersActivity.class.getName())) {
             mListType = LIST_TYPE_ALARMS_AND_REMINDERS;
-            screenTitle = R.string.alarms_and_reminders_title;
         } else if (className.equals(Settings.NotificationAppListActivity.class.getName())) {
             mListType = LIST_TYPE_NOTIFICATION;
             mUsageStatsManager = IUsageStatsManager.Stub.asInterface(
                     ServiceManager.getService(Context.USAGE_STATS_SERVICE));
             mNotificationBackend = new NotificationBackend();
             mSortOrder = R.id.sort_order_recent_notification;
-            screenTitle = R.string.app_notifications_title;
+        } else if (className.equals(AppLocaleDetails.class.getName())) {
+            mListType = LIST_TYPE_APPS_LOCAL;
         } else {
-            if (screenTitle == -1) {
-                screenTitle = R.string.all_apps;
-            }
             mListType = LIST_TYPE_MAIN;
         }
         final AppFilterRegistry appFilterRegistry = AppFilterRegistry.getInstance();
@@ -514,6 +504,8 @@ public class ManageApplications extends InstrumentedFragment
                 return SettingsEnums.ALARMS_AND_REMINDERS;
             case LIST_TYPE_MEDIA_MANAGEMENT_APPS:
                 return SettingsEnums.MEDIA_MANAGEMENT_APPS;
+            case LIST_TYPE_APPS_LOCAL:
+                return SettingsEnums.APPS_LOCALE_LIST;
             default:
                 return SettingsEnums.PAGE_UNKNOWN;
         }
@@ -636,6 +628,10 @@ public class ManageApplications extends InstrumentedFragment
             case LIST_TYPE_MEDIA_MANAGEMENT_APPS:
                 startAppInfoFragment(MediaManagementAppsDetails.class,
                         R.string.media_management_apps_title);
+                break;
+            case LIST_TYPE_APPS_LOCAL:
+                startAppInfoFragment(AppLocaleDetails.class,
+                        R.string.app_locale_picker_title);
                 break;
             // TODO: Figure out if there is a way where we can spin up the profile's settings
             // process ahead of time, to avoid a long load of data when user clicks on a managed
@@ -879,6 +875,48 @@ public class ManageApplications extends InstrumentedFragment
                     }
                 });
         params.setBehavior(behavior);
+    }
+
+    /**
+     * Returns a resource ID of title based on what type of app list is
+     * @param intent the intent of the activity that might include a specified title
+     * @param args the args that includes a class name of app list
+     */
+    public static int getTitleResId(@NonNull Intent intent, Bundle args) {
+        int screenTitle = intent.getIntExtra(
+                SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, R.string.all_apps);
+        String className = args != null ? args.getString(EXTRA_CLASSNAME) : null;
+        if (className == null) {
+            className = intent.getComponent().getClassName();
+        }
+        if (className.equals(Settings.UsageAccessSettingsActivity.class.getName())) {
+            screenTitle = R.string.usage_access;
+        } else if (className.equals(Settings.HighPowerApplicationsActivity.class.getName())) {
+            screenTitle = R.string.high_power_apps;
+        } else if (className.equals(Settings.OverlaySettingsActivity.class.getName())) {
+            screenTitle = R.string.system_alert_window_settings;
+        } else if (className.equals(Settings.WriteSettingsActivity.class.getName())) {
+            screenTitle = R.string.write_settings;
+        } else if (className.equals(Settings.ManageExternalSourcesActivity.class.getName())) {
+            screenTitle = R.string.install_other_apps;
+        } else if (className.equals(Settings.ChangeWifiStateActivity.class.getName())) {
+            screenTitle = R.string.change_wifi_state_title;
+        } else if (className.equals(Settings.ManageExternalStorageActivity.class.getName())) {
+            screenTitle = R.string.manage_external_storage_title;
+        }  else if (className.equals(Settings.MediaManagementAppsActivity.class.getName())) {
+            screenTitle = R.string.media_management_apps_title;
+        } else if (className.equals(Settings.AlarmsAndRemindersActivity.class.getName())) {
+            screenTitle = R.string.alarms_and_reminders_title;
+        } else if (className.equals(Settings.NotificationAppListActivity.class.getName())) {
+            screenTitle = R.string.app_notifications_title;
+        } else if (className.equals(AppLocaleDetails.class.getName())) {
+            screenTitle = R.string.app_locales_picker_menu_title;
+        } else {
+            if (screenTitle == -1) {
+                screenTitle = R.string.all_apps;
+            }
+        }
+        return screenTitle;
     }
 
     static class FilterSpinnerAdapter extends SettingsSpinnerAdapter<CharSequence> {
@@ -1494,6 +1532,10 @@ public class ManageApplications extends InstrumentedFragment
                     break;
                 case LIST_TYPE_MEDIA_MANAGEMENT_APPS:
                     holder.setSummary(MediaManagementAppsDetails.getSummary(mContext, entry));
+                    break;
+                case LIST_TYPE_APPS_LOCAL:
+                    holder.setSummary(AppLocaleDetails
+                            .getSummary(mContext, entry.info.packageName));
                     break;
                 default:
                     holder.updateSizeText(entry, mManageApplications.mInvalidSizeStr, mWhichSize);

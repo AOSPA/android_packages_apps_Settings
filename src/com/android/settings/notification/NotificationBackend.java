@@ -54,6 +54,7 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.internal.util.CollectionUtils;
 import com.android.settingslib.R;
 import com.android.settingslib.Utils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -122,6 +123,13 @@ public class NotificationBackend {
             } catch (RemoteException e) {
                 Log.w(TAG, "Error calling NMS", e);
             }
+            // The permission system cannot make role permissions 'fixed', so check for these
+            // roles explicitly
+            List<String> roles = rm.getHeldRolesFromController(app.packageName);
+            if (roles.contains(RoleManager.ROLE_DIALER)
+                    || roles.contains(RoleManager.ROLE_EMERGENCY)) {
+                row.systemApp = row.lockedImportance = true;
+            }
         } else {
             row.systemApp = Utils.isSystemPackage(context.getResources(), pm, app);
             List<String> roles = rm.getHeldRolesFromController(app.packageName);
@@ -159,7 +167,9 @@ public class NotificationBackend {
         StringBuilder sb = new StringBuilder();
 
         try {
-            List<String> associatedMacAddrs = cdm.getAssociations(pkg, userId);
+            List<String> associatedMacAddrs = CollectionUtils.mapNotNull(
+                    cdm.getAssociations(pkg, userId),
+                    a -> a.isSelfManaged() ? null : a.getDeviceMacAddress().toString());
             if (associatedMacAddrs != null) {
                 for (String assocMac : associatedMacAddrs) {
                     final Collection<CachedBluetoothDevice> cachedDevices =
@@ -348,6 +358,15 @@ public class NotificationBackend {
              sINM.setInvalidMsgAppDemoted(pkg, uid, isDemoted);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
+        }
+    }
+
+    public boolean hasSentValidBubble(String pkg, int uid) {
+        try {
+            return sINM.hasSentValidBubble(pkg, uid);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return false;
         }
     }
 

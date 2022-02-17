@@ -58,7 +58,6 @@ import androidx.preference.PreferenceManager;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
-import com.android.settings.activityembedding.SplitStateObserver;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.core.SettingsBaseActivity;
@@ -248,16 +247,21 @@ public class SettingsActivity extends SettingsBaseActivity
 
     @Override
     protected void onCreate(Bundle savedState) {
-        super.onCreate(savedState);
-        Log.d(LOG_TAG, "Starting onCreate");
-
-        long startTime = System.currentTimeMillis();
-
         // Should happen before any call to getIntent()
         getMetaData();
         final Intent intent = getIntent();
 
-        registerSplitStateObserverForTwoPaneDeepLink();
+        if (shouldShowTwoPaneDeepLink(intent)) {
+            launchHomepageForTwoPaneDeepLink(intent);
+            finishAndRemoveTask();
+            super.onCreate(savedState);
+            return;
+        }
+
+        super.onCreate(savedState);
+        Log.d(LOG_TAG, "Starting onCreate");
+
+        long startTime = System.currentTimeMillis();
 
         final FeatureFactory factory = FeatureFactory.getFactory(this);
         mDashboardFeatureProvider = factory.getDashboardFeatureProvider(this);
@@ -364,30 +368,6 @@ public class SettingsActivity extends SettingsBaseActivity
         }
     }
 
-    private void registerSplitStateObserverForTwoPaneDeepLink() {
-        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this)) {
-            return;
-        }
-
-        final SplitStateObserver splitStateObserver = new SplitStateObserver(this /* activity*/,
-                true /* listenOnce */,
-                splitInfos -> {
-                    if (!splitInfos.isEmpty() || !SettingsActivity.this.isTaskRoot()) {
-                        // It's already in 2-pane or in a non-empty task, there is no need to go
-                        // 2-pane deep link flow.
-                        return;
-                    }
-
-                    if (shouldShowTwoPaneDeepLink(getIntent())) {
-                        launchHomepageForTwoPaneDeepLink(getIntent());
-                        finishAndRemoveTask();
-                        return;
-                    }
-                }
-            );
-        getLifecycle().addObserver(splitStateObserver);
-    }
-
     private boolean isSubSettings(Intent intent) {
         return this instanceof SubSettings ||
             intent.getBooleanExtra(EXTRA_SHOW_FRAGMENT_AS_SUBSETTING, false);
@@ -399,8 +379,9 @@ public class SettingsActivity extends SettingsBaseActivity
     public static Intent getTrampolineIntent(Intent intent, String highlightMenuKey) {
         final Intent detailIntent = new Intent(intent);
         // It's a deep link intent, SettingsHomepageActivity will set SplitPairRule and start it.
-        final Intent trampolineIntent = new Intent(ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY);
-        trampolineIntent.replaceExtras(detailIntent);
+        final Intent trampolineIntent = new Intent(ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY)
+                .setPackage(Utils.SETTINGS_PACKAGE_NAME)
+                .replaceExtras(detailIntent);
 
         // Relay detail intent data to prevent failure of Intent#ParseUri.
         // If Intent#getData() is not null, Intent#toUri will return an Uri which has the scheme of
@@ -437,6 +418,15 @@ public class SettingsActivity extends SettingsBaseActivity
     }
 
     private boolean shouldShowTwoPaneDeepLink(Intent intent) {
+        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this)) {
+            return false;
+        }
+
+        // If the activity is not the task root, it should not start trampoline for deep links.
+        if (!isTaskRoot()) {
+            return false;
+        }
+
         // Only starts trampoline for deep links. Should return false for all the cases that
         // Settings app starts SettingsActivity or SubSetting by itself.
         if (intent.getAction() == null) {

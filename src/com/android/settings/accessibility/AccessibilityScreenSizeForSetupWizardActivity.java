@@ -63,6 +63,9 @@ public class AccessibilityScreenSizeForSetupWizardActivity extends InstrumentedA
         int SCREEN_SIZE = 2;
     }
 
+    // Keep the last height of the scroll view in the {@link GlifLayout}
+    private int mLastScrollViewHeight;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,8 +120,8 @@ public class AccessibilityScreenSizeForSetupWizardActivity extends InstrumentedA
                         : R.string.screen_zoom_title);
         ((TextView) findViewById(R.id.sud_layout_subtitle)).setText(
                 getFragmentType(getIntent()) == FragmentType.FONT_SIZE
-                        ? R.string.short_summary_font_size
-                        : R.string.screen_zoom_short_summary);
+                        ? R.string.font_size_summary
+                        : R.string.screen_zoom_summary);
     }
 
     private boolean isSuwSupportedTwoPanes() {
@@ -143,11 +146,13 @@ public class AccessibilityScreenSizeForSetupWizardActivity extends InstrumentedA
      * Scrolls to bottom while {@link ScrollView} layout changed.
      */
     private void scrollToBottom() {
+        mLastScrollViewHeight = 0;
         final GlifLayout layout = findViewById(R.id.setup_wizard_layout);
         final ScrollView scrollView = layout.getScrollView();
         scrollView.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
             final int scrollViewHeight = scrollView.getHeight();
-            if (scrollViewHeight > 0) {
+            if (scrollViewHeight > 0 && scrollViewHeight != mLastScrollViewHeight) {
+                mLastScrollViewHeight = scrollViewHeight;
                 scrollView.post(() -> {
                     // Here is no need to show the scrolling animation. So disabled first and
                     // then enabled it after scrolling finished.

@@ -1292,8 +1292,4 @@ public final class Utils extends com.android.settingslib.Utils {
     public static int getHomepageIconColorHighlight(Context context) {
         return getColorAttrDefaultColor(context, android.R.attr.textColorSecondaryInverse);
     }
-
-    public static boolean isProviderModelEnabled(Context context) {
-        return FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL);
-    }
 }

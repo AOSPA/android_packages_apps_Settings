@@ -40,6 +40,7 @@ import android.widget.CheckBox;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
+import androidx.preference.SwitchPreference;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.DialogCreatable;
@@ -73,7 +74,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     private static final TextUtils.SimpleStringSplitter sStringColonSplitter =
             new TextUtils.SimpleStringSplitter(COMPONENT_NAME_SEPARATOR);
 
-    private MagnificationModePreferenceController mModePreferenceController;
     private DialogCreatable mDialogDelegate;
 
     @Override
@@ -170,11 +170,28 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         final PreferenceCategory generalCategory = findPreference(KEY_GENERAL_CATEGORY);
         generalCategory.addPreference(mSettingsPreference);
 
-        mModePreferenceController = new MagnificationModePreferenceController(getContext(),
-                MagnificationModePreferenceController.PREF_KEY);
-        mModePreferenceController.setDialogHelper(this);
-        getSettingsLifecycle().addObserver(mModePreferenceController);
-        mModePreferenceController.displayPreference(getPreferenceScreen());
+        final MagnificationModePreferenceController magnificationModePreferenceController =
+                new MagnificationModePreferenceController(getContext(),
+                        MagnificationModePreferenceController.PREF_KEY);
+        magnificationModePreferenceController.setDialogHelper(this);
+        getSettingsLifecycle().addObserver(magnificationModePreferenceController);
+        magnificationModePreferenceController.displayPreference(getPreferenceScreen());
+
+        final SwitchPreference followingTypingSwitchPreference =
+                new SwitchPreference(getPrefContext());
+        followingTypingSwitchPreference.setTitle(
+                R.string.accessibility_screen_magnification_follow_typing_title);
+        followingTypingSwitchPreference.setSummary(
+                R.string.accessibility_screen_magnification_follow_typing_summary);
+        followingTypingSwitchPreference.setKey(
+                MagnificationFollowTypingPreferenceController.PREF_KEY);
+        generalCategory.addPreference(followingTypingSwitchPreference);
+
+        final MagnificationFollowTypingPreferenceController followTypingPreferenceController =
+                new MagnificationFollowTypingPreferenceController(getContext(),
+                        MagnificationFollowTypingPreferenceController.PREF_KEY);
+        getSettingsLifecycle().addObserver(followTypingPreferenceController);
+        followTypingPreferenceController.displayPreference(getPreferenceScreen());
     }
 
     @Override
@@ -273,6 +290,13 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             resId = R.string.accessibility_shortcut_edit_summary_software;
         }
         return context.getText(resId);
+    }
+
+    @Override
+    protected List<String> getFeatureSettingsKeys() {
+        final List<String> shortcutKeys = super.getFeatureSettingsKeys();
+        shortcutKeys.add(Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED);
+        return shortcutKeys;
     }
 
     @Override

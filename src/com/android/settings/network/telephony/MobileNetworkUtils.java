@@ -45,6 +45,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
+import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.SystemClock;
 import android.os.SystemProperties;
@@ -73,9 +74,12 @@ import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
 import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
+import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.graph.SignalDrawable;
 import com.android.settingslib.utils.ThreadUtils;
@@ -201,13 +205,12 @@ public class MobileNetworkUtils {
      * should be shown to the user, false if the option should be hidden.
      */
     public static boolean isContactDiscoveryVisible(Context context, int subId) {
-        CarrierConfigManager carrierConfigManager = context.getSystemService(
-                CarrierConfigManager.class);
-        if (carrierConfigManager == null) {
+        CarrierConfigCache carrierConfigCache = CarrierConfigCache.getInstance(context);
+        if (!carrierConfigCache.hasCarrierConfigManager()) {
             Log.w(TAG, "isContactDiscoveryVisible: Could not resolve carrier config");
             return false;
         }
-        PersistableBundle bundle = carrierConfigManager.getConfigForSubId(subId);
+        PersistableBundle bundle = carrierConfigCache.getConfigForSubId(subId);
         return bundle.getBoolean(
                 CarrierConfigManager.KEY_USE_RCS_PRESENCE_BOOL, false /*default*/)
                 || bundle.getBoolean(CarrierConfigManager.Ims.KEY_RCS_BULK_CAPABILITY_EXCHANGE_BOOL,
@@ -355,9 +358,8 @@ public class MobileNetworkUtils {
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             return false;
         }
-
-        final PersistableBundle carrierConfig = context.getSystemService(
-                CarrierConfigManager.class).getConfigForSubId(subId);
+        final PersistableBundle carrierConfig =
+                CarrierConfigCache.getInstance(context).getConfigForSubId(subId);
         if (carrierConfig != null
                 && !carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL)
@@ -421,8 +423,8 @@ public class MobileNetworkUtils {
     }
 
     private static boolean isGsmBasicOptions(Context context, int subId) {
-        final PersistableBundle carrierConfig = context.getSystemService(
-                CarrierConfigManager.class).getConfigForSubId(subId);
+        final PersistableBundle carrierConfig =
+                CarrierConfigCache.getInstance(context).getConfigForSubId(subId);
         if (carrierConfig != null
                 && !carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL)
@@ -444,8 +446,8 @@ public class MobileNetworkUtils {
      * settings
      */
     public static boolean isWorldMode(Context context, int subId) {
-        final PersistableBundle carrierConfig = context.getSystemService(
-                CarrierConfigManager.class).getConfigForSubId(subId);
+        final PersistableBundle carrierConfig =
+                CarrierConfigCache.getInstance(context).getConfigForSubId(subId);
         return carrierConfig == null
                 ? false
                 : carrierConfig.getBoolean(CarrierConfigManager.KEY_WORLD_MODE_ENABLED_BOOL);
@@ -457,8 +459,8 @@ public class MobileNetworkUtils {
     public static boolean shouldDisplayNetworkSelectOptions(Context context, int subId) {
         final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(subId);
-        final PersistableBundle carrierConfig = context.getSystemService(
-                CarrierConfigManager.class).getConfigForSubId(subId);
+        final PersistableBundle carrierConfig =
+                CarrierConfigCache.getInstance(context).getConfigForSubId(subId);
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID
                 || carrierConfig == null
                 || !carrierConfig.getBoolean(
@@ -499,8 +501,7 @@ public class MobileNetworkUtils {
 
     //TODO(b/117651939): move it to telephony
     private static boolean isTdscdmaSupported(Context context, TelephonyManager telephonyManager) {
-        final PersistableBundle carrierConfig = context.getSystemService(
-                CarrierConfigManager.class).getConfig();
+        final PersistableBundle carrierConfig = CarrierConfigCache.getInstance(context).getConfig();
 
         if (carrierConfig == null) {
             return false;
@@ -1006,6 +1007,24 @@ public class MobileNetworkUtils {
 
     private static String setSummaryResId(Context context, int resId) {
         return context.getResources().getString(resId);
+    }
+
+    public static void launchMobileNetworkSettings(Context context, SubscriptionInfo info) {
+        final int subId = info.getSubscriptionId();
+        if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            Log.d(TAG, "launchMobileNetworkSettings fail, subId is invalid.");
+            return;
+        }
+
+        Log.d(TAG, "launchMobileNetworkSettings for subId: " + subId);
+        final Bundle extra = new Bundle();
+        extra.putInt(Settings.EXTRA_SUB_ID, subId);
+        new SubSettingLauncher(context)
+                .setTitleText(SubscriptionUtil.getUniqueSubscriptionDisplayName(info, context))
+                .setDestination(MobileNetworkSettings.class.getCanonicalName())
+                .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
+                .setArguments(extra)
+                .launch();
     }
 
 }

@@ -67,7 +67,7 @@ public class ImsConnector implements FeatureConnector.Listener<ImsManager> {
     }
 
     @Override
-    public void connectionReady(ImsManager manager) throws ImsException {
+    public void connectionReady(ImsManager manager, int subId) throws ImsException {
         mImsManager = manager;
         registerListener();
     }

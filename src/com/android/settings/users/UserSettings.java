@@ -115,6 +115,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String KEY_USER_GUEST = "user_guest";
     private static final String KEY_ADD_GUEST = "guest_add";
     private static final String KEY_ADD_USER = "user_add";
+    private static final String KEY_ADD_SUPERVISED_USER = "supervised_user_add";
     private static final String KEY_ADD_USER_WHEN_LOCKED = "user_settings_add_users_when_locked";
     private static final String KEY_MULTIUSER_TOP_INTRO = "multiuser_top_intro";
 
@@ -165,10 +166,13 @@ public class UserSettings extends SettingsPreferenceFragment
     @VisibleForTesting
     RestrictedPreference mAddUser;
     @VisibleForTesting
+    RestrictedPreference mAddSupervisedUser;
+    @VisibleForTesting
     SparseArray<Bitmap> mUserIcons = new SparseArray<>();
     private int mRemovingUserId = -1;
     private boolean mAddingUser;
     private boolean mGuestUserAutoCreated;
+    private String mConfigSupervisedUserCreationPackage;
     private String mAddingUserName;
     private UserCapabilities mUserCaps;
     private boolean mShouldUpdateUserList = true;
@@ -300,8 +304,13 @@ public class UserSettings extends SettingsPreferenceFragment
         }
         mAddUser.setOnPreferenceClickListener(this);
 
+        setConfigSupervisedUserCreationPackage();
+        mAddSupervisedUser = findPreference(KEY_ADD_SUPERVISED_USER);
+        mAddSupervisedUser.setOnPreferenceClickListener(this);
+
         activity.registerReceiverAsUser(
-                mUserChangeReceiver, UserHandle.ALL, USER_REMOVED_INTENT_FILTER, null, mHandler);
+                mUserChangeReceiver, UserHandle.ALL, USER_REMOVED_INTENT_FILTER, null, mHandler,
+                Context.RECEIVER_EXPORTED_UNAUDITED);
 
         updateUI();
         mShouldUpdateUserList = false;
@@ -489,6 +498,21 @@ public class UserSettings extends SettingsPreferenceFragment
                 }
             }
         }
+    }
+
+    private void onAddSupervisedUserClicked() {
+        final Intent intent = new Intent()
+                .setAction(UserManager.ACTION_CREATE_SUPERVISED_USER)
+                .setPackage(mConfigSupervisedUserCreationPackage);
+
+        // TODO(b/209659998): [to-be-removed] fallback activity for supervised user creation.
+        if (getActivity().getPackageManager().resolveActivity(intent, 0) == null) {
+            intent
+                .setClass(getContext(), AddSupervisedUserActivity.class)
+                .setPackage(null);
+        }
+
+        startActivity(intent);
     }
 
     private void onRemoveUserClicked(int userId) {
@@ -790,8 +814,8 @@ public class UserSettings extends SettingsPreferenceFragment
         }
         try {
             getContext().getSystemService(UserManager.class)
-                    .removeUserOrSetEphemeral(UserHandle.myUserId(),
-                            /* evenWhenDisallowed= */ false);
+                    .removeUserWhenPossible(UserHandle.of(UserHandle.myUserId()),
+                            /* overrideDevicePolicy= */ false);
             ActivityManager.getService().switchUser(UserHandle.USER_SYSTEM);
         } catch (RemoteException re) {
             Log.e(TAG, "Unable to remove self user");
@@ -1058,6 +1082,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
         updateAddGuest(context, users.stream().anyMatch(UserInfo::isGuest));
         updateAddUser(context);
+        updateAddSupervisedUser(context);
 
         if (!mUserCaps.mUserSwitcherEnabled) {
             return;
@@ -1070,6 +1095,12 @@ public class UserSettings extends SettingsPreferenceFragment
 
     }
 
+    @VisibleForTesting
+    void setConfigSupervisedUserCreationPackage() {
+        mConfigSupervisedUserCreationPackage = getPrefContext().getString(
+                com.android.internal.R.string.config_supervisedUserCreationPackage);
+    }
+
     private boolean isCurrentUserGuest() {
         return mUserCaps.mIsGuest;
     }
@@ -1080,6 +1111,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private void updateAddGuest(Context context, boolean isGuestAlreadyCreated) {
         if (!isGuestAlreadyCreated && mUserCaps.mCanAddGuest
+                && mUserManager.canAddMoreUsers(UserManager.USER_TYPE_FULL_GUEST)
                 && WizardManagerHelper.isDeviceProvisioned(context)
                 && mUserCaps.mUserSwitcherEnabled) {
             mAddGuest.setVisible(true);
@@ -1099,25 +1131,41 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private void updateAddUser(Context context) {
+        updateAddUserCommon(context, mAddUser, mUserCaps.mCanAddRestrictedProfile);
+    }
+
+    private void updateAddSupervisedUser(Context context) {
+        if (!TextUtils.isEmpty(mConfigSupervisedUserCreationPackage)) {
+            updateAddUserCommon(context, mAddSupervisedUser, false);
+        } else {
+            mAddSupervisedUser.setVisible(false);
+        }
+    }
+
+    private void updateAddUserCommon(Context context, RestrictedPreference addUser,
+            boolean canAddRestrictedProfile) {
         if ((mUserCaps.mCanAddUser || mUserCaps.mDisallowAddUserSetByAdmin)
                 && WizardManagerHelper.isDeviceProvisioned(context)
                 && mUserCaps.mUserSwitcherEnabled) {
-            mAddUser.setVisible(true);
-            mAddUser.setSelectable(true);
-            final boolean canAddMoreUsers = mUserManager.canAddMoreUsers();
-            mAddUser.setEnabled(canAddMoreUsers && !mAddingUser && canSwitchUserNow());
+            addUser.setVisible(true);
+            addUser.setSelectable(true);
+            final boolean canAddMoreUsers =
+                    mUserManager.canAddMoreUsers(UserManager.USER_TYPE_FULL_SECONDARY)
+                            || (canAddRestrictedProfile
+                            && mUserManager.canAddMoreUsers(UserManager.USER_TYPE_FULL_RESTRICTED));
+            addUser.setEnabled(canAddMoreUsers && !mAddingUser && canSwitchUserNow());
             if (!canAddMoreUsers) {
-                mAddUser.setSummary(
+                addUser.setSummary(
                         getString(R.string.user_add_max_count, getRealUsersCount()));
             } else {
-                mAddUser.setSummary(null);
+                addUser.setSummary(null);
             }
-            if (mAddUser.isEnabled()) {
-                mAddUser.setDisabledByAdmin(
+            if (addUser.isEnabled()) {
+                addUser.setDisabledByAdmin(
                         mUserCaps.mDisallowAddUser ? mUserCaps.mEnforcedAdmin : null);
             }
         } else {
-            mAddUser.setVisible(false);
+            addUser.setVisible(false);
         }
     }
 
@@ -1201,6 +1249,12 @@ public class UserSettings extends SettingsPreferenceFragment
             } else {
                 onAddUserClicked(USER_TYPE_USER);
             }
+            return true;
+        } else if (pref == mAddSupervisedUser) {
+            mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_USER_SUPERVISED_ADD);
+            Trace.beginSection("UserSettings.addSupervisedUser");
+            onAddSupervisedUserClicked();
+            Trace.endSection();
             return true;
         } else if (pref == mAddGuest) {
             mAddGuest.setEnabled(false); // prevent multiple tap issue

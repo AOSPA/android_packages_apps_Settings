@@ -192,7 +192,7 @@ public class PhoneNumberPreferenceController extends BasePreferenceController
 
     @VisibleForTesting
     protected Preference createNewPreference(Context context) {
-        return new Preference(context);
+        return new PhoneNumberSummaryPreference(context);
     }
 
     public void init(Lifecycle lifecycle) {

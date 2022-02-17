@@ -45,7 +45,6 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.util.FeatureFlagUtils;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -158,20 +157,18 @@ public class NetworkProviderSettingsTest {
                 .when(mFirstWifiEntryPreferenceCategory).getKey();
         mNetworkProviderSettings.mFirstWifiEntryPreferenceCategory =
                 mFirstWifiEntryPreferenceCategory;
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL, false);
     }
 
     @Test
     public void addNetworkFragmentSendResult_onActivityResult_shouldHandleEvent() {
-        final NetworkProviderSettings NetworkProviderSettings = spy(new NetworkProviderSettings());
         final Intent intent = new Intent();
-        doNothing().when(NetworkProviderSettings).handleAddNetworkRequest(anyInt(),
+        doNothing().when(mNetworkProviderSettings).handleAddNetworkRequest(anyInt(),
                 any(Intent.class));
 
-        NetworkProviderSettings.onActivityResult(NetworkProviderSettings.ADD_NETWORK_REQUEST,
+        mNetworkProviderSettings.onActivityResult(NetworkProviderSettings.ADD_NETWORK_REQUEST,
                 Activity.RESULT_OK, intent);
 
-        verify(NetworkProviderSettings).handleAddNetworkRequest(anyInt(), any(Intent.class));
+        verify(mNetworkProviderSettings).handleAddNetworkRequest(anyInt(), any(Intent.class));
     }
 
     @Test
@@ -329,6 +326,55 @@ public class NetworkProviderSettingsTest {
         verify(menu).add(anyInt(), eq(NetworkProviderSettings.MENU_ID_FORGET), anyInt(), anyInt());
         verify(menu).add(anyInt(), eq(NetworkProviderSettings.MENU_ID_DISCONNECT), anyInt(),
                 anyInt());
+    }
+
+    @Test
+    public void onCreateContextMenu_canShare_shouldHaveShareMenuForConnectedWifiEntry() {
+        final FragmentActivity activity = mock(FragmentActivity.class);
+        when(activity.getApplicationContext()).thenReturn(mContext);
+        when(mNetworkProviderSettings.getActivity()).thenReturn(activity);
+
+        final WifiEntry wifiEntry = mock(WifiEntry.class);
+        when(wifiEntry.canDisconnect()).thenReturn(true);
+        when(wifiEntry.canShare()).thenReturn(true);
+        when(wifiEntry.canForget()).thenReturn(true);
+        when(wifiEntry.isSaved()).thenReturn(true);
+        when(wifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_CONNECTED);
+
+        final LongPressWifiEntryPreference connectedWifiEntryPreference =
+            mNetworkProviderSettings.createLongPressWifiEntryPreference(wifiEntry);
+        final View view = mock(View.class);
+        when(view.getTag()).thenReturn(connectedWifiEntryPreference);
+
+        final ContextMenu menu = mock(ContextMenu.class);
+        mNetworkProviderSettings.onCreateContextMenu(menu, view, null /* info */);
+
+        verify(menu).add(anyInt(), eq(NetworkProviderSettings.MENU_ID_SHARE), anyInt(), anyInt());
+    }
+
+    @Test
+    public void onCreateContextMenu_canNotShare_shouldDisappearShareMenuForConnectedWifiEntry() {
+        final FragmentActivity activity = mock(FragmentActivity.class);
+        when(activity.getApplicationContext()).thenReturn(mContext);
+        when(mNetworkProviderSettings.getActivity()).thenReturn(activity);
+
+        final WifiEntry wifiEntry = mock(WifiEntry.class);
+        when(wifiEntry.canDisconnect()).thenReturn(true);
+        when(wifiEntry.canShare()).thenReturn(false);
+        when(wifiEntry.canForget()).thenReturn(true);
+        when(wifiEntry.isSaved()).thenReturn(true);
+        when(wifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_CONNECTED);
+
+        final LongPressWifiEntryPreference connectedWifiEntryPreference =
+            mNetworkProviderSettings.createLongPressWifiEntryPreference(wifiEntry);
+        final View view = mock(View.class);
+        when(view.getTag()).thenReturn(connectedWifiEntryPreference);
+
+        final ContextMenu menu = mock(ContextMenu.class);
+        mNetworkProviderSettings.onCreateContextMenu(menu, view, null /* info */);
+
+        verify(menu, never())
+                .add(anyInt(), eq(NetworkProviderSettings.MENU_ID_SHARE), anyInt(), anyInt());
     }
 
     @Test

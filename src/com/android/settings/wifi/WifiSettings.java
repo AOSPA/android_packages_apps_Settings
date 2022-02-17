@@ -88,15 +88,20 @@ import java.util.Optional;
 /**
  * UI for Wi-Fi settings screen
  *
- * TODO(b/167474581): This file will be deprecated at Android S, please merge your WifiSettings
+ * @deprecated This file will be deprecated at Android S, please merge your WifiSettings
  * in change in {@link NetworkProviderSettings}.
  */
+@Deprecated
 @SearchIndexable
 public class WifiSettings extends RestrictedSettingsFragment
         implements Indexable, WifiPickerTracker.WifiPickerTrackerCallback,
         WifiDialog2.WifiDialog2Listener, DialogInterface.OnDismissListener {
 
     private static final String TAG = "WifiSettings";
+
+    // Set the Provider Model is always enabled
+    @VisibleForTesting
+    static Boolean IS_ENABLED_PROVIDER_MODEL = true;
 
     // IDs of context menu
     static final int MENU_ID_CONNECT = Menu.FIRST + 1;
@@ -233,7 +238,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-        if (Utils.isProviderModelEnabled(getContext())) {
+        if (IS_ENABLED_PROVIDER_MODEL) {
             final Intent intent = new Intent("android.settings.NETWORK_PROVIDER_SETTINGS");
             // Add FLAG_ACTIVITY_NEW_TASK and FLAG_ACTIVITY_CLEAR_TASK to avoid multiple
             // instances issue. (e.g. b/191956700)
@@ -267,9 +272,8 @@ public class WifiSettings extends RestrictedSettingsFragment
         mStatusMessagePreference = findPreference(PREF_KEY_STATUS_MESSAGE);
         mDataUsagePreference = findPreference(PREF_KEY_DATA_USAGE);
         mDataUsagePreference.setVisible(DataUsageUtils.hasWifiRadio(getContext()));
-        mDataUsagePreference.setTemplate(
-                NetworkTemplate.buildTemplateWifi(NetworkTemplate.WIFI_NETWORKID_ALL,
-                null /* subscriberId */), 0 /*subId*/, null /*service*/);
+        mDataUsagePreference.setTemplate(new NetworkTemplate.Builder(
+                NetworkTemplate.MATCH_WIFI).build(), 0 /*subId*/, null /*service*/);
     }
 
     @Override
@@ -653,7 +657,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     /** Called when the state of Wifi has changed. */
     @Override
     public void onWifiStateChanged() {
-        if (mIsRestricted) {
+        if (mIsRestricted || isFinishingOrDestroyed()) {
             return;
         }
         final int wifiState = mWifiPickerTracker.getWifiState();
@@ -1087,7 +1091,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             new BaseSearchIndexProvider(R.xml.wifi_settings) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return !Utils.isProviderModelEnabled(context);
+                    return !IS_ENABLED_PROVIDER_MODEL;
                 }
 
                 @Override
