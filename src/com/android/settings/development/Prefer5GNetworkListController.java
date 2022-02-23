@@ -91,7 +91,7 @@ public class Prefer5GNetworkListController extends AbstractPreferenceController 
     private PreferenceScreen mPreferenceScreen;
     private TelephonyManager mTelephonyManager;
     private Map<Integer, ListPreference> mPreferences;
-    private final List<ListPreference> mPreferenceList = new ArrayList<>();
+    private List<ListPreference> mPreferenceList;
 
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private int mPhoneId = SubscriptionManager.INVALID_PHONE_INDEX;
@@ -236,6 +236,7 @@ public class Prefer5GNetworkListController extends AbstractPreferenceController 
         // present in the screen, and finally remove any now-outdated ones.
         final Map<Integer, ListPreference> existingPreferences = mPreferences;
         mPreferences = new ArrayMap<>();
+        mPreferenceList = new ArrayList<>();
 
         for (int slotId = 0; slotId < mTelephonyManager.getPhoneCount();
                 slotId++) {
