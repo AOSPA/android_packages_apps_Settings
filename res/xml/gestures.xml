@@ -40,13 +40,6 @@
         settings:controller="com.android.settings.gestures.SwipeToNotificationPreferenceController" />
 
     <Preference
-        android:key="gesture_double_tap_power_input_summary"
-        android:title="@string/double_tap_power_for_camera_title"
-        android:fragment="com.android.settings.gestures.DoubleTapPowerSettings"
-        settings:searchable="false"
-        settings:controller="com.android.settings.gestures.DoubleTapPowerPreferenceController" />
-
-    <Preference
         android:key="gesture_double_twist_input_summary"
         android:title="@string/double_twist_for_camera_mode_title"
         android:fragment="com.android.settings.gestures.DoubleTwistGestureSettings"
@@ -54,68 +47,10 @@
         settings:controller="com.android.settings.gestures.DoubleTwistPreferenceController" />
 
     <Preference
-        android:key="gesture_system_navigation_input_summary"
-        android:title="@string/system_navigation_title"
-        android:fragment="com.android.settings.gestures.SystemNavigationGestureSettings"
-        settings:controller="com.android.settings.gestures.SystemNavigationPreferenceController"
-        settings:keywords="@string/keywords_system_navigation" />
-
-    <Preference
-        android:key="gesture_one_handed"
-        android:title="@string/one_handed_title"
-        android:fragment="com.android.settings.gestures.OneHandedSettings"
-        settings:controller="com.android.settings.gestures.OneHandedEnablePreferenceController" />
-
-    <Preference
-        android:key="gesture_tap_screen_input_summary"
-        android:title="@string/ambient_display_tap_screen_title"
-        android:fragment="com.android.settings.gestures.TapScreenGestureSettings"
-        settings:searchable="false"
-        settings:controller="com.android.settings.gestures.TapScreenGesturePreferenceController" />
-
-    <Preference
-        android:key="gesture_double_tap_screen_input_summary"
-        android:title="@string/ambient_display_title"
-        android:fragment="com.android.settings.gestures.DoubleTapScreenSettings"
-        settings:searchable="false"
-        settings:controller="com.android.settings.gestures.DoubleTapScreenPreferenceController" />
-
-    <Preference
-        android:key="gesture_pick_up_input_summary"
-        android:title="@string/ambient_display_pickup_title"
-        android:fragment="com.android.settings.gestures.PickupGestureSettings"
-        settings:searchable="false"
-        settings:controller="com.android.settings.gestures.PickupGesturePreferenceController" />
-
-    <Preference
-        android:key="gesture_power_menu_summary"
-        android:title="@string/power_menu_setting_name"
-        android:fragment="com.android.settings.gestures.PowerMenuSettings"
-        settings:controller="com.android.settings.gestures.PowerMenuPreferenceController" />
-
-    <Preference
         android:key="three_finger_gesture_summary"
         android:title="@string/three_finger_gesture"
         android:fragment="com.android.settings.gestures.SwipeToScreenshotGestureSettings"
         settings:controller="com.android.settings.gestures.SwipeToScreenshotPreferenceController" />
-
-    <Preference
-        android:key="volume_button_music_control_sumary"
-        android:title="@string/volume_button_music_control_title"
-        android:fragment="com.android.settings.gestures.VolumeButtonMusicControlGestureSettings"
-        settings:controller="com.android.settings.gestures.VolumeButtonMusicControlPreferenceController" />
-
-    <Preference
-        android:key="power_button_torch_summary"
-        android:title="@string/power_button_torch_title"
-        android:fragment="com.android.settings.gestures.PowerButtonTorchSettings"
-        settings:controller="com.android.settings.gestures.PowerButtonTorchGesturePreferenceController" />
-
-    <com.android.settings.widget.PrimarySwitchPreference
-        android:key="gesture_prevent_ringing_summary"
-        android:title="@string/gesture_prevent_ringing_screen_title"
-        android:fragment="com.android.settings.gestures.PreventRingingGestureSettings"
-        settings:controller="com.android.settings.gestures.PreventRingingParentPreferenceController" />
 
     <co.aospa.framework.preference.SecureSettingSwitchPreference
         android:key="status_bar_quick_qs_pulldown"
@@ -123,16 +58,105 @@
         android:summary="@string/quick_settings_quick_pull_down_summary"
         android:defaultValue="true" />
 
-    <co.aospa.framework.preference.SecureSettingSwitchPreference
-        android:key="advanced_reboot"
-        android:title="@string/global_actions_advanced_reboot_title"
-        android:summary="@string/global_actions_advanced_reboot_summary"
-        android:defaultValue="false" />
+    <PreferenceCategory
+        android:key="gesture_navigation_category"
+        android:title="@string/gesture_navigation_category_title">
 
-    <Preference
-        android:key="offscreen_gesture"
-        android:title="@string/offscreen_gesture_title"
-        android:summary="@string/offscreen_gesture_summary"
-        android:fragment="com.android.settings.gestures.OffscreenGestureSettings" />
+        <Preference
+            android:key="gesture_system_navigation_input_summary"
+            android:title="@string/system_navigation_title"
+            android:fragment="com.android.settings.gestures.SystemNavigationGestureSettings"
+            settings:controller="com.android.settings.gestures.SystemNavigationPreferenceController"
+            settings:keywords="@string/keywords_system_navigation" />
+
+        <Preference
+            android:key="gesture_one_handed"
+            android:title="@string/one_handed_title"
+            android:fragment="com.android.settings.gestures.OneHandedSettings"
+            settings:controller="com.android.settings.gestures.OneHandedEnablePreferenceController" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="gesture_power_button_category"
+        android:title="@string/gesture_power_button_category_title">
+
+        <Preference
+            android:key="gesture_double_tap_power_input_summary"
+            android:title="@string/double_tap_power_for_camera_title"
+            android:fragment="com.android.settings.gestures.DoubleTapPowerSettings"
+            settings:searchable="false"
+            settings:controller="com.android.settings.gestures.DoubleTapPowerPreferenceController" />
+
+        <Preference
+            android:key="power_button_torch_summary"
+            android:title="@string/power_button_torch_title"
+            android:fragment="com.android.settings.gestures.PowerButtonTorchSettings"
+            settings:controller="com.android.settings.gestures.PowerButtonTorchGesturePreferenceController" />
+
+        <Preference
+            android:key="gesture_power_menu_summary"
+            android:title="@string/power_menu_setting_name"
+            android:fragment="com.android.settings.gestures.PowerMenuSettings"
+            settings:controller="com.android.settings.gestures.PowerMenuPreferenceController" />
+
+        <co.aospa.framework.preference.SecureSettingSwitchPreference
+            android:key="advanced_reboot"
+            android:title="@string/global_actions_advanced_reboot_title"
+            android:summary="@string/global_actions_advanced_reboot_summary"
+            android:defaultValue="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="gesture_volume_buttons_category"
+        android:title="@string/gesture_volume_buttons_category_title">
+
+        <Preference
+            android:key="volume_button_music_control_sumary"
+            android:title="@string/volume_button_music_control_title"
+            android:fragment="com.android.settings.gestures.VolumeButtonMusicControlGestureSettings"
+            settings:controller="com.android.settings.gestures.VolumeButtonMusicControlPreferenceController" />
+
+        <com.android.settings.widget.PrimarySwitchPreference
+            android:key="gesture_prevent_ringing_summary"
+            android:title="@string/gesture_prevent_ringing_screen_title"
+            android:fragment="com.android.settings.gestures.PreventRingingGestureSettings"
+            settings:controller="com.android.settings.gestures.PreventRingingParentPreferenceController" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="gesture_screen_category"
+        android:title="@string/gesture_screen_category_title">
+
+        <Preference
+            android:key="gesture_tap_screen_input_summary"
+            android:title="@string/ambient_display_tap_screen_title"
+            android:fragment="com.android.settings.gestures.TapScreenGestureSettings"
+            settings:searchable="false"
+            settings:controller="com.android.settings.gestures.TapScreenGesturePreferenceController" />
+
+        <Preference
+            android:key="gesture_double_tap_screen_input_summary"
+            android:title="@string/ambient_display_title"
+            android:fragment="com.android.settings.gestures.DoubleTapScreenSettings"
+            settings:searchable="false"
+            settings:controller="com.android.settings.gestures.DoubleTapScreenPreferenceController" />
+
+        <Preference
+            android:key="gesture_pick_up_input_summary"
+            android:title="@string/ambient_display_pickup_title"
+            android:fragment="com.android.settings.gestures.PickupGestureSettings"
+            settings:searchable="false"
+            settings:controller="com.android.settings.gestures.PickupGesturePreferenceController" />
+
+        <Preference
+            android:key="offscreen_gesture"
+            android:title="@string/offscreen_gesture_title"
+            android:summary="@string/offscreen_gesture_summary"
+            android:fragment="com.android.settings.gestures.OffscreenGestureSettings" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>
