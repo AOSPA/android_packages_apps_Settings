@@ -96,8 +96,11 @@ android_library {
         "android.hardware.dumpstate-V1.0-java",
         "android.hardware.dumpstate-V1.1-java",
         "lottie",
+<<<<<<< HEAD
         "powerusagefeaturegoogle",
         "columbus-settingsgoogle",
+=======
+>>>>>>> parent of 769a5db59c (Settings: Import PowerUsageFeatureGoogle)
     ],
 
     libs: [
@@ -158,12 +161,6 @@ filegroup {
 filegroup {
     name: "Settings_manifest",
     srcs: ["AndroidManifest.xml"],
-}
-
-java_import {
-    name: "powerusagefeaturegoogle",
-    jars: ["libs/powerusagefeaturegoogle.jar"],
-    sdk_version: "current",
 }
 
 java_import {
