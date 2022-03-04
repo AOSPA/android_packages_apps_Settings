@@ -473,7 +473,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
             Activity activity, Lifecycle lifecycle, DevelopmentSettingsDashboardFragment fragment,
             BluetoothA2dpConfigStore bluetoothA2dpConfigStore) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new Prefer5GNetworkSummaryController(context, lifecycle));
         controllers.add(new PreferVonrController(context, lifecycle));
         controllers.add(new MemoryUsagePreferenceController(context));
         controllers.add(new BugReportPreferenceController(context));
@@ -516,7 +515,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new WifiScanThrottlingPreferenceController(context));
         controllers.add(new WifiNonPersistentMacRandomizationPreferenceController(context));
         controllers.add(new MobileDataAlwaysOnPreferenceController(context));
-        controllers.add(new SmartDdsSwitchPreferenceController(context));
         controllers.add(new TetheringHardwareAccelPreferenceController(context));
         controllers.add(new BluetoothDeviceNoNamePreferenceController(context));
         controllers.add(new BluetoothAbsoluteVolumePreferenceController(context));
