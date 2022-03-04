@@ -5266,6 +5266,12 @@
     <string name="accessibility_introduction_title">About <xliff:g id="service" example="Select to Speak">%1$s</xliff:g></string>
     <!-- Title for the accessibility preference to adjust the display size, font size, bold text, and high contrast text features. [CHAR LIMIT=NONE] -->
     <string name="accessibility_text_reading_options_title">Text and reading options</string>
+    <!-- Subject for the mail content of the accessibility text reading preview. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_text_reading_preview_mail_subject">Email: Plans for time machine, v2</string>
+    <!-- Message for the mail content of the accessibility text reading preview. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_text_reading_preview_mail_from">From: bill@email.com</string>
+    <!-- Content for the mail content of the accessibility text reading preview. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_text_reading_preview_mail_content">Good morning! Following up on our last conversation, I’d like to check in on the progress of your time machine development plan. Will you be able to have a prototype ready to demo at E3 this year?</string>
     <!-- Title for the footer text to explain what option accessibility service does. [CHAR LIMIT=35] -->
     <string name="accessibility_screen_option">Options</string>
     <!-- Summary for the accessibility preference to enable screen magnification. [CHAR LIMIT=25] -->
@@ -5507,6 +5513,8 @@
     <string name="accessibility_vibration_settings_title">Vibration &amp; haptics</string>
     <!-- Summary for preference screen for configuring vibrations. [CHAR LIMIT=NONE] -->
     <string name="accessibility_vibration_settings_summary">Control the vibration strength for different usages</string>
+    <!-- Summary for vibration preference shown when it is disabled because the device is in silent mode. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary">Setting disabled because device is set to silent</string>
     <!-- Title for the category of preferences to configure device vibrations related to calls. [CHAR LIMIT=NONE] -->
     <string name="accessibility_call_vibration_category_title">Calls</string>
     <!-- Title for the category of preferences to configure device vibrations related to notifications and alarms. [CHAR LIMIT=NONE] -->
@@ -5531,6 +5539,8 @@
     <string name="accessibility_service_primary_open_title">Open <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g></string>
     <!-- Used in the accessibility service settings to show quick settings tooltips. [CHAR LIMIT=NONE] -->
     <string name="accessibility_service_quick_settings_tooltips_content">Swipe down to quickly turn <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g> on or off in quick settings</string>
+    <!-- Used in the accessibility action for accessibility quick settings tooltips to dismiss. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_tooltips_dismiss">Dismiss</string>
     <!-- Used in the Color correction settings screen to control turning on/off the feature entirely [CHAR LIMIT=60] -->
     <string name="accessibility_daltonizer_primary_switch_title">Use color correction</string>
     <!-- Title for accessibility shortcut preference for color correction. [CHAR LIMIT=60] -->
@@ -5873,7 +5883,8 @@
 
     <!-- Fast Pair setting summary in settings screen [CHAR LIMIT=50] -->
     <string name="fast_pair_settings_summary">Nearby detection of Fast Pair bluetooth devices.</string>
-
+    <!-- Title for Fast Pair main switch preferences. [CHAR LIMIT=50] -->
+    <string name="fast_pair_main_switch_title">Scan for nearby devices</string>
     <!-- Printing settings -->
     <skip />
 
@@ -7646,7 +7657,25 @@
     <string name="user_copy_apps_menu_title">Install available apps</string>
 
     <!-- NFC payment settings --><skip/>
+    <!-- Title for NFC payment settings page [CHAR LIMIT=40] -->
     <string name="nfc_payment_settings_title">Contactless payments</string>
+    <!-- Title for NFC default payment settings page [CHAR LIMIT=40] -->
+    <string name="nfc_default_payment_settings_title">Default payment app</string>
+    <!-- Text string explaining how Tap and Pay works [CHAR LIMIT=100] -->
+    <string name="nfc_default_payment_footer">To make a payment using a payment app, hold the back of your device to a payment terminal</string>
+    <!-- Text string linking to a page explaining how Tap and Pay works [CHAR LIMIT=40] -->
+    <string name="nfc_more_details">Learn more</string>
+
+    <!-- Strings shown in a dialog when a user tries to set a work app as a nfc default payment app --><skip/>
+    <!-- Title for the dialog [CHAR LIMIT=40] -->
+    <string name="nfc_default_payment_workapp_confirmation_title">Set work app as default payment app?</string>
+    <!-- Header text for the dialog [CHAR LIMIT=40] -->
+    <string name="nfc_default_payment_workapp_confirmation_message_title">To make a payment using a work app:</string>
+    <!-- Text string in the dialog [CHAR LIMIT=60] -->
+    <string name="nfc_default_payment_workapp_confirmation_message_1">work profile must be turned on.</string>
+    <!-- Text string in the dialog [CHAR LIMIT=60] -->
+    <string name="nfc_default_payment_workapp_confirmation_message_2">you\u2019ll need to enter your work profile lock if you have one.</string>
+
     <!-- Caption for button linking to a page explaining how Tap and Pay works-->
     <string name="nfc_payment_how_it_works">How it works</string>
     <!-- String shown when there are no NFC payment applications installed -->
@@ -7658,7 +7687,9 @@
     <!-- String indicating the label of the default payment app and a description of its state; eg Google Wallet - MasterCard 1234 -->
     <string name="nfc_payment_app_and_desc"><xliff:g id="app">%1$s</xliff:g> - <xliff:g id="description">%2$s</xliff:g></string>
     <!-- Header for what to do when the open app supports TapPay: use the default set app, or the open app -->
-    <string name="nfc_payment_use_default">Use default</string>
+    <string name="nfc_payment_use_default">Use default payment app</string>
+    <!-- Header for a dialog asking what to do when the open app supports TapPay [CHAR LIMIT=40] -->
+    <string name="nfc_payment_use_default_dialog">Use default payment app</string>
     <!-- Always use the default app (independent of what app is open) -->
     <string name="nfc_payment_favor_default">Always</string>
     <!-- If open app supports TapPay, use that app instead of the default -->
@@ -13176,6 +13207,9 @@
 
     <!-- Title for the button to initiate a heap dump for the system server. [CHAR LIMIT=NONE] -->
     <string name="capture_system_heap_dump_title">Capture system heap dump</string>
+    <!-- Title for the button to reboot with MTE enabled. [CHAR LIMIT=NONE] -->
+    <string name="reboot_with_mte_title">Reboot with MTE</string>
+    <string name="reboot_with_mte_message">This wil reboot and allow to experiment with Memory Tagging Extensions (MTE). This may negatively impact system performance and stability. Will be reset on next subsequent reboot.</string>
     <!-- Toast that is shown when the user initiates capturing a heap dump for the system server. [CHAR LIMIT=NONE] -->
     <string name="capturing_system_heap_dump_message">Capturing system heap dump</string>
     <!-- Toast that is shown if there's an error capturing the user initiated heap dump. [CHAR LIMIT=NONE] -->
