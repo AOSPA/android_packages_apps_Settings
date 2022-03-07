@@ -153,15 +153,11 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
         if (serviceState.getRoaming()) {
             preference.setEnabled(true);
         } else {
-            if (mTelephonyManager.getServiceState().getRoaming()) {
-                preference.setEnabled(true);
-            } else {
-                preference.setEnabled(!mOnlyAutoSelectInHome);
-                if (mOnlyAutoSelectInHome) {
-                    preference.setSummary(mContext.getString(
-                            R.string.manual_mode_disallowed_summary,
-                            mTelephonyManager.getSimOperatorName()));
-                }
+            preference.setEnabled(!mOnlyAutoSelectInHome);
+            if (mOnlyAutoSelectInHome) {
+                preference.setSummary(mContext.getString(
+                        R.string.manual_mode_disallowed_summary,
+                        mTelephonyManager.getSimOperatorName()));
             }
         }
     }
