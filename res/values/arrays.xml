@@ -110,6 +110,18 @@
         <item>@string/dark_ui_auto_mode_auto</item>
     </string-array>
 
+    <!-- Dark theme scheduling preferences  [CHAR LIMIT=NONE] -->
+    <string-array name="dark_ui_scheduler_with_bedtime_preference_titles">
+        <!-- 0: None -->
+        <item>@string/dark_ui_auto_mode_never</item>
+        <!-- 1: Custom -->
+        <item>@string/dark_ui_auto_mode_custom</item>
+        <!-- 2: Auto -->
+        <item>@string/dark_ui_auto_mode_auto</item>
+        <!-- 3: Bedtime -->
+        <item>@string/dark_ui_auto_mode_custom_bedtime</item>
+    </string-array>
+
     <!-- Security settings.  The delay after screen is turned off until device locks.
          These are shown in a list dialog. -->
     <string-array name="lock_after_timeout_entries">
@@ -1676,6 +1688,24 @@
         <item>0</item>
         <item>1</item>
     </string-array>
+
+    <!-- Setting entries for timing out to user 0 when docked. -->
+    <string-array name="switch_to_user_zero_when_docked_timeout_entries">
+        <item>Never</item>
+        <item>After 1 minute</item>
+        <item>After 5 minutes</item>
+    </string-array>
+
+    <!-- Setting values for timing out to user 0 when docked. [DO NOT TRANSLATE] -->
+    <string-array name="switch_to_user_zero_when_docked_timeout_values" translatable="false">
+        <!-- Never -->
+        <item>0</item>
+        <!-- 1 minute -->
+        <item>60000</item>
+        <!-- 5 minutes -->
+        <item>300000</item>
+    </string-array>
+
     <!--String arrays for showing user PLMN list -->
     <string-array name="uplmn_prefer_network_mode_td_choices">
         <item>GSM</item>
