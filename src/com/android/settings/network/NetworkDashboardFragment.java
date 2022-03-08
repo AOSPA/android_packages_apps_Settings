@@ -20,6 +20,7 @@ import static com.android.settings.network.MobilePlanPreferenceController.MANAGE
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.util.Log;
@@ -70,6 +71,12 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
         use(AirplaneModePreferenceController.class).setFragment(this);
         getSettingsLifecycle().addObserver(use(AllInOneTetherPreferenceController.class));
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        use(AirplaneModePreferenceController.class).onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
