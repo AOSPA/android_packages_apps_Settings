@@ -191,7 +191,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
 
     @Override
     protected void displayResourceTilesToScreen(PreferenceScreen screen) {
-        if (mBAEnabled == false) {
+        if (!mBAEnabled || !mCachedDevice.isBASeeker()) {
            screen.removePreference(screen.findPreference("sync_helper_buttons"));
            screen.removePreference(screen.findPreference("added_sources"));
         }
