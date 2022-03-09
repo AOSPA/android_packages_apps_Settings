@@ -19,6 +19,7 @@ package com.android.settings.network.telephony;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -59,6 +60,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -115,7 +117,11 @@ public class NetworkSelectSettings extends DashboardFragment implements
             Log.d(TAG, "ExtTelephonyService is not connected!!! ");
         }
         Log.d(TAG, "mIsAdvancedScanSupported: " + mIsAdvancedScanSupported);
-        mSubId = getArguments().getInt(Settings.EXTRA_SUB_ID);
+        Intent intent = getActivity().getIntent();
+        if (intent != null) {
+            mSubId = intent.getIntExtra(Settings.EXTRA_SUB_ID,
+                    SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        }
 
         mPreferenceCategory = findPreference(PREF_KEY_NETWORK_OPERATORS);
         mStatusMessagePreference = new Preference(getContext());
@@ -140,13 +146,12 @@ public class NetworkSelectSettings extends DashboardFragment implements
         mIsAggregationEnabled = getContext().getResources().getBoolean(
                 R.bool.config_network_selection_list_aggregation_enabled);
         Log.d(TAG, "init: mUseNewApi:" + mUseNewApi
-                + " ,mIsAggregationEnabled:" + mIsAggregationEnabled);
+                + " ,mIsAggregationEnabled:" + mIsAggregationEnabled + " ,mSubId:" + mSubId);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         final Activity activity = getActivity();
         if (activity != null) {
             mProgressHeader = setPinnedHeaderView(R.layout.progress_header)
@@ -373,12 +378,19 @@ public class NetworkSelectSettings extends DashboardFragment implements
                     CellInfoUtil.getCellIdentityMccMnc(cellInfo.getCellIdentity()));
             Class className = cellInfo.getClass();
 
-            if (aggregatedList.stream().anyMatch(
+            Optional<CellInfo> itemInTheList = aggregatedList.stream().filter(
                     item -> {
                         String itemPlmn = CellInfoUtil.getNetworkTitle(item.getCellIdentity(),
                                 CellInfoUtil.getCellIdentityMccMnc(item.getCellIdentity()));
                         return itemPlmn.equals(plmn) && item.getClass().equals(className);
-                    })) {
+                    })
+                    .findFirst();
+            if (itemInTheList.isPresent()) {
+                if (cellInfo.isRegistered() && !itemInTheList.get().isRegistered()) {
+                    // Adding the registered cellinfo item into list. If there are two registered
+                    // cellinfo items, then select first one from source list.
+                    aggregatedList.set(aggregatedList.indexOf(itemInTheList.get()), cellInfo);
+                }
                 continue;
             }
             aggregatedList.add(cellInfo);

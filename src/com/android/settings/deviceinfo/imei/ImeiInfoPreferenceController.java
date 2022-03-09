@@ -34,6 +34,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.deviceinfo.PhoneNumberSummaryPreference;
 import com.android.settings.network.telephony.TelephonyUtils;
 import com.android.settings.slices.Sliceable;
 import com.android.settings.Utils;
@@ -275,6 +276,6 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
 
     @VisibleForTesting
     Preference createNewPreference(Context context) {
-        return new Preference(context);
+        return new PhoneNumberSummaryPreference(context);
     }
 }
