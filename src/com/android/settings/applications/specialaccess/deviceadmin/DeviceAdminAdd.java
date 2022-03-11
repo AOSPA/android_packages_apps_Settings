@@ -27,6 +27,8 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.REMOVE_AN
 import static android.app.admin.DevicePolicyResources.Strings.Settings.REMOVE_DEVICE_ADMIN;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.REMOVE_WORK_PROFILE;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.SET_PROFILE_OWNER_DIALOG_TITLE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.SET_PROFILE_OWNER_POSTSETUP_WARNING;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.UNINSTALL_DEVICE_ADMIN;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.USER_ADMIN_POLICIES_WARNING;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_ADMIN_POLICIES_WARNING;
 
@@ -309,11 +311,13 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
                 return;
             }
 
-            // othewise, only the defined default supervision profile owner can be set after user
-            // setup.
+            // otherwise, only the defined default supervision profile owner or holder of
+            // supersvision role can be set after user setup.
             final String supervisor = getString(
                     com.android.internal.R.string.config_defaultSupervisionProfileOwnerComponent);
-            if (TextUtils.isEmpty(supervisor)) {
+            final String supervisionRolePackage = getString(
+                    com.android.internal.R.string.config_systemSupervision);
+            if (TextUtils.isEmpty(supervisor) && TextUtils.isEmpty(supervisionRolePackage)) {
                 Log.w(TAG, "Unable to set profile owner post-setup, no default supervisor"
                         + "profile owner defined");
                 finish();
@@ -322,7 +326,8 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
 
             final ComponentName supervisorComponent = ComponentName.unflattenFromString(
                     supervisor);
-            if (supervisorComponent == null || who.compareTo(supervisorComponent) != 0) {
+            if (!who.equals(supervisorComponent)
+                    && !who.getPackageName().equals(supervisionRolePackage)) {
                 Log.w(TAG, "Unable to set non-default profile owner post-setup " + who);
                 finish();
                 return;
@@ -364,6 +369,10 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
         mAdminName = (TextView)findViewById(R.id.admin_name);
         mAdminDescription = (TextView)findViewById(R.id.admin_description);
         mProfileOwnerWarning = (TextView) findViewById(R.id.profile_owner_warning);
+
+        mProfileOwnerWarning.setText(
+                mDPM.getString(SET_PROFILE_OWNER_POSTSETUP_WARNING,
+                        () -> getString(R.string.adding_profile_owner_warning)));
 
         mAddMsg = (TextView)findViewById(R.id.add_msg);
         mAddMsgExpander = (ImageView) findViewById(R.id.add_msg_expander);
@@ -410,6 +419,8 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
         });
 
         mUninstallButton = (Button) findViewById(R.id.uninstall_button);
+        mUninstallButton.setText(mDPM.getString(UNINSTALL_DEVICE_ADMIN,
+                () -> getString(R.string.uninstall_device_admin)));
         mUninstallButton.setFilterTouchesWhenObscured(true);
         mUninstallButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
