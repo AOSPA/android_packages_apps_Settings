@@ -19,11 +19,9 @@ package com.android.settings.dream;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.view.View;
-import android.widget.Button;
 
 import androidx.annotation.Nullable;
-import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
@@ -46,7 +44,6 @@ public class DreamPickerController extends BasePreferenceController {
     private final DreamBackend mBackend;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final List<DreamInfo> mDreamInfos;
-    private Button mPreviewButton;
     @Nullable
     private DreamInfo mActiveDream;
     private DreamAdapter mAdapter;
@@ -74,29 +71,23 @@ public class DreamPickerController extends BasePreferenceController {
     }
 
     @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
 
         mAdapter = new DreamAdapter(mDreamInfos.stream()
                 .map(DreamItem::new)
                 .collect(Collectors.toList()));
 
-        final RecyclerView recyclerView =
-                ((LayoutPreference) preference).findViewById(R.id.dream_list);
+        final LayoutPreference pref = screen.findPreference(getPreferenceKey());
+        if (pref == null) {
+            return;
+        }
+        final RecyclerView recyclerView = pref.findViewById(R.id.dream_list);
         recyclerView.setLayoutManager(new AutoFitGridLayoutManager(mContext));
+        recyclerView.addItemDecoration(
+                new GridSpacingItemDecoration(mContext, R.dimen.dream_preference_card_padding));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(mAdapter);
-
-        mPreviewButton = ((LayoutPreference) preference).findViewById(R.id.preview_button);
-        mPreviewButton.setVisibility(View.VISIBLE);
-        mPreviewButton.setOnClickListener(v -> mBackend.preview(mActiveDream));
-        updatePreviewButtonState();
-    }
-
-    private void updatePreviewButtonState() {
-        final boolean hasDream = mActiveDream != null;
-        mPreviewButton.setClickable(hasDream);
-        mPreviewButton.setEnabled(hasDream);
     }
 
     @Nullable
@@ -129,7 +120,6 @@ public class DreamPickerController extends BasePreferenceController {
         public void onItemClicked() {
             mActiveDream = mDreamInfo;
             mBackend.setActiveDream(mDreamInfo.componentName);
-            updatePreviewButtonState();
             mMetricsFeatureProvider.action(
                     mContext,
                     SettingsEnums.ACTION_DREAM_SELECT_TYPE,

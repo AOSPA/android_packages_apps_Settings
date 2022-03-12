@@ -502,6 +502,12 @@
     <!-- Category for the app's locale picker activity. [CHAR LIMIT=50]-->
     <string name="all_supported_app_locales_title">All languages</string>
 
+    <!-- Title for preference of the system default locale. [CHAR LIMIT=50]-->
+    <string name="preference_of_system_locale_title">System language</string>
+
+    <!-- Summary for preference of the system default locale. [CHAR LIMIT=50]-->
+    <string name="preference_of_system_locale_summary">System default - <xliff:g id="default_language" example="English (United States)">%1$s</xliff:g></string>
+
     <!-- Description for the app without any supported languages. [CHAR LIMIT=NONE]-->
     <string name="no_multiple_language_supported">The app is set to <xliff:g id="default_language" example="English (United States)">%1$s</xliff:g> by default and doesn\u2019t support multiple languages.</string>
     <!-- The title of the confirmation dialog shown when the user selects one / several languages and tries to remove them [CHAR LIMIT=60] -->
@@ -608,7 +614,7 @@
     <string name="date_and_time_settings_title_setup_wizard">Set date and time</string>
     <!-- Main Settings screen setting option summary text for the item to go into the date and time settings. -->
     <string name="date_and_time_settings_summary">Set date, time, time zone, &amp; formats</string>
-    <!-- Date & time setting screen setting switch title: whether the system clock (UTC time) should be determined automatically [CHAR LIMIT=100] -->
+    <!-- Date & time setting screen setting switch title: whether the system clock (Unix epoch time) should be determined automatically [CHAR LIMIT=100] -->
     <string name="date_time_auto">Set time automatically</string>
     <!-- Date & time setting screen setting switch title: whether the time zone should be determined automatically [CHAR LIMIT=100]  -->
     <string name="zone_auto_title">Set time zone automatically</string>
@@ -3230,7 +3236,7 @@
     <!-- [CHAR LIMIT=30] Sound & display settings screen, setting option name to change font size -->
     <string name="title_font_size">Font size</string>
     <!-- Summary for Font size. Lets the user know that this will make text larger or smaller. Appears in the accessibility portion of setup wizard. [CHAR LIMIT=NONE] -->
-    <string name="short_summary_font_size">Make text larger or smaller</string>
+    <string name="short_summary_font_size">Make text bigger or smaller</string>
     <!-- Sound & display settings screen, setting option summary displaying the currently selected font size -->
     <string name="summary_font_size" translatable="false">%1$s</string>
 
@@ -5033,6 +5039,9 @@
     <!-- Summary text for keyboards when no layout has been selected. [CHAR LIMIT=35] -->
     <string name="default_keyboard_layout">Default</string>
 
+    <!-- Title for the 'Speech' preference category. [CHAR LIMIT=45] -->
+    <string name="speech_category_title">Speech</string>
+
     <!-- On Languages & input settings screen, setting summary.  Setting for mouse pointer speed. [CHAR LIMIT=35] -->
     <string name="pointer_speed">Pointer speed</string>
 
@@ -5197,8 +5206,8 @@
     <string name="general_category_title">General</string>
     <!-- Title for the accessibility preference category of display services and settings. [CHAR LIMIT=50] -->
     <string name="display_category_title">Display</string>
-    <!-- Title for the accessibility text options page. [CHAR LIMIT=50] -->
-    <string name="accessibility_text_and_display_title">Text and display</string>
+    <!-- Title for the accessibility color and motion page. [CHAR LIMIT=50] -->
+    <string name="accessibility_color_and_motion_title">Color and motion</string>
     <!-- Title for the accessibility text options page. [CHAR LIMIT=50] -->
     <string name="accessibility_turn_screen_darker_title">Turn screen darker</string>
     <!-- Title for the accessibility preference category of interaction control services and settings. [CHAR LIMIT=50] -->
@@ -5276,13 +5285,17 @@
     <!-- Title for the footer text to explain what accessibility service does. [CHAR LIMIT=35] -->
     <string name="accessibility_introduction_title">About <xliff:g id="service" example="Select to Speak">%1$s</xliff:g></string>
     <!-- Title for the accessibility preference to adjust the display size, font size, bold text, and high contrast text features. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_text_reading_options_title">Text and reading options</string>
+    <string name="accessibility_text_reading_options_title">Display size and text</string>
+    <!-- Title for the entry of the text reading options. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_text_reading_options_suggestion_title">Change how text displays</string>
     <!-- Subject for the mail content of the accessibility text reading preview. [CHAR LIMIT=NONE] -->
     <string name="accessibility_text_reading_preview_mail_subject">Email: Plans for time machine, v2</string>
     <!-- Message for the mail content of the accessibility text reading preview. [CHAR LIMIT=NONE] -->
     <string name="accessibility_text_reading_preview_mail_from">From: bill@email.com</string>
     <!-- Content for the mail content of the accessibility text reading preview. [CHAR LIMIT=NONE] -->
     <string name="accessibility_text_reading_preview_mail_content">Good morning! Following up on our last conversation, I’d like to check in on the progress of your time machine development plan. Will you be able to have a prototype ready to demo at E3 this year?</string>
+    <!-- Title for the reset button of the accessibility text reading page to reset all preferences state. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_text_reading_reset_button_title">Reset</string>
     <!-- Title for the footer text to explain what option accessibility service does. [CHAR LIMIT=35] -->
     <string name="accessibility_screen_option">Options</string>
     <!-- Summary for the accessibility preference to enable screen magnification. [CHAR LIMIT=25] -->
@@ -5291,9 +5304,11 @@
     <string name="accessibility_screen_magnification_short_summary">Tap 3 times to zoom</string>
     <!-- Short summary for nav bar Magnification. Tells the user that this feature allows the user to magnify the screen using a button in the nav bar -->
     <string name="accessibility_screen_magnification_navbar_short_summary">Tap a button to zoom</string>
+    <!-- Intro for the accessibility preference screen to enable screen magnification gestures. [CHAR LIMIT=none] -->
+    <string name="accessibility_screen_magnification_intro_text">Quickly zoom in on the screen to make content larger</string>
     <!-- Summary for the accessibility preference screen to enable screen magnification gestures. [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_summary">
-        <![CDATA[Quickly zoom in on the screen to make content larger.<br/><br/>
+        <![CDATA[
         <b>To zoom in:</b><br/>
         {0,number,integer}. Use shortcut to start magnification<br/>
         {1,number,integer}. Tap the screen<br/>
@@ -5301,10 +5316,11 @@
         {3,number,integer}. Pinch with 2 fingers to adjust zoom<br/>
         {4,number,integer}. Use shortcut to stop magnification<br/><br/>
         <b>To zoom in temporarily:</b><br/>
-        {0,number,integer}. Use shortcut to start magnification<br/>
-        {1,number,integer}. Touch & hold anywhere on the screen<br/>
-        {2,number,integer}. Drag finger to move around screen<br/>
-        {3,number,integer}. Lift finger to stop magnification
+        {0,number,integer}. Make sure your magnification type is set to full screen<br/>
+        {1,number,integer}. Use shortcut to start magnification<br/>
+        {2,number,integer}. Touch & hold anywhere on the screen<br/>
+        {3,number,integer}. Drag finger to move around screen<br/>
+        {4,number,integer}. Lift finger to stop magnification
         ]]>
     </string>
     <!-- Summary for the accessibility preference screen to enable screen magnification via the nav bar. [CHAR LIMIT=none] -->
@@ -5395,6 +5411,8 @@
     <string name="accessibility_button_title">Accessibility button</string>
     <!-- Title for the accessibility button & gesture page. [CHAR LIMIT=35] -->
     <string name="accessibility_button_gesture_title">Accessibility button &amp; gesture</string>
+    <!-- Introduction for the accessibility button page. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_button_intro_text">Quickly access accessibility features from any screen</string>
     <!-- Title for the accessibility button footer. [CHAR LIMIT=35] -->
     <string name="accessibility_button_about_title">About accessibility button</string>
     <!-- Title for the accessibility button & gesture footer. [CHAR LIMIT=55] -->
@@ -5406,9 +5424,9 @@
     <!-- Summary text for the accessibility button preference. [CHAR LIMIT=50] -->
     <string name="accessibility_button_summary">Quickly access accessibility features</string>
     <!-- Description for the accessibility button in gesture navigation. Explain how this page works. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_button_gesture_description">Quickly access accessibility features from any screen.\n\nTo get started, go to accessibility settings and select a feature. Tap on the shortcut and select the accessibility button or gesture.</string>
+    <string name="accessibility_button_gesture_description"><b>How to use the button or gesture</b>\n\n1. Go to accessibility settings\n2. Select a feature and tap the shortcut\n3. To use the feature, tap the accessibility button or gesture</string>
     <!-- Description for the accessibility button page. Explain how this page works. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_button_description">Quickly access accessibility features from any screen.\n\nTo get started, go to accessibility settings and select a feature. Tap on the shortcut and select the accessibility button.</string>
+    <string name="accessibility_button_description"><b>How to use the button</b>\n\n1. Go to accessibility settings\n2. Select a feature and tap the shortcut\n3. To use the feature, tap the accessibility button</string>
     <!-- Title for the button or gesture of the accessibility button. [CHAR LIMIT=35] -->
     <string name="accessibility_button_or_gesture_title">Use button or gesture</string>
     <!-- Title for the location of the accessibility button. [CHAR LIMIT=35] -->
@@ -5427,6 +5445,8 @@
     <string name="accessibility_button_high_label">Non-transparent</string>
     <!-- Title for the accessibility preference to high contrast text. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_high_text_contrast_preference_title">High contrast text</string>
+    <!-- Summary for the accessibility preference to high contrast text. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_toggle_high_text_contrast_preference_summary">Change text color to black or white. Maximizes contrast with the background.</string>
     <!-- Title for the accessibility preference to auto update screen magnification. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title">Auto
         update screen magnification</string>
@@ -5469,7 +5489,9 @@
     <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
     <string name="accessibility_control_timeout_preference_title">Time to take action</string>
     <!-- Descriptive text for accessibility preference to accessibility control timeout. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_control_timeout_preference_summary">Choose how long to show messages that ask you to take action, but are visible only temporarily.\n\nNot all apps support this setting.</string>
+    <string name="accessibility_control_timeout_preference_summary">This timing preference isn\u2019t supported by all apps</string>
+    <!-- Intro text for accessibility preference to accessibility control timeout. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_control_timeout_preference_intro_text">Choose how long to show temporary messages that ask you to take action</string>
 
     <!-- Title for accessibility preference to choose long-press delay i.e. timeout before it is detected. [CHAR LIMIT=35] -->
     <string name="accessibility_long_press_timeout_preference_title">Touch &amp; hold delay</string>
@@ -5479,14 +5501,15 @@
     <string name="accessibility_display_inversion_switch_title">Use color inversion</string>
     <!-- Title for accessibility shortcut preference for color inversion. [CHAR LIMIT=60] -->
     <string name="accessibility_display_inversion_shortcut_title">Color inversion shortcut</string>
+    <!-- Intro for the accessibility preference to configure display color inversion. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_display_inversion_preference_intro_text">Color inversion turns light screens dark. It also turns dark screens light.</string>
     <!-- Subtitle for the accessibility preference to configure display color inversion. [CHAR LIMIT=NONE] -->
     <string name="accessibility_display_inversion_preference_subtitle">
-        <![CDATA[Color inversion turns light screens dark.<br/><br/>
-        Note:
+        <![CDATA[<b>Keep in mind</b><br/>
         <ol>
-            <li>\u00a0Color inversion also turns dark screens light.</li>
-            <li>\u00a0Colors will change in media and images.</li>
-            <li>\u00a0Dark theme can be used to display a dark background. Dark theme works with supported apps. Color inversion works on all apps.</li>
+            <li>\u00a0Colors will change in media and images</li>
+            <li>\u00a0Color inversion works on all apps</li>
+            <li>\u00a0To display a dark background, Dark theme can be used instead</li>
         </ol>
         ]]>
     </string>
@@ -5496,10 +5519,12 @@
     <string name="accessibility_autoclick_about_title">About autoclick (dwell timing)</string>
     <!-- Accessibility dwell timing footer link content description [CHAR LIMIT=NONE] -->
     <string name="accessibility_autoclick_footer_learn_more_content_description">Learn more about autoclick (dwell timing)</string>
-    <!-- Footer text to explain what autoclick does -->
-    <string name="accessibility_autoclick_description">Autoclick works with a connected mouse. You can set the mouse cursor to click automatically when the cursor stops moving for a certain amount of time.</string>
+    <!-- Intro text to explain what autoclick does. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_autoclick_intro_text">You can set a connected mouse to click automatically when the cursor stops moving for a certain amount of time</string>
+    <!-- Footer text to explain what autoclick does. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_autoclick_description">Autoclick can be helpful if clicking the mouse is difficult</string>
     <!-- Option heading to leave the auto click requirement for accessibility users at its default level. [CHAR LIMIT=50] -->
-    <string name="accessibility_autoclick_default_title">Off</string>
+    <string name="accessibility_autoclick_default_title">Autoclick off</string>
     <!-- Option heading to leave the auto click requirement for accessibility users at its short level. [CHAR LIMIT=35] -->
     <string name="accessibility_autoclick_short_title">Short</string>
     <!-- Option summary text for the auto click delay 0.2 seconds radio button. [CHAR LIMIT=35] -->
@@ -5548,10 +5573,16 @@
     <string name="accessibility_service_primary_switch_title">Use <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g></string>
     <!-- Used in the accessibility service settings to open the activity. [CHAR LIMIT=NONE] -->
     <string name="accessibility_service_primary_open_title">Open <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g></string>
+    <!-- Used in the accessibility service settings to show quick settings tooltips for auto-added feature. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_service_auto_added_qs_tooltips_content"><xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g> added to Quick Settings. Swipe down to turn it on or off anytime.</string>
     <!-- Used in the accessibility service settings to show quick settings tooltips. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_service_quick_settings_tooltips_content">Swipe down to quickly turn <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g> on or off in quick settings</string>
+    <string name="accessibility_service_qs_tooltips_content">You can add a shortcut to <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g> by editing quick settings</string>
     <!-- Used in the accessibility action for accessibility quick settings tooltips to dismiss. [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_tooltips_dismiss">Dismiss</string>
+    <!-- Intro for color correction settings screen to control turning on/off the feature entirely. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_daltonizer_about_intro_text" product="default">Adjust how colors display on your phone</string>
+    <!-- Intro for color correction settings screen to control turning on/off the feature entirely. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_daltonizer_about_intro_text" product="tablet">Adjust how colors display on your tablet</string>
     <!-- Used in the Color correction settings screen to control turning on/off the feature entirely [CHAR LIMIT=60] -->
     <string name="accessibility_daltonizer_primary_switch_title">Use color correction</string>
     <!-- Title for accessibility shortcut preference for color correction. [CHAR LIMIT=60] -->
@@ -5574,8 +5605,10 @@
     <string name="captioning_caption_appearance_summary"><xliff:g id="accessibility_font_size" example="Large">%1$s</xliff:g> text size</string>
     <!-- Title for Caption preference settings screen for configuring language. [CHAR LIMIT=NONE] -->
     <string name="captioning_more_options_title">More options</string>
-    <!-- Used in the Captions preference to tell users that the setting doesn't support all apps. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_caption_preference_summary">Not all apps support these caption preferences</string>
+    <!-- Introduction for the captions preference page. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_caption_preference_intro">Customize caption size and style to make them easier to read</string>
+    <!-- Summary for the captions preference page. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_caption_preference_summary">These caption preferences aren\u2019t supported by all media apps</string>
     <!-- Summary for accessibility shortcut preference for software shortcut type. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_type_software">Accessibility button</string>
     <!-- Summary for accessibility shortcut preference for software shortcut type when gesture mode is on. [CHAR LIMIT=NONE] -->
@@ -5604,6 +5637,13 @@
     </plurals>
     <!-- Title for the accessibility audio adjustment page. [CHAR LIMIT=50] -->
     <string name="accessibility_audio_adjustment_title">Audio adjustment</string>
+    <!-- Title for control audio description preference. [CHAR LIMIT=50] -->
+    <string name="accessibility_toggle_audio_description_preference_title">Audio Description</string>
+    <!-- Summary for accessibility preference for audio description when need
+    audio description in adopted apps. [CHAR_LIMIT=NONE] -->
+    <string name="accessibility_audio_description_summary">Select audio sound track with audio description by default</string>
+    <!-- List of synonyms used in the settings search bar to find the "Audio Description. [CHAR LIMIT=NONE] -->
+    <string name="keywords_audio_description">audio description, audio, description, low vision,</string>
 
     <!-- Preference's shortcut when enabled. [CHAR LIMIT=NONE] -->
     <string name="accessibility_summary_shortcut_enabled">Shortcut on</string>
@@ -5622,22 +5662,20 @@
 
     <!-- Title for the preference to show a tile for a particular feature in the Quick Settings pane. [CHAR LIMIT=NONE] -->
     <string name="enable_quick_setting">Show in Quick Settings</string>
-    <!-- Title for the preference to configure the type of color space correction to apply. [CHAR LIMIT=NONE] -->
-    <string name="daltonizer_type">Correction mode</string>
     <!-- Title shown for deuteranomaly (red-green color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_deuteranomaly_title">Deuteranomaly</string>
+    <string name="daltonizer_mode_deuteranomaly_title">Red-green</string>
     <!-- Title shown for protanomaly (red-green color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_protanomaly_title">Protanomaly</string>
+    <string name="daltonizer_mode_protanomaly_title">Red-green</string>
     <!-- Title shown for tritanomaly (blue-yellow color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_tritanomaly_title">Tritanomaly</string>
+    <string name="daltonizer_mode_tritanomaly_title">Blue-yellow</string>
     <!-- Title shown for grayscale [CHAR LIMIT=45] -->
     <string name="daltonizer_mode_grayscale_title">Grayscale</string>
     <!-- Summary shown for deuteranomaly (red-green color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_deuteranomaly_summary">Red-green</string>
+    <string name="daltonizer_mode_deuteranomaly_summary">Green weak, deuteranomaly</string>
     <!-- Summary shown for protanomaly (red-green color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_protanomaly_summary">Red-green</string>
+    <string name="daltonizer_mode_protanomaly_summary">Red weak, protanomaly</string>
     <!-- Summary shown for tritanomaly (blue-yellow color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_tritanomaly_summary">Blue-yellow</string>
+    <string name="daltonizer_mode_tritanomaly_summary">Tritanomaly</string>
 
     <!-- Title for the accessibility preference of the Extra Dim/Reduce Brightness feature that dims your screen. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_preference_title">Extra dim</string>
@@ -5651,10 +5689,11 @@
     <string name="reduce_bright_colors_preference_summary" product="default">Dim screen beyond your phone\u2019s minimum brightness</string>
     <!-- Summary for the accessibility preference to configure Reduce Brightness feature. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_preference_summary" product="tablet">Dim screen beyond your tablet\u2019s minimum brightness</string>
+    <!-- Intro that describes Reduce Brightness. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_preference_intro_text">Make your screen dimmer so it\u2019s more comfortable to read</string>
     <!-- Subtitle that describes Reduce Brightness. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_preference_subtitle" product="default">
-        <![CDATA[Make your screen dimmer so it\u2019s more comfortable to read.<br/><br/>
-        This can be helpful when:
+        <![CDATA[Extra dim can be helpful when:
         <ol>
             <li>\u00a0Your phone\u2019s default minimum brightness is still too bright</li>
             <li>\u00a0You\u2019re using your phone in dark situations, like at night or in a dark room before bed</li>
@@ -5663,8 +5702,7 @@
     </string>
     <!-- Subtitle that describes Reduce Brightness. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_preference_subtitle" product="tablet">
-        <![CDATA[Make your screen darker so it\u2019s more comfortable to read.<br/><br/>
-        This can be helpful when:
+        <![CDATA[Extra dim can be helpful when:
         <ol>
             <li>\u00a0Your tablet\u2019s default minimum brightness is still too bright</li>
             <li>\u00a0You\u2019re using your tablet in dark situations, like at night or in a dark room before bed</li>
@@ -7689,8 +7727,8 @@
     <string name="nfc_default_payment_workapp_confirmation_message_title">To make a payment using a work app:</string>
     <!-- Text string in the dialog [CHAR LIMIT=60] -->
     <string name="nfc_default_payment_workapp_confirmation_message_1">work profile must be turned on.</string>
-    <!-- Text string in the dialog [CHAR LIMIT=60] -->
-    <string name="nfc_default_payment_workapp_confirmation_message_2">you\u2019ll need to enter your work profile lock if you have one.</string>
+    <!-- Text string in the dialog [CHAR LIMIT=80] -->
+    <string name="nfc_default_payment_workapp_confirmation_message_2">you\u2019ll need to enter your work PIN, pattern, or password if you have one.</string>
 
     <!-- Caption for button linking to a page explaining how Tap and Pay works-->
     <string name="nfc_payment_how_it_works">How it works</string>
@@ -10967,7 +11005,7 @@
     <!-- Title of setting that controls screen zoom (e.g. how large interface elements appear). [CHAR LIMIT=40] -->
     <string name="screen_zoom_title">Display size</string>
     <!-- Short summary for Magnification gesture. Lets the user know that this makes items on screen larger or smaller. Appears in the accessibility portion of Setup Wizard. [CHAR LIMIT=NONE] -->
-    <string name="screen_zoom_short_summary">Make items on screen larger or smaller</string>
+    <string name="screen_zoom_short_summary">Make everything bigger or smaller</string>
     <!-- Keywords for setting that controls screen zoom (e.g. how large interface elements appear). [CHAR LIMIT=NONE] -->
     <string name="screen_zoom_keywords">display density, screen zoom, scale, scaling</string>
     <!-- Summary of screen zoom setting screen. [CHAR LIMIT=NONE] -->
@@ -12087,20 +12125,44 @@
 
     <!-- Title of setting on security settings screen on a financed device. This will take the user to a screen with information about what a device administrator can control and their impact on the user's privacy on a financed device. Shown on financed-managed devices only. [CHAR LIMIT=NONE] -->
     <string name="financed_privacy_settings">Financed device info</string>
-    <!-- Section header. This section shows what information a device administrator can see on a financed device. [CHAR LIMIT=60] -->
-    <string name="financed_privacy_exposure_category">Types of information your device administrator can see</string>
-    <!-- Label explaining that the device administrator can see data associated on the user's financed device. [CHAR LIMIT=NONE] -->
-    <string name="financed_privacy_data">Data associated with your account, such as email and calendar info</string>
-    <!-- Section header. This section shows what changes a device administrator made to a financed device. [CHAR LIMIT=60] -->
-    <string name="financed_privacy_exposure_changes_category">Changes made by your device administrator</string>
-    <!-- Label explaining that the device admin can lock the device and change the user's password on their financed device. [CHAR LIMIT=NONE] -->
-    <string name="financed_privacy_lock_device">Device administrator can lock this device and reset password</string>
-    <!-- Label explaining that the device admin can wipe the device remotely for a financed device. [CHAR LIMIT=NONE] -->
-    <string name="financed_privacy_wipe_device">Device administrator can delete all device data</string>
-    <!-- Label explaining that the device admin configured the device to wipe itself when an incorrect password is entered too many times on a financed device. [CHAR LIMIT=NONE] -->
-    <string name="financed_privacy_failed_password_wipe_device">Failed password attempts before deleting device data</string>
-    <!-- Financed Privacy settings activity header, summarizing the changes a credit provider can make to a financed device. [CHAR LIMIT=NONE] -->
-    <string name="financed_privacy_header">Your credit provider can change settings and install software on this device.\n\nTo learn more, contact your creditor provider.</string>
+    <!-- Top introduction on the financed device privacy settings, summarizing the changes a credit provider can make to a financed device. [CHAR LIMIT=NONE] -->
+    <string name="financed_privacy_intro">Your credit provider can change settings and install software on this device.\n\nIf you miss a payment, your device will be locked.\n\nTo learn more, contact your credit provider.</string>
+    <!-- Section header. This section shows what restrictions will be enforced on the device when it is financed. [CHAR LIMIT=60] -->
+    <string name="financed_privacy_restrictions_category">If your device is financed, you can\u2019t:</string>
+    <!-- Label explaining that installing apps from unknown sources beyond Play Store. [CHAR LIMIT=60]-->
+    <string name="financed_privacy_install_apps">Install apps from outside the Play Store</string>
+    <!-- Label explaining that rebooting the device into safe mode. [CHAR LIMIT=60]-->
+    <string name="financed_privacy_safe_mode">Reboot your device into safe mode</string>
+    <!-- Label explaining that adding more than one user into the device. [CHAR LIMIT=60]-->
+    <string name="financed_privacy_multi_users">Add multiple users to your device</string>
+    <!-- Label explaining that updating the date and time on the device. [CHAR LIMIT=60] -->
+    <string name="financed_privacy_config_date_time">Change date, time, and time zones</string>
+    <!-- Label explaining that turning on the developer options on the device. [CHAR LIMIT=40]-->
+    <string name="financed_privacy_developer_options">Use developer options</string>
+    <!-- Section header. This section shows how credit provider would control the device. [CHAR LIMIT=40]-->
+    <string name="financed_privacy_credit_provider_capabilities_category">Your credit provider can:</string>
+    <!-- Label explaining that IMEI can be access by the credit provider. [CHAR LIMIT=40] -->
+    <string name="financed_privacy_IMEI">Access your IMEI number</string>
+    <!-- Label explaining that device can be reset and data can be deleted. [CHAR LIMIT=40]-->
+    <string name="financed_privacy_factory_reset">Factory reset your device</string>
+    <!-- Section header. This section shows what the user can do if the device is locked by the credit provider. [CHAR LIMIT=100] -->
+    <string name="financed_privacy_locked_mode_category">If your device is locked, you can only use it to:</string>
+    <!-- Label explaining that calling emergency numbers. [CHAR LIMIT=40]-->
+    <string name="financed_privacy_emergency_calls">Make emergency calls</string>
+    <!-- Label explaining that access basic system level data including date, time, network status, and battery info. [CHAR LIMIT=100]-->
+    <string name="financed_privacy_system_info">View system info like date, time, network status, and battery</string>
+    <!-- Label explaining that powering on or off the device. [CHAR LIMIT=60]-->
+    <string name="financed_privacy_turn_on_off_device">Turn your device on or off</string>
+    <!-- Label explaining that accessing notifications and text messages. [CHAR LIMIT=60]-->
+    <string name="financed_privacy_notifications">View notifications &amp; text messages</string>
+    <!-- Label explaining that using apps that are allowed to be used by the credit provider when the device is locked. [CHAR LIMIT=100]-->
+    <string name="financed_privacy_allowlisted_apps">Access apps that are allowed by the credit provider</string>
+    <!-- Section header. This sections shows what would happen if the device is fully paid. [CHAR LIMIT=60] -->
+    <string name="financed_privacy_fully_paid_category">Once you pay the full amount:</string>
+    <!-- Label explaining that all previously restrictions enforce by the credit provider will be revoked. [CHAR LIMIT=100]-->
+    <string name="financed_privacy_restrictions_removed">All restrictions are removed from the device</string>
+    <!-- Label explaining that the app installed by credit provider can be uninstalled. [CHAR LIMIT=60]-->
+    <string name="financed_privacy_uninstall_creditor_app">You can uninstall the creditor app</string>
 
     <!-- Strings for displaying which applications were set as default for specific actions. -->
     <!-- Title for the apps that have been set as default handlers of camera-related intents. [CHAR LIMIT=30] -->
@@ -13369,7 +13431,7 @@
     <!-- Wallet (formerly Cards and passes) toggle name [CHAR LIMIT=60] -->
     <string name="lockscreen_privacy_wallet_setting_toggle">Show wallet</string>
     <!-- Wallet (formerly Cards and passes) summary [CHAR LIMIT=NONE] -->
-    <string name="lockscreen_privacy_wallet_summary">Allow access to wallet from lock screen and quick settings</string>
+    <string name="lockscreen_privacy_wallet_summary">Allow access to wallet from lock screen</string>
 
     <!-- QR Code Scanner toggle name [CHAR LIMIT=60] -->
     <string name="lockscreen_privacy_qr_code_scanner_setting_toggle">Show QR scanner</string>
@@ -13783,18 +13845,26 @@
     translate "maximum balance when device is fully charged" instead. Balance is the same meaning as
     having money in a bank account. Balance in our feature is the amount of Android Resource Credits
     an app can have. Android Resource Credits are a form of payment used by apps to be able to
-    perform tasks. [CHAR LIMIT=40]-->
+    perform tasks. [CHAR LIMIT=80]-->
     <string name="tare_max_satiated_balance">Maximum Satiated Balance</string>
-    <!-- Title for the TARE policy factor that determines the maximum credits in circulation between
-    all the apps [CHAR LIMIT=40]-->
-    <string name="tare_max_circulation">Maximum Circulation</string>
-    <!-- Title for the TARE policy factor that determines the minimum credits an app can have in one
-    battery life cycle. Satiated means battery is fully charged; If this is not easily translatable,
-    translate "minimum balance when device is fully charged" instead. Balance is the same meaning as
-    having money in a bank account. Balance in our feature is the amount of Android Resource Credits
-    an app can have. Android Resource Credits are a form of payment used by apps to be able to
-    perform tasks. [CHAR LIMIT=40]-->
-    <string name="tare_min_satiated_balance">Minimum Satiated Balance</string>
+    <!-- Title for the TARE policy factors that affect how many credits an app may have. Balance
+    in this context is the same as "bank balance" or "account balance" (ie. how much "money" may be
+    in a bank account). [CHAR LIMIT=55]-->
+    <string name="tare_balances">Balances</string>
+    <!-- Title for the TARE section to modify consumption limits. "Consumption" refers to the idea
+     using resources that are not replenished. [CHAR LIMIT=55]-->
+    <string name="tare_consumption_limits">Consumption Limits</string>
+    <!-- Title for the TARE policy factor that determines the initial maximum amount of credits that
+    can be consumed by all the apps [CHAR LIMIT=80]-->
+    <string name="tare_initial_consumption_limit">Initial Consumption Limit</string>
+    <!-- Title for the TARE policy factor that determines the maximum consumption limit the system
+     can have [CHAR LIMIT=80]-->
+    <string name="tare_hard_consumption_limit">Maximum Consumption Limit</string>
+    <!-- Titles for the consumption limits factors. [CHAR LIMIT=40]-->
+    <string-array name="tare_consumption_limit_subfactors" translatable="false">
+        <item>@string/tare_initial_consumption_limit</item>
+        <item>@string/tare_hard_consumption_limit</item>
+    </string-array>
     <!-- Title for the various modifiers that alter the cost of TARE tasks based on battery status
     (charging, power save mode, etc.) [CHAR LIMIT=40]-->
     <string name="tare_modifiers">Modifiers</string>
@@ -13830,14 +13900,6 @@
     <string name="tare_nonwakeup_inexact" translatable="false">Inexact NonWakeup Alarm</string>
     <!-- Title for the AlarmClock alarm set via AlarmManager.setAlarmClock() [CHAR LIMIT=50]-->
     <string name="tare_alarm_clock" translatable="false">AlarmClock</string>
-    <!-- Exempted apps are those apps exempted from most power saving features. [CHAR LIMIT=50]-->
-    <string name="tare_exempted">Exempted</string>
-    <!-- A headless system app is a preinstalled app that does not have any activities/UI that the
-    user can interact with. [CHAR LIMIT=50]-->
-    <string name="tare_headless_app">Headless System App</string>
-    <!-- Other apps are those apps interacted with by users that are not exempted or headless
-    system apps. [CHAR LIMIT=50]-->
-    <string name="tare_other_app">Other App</string>
     <!-- Top activity means an app is in the TOP android process state and is thus visible to the
     user[CHAR LIMIT=50]-->
     <string name="tare_top_activity">Top Activity</string>
@@ -13894,12 +13956,29 @@
     <!-- Title for the penalty an app receives for letting a job use the maximum execution time and
      time out [CHAR LIMIT=50]-->
     <string name="tare_job_timeout_penalty">Job Timeout Penalty</string>
+    <!-- Title for the TARE factor that determines the minimum credits an app should have when the
+    device is fully charged. "Satiated" in this context means that the battery is fully charged.
+    Balance is the same meaning as having money in a bank account.
+    Exempted apps are those apps exempted from most power saving features. [CHAR LIMIT=80]-->
+    <string name="tare_min_balance_exempted">Minimum Satiated Balance (Exempted)</string>
+    <!-- Title for the TARE factor that determines the minimum credits an app should have when the
+    device is fully charged. "Satiated" in this context means that the battery is fully charged.
+    Balance is the same meaning as having money in a bank account.
+    A headless system app is a preinstalled app that does not have any activities/UI that the
+    user can interact with. [CHAR LIMIT=80]-->
+    <string name="tare_min_balance_headless_app">Minimum Satiated Balance (Headless System App)</string>
+    <!-- Title for the TARE factor that determines the minimum credits an app should have when the
+    device is fully charged. "Satiated" in this context means that the battery is fully charged.
+    Balance is the same meaning as having money in a bank account.
+    Remaining apps are those apps that don't fit into predefined categories. [CHAR LIMIT=80]-->
+    <string name="tare_min_balance_other_app">Minimum Satiated Balance (Remaining Apps)</string>
     <!-- Titles for the minimum satiated credit balances for different types of apps
     (per battery cycle). Satiated means battery is fully charged. [CHAR LIMIT=40]-->
-    <string-array name="tare_min_satiated_balance_subfactors" translatable="false">
-        <item>@string/tare_exempted</item>
-        <item>@string/tare_headless_app</item>
-        <item>@string/tare_other_app</item>
+    <string-array name="tare_app_balance_subfactors" translatable="false">
+        <item>@string/tare_max_satiated_balance</item>
+        <item>@string/tare_min_balance_exempted</item>
+        <item>@string/tare_min_balance_headless_app</item>
+        <item>@string/tare_min_balance_other_app</item>
     </string-array>
     <!-- Various modifier subfactors that alter the cost of TARE tasks depending on what battery
     state the device is in [CHAR LIMIT=50]-->
@@ -13959,11 +14038,13 @@
     <!-- TARE dialog button to proceed with a value change [CHAR LIMIT=none] -->
     <string name="tare_dialog_confirm_button_title">Confirm</string>
     <!-- Button to preview the selected screensaver in settings [CHAR LIMIT=40] -->
-    <string name="dream_preview_button_title">Preview screensaver</string>
+    <string name="dream_preview_button_title">Preview</string>
     <!-- The title of the category to show for the screensaver selector in settings [CHAR LIMIT=none] -->
-    <string name="dream_picker_category">Choose an image</string>
-    <!-- The title of the category to show for the screensaver overlay selector in settings [CHAR LIMIT=none] -->
-    <string name="dream_complications_picker_category">Choose more options</string>
+    <string name="dream_picker_category">Choose a screen saver</string>
+    <!-- The title of the toggle which enables/disables overlays on top of the screen saver [CHAR LIMIT=none] -->
+    <string name="dream_complications_toggle_title">Show additional information</string>
+    <!-- The summary of what overlays this toggle controls [CHAR LIMIT=none] -->
+    <string name="dream_complications_toggle_summary">Display time, date and weather on the screen saver</string>
     <!-- The title of the category to show for the screensaver miscellaneous settings [CHAR LIMIT=none] -->
     <string name="dream_more_settings_category">More settings</string>
     <!-- The title of the screen saver setup page [CHAR LIMIT=none] -->

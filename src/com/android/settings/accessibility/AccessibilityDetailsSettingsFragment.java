@@ -221,11 +221,21 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
             extras.putString(AccessibilitySettings.EXTRA_SETTINGS_COMPONENT_NAME,
                     new ComponentName(packageName, settingsClassName).flattenToString());
         }
+
+        final String tileServiceClassName = info.getTileServiceClassName();
+        if (!TextUtils.isEmpty(tileServiceClassName)) {
+            extras.putString(AccessibilitySettings.EXTRA_TILE_SERVICE_COMPONENT_NAME,
+                    new ComponentName(packageName, tileServiceClassName).flattenToString());
+        }
+
         extras.putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, componentName);
         extras.putInt(AccessibilitySettings.EXTRA_ANIMATED_IMAGE_RES, info.getAnimatedImageRes());
 
         final String htmlDescription = info.loadHtmlDescription(getActivity().getPackageManager());
         extras.putString(AccessibilitySettings.EXTRA_HTML_DESCRIPTION, htmlDescription);
+
+        final CharSequence intro = info.loadIntro(getActivity().getPackageManager());
+        extras.putCharSequence(AccessibilitySettings.EXTRA_INTRO, intro);
 
         // We will log nonA11yTool status from PolicyWarningUIController; others none.
         extras.putLong(AccessibilitySettings.EXTRA_TIME_FOR_LOGGING,
