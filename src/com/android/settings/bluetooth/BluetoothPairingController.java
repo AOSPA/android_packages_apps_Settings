@@ -428,7 +428,7 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
      */
     public void onCancel() {
         Log.d(TAG, "Pairing dialog canceled");
-        mDevice.cancelPairing();
+        mDevice.cancelBondProcess();
     }
 
     /**
