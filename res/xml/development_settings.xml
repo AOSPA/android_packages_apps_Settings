@@ -267,11 +267,6 @@
         android:title="@string/debug_networking_category"
         android:order="400">
 
-        <com.android.settings.widget.AddPreference
-            android:key="prefer_5G_nr_mode"
-            android:title="@string/prefer_5G_nr_mode_title"
-            settings:controller="com.android.settings.development.Prefer5GNetworkSummaryController"/>
-
         <com.android.settingslib.RestrictedPreference
             android:fragment="com.android.settings.development.PreferVonrSettings"
             android:key="prefer_vonr_mode"
@@ -307,11 +302,6 @@
             android:key="mobile_data_always_on"
             android:title="@string/mobile_data_always_on"
             android:summary="@string/mobile_data_always_on_summary" />
-
-        <SwitchPreference
-            android:key="smart_dds_switch"
-            android:title="@string/smart_dds_switch"
-            android:summary="@string/smart_dds_switch_summary" />
 
         <SwitchPreference
             android:key="tethering_hardware_offload"
