@@ -209,6 +209,7 @@ public class NetworkScanHelper {
                     mExecutor,
                     mInternalNetworkScanCallback);
             if (mNetworkScanRequester == null) {
+                Log.d(TAG, "mNetworkScanRequester == null");
                 onError(NetworkScan.ERROR_RADIO_INTERFACE_ERROR);
             }
         } else if (type == NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS_LEGACY) {
