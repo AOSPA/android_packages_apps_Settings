@@ -20,7 +20,9 @@ import android.content.Context;
 import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
+import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
@@ -29,11 +31,17 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.network.GlobalSettingsChangeListener;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Preference controller for "Roaming"
@@ -46,6 +54,7 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
 
     private RestrictedSwitchPreference mSwitchPreference;
     private TelephonyManager mTelephonyManager;
+    public SubscriptionManager mSubscriptionManager;
     private CarrierConfigManager mCarrierConfigManager;
 
     /**
@@ -56,6 +65,8 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
      */
     private GlobalSettingsChangeListener mListener;
     private GlobalSettingsChangeListener mListenerForSubId;
+
+    private NonDdsCallStateListener mNonDdsCallStateListener;
 
     @VisibleForTesting
     FragmentManager mFragmentManager;
@@ -88,12 +99,20 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
                 updateState(mSwitchPreference);
             }
         };
+
+        // If the current instance is for the DDS, listen to the call state changes on nDDS.
+        if (mSubId == SubscriptionManager.getDefaultDataSubscriptionId()) {
+            mNonDdsCallStateListener.register(mContext, mSubId);
+        }
     }
 
     @Override
     public void onStop() {
         stopMonitor();
         stopMonitorSubIdSpecific();
+        if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            mNonDdsCallStateListener.unregister();
+        }
     }
 
     @Override
@@ -129,6 +148,17 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
         if (!switchPreference.isDisabledByAdmin()) {
             switchPreference.setEnabled(mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID);
             switchPreference.setChecked(isChecked());
+
+            if (!mNonDdsCallStateListener.isIdle()) {
+                Log.d(TAG, "nDDS voice call in ongoing");
+                // we will get inside this block only when the current instance is for the DDS
+                if (isChecked()) {
+                    Log.d(TAG, "Do not allow the user to turn off DDS data roaming");
+                    preference.setEnabled(false);
+                    preference.setSummary(
+                            R.string.mobile_data_settings_summary_dds_roaming_unavailable);
+                }
+            }
         }
     }
 
@@ -155,6 +185,7 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
         mFragmentManager = fragmentManager;
         mSubId = subId;
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
+        mSubscriptionManager = mContext.getSystemService(SubscriptionManager.class);
         if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             return;
         }
@@ -166,6 +197,11 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
             return;
         }
         mTelephonyManager = telephonyManager;
+
+        mNonDdsCallStateListener =
+                new NonDdsCallStateListener(mTelephonyManager,
+                        mSubscriptionManager,
+                        ()-> updateState(mSwitchPreference));
     }
 
     private void showDialog() {
@@ -185,6 +221,56 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
         if (mListenerForSubId != null) {
             mListenerForSubId.close();
             mListenerForSubId = null;
+        }
+    }
+
+    private static class NonDdsCallStateListener extends TelephonyCallback
+        implements TelephonyCallback.CallStateListener {
+        private Runnable mRunnable;
+        private int mState = TelephonyManager.CALL_STATE_IDLE;
+        private Map<Integer, NonDdsCallStateListener> mCallbacks;
+        private TelephonyManager mTelephonyManager;
+        private SubscriptionManager mSubscriptionManager;
+
+        public NonDdsCallStateListener(TelephonyManager tm, SubscriptionManager sm,
+                Runnable runnable) {
+            mTelephonyManager = tm;
+            mSubscriptionManager = sm;
+            mRunnable = runnable;
+            mCallbacks = new TreeMap<>();
+        }
+
+        public void register(Context context, int defaultDataSubId) {
+            final List<SubscriptionInfo> subs =
+                    SubscriptionUtil.getActiveSubscriptions(mSubscriptionManager);
+            for (SubscriptionInfo subInfo : subs) {
+                // listen to call state changes of the non-DDS
+                if (subInfo.getSubscriptionId() != defaultDataSubId) {
+                    mTelephonyManager.createForSubscriptionId(subInfo.getSubscriptionId())
+                            .registerTelephonyCallback(context.getMainExecutor(), this);
+                    mCallbacks.put(subInfo.getSubscriptionId(), this);
+                }
+            }
+        }
+
+        public void unregister() {
+            for (int subId : mCallbacks.keySet()) {
+                mTelephonyManager.createForSubscriptionId(subId)
+                        .unregisterTelephonyCallback(mCallbacks.get(subId));
+            }
+            mCallbacks.clear();
+        }
+
+        public boolean isIdle() {
+            return mState == TelephonyManager.CALL_STATE_IDLE;
+        }
+
+        @Override
+        public void onCallStateChanged(int state) {
+            mState = state;
+            if (mRunnable != null) {
+                mRunnable.run();
+            }
         }
     }
 }
