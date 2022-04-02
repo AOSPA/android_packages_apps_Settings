@@ -140,7 +140,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
             if (btManager != null) {
                 BluetoothAdapter btAdapter = btManager.getAdapter();
                 if (btAdapter != null) {
-                    btAdapter.factoryReset();
+                    btAdapter.clearBluetooth();
                     LocalBluetoothManager mLocalBtManager =
                                       LocalBluetoothManager.getInstance(mContext, null);
                     if (mLocalBtManager != null) {
