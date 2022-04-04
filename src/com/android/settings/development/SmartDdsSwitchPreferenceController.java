@@ -29,12 +29,16 @@ THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
 
 package com.android.settings.development;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
 import android.provider.Settings;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import androidx.preference.Preference;
@@ -69,6 +73,12 @@ public class SmartDdsSwitchPreferenceController extends DeveloperOptionsPreferen
     private boolean mFeatureAvailable = false;
     private boolean mServiceConnected = false;
     private boolean mSwitchEnabled = false;
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            updateState(mPreference);
+        }
+    };
 
     private SmartDdsSwitchPreferenceController(Context context) {
         super(context);
@@ -78,6 +88,9 @@ public class SmartDdsSwitchPreferenceController extends DeveloperOptionsPreferen
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
         mExtTelephonyManager = ExtTelephonyManager.getInstance(mContext);
         mExtTelephonyManager.connectService(mExtTelManagerServiceCallback);
+        IntentFilter filter = new IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+        filter.addAction(TelephonyManager.ACTION_SIM_APPLICATION_STATE_CHANGED);
+        mContext.registerReceiver(mBroadcastReceiver, filter);
     }
 
     public static SmartDdsSwitchPreferenceController getInstance(Context context) {
@@ -96,7 +109,7 @@ public class SmartDdsSwitchPreferenceController extends DeveloperOptionsPreferen
     private ServiceCallback mExtTelManagerServiceCallback = new ServiceCallback() {
         @Override
         public void onConnected() {
-            Log.d(TAG, "mExtTelManagerServiceCallback: service connected");
+            Log.d(TAG, "ExtTelephonyService connected");
             mServiceConnected = true;
             mClient = mExtTelephonyManager.registerCallback(mPackageName, mCallback);
             Log.d(TAG, "Client = " + mClient);
@@ -104,7 +117,8 @@ public class SmartDdsSwitchPreferenceController extends DeveloperOptionsPreferen
 
         @Override
         public void onDisconnected() {
-            Log.d(TAG, "mExtTelManagerServiceCallback: service disconnected");
+            Log.d(TAG, "ExtTelephonyService disconnected");
+            mContext.unregisterReceiver(mBroadcastReceiver);
             mServiceConnected = false;
             mClient = null;
         }
@@ -183,7 +197,7 @@ public class SmartDdsSwitchPreferenceController extends DeveloperOptionsPreferen
             if (mFeatureAvailable) {
                 String defaultSummary = mContext.getResources().getString(
                         R.string.smart_dds_switch_summary);
-                updateUi(defaultSummary, true);
+                updateUi(defaultSummary, isAvailable());
             } else {
                 Log.d(TAG, "Feature unavailable");
                 preference.setVisible(false);
@@ -204,10 +218,17 @@ public class SmartDdsSwitchPreferenceController extends DeveloperOptionsPreferen
 
     @Override
     public boolean isAvailable() {
-        // Only show the toggle if more than one phone is active
-        int numActiveModemCount = mTelephonyManager.getActiveModemCount();
-        Log.d(TAG, "numActiveModemCount: " + numActiveModemCount);
-        return numActiveModemCount > 1;
+        // Only show the toggle if 1) APM is off and 2) more than one subscription is active
+        SubscriptionManager subscriptionManager = mContext.getSystemService(
+                SubscriptionManager.class);
+        int numActiveSubscriptionInfoCount = subscriptionManager.getActiveSubscriptionInfoCount();
+        Log.d(TAG, "numActiveSubscriptionInfoCount: " + numActiveSubscriptionInfoCount);
+        return !isAirplaneModeOn() && (numActiveSubscriptionInfoCount > 1);
+    }
+
+    private boolean isAirplaneModeOn() {
+        return Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.AIRPLANE_MODE_ON, 0) != 0;
     }
 
     private void putSwitchValue(int state) {
