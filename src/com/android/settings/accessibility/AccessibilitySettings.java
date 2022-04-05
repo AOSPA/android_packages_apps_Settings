@@ -94,9 +94,11 @@ public class AccessibilitySettings extends DashboardFragment {
     static final String EXTRA_TITLE_RES = "title_res";
     static final String EXTRA_RESOLVE_INFO = "resolve_info";
     static final String EXTRA_SUMMARY = "summary";
+    static final String EXTRA_INTRO = "intro";
     static final String EXTRA_SETTINGS_TITLE = "settings_title";
     static final String EXTRA_COMPONENT_NAME = "component_name";
     static final String EXTRA_SETTINGS_COMPONENT_NAME = "settings_component_name";
+    static final String EXTRA_TILE_SERVICE_COMPONENT_NAME = "tile_service_component_name";
     static final String EXTRA_VIDEO_RAW_RESOURCE_ID = "video_resource";
     static final String EXTRA_LAUNCHED_FROM_SUW = "from_suw";
     static final String EXTRA_ANIMATED_IMAGE_RES = "animated_image_res";
@@ -569,15 +571,18 @@ public class AccessibilitySettings extends DashboardFragment {
 
                 final String prefKey = preference.getKey();
                 final int imageRes = info.getAnimatedImageRes();
+                final CharSequence intro = info.loadIntro(mPm);
                 final CharSequence description = getServiceDescription(mContext, info,
                         serviceEnabled);
                 final String htmlDescription = info.loadHtmlDescription(mPm);
                 final String settingsClassName = info.getSettingsActivityName();
+                final String tileServiceClassName = info.getTileServiceName();
 
-                putBasicExtras(preference, prefKey, title, description, imageRes, htmlDescription,
-                        componentName);
+                putBasicExtras(preference, prefKey, title, intro, description, imageRes,
+                        htmlDescription, componentName);
                 putServiceExtras(preference, resolveInfo, serviceEnabled);
                 putSettingsExtras(preference, packageName, settingsClassName);
+                putTileServiceExtras(preference, packageName, tileServiceClassName);
 
                 preferenceList.add(preference);
             }
@@ -627,14 +632,18 @@ public class AccessibilitySettings extends DashboardFragment {
                 setRestrictedPreferenceEnabled(preference, permittedServices, serviceEnabled);
 
                 final String prefKey = preference.getKey();
+                final CharSequence intro = info.loadIntro(mPm);
                 final String description = info.loadDescription(mPm);
                 final int imageRes = info.getAnimatedImageRes();
                 final String htmlDescription = info.loadHtmlDescription(mPm);
                 final String settingsClassName = info.getSettingsActivityName();
+                final String tileServiceClassName = info.getTileServiceName();
 
-                putBasicExtras(preference, prefKey, title, description, imageRes, htmlDescription,
-                        componentName);
+                putBasicExtras(preference, prefKey, title, intro, description, imageRes,
+                        htmlDescription, componentName);
                 putSettingsExtras(preference, componentName.getPackageName(), settingsClassName);
+                putTileServiceExtras(preference, componentName.getPackageName(),
+                        tileServiceClassName);
 
                 preferenceList.add(preference);
             }
@@ -716,11 +725,12 @@ public class AccessibilitySettings extends DashboardFragment {
 
         /** Puts the basic extras into {@link RestrictedPreference}'s getExtras(). */
         private void putBasicExtras(RestrictedPreference preference, String prefKey,
-                CharSequence title, CharSequence summary, int imageRes, String htmlDescription,
-                ComponentName componentName) {
+                CharSequence title, CharSequence intro, CharSequence summary, int imageRes,
+                String htmlDescription, ComponentName componentName) {
             final Bundle extras = preference.getExtras();
             extras.putString(EXTRA_PREFERENCE_KEY, prefKey);
             extras.putCharSequence(EXTRA_TITLE, title);
+            extras.putCharSequence(EXTRA_INTRO, intro);
             extras.putCharSequence(EXTRA_SUMMARY, summary);
             extras.putParcelable(EXTRA_COMPONENT_NAME, componentName);
             extras.putInt(EXTRA_ANIMATED_IMAGE_RES, imageRes);
@@ -730,7 +740,11 @@ public class AccessibilitySettings extends DashboardFragment {
         /**
          * Puts the service extras into {@link RestrictedPreference}'s getExtras().
          *
-         * Called by {@link AccessibilityServiceInfo} for now.
+         * <p><b>Note:</b> Called by {@link AccessibilityServiceInfo}.</p>
+         *
+         * @param preference The preference we are configuring.
+         * @param resolveInfo The service resolve info.
+         * @param serviceEnabled Whether the accessibility service is enabled.
          */
         private void putServiceExtras(RestrictedPreference preference, ResolveInfo resolveInfo,
                 Boolean serviceEnabled) {
@@ -743,7 +757,12 @@ public class AccessibilitySettings extends DashboardFragment {
         /**
          * Puts the settings extras into {@link RestrictedPreference}'s getExtras().
          *
-         * Called when settings UI is needed.
+         * <p><b>Note:</b> Called when settings UI is needed.</p>
+         *
+         * @param preference The preference we are configuring.
+         * @param packageName Package of accessibility feature.
+         * @param settingsClassName The component name of an activity that allows the user to modify
+         *                          the settings for this accessibility feature.
          */
         private void putSettingsExtras(RestrictedPreference preference, String packageName,
                 String settingsClassName) {
@@ -754,6 +773,28 @@ public class AccessibilitySettings extends DashboardFragment {
                         mContext.getText(R.string.accessibility_menu_item_settings).toString());
                 extras.putString(EXTRA_SETTINGS_COMPONENT_NAME,
                         new ComponentName(packageName, settingsClassName).flattenToString());
+            }
+        }
+
+        /**
+         * Puts the information about a particular application
+         * {@link android.service.quicksettings.TileService} into {@link RestrictedPreference}'s
+         * getExtras().
+         *
+         * <p><b>Note:</b> Called when a tooltip of
+         * {@link android.service.quicksettings.TileService} is needed.</p>
+         *
+         * @param preference The preference we are configuring.
+         * @param packageName Package of accessibility feature.
+         * @param tileServiceClassName The component name of tileService is associated with this
+         *                             accessibility feature.
+         */
+        private void putTileServiceExtras(RestrictedPreference preference, String packageName,
+                String tileServiceClassName) {
+            final Bundle extras = preference.getExtras();
+            if (!TextUtils.isEmpty(tileServiceClassName)) {
+                extras.putString(EXTRA_TILE_SERVICE_COMPONENT_NAME,
+                        new ComponentName(packageName, tileServiceClassName).flattenToString());
             }
         }
     }

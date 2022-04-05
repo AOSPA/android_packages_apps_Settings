@@ -38,6 +38,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toolbar;
 
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -96,7 +100,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         void onHomepageLoaded();
     }
 
-    private interface FragmentBuilder<T extends Fragment>  {
+    private interface FragmentBuilder<T extends Fragment> {
         T build();
     }
 
@@ -149,7 +153,9 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setupEdgeToEdge();
         setContentView(R.layout.settings_homepage_container);
+
         mIsEmbeddingActivityEnabled = ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this);
         mSplitController = SplitController.getInstance();
         mIsTwoPane = mSplitController.isActivityEmbedded(this);
@@ -224,6 +230,20 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         }
     }
 
+    private void setupEdgeToEdge() {
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content),
+                (v, windowInsets) -> {
+                    Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+                    // Apply the insets paddings to the view.
+                    v.setPadding(insets.left, insets.top, insets.right, insets.bottom);
+
+                    // Return CONSUMED if you don't want the window insets to keep being
+                    // passed down to descendant views.
+                    return WindowInsetsCompat.CONSUMED;
+                });
+    }
+
     private void initSearchBarView() {
         final Toolbar toolbar = findViewById(R.id.search_action_bar);
         FeatureFactory.getFactory(this).getSearchFeatureProvider()
@@ -265,7 +285,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         // Update status bar color
         window.setStatusBarColor(color);
         // Update content background.
-        findViewById(R.id.settings_homepage_container).setBackgroundColor(color);
+        findViewById(android.R.id.content).setBackgroundColor(color);
     }
 
     private void showSuggestionFragment(boolean scrollNeeded) {

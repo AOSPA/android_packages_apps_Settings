@@ -49,8 +49,10 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogType;
+import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.testutils.shadow.ShadowFragment;
+import com.android.settingslib.widget.TopIntroPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -76,11 +78,12 @@ public class ToggleFeaturePreferenceFragmentTest {
             PLACEHOLDER_PACKAGE_NAME + "tile.placeholder";
     private static final ComponentName PLACEHOLDER_TILE_COMPONENT_NAME = new ComponentName(
             PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_TILE_CLASS_NAME);
-    private static final String PLACEHOLDER_TILE_NAME =
-            PLACEHOLDER_PACKAGE_NAME + "tile.placeholder";
+    private static final String PLACEHOLDER_TILE_TOOLTIP_CONTENT =
+            PLACEHOLDER_PACKAGE_NAME + "tooltip_content";
     private static final String PLACEHOLDER_DIALOG_TITLE = "title";
     private static final String DEFAULT_SUMMARY = "default summary";
     private static final String DEFAULT_DESCRIPTION = "default description";
+    private static final String DEFAULT_TOP_INTRO = "default top intro";
 
     private static final String SOFTWARE_SHORTCUT_KEY =
             Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS;
@@ -294,6 +297,23 @@ public class ToggleFeaturePreferenceFragmentTest {
     }
 
     @Test
+    public void initTopIntroPreference_hasTopIntroTitle_shouldSetAsExpectedValue() {
+        mFragment.mTopIntroTitle = DEFAULT_TOP_INTRO;
+        mFragment.initTopIntroPreference();
+
+        TopIntroPreference topIntroPreference =
+                (TopIntroPreference) mFragment.getPreferenceScreen().getPreference(/* index= */ 0);
+        assertThat(topIntroPreference.getTitle().toString()).isEqualTo(DEFAULT_TOP_INTRO);
+    }
+
+    @Test
+    public void initTopIntroPreference_topIntroTitleIsNull_shouldNotAdded() {
+        mFragment.initTopIntroPreference();
+
+        assertThat(mFragment.getPreferenceScreen().getPreferenceCount()).isEqualTo(0);
+    }
+
+    @Test
     public void createFooterPreference_shouldSetAsExpectedValue() {
         mFragment.createFooterPreference(mFragment.getPreferenceScreen(),
                 DEFAULT_SUMMARY, DEFAULT_DESCRIPTION);
@@ -342,8 +362,8 @@ public class ToggleFeaturePreferenceFragmentTest {
         }
 
         @Override
-        CharSequence getTileName() {
-            return PLACEHOLDER_TILE_NAME;
+        protected CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
+            return PLACEHOLDER_TILE_TOOLTIP_CONTENT;
         }
 
         @Override
