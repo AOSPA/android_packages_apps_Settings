@@ -695,7 +695,6 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     @Override
     public void onWifiEntriesChanged() {
-        // do nothing if UI is finishing and destoryed status
         if (isFinishingOrDestroyed()) {
             Log.d(TAG, "onWifiEntriesChanged: isFinishingOrDestroyed true");
             return;
