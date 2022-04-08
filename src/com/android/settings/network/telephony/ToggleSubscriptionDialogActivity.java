@@ -33,6 +33,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.SidecarFragment;
 import com.android.settings.network.EnableMultiSimSidecar;
+import com.android.settings.network.SubscriptionsChangeListener;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.SwitchToEuiccSubscriptionSidecar;
 import com.android.settings.network.SwitchToRemovableSlotSidecar;
@@ -47,7 +48,8 @@ import java.util.stream.Collectors;
 
 /** This dialog activity handles both eSIM and pSIM subscriptions enabling and disabling. */
 public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogActivity
-        implements SidecarFragment.Listener, ConfirmDialogFragment.OnConfirmListener {
+        implements SidecarFragment.Listener, ConfirmDialogFragment.OnConfirmListener,
+        SubscriptionsChangeListener.SubscriptionsChangeListenerClient {
 
     private static final String TAG = "ToggleSubscriptionDialogActivity";
     // Arguments
@@ -83,6 +85,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
     }
 
     private SubscriptionInfo mSubInfo;
+    private SubscriptionsChangeListener mChangeListener;
     private SwitchToEuiccSubscriptionSidecar mSwitchToEuiccSubscriptionSidecar;
     private SwitchToRemovableSlotSidecar mSwitchToRemovableSlotSidecar;
     private EnableMultiSimSidecar mEnableMultiSimSidecar;
@@ -136,6 +139,10 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
     @Override
     protected void onResume() {
         super.onResume();
+        if (mChangeListener == null) {
+            mChangeListener = new SubscriptionsChangeListener(this, this);
+        }
+        mChangeListener.start();
         mSwitchToEuiccSubscriptionSidecar.addListener(this);
         mSwitchToRemovableSlotSidecar.addListener(this);
         mEnableMultiSimSidecar.addListener(this);
@@ -143,11 +150,26 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
 
     @Override
     protected void onPause() {
+        if (mChangeListener != null) {
+            mChangeListener.stop();
+        }
         mEnableMultiSimSidecar.removeListener(this);
         mSwitchToRemovableSlotSidecar.removeListener(this);
         mSwitchToEuiccSubscriptionSidecar.removeListener(this);
         super.onPause();
     }
+
+    @Override
+    public void onSubscriptionsChanged() {
+        if ((mSubInfo == null || !mSubscriptionManager.isActiveSubscriptionId(
+                mSubInfo.getSubscriptionId())) && !isFinishing()) {
+            Log.i(TAG, "Finish dialog for inactive sim");
+            finish();
+        }
+    }
+
+    @Override
+    public void onAirplaneModeChanged(boolean airplaneModeEnabled) {}
 
     @Override
     public void onStateChange(SidecarFragment fragment) {
