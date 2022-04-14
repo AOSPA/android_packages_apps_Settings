@@ -18,10 +18,8 @@ package com.android.settings.network.telephony;
 
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -40,8 +38,6 @@ import android.view.MenuItem;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
-import com.android.internal.telephony.IccCardConstants;
-import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
 import com.android.settings.Settings.MobileNetworkActivity;
 import com.android.settings.datausage.BillingCyclePreferenceController;
@@ -83,7 +79,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
 
     private TelephonyManager mTelephonyManager;
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-    private int mPhoneId = SubscriptionManager.INVALID_PHONE_INDEX;
 
     private CdmaSystemSelectPreferenceController mCdmaSystemSelectPreferenceController;
     private CdmaSubscriptionPreferenceController mCdmaSubscriptionPreferenceController;
@@ -94,33 +89,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
     private ActiveSubscriptionsListener mActiveSubscriptionsListener;
     private boolean mDropFirstSubscriptionChangeNotify;
     private int mActiveSubscriptionsListenerCount;
-
-    private final BroadcastReceiver mSimStateReceiver = new BroadcastReceiver() {
-        public void onReceive(Context context, Intent intent) {
-            final String action = intent.getAction();
-            if (TelephonyIntents.ACTION_SIM_STATE_CHANGED.equals(action)) {
-                String state =  intent.getStringExtra(IccCardConstants.INTENT_KEY_ICC_STATE);
-                Log.d(LOG_TAG, "Received ACTION_SIM_STATE_CHANGED: " + state);
-                setScreenState();
-            }
-        }
-    };
-
-    private void setScreenState() {
-        int simState = mTelephonyManager.getSimState();
-        boolean screenState = simState != TelephonyManager.SIM_STATE_ABSENT;
-        if (screenState) {
-            SubscriptionManager subscriptionManager = ((SubscriptionManager) getContext().
-                    getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE));
-            SubscriptionInfo subInfo = subscriptionManager.getActiveSubscriptionInfo(mSubId);
-            Log.d(LOG_TAG, "subInfo: " + subInfo + ", mSubId: " + mSubId);
-            if (subInfo != null && !subInfo.areUiccApplicationsEnabled()) {
-                screenState = false;
-            }
-        }
-        Log.d(LOG_TAG, "Setting screen state to: " + screenState);
-        getPreferenceScreen().setEnabled(screenState);
-    }
 
     public MobileNetworkSettings() {
         super(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
@@ -173,8 +141,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
                     MobileNetworkUtils.getSearchableSubscriptionId(context));
             Log.d(LOG_TAG, "display subId from getArguments(): " + mSubId);
         }
-        mPhoneId = SubscriptionManager.getPhoneId(mSubId);
-        Log.i(LOG_TAG, "display subId: " + mSubId + ", phoneId: " + mPhoneId);
+        Log.i(LOG_TAG, "display subId: " + mSubId);
 
         if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
             return Arrays.asList();
@@ -315,13 +282,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
         }
         mActiveSubscriptionsListener.start();
 
-        Context context = getContext();
-        if (context != null) {
-            context.registerReceiver(mSimStateReceiver,
-                    new IntentFilter(TelephonyIntents.ACTION_SIM_STATE_CHANGED));
-        } else {
-            Log.i(LOG_TAG, "context is null, not registering SimStateReceiver");
-        }
     }
 
     private void onSubscriptionDetailChanged() {
@@ -352,18 +312,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
             mActiveSubscriptionsListener.stop();
         }
         super.onDestroy();
-    }
-
-    @Override
-    public void onPause() {
-        Log.i(LOG_TAG, "onPause:+");
-        super.onPause();
-        Context context = getContext();
-        if (context != null) {
-            context.unregisterReceiver(mSimStateReceiver);
-        } else {
-            Log.i(LOG_TAG, "context already null, not unregistering SimStateReceiver");
-        }
     }
 
     @VisibleForTesting
