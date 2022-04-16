@@ -24,6 +24,7 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentManager;
@@ -50,6 +51,7 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
         implements LifecycleObserver, OnStart, OnStop {
 
     private static final String DIALOG_TAG = "MobileDataDialog";
+    private static final String TAG = "MobileDataPreferenceController";
 
     private SwitchPreference mPreference;
     private TelephonyManager mTelephonyManager;
@@ -146,9 +148,14 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
             preference.setSummary(R.string.mobile_data_settings_summary_auto_switch);
         } else {
             if (!mCallStateListener.isIdle()) {
-                preference.setEnabled(false);
-                preference.setSummary(
-                        R.string.mobile_data_settings_summary_default_data_unavailable);
+                Log.d(TAG, "nDDS voice call in ongoing");
+                // we will get inside this block only when the current instance is for the DDS
+                if (isChecked()) {
+                    Log.d(TAG, "Do not allow the user to turn off DDS mobile data");
+                    preference.setEnabled(false);
+                    preference.setSummary(
+                            R.string.mobile_data_settings_summary_default_data_unavailable);
+                }
             } else {
                 if (TelephonyUtils.isSubsidyFeatureEnabled(mContext) &&
                         !TelephonyUtils.isSubsidySimCard(mContext,

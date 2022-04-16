@@ -182,6 +182,8 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             showSuggestionFragment(scrollNeeded);
             if (FeatureFlagUtils.isEnabled(this, FeatureFlags.CONTEXTUAL_HOME)) {
                 showFragment(() -> new ContextualCardsFragment(), R.id.contextual_cards_content);
+                ((FrameLayout) findViewById(R.id.main_content))
+                        .getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
             }
         }
         mMainFragment = showFragment(() -> {
@@ -190,9 +192,6 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                     highlightMenuKey);
             return fragment;
         }, R.id.main_content);
-
-        ((FrameLayout) findViewById(R.id.main_content))
-                .getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
 
         // Launch the intent from deep link for large screen devices.
         launchDeepLinkIntentToRight();
@@ -345,7 +344,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         }
 
         if (!(this instanceof DeepLinkHomepageActivity
-                || this instanceof SliceDeepLinkHomepageActivity)) {
+                || this instanceof DeepLinkHomepageActivityInternal)) {
             Log.e(TAG, "Not a deep link component");
             finish();
             return;

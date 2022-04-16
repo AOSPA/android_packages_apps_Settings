@@ -102,7 +102,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     protected static final String KEY_USE_SERVICE_PREFERENCE = "use_service";
     public static final String KEY_GENERAL_CATEGORY = "general_categories";
     protected static final String KEY_HTML_DESCRIPTION_PREFERENCE = "html_description";
-    private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
+    public static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
     protected static final String KEY_SAVED_USER_SHORTCUT_TYPE = "shortcut_type";
     protected static final String KEY_SAVED_QS_TOOLTIP_RESHOW = "qs_tooltip_reshow";
     protected static final String KEY_SAVED_QS_TOOLTIP_TYPE = "qs_tooltip_type";
@@ -564,13 +564,6 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             createFooterPreference(getPreferenceScreen(), mDescription,
                     getString(R.string.accessibility_introduction_title, mPackageName));
         }
-
-        if (TextUtils.isEmpty(mHtmlDescription) && TextUtils.isEmpty(mDescription)) {
-            final CharSequence defaultDescription =
-                    getText(R.string.accessibility_service_default_description);
-            createFooterPreference(getPreferenceScreen(), defaultDescription,
-                    getString(R.string.accessibility_introduction_title, mPackageName));
-        }
     }
 
 
@@ -732,6 +725,10 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         mShortcutPreference.setChecked(shortcutAssigned);
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
 
+        if (mHardwareTypeCheckBox.isChecked()) {
+            AccessibilityUtil.skipVolumeShortcutDialogTimeoutRestriction(getPrefContext());
+        }
+
         // Show the quick setting tooltip if the shortcut assigned in the first time
         if (shortcutAssigned) {
             showQuickSettingsTooltipIfNeeded();
@@ -877,8 +874,8 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         }
 
         final int imageResId = mNeedsQSTooltipType == QuickSettingsTooltipType.GUIDE_TO_EDIT
-                ? R.drawable.accessibility_qs_tooltips_illustration
-                : R.drawable.accessibility_auto_added_qs_tooltips_illustration;
+                ? R.drawable.accessibility_qs_tooltip_illustration
+                : R.drawable.accessibility_auto_added_qs_tooltip_illustration;
         mTooltipWindow = new AccessibilityQuickSettingsTooltipWindow(getContext());
         mTooltipWindow.setup(content, imageResId);
         mTooltipWindow.showAtTopCenter(getView());

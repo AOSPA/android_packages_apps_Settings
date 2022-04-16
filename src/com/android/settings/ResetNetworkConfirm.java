@@ -140,7 +140,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
             if (btManager != null) {
                 BluetoothAdapter btAdapter = btManager.getAdapter();
                 if (btAdapter != null) {
-                    btAdapter.factoryReset();
+                    btAdapter.clearBluetooth();
                     LocalBluetoothManager mLocalBtManager =
                                       LocalBluetoothManager.getInstance(mContext, null);
                     if (mLocalBtManager != null) {
@@ -159,7 +159,10 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
 
         @Override
         protected void onPostExecute(Boolean succeeded) {
-            mProgressDialog.dismiss();
+            if (mProgressDialog != null && mProgressDialog.isShowing()) {
+                mProgressDialog.dismiss();
+            }
+
             if (succeeded) {
                 Toast.makeText(mContext, R.string.reset_network_complete_toast, Toast.LENGTH_SHORT)
                         .show();
@@ -196,6 +199,12 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
                     mActivity.finish();
                     return;
                 }
+            }
+
+            // Should dismiss the progress dialog firstly if it is showing
+            // Or not the progress dialog maybe not dismissed in fast clicking.
+            if (mProgressDialog != null && mProgressDialog.isShowing()) {
+                mProgressDialog.dismiss();
             }
 
             mProgressDialog = getProgressDialog(mActivity);

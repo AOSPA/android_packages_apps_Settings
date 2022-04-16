@@ -38,6 +38,7 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.PopupWindow;
 
 import androidx.annotation.XmlRes;
@@ -184,6 +185,28 @@ public class ToggleFeaturePreferenceFragmentTest {
     }
 
     @Test
+    public void dialogCheckboxClicked_hardwareType_skipTimeoutRestriction() {
+        mContext.setTheme(R.style.Theme_AppCompat);
+        final ShortcutPreference shortcutPreference = new ShortcutPreference(mContext, /* attrs= */
+                null);
+        mFragment.mComponentName = PLACEHOLDER_COMPONENT_NAME;
+        mFragment.mShortcutPreference = shortcutPreference;
+        final AlertDialog dialog = AccessibilityDialogUtils.showEditShortcutDialog(
+                mContext, DialogType.EDIT_SHORTCUT_GENERIC, PLACEHOLDER_DIALOG_TITLE,
+                mFragment::callOnAlertDialogCheckboxClicked);
+        mFragment.setupEditShortcutDialog(dialog);
+
+        final View dialogHardwareView = dialog.findViewById(R.id.hardware_shortcut);
+        final CheckBox hardwareTypeCheckBox = dialogHardwareView.findViewById(R.id.checkbox);
+        hardwareTypeCheckBox.setChecked(true);
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).callOnClick();
+        final boolean skipTimeoutRestriction = Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.SKIP_ACCESSIBILITY_SHORTCUT_DIALOG_TIMEOUT_RESTRICTION, 0) != 0;
+
+        assertThat(skipTimeoutRestriction).isTrue();
+    }
+
+    @Test
     public void setupEditShortcutDialog_shortcutPreferenceOff_checkboxIsEmptyValue() {
         mContext.setTheme(R.style.Theme_AppCompat);
         final AlertDialog dialog = AccessibilityDialogUtils.showEditShortcutDialog(
@@ -322,7 +345,7 @@ public class ToggleFeaturePreferenceFragmentTest {
                 (AccessibilityFooterPreference) mFragment.getPreferenceScreen().getPreference(
                         mFragment.getPreferenceScreen().getPreferenceCount() - 1);
         assertThat(accessibilityFooterPreference.getSummary()).isEqualTo(DEFAULT_SUMMARY);
-        assertThat(accessibilityFooterPreference.isSelectable()).isEqualTo(true);
+        assertThat(accessibilityFooterPreference.isSelectable()).isEqualTo(false);
         assertThat(accessibilityFooterPreference.getOrder()).isEqualTo(Integer.MAX_VALUE - 1);
     }
 

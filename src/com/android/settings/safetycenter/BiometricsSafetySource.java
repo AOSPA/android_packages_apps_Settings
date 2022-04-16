@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceData;
+import android.safetycenter.SafetySourceSeverity;
 import android.safetycenter.SafetySourceStatus;
 
 import com.android.settings.R;
@@ -40,7 +41,8 @@ public final class BiometricsSafetySource {
 
     public static final String SAFETY_SOURCE_ID = "Biometrics";
 
-    private BiometricsSafetySource() {}
+    private BiometricsSafetySource() {
+    }
 
     /** Sets biometric safety data for Safety Center. */
     public static void setSafetySourceData(Context context, SafetyEvent safetyEvent) {
@@ -65,6 +67,7 @@ public final class BiometricsSafetySource {
                             combinedBiometricStatusUtils.getSettingsClassName(), disablingAdmin,
                             Bundle.EMPTY),
                     disablingAdmin == null /* enabled */,
+                    combinedBiometricStatusUtils.hasEnrolled(),
                     safetyEvent);
             return;
         }
@@ -82,6 +85,7 @@ public final class BiometricsSafetySource {
                             faceStatusUtils.getSettingsClassName(), disablingAdmin,
                             Bundle.EMPTY),
                     disablingAdmin == null /* enabled */,
+                    faceStatusUtils.hasEnrolled(),
                     safetyEvent);
 
             return;
@@ -101,6 +105,7 @@ public final class BiometricsSafetySource {
                             fingerprintStatusUtils.getSettingsClassName(), disablingAdmin,
                             Bundle.EMPTY),
                     disablingAdmin == null /* enabled */,
+                    fingerprintStatusUtils.hasEnrolled(),
                     safetyEvent);
         }
     }
@@ -114,12 +119,14 @@ public final class BiometricsSafetySource {
     }
 
     private static void setBiometricSafetySourceData(Context context, String title, String summary,
-            Intent clickIntent, boolean enabled, SafetyEvent safetyEvent) {
+            Intent clickIntent, boolean enabled, boolean hasEnrolled, SafetyEvent safetyEvent) {
         final PendingIntent pendingIntent = createPendingIntent(context, clickIntent);
+        final int severityLevel =
+                enabled && hasEnrolled ? SafetySourceSeverity.LEVEL_INFORMATION
+                        : SafetySourceSeverity.LEVEL_UNSPECIFIED;
 
         final SafetySourceStatus status = new SafetySourceStatus.Builder(title, summary,
-                SafetySourceStatus.STATUS_LEVEL_NONE, pendingIntent)
-                .setEnabled(enabled).build();
+                severityLevel).setPendingIntent(pendingIntent).setEnabled(enabled).build();
         final SafetySourceData safetySourceData =
                 new SafetySourceData.Builder().setStatus(status).build();
 

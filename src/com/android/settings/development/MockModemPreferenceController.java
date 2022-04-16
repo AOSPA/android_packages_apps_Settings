@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,8 @@
 package com.android.settings.development;
 
 import android.content.Context;
-import android.provider.DeviceConfig;
+import android.os.SystemProperties;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -27,47 +28,59 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 /**
- * Preference controller for Bluetooth Gabeldorche feature
+ * PreferenceController for MockModem
  */
-public class BluetoothGabeldorschePreferenceController extends
+public class MockModemPreferenceController extends
         DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener,
         PreferenceControllerMixin {
 
-    private static final String BLUETOOTH_GABELDORSCHE_KEY =
-            "bluetooth_gabeldorsche_enable";
-
+    private static final String TAG = "MockModemPreferenceController";
+    private static final String ALLOW_MOCK_MODEM_KEY =
+            "allow_mock_modem";
     @VisibleForTesting
-    static final String CURRENT_GD_FLAG = "INIT_gd_scanning";
+    static final String ALLOW_MOCK_MODEM_PROPERTY =
+            "persist.radio.allow_mock_modem";
 
-    public BluetoothGabeldorschePreferenceController(Context context) {
+    public MockModemPreferenceController(Context context) {
         super(context);
     }
 
     @Override
     public String getPreferenceKey() {
-        return BLUETOOTH_GABELDORSCHE_KEY;
+        return ALLOW_MOCK_MODEM_KEY;
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean isEnabled = (Boolean) newValue;
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_BLUETOOTH,
-                CURRENT_GD_FLAG, isEnabled ? "true" : "false", false /* makeDefault */);
+        try {
+            SystemProperties.set(ALLOW_MOCK_MODEM_PROPERTY,
+                    isEnabled ? "true" : "false");
+        } catch (RuntimeException e) {
+            Log.e(TAG, "Fail to set radio system property: " + e.getMessage());
+        }
         return true;
     }
 
     @Override
     public void updateState(Preference preference) {
-        final boolean isEnabled = DeviceConfig.getBoolean(
-                DeviceConfig.NAMESPACE_BLUETOOTH, CURRENT_GD_FLAG, false /* default */);
-        ((SwitchPreference) mPreference).setChecked(isEnabled);
+        try {
+            final boolean isEnabled = SystemProperties.getBoolean(
+                    ALLOW_MOCK_MODEM_PROPERTY, false /* default */);
+            ((SwitchPreference) mPreference).setChecked(isEnabled);
+        } catch (RuntimeException e) {
+            Log.e(TAG, "Fail to get radio system property: " + e.getMessage());
+        }
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_BLUETOOTH,
-                CURRENT_GD_FLAG, null, false /* makeDefault */);
-        ((SwitchPreference) mPreference).setChecked(false);
+        try {
+            SystemProperties.set(ALLOW_MOCK_MODEM_PROPERTY, "false");
+            ((SwitchPreference) mPreference).setChecked(false);
+        } catch (RuntimeException e) {
+            Log.e(TAG, "Fail to set radio system property: " + e.getMessage());
+        }
     }
 }
