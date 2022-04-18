@@ -154,6 +154,7 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
 
     private boolean isNoPasswordSecurityrType(int securityType) {
         return (securityType == SoftApConfiguration.SECURITY_TYPE_OPEN
-                || securityType == SoftApConfiguration.SECURITY_TYPE_OWE);
+                || securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION
+                || securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_OWE);
     }
 }
