@@ -226,13 +226,13 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         use(WifiTetherAutoOffPreferenceController.class).updateDisplay();
 
         if (mSecurityPreferenceController.isOweDualSapSupported()) {
-            if ((config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_OWE)
+            if ((config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION)
                    && (mApBandPreferenceController.getBandIndex() == BAND_BOTH_2G_5G)) {
                 mApBandPreferenceController.updatePreferenceEntries();
                 mApBandPreferenceController.updateDisplay();
                 wasApBandPrefUpdated = true;
             } else if (wasApBandPrefUpdated
-                   && config.getSecurityType() != SoftApConfiguration.SECURITY_TYPE_OWE) {
+                   && config.getSecurityType() != SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION) {
                 mApBandPreferenceController.updatePreferenceEntries();
                 mApBandPreferenceController.updateDisplay();
                 wasApBandPrefUpdated = false;
@@ -258,7 +258,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         final int securityType = mSecurityPreferenceController.getSecurityType();
         configBuilder.setSsid(mSSIDPreferenceController.getSSID());
         if (securityType == SoftApConfiguration.SECURITY_TYPE_OPEN
-              || securityType == SoftApConfiguration.SECURITY_TYPE_OWE) {
+              || securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION
+              || securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_OWE) {
             configBuilder.setPassphrase(null, securityType);
         } else {
             configBuilder.setPassphrase(
@@ -269,7 +270,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                 mWifiTetherAutoOffPreferenceController.isEnabled());
         if (mApBandPreferenceController.getBandIndex() == BAND_BOTH_2G_5G) {
             // Fallback to 2G band if user selected OWE+Dual band
-            if (securityType == SoftApConfiguration.SECURITY_TYPE_OWE) {
+            if (securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION) {
                 configBuilder.setBand(SoftApConfiguration.BAND_2GHZ);
             } else {
                 int[] dualBands = new int[] {
