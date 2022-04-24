@@ -16,7 +16,6 @@
 
 package com.android.settings.wifi.tether;
 
-import static android.net.TetheringManager.ACTION_TETHER_STATE_CHANGED;
 import static android.net.wifi.WifiManager.WIFI_AP_STATE_CHANGED_ACTION;
 import static com.android.settings.wifi.tether.WifiTetherApBandPreferenceController.BAND_BOTH_2G_5G;
 
@@ -33,7 +32,6 @@ import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceGroup;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -83,8 +81,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     TetherChangeReceiver mTetherChangeReceiver;
 
     static {
-        TETHER_STATE_CHANGE_FILTER = new IntentFilter(ACTION_TETHER_STATE_CHANGED);
-        TETHER_STATE_CHANGE_FILTER.addAction(WIFI_AP_STATE_CHANGED_ACTION);
+        TETHER_STATE_CHANGE_FILTER = new IntentFilter(WIFI_AP_STATE_CHANGED_ACTION);
     }
 
     public WifiTetherSettings() {
@@ -318,12 +315,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
             String action = intent.getAction();
             Log.d(TAG, "updating display config due to receiving broadcast action " + action);
             updateDisplayWithNewConfig();
-            if (action.equals(ACTION_TETHER_STATE_CHANGED)) {
-                if (mWifiManager.getWifiApState() == WifiManager.WIFI_AP_STATE_DISABLED
-                        && mRestartWifiApAfterConfigChange) {
-                    startTether();
-                }
-            } else if (action.equals(WIFI_AP_STATE_CHANGED_ACTION)) {
+            if (action.equals(WIFI_AP_STATE_CHANGED_ACTION)) {
                 int state = intent.getIntExtra(WifiManager.EXTRA_WIFI_AP_STATE, 0);
                 if (state == WifiManager.WIFI_AP_STATE_DISABLED
                         && mRestartWifiApAfterConfigChange) {
