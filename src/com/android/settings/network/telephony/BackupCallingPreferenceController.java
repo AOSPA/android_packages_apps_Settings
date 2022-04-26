@@ -28,6 +28,7 @@ import android.telephony.ims.ImsMmTelManager;
 import android.util.Log;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
@@ -47,7 +48,10 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
 
     private static final String LOG_TAG = "BackupCallingPrefCtrl";
 
+    private final String PREFERENCE_KEY = "backup_calling_key";
+
     private Preference mPreference;
+    private PreferenceScreen mScreen;
     private Context mContext;
     private ExtTelephonyManager mExtTelephonyManager;
     private boolean mServiceConnected = false;
@@ -74,6 +78,10 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
         public void onConnected() {
             Log.d(LOG_TAG, "mExtTelManagerServiceCallback: service connected");
             mServiceConnected = true;
+            displayPreference(mScreen);
+            if (mScreen != null) {
+                updateState((SwitchPreference) mScreen.findPreference(PREFERENCE_KEY));
+            }
         }
 
         @Override
@@ -105,6 +113,14 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
             return CONDITIONALLY_UNAVAILABLE;
         }
         return (subIdList.size() == 1) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        mScreen = screen;
+        if (mScreen != null) {
+            super.displayPreference(mScreen);
+        }
     }
 
     /**
