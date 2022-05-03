@@ -225,9 +225,10 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Kieliehdotukset"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Kaikki kielet"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Järjestelmän kieli"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Järjestelmän oletusarvo - <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Järjestelmän oletusarvo"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Sovellukselle ei voi valita kieltä asetuksista."</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Et voi valita tälle sovellukselle kieltä asetuksista."</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Poistetaanko valitut kielet?</item>
       <item quantity="one">Poistetaanko valittu kieli?</item>
@@ -342,8 +343,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"Suojaustila"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Näytön lukitus, Paikanna laite, sovellusten tietoturva"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Tietoturva ja yksityisyys"</string>
-    <!-- no translation found for safety_center_summary (3554867379951053869) -->
-    <skip />
+    <string name="safety_center_summary" msgid="3554867379951053869">"Sovellusten tietoturva, laitteen lukitus, luvat"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Kasvot lisätty"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Ota kasvot käyttöön napauttamalla"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Kasvojentunnistusavaus"</string>
@@ -587,14 +587,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Näytön lukitustapa on poistettu käytöstä. Kysy lisätietoja organisaatiosi järjestelmänvalvojalta. "<annotation id="admin_details">"Katso lisätietoja"</annotation>\n\n"Voit yhä valtuuttaa ostoksia ja käyttää sovelluksia sormenjälkesi avulla. "<annotation id="url">"Lisätietoja"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Nosta sormesi ja kosketa tunnistinta uudelleen"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Sormenjälkitunnistinta ei voi käyttää. Ota yhteys korjauspalveluun"</string>
-    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
-    <skip />
+    <string name="security_advanced_settings" msgid="6260756619837834042">"Lisää tietoturva-asetuksia"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Työprofiilin lukitus, salaus ja muuta"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Salaus, kirjautumistiedot ja muuta"</string>
+    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"tietoturva, lisää tietoturva-asetuksia, lisää asetuksia, tietoturvan lisäasetukset"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Voit lisätä korkeintaan <xliff:g id="COUNT">%d</xliff:g> sormenjälkeä"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Et voi lisätä useampia sormenjälkiä."</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Enempää sormenjälkiä ei voi lisätä."</string>
@@ -951,7 +947,7 @@
     <string name="wifi_sap_no_channel_error" msgid="2126487622024749402">"5 GHz:n kaista ei ole käytettävissä tässä maassa."</string>
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"Lentokonetilassa"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Ilmoita julkisista verkoista"</string>
-    <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Ilmoita, kun käytettävissä on laadukkaita julkisia verkkoja."</string>
+    <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Ilmoita, kun käytettävissä on laadukkaita julkisia verkkoja"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Laita Wi-Fi päälle automaattisesti"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wi-Fi laitetaan automaattisesti päälle, kun lähistöllä on kotiverkkosi tai muita laadukkaita tallennettuja verkkoja"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Ei käytettävissä, koska sijainti on poistettu käytöstä. Ota "<annotation id="link">"sijainti"</annotation>" käyttöön."</string>
@@ -1163,9 +1159,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (ellei ohitettu yksityisellä DNS:llä)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Yhdyskäytävä"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Verkon etuliitteen pituus"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi-Fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi-Fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi-Fi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi-Fi Direct"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"Laitteen tiedot"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"Muista tämä yhteys"</string>
@@ -2352,13 +2345,13 @@
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Näin voit lähentää näyttöä:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Aloita suurennus käyttämällä pikanäppäintä&lt;br/&gt; {1,number,integer}. Napauta näyttöä&lt;br/&gt; {2,number,integer}. Siirry näytöllä vetämällä kahdella sormella&lt;br/&gt; {3,number,integer}. Säädä zoomausta nipistämällä kahdella sormella&lt;br/&gt; {4,number,integer}. Lopeta suurennus käyttämällä pikanäppäintä&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Väliaikainen lähentäminen:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Varmista, että suurennustapa on asetettu koko näytölle &lt;br/&gt; {1,number,integer}. Aloita suurennus käyttämällä pikanäppäintä&lt;br/&gt; {2,number,integer}. Kosketa näyttöä mistä tahansa pitkään&lt;br/&gt; {3,number,integer}. Siirry näytöllä vetämällä kahdella sormella&lt;br/&gt; {4,number,integer}. Lopeta suurennus nostamalla sormi näytöltä"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Kun suurennus on käytössä, voit suurentaa näytöllä olevia kohteita.\n\n"<b>"Zoomaa:"</b>" käynnistä suurennus ja napauta sitten haluamaasi kohtaa näytöllä\n"<ul><li>"Vieritä: vedä vähintään kahta sormea näytön poikki"</li>\n<li>"Säädä zoomausta: nipistä vähintään kaksi sormea yhteen tai levitä ne erilleen"</li></ul>\n\n<b>"Zoomaa väliaikaisesti:"</b>" käynnistä suurennus ja paina pitkään missä tahansa näytöllä\n"<ul><li>"Liiku näytöllä: vedä sormea eri suuntiin"</li>\n<li>"Loitonna: nosta sormi"</li></ul>\n\n"Suurennus ei toimi näppäimistöllä tai siirtymispalkissa."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Sivu <xliff:g id="CURRENT_PAGE">%1$d</xliff:g>/<xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
-    <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Avaa esteettömyyspainikkeella"</string>
+    <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Avaa saavutettavuuspainikkeella"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Avaa painamalla äänenvoimakkuuspainikkeita"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Avaa kolmoisnapauttamalla näyttöä"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Avaa eleellä"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Käytä esteettömyyselettä"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Laita ominaisuus päälle napauttamalla näytön alareunassa olevaa esteettömyyspainiketta <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>.\n\nVaihda ominaisuudesta toiseen painamalla esteettömyyspainiketta pitkään."</string>
-    <string name="accessibility_tutorial_dialog_message_floating_button" msgid="2551777208185138391">"Ota ominaisuus käyttöön napauttamalla näytöllä näkyvää esteettömyyspainiketta."</string>
+    <string name="accessibility_tutorial_dialog_message_floating_button" msgid="2551777208185138391">"Ota ominaisuus käyttöön napauttamalla näytöllä näkyvää saavutettavuuspainiketta."</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Laita tämä ominaisuus päälle painamalla pitkään molempia äänenvoimakkuuspainikkeita."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Aloita tai lopeta suurennus kolmoisnapauttamalla missä vain näytöllä."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Laita ominaisuus päälle pyyhkäisemällä näytön alalaidasta ylös kahdella sormella.\n\nVaihda ominaisuudesta toiseen pyyhkäisemällä ylös kahdella sormella ja koskettamalla pitkään."</string>
@@ -2367,11 +2360,11 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Laita esteettömyysominaisuus päälle pyyhkäisemällä näytön alalaidasta ylös kolmella sormella.\n\nVaihda ominaisuudesta toiseen pyyhkäisemällä ylös kolmella sormella ja koskettamalla pitkään."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Pikanäppäin: <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Esteettömyyspainike"</string>
+    <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Saavutettavuuspainike"</string>
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Esteettömyysele"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Pyyhkäise kahdella sormella ylöspäin"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Pyyhkäise kolmella sormella ylöspäin"</string>
-    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Napauta esteettömyyspainiketta"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Napauta saavutettavuuspainiketta"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"Käytä esteettömyyselettä"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Napauta näytön alareunassa olevaa esteettömyyspainiketta <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>.\n\nVaihda ominaisuudesta toiseen painamalla esteettömyyspainiketta pitkään."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Pyyhkäise näytön alalaidasta ylös kahdella sormella.\n\nVaihda ominaisuudesta toiseen pyyhkäisemällä ylös kahdella sormella ja koskettamalla pitkään."</string>
@@ -2392,14 +2385,14 @@
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Pikanäppäinasetukset"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"Pikakuvake lukitusnäytöllä"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Salli ominaisuuden päälle laittaminen lukitusnäytön pikakuvakkeella. Paina molempia äänenvoimakkuuspainikkeita muutaman sekunnin ajan."</string>
-    <string name="accessibility_button_title" msgid="5251235485581552614">"Esteettömyyspainike"</string>
-    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Esteettömyyspainike ja ‑ele"</string>
+    <string name="accessibility_button_title" msgid="5251235485581552614">"Saavutettavuuspainike"</string>
+    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Saavutettavuuspainike ja ‑ele"</string>
     <string name="accessibility_button_intro_text" msgid="80993874471745687">"Avaa saavutettavuusominaisuudet nopeasti miltä tahansa näytöltä"</string>
     <string name="accessibility_button_about_title" msgid="3581116105084067926">"Tietoja esteettömyyspainikkeesta"</string>
     <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"Tietoja esteettömyyspainikkeesta ja ‑eleestä"</string>
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Lue lisää esteettömyyspainikkeesta ja ‑eleestä"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Esteettömyyspainikkeen käyttö. Elettä ei voi käyttää kolmen painikkeen navigoinnissa."</string>
-    <string name="accessibility_button_summary" msgid="8510939012631455831">"Avaa esteettömyysominaisuudet nopeasti"</string>
+    <string name="accessibility_button_summary" msgid="8510939012631455831">"Avaa saavutettavuusominaisuudet nopeasti"</string>
     <string name="accessibility_button_gesture_description" msgid="7507097717493960397"><b>"Näin pääset alkuun"</b>\n"1. Siirry saavutettavuusasetuksiin\n2. Valitse ominaisuus ja napauta pikanäppäintä\n3. Valitse, haluatko saada pääsyn ominaisuuteen painikkeella vai eleellä"</string>
     <string name="accessibility_button_description" msgid="1261273371298608222"><b>"Näin pääset alkuun"</b>\n"1. Siirry saavutettavuusasetuksiin\n2. Valitse ominaisuus ja napauta pikanäppäintä\n3. Valitse painike, jolla saat pääsyn ominaisuuteen"</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Käytä painiketta tai elettä"</string>
@@ -2429,9 +2422,9 @@
     <string name="accessibility_timeout_30secs" msgid="7814673496724760684">"30 sekuntia"</string>
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 minuutti"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 minuuttia"</string>
-    <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Toiminnon aika (esteettömyyskatkaisu)"</string>
-    <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"Tietoja toiminnon ajasta (esteettömyyskatkaisu)"</string>
-    <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"Lue lisää toiminnon ajasta (esteettömyyskatkaisu)"</string>
+    <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Toiminnon aika (saavutettavuuskatkaisu)"</string>
+    <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"Tietoja toiminnon ajasta (saavutettavuuskatkaisu)"</string>
+    <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"Lue lisää toiminnon ajasta (saavutettavuuskatkaisu)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Reagointiaika"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Kaikki sovellukset eivät tue tätä ajoitusasetusta"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Valitse, miten pitkään haluat nähdä tilapäiset viestit, joissa pyydetään tekemään toiminto"</string>
@@ -2440,7 +2433,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Käytä käänteisiä värejä"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Käänteisten värien pikanäppäin"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Käänteiset värit muuttaa kirkkaat näytöt tummiksi. Se myös muuttaa tummat näytöt vaaleiksi."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Pidä mielessäd&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Median ja kuvien värit muuttuvat&lt;/li&gt; &lt;li&gt; Käänteiset värit toimii kaikilla sovelluksilla&lt;/li&gt; &lt;li&gt; Saat tumman taustan käyttämällä tummaa teemaa&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Pidä mielessä&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Median ja kuvien värit muuttuvat&lt;/li&gt; &lt;li&gt; Käänteiset värit toimii kaikilla sovelluksilla&lt;/li&gt; &lt;li&gt; Saat tumman taustan käyttämällä tummaa teemaa&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Automaattinen klikkaus (viiveaika)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Automaattinen klikkaus (viiveaika)"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Lue lisää automaattisesta klikkauksesta (viiveaika)"</string>
@@ -2497,7 +2490,7 @@
     <string name="captioning_more_options_title" msgid="3484496882942539652">"Lisää asetuksia"</string>
     <string name="accessibility_caption_preference_intro" msgid="6662649135457507767">"Muokkaa tekstityksen kokoa ja tyyliä helpommin luettavaksi"</string>
     <string name="accessibility_caption_preference_summary" msgid="632875702223135121">"Kaikki mediasovellukset eivät tue näitä tekstitysasetuksia"</string>
-    <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Esteettömyyspainike"</string>
+    <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Saavutettavuuspainike"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Pyyhkäisy kahdella sormella alhaalta ylöspäin"</string>
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Paina äänenvoimakkuuspainikkeita pitkään"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Kolmoisnapauta näyttöä"</string>
@@ -2526,7 +2519,7 @@
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"Pois päältä"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"Palvelu ei toimi. Katso lisätietoja napauttamalla."</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Tämä palvelu ei toimi oikein."</string>
-    <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Esteettömyyden pikanäppäimet"</string>
+    <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Saavutettavuuden pikanäppäimet"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Näytä pika-asetuksissa"</string>
     <string name="daltonizer_mode_deuteranomaly_title" msgid="4210949400493358650">"Puna-vihersokeus"</string>
     <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Puna-vihersokeus"</string>
@@ -2601,7 +2594,7 @@
     <string name="capabilities_list_title" msgid="1225853611983394386">"<xliff:g id="SERVICE">%1$s</xliff:g> saa luvan:"</string>
     <string name="touch_filtered_warning" msgid="4225815157460318241">"Sovellus peittää lupapyynnön, joten Asetukset ei voi vahvistaa valintaasi."</string>
     <string name="accessibility_service_warning" msgid="6779187188736432618">"<xliff:g id="SERVICE">%1$s</xliff:g> pyytää laitteen täyttä hallintaoikeutta. Palvelu voi lukea näytön sisällön ja toimia esteettömyyspalvelujen käyttäjien puolesta. Hallintaoikeudet ovat useimmille sovelluksille liian laajat."</string>
-    <string name="accessibility_service_warning_description" msgid="6573203795976134751">"Täysi käyttöoikeus sopii esteettömyyssovelluksille, mutta ei useimmille sovelluksille."</string>
+    <string name="accessibility_service_warning_description" msgid="6573203795976134751">"Täysi käyttöoikeus sopii saavutettavuussovelluksille, mutta ei useimmille sovelluksille."</string>
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Näytön katselu ja ohjaus"</string>
     <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"Se voi lukea kaiken näytön sisällön ja näyttää sisältöä kaikista sovelluksista."</string>
     <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"Toimintojen näkeminen ja suorittaminen"</string>
@@ -3724,7 +3717,7 @@
     <string name="emergency_tone_alert" msgid="1977698889522966589">"Soittoäänet"</string>
     <string name="emergency_tone_vibrate" msgid="6282296789406984698">"Värinä"</string>
     <string name="boot_sounds_title" msgid="5033062848948884111">"Käynnistysäänet"</string>
-    <string name="live_caption_title" msgid="8617086825712756983">"Live-tekstitys"</string>
+    <string name="live_caption_title" msgid="8617086825712756983">"Livetekstitys"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Tekstitä media automaattisesti"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"Puhelimen kaiutin"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Langalliset kuulokkeet"</string>
@@ -4764,7 +4757,7 @@
     <string name="data_warning" msgid="2925054658166062884">"Datavaroitus"</string>
     <string name="data_warning_footnote" msgid="5991901765915710592">"Datavaroitus ja dataraja perustuvat laitteesi mittauksiin. Operaattorin mittaukset saattavat erota näistä."</string>
     <string name="set_data_limit" msgid="9010326815874642680">"Aseta datankäyttöraja"</string>
-    <string name="data_limit" msgid="8731731657513652363">"Datankäyttöraja"</string>
+    <string name="data_limit" msgid="8731731657513652363">"Dataraja"</string>
     <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_1">%1$s</xliff:g> käytetty <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="configure" msgid="1499586749829665889">"Määritä"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"Muut datan käyttöön laskettavat sovellukset"</string>
@@ -4927,7 +4920,7 @@
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"Kokeile uutta aloitusnäyttöpainiketta"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"Ota käyttöön uusi ele sovelluksesta toiseen vaihtamiseen."</string>
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Turvallisuus ja hätätilanteet"</string>
-    <string name="emergency_dashboard_summary" msgid="401033951074039302">"Hätäpuhelut, terveystiedot, ilmoitukset"</string>
+    <string name="emergency_dashboard_summary" msgid="401033951074039302">"Hätäpuhelut, terveystiedot, hälytykset"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Eleillä navigointi"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Siirry aloitusnäytölle pyyhkäisemällä ylös näytön alalaidasta. Vaihda sovelluksesta toiseen pyyhkäisemällä alareunasta ylös, pitämällä sormea paikallaan ja päästämällä sitten irti. Palaa takaisin pyyhkäisemällä näytön vasemmasta tai oikeasta reunasta."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Kolmen painikkeen navigointi"</string>
@@ -5162,7 +5155,7 @@
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Seuraa kaikkia GNSS-kuvioita ja ‑taajuuksia, joissa ei ole pulssisuhdetta"</string>
     <string name="input_method_category" msgid="2252659253631639005">"Syöttötapa"</string>
     <string name="stylus_handwriting" msgid="2154591374132794563">"Käsinkirjoitus näyttökynällä"</string>
-    <string name="stylus_handwriting_summary" msgid="6333425895172696950">"Kun asetus on päällä, tämänhetkinen syöttötapa vastaanottaa näyttökynän MotionEvent-objektin, jos muokkaaja on kohdennettuna."</string>
+    <string name="stylus_handwriting_summary" msgid="6333425895172696950">"Kun asetus on päällä, tämänhetkinen syöttötapa vastaanottaa näyttökynän MotionEvent-objektin, jos muokkaaja on kohdennettuna"</string>
     <string name="device_theme" msgid="5027604586494772471">"Laitteen teema"</string>
     <string name="default_theme" msgid="4815428567082263639">"Oletus"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"Verkon nimi"</string>
@@ -5540,7 +5533,7 @@
     <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"Näytä virtavalikko painamalla pitkään"</string>
     <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"Pitkään painaminen poissa käytöstä"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Käyttääksesi tätä aseta ensin näytön lukitus"</string>
-    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Paina pitkään käynnistääksesi Assistant"</string>
+    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Paina pitkään käynnistääksesi Assistantin"</string>
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Käynnistä Assistant painamalla virtapainiketta pitkään"</string>
     <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Virta‑ ja Hätätilannevalikko:\nPaina virta‑ ja äänenvoimakkuuspainiketta yhtä aikaa."</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Soittamisen esto:\nPikanäppäin näkyy äänenvoimakkuusvalikossa."</string>
@@ -5772,7 +5765,15 @@
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Pään liikkeiden seuranta"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Audio muuttuu pääsi liikkeen mukana kuulostaakseen luonnollisemmalta"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Verkon latausnopeuden rajoitus"</string>
-    <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Määritä verkon kaistanleveyden sisääntulonopeus, jota sovelletaan kaikkiin verkkoihin, jotka tarjoavat internetyhteyden."</string>
+    <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Määritä verkon kaistanleveyden sisääntulonopeus, jota sovelletaan kaikkiin verkkoihin, jotka tarjoavat internetyhteyden"</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Määritä verkon latausnopeuden rajoitus"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Ei rajoitusta"</string>
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Lähetä"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Kuuntele lähellä olevia lähetyksiä"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Lähetä mediaa lähellä oleviin laitteisiin tai kuuntele jonkun toisen lähetystä"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Lähetykset"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Kuunnellaan lähetystä"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Etsi lähetyksiä"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Poistu lähetyksestä"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Lue QR-koodi"</string>
 </resources>

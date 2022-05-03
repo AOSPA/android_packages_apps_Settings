@@ -227,9 +227,11 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Пропоновані мови"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Усі мови"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Мова системи"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"За умовчанням – <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <!-- no translation found for preference_of_system_locale_summary (5612241394431188535) -->
+    <skip />
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Вибір мови для цього додатка в налаштуваннях неможливий"</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Вибрати мову для цього додатка в налаштуваннях не можна."</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Видалити вибрані мови?</item>
       <item quantity="few">Видалити вибрані мови?</item>
@@ -293,10 +295,10 @@
     <string name="date_time_search_region" msgid="1364133854952610919">"Регіон пошуку"</string>
     <string name="date_time_select_region" msgid="5449345333305056072">"Регіон"</string>
     <string name="date_time_select_fixed_offset_time_zones" msgid="594848300882055361">"Виберіть зміщення від UTC"</string>
-    <string name="zone_change_to_from_dst" msgid="686451769985774294">"<xliff:g id="TIME_TYPE">%1$s</xliff:g> починається <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
+    <string name="zone_change_to_from_dst" msgid="686451769985774294">"<xliff:g id="TIME_TYPE">%1$s</xliff:g> починається <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>"</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
-    <string name="zone_info_footer" msgid="7004693956837388129">"Діє <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g> починається <xliff:g id="TRANSITION_DATE">%3$s</xliff:g>."</string>
+    <string name="zone_info_footer" msgid="7004693956837388129">"Діє <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g> починається <xliff:g id="TRANSITION_DATE">%3$s</xliff:g>"</string>
     <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"Діє <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Немає переходу на літній час."</string>
     <string name="zone_time_type_dst" msgid="9189689342265305808">"Літній час"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Стандартний час"</string>
@@ -348,8 +350,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"Статус безпеки"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Блокування екрана, сервіс Знайти пристрій, безпека додатків"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Безпека й конфіденційність"</string>
-    <!-- no translation found for safety_center_summary (3554867379951053869) -->
-    <skip />
+    <string name="safety_center_summary" msgid="3554867379951053869">"Безпека додатків, блокування пристрою, дозволи"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Обличчя додано"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Натисніть, щоб налаштувати фейсконтроль"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Фейсконтроль"</string>
@@ -595,14 +596,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Цей спосіб блокування екрана вимкнено. Щоб отримати докладнішу інформацію, зв’яжіться з адміністратором своєї організації. "<annotation id="admin_details">"Докладніше"</annotation>\n\n"Ви все одно можете робити покупки та заходити в додатки за допомогою відбитка пальця. "<annotation id="url">"Докладніше"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Підніміть палець і знову торкніться датчика"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Не вдається скористатися сканером відбитків пальців. Зверніться до постачальника послуг із ремонту."</string>
-    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
-    <skip />
+    <string name="security_advanced_settings" msgid="6260756619837834042">"Інші налаштування безпеки"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Блокування робочого профілю, шифрування тощо"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Шифрування, облікові дані тощо"</string>
+    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"безпека, додаткові налаштування безпеки, додаткові налаштування, розширені налаштування безпеки"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Можна додати максимум стільки відбитків: <xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Ви додали максимальну кількість відбитків пальців"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Більше не можна додати відбитки пальців"</string>
@@ -1203,9 +1200,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (якщо не замінено приватним DNS-сервером)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Шлюз"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Довжина префіксу мережі"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi-Fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi-Fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi-Fi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi-Fi Direct"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"Інформація про пристрій"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"Запам’ятати це з’єднання"</string>
@@ -1810,7 +1804,7 @@
     <string name="main_clear_title" msgid="277664302144837723">"Стерти всі дані (скинути налаштування)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Стерти всі дані (скинути налаштування)"</string>
     <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"Буде видалено всі дані з "<b>"внутрішньої пам\'яті"</b>" вашого планшета, зокрема:\n\n"<li>"обліковий запис Google;"</li>\n<li>"дані й налаштування системи та додатків;"</li>\n<li>"завантажені додатки."</li></string>
-    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"Буде видалено всі дані з "<b>"внутрішньої пам\'яті"</b>" вашого телефона, зокрема:\n\n"<li>"обліковий запис Google;"</li>\n<li>"дані й налаштування системи та додатків;"</li>\n<li>"завантажені додатки."</li></string>
+    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"Буде видалено всі дані з "<b>"внутрішньої пам’яті"</b>" вашого телефона, зокрема:\n\n"<li>"обліковий запис Google"</li>\n<li>"дані й налаштування системи та додатків"</li>\n<li>"завантажені додатки"</li></string>
     <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"Наразі ви ввійшли в такі облікові записи:\n"</string>
     <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"На цьому пристрої є інші користувачі.\n"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"музику"</li>\n<li>"фото"</li>\n<li>"інші дані користувача"</li></string>
@@ -1961,7 +1955,7 @@
     <string name="module_license_title" msgid="8705484239826702828">"Ліцензії оновлень системи Google Play"</string>
     <string name="terms_title" msgid="2071742973672326073">"Заг. положення й умови"</string>
     <string name="webview_license_title" msgid="5832692241345780517">"Ліцензія компонента WebView"</string>
-    <string name="wallpaper_attributions" msgid="4323659759250650736">"Показувати авторів фонових малюнків"</string>
+    <string name="wallpaper_attributions" msgid="4323659759250650736">"Авторство фонових малюнків"</string>
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"Постачальники супутникових зображень:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"Посібник"</string>
     <string name="settings_manual_activity_unavailable" msgid="2514549851682321576">"Не вдалося завантажити посібник."</string>
@@ -2354,7 +2348,7 @@
     <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Докладніше про параметри субтитрів"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Збільшення"</string>
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Швидкий запуск збільшення"</string>
-    <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Збільшити текст під час введення"</string>
+    <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Збільшувити текст під час введення"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Лупа переміщуватиметься за текстом, який ви вводите"</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Про збільшення"</string>
     <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"Докладніше про збільшення"</string>
@@ -2373,7 +2367,7 @@
     <string name="accessibility_magnification_switch_shortcut_positive_button" msgid="2446942190957296957">"Перейти на кнопку спеціальних можливостей"</string>
     <string name="accessibility_magnification_switch_shortcut_negative_button" msgid="7115794462123071594">"Використовувати потрійний дотик"</string>
     <string name="accessibility_magnification_triple_tap_warning_title" msgid="8484669851397296597">"Клавіатура може працювати повільніше"</string>
-    <string name="accessibility_magnification_triple_tap_warning_message" msgid="2008671502848936410">"Збільшуючи частину екрана за допомогою потрійного дотику, ви можете помітити проблеми з клавіатурою.\n\nЩоб уникнути цього, змініть швидку команду збільшення з потрійного дотику на інший варіант.\n"<annotation id="link">"Змінити налаштування"</annotation></string>
+    <string name="accessibility_magnification_triple_tap_warning_message" msgid="2008671502848936410">"Збільшуючи частину екрана за допомогою потрійного дотику, ви можете помітити проблеми з клавіатурою.\n\nЩоб уникнути цього, виберіть іншу швидку команду для збільшення екрана.\n"<annotation id="link">"Змінити налаштування"</annotation></string>
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Усе одно продовжити"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Скасувати"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Налаштування збільшення"</string>
@@ -2454,7 +2448,7 @@
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Розташування"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Розмір"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Прихована, коли не використовується"</string>
-    <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Кнопка зникає через кілька секунд, щоб краще було видно екран"</string>
+    <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Стає прозорою за кілька секунд, щоб краще було видно екран"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Прозорість неактивної кнопки"</string>
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"Прозора"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"Непрозора"</string>
@@ -3318,7 +3312,7 @@
     <string name="data_usage_cycle_editor_positive" msgid="6110165528024717527">"Установити"</string>
     <string name="data_usage_warning_editor_title" msgid="5252748452973120016">"Установити застереження про використання даних"</string>
     <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"Установити ліміт використання даних"</string>
-    <string name="data_usage_limit_dialog_title" msgid="2053134451707801439">"Обмежити використання даних"</string>
+    <string name="data_usage_limit_dialog_title" msgid="2053134451707801439">"Обмежити використання трафіку"</string>
     <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="6000062970083379466">"Планшет вимкне мобільний трафік, коли буде досягнено вказаного ліміту.\n\nОскільки методи обліку використання трафіку телефона й оператора можуть відрізнятися, радимо встановити занижений ліміт."</string>
     <string name="data_usage_limit_dialog_mobile" product="default" msgid="4942895670789168024">"Телефон вимкне мобільний трафік, коли буде досягнено вказаного ліміту.\n\nОскільки методи обліку використання трафіку телефона й оператора можуть відрізнятися, радимо встановити занижений ліміт."</string>
     <string name="data_usage_restrict_background_title" msgid="2745551538820692821">"Обмежити використання фонових даних?"</string>
@@ -4191,7 +4185,7 @@
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Дозволити доступ у режимі \"Не турбувати\""</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Установлені додатки не запитували доступу до функції \"Не турбувати\""</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"Завантаження додатків…"</string>
-    <string name="app_notifications_off_desc" msgid="6691342160980435901">"Android блокує сповіщення з цього додатка на цьому пристрої"</string>
+    <string name="app_notifications_off_desc" msgid="6691342160980435901">"За вашим запитом Android блокує на цьому пристрої сповіщення з цього додатка"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"На ваш запит Android блокує цю категорію сповіщень на пристрої"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"На ваш запит Android блокує цю групу сповіщень на пристрої"</string>
     <string name="notification_channels" msgid="1502969522886493799">"Категорії"</string>
@@ -5953,4 +5947,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Налаштуйте ліміт вхідної пропускної спроможності мережі, який застосовуватиметься до всіх мереж, що забезпечують інтернет-з’єднання."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Налаштувати ліміт швидкості завантаження в мережі"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Немає ліміту"</string>
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Трансляція"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Слухайте трансляції з пристроїв поблизу"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Транслюйте мультимедійний контент на пристрої поблизу або слухайте чиюсь трансляцію"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Трансляції"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Прослуховування"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Знайти трансляції"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Вийти з трансляції"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Сканувати QR-код"</string>
 </resources>
