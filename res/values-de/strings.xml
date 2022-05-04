@@ -225,9 +225,11 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Vorgeschlagene Sprachen"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Alle Sprachen"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Systemsprache"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Standardeinstellung des Systems – <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <!-- no translation found for preference_of_system_locale_summary (5612241394431188535) -->
+    <skip />
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Für diese App ist in den Einstellungen keine Sprachauswahl verfügbar."</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Für diese App kannst du in den Einstellungen keine Sprache auswählen."</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Ausgewählte Sprachen entfernen?</item>
       <item quantity="one">Ausgewählte Sprache entfernen?</item>
@@ -342,8 +344,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"Sicherheitsstatus"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Displaysperre, „Mein Gerät finden“, App-Sicherheit"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Sicherheit &amp; Datenschutz"</string>
-    <!-- no translation found for safety_center_summary (3554867379951053869) -->
-    <skip />
+    <string name="safety_center_summary" msgid="3554867379951053869">"App-Sicherheit, Gerätesperre, Berechtigungen"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Gesicht hinzugefügt"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Zum Einrichten der Gesichtsentsperrung tippen"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Gesichtsentsperrung"</string>
@@ -589,14 +590,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Die Option für die Displaysperre ist deaktiviert. Wende dich an den Administrator deiner Organisation, um weitere Informationen zu erhalten. "<annotation id="admin_details">"Weitere Details"</annotation>\n\n"Du kannst deinen Fingerabdruck dennoch verwenden, um Käufe zu autorisieren und dich in Apps anzumelden. "<annotation id="url">"Weitere Informationen"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Hebe den Finger und berühre den Sensor dann noch einmal"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Der Fingerabdrucksensor kann nicht verwendet werden. Suche einen Reparaturdienstleister auf."</string>
-    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
-    <skip />
+    <string name="security_advanced_settings" msgid="6260756619837834042">"Weitere Sicherheitseinstellungen"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Sperre des Arbeitsprofils, Verschlüsselung und mehr"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Verschlüsselung, Anmeldedaten und mehr"</string>
+    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"Sicherheit, weitere Sicherheitseinstellungen, weitere Einstellungen, erweiterte Sicherheitseinstellungen"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Du kannst bis zu <xliff:g id="COUNT">%d</xliff:g> Fingerabdrücke hinzufügen."</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Du hast die maximale Anzahl an Fingerabdrücken hinzugefügt"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Es können keine Fingerabdrücke mehr hinzugefügt werden"</string>
@@ -956,7 +953,7 @@
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Über öffentliche Netzwerke informieren"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Benachrichtigen, wenn ein leistungsstarkes öffentliches Netzwerk verfügbar ist"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"WLAN automatisch aktivieren"</string>
-    <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wenn du in den Abdeckungsbereich gespeicherter WLANs kommst und die Signalqualität gut ist, wird die WLAN-Funktion automatisch wieder eingeschaltet"</string>
+    <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Die WLAN-Funktion wird automatisch eingeschaltet, wenn du in den Abdeckungsbereich gespeicherter WLANs kommst und die Signalqualität gut ist."</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Nicht verfügbar, weil die Einstellung \"Standort\" deaktiviert ist. Aktiviere die Einstellung "<annotation id="link">"Standort"</annotation>"."</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="1771489741850119751">"Nicht verfügbar, weil WLAN-Suche deaktiviert ist"</string>
     <string name="wifi_wakeup_summary_scoring_disabled" msgid="3615120120960539780">"Für diese Funktion musst du zuerst einen Anbieter von Netzwerkbewertungen auswählen"</string>
@@ -1166,9 +1163,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (sofern nicht von privatem DNS überschrieben)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Gateway"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Länge d. Netzwerkpräfixes"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi-Fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi-Fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi-Fi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi-Fi Direct"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"Geräte-Informationen"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"Diese Verbindung speichern"</string>
@@ -2445,11 +2439,11 @@
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Die Farbumkehr macht helle Displays dunkel. Und sie macht dunkle Displays hell."</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Hinweis&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Das führt zu einer veränderten Wiedergabe der Farben in Medien und Bildern&lt;/li&gt; &lt;li&gt; Die Farbumkehr funktioniert in allen Apps&lt;/li&gt; &lt;li&gt; Ein dunkler Hintergrund kann stattdessen mit dem dunklen Design angezeigt werden&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Automatischer Klick (Verweildauer)"</string>
-    <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Über automatische Klicks (Verweildauer)"</string>
+    <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Über automatischer Klick (Verweildauer)"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Weitere Informationen zu automatischen Klicks (Verweildauer)"</string>
     <string name="accessibility_autoclick_intro_text" msgid="8959680635470639347">"Du kannst eine verbundene Maus so einstellen, dass sie automatisch klickt, wenn sich der Cursor für eine bestimmte Zeit nicht bewegt"</string>
-    <string name="accessibility_autoclick_description" msgid="6695732131412361101">"Automatische Klicks können nützlich sein, wenn es schwierig ist, mit der Maus zu klicken"</string>
-    <string name="accessibility_autoclick_default_title" msgid="2024730028293793490">"Automatische Klicks deaktivieren"</string>
+    <string name="accessibility_autoclick_description" msgid="6695732131412361101">"Automatischer Klick kann nützlich sein, wenn es schwierig ist, mit der Maus zu klicken"</string>
+    <string name="accessibility_autoclick_default_title" msgid="2024730028293793490">"Automatischer Klick deaktivieren"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Kurz"</string>
     <string name="accessibility_autoclick_short_summary" msgid="4106953930081213514">"0,2 Sekunden"</string>
     <string name="accessibility_autoclick_medium_title" msgid="3134175117576834320">"Mittel"</string>
@@ -2539,7 +2533,7 @@
     <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Rot-Sehschwäche"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomalie"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Extradunkel"</string>
-    <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Display extradunkel machen"</string>
+    <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Display extradunkel aktivieren"</string>
     <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Kurzbefehl für Extradunkel"</string>
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Über die Funktion „Extradunkel“"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Das Display dunkler machen als die niedrigste Helligkeit deines Smartphones"</string>
@@ -3977,11 +3971,11 @@
     <string name="notification_importance_low" msgid="7562535765919565273">"Ohne Ton anzeigen"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"Akustisches Signal"</string>
     <string name="notification_importance_high" msgid="8453789143477210550">"Akustisches Signal und Bildschirmbenachrichtigung"</string>
-    <string name="notification_importance_high_silent" msgid="8977232884004607985">"Auf Bildschirm aufpoppen"</string>
+    <string name="notification_importance_high_silent" msgid="8977232884004607985">"Popup auf dem Bildschirm"</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"Minimieren"</string>
     <string name="notification_importance_low_title" msgid="658158049378796947">"Mittel"</string>
     <string name="notification_importance_default_title" msgid="8875198696330289686">"Hoch"</string>
-    <string name="notification_importance_high_title" msgid="394129291760607808">"Auf Bildschirm aufpoppen"</string>
+    <string name="notification_importance_high_title" msgid="394129291760607808">"Popup auf dem Bildschirm"</string>
     <string name="notification_block_title" msgid="7392909527700971673">"Blockieren"</string>
     <string name="notification_silence_title" msgid="4085829874452944989">"Lautlos"</string>
     <string name="notification_alert_title" msgid="1632401211722199217">"Standard"</string>
@@ -5328,7 +5322,7 @@
     <string name="calls_preference" msgid="2166481296066890129">"Anrufeinstellung"</string>
     <string name="sms_preference" msgid="7742964962568219351">"SMS-Einstellung"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Jedes Mal fragen"</string>
-    <string name="mobile_network_summary_add_a_network" msgid="9079866102827526779">"Netz hinzufügen"</string>
+    <string name="mobile_network_summary_add_a_network" msgid="9079866102827526779">"Netzwerk hinzufügen"</string>
     <plurals name="mobile_network_summary_count" formatted="false" msgid="5173633860800230925">
       <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> SIM-Karten</item>
       <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> SIM-Karte</item>
@@ -5778,4 +5772,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Damit kannst du die Ratenbegrenzung für eingehenden Traffic über die Netzwerkbandbreite konfigurieren, die für alle Netzwerke angewendet wird, die eine Internetverbindung zur Verfügung stellen."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Ratenbegrenzung für Downloads im Netzwerk konfigurieren"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Keine Begrenzung"</string>
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Übertragen"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Du kannst dir das anhören, was andere in deiner Nähe abspielen"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Du kannst Medien auf Geräte in deiner Nähe übertragen oder dir das anhören, was andere übertragen"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Übertragungen"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Läuft gerade"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Übertragungen finden"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Übertragung verlassen"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"QR-Code scannen"</string>
 </resources>

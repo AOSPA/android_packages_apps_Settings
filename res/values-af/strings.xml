@@ -225,9 +225,10 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Voorgestelde tale"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Alle tale"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Stelseltaal"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Stelselverstek – <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Stelselverstek"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Taalkeuse vir hierdie program is nie in Instellings beskikbaar nie."</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Jy kan nie in Instellings ’n taal vir hierdie program kies nie."</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Verwyder gekose tale?</item>
       <item quantity="one">Verwyder gekose taal?</item>
@@ -342,8 +343,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"Sekuriteitstatus"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Skermslot, Kry My Toestel, programsekuriteit"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Sekuriteit en privaatheid"</string>
-    <!-- no translation found for safety_center_summary (3554867379951053869) -->
-    <skip />
+    <string name="safety_center_summary" msgid="3554867379951053869">"Programsekuriteit, toestelslot, toestemmings"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Gesig is bygevoeg"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Tik om gesig op te stel"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Gesigslot"</string>
@@ -587,14 +587,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Die skermslotopsie is gedeaktiveer. Kontak jou organisasie se administrateur om meer te wete te kom. "<annotation id="admin_details">"Nog besonderhede"</annotation>\n\n"Jy kan steeds jou vingerafdruk gebruik om aankope en programtoegang te magtig. "<annotation id="url">"Kom meer te wete"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Lig vinger op en raak sensor dan weer"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Kan nie vingerafdruksensor gebruik nie. Besoek \'n verskaffer wat herstelwerk doen"</string>
-    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
-    <skip />
+    <string name="security_advanced_settings" msgid="6260756619837834042">"Meer sekuriteitinstellings"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Werkprofielslot, enkripsie, en meer"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Enkripsie, eiebewyse, en meer"</string>
+    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"sekuriteit, meer sekuriteitinstellings, meer instellings, gevorderde sekuriteitinstellings"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Jy kan tot <xliff:g id="COUNT">%d</xliff:g> vingerafdrukke byvoeg"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Jy het die maksimum aantal vingerafdrukke bygevoeg"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Kan nie nog vingerafdrukke byvoeg nie"</string>
@@ -1163,9 +1159,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (tensy deur private DNS geïgnoreer)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Deurgang"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Lengte van netwerkvoorvoegsel"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi-fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi-fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi-fi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi-Fi Direct"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"Toestelinligting"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"Onthou hierdie verbinding"</string>
@@ -2382,7 +2375,7 @@
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"hou volumesleutels"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Druk en hou albei volumesleutels"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Tik 3 keer op skerm"</string>
-    <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"trippeltik op skerm"</string>
+    <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"tripeltik op skerm"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2102327956423320536">"Tik {0,number,integer} keer vinnig op skerm. Hierdie kortpad kan jou toestel stadiger maak"</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Gevorderd"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Die Toeganklikheidsknoppie is gestel op <xliff:g id="SERVICE">%1$s</xliff:g>. Raak en hou die Toeganklikheidsknoppie en kies vergroting as jy vergroting wil gebruik."</string>
@@ -3890,7 +3883,7 @@
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Kanselleer"</string>
     <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Aan / Gesprekke kan as swerwende ikone verskyn"</string>
     <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"Laat programme toe om borrels te wys"</string>
-    <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"Sommige gesprekke sal as swerwende ikone bo-oor ander programme verskyn"</string>
+    <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"Sommige gesprekke sal as swewende ikone bo-oor ander programme verskyn"</string>
     <string name="bubble_app_setting_all" msgid="312524752846978277">"Alle gesprekke kan borrels word"</string>
     <string name="bubble_app_setting_selected" msgid="4324386074198040675">"Geselekteerde gesprekke kan borrels word"</string>
     <string name="bubble_app_setting_none" msgid="8643594711863996418">"Niks kan borrels word nie"</string>
@@ -5775,4 +5768,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Stel netwerkbandwydte se binnedringingkoerslimiet op wat op alle netwerke wat \'n internetverbinding verskaf, toegepas word."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Stel netwerkaflaaikoerslimiet op"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Geen limiet nie"</string>
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Saai uit"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Luister na uitsendings wat in jou omtrek speel"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Saai media na toestelle in jou omtrek uit, of luister na iemand anders se uitsending"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Uitsendings"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Luister tans na"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Soek uitsendings"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Verlaat uitsending"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Skandeer QR-kode"</string>
 </resources>
