@@ -16,8 +16,6 @@
 
 package com.android.settings.deviceinfo;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
@@ -27,7 +25,6 @@ import android.telephony.TelephonyManager;
 import android.telephony.ims.ImsMmTelManager;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.Lifecycle;
@@ -129,17 +126,6 @@ public class PhoneNumberPreferenceController extends BasePreferenceController
     @Override
     public boolean useDynamicSliceSummary() {
         return true;
-    }
-
-    @Override
-    public void copy() {
-        final ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(
-                CLIPBOARD_SERVICE);
-        clipboard.setPrimaryClip(ClipData.newPlainText("text", getFirstPhoneNumber()));
-
-        final String toast = mContext.getString(R.string.copyable_slice_toast,
-                mContext.getText(R.string.status_number));
-        Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show();
     }
 
     private CharSequence getFirstPhoneNumber() {
