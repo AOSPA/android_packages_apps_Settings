@@ -25,6 +25,7 @@ import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
+import android.content.res.Resources;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
@@ -43,6 +44,10 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
         implements WifiManager.SoftApCallback {
 
     private static final String PREF_KEY = "wifi_tether_security";
+    private static final String WIFI_RES_PACKAGE = "com.android.wifi.resources";
+
+    private Context mWifiResContext;
+    private Resources mWifiRes;
 
     private Map<Integer, String> mSecurityMap = new LinkedHashMap<Integer, String>();
     private int mSecurityValue;
@@ -65,6 +70,24 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
         }
         mWifiManager.registerSoftApCallback(context.getMainExecutor(), this);
         mIsDualSapSupported = mWifiManager.isBridgedApConcurrencySupported();
+
+        try {
+            mWifiResContext = mContext.createPackageContext(WIFI_RES_PACKAGE,
+                Context.CONTEXT_INCLUDE_CODE | Context.CONTEXT_IGNORE_SECURITY);
+        } catch (Exception e) {
+            Log.e(PREF_KEY, "exception in createPackageContext: " + e);
+            // this will cause Settings/tethering to fail loading
+            throw new RuntimeException(e);
+        }
+        mWifiRes = mWifiResContext.getResources();
+    }
+
+    private int getWifiResId(String category, String name) {
+        if (mWifiRes == null) {
+            Log.e(PREF_KEY, "no WIFI resources, fail to get " + category + "." + name);
+            return -1;
+        }
+        return mWifiRes.getIdentifier(name, category, WIFI_RES_PACKAGE);
     }
 
     @Override
@@ -142,7 +165,8 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
         }
 
         final boolean isOweSupported =
-                softApCapability.areFeaturesSupported(SoftApCapability.SOFTAP_FEATURE_WPA3_OWE);
+                softApCapability.areFeaturesSupported(SoftApCapability.SOFTAP_FEATURE_WPA3_OWE)
+                || mWifiRes.getBoolean(getWifiResId("bool", "config_vendor_wifi_softap_owe_supported"));
         if (!isOweSupported) {
             Log.i(PREF_KEY, "OWE not supported.");
         }
