@@ -295,12 +295,22 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
             return;
         }
 
-        if (SubscriptionUtil.getSubscriptionOrDefault(getContext(), mSubId) == null) {
+        SubscriptionInfo subInfo = SubscriptionUtil.getSubscriptionOrDefault(
+                getContext(), mSubId);
+        if (subInfo == null) {
             finishFragment();
             return;
         }
 
         ThreadUtils.postOnMainThread(() -> {
+            // Mobile network activity uses the sim card display name as title
+            // so need refresh the activity title after renaming the SIM card
+            Activity activity = getActivity();
+            if (activity != null) {
+                activity.setTitle(SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                        subInfo, getContext()));
+            }
+
             mActiveSubscriptionsListenerCount = 0;
             redrawPreferenceControllers();
         });
