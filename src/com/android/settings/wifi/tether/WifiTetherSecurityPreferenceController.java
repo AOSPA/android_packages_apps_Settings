@@ -94,7 +94,7 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
         preference.setEntryValues(mSecurityMap.keySet().stream().map(i -> Integer.toString(i))
                     .toArray(CharSequence[]::new));
 
-        if (config.getBand() == (SoftApConfiguration.BAND_6GHZ | SoftApConfiguration.BAND_2GHZ)
+        if ((config.getBand() & SoftApConfiguration.BAND_6GHZ) != 0
                 && mSecurityMap.keySet().removeIf(
                 key -> key < SoftApConfiguration.SECURITY_TYPE_WPA3_SAE)) {
             preference.setEntries(mSecurityMap.values().stream().toArray(CharSequence[]::new));
