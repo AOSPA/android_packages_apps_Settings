@@ -205,7 +205,6 @@ public class WifiConfigController2 implements TextWatcher,
     private TextView mProxyExclusionListView;
     private TextView mProxyPacView;
     private CheckBox mSharedCheckBox;
-    private CheckBox mShareThisWifiCheckBox;
 
     private IpAssignment mIpAssignment = IpAssignment.UNASSIGNED;
     private ProxySettings mProxySettings = ProxySettings.UNASSIGNED;
@@ -298,19 +297,11 @@ public class WifiConfigController2 implements TextWatcher,
                         ? View.GONE
                         : View.VISIBLE);
         mSecurityInPosition = new Integer[WifiEntry.NUM_SECURITY_TYPES];
-        mShareThisWifiCheckBox = (CheckBox) mView.findViewById(R.id.share_this_wifi);
 
         if (mWifiEntry == null) { // new network
             configureSecuritySpinner();
             mConfigUi.setSubmitButton(res.getString(R.string.wifi_save));
         } else {
-            if (!mWifiManager.isWifiCoverageExtendFeatureEnabled()
-                 || (mWifiEntry.getSecurity() != WifiEntry.SECURITY_NONE
-                      && mWifiEntry.getSecurity() != WifiEntry.SECURITY_PSK)) {
-                mShareThisWifiCheckBox.setChecked(false);
-                mShareThisWifiCheckBox.setVisibility(View.GONE);
-            }
-
             mConfigUi.setTitle(mWifiEntry.getTitle());
 
             ViewGroup group = (ViewGroup) mView.findViewById(R.id.info);
@@ -318,7 +309,6 @@ public class WifiConfigController2 implements TextWatcher,
             boolean showAdvancedFields = false;
             if (mWifiEntry.isSaved()) {
                 WifiConfiguration config = mWifiEntry.getWifiConfiguration();
-                mShareThisWifiCheckBox.setChecked(config.shareThisAp);
                 mMeteredSettingsSpinner.setSelection(config.meteredOverride);
                 mHiddenSettingsSpinner.setSelection(config.hiddenSSID
                         ? HIDDEN_NETWORK
@@ -612,7 +602,6 @@ public class WifiConfigController2 implements TextWatcher,
         }
 
         config.shared = mSharedCheckBox.isChecked();
-        config.shareThisAp = mShareThisWifiCheckBox.isChecked();
 
         switch (mWifiEntrySecurity) {
             case WifiEntry.SECURITY_NONE:
@@ -1702,15 +1691,6 @@ public class WifiConfigController2 implements TextWatcher,
         if (parent == mSecuritySpinner) {
             // Convert menu position to actual Wi-Fi security type
             mWifiEntrySecurity = mSecurityInPosition[position];
-
-            if (!mWifiManager.isWifiCoverageExtendFeatureEnabled()
-                 || (mWifiEntrySecurity != WifiEntry.SECURITY_NONE
-                      && mWifiEntrySecurity != WifiEntry.SECURITY_PSK)) {
-                mShareThisWifiCheckBox.setChecked(false);
-                mShareThisWifiCheckBox.setVisibility(View.GONE);
-            } else {
-                mShareThisWifiCheckBox.setVisibility(View.VISIBLE);
-            }
 
             showSecurityFields(/* refreshEapMethods */ true, /* refreshCertificates */ true);
 
