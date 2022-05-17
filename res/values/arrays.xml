@@ -1715,6 +1715,11 @@
         <item>1875000</item> <!-- 15Mbps == 1875000/s -->
     </string-array>
 
+    <!-- An allowlist which packages won't show summary in battery usage screen.
+         [CHAR LIMIT=NONE] -->
+    <string-array name="allowlist_hide_summary_in_battery_usage" translatable="false">
+    </string-array>
+
     <!--String arrays for showing user PLMN list -->
     <string-array name="uplmn_prefer_network_mode_td_choices">
         <item>GSM</item>
