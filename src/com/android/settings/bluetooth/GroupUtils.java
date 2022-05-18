@@ -52,6 +52,7 @@ import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothProfile;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothCsipSetCoordinator;
 import android.bluetooth.DeviceGroup;
 import android.content.Context;
 import android.os.SystemProperties;
@@ -115,14 +116,14 @@ public class GroupUtils {
      * Get group id associated with this device
      */
     int getGroupId(CachedBluetoothDevice device) {
-        int groupId = device.getGroupId();
-        if (groupId == -1) {
-            loge(" groupId is -1");
+        int qgroupId = device.getQGroupId();
+        if (qgroupId == BluetoothCsipSetCoordinator.GROUP_ID_INVALID) {
+            loge(" qgroupId is -1");
         }
         if (D) {
-            Log.d(TAG, "getgroupId " + groupId + " device " + device);
+            Log.d(TAG, "qgroupId " + qgroupId + " device " + device);
         }
-        return groupId;
+        return qgroupId;
     }
 
     private void updateGroupStatus(CachedBluetoothDevice device, int groupId) {

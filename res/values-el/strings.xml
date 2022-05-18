@@ -225,9 +225,9 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Προτεινόμενες γλώσσες"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Όλες οι γλώσσες"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Γλώσσα συστήματος"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Προεπιλογή συστήματος - <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Προεπιλογή συστήματος"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Η δυνατότητα επιλογής γλώσσας για αυτήν την εφαρμογή δεν είναι διαθέσιμη από τις Ρυθμίσεις."</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Δεν είναι δυνατή η επιλογή κάποιας γλώσσας για αυτήν την εφαρμογή από τις Ρυθμίσεις."</string>
+    <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Η γλώσσα μπορεί να διαφέρει από τις γλώσσες που είναι διαθέσιμες στην εφαρμογή. Ορισμένες εφαρμογές μπορεί να μην υποστηρίζουν αυτήν τη ρύθμιση."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Να αφαιρεθούν οι επιλεγμένες γλώσσες;</item>
       <item quantity="one">Να αφαιρεθεί η επιλεγμένη γλώσσα;</item>
@@ -342,8 +342,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"Κατάσταση ασφάλειας"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Κλείδωμα οθόνης, Εύρεση συσκευής, ασφάλεια εφαρμογής"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Ασφάλεια και απόρρητο"</string>
-    <!-- no translation found for safety_center_summary (3554867379951053869) -->
-    <skip />
+    <string name="safety_center_summary" msgid="3554867379951053869">"Ασφάλεια εφαρμογής, κλείδωμα συσκευής, άδειες"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Προστέθηκε πρόσωπο"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Πατήστε για ρύθμιση προσώπου"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Ξεκλείδωμα με το πρόσωπο"</string>
@@ -587,14 +586,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Η επιλογή κλειδώματος οθόνης είναι απενεργοποιημένη. Για να μάθετε περισσότερα, επικοινωνήστε με τον διαχειριστή της εφαρμογής σας. "<annotation id="admin_details">"Περισσότερες λεπτομέρειες"</annotation>\n\n"Μπορείτε να εξακολουθήσετε να χρησιμοποιείτε το δακτυλικό αποτύπωμα για την εξουσιοδότηση αγορών και την πρόσβαση εφαρμογών. "<annotation id="url">"Μάθετε περισσότερα"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Σηκώστε το δάχτυλο και, στη συνέχεια, αγγίξτε ξανά τον αισθητήρα"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Δεν είναι δυνατή η χρήση του αισθητήρα δακτ. αποτυπωμ. Επισκεφτείτε έναν πάροχο υπηρεσιών επισκευής."</string>
-    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
-    <skip />
+    <string name="security_advanced_settings" msgid="6260756619837834042">"Περισσότερες ρυθμίσεις ασφαλείας"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Κλείδωμα προφίλ εργασίας, κρυπτογράφηση και περισσότερα"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Κρυπτογράφηση, διαπιστευτήρια και περισσότερα"</string>
+    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"ασφάλεια, περισσότερες ρυθμίσεις ασφαλείας, περισσότερες ρυθμίσεις, σύνθετες ρυθμίσεις ασφαλείας"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Μπορείτε να προσθέσετε έως <xliff:g id="COUNT">%d</xliff:g> μοναδικά χαρακτηριστικά"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Έχετε προσθέσει τον μέγιστο αριθμό δακτυλικών αποτυπωμάτων"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Δεν είναι δυνατή η προσθήκη περισσότερων δακτυλικών αποτυπωμάτων"</string>
@@ -1163,9 +1158,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (εκτός αν παρακάμπτεται από Ιδιωτικό DNS)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Πύλη"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Μήκος προθέματος δικτύου"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi-Fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi-Fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi-Fi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi-Fi Direct"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"Στοιχεία συσκευής"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"Απομνημόνευση αυτής της σύνδεσης"</string>
@@ -2482,7 +2474,7 @@
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"Η λειτουργία ενός χεριού προστέθηκε στις Γρήγορες ρυθμίσεις. Σύρετε προς τα κάτω για να την ενεργοποιήσετε ή να την απενεργοποιήσετε ανά πάσα στιγμή."</string>
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"Μπορείτε επίσης να προσθέσετε τη λειτουργία ενός χεριού στις Γρήγορες ρυθμίσεις από το επάνω μέρος της οθόνης σας"</string>
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"Παράβλεψη"</string>
-    <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="3636710237139542212">"Προσαρμόστε πώς θα εμφανίζονται τα χρώματα στο τηλέφωνό σας"</string>
+    <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="3636710237139542212">"Προσαρμόστε τα χρώματα στο τηλέφωνό σας"</string>
     <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="3702653229533336133">"Προσαρμόστε πώς θα εμφανίζονται τα χρώματα στη συσκευή σας"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Χρήση διόρθωσης χρωμάτων"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Συντόμευση διόρθωσης χρωμάτων"</string>
@@ -3055,7 +3047,7 @@
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Να μην γίνει εγκατάσταση"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Εγκατάσταση ούτως ή άλλως"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Δεν εγκαταστάθηκε πιστοποιητικό"</string>
-    <string name="request_manage_credentials_title" msgid="596805634568013413">"Να επιτρέπεται στην εφαρμογή "<b>"<xliff:g id="APP_NAME">^1</xliff:g>"</b>" η εγκατάσταση πιστοποιητικών σε αυτήν τη συσκευή;"</string>
+    <string name="request_manage_credentials_title" msgid="596805634568013413">"Να επιτρέπεται στο "<b>"<xliff:g id="APP_NAME">^1</xliff:g>"</b>" η εγκατάσταση πιστοποιητικών σε αυτήν τη συσκευή;"</string>
     <string name="request_manage_credentials_description" msgid="8044839857171509619">"Αυτά τα πιστοποιητικά θα σας επαληθεύουν κοινοποιώντας το μοναδικό αναγνωριστικό της συσκευής σας στις παρακάτω εφαρμογές και URL."</string>
     <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"Να μην επιτρέπεται"</string>
     <string name="request_manage_credentials_allow" msgid="4910940118408348245">"Να επιτρέπεται"</string>
@@ -3373,7 +3365,7 @@
       <item quantity="other">Έλεγχος πιστοποιητικών</item>
       <item quantity="one">Έλεγχος πιστοποιητικού</item>
     </plurals>
-    <string name="user_settings_title" msgid="6550866465409807877">"Πολλοί χρήστες"</string>
+    <string name="user_settings_title" msgid="6550866465409807877">"Πολλαπλοί χρήστες"</string>
     <string name="user_settings_footer_text" product="device" msgid="7523914344521302179">"Μοιραστείτε τη συσκευή σας προσθέτοντας νέους χρήστες. Κάθε χρήστης έχει έναν προσωπικό χώρο στη συσκευή σας για προσαρμοσμένες αρχικές οθόνες, λογαριασμούς, εφαρμογές, ρυθμίσεις και άλλα."</string>
     <string name="user_settings_footer_text" product="tablet" msgid="3730074318510244552">"Μοιραστείτε το tablet σας προσθέτοντας νέους χρήστες. Κάθε χρήστης έχει έναν προσωπικό χώρο στο tablet σας για προσαρμοσμένες αρχικές οθόνες, λογαριασμούς, εφαρμογές, ρυθμίσεις και άλλα."</string>
     <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"Μοιραστείτε το τηλέφωνό σας προσθέτοντας νέους χρήστες. Κάθε χρήστης έχει έναν προσωπικό χώρο στο τηλέφωνό σας για προσαρμοσμένες αρχικές οθόνες, λογαριασμούς, εφαρμογές, ρυθμίσεις και άλλα."</string>
@@ -3883,7 +3875,7 @@
     <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"Όλες οι ρυθμίσεις για τα Συννεφάκια"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Εμφάνιση αυτής της συνομιλίας σε συννεφάκι"</string>
     <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"Εμφάνιση κινούμενου εικονιδίου πάνω από εφαρμογές"</string>
-    <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Να επιτρέπεται στην εφαρμογή <xliff:g id="APP_NAME">%1$s</xliff:g> να εμφανίζει ορισμένες ειδοποιήσεις ως συννεφάκια"</string>
+    <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Να επιτρέπεται στο <xliff:g id="APP_NAME">%1$s</xliff:g> να εμφανίζει ορισμένες ειδοποιήσεις ως συννεφάκια"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"Θέλετε να ενεργοποιήσετε τα συννεφάκια για τη συσκευή;"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"Για να ενεργοποιήσετε τα συννεφάκια για αυτήν την εφαρμογή, θα πρέπει να τα ενεργοποιήσετε για τη συσκευή σας.\n\n Αυτή η ενέργεια επηρεάζει και άλλες εφαρμογές ή συζητήσεις στις οποίες επιτρέπεται να προσθέτουν συννεφάκια."</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="2042628067101419871">"Ενεργοποίηση"</string>
@@ -4590,7 +4582,7 @@
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Βελτιστοποίηση"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"Η μπαταρία σας μπορεί να εξαντλείται πιο γρήγορα. Θα επιτρέπεται πλέον η χρήση μπαταρίας στο παρασκήνιο από την εφαρμογή."</string>
     <string name="ignore_optimizations_off_desc" msgid="3324571675983286177">"Συνιστάται για μεγαλύτερη διάρκεια μπαταρίας"</string>
-    <string name="ignore_optimizations_title" msgid="3464172726254542889">"Να επιτρέπεται στην εφαρμογή <xliff:g id="APP">%s</xliff:g> να αγνοεί τις βελτιστοποιήσεις μπαταρίας;"</string>
+    <string name="ignore_optimizations_title" msgid="3464172726254542889">"Να επιτρέπεται στο <xliff:g id="APP">%s</xliff:g> να αγνοεί τις βελτιστοποιήσεις μπαταρίας;"</string>
     <string name="app_list_preference_none" msgid="1635406344616653756">"Κανένα"</string>
     <string name="work_profile_usage_access_warning" msgid="3477719910927319122">"Η απενεργοποίηση της πρόσβασης χρήσης γι\' αυτήν την εφαρμογή δεν αποτρέπει τον διαχειριστή σας από την παρακολούθηση της χρήσης δεδομένων για εφαρμογές του προφίλ εργασίας σας"</string>
     <string name="accessibility_lock_screen_progress" msgid="4597298121698665401">"Χρησιμοποιούνται <xliff:g id="COUNT_0">%1$d</xliff:g> από <xliff:g id="COUNT_1">%2$d</xliff:g> χαρακτήρες"</string>
@@ -4936,8 +4928,8 @@
     <string name="gesture_not_supported_dialog_message" msgid="5316512246119347889">"Δεν υποστηρίζεται για την προεπιλεγμένη εφαρμογή αρχικής οθόνης, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"Εναλλαγή προεπ. εφαρμογής αρχικής οθόνης"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Ψηφιακός βοηθός"</string>
-    <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Σύρετε για επίκληση του βοηθού"</string>
-    <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Σύρετε προς τα επάνω από μια από τις κάτω γωνίες για επίκληση της εφαρμογής ψηφιακού βοηθού."</string>
+    <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Σύρετε για άνοιγμα του βοηθού"</string>
+    <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Σύρετε προς τα επάνω από μια από τις κάτω γωνίες για άνοιγμα της εφαρμογής ψηφιακού βοηθού."</string>
     <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"Πατήστε παρατεταμένα το κουμπί αρχικής σελίδας για τον Βοηθό"</string>
     <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Πατήστε παρατεταμένα το κουμπί αρχικής οθόνης για ενεργοποίηση της εφαρμογής ψηφιακού βοηθού."</string>
     <string name="information_label" msgid="6939310810756569298">"Πληροφορίες"</string>
@@ -5775,4 +5767,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Διαμορφώστε το όριο του ρυθμού εισόδου εύρους ζώνης του δικτύου που εφαρμόζεται σε όλα τα δίκτυα που παρέχουν συνδεσιμότητα στο διαδίκτυο."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Διαμόρφωση ορίου ρυθμού λήψης δικτύου"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Κανένα όριο"</string>
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Μετάδοση"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Ακούστε μεταδόσεις που πραγματοποιούνται κοντά σας"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Μεταδώστε πολυμέσα σε συσκευές που βρίσκονται σε κοντινή απόσταση ή ακούστε τη μετάδοση κάποιου άλλου"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Μεταδόσεις"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Ακρόαση"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Εύρεση μεταδόσεων"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Αποχώρηση από μετάδοση"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Σάρωση κωδικού QR"</string>
 </resources>
