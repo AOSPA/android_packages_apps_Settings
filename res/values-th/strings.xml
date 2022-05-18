@@ -1429,17 +1429,15 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"ปรับแต่งโทรศัพท์"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"ลองใช้รูปแบบ วอลเปเปอร์ และอื่นๆ ที่มีหลากหลาย"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"โปรแกรมรักษาหน้าจอ"</string>
+    <string name="keywords_screensaver" msgid="7249337959432229172">"โปรแกรมรักษาหน้าจอ"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"ใช้โปรแกรมรักษาหน้าจอ"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"ขณะชาร์จหรือวางอยู่บนแท่นชาร์จ"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"แบบใดก็ได้"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"ขณะที่ชาร์จ"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"ขณะวางอยู่บนแท่นชาร์จ"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"ไม่เลย"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"ปิด"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"หากต้องการควบคุมสิ่งที่เกิดขึ้นขณะที่โทรศัพท์อยู่บนแท่นชาร์จและ/หรืออยู่ในโหมดสลีป ให้เปิดโปรแกรมรักษาหน้าจอ"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"เริ่มเมื่อใด"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"โปรแกรมรักษาหน้าจอในปัจจุบัน"</string>
-    <string name="screensaver_settings_button" msgid="6159236558934930238">"การตั้งค่า"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"ปรับความสว่างอัตโนมัติ"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"ยกขึ้นเพื่อเวก"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"หน้าจอแอมเบียนท์"</string>
@@ -3401,6 +3399,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"ลบ"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"ระบบจะลบแอปและข้อมูลทั้งหมดในเซสชันนี้"</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"นำออก"</string>
+    <string name="guest_category_title" msgid="5562663588315329152">"ผู้มาเยือน (คุณ)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"ผู้ใช้"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"ผู้ใช้รายอื่นๆ"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"ลบกิจกรรมของผู้ใช้ชั่วคราว"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"ลบแอปและข้อมูลทั้งหมดของผู้ใช้ชั่วคราวเมื่อออกจากโหมดผู้ใช้ชั่วคราว"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"ลบกิจกรรมของผู้ใช้ชั่วคราวไหม"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"ระบบจะลบแอปและข้อมูลจากเซสชันผู้ใช้ชั่วคราวนี้ตอนนี้เลย และต่อไปนี้จะลบกิจกรรมทั้งหมดของผู้ใช้ชั่วคราวทุกครั้งที่คุณออกจากโหมดผู้ใช้ชั่วคราว"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"เปิดการโทร"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"เปิดการโทรและ SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"ลบผู้ใช้"</string>
@@ -4294,10 +4299,8 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"ปิด"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"การปักหมุดแอป"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"การปักหมุดแอปจะทำให้คุณเห็นแอปปัจจุบันได้ตลอดจนกว่าจะเลิกปักหมุด ตัวอย่างการใช้ฟีเจอร์นี้ เช่น อนุญาตให้เพื่อนที่เชื่อถือได้เล่นเกมหนึ่งๆ"</string>
-    <!-- no translation found for screen_pinning_description (4305370471370474846) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_user_description (2465729370037556955) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="7289730998890213708">"เมื่อปักหมุดแอป แอปที่ปักหมุดอาจเปิดแอปอื่นๆ และอาจมีการเข้าถึงข้อมูลส่วนตัว \n\nวิธีใช้การปักหมุดแอป 	\n1.	เปิดการปักหมุดแอป 	\n2.	เปิด \"ภาพรวม\" 	\n3.	แตะไอคอนแอปที่ด้านบนหน้าจอ จากนั้นแตะ \"ปักหมุด\""</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"เมื่อปักหมุดแอป แอปที่ปักหมุดอาจเปิดแอปอื่นๆ และอาจมีการเข้าถึงข้อมูลส่วนตัว \n\nหากต้องการใช้อุปกรณ์ร่วมกับคนอื่นอย่างปลอดภัย ให้ลองใช้ผู้ใช้ชั่วคราวแทน \n\nวิธีใช้การปักหมุดแอป 	\n1.	เปิดการปักหมุดแอป 	\n2.	เปิด \"ภาพรวม\" 	\n3.	แตะไอคอนแอปที่ด้านบนหน้าจอ จากนั้นแตะ \"ปักหมุด\""</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"เมื่อมีการปักหมุดแอป \n\n•	 อาจมีการเข้าถึงข้อมูลส่วนตัว (เช่น รายชื่อติดต่อและเนื้อหาในอีเมล)\n•	 แอปที่ปักหมุดอาจเปิดแอปอื่นๆ \n\nใช้การปักหมุดแอปกับคนที่คุณไว้ใจเท่านั้น\n"</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"ขอรูปแบบการปลดล็อกก่อนเลิกปักหมุด"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"ขอ PIN ก่อนเลิกปักหมุด"</string>
@@ -5071,7 +5074,7 @@
     <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"อนุญาตการตั้งค่าที่จำกัดสำหรับ <xliff:g id="APP_NAME">%s</xliff:g>"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"การตั้งค่านี้ใช้ไม่ได้ในตอนนี้เพื่อความปลอดภัยของคุณ"</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"ข้อมูลอุปกรณ์ที่ได้รับการสนับสนุนทางการเงิน"</string>
-    <string name="financed_privacy_intro" msgid="5458393846604867947">"ผู้ให้บริการเครดิตจะเปลี่ยนการตั้งค่าและติดตั้งซอฟต์แวร์ในอุปกรณ์นี้ได้\n\nหากคุณไม่ชำระเงิน อุปกรณ์จะถูกล็อก\n\nโปรดติดต่อผู้ให้บริการเครดิตเพื่อสอบถามข้อมูลเพิ่มเติม"</string>
+    <string name="financed_privacy_intro" msgid="7836497475568741579">"ผู้ให้บริการเครดิตจะเปลี่ยนการตั้งค่าและติดตั้งซอฟต์แวร์ในอุปกรณ์นี้ได้ระหว่างการตั้งค่า\n\nหากคุณไม่ชำระเงิน ผู้ให้บริการเครดิตอาจล็อกและเปลี่ยนการตั้งค่าอุปกรณ์\n\nโปรดติดต่อผู้ให้บริการเครดิตเพื่อสอบถามข้อมูลเพิ่มเติม"</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"หากผ่อนชำระอุปกรณ์อยู่ คุณจะดำเนินการดังต่อไปนี้ไม่ได้"</string>
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"ติดตั้งแอปจากภายนอก Play Store"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"รีบูตอุปกรณ์ให้อยู่ในโหมดปลอดภัย"</string>
@@ -5080,7 +5083,7 @@
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"ใช้ตัวเลือกสำหรับนักพัฒนาแอป"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"ผู้ให้บริการเครดิตสามารถดำเนินการดังนี้"</string>
     <string name="financed_privacy_IMEI" msgid="1852413860963824799">"ดูหมายเลข IMEI"</string>
-    <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"รีเซ็ตอุปกรณ์เป็นค่าเริ่มต้น"</string>
+    <string name="financed_privacy_factory_reset" msgid="5505016667590160732">"รีเซ็ตอุปกรณ์เป็นค่าเริ่มต้นหากมีบางอย่างผิดปกติ"</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"หากมีการล็อกอุปกรณ์ คุณจะใช้อุปกรณ์เพื่อดำเนินการดังต่อไปนี้ได้เท่านั้น"</string>
     <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"โทรหาหมายเลขฉุกเฉิน"</string>
     <string name="financed_privacy_system_info" msgid="4158031444108708927">"ดูข้อมูลระบบ เช่น วันที่ เวลา สถานะเครือข่าย และแบตเตอรี่"</string>
@@ -5545,8 +5548,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"นาน"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"แสดง Wallet"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"อนุญาตให้เข้าถึงกระเป๋าเงินจากหน้าจอล็อก"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"แสดงเครื่องมือสแกนคิวอาร์"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"อนุญาตให้เข้าถึงเครื่องมือสแกนคิวอาร์จากหน้าจอล็อก"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"แสดงเครื่องมือสแกนคิวอาร์โค้ด"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"อนุญาตให้เข้าถึงเครื่องมือสแกนคิวอาร์โค้ดจากหน้าจอล็อก"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"แสดงระบบควบคุมอุปกรณ์"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"แสดงการควบคุมสำหรับอุปกรณ์ภายนอกจากหน้าจอล็อก"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"ควบคุมจากอุปกรณ์ที่ล็อกอยู่"</string>
@@ -5710,10 +5713,6 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"ไม่เชื่อมต่อ"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"เชื่อมต่อ"</string>
     <string name="tare_settings" msgid="3788654800004869077">"การตั้งค่า TARE"</string>
-    <!-- no translation found for tare_on (2386073225978684535) -->
-    <skip />
-    <!-- no translation found for tare_off (6305694402929756726) -->
-    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"เปลี่ยนกลับไปเป็นการตั้งค่าเริ่มต้น"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"เปลี่ยนการตั้งค่ากลับเป็นค่าเริ่มต้นแล้ว"</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"สมดุลที่อิ่มตัวสูงสุด"</string>
@@ -5725,8 +5724,7 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"การดำเนินการ (ต้นทุนในการผลิต)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"การดำเนินการ (ราคาฐาน)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"รางวัลต่อเหตุการณ์เดียว"</string>
-    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
-    <skip />
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"รางวัลตลอดระยะเวลาของเหตุการณ์"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"รางวัลสูงสุดต่อวัน"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"กิจกรรมแรก"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"เห็นการแจ้งเตือนแล้ว"</string>

@@ -1431,17 +1431,15 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"Personaliza tu teléfono"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"Prueba diferentes estilos, fondos de pantalla y mucho más"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Protector de pantalla"</string>
+    <string name="keywords_screensaver" msgid="7249337959432229172">"protector de pantalla"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Usar protector de pantalla"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Mientras se carga o está conectado"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"En ambos casos"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Mientras se carga"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Cuando está conectado"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Nunca"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Apagado"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Para controlar qué sucede cuando el teléfono está conectado o suspendido, activa el protector de pantalla."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Cuándo comenzar"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Protector de pantalla actual"</string>
-    <string name="screensaver_settings_button" msgid="6159236558934930238">"Configuración"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Brillo automático"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Levantar el dispositivo para activarlo"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Pantalla Ambiente"</string>
@@ -3405,6 +3403,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"Borrar"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Se eliminarán las aplicaciones y los datos de esta sesión."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Eliminar"</string>
+    <string name="guest_category_title" msgid="5562663588315329152">"Invitado (tú)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"Usuarios"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"Otros usuarios"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"Borrar la actividad de invitado"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Borra todas las apps y los datos de invitado cuando salgas del modo de invitado"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"¿Borrar la actividad de invitado?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Las apps y los datos de esta sesión de invitado se borrarán ahora, y toda la actividad futura correspondiente se borrará cada vez que salgas del modo de invitado."</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Activar llamadas telefónicas"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Activar llamadas telefónicas y SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Borrar usuario"</string>
@@ -4298,10 +4303,8 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Desactivada"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Fijación de apps"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"Al fijar una app, esta se mantiene visible hasta que dejas de fijarla. Esta función se puede utilizar, por ejemplo, para dejar que alguien de confianza juegue un juego específico."</string>
-    <!-- no translation found for screen_pinning_description (4305370471370474846) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_user_description (2465729370037556955) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="7289730998890213708">"Si fijas una app, esta podrá abrir otras apps y acceder a tus datos personales. \n\nPara usar la fijación de apps, sigue estos pasos: 	\n1.	Activa la fijación de apps. 	\n2.	Abre Recientes. 	\n3.	Presiona el icono de la app que se encuentra en la parte superior de la pantalla y, luego, Fijar."</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"Si fijas una app, esta podrá abrir otras apps y acceder a tus datos personales. \n\nSi quieres compartir tu dispositivo con alguien de forma segura, usa un perfil de invitado. \n\nPara usar la fijación de apps, sigue estos pasos: 	\n1.	Activa la fijación de apps. 	\n2.	Abre Recientes. 	\n3.	Presiona el icono de la app que se encuentra en la parte superior de la pantalla y, luego, Fijar."</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Cuando fijas una app, puede ocurrir lo siguiente: \n\n•		Esta podrá acceder a datos personales (como contactos y contenido de los correos electrónicos). \n•	 Es posible que las apps fijadas abran otras apps.		 \n\nUsa la función para fijar apps solo con personas de confianza.\n"</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Solicitar desbloqueo para quitar fijación"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Solicitar PIN para quitar fijación"</string>
@@ -5075,7 +5078,7 @@
     <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"Se permite la configuración restringida para <xliff:g id="APP_NAME">%s</xliff:g>"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"Por seguridad, esta configuración no está disponible actualmente."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Información del dispositivo financiado"</string>
-    <string name="financed_privacy_intro" msgid="5458393846604867947">"Tu proveedor de crédito puede cambiar la configuración e instalar software en este dispositivo.\n\nSi no realizas un pago, se bloqueará el dispositivo.\n\nPara obtener más información, comunícate con proveedor."</string>
+    <string name="financed_privacy_intro" msgid="7836497475568741579">"Tu proveedor de crédito puede cambiar los parámetros de configuración y, además, instalar software en este dispositivo durante la configuración.\n\nSi no realizas un pago, el proveedor de crédito puede bloquear el dispositivo y cambiar su configuración.\n\nPara obtener más información, comunícate con proveedor."</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"Si el dispositivo es financiado, no podrás hacer esto:"</string>
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Instalar apps por fuera de Play Store"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"Reiniciar el dispositivo de modo seguro"</string>
@@ -5084,7 +5087,7 @@
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"Usar opciones para desarrolladores"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"El proveedor de crédito puede:"</string>
     <string name="financed_privacy_IMEI" msgid="1852413860963824799">"Accede a tu número de IMEI"</string>
-    <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"Restablecer config. de fábrica del disp."</string>
+    <string name="financed_privacy_factory_reset" msgid="5505016667590160732">"Restablece de fábrica el dispositivo si hay algún problema"</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"Si se bloquea el dispositivo, podrás usarlo solo para lo siguiente:"</string>
     <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"Realizar llamadas de emergencia"</string>
     <string name="financed_privacy_system_info" msgid="4158031444108708927">"Ver información del sistema, como la fecha, la hora, el estado de la red y la batería"</string>
@@ -5549,8 +5552,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Larga"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Mostrar billetera"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"Permite el acceso a la billetera desde la pantalla de bloqueo"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"Mostrar escáner de QR"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Permitir el acceso al escáner de QR desde la pantalla de bloqueo"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"Mostrar escáner de código QR"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Permitir el acceso al escáner de código QR desde la pantalla de bloqueo"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Mostrar controles del dispositivo"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Muestra los controles para dispositivos externos desde la pantalla de bloqueo"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Controlar con el dispositivo bloqueado"</string>
@@ -5714,10 +5717,6 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"No conectar"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Conectar"</string>
     <string name="tare_settings" msgid="3788654800004869077">"Configuración de TARE"</string>
-    <!-- no translation found for tare_on (2386073225978684535) -->
-    <skip />
-    <!-- no translation found for tare_off (6305694402929756726) -->
-    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"Restablecer configuración predeterminada"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Config. predeterminada restablecida."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Saldo máx. cuando el disp. está cargado"</string>
@@ -5729,8 +5728,7 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Acciones (costo de producción)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Acciones (precio base)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Recompensas por cada evento"</string>
-    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
-    <skip />
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"Recompensas por la duración del evento"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"Máximo de recompensas por día"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Actividad principal"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Notificación vista"</string>

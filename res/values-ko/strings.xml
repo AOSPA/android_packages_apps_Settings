@@ -1431,17 +1431,15 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"휴대전화 맞춤설정"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"다른 스타일, 배경화면 등 사용해 보기"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"화면 보호기"</string>
+    <string name="keywords_screensaver" msgid="7249337959432229172">"화면 보호기"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"화면 보호기 사용"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"충전 또는 도킹하는 동안"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"도킹이나 충전 중일 때"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"충전하는 동안"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"도킹하는 동안"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"사용 안함"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"사용 안함"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"휴대전화가 도킹 또는 절전 모드일 때 작동 방식을 조정하려면 화면 보호기를 사용 설정합니다."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"표시 시간"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"현재 화면 보호기"</string>
-    <string name="screensaver_settings_button" msgid="6159236558934930238">"설정"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"자동 밝기"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"기기를 들어 대기 모드 해제"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"절전 모드 자동 해제"</string>
@@ -3405,6 +3403,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"삭제"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"이 세션에 있는 모든 앱과 데이터가 삭제됩니다."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"삭제"</string>
+    <string name="guest_category_title" msgid="5562663588315329152">"게스트(나)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"사용자"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"다른 사용자"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"게스트 활동 삭제"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"게스트 모드 종료 시 모든 게스트 앱 및 데이터 삭제"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"게스트 활동을 삭제하시겠습니까?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"현재 게스트 세션의 앱과 데이터가 지금 삭제되고 이후 모든 게스트 활동은 게스트 모드를 종료할 때마다 삭제됩니다."</string>
     <string name="user_enable_calling" msgid="264875360626905535">"통화 기능 사용"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"통화 및 SMS 기능 사용"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"사용자 삭제"</string>
@@ -4298,10 +4303,8 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"사용 중지"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"앱 고정"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"앱을 고정하여 고정 해제할 때까지 계속 화면에 표시되도록 할 수 있습니다. 예를 들어 신뢰할 수 있는 친구가 특정 게임을 하도록 허용할 때 이 기능을 사용해 보세요."</string>
-    <!-- no translation found for screen_pinning_description (4305370471370474846) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_user_description (2465729370037556955) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="7289730998890213708">"고정된 앱을 통해 다른 앱이 열리고 개인 정보가 표시될 수 있습니다. \n\n앱 고정을 사용하려면 다음 단계를 따르세요. 	\n1.	앱 고정을 사용 설정합니다. 	\n2.	최근 사용을 엽니다. 	\n3.	화면 상단의 앱 아이콘을 탭한 후 고정을 탭합니다."</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"고정된 앱을 통해 다른 앱이 열리고 개인 정보가 표시될 수 있습니다. \n\n기기를 다른 사람과 안전하게 공유하고 싶다면 게스트 사용자를 대신 사용해 보세요. \n\n앱 고정을 사용하려면 다음 단계를 따르세요. 	\n1.	앱 고정을 사용 설정합니다. 	\n2.	최근 사용을 엽니다. 	\n3.	화면 상단의 앱 아이콘을 탭한 후 고정을 탭합니다."</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"앱이 고정되었을 때 다음 사항이 적용됩니다. \n\n•	 개인 데이터가 표시될 수 있습니다.\n		(연락처, 이메일 내용 등) \n•	 고정된 앱을 통해 다른 앱이 열릴 수 있습니다. \n\n신뢰할 수 있는 상대에게만 앱 고정을 사용하세요."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"고정 해제 이전에 잠금해제 패턴 요청"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"고정 해제 이전에 PIN 요청"</string>
@@ -5075,7 +5078,7 @@
     <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"<xliff:g id="APP_NAME">%s</xliff:g>에 제한된 설정이 허용되었습니다."</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"보안을 위해 이 설정은 현재 사용할 수 없습니다."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"할부 기기 정보"</string>
-    <string name="financed_privacy_intro" msgid="5458393846604867947">"신용 상품 제공업체가 이 기기에서 설정을 변경하고 소프트웨어를 설치할 수 있습니다.\n\n결제를 놓치면 기기가 잠깁니다.\n\n자세히 알아보려면 신용 상품 제공업체에 문의하세요."</string>
+    <string name="financed_privacy_intro" msgid="7836497475568741579">"신용 상품 제공업체는 설정 중에 이 기기에서 설정을 변경하고 소프트웨어를 설치할 수 있습니다.\n\n결제를 놓치면 신용 상품 제공업체에서 기기를 잠그고 기기 설정을 변경할 수 있습니다.\n\n자세한 내용은 신용 상품 제공업체에 문의하세요."</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"기기 할부금이 남아 있는 경우 다음과 같은 작업을 할 수 없습니다"</string>
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Play 스토어가 아닌 출처의 앱 설치"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"기기를 안전 모드로 재부팅"</string>
@@ -5084,7 +5087,7 @@
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"개발자 옵션 사용"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"신용 상품 제공업체는 다음과 같은 작업을 할 수 있습니다"</string>
     <string name="financed_privacy_IMEI" msgid="1852413860963824799">"IMEI 번호에 액세스"</string>
-    <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"기기 초기화"</string>
+    <string name="financed_privacy_factory_reset" msgid="5505016667590160732">"문제가 발생하면 기기를 초기화하세요."</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"기기가 잠기면 기기 사용이 다음으로 제한됩니다"</string>
     <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"긴급 전화 걸기"</string>
     <string name="financed_privacy_system_info" msgid="4158031444108708927">"날짜, 시간, 네트워크 상태, 배터리와 같은 시스템 정보 조회"</string>
@@ -5549,8 +5552,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"길게"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"월렛 표시"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"잠금 화면에서 월렛에 액세스하도록 허용합니다."</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"QR 스캐너 표시"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"잠금 화면에서 QR 스캐너에 액세스할 수 있도록 허용"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"QR 코드 스캐너 표시"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"잠금 화면에서 QR 코드 스캐너에 액세스할 수 있도록 허용하세요."</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"기기 제어 표시"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"잠금 화면에서 외부 기기를 관리하는 설정을 표시합니다."</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"잠긴 기기에서 제어"</string>
@@ -5714,10 +5717,6 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"연결 안함"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"연결"</string>
     <string name="tare_settings" msgid="3788654800004869077">"TARE 설정"</string>
-    <!-- no translation found for tare_on (2386073225978684535) -->
-    <skip />
-    <!-- no translation found for tare_off (6305694402929756726) -->
-    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"기본 설정으로 복원"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"설정이 기본값으로 복원되었습니다."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"완충 시 최대 잔량"</string>
@@ -5729,8 +5728,7 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"작업(제작 비용)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"작업(기본 가격)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"단일 이벤트별 리워드"</string>
-    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
-    <skip />
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"전체 이벤트 기간 리워드"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"일일 최대 리워드"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"상위 활동"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"알림 확인됨"</string>

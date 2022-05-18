@@ -1429,17 +1429,15 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"მოირგეთ ტელეფონი"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"ცადეთ სხვადასხვა სტილი, ფონი და ა.შ."</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"ეკრანმზოგი"</string>
+    <string name="keywords_screensaver" msgid="7249337959432229172">"ეკრანმზოგი"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"გამოიყენეთ ეკრანმზოგი"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"დატენვისას ან სანამ ჩამაგრებულია"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"ორივე შემთხვევაში"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"დატენვისას"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"სანამ ჩამაგრებულია"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"არასოდეს"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"გამორთული"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"დოკ-სადგურთან მიერთების და/ან ძილის რეჟიმზე გადასვლის დროს ტელეფონის ქცევის სამართავად, ჩართეთ ეკრანმზოგი."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"გაშვების დრო"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"ამჟამინდელი ეკრანმზოგი"</string>
-    <string name="screensaver_settings_button" msgid="6159236558934930238">"პარამეტრები"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"ავტომატური სიკაშკაშე"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"გაღვიძება აწევისას"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"ემბიენტური ეკრანი"</string>
@@ -3403,6 +3401,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"წაშლა"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"ამ სესიის ყველა აპი და მონაცემი წაიშლება."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"ამოშლა"</string>
+    <string name="guest_category_title" msgid="5562663588315329152">"სტუმარი (თქვენ)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"მომხმარებლები"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"სხვა მომხმარებლები"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"სტუმრის აქტივობის წაშლა"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"სტუმრის ყველა აპის და მონაცემის წაშლა სტუმრის რეჟიმიდან გასვლისას"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"გსურთ სტუმრის აქტივობის წაშლა?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"აპები და მონაცემები სტუმრის ამ სესიიდან წაიშლება ახლავე, ხოლო სტუმრის ყველა მომავალი აქტივობა წაიშლება ყოველთვის, როცა სტუმრის რეჟიმიდან გახვალთ"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"სატელეფონო ზარების ჩართვა"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"სატელ. ზარების და SMS-ის ჩართვა"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"მომხმარებლის წაშლა"</string>
@@ -4296,10 +4301,8 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"გამორთვა"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"აპის ჩამაგრება"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"აპის ჩამაგრება საშუალებას გაძლევთ, ჩანდეს მიმდინარე აპი, სანამ ჩამაგრებას არ მოხსნით. ამ ფუნქციის გამოყენებით შეგიძლიათ, მაგალითად, სანდო მეგობარი დაუშვათ კონკრეტულ თამაშზე."</string>
-    <!-- no translation found for screen_pinning_description (4305370471370474846) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_user_description (2465729370037556955) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="7289730998890213708">"როდესაც აპი ჩამაგრებულია, ჩამაგრებულმა აპმა შეიძლება გახსნას სხვა აპები და მისაწვდომი გახდეს პერსონალური მონაცემები. \n\nაპის ჩამაგრებით სარგებლობისთვის: 	\n1.	ჩართეთ აპის ჩამაგრება 	\n2.	გახსენით მიმოხილვა 	\n3.	შეეხეთ აპის ხატულას ეკრანის ზედა ნაწილში, შემდეგ შეეხეთ „ჩამაგრებას“"</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"როდესაც აპი ჩამაგრებულია, ჩამაგრებულმა აპმა შეიძლება გახსნას სხვა აპები და მისაწვდომი გახდეს პერსონალური მონაცემები. \n\nთუ გსურთ, უსაფრთხოდ გაუზიაროთ თქვენი მოწყობილობა სხვას, ამის ნაცვლად, ცადეთ სტუმარი მომხმარებლის გამოყენება. \n\nაპის ჩამაგრებით სარგებლობისთვის: 	\n1.	ჩართეთ აპის ჩამაგრება 	\n2.	გახსენით მიმოხილვა 	\n3.	შეეხეთ აპის ხატულას ეკრანის ზედა ნაწილში, შემდეგ შეეხეთ „ჩამაგრებას“"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"როდესაც აპი ჩამაგრებულია: \n\n•		შეიძლება მისაწვდომი გახდეს პერსონალური მონაცემები \n		(მაგალითად, კონტაქტები და ელფოსტის კონტენტი) \n•		ჩამაგრებულმა აპმა შეიძლება გახსნას სხვა აპები \n\nაპის ჩამაგრება მხოლოდ სანდო ადამიანებთან გამოიყენეთ."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"ფიქსაციის მოხსნამდე განბლოკვის ნიმუშის მოთხოვნა"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"ჩამაგ. მოხსნამდე PIN-ის მოთხოვნა"</string>
@@ -5073,7 +5076,7 @@
     <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"შეზღუდული რეჟიმის პარამეტრები დაშვებულია <xliff:g id="APP_NAME">%s</xliff:g>-ისთვის"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"თქვენივე უსაფრთხოებისთვის ეს პარამეტრი ამჟამად მიუწვდომელია."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"დაფინანსებული მოწყობილობის ინფორმაცია"</string>
-    <string name="financed_privacy_intro" msgid="5458393846604867947">"თქვენს კრედიტის პროვაიდერს შეუძლია ამ მოწყობილობაზე პარამეტრების შეცვლა და პროგრამული უზრუნველყოფის ინსტალაცია.\n\nთუ რომელიმე გადახდას გამოტოვებთ, თქვენი მოწყობილობა ჩაიკეტება.\n\nმეტის შესატყობად, დაუკავშირდით თქვენს კრედიტის პროვაიდერს."</string>
+    <string name="financed_privacy_intro" msgid="7836497475568741579">"თქვენს კრედიტის პროვაიდერს შეუძლია ამ მოწყობილობაზე პარამეტრების შეცვლა და პროგრამული უზრუნველყოფის ინსტალაცია, დაყენების დროს.\n\nრომელიმე გადახდის გამოტოვების შემთხვევაში, თქვენი კრედიტის პროვაიდერს შეუძლია თქვენი მოწყობილობის ჩაკეტვა და მისი პარამეტრების შეცვლა.\n\nმეტის შესატყობად, დაუკავშირდით თქვენს კრედიტის პროვაიდერს."</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"თუ თქვენი მოწყობილობა ფინანსდება, თქვენ არ შეგიძლიათ:"</string>
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"აპების დაინსტალირება წყაროებიდან Play Store-ის მიღმა"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"თქვენი მოწყობილობის გადატვირთვა უსაფრთხო რეჟიმში"</string>
@@ -5082,7 +5085,7 @@
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"დეველოპერთა პარამეტრების გამოყენება"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"თქვენს კრედიტის პროვაიდერს შეუძლია:"</string>
     <string name="financed_privacy_IMEI" msgid="1852413860963824799">"წვდომა თქვენს IMEI ნომერზე"</string>
-    <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"თქვენი მოწყობილობის ქარხნული პარამეტრების დაბრუნება"</string>
+    <string name="financed_privacy_factory_reset" msgid="5505016667590160732">"რაიმე პრობლემის შემთხვევაში დააბრუნეთ თქვენი მოწყობილობის ქარხნული პარამეტრები"</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"თუ თქვენი მოწყობილობა ჩაკეტილია, მისი გამოყენება შეგიძლიათ მხოლოდ შემდეგი მიზნებისთვის:"</string>
     <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"გადაუდებელი ზარების განხორციელება"</string>
     <string name="financed_privacy_system_info" msgid="4158031444108708927">"სისტემის ისეთი ინფორმაციის ნახვა, როგორიცაა თარიღი, დრო, ქსელის სტატუსი და ბატარეა"</string>
@@ -5547,8 +5550,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"ხანგრძლივი"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"საფულის ჩვენება"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"დაუშვით ჩაკეტილი ეკრანიდან საფულეზე წვდომა"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"QR სკანერის ჩვენება"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"დაუშვით QR სკანერზე წვდომა ჩაკეტილი ეკრანიდან"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"QR კოდის სკანერის ჩვენება"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"დაბლოკილი ეკრანიდან დაუშვით წვდომა QR კოდის სკანერზე"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"მოწყობილობის მართვის საშუალებების ჩვენება"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"მართვის საშუალებების ჩვენება ჩაკეტილი ეკრანიდან გარე მოწყობილობებისთვის"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"ჩაკეტილი მოწყობილობიდან კონტროლი"</string>
@@ -5712,10 +5715,6 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"არ დაუკავშირდეს"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"დაკავშირება"</string>
     <string name="tare_settings" msgid="3788654800004869077">"TARE პარამეტრები"</string>
-    <!-- no translation found for tare_on (2386073225978684535) -->
-    <skip />
-    <!-- no translation found for tare_off (6305694402929756726) -->
-    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"დაბრუნება ნაგულისხმევ პარამეტრებზე"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"პარამეტრები ნაგულისხმევზე დაბრუნდა."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"მაქსიმალური ბალანსი სრული დატენვისას"</string>
@@ -5727,8 +5726,7 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"მოქმედებები (წარმოების ღირებულება)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"მოქმედებები (საბაზისო ფასი)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"ჯილდო თითოეული ღონისძიებისთვის"</string>
-    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
-    <skip />
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"ჯილდო ღონისძიების მთელი მსვლელობისას"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"ჯილდოს მაქსიმალური რაოდენობა დღეში"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"ტოპ აქტივობა"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"შეტყობინება ნანახია"</string>

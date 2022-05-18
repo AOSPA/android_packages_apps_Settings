@@ -1429,17 +1429,15 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"اپنے فون کو حسب ضرورت بنائیں"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"مختلف اسٹائل، وال پیپرز، اور مزید بہت کچھ آزمائیں"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"اسکرین سیور"</string>
+    <string name="keywords_screensaver" msgid="7249337959432229172">"اسکرین سیور"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"اسکرین سیور کا استعمال کریں"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"ڈاک سے منسلک یا چارج ہونے کے دوران"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"دونوں صورتوں میں"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"چارج ہوتے وقت"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"ڈاک کیے ہونے پر"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"کبھی نہیں"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"آف"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"فون ڈاک کیے ہونے اور/یا سوئے ہوئے ہونے کے دوران کیا ہو اسے کنٹرول کرنے کیلئے، اسکرین سیور آن کریں۔"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"وقت آغاز"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"موجودہ اسکرین سیور"</string>
-    <string name="screensaver_settings_button" msgid="6159236558934930238">"ترتیبات"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"خود کار چمک"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"جگانے کیلئے اٹھائیں"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"ايمبيئنٹ ڈسپلے"</string>
@@ -3403,6 +3401,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"حذف کریں"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"اس سیشن میں موجود سبھی ایپس اور ڈیٹا کو حذف کر دیا جائے گا۔"</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"ہٹائیں"</string>
+    <string name="guest_category_title" msgid="5562663588315329152">"مہمان (آپ)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"صارفین"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"دیگر صارفین"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"مہمان کی سرگرمی کو حذف کریں"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"مہمان وضع سے باہر نکلتے وقت تمام مہمان ایپس اور ڈیٹا کو حذف کریں"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"مہمان کی سرگرمی کو حذف کریں؟"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"اس مہمان سیشن سے ایپس اور ڈیٹا کو اب حذف کر دیا جائے گا، اور ہر دفعہ آپ کے مہمان وضع سے باہر نکلنے پر مہمان کی مستقبل کی تمام سرگرمی حذف کر دی جائے گی"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"فون کالز آن کریں"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"‏فون کالز اور SMS آن کریں"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"صارف کو حذف کریں"</string>
@@ -4296,10 +4301,8 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"آف ہے"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"ایپ کو پن کرنا"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"ایپ کو پن کرنے سے آپ کو حالیہ ایپ سے پن ہٹانے تک اسے منظر میں رکھنے کی اجازت ہوتی ہیں۔ اس خصوصیت کا استعمال کیا جا سکتا ہے مثال کے طور پر، کسی بھروسے مند دوست کو ایک مخصوص گیم کھیلنے کی اجازت دینا۔"</string>
-    <!-- no translation found for screen_pinning_description (4305370471370474846) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_user_description (2465729370037556955) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="7289730998890213708">"کسی ایپ کو پن کرنے پر پن کردہ ایپ دیگر ایپس کو کھول سکتی ہے اور ذاتی ڈیٹا قابل رسائی ہو سکتا ہے۔ \n\nایپ کو پن کرنا استعمال کرنے کے لیے: ←\n1۔	ایپ کو پن کرنا آن کریں ←\n2۔	مجموعی جائزہ کھولیں ←\n3۔	اسکرین کے اوپری حصے پر ایپ آئیکن پر تھپتھپائیں پھر \'پن کریں\' پر تھپتھپائیں"</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"کسی ایپ کو پن کرنے پر پن کردہ ایپ دیگر ایپس کو کھول سکتی ہے اور ذاتی ڈیٹا قابل رسائی ہو سکتا ہے۔ \n\nاگر آپ محفوظ طریقے سے اپنے آلے کا کسی کے ساتھ اشتراک کرنا چاہتے ہیں تو اس کے بجائے مہمان صارف استعمال کر کے آزمائیں۔ \n\nایپ کو پن کرنا استعمال کرنے کے ليے: ←\n1۔	ایپ کو پن کرنا آن کریں ←\n2۔	مجموعی جائزہ کھولیں ←\n3۔	اسکرین کے اوپری حصے پر ایپ آئیکن پر تھپتھپائیں پھر \'پن کریں\' پر تھپتھپائیں"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"جب ایپ کو پن کر دیا جاتا ہے: \n\n• ذاتی ڈیٹا قابل رسائی ہوسکتا ہے \n (جیسے رابطے اور ای میل کا مواد) \n• پن کردہ ایپ دیگر ایپس کو کھول سکتی ہے \n\nصرف ان لوگوں کے ساتھ ایپ کو پن کرنا استعمال کریں جن پر آپ کو بھروسہ ہے۔"</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"پن ہٹانے سے پہلے غیر مقفل کرنے کا پیٹرن طلب کریں"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"‏پن ہٹانے سے پہلے PIN طلب کریں"</string>
@@ -5073,7 +5076,7 @@
     <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"<xliff:g id="APP_NAME">%s</xliff:g> کے لیے محدود ترتیبات کی اجازت ہے"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"آپ کی سیکیورٹی کے لیے، یہ ترتیب فی الحال دستیاب نہیں ہے۔"</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"مالی تعاون یافتہ آلے کی معلومات"</string>
-    <string name="financed_privacy_intro" msgid="5458393846604867947">"آپ کا کریڈٹ فراہم کنندہ ترتیبات کو تبدیل اور اس آلے پر سافٹ ویئر انسٹال کر سکتا ہے۔\n\nاگر آپ سے ادائیگی چھوٹ جاتی ہے تو آپ کا آلہ مقفل ہو جائے گا۔\n\nمزید جاننے کے لیے، اپنے کریڈٹ فراہم کنندہ سے رابطہ کریں۔"</string>
+    <string name="financed_privacy_intro" msgid="7836497475568741579">"آپ کا کریڈٹ فراہم کنندہ سیٹ اپ کے دوران ترتیبات کو تبدیل اور اس آلے پر سافٹ ویئر انسٹال کر سکتا ہے۔\n\nاگر آپ سے کوئی ادائیگی چھوٹ جاتی ہے تو آپ کا کریڈٹ فراہم کنندہ آپ کے آلے کو مقفل اور آلے کی ترتیبات کو تبدیل کر سکتا ہے۔\n\nمزید جاننے کے لیے، اپنے کریڈٹ فراہم کنندہ سے رابطہ کریں۔"</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"اگر آپ کا آلہ مالی تعاون یافتہ ہے تو آپ یہ نہیں کر سکتے ہیں:"</string>
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"‏Play اسٹور کے باہر سے ایپس انسٹال کریں"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"اپنا آلہ حفاظتی وضع میں ریبوٹ کریں"</string>
@@ -5082,7 +5085,7 @@
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"ڈویلپر کے اختیارات کا استعمال کریں"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"آپ کا کریڈٹ فراہم کنندہ یہ کر سکتا ہے:"</string>
     <string name="financed_privacy_IMEI" msgid="1852413860963824799">"‏اپنے IMEI نمبر تک رسائی حاصل کریں"</string>
-    <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"اپنے آلہ کو فیکٹری ری سیٹ کریں"</string>
+    <string name="financed_privacy_factory_reset" msgid="5505016667590160732">"کچھ غلط ہونے پر اپنے آلے کو فیکٹری ری سیٹ کریں"</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"اگر آپ کا آلہ مقفل ہے تو آپ اسے صرف درج ذیل کام کے لیے استعمال کر سکتے ہیں:"</string>
     <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"ہنگامی کالز کریں"</string>
     <string name="financed_privacy_system_info" msgid="4158031444108708927">"سسٹم کی معلومات دیکھیں جیسے تاریخ، وقت، نیٹ ورک کا اسٹیٹس اور بیٹری"</string>
@@ -5547,8 +5550,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"طویل"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"والٹ دکھائیں"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"مقفل اسکرین سے والٹ تک رسائی کی اجازت دیں"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"‏QR اسکینر دکھائیں"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"‏مقفل اسکرین سے QR اسکینر تک رسائی کی اجازت دیں"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"‏QR کوڈ اسکینر دکھائیں"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"‏مقفل اسکرین سے QR کوڈ اسکینر تک رسائی کی اجازت دیں"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"آلے کے کنٹرولز دکھائیں"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"مقفل اسکرین سے بیرونی آلات کے لیے کنٹرولز دکھائیں"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"مقفل آلہ سے کنٹرول کریں"</string>
@@ -5712,10 +5715,6 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"منسلک نہ کریں"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"منسلک کریں"</string>
     <string name="tare_settings" msgid="3788654800004869077">"‏TARE کی ترتیبات"</string>
-    <!-- no translation found for tare_on (2386073225978684535) -->
-    <skip />
-    <!-- no translation found for tare_off (6305694402929756726) -->
-    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"ڈیفالٹ ترتیبات پر لوٹائیں"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"ترتیبات ڈیفالٹ پر لوٹا دی گئیں۔"</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"زیادہ سے زیادہ مطمئن بیلنس"</string>
@@ -5727,8 +5726,7 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"کارروائیاں (پروڈیوس کرنے کی لاگت)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"کارروائیاں (بنیادی قیمت)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"فی واحد ایونٹ انعامات"</string>
-    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
-    <skip />
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"ایونٹ کے کل دورانیے کے لیے انعامات"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"فی دن زیادہ سے زیادہ انعامات"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"سرفہرست سرگرمی"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"اطلاع کو دیکھا گیا"</string>

@@ -1429,17 +1429,15 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"スマートフォンのカスタマイズ"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"別のスタイル、壁紙などを試す"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"スクリーンセーバー"</string>
+    <string name="keywords_screensaver" msgid="7249337959432229172">"スクリーンセーバー"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"スクリーン セーバーを使用する"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"充電時またはドッキング時"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"いずれか"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"充電時"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"ドッキング時"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"なし"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"OFF"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"スマートフォンのドッキング時やスリープ時の動作を管理するには、スクリーン セーバーを ON にします。"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"起動するタイミング"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"現在のスクリーンセーバー"</string>
-    <string name="screensaver_settings_button" msgid="6159236558934930238">"設定"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"明るさを自動調整"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"指を離してスリープ状態から復帰"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"アンビエント表示"</string>
@@ -3403,6 +3401,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"削除"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"このセッションでのアプリとデータはすべて削除されます。"</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"削除"</string>
+    <string name="guest_category_title" msgid="5562663588315329152">"ゲスト（自分）"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"ユーザー"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"その他のユーザー"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"ゲストのアクティビティを削除"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"ゲストモードの終了時にゲストのすべてのアプリとデータを削除します"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"ゲストのアクティビティを削除しますか？"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"今回のゲスト セッションのアプリとデータが今すぐ削除され、今後のゲストのアクティビティはすべて、ゲストモードを終了するたびに削除されます"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"通話をON"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"通話とSMSをON"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"ユーザーの削除"</string>
@@ -4296,10 +4301,8 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"OFF"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"アプリ固定"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"アプリ固定機能を使用すると、固定を解除するまで現在のアプリを表示したままにすることができます。たとえば、この機能を使用して、信頼できる友だちに特定のゲームをプレイすることを許可できます。"</string>
-    <!-- no translation found for screen_pinning_description (4305370471370474846) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_user_description (2465729370037556955) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="7289730998890213708">"アプリを固定した場合、そのアプリが他のアプリを開いたり、個人データにアクセスしたりする可能性があります。\n\nアプリ固定機能を使用するには: 	\n1.	アプリ固定機能を ON にします 	\n2.	[概要] を開きます 	\n3.	画面上部のアプリアイコンをタップし、[固定] をタップします"</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"アプリを固定した場合、そのアプリが他のアプリを開いたり、個人データにアクセスしたりする可能性があります。\n\nデバイスを他のユーザーと安全に共有するには、代わりにゲスト アカウントを使用してみてください。\n\nアプリ固定機能を使用するには: 	\n1.	アプリ固定機能を ON にします 	\n2.	「最近のアプリ」の画面を開きます 	\n3.	画面上部のアプリアイコンをタップし、[固定] をタップします"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"アプリが固定されている場合: \n\n•	 個人データにアクセスされる可能性があります（連絡先、メールの内容など） \n•	 固定されたアプリが他のアプリを開く可能性があります \n\nアプリ固定機能は、相手を信頼できる場合にのみ使用してください。\n"</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"画面固定の解除前にロック解除パターンを要求"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"画面固定の解除前にPINを要求"</string>
@@ -5073,7 +5076,7 @@
     <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"<xliff:g id="APP_NAME">%s</xliff:g> の制限付き設定を許可しました"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"セキュリティ保護のため、この設定は現在利用できません。"</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"ローンで購入したデバイスの情報"</string>
-    <string name="financed_privacy_intro" msgid="5458393846604867947">"クレジット プロバイダは、このデバイスの設定を変更したり、このデバイスにソフトウェアをインストールしたりできます。\n\nお支払いいただかないと、デバイスはロックされます。\n\n詳しくは、クレジット プロバイダにお問い合わせください。"</string>
+    <string name="financed_privacy_intro" msgid="7836497475568741579">"クレジット プロバイダは、セットアップ時にこのデバイスの設定を変更したり、このデバイスにソフトウェアをインストールしたりすることがあります。\n\nお支払いいただかないと、クレジット プロバイダによってデバイスがロックされたり、デバイスの設定が変更されたりすることがあります。\n\n詳しくは、クレジット プロバイダにお問い合わせください。"</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"デバイスをローンで購入された場合、以下の操作は行えません。"</string>
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Play ストア以外からアプリをインストールする"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"デバイスをセーフモードで再起動する"</string>
@@ -5082,7 +5085,7 @@
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"開発者向けオプションを使用する"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"クレジット プロバイダが行える操作:"</string>
     <string name="financed_privacy_IMEI" msgid="1852413860963824799">"IMEI 番号にアクセスする"</string>
-    <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"デバイスを出荷時の設定にリセットする"</string>
+    <string name="financed_privacy_factory_reset" msgid="5505016667590160732">"問題が発生した場合にデバイスを出荷時の設定にリセットする"</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"デバイスがロックされた場合に行えるのは、以下の操作のみです。"</string>
     <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"緊急通報を発信する"</string>
     <string name="financed_privacy_system_info" msgid="4158031444108708927">"日付、時刻、ネットワークの状態、バッテリー残量などのシステム情報を見る"</string>
@@ -5547,8 +5550,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"長い"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"ウォレットを表示"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"ロック画面からウォレットへのアクセスを許可します"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"QR スキャナの表示"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"ロック画面からの QR スキャナへのアクセスを許可します"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"QR コードスキャナを表示"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"ロック画面から QR コードスキャナにアクセスできるようにします"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"デバイス コントロールを表示"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"ロック画面から操作して、外部デバイスのコントロールを表示できます"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"ロックされたデバイスから操作する"</string>
@@ -5712,10 +5715,6 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"接続しない"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"接続"</string>
     <string name="tare_settings" msgid="3788654800004869077">"TARE 設定"</string>
-    <!-- no translation found for tare_on (2386073225978684535) -->
-    <skip />
-    <!-- no translation found for tare_off (6305694402929756726) -->
-    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"デフォルトの設定に戻す"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"設定をデフォルトに戻しました。"</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"充電完了時の最大上限"</string>
@@ -5727,8 +5726,7 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"アクション（実施費用）"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"アクション（基本価格）"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"1 つのイベントあたりの特典"</string>
-    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
-    <skip />
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"イベント期間全体の特典"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"1 日あたりの特典数の上限"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"上位のアクティビティ"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"表示された通知"</string>

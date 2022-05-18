@@ -1429,17 +1429,15 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"மொபைலைப் பிரத்தியேகமாக்கல்"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"மாறுபட்ட ஸ்டைல்கள், வால்பேப்பர்கள் மற்றும் பலவற்றை முயல்க"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"ஸ்கிரீன் சேவர்"</string>
+    <string name="keywords_screensaver" msgid="7249337959432229172">"ஸ்கிரீன் சேவர்"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"ஸ்கிரீன் சேவரை உபயோகித்தல்"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"இரண்டின் போதும்"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"இவற்றில் ஒன்று"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"சார்ஜ் செய்யப்படும்போது"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"சாதனத்தில் இணைந்திருக்கும்போது"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"ஒருபோதும் வேண்டாம்"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"ஆஃப்"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"மொபைல் உறக்கநிலையில் அல்லது சார்ஜாகும்போது, நிகழ்வுகளைக் கட்டுப்படுத்த பகல்கனாவை இயக்கு."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"தொடங்க வேண்டிய நேரம்"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"தற்போதைய ஸ்கிரீன் சேவர்"</string>
-    <string name="screensaver_settings_button" msgid="6159236558934930238">"அமைப்பு"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"தானாக ஒளிர்வைச் சரிசெய்தல்"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"விரலை எடுக்கும் போது இயங்கு"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"சூழல்சார் திரை"</string>
@@ -3403,6 +3401,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"நீக்கு"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"இந்த அமர்வின் எல்லா பயன்பாடுகளும், தரவும் நீக்கப்படும்."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"அகற்று"</string>
+    <string name="guest_category_title" msgid="5562663588315329152">"கெஸ்ட் (நீங்கள்)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"பயனர்கள்"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"பிற பயனர்கள்"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"கெஸ்ட் செயல்பாடுகளை நீக்குதல்"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"கெஸ்ட் பயன்முறையிலிருந்து வெளியேறும்போது கெஸ்ட் அமர்வின் ஆப்ஸ் மற்றும் தரவு அனைத்தும் நீக்கப்படும்"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"கெஸ்ட் செயல்பாடுகளை நீக்கவா?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"இந்த கெஸ்ட் அமர்வின் ஆப்ஸும் தரவும் இப்போது நீக்கப்படும். இனி கெஸ்ட் பயன்முறையிலிருந்து வெளியேறும் ஒவ்வொரு முறையும் கெஸ்ட் செயல்பாடுகள் நீக்கப்படும்"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"ஃபோன் அழைப்புகளை இயக்கு"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"ஃபோன் அழைப்புகள் &amp; SMSஐ இயக்கு"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"பயனரை நீக்குதல்"</string>
@@ -4296,10 +4301,8 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"ஆஃப்"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"ஆப்ஸைப் பின் செய்தல்"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"அகற்றப்படும்வரை ஆப்ஸ் ஒன்றைத் திரையில் காட்டுவதற்கு ஆப்ஸைப் பின் செய்தல் அம்சம் அனுமதிக்கிறது. உதாரணமாக, இந்த அம்சத்தைப் பயன்படுத்தி குறிப்பிட்ட கேமை விளையாட நம்பிக்கைக்குரிய நண்பரை அனுமதிக்கலாம்."</string>
-    <!-- no translation found for screen_pinning_description (4305370471370474846) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_user_description (2465729370037556955) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="7289730998890213708">"ஆப்ஸ் பின் செய்யப்பட்டிருக்கும்போது அது பிற ஆப்ஸைத் திறக்கக்கூடும், இதனால் தனிப்பட்ட தரவு அணுகப்படக்கூடும். \n\nஆப்ஸைப் பின் செய்தல் அம்சத்தைப் பயன்படுத்த: 	\n1.	ஆப்ஸைப் பின் செய்தல் அம்சத்தை ஆன் செய்யவும் 	\n2.	மேலோட்டப் பார்வையைத் திறக்கவும் 	\n3.	திரையின் மேற்பகுதியில் உள்ள ஆப்ஸ் ஐகானைத் தட்டி ‘பின் செய்’ என்பதைத் தட்டவும்"</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"ஆப்ஸ் பின் செய்யப்பட்டிருக்கும்போது அது பிற ஆப்ஸைத் திறக்கக்கூடும், இதனால் தனிப்பட்ட தரவு அணுகப்படக்கூடும். \n\nசாதனத்தை வேறொருவருடன் பாதுகாப்பாகப் பகிர விரும்பினால் கெஸ்ட் பயனர் அம்சத்தைப் பயன்படுத்திப் பார்க்கவும். \n\nஆப்ஸைப் பின் செய்தல் அம்சத்தைப் பயன்படுத்த: 	\n1.	ஆப்ஸைப் பின் செய்தல் அம்சத்தை ஆன் செய்யவும் 	\n2.	மேலோட்டப் பார்வையைத் திறக்கவும் 	\n3.	திரையின் மேற்பகுதியில் உள்ள ஆப்ஸ் ஐகானைத் தட்டி ‘பின் செய்’ என்பதைத் தட்டவும்"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"ஆப்ஸ் பின் செய்யப்படும்போது: \n\n•	தனிப்பட்ட தரவுக்கு அணுகல்தன்மை இருக்கக்கூடும் \n		(தொடர்புகள், மின்னஞ்சல் உள்ளடக்கம் போன்றவை) \n•	பின் செய்யப்பட்ட ஆப்ஸ் பிற ஆப்ஸைத் திறக்கக்கூடும் \n\nஉங்கள் நம்பிக்கைக்குரிய நபர்களுடன் மட்டுமே ஆப்ஸைப் பின்செய்தல் அம்சத்தைப் பயன்படுத்தவும்."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"அகற்றும் முன் அன்லாக் பேட்டர்னைக் கேள்"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"அகற்றும் முன் பின்(PIN) எண்ணைக் கேள்"</string>
@@ -5073,7 +5076,7 @@
     <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"கட்டுப்படுத்தப்பட்ட அமைப்பு <xliff:g id="APP_NAME">%s</xliff:g>க்கு அனுமதிக்கப்பட்டது"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"உங்கள் பாதுகாப்பிற்காக, இந்த அமைப்பு தற்போது இல்லை."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"கடன் மூலம் பெறப்பட்ட சாதனத்தின் தகவல்கள்"</string>
-    <string name="financed_privacy_intro" msgid="5458393846604867947">"உங்கள் கடன் வழங்குநரால் இந்தச் சாதனத்தில் அமைப்புகளை மாற்றி மென்பொருளை நிறுவ முடியும்.\n\nநீங்கள் பேமெண்ட் செலுத்தத் தவறினால் உங்கள் சாதனம் பூட்டப்படும்.\n\nமேலும் அறிய, உங்கள் கடன் வழங்குநரைத் தொடர்புகொள்ளவும்."</string>
+    <string name="financed_privacy_intro" msgid="7836497475568741579">"இந்தச் சாதனத்தை அமைக்கும்போது உங்கள் கடன் வழங்குநர் அதில் அமைப்புகளை மாற்றலாம், மென்பொருளை நிறுவலாம்.\n\nநீங்கள் பேமெண்ட்டைச் செலுத்தத் தவறினால் கடன் வழங்குநர் உங்கள் சாதனத்தைப் பூட்டலாம், சாதனத்தின் அமைப்புகளை மாற்றலாம்.\n\nமேலும் அறிய, உங்கள் கடன் வழங்குநரைத் தொடர்புகொள்ளுங்கள்."</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"கடன் மூலம் பெற்ற சாதனமாக இருந்தால் இவற்றைச் செய்ய முடியாது:"</string>
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Play Store அல்லாமல் வெளியிலிருந்து ஆப்ஸைப் பதிவிறக்கலாம்"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"பாதுகாப்புப் பயன்முறைக்குச் சாதனத்தை மறுபடி தொடங்கலாம்"</string>
@@ -5082,7 +5085,7 @@
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"டெவெலப்பர் விருப்பங்களைப் பயன்படுத்தலாம்"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"கடன் வழங்குநரால் இவற்றை செய்ய முடியும்:"</string>
     <string name="financed_privacy_IMEI" msgid="1852413860963824799">"உங்கள் IMEI எண்ணை அணுகலாம்"</string>
-    <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"சாதனத்தை ஆரம்பநிலைக்கு மீட்டமைக்கலாம்"</string>
+    <string name="financed_privacy_factory_reset" msgid="5505016667590160732">"ஏதேனும் தவறானால் உங்கள் சாதனத்தை ஆரம்பநிலைக்கு மீட்டமைக்கலாம்"</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"உங்கள் சாதனம் பூட்டப்பட்டால் அதை இவற்றுக்கு மட்டுமே பயன்படுத்த முடியும்:"</string>
     <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"அவசர அழைப்பு செய்யலாம்"</string>
     <string name="financed_privacy_system_info" msgid="4158031444108708927">"தேதி, நேரம், நெட்வொர்க், நிலை, பேட்டரி போன்ற சிஸ்டம் தகவல்களைப் பார்க்கலாம்"</string>
@@ -5547,8 +5550,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"அதிகபட்சம்"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"வாலட்டைக் காட்டு"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"பூட்டுத் திரையிலிருந்தே வாலட்டை அணுகலாம்"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"QR ஸ்கேனரைக் காட்டுதல்"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"பூட்டுத் திரையிலிருந்தே QR ஸ்கேனருக்கு அணுகல் வழங்கலாம்"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"QR குறியீடு ஸ்கேனரைக் காட்டுதல்"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"பூட்டுத் திரையிலிருந்து QR குறியீடு ஸ்கேனருக்கு அணுகலை வழங்குங்கள்"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"சாதனக் கட்டுப்பாடுகளைக் காட்டு"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"வெளிப்புறச் சாதனங்களுக்கான கண்ட்ரோல்களைப் பூட்டுத் திரையிலேயே காட்டலாம்"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"பூட்டப்பட்ட சாதனத்திலிருந்து கட்டுப்படுத்துதல்"</string>
@@ -5712,10 +5715,6 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"இணைக்க வேண்டாம்"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"இணை"</string>
     <string name="tare_settings" msgid="3788654800004869077">"TARE அமைப்புகள்"</string>
-    <!-- no translation found for tare_on (2386073225978684535) -->
-    <skip />
-    <!-- no translation found for tare_off (6305694402929756726) -->
-    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"இயல்புநிலை அமைப்புகளுக்கு மாற்றியமை"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"அமைப்புகள் இயல்புநிலைக்கு மாற்றப்பட்டன."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"அதிகபட்ச பேட்டரி இருப்பு"</string>
@@ -5727,8 +5726,7 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"செயல்கள் (செயல்பாட்டுச் செலவு)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"செயல்கள் (அடிப்படை விலை)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"ஒற்றை நிகழ்வுக்கான ரிவார்டுகள்"</string>
-    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
-    <skip />
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"மொத்த நிகழ்வுக் காலத்திற்கான ரிவார்டுகள்"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"ஒரு நாளுக்கான அதிகபட்ச ரிவார்டுகள்"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"சிறந்த செயல்பாடு"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"அறிவிப்பு பார்க்கப்பட்டது"</string>

@@ -1431,17 +1431,15 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"Telefoni kohandamine"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"Proovige eri stiile, taustapilte ja muud"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Ekraanisäästja"</string>
+    <string name="keywords_screensaver" msgid="7249337959432229172">"ekraanisäästja"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Ekraanisäästja kasutamine"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Laadimise ajal või dokis"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"Kui on dokitud või laeb"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Laadimise ajal"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Kui on dokitud"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Mitte kunagi"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Välja"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Kui soovite juhtida, mis juhtub telefoni dokkimisel ja/või puhkerežiimi lülitamisel, siis lülitage ekraanisäästja sisse."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Alustamise aeg"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Praegune ekraanisäästja"</string>
-    <string name="screensaver_settings_button" msgid="6159236558934930238">"Seaded"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Automaatne eredus"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Tõstke äratamiseks"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Säästlik ekraan"</string>
@@ -3405,6 +3403,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"Kustuta"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Seansi kõik rakendused ja andmed kustutatakse."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Eemalda"</string>
+    <string name="guest_category_title" msgid="5562663588315329152">"Külaline (teie)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"Kasutajad"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"Teised kasutajad"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"Kustuta külalise tegevus"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Kustuta külalisrežiimist väljumisel kõik külalise rakendused ja andmed"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Kas kustutada külalise tegevus?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Selle külastajaseansi rakendused ja andmed kustutatakse kohe ning kõik tulevased külastajate tegevused kustutatakse külalisrežiimist väljumisel."</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Lülita telefonikõned sisse"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Lülita telefonikõned ja SMS-id sisse"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Kustuta kasutaja"</string>
@@ -4298,10 +4303,8 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Väljas"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Rakenduse kinnitamine"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"Rakenduse kinnitamine võimaldab teil praeguse rakenduse kuval hoida seni, kuni selle vabastate. Seda funktsiooni saab kasutada näiteks selleks, et lubada usaldusväärsel sõbral teatud mängu mängida."</string>
-    <!-- no translation found for screen_pinning_description (4305370471370474846) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_user_description (2465729370037556955) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="7289730998890213708">"Kui rakendus on kinnitatud, saab kinnitatud rakendus avada teisi rakendusi ja isiklikud andmed võivad olla juurdepääsetavad. \n\nRakenduse kinnitamise kasutamiseks toimige järgmiselt. 	\n1.	Lülitage rakenduse kinnitamine sisse. 	\n2.	Avage leht Ülevaade. 	\n3.	Puudutage ekraanikuva ülaosas rakenduse ikooni ja siis käsku Kinnita."</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"Kui rakendus on kinnitatud, saab kinnitatud rakendus avada teisi rakendusi ja isiklikud andmed võivad olla juurdepääsetavad. \n\nKui soovite oma seadet kellegagi turvaliselt jagada, proovige selle asemel kasutada külaliskasutajat. \n\nRakenduse kinnitamise kasutamiseks toimige järgmiselt. 	\n1.	Lülitage rakenduse kinnitamine sisse. 	\n2.	Avage leht Ülevaade. 	\n3.	Puudutage ekraanikuva ülaosas rakenduse ikooni ja siis käsku Kinnita."</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Kui rakendus on kinnitatud: \n\n•		võivad isiklikud andmed (nt kontaktid\nja meilide sisu) olla juurdepääsetavad; \n•		kinnitatud rakendus võib avada teisi rakendusi. \n\nKasutage rakenduse kinnitamist ainult usaldusväärsete inimestega."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Enne vabastamist küsi avamismustrit"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Enne vabastamist küsi PIN-koodi"</string>
@@ -5075,7 +5078,7 @@
     <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"Piiratud seaded on rakenduse <xliff:g id="APP_NAME">%s</xliff:g> jaoks lubatud"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"Teie turvalisuse huvides pole see seade praegu saadaval."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Järelmaksuga seadme teave"</string>
-    <string name="financed_privacy_intro" msgid="5458393846604867947">"Teie krediidipakkuja saab muuta seadeid ja installida seadmesse tarkvara.\n\nKui makse jääb tegemata, lukustatakse seade.\n\nLisateabe saamiseks võtke ühendust krediidipakkujaga."</string>
+    <string name="financed_privacy_intro" msgid="7836497475568741579">"Teie krediidipakkuja saab seadistamise ajal teie seadeid muuta ja seadmesse tarkvara installida.\n\nKui makse jääb tegemata, võib krediidipakkuja teie seadme lukustada ja selle seadeid muuta.\n\nLisateabe saamiseks võtke ühendust krediidipakkujaga."</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"Kui teie seadet rahastatakse, ei saa te teha järgmist."</string>
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Rakenduste installimine väljastpoolt Play poodi"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"Seadme taaskäivitamine turvarežiimis"</string>
@@ -5084,7 +5087,7 @@
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"Arendaja valikute kasutamine"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"Krediidipakkuja saab teha järgmist."</string>
     <string name="financed_privacy_IMEI" msgid="1852413860963824799">"Juurdepääs teie IMEI-numbrile"</string>
-    <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"Seadme lähtestamine tehaseseadetele"</string>
+    <string name="financed_privacy_factory_reset" msgid="5505016667590160732">"Kui midagi läheb valesti, lähtestage oma seade tehaseseadetele"</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"Kui seade on lukustatud, saate seda kasutada ainult järgmiseks."</string>
     <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"Hädaabikõnede tegemine"</string>
     <string name="financed_privacy_system_info" msgid="4158031444108708927">"Süsteemiteabe (nt kuupäeva, kellaaja, võrgu oleku ja aku taseme) vaatamine"</string>
@@ -5549,8 +5552,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Pikk"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Kuva rahakott"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"Rahakotile juurdepääsu lubamine lukustuskuvalt"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"Kuva QR-koodi skanner"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Lubage lukustuskuval juurdepääs QR-koodi skannerile"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"Kuva QR-koodi skanner"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Lubage lukustuskuval juurdepääs QR-koodi skannerile"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Kuva seadmete juhtimisvidinad"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Kuva lukustuskuval välisseadmete juhtelemendid"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Lukustatud seadmest juhtimine"</string>
@@ -5714,10 +5717,6 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Ära ühenda"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Ühenda"</string>
     <string name="tare_settings" msgid="3788654800004869077">"TARE seaded"</string>
-    <!-- no translation found for tare_on (2386073225978684535) -->
-    <skip />
-    <!-- no translation found for tare_off (6305694402929756726) -->
-    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"Taasta vaikeseaded"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Taastati vaikeseaded."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Max täislaetud aku saldo"</string>
@@ -5729,8 +5728,7 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Toimingud (tegemise hind)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Toimingud (baashind)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Preemiaid ühe sündmuse kohta"</string>
-    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
-    <skip />
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"Preemiad sündmuse kogu kestuse jooksul"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"Maksimaalne preemiate arv päevas"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Tipptegevus"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Märguannet vaadati"</string>
