@@ -151,7 +151,11 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        if (!hasBackupCallingFeature(subId)) {
+        TelephonyManager tm = mContext.getSystemService(TelephonyManager.class);
+        Log.d(LOG_TAG, "getActiveModemCount: " + tm.getActiveModemCount());
+        // Check for the static Backup Calling capability first (not currently supported in MSIM).
+        // Then, check for the dynamic capability (from modem).
+        if (tm.getActiveModemCount() > 1 || !hasBackupCallingFeature(subId)) {
             return CONDITIONALLY_UNAVAILABLE;
         }
         List<SubscriptionInfo> subIdList = getActiveSubscriptionList();
@@ -159,7 +163,7 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
         if (subInfo == null) {  // given subId is not actives
             return CONDITIONALLY_UNAVAILABLE;
         }
-        return (subIdList.size() == 1) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return AVAILABLE;
     }
 
     @Override
