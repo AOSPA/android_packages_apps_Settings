@@ -126,12 +126,12 @@ public class BluetoothDashboardFragment extends DashboardFragment {
                 Class.forName("com.android.settings.bluetooth.BluetoothBroadcastEnableController");
             Constructor ctorPin, ctorEnable;
             ctorPin = classBroadcastPinController
-                          .getDeclaredConstructor(new Class[] {Context.class});
+                          .getDeclaredConstructor(new Class[] {Context.class, Lifecycle.class});
             ctorEnable = classBroadcastEnableController
-                .getDeclaredConstructor(new Class[] {Context.class, String.class});
-            Object objBroadcastPinController = ctorPin.newInstance(context);
+                .getDeclaredConstructor(new Class[] {Context.class, String.class, Lifecycle.class});
+            Object objBroadcastPinController = ctorPin.newInstance(context, getSettingsLifecycle());
             Object objBroadcastEnableController = ctorEnable
-                .newInstance(context, new String("bluetooth_screen_broadcast_enable"));
+                .newInstance(context, new String("bluetooth_screen_broadcast_enable"), getSettingsLifecycle());
             objBroadcastPinController.getClass().getMethod("setFragment", Fragment.class)
                 .invoke(objBroadcastPinController, (Fragment) this);
             controllers.add((AbstractPreferenceController) objBroadcastPinController);
