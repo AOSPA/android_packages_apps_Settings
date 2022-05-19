@@ -57,7 +57,6 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     private static final String KEY_WIFI_TETHER_SCREEN = "wifi_tether_settings_screen";
     private static final int EXPANDED_CHILD_COUNT_WITH_SECURITY_NON = 3;
     private static boolean mWasApBand6GHzSelected = false;
-    private static final int BAND_6GHZ = SoftApConfiguration.BAND_6GHZ | SoftApConfiguration.BAND_2GHZ;
 
     @VisibleForTesting
     static final String KEY_WIFI_TETHER_NETWORK_NAME = "wifi_tether_network_name";
@@ -240,13 +239,14 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
             }
         }
 
-        if (mApBandPreferenceController.getBandIndex() == BAND_6GHZ
+        if ((mApBandPreferenceController.getBandIndex() & SoftApConfiguration.BAND_6GHZ) != 0
                 && (mWasApBand6GHzSelected == false)) {
             mSecurityPreferenceController.updateDisplay();
             mWasApBand6GHzSelected = true;
             config = buildNewConfig();
+            mPasswordPreferenceController.setSecurityType(config.getSecurityType());
             mWifiManager.setSoftApConfiguration(config);
-        } else if (mApBandPreferenceController.getBandIndex() != BAND_6GHZ
+        } else if ((mApBandPreferenceController.getBandIndex() & SoftApConfiguration.BAND_6GHZ) == 0
                 &&(mWasApBand6GHzSelected == true)) {
             mSecurityPreferenceController.updateDisplay();
             mWasApBand6GHzSelected = false;
