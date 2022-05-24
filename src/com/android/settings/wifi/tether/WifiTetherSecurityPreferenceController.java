@@ -138,7 +138,13 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
                     .toArray(CharSequence[]::new));
         }
 
-        final int securityType = mWifiManager.getSoftApConfiguration().getSecurityType();
+        int securityType = mWifiManager.getSoftApConfiguration().getSecurityType();
+
+        /* Since UI has single option for OWE and OWE Transition mode, lets map OWE to
+         * OWE transition option for display purpose */
+        if (securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_OWE)
+             securityType = SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION;
+
         mSecurityValue = mSecurityMap.get(securityType) != null
                 ? securityType : defaultSecurityType;
 
