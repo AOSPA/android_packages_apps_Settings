@@ -255,8 +255,15 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
 
     private SoftApConfiguration buildNewConfig() {
         final SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder();
-        final int securityType = mSecurityPreferenceController.getSecurityType();
+        int securityType = mSecurityPreferenceController.getSecurityType();
         configBuilder.setSsid(mSSIDPreferenceController.getSSID());
+
+        // For 6GHz use OWE only mode.
+        if ((mApBandPreferenceController.getBandIndex() & SoftApConfiguration.BAND_6GHZ) != 0
+                 && securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION) {
+            securityType = SoftApConfiguration.SECURITY_TYPE_WPA3_OWE;
+        }
+
         if (securityType == SoftApConfiguration.SECURITY_TYPE_OPEN
               || securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION
               || securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_OWE) {
