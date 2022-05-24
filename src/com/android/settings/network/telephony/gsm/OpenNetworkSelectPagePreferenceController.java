@@ -53,12 +53,14 @@ public class OpenNetworkSelectPagePreferenceController extends
     private Preference mPreference;
     private PreferenceScreen mPreferenceScreen;
     private AllowedNetworkTypesListener mAllowedNetworkTypesListener;
+    private int mCacheOfModeStatus;
     private SubscriptionsChangeListener mSubscriptionsListener;
 
     public OpenNetworkSelectPagePreferenceController(Context context, String key) {
         super(context, key);
         mTelephonyManager = context.getSystemService(TelephonyManager.class);
         mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+        mCacheOfModeStatus = TelephonyManager.NETWORK_SELECTION_MODE_UNKNOWN;
         mAllowedNetworkTypesListener = new AllowedNetworkTypesListener(
                 context.getMainExecutor());
         mAllowedNetworkTypesListener.setAllowedNetworkTypesListener(
@@ -114,7 +116,7 @@ public class OpenNetworkSelectPagePreferenceController extends
         if (phoneType == TelephonyManager.PHONE_TYPE_CDMA) {
              preference.setEnabled(false);
         } else {
-        preference.setEnabled(mTelephonyManager.getNetworkSelectionMode()
+        preference.setEnabled(mCacheOfModeStatus
                 != TelephonyManager.NETWORK_SELECTION_MODE_AUTO);
         }
 
@@ -144,8 +146,11 @@ public class OpenNetworkSelectPagePreferenceController extends
     }
 
     @Override
-    public void onNetworkSelectModeChanged() {
-        updateState(mPreference);
+    public void onNetworkSelectModeUpdated(int mode) {
+        mCacheOfModeStatus = mode;
+        if (mPreference != null) {
+            updateState(mPreference);
+        }
     }
 
     @Override
