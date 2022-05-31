@@ -240,7 +240,6 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
             }
         }
 
-        mPreference.setEnabled(true);
         mPreference.setEntries(displayNames.toArray(new CharSequence[0]));
         mPreference.setEntryValues(subscriptionIds.toArray(new CharSequence[0]));
 
