@@ -30,7 +30,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.app.LocalePickerWithRegion;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
@@ -38,12 +37,8 @@ import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.appinfo.AppLocaleDetails;
 import com.android.settings.core.SettingsBaseActivity;
 
-/**
- * TODO(b/223503670): Add unit test for AppLocalePickerActivity.
- * A activity to show the locale picker and information page.
- */
 public class AppLocalePickerActivity extends SettingsBaseActivity
-        implements LocalePickerWithRegion.LocaleSelectedListener {
+        implements LocalePickerWithRegion.LocaleSelectedListener, MenuItem.OnActionExpandListener {
     private static final String TAG = AppLocalePickerActivity.class.getSimpleName();
 
     private String mPackageName;
@@ -80,9 +75,10 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
 
         mLocalePickerWithRegion = LocalePickerWithRegion.createLanguagePicker(
                 mContextAsUser,
-                AppLocalePickerActivity.this,
+                this,
                 false /* translate only */,
-                mPackageName);
+                mPackageName,
+                this);
         mAppLocaleDetails = AppLocaleDetails.newInstance(mPackageName);
         mAppLocaleDetailContainer = launchAppLocaleDetailsPage();
         // Launch Locale picker part.
@@ -108,6 +104,18 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
         finish();
     }
 
+    @Override
+    public boolean onMenuItemActionCollapse(MenuItem item) {
+        mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
+        return true;
+    }
+
+    @Override
+    public boolean onMenuItemActionExpand(MenuItem item) {
+        mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
+        return true;
+    }
+
     /** Sets the app's locale to the supplied language tag */
     private void setAppDefaultLocale(String languageTag) {
         LocaleManager localeManager = mContextAsUser.getSystemService(LocaleManager.class);
@@ -128,8 +136,7 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
         return appLocaleDetailsContainer;
     }
 
-    @VisibleForTesting
-    void launchLocalePickerPage() {
+    private void launchLocalePickerPage() {
         // LocalePickerWithRegion use android.app.ListFragment. Thus, it can not use
         // getSupportFragmentManager() to add this into container.
         android.app.FragmentManager fragmentManager = getFragmentManager();

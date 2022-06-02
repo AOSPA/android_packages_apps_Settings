@@ -40,6 +40,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.Settings.MobileNetworkActivity;
+import com.android.settings.SettingsActivity;
 import com.android.settings.datausage.BillingCyclePreferenceController;
 import com.android.settings.datausage.DataUsageSummaryPreferenceController;
 import com.android.settings.network.ActiveSubscriptionsListener;
@@ -59,6 +60,7 @@ import org.codeaurora.internal.IExtTelephony;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
@@ -290,17 +292,37 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
             Log.d(LOG_TAG, "Callback during onResume()");
             return;
         }
+
+        final SubscriptionInfo subInfo = SubscriptionUtil
+                .getSubscriptionOrDefault(getContext(), mSubId);
+
+        if (subInfo != null) {
+            /**
+             * Update the title when SIM stats got changed
+             */
+            final Consumer<Activity> renameTitle = activity -> {
+                if (activity != null && !activity.isFinishing()) {
+                    if (activity instanceof SettingsActivity) {
+                        final CharSequence displayName = SubscriptionUtil
+                                .getUniqueSubscriptionDisplayName(subInfo, activity);
+                        ((SettingsActivity)activity).setTitle(displayName);
+                    }
+                }
+            };
+
+            ThreadUtils.postOnMainThread(() -> renameTitle.accept(getActivity()));
+        }
+
         mActiveSubscriptionsListenerCount++;
         if (mActiveSubscriptionsListenerCount != 1) {
             return;
         }
 
-        if (SubscriptionUtil.getSubscriptionOrDefault(getContext(), mSubId) == null) {
-            finishFragment();
-            return;
-        }
-
         ThreadUtils.postOnMainThread(() -> {
+            if (subInfo == null) {
+                finishFragment();
+                return;
+            }
             mActiveSubscriptionsListenerCount = 0;
             redrawPreferenceControllers();
         });

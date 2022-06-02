@@ -30,6 +30,7 @@ import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.network.MobilePlanPreferenceController.MobilePlanPreferenceHost;
 import com.android.settings.network.telephony.TelephonyUtils;
@@ -46,7 +47,7 @@ import java.util.List;
 
 @SearchIndexable
 public class NetworkDashboardFragment extends DashboardFragment implements
-        MobilePlanPreferenceHost {
+        MobilePlanPreferenceHost, OnActivityResultListener {
 
     private static final String TAG = "NetworkDashboardFrag";
 
@@ -71,12 +72,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
         use(AirplaneModePreferenceController.class).setFragment(this);
         getSettingsLifecycle().addObserver(use(AllInOneTetherPreferenceController.class));
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        use(AirplaneModePreferenceController.class).onActivityResult(requestCode, resultCode, data);
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -160,6 +155,17 @@ public class NetworkDashboardFragment extends DashboardFragment implements
             return SettingsEnums.DIALOG_MANAGE_MOBILE_PLAN;
         }
         return 0;
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case AirplaneModePreferenceController.REQUEST_CODE_EXIT_ECM:
+                use(AirplaneModePreferenceController.class)
+                        .onActivityResult(requestCode, resultCode, data);
+                break;
+        }
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

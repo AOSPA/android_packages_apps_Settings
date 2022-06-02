@@ -147,8 +147,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 return AccessibilityGestureNavigationTutorial
                         .showAccessibilityGestureTutorialDialog(getPrefContext());
             case DialogEnums.MAGNIFICATION_EDIT_SHORTCUT:
-                final CharSequence dialogTitle = getPrefContext().getString(
-                        R.string.accessibility_shortcut_title, mPackageName);
+                final CharSequence dialogTitle = getShortcutTitle();
                 final int dialogType = WizardManagerHelper.isAnySetupWizard(getIntent())
                         ? DialogType.EDIT_SHORTCUT_MAGNIFICATION_SUW
                         : DialogType.EDIT_SHORTCUT_MAGNIFICATION;
@@ -470,9 +469,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         mShortcutPreference.setKey(getShortcutPreferenceKey());
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
         mShortcutPreference.setOnClickCallback(this);
-
-        final CharSequence title = getString(R.string.accessibility_shortcut_title, mPackageName);
-        mShortcutPreference.setTitle(title);
+        mShortcutPreference.setTitle(getShortcutTitle());
 
         final PreferenceCategory generalCategory = findPreference(KEY_GENERAL_CATEGORY);
         generalCategory.addPreference(mShortcutPreference);
