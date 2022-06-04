@@ -115,6 +115,12 @@
     <PreferenceCategory
         android:title="@string/category_name_display_controls">
 
+        <SwitchPreference
+            android:key="screen_off_udfps"
+            android:title="@string/screen_off_udfps_title"
+            android:summary="@string/screen_off_udfps_summary"
+            settings:controller="com.android.settings.display.ScreenOffUdfpsPreferenceController" />
+
         <com.android.settings.widget.PrimarySwitchPreference
             android:key="auto_rotate"
             android:title="@string/accelerometer_title"
