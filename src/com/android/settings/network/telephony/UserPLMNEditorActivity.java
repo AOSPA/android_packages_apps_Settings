@@ -40,6 +40,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.text.InputType;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -318,7 +319,9 @@ public class UserPLMNEditorActivity extends PreferenceActivity implements
         Log.d(LOG_TAG, "plmn = " + plmn);
         String[] CuPlmnArray = getResources().getStringArray(R.array.uplmn_cu_mcc_mnc_values);
         for (String CuPlmn : CuPlmnArray) {
-            if (plmn.equals(CuPlmn)) return R.array.uplmn_prefer_network_mode_w_choices;
+            if (!TextUtils.isEmpty(plmn) && plmn.equals(CuPlmn)) {
+                return R.array.uplmn_prefer_network_mode_w_choices;
+            }
         }
         return R.array.uplmn_prefer_network_mode_td_choices;
     }
