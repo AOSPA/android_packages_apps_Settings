@@ -126,6 +126,10 @@ public class BluetoothCodecDialogPreferenceController extends
                 codecTypeValue = BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX_TWSP;
                 codecPriorityValue = BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST;
                 break;
+            case 8:
+                codecTypeValue = BluetoothCodecConfig.SOURCE_CODEC_TYPE_LC3;
+                codecPriorityValue = BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST;
+                break;
             default:
                 break;
         }
