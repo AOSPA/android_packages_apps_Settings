@@ -132,7 +132,8 @@
             android:usesCleartextTraffic="true"
             android:defaultToDeviceProtectedStorage="true"
             android:directBootAware="true"
-            android:appComponentFactory="androidx.core.app.CoreComponentFactory">
+            android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+            android:gwpAsanMode="always">
 
         <uses-library android:name="org.apache.http.legacy" />
         <uses-library android:name="com.qti.extphone.extphonelib"/>
@@ -882,9 +883,13 @@
             android:exported="true"
             android:icon="@drawable/ic_settings_language">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.settings.LANGUAGE_SETTINGS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.VOICE_LAUNCH"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.language.LanguageAndInputSettings"/>
@@ -1104,6 +1109,10 @@
                   android:label="@string/wallpaper_settings_fragment_title"
                   android:icon="@drawable/ic_wallpaper"
                   android:exported="true">
+            <intent-filter>
+                <action android:name="android.settings.WALLPAPER_SETTINGS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.wallpaper.WallpaperTypeSettings" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
@@ -3053,13 +3062,6 @@
                        android:value="@string/menu_key_system"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
-        </activity>
-
-        <activity
-            android:name=".users.AddSupervisedUserActivity"
-            android:label="@*android:string/supervised_user_creation_label"
-            android:icon="@drawable/ic_settings_multiuser"
-            android:exported="true">
         </activity>
 
         <activity

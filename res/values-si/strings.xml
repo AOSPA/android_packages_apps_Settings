@@ -1429,17 +1429,15 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"ඔබේ දුරකථනය අභිරුචිකරණය කරන්න"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"වෙනත් මෝස්තර, වෝල්පේපර, සහ තවත් ඒවා උත්සාහ කරන්න"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"තිර සුරැකුම"</string>
+    <string name="keywords_screensaver" msgid="7249337959432229172">"තිර සුරැකුම"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"තිර සුරැකුම භාවිත කරන්න"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"ආරෝපණය හෝ ඩොක් කර ඇති විට"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"දෙකෙන් එකක්"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"ආරෝපණය වන අතරතුර"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"ඩොක් කර ඇති විට"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"කවදාවත් නෑ"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"අක්‍රියයි"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"දුරකථනය රඳවා ඇති විට සහ/හෝ නිද්‍රාවේ ඇති විට සිදු වන දේ පාලනය කිරීමට, තිර සුරැකුම ක්‍රියාත්මක කරන්න."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"පටන් ගන්න මොන වේලාවටද"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"වර්තමාන තිර සුරැකුම"</string>
-    <string name="screensaver_settings_button" msgid="6159236558934930238">"සැකසීම්"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"ස්වයංක්‍රිය දීප්තිය"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"අවදි කිරීමට ඔසවන්න"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"ස්ථානික සංදර්ශකය"</string>
@@ -3403,6 +3401,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"මකන්න"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"මෙම සැසියේ සියළුම යෙදුම් සහ දත්ත මකාවී."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"ඉවත් කරන්න"</string>
+    <string name="guest_category_title" msgid="5562663588315329152">"ආගන්තුකයා (ඔබ)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"පරිශීලකයින්"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"වෙනත් පරිශීලකයින්"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"ආගන්තුක ක්‍රියාකාරකම් මකන්න"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"ආගන්තුක ප්‍රකාරයෙන් පිටවන විට සියලු ආගන්තුක යෙදුම් සහ දත්ත මකන්න"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"ආගන්තුක ක්‍රියාකාරකම මකන්නද?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"මෙම ආගන්තුක සැසියේ යෙදුම් සහ දත්ත දැන් මකනු ඇති අතර, ඔබ ආගන්තුක ප්‍රකාරයෙන් පිටවන සෑම අවස්ථාවකම අනාගත ආගන්තුකයන්ගේ ක්‍රියාකාරකම් සියල්ල මකනු ඇත"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"දුරකථන ඇමතුම් ක්‍රියාත්මක කරන්න"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"දුරකථන ඇමතුම් සහ SMS ක්‍රියාත්මක කරන්න?"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"පරිශීලකයා මකන්න"</string>
@@ -4296,10 +4301,8 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"ක්‍රියාවිරහිතයි"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"යෙදුම ඇමිණීම"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"යෙදුම ඇමිණීම ඔබ එය ඇමිණීමෙන් ඉවත් කරන තෙක් වත්මන් යෙදුම තබා ගැනීමට ඉඩ දේ. උදාහරණයක් වශයෙන් විශ්වාසි මිතුරෙකුට විශේෂිත ගේම් එකක් ක්‍රීඩා කිරීමට ඉඩ දීමට මෙම විශේෂාංගය භාවිත කළ හැකිය."</string>
-    <!-- no translation found for screen_pinning_description (4305370471370474846) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_user_description (2465729370037556955) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="7289730998890213708">"යෙදුමක් ඇමිණූ විට, ඇමිණූ යෙදුම වෙනත් යෙදුම් විවෘත කළ හැකි අතර පෞද්ගලික දත්තවලට ප්‍රවේශ විය හැකිය. \n\nයෙදුම ඇමිණීම භාවිත කිරීමට: 	\n1.	යෙදුම ඇමිණීම ක්‍රියාත්මක කරන්න 	\n2.	දළ විශ්ලේෂණය විවෘත කරන්න 	\n3.	තිරයේ ඉහළින් ඇති යෙදුම් නිරූපකය තට්ටු කර අනතුරුව අමුණන්න තට්ටු කරන්න"</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"යෙදුමක් ඇමිණූ විට, ඇමිණූ යෙදුම වෙනත් යෙදුම් විවෘත කළ හැකි අතර පෞද්ගලික දත්තවලට ප්‍රවේශ විය හැකිය. \n\nඔබට ඔබේ උපාංගය යම් කෙනෙකු සමග ආරක්ෂිතව බෙදා ගැනීමට අවශ්‍ය නම්, ඒ වෙනුවට ආගන්තුක පරිශීලකයකු භාවිත කිරීමට උත්සාහ කරන්න. \n\nයෙදුම ඇමිණීම භාවිත කිරීමට: 	\n1.	යෙදුම ඇමිණීම ක්‍රියාත්මක කරන්න 	\n2.	දළ විශ්ලේෂණය විවෘත කරන්න 	\n3.	තිරයේ ඉහළින් ඇති යෙදුම් නිරූපකය තට්ටු කර අනතුරුව අමුණන්න තට්ටු කරන්න"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"යෙදුම අමුණා ඇති විට: \n\n•		පෞද්ගලික දත්ත ප්‍රවේශ විය හැකිය \n		(සම්බන්ධතා සහ ඉ-තැපැල් අන්තර්ගත යනාදි) \n•	ඇමුණූ යෙදුම වෙනත් යෙදුම් විවෘත කළ හැකිය \n\nඔබ විශ්වාස කරන පුද්ගලයන් සමග පමණක් යෙදුම ඇමිණීම භාවිත කරන්න."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"ගැලවීමට පෙර අගුළු අරින රටාව සඳහා අසන්න"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"ගැලවීමට පෙර PIN විමසන්න"</string>
@@ -5073,7 +5076,7 @@
     <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"<xliff:g id="APP_NAME">%s</xliff:g> සඳහා සීමා කළ සැකසීම් ඉඩ දේ"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"ඔබගේ ආරක්ෂාව සඳහා, මෙම සැකසීම දැනට නොමැත."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"මූල්‍යනය කළ උපාංග තොරතුරු"</string>
-    <string name="financed_privacy_intro" msgid="5458393846604867947">"ඔබගේ ණය සැපයුම්කරුට මෙම උපාංගයේ සැකසීම් වෙනස් කිරීමට සහ මෘදුකාංග ස්ථාපනය කිරීමට හැකිය.\n\nඔබට ගෙවීමක් මග හැරුණහොත්, ඔබගේ උපාංගය අගුලු දමනු ඇත.\n\nතව දැන ගැනීමට, ඔබගේ ණය සැපයුම්කරු අමතන්න."</string>
+    <string name="financed_privacy_intro" msgid="7836497475568741579">"පිහිටුවීම අතුරතුර ඔබගේ ණය සැපයුම්කරුට මෙම උපාංගයේ සැකසීම් වෙනස් කිරීමට සහ මෘදුකාංග ස්ථාපනය කිරීමට හැකිය.\n\nඔබට ගෙවීමක් මග හැරුණහොත්, ඔබගේ ණය සැපයුම්කරුට ඔබගේ උපාංගය අගුලු දමා උපාංග සැකසීම් වෙනස් කළ හැකිය.\n\nතව දැන ගැනීමට, ඔබගේ ණය සැපයුම්කරු අමතන්න."</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"ඔබගේ උපාංගය මූල්‍යනය කර ඇත්නම්, ඔබට මේවා සිදු කළ නොහැකිය:"</string>
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Play Store වෙතින් පිටත යෙදුම් ස්ථාපනය කරන්න"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"ඔබගේ උපාංගය ආරක්ෂිත ප්‍රකාරයට නැවත පණ ගැන්වීම"</string>
@@ -5082,7 +5085,7 @@
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"සංවර්ධක විකල්ප භාවිත කිරීම"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"ඔබගේ ණය සැපයුම්කරු මේවා සිදු කළ හැකිය:"</string>
     <string name="financed_privacy_IMEI" msgid="1852413860963824799">"ඔබගේ IMEI අංකය වෙත ප්‍රවේශ වන්න"</string>
-    <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"ඔබගේ උපාංගය කර්මාන්තශාලා යළි සැකසීම"</string>
+    <string name="financed_privacy_factory_reset" msgid="5505016667590160732">"යම් දෙයක් වැරදී ගියහොත් ඔබගේ උපාංගය කර්මාන්තශාලා යළි සැකසීම සිදු කරන්න"</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"ඔබගේ උපාංගය අගුලු දමා තිබේ නම්, ඔබට එය මේවා කිරීමට පමණක් භාවිත කළ හැකිය:"</string>
     <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"හදිසි ඇමතුම් සිදු කිරීම"</string>
     <string name="financed_privacy_system_info" msgid="4158031444108708927">"දිනය, වේලාව, ජාල තත්ත්වය සහ බැටරිය වැනි පද්ධති තොරතුරු බැලීම"</string>
@@ -5547,8 +5550,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"දිගු"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"පසුම්බිය පෙන්වන්න"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"අගුලු තිරයෙන් පසුම්බිය වෙත ප්‍රවේශ වීමට ඉඩ දෙන්න"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"QR ස්කෑනරය පෙන්වන්න"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"අගුලු තිරයෙන් QR ස්කෑනරය වෙත ප්‍රවේශ වීමට ඉඩ දෙන්න"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"QR කේත ස්කෑනරය පෙන්වන්න"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"අගුලු තිරයෙන් QR කේත ස්කෑනරය වෙත ප්‍රවේශ වීමට ඉඩ දෙන්න"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"උපාංග පාලන පෙන්වන්න"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"අගුලු තිරයෙන් බාහිර උපාංග සඳහා පාලන පෙන්වන්න"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"අගුලු දැමූ උපාංගයෙන් පාලනය කරන්න"</string>
@@ -5712,10 +5715,6 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"සම්බන්ධ නොකරන්න"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"සම්බන්ධ කරන්න"</string>
     <string name="tare_settings" msgid="3788654800004869077">"TARE සැකසීම්"</string>
-    <!-- no translation found for tare_on (2386073225978684535) -->
-    <skip />
-    <!-- no translation found for tare_off (6305694402929756726) -->
-    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"පෙරනිමි සැකසීම් වෙත ප්‍රතිවර්තනය කරන්න"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"සැකසීම් පෙරනිමිවලට ප්‍රතිවර්තනය කරන ලදි."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"උපරිම තෘප්තිමත් ශේෂය"</string>
@@ -5727,8 +5726,7 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"ක්‍රියා (නිෂ්පාදන වියදම)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"ක්‍රියා (මූලික මිල)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"තනි සිදුවීමකට ත්‍යාග"</string>
-    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
-    <skip />
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"මුළු සිදුවීම් කාල සීමාව සඳහා ත්‍යාග"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"දිනකට උපරිම ත්‍යාග"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"ඉහළම ක්‍රියාකාරකම"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"දැනුම්දීම දකින ලදි"</string>

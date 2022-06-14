@@ -1429,17 +1429,15 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"Personalitza el telèfon"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"Prova diferents estils, fons de pantalla i més"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Estalvi de pantalla"</string>
+    <string name="keywords_screensaver" msgid="7249337959432229172">"estalvi de pantalla"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Utilitza l\'estalvi de pantalla"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Mentre es carrega o està acoblat a la base"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"Els dos casos"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Mentre es carrega"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Mentre està acoblat a la base"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Mai"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Desactivat"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Per controlar què passa quan el telèfon està acoblat a una base o en mode de repòs, activa l\'estalvi de pantalla."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Quan comença"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Estalvi de pantalla actual"</string>
-    <string name="screensaver_settings_button" msgid="6159236558934930238">"Configuració"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Brillantor adaptativa"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Aixeca el dispositiu per activar-lo"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Pantalla ambient"</string>
@@ -3403,6 +3401,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"Suprimeix"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Totes les aplicacions i les dades d\'aquesta sessió se suprimiran."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Suprimeix"</string>
+    <string name="guest_category_title" msgid="5562663588315329152">"Convidat (Tu)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"Usuaris"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"Altres usuaris"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"Suprimeix l\'activitat de convidat"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Suprimeix totes les aplicacions i dades de la sessió de convidat en sortir d\'aquest mode"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Suprimir l\'activitat de convidat?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Les aplicacions i les dades d\'aquesta sessió de convidat se suprimiran ara, i tota l\'activitat de convidat que facis en el futur se suprimirà cada vegada que surtis del mode de convidat"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Activa les trucades telefòniques"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Activa les trucades telefòniques i els SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Suprimeix l\'usuari"</string>
@@ -4296,10 +4301,8 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Desactivat"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Fixació d\'aplicacions"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"La fixació d\'aplicacions permet mantenir l\'aplicació actual visible fins que es deixa de fixar. Aquesta funció serveix, per exemple, perquè un amic de confiança pugui jugar a un joc concret."</string>
-    <!-- no translation found for screen_pinning_description (4305370471370474846) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_user_description (2465729370037556955) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="7289730998890213708">"Quan una aplicació està fixada, pot obrir-ne d\'altres i es pot accedir a les dades personals. \n\nPer utilitzar la fixació d\'aplicacions: 	\n1.	Activa la fixació d\'aplicacions. 	\n2.	Obre Aplicacions recents. 	\n3.	Toca la icona de l\'aplicació a la part superior de la pantalla i, a continuació, toca Fixa."</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"Quan una aplicació està fixada, pot obrir-ne d\'altres i es pot accedir a les dades personals. \n\nSi vols compartir el teu dispositiu amb algú de manera segura, prova d\'utilitzar un usuari convidat. \n\nPer utilitzar la fixació d\'aplicacions: 	\n1.	Activa la fixació d\'aplicacions. 	\n2.	Obre Aplicacions recents. 	\n3.	Toca la icona de l\'aplicació a la part superior de la pantalla i, a continuació, toca Fixa."</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Quan es fixa una aplicació: \n\n•		Es pot accedir a les dades personals \n		(com ara els contactes i el contingut dels correus electrònics). \n•		L\'aplicació fixada pot obrir altres aplicacions. \n\nUtilitza la fixació d\'aplicacions només amb gent de confiança."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Sol·licita el patró de desbloqueig per deixar de fixar"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Demana el PIN per deixar de fixar"</string>
@@ -5073,7 +5076,7 @@
     <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"S\'ha permès la configuració restringida per a <xliff:g id="APP_NAME">%s</xliff:g>"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"Per la teva seguretat, aquesta opció de configuració no està disponible en aquests moments."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Informació del dispositiu finançat"</string>
-    <string name="financed_privacy_intro" msgid="5458393846604867947">"La teva entitat de crèdit pot canviar la configuració i instal·lar programari en aquest dispositiu.\n\nSi t\'oblides d\'un pagament, el dispositiu es bloquejarà.\n\nPer obtenir més informació, contacta amb l\'entitat de crèdit."</string>
+    <string name="financed_privacy_intro" msgid="7836497475568741579">"La teva entitat de crèdit pot canviar la configuració i instal·lar programari en aquest dispositiu durant la configuració.\n\nSi t\'oblides d\'un pagament, l\'entitat de crèdit pot bloquejar el dispositiu i canviar-ne la configuració.\n\nPer obtenir més informació, contacta amb l\'entitat de crèdit."</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"Si el dispositiu està finançat, no pots:"</string>
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Instal·lar aplicacions que no siguin de Play Store"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"Reiniciar el dispositiu en mode segur"</string>
@@ -5082,7 +5085,7 @@
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"Utilitzar opcions per a desenvolupadors"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"L\'entitat de crèdit pot:"</string>
     <string name="financed_privacy_IMEI" msgid="1852413860963824799">"Accedir al número IMEI"</string>
-    <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"Restablir les dades de fàbrica"</string>
+    <string name="financed_privacy_factory_reset" msgid="5505016667590160732">"Restableix les dades de fàbrica del dispositiu si es produeix un error"</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"Si el dispositiu es bloqueja, només pots utilitzar-lo per:"</string>
     <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"Fer trucades d\'emergència"</string>
     <string name="financed_privacy_system_info" msgid="4158031444108708927">"Consultar informació del sistema com ara la data, l\'hora, l\'estat de la xarxa i la bateria"</string>
@@ -5547,8 +5550,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Llarg"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Mostra la cartera"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"Permet l\'accés a la cartera des de la pantalla de bloqueig"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"Mostra l\'escàner de codis QR"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Permet l\'accés a l\'escàner de QR des de la pantalla de bloqueig"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"Mostra l\'escàner de codis QR"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Permet l\'accés a l\'escàner de codis QR des de la pantalla de bloqueig"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Mostra el control de dispositius"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Mostra els controls per a dispositius externs des de la pantalla de bloqueig"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Controla amb el dispositiu bloquejat"</string>
@@ -5712,10 +5715,6 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"No connectis"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Connecta"</string>
     <string name="tare_settings" msgid="3788654800004869077">"Configuració de TARE"</string>
-    <!-- no translation found for tare_on (2386073225978684535) -->
-    <skip />
-    <!-- no translation found for tare_off (6305694402929756726) -->
-    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"Torna a la configuració predeterminada"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Configuració predeterminada restablerta."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Saldo màxim amb càrrega completa"</string>
@@ -5727,8 +5726,7 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Accions (cost de producció)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Accions (preu base)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Recompenses per cada esdeveniment"</string>
-    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
-    <skip />
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"Recompenses per durada de l\'esdeveniment"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"Nombre màxim de recompenses al dia"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Activitat principal"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Notificació vista"</string>

@@ -1431,17 +1431,15 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"自訂您的手機"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"嘗試其他樣式和桌布等"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"螢幕保護程式"</string>
+    <string name="keywords_screensaver" msgid="7249337959432229172">"螢幕保護程式"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"使用螢幕保護程式"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"充電或放上插座時"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"任何一個狀態"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"充電時"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"放上插座時"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"永不"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"關閉"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"如要控制手機在插座上和/或休眠時的操作，請開啟螢幕保護程式。"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"啟用時間"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"目前的螢幕保護程式"</string>
-    <string name="screensaver_settings_button" msgid="6159236558934930238">"設定"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"自動調整亮度"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"拿起即可喚醒"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"微光螢幕"</string>
@@ -3406,6 +3404,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"刪除"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"這個工作階段中的所有應用程式和資料都會被刪除。"</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"移除"</string>
+    <string name="guest_category_title" msgid="5562663588315329152">"訪客 (您)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"使用者"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"其他使用者"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"刪除訪客活動"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"結束訪客模式時刪除所有訪客應用程式和資料"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"要刪除訪客活動嗎？"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"系統現在會刪除此訪客工作階段中的應用程式和資料；日後每次結束訪客模式時，系統都會刪除所有未來的訪客活動"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"開啟通話功能"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"開啟通話和短訊功能"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"刪除使用者"</string>
@@ -4299,10 +4304,8 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"關閉"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"應用程式固定"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"應用程式固定功能可讓目前使用的應用程式持續在畫面上顯示，直到您取消固定為止。此功能可讓信任的朋友玩特定遊戲。"</string>
-    <!-- no translation found for screen_pinning_description (4305370471370474846) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_user_description (2465729370037556955) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="7289730998890213708">"固定應用程式後，該應用程式可開啟其他應用程式，亦能存取個人資料。\n\n使用應用程式固定功能的步驟如下：	\n1.	開啟應用程式固定功能	\n2.	開啟 [概覽]	\n3.	輕按畫面頂部的應用程式圖示，然後輕按 [固定]"</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"固定應用程式後，該應用程式可開啟其他應用程式，亦能存取個人資料。\n\n如要安全地與他人共用裝置，建議您改用訪客使用者。\n\n使用應用程式固定功能的步驟如下：	\n1.	開啟應用程式固定功能 \n2.	開啟 [概覽]	\n3.	輕按畫面頂部的應用程式圖示，然後輕按 [固定]"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"固定應用程式後：\n\n•	 該應用程式可存取個人資料\n		(例如聯絡人和電郵內容)\n•	 固定的應用程式可開啟其他應用程式\n\n僅與您信任的人使用應用程式固定功能。"</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"取消固定時必須提供解鎖圖形"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"取消固定時必須輸入 PIN"</string>
@@ -5076,7 +5079,7 @@
     <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"已允許「<xliff:g id="APP_NAME">%s</xliff:g>」的受限設定"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"為安全起見，系統目前不提供此設定。"</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"分期付款裝置資料"</string>
-    <string name="financed_privacy_intro" msgid="5458393846604867947">"信貸提供者可在此裝置上變更設定及安裝軟件。\n\n如果您未按時付款，系統便會鎖定您的裝置。\n\n如要瞭解詳情，請聯絡您的信貸提供者。"</string>
+    <string name="financed_privacy_intro" msgid="7836497475568741579">"信貸提供者可在設定過程中在此裝置上變更設定及安裝軟件。\n\n如果您未按時付款，信貸提供者可鎖定裝置並變更裝置設定。\n\n如要瞭解詳情，請聯絡您的信貸提供者。"</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"如果透過分期付款購買裝置，您無法執行以下操作："</string>
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"安裝非「Play 商店」的應用程式"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"重新啟動裝置並進入安全模式"</string>
@@ -5085,7 +5088,7 @@
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"使用開發人員選項"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"您的信貸提供者可執行以下操作："</string>
     <string name="financed_privacy_IMEI" msgid="1852413860963824799">"存取您的 IMEI 號碼"</string>
-    <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"將裝置回復原廠設定"</string>
+    <string name="financed_privacy_factory_reset" msgid="5505016667590160732">"發生問題時將裝置回復原廠設定"</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"裝置被鎖定時，您只能執行以下操作："</string>
     <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"撥打緊急電話"</string>
     <string name="financed_privacy_system_info" msgid="4158031444108708927">"查看日期、時間、網絡狀態和電池等系統資料"</string>
@@ -5550,8 +5553,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"長"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"顯示電子錢包"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"允許在上鎖畫面使用電子錢包"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"顯示 QR 碼掃瞄器"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"允許在上鎖畫面存取 QR 碼掃瞄器"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"顯示 QR 碼掃瞄器"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"允許在上鎖畫面存取 QR 碼掃瞄器"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"顯示裝置控制"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"在螢幕鎖定畫面上顯示外部裝置的控制項"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"透過已鎖定的裝置控制"</string>
@@ -5715,10 +5718,6 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"不要連接"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"連接"</string>
     <string name="tare_settings" msgid="3788654800004869077">"TARE 設定"</string>
-    <!-- no translation found for tare_on (2386073225978684535) -->
-    <skip />
-    <!-- no translation found for tare_off (6305694402929756726) -->
-    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"還原為預設設定"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"已還原為預設設定。"</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"裝置充滿電時的最大可用電量"</string>
@@ -5730,8 +5729,7 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"行動 (生產成本)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"行動 (基本價格)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"每個活動的個別獎賞"</string>
-    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
-    <skip />
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"活動時間總長度的獎賞"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"每日獎賞上限"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"最上層顯示的活動"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"已查看通知"</string>

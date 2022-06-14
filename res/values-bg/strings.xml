@@ -1431,17 +1431,15 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"Персонализиране на телефона ви"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"Изпробвайте различни стилове, тапети и др."</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Скрийнсейвър"</string>
+    <string name="keywords_screensaver" msgid="7249337959432229172">"скрийнсейвър"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Използване на скрийнсейвър"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"При зареждане или връзка с докинг станция"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"И в двата случая"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"При зареждане"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"При свързване с докинг станция"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Никога"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Изкл."</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"За да контролирате какво се случва, когато телефонът е свързан с докинг станция и/или е в спящ режим, включете скрийнсейвъра."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Кога да стартира функцията"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Текущ скрийнсейвър"</string>
-    <string name="screensaver_settings_button" msgid="6159236558934930238">"Настройки"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Автоматична яркост"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Събуждане при повдигане"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Дисплей, открояващ важни неща"</string>
@@ -3405,6 +3403,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"Изтриване"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Всички приложения и данни в тази сесия ще бъдат изтрити."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Премахване"</string>
+    <string name="guest_category_title" msgid="5562663588315329152">"Гост (вие)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"Потребители"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"Други потребители"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"Изтриване на активността като гост"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Изтриване на всички приложения и данни при изход от режима на гост"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Изтриване на активността като гост?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Приложенията и данните от тази сесия като гост ще бъдат изтрити сега, а цялата бъдеща активност като гост ще се изтрива всеки път, когато излезете от режима на гост"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Включване на телефонните обаждания"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Включване на тел. обаждания и SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Изтриване на потребителя"</string>
@@ -4298,10 +4303,8 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Изключено"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Фиксиране на приложения"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"Функцията за фиксиране на приложения ви дава възможност да задържите текущото приложение на преден план, докато не го премахнете. С нейна помощ можете например да позволите на доверен приятел да играе конкретна игра."</string>
-    <!-- no translation found for screen_pinning_description (4305370471370474846) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_user_description (2465729370037556955) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="7289730998890213708">"Когато дадено приложение е фиксирано, то може да отваря други приложения. Възможно е също някои лични данни да са достъпни. \n\nЗа да използвате функцията за фиксиране на приложения: 	\n1.	Включете я. 	\n2.	Отворете екрана за общ преглед. 	\n3.	Докоснете иконата на приложението в горната част на екрана, след което изберете „Фиксиране“."</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"Когато дадено приложение е фиксирано, то може да отваря други приложения. Възможно е също някои лични данни да са достъпни. \n\nАко искате по сигурен начин да споделите устройството си с друг човек, използвайте режима на гост. \n\nЗа да използвате функцията за фиксиране на приложения: 	\n1.	Включете я. 	\n2.	Отворете екрана за общ преглед. 	\n3.	Докоснете иконата на приложението в горната част на екрана, след което изберете „Фиксиране“."</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Когато дадено приложение е фиксирано: \n\n•		някои лични данни може да бъдат достъпни \n		(като например контактите и съдържанието на имейлите); \n•		то може да отваря други приложения. \n\nИзползвайте функцията само с хора, на които имате доверие."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Запитване за фигура за отключване преди освобождаване"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"ПИН код преди освобождаване"</string>
@@ -5077,7 +5080,7 @@
     <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"Ограничените настройки са разрешени за <xliff:g id="APP_NAME">%s</xliff:g>"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"От съображения за сигурност понастоящем тази настройка не е налице."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Информация за финансираното устройство"</string>
-    <string name="financed_privacy_intro" msgid="5458393846604867947">"Кредитодателят ви може да променя настройките на това устройство и да инсталира софтуер на него.\n\nАко пропуснете плащане, устройството ви ще бъде заключено.\n\nЗа да научите повече, свържете се с кредитодателя си."</string>
+    <string name="financed_privacy_intro" msgid="7836497475568741579">"Кредитодателят ви може да променя настройките на това устройство и да инсталира софтуер на него по време на настройването.\n\nАко пропуснете плащане, кредитодателят може да заключи устройството ви и да промени настройките му.\n\nЗа да научите повече, свържете се с кредитодателя си."</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"Ако у-вото ви е финансирано, не можете да правите следното:"</string>
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Инсталиране на приложения извън Google Play Магазин"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"Рестартиране на устройството ви в безопасен режим"</string>
@@ -5086,7 +5089,7 @@
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"Използване на опциите за програмисти"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"Кредитодателят ви може да прави следното:"</string>
     <string name="financed_privacy_IMEI" msgid="1852413860963824799">"Достъп до IMEI номера ви"</string>
-    <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"Възстан. на фабр. настройки на у-вото ви"</string>
+    <string name="financed_privacy_factory_reset" msgid="5505016667590160732">"Възстановете фабричните настройки на устройството си, ако нещо се обърка"</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"Ако устройството ви е заключено, можете да го използвате само за:"</string>
     <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"Извършване на спешни обаждания"</string>
     <string name="financed_privacy_system_info" msgid="4158031444108708927">"Преглед на системна информация, като например датата, часа, състоянието на мрежата и батерията"</string>
@@ -5551,8 +5554,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Продължително"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Показване на портфейла"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"Разрешаване на достъп до Wallet от заключения екран"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"Показване на инструмента за сканиране на QR кодове"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Разрешаване на достъп до инструмента за сканиране на QR кодове от заключения екран"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"Показване на скенера за QR кодове"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Разрешаване на достъп до инструмента за сканиране на QR кодове от заключения екран"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Показване на контроли за устройства"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Показване на контроли за външни устройства на заключения екран"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Управление от заключено устройство"</string>
@@ -5716,10 +5719,6 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Отказ"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Свързване"</string>
     <string name="tare_settings" msgid="3788654800004869077">"Настройки за TARE"</string>
-    <!-- no translation found for tare_on (2386073225978684535) -->
-    <skip />
-    <!-- no translation found for tare_off (6305694402929756726) -->
-    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"Възстановяване на стандартните настройки"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Възстановени са стандартните настройки"</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Максимален баланс при заредена батерия"</string>
@@ -5731,8 +5730,7 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Действия (цена за извършване)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Действия (основна цена)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Награди за едно събитие"</string>
-    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
-    <skip />
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"Награди за времетраенето на събитието"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"Максималният брой награди на ден"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Водеща активност"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Видяхте известие"</string>

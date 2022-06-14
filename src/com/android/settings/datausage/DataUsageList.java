@@ -152,7 +152,20 @@ public class DataUsageList extends DataUsageBaseFragment
     public void onViewCreated(View v, Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
 
+        // Show loading
+        mLoadingViewController = new LoadingViewController(
+                v.findViewById(R.id.loading_container), getListView());
+        mLoadingViewController.showLoadingViewDelayed();
+    }
+
+    private void onEndOfLoading() {
+        if (mHeader != null) {
+            return;
+        }
         mHeader = setPinnedHeaderView(R.layout.apps_filter_spinner);
+
+        mCycleSpinner = mHeader.findViewById(R.id.filter_spinner);
+
         mHeader.findViewById(R.id.filter_settings).setOnClickListener(btn -> {
             final Bundle args = new Bundle();
             args.putParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE, mTemplate);
@@ -163,8 +176,6 @@ public class DataUsageList extends DataUsageBaseFragment
                     .setArguments(args)
                     .launch();
         });
-        mCycleSpinner = mHeader.findViewById(R.id.filter_spinner);
-        mCycleSpinner.setVisibility(View.GONE);
         mCycleAdapter = new CycleAdapter(mCycleSpinner.getContext(), new SpinnerInterface() {
             @Override
             public void setAdapter(CycleAdapter cycleAdapter) {
@@ -196,16 +207,16 @@ public class DataUsageList extends DataUsageBaseFragment
                 super.sendAccessibilityEvent(host, eventType);
             }
         });
-
-        mLoadingViewController = new LoadingViewController(
-                getView().findViewById(R.id.loading_container), getListView());
-        mLoadingViewController.showLoadingViewDelayed();
     }
 
     @Override
     public void onResume() {
         super.onResume();
         mDataStateListener.start(mSubId);
+
+        if (mChart != null) {
+            mChart.onPreparingChartData();
+        }
 
         // kick off loader for network history
         // TODO: consider chaining two loaders together instead of reloading
@@ -305,6 +316,9 @@ public class DataUsageList extends DataUsageBaseFragment
      */
     @VisibleForTesting
     void updatePolicy() {
+        if (mHeader == null) {
+            return;
+        }
         final NetworkPolicy policy = services.mPolicyEditor.getPolicy(mTemplate);
         final View configureButton = mHeader.findViewById(R.id.filter_settings);
         //SUB SELECT
@@ -538,11 +552,13 @@ public class DataUsageList extends DataUsageBaseFragment
         @Override
         public void onLoadFinished(Loader<List<NetworkCycleChartData>> loader,
                 List<NetworkCycleChartData> data) {
-            mLoadingViewController.showContent(false /* animate */);
+            onEndOfLoading();
+            if (mLoadingViewController != null) {
+                mLoadingViewController.showContent(false /* animate */);
+            }
             mCycleData = data;
             // calculate policy cycles based on available data
             updatePolicy();
-            mCycleSpinner.setVisibility(View.VISIBLE);
         }
 
         @Override

@@ -1429,17 +1429,15 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"Телефонды реттеу"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"Түрлі стильдерді, тұсқағаздарды, т.б. пайдаланып көріңіз."</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Скринсейвер"</string>
+    <string name="keywords_screensaver" msgid="7249337959432229172">"скринсейвер"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Скринсейверді пайдалану"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Зарядтау кезінде немесе қондыру станциясында"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"Екеуі де"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Зарядтау кезінде"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Қондыру станциясында"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Ешқашан"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Өшірулі"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Телефон қондырылған және/немесе ұйықтаған кездегі процесті бақылау үшін скринсейверді қосыңыз."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Іске қосылатын кезі"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Қазіргі скринсейвер"</string>
-    <string name="screensaver_settings_button" msgid="6159236558934930238">"Параметрлер"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Aвтоматтық жарықтық"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Ояту үшін көтеру"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Экранды автоматты қосу"</string>
@@ -3403,6 +3401,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"Жою"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Осы сеанстағы барлық қолданбалар мен деректер жойылады."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Алып тастау"</string>
+    <string name="guest_category_title" msgid="5562663588315329152">"Қонақ (сіз)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"Пайдаланушылар"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"Басқа пайдаланушылар"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"Қонақ әрекетін жою"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Қонақ режимінен шыққан кезде, барлық қонақ қолданбасы мен дерегін жою"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Қонақ әрекетін жою керек пе?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Осы қонақ сеансындағы қолданбалар мен деректер қазір жойылады және қонақ режимінен шыққан сайын қонақтың барлық әрекеті өшіп отырады."</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Телефон қоңырауларын қосу"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Телефон қоңырауларын және SMS қосу"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Пайдаланушыны жою"</string>
@@ -4296,10 +4301,8 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Өшірулі"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Қолданбаны бекіту"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"Экранда бекітілген қолданба ғана көрсетіліп тұрады. Оны, мысалы, досыңыз құрылғыңызды бір ойын ойнау үшін сұрағанда қолдануға болады."</string>
-    <!-- no translation found for screen_pinning_description (4305370471370474846) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_user_description (2465729370037556955) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="7289730998890213708">"Қолданба бекітілген кезде, ол арқылы басқа қолданбаларды және жеке деректерді ашуға болады. \n\nҚолданбаны бекіту функциясын пайдалану үшін: 	\n1.	Оны іске қосыңыз. 	\n2.	\"Шолу\" мәзірін ашыңыз. 	\n3.	Экранның жоғарғы жағындағы қолданба белгішесін, одан кейін \"Бекіту\" түймесін түртіңіз."</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"Қолданба бекітілген кезде, ол арқылы басқа қолданбаларды және жеке деректерді ашуға болады. \n\nҚұрылғыны біреумен бөлісу үшін қонақ профилін пайдаланған дұрыс. \n\nҚолданбаны бекіту функциясын пайдалану үшін: 	\n1.	Оны іске қосыңыз. 	\n2.	\"Шолу\" мәзірін ашыңыз. 	\n3.	Экранның жоғарғы жағындағы қолданба белгішесін, одан кейін \"Бекіту\" түймесін түртіңіз."</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Қолданба бекітілген кезде: \n\n•	 жеке деректерді пайдалануға болады \n		(мысалы, контактілер және электрондық хаттың мазмұны); \n•	 бекітілген қолданбалар басқа да қолданбаларды аша алады. \n\nБұл функцияны сенімді адамдармен ғана пайдаланыңыз."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Босату алдында құлыпты ашу өрнегін сұрау"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Босату алдында PIN кодын сұрау"</string>
@@ -5073,7 +5076,7 @@
     <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"<xliff:g id="APP_NAME">%s</xliff:g> үшін шектелген параметрлерге рұқсат берілген."</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"Қауіпсіздік үшін бұл параметр қазір қолжетімсіз."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Қаржыландырылатын құрылғы туралы ақпарат"</string>
-    <string name="financed_privacy_intro" msgid="5458393846604867947">"Кредитор параметрлерді өзгертіп, осы құрылғыға бағдарламалық құрал орнатуы мүмкін.\n\nТөлемді өткізіп алған болсаңыз, құрылғыңыз құлыпталады.\n\nТолық ақпарат алу үшін кредиторға хабарласыңыз."</string>
+    <string name="financed_privacy_intro" msgid="7836497475568741579">"Кредитор параметрлерді өзгертіп, реттеу кезінде осы құрылғыға бағдарламалық құрал орнатуы мүмкін.\n\nТөлемді өткізіп алсаңыз, кредитор құрылғыңызды құлыптап, оның параметрлерін өзгертуі мүмкін.\n\nТолық ақпарат алу үшін кредиторға хабарласыңыз."</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"Құрылғы ақысы толық төленбеген жағдайда қойылатын шектеулер:"</string>
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Play Store-дан тыс қолданбаларды орнату"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"Құрылғыны өшіріп қосып, қауіпсіз режимге өту"</string>
@@ -5082,7 +5085,7 @@
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"Әзірлеуші опцияларын пайдалану"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"Кредитордың мүмкіндіктері:"</string>
     <string name="financed_privacy_IMEI" msgid="1852413860963824799">"IMEI нөмірін пайдалану"</string>
-    <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"Құрылғыны зауыттық параметрлерге қайтару"</string>
+    <string name="financed_privacy_factory_reset" msgid="5505016667590160732">"Бірдеңе дұрыс болмаса, құрылғыңызды зауыттық параметрлерге қайтарыңыз."</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"Егер құрылғыңыз құлыпталып қалса, оны төмендегі әрекеттерге ғана қолдана аласыз:"</string>
     <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"Құтқару қызметіне қоңырау шалу"</string>
     <string name="financed_privacy_system_info" msgid="4158031444108708927">"Күн, уақыт, желі күйі және батарея сияқты жүйе ақпаратын көру"</string>
@@ -5547,8 +5550,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Ұзақ"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Әмиянды көрсету"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"Әмиянды құлыптаулы экраннан пайдалануға мүмкіндік береді."</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"QR сканерін көрсету"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"QR сканерін құлыптаулы экраннан пайдалануға рұқсат ету"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"QR кодының сканерін көрсету"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"QR кодын сканерлеу қолданбасын құлыптаулы экраннан пайдалануға рұқсат ету"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Құрылғыны басқару элементтерін көрсету"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Құлыптаулы экранда сыртқы құрылғыларға арналған басқару элементтерін көрсету"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Құлыпталған құрылғыдан басқару"</string>
@@ -5712,10 +5715,6 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Қосылмау"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Қосылу"</string>
     <string name="tare_settings" msgid="3788654800004869077">"TARE параметрлері"</string>
-    <!-- no translation found for tare_on (2386073225978684535) -->
-    <skip />
-    <!-- no translation found for tare_off (6305694402929756726) -->
-    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"Әдепкі параметрлерге қайтару"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Әдепкі параметрлерге қайтарылды."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Толық зарядталғандағы максималды баланс"</string>
@@ -5727,8 +5726,7 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Әрекеттер (өндіріс бағасы)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Әрекеттер (негізгі баға)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Бір іс-шараға берілетін бонустар"</string>
-    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
-    <skip />
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"Толық іс-шараға берілетін бонустар"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"Бір күнге берілетін ең көп бонустар"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Ең жоғары белсенділік"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Хабарландыру қаралды"</string>

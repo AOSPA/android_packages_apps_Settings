@@ -1429,17 +1429,15 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"Pertsonalizatu telefonoa"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"Probatu askotariko estiloak, horma-paperak, etab."</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Pantaila-babeslea"</string>
+    <string name="keywords_screensaver" msgid="7249337959432229172">"pantailarako babeslea"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Erabili pantaila-babeslea"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Kargatzen ari denean edo oinarrian dagoenean"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"Bietako edozein"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Kargatzen ari denean"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Oinarrian dagoenean"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Inoiz ez"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Desaktibatuta"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Telefonoa oinarrian edo inaktibo dagoenean zer gertatzen den kontrolatzeko, aktibatu pantaila-babeslea."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Noiz abiarazi"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Oraingo pantaila-babeslea"</string>
-    <string name="screensaver_settings_button" msgid="6159236558934930238">"Ezarpenak"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Distira automatikoa"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Aktibatu eskuetan hartzen denean"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Pantaila ilundua"</string>
@@ -3403,6 +3401,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"Ezabatu"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Saioko aplikazio eta datu guztiak ezabatuko dira."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Kendu"</string>
+    <string name="guest_category_title" msgid="5562663588315329152">"Gonbidatua (zu)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"Erabiltzaileak"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"Beste erabiltzaileak"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"Ezabatu gonbidatuaren jarduerak"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Gonbidatu modutik irtetean, ezabatu gonbidatuaren aplikazio eta datu guztiak"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Gonbidatuaren jarduerak ezabatu nahi dituzu?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Gonbidatuentzako saio honetako aplikazio eta datuak orain ezabatuko dira; bestalde, etorkizuneko gonbidatuen jarduera guztiak gonbidatu modutik irteten zaren bakoitzean ezabatuko dira"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Aktibatu telefono-deiak"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Aktibatu telefono-deiak eta SMSak"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Ezabatu erabiltzailea"</string>
@@ -4296,10 +4301,8 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Desaktibatuta"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Aplikazioak ainguratzea"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"Ainguratuz gero, aplikazio hau begien bistan izango duzu beti, harik eta aingura kentzen diozun arte. Lagun fidagarri bati joko zehatz batean aritzea ahalbidetzeko erabil dezakezu, adibidez."</string>
-    <!-- no translation found for screen_pinning_description (4305370471370474846) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_user_description (2465729370037556955) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="7289730998890213708">"Aplikazio bat ainguratuta dagoenean, baliteke beste aplikazio batzuk irekitzeko gai izatea, eta haiek zure datu pertsonalak atzitu ahal izango dituzte agian. \n\nAplikazioak ainguratzeko aukera erabiltzeko: 	\n1.	Aktibatu aplikazioak ainguratzeko aukera. 	\n2.	Ireki Ikuspegi orokorra. 	\n3.	Sakatu pantailaren goialdean dagoen aplikazioaren ikonoa eta, ondoren, sakatu Ainguratu."</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"Aplikazio bat ainguratuta dagoenean, baliteke beste aplikazio batzuk irekitzeko gai izatea, eta haiek zure datu pertsonalak atzitu ahal izango dituzte agian. \n\nGailua segurtasunez partekatu nahi baduzu beste norbaitekin, gonbidatuentzako erabiltzaile-profil bat ere erabil dezakezu. \n\nAplikazioak ainguratzeko aukera erabiltzeko: 	\n1.	Aktibatu aplikazioak ainguratzeko aukera. 	\n2.	Ireki Ikuspegi orokorra. 	\n3.	Sakatu pantailaren goialdean dagoen aplikazioaren ikonoa eta, ondoren, sakatu Ainguratu."</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Aplikazioa ainguratuta dagoenean: \n\n• Baliteke zure datu pertsonalak atzitzeko aukera egotea (adibidez, kontaktuak eta posta elektronikoko edukia). \n\n• Baliteke beste aplikazio batzuk irekitzeko gai izatea. \n\nPertsona fidagarriekin soilik erabili beharko zenuke aplikazioak ainguratzeko aukera."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Eskatu desblokeatzeko eredua aingura kendu aurretik"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Eskatu PINa aingura kendu aurretik"</string>
@@ -5073,7 +5076,7 @@
     <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"Eman da <xliff:g id="APP_NAME">%s</xliff:g> aplikazioan ezarpen mugatuak erabiltzeko baimena"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"Zure segurtasuna bermatzeko, ezarpena ez dago erabilgarri une honetan."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Gailu finantzatuaren informazioa"</string>
-    <string name="financed_privacy_intro" msgid="5458393846604867947">"Kreditu bidezko gailu-hornitzaileak gailuaren ezarpenak alda ditzake, eta bertan softwarea instalatu.\n\nOrdainketaren bat egiten ez baduzu, gailua blokeatu egingo da.\n\nInformazio gehiago lortzeko, jarri harremanetan kreditu bidezko gailu-hornitzailearekin."</string>
+    <string name="financed_privacy_intro" msgid="7836497475568741579">"Kreditu bidezko gailu-hornitzaileak gailuaren ezarpenak alda ditzake, eta bertan softwarea instalatu, konfigurazio-prozesuan.\n\nOrdainketaren bat egiten ez baduzu, kreditu bidezko gailu-hornitzaileak gailua blokea dezake, eta gailuaren ezarpenak aldatu.\n\nInformazio gehiago lortzeko, jarri harremanetan kreditu bidezko gailu-hornitzailearekin."</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"Gailua finantzatu baduzu, ezingo dituzu egin hauek:"</string>
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Instalatu Play Store-tik kanpoko aplikazioak"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"Berrabiarazi gailua eta, ondoren, erabili modu segurua"</string>
@@ -5082,7 +5085,7 @@
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"Erabili garatzaileentzako aukerak"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"Kreditu bidezko gailu-hornitzaileak hauek egin ditzake:"</string>
     <string name="financed_privacy_IMEI" msgid="1852413860963824799">"Atzitu IMEI zenbakia"</string>
-    <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"Berrezarri gailuaren jatorrizko datuak"</string>
+    <string name="financed_privacy_factory_reset" msgid="5505016667590160732">"Arazoren bat gertatuz gero, berrezarri gailuaren jatorrizko datuak"</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"Gailua blokeatuta badago, hauek egiteko soilik erabil dezakezu:"</string>
     <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"Egin larrialdi-deiak"</string>
     <string name="financed_privacy_system_info" msgid="4158031444108708927">"Ikusi sistemari buruzko informazioa, hala nola data, ordua, sarearen egoera eta bateria"</string>
@@ -5547,8 +5550,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Luzea"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Erakutsi diru-zorroa"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"Eman pantaila blokeatutik diru-zorroa atzitzeko baimena"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"Erakutsi QR kodeen eskanerra"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Eman QR kodeen eskanerra atzitzeko baimena pantaila blokeatuan"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"Erakutsi QR kodeen eskanerra"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Eman QR kodeen eskanerra atzitzeko baimena pantaila blokeatuan"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Erakutsi gailuak kontrolatzeko widgetak"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Erakutsi kanpoko gailuak kontrolatzeko aukerak pantaila blokeatuan"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Kontrolatu gailu blokeatutik"</string>
@@ -5712,10 +5715,6 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Ez konektatu"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Konektatu"</string>
     <string name="tare_settings" msgid="3788654800004869077">"TARE ezarpenak"</string>
-    <!-- no translation found for tare_on (2386073225978684535) -->
-    <skip />
-    <!-- no translation found for tare_off (6305694402929756726) -->
-    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"Berrezarri ezarpen lehenetsiak"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Ezarpen lehenetsiak berrezarri dira."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Gehieneko oreka asea"</string>
@@ -5727,8 +5726,7 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Ekintzak (gauzatzeko kostua)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Ekintzak (oinarrizko prezioa)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Gertaera bakoitzeko sariak"</string>
-    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
-    <skip />
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"Gertaeraren iraupen osoko sariak"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"Gehieneko sariak eguneko"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Jarduera nagusia"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Jakinarazpen bat ikusi da"</string>

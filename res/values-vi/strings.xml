@@ -1431,17 +1431,15 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"Tùy chỉnh điện thoại"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"Thử nhiều kiểu, hình nền và các tùy chọn khác"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Trình bảo vệ màn hình"</string>
+    <string name="keywords_screensaver" msgid="7249337959432229172">"trình bảo vệ màn hình"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Sử dụng trình bảo vệ màn hình"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Khi sạc hoặc gắn vào đế sạc"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"Khi gắn đế và sạc"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Trong khi sạc"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Khi gắn vào đế sạc"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Không bao giờ"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Tắt"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Để kiểm soát những gì diễn ra khi điện thoại được gắn đế và/hoặc ở chế độ ngủ, hãy bật trình bảo vệ màn hình."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Thời điểm khởi động"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Trình bảo vệ màn hình hiện tại"</string>
-    <string name="screensaver_settings_button" msgid="6159236558934930238">"Cài đặt"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Độ sáng tự động"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Nhấc lên để đánh thức"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Màn hình sáng"</string>
@@ -3403,6 +3401,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"Xóa"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Tất cả ứng dụng và dữ liệu trong phiên này sẽ bị xóa."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Xóa"</string>
+    <string name="guest_category_title" msgid="5562663588315329152">"Khách (Bạn)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"Người dùng"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"Người dùng khác"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"Xoá hoạt động ở chế độ khách"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Xoá mọi ứng dụng và dữ liệu ở chế độ khách khi thoát khỏi chế độ khách"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Xoá hoạt động ở chế độ khách?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Các ứng dụng và dữ liệu trong phiên khách này sẽ bị xoá ngay bây giờ, và tất cả hoạt động sau này ở chế độ khách sẽ bị xoá mỗi khi bạn thoát khỏi chế độ khách"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Bật cuộc gọi điện thoại"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Bật cuộc gọi điện thoại và SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Xóa người dùng"</string>
@@ -4296,10 +4301,8 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Đang tắt"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Ghim ứng dụng"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"Tính năng ghim ứng dụng cho phép một ứng dụng liên tục hiện trên màn hình cho tới khi bỏ ghim. Bạn có thể sử dụng tính năng này để cho phép người mà bạn tin cậy chơi một trò chơi cụ thể chẳng hạn."</string>
-    <!-- no translation found for screen_pinning_description (4305370471370474846) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_user_description (2465729370037556955) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="7289730998890213708">"Khi bạn ghim ứng dụng, ứng dụng đã ghim có thể mở các ứng dụng khác và truy cập vào dữ liệu cá nhân. \n\nĐể dùng tính năng ghim ứng dụng, hãy làm như sau: 	\n1.	Bật tính năng ghim ứng dụng 	\n2.	Mở phần Tổng quan 	\n3.	Nhấn vào biểu tượng ứng dụng ở đầu màn hình, sau đó nhấn vào Ghim"</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"Khi bạn ghim ứng dụng, ứng dụng đã ghim có thể mở các ứng dụng khác và truy cập vào dữ liệu cá nhân. \n\nNếu bạn muốn chia sẻ thiết bị của mình với người khác một cách an toàn, hãy thử sử dụng chế độ khách. \n\nĐể dùng tính năng ghim ứng dụng, hãy làm như sau: 	\n1.	Bật tính năng ghim ứng dụng 	\n2.	Mở phần Tổng quan 	\n3.	Nhấn vào biểu tượng ứng dụng ở đầu màn hình, sau đó nhấn vào Ghim"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Khi ghim ứng dụng: \n\n•	 Ứng dụng đã ghim có thể truy cập dữ liệu cá nhân (chẳng hạn như danh bạ và nội dung email) \n\n•	 Ứng dụng đã ghim có thể mở các ứng dụng khác \n\nChỉ sử dụng tính năng ghim ứng dụng với những người mà bạn tin tưởng."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Hỏi hình mở khóa trước khi bỏ ghim"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Hỏi mã PIN trước khi bỏ ghim"</string>
@@ -5073,7 +5076,7 @@
     <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"Đã cho phép các chế độ cài đặt bị hạn chế cho <xliff:g id="APP_NAME">%s</xliff:g>"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"Để bảo mật cho bạn, chế độ cài đặt này hiện không dùng được."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Thông tin về thiết bị trả góp"</string>
-    <string name="financed_privacy_intro" msgid="5458393846604867947">"Tổ chức tín dụng của bạn có thể thay đổi chế độ cài đặt và cài đặt phần mềm trên thiết bị này.\n\nNếu bạn chưa thanh toán, thiết bị của bạn sẽ bị khoá.\n\nĐể tìm hiểu thêm, hãy liên hệ với tổ chức tín dụng."</string>
+    <string name="financed_privacy_intro" msgid="7836497475568741579">"Tổ chức tín dụng có thể thay đổi các chế độ cài đặt và cài đặt phần mềm trên thiết bị này trong quá trình thiết lập.\n\nNếu bạn chưa thanh toán, tổ chức tín dụng có thể khoá thiết bị của bạn và thay đổi các chế độ cài đặt thiết bị.\n\nĐể tìm hiểu thêm, hãy liên hệ với tổ chức tín dụng."</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"Nếu mua trả góp thiết bị, bạn không thể:"</string>
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Cài đặt các ứng dụng không phải của Cửa hàng Play"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"Khởi động lại thiết bị ở chế độ an toàn"</string>
@@ -5082,7 +5085,7 @@
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"Sử dụng tuỳ chọn cho nhà phát triển"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"Tổ chức tín dụng của bạn có thể:"</string>
     <string name="financed_privacy_IMEI" msgid="1852413860963824799">"Truy cập số IMEI của bạn"</string>
-    <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"Đặt lại thiết bị về trạng thái ban đầu"</string>
+    <string name="financed_privacy_factory_reset" msgid="5505016667590160732">"Đặt lại thiết bị về trạng thái ban đầu nếu có sự cố xảy ra"</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"Nếu thiết bị bị khoá, thì bạn chỉ có thể dùng thiết bị để làm những việc sau:"</string>
     <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"Thực hiện cuộc gọi khẩn cấp"</string>
     <string name="financed_privacy_system_info" msgid="4158031444108708927">"Xem thông tin hệ thống như ngày, giờ, trạng thái mạng và pin"</string>
@@ -5547,8 +5550,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Dài"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Hiện ví"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"Cho phép truy cập vào ví trên màn hình khoá"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"Hiện trình quét mã QR"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Cho phép truy cập vào trình quét mã QR từ màn hình khoá"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"Hiện Trình quét mã QR"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Cho phép truy cập vào trình quét mã QR từ màn hình khoá"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Hiện các nút điều khiển thiết bị"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Hiện các nút điều khiển của thiết bị bên ngoài trên màn hình khoá"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Điều khiển trên thiết bị đang khoá"</string>
@@ -5712,10 +5715,6 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Không kết nối"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Kết nối"</string>
     <string name="tare_settings" msgid="3788654800004869077">"Cài đặt TARE"</string>
-    <!-- no translation found for tare_on (2386073225978684535) -->
-    <skip />
-    <!-- no translation found for tare_off (6305694402929756726) -->
-    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"Khôi phục về Chế độ cài đặt mặc định"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Đã khôi phục về Chế độ cài đặt mặc định."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Tín dụng tối đa cho trạng thái sạc đầy"</string>
@@ -5727,8 +5726,7 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Thao tác (Chi phí sản xuất)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Thao tác (Giá cơ sở)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Số phần thưởng cho mỗi sự kiện"</string>
-    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
-    <skip />
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"Số phần thưởng trong toàn bộ thời gian diễn ra sự kiện"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"Số phần thưởng tối đa mỗi ngày"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Hoạt động hàng đầu"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Thông báo đã xem"</string>

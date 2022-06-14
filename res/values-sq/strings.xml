@@ -1429,17 +1429,15 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"Personalizo telefonin"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"Provo stile, imazhe sfondi të ndryshme etj."</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Mbrojtësi i ekranit"</string>
+    <string name="keywords_screensaver" msgid="7249337959432229172">"mbrojtësi i ekranit"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Përdor mbrojtësin e ekranit"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Gjatë karikimit ose lidhjes me stacionin"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"Në të dyja rastet"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Gjatë karikimit"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Kur vendoset në stacion"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Asnjëherë"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Çaktivizuar"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Për të kontrolluar se çfarë ndodh kur telefonin e vendos te stacioni dhe/ose në gjumë, aktivizo mbrojtësin e ekranit."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Kur të fillojë"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Mbrojtësi aktual i ekranit"</string>
-    <string name="screensaver_settings_button" msgid="6159236558934930238">"Cilësimet"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Ndriçimi automatik"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Ngrije për ta zgjuar"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Shfaqja e ambientit"</string>
@@ -3403,6 +3401,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"Fshi"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Të gjitha aplikacionet dhe të dhënat në këtë sesion do të fshihen."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Hiq!"</string>
+    <string name="guest_category_title" msgid="5562663588315329152">"Vizitor (ti)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"Përdoruesit"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"Përdorues të tjerë"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"Fshi aktivitetin e vizitorit"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Fshi të gjitha aplikacionet dhe të dhënat e vizitorit kur del nga modaliteti \"vizitor\""</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Të fshihet aktiviteti i vizitorit?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Tani aplikacionet dhe të dhënat nga ky sesion për vizitorë do të fshihen dhe të gjitha aktivitetet e ardhshme të vizitorit do të fshihen sa herë që të dalësh nga modaliteti \"vizitor\""</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Aktivizo telefonatat"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Aktivizo telefonatat dhe SMS-të"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Fshi përdoruesin"</string>
@@ -4296,10 +4301,8 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Joaktiv"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Gozhdimi i aplikacionit"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"Gozhdimi i aplikacionit të lejon ta mbash aplikacionin aktual në pamje derisa ta zhgozhdosh. Kjo veçori mund të përdoret, për shembull, për të lejuar një shok të besuar që të luajë një lojë specifike."</string>
-    <!-- no translation found for screen_pinning_description (4305370471370474846) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_user_description (2465729370037556955) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="7289730998890213708">"Kur një aplikacion është i gozhduar, aplikacioni i gozhduar mund të hapë aplikacione të tjera dhe të dhënat personale mund të jenë të qasshme. \n\nPër të përdorur gozhdimin e aplikacionit: 	\n1.	Aktivizo gozhdimin e aplikacionit 	\n2.	Hap \"Përmbledhja\" 	\n3.	Trokit ikonën në krye të ekranit, më pas trokit \"Gozhdo\""</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"Kur një aplikacion është i gozhduar, aplikacioni i gozhduar mund të hapë aplikacione të tjera dhe të dhënat personale mund të jenë të qasshme. \n\nNëse do që të ndash në mënyrë të sigurt pajisjen tënde me dikë, provo të përdorësh më mirë një përdorues vizitor. \n\nPër të përdorur gozhdimin e aplikacionit: 	\n1.	Aktivizo gozhdimin e aplikacionit 	\n2.	Hap \"Përmbledhja\" 	\n3.	Trokit ikonën në krye të ekranit, më pas trokit \"Gozhdo\""</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Kur aplikacioni është i gozhduar: \n\n•		Të dhënat personale mund të jenë të qasshme \n		(si kontaktet dhe përmbajtja e email-eve) \n•		Aplikacioni i gozhduar mund të hapë aplikacione të tjera \n\nPërdore gozhdimin e aplikacionit vetëm me personat te të cilët ke besim."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Kërko motivin e shkyçjes para heqjes së gozhdimit"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Zhgozhdimi kërkon PIN-in"</string>
@@ -5073,7 +5076,7 @@
     <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"Cilësimet e kufizuara janë lejuar për <xliff:g id="APP_NAME">%s</xliff:g>"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"Për sigurinë tënde, ky cilësim nuk ofrohet për momentin."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Informacionet e pajisjes së financuar"</string>
-    <string name="financed_privacy_intro" msgid="5458393846604867947">"Ofruesi yt i blerjes me këste mund të ndryshojë cilësimet dhe të instalojë softuerë në këtë pajisje.\n\nNëse harron një pagesë, pajisja jote do të kyçet.\n\nPër të mësuar më shumë, kontakto ofruesin e blerjes me këste."</string>
+    <string name="financed_privacy_intro" msgid="7836497475568741579">"Ofruesi yt i blerjes me këste mund të ndryshojë cilësimet dhe të instalojë softuerë në këtë pajisje gjatë konfigurimit.\n\nNëse harron një pagesë, ofruesi yt i blerjes me këste mund ta kyçë pajisjen tënde dhe të ndryshojë cilësimet e pajisjes.\n\nPër të mësuar më shumë, kontakto ofruesin tënd të blerjes me këste."</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"Nëse pajisja nuk është financuar, nuk mund:"</string>
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Të instalojë aplikacione nga jashtë \"Dyqanit të Play\""</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"Të rindezësh pajisjen në modalitetin e sigurt"</string>
@@ -5082,7 +5085,7 @@
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"Të përdorë opsionet e zhvilluesit"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"Ofruesi yt i blerjes me këste mund:"</string>
     <string name="financed_privacy_IMEI" msgid="1852413860963824799">"Qasu te numri yt IMEI"</string>
-    <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"Të rivendosë pajisjen në gjendje fabrike"</string>
+    <string name="financed_privacy_factory_reset" msgid="5505016667590160732">"Nëse ndodh ndonjë problem, rivendose pajisjen në gjendje fabrike"</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"Nëse pajisja jote është e kyçur, mund ta përdorësh atë vetëm për sa më poshtë:"</string>
     <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"Të bëjë telefonata urgjence"</string>
     <string name="financed_privacy_system_info" msgid="4158031444108708927">"Të shikosh informacionet e sistemit, si p.sh. datën, orën, statusin e rrjetit dhe baterinë"</string>
@@ -5547,8 +5550,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"E gjatë"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Shfaq portofolin"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"Lejo qasje te portofoli nga ekrani i kyçjes"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"Shfaq skanerin e kodeve QR"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Lejo qasje te \"Skaneri i kodeve QR\" nga ekrani i kyçjes"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"Shfaq skanerin e kodeve QR"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Lejo qasje te \"Skaneri i kodeve QR\" nga ekrani i kyçjes"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Shfaq kontrollet e pajisjes"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Shfaq kontrollet për pajisjet e jashtme nga ekrani i kyçjes"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Kontrolli nga pajisja e kyçur"</string>
@@ -5712,10 +5715,6 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Mos lidh"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Lidh"</string>
     <string name="tare_settings" msgid="3788654800004869077">"Cilësimet e TARE"</string>
-    <!-- no translation found for tare_on (2386073225978684535) -->
-    <skip />
-    <!-- no translation found for tare_off (6305694402929756726) -->
-    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"Riktheji te cilësimet e parazgjedhura"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Cilësimet u rikthyen te parazgjedhja."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Balancë maksimale e ngopur"</string>
@@ -5727,8 +5726,7 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Veprimet (kostoja e prodhimit)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Veprimet (çmimi bazë)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Shpërblimet për çdo ngjarje"</string>
-    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
-    <skip />
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"Shpërblimet për kohëzgjatjen e ngjarjes"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"Numri maksimal i shpërblimeve në ditë"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Aktivitet kryesor"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Njoftim i parë"</string>

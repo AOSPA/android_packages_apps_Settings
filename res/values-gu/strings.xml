@@ -1429,17 +1429,15 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"તમારા ફોનને કસ્ટમાઇઝ કરો"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"અલગ-અલગ શૈલીઓ, વૉલપેપર અને બીજું ઘણું અજમાવી જુઓ"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"સ્ક્રીન સેવર"</string>
+    <string name="keywords_screensaver" msgid="7249337959432229172">"સ્ક્રીનસેવર"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"સ્ક્રીન સેવરનો ઉપયોગ કરો"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"ચાર્જ થતું હોય અથવા ડૉક કરેલ હોય ત્યારે"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"બેમાંથી કોઈપણ એક"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"ચાર્જિંગ થતી વખતે"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"ડૉક હોય ત્યારે"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"ક્યારેય નહીં"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"બંધ"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"ફોન ડૉક થાય અને/અથવા નિષ્ક્રિય થઈ જાય ત્યારે શું થાય તેને નિયંત્રિત કરવા માટે, સ્ક્રીન સેવર ચાલુ કરો."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"ક્યારે શરૂ કરવું"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"વર્તમાન સ્ક્રીન સેવર"</string>
-    <string name="screensaver_settings_button" msgid="6159236558934930238">"સેટિંગ"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"સ્વચલિત તેજ"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"જાગૃત કરવા માટે લિફ્ટ કરો"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"ઍમ્બિઅન્ટ ડિસ્પ્લે"</string>
@@ -3403,6 +3401,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"ડિલીટ કરો"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"આ સત્રમાંની તમામ ઍપ અને ડેટા કાઢી નાખવામાં આવશે."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"કાઢી નાખો"</string>
+    <string name="guest_category_title" msgid="5562663588315329152">"અતિથિ (તમે)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"વપરાશકર્તાઓ"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"અન્ય વપરાશકર્તાઓ"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"અતિથિ પ્રવૃત્તિ ડિલીટ કરો"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"અતિથિ મોડમાંથી બહાર નીકળતી વખતે તમામ અતિથિ ઍપ અને ડેટા ડિલીટ કરો"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"શું અતિથિની પ્રવૃત્તિ ડિલીટ કરીએ?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"આ અતિથિ સત્રમાંની તમામ ઍપ અને ડેટા હમણાં ડિલીટ કરવામાં આવશે તેમજ ભવિષ્યમાં જ્યારે પણ તમે અતિથિ મોડમાંથી બહાર નીકળો, ત્યારે તમામ અતિથિ પ્રવૃત્તિ ડિલીટ કરવામાં આવશે"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"ફોન કૉલ ચાલુ કરો"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"ફોન કૉલ અને SMS ચાલુ કરો"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"વપરાશકર્તાને ડિલીટ કરો"</string>
@@ -4296,10 +4301,8 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"બંધ છે"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"ઍપ પિનિંગ"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"ઍપ પિનિંગ, તમે હાલની ઍપને અનપિન ન કરો ત્યાં સુધી તેને વ્યૂમાં રાખવાની તમને સુવિધા આપે છે. વિશ્વાસપાત્ર મિત્રને કોઈ ખાસ ગેમ રમવાની સવલત આપવા જેવા કાર્ય માટે આ સુવિધાનો ઉપયોગ થઈ શકે છે."</string>
-    <!-- no translation found for screen_pinning_description (4305370471370474846) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_user_description (2465729370037556955) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="7289730998890213708">"ઍપ પિન કરેલી હશે, ત્યારે પિન કરેલી ઍપ અન્ય ઍપ ખોલે અને વ્યક્તિગત ડેટા ઍક્સેસ કરી શકાય તેમ બની શકે છે. \n\nઍપ પિનિંગનો ઉપયોગ કરવા માટે: 	\n1.	ઍપ પિનિંગ ચાલુ કરો 	\n2.	ઓવરવ્યૂ ખોલો 	\n3.	સ્ક્રીનમાં સૌથી ઉપર આવેલા ઍપ આઇકન પર ટૅપ કરો, ત્યાર બાદ પિન કરો પર ટૅપ કરો"</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"ઍપ પિન કરેલી હશે, ત્યારે પિન કરેલી ઍપ અન્ય ઍપ ખોલે અને વ્યક્તિગત ડેટા ઍક્સેસ કરી શકાય તેમ બની શકે છે. \n\nતમારે તમારું ડિવાઇસ કોઈ વ્યક્તિ સાથે સુરક્ષિત રીતે શેર કરવું હોય, તો વિકલ્પરૂપે અતિથિ વપરાશકર્તાનો ઉપયોગ કરી જુઓ. \n\nઍપ પિનિંગનો ઉપયોગ કરવા માટે: 	\n1.	ઍપ પિનિંગ ચાલુ કરો 	\n2.	ઓવરવ્યૂ ખોલો 	\n3.	સ્ક્રીનમાં સૌથી ઉપર આવેલા ઍપ આઇકન પર ટૅપ કરો, ત્યાર બાદ પિન કરો પર ટૅપ કરો"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"ઍપ પિન કરેલી હોય, ત્યારે: \n\n•		વ્યક્તિગત ડેટા ઍક્સેસ કરી શકાય તેમ બની શકે \n		(જેમ કે સંપર્કો અને ઇમેલનું કન્ટેન્ટ) \n•		પિન કરેલી ઍપ અન્ય ઍપ ખોલે તેમ બની શકે \n\nમાત્ર તમારા વિશ્વાસપાત્ર લોકો સાથે ઍપ પિનિંગનો ઉપયોગ કરો."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"અનપિન કરતા પહેલાં અનલૉક પૅટર્ન માટે પૂછો"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"અનપિન કરતા પહેલાં પિન માટે પૂછો"</string>
@@ -5073,7 +5076,7 @@
     <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"<xliff:g id="APP_NAME">%s</xliff:g> માટે પ્રતિબંધિત સેટિંગને મંજૂરી આપી"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"તમારી સુરક્ષા માટે, આ સેટિંગ હાલમાં ઉપલબ્ધ નથી."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"લોન પર લીધેલા ડિવાઇસની માહિતી"</string>
-    <string name="financed_privacy_intro" msgid="5458393846604867947">"તમને ક્રેડિટ પર વેચાણ કરનારા આ ડિવાઇસ પર સેટિંગમાં ફેરફાર કરી શકશે અને સૉફ્ટવેર ઇન્સ્ટૉલ કરી શકશે.\n\nજો તમે કોઈ ચુકવણી ચૂકી જાઓ, તો તમારું ડિવાઇસ લૉક કરવામાં આવશે.\n\nવધુ જાણવા માટે, તમને ડિવાઇસ ક્રેડિટ પર વેચાણ કરનારાનો સંપર્ક કરો."</string>
+    <string name="financed_privacy_intro" msgid="7836497475568741579">"તમને ડિવાઇસ ક્રેડિટ પર વેચાણ કરનારા સેટઅપ દરમિયાન આ ડિવાઇસના સેટિંગમાં ફેરફાર કરી શકશે અને તેમાં સૉફ્ટવેર ઇન્સ્ટૉલ કરી શકશે.\n\nજો તમે કોઈ ચુકવણી ચૂકી જાઓ, તો તમને ડિવાઇસ ક્રેડિટ પર વેચાણ કરનારા તમારું ડિવાઇસ લૉક કરી શકશે અને ડિવાઇસના સેટિંગમાં ફેરફાર કરી શકશે.\n\nવધુ જાણવા માટે, તમને ડિવાઇસ ક્રેડિટ પર વેચાણ કરનારાનો સંપર્ક કરો."</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"ડિવાઇસ જો લોન પર લીધેલું હોય, તો તમે આમ કરી શકશો નહીં:"</string>
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Play Storeની બહારથી ઍપ ઇન્સ્ટૉલ કરી શકશો"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"તમારા ડિવાઇસને સુરક્ષિત મોડમાં રીબૂટ કરવું"</string>
@@ -5082,7 +5085,7 @@
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"ડેવલપરના વિકલ્પોનો ઉપયોગ કરી શકશે"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"ક્રેડિટ પર વેચાણ કરનારા આમ કરી શકશે:"</string>
     <string name="financed_privacy_IMEI" msgid="1852413860963824799">"તમારો IMEI નંબર ઍક્સેસ કરો"</string>
-    <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"તમારા ડિવાઇસને ફેક્ટરી રીસેટ કરી શકશે"</string>
+    <string name="financed_privacy_factory_reset" msgid="5505016667590160732">"જો કંઈ ખોટું થાય, તો તમારું ડિવાઇસ ફેક્ટરી રીસેટ કરો"</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"જો તમારું ડિવાઇસ લૉક હોય, તો તમે તેનો ઉપયોગ માત્ર આના માટે કરી શકશો:"</string>
     <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"ઇમર્જન્સી કૉલ કરી શકશે"</string>
     <string name="financed_privacy_system_info" msgid="4158031444108708927">"તારીખ, સમય, નેટવર્કનું સ્ટેટસ અને બૅટરી લેવલ જેવી સિસ્ટમની માહિતી જોવી"</string>
@@ -5547,8 +5550,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"લાંબો"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"વૉલેટ બતાવો"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"લૉક સ્ક્રીનમાંથી વૉલેટ ઍક્સેસ કરવાની મંજૂરી આપો"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"QR સ્કૅનર બતાવો"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"લૉક સ્ક્રીનમાંથી QR સ્કૅનરના ઍક્સેસની મંજૂરી આપો"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"QR કોડ સ્કૅનર બતાવો"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"લૉક સ્ક્રીનમાંથી QR કોડ સ્કૅનરના ઍક્સેસની મંજૂરી આપો"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"ડિવાઇસનાં નિયંત્રણો બતાવો"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"બાહ્ય ડિવાઇસ માટેના નિયંત્રણો લૉક સ્ક્રીનમાંથી બતાવો"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"લૉક કરેલા ડિવાઇસમાંથી નિયંત્રણ કરો"</string>
@@ -5712,10 +5715,6 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"કનેક્ટ કરશો નહીં"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"કનેક્ટ કરો"</string>
     <string name="tare_settings" msgid="3788654800004869077">"TARE સેટિંગ"</string>
-    <!-- no translation found for tare_on (2386073225978684535) -->
-    <skip />
-    <!-- no translation found for tare_off (6305694402929756726) -->
-    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"ડિફૉલ્ટ સેટિંગ પર પાછા ફરો"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"ફરીથી ડિફૉલ્ટ સેટિંગ પર."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"સંપૂર્ણ ચાર્જ ડિવાઇસમાંનો મહત્તમ પાવર"</string>
@@ -5727,8 +5726,7 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"ક્રિયાઓ (ઉત્પાદન ખર્ચ)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"ક્રિયાઓ (મૂળ કિંમત)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"પ્રત્યેક ઇવેન્ટ દીઠ રિવૉર્ડ"</string>
-    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
-    <skip />
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"ઇવેન્ટની કુલ અવધિ માટે રિવૉર્ડ"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"દિવસ દીઠ મહત્તમ રિવૉર્ડ"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"વપરાશકર્તાઓને સૌથી વધુ દેખાતી ઍપ"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"નોટિફિકેશન જોવાયું"</string>

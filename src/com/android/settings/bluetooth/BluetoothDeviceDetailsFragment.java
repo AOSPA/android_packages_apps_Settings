@@ -24,6 +24,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.SystemProperties;
+import android.os.UserManager;
 import android.provider.DeviceConfig;
 import android.util.Log;
 import android.view.Menu;
@@ -74,6 +75,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     interface TestDataFactory {
         CachedBluetoothDevice getDevice(String deviceAddress);
         LocalBluetoothManager getManager(Context context);
+        UserManager getUserManager();
     }
 
     @VisibleForTesting
@@ -85,6 +87,8 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     LocalBluetoothManager mManager;
     @VisibleForTesting
     CachedBluetoothDevice mCachedDevice;
+
+    private UserManager mUserManager;
 
     public BluetoothDeviceDetailsFragment() {
         super(DISALLOW_CONFIG_BLUETOOTH);
@@ -108,6 +112,15 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         return mManager.getCachedDeviceManager().findDevice(remoteDevice);
     }
 
+    @VisibleForTesting
+    UserManager getUserManager() {
+        if (sTestDataFactory != null) {
+            return sTestDataFactory.getUserManager();
+        }
+
+        return getSystemService(UserManager.class);
+    }
+
     public static BluetoothDeviceDetailsFragment newInstance(String deviceAddress) {
         Bundle args = new Bundle(1);
         args.putString(KEY_DEVICE_ADDRESS, deviceAddress);
@@ -121,6 +134,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         mDeviceAddress = getArguments().getString(KEY_DEVICE_ADDRESS);
         mManager = getLocalBluetoothManager(context);
         mCachedDevice = getCachedDevice(mDeviceAddress);
+        mUserManager = getUserManager();
         super.onAttach(context);
         if (mCachedDevice == null) {
             // Close this page if device is null with invalid device mac address
@@ -174,9 +188,12 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        MenuItem item = menu.add(0, EDIT_DEVICE_NAME_ITEM_ID, 0, R.string.bluetooth_rename_button);
-        item.setIcon(com.android.internal.R.drawable.ic_mode_edit);
-        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        if (!mUserManager.isGuestUser()) {
+            MenuItem item = menu.add(0, EDIT_DEVICE_NAME_ITEM_ID, 0,
+                    R.string.bluetooth_rename_button);
+            item.setIcon(com.android.internal.R.drawable.ic_mode_edit);
+            item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        }
         super.onCreateOptionsMenu(menu, inflater);
     }
 

@@ -1429,17 +1429,15 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"I-customize ang iyong telepono"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"Sumubok ng iba\'t ibang istilo, wallpaper, at higit pa"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Screen saver"</string>
+    <string name="keywords_screensaver" msgid="7249337959432229172">"screensaver"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Gumamit ng screen saver"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Habang nagcha-charge o naka-dock"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"Alinman"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Habang nagcha-charge"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Habang naka-dock"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Hindi kailanman"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Naka-off"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Upang makontrol kung ano ang mangyayari kapag naka-dock o naka-sleep ang telepono, i-on ang screen saver."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Kailan magsisimula"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Kasalukuyang screen saver"</string>
-    <string name="screensaver_settings_button" msgid="6159236558934930238">"Mga Setting"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Awtomatikong pagliwanag"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Angatin upang paganahin"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Ambient na display"</string>
@@ -3403,6 +3401,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"I-delete"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Ide-delete ang lahat ng app at data sa session na ito."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Alisin"</string>
+    <string name="guest_category_title" msgid="5562663588315329152">"Bisita (Ikaw)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"Mga User"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"Iba pang user"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"I-delete ang aktibidad ng bisita"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"I-delete ang lahat ng app at data ng bisita kapag umaalis sa guest mode"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"I-delete ang aktibidad ng bisita?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Made-delete na ngayon ang mga app at data mula sa session na ito ng bisita, at made-delete ang lahat ng aktibidad ng bisita sa hinaharap sa tuwing aalis ka ng guest mode"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"I-on ang mga pagtawag sa telepono"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"I-on ang mga pagtawag sa telepono at SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"I-delete ang user"</string>
@@ -4296,10 +4301,8 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Naka-off"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Pag-pin ng app"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"Sa pamamagitan ng pag-pin ng app, puwede mong panatilihing nakikita ang kasalukuyang app hanggang sa i-unpin mo ito. Puwedeng gamitin ang feature na ito, halimbawa, para mapalaro sa pinagkakatiwalaang kaibigan ang isang partikular na laro."</string>
-    <!-- no translation found for screen_pinning_description (4305370471370474846) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_user_description (2465729370037556955) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="7289730998890213708">"Kapag naka-pin ang isang app, puwedeng magbukas ng iba pang app ang naka-pin na app at puwedeng ma-access ang personal na data. \n\nPara gamitin ang pag-pin ng app: 	\n1.	I-on ang pag-pin ng app 	\n2.	Buksan ang Pangkalahatang-ideya 	\n3.	I-tap ang icon ng app sa itaas ng screen, pagkatapos ay i-tap ang I-pin"</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"Kapag naka-pin ang isang app, puwedeng magbukas ng iba pang app ang naka-pin na app at puwedeng ma-access ang personal na data. \n\nKung gusto mong secure na ipagamit ang iyong device sa ibang tao, subukang gumamit na lang ng profile ng bisita. \n\nPara gamitin ang pag-pin ng app: 	\n1.	I-on ang pag-pin ng app 	\n2.	Buksan ang Pangkalahatang-ideya 	\n3.	I-tap ang icon ng app sa itaas ng screen, pagkatapos ay i-tap ang I-pin"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Kapag naka-pin ang isang app: \n\n•		Puwedeng ma-access ang personal data \n		(gaya ng mga contact at content ng email) \n•	 Puwedeng magbukas ng ibang app ang naka-pin na app \n\nGamitin lang ang pag-pin ng app sa mga taong pinagkakatiwalaan mo."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Humingi ng pattern sa pag-unlock bago mag-unpin"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Humingi ng PIN bago mag-unpin"</string>
@@ -5073,7 +5076,7 @@
     <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"Pinapayagan sa <xliff:g id="APP_NAME">%s</xliff:g> ang mga pinaghihigpitang setting"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"Para sa iyong seguridad, hindi available ang setting na ito sa ngayon."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Impormasyon ng pinopondohang device"</string>
-    <string name="financed_privacy_intro" msgid="5458393846604867947">"Mababago ng iyong credit provider ang mga setting at makakapag-install ito ng software sa device na ito.\n\nKung may mapalampas kang bayad, mala-lock ang device mo.\n\nPara matuto pa, makipag-ugnayan sa iyong credit provider."</string>
+    <string name="financed_privacy_intro" msgid="7836497475568741579">"Mababago ng iyong credit provider ang mga setting at makakapag-install ito ng software sa device na ito sa panahon ng pag-set up.\n\nKung may mapalampas kang pagbabayad, puwedeng i-lock ng iyong credit provider ang device mo at mababago nito ang mga setting ng device.\n\nPara matuto pa, makipag-ugnayan sa iyong credit provider."</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"Kung pinopondohan ang iyong device, hindi mo magagawang:"</string>
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Mag-install ng mga app mula sa labas ng Play Store"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"I-reboot ang iyong device sa safe mode"</string>
@@ -5082,7 +5085,7 @@
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"Gamitin ang mga opsyon ng developer"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"Magagawa ng iyong credit provider na:"</string>
     <string name="financed_privacy_IMEI" msgid="1852413860963824799">"I-access ang iyong IMEI number"</string>
-    <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"I-factory reset ang iyong device"</string>
+    <string name="financed_privacy_factory_reset" msgid="5505016667590160732">"I-factory reset ang iyong device kung magkakaproblema"</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"Kung naka-lock ang iyong device, magagamit mo lang ito para:"</string>
     <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"Gumawa ng mga emergency na tawag"</string>
     <string name="financed_privacy_system_info" msgid="4158031444108708927">"Tingnan ang impormasyon ng system tulad ng petsa, oras, status ng network, at baterya"</string>
@@ -5547,8 +5550,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Matagal"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Ipakita ang wallet"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"Payagan ang access sa wallet mula sa lock screen"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"Ipakita ang QR scanner"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Payagan ang access sa QR scanner mula sa lock screen"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"Ipakita ang Scanner ng QR code"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Payagan ang access sa scanner ng QR code mula sa lock screen"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Ipakita ang mga kontrol ng device"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Ipakita ang mga kontrol para sa mga external na device mula sa lock screen"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Kontrol mula sa naka-lock na device"</string>
@@ -5712,10 +5715,6 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Huwag kumonekta"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Kumonekta"</string>
     <string name="tare_settings" msgid="3788654800004869077">"Mga Setting ng TARE"</string>
-    <!-- no translation found for tare_on (2386073225978684535) -->
-    <skip />
-    <!-- no translation found for tare_off (6305694402929756726) -->
-    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"Bumalik sa Mga Default na Setting"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Ibinalik sa default ang mga setting."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Max na Balanse Kapag Ganap na Na-charge"</string>
@@ -5727,8 +5726,7 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Mga Pagkilos (Halaga ng Paggawa)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Mga Pagkilos (Batayang Presyo)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Mga reward sa bawat iisang event"</string>
-    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
-    <skip />
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"Mga reward sa kabuuang tagal ng event"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"Maximum na Reward Kada Araw"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Nangungunang Aktibidad"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Nakita ang Notification"</string>
