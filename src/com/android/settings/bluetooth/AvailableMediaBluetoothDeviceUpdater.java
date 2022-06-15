@@ -77,6 +77,8 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
                 Log.d(TAG, "isFilterMatched() device : " +
                         cachedDevice.getName() + ", the profile is connected.");
                 isFilterMatched =  true;
+                Log.d(TAG, "isFilterMatched() device : " +
+                        cachedDevice.getName() + ", the profile is connected.");
             }
             // According to the current audio profile type,
             // this page will show the bluetooth device that have corresponding profile.
