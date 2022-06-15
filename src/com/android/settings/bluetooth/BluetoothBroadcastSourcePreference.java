@@ -107,7 +107,8 @@ class BluetoothBroadcastSourcePreference extends Preference {
     public void updateMetadataAndRefreshUi(BluetoothLeBroadcastMetadata source, boolean status) {
         mBluetoothLeBroadcastMetadata = source;
         mTitle = getProgramInfo();
-        mIsEncrypted = mBluetoothLeBroadcastMetadata.isEncrypted();
+        mIsEncrypted = mBluetoothLeBroadcastMetadata != null ?
+                mBluetoothLeBroadcastMetadata.isEncrypted() : false;
         mStatus = status || mBluetoothLeBroadcastReceiveState != null;
 
         refresh();
@@ -143,6 +144,7 @@ class BluetoothBroadcastSourcePreference extends Preference {
             if (!bluetoothLeAudioContentMetadata.isEmpty()) {
                 return bluetoothLeAudioContentMetadata.stream()
                         .map(i -> i.getProgramInfo())
+                        .filter(i -> !TextUtils.isEmpty(i))
                         .findFirst().orElse(
                                 getContext().getString(RESOURCE_ID_UNKNOWN_PROGRAM_INFO));
             }
