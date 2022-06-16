@@ -10847,6 +10847,10 @@
     that the user will be asked which mobile network subscription to use every time they place a
     call or send an SMS, instead of defaulting to one particular subscription. [CHAR LIMIT=40]-->
     <string name="calls_and_sms_ask_every_time">Ask every time</string>
+    <!-- Mobile network settings screen, summary of item showing the name of the default
+         subscription that will be used for data, when Smart DDS feature is turned on. This only
+         appears in multi-SIM mode. [CHAR LIMIT=NONE] -->
+    <string name="dds_preference_smart_dds_switch_is_on">Smart DDS switch is on</string>
 
     <!-- Summary of the 'Mobile network' item on the Network & internet page when there is no mobile
          service setup yet (eg no SIM card inserted and no eSIM configured). Tapping it leads to a
