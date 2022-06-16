@@ -147,11 +147,11 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
                 return SoftApConfiguration.BAND_2GHZ;
             }
             // fallthrough to return BAND_5GHZ
-        } else if (band == BAND_6GHZ) {
+        } else if ((band & SoftApConfiguration.BAND_6GHZ) != 0) {
             if (!is6GhzBandSupported()) {
                 return SoftApConfiguration.BAND_2GHZ;
             }
-            // fallthrough to return BAND_6GHZ
+            return BAND_6GHZ;
         }
 
         return band;
