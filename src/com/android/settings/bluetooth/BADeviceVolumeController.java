@@ -21,8 +21,10 @@
 
 package com.android.settings.bluetooth;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
+import android.bluetooth.BluetoothStatusCodes;
 import android.bluetooth.BluetoothVcp;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -82,10 +84,22 @@ public class BADeviceVolumeController extends
 
     public BADeviceVolumeController(Context context) {
         super(context, KEY_BA_DEVICE_VOLUME);
+        boolean isAospBroadcastSupport = false;
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (bluetoothAdapter != null && ((bluetoothAdapter.isLeAudioBroadcastSourceSupported() ==
+                BluetoothStatusCodes.FEATURE_SUPPORTED)||
+                (bluetoothAdapter.isLeAudioBroadcastAssistantSupported() ==
+                BluetoothStatusCodes.FEATURE_SUPPORTED))) {
+            Log.d(TAG, "Broadcast is supported");
+            isAospBroadcastSupport = true;
+        }
         int advAudioMask = SystemProperties.getInt(BLUETOOTH_ADV_AUDIO_MASK_PROP, 0);
         mIsVcpForBroadcastSupported =
                 (((advAudioMask & BROADCAST_AUDIO_MASK) == BROADCAST_AUDIO_MASK) &&
                 SystemProperties.getBoolean(BLUETOOTH_VCP_FOR_BROADCAST_PROP, false));
+        if (isAospBroadcastSupport) {
+            mIsVcpForBroadcastSupported = false;
+        }
         Log.d(TAG, "mIsVcpForBroadcastSupported: " + mIsVcpForBroadcastSupported);
     }
 
