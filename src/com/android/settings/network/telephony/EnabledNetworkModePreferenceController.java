@@ -33,7 +33,6 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.ListPreference;
@@ -176,7 +175,7 @@ public class EnabledNetworkModePreferenceController extends
         return false;
     }
 
-    public void init(Lifecycle lifecycle, int subId) {
+    void init(int subId) {
         mSubId = subId;
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
@@ -194,7 +193,6 @@ public class EnabledNetworkModePreferenceController extends
                         updatePreference();
                     });
         }
-        lifecycle.addObserver(this);
     }
 
     private void updatePreference() {

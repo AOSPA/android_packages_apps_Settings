@@ -598,7 +598,9 @@ public class UserPLMNListActivity extends PreferenceActivity
             list.add(mUPLMNList.get(i));
         }
 
-        list.remove(position);
+        if (position >= 0) {
+            list.remove(position);
+        }
         network.setOperatorNumeric(null);
         list.add(network);
 
