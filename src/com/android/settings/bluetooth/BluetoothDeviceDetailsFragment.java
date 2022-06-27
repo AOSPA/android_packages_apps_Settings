@@ -20,6 +20,8 @@ import static android.bluetooth.BluetoothDevice.BOND_NONE;
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
 import android.app.settings.SettingsEnums;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothStatusCodes;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -101,6 +103,16 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
 
     public BluetoothDeviceDetailsFragment() {
         super(DISALLOW_CONFIG_BLUETOOTH);
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (bluetoothAdapter != null && ((bluetoothAdapter.isLeAudioBroadcastSourceSupported() ==
+                BluetoothStatusCodes.FEATURE_SUPPORTED)||
+                (bluetoothAdapter.isLeAudioBroadcastAssistantSupported() ==
+                BluetoothStatusCodes.FEATURE_SUPPORTED))) {
+            SystemProperties.set(BLUETOOTH_BROADCAST_UI_PROP, "false");
+        } else {
+            Log.d(TAG, "Use legacy broadcast if available");
+            SystemProperties.set(BLUETOOTH_BROADCAST_UI_PROP, "true");
+        }
     }
 
     @VisibleForTesting
