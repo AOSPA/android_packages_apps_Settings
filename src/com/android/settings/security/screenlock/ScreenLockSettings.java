@@ -16,77 +16,51 @@
 
 package com.android.settings.security.screenlock;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.UserHandle;
+import androidx.preference.Preference;
+import androidx.preference.TwoStatePreference;
 
-import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.R;
-import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.security.OwnerInfoPreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.search.SearchIndexable;
 
-import java.util.ArrayList;
-import java.util.List;
+import lineageos.providers.LineageSettings;
 
-@SearchIndexable
-public class ScreenLockSettings extends DashboardFragment
-        implements OwnerInfoPreferenceController.OwnerInfoCallback {
+public class FingerprintUnlockPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
 
-    private static final String TAG = "ScreenLockSettings";
+    static final String KEY_FINGERPRINT_WAKE_UNLOCK = "fingerprint_wake_unlock";
 
-    private static final int MY_USER_ID = UserHandle.myUserId();
-    private LockPatternUtils mLockPatternUtils;
+    public FingerprintUnlockPreferenceController(Context context) {
+        super(context);
+    }
 
-    @Override
-    public int getMetricsCategory() {
-        return SettingsEnums.SCREEN_LOCK_SETTINGS;
+    private int getFingerprintSettings() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+                KEY_FINGERPRINT_WAKE_UNLOCK, 1) == 1;
     }
 
     @Override
-    protected int getPreferenceScreenResId() {
-        return R.xml.screen_lock_settings;
+    public boolean isAvailable() {
+        // Enable it for just powerbutton fps devices
+        // Disable for devices config_fingerprintWakeAndUnlock set to false.
+        return getFingerprintSettings() != 2 && mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_is_powerbutton_fps);
     }
 
     @Override
-    protected String getLogTag() {
-        return TAG;
+    public String getPreferenceKey() {
+        return KEY_FINGERPRINT_WAKE_UNLOCK;
     }
 
     @Override
-    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        mLockPatternUtils = new LockPatternUtils(context);
-        return buildPreferenceControllers(context, this /* parent */, mLockPatternUtils);
+    public void updateState(Preference preference) {
+        ((TwoStatePreference) preference).setChecked(getFingerprintSettings() == 1);
     }
 
     @Override
-    public void onOwnerInfoUpdated() {
-        use(OwnerInfoPreferenceController.class).updateSummary();
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        return Settings.System.putInt(mContext.getContentResolver(),
+                FINGERPRINT_WAKE_UNLOCK, isChecked ? 1 : 0);
     }
-
-    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            DashboardFragment parent, LockPatternUtils lockPatternUtils) {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new PatternVisiblePreferenceController(
-                context, MY_USER_ID, lockPatternUtils));
-        controllers.add(new PowerButtonInstantLockPreferenceController(
-                context, MY_USER_ID, lockPatternUtils));
-        controllers.add(new LockAfterTimeoutPreferenceController(
-                context, MY_USER_ID, lockPatternUtils));
-        controllers.add(new OwnerInfoPreferenceController(context, parent));
-        return controllers;
-    }
-
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.screen_lock_settings) {
-
-                @Override
-                public List<AbstractPreferenceController> createPreferenceControllers(
-                        Context context) {
-                    return buildPreferenceControllers(context, null /* parent */,
-                            new LockPatternUtils(context));
-                }
-            };
 }
