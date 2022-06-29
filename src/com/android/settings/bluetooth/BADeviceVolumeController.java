@@ -21,15 +21,14 @@
 
 package com.android.settings.bluetooth;
 
-import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
-import android.bluetooth.BluetoothStatusCodes;
 import android.bluetooth.BluetoothVcp;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.os.SystemProperties;
+import android.sysprop.BluetoothProperties;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -85,11 +84,8 @@ public class BADeviceVolumeController extends
     public BADeviceVolumeController(Context context) {
         super(context, KEY_BA_DEVICE_VOLUME);
         boolean isAospBroadcastSupport = false;
-        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (bluetoothAdapter != null && ((bluetoothAdapter.isLeAudioBroadcastSourceSupported() ==
-                BluetoothStatusCodes.FEATURE_SUPPORTED)||
-                (bluetoothAdapter.isLeAudioBroadcastAssistantSupported() ==
-                BluetoothStatusCodes.FEATURE_SUPPORTED))) {
+        if (BluetoothProperties.isProfileBapBroadcastSourceEnabled().orElse(false) ||
+            BluetoothProperties.isProfileBapBroadcastAssistEnabled().orElse(false)) {
             Log.d(TAG, "Broadcast is supported");
             isAospBroadcastSupport = true;
         }
