@@ -14,6 +14,13 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center are provided under the following license:
+ *
+ * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.network.telephony.gsm;
 
 import static androidx.lifecycle.Lifecycle.Event.ON_START;
@@ -32,6 +39,7 @@ import android.telephony.CarrierConfigManager;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LifecycleObserver;
@@ -56,22 +64,37 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 
+import com.qti.extphone.Client;
+import com.qti.extphone.ExtPhoneCallbackBase;
+import com.qti.extphone.ExtTelephonyManager;
+import com.qti.extphone.IExtPhoneCallback;
+import com.qti.extphone.NetworkSelectionMode;
+import com.qti.extphone.ServiceCallback;
+import com.qti.extphone.Status;
+import com.qti.extphone.Token;
+
 /**
  * Preference controller for "Auto Select Network"
  */
 public class AutoSelectPreferenceController extends TelephonyTogglePreferenceController
         implements LifecycleObserver,
         Enhanced4gBasePreferenceController.On4gLteUpdateListener,
-        SubscriptionsChangeListener.SubscriptionsChangeListenerClient {
+        SubscriptionsChangeListener.SubscriptionsChangeListenerClient,
+        SelectNetworkPreferenceController.OnNetworkScanTypeListener {
+
     private static final long MINIMUM_DIALOG_TIME_MILLIS = TimeUnit.SECONDS.toMillis(1);
 
     private final Handler mUiHandler;
+    private static final String TAG = "AutoSelectPreferenceController";
     private PreferenceScreen mPreferenceScreen;
     private AllowedNetworkTypesListener mAllowedNetworkTypesListener;
     private TelephonyManager mTelephonyManager;
     private boolean mOnlyAutoSelectInHome;
     private List<OnNetworkSelectModeListener> mListeners;
     private SubscriptionsChangeListener mSubscriptionsListener;
+    private ExtTelephonyManager mExtTelephonyManager;
+    private Client mClient;
+    private boolean mServiceConnected;
     @VisibleForTesting
     ProgressDialog mProgressDialog;
     @VisibleForTesting
@@ -79,6 +102,7 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
     private AtomicBoolean mUpdatingConfig;
     private int mCacheOfModeStatus;
     private AtomicLong mRecursiveUpdate;
+    private Object mLock = new Object();
 
     public AutoSelectPreferenceController(Context context, String key) {
         super(context, key);
@@ -141,12 +165,34 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
     @Override
     public boolean isChecked() {
         if (!mUpdatingConfig.get()) {
-            mCacheOfModeStatus = mTelephonyManager.getNetworkSelectionMode();
+            if (MobileNetworkUtils.isCagSnpnEnabled(mContext)) {
+                synchronized (mLock) {
+                    getNetworkSelectionMode();
+                }
+            } else {
+                mCacheOfModeStatus = mTelephonyManager.getNetworkSelectionMode();
+            }
             for (OnNetworkSelectModeListener lsn : mListeners) {
                 lsn.onNetworkSelectModeUpdated(mCacheOfModeStatus);
             }
         }
         return mCacheOfModeStatus == TelephonyManager.NETWORK_SELECTION_MODE_AUTO;
+    }
+
+    private void getNetworkSelectionMode() {
+        if (mServiceConnected && mClient != null) {
+            try {
+                Token token = mExtTelephonyManager.getNetworkSelectionMode(
+                        mTelephonyManager.getSlotIndex(), mClient);
+            } catch (RuntimeException e) {
+                Log.i(TAG, "Exception getNetworkSelectionMode " + e);
+            }
+            try {
+                mLock.wait();
+            } catch (Exception e) {
+                Log.i(TAG, "Exception :" + e);
+            }
+        }
     }
 
     @Override
@@ -178,6 +224,7 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
 
     @Override
     public boolean setChecked(boolean isChecked) {
+        Log.i(TAG, "isChecked = " + isChecked);
         if (mRecursiveUpdate.get() != 0) {
             // Changing from software are allowed and changing presentation only.
             return true;
@@ -229,6 +276,8 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
         mSubId = subId;
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
+        mExtTelephonyManager = ExtTelephonyManager.getInstance(mContext);
+        mExtTelephonyManager.connectService(mExtTelManagerServiceCallback);
         final PersistableBundle carrierConfig =
                 CarrierConfigCache.getInstance(mContext).getConfigForSubId(mSubId);
         mOnlyAutoSelectInHome = carrierConfig != null
@@ -238,6 +287,47 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
 
         return this;
     }
+
+    private ServiceCallback mExtTelManagerServiceCallback = new ServiceCallback() {
+
+        @Override
+        public void onConnected() {
+            mServiceConnected = true;
+            mClient = mExtTelephonyManager.registerCallback(
+                    mContext.getPackageName(), mExtPhoneCallback);
+            Log.i(TAG, "mExtTelManagerServiceCallback: service connected " + mClient);
+        }
+
+        @Override
+        public void onDisconnected() {
+            Log.i(TAG, "mExtTelManagerServiceCallback: service disconnected");
+            if (mServiceConnected) {
+                mServiceConnected = false;
+                mClient = null;
+            }
+        }
+    };
+
+    protected IExtPhoneCallback mExtPhoneCallback = new ExtPhoneCallbackBase() {
+        @Override
+        public void getNetworkSelectionModeResponse(int slotId, Token token, Status status,
+                NetworkSelectionMode modes) {
+            Log.i(TAG, "ExtPhoneCallback: getNetworkSelectionModeResponse");
+            if (status.get() == Status.SUCCESS) {
+                try {
+                    mCacheOfModeStatus = modes.getIsManual() ?
+                            mTelephonyManager.NETWORK_SELECTION_MODE_MANUAL :
+                            mTelephonyManager.NETWORK_SELECTION_MODE_AUTO;
+                    MobileNetworkUtils.setAccessMode(mContext, slotId, modes.getAccessMode());
+                } catch (Exception e) {
+                    // send the setting on error
+                }
+            }
+            synchronized (mLock) {
+                mLock.notify();
+            }
+        }
+    };
 
     public AutoSelectPreferenceController addListener(OnNetworkSelectModeListener lsn) {
         mListeners.add(lsn);
@@ -274,6 +364,13 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
     @Override
     public void onSubscriptionsChanged() {
         updateState(mSwitchPreference);
+    }
+
+    @Override
+    public void onNetworkScanTypeChanged(int type) {
+        Log.i(TAG, "onNetworkScanTypeChanged type = " + type);
+        mSwitchPreference.setChecked(true);
+        setChecked(true);
     }
     /**
      * Callback when network select mode might get updated
