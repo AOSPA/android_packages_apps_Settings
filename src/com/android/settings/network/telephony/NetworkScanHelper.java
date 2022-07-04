@@ -14,6 +14,13 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center are provided under the following license:
+ *
+ * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.network.telephony;
 
 import android.annotation.IntDef;
@@ -21,6 +28,7 @@ import android.content.Context;
 import android.content.IntentFilter;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.provider.Settings;
 import android.telephony.AccessNetworkConstants.AccessNetworkType;
 import android.telephony.CellInfo;
 import android.telephony.NetworkScan;
@@ -32,6 +40,8 @@ import android.telephony.TelephonyScanManager;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
+
+import com.qti.extphone.ExtTelephonyManager;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -123,6 +133,7 @@ public class NetworkScanHelper {
 
     private final NetworkScanCallback mNetworkScanCallback;
     private final TelephonyManager mTelephonyManager;
+    private ExtTelephonyManager mExtTelephonyManager;
     private final TelephonyScanManager.NetworkScanCallback mInternalNetworkScanCallback;
     private final Executor mExecutor;
     private final LegacyIncrementalScanBroadcastReceiver mLegacyIncrScanReceiver;
@@ -140,6 +151,7 @@ public class NetworkScanHelper {
         mExecutor = executor;
         mLegacyIncrScanReceiver =
                 new LegacyIncrementalScanBroadcastReceiver(mContext, mInternalNetworkScanCallback);
+        mExtTelephonyManager = ExtTelephonyManager.getInstance(context);
     }
 
     @VisibleForTesting
@@ -178,6 +190,13 @@ public class NetworkScanHelper {
                     new RadioAccessSpecifier(AccessNetworkType.NGRAN, null, null));
             Log.d(TAG, "radioAccessSpecifiers add NGRAN.");
         }
+        int accessMode = NetworkScanRequest.ACCESS_MODE_PLMN;
+        int searchType = NetworkScanRequest.SEARCH_TYPE_PLMN_ONLY;
+        if(MobileNetworkUtils.isCagSnpnEnabled(mContext)) {
+            accessMode = MobileNetworkUtils.getAccessMode(mContext,
+                    mTelephonyManager.getSlotIndex());
+            searchType = NetworkScanRequest.SEARCH_TYPE_PLMN_AND_CAG;
+        }
 
         return new NetworkScanRequest(
                 NetworkScanRequest.SCAN_TYPE_ONE_SHOT,
@@ -187,7 +206,9 @@ public class NetworkScanHelper {
                 MAX_SEARCH_TIME_SEC,
                 INCREMENTAL_RESULTS,
                 INCREMENTAL_RESULTS_PERIODICITY_SEC,
-                null /* List of PLMN ids (MCC-MNC) */);
+                null /* List of PLMN ids (MCC-MNC) */,
+                accessMode,
+                searchType);
     }
 
     /**
