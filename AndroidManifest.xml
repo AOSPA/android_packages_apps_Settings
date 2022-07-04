@@ -838,7 +838,8 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                 android:label="@string/device_picker"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:exported="true"
-                android:clearTaskOnLaunch="true">
+                android:clearTaskOnLaunch="true"
+                android:theme="@style/Theme.SubSettingsBase">
             <intent-filter>
                 <action android:name="android.bluetooth.devicepicker.action.LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
