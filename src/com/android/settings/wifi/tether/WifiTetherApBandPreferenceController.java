@@ -80,7 +80,7 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
                                 .build());
                     mBandIndex = SoftApConfiguration.BAND_2GHZ;
                     Log.d(TAG, "Dual band not supported with OWE, updating band index to 2GHz");
-                } else {
+                } else if (false) {
                     mBandIndex = BAND_BOTH_2G_5G;
                 }
             } else
@@ -182,7 +182,7 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
                 && (config != null) && (config.getSecurityType() != SoftApConfiguration.SECURITY_TYPE_OWE)) {
             /* isConcurrentBandSupported indicates Concurrent band support
              * for HW_SUPPORTED_FEATURES.*/
-            if (mWifiManager.isConcurrentBandSupported()) {
+            if (mWifiManager.isConcurrentBandSupported() && false) {
                 bandEntries.add(String.valueOf(BAND_BOTH_2G_5G));
                 bandSummaries.add(mContext.getString(R.string.wifi_ap_choose_vendor_dual_band));
             }
