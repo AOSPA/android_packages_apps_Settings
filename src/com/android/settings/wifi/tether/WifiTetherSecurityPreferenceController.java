@@ -172,7 +172,7 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
 
         final boolean isOweSupported =
                 softApCapability.areFeaturesSupported(SoftApCapability.SOFTAP_FEATURE_WPA3_OWE)
-                || mWifiRes.getBoolean(getWifiResId("bool", "config_vendor_wifi_softap_owe_supported"));
+                || (mWifiRes != null && mWifiRes.getBoolean(getWifiResId("bool", "config_vendor_wifi_softap_owe_supported")));
         if (!isOweSupported) {
             Log.i(PREF_KEY, "OWE not supported.");
         }

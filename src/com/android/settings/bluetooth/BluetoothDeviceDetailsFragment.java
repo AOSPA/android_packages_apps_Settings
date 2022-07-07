@@ -20,8 +20,11 @@ import static android.bluetooth.BluetoothDevice.BOND_NONE;
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
 import android.app.settings.SettingsEnums;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothStatusCodes;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemProperties;
@@ -55,7 +58,6 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.IllegalFormatException;
 import java.util.List;
 
 public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment {
@@ -97,6 +99,16 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
 
     public BluetoothDeviceDetailsFragment() {
         super(DISALLOW_CONFIG_BLUETOOTH);
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (bluetoothAdapter != null && ((bluetoothAdapter.isLeAudioBroadcastSourceSupported() ==
+                BluetoothStatusCodes.FEATURE_SUPPORTED)||
+                (bluetoothAdapter.isLeAudioBroadcastAssistantSupported() ==
+                BluetoothStatusCodes.FEATURE_SUPPORTED))) {
+            SystemProperties.set(BLUETOOTH_BROADCAST_UI_PROP, "false");
+        } else {
+            Log.d(TAG, "Use legacy broadcast if available");
+            SystemProperties.set(BLUETOOTH_BROADCAST_UI_PROP, "true");
+        }
     }
 
     @VisibleForTesting
@@ -148,7 +160,6 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         use(BlockingSlicePrefController.class).setSliceUri(sliceEnabled
                 ? featureProvider.getBluetoothDeviceSettingsUri(mCachedDevice.getDevice())
                 : null);
-        updateExtraControlUri(/* viewWidth */ 0);
 
         use(BADeviceVolumeController.class).init(this, mManager, mCachedDevice);
     }
@@ -162,13 +173,14 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         String uri = featureProvider.getBluetoothDeviceControlUri(mCachedDevice.getDevice());
         if (!TextUtils.isEmpty(uri)) {
             try {
-                controlUri = Uri.parse(String.format(uri, viewWidth));
-            } catch (IllegalFormatException | NullPointerException exception) {
+                controlUri = Uri.parse(uri + viewWidth);
+            } catch (NullPointerException exception) {
                 Log.d(TAG, "unable to parse uri");
                 controlUri = null;
             }
         }
         use(SlicePreferenceController.class).setSliceUri(sliceEnabled ? controlUri : null);
+        use(SlicePreferenceController.class).onStart();
     }
 
     private final ViewTreeObserver.OnGlobalLayoutListener mOnGlobalLayoutListener =
@@ -179,7 +191,10 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                     if (view == null) {
                         return;
                     }
-                    updateExtraControlUri(view.getWidth());
+                    if (view.getWidth() <= 0) {
+                        return;
+                    }
+                    updateExtraControlUri(view.getWidth() - getPaddingSize());
                     view.getViewTreeObserver().removeOnGlobalLayoutListener(
                             mOnGlobalLayoutListener);
                 }
@@ -314,5 +329,18 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         } finally {
             return controllers;
         }
+    }
+
+    private int getPaddingSize() {
+        TypedArray resolvedAttributes =
+                getContext().obtainStyledAttributes(
+                        new int[]{
+                                android.R.attr.listPreferredItemPaddingStart,
+                                android.R.attr.listPreferredItemPaddingEnd
+                        });
+        int width = resolvedAttributes.getDimensionPixelSize(0, 0)
+                + resolvedAttributes.getDimensionPixelSize(1, 0);
+        resolvedAttributes.recycle();
+        return width;
     }
 }
