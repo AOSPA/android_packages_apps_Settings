@@ -33,7 +33,9 @@ import android.text.TextUtils;
 import com.android.settings.Utils;
 import com.android.wifitrackerlib.WifiEntry;
 
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.util.Locale;
 
 /** A utility class for Wi-Fi functions. */
 public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
@@ -247,5 +249,35 @@ public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
         }
 
         return WifiEntry.SECURITY_NONE;
+    }
+
+    // copied from NativeUtil#removeEnclosingQuotes
+    public static String removeEnclosingQuotes(String quotedStr) {
+        int length = quotedStr.length();
+        if ((length >= 2)
+                && (quotedStr.charAt(0) == '"') && (quotedStr.charAt(length - 1) == '"')) {
+            return quotedStr.substring(1, length - 1);
+        }
+        return quotedStr;
+    }
+
+    public static String quotedStrToGbkHex(String quotedStr) {
+        String bareStr = removeEnclosingQuotes(quotedStr);
+        byte[] bareBytes = null;
+        try {
+            bareBytes = bareStr.getBytes("GBK");
+        } catch (UnsupportedEncodingException cce) {
+           // Unsupported
+        }
+        if (bareBytes != null && bareBytes.length <= SSID_ASCII_MAX_LENGTH) {
+            StringBuffer out = new StringBuffer(64);
+            for (int i = 0; i < bareBytes.length; i++) {
+                out.append(String.format(Locale.US, "%02x", bareBytes[i]));
+            }
+            if (out.length() > 0) {
+                return out.toString();
+            }
+        }
+        return quotedStr;
     }
 }
