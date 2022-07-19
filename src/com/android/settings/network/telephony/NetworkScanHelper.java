@@ -232,20 +232,20 @@ public class NetworkScanHelper {
         if (mNetworkScanRequester != null) {
             mNetworkScanRequester.stopScan();
             mNetworkScanRequester = null;
-        }
-
-        try {
-            int slotIndex = mTelephonyManager.getSlotIndex();
-            if (slotIndex >= 0 && slotIndex < mTelephonyManager.getActiveModemCount()) {
-                TelephonyUtils.abortIncrementalScan(mContext, slotIndex);
-            } else {
-                Log.d(TAG, "slotIndex is invalid, skipping abort");
+        } else {
+            try {
+                int slotIndex = mTelephonyManager.getSlotIndex();
+                if (slotIndex >= 0 && slotIndex < mTelephonyManager.getActiveModemCount()) {
+                    TelephonyUtils.abortIncrementalScan(mContext, slotIndex);
+                } else {
+                    Log.d(TAG, "slotIndex is invalid, skipping abort");
+                }
+                mContext.unregisterReceiver(mLegacyIncrScanReceiver);
+            } catch (NullPointerException ex) {
+                Log.e(TAG, "abortIncrementalScan Exception: ", ex);
+            } catch (IllegalArgumentException ex) {
+                Log.e(TAG, "IllegalArgumentException");
             }
-            mContext.unregisterReceiver(mLegacyIncrScanReceiver);
-        } catch (NullPointerException ex) {
-            Log.e(TAG, "abortIncrementalScan Exception: ", ex);
-        } catch (IllegalArgumentException ex) {
-            Log.e(TAG, "IllegalArgumentException");
         }
     }
 
