@@ -195,6 +195,9 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
 
     @Override
     public void updateState(Preference preference) {
+        if (mTelephonyManager == null) {
+            return;
+        }
         super.updateState(preference);
         final SwitchPreference switchPreference = (SwitchPreference) preference;
         switchPreference.setVisible(isAvailable());
