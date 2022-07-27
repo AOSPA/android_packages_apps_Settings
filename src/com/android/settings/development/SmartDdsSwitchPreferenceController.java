@@ -200,7 +200,9 @@ public class SmartDdsSwitchPreferenceController extends DeveloperOptionsPreferen
                 updateUi(defaultSummary, isAvailable());
             } else {
                 Log.d(TAG, "Feature unavailable");
-                preference.setVisible(false);
+                if (preference != null) {
+                    preference.setVisible(false);
+                }
             }
         } else {
             Log.d(TAG, "Service not connected");
