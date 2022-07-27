@@ -161,8 +161,9 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
 
     @Override
     public void onSubscriptionsChanged() {
-        if ((mSubInfo == null || !mSubscriptionManager.isActiveSubscriptionId(
-                mSubInfo.getSubscriptionId())) && !isFinishing()) {
+        if ((mSubInfo == null || (!mSubInfo.isEmbedded() &&
+                !mSubscriptionManager.isActiveSubscriptionId(mSubInfo.getSubscriptionId())))
+                && !isFinishing()) {
             Log.i(TAG, "Finish dialog for inactive sim");
             finish();
         }
