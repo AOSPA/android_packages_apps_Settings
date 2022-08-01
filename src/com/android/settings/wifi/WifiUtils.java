@@ -170,11 +170,19 @@ public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
         final int security;
 
         if (wifiEntry == null) {
-            config.SSID = "\"" + scanResult.SSID + "\"";
+            if (wifiEntry.isGbkSsidSupported()) {
+                config.SSID = scanResult.getWifiSsid().toString();
+            } else {
+                config.SSID = "\"" + scanResult.SSID + "\"";
+            }
             security = getWifiEntrySecurity(scanResult);
         } else {
             if (wifiEntry.getWifiConfiguration() == null) {
-                config.SSID = "\"" + wifiEntry.getSsid() + "\"";
+                if (wifiEntry.isGbkSsidSupported()) {
+                    config.SSID = wifiEntry.getSsid();
+                } else {
+                    config.SSID = "\"" + wifiEntry.getSsid() + "\"";
+                }
             } else {
                 config.networkId = wifiEntry.getWifiConfiguration().networkId;
                 config.hiddenSSID = wifiEntry.getWifiConfiguration().hiddenSSID;
