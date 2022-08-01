@@ -594,7 +594,11 @@ public class WifiConfigController2 implements TextWatcher,
             // If the user adds a network manually, assume that it is hidden.
             config.hiddenSSID = mHiddenSettingsSpinner.getSelectedItemPosition() == HIDDEN_NETWORK;
         } else if (!mWifiEntry.isSaved()) {
-            config.SSID = "\"" + mWifiEntry.getTitle() + "\"";
+            if (mWifiEntry.isGbkSsidSupported()) {
+                config.SSID = mWifiEntry.getSsid();
+            } else {
+                config.SSID = "\"" + mWifiEntry.getTitle() + "\"";
+            }
         } else {
             config.networkId = mWifiEntry.getWifiConfiguration().networkId;
             config.hiddenSSID = mWifiEntry.getWifiConfiguration().hiddenSSID;
