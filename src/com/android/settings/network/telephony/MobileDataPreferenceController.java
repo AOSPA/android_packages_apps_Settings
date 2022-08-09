@@ -142,6 +142,9 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
 
     @Override
     public void updateState(Preference preference) {
+        if (mTelephonyManager == null) {
+            return;
+        }
         super.updateState(preference);
         if (isOpportunistic()) {
             preference.setEnabled(false);
