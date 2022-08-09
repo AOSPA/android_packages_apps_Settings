@@ -143,6 +143,9 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
 
     @Override
     public void updateState(Preference preference) {
+        if (mTelephonyManager == null) {
+            return;
+        }
         super.updateState(preference);
         final RestrictedSwitchPreference switchPreference = (RestrictedSwitchPreference) preference;
         if (!switchPreference.isDisabledByAdmin()) {
@@ -164,6 +167,9 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
 
     @VisibleForTesting
     boolean isDialogNeeded() {
+        if (mTelephonyManager == null) {
+            return false;
+        }
         final boolean isRoamingEnabled = mTelephonyManager.isDataRoamingEnabled();
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(
                 mSubId);
@@ -178,6 +184,9 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
 
     @Override
     public boolean isChecked() {
+        if (mTelephonyManager == null) {
+            return false;
+        }
         return mTelephonyManager.isDataRoamingEnabled();
     }
 

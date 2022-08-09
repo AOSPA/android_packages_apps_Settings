@@ -113,6 +113,9 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
 
     @Override
     public boolean isChecked() {
+        if (mManager == null) {
+            return false;
+        }
         return mManager.isMobileDataPolicyEnabled(
                 TelephonyManager.MOBILE_DATA_POLICY_DATA_ON_NON_DEFAULT_DURING_VOICE_CALL);
     }
@@ -135,6 +138,9 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
         if (!SubscriptionManager.isValidSubscriptionId(subId)
                 || SubscriptionManager.getDefaultDataSubscriptionId() == subId
                 || (!hasMobileData())) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+        if (mManager == null) {
             return CONDITIONALLY_UNAVAILABLE;
         }
         boolean isDefDataEnabled = mManager.createForSubscriptionId(
