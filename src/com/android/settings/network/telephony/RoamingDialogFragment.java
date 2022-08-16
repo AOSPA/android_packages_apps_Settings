@@ -35,14 +35,20 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
  */
 public class RoamingDialogFragment extends InstrumentedDialogFragment implements OnClickListener {
 
-    public static final String SUB_ID_KEY = "sub_id_key";
+    private static final String SUB_ID_KEY = "sub_id_key";
+    private static final String DIALOG_TYPE = "dialog_type";
+
+    public static final int TYPE_ENABLE_DIALOG = 0;
+    public static final int TYPE_DISABLE_CIWLAN_DIALOG = 1;
 
     private CarrierConfigManager mCarrierConfigManager;
+    private int mType;
     private int mSubId;
 
-    public static RoamingDialogFragment newInstance(int subId) {
+    public static RoamingDialogFragment newInstance(int type, int subId) {
         final RoamingDialogFragment dialogFragment = new RoamingDialogFragment();
         final Bundle args = new Bundle();
+        args.putInt(DIALOG_TYPE, type);
         args.putInt(SUB_ID_KEY, subId);
         dialogFragment.setArguments(args);
 
@@ -59,22 +65,30 @@ public class RoamingDialogFragment extends InstrumentedDialogFragment implements
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        mType = getArguments().getInt(DIALOG_TYPE);
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        final int title = R.string.roaming_alert_title;
-        int message = R.string.roaming_warning;
-        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
-        if (carrierConfig != null && carrierConfig.getBoolean(
-                CarrierConfigManager.KEY_CHECK_PRICING_WITH_CARRIER_FOR_DATA_ROAMING_BOOL)) {
-            message = R.string.roaming_check_price_warning;
+        switch (mType) {
+            case TYPE_ENABLE_DIALOG:
+                int message = R.string.roaming_warning;
+                final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(
+                        mSubId);
+                if (carrierConfig != null && carrierConfig.getBoolean(
+                        CarrierConfigManager.KEY_CHECK_PRICING_WITH_CARRIER_FOR_DATA_ROAMING_BOOL))
+                {
+                    message = R.string.roaming_check_price_warning;
+                }
+                builder.setMessage(getResources().getString(message))
+                       .setTitle(getResources().getString(R.string.roaming_alert_title));
+                break;
+            case TYPE_DISABLE_CIWLAN_DIALOG:
+                builder.setTitle(R.string.roaming_disable_title)
+                       .setMessage(R.string.roaming_disable_dialog_ciwlan_call);
+                break;
         }
-        builder.setMessage(getResources().getString(message))
-                .setTitle(title)
-                .setIconAttribute(android.R.attr.alertDialogIcon)
-                .setPositiveButton(android.R.string.yes, this)
-                .setNegativeButton(android.R.string.no, this);
-        AlertDialog dialog = builder.create();
-        dialog.setCanceledOnTouchOutside(false);
-        return dialog;
+        builder.setIconAttribute(android.R.attr.alertDialogIcon)
+               .setPositiveButton(android.R.string.yes, this)
+               .setNegativeButton(android.R.string.no, this);
+        return builder.create();
     }
 
     @Override
@@ -84,15 +98,24 @@ public class RoamingDialogFragment extends InstrumentedDialogFragment implements
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
-        // let the host know that the positive button has been clicked
-        if (which == dialog.BUTTON_POSITIVE) {
-            final TelephonyManager telephonyManager =
-                    getContext().getSystemService(TelephonyManager.class)
-                    .createForSubscriptionId(mSubId);
-            if (telephonyManager == null) {
-                return;
-            }
-            telephonyManager.setDataRoamingEnabled(true);
+        final TelephonyManager telephonyManager =
+                getContext().getSystemService(TelephonyManager.class)
+                .createForSubscriptionId(mSubId);
+        if (telephonyManager == null) {
+            return;
+        }
+        switch (mType) {
+            case TYPE_ENABLE_DIALOG:
+                // let the host know that the positive button has been clicked
+                if (which == dialog.BUTTON_POSITIVE) {
+                    telephonyManager.setDataRoamingEnabled(true);
+                }
+                break;
+            case TYPE_DISABLE_CIWLAN_DIALOG:
+                if (which == dialog.BUTTON_POSITIVE) {
+                    telephonyManager.setDataRoamingEnabled(false);
+                }
+                break;
         }
     }
 }

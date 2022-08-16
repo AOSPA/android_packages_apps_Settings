@@ -244,7 +244,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
         final VideoCallingPreferenceController videoCallingPreferenceController =
                 use(VideoCallingPreferenceController.class).init(mSubId);
         final BackupCallingPreferenceController crossSimCallingPreferenceController =
-                use(BackupCallingPreferenceController.class).init(mSubId);
+                use(BackupCallingPreferenceController.class).init(getFragmentManager(), mSubId);
         use(Enabled5GPreferenceController.class).init(mSubId);
         use(CallingPreferenceCategoryController.class).setChildren(
                 Arrays.asList(wifiCallingPreferenceController, videoCallingPreferenceController,
