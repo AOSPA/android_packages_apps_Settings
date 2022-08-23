@@ -179,7 +179,13 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
         final TextView operatorName = view.findViewById(R.id.operator_name_value);
         mTelephonyManager = mTelephonyManager.createForSubscriptionId(mSubId);
         operatorName.setText(info.getCarrierName());
-
+        if (DomesticRoamUtils.isFeatureEnabled(getContext())) {
+            String carrierName = DomesticRoamUtils.getRegisteredOperatorName(
+                    getContext(), info.getSubscriptionId());
+            if (DomesticRoamUtils.EMPTY_OPERATOR_NAME != carrierName) {
+                operatorName.setText(carrierName);
+            }
+        }
         final TextView phoneTitle = view.findViewById(R.id.number_label);
         phoneTitle.setVisibility(info.isOpportunistic() ? View.GONE : View.VISIBLE);
 
