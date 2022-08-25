@@ -22,14 +22,20 @@ import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.os.UserManager;
 import android.provider.DeviceConfig;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceFragmentCompat;
@@ -41,6 +47,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.BlockingSlicePrefController;
+import com.android.settings.slices.SlicePreferenceController;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -49,6 +56,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.IllegalFormatException;
 import java.util.List;
 
 public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment {
@@ -74,6 +82,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     @VisibleForTesting
     interface TestDataFactory {
         CachedBluetoothDevice getDevice(String deviceAddress);
+
         LocalBluetoothManager getManager(Context context);
         UserManager getUserManager();
     }
@@ -146,7 +155,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         use(LeAudioBluetoothDetailsHeaderController.class).init(mCachedDevice, mManager);
 
         final BluetoothFeatureProvider featureProvider = FeatureFactory.getFactory(
-                context).getBluetoothFeatureProvider(context);
+                context).getBluetoothFeatureProvider();
         final boolean sliceEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
                 SettingsUIDeviceConfig.BT_SLICE_SETTINGS_ENABLED, true);
 
@@ -155,6 +164,49 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                 : null);
 
         use(BADeviceVolumeController.class).init(this, mManager, mCachedDevice);
+        updateExtraControlUri(/* viewWidth */ 0);
+    }
+
+    private void updateExtraControlUri(int viewWidth) {
+        BluetoothFeatureProvider featureProvider = FeatureFactory.getFactory(
+                getContext()).getBluetoothFeatureProvider();
+        boolean sliceEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
+                SettingsUIDeviceConfig.BT_SLICE_SETTINGS_ENABLED, true);
+        Uri controlUri = null;
+        String uri = featureProvider.getBluetoothDeviceControlUri(mCachedDevice.getDevice());
+        if (!TextUtils.isEmpty(uri)) {
+            try {
+                controlUri = Uri.parse(String.format(uri, viewWidth));
+            } catch (IllegalFormatException | NullPointerException exception) {
+                Log.d(TAG, "unable to parse uri");
+                controlUri = null;
+            }
+        }
+        use(SlicePreferenceController.class).setSliceUri(sliceEnabled ? controlUri : null);
+    }
+
+    private final ViewTreeObserver.OnGlobalLayoutListener mOnGlobalLayoutListener =
+            new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    View view = getView();
+                    if (view == null) {
+                        return;
+                    }
+                    updateExtraControlUri(view.getWidth());
+                    view.getViewTreeObserver().removeOnGlobalLayoutListener(
+                            mOnGlobalLayoutListener);
+                }
+            };
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        View view = super.onCreateView(inflater, container, savedInstanceState);
+        if (view != null) {
+            view.getViewTreeObserver().addOnGlobalLayoutListener(mOnGlobalLayoutListener);
+        }
+        return view;
     }
 
     @Override
@@ -234,6 +286,8 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         controllers.add(new BluetoothDetailsProfilesController(context, this, mManager,
                 mCachedDevice, lifecycle));
         controllers.add(new BluetoothDetailsMacAddressController(context, this, mCachedDevice,
+                lifecycle));
+        controllers.add(new BluetoothDetailsRelatedToolsController(context, this, mCachedDevice,
                 lifecycle));
         if (mBAPropertyChecked == false) {
             int advAudioMask = SystemProperties.getInt(BLUETOOTH_ADV_AUDIO_MASK_PROP, 0);

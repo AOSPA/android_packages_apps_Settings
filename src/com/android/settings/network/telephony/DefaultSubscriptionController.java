@@ -43,7 +43,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.SubscriptionsChangeListener;
 
@@ -150,6 +149,16 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
     }
 
     @Override
+    protected void refreshSummary(Preference preference) {
+        // Currently, cannot use ListPreference.setSummary() when the summary contains user
+        // generated string, because ListPreference.getSummary() is using String.format() to format
+        // the summary when the summary is set by ListPreference.setSummary().
+        if (preference != null) {
+            preference.setSummaryProvider(pref -> getSummary());
+        }
+    }
+
+    @Override
     public CharSequence getSummary() {
         final PhoneAccountHandle handle = getDefaultCallingAccountHandle();
         if ((handle != null) && (!isCallingAccountBindToSubscription(handle))) {
@@ -198,8 +207,8 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
 
         if (mSelectableSubs.size() == 1) {
             mPreference.setEnabled(false);
-            mPreference.setSummary(SubscriptionUtil.getUniqueSubscriptionDisplayName(
-                    mSelectableSubs.get(0), mContext));
+            mPreference.setSummaryProvider(pref ->
+                    SubscriptionUtil.getUniqueSubscriptionDisplayName(mSelectableSubs.get(0), mContext));
             return;
         }
 
