@@ -51,9 +51,8 @@ public class ParanoidAndroidVersionPreferenceController extends BasePreferenceCo
 
         if (aospaBuildVariant.equals("Release")) {
             return aospaVersionMajor + " " + aospaVersionMinor;
-        } else if (aospaBuildVariant.matches("Alpha|Beta")) {
+        } else {
            return aospaVersionMajor + " " + aospaBuildVariant + " " + aospaVersionMinor;
         }
-        return aospaVersionMajor + " " + aospaVersionMinor + " " + aospaBuildVariant;
     }
 }
