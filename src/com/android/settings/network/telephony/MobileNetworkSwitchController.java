@@ -30,7 +30,6 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.PreferenceScreen;
@@ -71,8 +70,7 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
         mCallState = mTelephonyManager.getCallState();
     }
 
-    public void init(Lifecycle lifecycle, int subId) {
-        lifecycle.addObserver(this);
+    void init(int subId) {
         mSubId = subId;
     }
 

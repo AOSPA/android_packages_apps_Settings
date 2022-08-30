@@ -43,12 +43,6 @@
         android:icon="@drawable/ic_guest_reset"
         android:order="4"/>
 
-    <Preference
-        android:key="guest_info"
-        android:icon="@drawable/ic_info"
-        android:order="5"
-        android:selectable="false"/>
-
     <PreferenceCategory
         android:key="user_list"
         android:title="@string/user_category_title"
@@ -83,6 +77,13 @@
             android:title="@string/remove_guest_on_exit"
             android:summary="@string/remove_guest_on_exit_summary"
             android:order="60"/>
+
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="enable_guest_calling"
+        android:title="@string/enable_guest_calling"
+        android:summary="@string/enable_guest_calling_summary"
+        android:singleLineTitle="false"
+        android:order="65"/>
 
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="user_settings_add_users_when_locked"

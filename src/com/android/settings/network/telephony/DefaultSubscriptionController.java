@@ -34,7 +34,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.ListPreference;
@@ -95,10 +94,6 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         mPhoneStateListener = new PhoneStateListener[mPhoneCount];
         mCallState = new int[mPhoneCount];
         mSelectableSubs = new ArrayList<SubscriptionInfo>();
-    }
-
-    public void init(Lifecycle lifecycle) {
-        lifecycle.addObserver(this);
     }
 
     /** @return SubscriptionInfo for the default subscription for the service, or null if there

@@ -35,6 +35,14 @@ java_library {
     ],
 }
 
+java_library {
+    name: "Settings-change-ids",
+    srcs: ["src/com/android/settings/ChangeIds.java"],
+    libs: [
+        "app-compat-annotations",
+    ],
+}
+
 soong_config_module_type_import {
     from: "device/qcom/qssi/Android.bp",
     module_types: [
@@ -100,12 +108,12 @@ android_library {
         "lottie",
         "WifiTrackerLib",
         "SettingsLibActivityEmbedding",
+        "Settings-change-ids",
     ],
 
     libs: [
         "telephony-common",
         "ims-common",
-        "app-compat-annotations",
         "telephony-ext",
         "extphonelib",
     ],
@@ -113,7 +121,7 @@ android_library {
 
 platform_compat_config {
     name: "settings-platform-compat-config",
-    src: ":Settings-core",
+    src: ":Settings-change-ids",
     system_ext_specific: true,
 }
 
@@ -154,7 +162,7 @@ filegroup {
 // over all the sources together.
 filegroup {
     name: "Settings_srcs",
-    srcs: ["src/**/*.java"],
+    srcs: ["src/**/*.java", "src/**/*.kt"],
 }
 
 filegroup {

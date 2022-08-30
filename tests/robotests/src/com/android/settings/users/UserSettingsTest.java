@@ -146,6 +146,8 @@ public class UserSettingsTest {
         mFragment = spy(new UserSettings());
         ReflectionHelpers.setField(mFragment, "mAddUserWhenLockedPreferenceController",
                 mock(AddUserWhenLockedPreferenceController.class));
+        ReflectionHelpers.setField(mFragment, "mGuestTelephonyPreferenceController",
+                mock(GuestTelephonyPreferenceController.class));
         ReflectionHelpers.setField(mFragment, "mMultiUserTopIntroPreferenceController",
                 mock(MultiUserTopIntroPreferenceController.class));
         ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
@@ -185,7 +187,6 @@ public class UserSettingsTest {
         mFragment.mGuestCategory = mock(PreferenceCategory.class);
         mFragment.mGuestResetPreference = mock(Preference.class);
         mFragment.mGuestExitPreference = mock(Preference.class);
-        mFragment.mGuestInfoPreference = mock(Preference.class);
     }
 
     @After

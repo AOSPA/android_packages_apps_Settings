@@ -89,9 +89,6 @@
     <!-- Content description for dot pager indicator for preview pager. [CHAR LIMIT=NONE] -->
     <string name="preview_page_indicator_content_description">Preview, page <xliff:g id="current_page" example="3">%1$d</xliff:g> of <xliff:g id="num_pages" example="9">%2$d</xliff:g></string>
 
-    <!-- Summary of font size setting screen. [CHAR LIMIT=NONE] -->
-    <string name="font_size_summary">Make the text on screen smaller or larger.</string>
-
     <!-- Description for the button that makes interface elements smaller. [CHAR_LIMIT=NONE] -->
     <string name="font_size_make_smaller_desc">Make smaller</string>
     <!-- Description for the button that makes interface elements larger. [CHAR_LIMIT=NONE] -->
@@ -102,30 +99,6 @@
 
     <!-- Disclaimer for camera based rotate [CHAR_LIMIT=NONE] -->
     <string name="smart_rotate_text_headline">Face Detection uses the front-facing camera to improve auto-rotate accuracy. Images are never stored or sent to Google.</string>
-    <string name="font_size_preview_text_headline">Sample text</string>
-    <string name="font_size_preview_text_title"
-            translation_description="Title text in sample text used to illustrate how the currently selected font size will appear to the user. NOTE: Translate manually. No not adopt any copyrighted material for translation.">
-        The Wonderful Wizard of Oz
-    </string>
-    <string name="font_size_preview_text_subtitle"
-            translation_description="Subtitle text in sample text used to illustrate how the currently selected font size will appear to the user. NOTE: Translate manually. No not adopt any copyrighted material for translation.">
-        Chapter 11: The Wonderful Emerald City of Oz</string>
-    <string name="font_size_preview_text_body"
-            translation_description="Text in sample text used to illustrate how the currently selected font size will appear to the user. NOTE: Translate manually. No not adopt any copyrighted material for translation.">
-        Even with eyes protected by the green spectacles Dorothy and her friends were at first dazzled by the brilliancy of the wonderful City.
-        The streets were lined with beautiful houses all built of green marble and studded everywhere with sparkling emeralds.
-        They walked over a pavement of the same green marble, and where the blocks were joined together were rows of emeralds, set closely, and glittering in the brightness of the sun.
-        The window panes were of green glass; even the sky above the City had a green tint, and the rays of the sun were green.
-        \n\nThere were many people, men, women and children, walking about, and these were all dressed in green clothes and had greenish skins.
-        They looked at Dorothy and her strangely assorted company with wondering eyes, and the children all ran away and hid behind their mothers when they saw the Lion; but no one spoke to them.
-        Many shops stood in the street, and Dorothy saw that everything in them was green.
-        Green candy and green pop-corn were offered for sale, as well as green shoes, green hats and green clothes of all sorts.
-        At one place a man was selling green lemonade, and when the children bought it Dorothy could see that they paid for it with green pennies.
-        \n\nThere seemed to be no horses nor animals of any kind; the men carried things around in little green carts, which they pushed before them.
-        Everyone seeemed happy and contented and prosperous.
-    </string>
-    <!-- Button. Chosen when they want to save the chosen text size. -->
-    <string name="font_size_save">OK</string>
 
     <!-- Title for a notification shown. [CHAR LIMIT=25] -->
     <string name="sdcard_setting" product="nosdcard">USB storage</string>
@@ -351,8 +324,8 @@
 
     <!-- UI debug setting: Disable Bluetooth A2DP hardware offload [CHAR LIMIT=none] -->
     <string name="bluetooth_disable_a2dp_hw_offload">Disable Bluetooth A2DP hardware offload</string>
-    <!-- UI debug setting: Disable Bluetooth LE AUDIO hardware offload [CHAR LIMIT=none] -->
-    <string name="bluetooth_disable_le_audio_hw_offload">Disable Bluetooth LE AUDIO hardware offload</string>
+    <!-- UI debug setting: Disable Bluetooth LE audio hardware offload [CHAR LIMIT=none] -->
+    <string name="bluetooth_disable_le_audio_hw_offload">Disable Bluetooth LE audio hardware offload</string>
     <!-- UI debug setting: Disable Bluetooth hardware offload [CHAR LIMIT=none] -->
     <string name="bluetooth_disable_hw_offload_dialog_title">Restart Device?</string>
     <!-- UI debug setting: Disable Bluetooth hardware offload [CHAR LIMIT=none] -->
@@ -361,6 +334,11 @@
     <string name="bluetooth_disable_hw_offload_dialog_confirm">Restart</string>
     <!-- UI debug setting: Disable Bluetooth hardware offload [CHAR LIMIT=none] -->
     <string name="bluetooth_disable_hw_offload_dialog_cancel">Cancel</string>
+
+    <!-- Setting Checkbox title for enabling Bluetooth LE Audio feature. [CHAR LIMIT=40] -->
+    <string name="bluetooth_enable_leaudio">Enable Bluetooth LE audio</string>
+    <!-- Summary of checkbox for enabling Bluetooth LE audio [CHAR LIMIT=none]-->
+    <string name="bluetooth_enable_leaudio_summary">Enables Bluetooth LE audio feature if the device supports LE audio hardware capabilities.</string>
 
     <!-- Title for Bluetooth device group with media capability group [CHAR LIMIT=none]-->
     <string name="connected_device_media_device_title">Media devices</string>
@@ -1134,6 +1112,8 @@
     <string name="security_settings_fingerprint_enroll_dialog_name_label">Name</string>
     <!-- Button text shown in fingerprint dialog that allows the user to rename a fingerprint template [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_dialog_ok">OK</string>
+    <!-- Button text shown in fingerprint dialog that allows the user to try and enroll again[CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_enroll_dialog_try_again">Try again</string>
     <!-- Button text shown in fingerprint dialog that allows the user to delete the fingerprint template [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_dialog_delete">Delete</string>
     <!-- Title shown in fingerprint enrollment dialog to begin enrollment [CHAR LIMIT=29]-->
@@ -1290,9 +1270,9 @@
     <!-- Dialog message for dialog which shows when user touches the icon on the screen, instead of the sensor at the back [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_enroll_touch_dialog_message">Touch the sensor on the back of your phone. Use your index finger.</string>
     <!-- Dialog message for dialog which shows when finger cannot be enrolled. [CHAR LIMIT=45] -->
-    <string name="security_settings_fingerprint_enroll_error_dialog_title">Enrollment was not completed</string>
+    <string name="security_settings_fingerprint_enroll_error_dialog_title">Fingerprint setup timed out</string>
     <!-- Dialog message for dialog which shows when finger cannot be enrolled due to being idle too long. -->
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message">Fingerprint enrollment time limit reached. Try again.</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message">Try again now or set up your fingerprint later in Settings</string>
     <!-- Dialog message for dialog which shows when finger cannot be enrolled due to an internal error or fingerprint can't be read. -->
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message">Fingerprint enrollment didn\'t work. Try again or use a different finger.</string>
     <!-- Button text shown at the end of enrollment that allows the user to add another fingerprint -->
@@ -3017,7 +2997,7 @@
     <!-- Display settings screen, "QHD+" screen resolution summary [CHAR LIMIT=NONE] -->
     <string name="screen_resolution_summary_highest">1440p QHD+</string>
     <!-- The footer message for switch screen resolution [CHAR LIMIT=NONE] -->
-    <string name="screen_resolution_footer">Full resolution uses more of your battery. Switching to full resolution may cause some apps to restart.</string>
+    <string name="screen_resolution_footer">Full resolution uses more of your battery. Switching your resolution may cause some apps to restart.</string>
 
     <!-- Display settings screen, Color mode settings title [CHAR LIMIT=30] -->
     <string name="color_mode_title">Colors</string>
@@ -4654,12 +4634,8 @@
     <!-- Applications Settings --> <skip />
     <!-- Applications settings screen, setting option name for the user to go to the screen to manage installed applications  -->
     <string name="manageapplications_settings_title">Manage apps</string>
-    <!-- Applications settings screen, setting option summary for the user to go to the screen to manage installed applications  -->
-    <string name="manageapplications_settings_summary">Manage and remove installed apps</string>
     <!-- Applications settings title, on main settings screen. If clicked, the user is taken to a settings screen full of application settings-->
     <string name="applications_settings">App info</string>
-    <!-- Applications settings summary, on main settings screen. The summary for the "Applications" item on the main settings screen. Describes what settings are accessible from the "Applications" screen. -->
-    <string name="applications_settings_summary">Manage apps, set up quick launch shortcuts</string>
     <!-- Applications settings screen heading. The header for the Application settings screen. -->
     <string name="applications_settings_header">App settings</string>
     <!-- Applications settings screen, setting check box title. If checked, the system allows installation of applications that are downloaded from random places, such as web sites.  -->
@@ -5379,7 +5355,9 @@
     <!-- Title for the confirm dialog of reset settings. [CHAR LIMIT=NONE] -->
     <string name="accessibility_text_reading_confirm_dialog_title">Reset display size and text?</string>
     <!-- Message for the confirm dialog of reset settings. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_text_reading_confirm_dialog_message">Your display size and text preferences will reset to the phone\u2019s original settings</string>
+    <string name="accessibility_text_reading_confirm_dialog_message" product="default">Your display size and text preferences will reset to the phone\u2019s original settings</string>
+    <!-- Message for the confirm dialog of reset settings. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet">Your display size and text preferences will reset to the tablet\u2019s original settings</string>
     <!-- Title for the reset button of the confirm dialog of reset settings. [CHAR LIMIT=25] -->
     <string name="accessibility_text_reading_confirm_dialog_reset_button">Reset</string>
     <!-- Conversation message for the messaging app preview screen. [CHAR LIMIT=NONE] -->
@@ -6166,14 +6144,8 @@
     <!-- Summary for the low battery state [CHAR LIMIT=NONE] -->
     <string name="low_battery_summary">Low battery</string>
 
-    <!-- Title for the background activity setting, which allows a user to control whether an app can run in the background [CHAR_LIMIT=40] -->
-    <string name="background_activity_title">Background restriction</string>
     <!-- Summary for the background activity [CHAR_LIMIT=120] -->
     <string name="background_activity_summary">Allow the app to run in the background</string>
-    <!-- Summary for the background activity when it is disabled [CHAR_LIMIT=120] -->
-    <string name="background_activity_summary_disabled">App not allowed to run in background</string>
-    <!-- TODO: Pending UX review. Summary for the background activity when it is allowlisted [CHAR_LIMIT=120] -->
-    <string name="background_activity_summary_allowlisted">Background usage can\u2019t be restricted</string>
     <!-- TODO: Pending UX review. Title for the warning dialog to show to the user when limiting background activity for an app -->
     <string name="background_activity_warning_dialog_title">Limit background activity?</string>
     <!-- TODO: Pending UX review. Text for the warning dialog to show to the user when limiting background activity for an app -->
@@ -6600,8 +6572,6 @@
 
     <!-- Description for battery usage time for an app, i.e. Used for 30min. Note: ^1 should be used in all translations [CHAR LIMIT=60] -->
     <string name="battery_used_for">Used for <xliff:g id="time">^1</xliff:g></string>
-    <!-- Description for battery usage background time for an app, i.e. Active for 30min. Note: ^1 should be used in all translations [CHAR LIMIT=60] -->
-    <string name="battery_active_for">Active for <xliff:g id="time">^1</xliff:g></string>
     <!-- Description for battery screen usage time for an app, i.e. Screen usage 30min. Note: ^1 should be used in all translations [CHAR LIMIT=60] -->
     <string name="battery_screen_usage">Screen usage <xliff:g id="time">^1</xliff:g></string>
     <!-- Description for battery usage info for an app, i.e. 60% used by facebook. [CHAR LIMIT=60] -->
@@ -6616,14 +6586,8 @@
     <string name="battery_full_charge_last">Full charge lasts about</string>
     <!-- Description for text in battery footer. [CHAR LIMIT=NONE] -->
     <string name="battery_footer_summary">Battery usage data is approximate and can change based on usage.</string>
-    <!-- Title for text that shows the amount of time an app has been running while in the foreground. [CHAR LIMIT=80] -->
-    <string name="battery_detail_foreground">While in active use</string>
-    <!-- Title for text that shows the amount of time an app has been running while in the background. [CHAR LIMIT=80] -->
-    <string name="battery_detail_background">While in background</string>
     <!-- Title for battery usage amount by this app. [CHAR LIMIT=80] -->
     <string name="battery_detail_power_usage">Battery usage</string>
-    <!-- Title for the battery usage group, which means all the battery data are calculated 'since full charge' [CHAR LIMIT=40] -->
-    <string name ="battery_detail_info_title">Since full charge</string>
     <!-- Title for the battery management group [CHAR LIMIT=40] -->
     <string name ="battery_detail_manage_title">Manage battery usage</string>
 
@@ -7221,10 +7185,6 @@
     <string name="sync_calendar">Calendar</string>
     <!-- Data synchronization settings screen, checkbox setting option name -->
     <string name="sync_contacts">Contacts</string>
-    <!-- Message introducing the user to Google Sync. -->
-    <string name="sync_plug"><font fgcolor="#ffffffff">Welcome to Google sync!</font>
-    \nA Google approach to syncing data to allow access to your contacts, appointments, and more from wherever you are.
-    </string>
 
     <!-- Header title for those settings relating to application syncing. -->
     <string name="header_application_sync_settings">App sync settings</string>
@@ -7796,17 +7756,15 @@
     <!-- Message of dialog shown when remove_guest_on_exit toggle is ON [CHAR LIMIT=NONE] -->
     <string name="remove_guest_on_exit_dialog_message">Apps and data from this guest session will be
         deleted now, and all future guest activity will be deleted each time you exit guest mode</string>
+    <!-- Title of preference to enable guest calling[CHAR LIMIT=40] -->
+    <string name="enable_guest_calling">Allow guest to use phone</string>
+    <!-- Summary of preference to enable guest calling [CHAR LIMIT=NONE] -->
+    <string name="enable_guest_calling_summary">Call history will be shared with guest user</string>
 
-    <!-- Title of preference to enable calling[CHAR LIMIT=40] -->
-    <string name="user_enable_calling">Turn on phone calls</string>
     <!-- Title of preference to enable calling and SMS [CHAR LIMIT=45] -->
     <string name="user_enable_calling_sms">Turn on phone calls &amp; SMS</string>
     <!-- Title of preference to remove the user [CHAR LIMIT=35] -->
     <string name="user_remove_user">Delete user</string>
-    <!-- Title for confirmation of turning on calls [CHAR LIMIT=40] -->
-    <string name="user_enable_calling_confirm_title">Turn on phone calls?</string>
-    <!-- Message for confirmation of turning on calls [CHAR LIMIT=none] -->
-    <string name="user_enable_calling_confirm_message">Call history will be shared with this user.</string>
     <!-- Title for confirmation of turning on calls and SMS [CHAR LIMIT=45] -->
     <string name="user_enable_calling_and_sms_confirm_title">Turn on phone calls &amp; SMS?</string>
     <!-- Message for confirmation of turning on calls and SMS [CHAR LIMIT=none] -->
@@ -8024,10 +7982,6 @@
     <string name="help_url_manage_storage" translatable="false"></string>
     <!-- Help URL, Android is upgrading [DO NOT TRANSLATE] -->
     <string name="help_url_upgrading" translatable="false"></string>
-    <!-- Help URL, Font size [DO NOT TRANSLATE] -->
-    <string name="help_url_font_size" translatable="false"></string>
-    <!-- Help URL, Display size [DO NOT TRANSLATE] -->
-    <string name="help_url_display_size" translatable="false"></string>
     <!-- Help URL, Auto brightness [DO NOT TRANSLATE] -->
     <string name="help_url_auto_brightness" translatable="false" />
     <!-- Help URL, Adaptive sleep [DO NOT TRANSLATE] -->
@@ -8578,9 +8532,6 @@
 
     <!-- Sound: Dashboard summary indicating the volume of ringtone when at 0% with vibrate disabled [CHAR LIMIT=100] -->
     <string name="sound_settings_summary_silent">Ringer set to silent</string>
-
-    <!-- Sound: Dashboard summary example used in Setup Wizard preview screen. [CHAR LIMIT=100] -->
-    <string name="sound_settings_example_summary">Ring &amp; notification volume at 80%</string>
 
     <!-- Sound: Title for the option managing media volume. [CHAR LIMIT=30] -->
     <string name="media_volume_option_title">Media volume</string>
@@ -10393,11 +10344,6 @@
     <!-- Button label to say no to the question of whether to require PIN/password/pattern to start your device. [CHAR LIMIT=20] -->
     <string name="encryption_interstitial_no">No</string>
 
-    <!-- Label to say yes to the question of whether app is restricted. [CHAR LIMIT=20] -->
-    <string name="restricted_true_label">Restricted</string>
-    <!-- Label to say no to the question of whether app is restricted. [CHAR LIMIT=20] -->
-    <string name="restricted_false_label">App can use battery in background</string>
-
     <!-- Title for encryption dialog that disables TalkBack. [CHAR_LIMIT=25] -->
     <string name="encrypt_talkback_dialog_require_pin">Require PIN?</string>
 
@@ -11173,8 +11119,6 @@
     <string name="screen_zoom_short_summary">Make everything bigger or smaller</string>
     <!-- Keywords for setting that controls screen zoom (e.g. how large interface elements appear). [CHAR LIMIT=NONE] -->
     <string name="screen_zoom_keywords">display density, screen zoom, scale, scaling</string>
-    <!-- Summary of screen zoom setting screen. [CHAR LIMIT=NONE] -->
-    <string name="screen_zoom_summary">Make the items on your screen smaller or larger. Some apps on your screen may change position.</string>
     <!-- Title of the screen zoom preview activity. -->
     <string name="screen_zoom_preview_title">Preview</string>
     <!-- Description for the button that makes interface elements smaller. [CHAR_LIMIT=NONE] -->
@@ -11226,8 +11170,6 @@
 
     <!-- Summary of apps [CHAR LIMIT=NONE] -->
     <string name="apps_summary"><xliff:g id="count" example="24">%1$d</xliff:g> apps installed</string>
-    <!-- Example summary of apps used in Setup Wizard preview screen [CHAR LIMIT=NONE] -->
-    <string name="apps_summary_example">24 apps installed</string>
 
     <!-- Summary of storage usage [CHAR LIMIT=NONE] -->
     <string name="storage_summary"><xliff:g id="percentage" example="54%">%1$s</xliff:g> used - <xliff:g id="free_space" example="32GB">%2$s</xliff:g> free</string>
@@ -11239,9 +11181,6 @@
     <string name="display_summary">Sleep after <xliff:g id="timeout_description" example="10 minutes">%1$s</xliff:g> of inactivity</string>
     <!-- Summary for Display settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
     <string name="display_dashboard_summary">Dark theme, font size, brightness</string>
-
-    <!-- Example summary of display used in Setup Wizard preview screen [CHAR LIMIT=NONE] -->
-    <string name="display_summary_example">Sleep after 10 minutes of inactivity</string>
 
     <!-- Summary of memory screen [CHAR LIMIT=NONE] -->
     <string name="memory_summary">Avg <xliff:g id="used_memory" example="1.7GB">%1$s</xliff:g> of <xliff:g id="total_memory" example="2GB">%2$s</xliff:g> memory used</string>
@@ -11814,12 +11753,6 @@
 
     <!-- [CHAR LIMIT=60] Summary string on dark theme explaining why the toggle is disabled while the setting is off-->
     <string name="dark_ui_mode_disabled_summary_dark_theme_off">Temporarily turned on due to Battery Saver</string>
-
-    <!-- [CHAR_LIMIT=NONE] Summary that is shown in the footer when dark mode is selected -->
-    <string name="dark_ui_settings_dark_summary">Supported apps will also switch to dark theme</string>
-
-    <!-- [CHAR_LIMIT=40] Positive button text in dark theme notification -->
-    <string name="dark_ui_settings_dialog_acknowledge">Got it</string>
 
     <!-- [CHAR_LIMIT=50] Title string in the dark theme slice(suggestion) -->
     <string name="dark_theme_slice_title">Try Dark theme</string>
