@@ -31,6 +31,7 @@ public class WifiTetherAutoOffPreferenceController extends BasePreferenceControl
         Preference.OnPreferenceChangeListener {
 
     private final WifiManager mWifiManager;
+    private boolean mSettingsOn;
     private String TAG = "WifiTetherAutoOffPreferenceController";
     private SwitchPreference mPreference = null;
 
@@ -60,9 +61,9 @@ public class WifiTetherAutoOffPreferenceController extends BasePreferenceControl
     @Override
     public void updateState(Preference preference) {
         SoftApConfiguration softApConfiguration = mWifiManager.getSoftApConfiguration();
-        final boolean settingsOn = softApConfiguration.isAutoShutdownEnabled();
+        mSettingsOn = softApConfiguration.isAutoShutdownEnabled();
 
-        ((SwitchPreference) preference).setChecked(settingsOn);
+        ((SwitchPreference) preference).setChecked(mSettingsOn);
     }
 
     @Override
@@ -73,6 +74,11 @@ public class WifiTetherAutoOffPreferenceController extends BasePreferenceControl
                 new SoftApConfiguration.Builder(softApConfiguration)
                         .setAutoShutdownEnabled(settingsOn)
                         .build();
+        mSettingsOn = settingsOn;
         return mWifiManager.setSoftApConfiguration(newSoftApConfiguration);
+    }
+
+    public boolean isEnabled() {
+        return mSettingsOn;
     }
 }
