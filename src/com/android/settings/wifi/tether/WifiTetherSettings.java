@@ -75,6 +75,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     private WifiTetherPasswordPreferenceController mPasswordPreferenceController;
     private WifiTetherApBandPreferenceController mApBandPreferenceController;
     private WifiTetherSecurityPreferenceController mSecurityPreferenceController;
+    private WifiTetherAutoOffPreferenceController mWifiTetherAutoOffPreferenceController;
 
     private WifiManager mWifiManager;
     private boolean mRestartWifiApAfterConfigChange;
@@ -125,6 +126,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         mSSIDPreferenceController = use(WifiTetherSSIDPreferenceController.class);
         mSecurityPreferenceController = use(WifiTetherSecurityPreferenceController.class);
         mPasswordPreferenceController = use(WifiTetherPasswordPreferenceController.class);
+        mWifiTetherAutoOffPreferenceController = use(WifiTetherAutoOffPreferenceController.class);
         mApBandPreferenceController = use(WifiTetherApBandPreferenceController.class);
     }
 
@@ -260,6 +262,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                     mPasswordPreferenceController.getPasswordValidated(securityType),
                     securityType);
         }
+        configBuilder.setAutoShutdownEnabled(
+                mWifiTetherAutoOffPreferenceController.isEnabled());
         if (mApBandPreferenceController.getBandIndex() == BAND_BOTH_2G_5G) {
             // Fallback to 2G band if user selected OWE+Dual band
             if (securityType == SoftApConfiguration.SECURITY_TYPE_OWE) {
