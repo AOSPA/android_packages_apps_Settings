@@ -34,6 +34,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.network.AllowedNetworkTypesListener;
 import com.android.settings.network.SubscriptionsChangeListener;
+import com.android.settings.network.telephony.DomesticRoamUtils;
 import com.android.settings.network.telephony.Enhanced4gBasePreferenceController;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.network.telephony.TelephonyBasePreferenceController;
@@ -130,6 +131,13 @@ public class OpenNetworkSelectPagePreferenceController extends
     public CharSequence getSummary() {
         final ServiceState ss = mTelephonyManager.getServiceState();
         if (ss != null && ss.getState() == ServiceState.STATE_IN_SERVICE) {
+            if (DomesticRoamUtils.isFeatureEnabled(mContext)) {
+                String registeredOperatorName = DomesticRoamUtils.getRegisteredOperatorName(
+                        mContext, mSubId);
+                if (DomesticRoamUtils.EMPTY_OPERATOR_NAME != registeredOperatorName) {
+                    return registeredOperatorName;
+                }
+            }
             return MobileNetworkUtils.getCurrentCarrierNameForDisplay(mContext, mSubId);
         } else {
             return mContext.getString(R.string.network_disconnected);

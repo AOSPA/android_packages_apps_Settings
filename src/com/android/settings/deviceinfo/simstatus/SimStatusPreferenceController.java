@@ -29,6 +29,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.network.telephony.DomesticRoamUtils;
 import com.android.settingslib.deviceinfo.AbstractSimStatusImeiInfoPreferenceController;
 
 import java.util.ArrayList;
@@ -114,6 +115,13 @@ public class SimStatusPreferenceController extends
         if (subscriptionInfoList != null) {
             for (SubscriptionInfo info : subscriptionInfoList) {
                 if (info.getSimSlotIndex() == simSlot) {
+                    if (DomesticRoamUtils.isFeatureEnabled(mContext)) {
+                        String operatorName = DomesticRoamUtils.getRegisteredOperatorName(
+                                mContext, info.getSubscriptionId());
+                        if (DomesticRoamUtils.EMPTY_OPERATOR_NAME != operatorName) {
+                            return operatorName;
+                        }
+                    }
                     return info.getCarrierName();
                 }
             }
