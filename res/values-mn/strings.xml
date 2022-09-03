@@ -271,7 +271,7 @@
     <string name="date_and_time_settings_title_setup_wizard" msgid="1841717199409629742">"Огноо болон цагийг тохируулах"</string>
     <string name="date_and_time_settings_summary" msgid="334967758944498010">"Огноо, цаг, цагийн бүс &amp; форматуудыг тохируулах"</string>
     <string name="date_time_auto" msgid="4239202185055225869">"Цагийг автоматаар тохируулах"</string>
-    <string name="zone_auto_title" msgid="3993580453604839924">"Цагийн бүсийг автоматаар тохируулах"</string>
+    <string name="zone_auto_title" msgid="5141692422373097957">"Автоматаар тохируулах"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Бүс нутгийн өгөгдмөлийг ашиглах"</string>
     <string name="date_time_24hour_title" msgid="1445056824481243600">"24 цагийн формат"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"24 цагийн формат ашиглах"</string>
@@ -1888,7 +1888,7 @@
     <string name="location_services_preference_title" msgid="604317859531782159">"Байршлын үйлчилгээ"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"Байршлын үйлчилгээ"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Ажилд зориулсан байршлын үйлчилгээ"</string>
-    <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Цагийн бүс тохируулахын тулд байршлыг ашиглана уу"</string>
+    <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"Байршлыг ашиглах"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"Төхөөрөмжийн байршил шаардлагатай"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_message" msgid="5846316326139169523">"Та байршлаа ашиглан цагийн бүс тохируулахын тулд байршлыг асааж, цагийн бүсийн тохиргоог шинэчилнэ үү"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"Байршлын тохиргоо"</string>
@@ -1897,6 +1897,7 @@
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"Байршлын цагийн бүс илрүүлэх горимыг идэвхгүй болгосон"</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"Байршлын цаг бүс илрүүлэх горимыг дэмждэггүй"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Байршлын цагийн бүс илрүүлэх горимыг өөрчлөхийг зөвшөөрөхгүй"</string>
+    <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"Байршлыг цагийн бүс тохируулахад ашиглаж магадгүй"</string>
     <string name="location_network_based" msgid="5247042890080021887">"Wi-Fi &amp; мобайл сүлжээний байршил"</string>
     <string name="location_neighborhood_level" msgid="3668890550358558267">"Апп-уудад Google-н байршлын үйлчилгээ ашиглан таны байршлыг хурдан олохыг зөвшөөрөх. Нэргүй байршлын мэдээлэл цуглуулагдаж Google рүү илгээгдэх болно."</string>
     <string name="location_neighborhood_level_wifi" msgid="6227393490651891977">"Wi-Fi-р тодорхойлогдсон байршил"</string>
@@ -2795,8 +2796,8 @@
     <string name="smart_battery_footer" msgid="8407121907452993645">"Батарейн менежер нь аппуудыг батарейг хурдан дуусгаж байгааг илрүүлэх үед та тэдгээр аппыг хязгаарлах боломжтой. Хязгаарласан аппууд буруу ажиллаж болзошгүй бөгөөд мэдэгдэл хоцорч болзошгүй."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Хязгаарласан аппууд"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
-      <item quantity="other">%1$d аппын батерей ашиглалтыг хязгаарлаж байна</item>
-      <item quantity="one">%1$d аппын батерей ашиглалтыг хязгаарлаж байна</item>
+      <item quantity="other">%1$d аппын батарей ашиглалтыг хязгаарлаж байна</item>
+      <item quantity="one">%1$d аппын батарей ашиглалтыг хязгаарлаж байна</item>
     </plurals>
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"Хязгаарласан <xliff:g id="TIME">%1$s</xliff:g>"</string>
     <string name="restricted_app_detail_footer" msgid="3495725286882138803">"Эдгээр аппыг ард батарей ашиглахыг нь хязгаарласан. Тэдгээр нь зохих ёсоор ажиллахгүй байж магадгүй бөгөөд мэдэгдлүүд саатаж болзошгүй."</string>
@@ -2874,7 +2875,7 @@
     <string name="battery_desc_standby" product="default" msgid="2543075041964578103">"Утас идэвхгүй байх үед зарцуулагдсан зай"</string>
     <string name="battery_desc_radio" msgid="454677140485133914">"Үүрэн радиод ашиглагдсан зайны цэнэг"</string>
     <string name="battery_sugg_radio" msgid="5476234634503535270">"Үүрэн сүлжээгүй газарт нислэгийн горимд шилжүүлэн цэнэгээ хэмнээрэй"</string>
-    <string name="battery_desc_flashlight" msgid="6694895513133361404">"Флашд ашиглагддаг батерей"</string>
+    <string name="battery_desc_flashlight" msgid="6694895513133361404">"Флашд ашиглагддаг батарей"</string>
     <string name="battery_desc_camera" msgid="6152712271731518018">"Камерын ашигласан тэжээлийн хэмжээ"</string>
     <string name="battery_desc_display" msgid="7175017688954602685">"Дэлгэц болон арын гэрэлд зарцуулагдсан зай"</string>
     <string name="battery_sugg_display" msgid="3102137296547788111">"Дэлгэцийн гэрэлтүүлэг болон/эсхүл дэлгэцийн завсарлах хугацааг бууруулна уу"</string>
@@ -2885,11 +2886,11 @@
     <string name="battery_sugg_bluetooth_headset" msgid="6495519793211758353">"Өөр блютүүт төхөөрөмж холбож үзнэ үү"</string>
     <string name="battery_desc_apps" msgid="4187483940383266017">"Апп-н ашигласан зайны цэнэг"</string>
     <string name="battery_sugg_apps_info" msgid="4796917242296658454">"Апп-г зогсоох буюу устгах"</string>
-    <string name="battery_sugg_apps_gps" msgid="7221335088647925110">"Батерей хэмнэлтийн горимыг сонгох"</string>
+    <string name="battery_sugg_apps_gps" msgid="7221335088647925110">"Батарей хэмнэлтийн горимыг сонгох"</string>
     <string name="battery_sugg_apps_settings" msgid="6527223370162382166">"Апп зайны ашиглалтыг багасгах тохиргоог санал болгож болно"</string>
     <string name="battery_desc_users" msgid="1959428568888686847">"Хэрэглэгчийн зарцуулсан зай"</string>
     <string name="battery_desc_unaccounted" msgid="1649497860893660763">"Бусад цахилгаан хэрэглээ"</string>
-    <string name="battery_msg_unaccounted" msgid="5647345548624995064">"Батерейны ашиглалт нь цэнэг зарцуулалтын ойролцоо хэмжүүр бөгөөд батерей зарцуулдаг бүх сурвалжийг багтаахгүй. Бусад цахилгаан хэрэглээ гэдэг нь тооцоолсон ашиглалт болон бодит цэнэг зарцуулалтын зөрүү юм."</string>
+    <string name="battery_msg_unaccounted" msgid="5647345548624995064">"Батарейны ашиглалт нь цэнэг зарцуулалтын ойролцоо хэмжүүр бөгөөд батарей зарцуулдаг бүх сурвалжийг багтаахгүй. Бусад цахилгаан хэрэглээ гэдэг нь тооцоолсон ашиглалт болон бодит цэнэг зарцуулалтын зөрүү юм."</string>
     <string name="battery_desc_overcounted" msgid="5982079150027267539">"Хэтрүүлэн тооцсон цахилгаан ашиглалт"</string>
     <string name="mah" msgid="3604527474433227780">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="6401552215008504483">"<xliff:g id="TIME">^1</xliff:g>-д ашигласан"</string>
@@ -2923,6 +2924,7 @@
     <string name="battery_not_usage" msgid="1472275761547230196">"Сүүлд бүрэн цэнэглэснээс хойш ашиглаагүй"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Өнгөрсөн 24 цагийн турш ашиглаагүй"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
+    <string name="battery_usage_other_users" msgid="9002643295562500693">"Бусад хэрэглэгч"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Таны төхөөрөмжийн ашиглалтад үндэслэн батарейны үлдсэн түвшнийг тооцдог"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Барагцаалсан үлдсэн хугацаа"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Бүрэн цэнэглэх хүртэл"</string>
@@ -2955,7 +2957,7 @@
     <string name="battery_saver_master_switch_title" msgid="3474312070095834915">"Батарей хэмнэгчийг ашиглах"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="7857393318205740864">"Автоматаар асаах"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6194649389871448663">"Хэзээ ч үгүй"</string>
-    <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"батерей <xliff:g id="PERCENT">%1$s</xliff:g> болоход"</string>
+    <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"батарей <xliff:g id="PERCENT">%1$s</xliff:g> болоход"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Батарейн хувь"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Батарейн хувийг статус самбарт харуулах"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Өнгөрсөн 24 цагийн батарейн түвшин"</string>
@@ -3012,6 +3014,9 @@
     <string name="voice_interactor_preference_summary" msgid="3942881638813452880">"Бүрэн хотворд болон харилцан үйлчлэл"</string>
     <string name="voice_recognizer_preference_summary" msgid="9195427725367463336">"Энгийн яриаг бичвэрт буулгах"</string>
     <string name="voice_interaction_security_warning" msgid="7962884055885987671">"Энэ дуун оруулгын үйлчилгээ нь дуун хяналтыг байнга ажиллуулах болон дуугаар ажиллах апп-уудыг таны өмнөөс хянах боломжтой болно.Үүнийг <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g> аппликейшн нийлүүлдэг. Энэ үйлчилгээг идэвхжүүлэх үү?"</string>
+    <string name="on_device_recognition_settings" msgid="6503160369314598069">"Төхөөрөмж дээрх танилтын тохиргоо"</string>
+    <string name="on_device_recognition_settings_title" msgid="7137599722039096545">"Төхөөрөмж дээрх танилт"</string>
+    <string name="on_device_recognition_settings_summary" msgid="3292736423223499348">"Төхөөрөмж дээрх яриа таних"</string>
     <string name="tts_engine_preference_title" msgid="7808775764174571132">"Давуу систем"</string>
     <string name="tts_engine_settings_title" msgid="1298093555056321577">"Хөдөлгүүрийн тохиргоо"</string>
     <string name="tts_sliders_title" msgid="6901146958648426181">"Ярианы түвшин, өнгө"</string>
@@ -3606,7 +3611,7 @@
     <string name="keywords_more_mobile_networks" msgid="5041272719326831744">"үүрэн холбоо, үүрэн холбооны оператор, утасгүй интернэт, дата, 4g, 3g, 2g, lte"</string>
     <string name="keywords_wifi_calling" msgid="4319184318421027136">"wifi, wi-fi, залгах, дуудлага"</string>
     <string name="keywords_display" msgid="874738809280751745">"дэлгэц, мэдрэгчтэй дэлгэц"</string>
-    <string name="keywords_display_brightness_level" msgid="850742707616318056">"бүдэг гэрэлтэй дэлгэц, мэдрэмтгий дэлгэц, батерей, гэгээлэг"</string>
+    <string name="keywords_display_brightness_level" msgid="850742707616318056">"бүдэг гэрэлтэй дэлгэц, мэдрэмтгий дэлгэц, батарей, гэгээлэг"</string>
     <string name="keywords_display_night_display" msgid="4711054330804250058">"бүдэг гэрэлтэй дэлгэц, шөнө, уусгалт, шөнийн ээлж, гэрэлтүүлэг, дэлгэцийн өнгө, өнгө, өнгө"</string>
     <string name="keywords_display_wallpaper" msgid="8478137541939526564">"дэвсгэр, өөрчлөх, дэлгэцийг өөрчлөх"</string>
     <string name="keywords_display_font_size" msgid="3593317215149813183">"текстийн хэмжээ"</string>
@@ -3689,8 +3694,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, дэвшилтэт дуудлага, 5g дуудлага"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"хэл нэмэх, хэл нэмэх"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"текстийн хэмжээ, том хэвлэл, том фонт, том текст, сул хараа, текстийг илүү том болгох, фонт томруулагч, фонт томруулалт"</string>
-    <!-- no translation found for keywords_always_show_time_info (645658129239452778) -->
-    <skip />
+    <string name="keywords_always_show_time_info" msgid="645658129239452778">"үргэлж дэлгэцэд байх, ҮДБ"</string>
     <string name="default_sound" msgid="6604374495015245195">"Үндсэн дуу"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Хонх ба мэдэгдлийн дууны түвшин <xliff:g id="PERCENTAGE">%1$s</xliff:g> байна"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Түвшин, чичиргээ, Бүү саад бол"</string>

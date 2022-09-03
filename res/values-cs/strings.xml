@@ -275,7 +275,7 @@
     <string name="date_and_time_settings_title_setup_wizard" msgid="1841717199409629742">"Nastavit datum a čas"</string>
     <string name="date_and_time_settings_summary" msgid="334967758944498010">"Umožňuje nastavit datum, čas, časové pásmo a formát"</string>
     <string name="date_time_auto" msgid="4239202185055225869">"Nastavit čas automaticky"</string>
-    <string name="zone_auto_title" msgid="3993580453604839924">"Nastavit časové pásmo automaticky"</string>
+    <string name="zone_auto_title" msgid="5141692422373097957">"Nastavit automaticky"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Používat výchozí nastavení jazyka"</string>
     <string name="date_time_24hour_title" msgid="1445056824481243600">"24hodinový formát"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Používat 24hodinový formát"</string>
@@ -1932,7 +1932,7 @@
     <string name="location_services_preference_title" msgid="604317859531782159">"Služby určování polohy"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"Služby určování polohy"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Služby určování polohy pro práci"</string>
-    <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Nastavit časové pásmo pomocí polohy"</string>
+    <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"Používat polohu"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"Je požadována poloha zařízení"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_message" msgid="5846316326139169523">"Pokud chcete nastavit časové pásmo podle své polohy, zapněte určování polohy a poté aktualizujte nastavení časového pásma"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"Nastavení polohy"</string>
@@ -1941,6 +1941,7 @@
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"Zjišťování časového pásma je deaktivováno"</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"Zjišťování časového pásma není podporováno"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Změny zjišťování časového pásma nejsou povoleny"</string>
+    <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"Časové pásmo se může nastavit podle polohy"</string>
     <string name="location_network_based" msgid="5247042890080021887">"Poloha Wi-Fi a mobilní sítě"</string>
     <string name="location_neighborhood_level" msgid="3668890550358558267">"Povolit aplikacím používat službu určování polohy Google a rychleji odhadovat vaši polohu. Anonymní data budou sbírána a odesílána Googlu."</string>
     <string name="location_neighborhood_level_wifi" msgid="6227393490651891977">"Poloha určená sítí Wi-Fi"</string>
@@ -2999,6 +3000,8 @@
     <string name="battery_not_usage" msgid="1472275761547230196">"Od posledního nabití žádné využití"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Za posledních 24 hodin žádné využití"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
+    <!-- no translation found for battery_usage_other_users (9002643295562500693) -->
+    <skip />
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Odhad zbývající výdrže baterie vychází z vašeho používání zařízení"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Odhadovaný zbývající čas"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Do úplného nabití"</string>
@@ -3088,6 +3091,9 @@
     <string name="voice_interactor_preference_summary" msgid="3942881638813452880">"Úplná aktivace klíčových slov a interakce"</string>
     <string name="voice_recognizer_preference_summary" msgid="9195427725367463336">"Jednoduchý převod řeči na text"</string>
     <string name="voice_interaction_security_warning" msgid="7962884055885987671">"Služba hlasového zadávání bude moci neustále monitorovat hlas a ovládat za vás aplikace s aktivovaným hlasovým zadáváním. Služba pochází z <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Chcete použití této služby povolit?"</string>
+    <string name="on_device_recognition_settings" msgid="6503160369314598069">"Nastavení rozpoznávání na zařízení"</string>
+    <string name="on_device_recognition_settings_title" msgid="7137599722039096545">"Rozpoznávání na zařízení"</string>
+    <string name="on_device_recognition_settings_summary" msgid="3292736423223499348">"Rozpoznávání řeči na zařízení"</string>
     <string name="tts_engine_preference_title" msgid="7808775764174571132">"Preferovaný modul"</string>
     <string name="tts_engine_settings_title" msgid="1298093555056321577">"Nastavení modulu"</string>
     <string name="tts_sliders_title" msgid="6901146958648426181">"Rychlost řeči a výška hlasu"</string>
@@ -3351,7 +3357,7 @@
     <string name="vpn_mppe" msgid="7366657055055114239">"Šifrování PPP (MPPE)"</string>
     <string name="vpn_l2tp_secret" msgid="2356744369959140121">"Tajný klíč L2TP"</string>
     <string name="vpn_ipsec_identifier" msgid="8511842694369254801">"Identifikátor protokolu IPSec"</string>
-    <string name="vpn_ipsec_secret" msgid="532007567355505963">"Předsdílený klíč IPSec"</string>
+    <string name="vpn_ipsec_secret" msgid="532007567355505963">"Předem sdílený klíč IPSec"</string>
     <string name="vpn_ipsec_user_cert" msgid="2714372103705048405">"Uživatelský certifikát IPSec"</string>
     <string name="vpn_ipsec_ca_cert" msgid="5558498943577474987">"Certifikát CA protokolu IPSec"</string>
     <string name="vpn_ipsec_server_cert" msgid="1411390470454731396">"Certifikát serveru IPSec"</string>
@@ -3775,8 +3781,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, rozšířené volání, volání 5g"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"přidat jazyk, přidání jazyka"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"velikost textu, velké písmo, velký text, slabozrakost, zvětšení textu, zvětšovač písma, zvětšení písma"</string>
-    <!-- no translation found for keywords_always_show_time_info (645658129239452778) -->
-    <skip />
+    <string name="keywords_always_show_time_info" msgid="645658129239452778">"vždy zapnutý displej"</string>
     <string name="default_sound" msgid="6604374495015245195">"Výchozí zvuk"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Hlasitost vyzvánění a oznámení je na <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Hlasitost, vibrace, režim Nerušit"</string>

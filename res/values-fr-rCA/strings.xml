@@ -271,7 +271,7 @@
     <string name="date_and_time_settings_title_setup_wizard" msgid="1841717199409629742">"Régler la date et l\'heure"</string>
     <string name="date_and_time_settings_summary" msgid="334967758944498010">"Configurer la date, l\'heure, le fuseau horaire et les formats"</string>
     <string name="date_time_auto" msgid="4239202185055225869">"Définir l\'heure automatiquement"</string>
-    <string name="zone_auto_title" msgid="3993580453604839924">"Définir le fuseau horaire automatiquement"</string>
+    <string name="zone_auto_title" msgid="5141692422373097957">"Définir automatiquement"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Utiliser les paramètres régionaux par défaut"</string>
     <string name="date_time_24hour_title" msgid="1445056824481243600">"Format 24 heures"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Utiliser le format 24 h"</string>
@@ -476,7 +476,7 @@
     <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"Utilisez votre empreinte digitale pour déverrouiller votre tablette ou vérifier que c\'est bien vous"</string>
     <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"Utilisez votre empreinte digitale pour déverrouiller votre appareil ou vérifier que c\'est bien vous"</string>
     <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"Utilisez votre empreinte digitale pour déverrouiller votre téléphone ou vérifier que c\'est bien vous"</string>
-    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Déverrouillage par reconnaissance faciale et empreinte digitale"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Déverrouillage par recon. faciale et empreinte digitale"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Touchez pour configurer"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Empreintes digitales et visage ajoutés"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Empreinte digitale et visage ajoutés"</string>
@@ -1888,7 +1888,7 @@
     <string name="location_services_preference_title" msgid="604317859531782159">"Services de localisation"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"Services de localisation"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Services de localisation pour le travail"</string>
-    <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Utiliser la position pour définir le fuseau horaire"</string>
+    <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"Utiliser ma position"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"La position de l\'appareil est nécessaire"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_message" msgid="5846316326139169523">"Pour définir le fuseau horaire à l\'aide de votre position, activez la localisation et mettez à jour les paramètres de fuseau horaire"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"Paramètres de localisation"</string>
@@ -1897,6 +1897,7 @@
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"La détection du fuseau horaire basée sur la position est désactivée"</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"La détection du fuseau horaire basée sur la position n\'est pas prise en charge"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Les modifications de la détection du fuseau horaire basée sur la position ne sont pas autorisées"</string>
+    <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"La position peut être utilisée pour définir le fuseau horaire"</string>
     <string name="location_network_based" msgid="5247042890080021887">"Localis. via Wi-Fi et réseau mob."</string>
     <string name="location_neighborhood_level" msgid="3668890550358558267">"Autoriser applis à utiliser localisation Google pour estimer position plus rapidement. Infos localisation anonymes envoyées à Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="6227393490651891977">"Position déterminée par le Wi-Fi"</string>
@@ -2295,7 +2296,7 @@
     <string name="screen_reader_category_title" msgid="5825700839731107803">"Lecteur d\'écran"</string>
     <string name="captions_category_title" msgid="574490148949400274">"Sous-titres"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"Audio"</string>
-    <string name="general_category_title" msgid="6298579528716834157">"Généraux"</string>
+    <string name="general_category_title" msgid="6298579528716834157">"Général"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Affichage"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Couleur et mouvement"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Assombrir l\'écran"</string>
@@ -2923,6 +2924,8 @@
     <string name="battery_not_usage" msgid="1472275761547230196">"Aucune utilisation depuis la dernière recharge complète"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Aucune utilisation au cours des dernières 24 heures"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
+    <!-- no translation found for battery_usage_other_users (9002643295562500693) -->
+    <skip />
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"L\'estimation de l\'autonomie restante est basée sur l\'utilisation de l\'appareil"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Temps restant estimé"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Jusqu\'à la charge complète"</string>
@@ -3012,6 +3015,9 @@
     <string name="voice_interactor_preference_summary" msgid="3942881638813452880">"Détection de mot clé et interaction totales"</string>
     <string name="voice_recognizer_preference_summary" msgid="9195427725367463336">"Synthèse vocale simple"</string>
     <string name="voice_interaction_security_warning" msgid="7962884055885987671">"Ce service d\'entrée vocale pourra contrôler en permanence les fonctionnalités vocales et utiliser en votre nom les applications commandées par la voix. Il provient de l\'application <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Autoriser l\'utilisation de ce service?"</string>
+    <string name="on_device_recognition_settings" msgid="6503160369314598069">"Paramètres de reconnaissance sur l\'appareil"</string>
+    <string name="on_device_recognition_settings_title" msgid="7137599722039096545">"Reconnaissance sur l\'appareil"</string>
+    <string name="on_device_recognition_settings_summary" msgid="3292736423223499348">"Reconnaissance vocale sur l\'appareil"</string>
     <string name="tts_engine_preference_title" msgid="7808775764174571132">"Moteur préféré"</string>
     <string name="tts_engine_settings_title" msgid="1298093555056321577">"Paramètres du moteur"</string>
     <string name="tts_sliders_title" msgid="6901146958648426181">"Cadence et ton"</string>
@@ -3689,8 +3695,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"Voix sur 5G, voix sur NR, appels avancés, appels 5G"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"ajouter langue, ajouter une langue"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"taille du texte, grands caractères, police de grande taille, texte de grande taille, vision faible, agrandir le texte, agrandisseur de police, agrandissement de la police"</string>
-    <!-- no translation found for keywords_always_show_time_info (645658129239452778) -->
-    <skip />
+    <string name="keywords_always_show_time_info" msgid="645658129239452778">"écran actif en permanence, EAP"</string>
     <string name="default_sound" msgid="6604374495015245195">"Son par défaut"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Le volume pour la sonnerie et les notifications est réglé à <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volume, vibration, Ne pas déranger"</string>

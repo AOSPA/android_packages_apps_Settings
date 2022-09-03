@@ -271,7 +271,7 @@
     <string name="date_and_time_settings_title_setup_wizard" msgid="1841717199409629742">"Kuupäeva ja kellaaja määramine"</string>
     <string name="date_and_time_settings_summary" msgid="334967758944498010">"Määra kuupäev, kellaaeg, ajavöönd ja vormingud"</string>
     <string name="date_time_auto" msgid="4239202185055225869">"Kellaaja automaatne määramine"</string>
-    <string name="zone_auto_title" msgid="3993580453604839924">"Ajavööndi automaatne määramine"</string>
+    <string name="zone_auto_title" msgid="5141692422373097957">"Määra automaatselt"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Kasuta lokaadi vaikeseadet"</string>
     <string name="date_time_24hour_title" msgid="1445056824481243600">"24-tunnine vorming"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"24-tunnise vormingu kasutamine"</string>
@@ -1890,7 +1890,7 @@
     <string name="location_services_preference_title" msgid="604317859531782159">"Asukohateenused"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"Asukohateenused"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Asukohateenused töö jaoks"</string>
-    <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Kasuta ajavööndi määramiseks asukohta"</string>
+    <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"Kasuta asukohta"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"Seadme asukoht on vajalik"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_message" msgid="5846316326139169523">"Selleks et ajavöönd kasutaks teie asukohta, lülitage sisse asukoht ja värskendage ajavööndi seadeid"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"Asukohaseaded"</string>
@@ -1899,6 +1899,7 @@
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"Asukohapõhine ajavööndi tuvastamine on keelatud"</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"Asukohapõhine ajavööndi tuvastamine pole toetatud"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Asukohapõhise ajavööndi tuvastamise muudatused pole lubatud"</string>
+    <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"Ajavööndi määramiseks võidakse kasutada asukohta"</string>
     <string name="location_network_based" msgid="5247042890080021887">"WiFi/mobiilsidevõrgu asukoht"</string>
     <string name="location_neighborhood_level" msgid="3668890550358558267">"Lubage rakendustel kasutada Google\'i asukohateenust, et asukohta kiiremini määrata. Kogutud anonüümsed asukohaandmed saadetakse Google\'ile."</string>
     <string name="location_neighborhood_level_wifi" msgid="6227393490651891977">"WiFi järgi määratud asukoht"</string>
@@ -2925,6 +2926,8 @@
     <string name="battery_not_usage" msgid="1472275761547230196">"Pole alates viimasest täislaadimisest kasutatud"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Pole viimase 24 tunni jooksul kasutatud"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
+    <!-- no translation found for battery_usage_other_users (9002643295562500693) -->
+    <skip />
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Aku järelejäänud tööaja prognoos põhineb seadme kasutusel"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Hinnanguline järelejäänud aeg"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Täislaadimiseni"</string>
@@ -3014,6 +3017,9 @@
     <string name="voice_interactor_preference_summary" msgid="3942881638813452880">"Täielik otsetee sõna ja interaktsioon"</string>
     <string name="voice_recognizer_preference_summary" msgid="9195427725367463336">"Lihtne kõnesüntees"</string>
     <string name="voice_interaction_security_warning" msgid="7962884055885987671">"See häälsisendi teenus suudab pakkuda alati sisse lülitatud hääle jälgimisteenust ja juhtida teie nimel rakendusi, kus on lubatud häälefunktsioon. See pärineb rakendusest <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Kas lubada teenuse kasutamine?"</string>
+    <string name="on_device_recognition_settings" msgid="6503160369314598069">"Seadmepõhise tuvastuse seaded"</string>
+    <string name="on_device_recognition_settings_title" msgid="7137599722039096545">"Seadmepõhine tuvastus"</string>
+    <string name="on_device_recognition_settings_summary" msgid="3292736423223499348">"Seadmepõhine kõnetuvastus"</string>
     <string name="tts_engine_preference_title" msgid="7808775764174571132">"Eelistatud kõnesünteesi mootor"</string>
     <string name="tts_engine_settings_title" msgid="1298093555056321577">"Kõnesünteesi mootori seaded"</string>
     <string name="tts_sliders_title" msgid="6901146958648426181">"Kõne kiirus ja helikõrgus"</string>
@@ -3691,8 +3697,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, täiustatud helistamine, 5g-kõned"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"lisa keel, keele lisamine"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"teksti suurus, suur tekst, suur font, halb nähtavus, teksti suuremaks muutmine, fondi suurendaja, fondi suurendamine"</string>
-    <!-- no translation found for keywords_always_show_time_info (645658129239452778) -->
-    <skip />
+    <string name="keywords_always_show_time_info" msgid="645658129239452778">"alati sisse lülitatud ekraan, AOD"</string>
     <string name="default_sound" msgid="6604374495015245195">"Vaikeheli"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Helina ja märguannete helitugevus on <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Helitugevus, vibreerimine, režiim Mitte segada"</string>
