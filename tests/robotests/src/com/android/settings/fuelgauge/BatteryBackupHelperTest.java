@@ -34,7 +34,7 @@ import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.verifyNoInteractions;
 
 import android.app.AppOpsManager;
 import android.app.backup.BackupDataInputStream;
@@ -70,6 +70,7 @@ import org.robolectric.annotation.Resetter;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(RobolectricTestRunner.class)
@@ -253,7 +254,7 @@ public final class BatteryBackupHelperTest {
 
         mBatteryBackupHelper.restoreEntity(mBackupDataInputStream);
 
-        verifyZeroInteractions(mBackupDataInputStream);
+        verifyNoInteractions(mBackupDataInputStream);
     }
 
     @Test
@@ -291,13 +292,13 @@ public final class BatteryBackupHelperTest {
     @Test
     public void restoreOptimizationMode_nullBytesData_skipRestore() throws Exception {
         mBatteryBackupHelper.restoreOptimizationMode(new byte[0]);
-        verifyZeroInteractions(mBatteryOptimizeUtils);
+        verifyNoInteractions(mBatteryOptimizeUtils);
 
         mBatteryBackupHelper.restoreOptimizationMode("invalid data format".getBytes());
-        verifyZeroInteractions(mBatteryOptimizeUtils);
+        verifyNoInteractions(mBatteryOptimizeUtils);
 
         mBatteryBackupHelper.restoreOptimizationMode(DELIMITER.getBytes());
-        verifyZeroInteractions(mBatteryOptimizeUtils);
+        verifyNoInteractions(mBatteryOptimizeUtils);
     }
 
     @Test
@@ -343,9 +344,17 @@ public final class BatteryBackupHelperTest {
 
     private void verifyBackupData(String expectedResult) throws Exception {
         final byte[] expectedBytes = expectedResult.getBytes();
+        final ArgumentCaptor<byte[]> captor = ArgumentCaptor.forClass(byte[].class);
+        final Set<String> expectedResultSet =
+                Set.of(expectedResult.split(BatteryBackupHelper.DELIMITER));
+
         verify(mBackupDataOutput).writeEntityHeader(
                 BatteryBackupHelper.KEY_OPTIMIZATION_LIST, expectedBytes.length);
-        verify(mBackupDataOutput).writeEntityData(expectedBytes, expectedBytes.length);
+        verify(mBackupDataOutput).writeEntityData(captor.capture(), eq(expectedBytes.length));
+        final String actualResult = new String(captor.getValue());
+        final Set<String> actualResultSet =
+                Set.of(actualResult.split(BatteryBackupHelper.DELIMITER));
+        assertThat(actualResultSet).isEqualTo(expectedResultSet);
     }
 
     private void createTestingData(
