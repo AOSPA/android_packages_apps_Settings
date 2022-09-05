@@ -4714,6 +4714,10 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                     <action android:name="android.settings.panel.action.VOLUME" />
                     <category android:name="android.intent.category.DEFAULT" />
                 </intent-filter>
+                <intent-filter>
+                    <action android:name="android.settings.panel.action.APP_VOLUME" />
+                    <category android:name="android.intent.category.DEFAULT" />
+                </intent-filter>
         </activity>
 
         <activity android:name=".wifi.addappnetworks.AddAppNetworksActivity"
