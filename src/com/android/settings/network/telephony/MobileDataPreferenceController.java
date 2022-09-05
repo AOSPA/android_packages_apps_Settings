@@ -16,9 +16,14 @@
 
 package com.android.settings.network.telephony;
 
+import static android.telephony.ims.feature.ImsFeature.FEATURE_MMTEL;
+import static android.telephony.ims.stub.ImsRegistrationImplBase.REGISTRATION_TECH_CROSS_SIM;
+
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.RemoteException;
+import android.telephony.ims.aidl.IImsRegistration;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyCallback;
@@ -58,6 +63,7 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
     private SubscriptionManager mSubscriptionManager;
     private MobileDataContentObserver mDataContentObserver;
     private FragmentManager mFragmentManager;
+    private static boolean mIsMultiSim;
     @VisibleForTesting
     int mDialogType;
     @VisibleForTesting
@@ -90,7 +96,11 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
     public void onStart() {
         if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             mDataContentObserver.register(mContext, mSubId);
-            // Listen if voice call is on nDDS SUB.
+            mTelephonyManager = getTelephonyManager();
+            mIsMultiSim = mTelephonyManager.getActiveModemCount() > 1;
+            // Register for voice call notifications. What happens to the mobile data toggle in case
+            // of a voice call is dependent on the device being in the SSIM or MSIM mode which is
+            // checked in updateState()
             if (mSubId == mSubscriptionManager.getDefaultDataSubscriptionId()) {
                 mCallStateListener.register(mContext, mSubId);
             }
@@ -142,19 +152,24 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
 
     @Override
     public void updateState(Preference preference) {
+        if (mTelephonyManager == null) {
+            return;
+        }
         super.updateState(preference);
         if (isOpportunistic()) {
             preference.setEnabled(false);
             preference.setSummary(R.string.mobile_data_settings_summary_auto_switch);
         } else {
             if (!mCallStateListener.isIdle()) {
-                Log.d(TAG, "nDDS voice call in ongoing");
-                // we will get inside this block only when the current instance is for the DDS
-                if (isChecked()) {
-                    Log.d(TAG, "Do not allow the user to turn off DDS mobile data");
-                    preference.setEnabled(false);
-                    preference.setSummary(
-                            R.string.mobile_data_settings_summary_default_data_unavailable);
+                if (mIsMultiSim) {
+                    Log.d(TAG, "nDDS voice call in ongoing");
+                    // we will get inside this block only when the current instance is for the DDS
+                    if (isChecked()) {
+                        Log.d(TAG, "Do not allow the user to turn off DDS mobile data");
+                        preference.setEnabled(false);
+                        preference.setSummary(
+                                R.string.mobile_data_settings_summary_default_data_unavailable);
+                    }
                 }
             } else {
                 if (TelephonyUtils.isSubsidyFeatureEnabled(mContext) &&
@@ -214,8 +229,6 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
     @VisibleForTesting
     boolean isDialogNeeded() {
         final boolean enableData = !isChecked();
-        mTelephonyManager = getTelephonyManager();
-        final boolean isMultiSim = (mTelephonyManager.getActiveModemCount() > 1);
         final int defaultSubId = mSubscriptionManager.getDefaultDataSubscriptionId();
         boolean needToDisableOthers = mSubscriptionManager
                 .isActiveSubscriptionId(defaultSubId) && defaultSubId != mSubId;
@@ -225,8 +238,26 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
             // simultaneously. DDS setting will be controlled by the config.
             needToDisableOthers = false;
         }
-        if (enableData && isMultiSim && needToDisableOthers) {
+        IImsRegistration imsRegistrationImpl = mTelephonyManager.getImsRegistration(
+                mSubscriptionManager.getSlotIndex(mSubId), FEATURE_MMTEL);
+        boolean isImsRegisteredOverCiwlan = false;
+        try {
+            isImsRegisteredOverCiwlan = imsRegistrationImpl.getRegistrationTechnology() ==
+                    REGISTRATION_TECH_CROSS_SIM;
+        } catch (RemoteException ex) {
+            Log.e(TAG, "getRegistrationTechnology failed", ex);
+        }
+        Log.d(TAG, "isDialogNeeded: " + "enableData=" + enableData + ", isMultiSim=" + mIsMultiSim +
+                ", needToDisableOthers=" + needToDisableOthers + ", isImsRegisteredOverCiwlan=" +
+                isImsRegisteredOverCiwlan + ", callIdle=" + mCallStateListener.isIdle());
+        if (enableData && mIsMultiSim && needToDisableOthers) {
             mDialogType = MobileDataDialogFragment.TYPE_MULTI_SIM_DIALOG;
+            return true;
+        }
+        // If device is in a C_IWLAN call, and the user is trying to disable mobile data, display
+        // the warning dialog.
+        if (!mCallStateListener.isIdle() && isImsRegisteredOverCiwlan && !enableData) {
+            mDialogType = MobileDataDialogFragment.TYPE_DISABLE_CIWLAN_DIALOG;
             return true;
         }
         return false;
@@ -257,12 +288,18 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
         public void register(Context context, int subId) {
             final List<SubscriptionInfo> subs =
                     SubscriptionUtil.getActiveSubscriptions(mSubscriptionManager);
-            for (SubscriptionInfo subInfo : subs) {
-                if (subInfo.getSubscriptionId() != subId) {
-                    mTelephonyManager.createForSubscriptionId(subInfo.getSubscriptionId())
-                            .registerTelephonyCallback(context.getMainExecutor(), this);
-                    mCallbacks.put(subInfo.getSubscriptionId(), this);
+            if (mIsMultiSim) {
+                for (SubscriptionInfo subInfo : subs) {
+                    if (subInfo.getSubscriptionId() != subId) {
+                        mTelephonyManager.createForSubscriptionId(subInfo.getSubscriptionId())
+                                .registerTelephonyCallback(context.getMainExecutor(), this);
+                        mCallbacks.put(subInfo.getSubscriptionId(), this);
+                    }
                 }
+            } else {
+                mTelephonyManager.createForSubscriptionId(subId)
+                        .registerTelephonyCallback(context.getMainExecutor(), this);
+                mCallbacks.put(subId, this);
             }
         }
 
