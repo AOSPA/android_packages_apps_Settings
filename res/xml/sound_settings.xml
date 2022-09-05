@@ -251,4 +251,13 @@
         android:order="100"
         settings:controller="com.android.settings.notification.WorkSoundsPreferenceController"/>
 
+    
+    <!-- Per-app volume control -->
+    <SwitchPreference
+        android:key="show_app_volume"
+        android:title="@string/app_volume_title"
+        android:summary="@string/app_volume_summary"
+        android:order="-137"
+        android:defaultValue="true" />
+        
 </PreferenceScreen>
