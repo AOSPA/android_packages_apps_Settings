@@ -112,6 +112,7 @@ android_library {
         "Settings-change-ids",
         "SystemUIUnfoldLib",
         "co.aospa.framework",
+        "google-securityhub",
     ],
 
     libs: [
@@ -149,6 +150,18 @@ android_app {
         "extphonelib"
     ],
 }
+
+android_library_import {
+    name: "google-securityhub",
+    aars: ["libs/google-securityhub.aar"],
+    sdk_version: "33",
+    static_libs: [
+        "androidx.preference_preference",
+        "com.google.android.material_material",
+        "guava",
+    ]
+}
+
 
 android_library_import {
     name: "contextualcards",
