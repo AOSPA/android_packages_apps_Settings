@@ -52,6 +52,8 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
     PreferenceCategory mProfilesContainer;
     @VisibleForTesting
     AudioDeviceAttributes mAudioDevice;
+    @VisibleForTesting
+    AudioDeviceAttributes mLEAudioDevice;
 
     public BluetoothDetailsSpatialAudioController(
             Context context,
@@ -65,12 +67,16 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
                 AudioDeviceAttributes.ROLE_OUTPUT,
                 AudioDeviceInfo.TYPE_BLUETOOTH_A2DP,
                 mCachedDevice.getAddress());
+        mLEAudioDevice = new AudioDeviceAttributes(
+                AudioDeviceAttributes.ROLE_OUTPUT,
+                AudioDeviceInfo.TYPE_BLE_HEADSET,
+                mCachedDevice.getAddress());
 
     }
 
     @Override
     public boolean isAvailable() {
-        return mSpatializer.isAvailableForDevice(mAudioDevice) ? true : false;
+        return (mSpatializer.isAvailableForDevice(mAudioDevice) || mSpatializer.isAvailableForDevice(mLEAudioDevice)) ? true : false;
     }
 
     @Override
@@ -80,8 +86,10 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
         if (TextUtils.equals(key, KEY_SPATIAL_AUDIO)) {
             if (switchPreference.isChecked()) {
                 mSpatializer.addCompatibleAudioDevice(mAudioDevice);
+                mSpatializer.addCompatibleAudioDevice(mLEAudioDevice);
             } else {
                 mSpatializer.removeCompatibleAudioDevice(mAudioDevice);
+                mSpatializer.removeCompatibleAudioDevice(mLEAudioDevice);
             }
             refresh();
             return true;
@@ -114,7 +122,7 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
             mProfilesContainer.addPreference(spatialAudioPref);
         }
 
-        boolean isSpatialAudioOn = mSpatializer.getCompatibleAudioDevices().contains(mAudioDevice);
+        boolean isSpatialAudioOn = mSpatializer.getCompatibleAudioDevices().contains(mAudioDevice) || mSpatializer.getCompatibleAudioDevices().contains(mLEAudioDevice);
         Log.d(TAG, "refresh() isSpatialAudioOn : " + isSpatialAudioOn);
         spatialAudioPref.setChecked(isSpatialAudioOn);
 
