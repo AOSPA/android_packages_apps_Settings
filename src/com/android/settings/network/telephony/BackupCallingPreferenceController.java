@@ -16,19 +16,25 @@
 
 package com.android.settings.network.telephony;
 
+import static android.telephony.ims.feature.ImsFeature.FEATURE_MMTEL;
+import static android.telephony.ims.stub.ImsRegistrationImplBase.REGISTRATION_TECH_CROSS_SIM;
+
 import android.content.Context;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
 import android.telephony.CarrierConfigManager;
+import android.telephony.ims.aidl.IImsRegistration;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 import android.telephony.ims.ImsException;
 import android.telephony.ims.ImsManager;
 import android.telephony.ims.ImsMmTelManager;
+import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
@@ -36,9 +42,6 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.R;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnStart;
-import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import com.qti.extphone.ExtTelephonyManager;
 import com.qti.extphone.ServiceCallback;
@@ -49,20 +52,24 @@ import java.util.Objects;
 /**
  * Preference controller for "Backup Calling"
  **/
-public class BackupCallingPreferenceController extends TelephonyTogglePreferenceController
-        implements LifecycleObserver, OnStart, OnStop {
+public class BackupCallingPreferenceController extends TelephonyTogglePreferenceController {
 
     private static final String LOG_TAG = "BackupCallingPrefCtrl";
+    private static final String DIALOG_TAG = "BackupCallingDialog";
 
     private final String PREFERENCE_KEY = "backup_calling_key";
 
     private Preference mPreference;
     private PreferenceScreen mScreen;
     private Context mContext;
-    private PhoneTelephonyCallback mTelephonyCallback;
     private ExtTelephonyManager mExtTelephonyManager;
-    private Integer mCallState;
     private boolean mServiceConnected = false;
+    private SubscriptionManager mSubscriptionManager;
+    private int mDialogType;
+    private FragmentManager mFragmentManager;
+    private TelephonyManager mTelephonyManager;
+    @VisibleForTesting
+    boolean mDialogNeeded = false;
 
     /**
      * Class constructor of backup calling.
@@ -75,7 +82,7 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
         mContext = context.getApplicationContext();
         mExtTelephonyManager = ExtTelephonyManager.getInstance(mContext);
         mExtTelephonyManager.connectService(mExtTelManagerServiceCallback);
-        mTelephonyCallback = new PhoneTelephonyCallback();
+        mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
     }
 
     private ServiceCallback mExtTelManagerServiceCallback = new ServiceCallback() {
@@ -106,47 +113,24 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
      * @param subId is the subscription id
      * @return this instance after initialization
      **/
-    public BackupCallingPreferenceController init(int subId) {
+    public BackupCallingPreferenceController init(FragmentManager fragmentManager, int subId) {
+        mFragmentManager = fragmentManager;
         mSubId = subId;
+        mTelephonyManager = getTelephonyManager();
         return this;
     }
 
-    @Override
-    public void onStart() {
-        mTelephonyCallback.register(mContext, mSubId);
-    }
-
-    @Override
-    public void onStop() {
-        mTelephonyCallback.unregister();
-    }
-
-    private class PhoneTelephonyCallback extends TelephonyCallback implements
-            TelephonyCallback.CallStateListener {
-
-        private TelephonyManager tm;
-
-        @Override
-        public void onCallStateChanged(int state) {
-            mCallState = state;
-            updateState(mPreference);
+    private TelephonyManager getTelephonyManager() {
+        if (mTelephonyManager != null) {
+            return mTelephonyManager;
         }
-
-        public void register(Context context, int subId) {
-            tm = context.getSystemService(TelephonyManager.class);
-            if (SubscriptionManager.isValidSubscriptionId(subId)) {
-                tm = tm.createForSubscriptionId(subId);
-            }
-            // Assign the current call state to show the correct preference state even before the
-            // first onCallStateChanged() by initial registration.
-            mCallState = tm.getCallState(subId);
-            tm.registerTelephonyCallback(context.getMainExecutor(), this);
+        TelephonyManager telMgr =
+                mContext.getSystemService(TelephonyManager.class);
+        if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            telMgr = telMgr.createForSubscriptionId(mSubId);
         }
-
-        public void unregister() {
-            mCallState = null;
-            tm.unregisterTelephonyCallback(this);
-        }
+        mTelephonyManager = telMgr;
+        return telMgr;
     }
 
     @Override
@@ -178,23 +162,67 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
      * Implementation of abstract methods
      **/
     public boolean setChecked(boolean isChecked) {
-        ImsMmTelManager imsMmTelMgr = getImsMmTelManager(mSubId);
-        if (imsMmTelMgr == null) {
-            return false;
+        // If IMS is registered over C_IWLAN and the device is in a call, display a warning dialog
+        // that disabling C_IWLAN might cause a call drop.
+        mDialogNeeded = isDialogNeeded(isChecked);
+        if (!mDialogNeeded) {
+            // Update directly if we don't need dialog
+            ImsMmTelManager imsMmTelMgr = getImsMmTelManager(mSubId);
+            if (imsMmTelMgr == null) {
+                return false;
+            }
+            try {
+                imsMmTelMgr.setCrossSimCallingEnabled(isChecked);
+            } catch (ImsException exception) {
+                Log.w(LOG_TAG, "fail to change cross SIM calling configuration: " + isChecked,
+                        exception);
+                return false;
+            }
+            return true;
         }
+        return false;
+    }
+
+    private boolean isDialogNeeded(boolean isChecked) {
+        IImsRegistration imsRegistrationImpl = mTelephonyManager.getImsRegistration(
+                mSubscriptionManager.getSlotIndex(mSubId), FEATURE_MMTEL);
+        boolean isImsRegisteredOverCiwlan = false;
         try {
-            imsMmTelMgr.setCrossSimCallingEnabled(isChecked);
-        } catch (ImsException exception) {
-            Log.w(LOG_TAG, "fail to change cross SIM calling configuration: " + isChecked,
-                    exception);
-            return false;
+            isImsRegisteredOverCiwlan = imsRegistrationImpl.getRegistrationTechnology() ==
+                    REGISTRATION_TECH_CROSS_SIM;
+        } catch (RemoteException ex) {
+            Log.e(LOG_TAG, "getRegistrationTechnology failed", ex);
         }
-        return true;
+        boolean isCallIdle = mTelephonyManager.getCallState() == TelephonyManager.CALL_STATE_IDLE;
+        Log.d(LOG_TAG, "isDialogNeeded: isChecked=" + isChecked + ", isCallIdle=" + isCallIdle +
+                ", isImsRegisteredOverCiwlan=" + isImsRegisteredOverCiwlan);
+        if (!isChecked && !isCallIdle && isImsRegisteredOverCiwlan) {
+            mDialogType = BackupCallingDialogFragment.TYPE_DISABLE_CIWLAN_DIALOG;
+            return true;
+        }
+        return false;
+    }
+
+    private void showDialog(int type) {
+        final BackupCallingDialogFragment dialogFragment = BackupCallingDialogFragment.newInstance(
+                type, mSubId);
+        dialogFragment.show(mFragmentManager, DIALOG_TAG);
     }
 
     /**
      * Implementation of abstract methods
      **/
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (TextUtils.equals(preference.getKey(), getPreferenceKey())) {
+            if (mDialogNeeded) {
+                showDialog(mDialogType);
+            }
+            return true;
+        }
+        return false;
+    }
+
     public boolean isChecked() {
         ImsMmTelManager imsMmTelMgr = getImsMmTelManager(mSubId);
         if (imsMmTelMgr == null) {
@@ -211,9 +239,7 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        if ((mCallState == null) || (preference == null) ||
-                (!(preference instanceof SwitchPreference))) {
-            Log.d(LOG_TAG, "Skip update under mCallState=" + mCallState);
+        if ((preference == null) || (!(preference instanceof SwitchPreference))) {
             return;
         }
         SubscriptionInfo subInfo = getSubscriptionInfoFromActiveList(mSubId);
@@ -221,8 +247,6 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
         mPreference = preference;
 
         final SwitchPreference switchPreference = (SwitchPreference) preference;
-        // Gray out the setting if in a call
-        switchPreference.setEnabled(mCallState == TelephonyManager.CALL_STATE_IDLE);
         switchPreference.setChecked((subInfo != null) ? isChecked() : false);
 
         updateSummary(getLatestSummary(subInfo));

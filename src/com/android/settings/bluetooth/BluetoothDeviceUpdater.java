@@ -353,4 +353,8 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
         }
         return isPvtAddr;
     }
+
+    protected boolean isDeviceInCachedDevicesList(CachedBluetoothDevice cachedDevice){
+        return mLocalManager.getCachedDeviceManager().getCachedDevicesCopy().contains(cachedDevice);
+    }
 }

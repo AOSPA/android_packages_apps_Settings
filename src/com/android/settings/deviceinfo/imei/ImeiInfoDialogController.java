@@ -80,7 +80,7 @@ public class ImeiInfoDialogController {
         String imei = null;
         if (mQtiImeiInfo != null) {
             for (int i = 0; i < mQtiImeiInfo.length; i++) {
-                if (mQtiImeiInfo[i].getSlotId() == slot) {
+                if (null != mQtiImeiInfo[i] && mQtiImeiInfo[i].getSlotId() == slot) {
                     imei = mQtiImeiInfo[i].getImei();
                     break;
                 }
