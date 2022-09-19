@@ -48,6 +48,7 @@ import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.telephony.DomesticRoamUtils;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -203,6 +204,13 @@ public class ResetNetwork extends InstrumentedFragment {
                 if (TextUtils.isEmpty(name)) {
                     CharSequence carrierName = record.getCarrierName();
                     name = TextUtils.isEmpty(carrierName) ? "" : carrierName.toString();
+                    if (DomesticRoamUtils.isFeatureEnabled(getContext())) {
+                        String operatorName = DomesticRoamUtils.getRegisteredOperatorName(
+                                getContext(), record.getSubscriptionId());
+                        if (DomesticRoamUtils.EMPTY_OPERATOR_NAME != operatorName) {
+                            name = operatorName;
+                        }
+                    }
                 }
                 if (TextUtils.isEmpty(name)) {
                     name = String.format("MCC:%s MNC:%s Slot:%s Id:%s", record.getMcc(),
