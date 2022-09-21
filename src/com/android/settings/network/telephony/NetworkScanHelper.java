@@ -33,6 +33,7 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.R;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -125,21 +126,29 @@ public class NetworkScanHelper {
     private final TelephonyManager mTelephonyManager;
     private final TelephonyScanManager.NetworkScanCallback mInternalNetworkScanCallback;
     private final Executor mExecutor;
+    private int mMaxSearchTimeSec = MAX_SEARCH_TIME_SEC;
+
     private final LegacyIncrementalScanBroadcastReceiver mLegacyIncrScanReceiver;
     private Context mContext;
     private NetworkScan mNetworkScanRequester;
     private IntentFilter filter =
             new IntentFilter("qualcomm.intent.action.ACTION_INCREMENTAL_NW_SCAN_IND");
 
-    public NetworkScanHelper(Context context, TelephonyManager tm, NetworkScanCallback callback,
-                             Executor executor) {
-        mContext = context;
+    public NetworkScanHelper(TelephonyManager tm, NetworkScanCallback callback, Executor executor) {
         mTelephonyManager = tm;
         mNetworkScanCallback = callback;
         mInternalNetworkScanCallback = new NetworkScanCallbackImpl();
         mExecutor = executor;
         mLegacyIncrScanReceiver =
                 new LegacyIncrementalScanBroadcastReceiver(mContext, mInternalNetworkScanCallback);
+    }
+
+    public NetworkScanHelper(Context context, TelephonyManager tm, NetworkScanCallback callback,
+            Executor executor) {
+        this(tm, callback, executor);
+        mContext = context;
+        mMaxSearchTimeSec = context.getResources().getInteger(
+                R.integer.config_network_scan_helper_max_search_time_sec);
     }
 
     @VisibleForTesting
@@ -184,7 +193,7 @@ public class NetworkScanHelper {
                 radioAccessSpecifiers.toArray(
                         new RadioAccessSpecifier[radioAccessSpecifiers.size()]),
                 SEARCH_PERIODICITY_SEC,
-                MAX_SEARCH_TIME_SEC,
+                mMaxSearchTimeSec,
                 INCREMENTAL_RESULTS,
                 INCREMENTAL_RESULTS_PERIODICITY_SEC,
                 null /* List of PLMN ids (MCC-MNC) */);

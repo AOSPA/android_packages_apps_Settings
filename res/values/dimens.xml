@@ -97,8 +97,8 @@
 
     <dimen name="rect_button_radius">8dp</dimen>
 
-    <!-- Default text size for caption preview samples. Uses dp rather than sp because captions are not scaled. -->
-    <dimen name="caption_preview_text_size">48dp</dimen>
+    <!-- Default text size for captioning preview samples. Uses dp rather than sp because captions are not scaled. -->
+    <dimen name="captioning_preview_text_size">48dp</dimen>
 
     <!-- ActionBar height -->
     <dimen name="actionbar_size">56dip</dimen>
@@ -494,8 +494,18 @@
     <dimen name="sims_select_margin_bottom">24dp</dimen>
     <dimen name="sims_select_margin_top">8dp</dimen>
 
+    <!-- Biometrics UDFPS enroll default dimensions-->
+    <dimen name="enroll_padding_start">0dp</dimen>
+    <dimen name="enroll_padding_end">0dp</dimen>
+    <dimen name="enroll_margin_end">0dp</dimen>
+    <dimen name="rotation_90_enroll_padding_start">0dp</dimen>
+    <dimen name="rotation_90_enroll_padding_end">0dp</dimen>
+    <dimen name="rotation_90_enroll_margin_end">0dp</dimen>
+
     <!-- QR code picture size -->
     <dimen name="qrcode_preview_margin">40dp</dimen>
     <dimen name="qrcode_preview_radius">30dp</dimen>
     <dimen name="qrcode_icon_size">27dp</dimen>
+    <!-- Margin for SD card setup completion Image -->
+    <dimen name="setup_completion_margin_top">88dp</dimen>
 </resources>
