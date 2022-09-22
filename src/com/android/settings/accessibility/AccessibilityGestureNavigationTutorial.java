@@ -24,7 +24,6 @@ import static com.android.settings.accessibility.AccessibilityUtil.UserShortcutT
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -43,7 +42,6 @@ import android.widget.TextSwitcher;
 import android.widget.TextView;
 
 import androidx.annotation.AnimRes;
-import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
@@ -51,7 +49,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RawRes;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.ContextCompat;
 import androidx.core.util.Preconditions;
 import androidx.core.widget.TextViewCompat;
 import androidx.viewpager.widget.PagerAdapter;
@@ -98,27 +95,18 @@ public final class AccessibilityGestureNavigationTutorial {
      * Displays a dialog that guides users to use accessibility features with accessibility
      * gestures under system gesture navigation mode.
      */
-    public static void showGestureNavigationTutorialDialog(Context context,
+    public static AlertDialog showGestureNavigationTutorialDialog(Context context,
             DialogInterface.OnDismissListener onDismissListener) {
         final AlertDialog alertDialog = new AlertDialog.Builder(context)
                 .setView(createTutorialDialogContentView(context,
                         DialogType.GESTURE_NAVIGATION_SETTINGS))
-                .setNegativeButton(R.string.accessibility_tutorial_dialog_button, mOnClickListener)
+                .setPositiveButton(R.string.accessibility_tutorial_dialog_button, mOnClickListener)
                 .setOnDismissListener(onDismissListener)
                 .create();
 
         alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.show();
-    }
-
-    static AlertDialog showAccessibilityButtonTutorialDialog(Context context) {
-        final AlertDialog alertDialog = createDialog(context,
-                DialogType.LAUNCH_SERVICE_BY_ACCESSIBILITY_BUTTON);
-
-        if (!AccessibilityUtil.isGestureNavigateEnabled(context)) {
-            updateMessageWithIcon(context, alertDialog);
-        }
 
         return alertDialog;
     }
@@ -142,17 +130,32 @@ public final class AccessibilityGestureNavigationTutorial {
                         .launch();
 
         final AlertDialog alertDialog = new AlertDialog.Builder(context)
-                .setNegativeButton(R.string.accessibility_tutorial_dialog_link_button,
-                        linkButtonListener)
                 .setPositiveButton(R.string.accessibility_tutorial_dialog_button,
                         actionButtonListener)
+                .setNegativeButton(R.string.accessibility_tutorial_dialog_link_button,
+                        linkButtonListener)
                 .create();
 
-        final TutorialPageChangeListener.OnPageSelectedCallback callback =
-                type -> alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(
-                        type == UserShortcutType.SOFTWARE ? VISIBLE : GONE);
+        final List<TutorialPage> tutorialPages =
+                createShortcutTutorialPages(context, shortcutTypes);
+        Preconditions.checkArgument(!tutorialPages.isEmpty(),
+                /* errorMessage= */ "Unexpected tutorial pages size");
 
-        alertDialog.setView(createShortcutNavigationContentView(context, shortcutTypes, callback));
+        final TutorialPageChangeListener.OnPageSelectedCallback callback = index -> {
+            final int pageType = tutorialPages.get(index).getType();
+            alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(
+                    pageType == UserShortcutType.SOFTWARE ? VISIBLE : GONE);
+        };
+
+        alertDialog.setView(createShortcutNavigationContentView(context, tutorialPages, callback));
+
+        // Showing first page won't invoke onPageSelectedCallback. Need to check the first tutorial
+        // page type manually to set correct visibility of the link button.
+        alertDialog.setOnShowListener(dialog -> {
+            final int firstPageType = tutorialPages.get(0).getType();
+            alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(
+                    firstPageType == UserShortcutType.SOFTWARE ? VISIBLE : GONE);
+        });
 
         return alertDialog;
     }
@@ -208,7 +211,7 @@ public final class AccessibilityGestureNavigationTutorial {
     private static AlertDialog createDialog(Context context, int dialogType) {
         final AlertDialog alertDialog = new AlertDialog.Builder(context)
                 .setView(createTutorialDialogContentView(context, dialogType))
-                .setNegativeButton(R.string.accessibility_tutorial_dialog_button, mOnClickListener)
+                .setPositiveButton(R.string.accessibility_tutorial_dialog_button, mOnClickListener)
                 .create();
 
         alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -216,50 +219,6 @@ public final class AccessibilityGestureNavigationTutorial {
         alertDialog.show();
 
         return alertDialog;
-    }
-
-    private static void updateMessageWithIcon(Context context, AlertDialog alertDialog) {
-        final TextView gestureTutorialMessage = alertDialog.findViewById(
-                R.id.button_tutorial_message);
-
-        // Get the textView line height to update [icon] size. Must be called after show()
-        final int lineHeight = gestureTutorialMessage.getLineHeight();
-        gestureTutorialMessage.setText(getMessageStringWithIcon(context, lineHeight));
-    }
-
-    private static SpannableString getMessageStringWithIcon(Context context, int lineHeight) {
-        final String messageString = context
-                .getString(R.string.accessibility_tutorial_dialog_message_button);
-        final SpannableString spannableMessage = SpannableString.valueOf(messageString);
-
-        // Icon
-        final int indexIconStart = messageString.indexOf("%s");
-        final int indexIconEnd = indexIconStart + 2;
-        final Drawable icon = context.getDrawable(R.drawable.ic_accessibility_new);
-        final ImageSpan imageSpan = new ImageSpan(icon);
-        imageSpan.setContentDescription("");
-        icon.setBounds(0, 0, lineHeight, lineHeight);
-        spannableMessage.setSpan(
-                imageSpan, indexIconStart, indexIconEnd,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        return spannableMessage;
-    }
-
-    /** Returns the color associated with the specified attribute in the context's theme. */
-    @ColorInt
-    private static int getThemeAttrColor(final Context context, final int attributeColor) {
-        final int colorResId = getAttrResourceId(context, attributeColor);
-        return ContextCompat.getColor(context, colorResId);
-    }
-
-    /** Returns the identifier of the resolved resource assigned to the given attribute. */
-    private static int getAttrResourceId(final Context context, final int attributeColor) {
-        final int[] attrs = {attributeColor};
-        final TypedArray typedArray = context.obtainStyledAttributes(attrs);
-        final int colorResId = typedArray.getResourceId(0, 0);
-        typedArray.recycle();
-        return colorResId;
     }
 
     private static class TutorialPagerAdapter extends PagerAdapter {
@@ -330,16 +289,13 @@ public final class AccessibilityGestureNavigationTutorial {
         return inflater.inflate(R.layout.accessibility_lottie_animation_view, /* root= */ null);
     }
 
-    private static View createShortcutNavigationContentView(Context context, int shortcutTypes,
+    private static View createShortcutNavigationContentView(Context context,
+            List<TutorialPage> tutorialPages,
             TutorialPageChangeListener.OnPageSelectedCallback onPageSelectedCallback) {
 
         final LayoutInflater inflater = context.getSystemService(LayoutInflater.class);
         final View contentView = inflater.inflate(
                 R.layout.accessibility_shortcut_tutorial_dialog, /* root= */ null);
-        final List<TutorialPage> tutorialPages =
-                createShortcutTutorialPages(context, shortcutTypes);
-        Preconditions.checkArgument(!tutorialPages.isEmpty(),
-                /* errorMessage= */ "Unexpected tutorial pages size");
 
         final LinearLayout indicatorContainer = contentView.findViewById(R.id.indicator_container);
         indicatorContainer.setVisibility(tutorialPages.size() > 1 ? VISIBLE : GONE);
@@ -631,7 +587,7 @@ public final class AccessibilityGestureNavigationTutorial {
                             currentPageNumber, mTutorialPages.size()));
 
             if (mOnPageSelectedCallback != null) {
-                mOnPageSelectedCallback.onPageSelected(mTutorialPages.get(position).getType());
+                mOnPageSelectedCallback.onPageSelected(position);
             }
         }
 
@@ -644,7 +600,7 @@ public final class AccessibilityGestureNavigationTutorial {
         private interface OnPageSelectedCallback {
 
             /** The callback method after tutorial page is selected. */
-            void onPageSelected(int type);
+            void onPageSelected(int index);
         }
     }
 }

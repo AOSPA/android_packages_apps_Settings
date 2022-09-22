@@ -225,7 +225,7 @@ public class TetherPreferenceController extends AbstractPreferenceController imp
         }
         if (!hotSpotOn && !tetherOn) {
             // Both off
-            mPreference.setSummary(R.string.switch_off_text);
+            mPreference.setSummary(R.string.off);
         } else if (hotSpotOn && tetherOn) {
             // Both on
             mPreference.setSummary(R.string.tether_settings_summary_hotspot_on_tether_on);
@@ -241,7 +241,7 @@ public class TetherPreferenceController extends AbstractPreferenceController imp
             // Preference is not ready yet.
             return;
         }
-        mPreference.setSummary(R.string.switch_off_text);
+        mPreference.setSummary(R.string.off);
     }
 
     class SettingObserver extends ContentObserver {

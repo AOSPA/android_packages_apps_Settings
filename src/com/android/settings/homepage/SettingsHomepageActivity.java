@@ -68,6 +68,8 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
+import com.google.android.setupcompat.util.WizardManagerHelper;
+
 import java.net.URISyntaxException;
 import java.util.Set;
 
@@ -171,7 +173,6 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             if (userInfo.isManagedProfile()) {
                 final Intent intent = new Intent(getIntent())
                         .setClass(this, DeepLinkHomepageActivityInternal.class)
-                        .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
                         .putExtra(EXTRA_USER_HANDLE, getUser());
                 intent.removeFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivityAsUser(intent, um.getPrimaryUser().getUserHandle());
@@ -219,7 +220,9 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         }, R.id.main_content);
 
         // Launch the intent from deep link for large screen devices.
-        launchDeepLinkIntentToRight();
+        if (shouldLaunchDeepLinkIntentToRight()) {
+            launchDeepLinkIntentToRight();
+        }
         updateHomepagePaddings();
         updateSplitLayout();
     }
@@ -242,7 +245,9 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             return;
         }
         // Launch the intent from deep link for large screen devices.
-        launchDeepLinkIntentToRight();
+        if (shouldLaunchDeepLinkIntentToRight()) {
+            launchDeepLinkIntentToRight();
+        }
     }
 
     @Override
@@ -351,7 +356,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
     private void showSuggestionFragment(boolean scrollNeeded) {
         final Class<? extends Fragment> fragmentClass = FeatureFactory.getFactory(this)
-                .getSuggestionFeatureProvider(this).getContextualSuggestionFragment();
+                .getSuggestionFeatureProvider().getContextualSuggestionFragment();
         if (fragmentClass == null) {
             return;
         }
@@ -390,17 +395,18 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         return showFragment;
     }
 
+    private boolean shouldLaunchDeepLinkIntentToRight() {
+        if (!FeatureFlagUtils.isEnabled(this, FeatureFlagUtils.SETTINGS_SUPPORT_LARGE_SCREEN)
+                || !SplitController.getInstance().isSplitSupported()) {
+            return false;
+        }
+
+        Intent intent = getIntent();
+        return intent != null && TextUtils.equals(intent.getAction(),
+                ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY);
+    }
+
     private void launchDeepLinkIntentToRight() {
-        if (!mIsEmbeddingActivityEnabled) {
-            return;
-        }
-
-        final Intent intent = getIntent();
-        if (intent == null || !TextUtils.equals(intent.getAction(),
-                ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY)) {
-            return;
-        }
-
         if (!(this instanceof DeepLinkHomepageActivity
                 || this instanceof DeepLinkHomepageActivityInternal)) {
             Log.e(TAG, "Not a deep link component");
@@ -408,6 +414,13 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             return;
         }
 
+        if (!WizardManagerHelper.isUserSetupComplete(this)) {
+            Log.e(TAG, "Cancel deep link before SUW completed");
+            finish();
+            return;
+        }
+
+        final Intent intent = getIntent();
         final String intentUriString = intent.getStringExtra(
                 EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_INTENT_URI);
         if (TextUtils.isEmpty(intentUriString)) {
@@ -437,7 +450,6 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         intent.setAction(null);
 
         targetIntent.removeFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-        targetIntent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
 
         // Sender of intent may want to send intent extra data to the destination of targetIntent.
         targetIntent.replaceExtras(intent);

@@ -49,8 +49,8 @@ import java.util.List;
 public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         BiometricEnrollSidecar.Listener {
 
-
     private static final String TAG = "FingerprintEnrollFindSensor";
+    private static final String SAVED_STATE_IS_NEXT_CLICKED = "is_next_clicked";
 
     @Nullable
     private FingerprintFindSensorAnimation mAnimation;
@@ -67,7 +67,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final FingerprintManager fingerprintManager = getSystemService(FingerprintManager.class);
+        final FingerprintManager fingerprintManager = Utils.getFingerprintManagerOrNull(this);
         final List<FingerprintSensorPropertiesInternal> props =
                 fingerprintManager.getSensorPropertiesInternal();
         mCanAssumeUdfps = props != null && props.size() == 1 && props.get(0).isAnyUdfpsType();
@@ -138,8 +138,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         // This is an entry point for SetNewPasswordController, e.g.
         // adb shell am start -a android.app.action.SET_NEW_PASSWORD
         if (mToken == null && BiometricUtils.containsGatekeeperPasswordHandle(getIntent())) {
-            final FingerprintManager fpm = getSystemService(FingerprintManager.class);
-            fpm.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
+            fingerprintManager.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
                 mChallenge = challenge;
                 mSensorId = sensorId;
                 mToken = BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId, challenge);
@@ -174,6 +173,15 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
                 mAnimation = (FingerprintFindSensorAnimation) animationView;
             }
         }
+        if (savedInstanceState != null) {
+            mNextClicked = savedInstanceState.getBoolean(SAVED_STATE_IS_NEXT_CLICKED, mNextClicked);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(SAVED_STATE_IS_NEXT_CLICKED, mNextClicked);
     }
 
     @Override
@@ -240,7 +248,6 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     @Override
     public void onEnrollmentError(int errMsgId, CharSequence errString) {
         if (mNextClicked && errMsgId == FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
-            mNextClicked = false;
             proceedToEnrolling(false /* cancelEnrollment */);
         } else {
             FingerprintErrorDialog.showErrorDialog(this, errMsgId);
@@ -270,6 +277,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     }
 
     private void onStartButtonClick(View view) {
+        mNextClicked = true;
         startActivityForResult(getFingerprintEnrollingIntent(), ENROLL_REQUEST);
     }
 
@@ -341,6 +349,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
                         finish();
                     } else {
                         // We came back from enrolling but it wasn't completed, start again.
+                        mNextClicked = false;
                         startLookingForFingerprint();
                     }
                     break;
