@@ -44,6 +44,9 @@ import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
 import com.android.settings.R;
 
+import com.android.wifitrackerlib.Utils;
+import com.android.wifitrackerlib.WifiEntry;
+
 /**
  * To display a dialog that asks the user whether to connect to a network that is not validated.
  */
@@ -119,7 +122,11 @@ public class WifiNoInternetDialog extends AlertActivity implements
         }
         mNetworkName = nc.getSsid();
         if (mNetworkName != null) {
-            mNetworkName = WifiInfo.sanitizeSsid(mNetworkName);
+            if (WifiEntry.isGbkSsidSupported()) {
+                mNetworkName = Utils.getReadableText(mNetworkName);
+            } else {
+                mNetworkName = WifiInfo.sanitizeSsid(mNetworkName);
+            }
         }
 
         createDialog();
