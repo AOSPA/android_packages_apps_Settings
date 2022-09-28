@@ -41,6 +41,7 @@ import android.telephony.CellInfoNr;
 import android.telephony.CellInfoTdscdma;
 import android.telephony.CellInfoWcdma;
 import android.telephony.CellSignalStrength;
+import android.telephony.SubscriptionManager;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -73,11 +74,14 @@ public class NetworkOperatorPreference extends Preference {
     private boolean mIsAdvancedScanSupported;
     private int mAccessMode;
     private ExtTelephonyManager mExtTelephonyManager;
+    private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
     public NetworkOperatorPreference(Context context, CellInfo cellinfo,
             List<String> forbiddenPlmns, boolean show4GForLTE, int accessMode) {
         this(context, forbiddenPlmns, show4GForLTE, accessMode);
-        updateCell(cellinfo);
+        if (!DomesticRoamUtils.isFeatureEnabled(context)) {
+            updateCell(cellinfo);
+        }
     }
 
     public NetworkOperatorPreference(Context context, CellIdentity connectedCellId,
@@ -133,6 +137,13 @@ public class NetworkOperatorPreference extends Preference {
      */
     public void refresh() {
         String networkTitle = getOperatorName();
+        if (DomesticRoamUtils.isFeatureEnabled(getContext())) {
+            String mplmnOperatorName = DomesticRoamUtils.getMPLMNOperatorName(getContext(),
+                    mSubId, getOperatorNumeric());
+            if (DomesticRoamUtils.EMPTY_OPERATOR_NAME != mplmnOperatorName) {
+                networkTitle = mplmnOperatorName;
+            }
+        }
 
         if(MobileNetworkUtils.isCagSnpnEnabled(getContext()) &&
                 mCellId instanceof CellIdentityNr) {
@@ -317,5 +328,9 @@ public class NetworkOperatorPreference extends Preference {
         final Context context = getContext();
         setIcon(MobileNetworkUtils.getSignalStrengthIcon(context, level, NUM_SIGNAL_STRENGTH_BINS,
                 getIconIdForCell(mCellInfo), false));
+    }
+
+    public void setSubId(int subId) {
+        mSubId = subId;
     }
 }

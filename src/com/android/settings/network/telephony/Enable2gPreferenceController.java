@@ -104,6 +104,13 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
             return "";
         }
         CharSequence carrierName = subInfo.getCarrierName();
+        if (DomesticRoamUtils.isFeatureEnabled(mContext)) {
+            String operatorName = DomesticRoamUtils.getRegisteredOperatorName(
+                    mContext, subInfo.getSubscriptionId());
+            if (DomesticRoamUtils.EMPTY_OPERATOR_NAME != operatorName) {
+                return operatorName;
+            }
+        }
         return TextUtils.isEmpty(carrierName) ? "" : carrierName.toString();
     }
 

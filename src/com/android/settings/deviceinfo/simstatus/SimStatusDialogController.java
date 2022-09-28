@@ -66,6 +66,7 @@ import androidx.lifecycle.OnLifecycleEvent;
 import com.android.internal.telephony.PhoneConstants;
 
 import com.android.settings.R;
+import com.android.settings.network.telephony.DomesticRoamUtils;
 import com.android.settingslib.DeviceInfoUtils;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -360,6 +361,16 @@ public class SimStatusDialogController implements LifecycleObserver {
     private void updateNetworkProvider() {
         final CharSequence carrierName =
                 mSubscriptionInfo != null ? mSubscriptionInfo.getCarrierName() : null;
+        if (DomesticRoamUtils.isFeatureEnabled(mContext)) {
+            if (mSubscriptionInfo != null) {
+                String operatorName = DomesticRoamUtils.getRegisteredOperatorName(
+                        mContext, mSubscriptionInfo.getSubscriptionId());
+                if (DomesticRoamUtils.EMPTY_OPERATOR_NAME != operatorName) {
+                    mDialog.setText(NETWORK_PROVIDER_VALUE_ID, operatorName);
+                    return;
+                }
+            }
+        }
         mDialog.setText(NETWORK_PROVIDER_VALUE_ID, carrierName);
     }
 

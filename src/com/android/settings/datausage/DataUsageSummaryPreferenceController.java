@@ -41,6 +41,7 @@ import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.datausage.lib.DataUsageLib;
 import com.android.settings.network.ProxySubscriptionManager;
+import com.android.settings.network.telephony.DomesticRoamUtils;
 import com.android.settings.network.telephony.TelephonyBasePreferenceController;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.NetworkPolicyEditor;
@@ -308,6 +309,13 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
 
         if (subInfo != null && mHasMobileData) {
             mCarrierName = subInfo.getCarrierName();
+            if (DomesticRoamUtils.isFeatureEnabled(mContext)) {
+                String operatorName = DomesticRoamUtils.getRegisteredOperatorName(
+                        mContext, subInfo.getSubscriptionId());
+                if (DomesticRoamUtils.EMPTY_OPERATOR_NAME != operatorName) {
+                    mCarrierName = operatorName;
+                }
+            }
             final List<SubscriptionPlan> plans = getSubscriptionPlans(mSubId);
             final SubscriptionPlan primaryPlan = getPrimaryPlan(plans);
 

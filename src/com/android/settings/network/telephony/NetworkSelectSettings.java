@@ -536,6 +536,12 @@ public class NetworkSelectSettings extends DashboardFragment implements
                 // add new preference
                 pref = createNetworkOperatorPreference(cellInfo);
                 pref.setOrder(index);
+
+                if (DomesticRoamUtils.isFeatureEnabled(getContext())) {
+                    pref.setSubId(mSubId);
+                    pref.updateCell(cellInfo);
+                }
+
                 mPreferenceCategory.addPreference(pref);
             }
             pref.setKey(pref.getOperatorName());
