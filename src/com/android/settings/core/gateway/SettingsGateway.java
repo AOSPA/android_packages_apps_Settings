@@ -117,11 +117,13 @@ import com.android.settings.gestures.SwipeToNotificationSettings;
 import com.android.settings.gestures.SystemNavigationGestureSettings;
 import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
 import com.android.settings.inputmethod.KeyboardLayoutPickerFragment;
+import com.android.settings.inputmethod.KeyboardSettings;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment;
 import com.android.settings.inputmethod.SpellCheckersSettings;
 import com.android.settings.inputmethod.UserDictionaryList;
 import com.android.settings.inputmethod.UserDictionarySettings;
 import com.android.settings.language.LanguageAndInputSettings;
+import com.android.settings.language.LanguageSettings;
 import com.android.settings.localepicker.LocaleListEditor;
 import com.android.settings.location.LocationServices;
 import com.android.settings.location.LocationSettings;
@@ -207,6 +209,8 @@ public class SettingsGateway {
             LocaleListEditor.class.getName(),
             AvailableVirtualKeyboardFragment.class.getName(),
             LanguageAndInputSettings.class.getName(),
+            LanguageSettings.class.getName(),
+            KeyboardSettings.class.getName(),
             SpellCheckersSettings.class.getName(),
             UserDictionaryList.class.getName(),
             UserDictionarySettings.class.getName(),
@@ -387,6 +391,8 @@ public class SettingsGateway {
             Settings.LocationSettingsActivity.class.getName(),
             // Home page > System
             Settings.LanguageAndInputSettingsActivity.class.getName(),
+            Settings.LanguageSettingsActivity.class.getName(),
+            Settings.KeyboardSettingsActivity.class.getName(),
             Settings.DateTimeSettingsActivity.class.getName(),
             Settings.EnterprisePrivacySettingsActivity.class.getName(),
             Settings.MyDeviceInfoActivity.class.getName(),
