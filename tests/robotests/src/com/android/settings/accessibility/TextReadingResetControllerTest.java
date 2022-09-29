@@ -16,9 +16,8 @@
 
 package com.android.settings.accessibility;
 
-import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -28,14 +27,13 @@ import android.view.View;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settings.R;
-import com.android.settingslib.widget.LayoutPreference;
-
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 
 /**
@@ -45,8 +43,11 @@ import org.robolectric.RobolectricTestRunner;
 public class TextReadingResetControllerTest {
     private static final String RESET_KEY = "reset";
     private final Context mContext = ApplicationProvider.getApplicationContext();
-    private final View mResetView = new View(mContext);
     private TextReadingResetController mResetController;
+    private TextReadingResetPreference mResetPreference;
+
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     @Mock
     private View.OnClickListener mOnResetButtonClickListener;
@@ -54,37 +55,19 @@ public class TextReadingResetControllerTest {
     @Mock
     private PreferenceScreen mPreferenceScreen;
 
-    @Mock
-    private LayoutPreference mLayoutPreference;
-
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         mResetController = new TextReadingResetController(mContext, RESET_KEY,
                 mOnResetButtonClickListener);
+        mResetPreference = spy(new TextReadingResetPreference(mContext, /* attrs= */ null));
+
+        when(mPreferenceScreen.findPreference(RESET_KEY)).thenReturn(mResetPreference);
     }
 
     @Test
-    public void setClickListener_success() {
-        setupResetButton();
-
+    public void displayResetPreference_verifyResetClickListener() {
         mResetController.displayPreference(mPreferenceScreen);
 
-        assertThat(mResetView.hasOnClickListeners()).isTrue();
-    }
-
-    @Test
-    public void clickResetButtonAfterDisplayPreference_verifyClickListener() {
-        setupResetButton();
-
-        mResetController.displayPreference(mPreferenceScreen);
-        mResetView.callOnClick();
-
-        verify(mOnResetButtonClickListener).onClick(any(View.class));
-    }
-
-    private void setupResetButton() {
-        when(mPreferenceScreen.findPreference(RESET_KEY)).thenReturn(mLayoutPreference);
-        when(mLayoutPreference.findViewById(R.id.reset_button)).thenReturn(mResetView);
+        verify(mResetPreference).setOnResetClickListener(any(View.OnClickListener.class));
     }
 }

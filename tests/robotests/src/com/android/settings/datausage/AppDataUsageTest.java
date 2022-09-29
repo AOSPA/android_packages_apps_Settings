@@ -19,14 +19,14 @@ package com.android.settings.datausage;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyBoolean;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyBoolean;
+import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -48,6 +48,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -240,6 +241,7 @@ public class AppDataUsageTest {
         ReflectionHelpers.setField(mFragment, "mUnrestrictedData", unrestrictedDataPref);
         ReflectionHelpers.setField(mFragment, "mDataSaverBackend", dataSaverBackend);
         ReflectionHelpers.setField(mFragment.services, "mPolicyManager", networkPolicyManager);
+        when(mFragment.getListView()).thenReturn(mock(RecyclerView.class));
 
         ShadowRestrictedLockUtilsInternal.setRestricted(true);
         doReturn(NetworkPolicyManager.POLICY_NONE).when(networkPolicyManager)
@@ -302,6 +304,7 @@ public class AppDataUsageTest {
         final Context context = RuntimeEnvironment.application;
         final int testUid = 123123;
         final AppItem appItem = new AppItem(testUid);
+        appItem.addUid(testUid);
         appItem.category = AppItem.CATEGORY_APP;
         ReflectionHelpers.setField(mFragment, "mContext", context);
         ReflectionHelpers.setField(mFragment, "mAppItem", appItem);

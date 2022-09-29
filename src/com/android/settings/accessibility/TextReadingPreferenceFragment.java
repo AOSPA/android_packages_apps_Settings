@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.IntDef;
@@ -105,6 +106,16 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        final View rootView = getActivity().getWindow().peekDecorView();
+        if (rootView != null) {
+            rootView.setAccessibilityPaneTitle(getString(
+                    R.string.accessibility_text_reading_options_title));
+        }
+    }
+
+    @Override
     protected int getPreferenceScreenResId() {
         return R.xml.accessibility_text_reading_options;
     }
@@ -129,18 +140,17 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
 
         final TextReadingPreviewController previewController = new TextReadingPreviewController(
                 context, PREVIEW_KEY, fontSizeData, displaySizeData);
+        previewController.setEntryPoint(mEntryPoint);
         controllers.add(previewController);
 
         final PreviewSizeSeekBarController fontSizeController = new PreviewSizeSeekBarController(
                 context, FONT_SIZE_KEY, fontSizeData);
         fontSizeController.setInteractionListener(previewController);
-        fontSizeController.setEntryPoint(mEntryPoint);
         controllers.add(fontSizeController);
 
         final PreviewSizeSeekBarController displaySizeController = new PreviewSizeSeekBarController(
                 context, DISPLAY_SIZE_KEY, displaySizeData);
         displaySizeController.setInteractionListener(previewController);
-        displaySizeController.setEntryPoint(mEntryPoint);
         controllers.add(displaySizeController);
 
         mFontWeightAdjustmentController =

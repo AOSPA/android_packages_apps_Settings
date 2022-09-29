@@ -23,6 +23,7 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -138,6 +139,11 @@ public class TopLevelHighlightMixin implements Parcelable, DialogInterface.OnSho
             mCurrentKey = prefKey;
             mTopLevelAdapter.highlightPreference(prefKey, /* scrollNeeded= */ false);
         }
+    }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
+    public String getHighlightPreferenceKey() {
+        return mCurrentKey;
     }
 
     void highlightPreferenceIfNeeded() {

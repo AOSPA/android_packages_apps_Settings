@@ -25,6 +25,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
@@ -33,7 +34,7 @@ import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.verifyNoInteractions;
 
 import android.app.AppOpsManager;
 import android.app.backup.BackupDataInputStream;
@@ -48,6 +49,7 @@ import android.os.IDeviceIdleController;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.ArraySet;
 
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 
@@ -68,6 +70,7 @@ import org.robolectric.annotation.Resetter;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(RobolectricTestRunner.class)
@@ -193,7 +196,7 @@ public final class BatteryBackupHelperTest {
         doReturn(Arrays.asList(userInfo)).when(mUserManager).getProfiles(anyInt());
         doThrow(new RuntimeException())
                 .when(mIPackageManager)
-                .getInstalledApplications(anyInt(), anyInt());
+                .getInstalledApplications(anyLong(), anyInt());
 
         mBatteryBackupHelper.backupOptimizationMode(mBackupDataOutput, null);
 
@@ -251,7 +254,7 @@ public final class BatteryBackupHelperTest {
 
         mBatteryBackupHelper.restoreEntity(mBackupDataInputStream);
 
-        verifyZeroInteractions(mBackupDataInputStream);
+        verifyNoInteractions(mBackupDataInputStream);
     }
 
     @Test
@@ -289,13 +292,13 @@ public final class BatteryBackupHelperTest {
     @Test
     public void restoreOptimizationMode_nullBytesData_skipRestore() throws Exception {
         mBatteryBackupHelper.restoreOptimizationMode(new byte[0]);
-        verifyZeroInteractions(mBatteryOptimizeUtils);
+        verifyNoInteractions(mBatteryOptimizeUtils);
 
         mBatteryBackupHelper.restoreOptimizationMode("invalid data format".getBytes());
-        verifyZeroInteractions(mBatteryOptimizeUtils);
+        verifyNoInteractions(mBatteryOptimizeUtils);
 
         mBatteryBackupHelper.restoreOptimizationMode(DELIMITER.getBytes());
-        verifyZeroInteractions(mBatteryOptimizeUtils);
+        verifyNoInteractions(mBatteryOptimizeUtils);
     }
 
     @Test
@@ -341,9 +344,17 @@ public final class BatteryBackupHelperTest {
 
     private void verifyBackupData(String expectedResult) throws Exception {
         final byte[] expectedBytes = expectedResult.getBytes();
+        final ArgumentCaptor<byte[]> captor = ArgumentCaptor.forClass(byte[].class);
+        final Set<String> expectedResultSet =
+                Set.of(expectedResult.split(BatteryBackupHelper.DELIMITER));
+
         verify(mBackupDataOutput).writeEntityHeader(
                 BatteryBackupHelper.KEY_OPTIMIZATION_LIST, expectedBytes.length);
-        verify(mBackupDataOutput).writeEntityData(expectedBytes, expectedBytes.length);
+        verify(mBackupDataOutput).writeEntityData(captor.capture(), eq(expectedBytes.length));
+        final String actualResult = new String(captor.getValue());
+        final Set<String> actualResultSet =
+                Set.of(actualResult.split(BatteryBackupHelper.DELIMITER));
+        assertThat(actualResultSet).isEqualTo(expectedResultSet);
     }
 
     private void createTestingData(
@@ -369,7 +380,7 @@ public final class BatteryBackupHelperTest {
         doReturn(new ParceledListSlice<ApplicationInfo>(
                 Arrays.asList(applicationInfo1, applicationInfo2, applicationInfo3)))
             .when(mIPackageManager)
-            .getInstalledApplications(anyInt(), anyInt());
+            .getInstalledApplications(anyLong(), anyInt());
         // Sets the AppOpsManager for checkOpNoThrow() method.
         doReturn(AppOpsManager.MODE_ALLOWED)
                 .when(mAppOpsManager)
@@ -384,7 +395,7 @@ public final class BatteryBackupHelperTest {
                         applicationInfo2.uid,
                         applicationInfo2.packageName);
         mBatteryBackupHelper.mTestApplicationInfoList =
-                Arrays.asList(applicationInfo1, applicationInfo2, applicationInfo3);
+                new ArraySet<>(Arrays.asList(applicationInfo1, applicationInfo2, applicationInfo3));
     }
 
     @Implements(UserHandle.class)

@@ -19,8 +19,8 @@ package com.android.settings.fuelgauge;
 import android.annotation.UserIdInt;
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.settings.SettingsEnums;
 import android.app.backup.BackupManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -32,7 +32,6 @@ import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -42,9 +41,10 @@ import com.android.settings.applications.appinfo.ButtonActionDialogFragment;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
-import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.fuelgauge.batteryusage.BatteryDiffEntry;
+import com.android.settings.fuelgauge.batteryusage.BatteryEntry;
+import com.android.settings.fuelgauge.batteryusage.BatteryHistEntry;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.applications.AppUtils;
@@ -66,7 +66,6 @@ import java.util.List;
  */
 public class AdvancedPowerUsageDetail extends DashboardFragment implements
         ButtonActionDialogFragment.AppButtonsDialogListener,
-        BatteryTipPreferenceController.BatteryTipListener,
         SelectorWithWidgetPreference.OnClickListener {
 
     public static final String TAG = "AdvancedPowerDetail";
@@ -80,8 +79,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     public static final String EXTRA_POWER_USAGE_PERCENT = "extra_power_usage_percent";
     public static final String EXTRA_POWER_USAGE_AMOUNT = "extra_power_usage_amount";
 
-    private static final String KEY_PREF_FOREGROUND = "app_usage_foreground";
-    private static final String KEY_PREF_BACKGROUND = "app_usage_background";
     private static final String KEY_PREF_HEADER = "header_view";
     private static final String KEY_PREF_UNRESTRICTED = "unrestricted_pref";
     private static final String KEY_PREF_OPTIMIZED = "optimized_pref";
@@ -103,10 +100,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     @VisibleForTesting
     BatteryOptimizeUtils mBatteryOptimizeUtils;
     @VisibleForTesting
-    Preference mForegroundPreference;
-    @VisibleForTesting
-    Preference mBackgroundPreference;
-    @VisibleForTesting
     FooterPreference mFooterPreference;
     @VisibleForTesting
     SelectorWithWidgetPreference mRestrictedPreference;
@@ -115,15 +108,12 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     @VisibleForTesting
     SelectorWithWidgetPreference mUnrestrictedPreference;
     @VisibleForTesting
-    boolean mEnableTriState = true;
-    @VisibleForTesting
     @BatteryOptimizeUtils.OptimizationMode
     int mOptimizationMode = BatteryOptimizeUtils.MODE_UNKNOWN;
     @VisibleForTesting
     BackupManager mBackupManager;
 
     private AppButtonsPreferenceController mAppButtonsPreferenceController;
-    private BackgroundActivityPreferenceController mBackgroundActivityPreferenceController;
 
     // A wrapper class to carry LaunchBatteryDetailPage required arguments.
     private static final class LaunchBatteryDetailPageArgs {
@@ -252,12 +242,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         super.onCreate(icicle);
 
         final String packageName = getArguments().getString(EXTRA_PACKAGE_NAME);
-        if (mEnableTriState) {
-            onCreateForTriState(packageName);
-        } else {
-            mForegroundPreference = findPreference(KEY_PREF_FOREGROUND);
-            mBackgroundPreference = findPreference(KEY_PREF_BACKGROUND);
-        }
+        onCreateForTriState(packageName);
         mHeaderPreference = findPreference(KEY_PREF_HEADER);
 
         if (packageName != null) {
@@ -270,31 +255,26 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         super.onResume();
 
         initHeader();
-        if (mEnableTriState) {
-            mOptimizationMode = mBatteryOptimizeUtils.getAppOptimizationMode();
-            initPreferenceForTriState(getContext());
-            final String packageName = mBatteryOptimizeUtils.getPackageName();
-            FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
+        mOptimizationMode = mBatteryOptimizeUtils.getAppOptimizationMode();
+        initPreferenceForTriState(getContext());
+        final String packageName = mBatteryOptimizeUtils.getPackageName();
+        FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
                 .action(
-                    getContext(),
-                    SettingsEnums.OPEN_APP_BATTERY_USAGE,
-                    packageName);
-        } else {
-            initPreference(getContext());
-        }
+                getContext(),
+                SettingsEnums.OPEN_APP_BATTERY_USAGE,
+                packageName);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if (mEnableTriState) {
-            final int selectedPreference = getSelectedPreference();
 
-            notifyBackupManager();
-            logMetricCategory(selectedPreference);
-            mBatteryOptimizeUtils.setAppUsageState(selectedPreference);
-            Log.d(TAG, "Leave with mode: " + selectedPreference);
-        }
+        final int selectedPreference = getSelectedPreference();
+
+        notifyBackupManager();
+        logMetricCategory(selectedPreference);
+        mBatteryOptimizeUtils.setAppUsageState(selectedPreference);
+        Log.d(TAG, "Leave with mode: " + selectedPreference);
     }
 
     @VisibleForTesting
@@ -333,32 +313,8 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
             controller.setIsInstantApp(AppUtils.isInstant(mAppEntry.info));
         }
 
-        if (mEnableTriState) {
-            controller.setSummary(getAppActiveTime(bundle));
-        }
-
+        controller.setSummary(getAppActiveTime(bundle));
         controller.done(context, true /* rebindActions */);
-    }
-
-    @VisibleForTesting
-    void initPreference(Context context) {
-        final Bundle bundle = getArguments();
-        final long foregroundTimeMs = bundle.getLong(EXTRA_FOREGROUND_TIME);
-        final long backgroundTimeMs = bundle.getLong(EXTRA_BACKGROUND_TIME);
-        mForegroundPreference.setSummary(
-                TextUtils.expandTemplate(getText(R.string.battery_used_for),
-                        StringUtil.formatElapsedTime(
-                                context,
-                                foregroundTimeMs,
-                                /* withSeconds */ false,
-                                /* collapseTimeUnit */ false)));
-        mBackgroundPreference.setSummary(
-                TextUtils.expandTemplate(getText(R.string.battery_active_for),
-                        StringUtil.formatElapsedTime(
-                                context,
-                                backgroundTimeMs,
-                                /* withSeconds */ false,
-                                /* collapseTimeUnit */ false)));
     }
 
     @VisibleForTesting
@@ -386,7 +342,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         if (helpIntent != null) {
             mFooterPreference.setLearnMoreAction(v ->
                     startActivityForResult(helpIntent, /*requestCode=*/ 0));
-            mFooterPreference.setLearnMoreContentDescription(
+            mFooterPreference.setLearnMoreText(
                     context.getString(R.string.manager_battery_usage_link_a11y));
         }
     }
@@ -403,7 +359,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return mEnableTriState ? R.xml.power_usage_detail : R.xml.power_usage_detail_legacy;
+        return R.xml.power_usage_detail;
     }
 
     @Override
@@ -417,17 +373,9 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
                 (SettingsActivity) getActivity(), this, getSettingsLifecycle(),
                 packageName, mState, REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN);
         controllers.add(mAppButtonsPreferenceController);
-        if (mEnableTriState) {
-            controllers.add(new UnrestrictedPreferenceController(context, uid, packageName));
-            controllers.add(new OptimizedPreferenceController(context, uid, packageName));
-            controllers.add(new RestrictedPreferenceController(context, uid, packageName));
-        } else {
-            mBackgroundActivityPreferenceController = new BackgroundActivityPreferenceController(
-                    context, this, uid, packageName);
-            controllers.add(mBackgroundActivityPreferenceController);
-            controllers.add(new BatteryOptimizationPreferenceController(
-                    (SettingsActivity) getActivity(), this, packageName));
-        }
+        controllers.add(new UnrestrictedPreferenceController(context, uid, packageName));
+        controllers.add(new OptimizedPreferenceController(context, uid, packageName));
+        controllers.add(new RestrictedPreferenceController(context, uid, packageName));
 
         return controllers;
     }
@@ -445,12 +393,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         if (mAppButtonsPreferenceController != null) {
             mAppButtonsPreferenceController.handleDialogClick(id);
         }
-    }
-
-    @Override
-    public void onBatteryTipHandled(BatteryTip batteryTip) {
-        mBackgroundActivityPreferenceController.updateSummary(
-                findPreference(mBackgroundActivityPreferenceController.getPreferenceKey()));
     }
 
     @Override
@@ -525,20 +467,24 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         final long foregroundTimeMs = bundle.getLong(EXTRA_FOREGROUND_TIME);
         final long backgroundTimeMs = bundle.getLong(EXTRA_BACKGROUND_TIME);
         final int consumedPower = bundle.getInt(EXTRA_POWER_USAGE_AMOUNT);
+        final int uid = bundle.getInt(EXTRA_UID, 0);
         final String slotTime = bundle.getString(EXTRA_SLOT_TIME, null);
         final long totalTimeMs = foregroundTimeMs + backgroundTimeMs;
         final CharSequence usageTimeSummary;
-        final PowerUsageFeatureProvider powerFeatureProvider =
-                FeatureFactory.getFactory(getContext()).getPowerUsageFeatureProvider(getContext());
+        final boolean isChartGraphEnabled = FeatureFactory.getFactory(getContext())
+                .getPowerUsageFeatureProvider(getContext()).isChartGraphEnabled(getContext());
 
+        if (!isChartGraphEnabled && BatteryEntry.isSystemUid(uid)) {
+            return null;
+        }
         if (totalTimeMs == 0) {
             final int batteryWithoutUsageTime = consumedPower > 0
                     ? R.string.battery_usage_without_time : R.string.battery_not_usage_24hr;
-            usageTimeSummary = getText(powerFeatureProvider.isChartGraphEnabled(getContext())
+            usageTimeSummary = getText(isChartGraphEnabled
                     ? batteryWithoutUsageTime : R.string.battery_not_usage);
         } else if (slotTime == null) {
             // Shows summary text with past 24 hr or full charge if slot time is null.
-            usageTimeSummary = powerFeatureProvider.isChartGraphEnabled(getContext())
+            usageTimeSummary = isChartGraphEnabled
                     ? getAppPast24HrActiveSummary(foregroundTimeMs, backgroundTimeMs, totalTimeMs)
                     : getAppFullChargeActiveSummary(
                             foregroundTimeMs, backgroundTimeMs, totalTimeMs);

@@ -131,7 +131,7 @@ public class BiometricUtils {
         if (WizardManagerHelper.isAnySetupWizard(activityIntent)) {
             // Default to PIN lock in setup wizard
             Intent intent = new Intent(context, SetupChooseLockGeneric.class);
-            if (StorageManager.isFileEncryptedNativeOrEmulated()) {
+            if (StorageManager.isFileEncrypted()) {
                 intent.putExtra(
                         LockPatternUtils.PASSWORD_TYPE_KEY,
                         DevicePolicyManager.PASSWORD_QUALITY_NUMERIC);
@@ -240,7 +240,6 @@ public class BiometricUtils {
         return activity.getIntent().hasExtra(MultiBiometricEnrollHelper.EXTRA_ENROLL_AFTER_FACE);
     }
 
-
     /**
      * Used for checking if a multi-biometric enrollment flowstarts with Fingerprint
      * and ends with Face.
@@ -252,6 +251,18 @@ public class BiometricUtils {
     public static boolean isMultiBiometricFingerprintEnrollmentFlow(@NonNull Activity activity) {
         return activity.getIntent().hasExtra(
                 MultiBiometricEnrollHelper.EXTRA_ENROLL_AFTER_FINGERPRINT);
+    }
+
+    /**
+     * Used to check if the activity is a multi biometric flow activity.
+     *
+     * @param activity Activity to check
+     * @return True if the activity is going through a multi-biometric enrollment flow, that starts
+     * with Fingerprint.
+     */
+    public static boolean isAnyMultiBiometricFlow(@NonNull Activity activity) {
+        return isMultiBiometricFaceEnrollmentFlow(activity)
+                || isMultiBiometricFingerprintEnrollmentFlow(activity);
     }
 
     public static void copyMultiBiometricExtras(@NonNull Intent fromIntent,

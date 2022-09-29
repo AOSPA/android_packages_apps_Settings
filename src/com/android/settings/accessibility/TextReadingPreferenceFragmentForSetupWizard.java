@@ -30,6 +30,7 @@ import com.android.settingslib.Utils;
 
 import com.google.android.setupdesign.GlifPreferenceLayout;
 
+
 /**
  * A {@link androidx.preference.PreferenceFragmentCompat} that displays the settings page related
  * to the text and reading option in the SetupWizard.

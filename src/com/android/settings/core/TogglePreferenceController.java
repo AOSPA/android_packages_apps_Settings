@@ -23,6 +23,8 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.SliceData;
 import com.android.settings.widget.TwoStateButtonPreference;
 import com.android.settingslib.PrimarySwitchPreference;
+import com.android.settingslib.core.instrumentation.SettingsJankMonitor;
+import com.android.settingslib.widget.MainSwitchPreference;
 
 /**
  * Abstract class that consolidates logic for updating toggle controllers.
@@ -52,6 +54,19 @@ public abstract class TogglePreferenceController extends BasePreferenceControlle
     public abstract boolean setChecked(boolean isChecked);
 
     @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        Preference preference = screen.findPreference(getPreferenceKey());
+        if (preference instanceof MainSwitchPreference) {
+            ((MainSwitchPreference) preference).addOnSwitchChangeListener((switchView, isChecked) ->
+                    SettingsJankMonitor.detectToggleJank(getPreferenceKey(), switchView));
+        }
+        if (preference != null) {
+            preference.setOnPreferenceChangeListener(this);
+        }
+    }
+
+    @Override
     public void updateState(Preference preference) {
         if (preference instanceof TwoStatePreference) {
             ((TwoStatePreference) preference).setChecked(isChecked());
@@ -61,15 +76,6 @@ public abstract class TogglePreferenceController extends BasePreferenceControlle
             ((TwoStateButtonPreference) preference).setChecked(isChecked());
         } else {
             refreshSummary(preference);
-        }
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        Preference preference = screen.findPreference(getPreferenceKey());
-        if (preference != null) {
-            preference.setOnPreferenceChangeListener(this);
         }
     }
 

@@ -34,7 +34,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.ListPreference;
@@ -43,7 +42,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.SubscriptionsChangeListener;
 
@@ -98,10 +96,6 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         mSelectableSubs = new ArrayList<SubscriptionInfo>();
     }
 
-    public void init(Lifecycle lifecycle) {
-        lifecycle.addObserver(this);
-    }
-
     /** @return SubscriptionInfo for the default subscription for the service, or null if there
      * isn't one. */
     protected abstract SubscriptionInfo getDefaultSubscriptionInfo();
@@ -147,6 +141,16 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
         updateEntries();
+    }
+
+    @Override
+    protected void refreshSummary(Preference preference) {
+        // Currently, cannot use ListPreference.setSummary() when the summary contains user
+        // generated string, because ListPreference.getSummary() is using String.format() to format
+        // the summary when the summary is set by ListPreference.setSummary().
+        if (preference != null) {
+            preference.setSummaryProvider(pref -> getSummary());
+        }
     }
 
     @Override
@@ -198,8 +202,8 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
 
         if (mSelectableSubs.size() == 1) {
             mPreference.setEnabled(false);
-            mPreference.setSummary(SubscriptionUtil.getUniqueSubscriptionDisplayName(
-                    mSelectableSubs.get(0), mContext));
+            mPreference.setSummaryProvider(pref ->
+                    SubscriptionUtil.getUniqueSubscriptionDisplayName(mSelectableSubs.get(0), mContext));
             return;
         }
 

@@ -34,6 +34,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.content.res.Resources.Theme;
 import android.graphics.drawable.Icon;
@@ -69,6 +70,7 @@ import com.android.settings.homepage.DeepLinkHomepageActivityInternal;
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.password.PasswordUtils;
 import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.core.instrumentation.Instrumentable;
@@ -150,6 +152,9 @@ public class SettingsActivity extends SettingsBaseActivity
      * Set true when the deep link intent is from a slice
      */
     public static final String EXTRA_IS_FROM_SLICE = "is_from_slice";
+
+    public static final String EXTRA_USER_HANDLE = "user_handle";
+    public static final String EXTRA_INITIAL_CALLING_PACKAGE = "initial_calling_package";
 
     /**
      * Personal or Work profile tab of {@link ProfileSelectFragment}
@@ -261,7 +266,10 @@ public class SettingsActivity extends SettingsBaseActivity
 
         super.onCreate(savedState);
         Log.d(LOG_TAG, "Starting onCreate");
+        createUiFromIntent(savedState, intent);
+    }
 
+    protected void createUiFromIntent(Bundle savedState, Intent intent) {
         long startTime = System.currentTimeMillis();
 
         final FeatureFactory factory = FeatureFactory.getFactory(this);
@@ -414,6 +422,8 @@ public class SettingsActivity extends SettingsBaseActivity
     }
 
     private boolean tryStartTwoPaneDeepLink(Intent intent) {
+        intent.putExtra(EXTRA_INITIAL_CALLING_PACKAGE, PasswordUtils.getCallingAppPackageName(
+                getActivityToken()));
         final Intent trampolineIntent;
         if (intent.getBooleanExtra(EXTRA_IS_FROM_SLICE, false)) {
             // Get menu key for slice deep link case.
@@ -429,7 +439,15 @@ public class SettingsActivity extends SettingsBaseActivity
         }
 
         try {
-            startActivity(trampolineIntent);
+            final UserManager um = getSystemService(UserManager.class);
+            final UserInfo userInfo = um.getUserInfo(getUser().getIdentifier());
+            if (userInfo.isManagedProfile()) {
+                trampolineIntent.setClass(this, DeepLinkHomepageActivityInternal.class)
+                        .putExtra(EXTRA_USER_HANDLE, getUser());
+                startActivityAsUser(trampolineIntent, um.getPrimaryUser().getUserHandle());
+            } else {
+                startActivity(trampolineIntent);
+            }
         } catch (ActivityNotFoundException e) {
             Log.e(LOG_TAG, "Deep link homepage is not available to show 2-pane UI");
             return false;
@@ -454,6 +472,15 @@ public class SettingsActivity extends SettingsBaseActivity
         // Settings app starts SettingsActivity or SubSetting by itself.
         if (intent.getAction() == null) {
             // Other apps should send deep link intent which matches intent filter of the Activity.
+            return false;
+        }
+
+        // If the activity's launch mode is "singleInstance", it can't be embedded in Settings since
+        // it will be created in a new task.
+        ActivityInfo info = intent.resolveActivityInfo(getPackageManager(),
+                PackageManager.MATCH_DEFAULT_ONLY);
+        if (info.launchMode == ActivityInfo.LAUNCH_SINGLE_INSTANCE) {
+            Log.w(LOG_TAG, "launchMode: singleInstance");
             return false;
         }
 
@@ -482,6 +509,17 @@ public class SettingsActivity extends SettingsBaseActivity
         }
 
         return true;
+    }
+
+    /** Returns the initial calling package name that launches the activity. */
+    public String getInitialCallingPackage() {
+        String callingPackage = PasswordUtils.getCallingAppPackageName(getActivityToken());
+        if (!TextUtils.equals(callingPackage, getPackageName())) {
+            return callingPackage;
+        }
+
+        String initialCallingPackage = getIntent().getStringExtra(EXTRA_INITIAL_CALLING_PACKAGE);
+        return TextUtils.isEmpty(initialCallingPackage) ? callingPackage : initialCallingPackage;
     }
 
     /** Returns the initial fragment name that the activity will launch. */

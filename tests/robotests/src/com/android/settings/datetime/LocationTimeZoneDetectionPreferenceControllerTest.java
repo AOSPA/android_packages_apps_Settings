@@ -24,7 +24,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.time.Capabilities;
@@ -99,7 +99,7 @@ public class LocationTimeZoneDetectionPreferenceControllerTest {
         mController.setChecked(true);
 
         // Verify the TimeManager was not called.
-        verifyZeroInteractions(mTimeManager);
+        verifyNoInteractions(mTimeManager);
     }
 
     @Test
@@ -150,7 +150,8 @@ public class LocationTimeZoneDetectionPreferenceControllerTest {
                 new TimeZoneCapabilitiesAndConfig(capabilities, configuration);
 
         when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
-        assertThat(mController.getSummary().toString()).isEmpty();
+        assertThat(mController.getSummary()).isEqualTo(
+                mContext.getString(R.string.location_time_zone_detection_auto_is_on));
     }
 
     @Test
