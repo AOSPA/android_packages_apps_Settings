@@ -277,7 +277,9 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
         mFilteredWifiEntries.clear();
         mFilteredWifiEntries.addAll(wifiEntries.stream().filter(entry -> {
             for (ScanResult matchedScanResult : mMatchedScanResults) {
-                if (TextUtils.equals(entry.getSsid(), matchedScanResult.SSID)
+                String matchSsid = WifiEntry.isGbkSsidSupported() ?
+                    matchedScanResult.getWifiSsid().toString() : matchedScanResult.SSID;
+                if (TextUtils.equals(entry.getSsid(), matchSsid)
                         && entry.getSecurity() == getWifiEntrySecurity(matchedScanResult)) {
                     return true;
                 }
