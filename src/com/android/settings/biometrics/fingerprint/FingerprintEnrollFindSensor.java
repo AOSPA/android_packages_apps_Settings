@@ -58,7 +58,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     private FingerprintEnrollSidecar mSidecar;
     private boolean mNextClicked;
     private boolean mCanAssumeUdfps;
-    private boolean mCanAssumeSidefps;
+    private boolean mCanAssumeSfps;
 
     private OrientationEventListener mOrientationEventListener;
     private int mPreviousRotation = 0;
@@ -71,7 +71,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         final List<FingerprintSensorPropertiesInternal> props =
                 fingerprintManager.getSensorPropertiesInternal();
         mCanAssumeUdfps = props != null && props.size() == 1 && props.get(0).isAnyUdfpsType();
-        mCanAssumeSidefps = props != null && props.size() == 1 && props.get(0).isAnySidefpsType();
+        mCanAssumeSfps = props != null && props.size() == 1 && props.get(0).isAnySidefpsType();
         setContentView(getContentView());
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
         mFooterBarMixin.setSecondaryButton(
@@ -102,10 +102,9 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
             if (am.isEnabled()) {
                 lottieAnimationView.setAnimation(R.raw.udfps_edu_a11y_lottie);
             }
-
-        } else if (mCanAssumeSidefps) {
-            setHeaderText(R.string.security_settings_fingerprint_enroll_find_sensor_title);
-            setDescriptionText(R.string.security_settings_fingerprint_enroll_find_sensor_message);
+        } else if (mCanAssumeSfps) {
+            setHeaderText(R.string.security_settings_sfps_enroll_find_sensor_title);
+            setDescriptionText(R.string.security_settings_sfps_enroll_find_sensor_message);
             final LottieAnimationView lottieAnimationView = findViewById(R.id.illustration_lottie);
             final LottieAnimationView lottieAnimationViewPortrait =
                     findViewById(R.id.illustration_lottie_portrait);
@@ -134,6 +133,9 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
             setHeaderText(R.string.security_settings_fingerprint_enroll_find_sensor_title);
             setDescriptionText(R.string.security_settings_fingerprint_enroll_find_sensor_message);
         }
+        if (savedInstanceState != null) {
+            mNextClicked = savedInstanceState.getBoolean(SAVED_STATE_IS_NEXT_CLICKED, mNextClicked);
+        }
 
         // This is an entry point for SetNewPasswordController, e.g.
         // adb shell am start -a android.app.action.SET_NEW_PASSWORD
@@ -148,11 +150,19 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
                 // it passed in.
                 getIntent().putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
 
-                startLookingForFingerprint();
+                // Do not start looking for fingerprint if this activity is re-created because it is
+                // waiting for activity result from enrolling activity.
+                if (!mNextClicked) {
+                    startLookingForFingerprint();
+                }
             });
         } else if (mToken != null) {
-            // HAT passed in from somewhere else, such as FingerprintEnrollIntroduction
-            startLookingForFingerprint();
+            // Do not start looking for fingerprint if this activity is re-created because it is
+            // waiting for activity result from enrolling activity.
+            if (!mNextClicked) {
+                // HAT passed in from somewhere else, such as FingerprintEnrollIntroduction
+                startLookingForFingerprint();
+            }
         } else {
             // There's something wrong with the enrollment flow, this should never happen.
             throw new IllegalStateException("HAT and GkPwHandle both missing...");
@@ -173,9 +183,6 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
                 mAnimation = (FingerprintFindSensorAnimation) animationView;
             }
         }
-        if (savedInstanceState != null) {
-            mNextClicked = savedInstanceState.getBoolean(SAVED_STATE_IS_NEXT_CLICKED, mNextClicked);
-        }
     }
 
     @Override
@@ -193,7 +200,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     protected int getContentView() {
         if (mCanAssumeUdfps) {
             return R.layout.udfps_enroll_find_sensor_layout;
-        } else if (mCanAssumeSidefps) {
+        } else if (mCanAssumeSfps) {
             return R.layout.sfps_enroll_find_sensor_layout;
         }
         return R.layout.fingerprint_enroll_find_sensor;
@@ -297,6 +304,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
                     return;
                 }
             }
+            mSidecar.setListener(null);
             getSupportFragmentManager().beginTransaction().remove(mSidecar).
                     commitAllowingStateLoss();
             mSidecar = null;
@@ -365,7 +373,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     }
 
     private void listenOrientationEvent() {
-        if (!mCanAssumeSidefps) {
+        if (!mCanAssumeSfps) {
             // Do nothing if the device doesn't support SideFPS.
             return;
         }
@@ -384,7 +392,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     }
 
     private void stopListenOrientationEvent() {
-        if (!mCanAssumeSidefps) {
+        if (!mCanAssumeSfps) {
             // Do nothing if the device doesn't support SideFPS.
             return;
         }

@@ -40,8 +40,6 @@ public class BluetoothCodecDialogPreferenceController extends
     private static final String KEY = "bluetooth_audio_codec_settings";
     private static final String TAG = "BtCodecCtr";
 
-    private static final int SOURCE_CODEC_TYPE_OPUS = 6; // TODO remove in U
-
     private final Callback mCallback;
 
     public BluetoothCodecDialogPreferenceController(Context context, Lifecycle lifecycle,
@@ -125,7 +123,7 @@ public class BluetoothCodecDialogPreferenceController extends
                 codecPriorityValue = BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST;
                 break;
             case 7:
-                codecTypeValue = SOURCE_CODEC_TYPE_OPUS; // TODO update in U
+                codecTypeValue = BluetoothCodecConfig.SOURCE_CODEC_TYPE_OPUS;
                 codecPriorityValue = BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST;
                 break;
             case 8:
@@ -198,6 +196,8 @@ public class BluetoothCodecDialogPreferenceController extends
             case BluetoothCodecConfig.SOURCE_CODEC_TYPE_LDAC:
                 index = 5;
                 break;
+            case BluetoothCodecConfig.SOURCE_CODEC_TYPE_OPUS:
+                index = 7;
             // BUG b/245994340
             case BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX_ADAPTIVE:
                 index = 8;
