@@ -21,7 +21,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceViewHolder;
 
-import com.android.settingslib.wifi.WifiEntryPreference;
 import com.android.wifitrackerlib.WifiEntry;
 
 /**
