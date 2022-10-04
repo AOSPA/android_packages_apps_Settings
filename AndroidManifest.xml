@@ -1346,7 +1346,7 @@
 
         <activity
                 android:name="Settings$DarkThemeSettingsActivity"
-                android:label="@string/dark_ui_auto_mode_title"
+                android:label="@string/dark_ui_mode"
                 android:exported="true"
                 android:enabled="true">
             <intent-filter android:priority="32">
@@ -2585,39 +2585,31 @@
         <activity android:name=".deviceinfo.StorageWizardInit"
                 android:theme="@style/GlifTheme.Light"
                 android:exported="true"
-                android:configChanges="keyboardHidden|orientation|screenSize"
                 android:permission="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
         <activity android:name=".deviceinfo.StorageWizardFormatProgress"
                 android:theme="@style/GlifTheme.Light"
-                android:exported="false"
-                android:configChanges="keyboardHidden|orientation|screenSize"/>
+                android:exported="false"/>
         <activity android:name=".deviceinfo.StorageWizardFormatSlow"
                 android:theme="@style/GlifTheme.Light"
-                android:exported="false"
-                android:configChanges="keyboardHidden|orientation|screenSize"/>
+                android:exported="false"/>
         <activity android:name=".deviceinfo.StorageWizardMigrateConfirm"
                 android:theme="@style/GlifTheme.Light"
-                android:exported="false"
-                android:configChanges="keyboardHidden|orientation|screenSize"/>
+                android:exported="false"/>
         <activity android:name=".deviceinfo.StorageWizardMigrateProgress"
                 android:theme="@style/GlifTheme.Light"
                 android:exported="true"
-                android:configChanges="keyboardHidden|orientation|screenSize"
                 android:permission="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
         <activity android:name=".deviceinfo.StorageWizardReady"
                 android:theme="@style/GlifTheme.Light"
                 android:exported="true"
-                android:configChanges="keyboardHidden|orientation|screenSize"
                 android:permission="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
         <activity android:name=".deviceinfo.StorageWizardMoveConfirm"
                 android:theme="@style/GlifTheme.Light"
-                android:exported="false"
-                android:configChanges="keyboardHidden|orientation|screenSize"/>
+                android:exported="false"/>
         <activity android:name=".deviceinfo.StorageWizardMoveProgress"
                 android:theme="@style/GlifTheme.Light"
                 android:exported="true"
-                android:configChanges="keyboardHidden|orientation|screenSize"
                 android:permission="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
         <!-- Exported for SystemUI to trigger -->
@@ -2940,15 +2932,6 @@
             <intent-filter android:priority="1">
                 <action android:name="android.appwidget.action.APPWIDGET_BIND" />
                 <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name="UsageStatsActivity"
-                  android:exported="true"
-                  android:label="@string/usage_stats_label">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
             </intent-filter>
         </activity>
 
@@ -4221,16 +4204,26 @@
                   android:exported="true"
                   android:label="@string/connected_device_connections_title">
             <intent-filter android:priority="1">
-                <action android:name="android.settings.NFC_SETTINGS" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter android:priority="1">
                 <action android:name="com.android.settings.ADVANCED_CONNECTED_DEVICE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_connected_devices"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
+        <activity android:name="Settings$NfcSettingsActivity"
+                  android:exported="true"
+                  android:label="@string/nfc_quick_toggle_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.NFC_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.connecteddevice.NfcAndPaymentFragment" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                        android:value="@string/menu_key_connected_devices"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -4634,9 +4627,35 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".spa.SpaActivity" android:exported="false"/>
+        <activity android:name=".spa.SpaBridgeActivity" android:exported="false"/>
+
+        <activity-alias android:name="UsageStatsActivity"
+                        android:exported="true"
+                        android:label="@string/testing_usage_stats"
+                        android:targetActivity=".spa.SpaBridgeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.spa.DESTINATION"
+                       android:value="UsageStats"/>
+        </activity-alias>
+
         <activity
-            android:name="com.android.settings.spa.SpaActivity"
+            android:name="com.android.settings.spa.SpaDebugActivity"
             android:exported="false">
+        </activity>
+
+        <activity
+            android:name="com.android.settings.applications.mobilebundledapps.MobileBundledAppDetailsActivity"
+            android:label="@string/mobile_bundled_apps_details_title"
+            android:exported="true"
+            android:icon="@drawable/ic_homepage_connected_device">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.TRANSPARENCY_METADATA" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
         <!-- This is the longest AndroidManifest.xml ever. -->

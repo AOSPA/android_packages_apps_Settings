@@ -34,7 +34,11 @@ object SpecialAppAccessPageProvider : SettingsPageProvider {
 
     @Composable
     override fun Page(arguments: Bundle?) {
-        SpecialAppAccessPage()
+        RegularScaffold(title = stringResource(R.string.special_access)) {
+            for (entry in buildEntry(arguments)) {
+                entry.UiLayout()
+            }
+        }
     }
 
     @Composable
@@ -46,21 +50,17 @@ object SpecialAppAccessPageProvider : SettingsPageProvider {
     }
 
     fun buildInjectEntry() =
-        SettingsEntryBuilder.createInject(SettingsPage.create(name)).setIsAllowSearch(false)
+        SettingsEntryBuilder.createInject(owner = SettingsPage.create(name)).setIsAllowSearch(false)
 
     override fun buildEntry(arguments: Bundle?): List<SettingsEntry> {
         val owner = SettingsPage.create(name, parameter, arguments)
         return listOf(
-            PictureInPictureListProvider.buildInjectEntry().setLink(fromPage = owner).build(),
-            InstallUnknownAppsListProvider.buildInjectEntry().setLink(fromPage = owner).build(),
-        )
-    }
-}
-
-@Composable
-private fun SpecialAppAccessPage() {
-    RegularScaffold(title = stringResource(R.string.special_access)) {
-        PictureInPictureListProvider.EntryItem()
-        InstallUnknownAppsListProvider.EntryItem()
+            AllFilesAccessAppListProvider,
+            DisplayOverOtherAppsAppListProvider,
+            MediaManagementAppsAppListProvider,
+            ModifySystemSettingsAppListProvider,
+            PictureInPictureListProvider,
+            InstallUnknownAppsListProvider,
+        ).map { it.buildAppListInjectEntry().setLink(fromPage = owner).build() }
     }
 }
