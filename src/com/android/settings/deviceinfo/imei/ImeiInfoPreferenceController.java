@@ -84,6 +84,7 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
         for (int simSlotNumber = 1; simSlotNumber < mTelephonyManager.getPhoneCount();
                 simSlotNumber++) {
             final Preference multiSimPreference = createNewPreference(screen.getContext());
+            multiSimPreference.setCopyingEnabled(true);
             multiSimPreference.setOrder(imeiPreferenceOrder + simSlotNumber);
             multiSimPreference.setKey(getPreferenceKey() + simSlotNumber);
             category.addPreference(multiSimPreference);
@@ -263,7 +264,7 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
             return mTelephonyManager.getCurrentPhoneTypeForSlot(slotIndex);
         }
         SubscriptionInfo subInfo = SubscriptionManager.from(mContext)
-            .getActiveSubscriptionInfoForSimSlotIndex(slotIndex);
+                .getActiveSubscriptionInfoForSimSlotIndex(slotIndex);
         return mTelephonyManager.getCurrentPhoneType(subInfo != null ? subInfo.getSubscriptionId()
                 : SubscriptionManager.DEFAULT_SUBSCRIPTION_ID);
     }

@@ -31,6 +31,7 @@ import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -123,6 +124,9 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         final TextView footerTitle2 = findViewById(R.id.footer_title_2);
         footerTitle1.setText(getFooterTitle1());
         footerTitle2.setText(getFooterTitle2());
+
+        final ScrollView scrollView = findViewById(R.id.sud_scroll_view);
+        scrollView.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
     }
 
     @Override
@@ -248,6 +252,11 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         return findViewById(R.id.error_text);
     }
 
+    private boolean isFromSetupWizardSuggestAction(@Nullable Intent intent) {
+        return intent != null && intent.getBooleanExtra(
+                WizardManagerHelper.EXTRA_IS_SUW_SUGGESTED_ACTION_FLOW, false);
+    }
+
     @Override
     protected int checkMaxEnrolled() {
         final boolean isSetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
@@ -255,6 +264,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
                 WizardManagerHelper.isDeferredSetupWizard(getIntent());
         final boolean isPortalSetupWizard =
                 WizardManagerHelper.isPortalSetupWizard(getIntent());
+        final boolean isFromSetupWizardSuggestAction = isFromSetupWizardSuggestAction(getIntent());
         if (mFingerprintManager != null) {
             final List<FingerprintSensorPropertiesInternal> props =
                     mFingerprintManager.getSensorPropertiesInternal();
@@ -266,7 +276,8 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
                     getApplicationContext()
                             .getResources()
                             .getInteger(R.integer.suw_max_fingerprints_enrollable);
-            if (isSetupWizard && !isDeferredSetupWizard && !isPortalSetupWizard) {
+            if (isSetupWizard && !isDeferredSetupWizard && !isPortalSetupWizard
+                    && !isFromSetupWizardSuggestAction) {
                 if (numEnrolledFingerprints >= maxFingerprintsEnrollableIfSUW) {
                     return R.string.fingerprint_intro_error_max;
                 } else {
