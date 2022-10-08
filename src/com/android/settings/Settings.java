@@ -688,10 +688,6 @@ public class Settings extends SettingsActivity {
         }
     }
     public static class SystemDashboardActivity extends SettingsActivity {}
-// QTI_BEGIN: 2018-06-25: Linux/QDMA: Adding QtiFeedback menu settings
-    public static class SupportDashboardActivity extends SettingsActivity {}
-    public static class SMQQtiFeedbackActivity extends SettingsActivity { /* empty */ }
-// QTI_END: 2018-06-25: Linux/QDMA: Adding QtiFeedback menu settings
     public static class ResetDashboardActivity extends CatalystSettingsActivity {
         public ResetDashboardActivity() {
             super(ResetDashboardScreen.KEY, ResetDashboardFragment.class);
