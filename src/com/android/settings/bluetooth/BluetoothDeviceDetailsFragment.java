@@ -65,6 +65,8 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     private static final String BLUETOOTH_ADV_AUDIO_MASK_PROP
                                                   = "persist.vendor.service.bt.adv_audio_mask";
     private static final String BLUETOOTH_BROADCAST_UI_PROP = "persist.bluetooth.broadcast_ui";
+    private static final String BLUETOOTH_BROADCAST_PTS_PROP
+                                                  = "persist.vendor.service.bt.broadcast_pts";
     private static final int BA_MASK = 0x02;
     private static boolean mBAEnabled = false;
     private static boolean mBAPropertyChecked = false;
@@ -98,8 +100,11 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
 
     public BluetoothDeviceDetailsFragment() {
         super(DISALLOW_CONFIG_BLUETOOTH);
-        if (BluetoothProperties.isProfileBapBroadcastSourceEnabled().orElse(false) ||
-            BluetoothProperties.isProfileBapBroadcastAssistEnabled().orElse(false)) {
+        boolean broadcastPtsEnabled =
+                SystemProperties.getBoolean(BLUETOOTH_BROADCAST_PTS_PROP, false);
+        if ((BluetoothProperties.isProfileBapBroadcastSourceEnabled().orElse(false) ||
+                BluetoothProperties.isProfileBapBroadcastAssistEnabled().orElse(false)) &&
+                !broadcastPtsEnabled) {
             SystemProperties.set(BLUETOOTH_BROADCAST_UI_PROP, "false");
         } else {
             Log.d(TAG, "Use legacy broadcast if available");
