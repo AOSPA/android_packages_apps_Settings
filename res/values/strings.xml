@@ -12,6 +12,11 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
+
+     Changes from Qualcomm Innovation Center are provided under the following license:
+
+     Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+     SPDX-License-Identifier: BSD-3-Clause-Clear
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Strings for Dialog yes button -->
@@ -1705,8 +1710,6 @@
     <string name="wifi_display_settings_title">Cast</string>
     <!-- Wifi Display settings. The keywords of the setting. [CHAR LIMIT=NONE] -->
     <string name="keywords_wifi_display_settings">mirror</string>
-    <!-- Checkbox title for enabling particual wifi as shared -->
-    <string name="share_this_wifi">Extend Wi-Fi coverage</string>
     <!-- Wifi Display settings. The title of a menu item to enable wireless display [CHAR LIMIT=40] -->
     <string name="wifi_display_enable_menu_item">Enable wireless display</string>
     <!-- Wifi Display settings. Text that appears when scanning for devices is finished and no nearby device was found [CHAR LIMIT=40]-->
@@ -1893,6 +1896,8 @@
     <string name="wifi_hidden_network">Hidden network</string>
     <!-- Label for the warning shown to users if they try to connect to a network as "hidden" -->
     <string name="wifi_hidden_network_warning">If your router is not broadcasting a network ID but you would like to connect to it in the future, you can set the network as hidden.\n\nThis may create a security risk because your phone will regularly broadcast its signal to find the network.\n\nSetting the network as hidden will not change your router settings.</string>
+    <!-- Lable for the hidden GBK Encoding of this network -->
+    <string name="wifi_hidden_gbk">GBK Encoding</string>
     <!-- Label for the signal strength of the connection -->
     <string name="wifi_signal">Signal strength</string>
     <!-- Label for the status of the connection -->
@@ -10773,8 +10778,6 @@
 
     <!-- Text for Network mode 5g recommended [CHAR LIMIT=NONE] -->
     <string name="network_5G_recommended">5G (recommended)</string>
-    <!-- Text for Network 5g lte[CHAR LIMIT=NONE] -->
-    <string name="network_5G_lte" translatable="false">5G</string>
     <!-- Text for Network lte [CHAR LIMIT=NONE] -->
     <string name="network_lte_pure" translatable="false">LTE</string>
     <!-- Text for Network 4g [CHAR LIMIT=NONE] -->
@@ -10802,8 +10805,8 @@
     <!-- Text for Network 2g only [CHAR LIMIT=NONE] -->
     <string name="network_2G_only" translatable="false">2G only</string>
 
-    <!-- Available networks screen, name of switch button for whether to select network automatically [CHAR LIMIT=NONE] -->
-    <string name="select_automatically">Automatically select network</string>
+    <!-- Available networks screen, name of switch button to select SNPN search type [CHAR LIMIT=NONE] -->
+    <string name="enable_snpn">Enable SNPN</string>
 
     <!-- A menu item in "Mobile network settings" that allows the user to update the phone
      with mobile operator specific settings. [CHAR LIMIT=25] -->
@@ -10849,6 +10852,10 @@
     that the user will be asked which mobile network subscription to use every time they place a
     call or send an SMS, instead of defaulting to one particular subscription. [CHAR LIMIT=40]-->
     <string name="calls_and_sms_ask_every_time">Ask every time</string>
+    <!-- Mobile network settings screen, summary of item showing the name of the default
+         subscription that will be used for data, when Smart DDS feature is turned on. This only
+         appears in multi-SIM mode. [CHAR LIMIT=NONE] -->
+    <string name="dds_preference_smart_dds_switch_is_on">Smart DDS switch is on</string>
 
     <!-- Summary of the 'Mobile network' item on the Network & internet page when there is no mobile
          service setup yet (eg no SIM card inserted and no eSIM configured). Tapping it leads to a
@@ -10966,6 +10973,10 @@
     <string name="roaming_alert_title">Allow data roaming?</string>
     <!-- Mobile network settings screen, message asking the user to check their pricing with their Carrier, when enabling Data roaming. [CHAR LIMIT=NONE] -->
     <string name="roaming_check_price_warning">Check with your network provider for pricing.</string>
+    <!-- Mobile network settings screen, title of dialog box that appears when user tries to disable romaing while there is an ongoing C_IWLAN call [CHAR LIMIT=120] -->
+    <string name="roaming_disable_title">Disable roaming?</string>
+    <!-- Mobile network settings screen, body of dialog box that appears when user tries to disable romaing while there is an ongoing C_IWLAN call [CHAR LIMIT=120] -->
+    <string name="roaming_disable_dialog_ciwlan_call">Disabling roaming may cause ongoing call disconnect.</string>
 
     <!-- Title for mobile data preference, to display the mobile data usage for each app. [CHAR LIMIT=NONE]-->
     <string name="mobile_data_usage_title">App data usage</string>
@@ -11262,6 +11273,9 @@
     <!-- Backup calling summary.  [CHAR LIMIT=100] -->
     <string name="backup_calling_setting_summary">If <xliff:g id="backup_calling_operator_text" example="Google Fi">%1$s</xliff:g> is unavailable or roaming, use your mobile data SIM for <xliff:g id="backup_calling_carrier_text" example="Google Fi">%1$s</xliff:g> calls.</string>
 
+    <!-- Body of dialog shown to request confirmation that C_IWLAN disabling might cause call drop while IMS is registered on C_IWLAN and device is in a call [CHAR LIMIT=NONE] -->
+    <string name="backup_calling_disable_dialog_ciwlan_call">Disabling Voice Over Cellular Internet may cause ongoing call disconnect.</string>
+
     <!-- List of synonyms for the cross SIM calling titles, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_backup_calling">backup calling</string>
 
@@ -11543,6 +11557,8 @@
     <string name="mobile_data_disable_message">You won\’t have access to data or the internet through <xliff:g id="carrier" example="T-Mobile">%s</xliff:g>. Internet will only be available via Wi\u2011Fi.</string>
     <!-- Text used to refer to the user's current carrier in mobile_data_disable_message if the users's mobile network carrier name is not available [CHAR LIMIT=NONE] -->
     <string name="mobile_data_disable_message_default_carrier">your carrier</string>
+    <!-- Body of dialog shown to request confirmation that mobile data disabling might cause call drop while IMS is registered on C_IWLAN and device is in a call [CHAR LIMIT=NONE] -->
+    <string name="mobile_data_disable_dialog_ciwlan_call">Disabling mobile data may cause ongoing call disconnect.</string>
     <!-- Summary for enterprise restriction not allow to use [CHAR LIMIT=NONE] -->
     <string name="not_allowed_by_ent">Not allowed by your organization</string>
 

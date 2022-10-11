@@ -198,14 +198,15 @@ public class WifiConfigController2 implements TextWatcher,
     private Spinner mProxySettingsSpinner;
     private Spinner mMeteredSettingsSpinner;
     private Spinner mHiddenSettingsSpinner;
+    private Spinner mHiddenGbkSpinner;
     private Spinner mPrivacySettingsSpinner;
     private TextView mHiddenWarningView;
+    private TextView mHiddenGbkView;
     private TextView mProxyHostView;
     private TextView mProxyPortView;
     private TextView mProxyExclusionListView;
     private TextView mProxyPacView;
     private CheckBox mSharedCheckBox;
-    private CheckBox mShareThisWifiCheckBox;
 
     private IpAssignment mIpAssignment = IpAssignment.UNASSIGNED;
     private ProxySettings mProxySettings = ProxySettings.UNASSIGNED;
@@ -297,20 +298,27 @@ public class WifiConfigController2 implements TextWatcher,
                 mHiddenSettingsSpinner.getSelectedItemPosition() == NOT_HIDDEN_NETWORK
                         ? View.GONE
                         : View.VISIBLE);
+        mHiddenGbkView = mView.findViewById(R.id.hidden_gbk_title);
+        mHiddenGbkSpinner = mView.findViewById(R.id.hidden_gbk_settings);
+        if (WifiEntry.isGbkSsidSupported()) {
+            mHiddenGbkView.setVisibility(
+                mHiddenSettingsSpinner.getSelectedItemPosition() == NOT_HIDDEN_NETWORK
+                        ? View.GONE
+                        : View.VISIBLE);
+            mHiddenGbkSpinner.setVisibility(
+                mHiddenSettingsSpinner.getSelectedItemPosition() == NOT_HIDDEN_NETWORK
+                        ? View.GONE
+                        : View.VISIBLE);
+        } else {
+            mHiddenGbkView.setVisibility(View.GONE);
+            mHiddenGbkSpinner.setVisibility(View.GONE);
+        }
         mSecurityInPosition = new Integer[WifiEntry.NUM_SECURITY_TYPES];
-        mShareThisWifiCheckBox = (CheckBox) mView.findViewById(R.id.share_this_wifi);
 
         if (mWifiEntry == null) { // new network
             configureSecuritySpinner();
             mConfigUi.setSubmitButton(res.getString(R.string.wifi_save));
         } else {
-            if (!mWifiManager.isWifiCoverageExtendFeatureEnabled()
-                 || (mWifiEntry.getSecurity() != WifiEntry.SECURITY_NONE
-                      && mWifiEntry.getSecurity() != WifiEntry.SECURITY_PSK)) {
-                mShareThisWifiCheckBox.setChecked(false);
-                mShareThisWifiCheckBox.setVisibility(View.GONE);
-            }
-
             mConfigUi.setTitle(mWifiEntry.getTitle());
 
             ViewGroup group = (ViewGroup) mView.findViewById(R.id.info);
@@ -318,7 +326,6 @@ public class WifiConfigController2 implements TextWatcher,
             boolean showAdvancedFields = false;
             if (mWifiEntry.isSaved()) {
                 WifiConfiguration config = mWifiEntry.getWifiConfiguration();
-                mShareThisWifiCheckBox.setChecked(config.shareThisAp);
                 mMeteredSettingsSpinner.setSelection(config.meteredOverride);
                 mHiddenSettingsSpinner.setSelection(config.hiddenSSID
                         ? HIDDEN_NETWORK
@@ -602,17 +609,28 @@ public class WifiConfigController2 implements TextWatcher,
 
         if (mWifiEntry == null) {
             config.SSID = "\"" + mSsidView.getText().toString() + "\"";
-            // If the user adds a network manually, assume that it is hidden.
+            // If the user adds a network manually, if it is hidden, check encoding.
             config.hiddenSSID = mHiddenSettingsSpinner.getSelectedItemPosition() == HIDDEN_NETWORK;
+            if (config.hiddenSSID && WifiEntry.isGbkSsidSupported()) {
+                String bareSsid = mSsidView.getText().toString();
+                boolean useGbk = mHiddenGbkSpinner.getSelectedItemPosition() == 1;
+                boolean allAscii = bareSsid.chars().allMatch(c -> c < 128);
+                if (useGbk && !allAscii) {
+                    config.SSID = WifiUtils.quotedStrToGbkHex(config.SSID);
+                }
+            }
         } else if (!mWifiEntry.isSaved()) {
-            config.SSID = "\"" + mWifiEntry.getTitle() + "\"";
+            if (mWifiEntry.isGbkSsidSupported()) {
+                config.SSID = mWifiEntry.getSsid();
+            } else {
+                config.SSID = "\"" + mWifiEntry.getTitle() + "\"";
+            }
         } else {
             config.networkId = mWifiEntry.getWifiConfiguration().networkId;
             config.hiddenSSID = mWifiEntry.getWifiConfiguration().hiddenSSID;
         }
 
         config.shared = mSharedCheckBox.isChecked();
-        config.shareThisAp = mShareThisWifiCheckBox.isChecked();
 
         switch (mWifiEntrySecurity) {
             case WifiEntry.SECURITY_NONE:
@@ -1703,15 +1721,6 @@ public class WifiConfigController2 implements TextWatcher,
             // Convert menu position to actual Wi-Fi security type
             mWifiEntrySecurity = mSecurityInPosition[position];
 
-            if (!mWifiManager.isWifiCoverageExtendFeatureEnabled()
-                 || (mWifiEntrySecurity != WifiEntry.SECURITY_NONE
-                      && mWifiEntrySecurity != WifiEntry.SECURITY_PSK)) {
-                mShareThisWifiCheckBox.setChecked(false);
-                mShareThisWifiCheckBox.setVisibility(View.GONE);
-            } else {
-                mShareThisWifiCheckBox.setVisibility(View.VISIBLE);
-            }
-
             showSecurityFields(/* refreshEapMethods */ true, /* refreshCertificates */ true);
 
             if (WifiDppUtils.isSupportEnrolleeQrCodeScanner(mContext, mWifiEntrySecurity)) {
@@ -1739,6 +1748,12 @@ public class WifiConfigController2 implements TextWatcher,
         } else if (parent == mHiddenSettingsSpinner) {
             mHiddenWarningView.setVisibility(position == NOT_HIDDEN_NETWORK
                     ? View.GONE : View.VISIBLE);
+            if (WifiEntry.isGbkSsidSupported()) {
+                mHiddenGbkSpinner.setVisibility(position == NOT_HIDDEN_NETWORK
+                    ? View.GONE : View.VISIBLE);
+                mHiddenGbkView.setVisibility(position == NOT_HIDDEN_NETWORK
+                    ? View.GONE : View.VISIBLE);
+            }
         } else {
             showIpConfigFields();
         }

@@ -28,6 +28,7 @@ import android.os.Bundle;
 import android.os.SystemProperties;
 import android.os.UserManager;
 import android.provider.DeviceConfig;
+import android.sysprop.BluetoothProperties;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -101,6 +102,13 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
 
     public BluetoothDeviceDetailsFragment() {
         super(DISALLOW_CONFIG_BLUETOOTH);
+        if (BluetoothProperties.isProfileBapBroadcastSourceEnabled().orElse(false) ||
+            BluetoothProperties.isProfileBapBroadcastAssistEnabled().orElse(false)) {
+            SystemProperties.set(BLUETOOTH_BROADCAST_UI_PROP, "false");
+        } else {
+            Log.d(TAG, "Use legacy broadcast if available");
+            SystemProperties.set(BLUETOOTH_BROADCAST_UI_PROP, "true");
+        }
     }
 
     @VisibleForTesting

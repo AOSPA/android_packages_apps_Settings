@@ -12,6 +12,11 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
+
+     Changes from Qualcomm Innovation Center are provided under the following license:
+
+     Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+     SPDX-License-Identifier: BSD-3-Clause-Clear
 -->
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -226,9 +231,9 @@
             settings:controller="com.android.settings.network.telephony.NetworkPreferenceCategoryController">
 
             <SwitchPreference
-                android:key="auto_select_key"
-                android:title="@string/select_automatically"
-                settings:controller="com.android.settings.network.telephony.gsm.AutoSelectPreferenceController"/>
+                android:key="select_network_key"
+                android:title="@string/enable_snpn"
+                settings:controller="com.android.settings.network.telephony.gsm.SelectNetworkPreferenceController"/>
 
             <Preference
                 android:key="choose_network_key"

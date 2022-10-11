@@ -234,7 +234,7 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
                         TelephonyUtils.allowUsertoSetDDS(mContext)));
             } else {
                 mPreference.setEnabled(false);
-                mPreference.setSummary("Smart DDS switch is on");
+                mPreference.setSummaryProvider(pref -> getSmartDdsSummary());
             }
 
         } else {
@@ -253,6 +253,10 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         } else {
             mPreference.setValue(Integer.toString(SubscriptionManager.INVALID_SUBSCRIPTION_ID));
         }
+    }
+
+    private CharSequence getSmartDdsSummary() {
+        return mContext.getString(R.string.dds_preference_smart_dds_switch_is_on);
     }
 
     /**

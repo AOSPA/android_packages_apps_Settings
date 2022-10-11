@@ -14,6 +14,13 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center are provided under the following license:
+ *
+ * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.network.telephony;
 
 import android.app.Activity;
@@ -50,6 +57,7 @@ import com.android.settings.network.telephony.cdma.CdmaSubscriptionPreferenceCon
 import com.android.settings.network.telephony.cdma.CdmaSystemSelectPreferenceController;
 import com.android.settings.network.telephony.gsm.AutoSelectPreferenceController;
 import com.android.settings.network.telephony.gsm.OpenNetworkSelectPagePreferenceController;
+import com.android.settings.network.telephony.gsm.SelectNetworkPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -220,6 +228,12 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
                 use(AutoSelectPreferenceController.class)
                         .init(mSubId)
                         .addListener(openNetworkSelectPagePreferenceController);
+
+        final SelectNetworkPreferenceController selectNetworkPreferenceController =
+                use(SelectNetworkPreferenceController.class)
+                        .init(mSubId)
+                        .addListener(autoSelectPreferenceController);
+
         use(NetworkPreferenceCategoryController.class).init(mSubId)
                 .setChildren(Arrays.asList(autoSelectPreferenceController));
         mCdmaSystemSelectPreferenceController = use(CdmaSystemSelectPreferenceController.class);
@@ -230,7 +244,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
         final VideoCallingPreferenceController videoCallingPreferenceController =
                 use(VideoCallingPreferenceController.class).init(mSubId);
         final BackupCallingPreferenceController crossSimCallingPreferenceController =
-                use(BackupCallingPreferenceController.class).init(mSubId);
+                use(BackupCallingPreferenceController.class).init(getFragmentManager(), mSubId);
         use(Enabled5GPreferenceController.class).init(mSubId);
         use(CallingPreferenceCategoryController.class).setChildren(
                 Arrays.asList(wifiCallingPreferenceController, videoCallingPreferenceController,
