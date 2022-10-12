@@ -55,12 +55,12 @@ import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.HeadsetProfile;
 import com.android.settingslib.bluetooth.HearingAidProfile;
+import com.android.settingslib.bluetooth.LeAudioProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -77,7 +77,6 @@ import java.util.Collection;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Ignore
 @Config(shadows = {
         ShadowAudioManager.class,
         ShadowBluetoothUtils.class,
@@ -128,6 +127,7 @@ public class AudioOutputSwitchPreferenceControllerTest {
     private AudioSwitchPreferenceController mController;
     private List<BluetoothDevice> mProfileConnectedDevices;
     private List<BluetoothDevice> mHearingAidActiveDevices;
+    private List<BluetoothDevice> mLeAudioActiveDevices;
     private List<BluetoothDevice> mEmptyDevices;
     private ShadowPackageManager mPackageManager;
     private Collection<CachedBluetoothDevice> mCachedDevices;
@@ -149,6 +149,7 @@ public class AudioOutputSwitchPreferenceControllerTest {
         when(mLocalBluetoothProfileManager.getA2dpProfile()).thenReturn(mA2dpProfile);
         when(mLocalBluetoothProfileManager.getHearingAidProfile()).thenReturn(mHearingAidProfile);
         when(mLocalBluetoothProfileManager.getHeadsetProfile()).thenReturn(mHeadsetProfile);
+        when(mLocalBluetoothProfileManager.getLeAudioProfile()).thenReturn(mLeAudioProfile);
         mPackageManager = Shadow.extract(mContext.getPackageManager());
         mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, true);
 
@@ -174,6 +175,7 @@ public class AudioOutputSwitchPreferenceControllerTest {
         mPreference = new ListPreference(mContext);
         mProfileConnectedDevices = new ArrayList<>();
         mHearingAidActiveDevices = new ArrayList<>(2);
+        mLeAudioActiveDevices = new ArrayList<>();
         mEmptyDevices = new ArrayList<>(2);
 
         when(mScreen.getPreferenceManager()).thenReturn(mock(PreferenceManager.class));

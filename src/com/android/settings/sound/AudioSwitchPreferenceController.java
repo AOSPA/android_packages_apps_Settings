@@ -45,6 +45,7 @@ import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.HeadsetProfile;
 import com.android.settingslib.bluetooth.HearingAidProfile;
+import com.android.settingslib.bluetooth.LeAudioProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -292,6 +293,24 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
                 }
             }
         }
+        return null;
+    }
+
+    /**
+     * Find active LE Audio device
+     */
+    protected BluetoothDevice findActiveLeAudioDevice() {
+        final LeAudioProfile leAudioProfile = mProfileManager.getLeAudioProfile();
+
+        if (leAudioProfile != null) {
+            List<BluetoothDevice> activeDevices = leAudioProfile.getActiveDevices();
+            for (BluetoothDevice leAudioDevice : activeDevices) {
+                if (leAudioDevice != null) {
+                    return leAudioDevice;
+                }
+            }
+        }
+        Log.d(TAG, "There is no LE audio profile or no active LE audio device");
         return null;
     }
 
