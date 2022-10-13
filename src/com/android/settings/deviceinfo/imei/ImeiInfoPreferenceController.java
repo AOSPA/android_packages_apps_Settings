@@ -157,7 +157,7 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
 
     @Override
     public CharSequence getSummary() {
-        return getSummary(0);
+        return mContext.getString(R.string.device_info_protected_single_press);
     }
 
     private CharSequence getSummary(int simSlot) {
@@ -184,6 +184,7 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
         }
 
         ImeiInfoDialogFragment.show(mFragment, simSlot, preference.getTitle().toString());
+        preference.setSummary(getSummary(simSlot));
         return true;
     }
 
@@ -200,7 +201,7 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
 
     private void updatePreference(Preference preference, int simSlot) {
         preference.setTitle(getTitle(simSlot));
-        preference.setSummary(getSummary(simSlot));
+        preference.setSummary(getSummary());
     }
 
     private boolean isPrimaryImeiSlot(int slot) {

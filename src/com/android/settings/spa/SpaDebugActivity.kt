@@ -18,5 +18,4 @@ package com.android.settings.spa
 
 import com.android.settingslib.spa.framework.DebugActivity
 
-class SpaDebugActivity :
-    DebugActivity(SpaEnvironment.settingsEntryRepository, SpaActivity::class.java)
+class SpaDebugActivity : DebugActivity(SettingsSpaEnvironment)

@@ -16,6 +16,7 @@
 
 package com.android.settings.spa
 
+import com.android.settings.spa.app.AllAppListPageProvider
 import com.android.settings.spa.app.AppsMainPageProvider
 import com.android.settings.spa.app.appsettings.AppSettingsProvider
 import com.android.settings.spa.app.specialaccess.AlarmsAndRemindersAppListProvider
@@ -30,14 +31,13 @@ import com.android.settings.spa.development.UsageStatsPageProvider
 import com.android.settings.spa.home.HomePageProvider
 import com.android.settings.spa.notification.AppListNotificationsPageProvider
 import com.android.settings.spa.notification.NotificationMainPageProvider
-import com.android.settingslib.spa.framework.common.SettingsEntryRepository
 import com.android.settingslib.spa.framework.common.SettingsPage
 import com.android.settingslib.spa.framework.common.SettingsPageProviderRepository
+import com.android.settingslib.spa.framework.common.SpaEnvironment
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListTemplate
 
-object SpaEnvironment {
-    val settingsPageProviders: SettingsPageProviderRepository by
-    lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+object SettingsSpaEnvironment : SpaEnvironment() {
+    override val pageProviderRepository = lazy {
         val togglePermissionAppListTemplate = TogglePermissionAppListTemplate(
             allProviders = listOf(
                 AllFilesAccessAppListProvider,
@@ -53,6 +53,7 @@ object SpaEnvironment {
             allPageProviders = listOf(
                 HomePageProvider,
                 AppsMainPageProvider,
+                AllAppListPageProvider,
                 AppSettingsProvider,
                 SpecialAppAccessPageProvider,
                 NotificationMainPageProvider,
@@ -64,10 +65,8 @@ object SpaEnvironment {
             ),
         )
     }
-    val settingsEntryRepository: SettingsEntryRepository by
-    lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
-        SettingsEntryRepository(settingsPageProviders)
-    }
 
-    // TODO: add other environment setup here.
+    override val browseActivityClass = SpaActivity::class.java
+
+    override val entryProviderAuthorities = "com.android.settings.spa.provider"
 }

@@ -31,6 +31,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Animatable2;
@@ -63,6 +64,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.SetupWizardUtils;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.BiometricsEnrollEnrolling;
@@ -213,6 +215,13 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     }
 
     @Override
+    protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
+        final int newResid = SetupWizardUtils.getTheme(this, getIntent());
+        theme.applyStyle(R.style.SetupWizardPartnerResource, true);
+        super.onApplyThemeResource(theme, newResid, first);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -316,6 +325,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         mFastOutLinearInInterpolator = AnimationUtils.loadInterpolator(
                 this, android.R.interpolator.fast_out_linear_in);
         if (mProgressBar != null) {
+            mProgressBar.setProgressBackgroundTintMode(PorterDuff.Mode.SRC);
             mProgressBar.setOnTouchListener((v, event) -> {
                 if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
                     mIconTouchCount++;
@@ -757,11 +767,13 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     public void onEnrollmentProgressChange(int steps, int remaining) {
         updateProgress(true /* animate */);
         final int percent = (int) (((float) (steps - remaining) / (float) steps) * 100);
-        if (mCanAssumeSfps) {
-            if (mIsAccessibilityEnabled) {
-                CharSequence announcement = getString(
-                        R.string.security_settings_sfps_enroll_progress_a11y_message, percent);
-                announceEnrollmentProgress(announcement);
+        if (mCanAssumeSfps && mIsAccessibilityEnabled) {
+            CharSequence announcement = getString(
+                    R.string.security_settings_sfps_enroll_progress_a11y_message, percent);
+            announceEnrollmentProgress(announcement);
+            // mIllustrationLottie is only shown when current display density = default density,
+            // to prevent overlap with the settings header text.
+            if (mIllustrationLottie != null) {
                 mIllustrationLottie.setContentDescription(
                         getString(
                                 R.string.security_settings_sfps_animation_a11y_label,
@@ -827,7 +839,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
             // Show nothing for subtitle when getting an error message.
             setDescriptionText("");
             if (mCanAssumeSfps) {
-                applySfpsErrorDynamicColors(getApplicationContext(), mIllustrationLottie, true);
+                applySfpsErrorDynamicColors(getApplicationContext(), true);
             }
         } else {
             mErrorText.setText(error);
@@ -857,7 +869,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     private void clearError() {
         if (mCanAssumeSfps) {
-            applySfpsErrorDynamicColors(getApplicationContext(), mIllustrationLottie, false);
+            applySfpsErrorDynamicColors(getApplicationContext(), false);
         }
         if ((!(mCanAssumeUdfps || mCanAssumeSfps)) && mErrorText.getVisibility() == View.VISIBLE) {
             mErrorText.animate()
@@ -875,10 +887,11 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
      * Applies dynamic colors corresponding to showing or clearing errors on the progress bar
      * and finger lottie for SFPS
      */
-    private void applySfpsErrorDynamicColors(Context context, LottieAnimationView composition,
-            boolean isError) {
+    private void applySfpsErrorDynamicColors(Context context, boolean isError) {
         applyProgressBarDynamicColor(context, isError);
-        applyLottieDynamicColor(context, composition, isError);
+        if (mIllustrationLottie != null) {
+            applyLottieDynamicColor(context, isError);
+        }
     }
 
     private void applyProgressBarDynamicColor(Context context, boolean isError) {
@@ -889,24 +902,21 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
             ColorStateList fillColor = ColorStateList.valueOf(
                     isError ? error_color : progress_bar_fill_color);
             mProgressBar.setProgressTintList(fillColor);
-            mProgressBar.setProgressTintMode(PorterDuff.Mode.SRC_ATOP);
+            mProgressBar.setProgressTintMode(PorterDuff.Mode.SRC);
             mProgressBar.invalidate();
         }
     }
 
-    private void applyLottieDynamicColor(Context context, LottieAnimationView composition,
-            boolean isError) {
-        if (composition != null) {
-            int error_color = context.getColor(R.color.sfps_enrollment_fp_error_color);
-            int fp_captured_color = context.getColor(R.color.sfps_enrollment_fp_captured_color);
-            int color = isError ? error_color : fp_captured_color;
-            composition.addValueCallback(
-                    new KeyPath(".blue100", "**"),
-                    LottieProperty.COLOR_FILTER,
-                    frameInfo -> new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
-            );
-            composition.invalidate();
-        }
+    private void applyLottieDynamicColor(Context context, boolean isError) {
+        int error_color = context.getColor(R.color.sfps_enrollment_fp_error_color);
+        int fp_captured_color = context.getColor(R.color.sfps_enrollment_fp_captured_color);
+        int color = isError ? error_color : fp_captured_color;
+        mIllustrationLottie.addValueCallback(
+                new KeyPath(".blue100", "**"),
+                LottieProperty.COLOR_FILTER,
+                frameInfo -> new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
+        );
+        mIllustrationLottie.invalidate();
     }
 
     private void listenOrientationEvent() {
@@ -1008,8 +1018,10 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     }
 
     private void updateOrientation(int orientation) {
-        if (mCanAssumeSfps && mShouldShowLottie) {
-            mIllustrationLottie = findViewById(R.id.illustration_lottie);
+        if (mCanAssumeSfps) {
+            if (mShouldShowLottie) {
+                mIllustrationLottie = findViewById(R.id.illustration_lottie);
+            }
         } else {
             switch(orientation) {
                 case Configuration.ORIENTATION_LANDSCAPE: {
