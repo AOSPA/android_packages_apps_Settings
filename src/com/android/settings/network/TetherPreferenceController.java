@@ -76,6 +76,7 @@ public class TetherPreferenceController extends AbstractPreferenceController imp
                     if (currentProfile != null && adapter != null) {
                         adapter.closeProfileProxy(BluetoothProfile.PAN, currentProfile);
                     }
+                    updateSummary();
                 }
             };
 
@@ -225,7 +226,7 @@ public class TetherPreferenceController extends AbstractPreferenceController imp
         }
         if (!hotSpotOn && !tetherOn) {
             // Both off
-            mPreference.setSummary(R.string.off);
+            updateSummaryToOff();
         } else if (hotSpotOn && tetherOn) {
             // Both on
             mPreference.setSummary(R.string.tether_settings_summary_hotspot_on_tether_on);
@@ -241,7 +242,7 @@ public class TetherPreferenceController extends AbstractPreferenceController imp
             // Preference is not ready yet.
             return;
         }
-        mPreference.setSummary(R.string.off);
+        mPreference.setSummary(R.string.tether_preference_summary_off);
     }
 
     class SettingObserver extends ContentObserver {

@@ -482,7 +482,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.wifi.savedaccesspoints.SavedAccessPointsWifiSettings" />
+                android:value="com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiSettings2" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                 android:value="@string/menu_key_network"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -1305,7 +1305,7 @@
         <activity
             android:name="Settings$SmartAutoRotateSettingsActivity"
             android:label="@string/accelerometer_title"
-            android:icon="@drawable/ic_homepage_notification"
+            android:icon="@drawable/ic_screen_rotation_24dp"
             android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.AUTO_ROTATE_SETTINGS" />
@@ -4171,6 +4171,8 @@
             </intent-filter>
             <meta-data android:name="android.service.quicksettings.TOGGLEABLE_TILE"
                 android:value="true"/>
+            <meta-data android:name="com.android.settings.development.qstile.REQUIRES_SYSTEM_PROPERTY"
+                       android:value="persist.wm.debug.desktop_mode" />
         </service>
 
         <activity
@@ -4629,6 +4631,13 @@
 
         <activity android:name=".spa.SpaActivity" android:exported="false"/>
         <activity android:name=".spa.SpaBridgeActivity" android:exported="false"/>
+        <activity android:name=".spa.SpaDebugActivity" android:exported="false"/>
+        <provider
+            android:name=".spa.SpaEntryProvider"
+            android:authorities="com.android.settings.spa.provider"
+            android:enabled="true"
+            android:exported="false">
+        </provider>
 
         <activity-alias android:name="UsageStatsActivity"
                         android:exported="true"
@@ -4641,11 +4650,6 @@
             <meta-data android:name="com.android.settings.spa.DESTINATION"
                        android:value="UsageStats"/>
         </activity-alias>
-
-        <activity
-            android:name="com.android.settings.spa.SpaDebugActivity"
-            android:exported="false">
-        </activity>
 
         <activity
             android:name="com.android.settings.applications.mobilebundledapps.MobileBundledAppDetailsActivity"

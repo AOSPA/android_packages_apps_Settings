@@ -38,6 +38,8 @@
 
     <!-- Device Info screen. Used for a status item's value when the proper value is not known -->
     <string name="device_info_default">Unknown</string>
+    <!-- String for removal of sensitive info on about, depending on tap -->
+    <string name="device_info_protected_single_press">Tap to show info</string>
     <!-- [CHAR LIMIT=NONE] Device Info screen. Countdown for user taps to enable development settings -->
     <plurals name="show_dev_countdown">
         <item quantity="one">You are now <xliff:g id="step_count">%1$d</xliff:g> step away from being a developer.</item>
@@ -347,12 +349,6 @@
     <!-- Title for the locale picker activity. [CHAR LIMIT=30]-->
     <string name="language_picker_title">Languages</string>
 
-    <!-- Title for category of the locale picker . [CHAR LIMIT=50]-->
-    <string name="language_picker_category_title">Preferred language order</string>
-
-    <!-- Description for indication of current system default language. [CHAR LIMIT=50]-->
-    <string name="desc_current_default_language">System language</string>
-
     <!-- Menu item in the locale menu. Will remove the selected locales. [CHAR LIMIT=30] -->
     <string name="locale_remove_menu">Remove</string>
 
@@ -366,13 +362,13 @@
     <string name="locale_picker_category_title">Preferred Language</string>
 
     <!-- Title for the Apps' locale menu entry [CHAR LIMIT=50]-->
-    <string name="app_locales_picker_menu_title">App languages</string>
+    <string name="app_locales_picker_menu_title">App Languages</string>
 
     <!-- Summary for the app's locale picker activity. [CHAR LIMIT=50]-->
     <string name="app_locale_picker_summary">Set the language for each app</string>
 
     <!-- Title for the App's locale picker activity. [CHAR LIMIT=50]-->
-    <string name="app_locale_picker_title">App language</string>
+    <string name="app_locale_picker_title">App Language</string>
 
     <!-- Category for the suggested app's locales. [CHAR LIMIT=50]-->
     <string name="suggested_app_locales_title">Suggested languages</string>
@@ -395,18 +391,6 @@
     <!-- Description for introduction of the locale selection supported of app list [CHAR LIMIT=NONE]-->
     <string name="desc_app_locale_selection_supported">Only apps that support language selection are shown here.</string>
 
-    <!-- Description for the introduction to language picker activity. [CHAR LIMIT=NONE]-->
-    <string name="desc_introduction_of_language_picker">Your system, apps, and websites use the first supported language from your preferred languages.</string>
-
-    <!-- Description for the notice of language picker. [CHAR LIMIT=NONE]-->
-    <string name="desc_notice_of_language_picker">To select a language for each app, go to app language settings.</string>
-
-    <!-- Title for locale helper page [CHAR LIMIT=NONE] -->
-    <string name="desc_locale_helper_footer_general">Learn more about languages</string>
-
-    <!-- Link for Locale helper page. [CHAR LIMIT=NONE]-->
-    <string name="link_locale_picker_footer_learn_more" translatable="false">https://support.google.com/android?p=per_language_app_settings</string>
-
     <!-- The title of the confirmation dialog shown when the user selects one / several languages and tries to remove them [CHAR LIMIT=60] -->
     <plurals name="dlg_remove_locales_title">
         <item quantity="one">Remove selected language?</item>
@@ -422,7 +406,7 @@
     <string name="dlg_remove_locales_error_message">Keep at least one preferred language</string>
 
     <!-- This text shows in the language picker when the system is not translated into that languages [CHAR LIMIT=80] -->
-    <string name="locale_not_translated">Not available as system language</string>
+    <string name="locale_not_translated">May not be available in some apps</string>
 
     <!-- Label for an accessibility action that moves a language up in the ordered language list [CHAR LIMIT=20] -->
     <string name="action_drag_label_move_up">Move up</string>
@@ -1223,10 +1207,18 @@
     <string name="fingerprint_delete_title">Delete \'<xliff:g id="fingerprint_id" example="Fingerprint 2">%1$s</xliff:g>\'</string>
 
     <!-- Message shown in a dialog which asks the user to confirm when a single fingerprint gets deleted. [CHAR LIMIT=NONE]-->
-    <string name="fingerprint_v2_delete_message">This deletes the fingerprint images and model associated with \'<xliff:g id="fingerprint_id" example="Fingerprint 2">%1$s</xliff:g>\' that are stored on your device</string>
+    <string name="fingerprint_v2_delete_message" product="default">This deletes the fingerprint images and model associated with \'<xliff:g id="fingerprint_id" example="Fingerprint 2">%1$s</xliff:g>\' that are stored on your phone</string>
+    <!-- Message shown in a dialog which asks the user to confirm when a single fingerprint gets deleted. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_v2_delete_message" product="tablet">This deletes the fingerprint images and model associated with \'<xliff:g id="fingerprint_id" example="Fingerprint 2">%1$s</xliff:g>\' that are stored on your tablet</string>
+    <!-- Message shown in a dialog which asks the user to confirm when a single fingerprint gets deleted. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_v2_delete_message" product="device">This deletes the fingerprint images and model associated with \'<xliff:g id="fingerprint_id" example="Fingerprint 2">%1$s</xliff:g>\' that are stored on your device</string>
 
     <!-- Message shown in a dialog which asks the user to confirm when the last fingerprint gets deleted by him. [CHAR LIMIT=NONE]-->
-    <string name="fingerprint_last_delete_message">You won\'t be able to use your fingerprint to unlock your phone or verify it\'s you in apps.</string>
+    <string name="fingerprint_last_delete_message" product="default">You won\'t be able to use your fingerprint to unlock your phone or verify it\'s you in apps.</string>
+    <!-- Message shown in a dialog which asks the user to confirm when the last fingerprint gets deleted by him. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_last_delete_message" product="tablet">You won\'t be able to use your fingerprint to unlock your tablet or verify it\'s you in apps.</string>
+    <!-- Message shown in a dialog which asks the user to confirm when the last fingerprint gets deleted by him. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_last_delete_message" product="device">You won\'t be able to use your fingerprint to unlock your device or verify it\'s you in apps.</string>
     <string name="fingerprint_last_delete_message_profile_challenge">You won\'t be able to use your fingerprint to unlock your work profile, authorize purchases, or sign in to work apps.</string>
 
     <!-- Title of the preferences category for preference items to control encryption -->
@@ -3291,6 +3283,8 @@
 
     <!-- Tethering setting summary when hotspot and tethering are off [CHAR LIMIT=NONE]-->
     <string name="tether_settings_summary_off">Not sharing internet with other devices</string>
+    <!-- Tethering preference summary when hotspot and tethering are off [CHAR LIMIT=NONE]-->
+    <string name="tether_preference_summary_off">Off</string>
 
     <!-- Tethering interface options [CHAR LIMIT=NONE]-->
     <string name="tethering_interface_options">Tethering</string>
@@ -11888,6 +11882,10 @@
     Balance is the same meaning as having money in a bank account.
     Remaining apps are those apps that don't fit into predefined categories. [CHAR LIMIT=80]-->
     <string name="tare_min_balance_other_app">Minimum Satiated Balance (Remaining Apps)</string>
+    <!-- Title for the TARE factor that app updaters (for example, an app store) additional
+    credits. "Satiated" in this context means that the battery is fully charged.
+    Balance is the same meaning as having money in a bank account. [CHAR LIMIT=80]-->
+    <string name="tare_min_balance_addition_app_updater">Minimum Satiated Balance Addition (App Updaters)</string>
     <!-- Titles for the minimum satiated credit balances for different types of apps
     (per battery cycle). Satiated means battery is fully charged. [CHAR LIMIT=40]-->
     <string-array name="tare_app_balance_subfactors" translatable="false">
@@ -11895,6 +11893,15 @@
         <item>@string/tare_min_balance_exempted</item>
         <item>@string/tare_min_balance_headless_app</item>
         <item>@string/tare_min_balance_other_app</item>
+    </string-array>
+    <!-- Titles for the minimum satiated credit balances for different types of apps
+    (per battery cycle). Satiated means battery is fully charged. [CHAR LIMIT=40]-->
+    <string-array name="tare_job_scheduler_app_balance_subfactors" translatable="false">
+        <item>@string/tare_max_satiated_balance</item>
+        <item>@string/tare_min_balance_exempted</item>
+        <item>@string/tare_min_balance_headless_app</item>
+        <item>@string/tare_min_balance_other_app</item>
+        <item>@string/tare_min_balance_addition_app_updater</item>
     </string-array>
     <!-- Various modifier subfactors that alter the cost of TARE tasks depending on what battery
     state the device is in [CHAR LIMIT=50]-->
