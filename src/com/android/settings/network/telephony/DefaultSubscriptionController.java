@@ -113,14 +113,7 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        boolean visible = false;
-        if (mSelectableSubs != null && mSelectableSubs.size() > 1) {
-            visible = true;
-        } else {
-            visible = false;
-        }
-
-        return visible ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return AVAILABLE;
     }
 
     @OnLifecycleEvent(ON_RESUME)
