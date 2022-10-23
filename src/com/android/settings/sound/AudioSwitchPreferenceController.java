@@ -52,6 +52,7 @@ import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
@@ -212,6 +213,41 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
             return new ArrayList<>();
         }
         return a2dpProfile.getConnectedDevices();
+    }
+
+    /**
+     * Get LE Audio profile connected devices
+     */
+    protected List<BluetoothDevice> getConnectedLeAudioDevices() {
+        final List<BluetoothDevice> connectedDevices = new ArrayList<>();
+        final LeAudioProfile leAudioProfile = mProfileManager.getLeAudioProfile();
+        if (leAudioProfile == null) {
+            Log.d(TAG, "LeAudioProfile is null");
+            return connectedDevices;
+        }
+        final List<BluetoothDevice> devices = leAudioProfile.getConnectedDevices();
+        for (BluetoothDevice device : devices) {
+            if (device.isConnected() && isDeviceInCachedList(device)) {
+                connectedDevices.add(device);
+            }
+        }
+        return connectedDevices;
+    }
+
+    /**
+     * Confirm if the device exists in the cached devices list. If return true, it means
+     * the device is main device in the LE Audio device group. Otherwise, the device is the member
+     * device in the group.
+     */
+    protected boolean isDeviceInCachedList(BluetoothDevice device) {
+        Collection<CachedBluetoothDevice> cachedDevices =
+                mLocalBluetoothManager.getCachedDeviceManager().getCachedDevicesCopy();
+        for (CachedBluetoothDevice cachedDevice : cachedDevices) {
+            if (cachedDevice.getDevice().equals(device)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

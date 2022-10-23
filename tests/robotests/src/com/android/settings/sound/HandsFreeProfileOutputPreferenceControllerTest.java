@@ -44,6 +44,8 @@ import com.android.settings.bluetooth.Utils;
 import com.android.settings.testutils.shadow.ShadowAudioManager;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settingslib.bluetooth.BluetoothEventManager;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.HeadsetProfile;
 import com.android.settingslib.bluetooth.HearingAidProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -63,6 +65,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowBluetoothDevice;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
@@ -97,6 +100,12 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
     private HearingAidProfile mHearingAidProfile;
     @Mock
     private AudioSwitchPreferenceController.AudioSwitchCallback mAudioSwitchPreferenceCallback;
+    @Mock
+    private CachedBluetoothDeviceManager mCachedDeviceManager;
+    @Mock
+    private CachedBluetoothDevice mCachedBluetoothDeviceL;
+    @Mock
+    private CachedBluetoothDevice mCachedBluetoothDeviceR;
 
     private Context mContext;
     private PreferenceScreen mScreen;
@@ -113,6 +122,8 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
     private HandsFreeProfileOutputPreferenceController mController;
     private List<BluetoothDevice> mProfileConnectedDevices;
     private List<BluetoothDevice> mHearingAidActiveDevices;
+    private List<BluetoothDevice> mLeAudioActiveDevices;
+    private Collection<CachedBluetoothDevice> mCachedDevices;
 
     @Before
     public void setUp() {
@@ -127,11 +138,17 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
 
         when(mLocalBluetoothManager.getEventManager()).thenReturn(mBluetoothEventManager);
         when(mLocalBluetoothManager.getProfileManager()).thenReturn(mLocalBluetoothProfileManager);
+        when(mLocalBluetoothManager.getCachedDeviceManager()).thenReturn(mCachedDeviceManager);
         when(mLocalBluetoothProfileManager.getHeadsetProfile()).thenReturn(mHeadsetProfile);
         when(mLocalBluetoothProfileManager.getHearingAidProfile()).thenReturn(mHearingAidProfile);
 
         mBluetoothManager = mContext.getSystemService(BluetoothManager.class);
         mBluetoothAdapter = mBluetoothManager.getAdapter();
+
+        mCachedDevices = new ArrayList<>();
+        mCachedDevices.add(mCachedBluetoothDeviceL);
+        mCachedDevices.add(mCachedBluetoothDeviceR);
+        when(mCachedDeviceManager.getCachedDevicesCopy()).thenReturn(mCachedDevices);
 
         mBluetoothDevice = spy(mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS_1));
         when(mBluetoothDevice.getName()).thenReturn(TEST_DEVICE_NAME_1);
@@ -471,6 +488,26 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
         assertThat(mPreference.getSummary()).isEqualTo(mRightBluetoothHapDevice.getName());
         assertThat(mController.mConnectedDevices).containsExactly(mBluetoothDevice,
                 mLeftBluetoothHapDevice, mRightBluetoothHapDevice);
+    }
+
+    @Test
+    public void updateState_leAudioDeviceActive_shouldSetActivatedDeviceName() {
+        mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+        mShadowAudioManager.setOutputDevice(DEVICE_OUT_BLE_HEADSET);
+        when(mCachedBluetoothDeviceL.getDevice()).thenReturn(mBluetoothDevice);
+        when(mBluetoothDevice.getName()).thenReturn(TEST_LE_AUDIO_DEVICE_NAME_1);
+        when(mBluetoothDevice.getAlias()).thenReturn(TEST_LE_AUDIO_DEVICE_NAME_1);
+        mProfileConnectedDevices.clear();
+        mProfileConnectedDevices.add(mBluetoothDevice);
+        mLeAudioActiveDevices.clear();
+        mLeAudioActiveDevices.add(mBluetoothDevice);
+        when(mLeAudioProfile.getConnectedDevices()).thenReturn(mProfileConnectedDevices);
+        when(mLeAudioProfile.getActiveDevices()).thenReturn(mLeAudioActiveDevices);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.isVisible()).isTrue();
+        assertThat(mPreference.getSummary()).isEqualTo(mBluetoothDevice.getName());
     }
 
     @Test
