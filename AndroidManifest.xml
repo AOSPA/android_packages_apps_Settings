@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
           package="com.android.settings"
           coreApp="true"
           android:sharedUserId="android.uid.system">
@@ -2135,6 +2136,22 @@
         </activity-alias>
 
         <activity
+            android:name="Settings$TextReadingSettingsActivity"
+            android:exported="true"
+            android:label="@string/accessibility_text_reading_options_title">
+            <intent-filter>
+                <action android:name="android.settings.TEXT_READING_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.accessibility.TextReadingPreferenceFragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_accessibility"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity
             android:name="Settings$AccessibilityDaltonizerSettingsActivity"
             android:exported="true"
             android:label="@string/accessibility_display_daltonizer_preference_title">
@@ -2207,6 +2224,22 @@
                 android:value="com.android.settings.accessibility.CaptioningPropertiesFragment" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                        android:value="@string/menu_key_accessibility"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity
+            android:name="Settings$ColorAndMotionActivity"
+            android:exported="true"
+            android:label="@string/accessibility_color_and_motion_title">
+            <intent-filter>
+                <action android:name="android.settings.ACCESSIBILITY_COLOR_MOTION_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.accessibility.ColorAndMotionFragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_accessibility"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -2725,9 +2758,15 @@
 
         <activity android:name=".development.AdbQrCodeActivity" />
 
-        <activity android:name=".development.DSULoader"
+        <activity android:name="com.android.settings.development.DSULoader"
                   android:label="Select DSU Package"
-                  android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
+                  android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"
+                  android:exported="true" >
+            <intent-filter>
+                <action android:name="android.settings.development.START_DSU_LOADER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".development.DSUTermsOfServiceActivity"
                   android:label="Terms of Service"
                   android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
@@ -3045,6 +3084,7 @@
                   android:taskAffinity="com.android.settings.FallbackHome"
                   android:exported="true"
                   android:theme="@style/FallbackHome"
+                  android:permission="android.permission.DEVICE_POWER"
                   android:configChanges="keyboardHidden">
             <intent-filter android:priority="-1000">
                 <action android:name="android.intent.action.MAIN" />
@@ -4661,6 +4701,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <!-- [b/197780098] Disable eager initialization of Jetpack libraries. -->
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            tools:node="remove" />
 
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
