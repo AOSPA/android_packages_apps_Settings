@@ -20,6 +20,8 @@ import static android.telephony.ims.feature.ImsFeature.FEATURE_MMTEL;
 import static android.telephony.ims.stub.ImsRegistrationImplBase.REGISTRATION_TECH_CROSS_SIM;
 
 import android.content.Context;
+import android.database.ContentObserver;
+import android.net.Uri;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
 import android.telephony.CarrierConfigManager;
@@ -35,6 +37,9 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
@@ -52,7 +57,8 @@ import java.util.Objects;
 /**
  * Preference controller for "Backup Calling"
  **/
-public class BackupCallingPreferenceController extends TelephonyTogglePreferenceController {
+public class BackupCallingPreferenceController extends TelephonyTogglePreferenceController
+        implements LifecycleObserver {
 
     private static final String LOG_TAG = "BackupCallingPrefCtrl";
     private static final String DIALOG_TAG = "BackupCallingDialog";
@@ -70,6 +76,8 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
     private TelephonyManager mTelephonyManager;
     @VisibleForTesting
     boolean mDialogNeeded = false;
+    private Uri mCrossSimUri;
+    private ContentObserver mCrossSimObserver;
 
     /**
      * Class constructor of backup calling.
@@ -117,7 +125,41 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
         mFragmentManager = fragmentManager;
         mSubId = subId;
         mTelephonyManager = getTelephonyManager();
+        mCrossSimUri = Uri.withAppendedPath(
+                SubscriptionManager.CROSS_SIM_ENABLED_CONTENT_URI, String.valueOf(mSubId));
         return this;
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    public void onResume() {
+        registerCrossSimObserver();
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+    public void onPause() {
+        unregisterCrossSimObserver();
+    }
+
+    private void registerCrossSimObserver() {
+        if (mCrossSimObserver == null) {
+            mCrossSimObserver = new ContentObserver(mContext.getMainThreadHandler()) {
+                @Override
+                public void onChange(boolean selfChange, Uri uri) {
+                    if (mCrossSimUri.equals(uri)) {
+                        Log.d(LOG_TAG, "CIWLAN UI preference changed");
+                        if (mPreference != null) {
+                            updateState(mPreference);
+                        }
+                    }
+                }
+            };
+        }
+        mContext.getContentResolver().registerContentObserver(mCrossSimUri,
+                true, mCrossSimObserver);
+    }
+
+    private void unregisterCrossSimObserver() {
+        mContext.getContentResolver().unregisterContentObserver(mCrossSimObserver);
     }
 
     private TelephonyManager getTelephonyManager() {
