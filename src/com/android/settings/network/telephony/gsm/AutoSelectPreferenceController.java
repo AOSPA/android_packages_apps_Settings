@@ -92,6 +92,7 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
     private boolean mOnlyAutoSelectInHome;
     private List<OnNetworkSelectModeListener> mListeners;
     private SubscriptionsChangeListener mSubscriptionsListener;
+    private SubscriptionManager mSubscriptionManager;
     private ExtTelephonyManager mExtTelephonyManager;
     private Client mClient;
     private boolean mServiceConnected;
@@ -107,6 +108,7 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
     public AutoSelectPreferenceController(Context context, String key) {
         super(context, key);
         mTelephonyManager = context.getSystemService(TelephonyManager.class);
+        mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
         mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
         mRecursiveUpdate = new AtomicLong();
         mUpdatingConfig = new AtomicBoolean();
@@ -180,7 +182,14 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
     }
 
     private void getNetworkSelectionMode() {
-        if (mServiceConnected && mClient != null) {
+        if (mSubscriptionManager != null &&
+                !mSubscriptionManager.isActiveSubscriptionId(mSubId)) {
+            Log.i(TAG, "getNetworkSelectionMode invalid sub ID " + mSubId);
+            mCacheOfModeStatus = TelephonyManager.NETWORK_SELECTION_MODE_UNKNOWN;
+            return;
+        }
+        if (mServiceConnected && mClient != null &&
+                mTelephonyManager.getSlotIndex() != SubscriptionManager.DEFAULT_SIM_SLOT_INDEX) {
             try {
                 Token token = mExtTelephonyManager.getNetworkSelectionMode(
                         mTelephonyManager.getSlotIndex(), mClient);
@@ -192,6 +201,8 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
             } catch (Exception e) {
                 Log.i(TAG, "Exception :" + e);
             }
+        } else {
+            mCacheOfModeStatus = TelephonyManager.NETWORK_SELECTION_MODE_UNKNOWN;
         }
     }
 
@@ -278,6 +289,7 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
                 .createForSubscriptionId(mSubId);
         mExtTelephonyManager = ExtTelephonyManager.getInstance(mContext);
         mExtTelephonyManager.connectService(mExtTelManagerServiceCallback);
+        mSubscriptionManager = mContext.getSystemService(SubscriptionManager.class);
         final PersistableBundle carrierConfig =
                 CarrierConfigCache.getInstance(mContext).getConfigForSubId(mSubId);
         mOnlyAutoSelectInHome = carrierConfig != null
