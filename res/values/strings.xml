@@ -2511,7 +2511,7 @@
     <!-- Display settings screen, peak refresh rate settings title [CHAR LIMIT=30] -->
     <string name="peak_refresh_rate_title">Smooth Display</string>
     <!-- Display settings screen, peak refresh rate settings summary [CHAR LIMIT=NONE] -->
-    <string name="peak_refresh_rate_summary">Automatically raises the refresh rate from 60 to 90 Hz for some content. Increases battery usage.</string>
+    <string name="peak_refresh_rate_summary">Automatically raises the refresh rate from 60 to <xliff:g name="refresh_rate" example="120">%1$s</xliff:g> Hz for some content. Increases battery usage.</string>
     <!-- Display developer settings: Force to the highest refresh rate [CHAR LIMIT=NONE] -->
     <string name="force_high_refresh_rate_toggle">Force peak refresh rate</string>
     <!-- Display developer settings: Force to the highest refresh rate description [CHAR LIMIT=NONE]-->
@@ -2655,6 +2655,8 @@
     <string name="screensaver_settings_title">Screen saver</string>
     <!-- List of synonyms used in the settings search bar to find the “Screen saver”. [CHAR LIMIT=NONE] -->
     <string name="keywords_screensaver">screensaver</string>
+    <!-- Summary for screensaver unavailable when Bedtime mode is on [CHAR LIMIT=50] -->
+    <string name="screensaver_settings_when_to_dream_bedtime">Unavailable because bedtime mode is on</string>
     <!-- The title for the toggle which disables/enables screen savers [CHAR_LIMIT=30] -->
     <string name="screensaver_settings_toggle_title">Use screen saver</string>
     <!-- Display settings screen, summary fragment for screen saver options, activated when docked or asleep and charging [CHAR LIMIT=35] -->
@@ -6529,6 +6531,8 @@
     <!-- Message of dialog shown when remove_guest_on_exit toggle is ON [CHAR LIMIT=NONE] -->
     <string name="remove_guest_on_exit_dialog_message">Apps and data from this guest session will be
         deleted now, and all future guest activity will be deleted each time you exit guest mode</string>
+    <!-- Search keywords for the "Delete Guest Activity" section in Multiple Users Screen. [CHAR LIMIT=NONE] -->
+    <string name="remove_guest_on_exit_keywords">delete, guest, activity, remove, data, visitor, erase</string>
     <!-- Title of preference to enable guest calling[CHAR LIMIT=40] -->
     <string name="enable_guest_calling">Allow guest to use phone</string>
     <!-- Summary of preference to enable guest calling [CHAR LIMIT=NONE] -->
@@ -8087,6 +8091,8 @@
     <string name="notif_listener_excluded_app_summary">Change settings for each app that sends notifications</string>
     <string name="notif_listener_excluded_app_screen_title">Apps shown on device</string>
     <string name="notif_listener_not_migrated">This app doesn\u2019t support enhanced settings</string>
+    <string name="notif_listener_more_settings">More settings</string>
+    <string name="notif_listener_more_settings_desc">More settings are available inside this app</string>
 
     <!-- Title for managing VR (virtual reality) helper services. [CHAR LIMIT=50] -->
     <string name="vr_listeners_title">VR helper services</string>
@@ -11598,8 +11604,12 @@
     <string name="developer_options_main_switch_title">Use developer options</string>
     <!-- Title for default print service main switch. [CHAR LIMIT=50] -->
     <string name="default_print_service_main_switch_title">Use print service</string>
+
     <!-- Title for multiple users main switch. [CHAR LIMIT=50] -->
     <string name="multiple_users_main_switch_title">Allow multiple users</string>
+    <!-- Search keywords for the "Allow Multiple Users" section in Multiple Users Screen. [CHAR LIMIT=NONE] -->
+    <string name="multiple_users_main_switch_keywords">allow, multiple, user, permit, many</string>
+
     <!-- Title for wireless debugging main switch. [CHAR LIMIT=50] -->
     <string name="wireless_debugging_main_switch_title">Use wireless debugging</string>
     <!-- Title for graphics driver main switch. [CHAR LIMIT=50] -->
