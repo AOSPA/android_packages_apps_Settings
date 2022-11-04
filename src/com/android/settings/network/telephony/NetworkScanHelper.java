@@ -139,7 +139,7 @@ public class NetworkScanHelper {
     private final Executor mExecutor;
     private int mMaxSearchTimeSec = MAX_SEARCH_TIME_SEC;
 
-    private final LegacyIncrementalScanBroadcastReceiver mLegacyIncrScanReceiver;
+    private LegacyIncrementalScanBroadcastReceiver mLegacyIncrScanReceiver;
     private Context mContext;
     private NetworkScan mNetworkScanRequester;
     private IntentFilter filter =
@@ -150,9 +150,6 @@ public class NetworkScanHelper {
         mNetworkScanCallback = callback;
         mInternalNetworkScanCallback = new NetworkScanCallbackImpl();
         mExecutor = executor;
-        mLegacyIncrScanReceiver =
-                new LegacyIncrementalScanBroadcastReceiver(mContext, mInternalNetworkScanCallback);
-        mExtTelephonyManager = ExtTelephonyManager.getInstance(mContext);
     }
 
     public NetworkScanHelper(Context context, TelephonyManager tm, NetworkScanCallback callback,
@@ -161,6 +158,9 @@ public class NetworkScanHelper {
         mContext = context;
         mMaxSearchTimeSec = context.getResources().getInteger(
                 R.integer.config_network_scan_helper_max_search_time_sec);
+        mLegacyIncrScanReceiver =
+                new LegacyIncrementalScanBroadcastReceiver(mContext, mInternalNetworkScanCallback);
+        mExtTelephonyManager = ExtTelephonyManager.getInstance(mContext);
     }
 
     @VisibleForTesting
