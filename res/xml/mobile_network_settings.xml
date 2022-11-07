@@ -235,6 +235,11 @@
                 android:title="@string/enable_snpn"
                 settings:controller="com.android.settings.network.telephony.gsm.SelectNetworkPreferenceController"/>
 
+            <SwitchPreference
+                android:key="auto_select_key"
+                android:title="@string/select_automatically"
+                settings:controller="com.android.settings.network.telephony.gsm.AutoSelectPreferenceController"/>
+
             <Preference
                 android:key="choose_network_key"
                 android:title="@string/choose_network_title"
