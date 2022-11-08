@@ -33,7 +33,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -56,6 +58,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class TetherPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin, LifecycleObserver, OnCreate, OnResume, OnPause, OnDestroy {
 
+    private static final String TAG = "TetherPreferenceController";
     private static final String KEY_TETHER_SETTINGS = "tether_settings";
 
     private final boolean mAdminDisallowedTetherConfig;
@@ -66,7 +69,9 @@ public class TetherPreferenceController extends AbstractPreferenceController imp
     final BluetoothProfile.ServiceListener mBtProfileServiceListener =
             new android.bluetooth.BluetoothProfile.ServiceListener() {
                 public void onServiceConnected(int profile, BluetoothProfile proxy) {
-                    mBluetoothPan.set((BluetoothPan) proxy);
+                    if (mBluetoothPan.get() == null) {
+                        mBluetoothPan.set((BluetoothPan) proxy);
+                    }
                     updateSummary();
                 }
 
@@ -83,6 +88,7 @@ public class TetherPreferenceController extends AbstractPreferenceController imp
     private SettingObserver mAirplaneModeObserver;
     private Preference mPreference;
     private TetherBroadcastReceiver mTetherReceiver;
+    private BroadcastReceiver mBluetoothStateReceiver;
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
     TetherPreferenceController() {
@@ -132,6 +138,12 @@ public class TetherPreferenceController extends AbstractPreferenceController imp
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        if (mBluetoothStateReceiver == null) {
+            mBluetoothStateReceiver = new BluetoothStateReceiver();
+            mContext.registerReceiver(
+                    mBluetoothStateReceiver,
+                    new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
+        }
     }
 
     @Override
@@ -174,6 +186,10 @@ public class TetherPreferenceController extends AbstractPreferenceController imp
 
     @Override
     public void onDestroy() {
+        if (mBluetoothStateReceiver != null) {
+            mContext.unregisterReceiver(mBluetoothStateReceiver);
+            mBluetoothStateReceiver = null;
+        }
     }
 
     public static boolean isTetherConfigDisallowed(Context context) {
@@ -278,5 +294,28 @@ public class TetherPreferenceController extends AbstractPreferenceController imp
             updateSummary();
         }
 
+    }
+
+    private class BluetoothStateReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final String action = intent.getAction();
+            Log.i(TAG, "onReceive: action: " + action);
+
+            if (TextUtils.equals(action, BluetoothAdapter.ACTION_STATE_CHANGED)) {
+                final int state =
+                        intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
+                Log.i(TAG, "onReceive: state: " + BluetoothAdapter.nameForState(state));
+                final BluetoothProfile profile = mBluetoothPan.get();
+                switch(state) {
+                    case BluetoothAdapter.STATE_ON:
+                        if (profile == null && mBluetoothAdapter != null) {
+                            mBluetoothAdapter.getProfileProxy(mContext, mBtProfileServiceListener,
+                                    BluetoothProfile.PAN);
+                        }
+                        break;
+                }
+            }
+        }
     }
 }
