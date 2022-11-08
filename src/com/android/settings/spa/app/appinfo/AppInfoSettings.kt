@@ -16,6 +16,7 @@
 
 package com.android.settings.spa.app.appinfo
 
+import android.app.settings.SettingsEnums
 import android.content.pm.ApplicationInfo
 import android.os.Bundle
 import androidx.compose.runtime.Composable
@@ -49,6 +50,8 @@ object AppInfoSettingsProvider : SettingsPageProvider {
         navArgument(PACKAGE_NAME) { type = NavType.StringType },
         navArgument(USER_ID) { type = NavType.IntType },
     )
+
+    const val METRICS_CATEGORY = SettingsEnums.APPLICATIONS_INSTALLED_APP_DETAILS
 
     @Composable
     override fun Page(arguments: Bundle?) {
@@ -90,14 +93,22 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
 
         AppButtons(packageInfoPresenter)
 
+        AppSettingsPreference(app)
+        // TODO: all_services_settings
+        // TODO: notification_settings
         AppPermissionPreference(app)
         AppStoragePreference(app)
         // TODO: instant_app_launch_supported_domain_urls
-        // TODO: data_settings
+        AppDataUsagePreference(app)
         AppTimeSpentPreference(app)
-        // TODO: battery
-        // TODO: app_language_setting
+        AppBatteryPreference(app)
+        AppLocalePreference(app)
         AppOpenByDefaultPreference(app)
+        DefaultAppShortcuts(app)
+
+        Category(title = stringResource(R.string.unused_apps_category)) {
+            HibernationSwitchPreference(app)
+        }
 
         Category(title = stringResource(R.string.advanced_apps)) {
             DisplayOverOtherAppsAppListProvider.InfoPageEntryItem(app)
@@ -108,7 +119,9 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
             AlarmsAndRemindersAppListProvider.InfoPageEntryItem(app)
         }
 
-        // TODO: app_installer
+        Category(title = stringResource(R.string.app_install_details_group_title)) {
+            AppInstallerInfoPreference(app)
+        }
         appInfoProvider.FooterAppVersion()
     }
 }

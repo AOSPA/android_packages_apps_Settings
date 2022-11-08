@@ -1004,6 +1004,20 @@
         <item>90</item>
     </string-array>
 
+    <!-- Options for screensaver "When to start" for devices that do not support screensavers
+         while on battery -->
+    <string-array name="when_to_start_screensaver_entries_no_battery" translatable="false">
+        <item>@string/screensaver_settings_summary_sleep</item>
+        <item>@string/screensaver_settings_summary_dock_and_charging</item>
+    </string-array>
+
+    <!-- Values for screensaver "When to start" for devices that do not support screensavers
+         while on battery -->
+    <string-array name="when_to_start_screensaver_values_no_battery" translatable="false">
+        <item>while_charging_only</item>
+        <item>while_docked_only</item>
+    </string-array>
+
     <string-array name="when_to_start_screensaver_entries" translatable="false">
         <item>@string/screensaver_settings_summary_sleep</item>
         <item>@string/screensaver_settings_summary_dock</item>
@@ -1406,6 +1420,11 @@
          [CHAR LIMIT=NONE] -->
     <string-array name="allowlist_hide_summary_in_battery_usage" translatable="false">
     </string-array>
+
+    <!-- Array containing help message codes that should not be displayed
+         during fingerprint enrollment. -->
+    <integer-array name="fingerprint_acquired_ignore_list">
+    </integer-array>
 
     <!--String arrays for showing user PLMN list -->
     <string-array name="uplmn_prefer_network_mode_td_choices">
