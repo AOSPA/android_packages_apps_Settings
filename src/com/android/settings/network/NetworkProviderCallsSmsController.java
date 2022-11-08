@@ -71,7 +71,7 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
         mIsRtlMode = context.getResources().getConfiguration().getLayoutDirection()
                 == View.LAYOUT_DIRECTION_RTL;
         mLifecycleOwner = lifecycleOwner;
-        mMobileNetworkRepository = new MobileNetworkRepository(context, this);
+        mMobileNetworkRepository = MobileNetworkRepository.create(context, this);
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
@@ -85,7 +85,6 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
 
     @OnLifecycleEvent(Event.ON_PAUSE)
     public void onPause() {
-        mMobileNetworkRepository.removeRegister();
     }
 
     @Override
@@ -186,7 +185,8 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
 
     @Override
     public boolean isAvailable() {
-        return mUserManager.isAdminUser();
+        return SubscriptionUtil.isSimHardwareVisible(mContext) &&
+                mUserManager.isAdminUser();
     }
 
     @Override

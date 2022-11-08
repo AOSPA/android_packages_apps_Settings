@@ -18,7 +18,10 @@ package com.android.settings.network;
 import static android.telephony.UiccSlotInfo.CARD_STATE_INFO_PRESENT;
 
 import android.app.settings.SettingsEnums;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
@@ -78,6 +81,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     private AirplaneModeObserver mAirplaneModeObserver;
     private Uri mAirplaneModeSettingUri;
     private MetricsFeatureProvider mMetricsFeatureProvider;
+    private IntentFilter mFilter = new IntentFilter();
 
     private int mPhysicalSlotIndex = SubscriptionManager.INVALID_SIM_SLOT_INDEX;
     private int mLogicalSlotIndex = SubscriptionManager.INVALID_SIM_SLOT_INDEX;
@@ -89,10 +93,15 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     private boolean mIsRemovable = false;
     private boolean mIsActive = false;
 
-    MobileNetworkRepository(Context context, MobileNetworkCallback mobileNetworkCallback) {
+    public static MobileNetworkRepository create(Context context,
+            MobileNetworkCallback mobileNetworkCallback) {
+        return new MobileNetworkRepository(context, mobileNetworkCallback);
+    }
+
+    private MobileNetworkRepository(Context context, MobileNetworkCallback mobileNetworkCallback) {
         mContext = context;
         mCallback = mobileNetworkCallback;
-        mMobileNetworkDatabase = MobileNetworkDatabase.createDatabase(context);
+        mMobileNetworkDatabase = MobileNetworkDatabase.getInstance(context);
         mSubscriptionInfoDao = mMobileNetworkDatabase.mSubscriptionInfoDao();
         mUiccInfoDao = mMobileNetworkDatabase.mUiccInfoDao();
         mMobileNetworkInfoDao = mMobileNetworkDatabase.mMobileNetworkInfoDao();
@@ -101,6 +110,8 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         mAirplaneModeSettingUri = Settings.Global.getUriFor(Settings.Global.AIRPLANE_MODE_ON);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
         mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_MOBILE_NETWORK_DB_CREATED);
+        mFilter.addAction(TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED);
+        mFilter.addAction(SubscriptionManager.ACTION_DEFAULT_SUBSCRIPTION_CHANGED);
     }
 
     private class AirplaneModeObserver extends ContentObserver {
@@ -125,9 +136,21 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         }
     }
 
+    private final BroadcastReceiver mDataSubscriptionChangedReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final String action = intent.getAction();
+            if (action.equals(TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED)
+                    || action.equals(SubscriptionManager.ACTION_DEFAULT_SUBSCRIPTION_CHANGED)) {
+                onSubscriptionsChanged();
+            }
+        }
+    };
+
     public void addRegister(LifecycleOwner lifecycleOwner) {
         mSubscriptionManager.addOnSubscriptionsChangedListener(mContext.getMainExecutor(), this);
         mAirplaneModeObserver.register(mContext);
+        mContext.registerReceiver(mDataSubscriptionChangedReceiver, mFilter);
         observeAllSubInfo(lifecycleOwner);
         observeAllUiccInfo(lifecycleOwner);
         observeAllMobileNetworkInfo(lifecycleOwner);
@@ -137,6 +160,9 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         mSubscriptionManager.removeOnSubscriptionsChangedListener(this);
         mAirplaneModeObserver.unRegister(mContext);
         mContext.getContentResolver().unregisterContentObserver(mAirplaneModeObserver);
+        if (mDataSubscriptionChangedReceiver != null) {
+            mContext.unregisterReceiver(mDataSubscriptionChangedReceiver);
+        }
     }
 
     private void observeAllSubInfo(LifecycleOwner lifecycleOwner) {
@@ -171,6 +197,10 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
 
     public List<MobileNetworkInfoEntity> getMobileNetworkInfoEntityList() {
         return mMobileNetworkInfoEntityList;
+    }
+
+    public SubscriptionInfoEntity getSubInfoById(String subId) {
+        return mSubscriptionInfoDao.querySubInfoById(subId);
     }
 
     public int getSubInfosCount() {
@@ -327,7 +357,8 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                     mSubscriptionManager.getDefaultVoiceSubscriptionId() == mSubId,
                     mSubscriptionManager.getDefaultSmsSubscriptionId() == mSubId,
                     mSubscriptionManager.getDefaultDataSubscriptionId() == mSubId,
-                    mSubscriptionManager.getDefaultSubscriptionId() == mSubId);
+                    mSubscriptionManager.getDefaultSubscriptionId() == mSubId,
+                    mSubscriptionManager.getActiveDataSubscriptionId() == mSubId);
         }
     }
 
@@ -417,7 +448,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
      * Callback for clients to get the latest info changes if the framework or content observers.
      * updates the relevant info.
      */
-    interface MobileNetworkCallback {
+    public interface MobileNetworkCallback {
         void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList);
 
         void onActiveSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList);

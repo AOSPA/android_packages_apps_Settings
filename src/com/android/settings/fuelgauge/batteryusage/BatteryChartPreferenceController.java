@@ -108,6 +108,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
 
     private boolean mIs24HourFormat;
     private boolean mIsFooterPrefAdded = false;
+    private boolean mHourlyChartVisible = true;
     private View mBatteryChartViewGroup;
     private View mCategoryTitleView;
     private PreferenceScreen mPreferenceScreen;
@@ -119,7 +120,6 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     private final String mPreferenceKey;
     private final SettingsActivity mActivity;
     private final InstrumentedPreferenceFragment mFragment;
-    private final CharSequence[] mNotAllowShowSummaryPackages;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final Handler mHandler = new Handler(Looper.getMainLooper());
     private final AnimatorListenerAdapter mHourlyChartFadeInAdapter =
@@ -149,10 +149,6 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         mIs24HourFormat = DateFormat.is24HourFormat(context);
         mMetricsFeatureProvider =
                 FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
-        mNotAllowShowSummaryPackages =
-                FeatureFactory.getFactory(context)
-                        .getPowerUsageFeatureProvider(context)
-                        .getHideApplicationSummary(context);
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
@@ -257,8 +253,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         Log.d(TAG, String.format("handleClick() label=%s key=%s package=%s",
                 diffEntry.getAppLabel(), histEntry.getKey(), histEntry.mPackageName));
         AdvancedPowerUsageDetail.startBatteryDetailPage(
-                mActivity, mFragment, diffEntry, powerPref.getPercent(),
-                isValidToShowSummary(packageName), getSlotInformation());
+                mActivity, mFragment, diffEntry, powerPref.getPercent(), getSlotInformation());
         return true;
     }
 
@@ -634,11 +629,6 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         final long foregroundUsageTimeInMs = entry.mForegroundUsageTimeInMs;
         final long backgroundUsageTimeInMs = entry.mBackgroundUsageTimeInMs;
         final long totalUsageTimeInMs = foregroundUsageTimeInMs + backgroundUsageTimeInMs;
-        // Checks whether the package is allowed to show summary or not.
-        if (!isValidToShowSummary(entry.getPackageName())) {
-            preference.setSummary(null);
-            return;
-        }
         String usageTimeSummary = null;
         // Not shows summary for some system components without usage time.
         if (totalUsageTimeInMs == 0) {
@@ -677,11 +667,6 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         return mPrefContext.getString(resourceId, timeSequence);
     }
 
-    @VisibleForTesting
-    boolean isValidToShowSummary(String packageName) {
-        return !DataProcessor.contains(packageName, mNotAllowShowSummaryPackages);
-    }
-
     private void animateBatteryChartViewGroup() {
         if (mBatteryChartViewGroup != null && mBatteryChartViewGroup.getAlpha() == 0) {
             mBatteryChartViewGroup.animate().alpha(1f).setDuration(FADE_IN_ANIMATION_DURATION)
@@ -690,9 +675,10 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     }
 
     private void animateBatteryHourlyChartView(final boolean visible) {
-        if (mHourlyChartView == null) {
+        if (mHourlyChartView == null || mHourlyChartVisible == visible) {
             return;
         }
+        mHourlyChartVisible = visible;
 
         if (visible) {
             mHourlyChartView.setVisibility(View.VISIBLE);
