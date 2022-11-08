@@ -77,6 +77,7 @@ public class FaceSettings extends DashboardFragment {
     private FaceSettingsRemoveButtonPreferenceController mRemoveController;
     private FaceSettingsEnrollButtonPreferenceController mEnrollController;
     private FaceSettingsLockscreenBypassPreferenceController mLockscreenController;
+    private FaceSettingsSwipePreferenceController mSwipeController;
     private List<AbstractPreferenceController> mControllers;
 
     private List<Preference> mTogglePreferences;
@@ -174,12 +175,13 @@ public class FaceSettings extends DashboardFragment {
 
         Preference keyguardPref = findPreference(FaceSettingsKeyguardPreferenceController.KEY);
         Preference appPref = findPreference(FaceSettingsAppPreferenceController.KEY);
+        Preference swipePref = findPreference(FaceSettingsSwipePreferenceController.KEY);
         Preference attentionPref = findPreference(FaceSettingsAttentionPreferenceController.KEY);
         Preference confirmPref = findPreference(FaceSettingsConfirmPreferenceController.KEY);
         Preference bypassPref =
                 findPreference(mLockscreenController.getPreferenceKey());
         mTogglePreferences = new ArrayList<>(
-                Arrays.asList(keyguardPref, appPref, attentionPref, confirmPref, bypassPref));
+                Arrays.asList(keyguardPref, appPref, attentionPref, confirmPref, bypassPref, swipePref));
 
         mRemoveButton = findPreference(FaceSettingsRemoveButtonPreferenceController.KEY);
         mEnrollButton = findPreference(FaceSettingsEnrollButtonPreferenceController.KEY);
