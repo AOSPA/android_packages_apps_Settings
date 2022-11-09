@@ -229,5 +229,12 @@
             android:key="vr_display_pref"
             android:title="@string/display_vr_pref_title"
             android:fragment="com.android.settings.display.VrDisplayPreferencePicker"/>
+        
+        <co.aospa.framework.preference.SecureSettingSwitchPreference
+               android:key="window_ignore_secure"
+               android:title="@string/ignore_window_secure_title"
+               android:summary="@string/ignore_window_secure_summary"
+               android:defaultValue="false"/>
+
     </PreferenceCategory>
 </PreferenceScreen>
