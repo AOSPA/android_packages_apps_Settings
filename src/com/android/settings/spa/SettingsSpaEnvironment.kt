@@ -16,6 +16,7 @@
 
 package com.android.settings.spa
 
+import android.content.Context
 import com.android.settings.spa.app.AllAppListPageProvider
 import com.android.settings.spa.app.AppsMainPageProvider
 import com.android.settings.spa.app.appinfo.AppInfoSettingsProvider
@@ -31,12 +32,15 @@ import com.android.settings.spa.development.UsageStatsPageProvider
 import com.android.settings.spa.home.HomePageProvider
 import com.android.settings.spa.notification.AppListNotificationsPageProvider
 import com.android.settings.spa.notification.NotificationMainPageProvider
+import com.android.settings.spa.system.AppLanguagesPageProvider
+import com.android.settings.spa.system.LanguageAndInputPageProvider
+import com.android.settings.spa.system.SystemMainPageProvider
 import com.android.settingslib.spa.framework.common.SettingsPage
 import com.android.settingslib.spa.framework.common.SettingsPageProviderRepository
 import com.android.settingslib.spa.framework.common.SpaEnvironment
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListTemplate
 
-open class SettingsSpaEnvironment : SpaEnvironment() {
+open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
     override val pageProviderRepository = lazy {
         val togglePermissionAppListTemplate = TogglePermissionAppListTemplate(
             allProviders = listOf(
@@ -58,6 +62,9 @@ open class SettingsSpaEnvironment : SpaEnvironment() {
                 SpecialAppAccessPageProvider,
                 NotificationMainPageProvider,
                 AppListNotificationsPageProvider,
+                SystemMainPageProvider,
+                LanguageAndInputPageProvider,
+                AppLanguagesPageProvider,
                 UsageStatsPageProvider,
             ) + togglePermissionAppListTemplate.createPageProviders(),
             rootPages = listOf(

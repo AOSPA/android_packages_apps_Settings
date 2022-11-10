@@ -94,11 +94,11 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
         AppButtons(packageInfoPresenter)
 
         AppSettingsPreference(app)
-        // TODO: all_services_settings
+        AppAllServicesPreference(app)
         // TODO: notification_settings
         AppPermissionPreference(app)
         AppStoragePreference(app)
-        // TODO: instant_app_launch_supported_domain_urls
+        InstantAppDomainsPreference(app)
         AppDataUsagePreference(app)
         AppTimeSpentPreference(app)
         AppBatteryPreference(app)
@@ -115,7 +115,7 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
             ModifySystemSettingsAppListProvider.InfoPageEntryItem(app)
             PictureInPictureListProvider.InfoPageEntryItem(app)
             InstallUnknownAppsListProvider.InfoPageEntryItem(app)
-            // TODO: interact_across_profiles
+            InteractAcrossProfilesDetailsPreference(app)
             AlarmsAndRemindersAppListProvider.InfoPageEntryItem(app)
         }
 

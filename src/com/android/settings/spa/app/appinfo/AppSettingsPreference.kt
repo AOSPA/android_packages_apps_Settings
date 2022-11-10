@@ -19,8 +19,8 @@ package com.android.settings.spa.app.appinfo
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.content.pm.ApplicationInfo
-import android.content.pm.PackageManager.ResolveInfoFlags
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -31,16 +31,17 @@ import com.android.settings.overlay.FeatureFactory
 import com.android.settingslib.spa.framework.compose.collectAsStateWithLifecycle
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
+import com.android.settingslib.spaprivileged.model.app.resolveActionForApp
 import com.android.settingslib.spaprivileged.model.app.userHandle
-import com.android.settingslib.spaprivileged.model.app.userId
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.plus
 
 @Composable
 fun AppSettingsPreference(app: ApplicationInfo) {
@@ -63,39 +64,28 @@ private class AppSettingsPresenter(
     private val packageManager = context.packageManager
 
     private val intentFlow = flow {
-        emit(resolveIntent())
-    }.shareIn(coroutineScope, SharingStarted.WhileSubscribed(), 1)
+        emit(packageManager.resolveActionForApp(app, Intent.ACTION_APPLICATION_PREFERENCES))
+    }.shareIn(coroutineScope + Dispatchers.IO, SharingStarted.WhileSubscribed(), 1)
 
     val isAvailableFlow = intentFlow.map { it != null }
 
     fun startActivity() {
         coroutineScope.launch {
-            intentFlow.collect { intent ->
-                if (intent != null) {
-                    FeatureFactory.getFactory(context).metricsFeatureProvider
-                        .action(
-                            SettingsEnums.PAGE_UNKNOWN,
-                            SettingsEnums.ACTION_OPEN_APP_SETTING,
-                            AppInfoSettingsProvider.METRICS_CATEGORY,
-                            null,
-                            0,
-                        )
-                    context.startActivityAsUser(intent, app.userHandle)
-                }
-            }
+            intentFlow.firstOrNull()?.let(::startActivity)
         }
     }
 
-    private suspend fun resolveIntent(): Intent? = withContext(Dispatchers.IO) {
+    private fun startActivity(activityInfo: ActivityInfo) {
+        FeatureFactory.getFactory(context).metricsFeatureProvider.action(
+            SettingsEnums.PAGE_UNKNOWN,
+            SettingsEnums.ACTION_OPEN_APP_SETTING,
+            AppInfoSettingsProvider.METRICS_CATEGORY,
+            null,
+            0,
+        )
         val intent = Intent(Intent.ACTION_APPLICATION_PREFERENCES).apply {
-            `package` = app.packageName
+            component = activityInfo.componentName
         }
-        packageManager.resolveActivityAsUser(intent, ResolveInfoFlags.of(0), app.userId)
-            ?.activityInfo
-            ?.let { activityInfo ->
-                Intent(intent.action).apply {
-                    setClassName(activityInfo.packageName, activityInfo.name)
-                }
-            }
+        context.startActivityAsUser(intent, app.userHandle)
     }
 }

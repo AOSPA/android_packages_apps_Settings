@@ -138,7 +138,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         if (!SubscriptionUtil.isSimHardwareVisible(context)) {
-            finishFragment();
+            finish();
             return Arrays.asList();
         }
         if (getArguments() == null) {
