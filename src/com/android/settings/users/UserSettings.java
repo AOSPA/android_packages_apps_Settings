@@ -49,7 +49,6 @@ import android.os.UserManager;
 import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Gravity;
@@ -280,7 +279,7 @@ public class UserSettings extends SettingsPreferenceFragment
         final SettingsActivity activity = (SettingsActivity) getActivity();
         final SettingsMainSwitchBar switchBar = activity.getSwitchBar();
         switchBar.setTitle(getContext().getString(R.string.multiple_users_main_switch_title));
-        if (mUserCaps.mIsAdmin) {
+        if (isCurrentUserAdmin()) {
             switchBar.show();
         } else {
             switchBar.hide();
@@ -359,7 +358,7 @@ public class UserSettings extends SettingsPreferenceFragment
         mMePreference = new UserPreference(getPrefContext(), null /* attrs */, myUserId);
         mMePreference.setKey(KEY_USER_ME);
         mMePreference.setOnPreferenceClickListener(this);
-        if (mUserCaps.mIsAdmin) {
+        if (isCurrentUserAdmin()) {
             mMePreference.setSummary(R.string.user_admin);
         }
 
@@ -450,10 +449,7 @@ public class UserSettings extends SettingsPreferenceFragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         int pos = 0;
-        // TODO(b/191509236): The menu item does not need to be accessible for guest users,
-        //  regardless of mGuestUserAutoCreated
-        if (!mUserCaps.mIsAdmin && canSwitchUserNow() && !(isCurrentUserGuest()
-                && mGuestUserAutoCreated)) {
+        if (!isCurrentUserAdmin() && canSwitchUserNow() && !isCurrentUserGuest()) {
             String nickname = mUserManager.getUserName();
             MenuItem removeThisUser = menu.add(0, MENU_REMOVE_USER, pos++,
                     getResources().getString(R.string.user_remove_user_menu, nickname));
@@ -488,11 +484,6 @@ public class UserSettings extends SettingsPreferenceFragment
         mUserCaps.updateAddUserCapabilities(getActivity());
         loadProfile();
         updateUserList();
-    }
-
-    private boolean isEnableGuestModeUxChanges() {
-        return FeatureFlagUtils.isEnabled(getContext(),
-                FeatureFlagUtils.SETTINGS_GUEST_MODE_UX_CHANGES);
     }
 
     /**
@@ -1217,12 +1208,12 @@ public class UserSettings extends SettingsPreferenceFragment
         // don't show the guest user icon, instead we show two preferences for guest user to
         // exit and reset itself. Hence we don't add mMePreference, i.e. guest user to the
         // list of users visible in the UI.
-        if (!mUserCaps.mIsGuest) {
+        if (!isCurrentUserGuest()) {
             userPreferences.add(mMePreference);
         }
 
         boolean canOpenUserDetails =
-                mUserCaps.mIsAdmin || (canSwitchUserNow() && !mUserCaps.mDisallowSwitchUser);
+                isCurrentUserAdmin() || (canSwitchUserNow() && !mUserCaps.mDisallowSwitchUser);
         for (UserInfo user : users) {
             if (user.isGuest()) {
                 // Guest user is added to guest category via updateGuestCategory
@@ -1347,6 +1338,10 @@ public class UserSettings extends SettingsPreferenceFragment
         return mUserCaps.mIsGuest;
     }
 
+    private boolean isCurrentUserAdmin() {
+        return mUserCaps.mIsAdmin;
+    }
+
     private boolean canSwitchUserNow() {
         return mUserManager.getUserSwitchability() == UserManager.SWITCHABILITY_STATUS_OK;
     }
@@ -1362,33 +1357,25 @@ public class UserSettings extends SettingsPreferenceFragment
         }
         mGuestCategory.setVisible(true);
         mGuestExitPreference.setVisible(true);
-        if (isEnableGuestModeUxChanges()) {
-            mGuestResetPreference.setVisible(true);
+        mGuestResetPreference.setVisible(true);
 
-            boolean isGuestFirstLogin = Settings.Secure.getIntForUser(
-                                            getContext().getContentResolver(),
-                                            SETTING_GUEST_HAS_LOGGED_IN,
-                                            0,
-                                            UserHandle.myUserId()) <= 1;
-            String guestExitSummary;
-            if (mUserCaps.mIsEphemeral) {
-                guestExitSummary = getContext().getString(
-                                    R.string.guest_notification_ephemeral);
-            } else if (isGuestFirstLogin) {
-                guestExitSummary = getContext().getString(
-                                    R.string.guest_notification_non_ephemeral);
-            } else {
-                guestExitSummary = getContext().getString(
-                                    R.string.guest_notification_non_ephemeral_non_first_login);
-            }
-            mGuestExitPreference.setSummary(guestExitSummary);
+        boolean isGuestFirstLogin = Settings.Secure.getIntForUser(
+                                        getContext().getContentResolver(),
+                                        SETTING_GUEST_HAS_LOGGED_IN,
+                                        0,
+                                        UserHandle.myUserId()) <= 1;
+        String guestExitSummary;
+        if (mUserCaps.mIsEphemeral) {
+            guestExitSummary = getContext().getString(
+                                R.string.guest_notification_ephemeral);
+        } else if (isGuestFirstLogin) {
+            guestExitSummary = getContext().getString(
+                                R.string.guest_notification_non_ephemeral);
         } else {
-            mGuestExitPreference.setIcon(getEncircledDefaultIcon());
-            mGuestExitPreference.setTitle(
-                                    mGuestUserAutoCreated
-                                        ? com.android.settingslib.R.string.guest_reset_guest
-                                        : com.android.settingslib.R.string.guest_exit_guest);
+            guestExitSummary = getContext().getString(
+                                R.string.guest_notification_non_ephemeral_non_first_login);
         }
+        mGuestExitPreference.setSummary(guestExitSummary);
     }
 
     private void updateGuestCategory(Context context, List<UserInfo> users) {
@@ -1402,7 +1389,7 @@ public class UserSettings extends SettingsPreferenceFragment
         UserPreference pref = null;
         boolean isGuestAlreadyCreated = false;
         boolean canOpenUserDetails =
-                mUserCaps.mIsAdmin || (canSwitchUserNow() && !mUserCaps.mDisallowSwitchUser);
+                isCurrentUserAdmin() || (canSwitchUserNow() && !mUserCaps.mDisallowSwitchUser);
 
         mGuestUserCategory.removeAll();
         mGuestUserCategory.setVisible(false);
@@ -1417,16 +1404,12 @@ public class UserSettings extends SettingsPreferenceFragment
             pref.setOnPreferenceClickListener(this);
             pref.setEnabled(canOpenUserDetails);
             pref.setSelectable(true);
-            if (isEnableGuestModeUxChanges()) {
-                Drawable icon = getContext().getDrawable(R.drawable.ic_account_circle_outline);
-                icon.setTint(
-                        getColorAttrDefaultColor(getContext(), android.R.attr.colorControlNormal));
-                pref.setIcon(encircleUserIcon(
-                        UserIcons.convertToBitmapAtUserIconSize(
-                                getContext().getResources(), icon)));
-            } else {
-                pref.setIcon(getEncircledDefaultIcon());
-            }
+            Drawable icon = getContext().getDrawable(R.drawable.ic_account_circle_outline);
+            icon.setTint(
+                    getColorAttrDefaultColor(getContext(), android.R.attr.colorControlNormal));
+            pref.setIcon(encircleUserIcon(
+                    UserIcons.convertToBitmapAtUserIconSize(
+                            getContext().getResources(), icon)));
             pref.setKey(KEY_USER_GUEST);
             pref.setOrder(Preference.DEFAULT_ORDER);
             if (mUserCaps.mDisallowSwitchUser) {
@@ -1454,7 +1437,7 @@ public class UserSettings extends SettingsPreferenceFragment
             // "reset guest on exit" preference is shown hence also make guest category visible
             mGuestUserCategory.setVisible(true);
         }
-        if (mUserCaps.mIsGuest) {
+        if (isCurrentUserGuest()) {
             // guest category is not visible for guest user.
             mGuestUserCategory.setVisible(false);
         }
@@ -1468,13 +1451,6 @@ public class UserSettings extends SettingsPreferenceFragment
                 && mUserCaps.mUserSwitcherEnabled) {
             isVisible = true;
             mAddGuest.setVisible(true);
-            // when isEnableGuestModeUxChanges() is true, the icon is set via the layout xml
-            // In com.android.settings.users.UserSettingsTest
-            // we disable the check for setIcon being called
-            if (!isEnableGuestModeUxChanges()) {
-                Drawable icon = context.getDrawable(R.drawable.ic_account_circle);
-                mAddGuest.setIcon(centerAndTint(icon));
-            }
             mAddGuest.setSelectable(true);
             if (mGuestUserAutoCreated && mGuestCreationScheduled.get()) {
                 mAddGuest.setTitle(com.android.internal.R.string.guest_name);
@@ -1492,21 +1468,11 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private void updateAddUser(Context context) {
         updateAddUserCommon(context, mAddUser, mUserCaps.mCanAddRestrictedProfile);
-        // when isEnableGuestModeUxChanges() is true, the icon is set via the layout xml
-        if (!isEnableGuestModeUxChanges()) {
-            Drawable icon = context.getDrawable(R.drawable.ic_account_circle_filled);
-            mAddUser.setIcon(centerAndTint(icon));
-        }
     }
 
     private void updateAddSupervisedUser(Context context) {
         if (!TextUtils.isEmpty(mConfigSupervisedUserCreationPackage)) {
             updateAddUserCommon(context, mAddSupervisedUser, false);
-            // when isEnableGuestModeUxChanges() is true, the icon is set via the layout xml
-            if (!isEnableGuestModeUxChanges()) {
-                Drawable icon = context.getDrawable(R.drawable.ic_add_supervised_user);
-                mAddSupervisedUser.setIcon(centerAndTint(icon));
-            }
         } else {
             mAddSupervisedUser.setVisible(false);
         }
@@ -1603,28 +1569,17 @@ public class UserSettings extends SettingsPreferenceFragment
     @Override
     public boolean onPreferenceClick(Preference pref) {
         if (isCurrentUserGuest()) {
-            if (isEnableGuestModeUxChanges()) {
-                if (mGuestResetPreference != null && pref == mGuestResetPreference) {
-                    showDialog(DIALOG_CONFIRM_RESET_AND_RESTART_GUEST);
-                    return true;
+            if (mGuestResetPreference != null && pref == mGuestResetPreference) {
+                showDialog(DIALOG_CONFIRM_RESET_AND_RESTART_GUEST);
+                return true;
+            }
+            if (mGuestExitPreference != null && pref == mGuestExitPreference) {
+                if (mUserCaps.mIsEphemeral) {
+                    showDialog(DIALOG_CONFIRM_EXIT_GUEST_EPHEMERAL);
+                } else {
+                    showDialog(DIALOG_CONFIRM_EXIT_GUEST_NON_EPHEMERAL);
                 }
-                if (mGuestExitPreference != null && pref == mGuestExitPreference) {
-                    if (mUserCaps.mIsEphemeral) {
-                        showDialog(DIALOG_CONFIRM_EXIT_GUEST_EPHEMERAL);
-                    } else {
-                        showDialog(DIALOG_CONFIRM_EXIT_GUEST_NON_EPHEMERAL);
-                    }
-                    return true;
-                }
-            } else {
-                if (mGuestExitPreference != null && pref == mGuestExitPreference) {
-                    if (mGuestUserAutoCreated) {
-                        showDialog(DIALOG_CONFIRM_REMOVE_GUEST_WITH_AUTO_CREATE);
-                    } else {
-                        showDialog(DIALOG_CONFIRM_REMOVE_GUEST);
-                    }
-                    return true;
-                }
+                return true;
             }
         }
         if (pref == mMePreference) {
