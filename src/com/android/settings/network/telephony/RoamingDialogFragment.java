@@ -86,8 +86,8 @@ public class RoamingDialogFragment extends InstrumentedDialogFragment implements
                 break;
         }
         builder.setIconAttribute(android.R.attr.alertDialogIcon)
-               .setPositiveButton(android.R.string.yes, this)
-               .setNegativeButton(android.R.string.no, this);
+               .setPositiveButton(android.R.string.ok, this)
+               .setNegativeButton(android.R.string.cancel, this);
         return builder.create();
     }
 
