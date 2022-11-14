@@ -263,37 +263,49 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
             // simultaneously. DDS setting will be controlled by the config.
             needToDisableOthers = false;
         }
-        IImsRegistration imsRegistrationImpl = mTelephonyManager.getImsRegistration(
-                mSubscriptionManager.getSlotIndex(mSubId), FEATURE_MMTEL);
-        boolean isImsRegisteredOverCiwlan = false;
-        if (imsRegistrationImpl != null) {
-            try {
-                isImsRegisteredOverCiwlan = imsRegistrationImpl.getRegistrationTechnology() ==
-                        REGISTRATION_TECH_CROSS_SIM;
-            } catch (RemoteException ex) {
-                Log.e(TAG, "getRegistrationTechnology failed", ex);
-            }
-        }
-        final boolean isInNonDdsVoiceCall = mDdsDataOptionStateTuner.isInNonDdsVoiceCall();
-        Log.d(TAG, "isDialogNeeded: " + "enableData=" + enableData  + ", isMultiSim=" + isMultiSim +
-                ", needToDisableOthers=" + needToDisableOthers + ", isImsRegisteredOverCiwlan=" +
-                isImsRegisteredOverCiwlan + ", isInNonDdsVoiceCall=" + isInNonDdsVoiceCall);
+        Log.d(TAG, "isDialogNeeded: enableData = " + enableData  + ", isMultiSim = " + isMultiSim +
+                ", needToDisableOthers = " + needToDisableOthers);
         if (enableData && isMultiSim && needToDisableOthers) {
             mDialogType = MobileDataDialogFragment.TYPE_MULTI_SIM_DIALOG;
             return true;
         }
-        // If device is in a C_IWLAN call, and the user is trying to disable mobile data, display
-        // the warning dialog.
-        if (isInNonDdsVoiceCall && isImsRegisteredOverCiwlan && !enableData) {
-            mDialogType = MobileDataDialogFragment.TYPE_DISABLE_CIWLAN_DIALOG;
-            return true;
+        if (!enableData) {
+            final boolean isInVoiceCall = mDdsDataOptionStateTuner.isInVoiceCall();
+            boolean isInCiwlanOnlyMode = false;
+            boolean isImsRegisteredOverCiwlan = false;
+            if (isInVoiceCall) {
+                isInCiwlanOnlyMode = MobileNetworkSettings.isInCiwlanOnlyMode();
+                if (isInCiwlanOnlyMode) {
+                    IImsRegistration imsRegistrationImpl = mTelephonyManager.getImsRegistration(
+                            mSubscriptionManager.getSlotIndex(mSubId), FEATURE_MMTEL);
+                    if (imsRegistrationImpl != null) {
+                        try {
+                            isImsRegisteredOverCiwlan =
+                                    imsRegistrationImpl.getRegistrationTechnology() ==
+                                            REGISTRATION_TECH_CROSS_SIM;
+                        } catch (RemoteException ex) {
+                            Log.e(TAG, "getRegistrationTechnology failed", ex);
+                        }
+                    }
+                    Log.d(TAG, "isDialogNeeded: isInVoiceCall = " + isInVoiceCall +
+                            ", isInCiwlanOnlyMode = " + isInCiwlanOnlyMode +
+                            ", isImsRegisteredOverCiwlan = " + isImsRegisteredOverCiwlan);
+                    // If IMS is registered over C_IWLAN-only mode, the device is in a call, and
+                    // user is trying to disable mobile data, display a warning dialog that
+                    // disabling mobile data will cause a call drop.
+                    if (isInVoiceCall && isImsRegisteredOverCiwlan && isInCiwlanOnlyMode) {
+                        mDialogType = MobileDataDialogFragment.TYPE_DISABLE_CIWLAN_DIALOG;
+                        return true;
+                    }
+                }
+            }
         }
         return false;
     }
 
     private void showDialog(int type) {
-        final MobileDataDialogFragment dialogFragment = MobileDataDialogFragment.newInstance(type,
-                mSubId);
+        final MobileDataDialogFragment dialogFragment = MobileDataDialogFragment.newInstance(
+                mPreference.getTitle().toString(), type, mSubId);
         dialogFragment.show(mFragmentManager, DIALOG_TAG);
     }
 

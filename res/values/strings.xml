@@ -10498,6 +10498,10 @@
     <string name="preferred_network_mode_summary">Change the network operating mode</string>
     <!-- Dialog title for preferred network type [CHAR LIMIT=NONE] -->
     <string name="preferred_network_mode_dialogtitle">Preferred network type</string>
+    <!-- Dialog title for C_IWLAN-unsupported network type [CHAR LIMIT=NONE] -->
+    <string name="preferred_nw_incompatible_ciwlan_nw_mode_dialog_title">Incompatible network type</string>
+    <!-- Body of dialog for C_IWLAN-unsupported network type [CHAR LIMIT=NONE] -->
+    <string name="preferred_nw_incompatible_ciwlan_nw_mode_dialog_body">To select a network type not containing LTE, NR, or Global, please turn off Voice Over Cellular Internet.</string>
     <!-- Mobile network settings screen, a string showing the version of carrier settings for this
          subscription [CHAR LIMIT=NONE] -->
     <string name="carrier_settings_version">Carrier settings version</string>
@@ -10530,10 +10534,6 @@
     <string name="roaming_alert_title">Allow data roaming?</string>
     <!-- Mobile network settings screen, message asking the user to check their pricing with their Carrier, when enabling Data roaming. [CHAR LIMIT=NONE] -->
     <string name="roaming_check_price_warning">Check with your network provider for pricing.</string>
-    <!-- Mobile network settings screen, title of dialog box that appears when user tries to disable romaing while there is an ongoing C_IWLAN call [CHAR LIMIT=120] -->
-    <string name="roaming_disable_title">Disable roaming?</string>
-    <!-- Mobile network settings screen, body of dialog box that appears when user tries to disable romaing while there is an ongoing C_IWLAN call [CHAR LIMIT=120] -->
-    <string name="roaming_disable_dialog_ciwlan_call">Disabling roaming may cause ongoing call disconnect.</string>
 
     <!-- Title for mobile data preference, to display the mobile data usage for each app. [CHAR LIMIT=NONE]-->
     <string name="mobile_data_usage_title">App data usage</string>
@@ -10837,8 +10837,12 @@
     <!-- Backup calling summary.  [CHAR LIMIT=100] -->
     <string name="backup_calling_setting_summary">If <xliff:g id="backup_calling_operator_text" example="Google Fi">%1$s</xliff:g> is unavailable or roaming, use your mobile data SIM for <xliff:g id="backup_calling_carrier_text" example="Google Fi">%1$s</xliff:g> calls.</string>
 
-    <!-- Body of dialog shown to request confirmation that C_IWLAN disabling might cause call drop while IMS is registered on C_IWLAN and device is in a call [CHAR LIMIT=NONE] -->
-    <string name="backup_calling_disable_dialog_ciwlan_call">Disabling Voice Over Cellular Internet may cause ongoing call disconnect.</string>
+    <!-- Title of dialog shown to request confirmation that disabling certain toggles, like mobile data, roaming, and backup calling, will cause a call drop while IMS is registered on C_IWLAN-only and device is in a call [CHAR LIMIT=120] -->
+    <string name="toggle_disabling_ciwlan_call_dialog_title">Disable %s?</string>
+    <!-- Body of dialog shown to request confirmation that disabling certain toggles, like mobile data, roaming, and backup calling, will cause a call drop while IMS is registered on C_IWLAN-only and device is in a call [CHAR LIMIT=NONE] -->
+    <string name="toggle_disabling_ciwlan_call_dialog_body">Disabling %s will cause ongoing call drop.</string>
+    <!-- Body of dialog shown to warn when an incompatible preferred network type is currently selected and user tries to turn on C_IWLAN [CHAR LIMIT=NONE] -->
+    <string name="backup_calling_enable_dialog_incompatible_nw_type">To turn on Voice Over Cellular Internet, please set the preferred network type to one including LTE, NR, or Global.</string>
 
     <!-- List of synonyms for the cross SIM calling titles, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_backup_calling">backup calling</string>
@@ -11128,8 +11132,6 @@
     <string name="mobile_data_disable_message">You won\’t have access to data or the internet through <xliff:g id="carrier" example="T-Mobile">%s</xliff:g>. Internet will only be available via Wi\u2011Fi.</string>
     <!-- Text used to refer to the user's current carrier in mobile_data_disable_message if the users's mobile network carrier name is not available [CHAR LIMIT=NONE] -->
     <string name="mobile_data_disable_message_default_carrier">your carrier</string>
-    <!-- Body of dialog shown to request confirmation that mobile data disabling might cause call drop while IMS is registered on C_IWLAN and device is in a call [CHAR LIMIT=NONE] -->
-    <string name="mobile_data_disable_dialog_ciwlan_call">Disabling mobile data may cause ongoing call disconnect.</string>
     <!-- Summary for enterprise restriction not allow to use [CHAR LIMIT=NONE] -->
     <string name="not_allowed_by_ent">Not allowed by your organization</string>
 
