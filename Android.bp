@@ -56,6 +56,15 @@ bredr_vs_btadva_java_defaults {
    }
 }
 
+java_library {
+    name: "Settings-change-ids",
+    srcs: ["src/com/android/settings/ChangeIds.java"],
+    libs: [
+        "app-compat-annotations",
+    ],
+}
+
+
 // Build the Settings APK
 android_library {
     name: "Settings-core",
@@ -97,15 +106,16 @@ android_library {
         "zxing-core-1.7",
         "android.hardware.dumpstate-V1.0-java",
         "android.hardware.dumpstate-V1.1-java",
+        "android.hardware.dumpstate-V1-java",
         "lottie",
         "WifiTrackerLib",
         "SettingsLibActivityEmbedding",
+        "Settings-change-ids",
     ],
 
     libs: [
         "telephony-common",
         "ims-common",
-        "app-compat-annotations",
         "telephony-ext",
         "extphonelib",
     ],
@@ -113,7 +123,7 @@ android_library {
 
 platform_compat_config {
     name: "settings-platform-compat-config",
-    src: ":Settings-core",
+    src: ":Settings-change-ids",
     system_ext_specific: true,
 }
 
@@ -154,7 +164,7 @@ filegroup {
 // over all the sources together.
 filegroup {
     name: "Settings_srcs",
-    srcs: ["src/**/*.java"],
+    srcs: ["src/**/*.java", "src/**/*.kt"],
 }
 
 filegroup {
