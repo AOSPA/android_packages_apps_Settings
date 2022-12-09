@@ -5244,8 +5244,8 @@
     <string name="advanced_battery_preference_title">Battery usage</string>
     <!-- Preference summary for advanced battery usage, for past 24 hours [CHAR LIMIT=40] -->
     <string name="advanced_battery_preference_summary_with_hours">View usage for past 24 hours</string>
-    <!-- Preference summary for advanced battery usage, from last full charge [CHAR LIMIT=40] -->
-    <string name="advanced_battery_preference_summary">View usage from last full charge</string>
+    <!-- Preference summary for advanced battery usage, since last full charge [CHAR LIMIT=40] -->
+    <string name="advanced_battery_preference_summary">View usage since last full charge</string>
 
     <!-- Activity title for battery usage details for an app. or power consumer -->
     <string name="battery_details_title">App battery usage</string>
@@ -5446,50 +5446,50 @@
     <!-- Title for battery usage amount by this app. [CHAR LIMIT=80] -->
     <string name="battery_detail_power_usage">Battery usage</string>
 
-    <!-- Description for battery total and background usage time for an app, i.e. 1 hr 15 min total • 39 min background from last full charge. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
-    <string name="battery_total_and_bg_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • <xliff:g id="time" example="39 min">^2</xliff:g> background\nfrom last full charge</string>
+    <!-- Description for battery total and background usage time for an app, i.e. 1 hr 15 min total • 39 min background since last full charge. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
+    <string name="battery_total_and_bg_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • <xliff:g id="time" example="39 min">^2</xliff:g> background\nsince last full charge</string>
     <!-- Description for battery total and background usage time for an app, i.e. 1 hr 15 min total • 39 min background for past 24 hr. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
     <string name="battery_total_and_bg_usage_24hr"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • <xliff:g id="time" example="39 min">^2</xliff:g> background\nfor past 24 hr</string>
     <!-- Description for battery total and background usage time in a time period for an app, i.e. 1 hr 15 min total • 39 min background for 12 am-2 am. Note: ^1, ^2 and ^3 should be used in all translations [CHAR LIMIT=120] -->
     <string name="battery_total_and_bg_usage_with_period"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • <xliff:g id="time" example="39 min">^2</xliff:g> background\nfor <xliff:g id="time_period" example="12 am-2 am">^3</xliff:g></string>
 
-    <!-- Description for battery total usage time is less than a minute for an app from last full charge [CHAR LIMIT=120] -->
-    <string name="battery_total_usage_less_minute">Total less than a minute from last full charge</string>
+    <!-- Description for battery total usage time is less than a minute for an app since last full charge [CHAR LIMIT=120] -->
+    <string name="battery_total_usage_less_minute">Total less than a minute since last full charge</string>
     <!-- Description for battery total usage time is less than a minute for an app for past 24 hr [CHAR LIMIT=120] -->
     <string name="battery_total_usage_less_minute_24hr">Total less than a minute for past 24 hr</string>
     <!-- Description for battery total usage time is less than a minute in a time period for an app, i.e. Total less than a minute for 12 am-2 am. Note: ^1 should be used in all translations[CHAR LIMIT=120] -->
     <string name="battery_total_usage_less_minute_with_period">Total less than a minute for <xliff:g id="time_period" example="12 am-2 am">^1</xliff:g></string>
 
-    <!-- Description for battery background usage time is less than a minute for an app from last full charge [CHAR LIMIT=120] -->
-    <string name="battery_bg_usage_less_minute">Background less than a minute from last full charge</string>
+    <!-- Description for battery background usage time is less than a minute for an app since last full charge [CHAR LIMIT=120] -->
+    <string name="battery_bg_usage_less_minute">Background less than a minute since last full charge</string>
     <!-- Description for battery background usage time is less than a minute for an app for past 24 hr [CHAR LIMIT=120] -->
     <string name="battery_bg_usage_less_minute_24hr">Background less than a minute for past 24 hr</string>
     <!-- Description for battery background usage time is less than a minute in a time period for an app, i.e. Background less than a minute for 12 am-2 am. Note: ^1 should be used in all translations[CHAR LIMIT=120] -->
     <string name="battery_bg_usage_less_minute_with_period">Background less than a minute for <xliff:g id="time_period" example="12 am-2 am">^1</xliff:g></string>
 
-    <!-- Description for battery total usage time for an app, i.e. 1 hr 15 min total from last full charge. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
-    <string name="battery_total_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total from last full charge</string>
+    <!-- Description for battery total usage time for an app, i.e. 1 hr 15 min total since last full charge. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
+    <string name="battery_total_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total since last full charge</string>
     <!-- Description for battery total usage time for an app, i.e. 1 hr 15 min total for past 24 hr. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
     <string name="battery_total_usage_24hr"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total for past 24 hr</string>
     <!-- Description for battery total usage time in a time period for an app, i.e. 1 hr 15 min total for 12 am-2 am. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
     <string name="battery_total_usage_with_period"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total for <xliff:g id="time_period" example="12 am-2 am">^2</xliff:g></string>
 
-    <!-- Description for battery background usage time for an app, i.e. 1 hr 15 min background from last full charge. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
-    <string name="battery_bg_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> background from last full charge</string>
+    <!-- Description for battery background usage time for an app, i.e. 1 hr 15 min background since last full charge. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
+    <string name="battery_bg_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> background since last full charge</string>
     <!-- Description for battery background usage time for an app, i.e. 1 hr 15 min background for past 24 hr. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
     <string name="battery_bg_usage_24hr"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> background for past 24 hr</string>
     <!-- Description for battery background usage time in a time period for an app, i.e. 1 hr 15 min background for 12 am-2 am. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
     <string name="battery_bg_usage_with_period"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> background for <xliff:g id="time_period" example="12 am-2 am">^2</xliff:g></string>
 
-    <!-- Description for battery total usage with background usage time less than a minute for an app, i.e. 1 hr 15 min total • background less than a minute from last full charge. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
-    <string name="battery_total_usage_and_bg_less_minute_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • background less than a minute\nfrom last full charge</string>
+    <!-- Description for battery total usage with background usage time less than a minute for an app, i.e. 1 hr 15 min total • background less than a minute since last full charge. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
+    <string name="battery_total_usage_and_bg_less_minute_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • background less than a minute\nsince last full charge</string>
     <!-- Description for battery total usage with background usage time less than a minute for an app, i.e. 1 hr 15 min total • background less than a minute for past 24 hr. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
     <string name="battery_total_usage_and_bg_less_minute_usage_24hr"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • background less than a minute\nfor past 24 hr</string>
     <!-- Description for battery total usage with background usage time less than a minute in a time period for an app, i.e. 1 hr 15 min total • background less than a minute for 12 am-2 am. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • background less than a minute\nfor <xliff:g id="time_period" example="12 am-2 am">^2</xliff:g></string>
 
-    <!-- Description for no any battery usage from last full charge [CHAR LIMIT=120] -->
-    <string name="battery_not_usage">No usage from last full charge</string>
+    <!-- Description for no any battery usage since last full charge [CHAR LIMIT=120] -->
+    <string name="battery_not_usage">No usage since last full charge</string>
     <!-- Description for no any battery usage for past 24 hr [CHAR LIMIT=120] -->
     <string name="battery_not_usage_24hr">No usage for past 24 hr</string>
     <!-- Description for no usage time but have battery usage [CHAR LIMIT=120] -->
@@ -6771,6 +6771,7 @@
     <!-- Help URL, Top level privacy settings [DO NOT TRANSLATE] -->
     <string name="help_url_privacy_dashboard" translatable="false"></string>
 
+    <string name="help_url_memtag" translatable="false"></string>
     <string name="help_url_network_dashboard" translatable="false"></string>
     <string name="help_url_connected_devices" translatable="false"></string>
     <string name="help_url_apps_and_notifications" translatable="false"></string>
@@ -7050,6 +7051,8 @@
     <!-- Title for setting tile leading to setting UI which allows user set default app to
     handle actions such as open web page, making phone calls, default SMS apps [CHAR  LIMIT=40]-->
     <string name="app_default_dashboard_title">Default apps</string>
+    <!-- Title for setting tile leading to App Clones menu under the Apps page [CHAR LIMIT=40] -->
+    <string name="cloned_apps_dashboard_title">Cloned Apps</string>
     <!-- Summary text for system preference title, showing important setting items under system setting [CHAR LIMIT=NONE]-->
     <string name="system_dashboard_summary">Languages, gestures, time, backup</string>
     <!-- Summary text for language preference title, showing important setting items under language setting [CHAR LIMIT=NONE]-->
@@ -8700,6 +8703,38 @@
     <string name="confirm_sim_deletion_title">Confirm SIM deletion</string>
     <!-- [CHAR LIMIT=NONE] eSim deletion confirmation description  -->
     <string name="confirm_sim_deletion_description">Verify it\u0027s you before erasing a downloaded SIM</string>
+
+    <!-- TODO(b/258550150): Finalize all strings in this section and remove translatable="false" -->
+    <!-- [CHAR LIMIT=32] Name of Advanced memory protection page in "More Security Settings" and heading of page. -->
+    <string name="memtag_title" translatable="false">Advanced memory protection</string>
+    <!-- [CHAR LIMIT=52] Label for button to turn on / off Advanced memory protection.-->
+    <string name="memtag_toggle" translatable="false">Try Advanced memory protection</string>
+    <!-- [CHAR LIMIT=NONE] Subtitle of Advanced memory protection page. -->
+    <string name="memtag_intro" translatable="false">This beta feature helps you protect your device from bugs that may put your security at risk.</string>
+    <!-- [CHAR LIMIT=NONE] Status label indicating that Advanced memory protection is on. -->
+    <string name="memtag_on" translatable="false">On</string>
+    <!-- [CHAR LIMIT=37] Status label indicating that Advanced memory protection is off. -->
+    <string name="memtag_off" translatable="false">Off</string>
+    <!-- [CHAR LIMIT=37] Status label indicating that system needs to be rebooted for Advanced memory protection to be on. -->
+    <string name="memtag_on_pending" translatable="false">On after restart</string>
+    <!-- [CHAR LIMIT=37] Status label indicating that system needs to be rebooted for Advanced memory protection to be off. -->
+    <string name="memtag_off_pending" translatable="false">Off after restart</string>
+    <!-- [CHAR LIMIT=37] Status label indicating that Advanced memory protection was forced off via remote device configuration. -->
+    <string name="memtag_force_off" translatable="false">Currently unavailable for your device.</string>
+    <!-- [CHAR LIMIT=NONE] Subtext on page to control Advanced memory protection settings. -->
+    <string name="memtag_footer" translatable="false">You\u0027ll have to restart your device to turn Advanced memory protection on or off. When it\u0027s on, you may notice slower device performance.</string>
+    <!-- [CHAR LIMIT=31] Header of dialog asking user to reboot device. -->
+    <string name="memtag_reboot_title" translatable="false">Restart device?</string>
+    <!-- [CHAR LIMIT=NONE] Message shown in dialog prompting user to reboot device to turn on Advanced memory protection.-->
+    <string name="memtag_reboot_message_on" translatable="false">You\u0027ll need to restart your device to turn on Advanced memory protection.</string>
+    <!-- [CHAR LIMIT=NONE] Message shown in dialog prompting user to reboot device to turn off Advanced memory protection.-->
+    <string name="memtag_reboot_message_off" translatable="false">You\u0027ll need to restart your device to turn off Advanced memory protection.</string>
+    <!-- [CHAR LIMIT=17] Button label in dialog prompting user to reboot device.-->
+    <string name="memtag_reboot_yes" translatable="false">Restart</string>
+    <!-- [CHAR LIMIT=17] Button label in dialog prompting user to reboot device.-->
+    <string name="memtag_reboot_no" translatable="false">Not now</string>
+    <!-- [CHAR LIMIT=NONE] Label for Learn More link. -->
+    <string name="memtag_learn_more" translatable="false">Learn more about Advanced memory protection.</string>
 
     <!-- Opening string on the dialog that prompts the user to confirm that they really want to delete their existing work profile. The administration app icon and name appear after the final colon. [CHAR LIMIT=NONE] -->
     <string name="opening_paragraph_delete_profile_unknown_company">This work profile is managed by:</string>
