@@ -126,6 +126,7 @@
     <uses-permission android:name="android.permission.READ_SAFETY_CENTER_STATUS" />
     <uses-permission android:name="android.permission.SEND_SAFETY_CENTER_UPDATE" />
     <uses-permission android:name="android.permission.START_VIEW_APP_FEATURES" />
+    <uses-permission android:name="android.permission.ACCESS_KEYGUARD_QUICK_AFFORDANCES" />
 
     <application
             android:name=".SettingsApplication"
@@ -845,6 +846,37 @@
                        android:value="com.android.settings.datausage.DataSaverSummary" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                        android:value="@string/menu_key_network"/>
+        </activity>
+
+        <activity
+            android:name="Settings$LongBackgroundTasksActivity"
+            android:exported="true"
+            android:label="@string/long_background_tasks_label">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.MANAGE_APP_LONG_JOBS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.manageapplications.ManageApplications" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_apps"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
+        <activity
+            android:name="Settings$LongBackgroundTasksAppActivity"
+            android:exported="true"
+            android:label="@string/long_background_tasks_label">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.MANAGE_APP_LONG_JOBS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.appinfo.LongBackgroundTasksDetails" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_apps"/>
         </activity>
 
         <activity
@@ -2434,6 +2466,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".biometrics2.ui.view.FingerprintEnrollmentActivity"
+            android:exported="true"
+            android:permission="android.permission.MANAGE_FINGERPRINT"
+            android:theme="@style/GlifTheme.Light"/>
 
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollIntroductionInternal"
                   android:exported="false"
@@ -4750,7 +4787,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".spa.SpaActivity" android:exported="false"/>
+        <activity
+            android:name=".spa.SpaActivity"
+            android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize"
+            android:exported="false" />
         <activity android:name=".spa.SpaBridgeActivity" android:exported="false"/>
 
         <activity-alias android:name="UsageStatsActivity"

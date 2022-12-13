@@ -151,6 +151,11 @@ public class EnabledNetworkModePreferenceController extends
             return;
         }
         super.updateState(preference);
+
+        if (mBuilder == null) {
+            return;
+        }
+
         final ListPreference listPreference = (ListPreference) preference;
 
         mBuilder.setPreferenceEntries();
@@ -905,10 +910,9 @@ public class EnabledNetworkModePreferenceController extends
 
     @Override
     public void onSubscriptionsChanged() {
-        if (mBuilder == null) {
-            return;
+        if (mBuilder != null) {
+            mBuilder.updateConfig();
         }
-        mBuilder.updateConfig();
     }
 
     private class PhoneCallStateListener extends PhoneStateListener {

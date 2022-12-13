@@ -123,10 +123,7 @@ public class AutoDataSwitchPreferenceController extends TelephonyTogglePreferenc
 
     @Override
     public boolean isChecked() {
-        if (mManager == null) {
-            return false;
-        }
-        return mManager.isMobileDataPolicyEnabled(
+        return mManager != null && mManager.isMobileDataPolicyEnabled(
                 TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH);
     }
 

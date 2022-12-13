@@ -619,7 +619,7 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.mHourlyChartIndex = 1;
 
         assertThat(mBatteryChartPreferenceController.getSlotInformation()).isEqualTo(
-                "10 AM - 12 PM");
+                "10 AM - 12 PM");
     }
 
     @Test
@@ -629,7 +629,7 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.mHourlyChartIndex = 8;
 
         assertThat(mBatteryChartPreferenceController.getSlotInformation()).isEqualTo(
-                "Sunday 4 PM - 6 PM");
+                "Sunday 4 PM - 6 PM");
     }
 
     @Test
@@ -679,8 +679,19 @@ public final class BatteryChartPreferenceControllerTest {
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
         for (int index = 0; index < numOfHours; index++) {
             final ContentValues values = new ContentValues();
-            values.put("batteryLevel", Integer.valueOf(100 - index));
-            values.put("consumePower", Integer.valueOf(100 - index));
+            final DeviceBatteryState deviceBatteryState =
+                    DeviceBatteryState
+                            .newBuilder()
+                            .setBatteryLevel(100 - index)
+                            .build();
+            final BatteryInformation batteryInformation =
+                    BatteryInformation
+                            .newBuilder()
+                            .setDeviceBatteryState(deviceBatteryState)
+                            .setConsumePower(100 - index)
+                            .build();
+            values.put(BatteryHistEntry.KEY_BATTERY_INFORMATION,
+                    ConvertUtils.convertBatteryInformationToString(batteryInformation));
             final BatteryHistEntry entry = new BatteryHistEntry(values);
             final Map<String, BatteryHistEntry> entryMap = new HashMap<>();
             entryMap.put("fake_entry_key" + index, entry);

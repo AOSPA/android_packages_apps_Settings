@@ -25,7 +25,6 @@ import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.CompoundButton;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -45,7 +44,6 @@ import java.util.List;
 public class FingerprintEnrollFinish extends BiometricEnrollBase {
 
     private static final String TAG = "FingerprintEnrollFinish";
-    private static final String KEY_REQUIRE_SCREEN_ON_TO_AUTH = "require_screen_on_to_auth_toggle";
     private static final String ACTION_FINGERPRINT_SETTINGS =
             "android.settings.FINGERPRINT_SETTINGS";
     @VisibleForTesting
@@ -54,14 +52,9 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
 
     private FingerprintManager mFingerprintManager;
 
-    private FingerprintSettingsRequireScreenOnToAuthPreferenceController
-            mRequireScreenOnToAuthPreferenceController;
-    private FingerprintRequireScreenOnToAuthToggle mRequireScreenOnToAuthToggle;
     private boolean mCanAssumeSfps;
 
     private boolean mIsAddAnotherOrFinish;
-
-    private CompoundButton.OnCheckedChangeListener mRequireScreenOnToAuthToggleListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,20 +65,11 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
         mCanAssumeSfps = props != null && props.size() == 1 && props.get(0).isAnySidefpsType();
         if (mCanAssumeSfps) {
             setContentView(R.layout.sfps_enroll_finish);
-            mRequireScreenOnToAuthPreferenceController =
-                    new FingerprintSettingsRequireScreenOnToAuthPreferenceController(
-                            getApplicationContext(),
-                            KEY_REQUIRE_SCREEN_ON_TO_AUTH
-                    );
         } else {
             setContentView(R.layout.fingerprint_enroll_finish);
         }
         setHeaderText(R.string.security_settings_fingerprint_enroll_finish_title);
-        if (mCanAssumeSfps) {
-            setDescriptionText(R.string.security_settings_sfps_enroll_finish);
-        } else {
-            setDescriptionText(R.string.security_settings_fingerprint_enroll_finish_v2_message);
-        }
+        setDescriptionText(R.string.security_settings_fingerprint_enroll_finish_v2_message);
 
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
         mFooterBarMixin.setSecondaryButton(
@@ -104,20 +88,6 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
                         .setTheme(R.style.SudGlifButton_Primary)
                         .build()
         );
-
-        if (mCanAssumeSfps) {
-            mRequireScreenOnToAuthToggleListener =
-                (buttonView, isChecked) -> {
-                    mRequireScreenOnToAuthPreferenceController.setChecked(isChecked);
-                };
-            mRequireScreenOnToAuthToggle = findViewById(R.id.require_screen_on_to_auth_toggle);
-            mRequireScreenOnToAuthToggle.setChecked(
-            mRequireScreenOnToAuthPreferenceController.isChecked());
-            mRequireScreenOnToAuthToggle.setListener(mRequireScreenOnToAuthToggleListener);
-            mRequireScreenOnToAuthToggle.setOnClickListener(v -> {
-                mRequireScreenOnToAuthToggle.getSwitch().toggle();
-            });
-        }
     }
 
     @Override
@@ -131,13 +101,6 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
     @Override
     protected void onResume() {
         super.onResume();
-        if (mCanAssumeSfps) {
-            mRequireScreenOnToAuthToggleListener.onCheckedChanged(
-                    mRequireScreenOnToAuthToggle.getSwitch(),
-                    mRequireScreenOnToAuthToggle.isChecked()
-            );
-        }
-
         FooterButton addButton = mFooterBarMixin.getSecondaryButton();
 
         final FingerprintManager fpm = Utils.getFingerprintManagerOrNull(this);
@@ -169,12 +132,12 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
     @Override
     protected void onNextButtonClick(View view) {
         updateFingerprintSuggestionEnableState();
-        finishAndToNext();
+        finishAndToNext(RESULT_FINISHED);
     }
 
-    private void finishAndToNext() {
+    private void finishAndToNext(int resultCode) {
         mIsAddAnotherOrFinish = true;
-        setResult(RESULT_FINISHED);
+        setResult(resultCode);
         if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
             postEnroll();
         }
@@ -221,9 +184,12 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         updateFingerprintSuggestionEnableState();
-        if (requestCode == BiometricUtils.REQUEST_ADD_ANOTHER && resultCode != RESULT_CANCELED) {
+        if (requestCode == BiometricUtils.REQUEST_ADD_ANOTHER && resultCode == RESULT_TIMEOUT) {
+            finishAndToNext(resultCode);
+        } else if (requestCode == BiometricUtils.REQUEST_ADD_ANOTHER
+                && resultCode != RESULT_CANCELED) {
             // If user cancel during "Add another", just use similar flow on "Next" button
-            finishAndToNext();
+            finishAndToNext(RESULT_FINISHED);
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
