@@ -42,6 +42,7 @@ import android.os.UserManager;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImeAwareEditText;
@@ -53,6 +54,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
@@ -63,6 +65,7 @@ import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
+import com.android.settings.biometrics2.ui.view.FingerprintEnrollmentActivity;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.DashboardFragment;
@@ -158,6 +161,8 @@ public class FingerprintSettings extends SubSettings {
         private static final String KEY_IS_ENROLLING = "is_enrolled";
         private static final String KEY_REQUIRE_SCREEN_ON_TO_AUTH =
                 "security_settings_require_screen_on_to_auth";
+        private static final String KEY_FINGERPRINT_UNLOCK_CATEGORY =
+                "security_settings_fingerprint_unlock_category";
 
         private static final int MSG_REFRESH_FINGERPRINT_TEMPLATES = 1000;
         private static final int MSG_FINGER_AUTH_SUCCESS = 1001;
@@ -177,6 +182,7 @@ public class FingerprintSettings extends SubSettings {
         private FingerprintSettingsRequireScreenOnToAuthPreferenceController
                 mRequireScreenOnToAuthPreferenceController;
         private RestrictedSwitchPreference mRequireScreenOnToAuthPreference;
+        private PreferenceCategory mFingerprintUnlockCategory;
 
         private FingerprintManager mFingerprintManager;
         private FingerprintUpdater mFingerprintUpdater;
@@ -442,7 +448,8 @@ public class FingerprintSettings extends SubSettings {
                 mFooterColumns.add(column2);
             } else {
                 final FooterColumn column = new FooterColumn();
-                column.mTitle = getText(R.string.security_settings_fingerprint_v2_home_screen_text);
+                column.mTitle = getText(
+                        R.string.security_settings_fingerprint_enroll_introduction_v2_message);
                 column.mLearnMoreClickListener = learnMoreClickListener;
                 mFooterColumns.add(column);
             }
@@ -493,6 +500,7 @@ public class FingerprintSettings extends SubSettings {
             addFingerprintItemPreferences(root);
             addPreferencesFromResource(getPreferenceScreenResId());
             mRequireScreenOnToAuthPreference = findPreference(KEY_REQUIRE_SCREEN_ON_TO_AUTH);
+            mFingerprintUnlockCategory = findPreference(KEY_FINGERPRINT_UNLOCK_CATEGORY);
             for (AbstractPreferenceController controller : mControllers) {
                 ((FingerprintSettingsPreferenceController) controller).setUserId(mUserId);
             }
@@ -504,7 +512,7 @@ public class FingerprintSettings extends SubSettings {
                         mRequireScreenOnToAuthPreferenceController.setChecked(!isChecked);
                         return true;
                     });
-            mRequireScreenOnToAuthPreference.setVisible(false);
+            mFingerprintUnlockCategory.setVisible(false);
             if (isSfps()) {
                 setRequireScreenOnToAuthVisibility();
             }
@@ -517,9 +525,9 @@ public class FingerprintSettings extends SubSettings {
             final boolean removalInProgress = mRemovalSidecar.inProgress();
             // Removing last remaining fingerprint
             if (fingerprintsEnrolled == 0 && removalInProgress) {
-                mRequireScreenOnToAuthPreference.setVisible(false);
+                mFingerprintUnlockCategory.setVisible(false);
             } else {
-                mRequireScreenOnToAuthPreference.setVisible(true);
+                mFingerprintUnlockCategory.setVisible(true);
             }
         }
 
@@ -887,7 +895,11 @@ public class FingerprintSettings extends SubSettings {
         private void addFirstFingerprint() {
             Intent intent = new Intent();
             intent.setClassName(SETTINGS_PACKAGE_NAME,
-                    FingerprintEnrollIntroductionInternal.class.getName());
+                    FeatureFlagUtils.isEnabled(getActivity(),
+                            FeatureFlagUtils.SETTINGS_BIOMETRICS2_ENROLLMENT)
+                            ? FingerprintEnrollmentActivity.class.getName()
+                            : FingerprintEnrollIntroductionInternal.class.getName()
+            );
 
             intent.putExtra(EXTRA_FROM_SETTINGS_SUMMARY, true);
             intent.putExtra(SettingsBaseActivity.EXTRA_PAGE_TRANSITION_TYPE,
@@ -1014,7 +1026,9 @@ public class FingerprintSettings extends SubSettings {
             @Override
             public void onCancel(DialogInterface dialog) {
                 super.onCancel(dialog);
-                mDismissListener.onDismiss(dialog);
+                if (mDismissListener != null) {
+                    mDismissListener.onDismiss(dialog);
+                }
             }
 
             @Override
@@ -1052,7 +1066,9 @@ public class FingerprintSettings extends SubSettings {
                                             parent.renameFingerPrint(mFp.getBiometricId(),
                                                     newName);
                                         }
-                                        mDismissListener.onDismiss(dialog);
+                                        if (mDismissListener != null) {
+                                            mDismissListener.onDismiss(dialog);
+                                        }
                                         dialog.dismiss();
                                     }
                                 })

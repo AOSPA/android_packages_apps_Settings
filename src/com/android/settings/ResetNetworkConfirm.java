@@ -16,31 +16,16 @@
 
 package com.android.settings;
 
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.app.settings.SettingsEnums;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothManager;
-import android.content.ContentResolver;
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkPolicyManager;
-import android.net.Uri;
-import android.net.VpnManager;
-import android.net.wifi.WifiManager;
-import android.net.wifi.p2p.WifiP2pManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
-import android.os.RecoverySystem;
-import android.os.UserHandle;
-import android.os.UserManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionManager.OnSubscriptionsChangedListener;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,11 +37,12 @@ import android.widget.Toast;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.core.InstrumentedFragment;
-import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
-import com.android.settings.network.apn.ApnSettings;
-import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.settings.network.ResetNetworkOperationBuilder;
+import com.android.settings.network.ResetNetworkRestrictionViewBuilder;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Confirm and execute a reset of the network settings to a clean "just out of the box"
@@ -97,61 +83,25 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            boolean isResetSucceed = true;
-            ConnectivityManager connectivityManager = (ConnectivityManager)
-                    mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-            if (connectivityManager != null) {
-                connectivityManager.factoryReset();
-            }
-
-            VpnManager vpnManager = mContext.getSystemService(VpnManager.class);
-            if (vpnManager != null) {
-                vpnManager.factoryReset();
-            }
-
-            WifiManager wifiManager = (WifiManager)
-                    mContext.getSystemService(Context.WIFI_SERVICE);
-            if (wifiManager != null) {
-                wifiManager.factoryReset();
-            }
-
-            p2pFactoryReset(mContext);
-
+            final AtomicBoolean resetEsimSuccess = new AtomicBoolean(true);
+            ResetNetworkOperationBuilder builder =
+                    (new ResetNetworkOperationBuilder(mContext))
+                    .resetConnectivityManager()
+                    .resetVpnManager()
+                    .resetWifiManager()
+                    .resetWifiP2pManager(Looper.getMainLooper());
             if (mEraseEsim) {
-                isResetSucceed = RecoverySystem.wipeEuiccData(mContext, mPackageName);
+                builder = builder.resetEsim(mContext.getPackageName(),
+                        success -> { resetEsimSuccess.set(success); }
+                        );
             }
+            builder.resetTelephonyAndNetworkPolicyManager(mSubId)
+                    .resetBluetoothManager()
+                    .resetApn(mSubId)
+                    .build()
+                    .run();
 
-            TelephonyManager telephonyManager = (TelephonyManager)
-                    mContext.getSystemService(TelephonyManager.class)
-                            .createForSubscriptionId(mSubId);
-            if (telephonyManager != null) {
-                telephonyManager.resetSettings();
-            }
-
-            NetworkPolicyManager policyManager = (NetworkPolicyManager)
-                    mContext.getSystemService(Context.NETWORK_POLICY_SERVICE);
-            if (policyManager != null) {
-                String subscriberId = telephonyManager.getSubscriberId();
-                policyManager.factoryReset(subscriberId);
-            }
-
-            BluetoothManager btManager = (BluetoothManager)
-                    mContext.getSystemService(Context.BLUETOOTH_SERVICE);
-            if (btManager != null) {
-                BluetoothAdapter btAdapter = btManager.getAdapter();
-                if (btAdapter != null) {
-                    btAdapter.clearBluetooth();
-                    LocalBluetoothManager mLocalBtManager =
-                                      LocalBluetoothManager.getInstance(mContext, null);
-                    if (mLocalBtManager != null) {
-                        CachedBluetoothDeviceManager cachedDeviceManager =
-                                            mLocalBtManager.getCachedDeviceManager();
-                        cachedDeviceManager.clearAllDevices();
-                    }
-                }
-            }
-
-            restoreDefaultApn(mContext);
+            boolean isResetSucceed = resetEsimSuccess.get();
             Log.d(TAG, "network factoryReset complete. succeeded: "
                     + String.valueOf(isResetSucceed));
             return isResetSucceed;
@@ -215,20 +165,6 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
         }
     };
 
-    @VisibleForTesting
-    void p2pFactoryReset(Context context) {
-        WifiP2pManager wifiP2pManager = (WifiP2pManager)
-                context.getSystemService(Context.WIFI_P2P_SERVICE);
-        if (wifiP2pManager != null) {
-            WifiP2pManager.Channel channel = wifiP2pManager.initialize(
-                    context.getApplicationContext(), context.getMainLooper(),
-                    null /* listener */);
-            if (channel != null) {
-                wifiP2pManager.factoryReset(channel, null /* listener */);
-            }
-        }
-    }
-
     private ProgressDialog getProgressDialog(Context context) {
         final ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.setIndeterminate(true);
@@ -236,20 +172,6 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
         progressDialog.setMessage(
                 context.getString(R.string.main_clear_progress_text));
         return progressDialog;
-    }
-
-    /**
-     * Restore APN settings to default.
-     */
-    private void restoreDefaultApn(Context context) {
-        Uri uri = Uri.parse(ApnSettings.RESTORE_CARRIERS_URI);
-
-        if (SubscriptionManager.isUsableSubscriptionId(mSubId)) {
-            uri = Uri.withAppendedPath(uri, "subId/" + String.valueOf(mSubId));
-        }
-
-        ContentResolver resolver = context.getContentResolver();
-        resolver.delete(uri, null, null);
     }
 
     /**
@@ -271,17 +193,10 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        final EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
-                mActivity, UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId());
-        if (RestrictedLockUtilsInternal.hasBaseUserRestriction(mActivity,
-                UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId())) {
-            return inflater.inflate(R.layout.network_reset_disallowed_screen, null);
-        } else if (admin != null) {
-            new ActionDisabledByAdminDialogHelper(mActivity)
-                    .prepareDialogBuilder(UserManager.DISALLOW_NETWORK_RESET, admin)
-                    .setOnDismissListener(__ -> mActivity.finish())
-                    .show();
-            return new View(mActivity);
+        View view = (new ResetNetworkRestrictionViewBuilder(mActivity)).build();
+        if (view != null) {
+            Log.w(TAG, "Access deny.");
+            return view;
         }
         mContentView = inflater.inflate(R.layout.reset_network_confirm, null);
         establishFinalConfirmationState();
