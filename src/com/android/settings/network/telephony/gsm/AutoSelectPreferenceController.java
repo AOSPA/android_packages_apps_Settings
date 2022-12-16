@@ -65,7 +65,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 
 import com.qti.extphone.Client;
-import com.qti.extphone.ExtPhoneCallbackBase;
+import com.qti.extphone.ExtPhoneCallbackListener;
 import com.qti.extphone.ExtTelephonyManager;
 import com.qti.extphone.IExtPhoneCallback;
 import com.qti.extphone.NetworkSelectionMode;
@@ -293,8 +293,9 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
         @Override
         public void onConnected() {
             mServiceConnected = true;
-            mClient = mExtTelephonyManager.registerCallback(
-                    mContext.getPackageName(), mExtPhoneCallback);
+            int[] events = new int[] {};
+            mClient = mExtTelephonyManager.registerCallbackWithEvents(
+                    mContext.getPackageName(), mExtPhoneCallbackListener, events);
             Log.i(TAG, "mExtTelManagerServiceCallback: service connected " + mClient);
         }
 
@@ -308,7 +309,7 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
         }
     };
 
-    protected IExtPhoneCallback mExtPhoneCallback = new ExtPhoneCallbackBase() {
+    protected ExtPhoneCallbackListener mExtPhoneCallbackListener = new ExtPhoneCallbackListener() {
         @Override
         public void getNetworkSelectionModeResponse(int slotId, Token token, Status status,
                 NetworkSelectionMode modes) {
