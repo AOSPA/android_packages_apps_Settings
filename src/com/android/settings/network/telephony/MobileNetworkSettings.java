@@ -92,6 +92,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     private static final String KEY_ROAMING_PREF = "button_roaming_key";
     private static final String KEY_CALLS_PREF = "calls_preference";
     private static final String KEY_SMS_PREF = "sms_preference";
+    private static final String KEY_MOBILE_DATA_PREF = "mobile_data_enable";
 
     // UICC provisioning status
     public static final int CARD_NOT_PROVISIONED = 0;
@@ -194,7 +195,9 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 new CallsDefaultSubscriptionController(context, KEY_CALLS_PREF,
                         getSettingsLifecycle(), this),
                 new SmsDefaultSubscriptionController(context, KEY_SMS_PREF, getSettingsLifecycle(),
-                        this));
+                        this),
+                new MobileDataPreferenceController(context, KEY_MOBILE_DATA_PREF,
+                        getSettingsLifecycle(), this, mSubId));
     }
 
     @Override
@@ -250,10 +253,16 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 REQUEST_CODE_DELETE_SUBSCRIPTION);
         use(DisableSimFooterPreferenceController.class).init(mSubId);
         use(NrDisabledInDsdsFooterPreferenceController.class).init(mSubId);
-        use(MobileDataPreferenceController.class).init(getFragmentManager(), mSubId);
-        use(MobileDataPreferenceController.class).setWifiPickerTrackerHelper(
-                new WifiPickerTrackerHelper(getSettingsLifecycle(), context,
-                        null /* WifiPickerTrackerCallback */));
+
+        final MobileDataPreferenceController mobileDataPreferenceController =
+                use(MobileDataPreferenceController.class);
+        if (mobileDataPreferenceController != null) {
+            mobileDataPreferenceController.init(getFragmentManager(), mSubId,
+                    mSubscriptionInfoEntity, mMobileNetworkInfoEntity);
+            mobileDataPreferenceController.setWifiPickerTrackerHelper(
+                    new WifiPickerTrackerHelper(getSettingsLifecycle(), context,
+                            null /* WifiPickerTrackerCallback */));
+        }
 
         final RoamingPreferenceController roamingPreferenceController =
                 use(RoamingPreferenceController.class);
@@ -295,12 +304,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
         final VideoCallingPreferenceController videoCallingPreferenceController =
                 use(VideoCallingPreferenceController.class).init(mSubId);
-        final BackupCallingPreferenceController crossSimCallingPreferenceController =
-                use(BackupCallingPreferenceController.class).init(getFragmentManager(), mSubId);
         use(Enabled5GPreferenceController.class).init(mSubId);
-        use(CallingPreferenceCategoryController.class).setChildren(
-                Arrays.asList(wifiCallingPreferenceController, videoCallingPreferenceController,
-                        crossSimCallingPreferenceController));
         use(Enhanced4gLtePreferenceController.class).init(mSubId)
                 .addListener(videoCallingPreferenceController);
         use(Enhanced4gCallingPreferenceController.class).init(mSubId)

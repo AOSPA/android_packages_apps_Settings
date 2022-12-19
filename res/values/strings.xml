@@ -4645,8 +4645,6 @@
     <string name="power_usage_summary_title">Battery</string>
     <!-- Activity title summary for App Fuel Gauge summary -->
     <string name="power_usage_summary">What has been using the battery</string>
-    <!-- Message to show when battery usage data is not available [CHAR LIMIT=30] -->
-    <string name="power_usage_not_available">Battery usage data isn\u2019t available.</string>
     <!-- Display the battery level and status [CHAR_LIMIT=60] -->
     <string name="power_usage_level_and_status"><xliff:g id="level">%1$s</xliff:g>
             - <xliff:g id="status">%2$s</xliff:g></string>
@@ -4694,8 +4692,6 @@
 
     <!-- Title for the screen usage in power use UI [CHAR_LIMIT=60] -->
     <string name="device_screen_usage">Screen usage since full charge</string>
-    <!-- Label for list of apps using battery in power use UI. Note: ^1 should be used in all translations[CHAR_LIMIT=120] -->
-    <string name="power_usage_list_summary">Battery usage since full charge</string>
     <!-- Temp string used to debug new battery estimates [DO NOT TRANSLATE] -->
     <string name="power_usage_enhanced_debug" translatable="false"><xliff:g id="time">%1$s</xliff:g> left (New ML est)</string>
     <!-- Temp string used to debug old battery estimates [DO NOT TRANSLATE] -->
@@ -4749,8 +4745,18 @@
     <string name="battery_tip_limited_temporarily_title">Charging is paused</string>
     <!-- Summary for the battery limited temporarily tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_limited_temporarily_summary">Protecting battery to extend battery lifespan</string>
-    <!-- Summary for the battery limited temporarily extra tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_limited_temporarily_extra_summary"><xliff:g id="percent" example="10%">%1$s</xliff:g></string>
+    <!-- Title for the battery dock defender future bypass tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_dock_defender_future_bypass_title">Charging to <xliff:g id="percent" example="10%">%1$s</xliff:g> to protect the battery</string>
+    <!-- Summary for the battery dock defender future bypass tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_dock_defender_future_bypass_summary">When your tablet is docked, charging will be paused at <xliff:g id="percent" example="10%">%1$s</xliff:g> to extend battery lifespan</string>
+    <!-- Title for the battery dock defender active tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_dock_defender_active_title">Charging paused to protect battery</string>
+    <!-- Summary for the battery dock defender active tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_dock_defender_active_summary">When your tablet is docked, charging is paused at <xliff:g id="percent" example="10%">%1$s</xliff:g> to extend battery lifespan</string>
+    <!-- Title for the battery dock defender temporarily bypassed tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_dock_defender_temporarily_bypassed_title">Charging to full</string>
+    <!-- Summary for the battery dock defender temporarily bypassed tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_dock_defender_temporarily_bypassed_summary">To protect your battery, charging will be paused at <xliff:g id="percent" example="10%">%1$s</xliff:g> the next time your tablet is docked</string>
     <!-- Content description for the battery limited temporarily tip secondary button [CHAR LIMIT=NONE] -->
     <string name="battery_tip_limited_temporarily_sec_button_content_description">Learn more about charging is paused</string>
     <!-- Text of battery limited temporarily tip resume charge button. [CHAR LIMIT=NONE] -->
@@ -4863,8 +4869,6 @@
     <!-- Label for power consumed by Calling -->
     <string name="power_phone">Voice calls</string>
 
-    <!-- Description for battery usage time for an app, i.e. Used for 30min. Note: ^1 should be used in all translations [CHAR LIMIT=60] -->
-    <string name="battery_used_for">Used for <xliff:g id="time">^1</xliff:g></string>
     <!-- Description for battery screen usage time for an app, i.e. Screen usage 30min. Note: ^1 should be used in all translations [CHAR LIMIT=60] -->
     <string name="battery_screen_usage">Screen usage <xliff:g id="time">^1</xliff:g></string>
     <!-- Description for battery usage info for an app, i.e. 60% used by facebook. [CHAR LIMIT=60] -->
@@ -4932,9 +4936,6 @@
     <string name="battery_usage_without_time"></string>
     <!-- Description for other users aggregated battery usage data [CHAR LIMIT=120] -->
     <string name="battery_usage_other_users">Other users</string>
-
-    <!-- Graph subtext displayed to user when enhanced battery estimate is being used [CHAR LIMIT=120] -->
-    <string name="advanced_battery_graph_subtext">Battery left estimate is based on your device usage</string>
 
     <!-- Description for battery time left, i.e. 50min Estimated time left. [CHAR LIMIT=80]-->
     <string name="estimated_time_left">Estimated time left</string>
@@ -5204,6 +5205,8 @@
     <string name="adaptive_connectivity_title">Adaptive connectivity</string>
     <!-- Summary of Adaptive connectivity preference. [CHAR LIMIT=NONE] -->
     <string name="adaptive_connectivity_summary">Extends battery life and improves device performance by automatically managing your network connections</string>
+    <!-- Title for adaptive connectivity main switch preferences. [CHAR LIMIT=50] -->
+    <string name="adaptive_connectivity_main_switch_title">Use adaptive connectivity</string>
 
     <!-- Title of preference group for credential storage settings [CHAR LIMIT=30] -->
     <string name="credentials_title">Credential storage</string>
@@ -6438,6 +6441,9 @@
     <string name="app_default_dashboard_title">Default apps</string>
     <!-- Title for setting tile leading to App Clones menu under the Apps page [CHAR LIMIT=40] -->
     <string name="cloned_apps_dashboard_title">Cloned Apps</string>
+    <!-- Description for introduction of the cloned apps page [CHAR LIMIT=NONE]-->
+    <string name="desc_cloned_apps_intro_text">Create a second instance of an app so that you can use two accounts at the same time.</string>
+    <string name="cloned_apps_summary"><xliff:g id="cloned_apps_count">%1$s</xliff:g> cloned, <xliff:g id="allowed_apps_count">%2$d</xliff:g> available to clone</string>
     <!-- Summary text for system preference title, showing important setting items under system setting [CHAR LIMIT=NONE]-->
     <string name="system_dashboard_summary">Languages, gestures, time, backup</string>
     <!-- Summary text for language preference title, showing important setting items under language setting [CHAR LIMIT=NONE]-->
@@ -10644,15 +10650,18 @@
     <string name="wifi_calling_summary">Use Wi\u2011Fi for calls to improve quality</string>
 
     <!-- Mobile network settings screen, title of Backup calling setting.  [CHAR LIMIT=NONE] -->
+    <!-- Deprecated ToDo: b/260059444 remove it next version-->
     <string name="backup_calling_settings_title">Backup calling</string>
 
     <!-- Backup calling summary.  [CHAR LIMIT=100] -->
+    <!-- Deprecated ToDo: b/260059444 remove it next version-->
     <string name="backup_calling_setting_summary">If <xliff:g id="backup_calling_operator_text" example="Google Fi">%1$s</xliff:g> is unavailable or roaming, use your mobile data SIM for <xliff:g id="backup_calling_carrier_text" example="Google Fi">%1$s</xliff:g> calls.</string>
 
     <!-- Body of dialog shown to request confirmation that C_IWLAN disabling might cause call drop while IMS is registered on C_IWLAN and device is in a call [CHAR LIMIT=NONE] -->
     <string name="backup_calling_disable_dialog_ciwlan_call">Disabling Voice Over Cellular Internet may cause ongoing call disconnect.</string>
 
     <!-- List of synonyms for the cross SIM calling titles, used to match in settings search [CHAR LIMIT=NONE] -->
+    <!-- Deprecated ToDo: b/260059444 remove it next version-->
     <string name="keywords_backup_calling">backup calling</string>
 
     <!-- Title for enable MMS notification when trying to receive MMS.  [CHAR LIMIT=40] -->
@@ -11419,6 +11428,11 @@
     <string name="ingress_rate_limit_dialog_title">Configure network download rate limit</string>
     <!-- Developer Settings: Dialog ListPreference option to disable network bandwidth ingress rate limit [CHAR LIMIT=none] -->
     <string name="ingress_rate_limit_no_limit_entry">No limit</string>
+
+    <!-- Developer settings: Title for disabling phantom process monitoring. [CHAR LIMIT=50]-->
+    <string name="disable_phantom_process_monitor_title">Disable child process restrictions</string>
+    <!-- Developer settings: Summary for disabling phantom process monitoring. [CHAR LIMIT=NONE]-->
+    <string name="disable_phantom_process_monitor_summary">Disable restrictions on the system resource usage of the app child processes</string>
 
     <!-- BT LE Audio Device: Media Broadcast -->
     <!-- The title of the Media Broadcast Dialog [CHAR LIMIT=none] -->
