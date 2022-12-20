@@ -26,6 +26,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.os.BatteryConsumer;
+import android.os.BatteryConsumer.Dimensions;
 import android.os.Process;
 import android.os.RemoteException;
 import android.os.UidBatteryConsumer;
@@ -39,7 +40,6 @@ import com.android.settings.R;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settingslib.Utils;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Locale;
@@ -70,15 +70,27 @@ public class BatteryEntry {
         }
     }
 
-    public static final int MSG_UPDATE_NAME_ICON = 1;
-    public static final int MSG_REPORT_FULLY_DRAWN = 2;
-
     private static final String TAG = "BatteryEntry";
     private static final String PACKAGE_SYSTEM = "android";
 
-    static final HashMap<String, UidToDetail> sUidCache = new HashMap<>();
+    static final int BATTERY_USAGE_INDEX_FOREGROUND = 0;
+    static final int BATTERY_USAGE_INDEX_FOREGROUND_SERVICE = 1;
+    static final int BATTERY_USAGE_INDEX_BACKGROUND = 2;
+    static final int BATTERY_USAGE_INDEX_CACHED = 3;
 
-    static final ArrayList<BatteryEntry> sRequestQueue = new ArrayList<BatteryEntry>();
+    static final Dimensions[] BATTERY_DIMENSIONS = new Dimensions[] {
+            new Dimensions(
+                    BatteryConsumer.POWER_COMPONENT_ANY, BatteryConsumer.PROCESS_STATE_FOREGROUND),
+            new Dimensions(
+                    BatteryConsumer.POWER_COMPONENT_ANY,
+                    BatteryConsumer.PROCESS_STATE_FOREGROUND_SERVICE),
+            new Dimensions(
+                    BatteryConsumer.POWER_COMPONENT_ANY, BatteryConsumer.PROCESS_STATE_BACKGROUND),
+            new Dimensions(
+                    BatteryConsumer.POWER_COMPONENT_ANY, BatteryConsumer.PROCESS_STATE_CACHED),
+    };
+
+    static final HashMap<String, UidToDetail> sUidCache = new HashMap<>();
 
     static Locale sCurrentLocale = null;
 
@@ -100,6 +112,7 @@ public class BatteryEntry {
     private final int mPowerComponentId;
     private long mUsageDurationMs;
     private long mTimeInForegroundMs;
+    private long mTimeInForegroundServiceMs;
     private long mTimeInBackgroundMs;
 
     public String mName;
@@ -108,6 +121,10 @@ public class BatteryEntry {
     public double mPercent;
     private String mDefaultPackageName;
     private double mConsumedPower;
+    private double mConsumedPowerInForeground;
+    private double mConsumedPowerInForegroundService;
+    private double mConsumedPowerInBackground;
+    private double mConsumedPowerInCached;
 
     static class UidToDetail {
         String mName;
@@ -159,8 +176,19 @@ public class BatteryEntry {
             getQuickNameIconForUid(uid, packages, loadDataInBackground);
             mTimeInForegroundMs =
                     uidBatteryConsumer.getTimeInStateMs(UidBatteryConsumer.STATE_FOREGROUND);
+            //TODO: update this to the correct API after the new API is completed.
+            mTimeInForegroundServiceMs =
+                    uidBatteryConsumer.getTimeInStateMs(UidBatteryConsumer.STATE_FOREGROUND);
             mTimeInBackgroundMs =
                     uidBatteryConsumer.getTimeInStateMs(UidBatteryConsumer.STATE_BACKGROUND);
+            mConsumedPowerInForeground = safeGetConsumedPower(
+                    uidBatteryConsumer, BATTERY_DIMENSIONS[BATTERY_USAGE_INDEX_FOREGROUND]);
+            mConsumedPowerInForegroundService = safeGetConsumedPower(
+                    uidBatteryConsumer, BATTERY_DIMENSIONS[BATTERY_USAGE_INDEX_FOREGROUND_SERVICE]);
+            mConsumedPowerInBackground = safeGetConsumedPower(
+                    uidBatteryConsumer, BATTERY_DIMENSIONS[BATTERY_USAGE_INDEX_BACKGROUND]);
+            mConsumedPowerInCached = safeGetConsumedPower(
+                    uidBatteryConsumer, BATTERY_DIMENSIONS[BATTERY_USAGE_INDEX_CACHED]);
         } else if (batteryConsumer instanceof UserBatteryConsumer) {
             mUid = Process.INVALID_UID;
             mConsumerType = ConvertUtils.CONSUMER_TYPE_USER_BATTERY;
@@ -399,12 +427,21 @@ public class BatteryEntry {
         return mUid;
     }
 
-    /** Returns foreground foreground time/ms that is attributed to this entry. */
+    /** Returns foreground time/ms that is attributed to this entry. */
     public long getTimeInForegroundMs() {
         if (mBatteryConsumer instanceof UidBatteryConsumer) {
             return mTimeInForegroundMs;
         } else {
             return mUsageDurationMs;
+        }
+    }
+
+    /** Returns foreground service time/ms that is attributed to this entry. */
+    public long getTimeInForegroundServiceMs() {
+        if (mBatteryConsumer instanceof UidBatteryConsumer) {
+            return mTimeInForegroundServiceMs;
+        } else {
+            return 0;
         }
     }
 
@@ -425,6 +462,53 @@ public class BatteryEntry {
     }
 
     /**
+     * Returns amount of power (in milli-amp-hours) used in foreground that is attributed to this
+     * entry.
+     */
+    public double getConsumedPowerInForeground() {
+        if (mBatteryConsumer instanceof UidBatteryConsumer) {
+            return mConsumedPowerInForeground;
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * Returns amount of power (in milli-amp-hours) used in foreground service that is attributed to
+     * this entry.
+     */
+    public double getConsumedPowerInForegroundService() {
+        if (mBatteryConsumer instanceof UidBatteryConsumer) {
+            return mConsumedPowerInForegroundService;
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * Returns amount of power (in milli-amp-hours) used in background that is attributed to this
+     * entry.
+     */
+    public double getConsumedPowerInBackground() {
+        if (mBatteryConsumer instanceof UidBatteryConsumer) {
+            return mConsumedPowerInBackground;
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * Returns amount of power (in milli-amp-hours) used in cached that is attributed to this entry.
+     */
+    public double getConsumedPowerInCached() {
+        if (mBatteryConsumer instanceof UidBatteryConsumer) {
+            return mConsumedPowerInCached;
+        } else {
+            return 0;
+        }
+    }
+
+    /**
      * Adds the consumed power of the supplied BatteryConsumer to this entry. Also
      * uses its package with highest drain, if necessary.
      */
@@ -434,8 +518,19 @@ public class BatteryEntry {
             UidBatteryConsumer uidBatteryConsumer = (UidBatteryConsumer) batteryConsumer;
             mTimeInForegroundMs += uidBatteryConsumer.getTimeInStateMs(
                     UidBatteryConsumer.STATE_FOREGROUND);
+            //TODO: update this to the correct API after the new API is completed.
+            mTimeInForegroundServiceMs += uidBatteryConsumer.getTimeInStateMs(
+                    UidBatteryConsumer.STATE_FOREGROUND);
             mTimeInBackgroundMs += uidBatteryConsumer.getTimeInStateMs(
                     UidBatteryConsumer.STATE_BACKGROUND);
+            mConsumedPowerInForeground += safeGetConsumedPower(
+                    uidBatteryConsumer, BATTERY_DIMENSIONS[BATTERY_USAGE_INDEX_FOREGROUND]);
+            mConsumedPowerInForegroundService += safeGetConsumedPower(
+                    uidBatteryConsumer, BATTERY_DIMENSIONS[BATTERY_USAGE_INDEX_FOREGROUND_SERVICE]);
+            mConsumedPowerInBackground += safeGetConsumedPower(
+                    uidBatteryConsumer, BATTERY_DIMENSIONS[BATTERY_USAGE_INDEX_BACKGROUND]);
+            mConsumedPowerInCached += safeGetConsumedPower(
+                    uidBatteryConsumer, BATTERY_DIMENSIONS[BATTERY_USAGE_INDEX_CACHED]);
             if (mDefaultPackageName == null) {
                 mDefaultPackageName = uidBatteryConsumer.getPackageWithHighestDrain();
             }
@@ -535,5 +630,15 @@ public class BatteryEntry {
     /** Whether the uid is system uid. */
     public static boolean isSystemUid(int uid) {
         return uid == Process.SYSTEM_UID;
+    }
+
+    private static double safeGetConsumedPower(
+            final UidBatteryConsumer uidBatteryConsumer, final Dimensions dimension) {
+        try {
+            return uidBatteryConsumer.getConsumedPower(dimension);
+        } catch (IllegalArgumentException e) {
+            Log.e(TAG, "safeGetConsumedPower failed:" + e);
+            return 0.0d;
+        }
     }
 }
