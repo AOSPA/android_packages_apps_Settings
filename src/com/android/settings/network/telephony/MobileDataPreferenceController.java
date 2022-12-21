@@ -160,8 +160,11 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
             preference.setEnabled(false);
             preference.setSummary(R.string.mobile_data_settings_summary_auto_switch);
         } else {
+            final List<SubscriptionInfo> activeSubs =
+                    SubscriptionUtil.getActiveSubscriptions(mSubscriptionManager);
+            Log.d(TAG, "updateState: activeSubs: " + activeSubs);
             if (!mCallStateListener.isIdle()) {
-                if (mIsMultiSim) {
+                if (mIsMultiSim && activeSubs.size() > 1) {
                     Log.d(TAG, "nDDS voice call in ongoing");
                     // we will get inside this block only when the current instance is for the DDS
                     if (isChecked()) {
@@ -286,9 +289,13 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
         }
 
         public void register(Context context, int subId) {
+            // This method is called for the Mobile Data preference every time one opens the
+            // landing page of the DDS
             final List<SubscriptionInfo> subs =
                     SubscriptionUtil.getActiveSubscriptions(mSubscriptionManager);
-            if (mIsMultiSim) {
+            Log.d(TAG, "registerTelephonyCallback: subs: " + subs);
+            if (mIsMultiSim && subs.size() > 1) {
+                // For MSIM cases, we need to listen to the call state of the nonDDS sub only
                 for (SubscriptionInfo subInfo : subs) {
                     if (subInfo.getSubscriptionId() != subId) {
                         mTelephonyManager.createForSubscriptionId(subInfo.getSubscriptionId())
@@ -297,6 +304,7 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
                     }
                 }
             } else {
+                // Single SIM case
                 mTelephonyManager.createForSubscriptionId(subId)
                         .registerTelephonyCallback(context.getMainExecutor(), this);
                 mCallbacks.put(subId, this);
