@@ -18,20 +18,28 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.content.ContentValues;
 import android.content.Context;
+import android.os.BatteryConsumer;
+import android.os.BatteryUsageStats;
 import android.text.format.DateUtils;
 
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
@@ -52,7 +60,15 @@ public class DataProcessorTest {
     private Context mContext;
 
     private FakeFeatureFactory mFeatureFactory;
+    private MetricsFeatureProvider mMetricsFeatureProvider;
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
+
+    @Mock private BatteryUsageStats mBatteryUsageStats;
+    @Mock private BatteryEntry mMockBatteryEntry1;
+    @Mock private BatteryEntry mMockBatteryEntry2;
+    @Mock private BatteryEntry mMockBatteryEntry3;
+    @Mock private BatteryEntry mMockBatteryEntry4;
+
 
     @Before
     public void setUp() {
@@ -61,6 +77,7 @@ public class DataProcessorTest {
 
         mContext = spy(RuntimeEnvironment.application);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
+        mMetricsFeatureProvider = mFeatureFactory.metricsFeatureProvider;
         mPowerUsageFeatureProvider = mFeatureFactory.powerUsageFeatureProvider;
     }
 
@@ -75,6 +92,10 @@ public class DataProcessorTest {
         assertThat(DataProcessor.getBatteryLevelData(
                 mContext, /*handler=*/ null, new HashMap<>(), /*asyncResponseDelegate=*/ null))
                 .isNull();
+        verify(mMetricsFeatureProvider, never())
+                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_SHOWN_APP_COUNT);
+        verify(mMetricsFeatureProvider, never())
+                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT);
     }
 
     @Test
@@ -88,6 +109,10 @@ public class DataProcessorTest {
         assertThat(DataProcessor.getBatteryLevelData(
                 mContext, /*handler=*/ null, batteryHistoryMap, /*asyncResponseDelegate=*/ null))
                 .isNull();
+        verify(mMetricsFeatureProvider, never())
+                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_SHOWN_APP_COUNT);
+        verify(mMetricsFeatureProvider, never())
+                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT);
     }
 
     @Test
@@ -304,6 +329,18 @@ public class DataProcessorTest {
     public void getDailyTimestamps_notEnoughData_returnEmptyList() {
         assertThat(DataProcessor.getDailyTimestamps(new ArrayList<>())).isEmpty();
         assertThat(DataProcessor.getDailyTimestamps(List.of(100L))).isEmpty();
+        assertThat(DataProcessor.getDailyTimestamps(List.of(100L, 5400000L))).isEmpty();
+    }
+
+    @Test
+    public void getDailyTimestamps_OneHourDataPerDay_returnEmptyList() {
+        // Timezone GMT+8
+        final List<Long> timestamps = List.of(
+                1641049200000L, // 2022-01-01 23:00:00
+                1641052800000L, // 2022-01-02 00:00:00
+                1641056400000L  // 2022-01-02 01:00:00
+        );
+        assertThat(DataProcessor.getDailyTimestamps(timestamps)).isEmpty();
     }
 
     @Test
@@ -328,18 +365,75 @@ public class DataProcessorTest {
     public void getDailyTimestamps_MultipleDaysData_returnExpectedList() {
         // Timezone GMT+8
         final List<Long> timestamps = List.of(
-                1640988000000L, // 2022-01-01 06:00:00
+                1641045600000L, // 2022-01-01 22:00:00
+                1641060000000L, // 2022-01-02 02:00:00
+                1641160800000L, // 2022-01-03 06:00:00
+                1641232800000L  // 2022-01-04 02:00:00
+        );
+
+        final List<Long> expectedTimestamps = List.of(
+                1641045600000L, // 2022-01-01 22:00:00
+                1641052800000L, // 2022-01-02 00:00:00
+                1641139200000L, // 2022-01-03 00:00:00
+                1641225600000L, // 2022-01-04 00:00:00
+                1641232800000L  // 2022-01-04 02:00:00
+        );
+        assertThat(DataProcessor.getDailyTimestamps(timestamps)).isEqualTo(expectedTimestamps);
+    }
+
+    @Test
+    public void getDailyTimestamps_FirstDayOneHourData_returnExpectedList() {
+        // Timezone GMT+8
+        final List<Long> timestamps = List.of(
+                1641049200000L, // 2022-01-01 23:00:00
                 1641060000000L, // 2022-01-02 02:00:00
                 1641160800000L, // 2022-01-03 06:00:00
                 1641254400000L  // 2022-01-04 08:00:00
         );
 
         final List<Long> expectedTimestamps = List.of(
-                1640988000000L, // 2022-01-01 06:00:00
                 1641052800000L, // 2022-01-02 00:00:00
                 1641139200000L, // 2022-01-03 00:00:00
                 1641225600000L, // 2022-01-04 00:00:00
                 1641254400000L  // 2022-01-04 08:00:00
+        );
+        assertThat(DataProcessor.getDailyTimestamps(timestamps)).isEqualTo(expectedTimestamps);
+    }
+
+    @Test
+    public void getDailyTimestamps_LastDayNoData_returnExpectedList() {
+        // Timezone GMT+8
+        final List<Long> timestamps = List.of(
+                1640988000000L, // 2022-01-01 06:00:00
+                1641060000000L, // 2022-01-02 02:00:00
+                1641160800000L, // 2022-01-03 06:00:00
+                1641225600000L  // 2022-01-04 00:00:00
+        );
+
+        final List<Long> expectedTimestamps = List.of(
+                1640988000000L, // 2022-01-01 06:00:00
+                1641052800000L, // 2022-01-02 00:00:00
+                1641139200000L, // 2022-01-03 00:00:00
+                1641225600000L  // 2022-01-04 00:00:00
+        );
+        assertThat(DataProcessor.getDailyTimestamps(timestamps)).isEqualTo(expectedTimestamps);
+    }
+
+    @Test
+    public void getDailyTimestamps_LastDayOneHourData_returnExpectedList() {
+        // Timezone GMT+8
+        final List<Long> timestamps = List.of(
+                1640988000000L, // 2022-01-01 06:00:00
+                1641060000000L, // 2022-01-02 02:00:00
+                1641160800000L, // 2022-01-03 06:00:00
+                1641229200000L  // 2022-01-04 01:00:00
+        );
+
+        final List<Long> expectedTimestamps = List.of(
+                1640988000000L, // 2022-01-01 06:00:00
+                1641052800000L, // 2022-01-02 00:00:00
+                1641139200000L, // 2022-01-03 00:00:00
+                1641225600000L  // 2022-01-04 00:00:00
         );
         assertThat(DataProcessor.getDailyTimestamps(timestamps)).isEqualTo(expectedTimestamps);
     }
@@ -421,6 +515,10 @@ public class DataProcessorTest {
 
         assertThat(DataProcessor.getBatteryUsageMap(
                 mContext, hourlyBatteryLevelsPerDay, new HashMap<>())).isNull();
+        verify(mMetricsFeatureProvider, never())
+                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_SHOWN_APP_COUNT);
+        verify(mMetricsFeatureProvider, never())
+                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT);
     }
 
     @Test
@@ -549,6 +647,14 @@ public class DataProcessorTest {
                 resultDiffData.getSystemDiffEntryList().get(0), currentUserId, /*uid=*/ 3L,
                 ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY, /*consumePercentage=*/ 25.0,
                 /*foregroundUsageTimeInMs=*/ 50, /*backgroundUsageTimeInMs=*/ 60);
+        verify(mMetricsFeatureProvider)
+                .action(mContext.getApplicationContext(),
+                        SettingsEnums.ACTION_BATTERY_USAGE_SHOWN_APP_COUNT,
+                        3);
+        verify(mMetricsFeatureProvider)
+                .action(mContext.getApplicationContext(),
+                        SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT,
+                        0);
     }
 
     @Test
@@ -640,6 +746,14 @@ public class DataProcessorTest {
                 /*backgroundUsageTimeInMs=*/ 0);
         assertThat(resultMap.get(0).get(0)).isNotNull();
         assertThat(resultMap.get(0).get(DataProcessor.SELECTED_INDEX_ALL)).isNotNull();
+        verify(mMetricsFeatureProvider)
+                .action(mContext.getApplicationContext(),
+                        SettingsEnums.ACTION_BATTERY_USAGE_SHOWN_APP_COUNT,
+                        2);
+        verify(mMetricsFeatureProvider)
+                .action(mContext.getApplicationContext(),
+                        SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT,
+                        0);
     }
 
     @Test
@@ -701,6 +815,14 @@ public class DataProcessorTest {
                 .isEqualTo(entry.mConsumePower * ratio);
         assertThat(resultMap.get(0).get(0)).isNotNull();
         assertThat(resultMap.get(0).get(DataProcessor.SELECTED_INDEX_ALL)).isNotNull();
+        verify(mMetricsFeatureProvider)
+                .action(mContext.getApplicationContext(),
+                        SettingsEnums.ACTION_BATTERY_USAGE_SHOWN_APP_COUNT,
+                        1);
+        verify(mMetricsFeatureProvider)
+                .action(mContext.getApplicationContext(),
+                        SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT,
+                        0);
     }
 
     @Test
@@ -772,6 +894,14 @@ public class DataProcessorTest {
                 resultDiffData.getAppDiffEntryList().get(0), currentUserId, /*uid=*/ 2L,
                 ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 50.0,
                 /*foregroundUsageTimeInMs=*/ 10, /*backgroundUsageTimeInMs=*/ 20);
+        verify(mMetricsFeatureProvider)
+                .action(mContext.getApplicationContext(),
+                        SettingsEnums.ACTION_BATTERY_USAGE_SHOWN_APP_COUNT,
+                        1);
+        verify(mMetricsFeatureProvider)
+                .action(mContext.getApplicationContext(),
+                        SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT,
+                        1);
     }
 
     @Test
@@ -843,6 +973,68 @@ public class DataProcessorTest {
         assertThat(resultEntry.mBackgroundUsageTimeInMs).isEqualTo(20);
         resultEntry = resultDiffData.getAppDiffEntryList().get(1);
         assertThat(resultEntry.mBackgroundUsageTimeInMs).isEqualTo(0);
+        verify(mMetricsFeatureProvider)
+                .action(mContext.getApplicationContext(),
+                        SettingsEnums.ACTION_BATTERY_USAGE_SHOWN_APP_COUNT,
+                        2);
+        verify(mMetricsFeatureProvider)
+                .action(mContext.getApplicationContext(),
+                        SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT,
+                        0);
+    }
+
+    @Test
+    public void generateBatteryDiffData_emptyBatteryEntryList_returnNull() {
+        assertThat(DataProcessor.generateBatteryDiffData(
+                mContext, null, mBatteryUsageStats)).isNull();
+    }
+
+    @Test
+    public void generateBatteryDiffData_returnsExpectedResult() {
+        final List<BatteryEntry> batteryEntryList = new ArrayList<>();
+        batteryEntryList.add(mMockBatteryEntry1);
+        batteryEntryList.add(mMockBatteryEntry2);
+        batteryEntryList.add(mMockBatteryEntry3);
+        batteryEntryList.add(mMockBatteryEntry4);
+        doReturn(0.0).when(mMockBatteryEntry1).getConsumedPower();
+        doReturn(30L).when(mMockBatteryEntry1).getTimeInForegroundMs();
+        doReturn(40L).when(mMockBatteryEntry1).getTimeInBackgroundMs();
+        doReturn(1).when(mMockBatteryEntry1).getUid();
+        doReturn(ConvertUtils.CONSUMER_TYPE_UID_BATTERY).when(mMockBatteryEntry1).getConsumerType();
+        doReturn(0.5).when(mMockBatteryEntry2).getConsumedPower();
+        doReturn(20L).when(mMockBatteryEntry2).getTimeInForegroundMs();
+        doReturn(20L).when(mMockBatteryEntry2).getTimeInBackgroundMs();
+        doReturn(2).when(mMockBatteryEntry2).getUid();
+        doReturn(ConvertUtils.CONSUMER_TYPE_UID_BATTERY).when(mMockBatteryEntry2).getConsumerType();
+        doReturn(0.0).when(mMockBatteryEntry3).getConsumedPower();
+        doReturn(0L).when(mMockBatteryEntry3).getTimeInForegroundMs();
+        doReturn(0L).when(mMockBatteryEntry3).getTimeInBackgroundMs();
+        doReturn(3).when(mMockBatteryEntry3).getUid();
+        doReturn(ConvertUtils.CONSUMER_TYPE_UID_BATTERY).when(mMockBatteryEntry3).getConsumerType();
+        doReturn(1.5).when(mMockBatteryEntry4).getConsumedPower();
+        doReturn(10L).when(mMockBatteryEntry4).getTimeInForegroundMs();
+        doReturn(10L).when(mMockBatteryEntry4).getTimeInBackgroundMs();
+        doReturn(4).when(mMockBatteryEntry4).getUid();
+        doReturn(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY)
+                .when(mMockBatteryEntry4).getConsumerType();
+        doReturn(BatteryConsumer.POWER_COMPONENT_CAMERA)
+                .when(mMockBatteryEntry4).getPowerComponentId();
+
+        final BatteryDiffData batteryDiffData = DataProcessor.generateBatteryDiffData(
+                mContext, batteryEntryList, mBatteryUsageStats);
+
+        assertBatteryDiffEntry(
+                batteryDiffData.getAppDiffEntryList().get(0), 0, /*uid=*/ 2L,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 25.0,
+                /*foregroundUsageTimeInMs=*/ 20, /*backgroundUsageTimeInMs=*/ 20);
+        assertBatteryDiffEntry(
+                batteryDiffData.getAppDiffEntryList().get(1), 0, /*uid=*/ 1L,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 0.0,
+                /*foregroundUsageTimeInMs=*/ 30, /*backgroundUsageTimeInMs=*/ 40);
+        assertBatteryDiffEntry(
+                batteryDiffData.getSystemDiffEntryList().get(0), 0, /*uid=*/ 4L,
+                ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY, /*consumePercentage=*/ 75.0,
+                /*foregroundUsageTimeInMs=*/ 10, /*backgroundUsageTimeInMs=*/ 10);
     }
 
     private static Map<Long, Map<String, BatteryHistEntry>> createHistoryMap(

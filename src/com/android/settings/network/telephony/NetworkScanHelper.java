@@ -14,6 +14,13 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center are provided under the following license:
+ *
+ * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.network.telephony;
 
 import android.annotation.IntDef;
@@ -21,6 +28,7 @@ import android.content.Context;
 import android.content.IntentFilter;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.provider.Settings;
 import android.telephony.AccessNetworkConstants.AccessNetworkType;
 import android.telephony.CellInfo;
 import android.telephony.NetworkScan;
@@ -34,6 +42,8 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
+import com.qti.extphone.ExtTelephonyManager;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -124,11 +134,12 @@ public class NetworkScanHelper {
 
     private final NetworkScanCallback mNetworkScanCallback;
     private final TelephonyManager mTelephonyManager;
+    private ExtTelephonyManager mExtTelephonyManager;
     private final TelephonyScanManager.NetworkScanCallback mInternalNetworkScanCallback;
     private final Executor mExecutor;
     private int mMaxSearchTimeSec = MAX_SEARCH_TIME_SEC;
 
-    private final LegacyIncrementalScanBroadcastReceiver mLegacyIncrScanReceiver;
+    private LegacyIncrementalScanBroadcastReceiver mLegacyIncrScanReceiver;
     private Context mContext;
     private NetworkScan mNetworkScanRequester;
     private IntentFilter filter =
@@ -139,8 +150,6 @@ public class NetworkScanHelper {
         mNetworkScanCallback = callback;
         mInternalNetworkScanCallback = new NetworkScanCallbackImpl();
         mExecutor = executor;
-        mLegacyIncrScanReceiver =
-                new LegacyIncrementalScanBroadcastReceiver(mContext, mInternalNetworkScanCallback);
     }
 
     public NetworkScanHelper(Context context, TelephonyManager tm, NetworkScanCallback callback,
@@ -149,6 +158,9 @@ public class NetworkScanHelper {
         mContext = context;
         mMaxSearchTimeSec = context.getResources().getInteger(
                 R.integer.config_network_scan_helper_max_search_time_sec);
+        mLegacyIncrScanReceiver =
+                new LegacyIncrementalScanBroadcastReceiver(mContext, mInternalNetworkScanCallback);
+        mExtTelephonyManager = ExtTelephonyManager.getInstance(mContext);
     }
 
     @VisibleForTesting
@@ -187,6 +199,13 @@ public class NetworkScanHelper {
                     new RadioAccessSpecifier(AccessNetworkType.NGRAN, null, null));
             Log.d(TAG, "radioAccessSpecifiers add NGRAN.");
         }
+        int accessMode = NetworkScanRequest.ACCESS_MODE_PLMN;
+        int searchType = NetworkScanRequest.SEARCH_TYPE_PLMN_ONLY;
+        if(MobileNetworkUtils.isCagSnpnEnabled(mContext)) {
+            accessMode = MobileNetworkUtils.getAccessMode(mContext,
+                    mTelephonyManager.getSlotIndex());
+            searchType = NetworkScanRequest.SEARCH_TYPE_PLMN_AND_CAG;
+        }
 
         return new NetworkScanRequest(
                 NetworkScanRequest.SCAN_TYPE_ONE_SHOT,
@@ -196,7 +215,9 @@ public class NetworkScanHelper {
                 mMaxSearchTimeSec,
                 INCREMENTAL_RESULTS,
                 INCREMENTAL_RESULTS_PERIODICITY_SEC,
-                null /* List of PLMN ids (MCC-MNC) */);
+                null /* List of PLMN ids (MCC-MNC) */,
+                accessMode,
+                searchType);
     }
 
     /**

@@ -30,8 +30,11 @@ package com.android.settings.location;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import androidx.preference.PreferenceViewHolder;
-import com.android.settingslib.location.InjectedSetting;
 import android.util.Log;
+import android.os.Looper;
+import android.os.Handler;
+import com.android.settingslib.location.InjectedSetting;
+import com.android.settingslib.location.SettingsInjector;
 import com.android.settingslib.widget.AppPreference;
 import com.android.settings.widget.RestrictedAppPreference;
 import dalvik.system.DexClassLoader;
@@ -124,14 +127,17 @@ public class DimmableIZatIconPreference {
             icon.mutate().setAlpha(dimmed ? ICON_ALPHA_DISABLED : ICON_ALPHA_ENABLED);
             pref.setIcon(icon);
         }
+        pref.setSummary(pref.getSummary());
     }
 
     private static class IZatAppPreference extends AppPreference {
+        private Handler mHandler;
         private boolean mChecked;
         private Context mContext;
         private IZatAppPreference(Context context) {
             super(context);
             mContext = context;
+            mHandler = new Handler(Looper.getMainLooper());
             Object notifier = Proxy.newProxyInstance(mLoader,
                                                      new Class[] { mNotifierClz },
                                                      new InvocationHandler() {
@@ -143,7 +149,9 @@ public class DimmableIZatIconPreference {
                         boolean consent = (Boolean)args[0];
                         if (mChecked != consent) {
                             mChecked = consent;
-                            dimIcon(IZatAppPreference.this, !isEnabled() || !mChecked);
+                            mHandler.post(() -> {
+                                DimmableIZatIconPreference.dimIcon(
+                                    IZatAppPreference.this, !isEnabled() || !mChecked);});
                         }
                     }
                     return null;
@@ -172,14 +180,18 @@ public class DimmableIZatIconPreference {
         @Override
         public void onBindViewHolder(PreferenceViewHolder view) {
             super.onBindViewHolder(view);
-            DimmableIZatIconPreference.dimIcon(this, !isEnabled() || !mChecked);
+            mHandler.post(() -> {
+                DimmableIZatIconPreference.dimIcon(
+                    IZatAppPreference.this, !isEnabled() || !mChecked);});
         }
     }
 
     private static class IZatRestrictedAppPreference extends RestrictedAppPreference {
+        private Handler mHandler;
         private boolean mChecked;
         private IZatRestrictedAppPreference(Context context, String userRestriction) {
             super(context, userRestriction);
+            mHandler = new Handler(Looper.getMainLooper());
             Object notifier = Proxy.newProxyInstance(mLoader,
                                                      new Class[] { mNotifierClz },
                                                      new InvocationHandler() {
@@ -191,7 +203,9 @@ public class DimmableIZatIconPreference {
                         boolean consent = (Boolean)args[0];
                         if (mChecked != consent) {
                             mChecked = consent;
-                            dimIcon(IZatRestrictedAppPreference.this, !isEnabled() || !mChecked);
+                            mHandler.post(() -> {
+                                DimmableIZatIconPreference.dimIcon(
+                                   IZatRestrictedAppPreference.this, !isEnabled() || !mChecked);});
                         }
                     }
                     return null;
@@ -209,7 +223,9 @@ public class DimmableIZatIconPreference {
         @Override
         public void onBindViewHolder(PreferenceViewHolder view) {
             super.onBindViewHolder(view);
-            DimmableIZatIconPreference.dimIcon(this, !isEnabled() || !mChecked);
+            mHandler.post(() -> {
+                DimmableIZatIconPreference.dimIcon(
+                    IZatRestrictedAppPreference.this, !isEnabled() || !mChecked);});
         }
     }
 

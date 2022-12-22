@@ -64,6 +64,7 @@
         android:order="50"
         android:key="sim_lock_settings"
         android:title="@string/sim_lock_settings_category"
+        settings:isPreferenceVisible="@bool/config_show_sim_info"
         settings:controller="com.android.settings.security.SimLockPreferenceController">
 
         <intent
@@ -103,11 +104,20 @@
         android:key="confirm_sim_deletion"
         android:title="@string/confirm_sim_deletion_title"
         android:summary="@string/confirm_sim_deletion_description"
+        settings:isPreferenceVisible="@bool/config_show_sim_info"
         settings:controller="com.android.settings.security.ConfirmSimDeletionPreferenceController" />
+
+  <Preference
+        android:order="100"
+        android:id="@+id/memtag_page"
+        android:key="memtag_page"
+        android:title="@string/memtag_title"
+        android:fragment="com.android.settings.security.MemtagPage"
+        settings:controller="com.android.settings.security.MemtagPagePreferenceController" />
 
     <!-- work profile security section -->
     <PreferenceCategory
-        android:order="100"
+        android:order="110"
         android:key="security_category_profile"
         android:title="@string/lock_settings_profile_title">
 

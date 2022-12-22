@@ -18,10 +18,11 @@ package com.android.settings.connecteddevice;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
-
 import android.os.SystemProperties;
+import android.sysprop.BluetoothProperties;
 import android.util.Log;
 import android.view.View;
+
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
@@ -60,6 +61,16 @@ public class BluetoothDashboardFragment extends DashboardFragment {
     private FooterPreference mFooterPreference;
     private SettingsMainSwitchBar mSwitchBar;
     private BluetoothSwitchPreferenceController mController;
+
+    public BluetoothDashboardFragment() {
+        if (BluetoothProperties.isProfileBapBroadcastSourceEnabled().orElse(false) ||
+            BluetoothProperties.isProfileBapBroadcastAssistEnabled().orElse(false)) {
+            SystemProperties.set(BLUETOOTH_BROADCAST_UI_PROP, "false");
+        } else {
+            Log.d(TAG, "Use legacy broadcast if available");
+            SystemProperties.set(BLUETOOTH_BROADCAST_UI_PROP, "true");
+        }
+    }
 
     @Override
     public int getMetricsCategory() {

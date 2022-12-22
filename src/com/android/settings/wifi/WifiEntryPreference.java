@@ -30,10 +30,10 @@ import android.widget.TextView;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settingslib.R;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.Utils;
 import com.android.settingslib.wifi.WifiUtils;
 import com.android.wifitrackerlib.BaseWifiTracker;
@@ -42,7 +42,8 @@ import com.android.wifitrackerlib.WifiEntry;
 /**
  * Preference to display a WifiEntry in a wifi picker.
  */
-public class WifiEntryPreference extends Preference implements WifiEntry.WifiEntryCallback,
+public class WifiEntryPreference extends RestrictedPreference implements
+        WifiEntry.WifiEntryCallback,
         View.OnClickListener {
 
     private static final int[] STATE_SECURED = {
@@ -201,7 +202,8 @@ public class WifiEntryPreference extends Preference implements WifiEntry.WifiEnt
         return accent ? android.R.attr.colorAccent : android.R.attr.colorControlNormal;
     }
 
-    private void updateIcon(boolean showX, int level) {
+    @VisibleForTesting
+    void updateIcon(boolean showX, int level) {
         if (level == -1) {
             setIcon(null);
             return;
@@ -209,7 +211,9 @@ public class WifiEntryPreference extends Preference implements WifiEntry.WifiEnt
 
         final Drawable drawable = mIconInjector.getIcon(showX, level);
         if (drawable != null) {
-            drawable.setTint(Utils.getColorAttrDefaultColor(getContext(), getIconColorAttr()));
+            // Must use Drawable#setTintList() instead of Drawable#setTint() to show the grey
+            // icon when the preference is disabled.
+            drawable.setTintList(Utils.getColorAttr(getContext(), getIconColorAttr()));
             setIcon(drawable);
         } else {
             setIcon(null);
@@ -306,5 +310,4 @@ public class WifiEntryPreference extends Preference implements WifiEntry.WifiEnt
         }
         return buttonIcon;
     }
-
 }

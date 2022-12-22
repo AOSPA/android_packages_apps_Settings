@@ -14,6 +14,13 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center are provided under the following license:
+ *
+ * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.network.telephony;
 
 import android.telephony.AccessNetworkConstants.AccessNetworkType;
@@ -75,6 +82,33 @@ public final class CellInfoUtil {
         }
         final BidiFormatter bidiFormatter = BidiFormatter.getInstance();
         return bidiFormatter.unicodeWrap(networkMccMnc, TextDirectionHeuristics.LTR);
+    }
+
+    /**
+     * Returns the network info obtained in the manual search.
+     *
+     * @param cellId contains the identity of the network.
+     * @return SNPN network Id if not null/empty, otherwise CAG name if not null/empty,
+     * else CAG Id.
+     */
+    public static String getNetworkInfo(CellIdentityNr cellId) {
+        String info = "";
+        if (cellId != null) {
+            if (cellId.getSnpnInfo() != null) {
+                info += "SNPN: ";
+                for (byte id : cellId.getSnpnInfo().getNid()) {
+                    info += String.format("%02X", id);
+                }
+            } else if (cellId.getCagInfo() != null) {
+                if (cellId.getCagInfo().getCagName() != null &&
+                        !(cellId.getCagInfo().getCagName().isEmpty())) {
+                    info += "CAG: " + cellId.getCagInfo().getCagName();
+                } else {
+                    info += "CAG: " + cellId.getCagInfo().getCagId();
+                }
+            }
+        }
+        return info;
     }
 
     /**

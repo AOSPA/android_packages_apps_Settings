@@ -14,6 +14,13 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center are provided under the following license:
+ *
+ * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.network.telephony;
 
 import android.app.Activity;
@@ -489,7 +496,9 @@ public class NetworkSelectSettings extends DashboardFragment implements
     @VisibleForTesting
     protected NetworkOperatorPreference createNetworkOperatorPreference(CellInfo cellInfo) {
         return new NetworkOperatorPreference(getPrefContext(),
-                cellInfo, mForbiddenPlmns, mShow4GForLTE);
+                cellInfo, mForbiddenPlmns, mShow4GForLTE,
+                MobileNetworkUtils.getAccessMode(getContext(),
+                        mTelephonyManager.getSlotIndex()));
     }
 
     /**
@@ -527,6 +536,12 @@ public class NetworkSelectSettings extends DashboardFragment implements
                 // add new preference
                 pref = createNetworkOperatorPreference(cellInfo);
                 pref.setOrder(index);
+
+                if (DomesticRoamUtils.isFeatureEnabled(getContext())) {
+                    pref.setSubId(mSubId);
+                    pref.updateCell(cellInfo);
+                }
+
                 mPreferenceCategory.addPreference(pref);
             }
             pref.setKey(pref.getOperatorName());
@@ -604,7 +619,9 @@ public class NetworkSelectSettings extends DashboardFragment implements
                     continue;
                 }
                 final NetworkOperatorPreference pref = new NetworkOperatorPreference(
-                        getPrefContext(), cellIdentity, mForbiddenPlmns, mShow4GForLTE);
+                        getPrefContext(), cellIdentity, mForbiddenPlmns, mShow4GForLTE,
+                        MobileNetworkUtils.getAccessMode(getContext(),
+                                mTelephonyManager.getSlotIndex()));
                 if (pref.isForbiddenNetwork()) {
                     continue;
                 }

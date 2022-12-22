@@ -24,7 +24,6 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.UiccCardInfo;
-import android.telephony.UiccSlotInfo;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -39,8 +38,6 @@ import com.android.settings.network.SwitchToEuiccSubscriptionSidecar;
 import com.android.settings.network.SwitchToRemovableSlotSidecar;
 import com.android.settings.network.UiccSlotUtil;
 import com.android.settings.sim.SimActivationNotifier;
-
-import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -161,8 +158,9 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
 
     @Override
     public void onSubscriptionsChanged() {
-        if ((mSubInfo == null || !mSubscriptionManager.isActiveSubscriptionId(
-                mSubInfo.getSubscriptionId())) && !isFinishing()) {
+        if ((mSubInfo == null || (!mSubInfo.isEmbedded() &&
+                !mSubscriptionManager.isActiveSubscriptionId(mSubInfo.getSubscriptionId())))
+                && !isFinishing()) {
             Log.i(TAG, "Finish dialog for inactive sim");
             finish();
         }
@@ -403,7 +401,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                 DIALOG_TAG_DISABLE_SIM_CONFIRMATION,
                 title,
                 null,
-                getString(R.string.yes),
+                getString(R.string.condition_turn_off),
                 getString(R.string.sim_action_cancel));
     }
 
@@ -468,7 +466,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                 DIALOG_TAG_ENABLE_SIM_CONFIRMATION,
                 getEnableSubscriptionTitle(),
                 null /* msg */,
-                getString(R.string.yes),
+                getString(R.string.condition_turn_on),
                 getString(R.string.sim_action_cancel));
     }
 
@@ -607,18 +605,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
     }
 
     private boolean isRemovableSimEnabled() {
-        ImmutableList<UiccSlotInfo> slotInfos = UiccSlotUtil.getSlotInfos(mTelMgr);
-        boolean isRemovableSimEnabled =
-                slotInfos.stream()
-                        .anyMatch(
-                                slot -> slot != null
-                                        && slot.isRemovable()
-                                        && slot.getPorts().stream().anyMatch(
-                                                port -> port.isActive())
-                                        && slot.getCardStateInfo()
-                                                == UiccSlotInfo.CARD_STATE_INFO_PRESENT);
-        Log.i(TAG, "isRemovableSimEnabled: " + isRemovableSimEnabled);
-        return isRemovableSimEnabled;
+        return UiccSlotUtil.isRemovableSimEnabled(mTelMgr);
     }
 
     private boolean isMultipleEnabledProfilesSupported() {

@@ -19,6 +19,7 @@ package com.android.settings.applications.manageapplications;
 import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING;
 import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
 
+import static com.android.internal.jank.InteractionJankMonitor.CUJ_SETTINGS_PAGE_SCROLL;
 import static com.android.settings.ChangeIds.CHANGE_RESTRICT_SAW_INTENT;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_ALL;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_BATTERY_OPTIMIZED;
@@ -36,7 +37,6 @@ import static com.android.settings.applications.manageapplications.AppFilterRegi
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_WORK;
 import static com.android.settings.search.actionbar.SearchMenuController.MENU_SEARCH;
 
-import android.annotation.Nullable;
 import android.annotation.StringRes;
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -60,6 +60,7 @@ import android.os.UserManager;
 import android.preference.PreferenceFrameLayout;
 import android.text.TextUtils;
 import android.util.ArraySet;
+import android.util.FeatureFlagUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -77,6 +78,7 @@ import android.widget.SearchView;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -85,11 +87,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.compat.IPlatformCompat;
+import com.android.internal.jank.InteractionJankMonitor;
 import com.android.settings.R;
-import com.android.settings.Settings;
+import com.android.settings.Settings.AlarmsAndRemindersActivity;
+import com.android.settings.Settings.AppBatteryUsageActivity;
+import com.android.settings.Settings.ChangeWifiStateActivity;
 import com.android.settings.Settings.GamesStorageActivity;
 import com.android.settings.Settings.HighPowerApplicationsActivity;
 import com.android.settings.Settings.ManageExternalSourcesActivity;
+import com.android.settings.Settings.ManageExternalStorageActivity;
+import com.android.settings.Settings.MediaManagementAppsActivity;
+import com.android.settings.Settings.NotificationAppListActivity;
+import com.android.settings.Settings.NotificationReviewPermissionsActivity;
 import com.android.settings.Settings.OverlaySettingsActivity;
 import com.android.settings.Settings.StorageUseActivity;
 import com.android.settings.Settings.UsageAccessSettingsActivity;
@@ -131,6 +140,15 @@ import com.android.settings.localepicker.AppLocalePickerActivity;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.app.AppNotificationSettings;
+import com.android.settings.spa.SpaActivity;
+import com.android.settings.spa.app.AllAppListPageProvider;
+import com.android.settings.spa.app.specialaccess.AllFilesAccessAppListProvider;
+import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListProvider;
+import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider;
+import com.android.settings.spa.app.specialaccess.MediaManagementAppsAppListProvider;
+import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListProvider;
+import com.android.settings.spa.notification.AppListNotificationsPageProvider;
+import com.android.settings.spa.system.AppLanguagesPageProvider;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settings.wifi.AppStateChangeWifiStateBridge;
 import com.android.settings.wifi.ChangeWifiStateDetails;
@@ -270,20 +288,67 @@ public class ManageApplications extends InstrumentedFragment
     private AppBarLayout mAppBarLayout;
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (!FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_ENABLE_SPA)) {
+            return;
+        }
+        final String spaDestination = getSpaDestination();
+        if (spaDestination != null) {
+            SpaActivity.startSpaActivity(context, spaDestination);
+            getActivity().finish();
+        }
+    }
+
+    @Nullable
+    private String getSpaDestination() {
+        final String className = getClassName(getActivity().getIntent(), getArguments());
+        if (className.equals(UsageAccessSettingsActivity.class.getName())) {
+            return null;
+        } else if (className.equals(HighPowerApplicationsActivity.class.getName())) {
+            return null;
+        } else if (className.equals(OverlaySettingsActivity.class.getName())) {
+            return DisplayOverOtherAppsAppListProvider.INSTANCE.getAppListRoute();
+        } else if (className.equals(WriteSettingsActivity.class.getName())) {
+            return ModifySystemSettingsAppListProvider.INSTANCE.getAppListRoute();
+        } else if (className.equals(ManageExternalSourcesActivity.class.getName())) {
+            return InstallUnknownAppsListProvider.INSTANCE.getAppListRoute();
+        } else if (className.equals(ChangeWifiStateActivity.class.getName())) {
+            return null;
+        } else if (className.equals(ManageExternalStorageActivity.class.getName())) {
+            return AllFilesAccessAppListProvider.INSTANCE.getAppListRoute();
+        } else if (className.equals(MediaManagementAppsActivity.class.getName())) {
+            return MediaManagementAppsAppListProvider.INSTANCE.getAppListRoute();
+        } else if (className.equals(AlarmsAndRemindersActivity.class.getName())) {
+            return null;
+        } else if (className.equals(NotificationAppListActivity.class.getName())
+                || className.equals(NotificationReviewPermissionsActivity.class.getName())) {
+            return AppListNotificationsPageProvider.INSTANCE.getName();
+        } else if (className.equals(AppLocaleDetails.class.getName())) {
+            return AppLanguagesPageProvider.INSTANCE.getName();
+        } else if (className.equals(AppBatteryUsageActivity.class.getName())) {
+            return null;
+        } else {
+            return AllAppListPageProvider.INSTANCE.getName();
+        }
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
         final Activity activity = getActivity();
+        if (activity.isFinishing()) {
+            return;
+        }
+        setHasOptionsMenu(true);
         mUserManager = activity.getSystemService(UserManager.class);
         mApplicationsState = ApplicationsState.getInstance(activity.getApplication());
 
         Intent intent = activity.getIntent();
         Bundle args = getArguments();
         final int screenTitle = getTitleResId(intent, args);
-        String className = args != null ? args.getString(EXTRA_CLASSNAME) : null;
-        if (className == null) {
-            className = intent.getComponent().getClassName();
-        }
+        final String className = getClassName(intent, args);
         if (className.equals(StorageUseActivity.class.getName())) {
             if (args != null && args.containsKey(EXTRA_VOLUME_UUID)) {
                 mVolumeUuid = args.getString(EXTRA_VOLUME_UUID);
@@ -311,23 +376,22 @@ public class ManageApplications extends InstrumentedFragment
         } else if (className.equals(GamesStorageActivity.class.getName())) {
             mListType = LIST_TYPE_GAMES;
             mSortOrder = R.id.sort_order_size;
-        } else if (className.equals(Settings.ChangeWifiStateActivity.class.getName())) {
+        } else if (className.equals(ChangeWifiStateActivity.class.getName())) {
             mListType = LIST_TYPE_WIFI_ACCESS;
-        } else if (className.equals(Settings.ManageExternalStorageActivity.class.getName())) {
+        } else if (className.equals(ManageExternalStorageActivity.class.getName())) {
             mListType = LIST_MANAGE_EXTERNAL_STORAGE;
-        } else if (className.equals(Settings.MediaManagementAppsActivity.class.getName())) {
+        } else if (className.equals(MediaManagementAppsActivity.class.getName())) {
             mListType = LIST_TYPE_MEDIA_MANAGEMENT_APPS;
-        } else if (className.equals(Settings.AlarmsAndRemindersActivity.class.getName())) {
+        } else if (className.equals(AlarmsAndRemindersActivity.class.getName())) {
             mListType = LIST_TYPE_ALARMS_AND_REMINDERS;
-        } else if (className.equals(Settings.NotificationAppListActivity.class.getName())
-                || className.equals(
-                Settings.NotificationReviewPermissionsActivity.class.getName())) {
+        } else if (className.equals(NotificationAppListActivity.class.getName())
+                || className.equals(NotificationReviewPermissionsActivity.class.getName())) {
             mListType = LIST_TYPE_NOTIFICATION;
             mUsageStatsManager = IUsageStatsManager.Stub.asInterface(
                     ServiceManager.getService(Context.USAGE_STATS_SERVICE));
             mNotificationBackend = new NotificationBackend();
             mSortOrder = R.id.sort_order_recent_notification;
-            if (className.equals(Settings.NotificationReviewPermissionsActivity.class.getName())) {
+            if (className.equals(NotificationReviewPermissionsActivity.class.getName())) {
                 // Special-case for a case where a user is directed to the all apps notification
                 // preferences page via a notification prompt to review permissions settings.
                 android.provider.Settings.Global.putInt(getContext().getContentResolver(),
@@ -336,17 +400,17 @@ public class ManageApplications extends InstrumentedFragment
             }
         } else if (className.equals(AppLocaleDetails.class.getName())) {
             mListType = LIST_TYPE_APPS_LOCALE;
-        } else if (className.equals(Settings.AppBatteryUsageActivity.class.getName())) {
+        } else if (className.equals(AppBatteryUsageActivity.class.getName())) {
             mListType = LIST_TYPE_BATTERY_OPTIMIZATION;
         } else {
             mListType = LIST_TYPE_MAIN;
         }
         final AppFilterRegistry appFilterRegistry = AppFilterRegistry.getInstance();
         mFilter = appFilterRegistry.get(appFilterRegistry.getDefaultFilterType(mListType));
-        mIsPersonalOnly = args != null ? args.getInt(ProfileSelectFragment.EXTRA_PROFILE)
-                == ProfileSelectFragment.ProfileType.PERSONAL : false;
-        mIsWorkOnly = args != null ? args.getInt(ProfileSelectFragment.EXTRA_PROFILE)
-                == ProfileSelectFragment.ProfileType.WORK : false;
+        mIsPersonalOnly = args != null && args.getInt(ProfileSelectFragment.EXTRA_PROFILE)
+                == ProfileSelectFragment.ProfileType.PERSONAL;
+        mIsWorkOnly = args != null && args.getInt(ProfileSelectFragment.EXTRA_PROFILE)
+                == ProfileSelectFragment.ProfileType.WORK;
         mWorkUserId = args != null ? args.getInt(EXTRA_WORK_ID) : UserHandle.myUserId();
         if (mIsWorkOnly && mWorkUserId == UserHandle.myUserId()) {
             mWorkUserId = Utils.getManagedProfileId(mUserManager, UserHandle.myUserId());
@@ -399,6 +463,9 @@ public class ManageApplications extends InstrumentedFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+        if (getActivity().isFinishing()) {
+            return null;
+        }
         if (mListType == LIST_TYPE_OVERLAY && !Utils.isSystemAlertWindowEnabled(getContext())) {
             mRootView = inflater.inflate(R.layout.manage_applications_apps_unsupported, null);
             setHasOptionsMenu(false);
@@ -456,8 +523,9 @@ public class ManageApplications extends InstrumentedFragment
         mFilterAdapter.enableFilter(filterType);
 
         if (mListType == LIST_TYPE_MAIN) {
-            if (UserManager.get(getActivity()).getUserProfiles().size() > 1 && !mIsWorkOnly
-                    && !mIsPersonalOnly) {
+            // Apply the personal and work filter only if new tab should be added
+            // for a given user profile. Else let it use the default all apps filter.
+            if (Utils.isNewTabNeeded(getActivity()) && !mIsWorkOnly && !mIsPersonalOnly) {
                 mFilterAdapter.enableFilter(FILTER_APPS_PERSONAL);
                 mFilterAdapter.enableFilter(FILTER_APPS_WORK);
             }
@@ -568,7 +636,9 @@ public class ManageApplications extends InstrumentedFragment
         if (mApplications != null) {
             mApplications.pause();
         }
-        mResetAppsHelper.stop();
+        if (mResetAppsHelper != null) {
+            mResetAppsHelper.stop();
+        }
     }
 
     @Override
@@ -662,7 +732,8 @@ public class ManageApplications extends InstrumentedFragment
                 break;
             case LIST_TYPE_BATTERY_OPTIMIZATION:
                 AdvancedPowerUsageDetail.startBatteryDetailPage(
-                        getActivity(), this, mCurrentPkgName);
+                        getActivity(), this, mCurrentPkgName,
+                        UserHandle.getUserHandleForUid(mCurrentUid));
                 break;
             // TODO: Figure out if there is a way where we can spin up the profile's settings
             // process ahead of time, to avoid a long load of data when user clicks on a managed
@@ -694,6 +765,7 @@ public class ManageApplications extends InstrumentedFragment
             mSearchView = (SearchView) searchMenuItem.getActionView();
             mSearchView.setQueryHint(getText(R.string.search_settings));
             mSearchView.setOnQueryTextListener(this);
+            mSearchView.setMaxWidth(Integer.MAX_VALUE);
             if (mExpandSearch) {
                 searchMenuItem.expandActionView();
             }
@@ -931,35 +1003,32 @@ public class ManageApplications extends InstrumentedFragment
     public static int getTitleResId(@NonNull Intent intent, Bundle args) {
         int screenTitle = intent.getIntExtra(
                 SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, R.string.all_apps);
-        String className = args != null ? args.getString(EXTRA_CLASSNAME) : null;
-        if (className == null) {
-            className = intent.getComponent().getClassName();
-        }
-        if (className.equals(Settings.UsageAccessSettingsActivity.class.getName())) {
+        String className = getClassName(intent, args);
+        if (className.equals(UsageAccessSettingsActivity.class.getName())) {
             screenTitle = R.string.usage_access;
-        } else if (className.equals(Settings.HighPowerApplicationsActivity.class.getName())) {
+        } else if (className.equals(HighPowerApplicationsActivity.class.getName())) {
             screenTitle = R.string.high_power_apps;
-        } else if (className.equals(Settings.OverlaySettingsActivity.class.getName())) {
+        } else if (className.equals(OverlaySettingsActivity.class.getName())) {
             screenTitle = R.string.system_alert_window_settings;
-        } else if (className.equals(Settings.WriteSettingsActivity.class.getName())) {
+        } else if (className.equals(WriteSettingsActivity.class.getName())) {
             screenTitle = R.string.write_settings;
-        } else if (className.equals(Settings.ManageExternalSourcesActivity.class.getName())) {
+        } else if (className.equals(ManageExternalSourcesActivity.class.getName())) {
             screenTitle = R.string.install_other_apps;
-        } else if (className.equals(Settings.ChangeWifiStateActivity.class.getName())) {
+        } else if (className.equals(ChangeWifiStateActivity.class.getName())) {
             screenTitle = R.string.change_wifi_state_title;
-        } else if (className.equals(Settings.ManageExternalStorageActivity.class.getName())) {
+        } else if (className.equals(ManageExternalStorageActivity.class.getName())) {
             screenTitle = R.string.manage_external_storage_title;
-        } else if (className.equals(Settings.MediaManagementAppsActivity.class.getName())) {
+        } else if (className.equals(MediaManagementAppsActivity.class.getName())) {
             screenTitle = R.string.media_management_apps_title;
-        } else if (className.equals(Settings.AlarmsAndRemindersActivity.class.getName())) {
+        } else if (className.equals(AlarmsAndRemindersActivity.class.getName())) {
             screenTitle = R.string.alarms_and_reminders_title;
-        } else if (className.equals(Settings.NotificationAppListActivity.class.getName())
+        } else if (className.equals(NotificationAppListActivity.class.getName())
                 || className.equals(
-                Settings.NotificationReviewPermissionsActivity.class.getName())) {
+                NotificationReviewPermissionsActivity.class.getName())) {
             screenTitle = R.string.app_notifications_title;
         } else if (className.equals(AppLocaleDetails.class.getName())) {
             screenTitle = R.string.app_locales_picker_menu_title;
-        } else if (className.equals(Settings.AppBatteryUsageActivity.class.getName())) {
+        } else if (className.equals(AppBatteryUsageActivity.class.getName())) {
             screenTitle = R.string.app_battery_usage_title;
         } else {
             if (screenTitle == -1) {
@@ -967,6 +1036,14 @@ public class ManageApplications extends InstrumentedFragment
             }
         }
         return screenTitle;
+    }
+
+    private static String getClassName(@NonNull Intent intent, Bundle args) {
+        String className = args != null ? args.getString(EXTRA_CLASSNAME) : null;
+        if (className == null) {
+            className = intent.getComponent().getClassName();
+        }
+        return className;
     }
 
     static class FilterSpinnerAdapter extends SettingsSpinnerAdapter<CharSequence> {
@@ -1152,7 +1229,8 @@ public class ManageApplications extends InstrumentedFragment
             } else if (mManageApplications.mListType == LIST_TYPE_MEDIA_MANAGEMENT_APPS) {
                 mExtraInfoBridge = new AppStateMediaManagementAppsBridge(mContext, mState, this);
             } else if (mManageApplications.mListType == LIST_TYPE_APPS_LOCALE) {
-                mExtraInfoBridge = new AppStateLocaleBridge(mContext, mState, this);
+                mExtraInfoBridge = new AppStateLocaleBridge(mContext, mState, this,
+                        mManageApplications.mUserManager);
             } else if (mManageApplications.mListType == LIST_TYPE_BATTERY_OPTIMIZATION) {
                 mExtraInfoBridge = new AppStateAppBatteryUsageBridge(mContext, mState, this);
             } else {
@@ -1166,8 +1244,10 @@ public class ManageApplications extends InstrumentedFragment
         @Override
         public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
             super.onAttachedToRecyclerView(recyclerView);
+            final String className =
+                    mManageApplications.getClass().getName() + "_" + mManageApplications.mListType;
             mRecyclerView = recyclerView;
-            mOnScrollListener = new OnScrollListener(this);
+            mOnScrollListener = new OnScrollListener(this, className);
             mRecyclerView.addOnScrollListener(mOnScrollListener);
         }
 
@@ -1200,9 +1280,12 @@ public class ManageApplications extends InstrumentedFragment
                     rebuild(R.id.sort_order_alpha, true);
                 }
                 return;
-            } else if (mManageApplications.mListType == LIST_TYPE_BATTERY_OPTIMIZATION) {
+            }
+
+            if (mManageApplications.mListType == LIST_TYPE_BATTERY_OPTIMIZATION) {
                 logAppBatteryUsage(filterType);
             }
+
             rebuild();
         }
 
@@ -1674,10 +1757,10 @@ public class ManageApplications extends InstrumentedFragment
                     holder.setSummary(MediaManagementAppsDetails.getSummary(mContext, entry));
                     break;
                 case LIST_TYPE_APPS_LOCALE:
-                    holder.setSummary(AppLocaleDetails.getSummary(mContext, entry));
+                    holder.setSummary(AppLocaleDetails.getSummary(mContext, entry.info));
                     break;
                 case LIST_TYPE_BATTERY_OPTIMIZATION:
-                    holder.setSummary(R.string.app_battery_usage_summary);
+                    holder.setSummary(null);
                     break;
                 default:
                     holder.updateSizeText(entry, mManageApplications.mInvalidSizeStr, mWhichSize);
@@ -1724,11 +1807,15 @@ public class ManageApplications extends InstrumentedFragment
             private boolean mDelayNotifyDataChange;
             private ApplicationsAdapter mAdapter;
             private InputMethodManager mInputMethodManager;
+            private InteractionJankMonitor mMonitor;
+            private String mClassName;
 
-            public OnScrollListener(ApplicationsAdapter adapter) {
+            public OnScrollListener(ApplicationsAdapter adapter, String className) {
                 mAdapter = adapter;
                 mInputMethodManager = mAdapter.mContext.getSystemService(
                         InputMethodManager.class);
+                mMonitor = InteractionJankMonitor.getInstance();
+                mClassName = className;
             }
 
             @Override
@@ -1743,6 +1830,15 @@ public class ManageApplications extends InstrumentedFragment
                         mInputMethodManager.hideSoftInputFromWindow(recyclerView.getWindowToken(),
                                 0);
                     }
+                    // Start jank monitoring during page scrolling.
+                    final InteractionJankMonitor.Configuration.Builder builder =
+                            InteractionJankMonitor.Configuration.Builder.withView(
+                                            CUJ_SETTINGS_PAGE_SCROLL, recyclerView)
+                                    .setTag(mClassName);
+                    mMonitor.begin(builder);
+                } else if (mScrollState == SCROLL_STATE_IDLE) {
+                    // Stop jank monitoring on page scrolling.
+                    mMonitor.end(CUJ_SETTINGS_PAGE_SCROLL);
                 }
             }
 

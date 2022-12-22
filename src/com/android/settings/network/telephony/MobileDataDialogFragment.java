@@ -43,6 +43,7 @@ public class MobileDataDialogFragment extends InstrumentedDialogFragment impleme
 
     public static final int TYPE_DISABLE_DIALOG = 0;
     public static final int TYPE_MULTI_SIM_DIALOG = 1;
+    public static final int TYPE_DISABLE_CIWLAN_DIALOG = 2;
 
     private static final String ARG_DIALOG_TYPE = "dialog_type";
     private static final String ARG_SUB_ID = "subId";
@@ -115,6 +116,12 @@ public class MobileDataDialogFragment extends InstrumentedDialogFragment impleme
                                 this)
                         .setNegativeButton(R.string.cancel, null)
                         .create();
+            case TYPE_DISABLE_CIWLAN_DIALOG:
+                return new AlertDialog.Builder(context)
+                        .setMessage(R.string.mobile_data_disable_dialog_ciwlan_call)
+                        .setPositiveButton(android.R.string.ok, this)
+                        .setNegativeButton(android.R.string.cancel, null)
+                        .create();
             default:
                 throw new IllegalArgumentException("unknown type " + mType);
         }
@@ -128,6 +135,7 @@ public class MobileDataDialogFragment extends InstrumentedDialogFragment impleme
     @Override
     public void onClick(DialogInterface dialog, int which) {
         switch (mType) {
+            case TYPE_DISABLE_CIWLAN_DIALOG:
             case TYPE_DISABLE_DIALOG:
                 MobileNetworkUtils.setMobileDataEnabled(getContext(), mSubId, false /* enabled */,
                         false /* disableOtherSubscriptions */);

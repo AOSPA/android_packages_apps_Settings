@@ -21,7 +21,6 @@ import static android.content.Intent.EXTRA_USER_ID;
 import static android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
 import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
 
-import android.annotation.Nullable;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -42,6 +41,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
+import android.content.pm.UserProperties;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -101,6 +101,7 @@ import android.widget.TabWidget;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
@@ -122,6 +123,7 @@ import com.android.settingslib.widget.AdaptiveIcon;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import org.codeaurora.internal.IExtTelephony;
 
@@ -604,7 +606,9 @@ public final class Utils extends com.android.settingslib.Utils {
         return inflater.inflate(resId, parent, false);
     }
 
-    public static ArraySet<String> getHandledDomains(PackageManager pm, String packageName) {
+    /** Gets all the domains that the given package could handled. */
+    @NonNull
+    public static Set<String> getHandledDomains(PackageManager pm, String packageName) {
         final List<IntentFilterVerificationInfo> iviList =
                 pm.getIntentFilterVerifications(packageName);
         final List<IntentFilter> filters = pm.getAllIntentFilters(packageName);
@@ -612,9 +616,7 @@ public final class Utils extends com.android.settingslib.Utils {
         final ArraySet<String> result = new ArraySet<>();
         if (iviList != null && iviList.size() > 0) {
             for (IntentFilterVerificationInfo ivi : iviList) {
-                for (String host : ivi.getDomains()) {
-                    result.add(host);
-                }
+                result.addAll(ivi.getDomains());
             }
         }
         if (filters != null && filters.size() > 0) {
@@ -814,7 +816,9 @@ public final class Utils extends com.android.settingslib.Utils {
         }
     }
 
-    public static CharSequence getApplicationLabel(Context context, String packageName) {
+    /** Gets the application label of the given package name. */
+    @Nullable
+    public static CharSequence getApplicationLabel(Context context, @NonNull String packageName) {
         try {
             final ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo(
                     packageName,
@@ -1222,7 +1226,7 @@ public final class Utils extends com.android.settingslib.Utils {
         final boolean isWork = args != null ? args.getInt(ProfileSelectFragment.EXTRA_PROFILE)
                 == ProfileSelectFragment.ProfileType.WORK : false;
         try {
-            if (activity.getSystemService(UserManager.class).getUserProfiles().size() > 1
+            if (isNewTabNeeded(activity)
                     && ProfileFragmentBridge.FRAGMENT_MAP.get(fragmentName) != null
                     && !isWork && !isPersonal) {
                 f = Fragment.instantiate(activity,
@@ -1234,6 +1238,24 @@ public final class Utils extends com.android.settingslib.Utils {
             Log.e(TAG, "Unable to get target fragment", e);
         }
         return f;
+    }
+
+    /**
+     * Checks if a new tab is needed or not for any user profile associated with the context user.
+     *
+     * <p> Checks if any user has the property {@link UserProperties#SHOW_IN_SETTINGS_SEPARATE} set.
+     */
+    public static boolean isNewTabNeeded(Activity activity) {
+        UserManager userManager = activity.getSystemService(UserManager.class);
+        List<UserHandle> profiles = userManager.getUserProfiles();
+        for (UserHandle userHandle : profiles) {
+            UserProperties userProperties = userManager.getUserProperties(userHandle);
+            if (userProperties.getShowInSettings()
+                    == UserProperties.SHOW_IN_SETTINGS_SEPARATE) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

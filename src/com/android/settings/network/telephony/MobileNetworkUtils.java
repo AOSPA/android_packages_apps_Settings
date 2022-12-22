@@ -14,6 +14,13 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center are provided under the following license:
+ *
+ * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.network.telephony;
 
 import static android.provider.Telephony.Carriers.ENFORCE_MANAGED_URI;
@@ -82,7 +89,10 @@ import com.android.settings.network.telephony.TelephonyConstants.TelephonyManage
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.graph.SignalDrawable;
+import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import com.android.settingslib.utils.ThreadUtils;
+
+import com.qti.extphone.ExtTelephonyManager;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -112,6 +122,12 @@ public class MobileNetworkUtils {
     // The following constants are used to draw signal icon.
     public static final int NO_CELL_DATA_TYPE_ICON = 0;
     public static final Drawable EMPTY_DRAWABLE = new ColorDrawable(Color.TRANSPARENT);
+
+    private static ExtTelephonyManager mExtTelephonyManager;
+    private static final String PROPERTY_CAG_SNPN = "persist.vendor.cag_snpn";
+    private static final String NETWORK_ACCESS_MODE = "access_mode";
+    private static int mCagSnpnFeatureStatus = -1;
+    private static final int ACCESS_MODE_PLMN = 1;
 
     /**
      * Returns if DPC APNs are enforced.
@@ -263,6 +279,9 @@ public class MobileNetworkUtils {
      * the user has enabled development mode.
      */
     public static boolean showEuiccSettings(Context context) {
+        if (!SubscriptionUtil.isSimHardwareVisible(context)) {
+            return false;
+        }
         long timeForAccess = SystemClock.elapsedRealtime();
         try {
             Boolean isShow = ((Future<Boolean>) ThreadUtils.postOnBackgroundThread(() -> {
@@ -1014,6 +1033,10 @@ public class MobileNetworkUtils {
     }
 
     public static void launchMobileNetworkSettings(Context context, SubscriptionInfo info) {
+        if (!SubscriptionUtil.isSimHardwareVisible(context)) {
+            Log.e(TAG, "launchMobileNetworkSettings fail, device without such UI.");
+            return;
+        }
         final int subId = info.getSubscriptionId();
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             Log.d(TAG, "launchMobileNetworkSettings fail, subId is invalid.");
@@ -1025,6 +1048,45 @@ public class MobileNetworkUtils {
         extra.putInt(Settings.EXTRA_SUB_ID, subId);
         new SubSettingLauncher(context)
                 .setTitleText(SubscriptionUtil.getUniqueSubscriptionDisplayName(info, context))
+                .setDestination(MobileNetworkSettings.class.getCanonicalName())
+                .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
+                .setArguments(extra)
+                .launch();
+    }
+
+    public static boolean isCagSnpnEnabled(Context context) {
+        if (mCagSnpnFeatureStatus == -1) {
+            mExtTelephonyManager = ExtTelephonyManager.getInstance(context);
+            mCagSnpnFeatureStatus = mExtTelephonyManager.getPropertyValueBool(PROPERTY_CAG_SNPN,
+                false) ? 1 : 0;
+            Log.d(TAG, "isCagSnpnEnabled, mCagSnpnFeatureStatus = " + mCagSnpnFeatureStatus);
+        }
+        return mCagSnpnFeatureStatus == 1 ? true : false;
+    }
+
+    public static int getAccessMode(Context context, int slotId) {
+        return Settings.Global.getInt(context.getContentResolver(),
+                NETWORK_ACCESS_MODE + slotId, ACCESS_MODE_PLMN);
+    }
+
+    public static void setAccessMode(Context context, int slotId, int accessMode) {
+        Settings.Global.putInt(context.getContentResolver(),
+              NETWORK_ACCESS_MODE + slotId, accessMode);
+        Log.d(TAG, "setAccessMode, accessMode = " + accessMode);
+    }
+
+    public static void launchMobileNetworkSettings(Context context, SubscriptionInfoEntity info) {
+        final int subId = Integer.valueOf(info.subId);
+        if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            Log.d(TAG, "launchMobileNetworkSettings fail, subId is invalid.");
+            return;
+        }
+
+        Log.d(TAG, "launchMobileNetworkSettings for SubscriptionInfoEntity subId: " + subId);
+        final Bundle extra = new Bundle();
+        extra.putInt(Settings.EXTRA_SUB_ID, subId);
+        new SubSettingLauncher(context)
+                .setTitleText(info.uniqueName)
                 .setDestination(MobileNetworkSettings.class.getCanonicalName())
                 .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
                 .setArguments(extra)

@@ -29,6 +29,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.UserManager;
 import android.telephony.TelephonyManager;
 
@@ -41,6 +42,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -69,12 +71,18 @@ public class ImeiInfoPreferenceControllerTest {
     private PreferenceCategory mCategory;
 
     private Context mContext;
+    private Resources mResources;
     private ImeiInfoPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+
+        mResources = spy(mContext.getResources());
+        when(mContext.getResources()).thenReturn(mResources);
+        when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(true);
+
         doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
         mController = spy(new ImeiInfoPreferenceController(mContext, "imei_info"));
         mController.setHost(mFragment);
@@ -101,6 +109,7 @@ public class ImeiInfoPreferenceControllerTest {
         verify(mCategory).addPreference(mSecondSimPreference);
     }
 
+    @Ignore
     @Test
     public void displayPreference_singleSimCdmaPhone_shouldSetSingleSimCdmaTitleAndMeid() {
         ReflectionHelpers.setField(mController, "mIsMultiSim", false);
@@ -114,6 +123,7 @@ public class ImeiInfoPreferenceControllerTest {
         verify(mPreference).setSummary(meid);
     }
 
+    @Ignore
     @Test
     public void displayPreference_multiSimCdmaPhone_shouldSetMultiSimCdmaTitleAndMeid() {
         ReflectionHelpers.setField(mController, "mIsMultiSim", true);
@@ -131,6 +141,7 @@ public class ImeiInfoPreferenceControllerTest {
         verify(mSecondSimPreference).setSummary(meid);
     }
 
+    @Ignore
     @Test
     public void displayPreference_singleSimGsmPhone_shouldSetSingleSimGsmTitleAndImei() {
         ReflectionHelpers.setField(mController, "mIsMultiSim", false);
@@ -144,6 +155,7 @@ public class ImeiInfoPreferenceControllerTest {
         verify(mPreference).setSummary(imei);
     }
 
+    @Ignore
     @Test
     public void displayPreference_multiSimGsmPhone_shouldSetMultiSimGsmTitleAndImei() {
         ReflectionHelpers.setField(mController, "mIsMultiSim", true);

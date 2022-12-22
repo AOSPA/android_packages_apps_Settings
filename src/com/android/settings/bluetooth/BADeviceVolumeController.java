@@ -28,6 +28,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.os.SystemProperties;
+import android.sysprop.BluetoothProperties;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -82,10 +83,19 @@ public class BADeviceVolumeController extends
 
     public BADeviceVolumeController(Context context) {
         super(context, KEY_BA_DEVICE_VOLUME);
+        boolean isAospBroadcastSupport = false;
+        if (BluetoothProperties.isProfileBapBroadcastSourceEnabled().orElse(false) ||
+            BluetoothProperties.isProfileBapBroadcastAssistEnabled().orElse(false)) {
+            Log.d(TAG, "Broadcast is supported");
+            isAospBroadcastSupport = true;
+        }
         int advAudioMask = SystemProperties.getInt(BLUETOOTH_ADV_AUDIO_MASK_PROP, 0);
         mIsVcpForBroadcastSupported =
                 (((advAudioMask & BROADCAST_AUDIO_MASK) == BROADCAST_AUDIO_MASK) &&
                 SystemProperties.getBoolean(BLUETOOTH_VCP_FOR_BROADCAST_PROP, false));
+        if (isAospBroadcastSupport) {
+            mIsVcpForBroadcastSupported = false;
+        }
         Log.d(TAG, "mIsVcpForBroadcastSupported: " + mIsVcpForBroadcastSupported);
     }
 

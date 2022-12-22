@@ -105,6 +105,7 @@ public class BluetoothDetailsCompanionAppsControllerTest extends
                 MacAddress.fromString(mCachedDevice.getAddress()),
                 /* displayName */ null,
                 /* deviceProfile */ "",
+                /* associatedDevice */ null,
                 /* selfManaged */ false,
                 /* notifyOnDeviceNearby */ true,
                 /* revoked */ false,

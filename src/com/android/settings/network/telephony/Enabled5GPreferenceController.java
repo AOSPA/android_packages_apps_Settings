@@ -76,14 +76,6 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
     Integer mCallState;
 
     private ContentObserver mSubsidySettingsObserver;
-    /*
-     * Indicates whether this SUB has NR capability or not.
-     */
-    private boolean mIsNrRadioSupported = false;
-    /*
-     * Indicates whether NR can be registered on both SUBs at the same time.
-     */
-    private boolean mIsDualNrSupported = false;
 
     private SharedPreferences mSharedPreferences;
     private boolean mChangedBy5gToggle = false;
@@ -112,10 +104,6 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
         mSubId = subId;
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
             .createForSubscriptionId(mSubId);
-        mIsNrRadioSupported =
-                checkSupportedRadioBitmask(mTelephonyManager.getSupportedRadioAccessFamily(),
-                TelephonyManager.NETWORK_TYPE_BITMASK_NR);
-        mIsDualNrSupported = TelephonyUtils.isDual5gSupported(mTelephonyManager);
         if (mAllowedNetworkTypesListener == null) {
             mAllowedNetworkTypesListener = new AllowedNetworkTypesListener(
                     mContext.getMainExecutor());
@@ -149,16 +137,26 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
             return CONDITIONALLY_UNAVAILABLE;
         }
         int defaultDdsSubId = SubscriptionManager.getDefaultDataSubscriptionId();
-        final boolean isSingleNrSupportedOnly =
-                !mIsDualNrSupported && (defaultDdsSubId == subId);
         final boolean isNrAllowed =
                 checkSupportedRadioBitmask(mTelephonyManager.getAllowedNetworkTypes(),
                 TelephonyManager.NETWORK_TYPE_BITMASK_NR);
+        /*
+         * Indicates whether NR can be registered on both SUBs at the same time.
+         */
+        final boolean isDualNrSupported = TelephonyUtils.isDual5gSupported(mTelephonyManager);
+        /*
+         * Indicates whether this SUB has NR capability or not.
+         */
+        final boolean isNrRadioSupported =
+                checkSupportedRadioBitmask(mTelephonyManager.getSupportedRadioAccessFamily(),
+                TelephonyManager.NETWORK_TYPE_BITMASK_NR);
+        final boolean isSingleNrSupportedOnly = !isDualNrSupported && (defaultDdsSubId == subId);
+
         final boolean isVisible = SubscriptionManager.isValidSubscriptionId(subId)
                 && !carrierConfig.getBoolean(CarrierConfigManager.KEY_HIDE_ENABLED_5G_BOOL)
-                && mIsNrRadioSupported
+                && isNrRadioSupported
                 && isNrAllowed
-                && (mIsDualNrSupported || isSingleNrSupportedOnly);
+                && (isDualNrSupported || isSingleNrSupportedOnly);
         return isVisible ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
@@ -195,6 +193,9 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
 
     @Override
     public void updateState(Preference preference) {
+        if (mTelephonyManager == null) {
+            return;
+        }
         super.updateState(preference);
         final SwitchPreference switchPreference = (SwitchPreference) preference;
         switchPreference.setVisible(isAvailable());

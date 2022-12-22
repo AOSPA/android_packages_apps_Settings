@@ -82,6 +82,7 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.drawable.CircleFramedDrawable;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.users.EditUserInfoController;
 import com.android.settingslib.users.UserCreatingDialog;
 import com.android.settingslib.utils.ThreadUtils;
@@ -132,6 +133,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String KEY_GUEST_EXIT = "guest_exit";
     private static final String KEY_REMOVE_GUEST_ON_EXIT = "remove_guest_on_exit";
     private static final String KEY_GUEST_USER_CATEGORY = "guest_user_category";
+    private static final String KEY_ALLOW_MULTIPLE_USERS = "allow_multiple_users";
 
     private static final String SETTING_GUEST_HAS_LOGGED_IN = "systemui.guest_has_logged_in";
 
@@ -1196,11 +1198,19 @@ public class UserSettings extends SettingsPreferenceFragment
         if (context == null) {
             return;
         }
-        final List<UserInfo> users = mUserManager.getAliveUsers()
-                // Only users that can be switched to should show up here.
-                // e.g. Managed profiles appear under Accounts Settings instead
-                .stream().filter(UserInfo::supportsSwitchToByUser)
-                .collect(Collectors.toList());
+
+        List<UserInfo> users;
+        if (mUserCaps.mUserSwitcherEnabled) {
+            // Only users that can be switched to should show up here.
+            // e.g. Managed profiles appear under Accounts Settings instead
+            users = mUserManager.getAliveUsers().stream()
+                    .filter(UserInfo::supportsSwitchToByUser)
+                    .collect(Collectors.toList());
+        } else {
+            // Only current user will be displayed in case of multi-user switch is disabled
+            users = List.of(mUserManager.getUserInfo(context.getUserId()));
+        }
+
         final ArrayList<Integer> missingIcons = new ArrayList<>();
         final ArrayList<UserPreference> userPreferences = new ArrayList<>();
 
@@ -1276,7 +1286,6 @@ public class UserSettings extends SettingsPreferenceFragment
             userPreferences.add(pref);
         }
 
-
         // Sort list of users by serialNum
         Collections.sort(userPreferences, UserPreference.SERIAL_NUMBER_COMPARATOR);
 
@@ -1299,7 +1308,6 @@ public class UserSettings extends SettingsPreferenceFragment
         // Remove everything from mUserListCategory and add new users.
         mUserListCategory.removeAll();
 
-        // If multi-user is disabled, just show top info and return.
         final Preference addUserOnLockScreen = getPreferenceScreen().findPreference(
                 mAddUserWhenLockedPreferenceController.getPreferenceKey());
         mAddUserWhenLockedPreferenceController.updateState(addUserOnLockScreen);
@@ -1311,15 +1319,10 @@ public class UserSettings extends SettingsPreferenceFragment
         final Preference multiUserTopIntroPreference = getPreferenceScreen().findPreference(
                 mMultiUserTopIntroPreferenceController.getPreferenceKey());
         mMultiUserTopIntroPreferenceController.updateState(multiUserTopIntroPreference);
-        mUserListCategory.setVisible(mUserCaps.mUserSwitcherEnabled);
         updateGuestPreferences();
         updateGuestCategory(context, users);
         updateAddUser(context);
         updateAddSupervisedUser(context);
-
-        if (!mUserCaps.mUserSwitcherEnabled) {
-            return;
-        }
 
         for (UserPreference userPreference : userPreferences) {
             userPreference.setOrder(Preference.DEFAULT_ORDER);
@@ -1449,6 +1452,8 @@ public class UserSettings extends SettingsPreferenceFragment
                 && mUserManager.canAddMoreUsers(UserManager.USER_TYPE_FULL_GUEST)
                 && WizardManagerHelper.isDeviceProvisioned(context)
                 && mUserCaps.mUserSwitcherEnabled) {
+            Drawable icon = context.getDrawable(R.drawable.ic_account_circle);
+            mAddGuest.setIcon(centerAndTint(icon));
             isVisible = true;
             mAddGuest.setVisible(true);
             mAddGuest.setSelectable(true);
@@ -1468,11 +1473,15 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private void updateAddUser(Context context) {
         updateAddUserCommon(context, mAddUser, mUserCaps.mCanAddRestrictedProfile);
+        Drawable icon = context.getDrawable(R.drawable.ic_account_circle_filled);
+        mAddUser.setIcon(centerAndTint(icon));
     }
 
     private void updateAddSupervisedUser(Context context) {
         if (!TextUtils.isEmpty(mConfigSupervisedUserCreationPackage)) {
             updateAddUserCommon(context, mAddSupervisedUser, false);
+            Drawable icon = context.getDrawable(R.drawable.ic_add_supervised_user);
+            mAddSupervisedUser.setIcon(centerAndTint(icon));
         } else {
             mAddSupervisedUser.setVisible(false);
         }
@@ -1480,7 +1489,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private void updateAddUserCommon(Context context, RestrictedPreference addUser,
             boolean canAddRestrictedProfile) {
-        if ((mUserCaps.mCanAddUser || mUserCaps.mDisallowAddUserSetByAdmin)
+        if ((mUserCaps.mCanAddUser && !mUserCaps.mDisallowAddUserSetByAdmin)
                 && WizardManagerHelper.isDeviceProvisioned(context)
                 && mUserCaps.mUserSwitcherEnabled) {
             addUser.setVisible(true);
@@ -1513,7 +1522,10 @@ public class UserSettings extends SettingsPreferenceFragment
         LayerDrawable ld = new LayerDrawable(new Drawable[] {bg, icon});
         int size = getContext().getResources().getDimensionPixelSize(
                 R.dimen.multiple_users_avatar_size);
+        int bgSize = getContext().getResources().getDimensionPixelSize(
+                R.dimen.multiple_users_user_icon_size);
         ld.setLayerSize(1, size, size);
+        ld.setLayerSize(0, bgSize, bgSize);
         ld.setLayerGravity(1, Gravity.CENTER);
 
         return ld;
@@ -1690,7 +1702,10 @@ public class UserSettings extends SettingsPreferenceFragment
         }
 
         UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        Bitmap icon = BitmapFactory.decodeStream(avatarDataStream);
+        Bitmap decodedIcon = BitmapFactory.decodeStream(avatarDataStream);
+        CircleFramedDrawable drawable = CircleFramedDrawable.getInstance(context, decodedIcon);
+        Bitmap icon = UserIcons.convertToBitmapAtUserIconSize(context.getResources(), drawable);
+
         um.setUserIcon(userId, icon);
         try {
             avatarDataStream.close();
@@ -1705,6 +1720,27 @@ public class UserSettings extends SettingsPreferenceFragment
                 protected boolean isPageSearchEnabled(Context context) {
                     final UserCapabilities userCaps = UserCapabilities.create(context);
                     return userCaps.mEnabled;
+                }
+
+                @Override
+                public List<SearchIndexableRaw> getRawDataToIndex(Context context,
+                        boolean enabled) {
+                    final List<SearchIndexableRaw> rawData = new ArrayList<>();
+
+                    SearchIndexableRaw allowMultipleUsersResult = new SearchIndexableRaw(context);
+
+                    allowMultipleUsersResult.key = KEY_ALLOW_MULTIPLE_USERS;
+                    allowMultipleUsersResult.title =
+                            context.getString(R.string.multiple_users_main_switch_title);
+                    allowMultipleUsersResult.keywords =
+                            context.getString(R.string.multiple_users_main_switch_keywords);
+                    allowMultipleUsersResult.screenTitle =
+                            context.getString(R.string.user_settings_title);
+                    allowMultipleUsersResult.className =
+                            MultiUserSwitchBarController.class.getName();
+
+                    rawData.add(allowMultipleUsersResult);
+                    return rawData;
                 }
 
                 @Override

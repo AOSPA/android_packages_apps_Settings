@@ -12,6 +12,11 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
+
+     Changes from Qualcomm Innovation Center are provided under the following license:
+
+     Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+     SPDX-License-Identifier: BSD-3-Clause-Clear
 -->
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -64,6 +69,12 @@
             settings:controller="com.android.settings.network.telephony.MobileDataPreferenceController"
             settings:allowDividerAbove="true"/>
 
+        <SwitchPreference
+            android:key="auto_data_switch"
+            android:title="@string/auto_data_switch_title"
+            android:summary="@string/auto_data_switch_summary"
+            settings:controller="com.android.settings.network.telephony.AutoDataSwitchPreferenceController"/>
+
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="button_roaming_key"
             android:title="@string/roaming"
@@ -100,12 +111,6 @@
             android:title="@string/mms_message_title"
             android:summary="@string/mms_message_summary"
             settings:controller="com.android.settings.network.telephony.MmsMessagePreferenceController"/>
-
-        <SwitchPreference
-            android:key="data_during_calls"
-            android:title="@string/data_during_calls_title"
-            android:summary="@string/data_during_calls_summary"
-            settings:controller="com.android.settings.network.telephony.DataDuringCallsPreferenceController"/>
 
         <SwitchPreference
             android:key="enhanced_4g_lte"
@@ -226,6 +231,11 @@
             settings:controller="com.android.settings.network.telephony.NetworkPreferenceCategoryController">
 
             <SwitchPreference
+                android:key="select_network_key"
+                android:title="@string/enable_snpn"
+                settings:controller="com.android.settings.network.telephony.gsm.SelectNetworkPreferenceController"/>
+
+            <SwitchPreference
                 android:key="auto_select_key"
                 android:title="@string/select_automatically"
                 settings:controller="com.android.settings.network.telephony.gsm.AutoSelectPreferenceController"/>
@@ -259,11 +269,13 @@
             settings:controller="com.android.settings.network.telephony.CarrierPreferenceController">
         </Preference>
 
-        <SwitchPreference
+        <com.android.settingslib.RestrictedSwitchPreference
             android:key="enable_2g"
             android:title="@string/enable_2g_title"
             android:summary="@string/enable_2g_summary"
-            settings:controller="com.android.settings.network.telephony.Enable2gPreferenceController" />
+            settings:controller="com.android.settings.network.telephony.Enable2gPreferenceController"
+            settings:useAdminDisabledSummary="true"
+            settings:userRestriction="no_cellular_2g"/>
 
         <SwitchPreference
             android:key="nr_advanced_calling"

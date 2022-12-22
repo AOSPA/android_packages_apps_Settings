@@ -12,16 +12,25 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Changes from Qualcomm Innovation Center are provided under the following license:
+ *
+ * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
 package com.android.settings.network.telephony;
 
+import static android.telephony.ims.feature.ImsFeature.FEATURE_MMTEL;
+import static android.telephony.ims.stub.ImsRegistrationImplBase.REGISTRATION_TECH_CROSS_SIM;
+
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.RemoteException;
+import android.telephony.ims.aidl.IImsRegistration;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -34,15 +43,10 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.network.MobileDataContentObserver;
-import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
-
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * Preference controller for "Mobile data"
@@ -64,7 +68,7 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
     boolean mNeedDialog;
 
     private WifiPickerTrackerHelper mWifiPickerTrackerHelper;
-    private AnotherSubCallStateListener mCallStateListener;
+    private DdsDataOptionStateTuner mDdsDataOptionStateTuner;
 
     public MobileDataPreferenceController(Context context, String key) {
         super(context, key);
@@ -90,10 +94,10 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
     public void onStart() {
         if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             mDataContentObserver.register(mContext, mSubId);
-            // Listen if voice call is on nDDS SUB.
-            if (mSubId == mSubscriptionManager.getDefaultDataSubscriptionId()) {
-                mCallStateListener.register(mContext, mSubId);
-            }
+            // Register for nDDS sub events. What happens to the mobile data toggle in case
+            // of a voice call is dependent on the device being in temp DDS state which is
+            // checked in updateState()
+            mDdsDataOptionStateTuner.register(mContext, mSubId);
         }
     }
 
@@ -101,7 +105,7 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
     public void onStop() {
         if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             mDataContentObserver.unRegister(mContext);
-            mCallStateListener.unregister();
+            mDdsDataOptionStateTuner.unregister(mContext);
         }
     }
 
@@ -142,12 +146,15 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
 
     @Override
     public void updateState(Preference preference) {
+        if (mTelephonyManager == null) {
+            return;
+        }
         super.updateState(preference);
         if (isOpportunistic()) {
             preference.setEnabled(false);
             preference.setSummary(R.string.mobile_data_settings_summary_auto_switch);
         } else {
-            if (!mCallStateListener.isIdle()) {
+            if (mDdsDataOptionStateTuner.isDisallowed()) {
                 Log.d(TAG, "nDDS voice call in ongoing");
                 // we will get inside this block only when the current instance is for the DDS
                 if (isChecked()) {
@@ -188,10 +195,10 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
         mTelephonyManager = null;
         mTelephonyManager = getTelephonyManager();
 
-        mCallStateListener =
-                new AnotherSubCallStateListener(mTelephonyManager,
+        mDdsDataOptionStateTuner =
+                new DdsDataOptionStateTuner(mTelephonyManager,
                         mSubscriptionManager,
-                        ()-> updateState(mPreference));
+                        () -> updateState(mPreference));
     }
 
     private TelephonyManager getTelephonyManager() {
@@ -225,8 +232,27 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
             // simultaneously. DDS setting will be controlled by the config.
             needToDisableOthers = false;
         }
+        IImsRegistration imsRegistrationImpl = mTelephonyManager.getImsRegistration(
+                mSubscriptionManager.getSlotIndex(mSubId), FEATURE_MMTEL);
+        boolean isImsRegisteredOverCiwlan = false;
+        try {
+            isImsRegisteredOverCiwlan = imsRegistrationImpl.getRegistrationTechnology() ==
+                    REGISTRATION_TECH_CROSS_SIM;
+        } catch (RemoteException ex) {
+            Log.e(TAG, "getRegistrationTechnology failed", ex);
+        }
+        final boolean isInNonDdsVoiceCall = mDdsDataOptionStateTuner.isInNonDdsVoiceCall();
+        Log.d(TAG, "isDialogNeeded: " + "enableData=" + enableData  + ", isMultiSim=" + isMultiSim +
+                ", needToDisableOthers=" + needToDisableOthers + ", isImsRegisteredOverCiwlan=" +
+                isImsRegisteredOverCiwlan + ", isInNonDdsVoiceCall=" + isInNonDdsVoiceCall);
         if (enableData && isMultiSim && needToDisableOthers) {
             mDialogType = MobileDataDialogFragment.TYPE_MULTI_SIM_DIALOG;
+            return true;
+        }
+        // If device is in a C_IWLAN call, and the user is trying to disable mobile data, display
+        // the warning dialog.
+        if (isInNonDdsVoiceCall && isImsRegisteredOverCiwlan && !enableData) {
+            mDialogType = MobileDataDialogFragment.TYPE_DISABLE_CIWLAN_DIALOG;
             return true;
         }
         return false;
@@ -236,54 +262,5 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
         final MobileDataDialogFragment dialogFragment = MobileDataDialogFragment.newInstance(type,
                 mSubId);
         dialogFragment.show(mFragmentManager, DIALOG_TAG);
-    }
-
-    private static class AnotherSubCallStateListener extends TelephonyCallback
-        implements TelephonyCallback.CallStateListener {
-        private Runnable mRunnable;
-        private int mState = TelephonyManager.CALL_STATE_IDLE;
-        private Map<Integer, AnotherSubCallStateListener> mCallbacks;
-        private TelephonyManager mTelephonyManager;
-        private SubscriptionManager mSubscriptionManager;
-
-        public AnotherSubCallStateListener(TelephonyManager tm, SubscriptionManager sm,
-                Runnable runnable) {
-            mTelephonyManager = tm;
-            mSubscriptionManager = sm;
-            mRunnable = runnable;
-            mCallbacks = new TreeMap<>();
-        }
-
-        public void register(Context context, int subId) {
-            final List<SubscriptionInfo> subs =
-                    SubscriptionUtil.getActiveSubscriptions(mSubscriptionManager);
-            for (SubscriptionInfo subInfo : subs) {
-                if (subInfo.getSubscriptionId() != subId) {
-                    mTelephonyManager.createForSubscriptionId(subInfo.getSubscriptionId())
-                            .registerTelephonyCallback(context.getMainExecutor(), this);
-                    mCallbacks.put(subInfo.getSubscriptionId(), this);
-                }
-            }
-        }
-
-        public void unregister() {
-            for (int subId : mCallbacks.keySet()) {
-                mTelephonyManager.createForSubscriptionId(subId)
-                        .unregisterTelephonyCallback(mCallbacks.get(subId));
-            }
-            mCallbacks.clear();
-        }
-
-        public boolean isIdle() {
-            return mState == TelephonyManager.CALL_STATE_IDLE;
-        }
-
-        @Override
-        public void onCallStateChanged(int state) {
-            mState = state;
-            if (mRunnable != null) {
-                mRunnable.run();
-            }
-        }
     }
 }

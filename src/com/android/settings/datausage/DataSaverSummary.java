@@ -55,9 +55,22 @@ public class DataSaverSummary extends SettingsPreferenceFragment
     // Flag used to avoid infinite loop due if user switch it on/off too quicky.
     private boolean mSwitching;
 
+    private Runnable mLoadAppRunnable = () -> {
+        mApplicationsState = ApplicationsState.getInstance(
+                (Application) getContext().getApplicationContext());
+        mDataUsageBridge = new AppStateDataUsageBridge(mApplicationsState, this, mDataSaverBackend);
+        mSession = mApplicationsState.newSession(this, getSettingsLifecycle());
+        mDataUsageBridge.resume(true /* forceLoadAllApps */);
+    };
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+
+        if (!isDataSaverVisible(getContext())) {
+            finishFragment();
+            return;
+        }
 
         addPreferencesFromResource(R.xml.data_saver);
         mUnrestrictedAccess = findPreference(KEY_UNRESTRICTED_ACCESS);
@@ -83,14 +96,20 @@ public class DataSaverSummary extends SettingsPreferenceFragment
         mDataSaverBackend.refreshAllowlist();
         mDataSaverBackend.refreshDenylist();
         mDataSaverBackend.addListener(this);
-        mDataUsageBridge.resume(true /* forceLoadAllApps */);
+        if (mDataUsageBridge != null) {
+            mDataUsageBridge.resume(true /* forceLoadAllApps */);
+        } else {
+            getView().post(mLoadAppRunnable);
+        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
         mDataSaverBackend.remListener(this);
-        mDataUsageBridge.pause();
+        if (mDataUsageBridge != null) {
+            mDataUsageBridge.pause();
+        }
     }
 
     @Override
@@ -132,24 +151,7 @@ public class DataSaverSummary extends SettingsPreferenceFragment
 
     @Override
     public void onExtraInfoUpdated() {
-        if (!isAdded()) {
-            return;
-        }
-        int count = 0;
-        final ArrayList<AppEntry> allApps = mSession.getAllApps();
-        final int N = allApps.size();
-        for (int i = 0; i < N; i++) {
-            final AppEntry entry = allApps.get(i);
-            if (!ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER.filterApp(entry)) {
-                continue;
-            }
-            if (entry.extraInfo != null && ((AppStateDataUsageBridge.DataUsageState)
-                    entry.extraInfo).isDataSaverAllowlisted) {
-                count++;
-            }
-        }
-        mUnrestrictedAccess.setSummary(getResources().getQuantityString(
-                R.plurals.data_saver_unrestricted_summary, count, count));
+        updateUnrestrictedAccessSummary();
     }
 
     @Override
@@ -179,12 +181,12 @@ public class DataSaverSummary extends SettingsPreferenceFragment
 
     @Override
     public void onAllSizesComputed() {
-
+        updateUnrestrictedAccessSummary();
     }
 
     @Override
     public void onLauncherInfoChanged() {
-
+        updateUnrestrictedAccessSummary();
     }
 
     @Override
@@ -192,12 +194,35 @@ public class DataSaverSummary extends SettingsPreferenceFragment
 
     }
 
+    private void updateUnrestrictedAccessSummary() {
+        if (!isAdded() || isFinishingOrDestroyed() || mSession == null) return;
+
+        int count = 0;
+        for (AppEntry entry : mSession.getAllApps()) {
+            if (!ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER.filterApp(entry)) {
+                continue;
+            }
+            if (entry.extraInfo != null && ((AppStateDataUsageBridge.DataUsageState)
+                    entry.extraInfo).isDataSaverAllowlisted) {
+                count++;
+            }
+        }
+        mUnrestrictedAccess.setSummary(getResources().getQuantityString(
+                R.plurals.data_saver_unrestricted_summary, count, count));
+    }
+
+    public static boolean isDataSaverVisible(Context context) {
+        return context.getResources()
+            .getBoolean(R.bool.config_show_data_saver);
+    }
+
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.data_saver) {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return DataUsageUtils.hasMobileData(context)
+                    return isDataSaverVisible(context)
+                            && DataUsageUtils.hasMobileData(context)
                             && DataUsageUtils.getDefaultSubscriptionId(context)
                             != SubscriptionManager.INVALID_SUBSCRIPTION_ID;
                 }

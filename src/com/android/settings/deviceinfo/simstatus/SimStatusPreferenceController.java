@@ -29,6 +29,8 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.telephony.DomesticRoamUtils;
 import com.android.settingslib.deviceinfo.AbstractSimStatusImeiInfoPreferenceController;
 
 import java.util.ArrayList;
@@ -60,8 +62,17 @@ public class SimStatusPreferenceController extends
     }
 
     @Override
+    public boolean isAvailable() {
+        return SubscriptionUtil.isSimHardwareVisible(mContext) &&
+                super.isAvailable();
+    }
+
+    @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+        if (!SubscriptionUtil.isSimHardwareVisible(mContext)) {
+            return;
+        }
         final Preference preference = screen.findPreference(getPreferenceKey());
         if (!isAvailable() || preference == null || !preference.isVisible()) {
             return;
@@ -75,6 +86,7 @@ public class SimStatusPreferenceController extends
         for (int simSlotNumber = 1; simSlotNumber < mTelephonyManager.getPhoneCount();
                 simSlotNumber++) {
             final Preference multiSimPreference = createNewPreference(screen.getContext());
+            multiSimPreference.setCopyingEnabled(true);
             multiSimPreference.setOrder(simStatusOrder + simSlotNumber);
             multiSimPreference.setKey(KEY_SIM_STATUS + simSlotNumber);
             category.addPreference(multiSimPreference);
@@ -114,6 +126,13 @@ public class SimStatusPreferenceController extends
         if (subscriptionInfoList != null) {
             for (SubscriptionInfo info : subscriptionInfoList) {
                 if (info.getSimSlotIndex() == simSlot) {
+                    if (DomesticRoamUtils.isFeatureEnabled(mContext)) {
+                        String operatorName = DomesticRoamUtils.getRegisteredOperatorName(
+                                mContext, info.getSubscriptionId());
+                        if (DomesticRoamUtils.EMPTY_OPERATOR_NAME != operatorName) {
+                            return operatorName;
+                        }
+                    }
                     return info.getCarrierName();
                 }
             }

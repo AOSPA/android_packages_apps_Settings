@@ -22,27 +22,39 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.NetworkCapabilities;
+import android.net.TetheringManager;
 import android.net.wifi.ScanResult;
 import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+
+import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.wifitrackerlib.WifiEntry;
 
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.util.Locale;
 
 /** A utility class for Wi-Fi functions. */
 public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
+
+    static final String TAG = "WifiUtils";
 
     private static final int SSID_ASCII_MIN_LENGTH = 1;
     private static final int SSID_ASCII_MAX_LENGTH = 32;
 
     private static final int PSK_PASSPHRASE_ASCII_MIN_LENGTH = 8;
     private static final int PSK_PASSPHRASE_ASCII_MAX_LENGTH = 63;
+
+    private static Boolean sCanShowWifiHotspotCached;
 
     public static boolean isSSIDTooLong(String ssid) {
         if (TextUtils.isEmpty(ssid)) {
@@ -170,11 +182,19 @@ public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
         final int security;
 
         if (wifiEntry == null) {
-            config.SSID = "\"" + scanResult.SSID + "\"";
+            if (wifiEntry.isGbkSsidSupported()) {
+                config.SSID = scanResult.getWifiSsid().toString();
+            } else {
+                config.SSID = "\"" + scanResult.SSID + "\"";
+            }
             security = getWifiEntrySecurity(scanResult);
         } else {
             if (wifiEntry.getWifiConfiguration() == null) {
-                config.SSID = "\"" + wifiEntry.getSsid() + "\"";
+                if (wifiEntry.isGbkSsidSupported()) {
+                    config.SSID = wifiEntry.getSsid();
+                } else {
+                    config.SSID = "\"" + wifiEntry.getSsid() + "\"";
+                }
             } else {
                 config.networkId = wifiEntry.getWifiConfiguration().networkId;
                 config.hiddenSSID = wifiEntry.getWifiConfiguration().hiddenSSID;
@@ -239,5 +259,93 @@ public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
         }
 
         return WifiEntry.SECURITY_NONE;
+    }
+
+    /**
+     * Check if Wi-Fi hotspot settings can be displayed.
+     *
+     * @param context Context of caller
+     * @return true if Wi-Fi hotspot settings can be displayed
+     */
+    public static boolean checkShowWifiHotspot(Context context) {
+        if (context == null) return false;
+
+        boolean showWifiHotspotSettings =
+                context.getResources().getBoolean(R.bool.config_show_wifi_hotspot_settings);
+        if (!showWifiHotspotSettings) {
+            Log.w(TAG, "config_show_wifi_hotspot_settings:false");
+            return false;
+        }
+
+        WifiManager wifiManager = context.getSystemService(WifiManager.class);
+        if (wifiManager == null) {
+            Log.e(TAG, "WifiManager is null");
+            return false;
+        }
+
+        TetheringManager tetheringManager = context.getSystemService(TetheringManager.class);
+        if (tetheringManager == null) {
+            Log.e(TAG, "TetheringManager is null");
+            return false;
+        }
+        String[] wifiRegexs = tetheringManager.getTetherableWifiRegexs();
+        if (wifiRegexs == null || wifiRegexs.length == 0) {
+            Log.w(TAG, "TetherableWifiRegexs is empty");
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Return the cached result to see if Wi-Fi hotspot settings can be displayed.
+     *
+     * @param context Context of caller
+     * @return true if Wi-Fi hotspot settings can be displayed
+     */
+    public static boolean canShowWifiHotspot(Context context) {
+        if (sCanShowWifiHotspotCached == null) {
+            sCanShowWifiHotspotCached = checkShowWifiHotspot(context);
+        }
+        return sCanShowWifiHotspotCached;
+    }
+
+    /**
+     * Sets the sCanShowWifiHotspotCached for testing purposes.
+     *
+     * @param cached Cached value for #canShowWifiHotspot()
+     */
+    @VisibleForTesting
+    public static void setCanShowWifiHotspotCached(Boolean cached) {
+        sCanShowWifiHotspotCached = cached;
+    }
+
+    // copied from NativeUtil#removeEnclosingQuotes
+    public static String removeEnclosingQuotes(String quotedStr) {
+        int length = quotedStr.length();
+        if ((length >= 2)
+                && (quotedStr.charAt(0) == '"') && (quotedStr.charAt(length - 1) == '"')) {
+            return quotedStr.substring(1, length - 1);
+        }
+        return quotedStr;
+    }
+
+    public static String quotedStrToGbkHex(String quotedStr) {
+        String bareStr = removeEnclosingQuotes(quotedStr);
+        byte[] bareBytes = null;
+        try {
+            bareBytes = bareStr.getBytes("GBK");
+        } catch (UnsupportedEncodingException cce) {
+           // Unsupported
+        }
+        if (bareBytes != null && bareBytes.length <= SSID_ASCII_MAX_LENGTH) {
+            StringBuffer out = new StringBuffer(64);
+            for (int i = 0; i < bareBytes.length; i++) {
+                out.append(String.format(Locale.US, "%02x", bareBytes[i]));
+            }
+            if (out.length() > 0) {
+                return out.toString();
+            }
+        }
+        return quotedStr;
     }
 }

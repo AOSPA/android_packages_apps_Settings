@@ -40,6 +40,9 @@ public class CdmaSystemSelectPreferenceController extends CdmaBasePreferenceCont
 
     @Override
     public void updateState(Preference preference) {
+        if (mTelephonyManager == null) {
+            return;
+        }
         super.updateState(preference);
         final ListPreference listPreference = (ListPreference) preference;
         listPreference.setVisible(getAvailabilityStatus() == AVAILABLE);

@@ -19,6 +19,8 @@ package com.android.settings.wifi.tether;
 import static android.net.wifi.WifiManager.WIFI_AP_STATE_CHANGED_ACTION;
 import static com.android.settings.wifi.tether.WifiTetherApBandPreferenceController.BAND_BOTH_2G_5G;
 
+import static com.android.settings.wifi.WifiUtils.canShowWifiHotspot;
+
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -40,6 +42,7 @@ import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SettingsMainSwitchBar;
+import com.android.settings.wifi.WifiUtils;
 import com.android.settingslib.TetherUtil;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
@@ -57,7 +60,6 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     private static final String KEY_WIFI_TETHER_SCREEN = "wifi_tether_settings_screen";
     private static final int EXPANDED_CHILD_COUNT_WITH_SECURITY_NON = 3;
     private static boolean mWasApBand6GHzSelected = false;
-    private static final int BAND_6GHZ = SoftApConfiguration.BAND_6GHZ | SoftApConfiguration.BAND_2GHZ;
 
     @VisibleForTesting
     static final String KEY_WIFI_TETHER_NETWORK_NAME = "wifi_tether_network_name";
@@ -113,6 +115,13 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        if (!canShowWifiHotspot(getContext())) {
+            Log.e(TAG, "can not launch Wi-Fi hotspot settings"
+                    + " because the config is not set to show.");
+            finish();
+            return;
+        }
+
         setIfOnlyAvailableForAdmins(true);
         mUnavailable = isUiRestricted() || !mWifiRestriction.isHotspotAvailable(getContext());
     }
@@ -165,6 +174,9 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         if (context != null) {
             context.registerReceiver(mTetherChangeReceiver, TETHER_STATE_CHANGE_FILTER,
                     Context.RECEIVER_EXPORTED_UNAUDITED);
+            // The intent WIFI_AP_STATE_CHANGED_ACTION is not sticky intent anymore after SC-V2
+            // Handle the initial state after register the receiver.
+            updateDisplayWithNewConfig();
         }
     }
 
@@ -224,26 +236,27 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         use(WifiTetherAutoOffPreferenceController.class).updateDisplay();
 
         if (mSecurityPreferenceController.isOweDualSapSupported()) {
-            if ((config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_OWE)
+            if ((config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION)
                    && (mApBandPreferenceController.getBandIndex() == BAND_BOTH_2G_5G)) {
                 mApBandPreferenceController.updatePreferenceEntries();
                 mApBandPreferenceController.updateDisplay();
                 wasApBandPrefUpdated = true;
             } else if (wasApBandPrefUpdated
-                   && config.getSecurityType() != SoftApConfiguration.SECURITY_TYPE_OWE) {
+                   && config.getSecurityType() != SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION) {
                 mApBandPreferenceController.updatePreferenceEntries();
                 mApBandPreferenceController.updateDisplay();
                 wasApBandPrefUpdated = false;
             }
         }
 
-        if (mApBandPreferenceController.getBandIndex() == BAND_6GHZ
+        if ((mApBandPreferenceController.getBandIndex() & SoftApConfiguration.BAND_6GHZ) != 0
                 && (mWasApBand6GHzSelected == false)) {
             mSecurityPreferenceController.updateDisplay();
             mWasApBand6GHzSelected = true;
             config = buildNewConfig();
+            mPasswordPreferenceController.setSecurityType(config.getSecurityType());
             mWifiManager.setSoftApConfiguration(config);
-        } else if (mApBandPreferenceController.getBandIndex() != BAND_6GHZ
+        } else if ((mApBandPreferenceController.getBandIndex() & SoftApConfiguration.BAND_6GHZ) == 0
                 &&(mWasApBand6GHzSelected == true)) {
             mSecurityPreferenceController.updateDisplay();
             mWasApBand6GHzSelected = false;
@@ -252,10 +265,18 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
 
     private SoftApConfiguration buildNewConfig() {
         final SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder();
-        final int securityType = mSecurityPreferenceController.getSecurityType();
+        int securityType = mSecurityPreferenceController.getSecurityType();
         configBuilder.setSsid(mSSIDPreferenceController.getSSID());
+
+        // For 6GHz use OWE only mode.
+        if ((mApBandPreferenceController.getBandIndex() & SoftApConfiguration.BAND_6GHZ) != 0
+                 && securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION) {
+            securityType = SoftApConfiguration.SECURITY_TYPE_WPA3_OWE;
+        }
+
         if (securityType == SoftApConfiguration.SECURITY_TYPE_OPEN
-              || securityType == SoftApConfiguration.SECURITY_TYPE_OWE) {
+              || securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION
+              || securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_OWE) {
             configBuilder.setPassphrase(null, securityType);
         } else {
             configBuilder.setPassphrase(
@@ -266,7 +287,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                 mWifiTetherAutoOffPreferenceController.isEnabled());
         if (mApBandPreferenceController.getBandIndex() == BAND_BOTH_2G_5G) {
             // Fallback to 2G band if user selected OWE+Dual band
-            if (securityType == SoftApConfiguration.SECURITY_TYPE_OWE) {
+            if (securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION) {
                 configBuilder.setBand(SoftApConfiguration.BAND_2GHZ);
             } else {
                 int[] dualBands = new int[] {
@@ -334,12 +355,12 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
 
         @Override
         protected boolean isPageSearchEnabled(Context context) {
+            if (context == null || !WifiUtils.canShowWifiHotspot(context)) return false;
             return !FeatureFlagUtils.isEnabled(context, FeatureFlags.TETHER_ALL_IN_ONE);
         }
 
         @Override
-        public List<AbstractPreferenceController> createPreferenceControllers(
-                Context context) {
+        public List<AbstractPreferenceController> createPreferenceControllers(Context context) {
             return buildPreferenceControllers(context, null /* listener */);
         }
     }

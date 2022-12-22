@@ -18,7 +18,6 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.util.SparseIntArray;
 
 import com.android.settings.fuelgauge.batteryusage.BatteryHistEntry;
@@ -125,11 +124,6 @@ public interface PowerUsageFeatureProvider {
     boolean isSmartBatterySupported();
 
     /**
-     * Checks whether we should enable chart graph design or not.
-     */
-    boolean isChartGraphEnabled(Context context);
-
-    /**
      * Checks whether we should show usage information by slots or not.
      */
     boolean isChartGraphSlotsEnabled(Context context);
@@ -155,16 +149,6 @@ public interface PowerUsageFeatureProvider {
     Map<Long, Map<String, BatteryHistEntry>> getBatteryHistory(Context context);
 
     /**
-     * Returns battery history data since last full charge with corresponding timestamp key.
-     */
-    Map<Long, Map<String, BatteryHistEntry>> getBatteryHistorySinceLastFullCharge(Context context);
-
-    /**
-     * Returns {@link Uri} to monitor battery history data is update.
-     */
-    Uri getBatteryHistoryUri();
-
-    /**
      * Returns {@link Set} for hidding applications background usage time.
      */
     Set<CharSequence> getHideBackgroundUsageTimeSet(Context context);
@@ -173,9 +157,4 @@ public interface PowerUsageFeatureProvider {
      * Returns package names for hidding application in the usage screen.
      */
     CharSequence[] getHideApplicationEntries(Context context);
-
-    /**
-     * Returns package names for hidding summary in the usage screen.
-     */
-    CharSequence[] getHideApplicationSummary(Context context);
 }

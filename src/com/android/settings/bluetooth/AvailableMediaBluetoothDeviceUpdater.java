@@ -76,7 +76,9 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
                     || cachedDevice.isConnectedLeAudioDevice()) {
                 Log.d(TAG, "isFilterMatched() device : " +
                         cachedDevice.getName() + ", the profile is connected.");
-                return true;
+                isFilterMatched =  true;
+                Log.d(TAG, "isFilterMatched() device : " +
+                        cachedDevice.getName() + ", the profile is connected.");
             }
             // According to the current audio profile type,
             // this page will show the bluetooth device that have corresponding profile.
@@ -84,13 +86,15 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
             // If current audio profile is a2dp, show the bluetooth device that have a2dp profile.
             // If current audio profile is headset,
             // show the bluetooth device that have headset profile.
-            switch (currentAudioProfile) {
-                case BluetoothProfile.A2DP:
-                    isFilterMatched = cachedDevice.isConnectedA2dpDevice();
-                    break;
-                case BluetoothProfile.HEADSET:
-                    isFilterMatched = cachedDevice.isConnectedHfpDevice();
-                    break;
+            if (!isFilterMatched) {
+                switch (currentAudioProfile) {
+                    case BluetoothProfile.A2DP:
+                        isFilterMatched = cachedDevice.isConnectedA2dpDevice();
+                        break;
+                    case BluetoothProfile.HEADSET:
+                        isFilterMatched = cachedDevice.isConnectedHfpDevice();
+                        break;
+                }
             }
             if (DBG) {
                 Log.d(TAG, "isFilterMatched() device : " +

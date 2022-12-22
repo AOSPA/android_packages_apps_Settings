@@ -35,6 +35,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.deviceinfo.PhoneNumberSummaryPreference;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.telephony.TelephonyUtils;
 import com.android.settings.Utils;
 
@@ -73,6 +74,9 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+        if (!SubscriptionUtil.isSimHardwareVisible(mContext)) {
+            return;
+        }
         final Preference preference = screen.findPreference(getPreferenceKey());
         final PreferenceCategory category = screen.findPreference(KEY_PREFERENCE_CATEGORY);
 
@@ -84,6 +88,7 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
         for (int simSlotNumber = 1; simSlotNumber < mTelephonyManager.getPhoneCount();
                 simSlotNumber++) {
             final Preference multiSimPreference = createNewPreference(screen.getContext());
+            multiSimPreference.setCopyingEnabled(true);
             multiSimPreference.setOrder(imeiPreferenceOrder + simSlotNumber);
             multiSimPreference.setKey(getPreferenceKey() + simSlotNumber);
             category.addPreference(multiSimPreference);
@@ -156,7 +161,7 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
 
     @Override
     public CharSequence getSummary() {
-        return getSummary(0);
+        return mContext.getString(R.string.device_info_protected_single_press);
     }
 
     private CharSequence getSummary(int simSlot) {
@@ -183,12 +188,14 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
         }
 
         ImeiInfoDialogFragment.show(mFragment, simSlot, preference.getTitle().toString());
+        preference.setSummary(getSummary(simSlot));
         return true;
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return mContext.getSystemService(UserManager.class).isAdminUser()
+        return SubscriptionUtil.isSimHardwareVisible(mContext) &&
+                mContext.getSystemService(UserManager.class).isAdminUser()
                 && !Utils.isWifiOnly(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
@@ -199,7 +206,7 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
 
     private void updatePreference(Preference preference, int simSlot) {
         preference.setTitle(getTitle(simSlot));
-        preference.setSummary(getSummary(simSlot));
+        preference.setSummary(getSummary());
     }
 
     private boolean isPrimaryImeiSlot(int slot) {
@@ -226,7 +233,7 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
         }
         if (mQtiImeiInfo != null) {
             for (int i = 0; i < mQtiImeiInfo.length; i++) {
-                if (mQtiImeiInfo[i].getSlotId() == slot) {
+                if (null != mQtiImeiInfo[i] && mQtiImeiInfo[i].getSlotId() == slot) {
                     imei = mQtiImeiInfo[i].getImei();
                     break;
                 }
@@ -263,7 +270,7 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
             return mTelephonyManager.getCurrentPhoneTypeForSlot(slotIndex);
         }
         SubscriptionInfo subInfo = SubscriptionManager.from(mContext)
-            .getActiveSubscriptionInfoForSimSlotIndex(slotIndex);
+                .getActiveSubscriptionInfoForSimSlotIndex(slotIndex);
         return mTelephonyManager.getCurrentPhoneType(subInfo != null ? subInfo.getSubscriptionId()
                 : SubscriptionManager.DEFAULT_SUBSCRIPTION_ID);
     }

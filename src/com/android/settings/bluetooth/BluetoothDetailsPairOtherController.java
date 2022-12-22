@@ -22,19 +22,25 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.applications.SpacePreference;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.HearingAidProfile;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.ButtonPreference;
 
+import com.google.common.annotations.VisibleForTesting;
+
 /**
  * This class handles button preference logic to display for hearing aid device.
  */
 public class BluetoothDetailsPairOtherController extends BluetoothDetailsController {
     private static final String KEY_PAIR_OTHER = "hearing_aid_pair_other_button";
+    @VisibleForTesting
+    static final String KEY_SPACE = "hearing_aid_space_layout";
 
     private ButtonPreference mPreference;
+    private SpacePreference mSpacePreference;
 
     public BluetoothDetailsPairOtherController(Context context,
             PreferenceFragmentCompat fragment,
@@ -56,19 +62,32 @@ public class BluetoothDetailsPairOtherController extends BluetoothDetailsControl
 
     @Override
     protected void init(PreferenceScreen screen) {
-        final int side = mCachedDevice.getDeviceSide();
-        final int stringRes = (side == HearingAidProfile.DeviceSide.SIDE_LEFT)
-                ? R.string.bluetooth_pair_right_ear_button
-                : R.string.bluetooth_pair_left_ear_button;
-
         mPreference = screen.findPreference(getPreferenceKey());
-        mPreference.setTitle(stringRes);
+        mSpacePreference = screen.findPreference(KEY_SPACE);
+        updateButtonPreferenceTitle(mPreference);
+        setPreferencesVisibility(getButtonPreferenceVisibility(mCachedDevice));
         mPreference.setOnClickListener(v -> launchPairingDetail());
     }
 
     @Override
     protected void refresh() {
-        mPreference.setVisible(getButtonPreferenceVisibility(mCachedDevice));
+        updateButtonPreferenceTitle(mPreference);
+        setPreferencesVisibility(getButtonPreferenceVisibility(mCachedDevice));
+
+    }
+
+    private void updateButtonPreferenceTitle(ButtonPreference preference) {
+        final int side = mCachedDevice.getDeviceSide();
+        final int stringRes = (side == HearingAidProfile.DeviceSide.SIDE_LEFT)
+                ? R.string.bluetooth_pair_right_ear_button
+                : R.string.bluetooth_pair_left_ear_button;
+
+        preference.setTitle(stringRes);
+    }
+
+    private void setPreferencesVisibility(boolean visible) {
+        mPreference.setVisible(visible);
+        mSpacePreference.setVisible(visible);
     }
 
     private boolean getButtonPreferenceVisibility(CachedBluetoothDevice cachedDevice) {

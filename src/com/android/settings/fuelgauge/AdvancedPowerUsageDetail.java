@@ -41,6 +41,7 @@ import com.android.settings.applications.appinfo.ButtonActionDialogFragment;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
 import com.android.settings.fuelgauge.batteryusage.BatteryDiffEntry;
 import com.android.settings.fuelgauge.batteryusage.BatteryEntry;
 import com.android.settings.fuelgauge.batteryusage.BatteryHistEntry;
@@ -113,6 +114,8 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     int mOptimizationMode = BatteryOptimizeUtils.MODE_UNKNOWN;
     @VisibleForTesting
     BackupManager mBackupManager;
+    @VisibleForTesting
+    StringBuilder mLogStringBuilder;
 
     private AppButtonsPreferenceController mAppButtonsPreferenceController;
 
@@ -133,8 +136,15 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     /** Launches battery details page for an individual battery consumer. */
     public static void startBatteryDetailPage(
             Activity caller, InstrumentedPreferenceFragment fragment,
-            BatteryDiffEntry diffEntry, String usagePercent,
-            boolean isValidToShowSummary, String slotInformation) {
+            BatteryDiffEntry diffEntry, String usagePercent, String slotInformation) {
+        startBatteryDetailPage(
+                caller, fragment.getMetricsCategory(), diffEntry, usagePercent, slotInformation);
+    }
+
+    /** Launches battery details page for an individual battery consumer fragment. */
+    public static void startBatteryDetailPage(
+            Context context, int sourceMetricsCategory,
+            BatteryDiffEntry diffEntry, String usagePercent, String slotInformation) {
         final BatteryHistEntry histEntry = diffEntry.mBatteryHistEntry;
         final LaunchBatteryDetailPageArgs launchArgs = new LaunchBatteryDetailPageArgs();
         // configure the launch argument.
@@ -145,12 +155,10 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         launchArgs.mUid = (int) histEntry.mUid;
         launchArgs.mIconId = diffEntry.getAppIconId();
         launchArgs.mConsumedPower = (int) diffEntry.mConsumePower;
-        launchArgs.mForegroundTimeMs =
-            isValidToShowSummary ? diffEntry.mForegroundUsageTimeInMs : 0;
-        launchArgs.mBackgroundTimeMs =
-            isValidToShowSummary ? diffEntry.mBackgroundUsageTimeInMs : 0;
+        launchArgs.mForegroundTimeMs = diffEntry.mForegroundUsageTimeInMs;
+        launchArgs.mBackgroundTimeMs = diffEntry.mBackgroundUsageTimeInMs;
         launchArgs.mIsUserEntry = histEntry.isUserEntry();
-        startBatteryDetailPage(caller, fragment, launchArgs);
+        startBatteryDetailPage(context, sourceMetricsCategory, launchArgs);
     }
 
     /** Launches battery details page for an individual battery consumer. */
@@ -168,11 +176,11 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         launchArgs.mForegroundTimeMs = isValidToShowSummary ? entry.getTimeInForegroundMs() : 0;
         launchArgs.mBackgroundTimeMs = isValidToShowSummary ? entry.getTimeInBackgroundMs() : 0;
         launchArgs.mIsUserEntry = entry.isUserEntry();
-        startBatteryDetailPage(caller, fragment, launchArgs);
+        startBatteryDetailPage(caller, fragment.getMetricsCategory(), launchArgs);
     }
 
-    private static void startBatteryDetailPage(Activity caller,
-            InstrumentedPreferenceFragment fragment, LaunchBatteryDetailPageArgs launchArgs) {
+    private static void startBatteryDetailPage(
+            Context context, int sourceMetricsCategory, LaunchBatteryDetailPageArgs launchArgs) {
         final Bundle args = new Bundle();
         if (launchArgs.mPackageName == null) {
             // populate data for system app
@@ -193,11 +201,11 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         final int userId = launchArgs.mIsUserEntry ? ActivityManager.getCurrentUser()
             : UserHandle.getUserId(launchArgs.mUid);
 
-        new SubSettingLauncher(caller)
+        new SubSettingLauncher(context)
                 .setDestination(AdvancedPowerUsageDetail.class.getName())
                 .setTitleRes(R.string.battery_details_title)
                 .setArguments(args)
-                .setSourceMetricsCategory(fragment.getMetricsCategory())
+                .setSourceMetricsCategory(sourceMetricsCategory)
                 .setUserHandle(new UserHandle(userId))
                 .launch();
     }
@@ -214,7 +222,8 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
      * Start packageName's battery detail page.
      */
     public static void startBatteryDetailPage(
-            Activity caller, Instrumentable instrumentable, String packageName) {
+            Activity caller, Instrumentable instrumentable, String packageName,
+            UserHandle userHandle) {
         final Bundle args = new Bundle(3);
         final PackageManager packageManager = caller.getPackageManager();
         args.putString(EXTRA_PACKAGE_NAME, packageName);
@@ -230,6 +239,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
                 .setTitleRes(R.string.battery_details_title)
                 .setArguments(args)
                 .setSourceMetricsCategory(instrumentable.getMetricsCategory())
+                .setUserHandle(userHandle)
                 .launch();
     }
 
@@ -267,6 +277,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
                 getContext(),
                 SettingsEnums.OPEN_APP_BATTERY_USAGE,
                 packageName);
+        mLogStringBuilder = new StringBuilder("onResume mode = ").append(mOptimizationMode);
     }
 
     @Override
@@ -276,8 +287,16 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         final int selectedPreference = getSelectedPreference();
 
         notifyBackupManager();
+        mLogStringBuilder.append(", onPause mode = ").append(selectedPreference);
         logMetricCategory(selectedPreference);
-        mBatteryOptimizeUtils.setAppUsageState(selectedPreference);
+
+        BatteryHistoricalLogUtil.writeLog(
+                getContext().getApplicationContext(),
+                Action.MANUAL,
+                BatteryHistoricalLogUtil.getPackageNameWithUserId(
+                        mBatteryOptimizeUtils.getPackageName(), UserHandle.myUserId()),
+                mLogStringBuilder.toString());
+        mBatteryOptimizeUtils.setAppUsageState(selectedPreference, Action.APPLY);
         Log.d(TAG, "Leave with mode: " + selectedPreference);
     }
 
@@ -470,21 +489,12 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     private CharSequence getAppActiveTime(Bundle bundle) {
         final long foregroundTimeMs = bundle.getLong(EXTRA_FOREGROUND_TIME);
         final long backgroundTimeMs = bundle.getLong(EXTRA_BACKGROUND_TIME);
-        final int consumedPower = bundle.getInt(EXTRA_POWER_USAGE_AMOUNT);
-        final int uid = bundle.getInt(EXTRA_UID, 0);
         final String slotTime = bundle.getString(EXTRA_SLOT_TIME, null);
         final long totalTimeMs = foregroundTimeMs + backgroundTimeMs;
         final CharSequence usageTimeSummary;
-        final boolean isChartGraphEnabled = FeatureFactory.getFactory(getContext())
-                .getPowerUsageFeatureProvider(getContext()).isChartGraphEnabled(getContext());
 
-        if (!isChartGraphEnabled && BatteryEntry.isSystemUid(uid)) {
-            return null;
-        }
         if (totalTimeMs == 0) {
-            usageTimeSummary = getText(
-                    isChartGraphEnabled && consumedPower > 0 ? R.string.battery_usage_without_time
-                            : R.string.battery_not_usage);
+            usageTimeSummary = getText(R.string.battery_usage_without_time);
         } else if (slotTime == null) {
             // Shows summary text with last full charge if slot time is null.
             usageTimeSummary = getAppFullChargeActiveSummary(
