@@ -20,6 +20,7 @@ import android.app.ComponentCaller
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED
 import com.android.settings.biometrics.combination.CombinedBiometricStatusUtils
@@ -37,6 +38,9 @@ class FaceEnroll: AppCompatActivity() {
 
     private val enrollActivityProvider: FaceEnrollActivityClassProvider
         get() = featureFactory.faceFeatureProvider.enrollActivityClassProvider
+
+    @VisibleForTesting
+    var launchedFromProvider: () -> String? = { launchedFromPackage }
 
     private var isLaunched = false
 
@@ -56,6 +60,11 @@ class FaceEnroll: AppCompatActivity() {
             Log.d("FaceEnroll", "forward to $nextActivityClass")
             val nextIntent = Intent(this, nextActivityClass)
             nextIntent.putExtras(intent)
+
+            // drop extras that are not allowed from external packages before launching
+            if (launchedFromProvider() != packageName) {
+                nextIntent.removeExtra(Intent.EXTRA_USER_ID)
+            }
             startActivityForResult(nextIntent, 0)
 
             isLaunched = true
