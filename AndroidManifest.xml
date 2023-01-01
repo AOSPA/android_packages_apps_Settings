@@ -2538,7 +2538,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             android:name="Settings$AppUsageAccessSettingsActivity"
             android:exported="true"
             android:label="@string/usage_access_title">
-            <intent-filter>
+            <intent-filter android:priority="1">
                 <action android:name="android.settings.USAGE_ACCESS_SETTINGS"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <data android:scheme="package"/>

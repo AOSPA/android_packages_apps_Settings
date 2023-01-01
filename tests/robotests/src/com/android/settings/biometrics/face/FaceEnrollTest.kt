@@ -17,14 +17,17 @@
 package com.android.settings.biometrics.face
 
 import android.app.Activity
+import android.app.PendingIntent
 import android.content.Intent
+import androidx.test.core.app.ApplicationProvider
+import com.android.settings.biometrics.MultiBiometricEnrollHelper.EXTRA_ENROLL_AFTER_FACE
 import com.android.settings.overlay.FeatureFactory
 import com.android.settings.testutils.FakeFeatureFactory
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito.`when` as whenever
+import org.mockito.kotlin.whenever
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows
@@ -36,10 +39,6 @@ class FaceEnrollTest {
     private companion object {
         const val INTENT_KEY = "testKey"
         const val INTENT_VALUE = "testValue"
-        val INTENT = Intent().apply {
-            putExtra(INTENT_KEY, INTENT_VALUE)
-            putExtra(Intent.EXTRA_USER_ID, 11)
-        }
     }
 
     private val activityProvider = FaceEnrollActivityClassProvider()
@@ -55,7 +54,21 @@ class FaceEnrollTest {
         activityClass: Class<out FaceEnroll>,
         launchedFrom: String? = null,
     ): FaceEnroll {
-        val activityController = Robolectric.buildActivity(activityClass, INTENT)
+        val activityIntent =
+            Intent().apply {
+                putExtra(INTENT_KEY, INTENT_VALUE)
+                putExtra(Intent.EXTRA_USER_ID, 11)
+                putExtra(
+                    EXTRA_ENROLL_AFTER_FACE,
+                    PendingIntent.getActivity(
+                        ApplicationProvider.getApplicationContext()!!,
+                        1,
+                        Intent(),
+                        0,
+                    ),
+                )
+            }
+        val activityController = Robolectric.buildActivity(activityClass, activityIntent)
         activityController.get().launchedFromProvider = {
             launchedFrom ?: activityController.get().packageName
         }
@@ -68,23 +81,22 @@ class FaceEnrollTest {
 
         val nextActivityIntent = activity.asShadow().nextStartedActivity
         assertThat(nextActivityIntent.component!!.className).isEqualTo(activityProvider.next.name)
-        assertThat(nextActivityIntent.extras!!.size()).isEqualTo(2)
+        assertThat(nextActivityIntent.extras!!.size()).isEqualTo(3)
         assertThat(nextActivityIntent.getStringExtra(INTENT_KEY)).isEqualTo(INTENT_VALUE)
         assertThat(nextActivityIntent.hasExtra(Intent.EXTRA_USER_ID)).isTrue()
+        assertThat(nextActivityIntent.hasExtra(EXTRA_ENROLL_AFTER_FACE)).isTrue()
     }
 
     @Test
-    fun testFinishAndLaunchDefaultActivity_fromExternal_dropUser() {
-        val activity = setupActivity(
-            FaceEnroll::class.java,
-            launchedFrom = "com.foo.bar"
-        )
+    fun testFinishAndLaunchDefaultActivity_fromExternal_dropUserAndDropEnrollAfterFace() {
+        val activity = setupActivity(FaceEnroll::class.java, launchedFrom = "com.foo.bar")
 
         val nextActivityIntent = activity.asShadow().nextStartedActivity
         assertThat(nextActivityIntent.component!!.className).isEqualTo(activityProvider.next.name)
         assertThat(nextActivityIntent.extras!!.size()).isEqualTo(1)
         assertThat(nextActivityIntent.getStringExtra(INTENT_KEY)).isEqualTo(INTENT_VALUE)
         assertThat(nextActivityIntent.hasExtra(Intent.EXTRA_USER_ID)).isFalse()
+        assertThat(nextActivityIntent.hasExtra(EXTRA_ENROLL_AFTER_FACE)).isFalse()
     }
 }
 

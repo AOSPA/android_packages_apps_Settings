@@ -16,6 +16,7 @@
 
 package com.android.settings.biometrics.face;
 
+import static android.provider.Settings.Secure.BIOMETRIC_APP_ENABLED;
 import static android.provider.Settings.Secure.FACE_APP_ENABLED;
 
 import android.app.settings.SettingsEnums;
@@ -31,6 +32,7 @@ import com.android.settings.biometrics.activeunlock.ActiveUnlockStatusUtils;
 
 public class FaceSettingsAppsPreferenceController extends
         FaceSettingsPreferenceController {
+    private static final int NOT_SET = -1;
     private static final int ON = 1;
     private static final int OFF = 0;
     private static final int DEFAULT = ON;
@@ -40,12 +42,23 @@ public class FaceSettingsAppsPreferenceController extends
     public FaceSettingsAppsPreferenceController(@NonNull Context context, @NonNull String key) {
         super(context, key);
         mFaceManager = Utils.getFaceManagerOrNull(context);
+
+        // For OTA case: if FACE_APP_ENABLED is not set and BIOMETRIC_APP_ENABLED is set, set the
+        // default value of the former to that of the latter.
+        final int defValue = Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                FACE_APP_ENABLED, NOT_SET, getUserId());
+        final int oldDefValue = Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                BIOMETRIC_APP_ENABLED, NOT_SET, getUserId());
+        if (defValue == NOT_SET && oldDefValue != NOT_SET) {
+            Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                    FACE_APP_ENABLED, oldDefValue, getUserId());
+        }
     }
 
     @Override
     public boolean isChecked() {
-        return Settings.Secure.getIntForUser(mContext.getContentResolver(), FACE_APP_ENABLED,
-                DEFAULT, getUserId()) == ON;
+        return Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                FACE_APP_ENABLED, DEFAULT, getUserId()) == ON;
     }
 
     @Override
