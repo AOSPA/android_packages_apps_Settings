@@ -349,7 +349,7 @@
             android:exported="true"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter android:priority="1">
-                <action android:name="android.settings.MEMTAG_SETTINGS"/>
+                <action android:name="android.settings.ADVANCED_MEMORY_PROTECTION_SETTINGS"/>
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
@@ -3062,6 +3062,11 @@
             android:exported="true"
             android:authorities="${applicationId}.battery.usage.provider"
             android:permission="com.android.settings.BATTERY_DATA"/>
+
+        <provider
+            android:name=".fuelgauge.batteryusage.bugreport.BugReportContentProvider"
+            android:exported="false"
+            android:authorities="${applicationId}.battery.usage.bugreport"/>
 
         <receiver android:name=".fuelgauge.batteryusage.BatteryUsageBroadcastReceiver"
                   android:exported="true">
