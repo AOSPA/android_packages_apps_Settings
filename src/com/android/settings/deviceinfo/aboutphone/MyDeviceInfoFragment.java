@@ -45,6 +45,7 @@ import com.android.settings.deviceinfo.UptimePreferenceController;
 import com.android.settings.deviceinfo.WifiMacAddressPreferenceController;
 import com.android.settings.deviceinfo.imei.ImeiInfoPreferenceController;
 import com.android.settings.deviceinfo.simstatus.SimStatusPreferenceController;
+import com.android.settings.deviceinfo.simstatus.SlotSimStatus;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -54,6 +55,8 @@ import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
@@ -148,7 +151,11 @@ public class MyDeviceInfoFragment extends DashboardFragment
     private static List<AbstractPreferenceController> buildPreferenceControllers(
             Context context, MyDeviceInfoFragment fragment, Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new SimStatusPreferenceController(context, fragment));
+
+        final ExecutorService executor = (fragment == null) ? null :
+                Executors.newSingleThreadExecutor();
+        final SlotSimStatus slotSimStatus = new SlotSimStatus(context, executor);
+
         controllers.add(new IpAddressPreferenceController(context, lifecycle));
         controllers.add(new WifiMacAddressPreferenceController(context, lifecycle));
         controllers.add(new BluetoothAddressPreferenceController(context, lifecycle));
@@ -160,6 +167,17 @@ public class MyDeviceInfoFragment extends DashboardFragment
         controllers.add(new UptimePreferenceController(context, lifecycle));
         controllers.add(new SoftwareVersionPreferenceController(context));
         controllers.add(new StorageSizePreferenceController(context));
+
+        for (int slotIndex = 0; slotIndex < slotSimStatus.size(); slotIndex ++) {
+            SimStatusPreferenceController slotRecord =
+                    new SimStatusPreferenceController(context,
+                    slotSimStatus.getPreferenceKey(slotIndex));
+            slotRecord.init(fragment, slotSimStatus);
+            controllers.add(slotRecord);
+        }
+        if (executor != null) {
+            executor.shutdown();
+        }
         return controllers;
     }
 

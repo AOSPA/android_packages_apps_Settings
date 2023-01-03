@@ -97,6 +97,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
@@ -239,9 +240,6 @@ public class UserSettings extends SettingsPreferenceFragment
             switch (msg.what) {
                 case MESSAGE_UPDATE_LIST:
                     updateUserList();
-                    break;
-                case MESSAGE_USER_CREATED:
-                    onUserCreated(msg.arg1);
                     break;
                 case MESSAGE_REMOVE_GUEST_ON_EXIT_CONTROLLER_GUEST_REMOVED:
                     updateUserList();
@@ -592,6 +590,7 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private void onAddGuestClicked() {
+        Context context = getContext();
         final UserCreatingDialog guestCreatingDialog =
                 new UserCreatingDialog(getActivity(), /* isGuest= */ true);
         guestCreatingDialog.show();
@@ -599,18 +598,18 @@ public class UserSettings extends SettingsPreferenceFragment
         ThreadUtils.postOnBackgroundThread(() -> {
             mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_USER_GUEST_ADD);
             Trace.beginSection("UserSettings.addGuest");
-            final UserInfo guest = mUserManager.createGuest(getContext());
+            final UserInfo guest = mUserManager.createGuest(context);
             Trace.endSection();
 
             ThreadUtils.postOnMainThread(() -> {
                 guestCreatingDialog.dismiss();
                 if (guest == null) {
-                    Toast.makeText(getContext(),
+                    Toast.makeText(context,
                             com.android.settingslib.R.string.add_guest_failed,
                             Toast.LENGTH_SHORT).show();
                     return;
                 }
-                openUserDetails(guest, true);
+                openUserDetails(guest, true, context);
             });
         });
     }
@@ -624,15 +623,10 @@ public class UserSettings extends SettingsPreferenceFragment
         }
     }
 
-    private void onUserCreated(int userId) {
+    private void onUserCreated(UserInfo userInfo, Context context) {
         hideUserCreatingDialog();
-        // prevent crash when config changes during user creation
-        if (getContext() == null) {
-            return;
-        }
         mAddingUser = false;
-        UserInfo userInfo = mUserManager.getUserInfo(userId);
-        openUserDetails(userInfo, true);
+        openUserDetails(userInfo, true, context);
     }
 
     private void hideUserCreatingDialog() {
@@ -649,11 +643,21 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private void openUserDetails(UserInfo userInfo, boolean newUser) {
+        openUserDetails(userInfo, newUser, getContext());
+    }
+
+    private void openUserDetails(UserInfo userInfo, boolean newUser, Context context) {
+        // to prevent a crash when config changes during user creation,
+        // we simply ignore this redirection step
+        if (context == null) {
+            return;
+        }
+
         Bundle extras = new Bundle();
         extras.putInt(UserDetailsSettings.EXTRA_USER_ID, userInfo.id);
         extras.putBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, newUser);
 
-        SubSettingLauncher launcher = new SubSettingLauncher(getContext())
+        SubSettingLauncher launcher = new SubSettingLauncher(context)
                 .setDestination(UserDetailsSettings.class.getName())
                 .setArguments(extras)
                 .setTitleText(userInfo.name)
@@ -1011,69 +1015,53 @@ public class UserSettings extends SettingsPreferenceFragment
 
         mUserCreatingDialog = new UserCreatingDialog(getActivity());
         mUserCreatingDialog.show();
-        ThreadUtils.postOnBackgroundThread(new AddUserNowImpl(userType, mAddingUserName));
+        createUser(userType, mAddingUserName);
     }
 
     @VisibleForTesting
-    class AddUserNowImpl implements Runnable{
-        int mUserType;
-        String mImplAddUserName;
-
-        AddUserNowImpl(final int userType, final String addUserName) {
-            mUserType = userType;
-            mImplAddUserName = addUserName;
-        }
-
-        @Override
-        public void run() {
-            runAddUser();
-            Trace.endAsyncSection("UserSettings.addUserNow", 0);
-        }
-
-        private void runAddUser() {
+    void createUser(final int userType, String userName) {
+        Context context = getContext();
+        Resources resources = getResources();
+        final Drawable selectedUserIcon = mPendingUserIcon;
+        Future<?> unusedCreateUserFuture = ThreadUtils.postOnBackgroundThread(() -> {
             UserInfo user;
-            String username;
 
-            synchronized (mUserLock) {
-                username = mImplAddUserName;
-            }
-
-            // Could take a few seconds
-            if (mUserType == USER_TYPE_USER) {
-                user = mUserManager.createUser(username, 0);
+            if (userType == USER_TYPE_USER) {
+                user = mUserManager.createUser(
+                        userName,
+                        mUserManager.USER_TYPE_FULL_SECONDARY,
+                        0);
             } else {
-                user = mUserManager.createRestrictedProfile(username);
+                user = mUserManager.createRestrictedProfile(userName);
             }
 
-            synchronized (mUserLock) {
+            ThreadUtils.postOnMainThread(() -> {
                 if (user == null) {
                     mAddingUser = false;
                     mPendingUserIcon = null;
                     mPendingUserName = null;
-                    ThreadUtils.postOnMainThread(() -> onUserCreationFailed());
+                    onUserCreationFailed();
                     return;
                 }
 
-                Drawable newUserIcon = mPendingUserIcon;
-                if (newUserIcon == null) {
-                    newUserIcon = UserIcons.getDefaultUserIcon(getResources(), user.id, false);
-                }
-                mUserManager.setUserIcon(
-                        user.id, UserIcons.convertToBitmapAtUserIconSize(
-                                getResources(), newUserIcon));
-
-                if (mUserType == USER_TYPE_USER) {
-                    mHandler.sendEmptyMessage(MESSAGE_UPDATE_LIST);
-                }
-
-                mHandler.sendMessage(mHandler.obtainMessage(
-                        MESSAGE_USER_CREATED, user.id, user.serialNumber));
+                Future<?> unusedSettingIconFuture = ThreadUtils.postOnBackgroundThread(() -> {
+                    Drawable newUserIcon = selectedUserIcon;
+                    if (newUserIcon == null) {
+                        newUserIcon = UserIcons.getDefaultUserIcon(resources, user.id, false);
+                    }
+                    mUserManager.setUserIcon(
+                            user.id, UserIcons.convertToBitmapAtUserIconSize(
+                                    resources, newUserIcon));
+                });
 
                 mPendingUserIcon = null;
                 mPendingUserName = null;
-            }
-        }
-    };
+
+                onUserCreated(user, context);
+            });
+        });
+    }
+
 
     /**
      * Erase the current user (guest) and switch to another user.
@@ -1604,6 +1592,7 @@ public class UserSettings extends SettingsPreferenceFragment
             openUserDetails(userInfo, false);
             return true;
         } else if (pref == mAddUser) {
+            mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_USER_ADD);
             // If we allow both types, show a picker, otherwise directly go to
             // flow for full user.
             if (mUserCaps.mCanAddRestrictedProfile) {
