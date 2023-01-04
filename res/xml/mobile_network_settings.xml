@@ -70,6 +70,12 @@
             settings:allowDividerAbove="true"/>
 
         <SwitchPreference
+            android:key="data_during_calls"
+            android:title="@string/data_during_calls_title"
+            android:summary="@string/data_during_calls_summary"
+            settings:controller="com.android.settings.network.telephony.DataDuringCallsPreferenceController"/>
+
+        <SwitchPreference
             android:key="auto_data_switch"
             android:title="@string/auto_data_switch_title"
             android:summary="@string/auto_data_switch_summary"
