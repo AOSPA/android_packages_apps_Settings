@@ -100,11 +100,15 @@ public final class CellInfoUtil {
                     info += String.format("%02X", id);
                 }
             } else if (cellId.getCagInfo() != null) {
-                if (cellId.getCagInfo().getCagName() != null &&
-                        !(cellId.getCagInfo().getCagName().isEmpty())) {
-                    info += "CAG: " + cellId.getCagInfo().getCagName();
+                if (cellId.getCagInfo().getCagOnlyAccess() == false) {
+                    if (cellId.getCagInfo().getCagName() != null &&
+                            !(cellId.getCagInfo().getCagName().isEmpty())) {
+                        info += "CAG: " + cellId.getCagInfo().getCagName();
+                    } else {
+                        info += "CAG: " + cellId.getCagInfo().getCagId();
+                    }
                 } else {
-                    info += "CAG: " + cellId.getCagInfo().getCagId();
+                    info += "CAG Only";
                 }
             }
         }
