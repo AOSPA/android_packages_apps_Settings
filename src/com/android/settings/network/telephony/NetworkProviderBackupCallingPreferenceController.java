@@ -78,8 +78,7 @@ public class NetworkProviderBackupCallingPreferenceController extends
     @Override
     public int getAvailabilityStatus() {
         if (mNetworkProviderBackupCallingGroup == null
-                || mSubscriptionList == null
-                || mSubscriptionList.size() < 2) {
+                || mSubscriptionList == null) {
             return CONDITIONALLY_UNAVAILABLE;
         } else {
             return AVAILABLE;
