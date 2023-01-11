@@ -21,12 +21,19 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.hardware.display.AmbientDisplayConfiguration;
 
+import co.aospa.settings.gestures.PickupGestureInsidePreferenceController;
+
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SearchIndexable
 public class PickupGestureSettings extends DashboardFragment {
@@ -43,9 +50,18 @@ public class PickupGestureSettings extends DashboardFragment {
                 FeatureFactory.getFeatureFactory().getSuggestionFeatureProvider();
         SharedPreferences prefs = suggestionFeatureProvider.getSharedPrefs(context);
         prefs.edit().putBoolean(PREF_KEY_SUGGESTION_COMPLETE, true).apply();
+    }
 
-        use(PickupGesturePreferenceController.class)
-            .setConfig(new AmbientDisplayConfiguration(context));
+    @Override
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context, getSettingsLifecycle());
+    }
+
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
+            Lifecycle lifecycle) {
+        List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new PickupGestureInsidePreferenceController(context));
+        return controllers;
     }
 
     @Override
@@ -60,7 +76,7 @@ public class PickupGestureSettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.pick_up_gesture_settings;
+        return R.xml.pick_up_gesture_settings_doze;
     }
 
     @Override
@@ -69,6 +85,6 @@ public class PickupGestureSettings extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.pick_up_gesture_settings);
+            new BaseSearchIndexProvider(R.xml.pick_up_gesture_settings_doze);
 
 }
