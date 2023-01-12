@@ -19,6 +19,7 @@ import static androidx.lifecycle.Lifecycle.Event;
 
 import android.content.Context;
 import android.os.PersistableBundle;
+import android.os.RemoteException;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -43,6 +44,9 @@ import com.android.settings.network.SubscriptionsChangeListener;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import com.qti.extphone.ExtTelephonyManager;
+import com.qti.extphone.ServiceCallback;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,6 +69,8 @@ public class NetworkProviderBackupCallingGroup extends
     private List<SubscriptionInfo> mSubInfoListForBackupCall;
     private Map<Integer, TelephonyManager> mTelephonyManagerList = new HashMap<>();
     private SubscriptionsChangeListener mSubscriptionsChangeListener;
+    private ExtTelephonyManager mExtTelephonyManager;
+    private boolean mServiceConnected = false;
 
     public NetworkProviderBackupCallingGroup(Context context, Lifecycle lifecycle,
             List<SubscriptionInfo> subscriptionList, String preferenceGroupKey) {
@@ -74,7 +80,23 @@ public class NetworkProviderBackupCallingGroup extends
         mBackupCallingForSubPreferences = new ArrayMap<>();
         setSubscriptionInfoList(context);
         lifecycle.addObserver(this);
+        mExtTelephonyManager = ExtTelephonyManager.getInstance(mContext);
+        mExtTelephonyManager.connectService(mExtTelManagerServiceCallback);
     }
+
+    private ServiceCallback mExtTelManagerServiceCallback = new ServiceCallback() {
+        @Override
+        public void onConnected() {
+            Log.d(TAG, "mExtTelManagerServiceCallback: service connected");
+            mServiceConnected = true;
+        }
+
+        @Override
+        public void onDisconnected() {
+            Log.d(TAG, "mExtTelManagerServiceCallback: service disconnected");
+            mServiceConnected = false;
+        }
+    };
 
     @OnLifecycleEvent(Event.ON_RESUME)
     public void onResume() {
@@ -98,7 +120,7 @@ public class NetworkProviderBackupCallingGroup extends
             return CONDITIONALLY_UNAVAILABLE;
         }
 
-        return (mSubInfoListForBackupCall.size() > 1) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return (mSubInfoListForBackupCall.size() >= 1) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     private boolean setCrossSimCallingEnabled(int subId, boolean checked) {
@@ -163,7 +185,7 @@ public class NetworkProviderBackupCallingGroup extends
         }
 
         setSubscriptionInfoList(mContext);
-        if (mSubInfoListForBackupCall == null || mSubInfoListForBackupCall.size() < 2) {
+        if (mSubInfoListForBackupCall == null) {
             for (SwitchPreference pref : mBackupCallingForSubPreferences.values()) {
                 mPreferenceGroup.removePreference(pref);
             }
@@ -242,6 +264,21 @@ public class NetworkProviderBackupCallingGroup extends
      **/
     @VisibleForTesting
     protected boolean isCrossSimEnabledByPlatform(Context context, int subscriptionId) {
+        if (!mServiceConnected) {
+            Log.d(TAG, "ExtTelephony service is not connected");
+            return false;
+        }
+
+        try {
+            if (!mExtTelephonyManager.isEpdgOverCellularDataSupported(
+                    SubscriptionManager.getPhoneId(subscriptionId))) {
+                Log.d(TAG, "Not supported by platform. subId = " + subscriptionId);
+                return false;
+            }
+        } catch(RemoteException ex) {
+            Log.e(TAG, "isEpdgOverCellularDataSupported Exception" + ex);
+            return false;
+        }
         // TODO : Change into API which created for accessing
         //        com.android.ims.ImsManager#isCrossSimEnabledByPlatform()
         if ((new WifiCallingQueryImsState(context, subscriptionId)).isWifiCallingSupported()) {
