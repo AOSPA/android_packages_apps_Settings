@@ -19,8 +19,6 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -36,8 +34,8 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
-import com.android.settingslib.fuelgauge.BatteryStatus;
 
 import java.time.Clock;
 import java.time.Duration;
@@ -50,8 +48,6 @@ import java.util.Map;
 /** A utility class to operate battery usage database. */
 public final class DatabaseUtils {
     private static final String TAG = "DatabaseUtils";
-    private static final String PREF_FILE_NAME = "battery_module_preference";
-    private static final String PREF_FULL_CHARGE_TIMESTAMP_KEY = "last_full_charge_timestamp_key";
     /** Key for query parameter timestamp used in BATTERY_CONTENT_URI **/
     private static final String QUERY_KEY_TIMESTAMP = "timestamp";
     /** Clear memory threshold for device booting phase. **/
@@ -89,8 +85,8 @@ public final class DatabaseUtils {
     public static Map<Long, Map<String, BatteryHistEntry>> getHistoryMapSinceLastFullCharge(
             Context context, Calendar calendar) {
         final long startTime = System.currentTimeMillis();
-        final long lastFullChargeTimestamp =
-                getStartTimestampForLastFullCharge(context, calendar);
+        final long sixDaysAgoTimestamp = getTimestampSixDaysAgo(calendar);
+        Log.d(TAG, "sixDayAgoTimestamp: " + sixDaysAgoTimestamp);
         // Builds the content uri everytime to avoid cache.
         final Uri batteryStateUri =
                 new Uri.Builder()
@@ -98,7 +94,7 @@ public final class DatabaseUtils {
                         .authority(AUTHORITY)
                         .appendPath(BATTERY_STATE_TABLE)
                         .appendQueryParameter(
-                                QUERY_KEY_TIMESTAMP, Long.toString(lastFullChargeTimestamp))
+                                QUERY_KEY_TIMESTAMP, Long.toString(sixDaysAgoTimestamp))
                         .build();
 
         final Map<Long, Map<String, BatteryHistEntry>> resultMap =
@@ -141,24 +137,19 @@ public final class DatabaseUtils {
         });
     }
 
-    /** Gets the latest sticky battery intent from framework. */
-    static Intent getBatteryIntent(Context context) {
-        return context.registerReceiver(
-                /*receiver=*/ null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-    }
-
     static List<ContentValues> sendBatteryEntryData(
-            Context context,
-            List<BatteryEntry> batteryEntryList,
-            BatteryUsageStats batteryUsageStats) {
+            final Context context,
+            final List<BatteryEntry> batteryEntryList,
+            final BatteryUsageStats batteryUsageStats,
+            final boolean isFullChargeStart) {
         final long startTime = System.currentTimeMillis();
-        final Intent intent = getBatteryIntent(context);
+        final Intent intent = BatteryUtils.getBatteryIntent(context);
         if (intent == null) {
             Log.e(TAG, "sendBatteryEntryData(): cannot fetch battery intent");
             clearMemory();
             return null;
         }
-        final int batteryLevel = getBatteryLevel(intent);
+        final int batteryLevel = BatteryUtils.getBatteryLevel(intent);
         final int batteryStatus = intent.getIntExtra(
                 BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN);
         final int batteryHealth = intent.getIntExtra(
@@ -173,15 +164,20 @@ public final class DatabaseUtils {
             batteryEntryList.stream()
                     .filter(entry -> {
                         final long foregroundMs = entry.getTimeInForegroundMs();
+                        final long foregroundServiceMs = entry.getTimeInForegroundServiceMs();
                         final long backgroundMs = entry.getTimeInBackgroundMs();
                         if (entry.getConsumedPower() == 0
-                                && (foregroundMs != 0 || backgroundMs != 0)) {
+                                && (foregroundMs != 0
+                                || foregroundServiceMs != 0
+                                || backgroundMs != 0)) {
                             Log.w(TAG, String.format(
-                                    "no consumed power but has running time for %s time=%d|%d",
-                                    entry.getLabel(), foregroundMs, backgroundMs));
+                                    "no consumed power but has running time for %s time=%d|%d|%d",
+                                    entry.getLabel(), foregroundMs, foregroundServiceMs,
+                                    backgroundMs));
                         }
                         return entry.getConsumedPower() != 0
                                 || foregroundMs != 0
+                                || foregroundServiceMs != 0
                                 || backgroundMs != 0;
                     })
                     .forEach(entry -> valuesList.add(
@@ -192,7 +188,8 @@ public final class DatabaseUtils {
                                     batteryStatus,
                                     batteryHealth,
                                     snapshotBootTimestamp,
-                                    snapshotTimestamp)));
+                                    snapshotTimestamp,
+                                    isFullChargeStart)));
         }
 
         int size = 1;
@@ -203,6 +200,8 @@ public final class DatabaseUtils {
             valuesList.toArray(valuesArray);
             try {
                 size = resolver.bulkInsert(BATTERY_CONTENT_URI, valuesArray);
+                Log.d(TAG, "insert() data into database with isFullChargeStart:"
+                        + isFullChargeStart);
             } catch (Exception e) {
                 Log.e(TAG, "bulkInsert() data into database error:\n" + e);
             }
@@ -216,56 +215,23 @@ public final class DatabaseUtils {
                             batteryStatus,
                             batteryHealth,
                             snapshotBootTimestamp,
-                            snapshotTimestamp);
+                            snapshotTimestamp,
+                            isFullChargeStart);
             try {
                 resolver.insert(BATTERY_CONTENT_URI, contentValues);
+                Log.d(TAG, "insert() data into database with isFullChargeStart:"
+                        + isFullChargeStart);
+
             } catch (Exception e) {
                 Log.e(TAG, "insert() data into database error:\n" + e);
             }
             valuesList.add(contentValues);
         }
-        saveLastFullChargeTimestampPref(context, batteryStatus, batteryLevel, snapshotTimestamp);
         resolver.notifyChange(BATTERY_CONTENT_URI, /*observer=*/ null);
         Log.d(TAG, String.format("sendBatteryEntryData() size=%d in %d/ms",
                 size, (System.currentTimeMillis() - startTime)));
         clearMemory();
         return valuesList;
-    }
-
-    @VisibleForTesting
-    static void saveLastFullChargeTimestampPref(
-            Context context, int batteryStatus, int batteryLevel, long timestamp) {
-        // Updates the SharedPreference only when timestamp is valid and phone is full charge.
-        if (!BatteryStatus.isCharged(batteryStatus, batteryLevel)) {
-            return;
-        }
-
-        final boolean success =
-                getSharedPreferences(context)
-                        .edit()
-                        .putLong(PREF_FULL_CHARGE_TIMESTAMP_KEY, timestamp)
-                        .commit();
-        if (!success) {
-            Log.w(TAG, "saveLastFullChargeTimestampPref() fail: value=" + timestamp);
-        }
-    }
-
-    @VisibleForTesting
-    static long getLastFullChargeTimestampPref(Context context) {
-        return getSharedPreferences(context).getLong(PREF_FULL_CHARGE_TIMESTAMP_KEY, 0);
-    }
-
-    /**
-     * Returns the start timestamp for "since last full charge" battery usage chart.
-     * If the last full charge happens within the last 7 days, returns the timestamp of last full
-     * charge. Otherwise, returns the timestamp for 00:00 6 days before the calendar date.
-     */
-    @VisibleForTesting
-    static long getStartTimestampForLastFullCharge(
-            Context context, Calendar calendar) {
-        final long lastFullChargeTimestamp = getLastFullChargeTimestampPref(context);
-        final long sixDayAgoTimestamp = getTimestampSixDaysAgo(calendar);
-        return Math.max(lastFullChargeTimestamp, sixDayAgoTimestamp);
     }
 
     private static Map<Long, Map<String, BatteryHistEntry>> loadHistoryMapFromContentProvider(
@@ -302,16 +268,13 @@ public final class DatabaseUtils {
                 }
                 batteryHistEntryMap.put(key, entry);
             }
+            try {
+                cursor.close();
+            } catch (Exception e) {
+                Log.e(TAG, "cursor.close() failed", e);
+            }
         }
         return resultMap;
-    }
-
-    private static int getBatteryLevel(Intent intent) {
-        final int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-        final int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, 0);
-        return scale == 0
-                ? -1 /*invalid battery level*/
-                : Math.round((level / (float) scale) * 100f);
     }
 
     private static void clearMemory() {
@@ -325,13 +288,6 @@ public final class DatabaseUtils {
             System.gc();
             Log.w(TAG, "invoke clearMemory()");
         }, CLEAR_MEMORY_DELAYED_MS);
-    }
-
-    private static SharedPreferences getSharedPreferences(Context context) {
-        return context
-                .getApplicationContext() // ensures we bind it with application
-                .createDeviceProtectedStorageContext()
-                .getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
     }
 
     /** Returns the timestamp for 00:00 6 days before the calendar date. */

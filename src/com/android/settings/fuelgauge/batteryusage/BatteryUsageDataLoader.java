@@ -24,33 +24,34 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 /** Load battery usage data in the background. */
 public final class BatteryUsageDataLoader {
     private static final String TAG = "BatteryUsageDataLoader";
 
+    // For testing only.
     @VisibleForTesting
-    static BatteryAppListPreferenceController sController;
+    static Supplier<List<BatteryEntry>> sFakeBatteryEntryListSupplier;
 
     private BatteryUsageDataLoader() {
     }
 
-    static void enqueueWork(Context context) {
+    static void enqueueWork(final Context context, final boolean isFullChargeStart) {
         AsyncTask.execute(() -> {
             Log.d(TAG, "loadUsageDataSafely() in the AsyncTask");
-            loadUsageDataSafely(context.getApplicationContext());
+            loadUsageDataSafely(context.getApplicationContext(), isFullChargeStart);
         });
     }
 
     @VisibleForTesting
-    static void loadUsageData(Context context) {
+    static void loadUsageData(final Context context, final boolean isFullChargeStart) {
         final long start = System.currentTimeMillis();
         final BatteryUsageStats batteryUsageStats = DataProcessor.getBatteryUsageStats(context);
         final List<BatteryEntry> batteryEntryList =
-                DataProcessor.generateBatteryEntryListFromBatteryUsageStats(
-                        context,
-                        batteryUsageStats,
-                        sController);
+                sFakeBatteryEntryListSupplier != null ? sFakeBatteryEntryListSupplier.get()
+                        : DataProcessor.generateBatteryEntryListFromBatteryUsageStats(context,
+                                batteryUsageStats);
         if (batteryEntryList == null || batteryEntryList.isEmpty()) {
             Log.w(TAG, "getBatteryEntryList() returns null or empty content");
         }
@@ -59,13 +60,14 @@ public final class BatteryUsageDataLoader {
 
         // Uploads the BatteryEntry data into SettingsIntelligence.
         DatabaseUtils.sendBatteryEntryData(
-                context, batteryEntryList, batteryUsageStats);
+                context, batteryEntryList, batteryUsageStats, isFullChargeStart);
         DataProcessor.closeBatteryUsageStats(batteryUsageStats);
     }
 
-    private static void loadUsageDataSafely(Context context) {
+    private static void loadUsageDataSafely(
+            final Context context, final boolean isFullChargeStart) {
         try {
-            loadUsageData(context);
+            loadUsageData(context, isFullChargeStart);
         } catch (RuntimeException e) {
             Log.e(TAG, "loadUsageData:" + e);
         }

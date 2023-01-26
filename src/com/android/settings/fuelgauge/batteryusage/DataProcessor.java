@@ -21,22 +21,29 @@ import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.utcToLoca
 import android.app.settings.SettingsEnums;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.os.BatteryConsumer;
 import android.os.BatteryStatsManager;
 import android.os.BatteryUsageStats;
 import android.os.BatteryUsageStatsQuery;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Process;
+import android.os.UidBatteryConsumer;
+import android.os.UserBatteryConsumer;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.ArraySet;
 import android.util.Log;
+import android.util.SparseArray;
 
 import androidx.annotation.Nullable;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.internal.os.PowerProfile;
 import com.android.settings.Utils;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.overlay.FeatureFactory;
@@ -48,6 +55,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -62,12 +70,14 @@ import java.util.stream.Collectors;
 public final class DataProcessor {
     private static final boolean DEBUG = false;
     private static final String TAG = "DataProcessor";
+    private static final int MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP = 10;
     private static final int MIN_DAILY_DATA_SIZE = 2;
     private static final int MIN_TIMESTAMP_DATA_SIZE = 2;
     private static final int MAX_DIFF_SECONDS_OF_UPPER_TIMESTAMP = 5;
     // Maximum total time value for each hourly slot cumulative data at most 2 hours.
     private static final float TOTAL_HOURLY_TIME_THRESHOLD = DateUtils.HOUR_IN_MILLIS * 2;
     private static final long MIN_TIME_SLOT = DateUtils.HOUR_IN_MILLIS * 2;
+    private static final String MEDIASERVER_PACKAGE_NAME = "mediaserver";
     private static final Map<String, BatteryHistEntry> EMPTY_BATTERY_MAP = new HashMap<>();
     private static final BatteryHistEntry EMPTY_BATTERY_HIST_ENTRY =
             new BatteryHistEntry(new ContentValues());
@@ -76,9 +86,6 @@ public final class DataProcessor {
     static final double PERCENTAGE_OF_TOTAL_THRESHOLD = 1f;
     @VisibleForTesting
     static final int SELECTED_INDEX_ALL = BatteryChartViewModel.SELECTED_INDEX_ALL;
-
-    /** A fake package name to represent no BatteryEntry data. */
-    public static final String FAKE_PACKAGE_NAME = "fake_package";
 
     /** A callback listener when battery usage loading async task is executed. */
     public interface UsageMapAsyncResponse {
@@ -164,7 +171,11 @@ public final class DataProcessor {
     @Nullable
     public static BatteryUsageStats getBatteryUsageStats(final Context context) {
         final BatteryUsageStatsQuery batteryUsageStatsQuery =
-                new BatteryUsageStatsQuery.Builder().includeBatteryHistory().build();
+                new BatteryUsageStatsQuery
+                        .Builder()
+                        .includeBatteryHistory()
+                        .includeProcessStateData()
+                        .build();
         return context.getSystemService(BatteryStatsManager.class)
                 .getBatteryUsageStats(batteryUsageStatsQuery);
     }
@@ -188,24 +199,26 @@ public final class DataProcessor {
     @Nullable
     public static List<BatteryEntry> generateBatteryEntryListFromBatteryUsageStats(
             final Context context,
-            @Nullable final BatteryUsageStats batteryUsageStats,
-            @Nullable BatteryAppListPreferenceController batteryAppListPreferenceController) {
+            @Nullable final BatteryUsageStats batteryUsageStats) {
         if (batteryUsageStats == null) {
             Log.w(TAG, "batteryUsageStats is null content");
             return null;
         }
-        // Loads the battery consuming data.
-        final BatteryAppListPreferenceController controller =
-                batteryAppListPreferenceController == null
-                        ? new BatteryAppListPreferenceController(
-                                context,
-                                /*preferenceKey=*/ null,
-                                /*lifecycle=*/ null,
-                                /*activity*=*/ null,
-                                /*fragment=*/ null)
-                        : batteryAppListPreferenceController;
-
-        return controller.getBatteryEntryList(batteryUsageStats, /*showAllApps=*/ true);
+        if (!shouldShowBatteryAttributionList(context)) {
+            return null;
+        }
+        final BatteryUtils batteryUtils = BatteryUtils.getInstance(context);
+        final int dischargePercentage = Math.max(0, batteryUsageStats.getDischargePercentage());
+        final List<BatteryEntry> usageList = getCoalescedUsageList(
+                context, batteryUtils, batteryUsageStats, /*loadDataInBackground=*/ false);
+        final double totalPower = batteryUsageStats.getConsumedPower();
+        for (int i = 0; i < usageList.size(); i++) {
+            final BatteryEntry entry = usageList.get(i);
+            final double percentOfTotal = batteryUtils.calculateBatteryPercent(
+                    entry.getConsumedPower(), totalPower, dischargePercentage);
+            entry.mPercent = percentOfTotal;
+        }
+        return usageList;
     }
 
     /**
@@ -466,8 +479,13 @@ public final class DataProcessor {
                 final BatteryDiffEntry currentBatteryDiffEntry = new BatteryDiffEntry(
                         context,
                         entry.mForegroundUsageTimeInMs,
+                        entry.mForegroundServiceUsageTimeInMs,
                         entry.mBackgroundUsageTimeInMs,
                         entry.mConsumePower,
+                        entry.mForegroundUsageConsumePower,
+                        entry.mForegroundServiceUsageConsumePower,
+                        entry.mBackgroundUsageConsumePower,
+                        entry.mCachedUsageConsumePower,
                         entry);
                 if (currentBatteryDiffEntry.isSystemEntry()) {
                     systemEntries.add(currentBatteryDiffEntry);
@@ -534,10 +552,7 @@ public final class DataProcessor {
         try {
             final BatteryUsageStats batteryUsageStats = getBatteryUsageStats(context);
             final List<BatteryEntry> batteryEntryList =
-                    generateBatteryEntryListFromBatteryUsageStats(
-                            context,
-                            batteryUsageStats,
-                            /*batteryAppListPreferenceController=*/ null);
+                    generateBatteryEntryListFromBatteryUsageStats(context, batteryUsageStats);
             batteryDiffData = generateBatteryDiffData(context, batteryEntryList, batteryUsageStats);
             closeBatteryUsageStats(batteryUsageStats);
         } catch (RuntimeException e) {
@@ -558,10 +573,12 @@ public final class DataProcessor {
         return batteryEntryList.stream()
                 .filter(entry -> {
                     final long foregroundMs = entry.getTimeInForegroundMs();
+                    final long foregroundServiceMs = entry.getTimeInForegroundServiceMs();
                     final long backgroundMs = entry.getTimeInBackgroundMs();
                     return entry.getConsumedPower() > 0
                             || (entry.getConsumedPower() == 0
-                            && (foregroundMs != 0 || backgroundMs != 0));
+                            && (foregroundMs != 0 || foregroundServiceMs != 0
+                            || backgroundMs != 0));
                 })
                 .map(entry -> ConvertUtils.convertToBatteryHistEntry(
                                 entry,
@@ -682,9 +699,14 @@ public final class DataProcessor {
             if (lowerEntry != null) {
                 final boolean invalidForegroundUsageTime =
                         lowerEntry.mForegroundUsageTimeInMs > upperEntry.mForegroundUsageTimeInMs;
+                final boolean invalidForegroundServiceUsageTime =
+                        lowerEntry.mForegroundServiceUsageTimeInMs
+                                > upperEntry.mForegroundServiceUsageTimeInMs;
                 final boolean invalidBackgroundUsageTime =
                         lowerEntry.mBackgroundUsageTimeInMs > upperEntry.mBackgroundUsageTimeInMs;
-                if (invalidForegroundUsageTime || invalidBackgroundUsageTime) {
+                if (invalidForegroundUsageTime
+                        || invalidForegroundServiceUsageTime
+                        || invalidBackgroundUsageTime) {
                     newHistEntryMap.put(entryKey, upperEntry);
                     log(context, "abnormal reset condition is found", currentSlot, upperEntry);
                     continue;
@@ -915,6 +937,11 @@ public final class DataProcessor {
                             currentEntry.mForegroundUsageTimeInMs,
                             nextEntry.mForegroundUsageTimeInMs,
                             nextTwoEntry.mForegroundUsageTimeInMs);
+            long foregroundServiceUsageTimeInMs =
+                    getDiffValue(
+                            currentEntry.mForegroundServiceUsageTimeInMs,
+                            nextEntry.mForegroundServiceUsageTimeInMs,
+                            nextTwoEntry.mForegroundServiceUsageTimeInMs);
             long backgroundUsageTimeInMs =
                     getDiffValue(
                             currentEntry.mBackgroundUsageTimeInMs,
@@ -925,8 +952,29 @@ public final class DataProcessor {
                             currentEntry.mConsumePower,
                             nextEntry.mConsumePower,
                             nextTwoEntry.mConsumePower);
+            double foregroundUsageConsumePower =
+                    getDiffValue(
+                            currentEntry.mForegroundUsageConsumePower,
+                            nextEntry.mForegroundUsageConsumePower,
+                            nextTwoEntry.mForegroundUsageConsumePower);
+            double foregroundServiceUsageConsumePower =
+                    getDiffValue(
+                            currentEntry.mForegroundServiceUsageConsumePower,
+                            nextEntry.mForegroundServiceUsageConsumePower,
+                            nextTwoEntry.mForegroundServiceUsageConsumePower);
+            double backgroundUsageConsumePower =
+                    getDiffValue(
+                            currentEntry.mBackgroundUsageConsumePower,
+                            nextEntry.mBackgroundUsageConsumePower,
+                            nextTwoEntry.mBackgroundUsageConsumePower);
+            double cachedUsageConsumePower =
+                    getDiffValue(
+                            currentEntry.mCachedUsageConsumePower,
+                            nextEntry.mCachedUsageConsumePower,
+                            nextTwoEntry.mCachedUsageConsumePower);
             // Excludes entry since we don't have enough data to calculate.
             if (foregroundUsageTimeInMs == 0
+                    && foregroundServiceUsageTimeInMs == 0
                     && backgroundUsageTimeInMs == 0
                     && consumePower == 0) {
                 continue;
@@ -938,6 +986,7 @@ public final class DataProcessor {
             }
             // Forces refine the cumulative value since it may introduce deviation error since we
             // will apply the interpolation arithmetic.
+            // TODO: update this value after the new API for foreground service is completed.
             final float totalUsageTimeInMs =
                     foregroundUsageTimeInMs + backgroundUsageTimeInMs;
             if (totalUsageTimeInMs > TOTAL_HOURLY_TIME_THRESHOLD) {
@@ -950,9 +999,15 @@ public final class DataProcessor {
                 }
                 foregroundUsageTimeInMs =
                         Math.round(foregroundUsageTimeInMs * ratio);
+                foregroundServiceUsageTimeInMs =
+                        Math.round(foregroundServiceUsageTimeInMs * ratio);
                 backgroundUsageTimeInMs =
                         Math.round(backgroundUsageTimeInMs * ratio);
                 consumePower = consumePower * ratio;
+                foregroundUsageConsumePower = foregroundUsageConsumePower * ratio;
+                foregroundServiceUsageConsumePower = foregroundServiceUsageConsumePower * ratio;
+                backgroundUsageConsumePower = backgroundUsageConsumePower * ratio;
+                cachedUsageConsumePower = cachedUsageConsumePower * ratio;
             }
             totalConsumePower += consumePower;
 
@@ -964,8 +1019,13 @@ public final class DataProcessor {
                 final BatteryDiffEntry currentBatteryDiffEntry = new BatteryDiffEntry(
                         context,
                         foregroundUsageTimeInMs,
+                        foregroundServiceUsageTimeInMs,
                         backgroundUsageTimeInMs,
                         consumePower,
+                        foregroundUsageConsumePower,
+                        foregroundServiceUsageConsumePower,
+                        backgroundUsageConsumePower,
+                        cachedUsageConsumePower,
                         selectedBatteryEntry);
                 if (currentBatteryDiffEntry.isSystemEntry()) {
                     systemEntries.add(currentBatteryDiffEntry);
@@ -1045,9 +1105,16 @@ public final class DataProcessor {
             // Sums up some field data into the existing one.
             oldBatteryDiffEntry.mForegroundUsageTimeInMs +=
                     entry.mForegroundUsageTimeInMs;
+            oldBatteryDiffEntry.mForegroundServiceUsageTimeInMs +=
+                    entry.mForegroundServiceUsageTimeInMs;
             oldBatteryDiffEntry.mBackgroundUsageTimeInMs +=
                     entry.mBackgroundUsageTimeInMs;
             oldBatteryDiffEntry.mConsumePower += entry.mConsumePower;
+            oldBatteryDiffEntry.mForegroundUsageConsumePower += entry.mForegroundUsageConsumePower;
+            oldBatteryDiffEntry.mForegroundServiceUsageConsumePower
+                    += entry.mForegroundServiceUsageConsumePower;
+            oldBatteryDiffEntry.mBackgroundUsageConsumePower += entry.mBackgroundUsageConsumePower;
+            oldBatteryDiffEntry.mCachedUsageConsumePower += entry.mCachedUsageConsumePower;
         }
     }
 
@@ -1088,7 +1155,7 @@ public final class DataProcessor {
             final BatteryDiffEntry entry = iterator.next();
             final String packageName = entry.getPackageName();
             if (entry.getPercentOfTotal() < PERCENTAGE_OF_TOTAL_THRESHOLD
-                    || FAKE_PACKAGE_NAME.equals(packageName)
+                    || ConvertUtils.FAKE_PACKAGE_NAME.equals(packageName)
                     || contains(packageName, notAllowShowEntryPackages)) {
                 iterator.remove();
             }
@@ -1098,6 +1165,136 @@ public final class DataProcessor {
                 entry.mBackgroundUsageTimeInMs = 0;
             }
         }
+    }
+
+    private static boolean shouldShowBatteryAttributionList(final Context context) {
+        final PowerProfile powerProfile = new PowerProfile(context);
+        // Cheap hack to try to figure out if the power_profile.xml was populated.
+        final double averagePowerForOrdinal = powerProfile.getAveragePowerForOrdinal(
+                PowerProfile.POWER_GROUP_DISPLAY_SCREEN_FULL, 0);
+        final boolean shouldShowBatteryAttributionList =
+                averagePowerForOrdinal >= MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP;
+        if (!shouldShowBatteryAttributionList) {
+            Log.w(TAG, "shouldShowBatteryAttributionList(): " + averagePowerForOrdinal);
+        }
+        return shouldShowBatteryAttributionList;
+    }
+
+    /**
+     * We want to coalesce some UIDs. For example, dex2oat runs under a shared gid that
+     * exists for all users of the same app. We detect this case and merge the power use
+     * for dex2oat to the device OWNER's use of the app.
+     *
+     * @return A sorted list of apps using power.
+     */
+    private static List<BatteryEntry> getCoalescedUsageList(final Context context,
+            final BatteryUtils batteryUtils,
+            final BatteryUsageStats batteryUsageStats,
+            final boolean loadDataInBackground) {
+        final PackageManager packageManager = context.getPackageManager();
+        final UserManager userManager = context.getSystemService(UserManager.class);
+        final SparseArray<BatteryEntry> batteryEntryList = new SparseArray<>();
+        final ArrayList<BatteryEntry> results = new ArrayList<>();
+        final List<UidBatteryConsumer> uidBatteryConsumers =
+                batteryUsageStats.getUidBatteryConsumers();
+
+        // Sort to have all apps with "real" UIDs first, followed by apps that are supposed
+        // to be combined with the real ones.
+        uidBatteryConsumers.sort(Comparator.comparingInt(
+                consumer -> consumer.getUid() == getRealUid(consumer) ? 0 : 1));
+
+        for (int i = 0, size = uidBatteryConsumers.size(); i < size; i++) {
+            final UidBatteryConsumer consumer = uidBatteryConsumers.get(i);
+            final int uid = getRealUid(consumer);
+
+            final String[] packages = packageManager.getPackagesForUid(uid);
+            if (batteryUtils.shouldHideUidBatteryConsumerUnconditionally(consumer, packages)) {
+                continue;
+            }
+
+            final boolean isHidden = batteryUtils.shouldHideUidBatteryConsumer(consumer, packages);
+            final int index = batteryEntryList.indexOfKey(uid);
+            if (index < 0) {
+                // New entry.
+                batteryEntryList.put(uid, new BatteryEntry(context, userManager, consumer,
+                        isHidden, uid, packages, null, loadDataInBackground));
+            } else {
+                // Combine BatterySippers if we already have one with this UID.
+                final BatteryEntry existingSipper = batteryEntryList.valueAt(index);
+                existingSipper.add(consumer);
+            }
+        }
+
+        final BatteryConsumer deviceConsumer = batteryUsageStats.getAggregateBatteryConsumer(
+                BatteryUsageStats.AGGREGATE_BATTERY_CONSUMER_SCOPE_DEVICE);
+        final BatteryConsumer appsConsumer = batteryUsageStats.getAggregateBatteryConsumer(
+                BatteryUsageStats.AGGREGATE_BATTERY_CONSUMER_SCOPE_ALL_APPS);
+
+        for (int componentId = 0; componentId < BatteryConsumer.POWER_COMPONENT_COUNT;
+                componentId++) {
+            results.add(new BatteryEntry(context, componentId,
+                    deviceConsumer.getConsumedPower(componentId),
+                    appsConsumer.getConsumedPower(componentId),
+                    deviceConsumer.getUsageDurationMillis(componentId)));
+        }
+
+        for (int componentId = BatteryConsumer.FIRST_CUSTOM_POWER_COMPONENT_ID;
+                componentId < BatteryConsumer.FIRST_CUSTOM_POWER_COMPONENT_ID
+                        + deviceConsumer.getCustomPowerComponentCount();
+                componentId++) {
+            results.add(new BatteryEntry(context, componentId,
+                    deviceConsumer.getCustomPowerComponentName(componentId),
+                    deviceConsumer.getConsumedPowerForCustomComponent(componentId),
+                    appsConsumer.getConsumedPowerForCustomComponent(componentId)));
+        }
+
+        final List<UserBatteryConsumer> userBatteryConsumers =
+                batteryUsageStats.getUserBatteryConsumers();
+        for (int i = 0, size = userBatteryConsumers.size(); i < size; i++) {
+            final UserBatteryConsumer consumer = userBatteryConsumers.get(i);
+            results.add(new BatteryEntry(context, userManager, consumer, /* isHidden */ true,
+                    Process.INVALID_UID, null, null, loadDataInBackground));
+        }
+
+        final int numUidSippers = batteryEntryList.size();
+
+        for (int i = 0; i < numUidSippers; i++) {
+            results.add(batteryEntryList.valueAt(i));
+        }
+
+        // The sort order must have changed, so re-sort based on total power use.
+        results.sort(BatteryEntry.COMPARATOR);
+        return results;
+    }
+
+    private static int getRealUid(final UidBatteryConsumer consumer) {
+        int realUid = consumer.getUid();
+
+        // Check if this UID is a shared GID. If so, we combine it with the OWNER's
+        // actual app UID.
+        if (isSharedGid(consumer.getUid())) {
+            realUid = UserHandle.getUid(UserHandle.USER_SYSTEM,
+                    UserHandle.getAppIdFromSharedAppGid(consumer.getUid()));
+        }
+
+        // Check if this UID is a system UID (mediaserver, logd, nfc, drm, etc).
+        if (isSystemUid(realUid)
+                && !MEDIASERVER_PACKAGE_NAME.equals(consumer.getPackageWithHighestDrain())) {
+            // Use the system UID for all UIDs running in their own sandbox that
+            // are not apps. We exclude mediaserver because we already are expected to
+            // report that as a separate item.
+            realUid = Process.SYSTEM_UID;
+        }
+        return realUid;
+    }
+
+    private static boolean isSharedGid(final int uid) {
+        return UserHandle.getAppIdFromSharedAppGid(uid) > 0;
+    }
+
+    private static boolean isSystemUid(final int uid) {
+        final int appUid = UserHandle.getAppId(uid);
+        return appUid >= Process.SYSTEM_UID && appUid < Process.FIRST_APPLICATION_UID;
     }
 
     private static boolean isUsageMapValid(
@@ -1207,8 +1404,13 @@ public final class DataProcessor {
         final BatteryDiffEntry batteryDiffEntry = new BatteryDiffEntry(
                 context,
                 /*foregroundUsageTimeInMs=*/ 0,
+                /*foregroundServiceUsageTimeInMs=*/ 0,
                 /*backgroundUsageTimeInMs=*/ 0,
                 consumePower,
+                /*foregroundUsageConsumePower=*/ 0,
+                /*foregroundServiceUsageConsumePower=*/ 0,
+                /*backgroundUsageConsumePower=*/ 0,
+                /*cachedUsageConsumePower=*/ 0,
                 new BatteryHistEntry(values));
         return batteryDiffEntry;
     }

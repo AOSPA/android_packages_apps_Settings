@@ -29,18 +29,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotDisplayed
-import androidx.compose.ui.test.assertIsNotEnabled
-import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
-import androidx.compose.ui.test.printToLog
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
-import com.android.settings.testutils.waitUntilExists
-import com.android.settingslib.applications.AppUtils
+import com.android.settingslib.spa.testutils.delay
 import com.android.settingslib.spaprivileged.model.app.userHandle
 import com.android.settingslib.spaprivileged.model.app.userId
 import com.google.common.truth.Truth.assertThat
@@ -49,7 +45,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentCaptor
-import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito.any
 import org.mockito.Mockito.eq
@@ -61,8 +56,7 @@ import org.mockito.Mockito.`when` as whenever
 
 @RunWith(AndroidJUnit4::class)
 class AppSettingsPreferenceTest {
-    @JvmField
-    @Rule
+    @get:Rule
     val mockito: MockitoRule = MockitoJUnit.rule()
 
     @get:Rule
@@ -135,6 +129,7 @@ class AppSettingsPreferenceTest {
 
         setContent()
         composeTestRule.onRoot().performClick()
+        composeTestRule.delay()
 
         val intentCaptor = ArgumentCaptor.forClass(Intent::class.java)
         verify(context).startActivityAsUser(intentCaptor.capture(), eq(APP.userHandle))
@@ -149,6 +144,7 @@ class AppSettingsPreferenceTest {
                 AppSettingsPreference(APP)
             }
         }
+        composeTestRule.delay()
     }
 
     private companion object {

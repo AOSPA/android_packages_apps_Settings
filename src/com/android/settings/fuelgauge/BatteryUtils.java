@@ -23,7 +23,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.os.BatteryConsumer;
+import android.os.BatteryManager;
 import android.os.BatteryStats;
 import android.os.BatteryStatsManager;
 import android.os.BatteryUsageStats;
@@ -33,6 +33,8 @@ import android.os.Process;
 import android.os.SystemClock;
 import android.os.UidBatteryConsumer;
 import android.os.UserHandle;
+import android.provider.Settings;
+import android.util.Base64;
 import android.util.Log;
 
 import androidx.annotation.IntDef;
@@ -53,6 +55,9 @@ import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 import com.android.settingslib.utils.PowerUtil;
 import com.android.settingslib.utils.ThreadUtils;
 
+import com.google.protobuf.InvalidProtocolBufferException;
+import com.google.protobuf.MessageLite;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.time.Duration;
@@ -72,6 +77,11 @@ public class BatteryUtils {
     /** Special UID for aggregated other users. */
     public static final long UID_OTHER_USERS = Long.MIN_VALUE;
 
+    /** Flag to check if the dock defender mode has been temporarily bypassed */
+    public static final String SETTINGS_GLOBAL_DOCK_DEFENDER_BYPASS = "dock_defender_bypass";
+
+    public static final String BYPASS_DOCK_DEFENDER_ACTION = "battery.dock.defender.bypass";
+
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({StatusType.SCREEN_USAGE,
             StatusType.FOREGROUND,
@@ -83,6 +93,18 @@ public class BatteryUtils {
         int FOREGROUND = 1;
         int BACKGROUND = 2;
         int ALL = 3;
+    }
+
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({DockDefenderMode.FUTURE_BYPASS,
+            DockDefenderMode.ACTIVE,
+            DockDefenderMode.TEMPORARILY_BYPASSED,
+            DockDefenderMode.DISABLED})
+    public @interface DockDefenderMode {
+        int FUTURE_BYPASS = 0;
+        int ACTIVE = 1;
+        int TEMPORARILY_BYPASSED = 2;
+        int DISABLED = 3;
     }
 
     private static final String TAG = "BatteryUtils";
@@ -198,24 +220,6 @@ public class BatteryUtils {
         return uid == UID_TETHERING
                 ? false
                 : uid < 0 || isHiddenSystemModule(packages);
-    }
-
-    /**
-     * Returns true if the specified device power component should be excluded from the summary
-     * battery consumption list.
-     */
-    public boolean shouldHideDevicePowerComponent(BatteryConsumer consumer,
-            @BatteryConsumer.PowerComponent int powerComponentId) {
-        switch (powerComponentId) {
-            case BatteryConsumer.POWER_COMPONENT_IDLE:
-            case BatteryConsumer.POWER_COMPONENT_MOBILE_RADIO:
-            case BatteryConsumer.POWER_COMPONENT_SCREEN:
-            case BatteryConsumer.POWER_COMPONENT_BLUETOOTH:
-            case BatteryConsumer.POWER_COMPONENT_WIFI:
-                return true;
-            default:
-                return false;
-        }
     }
 
     /**
@@ -335,6 +339,28 @@ public class BatteryUtils {
         }
     }
 
+    /**
+     * Parses proto object from string.
+     *
+     * @param serializedProto the serialized proto string
+     * @param protoClass class of the proto
+     * @return instance of the proto class parsed from the string
+     */
+    @SuppressWarnings("unchecked")
+    public static <T extends MessageLite> T parseProtoFromString(
+            String serializedProto, T protoClass) {
+        if (serializedProto.isEmpty()) {
+            return (T) protoClass.getDefaultInstanceForType();
+        }
+        try {
+            return (T) protoClass.getParserForType()
+                    .parseFrom(Base64.decode(serializedProto, Base64.DEFAULT));
+        } catch (InvalidProtocolBufferException e) {
+            Log.e(TAG, "Failed to deserialize proto class", e);
+            return (T) protoClass.getDefaultInstanceForType();
+        }
+    }
+
     public void setForceAppStandby(int uid, String packageName,
             int mode) {
         final boolean isPreOApp = isPreOApp(packageName);
@@ -390,8 +416,7 @@ public class BatteryUtils {
         final long startTime = System.currentTimeMillis();
 
         // Stuff we always need to get BatteryInfo
-        final Intent batteryBroadcast = mContext.registerReceiver(null,
-                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        final Intent batteryBroadcast = getBatteryIntent(mContext);
 
         final long elapsedRealtimeUs = PowerUtil.convertMsToUs(
                 SystemClock.elapsedRealtime());
@@ -569,5 +594,37 @@ public class BatteryUtils {
         }
 
         return -1L;
+    }
+
+    /** Gets the latest sticky battery intent from the Android system. */
+    public static Intent getBatteryIntent(Context context) {
+        return context.registerReceiver(
+                /*receiver=*/ null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+    }
+
+    /** Gets the battery level from the intent. */
+    public static int getBatteryLevel(Intent intent) {
+        final int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+        final int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, 0);
+        return scale == 0
+                ? -1 /*invalid battery level*/
+                : Math.round((level / (float) scale) * 100f);
+    }
+
+    /** Gets the current dock defender mode */
+    public static int getCurrentDockDefenderMode(Context context, BatteryInfo batteryInfo) {
+        if (batteryInfo.pluggedStatus == BatteryManager.BATTERY_PLUGGED_DOCK) {
+            if (Settings.Global.getInt(context.getContentResolver(),
+                    SETTINGS_GLOBAL_DOCK_DEFENDER_BYPASS, 0) == 1) {
+                return DockDefenderMode.TEMPORARILY_BYPASSED;
+            } else if (batteryInfo.isOverheated && FeatureFactory.getFactory(context)
+                    .getPowerUsageFeatureProvider(context)
+                    .isExtraDefend()) {
+                return DockDefenderMode.ACTIVE;
+            } else if (!batteryInfo.isOverheated) {
+                return DockDefenderMode.FUTURE_BYPASS;
+            }
+        }
+        return DockDefenderMode.DISABLED;
     }
 }

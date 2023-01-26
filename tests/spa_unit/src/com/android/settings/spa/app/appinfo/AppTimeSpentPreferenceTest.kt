@@ -49,8 +49,7 @@ import org.mockito.Mockito.`when` as whenever
 
 @RunWith(AndroidJUnit4::class)
 class AppTimeSpentPreferenceTest {
-    @JvmField
-    @Rule
+    @get:Rule
     val mockito: MockitoRule = MockitoJUnit.rule()
 
     @get:Rule
@@ -63,7 +62,7 @@ class AppTimeSpentPreferenceTest {
     private lateinit var packageManager: PackageManager
 
     private val fakeFeatureFactory = FakeFeatureFactory()
-    private val appFeatureProvider = fakeFeatureFactory.applicationFeatureProvider
+    private val appFeatureProvider = fakeFeatureFactory.mockApplicationFeatureProvider
 
     @Before
     fun setUp() {

@@ -16,27 +16,25 @@
 
 package com.android.settings.spa.app.appinfo
 
-import android.content.pm.PackageInfo
+import android.content.pm.ApplicationInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import com.android.settingslib.applications.AppUtils
-import com.android.settingslib.spa.framework.compose.collectAsStateWithLifecycle
 import com.android.settingslib.spa.widget.button.ActionButton
 import com.android.settingslib.spa.widget.button.ActionButtons
-import com.android.settingslib.spaprivileged.model.app.isSystemModule
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.withContext
 
 @Composable
 fun AppButtons(packageInfoPresenter: PackageInfoPresenter) {
+    if (remember(packageInfoPresenter) { packageInfoPresenter.isMainlineModule() }) return
     val presenter = remember { AppButtonsPresenter(packageInfoPresenter) }
-    if (!presenter.isAvailableFlow.collectAsStateWithLifecycle(initialValue = false).value) return
     presenter.Dialogs()
     ActionButtons(actionButtons = presenter.rememberActionsButtons().value)
 }
+
+private fun PackageInfoPresenter.isMainlineModule(): Boolean =
+    AppUtils.isMainlineModule(userPackageManager, packageName)
 
 private class AppButtonsPresenter(private val packageInfoPresenter: PackageInfoPresenter) {
     private val appLaunchButton = AppLaunchButton(packageInfoPresenter)
@@ -46,29 +44,20 @@ private class AppButtonsPresenter(private val packageInfoPresenter: PackageInfoP
     private val appClearButton = AppClearButton(packageInfoPresenter)
     private val appForceStopButton = AppForceStopButton(packageInfoPresenter)
 
-    val isAvailableFlow = flow { emit(isAvailable()) }
-
-    private suspend fun isAvailable(): Boolean = withContext(Dispatchers.IO) {
-        !packageInfoPresenter.userPackageManager.isSystemModule(packageInfoPresenter.packageName) &&
-            !AppUtils.isMainlineModule(
-                packageInfoPresenter.userPackageManager, packageInfoPresenter.packageName
-            )
-    }
-
     @Composable
     fun rememberActionsButtons() = remember {
         packageInfoPresenter.flow.map { packageInfo ->
-            if (packageInfo != null) getActionButtons(packageInfo) else emptyList()
+            if (packageInfo != null) getActionButtons(packageInfo.applicationInfo) else emptyList()
         }
     }.collectAsState(initial = emptyList())
 
-    private fun getActionButtons(packageInfo: PackageInfo): List<ActionButton> = listOfNotNull(
-        appLaunchButton.getActionButton(packageInfo),
-        appInstallButton.getActionButton(packageInfo),
-        appDisableButton.getActionButton(packageInfo),
-        appUninstallButton.getActionButton(packageInfo),
-        appClearButton.getActionButton(packageInfo),
-        appForceStopButton.getActionButton(packageInfo),
+    private fun getActionButtons(app: ApplicationInfo): List<ActionButton> = listOfNotNull(
+        appLaunchButton.getActionButton(app),
+        appInstallButton.getActionButton(app),
+        appDisableButton.getActionButton(app),
+        appUninstallButton.getActionButton(app),
+        appClearButton.getActionButton(app),
+        appForceStopButton.getActionButton(app),
     )
 
     @Composable

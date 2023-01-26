@@ -26,7 +26,6 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.network.telephony.CallsDefaultSubscriptionController;
-import com.android.settings.network.telephony.NetworkProviderBackupCallingPreferenceController;
 import com.android.settings.network.telephony.NetworkProviderWifiCallingPreferenceController;
 import com.android.settings.network.telephony.SmsDefaultSubscriptionController;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -42,9 +41,6 @@ public class NetworkProviderCallsSmsFragment extends DashboardFragment {
     static final String LOG_TAG = "NetworkProviderCallsSmsFragment";
     @VisibleForTesting
     static final String KEY_PREFERENCE_CATEGORY_CALLING = "provider_model_calling_category";
-    @VisibleForTesting
-    static final String KEY_PREFERENCE_CATEGORY_BACKUP_CALLING =
-            "provider_model_backup_calling_category";
 
     @VisibleForTesting
     static final String KEY_PREFERENCE_CALLS= "provider_model_calls_preference";
@@ -57,19 +53,15 @@ public class NetworkProviderCallsSmsFragment extends DashboardFragment {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new CallsDefaultSubscriptionController(context, KEY_PREFERENCE_CALLS));
-        controllers.add(new SmsDefaultSubscriptionController(context, KEY_PREFERENCE_SMS));
+        controllers.add(new CallsDefaultSubscriptionController(context, KEY_PREFERENCE_CALLS,
+                getSettingsLifecycle(), this));
+        controllers.add(new SmsDefaultSubscriptionController(context, KEY_PREFERENCE_SMS,
+                getSettingsLifecycle(), this));
         mNetworkProviderWifiCallingPreferenceController =
                 new NetworkProviderWifiCallingPreferenceController(context,
                         KEY_PREFERENCE_CATEGORY_CALLING);
         mNetworkProviderWifiCallingPreferenceController.init(getSettingsLifecycle());
         controllers.add(mNetworkProviderWifiCallingPreferenceController);
-
-        NetworkProviderBackupCallingPreferenceController backupCallingPrefCtrl =
-                new NetworkProviderBackupCallingPreferenceController(context,
-                        KEY_PREFERENCE_CATEGORY_BACKUP_CALLING);
-        backupCallingPrefCtrl.init(getSettingsLifecycle());
-        controllers.add(backupCallingPrefCtrl);
 
         return controllers;
     }

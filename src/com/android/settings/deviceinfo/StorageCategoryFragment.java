@@ -26,7 +26,6 @@ import android.os.Bundle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.util.SparseArray;
-import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
@@ -210,9 +209,7 @@ public class StorageCategoryFragment extends DashboardFragment
             return;
         }
 
-        if (getView().findViewById(R.id.loading_container).getVisibility() == View.VISIBLE) {
-            setLoading(false /* loading */, true /* animate */);
-        }
+        setLoading(false /* loading */, false /* animate */);
 
         final long privateUsedBytes = mStorageInfo.totalBytes - mStorageInfo.freeBytes;
         mPreferenceController.setVolume(mSelectedStorageEntry.getVolumeInfo());
@@ -232,7 +229,8 @@ public class StorageCategoryFragment extends DashboardFragment
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.SETTINGS_STORAGE_CATEGORY;
+        return mIsWorkProfile ? SettingsEnums.SETTINGS_STORAGE_CATEGORY_WORK :
+                SettingsEnums.SETTINGS_STORAGE_CATEGORY;
     }
 
     @Override

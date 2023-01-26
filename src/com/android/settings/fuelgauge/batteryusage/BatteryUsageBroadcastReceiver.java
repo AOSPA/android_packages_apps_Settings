@@ -25,6 +25,7 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settingslib.fuelgauge.BatteryStatus;
 
 import java.time.Duration;
@@ -64,7 +65,7 @@ public final class BatteryUsageBroadcastReceiver extends BroadcastReceiver {
     }
 
     private void tryToFetchUsageData(Context context) {
-        final Intent batteryIntent = DatabaseUtils.getBatteryIntent(context);
+        final Intent batteryIntent = BatteryUtils.getBatteryIntent(context);
         // Returns when battery is not fully charged.
         if (!BatteryStatus.isCharged(batteryIntent)) {
             return;
@@ -79,6 +80,6 @@ public final class BatteryUsageBroadcastReceiver extends BroadcastReceiver {
         }
 
         mFetchBatteryUsageData = true;
-        BatteryUsageDataLoader.enqueueWork(context);
+        BatteryUsageDataLoader.enqueueWork(context, /*isFullChargeStart=*/ true);
     }
 }

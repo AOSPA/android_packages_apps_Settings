@@ -77,6 +77,8 @@ import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.GlifLayout;
+import com.google.android.setupdesign.template.DescriptionMixin;
+import com.google.android.setupdesign.template.HeaderMixin;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -176,6 +178,8 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     private boolean mHaveShownUdfpsTipLottie;
     private boolean mHaveShownUdfpsLeftEdgeLottie;
     private boolean mHaveShownUdfpsRightEdgeLottie;
+    private boolean mHaveShownUdfpsCenterLottie;
+    private boolean mHaveShownUdfpsGuideLottie;
     private boolean mHaveShownSfpsNoAnimationLottie;
     private boolean mHaveShownSfpsCenterLottie;
     private boolean mHaveShownSfpsTipLottie;
@@ -341,6 +345,9 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                 return true;
             });
         }
+
+        final Configuration config = getApplicationContext().getResources().getConfiguration();
+        maybeHideSfpsText(config);
     }
 
     @Override
@@ -415,7 +422,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         // showErrorDialog() will cause onWindowFocusChanged(false), set mIsCanceled to false
         // before showErrorDialog() to prevent that another error dialog is triggered again.
         mIsCanceled = true;
-        FingerprintErrorDialog.showErrorDialog(this, errorMsgId);
+        FingerprintErrorDialog.showErrorDialog(this, errorMsgId, mCanAssumeUdfps);
         mIsOrientationChanged = false;
         cancelEnrollment();
         stopIconAnimation();
@@ -503,18 +510,31 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         switch (getCurrentStage()) {
             case STAGE_CENTER:
                 setHeaderText(R.string.security_settings_fingerprint_enroll_repeat_title);
-                setDescriptionText(R.string.security_settings_udfps_enroll_start_message);
+                if (mIsAccessibilityEnabled || mIllustrationLottie == null) {
+                    setDescriptionText(R.string.security_settings_udfps_enroll_start_message);
+                } else if (!mHaveShownUdfpsCenterLottie && mIllustrationLottie != null) {
+                    mHaveShownUdfpsCenterLottie = true;
+                    // Note: Update string reference when differentiate in between udfps & sfps
+                    mIllustrationLottie.setContentDescription(
+                            getString(R.string.security_settings_sfps_enroll_finger_center_title)
+                    );
+                    configureEnrollmentStage("", R.raw.udfps_center_hint_lottie);
+                }
                 break;
 
             case STAGE_GUIDED:
                 setHeaderText(R.string.security_settings_fingerprint_enroll_repeat_title);
-                if (mIsAccessibilityEnabled) {
+                if (mIsAccessibilityEnabled || mIllustrationLottie == null) {
                     setDescriptionText(R.string.security_settings_udfps_enroll_repeat_a11y_message);
-                } else {
-                    setDescriptionText(R.string.security_settings_udfps_enroll_repeat_message);
+                } else if (!mHaveShownUdfpsGuideLottie && mIllustrationLottie != null) {
+                    mHaveShownUdfpsGuideLottie = true;
+                    mIllustrationLottie.setContentDescription(
+                            getString(R.string.security_settings_fingerprint_enroll_repeat_message)
+                    );
+                    // TODO(b/228100413) Could customize guided lottie animation
+                    configureEnrollmentStage("", R.raw.udfps_center_hint_lottie);
                 }
                 break;
-
             case STAGE_FINGERTIP:
                 setHeaderText(R.string.security_settings_udfps_enroll_fingertip_title);
                 if (!mHaveShownUdfpsTipLottie && mIllustrationLottie != null) {
@@ -525,7 +545,6 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                     configureEnrollmentStage("", R.raw.udfps_tip_hint_lottie);
                 }
                 break;
-
             case STAGE_LEFT_EDGE:
                 setHeaderText(R.string.security_settings_udfps_enroll_left_edge_title);
                 if (!mHaveShownUdfpsLeftEdgeLottie && mIllustrationLottie != null) {
@@ -1041,6 +1060,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     @SuppressWarnings("MissingSuperCall") // TODO: Fix me
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        maybeHideSfpsText(newConfig);
         switch(newConfig.orientation) {
             case Configuration.ORIENTATION_LANDSCAPE: {
                 updateOrientation(Configuration.ORIENTATION_LANDSCAPE);
@@ -1053,6 +1073,27 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
             default:
                 Log.e(TAG, "Error unhandled configuration change");
                 break;
+        }
+    }
+
+    private void maybeHideSfpsText(@NonNull Configuration newConfig) {
+        final HeaderMixin headerMixin = getLayout().getMixin(HeaderMixin.class);
+        final DescriptionMixin descriptionMixin = getLayout().getMixin(DescriptionMixin.class);
+        final boolean isLandscape = newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE;
+
+        if (mCanAssumeSfps) {
+            if (isLandscape) {
+                headerMixin.setAutoTextSizeEnabled(true);
+                headerMixin.getTextView().setMinLines(0);
+                headerMixin.getTextView().setMaxLines(10);
+                descriptionMixin.getTextView().setMinLines(0);
+                descriptionMixin.getTextView().setMaxLines(10);
+            } else {
+                headerMixin.setAutoTextSizeEnabled(false);
+                headerMixin.getTextView().setLines(4);
+                // hide the description
+                descriptionMixin.getTextView().setLines(0);
+            }
         }
     }
 

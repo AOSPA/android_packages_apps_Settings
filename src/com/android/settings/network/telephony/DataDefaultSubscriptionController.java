@@ -18,25 +18,37 @@
  package com.android.settings.network.telephony;
 
  import android.content.Context;
- import android.telephony.SubscriptionInfo;
  import android.telephony.SubscriptionManager;
+ import androidx.lifecycle.LifecycleOwner;
+ import com.android.settingslib.core.lifecycle.Lifecycle;
+ import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 
 public class DataDefaultSubscriptionController extends DefaultSubscriptionController {
 
     private static final String SETTING_USER_PREF_DATA_SUB = "user_preferred_data_sub";
+    private SubscriptionInfoEntity mSubscriptionInfoEntity;
 
-    public DataDefaultSubscriptionController(Context context, String preferenceKey) {
-        super(context, preferenceKey);
+    public DataDefaultSubscriptionController(Context context, String preferenceKey,
+              Lifecycle lifecycle, LifecycleOwner lifecycleOwner) {
+          super(context, preferenceKey, lifecycle, lifecycleOwner);
     }
 
     @Override
-    protected SubscriptionInfo getDefaultSubscriptionInfo() {
-        return mManager.getActiveSubscriptionInfo(getDefaultSubscriptionId());
+    protected SubscriptionInfoEntity getDefaultSubscriptionInfo() {
+        return mSubscriptionInfoEntity;
     }
+
 
     @Override
     protected int getDefaultSubscriptionId() {
-        return SubscriptionManager.getDefaultDataSubscriptionId();
+        for (SubscriptionInfoEntity subInfo : mSubInfoEntityList) {
+            if (subInfo.isActiveSubscriptionId && subInfo.isDefaultDataSubscription) {
+                mSubscriptionInfoEntity = subInfo;
+                return Integer.parseInt(subInfo.subId);
+            }
+        }
+
+        return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     }
 
     @Override

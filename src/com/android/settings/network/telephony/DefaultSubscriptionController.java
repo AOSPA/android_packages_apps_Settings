@@ -35,6 +35,7 @@ import android.util.Log;
 import android.view.View;
 
 import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
@@ -42,8 +43,12 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
-import com.android.settings.network.SubscriptionUtil;
-import com.android.settings.network.SubscriptionsChangeListener;
+import com.android.settings.network.MobileNetworkRepository;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.mobile.dataservice.DataServiceUtils;
+import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
+import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
+import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,13 +62,14 @@ import org.codeaurora.internal.IExtTelephony;
  */
 public abstract class DefaultSubscriptionController extends TelephonyBasePreferenceController
         implements LifecycleObserver, Preference.OnPreferenceChangeListener,
-        SubscriptionsChangeListener.SubscriptionsChangeListenerClient {
+        MobileNetworkRepository.MobileNetworkCallback {
     private static final String TAG = "DefaultSubController";
 
-    protected SubscriptionsChangeListener mChangeListener;
     protected ListPreference mPreference;
     protected SubscriptionManager mManager;
     protected TelecomManager mTelecomManager;
+    protected MobileNetworkRepository mMobileNetworkRepository;
+    protected LifecycleOwner mLifecycleOwner;
 
     private static final String EMERGENCY_ACCOUNT_HANDLE_ID = "E";
     private static final ComponentName PSTN_CONNECTION_SERVICE_COMPONENT =
@@ -81,12 +87,19 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
     private int[] mCallState;
     private ArrayList<SubscriptionInfo> mSelectableSubs;
 
-    public DefaultSubscriptionController(Context context, String preferenceKey) {
+    List<SubscriptionInfoEntity> mSubInfoEntityList = new ArrayList<>();
+
+    public DefaultSubscriptionController(Context context, String preferenceKey, Lifecycle lifecycle,
+            LifecycleOwner lifecycleOwner) {
         super(context, preferenceKey);
         mManager = context.getSystemService(SubscriptionManager.class);
-        mChangeListener = new SubscriptionsChangeListener(context, this);
         mIsRtlMode = context.getResources().getConfiguration().getLayoutDirection()
                 == View.LAYOUT_DIRECTION_RTL;
+        mMobileNetworkRepository = MobileNetworkRepository.create(context, this);
+        mLifecycleOwner = lifecycleOwner;
+        if (lifecycle != null) {
+            lifecycle.addObserver(this);
+        }
 
         mTelephonyManager = (TelephonyManager) mContext
                 .getSystemService(Context.TELEPHONY_SERVICE);
@@ -98,7 +111,7 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
 
     /** @return SubscriptionInfo for the default subscription for the service, or null if there
      * isn't one. */
-    protected abstract SubscriptionInfo getDefaultSubscriptionInfo();
+    protected abstract SubscriptionInfoEntity getDefaultSubscriptionInfo();
 
     /** @return the id of the default subscription for the service, or
      * SubscriptionManager.INVALID_SUBSCRIPTION_ID if there isn't one. */
@@ -125,14 +138,14 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
 
     @OnLifecycleEvent(ON_RESUME)
     public void onResume() {
-        mChangeListener.start();
+        mMobileNetworkRepository.addRegister(mLifecycleOwner);
         registerPhoneStateListener();
         updateEntries();
     }
 
     @OnLifecycleEvent(ON_PAUSE)
     public void onPause() {
-        mChangeListener.stop();
+        mMobileNetworkRepository.removeRegister();
         unRegisterPhoneStateListener();
     }
 
@@ -160,10 +173,10 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
             // display VoIP account in summary when configured through settings within dialer
             return getLabelFromCallingAccount(handle);
         }
-        final SubscriptionInfo info = getDefaultSubscriptionInfo();
+        final SubscriptionInfoEntity info = getDefaultSubscriptionInfo();
         if (info != null) {
             // display subscription based account
-            return SubscriptionUtil.getUniqueSubscriptionDisplayName(info, mContext);
+            return info.uniqueName;
         } else {
             if (isAskEverytimeSupported()) {
                 return mContext.getString(R.string.calls_and_sms_ask_every_time);
@@ -173,7 +186,8 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         }
     }
 
-    private void updateEntries() {
+    @VisibleForTesting
+    void updateEntries() {
         if (mPreference == null) {
             return;
         }
@@ -199,24 +213,24 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         // time" entry at the end.
         final ArrayList<CharSequence> displayNames = new ArrayList<>();
         final ArrayList<CharSequence> subscriptionIds = new ArrayList<>();
+        List<SubscriptionInfoEntity> list = getSubscriptionInfoList();
 
         if (mSelectableSubs.size() == 1) {
             mPreference.setEnabled(false);
-            mPreference.setSummaryProvider(pref ->
-                    SubscriptionUtil.getUniqueSubscriptionDisplayName(mSelectableSubs.get(0), mContext));
+            mPreference.setSummaryProvider(pref -> list.get(0).uniqueName);
             return;
         }
 
         final int serviceDefaultSubId = getDefaultSubscriptionId();
         boolean subIsAvailable = false;
 
-        for (SubscriptionInfo sub : mSelectableSubs) {
-            if (sub.isOpportunistic()) {
+        for (SubscriptionInfoEntity sub : list) {
+            if (sub.isOpportunistic) {
                 continue;
             }
-            displayNames.add(SubscriptionUtil.getUniqueSubscriptionDisplayName(sub, mContext));
-            final int subId = sub.getSubscriptionId();
-            subscriptionIds.add(Integer.toString(subId));
+            displayNames.add(sub.uniqueName);
+            final int subId = Integer.parseInt(sub.subId);
+            subscriptionIds.add(sub.subId);
             if (subId == serviceDefaultSubId) {
                 subIsAvailable = true;
             }
@@ -329,6 +343,11 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         return (label != null) ? label : "";
     }
 
+    @VisibleForTesting
+    protected List<SubscriptionInfoEntity> getSubscriptionInfoList() {
+        return mSubInfoEntityList;
+    }
+
     private boolean isCallStateIdle() {
         boolean callStateIdle = true;
         for (int i = 0; i < mPhoneCount; i++) {
@@ -351,12 +370,18 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
     public void onAirplaneModeChanged(boolean airplaneModeEnabled) {
     }
 
-    @Override
-    public void onSubscriptionsChanged() {
-        if (mSelectableSubs != null) mSelectableSubs.clear();
-        updateSubStatus();
+    boolean isRtlMode() {
+        return mIsRtlMode;
+    }
 
-        if (mPreference != null) {
+    @Override
+    public void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
+    }
+
+    @Override
+    public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
+        if (DataServiceUtils.shouldUpdateEntityList(mSubInfoEntityList, subInfoEntityList)) {
+            mSubInfoEntityList = subInfoEntityList;
             updateEntries();
             refreshSummary(mPreference);
         }
@@ -411,7 +436,12 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         }
     }
 
-    boolean isRtlMode() {
-        return mIsRtlMode;
+    @Override
+    public void onAllUiccInfoChanged(List<UiccInfoEntity> uiccInfoEntityList) {
+    }
+
+    @Override
+    public void onAllMobileNetworkInfoChanged(
+            List<MobileNetworkInfoEntity> mobileNetworkInfoEntityList) {
     }
 }

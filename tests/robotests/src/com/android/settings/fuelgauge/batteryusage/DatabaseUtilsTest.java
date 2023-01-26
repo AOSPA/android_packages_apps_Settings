@@ -46,7 +46,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -99,7 +98,8 @@ public final class DatabaseUtilsTest {
         doReturn(null).when(mContext).registerReceiver(any(), any());
         assertThat(
                 DatabaseUtils.sendBatteryEntryData(
-                        mContext, /*batteryEntryList=*/ null, mBatteryUsageStats))
+                        mContext, /*batteryEntryList=*/ null, mBatteryUsageStats,
+                        /*isFullChargeStart=*/ false))
                 .isNull();
     }
 
@@ -118,7 +118,8 @@ public final class DatabaseUtilsTest {
 
         final List<ContentValues> valuesList =
                 DatabaseUtils.sendBatteryEntryData(
-                        mContext, batteryEntryList, mBatteryUsageStats);
+                        mContext, batteryEntryList, mBatteryUsageStats,
+                        /*isFullChargeStart=*/ false);
 
         assertThat(valuesList).hasSize(2);
         // Verifies the ContentValues content.
@@ -141,7 +142,8 @@ public final class DatabaseUtilsTest {
                 DatabaseUtils.sendBatteryEntryData(
                         mContext,
                         new ArrayList<>(),
-                        mBatteryUsageStats);
+                        mBatteryUsageStats,
+                        /*isFullChargeStart=*/ false);
 
         assertThat(valuesList).hasSize(1);
         verifyFakeContentValues(valuesList.get(0));
@@ -159,7 +161,8 @@ public final class DatabaseUtilsTest {
                 DatabaseUtils.sendBatteryEntryData(
                         mContext,
                         /*batteryEntryList=*/ null,
-                        mBatteryUsageStats);
+                        mBatteryUsageStats,
+                        /*isFullChargeStart=*/ false);
 
         assertThat(valuesList).hasSize(1);
         verifyFakeContentValues(valuesList.get(0));
@@ -177,7 +180,8 @@ public final class DatabaseUtilsTest {
                 DatabaseUtils.sendBatteryEntryData(
                         mContext,
                         /*batteryEntryList=*/ null,
-                        /*batteryUsageStats=*/ null);
+                        /*batteryUsageStats=*/ null,
+                        /*isFullChargeStart=*/ false);
 
         assertThat(valuesList).hasSize(1);
         verifyFakeContentValues(valuesList.get(0));
@@ -231,13 +235,13 @@ public final class DatabaseUtilsTest {
         // Verifies the BatteryHistEntry data for timestamp1.
         Map<String, BatteryHistEntry> batteryMap = batteryHistMap.get(timestamp1);
         assertThat(batteryMap).hasSize(1);
-        assertThat(batteryMap.get("1").mAppLabel).isEqualTo("app name1");
+        assertThat(batteryMap.get("1").mPackageName).isEqualTo("app name1");
         // Verifies the BatteryHistEntry data for timestamp2.
         batteryMap = batteryHistMap.get(timestamp2);
         assertThat(batteryMap).hasSize(3);
-        assertThat(batteryMap.get("2").mAppLabel).isEqualTo("app name2");
-        assertThat(batteryMap.get("3").mAppLabel).isEqualTo("app name3");
-        assertThat(batteryMap.get("4").mAppLabel).isEqualTo("app name4");
+        assertThat(batteryMap.get("2").mPackageName).isEqualTo("app name2");
+        assertThat(batteryMap.get("3").mPackageName).isEqualTo("app name3");
+        assertThat(batteryMap.get("4").mPackageName).isEqualTo("app name4");
     }
 
     @Test
@@ -258,103 +262,28 @@ public final class DatabaseUtilsTest {
         assertThat(batteryHistMap).isEmpty();
     }
 
-    @Test
-    public void saveLastFullChargeTimestampPref_notFullCharge_returnsFalse() {
-        DatabaseUtils.saveLastFullChargeTimestampPref(
-                mContext,
-                BatteryManager.BATTERY_STATUS_UNKNOWN,
-                /* level */ 10,
-                /* timestamp */ 1);
-        assertThat(DatabaseUtils.getLastFullChargeTimestampPref(mContext)).isEqualTo(0);
-    }
-
-    @Test
-    public void saveLastFullChargeTimestampPref_fullStatus_returnsTrue() {
-        long expectedTimestamp = 1;
-        DatabaseUtils.saveLastFullChargeTimestampPref(
-                mContext,
-                BatteryManager.BATTERY_STATUS_FULL,
-                /* level */ 10,
-                /* timestamp */ expectedTimestamp);
-        assertThat(DatabaseUtils.getLastFullChargeTimestampPref(mContext))
-                .isEqualTo(expectedTimestamp);
-    }
-
-    @Test
-    public void saveLastFullChargeTimestampPref_level100_returnsTrue() {
-        long expectedTimestamp = 1;
-        DatabaseUtils.saveLastFullChargeTimestampPref(
-                mContext,
-                BatteryManager.BATTERY_STATUS_UNKNOWN,
-                /* level */ 100,
-                /* timestamp */ expectedTimestamp);
-        assertThat(DatabaseUtils.getLastFullChargeTimestampPref(mContext))
-                .isEqualTo(expectedTimestamp);
-    }
-
-    @Test
-    public void getStartTimestampForLastFullCharge_noTimestampPreference_returnsSixDaysAgo() {
-        Calendar currentCalendar = Calendar.getInstance();
-        currentCalendar.set(2022, 6, 5, 6, 30, 50); // 2022-07-05 06:30:50
-        Calendar expectedCalendar = Calendar.getInstance();
-        expectedCalendar.set(2022, 5, 29, 0, 0, 0); // 2022-06-29 00:00:00
-        expectedCalendar.set(Calendar.MILLISECOND, 0);
-
-        assertThat(DatabaseUtils.getStartTimestampForLastFullCharge(mContext, currentCalendar))
-                .isEqualTo(expectedCalendar.getTimeInMillis());
-    }
-
-    @Test
-    public void getStartTimestampForLastFullCharge_lastFullChargeEarlier_returnsSixDaysAgo() {
-        Calendar lastFullCalendar = Calendar.getInstance();
-        lastFullCalendar.set(2021, 11, 25, 6, 30, 50); // 2021-12-25 06:30:50
-        DatabaseUtils.saveLastFullChargeTimestampPref(
-                mContext,
-                BatteryManager.BATTERY_STATUS_UNKNOWN,
-                /* level */ 100,
-                /* timestamp */ lastFullCalendar.getTimeInMillis());
-        Calendar currentCalendar = Calendar.getInstance();
-        currentCalendar.set(2022, 0, 2, 6, 30, 50); // 2022-01-02 06:30:50
-        Calendar expectedCalendar = Calendar.getInstance();
-        expectedCalendar.set(2021, 11, 27, 0, 0, 0); // 2021-12-27 00:00:00
-        expectedCalendar.set(Calendar.MILLISECOND, 0);
-
-        assertThat(DatabaseUtils.getStartTimestampForLastFullCharge(mContext, currentCalendar))
-                .isEqualTo(expectedCalendar.getTimeInMillis());
-    }
-
-    @Test
-    public void getStartTimestampForLastFullCharge_lastFullChargeLater_returnsLastFullCharge() {
-        Calendar lastFullCalendar = Calendar.getInstance();
-        lastFullCalendar.set(2022, 6, 1, 6, 30, 50); // 2022-07-01 06:30:50
-        long expectedTimestamp = lastFullCalendar.getTimeInMillis();
-        DatabaseUtils.saveLastFullChargeTimestampPref(
-                mContext,
-                BatteryManager.BATTERY_STATUS_UNKNOWN,
-                /* level */ 100,
-                /* timestamp */ expectedTimestamp);
-        Calendar currentCalendar = Calendar.getInstance();
-        currentCalendar.set(2022, 6, 5, 6, 30, 50); // 2022-07-05 06:30:50
-
-        assertThat(DatabaseUtils.getStartTimestampForLastFullCharge(mContext, currentCalendar))
-                .isEqualTo(expectedTimestamp);
-    }
-
     private static void verifyContentValues(double consumedPower, ContentValues values) {
-        assertThat(values.getAsDouble(BatteryHistEntry.KEY_CONSUME_POWER))
-                .isEqualTo(consumedPower);
-        assertThat(values.getAsInteger(BatteryHistEntry.KEY_BATTERY_LEVEL)).isEqualTo(20);
-        assertThat(values.getAsInteger(BatteryHistEntry.KEY_BATTERY_STATUS))
+        final BatteryInformation batteryInformation =
+                ConvertUtils.getBatteryInformation(
+                        values, BatteryHistEntry.KEY_BATTERY_INFORMATION);
+        final DeviceBatteryState deviceBatteryState = batteryInformation.getDeviceBatteryState();
+        assertThat(batteryInformation.getConsumePower()).isEqualTo(consumedPower);
+        assertThat(deviceBatteryState.getBatteryLevel()).isEqualTo(20);
+        assertThat(deviceBatteryState.getBatteryStatus())
                 .isEqualTo(BatteryManager.BATTERY_STATUS_FULL);
-        assertThat(values.getAsInteger(BatteryHistEntry.KEY_BATTERY_HEALTH))
+        assertThat(deviceBatteryState.getBatteryHealth())
                 .isEqualTo(BatteryManager.BATTERY_HEALTH_COLD);
     }
 
     private static void verifyFakeContentValues(ContentValues values) {
-        assertThat(values.getAsInteger("batteryLevel")).isEqualTo(20);
-        assertThat(values.getAsInteger("batteryStatus"))
+        final BatteryInformation batteryInformation =
+                ConvertUtils.getBatteryInformation(
+                        values, BatteryHistEntry.KEY_BATTERY_INFORMATION);
+        final DeviceBatteryState deviceBatteryState = batteryInformation.getDeviceBatteryState();
+        assertThat(deviceBatteryState.getBatteryLevel()).isEqualTo(20);
+        assertThat(deviceBatteryState.getBatteryStatus())
                 .isEqualTo(BatteryManager.BATTERY_STATUS_FULL);
-        assertThat(values.getAsInteger("batteryHealth"))
+        assertThat(deviceBatteryState.getBatteryHealth())
                 .isEqualTo(BatteryManager.BATTERY_HEALTH_COLD);
         assertThat(values.getAsString("packageName"))
                 .isEqualTo(ConvertUtils.FAKE_PACKAGE_NAME);
@@ -372,7 +301,7 @@ public final class DatabaseUtilsTest {
     private static MatrixCursor getMatrixCursor() {
         return new MatrixCursor(
                 new String[] {
-                        BatteryHistEntry.KEY_APP_LABEL,
+                        BatteryHistEntry.KEY_PACKAGE_NAME,
                         BatteryHistEntry.KEY_TIMESTAMP,
                         BatteryHistEntry.KEY_UID,
                         BatteryHistEntry.KEY_CONSUMER_TYPE});
