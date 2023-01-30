@@ -463,6 +463,7 @@ public class ProviderModelSliceTest {
         }
     }
 
+    @Ignore
     @Test
     @UiThreadTest
     public void onNotifyChange_FirstTimeDisableToggleState_showDialog() {

@@ -126,7 +126,7 @@ public class MobileNetworkListController extends AbstractPreferenceController im
             } else {
                 int slotId = mSubscriptionManager.getPhoneId(subId);
                 if (mSubscriptionManager.isActiveSubscriptionId(subId) &&
-                        mSubscriptionManager.getSimStateForSlotIndex(slotId) !=
+                        TelephonyManager.getSimStateForSlotIndex(slotId) !=
                                 TelephonyManager.SIM_STATE_NOT_READY) {
                     pref.setSummary(R.string.mobile_network_active_sim);
                 } else if (SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager)) {

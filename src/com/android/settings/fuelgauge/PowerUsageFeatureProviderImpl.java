@@ -66,6 +66,11 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
+    public boolean isBatteryUsageEnabled(Context context) {
+        return true;
+    }
+
+    @Override
     public boolean isLocationSettingEnabled(String[] packages) {
         return false;
     }
@@ -152,12 +157,22 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
+    public boolean delayHourlyJobWhenBooting() {
+        return true;
+    }
+
+    @Override
     public Set<CharSequence> getHideBackgroundUsageTimeSet(Context context) {
         return new ArraySet<>();
     }
 
     @Override
-    public CharSequence[] getHideApplicationEntries(Context context) {
-        return new CharSequence[0];
+    public Set<CharSequence> getHideApplicationSet(Context context) {
+        return new ArraySet<>();
+    }
+
+    @Override
+    public Set<CharSequence> getIgnoreScreenOnTimeTaskRootSet(Context context) {
+        return new ArraySet<>();
     }
 }

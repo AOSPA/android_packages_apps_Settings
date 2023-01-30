@@ -19,6 +19,8 @@ package com.android.settings.network.telephony.gsm;
 import static androidx.lifecycle.Lifecycle.Event.ON_START;
 import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
@@ -121,8 +123,8 @@ public class OpenNetworkSelectPagePreferenceController extends
         }
 
         Intent intent = new Intent();
-        intent.setClassName("com.android.settings",
-                "com.android.settings.Settings$NetworkSelectActivity");
+        intent.setClassName(SETTINGS_PACKAGE_NAME,
+                SETTINGS_PACKAGE_NAME + ".Settings$NetworkSelectActivity");
         intent.putExtra(Settings.EXTRA_SUB_ID, mSubId);
         preference.setIntent(intent);
     }

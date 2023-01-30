@@ -2618,13 +2618,6 @@
             android:theme="@style/GlifTheme.Light"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
 
-        <activity android:name=".SetupEncryptionInterstitial"
-            android:label="@string/encryption_interstitial_header"
-            android:theme="@style/GlifTheme.Light"/>
-
-        <activity android:name=".EncryptionInterstitial"
-            android:theme="@style/GlifTheme.Light" />
-
         <activity
             android:name=".Settings$StorageDashboardActivity"
             android:label="@string/storage_settings"
@@ -4678,6 +4671,9 @@
                 <action android:name="android.telephony.action.SIM_SLOT_STATUS_CHANGED" />
             </intent-filter>
         </receiver>
+
+        <service android:name=".sim.receivers.SimSlotChangeService"
+                 android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <receiver
             android:name=".sim.receivers.SimCompleteBootReceiver"

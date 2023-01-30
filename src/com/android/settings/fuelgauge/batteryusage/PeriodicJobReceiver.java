@@ -40,8 +40,9 @@ public final class PeriodicJobReceiver extends BroadcastReceiver {
             return;
         }
         BatteryUsageDataLoader.enqueueWork(context, /*isFullChargeStart=*/ false);
+        AppUsageDataLoader.enqueueWork(context);
         Log.d(TAG, "refresh periodic job from action=" + action);
-        PeriodicJobManager.getInstance(context).refreshJob();
+        PeriodicJobManager.getInstance(context).refreshJob(/*fromBoot=*/ false);
         DatabaseUtils.clearExpiredDataIfNeeded(context);
     }
 }
