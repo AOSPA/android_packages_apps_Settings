@@ -90,6 +90,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     static final String KEY_CLICKED_PREF = "key_clicked_pref";
 
     private static final String KEY_ROAMING_PREF = "button_roaming_key";
+    private static final String KEY_DATA_PREF = "data_preference";
     private static final String KEY_CALLS_PREF = "calls_preference";
     private static final String KEY_SMS_PREF = "sms_preference";
     private static final String KEY_MOBILE_DATA_PREF = "mobile_data_enable";
@@ -193,6 +194,8 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                         this, mSubId),
                 new RoamingPreferenceController(context, KEY_ROAMING_PREF, getSettingsLifecycle(),
                         this, mSubId),
+                new DataDefaultSubscriptionController(context, KEY_DATA_PREF,
+                        getSettingsLifecycle(), this),
                 new CallsDefaultSubscriptionController(context, KEY_CALLS_PREF,
                         getSettingsLifecycle(), this),
                 new SmsDefaultSubscriptionController(context, KEY_SMS_PREF, getSettingsLifecycle(),
