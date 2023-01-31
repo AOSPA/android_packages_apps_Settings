@@ -48,6 +48,7 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.Arrays;
 import java.util.Locale;
+import java.util.Set;
 import java.util.TimeZone;
 
 @RunWith(RobolectricTestRunner.class)
@@ -86,9 +87,9 @@ public final class BatteryUsageBreakdownControllerTest {
         final Resources resources = spy(mContext.getResources());
         resources.getConfiguration().setLocales(new LocaleList(new Locale("en_US")));
         doReturn(resources).when(mContext).getResources();
-        doReturn(new String[]{"com.android.gms.persistent"})
+        doReturn(Set.of("com.android.gms.persistent"))
                 .when(mFeatureFactory.powerUsageFeatureProvider)
-                .getHideApplicationEntries(mContext);
+                .getHideApplicationSet(mContext);
         mBatteryUsageBreakdownController = createController();
         mBatteryUsageBreakdownController.mAppListPreferenceGroup = mAppListPreferenceGroup;
         mBatteryDiffEntry = new BatteryDiffEntry(
@@ -104,6 +105,8 @@ public final class BatteryUsageBreakdownControllerTest {
         mBatteryDiffEntry = spy(mBatteryDiffEntry);
         mBatteryUsageBreakdownController.mBatteryDiffData =
                 new BatteryDiffData(Arrays.asList(mBatteryDiffEntry), Arrays.asList());
+        mBatteryUsageBreakdownController.mBatteryDiffData.setTotalConsumePower();
+        mBatteryUsageBreakdownController.mBatteryDiffData.sortEntries();
         // Adds fake testing data.
         BatteryDiffEntry.sResourceCache.put(
                 "fakeBatteryDiffEntryKey",
@@ -211,7 +214,7 @@ public final class BatteryUsageBreakdownControllerTest {
                         SettingsEnums.ACTION_BATTERY_USAGE_SYSTEM_ITEM,
                         SettingsEnums.OPEN_BATTERY_USAGE,
                         /* package name */ "none",
-                        /* percentage of total */ 0);
+                        /* percentage of total */ 100);
     }
 
     @Test
@@ -227,7 +230,7 @@ public final class BatteryUsageBreakdownControllerTest {
                         SettingsEnums.ACTION_BATTERY_USAGE_APP_ITEM,
                         SettingsEnums.OPEN_BATTERY_USAGE,
                         /* package name */ "none",
-                        /* percentage of total */ 0);
+                        /* percentage of total */ 100);
     }
 
     @Test

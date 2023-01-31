@@ -39,15 +39,11 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-/**
- * Deprecated ToDo: b/260059444 remove it next version
- */
 @RunWith(AndroidJUnit4.class)
 public class BackupCallingPreferenceControllerTest {
     private static final int SUB_ID = 2;
@@ -75,7 +71,6 @@ public class BackupCallingPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void controller_isUnavailable() {
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE);

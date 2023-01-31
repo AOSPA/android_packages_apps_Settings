@@ -17,6 +17,7 @@
 
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <LinearLayout
@@ -161,13 +162,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/status_esim_id"/>
-        <TextView
-            style="@style/device_info_dialog_value"
-            android:id="@+id/esim_id_value"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textIsSelectable="true"
-            android:text="@string/device_info_not_available"/>
+
+        <include layout="@xml/esim_eid_and_qrcode" />
 
         <TextView
             style="@style/device_info_dialog_label"

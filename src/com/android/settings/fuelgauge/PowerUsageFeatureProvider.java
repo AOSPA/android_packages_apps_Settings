@@ -30,6 +30,11 @@ import java.util.Set;
 public interface PowerUsageFeatureProvider {
 
     /**
+     * Check whether the battery usage button is enabled in the battery page
+     */
+    boolean isBatteryUsageEnabled(Context context);
+
+    /**
      * Check whether location setting is enabled
      */
     boolean isLocationSettingEnabled(String[] packages);
@@ -131,17 +136,27 @@ public interface PowerUsageFeatureProvider {
     boolean isExtraDefend();
 
     /**
+     * Returns {@code true} if delay the hourly job when device is booting.
+     */
+    boolean delayHourlyJobWhenBooting();
+
+    /**
      * Gets a intent for one time bypass charge limited to resume charging.
      */
     Intent getResumeChargeIntent(boolean isDockDefender);
 
     /**
-     * Returns {@link Set} for hidding applications background usage time.
+     * Returns {@link Set} for hiding applications background usage time.
      */
     Set<CharSequence> getHideBackgroundUsageTimeSet(Context context);
 
     /**
-     * Returns package names for hidding application in the usage screen.
+     * Returns {@link Set} for hiding application package names in the usage screen.
      */
-    CharSequence[] getHideApplicationEntries(Context context);
+    Set<CharSequence> getHideApplicationSet(Context context);
+
+    /**
+     * Returns {@link Set} for ignoring task root class names for screen on time.
+     */
+    Set<CharSequence> getIgnoreScreenOnTimeTaskRootSet(Context context);
 }

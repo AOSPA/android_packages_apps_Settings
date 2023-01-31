@@ -280,7 +280,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
             final SubscriptionInfo subInfo = getVisibleSubscriptionInfoForSimSlotIndex(i);
             if (subInfo != null) {
                 final int slot = subInfo.getSimSlotIndex();
-                if (mSubscriptionManager.getSimStateForSlotIndex(slot) !=
+                if (mTelephonyManager.getSimStateForSlotIndex(slot) !=
                         TelephonyManager.SIM_STATE_NOT_READY) {
                     componenterList.add(subInfo);
                 }
