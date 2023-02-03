@@ -20,9 +20,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.sysprop.BluetoothProperties;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
@@ -30,6 +32,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.bluetooth.BluetoothDeviceRenamePreferenceController;
 import com.android.settings.bluetooth.BluetoothSwitchPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.password.PasswordUtils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.MainSwitchBarController;
 import com.android.settings.widget.SettingsMainSwitchBar;
@@ -59,6 +62,10 @@ public class BluetoothDashboardFragment extends DashboardFragment {
     private static final int BROADCAST_MASK = 0x04;
     private static boolean mBroadcastEnabled = false;
     private static boolean mBroadcastPropertyChecked = false;
+    private static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
+    private static final String SYSTEMUI_PACKAGE_NAME = "com.android.systemui";
+    private static final String SLICE_ACTION = "com.android.settings.SEARCH_RESULT_TRAMPOLINE";
+    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     private FooterPreference mFooterPreference;
     private SettingsMainSwitchBar mSwitchBar;
@@ -165,17 +172,33 @@ public class BluetoothDashboardFragment extends DashboardFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        String callingAppPackageName = PasswordUtils.getCallingAppPackageName(
+                getActivity().getActivityToken());
+        String action = getIntent() != null ? getIntent().getAction() : "";
+        if (DEBUG) {
+            Log.d(TAG, "onActivityCreated() calling package name is : " + callingAppPackageName
+                    + ", action : " + action);
+        }
 
         SettingsActivity activity = (SettingsActivity) getActivity();
         mSwitchBar = activity.getSwitchBar();
         mSwitchBar.setTitle(getContext().getString(R.string.bluetooth_main_switch_title));
         mController = new BluetoothSwitchPreferenceController(activity,
                 new MainSwitchBarController(mSwitchBar), mFooterPreference);
+        mController.setAlwaysDiscoverable(isAlwaysDiscoverable(callingAppPackageName, action));
         Lifecycle lifecycle = getSettingsLifecycle();
         if (lifecycle != null) {
             lifecycle.addObserver(mController);
         }
     }
+
+    @VisibleForTesting
+    boolean isAlwaysDiscoverable(String callingAppPackageName, String action) {
+        return TextUtils.equals(SLICE_ACTION, action) ? false
+            : TextUtils.equals(SETTINGS_PACKAGE_NAME, callingAppPackageName)
+                || TextUtils.equals(SYSTEMUI_PACKAGE_NAME, callingAppPackageName);
+    }
+
     /**
      * For Search.
      */
