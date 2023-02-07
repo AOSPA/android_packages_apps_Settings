@@ -41,6 +41,8 @@ import com.android.settings.network.telephony.Enhanced4gBasePreferenceController
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.network.telephony.TelephonyBasePreferenceController;
 
+import com.qti.extphone.ExtTelephonyManager;
+
 /**
  * Preference controller for "Open network select"
  */
@@ -132,7 +134,8 @@ public class OpenNetworkSelectPagePreferenceController extends
     @Override
     public CharSequence getSummary() {
         final ServiceState ss = mTelephonyManager.getServiceState();
-        if (ss != null && ss.getState() == ServiceState.STATE_IN_SERVICE) {
+        if (ss != null && (ss.getState() == ServiceState.STATE_IN_SERVICE
+                || isSnpnInService(ss))) {
             if (DomesticRoamUtils.isFeatureEnabled(mContext)) {
                 String registeredOperatorName = DomesticRoamUtils.getRegisteredOperatorName(
                         mContext, mSubId);
@@ -144,6 +147,12 @@ public class OpenNetworkSelectPagePreferenceController extends
         } else {
             return mContext.getString(R.string.network_disconnected);
         }
+    }
+
+    private boolean isSnpnInService(ServiceState ss) {
+        return ((MobileNetworkUtils.getAccessMode(mContext, mTelephonyManager.getSlotIndex())
+                == ExtTelephonyManager.ACCESS_MODE_SNPN)
+                && (ss.getDataRegState() == ServiceState.STATE_IN_SERVICE));
     }
 
     /**
