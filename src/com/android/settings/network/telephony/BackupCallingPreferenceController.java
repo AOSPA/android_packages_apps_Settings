@@ -226,11 +226,13 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
         IImsRegistration imsRegistrationImpl = mTelephonyManager.getImsRegistration(
                 mSubscriptionManager.getSlotIndex(mSubId), FEATURE_MMTEL);
         boolean isImsRegisteredOverCiwlan = false;
-        try {
-            isImsRegisteredOverCiwlan = imsRegistrationImpl.getRegistrationTechnology() ==
-                    REGISTRATION_TECH_CROSS_SIM;
-        } catch (RemoteException ex) {
-            Log.e(LOG_TAG, "getRegistrationTechnology failed", ex);
+        if (imsRegistrationImpl != null) {
+            try {
+                isImsRegisteredOverCiwlan = imsRegistrationImpl.getRegistrationTechnology() ==
+                        REGISTRATION_TECH_CROSS_SIM;
+            } catch (RemoteException ex) {
+                Log.e(LOG_TAG, "getRegistrationTechnology failed", ex);
+            }
         }
         boolean isCallIdle = mTelephonyManager.getCallState() == TelephonyManager.CALL_STATE_IDLE;
         Log.d(LOG_TAG, "isDialogNeeded: isChecked=" + isChecked + ", isCallIdle=" + isCallIdle +

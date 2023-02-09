@@ -244,11 +244,13 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
         IImsRegistration imsRegistrationImpl = mTelephonyManager.getImsRegistration(
                 mSubscriptionManager.getSlotIndex(mSubId), FEATURE_MMTEL);
         boolean isImsRegisteredOverCiwlan = false;
-        try {
-            isImsRegisteredOverCiwlan = imsRegistrationImpl.getRegistrationTechnology() ==
-                    REGISTRATION_TECH_CROSS_SIM;
-        } catch (RemoteException ex) {
-            Log.e(TAG, "getRegistrationTechnology failed", ex);
+        if (imsRegistrationImpl != null) {
+            try {
+                isImsRegisteredOverCiwlan = imsRegistrationImpl.getRegistrationTechnology() ==
+                        REGISTRATION_TECH_CROSS_SIM;
+            } catch (RemoteException ex) {
+                Log.e(TAG, "getRegistrationTechnology failed", ex);
+            }
         }
         Log.d(TAG, "isDialogNeeded: " + "enableData=" + enableData + ", isMultiSim=" + mIsMultiSim +
                 ", needToDisableOthers=" + needToDisableOthers + ", isImsRegisteredOverCiwlan=" +
