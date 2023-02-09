@@ -75,11 +75,12 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
             mWifiResContext = mContext.createPackageContext(WIFI_RES_PACKAGE,
                 Context.CONTEXT_INCLUDE_CODE | Context.CONTEXT_IGNORE_SECURITY);
         } catch (Exception e) {
-            Log.e(PREF_KEY, "exception in createPackageContext: " + e);
-            // this will cause Settings/tethering to fail loading
-            throw new RuntimeException(e);
+            Log.d(PREF_KEY, "exception in createPackageContext: " + e);
+            mWifiRes = null;
+            mWifiResContext = null;
         }
-        mWifiRes = mWifiResContext.getResources();
+        if (mWifiResContext != null)
+            mWifiRes = mWifiResContext.getResources();
     }
 
     private int getWifiResId(String category, String name) {
