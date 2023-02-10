@@ -26,12 +26,7 @@
     <string name="off" msgid="2898123876644709799">"Vypnuté"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Neznáme"</string>
     <string name="device_info_protected_single_press" msgid="3810785480060743677">"Klepnutím zobrazíte informácie"</string>
-    <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
-      <item quantity="few">Ešte <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> kroky a bude z vás vývojár.</item>
-      <item quantity="many">Ešte <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> kroka a bude z vás vývojár.</item>
-      <item quantity="other">Ešte <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> krokov a bude z vás vývojár.</item>
-      <item quantity="one">Ešte <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> krok a bude z vás vývojár.</item>
-    </plurals>
+    <string name="show_dev_countdown" msgid="2936506773086395069">"{count,plural, =1{Ešte # krok a bude z vás vývojár.}few{Ešte # kroky a bude z vás vývojár.}many{Ešte # kroka a bude z vás vývojár.}other{Ešte # krokov a bude z vás vývojár.}}"</string>
     <string name="show_dev_on" msgid="2840850085134853754">"Teraz ste vývojár!"</string>
     <string name="show_dev_already" msgid="7041756429707644630">"Nie je to potrebné, už ste vývojár."</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"Najprv povoľte možnosti pre vývojárov"</string>
@@ -124,7 +119,7 @@
     <string name="stylus_default_notes_app" msgid="3111290761558445874">"Systémová aplikácia na písanie poznámok"</string>
     <string name="stylus_textfield_handwriting" msgid="6962904622425646128">"Písanie dotykovým perom v textových poliach"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Ignorovať všetky stlačenia tlačidla dotykového pera"</string>
-    <string name="stylus_usi_header_title" msgid="1949011797718972583">"Dotykové pero USI"</string>
+    <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Dotykové pero"</string>
     <string name="date_and_time" msgid="1788358029823431692">"Dátum a čas"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Proxy server"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Vymazať"</string>
@@ -162,12 +157,15 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Výber jazyka pre túto aplikáciu nie je v Nastaveniach k dispozícii."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Jazyk môže byť iný, ako sú tie, ktoré sú k dispozícii v aplikácii. Niektoré aplikácie nemusia toto nastavenie podporovať."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Zobrazujú sa tu iba aplikácie, ktoré podporujú výber jazyka."</string>
-    <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
-      <item quantity="few">Odstrániť vybraté jazyky?</item>
-      <item quantity="many">Odstrániť vybraté jazyky?</item>
-      <item quantity="other">Odstrániť vybraté jazyky?</item>
-      <item quantity="one">Odstrániť vybratý jazyk?</item>
-    </plurals>
+    <string name="regional_preferences_title" msgid="4304567374498629528">"Regionálne predvoľby"</string>
+    <string name="regional_preferences_summary" msgid="1189876997389469650">"Nastavenie predvolieb jednotiek a čísiel"</string>
+    <string name="regional_preferences_main_page_sub_title" msgid="4666033861956272891">"Aplikácie môžu prispôsobovať vaše prostredie pomocou regionálnych predvolieb"</string>
+    <string name="temperature_preferences_title" msgid="5009881556503629058">"Teplota"</string>
+    <string name="calendar_preferences_title" msgid="8312485828206542600">"Kalendár"</string>
+    <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Prvý deň v týždni"</string>
+    <string name="numbers_preferences_title" msgid="6094837605398562369">"Čísla"</string>
+    <string name="default_string_of_regional_preference" msgid="1595774718180886349">"[Žiadna predvoľba]"</string>
+    <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Chcete vybraný jazyk odstrániť?}few{Chcete vybrané jazyky odstrániť?}many{Remove selected languages?}other{Chcete vybrané jazyky odstrániť?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Text sa zobrazí v inom jazyku."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Nie je možné odstrániť všetky jazyky"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Ponechajte aspoň jeden preferovaný jazyk"</string>
@@ -186,6 +184,7 @@
     <string name="apply" msgid="7834684883190163536">"Použiť"</string>
     <string name="share" msgid="8502235338607613795">"Zdieľať"</string>
     <string name="add" msgid="8335206931421683426">"Pridať"</string>
+    <string name="remove" msgid="1028414219245072102">"Odstrániť"</string>
     <string name="settings_label" msgid="943294133671632976">"Nastavenia"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"Nastavenia"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"Odkaz na nastavenia"</string>
@@ -197,6 +196,7 @@
     <string name="roaming_warning" msgid="7703647889040229013">"Môžu sa účtovať poplatky za roaming."</string>
     <string name="date_time_auto" msgid="4239202185055225869">"Nastaviť čas automaticky"</string>
     <string name="zone_auto_title" msgid="5141692422373097957">"Nastavovať automaticky"</string>
+    <string name="auto_zone_requires_location_summary" msgid="4831038184260596735">"Keď bude tento prepínač zapnutý, pomocou polohy sa nastaví časové pásmo"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Používať miestny predvolený formát"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Používať 24-hodinový formát"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Čas"</string>
@@ -225,12 +225,7 @@
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"Napr. Petrov Android"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"Poloha"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Používať polohu"</string>
-    <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
-      <item quantity="few">Zapnuté – <xliff:g id="COUNT_1">%1$d</xliff:g> aplikácie majú prístup k polohe</item>
-      <item quantity="many">On - <xliff:g id="COUNT_1">%1$d</xliff:g> apps have access to location</item>
-      <item quantity="other">Zapnuté – <xliff:g id="COUNT_1">%1$d</xliff:g> aplikácií má prístup k polohe</item>
-      <item quantity="one">Zapnuté – <xliff:g id="COUNT_0">%1$d</xliff:g> aplikácia má prístup k polohe</item>
-    </plurals>
+    <string name="location_settings_summary_location_on" msgid="7029728269719893381">"{count,plural, =1{Zapnuté – # aplikácia má prístup k polohe}few{Zapnuté – # aplikácie majú prístup k polohe}many{On - # apps have access to location}other{Zapnuté – # aplikácií má prístup k polohe}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Načítava sa…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Aplikácie s povolením pre zariadenia v okolí môžu rozpoznať relatívnu pozíciu pripojených zariadení."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Prístup aplikácií a služieb k polohe je vypnutý. Poloha zariadenia však stále môže byť odoslaná pracovníkom záchranného systému, keď zavoláte na tiesňovú linku alebo na ňu pošlete textovú správu."</string>
@@ -310,12 +305,7 @@
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Pri používaní odomknutia odtlačkom prsta"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Odtlačok pre prácu"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Pridať odtlačok prsta"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="6897454766137108776">
-      <item quantity="few">Boli pridané <xliff:g id="COUNT">%1$d</xliff:g> odltačky prsta</item>
-      <item quantity="many"><xliff:g id="COUNT">%1$d</xliff:g> fingerprints added</item>
-      <item quantity="other">Bolo pridaných <xliff:g id="COUNT">%1$d</xliff:g> odtlačkov prsta</item>
-      <item quantity="one">Odtlačok prsta bol pridaný</item>
-    </plurals>
+    <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Bol pridaný odtlačok prsta}few{Boli pridané # odtlačky prsta}many{# fingerprints added}other{Bolo pridaných # odtlačkov prsta}}"</string>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Nastavenie odtlačku prsta"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Povoľte odomk. odtlačk. prsta"</string>
@@ -538,75 +528,20 @@
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"Ak pri ďalšom pokuse zadáte nesprávny vzor, váš pracovný profil a jeho dáta budú odstránené"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Ak pri ďalšom pokuse zadáte nesprávny PIN, váš pracovný profil a jeho dáta budú odstránené"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Ak pri ďalšom pokuse zadáte nesprávne heslo, váš pracovný profil a jeho dáta budú odstránené"</string>
-    <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
-      <item quantity="few">Musí mať aspoň <xliff:g id="COUNT_1">%d</xliff:g> znaky</item>
-      <item quantity="many">Must be at least <xliff:g id="COUNT_1">%d</xliff:g> characters</item>
-      <item quantity="other">Musí mať aspoň <xliff:g id="COUNT_1">%d</xliff:g> znakov</item>
-      <item quantity="one">Musí mať aspoň <xliff:g id="COUNT_0">%d</xliff:g> znak</item>
-    </plurals>
+    <string name="lockpassword_password_too_short" msgid="1938086368137797700">"{count,plural, =1{Musí mať aspoň # znak}few{Musí mať aspoň # znaky}many{Must be at least # characters}other{Musí mať aspoň # znakov}}"</string>
     <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Ak používate iba čísla, heslo musí mať aspoň jednu číslicu}few{Ak používate iba čísla, heslo musí mať aspoň # číslice}many{If using only numbers, must be at least # digits}other{Ak používate iba čísla, heslo musí mať aspoň # číslic}}"</string>
-    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
-      <item quantity="few">PIN musí mať aspoň <xliff:g id="COUNT_1">%d</xliff:g> číslice</item>
-      <item quantity="many">PIN must be at least <xliff:g id="COUNT_1">%d</xliff:g> digits</item>
-      <item quantity="other">PIN musí mať aspoň <xliff:g id="COUNT_1">%d</xliff:g> číslic</item>
-      <item quantity="one">PIN musí mať aspoň ako <xliff:g id="COUNT_0">%d</xliff:g> číslicu</item>
-    </plurals>
-    <plurals name="lockpassword_password_too_long" formatted="false" msgid="8118091957172967677">
-      <item quantity="few">Musí mať menej ako <xliff:g id="NUMBER_1">%d</xliff:g> znaky</item>
-      <item quantity="many">Must be fewer than <xliff:g id="NUMBER_1">%d</xliff:g> characters</item>
-      <item quantity="other">Musí mať menej ako <xliff:g id="NUMBER_1">%d</xliff:g> znakov</item>
-      <item quantity="one">Musí mať menej ako <xliff:g id="NUMBER_0">%d</xliff:g> znak</item>
-    </plurals>
-    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="8706992338720310765">
-      <item quantity="few">Musí mať menej ako <xliff:g id="NUMBER_1">%d</xliff:g> číslice</item>
-      <item quantity="many">Must be fewer than <xliff:g id="NUMBER_1">%d</xliff:g> digits</item>
-      <item quantity="other">Musí mať menej ako <xliff:g id="NUMBER_1">%d</xliff:g> číslic</item>
-      <item quantity="one">Musí mať menej ako <xliff:g id="NUMBER_0">%d</xliff:g> číslicu</item>
-    </plurals>
+    <string name="lockpassword_pin_too_short" msgid="8910105226463085689">"{count,plural, =1{PIN musí mať aspoň # číslicu}few{PIN musí mať aspoň # číslice}many{PIN must be at least # digits}other{PIN musí mať aspoň # číslic}}"</string>
+    <string name="lockpassword_password_too_long" msgid="1940345313260498308">"{count,plural, =1{Musí mať menej ako # znak}few{Musí mať menej ako # znaky}many{Must be fewer than # characters}other{Musí mať menej ako # znakov}}"</string>
+    <string name="lockpassword_pin_too_long" msgid="1678212054564388576">"{count,plural, =1{Musí mať menej ako # číslicu}few{Musí mať menej ako # číslice}many{Must be fewer than # digits}other{Musí mať menej ako # číslic}}"</string>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"Správca zariadenia neumožňuje používať nedávny kód PIN"</string>
     <string name="lockpassword_illegal_character" msgid="3434031212215886433">"Musí obsahovať iba platné znaky"</string>
-    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="2385916409676839024">
-      <item quantity="few">Musí obsahovať aspoň <xliff:g id="COUNT">%d</xliff:g> písmená</item>
-      <item quantity="many">Musí obsahovať aspoň <xliff:g id="COUNT">%d</xliff:g> písmena</item>
-      <item quantity="other">Musí obsahovať aspoň <xliff:g id="COUNT">%d</xliff:g> písmen</item>
-      <item quantity="one">Musí obsahovať aspoň 1 písmeno</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="2057467885488612701">
-      <item quantity="few">Musí obsahovať aspoň <xliff:g id="COUNT">%d</xliff:g> malé písmená</item>
-      <item quantity="many">Musí obsahovať aspoň <xliff:g id="COUNT">%d</xliff:g> malého písmena</item>
-      <item quantity="other">Musí obsahovať aspoň <xliff:g id="COUNT">%d</xliff:g> malých písmen</item>
-      <item quantity="one">Musí obsahovať aspoň 1 malé písmeno</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="4541266279643052025">
-      <item quantity="few">Musí obsahovať aspoň <xliff:g id="COUNT">%d</xliff:g> veľké písmená</item>
-      <item quantity="many">Musí obsahovať aspoň <xliff:g id="COUNT">%d</xliff:g> veľkého písmena</item>
-      <item quantity="other">Musí obsahovať aspoň <xliff:g id="COUNT">%d</xliff:g> veľkých písmen</item>
-      <item quantity="one">Musí obsahovať aspoň 1 veľké písmeno</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="70617964591376248">
-      <item quantity="few">Musí obsahovať aspoň <xliff:g id="COUNT">%d</xliff:g> čísla</item>
-      <item quantity="many">Musí obsahovať aspoň <xliff:g id="COUNT">%d</xliff:g> čísla</item>
-      <item quantity="other">Musí obsahovať aspoň <xliff:g id="COUNT">%d</xliff:g> čísel</item>
-      <item quantity="one">Musí obsahovať aspoň 1 číslo</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="7981236881269921943">
-      <item quantity="few">Musí obsahovať aspoň <xliff:g id="COUNT">%d</xliff:g> špeciálne symboly</item>
-      <item quantity="many">Musí obsahovať aspoň <xliff:g id="COUNT">%d</xliff:g> špeciálneho symbolu</item>
-      <item quantity="other">Musí obsahovať aspoň <xliff:g id="COUNT">%d</xliff:g> špeciálnych symbolov</item>
-      <item quantity="one">Musí obsahovať aspoň 1 špeciálny symbol</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="1567877061888948467">
-      <item quantity="few">Musí obsahovať aspoň <xliff:g id="COUNT">%d</xliff:g> znaky, ktoré nie sú písmená</item>
-      <item quantity="many">Musí obsahovať aspoň <xliff:g id="COUNT">%d</xliff:g> znaku, ktorý nie je písmeno</item>
-      <item quantity="other">Musí obsahovať aspoň <xliff:g id="COUNT">%d</xliff:g> znakov, ktoré nie sú písmená</item>
-      <item quantity="one">Musí obsahovať aspoň 1 znak, ktorý nie je písmeno</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_nonnumerical" formatted="false" msgid="5056743974888384475">
-      <item quantity="few">Musí obsahovať aspoň <xliff:g id="COUNT">%d</xliff:g> znaky, ktoré nie sú číslice</item>
-      <item quantity="many">Musí obsahovať aspoň <xliff:g id="COUNT">%d</xliff:g> znakov, ktoré nie sú číslice</item>
-      <item quantity="other">Musí obsahovať aspoň <xliff:g id="COUNT">%d</xliff:g> znakov, ktoré nie sú číslice</item>
-      <item quantity="one">Musí obsahovať aspoň jeden znak, ktorý nie je číslica</item>
-    </plurals>
+    <string name="lockpassword_password_requires_letters" msgid="7058340182953750553">"{count,plural, =1{Musí obsahovať aspoň 1 písmeno}few{Musí obsahovať aspoň # písmená}many{Must contain at least # letters}other{Musí obsahovať aspoň # písmen}}"</string>
+    <string name="lockpassword_password_requires_lowercase" msgid="3286121470522077547">"{count,plural, =1{Musí obsahovať aspoň 1 malé písmeno}few{Musí obsahovať aspoň # malé písmená}many{Must contain at least # lowercase letters}other{Musí obsahovať aspoň # malých písmen}}"</string>
+    <string name="lockpassword_password_requires_uppercase" msgid="720312543910397772">"{count,plural, =1{Musí obsahovať aspoň 1 veľké písmeno}few{Musí obsahovať aspoň # veľké písmená}many{Must contain at least # uppercase letters}other{Musí obsahovať aspoň # veľkých písmen}}"</string>
+    <string name="lockpassword_password_requires_numeric" msgid="3886918493600507548">"{count,plural, =1{Musí obsahovať aspoň 1 číslicu}few{Musí obsahovať aspoň # číslice}many{Must contain at least # numerical digits}other{Musí obsahovať aspoň # číslic}}"</string>
+    <string name="lockpassword_password_requires_symbols" msgid="2904870551002210131">"{count,plural, =1{Musí obsahovať aspoň 1 špeciálny symbol}few{Musí obsahovať aspoň # špeciálne symboly}many{Must contain at least # special symbols}other{Musí obsahovať aspoň # špeciálnych symbolov}}"</string>
+    <string name="lockpassword_password_requires_nonletter" msgid="1185342065898300006">"{count,plural, =1{Musí obsahovať aspoň 1 znak, ktorý nie je písmeno}few{Musí obsahovať aspoň # znaky, ktoré nie sú písmená}many{Must contain at least # non-letter characters}other{Musí obsahovať aspoň # znakov, ktoré nie sú písmená}}"</string>
+    <string name="lockpassword_password_requires_nonnumerical" msgid="389687423482993365">"{count,plural, =1{Musí obsahovať aspoň 1 znak, ktorý nie je číslica}few{Musí obsahovať aspoň # znaky, ktoré nie sú číslice}many{Must contain at least # non-numerical characters}other{Musí obsahovať aspoň # znakov, ktoré nie sú číslice}}"</string>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"Správca zariadenia neumožňuje používať nedávne heslo"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"Vzostupná, zostupná alebo opakovaná sekvencia čísiel nie je povolená"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"Potvrdiť"</string>
@@ -616,21 +551,11 @@
     <string name="lockpattern_tutorial_continue_label" msgid="1329049481210689408">"Ďalej"</string>
     <string name="manage_device_admin" msgid="1044620606203916275">"Aplikácie na správu zariadenia"</string>
     <string name="number_of_device_admins_none" msgid="152926922020437312">"Žiadne aktívne aplikácie"</string>
-    <plurals name="number_of_device_admins" formatted="false" msgid="2528735319390151989">
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> aktívne aplikácie</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> aktívnej aplikácie</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> aktívnych aplikácií</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> aktívna aplikácia</item>
-    </plurals>
+    <string name="number_of_device_admins" msgid="3402909995362162876">"{count,plural, =1{# aktívna aplikácia}few{# aktívne aplikácie}many{# active apps}other{# aktívnych aplikácií}}"</string>
     <string name="manage_trust_agents" msgid="6410149930029992356">"Agenty dôvery"</string>
     <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"Pred použitím treba nastaviť zámku obrazovky"</string>
     <string name="manage_trust_agents_summary" msgid="6423843123607674286">"Žiadne"</string>
-    <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="5438047398376802735">
-      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> aktívne agenty dôvery</item>
-      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> aktívneho agenta dôvery</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aktívnych agentov dôvery</item>
-      <item quantity="one">1 aktívny agent dôvery</item>
-    </plurals>
+    <string name="manage_trust_agents_summary_on" msgid="3302574418419446146">"{count,plural, =1{1 aktívny agent dôvery}few{# aktívne agenty dôvery}many{# active trust agents}other{# aktívnych agentov dôvery}}"</string>
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Spárovať so zariadením <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
@@ -652,8 +577,7 @@
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Keď je zapnuté pripojenie Bluetooth, zariadenie môže komunikovať s ostatnými zariadeniami s funkciou Bluetooth v okolí."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Keď je zapnuté rozhranie Bluetooth, zariadenie môže komunikovať s ostatnými zariadeniami s rozhraním Bluetooth v okolí.\n\nNa zlepšenie prostredia zariadenia môžu aplikácie a služby kedykoľvek vyhľadávať zariadenia v okolí, a to aj vtedy, keď je rozhranie Bluetooth vypnuté. Vďaka tomu je napríklad možné zlepšiť funkcie a služby podmienené polohou. Môžete to zmeniť v "<annotation id="link">"nastaveniach vyhľadávania rozhraním Bluetooth"</annotation>"."</string>
     <string name="device_details_title" msgid="1155622417516195481">"O zariadení"</string>
-    <!-- no translation found for bluetooth_device_keyboard_settings_preference_title (3411693160917620519) -->
-    <skip />
+    <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Nastavenia klávesnice"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Adresa Bluetooth zariadenia: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Adresa zariadenia Bluetooth:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Zabudnúť zariadenie?"</string>
@@ -847,24 +771,9 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Nepodarilo sa uložiť sieť"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Zrušiť"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Odstrániť sieť?"</string>
-    <plurals name="wifi_saved_access_points_summary" formatted="false" msgid="2802436466732147888">
-      <item quantity="few">%d siete</item>
-      <item quantity="many">%d siete</item>
-      <item quantity="other">%d sietí</item>
-      <item quantity="one">1 sieť</item>
-    </plurals>
-    <plurals name="wifi_saved_passpoint_access_points_summary" formatted="false" msgid="5802057518058840450">
-      <item quantity="few">%d odbery</item>
-      <item quantity="many">%d subscriptions</item>
-      <item quantity="other">%d odberov</item>
-      <item quantity="one">1 odber</item>
-    </plurals>
-    <plurals name="wifi_saved_all_access_points_summary" formatted="false" msgid="5125849180309374451">
-      <item quantity="few">%d siete a odbery</item>
-      <item quantity="many">%d networks &amp; subscriptions</item>
-      <item quantity="other">%d sietí a odberov</item>
-      <item quantity="one">1 sieť a odber</item>
-    </plurals>
+    <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 sieť}few{# siete}many{# networks}other{# sietí}}"</string>
+    <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 odber}few{# odbery}many{# subscriptions}other{# odberov}}"</string>
+    <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 sieť a odber}few{# siete a odbery}many{# networks &amp; subscriptions}other{# sietí a odberov}}"</string>
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"Adresa MAC zariadenia"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"Náhodná adresa MAC"</string>
@@ -1059,8 +968,7 @@
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Pri nabíjaní"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Pri vložení do doku"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Nikdy"</string>
-    <!-- no translation found for screensaver_settings_summary_on (4210827304351483645) -->
-    <skip />
+    <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"Zapnuté / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Vypnuté"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Čas spustenia"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Prebudiť zdvihnutím"</string>
@@ -1097,12 +1005,7 @@
     <string name="sim_preferred_title" msgid="8850185380445309835">"Aktualizovať pref. SIM kartu?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> je jediná SIM karta v zariadení. Chcete ju použiť na mobilné dáta, hovory a správy SMS?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"Nesprávny kód PIN SIM karty. Teraz musíte kontaktovať svojho operátora, aby vám odomkol zariadenie."</string>
-    <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
-      <item quantity="few">Nesprávny kód PIN SIM karty. Zostávajú vám <xliff:g id="NUMBER_1">%d</xliff:g> pokusy.</item>
-      <item quantity="many">Nesprávny kód PIN SIM karty. Zostáva vám <xliff:g id="NUMBER_1">%d</xliff:g> pokusu.</item>
-      <item quantity="other">Nesprávny kód PIN SIM karty. Zostáva vám <xliff:g id="NUMBER_1">%d</xliff:g> pokusov.</item>
-      <item quantity="one">Nesprávny kód PIN SIM karty. Zostáva vám <xliff:g id="NUMBER_0">%d</xliff:g> pokus, potom budete musieť kontaktovať svojho operátora, aby vám odomkol zariadenie.</item>
-    </plurals>
+    <string name="wrong_pin_code" msgid="8124222991071607958">"{count,plural, =1{Nesprávny kód PIN SIM karty. Zostáva vám # pokus, potom budete musieť požiadať svojho operátora o odomknutie zariadenia.}few{Nesprávny kód PIN SIM karty. Zostávajú vám # pokusy.}many{Incorrect SIM PIN code, you have # remaining attempts.}other{Nesprávny kód PIN SIM karty. Zostáva vám # pokusov.}}"</string>
     <string name="wrong_pin_code_one" msgid="6924852214263071441">"Nesprávny kód PIN SIM karty. Zostáva vám jeden pokus, inak budete musieť kontaktovať operátora, aby vám odomkol zariadenie."</string>
     <string name="pin_failed" msgid="3726505565797352255">"Operácia kódu PIN SIM karty zlyhala!"</string>
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"Aktualizácie systému"</string>
@@ -1120,6 +1023,8 @@
     <string name="storage_settings" msgid="7472188817781592677">"Priestor"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"Ukladací priestor a vyrovnávacia pamäť"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Nastavenia úložiska"</string>
+    <string name="status_eid" msgid="7532406028683438634">"EID"</string>
+    <string name="eid_multi_sim" msgid="4581966600904959452">"EID (slot pre SIM kartu %1$d)"</string>
     <string name="imei_multi_sim" msgid="71477088017585479">"IMEI (%1$d. slot na SIM kartu)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Zobrazte výberom uloženej siete"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
@@ -1206,6 +1111,8 @@
     <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"<xliff:g id="NAME">^1</xliff:g> môžete začať používať"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Stav batérie"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Nabitie batérie"</string>
+    <string name="communal_settings_title" msgid="2845678473945902115">"Spoločné"</string>
+    <string name="communal_settings_summary" msgid="4923914136953940317">"Spoločné nastavenia"</string>
     <string name="apn_settings" msgid="4295467389400441299">"Prístupové body"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Upraviť prístupový bod"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"Nenastavené"</string>
@@ -1246,12 +1153,9 @@
     <string name="menu_restore" msgid="4310539620115151551">"Resetovať na predvolené"</string>
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"Predvolené nastavenia APN boli obnovené."</string>
     <string name="reset_dashboard_title" msgid="7423200250697886918">"Možnosti resetovania"</string>
-    <!-- no translation found for reset_mobile_network_settings_title (5616713931258506842) -->
-    <skip />
-    <!-- no translation found for reset_mobile_network_settings_desc (7292636387692165727) -->
-    <skip />
-    <!-- no translation found for reset_mobile_network_settings_confirm_title (7510965634669511241) -->
-    <skip />
+    <string name="reset_mobile_network_settings_title" msgid="5616713931258506842">"Resetovať nastavenia mobilnej siete"</string>
+    <string name="reset_mobile_network_settings_desc" msgid="7292636387692165727">"Týmto resetujete všetky nastavenia mobilnej siete"</string>
+    <string name="reset_mobile_network_settings_confirm_title" msgid="7510965634669511241">"Reset. nastavenia mob. siete?"</string>
     <string name="reset_bluetooth_wifi_title" msgid="4113071322344697317">"Resetovanie rozhrania Bluetooth a pripojenia Wi‑Fi"</string>
     <string name="reset_bluetooth_wifi_desc" msgid="4030295669083059711">"Týmto sa resetujú všetky nastavenia rozhrania Bluetooth a pripojenia Wi‑Fi. Túto akciu nemôžete vrátiť späť."</string>
     <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"Resetovať"</string>
@@ -1340,12 +1244,7 @@
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Poloha pre pracovný profil"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Prístup aplikácií k polohe"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Poloha je vypnutá"</string>
-    <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
-      <item quantity="few"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> z(o) <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> aplikácií majú prístup k polohe</item>
-      <item quantity="many"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> of <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> apps have access to location</item>
-      <item quantity="other"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> z(o) <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> aplikácií má prístup k polohe</item>
-      <item quantity="one"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_0">%1$d</xliff:g> z <xliff:g id="TOTAL_LOCATION_APP_COUNT_1">%2$d</xliff:g> aplikácií má prístup k polohe</item>
-    </plurals>
+    <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{Prístup k polohe má # z {total} aplikácií}few{Prístup k polohe majú # z {total} aplikácií}many{# of {total} apps have access to location}other{Prístup k polohe má # z {total} aplikácií}}"</string>
     <string name="location_category_recent_location_access" msgid="2558063524482178146">"Nedávny prístup"</string>
     <string name="location_recent_location_access_see_all" msgid="4203102419355323325">"Zobraziť všetko"</string>
     <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"Zobraziť podrobnosti"</string>
@@ -1360,9 +1259,15 @@
     <string name="location_services_preference_title" msgid="604317859531782159">"Služby určovania polohy"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"Služby určovania polohy"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"Používať polohu"</string>
+    <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"Časové pásmo sa nedá nastaviť automaticky"</string>
+    <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
+    <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"Poloha alebo služby určovania polohy sú vypnuté"</string>
+    <string name="location_time_zone_detection_status_summary_blocked_by_environment" msgid="2279833212923765802"></string>
+    <string name="location_time_zone_detection_status_summary_temporarily_unavailable" msgid="6586801403644278967"></string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"Vyžaduje sa poloha zariadenia"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_message" msgid="5846316326139169523">"Ak chcete pomocou polohy nastaviť časové pásmo, zapnite polohu a aktualizujte nastavenia časového pásma"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"Nastavenia polohy"</string>
+    <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"Opraviť"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"Zrušiť"</string>
     <string name="location_time_zone_detection_auto_is_off" msgid="6264253990141650280">"Automatické zisťovanie časového pásma je vypnuté"</string>
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"Zisťovanie časového pásma podľa polohy je deaktivované"</string>
@@ -1486,12 +1391,7 @@
     <string name="install_applications" msgid="3921609656584369901">"Neznáme zdroje"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"Povoliť všet. zdroje aplikácií"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Nedávno spustené aplikácie"</string>
-    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
-      <item quantity="few">Zobraziť všetky %1$d aplikácie</item>
-      <item quantity="many">See all %1$d apps</item>
-      <item quantity="other">Zobraziť všetkých %1$d aplikácií</item>
-      <item quantity="one">Zobraziť všetky aplikácie</item>
-    </plurals>
+    <string name="see_all_apps_title" msgid="1650653853942381797">"{count,plural, =1{Zobraziť všetky aplikácie}few{Zobraziť všetky # aplikácie}many{See all # apps}other{Zobraziť všetkých # aplikácií}}"</string>
     <string name="forgot_password_title" msgid="3967873480875239885">"Kontaktujte správcu IT"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"Môže vám pomôcť resetovať PIN, vzor alebo heslo"</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Rozšírené nastavenia"</string>
@@ -1505,12 +1405,7 @@
     <string name="cache_header_label" msgid="2441967971921741047">"Vyrovnávacia pamäť"</string>
     <string name="clear_cache_btn_text" msgid="8597272828928143723">"Vymazať vyrovnávaciu pamäť"</string>
     <string name="cache_size_label" msgid="313456088966822757">"Vyrovnávacia pamäť"</string>
-    <plurals name="uri_permissions_text" formatted="false" msgid="8212425823423508096">
-      <item quantity="few">%d položky</item>
-      <item quantity="many">%d položky</item>
-      <item quantity="other">%d položiek</item>
-      <item quantity="one">1 položka</item>
-    </plurals>
+    <string name="uri_permissions_text" msgid="8406345863117405105">"{count,plural, =1{1 položka}few{# položky}many{# items}other{# položiek}}"</string>
     <string name="clear_uri_btn_text" msgid="4828117421162495134">"Zrušiť prístup"</string>
     <string name="controls_label" msgid="8671492254263626383">"Ovládacie prvky"</string>
     <string name="force_stop" msgid="2681771622136916280">"Vynútiť zastavenie"</string>
@@ -1651,16 +1546,46 @@
     <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Dostupná klávesnica na obrazovke"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Spravovať klávesnice na obrazovke"</string>
-    <!-- no translation found for keyboard_options_category (8040137073401152608) -->
-    <skip />
+    <string name="keyboard_options_category" msgid="8040137073401152608">"Možnosti"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Fyzická klávesnica"</string>
     <string name="show_ime" msgid="4334255501724746849">"Používať klávesnicu na obrazovke"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Ponechať na obrazovke, keď je aktívna fyzická klávesnica"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Klávesové skratky"</string>
-    <!-- no translation found for keyboard_shortcuts_helper_summary (5979507677602559203) -->
-    <skip />
+    <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Zobrazenie zoznamu skratiek"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Klávesnice a nástroje pracovného profilu"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Klávesnica na obrazovke na prácu"</string>
+    <string name="trackpad_settings" msgid="2071131324087677005">"Touchpad"</string>
+    <string name="trackpad_mouse_settings" msgid="136226693583218429">"Touchpad a myš"</string>
+    <string name="trackpad_settings_summary" msgid="3369855644136760402">"Rýchlosť kurzora, gestá"</string>
+    <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Kliknutie klepnutím"</string>
+    <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"Gestá touchpadu"</string>
+    <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Prispôsobte si jednotlivé navigačné gestá touchpadu"</string>
+    <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Obrátené posúvanie"</string>
+    <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Pri posúvaní nadol sa obsah pohybuje nahor"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Klepnutie vpravo dole"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Viac zobrazíte klepnutím do pravého dolného rohu touchpadu"</string>
+    <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Rýchlosť kurzora"</string>
+    <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Naučiť sa gestá touchpadu"</string>
+    <string name="trackpad_go_back_title" msgid="5312164160947491440">"Prejdenie späť"</string>
+    <string name="trackpad_go_back_summary" msgid="4201901101085902768">"Potiahnite troma prstami doľava alebo doprava"</string>
+    <string name="trackpad_go_home_title" msgid="2146525662148291552">"Prejdenie na plochu"</string>
+    <string name="trackpad_go_home_summary" msgid="2222744701528360887">"Potiahnite troma prstami"</string>
+    <string name="trackpad_recent_apps_title" msgid="8195970908411585445">"Nedávne aplikácie"</string>
+    <string name="trackpad_recent_apps_summary" msgid="2685092851677573794">"Potiahnite troma prstami a pridržte ich"</string>
+    <string name="trackpad_notifications_title" msgid="3521663305043747880">"Upozornenia"</string>
+    <string name="trackpad_notifications_summary" msgid="7663647367648690040">"Potiahnite troma prstami nadol"</string>
+    <string name="trackpad_switch_apps_title" msgid="7342032935377284039">"Prepínanie aplikácií"</string>
+    <string name="trackpad_switch_apps_summary" msgid="9193942041912927440">"Potiahnite štyrmi prstami doľava alebo doprava"</string>
+    <string name="modifier_keys_settings" msgid="2537108435032034683">"Klávesy modifikátora"</string>
+    <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Zmena správania klávesov"</string>
+    <string name="modifier_keys_reset_title" msgid="948294258402761066">"Resetovať všetky"</string>
+    <string name="modifier_keys_default_summary" msgid="8701640508670973258">"Predvolené"</string>
+    <string name="modifier_keys_reset_message" msgid="5236994817619936058">"Naozaj chcete resetovať všetky klávesy modifikátora na predvolené?"</string>
+    <string name="modifier_keys_done" msgid="8196199314913909700">"Hotovo"</string>
+    <string name="modifier_keys_cancel" msgid="7136520252570826772">"Zrušiť"</string>
+    <string name="modifier_keys_restore" msgid="7627661630556839268">"Obnoviť"</string>
+    <string name="modifier_keys_picker_title" msgid="244545904150587851">"Vyberte kláves modifikátora"</string>
+    <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Vyberte pre <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g> nový kláves:"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Predvolené"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Reč"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Rýchlosť kurzora"</string>
@@ -1672,8 +1597,7 @@
     <string name="keyboard_layout_dialog_switch_hint" msgid="3303564123674979354">"Prepnite klávesmi ctrl-space"</string>
     <string name="keyboard_layout_default_label" msgid="6078569989261528039">"Predvolené"</string>
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"Rozloženia klávesnice"</string>
-    <!-- no translation found for keyboard_layout_picker_category_title (2369473692906329772) -->
-    <skip />
+    <string name="keyboard_layout_picker_category_title" msgid="2369473692906329772">"Rozloženia fyzickej klávesnice"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"Osobný slovník"</string>
     <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"Osobný slovník pre prácu"</string>
     <string name="user_dict_settings_summary" msgid="4939694372338975081">"Pridajte slová, ktoré sa majú použiť v aplikáciách, ako je Kontrola pravopisu"</string>
@@ -1698,8 +1622,7 @@
     <string name="keyboard_settings_summary" msgid="2716339620942356432">"Klávesnica na obrazovke, reč, nástroje"</string>
     <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"Klávesnica na obrazovke, fyzická klávesnica, reč, nástroje"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Fyzická klávesnica"</string>
-    <!-- no translation found for enabled_locales_keyboard_layout (3939886151098958639) -->
-    <skip />
+    <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"Rozloženie"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"Vyberte modul gadget"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"Vyberte miniaplikáciu"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="3537968409832846255">"Vytvoriť miniaplikáciu a povoliť prístup?"</string>
@@ -1979,30 +1902,10 @@
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Tmavšie"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"Jasnejšie"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Po reštartovaní zariadenia ponechať zapnuté"</string>
-    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
-      <item quantity="few">Krátke (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
-      <item quantity="many">Krátke (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
-      <item quantity="other">Krátke (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekúnd)</item>
-      <item quantity="one">Krátke (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekunda)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
-      <item quantity="few">Stredné (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
-      <item quantity="many">Stredné (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
-      <item quantity="other">Stredné (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekúnd)</item>
-      <item quantity="one">Stredné (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekunda)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
-      <item quantity="few">Dlhé (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
-      <item quantity="many">Dlhé (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
-      <item quantity="other">Dlhé (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekúnd)</item>
-      <item quantity="one">Dlhé (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekunda)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="4537791441118261556">
-      <item quantity="few"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy</item>
-      <item quantity="many"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> sekundy</item>
-      <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> sekúnd</item>
-      <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekunda</item>
-    </plurals>
+    <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{Krátke ({time} sekunda)}few{Krátke ({time} sekundy)}many{Krátke ({time} sekundy)}other{Krátke ({time} sekúnd)}}"</string>
+    <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{Stredné ({time} sekunda)}few{Stredné ({time} sekundy)}many{Stredné ({time} sekundy)}other{Stredné ({time} sekúnd)}}"</string>
+    <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{Dlhé ({time} sekunda)}few{Dlhé ({time} sekundy)}many{Dlhé ({time} sekundy)}other{Dlhé ({time} sekúnd)}}"</string>
+    <string name="accessibilty_autoclick_delay_unit_second" msgid="5979297390686370567">"{count,plural, =1{{time} sekunda}few{{time} sekundy}many{{time} sekundy}other{{time} sekúnd}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Nastavenia"</string>
     <string name="captioning_preview_title" msgid="2888561631323180535">"Ukážka"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"Štandardné možnosti"</string>
@@ -2077,18 +1980,8 @@
     <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"Hľadať zariadenia v okolí"</string>
     <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"Uložené zariadenia"</string>
     <string name="print_settings" msgid="8519810615863882491">"Tlač"</string>
-    <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
-      <item quantity="few"><xliff:g id="COUNT">%1$d</xliff:g> zapnuté tlačové služby</item>
-      <item quantity="many"><xliff:g id="COUNT">%1$d</xliff:g> print services on</item>
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> zapnutých tlačových služieb</item>
-      <item quantity="one">1 zapnutá tlačová služba</item>
-    </plurals>
-    <plurals name="print_jobs_summary" formatted="false" msgid="3933688846338306536">
-      <item quantity="few"><xliff:g id="COUNT">%1$d</xliff:g> tlačové úlohy</item>
-      <item quantity="many"><xliff:g id="COUNT">%1$d</xliff:g> tlačovej úlohy</item>
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> tlačových úloh</item>
-      <item quantity="one">1 tlačová úloha</item>
-    </plurals>
+    <string name="print_settings_summary" msgid="1458773840720811915">"{count,plural, =1{Je zapnutá 1 tlačová služba}few{Sú zapnuté # tlačové služby}many{# print services on}other{Je zapnutých # tlačových služieb}}"</string>
+    <string name="print_jobs_summary" msgid="7040836482336577323">"{count,plural, =1{1 tlačová úloha}few{# tlačové úlohy}many{# print jobs}other{# tlačových úloh}}"</string>
     <string name="print_settings_title" msgid="7680498284751129935">"Tlačové služby"</string>
     <string name="print_no_services_installed" msgid="7554057966540602692">"Nie sú nainštalované žiadne služby"</string>
     <string name="print_no_printers_found" msgid="4833082484646109486">"Nenašli sa žiadne tlačiarne"</string>
@@ -2155,47 +2048,22 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Niektoré funkcie môžu byť obmedzené"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Vysoká spotreba batérie"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Prezrite si aplikácie s najvyššou spotrebou"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Nabíjanie je pozastavené"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="5254922316684499816">"Ochrana batérie predlžujúca jej životnosť"</string>
-    <string name="battery_tip_dock_defender_future_bypass_title" msgid="7257251934903787366">"Nabíja sa na <xliff:g id="PERCENT">%1$s</xliff:g>, aby sa chránila batéria"</string>
-    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="428474483479026813">"Nabíjanie tabletu v doku bude pozastavené na úrovni <xliff:g id="PERCENT">%1$s</xliff:g>, aby sa predĺžila životnosť batérie"</string>
-    <string name="battery_tip_dock_defender_active_title" msgid="8843454404807737776">"Nabíjanie bolo pozastavené, aby sa chránila batéria"</string>
-    <string name="battery_tip_dock_defender_active_summary" msgid="5582869291068635429">"Nabíjanie tabletu v doku sa pozastaví na úrovni <xliff:g id="PERCENT">%1$s</xliff:g>, aby sa predĺžila životnosť batérie"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Nabíjanie je optimalizované, aby sa chránila batéria"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"Nabíjanie je optimalizované, aby sa predĺžila životnosť batérie"</string>
+    <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Nabíjanie je optimalizované, aby sa chránila batéria"</string>
+    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Keď je zariadenie v doku, nabíjanie je optimalizovné, aby sa predĺžila životnosť batérie"</string>
+    <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Nabíjanie je optimalizované, aby sa chránila batéria"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"Keď je zariadenie v doku, nabíjanie je optimalizovné, aby sa predĺžila životnosť batérie"</string>
     <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"Nabíja sa úplne"</string>
-    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="5107293805054133144">"Nabíjanie bude pozastavené na úrovni <xliff:g id="PERCENT">%1$s</xliff:g>, keď bude najbližšie tablet v doku, aby sa ochránila batéria"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"Keď nabudúce vložíte tablet do doku, bude nabíjanie optimalizované, aby sa chránila batéria"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Ďalšie informácie o pozastavenom nabíjaní"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Pokračovať v nabíjaní"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Zahrnuje energeticky náročnú aktivitu na pozadí"</string>
-    <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
-      <item quantity="few">Obmedziť %1$d aplikácie</item>
-      <item quantity="many">Obmedziť %1$d aplikácie</item>
-      <item quantity="other">Obmedziť %1$d aplikácií</item>
-      <item quantity="one">Obmedziť %1$d aplikáciu</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_handled_title" formatted="false" msgid="5862649927574803958">
-      <item quantity="few">%2$d aplikácie boli nedávno obmedzené</item>
-      <item quantity="many">%2$d aplikácie bolo nedávno obmedzenej</item>
-      <item quantity="other">%2$d aplikácií bolo nedávno obmedzených</item>
-      <item quantity="one">%1$s aplikácia bola nedávno obmedzená</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_summary" formatted="false" msgid="3328499737453686910">
-      <item quantity="few">%2$d aplikácie majú vysokú spotrebu batérie na pozadí</item>
-      <item quantity="many">%2$d aplikácie má vysokú spotrebu batérie na pozadí</item>
-      <item quantity="other">%2$d aplikácií má vysokú spotrebu batérie na pozadí</item>
-      <item quantity="one">Aplikácia %1$s má vysokú spotrebu batérie na pozadí</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_handled_summary" formatted="false" msgid="3036853535034350991">
-      <item quantity="few">Tieto aplikácie sa nedajú spustiť na pozadí</item>
-      <item quantity="many">Tieto aplikácie sa nedajú spustiť na pozadí</item>
-      <item quantity="other">Tieto aplikácie sa nedajú spustiť na pozadí</item>
-      <item quantity="one">Táto aplikácia sa nedá spustiť na pozadí</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_app_dialog_title" formatted="false" msgid="7897944678619251740">
-      <item quantity="few">Obmedziť %1$d aplikácie?</item>
-      <item quantity="many">Obmedziť %1$d aplikácie?</item>
-      <item quantity="other">Obmedziť %1$d aplikácií?</item>
-      <item quantity="one">Obmedziť aplikáciu?</item>
-    </plurals>
+    <string name="battery_tip_restrict_title" msgid="4537101947310626753">"{count,plural, =1{Obmedzenie # aplikácie}few{Obmedzenie # aplikácií}many{Restrict # apps}other{Obmedzenie # aplikácií}}"</string>
+    <string name="battery_tip_restrict_handled_title" msgid="7142074986508706853">"{count,plural, =1{Aplikácia {label} bola nedávno obmedzená}few{# aplikácie boli nedávno obmedzené}many{# apps recently restricted}other{# aplikácií bolo nedávno obmedzených}}"</string>
+    <string name="battery_tip_restrict_summary" msgid="7539469590829235277">"{count,plural, =1{{label} má vysokú spotrebu batérie na pozadí}few{# aplikácie majú vysokú spotrebu batérie na pozadí}many{# apps have high background battery usage}other{# aplikácií má vysokú spotrebu batérie na pozadí}}"</string>
+    <string name="battery_tip_restrict_handled_summary" msgid="3535697154547199190">"{count,plural, =1{Táto aplikácia sa nedá spustiť na pozadí}few{Tieto aplikácie sa nedajú spustiť na pozadí}many{Tieto aplikácie sa nedajú spustiť na pozadí}other{Tieto aplikácie sa nedajú spustiť na pozadí}}"</string>
+    <string name="battery_tip_restrict_app_dialog_title" msgid="1649476357343160240">"{count,plural, =1{Chcete obmedziť aplikáciu?}few{Chcete obmedziť # aplikácie?}many{Restrict # apps?}other{Chcete obmedziť # aplikácií?}}"</string>
     <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"Ak chcete ušetriť batériu, zakážte aplikácii <xliff:g id="APP">%1$s</xliff:g> využívať ju na pozadí. Táto aplikácia nemusí fungovať správne a upozornenia môžu byť oneskorené."</string>
     <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="5894648804112181324">"Ak chcete ušetriť batériu, zakážte týmto aplikáciám využívať ju na pozadí. Obmedzené aplikácie nemusia správne fungovať a upozornenia môžu byť oneskorené.\n\nAplikácie:"</string>
     <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="4546838397423565138">"Ak chcete ušetriť batériu, zakážte týmto aplikáciám využívať ju na pozadí. Obmedzené aplikácie nemusia správne fungovať a upozornenia môžu byť oneskorené.\n\nAplikácie:\n<xliff:g id="APP_LIST">%1$s</xliff:g>."</string>
@@ -2209,24 +2077,14 @@
     <string name="smart_battery_title" msgid="9095903608520254254">"Spravovať aplikácie automaticky"</string>
     <string name="smart_battery_footer" msgid="8407121907452993645">"Keď správca batérie zistí, že aplikácie nadmerne vybíjajú batériu, zobrazí sa možnosť ich obmedziť. Obmedzené aplikácie nemusia správne fungovať a upozornenia môžu byť oneskorené."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Obmedzené aplikácie"</string>
-    <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
-      <item quantity="few">Obmedzuje sa spotreba batérie %1$d aplikáciami</item>
-      <item quantity="many">Limiting battery usage for %1$d apps</item>
-      <item quantity="other">Obmedzuje sa spotreba batérie %1$d aplikáciami</item>
-      <item quantity="one">Obmedzuje sa spotreba batérie %1$d aplikáciou</item>
-    </plurals>
+    <string name="restricted_app_summary" msgid="1022307922754893997">"{count,plural, =1{Obmedzovanie spotreby batérie pre # aplikáciu}few{Obmedzovanie spotreby batérie pre # aplikácie}many{Limiting battery usage for # apps}other{Obmedzovanie spotreby batérie pre # aplikácií}}"</string>
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"Obmedzené <xliff:g id="TIME">%1$s</xliff:g>"</string>
     <string name="restricted_app_detail_footer" msgid="3495725286882138803">"Tieto aplikácie majú obmedzenú spotrebu batérie na pozadí. Nemusia fungovať podľa očakávaní a upozornenia môžu byť oneskorené."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Použiť správcu batérie"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Zistite, keď aplikácie nadmerne vybíjajú batériu"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"Rozpoznáva sa, kedy aplikácie nadmerne spotrebúvajú batériu"</string>
     <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"Rozpoznáva sa, kedy aplikácie nadmerne spotrebúvajú batériu"</string>
-    <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
-      <item quantity="few">%1$d obmedzené aplikácie</item>
-      <item quantity="many">%1$d obmedzenej aplikácie</item>
-      <item quantity="other">%1$d obmedzených aplikácií</item>
-      <item quantity="one">%1$d obmedzená aplikácia</item>
-    </plurals>
+    <string name="battery_manager_app_restricted" msgid="2583902700677009173">"{count,plural, =1{Bola obmedzená # aplikácia}few{Boli obmedzené # aplikácie}many{# apps restricted}other{Bolo obmedzených # aplikácií}}"</string>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
     <string name="battery_missing_message" msgid="400958471814422770">"Pri čítaní merača batérie sa vyskytol problém."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
@@ -2267,7 +2125,6 @@
     <string name="battery_not_usage" msgid="3851536644733662392">"Bez použitia od posledného úplného dobitia"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Žiadne použitie za posledných 24 hodín"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
-    <string name="battery_usage_other_users" msgid="9002643295562500693">"Ďalší používatelia"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Odhadovaný zostávajúci čas:"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Do úplného dobitia"</string>
     <string name="estimated_time_description" msgid="211058785418596009">"Odhad sa môže líšiť v závislosti od intenzity využitia"</string>
@@ -2391,7 +2248,8 @@
     <string name="advanced_security_title" msgid="7117581975877192652">"Rozšírené"</string>
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"Poverenia nie sú pre tohto používateľa k dispozícii"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"Nainštalované pre sieť VPN a aplikácie"</string>
-    <string name="credential_for_wifi" msgid="1963335263280604998">"Nainštalované pre sieť Wi‑Fi"</string>
+    <string name="credential_for_wifi" msgid="2286560570630763556">"Nainštalované pre Wi‑Fi"</string>
+    <string name="credential_for_wifi_in_use" msgid="7276290656840986618">"Nainštalované pre Wi‑Fi (používa sa)"</string>
     <string name="credentials_reset_hint" msgid="4054601857203464867">"Chcete odstrániť všetok obsah?"</string>
     <string name="credentials_erased" msgid="9121052044566053345">"Úložisko poverení bolo vymazané"</string>
     <string name="credentials_not_erased" msgid="3611058412683184031">"Úlož. poverení nemožno vymazať"</string>
@@ -2416,12 +2274,7 @@
     <string name="remove_credential_management_app" msgid="6089291496976812786">"Odstrániť aplikáciu"</string>
     <string name="remove_credential_management_app_dialog_title" msgid="5713525435104706772">"Odstrániť túto aplikáciu?"</string>
     <string name="remove_credential_management_app_dialog_message" msgid="7739474298063646935">"Táto aplikácia nebude spravovať certifikáty, ale zostane vo vašom zariadení. Všetky certifikáty nainštalované touto aplikáciou budú odinštalované."</string>
-    <plurals name="number_of_urls" formatted="false" msgid="403979258551655023">
-      <item quantity="few"><xliff:g id="NUMBER_1">%d</xliff:g> webové adresy</item>
-      <item quantity="many"><xliff:g id="NUMBER_1">%d</xliff:g> URLs</item>
-      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> webových adries</item>
-      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> webová adresa</item>
-    </plurals>
+    <string name="number_of_urls" msgid="1128699121050872188">"{count,plural, =1{# webová adresa}few{# webové adresy}many{# URLs}other{# webových adries}}"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"Signál núdzového vytáčania"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Nastaviť správanie pri tiesňovom volaní"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Zálohovanie"</string>
@@ -2464,12 +2317,7 @@
     <string name="notification_history_today" msgid="5828496957208237230">"Posledných 24 hodín"</string>
     <string name="notification_history_snooze" msgid="3980568893290512257">"Odložené"</string>
     <string name="notification_history_dismiss" msgid="6180321217375722918">"Nedávno zavreté"</string>
-    <plurals name="notification_history_count" formatted="false" msgid="1859304685071321991">
-      <item quantity="few"><xliff:g id="NUMBER_1">%d</xliff:g> upozornenia</item>
-      <item quantity="many"><xliff:g id="NUMBER_1">%d</xliff:g> notifications</item>
-      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> upozornení</item>
-      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> upozornenie</item>
-    </plurals>
+    <string name="notification_history_count" msgid="885305572972482838">"{count,plural, =1{# upozornenie}few{# upozornenia}many{# notifications}other{# upozornení}}"</string>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"Tón zvonenia a vibrovanie"</string>
     <string name="wifi_setup_detail" msgid="2012898800571616422">"Podrobnosti siete"</string>
     <string name="accessibility_sync_enabled" msgid="5308864640407050209">"Synchronizácia je povolená"</string>
@@ -2641,10 +2489,11 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Povoliť systémový certifikát CA?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Zakázať systémový certifikát CA?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Natrvalo odstrániť používateľský certifikát CA?"</string>
-    <string name="credential_contains" msgid="407972262032275476">"Obsah záznamu:"</string>
-    <string name="one_userkey" msgid="4417212932385103517">"jeden kľúč používateľa"</string>
-    <string name="one_usercrt" msgid="1865069301105101370">"jeden certifikát používateľa"</string>
-    <string name="one_cacrt" msgid="7467796501404158399">"jeden certifikát CA"</string>
+    <string name="credential_being_used_by" msgid="3682869943025283499">"Používajú:"</string>
+    <string name="credential_contains" msgid="3146519680449595771">"Tento záznam obsahuje"</string>
+    <string name="one_userkey" msgid="6363426728683951234">"1 kľúč používateľa"</string>
+    <string name="one_usercrt" msgid="2097644070227688983">"1 certifikát používateľa"</string>
+    <string name="one_cacrt" msgid="982242103604501559">"1 Certifikát CA"</string>
     <string name="n_cacrts" msgid="5886462550192731627">"certifikáty CA (%d)"</string>
     <string name="user_credential_title" msgid="4686178602575567298">"Podrobnosti o povereniach"</string>
     <string name="user_credential_removed" msgid="4087675887725394743">"Odstránené poverenie: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
@@ -2659,21 +2508,11 @@
     <string name="additional_system_update_settings_list_item_title" msgid="7230385345152138051">"Ďalšie aktualizácie systému"</string>
     <string name="ssl_ca_cert_warning" msgid="3898387588657346106">"Sieť môže byť monitorovaná"</string>
     <string name="done_button" msgid="6269449526248267">"Hotovo"</string>
-    <plurals name="ssl_ca_cert_dialog_title" formatted="false" msgid="5491460811755938449">
-      <item quantity="few">Nastavte certifikáty ako dôveryhodné alebo ich odstráňte</item>
-      <item quantity="many">Nastavte certifikáty ako dôveryhodné alebo ich odstráňte</item>
-      <item quantity="other">Nastavte certifikáty ako dôveryhodné alebo ich odstráňte</item>
-      <item quantity="one">Nastavte certifikát ako dôveryhodný alebo ho odstráňte</item>
-    </plurals>
+    <string name="ssl_ca_cert_dialog_title" msgid="1032088078702042090">"{count,plural, =1{Nastavte certifikát ako dôveryhodný alebo ho odstráňte}few{Nastavte certifikáty ako dôveryhodné alebo ich odstráňte}many{Nastavte certifikáty ako dôveryhodné alebo ich odstráňte}other{Nastavte certifikáty ako dôveryhodné alebo ich odstráňte}}"</string>
     <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{Doména {orgName} nainštalovala do vášho zariadenia certifikačnú autoritu, ktorá jej umožní monitorovať aktivitu v sieti zariadenia vrátane pošty, aplikácií a zabezpečených webov.\n\nViac o tomto certifikáte sa dozviete od svojho správcu.}few{Doména {orgName} nainštalovala do vášho zariadenia certifikačné autority, ktoré jej umožnia monitorovať aktivitu v sieti zariadenia vrátane pošty, aplikácií a zabezpečených webov.\n\nViac o týchto certifikátoch sa dozviete od svojho správcu.}many{Doména {orgName} nainštalovala do vášho zariadenia certifikačné autority, ktoré jej umožnia monitorovať aktivitu v sieti zariadenia vrátane pošty, aplikácií a zabezpečených webov.\n\nViac o týchto certifikátoch sa dozviete od svojho správcu.}other{Doména {orgName} nainštalovala do vášho zariadenia certifikačné autority, ktoré jej umožnia monitorovať aktivitu v sieti zariadenia vrátane pošty, aplikácií a zabezpečených webov.\n\nViac o týchto certifikátoch sa dozviete od svojho správcu.}}"</string>
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{Doména {orgName} nainštalovala pre váš pracovný profil certifikačnú autoritu, ktorá jej môže umožniť monitorovať aktivitu v pracovnej sieti vrátane pošty, aplikácií a zabezpečených webov.\n\nViac o tomto certifikáte sa dozviete od svojho správcu.}few{Doména {orgName} nainštalovala pre váš pracovný profil certifikačné autority, ktoré jej môžu umožniť monitorovať aktivitu v pracovnej sieti vrátane pošty, aplikácií a zabezpečených webov.\n\nViac o týchto certifikátoch sa dozviete od svojho správcu.}many{Doména {orgName} nainštalovala pre váš pracovný profil certifikačné autority, ktoré jej môžu umožniť monitorovať aktivitu v pracovnej sieti vrátane pošty, aplikácií a zabezpečených webov.\n\nViac o týchto certifikátoch sa dozviete od svojho správcu.}other{Doména {orgName} nainštalovala pre váš pracovný profil certifikačné autority, ktoré jej môžu umožniť monitorovať aktivitu v pracovnej sieti vrátane pošty, aplikácií a zabezpečených webov.\n\nViac o týchto certifikátoch sa dozviete od svojho správcu.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Vaša aktivita v sieti, vrátane e-mailov, aplikácií a zabezpečených webov môže byť monitorovaná treťou stranou.\n\nUmožňujú to dôveryhodné poverenia nainštalované vo vašom zariadení."</string>
-    <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="125941406175485894">
-      <item quantity="few">Overiť certifikáty</item>
-      <item quantity="many">Overiť certifikáty</item>
-      <item quantity="other">Overiť certifikáty</item>
-      <item quantity="one">Overiť certifikát</item>
-    </plurals>
+    <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Skontrolovať certifikát}few{Skontrolovať certifikáty}many{Skontrolovať certifikáty}other{Skontrolovať certifikáty}}"</string>
     <string name="user_settings_title" msgid="6550866465409807877">"Viacerí používatelia"</string>
     <string name="user_list_title" msgid="1387379079186123404">"Používatelia a profily"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Pridať používateľa alebo profil"</string>
@@ -2712,13 +2551,15 @@
     <string name="enable_guest_calling" msgid="8300355036005240911">"Povoliť hosťovi používať telefón"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"S hosťom sa bude zdieľať história hovorov"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Zapnúť telefonáty a SMS"</string>
+    <string name="user_grant_admin" msgid="6511342422361803820">"Udeliť používateľovi správcovské oprávnenia"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Odobrať používateľa"</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Zapnúť telefonické hovory a správy SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"S týmto používateľom sa bude zdieľať história hovorov a správ SMS."</string>
+    <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"Chcete odstrániť správcovské oprávnenia?"</string>
+    <string name="user_revoke_admin_confirm_message" msgid="2719667217562982318">"Naozaj chcete odstrániť správcovské oprávnenia tohto používateľa?"</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Tiesňové informácie"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Informácie a kontakty používateľa <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Otvoriť aplikáciu <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="more_settings_button" msgid="8988612279031242411">"Ďalšie nastavenia"</string>
     <string name="application_restrictions" msgid="276179173572729205">"Povoliť aplikácie a obsah"</string>
     <string name="apps_with_restrictions_header" msgid="5277698582872267931">"Aplikácie s obmedzením"</string>
     <string name="apps_with_restrictions_settings_button" msgid="2648355133416902221">"Rozbaliť nastavenia aplikácie"</string>
@@ -2861,6 +2702,12 @@
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"Klonované aplikácie"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"Vytvorte druhú inštanciu aplikácie, aby ste mohli súčasne používať dva účty."</string>
     <string name="cloned_apps_summary" msgid="8805362440770795709">"Naklonované: <xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g>, k dispozícii na klonovanie: <xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g>"</string>
+    <!-- no translation found for delete_all_app_clones (3489053361980624999) -->
+    <skip />
+    <!-- no translation found for delete_all_app_clones_failure (6821033414547132335) -->
+    <skip />
+    <string name="cloned_app_creation_summary" msgid="4642627294993918502">"Vytvára sa…"</string>
+    <string name="cloned_app_created_summary" msgid="7277912971544890710">"Klonovaná"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Jazyky, gestá, čas, záloha"</string>
     <string name="languages_setting_summary" msgid="4924440599794956443">"Jazyky systému, jazyky aplikácií"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, sieťové pripojenie, internet, bezdrôtové, dáta, wi fi"</string>
@@ -2920,16 +2767,11 @@
     <string name="keywords_face_unlock" msgid="545338452730885392">"tvár, odomknutie, overenie totožnosti, prihlásenie"</string>
     <string name="keywords_biometric_unlock" msgid="8569545388717753692">"tvár, odomknúť, overiť, prihlásiť sa, odtlačok prsta, biometria"</string>
     <string name="keywords_imei_info" msgid="8848791606402333514">"imei, meid, min, verzia prl, imei sv"</string>
-    <!-- no translation found for keywords_sim_status (4221401945956122228) -->
-    <skip />
-    <!-- no translation found for keywords_sim_status_esim (3338719238556853609) -->
-    <skip />
-    <!-- no translation found for keywords_sim_status_iccid (4775398796251969759) -->
-    <skip />
-    <!-- no translation found for keywords_sim_status_iccid_esim (4634015619840979184) -->
-    <skip />
-    <!-- no translation found for keywords_esim_eid (8128175058237372457) -->
-    <skip />
+    <string name="keywords_sim_status" msgid="4221401945956122228">"sieť, stav mobilnej siete, stav služby, sila signálu, typ mobilnej siete, roaming"</string>
+    <string name="keywords_sim_status_esim" msgid="3338719238556853609">"sieť, stav mobilnej siete, stav služby, sila signálu, typ mobilnej siete, roaming, eid"</string>
+    <string name="keywords_sim_status_iccid" msgid="4775398796251969759">"sieť, stav mobilnej siete, stav služby, sila signálu, typ mobilnej siete, roaming, iccid"</string>
+    <string name="keywords_sim_status_iccid_esim" msgid="4634015619840979184">"sieť, stav mobilnej siete, stav služby, sila signálu, typ mobilnej siete, roaming, iccid, eid"</string>
+    <string name="keywords_esim_eid" msgid="8128175058237372457">"eid"</string>
     <string name="keywords_model_and_hardware" msgid="4723665865709965044">"sériové číslo, hardvérová verzia"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"úroveň opráv zabezpečenia androidu, verzia základného pásma, verzia jadra"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"motív, svetlý, tmavý, režim, svetloplachosť, fotofóbia, stmaviť, tmavý režim, migréna"</string>
@@ -3199,12 +3041,7 @@
     <string name="promote_conversation_title" msgid="4731148769888238722">"Toto je konverzácia"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Pridať do sekcie konverzácií"</string>
     <string name="priority_conversation_count_zero" msgid="3862289535537564713">"Žiadne prioritné konverzácie"</string>
-    <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> prioritné konverzácie</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> priority conversations</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> prioritných konverzácií</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> prioritná konverzácia</item>
-    </plurals>
+    <string name="priority_conversation_count" msgid="7291234530844412077">"{count,plural, =1{# prioritná konverzácia}few{# prioritné konverzácie}many{# priority conversations}other{# prioritných konverzácií}}"</string>
     <string name="important_conversations" msgid="1233893707189659401">"Prioritné konverzácie"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Zobrazovať hore v sekcii konverzácií ako plávajúce bubliny"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Zobrazovať hore v sekcii konverzácií"</string>
@@ -3236,18 +3073,8 @@
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Keď je zariadenie odomknuté, zobrazovať upozornenia ako banner v hornej časti obrazovky"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Všetky upozornenia aplikácie <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Všetky upozornenia aplikácie <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
-      <item quantity="few">Približne <xliff:g id="NUMBER_1">%,d</xliff:g> upozornenia denne</item>
-      <item quantity="many">About <xliff:g id="NUMBER_1">%,d</xliff:g> notifications per day</item>
-      <item quantity="other">Približne <xliff:g id="NUMBER_1">%,d</xliff:g> upozornení denne</item>
-      <item quantity="one">Približne <xliff:g id="NUMBER_0">%d</xliff:g> upozornenie denne</item>
-    </plurals>
-    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
-      <item quantity="few">Približne <xliff:g id="NUMBER_1">%,d</xliff:g> upozornenia týždenne</item>
-      <item quantity="many">About <xliff:g id="NUMBER_1">%,d</xliff:g> notifications per week</item>
-      <item quantity="other">Približne <xliff:g id="NUMBER_1">%,d</xliff:g> upozornení týždenne</item>
-      <item quantity="one">Približne <xliff:g id="NUMBER_0">%d</xliff:g> upozornenie týždenne</item>
-    </plurals>
+    <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{Približne # upozornenie denne}few{Približne # upozornenia denne}many{About # notifications per day}other{Približne # upozornení denne}}"</string>
+    <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{Približne # upozornenie týždenne}few{Približne # upozornenia týždenne}many{About # notifications per week}other{Približne # upozornení týždenne}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Nikdy"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Upozornenia v zariadeniach a aplikáciách"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Ovládať, ktoré aplikácie a zariadenia môžu čítať upozornenia"</string>
@@ -3316,12 +3143,7 @@
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"Povolenia"</string>
     <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"Táto aplikácia môže používať povolenia osobnej aplikácie <xliff:g id="NAME">%1$s</xliff:g>, ako je prístup k polohe, úložisku či kontaktom."</string>
     <string name="interact_across_profiles_number_of_connected_apps_none" msgid="8573289199942092964">"Žiadne aplikácie neprepojené"</string>
-    <plurals name="interact_across_profiles_number_of_connected_apps" formatted="false" msgid="6991750455661974772">
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> prepojené aplikácie</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> apps connected</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> prepojených aplikácií</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> prepojená aplikácia</item>
-    </plurals>
+    <string name="interact_across_profiles_number_of_connected_apps" msgid="4000424798291479207">"{count,plural, =1{Pripojená je # aplikácia}few{Pripojené sú # aplikácie}many{# apps connected}other{Pripojených je # aplikácií}}"</string>
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"Ak chcete tieto aplikácie prepojiť, nainštalujte aplikáciu <xliff:g id="NAME">%1$s</xliff:g> vo svojom pracovnom profile"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"Ak chcete tieto aplikácie prepojiť, nainštalujte aplikáciu <xliff:g id="NAME">%1$s</xliff:g> vo svojom osobnom profile"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Klepnutím získate aplikáciu"</string>
@@ -3336,12 +3158,7 @@
     <string name="notification_channels_other" msgid="18159805343647908">"Iné"</string>
     <string name="no_channels" msgid="4716199078612071915">"Táto aplikácia ešte neposlala žiadne upozornenia"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Ďalšie nastavenia v aplikácii"</string>
-    <plurals name="deleted_channels" formatted="false" msgid="5963473421547029532">
-      <item quantity="few">Boli odstránené <xliff:g id="COUNT_1">%d</xliff:g> kategórie</item>
-      <item quantity="many">Bolo odstránenej <xliff:g id="COUNT_1">%d</xliff:g> kategórie</item>
-      <item quantity="other">Bolo odstránených <xliff:g id="COUNT_1">%d</xliff:g> kategórií</item>
-      <item quantity="one">Bola odstránená <xliff:g id="COUNT_0">%d</xliff:g> kategória</item>
-    </plurals>
+    <string name="deleted_channels" msgid="8489800381509312964">"{count,plural, =1{Bola odstránená # kategória}few{Boli odstránené # kategórie}many{# categories deleted}other{Bolo odstránených # kategórií}}"</string>
     <string name="app_notification_block_title" msgid="3880322745749900296">"Blokovať všetko"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Tieto upozornenia nikdy nezobrazovať"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Zobrazovať upozornenia"</string>
@@ -3473,10 +3290,8 @@
     <string name="zen_mode_end_time" msgid="223502560367331706">"Čas ukončenia"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="419683704068360804">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> nasledujúci deň"</string>
     <string name="zen_mode_summary_alarms_only_indefinite" msgid="910047326128154945">"Zmena na možnosť Iba budíky platná natrvalo"</string>
-    <!-- no translation found for zen_mode_summary_alarms_only_by_minute (6673649005494939311) -->
-    <skip />
-    <!-- no translation found for zen_mode_summary_alarms_only_by_hour (7400910210950788163) -->
-    <skip />
+    <string name="zen_mode_summary_alarms_only_by_minute" msgid="6673649005494939311">"{count,plural, =1{Zmena v budíkoch iba na minútu do {time}}few{Zmena v budíkoch iba na # minúty (do {time})}many{Change to alarms only for # minutes (until {time})}other{Zmena v budíkoch iba na # minút (do {time})}}"</string>
+    <string name="zen_mode_summary_alarms_only_by_hour" msgid="7400910210950788163">"{count,plural, =1{Zmena v budíkoch iba na hodinu do {time}}few{Zmena v budíkoch iba na # hodiny do {time}}many{Change to alarms only for # hours until {time}}other{Zmena v budíkoch iba na # hodín do {time}}}"</string>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Zmena na možnosť Iba budíky platná do <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Zmena na možnosť Vždy prerušiť"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Upozornenie"</string>
@@ -3493,7 +3308,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Pred odopnutím požiadať o heslo"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Pri odopnutí zamknúť zariadenie"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Potvrdiť odstránenie SIM karty"</string>
-    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"Pred vymazaním eSIM karty overte, že ste to vy"</string>
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"Pred vymazaním eSIM karty overte svoju totožnosť"</string>
     <string name="memtag_title" msgid="5096176296797727201">"Beta verzia rozšír. ochr. pamäte"</string>
     <string name="memtag_toggle" msgid="8695028758462939212">"Rozšírená ochrana pamäte"</string>
     <string name="memtag_intro" msgid="579408691329568953">"Táto beta funkcia pomáha chrániť vaše zariadenie pred chybami, ktoré môžu ohroziť jeho zabezpečenie."</string>
@@ -3512,28 +3327,6 @@
     <string name="memtag_learn_more" msgid="1596145970669119776">"Ďalšie informácie o rozšírenej ochrane pamäte"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Tento pracovný profil spravuje aplikácia:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Spravované aplikáciou <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
-    <string name="encryption_interstitial_header" msgid="4418014339568737685">"Bezpečné spustenie"</string>
-    <string name="encryption_interstitial_message_pin" msgid="1413575143234269985">"Ďalšiu ochranu tohto zariadenia zabezpečíte požadovaním kódu PIN pred spustením. Toto zariadenie nemôže prijímať hovory, správy ani upozornenia (vrátane budíkov), dokým sa nespustí. \n\nPomáha to chrániť dáta v stratených alebo ukradnutých zariadeniach. Vyžadovať kód PIN na spustenie zariadenia?"</string>
-    <string name="encryption_interstitial_message_pattern" msgid="726550613252236854">"Ďalšiu ochranu tohto zariadenia zabezpečíte požadovaním vzoru pred spustením. Toto zariadenie nemôže prijímať hovory, správy ani upozornenia (vrátane budíkov), dokým sa nespustí. \n\nPomáha to chrániť dáta v stratených alebo ukradnutých zariadeniach. Vyžadovať vzor na spustenie zariadenia?"</string>
-    <string name="encryption_interstitial_message_password" msgid="6051054565294909975">"Ďalšiu ochranu tohto zariadenia zabezpečíte požadovaním hesla pred jeho spustením. Toto zariadenie nemôže prijímať hovory, správy ani upozornenia (vrátane budíkov), dokým sa nespustí. \n\nPomáha to chrániť dáta v stratených alebo ukradnutých zariadeniach. Vyžadovať heslo na spustenie zariadenia?"</string>
-    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="7152770518093102916">"Okrem odomknutia pomocou odtlačku prsta môžete toto zariadenie ochrániť aj vyžadovaním kódu PIN pred spustením. Zariadenie nemôže prijímať hovory, správy ani upozornenia (vrátane budíkov), dokým sa nespustí.\n\nPomáha to chrániť dáta v stratených alebo ukradnutých zariadeniach. Vyžadovať kód PIN na spustenie zariadenia?"</string>
-    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="6257856552043740490">"Okrem odomknutia pomocou odtlačku prsta môžete svoje zariadenie ochrániť aj vyžadovaním bezpečnostného vzoru pred spustením. Zariadenie nemôže prijímať hovory, správy ani upozornenia (vrátane budíkov), dokým sa nespustí.\n\nPomáha to chrániť dáta v stratených alebo ukradnutých zariadeniach. Vyžadovať vzor na spustenie zariadenia?"</string>
-    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="7710804822643612867">"Okrem odomknutia pomocou odtlačku prsta môžete svoje zariadenie ochrániť aj vyžadovaním hesla pred spustením. Zariadenie nemôže prijímať hovory, správy ani upozornenia (vrátane budíkov), dokým sa nespustí.\n\nPomáha to chrániť dáta v stratených alebo ukradnutých zariadeniach. Vyžadovať heslo na spustenie zariadenia?"</string>
-    <string name="encryption_interstitial_message_pin_for_face" msgid="8577135499926738241">"Okrem odomknutia odtlačkom prsta môžete toto zariadenie ochrániť aj vyžadovaním kódu PIN pred spustením. Zariadenie nemôže prijímať hovory, správy ani upozornenia (vrátane budíkov), dokým sa nespustí.\n\nPomáha to chrániť dáta v stratených alebo ukradnutých zariadeniach. Vyžadovať kód PIN na spustenie zariadenia?"</string>
-    <string name="encryption_interstitial_message_pattern_for_face" msgid="5851725964283239644">"Okrem odomknutia odtlačkom prsta môžete svoje zariadenie ochrániť aj vyžadovaním bezpečnostného vzoru pred spustením. Zariadenie nemôže prijímať hovory, správy ani upozornenia (vrátane budíkov), dokým sa nespustí.\n\nPomáha to chrániť dáta v stratených alebo ukradnutých zariadeniach. Vyžadovať vzor na spustenie zariadenia?"</string>
-    <string name="encryption_interstitial_message_password_for_face" msgid="3553329272456428461">"Okrem odomknutia odtlačkom prsta môžete svoje zariadenie ochrániť aj vyžadovaním hesla pred spustením. Zariadenie nemôže prijímať hovory, správy ani upozornenia (vrátane budíkov), dokým sa nespustí.\n\nPomáha to chrániť dáta v stratených alebo ukradnutých zariadeniach. Vyžadovať heslo na spustenie zariadenia?"</string>
-    <string name="encryption_interstitial_message_pin_for_biometrics" msgid="4590004045791674901">"Okrem odomknutia pomocou biometrie môžete toto zariadenie ochrániť aj vyžadovaním kódu PIN pred spustením. Toto zariadenie nemôže prijímať hovory, správy ani upozornenia (vrátane budíkov), dokým sa nespustí.\n\nPomáha to chrániť údaje v stratených alebo ukradnutých zariadeniach. Vyžadovať kód PIN na spustenie zariadenia?"</string>
-    <string name="encryption_interstitial_message_pattern_for_biometrics" msgid="2697768285995352576">"Okrem odomknutia pomocou biometrie môžete svoje zariadenie ochrániť aj vyžadovaním bezpečnostného vzoru pred spustením. Toto zariadenie nemôže prijímať hovory, správy ani upozornenia (vrátane budíkov), dokým sa nespustí.\n\nPomáha to chrániť údaje v stratených alebo ukradnutých zariadeniach. Vyžadovať vzor na spustenie zariadenia?"</string>
-    <string name="encryption_interstitial_message_password_for_biometrics" msgid="1895561539964730123">"Okrem odomknutia pomocou biometrie môžete svoje zariadenie ochrániť aj vyžadovaním hesla pred spustením. Toto zariadenie nemôže prijímať hovory, správy ani upozornenia (vrátane budíkov), dokým sa nespustí.\n\nPomáha to chrániť údaje v stratených alebo ukradnutých zariadeniach. Vyžadovať heslo na spustenie zariadenia?"</string>
-    <string name="encryption_interstitial_yes" msgid="1948016725089728181">"Áno"</string>
-    <string name="encryption_interstitial_no" msgid="3352331535473118487">"Nie"</string>
-    <string name="encrypt_talkback_dialog_require_pin" msgid="8974156384205924887">"Vyžadovať kód PIN?"</string>
-    <string name="encrypt_talkback_dialog_require_pattern" msgid="1587587568721873184">"Vyžadovať vzor?"</string>
-    <string name="encrypt_talkback_dialog_require_password" msgid="2701793623210531836">"Vyžadovať heslo?"</string>
-    <string name="encrypt_talkback_dialog_message_pin" msgid="4482887117824444481">"Pri zadávaní kódu PIN na spustenie zariadenia ešte nebudú k dispozícii služby dostupnosti, ako napríklad <xliff:g id="SERVICE">%1$s</xliff:g>."</string>
-    <string name="encrypt_talkback_dialog_message_pattern" msgid="5156321541636018756">"Pri zadávaní vzoru na spustenie zariadenia ešte nebudú k dispozícii služby dostupnosti, ako napríklad <xliff:g id="SERVICE">%1$s</xliff:g>."</string>
-    <string name="encrypt_talkback_dialog_message_password" msgid="1917287751192953034">"Pri zadávaní hesla na spustenie zariadenia ešte nebudú k dispozícii služby dostupnosti, ako napríklad <xliff:g id="SERVICE">%1$s</xliff:g>."</string>
-    <string name="direct_boot_unaware_dialog_message" msgid="5766006106305996844">"Poznámka: Ak reštartujete telefón a máte nastavenú zámku obrazovky, táto aplikácia sa spustí až po odomknutí telefónu"</string>
     <string name="launch_by_default" msgid="892824422067985734">"Predvolené otváranie"</string>
     <string name="app_launch_open_domain_urls_title" msgid="4805388403977096285">"Otvoriť podporované odkazy"</string>
     <string name="app_launch_top_intro_message" msgid="137370923637482459">"Povoliť otváranie webových odkazov v tejto aplikácii"</string>
@@ -3542,16 +3335,13 @@
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Ďalšie predvolené predvoľby"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"Pridať odkaz"</string>
     <string name="app_launch_footer" msgid="4521865035105622557">"Aplikácia môže overiť odkazy, aby sa v nej automaticky otvárali."</string>
-    <!-- no translation found for app_launch_verified_links_title (621908751569155356) -->
-    <skip />
-    <!-- no translation found for app_launch_verified_links_message (190871133877476176) -->
-    <skip />
+    <string name="app_launch_verified_links_title" msgid="621908751569155356">"{count,plural, =1{# overený odkaz}few{# overené odkazy}many{# verified links}other{# overených odkazov}}"</string>
+    <string name="app_launch_verified_links_message" msgid="190871133877476176">"{count,plural, =1{Tento odkaz je overený a automaticky sa otvára v tejto aplikácii.}few{Tieto odkazy sú overené a automaticky sa otvárajú v tejto aplikácii.}many{These links are verified and automatically open in this app.}other{Tieto odkazy sú overené a automaticky sa otvárajú v tejto aplikácii.}}"</string>
     <string name="app_launch_dialog_ok" msgid="1446157681861409861">"OK"</string>
     <string name="app_launch_verified_links_info_description" msgid="7514750232467132117">"Zobrazenie zoznamu overovacích odkazov"</string>
     <string name="app_launch_checking_links_title" msgid="6119228853554114201">"Vyhľadávajú sa ďalšie podporované odkazy…"</string>
     <string name="app_launch_dialog_cancel" msgid="6961071841814898663">"Zrušiť"</string>
-    <!-- no translation found for app_launch_supported_links_title (2457931321701095763) -->
-    <skip />
+    <string name="app_launch_supported_links_title" msgid="2457931321701095763">"{count,plural, =1{# podporovaný odkaz}few{# podporované odkazy}many{# supported links}other{# podporovaných odkazov}}"</string>
     <string name="app_launch_supported_links_add" msgid="3271247750388016131">"Pridať"</string>
     <string name="app_launch_supported_links_subtext" msgid="4268004019469184113">"Otvára sa v aplikácii <xliff:g id="APP_LABEL">%s</xliff:g>"</string>
     <string name="storage_summary_format" msgid="5721782272185284276">"Využité: <xliff:g id="SIZE">%1$s</xliff:g>, <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
@@ -3563,18 +3353,15 @@
     <string name="change_storage" msgid="8773820275624113401">"Zmeniť úložisko"</string>
     <string name="notifications_label" msgid="8471624476040164538">"Upozornenia"</string>
     <string name="notifications_enabled_with_info" msgid="1808946629277684308">"<xliff:g id="NOTIFICATIONS_SENT">%1$s</xliff:g> / <xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%2$s</xliff:g>"</string>
-    <!-- no translation found for notifications_categories_off (7712037485557237328) -->
-    <skip />
-    <!-- no translation found for runtime_permissions_additional_count (6071909675951786523) -->
-    <skip />
+    <string name="notifications_categories_off" msgid="7712037485557237328">"{count,plural, =1{# kategória bola vypnutá}few{# kategórie boli vypnuté}many{# categories turned off}other{# kategórií bolo vypnutých}}"</string>
+    <string name="runtime_permissions_additional_count" msgid="6071909675951786523">"{count,plural, =1{# ďalšie povolenie}few{# ďalšie povolenia}many{# additional permissions}other{# ďalších povolení}}"</string>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Neboli udelené žiadne povolenia"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Neboli požadované žiadne povolenia"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Ovládajte prístup aplikácií k údajom"</string>
     <string name="permissions_usage_title" msgid="2942741460679049132">"Panel ochrany súkromia"</string>
     <string name="permissions_usage_summary" msgid="6784310472062516454">"Zobraziť, ktoré aplikácie nedávno použili povolenia"</string>
     <string name="unused_apps" msgid="4566272194756830656">"Nepoužívané aplikácie"</string>
-    <!-- no translation found for unused_apps_summary (4236371818881973021) -->
-    <skip />
+    <string name="unused_apps_summary" msgid="4236371818881973021">"{count,plural, =1{# nepoužívaná aplikácia}few{# nepoužívané aplikácie}many{# unused apps}other{# nepoužívaných aplikácií}}"</string>
     <string name="unused_apps_category" msgid="8954930958175500851">"Nastavenia nepoužívaných aplikácií"</string>
     <string name="unused_apps_switch" msgid="7595419855882245772">"Pozastaviť aktivitu v nepoužívaných apl."</string>
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Odstrániť povolenia, vymazať dočasné súbory a zastaviť upozornenia"</string>
@@ -3593,8 +3380,7 @@
     <string name="app_link_open_always" msgid="9167065494930657503">"Povoliť aplikácii otvárať podporované odkazy"</string>
     <string name="app_link_open_ask" msgid="2422450109908936371">"Vždy sa opýtať"</string>
     <string name="app_link_open_never" msgid="5299808605386052350">"Nepovoliť aplikácii otvárať odkazy"</string>
-    <!-- no translation found for app_link_open_always_summary (4524005594295855117) -->
-    <skip />
+    <string name="app_link_open_always_summary" msgid="4524005594295855117">"{count,plural, =1{Aplikácia žiada o spracovanie # odkazu}few{Aplikácia žiada o spracovanie # odkazov}many{App claims to handle # links}other{Aplikácia žiada o spracovanie # odkazov}}"</string>
     <string name="open_supported_links_footer" msgid="3188808142432787933">"Aplikácia žiada o spracovanie nasledujúcich odkazov:"</string>
     <string name="assist_and_voice_input_title" msgid="6317935163145135914">"Asistencia a hlasový vstup"</string>
     <string name="default_assist_title" msgid="1182435129627493758">"Digitálny asistent"</string>
@@ -3681,8 +3467,7 @@
     <string name="average_used" msgid="690235917394070169">"Priemerné využitie (%)"</string>
     <string name="free_memory" msgid="439783742246854785">"Voľná pamäť"</string>
     <string name="memory_usage_apps" msgid="5776108502569850579">"Pamäť používaná aplikáciami"</string>
-    <!-- no translation found for memory_usage_apps_summary (7168292864155527974) -->
-    <skip />
+    <string name="memory_usage_apps_summary" msgid="7168292864155527974">"{count,plural, =1{1 aplikácia použila pamäť v priebehu tohto uplynulého času: {time}}few{# aplikácie použili pamäť v priebehu tohto uplynulého času: {time}}many{# apps used memory in the last {time}}other{# aplikácií použilo pamäť v priebehu tohto uplynulého času: {time}}}"</string>
     <string name="running_frequency" msgid="7260225121706316639">"Frekvencia"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Maximálne využitie"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"Neboli spotrebované žiadne dáta"</string>
@@ -3821,8 +3606,7 @@
     <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_2">%2$s</xliff:g> spotreba <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="configure" msgid="1499586749829665889">"Konfigurovať"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"Iné aplikácie zahrnuté v prehľade spotreby dát"</string>
-    <!-- no translation found for data_saver_unrestricted_summary (7343571401172437542) -->
-    <skip />
+    <string name="data_saver_unrestricted_summary" msgid="7343571401172437542">"{count,plural, =1{1 aplikácia má povolené používať neobmedzené dáta, keď je zapnutý Šetrič dát}few{# aplikácie majú povolené používať neobmedzené dáta, keď je zapnutý Šetrič dát}many{# apps allowed to use unrestricted data when Data Saver is on}other{# aplikácií má povolených používať neobmedzené dáta, keď je zapnutý Šetrič dát}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"Primárne dáta"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Dáta Wi‑Fi"</string>
     <string name="data_used_formatted" msgid="7913920278059077938">"Využité: <xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g>"</string>
@@ -3830,8 +3614,7 @@
     <string name="data_remaining" msgid="6316251496381922837">"Zostáva: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="data_usage_chart_brief_content_description" msgid="5548074070258881530">"Graf zobrazuje spotrebu dát od <xliff:g id="START_DATE">%1$s</xliff:g> do <xliff:g id="END_DATE">%2$s</xliff:g>."</string>
     <string name="data_usage_chart_no_data_content_description" msgid="5481968839079467231">"Pre tento rozsah dátumov neexistujú žiadne údaje."</string>
-    <!-- no translation found for billing_cycle_days_left (174337287346866400) -->
-    <skip />
+    <string name="billing_cycle_days_left" msgid="174337287346866400">"{count,plural, =1{Zostáva # deň}few{Zostávajú # dni}many{Zostáva # dňa}other{Zostáva # dní}}"</string>
     <string name="billing_cycle_none_left" msgid="1694844019159277504">"Žiadny zostávajúci čas"</string>
     <string name="billing_cycle_less_than_one_day_left" msgid="1210202399053992163">"Zostáva menej ako 1 deň"</string>
     <string name="carrier_and_update_text" msgid="5363656651921656280">"Aktualizované pred <xliff:g id="ID_2">^2</xliff:g> – <xliff:g id="ID_1">^1</xliff:g>"</string>
@@ -4026,22 +3809,12 @@
     <string name="enterprise_privacy_none" msgid="6026527690979756431">"Žiadne"</string>
     <string name="enterprise_privacy_enterprise_installed_packages" msgid="9114143640515900082">"Nainštalované aplikácie"</string>
     <string name="enterprise_privacy_apps_count_estimation_info" msgid="7959907857710107792">"Počet aplikácií je odhadnutý. Nemusí zahrnovať aplikácie nainštalované mimo Obchodu Play."</string>
-    <plurals name="enterprise_privacy_number_packages_lower_bound" formatted="false" msgid="5403847001419529018">
-      <item quantity="few">Minimálne <xliff:g id="COUNT_1">%d</xliff:g> aplikácie</item>
-      <item quantity="many">Minimálne <xliff:g id="COUNT_1">%d</xliff:g> aplikácie</item>
-      <item quantity="other">Minimálne <xliff:g id="COUNT_1">%d</xliff:g> aplikácií</item>
-      <item quantity="one">Minimálne <xliff:g id="COUNT_0">%d</xliff:g> aplikácia</item>
-    </plurals>
+    <string name="enterprise_privacy_number_packages_lower_bound" msgid="5317634640873658149">"{count,plural, =1{Minimálne # aplikácia}few{Minimálne # aplikácie}many{Minimum # apps}other{Minimálne # aplikácií}}"</string>
     <string name="enterprise_privacy_location_access" msgid="8023838718108456971">"Miestne povolenia"</string>
     <string name="enterprise_privacy_microphone_access" msgid="7242958026470143653">"Povolenia mikrofónu"</string>
     <string name="enterprise_privacy_camera_access" msgid="7685460535880069016">"Povolenia fotoaparátu"</string>
     <string name="enterprise_privacy_enterprise_set_default_apps" msgid="7498546659083996300">"Predvolené aplikácie"</string>
-    <plurals name="enterprise_privacy_number_packages" formatted="false" msgid="8568544906431825430">
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> aplikácie</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> aplikácie</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> aplikácií</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> aplikácia</item>
-    </plurals>
+    <string name="enterprise_privacy_number_packages" msgid="5294444005035188274">"{count,plural, =1{# aplikácia}few{# aplikácie}many{# apps}other{# aplikácií}}"</string>
     <string name="enterprise_privacy_input_method" msgid="3278314982700662246">"Predvolená klávesnica"</string>
     <string name="enterprise_privacy_input_method_name" msgid="2974859490559054584">"Nastavené na možnosť <xliff:g id="APP_LABEL">%s</xliff:g>"</string>
     <string name="enterprise_privacy_always_on_vpn_device" msgid="1735829327405126695">"Trvalé pripojenie k sieti VPN je zapnuté"</string>
@@ -4051,22 +3824,12 @@
     <string name="enterprise_privacy_ca_certs_device" msgid="1816495877258727663">"Dôveryhodné poverenia"</string>
     <string name="enterprise_privacy_ca_certs_personal" msgid="1516422660828485795">"Dôveryhodné poverenia vo vašom osobnom profile"</string>
     <string name="enterprise_privacy_ca_certs_work" msgid="4318941788592655561">"Dôveryhodné poverenia vo vašom pracovnom profile"</string>
-    <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="6459725295322004179">
-      <item quantity="few">Minimálne <xliff:g id="COUNT_1">%d</xliff:g> certifikáty CA</item>
-      <item quantity="many">Minimálne <xliff:g id="COUNT_1">%d</xliff:g> certifikátu CA</item>
-      <item quantity="other">Minimálne <xliff:g id="COUNT_1">%d</xliff:g> certifikátov CA</item>
-      <item quantity="one">Minimálne <xliff:g id="COUNT_0">%d</xliff:g> certifikát CA</item>
-    </plurals>
+    <string name="enterprise_privacy_number_ca_certs" msgid="4540897122831942658">"{count,plural, =1{Minimálne # certifikát CA}few{Minimálne # certifikáty CA}many{Minimum # CA certificates}other{Minimálne # certifikátov CA}}"</string>
     <string name="enterprise_privacy_lock_device" msgid="464054894363899866">"Správca môže uzamknúť zariadenie a obnoviť heslo"</string>
     <string name="enterprise_privacy_wipe_device" msgid="869589182352244591">"Správca môže zo zariadenia odstrániť všetky údaje"</string>
     <string name="enterprise_privacy_failed_password_wipe_device" msgid="7045164901334821226">"Počet nesprávnych zadaní hesla pred odstránením všetkých dát zariadenia"</string>
     <string name="enterprise_privacy_failed_password_wipe_work" msgid="2537582942554484170">"Počet nesprávnych zadaní hesla pred odstránením dát pracovného profilu"</string>
-    <plurals name="enterprise_privacy_number_failed_password_wipe" formatted="false" msgid="8811973918944217791">
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> pokusy</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> pokusu</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> pokusov</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> pokus</item>
-    </plurals>
+    <string name="enterprise_privacy_number_failed_password_wipe" msgid="2695842143305867642">"{count,plural, =1{# pokus}few{# pokusy}many{# attempts}other{# pokusov}}"</string>
     <string name="do_disclosure_generic" msgid="3067459392402324538">"Toto zariadenie spravuje vaša organizácia."</string>
     <string name="do_disclosure_with_name" msgid="867544298924410766">"Toto zariadenie spravuje organizácia <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>."</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
@@ -4094,27 +3857,12 @@
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Po zaplatení plnej sumy:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Zo zariadenia budú odstránené všetky obmedzenia"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Môžete odinštalovať aplikáciu veriteľa"</string>
-    <plurals name="default_camera_app_title" formatted="false" msgid="8112432929729136399">
-      <item quantity="few">Aplikácie na fotografovanie</item>
-      <item quantity="many">Aplikácie na fotografovanie</item>
-      <item quantity="other">Aplikácie na fotografovanie</item>
-      <item quantity="one">Aplikácia na fotografovanie</item>
-    </plurals>
+    <string name="default_camera_app_title" msgid="6546248868519965998">"{count,plural, =1{Kamerová aplikácia}few{Kamerové aplikácie}many{Camera apps}other{Kamerové aplikácie}}"</string>
     <string name="default_calendar_app_title" msgid="1870095225089706093">"Aplikácia Kalendár"</string>
     <string name="default_contacts_app_title" msgid="7740028900741944569">"Aplikácia Kontakty"</string>
-    <plurals name="default_email_app_title" formatted="false" msgid="8338194872609410234">
-      <item quantity="few">E-mailové aplikácie</item>
-      <item quantity="many">E-mailové aplikácie</item>
-      <item quantity="other">E-mailové aplikácie</item>
-      <item quantity="one">E-mailová aplikácia</item>
-    </plurals>
+    <string name="default_email_app_title" msgid="5411280873093244250">"{count,plural, =1{E‑mailový klient}few{E‑mailové klienty}many{Email client apps}other{E‑mailové klienty}}"</string>
     <string name="default_map_app_title" msgid="7569231732944853320">"Aplikácia Mapa"</string>
-    <plurals name="default_phone_app_title" formatted="false" msgid="4222188821845826493">
-      <item quantity="few">Aplikácie na telefonovanie</item>
-      <item quantity="many">Aplikácie na telefonovanie</item>
-      <item quantity="other">Aplikácie na telefonovanie</item>
-      <item quantity="one">Aplikácia na telefonovanie</item>
-    </plurals>
+    <string name="default_phone_app_title" msgid="795025972645464135">"{count,plural, =1{Telefónna aplikácia}few{Telefónne aplikácie}many{Phone apps}other{Telefónne aplikácie}}"</string>
     <string name="app_names_concatenation_template_2" msgid="8320181646458855457">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>, <xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>"</string>
     <string name="app_names_concatenation_template_3" msgid="7019703249717854148">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>, <xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>, <xliff:g id="THIRD_APP_NAME">%3$s</xliff:g>"</string>
     <string name="storage_default_internal_storage" msgid="4055660218818688131">"Toto zariadenie"</string>
@@ -4141,15 +3889,18 @@
     <string name="webview_uninstalled_for_user" msgid="627352948986275488">"(odinštalované pre používateľa <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="webview_disabled_for_user" msgid="5809886172032644498">"(vypnuté pre používateľa <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="autofill_app" msgid="7595308061826307921">"Služba automatického dopĺňania"</string>
+    <string name="default_autofill_app" msgid="372234803718251606">"Predvolená služba automatického dopĺňania"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Heslá"</string>
-    <plurals name="autofill_passwords_count" formatted="false" msgid="7715009165029452622">
-      <item quantity="few"><xliff:g id="COUNT_1">%1$d</xliff:g> heslá</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%1$d</xliff:g> passwords</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> hesiel</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> heslo</item>
-    </plurals>
+    <string name="credman_credentials" msgid="5937331545565783811">"Služby na overovanie totožnosti a správu hesiel"</string>
+    <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# heslo}few{# heslá}many{# passwords}other{# hesiel}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"automaticky, vypĺňanie, automatické dopĺňanie, heslo"</string>
+    <string name="credman_keywords" msgid="7236954350284379264">"prihlasovacie údaje, prístupový kľúč, heslo"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Skontrolujte, či ide o dôveryhodnú aplikáciu&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Automatické dopĺňanie Google&gt;%1$s&lt;/xliff:g&gt; určuje na základe obsahu obrazovky, čo je možné automaticky vyplniť."</string>
+    <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Chcete službu %1$s vypnúť?"</string>
+    <string name="credman_confirmation_message" msgid="1485617504425237430">"Uložené informácie, ako sú adresy alebo spôsoby platby, sa pri prihlasovaní nebudú dopĺňať. Ak chcete, aby sa uložené informácie naďalej dopĺňali, nastavte predvolenú službu automatického dopĺňania"</string>
+    <string name="credman_error_message_title" msgid="5108868200002966901">"Obmedzenie počtu služieb na overovanie totožnosti a správu hesiel"</string>
+    <string name="credman_error_message" msgid="4058425433345908579">"Súčasne môžete mať aktívnych maximálne päť služieb na automatické dopĺňanie a správu hesiel. Ak chcete pridať ďalšiu službu, jednu vypnite."</string>
+    <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"Vypnúť"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"Automatické dopĺňanie"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"Úroveň zaznamenávania"</string>
     <string name="autofill_max_partitions" msgid="7342195529574406366">"Maximum žiadostí na reláciu"</string>
@@ -4300,8 +4051,7 @@
     <string name="mobile_data_active" msgid="8683694456401350210">"Mobilné dáta sú aktívne"</string>
     <string name="mobile_data_off" msgid="2702029611959308269">"Mobilné dáta sú vypnuté"</string>
     <string name="subscription_available" msgid="2659722770210403365">"K dispozícii"</string>
-    <!-- no translation found for mobile_network_list_add_more (5076722903436552813) -->
-    <skip />
+    <string name="mobile_network_list_add_more" msgid="5076722903436552813">"Pridať SIM kartu"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"Aktívne / SIM"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"Neaktívne / SIM"</string>
     <string name="mobile_network_active_esim" msgid="3984452275968408382">"Aktívna / eSIM"</string>
@@ -4333,6 +4083,7 @@
     <string name="mobile_data_usage_title" msgid="2047864499317759728">"Spotreba dát aplikáciami"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Neplatný režim siete <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignorovať."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Názvy prístupových bodov"</string>
+    <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Nie je k dispozícii pri pripojení k operátorovi <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"Zobraziť viac"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"Chcete zapnúť operátora <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
@@ -4422,12 +4173,7 @@
     <string name="copyable_slice_toast" msgid="1008251852798990606">"Položka <xliff:g id="COPY_CONTENT">%1$s</xliff:g> bola skopírovaná do schránky."</string>
     <string name="search_bar_account_avatar_content_description" msgid="880523277036898350"></string>
     <string name="accessibility_usage_title" msgid="9190967143518779145">"Využitie dostupnosti"</string>
-    <plurals name="accessibility_usage_summary" formatted="false" msgid="6910643986958263005">
-      <item quantity="few">Do vášho zariadenia majú prístup <xliff:g id="SERVICE_COUNT">%1$d</xliff:g> aplikácie</item>
-      <item quantity="many"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> apps have full access to your device</item>
-      <item quantity="other">Do vášho zariadenia má prístup <xliff:g id="SERVICE_COUNT">%1$d</xliff:g> aplikácií</item>
-      <item quantity="one">Do vášho zariadenia má prístup 1 aplikácia</item>
-    </plurals>
+    <string name="accessibility_usage_summary" msgid="4348285359995227813">"{count,plural, =1{Do vášho zariadenia má úplný prístup 1 aplikácia}few{Do vášho zariadenia majú úplný prístup # aplikácie}many{# apps have full access to your device}other{Do vášho zariadenia má úplný prístup # aplikácií}}"</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"Dôležité informácie"</string>
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"POKRAČOVAŤ"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"NIE, ĎAKUJEM"</string>
@@ -4613,6 +4359,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"Povoliť 2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"Sieť 2G je menej bezpečná, ale na niektorých miestach môže zlepšiť pripojenie. V prípade tiesňových volaní je sieť 2G stále povolená."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> vyžaduje dostupnosť siete 2G"</string>
+    <string name="allow_null_algorithms_title" msgid="9143076634352979096">"Povoliť menej zabezpečené pripojenie"</string>
+    <string name="allow_null_algorithms_summary" msgid="5874570357011783211">"V niektorých oblastiach môže dôjsť k zlepšeniu signálu. Pre tiesňové hovory sú vždy povolené menej zabezpečené pripojenia."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Všetky služby"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Zobraziť prístup k schránke"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Zobraziť správu, keď sa aplikácie dostanú k textu, obrázkom alebo inému obsahu, ktorý ste skopírovali"</string>
@@ -4718,8 +4466,13 @@
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Nesprávne heslo"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Ak chcete začať počúvať, umiestnite QR kód do stredu nižšie"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR kód nie je platný formát"</string>
-    <!-- no translation found for convert_to_esim_title (71037864129009206) -->
-    <skip />
-    <!-- no translation found for transfer_esim_to_another_device_title (5286117866086383192) -->
-    <skip />
+    <string name="convert_to_esim_title" msgid="71037864129009206">"Konvertovať na eSIM"</string>
+    <string name="transfer_esim_to_another_device_title" msgid="5286117866086383192">"Preniesť eSIM kartu do iného zariadenia"</string>
+    <string name="background_install_preference_summary" msgid="3065219346519340364">"{count,plural, =1{# aplikácia}few{# aplikácie}many{# apps}other{# aplikácií}}"</string>
+    <string name="background_install_title" msgid="607913515188276168">"Aplikácie nainštalované na pozadí"</string>
+    <string name="background_install_summary" msgid="3890296129543309666">"Výrobca vášho zariadenia môže v zariadení inštalovať aplikácie na pozadí alebo takýto postup povoliť vášmu operátorovi či iným partnerom.\n\nŽiadne aplikácie, ktoré sú tu uvedené, nie sú potrebné na to, aby vaše zariadenie normálne fungovalo. Aplikácie, ktoré nechcete, môžete odinštalovať."</string>
+    <string name="background_install_feature_list_no_entry" msgid="2071343281272266154">"Na pozadí neboli nainštalované žiadne aplikácie"</string>
+    <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Odinštalovať aplikáciu"</string>
+    <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Aplikácie nainštalované za posledný # mesiac}few{Aplikácie nainštalované za posledné # mesiace}many{Aplikácie nainštalované za posledného # mesiaca}other{Aplikácie nainštalované za posledných # mesiacov}}"</string>
+    <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Aplikácie nainštalované pred viac než # mesiacom}few{Aplikácie nainštalované pred viac než # mesiacmi}many{Aplikácie nainštalované pred viac než # mesiaca}other{Aplikácie nainštalované pred viac než # mesiacmi}}"</string>
 </resources>

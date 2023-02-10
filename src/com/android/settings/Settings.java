@@ -114,6 +114,8 @@ public class Settings extends SettingsActivity {
     public static class LocalePickerActivity extends SettingsActivity { /* empty */ }
     public static class LanguageAndInputSettingsActivity extends SettingsActivity { /* empty */ }
     public static class LanguageSettingsActivity extends SettingsActivity { /* empty */ }
+    /** Activity for the regional preferences settings. */
+    public static class RegionalPreferencesActivity extends SettingsActivity { /* empty */ }
     public static class KeyboardSettingsActivity extends SettingsActivity { /* empty */ }
     public static class UserDictionarySettingsActivity extends SettingsActivity { /* empty */ }
     public static class DarkThemeSettingsActivity extends SettingsActivity { /* empty */ }
@@ -383,6 +385,7 @@ public class Settings extends SettingsActivity {
     public static class AdvancedConnectedDeviceActivity extends SettingsActivity { /* empty */ }
     public static class NfcSettingsActivity extends SettingsActivity { /* empty */ }
     public static class BluetoothDeviceDetailActivity extends SettingsActivity { /* empty */ }
+    public static class StylusUsiDetailsActivity extends SettingsActivity { /* empty */ }
     public static class BluetoothBroadcastActivity extends SettingsActivity { /* empty */ }
     public static class BluetoothFindBroadcastsActivity extends SettingsActivity { /* empty */ }
     public static class WifiCallingDisclaimerActivity extends SettingsActivity { /* empty */ }

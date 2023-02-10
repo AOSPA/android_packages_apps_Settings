@@ -104,7 +104,7 @@ public class FingerprintEnrollmentViewModel extends AndroidViewModel implements
      * Handle activity result from FingerprintFindSensor
      */
     public void onContinueEnrollActivityResult(@NonNull ActivityResult result, int userId) {
-        if (mIsWaitingActivityResult.compareAndSet(true, false)) {
+        if (!mIsWaitingActivityResult.compareAndSet(true, false)) {
             Log.w(TAG, "fail to reset isWaiting flag for enrollment");
         }
         if (result.getResultCode() == RESULT_FINISHED
@@ -123,8 +123,6 @@ public class FingerprintEnrollmentViewModel extends AndroidViewModel implements
             mSetResultLiveData.postValue(result);
         }
     }
-
-
 
     private boolean isKeyguardSecure() {
         return mKeyguardManager != null && mKeyguardManager.isKeyguardSecure();
@@ -181,5 +179,19 @@ public class FingerprintEnrollmentViewModel extends AndroidViewModel implements
      */
     public void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putBoolean(SAVED_STATE_IS_WAITING_ACTIVITY_RESULT, mIsWaitingActivityResult.get());
+    }
+
+    /**
+     * The first sensor type is UDFPS sensor or not
+     */
+    public boolean canAssumeUdfps() {
+        return mFingerprintRepository.canAssumeUdfps();
+    }
+
+    /**
+     * The first sensor type is side fps sensor or not
+     */
+    public boolean canAssumeSfps() {
+        return mFingerprintRepository.canAssumeSfps();
     }
 }

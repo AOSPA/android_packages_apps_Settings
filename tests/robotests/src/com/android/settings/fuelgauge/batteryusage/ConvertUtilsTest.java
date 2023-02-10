@@ -15,6 +15,9 @@
  */
 package com.android.settings.fuelgauge.batteryusage;
 
+import static android.app.usage.UsageStatsManager.USAGE_SOURCE_CURRENT_ACTIVITY;
+import static android.app.usage.UsageStatsManager.USAGE_SOURCE_TASK_ROOT_ACTIVITY;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -22,14 +25,17 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageEvents;
 import android.app.usage.UsageEvents.Event;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.database.MatrixCursor;
 import android.os.BatteryManager;
 import android.os.BatteryUsageStats;
 import android.os.LocaleList;
+import android.os.RemoteException;
 import android.os.UserHandle;
 
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
@@ -54,6 +60,8 @@ public final class ConvertUtilsTest {
     private PackageManager mMockPackageManager;
     @Mock
     private BatteryUsageStats mBatteryUsageStats;
+    @Mock
+    private IUsageStatsManager mUsageStatsManager;
     @Mock
     private BatteryEntry mMockBatteryEntry;
 
@@ -277,7 +285,7 @@ public final class ConvertUtilsTest {
 
         final long userId = 2;
         final AppUsageEvent appUsageEvent = ConvertUtils.convertToAppUsageEvent(
-                mContext, event, userId);
+                mContext, mUsageStatsManager, event, userId);
         assertThat(appUsageEvent.getTimestamp()).isEqualTo(101L);
         assertThat(appUsageEvent.getType()).isEqualTo(AppUsageEventType.ACTIVITY_RESUMED);
         assertThat(appUsageEvent.getPackageName()).isEqualTo("com.android.settings1");
@@ -298,7 +306,7 @@ public final class ConvertUtilsTest {
 
         final long userId = 1;
         final AppUsageEvent appUsageEvent = ConvertUtils.convertToAppUsageEvent(
-                mContext, event, userId);
+                mContext, mUsageStatsManager, event, userId);
         assertThat(appUsageEvent.getTimestamp()).isEqualTo(101L);
         assertThat(appUsageEvent.getType()).isEqualTo(AppUsageEventType.DEVICE_SHUTDOWN);
         assertThat(appUsageEvent.getPackageName()).isEqualTo("com.android.settings1");
@@ -314,7 +322,7 @@ public final class ConvertUtilsTest {
         event.mPackage = null;
 
         final AppUsageEvent appUsageEvent = ConvertUtils.convertToAppUsageEvent(
-                mContext, event, /*userId=*/ 0);
+                mContext, mUsageStatsManager, event, /*userId=*/ 0);
 
         assertThat(appUsageEvent).isNull();
     }
@@ -330,9 +338,71 @@ public final class ConvertUtilsTest {
 
         final long userId = 1;
         final AppUsageEvent appUsageEvent = ConvertUtils.convertToAppUsageEvent(
-                mContext, event, userId);
+                mContext, mUsageStatsManager, event, userId);
 
         assertThat(appUsageEvent).isNull();
+    }
+
+    @Test
+    public void convertToAppUsageEventFromCursor_returnExpectedResult() {
+        final MatrixCursor cursor = new MatrixCursor(
+                new String[]{
+                        AppUsageEventEntity.KEY_UID,
+                        AppUsageEventEntity.KEY_USER_ID,
+                        AppUsageEventEntity.KEY_PACKAGE_NAME,
+                        AppUsageEventEntity.KEY_TIMESTAMP,
+                        AppUsageEventEntity.KEY_APP_USAGE_EVENT_TYPE,
+                        AppUsageEventEntity.KEY_TASK_ROOT_PACKAGE_NAME,
+                        AppUsageEventEntity.KEY_INSTANCE_ID});
+        cursor.addRow(
+                new Object[]{
+                        101L,
+                        1001L,
+                        "com.android.settings1",
+                        10001L,
+                        AppUsageEventType.DEVICE_SHUTDOWN.getNumber(),
+                        "com.android.settings2",
+                        100001L});
+        cursor.moveToFirst();
+
+        final AppUsageEvent appUsageEvent = ConvertUtils.convertToAppUsageEventFromCursor(cursor);
+
+        assertThat(appUsageEvent.getUid()).isEqualTo(101L);
+        assertThat(appUsageEvent.getUserId()).isEqualTo(1001L);
+        assertThat(appUsageEvent.getPackageName()).isEqualTo("com.android.settings1");
+        assertThat(appUsageEvent.getTimestamp()).isEqualTo(10001L);
+        assertThat(appUsageEvent.getType()).isEqualTo(AppUsageEventType.DEVICE_SHUTDOWN);
+        assertThat(appUsageEvent.getTaskRootPackageName()).isEqualTo("com.android.settings2");
+        assertThat(appUsageEvent.getInstanceId()).isEqualTo(100001L);
+    }
+
+    @Test
+    public void convertToAppUsageEventFromCursor_emptyInstanceIdAndRootName_returnExpectedResult() {
+        final MatrixCursor cursor = new MatrixCursor(
+                new String[]{
+                        AppUsageEventEntity.KEY_UID,
+                        AppUsageEventEntity.KEY_USER_ID,
+                        AppUsageEventEntity.KEY_PACKAGE_NAME,
+                        AppUsageEventEntity.KEY_TIMESTAMP,
+                        AppUsageEventEntity.KEY_APP_USAGE_EVENT_TYPE});
+        cursor.addRow(
+                new Object[]{
+                        101L,
+                        1001L,
+                        "com.android.settings1",
+                        10001L,
+                        AppUsageEventType.DEVICE_SHUTDOWN.getNumber()});
+        cursor.moveToFirst();
+
+        final AppUsageEvent appUsageEvent = ConvertUtils.convertToAppUsageEventFromCursor(cursor);
+
+        assertThat(appUsageEvent.getUid()).isEqualTo(101L);
+        assertThat(appUsageEvent.getUserId()).isEqualTo(1001L);
+        assertThat(appUsageEvent.getPackageName()).isEqualTo("com.android.settings1");
+        assertThat(appUsageEvent.getTimestamp()).isEqualTo(10001L);
+        assertThat(appUsageEvent.getType()).isEqualTo(AppUsageEventType.DEVICE_SHUTDOWN);
+        assertThat(appUsageEvent.getTaskRootPackageName()).isEqualTo("");
+        assertThat(appUsageEvent.getInstanceId()).isEqualTo(0);
     }
 
     @Test
@@ -351,5 +421,54 @@ public final class ConvertUtilsTest {
     public void getLocale_emptyLocaleList_returnDefaultLocale() {
         mContext.getResources().getConfiguration().setLocales(new LocaleList());
         assertThat(ConvertUtils.getLocale(mContext)).isEqualTo(Locale.getDefault());
+    }
+
+    @Test
+    public void getEffectivePackageName_currentActivity_returnPackageName() throws RemoteException {
+        when(mUsageStatsManager.getUsageSource()).thenReturn(USAGE_SOURCE_CURRENT_ACTIVITY);
+        final String packageName = "com.android.settings1";
+        final String taskRootPackageName = "com.android.settings2";
+
+        assertThat(ConvertUtils.getEffectivePackageName(
+                mUsageStatsManager, packageName, taskRootPackageName))
+                .isEqualTo(packageName);
+    }
+
+    @Test
+    public void getEffectivePackageName_usageSourceThrowException_returnPackageName()
+            throws RemoteException {
+        when(mUsageStatsManager.getUsageSource()).thenThrow(new RemoteException());
+        final String packageName = "com.android.settings1";
+        final String taskRootPackageName = "com.android.settings2";
+
+        assertThat(ConvertUtils.getEffectivePackageName(
+                mUsageStatsManager, packageName, taskRootPackageName))
+                .isEqualTo(packageName);
+    }
+
+    @Test
+    public void getEffectivePackageName_rootActivity_returnTaskRootPackageName()
+            throws RemoteException {
+        when(mUsageStatsManager.getUsageSource()).thenReturn(USAGE_SOURCE_TASK_ROOT_ACTIVITY);
+        final String packageName = "com.android.settings1";
+        final String taskRootPackageName = "com.android.settings2";
+
+        assertThat(ConvertUtils.getEffectivePackageName(
+                mUsageStatsManager, packageName, taskRootPackageName))
+                .isEqualTo(taskRootPackageName);
+    }
+
+    @Test
+    public void getEffectivePackageName_nullOrEmptyTaskRoot_returnPackageName()
+            throws RemoteException {
+        when(mUsageStatsManager.getUsageSource()).thenReturn(USAGE_SOURCE_TASK_ROOT_ACTIVITY);
+        final String packageName = "com.android.settings1";
+
+        assertThat(ConvertUtils.getEffectivePackageName(
+                mUsageStatsManager, packageName, /*taskRootPackageName=*/ null))
+                .isEqualTo(packageName);
+        assertThat(ConvertUtils.getEffectivePackageName(
+                mUsageStatsManager, packageName, /*taskRootPackageName=*/ ""))
+                .isEqualTo(packageName);
     }
 }
