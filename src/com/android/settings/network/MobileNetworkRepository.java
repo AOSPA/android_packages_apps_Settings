@@ -249,7 +249,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             SubscriptionInfo subInfo) {
         for (int i = 0; i < uiccSlotInfos.length; i++) {
             UiccSlotInfo curSlotInfo = uiccSlotInfos[i];
-            if (curSlotInfo.getCardStateInfo() == CARD_STATE_INFO_PRESENT) {
+            if (curSlotInfo != null && curSlotInfo.getCardStateInfo() == CARD_STATE_INFO_PRESENT) {
                 final int index = i;
                 mIsEuicc = curSlotInfo.getIsEuicc();
                 mCardState = curSlotInfo.getCardStateInfo();
