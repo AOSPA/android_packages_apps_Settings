@@ -78,6 +78,9 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     private static boolean mBAEnabled = false;
     private static boolean mBAPropertyChecked = false;
 
+    static final int FEATURE_HEARING_DEVICE_CONTROLS_ORDER = 1;
+    static final int FEATURE_AUDIO_ROUTING_ORDER = 2;
+
     @VisibleForTesting
     static int EDIT_DEVICE_NAME_ITEM_ID = Menu.FIRST;
 
@@ -344,8 +347,15 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                   mCachedDevice, lifecycle));
           controllers.add(new BluetoothDetailsMacAddressController(context, this, mCachedDevice,
                   lifecycle));
-          controllers.add(new StylusDevicesController(context, mInputDevice, lifecycle));
+          controllers.add(new StylusDevicesController(context, mInputDevice, mCachedDevice,
+                  lifecycle));
           controllers.add(new BluetoothDetailsRelatedToolsController(context, this, mCachedDevice,
+                  lifecycle));
+          controllers.add(new BluetoothDetailsPairOtherController(context, this, mCachedDevice,
+                  lifecycle));
+          controllers.add(new BluetoothDetailsHearingDeviceControlsController(context, this,
+                  mCachedDevice, lifecycle));
+          controllers.add(new BluetoothDetailsAudioRoutingController(context, this, mCachedDevice,
                   lifecycle));
           if (mBAPropertyChecked == false) {
               int advAudioMask = SystemProperties.getInt(BLUETOOTH_ADV_AUDIO_MASK_PROP, 0);
@@ -406,9 +416,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
 
     @VisibleForTesting
     void setTitleForInputDevice() {
-        // TODO(b/254835745) once source filter for bt stylus merged
-        // && mInputDevice.supportsSource(InputDevice.SOURCE_BLUETOOTH_STYLUS))
-        if (mInputDevice != null) {
+        if (StylusDevicesController.isDeviceStylus(mInputDevice, mCachedDevice)) {
             // This will override the default R.string.device_details_title "Device Details"
             // that will show on non-stylus bluetooth devices.
             // That title is set via the manifest and also from BluetoothDeviceUpdater.

@@ -41,10 +41,10 @@
     <!-- String for removal of sensitive info on about, depending on tap -->
     <string name="device_info_protected_single_press">Tap to show info</string>
     <!-- [CHAR LIMIT=NONE] Device Info screen. Countdown for user taps to enable development settings -->
-    <plurals name="show_dev_countdown">
-        <item quantity="one">You are now <xliff:g id="step_count">%1$d</xliff:g> step away from being a developer.</item>
-        <item quantity="other">You are now <xliff:g id="step_count">%1$d</xliff:g> steps away from being a developer.</item>
-    </plurals>
+    <string name="show_dev_countdown">{count, plural,
+      =1      {You are now # step away from being a developer.}
+      other   {You are now # steps away from being a developer.}
+    }</string>
     <!-- [CHAR LIMIT=NONE] Device Info screen. Confirmation that developer settings are enabled -->
     <string name="show_dev_on">You are now a developer!</string>
     <!-- [CHAR LIMIT=NONE] Device Info screen. Okay we get it, stop pressing, you already have it on -->
@@ -267,13 +267,13 @@
     <!-- Title for stylus device details page [CHAR LIMIT=50] -->
     <string name="stylus_device_details_title">Stylus</string>
     <!-- Preference title for setting the default note taking app [CHAR LIMIT=none] -->
-    <string name="stylus_default_notes_app">System note taking app</string>
+    <string name="stylus_default_notes_app">Default notes app</string>
     <!-- Preference title for toggling whether handwriting in textfields is enabled [CHAR LIMIT=none] -->
-    <string name="stylus_textfield_handwriting">Stylus writing in textfields</string>
+    <string name="stylus_textfield_handwriting">Write in text fields</string>
     <!-- Preference title for toggling whether stylus button presses are ignored [CHAR LIMIT=none] -->
     <string name="stylus_ignore_button">Ignore all stylus button presses</string>
-    <!-- Name shown in a USI stylus header in device details page [CHAR LIMIT=60] -->
-    <string name="stylus_usi_header_title">USI stylus</string>
+    <!-- Name shown in the title of individual stylus preference in the connected devices page [CHAR LIMIT=60] -->
+    <string name="stylus_connected_devices_title">Stylus</string>
 
     <!-- Date & time settings screen title -->
     <string name="date_and_time">Date &amp; time</string>
@@ -370,11 +370,49 @@
     <!-- Description for introduction of the locale selection supported of app list [CHAR LIMIT=NONE]-->
     <string name="desc_app_locale_selection_supported">Only apps that support language selection are shown here.</string>
 
+    <!-- Regional Preferences begin -->
+    <!-- The title of the menu entry of regional preferences. [CHAR LIMIT=50] -->
+    <string name="regional_preferences_title">Regional preferences</string>
+    <!-- The summary of the  menu entry of regional preferences. [CHAR LIMIT=NONE] -->
+    <string name="regional_preferences_summary">Set units and number preferences</string>
+    <!-- The subtitle of main page of regional preferences. [CHAR LIMIT=NONE] -->
+    <string name="regional_preferences_main_page_sub_title">Let apps know your regional preferences so they can personalize your experience.</string>
+    <!-- The subtitle of option's page of regional preferences for Temperature units, Calendar and First day of week. [CHAR LIMIT=NONE] -->
+    <string name="regional_preferences_option_page_sub_title">Apps will use your regional preferences where possible.</string>
+    <!-- The title of menu entry of Temperature unit preference. [CHAR LIMIT=50] -->
+    <string name="temperature_preferences_title">Temperature units</string>
+    <!-- The title of the  menu entry of Calendar type preference. [CHAR LIMIT=50]  -->
+    <string name="calendar_preferences_title">Calendar</string>
+    <!-- The title of the  menu entry of First day of week preference. [CHAR LIMIT=50]  -->
+    <string name="first_day_of_week_preferences_title">First day of week</string>
+    <!-- The title of the menu entry of Numbers system preference. [CHAR LIMIT=50]  -->
+    <string name="numbers_preferences_title">Numbers</string>
+    <!-- The summary of default string for each regional preference. [CHAR LIMIT=50] -->
+    <string name="default_string_of_regional_preference">Use app default</string>
+    <!-- The title of Celsius for preference of temperature unit. [CHAR LIMIT=50] -->
+    <string name="celsius_temperature_unit">Celsius(\u00B0C)</string>
+    <!-- The title of Fahrenheit for preference of temperature unit. [CHAR LIMIT=50] -->
+    <string name="fahrenheit_temperature_unit">Fahrenheit(\u00B0F)</string>
+    <!-- The title of sunday for preference of first day of week. [CHAR LIMIT=50] -->
+    <string name="sunday_first_day_of_week">Sunday</string>
+    <!-- The title of monday for preference of first day of week. [CHAR LIMIT=50] -->
+    <string name="monday_first_day_of_week">Monday</string>
+    <!-- The title of tuesday for preference of first day of week. [CHAR LIMIT=50] -->
+    <string name="tuesday_first_day_of_week">Tuesday</string>
+    <!-- The title of wednesday for preference of first day of week. [CHAR LIMIT=50] -->
+    <string name="wednesday_first_day_of_week">Wednesday</string>
+    <!-- The title of thursday for preference of first day of week. [CHAR LIMIT=50] -->
+    <string name="thursday_first_day_of_week">Thursday</string>
+    <!-- The title of friday for preference of first day of week. [CHAR LIMIT=50] -->
+    <string name="friday_first_day_of_week">Friday</string>
+    <!-- The title of saturday for preference of first day of week. [CHAR LIMIT=50] -->
+    <string name="saturday_first_day_of_week">Saturday</string>
+
     <!-- The title of the confirmation dialog shown when the user selects one / several languages and tries to remove them [CHAR LIMIT=60] -->
-    <plurals name="dlg_remove_locales_title">
-        <item quantity="one">Remove selected language?</item>
-        <item quantity="other">Remove selected languages?</item>
-    </plurals>
+    <string name="dlg_remove_locales_title">{count, plural,
+      =1      {Remove selected language?}
+      other   {Remove selected languages?}
+    }</string>
 
     <!-- The text of the confirmation dialog shown when the user selects several languages and tries to remove them [CHAR LIMIT=NONE] -->
     <string name="dlg_remove_locales_message">Text will be displayed in another language.</string>
@@ -417,6 +455,8 @@
     <string name="share">Share</string>
     <!-- Button label for generic add action [CHAR LIMIT=20] -->
     <string name="add">Add</string>
+    <!-- Button label for remove action [CHAR LIMIT=20] -->
+    <string name="remove">Remove</string>
 
     <!-- Title of the Settings activity shown within the application itself. -->
     <string name="settings_label">Settings</string>
@@ -442,6 +482,8 @@
     <string name="date_time_auto">Set time automatically</string>
     <!-- Date & time setting screen setting switch title: whether the time zone should be determined automatically [CHAR LIMIT=100]  -->
     <string name="zone_auto_title">Set automatically</string>
+    <!-- Date & time setting screen setting switch summary for non-telephony devices [CHAR LIMIT=100] -->
+    <string name="auto_zone_requires_location_summary">Location will be used for setting the time zone when this toggle is on</string>
     <!-- Date & time setting screen setting option summary text for the automatic 24 hour setting checkbox [CHAR LIMIT=100] -->
     <string name="date_time_24hour_auto">Use locale default</string>
     <!-- Date & time setting screen setting check box title -->
@@ -504,10 +546,10 @@
     <!-- Used in the location settings to control turning on/off the feature entirely [CHAR LIMIT=60] -->
     <string name="location_settings_primary_switch_title">Use location</string>
     <!-- Summary for Location settings when location is on, explaining how many apps have location permission [CHAR LIMIT=NONE]-->
-    <plurals name="location_settings_summary_location_on">
-        <item quantity="one">On - <xliff:g id="count">%1$d</xliff:g> app has access to location</item>
-        <item quantity="other">On - <xliff:g id="count">%1$d</xliff:g> apps have access to location</item>
-    </plurals>
+    <string name="location_settings_summary_location_on">{count, plural,
+      =1      {On - # app has access to location}
+      other   {On - # apps have access to location}
+    }</string>
     <!-- Location settings, loading the number of apps which have location permission [CHAR LIMIT=30] -->
     <string name="location_settings_loading_app_permission_stats">Loading\u2026</string>
     <!-- Location settings footer warning text when location is on [CHAR LIMIT=NONE] -->
@@ -689,10 +731,10 @@
     <!-- Preference to add another fingerprint -->
     <string name="fingerprint_add_title">Add fingerprint</string>
     <!-- Message showing the current number of fingerprints set up. Shown for a menu item that launches fingerprint settings or enrollment. -->
-    <plurals name="security_settings_fingerprint_preference_summary">
-        <item quantity="one">Fingerprint added</item>
-        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> fingerprints added</item>
-    </plurals>
+    <string name="security_settings_fingerprint_preference_summary">{count, plural,
+      =1      {Fingerprint added}
+      other   {# fingerprints added}
+    }</string>
     <!-- message shown in summary field when no fingerprints are registered -->
     <string name="security_settings_fingerprint_preference_summary_none"></string>
     <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
@@ -845,9 +887,9 @@
     <!-- Title shown in fingerprint enrollment dialog once enrollment is completed [CHAR LIMIT=29] -->
     <string name="security_settings_fingerprint_enroll_finish_title">Fingerprint added</string>
     <!-- Title for require screen on to auth toggle shown in fingerprint enrollment dialog once enrollment is completed. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_require_screen_on_to_auth_title">Unlock only when screen is on</string>
+    <string name="security_settings_require_screen_on_to_auth_title">Touch to unlock anytime</string>
     <!-- Description for require screen on to auth toggle shown in fingerprint enrollment dialog once enrollment is completed. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_require_screen_on_to_auth_description">The screen must be on before you can unlock with your fingerprint. This makes accidental unlocking less likely.</string>
+    <string name="security_settings_require_screen_on_to_auth_description">Touch the sensor to unlock, even when the screen is off. This makes accidental unlocking more likely.</string>
     <!-- Description for require screen on to auth toggle shown in fingerprint enrollment dialog once enrollment is completed. [CHAR LIMIT=NONE] -->
     <string name="security_settings_require_screen_on_to_auth_keywords">Screen, Unlock</string>
     <!-- Button text to skip enrollment of fingerprint [CHAR LIMIT=40] -->
@@ -1028,8 +1070,6 @@
     <string name="fingerprint_unlock_set_unlock_password">Fingerprint + Password</string>
     <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
     <string name="fingerprint_unlock_skip_fingerprint">Continue without fingerprint</string>
-    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
-    <string name="fingerprint_unlock_title">You can unlock your phone using your fingerprint. For security, this option requires a backup screen lock.</string>
 
     <!-- Title for preference that guides the user through creating a backup unlock pattern for Face Unlock [CHAR LIMIT=45]-->
     <string name="face_unlock_set_unlock_pattern">Face Unlock + Pattern</string>
@@ -1039,8 +1079,6 @@
     <string name="face_unlock_set_unlock_password">Face Unlock + Password</string>
     <!-- Title for preference that guides the user to skip Face Unlock setup [CHAR LIMIT=60]-->
     <string name="face_unlock_skip_face">Continue without Face Unlock</string>
-    <!-- Message shown in screen lock picker while setting up the new screen lock with face unlock option. [CHAR LIMIT=NONE] -->
-    <string name="face_unlock_title">You can unlock your phone using your face. For security, this option requires a backup screen lock.</string>
 
     <!-- Title for preference that guides the user through creating a backup unlock pattern for biometrics unlock [CHAR LIMIT=45]-->
     <string name="biometrics_unlock_set_unlock_pattern">Pattern \u2022 Face \u2022 Fingerprint</string>
@@ -1050,8 +1088,6 @@
     <string name="biometrics_unlock_set_unlock_password">Password \u2022 Face \u2022 Fingerprint</string>
     <!-- Title for preference that guides the user to skip face unlock setup [CHAR LIMIT=60]-->
     <string name="biometrics_unlock_skip_biometrics">Continue without face or fingerprint</string>
-    <!-- Message shown in screen lock picker while setting up the new screen lock with biometrics option. [CHAR LIMIT=NONE] -->
-    <string name="biometrics_unlock_title">You can unlock your phone using your face or fingerprint. For security, this option requires a backup screen lock.</string>
 
     <!-- Summary for "Configure lockscreen" when lock screen is off [CHAR LIMIT=45] -->
     <string name="unlock_set_unlock_mode_off">None</string>
@@ -1140,10 +1176,10 @@
     <string name="lock_last_password_attempt_before_wipe_profile">If you enter an incorrect password on the next attempt, your work profile and its data will be deleted</string>
 
     <!-- Hint shown in dialog screen when password is too short -->
-    <plurals name="lockpassword_password_too_short">
-        <item quantity="one">Must contain at least <xliff:g id="count" example="1">%d</xliff:g> character</item>
-        <item quantity="other">Must be at least <xliff:g id="count" example="3">%d</xliff:g> characters</item>
-    </plurals>
+    <string name="lockpassword_password_too_short">{count, plural,
+      =1      {Must contain at least # character}
+      other   {Must be at least # characters}
+    }</string>
     <!-- Hint shown in dialog screen when password is too short and only using numbers. [CHAR LIMIT=NONE] -->
     <string name="lockpassword_password_too_short_all_numeric">
         {count, plural,
@@ -1152,21 +1188,21 @@
         }
     </string>
     <!-- Hint shown in dialog screen when PIN is too short -->
-    <plurals name="lockpassword_pin_too_short">
-        <item quantity="one">PIN must contain at least <xliff:g id="count" example="1">%d</xliff:g> digit</item>
-        <item quantity="other">PIN must be at least <xliff:g id="count" example="3">%d</xliff:g> digits</item>
-    </plurals>
+    <string name="lockpassword_pin_too_short">{count, plural,
+      =1      {PIN must contain at least # digit}
+      other   {PIN must be at least # digits}
+    }</string>
 
     <!-- Error shown in popup when password is too long -->
-    <plurals name="lockpassword_password_too_long">
-        <item quantity="one">Must be fewer than <xliff:g id="number" example="1">%d</xliff:g> character</item>
-        <item quantity="other">Must be fewer than <xliff:g id="number" example="17">%d</xliff:g> characters</item>
-    </plurals>
+    <string name="lockpassword_password_too_long">{count, plural,
+      =1      {Must be fewer than # character}
+      other   {Must be fewer than # characters}
+    }</string>
     <!-- Error shown in popup when PIN is too long -->
-    <plurals name="lockpassword_pin_too_long">
-        <item quantity="one">Must be fewer than <xliff:g id="number" example="1">%d</xliff:g> digit</item>
-        <item quantity="other">Must be fewer than <xliff:g id="number" example="17">%d</xliff:g> digits</item>
-    </plurals>
+    <string name="lockpassword_pin_too_long">{count, plural,
+      =1      {Must be fewer than # digit}
+      other   {Must be fewer than # digits}
+    }</string>
 
     <!-- Error shown when in PIN mode and PIN has been used recently. Please keep this string short! -->
     <string name="lockpassword_pin_recently_used">Device admin doesn\'t allow using a recent PIN</string>
@@ -1175,46 +1211,46 @@
     <string name="lockpassword_illegal_character">This can\'t include an invalid character</string>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of letters -->
-    <plurals name="lockpassword_password_requires_letters">
-        <item quantity="one">Must contain at least 1 letter</item>
-        <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> letters</item>
-    </plurals>
+    <string name="lockpassword_password_requires_letters">{count, plural,
+      =1      {Must contain at least 1 letter}
+      other   {Must contain at least # letters}
+    }</string>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of lowercase letters -->
-    <plurals name="lockpassword_password_requires_lowercase">
-        <item quantity="one">Must contain at least 1 lowercase letter</item>
-        <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> lowercase letters</item>
-    </plurals>
+    <string name="lockpassword_password_requires_lowercase">{count, plural,
+      =1      {Must contain at least 1 lowercase letter}
+      other   {Must contain at least # lowercase letters}
+    }</string>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of uppercase letters -->
-    <plurals name="lockpassword_password_requires_uppercase">
-        <item quantity="one">Must contain at least 1 uppercase letter</item>
-        <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> uppercase letters</item>
-    </plurals>
+    <string name="lockpassword_password_requires_uppercase">{count, plural,
+      =1      {Must contain at least 1 uppercase letter}
+      other   {Must contain at least # uppercase letters}
+    }</string>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of numerical digits -->
-    <plurals name="lockpassword_password_requires_numeric">
-        <item quantity="one">Must contain at least 1 numerical digit</item>
-        <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> numerical digits</item>
-    </plurals>
+    <string name="lockpassword_password_requires_numeric">{count, plural,
+      =1      {Must contain at least 1 numerical digit}
+      other   {Must contain at least # numerical digits}
+    }</string>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of special symbols -->
-    <plurals name="lockpassword_password_requires_symbols">
-        <item quantity="one">Must contain at least 1 special symbol</item>
-        <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> special symbols</item>
-    </plurals>
+    <string name="lockpassword_password_requires_symbols">{count, plural,
+      =1      {Must contain at least 1 special symbol}
+      other   {Must contain at least # special symbols}
+    }</string>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of non-letter characters -->
-    <plurals name="lockpassword_password_requires_nonletter">
-        <item quantity="one">Must contain at least 1 non-letter character</item>
-        <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> non-letter characters</item>
-    </plurals>
+    <string name="lockpassword_password_requires_nonletter">{count, plural,
+      =1      {Must contain at least 1 non-letter character}
+      other   {Must contain at least # non-letter characters}
+    }</string>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of non-numerical characters -->
-    <plurals name="lockpassword_password_requires_nonnumerical">
-        <item quantity="one">Must contain at least 1 non-numerical character</item>
-        <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> non-numerical characters</item>
-    </plurals>
+    <string name="lockpassword_password_requires_nonnumerical">{count, plural,
+      =1      {Must contain at least 1 non-numerical character}
+      other   {Must contain at least # non-numerical characters}
+    }</string>
 
     <!-- Error shown when in PASSWORD mode and password has been used recently. Please keep this string short! -->
     <string name="lockpassword_password_recently_used">Device admin doesn\'t allow using a recent
@@ -1246,10 +1282,10 @@
     <string name="number_of_device_admins_none">No active apps</string>
 
     <!-- Summary of preference to manage device admin apps, informing the user how many device admin apps are installed and active -->
-    <plurals name="number_of_device_admins">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> active app</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> active apps</item>
-    </plurals>
+    <string name="number_of_device_admins">{count, plural,
+      =1      {# active app}
+      other   {# active apps}
+    }</string>
 
     <!-- Title of preference to manage trust agents -->
     <string name="manage_trust_agents">Trust agents</string>
@@ -1261,10 +1297,10 @@
     <string name="manage_trust_agents_summary">None</string>
 
     <!-- Summary of preference to manage device policies when there is trust agent-->
-    <plurals name="manage_trust_agents_summary_on">
-        <item quantity="one">1 active trust agent</item>
-        <item quantity="other"><xliff:g id="count" example="3">%d</xliff:g> active trust agents</item>
-    </plurals>
+    <string name="manage_trust_agents_summary_on">{count, plural,
+      =1      {1 active trust agent}
+      other   {# active trust agents}
+    }</string>
 
     <!-- Bluetooth settings -->
     <!--Used as title on second screen after selecting Bluetooth settings -->
@@ -1774,20 +1810,20 @@
 
     <!-- Wi-Fi Advanced Settings --> <skip />
     <!-- Wi-Fi settings screen, Saved networks summary.  This shows below the "Saved networks" item and indicates the number of networks, not including passpoint network, a user has saved. [CHAR LIMIT=30] -->
-    <plurals name="wifi_saved_access_points_summary">
-        <item quantity="one">1 network</item>
-        <item quantity="other">%d networks</item>
-    </plurals>
+    <string name="wifi_saved_access_points_summary">{count, plural,
+      =1      {1 network}
+      other   {# networks}
+    }</string>
     <!-- Wi-Fi settings screen, Saved networks summary.  This shows below the "Saved networks" item and indicates the number of passpoint networks a user has saved. [CHAR LIMIT=30] -->
-    <plurals name="wifi_saved_passpoint_access_points_summary">
-        <item quantity="one">1 subscription</item>
-        <item quantity="other">%d subscriptions</item>
-    </plurals>
+    <string name="wifi_saved_passpoint_access_points_summary">{count, plural,
+      =1      {1 subscription}
+      other   {# subscriptions}
+    }</string>
     <!-- Wi-Fi settings screen, Saved networks summary.  This shows below the "Saved networks" item and indicates number of whole kinds networks, if there are both normal saved networks and saved passpoint networks. The number will be at least 2, so the one case is only to prevent lint error. [CHAR LIMIT=60] -->
-    <plurals name="wifi_saved_all_access_points_summary">
-        <item quantity="one">1 network &amp; subscription</item>
-        <item quantity="other">%d networks &amp; subscriptions</item>
-    </plurals>
+    <string name="wifi_saved_all_access_points_summary">{count, plural,
+      =1      {1 network &amp; subscription}
+      other   {# networks &amp; subscriptions}
+    }</string>
     <!-- Wi-Fi settings screen, advanced, title of the item to show the Wi-Fi device's SSID. [CHAR LIMIT=20] -->
     <string name="wifi_advanced_ssid_title">SSID</string>
     <!-- Wi-Fi settings screen, advanced, title of the item to show the device's Wi-Fi MAC address. [CHAR LIMIT=50] -->
@@ -2136,14 +2172,10 @@
 
     <!-- Display settings screen, screen resolution settings title [CHAR LIMIT=30] -->
     <string name="screen_resolution_title">Screen resolution</string>
-    <!-- Display settings screen, screen resolution option for "FHD+" [CHAR LIMIT=45] -->
+    <!-- Display settings screen, screen resolution option for high resolution [CHAR LIMIT=45] -->
     <string name="screen_resolution_option_high">High resolution</string>
-    <!-- Display settings screen, screen resolution option for "QHD+" [CHAR LIMIT=45] -->
-    <string name="screen_resolution_option_highest">Full resolution</string>
-    <!-- Display settings screen, "FHD+" screen resolution summary [CHAR LIMIT=NONE] -->
-    <string name="screen_resolution_summary_high">1080p FHD+</string>
-    <!-- Display settings screen, "QHD+" screen resolution summary [CHAR LIMIT=NONE] -->
-    <string name="screen_resolution_summary_highest">1440p QHD+</string>
+    <!-- Display settings screen, screen resolution option for full resolution [CHAR LIMIT=45] -->
+    <string name="screen_resolution_option_full">Full resolution</string>
     <!-- The footer message for switch screen resolution [CHAR LIMIT=NONE] -->
     <string name="screen_resolution_footer">Full resolution uses more of your battery. Switching your resolution may cause some apps to restart.</string>
     <!-- Message announced to a11y users when they selected one resolution [CHAR LIMIT=NONE] -->
@@ -2424,10 +2456,10 @@
          Displayed in a dialog box.  [CHAR LIMIT=100] -->
     <string name="wrong_pin_code_pukked">Incorrect SIM PIN code you must now contact your carrier to unlock your device.</string>
     <!-- Instructions telling the user that they entered the wrong SIM PIN while trying to unlock the keyguard.  Displayed in a dialog box.  [CHAR LIMIT=100] -->
-    <plurals name="wrong_pin_code">
-        <item quantity="one">Incorrect SIM PIN code, you have <xliff:g id="number">%d</xliff:g> remaining attempt before you must contact your carrier to unlock your device.</item>
-        <item quantity="other">Incorrect SIM PIN code, you have <xliff:g id="number">%d</xliff:g> remaining attempts.</item>
-    </plurals>
+    <string name="wrong_pin_code">{count, plural,
+      =1      {Incorrect SIM PIN code, you have # remaining attempt before you must contact your carrier to unlock your device.}
+      other   {Incorrect SIM PIN code, you have # remaining attempts.}
+    }</string>
 
     <!-- This is instruction text to inform the user that they have entered the wrong SIM PIN while trying to unlock the keyguard.
          The variable will be replaced with a number. [CHAR LIMIT=NONE] -->
@@ -2467,8 +2499,14 @@
     <string name="storage_settings_for_app" >Storage &amp; cache</string>
     <!-- Storage settings screen title -->
     <string name="storage_settings_title">Storage settings</string>
+    <!-- About phone, title of EID -->
+    <string name="status_eid">EID</string>
+    <!-- About phone, title of EID for multi-sim devices -->
+    <string name="eid_multi_sim">EID (sim slot <xliff:g id="eid_slot_id">%1$d</xliff:g>)</string>
     <!-- About phone screen, title for IMEI for multi-sim devices -->
-    <string name="imei_multi_sim">IMEI (sim slot %1$d)</string>
+    <string name="imei_multi_sim">IMEI (sim slot <xliff:g id="imei_slot_id">%1$d</xliff:g>)</string>
+    <!-- About phone screen, title for primary IMEI for multi-sim devices -->
+    <string name="imei_multi_sim_primary">IMEI (sim slot <xliff:g id="imei_slot_id_primary">%1$d</xliff:g>) (primary)</string>
     <!-- About phone screen, summary of the MAC address [CHAR LIMIT=80] -->
     <string name="view_saved_network">To view, choose saved network</string>
     <!-- Do not translate. About phone, status item title -->
@@ -2484,7 +2522,9 @@
     <!-- About phone, status item title.  The phone PRL Version of the current device.-->
     <string name="status_prl_version">PRL version</string>
     <!-- About phone screen, title for MEID for multi-sim devices -->
-    <string name="meid_multi_sim">MEID (sim slot %1$d)</string>
+    <string name="meid_multi_sim">MEID (sim slot <xliff:g id="meid_slot_id">%1$d</xliff:g>)</string>
+    <!-- About phone screen, title for primary MEID for multi-sim devices -->
+    <string name="meid_multi_sim_primary">MEID (sim slot <xliff:g id="meid_slot_id_primary">%1$d</xliff:g>) (primary)</string>
     <!-- About phone, status item title.  The phone MEID number of the current LTE/CDMA device. [CHAR LIMIT=30] -->
     <string name="status_meid_number">MEID</string>
     <!-- About phone, status item title.  The ICCID of the current LTE device. [CHAR LIMIT=30] -->
@@ -2693,6 +2733,12 @@
     <!-- Phone info screen, section titles: -->
     <string name="battery_level_title">Battery level</string>
 
+    <!-- Communal Settings -->
+    <!-- Title of the communal settings under Settings > Communal [CHAR LIMIT=30] -->
+    <string name="communal_settings_title">Communal</string>
+    <!-- Summary of the communal settings under Settings > Communal [CHAR LIMIT=50] -->
+    <string name="communal_settings_summary">Communal settings</string>
+
     <!-- APN Settings -->
     <!-- APN settings screen title -->
     <string name="apn_settings">APNs</string>
@@ -2780,7 +2826,7 @@
     <string name="reset_mobile_network_settings_title">Reset Mobile Network Settings</string>
     <!-- User selects Reset mobile network settings [CHAR LIMIT=NONE] -->
     <string name="reset_mobile_network_settings_desc">This will reset all mobile network settings</string>
-    <!-- Reset Mobile network setting confirmation screen title [CHAR LIMIT=30] -->
+    <!-- Reset Mobile network setting confirmation screen title [CHAR LIMIT=62] -->
     <string name="reset_mobile_network_settings_confirm_title">Reset Mobile Network Settings?</string>
 
     <!-- Reset Bluetooth and Wi-Fi Network -->
@@ -2997,18 +3043,10 @@
     "total_location_app_count" is almost always greater than 1, so "apps" is always in plural form.
 
     [CHAR LIMIT=NONE]-->
-    <plurals name="location_app_permission_summary_location_on">
-        <item quantity="one">
-            <xliff:g id="permitted_location_app_count">%1$d</xliff:g>
-            of
-            <xliff:g id="total_location_app_count">%2$d</xliff:g>
-            apps has access to location</item>
-        <item quantity="other">
-            <xliff:g id="permitted_location_app_count">%1$d</xliff:g>
-            of
-            <xliff:g id="total_location_app_count">%2$d</xliff:g>
-            apps have access to location</item>
-    </plurals>
+    <string name="location_app_permission_summary_location_on">{count, plural,
+      =1      {# of {total} apps has access to location}
+      other   {# of {total} apps have access to location}
+    }</string>
     <!-- [CHAR LIMIT=50] Location settings screen, sub category for recent location access -->
     <string name="location_category_recent_location_access">Recent access</string>
     <!-- Location settings screen, displayed when there're more than three recent location access apps [CHAR LIMIT=30] -->
@@ -3040,6 +3078,16 @@
 
     <!-- [CHAR LIMIT=60] Date&Time settings screen, toggle button title -->
     <string name="location_time_zone_detection_toggle_title">Use location</string>
+    <!-- [CHAR LIMIT=50] Date&Time settings screen, title of the dialog when AutoTimeZone is degraded -->
+    <string name="location_time_zone_detection_status_title">Cannot set the time zone automatically</string>
+    <!-- Date&Time settings screen, summary of the dialog when AutoTimeZone is degraded by settings-->
+    <string name="location_time_zone_detection_status_summary_degraded_by_settings" />
+    <!-- [CHAR LIMIT=60] Date&Time settings screen, summary of the dialog when AutoTimeZone is blocked by settings -->
+    <string name="location_time_zone_detection_status_summary_blocked_by_settings">Location or Location Services are off</string>
+    <!-- Date&Time settings screen, summary of the dialog when AutoTimeZone is blocked by the environment-->
+    <string name="location_time_zone_detection_status_summary_blocked_by_environment" />
+    <!-- Date&Time settings screen, summary of the dialog when AutoTimeZone is temporarily unavailable-->
+    <string name="location_time_zone_detection_status_summary_temporarily_unavailable" />
     <!-- [CHAR LIMIT=60] Date&Time settings screen, title of the dialog shown when user tries to
          enable GeoTZ when Location toggle is off. -->
     <string name="location_time_zone_detection_location_is_off_dialog_title">Device location needed</string>
@@ -3049,6 +3097,8 @@
     <!-- [CHAR LIMIT=30] Date&Time settings screen, button on a dialog shown when user tries to
     enable GeoTZ, but Location toggle is off, which leads to Location settings page. -->
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button">Location settings</string>
+    <!-- [CHAR LIMIT=30] Date&Time settings screen, button on a dialog shown when the LTZP needs to be fixed -->
+    <string name="location_time_zone_provider_fix_dialog_ok_button">Fix this</string>
     <!-- [CHAR LIMIT=30] Date&Time settings screen, button on a dialog shown when user tries to
      enable GeoTZ, but Location toggle is off, which closes the dialog. -->
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button">Cancel</string>
@@ -3360,10 +3410,10 @@
     <!-- Category title listing recently used apps [CHAR_LIMIT=50]-->
     <string name="recent_app_category_title">Recently opened apps</string>
     <!-- Preference title for showing all apps on device [CHAR_LIMIT=50]-->
-    <plurals name="see_all_apps_title">
-        <item quantity="one">See all apps</item>
-        <item quantity="other">See all %1$d apps</item>
-    </plurals>
+    <string name="see_all_apps_title">{count, plural,
+      =1      {See all apps}
+      other   {See all # apps}
+    }</string>
 
     <!-- Title of the dialog that asks the user to contact the IT admin to reset password [CHAR LIMIT=40] -->
     <string name="forgot_password_title">Contact your IT admin</string>
@@ -3393,10 +3443,10 @@
     <!-- Manage applications, label that appears next to the cache size -->
     <string name="cache_size_label">Cache</string>
     <!-- Manage applications, individual application info storage screen. Describes the number of URIs (directories or files) an app has been granted access (by another apps)-->
-    <plurals name="uri_permissions_text">
-        <item quantity="one">1 item</item>
-        <item quantity="other">%d items</item>
-    </plurals>
+    <string name="uri_permissions_text">{count, plural,
+      =1      {1 item}
+      other   {# items}
+    }</string>
     <!-- Manage applications, individual application info storage screen. Button below list of URIs. -->
     <string name="clear_uri_btn_text">Clear access</string>
     <!-- Manage applications, Header name used for other controls -->
@@ -3724,6 +3774,84 @@
     <string name="language_and_input_for_work_category_title">Work profile keyboards &amp; tools</string>
     <!-- Title for the 'Virtual keyboards for work' preference. [CHAR LIMIT=45] -->
     <string name="virtual_keyboards_for_work_title">On-screen keyboard for work</string>
+
+    <!-- Title for the button to trigger the 'trackpad settings' page if only connect with a touchpad. [CHAR LIMIT=35] -->
+    <string name="trackpad_settings">Touchpad</string>
+    <!-- Title for the button to trigger the 'trackpad settings' page if connect with a touchpad and a mouse. [CHAR LIMIT=35] -->
+    <string name="trackpad_mouse_settings">Touchpad &amp; mouse</string>
+    <!-- Summary text for the 'trackpad settings' page. [CHAR LIMIT=100] -->
+    <string name="trackpad_settings_summary">Pointer speed, gestures</string>
+
+    <!-- Title text for 'Tap to click'. [CHAR LIMIT=35] -->
+    <string name="trackpad_tap_to_click">Tap to click</string>
+    <!-- Title text for 'Touchpad gestures' [CHAR LIMIT=35] -->
+    <string name="trackpad_touchpad_gesture_title">Touchpad gestures</string>
+    <!-- Summary text for 'Touchpad gestures' [CHAR LIMIT=60] -->
+    <string name="trackpad_touchpad_gesture_summary">Customize individual touchpad navigation gestures</string>
+    <!-- Title text for 'Reverse scrolling' [CHAR LIMIT=35] -->
+    <string name="trackpad_reverse_scrolling_title">Reverse scrolling</string>
+    <!-- Summary text for 'Reverse scrolling' [CHAR LIMIT=60] -->
+    <string name="trackpad_reverse_scrolling_summary">Content moves up when you scroll down</string>
+    <!-- Title text for 'Bottom-right tap' [CHAR LIMIT=35] -->
+    <string name="trackpad_bottom_right_tap_title">Bottom-right tap</string>
+    <!-- Summary text for 'Bottom-right tap' [CHAR LIMIT=60] -->
+    <string name="trackpad_bottom_right_tap_summary">Tap the bottom right corner of the touchpad for more options</string>
+    <!-- Title text for 'Pointer speed'. [CHAR LIMIT=35] -->
+    <string name="trackpad_pointer_speed">Pointer speed</string>
+    <!-- Title for the button to trigger the 'touch gesture' education. [CHAR LIMIT=35] -->
+    <string name="trackpad_touch_gesture">Learn touchpad gestures</string>
+
+    <!-- Title text for 'Go back' [CHAR LIMIT=35] -->
+    <string name="trackpad_go_back_title">Go back</string>
+    <!-- Summary text for 'Go back' [CHAR LIMIT=60] -->
+    <string name="trackpad_go_back_summary">Swipe left or right with three fingers</string>
+    <!-- Title text for 'Go home' [CHAR LIMIT=35] -->
+    <string name="trackpad_go_home_title">Go home</string>
+    <!-- Summary text for 'Go home' [CHAR LIMIT=60] -->
+    <string name="trackpad_go_home_summary">Swipe up with three fingers</string>
+    <!-- Title text for 'Recent apps' [CHAR LIMIT=35] -->
+    <string name="trackpad_recent_apps_title">Recent apps</string>
+    <!-- Summary text for 'Recent apps' [CHAR LIMIT=60] -->
+    <string name="trackpad_recent_apps_summary">Swipe up with three fingers, then hold</string>
+    <!-- Title text for 'Notifications' [CHAR LIMIT=35] -->
+    <string name="trackpad_notifications_title">Notifications</string>
+    <!-- Summary text for 'Notifications' [CHAR LIMIT=60] -->
+    <string name="trackpad_notifications_summary">Swipe down with three fingers</string>
+    <!-- Title text for 'Switch apps' [CHAR LIMIT=35] -->
+    <string name="trackpad_switch_apps_title">Switch apps</string>
+    <!-- Summary text for 'Switch apps' [CHAR LIMIT=60] -->
+    <string name="trackpad_switch_apps_summary">Swipe left or right with four fingers</string>
+
+    <!-- Title for the button to trigger the 'modifier keys settings' page. [CHAR LIMIT=35] -->
+    <string name="modifier_keys_settings">Modifier keys</string>
+    <!-- Summary text for the 'modifier_keys_settings' page. [CHAR LIMIT=100] -->
+    <string name="modifier_keys_settings_summary">Change the behavior of keys</string>
+
+    <!-- Title for the button to trigger the 'modifier keys caps lock'. [CHAR LIMIT=15] -->
+    <string name="modifier_keys_caps_lock" translatable="false">Caps lock</string>
+    <!-- Title for the button to trigger the 'modifier keys ctrl'. [CHAR LIMIT=15] -->
+    <string name="modifier_keys_ctrl" translatable="false">Ctrl</string>
+    <!-- Title for the button to trigger the 'modifier keys meta'. [CHAR LIMIT=15] -->
+    <string name="modifier_keys_meta" translatable="false">Meta</string>
+    <!-- Title for the button to trigger the 'modifier keys alt'. [CHAR LIMIT=15] -->
+    <string name="modifier_keys_alt" translatable="false">Alt</string>
+
+    <!-- Title for the button to trigger the 'modifier keys reset all'. [CHAR LIMIT=35] -->
+    <string name="modifier_keys_reset_title">Reset all</string>
+    <!-- Summary text for the buttons. [CHAR LIMIT=35] -->
+    <string name="modifier_keys_default_summary">Default</string>
+    <!-- Message for the 'Reset all' page. [CHAR LIMIT=100] -->
+    <string name="modifier_keys_reset_message">Are you sure you would like to reset all the modifier keys to their default?</string>
+    <!-- Text of the done button. [CHAR LIMIT=15] -->
+    <string name="modifier_keys_done">Done</string>
+    <!-- Text of the cancel button. [CHAR LIMIT=15] -->
+    <string name="modifier_keys_cancel">Cancel</string>
+    <!-- Text of the restore button. [CHAR LIMIT=15] -->
+    <string name="modifier_keys_restore">Restore</string>
+    <!-- Title for the modifier key picker dialog page [CHAR LIMIT=35] -->
+    <string name="modifier_keys_picker_title">Choose modifier key</string>
+    <!-- Summary for the modifier key picker dialog page [CHAR LIMIT=35] -->
+    <string name="modifier_keys_picker_summary">Choose a new key for <xliff:g id="modifier_key_default_name">%1$s</xliff:g>:</string>
 
     <!-- Summary text for keyboards when no layout has been selected. [CHAR LIMIT=35] -->
     <string name="default_keyboard_layout">Default</string>
@@ -4420,27 +4548,26 @@
     <string name="reduce_bright_colors_persist_preference_title">Keep on after device restarts</string>
 
     <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad pointer stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
-    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay">
-        <item quantity="one">Short (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> second)</item>
-        <item quantity="other">Short (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> seconds)</item>
-    </plurals>
+    <string name="accessibilty_autoclick_preference_subtitle_short_delay">{count, plural,
+      =1      {Short ({time} second)}
+      other   {Short ({time} seconds)}
+    }</string>
     <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad pointer stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
-    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay">
-        <item quantity="one">Medium (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> second)</item>
-        <item quantity="other">Medium (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> seconds)</item>
-    </plurals>
+    <string name="accessibilty_autoclick_preference_subtitle_medium_delay">{count, plural,
+      =1      {Medium ({time} second)}
+      other   {Medium ({time} seconds)}
+    }</string>
     <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad pointer stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
-    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay">
-        <item quantity="one">Long (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> second)</item>
-        <item quantity="other">Long (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> seconds)</item>
-    </plurals>
+    <string name="accessibilty_autoclick_preference_subtitle_long_delay">{count, plural,
+      =1      {Long ({time} second)}
+      other   {Long ({time} seconds)}
+    }</string>
 
     <!-- Summary for autoclick seekbar settings preference when user selected custom item. [CHAR LIMIT=35] -->
-    <plurals name="accessibilty_autoclick_delay_unit_second">
-        <item quantity="one"><xliff:g id="click_delay_label" example="1">%1$s</xliff:g> second</item>
-        <item quantity="few"><xliff:g id="click_delay_label" example="0.6">%1$s</xliff:g> seconds</item>
-        <item quantity="other"><xliff:g id="click_delay_label">%1$s</xliff:g> seconds</item>
-    </plurals>
+    <string name="accessibilty_autoclick_delay_unit_second">{count, plural,
+      =1      {{time} second}
+      other   {{time} seconds}
+    }</string>
 
     <!-- Title for accessibility menu item to launch a settings activity. [CHAR LIMIT=15] -->
     <string name="accessibility_menu_item_settings">Settings</string>
@@ -4639,16 +4766,16 @@
     <string name="print_settings">Printing</string>
 
     <!-- Print setting summary in settings screen [CHAR LIMIT=50] -->
-    <plurals name="print_settings_summary">
-        <item quantity="one">1 print service on</item>
-        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> print services on</item>
-    </plurals>
+    <string name="print_settings_summary">{count, plural,
+      =1      {1 print service on}
+      other   {# print services on}
+    }</string>
 
     <!-- Print setting summary in settings screenm indicating how many print jobs are active [CHAR LIMIT=None] -->
-    <plurals name="print_jobs_summary">
-        <item quantity="one">1 print job</item>
-        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> print jobs</item>
-    </plurals>
+    <string name="print_jobs_summary">{count, plural,
+      =1      {1 print job}
+      other   {# print jobs}
+    }</string>
 
     <!-- Title for print service settings screen [CHAR LIMIT=25] -->
     <string name="print_settings_title">Print services</string>
@@ -4845,31 +4972,31 @@
     <!-- Footer message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
     <string name="battery_tip_dialog_message_footer">Includes high-power background activity</string>
     <!-- Title for restricted app preference, showing how many app need to be restricted [CHAR LIMIT=NONE] -->
-    <plurals name="battery_tip_restrict_title">
-        <item quantity="one">Restrict %1$d app</item>
-        <item quantity="other">Restrict %1$d apps</item>
-    </plurals>
+    <string name="battery_tip_restrict_title">{count, plural,
+      =1      {Restrict # app}
+      other   {Restrict # apps}
+    }</string>
     <!-- Title for restricted app preference, showing how many app been restricted [CHAR LIMIT=NONE] -->
-    <plurals name="battery_tip_restrict_handled_title">
-        <item quantity="one">%1$s recently restricted</item>
-        <item quantity="other">%2$d apps recently restricted</item>
-    </plurals>
+    <string name="battery_tip_restrict_handled_title">{count, plural,
+      =1      {{label} recently restricted}
+      other   {# apps recently restricted}
+    }</string>
     <!-- Summary for restricted app preference, showing the impact of the apps [CHAR LIMIT=NONE] -->
-    <plurals name="battery_tip_restrict_summary">
-        <item quantity="one">%1$s has high background battery usage</item>
-        <item quantity="other">%2$d apps have high background battery usage</item>
-    </plurals>
+    <string name="battery_tip_restrict_summary">{count, plural,
+      =1      {{label} has high background battery usage}
+      other   {# apps have high background battery usage}
+    }</string>
     <!-- Summary for restricted app preference, showing the impact of the apps [CHAR LIMIT=NONE] -->
-    <plurals name="battery_tip_restrict_handled_summary">
-        <item quantity="one">This app can\'t run in the background</item>
-        <item quantity="other">These apps can\'t run in the background</item>
-    </plurals>
+    <string name="battery_tip_restrict_handled_summary">{count, plural,
+      =1      {This app can\'t run in the background}
+      other   {These apps can\'t run in the background}
+    }</string>
 
     <!-- Title for dialog to restrict the app [CHAR LIMIT=NONE] -->
-    <plurals name="battery_tip_restrict_app_dialog_title">
-        <item quantity="one">Restrict app?</item>
-        <item quantity="other">Restrict %1$d apps?</item>
-    </plurals>
+    <string name="battery_tip_restrict_app_dialog_title">{count, plural,
+      =1      {Restrict app?}
+      other   {Restrict # apps?}
+    }</string>
     <!-- Message for battery tip dialog to show the info to restrict the app [CHAR LIMIT=NONE] -->
     <string name="battery_tip_restrict_app_dialog_message">To save battery, stop <xliff:g id="app">%1$s</xliff:g> from using battery in the background. This app may not work properly and notifications may be delayed.</string>
     <!-- Message for battery tip dialog to show the info to restrict the app, below it app list will be shown as a view [CHAR LIMIT=NONE] -->
@@ -4898,10 +5025,10 @@
     <!-- Title for restricted app preference, clicking it will goes to restricted app list [CHAR LIMIT=NONE] -->
     <string name="restricted_app_title">Restricted apps</string>
     <!-- Summary for restricted app preference, clicking it will goes to restricted app list [CHAR LIMIT=NONE] -->
-    <plurals name="restricted_app_summary">
-        <item quantity="one">Limiting battery usage for %1$d app</item>
-        <item quantity="other">Limiting battery usage for %1$d apps</item>
-    </plurals>
+    <string name="restricted_app_summary">{count, plural,
+      =1      {Limiting battery usage for # app}
+      other   {Limiting battery usage for # apps}
+    }</string>
 
     <!-- Summary for restricted app to show the restriction time [CHAR LIMIT=NONE] -->
     <string name="restricted_app_time_summary">Restricted <xliff:g id="time" example="5 days ago">%1$s</xliff:g></string>
@@ -4920,10 +5047,10 @@
     <string name="battery_manager_summary_unsupported">Detecting when apps drain battery</string>
 
     <!-- Summary for battery manager, showing app restricted -->
-    <plurals name="battery_manager_app_restricted">
-        <item quantity="one">%1$d app restricted</item>
-        <item quantity="other">%1$d apps restricted</item>
-    </plurals>
+    <string name="battery_manager_app_restricted">{count, plural,
+      =1      {# app restricted}
+      other   {# apps restricted}
+    }</string>
 
     <!-- Title to display the battery percentage. [CHAR LIMIT=24] -->
     <string name="battery_header_title_alternate"><xliff:g id="number" example="88">^1</xliff:g><small> <font size="20"><xliff:g id="unit" example="%">%</xliff:g></font></small></string>
@@ -4967,56 +5094,18 @@
     <!-- Title for battery usage amount by this app. [CHAR LIMIT=80] -->
     <string name="battery_detail_power_usage">Battery usage</string>
 
-    <!-- Description for battery total and background usage time for an app, i.e. 1 hr 15 min total • 39 min background since last full charge. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
-    <string name="battery_total_and_bg_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • <xliff:g id="time" example="39 min">^2</xliff:g> background\nsince last full charge</string>
-    <!-- Description for battery total and background usage time for an app, i.e. 1 hr 15 min total • 39 min background for past 24 hr. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
-    <string name="battery_total_and_bg_usage_24hr"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • <xliff:g id="time" example="39 min">^2</xliff:g> background\nfor past 24 hr</string>
-    <!-- Description for battery total and background usage time in a time period for an app, i.e. 1 hr 15 min total • 39 min background for 12 am-2 am. Note: ^1, ^2 and ^3 should be used in all translations [CHAR LIMIT=120] -->
-    <string name="battery_total_and_bg_usage_with_period"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • <xliff:g id="time" example="39 min">^2</xliff:g> background\nfor <xliff:g id="time_period" example="12 am-2 am">^3</xliff:g></string>
-
-    <!-- Description for battery total usage time is less than a minute for an app since last full charge [CHAR LIMIT=120] -->
-    <string name="battery_total_usage_less_minute">Total less than a minute since last full charge</string>
-    <!-- Description for battery total usage time is less than a minute for an app for past 24 hr [CHAR LIMIT=120] -->
-    <string name="battery_total_usage_less_minute_24hr">Total less than a minute for past 24 hr</string>
-    <!-- Description for battery total usage time is less than a minute in a time period for an app, i.e. Total less than a minute for 12 am-2 am. Note: ^1 should be used in all translations[CHAR LIMIT=120] -->
-    <string name="battery_total_usage_less_minute_with_period">Total less than a minute for <xliff:g id="time_period" example="12 am-2 am">^1</xliff:g></string>
-
-    <!-- Description for battery background usage time is less than a minute for an app since last full charge [CHAR LIMIT=120] -->
-    <string name="battery_bg_usage_less_minute">Background less than a minute since last full charge</string>
-    <!-- Description for battery background usage time is less than a minute for an app for past 24 hr [CHAR LIMIT=120] -->
-    <string name="battery_bg_usage_less_minute_24hr">Background less than a minute for past 24 hr</string>
-    <!-- Description for battery background usage time is less than a minute in a time period for an app, i.e. Background less than a minute for 12 am-2 am. Note: ^1 should be used in all translations[CHAR LIMIT=120] -->
-    <string name="battery_bg_usage_less_minute_with_period">Background less than a minute for <xliff:g id="time_period" example="12 am-2 am">^1</xliff:g></string>
-
-    <!-- Description for battery total usage time for an app, i.e. 1 hr 15 min total since last full charge. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
-    <string name="battery_total_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total since last full charge</string>
-    <!-- Description for battery total usage time for an app, i.e. 1 hr 15 min total for past 24 hr. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
-    <string name="battery_total_usage_24hr"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total for past 24 hr</string>
-    <!-- Description for battery total usage time in a time period for an app, i.e. 1 hr 15 min total for 12 am-2 am. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
-    <string name="battery_total_usage_with_period"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total for <xliff:g id="time_period" example="12 am-2 am">^2</xliff:g></string>
-
-    <!-- Description for battery background usage time for an app, i.e. 1 hr 15 min background since last full charge. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
-    <string name="battery_bg_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> background since last full charge</string>
-    <!-- Description for battery background usage time for an app, i.e. 1 hr 15 min background for past 24 hr. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
-    <string name="battery_bg_usage_24hr"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> background for past 24 hr</string>
-    <!-- Description for battery background usage time in a time period for an app, i.e. 1 hr 15 min background for 12 am-2 am. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
-    <string name="battery_bg_usage_with_period"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> background for <xliff:g id="time_period" example="12 am-2 am">^2</xliff:g></string>
-
-    <!-- Description for battery total usage with background usage time less than a minute for an app, i.e. 1 hr 15 min total • background less than a minute since last full charge. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
-    <string name="battery_total_usage_and_bg_less_minute_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • background less than a minute\nsince last full charge</string>
-    <!-- Description for battery total usage with background usage time less than a minute for an app, i.e. 1 hr 15 min total • background less than a minute for past 24 hr. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
-    <string name="battery_total_usage_and_bg_less_minute_usage_24hr"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • background less than a minute\nfor past 24 hr</string>
-    <!-- Description for battery total usage with background usage time less than a minute in a time period for an app, i.e. 1 hr 15 min total • background less than a minute for 12 am-2 am. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
-    <string name="battery_total_usage_and_bg_less_minute_usage_with_period"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • background less than a minute\nfor <xliff:g id="time_period" example="12 am-2 am">^2</xliff:g></string>
-
     <!-- Description for no any battery usage since last full charge [CHAR LIMIT=120] -->
     <string name="battery_not_usage">No usage since last full charge</string>
     <!-- Description for no any battery usage for past 24 hr [CHAR LIMIT=120] -->
     <string name="battery_not_usage_24hr">No usage for past 24 hr</string>
     <!-- Description for no usage time but have battery usage [CHAR LIMIT=120] -->
     <string name="battery_usage_without_time"></string>
-    <!-- Description for other users aggregated battery usage data [CHAR LIMIT=120] -->
-    <string name="battery_usage_other_users">Other users</string>
+    <!-- Description for the specific time slot in the battery usage page [CHAR LIMIT=120] -->
+    <string name="battery_usage_since_last_full_charge">since last full charge</string>
+   <!-- Description for system apps aggregated battery usage data [CHAR LIMIT=120] -->
+    <string name="battery_usage_system_apps">System apps</string>
+    <!-- Description for others battery usage data [CHAR LIMIT=120] -->
+    <string name="battery_usage_others">Others</string>
 
     <!-- Description for battery time left, i.e. 50min Estimated time left. [CHAR LIMIT=80]-->
     <string name="estimated_time_left">Estimated time left</string>
@@ -5112,10 +5201,14 @@
     <string name="battery_usage_total_less_than_one_minute">Total: less than a min</string>
     <!-- [CHAR_LIMIT=NONE] Battery usage item for total background time less than a minute -->
     <string name="battery_usage_background_less_than_one_minute">Background: less than a min</string>
+    <!-- [CHAR_LIMIT=NONE] Device screen on time less than a minute -->
+    <string name="battery_usage_screen_time_less_than_one_minute">Screen time: less than a min</string>
     <!-- [CHAR_LIMIT=NONE] Battery usage item for total usage time -->
     <string name="battery_usage_for_total_time">Total: <xliff:g id="time">%s</xliff:g></string>
     <!-- [CHAR_LIMIT=NONE] Battery usage item for background usage time -->
     <string name="battery_usage_for_background_time">Background: <xliff:g id="time">%s</xliff:g></string>
+    <!-- [CHAR_LIMIT=NONE] Device screen on time -->
+    <string name="battery_usage_screen_time">Screen time: <xliff:g id="time">%s</xliff:g></string>
     <!-- [CHAR_LIMIT=NONE] Battery usage main screen footer for empty content -->
     <string name="battery_usage_screen_footer_empty">Battery usage data will be available in a few hours once fully charged</string>
     <!-- [CHAR_LIMIT=NONE] Battery chart label for the current time. -->
@@ -5127,13 +5220,17 @@
     <!-- [CHAR_LIMIT=NONE] Accessibility content description for hourly battery chart view. -->
     <string name="hourly_battery_usage_chart">Hourly battery usage chart</string>
     <!-- [CHAR_LIMIT=NONE] Battery usage breakdown title since last full charge -->
-    <string name="battery_usage_breakdown_title_since_last_full_charge">Usage proportional breakdown since last full charge</string>
+    <string name="battery_usage_breakdown_title_since_last_full_charge">Battery usage since last full charge</string>
     <!-- [CHAR_LIMIT=NONE] Battery usage breakdown title for a selected slot -->
-    <string name="battery_usage_breakdown_title_for_slot">Usage proportional breakdown for <xliff:g id="slot">%s</xliff:g></string>
-    <!-- [CHAR_LIMIT=NONE] The tab title in the battery usage breakdown. -->
-    <string name="battery_usage_app_tab">App</string>
-    <!-- [CHAR_LIMIT=NONE] The tab title in the battery usage breakdown. -->
-    <string name="battery_usage_system_tab">System</string>
+    <string name="battery_usage_breakdown_title_for_slot">Battery usage for <xliff:g id="slot">%s</xliff:g></string>
+    <!-- [CHAR_LIMIT=NONE] Device screen on time category since last full charge -->
+    <string name="screen_time_category_last_full_charge">Screen time since last full charge</string>
+    <!-- [CHAR_LIMIT=NONE] Device screen on time category for a selected slot -->
+    <string name="screen_time_category_for_slot">Screen time for <xliff:g id="slot">%s</xliff:g></string>
+    <!-- [CHAR_LIMIT=NONE] The spinner item text in the battery usage breakdown. -->
+    <string name="battery_usage_spinner_breakdown_by_apps">Breakdown by apps</string>
+    <!-- [CHAR_LIMIT=NONE] The spinner item text in the battery usage breakdown. -->
+    <string name="battery_usage_spinner_breakdown_by_system">Breakdown by system</string>
     <!-- Process Stats strings -->
     <skip />
 
@@ -5375,10 +5472,10 @@
     <!-- Dialog message for button to remove the credential management app [CHAR LIMIT=NONE] -->
     <string name="remove_credential_management_app_dialog_message">This app won\u2019t manage certificates, but it will stay on your device. Any certificates installed by the app will be uninstalled.</string>
     <!-- List item found in the credential management app's authentication policy [CHAR LIMIT=NONE] -->
-    <plurals name="number_of_urls">
-        <item quantity="one"><xliff:g id="number">%d</xliff:g> URL</item>
-        <item quantity="other"><xliff:g id="number">%d</xliff:g> URLs</item>
-    </plurals>
+    <string name="number_of_urls">{count, plural,
+      =1      {# URL}
+      other   {# URLs}
+    }</string>
 
     <!-- Sound settings screen, setting check box label -->
     <string name="emergency_tone_title">Emergency dialing signal</string>
@@ -5479,10 +5576,10 @@
     <string name="notification_history_dismiss">Recently dismissed</string>
 
     <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
-    <plurals name="notification_history_count">
-        <item quantity="one"><xliff:g id="number">%d</xliff:g> notification</item>
-        <item quantity="other"><xliff:g id="number">%d</xliff:g> notifications</item>
-    </plurals>
+    <string name="notification_history_count">{count, plural,
+      =1      {# notification}
+      other   {# notifications}
+    }</string>
 
     <!-- Category title for phone call's ringtone and vibration settings in the Sound Setting.
          [CHAR LIMIT=40] -->
@@ -5923,10 +6020,10 @@
     <!-- Button to close the SSL CA cert warning dialog box, meaning the user is done reading.  [CHAR LIMIT=NONE] -->
     <string name="done_button">Done</string>
     <!-- Title of Dialog warning users of SSL monitoring. [CHAR LIMIT=NONE] -->
-    <plurals name="ssl_ca_cert_dialog_title">
-        <item quantity="one">Trust or remove certificate</item>
-        <item quantity="other">Trust or remove certificates</item>
-    </plurals>
+    <string name="ssl_ca_cert_dialog_title">{count, plural,
+      =1      {Trust or remove certificate}
+      other   {Trust or remove certificates}
+    }</string>
     <!-- Text of message to show to device owner user whose administrator has installed a SSL CA Cert.  [CHAR LIMIT=NONE] -->
     <string name="ssl_ca_cert_info_message_device_owner"> {numberOfCertificates, plural,
         =1 {{orgName} has installed a certificate authority on your device, which may allow them to monitor your device network activity, including emails, apps, and secure websites.\n\nFor more information about this certificate, contact your admin.}
@@ -5940,10 +6037,10 @@
     <!-- Text of warning to show to users that have a SSL CA Cert installed.  [CHAR LIMIT=NONE] -->
     <string name="ssl_ca_cert_warning_message">A third party is capable of monitoring your network activity, including emails, apps, and secure websites.\n\nA trusted credential installed on your device is making this possible.</string>
     <!-- Label on button that will take the user to the Trusted Credentials settings page.  [CHAR LIMIT=NONE]-->
-    <plurals name="ssl_ca_cert_settings_button">
-        <item quantity="one">Check certificate</item>
-        <item quantity="other">Check certificates</item>
-    </plurals>
+    <string name="ssl_ca_cert_settings_button">{count, plural,
+      =1      {Check certificate}
+      other   {Check certificates}
+    }</string>
 
     <!-- User settings screen title [CHAR LIMIT=40] -->
     <string name="user_settings_title">Multiple users</string>
@@ -6032,12 +6129,18 @@
 
     <!-- Title of preference to enable calling and SMS [CHAR LIMIT=45] -->
     <string name="user_enable_calling_sms">Turn on phone calls &amp; SMS</string>
+    <!-- Title of preference to grant user admin privileges [CHAR LIMIT=45] -->
+    <string name="user_grant_admin">Give this user admin privileges</string>
     <!-- Title of preference to remove the user [CHAR LIMIT=35] -->
     <string name="user_remove_user">Delete user</string>
     <!-- Title for confirmation of turning on calls and SMS [CHAR LIMIT=45] -->
     <string name="user_enable_calling_and_sms_confirm_title">Turn on phone calls &amp; SMS?</string>
     <!-- Message for confirmation of turning on calls and SMS [CHAR LIMIT=none] -->
     <string name="user_enable_calling_and_sms_confirm_message">Call and SMS history will be shared with this user.</string>
+    <!-- Title for confirmation of revoking admin privileges [CHAR LIMIT=45] -->
+    <string name="user_revoke_admin_confirm_title">Remove admin privileges?</string>
+    <!-- Message for confirmation of revoking admin privileges [CHAR LIMIT=none] -->
+    <string name="user_revoke_admin_confirm_message">Are you sure you want to remove this user\'s admin privileges?</string>
     <!-- Title for the emergency info preference [CHAR LIMIT=40] -->
     <string name="emergency_info_title">Emergency information</string>
     <!-- Summary for the emergency info preference [CHAR LIMIT=40] -->
@@ -6542,6 +6645,14 @@
     <!-- Description for introduction of the cloned apps page [CHAR LIMIT=NONE]-->
     <string name="desc_cloned_apps_intro_text">Create a second instance of an app so that you can use two accounts at the same time.</string>
     <string name="cloned_apps_summary"><xliff:g id="cloned_apps_count">%1$s</xliff:g> cloned, <xliff:g id="allowed_apps_count">%2$d</xliff:g> available to clone</string>
+    <!-- Description for cloned apps removal title [CHAR LIMIT=40]-->
+    <string name="delete_all_app_clones">Delete all App clones</string>
+    <!-- Description for cloned apps removal failure title [CHAR LIMIT=40]-->
+    <string name="delete_all_app_clones_failure">Delete all App clones failed</string>
+    <!-- Summary text when an app is being cloned [CHAR LIMIT=40] -->
+    <string name="cloned_app_creation_summary">Creating&#8230;</string>
+    <!-- Summary text after an app is cloned [CHAR LIMIT=40] -->
+    <string name="cloned_app_created_summary">Cloned</string>
     <!-- Summary text for system preference title, showing important setting items under system setting [CHAR LIMIT=NONE]-->
     <string name="system_dashboard_summary">Languages, gestures, time, backup</string>
     <!-- Summary text for language preference title, showing important setting items under language setting [CHAR LIMIT=NONE]-->
@@ -7398,10 +7509,10 @@
     <string name="priority_conversation_count_zero">No priority conversations</string>
 
     <!-- [CHAR LIMIT=100] summary text on link to 'all conversations' page, some conversations are priority -->
-    <plurals name="priority_conversation_count">
-        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> priority conversation</item>
-        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> priority conversations</item>
-    </plurals>
+    <string name="priority_conversation_count">{count, plural,
+      =1      {# priority conversation}
+      other   {# priority conversations}
+    }</string>
 
     <!-- [CHAR LIMIT=100] preference category title -->
     <string name="important_conversations">Priority conversations</string>
@@ -7494,14 +7605,14 @@
     <string name="notification_app_switch_label">All <xliff:g id="app_name" example="Android Services">%1$s</xliff:g> notifications</string>
 
     <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
-    <plurals name="notifications_sent_daily">
-        <item quantity="one">About <xliff:g id="number">%d</xliff:g> notification per day</item>
-        <item quantity="other">About <xliff:g id="number">%,d</xliff:g> notifications per day</item>
-    </plurals>
-    <plurals name="notifications_sent_weekly">
-        <item quantity="one">About <xliff:g id="number">%d</xliff:g> notification per week</item>
-        <item quantity="other">About <xliff:g id="number">%,d</xliff:g> notifications per week</item>
-    </plurals>
+    <string name="notifications_sent_daily">{count, plural,
+      =1      {About # notification per day}
+      other   {About # notifications per day}
+    }</string>
+    <string name="notifications_sent_weekly">{count, plural,
+      =1      {About # notification per week}
+      other   {About # notifications per week}
+    }</string>
     <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
     <string name="notifications_sent_never">Never</string>
 
@@ -7698,10 +7809,10 @@
     <string name="interact_across_profiles_number_of_connected_apps_none">No apps connected</string>
 
     <!-- Summary of preference to manage connected work and personal apps, informing the user how many apps are connected -->
-    <plurals name="interact_across_profiles_number_of_connected_apps">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> app connected</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps connected</item>
-    </plurals>
+    <string name="interact_across_profiles_number_of_connected_apps">{count, plural,
+      =1      {# app connected}
+      other   {# apps connected}
+    }</string>
 
     <!-- Banner title. This banner lets a user know that they need to install an app in their
     work profile in order to connect it to the corresponding personal app.
@@ -7728,7 +7839,7 @@
     <string name="zen_access_empty_text">No installed apps have requested Do Not Disturb access</string>
 
     <!-- [CHAR LIMIT=NONE] Text appearing when app notifications are off -->
-    <string name="app_notifications_off_desc">At your request, Android is blocking this app\'s notifications from appearing on this device</string>
+    <string name="app_notifications_off_desc">You haven\'t allowed notifications from this app</string>
 
     <!-- [CHAR LIMIT=NONE] Text appearing when channel notifications are off -->
     <string name="channel_notifications_off_desc">At your request, Android is blocking this category of notifications from appearing on this device</string>
@@ -7752,10 +7863,10 @@
     <string name="app_settings_link">Additional settings in the app</string>
 
     <!-- [CHAR LIMIT=NONE] Footer listing a count of deleted channels. -->
-    <plurals name="deleted_channels">
-        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> category deleted</item>
-        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> categories deleted</item>
-    </plurals>
+    <string name="deleted_channels">{count, plural,
+      =1      {# category deleted}
+      other   {# categories deleted}
+    }</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: notifications enabled-->
     <string name="notification_toggle_on">On</string>
@@ -8195,7 +8306,7 @@
     <!-- [CHAR LIMIT=60] turn eSim deletion confirmation on/off  -->
     <string name="confirm_sim_deletion_title">Confirm SIM deletion</string>
     <!-- [CHAR LIMIT=NONE] eSim deletion confirmation description  -->
-    <string name="confirm_sim_deletion_description">Verify it\u0027s you before erasing a eSIM</string>
+    <string name="confirm_sim_deletion_description">Verify it\u0027s you before erasing an eSIM</string>
 
     <!-- [CHAR LIMIT=32] Name of Advanced memory protection page in "More Security Settings" and heading of page. -->
     <string name="memtag_title">Advanced memory protection beta</string>
@@ -8369,6 +8480,12 @@
 
     <!-- Label for list that shows all permissions -->
     <string name="app_permissions">Permission manager</string>
+
+    <!-- Label for the list that shows all data sharing updates. TODO b/261914980 finalize string [CHAR LIMIT=30]-->
+    <string name="app_data_sharing_updates_title">Data sharing updates</string>
+
+    <!-- Label for the list that shows all data sharing updates TODO b/261914980 finalize string [CHAR LIMIT=NONE]-->
+    <string name="app_data_sharing_updates_summary">Show which apps recently updated data sharing policy</string>
 
     <!-- Label for tap to wake setting [CHAR LIMIT=30] -->
     <string name="tap_to_wake">Tap to wake</string>
@@ -9599,10 +9716,10 @@
     <!-- Label explaining that the the number of apps is an estimation. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_apps_count_estimation_info">Number of apps is estimated. It may not include apps installed outside of the Play Store.</string>
     <!-- Summary indicating the number of apps that a label (e.g. installed apps or apps granted a particular permission) refers to. The number shown is a minimum as there may be additional apps we do not know about. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_number_packages_lower_bound">
-        <item quantity="one">Minimum <xliff:g id="count">%d</xliff:g> app</item>
-        <item quantity="other">Minimum <xliff:g id="count">%d</xliff:g> apps</item>
-    </plurals>
+    <string name="enterprise_privacy_number_packages_lower_bound">{count, plural,
+      =1      {Minimum # app}
+      other   {Minimum # apps}
+    }</string>
     <!-- Label indicating that the admin granted one or more apps access to the device's location. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_location_access">Location permissions</string>
     <!-- Label indicating that the admin granted one or more apps access to the microphone. [CHAR LIMIT=NONE] -->
@@ -9612,10 +9729,10 @@
     <!-- Label indicating that the admin set one or more apps as defaults for common actions (e.g. open browser, send e-mail). [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_enterprise_set_default_apps">Default apps</string>
     <!-- Summary indicating the number of apps that a label (e.g. installed apps or apps granted a particular permission) refers to. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_number_packages">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> app</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps</item>
-    </plurals>
+    <string name="enterprise_privacy_number_packages">{count, plural,
+      =1      {# app}
+      other   {# apps}
+    }</string>
     <!-- Label explaining that the current input method was set by the admin. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_input_method">Default keyboard</string>
     <!-- Summary indicating the input method set by the admin. [CHAR LIMIT=NONE] -->
@@ -9635,10 +9752,10 @@
     <!-- Label explaining that the admin installed trusted CA certificates in work profile. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_ca_certs_work">Trusted credentials in your work profile</string>
     <!-- Summary indicating the number of trusted CA certificates installed by the admin. The number shown is a minimum as there may be additional CA certificates we do not know about. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_number_ca_certs">
-        <item quantity="one">Minimum <xliff:g id="count">%d</xliff:g> CA certificate</item>
-        <item quantity="other">Minimum <xliff:g id="count">%d</xliff:g> CA certificates</item>
-    </plurals>
+    <string name="enterprise_privacy_number_ca_certs">{count, plural,
+      =1      {Minimum # CA certificate}
+      other   {Minimum # CA certificates}
+    }</string>
     <!-- Label explaining that the admin can lock the device and change the user's password. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_lock_device">Admin can lock the device and reset password</string>
     <!-- Label explaining that the admin can wipe the device remotely. [CHAR LIMIT=NONE] -->
@@ -9648,10 +9765,10 @@
     <!-- Label explaining that the admin configured the work profile to wipe itself when the password is mistyped too many times. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_failed_password_wipe_work">Failed password attempts before deleting work profile data</string>
     <!-- Summary indicating the number of mistyped passwords after which the device or work profile wipes itself. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_number_failed_password_wipe">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> attempt</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> attempts</item>
-    </plurals>
+    <string name="enterprise_privacy_number_failed_password_wipe">{count, plural,
+      =1      {# attempt}
+      other   {# attempts}
+    }</string>
     <!-- Message indicating that the device is enterprise-managed by a Device Owner [CHAR LIMIT=NONE] -->
     <string name="do_disclosure_generic">This device is managed by your organization.</string>
     <!-- Message indicating that the device is enterprise-managed by a Device Owner [CHAR LIMIT=NONE] -->
@@ -9712,26 +9829,26 @@
 
     <!-- Strings for displaying which applications were set as default for specific actions. -->
     <!-- Title for the apps that have been set as default handlers of camera-related intents. [CHAR LIMIT=30] -->
-    <plurals name="default_camera_app_title">
-        <item quantity="one">Camera app</item>
-        <item quantity="other">Camera apps</item>
-    </plurals>
+    <string name="default_camera_app_title">{count, plural,
+      =1      {Camera app}
+      other   {Camera apps}
+    }</string>
     <!-- Title for the app that has been set as default handler of calendar-related intents. [CHAR LIMIT=30] -->
     <string name="default_calendar_app_title">Calendar app</string>
     <!-- Title for the app that has been set as default handler of contacts-related intents. [CHAR LIMIT=30] -->
     <string name="default_contacts_app_title">Contacts app</string>
     <!-- Title for the apps that have been set as default handlers of new email intents. [CHAR LIMIT=30] -->
-    <plurals name="default_email_app_title">
-        <item quantity="one">Email client app</item>
-        <item quantity="other">Email client apps</item>
-    </plurals>
+    <string name="default_email_app_title">{count, plural,
+      =1      {Email client app}
+      other   {Email client apps}
+    }</string>
     <!-- Title for the app that has been set as default handler of geo-related intents. [CHAR LIMIT=30] -->
     <string name="default_map_app_title">Map app</string>
     <!-- Title for the apps that have been set as default handlers of call-related intents. [CHAR LIMIT=30] -->
-    <plurals name="default_phone_app_title">
-        <item quantity="one">Phone app</item>
-        <item quantity="other">Phone apps</item>
-    </plurals>
+    <string name="default_phone_app_title">{count, plural,
+      =1      {Phone app}
+      other   {Phone apps}
+    }</string>
     <!-- Template for concatenating two app names -->
     <string name="app_names_concatenation_template_2"><xliff:g id="first_app_name">%1$s</xliff:g>, <xliff:g id="second_app_name">%2$s</xliff:g></string>
     <!-- Template for concatenating three app names -->
@@ -9806,19 +9923,25 @@
     <!-- AutoFill strings -->
     <!-- Preference label for choosing auto-fill service. [CHAR LIMIT=60] -->
     <string name="autofill_app">Autofill service</string>
+    <!-- Preference label for choosing auto-fill service. [CHAR LIMIT=60] -->
+    <string name="default_autofill_app">Default autofill service</string>
     <!-- Preference category for showing auto-fill services with saved passwords. [CHAR LIMIT=60] -->
     <string name="autofill_passwords">Passwords</string>
+    <!-- Preference category for showing credman services with saved credentials. [CHAR LIMIT=60] -->
+    <string name="credman_credentials">Password and identity services</string>
     <!-- Summary for passwords settings that shows how many passwords are saved for each autofill
          service. [CHAR LIMIT=NONE] -->
-    <plurals name="autofill_passwords_count">
-        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> password</item>
-        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> passwords</item>
-    </plurals>
+    <string name="autofill_passwords_count">{count, plural,
+      =1      {# password}
+      other   {# passwords}
+    }</string>
     <!-- DO NOT TRANSLATE Summary placeholder for when the passwords count is still loading or is
          unavailable. -->
     <string name="autofill_passwords_count_placeholder" translatable="false">\u2014</string>
     <!-- Keywords for the auto-fill feature. [CHAR LIMIT=NONE] -->
     <string name="autofill_keywords">auto, fill, autofill, password</string>
+    <!-- Keywords for the credman feature. [CHAR LIMIT=NONE] -->
+    <string name="credman_keywords">credentials, passkey, password</string>
 
     <!-- Message of the warning dialog for setting the auto-fill app. [CHAR_LIMIT=NONE] -->
     <string name="autofill_confirmation_message">
@@ -9830,6 +9953,21 @@
         your screen to determine what can be autofilled.
         ]]>
     </string>
+
+    <!-- Title of the warning dialog for disabling the credential provider. [CHAR_LIMIT=NONE] -->
+    <string name="credman_confirmation_message_title">Turn off %1$s\?</string>
+
+    <!-- Message of the warning dialog for disabling the credential provider. [CHAR_LIMIT=NONE] -->
+    <string name="credman_confirmation_message">Saved info like addresses or payment methods won\'t be filled in when you sign in. To keep your saved info filled in, set a default autofill service.</string>
+
+    <!-- Title of the error dialog when too many credential providers are selected. [CHAR_LIMIT=NONE] -->
+    <string name="credman_error_message_title">Password and identity services limit</string>
+
+    <!-- Message of the error dialog when too many credential providers are selected. [CHAR_LIMIT=NONE] -->
+    <string name="credman_error_message">You can have up to 5 autofill and password services active at the same time. Turn off a service to add more.</string>
+
+    <!-- Positive button to turn off credential manager provider (confirmation). [CHAR LIMIT=60] -->
+    <string name="credman_confirmation_message_positive_button">Turn off</string>
 
     <!-- Preference category for autofill debugging development settings. [CHAR LIMIT=25] -->
     <string name="debug_autofill_category">Autofill</string>
@@ -10629,10 +10767,10 @@
     <string name="accessibility_usage_title">Accessibility usage</string>
 
     <!-- Summary for the accessibility usage preference in the Privacy page.  [CHAR LIMIT=NONE] -->
-    <plurals name="accessibility_usage_summary">
-        <item quantity="one">1 app has full access to your device</item>
-        <item quantity="other"><xliff:g id="service_count">%1$d</xliff:g> apps have full access to your device</item>
-    </plurals>
+    <string name="accessibility_usage_summary">{count, plural,
+      =1      {1 app has full access to your device}
+      other   {# apps have full access to your device}
+    }</string>
 
     <!-- Label for the title on wfc disclaimer fragment. [CHAR LIMIT=40] -->
     <string name="wfc_disclaimer_title_text">Important information</string>
@@ -10754,6 +10892,9 @@
 
     <!-- Subtext of system default app for current setting [CHAR LIMIT=NONE] -->
     <string name="system_default_app_subtext">System default</string>
+
+    <!-- Summary of a default app when there is no app set [CHAR LIMIT=60] -->
+    <string name="default_app_none">None</string>
 
     <!-- Developer settings: text for the bug report handler selection toast shown if an invalid bug report handler was chosen. [CHAR LIMIT=NONE] -->
     <string name="select_invalid_bug_report_handler_toast_text">This choice is no longer valid. Try again.</string>
@@ -11524,4 +11665,32 @@
     <!-- [CHAR LIMIT=NONE] Title for preference: Transfer eSIM to another device -->
     <string name="transfer_esim_to_another_device_title">Transfer eSIM to another device</string>
 
+    <!-- Background Install Control UI -->
+    <!-- [CHAR LIMIT=NONE] Preference Feature Summary -->
+    <string name="background_install_preference_summary">{count, plural,
+    =1    {# app}
+    other {# apps}
+    }</string>
+
+    <!-- [CHAR LIMIT=NONE] Feature Title -->
+    <string name="background_install_title">Apps installed in the background</string>
+    <!-- [CHAR LIMIT=NONE] Feature summary -->
+    <string name="background_install_summary">Your device manufacturer may install apps on your device in the background, or allow your carrier and other partners to do so.\u000a\u000aAny apps listed here aren\u0027t required for your device to function normally. You can uninstall apps you don\u0027t want. </string>
+    <!-- [CHAR LIMIT=NONE] Group list no entry -->
+    <string name="background_install_feature_list_no_entry">No apps installed in the background</string>
+    <!-- [CHAR LIMIT=NONE] Uninstall app button content description -->
+    <string name="background_install_uninstall_button_description">Uninstall app</string>
+    <!-- [CHAR LIMIT=NONE] Before time period group list title -->
+    <string name="background_install_before">{count, plural,
+    =1    {Apps installed in the last # month}
+    other {Apps installed in the last # months}
+    }</string>
+    <!-- [CHAR LIMIT=NONE] After time period group list title -->
+    <string name="background_install_after">{count, plural,
+    =1    {Apps installed more than # month ago}
+    other {Apps installed more than # months ago}
+    }</string>
+
+    <!-- Accessibility label for fingerprint sensor [CHAR LIMIT=NONE] -->
+    <string name="accessibility_fingerprint_label">Fingerprint sensor</string>
 </resources>

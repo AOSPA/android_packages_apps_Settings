@@ -26,6 +26,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.role.RoleManager;
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -44,6 +45,7 @@ import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -76,6 +78,10 @@ public class StylusDevicesControllerTest {
     private RoleManager mRm;
     @Mock
     private Lifecycle mLifecycle;
+    @Mock
+    private CachedBluetoothDevice mCachedBluetoothDevice;
+    @Mock
+    private BluetoothDevice mBluetoothDevice;
 
 
     @Before
@@ -93,13 +99,15 @@ public class StylusDevicesControllerTest {
         when(mContext.getSystemService(RoleManager.class)).thenReturn(mRm);
         doNothing().when(mContext).startActivity(any());
 
-        // TODO(b/254834764): notes role placeholder
-        when(mRm.getRoleHoldersAsUser(eq(RoleManager.ROLE_ASSISTANT), any(UserHandle.class)))
+        when(mRm.getRoleHoldersAsUser(eq(RoleManager.ROLE_NOTES), any(UserHandle.class)))
                 .thenReturn(Collections.singletonList(NOTES_PACKAGE_NAME));
+        when(mRm.isRoleAvailable(RoleManager.ROLE_NOTES)).thenReturn(true);
         when(mContext.getPackageManager()).thenReturn(mPm);
         when(mPm.getApplicationInfo(eq(NOTES_PACKAGE_NAME),
                 any(PackageManager.ApplicationInfoFlags.class))).thenReturn(new ApplicationInfo());
         when(mPm.getApplicationLabel(any(ApplicationInfo.class))).thenReturn(NOTES_APP_LABEL);
+
+        when(mCachedBluetoothDevice.getDevice()).thenReturn(mBluetoothDevice);
 
         mInputDevice = spy(new InputDevice.Builder()
                 .setId(1)
@@ -107,16 +115,84 @@ public class StylusDevicesControllerTest {
                 .build());
         when(mInputDevice.getBluetoothAddress()).thenReturn("SOME:ADDRESS");
 
-        mController = new StylusDevicesController(mContext, mInputDevice, mLifecycle);
+        mController = new StylusDevicesController(mContext, mInputDevice, null, mLifecycle);
     }
 
     @Test
-    public void noInputDevice_noPreference() {
+    public void isDeviceStylus_noDevices_false() {
+        assertThat(StylusDevicesController.isDeviceStylus(null, null)).isFalse();
+    }
+
+    @Test
+    public void isDeviceStylus_nonStylusInputDevice_false() {
+        InputDevice inputDevice = new InputDevice.Builder()
+                .setSources(InputDevice.SOURCE_DPAD)
+                .build();
+
+        assertThat(StylusDevicesController.isDeviceStylus(inputDevice, null)).isFalse();
+    }
+
+    @Test
+    public void isDeviceStylus_stylusInputDevice_true() {
+        InputDevice inputDevice = new InputDevice.Builder()
+                .setSources(InputDevice.SOURCE_STYLUS)
+                .build();
+
+        assertThat(StylusDevicesController.isDeviceStylus(inputDevice, null)).isTrue();
+    }
+
+    @Test
+    public void isDeviceStylus_nonStylusBluetoothDevice_false() {
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_DEVICE_TYPE)).thenReturn(
+                BluetoothDevice.DEVICE_TYPE_WATCH.getBytes());
+
+        assertThat(StylusDevicesController.isDeviceStylus(null, mCachedBluetoothDevice)).isFalse();
+    }
+
+    @Test
+    public void isDeviceStylus_stylusBluetoothDevice_true() {
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_DEVICE_TYPE)).thenReturn(
+                BluetoothDevice.DEVICE_TYPE_STYLUS.getBytes());
+        when(mCachedBluetoothDevice.getDevice()).thenReturn(mBluetoothDevice);
+
+        assertThat(StylusDevicesController.isDeviceStylus(null, mCachedBluetoothDevice)).isTrue();
+    }
+
+    @Test
+    public void noInputDevice_noBluetoothDevice_noPreference() {
         StylusDevicesController controller = new StylusDevicesController(
-                mContext, null, mLifecycle
+                mContext, null, null, mLifecycle
         );
+
         showScreen(controller);
+
         assertThat(mPreferenceContainer.getPreferenceCount()).isEqualTo(0);
+    }
+
+    @Test
+    public void noInputDevice_nonStylusBluetoothDevice_noPreference() {
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_DEVICE_TYPE)).thenReturn(
+                BluetoothDevice.DEVICE_TYPE_WATCH.getBytes());
+        StylusDevicesController controller = new StylusDevicesController(
+                mContext, null, mCachedBluetoothDevice, mLifecycle
+        );
+
+        showScreen(controller);
+
+        assertThat(mPreferenceContainer.getPreferenceCount()).isEqualTo(0);
+    }
+
+    @Test
+    public void noInputDevice_stylusBluetoothDevice_showsPreference() {
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_DEVICE_TYPE)).thenReturn(
+                BluetoothDevice.DEVICE_TYPE_STYLUS.getBytes());
+        StylusDevicesController controller = new StylusDevicesController(
+                mContext, null, mCachedBluetoothDevice, mLifecycle
+        );
+
+        showScreen(controller);
+
+        assertThat(mPreferenceContainer.getPreferenceCount()).isEqualTo(3);
     }
 
     @Test
@@ -160,17 +236,26 @@ public class StylusDevicesControllerTest {
     }
 
     @Test
-    public void defaultNotesPreference_noRoleHolder_hidesNotesRoleApp() {
-        // TODO(b/254834764): replace with notes role once merged
-        when(mRm.getRoleHoldersAsUser(eq(RoleManager.ROLE_ASSISTANT), any(UserHandle.class)))
+    public void defaultNotesPreference_roleHolderChanges_updatesPreference() {
+        showScreen(mController);
+        Preference defaultNotesPref = mPreferenceContainer.getPreference(0);
+        when(mRm.getRoleHoldersAsUser(eq(RoleManager.ROLE_NOTES), any(UserHandle.class)))
                 .thenReturn(Collections.emptyList());
         showScreen(mController);
 
-        for (int i = 0; i < mPreferenceContainer.getPreferenceCount(); i++) {
-            Preference pref = mPreferenceContainer.getPreference(i);
-            assertThat(pref.getTitle().toString()).isNotEqualTo(
-                    mContext.getString(R.string.stylus_default_notes_app));
-        }
+        assertThat(defaultNotesPref.getSummary().toString()).isEqualTo(
+                mContext.getString(R.string.default_app_none));
+    }
+
+    @Test
+    public void defaultNotesPreference_noRoleHolder_showNoneInSummary() {
+        when(mRm.getRoleHoldersAsUser(eq(RoleManager.ROLE_NOTES), any(UserHandle.class)))
+                .thenReturn(Collections.emptyList());
+        showScreen(mController);
+
+        Preference defaultNotesPref = mPreferenceContainer.getPreference(0);
+        assertThat(defaultNotesPref.getSummary().toString()).isEqualTo(
+                mContext.getString(R.string.default_app_none));
     }
 
     @Test
@@ -182,14 +267,13 @@ public class StylusDevicesControllerTest {
         showScreen(mController);
         Preference defaultNotesPref = mPreferenceContainer.getPreference(0);
         mController.onPreferenceClick(defaultNotesPref);
-        verify(mContext).startActivity(captor.capture());
 
+        verify(mContext).startActivity(captor.capture());
         Intent intent = captor.getValue();
         assertThat(intent.getAction()).isEqualTo(Intent.ACTION_MANAGE_DEFAULT_APP);
         assertThat(intent.getPackage()).isEqualTo(permissionPackageName);
-        // TODO(b/254834764): when notes role is merged
         assertThat(intent.getStringExtra(Intent.EXTRA_ROLE_NAME)).isEqualTo(
-                RoleManager.ROLE_ASSISTANT);
+                RoleManager.ROLE_NOTES);
     }
 
     @Test

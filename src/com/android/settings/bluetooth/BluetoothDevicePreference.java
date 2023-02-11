@@ -359,4 +359,12 @@ public final class BluetoothDevicePreference extends GearPreference {
                     R.string.bluetooth_pairing_error_message);
         }
     }
+
+    private String getConnectionSummary() {
+        String summary = null;
+        if (mCachedDevice.getBondState() != BluetoothDevice.BOND_NONE) {
+            summary = mCachedDevice.getConnectionSummary();
+        }
+        return summary;
+    }
 }

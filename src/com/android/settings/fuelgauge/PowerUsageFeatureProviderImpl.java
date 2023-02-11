@@ -26,6 +26,7 @@ import android.util.SparseIntArray;
 import com.android.internal.util.ArrayUtils;
 import com.android.settingslib.fuelgauge.Estimate;
 
+import java.util.List;
 import java.util.Set;
 
 /** Implementation of {@code PowerUsageFeatureProvider} */
@@ -66,8 +67,18 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public boolean isBatteryUsageEnabled(Context context) {
+    public boolean isBatteryUsageEnabled() {
         return true;
+    }
+
+    @Override
+    public double getBatteryUsageListConsumePowerThreshold() {
+        return 0.0;
+    }
+
+    @Override
+    public List<String> getSystemAppsAllowlist() {
+        return null;
     }
 
     @Override
@@ -76,23 +87,8 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public boolean isAdditionalBatteryInfoEnabled() {
-        return false;
-    }
-
-    @Override
     public Intent getAdditionalBatteryInfoIntent() {
         return null;
-    }
-
-    @Override
-    public boolean isAdvancedUiEnabled() {
-        return true;
-    }
-
-    @Override
-    public boolean isPowerAccountingToggleEnabled() {
-        return true;
     }
 
     @Override
@@ -126,11 +122,6 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public boolean getEarlyWarningSignal(Context context, String id) {
-        return false;
-    }
-
-    @Override
     public boolean isSmartBatterySupported() {
         return mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_smart_battery_available);
@@ -144,6 +135,11 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     @Override
     public boolean isAdaptiveChargingSupported() {
         return false;
+    }
+
+    @Override
+    public boolean isBatteryManagerSupported() {
+        return true;
     }
 
     @Override
@@ -162,17 +158,27 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public Set<CharSequence> getHideBackgroundUsageTimeSet(Context context) {
+    public Set<Integer> getOthersSystemComponentSet() {
         return new ArraySet<>();
     }
 
     @Override
-    public Set<CharSequence> getHideApplicationSet(Context context) {
+    public Set<Integer> getHideSystemComponentSet() {
         return new ArraySet<>();
     }
 
     @Override
-    public Set<CharSequence> getIgnoreScreenOnTimeTaskRootSet(Context context) {
+    public Set<String> getHideApplicationSet() {
+        return new ArraySet<>();
+    }
+
+    @Override
+    public Set<String> getHideBackgroundUsageTimeSet() {
+        return new ArraySet<>();
+    }
+
+    @Override
+    public Set<String> getIgnoreScreenOnTimeTaskRootSet() {
         return new ArraySet<>();
     }
 }

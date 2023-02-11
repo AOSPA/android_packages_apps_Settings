@@ -200,11 +200,11 @@ public class BatteryEntry {
 
     /** Battery entry for a power component of AggregateBatteryConsumer */
     public BatteryEntry(Context context, int powerComponentId, double devicePowerMah,
-            long usageDurationMs) {
+            long usageDurationMs, boolean isHidden) {
         mContext = context;
         mBatteryConsumer = null;
         mUid = Process.INVALID_UID;
-        mIsHidden = false;
+        mIsHidden = isHidden;
         mPowerComponentId = powerComponentId;
         mConsumedPower = devicePowerMah;
         mUsageDurationMs = usageDurationMs;
@@ -589,11 +589,6 @@ public class BatteryEntry {
             case BatteryConsumer.POWER_COMPONENT_WIFI:
                 name = context.getResources().getString(R.string.power_wifi);
                 iconId = R.drawable.ic_settings_wireless_no_theme;
-                break;
-            case BatteryConsumer.POWER_COMPONENT_IDLE:
-            case BatteryConsumer.POWER_COMPONENT_MEMORY:
-                name = context.getResources().getString(R.string.power_idle);
-                iconId = R.drawable.ic_settings_phone_idle;
                 break;
             default:
                 Log.w(TAG, "unknown attribute:" + DebugUtils.constantToString(
