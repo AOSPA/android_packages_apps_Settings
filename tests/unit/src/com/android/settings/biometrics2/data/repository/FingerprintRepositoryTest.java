@@ -23,22 +23,18 @@ import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_UDFP
 import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_UDFPS_ULTRASONIC;
 import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_UNKNOWN;
 
-import static com.android.settings.biometrics2.util.FingerprintManagerUtil.setupFingerprintEnrolledFingerprints;
-import static com.android.settings.biometrics2.util.FingerprintManagerUtil.setupFingerprintFirstSensor;
+import static com.android.settings.biometrics2.utils.FingerprintRepositoryUtils.newFingerprintRepository;
+import static com.android.settings.biometrics2.utils.FingerprintRepositoryUtils.setupFingerprintEnrolledFingerprints;
+import static com.android.settings.biometrics2.utils.FingerprintRepositoryUtils.setupSuwMaxFingerprintsEnrollable;
 
 import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.res.Resources;
 import android.hardware.fingerprint.FingerprintManager;
 
-import androidx.annotation.NonNull;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-
-import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -57,69 +53,88 @@ public class FingerprintRepositoryTest {
     @Mock private FingerprintManager mFingerprintManager;
 
     private Context mContext;
-    private FingerprintRepository mFingerprintRepository;
 
     @Before
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
-        mFingerprintRepository = new FingerprintRepository(mFingerprintManager);
     }
 
     @Test
-    public void testCanAssumeSensorType() {
-        setupFingerprintFirstSensor(mFingerprintManager, TYPE_UNKNOWN, 1);
-        assertThat(mFingerprintRepository.canAssumeUdfps()).isFalse();
+    public void testCanAssumeSensorType_forUnknownSensor() {
+        final FingerprintRepository repository = newFingerprintRepository(mFingerprintManager,
+                TYPE_UNKNOWN, 1);
+        assertThat(repository.canAssumeUdfps()).isFalse();
+        assertThat(repository.canAssumeSfps()).isFalse();
+    }
 
-        setupFingerprintFirstSensor(mFingerprintManager, TYPE_REAR, 1);
-        assertThat(mFingerprintRepository.canAssumeUdfps()).isFalse();
+    @Test
+    public void testCanAssumeSensorType_forRearSensor() {
+        final FingerprintRepository repository = newFingerprintRepository(mFingerprintManager,
+                TYPE_REAR, 1);
+        assertThat(repository.canAssumeUdfps()).isFalse();
+        assertThat(repository.canAssumeSfps()).isFalse();
+    }
 
-        setupFingerprintFirstSensor(mFingerprintManager, TYPE_UDFPS_ULTRASONIC, 1);
-        assertThat(mFingerprintRepository.canAssumeUdfps()).isTrue();
+    @Test
+    public void testCanAssumeSensorType_forUdfpsUltrasonicSensor() {
+        final FingerprintRepository repository = newFingerprintRepository(mFingerprintManager,
+                TYPE_UDFPS_ULTRASONIC, 1);
+        assertThat(repository.canAssumeUdfps()).isTrue();
+        assertThat(repository.canAssumeSfps()).isFalse();
+    }
 
-        setupFingerprintFirstSensor(mFingerprintManager, TYPE_UDFPS_OPTICAL, 1);
-        assertThat(mFingerprintRepository.canAssumeUdfps()).isTrue();
+    @Test
+    public void testCanAssumeSensorType_forUdfpsOpticalSensor() {
+        final FingerprintRepository repository = newFingerprintRepository(mFingerprintManager,
+                TYPE_UDFPS_OPTICAL, 1);
+        assertThat(repository.canAssumeUdfps()).isTrue();
+        assertThat(repository.canAssumeSfps()).isFalse();
+    }
 
-        setupFingerprintFirstSensor(mFingerprintManager, TYPE_POWER_BUTTON, 1);
-        assertThat(mFingerprintRepository.canAssumeUdfps()).isFalse();
+    @Test
+    public void testCanAssumeSensorType_forPowerButtonSensor() {
+        final FingerprintRepository repository = newFingerprintRepository(mFingerprintManager,
+                TYPE_POWER_BUTTON, 1);
+        assertThat(repository.canAssumeUdfps()).isFalse();
+        assertThat(repository.canAssumeSfps()).isTrue();
+    }
 
-        setupFingerprintFirstSensor(mFingerprintManager, TYPE_HOME_BUTTON, 1);
-        assertThat(mFingerprintRepository.canAssumeUdfps()).isFalse();
+    @Test
+    public void testCanAssumeSensorType_forHomeButtonSensor() {
+        final FingerprintRepository repository = newFingerprintRepository(mFingerprintManager,
+                TYPE_HOME_BUTTON, 1);
+        assertThat(repository.canAssumeUdfps()).isFalse();
+        assertThat(repository.canAssumeSfps()).isFalse();
     }
 
     @Test
     public void testGetMaxFingerprints() {
-        setupFingerprintFirstSensor(mFingerprintManager, TYPE_UNKNOWN, 44);
-        assertThat(mFingerprintRepository.getMaxFingerprints()).isEqualTo(44);
-
-        setupFingerprintFirstSensor(mFingerprintManager, TYPE_UNKNOWN, 999);
-        assertThat(mFingerprintRepository.getMaxFingerprints()).isEqualTo(999);
+        final FingerprintRepository repository = newFingerprintRepository(mFingerprintManager,
+                TYPE_UNKNOWN, 999);
+        assertThat(repository.getMaxFingerprints()).isEqualTo(999);
     }
 
     @Test
     public void testGetNumOfEnrolledFingerprintsSize() {
+        final FingerprintRepository repository = newFingerprintRepository(mFingerprintManager,
+                TYPE_UNKNOWN, 999);
         setupFingerprintEnrolledFingerprints(mFingerprintManager, 10, 3);
         setupFingerprintEnrolledFingerprints(mFingerprintManager, 22, 99);
 
-        assertThat(mFingerprintRepository.getNumOfEnrolledFingerprintsSize(10)).isEqualTo(3);
-        assertThat(mFingerprintRepository.getNumOfEnrolledFingerprintsSize(22)).isEqualTo(99);
+        assertThat(repository.getNumOfEnrolledFingerprintsSize(10)).isEqualTo(3);
+        assertThat(repository.getNumOfEnrolledFingerprintsSize(22)).isEqualTo(99);
     }
 
     @Test
     public void testGetMaxFingerprintsInSuw() {
+        final FingerprintRepository repository = newFingerprintRepository(mFingerprintManager,
+                TYPE_UNKNOWN, 999);
         setupSuwMaxFingerprintsEnrollable(mContext, mResources, 333);
-        assertThat(mFingerprintRepository.getMaxFingerprintsInSuw(mResources))
+        assertThat(repository.getMaxFingerprintsInSuw(mResources))
                 .isEqualTo(333);
 
         setupSuwMaxFingerprintsEnrollable(mContext, mResources, 20);
-        assertThat(mFingerprintRepository.getMaxFingerprintsInSuw(mResources)).isEqualTo(20);
+        assertThat(repository.getMaxFingerprintsInSuw(mResources)).isEqualTo(20);
     }
 
-    public static void setupSuwMaxFingerprintsEnrollable(
-            @NonNull Context context,
-            @NonNull Resources mockedResources,
-            int numOfFp) {
-        final int resId = ResourcesUtils.getResourcesId(context, "integer",
-                "suw_max_fingerprints_enrollable");
-        when(mockedResources.getInteger(resId)).thenReturn(numOfFp);
-    }
 }

@@ -64,7 +64,12 @@ public class PowerUsageFeatureProviderImplTest {
 
     @Test
     public void testIsBatteryUsageEnabled_returnFalse() {
-        assertThat(mPowerFeatureProvider.isBatteryUsageEnabled(mContext)).isTrue();
+        assertThat(mPowerFeatureProvider.isBatteryUsageEnabled()).isTrue();
+    }
+
+    @Test
+    public void testGetBatteryUsageListConsumePowerThreshold_return0() {
+        assertThat(mPowerFeatureProvider.getBatteryUsageListConsumePowerThreshold()).isEqualTo(0.0);
     }
 
     @Test
@@ -103,16 +108,6 @@ public class PowerUsageFeatureProviderImplTest {
     @Test
     public void testIsTypeSystem_uidOther_returnFalse() {
         assertThat(mPowerFeatureProvider.isTypeSystem(UID_OTHER, null)).isFalse();
-    }
-
-    @Test
-    public void testIsAdvancedUiEnabled_returnTrue() {
-        assertThat(mPowerFeatureProvider.isAdvancedUiEnabled()).isTrue();
-    }
-
-    @Test
-    public void testIsPowerAccountingToggleEnabled_returnTrue() {
-        assertThat(mPowerFeatureProvider.isPowerAccountingToggleEnabled()).isTrue();
     }
 
     @Test

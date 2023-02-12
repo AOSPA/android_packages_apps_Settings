@@ -20,6 +20,8 @@ import android.content.Context
 import com.android.settings.spa.app.AllAppListPageProvider
 import com.android.settings.spa.app.AppsMainPageProvider
 import com.android.settings.spa.app.appinfo.AppInfoSettingsProvider
+import com.android.settings.spa.app.appinfo.CloneAppInfoSettingsProvider
+import com.android.settings.spa.app.backgroundinstall.BackgroundInstalledAppsPageProvider
 import com.android.settings.spa.app.specialaccess.AlarmsAndRemindersAppListProvider
 import com.android.settings.spa.app.specialaccess.AllFilesAccessAppListProvider
 import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListProvider
@@ -28,6 +30,7 @@ import com.android.settings.spa.app.specialaccess.MediaManagementAppsAppListProv
 import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListProvider
 import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider
 import com.android.settings.spa.app.specialaccess.SpecialAppAccessPageProvider
+import com.android.settings.spa.app.specialaccess.WifiControlAppListProvider
 import com.android.settings.spa.development.UsageStatsPageProvider
 import com.android.settings.spa.home.HomePageProvider
 import com.android.settings.spa.notification.AppListNotificationsPageProvider
@@ -42,17 +45,20 @@ import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppLis
 
 open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
     override val pageProviderRepository = lazy {
-        val togglePermissionAppListTemplate = TogglePermissionAppListTemplate(
-            allProviders = listOf(
-                AllFilesAccessAppListProvider,
-                DisplayOverOtherAppsAppListProvider,
-                MediaManagementAppsAppListProvider,
-                ModifySystemSettingsAppListProvider,
-                PictureInPictureListProvider,
-                InstallUnknownAppsListProvider,
-                AlarmsAndRemindersAppListProvider,
-            ),
-        )
+        val togglePermissionAppListTemplate =
+            TogglePermissionAppListTemplate(
+                allProviders =
+                    listOf(
+                        AllFilesAccessAppListProvider,
+                        DisplayOverOtherAppsAppListProvider,
+                        MediaManagementAppsAppListProvider,
+                        ModifySystemSettingsAppListProvider,
+                        PictureInPictureListProvider,
+                        InstallUnknownAppsListProvider,
+                        AlarmsAndRemindersAppListProvider,
+                        WifiControlAppListProvider,
+                    ),
+            )
         SettingsPageProviderRepository(
             allPageProviders = listOf(
                 HomePageProvider,
@@ -66,6 +72,8 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
                 LanguageAndInputPageProvider,
                 AppLanguagesPageProvider,
                 UsageStatsPageProvider,
+                BackgroundInstalledAppsPageProvider,
+                CloneAppInfoSettingsProvider,
             ) + togglePermissionAppListTemplate.createPageProviders(),
             rootPages = listOf(
                 SettingsPage.create(HomePageProvider.name),
