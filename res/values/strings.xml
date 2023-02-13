@@ -328,6 +328,12 @@
     <!-- Title for the locale picker activity. [CHAR LIMIT=30]-->
     <string name="language_picker_title">Languages</string>
 
+    <!-- Title for category of the locale picker . [CHAR LIMIT=50]-->
+    <string name="language_picker_category_title">Preferred language order</string>
+
+    <!-- Description for indication of current system default language. [CHAR LIMIT=50]-->
+    <string name="desc_current_default_language">System language</string>
+
     <!-- Menu item in the locale menu. Will remove the selected locales. [CHAR LIMIT=30] -->
     <string name="locale_remove_menu">Remove</string>
 
@@ -341,13 +347,13 @@
     <string name="locale_picker_category_title">Preferred Language</string>
 
     <!-- Title for the Apps' locale menu entry [CHAR LIMIT=50]-->
-    <string name="app_locales_picker_menu_title">App Languages</string>
+    <string name="app_locales_picker_menu_title">App languages</string>
 
     <!-- Summary for the app's locale picker activity. [CHAR LIMIT=50]-->
     <string name="app_locale_picker_summary">Set the language for each app</string>
 
     <!-- Title for the App's locale picker activity. [CHAR LIMIT=50]-->
-    <string name="app_locale_picker_title">App Language</string>
+    <string name="app_locale_picker_title">App language</string>
 
     <!-- Category for the suggested app's locales. [CHAR LIMIT=50]-->
     <string name="suggested_app_locales_title">Suggested languages</string>
@@ -369,6 +375,18 @@
 
     <!-- Description for introduction of the locale selection supported of app list [CHAR LIMIT=NONE]-->
     <string name="desc_app_locale_selection_supported">Only apps that support language selection are shown here.</string>
+
+    <!-- Description for the introduction to language picker activity. [CHAR LIMIT=NONE]-->
+    <string name="desc_introduction_of_language_picker">Your system, apps, and websites use the first supported language from your preferred languages.</string>
+
+    <!-- Description for the notice of language picker. [CHAR LIMIT=NONE]-->
+    <string name="desc_notice_of_language_picker">To select a language for each app, go to app language settings.</string>
+
+    <!-- Title for locale helper page [CHAR LIMIT=NONE] -->
+    <string name="desc_locale_helper_footer_general">Learn more about languages</string>
+
+    <!-- Link for Locale helper page. [CHAR LIMIT=NONE]-->
+    <string name="link_locale_picker_footer_learn_more" translatable="false">https://support.google.com/android?p=per_language_app_settings</string>
 
     <!-- Regional Preferences begin -->
     <!-- The title of the menu entry of regional preferences. [CHAR LIMIT=50] -->
@@ -423,7 +441,7 @@
     <string name="dlg_remove_locales_error_message">Keep at least one preferred language</string>
 
     <!-- This text shows in the language picker when the system is not translated into that languages [CHAR LIMIT=80] -->
-    <string name="locale_not_translated">May not be available in some apps</string>
+    <string name="locale_not_translated">Not available as system language</string>
 
     <!-- Label for an accessibility action that moves a language up in the ordered language list [CHAR LIMIT=20] -->
     <string name="action_drag_label_move_up">Move up</string>
@@ -824,6 +842,12 @@
     <string name="security_settings_udfps_enroll_find_sensor_title">How to set up your fingerprint</string>
     <!-- Message shown in fingerprint enrollment dialog to locate the sensor -->
     <string name="security_settings_fingerprint_enroll_find_sensor_message">It\u2019s on the back of your phone. Use your index finger.</string>
+    <!-- Message shown in SFPS enrollment dialog to locate the sensor (tablet) [CHAR LIMIT=NONE]-->
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet">The fingerprint sensor is on the power button. It’s the flat button next to the raised volume button on the edge of the tablet.</string>
+    <!-- Message shown in SFPS enrollment dialog to locate the sensor (device) [CHAR LIMIT=NONE]-->
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="device">The fingerprint sensor is on the power button. It’s the flat button next to the raised volume button on the edge of the device.</string>
+    <!-- Message shown in SFPS enrollment dialog to locate the sensor (default) [CHAR LIMIT=NONE]-->
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="default">The fingerprint sensor is on the power button. It’s the flat button next to the raised volume button on the edge of the phone.</string>
     <!-- Message shown in UDFPS enrollment dialog to locate the sensor [CHAR LIMIT=NONE]-->
     <string name="security_settings_udfps_enroll_find_sensor_message">The fingerprint sensor is on your screen. You\u2019ll capture your fingerprint on the next screen.</string>
     <!-- Button for starting fingerprint enrollment. [CHAR LIMIT=10]-->
@@ -935,6 +959,8 @@
     <string name="security_settings_fingerprint_enroll_touch_dialog_title">Whoops, that\u2019s not the sensor</string>
     <!-- Dialog message for dialog which shows when user touches the icon on the screen, instead of the sensor at the back [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_enroll_touch_dialog_message">Touch the sensor on the back of your phone. Use your index finger.</string>
+    <!-- Dialog message for dialog which shows when finger cannot be processed in enrollment. [CHAR LIMIT=45] -->
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title">Enrollment was not completed</string>
     <!-- Dialog message for dialog which shows when finger cannot be enrolled. [CHAR LIMIT=45] -->
     <string name="security_settings_fingerprint_enroll_error_dialog_title">Fingerprint setup timed out</string>
     <!-- Dialog message for dialog which shows when finger cannot be enrolled due to being idle too long. -->
@@ -2451,6 +2477,13 @@
     <string name="sim_preferred_title">Update preferred SIM?</string>
     <!-- Message for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=NONE] -->
     <string name="sim_preferred_message"><xliff:g id="new_sim">%1$s</xliff:g> is the only SIM in your device. Do you want to use this SIM for mobile data, calls, and SMS messages?</string>
+
+    <!-- Title for the dialog asking to user to enable auto data switch upon enabling multi-SIM  [CHAR LIMIT=30] -->
+    <string name="enable_auto_data_switch_dialog_title">Switch SIMs automatically?</string>
+    <!-- Message for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=NONE] -->
+    <string name="enable_auto_data_switch_dialog_message">Allow your phone to automatically switch to <xliff:g id="backup_carrier" example="T-mobile">%1$s</xliff:g> for mobile data when it has better availability.</string>
+    <!-- Message for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=NONE] -->
+    <string name="auto_data_switch_dialog_managed_profile_warning">\n\nCalls, messages, and network traffic may be visible to your organization.</string>
 
     <!-- Instructions telling the user that they entered the wrong SIM PIN for the last time.
          Displayed in a dialog box.  [CHAR LIMIT=100] -->
@@ -6644,6 +6677,9 @@
     <string name="cloned_apps_dashboard_title">Cloned Apps</string>
     <!-- Description for introduction of the cloned apps page [CHAR LIMIT=NONE]-->
     <string name="desc_cloned_apps_intro_text">Create a second instance of an app so that you can use two accounts at the same time.</string>
+    <!-- Description while displaying cloneable app list in Cloned Apps page [CHAR LIMIT=NONE]-->
+    <string name="desc_cloneable_app_list_text">Apps that can be cloned.</string>
+    <!-- Summary for Cloned Apps menu [CHAR  LIMIT=40] -->
     <string name="cloned_apps_summary"><xliff:g id="cloned_apps_count">%1$s</xliff:g> cloned, <xliff:g id="allowed_apps_count">%2$d</xliff:g> available to clone</string>
     <!-- Description for cloned apps removal title [CHAR LIMIT=40]-->
     <string name="delete_all_app_clones">Delete all App clones</string>
@@ -7038,7 +7074,7 @@
     <!-- Do not disturb: Hide notifications summary [CHAR LIMIT=NONE] -->
     <string name="zen_mode_restrict_notifications_hide_summary">You won\u2019t see or hear notifications</string>
     <!-- Do not disturb: Hide notifications footer [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_restrict_notifications_hide_footer">Your phone won\u2019t show, vibrate or make sound for new or existing notifications. Keep in mind, critical notifications for phone activity and status will still appear.\n\nWhen you turn off Do Not Disturb, find missed notifications by swiping down from the top of your screen.</string>
+    <string name="zen_mode_restrict_notifications_hide_footer">Your phone won\u2019t show, vibrate or make sound for new or existing notifications. Keep in mind, critical notifications for device activity and status will still appear.\n\nWhen you turn off Do Not Disturb, find missed notifications by swiping down from the top of your screen.</string>
     <!-- Do not disturb: Custom settings option [CHAR LIMIT=60] -->
     <string name="zen_mode_restrict_notifications_custom">Custom</string>
     <!-- Do not disturb: restrict notifications page, menu option [CHAR LIMIT=60] -->
@@ -7088,7 +7124,7 @@
     <!-- Do not disturb: what to block summary, all effects -->
     <string name="zen_mode_block_effect_summary_all">Sound, vibration, and visual signs of notifications</string>
 
-    <string name="zen_mode_blocked_effects_footer">Notifications needed for basic phone activity and status will never be hidden.</string>
+    <string name="zen_mode_blocked_effects_footer">Notifications needed for basic device activity and status will never be hidden.</string>
 
     <!--  Do not disturb: Zen mode no sounds are exceptions to bypass do not disturb-->
     <string name="zen_mode_no_exceptions">None</string>
@@ -11236,10 +11272,10 @@
     <!-- Title for if toggle access is disabled by carrier [CHAR LIMIT=NONE] -->
     <string name="enable_2g_summary_disabled_carrier"><xliff:g id="carrier_name_2g" example="Google Fi">%1$s</xliff:g> requires 2G to be available</string>
 
-    <!-- Title for toggle if user wants to allow null cellular algorithms [CHAR LIMIT=40] -->
-    <string name="allow_null_algorithms_title">Allow less secure connection</string>
-    <!-- Summary for if the user wants to allow null cellular algorithms [CHAR LIMIT=NONE] -->
-    <string name="allow_null_algorithms_summary">May improve your signal in some locations. For emergency calls, less secure connections are always allowed.</string>
+    <!-- Title for toggle if user wants to require cellular encryption [CHAR LIMIT=40] -->
+    <string name="require_cellular_encryption_title">Require encryption</string>
+    <!-- Summary for if the user wants to require cellular encryption [CHAR LIMIT=NONE] -->
+    <string name="require_cellular_encryption_summary">Encryption is more secure, but you might not be able to connect in some locations. For emergency calls, encryption is never required</string>
 
     <!-- Label for All services preference in App info settings [CHAR LIMIT=40] -->
     <string name="app_info_all_services_label">All services</string>

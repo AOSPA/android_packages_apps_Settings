@@ -859,7 +859,7 @@
             android:exported="true"
             android:label="@string/long_background_tasks_label">
             <intent-filter android:priority="1">
-                <action android:name="android.settings.MANAGE_APP_LONG_JOBS" />
+                <action android:name="android.settings.MANAGE_APP_LONG_RUNNING_JOBS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -875,7 +875,7 @@
             android:exported="true"
             android:label="@string/long_background_tasks_label">
             <intent-filter android:priority="1">
-                <action android:name="android.settings.MANAGE_APP_LONG_JOBS" />
+                <action android:name="android.settings.MANAGE_APP_LONG_RUNNING_JOBS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="package" />
             </intent-filter>
@@ -3083,11 +3083,12 @@
             android:exported="false"
             android:authorities="${applicationId}.battery.usage.bugreport"/>
 
-        <receiver android:name=".fuelgauge.batteryusage.BatteryUsageBroadcastReceiver"
+        <receiver android:name="com.android.settings.fuelgauge.batteryusage.BatteryUsageBroadcastReceiver"
                   android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BATTERY_LEVEL_CHANGED"/>
                 <action android:name="com.android.settings.battery.action.CLEAR_BATTERY_CACHE_DATA"/>
+                <action android:name="com.android.settings.battery.action.ACTION_BATTERY_UNPLUGGING"/>
             </intent-filter>
         </receiver>
 
