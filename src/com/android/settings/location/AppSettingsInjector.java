@@ -19,18 +19,8 @@ package com.android.settings.location;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
-import android.content.pm.ResolveInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.ServiceInfo;
-import android.os.UserHandle;
-
-import android.location.SettingInjectorService;
 
 import androidx.preference.Preference;
-
-import java.io.IOException;
-
-import org.xmlpull.v1.XmlPullParserException;
 
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.RestrictedAppPreference;
@@ -53,30 +43,11 @@ public class AppSettingsInjector extends SettingsInjector {
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
-    /**
-     * Returns the settings parsed from the attributes of the
-     * {@link SettingInjectorService#META_DATA_NAME} tag, or null.
-     *
-     * Duplicates some code from {@link android.content.pm.RegisteredServicesCache}.
-     */
-    @Override
-    protected InjectedSetting parseServiceInfo(ResolveInfo service, UserHandle userHandle,
-            PackageManager pm) throws XmlPullParserException, IOException {
-        InjectedSetting res = super.parseServiceInfo(service, userHandle, pm);
-        ServiceInfo si = service.serviceInfo;
-
-    	if ((null != res) && (!DimmableIZatIconPreference.showIzat(mContext, si.packageName))) {
-        	res = null;
-    	}
-
-    	return res;
-    }
-
     @Override
     protected Preference createPreference(Context prefContext, InjectedSetting setting) {
         return TextUtils.isEmpty(setting.userRestriction)
-                ? DimmableIZatIconPreference.getAppPreference(prefContext, setting)
-                : DimmableIZatIconPreference.getRestrictedAppPreference(prefContext, setting);
+                ? new AppPreference(prefContext)
+                : new RestrictedAppPreference(prefContext, setting.userRestriction);
     }
 
     @Override

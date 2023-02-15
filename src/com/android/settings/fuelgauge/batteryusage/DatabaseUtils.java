@@ -36,6 +36,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
+import com.android.settingslib.fuelgauge.BatteryStatus;
 
 import java.time.Clock;
 import java.time.Duration;
@@ -149,7 +150,7 @@ public final class DatabaseUtils {
             clearMemory();
             return null;
         }
-        final int batteryLevel = BatteryUtils.getBatteryLevel(intent);
+        final int batteryLevel = BatteryStatus.getBatteryLevel(intent);
         final int batteryStatus = intent.getIntExtra(
                 BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN);
         final int batteryHealth = intent.getIntExtra(
@@ -164,20 +165,16 @@ public final class DatabaseUtils {
             batteryEntryList.stream()
                     .filter(entry -> {
                         final long foregroundMs = entry.getTimeInForegroundMs();
-                        final long foregroundServiceMs = entry.getTimeInForegroundServiceMs();
                         final long backgroundMs = entry.getTimeInBackgroundMs();
                         if (entry.getConsumedPower() == 0
                                 && (foregroundMs != 0
-                                || foregroundServiceMs != 0
                                 || backgroundMs != 0)) {
                             Log.w(TAG, String.format(
-                                    "no consumed power but has running time for %s time=%d|%d|%d",
-                                    entry.getLabel(), foregroundMs, foregroundServiceMs,
-                                    backgroundMs));
+                                    "no consumed power but has running time for %s time=%d|%d",
+                                    entry.getLabel(), foregroundMs, backgroundMs));
                         }
                         return entry.getConsumedPower() != 0
                                 || foregroundMs != 0
-                                || foregroundServiceMs != 0
                                 || backgroundMs != 0;
                     })
                     .forEach(entry -> valuesList.add(

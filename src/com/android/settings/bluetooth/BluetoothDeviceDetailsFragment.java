@@ -23,6 +23,7 @@ import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.hardware.input.InputManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemProperties;
@@ -30,7 +31,9 @@ import android.os.UserManager;
 import android.provider.DeviceConfig;
 import android.sysprop.BluetoothProperties;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
+import android.view.InputDevice;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -39,11 +42,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.connecteddevice.stylus.StylusDevicesController;
 import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
@@ -85,6 +90,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         CachedBluetoothDevice getDevice(String deviceAddress);
 
         LocalBluetoothManager getManager(Context context);
+
         UserManager getUserManager();
     }
 
@@ -97,6 +103,9 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     LocalBluetoothManager mManager;
     @VisibleForTesting
     CachedBluetoothDevice mCachedDevice;
+
+    @Nullable
+    InputDevice mInputDevice;
 
     private UserManager mUserManager;
 
@@ -138,6 +147,21 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         return getSystemService(UserManager.class);
     }
 
+    @Nullable
+    @VisibleForTesting
+    InputDevice getInputDevice(Context context) {
+        InputManager im = context.getSystemService(InputManager.class);
+
+        for (int deviceId : im.getInputDeviceIds()) {
+            String btAddress = im.getInputDeviceBluetoothAddress(deviceId);
+
+            if (btAddress != null && btAddress.equals(mDeviceAddress)) {
+                return im.getInputDevice(deviceId);
+            }
+        }
+        return null;
+    }
+
     public static BluetoothDeviceDetailsFragment newInstance(String deviceAddress) {
         Bundle args = new Bundle(1);
         args.putString(KEY_DEVICE_ADDRESS, deviceAddress);
@@ -152,6 +176,12 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         mManager = getLocalBluetoothManager(context);
         mCachedDevice = getCachedDevice(mDeviceAddress);
         mUserManager = getUserManager();
+
+        if (FeatureFlagUtils.isEnabled(context,
+                FeatureFlagUtils.SETTINGS_SHOW_STYLUS_PREFERENCES)) {
+            mInputDevice = getInputDevice(context);
+        }
+
         super.onAttach(context);
         if (mCachedDevice == null) {
             // Close this page if device is null with invalid device mac address
@@ -212,6 +242,12 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                             mOnGlobalLayoutListener);
                 }
             };
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setTitleForInputDevice();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -286,65 +322,66 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         ArrayList<AbstractPreferenceController> controllers = new ArrayList<>();
 
-        if (mCachedDevice == null) return controllers;
+          if (mCachedDevice == null) return controllers;
 
-        Lifecycle lifecycle = getSettingsLifecycle();
-        controllers.add(new BluetoothDetailsHeaderController(context, this, mCachedDevice,
-                lifecycle, mManager));
-        controllers.add(new BluetoothDetailsButtonsController(context, this, mCachedDevice,
-                lifecycle));
-        controllers.add(new BluetoothDetailsCompanionAppsController(context, this,
-                mCachedDevice, lifecycle));
-        controllers.add(new BluetoothDetailsSpatialAudioController(context, this, mCachedDevice,
-                lifecycle));
-        controllers.add(new BluetoothDetailsProfilesController(context, this, mManager,
-                mCachedDevice, lifecycle));
-        controllers.add(new BluetoothDetailsMacAddressController(context, this, mCachedDevice,
-                lifecycle));
-        controllers.add(new BluetoothDetailsRelatedToolsController(context, this, mCachedDevice,
-                lifecycle));
-        if (mBAPropertyChecked == false) {
-            int advAudioMask = SystemProperties.getInt(BLUETOOTH_ADV_AUDIO_MASK_PROP, 0);
-            mBAEnabled = (((advAudioMask & BA_MASK) == BA_MASK) &&
-                SystemProperties.getBoolean(BLUETOOTH_BROADCAST_UI_PROP, true));
-            mBAPropertyChecked = true;
-        }
-        if (mBAEnabled == false) {
-            return controllers;
-        }
-
-        Log.d(TAG, "createPreferenceControllers for BA");
-
-        try {
-            if (mCachedDevice.isBASeeker()) {
-                Class<?> classAddSourceController = Class.forName(
-                    "com.android.settings.bluetooth.BluetoothDetailsAddSourceButtonController");
-                Class<?> classBADeviceController = Class.forName(
-                    "com.android.settings.bluetooth.BADevicePreferenceController");
-                Constructor ctorAddSource = classAddSourceController
-                    .getDeclaredConstructor(new Class[] {Context.class,
-                PreferenceFragmentCompat.class, CachedBluetoothDevice.class, Lifecycle.class});
-                Constructor ctorBADevice = classBADeviceController
-                    .getDeclaredConstructor(new Class[] {Context.class, Lifecycle.class,
-                    String.class});
-                Object objAddSourceController = ctorAddSource.newInstance(context, this,
-                    mCachedDevice, lifecycle);
-                Object objBADeviceController = ctorBADevice.newInstance(context, lifecycle,
-                    "added_sources");
-                objBADeviceController.getClass()
-                    .getMethod("init", DashboardFragment.class, CachedBluetoothDevice.class)
-                    .invoke(objBADeviceController, this, mCachedDevice);
-            controllers.add((AbstractPreferenceController) objAddSourceController);
-            controllers.add((AbstractPreferenceController) objBADeviceController);
+          Lifecycle lifecycle = getSettingsLifecycle();
+          controllers.add(new BluetoothDetailsHeaderController(context, this, mCachedDevice,
+                  lifecycle, mManager));
+          controllers.add(new BluetoothDetailsButtonsController(context, this, mCachedDevice,
+                  lifecycle));
+          controllers.add(new BluetoothDetailsCompanionAppsController(context, this,
+                  mCachedDevice, lifecycle));
+          controllers.add(new BluetoothDetailsSpatialAudioController(context, this, mCachedDevice,
+                  lifecycle));
+          controllers.add(new BluetoothDetailsProfilesController(context, this, mManager,
+                  mCachedDevice, lifecycle));
+          controllers.add(new BluetoothDetailsMacAddressController(context, this, mCachedDevice,
+                  lifecycle));
+          controllers.add(new StylusDevicesController(context, mInputDevice, lifecycle));
+          controllers.add(new BluetoothDetailsRelatedToolsController(context, this, mCachedDevice,
+                  lifecycle));
+          if (mBAPropertyChecked == false) {
+              int advAudioMask = SystemProperties.getInt(BLUETOOTH_ADV_AUDIO_MASK_PROP, 0);
+              mBAEnabled = (((advAudioMask & BA_MASK) == BA_MASK) &&
+                  SystemProperties.getBoolean(BLUETOOTH_BROADCAST_UI_PROP, true));
+              mBAPropertyChecked = true;
           }
-        } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException |
-            InvocationTargetException | InstantiationException | IllegalArgumentException |
-            ExceptionInInitializerError e) {
-            e.printStackTrace();
-            mBAEnabled = false;
-        } finally {
-            return controllers;
-        }
+          if (mBAEnabled == false) {
+              return controllers;
+          }
+
+          Log.d(TAG, "createPreferenceControllers for BA");
+
+          try {
+              if (mCachedDevice.isBASeeker()) {
+                  Class<?> classAddSourceController = Class.forName(
+                      "com.android.settings.bluetooth.BluetoothDetailsAddSourceButtonController");
+                  Class<?> classBADeviceController = Class.forName(
+                      "com.android.settings.bluetooth.BADevicePreferenceController");
+                  Constructor ctorAddSource = classAddSourceController
+                      .getDeclaredConstructor(new Class[] {Context.class,
+                  PreferenceFragmentCompat.class, CachedBluetoothDevice.class, Lifecycle.class});
+                  Constructor ctorBADevice = classBADeviceController
+                      .getDeclaredConstructor(new Class[] {Context.class, Lifecycle.class,
+                      String.class});
+                  Object objAddSourceController = ctorAddSource.newInstance(context, this,
+                      mCachedDevice, lifecycle);
+                  Object objBADeviceController = ctorBADevice.newInstance(context, lifecycle,
+                      "added_sources");
+                  objBADeviceController.getClass()
+                      .getMethod("init", DashboardFragment.class, CachedBluetoothDevice.class)
+                      .invoke(objBADeviceController, this, mCachedDevice);
+              controllers.add((AbstractPreferenceController) objAddSourceController);
+              controllers.add((AbstractPreferenceController) objBADeviceController);
+            }
+          } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException |
+              InvocationTargetException | InstantiationException | IllegalArgumentException |
+              ExceptionInInitializerError e) {
+              e.printStackTrace();
+              mBAEnabled = false;
+          } finally {
+              return controllers;
+          }
     }
 
     private int getPaddingSize() {
@@ -358,5 +395,17 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                 + resolvedAttributes.getDimensionPixelSize(1, 0);
         resolvedAttributes.recycle();
         return width;
+    }
+
+    @VisibleForTesting
+    void setTitleForInputDevice() {
+        // TODO(b/254835745) once source filter for bt stylus merged
+        // && mInputDevice.supportsSource(InputDevice.SOURCE_BLUETOOTH_STYLUS))
+        if (mInputDevice != null) {
+            // This will override the default R.string.device_details_title "Device Details"
+            // that will show on non-stylus bluetooth devices.
+            // That title is set via the manifest and also from BluetoothDeviceUpdater.
+            getActivity().setTitle(getContext().getString(R.string.stylus_device_details_title));
+        }
     }
 }

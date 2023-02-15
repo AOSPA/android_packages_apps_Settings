@@ -135,9 +135,29 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button">Pair right ear</string>
     <!-- Connected devices settings. Positive button of the dialog to help user to pair left ear of the hearing aid device. Dialog shows when only one of the hearing aid device set is connected. [CHAR LIMIT=20] -->
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button">Pair left ear</string>
-
+    <!-- Connected devices settings. Title of the preference to show the entrance of the hearing device controls page. [CHAR LIMIT=35] -->
+    <string name="bluetooth_device_controls_title">Hearing device controls</string>
+    <!-- Connected devices settings. Summary of the preference to show the entrance of the hearing device controls page. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_device_controls_summary">Hearing device shortcut, hearing aid compatibility</string>
+    <!-- Connected devices settings. Title of the preference to show the entrance of the audio output page. It can change different types of audio are played on phone or other bluetooth devices. [CHAR LIMIT=35] -->
+    <string name="bluetooth_audio_routing_title">Audio output</string>
+    <!-- Connected devices settings. Summary of the preference to show the entrance of the audio output page. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_audio_routing_summary">Choose whether different types of audio are played on your hearing device or phone speaker</string>
     <!-- Title for related tools section. This section will list related tools below. [CHAR LIMIT=15] -->
     <string name="bluetooth_screen_related">Related</string>
+
+    <!-- Bluetooth audio output settings. Title of the option managing ringtone audio path. [CHAR LIMIT=30] -->
+    <string name="bluetooth_ringtone_title">Ringtone</string>
+    <!-- Bluetooth audio output settings. Title of the option managing call audio path. [CHAR LIMIT=30] -->
+    <string name="bluetooth_call_title">Call</string>
+    <!-- Bluetooth audio output settings. Title of the option managing media audio path. [CHAR LIMIT=30] -->
+    <string name="bluetooth_media_title">Media</string>
+    <!-- Bluetooth audio output settings. Title of the option managing system sounds audio path. [CHAR LIMIT=30] -->
+    <string name="bluetooth_system_sounds_title">System sounds</string>
+    <!-- Bluetooth audio output settings. Title of the option to play audio on hearing aids. [CHAR LIMIT=40] -->
+    <string name="bluetooth_audio_path_hearing_device_title">Play on hearing device</string>
+    <!-- Bluetooth audio output settings. Title of the option to play audio on phone speaker. [CHAR LIMIT=40] -->
+    <string name="bluetooth_audio_path_phone_speaker_title">Play on phone speaker</string>
 
     <!-- Bluetooth broadcast enable/disable -->
     <string name="bluetooth_broadcast">Broadcast</string>
@@ -243,6 +263,17 @@
 
     <!-- Title to see all the previous connected devices [CHAR LIMIT=50] -->
     <string name="previous_connected_see_all">See all</string>
+
+    <!-- Title for stylus device details page [CHAR LIMIT=50] -->
+    <string name="stylus_device_details_title">Stylus</string>
+    <!-- Preference title for setting the default note taking app [CHAR LIMIT=none] -->
+    <string name="stylus_default_notes_app">System note taking app</string>
+    <!-- Preference title for toggling whether handwriting in textfields is enabled [CHAR LIMIT=none] -->
+    <string name="stylus_textfield_handwriting">Stylus writing in textfields</string>
+    <!-- Preference title for toggling whether stylus button presses are ignored [CHAR LIMIT=none] -->
+    <string name="stylus_ignore_button">Ignore all stylus button presses</string>
+    <!-- Name shown in a USI stylus header in device details page [CHAR LIMIT=60] -->
+    <string name="stylus_usi_header_title">USI stylus</string>
 
     <!-- Date & time settings screen title -->
     <string name="date_and_time">Date &amp; time</string>
@@ -1554,6 +1585,8 @@
     <string name="please_select_phase2">Phase 2 authentication</string>
     <!-- Label for the EAP CA certificate of the network -->
     <string name="wifi_eap_ca_cert">CA certificate</string>
+    <!-- Label for the EAP minimum TLS version of the network -->
+    <string name="wifi_eap_min_tls_ver">Minimum TLS version</string>
     <!-- Label for the OCSP type of the network. [CHAR LIMIT=32] -->
     <string name="wifi_eap_ocsp">Online Certificate Status</string>
     <!-- Label for the domain name that the EAP CA certificate(s) can be used to validate. -->
@@ -2739,6 +2772,16 @@
     <string name="reset_network_title">Reset Wi-Fi, mobile &amp; Bluetooth</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Reset network settings [CHAR LIMIT=NONE] -->
     <string name="reset_network_desc">This will reset all network settings, including:\n\n<li>Wi\u2011Fi</li>\n<li>Mobile data</li>\n<li>Bluetooth</li>"</string>
+
+    <!-- Reset Bluetooth and Wi-Fi Network -->
+    <!-- Dialog title to reset Bluetooth and Wi-Fi settings -->
+    <string name="reset_bluetooth_wifi_title">Reset Bluetooth &amp; Wi\u2011Fi</string>
+    <!-- Dialog context when reset Bluetooth and Wi-Fi settings [CHAR LIMIT=NONE] -->
+    <string name="reset_bluetooth_wifi_desc">This will reset all Wi\u2011Fi &amp; Bluetooth settings. You can\u2019t undo this action.</string>
+    <!-- Confirmation button text when reset Bluetooth and Wi-Fi settings [CHAR LIMIT=NONE] -->
+    <string name="reset_bluetooth_wifi_button_text">Reset</string>
+    <!-- Reset Bluetooth and Wi-Fi complete toast text [CHAR LIMIT=75] -->
+    <string name="reset_bluetooth_wifi_complete_toast">Bluetooth &amp; Wi\u2011Fi have been reset</string>
 
     <!-- Erase Euicc -->
     <!-- Confirmation button of dialog to confirm resetting user's app preferences [CHAR LIMIT=NONE] -->
@@ -4261,8 +4304,8 @@
 
     <!-- Button text for the accessibility dialog continue to the next screen for hearing aid. [CHAR LIMIT=32] -->
     <string name="accessibility_hearingaid_instruction_continue_button">Continue</string>
-    <!-- Title for the accessibility preference for hearing aid. [CHAR LIMIT=35] -->
-    <string name="accessibility_hearingaid_title">Hearing aids</string>
+    <!-- Title for the accessibility preference for hearing devices. [CHAR LIMIT=35] -->
+    <string name="accessibility_hearingaid_title">Hearing devices</string>
     <!-- Summary for the accessibility preference for hearing aid when not connected. [CHAR LIMIT=50] -->
     <string name="accessibility_hearingaid_not_connected_summary">No hearing aids connected</string>
     <!-- Summary for the accessibility preference for hearing aid when adding new devices. [CHAR LIMIT=50] -->
@@ -4281,6 +4324,29 @@
     <string name="accessibility_hearingaid_left_and_right_side_device_summary"><xliff:g id="device_name"  example="GN Hearing Aids">%1$s</xliff:g>, left and right</string>
     <!-- Summary for the accessibility preference for hearing aid when there are more than one set of devices are active. [CHAR LIMIT=50] -->
     <string name="accessibility_hearingaid_more_device_summary"><xliff:g id="device_name" example="GN Hearing Aids">%1$s</xliff:g> +1 more</string>
+    <!-- Title for the hearing device pairing preference. [CHAR LIMIT=20] -->
+    <string name="accessibility_hearing_device_pairing_title">Pair new device</string>
+    <!-- Title for the preference category containing the connected hearing device group. [CHAR LIMIT=20]-->
+    <string name="accessibility_hearing_device_saved_title">Saved devices</string>
+    <!-- Title for the preference category containing the controls of the hearing device. [CHAR LIMIT=35] -->
+    <string name="accessibility_hearing_device_control">Hearing device controls</string>
+    <!-- Title for the accessibility preference for hearing devices. [CHAR LIMIT=35] -->
+    <string name="accessibility_hearing_device_shortcut_title">Hearing device shortcut</string>
+    <!-- Title for the Hearing Aid Compatibility preference in the accessibility page. [CHAR LIMIT=35] -->
+    <string name="accessibility_hac_mode_title">Hearing aid compatibility</string>
+    <!--Summary for the Hearing Aid Compatibility preference in the accessibility page. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_hac_mode_summary">Improve audio for some hearing devices</string>
+    <!-- Description for text in accessibility hearing aids footer. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_hearing_device_footer_summary">Make sure your hearing devices are turned on and in pairing mode</string>
+    <!-- Title for the pair hearing device page. [CHAR LIMIT=25] -->
+    <string name="accessibility_hearing_device_pairing_page_title">Pair hearing device</string>
+    <!-- Title for the preference category containing the list of the available hearing during and after bluetooth scanning devices. [CHAR LIMIT=30] -->
+    <string name="accessibility_found_hearing_devices">Available devices</string>
+    <!-- Title for the preference category containing the all bluetooth devices during and after bluetooth scanning devices. Used when people can not find their hearing device in hearing device pairing list. [CHAR LIMIT=45] -->
+    <string name="accessibility_found_all_devices">Don\u2019t see your hearing device?</string>
+    <!-- Title for listing all bluetooth devices preference in the accessibility page. [CHAR LIMIT=40] -->
+    <string name="accessibility_list_all_devices_title">View all Bluetooth devices</string>
+
     <!-- Title for the accessibility audio adjustment page. [CHAR LIMIT=50] -->
     <string name="accessibility_audio_adjustment_title">Audio adjustment</string>
     <!-- Title for control audio description preference. [CHAR LIMIT=50] -->
@@ -5037,12 +5103,22 @@
     <string name="battery_usage_for_background_time">Background: <xliff:g id="time">%s</xliff:g></string>
     <!-- [CHAR_LIMIT=NONE] Battery usage main screen footer for empty content -->
     <string name="battery_usage_screen_footer_empty">Battery usage data will be available in a few hours once fully charged</string>
+    <!-- [CHAR_LIMIT=NONE] Battery chart label for the current time. -->
+    <string name="battery_usage_chart_label_now">now</string>
     <!-- [CHAR_LIMIT=NONE] Accessibility content description for battery chart view. -->
     <string name="battery_usage_chart">Battery usage chart</string>
     <!-- [CHAR_LIMIT=NONE] Accessibility content description for daily battery chart view. -->
     <string name="daily_battery_usage_chart">Daily battery usage chart</string>
     <!-- [CHAR_LIMIT=NONE] Accessibility content description for hourly battery chart view. -->
     <string name="hourly_battery_usage_chart">Hourly battery usage chart</string>
+    <!-- [CHAR_LIMIT=NONE] Battery usage breakdown title since last full charge -->
+    <string name="battery_usage_breakdown_title_since_last_full_charge">Usage proportional breakdown since last full charge</string>
+    <!-- [CHAR_LIMIT=NONE] Battery usage breakdown title for a selected slot -->
+    <string name="battery_usage_breakdown_title_for_slot">Usage proportional breakdown for <xliff:g id="slot">%s</xliff:g></string>
+    <!-- [CHAR_LIMIT=NONE] The tab title in the battery usage breakdown. -->
+    <string name="battery_usage_app_tab">App</string>
+    <!-- [CHAR_LIMIT=NONE] The tab title in the battery usage breakdown. -->
+    <string name="battery_usage_system_tab">System</string>
     <!-- Process Stats strings -->
     <skip />
 
@@ -6298,10 +6374,14 @@
     <!-- Title of a preference for whether to allow data during calls that is shown when mobile
          data is turned off. This is needed for some multi-SIM scenarios, because the SIM that is
          default for data might not be available during a phone call. [CHAR LIMIT=60] -->
+    <string name="data_during_calls_title">Data during calls</string>
     <string name="auto_data_switch_title">Switch mobile data automatically</string>
     <!-- Title of a preference for whether to allow data during calls that is shown when mobile
          data is turned off. This is needed for some multi-SIM scenarios, because the SIM that is
          default for data might not be available during a phone call. [CHAR LIMIT=NONE] -->
+    <string name="data_during_calls_summary">
+        Allow this SIM to be used for mobile data only during calls
+    </string>
     <string name="auto_data_switch_summary">
         Temporarily use this network when it has better availability for calls and internet
     </string>
@@ -8095,37 +8175,40 @@
     <!-- [CHAR LIMIT=NONE] eSim deletion confirmation description  -->
     <string name="confirm_sim_deletion_description">Verify it\u0027s you before erasing a eSIM</string>
 
-    <!-- TODO(b/258550150): Finalize all strings in this section and remove translatable="false" -->
     <!-- [CHAR LIMIT=32] Name of Advanced memory protection page in "More Security Settings" and heading of page. -->
-    <string name="memtag_title" translatable="false">Advanced memory protection beta</string>
+    <string name="memtag_title">Advanced memory protection beta</string>
     <!-- [CHAR LIMIT=52] Label for button to turn on / off Advanced memory protection.-->
-    <string name="memtag_toggle" translatable="false">Advanced memory protection</string>
+    <string name="memtag_toggle">Advanced memory protection</string>
     <!-- [CHAR LIMIT=NONE] Subtitle of Advanced memory protection page. -->
-    <string name="memtag_intro" translatable="false">This beta feature helps you protect your device from bugs that may put your security at risk.</string>
+    <string name="memtag_intro">This beta feature helps you protect your device from bugs that may put your security at risk.</string>
     <!-- [CHAR LIMIT=NONE] Status label indicating that Advanced memory protection is on. -->
-    <string name="memtag_on" translatable="false">On</string>
+    <string name="memtag_on">On</string>
     <!-- [CHAR LIMIT=37] Status label indicating that Advanced memory protection is off. -->
-    <string name="memtag_off" translatable="false">Off</string>
+    <string name="memtag_off">Off</string>
     <!-- [CHAR LIMIT=37] Status label indicating that system needs to be rebooted for Advanced memory protection to be on. -->
-    <string name="memtag_on_pending" translatable="false">On after restart</string>
+    <string name="memtag_on_pending">On after restart</string>
     <!-- [CHAR LIMIT=37] Status label indicating that system needs to be rebooted for Advanced memory protection to be off. -->
-    <string name="memtag_off_pending" translatable="false">Off after restart</string>
+    <string name="memtag_off_pending">Off after restart</string>
     <!-- [CHAR LIMIT=37] Status label indicating that Advanced memory protection was forced off via remote device configuration. -->
-    <string name="memtag_force_off" translatable="false">Currently unavailable for your device.</string>
+    <string name="memtag_force_off">Currently unavailable for your device</string>
+    <!-- [CHAR LIMIT=37] Status label indicating that Advanced memory protection was forced on via remote device configuration. -->
+    <string name="memtag_force_on">Always on for your device</string>
     <!-- [CHAR LIMIT=NONE] Subtext on page to control Advanced memory protection settings. -->
-    <string name="memtag_footer" translatable="false">You\u0027ll have to restart your device to turn Advanced memory protection on or off. When it\u0027s on, you may notice slower device performance.</string>
+    <string name="memtag_footer">You\u0027ll have to restart your device to turn Advanced memory protection on or off. When it\u0027s on, you may notice slower device performance.</string>
     <!-- [CHAR LIMIT=31] Header of dialog asking user to reboot device. -->
-    <string name="memtag_reboot_title" translatable="false">Restart device?</string>
+    <string name="memtag_reboot_title">Restart device?</string>
     <!-- [CHAR LIMIT=NONE] Message shown in dialog prompting user to reboot device to turn on Advanced memory protection.-->
-    <string name="memtag_reboot_message_on" translatable="false">You\u0027ll need to restart your device to turn on Advanced memory protection.</string>
+    <string name="memtag_reboot_message_on">You\u0027ll need to restart your device to turn on Advanced memory protection.</string>
     <!-- [CHAR LIMIT=NONE] Message shown in dialog prompting user to reboot device to turn off Advanced memory protection.-->
-    <string name="memtag_reboot_message_off" translatable="false">You\u0027ll need to restart your device to turn off Advanced memory protection.</string>
+    <string name="memtag_reboot_message_off">You\u0027ll need to restart your device to turn off Advanced memory protection.</string>
     <!-- [CHAR LIMIT=17] Button label in dialog prompting user to reboot device.-->
-    <string name="memtag_reboot_yes" translatable="false">Restart</string>
+    <string name="memtag_reboot_yes">Restart</string>
     <!-- [CHAR LIMIT=17] Button label in dialog prompting user to reboot device.-->
-    <string name="memtag_reboot_no" translatable="false">Not now</string>
+    <string name="memtag_reboot_no">Not now</string>
     <!-- [CHAR LIMIT=NONE] Label for Learn More link. -->
-    <string name="memtag_learn_more" translatable="false">Learn more about Advanced memory protection.</string>
+    <string name="memtag_learn_more">Learn more about Advanced memory protection.</string>
+    <!-- [CHAR LIMIT=NONE] Search keywords for Advanced memory protection option. -->
+    <string name="keywords_memtag" translatable="false">MTE, Memory Tagging Extension</string>
 
     <!-- Opening string on the dialog that prompts the user to confirm that they really want to delete their existing work profile. The administration app icon and name appear after the final colon. [CHAR LIMIT=NONE] -->
     <string name="opening_paragraph_delete_profile_unknown_company">This work profile is managed by:</string>
@@ -10626,7 +10709,10 @@
     <!-- Title for the button to reboot with MTE enabled. [CHAR LIMIT=NONE] -->
     <string name="reboot_with_mte_title">Reboot with MTE</string>
     <string name="reboot_with_mte_message">System will reboot and allow to experiment with Memory Tagging Extension (MTE). MTE may negatively impact system performance and stability. Will be reset on next subsequent reboot.</string>
+    <!-- Subtext for button if MTE is not enabled through Advanced memory protection. -->
     <string name="reboot_with_mte_summary">Try MTE for a single boot for app development</string>
+    <!-- Subtext for button if MTE is already enabled through Advanced memory protection.
+         The string for "Advanced memory protection" needs to match "memtag_toggle" above -->
     <string name="reboot_with_mte_already_enabled">MTE is enabled through Advanced memory protection</string>
     <!-- Toast that is shown when the user initiates capturing a heap dump for the system server. [CHAR LIMIT=NONE] -->
     <string name="capturing_system_heap_dump_message">Capturing system heap dump</string>
@@ -10773,8 +10859,8 @@
     <string name="lockscreen_double_line_clock_summary">Show double-line clock when available</string>
     <!-- Lockscreen double-line clock toggle [CHAR LIMIT=60] -->
     <string name="lockscreen_double_line_clock_setting_toggle">Double-line clock</string>
-    <!-- Lock screen buttons preference [CHAR LIMIT=60] -->
-    <string name="lockscreen_quick_affordances_title">Buttons</string>
+    <!-- Lock screen shortcuts preference [CHAR LIMIT=60] -->
+    <string name="lockscreen_quick_affordances_title">Shortcuts</string>
     <!-- Summary for the lock screen button preference [CHAR LIMIT=60] -->
     <plurals name="lockscreen_quick_affordances_summary">
         <item quantity="zero">None</item>
