@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3036c935_fe2dd9b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2023-02-16T18:57:41Z",
+      "side": 1,
+      "message": "packages/apps/Settings/src/com/android/settings/gestures/OffscreenGestureSettings.java:149: error: method does not override or implement a method from a supertype\n    @Override\n    ^\npackages/apps/Settings/src/com/android/settings/gestures/OffscreenGestureSettings.java:153: error: cannot find symbol\n            return UNSUPPORTED_ON_DEVICE;\n                   ^\n  symbol:   variable UNSUPPORTED_ON_DEVICE\n  location: class OffscreenGestureSettings\npackages/apps/Settings/src/com/android/settings/gestures/OffscreenGestureSettings.java:156: error: cannot find symbol\n        return AVAILABLE;\n               ^\n  symbol:   variable AVAILABLE\n  location: class OffscreenGestureSettings\n3 errors",
+      "revId": "f5986ece3507a3fa37e1fdcf2f4c3efc71427f43",
+      "serverId": "3162e3d8-d894-470e-abd9-724f7b0effad"
+    }
+  ]
+}
