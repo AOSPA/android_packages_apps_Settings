@@ -60,6 +60,8 @@ public class OffscreenGestureSettings extends SettingsPreferenceFragment impleme
     private static final HashMap<String, Integer> sGesturesDefaults = new HashMap<>();
     private static final HashMap<String, String> sGesturesSettings = new HashMap<>();
 
+    private boolean anyGesturesEnabled = false;
+
     static {
         sGesturesKeyCodes.put(KEY_DOUBLE_TAP, com.android.internal.R.integer.config_doubleTapKeyCode);
         sGesturesKeyCodes.put(KEY_SINGLE_TAP, com.android.internal.R.integer.config_singleTapKeyCode);
@@ -124,6 +126,7 @@ public class OffscreenGestureSettings extends SettingsPreferenceFragment impleme
                 Settings.System.GESTURES_ENABLED, 1, UserHandle.USER_CURRENT) != 0;
         for (String gestureKey : sGesturesKeyCodes.keySet()) {
             if (getResources().getInteger(sGesturesKeyCodes.get(gestureKey)) > 0) {
+                anyGesturesEnabled = true;
                 ListPreference pref = findPreference(gestureKey);
                 int gestureDefault = getResources().getInteger(
                         sGesturesDefaults.get(gestureKey));
@@ -141,6 +144,16 @@ public class OffscreenGestureSettings extends SettingsPreferenceFragment impleme
                 removePreference(gestureKey);
             }
         }
+    }
+
+    @Override
+    public int getAvailabilityStatus() {
+        // No gestures defined
+        if (!anyGesturesEnabled) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+
+        return AVAILABLE;
     }
 
     @Override
