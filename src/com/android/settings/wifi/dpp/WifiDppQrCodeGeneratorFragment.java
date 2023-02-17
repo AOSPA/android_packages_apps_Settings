@@ -44,6 +44,8 @@ import com.android.internal.app.chooser.DisplayResolveInfo;
 import com.android.internal.app.chooser.TargetInfo;
 import com.android.settings.R;
 import com.android.settingslib.qrcode.QrCodeGenerator;
+import com.android.wifitrackerlib.WifiEntry;
+import com.android.wifitrackerlib.Utils;
 
 import com.google.zxing.WriterException;
 
@@ -117,16 +119,20 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
         }
 
         final String password = wifiNetworkConfig.getPreSharedKey();
+        String tmpSsid = wifiNetworkConfig.getSsid();
+        if (WifiEntry.isGbkSsidSupported()) {
+            tmpSsid = Utils.getReadableText(tmpSsid);
+        }
+
         TextView passwordView = view.findViewById(R.id.password);
         if (TextUtils.isEmpty(password)) {
             mSummary.setText(getString(
-                    R.string.wifi_dpp_scan_open_network_qr_code_with_another_device,
-                    wifiNetworkConfig.getSsid()));
+                    R.string.wifi_dpp_scan_open_network_qr_code_with_another_device, tmpSsid));
 
             passwordView.setVisibility(View.GONE);
         } else {
-            mSummary.setText(getString(R.string.wifi_dpp_scan_qr_code_with_another_device,
-                    wifiNetworkConfig.getSsid()));
+            mSummary.setText(getString(
+                    R.string.wifi_dpp_scan_qr_code_with_another_device, tmpSsid));
 
             if (wifiNetworkConfig.isHotspot()) {
                 passwordView.setText(getString(R.string.wifi_dpp_hotspot_password, password));

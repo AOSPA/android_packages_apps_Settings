@@ -28,6 +28,8 @@ import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiManager;
 import android.text.TextUtils;
 import android.util.Log;
+import com.android.wifitrackerlib.WifiEntry;
+import com.android.settings.wifi.WifiUtils;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -288,6 +290,14 @@ public class WifiNetworkConfig {
         }
 
         wifiConfigurations.add(wifiConfiguration);
+        if (WifiEntry.isGbkSsidSupported()) {
+            String tmpSsid = WifiUtils.removeEnclosingQuotes(wifiConfiguration.SSID);
+            if (tmpSsid.matches("^[0-9A-Fa-f]+$")) {
+                WifiConfiguration configGbk = new WifiConfiguration(wifiConfiguration);
+                configGbk.SSID = tmpSsid;
+                wifiConfigurations.add(configGbk);
+            }
+        }
         return wifiConfigurations;
     }
 
