@@ -798,9 +798,53 @@
     <!-- Introduction detail message shown in fingerprint enrollment introduction to learn more about fingerprint [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more"></string>
 
+    <!-- Watch unlock enrollment and settings --><skip />
+    <!-- Title shown for menu item that launches watch unlock settings. [CHAR LIMIT=40] -->
+    <string name ="security_settings_activeunlock_preference_title">Watch Unlock</string>
+    <!-- Introduction shown in face and fingerprint page to introduce the biometric feature. [CHAR LIMIT=NONE]-->
+    <string name="biometric_settings_intro_with_activeunlock">When you set up Face Unlock and Fingerprint Unlock, your phone will ask for your fingerprint when you wear a mask or are in a dark area.\n\nYou can unlock with your watch when your face or fingerprint isn\u2019t recognized.</string>
+    <!-- Introduction shown in fingerprint page to explain that watch unlock can be used if fingerprint isn't recognized. [CHAR LIMIT=NONE]-->
+    <string name="biometric_settings_intro_with_fingerprint">You can unlock with your watch when your fingerprint isn\u2019t recognized.</string>
+     <!-- Introduction shown in face page to explain that watch unlock can be used if face isn't recognized. [CHAR LIMIT=NONE]-->
+    <string name="biometric_settings_intro_with_face">You can unlock with your watch when your face isn\u2019t recognized.</string>
+    <!-- Message for a biometric preference toggle, indicating that an action can only be performed by using Face Unlock or Watch Unlock. [CHAR LIMIT=50] -->
+    <string name="biometric_settings_use_face_or_watch_preference_summary">Using face or watch</string>
+    <!-- Message for a biometric preference toggle, indicating that an action can only be performed by using Fingerprint Unlock or Watch Unlock. [CHAR LIMIT=50] -->
+    <string name="biometric_settings_use_fingerprint_or_watch_preference_summary">Using fingerprint or watch</string>
+    <!-- Message for a biometric preference toggle, indicating that an action can be performed by using either Face Unlock, Fingerprint Unlock, or Watch Unlock. [CHAR LIMIT=50] -->
+    <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary">Using face, fingerprint, or watch</string>
+    <!-- Message for a biometric preference toggle, indicating that an action can be performed by using Watch Unlock. [CHAR LIMIT=50] -->
+    <string name="biometric_settings_use_watch_preference_summary">Using watch</string>
+    <!-- Title shown in watch unlock require face or fingerprint setup page [CHAR LIMIT=60] -->
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title">Set up Face or Fingerprint Unlock first</string>
+    <!-- Message shown in watch unlock require face or fingerprint setup page [CHAR LIMIT=NONE] -->
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_message">You can unlock with your watch when your face or fingerprint isn\u2019t recognized</string>
+    <!-- Title shown in watch unlock require fingerprint setup page [CHAR LIMIT=60] -->
+    <string name="security_settings_activeunlock_require_fingerprint_setup_title">Set up Fingerprint Unlock first</string>
+    <!-- Message shown in watch unlock require fingerprint setup page [CHAR LIMIT=NONE] -->
+    <string name="security_settings_activeunlock_require_fingerprint_setup_message">You can unlock with your watch when your fingerprint isn\u2019t recognized</string>
+    <!-- Title shown in watch unlock require face setup page [CHAR LIMIT=60] -->
+    <string name="security_settings_activeunlock_require_face_setup_title">Set up Face Unlock first</string>
+    <!-- Message shown in watch unlock require face setup page [CHAR LIMIT=NONE] -->
+    <string name="security_settings_activeunlock_require_face_setup_message">You can unlock with your watch when your face isn\u2019t recognized</string>
+    <!-- Button text to launch biometric setup [CHAR LIMIT=30] -->
+    <string name="security_settings_activeunlock_biometric_setup">Set up</string>
+    <!-- Message showing that fingerprint and watch is set up. Shown for a menu item that launches fingerprint and watch unlock settings or enrollment. [CHAR LIMIT=80]-->
+    <string name="security_settings_fingerprint_single_watch_preference_summary">Fingerprint and <xliff:g id="watch" example="Dani's Watch">%s</xliff:g> added</string>
+    <!-- Message showing that multiple fingerprints and watch is set up. Shown for a menu item that launches fingerprint and watch unlock settings or enrollment. [CHAR LIMIT=80]-->
+    <string name="security_settings_fingerprint_multiple_watch_preference_summary">Fingerprints and <xliff:g id="watch" example="Dani's Watch">%s</xliff:g> added</string>
+    <!-- Message showing that face and watch is set up. Shown for a menu item that launches face and watch unlock settings or enrollment. [CHAR LIMIT=80]-->
+    <string name="security_settings_face_watch_preference_summary">Face and <xliff:g id="watch" example="Dani's Watch">%s</xliff:g> added</string>
+    <!-- Message showing that fingerprint, face, and the current watch is set up. Shown for a menu item that launches fingerprint, face,  and active unlock settings or enrollment. [CHAR LIMIT=80] -->
+    <string name="security_settings_fingerprint_single_face_watch_preference_summary">Face, fingerprint, and <xliff:g id="watch" example="Dani's Watch">%s</xliff:g> added</string>
+    <!-- Message showing that multiple fingerprints, face, and the current watch is set up. Shown for a menu item that launches fingerprint, face,  and active unlock settings or enrollment. [CHAR LIMIT=80]-->
+    <string name="security_settings_fingerprint_multiple_face_watch_preference_summary">Face, fingerprints, and <xliff:g id="watch" example="Dani's Watch">%s</xliff:g> added</string>
+
     <!-- Biometric settings --><skip />
     <!-- Title shown for menu item that launches biometric settings. [CHAR LIMIT=66] -->
     <string name="security_settings_biometric_preference_title">Face &amp; Fingerprint Unlock</string>
+    <!-- Title shown for work menu item that launches biometric settings. [CHAR LIMIT=66] -->
+    <string name="security_settings_work_biometric_preference_title">Face &amp; Fingerprint Unlock for work</string>
     <!-- Message shown in summary field of biometric settings. [CHAR LIMIT=66] -->
     <string name="security_settings_biometric_preference_summary_none_enrolled">Tap to set up</string>
     <!-- Message shown in summary field of biometric settings when face is enrolled, and multiple fingerprints are enrolled. [CHAR LIMIT=66]-->
@@ -842,12 +886,6 @@
     <string name="security_settings_udfps_enroll_find_sensor_title">How to set up your fingerprint</string>
     <!-- Message shown in fingerprint enrollment dialog to locate the sensor -->
     <string name="security_settings_fingerprint_enroll_find_sensor_message">It\u2019s on the back of your phone. Use your index finger.</string>
-    <!-- Message shown in SFPS enrollment dialog to locate the sensor (tablet) [CHAR LIMIT=NONE]-->
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet">The fingerprint sensor is on the power button. It’s the flat button next to the raised volume button on the edge of the tablet.</string>
-    <!-- Message shown in SFPS enrollment dialog to locate the sensor (device) [CHAR LIMIT=NONE]-->
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="device">The fingerprint sensor is on the power button. It’s the flat button next to the raised volume button on the edge of the device.</string>
-    <!-- Message shown in SFPS enrollment dialog to locate the sensor (default) [CHAR LIMIT=NONE]-->
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="default">The fingerprint sensor is on the power button. It’s the flat button next to the raised volume button on the edge of the phone.</string>
     <!-- Message shown in UDFPS enrollment dialog to locate the sensor [CHAR LIMIT=NONE]-->
     <string name="security_settings_udfps_enroll_find_sensor_message">The fingerprint sensor is on your screen. You\u2019ll capture your fingerprint on the next screen.</string>
     <!-- Button for starting fingerprint enrollment. [CHAR LIMIT=10]-->
@@ -990,6 +1028,15 @@
     <!-- Title for the section that has additional privacy settings. [CHAR LIMIT=60] -->
     <string name="privacy_advanced_settings">More privacy settings</string>
 
+    <!-- Title for the subpage in the "Security & privacy". This page consists of the more security and privacy settings. Can be navigated by Settings -> Security & privacy -> More Settings [CHAR LIMIT=NONE] -->
+    <string name="more_security_privacy_settings">More settings</string>
+    <!-- Title for the section that has security entries in the More Settings page. [CHAR LIMIT=60] -->
+    <string name="security_header">Security</string>
+    <!-- Title for the section that has privacy entries in the More Settings page. [CHAR LIMIT=60] -->
+    <string name="privacy_header">Privacy</string>
+    <!-- Title for the section that has work profile entries in the More Settings page. [CHAR LIMIT=60] -->
+    <string name="work_profile_category_header">Work profile</string>
+
     <!-- Text shown when "Add fingerprint" button is disabled -->
     <string name="fingerprint_add_max">You can add up to <xliff:g id="count" example="5">%d</xliff:g> fingerprints</string>
     <!-- Text shown when users has enrolled a maximum number of fingerprints [CHAR LIMIT=NONE] -->
@@ -1058,6 +1105,15 @@
 
     <!-- Title for dialog in screen lock settings, allowing users to choose other types of screen locks. [CHAR LIMIT=40] -->
     <string name="setup_lock_settings_options_dialog_title">Screen lock options</string>
+
+    <!-- Title of the lock screen auto pin confirm setting. [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_auto_pin_confirm_title">Auto-confirm unlock</string>
+    <!-- Summary of the lock screen auto pin confirm setting. [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_auto_pin_confirm_summary">Unlock automatically if you input a correct PIN of 6 digits or more. This is slightly less secure than tapping Enter to confirm.</string>
+    <!-- Message shown to check auto pin confirmation feature when the user is updating the PIN. [CHAR LIMIT=NONE] -->
+    <string name="auto_pin_confirm_user_message">Auto-confirm correct PIN</string>
+    <!-- Message shown to explain the security concern if a user opts-in to the auto-pin feature. [CHAR LIMIT=NONE] -->
+    <string name="auto_pin_confirm_opt_in_security_message">Confirming your PIN by tapping Enter is more secure than using auto-confirm</string>
 
     <!--  Main Security lock settings --><skip />
     <!--  Title for PreferenceScreen to launch picker for security method when there is none [CHAR LIMIT=22] -->
@@ -1218,6 +1274,12 @@
       =1      {PIN must contain at least # digit}
       other   {PIN must be at least # digits}
     }</string>
+
+    <!-- Hint shown in dialog screen when PIN is too short with Additional text indicating minAutoConfirmLen(eg: 6) digits PIN offer additional security -->
+    <string name="lockpassword_pin_too_short_autoConfirm_extra_message">{count, plural,
+        =1      {PIN must contain at least # digit, but a {minAutoConfirmLen}-digit PIN is recommended for added security}
+        other   {PIN must be at least # digits, but a {minAutoConfirmLen}-digit PIN is recommended for added security}
+        }</string>
 
     <!-- Error shown in popup when password is too long -->
     <string name="lockpassword_password_too_long">{count, plural,
@@ -2198,10 +2260,14 @@
 
     <!-- Display settings screen, screen resolution settings title [CHAR LIMIT=30] -->
     <string name="screen_resolution_title">Screen resolution</string>
-    <!-- Display settings screen, screen resolution option for high resolution [CHAR LIMIT=45] -->
+    <!-- Display settings screen, screen resolution option for "FHD+" [CHAR LIMIT=45] -->
     <string name="screen_resolution_option_high">High resolution</string>
-    <!-- Display settings screen, screen resolution option for full resolution [CHAR LIMIT=45] -->
-    <string name="screen_resolution_option_full">Full resolution</string>
+    <!-- Display settings screen, screen resolution option for "QHD+" [CHAR LIMIT=45] -->
+    <string name="screen_resolution_option_highest">Full resolution</string>
+    <!-- Display settings screen, "FHD+" screen resolution summary [CHAR LIMIT=NONE] -->
+    <string name="screen_resolution_summary_high">1080p FHD+</string>
+    <!-- Display settings screen, "QHD+" screen resolution summary [CHAR LIMIT=NONE] -->
+    <string name="screen_resolution_summary_highest">1440p QHD+</string>
     <!-- The footer message for switch screen resolution [CHAR LIMIT=NONE] -->
     <string name="screen_resolution_footer">Full resolution uses more of your battery. Switching your resolution may cause some apps to restart.</string>
     <!-- Message announced to a11y users when they selected one resolution [CHAR LIMIT=NONE] -->
@@ -2478,11 +2544,11 @@
     <!-- Message for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=NONE] -->
     <string name="sim_preferred_message"><xliff:g id="new_sim">%1$s</xliff:g> is the only SIM in your device. Do you want to use this SIM for mobile data, calls, and SMS messages?</string>
 
-    <!-- Title for the dialog asking to user to enable auto data switch upon enabling multi-SIM  [CHAR LIMIT=30] -->
-    <string name="enable_auto_data_switch_dialog_title">Switch SIMs automatically?</string>
-    <!-- Message for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=NONE] -->
-    <string name="enable_auto_data_switch_dialog_message">Allow your phone to automatically switch to <xliff:g id="backup_carrier" example="T-mobile">%1$s</xliff:g> for mobile data when it has better availability.</string>
-    <!-- Message for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=NONE] -->
+    <!-- Title for the dialog asking user to enable auto data switch upon enabling multi-SIM  [CHAR LIMIT=30] -->
+    <string name="enable_auto_data_switch_dialog_title">Improve mobile data coverage?</string>
+    <!-- Message for the dialog asking user to enable auto data switch upon enabling multi-SIM  [CHAR LIMIT=NONE] -->
+    <string name="enable_auto_data_switch_dialog_message">Allow your device to automatically switch to <xliff:g id="backup_carrier" example="T-mobile">%1$s</xliff:g> for mobile data when it has better availability.</string>
+    <!-- Warning for the dialog asking user to enable auto data switch for switching data between work and personal profile  [CHAR LIMIT=NONE] -->
     <string name="auto_data_switch_dialog_managed_profile_warning">\n\nCalls, messages, and network traffic may be visible to your organization.</string>
 
     <!-- Instructions telling the user that they entered the wrong SIM PIN for the last time.
@@ -3834,6 +3900,36 @@
     <!-- Title for the button to trigger the 'touch gesture' education. [CHAR LIMIT=35] -->
     <string name="trackpad_touch_gesture">Learn touchpad gestures</string>
 
+    <!-- Title text for 'Go home' gesture education [CHAR LIMIT=35] -->
+    <string name="gesture_title_go_home">Go home</string>
+    <!-- Summary text for 'Go home' gesture education [CHAR LIMIT=60] -->
+    <string name="gesture_summary_go_home">Swipe up with three fingers anywhere on your touchpad</string>
+    <!-- Title text for 'Go back' gesture education [CHAR LIMIT=35] -->
+    <string name="gesture_title_go_back">Go back</string>
+    <!-- Summary text for 'Go back' gesture education [CHAR LIMIT=60] -->
+    <string name="gesture_summary_go_back">Swipe from the left or right with three fingers</string>
+    <!-- Title text for 'View recent apps' gesture education [CHAR LIMIT=35] -->
+    <string name="gesture_title_recent_apps">View recent apps</string>
+    <!-- Summary text for 'View recent apps' gesture education [CHAR LIMIT=60] -->
+    <string name="gesture_summary_recent_apps">Swipe up with three fingers, hold, then release</string>
+    <!-- Title text for 'View notifications' gesture education [CHAR LIMIT=35] -->
+    <string name="gesture_title_notifications">View notifications &amp; Quick Settings</string>
+    <!-- Summary text for 'View notifications' gesture education [CHAR LIMIT=60] -->
+    <string name="gesture_summary_notifications">Swipe down with three fingers on your home screen</string>
+    <!-- Title text for 'Switch apps' gesture education [CHAR LIMIT=35] -->
+    <string name="gesture_title_switch_apps">Switch apps</string>
+    <!-- Summary text for 'Switch apps' gesture education [CHAR LIMIT=60] -->
+    <string name="gesture_summary_switch_apps">Swipe left or right with four fingers</string>
+
+    <!-- Text for 'Skip' button in gesture education [CHAR LIMIT=10] -->
+    <string name="gesture_button_skip">Skip</string>
+    <!-- Text for 'Next' button in gesture education [CHAR LIMIT=10] -->
+    <string name="gesture_button_next">Next</string>
+    <!-- Text for 'Restart' button in gesture education [CHAR LIMIT=10] -->
+    <string name="gesture_button_restart">Restart</string>
+    <!-- Text for 'Done' button in gesture education [CHAR LIMIT=10] -->
+    <string name="gesture_button_done">Done</string>
+
     <!-- Title text for 'Go back' [CHAR LIMIT=35] -->
     <string name="trackpad_go_back_title">Go back</string>
     <!-- Summary text for 'Go back' [CHAR LIMIT=60] -->
@@ -4307,6 +4403,12 @@
     <string name="accessibility_disable_animations">Remove animations</string>
     <!-- Summary for the accessibility preference for disabling animations. [CHAR LIMIT=60] -->
     <string name="accessibility_disable_animations_summary">Reduce movement on the screen</string>
+    <!-- Title for the accessibility preference for the contrast level slider. [CHAR LIMIT=35] -->
+    <string name="accessibility_contrast_level_title">Contrast Level</string>
+    <!-- 'Low' text at the left of the contrast level slider. [CHAR LIMIT=20] -->
+    <string name="accessibility_contrast_level_left_label">Standard</string>
+    <!-- 'High' text at the right of the contrast level slider. [CHAR LIMIT=20] -->
+    <string name="accessibility_contrast_level_right_label">High</string>
     <!-- Title for the accessibility preference for primary mono. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_primary_mono_title">Mono audio</string>
     <!-- Summary for the accessibility preference for primary mono. [CHAR LIMIT=60] -->
@@ -5097,10 +5199,14 @@
 
     <!-- Label for power consumed by the screen -->
     <string name="power_screen">Screen</string>
+    <!-- Label for power consumed by the CPU -->
+    <string name="power_cpu">CPU</string>
     <!-- Label for power consumed by the flashlight -->
     <string name="power_flashlight">Flashlight</string>
     <!-- Label for power consumed by the camera -->
     <string name="power_camera">Camera</string>
+    <!-- Label for power consumed by the GPS -->
+    <string name="power_gps">GPS</string>
     <!-- Label for power consumed by Wi-Fi -->
     <string name="power_wifi">Wi\u2011Fi</string>
     <!-- Label for power consumed by Bluetooth -->
@@ -6529,6 +6635,9 @@
          data is turned off. This is needed for some multi-SIM scenarios, because the SIM that is
          default for data might not be available during a phone call. [CHAR LIMIT=60] -->
     <string name="data_during_calls_title">Data during calls</string>
+    <!-- Title of a preference for whether to allow auto data switch that is shown for backup
+         data SIM. This is needed for some multi-SIM scenarios, because the SIM that is
+         default for data might be unavailable while the backup is in coverage. [CHAR LIMIT=60] -->
     <string name="auto_data_switch_title">Switch mobile data automatically</string>
     <!-- Title of a preference for whether to allow data during calls that is shown when mobile
          data is turned off. This is needed for some multi-SIM scenarios, because the SIM that is
@@ -6536,8 +6645,11 @@
     <string name="data_during_calls_summary">
         Allow this SIM to be used for mobile data only during calls
     </string>
+    <!-- Summary of a preference for whether to allow auto data switch that is shown for backup
+         data SIM. This is needed for some multi-SIM scenarios, because the SIM that is
+         default for data might be unavailable while the backup is in coverage. [CHAR LIMIT=NONE]-->
     <string name="auto_data_switch_summary">
-        Temporarily use this network when it has better availability for calls and internet
+        Use this network when it has better availability
     </string>
 
     <!-- Work SIM title.  [CHAR LIMIT=50] -->
@@ -6794,6 +6906,9 @@
 
     <!-- Search keyword for biometric settings. [CHAR_LIMIT=NONE]-->
     <string name="keywords_biometric_settings">face, fingerprint, add fingerprint</string>
+
+    <!-- Search keyword for active unlock settings. [CHAR_LIMIT=NONE]-->
+    <string name="keywords_active_unlock_settings">watch unlock, add watch unlock</string>
 
     <!-- Search keywords for adaptive brightness setting [CHAR LIMIT=NONE]-->
     <string name="keywords_display_auto_brightness">dim screen, touchscreen, battery, smart brightness, dynamic brightness, Auto brightness</string>
@@ -7439,6 +7554,12 @@
     <!-- Configure Notifications: Title for the option controlling notifications for work profile. [CHAR LIMIT=30] -->
     <string name="locked_work_profile_notification_title">When work profile is locked</string>
 
+    <!-- Configure notifications: Title for the option controlling whether only new notifications are displayed to the user
+    on the lock screen [CHAR LIMIT=60] -->
+    <string name="unseen_notifs_lock_screen">Show only new notifications on lock screen</string>
+
+    <!-- Configure notifications: Summary for option of showing only new notifications on the lock screen. [CHAR LIMIT=100] -->
+    <string name="unseen_notifs_lock_screen_summary">After each unlock, remove existing notifications from the lock screen</string>
 
     <!-- Configure notifications: Title for determining which notifications appear on the lock screen [CHAR LIMIT=60] -->
     <string name="lock_screen_notifs_title">Notifications on lock screen</string>

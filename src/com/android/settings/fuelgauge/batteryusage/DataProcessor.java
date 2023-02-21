@@ -53,7 +53,6 @@ import com.android.settings.Utils;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.fuelgauge.BatteryStatus;
-import com.android.settingslib.spaprivileged.model.app.AppListConfig;
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryUtil;
 
 import java.time.Duration;
@@ -100,10 +99,10 @@ public final class DataProcessor {
     static boolean sDebug = false;
 
     @VisibleForTesting
-    static long sFakeCurrentTimeMillis = 0;
+    static long sTestCurrentTimeMillis = 0;
 
     @VisibleForTesting
-    static Set<String> sFakeSystemAppsSet;
+    static Set<String> sTestSystemAppsSet;
 
     @VisibleForTesting
     static IUsageStatsManager sUsageStatsManager =
@@ -540,7 +539,7 @@ public final class DataProcessor {
         }
         while (nextDay < endTime) {
             dailyTimestampList.add(nextDay);
-            nextDay += DateUtils.DAY_IN_MILLIS;
+            nextDay = getTimestampOfNextDay(nextDay);
         }
         final long lastDailyTimestamp = dailyTimestampList.get(dailyTimestampList.size() - 1);
         // Only if the timestamp diff in the last day is bigger than MIN_TIME_SLOT, add the
@@ -1901,13 +1900,12 @@ public final class DataProcessor {
     }
 
     private static Set<String> getSystemAppsSet(Context context) {
-        return sFakeSystemAppsSet != null ? sFakeSystemAppsSet
-                : AppListRepositoryUtil.getSystemPackageNames(context,
-                        new AppListConfig(context.getUserId(), false));
+        return sTestSystemAppsSet != null ? sTestSystemAppsSet
+                : AppListRepositoryUtil.getSystemPackageNames(context, context.getUserId(), false);
     }
 
     private static long getCurrentTimeMillis() {
-        return sFakeCurrentTimeMillis > 0 ? sFakeCurrentTimeMillis : System.currentTimeMillis();
+        return sTestCurrentTimeMillis > 0 ? sTestCurrentTimeMillis : System.currentTimeMillis();
     }
 
     private static void log(Context context, final String content, final long timestamp,
