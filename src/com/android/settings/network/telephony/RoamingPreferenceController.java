@@ -216,8 +216,7 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
         if (mTelephonyManager == null) {
             return false;
         }
-        final boolean isRoamingEnabled = mMobileNetworkInfoEntity == null ? false
-                : mMobileNetworkInfoEntity.isDataRoamingEnabled;
+        final boolean isRoamingEnabled = isChecked();
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(
                 mSubId);
         // Need dialog if we need to turn on roaming and the roaming charge indication is allowed
@@ -226,26 +225,37 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
             mDialogType = RoamingDialogFragment.TYPE_ENABLE_DIALOG;
             return true;
         }
-        // IMS via internet over another subscription
-        boolean isCallIdle = !mDdsDataOptionStateTuner.isInNonDdsVoiceCall();
-        IImsRegistration imsRegistrationImpl = mTelephonyManager.getImsRegistration(
-                mSubscriptionManager.getSlotIndex(mSubId), FEATURE_MMTEL);
-        boolean isImsRegisteredOverCiwlan = false;
-        if (imsRegistrationImpl != null) {
-            try {
-                isImsRegisteredOverCiwlan = imsRegistrationImpl.getRegistrationTechnology() ==
-                        REGISTRATION_TECH_CROSS_SIM;
-            } catch (RemoteException ex) {
-                Log.e(TAG, "getRegistrationTechnology failed", ex);
+        if (isRoamingEnabled) {
+            final boolean isInVoiceCall = mDdsDataOptionStateTuner.isInVoiceCall();
+            boolean isInCiwlanOnlyMode = false;
+            boolean isImsRegisteredOverCiwlan = false;
+            if (isInVoiceCall) {
+                isInCiwlanOnlyMode = mTelephonyManager.isNetworkRoaming(mSubId) &&
+                        MobileNetworkSettings.isInCiwlanOnlyMode();
+                if (isInCiwlanOnlyMode) {
+                    IImsRegistration imsRegistrationImpl = mTelephonyManager.getImsRegistration(
+                            mSubscriptionManager.getSlotIndex(mSubId), FEATURE_MMTEL);
+                    if (imsRegistrationImpl != null) {
+                        try {
+                            isImsRegisteredOverCiwlan =
+                                    imsRegistrationImpl.getRegistrationTechnology() ==
+                                            REGISTRATION_TECH_CROSS_SIM;
+                        } catch (RemoteException ex) {
+                            Log.e(TAG, "getRegistrationTechnology failed", ex);
+                        }
+                    }
+                    Log.d(TAG, "isDialogNeeded: isInVoiceCall = " + isInVoiceCall +
+                            ", isInCiwlanOnlyMode = " + isInCiwlanOnlyMode +
+                            ", isImsRegisteredOverCiwlan = " + isImsRegisteredOverCiwlan);
+                    // If IMS is registered over C_IWLAN-only mode, the device is in a call, and
+                    // user is trying to disable roaming while UE is romaing, display a warning
+                    // dialog that disabling roaming will cause a call drop.
+                    if (isInVoiceCall && isImsRegisteredOverCiwlan && isInCiwlanOnlyMode) {
+                        mDialogType = RoamingDialogFragment.TYPE_DISABLE_CIWLAN_DIALOG;
+                        return true;
+                    }
+                }
             }
-        }
-        Log.d(TAG, "isDialogNeeded: isRoamingEnabled=" + isRoamingEnabled + ", isCallIdle=" +
-                isCallIdle + ", isImsRegisteredOverCiwlan=" + isImsRegisteredOverCiwlan);
-        // If device is in a C_IWLAN call, and the user is trying to disable roaming, display the
-        // warning dialog.
-        if (isRoamingEnabled && !isCallIdle && isImsRegisteredOverCiwlan) {
-            mDialogType = RoamingDialogFragment.TYPE_DISABLE_CIWLAN_DIALOG;
-            return true;
         }
         return false;
     }
@@ -284,8 +294,8 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
     }
 
     private void showDialog(int type) {
-        final RoamingDialogFragment dialogFragment = RoamingDialogFragment.newInstance(type,
-                mSubId);
+        final RoamingDialogFragment dialogFragment = RoamingDialogFragment.newInstance(
+                mSwitchPreference.getTitle().toString(), type, mSubId);
 
         dialogFragment.show(mFragmentManager, DIALOG_TAG);
     }

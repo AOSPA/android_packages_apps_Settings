@@ -19,6 +19,9 @@ package com.android.settings.network.telephony;
 import static android.telephony.ims.feature.ImsFeature.FEATURE_MMTEL;
 import static android.telephony.ims.stub.ImsRegistrationImplBase.REGISTRATION_TECH_CROSS_SIM;
 
+import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.LTE;
+import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.NR;
+
 import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
@@ -48,6 +51,7 @@ import com.android.settings.R;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
 
+import com.qti.extphone.CiwlanConfig;
 import com.qti.extphone.ExtTelephonyManager;
 import com.qti.extphone.ServiceCallback;
 
@@ -201,8 +205,11 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
      * Implementation of abstract methods
      **/
     public boolean setChecked(boolean isChecked) {
-        // If IMS is registered over C_IWLAN and the device is in a call, display a warning dialog
-        // that disabling C_IWLAN might cause a call drop.
+        // 1) Check UE's C_IWLAN configuration and the current preferred network type. If UE is in
+        // C_IWLAN-only mode and the preferred network type does not contain LTE or NR, show a
+        // dialog to change the preferred network type.
+        // 2) If IMS is registered over C_IWLAN-only mode and the device is in a call, display a
+        // warning dialog that disabling C_IWLAN will cause a call drop.
         mDialogNeeded = isDialogNeeded(isChecked);
         if (!mDialogNeeded) {
             // Update directly if we don't need dialog
@@ -223,30 +230,54 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
     }
 
     private boolean isDialogNeeded(boolean isChecked) {
-        IImsRegistration imsRegistrationImpl = mTelephonyManager.getImsRegistration(
-                mSubscriptionManager.getSlotIndex(mSubId), FEATURE_MMTEL);
-        boolean isImsRegisteredOverCiwlan = false;
-        if (imsRegistrationImpl != null) {
-            try {
-                isImsRegisteredOverCiwlan = imsRegistrationImpl.getRegistrationTechnology() ==
-                        REGISTRATION_TECH_CROSS_SIM;
-            } catch (RemoteException ex) {
-                Log.e(LOG_TAG, "getRegistrationTechnology failed", ex);
-            }
+        boolean isInCiwlanOnlyMode = MobileNetworkSettings.isInCiwlanOnlyMode();
+        if (!isInCiwlanOnlyMode) {
+            return false;
+        }
+        boolean isCiwlanIncompatibleNetworkSelected = false;
+        if (isChecked) {
+            isCiwlanIncompatibleNetworkSelected = isCiwlanIncompatibleNetworkSelected();
+        }
+        Log.d(LOG_TAG, "isDialogNeeded: isChecked = " + isChecked +
+                ", isCiwlanIncompatibleNetworkSelected = " + isCiwlanIncompatibleNetworkSelected);
+        if (isChecked && isCiwlanIncompatibleNetworkSelected) {
+            mDialogType =
+                    BackupCallingDialogFragment.TYPE_ENABLE_CIWLAN_INCOMPATIBLE_NW_TYPE_DIALOG;
+            return true;
         }
         boolean isCallIdle = mTelephonyManager.getCallState() == TelephonyManager.CALL_STATE_IDLE;
-        Log.d(LOG_TAG, "isDialogNeeded: isChecked=" + isChecked + ", isCallIdle=" + isCallIdle +
-                ", isImsRegisteredOverCiwlan=" + isImsRegisteredOverCiwlan);
-        if (!isChecked && !isCallIdle && isImsRegisteredOverCiwlan) {
-            mDialogType = BackupCallingDialogFragment.TYPE_DISABLE_CIWLAN_DIALOG;
-            return true;
+        if (!isChecked && !isCallIdle) {
+            IImsRegistration imsRegistration = mTelephonyManager.getImsRegistration(
+                    mSubscriptionManager.getSlotIndex(mSubId), FEATURE_MMTEL);
+            boolean isImsRegisteredOverCiwlan = false;
+            if (imsRegistration != null) {
+                try {
+                    isImsRegisteredOverCiwlan =
+                            imsRegistration.getRegistrationTechnology() ==
+                                    REGISTRATION_TECH_CROSS_SIM;
+                } catch (RemoteException ex) {
+                    Log.e(LOG_TAG, "getRegistrationTechnology failed", ex);
+                }
+            }
+            Log.d(LOG_TAG, "isDialogNeeded: isImsRegisteredOverCiwlan = " +
+                    isImsRegisteredOverCiwlan);
+            if (isImsRegisteredOverCiwlan) {
+                mDialogType = BackupCallingDialogFragment.TYPE_DISABLE_CIWLAN_DIALOG;
+                return true;
+            }
         }
         return false;
     }
 
+    private boolean isCiwlanIncompatibleNetworkSelected() {
+        long preferredRaf = mTelephonyManager.getAllowedNetworkTypesForReason(
+                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER);
+        return ((LTE & preferredRaf) == 0 && (NR & preferredRaf) == 0);
+    }
+
     private void showDialog(int type) {
         final BackupCallingDialogFragment dialogFragment = BackupCallingDialogFragment.newInstance(
-                type, mSubId);
+                mPreference.getTitle().toString(), type, mSubId);
         dialogFragment.show(mFragmentManager, DIALOG_TAG);
     }
 
@@ -272,7 +303,7 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
         try {
             return imsMmTelMgr.isCrossSimCallingEnabled();
         } catch (ImsException exception) {
-            Log.w(LOG_TAG, "fail to get cross SIM calling configuration", exception);
+            Log.w(LOG_TAG, "Failed to get cross SIM calling configuration", exception);
         }
         return false;
     }

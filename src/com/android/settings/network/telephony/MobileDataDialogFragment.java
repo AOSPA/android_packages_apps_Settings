@@ -45,19 +45,22 @@ public class MobileDataDialogFragment extends InstrumentedDialogFragment impleme
     public static final int TYPE_MULTI_SIM_DIALOG = 1;
     public static final int TYPE_DISABLE_CIWLAN_DIALOG = 2;
 
+    private static final String ARG_PREF_TITLE = "pref_title";
     private static final String ARG_DIALOG_TYPE = "dialog_type";
     private static final String ARG_SUB_ID = "subId";
 
     private SubscriptionManager mSubscriptionManager;
+    private String mPrefTitle;
     private int mType;
     private int mSubId;
 
     private WifiPickerTrackerHelper mWifiPickerTrackerHelper;
 
-    public static MobileDataDialogFragment newInstance(int type, int subId) {
+    public static MobileDataDialogFragment newInstance(String prefTitle, int type, int subId) {
         final MobileDataDialogFragment dialogFragment = new MobileDataDialogFragment();
 
         Bundle args = new Bundle();
+        args.putString(ARG_PREF_TITLE, prefTitle);
         args.putInt(ARG_DIALOG_TYPE, type);
         args.putInt(ARG_SUB_ID, subId);
         dialogFragment.setArguments(args);
@@ -78,6 +81,7 @@ public class MobileDataDialogFragment extends InstrumentedDialogFragment impleme
         final Bundle bundle = getArguments();
         final Context context = getContext();
 
+        mPrefTitle = bundle.getString(ARG_PREF_TITLE).toLowerCase();
         mType = bundle.getInt(ARG_DIALOG_TYPE);
         mSubId = bundle.getInt(ARG_SUB_ID);
 
@@ -118,7 +122,10 @@ public class MobileDataDialogFragment extends InstrumentedDialogFragment impleme
                         .create();
             case TYPE_DISABLE_CIWLAN_DIALOG:
                 return new AlertDialog.Builder(context)
-                        .setMessage(R.string.mobile_data_disable_dialog_ciwlan_call)
+                        .setTitle(context.getString(
+                                R.string.toggle_disabling_ciwlan_call_dialog_title, mPrefTitle))
+                        .setMessage(context.getString(
+                                R.string.toggle_disabling_ciwlan_call_dialog_body, mPrefTitle))
                         .setPositiveButton(android.R.string.ok, this)
                         .setNegativeButton(android.R.string.cancel, null)
                         .create();
