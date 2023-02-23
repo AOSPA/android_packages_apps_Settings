@@ -17,9 +17,14 @@
 package com.android.settings;
 
 import android.app.Application;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.IntentFilter;
+import android.content.Intent;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.util.FeatureFlagUtils;
 
 import androidx.window.embedding.SplitController;
@@ -39,6 +44,15 @@ import java.lang.ref.WeakReference;
 public class SettingsApplication extends Application {
 
     private WeakReference<SettingsHomepageActivity> mHomeActivity = new WeakReference<>(null);
+
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals(TelephonyManager.ACTION_MULTI_SIM_CONFIG_CHANGED)) {
+                System.exit(0);
+            }
+        }
+    };
 
     @Override
     public void onCreate() {
@@ -60,6 +74,9 @@ public class SettingsApplication extends Application {
                 new DeviceProvisionedObserver().registerContentObserver();
             }
         }
+
+        registerReceiver(mBroadcastReceiver,
+                new IntentFilter(TelephonyManager.ACTION_MULTI_SIM_CONFIG_CHANGED));
     }
 
     /**
