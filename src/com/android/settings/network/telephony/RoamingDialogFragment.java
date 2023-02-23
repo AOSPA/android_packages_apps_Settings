@@ -35,6 +35,7 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
  */
 public class RoamingDialogFragment extends InstrumentedDialogFragment implements OnClickListener {
 
+    private static final String PREF_TITLE = "pref_title";
     private static final String SUB_ID_KEY = "sub_id_key";
     private static final String DIALOG_TYPE = "dialog_type";
 
@@ -42,12 +43,14 @@ public class RoamingDialogFragment extends InstrumentedDialogFragment implements
     public static final int TYPE_DISABLE_CIWLAN_DIALOG = 1;
 
     private CarrierConfigManager mCarrierConfigManager;
+    private String mPrefTitle;
     private int mType;
     private int mSubId;
 
-    public static RoamingDialogFragment newInstance(int type, int subId) {
+    public static RoamingDialogFragment newInstance(String prefTitle, int type, int subId) {
         final RoamingDialogFragment dialogFragment = new RoamingDialogFragment();
         final Bundle args = new Bundle();
+        args.putString(PREF_TITLE, prefTitle);
         args.putInt(DIALOG_TYPE, type);
         args.putInt(SUB_ID_KEY, subId);
         dialogFragment.setArguments(args);
@@ -65,8 +68,13 @@ public class RoamingDialogFragment extends InstrumentedDialogFragment implements
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        mType = getArguments().getInt(DIALOG_TYPE);
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        final Bundle bundle = getArguments();
+        final Context context = getContext();
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        mPrefTitle = bundle.getString(PREF_TITLE).toLowerCase();
+        mType = bundle.getInt(DIALOG_TYPE);
+
         switch (mType) {
             case TYPE_ENABLE_DIALOG:
                 int message = R.string.roaming_warning;
@@ -81,8 +89,10 @@ public class RoamingDialogFragment extends InstrumentedDialogFragment implements
                        .setTitle(getResources().getString(R.string.roaming_alert_title));
                 break;
             case TYPE_DISABLE_CIWLAN_DIALOG:
-                builder.setTitle(R.string.roaming_disable_title)
-                       .setMessage(R.string.roaming_disable_dialog_ciwlan_call);
+                builder.setTitle(context.getString(
+                                R.string.toggle_disabling_ciwlan_call_dialog_title, mPrefTitle))
+                       .setMessage(context.getString(
+                                R.string.toggle_disabling_ciwlan_call_dialog_body, mPrefTitle));
                 break;
         }
         builder.setIconAttribute(android.R.attr.alertDialogIcon)

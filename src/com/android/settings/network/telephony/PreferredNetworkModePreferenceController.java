@@ -19,11 +19,17 @@ package com.android.settings.network.telephony;
 import static androidx.lifecycle.Lifecycle.Event.ON_START;
 import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 
+import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.LTE;
+import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.NR;
+
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.ContentObserver;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.PersistableBundle;
+import android.os.RemoteException;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.PhoneStateListener;
@@ -95,7 +101,6 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
         if (mAllowedNetworkTypesListener != null) {
             mAllowedNetworkTypesListener.register(mContext, mSubId);
         }
-
     }
 
     @OnLifecycleEvent(ON_STOP)
@@ -130,7 +135,20 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
     @Override
     public boolean onPreferenceChange(Preference preference, Object object) {
         final int newPreferredNetworkMode = Integer.parseInt((String) object);
-
+        // Check UE's C_IWLAN configuration and user's current network mode selection. If UE is in
+        // C_IWLAN-only mode and the selection does not contain LTE or NR, show a dialog to disable
+        // C_IWLAN.
+        boolean isCiwlanEnabled = MobileNetworkSettings.isCiwlanEnabled();
+        boolean isInCiwlanOnlyMode = MobileNetworkSettings.isInCiwlanOnlyMode();
+        boolean isCiwlanIncompatibleNetworkSelected = isCiwlanIncompatibleNetworkSelected(
+                newPreferredNetworkMode);
+        Log.d(LOG_TAG, "isCiwlanEnabled = " + isCiwlanEnabled + ", isInCiwlanOnlyMode = " +
+                isInCiwlanOnlyMode + ", isCiwlanIncompatibleNetworkSelected = " +
+                isCiwlanIncompatibleNetworkSelected);
+        if (isCiwlanEnabled && isInCiwlanOnlyMode && isCiwlanIncompatibleNetworkSelected) {
+            showCiwlanWarningDialog();
+            return false;
+        }
         mTelephonyManager.setAllowedNetworkTypesForReason(
                 TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER,
                 MobileNetworkUtils.getRafFromNetworkType(newPreferredNetworkMode));
@@ -138,6 +156,22 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
         final ListPreference listPreference = (ListPreference) preference;
         listPreference.setSummary(getPreferredNetworkModeSummaryResId(newPreferredNetworkMode));
         return true;
+    }
+
+    private boolean isCiwlanIncompatibleNetworkSelected(int networkMode) {
+        long raf = MobileNetworkUtils.getRafFromNetworkType(networkMode);
+        return ((LTE & raf) == 0 && (NR & raf) == 0);
+    }
+
+    private void showCiwlanWarningDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setTitle(R.string.preferred_nw_incompatible_ciwlan_nw_mode_dialog_title)
+               .setMessage(R.string.preferred_nw_incompatible_ciwlan_nw_mode_dialog_body)
+               .setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
+                   public void onClick(DialogInterface dialog, int id) {
+                   }
+               });
+        builder.show();
     }
 
     public void init(Lifecycle lifecycle, int subId) {

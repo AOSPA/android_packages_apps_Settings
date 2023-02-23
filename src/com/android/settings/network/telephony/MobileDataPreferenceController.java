@@ -51,7 +51,6 @@ import com.android.settings.network.MobileDataContentObserver;
 import com.android.settings.network.MobileNetworkRepository;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.mobile.dataservice.DataServiceUtils;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
@@ -263,37 +262,49 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
             // simultaneously. DDS setting will be controlled by the config.
             needToDisableOthers = false;
         }
-        IImsRegistration imsRegistrationImpl = mTelephonyManager.getImsRegistration(
-                mSubscriptionManager.getSlotIndex(mSubId), FEATURE_MMTEL);
-        boolean isImsRegisteredOverCiwlan = false;
-        if (imsRegistrationImpl != null) {
-            try {
-                isImsRegisteredOverCiwlan = imsRegistrationImpl.getRegistrationTechnology() ==
-                        REGISTRATION_TECH_CROSS_SIM;
-            } catch (RemoteException ex) {
-                Log.e(TAG, "getRegistrationTechnology failed", ex);
-            }
-        }
-        final boolean isInNonDdsVoiceCall = mDdsDataOptionStateTuner.isInNonDdsVoiceCall();
-        Log.d(TAG, "isDialogNeeded: " + "enableData=" + enableData  + ", isMultiSim=" + isMultiSim +
-                ", needToDisableOthers=" + needToDisableOthers + ", isImsRegisteredOverCiwlan=" +
-                isImsRegisteredOverCiwlan + ", isInNonDdsVoiceCall=" + isInNonDdsVoiceCall);
+        Log.d(TAG, "isDialogNeeded: enableData = " + enableData  + ", isMultiSim = " + isMultiSim +
+                ", needToDisableOthers = " + needToDisableOthers);
         if (enableData && isMultiSim && needToDisableOthers) {
             mDialogType = MobileDataDialogFragment.TYPE_MULTI_SIM_DIALOG;
             return true;
         }
-        // If device is in a C_IWLAN call, and the user is trying to disable mobile data, display
-        // the warning dialog.
-        if (isInNonDdsVoiceCall && isImsRegisteredOverCiwlan && !enableData) {
-            mDialogType = MobileDataDialogFragment.TYPE_DISABLE_CIWLAN_DIALOG;
-            return true;
+        if (!enableData) {
+            final boolean isInVoiceCall = mDdsDataOptionStateTuner.isInVoiceCall();
+            boolean isInCiwlanOnlyMode = false;
+            boolean isImsRegisteredOverCiwlan = false;
+            if (isInVoiceCall) {
+                isInCiwlanOnlyMode = MobileNetworkSettings.isInCiwlanOnlyMode();
+                if (isInCiwlanOnlyMode) {
+                    IImsRegistration imsRegistrationImpl = mTelephonyManager.getImsRegistration(
+                            mSubscriptionManager.getSlotIndex(mSubId), FEATURE_MMTEL);
+                    if (imsRegistrationImpl != null) {
+                        try {
+                            isImsRegisteredOverCiwlan =
+                                    imsRegistrationImpl.getRegistrationTechnology() ==
+                                            REGISTRATION_TECH_CROSS_SIM;
+                        } catch (RemoteException ex) {
+                            Log.e(TAG, "getRegistrationTechnology failed", ex);
+                        }
+                    }
+                    Log.d(TAG, "isDialogNeeded: isInVoiceCall = " + isInVoiceCall +
+                            ", isInCiwlanOnlyMode = " + isInCiwlanOnlyMode +
+                            ", isImsRegisteredOverCiwlan = " + isImsRegisteredOverCiwlan);
+                    // If IMS is registered over C_IWLAN-only mode, the device is in a call, and
+                    // user is trying to disable mobile data, display a warning dialog that
+                    // disabling mobile data will cause a call drop.
+                    if (isInVoiceCall && isImsRegisteredOverCiwlan && isInCiwlanOnlyMode) {
+                        mDialogType = MobileDataDialogFragment.TYPE_DISABLE_CIWLAN_DIALOG;
+                        return true;
+                    }
+                }
+            }
         }
         return false;
     }
 
     private void showDialog(int type) {
-        final MobileDataDialogFragment dialogFragment = MobileDataDialogFragment.newInstance(type,
-                mSubId);
+        final MobileDataDialogFragment dialogFragment = MobileDataDialogFragment.newInstance(
+                mPreference.getTitle().toString(), type, mSubId);
         dialogFragment.show(mFragmentManager, DIALOG_TAG);
     }
 
@@ -317,21 +328,18 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
 
     @Override
     public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
-        if (DataServiceUtils.shouldUpdateEntityList(mSubscriptionInfoEntityList,
-                subInfoEntityList)) {
-            mSubscriptionInfoEntityList = subInfoEntityList;
-            mSubscriptionInfoEntityList.forEach(entity -> {
-                if (Integer.parseInt(entity.subId) == mSubId) {
-                    mSubscriptionInfoEntity = entity;
-                }
-            });
-            if (mSubscriptionInfoEntity != null
-                    && mSubscriptionInfoEntity.isDefaultDataSubscription) {
-                mDefaultSubId = Integer.parseInt(mSubscriptionInfoEntity.subId);
+        mSubscriptionInfoEntityList = subInfoEntityList;
+        mSubscriptionInfoEntityList.forEach(entity -> {
+            if (Integer.parseInt(entity.subId) == mSubId) {
+                mSubscriptionInfoEntity = entity;
             }
-            update();
-            refreshSummary(mPreference);
+        });
+        if (mSubscriptionInfoEntity != null
+                && mSubscriptionInfoEntity.isDefaultDataSubscription) {
+            mDefaultSubId = Integer.parseInt(mSubscriptionInfoEntity.subId);
         }
+        update();
+        refreshSummary(mPreference);
     }
 
     @Override
@@ -341,17 +349,14 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
     @Override
     public void onAllMobileNetworkInfoChanged(
             List<MobileNetworkInfoEntity> mobileNetworkInfoEntityList) {
-        if (DataServiceUtils.shouldUpdateEntityList(mMobileNetworkInfoEntityList,
-                mobileNetworkInfoEntityList)) {
-            mMobileNetworkInfoEntityList = mobileNetworkInfoEntityList;
-            mMobileNetworkInfoEntityList.forEach(entity -> {
-                if (Integer.parseInt(entity.subId) == mSubId) {
-                    mMobileNetworkInfoEntity = entity;
-                    update();
-                    refreshSummary(mPreference);
-                    return;
-                }
-            });
-        }
+        mMobileNetworkInfoEntityList = mobileNetworkInfoEntityList;
+        mMobileNetworkInfoEntityList.forEach(entity -> {
+            if (Integer.parseInt(entity.subId) == mSubId) {
+                mMobileNetworkInfoEntity = entity;
+                update();
+                refreshSummary(mPreference);
+                return;
+            }
+        });
     }
 }
