@@ -43,7 +43,6 @@ import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.GearPreference;
 import com.android.settingslib.bluetooth.BluetoothCallback;
@@ -68,10 +67,14 @@ import java.util.Map;
 public abstract class GroupBluetoothDeviceUpdater extends BluetoothDeviceUpdater {
     private static final String TAG = "GroupBluetoothDeviceUpdater";
     protected static final boolean DBG = ConnectedDeviceDashboardFragment.DBG_GROUP;
+    private Context mContext;
+    private int mMetricsCategory;
 
-    public GroupBluetoothDeviceUpdater(Context context, DashboardFragment fragment,
-            DevicePreferenceCallback devicePreferenceCallback) {
-        super(context, fragment, devicePreferenceCallback);
+    public GroupBluetoothDeviceUpdater(Context context,
+            DevicePreferenceCallback devicePreferenceCallback, int metricsCategory) {
+        super(context, devicePreferenceCallback, metricsCategory);
+        mContext = context;
+        mMetricsCategory = metricsCategory;
     }
 
     @Override
@@ -82,15 +85,15 @@ public abstract class GroupBluetoothDeviceUpdater extends BluetoothDeviceUpdater
     public void launchgroupOptions(Preference preference) {
         if (DBG)
             Log.d(TAG, " launchgroupOptions :" + preference);
-        mMetricsFeatureProvider.logClickedPreference(preference, mFragment.getMetricsCategory());
+        mMetricsFeatureProvider.logClickedPreference(preference, mMetricsCategory);
         final GroupBluetoothSettingsPreference pref =
                 (GroupBluetoothSettingsPreference) preference;
         final Bundle args = new Bundle();
         args.putInt(GroupBluetoothFragment.KEY_GROUP_ID, pref.getGroupId());
-        new SubSettingLauncher(mFragment.getContext()).setDestination
+        new SubSettingLauncher(mContext).setDestination
                     (GroupBluetoothFragment.class.getName())
                 .setArguments(args).setTitleRes(R.string.group_options)
-                .setSourceMetricsCategory(mFragment.getMetricsCategory()).launch();
+                .setSourceMetricsCategory(mMetricsCategory).launch();
     }
 
 }

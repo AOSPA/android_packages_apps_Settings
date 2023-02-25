@@ -80,7 +80,7 @@ public class GroupBluetoothDevicesAvailableMediaController extends BasePreferenc
         mGroupId = groupId;
         lifecycle.addObserver(this);
         mGroupDeviceUpdater = new GroupBluetoothDevicesAvailableMediaDeviceUpdater
-                (fragment.getContext(), fragment, this, mGroupId);
+                (fragment.getContext(), this, fragment.getMetricsCategory(), mGroupId);
     }
 
     @Override

@@ -58,8 +58,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
-import com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFragment;
-import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 
@@ -77,15 +75,16 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
 
     private static final String PREF_KEY = "saved_bt";
 
-    private final boolean mDisplayConnected;
+    private final boolean mShowConnectedDevice;
 
     @VisibleForTesting
     BluetoothAdapter mBluetoothAdapter;
 
-    public SavedBluetoothDeviceUpdater(Context context, DashboardFragment fragment,
-            DevicePreferenceCallback devicePreferenceCallback) {
-        super(context, fragment, devicePreferenceCallback);
-        mDisplayConnected = (fragment instanceof PreviouslyConnectedDeviceDashboardFragment);
+    public SavedBluetoothDeviceUpdater(Context context,
+            DevicePreferenceCallback devicePreferenceCallback, boolean showConnectedDevice,
+            int metricsCategory) {
+        super(context, devicePreferenceCallback, metricsCategory);
+        mShowConnectedDevice = showConnectedDevice;
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     }
 
@@ -140,7 +139,7 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
                     ", is twsplusdevice : " + device.isTwsPlusDevice());
         }
         return device.getBondState() == BluetoothDevice.BOND_BONDED
-                && (mDisplayConnected || (!device.isConnected() && isDeviceInCachedDevicesList(
+                && (mShowConnectedDevice || (!device.isConnected() && isDeviceInCachedDevicesList(
                 cachedDevice)))
                 && !device.isTwsPlusDevice() && !isGroupDevice(cachedDevice)
                 && !isPrivateAddr(cachedDevice);
@@ -148,7 +147,7 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        mMetricsFeatureProvider.logClickedPreference(preference, mFragment.getMetricsCategory());
+        mMetricsFeatureProvider.logClickedPreference(preference, mMetricsCategory);
         final CachedBluetoothDevice device = ((BluetoothDevicePreference) preference)
                 .getBluetoothDevice();
         if (device.isConnected()) {

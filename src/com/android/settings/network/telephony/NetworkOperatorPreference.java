@@ -327,7 +327,7 @@ public class NetworkOperatorPreference extends Preference {
         }
         final Context context = getContext();
         setIcon(MobileNetworkUtils.getSignalStrengthIcon(context, level, NUM_SIGNAL_STRENGTH_BINS,
-                getIconIdForCell(mCellInfo), false));
+                getIconIdForCell(mCellInfo), false, false));
     }
 
     public void setSubId(int subId) {

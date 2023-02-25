@@ -163,7 +163,7 @@ public class GroupConnectedBluetoothDevicesController extends BasePreferenceCont
 
     public void init(DashboardFragment fragment) {
         mBluetoothDeviceUpdater = new GroupConnectedBluetoothDeviceUpdater(fragment.getContext(),
-                fragment, GroupConnectedBluetoothDevicesController.this);
+                GroupConnectedBluetoothDevicesController.this, fragment.getMetricsCategory());
     }
 
     @Override
