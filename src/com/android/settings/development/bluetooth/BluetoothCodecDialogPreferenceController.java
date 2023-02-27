@@ -195,16 +195,19 @@ public class BluetoothCodecDialogPreferenceController extends
             case BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX_HD:
                 index = 4;
                 break;
-            case BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX_ADAPTIVE:
-                index = 6;
-                break;
             case BluetoothCodecConfig.SOURCE_CODEC_TYPE_LDAC:
                 index = 5;
                 break;
-            case BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX_TWSP:
-                index = 7;
+            case BluetoothCodecConfig.SOURCE_CODEC_TYPE_LC3:
+                index = 6;
                 break;
             case SOURCE_CODEC_TYPE_OPUS: // TODO update in U
+                index = 7;
+                break;
+            case BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX_ADAPTIVE:
+                index = 8;
+                break;
+            case BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX_TWSP:
                 index = 9;
                 break;
             default:
