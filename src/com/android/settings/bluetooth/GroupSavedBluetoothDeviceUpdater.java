@@ -40,7 +40,6 @@ import com.android.settings.R;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 
@@ -57,11 +56,13 @@ public class GroupSavedBluetoothDeviceUpdater extends GroupBluetoothDeviceUpdate
     private static final String TAG = "GroupSavedBluetoothDeviceUpdater";
     private static final String PREF_KEY = "saved_group_bt";
     private BluetoothAdapter mBluetoothAdapter;
+    private int mMetricsCategory;
 
-    public GroupSavedBluetoothDeviceUpdater(Context context, DashboardFragment fragment,
-        DevicePreferenceCallback devicePreferenceCallback) {
-        super(context, fragment, devicePreferenceCallback);
+    public GroupSavedBluetoothDeviceUpdater(Context context,
+        DevicePreferenceCallback devicePreferenceCallback, int metricsCategory) {
+        super(context, devicePreferenceCallback, metricsCategory);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        mMetricsCategory = metricsCategory;
     }
 
     @Override
@@ -129,7 +130,7 @@ public class GroupSavedBluetoothDeviceUpdater extends GroupBluetoothDeviceUpdate
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        mMetricsFeatureProvider.logClickedPreference(preference, mFragment.getMetricsCategory());
+        mMetricsFeatureProvider.logClickedPreference(preference, mMetricsCategory);
         final CachedBluetoothDevice device = ((BluetoothDevicePreference) preference)
                 .getBluetoothDevice();
         device.connect();

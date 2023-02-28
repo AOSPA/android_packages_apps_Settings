@@ -296,6 +296,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             mDailyChartIndex = trapezoidIndex;
             mHourlyChartIndex = BatteryChartViewModel.SELECTED_INDEX_ALL;
             refreshUi();
+            mHandler.post(() -> mDailyChartView.announceForAccessibility(
+                    getAccessibilityAnnounceMessage()));
             mMetricsFeatureProvider.action(
                     mPrefContext,
                     trapezoidIndex == BatteryChartViewModel.SELECTED_INDEX_ALL
@@ -311,6 +313,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             Log.d(TAG, "onHourlyChartSelect:" + trapezoidIndex);
             mHourlyChartIndex = trapezoidIndex;
             refreshUi();
+            mHandler.post(() -> mHourlyChartView.announceForAccessibility(
+                    getAccessibilityAnnounceMessage()));
             mMetricsFeatureProvider.action(
                     mPrefContext,
                     trapezoidIndex == BatteryChartViewModel.SELECTED_INDEX_ALL
@@ -436,7 +440,17 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             return selectedHourText;
         }
 
-        return String.format("%s %s", selectedDayText, selectedHourText);
+        return mContext.getString(
+                R.string.battery_usage_day_and_hour, selectedDayText, selectedHourText);
+    }
+
+    private String getAccessibilityAnnounceMessage() {
+        final String slotInformation = getSlotInformation();
+        return slotInformation == null
+                ? mPrefContext.getString(
+                       R.string.battery_usage_breakdown_title_since_last_full_charge)
+                : mPrefContext.getString(
+                        R.string.battery_usage_breakdown_title_for_slot, slotInformation);
     }
 
     private void animateBatteryChartViewGroup() {
@@ -653,8 +667,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             }
             return index == timestamps.size() - 1
                     ? generateText(timestamps, index)
-                    : String.format("%s%s%s", generateText(timestamps, index),
-                    mIs24HourFormat ? "-" : " - ", generateText(timestamps, index + 1));
+                    : mContext.getString(R.string.battery_usage_timestamps_hyphen,
+                            generateText(timestamps, index), generateText(timestamps, index + 1));
         }
 
         public HourlyChartLabelTextGenerator setLatestTimestamp(Long latestTimestamp) {

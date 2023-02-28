@@ -55,12 +55,14 @@ public class GroupBluetoothDevicesBondedUpdater extends GroupBluetoothDeviceUpda
     private static final String PREF_KEY = "group_options_bonded_devices_updater";
     private int mGroupId;
     private GroupUtils mGroupUtils;
+    private int mMetricsCategory;
 
-    public GroupBluetoothDevicesBondedUpdater(Context context, DashboardFragment fragment,
-        DevicePreferenceCallback devicePreferenceCallback, int groupId) {
-        super(context, fragment, devicePreferenceCallback);
+    public GroupBluetoothDevicesBondedUpdater(Context context,
+        DevicePreferenceCallback devicePreferenceCallback, int metricsCategory, int groupId) {
+        super(context, devicePreferenceCallback, metricsCategory);
         mGroupUtils = new GroupUtils(context);
         mGroupId = groupId;
+        mMetricsCategory = metricsCategory;
     }
 
     @Override
@@ -78,7 +80,7 @@ public class GroupBluetoothDevicesBondedUpdater extends GroupBluetoothDeviceUpda
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        mMetricsFeatureProvider.logClickedPreference(preference, mFragment.getMetricsCategory());
+        mMetricsFeatureProvider.logClickedPreference(preference, mMetricsCategory);
         final CachedBluetoothDevice device = ((BluetoothDevicePreference) preference)
                 .getBluetoothDevice();
         device.connect();

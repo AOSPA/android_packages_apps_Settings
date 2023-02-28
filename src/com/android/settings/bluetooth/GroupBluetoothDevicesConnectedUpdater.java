@@ -52,13 +52,15 @@ public class GroupBluetoothDevicesConnectedUpdater extends GroupBluetoothDeviceU
     private int mGroupId;
     private final AudioManager mAudioManager;
     private GroupUtils mGroupUtils;
+    private int mMetricsCategory;
 
-    public GroupBluetoothDevicesConnectedUpdater(Context context, DashboardFragment fragment,
-        DevicePreferenceCallback devicePreferenceCallback, int groupId) {
-        super(context, fragment, devicePreferenceCallback);
+    public GroupBluetoothDevicesConnectedUpdater(Context context,
+        DevicePreferenceCallback devicePreferenceCallback, int metricsCategory, int groupId) {
+        super(context, devicePreferenceCallback, metricsCategory);
         mGroupId = groupId;
         mAudioManager = context.getSystemService(AudioManager.class);
         mGroupUtils = new GroupUtils(context);
+        mMetricsCategory = metricsCategory;
     }
 
     @Override
@@ -127,7 +129,7 @@ public class GroupBluetoothDevicesConnectedUpdater extends GroupBluetoothDeviceU
         if (DBG) {
             Log.d(TAG, "onPreferenceClick " + preference);
         }
-        mMetricsFeatureProvider.logClickedPreference(preference, mFragment.getMetricsCategory());
+        mMetricsFeatureProvider.logClickedPreference(preference, mMetricsCategory);
         final CachedBluetoothDevice device = ((BluetoothDevicePreference) preference)
                 .getBluetoothDevice();
         return device.setActive();

@@ -54,7 +54,6 @@ import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
-import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
@@ -65,15 +64,15 @@ public class SavedBluetoothTwsDeviceUpdater extends BluetoothDeviceUpdater {
 
     private static final String PREF_KEY = "saved_bt_tws";
 
-    public SavedBluetoothTwsDeviceUpdater(Context context, DashboardFragment fragment,
-            DevicePreferenceCallback devicePreferenceCallback) {
-        super(context, fragment, devicePreferenceCallback);
+    public SavedBluetoothTwsDeviceUpdater(Context context,
+            DevicePreferenceCallback devicePreferenceCallback, int metricsCategory) {
+        super(context, devicePreferenceCallback, metricsCategory);
     }
 
-    SavedBluetoothTwsDeviceUpdater(Context context, DashboardFragment fragment,
+    SavedBluetoothTwsDeviceUpdater(Context context,
             DevicePreferenceCallback devicePreferenceCallback,
-            LocalBluetoothManager localBluetoothManager) {
-        super(context, fragment, devicePreferenceCallback, localBluetoothManager);
+            LocalBluetoothManager localBluetoothManager, int metricsCategory) {
+        super(context, devicePreferenceCallback, localBluetoothManager, metricsCategory);
     }
 
     @Override
