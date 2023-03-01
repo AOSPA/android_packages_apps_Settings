@@ -61,9 +61,53 @@ public class DomesticRoamUtils {
             Log.d(TAG, "getMPLMNOperatorName: context = " + context
                     + " subId = " + subId + " idMPLMN = " + idMPLMN);
         }
+
+        if (TextUtils.isEmpty(idMPLMN)) {
+            return EMPTY_OPERATOR_NAME;
+        }
+
         Context appContext = context.getApplicationContext();
-        OPERATOR_TYPE homeOperator = getHomeOperatorType(appContext, subId);
-        OPERATOR_TYPE mplmnOperator = getMPLMNOperatorType(appContext, subId, idMPLMN);
+
+        // use the static mapping to generate the operator name for MPLMN select UI
+        OPERATOR_TYPE homeOperator = OPERATOR_TYPE.OTHERS;
+        OPERATOR_TYPE mplmnOperator = OPERATOR_TYPE.OTHERS;
+        switch (idMPLMN) {
+            case "46050":
+                homeOperator = OPERATOR_TYPE.CHINA_MOBILE;
+                mplmnOperator = OPERATOR_TYPE.CHINA_TELECOM;
+                break;
+            case "46051":
+                homeOperator = OPERATOR_TYPE.CHINA_BROADCAST;
+                mplmnOperator = OPERATOR_TYPE.CHINA_TELECOM;
+                break;
+            case "46021":
+                homeOperator = OPERATOR_TYPE.CHINA_TELECOM;
+                mplmnOperator = OPERATOR_TYPE.CHINA_MOBILE;
+                break;
+            case "46022":
+                homeOperator = OPERATOR_TYPE.CHINA_UNION;
+                mplmnOperator = OPERATOR_TYPE.CHINA_MOBILE;
+                break;
+            case "46031":
+                homeOperator = OPERATOR_TYPE.CHINA_MOBILE;
+                mplmnOperator = OPERATOR_TYPE.CHINA_UNION;
+                break;
+            case "46032":
+                homeOperator = OPERATOR_TYPE.CHINA_BROADCAST;
+                mplmnOperator = OPERATOR_TYPE.CHINA_UNION;
+                break;
+            case "46060":
+                homeOperator = OPERATOR_TYPE.CHINA_TELECOM;
+                mplmnOperator = OPERATOR_TYPE.CHINA_BROADCAST;
+                break;
+            case "46061":
+                homeOperator = OPERATOR_TYPE.CHINA_UNION;
+                mplmnOperator = OPERATOR_TYPE.CHINA_BROADCAST;
+                break;
+            default:
+                break;
+        }
+
         Log.d(TAG, "getMPLMNOperatorName: homeOperator = " + homeOperator
                 + " mplmnOperator = " + mplmnOperator);
         if (homeOperator == OPERATOR_TYPE.OTHERS
