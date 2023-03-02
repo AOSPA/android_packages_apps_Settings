@@ -19,6 +19,8 @@ package com.android.settings.network.telephony.gsm;
 import static androidx.lifecycle.Lifecycle.Event.ON_START;
 import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
@@ -38,6 +40,8 @@ import com.android.settings.network.telephony.DomesticRoamUtils;
 import com.android.settings.network.telephony.Enhanced4gBasePreferenceController;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.network.telephony.TelephonyBasePreferenceController;
+
+import com.qti.extphone.ExtTelephonyManager;
 
 /**
  * Preference controller for "Open network select"
@@ -121,8 +125,8 @@ public class OpenNetworkSelectPagePreferenceController extends
         }
 
         Intent intent = new Intent();
-        intent.setClassName("com.android.settings",
-                "com.android.settings.Settings$NetworkSelectActivity");
+        intent.setClassName(SETTINGS_PACKAGE_NAME,
+                SETTINGS_PACKAGE_NAME + ".Settings$NetworkSelectActivity");
         intent.putExtra(Settings.EXTRA_SUB_ID, mSubId);
         preference.setIntent(intent);
     }
@@ -130,7 +134,8 @@ public class OpenNetworkSelectPagePreferenceController extends
     @Override
     public CharSequence getSummary() {
         final ServiceState ss = mTelephonyManager.getServiceState();
-        if (ss != null && ss.getState() == ServiceState.STATE_IN_SERVICE) {
+        if (ss != null && (ss.getState() == ServiceState.STATE_IN_SERVICE
+                || isSnpnInService(ss))) {
             if (DomesticRoamUtils.isFeatureEnabled(mContext)) {
                 String registeredOperatorName = DomesticRoamUtils.getRegisteredOperatorName(
                         mContext, mSubId);
@@ -142,6 +147,12 @@ public class OpenNetworkSelectPagePreferenceController extends
         } else {
             return mContext.getString(R.string.network_disconnected);
         }
+    }
+
+    private boolean isSnpnInService(ServiceState ss) {
+        return ((MobileNetworkUtils.getAccessMode(mContext, mTelephonyManager.getSlotIndex())
+                == ExtTelephonyManager.ACCESS_MODE_SNPN)
+                && (ss.getDataRegState() == ServiceState.STATE_IN_SERVICE));
     }
 
     /**

@@ -16,6 +16,7 @@
 
 package com.android.settings.biometrics;
 
+import android.annotation.IntDef;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.app.admin.DevicePolicyManager;
@@ -41,6 +42,7 @@ import com.android.settings.SetupWizardUtils;
 import com.android.settings.biometrics.face.FaceEnrollIntroduction;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollFindSensor;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroduction;
+import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollFindSensor;
 import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollIntroduction;
 import com.android.settings.biometrics2.ui.view.FingerprintEnrollmentActivity;
 import com.android.settings.password.ChooseLockGeneric;
@@ -49,11 +51,36 @@ import com.android.settings.password.SetupChooseLockGeneric;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 /**
  * Common biometric utilities.
  */
 public class BiometricUtils {
     private static final String TAG = "BiometricUtils";
+
+    // Note: Theis IntDef must align SystemUI DevicePostureInt
+    @IntDef(prefix = {"DEVICE_POSTURE_"}, value = {
+            DEVICE_POSTURE_UNKNOWN,
+            DEVICE_POSTURE_CLOSED,
+            DEVICE_POSTURE_HALF_OPENED,
+            DEVICE_POSTURE_OPENED,
+            DEVICE_POSTURE_FLIPPED
+    })
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface DevicePostureInt {}
+
+    // NOTE: These constants **must** match those defined for Jetpack Sidecar. This is because we
+    // use the Device State -> Jetpack Posture map in DevicePostureControllerImpl to translate
+    // between the two.
+    public static final int DEVICE_POSTURE_UNKNOWN = 0;
+    public static final int DEVICE_POSTURE_CLOSED = 1;
+    public static final int DEVICE_POSTURE_HALF_OPENED = 2;
+    public static final int DEVICE_POSTURE_OPENED = 3;
+    public static final int DEVICE_POSTURE_FLIPPED = 4;
+
+    public static int sAllowEnrollPosture = DEVICE_POSTURE_UNKNOWN;
 
     /**
      * Request was sent for starting another enrollment of a previously
@@ -72,6 +99,8 @@ public class BiometricUtils {
     };
 
     /**
+     * @deprecated Use {@link com.android.settings.biometrics.GatekeeperPasswordProvider} instead.
+     *
      * Given the result from confirming or choosing a credential, request Gatekeeper to generate
      * a HardwareAuthToken with the Gatekeeper Password together with a biometric challenge.
      *
@@ -83,6 +112,7 @@ public class BiometricUtils {
      * @throws GatekeeperCredentialNotMatchException if Gatekeeper response is not match
      * @throws IllegalStateException if Gatekeeper Password is missing
      */
+    @Deprecated
     public static byte[] requestGatekeeperHat(@NonNull Context context, @NonNull Intent result,
             int userId, long challenge) {
         if (!containsGatekeeperPasswordHandle(result)) {
@@ -93,6 +123,10 @@ public class BiometricUtils {
         return requestGatekeeperHat(context, gatekeeperPasswordHandle, userId, challenge);
     }
 
+    /**
+     * @deprecated Use {@link com.android.settings.biometrics.GatekeeperPasswordProvider} instead.
+     */
+    @Deprecated
     public static byte[] requestGatekeeperHat(@NonNull Context context, long gkPwHandle, int userId,
             long challenge) {
         final LockPatternUtils utils = new LockPatternUtils(context);
@@ -104,15 +138,25 @@ public class BiometricUtils {
         return response.getGatekeeperHAT();
     }
 
+    /**
+     * @deprecated Use {@link com.android.settings.biometrics.GatekeeperPasswordProvider} instead.
+     */
+    @Deprecated
     public static boolean containsGatekeeperPasswordHandle(@Nullable Intent data) {
         return data != null && data.hasExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE);
     }
 
+    /**
+     * @deprecated Use {@link com.android.settings.biometrics.GatekeeperPasswordProvider} instead.
+     */
+    @Deprecated
     public static long getGatekeeperPasswordHandle(@NonNull Intent data) {
         return data.getLongExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, 0L);
     }
 
     /**
+     * @deprecated Use {@link com.android.settings.biometrics.GatekeeperPasswordProvider} instead.
+     *
      * Requests {@link com.android.server.locksettings.LockSettingsService} to remove the
      * gatekeeper password associated with a previous
      * {@link ChooseLockSettingsHelper.Builder#setRequestGatekeeperPasswordHandle(boolean)}
@@ -120,6 +164,7 @@ public class BiometricUtils {
      * @param context Caller's context
      * @param data The onActivityResult intent from ChooseLock* or ConfirmLock*
      */
+    @Deprecated
     public static void removeGatekeeperPasswordHandle(@NonNull Context context,
             @Nullable Intent data) {
         if (data == null) {
@@ -131,6 +176,10 @@ public class BiometricUtils {
         removeGatekeeperPasswordHandle(context, getGatekeeperPasswordHandle(data));
     }
 
+    /**
+     * @deprecated Use {@link com.android.settings.biometrics.GatekeeperPasswordProvider} instead.
+     */
+    @Deprecated
     public static void removeGatekeeperPasswordHandle(@NonNull Context context, long handle) {
         final LockPatternUtils utils = new LockPatternUtils(context);
         utils.removeGatekeeperPasswordHandle(handle);
@@ -193,9 +242,13 @@ public class BiometricUtils {
      */
     public static Intent getFingerprintFindSensorIntent(@NonNull Context context,
             @NonNull Intent activityIntent) {
-        Intent intent = new Intent(context, FingerprintEnrollFindSensor.class);
-        SetupWizardUtils.copySetupExtras(activityIntent, intent);
-        return intent;
+        if (WizardManagerHelper.isAnySetupWizard(activityIntent)) {
+            Intent intent = new Intent(context, SetupFingerprintEnrollFindSensor.class);
+            SetupWizardUtils.copySetupExtras(activityIntent, intent);
+            return intent;
+        } else {
+            return new Intent(context, FingerprintEnrollFindSensor.class);
+        }
     }
 
     /**
@@ -310,6 +363,51 @@ public class BiometricUtils {
     public static boolean isAnyMultiBiometricFlow(@NonNull Activity activity) {
         return isMultiBiometricFaceEnrollmentFlow(activity)
                 || isMultiBiometricFingerprintEnrollmentFlow(activity);
+    }
+
+    /**
+     * Used to check if the activity is showing a posture guidance to user.
+     *
+     * @param devicePosture the device posture state
+     * @param isLaunchedPostureGuidance True launching a posture guidance to user
+     * @return True if the activity is showing posture guidance to user
+     */
+    public static boolean isPostureGuidanceShowing(@DevicePostureInt int devicePosture,
+            boolean isLaunchedPostureGuidance) {
+        return !isPostureAllowEnrollment(devicePosture) && isLaunchedPostureGuidance;
+    }
+
+    /**
+     * Used to check if current device posture state is allow to enroll biometrics.
+     * For compatibility, we don't restrict enrollment if device do not config.
+     *
+     * @param devicePosture True if current device posture allow enrollment
+     * @return True if current device posture state allow enrollment
+     */
+    public static boolean isPostureAllowEnrollment(@DevicePostureInt int devicePosture) {
+        return (sAllowEnrollPosture == DEVICE_POSTURE_UNKNOWN)
+                || (devicePosture == sAllowEnrollPosture);
+    }
+
+    /**
+     * Used to check if the activity should show a posture guidance to user.
+     *
+     * @param devicePosture the device posture state
+     * @param isLaunchedPostureGuidance True launching a posture guidance to user
+     * @return True if posture disallow enroll and posture guidance not showing, false otherwise.
+     */
+    public static boolean shouldShowPostureGuidance(@DevicePostureInt int devicePosture,
+            boolean isLaunchedPostureGuidance) {
+        return !isPostureAllowEnrollment(devicePosture) && !isLaunchedPostureGuidance;
+    }
+
+    /**
+     * Sets allowed device posture for face enrollment.
+     *
+     * @param devicePosture the allowed posture state {@link DevicePostureInt} for enrollment
+     */
+    public static void setDevicePosturesAllowEnroll(@DevicePostureInt int devicePosture) {
+        sAllowEnrollPosture = devicePosture;
     }
 
     public static void copyMultiBiometricExtras(@NonNull Intent fromIntent,

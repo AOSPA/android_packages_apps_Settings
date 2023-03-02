@@ -30,7 +30,11 @@ import android.os.Build
 import android.os.RemoteException
 import android.os.ServiceManager
 import android.util.Log
-import com.android.settingslib.spaprivileged.model.app.PackageManagers.hasRequestPermission
+import com.android.settings.R
+import com.android.settingslib.spa.framework.util.formatString
+import com.android.settingslib.spaprivileged.model.app.IPackageManagers
+import com.android.settingslib.spaprivileged.model.app.PackageManagers
+import com.android.settingslib.spaprivileged.model.app.userId
 import java.util.concurrent.TimeUnit
 import kotlin.math.max
 import kotlin.math.roundToInt
@@ -48,21 +52,28 @@ data class NotificationSentState(
     var sentCount: Int = 0,
 )
 
-class AppNotificationRepository(private val context: Context) {
+interface IAppNotificationRepository {
+    /** Gets the notification summary for the given application. */
+    fun getNotificationSummary(app: ApplicationInfo): String
+}
+
+class AppNotificationRepository(
+    private val context: Context,
+    private val packageManagers: IPackageManagers = PackageManagers,
+    private val usageStatsManager: IUsageStatsManager = IUsageStatsManager.Stub.asInterface(
+        ServiceManager.getService(Context.USAGE_STATS_SERVICE)
+    ),
+    private val notificationManager: INotificationManager = INotificationManager.Stub.asInterface(
+        ServiceManager.getService(Context.NOTIFICATION_SERVICE)
+    ),
+) : IAppNotificationRepository {
     fun getAggregatedUsageEvents(userIdFlow: Flow<Int>): Flow<Map<String, NotificationSentState>> =
         userIdFlow.map { userId ->
             val aggregatedStats = mutableMapOf<String, NotificationSentState>()
-            queryEventsForUser(userId)?.let { events ->
-                val event = UsageEvents.Event()
-                while (events.hasNextEvent()) {
-                    events.getNextEvent(event)
-                    if (event.eventType == UsageEvents.Event.NOTIFICATION_INTERRUPTION) {
-                        aggregatedStats.getOrPut(event.packageName, ::NotificationSentState)
-                            .apply {
-                                lastSent = max(lastSent, event.timeStamp)
-                                sentCount++
-                            }
-                    }
+            queryEventsForUser(userId).forEachNotificationEvent { event ->
+                aggregatedStats.getOrPut(event.packageName, ::NotificationSentState).apply {
+                    lastSent = max(lastSent, event.timeStamp)
+                    sentCount++
                 }
             }
             aggregatedStats
@@ -90,7 +101,9 @@ class AppNotificationRepository(private val context: Context) {
         // If the app targets T but has not requested the permission, we cannot change the
         // permission state.
         return app.targetSdkVersion < Build.VERSION_CODES.TIRAMISU ||
-            app.hasRequestPermission(Manifest.permission.POST_NOTIFICATIONS)
+            with(packageManagers) {
+                app.hasRequestPermission(Manifest.permission.POST_NOTIFICATIONS)
+            }
     }
 
     fun setEnabled(app: ApplicationInfo, enabled: Boolean): Boolean {
@@ -109,6 +122,73 @@ class AppNotificationRepository(private val context: Context) {
         }
     }
 
+    override fun getNotificationSummary(app: ApplicationInfo): String {
+        if (!isEnabled(app)) return context.getString(R.string.off)
+        val channelCount = getChannelCount(app)
+        if (channelCount == 0) {
+            return calculateFrequencySummary(getSentCount(app))
+        }
+        val blockedChannelCount = getBlockedChannelCount(app)
+        if (channelCount == blockedChannelCount) return context.getString(R.string.off)
+        val frequencySummary = calculateFrequencySummary(getSentCount(app))
+        if (blockedChannelCount == 0) return frequencySummary
+        return context.getString(
+            R.string.notifications_enabled_with_info,
+            frequencySummary,
+            context.formatString(
+                R.string.notifications_categories_off, "count" to blockedChannelCount
+            )
+        )
+    }
+
+    private fun getSentCount(app: ApplicationInfo): Int {
+        var sentCount = 0
+        queryEventsForPackageForUser(app).forEachNotificationEvent { sentCount++ }
+        return sentCount
+    }
+
+    private fun queryEventsForPackageForUser(app: ApplicationInfo): UsageEvents? {
+        val now = System.currentTimeMillis()
+        val startTime = now - TimeUnit.DAYS.toMillis(DAYS_TO_CHECK)
+        return try {
+            usageStatsManager.queryEventsForPackageForUser(
+                startTime, now, app.userId, app.packageName, context.packageName
+            )
+        } catch (e: RemoteException) {
+            Log.e(TAG, "Failed IUsageStatsManager.queryEventsForPackageForUser(): ", e)
+            null
+        }
+    }
+
+    private fun getChannelCount(app: ApplicationInfo): Int = try {
+        notificationManager.getNumNotificationChannelsForPackage(app.packageName, app.uid, false)
+    } catch (e: Exception) {
+        Log.w(TAG, "Error calling INotificationManager", e)
+        0
+    }
+
+    private fun getBlockedChannelCount(app: ApplicationInfo): Int = try {
+        notificationManager.getBlockedChannelCount(app.packageName, app.uid)
+    } catch (e: Exception) {
+        Log.w(TAG, "Error calling INotificationManager", e)
+        0
+    }
+
+    fun calculateFrequencySummary(sentCount: Int): String {
+        val dailyFrequency = (sentCount.toFloat() / DAYS_TO_CHECK).roundToInt()
+        return if (dailyFrequency > 0) {
+            context.formatString(
+                R.string.notifications_sent_daily,
+                "count" to dailyFrequency,
+            )
+        } else {
+            context.formatString(
+                R.string.notifications_sent_weekly,
+                "count" to sentCount,
+            )
+        }
+    }
+
     private fun updateChannel(app: ApplicationInfo, channel: NotificationChannel) {
         notificationManager.updateNotificationChannelForPackage(app.packageName, app.uid, channel)
     }
@@ -124,21 +204,16 @@ class AppNotificationRepository(private val context: Context) {
     companion object {
         private const val TAG = "AppNotificationsRepo"
 
-        const val DAYS_TO_CHECK = 7L
+        private const val DAYS_TO_CHECK = 7L
 
-        private val usageStatsManager by lazy {
-            IUsageStatsManager.Stub.asInterface(
-                ServiceManager.getService(Context.USAGE_STATS_SERVICE)
-            )
+        private fun UsageEvents?.forEachNotificationEvent(action: (UsageEvents.Event) -> Unit) {
+            this ?: return
+            val event = UsageEvents.Event()
+            while (getNextEvent(event)) {
+                if (event.eventType == UsageEvents.Event.NOTIFICATION_INTERRUPTION) {
+                    action(event)
+                }
+            }
         }
-
-        private val notificationManager by lazy {
-            INotificationManager.Stub.asInterface(
-                ServiceManager.getService(Context.NOTIFICATION_SERVICE)
-            )
-        }
-
-        fun calculateDailyFrequent(sentCount: Int): Int =
-            (sentCount.toFloat() / DAYS_TO_CHECK).roundToInt()
     }
 }

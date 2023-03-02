@@ -52,6 +52,7 @@ import com.android.settings.connecteddevice.stylus.StylusDevicesController;
 import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
+import com.android.settings.inputmethod.KeyboardSettingsPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.BlockingSlicePrefController;
 import com.android.settings.slices.SlicePreferenceController;
@@ -71,9 +72,14 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     private static final String BLUETOOTH_ADV_AUDIO_MASK_PROP
                                                   = "persist.vendor.service.bt.adv_audio_mask";
     private static final String BLUETOOTH_BROADCAST_UI_PROP = "persist.bluetooth.broadcast_ui";
+    private static final String BLUETOOTH_BROADCAST_PTS_PROP
+                                                  = "persist.vendor.service.bt.broadcast_pts";
     private static final int BA_MASK = 0x02;
     private static boolean mBAEnabled = false;
     private static boolean mBAPropertyChecked = false;
+
+    static final int FEATURE_HEARING_DEVICE_CONTROLS_ORDER = 1;
+    static final int FEATURE_AUDIO_ROUTING_ORDER = 2;
 
     @VisibleForTesting
     static int EDIT_DEVICE_NAME_ITEM_ID = Menu.FIRST;
@@ -111,8 +117,11 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
 
     public BluetoothDeviceDetailsFragment() {
         super(DISALLOW_CONFIG_BLUETOOTH);
-        if (BluetoothProperties.isProfileBapBroadcastSourceEnabled().orElse(false) ||
-            BluetoothProperties.isProfileBapBroadcastAssistEnabled().orElse(false)) {
+        boolean broadcastPtsEnabled =
+                SystemProperties.getBoolean(BLUETOOTH_BROADCAST_PTS_PROP, false);
+        if ((BluetoothProperties.isProfileBapBroadcastSourceEnabled().orElse(false) ||
+                BluetoothProperties.isProfileBapBroadcastAssistEnabled().orElse(false)) &&
+                !broadcastPtsEnabled) {
             SystemProperties.set(BLUETOOTH_BROADCAST_UI_PROP, "false");
         } else {
             Log.d(TAG, "Use legacy broadcast if available");
@@ -191,6 +200,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         }
         use(AdvancedBluetoothDetailsHeaderController.class).init(mCachedDevice);
         use(LeAudioBluetoothDetailsHeaderController.class).init(mCachedDevice, mManager);
+        use(KeyboardSettingsPreferenceController.class).init(mCachedDevice, getActivity());
 
         final BluetoothFeatureProvider featureProvider = FeatureFactory.getFactory(
                 context).getBluetoothFeatureProvider();
@@ -337,8 +347,15 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                   mCachedDevice, lifecycle));
           controllers.add(new BluetoothDetailsMacAddressController(context, this, mCachedDevice,
                   lifecycle));
-          controllers.add(new StylusDevicesController(context, mInputDevice, lifecycle));
+          controllers.add(new StylusDevicesController(context, mInputDevice, mCachedDevice,
+                  lifecycle));
           controllers.add(new BluetoothDetailsRelatedToolsController(context, this, mCachedDevice,
+                  lifecycle));
+          controllers.add(new BluetoothDetailsPairOtherController(context, this, mCachedDevice,
+                  lifecycle));
+          controllers.add(new BluetoothDetailsHearingDeviceControlsController(context, this,
+                  mCachedDevice, lifecycle));
+          controllers.add(new BluetoothDetailsAudioRoutingController(context, this, mCachedDevice,
                   lifecycle));
           if (mBAPropertyChecked == false) {
               int advAudioMask = SystemProperties.getInt(BLUETOOTH_ADV_AUDIO_MASK_PROP, 0);
@@ -399,9 +416,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
 
     @VisibleForTesting
     void setTitleForInputDevice() {
-        // TODO(b/254835745) once source filter for bt stylus merged
-        // && mInputDevice.supportsSource(InputDevice.SOURCE_BLUETOOTH_STYLUS))
-        if (mInputDevice != null) {
+        if (StylusDevicesController.isDeviceStylus(mInputDevice, mCachedDevice)) {
             // This will override the default R.string.device_details_title "Device Details"
             // that will show on non-stylus bluetooth devices.
             // That title is set via the manifest and also from BluetoothDeviceUpdater.

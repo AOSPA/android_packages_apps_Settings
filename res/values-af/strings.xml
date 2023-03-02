@@ -26,10 +26,7 @@
     <string name="off" msgid="2898123876644709799">"Af"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Onbekend"</string>
     <string name="device_info_protected_single_press" msgid="3810785480060743677">"Tik om inligting te wys"</string>
-    <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
-      <item quantity="other">Nog net <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> stappe oor voordat jy \'n ontwikkelaar is.</item>
-      <item quantity="one">Nog net <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> stap oor voordat jy \'n ontwikkelaar is.</item>
-    </plurals>
+    <string name="show_dev_countdown" msgid="2936506773086395069">"{count,plural, =1{Jy het nou # stap oor voordat jy ’n ontwikkelaar is.}other{Jy het nou # stappe oor voordat jy ’n ontwikkelaar is.}}"</string>
     <string name="show_dev_on" msgid="2840850085134853754">"Jy is nou \'n ontwikkelaar!"</string>
     <string name="show_dev_already" msgid="7041756429707644630">"Toemaar, jy is reeds \'n ontwikkelaar."</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"Aktiveer asseblief eers ontwikkelaaropsies."</string>
@@ -68,7 +65,17 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Jou regtergehoortoestel is gekoppel.\n\nMaak seker dat jou linkergehoortoestel aangeskakel en gereed is om saam te bind wanneer jy dit wil saambind."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Bind regteroor saam"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Bind linkeroor saam"</string>
+    <string name="bluetooth_device_controls_title" msgid="7115710864094259075">"Gehoortoestelkontroles"</string>
+    <string name="bluetooth_device_controls_summary" msgid="5843475712424478172">"Gehoortoestelkortpad, gehoortoestelversoenbaarheid"</string>
+    <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Oudio-uitvoer"</string>
+    <string name="bluetooth_audio_routing_summary" msgid="7236959154306472259">"Kies of verskillende soorte oudio op jou gehoortoestel of foonluidspreker gespeel word"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Soortgelyk"</string>
+    <string name="bluetooth_ringtone_title" msgid="3049822968673742328">"Luitoon"</string>
+    <string name="bluetooth_call_title" msgid="3170657843273743928">"Bel"</string>
+    <string name="bluetooth_media_title" msgid="343705257183053699">"Media"</string>
+    <string name="bluetooth_system_sounds_title" msgid="5331556107110163039">"Stelselklanke"</string>
+    <string name="bluetooth_audio_path_hearing_device_title" msgid="2073463574123159850">"Speel op gehoortoestel"</string>
+    <string name="bluetooth_audio_path_phone_speaker_title" msgid="4259772328898172657">"Speel op foonluidspreker"</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"Onbenoemde Bluetooth-toestel"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"Soek"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"Geen Bluetooth-toestelle is naby gevind nie."</string>
@@ -108,6 +115,13 @@
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"Voorheen gekoppel"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"Bluetooth is aangeskakel"</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"Sien alles"</string>
+    <string name="stylus_device_details_title" msgid="7618295136015480864">"Stilus"</string>
+    <!-- no translation found for stylus_default_notes_app (3896158797687806941) -->
+    <skip />
+    <!-- no translation found for stylus_textfield_handwriting (2363579035338976327) -->
+    <skip />
+    <string name="stylus_ignore_button" msgid="7734540973145241391">"Ignoreer alle stilusknoppiedrukke"</string>
+    <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Stilus"</string>
     <string name="date_and_time" msgid="1788358029823431692">"Datum en tyd"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Instaanbediener"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Maak skoon"</string>
@@ -145,10 +159,25 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Taalkeuse vir hierdie program is nie in Instellings beskikbaar nie."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Taal kan verskil van tale wat in die program beskikbaar is. Sommige programme steun dalk nie hierdie instelling nie."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Net programme wat taalkeuses ondersteun, word hier gewys."</string>
-    <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
-      <item quantity="other">Verwyder gekose tale?</item>
-      <item quantity="one">Verwyder gekose taal?</item>
-    </plurals>
+    <string name="regional_preferences_title" msgid="4304567374498629528">"Streeksvoorkeure"</string>
+    <string name="regional_preferences_summary" msgid="1189876997389469650">"Stel eenheid- en nommervoorkeure"</string>
+    <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Lig apps in oor jou streekvoorkeure sodat hulle jou ervaring kan personaliseer."</string>
+    <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"Apps sal waar moontlik jou streekvoorkeure gebruik."</string>
+    <string name="temperature_preferences_title" msgid="9067783912861473593">"Temperatuureenhede"</string>
+    <string name="calendar_preferences_title" msgid="8312485828206542600">"Kalender"</string>
+    <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Eerste dag van die week"</string>
+    <string name="numbers_preferences_title" msgid="6094837605398562369">"Nommers"</string>
+    <string name="default_string_of_regional_preference" msgid="7662581547334113719">"Gebruik appverstek"</string>
+    <string name="celsius_temperature_unit" msgid="6118523647432383132">"Celsius (°C)"</string>
+    <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"Fahrenheit (°F)"</string>
+    <string name="sunday_first_day_of_week" msgid="7644548348295686051">"Sondag"</string>
+    <string name="monday_first_day_of_week" msgid="7244698610476506771">"Maandag"</string>
+    <string name="tuesday_first_day_of_week" msgid="5085370946936582391">"Dinsdag"</string>
+    <string name="wednesday_first_day_of_week" msgid="6544537589727042869">"Woensdag"</string>
+    <string name="thursday_first_day_of_week" msgid="3035885630945594833">"Donderdag"</string>
+    <string name="friday_first_day_of_week" msgid="7074795061812083541">"Vrydag"</string>
+    <string name="saturday_first_day_of_week" msgid="3702282590450322727">"Saterdag"</string>
+    <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Verwyder geselekteerde taal?}other{Verwyder geselekteerde tale?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Teks sal in \'n ander taal gewys word."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Kan nie alle tale verwyder nie"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Hou minstens een voorkeurtaal"</string>
@@ -167,6 +196,7 @@
     <string name="apply" msgid="7834684883190163536">"Pas toe"</string>
     <string name="share" msgid="8502235338607613795">"Deel"</string>
     <string name="add" msgid="8335206931421683426">"Voeg by"</string>
+    <string name="remove" msgid="1028414219245072102">"Verwyder"</string>
     <string name="settings_label" msgid="943294133671632976">"Instellings"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"Instellings"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"Instellingskortpad"</string>
@@ -178,6 +208,7 @@
     <string name="roaming_warning" msgid="7703647889040229013">"Swerwingheffings kan geld."</string>
     <string name="date_time_auto" msgid="4239202185055225869">"Stel tyd outomaties"</string>
     <string name="zone_auto_title" msgid="5141692422373097957">"Stel outomaties"</string>
+    <string name="auto_zone_requires_location_summary" msgid="4831038184260596735">"Ligging sal gebruik word om die tydsone te stel wanneer hierdie wisselaar aan is"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Gebruik verstek vir locale"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Gebruik 24-uur-formaat"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Tyd"</string>
@@ -206,10 +237,7 @@
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"Bv. Joe se Android."</string>
     <string name="location_settings_title" msgid="8375074508036087178">"Ligging"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Gebruik ligging"</string>
-    <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
-      <item quantity="other">Aan – <xliff:g id="COUNT_1">%1$d</xliff:g> programme het toegang tot ligging</item>
-      <item quantity="one">Aan – <xliff:g id="COUNT_0">%1$d</xliff:g> program het toegang tot ligging</item>
-    </plurals>
+    <string name="location_settings_summary_location_on" msgid="7029728269719893381">"{count,plural, =1{Aan – # app het toegang tot ligging}other{Aan – # apps het toegang tot ligging}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Laai tans …"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Programme met die Toestelle in die Omtrek-toestemming kan die relatiewe posisie van gekoppelde toestelle bepaal."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Liggingtoegang is af vir programme en dienste. Jou toestelligging kan steeds aan nooddienste gestuur word wanneer jy \'n noodnommer bel of \'n SMS daarheen stuur."</string>
@@ -289,10 +317,7 @@
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Wanneer Vingerafdrukslot gebruik word"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Vingerafdruk vir werk"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Voeg vingerafdruk by"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="6897454766137108776">
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> vingerafdrukke bygevoeg</item>
-      <item quantity="one">Vingerafdruk bygevoeg</item>
-    </plurals>
+    <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Vingerafdruk is bygevoeg}other{# vingerafdrukke is bygevoeg}}"</string>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Stel jou vingerafdruk op"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Laat vingerafdrukslot toe"</string>
@@ -366,8 +391,10 @@
     <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"<xliff:g id="PERCENTAGE">%d</xliff:g> persent ingeskryf"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Skryf tans vingerafdruk in <xliff:g id="PERCENTAGE">%d</xliff:g> persent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Vingerafdruk bygevoeg"</string>
-    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Ontsluit slegs wanneer skerm aan is"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"Die skerm moet aan wees voordat jy met jou vingerafdruk kan ontsluit. Dit maak onbeplande ontsluiting minder waarskynlik."</string>
+    <!-- no translation found for security_settings_require_screen_on_to_auth_title (1641621458536715518) -->
+    <skip />
+    <!-- no translation found for security_settings_require_screen_on_to_auth_description (4158414711168345398) -->
+    <skip />
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Skerm, ontsluit"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Doen dit later"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Lig en raak dan weer"</string>
@@ -390,6 +417,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Klaar"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Oeps, dis nie die sensor nie"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Raak sensor op die agterkant van jou foon. Gebruik jou wysvinger."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (5796228438604723279) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Vingerafdrukopstelling het uitgetel"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Probeer nou weer of stel jou vingerafdruk later in Instellings op"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Vingerafdrukregistrasie het nie gewerk nie. Probeer weer of gebruik \'n ander vinger."</string>
@@ -441,17 +470,14 @@
     <string name="fingerprint_unlock_set_unlock_pin" msgid="4724451168139460493">"Vingerafdruk + PIN"</string>
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"Vingerafdruk + Wagwoord"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"Gaan voort sonder vingerafdruk"</string>
-    <string name="fingerprint_unlock_title" msgid="4978686534505944042">"Jy kan jou foon met jou vingerafdruk ontsluit. Vir sekuriteit vereis hierdie opsie \'n rugsteunskermslot."</string>
     <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"Gesigslot + patroon"</string>
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"Gesigslot + PIN"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"Gesigslot + wagwoord"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Gaan voort sonder Gesigslot"</string>
-    <string name="face_unlock_title" msgid="7344830351598247267">"Jy kan jou foon met jou gesig ontsluit. Vir sekuriteit vereis hierdie opsie \'n rugsteunskermslot."</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Patroon • Gesig • Vingerafdruk"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN • Gesig • Vingerafdruk"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"Wagwoord • Gesig • Vingerafdruk"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"Gaan voort sonder Gesigslot of Vingerafdruk"</string>
-    <string name="biometrics_unlock_title" msgid="616524056055233041">"Jy kan jou foon met jou gesig of vingerafdruk ontsluit. Om veiligheidsredes vereis hierdie opsie \'n rugsteunskermslot."</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Geen"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Swiep"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"Patroon"</string>
@@ -515,53 +541,20 @@
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"As jy met jou volgende poging \'n verkeerde patroon invoer, sal jou werkprofiel en sy data uitgevee word"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"As jy met jou volgende poging \'n verkeerde PIN invoer, sal jou werkprofiel en sy data uitgevee word"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"As jy met jou volgende poging \'n verkeerde wagwoord invoer, sal jou werkprofiel en sy data uitgevee word"</string>
-    <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
-      <item quantity="other">Moet minstens <xliff:g id="COUNT_1">%d</xliff:g> karakters bevat</item>
-      <item quantity="one">Moet minstens <xliff:g id="COUNT_0">%d</xliff:g> karakter bevat</item>
-    </plurals>
+    <string name="lockpassword_password_too_short" msgid="1938086368137797700">"{count,plural, =1{Moet minstens # karakter bevat}other{Moet minstens # karakters wees}}"</string>
     <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{As jy net syfers gebruik, moet jy minstens 1 syfer gebruik}other{As jy net syfers gebruik, moet jy minstens # syfers gebruik}}"</string>
-    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
-      <item quantity="other">PIN moet minstens <xliff:g id="COUNT_1">%d</xliff:g> syfers bevat</item>
-      <item quantity="one">PIN moet minstens <xliff:g id="COUNT_0">%d</xliff:g> syfer bevat</item>
-    </plurals>
-    <plurals name="lockpassword_password_too_long" formatted="false" msgid="8118091957172967677">
-      <item quantity="other">Moet minder as <xliff:g id="NUMBER_1">%d</xliff:g> karakters wees</item>
-      <item quantity="one">Moet minder as <xliff:g id="NUMBER_0">%d</xliff:g> karakter wees</item>
-    </plurals>
-    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="8706992338720310765">
-      <item quantity="other">Moet minder as <xliff:g id="NUMBER_1">%d</xliff:g> syfers wees</item>
-      <item quantity="one">Moet minder as <xliff:g id="NUMBER_0">%d</xliff:g> syfer wees</item>
-    </plurals>
+    <string name="lockpassword_pin_too_short" msgid="8910105226463085689">"{count,plural, =1{PIN moet minstens # syfer bevat}other{PIN moet minstens # syfers wees}}"</string>
+    <string name="lockpassword_password_too_long" msgid="1940345313260498308">"{count,plural, =1{Moet minder as # karakter wees}other{Moet minder as # karakters wees}}"</string>
+    <string name="lockpassword_pin_too_long" msgid="1678212054564388576">"{count,plural, =1{Moet minder as # syfer wees}other{Moet minder as # syfers wees}}"</string>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"Toesteladministrateur laat nie toe dat jy \'n onlangse PIN gebruik nie"</string>
     <string name="lockpassword_illegal_character" msgid="3434031212215886433">"Dit mag nie \'n ongeldige karakter insluit nie"</string>
-    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="2385916409676839024">
-      <item quantity="other">Moet minstens <xliff:g id="COUNT">%d</xliff:g> letters bevat</item>
-      <item quantity="one">Moet minstens een letter bevat</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="2057467885488612701">
-      <item quantity="other">Moet minstens <xliff:g id="COUNT">%d</xliff:g> kleinletters bevat</item>
-      <item quantity="one">Moet minstens 1 kleinletter bevat</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="4541266279643052025">
-      <item quantity="other">Moet minstens <xliff:g id="COUNT">%d</xliff:g> hoofletters bevat</item>
-      <item quantity="one">Moet minstens 1 hoofletter bevat</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="70617964591376248">
-      <item quantity="other">Moet minstens <xliff:g id="COUNT">%d</xliff:g> syfers bevat</item>
-      <item quantity="one">Moet minstens 1 syfer bevat</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="7981236881269921943">
-      <item quantity="other">Moet minstens <xliff:g id="COUNT">%d</xliff:g> spesiale simbole bevat</item>
-      <item quantity="one">Moet minstens 1 spesiale simbool bevat</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="1567877061888948467">
-      <item quantity="other">Moet minstens <xliff:g id="COUNT">%d</xliff:g> nieletterkarakters bevat</item>
-      <item quantity="one">Moet minstens 1 nieletterkarakter bevat</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_nonnumerical" formatted="false" msgid="5056743974888384475">
-      <item quantity="other">Moet minstens <xliff:g id="COUNT">%d</xliff:g> nienumeriese karakters bevat</item>
-      <item quantity="one">Moet minstens 1 nienumeriese karakter bevat</item>
-    </plurals>
+    <string name="lockpassword_password_requires_letters" msgid="7058340182953750553">"{count,plural, =1{Moet minstens 1 letter bevat}other{Moet minstens # letters bevat}}"</string>
+    <string name="lockpassword_password_requires_lowercase" msgid="3286121470522077547">"{count,plural, =1{Moet minstens 1 kleinletter bevat}other{Moet minstens # kleinletters bevat}}"</string>
+    <string name="lockpassword_password_requires_uppercase" msgid="720312543910397772">"{count,plural, =1{Moet minstens 1 hoofletter bevat}other{Moet minstens # hoofletters bevat}}"</string>
+    <string name="lockpassword_password_requires_numeric" msgid="3886918493600507548">"{count,plural, =1{Moet minstens 1 syfer bevat}other{Moet minstens # syfers bevat}}"</string>
+    <string name="lockpassword_password_requires_symbols" msgid="2904870551002210131">"{count,plural, =1{Moet minstens 1 spesiale simbool bevat}other{Moet minstens # spesiale simbole bevat}}"</string>
+    <string name="lockpassword_password_requires_nonletter" msgid="1185342065898300006">"{count,plural, =1{Moet minstens 1 nieletterkarakter bevat}other{Moet minstens # nieletterkarakters bevat}}"</string>
+    <string name="lockpassword_password_requires_nonnumerical" msgid="389687423482993365">"{count,plural, =1{Moet minstens 1 nienumeriese karakter bevat}other{Moet minstens # nienumeriese karakters bevat}}"</string>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"Toesteladministrateur laat nie toe dat jy \'n onlangse wagwoord gebruik nie"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"Stygende, dalende of herhalende volgorde van syfers word nie toegelaat nie"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"Bevestig"</string>
@@ -571,17 +564,11 @@
     <string name="lockpattern_tutorial_continue_label" msgid="1329049481210689408">"Volgende"</string>
     <string name="manage_device_admin" msgid="1044620606203916275">"Toesteladministrasieprogramme"</string>
     <string name="number_of_device_admins_none" msgid="152926922020437312">"Geen aktiewe programme nie"</string>
-    <plurals name="number_of_device_admins" formatted="false" msgid="2528735319390151989">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> aktiewe programme</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> aktiewe program</item>
-    </plurals>
+    <string name="number_of_device_admins" msgid="3402909995362162876">"{count,plural, =1{# aktiewe app}other{# aktiewe apps}}"</string>
     <string name="manage_trust_agents" msgid="6410149930029992356">"Vertrouensagente"</string>
     <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"Stel eers \'n skermslot op om te gebruik"</string>
     <string name="manage_trust_agents_summary" msgid="6423843123607674286">"Geen"</string>
-    <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="5438047398376802735">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aktiewe vertrouensagente</item>
-      <item quantity="one">1 aktiewe vertrouensagent</item>
-    </plurals>
+    <string name="manage_trust_agents_summary_on" msgid="3302574418419446146">"{count,plural, =1{1 aktiewe vertrouensagent}other{# aktiewe vertrouensagente}}"</string>
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Bind saam met <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
@@ -603,6 +590,7 @@
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Wanneer Bluetooth aangeskakel is, kan jou toestel met ander nabygeleë Bluetooth-toestelle kommunikeer."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Wanneer Bluetooth aangeskakel is, kan jou toestel met ander Bluetooth-toestelle in die omtrek kommunikeer.\n\nOm toestelervaring te verbeter, kan programme en dienste steeds enige tyd na toestelle in die omtrek soek, selfs wanneer Bluetooth af is. Dit kan byvoorbeeld gebruik word om ligginggegronde kenmerke en dienste te verbeter. Jy kan dit in "<annotation id="link">"Bluetooth-opsporinginstellings"</annotation>" verander."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Toestelbesonderhede"</string>
+    <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Sleutelbordinstellings"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Toestel se Bluetooth-adres: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Toestel se Bluetooth-adres:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Vergeet toestel?"</string>
@@ -708,6 +696,7 @@
     <string name="wifi_eap_method" msgid="3776009521349381742">"EAP-metode"</string>
     <string name="please_select_phase2" msgid="577633852089847142">"Fase 2-stawing"</string>
     <string name="wifi_eap_ca_cert" msgid="8033404008276298886">"CA-sertifikaat"</string>
+    <string name="wifi_eap_min_tls_ver" msgid="174023604103299457">"Minimum TLS-weergawe"</string>
     <string name="wifi_eap_ocsp" msgid="8713933962516871238">"Status van aanlyn sertifikaat"</string>
     <string name="wifi_eap_domain" msgid="8304301470752333203">"Domein"</string>
     <string name="wifi_eap_user_cert" msgid="3569182430929173220">"Gebruikersertifikaat"</string>
@@ -795,18 +784,9 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Netwerkstoring het misluk"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Kanselleer"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Vergeet netwerk?"</string>
-    <plurals name="wifi_saved_access_points_summary" formatted="false" msgid="2802436466732147888">
-      <item quantity="other">%d netwerke</item>
-      <item quantity="one">1 netwerk</item>
-    </plurals>
-    <plurals name="wifi_saved_passpoint_access_points_summary" formatted="false" msgid="5802057518058840450">
-      <item quantity="other">%d intekeninge</item>
-      <item quantity="one">1 intekening</item>
-    </plurals>
-    <plurals name="wifi_saved_all_access_points_summary" formatted="false" msgid="5125849180309374451">
-      <item quantity="other">%d netwerke en intekeninge</item>
-      <item quantity="one">1 netwerk en intekening</item>
-    </plurals>
+    <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 netwerk}other{# netwerke}}"</string>
+    <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 intekening}other{# intekeninge}}"</string>
+    <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 netwerk en intekening}other{# netwerke en intekeninge}}"</string>
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"Toestel se MAC-adres"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"Ewekansige MAC-adres"</string>
@@ -909,9 +889,7 @@
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Wanneer jy jou foon tussen portret en landskap beweeg"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Skermresolusie"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Hoë resolusie"</string>
-    <string name="screen_resolution_option_highest" msgid="9134161136319625840">"Volle resolusie"</string>
-    <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080 p FHD+"</string>
-    <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440 p QHD+"</string>
+    <string name="screen_resolution_option_full" msgid="2694003735219114186">"Volle resolusie"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"Volle resolusie gebruik meer van jou battery. As jy jou resolusie oorskakel, sal sommige programme dalk herbegin."</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Gekies"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Kleure"</string>
@@ -1001,6 +979,8 @@
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Terwyl dit laai"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Terwyl dit gedok is"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Nooit"</string>
+    <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"Aan/<xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
+    <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Af"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Wanneer om te begin"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Lig op om wakker te maak"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Stemmingvertoning"</string>
@@ -1036,10 +1016,7 @@
     <string name="sim_preferred_title" msgid="8850185380445309835">"Dateer voorkeur-SIM op?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> is die enigste SIM in jou toestel. Wil jy hierdie SIM vir mobiele data, oproepe en SMS\'e gebruik?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"Verkeerde SIM PIN-kode, jy sal nou jou diensverskaffer moet kontak om jou toestel te ontsluit."</string>
-    <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
-      <item quantity="other">Verkeerde SIM-PIN-kode. Jy het <xliff:g id="NUMBER_1">%d</xliff:g> pogings oor.</item>
-      <item quantity="one">Verkeerde SIM-PIN. <xliff:g id="NUMBER_0">%d</xliff:g> poging oor voor jy jou diensverskaffer moet kontak om jou toestel te ontsluit.</item>
-    </plurals>
+    <string name="wrong_pin_code" msgid="8124222991071607958">"{count,plural, =1{Verkeerde PIN-kode vir SIM. Jy het # poging oor voordat jy jou diensverskaffer moet kontak om jou toestel te ontsluit.}other{Verkeerde PIN-kode vir SIM. Jy het # pogings oor.}}"</string>
     <string name="wrong_pin_code_one" msgid="6924852214263071441">"Verkeerde SIM-PIN-kode. Jy het 1 oorblywende poging voordat jy jou diensverskaffer sal moet kontak om jou toestel te ontsluit."</string>
     <string name="pin_failed" msgid="3726505565797352255">"SIM PIN-bewerking het misluk!"</string>
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"Stelselopdaterings"</string>
@@ -1057,12 +1034,16 @@
     <string name="storage_settings" msgid="7472188817781592677">"Berging"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"Berging en kas"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Bergingsinstellings"</string>
-    <string name="imei_multi_sim" msgid="71477088017585479">"IMEI (SIM-gleuf %1$d)"</string>
+    <string name="status_eid" msgid="7532406028683438634">"EID"</string>
+    <string name="eid_multi_sim" msgid="9087924808336397804">"EID (SIM-gleuf <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
+    <string name="imei_multi_sim" msgid="9001570420423929507">"IMEI (SIM-gleuf <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
+    <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI (SIM-gleuf <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (primêr)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Kies gestoorde netwerk om te bekyk"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"PRL-weergawe"</string>
-    <string name="meid_multi_sim" msgid="7645394486193991388">"MEID (SIM-gleuf %1$d)"</string>
+    <string name="meid_multi_sim" msgid="1460689549266621286">"MEID (SIM-gleuf <xliff:g id="MEID_SLOT_ID">%1$d</xliff:g>)"</string>
+    <string name="meid_multi_sim_primary" msgid="8921262417580407201">"MEID (SIM-gleuf <xliff:g id="MEID_SLOT_ID_PRIMARY">%1$d</xliff:g>) (primêr)"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"Soort mobieledatanetwerk"</string>
@@ -1143,6 +1124,8 @@
     <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Jy kan begin om jou <xliff:g id="NAME">^1</xliff:g> te gebruik"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Batterystatus"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Batteryvlak"</string>
+    <string name="communal_settings_title" msgid="2845678473945902115">"Gemeenskaplik"</string>
+    <string name="communal_settings_summary" msgid="4923914136953940317">"Gemeenskaplike instellings"</string>
     <string name="apn_settings" msgid="4295467389400441299">"Toegangspuntname"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Redigeer toegangspunt"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"Nie gestel nie"</string>
@@ -1183,8 +1166,13 @@
     <string name="menu_restore" msgid="4310539620115151551">"Stel terug na verstek"</string>
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"Terugstel van verstek APN-instellings voltooi"</string>
     <string name="reset_dashboard_title" msgid="7423200250697886918">"Stel opsies terug"</string>
-    <string name="reset_network_title" msgid="1395494440355807616">"Stel terug: Wi-Fi, mobiel en Bluetooth"</string>
-    <string name="reset_network_desc" msgid="1112523764899788246">"Dit sal alle netwerkinstellings terugstel, insluitend:\n\n"<li>"Wi‑Fi"</li>\n<li>"Mobiele data"</li>\n<li>"Bluetooth"</li></string>
+    <string name="reset_mobile_network_settings_title" msgid="5616713931258506842">"Stel selnetwerkinstellings terug"</string>
+    <string name="reset_mobile_network_settings_desc" msgid="7292636387692165727">"Dit sal alle selnetwerkinstellings terugstel"</string>
+    <string name="reset_mobile_network_settings_confirm_title" msgid="7510965634669511241">"Stel selnetwerkinstellings terug?"</string>
+    <string name="reset_bluetooth_wifi_title" msgid="4113071322344697317">"Stel Bluetooth en wi‑fi terug"</string>
+    <string name="reset_bluetooth_wifi_desc" msgid="4030295669083059711">"Dit sal alle wi‑fi- en Bluetooth-instellings terugstel. Jy kan nie hierdie handeling ontdoen nie."</string>
+    <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"Stel terug"</string>
+    <string name="reset_bluetooth_wifi_complete_toast" msgid="5893439291030574365">"Bluetooth en wi‑fi is teruggestel"</string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"Vee uit"</string>
     <string name="reset_esim_title" msgid="4194570573425902754">"Vee e-SIM-kaarte uit"</string>
     <string name="reset_esim_desc" msgid="3662444090563399131">"Dit sal geen mobielediensplanne kanselleer nie. Kontak jou diensverskaffer om vervanging-SIM\'s af te laai."</string>
@@ -1269,10 +1257,7 @@
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Ligging vir werkprofiel"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Programliggingtoestemmings"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Ligging is af"</string>
-    <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
-      <item quantity="other"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> van <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> programme het toegang tot ligging</item>
-      <item quantity="one"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_0">%1$d</xliff:g> van <xliff:g id="TOTAL_LOCATION_APP_COUNT_1">%2$d</xliff:g> programme het toegang tot ligging</item>
-    </plurals>
+    <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{# van {total} apps het toegang tot ligging}other{# van {total} apps het toegang tot ligging}}"</string>
     <string name="location_category_recent_location_access" msgid="2558063524482178146">"Onlangse toegang"</string>
     <string name="location_recent_location_access_see_all" msgid="4203102419355323325">"Sien alles"</string>
     <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"Bekyk besonderhede"</string>
@@ -1287,9 +1272,15 @@
     <string name="location_services_preference_title" msgid="604317859531782159">"Liggingdienste"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"Liggingdienste"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"Gebruik ligging"</string>
+    <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"Kan nie die tydsone outomaties stel nie"</string>
+    <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
+    <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"Ligging of Liggingdienste is af"</string>
+    <string name="location_time_zone_detection_status_summary_blocked_by_environment" msgid="2279833212923765802"></string>
+    <string name="location_time_zone_detection_status_summary_temporarily_unavailable" msgid="6586801403644278967"></string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"Toestelligging word benodig"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_message" msgid="5846316326139169523">"As jy jou ligging wil gebruik om die tydsone te stel, moet jy ligging aanskakel en dan tydsone-instellings opdateer"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"Ligginginstellings"</string>
+    <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"Maak dit reg"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"Kanselleer"</string>
     <string name="location_time_zone_detection_auto_is_off" msgid="6264253990141650280">"Outomatiese tydsone is af"</string>
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"Liggingtydsonebespeuring is gedeaktiveer"</string>
@@ -1413,10 +1404,7 @@
     <string name="install_applications" msgid="3921609656584369901">"Onbekende bronne"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"Laat alle programbronne toe"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Programme wat onlangs oopgemaak is"</string>
-    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
-      <item quantity="other">Sien al %1$d programme</item>
-      <item quantity="one">Sien alle programme</item>
-    </plurals>
+    <string name="see_all_apps_title" msgid="1650653853942381797">"{count,plural, =1{Sien alle apps}other{Sien al # apps}}"</string>
     <string name="forgot_password_title" msgid="3967873480875239885">"Kontak jou IT-administrateur"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"Hulle kan jou help om jou PIN, patroon of wagwoord terug te stel"</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Gevorderde instellings"</string>
@@ -1430,10 +1418,7 @@
     <string name="cache_header_label" msgid="2441967971921741047">"Kasgeheue"</string>
     <string name="clear_cache_btn_text" msgid="8597272828928143723">"Maak kas skoon"</string>
     <string name="cache_size_label" msgid="313456088966822757">"Kasgeheue"</string>
-    <plurals name="uri_permissions_text" formatted="false" msgid="8212425823423508096">
-      <item quantity="other">%d items</item>
-      <item quantity="one">1 item</item>
-    </plurals>
+    <string name="uri_permissions_text" msgid="8406345863117405105">"{count,plural, =1{1 item}other{# items}}"</string>
     <string name="clear_uri_btn_text" msgid="4828117421162495134">"Maak toegang skoon"</string>
     <string name="controls_label" msgid="8671492254263626383">"Kontroles"</string>
     <string name="force_stop" msgid="2681771622136916280">"Forseer stop"</string>
@@ -1574,14 +1559,46 @@
     <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Beskikbare skermsleutelbord"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Bestuur sleutelborde op die skerm"</string>
-    <string name="keyboard_assistance_category" msgid="7320599809770932032">"Sleutelbordbystand"</string>
+    <string name="keyboard_options_category" msgid="8040137073401152608">"Opsies"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Fisiese sleutelbord"</string>
     <string name="show_ime" msgid="4334255501724746849">"Gebruik skermsleutelbord"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Hou dit op die skerm terwyl fisieke sleutelbord aktief is"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Kortpadsleutels"</string>
-    <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"Wys beskikbare kortpaaie"</string>
+    <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Wys lys met kortpaaie"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Werkprofielsleutelborde en -nutsgoed"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Skermsleutelbord vir werk"</string>
+    <string name="trackpad_settings" msgid="2071131324087677005">"Raakpaneel"</string>
+    <string name="trackpad_mouse_settings" msgid="136226693583218429">"Raakpaneel en muis"</string>
+    <string name="trackpad_settings_summary" msgid="3369855644136760402">"Wyserspoed, gebare"</string>
+    <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Tik om te klik"</string>
+    <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"Raakpaneelgebare"</string>
+    <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Pasmaak individuele raakpaneelnavigasiegebare"</string>
+    <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Omgekeerde rollees"</string>
+    <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Inhoud beweeg op wanneer jy ondertoe rollees"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Tik onder regs"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Tik op die raakpaneel se hoek onder regs vir meer opsies"</string>
+    <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Wyserspoed"</string>
+    <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Leer raakpaneelgebare"</string>
+    <string name="trackpad_go_back_title" msgid="5312164160947491440">"Gaan terug"</string>
+    <string name="trackpad_go_back_summary" msgid="4201901101085902768">"Swiep met drie vingers links of regs"</string>
+    <string name="trackpad_go_home_title" msgid="2146525662148291552">"Gaan na tuisskerm"</string>
+    <string name="trackpad_go_home_summary" msgid="2222744701528360887">"Swiep met drie vingers op"</string>
+    <string name="trackpad_recent_apps_title" msgid="8195970908411585445">"Onlangse apps"</string>
+    <string name="trackpad_recent_apps_summary" msgid="2685092851677573794">"Swiep met drie vingers op, en hou dan"</string>
+    <string name="trackpad_notifications_title" msgid="3521663305043747880">"Kennisgewings"</string>
+    <string name="trackpad_notifications_summary" msgid="7663647367648690040">"Swiep met drie vingers af"</string>
+    <string name="trackpad_switch_apps_title" msgid="7342032935377284039">"Wissel apps"</string>
+    <string name="trackpad_switch_apps_summary" msgid="9193942041912927440">"Swiep met vier vingers links of regs"</string>
+    <string name="modifier_keys_settings" msgid="2537108435032034683">"Wysigersleutels"</string>
+    <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Verander hoe sleutels optree"</string>
+    <string name="modifier_keys_reset_title" msgid="948294258402761066">"Stel alles terug"</string>
+    <string name="modifier_keys_default_summary" msgid="8701640508670973258">"Verstek"</string>
+    <string name="modifier_keys_reset_message" msgid="5236994817619936058">"Is jy seker jy wil al die wysigersleutels na hul verstek toe terugstel?"</string>
+    <string name="modifier_keys_done" msgid="8196199314913909700">"Klaar"</string>
+    <string name="modifier_keys_cancel" msgid="7136520252570826772">"Kanselleer"</string>
+    <string name="modifier_keys_restore" msgid="7627661630556839268">"Stel terug"</string>
+    <string name="modifier_keys_picker_title" msgid="244545904150587851">"Kies wysigersleutel"</string>
+    <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Kies ’n nuwe sleutel vir <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Verstek"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Spraak"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Wyserspoed"</string>
@@ -1593,6 +1610,7 @@
     <string name="keyboard_layout_dialog_switch_hint" msgid="3303564123674979354">"Om te wissel, druk Control-spasiebalk"</string>
     <string name="keyboard_layout_default_label" msgid="6078569989261528039">"Verstek"</string>
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"Sleutelborduitlegte"</string>
+    <string name="keyboard_layout_picker_category_title" msgid="2369473692906329772">"Uitlegte van fisieke sleutelborde"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"Persoonlike woordeboek"</string>
     <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"Persoonlike woordeboek vir werk"</string>
     <string name="user_dict_settings_summary" msgid="4939694372338975081">"Voeg woorde by wat in programme soos Speltoetser gebruik sal word"</string>
@@ -1617,6 +1635,7 @@
     <string name="keyboard_settings_summary" msgid="2716339620942356432">"Skermsleutelbord, spraak, nutsgoed"</string>
     <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"Skermsleutelbord, fisieke sleutelbord, spraak, nutsgoed"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Fisiese sleutelbord"</string>
+    <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"Uitleg"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"Kies apparaat"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"Kies legstuk"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="3537968409832846255">"Skep legstuk en laat toegang toe?"</string>
@@ -1849,7 +1868,7 @@
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Hou volumesleutels in"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Tripeltik op skerm"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Gaan voort"</string>
-    <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Gehoortoestelle"</string>
+    <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Gehoortoestelle"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"Geen gehoortoestelle is gekoppel nie"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Voeg gehoortoestelle by"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Bind gehoortoestelle saam"</string>
@@ -1859,6 +1878,17 @@
     <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, net regter"</string>
     <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, linker en regter"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> + nog 1"</string>
+    <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Bind nuwe toestel saam"</string>
+    <string name="accessibility_hearing_device_saved_title" msgid="7573926212664909296">"Gestoorde toestelle"</string>
+    <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"Gehoortoestelkontroles"</string>
+    <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Gehoortoestelkortpad"</string>
+    <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Gehoortoestelversoenbaarheid"</string>
+    <string name="accessibility_hac_mode_summary" msgid="5164793702798871478">"Verbeter oudio vir sommige gehoortoestelle"</string>
+    <string name="accessibility_hearing_device_footer_summary" msgid="4636110586636490256">"Maak seker dat jou gehoortoestel aangeskakel en in saambindmodus is"</string>
+    <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Bind gehoortoestel saam"</string>
+    <string name="accessibility_found_hearing_devices" msgid="3472605919692789408">"Beskikbare toestelle"</string>
+    <string name="accessibility_found_all_devices" msgid="7817834722148556520">"Sien nie jou gehoortoestel nie?"</string>
+    <string name="accessibility_list_all_devices_title" msgid="3555097127022458571">"Bekyk alle Bluetooth-toestelle"</string>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Oudio-aanpassing"</string>
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"Oudiobeskrywing"</string>
     <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"Hoor \'n beskrywing van wat op die skerm gebeur in gesteunde flieks en programme"</string>
@@ -1885,22 +1915,10 @@
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Dowwer"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"Helderder"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Hou aan nadat toestel herbegin het"</string>
-    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
-      <item quantity="other">Kort (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekondes)</item>
-      <item quantity="one">Kort (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekonde)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
-      <item quantity="other">Medium (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekondes)</item>
-      <item quantity="one">Medium (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekonde)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
-      <item quantity="other">Lank (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekondes)</item>
-      <item quantity="one">Lank (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekonde)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="4537791441118261556">
-      <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> sekondes</item>
-      <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekonde</item>
-    </plurals>
+    <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{Kort ({time} sekonde)}other{Kort ({time} sekondes)}}"</string>
+    <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{Medium ({time} sekonde)}other{Medium ({time} sekondes)}}"</string>
+    <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{Lank ({time} sekonde)}other{Lank ({time} sekondes)}}"</string>
+    <string name="accessibilty_autoclick_delay_unit_second" msgid="5979297390686370567">"{count,plural, =1{{time} sekonde}other{{time} sekondes}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Instellings"</string>
     <string name="captioning_preview_title" msgid="2888561631323180535">"Voorskou"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"Standaardopsies"</string>
@@ -1975,14 +1993,8 @@
     <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"Soek toestelle in die omtrek"</string>
     <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"Gestoorde toestelle"</string>
     <string name="print_settings" msgid="8519810615863882491">"Druk"</string>
-    <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> drukdienste is aan</item>
-      <item quantity="one">1 drukdiens is aan</item>
-    </plurals>
-    <plurals name="print_jobs_summary" formatted="false" msgid="3933688846338306536">
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> druktake</item>
-      <item quantity="one">1 druktaak</item>
-    </plurals>
+    <string name="print_settings_summary" msgid="1458773840720811915">"{count,plural, =1{1 drukdiens is aan}other{# drukdienste is aan}}"</string>
+    <string name="print_jobs_summary" msgid="7040836482336577323">"{count,plural, =1{1 druktaak}other{# druktake}}"</string>
     <string name="print_settings_title" msgid="7680498284751129935">"Drukdienste"</string>
     <string name="print_no_services_installed" msgid="7554057966540602692">"Geen dienste geïnstalleer nie"</string>
     <string name="print_no_printers_found" msgid="4833082484646109486">"Geen drukkers gekry nie"</string>
@@ -2049,43 +2061,22 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Sommige kenmerke kan beperk word"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Hoër battery gebruik"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Sien programme met die hoogste gebruik"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Laaiproses is onderbreek"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="5254922316684499816">"Beskerm tans battery om batterylewensduur te verleng"</string>
-    <!-- no translation found for battery_tip_dock_defender_future_bypass_title (7257251934903787366) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_future_bypass_summary (428474483479026813) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_active_title (8843454404807737776) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_active_summary (5582869291068635429) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_temporarily_bypassed_title (1679449361090557201) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_temporarily_bypassed_summary (5107293805054133144) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Laaiproses word geoptimeer om jou battery te beskerm"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"Laaiproses word geoptimeer om jou battery se leeftyd te help verleng"</string>
+    <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Laaiproses word geoptimeer om jou battery te beskerm"</string>
+    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Laaiproses word geoptimeer terwyl gedok om jou battery se leeftyd te help verleng"</string>
+    <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Laaiproses word geoptimeer om jou battery te beskerm"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"Laaiproses word geoptimeer terwyl gedok om jou battery se leeftyd te help verleng"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"Laaiproses is klaar"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"Die laaiproses sal volgende keer as jou tablet gedok is geoptimeer word om die battery te beskerm"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Kom meer te wete oor laaiproses wat onderbreek is"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Hervat laaiproses"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Sluit hoëkrag-agtergrondaktiwiteit in"</string>
-    <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
-      <item quantity="other">Beperk %1$d programme</item>
-      <item quantity="one">Beperk %1$d program</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_handled_title" formatted="false" msgid="5862649927574803958">
-      <item quantity="other">%2$d programme is onlangs beperk</item>
-      <item quantity="one">%1$s is onlangs beperk</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_summary" formatted="false" msgid="3328499737453686910">
-      <item quantity="other">%2$d programme het hoë batterygebruik op die agtergrond</item>
-      <item quantity="one">%1$s: hoë batterygebruik op die agtergrond</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_handled_summary" formatted="false" msgid="3036853535034350991">
-      <item quantity="other">Hierdie programme kan nie op die agtergrond werk nie</item>
-      <item quantity="one">Hierdie program kan nie op die agtergrond werk nie</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_app_dialog_title" formatted="false" msgid="7897944678619251740">
-      <item quantity="other">Beperk %1$d programme?</item>
-      <item quantity="one">Beperk program?</item>
-    </plurals>
+    <string name="battery_tip_restrict_title" msgid="4537101947310626753">"{count,plural, =1{Beperk # app}other{Beperk # apps}}"</string>
+    <string name="battery_tip_restrict_handled_title" msgid="7142074986508706853">"{count,plural, =1{{label} is onlangs beperk}other{# apps is onlangs beperk}}"</string>
+    <string name="battery_tip_restrict_summary" msgid="7539469590829235277">"{count,plural, =1{{label} se agtergrondbatterygebruik is hoog}other{# apps se agtergrondbatterygebruik is hoog}}"</string>
+    <string name="battery_tip_restrict_handled_summary" msgid="3535697154547199190">"{count,plural, =1{Hierdie app kan nie op die agtergrond loop nie}other{Hierdie apps kan nie op die agtergrond loop nie}}"</string>
+    <string name="battery_tip_restrict_app_dialog_title" msgid="1649476357343160240">"{count,plural, =1{Beperk app?}other{Beperk # apps?}}"</string>
     <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"Verhoed <xliff:g id="APP">%1$s</xliff:g> om die battery op die agtergrond te gebruik om so batterykrag te bespaar. Hierdie program sal dalk nie behoorlik werk nie en kennisgewings sal dalk vertraag word."</string>
     <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="5894648804112181324">"Verhoed hierdie programme om die battery op die agtergrond te gebruik om so batterykrag te bespaar. Beperkte programme sal dalk nie behoorlik werk nie en kennisgewings sal dalk vertraag word.\n\nProgramme:"</string>
     <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="4546838397423565138">"Verhoed hierdie programme om die battery op die agtergrond te gebruik om so batterykrag te bespaar. Beperkte programme sal dalk nie behoorlik werk nie en kennisgewings sal dalk vertraag word.\n\nProgramme:\n<xliff:g id="APP_LIST">%1$s</xliff:g>."</string>
@@ -2099,20 +2090,14 @@
     <string name="smart_battery_title" msgid="9095903608520254254">"Bestuur programme outomaties"</string>
     <string name="smart_battery_footer" msgid="8407121907452993645">"Wanneer Batterybestuurder bespeur dat programme jou battery leegmaak, het jy die opsie om daardie programme te beperk. Beperkte programme sal dalk nie behoorlik werk nie en kennisgewings sal dalk vertraag word."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Beperkte programme"</string>
-    <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
-      <item quantity="other">Beperk tans batterygebruik vir %1$d programme</item>
-      <item quantity="one">Beperk tans batterygebruik vir %1$d program</item>
-    </plurals>
+    <string name="restricted_app_summary" msgid="1022307922754893997">"{count,plural, =1{Beperk tans batterygebruik vir # app}other{Beperk tans batterygebruik vir # apps}}"</string>
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"Beperk: <xliff:g id="TIME">%1$s</xliff:g>"</string>
     <string name="restricted_app_detail_footer" msgid="3495725286882138803">"Hierdie programme word weerhou daarvan om agtergrondbattery te gebruik. Hulle sal dalk nie werk soos verwag nie en kennisgewings kan dalk vertraag word."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Gebruik Batterybestuurder"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Bespeur wanneer programme battery leegmaak"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"Bespeur wanneer programme battery leegmaak"</string>
     <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"Bespeur wanneer programme battery leegmaak"</string>
-    <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
-      <item quantity="other">%1$d programme word beperk</item>
-      <item quantity="one">%1$d program word beperk</item>
-    </plurals>
+    <string name="battery_manager_app_restricted" msgid="2583902700677009173">"{count,plural, =1{# app is beperk}other{# apps is beperk}}"</string>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
     <string name="battery_missing_message" msgid="400958471814422770">"Kon nie die batterymeter lees nie."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
@@ -2132,28 +2117,13 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"Volgelaaide battery hou omtrent"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Batterygebruikdata is benaderd en kan op grond van gebruik verander."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Batterygebruik"</string>
-    <string name="battery_total_and_bg_usage" msgid="8435738393326063685">"Altesaam <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> op die agtergrond gebruik\nsedert battery laas volgelaai is"</string>
-    <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"Altesame <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> op agtergrond gebruik\nin afgelope 24 uur"</string>
-    <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"Altesame <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> op agtergrond gebruik\ntydens <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
-    <string name="battery_total_usage_less_minute" msgid="3199193389086828320">"Altesaam minder as ’n minuut gebruik sedert battery laas volgelaai is"</string>
-    <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"Altesame minder as \'n minuut in afgelope 24 uur"</string>
-    <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Totaal was minder as \'n minuut in <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_bg_usage_less_minute" msgid="7776884932074493406">"Minder as ’n minuut op die agtergrond gebruik sedert battery laas volgelaai is"</string>
-    <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"Minder as \'n minuut op agtergrond gebruik in afgelope 24 uur"</string>
-    <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"Minder as \'n minuut op agtergrond gebruik in <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_total_usage" msgid="4811532932663354619">"Altesaam <xliff:g id="TIME">^1</xliff:g> gebruik sedert battery laas volgelaai is"</string>
-    <string name="battery_total_usage_24hr" msgid="3907495067623665787">"Altesame <xliff:g id="TIME">^1</xliff:g> in afgelope 24 uur"</string>
-    <string name="battery_total_usage_with_period" msgid="2849061229625950626">"Altesame <xliff:g id="TIME_0">^1</xliff:g> in <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_bg_usage" msgid="8262917746299259350">"<xliff:g id="TIME">^1</xliff:g> op die agtergrond gebruik sedert battery laas volgelaai is"</string>
-    <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"<xliff:g id="TIME">^1</xliff:g> op agtergrond gebruik in afgelope 24 uur"</string>
-    <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_0">^1</xliff:g> op agtergrond gebruik in <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="3861884807364163833">"Altesaam <xliff:g id="TIME">^1</xliff:g> • minder as ’n minuut op die agtergrond gebruik\nsedert battery laas volgelaai is"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"Altesame <xliff:g id="TIME">^1</xliff:g> • minder as \'n minuut op agtergrond gebruik\nin afgelope 24 uur"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"Altesame <xliff:g id="TIME_0">^1</xliff:g> • minder as \'n minuut op agtergrond gebruik\ntydens <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
     <string name="battery_not_usage" msgid="3851536644733662392">"Geen gebruik sedert battery laas volgelaai is nie"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Nie in afgelope 24 uur gebruik nie"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
-    <string name="battery_usage_other_users" msgid="9002643295562500693">"Ander gebruikers"</string>
+    <!-- no translation found for battery_usage_since_last_full_charge (3488425008925924769) -->
+    <skip />
+    <string name="battery_usage_system_apps" msgid="8659537819731575299">"Stelselprogramme"</string>
+    <string name="battery_usage_others" msgid="311793281613609986">"Ander"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Geskatte tyd oor"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Tot battery volgelaai is"</string>
     <string name="estimated_time_description" msgid="211058785418596009">"Skatting kan op grond van gebruik verander"</string>
@@ -2191,12 +2161,21 @@
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Programgebruik vir <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Total: minder as \'n min."</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Agtergrond: minder as \'n min."</string>
+    <string name="battery_usage_screen_time_less_than_one_minute" msgid="2911989465891679033">"Skermtyd: minder as een min."</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Totaal: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Agtergrond: <xliff:g id="TIME">%s</xliff:g>"</string>
+    <string name="battery_usage_screen_time" msgid="3973865893520804115">"Skermtyd: • <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Batterygebruiksdata sal binne ’n paar uur beskikbaar wees sodra dit ten volle gelaai is"</string>
+    <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"nou"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Batterygebruikgrafiek"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Grafiek van daaglikse batterygebruik"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Grafiek van uurlikse batterygebruik"</string>
+    <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"Batterygebruik sedert dit laas volgelaai is"</string>
+    <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Batterygebruik vir <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Skermtyd sedert battery laas volgelaai is"</string>
+    <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Skermtyd vir <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="battery_usage_spinner_breakdown_by_apps" msgid="7746337368402445072">"Ontleding volgens apps"</string>
+    <string name="battery_usage_spinner_breakdown_by_system" msgid="4646952798665973464">"Ontleding volgens stelsel"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Proses-statistieke"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Bleeksiel-statistieke vir lopende prosesse"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Berginggebruik"</string>
@@ -2272,7 +2251,8 @@
     <string name="advanced_security_title" msgid="7117581975877192652">"Gevorderd"</string>
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"Eiebewyse is nie vir hierdie gebruiker beskikbaar nie"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"Geïnstalleer vir VPN en programme"</string>
-    <string name="credential_for_wifi" msgid="1963335263280604998">"Geïnstalleer vir Wi-Fi"</string>
+    <string name="credential_for_wifi" msgid="2286560570630763556">"Geïnstalleer vir wi-fi"</string>
+    <string name="credential_for_wifi_in_use" msgid="7276290656840986618">"Geïnstalleer vir wi‑fi (in gebruik)"</string>
     <string name="credentials_reset_hint" msgid="4054601857203464867">"Verwyder al die inhoud?"</string>
     <string name="credentials_erased" msgid="9121052044566053345">"Eiebewysberging is uitgevee."</string>
     <string name="credentials_not_erased" msgid="3611058412683184031">"Eiebewysberging kon nie uitgevee word nie."</string>
@@ -2297,10 +2277,7 @@
     <string name="remove_credential_management_app" msgid="6089291496976812786">"Verwyder program"</string>
     <string name="remove_credential_management_app_dialog_title" msgid="5713525435104706772">"Verwyder hierdie program?"</string>
     <string name="remove_credential_management_app_dialog_message" msgid="7739474298063646935">"Hierdie program sal nie sertifikate bestuur nie, maar dit sal op jou toestel bly. Enige sertifikate wat deur die program geïnstalleer is, sal gedeïnstalleer word."</string>
-    <plurals name="number_of_urls" formatted="false" msgid="403979258551655023">
-      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> URL\'e</item>
-      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> URL</item>
-    </plurals>
+    <string name="number_of_urls" msgid="1128699121050872188">"{count,plural, =1{# URL}other{# URL\'e}}"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"Noodoproepsein"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Stel gedrag wanneer \'n noodoproep gemaak word"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Rugsteun"</string>
@@ -2343,10 +2320,7 @@
     <string name="notification_history_today" msgid="5828496957208237230">"Afgelope 24 uur"</string>
     <string name="notification_history_snooze" msgid="3980568893290512257">"Gesluimer"</string>
     <string name="notification_history_dismiss" msgid="6180321217375722918">"Onlangs toegemaak"</string>
-    <plurals name="notification_history_count" formatted="false" msgid="1859304685071321991">
-      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> kennisgewings</item>
-      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> kennisgewing</item>
-    </plurals>
+    <string name="notification_history_count" msgid="885305572972482838">"{count,plural, =1{# kennisgewing}other{# kennisgewings}}"</string>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"Oproep se luitoon en vibrasie"</string>
     <string name="wifi_setup_detail" msgid="2012898800571616422">"Netwerkdetails"</string>
     <string name="accessibility_sync_enabled" msgid="5308864640407050209">"Sinkronisasie geaktiveer"</string>
@@ -2518,10 +2492,11 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Aktiveer die stelsel se CA-sertifikaat?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Deaktiveer die stelsel se CA-sertifikaat?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Verwyder die gebruiker se CA-sertifikaat permanent?"</string>
-    <string name="credential_contains" msgid="407972262032275476">"Hierdie inskrywing bevat:"</string>
-    <string name="one_userkey" msgid="4417212932385103517">"een gebruikersleutel"</string>
-    <string name="one_usercrt" msgid="1865069301105101370">"een gebruikersertifikaat"</string>
-    <string name="one_cacrt" msgid="7467796501404158399">"een CA-sertifikaat"</string>
+    <string name="credential_being_used_by" msgid="3682869943025283499">"Word tans gebruik deur"</string>
+    <string name="credential_contains" msgid="3146519680449595771">"Hierdie inskrywing bevat"</string>
+    <string name="one_userkey" msgid="6363426728683951234">"1 gebruikersleutel"</string>
+    <string name="one_usercrt" msgid="2097644070227688983">"1 gebruikersertifikaat"</string>
+    <string name="one_cacrt" msgid="982242103604501559">"1 CA-sertifikaat"</string>
     <string name="n_cacrts" msgid="5886462550192731627">"%d CA-sertifikate"</string>
     <string name="user_credential_title" msgid="4686178602575567298">"Eiebewysbesonderhede"</string>
     <string name="user_credential_removed" msgid="4087675887725394743">"Het eiebewys verwyder: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
@@ -2536,17 +2511,11 @@
     <string name="additional_system_update_settings_list_item_title" msgid="7230385345152138051">"Bykomende stelselopdaterings"</string>
     <string name="ssl_ca_cert_warning" msgid="3898387588657346106">"Netwerk kan dalk gemonitor word"</string>
     <string name="done_button" msgid="6269449526248267">"Klaar"</string>
-    <plurals name="ssl_ca_cert_dialog_title" formatted="false" msgid="5491460811755938449">
-      <item quantity="other">Vertrou of verwyder sertifikate</item>
-      <item quantity="one">Vertrou of verwyder sertifikaat</item>
-    </plurals>
+    <string name="ssl_ca_cert_dialog_title" msgid="1032088078702042090">"{count,plural, =1{Vertrou of verwyder sertifikaat}other{Vertrou of verwyder sertifikate}}"</string>
     <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{{orgName} het ’n sertifikaatinstansie op jou toestel geïnstalleer wat dit vir hulle moontlik kan maak om jou toestelnetwerkaktiwiteit, insluitend e-posse, programme en beveiligde webwerwe, te monitor.\n\nKontak jou admin vir meer inligting oor hierdie sertifikaat.}other{{orgName} het sertifikaatinstansies op jou toestel geïnstalleer wat dit vir hulle moontlik kan maak om jou toestelnetwerkaktiwiteit, insluitend e-posse, programme en beveiligde webwerwe, te monitor.\n\nKontak jou admin vir meer inligting oor hierdie sertifikate.}}"</string>
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} het ’n sertifikaatinstansie vir jou werkprofiel geïnstalleer wat dit vir hulle moontlik kan maak om werknetwerkaktiwiteit, insluitend e-posse, programme en beveiligde webwerwe, te monitor.\n\nKontak jou admin vir meer inligting oor hierdie sertifikaat.}other{{orgName} het sertifikaatinstansies vir jou werkprofiel geïnstalleer wat dit vir hulle moontlik kan maak om werknetwerkaktiwiteit, insluitend e-posse, programme en beveiligde webwerwe, te monitor.\n\nKontak jou admin vir meer inligting oor hierdie sertifikate.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"\'n Derde party kan jou netwerkaktiwiteit monitor, insluitend e-posse, programme en veilige webwerwe.\n\n\'n Vertroude eiebewys wat op jou toestel geïnstalleer is, maak dit moontlik."</string>
-    <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="125941406175485894">
-      <item quantity="other">Kontroleer sertifikate</item>
-      <item quantity="one">Kontroleer sertifikaat</item>
-    </plurals>
+    <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Gaan sertifikaat na}other{Gaan sertifikate na}}"</string>
     <string name="user_settings_title" msgid="6550866465409807877">"Veelvuldige gebruikers"</string>
     <string name="user_list_title" msgid="1387379079186123404">"Gebruikers en profiele"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Voeg gebruiker of profiel by"</string>
@@ -2585,13 +2554,15 @@
     <string name="enable_guest_calling" msgid="8300355036005240911">"Laat gas toe om foon te gebruik"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"Oproepgeskiedenis sal met gasgebruiker gedeel word"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Skakel foonoproepe en SMS aan"</string>
+    <string name="user_grant_admin" msgid="6511342422361803820">"Gee hierdie gebruiker adminvoorregte"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Vee gebruiker uit"</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Skakel foonoproepe en SMS aan?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"Oproep- en SMS-geskiedenis sal met hierdie gebruiker gedeel word."</string>
+    <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"Verwyder adminvoorregte?"</string>
+    <string name="user_revoke_admin_confirm_message" msgid="2719667217562982318">"Is jy seker jy wil hierdie gebruiker se adminvoorregte verwyder?"</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Noodinligting"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Inligting en kontakte vir <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Maak <xliff:g id="APP_NAME">%1$s</xliff:g> oop"</string>
-    <string name="more_settings_button" msgid="8988612279031242411">"Meer instellings"</string>
     <string name="application_restrictions" msgid="276179173572729205">"Laat programme en inhoud toe"</string>
     <string name="apps_with_restrictions_header" msgid="5277698582872267931">"Programme met beperkings"</string>
     <string name="apps_with_restrictions_settings_button" msgid="2648355133416902221">"Brei instellings vir program uit"</string>
@@ -2732,10 +2703,12 @@
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"Gestoorde wagwoorde, outovul, gesinkroniseerde rekeninge"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Verstekprogramme"</string>
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"Gekloonde apps"</string>
-    <!-- no translation found for desc_cloned_apps_intro_text (1369621522882622476) -->
-    <skip />
-    <!-- no translation found for cloned_apps_summary (8805362440770795709) -->
-    <skip />
+    <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"Skep ’n tweede geval van ’n app sodat jy twee rekeninge op dieselfde tyd kan gebruik."</string>
+    <string name="cloned_apps_summary" msgid="8805362440770795709">"<xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g> is gekloon, <xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g> is beskikbaar om te kloon"</string>
+    <string name="delete_all_app_clones" msgid="3489053361980624999">"Vee alle appklone uit"</string>
+    <string name="delete_all_app_clones_failure" msgid="6821033414547132335">"Kon nie alle appklone uitvee nie"</string>
+    <string name="cloned_app_creation_summary" msgid="4642627294993918502">"Skep tans …"</string>
+    <string name="cloned_app_created_summary" msgid="7277912971544890710">"Gekloon"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Tale, gebare, tyd, rugsteun"</string>
     <string name="languages_setting_summary" msgid="4924440599794956443">"Stelseltale, programtale"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, netwerkverbinding, internet, draadloos, data, wi fi"</string>
@@ -2795,7 +2768,11 @@
     <string name="keywords_face_unlock" msgid="545338452730885392">"gesig, ontsluit, stawing, meld aan"</string>
     <string name="keywords_biometric_unlock" msgid="8569545388717753692">"gesig, ontsluit, stawing, aanmelding, vingerafdruk, biometries"</string>
     <string name="keywords_imei_info" msgid="8848791606402333514">"imei, meid, min, prl-weergawe, imei sv"</string>
-    <string name="keywords_sim_status" msgid="8784456547742075508">"netwerk, selnetwerkstaat, diensstaat, seinsterkte, selnetwerktipe, swerwing, iccid, eid"</string>
+    <string name="keywords_sim_status" msgid="4221401945956122228">"netwerk, selnetwerktoestand, dienstoestand, seinsterkte, selnetwerktipe, swerwing"</string>
+    <string name="keywords_sim_status_esim" msgid="3338719238556853609">"netwerk, selnetwerktoestand, dienstoestand, seinsterkte, selnetwerktipe, swerwing, eid"</string>
+    <string name="keywords_sim_status_iccid" msgid="4775398796251969759">"netwerk, selnetwerktoestand, dienstoestand, seinsterkte, selnetwerktipe, swerwing, iccid"</string>
+    <string name="keywords_sim_status_iccid_esim" msgid="4634015619840979184">"netwerk, selnetwerktoestand, dienstoestand, seinsterkte, selnetwerktipe, swerwing, iccid, eid"</string>
+    <string name="keywords_esim_eid" msgid="8128175058237372457">"eid"</string>
     <string name="keywords_model_and_hardware" msgid="4723665865709965044">"reeksnommer, hardewareweergawe"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"android-sekuriteitregstellingvlak, basisband-weergawe, kernweergawe"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"tema, lig, donker, modus, ligsensitiwiteit, fotofobie, maak donkerder, maak donker, donkermodus, migraine"</string>
@@ -3065,10 +3042,7 @@
     <string name="promote_conversation_title" msgid="4731148769888238722">"Dit is \'n gesprek"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Voeg by die gesprekafdeling"</string>
     <string name="priority_conversation_count_zero" msgid="3862289535537564713">"Geen prioriteitgesprekke nie"</string>
-    <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> prioriteitgesprekke</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> prioriteitgesprek</item>
-    </plurals>
+    <string name="priority_conversation_count" msgid="7291234530844412077">"{count,plural, =1{# prioriteitgesprek}other{# prioriteitgesprekke}}"</string>
     <string name="important_conversations" msgid="1233893707189659401">"Prioriteitgesprekke"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Wys boaan gespreksafdeling en verskyn as swewende borrels"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Boaan gespreksafdeling wys"</string>
@@ -3100,14 +3074,8 @@
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Wys kennisgewings as \'n banier boaan die skerm wanneer die toestel ontsluit is"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Alle \"<xliff:g id="APP_NAME">%1$s</xliff:g>\"-kennisgewings"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Alle <xliff:g id="APP_NAME">%1$s</xliff:g>-kennisgewings"</string>
-    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
-      <item quantity="other">Omtrent <xliff:g id="NUMBER_1">%,d</xliff:g> kennisgewings per dag</item>
-      <item quantity="one">Omtrent <xliff:g id="NUMBER_0">%d</xliff:g> kennisgewing per dag</item>
-    </plurals>
-    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
-      <item quantity="other">Omtrent <xliff:g id="NUMBER_1">%,d</xliff:g> kennisgewings per week</item>
-      <item quantity="one">Omtrent <xliff:g id="NUMBER_0">%d</xliff:g> kennisgewing per week</item>
-    </plurals>
+    <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{Omtrent # kennisgewing per dag}other{Omtrent # kennisgewings per dag}}"</string>
+    <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{Omtrent # kennisgewing per week}other{Omtrent # kennisgewings per week}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Nooit"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Toestel- en programkennisgewings"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Beheer watter programme en toestelle kennisgewings kan lees"</string>
@@ -3176,17 +3144,14 @@
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"Toestemmings"</string>
     <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"Hierdie program kan jou persoonlike <xliff:g id="NAME">%1$s</xliff:g>-program se toestemmings gebruik, soos toegang tot ligging, berging of kontakte."</string>
     <string name="interact_across_profiles_number_of_connected_apps_none" msgid="8573289199942092964">"Geen programme is gekoppel nie"</string>
-    <plurals name="interact_across_profiles_number_of_connected_apps" formatted="false" msgid="6991750455661974772">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> programme is gekoppel</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> program is gekoppel</item>
-    </plurals>
+    <string name="interact_across_profiles_number_of_connected_apps" msgid="4000424798291479207">"{count,plural, =1{# app is gekoppel}other{# apps is gekoppel}}"</string>
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"Om hierdie programme te skakel, moet jy <xliff:g id="NAME">%1$s</xliff:g> in jou werkprofiel installeer"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"Om hierdie programme te skakel, moet jy <xliff:g id="NAME">%1$s</xliff:g> in jou persoonlike profiel installeer"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Tik om die program te kry"</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Toegang tot Moenie Steur Nie"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Laat Moenie Steur Nie toe"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Geen geïnstalleerde programme het toegang tot Moenie Steur Nie versoek nie"</string>
-    <string name="app_notifications_off_desc" msgid="6691342160980435901">"Android keer tans op jou versoek dat hierdie program se kennisgewings op hierdie toestel verskyn"</string>
+    <string name="app_notifications_off_desc" msgid="2484843759466874201">"Jy het nie kennisgewings van hierdie app af toegelaat nie"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Android keer tans op jou versoek dat hierdie kategorie kennisgewings op hierdie toestel verskyn"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Android keer tans op jou versoek dat hierdie groep kennisgewings op hierdie toestel verskyn"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Hierdie app stuur nie kennisgewings nie"</string>
@@ -3194,10 +3159,7 @@
     <string name="notification_channels_other" msgid="18159805343647908">"Ander"</string>
     <string name="no_channels" msgid="4716199078612071915">"Hierdie program het nie enige kennisgewings geplaas nie"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Bykomende instellings in die program"</string>
-    <plurals name="deleted_channels" formatted="false" msgid="5963473421547029532">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> kategorieë is uitgevee</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> kategorie is uitgevee</item>
-    </plurals>
+    <string name="deleted_channels" msgid="8489800381509312964">"{count,plural, =1{# kategorie is uitgevee}other{# kategorieë is uitgevee}}"</string>
     <string name="app_notification_block_title" msgid="3880322745749900296">"Blokkeer almal"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Moet nooit hierdie kennisgewings wys nie"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Wys kennisgewings"</string>
@@ -3329,14 +3291,8 @@
     <string name="zen_mode_end_time" msgid="223502560367331706">"Eindtyd"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="419683704068360804">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> volgende dag"</string>
     <string name="zen_mode_summary_alarms_only_indefinite" msgid="910047326128154945">"Verander onbepaald na net wekkers"</string>
-    <plurals name="zen_mode_summary_alarms_only_by_minute" formatted="false" msgid="1900512966361163390">
-      <item quantity="other">Verander na net wekkers vir <xliff:g id="DURATION">%1$d</xliff:g> minute (tot <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="one">Verander na net wekkers vir een minuut tot <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
-    </plurals>
-    <plurals name="zen_mode_summary_alarms_only_by_hour" formatted="false" msgid="955991428001659124">
-      <item quantity="other">Verander na net wekkers vir <xliff:g id="DURATION">%1$d</xliff:g> uur tot <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="one">Verander na net wekkers vir een uur tot <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
-    </plurals>
+    <string name="zen_mode_summary_alarms_only_by_minute" msgid="6673649005494939311">"{count,plural, =1{Verandering aan wekkers vir slegs een minuut tot {time}}other{Verandering aan wekkers vir slegs # minute (tot {time})}}"</string>
+    <string name="zen_mode_summary_alarms_only_by_hour" msgid="7400910210950788163">"{count,plural, =1{Verandering aan wekkers vir slegs een uur tot {time}}other{Verandering aan wekkers vir slegs # uur tot {time}}}"</string>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Verander tot <xliff:g id="FORMATTEDTIME">%1$s</xliff:g> na net wekkers"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Verander na onderbreek altyd"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Waarskuwing"</string>
@@ -3353,31 +3309,25 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Vra wagwoord voordat jy ontspeld"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Sluit toestel wanneer jy ontspeld"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Bevestig dat SIM uitgevee word"</string>
-    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"Verifieer dat dit jy is voordat jy ’n e-SIM uitvee"</string>
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"Verifieer dat dit jy is voordat jy ’n e-SIM uitvee"</string>
+    <string name="memtag_title" msgid="5096176296797727201">"Gevorderde geheuebeskermingbeta"</string>
+    <string name="memtag_toggle" msgid="8695028758462939212">"Gevorderde geheuebeskerming"</string>
+    <string name="memtag_intro" msgid="579408691329568953">"Hierdie betakenmerk help jou om jou toestel te beskerm teen foute wat jou veiligheid kan bedreig."</string>
+    <string name="memtag_on" msgid="824938319141503923">"Aan"</string>
+    <string name="memtag_off" msgid="4835589640091709019">"Af"</string>
+    <string name="memtag_on_pending" msgid="1592053425431532361">"Aan ná herbegin"</string>
+    <string name="memtag_off_pending" msgid="1543177181383593726">"Af ná herbegin"</string>
+    <string name="memtag_force_off" msgid="1143468955988138470">"Tans onbeskikbaar vir jou toestel"</string>
+    <string name="memtag_force_on" msgid="3254349938627883664">"Altyd aan vir jou toestel"</string>
+    <string name="memtag_footer" msgid="8480784485124271376">"Jy sal jou toestel moet herbegin om gevorderde geheuebeskerming aan of af te skakel. Wanneer dit aan is, sal jy dalk opmerk dat jou toestel stadiger werk."</string>
+    <string name="memtag_reboot_title" msgid="1413471876903578769">"Herbegin toestel?"</string>
+    <string name="memtag_reboot_message_on" msgid="3270256606602439418">"Jy sal jou toestel moet herbegin om gevorderde geheuebeskerming aan te skakel."</string>
+    <string name="memtag_reboot_message_off" msgid="2567062468140476451">"Jy sal jou toestel moet herbegin om gevorderde geheuebeskerming af te skakel."</string>
+    <string name="memtag_reboot_yes" msgid="5788896350697141429">"Herbegin"</string>
+    <string name="memtag_reboot_no" msgid="2860671356184849330">"Nie nou nie"</string>
+    <string name="memtag_learn_more" msgid="1596145970669119776">"Kom meer te wete oor gevorderde geheuebeskerming."</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Hierdie werkprofiel word bestuur deur:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Bestuur deur <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
-    <string name="encryption_interstitial_header" msgid="4418014339568737685">"Begin veilig"</string>
-    <string name="encryption_interstitial_message_pin" msgid="1413575143234269985">"Jy kan hierdie toestel verder beskerm deur jou PIN te vereis voordat dit begin. Die toestel kan nie oproepe, boodskappe of kennisgewings, insluitend wekkers, ontvang voordat dit begin nie. \n\nDit help om data op verlore of gesteelde toestelle te beskerm. Vereis \'n PIN om jou toestel te begin?"</string>
-    <string name="encryption_interstitial_message_pattern" msgid="726550613252236854">"Jy kan hierdie toestel verder beskerm deur jou patroon te vereis voordat dit begin. Die toestel kan nie oproepe, boodskappe of kennisgewings, insluitend wekkers, ontvang voordat dit begin nie. \n\nDit help om data op verlore of gesteelde toestelle te beskerm. Vereis \'n patroon om jou toestel te begin?"</string>
-    <string name="encryption_interstitial_message_password" msgid="6051054565294909975">"Jy kan hierdie toestel verder beskerm deur jou wagwoord te vereis voordat dit begin. Die toestel kan nie oproepe, boodskappe of kennisgewings, insluitend wekkers, ontvang voordat dit begin nie. \n\nDit help om data op verlore of gesteelde toestelle te beskerm. Vereis \'n wagwoord om jou toestel te begin?"</string>
-    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="7152770518093102916">"Benewens die gebruik van jou vingerafdruk om jou toestel te ontsluit, kan jy hierdie toestel verder beskerm deur jou PIN te vereis voordat dit begin. Die toestel kan nie oproepe, boodskappe of kennisgewings, insluitend wekkers, ontvang voordat dit begin nie. \n\nDit help om data op verlore of gesteelde toestelle te beskerm. Vereis \'n PIN om jou toestel te begin?"</string>
-    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="6257856552043740490">"Benewens die gebruik van jou vingerafdruk om jou toestel te ontsluit, kan jy hierdie toestel verder beskerm deur jou patroon te vereis voordat dit begin. Die toestel kan nie oproepe, boodskappe of kennisgewings, insluitend wekkers, ontvang voordat dit begin nie. \n\nDit help om data op verlore of gesteelde toestelle te beskerm. Vereis \'n patroon om jou toestel te begin?"</string>
-    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="7710804822643612867">"Jy kan naas die gebruik van jou vingerafdruk om jou toestel te ontsluit, hierdie toestel verder beskerm deur jou wagwoord te vereis voordat dit begin. Die toestel kan nie oproepe, boodskappe of kennisgewings, insluitend wekkers, ontvang voordat dit begin nie.\n\nDit help om data op verlore of gesteelde toestelle te beskerm. Wil jy die wagwoord vereis om jou toestel te begin?"</string>
-    <string name="encryption_interstitial_message_pin_for_face" msgid="8577135499926738241">"Jy kan naas die gebruik van jou gesig om jou toestel te ontsluit hierdie toestel verder beskerm deur jou PIN te vereis voordat dit begin. Die toestel kan nie oproepe, boodskappe of kennisgewings, insluitend wekkers, ontvang voordat dit begin nie.\n\nDit help om data op verlore of gesteelde toestelle te beskerm. Wil jy die PIN vereis om jou toestel te begin?"</string>
-    <string name="encryption_interstitial_message_pattern_for_face" msgid="5851725964283239644">"Jy kan naas die gebruik van jou gesig om jou toestel te ontsluit hierdie toestel verder beskerm deur jou patroon te vereis voordat dit begin. Die toestel kan nie oproepe, boodskappe of kennisgewings, insluitend wekkers, ontvang voordat dit begin nie.\n\nDit help om data op verlore of gesteelde toestelle te beskerm. Wil jy die patroon vereis om jou toestel te begin?"</string>
-    <string name="encryption_interstitial_message_password_for_face" msgid="3553329272456428461">"Jy kan naas die gebruik van jou gesig om jou toestel te ontsluit hierdie toestel verder beskerm deur jou wagwoord te vereis voordat dit begin. Die toestel kan nie oproepe, boodskappe of kennisgewings, insluitend wekkers, ontvang voordat dit begin nie.\n\nDit help om data op verlore of gesteelde toestelle te beskerm. Wil jy die wagwoord vereis om jou toestel te begin?"</string>
-    <string name="encryption_interstitial_message_pin_for_biometrics" msgid="4590004045791674901">"Jy kan naas die gebruik van jou biometrie om jou toestel te ontsluit, hierdie toestel verder beskerm deur jou PIN te vereis voordat dit begin. Die toestel kan nie oproepe, boodskappe of kennisgewings, insluitend wekkers, ontvang voordat dit begin nie. \n\nDit help om data op verlore of gesteelde toestelle te beskerm. Vereis \'n PIN om jou toestel te begin?"</string>
-    <string name="encryption_interstitial_message_pattern_for_biometrics" msgid="2697768285995352576">"Jy kan naas die gebruik van jou biometrie om jou toestel te ontsluit, hierdie toestel verder beskerm deur jou patroon te vereis voordat dit begin. Die toestel kan nie oproepe, boodskappe of kennisgewings, insluitend wekkers, ontvang voordat dit begin nie.\n\nDit help om data op verlore of gesteelde toestelle te beskerm. Vereis patroon om jou toestel te begin?"</string>
-    <string name="encryption_interstitial_message_password_for_biometrics" msgid="1895561539964730123">"Jy kan naas die gebruik van jou biometrie om jou toestel te ontsluit, hierdie toestel verder beskerm deur jou wagwoord te vereis voordat dit begin. Die toestel kan nie oproepe, boodskappe of kennisgewings, insluitend wekkers, ontvang voordat dit begin nie.\n\nDit help om data op verlore of gesteelde toestelle te beskerm. Vereis \'n wagwoord om jou toestel te begin?"</string>
-    <string name="encryption_interstitial_yes" msgid="1948016725089728181">"Ja"</string>
-    <string name="encryption_interstitial_no" msgid="3352331535473118487">"Nee"</string>
-    <string name="encrypt_talkback_dialog_require_pin" msgid="8974156384205924887">"Vereis PIN?"</string>
-    <string name="encrypt_talkback_dialog_require_pattern" msgid="1587587568721873184">"Vereis patroon?"</string>
-    <string name="encrypt_talkback_dialog_require_password" msgid="2701793623210531836">"Vereis wagwoord?"</string>
-    <string name="encrypt_talkback_dialog_message_pin" msgid="4482887117824444481">"Wanneer jy jou PIN invoer om hierdie toestel te begin, sal toeganklikheiddienste soos <xliff:g id="SERVICE">%1$s</xliff:g> nog nie beskikbaar wees nie."</string>
-    <string name="encrypt_talkback_dialog_message_pattern" msgid="5156321541636018756">"Wanneer jy jou patroon invoer om hierdie toestel te begin, sal toeganklikheiddienste soos <xliff:g id="SERVICE">%1$s</xliff:g> nog nie beskikbaar wees nie."</string>
-    <string name="encrypt_talkback_dialog_message_password" msgid="1917287751192953034">"Wanneer jy jou wagwoord invoer om hierdie toestel te begin, sal toeganklikheiddienste soos <xliff:g id="SERVICE">%1$s</xliff:g> nog nie beskikbaar wees nie."</string>
-    <string name="direct_boot_unaware_dialog_message" msgid="5766006106305996844">"Let wel: As jy jou foon herbegin en \'n skermslot gestel het, kan hierdie program eers begin nadat jy jou foon ontsluit het"</string>
     <string name="launch_by_default" msgid="892824422067985734">"Maak by verstek oop"</string>
     <string name="app_launch_open_domain_urls_title" msgid="4805388403977096285">"Maak gesteunde skakels oop"</string>
     <string name="app_launch_top_intro_message" msgid="137370923637482459">"Laat toe dat webskakels in hierdie program oopmaak"</string>
@@ -3386,22 +3336,13 @@
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Ander verstekvoorkeure"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"Voeg skakel by"</string>
     <string name="app_launch_footer" msgid="4521865035105622557">"\'n Program kan skakels verifieer om outomaties in die program oop te maak."</string>
-    <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> geverifieerde skakels</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> geverifieerde skakel</item>
-    </plurals>
-    <plurals name="app_launch_verified_links_message" formatted="false" msgid="1209292155940482111">
-      <item quantity="other">Hierdie skakels is geverifieer en maak outomaties in hierdie program oop.</item>
-      <item quantity="one">Hierdie skakel is geverifieer en maak outomaties in hierdie program oop.</item>
-    </plurals>
+    <string name="app_launch_verified_links_title" msgid="621908751569155356">"{count,plural, =1{# geverifieerde skakel}other{# geverifieerde skakels}}"</string>
+    <string name="app_launch_verified_links_message" msgid="190871133877476176">"{count,plural, =1{Hierdie skakel is geverifieer en maak outomaties in hierdie app oop.}other{Hierdie skakels is geverifieer en maak outomaties in hierdie app oop.}}"</string>
     <string name="app_launch_dialog_ok" msgid="1446157681861409861">"OK"</string>
     <string name="app_launch_verified_links_info_description" msgid="7514750232467132117">"Wys lys verifikasieskakels"</string>
     <string name="app_launch_checking_links_title" msgid="6119228853554114201">"Soek tans vir ander gesteunde skakels …"</string>
     <string name="app_launch_dialog_cancel" msgid="6961071841814898663">"Kanselleer"</string>
-    <plurals name="app_launch_supported_links_title" formatted="false" msgid="8579323750839397568">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> gesteunde skakels</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> gesteunde skakel</item>
-    </plurals>
+    <string name="app_launch_supported_links_title" msgid="2457931321701095763">"{count,plural, =1{# gesteunde skakel}other{# gesteunde skakels}}"</string>
     <string name="app_launch_supported_links_add" msgid="3271247750388016131">"Voeg by"</string>
     <string name="app_launch_supported_links_subtext" msgid="4268004019469184113">"Maak oop in <xliff:g id="APP_LABEL">%s</xliff:g>"</string>
     <string name="storage_summary_format" msgid="5721782272185284276">"<xliff:g id="SIZE">%1$s</xliff:g> gebruik in <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
@@ -3413,24 +3354,15 @@
     <string name="change_storage" msgid="8773820275624113401">"Verander berging"</string>
     <string name="notifications_label" msgid="8471624476040164538">"Kennisgewings"</string>
     <string name="notifications_enabled_with_info" msgid="1808946629277684308">"<xliff:g id="NOTIFICATIONS_SENT">%1$s</xliff:g> / <xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%2$s</xliff:g>"</string>
-    <plurals name="notifications_categories_off" formatted="false" msgid="1385401442703692986">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> kategorieë is afgeskakel</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> kategorie is afgeskakel</item>
-    </plurals>
-    <plurals name="runtime_permissions_additional_count" formatted="false" msgid="5888624648943937645">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> bykomende toestemmings</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> bykomende toestemming</item>
-    </plurals>
+    <string name="notifications_categories_off" msgid="7712037485557237328">"{count,plural, =1{# kategorie is afgeskakel}other{# kategorieë is afgeskakel}}"</string>
+    <string name="runtime_permissions_additional_count" msgid="6071909675951786523">"{count,plural, =1{# bykomende toestemming}other{# bykomende toestemmings}}"</string>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Geen toestemmings is verleen nie"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Geen toestemmings is versoek nie"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Beheer apptoegang tot jou data"</string>
     <string name="permissions_usage_title" msgid="2942741460679049132">"Privaatheidkontroleskerm"</string>
     <string name="permissions_usage_summary" msgid="6784310472062516454">"Wys watter programme onlangs toestemmings gebruik het"</string>
     <string name="unused_apps" msgid="4566272194756830656">"Ongebruikte programme"</string>
-    <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ongebruikte programme</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ongebruikte program</item>
-    </plurals>
+    <string name="unused_apps_summary" msgid="4236371818881973021">"{count,plural, =1{# ongebruikte app}other{# ongebruikte apps}}"</string>
     <string name="unused_apps_category" msgid="8954930958175500851">"Ongebruikte programinstellings"</string>
     <string name="unused_apps_switch" msgid="7595419855882245772">"Onderbreek programaktiwiteit as ongebruik"</string>
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Verwyder toestemmings, vee tydelike lêers uit, en stop kennisgewings"</string>
@@ -3440,6 +3372,10 @@
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"Afgeskakel"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"Gevorderd"</string>
     <string name="app_permissions" msgid="8666537659217653626">"Toestemmingbestuurder"</string>
+    <!-- no translation found for app_data_sharing_updates_title (921888411974134089) -->
+    <skip />
+    <!-- no translation found for app_data_sharing_updates_summary (1500580254161164185) -->
+    <skip />
     <string name="tap_to_wake" msgid="3313433536261440068">"Tik om wakker te maak"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Dubbeltik enige plek op die skerm om die toestel wakker te maak"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Oopmaak van skakels"</string>
@@ -3449,10 +3385,7 @@
     <string name="app_link_open_always" msgid="9167065494930657503">"Laat program toe om gesteunde skakels oop te maak"</string>
     <string name="app_link_open_ask" msgid="2422450109908936371">"Vra elke keer"</string>
     <string name="app_link_open_never" msgid="5299808605386052350">"Moenie program toelaat om skakels oop te maak nie"</string>
-    <plurals name="app_link_open_always_summary" formatted="false" msgid="1816161439007251694">
-      <item quantity="other">Program beweer dat dit <xliff:g id="COUNT_1">%d</xliff:g> skakels hanteer</item>
-      <item quantity="one">Program beweer dat dit <xliff:g id="COUNT_0">%d</xliff:g> skakel hanteer</item>
-    </plurals>
+    <string name="app_link_open_always_summary" msgid="4524005594295855117">"{count,plural, =1{App beweer dat dit # skakel hanteer}other{App beweer dat dit # skakels hanteer}}"</string>
     <string name="open_supported_links_footer" msgid="3188808142432787933">"Program beweer dat dit die volgende skakels hanteer:"</string>
     <string name="assist_and_voice_input_title" msgid="6317935163145135914">"Bystand en steminvoer"</string>
     <string name="default_assist_title" msgid="1182435129627493758">"Digitaleassistentprogram"</string>
@@ -3539,10 +3472,7 @@
     <string name="average_used" msgid="690235917394070169">"Gemiddeld gebruik (%)"</string>
     <string name="free_memory" msgid="439783742246854785">"Beskikbaar"</string>
     <string name="memory_usage_apps" msgid="5776108502569850579">"Geheue wat deur programme gebruik word"</string>
-    <plurals name="memory_usage_apps_summary" formatted="false" msgid="1355637088533572208">
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> programme het geheue gebruik in die afgelope <xliff:g id="DURATION_1">%2$s</xliff:g></item>
-      <item quantity="one">1 program het geheue gebruik in die afgelope <xliff:g id="DURATION_0">%2$s</xliff:g></item>
-    </plurals>
+    <string name="memory_usage_apps_summary" msgid="7168292864155527974">"{count,plural, =1{1 app het geheue gebruik in die afgelope {time}}other{# apps het geheue gebruik in die afgelope {time}}}"</string>
     <string name="running_frequency" msgid="7260225121706316639">"Frekwensie"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Maksimum gebruik"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"Geen data is gebruik nie"</string>
@@ -3681,10 +3611,7 @@
     <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_1">%1$s</xliff:g> in <xliff:g id="ID_2">%2$s</xliff:g> gebruik"</string>
     <string name="configure" msgid="1499586749829665889">"Stel op"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"Ander programme wat by gebruik ingesluit is"</string>
-    <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="3316296488378947221">
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> programme word toegelaat om onbeperkte data te gebruik wanneer Databespaarder aan is</item>
-      <item quantity="one">1 program word toegelaat om onbeperkte data te gebruik wanneer Databespaarder aan is</item>
-    </plurals>
+    <string name="data_saver_unrestricted_summary" msgid="7343571401172437542">"{count,plural, =1{1 app word toegelaat om onbeperkte data te gebruik wanneer Databespaarder aan is}other{# apps word toegelaat om onbeperkte data te gebruik wanneer Databespaarder aan is}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"Primêre data"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Wi‑Fi-data"</string>
     <string name="data_used_formatted" msgid="7913920278059077938">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g> is gebruik"</string>
@@ -3692,10 +3619,7 @@
     <string name="data_remaining" msgid="6316251496381922837">"<xliff:g id="ID_1">^1</xliff:g> oor"</string>
     <string name="data_usage_chart_brief_content_description" msgid="5548074070258881530">"Grafiek wat datagebruik tussen <xliff:g id="START_DATE">%1$s</xliff:g> en <xliff:g id="END_DATE">%2$s</xliff:g> wys."</string>
     <string name="data_usage_chart_no_data_content_description" msgid="5481968839079467231">"Geen data in hierdie datumreeks nie"</string>
-    <plurals name="billing_cycle_days_left" formatted="false" msgid="661792524671718753">
-      <item quantity="other">%d dae oor</item>
-      <item quantity="one">%d dag oor</item>
-    </plurals>
+    <string name="billing_cycle_days_left" msgid="174337287346866400">"{count,plural, =1{# dag oor}other{# dae oor}}"</string>
     <string name="billing_cycle_none_left" msgid="1694844019159277504">"Geen tyd oor nie"</string>
     <string name="billing_cycle_less_than_one_day_left" msgid="1210202399053992163">"Minder as 1 dag oor"</string>
     <string name="carrier_and_update_text" msgid="5363656651921656280">"<xliff:g id="ID_2">^2</xliff:g> gelede opgedateer deur <xliff:g id="ID_1">^1</xliff:g>"</string>
@@ -3888,18 +3812,12 @@
     <string name="enterprise_privacy_none" msgid="6026527690979756431">"Geen"</string>
     <string name="enterprise_privacy_enterprise_installed_packages" msgid="9114143640515900082">"Programme is geïnstalleer"</string>
     <string name="enterprise_privacy_apps_count_estimation_info" msgid="7959907857710107792">"Aantal programme is geskat. Dit sluit dalk nie programme in wat buite die Play Winkel geïnstalleer is nie."</string>
-    <plurals name="enterprise_privacy_number_packages_lower_bound" formatted="false" msgid="5403847001419529018">
-      <item quantity="other">Minstens <xliff:g id="COUNT_1">%d</xliff:g> programme</item>
-      <item quantity="one">Minstens <xliff:g id="COUNT_0">%d</xliff:g> program</item>
-    </plurals>
+    <string name="enterprise_privacy_number_packages_lower_bound" msgid="5317634640873658149">"{count,plural, =1{Minimum # app}other{Minimum # apps}}"</string>
     <string name="enterprise_privacy_location_access" msgid="8023838718108456971">"Liggingtoestemmings"</string>
     <string name="enterprise_privacy_microphone_access" msgid="7242958026470143653">"Mikrofoontoestemmings"</string>
     <string name="enterprise_privacy_camera_access" msgid="7685460535880069016">"Kameratoestemmings"</string>
     <string name="enterprise_privacy_enterprise_set_default_apps" msgid="7498546659083996300">"Verstekprogramme"</string>
-    <plurals name="enterprise_privacy_number_packages" formatted="false" msgid="8568544906431825430">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> programme</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> program</item>
-    </plurals>
+    <string name="enterprise_privacy_number_packages" msgid="5294444005035188274">"{count,plural, =1{# app}other{# apps}}"</string>
     <string name="enterprise_privacy_input_method" msgid="3278314982700662246">"Versteksleutelbord"</string>
     <string name="enterprise_privacy_input_method_name" msgid="2974859490559054584">"Gestel na <xliff:g id="APP_LABEL">%s</xliff:g>"</string>
     <string name="enterprise_privacy_always_on_vpn_device" msgid="1735829327405126695">"Altyd-aan-VPN is aangeskakel"</string>
@@ -3909,18 +3827,12 @@
     <string name="enterprise_privacy_ca_certs_device" msgid="1816495877258727663">"Vertroude eiebewyse"</string>
     <string name="enterprise_privacy_ca_certs_personal" msgid="1516422660828485795">"Vertroude eiebewyse in jou persoonlike profiel"</string>
     <string name="enterprise_privacy_ca_certs_work" msgid="4318941788592655561">"Vertroude eiebewyse in jou werkprofiel"</string>
-    <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="6459725295322004179">
-      <item quantity="other">Minstens <xliff:g id="COUNT_1">%d</xliff:g> CA-sertifikate</item>
-      <item quantity="one">Minstens <xliff:g id="COUNT_0">%d</xliff:g> CA-sertifikaat</item>
-    </plurals>
+    <string name="enterprise_privacy_number_ca_certs" msgid="4540897122831942658">"{count,plural, =1{Minimum # CA-sertifikaat}other{Minimum # CA-sertifikate}}"</string>
     <string name="enterprise_privacy_lock_device" msgid="464054894363899866">"Die administrateur kan die toestel sluit en die wagwoord terugstel"</string>
     <string name="enterprise_privacy_wipe_device" msgid="869589182352244591">"Die administrateur kan alle toesteldata uitvee"</string>
     <string name="enterprise_privacy_failed_password_wipe_device" msgid="7045164901334821226">"Mislukte wagwoordpogings voordat alle toesteldata uitgevee word"</string>
     <string name="enterprise_privacy_failed_password_wipe_work" msgid="2537582942554484170">"Mislukte wagwoordpogings voordat alle werkprofieldata uitgevee word"</string>
-    <plurals name="enterprise_privacy_number_failed_password_wipe" formatted="false" msgid="8811973918944217791">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> pogings</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> poging</item>
-    </plurals>
+    <string name="enterprise_privacy_number_failed_password_wipe" msgid="2695842143305867642">"{count,plural, =1{# poging}other{# pogings}}"</string>
     <string name="do_disclosure_generic" msgid="3067459392402324538">"Hierdie toestel word deur jou organisasie bestuur."</string>
     <string name="do_disclosure_with_name" msgid="867544298924410766">"Hierdie toestel word deur <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> bestuur."</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
@@ -3948,21 +3860,12 @@
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Nadat jy die volle bedrag betaal het:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Word alle beperkings van die toestel af verwyder"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Kan jy die krediteurprogram deïnstalleer"</string>
-    <plurals name="default_camera_app_title" formatted="false" msgid="8112432929729136399">
-      <item quantity="other">Kameraprogramme</item>
-      <item quantity="one">Kameraprogram</item>
-    </plurals>
+    <string name="default_camera_app_title" msgid="6546248868519965998">"{count,plural, =1{Kamera-app}other{Kamera-apps}}"</string>
     <string name="default_calendar_app_title" msgid="1870095225089706093">"Kalenderprogram"</string>
     <string name="default_contacts_app_title" msgid="7740028900741944569">"Kontakteprogram"</string>
-    <plurals name="default_email_app_title" formatted="false" msgid="8338194872609410234">
-      <item quantity="other">E-poskliëntprogramme</item>
-      <item quantity="one">E-poskliëntprogram</item>
-    </plurals>
+    <string name="default_email_app_title" msgid="5411280873093244250">"{count,plural, =1{E-poskliëntapp}other{E-poskliëntapps}}"</string>
     <string name="default_map_app_title" msgid="7569231732944853320">"Kaartprogram"</string>
-    <plurals name="default_phone_app_title" formatted="false" msgid="4222188821845826493">
-      <item quantity="other">Foonprogramme</item>
-      <item quantity="one">Foonprogram</item>
-    </plurals>
+    <string name="default_phone_app_title" msgid="795025972645464135">"{count,plural, =1{Foonapp}other{Foonapps}}"</string>
     <string name="app_names_concatenation_template_2" msgid="8320181646458855457">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>, <xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>"</string>
     <string name="app_names_concatenation_template_3" msgid="7019703249717854148">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>, <xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>, <xliff:g id="THIRD_APP_NAME">%3$s</xliff:g>"</string>
     <string name="storage_default_internal_storage" msgid="4055660218818688131">"Hierdie toestel"</string>
@@ -3971,7 +3874,7 @@
     <string name="storage_images" msgid="2055893015567979387">"Prente"</string>
     <string name="storage_videos" msgid="6117698226447251033">"Video\'s"</string>
     <string name="storage_audio" msgid="5994664984472140386">"Oudio"</string>
-    <string name="storage_apps" msgid="3564291603258795216">"Programme"</string>
+    <string name="storage_apps" msgid="3564291603258795216">"Apps"</string>
     <string name="storage_documents_and_other" msgid="3293689243732236480">"Dokumente en ander"</string>
     <string name="storage_system" msgid="8472410119822911844">"Stelsel"</string>
     <string name="storage_trash" msgid="2807138998886084856">"Asblik"</string>
@@ -3989,13 +3892,18 @@
     <string name="webview_uninstalled_for_user" msgid="627352948986275488">"(gedeïnstalleer vir gebruiker <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="webview_disabled_for_user" msgid="5809886172032644498">"(gedeaktiveer vir gebruiker <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="autofill_app" msgid="7595308061826307921">"Outovuldiens"</string>
+    <string name="default_autofill_app" msgid="372234803718251606">"Verstekoutovuldiens"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Wagwoorde"</string>
-    <plurals name="autofill_passwords_count" formatted="false" msgid="7715009165029452622">
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> wagwoorde</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> wagwoord</item>
-    </plurals>
+    <string name="credman_credentials" msgid="5937331545565783811">"Wagwoord- en identiteitdienste"</string>
+    <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# wagwoord}other{# wagwoorde}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"outomaties, invul, outovul, wagwoord"</string>
+    <string name="credman_keywords" msgid="7236954350284379264">"eiebewyse, wagwoordsleutel, wagwoord"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Maak seker dat jy hierdie program vertrou&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Outovul&gt;%1$s&lt;/xliff:g&gt; gebruik wat op jou skerm is om te bepaal wat outomaties ingevul kan word."</string>
+    <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Skakel %1$s af?"</string>
+    <string name="credman_confirmation_message" msgid="1485617504425237430">"Gestoorde inligting, soos adresse of betaalmetodes, sal nie ingevul word wanneer jy aanmeld nie. Stel ’n verstekoutovuldiens om aan te hou om jou gestoorde inligting te laat invul."</string>
+    <string name="credman_error_message_title" msgid="5108868200002966901">"Limiet vir wagwoord- en identiteitdienste"</string>
+    <string name="credman_error_message" msgid="4058425433345908579">"Jy kan tot 5 outovul- en wagwoorddienste tegelyk aktief hê. Skakel ’n diens af om meer by te voeg."</string>
+    <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"Skakel af"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"Outovul"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"Aantekeningvlak"</string>
     <string name="autofill_max_partitions" msgid="7342195529574406366">"Maksimum aantal versoeke per sessie"</string>
@@ -4146,7 +4054,7 @@
     <string name="mobile_data_active" msgid="8683694456401350210">"Mobiele data aktief"</string>
     <string name="mobile_data_off" msgid="2702029611959308269">"Mobiele data af"</string>
     <string name="subscription_available" msgid="2659722770210403365">"Beskikbaar"</string>
-    <string name="mobile_network_list_add_more" msgid="4478586073355236604">"Voeg nog by"</string>
+    <string name="mobile_network_list_add_more" msgid="5076722903436552813">"Voeg SIM by"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"Aktief / SIM"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"Onaktief / SIM"</string>
     <string name="mobile_network_active_esim" msgid="3984452275968408382">"Aktief/e-SIM"</string>
@@ -4178,6 +4086,7 @@
     <string name="mobile_data_usage_title" msgid="2047864499317759728">"Programdatagebruik"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Ongeldige netwerkmodus <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignoreer."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Toegangspuntname"</string>
+    <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Onbeskikbaar wanneer gekoppel aan <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"Sien meer"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"Skakel <xliff:g id="CARRIER_NAME">%1$s</xliff:g> aan?"</string>
@@ -4267,10 +4176,7 @@
     <string name="copyable_slice_toast" msgid="1008251852798990606">"<xliff:g id="COPY_CONTENT">%1$s</xliff:g> is na knipbord gekopieer."</string>
     <string name="search_bar_account_avatar_content_description" msgid="880523277036898350"></string>
     <string name="accessibility_usage_title" msgid="9190967143518779145">"Toeganklikheidgebruik"</string>
-    <plurals name="accessibility_usage_summary" formatted="false" msgid="6910643986958263005">
-      <item quantity="other"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> programme het volle toegang tot jou toestel</item>
-      <item quantity="one">1 program het volle toegang tot jou toestel</item>
-    </plurals>
+    <string name="accessibility_usage_summary" msgid="4348285359995227813">"{count,plural, =1{1 app het volle toegang tot jou toestel}other{# apps het volle toegang tot jou toestel}}"</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"Belangrike inligting"</string>
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"GAAN VOORT"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"NEE, DANKIE"</string>
@@ -4310,6 +4216,7 @@
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Persoonlik"</string>
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"Werk"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Stelselverstek"</string>
+    <string name="default_app_none" msgid="5420632042222036264">"Geen"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Hierdie keuse is nie meer geldig nie. Probeer weer."</string>
     <string name="power_menu_setting_name" msgid="2394440932633137229">"Druk en hou aan/af-skakelaar"</string>
     <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Druk en hou aan/af-skakelaar om toegang te kry"</string>
@@ -4335,7 +4242,7 @@
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Skakel eers \"Wys toestelkontroles\" aan as jy wil gebruik"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Wys dubbellynhorlosie as dit beskikbaar is"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Dubbellynhorlosie"</string>
-    <string name="lockscreen_quick_affordances_title" msgid="435869403114245620">"Knoppies"</string>
+    <string name="lockscreen_quick_affordances_title" msgid="8615741551327565793">"Kortpaaie"</string>
     <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
       <item quantity="other"><xliff:g id="FIRST_1">%1$s</xliff:g>, <xliff:g id="SECOND">%2$s</xliff:g></item>
       <item quantity="one"><xliff:g id="FIRST_0">%1$s</xliff:g></item>
@@ -4454,6 +4361,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"Laat 2G toe"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G is minder veilig, maar kan jou verbinding in sekere liggings verbeter. 2G word altyd toegelaat vir noodoproepe."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> vereis 2G om beskikbaar te wees"</string>
+    <string name="allow_null_algorithms_title" msgid="9143076634352979096">"Laat minder veilige verbinding toe"</string>
+    <string name="allow_null_algorithms_summary" msgid="5874570357011783211">"Kan jou verbinding in sekere liggings verbeter. Minder veiliger verbindings word altyd vir noodoproepe toegelaat."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Alle dienste"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Wys knipbordtoegang"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Wys \'n boodskap wanneer programme toegang het tot teks, prente of ander inhoud wat jy gekopieer het"</string>
@@ -4543,10 +4452,8 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Stel netwerkbandwydte se binnedringingkoerslimiet op wat op alle netwerke wat \'n internetverbinding verskaf, toegepas word."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Stel netwerkaflaaikoerslimiet op"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Geen limiet nie"</string>
-    <!-- no translation found for disable_phantom_process_monitor_title (8348108346706188771) -->
-    <skip />
-    <!-- no translation found for disable_phantom_process_monitor_summary (3044464635550256985) -->
-    <skip />
+    <string name="disable_phantom_process_monitor_title" msgid="8348108346706188771">"Deaktiveer kindprosesbeperkings"</string>
+    <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"Deaktiveer beperkings op die stelselhulpbrongebruik van die app se kindprosesse"</string>
     <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Saai uit"</string>
     <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"Saai <xliff:g id="CURRENTAPP">%1$s</xliff:g> uit"</string>
     <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Luister na uitsendings wat in jou omtrek speel"</string>
@@ -4561,4 +4468,14 @@
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Verkeerde wagwoord"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Plaas die QR-kode hieronder in die middel om te begin luister"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR-kode is nie ’n geldige formaat nie"</string>
+    <string name="convert_to_esim_title" msgid="71037864129009206">"Skakel om na e-SIM"</string>
+    <string name="transfer_esim_to_another_device_title" msgid="5286117866086383192">"Dra e-SIM oor na ’n ander toestel"</string>
+    <string name="background_install_preference_summary" msgid="3065219346519340364">"{count,plural, =1{# app}other{# apps}}"</string>
+    <string name="background_install_title" msgid="607913515188276168">"Apps wat op die agtergrond geïnstalleer is"</string>
+    <string name="background_install_summary" msgid="3890296129543309666">"Jou toestelvervaardiger kan apps op die agtergrond op jou toestel installeer, of jou diensverskaffer en ander vennote toelaat om dit te doen.\n\nEnige apps wat hier gelys word, word nie vir jou toestel se normale werking benodig nie. Jy kan apps wat jy nie wil hê nie, deïnstalleer."</string>
+    <string name="background_install_feature_list_no_entry" msgid="2071343281272266154">"Geen apps is op die agtergrond geïnstalleer nie"</string>
+    <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Deïnstalleer app"</string>
+    <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Apps wat in die afgelope # maand geïnstalleer is}other{Apps wat in die afgelope # maande geïnstalleer is}}"</string>
+    <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Apps wat meer as # maand gelede geïnstalleer is}other{Apps wat meer as # maande gelede geïnstalleer is}}"</string>
+    <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Vingerafdruksensor"</string>
 </resources>

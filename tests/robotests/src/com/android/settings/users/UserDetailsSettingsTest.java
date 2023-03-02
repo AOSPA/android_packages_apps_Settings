@@ -22,6 +22,7 @@ import static android.os.UserManager.SWITCHABILITY_STATUS_USER_SWITCH_DISALLOWED
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -84,6 +85,7 @@ import java.util.List;
 })
 public class UserDetailsSettingsTest {
 
+    private static final String KEY_GRANT_ADMIN = "user_grant_admin";
     private static final String KEY_SWITCH_USER = "switch_user";
     private static final String KEY_ENABLE_TELEPHONY = "enable_calling";
     private static final String KEY_REMOVE_USER = "remove_user";
@@ -91,6 +93,7 @@ public class UserDetailsSettingsTest {
     private static final String KEY_APP_COPYING = "app_copying";
 
     private static final int DIALOG_CONFIRM_REMOVE = 1;
+    private static final int DIALOG_CONFIRM_RESET_GUEST = 4;
 
     @Mock
     private TelephonyManager mTelephonyManager;
@@ -101,6 +104,8 @@ public class UserDetailsSettingsTest {
     private RestrictedPreference mSwitchUserPref;
     @Mock
     private SwitchPreference mPhonePref;
+    @Mock
+    private SwitchPreference mGrantAdminPref;
     @Mock
     private Preference mRemoveUserPref;
     @Mock
@@ -143,6 +148,7 @@ public class UserDetailsSettingsTest {
         doReturn(mock(PreferenceScreen.class)).when(mFragment).getPreferenceScreen();
 
         doReturn(mSwitchUserPref).when(mFragment).findPreference(KEY_SWITCH_USER);
+        doReturn(mGrantAdminPref).when(mFragment).findPreference(KEY_GRANT_ADMIN);
         doReturn(mPhonePref).when(mFragment).findPreference(KEY_ENABLE_TELEPHONY);
         doReturn(mRemoveUserPref).when(mFragment).findPreference(KEY_REMOVE_USER);
         doReturn(mAppAndContentAccessPref)
@@ -469,8 +475,24 @@ public class UserDetailsSettingsTest {
         mFragment.onPreferenceClick(mSwitchUserPref);
 
         verify(mFragment).switchUser();
-        verify(mMetricsFeatureProvider, never()).action(any(),
-                eq(SettingsEnums.ACTION_SWITCH_TO_GUEST));
+        verify(mMetricsFeatureProvider).action(any(),
+                eq(SettingsEnums.ACTION_SWITCH_TO_USER));
+    }
+
+    @Test
+    public void onPreferenceClick_switchToRestrictedClicked_canSwitch_shouldSwitch() {
+        setupSelectedRestrictedUser();
+        mUserManager.setSwitchabilityStatus(SWITCHABILITY_STATUS_OK);
+        mFragment.mSwitchUserPref = mSwitchUserPref;
+        mFragment.mRemoveUserPref = mRemoveUserPref;
+        mFragment.mAppAndContentAccessPref = mAppAndContentAccessPref;
+        mFragment.mUserInfo = mUserInfo;
+
+        mFragment.onPreferenceClick(mSwitchUserPref);
+
+        verify(mFragment).switchUser();
+        verify(mMetricsFeatureProvider).action(any(),
+                eq(SettingsEnums.ACTION_SWITCH_TO_RESTRICTED_USER));
     }
 
     @Test
@@ -503,6 +525,41 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
+    public void onPreferenceClick_removeGuestClicked_canDelete_shouldShowDialog() {
+        setupSelectedGuest();
+        mFragment.mUserInfo = mUserInfo;
+        mUserManager.setIsAdminUser(true);
+        mFragment.mSwitchUserPref = mSwitchUserPref;
+        mFragment.mRemoveUserPref = mRemoveUserPref;
+        mFragment.mAppAndContentAccessPref = mAppAndContentAccessPref;
+        doNothing().when(mFragment).showDialog(anyInt());
+
+        mFragment.onPreferenceClick(mRemoveUserPref);
+
+        verify(mMetricsFeatureProvider).action(any(), eq(SettingsEnums.ACTION_REMOVE_GUEST_USER));
+        verify(mFragment).canDeleteUser();
+        verify(mFragment).showDialog(DIALOG_CONFIRM_RESET_GUEST);
+    }
+
+    @Test
+    public void onPreferenceClick_removeRestrictedClicked_canDelete_shouldShowDialog() {
+        setupSelectedRestrictedUser();
+        mFragment.mUserInfo = mUserInfo;
+        mUserManager.setIsAdminUser(true);
+        mFragment.mSwitchUserPref = mSwitchUserPref;
+        mFragment.mRemoveUserPref = mRemoveUserPref;
+        mFragment.mAppAndContentAccessPref = mAppAndContentAccessPref;
+        doNothing().when(mFragment).showDialog(anyInt());
+
+        mFragment.onPreferenceClick(mRemoveUserPref);
+
+        verify(mMetricsFeatureProvider)
+                .action(any(), eq(SettingsEnums.ACTION_REMOVE_RESTRICTED_USER));
+        verify(mFragment).canDeleteUser();
+        verify(mFragment).showDialog(DIALOG_CONFIRM_REMOVE);
+    }
+
+    @Test
     public void onPreferenceClick_removeClicked_canDelete_shouldShowDialog() {
         setupSelectedUser();
         mFragment.mUserInfo = mUserInfo;
@@ -514,6 +571,7 @@ public class UserDetailsSettingsTest {
 
         mFragment.onPreferenceClick(mRemoveUserPref);
 
+        verify(mMetricsFeatureProvider).action(any(), eq(SettingsEnums.ACTION_REMOVE_USER));
         verify(mFragment).canDeleteUser();
         verify(mFragment).showDialog(DIALOG_CONFIRM_REMOVE);
     }
@@ -623,6 +681,48 @@ public class UserDetailsSettingsTest {
         boolean result = mFragment.canDeleteUser();
 
         assertThat(result).isFalse();
+    }
+
+    @Test
+    public void initialize_userSelected_shouldShowGrantAdminPref_MultipleAdminEnabled() {
+        setupSelectedUser();
+        ShadowUserManager.setIsMultipleAdminEnabled(true);
+        mFragment.initialize(mActivity, mArguments);
+        assertTrue(UserManager.isMultipleAdminEnabled());
+        verify(mFragment, never()).removePreference(KEY_GRANT_ADMIN);
+    }
+
+    @Test
+    public void initialize_userSelected_shouldNotShowGrantAdminPref() {
+        setupSelectedUser();
+        mFragment.initialize(mActivity, mArguments);
+        verify(mFragment).removePreference(KEY_GRANT_ADMIN);
+    }
+
+    @Test
+    public void initialize_restrictUserSelected_shouldNotShowGrantAdminPref_MultipleAdminEnabled() {
+        setupSelectedUser();
+        ShadowUserManager.setIsMultipleAdminEnabled(true);
+        mUserManager.setUserRestriction(mUserInfo.getUserHandle(),
+                UserManager.DISALLOW_GRANT_ADMIN, true);
+        mFragment.initialize(mActivity, mArguments);
+        verify(mFragment).removePreference(KEY_GRANT_ADMIN);
+    }
+
+    @Test
+    public void initialize_mainUserSelected_shouldShowGrantAdminPref_MultipleAdminEnabled() {
+        setupSelectedMainUser();
+        ShadowUserManager.setIsMultipleAdminEnabled(true);
+        mFragment.initialize(mActivity, mArguments);
+        verify(mFragment).removePreference(KEY_GRANT_ADMIN);
+    }
+
+    @Test
+    public void initialize_guestSelected_shouldNotShowGrantAdminPref_MultipleAdminEnabled() {
+        setupSelectedGuest();
+        ShadowUserManager.setIsMultipleAdminEnabled(true);
+        mFragment.initialize(mActivity, mArguments);
+        verify(mFragment).removePreference(KEY_GRANT_ADMIN);
     }
 
     private void setupSelectedUser() {

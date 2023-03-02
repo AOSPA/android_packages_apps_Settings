@@ -57,6 +57,7 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settings.network.SubscriptionUtil;
+import com.android.settingslib.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -280,7 +281,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
             final SubscriptionInfo subInfo = getVisibleSubscriptionInfoForSimSlotIndex(i);
             if (subInfo != null) {
                 final int slot = subInfo.getSimSlotIndex();
-                if (mSubscriptionManager.getSimStateForSlotIndex(slot) !=
+                if (mTelephonyManager.getSimStateForSlotIndex(slot) !=
                         TelephonyManager.SIM_STATE_NOT_READY) {
                     componenterList.add(subInfo);
                 }
@@ -685,9 +686,8 @@ public class IccLockSettings extends SettingsPreferenceFragment
         } else if (attemptsRemaining == 1) {
             displayMessage = mRes.getString(R.string.wrong_pin_code_one, attemptsRemaining);
         } else if (attemptsRemaining > 1) {
-            displayMessage = mRes
-                    .getQuantityString(R.plurals.wrong_pin_code, attemptsRemaining,
-                            attemptsRemaining);
+            displayMessage = StringUtil.getIcuPluralsString(getPrefContext(), attemptsRemaining,
+                    R.string.wrong_pin_code);
         } else {
             displayMessage = mRes.getString(R.string.pin_failed);
         }

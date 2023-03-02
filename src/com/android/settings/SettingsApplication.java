@@ -25,6 +25,7 @@ import android.util.FeatureFlagUtils;
 import androidx.window.embedding.SplitController;
 
 import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
+import com.android.settings.core.instrumentation.ElapsedTimeUtils;
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.spa.SettingsSpaEnvironment;
 import com.android.settingslib.applications.AppIconCacheManager;
@@ -42,6 +43,11 @@ public class SettingsApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        // Add null checking to avoid test case failed.
+        if (getApplicationContext() != null) {
+            ElapsedTimeUtils.assignSuwFinishedTimeStamp(getApplicationContext());
+        }
 
         // Set Spa environment.
         setSpaEnvironment();
@@ -73,9 +79,9 @@ public class SettingsApplication extends Application {
     }
 
     @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        AppIconCacheManager.getInstance().release();
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+        AppIconCacheManager.getInstance().trimMemory(level);
     }
 
     private class DeviceProvisionedObserver extends ContentObserver {

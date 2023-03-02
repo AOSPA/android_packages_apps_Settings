@@ -16,11 +16,14 @@
 
 package com.android.settings.applications.manageapplications;
 
+import static android.util.FeatureFlagUtils.SETTINGS_ENABLE_SPA;
+
 import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING;
 import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
 
 import static com.android.internal.jank.InteractionJankMonitor.CUJ_SETTINGS_PAGE_SCROLL;
 import static com.android.settings.ChangeIds.CHANGE_RESTRICT_SAW_INTENT;
+import static com.android.settings.Utils.PROPERTY_DELETE_ALL_APP_CLONES_ENABLED;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_ALL;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_BATTERY_OPTIMIZED;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_BATTERY_RESTRICTED;
@@ -46,6 +49,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageItemInfo;
+import android.content.pm.UserInfo;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -53,14 +57,17 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
+import android.os.IUserManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.PreferenceFrameLayout;
+import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArraySet;
+import android.util.FeatureFlagUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -76,6 +83,7 @@ import android.widget.Filter;
 import android.widget.FrameLayout;
 import android.widget.SearchView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -144,6 +152,8 @@ import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.app.AppNotificationSettings;
 import com.android.settings.spa.SpaActivity;
+import com.android.settings.spa.app.appinfo.AppInfoSettingsProvider;
+import com.android.settings.spa.app.appinfo.CloneAppInfoSettingsProvider;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settings.wifi.AppStateChangeWifiStateBridge;
 import com.android.settings.wifi.ChangeWifiStateDetails;
@@ -236,6 +246,7 @@ public class ManageApplications extends InstrumentedFragment
 
     private Menu mOptionsMenu;
 
+    public static final int LIST_TYPE_NONE = -1;
     public static final int LIST_TYPE_MAIN = 0;
     public static final int LIST_TYPE_NOTIFICATION = 1;
     public static final int LIST_TYPE_STORAGE = 3;
@@ -702,6 +713,20 @@ public class ManageApplications extends InstrumentedFragment
                 startAppInfoFragment(LongBackgroundTasksDetails.class,
                         R.string.long_background_tasks_label);
                 break;
+            case LIST_TYPE_CLONED_APPS:
+                if (!FeatureFlagUtils.isEnabled(getContext(), SETTINGS_ENABLE_SPA)) {
+                    return;
+                }
+                int userId = UserHandle.getUserId(mCurrentUid);
+                UserInfo userInfo = mUserManager.getUserInfo(userId);
+                if (userInfo != null && !userInfo.isCloneProfile()) {
+                    SpaActivity.startSpaActivity(getContext(), CloneAppInfoSettingsProvider.INSTANCE
+                            .getRoute(mCurrentPkgName, userId));
+                } else {
+                    SpaActivity.startSpaActivity(getContext(), AppInfoSettingsProvider.INSTANCE
+                            .getRoute(mCurrentPkgName, userId));
+                }
+                break;
             // TODO: Figure out if there is a way where we can spin up the profile's settings
             // process ahead of time, to avoid a long load of data when user clicks on a managed
             // app. Maybe when they load the list of apps that contains managed profile apps.
@@ -830,6 +855,11 @@ public class ManageApplications extends InstrumentedFragment
         if (searchItem != null) {
             searchItem.setVisible(false);
         }
+
+        mOptionsMenu.findItem(R.id.delete_all_app_clones)
+                .setVisible(mListType == LIST_TYPE_CLONED_APPS  && DeviceConfig.getBoolean(
+                        DeviceConfig.NAMESPACE_APP_CLONING, PROPERTY_DELETE_ALL_APP_CLONES_ENABLED,
+                false) && Utils.getCloneUserId(getContext()) != -1);
     }
 
     @Override
@@ -870,6 +900,24 @@ public class ManageApplications extends InstrumentedFragment
                 startActivityForResult(intent, ADVANCED_SETTINGS);
             }
             return true;
+        } else if (i == R.id.delete_all_app_clones) {
+            int clonedUserId = Utils.getCloneUserId(getContext());
+            if (clonedUserId == -1) {
+                // No Apps Cloned Till now. Do Nothing.
+                return false;
+            }
+            IUserManager um = IUserManager.Stub.asInterface(
+                    ServiceManager.getService(Context.USER_SERVICE));
+            try {
+                // Warning: This removes all the data, media & images present in cloned user.
+                um.removeUser(clonedUserId);
+                mApplications.rebuild();
+            } catch (RemoteException e) {
+                Log.e(TAG, "Failed to remove cloned apps", e);
+                Toast.makeText(getContext(),
+                        getContext().getString(R.string.delete_all_app_clones_failure),
+                        Toast.LENGTH_LONG).show();
+            }
         } else {// Handle the home button
             return false;
         }
@@ -1324,17 +1372,20 @@ public class ManageApplications extends InstrumentedFragment
                 view = ApplicationViewHolder.newHeader(parent,
                         R.string.desc_app_locale_selection_supported);
             } else if (mManageApplications.mListType == LIST_TYPE_NOTIFICATION) {
-                view = ApplicationViewHolder.newView(parent, true /* twoTarget */);
+                view = ApplicationViewHolder.newView(parent, true /* twoTarget */,
+                        LIST_TYPE_NOTIFICATION);
             } else if (mManageApplications.mListType == LIST_TYPE_CLONED_APPS
                     && viewType == VIEW_TYPE_APP_HEADER) {
-                view = ApplicationViewHolder.newHeader(parent,
-                        R.string.desc_cloned_apps_intro_text);
+                view = ApplicationViewHolder.newHeaderWithAnimation(mContext, parent,
+                        R.string.desc_cloned_apps_intro_text, R.raw.app_cloning,
+                        R.string.desc_cloneable_app_list_text);
             } else if (mManageApplications.mListType == LIST_TYPE_CLONED_APPS
                     && viewType == VIEW_TYPE_TWO_TARGET) {
                 view = ApplicationViewHolder.newView(
-                        parent, true, LIST_TYPE_CLONED_APPS, mContext);
+                        parent, true, LIST_TYPE_CLONED_APPS);
             } else {
-                view = ApplicationViewHolder.newView(parent, false /* twoTarget */);
+                view = ApplicationViewHolder.newView(parent, false /* twoTarget */,
+                        mManageApplications.mListType);
             }
             return new ApplicationViewHolder(view);
         }
@@ -1781,7 +1832,9 @@ public class ManageApplications extends InstrumentedFragment
                     }
                     break;
                 case LIST_TYPE_CLONED_APPS:
-                    //todo(b/259022623): Attach onClick listener here.
+                    holder.updateAppCloneWidget(mContext,
+                            holder.appCloneOnClickListener(entry, this,
+                                    mManageApplications.getActivity()), entry);
                     break;
             }
         }

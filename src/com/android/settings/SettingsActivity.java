@@ -441,6 +441,7 @@ public class SettingsActivity extends SettingsBaseActivity
 
         trampolineIntent.putExtra(EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY,
                 highlightMenuKey);
+        trampolineIntent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
         return trampolineIntent;
     }
 
@@ -573,6 +574,11 @@ public class SettingsActivity extends SettingsBaseActivity
     @VisibleForTesting
     void launchSettingFragment(String initialFragmentName, Intent intent) {
         if (initialFragmentName != null) {
+            if (SettingsActivityUtil.launchSpaActivity(this, initialFragmentName, intent)) {
+                finish();
+                return;
+            }
+
             setTitleFromIntent(intent);
 
             Bundle initialArguments = intent.getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);

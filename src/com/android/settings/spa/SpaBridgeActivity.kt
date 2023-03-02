@@ -33,17 +33,17 @@ class SpaBridgeActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getDestination()?.let { destination ->
-            startSpaActivity(this, destination)
+            startSpaActivity(destination)
         }
         finish()
     }
 
-    private fun getDestination(): String? =
-        packageManager.getActivityInfo(
-            componentName, ComponentInfoFlags.of(PackageManager.GET_META_DATA.toLong())
-        ).metaData.getString(META_DATA_KEY_DESTINATION)
-
     companion object {
+        fun Activity.getDestination(): String? =
+            packageManager.getActivityInfo(
+                componentName, ComponentInfoFlags.of(PackageManager.GET_META_DATA.toLong())
+            ).metaData.getString(META_DATA_KEY_DESTINATION)
+
         private const val META_DATA_KEY_DESTINATION = "com.android.settings.spa.DESTINATION"
     }
 }

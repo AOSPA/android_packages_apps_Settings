@@ -94,6 +94,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     private static final String KEY_CALLS_PREF = "calls_preference";
     private static final String KEY_SMS_PREF = "sms_preference";
     private static final String KEY_MOBILE_DATA_PREF = "mobile_data_enable";
+    private static final String KEY_CONVERT_TO_ESIM_PREF = "convert_to_esim";
 
     // UICC provisioning status
     public static final int CARD_NOT_PROVISIONED = 0;
@@ -200,6 +201,8 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 new SmsDefaultSubscriptionController(context, KEY_SMS_PREF, getSettingsLifecycle(),
                         this),
                 new MobileDataPreferenceController(context, KEY_MOBILE_DATA_PREF,
+                        getSettingsLifecycle(), this, mSubId),
+                new ConvertToEsimPreferenceController(context, KEY_CONVERT_TO_ESIM_PREF,
                         getSettingsLifecycle(), this, mSubId));
     }
 
@@ -307,6 +310,11 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
         final VideoCallingPreferenceController videoCallingPreferenceController =
                 use(VideoCallingPreferenceController.class).init(mSubId);
+        final BackupCallingPreferenceController crossSimCallingPreferenceController =
+                use(BackupCallingPreferenceController.class).init(getFragmentManager(), mSubId);
+        use(CallingPreferenceCategoryController.class).setChildren(
+                Arrays.asList(wifiCallingPreferenceController, videoCallingPreferenceController,
+                        crossSimCallingPreferenceController));
         use(Enabled5GPreferenceController.class).init(mSubId);
         use(Enhanced4gLtePreferenceController.class).init(mSubId)
                 .addListener(videoCallingPreferenceController);
@@ -316,6 +324,8 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 .addListener(videoCallingPreferenceController);
         use(ContactDiscoveryPreferenceController.class).init(getParentFragmentManager(), mSubId);
         use(NrAdvancedCallingPreferenceController.class).init(mSubId);
+        use(TransferEsimPreferenceController.class).init(mSubId, mSubscriptionInfoEntity);
+        use(ConvertToEsimPreferenceController.class).init(mSubId, mSubscriptionInfoEntity);
     }
 
     @Override
@@ -500,10 +510,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
     @Override
     public void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
-    }
-
-    @Override
-    public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
         if (DataServiceUtils.shouldUpdateEntityList(mSubInfoEntityList, subInfoEntityList)) {
 
             // Check the current subId is existed or not, if so, finish it.
@@ -533,6 +539,10 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 }
             });
         }
+    }
+
+    @Override
+    public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
     }
 
     @Override

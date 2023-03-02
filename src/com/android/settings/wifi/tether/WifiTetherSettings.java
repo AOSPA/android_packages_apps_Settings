@@ -236,13 +236,14 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         use(WifiTetherAutoOffPreferenceController.class).updateDisplay();
 
         if (mSecurityPreferenceController.isOweDualSapSupported()) {
-            if ((config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION)
-                   && (mApBandPreferenceController.getBandIndex() == BAND_BOTH_2G_5G)) {
+            if (config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION
+                        || config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_WPA3_OWE) {
                 mApBandPreferenceController.updatePreferenceEntries();
                 mApBandPreferenceController.updateDisplay();
                 wasApBandPrefUpdated = true;
             } else if (wasApBandPrefUpdated
-                   && config.getSecurityType() != SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION) {
+                   && (config.getSecurityType() != SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION
+                       && config.getSecurityType() != SoftApConfiguration.SECURITY_TYPE_WPA3_OWE)) {
                 mApBandPreferenceController.updatePreferenceEntries();
                 mApBandPreferenceController.updateDisplay();
                 wasApBandPrefUpdated = false;
@@ -287,7 +288,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                 mWifiTetherAutoOffPreferenceController.isEnabled());
         if (mApBandPreferenceController.getBandIndex() == BAND_BOTH_2G_5G) {
             // Fallback to 2G band if user selected OWE+Dual band
-            if (securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION) {
+            if (securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION
+                    || securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_OWE) {
                 configBuilder.setBand(SoftApConfiguration.BAND_2GHZ);
             } else {
                 int[] dualBands = new int[] {

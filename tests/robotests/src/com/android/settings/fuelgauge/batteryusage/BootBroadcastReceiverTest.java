@@ -62,7 +62,7 @@ public final class BootBroadcastReceiverTest {
 
         // Inserts fake data into database for testing.
         final BatteryStateDatabase database = BatteryTestUtils.setUpBatteryStateDatabase(mContext);
-        BatteryTestUtils.insertDataToBatteryStateDatabase(
+        BatteryTestUtils.insertDataToBatteryStateTable(
                 mContext, Clock.systemUTC().millis(), "com.android.systemui");
         mDao = database.batteryStateDao();
     }
@@ -125,28 +125,6 @@ public final class BootBroadcastReceiverTest {
     }
 
     @Test
-    public void onReceive_containsExpiredData_clearsExpiredDataFromDatabase()
-            throws InterruptedException {
-        insertExpiredData(/*shiftDay=*/ DatabaseUtils.DATA_RETENTION_INTERVAL_DAY);
-
-        mReceiver.onReceive(mContext, new Intent(Intent.ACTION_BOOT_COMPLETED));
-
-        TimeUnit.MILLISECONDS.sleep(100);
-        assertThat(mDao.getAllAfter(0)).hasSize(1);
-    }
-
-    @Test
-    public void onReceive_withoutExpiredData_notClearsExpiredDataFromDatabase()
-            throws InterruptedException {
-        insertExpiredData(/*shiftDay=*/ DatabaseUtils.DATA_RETENTION_INTERVAL_DAY - 1);
-
-        mReceiver.onReceive(mContext, new Intent(Intent.ACTION_BOOT_COMPLETED));
-
-        TimeUnit.MILLISECONDS.sleep(100);
-        assertThat(mDao.getAllAfter(0)).hasSize(3);
-    }
-
-    @Test
     public void onReceive_withTimeChangedIntent_clearsAllDataAndRefreshesJob()
             throws InterruptedException {
         mReceiver.onReceive(mContext, new Intent(Intent.ACTION_TIME_CHANGED));
@@ -170,9 +148,9 @@ public final class BootBroadcastReceiverTest {
     private void insertExpiredData(int shiftDay) {
         final long expiredTimeInMs =
                 Clock.systemUTC().millis() - Duration.ofDays(shiftDay).toMillis();
-        BatteryTestUtils.insertDataToBatteryStateDatabase(
+        BatteryTestUtils.insertDataToBatteryStateTable(
                 mContext, expiredTimeInMs - 1, "com.android.systemui");
-        BatteryTestUtils.insertDataToBatteryStateDatabase(
+        BatteryTestUtils.insertDataToBatteryStateTable(
                 mContext, expiredTimeInMs, "com.android.systemui");
         // Ensures the testing environment is correct.
         assertThat(mDao.getAllAfter(0)).hasSize(3);
