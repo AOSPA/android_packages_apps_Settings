@@ -208,6 +208,8 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
                             mEnrolleeWifiConfiguration = qrCodeWifiConfiguration;
                             wifiManager.connect(id,
                                     /* listener */ WifiDppQrCodeScannerFragment.this);
+                        } else if (qrCodeWifiConfigurations.size() > 1) {
+                            wifiManager.removeNetwork(id);
                         }
                     }
 
@@ -253,7 +255,8 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         }
 
         for (WifiEntry wifiEntry : wifiEntries) {
-            if (!TextUtils.equals(wifiEntry.getSsid(), sanitizeSsid(wifiConfiguration.SSID))) {
+            if (!TextUtils.equals(wifiEntry.getSsid(), WifiEntry.isGbkSsidSupported() ?
+                        wifiConfiguration.SSID : sanitizeSsid(wifiConfiguration.SSID))) {
                 continue;
             }
             final int security =
@@ -276,7 +279,8 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     boolean canConnectWifi(String ssid) {
         final List<WifiEntry> wifiEntries = mWifiPickerTracker.getWifiEntries();
         for (WifiEntry wifiEntry : wifiEntries) {
-            if (!TextUtils.equals(wifiEntry.getSsid(), sanitizeSsid(ssid))) continue;
+            if (!TextUtils.equals(wifiEntry.getSsid(), WifiEntry.isGbkSsidSupported() ?
+                        ssid : sanitizeSsid(ssid))) continue;
 
             if (!wifiEntry.canConnect()) {
                 Log.w(TAG, "Wi-Fi is not allowed to connect by your organization. SSID:" + ssid);
