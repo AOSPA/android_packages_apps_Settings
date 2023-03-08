@@ -19,10 +19,10 @@ package com.android.settings.biometrics2.ui.viewmodel;
 import android.annotation.IntDef;
 import android.app.Application;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
-import android.os.Bundle;
 import android.os.VibrationAttributes;
 import android.os.VibrationEffect;
 import android.util.Log;
+import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.NonNull;
@@ -279,6 +279,27 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
     }
 
     /**
+     * Sends an {@link AccessibilityEvent}.
+     */
+    public void sendAccessibilityEvent(CharSequence announcement) {
+        AccessibilityEvent e = AccessibilityEvent.obtain();
+        e.setEventType(AccessibilityEvent.TYPE_ANNOUNCEMENT);
+        e.setClassName(getClass().getName());
+        e.setPackageName(getApplication().getPackageName());
+        e.getText().add(announcement);
+        mAccessibilityRepository.sendAccessibilityEvent(e);
+    }
+
+     /**
+     * Returns if the touch exploration in the system is enabled.
+     *
+     * @return True if touch exploration is enabled, false otherwise.
+     */
+    public boolean isTouchExplorationEnabled() {
+        return mAccessibilityRepository.isTouchExplorationEnabled();
+    }
+
+    /**
      * Like {@link #vibrate(VibrationEffect, VibrationAttributes)}, but allows the
      * caller to specify the vibration is owned by someone else and set a reason for vibration.
      */
@@ -300,30 +321,6 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
      */
     public boolean canAssumeUdfps() {
         return mFingerprintRepository.canAssumeUdfps();
-    }
-
-    /**
-     * Saves current state to outState
-     */
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        // TODO
-//        mRestoring = true;
-//        mIsCanceled = savedInstanceState.getBoolean(KEY_STATE_CANCELED, false);
-//        mPreviousRotation = savedInstanceState.getInt(KEY_STATE_PREVIOUS_ROTATION,
-//                getDisplay().getRotation());
-//        mIsOrientationChanged = mPreviousRotation != getDisplay().getRotation();
-    }
-
-    /**
-     * Restores saved state from previous savedInstanceState
-     */
-    public void restoreSavedState(@Nullable Bundle savedInstanceState) {
-        if (savedInstanceState == null) {
-            return;
-        }
-        // TODO
-//        outState.putBoolean(KEY_STATE_CANCELED, mIsCanceled);
-//        outState.putInt(KEY_STATE_PREVIOUS_ROTATION, mPreviousRotation);
     }
 
     /**

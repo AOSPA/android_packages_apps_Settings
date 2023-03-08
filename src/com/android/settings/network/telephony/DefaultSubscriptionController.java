@@ -365,16 +365,8 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         return true;
     }
 
-    @Override
-    public void onAirplaneModeChanged(boolean airplaneModeEnabled) {
-    }
-
     boolean isRtlMode() {
         return mIsRtlMode;
-    }
-
-    @Override
-    public void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
     }
 
     @Override
@@ -435,10 +427,5 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
 
     @Override
     public void onAllUiccInfoChanged(List<UiccInfoEntity> uiccInfoEntityList) {
-    }
-
-    @Override
-    public void onAllMobileNetworkInfoChanged(
-            List<MobileNetworkInfoEntity> mobileNetworkInfoEntityList) {
     }
 }
