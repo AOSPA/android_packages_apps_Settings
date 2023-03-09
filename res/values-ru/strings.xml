@@ -166,10 +166,11 @@
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Параметры единиц измерения и чисел"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Приложения используют эти параметры для персонализации."</string>
     <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"Приложения по возможности будут использовать ваши региональные настройки."</string>
-    <string name="temperature_preferences_title" msgid="9067783912861473593">"Единицы измерения температуры"</string>
+    <string name="temperature_preferences_title" msgid="5009881556503629058">"Единицы измерения температуры"</string>
     <string name="calendar_preferences_title" msgid="8312485828206542600">"Календарь"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Первый день недели"</string>
-    <string name="numbers_preferences_title" msgid="6094837605398562369">"Числа"</string>
+    <!-- no translation found for numbers_preferences_title (8197418984391195446) -->
+    <skip />
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"Разрешить приложениям самим определять параметр"</string>
     <string name="celsius_temperature_unit" msgid="6118523647432383132">"Градусы Цельсия (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"Градусы Фаренгейта (°F)"</string>
@@ -621,7 +622,8 @@
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Отключить"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Установить соединение и подключить"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Функция Bluetooth позволяет устанавливать подключение к другим Bluetooth-устройствам."</string>
-    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Функция Bluetooth позволяет устанавливать подключение к другим Bluetooth-устройствам.\n\nОбратите внимание, что для улучшения работы устройства, например повышения точности геолокации, приложения и сервисы могут искать другие устройства поблизости, даже если вы отключили Bluetooth. Чтобы запретить им это, отключите "<annotation id="link">"поиск устройств Bluetooth"</annotation>"."</string>
+    <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Функция Bluetooth позволяет устанавливать подключение к устройствам Bluetooth поблизости.\n\nОбратите внимание, что для улучшения работы устройства, например повышения точности геолокации, приложения и сервисы могут искать устройства поблизости, даже если вы отключили Bluetooth. Чтобы запретить им это, отключите поиск устройств Bluetooth."</string>
+    <string name="bluetooth_scan_change" msgid="1744636222637390367">"Изменить"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Об устройстве"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Настройки клавиатуры"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Адрес Bluetooth этого устройства: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
@@ -1391,6 +1393,16 @@
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Подтверждение графического ключа"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Подтверждение PIN-кода"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Подтверждение пароля"</string>
+    <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Проверка личности"</string>
+    <!-- no translation found for lockpassword_remote_validation_pattern_details (4655537780358707983) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_pin_details (2373654227583206297) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_password_details (3482328925925888340) -->
+    <skip />
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Использовать графический ключ для разблокировки"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Использовать PIN-код для разблокировки"</string>
+    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Использовать пароль для разблокировки"</string>
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"Неверный PIN-код"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"Неверный пароль"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"Неверный ключ."</string>
@@ -1715,6 +1727,20 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Скачанные приложения"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Экспериментальные функции"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Экспериментальные функции"</string>
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
+    <skip />
     <string name="talkback_title" msgid="8756080454514251327">"Talkback"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Инструмент для озвучивания данных с экрана для людей с нарушениями зрения"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Чтобы услышать описание элемента, нажмите на него"</string>
@@ -1725,10 +1751,10 @@
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Быстрый запуск увеличения"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Лупа при вводе текста"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Перемещать лупу по мере ввода текста"</string>
-    <!-- no translation found for accessibility_screen_magnification_always_on_title (3738009998799304549) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_always_on_summary (8946516092699010033) -->
-    <skip />
+    <string name="accessibility_screen_magnification_always_on_title" msgid="3738009998799304549">"Всегда включено"</string>
+    <string name="accessibility_screen_magnification_always_on_summary" msgid="8946516092699010033">"При открытии другого приложения уменьшать масштаб до обычного, вместо того чтобы отключать лупу. Чтобы снова увеличить масштаб, коснитесь экрана двумя пальцами и разведите их."</string>
+    <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Джойстик"</string>
+    <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Активируйте и перемещайте лупу с помощью экранного джойстика. Чтобы управлять лупой, нажмите на джойстик, удерживайте его, а затем перетащите. Чтобы переместить сам джойстик, нажмите на него и перетащите."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Об увеличении изображения на экране"</string>
     <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"Подробнее об увеличении изображения на экране…"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Тип увеличения"</string>
@@ -1935,8 +1961,7 @@
     <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, левое и правое ухо"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> и ещё 1"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Добавить устройство"</string>
-    <!-- no translation found for accessibility_hearing_device_connected_title (3785140037249487287) -->
-    <skip />
+    <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Слуховые аппараты"</string>
     <string name="accessibility_hearing_device_saved_title" msgid="7573926212664909296">"Сохраненные аппараты"</string>
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"Управление слуховым аппаратом"</string>
     <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Ярлык для слухового аппарата"</string>
@@ -1944,8 +1969,7 @@
     <string name="accessibility_hac_mode_summary" msgid="5164793702798871478">"Улучшать качество аудио для некоторых слуховых аппаратов"</string>
     <string name="accessibility_hearing_device_footer_summary" msgid="4636110586636490256">"Убедитесь, что слуховые аппараты включены и находятся в режиме подключения."</string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Подключение аппарата"</string>
-    <!-- no translation found for accessibility_found_hearing_devices (637407580358386553) -->
-    <skip />
+    <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Доступные слуховые аппараты"</string>
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"Не нашли свой слуховой аппарат?"</string>
     <string name="accessibility_list_all_devices_title" msgid="3555097127022458571">"Посмотреть все устройства Bluetooth"</string>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Корректировка аудио"</string>
@@ -2047,10 +2071,6 @@
     <string name="keywords_hearing_aids" msgid="524979615168196199">"слабый слух, потеря слуха"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"слабый слух, потеря слуха, субтитры, телетайп"</string>
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
-    <string name="fast_pair_settings" msgid="3308819519080016185">"Быстрое подключение"</string>
-    <string name="fast_pair_settings_summary" msgid="1786567691058982987">"Находить рядом устройства Bluetooth ­с быстрым подключением"</string>
-    <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"Искать устройства рядом"</string>
-    <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"Сохраненные устройства"</string>
     <string name="print_settings" msgid="8519810615863882491">"Печать"</string>
     <string name="print_settings_summary" msgid="1458773840720811915">"{count,plural, =1{Включена 1 служба печати}one{Включена # служба печати}few{Включено # службы печати}many{Включено # служб печати}other{Включено # службы печати}}"</string>
     <string name="print_jobs_summary" msgid="7040836482336577323">"{count,plural, =1{1 задание печати}one{# задание печати}few{# задания печати}many{# заданий печати}other{# задания печати}}"</string>
@@ -2164,7 +2184,8 @@
     <string name="battery_missing_message" msgid="400958471814422770">"Не удалось узнать уровень заряда батареи."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"Подробнее об этой ошибке…"</string>
-    <string name="power_screen" msgid="4596900105850963806">"Экран"</string>
+    <!-- no translation found for power_screen (3926703168513988776) -->
+    <skip />
     <string name="power_cpu" msgid="1820472721627148746">"Процессор"</string>
     <string name="power_flashlight" msgid="8993388636332573202">"Фонарик"</string>
     <string name="power_camera" msgid="4778315081581293923">"Камера"</string>
@@ -2205,8 +2226,7 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Задать расписание"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Продление времени работы от батареи"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Отключать при полном заряде"</string>
-    <!-- no translation found for battery_saver_sticky_description_new (6472610662679038342) -->
-    <skip />
+    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"Режим энергосбережения отключается, когда уровень заряда достигает <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Включить"</string>
@@ -2232,10 +2252,8 @@
     <string name="battery_usage_screen_time" msgid="3973865893520804115">"Время использования: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Сведения о расходе заряда батареи будут доступны через несколько часов после полной зарядки."</string>
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"Cейчас"</string>
-    <!-- no translation found for battery_usage_timestamps_hyphen (7401188432989043905) -->
-    <skip />
-    <!-- no translation found for battery_usage_day_and_hour (1417890420844950881) -->
-    <skip />
+    <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g>–<xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
+    <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g>, <xliff:g id="HOUR">%2$s</xliff:g>"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Диаграмма расхода заряда батареи"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Диаграмма расхода заряда батареи по дням"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Диаграмма расхода заряда батареи по часам"</string>
@@ -2245,6 +2263,8 @@
     <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Время использования устройства (<xliff:g id="SLOT">%s</xliff:g>)"</string>
     <string name="battery_usage_spinner_breakdown_by_apps" msgid="7746337368402445072">"Разбивка по приложениям"</string>
     <string name="battery_usage_spinner_breakdown_by_system" msgid="4646952798665973464">"Разбивка по системам"</string>
+    <!-- no translation found for battery_usage_less_than_percent (5873099028895001082) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Статистика процессов"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Статистика запущенных процессов"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Использование памяти"</string>
@@ -2862,7 +2882,6 @@
     <string name="keywords_screen_timeout" msgid="8921857020437540572">"экран, время блокировки, время отключения экрана, блокировка экрана"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"память, кеш, данные, удалить, очистить, освободить, место"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"подключено, устройство, наушники, гарнитура, динамик, беспроводной, связать, наушники-вкладыши, музыка, мультимедиа"</string>
-    <string name="keywords_fast_pair" msgid="5422942398816611159">"подключение, наушники, Bluetooth"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"фон, тема, сетка, настроить, персонализировать"</string>
     <string name="keywords_styles" msgid="5291614313348476068">"значок, акцент, цвет"</string>
     <string name="keywords_assist_input" msgid="3086289530227075593">"по умолчанию, ассистент"</string>
@@ -2893,6 +2912,7 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Вызовы и уведомления"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Громкость звонка"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Громкость уведомлений"</string>
+    <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Недоступно в беззвучном режиме"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Рингтон"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Звук уведомления по умолчанию"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Звук приложения по умолчанию"</string>
@@ -3161,8 +3181,10 @@
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Доступ к уведомлениям"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"В Android 12 доступны улучшенные уведомления. Эта функция упорядочивает все ваши уведомления и подсказывает ответы и действия.\n\nЕй доступно содержимое всех уведомлений, в том числе имена контактов, сообщения и другие личные данные. Также эта функция может закрывать уведомления и нажимать кнопки в них, например отвечать на звонки и управлять режимом \"Не беспокоить\"."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Открыть приложению \"<xliff:g id="SERVICE">%1$s</xliff:g>\" доступ к уведомлениям?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="4317764112725749020">"Приложение \"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>\" сможет читать все уведомления, в том числе содержащие личную информацию (например, имена контактов, фото и сообщения). Кроме того, оно получит право временно отключать или закрывать уведомления и нажимать кнопки в них, например отвечать на звонки. \n\nПриложение сможет включать и отключать режим \"Не беспокоить\", а также менять его настройки."</string>
-    <string name="nls_warning_prompt" msgid="9143226910825830619">"Приложение \"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>\" сможет:"</string>
+    <!-- no translation found for notification_listener_security_warning_summary (1131986567509818121) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (1486887096703743841) -->
+    <skip />
     <string name="nls_feature_read_title" msgid="7629713268744220437">"Читать уведомления"</string>
     <string name="nls_feature_read_summary" msgid="1064698238110273593">"Приложение может читать уведомления, в том числе содержащие личную информацию (например, имена контактов, фото и сообщения)."</string>
     <string name="nls_feature_reply_title" msgid="7925455553821362039">"Отвечать на сообщения"</string>
@@ -3446,8 +3468,8 @@
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"Уведомления отключены"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"Дополнительные настройки"</string>
     <string name="app_permissions" msgid="8666537659217653626">"Разрешения"</string>
-    <string name="app_data_sharing_updates_title" msgid="921888411974134089">"Обновление доступа к данным"</string>
-    <string name="app_data_sharing_updates_summary" msgid="1500580254161164185">"Показать, у каких приложений недавно обновилась политика доступа к данным"</string>
+    <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"Обновление доступа к данным о местоположении"</string>
+    <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Проверьте приложения, которые изменили способы предоставления данных о вашем местоположении."</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Включение нажатием"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Дважды нажмите в любом месте экрана, чтобы включить устройство"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Открытие ссылок"</string>
@@ -3496,8 +3518,7 @@
     <string name="usb_use_power_only" msgid="3408055485802114621">"Зарядка подключенного устройства"</string>
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Передача файлов"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"Режим PTP"</string>
-    <!-- no translation found for usb_use_uvc_webcam (6595429508472038732) -->
-    <skip />
+    <string name="usb_use_uvc_webcam" msgid="6595429508472038732">"Режим веб-камеры"</string>
     <string name="usb_transcode_files" msgid="2441954752105119109">"Конвертировать видео в формат AVC"</string>
     <string name="usb_transcode_files_summary" msgid="307102635711961513">"Выбор проигрывателей будет шире, но качество видео может снизиться"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"USB-модем"</string>
@@ -3520,14 +3541,12 @@
     <string name="usb_summary_tether" msgid="2554569836525075702">"USB-модем"</string>
     <string name="usb_summary_photo_transfers" msgid="7331503733435780492">"Режим PTP"</string>
     <string name="usb_summary_MIDI" msgid="2372443732675899571">"Режим MIDI"</string>
-    <!-- no translation found for usb_summary_UVC (8733131110899174299) -->
-    <skip />
+    <string name="usb_summary_UVC" msgid="8733131110899174299">"Режим веб-камеры"</string>
     <string name="usb_summary_file_transfers_power" msgid="2788374660532868630">"Передача файлов и зарядка"</string>
     <string name="usb_summary_tether_power" msgid="4853034392919904792">"USB-модем и зарядка"</string>
     <string name="usb_summary_photo_transfers_power" msgid="9077173567697482239">"Режим PTP и зарядка"</string>
     <string name="usb_summary_MIDI_power" msgid="1184681982025435815">"Режим MIDI и зарядка"</string>
-    <!-- no translation found for usb_summary_UVC_power (226810354412154061) -->
-    <skip />
+    <string name="usb_summary_UVC_power" msgid="226810354412154061">"Режим веб-камеры и зарядка"</string>
     <string name="background_check_pref" msgid="5304564658578987535">"Фоновая проверка"</string>
     <string name="assist_access_context_title" msgid="5201495523514096201">"Использовать текст с экрана"</string>
     <string name="assist_access_context_summary" msgid="6951814413185646275">"Разрешить просматривать содержимое экрана в виде текста"</string>
@@ -3573,12 +3592,9 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Разрешить доступ к управлению всеми файлами"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Приложение сможет читать, изменять и удалять все файлы на этом устройстве и любых подключенных носителях. Доступ к файлам будет осуществляться без дополнительного уведомления."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Приложения, имеющие доступ ко всем файлам"</string>
-    <!-- no translation found for full_screen_intent_title (1068024949389956404) -->
-    <skip />
-    <!-- no translation found for permit_full_screen_intent (2251949245519201421) -->
-    <skip />
-    <!-- no translation found for footer_description_full_screen_intent (8322826300555418227) -->
-    <skip />
+    <string name="full_screen_intent_title" msgid="1068024949389956404">"Управление полноэкранными уведомлениями"</string>
+    <string name="permit_full_screen_intent" msgid="2251949245519201421">"Разрешить приложениям отправлять полноэкранные уведомления намерений"</string>
+    <string name="footer_description_full_screen_intent" msgid="8322826300555418227">"Разрешить этому приложению отправлять полноэкранные уведомления намерений, закрывающие весь экран"</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Управление медиафайлами"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Разрешить приложению управлять медиафайлами"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Если эта настройка включена, приложение сможет без вашего ведома изменять или удалять медиафайлы, созданные другими приложениями. Для этого у приложения должно быть разрешение на доступ к файлам и медиаконтенту."</string>
@@ -3626,7 +3642,7 @@
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"Нужна помощь родителя"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Чтобы настроить эту функцию, попроси родителя тебе помочь."</string>
     <string name="disabled_by_policy_parental_consent" msgid="9166060049019018978">"Чтобы изменить этот параметр, попроси родителя тебе помочь."</string>
-    <string name="default_admin_support_msg" msgid="8816296554831532033">"Чтобы узнать подробности, обратитесь к своему администратору"</string>
+    <string name="default_admin_support_msg" msgid="8816296554831532033">"Чтобы узнать подробности, обратитесь к своему администратору."</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Подробнее…"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"Администратор может контролировать настройки, приложения, разрешения и параметры доступа к корпоративным ресурсам в этом профиле, а также связанные с ним данные, например сведения о местоположении или действиях в сети."</string>
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"Администратор может контролировать настройки, приложения, разрешения и параметры доступа к корпоративным ресурсам для этого пользователя, а также связанные с ним данные, например сведения о местоположении или действиях в сети."</string>
@@ -3980,15 +3996,20 @@
     <string name="autofill_app" msgid="7595308061826307921">"Автозаполнение"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Сервис автозаполнения по умолчанию"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Пароли"</string>
-    <string name="credman_credentials" msgid="5937331545565783811">"Сервисы идентификации и сохранения паролей"</string>
+    <!-- no translation found for credman_credentials (7413302794874989255) -->
+    <skip />
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# пароль}one{# пароль}few{# пароля}many{# паролей}other{# пароля}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"автозаполнение, автоматически, заполнение, пароль"</string>
-    <string name="credman_keywords" msgid="7236954350284379264">"учетные данные, ключ доступа, пароль"</string>
+    <!-- no translation found for credman_keywords (8305600680836806170) -->
+    <skip />
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Подтвердите, что вы доверяете этому приложению&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; анализирует содержимое экрана и находит поля, которые можно заполнить автоматически."</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Отключить %1$s?"</string>
-    <string name="credman_confirmation_message" msgid="1485617504425237430">"Во время входа сохраненные данные, например адреса или способы оплаты, не подставляются. Чтобы они подставлялись, настройте сервис автозаполнения по умолчанию."</string>
-    <string name="credman_error_message_title" msgid="5108868200002966901">"Превышено допустимое число сервисов идентификации и сохранения паролей"</string>
-    <string name="credman_error_message" msgid="4058425433345908579">"Активными одновременно могут быть не более пяти сервисов автозаполнения и сохранения паролей. Чтобы добавить новый сервис, отключите уже используемый."</string>
+    <!-- no translation found for credman_confirmation_message (3499478570809427026) -->
+    <skip />
+    <!-- no translation found for credman_error_message_title (4741457523969373713) -->
+    <skip />
+    <!-- no translation found for credman_error_message (6793314648458925172) -->
+    <skip />
     <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"Отключить"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"Автозаполнение"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"Журнал"</string>
@@ -4275,10 +4296,17 @@
     <string name="content_capture" msgid="868372905432812238">"Контент приложений"</string>
     <string name="content_capture_summary" msgid="49720773699715531">"Разрешить приложениям передавать контент системе Android"</string>
     <string name="capture_system_heap_dump_title" msgid="9210974110606886455">"Создать дамп системной кучи"</string>
-    <string name="reboot_with_mte_title" msgid="9167242803901899693">"Включить MTE и перезагрузить"</string>
-    <string name="reboot_with_mte_message" msgid="7675836625682561153">"Система будет перезагружена, и вы получите доступ к MTE (Memory Tagging Extension). Это может ухудшить стабильность работы и производительность. После следующей перезагрузки все изменения будут отменены."</string>
-    <string name="reboot_with_mte_summary" msgid="879384278357305846">"Использовать MTE для одного запуска в рамках разработки приложения"</string>
-    <string name="reboot_with_mte_already_enabled" msgid="7708271355555880940">"Функция MTE включена в рамках расширенной защиты памяти"</string>
+    <string name="development_memtag_page_title" msgid="3546667618748029188">"Memory Tagging Extension"</string>
+    <string name="development_memtag_intro" msgid="8032596625527637164">"Memory Tagging Extension (MTE) облегчает поиск проблем с безопасным доступом к памяти в приложении и защищает нативный код."</string>
+    <string name="development_memtag_footer" msgid="5681925148773626562">"Когда функция MTE включена, устройство может работать медленнее."</string>
+    <string name="development_memtag_learn_more" msgid="8961984806973926704">"Подробнее об MTE"</string>
+    <string name="development_memtag_toggle" msgid="2474420239518386894">"Включить MTE и запретить автоматическое отключение"</string>
+    <string name="development_memtag_reboot_message_on" msgid="8100075676107327847">"Чтобы включить MTE, перезапустите устройство."</string>
+    <string name="development_memtag_reboot_message_off" msgid="3703925647922079456">"Чтобы отключить MTE, перезапустите устройство."</string>
+    <string name="reboot_with_mte_title" msgid="2320125810211279">"Включить MTE только на время сеанса"</string>
+    <string name="reboot_with_mte_message" msgid="1232881567956207641">"Система будет перезапущена, и вы получите доступ к MTE (Memory Tagging Extension). Это может ухудшить стабильность работы и производительность. После следующей перезагрузки все изменения будут отменены."</string>
+    <string name="reboot_with_mte_summary" msgid="3896537791216432882">"Перезапустить компьютер и включить MTE только на время сеанса"</string>
+    <string name="reboot_with_mte_already_enabled" msgid="4439168867613407167">"Расширение MTE уже включено"</string>
     <string name="capturing_system_heap_dump_message" msgid="8410503247477360622">"Создание системного дампа кучи…"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="2352983250048200052">"Не удалось создать системный дамп кучи."</string>
     <string name="automatic_system_heap_dump_title" msgid="4093306504711109479">"Автоматически создавать системные дампы кучи"</string>
@@ -4570,54 +4598,30 @@
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Приложения, установленные в течение # последнего месяца}one{Приложения, установленные в течение # последнего месяца}few{Приложения, установленные в течение # последних месяцев}many{Приложения, установленные в течение # последних месяцев}other{Приложения, установленные в течение # последнего месяца}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Приложения, установленные более # месяца назад}one{Приложения, установленные более # месяца назад}few{Приложения, установленные более # месяцев назад}many{Приложения, установленные более # месяцев назад}other{Приложения, установленные более # месяца назад}}"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Сканер отпечатков пальцев"</string>
-    <!-- no translation found for flash_notifications_title (4490438861180492311) -->
-    <skip />
-    <!-- no translation found for flash_notifications_summary_off (6056282996770691461) -->
-    <skip />
-    <!-- no translation found for flash_notifications_summary_on_camera (455038312752009971) -->
-    <skip />
-    <!-- no translation found for flash_notifications_summary_on_screen (7321838939240499267) -->
-    <skip />
-    <!-- no translation found for flash_notifications_summary_on_camera_and_screen (6515622987118268649) -->
-    <skip />
-    <!-- no translation found for flash_notifications_intro (1506414740603805778) -->
-    <skip />
-    <!-- no translation found for flash_notifications_note (7258551860911169239) -->
-    <skip />
-    <!-- no translation found for flash_notifications_preview (5320176885050440874) -->
-    <skip />
-    <!-- no translation found for camera_flash_notification_title (1605639711485773787) -->
-    <skip />
-    <!-- no translation found for screen_flash_notification_title (8008197872050400734) -->
-    <skip />
-    <!-- no translation found for screen_flash_notification_color_title (7213407653340970790) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_blue (3585766657607931371) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_azure (8691198532944992243) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_cyan (6878780006173747267) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_spring_green (4466548514738457815) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_green (8418019648507964564) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_chartreuse_green (7456381649919010366) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_yellow (7413465411615454556) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_orange (979177126315557656) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_red (8954162219886445491) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_rose (1216848195972231251) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_magenta (7726221666557102155) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_violet (1279950780509029495) -->
-    <skip />
-    <!-- no translation found for color_selector_dialog_done (121253968943363376) -->
-    <skip />
-    <!-- no translation found for color_selector_dialog_cancel (8667350644753900701) -->
-    <skip />
+    <string name="flash_notifications_title" msgid="4490438861180492311">"Уведомления со вспышкой"</string>
+    <string name="flash_notifications_summary_off" msgid="6056282996770691461">"Выключено"</string>
+    <string name="flash_notifications_summary_on_camera" msgid="455038312752009971">"Вкл. (вспышка камеры)"</string>
+    <string name="flash_notifications_summary_on_screen" msgid="7321838939240499267">"Вкл. (подсветка экрана)"</string>
+    <string name="flash_notifications_summary_on_camera_and_screen" msgid="6515622987118268649">"Вкл. (вспышка камеры и подсветка экрана)"</string>
+    <string name="flash_notifications_intro" msgid="1506414740603805778">"Вспышка или экран могут мигать, когда вы получаете уведомления или когда звучит будильник."</string>
+    <string name="flash_notifications_note" msgid="7258551860911169239">"Используйте эту функцию осторожно, особенно если вы чувствительны к свету"</string>
+    <string name="flash_notifications_preview" msgid="5320176885050440874">"Посмотреть"</string>
+    <string name="camera_flash_notification_title" msgid="1605639711485773787">"Уведомления со вспышкой камеры"</string>
+    <string name="screen_flash_notification_title" msgid="8008197872050400734">"Уведомления с подсветкой на экране"</string>
+    <string name="screen_flash_notification_color_title" msgid="7213407653340970790">"Цвет подсветки экрана"</string>
+    <string name="screen_flash_color_blue" msgid="3585766657607931371">"Синий"</string>
+    <string name="screen_flash_color_azure" msgid="8691198532944992243">"Лазурный"</string>
+    <string name="screen_flash_color_cyan" msgid="6878780006173747267">"Голубой"</string>
+    <string name="screen_flash_color_spring_green" msgid="4466548514738457815">"Весенне-зеленый"</string>
+    <string name="screen_flash_color_green" msgid="8418019648507964564">"Зеленый"</string>
+    <string name="screen_flash_color_chartreuse_green" msgid="7456381649919010366">"Светло-зеленый"</string>
+    <string name="screen_flash_color_yellow" msgid="7413465411615454556">"Желтый"</string>
+    <string name="screen_flash_color_orange" msgid="979177126315557656">"Оранжевый"</string>
+    <string name="screen_flash_color_red" msgid="8954162219886445491">"Красный"</string>
+    <string name="screen_flash_color_rose" msgid="1216848195972231251">"Розовый"</string>
+    <string name="screen_flash_color_magenta" msgid="7726221666557102155">"Пурпурный"</string>
+    <string name="screen_flash_color_violet" msgid="1279950780509029495">"Фиолетовый"</string>
+    <string name="color_selector_dialog_done" msgid="121253968943363376">"Готово"</string>
+    <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Отмена"</string>
+    <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Это приложение можно открыть только в одном окне."</string>
 </resources>
