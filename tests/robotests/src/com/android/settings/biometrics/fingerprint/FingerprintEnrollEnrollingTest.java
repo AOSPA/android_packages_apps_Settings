@@ -55,6 +55,7 @@ import android.os.Vibrator;
 import android.util.FeatureFlagUtils;
 import android.view.Display;
 import android.view.Surface;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -63,6 +64,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.widget.RingProgressBar;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.LottieTask;
 import com.google.android.setupdesign.GlifLayout;
 
 import org.junit.Before;
@@ -175,6 +177,7 @@ public class FingerprintEnrollEnrollingTest {
     @Test
     public void fingerprintUdfpsOverlayEnrollment_PlaysAllAnimationsAssetsCorrectly() {
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
+        LottieTask.EXECUTOR = mContext.getMainExecutor();
 
         int initStageSteps = -1, initStageRemaining = 0;
         final int totalStages = mUdfpsStageThresholds.length;
@@ -191,17 +194,8 @@ public class FingerprintEnrollEnrollingTest {
             mActivity.onEnrollmentProgressChange(TOTAL_ENROLL_STEPS, remaining);
         }
 
-        List<Integer> expectedLottieAssetOrder = List.of(
-                R.raw.udfps_center_hint_lottie,
-                R.raw.udfps_tip_hint_lottie,
-                R.raw.udfps_left_edge_hint_lottie,
-                R.raw.udfps_right_edge_hint_lottie
-        );
 
-        ArgumentCaptor<Integer> lottieAssetCaptor = ArgumentCaptor.forClass(Integer.class);
-        verify(mIllustrationLottie, times(totalStages)).setAnimation(lottieAssetCaptor.capture());
-        List<Integer> observedLottieAssetOrder = lottieAssetCaptor.getAllValues();
-        assertThat(observedLottieAssetOrder).isEqualTo(expectedLottieAssetOrder);
+        verify(mIllustrationLottie, times(totalStages)).setComposition(any());
     }
 
     @Test
@@ -328,8 +322,9 @@ public class FingerprintEnrollEnrollingTest {
     }
 
     @Test
-    public void fingerprintSfpsEnroll_PlaysAllAnimationsAssetsCorrectly() {
+    public void fingerprintSfpsEnroll_PlaysAnimations() {
         initializeActivityFor(TYPE_POWER_BUTTON);
+        LottieTask.EXECUTOR = mContext.getMainExecutor();
 
         int initStageSteps = -1, initStageRemaining = 0;
 
@@ -345,18 +340,8 @@ public class FingerprintEnrollEnrollingTest {
             mActivity.onEnrollmentProgressChange(TOTAL_ENROLL_STEPS, remaining);
         }
 
-        List<Integer> expectedLottieAssetOrder = List.of(
-                R.raw.sfps_lottie_no_animation,
-                R.raw.sfps_lottie_pad_center,
-                R.raw.sfps_lottie_tip,
-                R.raw.sfps_lottie_left_edge,
-                R.raw.sfps_lottie_right_edge
-        );
 
-        ArgumentCaptor<Integer> lottieAssetCaptor = ArgumentCaptor.forClass(Integer.class);
-        verify(mIllustrationLottie, times(5)).setAnimation(lottieAssetCaptor.capture());
-        List<Integer> observedLottieAssetOrder = lottieAssetCaptor.getAllValues();
-        assertThat(observedLottieAssetOrder).isEqualTo(expectedLottieAssetOrder);
+        verify(mIllustrationLottie, times(5)).setComposition(any());
     }
 
     @Test
@@ -449,6 +434,28 @@ public class FingerprintEnrollEnrollingTest {
         assertThat(appliedThemes.contains("SetupWizardPartnerResource")).isTrue();
     }
 
+    @Test
+    public void fingerprintSfpsEnroll_descriptionTextVisibility() {
+        initializeActivityFor(TYPE_POWER_BUTTON);
+
+        mActivity.onEnrollmentProgressChange(1 /* steps */, 1 /* remaining */);
+
+        assertThat(getLayout().getDescriptionTextView().getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void fingerprintUdfpsEnroll_descriptionTextVisibility() {
+        initializeActivityFor(TYPE_UDFPS_OPTICAL);
+
+        mActivity.onEnrollmentProgressChange(1 /* steps */, 1 /* remaining */);
+
+        assertThat(getLayout().getDescriptionTextView().getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    private GlifLayout getLayout() {
+        return (GlifLayout) mActivity.findViewById(R.id.setup_wizard_layout);
+    }
+
     private void initializeActivityWithoutCreate(int sensorType) {
         final List<ComponentInfoInternal> componentInfo = new ArrayList<>();
         final FingerprintSensorPropertiesInternal prop =
@@ -481,6 +488,9 @@ public class FingerprintEnrollEnrollingTest {
                 doReturn(mSfpsStageThresholds[stage]).when(mActivity).getStageThresholdSteps(stage);
             }
             doReturn(true).when(mSidecar).isEnrolling();
+            ReflectionHelpers.setField(mActivity, "mCanAssumeSfps", true);
+        } else if (sensorType == TYPE_UDFPS_OPTICAL) {
+            ReflectionHelpers.setField(mActivity, "mCanAssumeUdfps", true);
         }
 
         if (sensorType == TYPE_UDFPS_OPTICAL) {

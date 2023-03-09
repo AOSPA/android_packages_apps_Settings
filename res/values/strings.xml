@@ -398,13 +398,13 @@
     <!-- The subtitle of option's page of regional preferences for Temperature units, Calendar and First day of week. [CHAR LIMIT=NONE] -->
     <string name="regional_preferences_option_page_sub_title">Apps will use your regional preferences where possible.</string>
     <!-- The title of menu entry of Temperature unit preference. [CHAR LIMIT=50] -->
-    <string name="temperature_preferences_title">Temperature units</string>
+    <string name="temperature_preferences_title">Temperature</string>
     <!-- The title of the  menu entry of Calendar type preference. [CHAR LIMIT=50]  -->
     <string name="calendar_preferences_title">Calendar</string>
     <!-- The title of the  menu entry of First day of week preference. [CHAR LIMIT=50]  -->
     <string name="first_day_of_week_preferences_title">First day of week</string>
     <!-- The title of the menu entry of Numbers system preference. [CHAR LIMIT=50]  -->
-    <string name="numbers_preferences_title">Numbers</string>
+    <string name="numbers_preferences_title">Numbers preferences</string>
     <!-- The summary of default string for each regional preference. [CHAR LIMIT=50] -->
     <string name="default_string_of_regional_preference">Use app default</string>
     <!-- The title of Celsius for preference of temperature unit. [CHAR LIMIT=50] -->
@@ -761,6 +761,8 @@
     <string name="security_settings_fingerprint_enroll_consent_introduction_title">Allow fingerprint unlock</string>
     <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature, when fingerprint unlock is disabled by device admin [CHAR LIMIT=40] -->
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled">Use your fingerprint</string>
+    <!-- Learn more text of footer preference for fingerprint settings [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_settings_footer_learn_more">Learn more about Fingerprint Unlock</string>
     <!-- Introduction title shown in the bottom of fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1">You\u2019re in control</string>
     <!-- Introduction title shown in the bottom of fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
@@ -1454,7 +1456,9 @@
     <!-- Bluetooth settings. Text displayed when Bluetooth is off and device list is empty [CHAR LIMIT=50]-->
     <string name="bluetooth_empty_list_bluetooth_off">When Bluetooth is turned on, your device can communicate with other nearby Bluetooth devices.</string>
     <!-- Bluetooth settings. Text displayed when Bluetooth is off and bluetooth scanning is turned on [CHAR LIMIT=NONE] -->
-    <string name="bluetooth_scanning_on_info_message">When Bluetooth is turned on, your device can communicate with other nearby Bluetooth devices.\n\nTo improve device experience, apps and services can still scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services. You can change this in <annotation id="link">Bluetooth scanning settings</annotation>.</string>
+    <string name="bluetooth_scanning_on_info_message">When Bluetooth is turned on, your device can communicate with other nearby Bluetooth devices.\n\nTo improve device experience, apps and services can still scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services. You can change this in Bluetooth scanning settings.</string>
+    <!-- Bluetooth settings. Link text to bring the user to "scanning settings" screen. [CHAR LIMIT=NONE]-->
+    <string name="bluetooth_scan_change">Change</string>
 
     <!-- Title of device details screen [CHAR LIMIT=28]-->
     <string name="device_details_title">Device details</string>
@@ -3402,6 +3406,24 @@
     <!-- Header shown when the password needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
     <string name="lockpassword_confirm_your_password_header_frp">Verify password</string>
 
+    <!-- Header shown when prompted for remote device credential validation. [CHAR LIMIT=17] -->
+    <string name="lockpassword_remote_validation_header">Verify it\u0027s you</string>
+
+    <!-- Details shown when pattern is prompted for remote device credential validation. [CHAR LIMIT=160] -->
+    <string name="lockpassword_remote_validation_pattern_details">To transfer Google Accounts, settings, and more, enter your other device\u0027s pattern. Your pattern is encrypted.</string>
+    <!-- Details shown when PIN is prompted for remote device credential validation. [CHAR LIMIT=160] -->
+    <string name="lockpassword_remote_validation_pin_details">To transfer Google Accounts, settings, and more, enter your other device\u0027s PIN. Your PIN is encrypted.</string>
+    <!-- Details shown when password is prompted for remote device credential validation. [CHAR LIMIT=160] -->
+    <string name="lockpassword_remote_validation_password_details">To transfer Google Accounts, settings, and more, enter your other device\u0027s password. Your password is encrypted.</string>
+
+    <!-- Checkbox label to set pattern as new screen lock if remote device credential validation succeeds. [CHAR LIMIT=43] -->
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock">Also use pattern to unlock this device</string>
+    <!-- Checkbox label to set PIN as new screen lock if remote device credential validation succeeds. [CHAR LIMIT=43] -->
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock">Also use PIN to unlock this device</string>
+    <!-- Checkbox label to set password as new screen lock if remote device credential validation succeeds. [CHAR LIMIT=43] -->
+    <string name="lockpassword_remote_validation_set_password_as_screenlock">Also use password to unlock this device</string>
+
+
     <!-- Security & location settings screen, change security method screen instruction if user
          enters incorrect PIN [CHAR LIMIT=30] -->
     <string name="lockpassword_invalid_pin">Wrong PIN</string>
@@ -3450,6 +3472,9 @@
     <string name="lockpattern_settings_enable_summary">Must draw pattern to unlock screen</string>
     <!-- Security & location settings screen, setting check box title. This setting controls whether a visible green line is drawn as the users move their finger around while drawing the unlock pattern.  If checked, this line is drawn.  If unchecked, there is nothing drawn so the users do not reveal their pattern while they unlock the phone.-->
     <string name="lockpattern_settings_enable_visible_pattern_title">Make pattern visible</string>
+    <!-- Security & location settings screen, setting check box title. This setting disables animations when entering the PIN.-->
+    <string name="lockpattern_settings_enhanced_pin_privacy_title">Enhanced PIN privacy</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary">Disable animations while entering the PIN</string>
     <!-- Security & location settings screen, setting check box title. This setting controls whether a visible green line is drawn as the users move their finger around while drawing the profile unlock pattern.  If checked, this line is drawn.  If unchecked, there is nothing drawn so the users do not reveal their pattern while they unlock the profile.-->
     <string name="lockpattern_settings_enable_visible_pattern_title_profile">Make profile pattern visible</string>
     <!-- Security & location settings screen, setting check box title. This setting controls whether tactile feedback will be produced when the user draws the pattern.-->
@@ -3959,8 +3984,8 @@
     <string name="modifier_keys_caps_lock" translatable="false">Caps lock</string>
     <!-- Title for the button to trigger the 'modifier keys ctrl'. [CHAR LIMIT=15] -->
     <string name="modifier_keys_ctrl" translatable="false">Ctrl</string>
-    <!-- Title for the button to trigger the 'modifier keys meta'. [CHAR LIMIT=15] -->
-    <string name="modifier_keys_meta" translatable="false">Meta</string>
+    <!-- Title for the button to trigger the 'modifier keys action key'. [CHAR LIMIT=15] -->
+    <string name="modifier_keys_meta" translatable="false">Action key</string>
     <!-- Title for the button to trigger the 'modifier keys alt'. [CHAR LIMIT=15] -->
     <string name="modifier_keys_alt" translatable="false">Alt</string>
 
@@ -4143,18 +4168,20 @@
     <string name="experimental_category_title">Experimental</string>
     <!-- Title for feature flags dashboard where developers can turn on experimental features [CHAR LIMIT=50] -->
     <string name="feature_flags_dashboard_title">Feature flags</string>
-    <!-- Title for snoop logger filters dashboard where developers can turn on filters [CHAR LIMIT=50] -->
-    <string name="snoop_logger_filters_dashboard_title">Snoop Logger Filters</string>
-    <!-- Summary for the snoop logger filters [CHAR LIMIT=50] -->
-    <string name="bt_hci_snoop_log_filters_dashboard_summary">Set filters (Toggle Bluetooth after changing this setting)</string>
-    <!-- Title for the snoop logger pbap filter [CHAR LIMIT=50] -->
-    <string name="bt_hci_snoop_log_filter_pbap_title">Snoop Logger Filter PBAP</string>
-    <!-- Title for the snoop logger map filter [CHAR LIMIT=50] -->
-    <string name="bt_hci_snoop_log_filter_map_title">Snoop Logger Filter MAP</string>
-    <!-- Summary for the snoop logger filters [CHAR LIMIT=50] -->
-    <string name="bt_hci_snoop_log_filter_summary">Set filtering mode. (Toggle Bluetooth after changing this setting)</string>
-    <!-- Summary for the snoop logger profile filters while disabled [CHAR LIMIT=50] -->
-    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary">Enable Snoop Log Mode Filtered to change this option.</string>
+    <!-- Title for snoop logger filters dashboard where developers can turn on filters [CHAR LIMIT=100] -->
+    <string name="bt_hci_snoop_log_filters_dashboard_title">Bluetooth HCI snoop log filtering</string>
+    <!-- Summary for the snoop logger filters [CHAR LIMIT=100] -->
+    <string name="bt_hci_snoop_log_filters_dashboard_summary">Set filters</string>
+    <!-- Summary for the snoop logger filters [CHAR LIMIT=100] -->
+    <string name="bt_hci_snoop_log_filters_dashboard_footer">Disable and enable Bluetooth for the changes to take effect</string>
+    <!-- Title for the snoop logger pbap filter [CHAR LIMIT=100] -->
+    <string name="bt_hci_snoop_log_filter_pbap_title">Bluetooth HCI snoop log filtering PBAP</string>
+    <!-- Title for the snoop logger map filter [CHAR LIMIT=100] -->
+    <string name="bt_hci_snoop_log_filter_map_title">Bluetooth HCI snoop log filtering MAP</string>
+    <!-- Summary for the snoop logger filters [CHAR LIMIT=100] -->
+    <string name="bt_hci_snoop_log_filter_summary">Set filtering mode. (Disable and enable Bluetooth for the changes to take effect)</string>
+    <!-- Summary for the snoop logger profile filters while disabled [CHAR LIMIT=100] -->
+    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary">Set Bluetooth HCI snoop log mode to Enabled Filtered to change this option</string>
     <!-- Title for the Talkback Accessibility Service. Displayed on the Accessibility Settings screen in Setup Wizard. [CHAR_LIMIT=25] -->
     <string name="talkback_title">Talkback</string>
     <!-- Summary for the Talkback Accessibility Service. Lets the user know that Talkback is a screenreader and that it is usually most helpful to blind and low vision users and whether the service is on. [CHAR_LIMIT=none] -->
@@ -5212,7 +5239,7 @@
     <string name="battery_missing_link_a11y_message">Tap to learn more about this error</string>
 
     <!-- Label for power consumed by the screen -->
-    <string name="power_screen">Screen</string>
+    <string name="power_screen">Display</string>
     <!-- Label for power consumed by the CPU -->
     <string name="power_cpu">CPU</string>
     <!-- Label for power consumed by the flashlight -->
@@ -5391,6 +5418,8 @@
     <string name="battery_usage_spinner_breakdown_by_apps">Breakdown by apps</string>
     <!-- [CHAR_LIMIT=NONE] The spinner item text in the battery usage breakdown. -->
     <string name="battery_usage_spinner_breakdown_by_system">Breakdown by system</string>
+    <!-- [CHAR_LIMIT=NONE] Less than some percentage, e.g. < 1% -->
+    <string name="battery_usage_less_than_percent">&lt; <xliff:g id="percentage">%1$s</xliff:g></string>
     <!-- Process Stats strings -->
     <skip />
 
@@ -7041,6 +7070,9 @@
     <!-- Sound: Title for the option managing notification volume. [CHAR LIMIT=30] -->
     <string name="notification_volume_option_title">Notification volume</string>
 
+    <!-- Sound: Summary for when notification volume is disabled. [CHAR LIMIT=100] -->
+    <string name="notification_volume_disabled_summary">Unavailable because ring is muted</string>
+
     <!-- Sound: Title for the option defining the phone ringtone. [CHAR LIMIT=30] -->
     <string name="ringtone_title">Phone ringtone</string>
 
@@ -7438,7 +7470,7 @@
     <string name="general_notification_header">Manage</string>
 
     <!-- notification preference for app specific notification settings [CHAR LIMIT=80]-->
-    <string name="app_notification_field">App settings</string>
+    <string name="app_notification_field">App notifications</string>
 
     <!-- notification preference summary for app specific notification settings [CHAR LIMIT=120]-->
     <string name="app_notification_field_summary">Control notifications from individual apps</string>
@@ -7585,7 +7617,7 @@
     <string name="unseen_notifs_lock_screen">Show only new notifications on lock screen</string>
 
     <!-- Configure notifications: Summary for option of showing only new notifications on the lock screen. [CHAR LIMIT=100] -->
-    <string name="unseen_notifs_lock_screen_summary">After each unlock, remove existing notifications from the lock screen</string>
+    <string name="unseen_notifs_lock_screen_summary">Automatically remove previously viewed notifications from the lock screen</string>
 
     <!-- Configure notifications: Title for determining which notifications appear on the lock screen [CHAR LIMIT=60] -->
     <string name="lock_screen_notifs_title">Notifications on lock screen</string>
@@ -7839,12 +7871,12 @@
     <!-- Summary for a warning message about security implications of enabling a notification
           listener, displayed as a dialog message. [CHAR LIMIT=NONE] -->
     <string name="notification_listener_security_warning_summary">
-        <xliff:g id="notification_listener_name">%1$s</xliff:g> will be able to read all notifications,
+        The <xliff:g id="notification_listener_name">%1$s</xliff:g> app will be able to read all notifications,
         including personal information such as contact names, photos, and the text of messages you receive.
         This app will also be able to snooze or dismiss notifications or take action on buttons in notifications, including answering phone calls.
         \n\nThis will also give the app the ability to turn Do Not Disturb on or off and change related settings.
     </string>
-    <string name="nls_warning_prompt"><xliff:g id="notification_listener_name">%1$s</xliff:g> will be able to:</string>
+    <string name="nls_warning_prompt">The <xliff:g id="notification_listener_name">%1$s</xliff:g> app will be able to:</string>
     <string name="nls_feature_read_title">Read your notifications</string>
     <string name="nls_feature_read_summary">It can read your notifications, including personal information such as contacts, messages, and photos.</string>
     <string name="nls_feature_reply_title">Reply to messages</string>
@@ -10129,7 +10161,7 @@
     <!-- Preference category for showing auto-fill services with saved passwords. [CHAR LIMIT=60] -->
     <string name="autofill_passwords">Passwords</string>
     <!-- Preference category for showing credman services with saved credentials. [CHAR LIMIT=60] -->
-    <string name="credman_credentials">Password and identity services</string>
+    <string name="credman_credentials">Passwords, passkeys and data services</string>
     <!-- Summary for passwords settings that shows how many passwords are saved for each autofill
          service. [CHAR LIMIT=NONE] -->
     <string name="autofill_passwords_count">{count, plural,
@@ -10142,7 +10174,7 @@
     <!-- Keywords for the auto-fill feature. [CHAR LIMIT=NONE] -->
     <string name="autofill_keywords">auto, fill, autofill, password</string>
     <!-- Keywords for the credman feature. [CHAR LIMIT=NONE] -->
-    <string name="credman_keywords">credentials, passkey, password</string>
+    <string name="credman_keywords">data, passkey, password</string>
 
     <!-- Message of the warning dialog for setting the auto-fill app. [CHAR_LIMIT=NONE] -->
     <string name="autofill_confirmation_message">
@@ -10159,13 +10191,13 @@
     <string name="credman_confirmation_message_title">Turn off %1$s\?</string>
 
     <!-- Message of the warning dialog for disabling the credential provider. [CHAR_LIMIT=NONE] -->
-    <string name="credman_confirmation_message">Saved info like addresses or payment methods won\'t be filled in when you sign in. To keep your saved info filled in, set a default autofill service.</string>
+    <string name="credman_confirmation_message">Saved info like addresses or payment methods won\'t be filled in when you sign in. To keep your saved info filled in, set enable a password, passkey and data/or service.</string>
 
     <!-- Title of the error dialog when too many credential providers are selected. [CHAR_LIMIT=NONE] -->
-    <string name="credman_error_message_title">Password and identity services limit</string>
+    <string name="credman_error_message_title">Passwords, passkeys and data services limit</string>
 
     <!-- Message of the error dialog when too many credential providers are selected. [CHAR_LIMIT=NONE] -->
-    <string name="credman_error_message">You can have up to 5 autofill and password services active at the same time. Turn off a service to add more.</string>
+    <string name="credman_error_message">You can have up to 5 passwords, passkeys and data services active at the same time. Turn off a service to add more.</string>
 
     <!-- Positive button to turn off credential manager provider (confirmation). [CHAR LIMIT=60] -->
     <string name="credman_confirmation_message_positive_button">Turn off</string>
@@ -11015,10 +11047,13 @@
 
     <!-- [CHAR LIMIT=32] Name of MTE page in "Developer Options" and heading of page. -->
     <string name="development_memtag_page_title">Memory Tagging Extension</string>
-    <!-- [CHAR LIMIT=52] Label for button to turn on / off MTE protection.-->
+    <!-- [CHAR LIMIT=NONE] Explanation shown under heading of the page.-->
     <string name="development_memtag_intro">Memory Tagging Extension (MTE) makes it easier to find memory safety issues in your app and make native code in it more secure.</string>
+    <!-- [CHAR LIMIT=NONE] Further explanation shown at the bottom of the page.-->
     <string name="development_memtag_footer">Turning on MTE might cause slower device performance.</string>
+    <!-- [CHAR LIMIT=NONE] String for link to learn more about MTE.-->
     <string name="development_memtag_learn_more">Learn more about MTE</string>
+    <!-- [CHAR LIMIT=52] Label for button to turn on / off MTE protection.-->
     <string name="development_memtag_toggle">Enable MTE until you turn it off</string>
     <!-- [CHAR LIMIT=NONE] Message shown in dialog prompting user to reboot device to turn on MTE.-->
     <string name="development_memtag_reboot_message_on">You\u0027ll need to restart your device to turn on MTE.</string>
@@ -11926,21 +11961,21 @@
     <!-- Summary of the Flash Notification preference if all flash alerts are off. [CHAR LIMIT=60] -->
     <string name="flash_notifications_summary_off">Off</string>
     <!-- Summary of the Flash Notification preference if only camera flash is on. [CHAR LIMIT=60] -->
-    <string name="flash_notifications_summary_on_camera">On / camera flash</string>
+    <string name="flash_notifications_summary_on_camera">On / Camera flash</string>
     <!-- Summary of the Flash Notification preference if only screen flash is on. [CHAR LIMIT=60] -->
-    <string name="flash_notifications_summary_on_screen">On / screen flash</string>
+    <string name="flash_notifications_summary_on_screen">On / Screen flash</string>
     <!-- Summary of the Flash Notification preference if both flash alerts are on. [CHAR LIMIT=60] -->
-    <string name="flash_notifications_summary_on_camera_and_screen">On / camera and screen flash</string>
+    <string name="flash_notifications_summary_on_camera_and_screen">On / Camera and screen flash</string>
     <!-- Introduction in Flash Notification page to introduce flash notifications feature. [CHAR LIMIT=NONE]  -->
-    <string name="flash_notifications_intro">Flash the camera light or the screen when you receive notifications or when alarms sound.</string>
+    <string name="flash_notifications_intro">Flash the camera light or the screen when you receive notifications or when alarms sound</string>
     <!-- Notes in Flash Notification page footer for something should be aware. [CHAR LIMIT=NONE]  -->
-    <string name="flash_notifications_note">Use flash notifications with caution if your are light sensitive</string>
+    <string name="flash_notifications_note">Use flash notifications with caution if you\u0027re light sensitive</string>
     <!-- Label of the button to preview the selected Flash Notification effects. [CHAR LIMIT=20]-->
     <string name="flash_notifications_preview">Preview</string>
     <!-- Title of the camera flash in Flash Notification page. [CHAR LIMIT=60] -->
-    <string name="camera_flash_notification_title">Camera flash notification</string>
+    <string name="camera_flash_notification_title">Camera flash</string>
     <!-- Title of the screen flash in Flash Notification page. [CHAR LIMIT=60] -->
-    <string name="screen_flash_notification_title">Screen flash notification</string>
+    <string name="screen_flash_notification_title">Screen flash</string>
     <!-- Title of the screen flash color selection dialog. [CHAR LIMIT=NONE] -->
     <string name="screen_flash_notification_color_title">Screen flash color</string>
     <!-- Label of the color option show in the summary of screen flash preference. [CHAR LIMIT=60] -->
