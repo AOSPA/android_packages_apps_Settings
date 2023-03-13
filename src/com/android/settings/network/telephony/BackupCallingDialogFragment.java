@@ -39,24 +39,30 @@ import com.android.settings.R;
 /**
  * Dialog fragment to show dialog for "Backup Calling"
  *
- * 1. When IMS is registered over C_IWLAN, device is in a call, and user tries to disable backup
- *    calling, show dialog to confirm
+ * 1. When IMS is registered over C_IWLAN-only mode, device is in a call, and user tries to disable
+ *    C_IWLAN, show a dialog to confirm.
+ * 2. When UE is in C_IWLAN-only mode, the preferred network type is not LTE, NR-only, or NR/LTE,
+ *    and the user tries to enable C_IWLAN, show a dialog to change preferred nw type.
  */
 public class BackupCallingDialogFragment extends InstrumentedDialogFragment implements
         DialogInterface.OnClickListener {
 
     private static final String LOG_TAG = "BackupCallingDialogFragment";
+    private static final String ARG_PREF_TITLE = "pref_title";
     private static final String ARG_DIALOG_TYPE = "dialog_type";
     private static final String ARG_SUB_ID = "subId";
 
     public static final int TYPE_DISABLE_CIWLAN_DIALOG = 0;
+    public static final int TYPE_ENABLE_CIWLAN_INCOMPATIBLE_NW_TYPE_DIALOG = 1;
 
+    private String mPrefTitle;
     private int mType;
     private int mSubId;
 
-     public static BackupCallingDialogFragment newInstance(int type, int subId) {
+     public static BackupCallingDialogFragment newInstance(String prefTitle, int type, int subId) {
         final BackupCallingDialogFragment dialogFragment = new BackupCallingDialogFragment();
         Bundle args = new Bundle();
+        args.putString(ARG_PREF_TITLE, prefTitle);
         args.putInt(ARG_DIALOG_TYPE, type);
         args.putInt(ARG_SUB_ID, subId);
         dialogFragment.setArguments(args);
@@ -68,15 +74,25 @@ public class BackupCallingDialogFragment extends InstrumentedDialogFragment impl
         final Bundle bundle = getArguments();
         final Context context = getContext();
 
+        mPrefTitle = bundle.getString(ARG_PREF_TITLE).toLowerCase();
         mType = bundle.getInt(ARG_DIALOG_TYPE);
         mSubId = bundle.getInt(ARG_SUB_ID);
 
         switch (mType) {
             case TYPE_DISABLE_CIWLAN_DIALOG:
                 return new AlertDialog.Builder(context)
-                        .setMessage(R.string.backup_calling_disable_dialog_ciwlan_call)
+                        .setTitle(context.getString(
+                                R.string.toggle_disabling_ciwlan_call_dialog_title, mPrefTitle))
+                        .setMessage(context.getString(
+                                R.string.toggle_disabling_ciwlan_call_dialog_body, mPrefTitle))
                         .setPositiveButton(android.R.string.ok, this)
                         .setNegativeButton(android.R.string.cancel, null)
+                        .create();
+            case TYPE_ENABLE_CIWLAN_INCOMPATIBLE_NW_TYPE_DIALOG:
+                return new AlertDialog.Builder(context)
+                        .setTitle(R.string.preferred_nw_incompatible_ciwlan_nw_mode_dialog_title)
+                        .setMessage(R.string.backup_calling_enable_dialog_incompatible_nw_type)
+                        .setPositiveButton(android.R.string.ok, null)
                         .create();
             default:
                 throw new IllegalArgumentException("Unknown type " + mType);

@@ -140,7 +140,8 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
 
     public void init(DashboardFragment fragment) {
         mBluetoothDeviceUpdater = new SavedBluetoothDeviceUpdater(fragment.getContext(),
-                fragment, PreviouslyConnectedDevicePreferenceController.this);
+                PreviouslyConnectedDevicePreferenceController.this, /* showConnectedDevice= */
+                false, fragment.getMetricsCategory());
     }
 
     @Override

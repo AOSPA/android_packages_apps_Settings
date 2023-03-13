@@ -12,6 +12,7 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
 import com.android.settings.network.SubscriptionUtil;
 
@@ -27,6 +28,7 @@ import java.util.TreeMap;
 public class DdsDataOptionStateTuner extends TelephonyCallback
         implements TelephonyCallback.CallStateListener,
         TelephonyCallback.ActiveDataSubscriptionIdListener {
+    private final static String LOG_TAG = "DdsDataOptionStateTuner";
     private final Runnable mUpdateCallback;
     private final Map<Integer, DdsDataOptionStateTuner> mCallbacks = new TreeMap<>();
     private final TelephonyManager mTelephonyManager;
@@ -67,9 +69,13 @@ public class DdsDataOptionStateTuner extends TelephonyCallback
         }
         final List<SubscriptionInfo> subs =
                 SubscriptionUtil.getActiveSubscriptions(mSubscriptionManager);
+        final boolean isMultiSub = subs.size() > 1;
         for (SubscriptionInfo subInfo : subs) {
-            // Listen to telehony callback events of the non-DDS.
-            if (subInfo.getSubscriptionId() != mDefaultDataSubId) {
+            // Listen to telephony callback events of the DDS in single-SIM case and the non-DDS in
+            // multi-SIM case.
+            if (isMultiSub && subInfo.getSubscriptionId() == mDefaultDataSubId) {
+                continue;
+            } else {
                 mTelephonyManager.createForSubscriptionId(subInfo.getSubscriptionId())
                         .registerTelephonyCallback(context.getMainExecutor(), this);
                 mCallbacks.put(subInfo.getSubscriptionId(), this);
@@ -107,11 +113,12 @@ public class DdsDataOptionStateTuner extends TelephonyCallback
     }
 
     /**
-     * Used to check if non-DDS sub has a voice call ongoing.
+     * Used to check if the DDS (in single-SIM) or the non-DDS (in multi-SIM) has an ongoing voice
+     * call
      *
-     * @return true if a non-DDS sub voice call is ongoing.
+     * @return true if a voice call is ongoing.
      */
-    public boolean isInNonDdsVoiceCall() {
+    public boolean isInVoiceCall() {
         return mNonDdsCallState != TelephonyManager.CALL_STATE_IDLE;
     }
 

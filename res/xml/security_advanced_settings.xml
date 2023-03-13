@@ -119,7 +119,7 @@
     <!-- work profile security section -->
     <PreferenceCategory
         android:order="110"
-        android:key="security_category_profile"
+        android:key="work_profile_category"
         android:title="@string/lock_settings_profile_title">
 
         <!-- security_settings_unification -->
@@ -146,12 +146,12 @@
 
         <com.android.settingslib.RestrictedPreference
             android:key="face_settings_profile"
-            android:title="@string/security_settings_face_preference_title"
+            android:title="@string/security_settings_face_profile_preference_title"
             android:summary="@string/summary_placeholder" />
 
         <com.android.settingslib.RestrictedPreference
             android:key="biometric_settings_profile"
-            android:title="@string/security_settings_biometric_preference_title"
+            android:title="@string/security_settings_work_biometric_preference_title"
             android:summary="@string/summary_placeholder" />
 
     </PreferenceCategory>

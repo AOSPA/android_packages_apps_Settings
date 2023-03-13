@@ -74,7 +74,7 @@ public class GroupBluetoothDevicesConnectedController extends BasePreferenceCont
         mGroupId = groupid;
         lifecycle.addObserver(this);
         mGroupDeviceUpdater = new GroupBluetoothDevicesConnectedUpdater(fragment.getContext(),
-                fragment, this, mGroupId);
+                this, fragment.getMetricsCategory(), mGroupId);
     }
 
     @Override

@@ -30,7 +30,6 @@ package com.android.settings.bluetooth;
 
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
-import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
 import android.bluetooth.BluetoothProfile;
@@ -50,9 +49,9 @@ public class GroupBluetoothDevicesAvailableMediaDeviceUpdater extends
     private final AudioManager mAudioManager;
     private GroupUtils mGroupUtils;
 
-    public GroupBluetoothDevicesAvailableMediaDeviceUpdater(Context context, DashboardFragment
-            fragment, DevicePreferenceCallback devicePreferenceCallback, int groupId) {
-        super(context, fragment, devicePreferenceCallback);
+    public GroupBluetoothDevicesAvailableMediaDeviceUpdater(Context context,
+           DevicePreferenceCallback devicePreferenceCallback, int metricsCategory, int groupId) {
+        super(context, devicePreferenceCallback, metricsCategory);
         mGroupId = groupId;
         mAudioManager = context.getSystemService(AudioManager.class);
         mGroupUtils = new GroupUtils(context);

@@ -153,7 +153,7 @@ public class GroupSavedDeviceController extends BasePreferenceController
 
     public void init(DashboardFragment fragment) {
         mBluetoothDeviceUpdater = new GroupSavedBluetoothDeviceUpdater(fragment.getContext(),
-        fragment, GroupSavedDeviceController.this);
+        GroupSavedDeviceController.this, fragment.getMetricsCategory());
     }
 
     @Override

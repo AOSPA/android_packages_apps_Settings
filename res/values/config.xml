@@ -101,6 +101,14 @@
         -->
     </string-array>
 
+    <!-- List containing the component names of pre-installed speech services. -->
+    <string-array name="config_preinstalled_speech_services" translatable="false">
+        <!--
+        <item>com.example.package.first/com.example.class.FirstService</item>
+        <item>com.example.package.second/com.example.class.SecondService</item>
+        -->
+    </string-array>
+
     <!-- List containing the component names of pre-installed interaction control services. -->
     <string-array name="config_preinstalled_interaction_control_services" translatable="false">
         <!--
@@ -109,8 +117,9 @@
         -->
     </string-array>
 
-    <!-- List containing the order of services in screen reader category by componentname.
-         All componentnames in a category need to be specified to guarantee correct behavior.-->
+    <!-- List containing the order of services in screen reader category by {@link ComponentName}.
+         All {@link ComponentName} in a category need to be specified to guarantee correct
+         behavior.-->
     <string-array name="config_order_screen_reader_services" translatable="false">
         <!--
         <item>com.example.package.first/com.example.class.FirstService</item>
@@ -119,8 +128,8 @@
     </string-array>
 
     <!-- List containing the order of services in captions category by preference key or
-         componentname. All preference keys in a category need to be specified to guarantee correct
-         behavior.-->
+         {@link ComponentName}. All preference keys in a category need to be specified to guarantee
+         correct behavior.-->
     <string-array name="config_order_captions_services" translatable="false">
         <!--
         <item>com.example.package.first/com.example.class.FirstService</item>
@@ -131,8 +140,8 @@
         -->
     </string-array>
 
-    <!-- List containing the order of services in audio and caption category by preference key
-         or componentname. All preference keys in a category need to be specified to guarantee
+    <!-- List containing the order of services in audio and caption category by preference key or
+         {@link ComponentName}. All preference keys in a category need to be specified to guarantee
          correct behavior.-->
     <string-array name="config_order_audio_services" translatable="false">
         <!--
@@ -144,8 +153,8 @@
         -->
     </string-array>
 
-    <!-- List containing the order of services in display category by preference key
-         or componentname. All preference keys in a category need to be specified to guarantee
+    <!-- List containing the order of services in display category by preference key or
+         {@link ComponentName}. All preference keys in a category need to be specified to guarantee
          correct behavior.-->
     <string-array name="config_order_display_services" translatable="false">
         <!--
@@ -157,8 +166,21 @@
         -->
     </string-array>
 
-    <!-- List containing the order of services in interaction control category by preference key
-         or componentname. All preference keys in a category need to be specified to guarantee
+    <!-- List containing the order of services in speech category by preference key or
+         {@link ComponentName}. All preference keys in a category need to be specified to guarantee
+         correct behavior.-->
+    <string-array name="config_order_speech_services" translatable="false">
+        <!--
+        <item>com.example.package.first/com.example.class.FirstService</item>
+        <item>com.example.package.second/com.example.class.SecondService</item>
+        <item>font_size_preference_screen</item>
+        <item>dark_ui_mode_accessibility</item>
+        <item>...</item>
+        -->
+    </string-array>
+
+    <!-- List containing the order of services in interaction control category by preference key or
+         {@link ComponentName}. All preference keys in a category need to be specified to guarantee
          correct behavior.-->
     <string-array name="config_order_interaction_control_services" translatable="false">
         <!--
@@ -654,6 +676,9 @@
     <!-- Whether the toggle for Auto-rotate with Face Detection should be shown. -->
     <bool name="config_auto_rotate_face_detection_available">true</bool>
 
+    <!-- Whether to display the 3G option at network mode.-->
+    <bool name="config_display_network_mode_3g_option">true</bool>
+
     <!-- The radius of the enrollment progress bar, in dp -->
     <integer name="config_udfpsEnrollProgressBar" translatable="false">
         280
@@ -673,5 +698,8 @@
         M44.9713,54.6267C42.5513,56.7167 39.2879,58.0001 35.5846,58.0001C32.2296,
         58.0001 29.2229,56.9551 26.8945,55.195
     </string>
+
+    <!-- Whether auto data switching on secondary SIM enables cross-SIM calling on both SIMs. -->
+    <bool name="config_auto_data_switch_enables_cross_sim_calling">false</bool>
 
 </resources>

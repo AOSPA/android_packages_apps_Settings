@@ -21,8 +21,6 @@ import static android.hardware.fingerprint.FingerprintManager.ENROLL_FIND_SENSOR
 import static android.hardware.fingerprint.FingerprintManager.EnrollReason;
 import static android.hardware.fingerprint.FingerprintManager.EnrollmentCallback;
 
-import static com.android.settings.biometrics2.ui.model.EnrollmentProgress.INITIAL_STEPS;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -56,6 +54,8 @@ import org.mockito.junit.MockitoRule;
 @RunWith(AndroidJUnit4.class)
 public class FingerprintEnrollProgressViewModelTest {
 
+    private static final int TEST_USER_ID = 334;
+
     @Rule public final MockitoRule mockito = MockitoJUnit.rule();
     @Rule public final InstantTaskExecutorRule mTaskExecutorRule = new InstantTaskExecutorRule();
 
@@ -70,23 +70,22 @@ public class FingerprintEnrollProgressViewModelTest {
         when(mApplication.getResources()).thenReturn(mResources);
         when(mResources.getBoolean(R.bool.enrollment_message_display_controller_flag))
                 .thenReturn(false);
-        mViewModel = new FingerprintEnrollProgressViewModel(mApplication, mFingerprintUpdater);
+        mViewModel = new FingerprintEnrollProgressViewModel(mApplication, mFingerprintUpdater,
+                TEST_USER_ID);
     }
 
     @Test
     public void testStartEnrollment() {
         @EnrollReason final int enrollReason = ENROLL_FIND_SENSOR;
-        final int userId = 334;
         final byte[] token = new byte[] { 1, 2, 3 };
         mViewModel.setToken(token);
-        mViewModel.setUserId(userId);
 
         // Start enrollment
         final boolean ret = mViewModel.startEnrollment(enrollReason);
 
         assertThat(ret).isTrue();
         verify(mFingerprintUpdater, only()).enroll(eq(token), any(CancellationSignal.class),
-                eq(userId), any(EnrollmentCallback.class), eq(enrollReason));
+                eq(TEST_USER_ID), any(EnrollmentCallback.class), eq(enrollReason));
     }
 
     @Test
@@ -102,17 +101,15 @@ public class FingerprintEnrollProgressViewModelTest {
     @Test
     public void testCancelEnrollment() {
         @EnrollReason final int enrollReason = ENROLL_ENROLL;
-        final int userId = 334;
         final byte[] token = new byte[] { 1, 2, 3 };
         mViewModel.setToken(token);
-        mViewModel.setUserId(userId);
 
         final TestWrapper<CancellationSignal> signalWrapper = new TestWrapper<>();
         doAnswer(invocation -> {
             signalWrapper.mValue = invocation.getArgument(1);
             return null;
         }).when(mFingerprintUpdater).enroll(any(byte[].class), any(CancellationSignal.class),
-                eq(userId), any(EnrollmentCallback.class), anyInt());
+                eq(TEST_USER_ID), any(EnrollmentCallback.class), anyInt());
 
         // Start enrollment
         final boolean ret = mViewModel.startEnrollment(enrollReason);
@@ -128,17 +125,15 @@ public class FingerprintEnrollProgressViewModelTest {
     @Test
     public void testProgressUpdate() {
         @EnrollReason final int enrollReason = ENROLL_ENROLL;
-        final int userId = 334;
         final byte[] token = new byte[] { 1, 2, 3 };
         mViewModel.setToken(token);
-        mViewModel.setUserId(userId);
 
         final TestWrapper<EnrollmentCallback> callbackWrapper = new TestWrapper<>();
         doAnswer(invocation -> {
             callbackWrapper.mValue = invocation.getArgument(3);
             return null;
         }).when(mFingerprintUpdater).enroll(any(byte[].class), any(CancellationSignal.class),
-                eq(userId), any(EnrollmentCallback.class), anyInt());
+                eq(TEST_USER_ID), any(EnrollmentCallback.class), anyInt());
 
         // Start enrollment
         final boolean ret = mViewModel.startEnrollment(enrollReason);
@@ -150,24 +145,14 @@ public class FingerprintEnrollProgressViewModelTest {
         EnrollmentProgress progress = mViewModel.getProgressLiveData().getValue();
         assertThat(progress).isNotNull();
         assertThat(progress.getSteps()).isEqualTo(25);
-        // TODO(b/260957933) verify getRemaining() when it is really used
-        //assertThat(progress.getRemaining()).isEqualTo(25);
+        assertThat(progress.getRemaining()).isEqualTo(25);
 
         // Update second progress
         callbackWrapper.mValue.onEnrollmentProgress(20);
         progress = mViewModel.getProgressLiveData().getValue();
         assertThat(progress).isNotNull();
         assertThat(progress.getSteps()).isEqualTo(25);
-        // TODO(b/260957933) verify getRemaining() when it is really used
-        //assertThat(progress.getRemaining()).isEqualTo(20);
-
-        // Clear progress
-        mViewModel.clearProgressLiveData();
-        progress = mViewModel.getProgressLiveData().getValue();
-        assertThat(progress).isNotNull();
-        assertThat(progress.getSteps()).isEqualTo(INITIAL_STEPS);
-        // TODO(b/260957933) verify getRemaining() when it is really used
-        //assertThat(progress.getRemaining()).isEqualTo(INITIAL_REMAINING);
+        assertThat(progress.getRemaining()).isEqualTo(20);
     }
 
     // TODO(b/260957933): FingerprintEnrollProgressViewModel::getErrorLiveData() and

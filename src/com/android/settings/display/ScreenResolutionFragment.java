@@ -56,6 +56,7 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
 
     private Resources mResources;
     private static final String SCREEN_RESOLUTION = "user_selected_resolution";
+    private static final String SCREEN_RESOLUTION_KEY = "screen_resolution";
     private Display mDefaultDisplay;
     private String[] mScreenResolutionOptions;
     private Set<Point> mResolutions;
@@ -80,15 +81,16 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
                 mResources.getStringArray(R.array.config_screen_resolution_options_strings);
         mImagePreference = new IllustrationPreference(context);
         mDisplayObserver = new DisplayObserver(context);
-        ScreenResolutionController mController =
-                new ScreenResolutionController(context, "fragment");
-        mResolutions = mController.getAllSupportedResolutions();
-        mHighWidth = mController.getHighWidth();
-        mFullWidth = mController.getFullWidth();
+        ScreenResolutionController controller =
+                new ScreenResolutionController(context, SCREEN_RESOLUTION_KEY);
+        mResolutions = controller.getAllSupportedResolutions();
+        mHighWidth = controller.getHighWidth();
+        mFullWidth = controller.getFullWidth();
+        Log.i(TAG, "mHighWidth:" + mHighWidth + "mFullWidth:" + mFullWidth);
         mScreenResolutionSummaries =
                 new String[] {
-                    mHighWidth + " x " + mController.getHighHeight(),
-                    mFullWidth + " x " + mController.getFullHeight()
+                    mHighWidth + " x " + controller.getHighHeight(),
+                    mFullWidth + " x " + controller.getFullHeight()
                 };
     }
 
@@ -201,7 +203,8 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
         return mScreenResolutionOptions[ScreenResolutionController.HIGHRESOLUTION_IDX].equals(key)
                 ? mHighWidth
                 : mScreenResolutionOptions[ScreenResolutionController.FULLRESOLUTION_IDX].equals(
-                    key) ? mFullWidth : -1;
+                    key)
+                ? mFullWidth : -1;
     }
 
     @Override
@@ -300,7 +303,7 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     ScreenResolutionController mController =
-                            new ScreenResolutionController(context, "fragment");
+                            new ScreenResolutionController(context, SCREEN_RESOLUTION_KEY);
                     return mController.checkSupportedResolutions();
                 }
             };

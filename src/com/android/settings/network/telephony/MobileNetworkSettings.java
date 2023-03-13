@@ -35,6 +35,9 @@ import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.telephony.ims.ImsException;
+import android.telephony.ims.ImsManager;
+import android.telephony.ims.ImsMmTelManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -60,15 +63,17 @@ import com.android.settings.network.telephony.gsm.SelectNetworkPreferenceControl
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.mobile.dataservice.DataServiceUtils;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.ThreadUtils;
 
-import org.codeaurora.internal.IExtTelephony;
+import com.qti.extphone.CiwlanConfig;
+import com.qti.extphone.ExtTelephonyManager;
+import com.qti.extphone.ServiceCallback;
 
+import java.lang.Runnable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -106,8 +111,8 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
     private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
 
-    private TelephonyManager mTelephonyManager;
-    private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+    private static TelephonyManager mTelephonyManager;
+    private static int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
     private CdmaSystemSelectPreferenceController mCdmaSystemSelectPreferenceController;
     private CdmaSubscriptionPreferenceController mCdmaSubscriptionPreferenceController;
@@ -120,6 +125,72 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     private Map<Integer, SubscriptionInfoEntity> mSubscriptionInfoMap = new HashMap<>();
     private SubscriptionInfoEntity mSubscriptionInfoEntity;
     private MobileNetworkInfoEntity mMobileNetworkInfoEntity;
+
+    private static ImsManager mImsMgr;
+    private static CiwlanConfig mCiwlanConfig = null;
+    private boolean mExtTelServiceConnected = false;
+    private ExtTelephonyManager mExtTelephonyManager;
+    private final ServiceCallback mExtTelServiceCallback = new ServiceCallback() {
+        @Override
+        public void onConnected() {
+            Log.d(LOG_TAG, "ExtTelephony service connected");
+            mExtTelServiceConnected = true;
+            runBackgroundTasks();
+        }
+
+        @Override
+        public void onDisconnected() {
+            Log.d(LOG_TAG, "ExtTelephony service disconnected");
+            mExtTelServiceConnected = false;
+        }
+    };
+
+    private void runBackgroundTasks() {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                // Query the C_IWLAN config
+                try {
+                    mCiwlanConfig = mExtTelephonyManager.getCiwlanConfig(
+                            SubscriptionManager.getSlotIndex(mSubId));
+                } catch (RemoteException ex) {
+                    Log.e(LOG_TAG, "getCiwlanConfig exception", ex);
+                }
+            }
+        });
+    }
+
+    static boolean isCiwlanEnabled() {
+        ImsMmTelManager imsMmTelMgr = getImsMmTelManager(mSubId);
+        if (imsMmTelMgr == null) {
+            return false;
+        }
+        try {
+            return imsMmTelMgr.isCrossSimCallingEnabled();
+        } catch (ImsException exception) {
+            Log.e(LOG_TAG, "Failed to get cross SIM calling configuration", exception);
+        }
+        return false;
+    }
+
+    private static ImsMmTelManager getImsMmTelManager(int subId) {
+        if (!SubscriptionManager.isUsableSubscriptionId(subId)) {
+            return null;
+        }
+        return (mImsMgr == null) ? null : mImsMgr.getImsMmTelManager(subId);
+    }
+
+    static boolean isInCiwlanOnlyMode() {
+        if (mCiwlanConfig == null) {
+            Log.d(LOG_TAG, "C_IWLAN config null");
+            return false;
+        }
+        if (mTelephonyManager.isNetworkRoaming(mSubId)) {
+            return mCiwlanConfig.isCiwlanOnlyInRoam();
+        }
+        return mCiwlanConfig.isCiwlanOnlyInHome();
+    }
 
     public MobileNetworkSettings() {
         super(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
@@ -214,6 +285,9 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
             Log.d(LOG_TAG, "Invalid subId request " + mSubId);
             return;
         }
+
+        mImsMgr = context.getSystemService(ImsManager.class);
+        mExtTelephonyManager = ExtTelephonyManager.getInstance(context);
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -332,6 +406,10 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     public void onCreate(Bundle icicle) {
         Log.i(LOG_TAG, "onCreate:+");
 
+        if (!mExtTelServiceConnected) {
+            mExtTelephonyManager.connectService(mExtTelServiceCallback);
+        }
+
         final TelephonyStatusControlSession session =
                 setTelephonyAvailabilityStatus(getPreferenceControllersAsList());
 
@@ -378,6 +456,10 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
     @Override
     public void onDestroy() {
+        if (mExtTelServiceConnected) {
+            mExtTelephonyManager.disconnectService(mExtTelServiceCallback);
+            mExtTelephonyManager = null;
+        }
         super.onDestroy();
         mMobileNetworkRepository.removeRegister();
     }
@@ -510,35 +592,32 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
     @Override
     public void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
-        if (DataServiceUtils.shouldUpdateEntityList(mSubInfoEntityList, subInfoEntityList)) {
+        // Check the current subId is existed or not, if so, finish it.
+        if (!mSubscriptionInfoMap.isEmpty()) {
 
-            // Check the current subId is existed or not, if so, finish it.
-            if (!mSubscriptionInfoMap.isEmpty()) {
-
-                // Check each subInfo and remove it in the map based on the new list.
-                for (SubscriptionInfoEntity entity : subInfoEntityList) {
-                    mSubscriptionInfoMap.remove(Integer.parseInt(entity.subId));
-                }
-
-                Iterator<Integer> iterator = mSubscriptionInfoMap.keySet().iterator();
-                while (iterator.hasNext()) {
-                    if (iterator.next() == mSubId) {
-                        finishFragment();
-                        return;
-                    }
-                }
+            // Check each subInfo and remove it in the map based on the new list.
+            for (SubscriptionInfoEntity entity : subInfoEntityList) {
+                mSubscriptionInfoMap.remove(Integer.parseInt(entity.subId));
             }
 
-            mSubInfoEntityList = subInfoEntityList;
-            mSubInfoEntityList.forEach(entity -> {
-                int subId = Integer.parseInt(entity.subId);
-                mSubscriptionInfoMap.put(subId, entity);
-                if (subId == mSubId) {
-                    mSubscriptionInfoEntity = entity;
-                    onSubscriptionDetailChanged();
+            Iterator<Integer> iterator = mSubscriptionInfoMap.keySet().iterator();
+            while (iterator.hasNext()) {
+                if (iterator.next() == mSubId) {
+                    finishFragment();
+                    return;
                 }
-            });
+            }
         }
+
+        mSubInfoEntityList = subInfoEntityList;
+        mSubInfoEntityList.forEach(entity -> {
+            int subId = Integer.parseInt(entity.subId);
+            mSubscriptionInfoMap.put(subId, entity);
+            if (subId == mSubId) {
+                mSubscriptionInfoEntity = entity;
+                onSubscriptionDetailChanged();
+            }
+        });
     }
 
     @Override

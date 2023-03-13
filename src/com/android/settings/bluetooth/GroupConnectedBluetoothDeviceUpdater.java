@@ -54,10 +54,12 @@ public class GroupConnectedBluetoothDeviceUpdater extends GroupBluetoothDeviceUp
 
     private static final String TAG = "GroupConnectedBluetoothDeviceUpdater";
     private static final String PREF_KEY = "connected_group_bt";
+    private int mMetricsCategory;
 
-    public GroupConnectedBluetoothDeviceUpdater(Context context, DashboardFragment fragment,
-            DevicePreferenceCallback devicePreferenceCallback) {
-        super(context, fragment, devicePreferenceCallback);
+    public GroupConnectedBluetoothDeviceUpdater(Context context,
+            DevicePreferenceCallback devicePreferenceCallback, int metricsCategory) {
+        super(context, devicePreferenceCallback, metricsCategory);
+        mMetricsCategory = metricsCategory;
     }
 
     @Override
@@ -146,7 +148,7 @@ public class GroupConnectedBluetoothDeviceUpdater extends GroupBluetoothDeviceUp
         if (DBG) {
             Log.d(TAG, " onPreferenceClick " + preference);
         }
-        mMetricsFeatureProvider.logClickedPreference(preference, mFragment.getMetricsCategory());
+        mMetricsFeatureProvider.logClickedPreference(preference, mMetricsCategory);
         final CachedBluetoothDevice device = ((BluetoothDevicePreference) preference)
                 .getBluetoothDevice();
         return device.setActive();

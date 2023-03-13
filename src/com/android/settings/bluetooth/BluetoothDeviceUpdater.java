@@ -27,11 +27,9 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.GearPreference;
 import com.android.settingslib.bluetooth.BluetoothCallback;
-import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
@@ -47,21 +45,22 @@ import java.util.UUID;
  * {@link BluetoothCallback}. It notifies the upper level whether to add/remove the preference
  * through {@link DevicePreferenceCallback}
  *
- * In {@link BluetoothDeviceUpdater}, it uses {@link BluetoothDeviceFilter.Filter} to detect
- * whether the {@link CachedBluetoothDevice} is relevant.
+ * In {@link BluetoothDeviceUpdater}, it uses {@link #isFilterMatched(CachedBluetoothDevice)} to
+ * detect whether the {@link CachedBluetoothDevice} is relevant.
  */
 public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
         LocalBluetoothProfileManager.ServiceListener {
-    private static final String TAG = "BluetoothDeviceUpdater";
-    private static final boolean DBG = Log.isLoggable(TAG, Log.DEBUG);
-
     protected final MetricsFeatureProvider mMetricsFeatureProvider;
     protected final DevicePreferenceCallback mDevicePreferenceCallback;
     protected final Map<BluetoothDevice, Preference> mPreferenceMap;
+    protected Context mContext;
     protected Context mPrefContext;
-    protected DashboardFragment mFragment;
     @VisibleForTesting
     protected LocalBluetoothManager mLocalManager;
+    protected int mMetricsCategory;
+
+    private static final String TAG = "BluetoothDeviceUpdater";
+    private static final boolean DBG = Log.isLoggable(TAG, Log.DEBUG);
 
     private GroupUtils mGroupUtils;
 
@@ -70,18 +69,20 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
         launchDeviceDetails(pref);
     };
 
-    public BluetoothDeviceUpdater(Context context, DashboardFragment fragment,
-            DevicePreferenceCallback devicePreferenceCallback) {
-        this(context, fragment, devicePreferenceCallback, Utils.getLocalBtManager(context));
+    public BluetoothDeviceUpdater(Context context,
+            DevicePreferenceCallback devicePreferenceCallback, int metricsCategory) {
+        this(context, devicePreferenceCallback, Utils.getLocalBtManager(context), metricsCategory);
     }
 
     @VisibleForTesting
-    BluetoothDeviceUpdater(Context context, DashboardFragment fragment,
-            DevicePreferenceCallback devicePreferenceCallback, LocalBluetoothManager localManager) {
-        mFragment = fragment;
+    BluetoothDeviceUpdater(Context context,
+            DevicePreferenceCallback devicePreferenceCallback, LocalBluetoothManager localManager,
+            int metricsCategory) {
+        mContext = context;
         mDevicePreferenceCallback = devicePreferenceCallback;
         mPreferenceMap = new HashMap<>();
         mLocalManager = localManager;
+        mMetricsCategory = metricsCategory;
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
         mGroupUtils = new GroupUtils(context);
     }
@@ -94,7 +95,7 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
             Log.e(TAG, "registerCallback() Bluetooth is not supported on this device");
             return;
         }
-        mLocalManager.setForegroundActivity(mFragment.getContext());
+        mLocalManager.setForegroundActivity(mContext);
         mLocalManager.getEventManager().registerCallback(this);
         mLocalManager.getProfileManager().addServiceListener(this);
         forceUpdate();
@@ -297,7 +298,7 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
      * {@link SubSettingLauncher} to launch {@link BluetoothDeviceDetailsFragment}
      */
     protected void launchDeviceDetails(Preference preference) {
-        mMetricsFeatureProvider.logClickedPreference(preference, mFragment.getMetricsCategory());
+        mMetricsFeatureProvider.logClickedPreference(preference, mMetricsCategory);
         final CachedBluetoothDevice device =
                 ((BluetoothDevicePreference) preference).getBluetoothDevice();
         if (device == null) {
@@ -307,11 +308,11 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
         args.putString(BluetoothDeviceDetailsFragment.KEY_DEVICE_ADDRESS,
                 device.getDevice().getAddress());
 
-        new SubSettingLauncher(mFragment.getContext())
+        new SubSettingLauncher(mContext)
                 .setDestination(BluetoothDeviceDetailsFragment.class.getName())
                 .setArguments(args)
                 .setTitleRes(R.string.device_details_title)
-                .setSourceMetricsCategory(mFragment.getMetricsCategory())
+                .setSourceMetricsCategory(mMetricsCategory)
                 .launch();
     }
 

@@ -41,7 +41,6 @@ import com.android.settings.R;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.GearPreference;
 import com.android.settingslib.bluetooth.BluetoothCallback;
@@ -57,9 +56,9 @@ import java.util.Map;
 
 public abstract class GroupBluetoothGroupDeviceUpdater extends GroupBluetoothDeviceUpdater {
 
-    public GroupBluetoothGroupDeviceUpdater(Context context, DashboardFragment fragment,
-        DevicePreferenceCallback devicePreferenceCallback) {
-        super(context, fragment, devicePreferenceCallback);
+    public GroupBluetoothGroupDeviceUpdater(Context context,
+        DevicePreferenceCallback devicePreferenceCallback, int metricsCategory) {
+        super(context, devicePreferenceCallback, metricsCategory);
     }
 
     @Override
