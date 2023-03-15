@@ -271,8 +271,6 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
                 new EmergencyTonePreferenceController(context, fragment, lifecycle);
         final VibrateIconPreferenceController vibrateIconPreferenceController =
                 new VibrateIconPreferenceController(context, fragment, lifecycle);
-        final LinkedVolumesPreferenceController linkedVolumesPreferenceController =
-                new LinkedVolumesPreferenceController(context, fragment, lifecycle);
         final ScreenshotSoundPreferenceController screenshotSoundPreferenceController =
                 new ScreenshotSoundPreferenceController(context, fragment, lifecycle);
 
@@ -286,7 +284,6 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
         controllers.add(dockAudioMediaPreferenceController);
         controllers.add(bootSoundPreferenceController);
         controllers.add(emergencyTonePreferenceController);
-        controllers.add(linkedVolumesPreferenceController);
         controllers.add(screenshotSoundPreferenceController);
         controllers.add(new PreferenceCategoryController(context,
                 "other_sounds_and_vibrations_category").setChildren(
@@ -300,7 +297,6 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
                         dockAudioMediaPreferenceController,
                         bootSoundPreferenceController,
                         emergencyTonePreferenceController,
-                        linkedVolumesPreferenceController,
                         screenshotSoundPreferenceController)));
 
         return controllers;
