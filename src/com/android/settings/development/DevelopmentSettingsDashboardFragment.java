@@ -389,6 +389,11 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 getDevelopmentOptionsController(
                         BluetoothLeAudioPreferenceController.class);
         leAudioFeatureController.onRebootDialogConfirmed();
+
+        final BluetoothLeAudioAllowListPreferenceController leAudioAllowListController =
+                getDevelopmentOptionsController(
+                    BluetoothLeAudioAllowListPreferenceController.class);
+        leAudioAllowListController.onRebootDialogConfirmed();
     }
 
     @Override
@@ -406,6 +411,11 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 getDevelopmentOptionsController(
                         BluetoothLeAudioPreferenceController.class);
         leAudioFeatureController.onRebootDialogCanceled();
+
+        final BluetoothLeAudioAllowListPreferenceController leAudioAllowListController =
+                getDevelopmentOptionsController(
+                    BluetoothLeAudioAllowListPreferenceController.class);
+        leAudioAllowListController.onRebootDialogCanceled();
     }
 
     @Override
@@ -603,6 +613,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BluetoothAvrcpVersionPreferenceController(context));
         controllers.add(new BluetoothMapVersionPreferenceController(context));
         controllers.add(new BluetoothLeAudioPreferenceController(context, fragment));
+        controllers.add(new BluetoothLeAudioAllowListPreferenceController(context, fragment));
         controllers.add(new BluetoothA2dpHwOffloadPreferenceController(context, fragment));
         controllers.add(new BluetoothLeAudioHwOffloadPreferenceController(context, fragment));
         controllers.add(new BluetoothMaxConnectedAudioDevicesPreferenceController(context));
@@ -617,6 +628,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new RtlLayoutPreferenceController(context));
         controllers.add(new WindowAnimationScalePreferenceController(context));
         controllers.add(new EmulateDisplayCutoutPreferenceController(context));
+        controllers.add(new TransparentNavigationBarPreferenceController(context));
         controllers.add(new TransitionAnimationScalePreferenceController(context));
         controllers.add(new AnimatorDurationScalePreferenceController(context));
         controllers.add(new SecondaryDisplayPreferenceController(context));
