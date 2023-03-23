@@ -92,6 +92,7 @@
             android:title="@string/sim_status_title"
             settings:keywords="@string/keywords_sim_status"
             android:summary="@string/summary_placeholder"
+            settings:isPreferenceVisible="@bool/config_show_sim_info"
             settings:enableCopying="true"/>
     </PreferenceCategory>
 
