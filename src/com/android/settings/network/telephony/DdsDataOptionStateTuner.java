@@ -69,13 +69,9 @@ public class DdsDataOptionStateTuner extends TelephonyCallback
         }
         final List<SubscriptionInfo> subs =
                 SubscriptionUtil.getActiveSubscriptions(mSubscriptionManager);
-        final boolean isMultiSub = subs.size() > 1;
         for (SubscriptionInfo subInfo : subs) {
-            // Listen to telephony callback events of the DDS in single-SIM case and the non-DDS in
-            // multi-SIM case.
-            if (isMultiSub && subInfo.getSubscriptionId() == mDefaultDataSubId) {
-                continue;
-            } else {
+            // Listen to telephony callback events of the non-DDS.
+            if (subInfo.getSubscriptionId() != mDefaultDataSubId) {
                 mTelephonyManager.createForSubscriptionId(subInfo.getSubscriptionId())
                         .registerTelephonyCallback(context.getMainExecutor(), this);
                 mCallbacks.put(subInfo.getSubscriptionId(), this);
@@ -113,12 +109,11 @@ public class DdsDataOptionStateTuner extends TelephonyCallback
     }
 
     /**
-     * Used to check if the DDS (in single-SIM) or the non-DDS (in multi-SIM) has an ongoing voice
-     * call
+     * Used to check if non-DDS sub has a voice call ongoing.
      *
-     * @return true if a voice call is ongoing.
+     * @return true if a non-DDS voice call is ongoing.
      */
-    public boolean isInVoiceCall() {
+    public boolean isInNonDdsVoiceCall() {
         return mNonDdsCallState != TelephonyManager.CALL_STATE_IDLE;
     }
 

@@ -138,14 +138,16 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
         // Check UE's C_IWLAN configuration and user's current network mode selection. If UE is in
         // C_IWLAN-only mode and the selection does not contain LTE or NR, show a dialog to disable
         // C_IWLAN.
+        boolean isDefaultDataSub = mSubId == SubscriptionManager.getDefaultDataSubscriptionId();
         boolean isCiwlanEnabled = MobileNetworkSettings.isCiwlanEnabled();
         boolean isInCiwlanOnlyMode = MobileNetworkSettings.isInCiwlanOnlyMode();
         boolean isCiwlanIncompatibleNetworkSelected = isCiwlanIncompatibleNetworkSelected(
                 newPreferredNetworkMode);
-        Log.d(LOG_TAG, "isCiwlanEnabled = " + isCiwlanEnabled + ", isInCiwlanOnlyMode = " +
-                isInCiwlanOnlyMode + ", isCiwlanIncompatibleNetworkSelected = " +
-                isCiwlanIncompatibleNetworkSelected);
-        if (isCiwlanEnabled && isInCiwlanOnlyMode && isCiwlanIncompatibleNetworkSelected) {
+        Log.d(LOG_TAG, "isDDS = " + isDefaultDataSub + ", isCiwlanEnabled = " + isCiwlanEnabled +
+                ", isInCiwlanOnlyMode = " + isInCiwlanOnlyMode +
+                ", isCiwlanIncompatibleNetworkSelected = " + isCiwlanIncompatibleNetworkSelected);
+        if (isDefaultDataSub && isCiwlanEnabled && isInCiwlanOnlyMode &&
+                isCiwlanIncompatibleNetworkSelected) {
             showCiwlanWarningDialog();
             return false;
         }
