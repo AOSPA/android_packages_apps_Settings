@@ -2036,6 +2036,16 @@
     <string name="wifi_hotspot_auto_off_title">Turn off hotspot automatically</string>
     <!-- Summary for the toggle to turn off hotspot automatically [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_auto_off_summary">When no devices are connected</string>
+    <!-- Title for Wifi hotspot speed [CHAR LIMIT=NONE]-->
+    <string name="wifi_hotspot_speed_title">Speed &amp; compatibility</string>
+    <!-- Summary for Wifi hotspot speed to 2.4 GHz band [CHAR LIMIT=NONE]-->
+    <string name="wifi_hotspot_speed_2g_summary">2.4 GHz / Any device can connect</string>
+    <!-- Summary for Wifi hotspot speed to 5 GHz band [CHAR LIMIT=NONE]-->
+    <string name="wifi_hotspot_speed_5g_summary">5 GHz / Most devices can connect</string>
+    <!-- Summary for Wifi hotspot speed to 6 GHz band [CHAR LIMIT=NONE]-->
+    <string name="wifi_hotspot_speed_6g_summary">6 GHz / Few devices can connect</string>
+    <!-- Summary for Wifi hotspot speed to 6 GHz band [CHAR LIMIT=NONE]-->
+    <string name="wifi_hotspot_speed_2g_and_5g_summary">2.4 and 5 GHz / Any device can connect</string>
 
     <!-- Summary text when turning hotspot on -->
     <string name="wifi_tether_starting">Turning hotspot on\u2026</string>
@@ -5201,8 +5211,6 @@
     <string name="battery_tip_charge_to_full_button">Charge to full</string>
     <!-- Title of incompatible charging battery tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_incompatible_charging_title">Issue with charging accessory</string>
-    <!-- Message of incompatible charging battery tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_incompatible_charging_message">Battery charging slowly or won\'t charge. Check if the cable and power adapter work with your phone</string>
     <!-- Content description for the incompatible charging battery tip button [CHAR LIMIT=NONE] -->
     <string name="battery_tip_incompatible_charging_content_description">Learn more about incompatible charging</string>
 
@@ -6873,6 +6881,10 @@
     <string name="cloned_app_creation_summary">Creating&#8230;</string>
     <!-- Summary text after an app is cloned [CHAR LIMIT=40] -->
     <string name="cloned_app_created_summary">Cloned</string>
+    <!-- Summary text shown in toast when app is being cloned [CHAR LIMIT=40] -->
+    <string name="cloned_app_creation_toast_summary">Creating <xliff:g id="package_label">%1$s</xliff:g> clone</string>
+    <!-- Summary text shown in toast after app is successfully cloned [CHAR LIMIT=40] -->
+    <string name="cloned_app_created_toast_summary">Created <xliff:g id="package_label">%1$s</xliff:g> clone</string>
     <!-- Summary text for system preference title, showing important setting items under system setting [CHAR LIMIT=NONE]-->
     <string name="system_dashboard_summary">Languages, gestures, time, backup</string>
     <!-- Summary text for language preference title, showing important setting items under language setting [CHAR LIMIT=NONE]-->
@@ -10429,13 +10441,13 @@
     <!-- Apps > App Details > Wifi access > Description. [CHAR LIMIT=NONE] -->
     <string name="change_wifi_state_app_detail_summary">Allow this app to turn Wi-Fi on or off, scan and connect to Wi-Fi networks, add or remove networks, or start a local-only hotspot</string>
 
-    <!-- Title for NFC launch [CHAR LIMIT=35] -->
-    <string name="change_nfc_tag_apps_title">NFC launch</string>
+    <!-- Title for Launch via NFC [CHAR LIMIT=35] -->
+    <string name="change_nfc_tag_apps_title">Launch via NFC</string>
 
-    <!-- Apps > App Details > Nfc launch > Switch title. [CHAR LIMIT=NONE] -->
+    <!-- Special app access > Launch via NFC > Switch title. [CHAR LIMIT=NONE] -->
     <string name="change_nfc_tag_apps_detail_switch">Allow launch on NFC scan</string>
 
-    <!-- Apps > App Details > Nfc launch > Description. [CHAR LIMIT=NONE] -->
+    <!-- Special app access > Launch via NFC > Description. [CHAR LIMIT=NONE] -->
     <string name="change_nfc_tag_apps_detail_summary">Allow this app to launch when a NFC tag is scanned.\nIf this permission is on, the app will be available as an option whenever a tag is detected.</string>
 
     <!-- Title for media output settings -->
