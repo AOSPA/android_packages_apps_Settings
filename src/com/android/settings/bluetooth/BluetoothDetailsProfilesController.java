@@ -271,6 +271,11 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             return;
         }
 
+        if (profile instanceof A2dpProfile ||
+            profile instanceof HeadsetProfile) {
+            disableProfileforGroup(profile);
+            return;
+        }
         final BluetoothDevice bluetoothDevice = mCachedDevice.getDevice();
         profile.setEnabled(bluetoothDevice, false);
 
@@ -457,6 +462,18 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         }
     }
 
+    private void disableProfileforGroup(LocalBluetoothProfile profile) {
+        if (profile != null && mProfileDeviceMap.get(profile.toString()) != null) {
+            Log.d(TAG, "Disable " + profile.toString());
+            for (CachedBluetoothDevice profileDevice : mProfileDeviceMap.get(profile.toString())) {
+                if (profile.isEnabled(profileDevice.getDevice())) {
+                    profile.setEnabled(profileDevice.getDevice(), false);
+                } else {
+                    Log.d(TAG, "The " + profile.toString() + " profile is disabled. Do nothing.");
+                }
+            }
+        }
+    }
     /**
      * This is a helper method to be called after adding a Preference for a profile. If that
      * profile happened to be A2dp and the device supports high quality audio, it will add a
