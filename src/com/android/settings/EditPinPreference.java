@@ -18,9 +18,11 @@ package com.android.settings;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Bundle;
 import android.text.InputType;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 
 import com.android.settingslib.CustomEditTextPreferenceCompat;
@@ -78,6 +80,25 @@ class EditPinPreference extends CustomEditTextPreferenceCompat {
         Dialog dialog = getDialog();
         if (dialog == null || !dialog.isShowing()) {
             onClick();
+        }
+    }
+
+    public static class EditPinDialogFragment extends
+            CustomPreferenceDialogFragment {
+
+        public static EditPinDialogFragment newInstance(String key) {
+            final EditPinDialogFragment fragment = new EditPinDialogFragment();
+            final Bundle b = new Bundle(1);
+            b.putString(ARG_KEY, key);
+            fragment.setArguments(b);
+            return fragment;
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            Dialog dialog = super.onCreateDialog(savedInstanceState);
+            dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
+            return dialog;
         }
     }
 }
