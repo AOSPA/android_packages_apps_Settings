@@ -469,6 +469,11 @@ public class NetworkSelectSettings extends DashboardFragment implements
             stopNetworkQuery();
         }
 
+        if (isFinishingOrDestroyed()) {
+            Log.d(TAG, "scanResultHandler: activity isFinishingOrDestroyed, directly return");
+            return;
+        }
+
         mCellInfoList = doAggregation(results);
         Log.d(TAG, "CellInfoList: " + CellInfoUtil.cellInfoListToString(mCellInfoList));
         if (mCellInfoList != null && mCellInfoList.size() != 0) {
