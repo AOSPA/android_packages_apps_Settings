@@ -52,6 +52,7 @@ import android.widget.TabWidget;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.DialogFragment;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
@@ -62,6 +63,7 @@ import com.android.settingslib.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Implements the preference screen to enable/disable ICC lock and
@@ -774,5 +776,22 @@ public class IccLockSettings extends SettingsPreferenceFragment
     private TabSpec buildTabSpec(String tag, String title) {
         return mTabHost.newTabSpec(tag).setIndicator(title).setContent(
                 mEmptyTabContent);
+    }
+
+    @Override
+    public void onDisplayPreferenceDialog(Preference preference) {
+        if (preference.getKey() == null) {
+            // Auto-key preferences that don't have a key, so the dialog can find them.
+            preference.setKey(UUID.randomUUID().toString());
+        }
+        DialogFragment f = null;
+        if (preference instanceof EditPinPreference) {
+            f = EditPinPreference.EditPinDialogFragment.newInstance(preference.getKey());
+        } else {
+            super.onDisplayPreferenceDialog(preference);
+            return;
+        }
+        f.setTargetFragment(this, 0);
+        f.show(getFragmentManager(), "dialog_preference");
     }
 }
