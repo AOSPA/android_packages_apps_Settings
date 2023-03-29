@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center are provided under the following license:
+ * Copyright (c) 2023 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.network.telephony;
 
 import static androidx.lifecycle.Lifecycle.Event.ON_START;
@@ -140,9 +146,14 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
         // C_IWLAN.
         boolean isDefaultDataSub = mSubId == SubscriptionManager.getDefaultDataSubscriptionId();
         boolean isCiwlanEnabled = MobileNetworkSettings.isCiwlanEnabled();
-        boolean isInCiwlanOnlyMode = MobileNetworkSettings.isInCiwlanOnlyMode();
         boolean isCiwlanIncompatibleNetworkSelected = isCiwlanIncompatibleNetworkSelected(
                 newPreferredNetworkMode);
+        boolean isInCiwlanOnlyMode = false;
+        // Warn on C_IWLAN-incompatible network selection only on targets that support getting the
+        // C_IWLAN config
+        if (MobileNetworkSettings.isCiwlanModeSupported()) {
+            isInCiwlanOnlyMode = MobileNetworkSettings.isInCiwlanOnlyMode();
+        }
         Log.d(LOG_TAG, "isDDS = " + isDefaultDataSub + ", isCiwlanEnabled = " + isCiwlanEnabled +
                 ", isInCiwlanOnlyMode = " + isInCiwlanOnlyMode +
                 ", isCiwlanIncompatibleNetworkSelected = " + isCiwlanIncompatibleNetworkSelected);

@@ -11261,9 +11261,10 @@
     <string name="backup_calling_setting_summary">If <xliff:g id="backup_calling_operator_text" example="Google Fi">%1$s</xliff:g> is unavailable or roaming, use your mobile data SIM for <xliff:g id="backup_calling_carrier_text" example="Google Fi">%1$s</xliff:g> calls.</string>
 
     <!-- Title of dialog shown to request confirmation that disabling certain toggles, like mobile data, roaming, and backup calling, will cause a call drop while IMS is registered on C_IWLAN-only and device is in a call [CHAR LIMIT=120] -->
-    <string name="toggle_disabling_ciwlan_call_dialog_title">Disable %s?</string>
+    <string name="toggle_disable_ciwlan_call_dialog_title">Disable %s?</string>
     <!-- Body of dialog shown to request confirmation that disabling certain toggles, like mobile data, roaming, and backup calling, will cause a call drop while IMS is registered on C_IWLAN-only and device is in a call [CHAR LIMIT=NONE] -->
-    <string name="toggle_disabling_ciwlan_call_dialog_body">Disabling %s will cause ongoing call drop.</string>
+    <string name="toggle_disable_ciwlan_call_will_drop_dialog_body">Disabling %s will cause ongoing call drop.</string>
+    <string name="toggle_disable_ciwlan_call_might_drop_dialog_body">Disabling %s might cause ongoing call drop.</string>
     <!-- Body of dialog shown to warn when an incompatible preferred network type is currently selected and user tries to turn on C_IWLAN [CHAR LIMIT=NONE] -->
     <string name="backup_calling_enable_dialog_incompatible_nw_type">To turn on Voice Over Cellular Internet, please set the preferred network type to one including LTE, NR, or Global.</string>
 
