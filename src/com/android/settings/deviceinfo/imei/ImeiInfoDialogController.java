@@ -187,7 +187,8 @@ public class ImeiInfoDialogController {
     }
 
     private boolean isMinHalVersion2_1() {
-        Pair<Integer, Integer> radioVersion = mTelephonyManager.getRadioHalVersion();
+        Pair<Integer, Integer> radioVersion = mTelephonyManager.getHalVersion(
+                TelephonyManager.HAL_SERVICE_MODEM);
         int halVersion = makeRadioVersion(radioVersion.first, radioVersion.second);
         return (halVersion > makeRadioVersion(2, 0)) ? true:false;
     }
