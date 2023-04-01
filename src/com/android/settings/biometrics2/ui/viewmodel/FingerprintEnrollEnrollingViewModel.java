@@ -19,10 +19,11 @@ package com.android.settings.biometrics2.ui.viewmodel;
 import android.annotation.IntDef;
 import android.app.Application;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
-import android.os.Bundle;
 import android.os.VibrationAttributes;
 import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
+import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.NonNull;
@@ -31,9 +32,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.android.settings.biometrics2.data.repository.AccessibilityRepository;
 import com.android.settings.biometrics2.data.repository.FingerprintRepository;
-import com.android.settings.biometrics2.data.repository.VibratorRepository;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -52,24 +51,24 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
             VibrationAttributes.createForUsage(VibrationAttributes.USAGE_ACCESSIBILITY);
 
     /**
-     * Enrolling skipped
-     */
-    public static final int FINGERPRINT_ENROLL_ENROLLING_ACTION_SKIP = 0;
-
-    /**
      * Enrolling finished
      */
-    public static final int FINGERPRINT_ENROLL_ENROLLING_ACTION_DONE = 1;
+    public static final int FINGERPRINT_ENROLL_ENROLLING_ACTION_DONE = 0;
 
     /**
      * Icon touch dialog show
      */
-    public static final int FINGERPRINT_ENROLL_ENROLLING_ACTION_SHOW_ICON_TOUCH_DIALOG = 2;
+    public static final int FINGERPRINT_ENROLL_ENROLLING_ACTION_SHOW_ICON_TOUCH_DIALOG = 1;
 
     /**
      * Icon touch dialog dismiss
      */
-    public static final int FINGERPRINT_ENROLL_ENROLLING_ACTION_DISMISS_ICON_TOUCH_DIALOG = 3;
+    public static final int FINGERPRINT_ENROLL_ENROLLING_ACTION_DISMISS_ICON_TOUCH_DIALOG = 2;
+
+    /**
+     * Has got latest cancelled event due to user skip
+     */
+    public static final int FINGERPRINT_ENROLL_ENROLLING_CANCELED_BECAUSE_USER_SKIP = 3;
 
     /**
      * Has got latest cancelled event due to back key
@@ -77,10 +76,10 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
     public static final int FINGERPRINT_ENROLL_ENROLLING_CANCELED_BECAUSE_BACK_PRESSED = 4;
 
     @IntDef(prefix = { "FINGERPRINT_ENROLL_ENROLLING_ACTION_" }, value = {
-            FINGERPRINT_ENROLL_ENROLLING_ACTION_SKIP,
             FINGERPRINT_ENROLL_ENROLLING_ACTION_DONE,
             FINGERPRINT_ENROLL_ENROLLING_ACTION_SHOW_ICON_TOUCH_DIALOG,
             FINGERPRINT_ENROLL_ENROLLING_ACTION_DISMISS_ICON_TOUCH_DIALOG,
+            FINGERPRINT_ENROLL_ENROLLING_CANCELED_BECAUSE_USER_SKIP,
             FINGERPRINT_ENROLL_ENROLLING_CANCELED_BECAUSE_BACK_PRESSED
     })
     @Retention(RetentionPolicy.SOURCE)
@@ -112,25 +111,22 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
     private final int mUserId;
     private boolean mOnBackPressed;
     private boolean mOnSkipPressed;
-    private final FingerprintRepository mFingerprintRepository;
-    private final AccessibilityRepository mAccessibilityRepository;
-    private final VibratorRepository mVibratorRepository;
+    @NonNull private final FingerprintRepository mFingerprintRepository;
+    private final AccessibilityManager mAccessibilityManager;
+    private final Vibrator mVibrator;
 
     private final MutableLiveData<Integer> mActionLiveData = new MutableLiveData<>();
     private final MutableLiveData<Integer> mIconTouchDialogLiveData = new MutableLiveData<>();
     private final MutableLiveData<ErrorDialogData> mErrorDialogLiveData = new MutableLiveData<>();
     private final MutableLiveData<Integer> mErrorDialogActionLiveData = new MutableLiveData<>();
 
-    public FingerprintEnrollEnrollingViewModel(Application application,
-            int userId,
-            FingerprintRepository fingerprintRepository,
-            AccessibilityRepository accessibilityRepository,
-            VibratorRepository vibratorRepository) {
+    public FingerprintEnrollEnrollingViewModel(@NonNull Application application,
+            int userId, @NonNull FingerprintRepository fingerprintRepository) {
         super(application);
         mUserId = userId;
         mFingerprintRepository = fingerprintRepository;
-        mAccessibilityRepository = accessibilityRepository;
-        mVibratorRepository = vibratorRepository;
+        mAccessibilityManager = application.getSystemService(AccessibilityManager.class);
+        mVibrator = application.getSystemService(Vibrator.class);
     }
 
     /**
@@ -184,7 +180,7 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
      * Enrolling is cacelled because user clicks skip
      */
     public void onCancelledDueToOnSkipPressed() {
-        final int action = FINGERPRINT_ENROLL_ENROLLING_ACTION_SKIP;
+        final int action = FINGERPRINT_ENROLL_ENROLLING_CANCELED_BECAUSE_USER_SKIP;
         if (DEBUG) {
             Log.d(TAG, "onSkipButtonClick, post action " + action);
         }
@@ -229,12 +225,12 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
     /**
      * Icon touch dialog show
      */
-    public void onIconTouchDialogShow() {
+    public void showIconTouchDialog() {
         final int action = FINGERPRINT_ENROLL_ENROLLING_ACTION_SHOW_ICON_TOUCH_DIALOG;
         if (DEBUG) {
             Log.d(TAG, "onIconTouchDialogShow, post action " + action);
         }
-        mIconTouchDialogLiveData.postValue(action);
+        mActionLiveData.postValue(action);
     }
 
     /**
@@ -245,7 +241,7 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
         if (DEBUG) {
             Log.d(TAG, "onIconTouchDialogDismiss, post action " + action);
         }
-        mIconTouchDialogLiveData.postValue(action);
+        mActionLiveData.postValue(action);
     }
 
     /**
@@ -266,7 +262,7 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
      * Requests interruption of the accessibility feedback from all accessibility services.
      */
     public void clearTalkback() {
-        mAccessibilityRepository.interrupt();
+        mAccessibilityManager.interrupt();
     }
 
     /**
@@ -275,7 +271,28 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
      * @return True if this {@link AccessibilityManager} is enabled, false otherwise.
      */
     public boolean isAccessibilityEnabled() {
-        return mAccessibilityRepository.isEnabled();
+        return mAccessibilityManager.isEnabled();
+    }
+
+    /**
+     * Sends an {@link AccessibilityEvent}.
+     */
+    public void sendAccessibilityEvent(CharSequence announcement) {
+        AccessibilityEvent e = AccessibilityEvent.obtain();
+        e.setEventType(AccessibilityEvent.TYPE_ANNOUNCEMENT);
+        e.setClassName(getClass().getName());
+        e.setPackageName(getApplication().getPackageName());
+        e.getText().add(announcement);
+        mAccessibilityManager.sendAccessibilityEvent(e);
+    }
+
+     /**
+     * Returns if the touch exploration in the system is enabled.
+     *
+     * @return True if touch exploration is enabled, false otherwise.
+     */
+    public boolean isTouchExplorationEnabled() {
+        return mAccessibilityManager.isTouchExplorationEnabled();
     }
 
     /**
@@ -283,7 +300,7 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
      * caller to specify the vibration is owned by someone else and set a reason for vibration.
      */
     public void vibrateError(String reason) {
-        mVibratorRepository.vibrate(mUserId, getApplication().getOpPackageName(),
+        mVibrator.vibrate(mUserId, getApplication().getOpPackageName(),
                 VIBRATE_EFFECT_ERROR, reason, FINGERPRINT_ENROLLING_SONFICATION_ATTRIBUTES);
     }
 
@@ -300,30 +317,6 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
      */
     public boolean canAssumeUdfps() {
         return mFingerprintRepository.canAssumeUdfps();
-    }
-
-    /**
-     * Saves current state to outState
-     */
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        // TODO
-//        mRestoring = true;
-//        mIsCanceled = savedInstanceState.getBoolean(KEY_STATE_CANCELED, false);
-//        mPreviousRotation = savedInstanceState.getInt(KEY_STATE_PREVIOUS_ROTATION,
-//                getDisplay().getRotation());
-//        mIsOrientationChanged = mPreviousRotation != getDisplay().getRotation();
-    }
-
-    /**
-     * Restores saved state from previous savedInstanceState
-     */
-    public void restoreSavedState(@Nullable Bundle savedInstanceState) {
-        if (savedInstanceState == null) {
-            return;
-        }
-        // TODO
-//        outState.putBoolean(KEY_STATE_CANCELED, mIsCanceled);
-//        outState.putInt(KEY_STATE_PREVIOUS_ROTATION, mPreviousRotation);
     }
 
     /**

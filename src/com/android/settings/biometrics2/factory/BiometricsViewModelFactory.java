@@ -17,7 +17,6 @@
 package com.android.settings.biometrics2.factory;
 
 import android.app.Application;
-import android.app.KeyguardManager;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -28,9 +27,7 @@ import androidx.lifecycle.viewmodel.CreationExtras;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.biometrics.fingerprint.FingerprintUpdater;
-import com.android.settings.biometrics2.data.repository.AccessibilityRepository;
 import com.android.settings.biometrics2.data.repository.FingerprintRepository;
-import com.android.settings.biometrics2.data.repository.VibratorRepository;
 import com.android.settings.biometrics2.ui.model.EnrollmentRequest;
 import com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel.ChallengeGenerator;
@@ -38,6 +35,7 @@ import com.android.settings.biometrics2.ui.viewmodel.DeviceFoldedViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.DeviceRotationViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollFindSensorViewModel;
+import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollFinishViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollIntroViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollProgressViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollmentViewModel;
@@ -103,8 +101,7 @@ public class BiometricsViewModelFactory implements ViewModelProvider.Factory {
             final FingerprintRepository repository = provider.getFingerprintRepository(application);
             final EnrollmentRequest request = extras.get(ENROLLMENT_REQUEST_KEY);
             if (repository != null && request != null) {
-                return (T) new FingerprintEnrollmentViewModel(application, repository,
-                        application.getSystemService(KeyguardManager.class), request);
+                return (T) new FingerprintEnrollmentViewModel(application, repository, request);
             }
         } else if (modelClass.isAssignableFrom(FingerprintEnrollProgressViewModel.class)) {
             final Integer userId = extras.get(USER_ID_KEY);
@@ -116,12 +113,18 @@ public class BiometricsViewModelFactory implements ViewModelProvider.Factory {
             final Integer userId = extras.get(USER_ID_KEY);
             final FingerprintRepository fingerprint = provider.getFingerprintRepository(
                     application);
-            final AccessibilityRepository accessibility = provider.getAccessibilityRepository(
+            if (fingerprint != null) {
+                return (T) new FingerprintEnrollEnrollingViewModel(application, userId,
+                        fingerprint);
+            }
+        } else if (modelClass.isAssignableFrom(FingerprintEnrollFinishViewModel.class)) {
+            final Integer userId = extras.get(USER_ID_KEY);
+            final EnrollmentRequest request = extras.get(ENROLLMENT_REQUEST_KEY);
+            final FingerprintRepository fingerprint = provider.getFingerprintRepository(
                     application);
-            final VibratorRepository vibrator = provider.getVibratorRepository(application);
-            if (fingerprint != null && accessibility != null && vibrator != null) {
-                return (T) new FingerprintEnrollEnrollingViewModel(application, userId, fingerprint,
-                        accessibility, vibrator);
+            if (fingerprint != null && userId != null) {
+                return (T) new FingerprintEnrollFinishViewModel(application, userId, request,
+                        fingerprint);
             }
         }
         return create(modelClass);
