@@ -23,6 +23,9 @@
 
 package com.android.settings.network.telephony;
 
+import static android.telephony.AccessNetworkConstants.TRANSPORT_TYPE_WWAN;
+import static android.telephony.NetworkRegistrationInfo.DOMAIN_PS;
+
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -33,6 +36,8 @@ import android.os.ServiceManager;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.telephony.NetworkRegistrationInfo;
+import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -187,10 +192,31 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
             Log.d(LOG_TAG, "C_IWLAN config null");
             return false;
         }
-        if (mTelephonyManager.isNetworkRoaming(mSubId)) {
+        if (isRoaming()) {
             return mCiwlanConfig.isCiwlanOnlyInRoam();
         }
         return mCiwlanConfig.isCiwlanOnlyInHome();
+    }
+
+    public static boolean isRoaming() {
+        if (mTelephonyManager == null) {
+            Log.d(LOG_TAG, "isRoaming: TelephonyManager null");
+            return false;
+        }
+        boolean nriRoaming = false;
+        ServiceState serviceState = mTelephonyManager.getServiceState();
+        if (serviceState != null) {
+            NetworkRegistrationInfo nri =
+                    serviceState.getNetworkRegistrationInfo(DOMAIN_PS, TRANSPORT_TYPE_WWAN);
+            if (nri != null) {
+                nriRoaming = nri.isNetworkRoaming();
+            } else {
+                Log.d(LOG_TAG, "isRoaming: network registration info null");
+            }
+        } else {
+            Log.d(LOG_TAG, "isRoaming: service state null");
+        }
+        return nriRoaming;
     }
 
     public MobileNetworkSettings() {
