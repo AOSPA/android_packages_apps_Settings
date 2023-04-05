@@ -225,10 +225,12 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
             return true;
         }
         if (isRoamingEnabled) {
-            final boolean isInVoiceCall = mDdsDataOptionStateTuner.isInVoiceCall();
+            final boolean isRoaming = MobileNetworkSettings.isRoaming();
+            final boolean isInVoiceCall = mTelephonyManager.getCallStateForSubscription() !=
+                    TelephonyManager.CALL_STATE_IDLE;
             boolean isInCiwlanOnlyMode = false;
             boolean isImsRegisteredOverCiwlan = false;
-            if (isInVoiceCall) {
+            if (isRoaming && isInVoiceCall) {
                 isInCiwlanOnlyMode = mTelephonyManager.isNetworkRoaming(mSubId) &&
                         MobileNetworkSettings.isInCiwlanOnlyMode();
                 if (isInCiwlanOnlyMode) {
@@ -243,7 +245,8 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
                             Log.e(TAG, "getRegistrationTechnology failed", ex);
                         }
                     }
-                    Log.d(TAG, "isDialogNeeded: isInVoiceCall = " + isInVoiceCall +
+                    Log.d(TAG, "isDialogNeeded: isRoaming = " + isRoaming +
+                            ", isInVoiceCall = " + isInVoiceCall +
                             ", isInCiwlanOnlyMode = " + isInCiwlanOnlyMode +
                             ", isImsRegisteredOverCiwlan = " + isImsRegisteredOverCiwlan);
                     // If IMS is registered over C_IWLAN-only mode, the device is in a call, and
@@ -253,7 +256,11 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
                         mDialogType = RoamingDialogFragment.TYPE_DISABLE_CIWLAN_DIALOG;
                         return true;
                     }
+                } else {
+                    Log.d(TAG, "isDialogNeeded: not in C_IWLAN-only mode");
                 }
+            } else {
+                Log.d(TAG, "isDialogNeeded: not roaming or not in a call");
             }
         }
         return false;

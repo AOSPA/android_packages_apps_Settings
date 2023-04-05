@@ -269,7 +269,8 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
             return true;
         }
         if (!enableData) {
-            final boolean isInVoiceCall = mDdsDataOptionStateTuner.isInVoiceCall();
+            final boolean isInVoiceCall = mTelephonyManager.getCallStateForSubscription() !=
+                    TelephonyManager.CALL_STATE_IDLE;
             boolean isInCiwlanOnlyMode = false;
             boolean isImsRegisteredOverCiwlan = false;
             if (isInVoiceCall) {
@@ -296,7 +297,11 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
                         mDialogType = MobileDataDialogFragment.TYPE_DISABLE_CIWLAN_DIALOG;
                         return true;
                     }
+                } else {
+                    Log.d(TAG, "isDialogNeeded: not in C_IWLAN-only mode");
                 }
+            } else {
+                Log.d(TAG, "isDialogNeeded: not in a call");
             }
         }
         return false;
