@@ -276,7 +276,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         }
         Log.i(LOG_TAG, "display subId: " + mSubId);
 
-        mMobileNetworkRepository = MobileNetworkRepository.create(context, this);
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
         mExecutor.execute(() -> {
             mSubscriptionInfoEntity = mMobileNetworkRepository.getSubInfoById(
                     String.valueOf(mSubId));
@@ -297,6 +297,8 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 new SmsDefaultSubscriptionController(context, KEY_SMS_PREF, getSettingsLifecycle(),
                         this),
                 new MobileDataPreferenceController(context, KEY_MOBILE_DATA_PREF,
+                        getSettingsLifecycle(), this, mSubId),
+                new ConvertToEsimPreferenceController(context, KEY_CONVERT_TO_ESIM_PREF,
                         getSettingsLifecycle(), this, mSubId));
     }
 
@@ -396,7 +398,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 use(OpenNetworkSelectPagePreferenceController.class).init(mSubId);
         final AutoSelectPreferenceController autoSelectPreferenceController =
                 use(AutoSelectPreferenceController.class)
-                        .init(mSubId)
+                        .init(getLifecycle(), mSubId)
                         .addListener(openNetworkSelectPagePreferenceController);
 
         final SelectNetworkPreferenceController selectNetworkPreferenceController =
@@ -461,7 +463,8 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     public void onResume() {
         Log.i(LOG_TAG, "onResume:+");
         super.onResume();
-        mMobileNetworkRepository.addRegister(this);
+        mMobileNetworkRepository.addRegister(this, this, mSubId);
+        mMobileNetworkRepository.updateEntity();
         // TODO: remove log after fixing b/182326102
         Log.d(LOG_TAG, "onResume() subId=" + mSubId);
     }
@@ -493,7 +496,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
             mExtTelephonyManager = null;
         }
         super.onDestroy();
-        mMobileNetworkRepository.removeRegister();
+        mMobileNetworkRepository.removeRegister(this);
     }
 
     @VisibleForTesting
@@ -653,7 +656,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 break;
             } else if (entity.isDefaultSubscriptionSelection) {
                 mSubscriptionInfoEntity = entity;
-                Log.d(LOG_TAG, "Set subInfo to the default subInfo.");
+                Log.d(LOG_TAG, "Set subInfo to default subInfo.");
             }
         }
         onSubscriptionDetailChanged();
