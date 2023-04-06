@@ -95,7 +95,7 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         mManager = context.getSystemService(SubscriptionManager.class);
         mIsRtlMode = context.getResources().getConfiguration().getLayoutDirection()
                 == View.LAYOUT_DIRECTION_RTL;
-        mMobileNetworkRepository = MobileNetworkRepository.create(context, this);
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
         mLifecycleOwner = lifecycleOwner;
         if (lifecycle != null) {
             lifecycle.addObserver(this);
@@ -138,14 +138,19 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
 
     @OnLifecycleEvent(ON_RESUME)
     public void onResume() {
-        mMobileNetworkRepository.addRegister(mLifecycleOwner);
+        mMobileNetworkRepository.addRegister(mLifecycleOwner, this,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         registerPhoneStateListener();
-        updateEntries();
+        mMobileNetworkRepository.updateEntity();
+        // Can not get default subId from database until get the callback, add register by subId
+        // later.
+        mMobileNetworkRepository.addRegisterBySubId(getDefaultSubscriptionId());
+
     }
 
     @OnLifecycleEvent(ON_PAUSE)
     public void onPause() {
-        mMobileNetworkRepository.removeRegister();
+        mMobileNetworkRepository.removeRegister(this);
         unRegisterPhoneStateListener();
     }
 
