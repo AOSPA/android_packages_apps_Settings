@@ -59,7 +59,7 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
     protected LocalBluetoothManager mLocalManager;
     protected int mMetricsCategory;
 
-    private static final String TAG = "BluetoothDeviceUpdater";
+    protected static final String TAG = "BluetoothDeviceUpdater";
     private static final boolean DBG = Log.isLoggable(TAG, Log.DEBUG);
 
     private GroupUtils mGroupUtils;
@@ -92,7 +92,7 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
      */
     public void registerCallback() {
         if (mLocalManager == null) {
-            Log.e(TAG, "registerCallback() Bluetooth is not supported on this device");
+            Log.e(getLogTag(), "registerCallback() Bluetooth is not supported on this device");
             return;
         }
         mLocalManager.setForegroundActivity(mContext);
@@ -106,7 +106,7 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
      */
     public void unregisterCallback() {
         if (mLocalManager == null) {
-            Log.e(TAG, "unregisterCallback() Bluetooth is not supported on this device");
+            Log.e(getLogTag(), "unregisterCallback() Bluetooth is not supported on this device");
             return;
         }
         mLocalManager.setForegroundActivity(null);
@@ -119,7 +119,7 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
      */
     public void forceUpdate() {
         if (mLocalManager == null) {
-            Log.e(TAG, "forceUpdate() Bluetooth is not supported on this device");
+            Log.e(getLogTag(), "forceUpdate() Bluetooth is not supported on this device");
             return;
         }
         if (BluetoothAdapter.getDefaultAdapter().isEnabled()) {
@@ -135,7 +135,8 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
 
     public void removeAllDevicesFromPreference() {
         if (mLocalManager == null) {
-            Log.e(TAG, "removeAllDevicesFromPreference() BT is not supported on this device");
+            Log.e(getLogTag(),
+                    "removeAllDevicesFromPreference() BT is not supported on this device");
             return;
         }
         final Collection<CachedBluetoothDevice> cachedDevices =
@@ -176,7 +177,7 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
     public void onProfileConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state,
             int bluetoothProfile) {
         if (DBG) {
-            Log.d(TAG, "onProfileConnectionStateChanged() device: " + cachedDevice.getName()
+            Log.d(getLogTag(), "onProfileConnectionStateChanged() device: " + cachedDevice.getName()
                     + ", state: " + state + ", bluetoothProfile: " + bluetoothProfile);
         }
         update(cachedDevice);
@@ -185,7 +186,7 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
     @Override
     public void onAclConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) {
         if (DBG) {
-            Log.d(TAG, "onAclConnectionStateChanged() device: " + cachedDevice.getName()
+            Log.d(getLogTag(), "onAclConnectionStateChanged() device: " + cachedDevice.getName()
                     + ", state: " + state);
         }
         update(cachedDevice);
@@ -326,8 +327,8 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
         }
         final BluetoothDevice device = cachedDevice.getDevice();
         if (DBG) {
-            Log.d(TAG, "isDeviceConnected() device name : " + cachedDevice.getName() +
-                    ", is connected : " + device.isConnected() + " , is profile connected : "
+            Log.d(getLogTag(), "isDeviceConnected() device name : " + cachedDevice.getName()
+                    + ", is connected : " + device.isConnected() + " , is profile connected : "
                     + cachedDevice.isConnected());
         }
         return device.getBondState() == BluetoothDevice.BOND_BONDED && device.isConnected();
@@ -357,5 +358,8 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
 
     protected boolean isDeviceInCachedDevicesList(CachedBluetoothDevice cachedDevice){
         return mLocalManager.getCachedDeviceManager().getCachedDevicesCopy().contains(cachedDevice);
+    }
+    protected String getLogTag() {
+        return TAG;
     }
 }
