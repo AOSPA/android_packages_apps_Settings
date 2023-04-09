@@ -189,11 +189,13 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
         IImsRegistration imsRegistrationImpl = mTelephonyManager.getImsRegistration(
                 mSubscriptionManager.getSlotIndex(mSubId), FEATURE_MMTEL);
         boolean isImsRegisteredOverCiwlan = false;
-        try {
-            isImsRegisteredOverCiwlan = imsRegistrationImpl.getRegistrationTechnology() ==
-                    REGISTRATION_TECH_CROSS_SIM;
-        } catch (RemoteException ex) {
-            Log.e(TAG, "getRegistrationTechnology failed", ex);
+        if (imsRegistrationImpl != null) {
+            try {
+                isImsRegisteredOverCiwlan = imsRegistrationImpl.getRegistrationTechnology() ==
+                        REGISTRATION_TECH_CROSS_SIM;
+            } catch (RemoteException ex) {
+                Log.e(TAG, "getRegistrationTechnology failed", ex);
+            }
         }
         Log.d(TAG, "isDialogNeeded: isRoamingEnabled=" + isRoamingEnabled + ", isCallIdle=" +
                 isCallIdle + ", isImsRegisteredOverCiwlan=" + isImsRegisteredOverCiwlan);
