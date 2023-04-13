@@ -677,13 +677,26 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                 Settings.Global.AIRPLANE_MODE_ON, 0) != 0;
     }
 
+    public boolean isAnyOngoingCallOnDevice() {
+        return mTelephonyCallbackMap.values().stream().anyMatch(value -> !value.isCallIdle());
+    }
+
     private class PhoneCallStateTelephonyCallback extends TelephonyCallback implements
             TelephonyCallback.CallStateListener {
 
+        private int mCallState = TelephonyManager.CALL_STATE_IDLE;
+
+        public boolean isCallIdle() {
+            return mCallState == TelephonyManager.CALL_STATE_IDLE;
+        }
+
         @Override
         public void onCallStateChanged(int state) {
+            mCallState = state;
+            final boolean isAnyCallOngoing = isAnyOngoingCallOnDevice();
             for (MobileNetworkCallback callback : sCallbacks) {
                 callback.onCallStateChanged(state);
+                callback.onAnyOngoingCallOnDevice(isAnyCallOngoing);
             }
         }
     }
@@ -710,6 +723,9 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         }
 
         default void onCallStateChanged(int state) {
+        }
+
+        default void onAnyOngoingCallOnDevice(boolean isAnyCallOngoing) {
         }
     }
 
