@@ -29,6 +29,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.telephony.DomesticRoamUtils;
 import com.android.settingslib.deviceinfo.AbstractSimStatusImeiInfoPreferenceController;
 
@@ -61,8 +62,17 @@ public class SimStatusPreferenceController extends
     }
 
     @Override
+    public boolean isAvailable() {
+        return SubscriptionUtil.isSimHardwareVisible(mContext) &&
+                super.isAvailable();
+    }
+
+    @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+        if (!SubscriptionUtil.isSimHardwareVisible(mContext)) {
+            return;
+        }
         final Preference preference = screen.findPreference(getPreferenceKey());
         if (!isAvailable() || preference == null || !preference.isVisible()) {
             return;
