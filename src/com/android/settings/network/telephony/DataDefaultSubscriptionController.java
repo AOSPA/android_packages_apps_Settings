@@ -18,8 +18,10 @@
  package com.android.settings.network.telephony;
 
  import android.content.Context;
+ import android.provider.Settings;
  import android.telephony.SubscriptionManager;
  import androidx.lifecycle.LifecycleOwner;
+ import com.android.settings.R;
  import com.android.settingslib.core.lifecycle.Lifecycle;
  import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 
@@ -57,6 +59,16 @@ public class DataDefaultSubscriptionController extends DefaultSubscriptionContro
     protected void setDefaultSubscription(int subscriptionId) {
         mManager.setDefaultDataSubId(subscriptionId);
         setUserPrefDataSubIdInDb(subscriptionId);
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        boolean isSmartDdsEnabled = Settings.Global.getInt(mContext.getContentResolver(),
+                    Settings.Global.SMART_DDS_SWITCH, 0) == 1;
+        if (isSmartDdsEnabled) {
+            return mContext.getString(R.string.dds_preference_smart_dds_switch_is_on);
+        }
+        return super.getSummary();
     }
 
     private void setUserPrefDataSubIdInDb(int subId) {
