@@ -93,7 +93,7 @@ public final class DataProcessorTest {
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mPowerUsageFeatureProvider = mFeatureFactory.powerUsageFeatureProvider;
 
-        DataProcessor.sTestSystemAppsSet = Set.of();
+        DataProcessor.sTestSystemAppsPackageNames = Set.of();
         DataProcessor.sUsageStatsManager = mUsageStatsManager;
         doReturn(mIntent).when(mContext).registerReceiver(
                 isA(BroadcastReceiver.class), isA(IntentFilter.class));
@@ -250,7 +250,7 @@ public final class DataProcessorTest {
 
         final Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>> periodMap =
                 DataProcessor.generateAppUsagePeriodMap(
-                        hourlyBatteryLevelsPerDay, appUsageEventList);
+                        14400000L, hourlyBatteryLevelsPerDay, appUsageEventList);
 
         assertThat(periodMap).hasSize(3);
         // Day 1
@@ -288,7 +288,7 @@ public final class DataProcessorTest {
         hourlyBatteryLevelsPerDay.add(
                 new BatteryLevelData.PeriodBatteryLevelData(new ArrayList<>(), new ArrayList<>()));
         assertThat(DataProcessor.generateAppUsagePeriodMap(
-                hourlyBatteryLevelsPerDay, new ArrayList<>())).isNull();
+                0L, hourlyBatteryLevelsPerDay, new ArrayList<>())).isNull();
     }
 
     @Test

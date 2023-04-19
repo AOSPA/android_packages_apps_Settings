@@ -23,6 +23,7 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
@@ -73,21 +74,29 @@ public class ImeiInfoDialogController {
         } else {
             mTelephonyManager = null;
         }
+        TelephonyUtils.connectExtTelephonyService(context);
         mQtiImeiInfo = TelephonyUtils.getImeiInfo();
     }
 
     private String getImei(int slot) {
         String imei = null;
-        if (mQtiImeiInfo != null) {
-            for (int i = 0; i < mQtiImeiInfo.length; i++) {
-                if (null != mQtiImeiInfo[i] && mQtiImeiInfo[i].getSlotId() == slot) {
-                    imei = mQtiImeiInfo[i].getImei();
-                    break;
+        if (isMinHalVersion2_1()) {
+            imei = mTelephonyManager.getImei(slot);
+        } else {
+            if (mQtiImeiInfo == null) {
+                mQtiImeiInfo = TelephonyUtils.getImeiInfo();
+            }
+            if (mQtiImeiInfo != null) {
+                for (int i = 0; i < mQtiImeiInfo.length; i++) {
+                    if (null != mQtiImeiInfo[i] && mQtiImeiInfo[i].getSlotId() == slot) {
+                        imei = mQtiImeiInfo[i].getImei();
+                        break;
+                    }
                 }
             }
-        }
-        if (TextUtils.isEmpty(imei)) {
-            imei = mTelephonyManager.getImei(slot);
+            if (TextUtils.isEmpty(imei)) {
+                imei = mTelephonyManager.getImei(slot);
+            }
         }
         return imei;
     }
@@ -170,5 +179,17 @@ public class ImeiInfoDialogController {
     @VisibleForTesting
     private boolean isValidSlotIndex(int slotIndex, TelephonyManager telephonyManager) {
         return slotIndex >= 0 && slotIndex < telephonyManager.getPhoneCount();
+    }
+
+    private int makeRadioVersion(int major, int minor) {
+        if (major < 0 || minor < 0) return 0;
+        return major * 100 + minor;
+    }
+
+    private boolean isMinHalVersion2_1() {
+        Pair<Integer, Integer> radioVersion = mTelephonyManager.getHalVersion(
+                TelephonyManager.HAL_SERVICE_MODEM);
+        int halVersion = makeRadioVersion(radioVersion.first, radioVersion.second);
+        return (halVersion > makeRadioVersion(2, 0)) ? true:false;
     }
 }

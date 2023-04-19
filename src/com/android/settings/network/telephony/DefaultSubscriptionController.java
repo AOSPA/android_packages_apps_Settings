@@ -44,6 +44,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.network.MobileNetworkRepository;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
@@ -216,20 +217,22 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
 
         if (mSelectableSubs.size() == 1) {
             mPreference.setEnabled(false);
-            mPreference.setSummaryProvider(pref -> list.get(0).uniqueName);
+            mPreference.setSummaryProvider(pref ->
+                    SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                    mSelectableSubs.get(0), mContext));
             return;
         }
 
         final int serviceDefaultSubId = getDefaultSubscriptionId();
         boolean subIsAvailable = false;
 
-        for (SubscriptionInfoEntity sub : list) {
-            if (sub.isOpportunistic) {
+        for (SubscriptionInfo sub : mSelectableSubs) {
+            if (sub.isOpportunistic()) {
                 continue;
             }
-            displayNames.add(sub.uniqueName);
-            final int subId = Integer.parseInt(sub.subId);
-            subscriptionIds.add(sub.subId);
+            displayNames.add(SubscriptionUtil.getUniqueSubscriptionDisplayName(sub, mContext));
+            final int subId = sub.getSubscriptionId();
+            subscriptionIds.add(Integer.toString(subId));
             if (subId == serviceDefaultSubId) {
                 subIsAvailable = true;
             }
@@ -371,6 +374,9 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
 
     @Override
     public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
+        if (mSelectableSubs != null) mSelectableSubs.clear();
+        updateSubStatus();
+
         mSubInfoEntityList = subInfoEntityList;
         updateEntries();
         refreshSummary(mPreference);
