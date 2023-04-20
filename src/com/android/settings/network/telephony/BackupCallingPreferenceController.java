@@ -165,12 +165,16 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
                 }
             };
         }
-        mContext.getContentResolver().registerContentObserver(mCrossSimUri,
-                true, mCrossSimObserver);
+        if (mCrossSimUri != null && mCrossSimObserver != null) {
+            mContext.getContentResolver().registerContentObserver(mCrossSimUri, true,
+                    mCrossSimObserver);
+        }
     }
 
     private void unregisterCrossSimObserver() {
-        mContext.getContentResolver().unregisterContentObserver(mCrossSimObserver);
+        if (mCrossSimObserver != null) {
+            mContext.getContentResolver().unregisterContentObserver(mCrossSimObserver);
+        }
     }
 
     private TelephonyManager getTelephonyManager() {
@@ -197,13 +201,17 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
         public void register(Context context, int subId) {
             // Assign the current call state to show the correct preference state even before the
             // first onCallStateChanged() by initial registration.
-            mCallState = mTelephonyManager.getCallState(subId);
-            mTelephonyManager.registerTelephonyCallback(context.getMainExecutor(), this);
+            if (mTelephonyManager != null) {
+                mCallState = mTelephonyManager.getCallState(subId);
+                mTelephonyManager.registerTelephonyCallback(context.getMainExecutor(), this);
+            }
         }
 
         public void unregister() {
             mCallState = null;
-            mTelephonyManager.unregisterTelephonyCallback(this);
+            if (mTelephonyManager != null) {
+                mTelephonyManager.unregisterTelephonyCallback(this);
+            }
         }
     }
 

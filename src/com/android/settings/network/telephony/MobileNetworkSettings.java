@@ -334,7 +334,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
         // Connect TelephonyUtils to ExtTelephonyService
         TelephonyUtils.connectExtTelephonyService(context);
-        mExtTelephonyManager = ExtTelephonyManager.getInstance(context);
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -458,15 +457,13 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     public void onCreate(Bundle icicle) {
         Log.i(LOG_TAG, "onCreate:+");
 
-        if (!mExtTelServiceConnected) {
-            mExtTelephonyManager.connectService(mExtTelServiceCallback);
-        }
-
         final TelephonyStatusControlSession session =
                 setTelephonyAvailabilityStatus(getPreferenceControllersAsList());
 
         super.onCreate(icicle);
         final Context context = getContext();
+        mExtTelephonyManager = ExtTelephonyManager.getInstance(context);
+        mExtTelephonyManager.connectService(mExtTelServiceCallback);
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mTelephonyManager = context.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
