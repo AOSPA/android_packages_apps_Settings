@@ -249,15 +249,17 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         if (TextUtils.equals(getPreferenceKey(), LIST_DATA_PREFERENCE_KEY)) {
             boolean isEcbmEnabled = mTelephonyManager.getEmergencyCallbackMode();
             boolean isScbmEnabled = TelephonyProperties.in_scbm().orElse(false);
-            boolean isSmartDdsEnabled = Settings.Global.getInt(mContext.getContentResolver(),
-                    Settings.Global.SMART_DDS_SWITCH, 0) == 1;
 
-            if (!isSmartDdsEnabled) {
+            int isSmartDdsEnabled = Settings.Global.getInt(mContext.getContentResolver(),
+                    Settings.Global.SMART_DDS_SWITCH, 0);
+
+            if (isSmartDdsEnabled == 0) {
                 mPreference.setEnabled(isCallStateIdle() && !isEcbmEnabled && !isScbmEnabled &&
                         (!TelephonyUtils.isSubsidyFeatureEnabled(mContext) ||
                         TelephonyUtils.allowUsertoSetDDS(mContext)));
             } else {
                 mPreference.setEnabled(false);
+                mPreference.setSummaryProvider(pref -> getSmartDdsSummary());
             }
 
         } else {
@@ -276,6 +278,10 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         } else {
             mPreference.setValue(Integer.toString(SubscriptionManager.INVALID_SUBSCRIPTION_ID));
         }
+    }
+
+    private CharSequence getSmartDdsSummary() {
+        return mContext.getString(R.string.dds_preference_smart_dds_switch_is_on);
     }
 
     /**
