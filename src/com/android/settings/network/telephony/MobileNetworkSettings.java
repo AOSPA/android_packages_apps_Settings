@@ -318,6 +318,9 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         }
 
         mImsMgr = context.getSystemService(ImsManager.class);
+
+        // Connect TelephonyUtils to ExtTelephonyService
+        TelephonyUtils.connectExtTelephonyService(context);
         mExtTelephonyManager = ExtTelephonyManager.getInstance(context);
 
         Intent intent = getIntent();
@@ -358,6 +361,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         use(CarrierSettingsVersionPreferenceController.class).init(mSubId);
         use(BillingCyclePreferenceController.class).init(mSubId);
         use(MmsMessagePreferenceController.class).init(mSubId);
+        use(AutoDataSwitchPreferenceController.class).init(mSubId);
         use(DataDuringCallsPreferenceController.class).init(mSubId);
         use(DisabledSubscriptionController.class).init(mSubId);
         use(DeleteSimProfilePreferenceController.class).init(mSubId, this,
