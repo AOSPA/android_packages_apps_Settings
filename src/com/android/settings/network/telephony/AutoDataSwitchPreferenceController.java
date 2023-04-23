@@ -227,7 +227,7 @@ public class AutoDataSwitchPreferenceController extends TelephonyTogglePreferenc
         boolean isDefDataEnabled = mManager.createForSubscriptionId(
                 SubscriptionManager.getDefaultDataSubscriptionId())
                 .isDataEnabled();
-        // Do not show 'Data during calls' preference when mobile data switch
+        // Do not show auto data switch preference when mobile data switch
         // for the DDS sub is turned off.
         if (!isDefDataEnabled) {
             return CONDITIONALLY_UNAVAILABLE;
@@ -236,6 +236,13 @@ public class AutoDataSwitchPreferenceController extends TelephonyTogglePreferenc
         if (TelephonyUtils.isSubsidyFeatureEnabled(mContext) &&
                 !TelephonyUtils.isSubsidySimCard(mContext,
                 SubscriptionManager.getSlotIndex(mSubId))) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+
+        // Do not show auto data switch preference on devices where Smart temp DDS switch
+        // feature is available.
+        if (TelephonyUtils.isSmartDdsSwitchFeatureAvailable()) {
+            Log.d(LOG_TAG, "Smart DDS switch feature is available");
             return CONDITIONALLY_UNAVAILABLE;
         }
 
