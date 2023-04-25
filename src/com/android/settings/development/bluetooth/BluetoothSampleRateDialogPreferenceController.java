@@ -61,8 +61,13 @@ public class BluetoothSampleRateDialogPreferenceController extends
             case 0:
                 final BluetoothCodecConfig currentConfig = getCurrentCodecConfig();
                 if (currentConfig != null) {
-                    sampleRateValue = getHighestSampleRate(getSelectableByCodecType(
-                            currentConfig.getCodecType()));
+                    /* Savitech LHDC patch: use default by LHDC native when selecting system default */
+                    if (currentConfig.getCodecType() != BluetoothCodecConfig.SOURCE_CODEC_TYPE_LHDCV2 &&
+                        currentConfig.getCodecType() != BluetoothCodecConfig.SOURCE_CODEC_TYPE_LHDCV3 &&
+                        currentConfig.getCodecType() != BluetoothCodecConfig.SOURCE_CODEC_TYPE_LHDCV5) {
+                        sampleRateValue = getHighestSampleRate(getSelectableByCodecType(
+                                currentConfig.getCodecType()));
+                    }
                 }
                 break;
             case 1:
@@ -77,6 +82,13 @@ public class BluetoothSampleRateDialogPreferenceController extends
             case 4:
                 sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_96000;
                 break;
+            case 5:
+                sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_176400;
+                break;
+            case 6:
+                sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_192000;
+                break;
+
             default:
                 break;
         }
@@ -123,6 +135,12 @@ public class BluetoothSampleRateDialogPreferenceController extends
                 break;
             case BluetoothCodecConfig.SAMPLE_RATE_96000:
                 index = 4;
+                break;
+            case BluetoothCodecConfig.SAMPLE_RATE_176400:
+                index = 5;
+                break;
+            case BluetoothCodecConfig.SAMPLE_RATE_192000:
+                index = 6;
                 break;
             default:
                 Log.e(TAG, "Unsupported config:" + config);
