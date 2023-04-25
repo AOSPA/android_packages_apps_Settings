@@ -50,6 +50,16 @@
             <include
                 android:id="@+id/bluetooth_audio_sample_rate_960"
                 layout="@layout/preference_widget_dialog_radiobutton"/>
+
+            <!-- Savitech LHDC - START -->
+            <include
+                android:id="@+id/bluetooth_audio_sample_rate_1764"
+                layout="@layout/preference_widget_dialog_radiobutton"/>
+
+            <include
+                android:id="@+id/bluetooth_audio_sample_rate_1920"
+                layout="@layout/preference_widget_dialog_radiobutton"/>
+            <!-- Savitech LHDC - END -->
         </RadioGroup>
 
         <include

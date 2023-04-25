@@ -23,53 +23,60 @@ import android.widget.RadioGroup;
 import com.android.settings.R;
 
 /**
- * Dialog preference to set the Bluetooth A2DP config of sample rate
+ * Dialog preference to set the Bluetooth A2DP config of LHDC quality
  */
-public class BluetoothSampleRateDialogPreference extends BaseBluetoothDialogPreference implements
+public class BluetoothLHDCQualityDialogPreference extends BaseBluetoothDialogPreference implements
         RadioGroup.OnCheckedChangeListener {
 
-    public BluetoothSampleRateDialogPreference(Context context) {
+    public BluetoothLHDCQualityDialogPreference(Context context) {
         super(context);
         initialize(context);
     }
 
-    public BluetoothSampleRateDialogPreference(Context context, AttributeSet attrs) {
+    public BluetoothLHDCQualityDialogPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         initialize(context);
     }
 
-    public BluetoothSampleRateDialogPreference(Context context, AttributeSet attrs,
-                                               int defStyleAttr) {
+    public BluetoothLHDCQualityDialogPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initialize(context);
     }
 
-    public BluetoothSampleRateDialogPreference(Context context, AttributeSet attrs,
-                                               int defStyleAttr, int defStyleRes) {
+    public BluetoothLHDCQualityDialogPreference(Context context, AttributeSet attrs, int defStyleAttr,
+                                            int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         initialize(context);
     }
 
     @Override
     protected int getRadioButtonGroupId() {
-        return R.id.bluetooth_audio_sample_rate_radio_group;
+        return R.id.bluetooth_lhdc_audio_quality_radio_group;
+    }
+
+    @Override
+    protected int getDefaultIndex() {
+        return 9; // Best Effort
     }
 
     private void initialize(Context context) {
-        mRadioButtonIds.add(R.id.bluetooth_audio_sample_rate_default);
-        mRadioButtonIds.add(R.id.bluetooth_audio_sample_rate_441);
-        mRadioButtonIds.add(R.id.bluetooth_audio_sample_rate_480);
-        mRadioButtonIds.add(R.id.bluetooth_audio_sample_rate_882);
-        mRadioButtonIds.add(R.id.bluetooth_audio_sample_rate_960);
-        mRadioButtonIds.add(R.id.bluetooth_audio_sample_rate_1764);
-        mRadioButtonIds.add(R.id.bluetooth_audio_sample_rate_1920);
+        mRadioButtonIds.add(R.id.bluetooth_lhdc_audio_quality_low0);
+        mRadioButtonIds.add(R.id.bluetooth_lhdc_audio_quality_low1);
+        mRadioButtonIds.add(R.id.bluetooth_lhdc_audio_quality_low2);
+        mRadioButtonIds.add(R.id.bluetooth_lhdc_audio_quality_low3);
+        mRadioButtonIds.add(R.id.bluetooth_lhdc_audio_quality_low4);
+        mRadioButtonIds.add(R.id.bluetooth_lhdc_audio_quality_low);
+        mRadioButtonIds.add(R.id.bluetooth_lhdc_audio_quality_mid);
+        mRadioButtonIds.add(R.id.bluetooth_lhdc_audio_quality_high);
+        mRadioButtonIds.add(R.id.bluetooth_lhdc_audio_quality_high1);
+        mRadioButtonIds.add(R.id.bluetooth_lhdc_audio_quality_best_effort);
         String[] stringArray = context.getResources().getStringArray(
-                R.array.bluetooth_a2dp_codec_sample_rate_titles);
+                R.array.bluetooth_a2dp_codec_lhdc_playback_quality_titles);
         for (int i = 0; i < stringArray.length; i++) {
             mRadioButtonStrings.add(stringArray[i]);
         }
         stringArray = context.getResources().getStringArray(
-                R.array.bluetooth_a2dp_codec_sample_rate_summaries);
+                R.array.bluetooth_a2dp_codec_lhdc_playback_quality_summaries);
         for (int i = 0; i < stringArray.length; i++) {
             mSummaryStrings.add(stringArray[i]);
         }
