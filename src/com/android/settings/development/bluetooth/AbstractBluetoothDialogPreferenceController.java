@@ -43,6 +43,9 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
     private static final int SOURCE_CODEC_TYPE_OPUS = 6; // TODO(b/240635097): remove in U
 
     protected static final int[] CODEC_TYPES = {SOURCE_CODEC_TYPE_OPUS,
+            BluetoothCodecConfig.SOURCE_CODEC_TYPE_LHDCV5,
+            BluetoothCodecConfig.SOURCE_CODEC_TYPE_LHDCV3,
+            BluetoothCodecConfig.SOURCE_CODEC_TYPE_LHDCV2,
             BluetoothCodecConfig.SOURCE_CODEC_TYPE_LC3,
             BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX_TWSP,
             BluetoothCodecConfig.SOURCE_CODEC_TYPE_LDAC,
