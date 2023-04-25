@@ -65,6 +65,7 @@ import com.android.settings.development.bluetooth.BluetoothChannelModeDialogPref
 import com.android.settings.development.bluetooth.BluetoothCodecDialogPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothHDAudioPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothQualityDialogPreferenceController;
+import com.android.settings.development.bluetooth.BluetoothLHDCQualityDialogPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothSampleRateDialogPreferenceController;
 import com.android.settings.development.graphicsdriver.GraphicsDriverEnableAngleAsSystemDriverController;
 import com.android.settings.development.qstile.DevelopmentTiles;
@@ -730,6 +731,16 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 bluetoothA2dpConfigStore));
         controllers.add(new BluetoothQualityDialogPreferenceController(context, lifecycle,
                 bluetoothA2dpConfigStore));
+        // Savitech LHDC -- START
+        controllers.add(new BluetoothLHDCQualityDialogPreferenceController(context, lifecycle,
+                bluetoothA2dpConfigStore));
+        controllers.add(new BluetoothLHDCAudioLatencyPreferenceController(context, lifecycle,
+                bluetoothA2dpConfigStore));
+        controllers.add(new BluetoothLHDCAudioArEffectPreferenceController(context, lifecycle,
+                bluetoothA2dpConfigStore));
+        controllers.add(new BluetoothLHDCAudioLosslessPreferenceController(context, lifecycle,
+                bluetoothA2dpConfigStore));
+        // Savitech LHDC -- END
         controllers.add(new BluetoothChannelModeDialogPreferenceController(context, lifecycle,
                 bluetoothA2dpConfigStore));
         controllers.add(new BluetoothHDAudioPreferenceController(context, lifecycle,

@@ -113,6 +113,10 @@ public abstract class AbstractBluetoothA2dpPreferenceController extends
 
     @Override
     public void updateState(Preference preference) {
+        if (mBluetoothA2dp == null) {
+            return;
+        }
+
         BluetoothDevice activeDevice = getA2dpActiveDevice();
         if (activeDevice == null || getCodecConfig(activeDevice) == null || mPreference == null) {
             return;
@@ -197,6 +201,49 @@ public abstract class AbstractBluetoothA2dpPreferenceController extends
         }
         mBluetoothA2dp.setCodecConfigPreference(bluetoothDevice, config);
     }
+
+
+    /************************************************
+     * Savitech LHDC EXT API -- START
+     *********************************************** /
+    @VisibleForTesting
+    int getLhdcCodecExtendApiVer(BluetoothDevice device, byte[] exApiVer) {
+        return mBluetoothA2dp.getLhdcCodecExtendApiVer(device, exApiVer);
+    }
+
+    @VisibleForTesting
+    int setLhdcCodecExtendApiConfigAr(BluetoothDevice device, byte[] codecConfig) {
+        return mBluetoothA2dp.setLhdcCodecExtendApiConfigAr(device, codecConfig);
+    }
+
+    @VisibleForTesting
+    int getLhdcCodecExtendApiConfigAr(BluetoothDevice device, byte[] codecConfig) {
+        return mBluetoothA2dp.getLhdcCodecExtendApiConfigAr(device, codecConfig);
+    }
+
+    @VisibleForTesting
+    int setLhdcCodecExtendApiConfigMeta(BluetoothDevice device, byte[] codecConfig) {
+        return mBluetoothA2dp.setLhdcCodecExtendApiConfigMeta(device, codecConfig);
+    }
+
+    @VisibleForTesting
+    int getLhdcCodecExtendApiConfigMeta(BluetoothDevice device, byte[] codecConfig) {
+        return mBluetoothA2dp.getLhdcCodecExtendApiConfigMeta(device, codecConfig);
+    }
+
+    @VisibleForTesting
+    int getLhdcCodecExtendApiConfigA2dpCodecSpecific(BluetoothDevice device, byte[] codecConfig) {
+        return mBluetoothA2dp.getLhdcCodecExtendApiConfigA2dpCodecSpecific(device, codecConfig);
+    }
+
+    @VisibleForTesting
+    void setLhdcCodecExtendApiDataGyro2D(BluetoothDevice device, byte[] codecData) {
+        mBluetoothA2dp.setLhdcCodecExtendApiDataGyro2D(device, codecData);
+    }
+    /************************************************
+     * Savitech LHDC EXT API -- END
+     ***********************************************/
+
 
     @VisibleForTesting
     BluetoothCodecConfig getCodecConfig(BluetoothDevice device) {
