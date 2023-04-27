@@ -348,4 +348,5 @@ public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
         }
         return quotedStr;
     }
+
 }

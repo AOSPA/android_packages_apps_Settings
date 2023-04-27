@@ -18,11 +18,6 @@ package com.android.settings.connecteddevice;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
-
-import androidx.annotation.VisibleForTesting;
-
 import android.os.SystemProperties;
 import android.sysprop.BluetoothProperties;
 import android.text.TextUtils;
@@ -59,10 +54,6 @@ public class BluetoothDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "BluetoothDashboardFrag";
     private static final String KEY_BLUETOOTH_SCREEN_FOOTER = "bluetooth_screen_footer";
-    private static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
-    private static final String SYSTEMUI_PACKAGE_NAME = "com.android.systemui";
-    private static final String SLICE_ACTION = "com.android.settings.SEARCH_RESULT_TRAMPOLINE";
-    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
     private static final String BLUETOOTH_ADV_AUDIO_MASK_PROP
                                                   = "persist.vendor.service.bt.adv_audio_mask";
     private static final String BLUETOOTH_BROADCAST_UI_PROP = "persist.bluetooth.broadcast_ui";
@@ -71,6 +62,10 @@ public class BluetoothDashboardFragment extends DashboardFragment {
     private static final int BROADCAST_MASK = 0x04;
     private static boolean mBroadcastEnabled = false;
     private static boolean mBroadcastPropertyChecked = false;
+    private static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
+    private static final String SYSTEMUI_PACKAGE_NAME = "com.android.systemui";
+    private static final String SLICE_ACTION = "com.android.settings.SEARCH_RESULT_TRAMPOLINE";
+    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     private FooterPreference mFooterPreference;
     private SettingsMainSwitchBar mSwitchBar;
