@@ -426,9 +426,9 @@
     <!-- The summary of default string for each regional preference. [CHAR LIMIT=50] -->
     <string name="default_string_of_regional_preference">Use app default</string>
     <!-- The title of Celsius for preference of temperature unit. [CHAR LIMIT=50] -->
-    <string name="celsius_temperature_unit">Celsius(\u00B0C)</string>
+    <string name="celsius_temperature_unit">Celsius (\u00B0C)</string>
     <!-- The title of Fahrenheit for preference of temperature unit. [CHAR LIMIT=50] -->
-    <string name="fahrenheit_temperature_unit">Fahrenheit(\u00B0F)</string>
+    <string name="fahrenheit_temperature_unit">Fahrenheit (\u00B0F)</string>
     <!-- The title of sunday for preference of first day of week. [CHAR LIMIT=50] -->
     <string name="sunday_first_day_of_week">Sunday</string>
     <!-- The title of monday for preference of first day of week. [CHAR LIMIT=50] -->
@@ -443,6 +443,12 @@
     <string name="friday_first_day_of_week">Friday</string>
     <!-- The title of saturday for preference of first day of week. [CHAR LIMIT=50] -->
     <string name="saturday_first_day_of_week">Saturday</string>
+    <!-- Title for regional preference footer. [CHAR LIMIT=NONE] -->
+    <string name="title_regional_pref_footer">If an app doesn’t support regional preferences, the app will use its default locale settings.</string>
+    <!-- Description for text in regional preference footer. [CHAR LIMIT=NONE] -->
+    <string name="desc_regional_pref_footer_learn_more">Learn more about language preferences.</string>
+    <!-- TODO(b/277573274): Update the learn more url in the regional preference. -->
+    <string name="regional_pref_footer_learn_more_link" translatable="false">https://support.google.com/android</string>
 
     <!-- The title of the confirmation dialog shown when the user selects one / several languages and tries to remove them [CHAR LIMIT=60] -->
     <string name="dlg_remove_locales_title">{count, plural,
@@ -756,6 +762,8 @@
 
     <!-- Fingerprint enrollment and settings --><skip />
     <!-- Note: Update FingerprintEnrollParentalConsent.CONSENT_STRING_RESOURCES when any _consent_ strings are added or removed. -->
+    <!-- Title shown for choose lock options [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint">Fingerprint</string>
     <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_preference_title">Fingerprint</string>
     <!-- Title for a category shown for the fingerprint settings page, followed by items that the user can toggle on/off to require/disable. [CHAR LIMIT=50] -->
@@ -887,12 +895,16 @@
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary">Using face or fingerprint</string>
     <!-- Button text shown during enrollment to proceed after a child user has handed the device to a parent or guardian. [CHAR LIMIT=22] -->
     <string name="biometric_settings_hand_back_to_guardian_ok">OK</string>
-    <!-- Dialog title for dialog which shows when trying to add fingerprint in split mode. [CHAR LIMIT=45] -->
+    <!-- Dialog title for dialog which shows when trying to add face in split mode. [CHAR LIMIT=NONE] -->
+    <string name="biometric_settings_add_face_in_split_mode_title">Can\u2019t set up Face Unlock</string>
+    <!-- Dialog message for dialog which shows when trying to add face in split mode. [CHAR LIMIT=NONE] -->
+    <string name="biometric_settings_add_face_in_split_mode_message">Exit split screen to set up Face Unlock</string>
+    <!-- Dialog title for dialog which shows when trying to add fingerprint in split mode. [CHAR LIMIT=80] -->
     <string name="biometric_settings_add_fingerprint_in_split_mode_title">Can\u2019t set up fingerprint</string>
-    <!-- Dialog message for dialog which shows when trying to add fingerprint in split mode. [CHAR LIMIT=45] -->
+    <!-- Dialog message for dialog which shows when trying to add fingerprint in split mode. [CHAR LIMIT=NONE] -->
     <string name="biometric_settings_add_fingerprint_in_split_mode_message">Exit split screen to set up Fingerprint Unlock</string>
-    <!-- Button text shown in adding fingerprint dialog that allows the user to go back to the settings page [CHAR LIMIT=22] -->
-    <string name="biometric_settings_add_fingerprint_in_split_mode_ok">OK</string>
+    <!-- Button text shown in adding biometrics dialog that allows the user to go back to the settings page [CHAR LIMIT=22] -->
+    <string name="biometric_settings_add_biometrics_in_split_mode_ok">OK</string>
 
     <!-- Title of dialog shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so [CHAR LIMIT=30]-->
     <string name="lock_screen_intro_skip_title">Skip screen lock?</string>
@@ -2047,13 +2059,13 @@
     <!-- Title for Wifi hotspot speed [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_speed_title">Speed &amp; compatibility</string>
     <!-- Summary for Wifi hotspot speed to 2.4 GHz band [CHAR LIMIT=NONE]-->
-    <string name="wifi_hotspot_speed_summary_2g">2.4 GHz / Any device can connect</string>
+    <string name="wifi_hotspot_speed_summary_2g">2.4 GHz / Compatible with most devices</string>
     <!-- Summary for Wifi hotspot speed to 5 GHz band [CHAR LIMIT=NONE]-->
-    <string name="wifi_hotspot_speed_summary_5g">5 GHz / Most devices can connect</string>
+    <string name="wifi_hotspot_speed_summary_5g">5 GHz / Compatible with many devices</string>
     <!-- Summary for Wifi hotspot speed to 6 GHz band [CHAR LIMIT=NONE]-->
-    <string name="wifi_hotspot_speed_summary_6g">6 GHz / Few devices can connect</string>
+    <string name="wifi_hotspot_speed_summary_6g">6 GHz / Compatible with few devices</string>
     <!-- Summary for Wifi hotspot speed to 6 GHz band [CHAR LIMIT=NONE]-->
-    <string name="wifi_hotspot_speed_summary_2g_and_5g">2.4 and 5 GHz / Any device can connect</string>
+    <string name="wifi_hotspot_speed_summary_2g_and_5g">2.4 and 5 GHz / Compatible with most devices</string>
     <!-- Top introduction on the Wi-Fi hotspot speed settings, summarizes options available for Wi-Fi hotspot bands. [CHAR LIMIT=NONE] -->
     <string name="wifi_hotspot_speed_intro">Choose a frequency for your hotspot. The frequency affects the connection speed and what types of devices can find your hotspot.</string>
     <!-- Category title on the radio button of the Wi-Fi hotspot speed. [CHAR LIMIT=NONE] -->
@@ -2061,23 +2073,27 @@
     <!-- Title for radio button of the Wi-Fi hotspot speed to 2.4 GHz band [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_speed_2g">2.4 GHz</string>
     <!-- Summary for radio button of the Wi-Fi hotspot speed to 2.4 GHz band [CHAR LIMIT=NONE]-->
-    <string name="wifi_hotspot_speed_2g_summary">Slower speeds. Any device can connect.</string>
+    <string name="wifi_hotspot_speed_2g_summary">Slower speeds. Compatible with most devices.</string>
     <!-- Title for radio button of the Wi-Fi hotspot speed to 5 GHz band [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_speed_5g">5 GHz</string>
     <!-- Summary for radio button of the Wi-Fi hotspot speed to 5 GHz band [CHAR LIMIT=NONE]-->
-    <string name="wifi_hotspot_speed_5g_summary">Fast speeds. Most devices can connect.</string>
+    <string name="wifi_hotspot_speed_5g_summary">Fast speeds. Compatible with many devices.</string>
     <!-- Title for radio button of the Wi-Fi hotspot speed to 2.4 GHz and 5 GHz bands [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_speed_2g_5g">2.4 and 5 GHz</string>
     <!-- Summary for radio button of the Wi-Fi hotspot speed to 2.4 GHz and 5 GHz bands [CHAR LIMIT=NONE]-->
-    <string name="wifi_hotspot_speed_2g_5g_summary">Fast speeds. Any device can connect to this dual-band hotspot.</string>
+    <string name="wifi_hotspot_speed_2g_5g_summary">Fast speeds. This dual-band hotspot is compatible with most devices.</string>
     <!-- Title for radio button of the Wi-Fi hotspot speed to 6 GHz band [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_speed_6g">6 GHz</string>
     <!-- Summary for radio button of the Wi-Fi hotspot speed to 6 GHz band [CHAR LIMIT=NONE]-->
-    <string name="wifi_hotspot_speed_6g_summary">Fastest speeds. Fewest devices can connect.</string>
+    <string name="wifi_hotspot_speed_6g_summary">Fastest speeds. Compatible with few devices.</string>
     <!-- Summary for the Wi-Fi hotspot speed unavailable [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_speed_summary_unavailable">Not available in your country or region</string>
     <!-- The footer message for switch screen resolution [CHAR LIMIT=NONE] -->
     <string name="wifi_hotspot_speed_footer">If your preferred frequency isn\u0027t available, your hotspot may use a different one. Hotspot security settings may change if you change the frequency.</string>
+    <!-- Summary for the Wi-Fi hotspot security unavailable [CHAR LIMIT=NONE] -->
+    <string name="wifi_hotspot_security_summary_unavailable">Not available with 6 GHz</string>
+    <!-- The footer message for Wi-Fi hotspot security settings [CHAR LIMIT=NONE] -->
+    <string name="wifi_hotspot_security_footer">Security settings may change if you change the hotspot’s frequency</string>
 
     <!-- Summary text when turning hotspot on -->
     <string name="wifi_tether_starting">Turning hotspot on\u2026</string>
@@ -5482,6 +5498,10 @@
     <string name="battery_system_usage_for">System usage for <xliff:g id="slot">%s</xliff:g></string>
     <!-- [CHAR_LIMIT=NONE] Battery app usage section header -->
     <string name="battery_app_usage_for">App usage for <xliff:g id="slot">%s</xliff:g></string>
+    <!-- [CHAR_LIMIT=NONE] Battery system usage section header since last full charge to slot_timestamp. Please use similar text with tc/3248552137819897140 -->
+    <string name="battery_system_usage_since_last_full_charge_to">System usage since last full charge to <xliff:g id="slot_timestamp" example="Friday 10 am">%s</xliff:g></string>
+    <!-- [CHAR_LIMIT=NONE] Battery app usage section header since last full charge to slot_timestamp. Please use similar text with tc/7309909074935858949 -->
+    <string name="battery_app_usage_since_last_full_charge_to">App usage since last full charge to <xliff:g id="slot_timestamp" example="Friday 10 am">%s</xliff:g></string>
     <!-- [CHAR_LIMIT=NONE] Battery usage item for total usage time less than a minute -->
     <string name="battery_usage_total_less_than_one_minute">Total: less than a min</string>
     <!-- [CHAR_LIMIT=NONE] Battery usage item for total background time less than a minute -->
@@ -6429,7 +6449,7 @@
     <!-- Title of preference to enable calling and SMS [CHAR LIMIT=45] -->
     <string name="user_enable_calling_sms">Turn on phone calls &amp; SMS</string>
     <!-- Title of preference to grant user admin privileges [CHAR LIMIT=45] -->
-    <string name="user_grant_admin">Give this user admin privileges</string>
+    <string name="user_grant_admin">Make this user an admin</string>
     <!-- Title of preference to remove the user [CHAR LIMIT=35] -->
     <string name="user_remove_user">Delete user</string>
     <!-- Title for confirmation of turning on calls and SMS [CHAR LIMIT=45] -->
@@ -6439,7 +6459,7 @@
     <!-- Title for confirmation of revoking admin privileges [CHAR LIMIT=45] -->
     <string name="user_revoke_admin_confirm_title">Remove admin privileges?</string>
     <!-- Message for confirmation of revoking admin privileges [CHAR LIMIT=none] -->
-    <string name="user_revoke_admin_confirm_message">Are you sure you want to remove this user\'s admin privileges?</string>
+    <string name="user_revoke_admin_confirm_message">If you remove admin privileges for this user, you or another admin can give them back later.</string>
     <!-- Title for the emergency info preference [CHAR LIMIT=40] -->
     <string name="emergency_info_title">Emergency information</string>
     <!-- Summary for the emergency info preference [CHAR LIMIT=40] -->
@@ -10348,13 +10368,10 @@
     <string name="credman_confirmation_message">Saved info like addresses or payment methods won\'t be filled in when you sign in. To keep your saved info filled in, set enable a password, passkey and data/or service.</string>
 
     <!-- Title of the warning dialog for enabling the credential provider. [CHAR_LIMIT=NONE] -->
-    <string name="credman_enable_confirmation_message_title">Turn on %1$s\?</string>
+    <string name="credman_enable_confirmation_message_title">Use %1$s\?</string>
 
     <!-- Message of the warning dialog for enabling the credential provider. [CHAR_LIMIT=NONE] -->
-    <string name="credman_enable_confirmation_message">Saved info like addresses or payment methods will be shared with this provider.</string>
-
-    <!-- Positive button to turn on credential manager provider (confirmation). [CHAR LIMIT=60] -->
-    <string name="credman_enable_confirmation_message_positive_button">Turn on</string>
+    <string name="credman_enable_confirmation_message">%1$s uses what\'s on your screen to determine what can be autofilled.</string>
 
     <!-- Title of the error dialog when too many credential providers are selected. [CHAR_LIMIT=NONE] -->
     <string name="credman_error_message_title">Passwords, passkeys and data services limit</string>
@@ -11371,11 +11388,9 @@
     <!-- Device controls toggle name [CHAR LIMIT=60] -->
     <string name="lockscreen_privacy_controls_setting_toggle">Show device controls</string>
     <!-- Device controls summary [CHAR LIMIT=NONE] -->
-    <string name="lockscreen_privacy_controls_summary">Show controls for external devices from the lock screen</string>
+    <string name="lockscreen_privacy_controls_summary">From the lockscreen</string>
     <!-- Trivial Device controls toggle name [CHAR LIMIT=60] -->
-    <string name="lockscreen_trivial_controls_setting_toggle">Control from locked device</string>
-    <!-- Trivial Device controls summary [CHAR LIMIT=NONE] -->
-    <string name="lockscreen_trivial_controls_summary">Control external devices without unlocking your phone or tablet if allowed by the device controls app</string>
+    <string name="lockscreen_trivial_controls_setting_toggle">Use device controls</string>
     <!-- Trivial Device disabled controls summary [CHAR LIMIT=NONE] -->
     <string name="lockscreen_trivial_disabled_controls_summary">To use, first turn on \u0022Show device controls\u0022</string>
     <!-- Lockscreen double-line clock summary [CHAR LIMIT=NONE] -->
@@ -11687,8 +11702,11 @@
     <!-- Summary for UWB preference. [CHAR_LIMIT=NONE]-->
     <string name="uwb_settings_summary">Helps identify the relative position of nearby devices that have UWB</string>
 
-    <!-- Summary for UWB preference when airplane mode is disabled. [CHAR_LIMIT=NONE]-->
+    <!-- Summary for UWB preference when airplane mode is enabled. [CHAR_LIMIT=NONE]-->
     <string name="uwb_settings_summary_airplane_mode">Turn off airplane mode to use UWB </string>
+
+    <!-- Summary for UWB preference when UWB is unavailable due to regulatory requirements. [CHAR_LIMIT=NONE]-->
+    <string name="uwb_settings_summary_no_uwb_regulatory">UWB is unavailable in the current location</string>
 
     <!-- Label for the camera use toggle [CHAR LIMIT=40] -->
     <string name="camera_toggle_title">Camera access</string>
@@ -12056,6 +12074,12 @@
     <!-- Developer settings: Summary for disabling phantom process monitoring. [CHAR LIMIT=NONE]-->
     <string name="disable_phantom_process_monitor_summary">Disable restrictions on the system resource usage of the app child processes</string>
 
+    <!-- Developer settings: Title for force enabling Notes role. [CHAR LIMIT=50]-->
+    <string name="enable_notes_role_title">Force enable Notes role</string>
+    <!-- Developer settings: Summary for disabling phantom process monitoring. [CHAR LIMIT=NONE]-->
+    <string name="enable_notes_role_summary">Enable note-taking system integrations via the Notes role. If the Notes role is already enabled, does nothing.</string>
+
+
     <!-- BT LE Audio Device: Media Broadcast -->
     <!-- The title of the Media Broadcast Dialog [CHAR LIMIT=none] -->
     <string name="bluetooth_broadcast_dialog_title">Broadcast</string>
@@ -12199,4 +12223,7 @@
 
     <!-- Warning message when we try to dock an app not supporting multiple instances split into multiple sides [CHAR LIMIT=NONE] -->
     <string name="dock_multi_instances_not_supported_text">"This app can only be opened in 1 window"</string>
+
+    <!-- [CHAR LIMIT=30] Label used to open Note Task -->
+    <string name="note_task_button_label">Notetaking</string>
 </resources>

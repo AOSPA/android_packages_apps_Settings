@@ -285,7 +285,6 @@ public final class DataProcessor {
         final Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>> resultMap =
                 new ArrayMap<>();
 
-        final long dailySize = hourlyBatteryLevelsPerDay.size();
         for (int dailyIndex = 0; dailyIndex < hourlyBatteryLevelsPerDay.size(); dailyIndex++) {
             final Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>> dailyMap =
                     new ArrayMap<>();
@@ -294,21 +293,9 @@ public final class DataProcessor {
                 continue;
             }
             final List<Long> timestamps = hourlyBatteryLevelsPerDay.get(dailyIndex).getTimestamps();
-            final long hourlySize = timestamps.size() - 1;
             for (int hourlyIndex = 0; hourlyIndex < timestamps.size() - 1; hourlyIndex++) {
-                // The start slot timestape is the near hour timestamp instead of the last full
-                // charge time. So use rawStartTimestamp instead of reading the timestamp from
-                // hourlyBatteryLevelsPerDay here.
-                final long startTimestamp =
-                        dailyIndex == 0 && hourlyIndex == 0 && !sDebug
-                                ? rawStartTimestamp : timestamps.get(hourlyIndex);
-                // The final slot is to show the data from last even hour until now but the
-                // timestamp in hourlyBatteryLevelsPerDay is not the real value. So use current
-                // timestamp instead of reading the timestamp from hourlyBatteryLevelsPerDay here.
-                final long endTimestamp =
-                        dailyIndex == dailySize - 1 && hourlyIndex == hourlySize - 1 && !sDebug
-                                ? System.currentTimeMillis() : timestamps.get(hourlyIndex + 1);
-
+                final long startTimestamp = timestamps.get(hourlyIndex);
+                final long endTimestamp = timestamps.get(hourlyIndex + 1);
                 // Gets the app usage event list for this hourly slot first.
                 final List<AppUsageEvent> hourlyAppUsageEventList =
                         getAppUsageEventListWithinTimeRangeWithBuffer(
@@ -463,11 +450,8 @@ public final class DataProcessor {
         Collections.sort(rawTimestampList);
         final long currentTime = getCurrentTimeMillis();
         final List<Long> expectedTimestampList = getTimestampSlots(rawTimestampList, currentTime);
-        final boolean isFromFullCharge =
-                isFromFullCharge(batteryHistoryMap.get(rawTimestampList.get(0)));
         interpolateHistory(
-                context, rawTimestampList, expectedTimestampList, currentTime, isFromFullCharge,
-                batteryHistoryMap, resultMap);
+                context, rawTimestampList, expectedTimestampList, batteryHistoryMap, resultMap);
         Log.d(TAG, String.format("getHistoryMapWithExpectedTimestamps() size=%d in %d/ms",
                 resultMap.size(), (System.currentTimeMillis() - startTime)));
         return resultMap;
@@ -496,8 +480,9 @@ public final class DataProcessor {
     }
 
     /**
-     * Computes expected timestamp slots for last full charge, which will return hourly timestamps
-     * between start and end two even hour values.
+     * Computes expected timestamp slots. The start timestamp is the last full charge time.
+     * The end timestamp is current time. The middle timestamps are the sharp hour timestamps
+     * between the start and end timestamps.
      */
     @VisibleForTesting
     static List<Long> getTimestampSlots(final List<Long> rawTimestampList, final long currentTime) {
@@ -505,19 +490,18 @@ public final class DataProcessor {
         if (rawTimestampList.isEmpty()) {
             return timestampSlots;
         }
-        final long rawStartTimestamp = rawTimestampList.get(0);
-        // No matter the start is from last full charge or 6 days ago, use the nearest even hour.
-        final long startTimestamp = getNearestEvenHourTimestamp(rawStartTimestamp);
-        // Use the first even hour after the current time as the end.
-        final long endTimestamp = getFirstEvenHourAfterTimestamp(currentTime);
+        final long startTimestamp = rawTimestampList.get(0);
+        final long endTimestamp = currentTime;
         // If the start timestamp is later or equal the end one, return the empty list.
         if (startTimestamp >= endTimestamp) {
             return timestampSlots;
         }
-        for (long timestamp = startTimestamp; timestamp <= endTimestamp;
-                timestamp += DateUtils.HOUR_IN_MILLIS) {
+        timestampSlots.add(startTimestamp);
+        for (long timestamp = TimestampUtils.getNextHourTimestamp(startTimestamp);
+                timestamp < endTimestamp; timestamp += DateUtils.HOUR_IN_MILLIS) {
             timestampSlots.add(timestamp);
         }
+        timestampSlots.add(endTimestamp);
         return timestampSlots;
     }
 
@@ -539,32 +523,36 @@ public final class DataProcessor {
         }
         final long startTime = timestampList.get(0);
         final long endTime = timestampList.get(timestampList.size() - 1);
-        // If the timestamp diff is smaller than MIN_TIME_SLOT, returns the empty list directly.
-        if (endTime - startTime < MIN_TIME_SLOT) {
-            return dailyTimestampList;
+        for (long timestamp = startTime; timestamp < endTime;
+                timestamp = TimestampUtils.getNextDayTimestamp(timestamp)) {
+            dailyTimestampList.add(timestamp);
         }
-        long nextDay = getTimestampOfNextDay(startTime);
-        // Only if the timestamp diff in the first day is bigger than MIN_TIME_SLOT, start from the
-        // first day. Otherwise, start from the second day.
-        if (nextDay - startTime >= MIN_TIME_SLOT) {
-            dailyTimestampList.add(startTime);
-        }
-        while (nextDay < endTime) {
-            dailyTimestampList.add(nextDay);
-            nextDay = getTimestampOfNextDay(nextDay);
-        }
-        final long lastDailyTimestamp = dailyTimestampList.get(dailyTimestampList.size() - 1);
-        // Only if the timestamp diff in the last day is bigger than MIN_TIME_SLOT, add the
-        // last day.
-        if (endTime - lastDailyTimestamp >= MIN_TIME_SLOT) {
-            dailyTimestampList.add(endTime);
-        }
-        // The dailyTimestampList must have the start and end timestamp, otherwise, return an empty
-        // list.
-        if (dailyTimestampList.size() < MIN_TIMESTAMP_DATA_SIZE) {
-            return new ArrayList<>();
-        }
+        dailyTimestampList.add(endTime);
         return dailyTimestampList;
+    }
+
+    @VisibleForTesting
+    static List<List<Long>> getHourlyTimestamps(final List<Long> dailyTimestamps) {
+        final List<List<Long>> hourlyTimestamps = new ArrayList<>();
+        if (dailyTimestamps.size() < MIN_DAILY_DATA_SIZE) {
+            return hourlyTimestamps;
+        }
+
+        for (int dailyIndex = 0; dailyIndex < dailyTimestamps.size() - 1; dailyIndex++) {
+            final List<Long> hourlyTimestampsPerDay = new ArrayList<>();
+            final long startTime = dailyTimestamps.get(dailyIndex);
+            final long endTime = dailyTimestamps.get(dailyIndex + 1);
+
+            hourlyTimestampsPerDay.add(startTime);
+            for (long timestamp = TimestampUtils.getNextEvenHourTimestamp(startTime);
+                    timestamp < endTime; timestamp += MIN_TIME_SLOT) {
+                hourlyTimestampsPerDay.add(timestamp);
+            }
+            hourlyTimestampsPerDay.add(endTime);
+
+            hourlyTimestamps.add(hourlyTimestampsPerDay);
+        }
+        return hourlyTimestamps;
     }
 
     @VisibleForTesting
@@ -600,30 +588,6 @@ public final class DataProcessor {
         results[0] = results[0] == Long.MIN_VALUE ? 0 : results[0];
         results[1] = results[1] == Long.MAX_VALUE ? 0 : results[1];
         return results;
-    }
-
-    /**
-     * @return Returns the timestamp for 00:00 1 day after the given timestamp based on local
-     * timezone.
-     */
-    @VisibleForTesting
-    static long getTimestampOfNextDay(long timestamp) {
-        return getTimestampWithDayDiff(timestamp, /*dayDiff=*/ 1);
-    }
-
-    /**
-     * Returns whether currentSlot will be used in daily chart.
-     */
-    @VisibleForTesting
-    static boolean isForDailyChart(final boolean isStartOrEnd, final long currentSlot) {
-        // The start and end timestamps will always be used in daily chart.
-        if (isStartOrEnd) {
-            return true;
-        }
-
-        // The timestamps for 00:00 will be used in daily chart.
-        final long startOfTheDay = getTimestampWithDayDiff(currentSlot, /*dayDiff=*/ 0);
-        return currentSlot == startOfTheDay;
     }
 
     /**
@@ -725,9 +689,9 @@ public final class DataProcessor {
     @VisibleForTesting
     @Nullable
     static Map<Long, Map<String, List<AppUsagePeriod>>> buildAppUsagePeriodList(
-            final List<AppUsageEvent> allAppUsageEvents, final List<BatteryEvent> batteryEventList,
+            final List<AppUsageEvent> appUsageEvents, final List<BatteryEvent> batteryEventList,
             final long startTime, final long endTime) {
-        if (allAppUsageEvents.isEmpty()) {
+        if (appUsageEvents.isEmpty()) {
             return null;
         }
 
@@ -735,7 +699,7 @@ public final class DataProcessor {
         // use.
         final List<AppUsageEvent> deviceEvents = new ArrayList<>();
         final ArrayMap<Integer, List<AppUsageEvent>> usageEventsByInstanceId = new ArrayMap<>();
-        for (final AppUsageEvent event : allAppUsageEvents) {
+        for (final AppUsageEvent event : appUsageEvents) {
             final AppUsageEventType eventType = event.getType();
             if (eventType == AppUsageEventType.ACTIVITY_RESUMED
                     || eventType == AppUsageEventType.ACTIVITY_STOPPED) {
@@ -852,9 +816,11 @@ public final class DataProcessor {
             final List<AppUsagePeriod> usagePeriodList,
             final List<BatteryEvent> batteryEventList) {
         final List<AppUsagePeriod> resultList = new ArrayList<>();
+        int index = 0;
         for (AppUsagePeriod inputPeriod : usagePeriodList) {
             long lastStartTime = inputPeriod.getStartTime();
-            for (BatteryEvent batteryEvent : batteryEventList) {
+            while (index < batteryEventList.size()) {
+                BatteryEvent batteryEvent = batteryEventList.get(index);
                 if (batteryEvent.getTimestamp() < inputPeriod.getStartTime()) {
                     // Because the batteryEventList has been sorted, here is to mark the power
                     // connection state when the usage period starts. If power is connected when
@@ -865,6 +831,7 @@ public final class DataProcessor {
                     } else if (batteryEvent.getType() == BatteryEventType.POWER_DISCONNECTED) {
                         lastStartTime = inputPeriod.getStartTime();
                     }
+                    index++;
                     continue;
                 }
                 if (batteryEvent.getTimestamp() > inputPeriod.getEndTime()) {
@@ -883,6 +850,7 @@ public final class DataProcessor {
                 } else if (batteryEvent.getType() == BatteryEventType.POWER_DISCONNECTED) {
                     lastStartTime = batteryEvent.getTimestamp();
                 }
+                index++;
             }
             if (lastStartTime != 0) {
                 resultList.add(AppUsagePeriod.newBuilder()
@@ -1180,43 +1148,22 @@ public final class DataProcessor {
             Context context,
             final List<Long> rawTimestampList,
             final List<Long> expectedTimestampSlots,
-            final long currentTime,
-            final boolean isFromFullCharge,
             final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap,
             final Map<Long, Map<String, BatteryHistEntry>> resultMap) {
         if (rawTimestampList.isEmpty() || expectedTimestampSlots.isEmpty()) {
             return;
         }
-        final long expectedStartTimestamp = expectedTimestampSlots.get(0);
-        final long rawStartTimestamp = rawTimestampList.get(0);
-        int startIndex = 0;
-        // If the expected start timestamp is full charge or earlier than what we have, use the
-        // first data of what we have directly. This should be OK because the expected start
-        // timestamp is the nearest even hour of the raw start timestamp, their time diff is no
-        // more than 1 hour.
-        if (isFromFullCharge || expectedStartTimestamp < rawStartTimestamp) {
-            startIndex = 1;
-            resultMap.put(expectedStartTimestamp, batteryHistoryMap.get(rawStartTimestamp));
-        }
         final int expectedTimestampSlotsSize = expectedTimestampSlots.size();
-        for (int index = startIndex; index < expectedTimestampSlotsSize; index++) {
-            final long currentSlot = expectedTimestampSlots.get(index);
-            if (currentSlot > currentTime) {
-                // The slot timestamp is greater than the current time. Puts a placeholder first,
-                // then in the async task, loads the real time battery usage data from the battery
-                // stats service.
-                // If current time is odd hour, one placeholder is added. If the current hour is
-                // even hour, two placeholders are added. This is because the method
-                // insertHourlyUsageDiffDataPerSlot() requires continuing three hours data.
-                resultMap.put(currentSlot,
-                        Map.of(CURRENT_TIME_BATTERY_HISTORY_PLACEHOLDER, EMPTY_BATTERY_HIST_ENTRY));
-                continue;
-            }
-            final boolean isStartOrEnd = index == 0 || index == expectedTimestampSlotsSize - 1;
-            interpolateHistoryForSlot(
-                    context, currentSlot, rawTimestampList, batteryHistoryMap, resultMap,
-                    isStartOrEnd);
+        final long startTimestamp = expectedTimestampSlots.get(0);
+        final long endTimestamp = expectedTimestampSlots.get(expectedTimestampSlotsSize - 1);
+
+        resultMap.put(startTimestamp, batteryHistoryMap.get(startTimestamp));
+        for (int index = 1; index < expectedTimestampSlotsSize - 1; index++) {
+            interpolateHistoryForSlot(context, expectedTimestampSlots.get(index), rawTimestampList,
+                    batteryHistoryMap, resultMap);
         }
+        resultMap.put(endTimestamp,
+                Map.of(CURRENT_TIME_BATTERY_HISTORY_PLACEHOLDER, EMPTY_BATTERY_HIST_ENTRY));
     }
 
     private static void interpolateHistoryForSlot(
@@ -1224,8 +1171,7 @@ public final class DataProcessor {
             final long currentSlot,
             final List<Long> rawTimestampList,
             final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap,
-            final Map<Long, Map<String, BatteryHistEntry>> resultMap,
-            final boolean isStartOrEnd) {
+            final Map<Long, Map<String, BatteryHistEntry>> resultMap) {
         final long[] nearestTimestamps = findNearestTimestamp(rawTimestampList, currentSlot);
         final long lowerTimestamp = nearestTimestamps[0];
         final long upperTimestamp = nearestTimestamps[1];
@@ -1248,9 +1194,8 @@ public final class DataProcessor {
             resultMap.put(currentSlot, new ArrayMap<>());
             return;
         }
-        interpolateHistoryForSlot(context,
-                currentSlot, lowerTimestamp, upperTimestamp, batteryHistoryMap, resultMap,
-                isStartOrEnd);
+        interpolateHistoryForSlot(
+                context, currentSlot, lowerTimestamp, upperTimestamp, batteryHistoryMap, resultMap);
     }
 
     private static void interpolateHistoryForSlot(
@@ -1259,8 +1204,7 @@ public final class DataProcessor {
             final long lowerTimestamp,
             final long upperTimestamp,
             final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap,
-            final Map<Long, Map<String, BatteryHistEntry>> resultMap,
-            final boolean isStartOrEnd) {
+            final Map<Long, Map<String, BatteryHistEntry>> resultMap) {
         final Map<String, BatteryHistEntry> lowerEntryDataMap =
                 batteryHistoryMap.get(lowerTimestamp);
         final Map<String, BatteryHistEntry> upperEntryDataMap =
@@ -1274,7 +1218,7 @@ public final class DataProcessor {
         // Skips the booting-specific logics and always does interpolation for daily chart level
         // data.
         if (lowerTimestamp < upperEntryDataBootTimestamp
-                && !isForDailyChart(isStartOrEnd, currentSlot)) {
+                && !TimestampUtils.isMidnight(currentSlot)) {
             // Provides an opportunity to force align the slot directly.
             if ((upperTimestamp - currentSlot) < 10 * DateUtils.MINUTE_IN_MILLIS) {
                 log(context, "force align into the nearest slot", currentSlot, null);
@@ -1319,70 +1263,6 @@ public final class DataProcessor {
             }
         }
         resultMap.put(currentSlot, newHistEntryMap);
-    }
-
-    /**
-     * @return Returns the nearest even hour timestamp of the given timestamp.
-     */
-    private static long getNearestEvenHourTimestamp(long rawTimestamp) {
-        // If raw hour is even, the nearest even hour should be the even hour before raw
-        // start. The hour doesn't need to change and just set the minutes and seconds to 0.
-        // Otherwise, the nearest even hour should be raw hour + 1.
-        // For example, the nearest hour of 14:30:50 should be 14:00:00. While the nearest
-        // hour of 15:30:50 should be 16:00:00.
-        return getEvenHourTimestamp(rawTimestamp, /*addHourOfDay*/ 1);
-    }
-
-    /**
-     * @return Returns the fist even hour timestamp after the given timestamp.
-     */
-    private static long getFirstEvenHourAfterTimestamp(long rawTimestamp) {
-        return getLastEvenHourBeforeTimestamp(rawTimestamp + DateUtils.HOUR_IN_MILLIS * 2);
-    }
-
-    /**
-     * @return Returns the last even hour timestamp before the given timestamp.
-     */
-    private static long getLastEvenHourBeforeTimestamp(long rawTimestamp) {
-        // If raw hour is even, the hour doesn't need to change as well.
-        // Otherwise, the even hour before raw end should be raw hour - 1.
-        // For example, the even hour before 14:30:50 should be 14:00:00. While the even
-        // hour before 15:30:50 should be 14:00:00.
-        return getEvenHourTimestamp(rawTimestamp, /*addHourOfDay*/ -1);
-    }
-
-    private static long getEvenHourTimestamp(long rawTimestamp, int addHourOfDay) {
-        final Calendar evenHourCalendar = Calendar.getInstance();
-        evenHourCalendar.setTimeInMillis(rawTimestamp);
-        // Before computing the evenHourCalendar, record raw hour based on local timezone.
-        final int rawHour = evenHourCalendar.get(Calendar.HOUR_OF_DAY);
-        if (rawHour % 2 != 0) {
-            evenHourCalendar.add(Calendar.HOUR_OF_DAY, addHourOfDay);
-        }
-        evenHourCalendar.set(Calendar.MINUTE, 0);
-        evenHourCalendar.set(Calendar.SECOND, 0);
-        evenHourCalendar.set(Calendar.MILLISECOND, 0);
-        return evenHourCalendar.getTimeInMillis();
-    }
-
-    private static List<List<Long>> getHourlyTimestamps(final List<Long> dailyTimestamps) {
-        final List<List<Long>> hourlyTimestamps = new ArrayList<>();
-        if (dailyTimestamps.size() < MIN_DAILY_DATA_SIZE) {
-            return hourlyTimestamps;
-        }
-
-        for (int dailyStartIndex = 0; dailyStartIndex < dailyTimestamps.size() - 1;
-                dailyStartIndex++) {
-            long currentTimestamp = dailyTimestamps.get(dailyStartIndex);
-            final long dailyEndTimestamp = dailyTimestamps.get(dailyStartIndex + 1);
-            final List<Long> hourlyTimestampsPerDay = new ArrayList<>();
-            while (currentTimestamp <= dailyEndTimestamp) {
-                hourlyTimestampsPerDay.add(currentTimestamp);
-                currentTimestamp += MIN_TIME_SLOT;
-            }
-            hourlyTimestamps.add(hourlyTimestampsPerDay);
-        }
-        return hourlyTimestamps;
     }
 
     private static List<BatteryLevelData.PeriodBatteryLevelData> getHourlyPeriodBatteryLevelData(
@@ -1446,31 +1326,44 @@ public final class DataProcessor {
         final int workProfileUserId =
                 userHandle != null ? userHandle.getIdentifier() : Integer.MIN_VALUE;
         // Each time slot usage diff data =
-        //     Math.abs(timestamp[i+2] data - timestamp[i+1] data) +
-        //     Math.abs(timestamp[i+1] data - timestamp[i] data);
-        // since we want to aggregate every two hours data into a single time slot.
+        //     sum(Math.abs(timestamp[i+1] data - timestamp[i] data));
+        // since we want to aggregate every hour usage diff data into a single time slot.
         for (int dailyIndex = 0; dailyIndex < hourlyBatteryLevelsPerDay.size(); dailyIndex++) {
             final Map<Integer, BatteryDiffData> dailyDiffMap = new ArrayMap<>();
             resultMap.put(dailyIndex, dailyDiffMap);
             if (hourlyBatteryLevelsPerDay.get(dailyIndex) == null) {
                 continue;
             }
-            final List<Long> timestamps = hourlyBatteryLevelsPerDay.get(dailyIndex).getTimestamps();
-            for (int hourlyIndex = 0; hourlyIndex < timestamps.size() - 1; hourlyIndex++) {
+            final List<Long> hourlyTimestamps =
+                    hourlyBatteryLevelsPerDay.get(dailyIndex).getTimestamps();
+            for (int hourlyIndex = 0; hourlyIndex < hourlyTimestamps.size() - 1; hourlyIndex++) {
+                final Long startTimestamp = hourlyTimestamps.get(hourlyIndex);
+                final Long endTimestamp = hourlyTimestamps.get(hourlyIndex + 1);
+                final long slotDuration = endTimestamp - startTimestamp;
+                List<Map<String, BatteryHistEntry>> slotBatteryHistoryList = new ArrayList<>();
+                slotBatteryHistoryList.add(
+                        batteryHistoryMap.getOrDefault(startTimestamp, EMPTY_BATTERY_MAP));
+                for (Long timestamp = TimestampUtils.getNextHourTimestamp(startTimestamp);
+                        timestamp < endTimestamp; timestamp += DateUtils.HOUR_IN_MILLIS) {
+                    slotBatteryHistoryList.add(
+                            batteryHistoryMap.getOrDefault(timestamp, EMPTY_BATTERY_MAP));
+                }
+                slotBatteryHistoryList.add(
+                        batteryHistoryMap.getOrDefault(endTimestamp, EMPTY_BATTERY_MAP));
+
                 final BatteryDiffData hourlyBatteryDiffData =
                         insertHourlyUsageDiffDataPerSlot(
                                 context,
                                 currentUserId,
                                 workProfileUserId,
-                                hourlyIndex,
-                                timestamps,
+                                slotDuration,
                                 systemAppsPackageNames,
                                 systemAppsUids,
                                 appUsagePeriodMap == null
                                         || appUsagePeriodMap.get(dailyIndex) == null
                                         ? null
                                         : appUsagePeriodMap.get(dailyIndex).get(hourlyIndex),
-                                batteryHistoryMap);
+                                slotBatteryHistoryList);
                 dailyDiffMap.put(hourlyIndex, hourlyBatteryDiffData);
             }
         }
@@ -1508,54 +1401,42 @@ public final class DataProcessor {
             final Context context,
             final int currentUserId,
             final int workProfileUserId,
-            final int currentIndex,
-            final List<Long> timestamps,
+            final long slotDuration,
             final Set<String> systemAppsPackageNames,
             final Set<Integer> systemAppsUids,
             final Map<Long, Map<String, List<AppUsagePeriod>>> appUsageMap,
-            final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
+            final List<Map<String, BatteryHistEntry>> slotBatteryHistoryList) {
         final List<BatteryDiffEntry> appEntries = new ArrayList<>();
         final List<BatteryDiffEntry> systemEntries = new ArrayList<>();
 
-        final Long currentTimestamp = timestamps.get(currentIndex);
-        final Long nextTimestamp = currentTimestamp + DateUtils.HOUR_IN_MILLIS;
-        final Long nextTwoTimestamp = nextTimestamp + DateUtils.HOUR_IN_MILLIS;
-        // Fetches BatteryHistEntry data from corresponding time slot.
-        final Map<String, BatteryHistEntry> currentBatteryHistMap =
-                batteryHistoryMap.getOrDefault(currentTimestamp, EMPTY_BATTERY_MAP);
-        final Map<String, BatteryHistEntry> nextBatteryHistMap =
-                batteryHistoryMap.getOrDefault(nextTimestamp, EMPTY_BATTERY_MAP);
-        final Map<String, BatteryHistEntry> nextTwoBatteryHistMap =
-                batteryHistoryMap.getOrDefault(nextTwoTimestamp, EMPTY_BATTERY_MAP);
-        // We should not get the empty list since we have at least one fake data to record
-        // the battery level and status in each time slot, the empty list is used to
-        // represent there is no enough data to apply interpolation arithmetic.
-        if (currentBatteryHistMap.isEmpty()
-                || nextBatteryHistMap.isEmpty()
-                || nextTwoBatteryHistMap.isEmpty()) {
-            return null;
-        }
-
         // Collects all keys in these three time slot records as all populations.
         final Set<String> allBatteryHistEntryKeys = new ArraySet<>();
-        allBatteryHistEntryKeys.addAll(currentBatteryHistMap.keySet());
-        allBatteryHistEntryKeys.addAll(nextBatteryHistMap.keySet());
-        allBatteryHistEntryKeys.addAll(nextTwoBatteryHistMap.keySet());
+        for (Map<String, BatteryHistEntry> slotBatteryHistMap : slotBatteryHistoryList) {
+            if (slotBatteryHistMap.isEmpty()) {
+                // We should not get the empty list since we have at least one fake data to record
+                // the battery level and status in each time slot, the empty list is used to
+                // represent there is no enough data to apply interpolation arithmetic.
+                return null;
+            }
+            allBatteryHistEntryKeys.addAll(slotBatteryHistMap.keySet());
+        }
 
         // Calculates all packages diff usage data in a specific time slot.
         for (String key : allBatteryHistEntryKeys) {
             if (key == null) {
                 continue;
             }
-            final BatteryHistEntry currentEntry =
-                    currentBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
-            final BatteryHistEntry nextEntry =
-                    nextBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
-            final BatteryHistEntry nextTwoEntry =
-                    nextTwoBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
 
-            final BatteryHistEntry selectedBatteryEntry =
-                    selectBatteryHistEntry(currentEntry, nextEntry, nextTwoEntry);
+            BatteryHistEntry selectedBatteryEntry = null;
+            final List<BatteryHistEntry> batteryHistEntries = new ArrayList<>();
+            for (Map<String, BatteryHistEntry> slotBatteryHistMap : slotBatteryHistoryList) {
+                BatteryHistEntry entry =
+                        slotBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
+                batteryHistEntries.add(entry);
+                if (selectedBatteryEntry == null && entry != EMPTY_BATTERY_HIST_ENTRY) {
+                    selectedBatteryEntry = entry;
+                }
+            }
             if (selectedBatteryEntry == null) {
                 continue;
             }
@@ -1568,41 +1449,45 @@ public final class DataProcessor {
             }
 
             // Cumulative values is a specific time slot for a specific app.
-            long foregroundUsageTimeInMs =
-                    getDiffValue(
-                            currentEntry.mForegroundUsageTimeInMs,
-                            nextEntry.mForegroundUsageTimeInMs,
-                            nextTwoEntry.mForegroundUsageTimeInMs);
-            long backgroundUsageTimeInMs =
-                    getDiffValue(
-                            currentEntry.mBackgroundUsageTimeInMs,
-                            nextEntry.mBackgroundUsageTimeInMs,
-                            nextTwoEntry.mBackgroundUsageTimeInMs);
-            double consumePower =
-                    getDiffValue(
-                            currentEntry.mConsumePower,
-                            nextEntry.mConsumePower,
-                            nextTwoEntry.mConsumePower);
-            double foregroundUsageConsumePower =
-                    getDiffValue(
-                            currentEntry.mForegroundUsageConsumePower,
-                            nextEntry.mForegroundUsageConsumePower,
-                            nextTwoEntry.mForegroundUsageConsumePower);
-            double foregroundServiceUsageConsumePower =
-                    getDiffValue(
-                            currentEntry.mForegroundServiceUsageConsumePower,
-                            nextEntry.mForegroundServiceUsageConsumePower,
-                            nextTwoEntry.mForegroundServiceUsageConsumePower);
-            double backgroundUsageConsumePower =
-                    getDiffValue(
-                            currentEntry.mBackgroundUsageConsumePower,
-                            nextEntry.mBackgroundUsageConsumePower,
-                            nextTwoEntry.mBackgroundUsageConsumePower);
-            double cachedUsageConsumePower =
-                    getDiffValue(
-                            currentEntry.mCachedUsageConsumePower,
-                            nextEntry.mCachedUsageConsumePower,
-                            nextTwoEntry.mCachedUsageConsumePower);
+            long foregroundUsageTimeInMs = 0;
+            long backgroundUsageTimeInMs = 0;
+            double consumePower = 0;
+            double foregroundUsageConsumePower = 0;
+            double foregroundServiceUsageConsumePower = 0;
+            double backgroundUsageConsumePower = 0;
+            double cachedUsageConsumePower = 0;
+            for (int i = 0; i < batteryHistEntries.size() - 1; i++) {
+                final BatteryHistEntry currentEntry = batteryHistEntries.get(i);
+                final BatteryHistEntry nextEntry = batteryHistEntries.get(i + 1);
+                foregroundUsageTimeInMs +=
+                        getDiffValue(
+                                currentEntry.mForegroundUsageTimeInMs,
+                                nextEntry.mForegroundUsageTimeInMs);
+                backgroundUsageTimeInMs +=
+                        getDiffValue(
+                                currentEntry.mBackgroundUsageTimeInMs,
+                                nextEntry.mBackgroundUsageTimeInMs);
+                consumePower +=
+                        getDiffValue(
+                                currentEntry.mConsumePower,
+                                nextEntry.mConsumePower);
+                foregroundUsageConsumePower +=
+                        getDiffValue(
+                                currentEntry.mForegroundUsageConsumePower,
+                                nextEntry.mForegroundUsageConsumePower);
+                foregroundServiceUsageConsumePower +=
+                        getDiffValue(
+                                currentEntry.mForegroundServiceUsageConsumePower,
+                                nextEntry.mForegroundServiceUsageConsumePower);
+                backgroundUsageConsumePower +=
+                        getDiffValue(
+                                currentEntry.mBackgroundUsageConsumePower,
+                                nextEntry.mBackgroundUsageConsumePower);
+                cachedUsageConsumePower +=
+                        getDiffValue(
+                                currentEntry.mCachedUsageConsumePower,
+                                nextEntry.mCachedUsageConsumePower);
+            }
             // Excludes entry since we don't have enough data to calculate.
             if (foregroundUsageTimeInMs == 0
                     && backgroundUsageTimeInMs == 0
@@ -1613,13 +1498,13 @@ public final class DataProcessor {
             // will apply the interpolation arithmetic.
             final float totalUsageTimeInMs =
                     foregroundUsageTimeInMs + backgroundUsageTimeInMs;
-            if (totalUsageTimeInMs > TOTAL_HOURLY_TIME_THRESHOLD) {
-                final float ratio = TOTAL_HOURLY_TIME_THRESHOLD / totalUsageTimeInMs;
+            if (totalUsageTimeInMs > slotDuration) {
+                final float ratio = slotDuration / totalUsageTimeInMs;
                 if (sDebug) {
                     Log.w(TAG, String.format("abnormal usage time %d|%d for:\n%s",
                             Duration.ofMillis(foregroundUsageTimeInMs).getSeconds(),
                             Duration.ofMillis(backgroundUsageTimeInMs).getSeconds(),
-                            currentEntry));
+                            selectedBatteryEntry));
                 }
                 foregroundUsageTimeInMs =
                         Math.round(foregroundUsageTimeInMs * ratio);
@@ -1634,14 +1519,14 @@ public final class DataProcessor {
 
             // Compute the screen on time and make sure it won't exceed the threshold.
             final long screenOnTime = Math.min(
-                    (long) TOTAL_HOURLY_TIME_THRESHOLD,
+                    (long) slotDuration,
                     getScreenOnTime(
                             appUsageMap,
                             selectedBatteryEntry.mUserId,
                             selectedBatteryEntry.mPackageName));
             // Make sure the background + screen-on time will not exceed the threshold.
             backgroundUsageTimeInMs = Math.min(
-                    backgroundUsageTimeInMs, (long) TOTAL_HOURLY_TIME_THRESHOLD - screenOnTime);
+                    backgroundUsageTimeInMs, (long) slotDuration - screenOnTime);
             final BatteryDiffEntry currentBatteryDiffEntry = new BatteryDiffEntry(
                     context,
                     foregroundUsageTimeInMs,
@@ -1938,33 +1823,12 @@ public final class DataProcessor {
         return true;
     }
 
-    private static long getTimestampWithDayDiff(final long timestamp, final int dayDiff) {
-        final Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(timestamp);
-        calendar.add(Calendar.DAY_OF_YEAR, dayDiff);
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        return calendar.getTimeInMillis();
+    private static long getDiffValue(long v1, long v2) {
+        return v2 > v1 ? v2 - v1 : 0;
     }
 
-    private static long getDiffValue(long v1, long v2, long v3) {
-        return (v2 > v1 ? v2 - v1 : 0) + (v3 > v2 ? v3 - v2 : 0);
-    }
-
-    private static double getDiffValue(double v1, double v2, double v3) {
-        return (v2 > v1 ? v2 - v1 : 0) + (v3 > v2 ? v3 - v2 : 0);
-    }
-
-    @Nullable
-    private static BatteryHistEntry selectBatteryHistEntry(
-            final BatteryHistEntry... batteryHistEntries) {
-        for (BatteryHistEntry entry : batteryHistEntries) {
-            if (entry != null && entry != EMPTY_BATTERY_HIST_ENTRY) {
-                return entry;
-            }
-        }
-        return null;
+    private static double getDiffValue(double v1, double v2) {
+        return v2 > v1 ? v2 - v1 : 0;
     }
 
     private static Set<String> getSystemAppsPackageNames(Context context) {
