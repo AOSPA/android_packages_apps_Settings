@@ -41,15 +41,17 @@ public class DataDefaultSubscriptionController extends DefaultSubscriptionContro
 
     @Override
     protected int getDefaultSubscriptionId() {
+        int defaultDataSubId = SubscriptionManager.getDefaultDataSubscriptionId();
         for (SubscriptionInfoEntity subInfo : mSubInfoEntityList) {
-            if (subInfo.isActiveSubscriptionId && subInfo.isDefaultDataSubscription) {
+            int subId = subInfo.getSubId();
+            if (subInfo.isActiveSubscriptionId && subId == defaultDataSubId) {
                 mSubscriptionInfoEntity = subInfo;
-                return Integer.parseInt(subInfo.subId);
+                return subId;
             }
         }
-
         return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     }
+
 
     @Override
     protected void setDefaultSubscription(int subscriptionId) {

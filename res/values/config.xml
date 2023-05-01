@@ -714,4 +714,15 @@
 
     <!-- Whether to display Cloned Apps page in Settings (Settings > Apps > Cloned Apps).-->
     <bool name="config_cloned_apps_page_enabled">false</bool>
+
+    <!-- Certificates of apps which are allowed to use activity embedding with Settings.-->
+    <string-array name="config_known_host_certs" translatable="false">
+        <item></item>
+    </string-array>
+
+    <!-- List of packages that should be hidden for MVNO. Do not translate -->
+    <string-array name="datausage_hiding_carrier_service_package_names" translatable="false"/>
+
+    <!-- List of MVNO. Do not translate -->
+    <integer-array name="datausage_hiding_carrier_service_carrier_id" translatable="false"/>
 </resources>

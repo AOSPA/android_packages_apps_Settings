@@ -23,6 +23,9 @@
 
 package com.android.settings.network.telephony;
 
+import static android.telephony.AccessNetworkConstants.TRANSPORT_TYPE_WWAN;
+import static android.telephony.NetworkRegistrationInfo.DOMAIN_PS;
+
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -33,6 +36,8 @@ import android.os.ServiceManager;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.telephony.NetworkRegistrationInfo;
+import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -187,10 +192,31 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
             Log.d(LOG_TAG, "C_IWLAN config null");
             return false;
         }
-        if (mTelephonyManager.isNetworkRoaming(mSubId)) {
+        if (isRoaming()) {
             return mCiwlanConfig.isCiwlanOnlyInRoam();
         }
         return mCiwlanConfig.isCiwlanOnlyInHome();
+    }
+
+    public static boolean isRoaming() {
+        if (mTelephonyManager == null) {
+            Log.d(LOG_TAG, "isRoaming: TelephonyManager null");
+            return false;
+        }
+        boolean nriRoaming = false;
+        ServiceState serviceState = mTelephonyManager.getServiceState();
+        if (serviceState != null) {
+            NetworkRegistrationInfo nri =
+                    serviceState.getNetworkRegistrationInfo(DOMAIN_PS, TRANSPORT_TYPE_WWAN);
+            if (nri != null) {
+                nriRoaming = nri.isNetworkRoaming();
+            } else {
+                Log.d(LOG_TAG, "isRoaming: network registration info null");
+            }
+        } else {
+            Log.d(LOG_TAG, "isRoaming: service state null");
+        }
+        return nriRoaming;
     }
 
     public MobileNetworkSettings() {
@@ -250,7 +276,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         }
         Log.i(LOG_TAG, "display subId: " + mSubId);
 
-        mMobileNetworkRepository = MobileNetworkRepository.create(context, this);
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
         mExecutor.execute(() -> {
             mSubscriptionInfoEntity = mMobileNetworkRepository.getSubInfoById(
                     String.valueOf(mSubId));
@@ -271,6 +297,8 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 new SmsDefaultSubscriptionController(context, KEY_SMS_PREF, getSettingsLifecycle(),
                         this),
                 new MobileDataPreferenceController(context, KEY_MOBILE_DATA_PREF,
+                        getSettingsLifecycle(), this, mSubId),
+                new ConvertToEsimPreferenceController(context, KEY_CONVERT_TO_ESIM_PREF,
                         getSettingsLifecycle(), this, mSubId));
     }
 
@@ -370,7 +398,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 use(OpenNetworkSelectPagePreferenceController.class).init(mSubId);
         final AutoSelectPreferenceController autoSelectPreferenceController =
                 use(AutoSelectPreferenceController.class)
-                        .init(mSubId)
+                        .init(getLifecycle(), mSubId)
                         .addListener(openNetworkSelectPagePreferenceController);
 
         final SelectNetworkPreferenceController selectNetworkPreferenceController =
@@ -435,7 +463,8 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     public void onResume() {
         Log.i(LOG_TAG, "onResume:+");
         super.onResume();
-        mMobileNetworkRepository.addRegister(this);
+        mMobileNetworkRepository.addRegister(this, this, mSubId);
+        mMobileNetworkRepository.updateEntity();
         // TODO: remove log after fixing b/182326102
         Log.d(LOG_TAG, "onResume() subId=" + mSubId);
     }
@@ -461,13 +490,18 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     }
 
     @Override
+    public void onPause() {
+        mMobileNetworkRepository.removeRegister(this);
+        super.onPause();
+    }
+
+    @Override
     public void onDestroy() {
         if (mExtTelServiceConnected) {
             mExtTelephonyManager.disconnectService(mExtTelServiceCallback);
             mExtTelephonyManager = null;
         }
         super.onDestroy();
-        mMobileNetworkRepository.removeRegister();
     }
 
     @VisibleForTesting
@@ -608,7 +642,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
             Iterator<Integer> iterator = mSubscriptionInfoMap.keySet().iterator();
             while (iterator.hasNext()) {
-                if (iterator.next() == mSubId) {
+                if (iterator.next() == mSubId && getActivity() != null) {
                     finishFragment();
                     return;
                 }
@@ -627,7 +661,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 break;
             } else if (entity.isDefaultSubscriptionSelection) {
                 mSubscriptionInfoEntity = entity;
-                Log.d(LOG_TAG, "Set subInfo to the default subInfo.");
+                Log.d(LOG_TAG, "Set subInfo to default subInfo.");
             }
         }
         onSubscriptionDetailChanged();

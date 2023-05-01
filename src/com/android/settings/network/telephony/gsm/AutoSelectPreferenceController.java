@@ -44,6 +44,7 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
@@ -55,6 +56,7 @@ import com.android.settings.network.AllowedNetworkTypesListener;
 import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.SubscriptionsChangeListener;
 import com.android.settings.network.telephony.Enhanced4gBasePreferenceController;
+import com.android.settings.network.helper.ServiceStateStatus;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.network.telephony.TelephonyTogglePreferenceController;
 import com.android.settingslib.utils.ThreadUtils;
@@ -85,6 +87,9 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
         SelectNetworkPreferenceController.OnNetworkScanTypeListener {
 
     private static final long MINIMUM_DIALOG_TIME_MILLIS = TimeUnit.SECONDS.toMillis(1);
+    private static final String LOG_TAG = "AutoSelectPreferenceController";
+    private static final String INTERNAL_LOG_TAG_INIT = "Init";
+    private static final String INTERNAL_LOG_TAG_AFTERSET = "AfterSet";
 
     private final Handler mUiHandler;
     private static final String TAG = "AutoSelectPreferenceController";
@@ -106,6 +111,7 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
     private int mCacheOfModeStatus;
     private AtomicLong mRecursiveUpdate;
     private Object mLock = new Object();
+    ServiceStateStatus mServiceStateStatus;
 
     public AutoSelectPreferenceController(Context context, String key) {
         super(context, key);
@@ -272,12 +278,23 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
 
             //Update UI in UI thread
             final long durationMillis = SystemClock.elapsedRealtime() - startMillis;
+
             mUiHandler.postDelayed(() -> {
-                mRecursiveUpdate.getAndIncrement();
-                mSwitchPreference.setEnabled(true);
-                mSwitchPreference.setChecked(isChecked());
-                mRecursiveUpdate.decrementAndGet();
-                dismissProgressBar();
+                ThreadUtils.postOnBackgroundThread(() -> {
+                    queryNetworkSelectionMode(INTERNAL_LOG_TAG_AFTERSET);
+
+                    //Update UI in UI thread
+                    mUiHandler.post(() -> {
+                        mRecursiveUpdate.getAndIncrement();
+                        if (mSwitchPreference != null) {
+                            mSwitchPreference.setEnabled(true);
+                            mSwitchPreference.setChecked(isChecked());
+                        }
+                        mRecursiveUpdate.decrementAndGet();
+                        updateListenerValue();
+                        dismissProgressBar();
+                    });
+                });
             }, Math.max(MINIMUM_DIALOG_TIME_MILLIS - durationMillis, 0));
         });
     }
@@ -285,7 +302,7 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
     /**
      * Initialization based on given subscription id.
      **/
-    public AutoSelectPreferenceController init(int subId) {
+    public AutoSelectPreferenceController init(Lifecycle lifecycle, int subId) {
         mSubId = subId;
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
@@ -299,6 +316,29 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
                 CarrierConfigManager.KEY_ONLY_AUTO_SELECT_IN_HOME_NETWORK_BOOL)
                 : false;
 
+        mServiceStateStatus = new ServiceStateStatus(lifecycle, mTelephonyManager,
+                new HandlerExecutor(mUiHandler)) {
+            @Override
+            protected void setValue(ServiceState status) {
+                if (status == null) {
+                    return;
+                }
+                updateUiAutoSelectValue(status);
+            }
+        };
+
+        ThreadUtils.postOnBackgroundThread(() -> {
+            queryNetworkSelectionMode(INTERNAL_LOG_TAG_INIT);
+            //Update UI in UI thread
+            mUiHandler.post(() -> {
+                if (mSwitchPreference != null) {
+                    mRecursiveUpdate.getAndIncrement();
+                    mSwitchPreference.setChecked(isChecked());
+                    mRecursiveUpdate.decrementAndGet();
+                    updateListenerValue();
+                }
+            });
+        });
         return this;
     }
 
@@ -348,6 +388,39 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
         mListeners.add(lsn);
 
         return this;
+    }
+
+    private void queryNetworkSelectionMode(String tag) {
+        mCacheOfModeStatus = mTelephonyManager.getNetworkSelectionMode();
+        Log.d(LOG_TAG, tag + ": query command done. mCacheOfModeStatus: " + mCacheOfModeStatus);
+    }
+
+    @VisibleForTesting
+    void updateUiAutoSelectValue(ServiceState status) {
+        if (status == null) {
+            return;
+        }
+        if (!mUpdatingConfig.get()) {
+            int networkSelectionMode = status.getIsManualSelection()
+                    ? TelephonyManager.NETWORK_SELECTION_MODE_MANUAL
+                    : TelephonyManager.NETWORK_SELECTION_MODE_AUTO;
+            if (mCacheOfModeStatus == networkSelectionMode) {
+                return;
+            }
+            mCacheOfModeStatus = networkSelectionMode;
+            Log.d(LOG_TAG, "updateUiAutoSelectValue: mCacheOfModeStatus: " + mCacheOfModeStatus);
+
+            mRecursiveUpdate.getAndIncrement();
+            updateState(mSwitchPreference);
+            mRecursiveUpdate.decrementAndGet();
+            updateListenerValue();
+        }
+    }
+
+    private void updateListenerValue() {
+        for (OnNetworkSelectModeListener lsn : mListeners) {
+            lsn.onNetworkSelectModeUpdated(mCacheOfModeStatus);
+        }
     }
 
     private void showAutoSelectProgressBar() {

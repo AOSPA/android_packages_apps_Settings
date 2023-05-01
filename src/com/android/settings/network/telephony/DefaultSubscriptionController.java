@@ -43,10 +43,10 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.network.DefaultSubscriptionReceiver;
 import com.android.settings.network.MobileNetworkRepository;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
 
@@ -62,7 +62,8 @@ import org.codeaurora.internal.IExtTelephony;
  */
 public abstract class DefaultSubscriptionController extends TelephonyBasePreferenceController
         implements LifecycleObserver, Preference.OnPreferenceChangeListener,
-        MobileNetworkRepository.MobileNetworkCallback {
+        MobileNetworkRepository.MobileNetworkCallback,
+        DefaultSubscriptionReceiver.DefaultSubscriptionListener {
     private static final String TAG = "DefaultSubController";
 
     protected ListPreference mPreference;
@@ -70,6 +71,7 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
     protected TelecomManager mTelecomManager;
     protected MobileNetworkRepository mMobileNetworkRepository;
     protected LifecycleOwner mLifecycleOwner;
+    private DefaultSubscriptionReceiver mDataSubscriptionChangedReceiver;
 
     private static final String EMERGENCY_ACCOUNT_HANDLE_ID = "E";
     private static final ComponentName PSTN_CONNECTION_SERVICE_COMPONENT =
@@ -95,7 +97,8 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         mManager = context.getSystemService(SubscriptionManager.class);
         mIsRtlMode = context.getResources().getConfiguration().getLayoutDirection()
                 == View.LAYOUT_DIRECTION_RTL;
-        mMobileNetworkRepository = MobileNetworkRepository.create(context, this);
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
+        mDataSubscriptionChangedReceiver = new DefaultSubscriptionReceiver(context, this);
         mLifecycleOwner = lifecycleOwner;
         if (lifecycle != null) {
             lifecycle.addObserver(this);
@@ -138,15 +141,21 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
 
     @OnLifecycleEvent(ON_RESUME)
     public void onResume() {
-        mMobileNetworkRepository.addRegister(mLifecycleOwner);
+        mMobileNetworkRepository.addRegister(mLifecycleOwner, this,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         registerPhoneStateListener();
-        updateEntries();
+        mMobileNetworkRepository.updateEntity();
+        // Can not get default subId from database until get the callback, add register by subId
+        // later.
+        mMobileNetworkRepository.addRegisterBySubId(getDefaultSubscriptionId());
+        mDataSubscriptionChangedReceiver.registerReceiver();
     }
 
     @OnLifecycleEvent(ON_PAUSE)
     public void onPause() {
-        mMobileNetworkRepository.removeRegister();
+        mMobileNetworkRepository.removeRegister(this);
         unRegisterPhoneStateListener();
+        mDataSubscriptionChangedReceiver.unRegisterReceiver();
     }
 
     @Override
@@ -433,5 +442,17 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
 
     @Override
     public void onAllUiccInfoChanged(List<UiccInfoEntity> uiccInfoEntityList) {
+    }
+
+    @Override
+    public void onDefaultVoiceChanged(int defaultVoiceSubId) {
+        updateEntries();
+        refreshSummary(mPreference);
+    }
+
+    @Override
+    public void onDefaultSmsChanged(int defaultSmsSubId) {
+        updateEntries();
+        refreshSummary(mPreference);
     }
 }

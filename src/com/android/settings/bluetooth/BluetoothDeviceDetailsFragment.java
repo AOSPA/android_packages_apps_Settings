@@ -78,9 +78,6 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     private static boolean mBAEnabled = false;
     private static boolean mBAPropertyChecked = false;
 
-    static final int FEATURE_HEARING_DEVICE_CONTROLS_ORDER = 1;
-    static final int FEATURE_AUDIO_ROUTING_ORDER = 2;
-
     @VisibleForTesting
     static int EDIT_DEVICE_NAME_ITEM_ID = Menu.FIRST;
 
@@ -200,7 +197,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         }
         use(AdvancedBluetoothDetailsHeaderController.class).init(mCachedDevice);
         use(LeAudioBluetoothDetailsHeaderController.class).init(mCachedDevice, mManager);
-        use(KeyboardSettingsPreferenceController.class).init(mCachedDevice, getActivity());
+        use(KeyboardSettingsPreferenceController.class).init(mCachedDevice);
 
         final BluetoothFeatureProvider featureProvider = FeatureFactory.getFactory(
                 context).getBluetoothFeatureProvider();

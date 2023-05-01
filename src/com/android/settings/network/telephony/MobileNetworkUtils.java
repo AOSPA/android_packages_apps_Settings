@@ -964,7 +964,12 @@ public class MobileNetworkUtils {
         boolean isWifiCallingEnabled;
         if (phoneAccountHandle != null) {
             final Intent intent = buildPhoneAccountConfigureIntent(context, phoneAccountHandle);
-            isWifiCallingEnabled = intent != null;
+            if (intent == null) {
+                Log.d(TAG, "Can not get phoneAccount configure intent.");
+                isWifiCallingEnabled = false;
+            } else {
+                isWifiCallingEnabled = true;
+            }
         } else {
             if (queryImsState == null) {
                 queryImsState = new WifiCallingQueryImsState(context, subId);
@@ -973,7 +978,6 @@ public class MobileNetworkUtils {
         }
         return isWifiCallingEnabled;
     }
-
 
     /**
      * Returns preferred status of Calls & SMS separately when Provider Model is enabled.
@@ -1022,7 +1026,7 @@ public class MobileNetworkUtils {
     private static CharSequence getPreferredCallStatus(Context context,
             SubscriptionInfoEntity subInfo) {
         String status = "";
-        if (subInfo.isDefaultVoiceSubscription) {
+        if (subInfo.getSubId() == SubscriptionManager.getDefaultVoiceSubscriptionId()) {
             status = setSummaryResId(context, R.string.calls_sms_preferred);
         }
 
@@ -1032,7 +1036,7 @@ public class MobileNetworkUtils {
     private static CharSequence getPreferredSmsStatus(Context context,
             SubscriptionInfoEntity subInfo) {
         String status = "";
-        if (subInfo.isDefaultSmsSubscription) {
+        if (subInfo.getSubId() == SubscriptionManager.getDefaultSmsSubscriptionId()) {
             status = setSummaryResId(context, R.string.calls_sms_preferred);
         }
 
