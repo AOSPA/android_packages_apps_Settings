@@ -16,7 +16,7 @@
 
 /*
  * Changes from Qualcomm Innovation Center are provided under the following license:
- * Copyright (c) 2023 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Copyright (c) 2022-2023 Qualcomm Innovation Center, Inc. All rights reserved.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
@@ -31,7 +31,6 @@ import android.net.Uri;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
 import android.telephony.CarrierConfigManager;
-import android.telephony.ims.aidl.IImsRegistration;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyCallback;
@@ -166,12 +165,16 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
                 }
             };
         }
-        mContext.getContentResolver().registerContentObserver(mCrossSimUri,
-                true, mCrossSimObserver);
+        if (mCrossSimUri != null && mCrossSimObserver != null) {
+            mContext.getContentResolver().registerContentObserver(mCrossSimUri, true,
+                    mCrossSimObserver);
+        }
     }
 
     private void unregisterCrossSimObserver() {
-        mContext.getContentResolver().unregisterContentObserver(mCrossSimObserver);
+        if (mCrossSimObserver != null) {
+            mContext.getContentResolver().unregisterContentObserver(mCrossSimObserver);
+        }
     }
 
     private TelephonyManager getTelephonyManager() {
@@ -198,13 +201,17 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
         public void register(Context context, int subId) {
             // Assign the current call state to show the correct preference state even before the
             // first onCallStateChanged() by initial registration.
-            mCallState = mTelephonyManager.getCallState(subId);
-            mTelephonyManager.registerTelephonyCallback(context.getMainExecutor(), this);
+            if (mTelephonyManager != null) {
+                mCallState = mTelephonyManager.getCallState(subId);
+                mTelephonyManager.registerTelephonyCallback(context.getMainExecutor(), this);
+            }
         }
 
         public void unregister() {
             mCallState = null;
-            mTelephonyManager.unregisterTelephonyCallback(this);
+            if (mTelephonyManager != null) {
+                mTelephonyManager.unregisterTelephonyCallback(this);
+            }
         }
     }
 
@@ -233,6 +240,7 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
     /**
      * Implementation of abstract methods
      **/
+    @Override
     public boolean setChecked(boolean isChecked) {
         // Check UE's C_IWLAN configuration and the current preferred network type. If UE is in
         // C_IWLAN-only mode and the preferred network type does not contain LTE or NR, show a
@@ -247,8 +255,7 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
             try {
                 imsMmTelMgr.setCrossSimCallingEnabled(isChecked);
             } catch (ImsException exception) {
-                Log.w(LOG_TAG, "fail to change cross SIM calling configuration: " + isChecked,
-                        exception);
+                Log.e(LOG_TAG, "Failed to change C_IWLAN status to " + isChecked, exception);
                 return false;
             }
             return true;
@@ -257,7 +264,12 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
     }
 
     private boolean isDialogNeeded(boolean isChecked) {
-        boolean isInCiwlanOnlyMode = MobileNetworkSettings.isInCiwlanOnlyMode();
+        boolean isInCiwlanOnlyMode = false;
+        // Warn on turning on C_IWLAN when an incompatible network is selected only on targets
+        // that support getting the C_IWLAN config
+        if (MobileNetworkSettings.isCiwlanModeSupported()) {
+            isInCiwlanOnlyMode = MobileNetworkSettings.isInCiwlanOnlyMode();
+        }
         if (!isInCiwlanOnlyMode) {
             return false;
         }
@@ -301,6 +313,7 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
         return false;
     }
 
+    @Override
     public boolean isChecked() {
         ImsMmTelManager imsMmTelMgr = getImsMmTelManager(mSubId);
         if (imsMmTelMgr == null) {
@@ -309,7 +322,7 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
         try {
             return imsMmTelMgr.isCrossSimCallingEnabled();
         } catch (ImsException exception) {
-            Log.w(LOG_TAG, "Failed to get cross SIM calling configuration", exception);
+            Log.w(LOG_TAG, "Failed to get C_IWLAN status", exception);
         }
         return false;
     }

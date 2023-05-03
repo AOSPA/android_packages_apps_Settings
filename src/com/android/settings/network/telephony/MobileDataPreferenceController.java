@@ -12,10 +12,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * Changes from Qualcomm Innovation Center are provided under the following license:
- *
- * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+ */
+
+/* Changes from Qualcomm Innovation Center are provided under the following license:
+ * Copyright (c) 2022-2023 Qualcomm Innovation Center, Inc. All rights reserved.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
@@ -215,12 +215,10 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
             SubscriptionInfoEntity subInfoEntity, MobileNetworkInfoEntity networkInfoEntity) {
         mFragmentManager = fragmentManager;
         mSubId = subId;
-
         mTelephonyManager = null;
         mTelephonyManager = getTelephonyManager();
         mSubscriptionInfoEntity = subInfoEntity;
         mMobileNetworkInfoEntity = networkInfoEntity;
-
         mDdsDataOptionStateTuner =
                 new DdsDataOptionStateTuner(mTelephonyManager,
                         mSubscriptionManager,
@@ -265,11 +263,13 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
         if (!enableData) {
             final boolean isInVoiceCall = mTelephonyManager.getCallStateForSubscription() !=
                     TelephonyManager.CALL_STATE_IDLE;
+            boolean isCiwlanModeSupported = false;
             boolean isInCiwlanOnlyMode = false;
             boolean isImsRegisteredOverCiwlan = false;
             if (isInVoiceCall) {
+                isCiwlanModeSupported = MobileNetworkSettings.isCiwlanModeSupported();
                 isInCiwlanOnlyMode = MobileNetworkSettings.isInCiwlanOnlyMode();
-                if (isInCiwlanOnlyMode) {
+                if (isInCiwlanOnlyMode || !isCiwlanModeSupported) {
                     IImsRegistration imsRegistrationImpl = mTelephonyManager.getImsRegistration(
                             mSubscriptionManager.getSlotIndex(mSubId), FEATURE_MMTEL);
                     if (imsRegistrationImpl != null) {
@@ -283,11 +283,12 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
                     }
                     Log.d(TAG, "isDialogNeeded: isInVoiceCall = " + isInVoiceCall +
                             ", isInCiwlanOnlyMode = " + isInCiwlanOnlyMode +
+                            ", isCiwlanModeSupported = " + isCiwlanModeSupported +
                             ", isImsRegisteredOverCiwlan = " + isImsRegisteredOverCiwlan);
                     // If IMS is registered over C_IWLAN-only mode, the device is in a call, and
                     // user is trying to disable mobile data, display a warning dialog that
                     // disabling mobile data will cause a call drop.
-                    if (isInVoiceCall && isImsRegisteredOverCiwlan && isInCiwlanOnlyMode) {
+                    if (isImsRegisteredOverCiwlan) {
                         mDialogType = MobileDataDialogFragment.TYPE_DISABLE_CIWLAN_DIALOG;
                         return true;
                     }
@@ -303,7 +304,8 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
 
     private void showDialog(int type) {
         final MobileDataDialogFragment dialogFragment = MobileDataDialogFragment.newInstance(
-                mPreference.getTitle().toString(), type, mSubId);
+                mPreference.getTitle().toString(), type, mSubId,
+                MobileNetworkSettings.isCiwlanModeSupported());
         dialogFragment.show(mFragmentManager, DIALOG_TAG);
     }
 
