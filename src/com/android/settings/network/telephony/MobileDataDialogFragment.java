@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center are provided under the following license:
+ * Copyright (c) 2023 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.network.telephony;
 
 import android.app.Dialog;
@@ -48,21 +54,25 @@ public class MobileDataDialogFragment extends InstrumentedDialogFragment impleme
     private static final String ARG_PREF_TITLE = "pref_title";
     private static final String ARG_DIALOG_TYPE = "dialog_type";
     private static final String ARG_SUB_ID = "subId";
+    private static final String ARG_CIWLAN_MODE_SUPPORTED = "ciwlan_mode_supported";
 
     private SubscriptionManager mSubscriptionManager;
     private String mPrefTitle;
     private int mType;
     private int mSubId;
+    private boolean mCiwlanModeSupported;
 
     private WifiPickerTrackerHelper mWifiPickerTrackerHelper;
 
-    public static MobileDataDialogFragment newInstance(String prefTitle, int type, int subId) {
+    public static MobileDataDialogFragment newInstance(String prefTitle, int type, int subId,
+            boolean ciwlanModeSupported) {
         final MobileDataDialogFragment dialogFragment = new MobileDataDialogFragment();
 
         Bundle args = new Bundle();
         args.putString(ARG_PREF_TITLE, prefTitle);
         args.putInt(ARG_DIALOG_TYPE, type);
         args.putInt(ARG_SUB_ID, subId);
+        args.putBoolean(ARG_CIWLAN_MODE_SUPPORTED, ciwlanModeSupported);
         dialogFragment.setArguments(args);
 
         return dialogFragment;
@@ -84,6 +94,7 @@ public class MobileDataDialogFragment extends InstrumentedDialogFragment impleme
         mPrefTitle = bundle.getString(ARG_PREF_TITLE).toLowerCase();
         mType = bundle.getInt(ARG_DIALOG_TYPE);
         mSubId = bundle.getInt(ARG_SUB_ID);
+        mCiwlanModeSupported = bundle.getBoolean(ARG_CIWLAN_MODE_SUPPORTED);
 
         switch (mType) {
             case TYPE_DISABLE_DIALOG:
@@ -121,11 +132,17 @@ public class MobileDataDialogFragment extends InstrumentedDialogFragment impleme
                         .setNegativeButton(R.string.cancel, null)
                         .create();
             case TYPE_DISABLE_CIWLAN_DIALOG:
+                String msg = mCiwlanModeSupported ?
+                        context.getString(
+                                R.string.toggle_disable_ciwlan_call_will_drop_dialog_body,
+                                mPrefTitle) :
+                        context.getString(
+                                R.string.toggle_disable_ciwlan_call_might_drop_dialog_body,
+                                mPrefTitle);
                 return new AlertDialog.Builder(context)
                         .setTitle(context.getString(
-                                R.string.toggle_disabling_ciwlan_call_dialog_title, mPrefTitle))
-                        .setMessage(context.getString(
-                                R.string.toggle_disabling_ciwlan_call_dialog_body, mPrefTitle))
+                                R.string.toggle_disable_ciwlan_call_dialog_title, mPrefTitle))
+                        .setMessage(msg)
                         .setPositiveButton(android.R.string.ok, this)
                         .setNegativeButton(android.R.string.cancel, null)
                         .create();

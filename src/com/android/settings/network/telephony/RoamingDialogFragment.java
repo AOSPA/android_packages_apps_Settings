@@ -13,6 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/*
+ * Changes from Qualcomm Innovation Center are provided under the following license:
+ * Copyright (c) 2023 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.network.telephony;
 
 import android.app.AlertDialog;
@@ -38,6 +45,7 @@ public class RoamingDialogFragment extends InstrumentedDialogFragment implements
     private static final String PREF_TITLE = "pref_title";
     private static final String SUB_ID_KEY = "sub_id_key";
     private static final String DIALOG_TYPE = "dialog_type";
+    private static final String ARG_CIWLAN_MODE_SUPPORTED = "ciwlan_mode_supported";
 
     public static final int TYPE_ENABLE_DIALOG = 0;
     public static final int TYPE_DISABLE_CIWLAN_DIALOG = 1;
@@ -46,13 +54,16 @@ public class RoamingDialogFragment extends InstrumentedDialogFragment implements
     private String mPrefTitle;
     private int mType;
     private int mSubId;
+    private boolean mCiwlanModeSupported;
 
-    public static RoamingDialogFragment newInstance(String prefTitle, int type, int subId) {
+    public static RoamingDialogFragment newInstance(String prefTitle, int type, int subId,
+            boolean ciwlanModeSupported) {
         final RoamingDialogFragment dialogFragment = new RoamingDialogFragment();
         final Bundle args = new Bundle();
         args.putString(PREF_TITLE, prefTitle);
         args.putInt(DIALOG_TYPE, type);
         args.putInt(SUB_ID_KEY, subId);
+        args.putBoolean(ARG_CIWLAN_MODE_SUPPORTED, ciwlanModeSupported);
         dialogFragment.setArguments(args);
 
         return dialogFragment;
@@ -74,6 +85,7 @@ public class RoamingDialogFragment extends InstrumentedDialogFragment implements
 
         mPrefTitle = bundle.getString(PREF_TITLE).toLowerCase();
         mType = bundle.getInt(DIALOG_TYPE);
+        mCiwlanModeSupported = bundle.getBoolean(ARG_CIWLAN_MODE_SUPPORTED);
 
         switch (mType) {
             case TYPE_ENABLE_DIALOG:
@@ -89,10 +101,16 @@ public class RoamingDialogFragment extends InstrumentedDialogFragment implements
                        .setTitle(getResources().getString(R.string.roaming_alert_title));
                 break;
             case TYPE_DISABLE_CIWLAN_DIALOG:
+                String msg = mCiwlanModeSupported ?
+                        context.getString(
+                                R.string.toggle_disable_ciwlan_call_will_drop_dialog_body,
+                                mPrefTitle) :
+                        context.getString(
+                                R.string.toggle_disable_ciwlan_call_might_drop_dialog_body,
+                                mPrefTitle);
                 builder.setTitle(context.getString(
-                                R.string.toggle_disabling_ciwlan_call_dialog_title, mPrefTitle))
-                       .setMessage(context.getString(
-                                R.string.toggle_disabling_ciwlan_call_dialog_body, mPrefTitle));
+                                R.string.toggle_disable_ciwlan_call_dialog_title, mPrefTitle))
+                       .setMessage(msg);
                 break;
         }
         builder.setIconAttribute(android.R.attr.alertDialogIcon)
