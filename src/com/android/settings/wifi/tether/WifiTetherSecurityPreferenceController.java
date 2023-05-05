@@ -33,6 +33,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.FeatureFlags;
+import com.android.settings.overlay.FeatureFactory;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -57,10 +58,19 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
     boolean mIsDualSapSupported = false;
     private String[] securityNames;
     private String[] securityValues;
+    @VisibleForTesting
+    boolean mShouldHidePreference;
 
     public WifiTetherSecurityPreferenceController(Context context,
             OnTetherConfigUpdateListener listener) {
         super(context, listener);
+        // If the Wi-Fi Hotspot Speed Feature available, then hide this controller.
+        mShouldHidePreference = FeatureFactory.getFactory(context)
+                .getWifiFeatureProvider().getWifiHotspotRepository().isSpeedFeatureAvailable();
+        Log.d(TAG, "shouldHidePreference():" + mShouldHidePreference);
+        if (mShouldHidePreference) {
+            return;
+        }
         securityNames = mContext.getResources().getStringArray(
                 R.array.wifi_tether_security);
         securityValues = mContext.getResources().getStringArray(
@@ -89,6 +99,14 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
             return -1;
         }
         return mWifiRes.getIdentifier(name, category, WIFI_RES_PACKAGE);
+    }
+
+    @Override
+    public boolean isAvailable() {
+        if (mShouldHidePreference) {
+            return false;
+        }
+        return super.isAvailable();
     }
 
     @Override
