@@ -85,6 +85,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     private Map<String, List<CachedBluetoothDevice>> mProfileDeviceMap =
             new HashMap<String, List<CachedBluetoothDevice>>();
     private boolean mIsLeContactSharingEnabled = false;
+    private boolean mIsLeAudioToggleEnabled = false;
 
     @VisibleForTesting
     PreferenceCategory mProfilesContainer;
@@ -122,6 +123,8 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         mProfilesContainer.setLayoutResource(R.layout.preference_bluetooth_profile_category);
         mIsLeContactSharingEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
                 SettingsUIDeviceConfig.BT_LE_AUDIO_CONTACT_SHARING_ENABLED, true);
+        mIsLeAudioToggleEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
+                SettingsUIDeviceConfig.BT_LE_AUDIO_DEVICE_DETAIL_ENABLED, false);
         // Call refresh here even though it will get called later in onResume, to avoid the
         // list of switches appearing to "pop" into the page.
         refresh();
@@ -165,6 +168,10 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             profilePref.setEnabled(false);
         } else {
             profilePref.setEnabled(!mCachedDevice.isBusy());
+        }
+
+        if (profile instanceof LeAudioProfile && !mIsLeAudioToggleEnabled) {
+            profilePref.setVisible(false);
         }
 
         if (profile instanceof MapProfile) {
