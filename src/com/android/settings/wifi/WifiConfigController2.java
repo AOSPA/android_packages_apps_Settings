@@ -202,10 +202,8 @@ public class WifiConfigController2 implements TextWatcher,
     private Spinner mProxySettingsSpinner;
     private Spinner mMeteredSettingsSpinner;
     private Spinner mHiddenSettingsSpinner;
-    private Spinner mHiddenGbkSpinner;
     private Spinner mPrivacySettingsSpinner;
     private TextView mHiddenWarningView;
-    private TextView mHiddenGbkView;
     private TextView mProxyHostView;
     private TextView mProxyPortView;
     private TextView mProxyExclusionListView;
@@ -302,21 +300,6 @@ public class WifiConfigController2 implements TextWatcher,
                 mHiddenSettingsSpinner.getSelectedItemPosition() == NOT_HIDDEN_NETWORK
                         ? View.GONE
                         : View.VISIBLE);
-        mHiddenGbkView = mView.findViewById(R.id.hidden_gbk_title);
-        mHiddenGbkSpinner = mView.findViewById(R.id.hidden_gbk_settings);
-        if (WifiEntry.isGbkSsidSupported()) {
-            mHiddenGbkView.setVisibility(
-                mHiddenSettingsSpinner.getSelectedItemPosition() == NOT_HIDDEN_NETWORK
-                        ? View.GONE
-                        : View.VISIBLE);
-            mHiddenGbkSpinner.setVisibility(
-                mHiddenSettingsSpinner.getSelectedItemPosition() == NOT_HIDDEN_NETWORK
-                        ? View.GONE
-                        : View.VISIBLE);
-        } else {
-            mHiddenGbkView.setVisibility(View.GONE);
-            mHiddenGbkSpinner.setVisibility(View.GONE);
-        }
         mSecurityInPosition = new Integer[WifiEntry.NUM_SECURITY_TYPES];
 
         if (mWifiEntry == null) { // new network
@@ -613,25 +596,12 @@ public class WifiConfigController2 implements TextWatcher,
         if (mWifiEntry == null) {
             config = new WifiConfiguration();
             config.SSID = "\"" + mSsidView.getText().toString() + "\"";
-            // If the user adds a network manually, if it is hidden, check encoding.
+            // If the user adds a network manually, assume that it is hidden.
             config.hiddenSSID = mHiddenSettingsSpinner.getSelectedItemPosition() == HIDDEN_NETWORK;
-            if (config.hiddenSSID && WifiEntry.isGbkSsidSupported()) {
-                String bareSsid = mSsidView.getText().toString();
-                boolean useGbk = mHiddenGbkSpinner.getSelectedItemPosition() == 1;
-                boolean allAscii = bareSsid.chars().allMatch(c -> c < 128);
-                if (useGbk && !allAscii) {
-                    config.SSID = WifiUtils.quotedStrToGbkHex(config.SSID);
-                }
-            }
-        } else if (!mWifiEntry.isSaved()) {
-            config = new WifiConfiguration();
-            if (mWifiEntry.isGbkSsidSupported()) {
-                config.SSID = mWifiEntry.getSsid();
-            } else {
-                config.SSID = "\"" + mWifiEntry.getTitle() + "\"";
-            }
-        } else {
+        } else if (mWifiEntry.isSaved()) {
             config = new WifiConfiguration(mWifiEntry.getWifiConfiguration());
+        } else {
+            config = new WifiConfiguration();
             config.SSID = "\"" + mWifiEntry.getTitle() + "\"";
         }
 
@@ -1789,12 +1759,6 @@ public class WifiConfigController2 implements TextWatcher,
         } else if (parent == mHiddenSettingsSpinner) {
             mHiddenWarningView.setVisibility(position == NOT_HIDDEN_NETWORK
                     ? View.GONE : View.VISIBLE);
-            if (WifiEntry.isGbkSsidSupported()) {
-                mHiddenGbkSpinner.setVisibility(position == NOT_HIDDEN_NETWORK
-                    ? View.GONE : View.VISIBLE);
-                mHiddenGbkView.setVisibility(position == NOT_HIDDEN_NETWORK
-                    ? View.GONE : View.VISIBLE);
-            }
         } else {
             showIpConfigFields();
         }
