@@ -36,10 +36,10 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.OnLifecycleEvent;
-import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
@@ -325,13 +325,12 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
         mSubscriptionInfoEntityList.forEach(entity -> {
             if (entity.getSubId() == mSubId) {
                 mSubscriptionInfoEntity = entity;
+                if (entity.getSubId() == SubscriptionManager.getDefaultDataSubscriptionId()) {
+                    mDefaultSubId = entity.getSubId();
+                }
             }
         });
-        int subId = mSubscriptionInfoEntity.getSubId();
-        if (mSubscriptionInfoEntity != null
-                && subId == SubscriptionManager.getDefaultDataSubscriptionId()) {
-            mDefaultSubId = subId;
-        }
+
         update();
         refreshSummary(mPreference);
     }
