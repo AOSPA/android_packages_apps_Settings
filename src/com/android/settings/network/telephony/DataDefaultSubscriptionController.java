@@ -42,12 +42,6 @@ public class DataDefaultSubscriptionController extends DefaultSubscriptionContro
     }
 
     @Override
-    protected SubscriptionInfoEntity getDefaultSubscriptionInfo() {
-        return mSubscriptionInfoEntity;
-    }
-
-
-    @Override
     protected int getDefaultSubscriptionId() {
         int defaultDataSubId = SubscriptionManager.getDefaultDataSubscriptionId();
         for (SubscriptionInfoEntity subInfo : mSubInfoEntityList) {
