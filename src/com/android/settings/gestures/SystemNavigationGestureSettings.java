@@ -74,7 +74,10 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
 
     private static final String KEY_SHOW_A11Y_TUTORIAL_DIALOG = "show_a11y_tutorial_dialog_bool";
 
-    private static final String NAV_MODE_IMMERSIVE_OVERLAY =
+    private static final String NAV_MODE_FWK_IMMERSIVE_OVERLAY =
+            "co.aospa.overlay.immnav.gestural";
+    
+    private static final String NAV_MODE_SYSUI_IMMERSIVE_OVERLAY =
             "co.aospa.overlay.systemui.immnav.gestural";
 
     private boolean mA11yTutorialDialogShown = false;
@@ -231,7 +234,7 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
                 Settings.Secure.IMMERSIVE_NAVIGATION, 0) == 1;
         try {
             info = overlayManager.getOverlayInfo(
-                    hasImmersiveNavigation ? NAV_MODE_IMMERSIVE_OVERLAY :
+                    hasImmersiveNavigation ? NAV_MODE_FWK_IMMERSIVE_OVERLAY :
                             NAV_BAR_MODE_GESTURAL_OVERLAY, USER_CURRENT);
         } catch (RemoteException e) { /* Do nothing */ }
         if (info != null && !info.isEnabled()) {
@@ -263,7 +266,7 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
         String overlayPackage = NAV_BAR_MODE_GESTURAL_OVERLAY;
         switch (key) {
             case KEY_SYSTEM_NAV_GESTURAL:
-                overlayPackage = hasImmersiveNavigation ? NAV_MODE_IMMERSIVE_OVERLAY
+                overlayPackage = hasImmersiveNavigation ? NAV_MODE_FWK_IMMERSIVE_OVERLAY
                         : NAV_BAR_MODE_GESTURAL_OVERLAY;
                 break;
             case KEY_SYSTEM_NAV_2BUTTONS:

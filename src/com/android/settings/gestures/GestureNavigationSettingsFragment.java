@@ -56,7 +56,10 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
     private static final String RIGHT_EDGE_SEEKBAR_KEY = "gesture_right_back_sensitivity";
     private static final String IMMERSIVE_NAV_KEY = "immersive_navigation";
 
-    private static final String NAV_MODE_IMMERSIVE_OVERLAY =
+    private static final String NAV_MODE_FWK_IMMERSIVE_OVERLAY =
+            "co.aospa.overlay.immnav.gestural";
+    
+    private static final String NAV_MODE_SYSUI_IMMERSIVE_OVERLAY =
             "co.aospa.overlay.systemui.immnav.gestural";
 
     private IOverlayManager mOverlayService;
@@ -176,16 +179,21 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
             final boolean isEnabled = (Boolean) o;
             if (isEnabled) {
                 try {
-                    mOverlayService.setEnabledExclusiveInCategory(NAV_MODE_IMMERSIVE_OVERLAY,
+                    mOverlayService.setEnabledExclusiveInCategory(NAV_MODE_FWK_IMMERSIVE_OVERLAY,
+                            USER_CURRENT);
+                    mOverlayService.setEnabledExclusiveInCategory(NAV_MODE_SYSUI_IMMERSIVE_OVERLAY,
                             USER_CURRENT);
                 } catch (RemoteException re) {
                     throw re.rethrowFromSystemServer();
                 }
             } else {
                 try {
-                    mOverlayService.setEnabledExclusiveInCategory(NAV_BAR_MODE_GESTURAL_OVERLAY,
+                    mOverlayService.setEnabledExclusiveInCategory(NAV_MODE_FWK_IMMERSIVE_OVERLAY,
                             USER_CURRENT);
-                    mOverlayService.setEnabled(NAV_MODE_IMMERSIVE_OVERLAY, false, USER_CURRENT);
+                    mOverlayService.setEnabledExclusiveInCategory(NAV_MODE_SYSUI_IMMERSIVE_OVERLAY,
+                            USER_CURRENT);
+                    mOverlayService.setEnabled(NAV_MODE_FWK_IMMERSIVE_OVERLAY, false, USER_CURRENT);
+                    mOverlayService.setEnabled(NAV_MODE_SYSUI_IMMERSIVE_OVERLAY, false, USER_CURRENT);
                 } catch (RemoteException re) {
                     throw re.rethrowFromSystemServer();
                 }
