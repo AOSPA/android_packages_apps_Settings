@@ -29,6 +29,7 @@ import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 
 import android.content.Context;
 import android.os.RemoteException;
+import android.provider.Settings;
 import android.telephony.ims.aidl.IImsRegistration;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -189,8 +190,16 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
                 if (isChecked()) {
                     Log.d(TAG, "Do not allow the user to turn off DDS mobile data");
                     mPreference.setEnabled(false);
-                    mPreference.setSummary(
-                            R.string.mobile_data_settings_summary_default_data_unavailable);
+                    boolean isSmartDdsEnabled =
+                            Settings.Global.getInt(mContext.getContentResolver(),
+                            Settings.Global.SMART_DDS_SWITCH, 0) == 1;
+                    if (isSmartDdsEnabled) {
+                        mPreference.setSummary(
+                                R.string.mobile_data_settings_summary_on_smart_dds_unavailable);
+                    } else {
+                        mPreference.setSummary(
+                                R.string.mobile_data_settings_summary_default_data_unavailable);
+                    }
                 }
             } else {
                 if (TelephonyUtils.isSubsidyFeatureEnabled(mContext) &&
