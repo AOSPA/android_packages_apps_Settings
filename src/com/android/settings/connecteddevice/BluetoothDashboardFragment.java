@@ -31,6 +31,7 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 import com.android.settings.bluetooth.BluetoothDeviceRenamePreferenceController;
 import com.android.settings.bluetooth.BluetoothSwitchPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
@@ -56,8 +57,6 @@ public class BluetoothDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "BluetoothDashboardFrag";
     private static final String KEY_BLUETOOTH_SCREEN_FOOTER = "bluetooth_screen_footer";
-    private static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
-    private static final String SYSTEMUI_PACKAGE_NAME = "com.android.systemui";
     private static final String SLICE_ACTION = "com.android.settings.SEARCH_RESULT_TRAMPOLINE";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
     private static final String BLUETOOTH_ADV_AUDIO_MASK_PROP
@@ -197,8 +196,8 @@ public class BluetoothDashboardFragment extends DashboardFragment {
     @VisibleForTesting
     boolean isAlwaysDiscoverable(String callingAppPackageName, String action) {
         return TextUtils.equals(SLICE_ACTION, action) ? false
-            : TextUtils.equals(SETTINGS_PACKAGE_NAME, callingAppPackageName)
-                || TextUtils.equals(SYSTEMUI_PACKAGE_NAME, callingAppPackageName);
+            : TextUtils.equals(Utils.SETTINGS_PACKAGE_NAME, callingAppPackageName)
+                || TextUtils.equals(Utils.SYSTEMUI_PACKAGE_NAME, callingAppPackageName);
     }
 
     /**

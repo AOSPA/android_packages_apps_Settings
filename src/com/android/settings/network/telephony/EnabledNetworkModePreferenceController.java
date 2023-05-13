@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center are provided under the following license:
+ * Copyright (c) 2023 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.network.telephony;
 
 import static androidx.lifecycle.Lifecycle.Event.ON_START;
@@ -183,14 +189,21 @@ public class EnabledNetworkModePreferenceController extends
         // Check UE's C_IWLAN configuration and user's current network mode selection. If UE is in
         // C_IWLAN-only mode and the selection does not contain LTE or NR, show a dialog to disable
         // C_IWLAN.
+        boolean isDefaultDataSub = mSubId == SubscriptionManager.getDefaultDataSubscriptionId();
         boolean isCiwlanEnabled = MobileNetworkSettings.isCiwlanEnabled();
-        boolean isInCiwlanOnlyMode = MobileNetworkSettings.isInCiwlanOnlyMode();
         boolean isCiwlanIncompatibleNetworkSelected = isCiwlanIncompatibleNetworkSelected(
                 newPreferredNetworkMode);
-        Log.d(LOG_TAG, "isCiwlanEnabled = " + isCiwlanEnabled + ", isInCiwlanOnlyMode = " +
-                isInCiwlanOnlyMode + ", isCiwlanIncompatibleNetworkSelected = " +
-                isCiwlanIncompatibleNetworkSelected);
-        if (isCiwlanEnabled && isInCiwlanOnlyMode && isCiwlanIncompatibleNetworkSelected) {
+        boolean isInCiwlanOnlyMode = false;
+        // Warn on C_IWLAN-incompatible network selection only on targets that support getting the
+        // C_IWLAN config
+        if (MobileNetworkSettings.isCiwlanModeSupported()) {
+            isInCiwlanOnlyMode = MobileNetworkSettings.isInCiwlanOnlyMode();
+        }
+        Log.d(LOG_TAG, "isDDS = " + isDefaultDataSub + ", isCiwlanEnabled = " + isCiwlanEnabled +
+                ", isInCiwlanOnlyMode = " + isInCiwlanOnlyMode +
+                ", isCiwlanIncompatibleNetworkSelected = " + isCiwlanIncompatibleNetworkSelected);
+        if (isDefaultDataSub && isCiwlanEnabled && isInCiwlanOnlyMode &&
+                isCiwlanIncompatibleNetworkSelected) {
             showCiwlanWarningDialog();
             return false;
         }

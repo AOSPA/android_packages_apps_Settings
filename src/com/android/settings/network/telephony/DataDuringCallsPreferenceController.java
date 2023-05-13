@@ -158,6 +158,12 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
                 SubscriptionManager.getSlotIndex(mSubId))) {
             return CONDITIONALLY_UNAVAILABLE;
         }
+
+        if (!TelephonyUtils.isSmartDdsSwitchFeatureAvailable()) {
+            Log.d(TAG, "Smart DDS switch feature is not available");
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+
         return AVAILABLE;
     }
 

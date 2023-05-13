@@ -74,6 +74,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     @VisibleForTesting
     static final String KEY_WIFI_TETHER_NETWORK_AP_BAND = "wifi_tether_network_ap_band";
     @VisibleForTesting
+    static final String KEY_WIFI_HOTSPOT_SECURITY = "wifi_hotspot_security";
+    @VisibleForTesting
     static final String KEY_WIFI_HOTSPOT_SPEED = "wifi_hotspot_speed";
 
     private WifiTetherSwitchBarController mSwitchBarController;
@@ -94,6 +96,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
 
     @VisibleForTesting
     WifiTetherViewModel mWifiTetherViewModel;
+    @VisibleForTesting
+    Preference mWifiHotspotSecurity;
     @VisibleForTesting
     Preference mWifiHotspotSpeed;
 
@@ -136,6 +140,10 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
 
         mWifiTetherViewModel = FeatureFactory.getFactory(getContext()).getWifiFeatureProvider()
                 .getWifiTetherViewModel(this);
+        mWifiHotspotSecurity = findPreference(KEY_WIFI_HOTSPOT_SECURITY);
+        if (mWifiHotspotSecurity != null && mWifiHotspotSecurity.isVisible()) {
+            mWifiTetherViewModel.getSecuritySummary().observe(this, this::onSecuritySummaryChanged);
+        }
         mWifiHotspotSpeed = findPreference(KEY_WIFI_HOTSPOT_SPEED);
         if (mWifiHotspotSpeed != null && mWifiHotspotSpeed.isVisible()) {
             mWifiTetherViewModel.getSpeedSummary().observe(this, this::onSpeedSummaryChanged);
@@ -207,6 +215,10 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         if (context != null) {
             context.unregisterReceiver(mTetherChangeReceiver);
         }
+    }
+
+    protected void onSecuritySummaryChanged(Integer securityResId) {
+        mWifiHotspotSecurity.setSummary(securityResId);
     }
 
     protected void onSpeedSummaryChanged(Integer summaryResId) {

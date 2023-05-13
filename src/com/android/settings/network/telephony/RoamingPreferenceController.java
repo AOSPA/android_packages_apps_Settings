@@ -12,10 +12,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ */
+
+/*
  * Changes from Qualcomm Innovation Center are provided under the following license:
- *
- * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Copyright (c) 2022-2023 Qualcomm Innovation Center, Inc. All rights reserved.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
@@ -229,12 +230,13 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
             final boolean isRoaming = MobileNetworkSettings.isRoaming();
             final boolean isInVoiceCall = mTelephonyManager.getCallStateForSubscription() !=
                     TelephonyManager.CALL_STATE_IDLE;
+            boolean isCiwlanModeSupported = false;
             boolean isInCiwlanOnlyMode = false;
             boolean isImsRegisteredOverCiwlan = false;
             if (isRoaming && isInVoiceCall) {
-                isInCiwlanOnlyMode = mTelephonyManager.isNetworkRoaming(mSubId) &&
-                        MobileNetworkSettings.isInCiwlanOnlyMode();
-                if (isInCiwlanOnlyMode) {
+                isCiwlanModeSupported = MobileNetworkSettings.isCiwlanModeSupported();
+                isInCiwlanOnlyMode = MobileNetworkSettings.isInCiwlanOnlyMode();
+                if (isInCiwlanOnlyMode || !isCiwlanModeSupported) {
                     IImsRegistration imsRegistrationImpl = mTelephonyManager.getImsRegistration(
                             mSubscriptionManager.getSlotIndex(mSubId), FEATURE_MMTEL);
                     if (imsRegistrationImpl != null) {
@@ -249,11 +251,12 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
                     Log.d(TAG, "isDialogNeeded: isRoaming = " + isRoaming +
                             ", isInVoiceCall = " + isInVoiceCall +
                             ", isInCiwlanOnlyMode = " + isInCiwlanOnlyMode +
+                            ", isCiwlanModeSupported = " + isCiwlanModeSupported +
                             ", isImsRegisteredOverCiwlan = " + isImsRegisteredOverCiwlan);
                     // If IMS is registered over C_IWLAN-only mode, the device is in a call, and
                     // user is trying to disable roaming while UE is romaing, display a warning
                     // dialog that disabling roaming will cause a call drop.
-                    if (isInVoiceCall && isImsRegisteredOverCiwlan && isInCiwlanOnlyMode) {
+                    if (isImsRegisteredOverCiwlan) {
                         mDialogType = RoamingDialogFragment.TYPE_DISABLE_CIWLAN_DIALOG;
                         return true;
                     }
@@ -302,7 +305,8 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
 
     private void showDialog(int type) {
         final RoamingDialogFragment dialogFragment = RoamingDialogFragment.newInstance(
-                mSwitchPreference.getTitle().toString(), type, mSubId);
+                mSwitchPreference.getTitle().toString(), type, mSubId,
+                MobileNetworkSettings.isCiwlanModeSupported());
 
         dialogFragment.show(mFragmentManager, DIALOG_TAG);
     }

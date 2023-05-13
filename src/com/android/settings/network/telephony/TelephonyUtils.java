@@ -56,7 +56,6 @@ public final class TelephonyUtils {
     public static boolean DBG = Log.isLoggable(TAG, Log.DEBUG);
 
     private static final String PROPERTY_ADVANCED_SCAN  = "persist.vendor.radio.enableadvancedscan";
-
     private static final String PROPERTY_SUBSIDY_DEVICE  = "persist.vendor.radio.subsidydevice";
     private static final String ALLOW_USER_SELECT_DDS = "allow_user_select_dds";
 
@@ -71,6 +70,7 @@ public final class TelephonyUtils {
 
     private static ExtTelephonyManager mExtTelephonyManager;
     private static boolean mIsServiceBound;
+    private static boolean mIsSmartDdsSwitchFeatureAvailable = true; // default to true
     private static Optional<Boolean> mIsSubsidyFeatureEnabled = Optional.empty();
 
     private TelephonyUtils() {
@@ -199,6 +199,10 @@ public final class TelephonyUtils {
         return qtiImeiInfo;
     }
 
+    public static boolean isSmartDdsSwitchFeatureAvailable() {
+        return mIsSmartDdsSwitchFeatureAvailable;
+    }
+
     public static void connectExtTelephonyService(Context context) {
         if (!mIsServiceBound) {
             Log.d(TAG, "Connect to ExtTelephonyService...");
@@ -216,6 +220,14 @@ public final class TelephonyUtils {
         public void onConnected() {
             Log.d(TAG, "ExtTelephony Service connected");
             mIsServiceBound = true;
+            try {
+                mIsSmartDdsSwitchFeatureAvailable =
+                        mExtTelephonyManager.isSmartDdsSwitchFeatureAvailable();
+                Log.d(TAG, "isSmartDdsSwitchFeatureAvailable: " +
+                        mIsSmartDdsSwitchFeatureAvailable);
+            } catch (RemoteException ex) {
+                Log.e(TAG, "isSmartDdsSwitchFeatureAvailable exception " + ex);
+            }
         }
 
         @Override
