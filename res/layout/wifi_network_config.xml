@@ -408,21 +408,6 @@
                       android:text="@string/wifi_hidden_network_warning"
                       android:textAppearance="?android:attr/textAppearanceSmall"
                       android:visibility="gone"/>
-
-            <TextView android:id="@+id/hidden_gbk_title"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      style="@style/wifi_item_label"
-                      android:text="@string/wifi_hidden_gbk"
-                      android:visibility="gone" />
-
-            <Spinner android:id="@+id/hidden_gbk_settings"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     style="@style/wifi_item_spinner"
-                     android:prompt="@string/wifi_hidden_gbk"
-                     android:entries="@array/wifi_hidden_gbk_entries"
-                     android:visibility="gone"/>
         </LinearLayout>
 
         <LinearLayout android:id="@+id/metered_settings_fields"
