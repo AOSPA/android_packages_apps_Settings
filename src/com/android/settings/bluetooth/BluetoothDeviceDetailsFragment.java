@@ -351,8 +351,6 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                   lifecycle));
           controllers.add(new BluetoothDetailsHearingDeviceControlsController(context, this,
                   mCachedDevice, lifecycle));
-          controllers.add(new BluetoothDetailsAudioRoutingController(context, this, mCachedDevice,
-                  lifecycle));
           if (mBAPropertyChecked == false) {
               int advAudioMask = SystemProperties.getInt(BLUETOOTH_ADV_AUDIO_MASK_PROP, 0);
               mBAEnabled = (((advAudioMask & BA_MASK) == BA_MASK) &&
