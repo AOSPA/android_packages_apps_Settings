@@ -365,7 +365,11 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
         mMatchWifis.clear();
         for (ScanResult scanResult : scanResults) {
             MatchWifi matchWifi = new MatchWifi();
-            matchWifi.mSsid = scanResult.SSID;
+            if (WifiEntry.isGbkSsidSupported()) {
+                matchWifi.mSsid = scanResult.getWifiSsid().toString();
+            } else {
+                matchWifi.mSsid = scanResult.SSID;
+            }
             matchWifi.mSecurityTypes = getSecurityTypesFromScanResult(scanResult);
             mMatchWifis.add(matchWifi);
         }
