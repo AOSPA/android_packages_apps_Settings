@@ -16,6 +16,23 @@
       "message": "This would crash with the following log:\n\n04-26 13:20:08.595  2310  2310 E AndroidRuntime: java.lang.RuntimeException: Unable to start activity ComponentInfo{com.android.settings/com.android.settings.SubSettings}: java.lang.ClassCastException: com.android.settingslib.widget.IllustrationPreference cannot be cast to com.android.settings.widget.VideoPreference",
       "revId": "0823114c25ca352826664b4581bba0435c6e1de5",
       "serverId": "3162e3d8-d894-470e-abd9-724f7b0effad"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93f8bb88_7419b86d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2023-05-26T13:01:50Z",
+      "side": 1,
+      "message": "Ah, makes sense why this wasn\u0027t picked during the rebase of the new patch sets. Will drop this.",
+      "revId": "0823114c25ca352826664b4581bba0435c6e1de5",
+      "serverId": "3162e3d8-d894-470e-abd9-724f7b0effad"
     }
   ]
 }
