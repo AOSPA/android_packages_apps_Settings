@@ -31,7 +31,6 @@ public class NotificationVibrationPatternPreferenceController extends VibrationP
     private static final int VIBRATE_PATTERN_MAXLEN = 8 * 2 + 1; // up to eight bumps
 
     private final long[] mDefaultPattern;
-    private final int[] mDefaultPatternAmp;
 
     private static final long[] DZZZ_VIBRATION_PATTERN = {
         0, // No delay before starting
@@ -55,34 +54,12 @@ public class NotificationVibrationPatternPreferenceController extends VibrationP
         1050, // How long to wait before vibrating again
     };
 
-    private static final int[] THREE_ELEMENTS_VIBRATION_AMPLITUDE = {
-        0, // No delay before starting
-        255, // Vibrate full amplitude
-        0, // No amplitude while waiting
-    };
-
-    private static final int[] FIVE_ELEMENTS_VIBRATION_AMPLITUDE = {
-        0, // No delay before starting
-        255, // Vibrate full amplitude
-        0, // No amplitude while waiting
-        255, // No amplitude while waiting
-        0, // No amplitude while waiting
-    };
-
     public NotificationVibrationPatternPreferenceController(Context context) {
         super(context);
         mDefaultPattern = getLongArray(context.getResources(),
                 com.android.internal.R.array.config_defaultNotificationVibePattern,
                 VIBRATE_PATTERN_MAXLEN,
                 DEFAULT_VIBRATE_PATTERN);
-
-        // making a full amp array according to what we have in config
-        int[] ampArr = new int[mDefaultPattern.length];
-        for (int i = 0; i < mDefaultPattern.length; i++) {
-            if (i % 2 == 0) ampArr[i] = 0;
-            else ampArr[i] = 255;
-        }
-        mDefaultPatternAmp = ampArr;
     }
 
     @Override
@@ -106,16 +83,16 @@ public class NotificationVibrationPatternPreferenceController extends VibrationP
         switch (vibPattern) {
             case 1:
                 return vibrationEffectProxy.createWaveform(DZZZ_VIBRATION_PATTERN,
-                        THREE_ELEMENTS_VIBRATION_AMPLITUDE, -1);
+                        getPatternAmplitude(DZZZ_VIBRATION_PATTERN), -1);
             case 2:
                 return vibrationEffectProxy.createWaveform(MM_MM_VIBRATION_PATTERN,
-                        FIVE_ELEMENTS_VIBRATION_AMPLITUDE, -1);
+                        getPatternAmplitude(MM_MM_VIBRATION_PATTERN), -1);
             case 3:
                 return vibrationEffectProxy.createWaveform(DA_DA_VIBRATION_PATTERN,
-                        FIVE_ELEMENTS_VIBRATION_AMPLITUDE, -1);
+                        getPatternAmplitude(DA_DA_VIBRATION_PATTERN), -1);
             default:
                 return vibrationEffectProxy.createWaveform(mDefaultPattern,
-                        mDefaultPatternAmp, -1);
+                        getPatternAmplitude(mDefaultPattern), -1);
         }
     }
 
