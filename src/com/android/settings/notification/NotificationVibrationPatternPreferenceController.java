@@ -18,6 +18,7 @@ package com.android.settings.notification;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.VibrationEffect;
 import android.provider.Settings;
 
 /**
@@ -31,6 +32,42 @@ public class NotificationVibrationPatternPreferenceController extends VibrationP
 
     private final long[] mDefaultPattern;
     private final int[] mDefaultPatternAmp;
+
+    private static final long[] DZZZ_VIBRATION_PATTERN = {
+        0, // No delay before starting
+        500, // How long to vibrate
+        720, // How long to wait before vibrating again
+    };
+
+    private static final long[] MM_MM_VIBRATION_PATTERN = {
+        0, // No delay before starting
+        300, // How long to vibrate
+        400, // Delay
+        300, // How long to vibrate
+        1400, // How long to wait before vibrating again
+    };
+
+    private static final long[] DA_DA_VIBRATION_PATTERN = {
+        0, // No delay before starting
+        70, // How long to vibrate
+        80, // Delay
+        70, // How long to vibrate
+        1050, // How long to wait before vibrating again
+    };
+
+    private static final int[] THREE_ELEMENTS_VIBRATION_AMPLITUDE = {
+        0, // No delay before starting
+        255, // Vibrate full amplitude
+        0, // No amplitude while waiting
+    };
+
+    private static final int[] FIVE_ELEMENTS_VIBRATION_AMPLITUDE = {
+        0, // No delay before starting
+        255, // Vibrate full amplitude
+        0, // No amplitude while waiting
+        255, // No amplitude while waiting
+        0, // No amplitude while waiting
+    };
 
     public NotificationVibrationPatternPreferenceController(Context context) {
         super(context);
@@ -64,13 +101,22 @@ public class NotificationVibrationPatternPreferenceController extends VibrationP
     }
 
     @Override
-    protected long[] getDefaultPattern() {
-        return mDefaultPattern;
-    }
-
-    @Override
-    protected int[] getDefaultPatternAmp() {
-        return mDefaultPatternAmp;
+    protected VibrationEffect getPattern(int vibPattern) {
+        VibrationEffectProxy vibrationEffectProxy = new VibrationEffectProxy();
+        switch (vibPattern) {
+            case 1:
+                return vibrationEffectProxy.createWaveform(DZZZ_VIBRATION_PATTERN,
+                        THREE_ELEMENTS_VIBRATION_AMPLITUDE, -1);
+            case 2:
+                return vibrationEffectProxy.createWaveform(MM_MM_VIBRATION_PATTERN,
+                        FIVE_ELEMENTS_VIBRATION_AMPLITUDE, -1);
+            case 3:
+                return vibrationEffectProxy.createWaveform(DA_DA_VIBRATION_PATTERN,
+                        FIVE_ELEMENTS_VIBRATION_AMPLITUDE, -1);
+            default:
+                return vibrationEffectProxy.createWaveform(mDefaultPattern,
+                        mDefaultPatternAmp, -1);
+        }
     }
 
     private static long[] getLongArray(Resources resources, int resId, int maxLength, long[] def) {

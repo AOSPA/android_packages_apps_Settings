@@ -43,7 +43,7 @@ public class VibrationPatternPreferenceController extends AbstractPreferenceCont
 
     protected final Vibrator mVibrator;
 
-    private static class VibrationEffectProxy {
+    protected static class VibrationEffectProxy {
         public VibrationEffect createWaveform(long[] timings, int[] amplitudes, int repeat) {
             return VibrationEffect.createWaveform(timings, amplitudes, repeat);
         }
@@ -137,14 +137,6 @@ public class VibrationPatternPreferenceController extends AbstractPreferenceCont
         return Settings.System.RINGTONE_VIBRATION_PATTERN;
     }
 
-    protected long[] getDefaultPattern() {
-        return SIMPLE_VIBRATION_PATTERN;
-    }
-
-    protected int[] getDefaultPatternAmp() {
-        return FIVE_ELEMENTS_VIBRATION_AMPLITUDE;
-    }
-
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
@@ -167,33 +159,29 @@ public class VibrationPatternPreferenceController extends AbstractPreferenceCont
     }
 
     private void previewPattern() {
-        VibrationEffect effect;
+        VibrationEffect effect = getPattern(Settings.System.getInt(
+                mContext.getContentResolver(), getSettingsKey(), 0));
+        mVibrator.vibrate(effect, VIBRATION_ATTRIBUTES);
+    }
+
+    protected VibrationEffect getPattern(int vibPattern) {
         VibrationEffectProxy vibrationEffectProxy = new VibrationEffectProxy();
-        int vibPattern = Settings.System.getInt(
-                mContext.getContentResolver(), getSettingsKey(), 0);
         switch (vibPattern) {
             case 1:
-                effect = vibrationEffectProxy.createWaveform(DZZZ_DA_VIBRATION_PATTERN,
+                return vibrationEffectProxy.createWaveform(DZZZ_DA_VIBRATION_PATTERN,
                         FIVE_ELEMENTS_VIBRATION_AMPLITUDE, -1);
-                break;
             case 2:
-                effect = vibrationEffectProxy.createWaveform(MM_MM_MM_VIBRATION_PATTERN,
+                return vibrationEffectProxy.createWaveform(MM_MM_MM_VIBRATION_PATTERN,
                         SEVEN_ELEMENTS_VIBRATION_AMPLITUDE, -1);
-                break;
             case 3:
-                effect = vibrationEffectProxy.createWaveform(DA_DA_DZZZ_VIBRATION_PATTERN,
+                return vibrationEffectProxy.createWaveform(DA_DA_DZZZ_VIBRATION_PATTERN,
                         SEVEN_ELEMENTS_VIBRATION_AMPLITUDE, -1);
-                break;
             case 4:
-                effect = vibrationEffectProxy.createWaveform(DA_DZZZ_DA_VIBRATION_PATTERN,
+                return vibrationEffectProxy.createWaveform(DA_DZZZ_DA_VIBRATION_PATTERN,
                         SEVEN_ELEMENTS_VIBRATION_AMPLITUDE, -1);
-                break;
             default:
-            case 0:
-                effect = vibrationEffectProxy.createWaveform(getDefaultPattern(),
-                        getDefaultPatternAmp(), -1);
-                break;
+                return vibrationEffectProxy.createWaveform(SIMPLE_VIBRATION_PATTERN,
+                        FIVE_ELEMENTS_VIBRATION_AMPLITUDE, -1);
         }
-        mVibrator.vibrate(effect, VIBRATION_ATTRIBUTES);
     }
 }
