@@ -171,10 +171,9 @@ x
     <ListPreference
         android:key="notification_vibration_pattern"
         android:title="@string/notification_vibration_pattern_title"
+        android:order="-67" 
         android:entries="@array/notification_vibration_pattern_entries"
-        android:entryValues="@array/vibration_pattern_values"
-        android:defaultValue="0"
-        android:order="-67" />
+        android:entryValues="@array/notification_vibration_pattern_values"/>
 
     <!-- Default alarm ringtone -->
     <com.android.settings.DefaultRingtonePreference
