@@ -173,7 +173,7 @@ public class SimStatusPreferenceController extends BasePreferenceController {
 
     private CharSequence getCarrierName(int simSlot) {
         SubscriptionInfo subInfo = getSubscriptionInfo(simSlot);
-        if (DomesticRoamUtils.isFeatureEnabled(mContext)) {
+        if (DomesticRoamUtils.isFeatureEnabled(mContext) && subInfo != null) {
             String operatorName = DomesticRoamUtils.getRegisteredOperatorName(
                 mContext, subInfo.getSubscriptionId());
             if (DomesticRoamUtils.EMPTY_OPERATOR_NAME != operatorName) {
