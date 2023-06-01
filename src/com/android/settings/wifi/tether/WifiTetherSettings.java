@@ -88,7 +88,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     @VisibleForTesting
     WifiTetherPasswordPreferenceController mPasswordPreferenceController;
     private WifiTetherApBandPreferenceController mApBandPreferenceController;
-    private WifiTetherSecurityPreferenceController mSecurityPreferenceController;
+    @VisibleForTesting
+    WifiTetherSecurityPreferenceController mSecurityPreferenceController;
     @VisibleForTesting
     WifiTetherAutoOffPreferenceController mWifiTetherAutoOffPreferenceController;
 
@@ -312,11 +313,12 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     SoftApConfiguration buildNewConfig() {
         SoftApConfiguration currentConfig = mWifiTetherViewModel.getSoftApConfiguration();
         SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder(currentConfig);
-        int securityType = (mWifiTetherViewModel.isSpeedFeatureAvailable())
-                ? currentConfig.getSecurityType()
-                : mSecurityPreferenceController.getSecurityType();
         configBuilder.setSsid(mSSIDPreferenceController.getSSID());
 
+        int securityType =
+                mWifiTetherViewModel.isSpeedFeatureAvailable()
+                        ? currentConfig.getSecurityType()
+                        : mSecurityPreferenceController.getSecurityType();
         // For 6GHz use OWE only mode.
         if ((mApBandPreferenceController.getBandIndex() & SoftApConfiguration.BAND_6GHZ) != 0
                  && securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION) {

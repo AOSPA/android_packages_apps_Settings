@@ -603,8 +603,10 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 /** suppress full page if user is not admin */
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return SubscriptionUtil.isSimHardwareVisible(context) &&
-                            context.getSystemService(UserManager.class).isAdminUser();
+                    boolean isAirplaneOff = Settings.Global.getInt(context.getContentResolver(),
+                            Settings.Global.AIRPLANE_MODE_ON, 0) == 0;
+                    return isAirplaneOff && SubscriptionUtil.isSimHardwareVisible(context)
+                            && context.getSystemService(UserManager.class).isAdminUser();
                 }
             };
 
