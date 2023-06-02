@@ -967,6 +967,15 @@ public class MobileNetworkUtils {
      */
     public static CharSequence getPreferredStatus(boolean isRtlMode, Context context,
             boolean isPreferredCallStatus, List<SubscriptionInfoEntity> entityList) {
+        return getPreferredStatus(isRtlMode, context, isPreferredCallStatus, false, entityList);
+    }
+
+    /**
+     * Returns preferred status of Calls & SMS & data separately when Provider Model is enabled.
+     */
+    public static CharSequence getPreferredStatus(boolean isRtlMode, Context context,
+            boolean isPreferredCallStatus, boolean isPreferredData,
+            List<SubscriptionInfoEntity> entityList) {
         if (entityList != null && !entityList.isEmpty()) {
             final StringBuilder summary = new StringBuilder();
             for (SubscriptionInfoEntity subInfo : entityList) {
@@ -978,9 +987,14 @@ public class MobileNetworkUtils {
                     return displayName;
                 }
 
-                CharSequence status = isPreferredCallStatus
-                        ? getPreferredCallStatus(context, subInfo)
-                        : getPreferredSmsStatus(context, subInfo);
+                CharSequence status = "";
+                if (isPreferredData) {
+                    status = getPreferredDataStatus(context, subInfo);
+                } else {
+                    status = isPreferredCallStatus
+                            ? getPreferredCallStatus(context, subInfo)
+                            : getPreferredSmsStatus(context, subInfo);
+                }
                 if (status.toString().isEmpty()) {
                     // If there are 2 or more SIMs and one of these has no preferred status,
                     // set only its displayName as summary.
@@ -1020,6 +1034,16 @@ public class MobileNetworkUtils {
             SubscriptionInfoEntity subInfo) {
         String status = "";
         if (subInfo.getSubId() == SubscriptionManager.getDefaultSmsSubscriptionId()) {
+            status = setSummaryResId(context, R.string.calls_sms_preferred);
+        }
+
+        return status;
+    }
+
+    private static CharSequence getPreferredDataStatus(Context context,
+            SubscriptionInfoEntity subInfo) {
+        String status = "";
+        if (subInfo.getSubId() == SubscriptionManager.getDefaultDataSubscriptionId()) {
             status = setSummaryResId(context, R.string.calls_sms_preferred);
         }
 
