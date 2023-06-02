@@ -263,10 +263,11 @@ public class NetworkSelectSettings extends DashboardFragment implements
     public void onStop() {
         Log.d(TAG, "onStop() mWaitingForNumberOfScanResults: " + mWaitingForNumberOfScanResults);
         mSubscriptionsChangeListener.stop();
-        super.onStop();
+
         if (mWaitingForNumberOfScanResults <= 0) {
             stopNetworkQuery();
         }
+        super.onStop();
     }
 
     @Override
