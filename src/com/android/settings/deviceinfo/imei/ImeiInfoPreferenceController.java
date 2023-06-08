@@ -216,7 +216,6 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
 
     @VisibleForTesting
     protected void updatePreference(Preference preference, int simSlot) {
-        SubscriptionInfo subInfo = getSubscriptionInfo(simSlot);
         preference.setTitle(getTitle(simSlot));
         preference.setSummary(getSummary());
     }

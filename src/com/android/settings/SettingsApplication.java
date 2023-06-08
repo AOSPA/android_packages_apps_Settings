@@ -27,9 +27,8 @@ import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.FeatureFlagUtils;
 
-import androidx.window.embedding.SplitController;
-
 import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
+import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.core.instrumentation.ElapsedTimeUtils;
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.spa.SettingsSpaEnvironment;
@@ -66,8 +65,9 @@ public class SettingsApplication extends Application {
         // Set Spa environment.
         setSpaEnvironment();
 
-        if (FeatureFlagUtils.isEnabled(this, FeatureFlagUtils.SETTINGS_SUPPORT_LARGE_SCREEN)
-                && SplitController.getInstance(this).isSplitSupported()) {
+        if (ActivityEmbeddingUtils.isSettingsSplitEnabled(this)
+                && FeatureFlagUtils.isEnabled(this,
+                        FeatureFlagUtils.SETTINGS_SUPPORT_LARGE_SCREEN)) {
             if (WizardManagerHelper.isUserSetupComplete(this)) {
                 new ActivityEmbeddingRulesController(this).initRules();
             } else {
