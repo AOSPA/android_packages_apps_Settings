@@ -230,7 +230,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
                 use(OpenNetworkSelectPagePreferenceController.class).init(mSubId);
         final AutoSelectPreferenceController autoSelectPreferenceController =
                 use(AutoSelectPreferenceController.class)
-                        .init(mSubId)
+                        .init(getLifecycle(), mSubId)
                         .addListener(openNetworkSelectPagePreferenceController);
 
         final SelectNetworkPreferenceController selectNetworkPreferenceController =
