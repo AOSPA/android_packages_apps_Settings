@@ -31,6 +31,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
@@ -72,6 +73,11 @@ public class VibrationSettings extends DashboardFragment {
     }
 
     @Override
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         final View view = super.onCreateView(inflater, container, savedInstanceState);
@@ -97,6 +103,11 @@ public class VibrationSettings extends DashboardFragment {
                 }
 
                 @Override
+                public List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+                    return buildPreferenceControllers(context);
+                }
+
+                @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
                         boolean enabled) {
                     final List<SearchIndexableResource> resourceData = new ArrayList<>();
@@ -106,4 +117,15 @@ public class VibrationSettings extends DashboardFragment {
                     return resourceData;
                 }
             };
+
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+
+        // === Phone & notification ringtone vibration pattern===
+        controllers.add(new NotificationVibrationPatternPreferenceController(context));
+        controllers.add(new PhoneVibrationPatternPreferenceController(context));
+
+        return controllers;
+    }
+
 }
