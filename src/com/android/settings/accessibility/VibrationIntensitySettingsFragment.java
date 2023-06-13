@@ -30,10 +30,17 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.recyclerview.widget.RecyclerView;
 
+import co.aospa.settings.accessibility.NotificationVibrationPatternPreferenceController;
+import co.aospa.settings.accessibility.PhoneVibrationPatternPreferenceController;
+
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /** Accessibility settings for the vibration. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
@@ -59,6 +66,11 @@ public class VibrationIntensitySettingsFragment extends DashboardFragment {
     @Override
     protected String getLogTag() {
         return TAG;
+    }
+
+    @Override
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context);
     }
 
     @VisibleForTesting
@@ -91,7 +103,23 @@ public class VibrationIntensitySettingsFragment extends DashboardFragment {
                 protected boolean isPageSearchEnabled(Context context) {
                     return VibrationIntensitySettingsFragment.isPageSearchEnabled(context);
                 }
+
+                @Override
+                public List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+                    return buildPreferenceControllers(context);
+                }
             };
+
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+
+        // === Phone & notification ringtone vibration pattern===
+        controllers.add(new NotificationVibrationPatternPreferenceController(context));
+        controllers.add(new PhoneVibrationPatternPreferenceController(context));
+
+        return controllers;
+    }
+
 
     @Override
     public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
