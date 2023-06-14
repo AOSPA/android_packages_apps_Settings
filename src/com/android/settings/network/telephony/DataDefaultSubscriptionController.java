@@ -67,7 +67,8 @@ public class DataDefaultSubscriptionController extends DefaultSubscriptionContro
         if (isSmartDdsEnabled) {
             return mContext.getString(R.string.dds_preference_smart_dds_switch_is_on);
         }
-        return super.getSummary();
+        return MobileNetworkUtils.getPreferredStatus(isRtlMode(),
+                mContext, false, true, mSubInfoEntityList);
     }
 
     private void setUserPrefDataSubIdInDb(int subId) {
