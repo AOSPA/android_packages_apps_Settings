@@ -34,6 +34,8 @@ import static android.telephony.NetworkRegistrationInfo.DOMAIN_PS;
 
 // QTI_END: 2023-04-03: Telephony: Use the new API to check if the device is roaming
 // QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+import co.aospa.settings.network.telephony.Smart5gPreferenceController;
+
 import static com.qti.extphone.ExtPhoneCallbackListener.EVENT_ON_CIWLAN_CONFIG_CHANGE;
 // QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
 import static com.qti.extphone.ExtPhoneCallbackListener.EVENT_GET_RADIO_ICON_RESPONSE;
@@ -816,8 +818,11 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                         .addListener(autoSelectPreferenceController);
 // QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
 
+        final Smart5gPreferenceController smart5gPreferenceController =
+                use(Smart5gPreferenceController.class).init(mSubId);
+
         use(NetworkPreferenceCategoryController.class).init(mSubId)
-                .setChildren(Arrays.asList(autoSelectPreferenceController));
+                .setChildren(Arrays.asList(autoSelectPreferenceController, smart5gPreferenceController));
         mCdmaSystemSelectPreferenceController = use(CdmaSystemSelectPreferenceController.class);
         mCdmaSystemSelectPreferenceController.init(getPreferenceManager(), mSubId);
         mCdmaSubscriptionPreferenceController = use(CdmaSubscriptionPreferenceController.class);
