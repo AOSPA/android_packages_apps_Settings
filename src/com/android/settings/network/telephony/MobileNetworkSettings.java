@@ -34,6 +34,8 @@ import static android.telephony.NetworkRegistrationInfo.DOMAIN_PS;
 
 // QTI_END: 2023-04-03: Telephony: Use the new API to check if the device is roaming
 // QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+import co.aospa.settings.network.telephony.Smart5gPreferenceController;
+
 import static com.qti.extphone.ExtPhoneCallbackListener.EVENT_ON_CIWLAN_CONFIG_CHANGE;
 // QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
 import static com.qti.extphone.ExtPhoneCallbackListener.EVENT_GET_RADIO_ICON_RESPONSE;
@@ -841,6 +843,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         use(ContactDiscoveryPreferenceController.class).init(getParentFragmentManager(), mSubId);
         use(NrAdvancedCallingPreferenceController.class).init(mSubId);
         use(TransferEsimPreferenceController.class).init(mSubId, mSubscriptionInfoEntity);
+        use(Smart5gPreferenceController.class).init(mSubId);
         final ConvertToEsimPreferenceController convertToEsimPreferenceController =
                 use(ConvertToEsimPreferenceController.class);
         if (convertToEsimPreferenceController != null) {
