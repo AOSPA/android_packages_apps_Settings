@@ -335,6 +335,13 @@
             settings:controller="com.android.settings.network.telephony.NetworkPreferenceCategoryController">
 
             <SwitchPreference
+                android:key="smart_5g"
+                android:title="@string/smart_5g_title"
+                android:persistent="false"
+                android:summary="@string/smart_5g_summary"
+                settings:controller="co.aospa.settings.network.telephony.Smart5gPreferenceController"/>
+
+            <SwitchPreference
                 android:key="select_network_key"
                 android:title="@string/enable_snpn"
                 settings:controller="com.android.settings.network.telephony.gsm.SelectNetworkPreferenceController"/>
