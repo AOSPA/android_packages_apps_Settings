@@ -29,6 +29,8 @@ import static android.telephony.ims.feature.ImsFeature.FEATURE_MMTEL;
 import static android.telephony.ims.stub.ImsRegistrationImplBase.REGISTRATION_TECH_CROSS_SIM;
 import static android.telephony.NetworkRegistrationInfo.DOMAIN_PS;
 
+import co.aospa.settings.network.telephony.Smart5gPreferenceController;
+
 import static com.qti.extphone.ExtPhoneCallbackListener.EVENT_ON_CIWLAN_CONFIG_CHANGE;
 
 import android.app.Activity;
@@ -567,6 +569,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         use(ContactDiscoveryPreferenceController.class).init(getParentFragmentManager(), mSubId);
         use(NrAdvancedCallingPreferenceController.class).init(mSubId);
         use(TransferEsimPreferenceController.class).init(mSubId, mSubscriptionInfoEntity);
+        use(Smart5gPreferenceController.class).init(mSubId);
         final ConvertToEsimPreferenceController convertToEsimPreferenceController =
                 use(ConvertToEsimPreferenceController.class);
         if (convertToEsimPreferenceController != null) {
