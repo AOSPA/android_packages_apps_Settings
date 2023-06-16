@@ -38,10 +38,12 @@ import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
@@ -83,6 +85,9 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
         SelectNetworkPreferenceController.OnNetworkScanTypeListener {
 
     private static final long MINIMUM_DIALOG_TIME_MILLIS = TimeUnit.SECONDS.toMillis(1);
+    private static final String LOG_TAG = "AutoSelectPreferenceController";
+    private static final String INTERNAL_LOG_TAG_INIT = "Init";
+    private static final String INTERNAL_LOG_TAG_AFTERSET = "AfterSet";
 
     private final Handler mUiHandler;
     private static final String TAG = "AutoSelectPreferenceController";
@@ -104,6 +109,7 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
     private int mCacheOfModeStatus;
     private AtomicLong mRecursiveUpdate;
     private Object mLock = new Object();
+    TelephonyCallbackListener mTelephonyCallbackListener;
 
     public AutoSelectPreferenceController(Context context, String key) {
         super(context, key);
@@ -120,6 +126,7 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
         mAllowedNetworkTypesListener.setAllowedNetworkTypesListener(
                 () -> updatePreference());
         mSubscriptionsListener = new SubscriptionsChangeListener(context, this);
+        mTelephonyCallbackListener = new TelephonyCallbackListener();
     }
 
     @Override
@@ -142,12 +149,15 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
     public void onStart() {
         mAllowedNetworkTypesListener.register(mContext, mSubId);
         mSubscriptionsListener.start();
+        mTelephonyManager.registerTelephonyCallback(new HandlerExecutor(mUiHandler),
+                mTelephonyCallbackListener);
     }
 
     @OnLifecycleEvent(ON_STOP)
     public void onStop() {
         mAllowedNetworkTypesListener.unregister(mContext, mSubId);
         mSubscriptionsListener.stop();
+        mTelephonyManager.unregisterTelephonyCallback(mTelephonyCallbackListener);
     }
 
     @Override
@@ -166,18 +176,6 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
 
     @Override
     public boolean isChecked() {
-        if (!mUpdatingConfig.get()) {
-            if (MobileNetworkUtils.isCagSnpnEnabled(mContext)) {
-                synchronized (mLock) {
-                    getNetworkSelectionMode();
-                }
-            } else {
-                mCacheOfModeStatus = mTelephonyManager.getNetworkSelectionMode();
-            }
-            for (OnNetworkSelectModeListener lsn : mListeners) {
-                lsn.onNetworkSelectModeUpdated(mCacheOfModeStatus);
-            }
-        }
         return mCacheOfModeStatus == TelephonyManager.NETWORK_SELECTION_MODE_AUTO;
     }
 
@@ -270,12 +268,23 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
 
             //Update UI in UI thread
             final long durationMillis = SystemClock.elapsedRealtime() - startMillis;
+
             mUiHandler.postDelayed(() -> {
-                mRecursiveUpdate.getAndIncrement();
-                mSwitchPreference.setEnabled(true);
-                mSwitchPreference.setChecked(isChecked());
-                mRecursiveUpdate.decrementAndGet();
-                dismissProgressBar();
+                ThreadUtils.postOnBackgroundThread(() -> {
+                    queryNetworkSelectionMode(INTERNAL_LOG_TAG_AFTERSET);
+
+                    //Update UI in UI thread
+                    mUiHandler.post(() -> {
+                        mRecursiveUpdate.getAndIncrement();
+                        if (mSwitchPreference != null) {
+                            mSwitchPreference.setEnabled(true);
+                            mSwitchPreference.setChecked(isChecked());
+                        }
+                        mRecursiveUpdate.decrementAndGet();
+                        updateListenerValue();
+                        dismissProgressBar();
+                    });
+                });
             }, Math.max(MINIMUM_DIALOG_TIME_MILLIS - durationMillis, 0));
         });
     }
@@ -283,7 +292,7 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
     /**
      * Initialization based on given subscription id.
      **/
-    public AutoSelectPreferenceController init(int subId) {
+    public AutoSelectPreferenceController init(Lifecycle lifecycle, int subId) {
         mSubId = subId;
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
@@ -297,6 +306,19 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
                 CarrierConfigManager.KEY_ONLY_AUTO_SELECT_IN_HOME_NETWORK_BOOL)
                 : false;
 
+        ThreadUtils.postOnBackgroundThread(() -> {
+            queryNetworkSelectionMode(INTERNAL_LOG_TAG_INIT);
+
+            //Update UI in UI thread
+            mUiHandler.post(() -> {
+                if (mSwitchPreference != null) {
+                    mRecursiveUpdate.getAndIncrement();
+                    mSwitchPreference.setChecked(isChecked());
+                    mRecursiveUpdate.decrementAndGet();
+                    updateListenerValue();
+                }
+            });
+        });
         return this;
     }
 
@@ -347,6 +369,39 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
         return this;
     }
 
+    private void queryNetworkSelectionMode(String tag) {
+        mCacheOfModeStatus = mTelephonyManager.getNetworkSelectionMode();
+        Log.d(LOG_TAG, tag + ": query command done. mCacheOfModeStatus: " + mCacheOfModeStatus);
+    }
+
+    @VisibleForTesting
+    void updateUiAutoSelectValue(ServiceState status) {
+        if (status == null) {
+            return;
+        }
+        if (!mUpdatingConfig.get()) {
+            int networkSelectionMode = status.getIsManualSelection()
+                    ? TelephonyManager.NETWORK_SELECTION_MODE_MANUAL
+                    : TelephonyManager.NETWORK_SELECTION_MODE_AUTO;
+            if (mCacheOfModeStatus == networkSelectionMode) {
+                return;
+            }
+            mCacheOfModeStatus = networkSelectionMode;
+            Log.d(LOG_TAG, "updateUiAutoSelectValue: mCacheOfModeStatus: " + mCacheOfModeStatus);
+
+            mRecursiveUpdate.getAndIncrement();
+            updateState(mSwitchPreference);
+            mRecursiveUpdate.decrementAndGet();
+            updateListenerValue();
+        }
+    }
+
+    private void updateListenerValue() {
+        for (OnNetworkSelectModeListener lsn : mListeners) {
+            lsn.onNetworkSelectModeUpdated(mCacheOfModeStatus);
+        }
+    }
+
     private void showAutoSelectProgressBar() {
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(mContext);
@@ -391,5 +446,14 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
      */
     public interface OnNetworkSelectModeListener {
         void onNetworkSelectModeUpdated(int mode);
+    }
+
+    private class TelephonyCallbackListener extends TelephonyCallback
+            implements TelephonyCallback.ServiceStateListener {
+
+        @Override
+        public void onServiceStateChanged(ServiceState serviceState) {
+            updateUiAutoSelectValue(serviceState);
+        }
     }
 }
