@@ -163,6 +163,13 @@
                 android:persistent="true"
                 settings:controller="com.android.settings.network.telephony.Enabled5GPreferenceController"/>
 
+            <SwitchPreference
+                android:key="smart_5g"
+                android:title="@string/smart_5g_title"
+                android:persistent="false"
+                android:summary="@string/smart_5g_summary"
+                settings:controller="com.android.settings.network.telephony.Smart5gPreferenceController"/>
+
             <com.android.settingslib.RestrictedSwitchPreference
                 android:key="enable_2g"
                 android:title="@string/enable_2g_title"
