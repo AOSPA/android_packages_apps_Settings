@@ -482,13 +482,9 @@ public class NetworkSelectSettings extends DashboardFragment implements
                     updateAllPreferenceCategory();
             if (connectedPref != null) {
                 // update selected preference instance into connected preference
-                if (mSelectedPreference != null) {
-                    mSelectedPreference = connectedPref;
-                }
+                mSelectedPreference = connectedPref;
             } else if (!isPreferenceScreenEnabled()) {
-                if (connectedPref == null) {
-                    mSelectedPreference.setSummary(R.string.network_connecting);
-                }
+                mSelectedPreference.setSummary(R.string.network_connecting);
             }
             enablePreferenceScreen(true);
         } else if (isPreferenceScreenEnabled()) {
@@ -563,7 +559,6 @@ public class NetworkSelectSettings extends DashboardFragment implements
         // update selected preference instance by index
         for (int index = 0; index < mCellInfoList.size(); index++) {
             final CellInfo cellInfo = mCellInfoList.get(index);
-
             if ((mSelectedPreference != null) && mSelectedPreference.isSameCell(cellInfo)) {
                 mSelectedPreference = (NetworkOperatorPreference)
                         (mPreferenceCategory.getPreference(index));
