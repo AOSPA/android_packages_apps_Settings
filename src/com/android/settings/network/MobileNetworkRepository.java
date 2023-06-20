@@ -56,6 +56,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -100,8 +101,10 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     private boolean mIsRemovable = false;
     private boolean mIsActive = false;
     private Map<Integer, SubscriptionInfo> mSubscriptionInfoMap = new ArrayMap<>();
-    private Map<Integer, TelephonyManager> mTelephonyManagerMap = new HashMap<>();
-    private Map<Integer, PhoneCallStateTelephonyCallback> mTelephonyCallbackMap = new HashMap<>();
+    private ConcurrentHashMap<Integer, TelephonyManager> mTelephonyManagerMap =
+            new ConcurrentHashMap<>();
+    private ConcurrentHashMap<Integer, PhoneCallStateTelephonyCallback> mTelephonyCallbackMap =
+            new ConcurrentHashMap<>();
 
     @NonNull
     public static MobileNetworkRepository getInstance(Context context) {
