@@ -158,20 +158,6 @@
         <item>1800000</item>
     </string-array>
 
-    <string-array name="entries_font_size">
-        <item msgid="6490061470416867723">Small</item>
-        <item msgid="3579015730662088893">Default</item>
-        <item msgid="1678068858001018666">Large</item>
-        <item msgid="490158884605093126">Largest</item>
-    </string-array>
-
-    <string-array name="entryvalues_font_size" translatable="false">
-        <item>0.85</item>
-        <item>1.0</item>
-        <item>1.15</item>
-        <item>1.30</item>
-    </string-array>
-
     <!-- Wi-Fi settings -->
 
     <!-- Match this with the order of NetworkInfo.DetailedState. --> <skip />
@@ -1400,6 +1386,10 @@
         <item>"0"</item>
     </string-array>
 
+    <string-array name="enabled_networks_except_gsm_3g_values" translatable="false">
+        <item>"9"</item>
+    </string-array>
+
     <string-array name="enabled_networks_except_lte_values" translatable="false">
         <item>"0"</item>
         <item>"1"</item>
@@ -1738,6 +1728,10 @@
          [CHAR LIMIT=NONE] -->
     <string-array name="allowlist_hide_summary_in_battery_usage" translatable="false">
     </string-array>
+
+    <!-- hide 3G option from preferred network type UI -->
+    <integer-array name="network_mode_3g_deprecated_carrier_id" translatable="false">
+    </integer-array>
 
     <!--String arrays for showing user PLMN list -->
     <string-array name="uplmn_prefer_network_mode_td_choices">
