@@ -22,9 +22,11 @@ import android.os.Bundle;
 import android.os.UserManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 import android.telephony.UiccCardInfo;
 import android.text.TextUtils;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
 
@@ -41,6 +43,7 @@ import com.android.settings.sim.SimActivationNotifier;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /** This dialog activity handles both eSIM and pSIM subscriptions enabling and disabling. */
@@ -66,6 +69,8 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
     private static final int LINE_BREAK_OFFSET_ONE = 1;
     private static final int LINE_BREAK_OFFSET_TWO = 2;
     private static final String RTL_MARK = "\u200F";
+
+    private Map<Integer, TelephonyCallbackCallStateListener> mCallStateListeners;
 
     /**
      * Returns an intent of ToggleSubscriptionDialogActivity.
@@ -123,6 +128,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
         isRtlMode = getResources().getConfiguration().getLayoutDirection()
                 == View.LAYOUT_DIRECTION_RTL;
         Log.i(TAG, "isMultipleEnabledProfilesSupported():" + isMultipleEnabledProfilesSupported());
+        mCallStateListeners = new ArrayMap<>();
 
         if (savedInstanceState == null) {
             if (mEnable) {
@@ -139,10 +145,26 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
         if (mChangeListener == null) {
             mChangeListener = new SubscriptionsChangeListener(this, this);
         }
+        registerCallStateListeners();
+
         mChangeListener.start();
         mSwitchToEuiccSubscriptionSidecar.addListener(this);
         mSwitchToRemovableSlotSidecar.addListener(this);
         mEnableMultiSimSidecar.addListener(this);
+    }
+
+    private void registerCallStateListeners() {
+        if (mCallStateListeners != null) {
+            for (int slotId = 0; slotId < mTelMgr.getActiveModemCount(); slotId++) {
+                SubscriptionInfo info = mSubscriptionManager.
+                         getActiveSubscriptionInfoForSimSlotIndex(slotId);
+                if (info != null) {
+                    int subId = info.getSubscriptionId();
+                    mCallStateListeners.put(subId, new TelephonyCallbackCallStateListener(subId));
+                    mCallStateListeners.get(subId).register(this);
+                }
+            }
+        }
     }
 
     @Override
@@ -163,6 +185,22 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                 && !isFinishing()) {
             Log.i(TAG, "Finish dialog for inactive sim");
             finish();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        unregisterTelephonyCallbackCallStateListener();
+    }
+
+    private void unregisterTelephonyCallbackCallStateListener() {
+        if (mCallStateListeners != null) {
+            for (var entry : mCallStateListeners.entrySet()) {
+                entry.getValue().unregister();
+            }
+            mCallStateListeners.clear();
         }
     }
 
@@ -616,5 +654,38 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
         }
         return cardInfos.stream().anyMatch(
                 cardInfo -> cardInfo.isMultipleEnabledProfilesSupported());
+    }
+
+    class TelephonyCallbackCallStateListener extends TelephonyCallback implements
+            TelephonyCallback.CallStateListener {
+        private int subId;
+        private TelephonyManager mTelephonyManager;
+
+        TelephonyCallbackCallStateListener(int subscriptionId) {
+            super();
+            subId = subscriptionId;
+        }
+
+        @Override
+        public void onCallStateChanged(int state) {
+            Log.d(TAG, "onCallStateChanged : subId : "
+                    +subId+" state = "+state);
+            if (state != TelephonyManager.CALL_STATE_IDLE) finish();
+        }
+
+        public void register(Context context) {
+            Log.d(TAG, "TelephonyCallbackCallStateListener ... register");
+            if (SubscriptionManager.isValidSubscriptionId(subId)) {
+                mTelephonyManager = context.getSystemService(TelephonyManager.class).
+                        createForSubscriptionId(subId);
+                mTelephonyManager.registerTelephonyCallback(context.getMainExecutor(),
+                    mCallStateListeners.get(subId));
+            }
+        }
+
+        public void unregister() {
+            Log.d(TAG, "TelephonyCallbackCallStateListener ... unregister");
+            mTelephonyManager.unregisterTelephonyCallback(this);
+        }
     }
 }
