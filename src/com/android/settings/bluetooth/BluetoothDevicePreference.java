@@ -19,6 +19,7 @@ package com.android.settings.bluetooth;
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
 import android.app.settings.SettingsEnums;
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
@@ -49,6 +50,8 @@ import com.android.settingslib.utils.ThreadUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.RejectedExecutionException;
 
 /**
@@ -72,6 +75,10 @@ public final class BluetoothDevicePreference extends GearPreference {
 
     private final CachedBluetoothDevice mCachedDevice;
     private final UserManager mUserManager;
+
+    private Set<BluetoothDevice> mBluetoothDevices;
+    @VisibleForTesting
+    BluetoothAdapter mBluetoothAdapter;
     private final boolean mShowDevicesWithoutNames;
     private final long mCurrentTime;
     private final int mType;
@@ -79,12 +86,23 @@ public final class BluetoothDevicePreference extends GearPreference {
     private AlertDialog mDisconnectDialog;
     private String contentDescription = null;
     private boolean mHideSecondTarget = false;
-    private boolean mIsCallbackRemoved = false;
+    private boolean mIsCallbackRemoved = true;
     @VisibleForTesting
     boolean mNeedNotifyHierarchyChanged = false;
     /* Talk-back descriptions for various BT icons */
     Resources mResources;
     final BluetoothDevicePreferenceCallback mCallback;
+    @VisibleForTesting
+    final BluetoothAdapter.OnMetadataChangedListener mMetadataListener =
+            new BluetoothAdapter.OnMetadataChangedListener() {
+                @Override
+                public void onMetadataChanged(BluetoothDevice device, int key, byte[] value) {
+                    Log.d(TAG, String.format("Metadata updated in Device %s: %d = %s.",
+                            device.getAnonymizedAddress(),
+                            key, value == null ? null : new String(value)));
+                    onPreferenceAttributesChanged();
+                }
+            };
 
     private class BluetoothDevicePreferenceCallback implements CachedBluetoothDevice.Callback {
 
@@ -101,6 +119,7 @@ public final class BluetoothDevicePreference extends GearPreference {
         super(context, null);
         mResources = getContext().getResources();
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mShowDevicesWithoutNames = showDeviceWithoutNames;
 
         if (sDimAlpha == Integer.MIN_VALUE) {
@@ -111,7 +130,6 @@ public final class BluetoothDevicePreference extends GearPreference {
 
         mCachedDevice = cachedDevice;
         mCallback = new BluetoothDevicePreferenceCallback();
-        mCachedDevice.registerCallback(mCallback);
         mCurrentTime = System.currentTimeMillis();
         mType = type;
         onPreferenceAttributesChanged();
@@ -165,6 +183,7 @@ public final class BluetoothDevicePreference extends GearPreference {
         super.onPrepareForRemoval();
         if (!mIsCallbackRemoved) {
             mCachedDevice.unregisterCallback(mCallback);
+            unregisterMetadataChangedListener();
             mIsCallbackRemoved = true;
         }
         if (mDisconnectDialog != null) {
@@ -178,6 +197,7 @@ public final class BluetoothDevicePreference extends GearPreference {
         super.onAttached();
         if (mIsCallbackRemoved) {
             mCachedDevice.registerCallback(mCallback);
+            registerMetadataChangedListener();
             mIsCallbackRemoved = false;
         }
         onPreferenceAttributesChanged();
@@ -188,8 +208,39 @@ public final class BluetoothDevicePreference extends GearPreference {
         super.onDetached();
         if (!mIsCallbackRemoved) {
             mCachedDevice.unregisterCallback(mCallback);
+            unregisterMetadataChangedListener();
             mIsCallbackRemoved = true;
         }
+    }
+
+    private void registerMetadataChangedListener() {
+        if (mBluetoothDevices == null) {
+            mBluetoothDevices = new HashSet<>();
+        }
+        mBluetoothDevices.clear();
+        if (mCachedDevice.getDevice() != null) {
+            mBluetoothDevices.add(mCachedDevice.getDevice());
+        }
+        for (CachedBluetoothDevice cbd : mCachedDevice.getMemberDevice()) {
+            mBluetoothDevices.add(cbd.getDevice());
+        }
+        if (mBluetoothDevices.isEmpty()) {
+            Log.d(TAG, "No BT device to register.");
+            return;
+        }
+        mBluetoothDevices.forEach(bd ->
+                mBluetoothAdapter.addOnMetadataChangedListener(bd,
+                        getContext().getMainExecutor(), mMetadataListener));
+    }
+
+    private void unregisterMetadataChangedListener() {
+        if (mBluetoothDevices == null || mBluetoothDevices.isEmpty()) {
+            Log.d(TAG, "No BT device to unregister.");
+            return;
+        }
+        mBluetoothDevices.forEach(
+                bd -> mBluetoothAdapter.removeOnMetadataChangedListener(bd, mMetadataListener));
+        mBluetoothDevices.clear();
     }
 
     public CachedBluetoothDevice getBluetoothDevice() {

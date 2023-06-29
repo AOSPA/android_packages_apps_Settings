@@ -61,6 +61,7 @@ import com.android.settings.network.telephony.TelephonyConstants.TelephonyManage
  */
 public class PreferredNetworkModePreferenceController extends TelephonyBasePreferenceController
         implements ListPreference.OnPreferenceChangeListener, LifecycleObserver {
+    private static final String TAG = "PrefNetworkModeCtrl";
 
     private static final String LOG_TAG = "PreferredNetworkMode";
     private CarrierConfigCache mCarrierConfigCache;
@@ -216,6 +217,10 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
     }
 
     private int getPreferredNetworkMode() {
+        if (mTelephonyManager == null) {
+            Log.w(TAG, "TelephonyManager is null");
+            return TelephonyManagerConstants.NETWORK_MODE_UNKNOWN;
+        }
         return MobileNetworkUtils.getNetworkTypeFromRaf(
                 (int) mTelephonyManager.getAllowedNetworkTypesForReason(
                         TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER));
