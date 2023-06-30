@@ -248,7 +248,7 @@ public class FingerprintSettings extends SubSettings {
                     }
 
                     private void updateDialog() {
-                        if (isSfps() && !mRequireScreenOnToAuth) {
+                        if (!isUdfps() && !mRequireScreenOnToAuth) {
                             setRequireScreenOnToAuthVisibility();
                         }
                         RenameDialog renameDialog = (RenameDialog) getFragmentManager().
@@ -524,7 +524,11 @@ public class FingerprintSettings extends SubSettings {
                         return true;
                     });
             mFingerprintUnlockCategory.setVisible(false);
+<<<<<<< HEAD
             if (isSfps() && !mRequireScreenOnToAuth) {
+=======
+            if (!isUdfps() && mFingerprintWakeAndUnlock) {
+>>>>>>> 9043a63cb0 (Settings: Show single-touch wakeup setting on rear & front fps devices)
                 setRequireScreenOnToAuthVisibility();
             }
             setPreferenceScreen(root);
