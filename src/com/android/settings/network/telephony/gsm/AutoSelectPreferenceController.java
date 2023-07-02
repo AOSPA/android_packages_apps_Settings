@@ -148,16 +148,16 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
     @OnLifecycleEvent(ON_START)
     public void onStart() {
         mAllowedNetworkTypesListener.register(mContext, mSubId);
-        mSubscriptionsListener.start();
         mTelephonyManager.registerTelephonyCallback(new HandlerExecutor(mUiHandler),
                 mTelephonyCallbackListener);
+        mSubscriptionsListener.start();
     }
 
     @OnLifecycleEvent(ON_STOP)
     public void onStop() {
         mAllowedNetworkTypesListener.unregister(mContext, mSubId);
-        mSubscriptionsListener.stop();
         mTelephonyManager.unregisterTelephonyCallback(mTelephonyCallbackListener);
+        mSubscriptionsListener.stop();
     }
 
     @Override
