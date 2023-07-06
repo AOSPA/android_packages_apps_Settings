@@ -23,6 +23,7 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.UiccCardInfo;
+import android.telephony.UiccPortInfo;
 import android.telephony.UiccSlotInfo;
 import android.telephony.UiccSlotMapping;
 import android.util.Log;
@@ -438,5 +439,28 @@ public class UiccSlotUtil {
                                                 == UiccSlotInfo.CARD_STATE_INFO_PRESENT);
         Log.i(TAG, "isRemovableSimEnabled: " + isRemovableSimEnabled);
         return isRemovableSimEnabled;
+    }
+
+    public static boolean isEsimSub(SubscriptionInfo subInfo, TelephonyManager telMgr) {
+        if (telMgr == null) {
+            return false;
+        }
+        UiccSlotInfo[] slotsInfo = telMgr.getUiccSlotsInfo();
+        for (int i = 0; slotsInfo != null && i < slotsInfo.length; i++) {
+            UiccSlotInfo slotInfo = slotsInfo[i];
+            if (slotInfo == null || !slotInfo.getIsEuicc()) {
+                continue;
+            }
+            for (UiccPortInfo portInfo : slotInfo.getPorts()) {
+                String iccId = portInfo.getIccId();
+                Log.i(TAG, "isEsimSub: " + " subInfo iccid: " + subInfo.getIccId()
+                        + " portInfoiccid: " + portInfo.getIccId() + " portIndex: "
+                        + portInfo.getPortIndex());
+                if (iccId.equals(subInfo.getIccId())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
