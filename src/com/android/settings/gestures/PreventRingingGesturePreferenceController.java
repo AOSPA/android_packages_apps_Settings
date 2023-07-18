@@ -81,9 +81,7 @@ public class PreventRingingGesturePreferenceController extends AbstractPreferenc
         mPreferenceCategory = screen.findPreference(getPreferenceKey());
         mVibratePref = makeRadioPreference(KEY_VIBRATE, R.string.prevent_ringing_option_vibrate);
         mMutePref = makeRadioPreference(KEY_MUTE, R.string.prevent_ringing_option_mute);
-        if (!mContext.getResources().getBoolean(com.android.internal.R.bool.config_hasAlertSlider)) {
-            mCyclePref = makeRadioPreference(KEY_CYCLE, R.string.prevent_ringing_option_cycle);
-        }
+        mCyclePref = makeRadioPreference(KEY_CYCLE, R.string.prevent_ringing_option_cycle);
 
         if (mPreferenceCategory != null) {
             mSettingObserver = new SettingObserver(mPreferenceCategory);
@@ -93,7 +91,7 @@ public class PreventRingingGesturePreferenceController extends AbstractPreferenc
     @Override
     public boolean isAvailable() {
         return mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_volumeHushGestureEnabled);
+                com.android.internal.R.bool.config_volumeHushGestureEnabled) && !mContext.getResources().getBoolean(com.android.internal.R.bool.config_hasAlertSlider);
     }
 
     @Override
