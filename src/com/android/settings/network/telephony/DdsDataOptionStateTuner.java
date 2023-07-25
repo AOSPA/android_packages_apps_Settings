@@ -37,7 +37,8 @@ public class DdsDataOptionStateTuner extends TelephonyCallback
     private int mActiveDataSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private int mNonDdsCallState = TelephonyManager.CALL_STATE_IDLE;
     // Used to avoid unregistering receiver multiple times resulting in an exception
-    private boolean isBroadcastRegistered = false;
+    private boolean mIsBroadcastRegistered = false;
+    private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -46,6 +47,8 @@ public class DdsDataOptionStateTuner extends TelephonyCallback
             if (TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED.equals(action)) {
                 mDefaultDataSubId = intent.getIntExtra(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX,
                         SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+                log("mDefaultDataSubId = " + mDefaultDataSubId);
+                refreshCallbackRegistration(context.getApplicationContext());
                 update();
             }
         }
@@ -61,12 +64,55 @@ public class DdsDataOptionStateTuner extends TelephonyCallback
     }
 
     public void register(Context context, int subId) {
+        mSubId = subId;
         // Update default data sub ID
         mDefaultDataSubId = mSubscriptionManager.getDefaultDataSubscriptionId();
+        log("register mDefaultDataSubId = " + mDefaultDataSubId);
         if (subId != mDefaultDataSubId) {
             // Only attached to DDS sub's instance.
             return;
         }
+        mActiveDataSubId = mSubscriptionManager.getActiveDataSubscriptionId();
+        mNonDdsCallState = TelephonyManager.CALL_STATE_IDLE;
+        log("register mActiveDataSubId = " + mActiveDataSubId
+                + " mNonDdsCallState = " + mNonDdsCallState);
+        registerTelephonyCallbackOnNddsSub(context);
+
+        IntentFilter intentFilter =
+                new IntentFilter(TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED);
+        context.registerReceiver(mReceiver, intentFilter);
+        mIsBroadcastRegistered = true;
+    }
+
+    public void unregister(Context context) {
+        log("unregister");
+        for (int subId : mCallbacks.keySet()) {
+            mTelephonyManager.createForSubscriptionId(subId)
+                    .unregisterTelephonyCallback(mCallbacks.get(subId));
+        }
+        mCallbacks.clear();
+        mNonDdsCallState = TelephonyManager.CALL_STATE_IDLE;
+        mActiveDataSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+        mDefaultDataSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+
+        if (mIsBroadcastRegistered) {
+            context.unregisterReceiver(mReceiver);
+            mIsBroadcastRegistered = false;
+        }
+    }
+
+    private void refreshCallbackRegistration(Context context) {
+        if (mCallbacks.keySet().contains(mDefaultDataSubId)) {
+            for (int subId : mCallbacks.keySet()) {
+                mTelephonyManager.createForSubscriptionId(subId)
+                        .unregisterTelephonyCallback(mCallbacks.get(subId));
+            }
+            mCallbacks.clear();
+            registerTelephonyCallbackOnNddsSub(context);
+        }
+    }
+
+    private void registerTelephonyCallbackOnNddsSub(Context context) {
         final List<SubscriptionInfo> subs =
                 SubscriptionUtil.getActiveSubscriptions(mSubscriptionManager);
         for (SubscriptionInfo subInfo : subs) {
@@ -76,24 +122,6 @@ public class DdsDataOptionStateTuner extends TelephonyCallback
                         .registerTelephonyCallback(context.getMainExecutor(), this);
                 mCallbacks.put(subInfo.getSubscriptionId(), this);
             }
-        }
-
-        IntentFilter intentFilter =
-                new IntentFilter(TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED);
-        context.registerReceiver(mReceiver, intentFilter);
-        isBroadcastRegistered = true;
-    }
-
-    public void unregister(Context context) {
-        for (int subId : mCallbacks.keySet()) {
-            mTelephonyManager.createForSubscriptionId(subId)
-                    .unregisterTelephonyCallback(mCallbacks.get(subId));
-        }
-        mCallbacks.clear();
-
-        if (isBroadcastRegistered) {
-            context.unregisterReceiver(mReceiver);
-            isBroadcastRegistered = false;
         }
     }
 
@@ -120,12 +148,14 @@ public class DdsDataOptionStateTuner extends TelephonyCallback
     @Override
     public void onCallStateChanged(int state) {
         mNonDdsCallState = state;
+        log("mNonDdsCallState = " + mNonDdsCallState);
         update();
     }
 
     @Override
     public void onActiveDataSubscriptionIdChanged(int subId) {
         mActiveDataSubId = subId;
+        log("mActiveDataSubId = " + mActiveDataSubId);
         update();
     }
 
@@ -133,5 +163,9 @@ public class DdsDataOptionStateTuner extends TelephonyCallback
         if (mUpdateCallback != null) {
             mUpdateCallback.run();
         }
+    }
+
+    private void log(String msg) {
+        Log.d(LOG_TAG, "SUB " + mSubId + " " + msg);
     }
 }
