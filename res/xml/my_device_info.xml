@@ -51,18 +51,10 @@
             android:fragment="com.android.settings.deviceinfo.firmwareversion.FirmwareVersionSettings"
             settings:controller="com.android.settings.deviceinfo.firmwareversion.FirmwareVersionPreferenceController"/>
 
-        <!-- Paranoid Android version -->
-        <Preference
-        android:key="aospa_version"
-            android:order="4"
-            android:title="@string/aospa_version"
-            android:summary="@string/summary_placeholder"
-            settings:controller="com.android.settings.deviceinfo.firmwareversion.ParanoidAndroidVersionPreferenceController"/>
-
         <!-- Account name -->
         <Preference
-        android:key="branded_account"
-            android:order="5"
+            android:key="branded_account"
+            android:order="4"
             android:title="@string/my_device_info_account_preference_title"
             android:summary="@string/summary_placeholder"
             settings:enableCopying="true"
