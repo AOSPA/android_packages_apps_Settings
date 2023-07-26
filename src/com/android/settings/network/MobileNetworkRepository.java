@@ -56,6 +56,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
@@ -434,6 +435,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     private void onActiveSubInfoListChanged(
             List<SubscriptionInfoEntity> availableSubInfoEntityList) {
         mActiveSubInfoEntityList = availableSubInfoEntityList.stream()
+                .filter(entity -> Objects.nonNull(entity))
                 .filter(SubscriptionInfoEntity::isActiveSubscription)
                 .filter(SubscriptionInfoEntity::isSubscriptionVisible)
                 .collect(Collectors.toList());
