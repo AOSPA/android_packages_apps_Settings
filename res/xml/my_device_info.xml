@@ -51,6 +51,7 @@
             android:fragment="com.android.settings.deviceinfo.firmwareversion.FirmwareVersionSettings"
             settings:controller="com.android.settings.deviceinfo.firmwareversion.FirmwareVersionPreferenceController"/>
 
+<<<<<<< HEAD   (e7052e Settings: Forward Port Volume Long Press Skip Tracks [2/2])
         <!-- Paranoid Android version -->
         <Preference
         android:key="aospa_version"
@@ -59,10 +60,17 @@
             android:summary="@string/summary_placeholder"
             settings:controller="com.android.settings.deviceinfo.firmwareversion.ParanoidAndroidVersionPreferenceController"/>
 
+=======
+>>>>>>> CHANGE (1cf38b Settings: Move PA version from My Device to About phone->And)
         <!-- Account name -->
         <Preference
+<<<<<<< HEAD   (e7052e Settings: Forward Port Volume Long Press Skip Tracks [2/2])
         android:key="branded_account"
             android:order="5"
+=======
+            android:key="branded_account"
+            android:order="4"
+>>>>>>> CHANGE (1cf38b Settings: Move PA version from My Device to About phone->And)
             android:title="@string/my_device_info_account_preference_title"
             android:summary="@string/summary_placeholder"
             settings:enableCopying="true"
