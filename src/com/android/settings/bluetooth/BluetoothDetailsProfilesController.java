@@ -365,7 +365,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
 
     /**
      * When user disable the Le Audio profile, the system needs to do two things.
-     * 1) Disable the Le Audio profile, VCP and CSIP for each of the Le Audio devices.
+     * 1) Disable the Le Audio profile, VCP, CSIP and BASS for each of the Le Audio devices.
      * 2) Enable the A2dp profile and Headset profile for the associated device. The system
      * can't enable the A2dp profile and Headset profile if the Le Audio profile is enabled.
      *
@@ -378,6 +378,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         }
         LocalBluetoothProfile vcp = mProfileManager.getVolumeControlProfile();
         LocalBluetoothProfile csip = mProfileManager.getCsipSetCoordinatorProfile();
+        LocalBluetoothProfile bass = mProfileManager.getBCProfile();
         LocalBluetoothProfile a2dp = mProfileManager.getA2dpProfile();
         LocalBluetoothProfile headset = mProfileManager.getHeadsetProfile();
 
@@ -391,6 +392,9 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             if (csip != null) {
                 csip.setEnabled(leAudioDevice.getDevice(), false);
             }
+            if (bass != null) {
+                bass.setEnabled(leAudioDevice.getDevice(), false);
+            }
         }
 
         enableProfileAfterUserDisablesLeAudio(a2dp);
@@ -401,7 +405,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
      * When user enable the Le Audio profile, the system needs to do two things.
      * 1) Disable the A2dp profile and Headset profile for the associated device. The system
      * can't enable the Le Audio if the A2dp profile and Headset profile are enabled.
-     * 2) Enable the Le Audio profile, VCP and CSIP for each of the Le Audio devices.
+     * 2) Enable the Le Audio profile, VCP, CSIP and BASS for each of the Le Audio devices.
      *
      * @param profile the LeAudio profile
      */
@@ -414,6 +418,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         LocalBluetoothProfile headset = mProfileManager.getHeadsetProfile();
         LocalBluetoothProfile vcp = mProfileManager.getVolumeControlProfile();
         LocalBluetoothProfile csip = mProfileManager.getCsipSetCoordinatorProfile();
+        LocalBluetoothProfile bass = mProfileManager.getBCProfile();
 
         disableProfileBeforeUserEnablesLeAudio(a2dp);
         disableProfileBeforeUserEnablesLeAudio(headset);
@@ -427,6 +432,9 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             }
             if (csip != null) {
                 csip.setEnabled(leAudioDevice.getDevice(), true);
+            }
+            if (bass != null) {
+                bass.setEnabled(leAudioDevice.getDevice(), true);
             }
         }
     }
