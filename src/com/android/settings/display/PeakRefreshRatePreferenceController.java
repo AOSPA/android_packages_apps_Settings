@@ -93,7 +93,7 @@ public class PeakRefreshRatePreferenceController extends TogglePreferenceControl
         String preferenceSummary = mContext.getResources().getString(
                 R.string.peak_refresh_rate_summary);
         mPreference.setSummary(preferenceSummary.replace("90",
-                Integer.toString(Math.round(getDefaultPeakRefreshRate()))));
+                Integer.toString(Math.round(mPeakRefreshRate))));
     }
 
     @Override
