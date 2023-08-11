@@ -16,6 +16,8 @@
 
 package com.android.settings.deviceinfo.aboutphone;
 
+import static android.telephony.TelephonyManager.PHONE_TYPE_CDMA;
+
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -23,6 +25,7 @@ import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserManager;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 
@@ -193,6 +196,21 @@ public class MyDeviceInfoFragment extends DashboardFragment
 
             if (fragment != null) {
                 imeiInfoList.accept(ImeiInfoPreferenceController.DEFAULT_KEY + (1 + slotIndex));
+            }
+        }
+
+        Context appContext = context.getApplicationContext();
+        TelephonyManager telephonyManager = appContext.getSystemService(TelephonyManager.class);
+        int phoneCount = telephonyManager.getPhoneCount();
+        if (Utils.isSupportCTPA(appContext) && phoneCount >= 2) {
+            final int slot0PhoneType = telephonyManager.getCurrentPhoneTypeForSlot(0);
+            final int slot1PhoneType = telephonyManager.getCurrentPhoneTypeForSlot(1);
+            if (PHONE_TYPE_CDMA != slot0PhoneType && PHONE_TYPE_CDMA != slot1PhoneType) {
+                imeiInfoList.accept(ImeiInfoPreferenceController.DEFAULT_KEY + (phoneCount + 1));
+            } else if (PHONE_TYPE_CDMA == slot0PhoneType){
+                imeiInfoList.accept(ImeiInfoPreferenceController.DEFAULT_KEY + (phoneCount + 2));
+            } else if (PHONE_TYPE_CDMA == slot1PhoneType) {
+                imeiInfoList.accept(ImeiInfoPreferenceController.DEFAULT_KEY + (phoneCount + 3));
             }
         }
 
