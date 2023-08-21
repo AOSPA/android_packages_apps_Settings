@@ -196,9 +196,12 @@ public class BluetoothCodecDialogPreferenceController extends
             case BluetoothCodecConfig.SOURCE_CODEC_TYPE_LDAC:
                 index = 5;
                 break;
+            case BluetoothCodecConfig.SOURCE_CODEC_TYPE_LC3:
+                index = 6;
+                break;
             case BluetoothCodecConfig.SOURCE_CODEC_TYPE_OPUS:
                 index = 7;
-            // BUG b/245994340
+                break;
             case BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX_ADAPTIVE:
                 index = 8;
                 break;
