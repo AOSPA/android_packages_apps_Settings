@@ -113,57 +113,11 @@
             settings:controller="com.android.settings.network.telephony.DataDuringCallsPreferenceController"/>
 
         <SwitchPreference
-            android:key="enhanced_4g_lte"
-            android:title="@string/enhanced_4g_lte_mode_title"
-            android:persistent="false"
-            android:summary="@string/enhanced_4g_lte_mode_summary"
-            settings:keywords="@string/keywords_enhance_4g_lte"
-            settings:controller="com.android.settings.network.telephony.Enhanced4gLtePreferenceController"/>
-
-        <SwitchPreference
-            android:key="4g_calling"
-            android:title="@string/enhanced_4g_lte_mode_title_4g_calling"
-            android:persistent="false"
-            android:summary="@string/enhanced_4g_lte_mode_summary_4g_calling"
-            settings:keywords="@string/keywords_enhance_4g_lte"
-            settings:controller="com.android.settings.network.telephony.Enhanced4gCallingPreferenceController"/>
-        <SwitchPreference
-            android:key="advance_call"
-            android:title="@string/enhanced_4g_lte_mode_title_advanced_calling"
-            android:persistent="false"
-            android:summary="@string/enhanced_4g_lte_mode_summary"
-            settings:keywords="@string/keywords_enhance_4g_lte"
-            settings:controller="com.android.settings.network.telephony.Enhanced4gAdvancedCallingPreferenceController"/>
-        <SwitchPreference
-            android:key="enabled_5g"
-            android:title="@string/enabled_5g_mode_title"
-            android:persistent="true"
-            settings:controller="com.android.settings.network.telephony.Enabled5GPreferenceController"/>
-
-        <SwitchPreference
             android:key="contact_discovery_opt_in"
             android:title="@string/contact_discovery_opt_in_title"
             android:persistent="false"
             android:summary="@string/contact_discovery_opt_in_summary"
             settings:controller="com.android.settings.network.telephony.ContactDiscoveryPreferenceController"/>
-
-        <ListPreference
-            android:key="preferred_network_mode_key"
-            android:title="@string/preferred_network_mode_title"
-            android:summary="@string/preferred_network_mode_summary"
-            android:entries="@array/preferred_network_mode_choices"
-            android:entryValues="@array/preferred_network_mode_values"
-            android:dialogTitle="@string/preferred_network_mode_dialogtitle"
-            settings:controller="com.android.settings.network.telephony.PreferredNetworkModePreferenceController"/>
-
-        <ListPreference
-            android:key="enabled_networks_key"
-            android:title="@string/preferred_network_mode_title"
-            android:summary="@string/preferred_network_mode_summary"
-            android:entries="@array/enabled_networks_choices"
-            android:entryValues="@array/enabled_networks_values"
-            android:dialogTitle="@string/preferred_network_mode_dialogtitle"
-            settings:controller="com.android.settings.network.telephony.EnabledNetworkModePreferenceController"/>
 
         <Preference
             android:key="carrier_settings_version_key"
@@ -175,9 +129,92 @@
             settings:enableCopying="true"/>
 
         <PreferenceCategory
+            android:key="network_operators_category_key"
+            android:title="@string/network_operator_category"
+            settings:controller="com.android.settings.network.telephony.NetworkPreferenceCategoryController">
+
+            <ListPreference
+                android:key="preferred_network_mode_key"
+                android:title="@string/preferred_network_mode_title"
+                android:summary="@string/preferred_network_mode_summary"
+                android:entries="@array/preferred_network_mode_choices"
+                android:entryValues="@array/preferred_network_mode_values"
+                android:dialogTitle="@string/preferred_network_mode_dialogtitle"
+                settings:controller="com.android.settings.network.telephony.PreferredNetworkModePreferenceController"/>
+
+            <ListPreference
+                android:key="enabled_networks_key"
+                android:title="@string/preferred_network_mode_title"
+                android:summary="@string/preferred_network_mode_summary"
+                android:entries="@array/enabled_networks_choices"
+                android:entryValues="@array/enabled_networks_values"
+                android:dialogTitle="@string/preferred_network_mode_dialogtitle"
+                settings:controller="com.android.settings.network.telephony.EnabledNetworkModePreferenceController"/>
+
+            <SwitchPreference
+                android:key="enabled_5g"
+                android:title="@string/enabled_5g_mode_title"
+                android:persistent="true"
+                settings:controller="com.android.settings.network.telephony.Enabled5GPreferenceController"/>
+
+            <SwitchPreference
+                android:key="enable_2g"
+                android:title="@string/enable_2g_title"
+                android:summary="@string/enable_2g_summary"
+                settings:controller="com.android.settings.network.telephony.Enable2gPreferenceController" />
+
+            <SwitchPreference
+                android:key="select_network_key"
+                android:title="@string/enable_snpn"
+                settings:controller="com.android.settings.network.telephony.gsm.SelectNetworkPreferenceController"/>
+
+            <SwitchPreference
+                android:key="auto_select_key"
+                android:title="@string/select_automatically"
+                settings:controller="com.android.settings.network.telephony.gsm.AutoSelectPreferenceController"/>
+
+            <Preference
+                android:key="choose_network_key"
+                android:title="@string/choose_network_title"
+                settings:controller="com.android.settings.network.telephony.gsm.OpenNetworkSelectPagePreferenceController"/>
+        </PreferenceCategory>
+
+        <PreferenceCategory
             android:key="calling_category"
             android:title="@string/call_category"
             settings:controller="com.android.settings.network.telephony.CallingPreferenceCategoryController">
+
+            <SwitchPreference
+                android:key="enhanced_4g_lte"
+                android:title="@string/enhanced_4g_lte_mode_title"
+                android:persistent="false"
+                android:summary="@string/enhanced_4g_lte_mode_summary"
+                settings:keywords="@string/keywords_enhance_4g_lte"
+                settings:controller="com.android.settings.network.telephony.Enhanced4gLtePreferenceController"/>
+
+            <SwitchPreference
+                android:key="4g_calling"
+                android:title="@string/enhanced_4g_lte_mode_title_4g_calling"
+                android:persistent="false"
+                android:summary="@string/enhanced_4g_lte_mode_summary_4g_calling"
+                settings:keywords="@string/keywords_enhance_4g_lte"
+                settings:controller="com.android.settings.network.telephony.Enhanced4gCallingPreferenceController"/>
+
+            <SwitchPreference
+                android:key="advance_call"
+                android:title="@string/enhanced_4g_lte_mode_title_advanced_calling"
+                android:persistent="false"
+                android:summary="@string/enhanced_4g_lte_mode_summary"
+                settings:keywords="@string/keywords_enhance_4g_lte"
+                settings:controller="com.android.settings.network.telephony.Enhanced4gAdvancedCallingPreferenceController"/>
+
+            <SwitchPreference
+                android:key="nr_advanced_calling"
+                android:title="@string/nr_advanced_calling_title"
+                android:persistent="false"
+                android:summary="@string/nr_advanced_calling_summary"
+                settings:keywords="@string/keywords_nr_advanced_calling"
+                settings:controller="com.android.settings.network.telephony.NrAdvancedCallingPreferenceController"/>
 
             <Preference
                 android:key="wifi_calling"
@@ -204,7 +241,6 @@
                 android:summary="@string/backup_calling_setting_summary"
                 settings:keywords="@string/keywords_backup_calling"
                 settings:controller="com.android.settings.network.telephony.BackupCallingPreferenceController"/>
-
         </PreferenceCategory>
 
         <com.android.settings.network.telephony.cdma.CdmaListPreference
@@ -224,27 +260,6 @@
             android:entryValues="@array/cdma_subscription_values"
             android:dialogTitle="@string/cdma_subscription_dialogtitle"
             settings:controller="com.android.settings.network.telephony.cdma.CdmaSubscriptionPreferenceController"/>
-
-        <PreferenceCategory
-            android:key="network_operators_category_key"
-            android:title="@string/network_operator_category"
-            settings:controller="com.android.settings.network.telephony.NetworkPreferenceCategoryController">
-
-            <SwitchPreference
-                android:key="select_network_key"
-                android:title="@string/enable_snpn"
-                settings:controller="com.android.settings.network.telephony.gsm.SelectNetworkPreferenceController"/>
-
-            <SwitchPreference
-                android:key="auto_select_key"
-                android:title="@string/select_automatically"
-                settings:controller="com.android.settings.network.telephony.gsm.AutoSelectPreferenceController"/>
-
-            <Preference
-                android:key="choose_network_key"
-                android:title="@string/choose_network_title"
-                settings:controller="com.android.settings.network.telephony.gsm.OpenNetworkSelectPagePreferenceController"/>
-        </PreferenceCategory>
 
         <!--We want separate APN setting from reset of settings because we want user to change it with caution-->
         <com.android.settingslib.RestrictedPreference
@@ -269,20 +284,6 @@
             android:title="@string/carrier_settings_title"
             settings:controller="com.android.settings.network.telephony.CarrierPreferenceController">
         </Preference>
-
-        <SwitchPreference
-            android:key="enable_2g"
-            android:title="@string/enable_2g_title"
-            android:summary="@string/enable_2g_summary"
-            settings:controller="com.android.settings.network.telephony.Enable2gPreferenceController" />
-
-        <SwitchPreference
-            android:key="nr_advanced_calling"
-            android:title="@string/nr_advanced_calling_title"
-            android:persistent="false"
-            android:summary="@string/nr_advanced_calling_summary"
-            settings:keywords="@string/keywords_nr_advanced_calling"
-            settings:controller="com.android.settings.network.telephony.NrAdvancedCallingPreferenceController"/>
     </PreferenceCategory>
 
     <Preference
