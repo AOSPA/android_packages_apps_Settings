@@ -242,6 +242,11 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
      **/
     @Override
     public boolean setChecked(boolean isChecked) {
+        // If C_IWLAN is being disabled, try dismissing any existing C_IWLAN exit notifications
+        if (!isChecked) {
+            CiwlanNotificationReceiver.dismissNotification(mContext,
+                    SubscriptionManager.getPhoneId(mSubId));
+        }
         // Check UE's C_IWLAN configuration and the current preferred network type. If UE is in
         // C_IWLAN-only mode and the preferred network type does not contain LTE or NR, show a
         // dialog to change the preferred network type.
