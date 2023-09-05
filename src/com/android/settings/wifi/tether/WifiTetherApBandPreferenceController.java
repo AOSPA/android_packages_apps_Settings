@@ -74,7 +74,7 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
             mBandIndex = SoftApConfiguration.BAND_2GHZ;
             Log.d(TAG, "Updating band index to BAND_2GHZ because no config");
         } else if (is5GhzBandSupported() || is6GhzBandSupported()) {
-            if (config.getBands().length == 2) {
+            if (config.getChannels().size() == 2) {
                 if (config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION
                         || config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_WPA3_OWE) {
                     mWifiManager.setSoftApConfiguration(
