@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
           package="com.android.settings"
@@ -4952,6 +4954,15 @@
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"
             tools:node="remove" />
+
+        <receiver
+            android:name=".network.telephony.CiwlanNotificationReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.qti.phone.action.ACTION_DISABLE_CIWLAN_NOTIFICATION" />
+                <action android:name="org.codeaurora.intent.action.RADIO_POWER_STATE" />
+            </intent-filter>
+        </receiver>
 
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
