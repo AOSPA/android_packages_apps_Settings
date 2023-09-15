@@ -17,6 +17,12 @@
 package com.android.settings.bluetooth;
 
 import static android.bluetooth.BluetoothDevice.BOND_NONE;
+import static android.bluetooth.BluetoothLeBroadcastReceiveState.BIG_ENCRYPTION_STATE_BAD_CODE;
+import static android.bluetooth.BluetoothLeBroadcastReceiveState.BIG_ENCRYPTION_STATE_CODE_REQUIRED;
+import static android.bluetooth.BluetoothLeBroadcastReceiveState.BIG_ENCRYPTION_STATE_INVALID;
+import static android.bluetooth.BluetoothLeBroadcastReceiveState.PA_SYNC_STATE_FAILED_TO_SYNCHRONIZE;
+import static android.bluetooth.BluetoothLeBroadcastReceiveState.PA_SYNC_STATE_INVALID;
+import static android.bluetooth.BluetoothLeBroadcastReceiveState.PA_SYNC_STATE_SYNCINFO_REQUEST;
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
 import android.app.Activity;
@@ -164,6 +170,8 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
                 public void onReceiveStateChanged(@NonNull BluetoothDevice sink, int sourceId,
                         @NonNull BluetoothLeBroadcastReceiveState state) {
                     Log.d(TAG, "onReceiveStateChanged:");
+                    getActivity().runOnUiThread(
+                            () -> handleReceiveStateChanged(sourceId, state));
                 }
             };
 
@@ -371,7 +379,7 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
     }
 
     private void updateListCategoryFromBroadcastReceiveState(
-            BluetoothLeBroadcastReceiveState receiveState) {
+            BluetoothLeBroadcastReceiveState receiveState, boolean isConnected) {
         BluetoothBroadcastSourcePreference item = mBroadcastSourceListCategory.findPreference(
                 Integer.toString(receiveState.getBroadcastId()));
         if (item == null) {
@@ -379,11 +387,16 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
             item.setKey(Integer.toString(receiveState.getBroadcastId()));
             mBroadcastSourceListCategory.addPreference(item);
         }
-        item.updateReceiveStateAndRefreshUi(receiveState);
+        item.updateReceiveStateAndRefreshUi(receiveState, isConnected);
         item.setOrder(0);
 
-        setSourceId(receiveState.getSourceId());
-        mSelectedPreference = item;
+        if (isConnected) {
+            setSourceId(receiveState.getSourceId());
+            mSelectedPreference = item;
+        } else {
+            setSourceId(-1);
+            mSelectedPreference = null;
+        }
 
         //refresh the header
         if (mBluetoothFindBroadcastsHeaderController != null) {
@@ -491,11 +504,29 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
         mSelectedPreference = null;
     }
 
+    private void handleReceiveStateChanged(int sourceId,
+            BluetoothLeBroadcastReceiveState recvState) {
+        boolean isConnected = true;
+        int syncState = recvState.getPaSyncState();
+        int encryptState = recvState.getBigEncryptionState();
+        Log.d(TAG, "syncState: " + syncState + ", encryptState: " + encryptState);
+        if (syncState == PA_SYNC_STATE_INVALID ||
+            encryptState == BIG_ENCRYPTION_STATE_INVALID) {
+            Log.d(TAG, "ingore invalid state");
+            return;
+        }
+        if (syncState == PA_SYNC_STATE_FAILED_TO_SYNCHRONIZE ||
+            encryptState == BIG_ENCRYPTION_STATE_BAD_CODE) {
+            isConnected = false;
+        }
+        updateListCategoryFromBroadcastReceiveState(recvState, isConnected);
+    }
+
     private void addConnectedSourcePreference() {
         List<BluetoothLeBroadcastReceiveState> receiveStateList =
                 mLeBroadcastAssistant.getAllSources(mCachedDevice.getDevice());
         if (!receiveStateList.isEmpty()) {
-            updateListCategoryFromBroadcastReceiveState(receiveStateList.get(0));
+            updateListCategoryFromBroadcastReceiveState(receiveStateList.get(0), true);
         }
     }
 

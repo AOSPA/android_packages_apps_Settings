@@ -117,10 +117,11 @@ class BluetoothBroadcastSourcePreference extends Preference {
     /**
      * Updates the title and status from BluetoothLeBroadcastReceiveState.
      */
-    public void updateReceiveStateAndRefreshUi(BluetoothLeBroadcastReceiveState receiveState) {
+    public void updateReceiveStateAndRefreshUi(BluetoothLeBroadcastReceiveState receiveState,
+            boolean status) {
         mBluetoothLeBroadcastReceiveState = receiveState;
         mTitle = getProgramInfo();
-        mStatus = true;
+        mStatus = status;
 
         refresh();
     }
