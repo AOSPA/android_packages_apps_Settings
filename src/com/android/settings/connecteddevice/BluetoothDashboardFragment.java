@@ -203,5 +203,16 @@ public class BluetoothDashboardFragment extends DashboardFragment {
      * For Search.
      */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.bluetooth_screen);
+            new BaseSearchIndexProvider(R.xml.bluetooth_screen) {
+
+            @Override
+            public List<String> getNonIndexableKeys(Context context) {
+                final List<String> keys = super.getNonIndexableKeys(context);
+                if (mBroadcastEnabled == false) {
+                    keys.add("bluetooth_screen_broadcast_enable");
+                    keys.add("bluetooth_screen_broadcast_pin_configure");
+                }
+                return keys;
+            }
+        };
 }
