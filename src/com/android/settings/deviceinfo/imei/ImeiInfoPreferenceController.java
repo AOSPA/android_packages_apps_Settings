@@ -215,23 +215,27 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
 
     private String getImei(int slot) {
         String imei = null;
-        if (isMinHalVersion2_1()) {
-            imei = mTelephonyManager.getImei(slot);
-        } else {
-            if (mQtiImeiInfo == null) {
-                mQtiImeiInfo = TelephonyUtils.getImeiInfo();
-            }
-            if (mQtiImeiInfo != null) {
-                for (int i = 0; i < mQtiImeiInfo.length; i++) {
-                    if (null != mQtiImeiInfo[i] && mQtiImeiInfo[i].getSlotId() == slot) {
-                        imei = mQtiImeiInfo[i].getImei();
-                        break;
+        try {
+            if (isMinHalVersion2_1()) {
+                imei = mTelephonyManager.getImei(slot);
+            } else {
+                if (mQtiImeiInfo == null) {
+                    mQtiImeiInfo = TelephonyUtils.getImeiInfo();
+                }
+                if (mQtiImeiInfo != null) {
+                    for (int i = 0; i < mQtiImeiInfo.length; i++) {
+                        if (null != mQtiImeiInfo[i] && mQtiImeiInfo[i].getSlotId() == slot) {
+                            imei = mQtiImeiInfo[i].getImei();
+                            break;
+                        }
                     }
                 }
+                if (TextUtils.isEmpty(imei)) {
+                    imei = mTelephonyManager.getImei(slot);
+                }
             }
-            if (TextUtils.isEmpty(imei)) {
-                imei = mTelephonyManager.getImei(slot);
-            }
+        } catch (Exception exception) {
+            Log.i(TAG, "Imei not available. " + exception);
         }
         return imei;
     }
