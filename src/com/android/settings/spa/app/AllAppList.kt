@@ -95,10 +95,12 @@ class AllAppListModel(
 
     override fun getSpinnerOptions(recordList: List<AppRecordWithSize>): List<SpinnerOption> {
         val hasDisabled = recordList.any(isDisabled)
+        val hasHidden = recordList.any(isHidden)
         val hasInstant = recordList.any(isInstant)
-        if (!hasDisabled && !hasInstant) return emptyList()
+        if (!hasDisabled && !hasInstant && !hasHidden) return emptyList()
         val options = mutableListOf(SpinnerItem.All, SpinnerItem.Enabled)
         if (hasDisabled) options += SpinnerItem.Disabled
+        if (hasHidden) options += SpinnerItem.Hidden
         if (hasInstant) options += SpinnerItem.Instant
         return options.map {
             SpinnerOption(
@@ -119,6 +121,7 @@ class AllAppListModel(
         when (SpinnerItem.values().getOrNull(option)) {
             SpinnerItem.Enabled -> ({ it.app.enabled && !it.app.isInstantApp })
             SpinnerItem.Disabled -> isDisabled
+            SpinnerItem.Hidden -> isHidden
             SpinnerItem.Instant -> isInstant
             else -> ({ true })
         }
@@ -126,6 +129,9 @@ class AllAppListModel(
 
     private val isDisabled: (AppRecordWithSize) -> Boolean =
         { !it.app.enabled && !it.app.isInstantApp }
+
+    private val isHidden: (AppRecordWithSize) -> Boolean =
+        { (it.app.privateFlags and ApplicationInfo.PRIVATE_FLAG_HIDDEN) != 0 }
 
     private val isInstant: (AppRecordWithSize) -> Boolean = { it.app.isInstantApp }
 
@@ -136,6 +142,9 @@ class AllAppListModel(
             derivedStateOf {
                 storageSummary.value +
                     when {
+                        isHidden(record) -> {
+                            System.lineSeparator() + context.getString(R.string.hidden)
+                        }
                         !record.app.installed -> {
                             System.lineSeparator() + context.getString(R.string.not_installed)
                         }
@@ -158,5 +167,6 @@ private enum class SpinnerItem(val stringResId: Int) {
     All(R.string.filter_all_apps),
     Enabled(R.string.filter_enabled_apps),
     Disabled(R.string.filter_apps_disabled),
-    Instant(R.string.filter_instant_apps);
+    Instant(R.string.filter_instant_apps),
+    Hidden(R.string.filter_hidden_apps);
 }
