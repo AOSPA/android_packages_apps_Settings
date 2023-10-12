@@ -42,6 +42,7 @@ private class AppButtonsPresenter(private val packageInfoPresenter: PackageInfoP
     private val appUninstallButton = AppUninstallButton(packageInfoPresenter)
     private val appClearButton = AppClearButton(packageInfoPresenter)
     private val appForceStopButton = AppForceStopButton(packageInfoPresenter)
+    private val appHideButton = AppHideButton(packageInfoPresenter)
 
     @OptIn(ExperimentalLifecycleComposeApi::class)
     @Composable
@@ -58,5 +59,6 @@ private class AppButtonsPresenter(private val packageInfoPresenter: PackageInfoP
         appUninstallButton.getActionButton(app),
         appClearButton.getActionButton(app),
         appForceStopButton.getActionButton(app),
+        appHideButton.getActionButton(app),
     )
 }
