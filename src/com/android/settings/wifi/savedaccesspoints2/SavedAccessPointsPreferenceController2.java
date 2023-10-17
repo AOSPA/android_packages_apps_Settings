@@ -112,6 +112,16 @@ public class SavedAccessPointsPreferenceController2 extends BasePreferenceContro
                 preference.setOnPreferenceClickListener(this);
 
                 mPreferenceGroup.addPreference(preference);
+            } else {
+                WifiEntryPreference wifiPreference = mPreferenceGroup.findPreference(wifiEntry.getKey());
+                WifiEntry oldEntry = wifiPreference.getWifiEntry();
+                if (oldEntry.getConnectedState() != wifiEntry.getConnectedState()) {
+                    mPreferenceGroup.removePreference(wifiPreference);
+                    final WifiEntryPreference preference = new WifiEntryPreference(mContext, wifiEntry);
+                    preference.setKey(wifiEntry.getKey());
+                    preference.setOnPreferenceClickListener(this);
+                    mPreferenceGroup.addPreference(preference);
+                }
             }
         }
     }
