@@ -20,11 +20,14 @@ import android.content.Context;
 import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.wifi.repository.WifiHotspotRepository;
 import android.util.Log;
 
 public class WifiTetherAutoOffPreferenceController extends BasePreferenceController implements
@@ -34,9 +37,16 @@ public class WifiTetherAutoOffPreferenceController extends BasePreferenceControl
     private boolean mSettingsOn;
     private String TAG = "WifiTetherAutoOffPreferenceController";
     private SwitchPreference mPreference = null;
+    @VisibleForTesting
+    boolean mNeedShutdownSecondarySap;
 
     public WifiTetherAutoOffPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
+        WifiHotspotRepository wifiHotspotRepository = FeatureFactory.getFactory(context)
+                .getWifiFeatureProvider().getWifiHotspotRepository();
+        if (wifiHotspotRepository.isSpeedFeatureAvailable() && wifiHotspotRepository.isDualBand()) {
+            mNeedShutdownSecondarySap = true;
+        }
         mWifiManager = context.getSystemService(WifiManager.class);
     }
 
@@ -68,14 +78,15 @@ public class WifiTetherAutoOffPreferenceController extends BasePreferenceControl
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final boolean settingsOn = (Boolean) newValue;
-        SoftApConfiguration softApConfiguration = mWifiManager.getSoftApConfiguration();
-        SoftApConfiguration newSoftApConfiguration =
-                new SoftApConfiguration.Builder(softApConfiguration)
-                        .setAutoShutdownEnabled(settingsOn)
-                        .build();
+        boolean settingsOn = (Boolean) newValue;
+        SoftApConfiguration.Builder configBuilder =
+                new SoftApConfiguration.Builder(mWifiManager.getSoftApConfiguration());
+        configBuilder.setAutoShutdownEnabled(settingsOn);
+        if (mNeedShutdownSecondarySap) {
+            configBuilder.setBridgedModeOpportunisticShutdownEnabled(settingsOn);
+        }
         mSettingsOn = settingsOn;
-        return mWifiManager.setSoftApConfiguration(newSoftApConfiguration);
+        return mWifiManager.setSoftApConfiguration(configBuilder.build());
     }
 
     public boolean isEnabled() {

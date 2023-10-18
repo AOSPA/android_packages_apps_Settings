@@ -94,7 +94,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     WifiTetherAutoOffPreferenceController mWifiTetherAutoOffPreferenceController;
 
     private WifiManager mWifiManager;
-    private boolean mUnavailable;
+    @VisibleForTesting
+    boolean mUnavailable;
     private WifiRestriction mWifiRestriction;
     private boolean wasApBandPrefUpdated = false;
 
@@ -144,6 +145,9 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
 
         setIfOnlyAvailableForAdmins(true);
         mUnavailable = isUiRestricted() || !mWifiRestriction.isHotspotAvailable(getContext());
+        if (mUnavailable) {
+            return;
+        }
 
         mWifiTetherViewModel = FeatureFactory.getFactory(getContext()).getWifiFeatureProvider()
                 .getWifiTetherViewModel(this);
@@ -402,7 +406,16 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
 
         @Override
         protected boolean isPageSearchEnabled(Context context) {
-            if (context == null || !WifiUtils.canShowWifiHotspot(context)) return false;
+            if (context == null) {
+                return false;
+            }
+            UserManager userManager = context.getSystemService(UserManager.class);
+            if (userManager == null || !userManager.isAdminUser()) {
+                return false;
+            }
+            if (!WifiUtils.canShowWifiHotspot(context)) {
+                return false;
+            }
             return !FeatureFlagUtils.isEnabled(context, FeatureFlags.TETHER_ALL_IN_ONE);
         }
 
