@@ -48,13 +48,20 @@
             android:order="3"
             android:title="@string/firmware_version"
             android:summary="@string/summary_placeholder"
-            android:fragment="com.android.settings.deviceinfo.firmwareversion.FirmwareVersionSettings"
             settings:controller="com.android.settings.deviceinfo.firmwareversion.FirmwareVersionPreferenceController"/>
+
+        <!-- Security patch -->
+        <Preference
+            android:order="4"
+            android:key="security_key"
+            android:title="@string/security_patch"
+            settings:enableCopying="true"
+            settings:controller="com.android.settings.deviceinfo.firmwareversion.SecurityPatchLevelPreferenceController"/>
 
         <!-- Paranoid Android version -->
         <Preference
         android:key="aospa_version"
-            android:order="4"
+            android:order="5"
             android:title="@string/aospa_version"
             android:summary="@string/summary_placeholder"
             settings:controller="com.android.settings.deviceinfo.firmwareversion.ParanoidAndroidVersionPreferenceController"/>
@@ -62,7 +69,7 @@
         <!-- Account name -->
         <Preference
         android:key="branded_account"
-            android:order="5"
+            android:order="6"
             android:title="@string/my_device_info_account_preference_title"
             android:summary="@string/summary_placeholder"
             settings:enableCopying="true"
@@ -107,6 +114,26 @@
             settings:isPreferenceVisible="@bool/config_show_sim_info"
             settings:enableCopying="true"
             settings:controller="com.android.settings.deviceinfo.simstatus.SimStatusPreferenceController"/>
+
+        <!-- Baseband -->
+        <Preference
+            android:key="base_band"
+            android:order="19"
+            android:title="@string/baseband_version"
+            android:summary="@string/summary_placeholder"
+            android:selectable="false"
+            settings:enableCopying="true"
+            settings:controller="com.android.settings.deviceinfo.firmwareversion.BasebandVersionPreferenceController"/>
+
+        <!-- Kernel -->
+        <Preference
+            android:key="kernel_version"
+            android:order="20"
+            android:title="@string/kernel_version"
+            android:summary="@string/summary_placeholder"
+            android:selectable="false"
+            settings:enableCopying="true"
+            settings:controller="com.android.settings.deviceinfo.firmwareversion.KernelVersionPreferenceController"/>
 
     </PreferenceCategory>
 
