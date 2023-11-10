@@ -24,9 +24,7 @@ import com.android.settings.core.BasePreferenceController;
 
 public class ParanoidAndroidVersionPreferenceController extends BasePreferenceController {
 
-    private static final String AOSPA_BUILD_VARIANT_PROP = "ro.aospa.build.variant";
-    private static final String AOSPA_VERSION_MAJOR_PROP = "ro.aospa.version.major";
-    private static final String AOSPA_VERSION_MINOR_PROP = "ro.aospa.version.minor";
+    private static final String AOSPA_VERSION_PROP = "ro.aospa.version";
 
     private final Context mContext;
 
@@ -42,19 +40,7 @@ public class ParanoidAndroidVersionPreferenceController extends BasePreferenceCo
 
     @Override
     public CharSequence getSummary() {
-        String aospaVersionMajor = SystemProperties.get(AOSPA_VERSION_MAJOR_PROP,
+        return SystemProperties.get(AOSPA_VERSION_PROP,
                 mContext.getResources().getString(R.string.device_info_default));
-        String aospaVersionMinor = SystemProperties.get(AOSPA_VERSION_MINOR_PROP,
-                mContext.getResources().getString(R.string.device_info_default));
-        String aospaBuildVariant = SystemProperties.get(AOSPA_BUILD_VARIANT_PROP,
-                mContext.getResources().getString(R.string.device_info_default));
-
-        if (aospaBuildVariant.equals("Release")) {
-            return aospaVersionMajor + " " + aospaVersionMinor;
-        } else if (aospaBuildVariant.equals("Unofficial")) {
-           return aospaVersionMajor + " " + aospaBuildVariant;
-        } else {
-           return aospaVersionMajor + " " + aospaBuildVariant + " " + aospaVersionMinor;
-        }
     }
 }
