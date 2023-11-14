@@ -193,7 +193,7 @@ public class UserPLMNListActivity extends PreferenceActivity
         intentFilter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
         intentFilter.addAction(ACTION_WRITE_EF_BROADCAST);
         intentFilter.addAction(ACTION_READ_EF_BROADCAST);
-        registerReceiver(mReceiver, intentFilter);
+        registerReceiver(mReceiver, intentFilter, Context.RECEIVER_EXPORTED);
     }
 
     @Override
