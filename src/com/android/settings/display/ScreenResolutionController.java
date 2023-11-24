@@ -89,7 +89,7 @@ public class ScreenResolutionController extends BasePreferenceController {
     @Override
     public int getAvailabilityStatus() {
         return !(mContext.getResources().getBoolean(
-                R.bool.config_show_custom_screen_resolution_switch)) &&
+                R.bool.config_show_screen_resolution_switch)) &&
                 (checkSupportedResolutions()) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
