@@ -56,19 +56,21 @@ class DisplayCutoutForceFullscreenSettings: Fragment(R.layout.cutout_force_fulls
     private lateinit var adapter: AppListAdapter
     private lateinit var packageList: List<PackageInfo>
     private lateinit var cutoutForceFullscreenSettings: CutoutFullscreenController
-    private lateinit var appBarLayout: AppBarLayout
-
+    
     private var searchText = ""
     private var category: Int = CATEGORY_USER_ONLY
     private var customFilter: ((PackageInfo) -> Boolean)? = null
     private var comparator: ((PackageInfo, PackageInfo) -> Int)? = null
+
+    private val appBarLayout: AppBarLayout by lazy{
+        requireActivity().findViewById(R.id.app_bar)
+    }
 
     @SuppressLint("QueryPermissionsNeeded")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         requireActivity().setTitle(getTitle())
-        appBarLayout = requireActivity().findViewById(R.id.app_bar)
         activityManager = requireContext().getSystemService(ActivityManager::class.java)
         packageManager = requireContext().packageManager
         packageList = packageManager.getInstalledPackages(0)
