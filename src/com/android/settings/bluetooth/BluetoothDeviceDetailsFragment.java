@@ -337,6 +337,8 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                   lifecycle));
           controllers.add(new BluetoothDetailsCompanionAppsController(context, this,
                   mCachedDevice, lifecycle));
+            controllers.add(new BluetoothDetailsAudioDeviceTypeController(context, this, mManager,
+                    mCachedDevice, lifecycle));
           controllers.add(new BluetoothDetailsSpatialAudioController(context, this, mCachedDevice,
                   lifecycle));
           controllers.add(new BluetoothDetailsProfilesController(context, this, mManager,
@@ -351,6 +353,8 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                   lifecycle));
           controllers.add(new BluetoothDetailsHearingDeviceControlsController(context, this,
                   mCachedDevice, lifecycle));
+            controllers.add(new BluetoothDetailsDataSyncController(context, this,
+                    mCachedDevice, lifecycle));
           if (mBAPropertyChecked == false) {
               int advAudioMask = SystemProperties.getInt(BLUETOOTH_ADV_AUDIO_MASK_PROP, 0);
               mBAEnabled = (((advAudioMask & BA_MASK) == BA_MASK) &&

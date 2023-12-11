@@ -23,6 +23,7 @@
 
 package com.android.settings.network.telephony.gsm;
 
+import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 import static androidx.lifecycle.Lifecycle.Event.ON_START;
 import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 
@@ -44,10 +45,11 @@ import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
+import androidx.lifecycle.LifecycleEventObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
@@ -82,14 +84,14 @@ import com.qti.extphone.Token;
  * Preference controller for "Auto Select Network"
  */
 public class AutoSelectPreferenceController extends TelephonyTogglePreferenceController
-        implements LifecycleObserver,
+        implements LifecycleEventObserver,
         Enhanced4gBasePreferenceController.On4gLteUpdateListener,
         SubscriptionsChangeListener.SubscriptionsChangeListenerClient,
         SelectNetworkPreferenceController.OnNetworkScanTypeListener {
 
     private static final long MINIMUM_DIALOG_TIME_MILLIS = TimeUnit.SECONDS.toMillis(1);
     private static final String LOG_TAG = "AutoSelectPreferenceController";
-    private static final String INTERNAL_LOG_TAG_INIT = "Init";
+    private static final String INTERNAL_LOG_TAG_ONRESUME = "OnResume";
     private static final String INTERNAL_LOG_TAG_AFTERSET = "AfterSet";
 
     private final Handler mUiHandler;
@@ -149,19 +151,42 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
         }
     }
 
-    @OnLifecycleEvent(ON_START)
-    public void onStart() {
-        mAllowedNetworkTypesListener.register(mContext, mSubId);
-        mSubscriptionsListener.start();
-        mTelephonyManager.registerTelephonyCallback(new HandlerExecutor(mUiHandler),
-                mTelephonyCallbackListener);
-    }
-
-    @OnLifecycleEvent(ON_STOP)
-    public void onStop() {
-        mAllowedNetworkTypesListener.unregister(mContext, mSubId);
-        mSubscriptionsListener.stop();
-        mTelephonyManager.unregisterTelephonyCallback(mTelephonyCallbackListener);
+    /**
+     * Implementation of LifecycleEventObserver.
+     */
+    @SuppressWarnings("FutureReturnValueIgnored")
+    public void onStateChanged(@NonNull LifecycleOwner lifecycleOwner,
+            @NonNull Lifecycle.Event event) {
+        switch (event) {
+            case ON_START:
+                mAllowedNetworkTypesListener.register(mContext, mSubId);
+                mSubscriptionsListener.start();
+                mTelephonyManager.registerTelephonyCallback(new HandlerExecutor(mUiHandler),
+                        mTelephonyCallbackListener);
+                break;
+            case ON_RESUME:
+                ThreadUtils.postOnBackgroundThread(() -> {
+                    queryNetworkSelectionMode(INTERNAL_LOG_TAG_ONRESUME);
+                    //Update UI in UI thread
+                    mUiHandler.post(() -> {
+                        if (mSwitchPreference != null) {
+                            mRecursiveUpdate.getAndIncrement();
+                            mSwitchPreference.setChecked(isChecked());
+                            mRecursiveUpdate.decrementAndGet();
+                            updateListenerValue();
+                        }
+                    });
+                });
+                break;
+            case ON_STOP:
+                mAllowedNetworkTypesListener.unregister(mContext, mSubId);
+                mSubscriptionsListener.stop();
+                mTelephonyManager.unregisterTelephonyCallback(mTelephonyCallbackListener);
+                break;
+            default:
+                // Do nothing
+                break;
+        }
     }
 
     @Override
@@ -327,20 +352,6 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
                 updateUiAutoSelectValue(status);
             }
         };
-
-        ThreadUtils.postOnBackgroundThread(() -> {
-            queryNetworkSelectionMode(INTERNAL_LOG_TAG_INIT);
-
-            //Update UI in UI thread
-            mUiHandler.post(() -> {
-                if (mSwitchPreference != null) {
-                    mRecursiveUpdate.getAndIncrement();
-                    mSwitchPreference.setChecked(isChecked());
-                    mRecursiveUpdate.decrementAndGet();
-                    updateListenerValue();
-                }
-            });
-        });
         return this;
     }
 
