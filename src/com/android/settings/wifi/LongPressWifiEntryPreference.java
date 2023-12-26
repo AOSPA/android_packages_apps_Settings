@@ -16,6 +16,7 @@
 package com.android.settings.wifi;
 
 import android.content.Context;
+import android.os.UserManager;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
