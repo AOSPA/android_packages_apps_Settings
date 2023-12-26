@@ -509,20 +509,13 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
 
     private void handleReceiveStateChanged(int sourceId,
             BluetoothLeBroadcastReceiveState recvState) {
-        boolean isConnected = true;
         int syncState = recvState.getPaSyncState();
         int encryptState = recvState.getBigEncryptionState();
         Log.d(TAG, "syncState: " + syncState + ", encryptState: " + encryptState);
-        if (syncState == PA_SYNC_STATE_INVALID ||
-            encryptState == BIG_ENCRYPTION_STATE_INVALID) {
-            Log.d(TAG, "ingore invalid state");
-            return;
-        }
         if (syncState == PA_SYNC_STATE_FAILED_TO_SYNCHRONIZE ||
             encryptState == BIG_ENCRYPTION_STATE_BAD_CODE) {
-            isConnected = false;
+            updateListCategoryFromBroadcastReceiveState(recvState, false);
         }
-        updateListCategoryFromBroadcastReceiveState(recvState, isConnected);
     }
 
     private void addConnectedSourcePreference() {
