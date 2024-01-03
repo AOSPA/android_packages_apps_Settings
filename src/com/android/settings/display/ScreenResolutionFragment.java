@@ -313,28 +313,24 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
         private int mDefaultDensity;
         private int mCurrentIndex;
         private AtomicInteger mPreviousWidth = new AtomicInteger(-1);
+        private final AtomicInteger mOldDensity = new AtomicInteger(-1);
 
         DisplayObserver(Context context) {
             mContext = context;
         }
 
         public void startObserve() {
+            // Here, we record the initial screen density and width for future use
             if (mContext == null) {
                 return;
             }
-
             final DisplayDensityUtils density = new DisplayDensityUtils(mContext);
-            final int currentIndex = density.getCurrentIndexForDefaultDisplay();
-            final int defaultDensity = density.getDefaultDensityForDefaultDisplay();
+            mOldDensity.set(density.getDefaultDisplayDensityValues()[density.getCurrentIndexForDefaultDisplay()]);
+            mPreviousWidth.set(getCurrentWidth());
 
-            if (density.getDefaultDisplayDensityValues()[mCurrentIndex]
-                    == density.getDefaultDensityForDefaultDisplay()) {
-                return;
-            }
-
-            mDefaultDensity = defaultDensity;
-            mCurrentIndex = currentIndex;
+            // Register itself as a display listener
             final DisplayManager dm = mContext.getSystemService(DisplayManager.class);
+            assert dm != null;
             dm.registerDisplayListener(this, null);
         }
 
@@ -369,18 +365,36 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
 
         private void restoreDensity() {
             final DisplayDensityUtils density = new DisplayDensityUtils(mContext);
-            /* If current density is the same as a default density of other resolutions,
-             * then mCurrentIndex may be out of boundary.
-             */
-            if (density.getDefaultDisplayDensityValues().length <= mCurrentIndex) {
-                mCurrentIndex = density.getCurrentIndexForDefaultDisplay();
-            }
-            if (density.getDefaultDisplayDensityValues()[mCurrentIndex]
-                    != density.getDefaultDensityForDefaultDisplay()) {
-                density.setForcedDisplayDensity(mCurrentIndex);
-            }
 
-            mDefaultDensity = density.getDefaultDensityForDefaultDisplay();
+            // Get available density values and current resolution width
+            int[] densityValues = density.getDefaultDisplayDensityValues();
+            int newWidth = getCurrentWidth();
+
+            // Scale the DPI based on the following formula:
+            //   px = C1 * (dpi / C2) ==> px_new / px_old = dpi_new / dpi_old
+            // So we have:
+            //   dpi_new = dpi_old * px_new / px_old
+            int newDensity = (int) ((double) mOldDensity.get() * newWidth / mPreviousWidth.get());
+
+            // Find the closet dpi available in density values
+            int minDistance = Math.abs(densityValues[0] - newDensity);
+            int idx = 0;
+            for (int i = 1; i < densityValues.length; i++) {
+                int dist = Math.abs(densityValues[i] - newDensity);
+                if (dist < minDistance) {
+                    minDistance = dist;
+                    idx = i;
+                }
+            }
+            Log.d(TAG, "Current width " + newWidth + ", old width " + mPreviousWidth.get());
+            Log.d(TAG,
+                    "Original dpi: " + mOldDensity + ", would like to change to " + newDensity
+                            + " actually set to " + densityValues[idx]);
+            density.setForcedDisplayDensity(idx);
+
+            // Update values
+            mPreviousWidth.set(newWidth);
+            mOldDensity.set(densityValues[idx]);
         }
 
         private boolean isDensityChanged() {
