@@ -213,6 +213,7 @@ public class Settings extends SettingsActivity {
     public static class NightDisplaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class NightDisplaySuggestionActivity extends NightDisplaySettingsActivity { /* empty */ }
     public static class SmartAutoRotateSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class RefreshRateSettingsActivity extends SettingsActivity { /* empty */ }
     public static class MyDeviceInfoActivity extends SettingsActivity { /* empty */ }
     public static class FirmwareVersionActivity extends CatalystSettingsActivity {
         public FirmwareVersionActivity() {
