@@ -128,6 +128,7 @@
         android:key="offscreen_gesture"
         android:title="@string/offscreen_gesture_title"
         android:summary="@string/offscreen_gesture_summary"
-        android:fragment="com.android.settings.gestures.OffscreenGestureSettings" />
+        android:fragment="com.android.settings.gestures.OffscreenGestureSettings"
+        settings:controller="com.android.settings.gestures.OffscreenGestureSettingsController" />
 
 </PreferenceScreen>
