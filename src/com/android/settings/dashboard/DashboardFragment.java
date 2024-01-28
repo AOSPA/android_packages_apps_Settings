@@ -21,6 +21,9 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.provider.Settings;
+import androidx.preference.Preference;
 import android.preference.PreferenceManager.OnActivityResultListener;
 import android.text.TextUtils;
 import android.util.ArrayMap;
@@ -75,6 +78,14 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     public static final String CATEGORY = "category";
     private static final String TAG = "DashboardFragment";
     private static final long TIMEOUT_MILLIS = 50L;
+    private static final String AOD_SCHEDULE_KEY = "always_on_display_schedule";
+
+    static final int MODE_DISABLED = 0;
+    static final int MODE_NIGHT = 1;
+    static final int MODE_TIME = 2;
+    static final int MODE_MIXED_SUNSET = 3;
+    static final int MODE_MIXED_SUNRISE = 4;
+    Preference mAODPref;
 
     @VisibleForTesting
     final ArrayMap<String, List<DynamicDataObserver>> mDashboardTilePrefKeys = new ArrayMap<>();
@@ -162,6 +173,8 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        mAODPref = findPreference(AOD_SCHEDULE_KEY);
+        updateAlwaysOnSummary();
         // Set ComparisonCallback so we get better animation when list changes.
         getPreferenceManager().setPreferenceComparisonCallback(
                 new PreferenceManager.SimplePreferenceComparisonCallback());
@@ -240,6 +253,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     public void onResume() {
         super.onResume();
         updatePreferenceStates();
+        updateAlwaysOnSummary();
     }
 
     @Override
@@ -652,6 +666,30 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             latch.await(TIMEOUT_MILLIS, TimeUnit.MILLISECONDS);
         } catch (InterruptedException e) {
             // Do nothing
+        }
+    }
+
+    private void updateAlwaysOnSummary() {
+        if (mAODPref == null) return;
+        int mode = Settings.Secure.getIntForUser(getActivity().getContentResolver(),
+                Settings.Secure.DOZE_ALWAYS_ON_AUTO_MODE, 0, UserHandle.USER_CURRENT);
+        switch (mode) {
+            default:
+            case MODE_DISABLED:
+                mAODPref.setSummary(R.string.disabled);
+                break;
+            case MODE_NIGHT:
+                mAODPref.setSummary(R.string.night_display_auto_mode_twilight);
+                break;
+            case MODE_TIME:
+                mAODPref.setSummary(R.string.night_display_auto_mode_custom);
+                break;
+            case MODE_MIXED_SUNSET:
+                mAODPref.setSummary(R.string.always_on_display_schedule_mixed_sunset);
+                break;
+            case MODE_MIXED_SUNRISE:
+                mAODPref.setSummary(R.string.always_on_display_schedule_mixed_sunrise);
+                break;
         }
     }
 }
