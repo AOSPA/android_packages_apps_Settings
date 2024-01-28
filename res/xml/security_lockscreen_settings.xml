@@ -95,6 +95,11 @@
             settings:controller="com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController"
             settings:userRestriction="no_ambient_display" />
 
+        <Preference
+            android:key="always_on_display_schedule"
+            android:title="@string/always_on_display_schedule_title"
+            android:fragment="com.android.settings.dashboard.AODSchedule" />
+
         <SwitchPreference
             android:key="doze_on_charge"
             android:title="@string/doze_on_charge_title"
