@@ -137,7 +137,7 @@ public class PulseAmbientLightSettings extends SettingsPreferenceFragment
 
             boolean enabled = Settings.System.getIntForUser(
                     mContext.getContentResolver(),
-                    Settings.System.AMBIENT_NOTIFICATION_LIGHT, 1, UserHandle.USER_CURRENT) != 0;
+                    Settings.System.AMBIENT_NOTIFICATION_LIGHT, 0, UserHandle.USER_CURRENT) != 0;
             mSwitchBar.setChecked(enabled);
             PulseAmbientLightSettings.this.updateDependencies(enabled);
         }
