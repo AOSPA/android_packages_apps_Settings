@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="@string/something_play_integrity_dashboard_title">
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="play_illustration"
+        settings:lottie_rawRes="@raw/play_illustration"
+        android:order="-1001" />
+
+    <PreferenceCategory
+        android:key="play_update_category"
+        android:title="@string/play_update_title">
+
+        <Preference
+            android:icon="@drawable/ic_update"
+            android:key="play_integrity_update"
+            android:title="@string/play_integrity_update_title"
+            android:summary="@string/play_integrity_update_summary" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="play_fingeprint_category"
+        android:title="@string/play_fingerprint">
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

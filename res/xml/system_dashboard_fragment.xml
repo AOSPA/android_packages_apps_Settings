@@ -93,6 +93,13 @@
     </Preference>
 
     <Preference
+        android:key="pintegrity_category"
+        android:title="@string/something_play_integrity_dashboard_title"
+        android:icon="@drawable/ic_playintegrity"
+        android:fragment="com.android.settings.dashboard.PlayIntegrity"
+        android:order="-57" />
+
+    <Preference
         android:key="reset_dashboard"
         android:title="@string/reset_dashboard_title"
         android:icon="@drawable/ic_restore"
