@@ -17,7 +17,6 @@
 package com.android.settings.notification
 
 import android.content.Context
-import android.os.Vibrator
 import android.provider.Settings.Secure
 import com.android.settings.R
 import com.android.settings.flags.Flags
@@ -25,7 +24,6 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
-import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 
@@ -49,11 +47,7 @@ class SoundApiScreen : PreferencesApiScreen(
             sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
 
             preconditions(R.string.sound_vibration_precondition) {
-                if (context.isVibrationAvailable()) {
-                    Allowed
-                } else {
-                    HardwareUnsupported(R.string.sound_vibration_hardware_unsupported)
-                }
+                HardwareUnsupported(R.string.sound_vibration_hardware_unsupported)
             }
 
             get {
@@ -68,10 +62,6 @@ class SoundApiScreen : PreferencesApiScreen(
                 }
             }
         }
-    }
-
-    private fun Context.isVibrationAvailable(): Boolean {
-        return getSystemService(Vibrator::class.java)?.hasVibrator() ?: false
     }
 
     companion object {
