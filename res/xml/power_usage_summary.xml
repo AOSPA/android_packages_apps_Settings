@@ -64,6 +64,12 @@
         android:fragment="com.android.settings.lineage.health.ChargingControlSettings"
         settings:controller="com.android.settings.lineage.health.ChargingControlPreferenceController" />
 
+    <Preference
+        android:key="power_profile_summary"
+        android:title="@string/power_profile_screen_title"
+        android:fragment="com.android.settings.fuelguage.powerprofile.PowerProfileSettings"
+        settings:controller="com.android.settings.fuelguage.powerprofile.PowerProfileParentPreferenceController" />
+
     <com.android.settingslib.widget.FooterPreference
         android:key="power_usage_footer"
         android:title="@string/battery_footer_summary"
