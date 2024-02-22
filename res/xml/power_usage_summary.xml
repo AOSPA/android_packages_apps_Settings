@@ -44,6 +44,12 @@
         android:title="@string/summary_placeholder"
         settings:controller="com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController" />
 
+    <Preference
+        android:key="battery_info"
+        android:title="@string/battery_info"
+        android:fragment="com.android.settings.deviceinfo.batteryinfo.BatteryInfoFragment"
+        settings:keywords="@string/keywords_battery_info"/>
+
     <com.android.settingslib.widget.UntitledPreferenceCategory
         android:key="power_usage_summary_category">
         <Preference
