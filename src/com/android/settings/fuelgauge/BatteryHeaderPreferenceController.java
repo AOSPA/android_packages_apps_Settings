@@ -63,6 +63,7 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     private Lifecycle mLifecycle;
     private BatteryTip mBatteryTip;
     private final PowerManager mPowerManager;
+    private int mChargerCounter = 0;
 
     public BatteryHeaderPreferenceController(Context context, String key) {
         super(context, key);
@@ -148,6 +149,9 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
         mBatteryUsageProgressBarPref.setUsageSummary(
                 formatBatteryPercentageText(info.batteryLevel));
         mBatteryUsageProgressBarPref.setPercent(info.batteryLevel, BATTERY_MAX_LEVEL);
+        mBatteryUsageProgressBarPref.setTotalSummary(
+                formatBatteryChargeCounterText(mChargerCounter));
+
     }
 
     /**
@@ -165,9 +169,12 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
         final int batteryLevel = Utils.getBatteryLevel(batteryBroadcast);
         final boolean discharging =
                 batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) == 0;
+        mChargerCounter = batteryBroadcast.getIntExtra(BatteryManager.EXTRA_CHARGE_COUNTER, 0);
 
         mBatteryUsageProgressBarPref.setUsageSummary(formatBatteryPercentageText(batteryLevel));
         mBatteryUsageProgressBarPref.setPercent(batteryLevel, BATTERY_MAX_LEVEL);
+        mBatteryUsageProgressBarPref.setTotalSummary(
+                formatBatteryChargeCounterText(mChargerCounter));
     }
 
     /**
@@ -184,5 +191,13 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     private CharSequence formatBatteryPercentageText(int batteryLevel) {
         return TextUtils.expandTemplate(mContext.getText(R.string.battery_header_title_alternate),
                 NumberFormat.getIntegerInstance().format(batteryLevel));
+    }
+
+    private CharSequence formatBatteryChargeCounterText(int chargeCounter) {
+        int counter =
+                chargeCounter < 1000
+                        ? chargeCounter
+                        : Integer.parseInt(String.valueOf(chargeCounter).substring(0, 4));
+        return mContext.getString(R.string.battery_charge_counter_summary, counter);
     }
 }
