@@ -148,6 +148,7 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
         mBatteryUsageProgressBarPref.setUsageSummary(
                 formatBatteryPercentageText(info.batteryLevel));
         mBatteryUsageProgressBarPref.setPercent(info.batteryLevel, BATTERY_MAX_LEVEL);
+
     }
 
     /**
@@ -165,9 +166,17 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
         final int batteryLevel = Utils.getBatteryLevel(batteryBroadcast);
         final boolean discharging =
                 batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) == 0;
+        final int chargeCounterUah =
+                batteryBroadcast.getIntExtra(BatteryManager.EXTRA_CHARGE_COUNTER, -1);
 
         mBatteryUsageProgressBarPref.setUsageSummary(formatBatteryPercentageText(batteryLevel));
         mBatteryUsageProgressBarPref.setPercent(batteryLevel, BATTERY_MAX_LEVEL);
+
+        if (chargeCounterUah != -1) {
+            int chargeCounter = chargeCounterUah / 1_000;
+            mBatteryUsageProgressBarPref.setTotalSummary(
+                    formatBatteryChargeCounterText(chargeCounter));
+        }
     }
 
     /**
@@ -184,5 +193,9 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     private CharSequence formatBatteryPercentageText(int batteryLevel) {
         return TextUtils.expandTemplate(mContext.getText(R.string.battery_header_title_alternate),
                 NumberFormat.getIntegerInstance().format(batteryLevel));
+    }
+
+    private CharSequence formatBatteryChargeCounterText(int chargeCounter) {
+        return mContext.getString(R.string.battery_charge_counter_summary, chargeCounter);
     }
 }
