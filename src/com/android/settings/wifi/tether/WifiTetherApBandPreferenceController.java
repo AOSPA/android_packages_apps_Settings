@@ -60,8 +60,8 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
     private int mBandIndex;
     private final Context mContext;
     private SoftApCapability mSoftApCapability;
-    private Set<Integer> mCurrentBands;
-    private Map<Integer, Boolean> mAllowedBands;
+    private Set<Integer> mCurrentBands = new HashSet<>();
+    private Map<Integer, Boolean> mAllowedBands = new HashMap<>();
     private boolean mVerboseLoggingEnabled;
 
     // Dual Band (2G + 5G)
@@ -72,8 +72,6 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
         super(context, listener);
         mContext = context;
         mWifiManager.registerSoftApCallback(context.getMainExecutor(), this);
-        mCurrentBands = new HashSet<>();
-        mAllowedBands = new HashMap<>();
         mVerboseLoggingEnabled = mWifiManager.isVerboseLoggingEnabled();
         updatePreferenceEntries();
     }
