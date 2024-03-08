@@ -33,6 +33,10 @@
         android:title="@string/wifi_security_wpa2"/>
 
     <com.android.settingslib.widget.SelectorWithWidgetPreference
+        android:key="wifi_hotspot_security_enhanced_open"
+        android:title="@string/wifi_security_owe"/>
+
+    <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="wifi_hotspot_security_none"
         android:title="@string/wifi_security_none"/>
 

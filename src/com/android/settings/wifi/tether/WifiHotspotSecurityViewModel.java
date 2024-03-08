@@ -17,6 +17,8 @@
 package com.android.settings.wifi.tether;
 
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_OPEN;
+import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_OWE;
+import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA2_PSK;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_SAE;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_SAE_TRANSITION;
@@ -49,6 +51,7 @@ public class WifiHotspotSecurityViewModel extends AndroidViewModel {
     public static final String KEY_SECURITY_WPA2_WPA3 = "wifi_hotspot_security_wpa2_wpa3";
     public static final String KEY_SECURITY_WPA2 = "wifi_hotspot_security_wpa2";
     public static final String KEY_SECURITY_NONE = "wifi_hotspot_security_none";
+    public static final String KEY_SECURITY_WPA3_OWE = "wifi_hotspot_security_enhanced_open";
 
     protected Map<Integer, ViewItem> mViewItemMap = new HashMap<>();
     protected MutableLiveData<List<ViewItem>> mViewInfoListData;
@@ -64,6 +67,7 @@ public class WifiHotspotSecurityViewModel extends AndroidViewModel {
         mViewItemMap.put(SECURITY_TYPE_WPA3_SAE_TRANSITION, new ViewItem(KEY_SECURITY_WPA2_WPA3));
         mViewItemMap.put(SECURITY_TYPE_WPA2_PSK, new ViewItem(KEY_SECURITY_WPA2));
         mViewItemMap.put(SECURITY_TYPE_OPEN, new ViewItem(KEY_SECURITY_NONE));
+        mViewItemMap.put(SECURITY_TYPE_WPA3_OWE, new ViewItem(KEY_SECURITY_WPA3_OWE));
 
         mWifiHotspotRepository = FeatureFactory.getFeatureFactory().getWifiFeatureProvider()
                 .getWifiHotspotRepository();
@@ -80,18 +84,29 @@ public class WifiHotspotSecurityViewModel extends AndroidViewModel {
     protected void onSecurityTypeChanged(int securityType) {
         log("onSecurityTypeChanged(), securityType:" + securityType);
         for (Map.Entry<Integer, ViewItem> entry : mViewItemMap.entrySet()) {
-            entry.getValue().mIsChecked = entry.getKey().equals(securityType);
+            if (entry.getKey() == SECURITY_TYPE_WPA3_OWE &&
+                securityType == SECURITY_TYPE_WPA3_OWE_TRANSITION) {
+                entry.getValue().mIsChecked = true;
+            } else {
+                entry.getValue().mIsChecked = entry.getKey().equals(securityType);
+            }
         }
         updateViewItemListData();
     }
 
     protected void onSpeedTypeChanged(Integer speedType) {
         log("onSpeedTypeChanged(), speedType:" + speedType);
-        boolean isWpa3Only = (speedType == SPEED_6GHZ);
         for (Map.Entry<Integer, ViewItem> entry : mViewItemMap.entrySet()) {
-            if (entry.getKey() != SECURITY_TYPE_WPA3_SAE) {
-                entry.getValue().mIsEnabled = !isWpa3Only;
-            }
+            if (speedType == SPEED_6GHZ) {
+                if (entry.getKey() == SECURITY_TYPE_WPA3_SAE ||
+                    entry.getKey() == SECURITY_TYPE_WPA3_OWE) {
+                    entry.getValue().mIsEnabled = true;
+                } else {
+                    entry.getValue().mIsEnabled = false;
+                }
+             } else {
+                entry.getValue().mIsEnabled = true;
+             }
         }
         updateViewItemListData();
     }

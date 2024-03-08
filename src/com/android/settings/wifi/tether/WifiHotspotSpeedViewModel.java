@@ -16,6 +16,9 @@
 
 package com.android.settings.wifi.tether;
 
+import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_OWE;
+import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION;
+
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_2GHZ;
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_2GHZ_5GHZ;
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_5GHZ;
@@ -62,6 +65,8 @@ public class WifiHotspotSpeedViewModel extends AndroidViewModel {
     protected final Observer<Boolean> m6gAvailableObserver = a -> on6gAvailableChanged(a);
     protected final Observer<Boolean> m5gAvailableObserver = a -> on5gAvailableChanged(a);
     protected final Observer<Integer> mSpeedTypeObserver = st -> onSpeedTypeChanged(st);
+    protected final Observer<Integer> mSecurityTypeObserver = st -> onSecurityTypeChanged(st);
+    protected int mCurrentSecurityType;
 
     public WifiHotspotSpeedViewModel(@NotNull Application application) {
         super(application);
@@ -70,6 +75,8 @@ public class WifiHotspotSpeedViewModel extends AndroidViewModel {
         mWifiHotspotRepository.get6gAvailable().observeForever(m6gAvailableObserver);
         mWifiHotspotRepository.get5gAvailable().observeForever(m5gAvailableObserver);
         mWifiHotspotRepository.getSpeedType().observeForever(mSpeedTypeObserver);
+        mWifiHotspotRepository.getSecurityType().observeForever(mSecurityTypeObserver);
+        mCurrentSecurityType = mWifiHotspotRepository.getSecurityType().getValue();
         mWifiHotspotRepository.setAutoRefresh(true);
 
         // The visibility of the 6 GHz speed option will not change on a Pixel device.
@@ -81,6 +88,7 @@ public class WifiHotspotSpeedViewModel extends AndroidViewModel {
         mWifiHotspotRepository.get6gAvailable().removeObserver(m6gAvailableObserver);
         mWifiHotspotRepository.get5gAvailable().removeObserver(m5gAvailableObserver);
         mWifiHotspotRepository.getSpeedType().removeObserver(mSpeedTypeObserver);
+        mWifiHotspotRepository.getSecurityType().removeObserver(mSecurityTypeObserver);
     }
 
     protected void on6gAvailableChanged(Boolean available) {
@@ -98,8 +106,13 @@ public class WifiHotspotSpeedViewModel extends AndroidViewModel {
                 .getString(available ? RES_SPEED_5G_SUMMARY : RES_SUMMARY_UNAVAILABLE);
 
         boolean showDualBand = mWifiHotspotRepository.isDualBand() && available;
-        log("on5gAvailableChanged(), showDualBand:" + showDualBand);
-        mSpeedInfo2g5g.mIsVisible = showDualBand;
+        if (mCurrentSecurityType == SECURITY_TYPE_WPA3_OWE ||
+            mCurrentSecurityType == SECURITY_TYPE_WPA3_OWE_TRANSITION) {
+            mSpeedInfo2g5g.mIsVisible = false;
+        } else {
+            log("on5gAvailableChanged(), showDualBand:" + showDualBand);
+            mSpeedInfo2g5g.mIsVisible = showDualBand;
+        }
         updateSpeedInfoMapData();
     }
 
@@ -111,6 +124,19 @@ public class WifiHotspotSpeedViewModel extends AndroidViewModel {
         mSpeedInfo6g.mIsChecked = speedType.equals(SPEED_6GHZ);
         updateSpeedInfoMapData();
     }
+
+   protected void onSecurityTypeChanged(int securityType) {
+       mCurrentSecurityType = securityType;
+       log("onSecurityTypeChanged(), securityType:" + securityType);
+       if (securityType == SECURITY_TYPE_WPA3_OWE ||
+           securityType == SECURITY_TYPE_WPA3_OWE_TRANSITION) {
+           mSpeedInfo2g5g.mIsVisible = false;
+           if (mSpeedInfo2g5g.mIsChecked) {
+               mSpeedInfo2g.mIsChecked = true;
+           }
+       }
+       updateSpeedInfoMapData();
+   }
 
     /**
      * Sets SpeedType
