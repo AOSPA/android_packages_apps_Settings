@@ -150,6 +150,8 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     private static Client sClient;
     private static ExtTelephonyManager sExtTelephonyManager;
     private static SubscriptionManager sSubscriptionManager;
+    private static boolean sIsMsimCiwlanSupported = false;
+    private static int sInstanceCounter = 0;
     private static final ServiceCallback mExtTelServiceCallback = new ServiceCallback() {
         @Override
         public void onConnected() {
@@ -158,6 +160,8 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
             int[] events = new int[] {EVENT_ON_CIWLAN_CONFIG_CHANGE};
             sClient = sExtTelephonyManager.registerCallbackWithEvents(sPackageName,
                     mExtPhoneCallbackListener, events);
+            sIsMsimCiwlanSupported = sExtTelephonyManager.isFeatureSupported(
+                    ExtTelephonyManager.FEATURE_CIWLAN_MODE_PREFERENCE);
             Log.d(LOG_TAG, "Client = " + sClient);
             getCiwlanConfig();
         }
@@ -283,8 +287,8 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     }
 
     static boolean isMsimCiwlanSupported() {
-        return sExtTelephonyManager.isFeatureSupported(
-                ExtTelephonyManager.FEATURE_CIWLAN_MODE_PREFERENCE);
+        Log.i(LOG_TAG, "isMsimCiwlanSupported = " + sIsMsimCiwlanSupported);
+        return sIsMsimCiwlanSupported;
     }
 
     static boolean isRoaming(int subId) {
@@ -568,6 +572,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         sPackageName = this.getClass().getPackage().toString();
         sExtTelephonyManager = ExtTelephonyManager.getInstance(context);
         sExtTelephonyManager.connectService(mExtTelServiceCallback);
+        sInstanceCounter++;
         sSubscriptionManager = context.getSystemService(SubscriptionManager.class);
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mTelephonyManager = context.getSystemService(TelephonyManager.class)
@@ -622,7 +627,13 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
     @Override
     public void onDestroy() {
-        if (sExtTelServiceConnected) {
+        Log.i(LOG_TAG, "onDestroy: sExtTelServiceConnected = " + sExtTelServiceConnected
+                + " , sInstanceCounter = " + sInstanceCounter);
+        if (sInstanceCounter > 0) {
+            sInstanceCounter--;
+        }
+        if ((sInstanceCounter == 0) && (sExtTelephonyManager != null) && sExtTelServiceConnected) {
+            Log.i(LOG_TAG, "onDestroy");
             sExtTelephonyManager.disconnectService(mExtTelServiceCallback);
             sExtTelephonyManager = null;
         }

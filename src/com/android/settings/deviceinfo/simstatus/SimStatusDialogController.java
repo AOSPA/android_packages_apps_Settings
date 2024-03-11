@@ -61,8 +61,15 @@ import androidx.lifecycle.OnLifecycleEvent;
 import com.android.settings.R;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.telephony.DomesticRoamUtils;
+import com.android.settingslib.mobile.MobileMappings;
+import com.android.settingslib.mobile.MobileMappings.Config;
+import com.android.settingslib.SignalIcon.MobileIconGroup;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+
+import static com.android.settings.network.MobileIconGroupExtKt.getSummaryForSub;
+import static com.android.settingslib.mobile.MobileMappings.getIconKey;
+import static com.android.settingslib.mobile.MobileMappings.mapIconSets;
 
 import java.util.List;
 
@@ -565,24 +572,47 @@ public class SimStatusDialogController implements LifecycleObserver {
             dataNetworkTypeName = "NR NSA";
         }
 
-        boolean show4GForLTE = false;
-        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
-        if (carrierConfig != null) {
-            show4GForLTE = carrierConfig.getBoolean(
-                    CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL);
-        }
-
-        if (show4GForLTE) {
-            if ("LTE".equals(dataNetworkTypeName)) {
-                dataNetworkTypeName = "4G";
+        boolean isLteVoice = (TelephonyManager.NETWORK_TYPE_LTE == actualVoiceNetworkType);
+        boolean isLteData = (TelephonyManager.NETWORK_TYPE_LTE == actualDataNetworkType);
+        if (isLteVoice || isLteData) {
+            Config mappingConfig = getMappingConfig(mContext);
+            if (mTelephonyDisplayInfo == null) {
+                boolean isUsingCA = mTelephonyManager.getServiceState().isUsingCarrierAggregation();
+                mTelephonyDisplayInfo = new TelephonyDisplayInfo(TelephonyManager.NETWORK_TYPE_LTE,
+                        isUsingCA ? TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_LTE_CA
+                                : TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NONE);
             }
-            if ("LTE".equals(voiceNetworkTypeName)) {
-                voiceNetworkTypeName = "4G";
+            String mappedTypeName = getMappingNetworkType(mContext, mappingConfig,
+                    mTelephonyDisplayInfo, subId);
+            if (!mappedTypeName.isEmpty()) {
+                voiceNetworkTypeName = isLteVoice ? mappedTypeName : voiceNetworkTypeName;
+                dataNetworkTypeName = isLteData ? mappedTypeName : dataNetworkTypeName;
             }
         }
 
         mDialog.setText(CELL_VOICE_NETWORK_TYPE_VALUE_ID, voiceNetworkTypeName);
         mDialog.setText(CELL_DATA_NETWORK_TYPE_VALUE_ID, dataNetworkTypeName);
+    }
+
+    /**
+     * Gets config for carrier customization.
+     */
+    private Config getMappingConfig(Context context) {
+        return MobileMappings.Config.readConfig(context);
+    }
+
+    /**
+     * Gets current network type of Carrier Cellular.
+     */
+    private String getMappingNetworkType(Context context, Config config,
+                                 TelephonyDisplayInfo telephonyDisplayInfo, int subId) {
+        String iconKey = getIconKey(telephonyDisplayInfo);
+        MobileIconGroup iconGroup = mapIconSets(config).get(iconKey);
+        if (iconGroup == null) {
+            Log.d(TAG, "Can not get the network's icon and description.");
+            return null;
+        }
+        return getSummaryForSub(iconGroup, context, subId);
     }
 
     private void updateRoamingStatus(ServiceState serviceState) {
@@ -792,8 +822,6 @@ public class SimStatusDialogController implements LifecycleObserver {
                 return "TD_SCDMA";
             case TelephonyManager.NETWORK_TYPE_IWLAN:
                 return "IWLAN";
-//          case TelephonyManager.NETWORK_TYPE_LTE_CA:
-//              return "LTE_CA";
             case TelephonyManager.NETWORK_TYPE_NR:
                 return "NR SA";
             default:
