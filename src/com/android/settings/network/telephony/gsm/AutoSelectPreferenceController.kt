@@ -140,13 +140,22 @@ class AutoSelectPreferenceController @JvmOverloads constructor(
 
     private suspend fun getDisallowedSummary(serviceState: ServiceState): String =
         withContext(Dispatchers.Default) {
+            val phoneType = getPhoneType()
             if (!serviceState.roaming && onlyAutoSelectInHome()) {
                 mContext.getString(
                     R.string.manual_mode_disallowed_summary,
                     telephonyManager.simOperatorName
                 )
+            } else if (phoneType == TelephonyManager.PHONE_TYPE_CDMA) {
+                mContext.getString(
+                    R.string.cdma_manual_mode_disallowed_summary
+                )
             } else ""
         }
+
+    private fun getPhoneType(): Int {
+        return telephonyManager.currentPhoneType
+    }
 
     private fun onlyAutoSelectInHome(): Boolean =
         getConfigForSubId(subId)
