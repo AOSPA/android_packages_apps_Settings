@@ -518,10 +518,10 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                         .init(mSubId)
                         .addListener(openNetworkSelectPagePreferenceController);
 
-        // final SelectNetworkPreferenceController selectNetworkPreferenceController =
-        //         use(SelectNetworkPreferenceController.class)
-        //                 .init(mSubId)
-        //                 .addListener(autoSelectPreferenceController);
+        final SelectNetworkPreferenceController selectNetworkPreferenceController =
+                use(SelectNetworkPreferenceController.class)
+                        .init(mSubId)
+                        .addListener(autoSelectPreferenceController);
 
         use(NetworkPreferenceCategoryController.class).init(mSubId)
                 .setChildren(Arrays.asList(autoSelectPreferenceController));

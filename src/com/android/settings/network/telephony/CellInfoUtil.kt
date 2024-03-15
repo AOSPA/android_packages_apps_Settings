@@ -14,10 +14,19 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center are provided under the following license:
+ *
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.network.telephony
 
+import android.content.Context
 import android.telephony.CellIdentity
 import android.telephony.CellIdentityGsm
+import android.telephony.CellIdentityNr;
 import android.telephony.CellInfo
 import android.telephony.CellInfoGsm
 import android.text.BidiFormatter
@@ -29,6 +38,8 @@ import com.android.internal.telephony.OperatorInfo
  * TODO: Modify [CellInfo] for simplify those functions
  */
 object CellInfoUtil {
+
+    var context: Context? = null
 
     /**
      * Returns the title of the network obtained in the manual search.
@@ -106,8 +117,45 @@ object CellInfoUtil {
      */
     @JvmStatic
     fun CellIdentity.getOperatorNumeric(): String? {
+        if (this is CellIdentityNr) {
+            if (MobileNetworkUtils.isCagSnpnEnabled(context)) {
+                if (snpnInfo != null) {
+                    return snpnInfo.operatorNumeric
+                }
+            }
+        }
         val mcc = mccString
         val mnc = mncString
         return if (mcc == null || mnc == null) null else mcc + mnc
+    }
+
+    /**
+     * Returns the network info obtained in the manual search.
+     *
+     * @param cellId contains the identity of the network.
+     * @return SNPN network Id if not null/empty, otherwise CAG name if not null/empty,
+     * else CAG Id.
+     */
+    fun getNetworkInfo(cellId: CellIdentityNr?): String {
+        var info = ""
+        if (cellId != null) {
+            if (cellId.snpnInfo != null) {
+                info += "SNPN: "
+                for (id in cellId.snpnInfo.nid) {
+                    info += String.format("%02X", id)
+                }
+            } else if (cellId.cagInfo != null) {
+                info += if (cellId.cagInfo.cagOnlyAccess == false) {
+                    if (cellId.cagInfo.cagName != null && !cellId.cagInfo.cagName.isEmpty()) {
+                        "CAG: " + cellId.cagInfo.cagName
+                    } else {
+                        "CAG: " + cellId.cagInfo.cagId
+                    }
+                } else {
+                    "CAG Only"
+                }
+            }
+        }
+        return info
     }
 }

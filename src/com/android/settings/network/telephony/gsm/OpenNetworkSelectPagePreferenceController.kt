@@ -14,6 +14,13 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center are provided under the following license:
+ *
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.network.telephony.gsm
 
 import android.content.Context
@@ -35,6 +42,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
+import com.qti.extphone.ExtTelephonyManager
+
 /**
  * Preference controller for "Open network select"
  */
@@ -49,12 +58,14 @@ class OpenNetworkSelectPagePreferenceController @JvmOverloads constructor(
     AutoSelectPreferenceController.OnNetworkSelectModeListener {
 
     private var preference: Preference? = null
+    private val telephonyManager = context.getSystemService(TelephonyManager::class.java)!!
 
     /**
      * Initialization based on given subscription id.
      */
     fun init(subId: Int): OpenNetworkSelectPagePreferenceController {
         mSubId = subId
+        telephonyManager.createForSubscriptionId(mSubId)
         return this
     }
 
@@ -80,7 +91,8 @@ class OpenNetworkSelectPagePreferenceController @JvmOverloads constructor(
 
         serviceStateFlowFactory(mSubId)
             .collectLatestWithLifecycle(viewLifecycleOwner) { serviceState ->
-                preference?.summary = if (serviceState.state == ServiceState.STATE_IN_SERVICE) {
+                preference?.summary = if (serviceState.state == ServiceState.STATE_IN_SERVICE ||
+                        isSnpnInService(serviceState)) {
                     withContext(Dispatchers.Default) {
                         MobileNetworkUtils.getCurrentCarrierNameForDisplay(mContext, mSubId)
                     }
@@ -88,6 +100,12 @@ class OpenNetworkSelectPagePreferenceController @JvmOverloads constructor(
                     mContext.getString(R.string.network_disconnected)
                 }
             }
+    }
+
+    private fun isSnpnInService(ss: ServiceState): Boolean {
+        return ((MobileNetworkUtils.getAccessMode(mContext, telephonyManager.getSlotIndex())
+                == ExtTelephonyManager.ACCESS_MODE_SNPN)
+                && (ss.getDataRegState() == ServiceState.STATE_IN_SERVICE))
     }
 
     override fun onNetworkSelectModeUpdated(mode: Int) {

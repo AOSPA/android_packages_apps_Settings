@@ -14,11 +14,19 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center are provided under the following license:
+ *
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.network.telephony
 
 import android.content.Context
 import android.telephony.AccessNetworkConstants.AccessNetworkType
 import android.telephony.CellIdentity
+import android.telephony.CellIdentityNr;
 import android.telephony.CellInfo
 import android.telephony.CellInfoCdma
 import android.telephony.CellInfoGsm
@@ -26,6 +34,7 @@ import android.telephony.CellInfoLte
 import android.telephony.CellInfoNr
 import android.telephony.CellInfoTdscdma
 import android.telephony.CellInfoWcdma
+import android.telephony.CellSignalStrength;
 import android.telephony.SignalStrength
 import android.telephony.SubscriptionManager;
 import android.util.Log
@@ -51,6 +60,7 @@ open class NetworkOperatorPreference(
     private var cellId: CellIdentity? = null
     private var subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private var isAdvancedScanSupported: Boolean = false;
+    private val LEVEL_NONE: Int = -1
 
     init {
         if (TelephonyUtils.isServiceConnected()) {
@@ -58,6 +68,7 @@ open class NetworkOperatorPreference(
         } else {
             Log.d(TAG, "ExtTelephonyService is not connected!");
         }
+        CellInfoUtil.context = context
     }
 
     /**
@@ -85,6 +96,12 @@ open class NetworkOperatorPreference(
      */
     fun refresh() {
         var networkTitle = cellId?.getNetworkTitle() ?: return
+        if (MobileNetworkUtils.isCagSnpnEnabled(getContext()) &&
+                cellId is CellIdentityNr) {
+            val networkInfo = CellInfoUtil.getNetworkInfo(cellId as CellIdentityNr?)
+            if (DBG) Log.d(TAG, "networkInfo: $networkInfo")
+            networkTitle += " $networkInfo"
+        }
         if (isForbiddenNetwork()) {
             if (DBG) Log.d(TAG, "refresh forbidden network: $networkTitle")
             networkTitle += " ${context.getString(R.string.forbidden_network)}"
@@ -92,7 +109,14 @@ open class NetworkOperatorPreference(
             if (DBG) Log.d(TAG, "refresh the network: $networkTitle")
         }
         title = networkTitle
-        val level = (cellInfo ?: return).cellSignalStrength.level
+        var level = LEVEL_NONE
+        level = if (MobileNetworkUtils.isCagSnpnEnabled(context) &&
+                cellId is CellIdentityNr && (cellId as CellIdentityNr).snpnInfo != null) {
+            (cellId as CellIdentityNr).snpnInfo.level
+        } else {
+            val signalStrength: CellSignalStrength? = cellInfo?.cellSignalStrength
+            if (signalStrength != null) signalStrength.level else LEVEL_NONE
+        }
         if (DBG) Log.d(TAG, "refresh level: $level")
         setIcon(level)
     }
@@ -123,12 +147,33 @@ open class NetworkOperatorPreference(
     /**
      * Operator info of this cell
      */
-    fun getOperatorInfo() = OperatorInfo(
-        Objects.toString(cellId?.operatorAlphaLong, ""),
-        Objects.toString(cellId?.operatorAlphaShort, ""),
-        cellId?.getOperatorNumeric(),
-        getAccessNetworkTypeFromCellInfo(),
-    )
+    fun getOperatorInfo() = if (MobileNetworkUtils.isCagSnpnEnabled(getContext())) {
+        if (cellId is CellIdentityNr) {
+            OperatorInfo(
+                Objects.toString(cellId?.operatorAlphaLong, ""),
+                Objects.toString(cellId?.operatorAlphaShort, ""),
+                cellId?.getOperatorNumeric(),
+                getAccessNetworkTypeFromCellInfo(),
+                accessMode, (cellId as CellIdentityNr)?.cagInfo,
+                (cellId as CellIdentityNr)?.snpnInfo,
+            )
+        } else {
+            OperatorInfo(
+                Objects.toString(cellId?.operatorAlphaLong, ""),
+                Objects.toString(cellId?.operatorAlphaShort, ""),
+                cellId?.getOperatorNumeric(),
+                getAccessNetworkTypeFromCellInfo(),
+                accessMode, null, null,
+            )
+        }
+    } else {
+        OperatorInfo(
+            Objects.toString(cellId?.operatorAlphaLong, ""),
+            Objects.toString(cellId?.operatorAlphaShort, ""),
+            cellId?.getOperatorNumeric(),
+            getAccessNetworkTypeFromCellInfo(),
+        )
+    }
 
     private fun getIconIdForCell(): Int = when (cellInfo) {
         is CellInfoGsm -> R.drawable.signal_strength_g

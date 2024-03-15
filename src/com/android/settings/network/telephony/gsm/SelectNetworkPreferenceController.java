@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Copyright (c) 2022, 2024 Qualcomm Innovation Center, Inc. All rights reserved.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
@@ -26,7 +26,13 @@ import com.android.settings.R;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.network.telephony.TelephonyTogglePreferenceController;
 
+import com.qti.extphone.Client;
+import com.qti.extphone.ExtPhoneCallbackListener;
 import com.qti.extphone.ExtTelephonyManager;
+import com.qti.extphone.NetworkSelectionMode;
+import com.qti.extphone.ServiceCallback;
+import com.qti.extphone.Status;
+import com.qti.extphone.Token;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,13 +47,18 @@ public class SelectNetworkPreferenceController extends TelephonyTogglePreference
     private PreferenceScreen mPreferenceScreen;
     private TelephonyManager mTelephonyManager;
     private ExtTelephonyManager mExtTelephonyManager;
+    private SubscriptionManager mSubscriptionManager;
     private List<OnNetworkScanTypeListener> mListeners;
+    private Client mClient;
+    private boolean mServiceConnected;
+    private Object mLock = new Object();
     @VisibleForTesting
     SwitchPreference mSwitchPreference;
 
     public SelectNetworkPreferenceController(Context context, String key) {
         super(context, key);
         mTelephonyManager = context.getSystemService(TelephonyManager.class);
+        mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
         mExtTelephonyManager = ExtTelephonyManager.getInstance(context);
         mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
         mListeners = new ArrayList<>();
@@ -79,6 +90,11 @@ public class SelectNetworkPreferenceController extends TelephonyTogglePreference
 
     @Override
     public boolean isChecked() {
+        if (MobileNetworkUtils.isCagSnpnEnabled(mContext)) {
+            synchronized (mLock) {
+                getNetworkSelectionMode();
+            }
+        }
         return MobileNetworkUtils.getAccessMode(mContext,
                 mTelephonyManager.getSlotIndex()) ==
                         mExtTelephonyManager.ACCESS_MODE_SNPN ? true : false;
@@ -97,10 +113,74 @@ public class SelectNetworkPreferenceController extends TelephonyTogglePreference
         return true;
     }
 
+    private ServiceCallback mExtTelManagerServiceCallback = new ServiceCallback() {
+
+        @Override
+        public void onConnected() {
+            mServiceConnected = true;
+            int[] events = new int[] {};
+            mClient = mExtTelephonyManager.registerCallbackWithEvents(
+                    mContext.getPackageName(), mExtPhoneCallbackListener, events);
+            Log.i(LOG_TAG, "mExtTelManagerServiceCallback: service connected " + mClient);
+        }
+
+        @Override
+        public void onDisconnected() {
+            Log.i(LOG_TAG, "mExtTelManagerServiceCallback: service disconnected");
+            if (mServiceConnected) {
+                mServiceConnected = false;
+                mClient = null;
+            }
+        }
+    };
+
+    private void getNetworkSelectionMode() {
+        if (mSubscriptionManager != null &&
+                !mSubscriptionManager.isActiveSubscriptionId(mSubId)) {
+            Log.i(LOG_TAG, "getNetworkSelectionMode invalid sub ID " + mSubId);
+            return;
+        }
+        if (mServiceConnected && mClient != null &&
+                mTelephonyManager.getSlotIndex() != SubscriptionManager.DEFAULT_SIM_SLOT_INDEX) {
+            try {
+                Token token = mExtTelephonyManager.getNetworkSelectionMode(
+                        mTelephonyManager.getSlotIndex(), mClient);
+            } catch (RuntimeException e) {
+                Log.i(LOG_TAG, "Exception getNetworkSelectionMode " + e);
+            }
+            try {
+                mLock.wait();
+            } catch (Exception e) {
+                Log.i(LOG_TAG, "Exception :" + e);
+            }
+        }
+    }
+
+    protected ExtPhoneCallbackListener mExtPhoneCallbackListener = new ExtPhoneCallbackListener() {
+        @Override
+        public void getNetworkSelectionModeResponse(int slotId, Token token, Status status,
+                NetworkSelectionMode modes) {
+            Log.i(LOG_TAG, "ExtPhoneCallback: getNetworkSelectionModeResponse");
+            if (status.get() == Status.SUCCESS) {
+                try {
+                    MobileNetworkUtils.setAccessMode(mContext, slotId, modes.getAccessMode());
+                } catch (Exception e) {
+                    Log.i(LOG_TAG, "Exception :" + e);
+                }
+            }
+            synchronized (mLock) {
+                mLock.notify();
+            }
+        }
+    };
+
     public SelectNetworkPreferenceController init(int subId) {
         mSubId = subId;
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
+        mExtTelephonyManager = ExtTelephonyManager.getInstance(mContext);
+        mExtTelephonyManager.connectService(mExtTelManagerServiceCallback);
+        mSubscriptionManager = mContext.getSystemService(SubscriptionManager.class);
 
         return this;
     }

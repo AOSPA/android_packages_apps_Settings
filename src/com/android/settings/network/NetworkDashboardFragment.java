@@ -13,6 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/*
+ * Changes from Qualcomm Innovation Center are provided under the following license:
+ *
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.network;
 
 import android.app.settings.SettingsEnums;
@@ -26,6 +34,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsDumpService;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.network.telephony.TelephonyUtils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -83,6 +92,8 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle, LifecycleOwner lifecycleOwner) {
+        // Connect to ExtTelephonyService
+        TelephonyUtils.connectExtTelephonyService(context);
         final InternetPreferenceController internetPreferenceController =
                 new InternetPreferenceController(context, lifecycle, lifecycleOwner);
 

@@ -14,6 +14,13 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center are provided under the following license:
+ *
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.network.telephony.gsm
 
 import android.app.ProgressDialog
@@ -24,6 +31,7 @@ import android.provider.Settings
 import android.telephony.CarrierConfigManager
 import android.telephony.ServiceState
 import android.telephony.TelephonyManager
+import android.util.Log
 import androidx.annotation.VisibleForTesting
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -47,12 +55,14 @@ import com.android.settingslib.spa.widget.preference.SwitchPreference
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
 import kotlin.properties.Delegates.notNull
 import kotlin.time.Duration.Companion.seconds
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
@@ -72,7 +82,10 @@ class AutoSelectPreferenceController @JvmOverloads constructor(
     private val getConfigForSubId: (subId: Int) -> PersistableBundle = { subId ->
         CarrierConfigCache.getInstance(context).getConfigForSubId(subId)
     },
-) : ComposePreferenceController(context, key) {
+) : ComposePreferenceController(context, key),
+    SelectNetworkPreferenceController.OnNetworkScanTypeListener {
+
+    private val LOG_TAG = "AutoSelectPreferenceController"
 
     private lateinit var telephonyManager: TelephonyManager
     private val listeners = mutableListOf<OnNetworkSelectModeListener>()
@@ -83,6 +96,7 @@ class AutoSelectPreferenceController @JvmOverloads constructor(
     private lateinit var preference: Preference
 
     private var subId by notNull<Int>()
+    lateinit var coroutineScope: CoroutineScope
 
     /**
      * Initialization based on given subscription id.
@@ -106,7 +120,7 @@ class AutoSelectPreferenceController @JvmOverloads constructor(
 
     @Composable
     override fun Content() {
-        val coroutineScope = rememberCoroutineScope()
+        coroutineScope = rememberCoroutineScope()
         val serviceStateFlow = remember {
             serviceStateFlowFactory(subId)
                 .stateIn(coroutineScope, SharingStarted.Lazily, null)
@@ -126,6 +140,7 @@ class AutoSelectPreferenceController @JvmOverloads constructor(
             override val changeable = { disallowedSummary.isEmpty() }
             override val checked = { isAuto }
             override val onCheckedChange: (Boolean) -> Unit = { newChecked ->
+                Log.i(LOG_TAG, "onCheckedChange newChecked = $newChecked")
                 if (newChecked) {
                     coroutineScope.launch { setAutomaticSelectionMode(isAutoOverridableFlow) }
                 } else {
@@ -162,6 +177,7 @@ class AutoSelectPreferenceController @JvmOverloads constructor(
             .getBoolean(CarrierConfigManager.KEY_ONLY_AUTO_SELECT_IN_HOME_NETWORK_BOOL)
 
     private suspend fun setAutomaticSelectionMode(overrideChannel: OverridableFlow<Boolean>) {
+        Log.i(LOG_TAG, "setAutomaticSelectionMode")
         showAutoSelectProgressBar()
 
         withContext(Dispatchers.Default) {
@@ -216,6 +232,13 @@ class AutoSelectPreferenceController @JvmOverloads constructor(
                 // Ignore exception since the dialog will be gone anyway.
             }
         }
+    }
+
+    override fun onNetworkScanTypeChanged(type: Int) {
+        Log.i(LOG_TAG, "onNetworkScanTypeChanged type = $type")
+
+        var overrideChannel: OverridableFlow<Boolean> = OverridableFlow( flowOf(true) )
+        coroutineScope.launch { setAutomaticSelectionMode(overrideChannel) }
     }
 
     /**
