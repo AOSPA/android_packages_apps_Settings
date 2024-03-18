@@ -14,6 +14,13 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center are provided under the following license:
+ *
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.datausage
 
 import android.content.Context
@@ -31,6 +38,7 @@ import com.android.settings.datausage.lib.DataUsageLib.getMobileTemplate
 import com.android.settings.datausage.lib.INetworkCycleDataRepository
 import com.android.settings.datausage.lib.NetworkCycleDataRepository
 import com.android.settings.network.ProxySubscriptionManager
+import com.android.settings.network.telephony.DomesticRoamUtils
 import com.android.settings.network.telephony.TelephonyBasePreferenceController
 import kotlin.math.max
 import kotlinx.coroutines.Dispatchers
@@ -111,10 +119,20 @@ open class DataUsageSummaryPreferenceController @JvmOverloads constructor(
             preference.setChartEnabled(false)
         }
 
+        var carrierName = subInfo?.carrierName
+        if (DomesticRoamUtils.isFeatureEnabled(mContext)) {
+            val operatorName : String = DomesticRoamUtils
+                    .getRegisteredOperatorName(mContext, mSubId)
+            Log.d(TAG, "DomesticRoamUtils operatorName: $operatorName")
+            if (DomesticRoamUtils.EMPTY_OPERATOR_NAME != operatorName) {
+                carrierName = operatorName
+            }
+        }
+
         preference.setUsageInfo(
             dataPlanInfo.cycleEnd,
             dataPlanInfo.snapshotTime,
-            subInfo?.carrierName,
+            carrierName,
             dataPlanInfo.dataPlanCount,
         )
     }

@@ -96,6 +96,14 @@ open class NetworkOperatorPreference(
      */
     fun refresh() {
         var networkTitle = cellId?.getNetworkTitle() ?: return
+        if (DomesticRoamUtils.isFeatureEnabled(getContext())) {
+            val plmnOperatorName: String = DomesticRoamUtils.getMPLMNOperatorName(
+                    getContext(), subId, cellId?.getOperatorNumeric())
+            Log.d(TAG, "DomesticRoamUtils plmnOperatorName: $plmnOperatorName")
+            if (DomesticRoamUtils.EMPTY_OPERATOR_NAME != plmnOperatorName) {
+                networkTitle = plmnOperatorName
+            }
+        }
         if (MobileNetworkUtils.isCagSnpnEnabled(getContext()) &&
                 cellId is CellIdentityNr) {
             val networkInfo = CellInfoUtil.getNetworkInfo(cellId as CellIdentityNr?)

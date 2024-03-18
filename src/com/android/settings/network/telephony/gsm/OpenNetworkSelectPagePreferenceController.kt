@@ -28,11 +28,13 @@ import android.content.Intent
 import android.provider.Settings
 import android.telephony.ServiceState
 import android.telephony.TelephonyManager
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.Settings.NetworkSelectActivity
+import com.android.settings.network.telephony.DomesticRoamUtils
 import com.android.settings.network.telephony.MobileNetworkUtils
 import com.android.settings.network.telephony.TelephonyBasePreferenceController
 import com.android.settings.network.telephony.allowedNetworkTypesFlow
@@ -94,6 +96,13 @@ class OpenNetworkSelectPagePreferenceController @JvmOverloads constructor(
                 preference?.summary = if (serviceState.state == ServiceState.STATE_IN_SERVICE ||
                         isSnpnInService(serviceState)) {
                     withContext(Dispatchers.Default) {
+                        if (DomesticRoamUtils.isFeatureEnabled(mContext)) {
+                            val registeredOperatorName : String = DomesticRoamUtils
+                                    .getRegisteredOperatorName(mContext, mSubId)
+                            if (DomesticRoamUtils.EMPTY_OPERATOR_NAME != registeredOperatorName) {
+                                registeredOperatorName
+                            }
+                        }
                         MobileNetworkUtils.getCurrentCarrierNameForDisplay(mContext, mSubId)
                     }
                 } else {
