@@ -93,8 +93,6 @@ class AutoSelectPreferenceController @JvmOverloads constructor(
     @VisibleForTesting
     var progressDialog: ProgressDialog? = null
 
-    private lateinit var preference: Preference
-
     private var subId by notNull<Int>()
     lateinit var coroutineScope: CoroutineScope
 
@@ -112,11 +110,6 @@ class AutoSelectPreferenceController @JvmOverloads constructor(
     override fun getAvailabilityStatus() =
         if (MobileNetworkUtils.shouldDisplayNetworkSelectOptions(mContext, subId)) AVAILABLE
         else CONDITIONALLY_UNAVAILABLE
-
-    override fun displayPreference(screen: PreferenceScreen) {
-        super.displayPreference(screen)
-        preference = screen.findPreference(preferenceKey)!!
-    }
 
     @Composable
     override fun Content() {

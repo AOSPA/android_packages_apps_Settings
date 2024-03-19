@@ -25,10 +25,12 @@ package com.android.settings.network.telephony;
 import static androidx.lifecycle.Lifecycle.Event.ON_START;
 import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 
+import static com.android.settings.network.telephony.EnabledNetworkModePreferenceControllerHelperKt.setAllowedNetworkTypes;
 import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.LTE;
 import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.NR;
 
 import android.app.AlertDialog;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.ContentObserver;
@@ -45,10 +47,12 @@ import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.ListPreference;
 import androidx.preference.ListPreferenceDialogFragmentCompat;
@@ -89,6 +93,7 @@ public class EnabledNetworkModePreferenceController extends
     private int mCallState = TelephonyManager.CALL_STATE_IDLE;
     private PhoneCallStateTelephonyCallback mTelephonyCallback;
     private FragmentManager mFragmentManager;
+    private LifecycleOwner mViewLifecycleOwner;
     private PhoneCallStateListener mPhoneStateListener;
 
     public EnabledNetworkModePreferenceController(Context context, String key) {
@@ -197,9 +202,12 @@ public class EnabledNetworkModePreferenceController extends
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object object) {
+    public boolean onPreferenceChange(@NonNull Preference preference, Object object) {
         final int newPreferredNetworkMode = Integer.parseInt((String) object);
         final ListPreference listPreference = (ListPreference) preference;
+        mBuilder.setPreferenceValueAndSummary(newPreferredNetworkMode);
+        listPreference.setValue(Integer.toString(mBuilder.getSelectedEntryValue()));
+        listPreference.setSummary(mBuilder.getSummary());
         final int DDS = SubscriptionManager.getDefaultDataSubscriptionId();
         final int nDDS = MobileNetworkSettings.getNonDefaultDataSub();
         final boolean isDDS = mSubId == DDS;
@@ -241,14 +249,8 @@ public class EnabledNetworkModePreferenceController extends
             }
         }
 
-        if (mTelephonyManager.setPreferredNetworkTypeBitmask(
-                MobileNetworkUtils.getRafFromNetworkType(newPreferredNetworkMode))) {
-            mBuilder.setPreferenceValueAndSummary(newPreferredNetworkMode);
-            listPreference.setValue(Integer.toString(mBuilder.getSelectedEntryValue()));
-            listPreference.setSummary(mBuilder.getSummary());
-            return true;
-        }
-        return false;
+        setAllowedNetworkTypes(mTelephonyManager, mViewLifecycleOwner, newPreferredNetworkMode);
+        return true;
     }
 
     private boolean isCiwlanIncompatibleNetworkSelected(int networkMode) {
@@ -286,6 +288,11 @@ public class EnabledNetworkModePreferenceController extends
                         updatePreference();
                     });
         }
+    }
+
+    @Override
+    public void onViewCreated(@NonNull LifecycleOwner viewLifecycleOwner) {
+        mViewLifecycleOwner = viewLifecycleOwner;
     }
 
     private void updatePreference() {
