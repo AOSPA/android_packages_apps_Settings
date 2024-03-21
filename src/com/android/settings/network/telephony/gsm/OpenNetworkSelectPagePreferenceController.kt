@@ -101,9 +101,12 @@ class OpenNetworkSelectPagePreferenceController @JvmOverloads constructor(
                                     .getRegisteredOperatorName(mContext, mSubId)
                             if (DomesticRoamUtils.EMPTY_OPERATOR_NAME != registeredOperatorName) {
                                 registeredOperatorName
+                            } else {
+                                MobileNetworkUtils.getCurrentCarrierNameForDisplay(mContext, mSubId)
                             }
+                        } else {
+                            MobileNetworkUtils.getCurrentCarrierNameForDisplay(mContext, mSubId)
                         }
-                        MobileNetworkUtils.getCurrentCarrierNameForDisplay(mContext, mSubId)
                     }
                 } else {
                     mContext.getString(R.string.network_disconnected)
