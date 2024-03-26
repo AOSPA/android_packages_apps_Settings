@@ -215,6 +215,11 @@ public class ApnSettings extends RestrictedSettingsFragment
                 } else {
                     showRestoreDefaultApnDialog();
                 }
+            } else if (CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED.equals(action)) {
+                loadCarrierConfig();
+                if (!mRestoreDefaultApnMode) {
+                    fillList();
+                }
             }
         }
     };
@@ -237,6 +242,34 @@ public class ApnSettings extends RestrictedSettingsFragment
                 PhoneStateListener.LISTEN_PRECISE_DATA_CONNECTION_STATE);
     }
 
+    private void loadCarrierConfig() {
+        final CarrierConfigManager configManager = (CarrierConfigManager)
+                getSystemService(Context.CARRIER_CONFIG_SERVICE);
+        final PersistableBundle b = configManager.getConfigForSubId(mSubId);
+        if (b == null) {
+            return;
+        }
+        mHideImsApn = b.getBoolean(CarrierConfigManager.KEY_HIDE_IMS_APN_BOOL);
+        mAllowAddingApns = b.getBoolean(CarrierConfigManager.KEY_ALLOW_ADDING_APNS_BOOL);
+        mHideApnsWithRule = b.getStringArray(APN_HIDE_RULE_STRINGS_ARRAY);
+        mHideApnsWithIccidRule = b.getStringArray(APN_HIDE_RULE_STRINGS_WITH_ICCIDS_ARRAY);
+        if (mSubscriptionInfo != null) {
+           String iccid = mSubscriptionInfo.getIccId();
+           Log.d(TAG, "iccid: " + iccid);
+           mHideApnsGroupByIccid = b.getPersistableBundle(iccid);
+        }
+        if (mAllowAddingApns) {
+            final String[] readOnlyApnTypes = b.getStringArray(
+                    CarrierConfigManager.KEY_READ_ONLY_APN_TYPES_STRING_ARRAY);
+            // if no apn type can be edited, do not allow adding APNs
+            if (ApnEditor.hasAllApns(readOnlyApnTypes)) {
+                Log.d(TAG, "not allowing adding APN because all APN types are read only");
+                mAllowAddingApns = false;
+            }
+        }
+        mHidePresetApnDetails = b.getBoolean(CarrierConfigManager.KEY_HIDE_PRESET_APN_DETAILS_BOOL);
+   }
+
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.APN;
@@ -255,35 +288,14 @@ public class ApnSettings extends RestrictedSettingsFragment
         if (Utils.isSupportCTPA(getActivity().getApplicationContext())) {
             mIntentFilter.addAction(ACTION_VOLTE_ENABLED_STATE_CHANGED);
         }
+        mIntentFilter.addAction(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED);
 
         setIfOnlyAvailableForAdmins(true);
 
         mSubscriptionInfo = getSubscriptionInfo(mSubId);
         mTelephonyManager = activity.getSystemService(TelephonyManager.class);
 
-        final CarrierConfigManager configManager = (CarrierConfigManager)
-                getSystemService(Context.CARRIER_CONFIG_SERVICE);
-        final PersistableBundle b = configManager.getConfigForSubId(mSubId);
-        mHideImsApn = b.getBoolean(CarrierConfigManager.KEY_HIDE_IMS_APN_BOOL);
-        mAllowAddingApns = b.getBoolean(CarrierConfigManager.KEY_ALLOW_ADDING_APNS_BOOL);
-
-        mHideApnsWithRule = b.getStringArray(APN_HIDE_RULE_STRINGS_ARRAY);
-        mHideApnsWithIccidRule = b.getStringArray(APN_HIDE_RULE_STRINGS_WITH_ICCIDS_ARRAY);
-        if(mSubscriptionInfo != null){
-           String iccid = mSubscriptionInfo.getIccId();
-           Log.d(TAG, "iccid: " + iccid);
-           mHideApnsGroupByIccid = b.getPersistableBundle(iccid);
-        }
-        if (mAllowAddingApns) {
-            final String[] readOnlyApnTypes = b.getStringArray(
-                    CarrierConfigManager.KEY_READ_ONLY_APN_TYPES_STRING_ARRAY);
-            // if no apn type can be edited, do not allow adding APNs
-            if (ApnEditor.hasAllApns(readOnlyApnTypes)) {
-                Log.d(TAG, "not allowing adding APN because all APN types are read only");
-                mAllowAddingApns = false;
-            }
-        }
-        mHidePresetApnDetails = b.getBoolean(CarrierConfigManager.KEY_HIDE_PRESET_APN_DETAILS_BOOL);
+        loadCarrierConfig();
         mUserManager = UserManager.get(activity);
     }
 
