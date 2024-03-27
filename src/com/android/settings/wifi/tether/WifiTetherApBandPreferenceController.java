@@ -120,7 +120,9 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
 
         ListPreference preference =
                 (ListPreference) mPreference;
-        if (preference == null) return;
+        if (preference == null) {
+            return;
+        }
         preference.setEntries(mBandSummaries);
         preference.setEntryValues(mBandEntries);
         preference.setValue(Integer.toString(mBandIndex));
