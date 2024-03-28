@@ -341,80 +341,82 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         ArrayList<AbstractPreferenceController> controllers = new ArrayList<>();
           if (mCachedDevice == null) return controllers;
 
-          Lifecycle lifecycle = getSettingsLifecycle();
-          controllers.add(new BluetoothDetailsHeaderController(context, this, mCachedDevice,
-                  lifecycle));
-          controllers.add(new BluetoothDetailsButtonsController(context, this, mCachedDevice,
-                  lifecycle));
-          controllers.add(new BluetoothDetailsCompanionAppsController(context, this,
-                  mCachedDevice, lifecycle));
-          controllers.add(new BluetoothDetailsAudioDeviceTypeController(context, this, mManager,
-                  mCachedDevice, lifecycle));
-          controllers.add(new BluetoothDetailsSpatialAudioController(context, this, mCachedDevice,
-                  lifecycle));
-          controllers.add(new BluetoothDetailsProfilesController(context, this, mManager,
-                  mCachedDevice, lifecycle));
-          controllers.add(new BluetoothDetailsMacAddressController(context, this, mCachedDevice,
-                  lifecycle));
-          controllers.add(new StylusDevicesController(context, mInputDevice, mCachedDevice,
-                  lifecycle));
-          controllers.add(new BluetoothDetailsRelatedToolsController(context, this, mCachedDevice,
-                  lifecycle));
-          controllers.add(new BluetoothDetailsPairOtherController(context, this, mCachedDevice,
-                  lifecycle));
-          controllers.add(new BluetoothDetailsHearingDeviceControlsController(context, this,
-                  mCachedDevice, lifecycle));
-          // Don't need to show hearing device again when launched from the same page.
-          if (!isLaunchFromHearingDevicePage()) {
-              controllers.add(new BluetoothDetailsHearingDeviceControlsController(context, this,
-                      mCachedDevice, lifecycle));
-          }
-          controllers.add(new BluetoothDetailsDataSyncController(context, this,
-                  mCachedDevice, lifecycle));
-          controllers.add(new BluetoothDetailsExtraOptionsController(context, this, 
-                  mCachedDevice, lifecycle));
-          if (mBAPropertyChecked == false) {
-              int advAudioMask = SystemProperties.getInt(BLUETOOTH_ADV_AUDIO_MASK_PROP, 0);
-              mBAEnabled = (((advAudioMask & BA_MASK) == BA_MASK) &&
-                  SystemProperties.getBoolean(BLUETOOTH_BROADCAST_UI_PROP, true));
-              mBAPropertyChecked = true;
-          }
-          if (mBAEnabled == false) {
-              return controllers;
-          }
+        if (mCachedDevice != null) {
+            Lifecycle lifecycle = getSettingsLifecycle();
+            controllers.add(new BluetoothDetailsHeaderController(context, this, mCachedDevice,
+                    lifecycle));
+            controllers.add(new BluetoothDetailsButtonsController(context, this, mCachedDevice,
+                    lifecycle));
+            controllers.add(new BluetoothDetailsCompanionAppsController(context, this,
+                    mCachedDevice, lifecycle));
+            controllers.add(new BluetoothDetailsAudioDeviceTypeController(context, this, mManager,
+                    mCachedDevice, lifecycle));
+            controllers.add(new BluetoothDetailsSpatialAudioController(context, this, mCachedDevice,
+                    lifecycle));
+            controllers.add(new BluetoothDetailsProfilesController(context, this, mManager,
+                    mCachedDevice, lifecycle));
+            controllers.add(new BluetoothDetailsMacAddressController(context, this, mCachedDevice,
+                    lifecycle));
+            controllers.add(new StylusDevicesController(context, mInputDevice, mCachedDevice,
+                    lifecycle));
+            controllers.add(new BluetoothDetailsRelatedToolsController(context, this, mCachedDevice,
+                    lifecycle));
+            controllers.add(new BluetoothDetailsPairOtherController(context, this, mCachedDevice,
+                    lifecycle));
+            controllers.add(new BluetoothDetailsDataSyncController(context, this, mCachedDevice,
+                    lifecycle));
+            controllers.add(new BluetoothDetailsExtraOptionsController(context, this, mCachedDevice,
+                    lifecycle));
+            BluetoothDetailsHearingDeviceController hearingDeviceController =
+                    new BluetoothDetailsHearingDeviceController(context, this, mManager,
+                            mCachedDevice, lifecycle);
+            controllers.add(hearingDeviceController);
+            hearingDeviceController.initSubControllers(isLaunchFromHearingDevicePage());
+            controllers.addAll(hearingDeviceController.getSubControllers());
+        }
+        if (mBAPropertyChecked == false) {
+            int advAudioMask = SystemProperties.getInt(BLUETOOTH_ADV_AUDIO_MASK_PROP, 0);
+            mBAEnabled = (((advAudioMask & BA_MASK) == BA_MASK) &&
+                SystemProperties.getBoolean(BLUETOOTH_BROADCAST_UI_PROP, true));
+            mBAPropertyChecked = true;
+        }
+        if (mBAEnabled == false) {
+            return controllers;
+        }
 
-          Log.d(TAG, "createPreferenceControllers for BA");
+        Log.d(TAG, "createPreferenceControllers for BA");
 
-          try {
-              if (mCachedDevice.isBASeeker()) {
-                  Class<?> classAddSourceController = Class.forName(
-                      "com.android.settings.bluetooth.BluetoothDetailsAddSourceButtonController");
-                  Class<?> classBADeviceController = Class.forName(
-                      "com.android.settings.bluetooth.BADevicePreferenceController");
-                  Constructor ctorAddSource = classAddSourceController
-                      .getDeclaredConstructor(new Class[] {Context.class,
-                  PreferenceFragmentCompat.class, CachedBluetoothDevice.class, Lifecycle.class});
-                  Constructor ctorBADevice = classBADeviceController
-                      .getDeclaredConstructor(new Class[] {Context.class, Lifecycle.class,
-                      String.class});
-                  Object objAddSourceController = ctorAddSource.newInstance(context, this,
-                      mCachedDevice, lifecycle);
-                  Object objBADeviceController = ctorBADevice.newInstance(context, lifecycle,
-                      "added_sources");
-                  objBADeviceController.getClass()
-                      .getMethod("init", DashboardFragment.class, CachedBluetoothDevice.class)
-                      .invoke(objBADeviceController, this, mCachedDevice);
-              controllers.add((AbstractPreferenceController) objAddSourceController);
-              controllers.add((AbstractPreferenceController) objBADeviceController);
-            }
-          } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException |
-              InvocationTargetException | InstantiationException | IllegalArgumentException |
-              ExceptionInInitializerError e) {
-              e.printStackTrace();
-              mBAEnabled = false;
-          } finally {
-              return controllers;
+        try {
+            if (mCachedDevice.isBASeeker()) {
+                Class<?> classAddSourceController = Class.forName(
+                    "com.android.settings.bluetooth.BluetoothDetailsAddSourceButtonController");
+                Class<?> classBADeviceController = Class.forName(
+                    "com.android.settings.bluetooth.BADevicePreferenceController");
+                Constructor ctorAddSource = classAddSourceController
+                    .getDeclaredConstructor(new Class[] {Context.class,
+                PreferenceFragmentCompat.class, CachedBluetoothDevice.class, Lifecycle.class});
+                Constructor ctorBADevice = classBADeviceController
+                    .getDeclaredConstructor(new Class[] {Context.class, Lifecycle.class,
+                    String.class});
+                Lifecycle lifecycle = getSettingsLifecycle();
+                Object objAddSourceController = ctorAddSource.newInstance(context, this,
+                    mCachedDevice, lifecycle);
+                Object objBADeviceController = ctorBADevice.newInstance(context, lifecycle,
+                    "added_sources");
+                objBADeviceController.getClass()
+                    .getMethod("init", DashboardFragment.class, CachedBluetoothDevice.class)
+                    .invoke(objBADeviceController, this, mCachedDevice);
+            controllers.add((AbstractPreferenceController) objAddSourceController);
+            controllers.add((AbstractPreferenceController) objBADeviceController);
           }
+        } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException |
+            InvocationTargetException | InstantiationException | IllegalArgumentException |
+            ExceptionInInitializerError e) {
+            e.printStackTrace();
+            mBAEnabled = false;
+        } finally {
+            return controllers;
+        }
     }
 
     private int getPaddingSize() {
