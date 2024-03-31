@@ -54,6 +54,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogType;
@@ -179,6 +180,9 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         final List<String> shortcutFeatureKeys = new ArrayList<>();
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
+        if (android.view.accessibility.Flags.a11yQsShortcut()) {
+            shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_QS_TARGETS);
+        }
         return shortcutFeatureKeys;
     }
 
@@ -658,7 +662,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         int value = restoreOnConfigChangedValue();
         if (value == NOT_SET) {
             final int lastNonEmptyUserShortcutType = PreferredShortcuts.retrieveUserShortcutType(
-                    getPrefContext(), mComponentName.flattenToString());
+                    getPrefContext(), mComponentName.flattenToString(), getDefaultShortcutTypes());
             value = mShortcutPreference.isChecked() ? lastNonEmptyUserShortcutType
                     : UserShortcutType.EMPTY;
         }
@@ -707,8 +711,8 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
             return context.getText(R.string.accessibility_shortcut_state_off);
         }
 
-        final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(context,
-                mComponentName.flattenToString());
+        final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(
+                context, mComponentName.flattenToString(), getDefaultShortcutTypes());
 
         final List<CharSequence> list = new ArrayList<>();
         if (android.view.accessibility.Flags.a11yQsShortcut()) {
@@ -808,7 +812,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         }
 
         final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(getPrefContext(),
-                mComponentName.flattenToString());
+                mComponentName.flattenToString(), getDefaultShortcutTypes());
         mShortcutPreference.setChecked(
                 AccessibilityUtil.hasValuesInSettings(getPrefContext(), shortcutTypes,
                         mComponentName));
@@ -826,7 +830,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         }
 
         final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(getPrefContext(),
-                mComponentName.flattenToString());
+                mComponentName.flattenToString(), getDefaultShortcutTypes());
         if (preference.isChecked()) {
             AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes,
                     mComponentName);
@@ -973,5 +977,14 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     @VisibleForTesting
     boolean isAnySetupWizard() {
         return WizardManagerHelper.isAnySetupWizard(getIntent());
+    }
+
+    /**
+     * Returns the default preferred shortcut types when the user doesn't have a preferred shortcut
+     * types
+     */
+    @ShortcutConstants.UserShortcutType
+    protected int getDefaultShortcutTypes() {
+        return ShortcutConstants.UserShortcutType.SOFTWARE;
     }
 }

@@ -299,18 +299,42 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
         Log.d(LOG_TAG, "isDialogNeeded: isChecked = " + isChecked +
                 ", isCiwlanIncompatibleNwSelected = " + isCiwlanIncompatibleNwSelected);
         if (isChecked && isCiwlanIncompatibleNwSelected) {
-            if (ciwlanIncompatibleNwSelectedForCurrentSub &&
-                    ciwlanIncompatibleNwSelectedForOtherSub) {
-                mDialogType = BackupCallingDialogFragment.
-                    TYPE_ENABLE_CIWLAN_INCOMPATIBLE_NW_TYPE_DIALOG_BOTH_SUBS;
-            } else if (ciwlanIncompatibleNwSelectedForCurrentSub &&
-                    !ciwlanIncompatibleNwSelectedForOtherSub) {
-                mDialogType = BackupCallingDialogFragment.
-                    TYPE_ENABLE_CIWLAN_INCOMPATIBLE_NW_TYPE_DIALOG_CURRENT_SUB;
-            } else if (!ciwlanIncompatibleNwSelectedForCurrentSub &&
-                    ciwlanIncompatibleNwSelectedForOtherSub) {
-                mDialogType = BackupCallingDialogFragment.
-                    TYPE_ENABLE_CIWLAN_INCOMPATIBLE_NW_TYPE_DIALOG_OTHER_SUB;
+            if (isDDS) {
+                if (ciwlanIncompatibleNwSelectedForCurrentSub &&
+                        ciwlanIncompatibleNwSelectedForOtherSub) {
+                    mDialogType = BackupCallingDialogFragment.
+                            TYPE_NW_INCOMPATIBLE_ON_DDS_INCOMPATIBLE_ON_NDDS_ATTEMPT_EITHER_SUB;
+                } else if (ciwlanIncompatibleNwSelectedForCurrentSub &&
+                        !ciwlanIncompatibleNwSelectedForOtherSub) {
+                    mDialogType = BackupCallingDialogFragment.
+                            TYPE_NW_INCOMPATIBLE_ON_DDS_COMPATIBLE_ON_NDDS_ATTEMPT_DDS;
+                } else if (!ciwlanIncompatibleNwSelectedForCurrentSub &&
+                        ciwlanIncompatibleNwSelectedForOtherSub) {
+                    mDialogType = BackupCallingDialogFragment.
+                            TYPE_NW_COMPATIBLE_ON_DDS_INCOMPATIBLE_ON_NDDS_ATTEMPT_DDS;
+                    showDialog(mDialogType);
+                    return false;
+                } else {
+                    // No warning
+                }
+            } else {
+                if (ciwlanIncompatibleNwSelectedForCurrentSub &&
+                        ciwlanIncompatibleNwSelectedForOtherSub) {
+                    mDialogType = BackupCallingDialogFragment.
+                            TYPE_NW_INCOMPATIBLE_ON_DDS_INCOMPATIBLE_ON_NDDS_ATTEMPT_EITHER_SUB;
+                } else if (ciwlanIncompatibleNwSelectedForCurrentSub &&
+                        !ciwlanIncompatibleNwSelectedForOtherSub) {
+                    mDialogType = BackupCallingDialogFragment.
+                            TYPE_NW_COMPATIBLE_ON_DDS_INCOMPATIBLE_ON_NDDS_ATTEMPT_NDDS;
+                    showDialog(mDialogType);
+                    return false;
+                } else if (!ciwlanIncompatibleNwSelectedForCurrentSub &&
+                        ciwlanIncompatibleNwSelectedForOtherSub) {
+                    mDialogType = BackupCallingDialogFragment.
+                            TYPE_NW_INCOMPATIBLE_ON_DDS_COMPATIBLE_ON_NDDS_ATTEMPT_NDDS;
+                } else {
+                    // No warning
+                }
             }
             return true;
         }

@@ -159,26 +159,41 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
                 ", isCiwlanIncompatibleNetworkSelected = " + isCiwlanIncompatibleNetworkSelected);
         if (isMsimCiwlanSupported) {
             if (isCiwlanIncompatibleNetworkSelected) {
-                if (otherSubCiwlanEnabled && currentSubCiwlanEnabled) {
-                    showCiwlanWarningDialog(
-                            R.string.pref_nw_incompatible_ciwlan_both_subs_dialog_body);
-                    return false;
-                } else if (otherSubCiwlanEnabled && !currentSubCiwlanEnabled) {
-                    showCiwlanWarningDialog(
-                            R.string.pref_nw_incompatible_ciwlan_other_sub_dialog_body);
-                    return false;
-                } else if (!otherSubCiwlanEnabled && currentSubCiwlanEnabled) {
-                    showCiwlanWarningDialog(
-                            R.string.pref_nw_incompatible_ciwlan_current_sub_dialog_body);
-                    return false;
+                if (isDDS) {
+                    if (otherSubCiwlanEnabled && currentSubCiwlanEnabled) {
+                        showCiwlanWarningDialog(
+                                R.string.incompatible_pref_nw_for_dds_with_ciwlan_ui_on_both);
+                        return false;
+                    } else if (otherSubCiwlanEnabled && !currentSubCiwlanEnabled) {
+                        showCiwlanWarningDialog(
+                                R.string.incompatible_pref_nw_for_dds_with_ciwlan_ui_on_ndds);
+                        return false;
+                    } else if (!otherSubCiwlanEnabled && currentSubCiwlanEnabled) {
+                        showCiwlanWarningDialog(
+                                R.string.incompatible_pref_nw_for_dds_with_ciwlan_ui_on_dds);
+                        return false;
+                    } else {
+                        // No warning
+                    }
                 } else {
-                    // No warning
+                    if (otherSubCiwlanEnabled && currentSubCiwlanEnabled) {
+                        showCiwlanWarningDialog(
+                                R.string.incompatible_pref_nw_for_ndds_with_ciwlan_ui_on_both);
+                    } else if (otherSubCiwlanEnabled && !currentSubCiwlanEnabled) {
+                        showCiwlanWarningDialog(
+                                R.string.incompatible_pref_nw_for_ndds_with_ciwlan_ui_on_dds);
+                    } else if (!otherSubCiwlanEnabled && currentSubCiwlanEnabled) {
+                        showCiwlanWarningDialog(
+                                R.string.incompatible_pref_nw_for_ndds_with_ciwlan_ui_on_ndds);
+                    } else {
+                        // No warning
+                    }
                 }
             }
         } else {
             if (currentSubCiwlanEnabled && isCiwlanIncompatibleNetworkSelected) {
                 showCiwlanWarningDialog(
-                        R.string.pref_nw_incompatible_ciwlan_current_sub_dialog_body);
+                        R.string.incompatible_pref_nw_for_dds_with_ciwlan_ui_on_dds);
                 return false;
             }
         }
@@ -199,7 +214,7 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
 
     private void showCiwlanWarningDialog(int dialogBodyTextId) {
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-        builder.setTitle(R.string.pref_nw_incompat_ciwlan_dialog_title)
+        builder.setTitle(R.string.incompatible_pref_nw_ciwlan_dialog_title)
                .setMessage(dialogBodyTextId)
                .setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {

@@ -46,9 +46,11 @@ public class BackupCallingDialogFragment extends InstrumentedDialogFragment {
     private static final String ARG_DIALOG_TYPE = "dialog_type";
     private static final String ARG_SUB_ID = "subId";
 
-    public static final int TYPE_ENABLE_CIWLAN_INCOMPATIBLE_NW_TYPE_DIALOG_CURRENT_SUB = 0;
-    public static final int TYPE_ENABLE_CIWLAN_INCOMPATIBLE_NW_TYPE_DIALOG_OTHER_SUB = 1;
-    public static final int TYPE_ENABLE_CIWLAN_INCOMPATIBLE_NW_TYPE_DIALOG_BOTH_SUBS = 2;
+    public static final int TYPE_NW_INCOMPATIBLE_ON_DDS_COMPATIBLE_ON_NDDS_ATTEMPT_DDS = 0;
+    public static final int TYPE_NW_INCOMPATIBLE_ON_DDS_COMPATIBLE_ON_NDDS_ATTEMPT_NDDS = 1;
+    public static final int TYPE_NW_COMPATIBLE_ON_DDS_INCOMPATIBLE_ON_NDDS_ATTEMPT_DDS = 2;
+    public static final int TYPE_NW_COMPATIBLE_ON_DDS_INCOMPATIBLE_ON_NDDS_ATTEMPT_NDDS = 3;
+    public static final int TYPE_NW_INCOMPATIBLE_ON_DDS_INCOMPATIBLE_ON_NDDS_ATTEMPT_EITHER_SUB = 4;
 
     private String mPrefTitle;
     private int mType;
@@ -72,20 +74,31 @@ public class BackupCallingDialogFragment extends InstrumentedDialogFragment {
 
         int dialogBodyTextId;
         switch (mType) {
-            case TYPE_ENABLE_CIWLAN_INCOMPATIBLE_NW_TYPE_DIALOG_CURRENT_SUB:
-                dialogBodyTextId = R.string.ciwlan_enable_dialog_incompatible_nw_type_current_sub;
+            case TYPE_NW_INCOMPATIBLE_ON_DDS_COMPATIBLE_ON_NDDS_ATTEMPT_DDS:
+                dialogBodyTextId =
+                        R.string.ciwlan_dialog_nw_incompatible_dds_compatible_ndds_attempt_dds;
                 break;
-            case TYPE_ENABLE_CIWLAN_INCOMPATIBLE_NW_TYPE_DIALOG_OTHER_SUB:
-                dialogBodyTextId = R.string.ciwlan_enable_dialog_incompatible_nw_type_other_sub;
+            case TYPE_NW_INCOMPATIBLE_ON_DDS_COMPATIBLE_ON_NDDS_ATTEMPT_NDDS:
+                dialogBodyTextId =
+                        R.string.ciwlan_dialog_nw_incompatible_dds_compatible_ndds_attempt_ndds;
                 break;
-            case TYPE_ENABLE_CIWLAN_INCOMPATIBLE_NW_TYPE_DIALOG_BOTH_SUBS:
-                dialogBodyTextId = R.string.ciwlan_enable_dialog_incompatible_nw_type_both_subs;
+            case TYPE_NW_COMPATIBLE_ON_DDS_INCOMPATIBLE_ON_NDDS_ATTEMPT_DDS:
+                dialogBodyTextId =
+                        R.string.ciwlan_dialog_nw_compatible_dds_incompatible_ndds_attempt_dds;
+                break;
+            case TYPE_NW_COMPATIBLE_ON_DDS_INCOMPATIBLE_ON_NDDS_ATTEMPT_NDDS:
+                dialogBodyTextId =
+                        R.string.ciwlan_dialog_nw_compatible_dds_incompatible_ndds_attempt_ndds;
+                break;
+            case TYPE_NW_INCOMPATIBLE_ON_DDS_INCOMPATIBLE_ON_NDDS_ATTEMPT_EITHER_SUB:
+                dialogBodyTextId =
+                        R.string.ciwlan_dialog_nw_incompatible_dds_incompatible_ndds_attempt_either;
                 break;
             default:
                 throw new IllegalArgumentException("Unknown type " + mType);
         }
         return new AlertDialog.Builder(context)
-                .setTitle(R.string.pref_nw_incompat_ciwlan_dialog_title)
+                .setTitle(R.string.incompatible_pref_nw_ciwlan_dialog_title)
                 .setMessage(dialogBodyTextId)
                 .setPositiveButton(android.R.string.ok, null)
                 .create();

@@ -30,6 +30,7 @@ import android.os.PersistableBundle
 import android.provider.Settings
 import android.telephony.CarrierConfigManager
 import android.telephony.ServiceState
+import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
 import android.util.Log
 import androidx.annotation.VisibleForTesting
@@ -93,7 +94,7 @@ class AutoSelectPreferenceController @JvmOverloads constructor(
     @VisibleForTesting
     var progressDialog: ProgressDialog? = null
 
-    private var subId by notNull<Int>()
+    private var subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID
     lateinit var coroutineScope: CoroutineScope
 
     /**

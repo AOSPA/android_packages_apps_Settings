@@ -1351,7 +1351,8 @@ public final class Utils extends com.android.settingslib.Utils {
      */
     @ColorInt
     public static int getHomepageIconColor(Context context) {
-        return getColorAttrDefaultColor(context, android.R.attr.textColorPrimary);
+        return getColorAttrDefaultColor(
+                context, com.android.internal.R.attr.materialColorOnSurface);
     }
 
     /**
@@ -1424,6 +1425,16 @@ public final class Utils extends com.android.settingslib.Utils {
         if (faceManager != null && faceManager.hasEnrolledTemplates(userId)) {
             faceManager.removeAll(userId, faceManagerRemovalCallback(userId));
         }
+    }
+
+    /**
+     * Returns true if the user should be hidden in Settings when it's in quiet mode.
+     */
+    public static boolean shouldHideUser(
+            @NonNull UserHandle userHandle, @NonNull UserManager userManager) {
+        UserProperties userProperties = userManager.getUserProperties(userHandle);
+        return userProperties.getShowInQuietMode() == UserProperties.SHOW_IN_QUIET_MODE_HIDDEN
+                && userManager.isQuietModeEnabled(userHandle);
     }
 
     private static FaceManager.RemovalCallback faceManagerRemovalCallback(int userId) {
