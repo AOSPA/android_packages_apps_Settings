@@ -570,13 +570,13 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         super.onCreate(icicle);
         final Context context = getContext();
         sPackageName = this.getClass().getPackage().toString();
-        sExtTelephonyManager = ExtTelephonyManager.getInstance(context);
-        sExtTelephonyManager.connectService(mExtTelServiceCallback);
-        sInstanceCounter++;
         sSubscriptionManager = context.getSystemService(SubscriptionManager.class);
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mTelephonyManager = context.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
+        sExtTelephonyManager = ExtTelephonyManager.getInstance(context);
+        sExtTelephonyManager.connectService(mExtTelServiceCallback);
+        sInstanceCounter++;
 
         session.close();
 
