@@ -51,7 +51,6 @@ import java.util.List;
  */
 public class DataUsageSummary extends DashboardFragment {
 
-    private SubscriptionManager mSubscriptionManager;
     private static final String TAG = "DataUsageSummary";
 
     static final boolean LOGD = false;
@@ -102,7 +101,8 @@ public class DataUsageSummary extends DashboardFragment {
         }
         boolean hasWifiRadio = DataUsageUtils.hasWifiRadio(context);
         if (hasMobileData) {
-            List<SubscriptionInfo> subscriptions = mSubscriptionManager.getActiveSubscriptionInfoList();
+            List<SubscriptionInfo> subscriptions = SubscriptionUtil.getAvailableSubscriptions(
+                    context);
             if (subscriptions == null || subscriptions.size() == 0) {
                 addMobileSection(defaultSubId);
             }
