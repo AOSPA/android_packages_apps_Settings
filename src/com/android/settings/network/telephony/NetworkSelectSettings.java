@@ -56,6 +56,7 @@ import androidx.preference.PreferenceCategory;
 
 import com.android.internal.annotations.Initializer;
 import com.android.internal.telephony.OperatorInfo;
+import com.android.internal.telephony.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
@@ -422,6 +423,9 @@ public class NetworkSelectSettings extends DashboardFragment implements
      */
     @VisibleForTesting
     protected List<String> getSatellitePlmnsForCarrierWrapper() {
+        if (!Flags.carrierEnabledSatelliteFlag()) {
+            return new ArrayList<>();
+        }
         return mSatelliteManager.getSatellitePlmnsForCarrier(mSubId);
     }
 

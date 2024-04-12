@@ -218,6 +218,14 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         super.onStart();
         final ContentResolver cr = getContext().getContentResolver();
         cr.registerContentObserver(mDevelopEnabled, false, mDeveloperSettingsObserver);
+
+        // Restore UI state based on whether developer options is enabled
+        if (DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(getContext())) {
+            enableDeveloperOptions();
+            handleQsTileLongPressActionIfAny();
+        } else {
+            disableDeveloperOptions();
+        }
     }
 
     @Override
@@ -274,14 +282,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         mSwitchBarController = new DevelopmentSwitchBarController(
                 this /* DevelopmentSettings */, mSwitchBar, mIsAvailable,
                 getSettingsLifecycle());
-
-        // Restore UI state based on whether developer options is enabled
-        if (DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(getContext())) {
-            enableDeveloperOptions();
-            handleQsTileLongPressActionIfAny();
-        } else {
-            disableDeveloperOptions();
-        }
     }
 
     @Override
@@ -741,7 +741,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new DefaultLaunchPreferenceController(context, "density"));
         controllers.add(new DefaultLaunchPreferenceController(context, "background_check"));
         controllers.add(new DefaultLaunchPreferenceController(context, "inactive_apps"));
-        controllers.add(new TarePreferenceController(context));
         controllers.add(new AutofillCategoryController(context, lifecycle));
         controllers.add(new AutofillLoggingLevelPreferenceController(context, lifecycle));
         controllers.add(new AutofillResetOptionsPreferenceController(context));

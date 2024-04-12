@@ -156,6 +156,7 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
 
         if (!mNeedDialog) {
             // Update data directly if we don't need dialog
+            Log.d(DIALOG_TAG, "setMobileDataEnabled: " + isChecked);
             MobileNetworkUtils.setMobileDataEnabled(mContext, mSubId, isChecked, false);
             if (mWifiPickerTrackerHelper != null
                     && !mWifiPickerTrackerHelper.isCarrierNetworkProvisionEnabled(mSubId)) {

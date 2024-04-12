@@ -21,6 +21,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -86,8 +87,6 @@ public class SetupSuccessFragment extends InstrumentedFragment {
             if (activity != null) {
                 mMetricsFeatureProvider.action(
                         getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_DONE);
-                //TODO(b/307729746): Add a test to verify PS is locked after setup completion.
-                PrivateSpaceMaintainer.getInstance(activity).lockPrivateSpace();
                 Intent allAppsIntent = new Intent(Intent.ACTION_ALL_APPS);
                 ResolveInfo resolveInfo =
                         activity.getPackageManager()
@@ -100,6 +99,7 @@ public class SetupSuccessFragment extends InstrumentedFragment {
                     allAppsIntent.setPackage(resolveInfo.activityInfo.packageName);
                     allAppsIntent.setComponent(resolveInfo.activityInfo.getComponentName());
                 }
+                activity.setTheme(R.style.Theme_SubSettings);
                 accessPrivateSpaceToast();
                 startActivity(allAppsIntent);
                 Log.i(TAG, "Private space setup complete");
@@ -109,7 +109,13 @@ public class SetupSuccessFragment extends InstrumentedFragment {
     }
 
     private void accessPrivateSpaceToast() {
-        Toast.makeText(getContext(), R.string.private_space_scrolldown_to_access,
-                Toast.LENGTH_SHORT).show();
+        Drawable drawable = getContext().getDrawable(R.drawable.ic_private_space_icon);
+        Toast.makeCustomToastWithIcon(
+                        getContext(),
+                        null /* looper */ ,
+                        getContext().getString(R.string.private_space_scrolldown_to_access),
+                        Toast.LENGTH_SHORT,
+                        drawable)
+                .show();
     }
 }

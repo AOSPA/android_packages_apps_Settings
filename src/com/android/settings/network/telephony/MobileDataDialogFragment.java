@@ -29,6 +29,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -46,6 +47,7 @@ import com.android.settings.wifi.WifiPickerTrackerHelper;
  */
 public class MobileDataDialogFragment extends InstrumentedDialogFragment implements
         DialogInterface.OnClickListener {
+    private static final String TAG = "MobileDataDialogFragment";
 
     public static final int TYPE_DISABLE_DIALOG = 0;
     public static final int TYPE_MULTI_SIM_DIALOG = 1;
@@ -161,6 +163,7 @@ public class MobileDataDialogFragment extends InstrumentedDialogFragment impleme
         switch (mType) {
             case TYPE_DISABLE_CIWLAN_DIALOG:
             case TYPE_DISABLE_DIALOG:
+                Log.d(TAG, "setMobileDataEnabled: false");
                 MobileNetworkUtils.setMobileDataEnabled(getContext(), mSubId, false /* enabled */,
                         false /* disableOtherSubscriptions */);
                 if (mWifiPickerTrackerHelper != null
@@ -170,6 +173,7 @@ public class MobileDataDialogFragment extends InstrumentedDialogFragment impleme
                 break;
             case TYPE_MULTI_SIM_DIALOG:
                 mSubscriptionManager.setDefaultDataSubId(mSubId);
+                Log.d(TAG, "setMobileDataEnabled: true");
                 MobileNetworkUtils.setMobileDataEnabled(getContext(), mSubId, true /* enabled */,
                         true /* disableOtherSubscriptions */);
                 if (mWifiPickerTrackerHelper != null

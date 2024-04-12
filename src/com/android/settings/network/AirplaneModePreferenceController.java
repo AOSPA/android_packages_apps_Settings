@@ -38,6 +38,7 @@ import androidx.preference.TwoStatePreference;
 
 import com.android.settings.AirplaneModeEnabler;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -94,7 +95,8 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
                 // In ECM mode launch ECM app dialog
                 if (mFragment != null) {
                     mFragment.startActivityForResult(
-                            new Intent(TelephonyManager.ACTION_SHOW_NOTICE_ECM_BLOCK_OTHERS, null),
+                            new Intent(TelephonyManager.ACTION_SHOW_NOTICE_ECM_BLOCK_OTHERS, null)
+                                .setPackage(Utils.PHONE_PACKAGE_NAME),
                             REQUEST_CODE_EXIT_ECM);
                 }
                 return true;
@@ -102,8 +104,9 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
                 // In SCBM mode launch SCBM app dialog
                 if (mFragment != null) {
                     mFragment.startActivityForResult(
-                            new Intent(ExtTelephonyManager.ACTION_SHOW_NOTICE_SCM_BLOCK_OTHERS,
-                            null), REQUEST_CODE_EXIT_SCBM);
+                            new Intent(ExtTelephonyManager.ACTION_SHOW_NOTICE_SCM_BLOCK_OTHERS, null)
+                                .setPackage(Utils.PHONE_PACKAGE_NAME),
+                            REQUEST_CODE_EXIT_SCBM);
                 }
                 return true;
             }

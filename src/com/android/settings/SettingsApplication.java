@@ -32,6 +32,7 @@ import androidx.annotation.NonNull;
 import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.core.instrumentation.ElapsedTimeUtils;
+import com.android.settings.development.DeveloperOptionsActivityLifecycle;
 import com.android.settings.fuelgauge.BatterySettingsStorage;
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.localepicker.LocaleNotificationDataManager;
@@ -95,6 +96,8 @@ public class SettingsApplication extends Application {
 
         registerReceiver(mBroadcastReceiver,
                 new IntentFilter(TelephonyManager.ACTION_MULTI_SIM_CONFIG_CHANGED));
+
+        registerActivityLifecycleCallbacks(new DeveloperOptionsActivityLifecycle());
     }
 
     @Override

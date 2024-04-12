@@ -73,14 +73,10 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="631521133525979967">"Правый слуховой аппарат подключен.\n\nУбедитесь, что левый аппарат работает и готов к подключению."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Подключить прав. ухо"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Подключить левое ухо"</string>
-    <!-- no translation found for bluetooth_hearing_device_settings_title (6060072560486755057) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_device_settings_summary (3822646075744075158) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets (5429761844739722885) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_error (2095249829735188484) -->
-    <skip />
+    <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Настройки слуховых аппаратов"</string>
+    <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Быстрый запуск, совместимость со слуховыми аппаратами"</string>
+    <string name="bluetooth_hearing_aids_presets" msgid="5429761844739722885">"Наборы настроек"</string>
+    <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Не удалось обновить набор настроек."</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Аудиовыход"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"О выводе звука"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Выводить звук на слуховой аппарат или динамик телефона"</string>
@@ -90,6 +86,7 @@
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Медиа и системные звуки"</string>
     <string name="bluetooth_notification_title" msgid="8708962394926222039">"Уведомления"</string>
     <string name="bluetooth_audio_routing_footer_summary" msgid="410260713589309293">"По умолчанию параметры вывода звука определяются отдельными приложениями."</string>
+    <string name="bluetooth_audio_codec_default_selection" msgid="4753278792700664175">"Выбор системы (по умолчанию)"</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"Bluetooth-устройство без названия"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"Поиск"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"Устройства Bluetooth не найдены."</string>
@@ -212,9 +209,9 @@
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"Если в приложении нельзя выбрать регион, будут использоваться настройки по умолчанию."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Узнайте больше о языковых настройках"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"Дополнительные настройки"</string>
-    <string name="terms_of_address_title" msgid="4064593634733842458">"Форма обращения"</string>
-    <string name="terms_of_address_summary" msgid="6136134336560679144">"Укажите предпочтительную форму обращения."</string>
-    <string name="terms_of_address_intro_title" msgid="6149691509414243483">"Информация о том, какую форму обращения вы предпочитаете, может использоваться для персонализации приложений."</string>
+    <string name="terms_of_address_title" msgid="7338630812197476808">"Выбрать, как к вам обращаться"</string>
+    <string name="terms_of_address_summary" msgid="7802443422612600620">"Настроить обращение к вам на устройстве"</string>
+    <string name="terms_of_address_intro_title" msgid="1533951542181569335">"Этот параметр позволяет большинству системных приложений определить, как к вам нужно обращаться. Он не действует для установленных приложений."</string>
     <string name="terms_of_address_not_specified" msgid="4439257779351251973">"Не указано"</string>
     <string name="terms_of_address_feminine" msgid="1743479869695539283">"В женском роде"</string>
     <string name="terms_of_address_masculine" msgid="983106046135098856">"В мужском роде"</string>
@@ -270,6 +267,10 @@
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Стандартное время"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Регион"</string>
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"Выбрать по разнице с UTC"</string>
+    <string name="time_feedback_category_title" msgid="5942621686512255208">"Отзыв"</string>
+    <string name="keywords_time_feedback_category" msgid="4553921538559830393">"отзыв, ошибка, время, пояс, часовой пояс"</string>
+    <string name="time_feedback_title" msgid="7720948068042783614">"Отправить отзыв о времени"</string>
+    <string name="keywords_time_feedback" msgid="929965356597294030">"отзыв, ошибка, время, пояс, часовой пояс"</string>
     <string name="lock_after_timeout" msgid="8682769000437403444">"Блокировать после отключения"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> после отключения"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Сразу по истечении времени ожидания (если блокировка экрана не контролируется функцией <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>)"</string>
@@ -545,7 +546,7 @@
     <string name="privacy_header" msgid="5526002421324257007">"Конфиденциальность"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Рабочий профиль"</string>
     <string name="private_space_title" msgid="1752064212078238723">"Личное пространство"</string>
-    <string name="private_space_summary" msgid="2274405892301976238">"Спрячьте приложения в личное пространство и закройте доступ к нему"</string>
+    <string name="private_space_summary" msgid="2274405892301976238">"Приложения в личном пространстве скрыты и доступны только вам"</string>
     <string name="private_space_description" msgid="4059594203775816136">"Создайте отдельное пространство для личных приложений, которое можно скрыть или защитить с помощью блокировки."</string>
     <string name="private_space_lock_title" msgid="7230836881433350526">"Блокировка личного пространства"</string>
     <string name="private_space_one_lock_summary" msgid="2106513606571219068">"Для личного пространства можно установить тот же способ разблокировки, который используется для экрана, или выбрать другой."</string>
@@ -559,26 +560,24 @@
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"Способы разблокировки"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Тот же способ блокировки, что и для экрана устройства"</string>
     <string name="private_space_new_lock_title" msgid="9056139964133004094">"Изменить способ блокировки личного пространства?"</string>
+    <string name="private_space_new_lock_message" msgid="3117703578905489206">"Вам понадобится ввести PIN-код, графический ключ или пароль на следующем экране."</string>
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Автоматически блокировать личное пространство"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Можно сделать так, чтобы личное пространство автоматически блокировалось, если вы не используете устройство какое-то время."</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Каждый раз при блокировке устройства"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Через 5 минут бездействия"</string>
-    <string name="private_space_auto_lock_never" msgid="595014527119778873">"Никогда"</string>
-    <string name="private_space_hide_title" msgid="8687034008994037610">"Скрывать, когда доступ заблокирован"</string>
-    <string name="privatespace_hide_page_title" msgid="8417507414027827566">"Скрывать личное пространство, если оно заблокировано"</string>
-    <string name="privatespace_hide_page_summary" msgid="5525422595477989312">"Вы можете скрыть личное пространство из списка приложений на устройстве. Так никто не узнает, что вы пользуетесь этой функцией."</string>
-    <string name="privatespace_access_header" msgid="6066826215718835041">"Доступ к личному пространству, когда оно скрыто"</string>
-    <string name="privatespace_search_description" msgid="3121043205513022357">"В списке приложений введите запрос \"личное пространство\"."</string>
-    <string name="privatespace_tap_tile_description" msgid="8346440188590931635">"Выберите параметр \"Личное пространство\"."</string>
-    <string name="privatespace_unlock_description" msgid="3177710543121916413">"Разблокируйте личное пространство."</string>
-    <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"Отключено"</string>
-    <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"Включено"</string>
-    <!-- no translation found for private_space_hide_dialog_title (3192253150765516720) -->
+    <!-- no translation found for private_space_auto_lock_after_device_restart (288755768725895029) -->
     <skip />
-    <!-- no translation found for private_space_hide_dialog_message (2006421821648157211) -->
-    <skip />
-    <!-- no translation found for private_space_hide_dialog_button (4157191429310035457) -->
-    <skip />
+    <string name="private_space_hide_page_title" msgid="4351404195904146088">"Прятать личное пространство, когда оно заблокировано"</string>
+    <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Вы можете скрыть личное пространство из списка приложений на устройстве. Так никто не узнает, что вы пользуетесь этой функцией."</string>
+    <string name="private_space_access_header" msgid="1077082416567150819">"Доступ к личному пространству, когда оно скрыто"</string>
+    <string name="private_space_search_description" msgid="1538155187658429618">"Введите \"личное пространство\" в строке поиска."</string>
+    <string name="private_space_tap_tile_description" msgid="6173556870938267361">"Нажмите "<b>"Личное пространство"</b>"."</string>
+    <string name="private_space_unlock_description" msgid="5527228922778630361">"Разблокировать личное пространство"</string>
+    <string name="private_space_hide_off_summary" msgid="8565973976602078315">"Отключено"</string>
+    <string name="private_space_hide_on_summary" msgid="3450844101901438867">"Включено"</string>
+    <string name="private_space_hide_dialog_title" msgid="6439207708506990156">"Личное пространство будет скрыто, когда вы его заблокируете"</string>
+    <string name="private_space_hide_dialog_message" msgid="618693520130744836">"Для доступа к нему введите \"личное пространство\" в строке поиска в списке приложений."</string>
+    <string name="private_space_hide_dialog_button" msgid="4157191429310035457">"ОК"</string>
     <string name="private_space_category_system" msgid="1286843321867285700">"Система"</string>
     <string name="private_space_delete_title" msgid="636873505724100006">"Удалить личное пространство"</string>
     <string name="private_space_delete_header" msgid="4594429153176776184">"Удалить личное пространство?"</string>
@@ -597,15 +596,16 @@
     <string name="private_space_cancel_label" msgid="379259667396956886">"Отмена"</string>
     <string name="private_space_setup_button_label" msgid="2094882154623560585">"Создать"</string>
     <string name="private_space_setup_title" msgid="2272968244329821450">"Личное пространство"</string>
-    <string name="private_space_hide_apps_summary" msgid="4418722947376042418">"Скройте или заблокируйте приложения в личном пространстве. В целях безопасности используйте отдельный аккаунт Google."</string>
+    <string name="private_space_hide_apps_summary" msgid="4418722947376042418">"Создайте пространство для личных приложений, которое можно скрыть или защитить с помощью блокировки. В целях безопасности используйте отдельный аккаунт Google."</string>
     <string name="private_space_setup_sub_header" msgid="5454598292017819146">"Настройка личного пространства"</string>
     <string name="private_space_separate_account_text" msgid="4492251315012955548"><b>"Выбор аккаунта Google"</b>\n"Чтобы синхронизированные файлы, фотографии и электронные письма не появлялись вне вашего личного пространства, выберите, какой аккаунт в нем использовать."</string>
     <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"Блокировка"</b>\n"Заблокируйте личное пространство, чтобы другие пользователи не могли его открыть."</string>
     <string name="private_space_install_apps_text" msgid="5693139160766464498"><b>"Установка приложений"</b>\n"В личном пространстве есть Google Play, поэтому вы можете легко устанавливать приложения."</string>
     <string name="private_space_apps_permission_text" msgid="7030946025253366172">"Приложения, добавленные в личное пространство, не показываются в разделе \"Управление разрешениями\", на панели управления разрешениями и в других настройках, когда доступ к личному пространству заблокирован.\n\nЛичное пространство нельзя перенести на другое устройство. Для этого потребуется создать новое личное пространство.\n\nДоступ к вашему личному пространству может получить человек, который установит на вашем устройстве вредоносные приложения или подключит его к компьютеру."</string>
+    <string name="private_space_learn_more_text" msgid="5314198983263277586">"Подробнее о личном пространстве"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Создание личного пространства…"</string>
     <string name="private_space_notifications_hidden_title" msgid="2009112565217540581">"Когда личное пространство заблокировано, уведомления из добавленных в него приложений скрываются"</string>
-    <string name="private_space_explore_settings_title" msgid="1448128245941571654">"В параметрах личного пространства можно скрыть его и настроить автоматическую блокировку"</string>
+    <string name="private_space_explore_settings_title" msgid="1448128245941571654">"Скройте личное пространство и настройте его автоматическую блокировку"</string>
     <string name="private_space_apps_installed_title" msgid="4781838023423527730">"В вашем личном пространстве уже установлены нужные приложения"</string>
     <string name="private_space_error_screen_title" msgid="739381738044418346">"Не удалось создать личное пространство"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Повторить попытку"</string>
@@ -621,7 +621,7 @@
     <string name="private_space_retry_summary" msgid="1920444015972648774">"Войдите в аккаунт, в котором хотите использовать личное пространство."</string>
     <string name="private_space_skip_login_label" msgid="7078019409056628192">"Не сейчас"</string>
     <string name="private_space_continue_login_label" msgid="7779965766333065391">"Продолжить"</string>
-    <string name="private_space_lock_setup_title" msgid="6541564212199510787">"Выберите способ разблокировки доступа к личному пространству"</string>
+    <string name="private_space_lock_setup_title" msgid="6541564212199510787">"Выберите способ разблокировки личного пространства"</string>
     <string name="private_space_lock_setup_description" msgid="423405593476300918">"Вы можете разблокировать личное пространство с помощью отпечатка пальца. В целях безопасности потребуется установить дополнительный способ разблокировки."</string>
     <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"Задайте PIN-код для личного пространства"</string>
     <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"Задайте пароль для личного пространства"</string>
@@ -705,35 +705,15 @@
 
 </xliff:g>Модель отпечатка пальца, сохраненная на устройстве, будет удалена. Модель вашего лица также будет безвозвратно удалена. Вы не сможете пользоваться фейсконтролем и отпечатком пальца для аутентификации в приложениях."</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"PIN-код защитит данные на телефоне в случае его потери или кражи."</string>
-    <string name="unlock_disable_frp_warning_content_pin_authbound_keys" msgid="6497861740382402784">"PIN-код и другие сохраненные данные будут потеряны.<xliff:g id="EMPTY_LINE_0">
-
-</xliff:g>Карты, установленные для бесконтактной оплаты, будут удалены.<xliff:g id="EMPTY_LINE_1">
-
-</xliff:g>Кошельки и другие приложения, для использования которых нужна разблокировка устройства, могут работать неправильно."</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"PIN-код защитит данные на телефоне в случае его потери или кражи.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>Модель отпечатка пальца, сохраненная на устройстве, также будет удалена. Вы не сможете пользоваться отпечатком пальца для аутентификации в приложениях."</string>
-    <string name="unlock_disable_frp_warning_content_pin_fingerprint_authbound_keys" msgid="8930057076658360799">"PIN-код, модель отпечатка и другие сохраненные данные будут потеряны.<xliff:g id="EMPTY_LINE_0">
-
-</xliff:g>Карты, установленные для бесконтактной оплаты, будут удалены.<xliff:g id="EMPTY_LINE_1">
-
-</xliff:g>Кошельки и другие приложения, для использования которых нужна разблокировка устройства, могут работать неправильно."</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"PIN-код защитит данные на телефоне в случае его потери или кражи.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>Модель вашего лица также будет безвозвратно удалена. Вы не сможете пользоваться фейсконтролем для аутентификации в приложениях."</string>
-    <string name="unlock_disable_frp_warning_content_pin_face_authbound_keys" msgid="979399855891561038">"PIN-код, модель лица и другие сохраненные данные будут потеряны.<xliff:g id="EMPTY_LINE_0">
-
-</xliff:g>Карты, установленные для бесконтактной оплаты, будут удалены.<xliff:g id="EMPTY_LINE_1">
-
-</xliff:g>Кошельки и другие приложения, для использования которых нужна разблокировка устройства, могут работать неправильно."</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"PIN-код защитит данные на телефоне в случае его потери или кражи.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>Модель отпечатка пальца, сохраненная на устройстве, будет удалена. Модель вашего лица также будет безвозвратно удалена. Вы не сможете пользоваться фейсконтролем и отпечатком пальца для аутентификации в приложениях."</string>
-    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint_authbound_keys" msgid="7019955731206729909">"PIN-код, модели лица и отпечатка, а также другие сохраненные данные будут потеряны.<xliff:g id="EMPTY_LINE_0">
-
-</xliff:g>Карты, установленные для бесконтактной оплаты, будут удалены.<xliff:g id="EMPTY_LINE_1">
-
-</xliff:g>Кошельки и другие приложения, для использования которых нужна разблокировка устройства, могут работать неправильно."</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"Пароль защитит данные на телефоне в случае его потери или кражи."</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"Пароль защитит данные на телефоне в случае его потери или кражи.<xliff:g id="EMPTY_LINE">
 
@@ -754,6 +734,26 @@
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"Без блокировки экрана не будет работать защита устройства.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>Модель отпечатка пальца, сохраненная на устройстве, будет удалена. Модель вашего лица также будет безвозвратно удалена. Вы не сможете пользоваться фейсконтролем и отпечатком пальца для аутентификации в приложениях."</string>
+    <string name="unlock_disable_frp_warning_content_authbound_keys" msgid="6397327696248819663">"Блокировка экрана будет отключена.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>Бесконтактная оплата будет недоступна.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>Платежные и другие приложения, для использования которых требуется аутентификация (например, кошельки), могут работать неправильно."</string>
+    <string name="unlock_disable_frp_warning_content_fingerprint_authbound_keys" msgid="7158076544627335461">"Блокировка экрана и разблокировка по отпечатку пальца будут отключены.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>Бесконтактная оплата будет недоступна.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>Платежные и другие приложения, для использования которых требуется аутентификация (например, кошельки), могут работать неправильно."</string>
+    <string name="unlock_disable_frp_warning_content_face_authbound_keys" msgid="8120786951217029818">"Блокировка экрана и фейсконтроль будут отключены.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>Бесконтактная оплата будет недоступна.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>Платежные и другие приложения, для использования которых требуется аутентификация (например, кошельки), могут работать неправильно."</string>
+    <string name="unlock_disable_frp_warning_content_face_fingerprint_authbound_keys" msgid="1574263040292024543">"Блокировка экрана, фейсконтроль и разблокировка по отпечатку пальца будут отключены.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>Бесконтактная оплата будет недоступна.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>Платежные и другие приложения, для использования которых требуется аутентификация (например, кошельки), могут работать неправильно."</string>
     <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"Не использовать"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"Для стабильной работы приложения \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" рекомендуется настроить сложный PIN-код или пароль."</string>
     <string name="unlock_footer_medium_complexity_requested" msgid="5515870066751600640">"Для стабильной работы приложения \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" рекомендуется настроить новый PIN-код или пароль."</string>
@@ -880,7 +880,7 @@
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"Готов к передаче контента приложений по NFC"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"Отключено"</string>
-    <string name="nfc_disabled_summary" msgid="8737797364522502351">"Недоступно, так как модуль NFC отключен."</string>
+    <string name="nfc_disabled_summary" msgid="8737797364522502351">"Недоступно, так как функция NFC выключена"</string>
     <string name="android_beam_explained" msgid="5684416131846701256">"Эта функция позволяет обмениваться информацией между устройствами, приложив их друг к другу. Передавать можно практически любые данные, включая контакты, веб-страницы и видео.\n\nСовместите задние панели устройств и нажмите на экран. Передаваемые данные зависят от приложения."</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi-Fi"</string>
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Использовать Wi-Fi"</string>
@@ -1041,8 +1041,12 @@
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"MAC-адрес устройства"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"Случайный MAC-адрес"</string>
     <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"Случайный MAC-адрес (последний)"</string>
+    <string name="wifi_certificate_summary_Certificates" msgid="7849788154375655654">"Сертификатов: <xliff:g id="NUMBER">%d</xliff:g>"</string>
+    <string name="wifi_certificate_summary_system" msgid="6521297326433133669">"Сертификат системы"</string>
+    <string name="wifi_certificate_summary_pinning" msgid="5901067790901727957">"Закрепление сертификата"</string>
     <string name="wifi_details_title" msgid="222735438574597493">"Сведения о сети"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"Маска подсети"</string>
+    <string name="server_name_title" msgid="7257095185810299066">"Имя сервера"</string>
     <string name="wifi_type_title" msgid="2174893488722015838">"Тип"</string>
     <string name="wifi_details_dns" msgid="273231528073312579">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"IPv6-адреса"</string>
@@ -1247,7 +1251,7 @@
     <string name="dark_ui_text" msgid="4392646155331126666">"В тёмной теме используется черный фон. Это помогает продлить время работы от батареи для некоторых устройств. Смена темы по расписанию происходит только после выключения экрана."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Тёмная тема сейчас используется в соответствии с вашим расписанием ночного режима."</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Настройки ночного режима"</string>
-    <string name="even_dimmer_display_title" msgid="8589063452814896327">"Более низкая яркость"</string>
+    <string name="even_dimmer_display_title" msgid="6731255736830410149">"Более низкая яркость"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Разрешить уменьшать яркость экрана ниже обычного"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Время отключения экрана"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"После <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> бездействия"</string>
@@ -1281,7 +1285,7 @@
     <string name="doze_always_on_summary" msgid="509097829739647852">"Батарея разряжается быстрее"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"Полужирный шрифт"</string>
     <string name="title_font_size" msgid="570613010306330622">"Размер шрифта"</string>
-    <string name="short_summary_font_size" msgid="8444689613442419978">"Изменение размера текста"</string>
+    <string name="short_summary_font_size" msgid="8444689613442419978">"Изменение размера шрифта"</string>
     <string name="sim_lock_settings" msgid="7331982427303002613">"Настройки блокировки SIM-карты"</string>
     <string name="sim_lock_settings_category" msgid="6475255139493877786">"Блокировка SIM-карты"</string>
     <string name="sim_pin_toggle" msgid="6814489621760857328">"Блокировать SIM-карту"</string>
@@ -1392,6 +1396,9 @@
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Удалить устройство \"<xliff:g id="NAME">^1</xliff:g>\"?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Вы потеряете доступ к данным, хранящимся на устройстве \"<xliff:g id="NAME">^1</xliff:g>\"."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"К разделу \"Система\" относятся файлы, используемые Android <xliff:g id="VERSION">%s</xliff:g>."</string>
+    <string name="storage_os_detail_dialog_system" msgid="1423073052313067844">"Сюда входит операционная система и файлы, необходимые для бесперебойной работы телефона. Доступ к этим файлам закрыт для защиты их целостности."</string>
+    <string name="storage_other_files_detail_dialog_system" msgid="8241153880150866635">"Сюда входит кеш и другие временные файлы, необходимые для работы операционной системы. Со временем используемый объем хранилища может измениться."</string>
+    <string name="storage_system_label" msgid="8320948583086758295">"Система"</string>
     <string name="storage_wizard_guest" msgid="5813419895687733649">"В гостевом режиме нельзя форматировать SD-карты."</string>
     <string name="storage_wizard_format_progress_title" msgid="9170393018855949774">"<xliff:g id="NAME">^1</xliff:g> форматируется…"</string>
     <string name="storage_wizard_format_progress_body" msgid="1044024044955390417">"Не извлекайте устройство \"<xliff:g id="NAME">^1</xliff:g>\" во время форматирования."</string>
@@ -1429,7 +1436,7 @@
     <string name="battery_level_title" msgid="1371765298786083448">"Уровень заряда батареи"</string>
     <string name="communal_settings_title" msgid="2845678473945902115">"Совместные"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Совместные настройки"</string>
-    <string name="satellite_setting" msgid="706846910912477125">"Обмен сообщениями по спутниковой связи"</string>
+    <string name="satellite_setting" msgid="4171265534842459910">"Обмен сообщениями по спутниковой связи"</string>
     <string name="apn_settings" msgid="4295467389400441299">"Точки доступа"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Изменить точку доступа"</string>
     <string name="apn_add" msgid="9069613192201630934">"Добавить точку доступа"</string>
@@ -1493,6 +1500,8 @@
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Сетевые настройки сброшены"</string>
     <string name="reset_esim_error_title" msgid="6516110227665862295">"Не получилось удалить eSIM-карты"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"Не получилось удалить eSIM-карты.\n\nПерезапустите устройство и повторите попытку."</string>
+    <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Удалить личное пространство"</string>
+    <string name="reset_private_space_delete_dialog" msgid="2108869024671690587">"Если на устройстве есть личное пространство, то оно, все приложения и их данные в нем будут безвозвратно удалены."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Удалить все данные"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Удалить все данные"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"музыка;"</li>\n<li>"фото;"</li>\n<li>"другие данные."</li></string>
@@ -1580,7 +1589,7 @@
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"Определение часового пояса с помощью геолокации отключено."</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"Определение часового пояса с помощью геолокации не поддерживается."</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Вы не можете изменить настройки определения часового пояса с помощью геолокации."</string>
-    <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"Для определения часового пояса могут быть использованы данные о местоположении"</string>
+    <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"Для определения часового пояса могут использоваться данные о местоположении"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Просмотр юридической информации, состояния планшетного ПК и версии ПО"</string>
     <string name="legal_information" msgid="7509900979811934843">"Юридическая информация"</string>
     <string name="manual" msgid="3651593989906084868">"Руководство"</string>
@@ -1746,7 +1755,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Включить"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Очистить хранилище"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Удалить обновления"</string>
-    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"Разрешить доступ к настройкам"</string>
+    <string name="app_restricted_settings_lockscreen_title" msgid="796413224212436400">"Предоставить ограниченные разрешения"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Некоторые выбранные вами действия выполняются в этом приложении по умолчанию."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Это приложение может создавать виджеты и получать их данные."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Значения по умолчанию не установлены."</string>
@@ -2014,8 +2023,9 @@
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"2 дня назад"</string>
     <string name="color_contrast_preview_email_badge" msgid="4845484039428505392">"Есть вопросы?"</string>
     <string name="color_contrast_preview_email_title" msgid="198712116139754823">"Отчет о командировке"</string>
-    <string name="color_contrast_preview_email_body" msgid="4139331665325624199">"Если у вас остались вопросы, напишите мне или Елене.\n Этот отчет будет"</string>
+    <string name="color_contrast_preview_email_body" msgid="2714343154965937945">"Если у вас остались вопросы, напишите мне или Елене. Этот отчет будет"</string>
     <string name="color_contrast_preview_email_attachment_name" msgid="852407311884814746">"Расходы клиента"</string>
+    <string name="color_contrast_about_title" msgid="5939566801408667867">"О цветовой контрастности"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Уменьшение яркости экрана"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Элементы управления"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Настройка времени задержки"</string>
@@ -2023,10 +2033,8 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Скачанные приложения"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Экспериментальные функции"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Экспериментальные функции"</string>
-    <!-- no translation found for bt_stack_log_level (6527899271926969296) -->
-    <skip />
-    <!-- no translation found for bt_stack_log_level_summary (3769107713334448285) -->
-    <skip />
+    <string name="bt_stack_log_level" msgid="6527899271926969296">"Включить журнал стека Bluetooth"</string>
+    <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"Обновить уровень логирования для стека Bluetooth (после изменения отключите и включите Bluetooth)"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Фильтрация snoop-логов Bluetooth HCI"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Настройте фильтры"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Выключите и включите Bluetooth, чтобы изменения вступили в силу"</string>
@@ -2046,6 +2054,8 @@
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Перемещать лупу по мере ввода текста"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Не отключать при смене приложений"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"Лупа остается включенной. Масштаб уменьшается при переключении приложений."</string>
+    <!-- no translation found for accessibility_screen_magnification_always_on_unavailable_summary (3844732482037416038) -->
+    <skip />
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Джойстик"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Активируйте и перемещайте лупу с помощью экранного джойстика. Чтобы управлять лупой, нажмите на джойстик, удерживайте его, а затем перетащите. Чтобы переместить сам джойстик, нажмите на него и перетащите."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Об увеличении изображения на экране"</string>
@@ -2094,55 +2104,59 @@
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Чтобы увеличить масштаб:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Выполните действие быстрого запуска для перехода в режим увеличения.&lt;br/&gt; {1,number,integer}. Коснитесь экрана.&lt;br/&gt; {2,number,integer}. Если нужно, перетащите область увеличения двумя пальцами.&lt;br/&gt; {3,number,integer}. Чтобы скорректировать масштаб, сведите или разведите два пальца.&lt;br/&gt; {4,number,integer}. Чтобы выйти из режима увеличения, выполните действие быстрого запуска.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Чтобы временно увеличить масштаб:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Убедитесь, что выбран режим увеличения \"Весь экран\".&lt;br/&gt; {1,number,integer}. Выполните действие быстрого запуска для перехода в режим увеличения.&lt;br/&gt; {2,number,integer}. Коснитесь любой области экрана и удерживайте палец.&lt;br/&gt; {3,number,integer}. Если нужно, перетащите область увеличения.&lt;br/&gt; {4,number,integer}. Чтобы вернуть исходный масштаб, уберите палец с экрана."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Благодаря функции увеличения вы сможете приближать изображение на экране.\n\n"<b>"Если вы хотите увеличить изображение"</b>", включите функцию и нажмите на экран в любом месте.\n"<ul><li>"Для прокрутки проведите двумя пальцами."</li>\n<li>"Чтобы изменить масштаб, сведите два пальца вместе или разведите их."</li></ul>\n\n<b>"Если нужно временно увеличить масштаб"</b>", включите функцию увеличения, коснитесь экрана и удерживайте.\n"<ul><li>"Для обзора проведите по экрану."</li>\n<li>"Чтобы уменьшить масштаб, отпустите палец."</li></ul>\n\n"Эти жесты не работают на клавиатуре и панели навигации."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Страница <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> из <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
-    <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Используйте кнопку специальных возможностей"</string>
-    <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Для запуска удерживайте кнопки громкости"</string>
-    <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Для запуска нажмите трижды на экран"</string>
-    <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="3912970760484557646">"Чтобы открыть, дважды нажмите на экран двумя пальцами"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_title_quick_setting (2905083277641794558) -->
-    <skip />
-    <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Используйте жесты"</string>
+    <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Кнопка быстрого доступа к специальным возможностям"</string>
+    <string name="accessibility_tutorial_dialog_title_volume" msgid="1032323517963429981">"Кнопки регулировки громкости для быстрого доступа"</string>
+    <string name="accessibility_tutorial_dialog_title_triple" msgid="5529704884360240365">"Тройное касание для быстрого доступа"</string>
+    <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="5749704453829390283">"Двойное касание %1$d пальцами для быстрого доступа"</string>
+    <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Переход к быстрым настройкам"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"Жест быстрого доступа к специальным возможностям"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Используйте жест специальных возможностей"</string>
-    <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Чтобы включить эту функцию, нажмите кнопку специальных возможностей <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> в нижней части экрана.\n\nДля переключения между функциями нажмите и удерживайте эту кнопку."</string>
-    <string name="accessibility_tutorial_dialog_message_floating_button" msgid="2551777208185138391">"Чтобы включить эту функцию, нажмите кнопку специальных возможностей."</string>
-    <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Чтобы включить эту функцию, нажмите и удерживайте обе кнопки регулировки громкости."</string>
+    <string name="accessibility_tutorial_dialog_message_button" msgid="8977286776192770246">"Чтобы включить эту функцию, нажмите кнопку специальных возможностей <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> в нижней части экрана.\n\nДля переключения между функциями нажмите и удерживайте эту кнопку."</string>
+    <string name="accessibility_tutorial_dialog_message_floating_button" msgid="6631371483819355514">"Чтобы включить эту функцию, нажмите кнопку специальных возможностей"</string>
+    <string name="accessibility_tutorial_dialog_message_volume" msgid="3785791536286606664">"Чтобы включить эту функцию, нажмите и удерживайте обе кнопки регулировки громкости"</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Чтобы включить или отключить увеличение, трижды нажмите на любую область экрана."</string>
-    <string name="accessibility_tutorial_dialog_message_two_finger_triple" msgid="860548190334486449">"Чтобы включить или отключить увеличение, дважды нажмите на любую область экрана двумя пальцами."</string>
-    <!-- no translation found for accessibility_tutorial_dialog_message_quick_setting (2272748015553891860) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_tripletap_instruction" msgid="7549293553589934">"Чтобы включить или отключить увеличение, быстро нажмите на экран %1$d раза"</string>
+    <string name="accessibility_tutorial_dialog_twofinger_doubletap_instruction" msgid="1007756360115974649">"Чтобы включить или отключить увеличение, быстро нажмите на экран дважды %1$d пальцами"</string>
+    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="3715446725334547432">"{count,plural, =1{Чтобы включить эту функцию, проведите вниз от верхнего края экрана. Затем найдите параметр \"{featureName}\".}one{Чтобы включить эту функцию, проведите вниз от верхнего края экрана # пальцем. Затем найдите параметр \"{featureName}\".}few{Чтобы включить эту функцию, проведите вниз от верхнего края экрана # пальцами. Затем найдите параметр \"{featureName}\".}many{Чтобы включить эту функцию, проведите вниз от верхнего края экрана # пальцами. Затем найдите параметр \"{featureName}\".}other{Чтобы включить эту функцию, проведите вниз от верхнего края экрана # пальца. Затем найдите параметр \"{featureName}\".}}"</string>
+    <string name="accessibility_tutorial_dialog_shortcut_unavailable_in_suw" msgid="3847728530771929959">"Этот жест будет доступен, когда вы завершите настройку устройства."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Чтобы включить эту функцию, проведите вверх от нижнего края экрана двумя пальцами.\n\nДля переключения между функциями проведите по экрану снизу вверх двумя пальцами и задержите их."</string>
+    <string name="accessibility_tutorial_dialog_gesture_shortcut_instruction" msgid="7349950768250852308">"{count,plural, =1{Чтобы включить эту функцию, проведите вверх от нижнего края экрана}one{Чтобы включить эту функцию, проведите вверх от нижнего края экрана # пальцем}few{Чтобы включить эту функцию, проведите вверх от нижнего края экрана # пальцами}many{Чтобы включить эту функцию, проведите вверх от нижнего края экрана # пальцами}other{Чтобы включить эту функцию, проведите вверх от нижнего края экрана # пальца}}"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Чтобы включить эту функцию, проведите вверх от нижнего края экрана тремя пальцами.\n\nДля переключения между функциями проведите по экрану снизу вверх тремя пальцами и задержите их."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Чтобы воспользоваться специальной возможностью, проведите вверх от нижнего края экрана двумя пальцами.\n\nДля переключения между функциями проведите по экрану снизу вверх двумя пальцами и задержите их."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Чтобы воспользоваться специальной возможностью, проведите вверх от нижнего края экрана тремя пальцами.\n\nДля переключения между функциями проведите по экрану снизу вверх тремя пальцами и задержите их."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"ОК"</string>
-    <string name="accessibility_tutorial_dialog_link_button" msgid="6797349445794031781">"Настройки кнопки"</string>
+    <string name="accessibility_tutorial_dialog_link_button" msgid="13364319079385020">"Настроить кнопку"</string>
+    <string name="accessibility_tutorial_dialog_configure_software_shortcut_type" msgid="8041105223988170653">"Ещё"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Быстрый запуск функции \"<xliff:g id="SERVICE">%1$s</xliff:g>\""</string>
-    <!-- no translation found for accessibility_shortcut_edit_summary_software (48978719406821294) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_summary_software_gesture (7346399253904683940) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_summary_software" msgid="48978719406821294">"Кнопка специальных возможностей"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="7346399253904683940">"Жест специальных возможностей"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Движение вверх по экрану двумя пальцами"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Движение вверх по экрану тремя пальцами"</string>
-    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Нажать кнопку специальных возможностей"</string>
-    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"Использовать жест специальных возможностей"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Нажмите кнопку специальных возможностей <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> в нижней части экрана.\n\nДля переключения между функциями нажмите и удерживайте эту кнопку."</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="6505512764022389951">"Кнопка специальных возможностей"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_floating_button" msgid="6266489864614886247">"Нажать плавающую кнопку"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="4775049370625630546">"Жест специальных возможностей"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8315934725362849788">"Нажмите кнопку специальных возможностей <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> внизу экрана. Чтобы переключиться между функциями, нажмите и удерживайте кнопку специальных возможностей."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Проведите двумя пальцами вверх от нижнего края экрана.\n\nДля переключения между функциями проведите двумя пальцами по экрану вверх и удерживайте их."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Проведите вверх от нижнего края экрана тремя пальцами.\n\nДля переключения между функциями проведите по экрану вверх тремя пальцами и задержите их."</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{Проведите вверх от нижнего края экрана. Чтобы переключиться между функциями, проведите снизу вверх и задержите палец на экране.}one{Проведите вверх от нижнего края экрана # пальцем. Чтобы переключиться между функциями, проведите снизу вверх # пальцем и задержите их на экране.}few{Проведите вверх от нижнего края экрана # пальцами. Чтобы переключиться между функциями, проведите снизу вверх # пальцами и задержите их на экране.}many{Проведите вверх от нижнего края экрана # пальцами. Чтобы переключиться между функциями, проведите снизу вверх # пальцами и задержите их на экране.}other{Проведите вверх от нижнего края экрана # пальца. Чтобы переключиться между функциями, проведите снизу вверх # пальца и задержите их на экране.}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Другие настройки"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Подробнее о сервисе \"<xliff:g id="SERVICE">%1$s</xliff:g>\""</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_quick_settings (140959604014177304) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_quick_settings (8726678553797015432) -->
-    <skip />
-    <!-- no translation found for accessibility_feature_shortcut_setting_summary_quick_settings (7006526933552889373) -->
-    <skip />
-    <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Удерживать кнопки регулировки громкости"</string>
-    <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"удерживание кнопок регулировки громкости"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Быстрые настройки"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{Проведите вниз от верхнего края экрана}one{Проведите вниз от верхнего края экрана # пальцем}few{Проведите вниз от верхнего края экрана # пальцами}many{Проведите вниз от верхнего края экрана # пальцами}other{Проведите вниз от верхнего края экрана # пальца}}"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{Проведите вниз от верхнего края экрана. Этот жест будет доступен, когда вы завершите настройку устройства.}one{Проведите вниз от верхнего края экрана # пальцем. Этот жест будет доступен, когда вы завершите настройку устройства.}few{Проведите вниз от верхнего края экрана # пальцами. Этот жест будет доступен, когда вы завершите настройку устройства.}many{Проведите вниз от верхнего края экрана # пальцами. Этот жест будет доступен, когда вы завершите настройку устройства.}other{Проведите вниз от верхнего края экрана # пальца. Этот жест будет доступен, когда вы завершите настройку устройства.}}"</string>
+    <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Быстрые настройки"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Кнопки регулировки громкости"</string>
+    <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"кнопки регулировки громкости"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Нажмите и удерживайте обе кнопки регулировки громкости"</string>
     <string name="accessibility_shortcut_edit_dialog_title_two_finger_double_tap" msgid="2271778556854020996">"Двойное нажатие двумя пальцами"</string>
-    <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="2971265341474137433">"двойное нажатие двумя пальцами"</string>
+    <string name="accessibility_shortcut_edit_screen_title_two_finger_double_tap" msgid="8952595692906527694">"Двойное нажатие %1$d пальцами"</string>
+    <string name="accessibility_shortcut_edit_screen_summary_two_finger_double_tap" msgid="385404127425496362">"Быстро нажмите на экран дважды %1$d пальцами"</string>
+    <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"Тройное нажатие"</string>
+    <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"Быстро нажмите на экран %1$d раза. Это может замедлить работу устройства."</string>
+    <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"двойное нажатие %1$d пальцами"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_two_finger_double_tap" msgid="8262165091808318538">"Быстро нажмите на экран двумя пальцами {0,number,integer} раза"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Тройное нажатие на экран"</string>
-    <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"тройное нажатие на экран"</string>
+    <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"тройное нажатие"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2102327956423320536">"Быстро коснитесь экрана {0,number,integer} раза (этот жест может замедлить работу устройства)."</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Ещё"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Кнопка специальных возможностей настроена на сервис \"<xliff:g id="SERVICE">%1$s</xliff:g>\". Чтобы использовать увеличение, удерживайте ее, а затем выберите \"Увеличение изображения на экране\"."</string>
@@ -2172,8 +2186,7 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Контрастный текст"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Изменить цвет текста на черный или белый, чтобы сделать его максимально заметным"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Максимальная контрастность текста"</string>
-    <!-- no translation found for accessibility_toggle_maximize_text_contrast_preference_summary (8200408691846666900) -->
-    <skip />
+    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Добавьте к тексту черный или белый фон, чтобы увеличить контраст"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Сохранять масштаб"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Сохранять масштаб при переходе между приложениями"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Кнопка питания завершает вызов"</string>
@@ -2334,7 +2347,7 @@
     <string name="captioning_preview_title" msgid="2888561631323180535">"Предпросмотр"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"Стандартные настройки"</string>
     <string name="captioning_locale" msgid="5533303294290661590">"Язык"</string>
-    <string name="captioning_text_size" msgid="8039448543171463017">"Размер текста"</string>
+    <string name="captioning_text_size" msgid="8039448543171463017">"Размер шрифта"</string>
     <string name="captioning_preset" msgid="4174276086501638524">"Стиль субтитров"</string>
     <string name="captioning_custom_options_title" msgid="3858866498893566351">"Собственные настройки"</string>
     <string name="captioning_background_color" msgid="5231412761368883107">"Цвет фона"</string>
@@ -2463,7 +2476,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Расход заряда батареи"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Расход заряда за последние 24 часа"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Данные об исп. с момента полной зарядки"</string>
-    <string name="battery_details_title" msgid="3289680399291090588">"Расход заряда батареи для приложений"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"Расход заряда батареи приложениями"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Расход батареи"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Режим энергопотребления"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Пакеты"</string>
@@ -2497,7 +2510,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Это приложение сможет потреблять энергию в фоновом режиме. Расход заряда батареи будет выше ожидаемого."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Удалить"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Отмена"</string>
-    <string name="battery_tip_charge_to_full_button" msgid="9172893341338732733">"Переопределить"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="9172893341338732733">"Изменить"</string>
     <string name="battery_tip_incompatible_charging_title" msgid="1567827436103364999">"Проверьте зарядное устройство"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"Подробнее об использовании несовместимых зарядных устройств"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Battery Manager"</string>
@@ -2512,7 +2525,6 @@
     <string name="battery_manager_summary" msgid="255708681438809287">"Обнаружение приложений, быстро расходующих заряд батареи"</string>
     <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"Обнаружение приложений, быстро расходующих заряд батареи"</string>
     <string name="battery_manager_app_restricted" msgid="2583902700677009173">"{count,plural, =1{Работа # приложения ограничена}one{Работа # приложения ограничена}few{Работа # приложений ограничена}many{Работа # приложений ограничена}other{Работа # приложения ограничена}}"</string>
-    <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
     <string name="battery_missing_message" msgid="400958471814422770">"Не удалось узнать уровень заряда батареи."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"Подробнее об этой ошибке…"</string>
@@ -2579,10 +2591,10 @@
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Расход заряда приложениями в период <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_system_usage_since_last_full_charge_to" msgid="4196795733829841971">"Расход системой с момента последней полной зарядки до <xliff:g id="SLOT_TIMESTAMP">%s</xliff:g>"</string>
     <string name="battery_app_usage_since_last_full_charge_to" msgid="4339201995118102114">"Расход приложениями с момента последней полной зарядки до <xliff:g id="SLOT_TIMESTAMP">%s</xliff:g>"</string>
-    <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Всего: меньше минуты"</string>
-    <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"В фоновом режиме: меньше минуты"</string>
-    <string name="battery_usage_screen_time_less_than_one_minute" msgid="2911989465891679033">"Время использования устройства: меньше минуты"</string>
-    <string name="power_usage_time_less_than_one_minute" msgid="8407404329381010144">"Менее минуты"</string>
+    <string name="battery_usage_total_less_than_one_minute" msgid="951460680288855780">"Итого: меньше минуты"</string>
+    <string name="battery_usage_background_less_than_one_minute" msgid="267133882897827276">"Фоновый режим: меньше минуты"</string>
+    <string name="battery_usage_screen_time_less_than_one_minute" msgid="578511021578427369">"Активное использование: меньше минуты"</string>
+    <string name="power_usage_time_less_than_one_minute" msgid="1599706998204418081">"меньше минуты"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Всего: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"В фоновом режиме: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_time" msgid="3973865893520804115">"Время использования: <xliff:g id="TIME">%s</xliff:g>"</string>
@@ -2669,6 +2681,15 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Включено"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Отключено"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Использование адаптивного подключения"</string>
+    <string name="cellular_security_title" msgid="7124079732186082924">"Безопасность мобильной сети"</string>
+    <string name="cellular_security_summary" msgid="1893770670709928113">"Тип сети, шифрование, управление уведомлениями"</string>
+    <string name="cellular_security_settings_title" msgid="116950133456981770">"Безопасность мобильной сети"</string>
+    <string name="cellular_security_notifications" msgid="4619728340612184944">"Уведомления"</string>
+    <string name="cellular_security_notifications_controller_title" msgid="5085567551536606230">"Уведомления системы безопасности"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="2876183397456700377">"Получайте уведомления, когда вы подключены к мобильной сети, которая не использует шифрование (она небезопасна) или сохраняет ваши уникальные идентификаторы устройства или SIM (IMEI-код и номер IMSI)"</string>
+    <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Шифрование"</string>
+    <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Поколения сетей"</string>
+    <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Вы можете настроить каждую из установленных SIM-карт так, что она будет подключаться только к сетям, поддерживающим 3G, 4G и 5G. Подключение к старым небезопасным 2G-сетям станет невозможным. Если единственная доступная сеть поддерживает только 2G, обмен данными может быть ограничен. Технология 2G может быть использована в экстренных случаях."</string>
     <string name="credentials_title" msgid="7535942196886123656">"Хранилище учетных данных"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Установка сертификатов"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"Очистить учетные данные"</string>
@@ -2681,6 +2702,8 @@
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"Этот пользователь не может изменять учетные данные"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"Установлено для VPN и приложений"</string>
     <string name="credential_for_wifi" msgid="2286560570630763556">"Установлено для Wi-Fi"</string>
+    <string name="credential_installed_for_wifi" msgid="2206050464844710099">"Установлено для сети \"<xliff:g id="SSID">%s</xliff:g>\""</string>
+    <string name="credential_using_for_wifi" msgid="6134471366188592845">"Используется для сети \"<xliff:g id="SSID">%s</xliff:g>\""</string>
     <string name="credential_for_wifi_in_use" msgid="7276290656840986618">"Установлено для Wi-Fi (используется)"</string>
     <string name="credentials_reset_hint" msgid="4054601857203464867">"Удалить все содержимое?"</string>
     <string name="credentials_erased" msgid="9121052044566053345">"Хранилище учетных данных очищено"</string>
@@ -4221,21 +4244,20 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Чтобы перейти на главный экран, проведите снизу вверх. Чтобы переключиться между приложениями, проведите по экрану снизу вверх, задержите палец в этой точке и отпустите. Чтобы вернуться назад, проведите по экрану влево или вправо."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Навигация с помощью трех кнопок"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Чтобы вернуться на предыдущий экран, открыть главный экран или переключиться между приложениями, используйте кнопки в нижней части экрана."</string>
-    <!-- no translation found for nav_tutorial_button_description (5791791794770463386) -->
-    <skip />
+    <string name="nav_tutorial_button_description" msgid="5791791794770463386">"Открыть руководство по навигации с помощью жестов"</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"навигация в системе, навигация с помощью двух кнопок, навигация с помощью трех кнопок, навигация с помощью жестов, пролистывание"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Цифровой помощник"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Жест вызова помощника"</string>
-    <string name="assistant_corner_gesture_summary" msgid="5012534700233017955">"Чтобы вызвать цифрового помощника, проведите вверх из нижнего угла экрана."</string>
+    <string name="assistant_corner_gesture_summary" msgid="5012534700233017955">"Проведите вверх из нижнего угла экрана, чтобы вызвать цифрового помощника"</string>
     <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"Чтобы вызвать Ассистента, удерживайте кнопку главного экрана"</string>
-    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Чтобы вызвать цифрового помощника, нажмите и удерживайте кнопку главного экрана."</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Нажмите и удерживайте кнопку главного экрана, чтобы вызвать цифрового помощника"</string>
     <string name="low_label" msgid="6525629096999711220">"Низкая"</string>
     <string name="high_label" msgid="357503396626018487">"Высокая"</string>
     <string name="left_edge" msgid="1513576842959071849">"Левый край"</string>
     <string name="right_edge" msgid="1505309103265829121">"Правый край"</string>
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"При высокой чувствительности могут не работать жесты по краям экрана в приложениях."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Чувствительность для жеста \"Назад\""</string>
-    <string name="gesture_settings_activity_title" msgid="2025828425762595733">"Чувствительность навигации с помощью жестов"</string>
+    <string name="gesture_settings_activity_title" msgid="1882463161833981820">"Навигация с помощью жестов"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Навигация с помощью кнопок"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"навигация с помощью жестов, чувствительность для жеста \"Назад\", жест \"Назад\""</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"навигация, кнопка главного экрана"</string>
@@ -4366,9 +4388,13 @@
     <string name="storage_images" msgid="2055893015567979387">"Изображения"</string>
     <string name="storage_videos" msgid="6117698226447251033">"Видео"</string>
     <string name="storage_audio" msgid="5994664984472140386">"Аудио"</string>
+    <string name="storage_documents" msgid="7873134307844320096">"Документы"</string>
+    <string name="storage_other" msgid="7922190148479988838">"Другое"</string>
     <string name="storage_apps" msgid="3564291603258795216">"Приложения"</string>
     <string name="storage_documents_and_other" msgid="3293689243732236480">"Документы и прочее"</string>
     <string name="storage_system" msgid="8472410119822911844">"Система"</string>
+    <string name="storage_os_name" msgid="4637680493234672410">"Android <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="storage_temporary_files" msgid="8254109904032452219">"Временные системные файлы"</string>
     <string name="storage_trash" msgid="2807138998886084856">"Корзина"</string>
     <string name="storage_trash_dialog_title" msgid="2296169576049935200">"Очистить корзину?"</string>
     <string name="storage_trash_dialog_ask_message" msgid="8982602137242358798">"Объем файлов в корзине составляет <xliff:g id="TOTAL">%1$s</xliff:g>. Если вы очистите корзину, все находящиеся в ней файлы будут удалены навсегда. Восстановить их будет нельзя."</string>
@@ -4386,7 +4412,7 @@
     <string name="autofill_app" msgid="7595308061826307921">"Автозаполнение"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Сервис автозаполнения по умолчанию"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Пароли"</string>
-    <string name="credman_chosen_app_title" msgid="7735183808067729319">"Предпочитаемый оператор"</string>
+    <string name="credman_chosen_app_title" msgid="7735183808067729319">"Предпочитаемый сервис"</string>
     <string name="credman_credentials" msgid="2620352336624160642">"Дополнительные сервисы"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# пароль}one{# пароль}few{# пароля}many{# паролей}other{# пароля}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"автозаполнение, автоматически, заполнение, пароль"</string>
@@ -4408,6 +4434,8 @@
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"Изменить"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"Можно указать не более пяти сервисов"</string>
     <string name="credman_limit_error_msg" msgid="2521803280130310063">"Чтобы добавить сервис, отключите хотя бы один из уже выбранных."</string>
+    <!-- no translation found for credman_main_settings_intro_text (4981603639240772620) -->
+    <skip />
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s анализирует содержимое экрана и находит поля, которые можно заполнить автоматически."</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"Выбрано слишком много сервисов"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"Одновременно можно использовать не более пяти сервисов для хранения паролей, ключей доступа и данных. Чтобы добавить сервис, отключите один из уже выбранных."</string>
@@ -4483,6 +4511,7 @@
     <string name="media_output_label_title" msgid="4139048973886819148">"<xliff:g id="LABEL">%s</xliff:g>: где воспроизводить"</string>
     <string name="media_output_title_without_playing" msgid="3339321669132875821">"Где будет воспроизводиться аудио:"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Это устройство"</string>
+    <string name="media_output_audio_sharing" msgid="6531742594884809737">"Передача аудио"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"Недоступно во время вызовов"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"Ответить с помощью"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"Изменить параметры этой точки доступа невозможно"</string>
@@ -4614,7 +4643,7 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Ваш телефон автоматически подключится к спутниковой связи. Для оптимального качества соединения найдите место, где хорошо видно небо."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"После подключения телефона к спутниковой связи"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"Вы можете отправлять текстовые сообщения кому угодно, в том числе экстренным службам. Ваш телефон повторно подключится к мобильной сети, когда она станет доступна."</string>
-    <string name="satellite_setting_summary_more_information" msgid="4008690241760925372">"Обмен сообщениями по спутниковой связи может занять больше времени и доступен только в некоторых регионах. На качество соединения могут влиять погода и внешние препятствия, такие как деревья, стены, мосты и здания. Звонки по спутниковой связи недоступны.\n\nМожет пройти некоторое время, прежде чем изменения в вашем аккаунте появятся в настройках. За дополнительной информацией обратитесь к оператору \"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>\"."</string>
+    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Обмен сообщениями по спутниковой связи может занять больше времени и доступен только в некоторых регионах. На качество соединения могут влиять погода и внешние препятствия, такие как деревья, стены, мосты и здания. Звонки по спутниковой связи недоступны (кроме экстренных).\n\nМожет пройти некоторое время, прежде чем изменения в вашем аккаунте появятся в настройках. За подробными сведениями обращайтесь к своему оператору связи."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Подробнее об обмене сообщениями по спутниковой связи…"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Точки доступа"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"точка доступа"</string>
@@ -4652,8 +4681,8 @@
     <string name="sim_action_turn_off" msgid="3506698692916473000">"Отключить"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Не удалось активировать SIM-карту"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Попробуйте включить SIM-карту ещё раз. Если проблема не исчезнет, перезапустите устройство."</string>
-    <string name="sim_onboarding_bottomsheets_title" msgid="143711121394213711">"Настройте SIM-карту"</string>
-    <string name="sim_onboarding_bottomsheets_msg" msgid="7367245016476460849">"Настройте параметры мобильной сети для использования нескольких SIM-карт на этом устройстве."</string>
+    <string name="sim_onboarding_dialog_starting_title" msgid="4212945803784596345">"Настройка параметров SIM-карт"</string>
+    <string name="sim_onboarding_dialog_starting_msg" msgid="8450391476631265209">"Настройте параметры мобильной сети для использования нескольких SIM-карт на этом устройстве."</string>
     <string name="sim_onboarding_label_sim_title" msgid="273162565849288273">"Назначьте ярлыки для SIM-карт"</string>
     <string name="sim_onboarding_label_sim_msg" msgid="5105859235219529056">"Эти ярлыки будут показываться при совершении звонков, отправке текстовых сообщений, использовании мобильного трафика, а также в настройках."</string>
     <string name="sim_onboarding_label_sim_dialog_title" msgid="5839073125605286120">"Ярлык SIM-карты"</string>
@@ -4671,7 +4700,8 @@
     <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"Чтобы использовать две SIM-карты сразу, включите их после перезапуска устройства."</string>
     <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"Использовать только <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"Только доступ к интернету"</string>
-    <string name="sim_onboarding_setup" msgid="5750393553605388463">"Настроить"</string>
+    <string name="sim_onboarding_setup" msgid="8678504891830386486">"Начать"</string>
+    <string name="sim_onboarding_close" msgid="8656305651358745422">"Закрыть"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Далее"</string>
     <string name="sim_onboarding_progressbar_turning_sim_on" msgid="1163318788393361574">"Включение SIM-карты \"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>\"…"</string>
     <string name="mobile_network_spn_title" msgid="3053793174495329077">"Мобильная сеть"</string>
@@ -4696,7 +4726,7 @@
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Чтобы использовать мобильный интернет, звонки и SMS, измените настройки сети."</string>
     <string name="sim_card_label" msgid="6263064316075963775">"SIM-карта"</string>
     <string name="erase_sim_dialog_title" msgid="4742077437653028326">"Удалить эту eSIM?"</string>
-    <string name="erase_sim_dialog_text" msgid="1406141218170595272">"Вы больше не сможете пользоваться услугами оператора \"<xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>\" на этом устройстве, но тарифный план оператора \"<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>\" останется."</string>
+    <string name="erase_sim_dialog_text" msgid="1406141218170595272">"Вы больше не сможете воспользоваться данными услугами от оператора \"<xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>\" на этом устройстве, но тарифный план оператора \"<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>\" будет действовать."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Стереть"</string>
     <string name="erasing_sim" msgid="4237180547590463930">"Удаление eSIM…"</string>
     <string name="erase_sim_fail_title" msgid="1445700500168357303">"Не получилось удалить eSIM"</string>
@@ -4784,16 +4814,11 @@
     <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"После подтверждения устройство перезагрузится."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Не удалось обеспечить совместимость ядра с размером страницы 16 КБ."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Применение изменения…"</string>
-    <!-- no translation found for confirm_format_ext4_title (4453684705528818873) -->
-    <skip />
-    <!-- no translation found for confirm_format_ext4_text (8164677342487500794) -->
-    <skip />
-    <!-- no translation found for format_ext4_failure_toast (6904611547290793885) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6338135847153690912) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_text (236718973897424382) -->
-    <skip />
+    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"Отформатировать устройство и изменить файловую систему на ext4?"</string>
+    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"Параметр \"16 КБ\" для разработчиков поддерживается в файловой системе ext4. После подтверждения данные на устройстве будут стерты и файловая система изменится на ext4."</string>
+    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"Не удалось отформатировать раздел данных и сменить файловую систему на ext4."</string>
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"Требуется заводская разблокировка"</string>
+    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"На устройстве нужно выполнить заводскую разблокировку, прежде чем воспользоваться параметром \"16 кБ\" для разработчиков. Для этого потребуется отформатировать пользовательские данные. После разблокировки повторите попытку."</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Обработчик отчетов об ошибках"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Выбранное приложение будет запускаться при нажатии быстрой клавиши для отправки отчета об ошибке."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Личный профиль"</string>
@@ -4845,7 +4870,7 @@
     <string name="allow_mock_modem" msgid="3832264806530479214">"Разрешить имитацию модема"</string>
     <string name="allow_mock_modem_summary" msgid="9097416612748005374">"Разрешить этому устройству запускать сервис, имитирующий модем, для инструментального теста. Не включайте этот параметр, когда пользуетесь телефоном в обычном режиме."</string>
     <string name="disable_screen_share_protections_for_apps_and_notifications" msgid="4987116103699222633">"Отключить защиту при демонстрации экрана"</string>
-    <string name="disable_screen_share_protections_for_apps_and_notifications_summary" msgid="932295234626582052">"Отключить системные средства защиты приложений и уведомлений, используемые во время демонстрации экрана"</string>
+    <string name="disable_screen_share_protections_for_apps_and_notifications_summary" msgid="5379583403909210858">"Системные средства, защищающие конфиденциальный контент в приложениях, перестанут работать в будущих сеансах демонстрации экрана"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Медиа"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Закрепить медиапроигрыватель"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Медиапроигрыватель остается открытым в Быстрых настройках, чтобы вы могли легко продолжить воспроизведение"</string>
@@ -5169,4 +5194,10 @@
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
     <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"Пароль установлен"</string>
     <string name="show_stylus_pointer_icon" msgid="1010583689203665786">"Показывать указатель при наведении стилусом"</string>
+    <!-- no translation found for media_drm_settings_title (897424966554739867) -->
+    <skip />
+    <!-- no translation found for force_swcrypto_fallback_title (8053166299808645593) -->
+    <skip />
+    <!-- no translation found for force_swcrypto_fallback_summary (181969966310309701) -->
+    <skip />
 </resources>

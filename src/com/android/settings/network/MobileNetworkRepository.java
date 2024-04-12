@@ -194,6 +194,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                 return;
             }
             sExecutor.execute(() -> {
+                Log.d(TAG, "DataRoamingObserver changed");
                 insertMobileNetworkInfo(mContext, mRegSubId, tm);
             });
             boolean isDataRoamingEnabled = tm.isDataRoamingEnabled();
@@ -217,9 +218,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             mSubscriptionManager.addOnSubscriptionsChangedListener(mContext.getMainExecutor(),
                     this);
             mAirplaneModeObserver.register(mContext);
-            if (DEBUG) {
-                Log.d(TAG, "addRegister done");
-            }
+            Log.d(TAG, "addRegister done");
         }
         sCallbacks.add(mobileNetworkCallback);
         observeAllSubInfo(lifecycleOwner);
@@ -236,10 +235,12 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     }
 
     public void addRegisterBySubId(int subId) {
+        Log.d(TAG, "MobileDataContentObserver addRegisterBySubId: " + subId);
         MobileDataContentObserver dataContentObserver = new MobileDataContentObserver(
                 new Handler(Looper.getMainLooper()));
         dataContentObserver.setOnMobileDataChangedListener(() -> {
             sExecutor.execute(() -> {
+                Log.d(TAG, "MobileDataContentObserver changed");
                 insertMobileNetworkInfo(mContext, subId,
                         getTelephonyManagerBySubId(mContext, subId));
             });
@@ -251,6 +252,9 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     private void createTelephonyManagerBySubId(int subId) {
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID
                 || mTelephonyCallbackMap.containsKey(subId)) {
+            if (DEBUG) {
+                Log.d(TAG, "createTelephonyManagerBySubId: directly return for subId = " + subId);
+            }
             return;
         }
         PhoneCallStateTelephonyCallback
@@ -320,9 +324,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             });
             mTelephonyCallbackMap.clear();
             mTelephonyManagerMap.clear();
-            if (DEBUG) {
-                Log.d(TAG, "removeRegister done");
-            }
+            Log.d(TAG, "removeRegister done");
         }
     }
 
@@ -357,9 +359,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     }
 
     private void observeAllMobileNetworkInfo(LifecycleOwner lifecycleOwner) {
-        if (DEBUG) {
-            Log.d(TAG, "Observe mobile network info.");
-        }
+        Log.d(TAG, "Observe mobile network info.");
         mMobileNetworkDatabase.queryAllMobileNetworkInfo().observe(
                 lifecycleOwner, this::onAllMobileNetworkInfoChanged);
     }
@@ -435,10 +435,10 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             }
             mAvailableSubInfoEntityList = new ArrayList<>(availableSubInfoEntityList);
         }
-        if (DEBUG) {
-            Log.d(TAG, "onAvailableSubInfoChanged, availableSubInfoEntityList = "
+
+        Log.d(TAG, "onAvailableSubInfoChanged, availableSubInfoEntityList = "
                     + availableSubInfoEntityList);
-        }
+
         for (MobileNetworkCallback callback : sCallbacks) {
             callback.onAvailableSubInfoChanged(availableSubInfoEntityList);
         }
@@ -455,10 +455,10 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                 .filter(SubscriptionInfoEntity::isActiveSubscription)
                 .filter(SubscriptionInfoEntity::isSubscriptionVisible)
                 .collect(Collectors.toList());
-        if (DEBUG) {
-            Log.d(TAG, "onActiveSubInfoChanged, activeSubInfoEntityList = "
-                    + activeSubInfoEntityList);
-        }
+
+        Log.d(TAG, "onActiveSubInfoChanged, activeSubInfoEntityList = "
+                + activeSubInfoEntityList);
+
         List<SubscriptionInfoEntity> tempActiveSubInfoEntityList = new ArrayList<>(
                 activeSubInfoEntityList);
         synchronized (this) {
@@ -523,6 +523,8 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                 if (DEBUG) {
                     Log.d(TAG, "Convert subId " + subId + " to SubscriptionInfoEntity: "
                             + subInfoEntity);
+                } else {
+                    Log.d(TAG, "insertSubsInfo into SubscriptionInfoEntity");
                 }
                 mMobileNetworkDatabase.insertSubsInfo(subInfoEntity);
                 mMetricsFeatureProvider.action(mContext,
@@ -536,9 +538,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     }
 
     private void deleteAllInfoBySubId(String subId) {
-        if (DEBUG) {
-            Log.d(TAG, "deleteAllInfoBySubId, subId = " + subId);
-        }
+        Log.d(TAG, "deleteAllInfoBySubId, subId = " + subId);
         mMobileNetworkDatabase.deleteSubInfoBySubId(subId);
         mMobileNetworkDatabase.deleteUiccInfoBySubId(subId);
         mMobileNetworkDatabase.deleteMobileNetworkInfoBySubId(subId);
@@ -619,10 +619,10 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         MobileNetworkInfoEntity mobileNetworkInfoEntity = convertToMobileNetworkInfoEntity(context,
                 subId, telephonyManager);
 
-        if (DEBUG) {
-            Log.d(TAG, "insertMobileNetworkInfo, mobileNetworkInfoEntity = "
-                    + mobileNetworkInfoEntity);
-        }
+
+        Log.d(TAG, "insertMobileNetworkInfo, mobileNetworkInfoEntity = "
+                + mobileNetworkInfoEntity);
+
 
         if (mobileNetworkInfoEntity == null) {
             return;
@@ -644,7 +644,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         if (telephonyManager != null) {
             isDataEnabled = telephonyManager.isDataEnabled();
             isDataRoamingEnabled = telephonyManager.isDataRoamingEnabled();
-        } else if (DEBUG) {
+        } else {
             Log.d(TAG, "TelephonyManager is null, subId = " + subId);
         }
 
@@ -673,17 +673,13 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
 
     private boolean isMultipleEnabledProfilesSupported(TelephonyManager telephonyManager) {
         if (telephonyManager == null) {
-            if (DEBUG) {
-                Log.d(TAG, "TelephonyManager is null");
-            }
+            Log.d(TAG, "TelephonyManager is null");
             return false;
         }
 
         List<UiccCardInfo> cardInfos = telephonyManager.getUiccCardsInfo();
         if (cardInfos == null) {
-            if (DEBUG) {
-                Log.d(TAG, "UICC card info list is empty.");
-            }
+            Log.d(TAG, "UICC card info list is empty.");
             return false;
         }
         return cardInfos.stream().anyMatch(

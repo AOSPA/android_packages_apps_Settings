@@ -95,7 +95,11 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         super.onCreate(icicle);
         mHistPref = findPreference(KEY_BATTERY_CHART);
         setBatteryChartPreferenceController();
-        AsyncTask.execute(() -> BootBroadcastReceiver.invokeJobRecheck(getContext()));
+        AsyncTask.execute(() -> {
+            if (getContext() != null) {
+                BootBroadcastReceiver.invokeJobRecheck(getContext());
+            }
+        });
     }
 
     @Override
@@ -262,7 +266,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                     final PowerUsageFeatureProvider powerUsageFeatureProvider =
                             FeatureFactory.getFeatureFactory().getPowerUsageFeatureProvider();
                     final PowerAnomalyEventList anomalyEventList =
-                            powerUsageFeatureProvider.detectSettingsAnomaly(
+                            powerUsageFeatureProvider.detectPowerAnomaly(
                                     getContext(),
                                     /* displayDrain= */ 0,
                                     DetectRequestSourceType.TYPE_USAGE_UI);
