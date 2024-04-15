@@ -1310,8 +1310,6 @@
     <string name="private_space_delete_button_label">Delete</string>
     <!-- Title for the private space delete confirmation page. [CHAR LIMIT=40] -->
     <string name="private_space_confirm_deletion_header">Deleting private space\u2026</string>
-    <!-- Description for private space delete confirmation page that mentions it will take a few moments. [CHAR LIMIT=40] -->
-    <string name="private_space_confirm_deletion_summary">This will take a few moments</string>
     <!-- Toast to show when the private space was deleted. [CHAR LIMIT=NONE] -->
     <string name="private_space_deleted">Private space deleted</string>
     <!-- Toast to show when the private space could not be deleted. [CHAR LIMIT=NONE] -->
@@ -1347,14 +1345,10 @@
     <!-- Private space footer link content description [CHAR LIMIT=40] -->
     <string name="private_space_learn_more_text">Learn more about private space</string>
     <string name="private_space_learn_more_url" translatable="false">https://support.google.com/android?p=private_space</string>
-    <!-- Text shown at the bottom in private space auto advancing  screens. [CHAR LIMIT=60] -->
+    <!-- Description for private space loading page that mentions it will take a few moments. [CHAR LIMIT=40] -->
+    <string name="private_space_few_moments_text">This will take a few moments</string>
+    <!-- Title shown in private space creation  screen. [CHAR LIMIT=60] -->
     <string name="private_space_setting_up_text">Setting up private space\u2026</string>
-    <!-- Title for private space setup in auto advancing screen informing private space notifications are hidden when locked. [CHAR LIMIT=NONE] -->
-    <string name="private_space_notifications_hidden_title">Notifications from private space apps are hidden when it\u2019s locked</string>
-    <!-- Title for private space setup in auto advancing screen informing to explore private space settings for hide and auto lock. [CHAR LIMIT=NONE] -->
-    <string name="private_space_explore_settings_title">Explore private space settings to hide private space and set up automatic locking</string>
-    <!-- Title for private space setup in auto advancing screen informing some system apps are already installed in private space. [CHAR LIMIT=NONE] -->
-    <string name="private_space_apps_installed_title">Required apps are already installed in your private space</string>
     <!-- Title for private space creation error screen. [CHAR LIMIT=60] -->
     <string name="private_space_error_screen_title">Couldn\u2019t set up a private space</string>
     <!-- Label for button to retry creating private space again on creation error. [CHAR LIMIT=30] -->
@@ -1411,6 +1405,10 @@
     <string name="private_space_gaia_education_bullet4">Suggested content related to your activity in private space apps</string>
     <!-- Text for button in private space GAIA education screen to start login [CHAR LIMIT=20] -->
     <string name="private_space_gaia_education_got_it">Got it</string>
+    <!-- The title of the category for settings related to the private space lock  [CHAR LIMIT=20] -->
+    <string name="private_space_category_lock">Lock</string>
+    <!-- The title of the category for settings related to hiding the private space  [CHAR LIMIT=20] -->
+    <string name="private_space_category_hide">Hide</string>
 
     <!-- Text shown when "Add fingerprint" button is disabled -->
     <string name="fingerprint_add_max">You can add up to <xliff:g id="count" example="5">%d</xliff:g> fingerprints</string>
@@ -2079,21 +2077,21 @@
     <!-- Wi-Fi settings dialog. Text to show in toast for when user turns on wifi scanning. [CHAR LIMIT=NONE] -->
     <string name="wifi_settings_scanning_required_enabled">Wi\u2011Fi scanning turned on</string>
     <!-- Wi-Fi settings dialog. Warning on the password entry page for a WEP network, when WEP networks are allowed. [CHAR LIMIT=NONE] -->
-    <string name="wifi_settings_warning_wep_network">This network uses an older security protocol that\u0027s less secure</string>
+    <string name="wifi_settings_warning_wep_network">This network uses an older security protocol called WEP, which is less secure</string>
     <!-- Wi-Fi settings dialog. Title of dialog displayed when WEP network is blocked. [CHAR LIMIT=NONE] -->
     <string name="wifi_settings_wep_networks_blocked_title"><xliff:g id="name">%1$s</xliff:g> is blocked</string>
     <!-- Wi-Fi settings dialog. Summary text of dialog displayed when WEP network toggle is turned off. [CHAR LIMIT=NONE] -->
     <string name="wifi_settings_wep_networks_summary_toggle_off">This network uses an older security protocol called WEP, which is less secure. To connect anyway, you can allow WEP networks.</string>
     <!-- Wi-Fi settings dialog. Summary text of dialog displayed when WEP network is blocked by the carrier. [CHAR LIMIT=NONE] -->
-    <string name="wifi_settings_wep_networks_summary_blocked_by_carrier">Your carrier doesn\u0027t allow you to connect to this network because it uses an older security protocol that’s less secure</string>
+    <string name="wifi_settings_wep_networks_summary_blocked_by_carrier">Your carrier doesn\u0027t allow you to connect to this network because it uses an older security protocol called WEP, which is less secure</string>
     <!-- Wi-Fi settings dialog. Button text of dialog displayed when WEP network toggle is turned off. [CHAR LIMIT=NONE] -->
     <string name="wifi_settings_wep_networks_button_allow">Allow WEP</string>
     <!-- Wi-Fi settings dialog. Button text of dialog displayed when WEP network toggle is blocked. [CHAR LIMIT=NONE] -->
     <string name="wifi_settings_ssid_block_button_close">Close</string>
     <!-- Wi-Fi settings dialog. Title of dialog displayed when the user turns off “Allow WEP networks” while connected to a WEP network. [CHAR LIMIT=NONE] -->
-    <string name="wifi_settings_wep_networks_disconnect_title">Disconnect from <xliff:g id="name">%1$s</xliff:g>?</string>
+    <string name="wifi_settings_wep_networks_disconnect_title">Stop allowing WEP networks?</string>
     <!-- Wi-Fi settings dialog. Summary text of dialog displayed when the user turns off “Allow WEP networks” while connected to a WEP network. [CHAR LIMIT=NONE] -->
-    <string name="wifi_settings_wep_networks_disconnect_summary">You\u0027re connected to a WEP network. If you block these networks, you\u0027ll be disconnected.</string>
+    <string name="wifi_settings_wep_networks_disconnect_summary">You\u0027re connected to a WEP network. If you stop allowing these networks, you\u0027ll be disconnected.</string>
 
     <!-- Dialog for Access Points --> <skip />
     <!-- Label to show/hide advanced options [CHAR LIMIT=40] -->
@@ -10692,7 +10690,7 @@
     <string name="legacy_navigation_summary">Go back, Home, and switch apps with buttons at the bottom of your screen.</string>
 
     <!-- Accessibility string for gesture nav tutorial button [CHAR_LIMIT=NONE] -->
-    <string name="nav_tutorial_button_description">Start gesture navigation tutorial</string>
+    <string name="nav_tutorial_button_description">Start gesture navigation tutorial, button. Double tap to activate.</string>
 
     <!-- Search keywords for System Navigation settings. [CHAR_LIMIT=NONE]-->
     <string name="keywords_system_navigation">system navigation, 2 button navigation, 3 button navigation, gesture navigation, swipe</string>
@@ -13409,4 +13407,7 @@
     <string name="force_swcrypto_fallback_title">Force Software Secure Crypto</string>
      <!-- Developer settings summary: select to force Software Secure Crypto.[CHAR LIMIT=NONE] -->
     <string name="force_swcrypto_fallback_summary">Force DRM key management to use software-based whitebox crypto</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">Clean your screen near the sensor and try again</string>
 </resources>
