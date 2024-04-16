@@ -17,6 +17,7 @@
 package com.android.settings.network.telephony.scan
 
 import android.content.Context
+import android.content.res.Resources
 import android.telephony.AccessNetworkConstants.AccessNetworkType
 import android.telephony.CellInfo
 import android.telephony.NetworkScanRequest
@@ -25,11 +26,15 @@ import android.telephony.RadioAccessSpecifier
 import android.telephony.TelephonyManager
 import android.telephony.TelephonyScanManager
 import android.util.Log
+
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LifecycleOwner
+
+import com.android.settings.R;
 import com.android.settings.network.telephony.CellInfoUtil
 import com.android.settings.network.telephony.CellInfoUtil.getNetworkTitle
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
+
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
 import kotlinx.coroutines.channels.awaitClose
@@ -46,6 +51,17 @@ class NetworkScanRepository(context: Context, subId: Int) {
 
     private val telephonyManager =
         context.getSystemService(TelephonyManager::class.java)!!.createForSubscriptionId(subId)
+
+    private var maxSearchTimeSec = MAX_SEARCH_TIME_SEC
+
+    init {
+        try {
+            maxSearchTimeSec = context.resources.getInteger(
+                    R.integer.config_network_scan_helper_max_search_time_sec)
+        } catch (exception: Resources.NotFoundException) {
+            Log.d(TAG, "Resource not found for max_search_time")
+        }
+    }
 
     /** TODO: Move this to UI layer, when UI layer migrated to Kotlin. */
     fun launchNetworkScan(lifecycleOwner: LifecycleOwner, onResult: (NetworkScanResult) -> Unit) {
@@ -97,6 +113,7 @@ class NetworkScanRepository(context: Context, subId: Int) {
     /** Create network scan for allowed network types. */
     private fun createNetworkScan(): NetworkScanRequest {
         val allowedNetworkTypes = getAllowedNetworkTypes()
+
         Log.d(TAG, "createNetworkScan: allowedNetworkTypes = $allowedNetworkTypes")
         val radioAccessSpecifiers = allowedNetworkTypes
             .map { RadioAccessSpecifier(it, null, null) }
@@ -105,7 +122,7 @@ class NetworkScanRepository(context: Context, subId: Int) {
             NetworkScanRequest.SCAN_TYPE_ONE_SHOT,
             radioAccessSpecifiers,
             NetworkScanRequest.MIN_SEARCH_PERIODICITY_SEC, // one shot, not used
-            MAX_SEARCH_TIME_SEC,
+            maxSearchTimeSec,
             true,
             INCREMENTAL_RESULTS_PERIODICITY_SEC,
             null,
@@ -159,7 +176,7 @@ class NetworkScanRepository(context: Context, subId: Int) {
         private const val TAG = "NetworkScanRepository"
 
         @VisibleForTesting
-        val MAX_SEARCH_TIME_SEC = 300
+        const val MAX_SEARCH_TIME_SEC = 254
 
         @VisibleForTesting
         val INCREMENTAL_RESULTS_PERIODICITY_SEC = 3
