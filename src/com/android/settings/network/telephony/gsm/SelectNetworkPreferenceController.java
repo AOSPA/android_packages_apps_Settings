@@ -13,6 +13,7 @@ import android.provider.Settings;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.util.Pair;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.Lifecycle;
@@ -76,7 +77,7 @@ public class SelectNetworkPreferenceController extends TelephonyTogglePreference
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        return MobileNetworkUtils.isCagSnpnEnabled(mContext)
+        return (MobileNetworkUtils.isCagSnpnEnabled(mContext) && !isMinHalVersion2_2())
                 ? AVAILABLE
                 : CONDITIONALLY_UNAVAILABLE;
     }
@@ -183,6 +184,23 @@ public class SelectNetworkPreferenceController extends TelephonyTogglePreference
         mSubscriptionManager = mContext.getSystemService(SubscriptionManager.class);
 
         return this;
+    }
+
+    private int makeRadioVersion(int major, int minor) {
+        if (major < 0 || minor < 0) return 0;
+        return major * 100 + minor;
+    }
+
+    private boolean isMinHalVersion2_2() {
+        try {
+            Pair<Integer, Integer> radioVersion = mTelephonyManager.getHalVersion(
+                    TelephonyManager.HAL_SERVICE_MODEM);
+            int halVersion = makeRadioVersion(radioVersion.first, radioVersion.second);
+            return halVersion > makeRadioVersion(2, 1);
+        } catch (Exception exception) {
+            Log.e(LOG_TAG, "Radio version not available. " + exception);
+        }
+        return false;
     }
 
     public SelectNetworkPreferenceController addListener(OnNetworkScanTypeListener lsn) {
