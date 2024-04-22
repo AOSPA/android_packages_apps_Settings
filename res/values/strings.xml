@@ -1354,9 +1354,9 @@
     <!-- Label for button to retry creating private space again on creation error. [CHAR LIMIT=30] -->
     <string name="private_space_tryagain_label">Try Again</string>
     <!-- Title for private space lock setup screen. [CHAR LIMIT=90] -->
-    <string name="private_space_lockscreen_title">Use screen lock to unlock private space?</string>
+    <string name="private_space_lockscreen_title">Choose a new lock for private space?</string>
     <!-- Summary for the private space lock setup screen. [CHAR LIMIT=NONE] -->
-    <string name="private_space_lockscreen_summary">You can unlock your private space the same way you unlock your device, or choose a different lock</string>
+    <string name="private_space_lockscreen_summary">You can set a new lock just for private space, or use the same lock you use to unlock your device</string>
     <!-- Action label to use existing device lock for private space. [CHAR LIMIT=50] -->
     <string name="private_space_use_screenlock_label">Use screen lock</string>
     <!-- Label for private space lock setup button to choose a new lock. [CHAR LIMIT=50] -->
@@ -1841,11 +1841,11 @@
     <!-- Bluetooth settings. Text displayed when Bluetooth is off and device list is empty [CHAR LIMIT=NONE]-->
     <string name="bluetooth_empty_list_bluetooth_off">When Bluetooth is turned on, your device can communicate with other nearby Bluetooth devices</string>
     <!-- Bluetooth settings. Text displayed when Bluetooth is off and device list is empty when auto-on feature is enabled [CHAR LIMIT=NONE]-->
-    <string name="bluetooth_empty_list_bluetooth_off_auto_on_available">When Bluetooth is on, your device can communicate with other nearby Bluetooth devices. Features like Quick Share, Find My Device, and device location use Bluetooth.</string>
+    <string name="bluetooth_empty_list_bluetooth_off_auto_on_available">When Bluetooth is on, your device can communicate with other nearby Bluetooth devices. Features like Quick Share and Find My Device use Bluetooth.</string>
     <!-- Bluetooth settings. Text displayed when Bluetooth is off and bluetooth scanning is turned on [CHAR LIMIT=NONE] -->
     <string name="bluetooth_scanning_on_info_message">When Bluetooth is turned on, your device can communicate with other nearby Bluetooth devices.\n\nTo improve device experience, apps and services can still scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services. You can change this in Bluetooth scanning settings.</string>
     <!-- Bluetooth settings. Text displayed when Bluetooth is off and bluetooth scanning is turned on [CHAR LIMIT=NONE] -->
-    <string name="bluetooth_scanning_on_info_message_auto_on_available">When Bluetooth is on, your device can communicate with other nearby Bluetooth devices. Features like Quick Share, Find My Device, and device location use Bluetooth.\n\nApps and services can still scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services. You can change this in Bluetooth scanning settings.</string>
+    <string name="bluetooth_scanning_on_info_message_auto_on_available">When Bluetooth is on, your device can communicate with other nearby Bluetooth devices. Features like Quick Share and Find My Device use Bluetooth.\n\nApps and services can still scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services. You can change this in Bluetooth scanning settings.</string>
     <!-- Bluetooth settings. Link text to bring the user to "scanning settings" screen. [CHAR LIMIT=NONE]-->
     <string name="bluetooth_scan_change">Change</string>
 
@@ -3125,9 +3125,9 @@
     <!-- Storage settings screen title -->
     <string name="storage_settings_title">Storage settings</string>
     <!-- About phone, title of EID -->
-    <string name="status_eid">EID</string>
+    <string name="status_eid">E&#x200B;ID</string>
     <!-- About phone, title of EID for multi-sim devices -->
-    <string name="eid_multi_sim">EID (sim slot <xliff:g id="eid_slot_id">%1$d</xliff:g>)</string>
+    <string name="eid_multi_sim">E&#x200B;ID (sim slot <xliff:g id="eid_slot_id">%1$d</xliff:g>)</string>
     <!-- About phone screen, title for IMEI for multi-sim devices -->
     <string name="imei_multi_sim">IMEI (sim slot <xliff:g id="imei_slot_id">%1$d</xliff:g>)</string>
     <!-- About phone screen, title for primary IMEI for multi-sim devices -->
@@ -8898,13 +8898,13 @@
     <!-- [CHAR LIMIT=NONE] App notification settings: link to app notification settings-->
     <string name="app_settings_link">Additional settings in the app</string>
 
-    <!-- [CHAR LIMIT=20] 3-dot menu option, reloads the screen to show channels that have not
+    <!-- [CHAR LIMIT=35] 3-dot menu option, reloads the screen to show channels that have not
     received notifications in the last two week -->
-    <string name="show_unused_channels">Show unused channels</string>
+    <string name="show_unused_channels">Show unused categories</string>
 
-    <!-- [CHAR LIMIT=20] 3-dot menu option, reloads the screen to hide channels that have not
+    <!-- [CHAR LIMIT=35] 3-dot menu option, reloads the screen to hide channels that have not
     received notifications in the last two week -->
-    <string name="hide_unused_channels">Hide unused channels</string>
+    <string name="hide_unused_channels">Hide unused categories</string>
 
     <!-- [CHAR LIMIT=NONE] Footer listing a count of deleted channels. -->
     <string name="deleted_channels">{count, plural,

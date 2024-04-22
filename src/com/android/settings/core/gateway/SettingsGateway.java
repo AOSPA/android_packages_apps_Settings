@@ -136,7 +136,6 @@ import com.android.settings.inputmethod.SpellCheckersSettings;
 import com.android.settings.inputmethod.TrackpadSettings;
 import com.android.settings.inputmethod.UserDictionaryList;
 import com.android.settings.inputmethod.UserDictionarySettings;
-import com.android.settings.language.LanguageAndInputSettings;
 import com.android.settings.language.LanguageSettings;
 import com.android.settings.localepicker.LocaleListEditor;
 import com.android.settings.location.LocationServices;
@@ -228,7 +227,6 @@ public class SettingsGateway {
             DateTimeSettings.class.getName(),
             LocaleListEditor.class.getName(),
             AvailableVirtualKeyboardFragment.class.getName(),
-            LanguageAndInputSettings.class.getName(),
             LanguageSettings.class.getName(),
             KeyboardSettings.class.getName(),
             ModifierKeysSettings.class.getName(),
