@@ -112,7 +112,9 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
         mMobileNetworkRepository.updateEntity();
 
         // If the current instance is for the DDS, listen to the call state changes on nDDS.
-        mDdsDataOptionStateTuner.register(mContext, mSubId);
+        if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            mDdsDataOptionStateTuner.register(mContext, mSubId);
+        }
     }
 
     @OnLifecycleEvent(ON_STOP)
