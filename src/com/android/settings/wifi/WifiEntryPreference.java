@@ -67,20 +67,21 @@ public class WifiEntryPreference extends RestrictedPreference implements
 
     // StateListDrawable to display secured lock / metered "$" icon
     @Nullable private final StateListDrawable mFrictionSld;
-    private final WifiUtils.InternetIconInjector mIconInjector;
+    private final InternetIconInjector mIconInjector;
     private WifiEntry mWifiEntry;
     private int mLevel = -1;
+    private int mWifiStandard;
     private boolean mShowX; // Shows the Wi-Fi signl icon of Pie+x when it's true.
     private CharSequence mContentDescription;
     private OnButtonClickListener mOnButtonClickListener;
 
     public WifiEntryPreference(@NonNull Context context, @NonNull WifiEntry wifiEntry) {
-        this(context, wifiEntry, new WifiUtils.InternetIconInjector(context));
+        this(context, wifiEntry, new InternetIconInjector(context));
     }
 
     @VisibleForTesting
     WifiEntryPreference(@NonNull Context context, @NonNull WifiEntry wifiEntry,
-            @NonNull WifiUtils.InternetIconInjector iconInjector) {
+            @NonNull InternetIconInjector iconInjector) {
         super(context);
 
         setLayoutResource(R.layout.preference_access_point);
@@ -160,12 +161,32 @@ public class WifiEntryPreference extends RestrictedPreference implements
         if (mWifiEntry instanceof HotspotNetworkEntry) {
             updateHotspotIcon(((HotspotNetworkEntry) mWifiEntry).getDeviceType());
         } else {
-            mLevel = mWifiEntry.getLevel();
-            mShowX = mWifiEntry.shouldShowXLevelIcon();
-            updateIcon(mShowX, mLevel);
+            final int level = mWifiEntry.getLevel();
+            final int standard = mWifiEntry.getWifiStandard();
+            final boolean showX = mWifiEntry.shouldShowXLevelIcon();
+
+            if (level != mLevel || showX != mShowX || standard != mWifiStandard) {
+                mLevel = level;
+                mWifiStandard = standard;
+                mShowX = showX;
+                updateIcon(mShowX, mLevel, mWifiStandard);
+                notifyChanged();
+            }
         }
 
-        setSummary(mWifiEntry.getSummary(false /* concise */));
+        String summary = mWifiEntry.getSummary(false /* concise */);
+
+        if (mWifiEntry.isPskSaeTransitionMode()) {
+           summary = "WPA3(SAE Transition Mode) " + summary;
+        } else if (mWifiEntry.isOweTransitionMode()) {
+           summary = "WPA3(OWE Transition Mode) " + summary;
+        } else if (mWifiEntry.getSecurity() == WifiEntry.SECURITY_SAE) {
+           summary = "WPA3(SAE) " + summary;
+        } else if (mWifiEntry.getSecurity() == WifiEntry.SECURITY_OWE) {
+           summary = "WPA3(OWE) " + summary;
+        }
+
+        setSummary(summary);
         mContentDescription = buildContentDescription();
     }
 
@@ -224,12 +245,12 @@ public class WifiEntryPreference extends RestrictedPreference implements
     }
 
     @VisibleForTesting
-    void updateIcon(boolean showX, int level) {
+    void updateIcon(boolean showX, int level, int standard) {
         if (level == -1) {
             setIcon(null);
             return;
         }
-        setIconWithTint(mIconInjector.getIcon(showX, level));
+        setIconWithTint(mIconInjector.getIcon(showX, level, standard));
     }
 
     @VisibleForTesting
@@ -287,6 +308,18 @@ public class WifiEntryPreference extends RestrictedPreference implements
                 mWifiEntry.getSecurity() == WifiEntry.SECURITY_NONE
                         ? context.getString(R.string.accessibility_wifi_security_type_none)
                         : context.getString(R.string.accessibility_wifi_security_type_secured));
+    }
+
+    static class InternetIconInjector {
+        private final Context mContext;
+
+        InternetIconInjector(Context context) {
+            mContext = context;
+        }
+
+        public Drawable getIcon(boolean showX, int level, int standard) {
+            return mContext.getDrawable(WifiUtils.getInternetIconResource(level, showX, standard));
+        }
     }
 
     /**
