@@ -191,7 +191,7 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
                 }
             }
         } else {
-            if (currentSubCiwlanEnabled && isCiwlanIncompatibleNetworkSelected) {
+            if (isDDS && currentSubCiwlanEnabled && isCiwlanIncompatibleNetworkSelected) {
                 showCiwlanWarningDialog(
                         R.string.incompatible_pref_nw_for_dds_with_ciwlan_ui_on_dds);
                 return false;

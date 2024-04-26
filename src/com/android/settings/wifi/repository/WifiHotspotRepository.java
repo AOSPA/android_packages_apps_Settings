@@ -506,9 +506,6 @@ public class WifiHotspotRepository {
             // This is expected on some hardware.
             Log.e(TAG, "Querying usable SAP channels is unsupported, band:" + band);
         }
-        // Disable Wi-Fi hotspot speed feature if an error occurs while getting usable channels.
-        mIsSpeedFeatureAvailable = false;
-        Log.w(TAG, "isChannelAvailable(): Wi-Fi hotspot speed feature disabled");
         return defaultValue;
     }
 
@@ -545,16 +542,10 @@ public class WifiHotspotRepository {
             return false;
         }
         // Check if 5 GHz band SAP channel is not ready
-        isChannelAvailable(WifiScanner.WIFI_BAND_5_GHZ_WITH_DFS, true /* defaultValue */);
-        if (mIsSpeedFeatureAvailable != null && !mIsSpeedFeatureAvailable) {
+        if (!isChannelAvailable(
+                WifiScanner.WIFI_BAND_5_GHZ_WITH_DFS, true /* defaultValue */)) {
+            mIsSpeedFeatureAvailable = false;
             log("isSpeedFeatureAvailable():false, error occurred while getting 5 GHz SAP channel");
-            return false;
-        }
-
-        // Check if 6 GHz band SAP channel is not ready
-        isChannelAvailable(WifiScanner.WIFI_BAND_6_GHZ, false /* defaultValue */);
-        if (mIsSpeedFeatureAvailable != null && !mIsSpeedFeatureAvailable) {
-            log("isSpeedFeatureAvailable():false, error occurred while getting 6 GHz SAP channel");
             return false;
         }
 
