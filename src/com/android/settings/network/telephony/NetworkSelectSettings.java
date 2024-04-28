@@ -17,7 +17,7 @@
 /*
  * Changes from Qualcomm Innovation Center are provided under the following license:
  *
- * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Copyright (c) 2022-2024 Qualcomm Innovation Center, Inc. All rights reserved.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
@@ -263,10 +263,14 @@ public class NetworkSelectSettings extends DashboardFragment implements
             if (!isPreferenceScreenEnabled()) {
                 clearPreferenceSummary();
                 enablePreferenceScreen(true);
-            } else if (networkScanResult instanceof NetworkScanComplete
-                    && mCellInfoList == null) {
-                // In case the scan timeout before getting any results
-                addMessagePreference(R.string.empty_networks_list);
+            } else if (networkScanResult instanceof NetworkScanComplete) {
+                if (mCellInfoList == null) {
+                    // In case the scan times out before getting any results
+                    addMessagePreference(R.string.empty_networks_list);
+                } else {
+                    // dismiss progress bar when network scan completed
+                    setProgressBarVisible(false);
+                }
             } else if (networkScanResult instanceof NetworkScanError) {
                 addMessagePreference(R.string.network_query_error);
             }
