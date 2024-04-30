@@ -26,11 +26,8 @@ import android.telephony.RadioAccessSpecifier
 import android.telephony.TelephonyManager
 import android.telephony.TelephonyScanManager
 import android.util.Log
-
-import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LifecycleOwner
-
-import com.android.settings.R;
+import com.android.settings.R
 import com.android.settings.network.telephony.CellInfoUtil
 import com.android.settings.network.telephony.CellInfoUtil.getNetworkTitle
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
@@ -42,7 +39,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flowOn
 
-class NetworkScanRepository(context: Context, subId: Int) {
+class NetworkScanRepository(private val context: Context, subId: Int) {
     sealed interface NetworkScanResult
 
     data class NetworkScanCellInfos(val cellInfos: List<CellInfo>) : NetworkScanResult
@@ -122,7 +119,7 @@ class NetworkScanRepository(context: Context, subId: Int) {
             NetworkScanRequest.SCAN_TYPE_ONE_SHOT,
             radioAccessSpecifiers,
             NetworkScanRequest.MIN_SEARCH_PERIODICITY_SEC, // one shot, not used
-            maxSearchTimeSec,
+            context.resources.getInteger(R.integer.config_network_scan_helper_max_search_time_sec),
             true,
             INCREMENTAL_RESULTS_PERIODICITY_SEC,
             null,
@@ -175,10 +172,8 @@ class NetworkScanRepository(context: Context, subId: Int) {
     companion object {
         private const val TAG = "NetworkScanRepository"
 
-        @VisibleForTesting
-        const val MAX_SEARCH_TIME_SEC = 254
+        private const val INCREMENTAL_RESULTS_PERIODICITY_SEC = 3
 
-        @VisibleForTesting
-        val INCREMENTAL_RESULTS_PERIODICITY_SEC = 3
+        const val MAX_SEARCH_TIME_SEC = 254
     }
 }
