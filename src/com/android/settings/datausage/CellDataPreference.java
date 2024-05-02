@@ -36,6 +36,8 @@ import com.android.settings.R;
 import com.android.settings.network.MobileDataEnabledListener;
 import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.telephony.DdsDataOptionStateTuner;
+import com.android.settings.network.telephony.TelephonyUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.CustomDialogPreferenceCompat;
 
@@ -51,10 +53,14 @@ public class CellDataPreference extends CustomDialogPreferenceCompat
     public boolean mChecked;
     public boolean mMultiSimDialog;
     private final MobileDataEnabledListener mDataStateListener;
+    private final DdsDataOptionStateTuner mDdsDataOptionStateTuner;
 
     public CellDataPreference(Context context, AttributeSet attrs) {
         super(context, attrs, androidx.preference.R.attr.switchPreferenceCompatStyle);
         mDataStateListener = new MobileDataEnabledListener(context, this);
+        mDdsDataOptionStateTuner = new DdsDataOptionStateTuner(
+                context.getSystemService(TelephonyManager.class),
+                getProxySubscriptionManager().get(), () -> updateEnabled());
     }
 
     @Override
@@ -83,6 +89,9 @@ public class CellDataPreference extends CustomDialogPreferenceCompat
         mDataStateListener.start(mSubId);
         getProxySubscriptionManager()
                 .addActiveSubscriptionsListener(mOnSubscriptionsChangeListener);
+        if (SubscriptionManager.isUsableSubscriptionId(mSubId)) {
+            mDdsDataOptionStateTuner.register(getContext(), mSubId);
+        }
     }
 
     @Override
@@ -90,6 +99,9 @@ public class CellDataPreference extends CustomDialogPreferenceCompat
         mDataStateListener.stop();
         getProxySubscriptionManager()
                 .removeActiveSubscriptionsListener(mOnSubscriptionsChangeListener);
+        if (SubscriptionManager.isUsableSubscriptionId(mSubId)) {
+            mDdsDataOptionStateTuner.unregister(getContext());
+        }
         super.onDetached();
     }
 
@@ -128,6 +140,20 @@ public class CellDataPreference extends CustomDialogPreferenceCompat
         // If this subscription is not active, for example, SIM card is taken out, we disable
         // the button.
         setEnabled(getActiveSubscriptionInfo(mSubId) != null);
+
+        // When nDds voice call is ongoing, disallow to turn off Dds mobile data, but enablement
+        // should be allowed.
+        if (mDdsDataOptionStateTuner.isDisallowed()) {
+            if (mChecked) {
+                setEnabled(false);
+            }
+        } else {
+            if (TelephonyUtils.isSubsidyFeatureEnabled(getContext()) &&
+                    !TelephonyUtils.isSubsidySimCard(getContext(),
+                    getProxySubscriptionManager().get().getSlotIndex(mSubId))) {
+                setEnabled(false);
+            }
+        }
     }
 
     @Override
