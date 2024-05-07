@@ -206,6 +206,7 @@ public class NetworkSelectSettings extends DashboardFragment implements
 
     @Keep
     @VisibleForTesting
+    @Nullable
     protected SatelliteManager getSatelliteManager(Context context) {
         return context.getSystemService(SatelliteManager.class);
     }
@@ -430,7 +431,13 @@ public class NetworkSelectSettings extends DashboardFragment implements
         if (!Flags.carrierEnabledSatelliteFlag()) {
             return new ArrayList<>();
         }
-        return mSatelliteManager.getSatellitePlmnsForCarrier(mSubId);
+
+        if (mSatelliteManager != null) {
+            return mSatelliteManager.getSatellitePlmnsForCarrier(mSubId);
+        } else {
+            Log.e(TAG, "mSatelliteManager is null, return empty list");
+            return new ArrayList<>();
+        }
     }
 
     private void handleCarrierConfigChanged(int subId) {
@@ -574,6 +581,7 @@ public class NetworkSelectSettings extends DashboardFragment implements
      */
     private void forceUpdateConnectedPreferenceCategory(
             NetworkSelectRepository.NetworkRegistrationAndForbiddenInfo info) {
+        mPreferenceCategory.removeAll();
         for (NetworkRegistrationInfo regInfo : info.getNetworkList()) {
             final CellIdentity cellIdentity = regInfo.getCellIdentity();
             if (cellIdentity == null) {

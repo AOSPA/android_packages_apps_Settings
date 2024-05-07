@@ -1329,10 +1329,8 @@
     <string name="storage_settings" msgid="7472188817781592677">"Pamięć wewnętrzna"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"Pamięć wewnętrzna i podręczna"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Ustawienia pamięci"</string>
-    <!-- no translation found for status_eid (3588471107671992684) -->
-    <skip />
-    <!-- no translation found for eid_multi_sim (6551259348909791790) -->
-    <skip />
+    <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
+    <string name="eid_multi_sim" msgid="6551259348909791790">"E​ID (gniazdo SIM <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim" msgid="9001570420423929507">"IMEI (gniazdo SIM <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI (gniazdo SIM <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) – główne"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Aby wyświetlić, wybierz zapisaną sieć"</string>
@@ -1499,7 +1497,8 @@
     <string name="reset_esim_error_title" msgid="6516110227665862295">"Nie można usunąć danych z kart eSIM"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"Coś poszło nie tak i dane z Twoich kart eSIM nie zostały usunięte.\n\nUruchom urządzenie ponownie i spróbuj jeszcze raz."</string>
     <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Usuń przestrzeń prywatną"</string>
-    <string name="reset_private_space_delete_dialog" msgid="2108869024671690587">"Jeśli na urządzeniu znajduje się przestrzeń prywatna, zostanie ona trwale usunięta. Wszystkie aplikacje w Twojej przestrzeni wraz z ich danymi zostaną usunięte."</string>
+    <!-- no translation found for reset_private_space_delete_dialog (7506471054091800883) -->
+    <skip />
     <string name="main_clear_title" msgid="277664302144837723">"Wykasuj wszystkie dane (przywróć dane fabryczne)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Wykasuj wszystkie dane (przywróć dane fabryczne)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"muzyka"</li>\n<li>"zdjęcia"</li>\n<li>"inne dane użytkownika"</li></string>
@@ -1904,7 +1903,7 @@
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Prędkość wskaźnika, gesty"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Kliknięcie przez dotknięcie"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Przeciąganie dotykiem"</string>
-    <string name="trackpad_tap_dragging_summary" msgid="5276968646031591058">"Kliknij i przeciągnij po touchpadzie, aby przesuwać obiekty"</string>
+    <string name="trackpad_tap_dragging_summary" msgid="5276968646031591058">"Dotknij i przeciągnij po touchpadzie, aby przesuwać obiekty"</string>
     <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"Gesty na touchpada"</string>
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Dostosuj indywidualne gesty nawigacyjne na touchpada"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Odwrotne przewijanie"</string>
@@ -2081,6 +2080,7 @@
     <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Przesuwanie jednym palcem"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Przesuń obszar powiększenia, przeciągając jeden palec."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Przesuń obszar powiększenia, przeciągając dwa palce."</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Niedostępne podczas powiększania tylko części ekranu"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Powiększanie skrótem"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Powiększanie skrótem i trzykrotnym kliknięciem"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"<xliff:g id="SERVICE">%1$s</xliff:g> – informacje"</string>
@@ -2090,8 +2090,8 @@
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Nadawca: Krzysztof"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Dzień dobry,\n\nczy prace przy projektach idą dobrze? Czy wszystko będzie gotowe, zanim zaczniemy budować nowe balony?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Resetuj ustawienia"</string>
-    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Rozmiar wyświetlacza i ustawienia tekstu zostały zresetowane"</string>
-    <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Zresetować rozmiar wyświetlacza i tekst?"</string>
+    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Rozmiar wyświetlanych elementów i ustawienia tekstu zostały zresetowane"</string>
+    <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Zresetować rozmiar wyświetlanych elementów i tekst?"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Resetuj"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Masz plany na weekend?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Wybieram się na plażę. Przyłączysz się?"</string>
@@ -2137,7 +2137,7 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8315934725362849788">"Kliknij przycisk ułatwień dostępu <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> na dole ekranu. Aby przełączać funkcje, naciśnij i przytrzymaj przycisk ułatwień dostępu."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Przesuń dwoma palcami z dołu ekranu w górę.\n\nAby przełączać funkcje, przesuń 2 palcami w górę i przytrzymaj."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Przesuń 3 palcami z dołu ekranu w górę.\n\nAby przełączyć funkcje, przesuń 3 palcami w górę i przytrzymaj."</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{Przesuń palcem z dołu ekranu w górę. Aby przełączać funkcje, przesuń w górę i przytrzymaj.}few{Przesuń # palcami z dołu ekranu w górę Aby przełączać funkcje, przesuń # palcami w górę i przytrzymaj.}many{Przesuń # palcami z dołu ekranu w górę Aby przełączać funkcje, przesuń # palcami w górę i przytrzymaj.}other{Przesuń # palca z dołu ekranu w górę Aby przełączać funkcje, przesuń # palca w górę i przytrzymaj.}}"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{Przesuń palcem z dołu ekranu w górę. Aby przełączać funkcje, przesuń w górę i przytrzymaj.}few{Przesuń # palcami z dołu ekranu w górę. Aby przełączać funkcje, przesuń # palcami w górę i przytrzymaj.}many{Przesuń # palcami z dołu ekranu w górę. Aby przełączać funkcje, przesuń # palcami w górę i przytrzymaj.}other{Przesuń # palca z dołu ekranu w górę. Aby przełączać funkcje, przesuń # palca w górę i przytrzymaj.}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Więcej opcji"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Więcej informacji: <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Szybkie ustawienia"</string>
@@ -2151,7 +2151,7 @@
     <string name="accessibility_shortcut_edit_screen_title_two_finger_double_tap" msgid="8952595692906527694">"Dwukrotnie kliknij %1$d palcami"</string>
     <string name="accessibility_shortcut_edit_screen_summary_two_finger_double_tap" msgid="385404127425496362">"Szybko dwukrotnie kliknij ekran %1$d palcami"</string>
     <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"Kliknij trzykrotnie"</string>
-    <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"Szybko %1$d-krotnie kliknij ekran. Może to spowolnić Twoje urządzenie."</string>
+    <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"Szybko %1$d-krotnie kliknij ekran – może to spowolnić Twoje urządzenie"</string>
     <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"Dwukrotnie kliknij %1$d palcami"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_two_finger_double_tap" msgid="8262165091808318538">"Szybko kliknij ekran {0,number,integer} razy dwoma palcami"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Kliknij ekran trzykrotnie"</string>
@@ -2200,7 +2200,7 @@
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Balans dźwięku"</string>
     <string name="accessibility_toggle_primary_balance_left_label" msgid="6415750010517682014">"Lewy"</string>
     <string name="accessibility_toggle_primary_balance_right_label" msgid="2987443495390104935">"Prawy"</string>
-    <string name="accessibility_timeout_default" msgid="1033702739376842824">"Domyślny"</string>
+    <string name="accessibility_timeout_default" msgid="1033702739376842824">"Domyślnie"</string>
     <string name="accessibility_timeout_10secs" msgid="5072577454521239794">"10 sekund"</string>
     <string name="accessibility_timeout_30secs" msgid="7814673496724760684">"30 sekund"</string>
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 minuta"</string>
@@ -2601,6 +2601,8 @@
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Dane o wykorzystaniu baterii będą dostępne po kilku godzinach od pełnego naładowania."</string>
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"teraz"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g>–<xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
+    <!-- no translation found for battery_usage_timestamps_content_description (1927748134271595985) -->
+    <skip />
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>⁠"</string>
     <string name="battery_usage_time_info_and_battery_level" msgid="6732629268310936155">"<xliff:g id="TIME_INFO">%1$s</xliff:g> <xliff:g id="BATTERY_LEVEL">%2$s</xliff:g>"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Wykres zużycia baterii"</string>
@@ -2614,6 +2616,8 @@
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Wyświetl według aplikacji"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Wyświetl według systemów"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <!-- no translation found for battery_usage_less_than_percent_content_description (6265933174815461493) -->
+    <skip />
     <string name="battery_cycle_count_footer" msgid="3642121059800373545">"Ze względu na kontrolę jakości przeprowadzaną przed wysyłką produktu liczba cykli przy pierwszym użyciu może być różna od zera"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Statystyki procesów"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Rozbudowane statystyki uruchomionych procesów"</string>
@@ -2966,6 +2970,8 @@
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"Nieskonfigurowany"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"Nieskonfigurowany profil ograniczony"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Nieskonfigurowany – profil służbowy"</string>
+    <!-- no translation found for user_owner (2079206733011361994) -->
+    <skip />
     <string name="user_admin" msgid="4024553191395768119">"Administrator"</string>
     <string name="user_you" msgid="3070562015202859996">"Ty (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"Nie możesz dodać więcej użytkowników. Aby dodać nowego użytkownika, usuń któregoś z obecnych."</string>
@@ -3623,8 +3629,8 @@
     <string name="notification_channels_other" msgid="18159805343647908">"Inne"</string>
     <string name="no_channels" msgid="4716199078612071915">"Ta aplikacja nie opublikowała żadnych powiadomień"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Dodatkowe ustawienia w aplikacji"</string>
-    <string name="show_unused_channels" msgid="2754356124204058828">"Pokaż nieużywane kanały"</string>
-    <string name="hide_unused_channels" msgid="9049958190570733200">"Ukryj nieużywane kanały"</string>
+    <string name="show_unused_channels" msgid="4956292847964439078">"Pokaż nieużywane kategorie"</string>
+    <string name="hide_unused_channels" msgid="2019739275175707170">"Ukryj nieużywane kategorie"</string>
     <string name="deleted_channels" msgid="8489800381509312964">"{count,plural, =1{Usunięto # kategorię}few{Usunięto # kategorie}many{Usunięto # kategorii}other{Usunięto kategorii}}"</string>
     <string name="app_notification_block_title" msgid="3880322745749900296">"Blokuj wszystkie"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Nigdy nie pokazuj tych powiadomień"</string>
@@ -4118,7 +4124,7 @@
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"Dane bez limitu"</string>
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"Dane w tle są wyłączone"</string>
     <string name="data_saver_on" msgid="7848893946018448793">"Włączone"</string>
-    <string name="data_saver_off" msgid="5891210864117269045">"Wyłączone"</string>
+    <string name="data_saver_off" msgid="5891210864117269045">"Wył."</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Włącz oszczędzanie danych"</string>
     <string name="unrestricted_app_title" msgid="7117585996574329284">"Nieograniczone użycie danych"</string>
     <string name="unrestricted_app_summary" msgid="282698963532000403">"Włącz nieograniczony dostęp do danych, gdy jest włączone oszczędzanie danych"</string>
@@ -4189,10 +4195,6 @@
     <string name="long_background_tasks_title" msgid="3272230637974707490">"Długotrwałe zadania w tle"</string>
     <string name="long_background_tasks_footer_title" msgid="9117342254914743097">"Zezwól na uruchamianie przez tę aplikację długotrwałych zadań w tle. Dzięki temu aplikacja będzie mogła uruchamiać zadania, których realizacja zajmuje więcej niż kilka minut (np. pobieranie lub przesyłanie). \n\nJeśli nie przyznasz tych uprawnień, system zastosuje limit czasu wykonywania przez aplikację zadań w tle."</string>
     <string name="keywords_long_background_tasks" msgid="5788956269136054574">"długotrwałe zadania, przesyłanie danych, zadania w tle"</string>
-    <string name="run_backup_tasks_title" msgid="8572480651659803275">"Wykonuj zadania tworzenia kopii zapasowych w tle"</string>
-    <string name="run_backup_tasks_switch_title" msgid="4740767959730361777">"Zezwalaj aplikacji na uruchamianie w tle zadań związanych z tworzeniem kopii zapasowych"</string>
-    <string name="run_backup_tasks_footer_title" msgid="1766222193265152388">"Wskazuje, że ta aplikacja ma główny przypadek użycia, w którym musi tworzyć kopie zapasowe treści lub je synchronizować. Dzięki tym uprawnieniom aplikacja może działać w tle przez nieco dłuższy czas w celu dokończenia zadań tworzenia kopii zapasowych. \n\nJeśli na to nie zezwolisz, system nie przyzna tej aplikacji żadnego specjalnego zwolnienia, aby mogła wykonywać prace związane z tworzeniem kopii zapasowych w tle."</string>
-    <string name="keywords_run_backup_tasks" msgid="632219905465766211">"zadania dotyczące kopii zapasowych, zadania tworzenia kopii zapasowych"</string>
     <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"Zresetuj ograniczanie szybkości w usłudze ShortcutManager"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"Zresetowano ograniczenie szybkości w usłudze ShortcutManager"</string>
     <string name="notification_suggestion_title" msgid="6309263655965785411">"Zarządzaj informacjami na ekranie blokady"</string>
@@ -4222,7 +4224,7 @@
     <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"Twoje wyszukiwania i połączenia przychodzące mogą być widoczne dla administratora IT"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Wszystkie profile w kalendarzu"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Pokazuj zdarzenia w profilu służbowym w kalendarzu osobistym"</string>
-    <string name="managed_profile_settings_footer" msgid="996500759305118103">"Gdy aplikacje służbowe są wyłączone, są wstrzymane i nie można uzyskać do nich dostępu. Aplikacje te nie mogą też wysyłać powiadomień."</string>
+    <string name="managed_profile_settings_footer" msgid="996500759305118103">"Gdy aplikacje służbowe będą wyłączone, zostaną wstrzymane i nie będzie można uzyskać do nich dostępu ani otrzymać z nich powiadomień."</string>
     <string name="automatic_storage_manager_settings" msgid="519158151463974656">"Zarządzaj pamięcią"</string>
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"Aby pomóc zwolnić miejsce, Menedżer miejsca usuwa z urządzenia kopie zapasowe zdjęć i filmów."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"Usuń zdjęcia i filmy"</string>
@@ -5192,7 +5194,11 @@
     <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"Ustawiono hasło"</string>
     <string name="show_stylus_pointer_icon" msgid="1010583689203665786">"Pokazuj wskaźnik przy najeżdżaniu kursorem"</string>
     <string name="media_drm_settings_title" msgid="897424966554739867">"Ustawienia DRM multimediów"</string>
-    <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"Wymuś Software Secure Crypto"</string>
-    <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Wymuś używanie kryptografii typu whitebox przez zarządzanie kluczami DRM"</string>
+    <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"Wymuś bezpieczną kryptografię opartą na oprogramowaniu"</string>
+    <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Wymuś stosowanie przez zarządzanie kluczami DRM kryptografii typu whitebox opartej na oprogramowaniu"</string>
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Wyczyść ekran w okolicy czujnika i spróbuj jeszcze raz"</string>
+    <!-- no translation found for sim_category_converted_sim (8575548015816988908) -->
+    <skip />
+    <!-- no translation found for sync_across_devices_title (3447757705383089345) -->
+    <skip />
 </resources>

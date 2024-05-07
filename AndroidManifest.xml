@@ -167,6 +167,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.GET_BACKGROUND_INSTALLED_PACKAGES" />
     <uses-permission android:name="android.permission.SATELLITE_COMMUNICATION" />
+    <uses-permission android:name="android.permission.READ_SYSTEM_GRAMMATICAL_GENDER" />
 
     <application
             android:name=".SettingsApplication"
@@ -989,39 +990,6 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                        android:value="@string/menu_key_apps"/>
         </activity>
-
-        <activity-alias
-            android:name="BackupTasksActivity"
-            android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
-            android:exported="true"
-            android:targetActivity=".spa.SpaBridgeActivity"
-            android:label="@string/run_backup_tasks_title">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.REQUEST_RUN_BACKUP_JOBS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.spa.DESTINATION"
-                       android:value="TogglePermissionAppList/BackupTasksApps"/>
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
-        </activity-alias>
-
-        <activity-alias
-            android:name="AppBackupTasksActivity"
-            android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
-            android:exported="true"
-            android:targetActivity=".spa.SpaAppBridgeActivity"
-            android:label="@string/run_backup_tasks_title">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.REQUEST_RUN_BACKUP_JOBS" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:scheme="package" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.spa.DESTINATION"
-                       android:value="TogglePermissionAppInfoPage/BackupTasksApps"/>
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
-        </activity-alias>
 
         <activity
             android:name="Settings$DateTimeSettingsActivity"
@@ -5214,6 +5182,8 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                 <action android:name="com.android.settings.action.OPEN_PRIVATE_SPACE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_security"/>
         </activity>
 
         <activity android:name=".privatespace.PrivateProfileContextHelperActivity" android:exported="false"/>

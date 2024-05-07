@@ -601,15 +601,12 @@
     <string name="private_space_install_apps_text" msgid="5693139160766464498"><b>"Instala aplicaciones"</b>\n"Tu espacio privado tiene su propia Play Store para que puedas instalar aplicaciones fácilmente."</string>
     <string name="private_space_apps_permission_text" msgid="7030946025253366172">"Las aplicaciones del espacio privado no se mostrarán en el Gestor de permisos, el panel de privacidad o en otros ajustes si el espacio privado está bloqueado.\n\nTu espacio privado no se puede trasladar a otro dispositivo. Debes configurar otro espacio privado si quieres usarlo en otro dispositivo.\n\nCualquier persona que conecte tu dispositivo a un ordenador o instale aplicaciones dañinas en tu dispositivo podría acceder a tu espacio privado."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Más información sobre el espacio privado"</string>
-    <!-- no translation found for private_space_few_moments_text (7166883272914424011) -->
-    <skip />
+    <string name="private_space_few_moments_text" msgid="7166883272914424011">"Tardará un momento"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Configurando espacio privado…"</string>
     <string name="private_space_error_screen_title" msgid="739381738044418346">"No se ha podido crear el espacio privado"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Reintentar"</string>
-    <!-- no translation found for private_space_lockscreen_title (5785259588888586366) -->
-    <skip />
-    <!-- no translation found for private_space_lockscreen_summary (3053836076639653805) -->
-    <skip />
+    <string name="private_space_lockscreen_title" msgid="5785259588888586366">"¿Elegir un nuevo bloqueo para el espacio privado?"</string>
+    <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Puedes definir un bloqueo nuevo solo para el espacio privado o usar el mismo con el que desbloqueas el dispositivo"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Usar bloqueo de pantalla"</string>
     <string name="private_space_set_lock_label" msgid="1790408277477408475">"Elegir nuevo bloqueo"</string>
     <string name="private_space_pre_finish_title" msgid="2314776598615113267">"Un segundo…"</string>
@@ -634,10 +631,8 @@
     <string name="private_space_gaia_education_bullet3" msgid="1703614225321289717">"Historial de navegación, marcadores y contraseñas guardadas"</string>
     <string name="private_space_gaia_education_bullet4" msgid="515761604505366164">"Contenido sugerido relacionado con tu actividad en las aplicaciones del espacio privado"</string>
     <string name="private_space_gaia_education_got_it" msgid="7824029819615566806">"Entendido"</string>
-    <!-- no translation found for private_space_category_lock (1917657024358778169) -->
-    <skip />
-    <!-- no translation found for private_space_category_hide (3236587591523126649) -->
-    <skip />
+    <string name="private_space_category_lock" msgid="1917657024358778169">"Bloquear"</string>
+    <string name="private_space_category_hide" msgid="3236587591523126649">"Ocultar"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Puedes añadir hasta <xliff:g id="COUNT">%d</xliff:g> huellas digitales"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Has añadido el número máximo de huellas digitales"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"No se pueden añadir más huellas digitales"</string>
@@ -822,11 +817,9 @@
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Desconectar"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Emparejar y conectar"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="7326727272747345476">"Con el Bluetooth activado, tu dispositivo se puede comunicar con dispositivos Bluetooth cercanos"</string>
-    <!-- no translation found for bluetooth_empty_list_bluetooth_off_auto_on_available (3430864468105204282) -->
-    <skip />
+    <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"Con el Bluetooth activado, tu dispositivo se puede comunicar con otros dispositivos Bluetooth cercanos. Las funciones como Quick Share y Encontrar mi dispositivo usan Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Cuando el Bluetooth está activado, tu dispositivo puede comunicarse con otros dispositivos Bluetooth cercanos.\n\nPara mejorar la experiencia de uso del dispositivo, las aplicaciones y los servicios pueden buscar dispositivos cercanos en cualquier momento aunque el Bluetooth esté desactivado. Esto puede servir, por ejemplo, para mejorar servicios y funciones basados en la ubicación. Puedes cambiar esta opción en los ajustes de búsqueda de dispositivos Bluetooth."</string>
-    <!-- no translation found for bluetooth_scanning_on_info_message_auto_on_available (7792443293031247638) -->
-    <skip />
+    <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Con el Bluetooth activado, tu dispositivo se puede comunicar con otros dispositivos Bluetooth cercanos. Las funciones como Quick Share y Encontrar mi dispositivo usan Bluetooth.\n\nAunque el Bluetooth esté desactivado, las aplicaciones y los servicios pueden buscar dispositivos cercanos en cualquier momento para mejorar las funciones y los servicios basados en la ubicación, entre otras cosas. Puedes cambiar esta opción en los ajustes de la búsqueda de dispositivos Bluetooth."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Cambiar"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Detalles del dispositivo"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Ajustes del teclado"</string>
@@ -920,18 +913,14 @@
     <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"La búsqueda de redes Wi‑Fi permite que las aplicaciones y los servicios busquen redes Wi‑Fi en cualquier momento aunque la conexión Wi‑Fi esté desactivada. Se puede usar, p. ej., para mejorar las funciones y servicios basados en la ubicación."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"Activar"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Búsqueda de redes Wi‑Fi activada"</string>
-    <!-- no translation found for wifi_settings_warning_wep_network (7032462362300663466) -->
-    <skip />
+    <string name="wifi_settings_warning_wep_network" msgid="7032462362300663466">"Esta red usa un protocolo de seguridad antiguo denominado WEP, que es menos seguro"</string>
     <string name="wifi_settings_wep_networks_blocked_title" msgid="8337700496544833669">"<xliff:g id="NAME">%1$s</xliff:g> está bloqueada"</string>
     <string name="wifi_settings_wep_networks_summary_toggle_off" msgid="1113138364046142949">"Esta red usa un protocolo de seguridad antiguo denominado WEP, que es menos seguro. Si quieres conectarte igualmente, puedes habilitar las redes WEP."</string>
-    <!-- no translation found for wifi_settings_wep_networks_summary_blocked_by_carrier (5891581925109256871) -->
-    <skip />
+    <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="5891581925109256871">"Tu operador no te permite conectarte a esta red porque usa un protocolo de seguridad antiguo denominado \"WEP\", que es menos seguro"</string>
     <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"Permitir WEP"</string>
     <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"Cerrar"</string>
-    <!-- no translation found for wifi_settings_wep_networks_disconnect_title (2428960671702242156) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_disconnect_summary (6894496037087903635) -->
-    <skip />
+    <string name="wifi_settings_wep_networks_disconnect_title" msgid="2428960671702242156">"¿Dejar de permitir redes WEP?"</string>
+    <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"Te has conectado a una red WEP. Si dejas de permitir estas redes, perderás la conexión."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Opciones avanzadas"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Lista desplegable de opciones avanzadas"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"mostrar"</string>
@@ -1340,10 +1329,8 @@
     <string name="storage_settings" msgid="7472188817781592677">"Almacenamiento"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"Almacenamiento y caché"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Ajustes de almacenamiento"</string>
-    <!-- no translation found for status_eid (3588471107671992684) -->
-    <skip />
-    <!-- no translation found for eid_multi_sim (6551259348909791790) -->
-    <skip />
+    <string name="status_eid" msgid="3588471107671992684">"EID"</string>
+    <string name="eid_multi_sim" msgid="6551259348909791790">"EID (ranura de SIM <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim" msgid="9001570420423929507">"IMEI (ranura de SIM <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI (ranura de SIM <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>, primario)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Para verla, selecciona una red guardada"</string>
@@ -1510,7 +1497,8 @@
     <string name="reset_esim_error_title" msgid="6516110227665862295">"No se pueden borrar las eSIMs"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"Se ha producido un error y tus eSIMs no se han borrado.\n\nReinicia el dispositivo y vuelve a intentarlo."</string>
     <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Eliminar espacio privado"</string>
-    <string name="reset_private_space_delete_dialog" msgid="2108869024671690587">"Si tienes un espacio privado en el dispositivo, se eliminará de forma permanente. Todas las aplicaciones de tu espacio privado y sus datos se eliminarán."</string>
+    <!-- no translation found for reset_private_space_delete_dialog (7506471054091800883) -->
+    <skip />
     <string name="main_clear_title" msgid="277664302144837723">"Volver al estado de fábrica (borrar todo)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Volver al estado de fábrica (borrar todo)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Música"</li>\n<li>"Fotos"</li>\n<li>"Otros datos de usuario"</li></string>
@@ -2092,6 +2080,7 @@
     <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Desplazarse con un dedo"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Mueve la lupa de área arrastrándola con un dedo."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Mueve la lupa de área arrastrándola con dos dedos."</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"No disponible cuando se amplía solo parte de la pantalla"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Ampliación con acceso directo"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Amplía con un acceso directo y tres toques"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Información de <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2148,19 +2137,19 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8315934725362849788">"En la parte inferior de la pantalla, toca el botón de accesibilidad <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>. Para cambiar de una función a otra, mantén pulsado el botón de accesibilidad."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Desde la parte inferior de la pantalla, desliza hacia arriba con dos dedos.\n\nPara cambiar de una función a otra, desliza hacia arriba con dos dedos y mantén pulsada la pantalla."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Desde la parte inferior de la pantalla, desliza tres dedos hacia arriba.\n\nPara cambiar de una función a otra, desliza tres dedos hacia arriba y mantén pulsada la pantalla."</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{Desliza hacia arriba desde la parte inferior de la pantalla. Para cambiar de una función a otra, desliza hacia arriba y mantén pulsado.}other{Desliza hacia arriba con # dedos desde la parte inferior de la pantalla. Para cambiar de una función a otra, desliza hacia arriba con # dedos y mantén pulsado.}}"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{Desliza hacia arriba desde la parte inferior de la pantalla. Para cambiar de una función a otra, desliza hacia arriba y mantén pulsada la pantalla.}other{Desliza hacia arriba con # dedos desde la parte inferior de la pantalla. Para cambiar de una función a otra, desliza hacia arriba con # dedos y mantén pulsada la pantalla.}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Más opciones"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Más información sobre <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Ajustes rápidos"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{Desliza hacia abajo desde la parte superior de la pantalla}other{Desliza hacia abajo con # dedos desde la parte superior de la pantalla}}"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{Desliza hacia abajo desde la parte superior de la pantalla.}other{Desliza hacia abajo con # dedos desde la parte superior de la pantalla.}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{Desliza hacia abajo desde la parte superior de la pantalla. Este acceso directo estará disponible cuando termines de configurar el dispositivo.}other{Desliza hacia abajo con # dedos desde la parte superior de la pantalla. Este acceso directo estará disponible cuando termines de configurar el dispositivo.}}"</string>
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Ajustes rápidos"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Teclas de volumen"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"teclas de volumen"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Mantén pulsadas las dos teclas de volumen"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Mantén pulsadas las dos teclas de volumen."</string>
     <string name="accessibility_shortcut_edit_dialog_title_two_finger_double_tap" msgid="2271778556854020996">"Toca dos veces la pantalla con dos dedos"</string>
     <string name="accessibility_shortcut_edit_screen_title_two_finger_double_tap" msgid="8952595692906527694">"Tocar dos veces con %1$d dedos"</string>
-    <string name="accessibility_shortcut_edit_screen_summary_two_finger_double_tap" msgid="385404127425496362">"Toca rápidamente la pantalla dos veces con %1$d dedos"</string>
+    <string name="accessibility_shortcut_edit_screen_summary_two_finger_double_tap" msgid="385404127425496362">"Toca rápidamente la pantalla dos veces con %1$d dedos."</string>
     <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"Tocar tres veces"</string>
     <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"Toca rápidamente la pantalla %1$d veces. Esta acción puede ralentizar tu dispositivo."</string>
     <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"tocar dos veces con %1$d dedos"</string>
@@ -2612,6 +2601,8 @@
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Los datos de uso de la batería estarán disponibles en unas horas cuando se haya cargado completamente"</string>
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"ahora"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> - <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
+    <!-- no translation found for battery_usage_timestamps_content_description (1927748134271595985) -->
+    <skip />
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>"</string>
     <string name="battery_usage_time_info_and_battery_level" msgid="6732629268310936155">"<xliff:g id="TIME_INFO">%1$s</xliff:g> <xliff:g id="BATTERY_LEVEL">%2$s</xliff:g>"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Gráfico del uso de batería"</string>
@@ -2625,6 +2616,8 @@
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Ver por aplicaciones"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Ver por sistemas"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <!-- no translation found for battery_usage_less_than_percent_content_description (6265933174815461493) -->
+    <skip />
     <string name="battery_cycle_count_footer" msgid="3642121059800373545">"Debido a las inspecciones de calidad realizadas antes del envío, puede que el recuento de ciclos no sea cero en el primer uso"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Estadísticas de procesos"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Estadísticas técnicas sobre procesos en ejecución"</string>
@@ -2977,6 +2970,8 @@
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"Sin configurar"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"No se ha configurado: perfil restringido"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Sin configurar: perfil de trabajo"</string>
+    <!-- no translation found for user_owner (2079206733011361994) -->
+    <skip />
     <string name="user_admin" msgid="4024553191395768119">"Administrador"</string>
     <string name="user_you" msgid="3070562015202859996">"Tú (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"No puedes añadir más usuarios. Quita un usuario para añadir otro."</string>
@@ -3634,8 +3629,8 @@
     <string name="notification_channels_other" msgid="18159805343647908">"Otros"</string>
     <string name="no_channels" msgid="4716199078612071915">"Esta aplicación no ha publicado ninguna notificación"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Ajustes adicionales de la aplicación"</string>
-    <string name="show_unused_channels" msgid="2754356124204058828">"Mostrar canales sin usar"</string>
-    <string name="hide_unused_channels" msgid="9049958190570733200">"Ocultar canales sin usar"</string>
+    <string name="show_unused_channels" msgid="4956292847964439078">"Mostrar categorías no usadas"</string>
+    <string name="hide_unused_channels" msgid="2019739275175707170">"Ocultar categorías no usadas"</string>
     <string name="deleted_channels" msgid="8489800381509312964">"{count,plural, =1{# categoría eliminada}other{# categorías eliminadas}}"</string>
     <string name="app_notification_block_title" msgid="3880322745749900296">"Bloquear todo"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"No mostrar nunca estas notificaciones"</string>
@@ -4200,10 +4195,6 @@
     <string name="long_background_tasks_title" msgid="3272230637974707490">"Tareas extensas en segundo plano"</string>
     <string name="long_background_tasks_footer_title" msgid="9117342254914743097">"Permite que la aplicación ejecute tareas extensas en segundo plano. Esto hace que la aplicación ejecute tareas que pueden necesitar bastante más tiempo para finalizar, como descargas o subidas. \n\nSi se rechaza este permiso, el sistema limitará el tiempo que puede tardar una aplicación en ejecutar dichas tareas en segundo plano."</string>
     <string name="keywords_long_background_tasks" msgid="5788956269136054574">"tareas extensas, transferencia de datos, tareas en segundo plano"</string>
-    <string name="run_backup_tasks_title" msgid="8572480651659803275">"Ejecutar tareas de copia de seguridad en segundo plano"</string>
-    <string name="run_backup_tasks_switch_title" msgid="4740767959730361777">"Permitir que la aplicación ejecute tareas relacionadas con la copia de seguridad en segundo plano"</string>
-    <string name="run_backup_tasks_footer_title" msgid="1766222193265152388">"Indica que esta aplicación tiene un gran caso práctico, por lo que necesita crear copias de seguridad o sincronizar el contenido. Dar este permiso permite que la aplicación se ejecute en segundo plano durante más tiempo para completar las tareas relacionadas con la copia de seguridad. \n\nSi se rechaza este permiso, el sistema no concederá ninguna exención especial a la aplicación para que complete las tareas de copia de seguridad en segundo plano."</string>
-    <string name="keywords_run_backup_tasks" msgid="632219905465766211">"tareas de copia de seguridad"</string>
     <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"Restablecer límite de frecuencia de ShortcutManager"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"Se ha restablecido el límite de frecuencia de ShortcutManager"</string>
     <string name="notification_suggestion_title" msgid="6309263655965785411">"Controlar qué aparece en la pantalla de bloqueo"</string>
@@ -4255,8 +4246,7 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Para ir a la pantalla de inicio, desliza hacia arriba desde la parte inferior de la pantalla. Para cambiar de aplicación, desliza hacia arriba desde la parte inferior de la pantalla, mantenla pulsada y levanta el dedo. Para ir atrás, desliza desde el borde izquierdo o el derecho."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navegación con 3 botones"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Ve hacia atrás, a la pantalla de inicio o cambia de aplicación con botones en la parte inferior de la pantalla."</string>
-    <!-- no translation found for nav_tutorial_button_description (6880450051535137024) -->
-    <skip />
+    <string name="nav_tutorial_button_description" msgid="6880450051535137024">"Botón para iniciar el tutorial de navegación por gestos. Toca dos veces para activarlo."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"navegación del sistema, navegación con 2 botones, navegación con 3 botones, navegación por gestos, deslizar"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Asistente digital"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Deslizar para abrir asistente"</string>
@@ -4698,7 +4688,7 @@
     <string name="sim_onboarding_label_sim_msg" msgid="5105859235219529056">"Verás estas etiquetas cuando hagas llamadas, envíes mensajes de texto y uses datos, y en Ajustes"</string>
     <string name="sim_onboarding_label_sim_dialog_title" msgid="5839073125605286120">"Etiqueta de la SIM"</string>
     <string name="sim_onboarding_label_sim_dialog_label" msgid="9020433985426525185">"Etiqueta"</string>
-    <string name="sim_onboarding_select_sim_title" msgid="5895262188167744055">"Selecciona qué SIMs quieras usar"</string>
+    <string name="sim_onboarding_select_sim_title" msgid="5895262188167744055">"Selecciona qué SIMs quieres usar"</string>
     <string name="sim_onboarding_select_sim_msg" msgid="5638859405391915048">"Puedes usar 2 SIMs al mismo tiempo"</string>
     <string name="sim_onboarding_primary_sim_title" msgid="2793090401371135675">"Configura tus SIMs principales"</string>
     <string name="sim_onboarding_primary_sim_msg" msgid="5484656671490558032">"Elige las SIMs que quieres usar de forma predeterminada para llamadas, mensajes de texto y datos"</string>
@@ -4828,8 +4818,8 @@
     <string name="confirm_format_ext4_title" msgid="4453684705528818873">"¿Reformatear dispositivo a ext4?"</string>
     <string name="confirm_format_ext4_text" msgid="8164677342487500794">"La opción para desarrolladores de 16 kB es compatible con el sistema de archivos ext4. El dispositivo se borrará, y el sistema de archivos cambiará a ext4 después de la confirmación."</string>
     <string name="format_ext4_failure_toast" msgid="6904611547290793885">"No se ha podido reformatear a ext4 ni borrar la partición de los datos."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"Desbloqueo OEM necesario"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"Debes hacer un desbloqueo OEM al dispositivo para usar la opción para desarrolladores de 16K. Esta acción también requiere formatear los datos de usuario. Haz el desbloqueo OEM del dispositivo e inténtalo de nuevo."</string>
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"Desbloqueo de OEM necesario"</string>
+    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"Debes hacer un desbloqueo de OEM al dispositivo para usar la opción para desarrolladores de 16K. Esta acción también requiere formatear los datos de usuario. Haz el desbloqueo de OEM del dispositivo e inténtalo de nuevo."</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Controlador de informes de errores"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Determina qué aplicación controla el acceso directo a los informes de errores del dispositivo."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Personal"</string>
@@ -5206,6 +5196,9 @@
     <string name="media_drm_settings_title" msgid="897424966554739867">"Ajustes de DRM de multimedia"</string>
     <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"Forzar criptografía de seguridad por software"</string>
     <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Fuerza la gestión de claves de DRM para usar criptografía de caja blanca basada en software"</string>
-    <!-- no translation found for fingerprint_acquired_imager_dirty_udfps (7005042288289506776) -->
+    <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Limpia la parte de tu pantalla que está cerca del sensor y vuelve a intentarlo"</string>
+    <!-- no translation found for sim_category_converted_sim (8575548015816988908) -->
+    <skip />
+    <!-- no translation found for sync_across_devices_title (3447757705383089345) -->
     <skip />
 </resources>

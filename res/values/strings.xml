@@ -3530,7 +3530,7 @@
     <!-- Title for the Delete private space settings controller [CHAR LIMIT=40] -->
     <string name="reset_private_space_delete_title">Delete private space</string>
     <!-- Delete private space dialog mentioning that private space and the apps in it along with its data will be permanently deleted [CHAR LIMIT=NONE] -->
-    <string name="reset_private_space_delete_dialog">If you have a private space on your device, it will be permanently deleted. All apps in your space and their data will be deleted.</string>
+    <string name="reset_private_space_delete_dialog">If you have a private space on your device, it will be permanently deleted and the Google Account added to your space will be removed.\n\nAll apps in your space and their data will also be permanently deleted.</string>
 
     <!-- Main Clear -->
     <!-- Button title to factory data reset the entire device [CHAR LIMIT=NONE] -->
@@ -5381,11 +5381,11 @@
     <!-- Summary for the accessibility preference for hearing aid when there is an active device. [CHAR LIMIT=50] -->
     <string name="accessibility_hearingaid_active_device_summary"><xliff:g id="device_name"  example="GN Hearing Aids">%1$s</xliff:g> active</string>
     <!-- Summary for the accessibility preference for hearing aid when there is only left side active. [CHAR LIMIT=50] -->
-    <string name="accessibility_hearingaid_left_side_device_summary"><xliff:g id="device_name"  example="GN Hearing Aids">%1$s</xliff:g>, left only</string>
+    <string name="accessibility_hearingaid_left_side_device_summary"><xliff:g id="device_name"  example="GN Hearing Aids">%1$s</xliff:g> / Left only</string>
     <!-- Summary for the accessibility preference for hearing aid when there is only right side active. [CHAR LIMIT=50] -->
-    <string name="accessibility_hearingaid_right_side_device_summary"><xliff:g id="device_name"  example="GN Hearing Aids">%1$s</xliff:g>, right only</string>
+    <string name="accessibility_hearingaid_right_side_device_summary"><xliff:g id="device_name"  example="GN Hearing Aids">%1$s</xliff:g> / Right only</string>
     <!-- Summary for the accessibility preference for hearing aid when both left side and right side are active. [CHAR LIMIT=50] -->
-    <string name="accessibility_hearingaid_left_and_right_side_device_summary"><xliff:g id="device_name"  example="GN Hearing Aids">%1$s</xliff:g>, left and right</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary"><xliff:g id="device_name"  example="GN Hearing Aids">%1$s</xliff:g> / Left and right</string>
     <!-- Summary for the accessibility preference for hearing aid when there are more than one set of devices are active. [CHAR LIMIT=50] -->
     <string name="accessibility_hearingaid_more_device_summary"><xliff:g id="device_name" example="GN Hearing Aids">%1$s</xliff:g> +1 more</string>
     <!-- Title for the hearing device pairing preference. [CHAR LIMIT=20] -->
@@ -6169,6 +6169,8 @@
     <string name="battery_usage_chart_label_now">now</string>
     <!-- [CHAR_LIMIT=NONE] A hyphen for two timestamps. For example, "6 AM - 8 AM", which means "from 6 AM to 8 AM". Please notice the spaces around the hyphen -->
     <string name="battery_usage_timestamps_hyphen"><xliff:g id="from_timestamp">%1$s</xliff:g> - <xliff:g id="to_timestamp">%2$s</xliff:g></string>
+    <!-- [CHAR_LIMIT=NONE] Accessibility content description for two timestamps. For example, Battery usage for "6 AM to 8 PM" -->
+    <string name="battery_usage_timestamps_content_description"><xliff:g id="from_timestamp">%1$s</xliff:g> to <xliff:g id="to_timestamp">%2$s</xliff:g></string>
     <!-- [CHAR_LIMIT=NONE] The first slot is a week day (e.g. "Monday"); the second slot is a hourly time span (e.g. "6 AM - 8 AM"). -->
     <string name="battery_usage_day_and_hour"><xliff:g id="day">%1$s</xliff:g> <xliff:g id="hour">%2$s</xliff:g></string>
     <!-- [CHAR_LIMIT=NONE] Accessibility content description for each slot in battery chart view. -->
@@ -6195,6 +6197,8 @@
     <string name="battery_usage_spinner_view_by_systems">View by systems</string>
     <!-- [CHAR_LIMIT=NONE] Less than some percentage, e.g. < 1% -->
     <string name="battery_usage_less_than_percent">&lt; <xliff:g id="percentage">%1$s</xliff:g></string>
+    <!-- [CHAR_LIMIT=NONE] Accessibility content description for less than some percentage, e.g. less than 1% -->
+    <string name="battery_usage_less_than_percent_content_description">less than <xliff:g id="percentage">%1$s</xliff:g></string>
     <!-- Process Stats strings -->
     <skip />
     <!-- Description of battery information footer text. [CHAR LIMIT=NONE] -->
@@ -6368,18 +6372,21 @@
 
     <!-- Cellular security related strings -->
     <!-- Title of Cellular security tile in Network & Internet settings page. [CHAR LIMIT=60]-->
-    <string name="cellular_security_title">Cellular network security</string>
+    <string name="cellular_security_title">Mobile network security</string>
     <!-- Summary of Cellular security tile in Network & Internet settings page. [CHAR LIMIT=NONE]-->
     <string name="cellular_security_summary">Network type, encryption, notification controls</string>
 
+    <!-- Summary of Cellular network security settings page in Network & Internet. [CHAR LIMIT=NONE]-->
+    <string name="cellular_security_top_intro">These settings help protect your calls, messages, and data from outdated or unencrypted networks that could expose you to data theft or surveillance</string>
+
     <!-- Title of cellular security settings page [CHAR LIMIT=60]-->
-    <string name="cellular_security_settings_title">Cellular network security</string>
+    <string name="cellular_security_settings_title">Mobile network security</string>
     <!-- Title of Cellular security notifications section [CHAR LIMIT=60]-->
     <string name="cellular_security_notifications">Notifications</string>
     <!-- Title of Cellular security notifications toggle [CHAR LIMIT=60]-->
-    <string name="cellular_security_notifications_controller_title">Security notifications</string>
+    <string name="cellular_security_notifications_controller_title">Network notifications</string>
     <!-- Summary of Cellular security notifications toggle [CHAR LIMIT=NONE]-->
-    <string name="cellular_security_notifications_controller_summary">Receive notifications in case the cellular network you are connected to is insecure due to lack of encryption, or if the cellular network records your unique decive or SIM identifiers (IMEI &amp; IMSI)</string>
+    <string name="cellular_security_notifications_controller_summary">Get notified when your device connects to an unencrypted network, or when a network records your unique device or SIM ID</string>
 
     <!--Cellular encryption -->
     <!--Cellular encryption title [CHAR LIMIT=60] -->
@@ -7033,6 +7040,8 @@
     <!-- User summary to indicate that a work profile is currently not set up [CHAR LIMIT=100] -->
     <string name="user_summary_managed_profile_not_set_up">Not set up - Work profile</string>
     <!-- User information string to represent the owner of the device [CHAR LIMIT=25] -->
+    <string name="user_owner">Owner</string>
+    <!-- User information string to represent the admin of the device [CHAR LIMIT=25] -->
     <string name="user_admin">Admin</string>
     <!-- User settings title for current user entry "You" user. [CHAR LIMIT=30] -->
     <string name="user_you">You (<xliff:g id="name" example="Name">%s</xliff:g>)</string>
@@ -10536,21 +10545,6 @@
     <!-- Keywords for settings screen for controlling apps that can run long background tasks [CHAR LIMIT=NONE] -->
     <string name="keywords_long_background_tasks">long jobs, data transfer, background tasks</string>
 
-    <!-- Title for the settings screen for controlling apps that hold the run backup jobs permission [CHAR LIMIT=60] -->
-    <string name="run_backup_tasks_title">Perform backup tasks in background</string>
-    <!-- Label for the switch to toggle the run backup jobs permission [CHAR LIMIT=100] -->
-    <string name="run_backup_tasks_switch_title">Allow app to run backup-related background tasks</string>
-    <!-- Description that appears below the run_backup_tasks switch [CHAR LIMIT=NONE] -->
-    <string name="run_backup_tasks_footer_title">
-        Indicates that this app has a major use-case where it needs to backup or sync content.
-        Granting this permission allows the app to run in the background for a slightly longer time
-        in order to complete the backup-related work.
-        \n\nIf this permission is denied, the system will not give any special exemption to this
-        app to complete backup-related work in the background.
-    </string>
-    <!-- Keywords for settings screen for controlling apps that hold the run backup tasks permission [CHAR LIMIT=NONE] -->
-    <string name="keywords_run_backup_tasks">backup tasks, backup jobs</string>
-
     <!-- Reset rate-limiting in the system service ShortcutManager.  "ShortcutManager" is the name of a system service and not translatable.
     If the word "rate-limit" is hard to translate, use "Reset ShortcutManager API call limit" as the source text, which means
     the same thing in this context.
@@ -12711,9 +12705,9 @@
     <string name="enable_2g_summary_disabled_carrier"><xliff:g id="carrier_name_2g" example="Google Fi">%1$s</xliff:g> requires 2G to be available</string>
 
     <!-- Title for toggle if user wants to require cellular encryption [CHAR LIMIT=40] -->
-    <string name="require_cellular_encryption_title">Require encryption</string>
+    <string name="require_cellular_encryption_title">Allow only encrypted networks</string>
     <!-- Summary for if the user wants to require cellular encryption [CHAR LIMIT=NONE] -->
-    <string name="require_cellular_encryption_summary">Encryption is more secure, but you might not be able to connect in some locations. For emergency calls, encryption is never required</string>
+    <string name="require_cellular_encryption_summary">This is more secure but may limit your mobile network connection in some locations. Emergency calling is always allowed.</string>
 
     <!-- Label for All services preference in App info settings [CHAR LIMIT=40] -->
     <string name="app_info_all_services_label">All services</string>
@@ -13414,4 +13408,10 @@
 
     <!--Text for acquire msg on UDFPS devices -->
     <string name="fingerprint_acquired_imager_dirty_udfps">Clean your screen near the sensor and try again</string>
+
+    <!-- Provider Model: summary of converted in SIM category. [CHAR LIMIT=50] -->
+    <string name="sim_category_converted_sim">Converted to eSIM. Remove and discard.</string>
+
+    <!--Title for Sync Across Devices category-->
+    <string name="sync_across_devices_title">Sync across devices</string>
 </resources>
