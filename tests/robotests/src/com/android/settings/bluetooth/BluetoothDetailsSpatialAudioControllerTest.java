@@ -16,9 +16,6 @@
 
 package com.android.settings.bluetooth;
 
-import static android.media.Spatializer.SPATIALIZER_IMMERSIVE_LEVEL_MULTICHANNEL;
-import static android.media.Spatializer.SPATIALIZER_IMMERSIVE_LEVEL_NONE;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
@@ -65,8 +62,6 @@ public class BluetoothDetailsSpatialAudioControllerTest extends BluetoothDetails
     @Mock
     private BluetoothDevice mBluetoothDevice;
 
-    private AudioDeviceAttributes mAvailableDevice;
-
     private BluetoothDetailsSpatialAudioController mController;
     private SwitchPreference mSpatialAudioPref;
     private SwitchPreference mHeadTrackingPref;
@@ -91,32 +86,94 @@ public class BluetoothDetailsSpatialAudioControllerTest extends BluetoothDetails
 
         when(mProfilesContainer.findPreference(KEY_SPATIAL_AUDIO)).thenReturn(mSpatialAudioPref);
         when(mProfilesContainer.findPreference(KEY_HEAD_TRACKING)).thenReturn(mHeadTrackingPref);
+    }
 
-        mAvailableDevice = new AudioDeviceAttributes(
+    @Test
+    public void isAvailable_spatialAudioSupportA2dpDevice_returnsTrue() {
+        AudioDeviceAttributes a2dpDevice = new AudioDeviceAttributes(
                 AudioDeviceAttributes.ROLE_OUTPUT,
                 AudioDeviceInfo.TYPE_BLUETOOTH_A2DP,
                 MAC_ADDRESS);
-    }
+        when(mSpatializer.isAvailableForDevice(a2dpDevice)).thenReturn(true);
 
-    @Test
-    public void isAvailable_forSpatializerWithLevelNone_returnsFalse() {
-        when(mSpatializer.getImmersiveAudioLevel()).thenReturn(SPATIALIZER_IMMERSIVE_LEVEL_NONE);
-        assertThat(mController.isAvailable()).isFalse();
-    }
+        mController.setAvailableDevice(a2dpDevice);
 
-    @Test
-    public void isAvailable_forSpatializerWithLevelNotNone_returnsTrue() {
-        when(mSpatializer.getImmersiveAudioLevel()).thenReturn(
-                SPATIALIZER_IMMERSIVE_LEVEL_MULTICHANNEL);
         assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.mAudioDevice.getType())
+                .isEqualTo(AudioDeviceInfo.TYPE_BLUETOOTH_A2DP);
+    }
+
+    @Test
+    public void isAvailable_spatialAudioSupportBleHeadsetDevice_returnsTrue() {
+        AudioDeviceAttributes bleHeadsetDevice = new AudioDeviceAttributes(
+                AudioDeviceAttributes.ROLE_OUTPUT,
+                AudioDeviceInfo.TYPE_BLE_HEADSET,
+                MAC_ADDRESS);
+        when(mSpatializer.isAvailableForDevice(bleHeadsetDevice)).thenReturn(true);
+
+        mController.setAvailableDevice(bleHeadsetDevice);
+
+        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.mAudioDevice.getType())
+                .isEqualTo(AudioDeviceInfo.TYPE_BLE_HEADSET);
+    }
+
+    @Test
+    public void isAvailable_spatialAudioSupportBleSpeakerDevice_returnsTrue() {
+        AudioDeviceAttributes bleSpeakerDevice = new AudioDeviceAttributes(
+                AudioDeviceAttributes.ROLE_OUTPUT,
+                AudioDeviceInfo.TYPE_BLE_SPEAKER,
+                MAC_ADDRESS);
+        when(mSpatializer.isAvailableForDevice(bleSpeakerDevice)).thenReturn(true);
+
+        mController.setAvailableDevice(bleSpeakerDevice);
+
+        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.mAudioDevice.getType())
+                .isEqualTo(AudioDeviceInfo.TYPE_BLE_SPEAKER);
+    }
+
+    @Test
+    public void isAvailable_spatialAudioSupportBleBroadcastDevice_returnsTrue() {
+        AudioDeviceAttributes bleBroadcastDevice = new AudioDeviceAttributes(
+                AudioDeviceAttributes.ROLE_OUTPUT,
+                AudioDeviceInfo.TYPE_BLE_BROADCAST,
+                MAC_ADDRESS);
+        when(mSpatializer.isAvailableForDevice(bleBroadcastDevice)).thenReturn(true);
+
+        mController.setAvailableDevice(bleBroadcastDevice);
+
+        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.mAudioDevice.getType())
+                .isEqualTo(AudioDeviceInfo.TYPE_BLE_BROADCAST);
+    }
+
+    @Test
+    public void isAvailable_spatialAudioSupportHearingAidDevice_returnsTrue() {
+        AudioDeviceAttributes hearingAidDevice = new AudioDeviceAttributes(
+                AudioDeviceAttributes.ROLE_OUTPUT,
+                AudioDeviceInfo.TYPE_HEARING_AID,
+                MAC_ADDRESS);
+        when(mSpatializer.isAvailableForDevice(hearingAidDevice)).thenReturn(true);
+
+        mController.setAvailableDevice(hearingAidDevice);
+
+        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.mAudioDevice.getType())
+                .isEqualTo(AudioDeviceInfo.TYPE_HEARING_AID);
+    }
+
+    @Test
+    public void isAvailable_spatialAudioNotSupported_returnsFalse() {
+        assertThat(mController.isAvailable()).isFalse();
+        assertThat(mController.mAudioDevice.getType())
+                .isEqualTo(AudioDeviceInfo.TYPE_HEARING_AID);
     }
 
     @Test
     public void refresh_spatialAudioIsTurnedOn_checksSpatialAudioPreference() {
         List<AudioDeviceAttributes> compatibleAudioDevices = new ArrayList<>();
-        mController.setAvailableDevice(mAvailableDevice);
         compatibleAudioDevices.add(mController.mAudioDevice);
-        when(mSpatializer.isAvailableForDevice(mController.mAudioDevice)).thenReturn(true);
         when(mSpatializer.getCompatibleAudioDevices()).thenReturn(compatibleAudioDevices);
 
         mController.refresh();
@@ -150,14 +207,13 @@ public class BluetoothDetailsSpatialAudioControllerTest extends BluetoothDetails
     public void
             refresh_spatialAudioOnAndHeadTrackingIsNotAvailable_hidesHeadTrackingPreference() {
         List<AudioDeviceAttributes> compatibleAudioDevices = new ArrayList<>();
-        mController.setAvailableDevice(mAvailableDevice);
         compatibleAudioDevices.add(mController.mAudioDevice);
         when(mSpatializer.getCompatibleAudioDevices()).thenReturn(compatibleAudioDevices);
         when(mSpatializer.hasHeadTracker(mController.mAudioDevice)).thenReturn(false);
 
         mController.refresh();
 
-        verify(mProfilesContainer).removePreference(mHeadTrackingPref);
+        assertThat(mHeadTrackingPref.isVisible()).isFalse();
     }
 
     @Test
@@ -167,16 +223,14 @@ public class BluetoothDetailsSpatialAudioControllerTest extends BluetoothDetails
 
         mController.refresh();
 
-        verify(mProfilesContainer).removePreference(mHeadTrackingPref);
+        assertThat(mHeadTrackingPref.isVisible()).isFalse();
     }
 
     @Test
     public void refresh_headTrackingIsTurnedOn_checksHeadTrackingPreference() {
         List<AudioDeviceAttributes> compatibleAudioDevices = new ArrayList<>();
-        mController.setAvailableDevice(mAvailableDevice);
         compatibleAudioDevices.add(mController.mAudioDevice);
         when(mSpatializer.getCompatibleAudioDevices()).thenReturn(compatibleAudioDevices);
-        when(mSpatializer.isAvailableForDevice(mController.mAudioDevice)).thenReturn(true);
         when(mSpatializer.hasHeadTracker(mController.mAudioDevice)).thenReturn(true);
         when(mSpatializer.isHeadTrackerEnabled(mController.mAudioDevice)).thenReturn(true);
 
@@ -188,10 +242,8 @@ public class BluetoothDetailsSpatialAudioControllerTest extends BluetoothDetails
     @Test
     public void refresh_headTrackingIsTurnedOff_unchecksHeadTrackingPreference() {
         List<AudioDeviceAttributes> compatibleAudioDevices = new ArrayList<>();
-        mController.setAvailableDevice(mAvailableDevice);
         compatibleAudioDevices.add(mController.mAudioDevice);
         when(mSpatializer.getCompatibleAudioDevices()).thenReturn(compatibleAudioDevices);
-        when(mSpatializer.isAvailableForDevice(mController.mAudioDevice)).thenReturn(true);
         when(mSpatializer.hasHeadTracker(mController.mAudioDevice)).thenReturn(true);
         when(mSpatializer.isHeadTrackerEnabled(mController.mAudioDevice)).thenReturn(false);
 
@@ -202,7 +254,6 @@ public class BluetoothDetailsSpatialAudioControllerTest extends BluetoothDetails
 
     @Test
     public void turnedOnSpatialAudio_invokesAddCompatibleAudioDevice() {
-        mController.setAvailableDevice(mAvailableDevice);
         mSpatialAudioPref.setChecked(true);
         mController.onPreferenceClick(mSpatialAudioPref);
         verify(mSpatializer).addCompatibleAudioDevice(mController.mAudioDevice);
@@ -210,7 +261,6 @@ public class BluetoothDetailsSpatialAudioControllerTest extends BluetoothDetails
 
     @Test
     public void turnedOffSpatialAudio_invokesRemoveCompatibleAudioDevice() {
-        mController.setAvailableDevice(mAvailableDevice);
         mSpatialAudioPref.setChecked(false);
         mController.onPreferenceClick(mSpatialAudioPref);
         verify(mSpatializer).removeCompatibleAudioDevice(mController.mAudioDevice);
@@ -218,7 +268,6 @@ public class BluetoothDetailsSpatialAudioControllerTest extends BluetoothDetails
 
     @Test
     public void turnedOnHeadTracking_invokesSetHeadTrackerEnabled_setsTrue() {
-        mController.setAvailableDevice(mAvailableDevice);
         mHeadTrackingPref.setChecked(true);
         mController.onPreferenceClick(mHeadTrackingPref);
         verify(mSpatializer).setHeadTrackerEnabled(true, mController.mAudioDevice);
@@ -226,7 +275,6 @@ public class BluetoothDetailsSpatialAudioControllerTest extends BluetoothDetails
 
     @Test
     public void turnedOffHeadTracking_invokesSetHeadTrackerEnabled_setsFalse() {
-        mController.setAvailableDevice(mAvailableDevice);
         mHeadTrackingPref.setChecked(false);
         mController.onPreferenceClick(mHeadTrackingPref);
         verify(mSpatializer).setHeadTrackerEnabled(false, mController.mAudioDevice);
