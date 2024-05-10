@@ -207,7 +207,8 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
+        if (!SubscriptionManager.isValidSubscriptionId(mSubId)
+                || (mTelephonyManager == null)) {
             return false;
         }
         int oldNetworkMode = getAllowedNetworkMode();

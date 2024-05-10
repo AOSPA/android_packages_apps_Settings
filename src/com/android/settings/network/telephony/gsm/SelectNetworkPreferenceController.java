@@ -91,6 +91,9 @@ public class SelectNetworkPreferenceController extends TelephonyTogglePreference
 
     @Override
     public boolean isChecked() {
+        if (mTelephonyManager == null) {
+            return false;
+        }
         if (MobileNetworkUtils.isCagSnpnEnabled(mContext)) {
             synchronized (mLock) {
                 getNetworkSelectionMode();
@@ -103,6 +106,9 @@ public class SelectNetworkPreferenceController extends TelephonyTogglePreference
 
     @Override
     public boolean setChecked(boolean isChecked) {
+        if (mTelephonyManager == null) {
+            return false;
+        }
         Log.i(LOG_TAG, "isChecked = " + isChecked);
         int accessMode = (isChecked == true) ? mExtTelephonyManager.ACCESS_MODE_SNPN :
                 mExtTelephonyManager.ACCESS_MODE_PLMN;
@@ -136,6 +142,9 @@ public class SelectNetworkPreferenceController extends TelephonyTogglePreference
     };
 
     private void getNetworkSelectionMode() {
+        if (mTelephonyManager == null) {
+            return;
+        }
         if (mSubscriptionManager != null &&
                 !mSubscriptionManager.isActiveSubscriptionId(mSubId)) {
             Log.i(LOG_TAG, "getNetworkSelectionMode invalid sub ID " + mSubId);

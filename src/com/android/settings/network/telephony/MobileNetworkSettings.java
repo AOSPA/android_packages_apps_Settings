@@ -347,6 +347,9 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         }
         final String key = preference.getKey();
 
+        if (mTelephonyManager == null) {
+            return false;
+        }
         if (TextUtils.equals(key, BUTTON_CDMA_SYSTEM_SELECT_KEY)
                 || TextUtils.equals(key, BUTTON_CDMA_SUBSCRIPTION_KEY)) {
             if (mTelephonyManager.getEmergencyCallbackMode()) {

@@ -67,6 +67,9 @@ public class DataServiceSetupPreferenceController extends TelephonyBasePreferenc
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
+        if (mTelephonyManager == null) {
+            return false;
+        }
         if (getPreferenceKey().equals(preference.getKey())) {
             if (!TextUtils.isEmpty(mSetupUrl)) {
                 String imsi = mTelephonyManager.getSubscriberId();

@@ -144,8 +144,10 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
             showDialog(mDialogType);
         } else {
             // Update data directly if we don't need dialog
-            mTelephonyManager.setDataRoamingEnabled(isChecked);
-            return true;
+            if (mTelephonyManager != null) {
+                mTelephonyManager.setDataRoamingEnabled(isChecked);
+                return true;
+            }
         }
 
         return false;

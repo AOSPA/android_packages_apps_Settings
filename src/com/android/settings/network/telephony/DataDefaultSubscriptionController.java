@@ -106,6 +106,9 @@ public class DataDefaultSubscriptionController extends DefaultSubscriptionContro
 
     @Override
     protected void updatePreferenceState(Preference preference) {
+        if (mTelephonyManager == null) {
+            return;
+        }
         if (preference != null) {
             boolean isEcbmEnabled = mTelephonyManager.getEmergencyCallbackMode();
             boolean isScbmEnabled = TelephonyProperties.in_scbm().orElse(false);

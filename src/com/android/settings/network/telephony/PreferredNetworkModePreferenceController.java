@@ -141,6 +141,9 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object object) {
+        if (mTelephonyManager == null) {
+            return false;
+        }
         final int newPreferredNetworkMode = Integer.parseInt((String) object);
         final int DDS = SubscriptionManager.getDefaultDataSubscriptionId();
         final int nDDS = MobileNetworkSettings.getNonDefaultDataSub();
