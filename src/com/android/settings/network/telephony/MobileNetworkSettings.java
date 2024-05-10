@@ -573,6 +573,12 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 setTelephonyAvailabilityStatus(getPreferenceControllersAsList());
 
         super.onCreate(icicle);
+        if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            Log.i(LOG_TAG, "onCreate: invalid subId. finish");
+            session.close();
+            finish();
+            return;
+        }
         final Context context = getContext();
         sPackageName = this.getClass().getPackage().toString();
         sSubscriptionManager = context.getSystemService(SubscriptionManager.class);
