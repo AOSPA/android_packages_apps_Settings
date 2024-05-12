@@ -1497,8 +1497,7 @@
     <string name="reset_esim_error_title" msgid="6516110227665862295">"ບໍ່ສາມາດລຶບ eSIM ໄດ້"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"ມີບາງຢ່າງຜິດພາດເກີດຂຶ້ນ ແລະ ບໍ່ສາມາດລຶບ eSIM ຂອງທ່ານໄດ້.\n\nກະລຸນາຣີສະຕາດອຸປະກອນຂອງທ່ານ ແລ້ວລອງໃໝ່."</string>
     <string name="reset_private_space_delete_title" msgid="2555885198282572990">"ລຶບພື້ນທີ່ສ່ວນບຸກຄົນ"</string>
-    <!-- no translation found for reset_private_space_delete_dialog (7506471054091800883) -->
-    <skip />
+    <string name="reset_private_space_delete_dialog" msgid="7506471054091800883">"ຫາກທ່ານມີພື້ນທີ່ສ່ວນບຸກຄົນໃນອຸປະກອນຂອງທ່ານ, ລະບົບຈະລຶບອອກຢ່າງຖາວອນ ແລະ ຈະລຶບບັນຊີ Google ທີ່ເພີ່ມໃສ່ພື້ນທີ່ຂອງທ່ານອອກ.\n\nນອກຈາກນີ້, ລະບົບຈະລຶບແອັບທັງໝົດໃນພື້ນທີ່ຂອງທ່ານ ແລະ ຂໍ້ມູນຂອງແອັບອອກຢ່າງຖາວອນ."</string>
     <string name="main_clear_title" msgid="277664302144837723">"ລຶບຂໍ້ມູນທັງໝົດ (ຣີເຊັດເປັນຄ່າຈາກໂຮງງານ)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"ລຶບຂໍ້ມູນທັງໝົດ (ຣີເຊັດເປັນຄ່າຈາກໂຮງງານ)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"ເພງ"</li>\n<li>"ຮູບພາບ"</li>\n<li>"ຂໍ້ມູນຜູ້ໃຊ້ອື່ນໆ"</li></string>
@@ -1811,6 +1810,7 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"ຮ້ານຄ້າ"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"ລາຍລະອຽດແອັບ"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"ແອັບທີ່ຕິດຕັ້ງຈາກ <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
+    <string name="app_install_details_different_initiating_package_summary" msgid="6093306593167176688">"ແອັບທີ່ຕິດຕັ້ງຈາກ <xliff:g id="APP_STORE1">%1$s</xliff:g> (ຜ່ານ <xliff:g id="APP_STORE2">%2$s</xliff:g>)"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"ຂໍ້ມູນເພີ່ມເຕີມຢູ່ <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"ກຳລັງເຮັດວຽກ"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(ບໍ່ເຄີຍໃຊ້)"</string>
@@ -2290,9 +2290,9 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"ຈັບຄູ່ເຄື່ອງຊ່ວຍຟັງ"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"ຢູ່ໜ້າຈໍຕໍ່ໄປ, ໃຫ້ແຕະໃສ່ເຄື່ອງຊ່ວຍຟັງຂອງທ່ານ. ທ່ານອາດຕ້ອງຈັບຄູ່ຫູຊ້າຍ ແລະ ຂວາແຍກກັນ.\n\nກະລຸນາກວດສອບວ່າເຄື່ອງຊ່ວຍຟັງຂອງທ່ານເປີດໃຊ້ ແລະ ພ້ອມຈັບຄູ່ແລ້ວ."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ໃຊ້ຢູ່"</string>
-    <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, ຊ້າຍເທົ່ານັ້ນ"</string>
-    <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, ຂວາເທົ່ານັ້ນ"</string>
-    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, ຊ້າຍ ແລະ ຂວາ"</string>
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="12349058624943107">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / ຊ້າຍເທົ່ານັ້ນ"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="8645789702686724188">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / ຂວາເທົ່ານັ້ນ"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="3314103411842694197">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / ຊ້າຍ ແລະ ຂວາ"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> +1 ເພີ່ມເຕີມ"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"ຈັບຄູ່ອຸປະກອນໃໝ່"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"ອຸປະກອນຊ່ວຍຟັງ"</string>
@@ -2571,7 +2571,8 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"ຂະຫຍາຍອາຍຸແບັດເຕີຣີ"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"ປິດເມື່ອສາກເຕັມແລ້ວ"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"ປິດຢູ່ທີ່ <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"ຕົວປະຢັດແບັດເຕີຣີຈະປິດເມື່ອແບັດເຕີຣີຮອດ <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"ເປີດ"</string>
@@ -2601,8 +2602,7 @@
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"ຂໍ້ມູນການໃຊ້ແບັດເຕີຣີຈະມີໃຫ້ໃນສອງສາມຊົ່ວໂມງເມື່ອສາກໄຟເຕັມແລ້ວ"</string>
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"ຕອນນີ້"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> - <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_timestamps_content_description (1927748134271595985) -->
-    <skip />
+    <string name="battery_usage_timestamps_content_description" msgid="1927748134271595985">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> ຫາ <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>⁠"</string>
     <string name="battery_usage_time_info_and_battery_level" msgid="6732629268310936155">"<xliff:g id="TIME_INFO">%1$s</xliff:g> <xliff:g id="BATTERY_LEVEL">%2$s</xliff:g>⁠"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"ແຜນພາບການໃຊ້ແບັດເຕີຣີ"</string>
@@ -2616,8 +2616,7 @@
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"ເບິ່ງຕາມແອັບ"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"ເບິ່ງຕາມລະບົບ"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_less_than_percent_content_description (6265933174815461493) -->
-    <skip />
+    <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"ໜ້ອຍກວ່າ <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_cycle_count_footer" msgid="3642121059800373545">"ເນື່ອງຈາກມີການກວດສອບຄຸນນະພາບກ່ອນຈັດສົ່ງ, ຈຳນວນຮອບຈຶ່ງອາດບໍ່ເປັນສູນເມື່ອນຳໃຊ້ເທື່ອທຳອິດ"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"ສະຖິຕິໂປຣເຊສ"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"ສະຖານະ Geeky ກ່ຽວກັບໂປຣເຊສທີ່ກຳລັງເຮັດວຽກຢູ່"</string>
@@ -2680,17 +2679,18 @@
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"ບໍ່ປອດໄພ"</string>
     <string name="vpn_settings_single_insecure_multiple_total" msgid="6107225844641301139">"<xliff:g id="VPN_COUNT">%d</xliff:g> ບໍ່ປອດໄພ"</string>
     <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> ບໍ່ປອດໄພ"</string>
-    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"ການເຊື່ອມຕໍ່ແບບປັບຕົວໄດ້"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"ການເຊື່ອມຕໍ່ແບບປັບອັດຕະໂນມັດ"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"ຍືດອາຍຸແບັດເຕີຣີ ແລະ ປັບປຸງປະສິດທິພາບອຸປະກອນໂດຍອັດຕະໂນມັດດ້ວຍການຈັດການການເຊື່ອມຕໍ່ເຄືອຂ່າຍຂອງທ່ານ"</string>
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"ເປີດ"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"ປິດ"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"ອັບເດດການເຊື່ອມຕໍ່ແບບປັບອັດຕະໂນມັດ"</string>
-    <string name="cellular_security_title" msgid="7124079732186082924">"ຄວາມປອດໄພເຄືອຂ່າຍມືຖື"</string>
+    <string name="cellular_security_title" msgid="5562899485544677941">"ຄວາມປອດໄພເຄືອຂ່າຍມືຖື"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"ປະເພດເຄືອຂ່າຍ, ການເຂົ້າລະຫັດ, ການຄວບຄຸມການແຈ້ງເຕືອນ"</string>
-    <string name="cellular_security_settings_title" msgid="116950133456981770">"ຄວາມປອດໄພເຄືອຂ່າຍມືຖື"</string>
+    <string name="cellular_security_top_intro" msgid="6749166804080092892">"ການຕັ້ງຄ່າເຫຼົ່ານີ້ຊ່ວຍປົກປ້ອງການໂທ, ຂໍ້ຄວາມ ແລະ ຂໍ້ມູນຂອງທ່ານຈາກເຄືອຂ່າຍທີ່ຫຼ້າສະໄໝ ຫຼື ທີ່ບໍ່ໄດ້ຖືກເຂົ້າລະຫັດ ເຊິ່ງອາດເຮັດໃຫ້ທ່ານຖືກລັກຂໍ້ມູນ ຫຼື ຖືກສອດແນມ"</string>
+    <string name="cellular_security_settings_title" msgid="7779141923670352595">"ຄວາມປອດໄພເຄືອຂ່າຍມືຖື"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"ການແຈ້ງເຕືອນ"</string>
-    <string name="cellular_security_notifications_controller_title" msgid="5085567551536606230">"ການແຈ້ງເຕືອນຄວາມປອດໄພ"</string>
-    <string name="cellular_security_notifications_controller_summary" msgid="2876183397456700377">"ຮັບການແຈ້ງເຕືອນໃນກໍລະນີທີ່ເຄືອຂ່າຍມືຖືທີ່ທ່ານເຊື່ອມຕໍ່ນັ້ນບໍ່ປອດໄພເນື່ອງຈາກຂາດການເຂົ້າລະຫັດ ຫຼື ຖ້າເຄືອຂ່າຍມືຖືບັນທຶກຄວາມຜິດພາດທີ່ເປັນເອກະລັກ ຫຼື ຕົວລະບຸຊິມ (IMEI ແລະ IMSI)"</string>
+    <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"ການແຈ້ງເຕືອນເຄືອຂ່າຍ"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"ຮັບການແຈ້ງເຕືອນເມື່ອອຸປະກອນຂອງທ່ານເຊື່ອມຕໍ່ກັບເຄືອຂ່າຍທີ່ບໍ່ໄດ້ຖືກເຂົ້າລະຫັດ ຫຼື ເມື່ອເຄືອຂ່າຍບັນທຶກອຸປະກອນ ຫຼື ID ຊິມທີ່ບໍ່ຊ້ຳກັນຂອງທ່ານ"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"ການເຂົ້າລະຫັດ"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"ຮຸ່ນຂອງເຄືອຂ່າຍ"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"ທ່ານສາມາດຕັ້ງຄ່າແຕ່ລະຊິມກາດທີ່ຕິດຕັ້ງໄວ້ເພື່ອເຊື່ອມຕໍ່ກັບເຄືອຂ່າຍທີ່ຮອງຮັບ 3G, 4G ແລະ 5G ເທົ່ານັ້ນ. ຊິມຈະບໍ່ເຊື່ອມຕໍ່ກັບເຄືອຂ່າຍ 2G ທີ່ເກົ່າກວ່າ ແລະ ບໍ່ປອດໄພ. ການຕັ້ງຄ່ານີ້ອາດຈະຈໍາກັດການເຊື່ອມຕໍ່ຂອງທ່ານໃນກໍລະນີທີ່ໃຊ້ໄດ້ພຽງເຄືອຂ່າຍ 2G. ໃນກໍລະນີສຸກເສີນ, 2G ອາດຖືກນຳໃຊ້."</string>
@@ -2963,15 +2963,15 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} ໄດ້ຕິດຕັ້ງຜູ້ອອກໃບຮັບຮອງສຳລັບໂປຣໄຟລ໌ບ່ອນເຮັດວຽກຂອງທ່ານແລ້ວ, ເຊິ່ງອາດອະນຸຍາດໃຫ້ເຂົາເຈົ້າສັງເກດການການເຄື່ອນໄຫວເຄືອຂ່າຍບ່ອນເຮັດວຽກໄດ້, ຮວມທັງອີເມວ, ແອັບ ແລະ ເວັບໄຊທີ່ເຂົ້າລະຫັດ.\n\nສຳລັບຂໍ້ມູນເພີ່ມເຕີມກ່ຽວກັບໃບຮັບຮອງນີ້, ກະລຸນາຕິດຕໍ່ຜູ້ເບິ່ງແຍງຂອງທ່ານ.}other{{orgName} ໄດ້ຕິດຕັ້ງຜູ້ອອກໃບຮັບຮອງສຳລັບໂປຣໄຟລ໌ບ່ອນເຮັດວຽກຂອງທ່ານແລ້ວ, ເຊິ່ງອາດອະນຸຍາດໃຫ້ເຂົາເຈົ້າສັງເກດການການເຄື່ອນໄຫວເຄືອຂ່າຍບ່ອນເຮັດວຽກໄດ້, ຮວມທັງອີເມວ, ແອັບ ແລະ ເວັບໄຊທີ່ເຂົ້າລະຫັດ.\n\nສຳລັບຂໍ້ມູນເພີ່ມເຕີມກ່ຽວກັບໃບຮັບຮອງເຫຼົ່ານີ້, ກະລຸນາຕິດຕໍ່ຜູ້ເບິ່ງແຍງຂອງທ່ານ.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"ພາກສ່ວນທີສາມສາມາດເບິ່ງການເຄື່ອນໄຫວເຄືອຂ່າຍຂອງທ່ານໄດ້ ຮວມເຖິງອີເມວ, ແອັບຯ ແລະເວັບໄຊທີ່ເຂົ້າລະຫັດ.\n\nຂໍ້ມູນການຢືນຢັນທີ່ເຊື່ອຖືໄດ້ໃນຄອມພິວເຕີຂອງທ່ານ ອະນຸມັດໃຫ້ຂັ້ນຕອນນີ້ເປັນໄປໄດ້."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{ກວດສອບໃບຮັບຮອງ}other{ກວດສອບໃບຮັບຮອງ}}"</string>
-    <string name="user_settings_title" msgid="6550866465409807877">"ຫຼາຍຜູ້ໃຊ້"</string>
+    <!-- no translation found for user_settings_title (9208831545558787202) -->
+    <skip />
     <string name="user_list_title" msgid="1387379079186123404">"ຜູ້ໃຊ້ ແລະ ໂປຣໄຟລ໌"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"ເພີ່ມ​ຜູ່້ໃຊ້ ຫຼື ​ໂປຣ​ໄຟລ໌"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"ໂປຣໄຟລ໌ທີ່ຖືກຈຳກັດ"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"ບໍ່ໄດ້ຕັ້ງຄ່າ"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"ບໍ່ໄດ້ຕັ້ງຄ່າ - ໂປຣໄຟລ໌ທີ່ຖືກຈຳກັດ"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"​ບໍ່​ໄດ້​ຕິດ​ຕັ້ງ - ​ໂປຣ​ໄຟລ໌​ບ່ອນ​ເຮັດ​ວຽກ"</string>
-    <!-- no translation found for user_owner (2079206733011361994) -->
-    <skip />
+    <string name="user_owner" msgid="2079206733011361994">"ເຈົ້າຂອງ"</string>
     <string name="user_admin" msgid="4024553191395768119">"ຜູ້ເບິ່ງແຍງ"</string>
     <string name="user_you" msgid="3070562015202859996">"ທ່ານ (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"ທ່ານບໍ່ສາມາດເພີ່ມຜູ້ໃຊ້ເພີ່ມເຕີມໄດ້ອີກແລ້ວ. ກະລຸນາລຶບຜູ້ໃຊ້ອອກເພື່ອເພີ່ມຜູ້ໃຊ້ໃໝ່."</string>
@@ -4644,6 +4644,8 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"ທ່ານສາມາດສົ່ງຂໍ້ຄວາມຫາໃຜກໍໄດ້, ເຊິ່ງຮວມທັງບໍລິການສຸກເສີນ. ໂທລະສັບຂອງທ່ານຈະເຊື່ອມຕໍ່ກັບເຄືອຂ່າຍມືຖືອີກຄັ້ງເມື່ອມີໃຫ້ໃຊ້."</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"ການຮັບສົ່ງຂໍ້ຄວາມຜ່ານດາວທຽມອາດໃຊ້ເວລາດົນກວ່າປົກກະຕິ ແລະ ພ້ອມໃຫ້ບໍລິການໃນບາງພື້ນທີ່ເທົ່ານັ້ນ. ສະພາບອາກາດ ແລະ ໂຄງສ້າງບາງຢ່າງອາດສົ່ງຜົນຕໍ່ການເຊື່ອມຕໍ່ຜ່ານດາວທຽມຂອງທ່ານ. ການໂທຜ່ານດາວທຽມບໍ່ພ້ອມໃຫ້ບໍລິການ. ການໂທສຸກເສີນອາດຍັງເຊື່ອມຕໍ່ຢູ່.\n\nລະບົບອາດໃຊ້ເວລາໄລຍະໜຶ່ງຈົນກວ່າການປ່ຽນແປງໃນບັນຊີຈະສະແດງໃນການຕັ້ງຄ່າ. ກະລຸນາຕິດຕໍ່ຜູ້ໃຫ້ບໍລິການຂອງທ່ານສຳລັບລາຍລະອຽດ."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"ຂໍ້ມູນເພີ່ມເຕີມກ່ຽວກັບການຮັບສົ່ງຂໍ້ຄວາມຜ່ານດາວທຽມ"</string>
+    <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"ບໍ່ສາມາດເປີດ <xliff:g id="FUNCTION">%1$s</xliff:g> ໄດ້"</string>
+    <string name="satellite_warning_dialog_content" msgid="936419945275934955">"ເພື່ອເປີດ <xliff:g id="FUNCTION">%1$s</xliff:g>, ໃຫ້ສິ້ນສຸດການເຊື່ອມຕໍ່ດາວທຽມກ່ອນ"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"ຊື່ຈຸດເຂົ້າເຖິງ (APN)"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"ບໍ່ສາມາດໃຊ້ໄດ້ເມື່ອເຊື່ອມຕໍ່ກັບ <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4805,19 +4807,46 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"ຂໍ້ມູນນະໂຍບາຍວຽກຂອງທ່ານ"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"ການຕັ້ງຄ່າແມ່ນຈັດການໂດຍຜູ້ເບິ່ງແຍງໄອທີຂອງທ່ານ"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <string name="enable_16k_pages" msgid="5009476566957520607">"ເປີດດ້ວຍໜ້າຂະໜາດ 16K"</string>
-    <string name="enable_16k_pages_summary" msgid="428117226069445198">"ເປີດອຸປະກອນໂດຍໃຊ້ເຄີເນວທີ່ຮອງຮັບໜ້າຂະໜາດ 16K"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="6751570067857011642">"ປິດເປີດໃໝ່ດ້ວຍເຄີເນວທີ່ໃຊ້ໄດ້ກັບໜ້າຂະໜາດ 16KB ບໍ?"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="702888115148257215">"ຄຳເຕືອນ: ບາງແອັບພລິເຄຊັນອາດໃຊ້ບໍ່ໄດ້ກັບໂໝດນີ້. ອຸປະກອນຈະປິດເປີດໃໝ່ຫຼັງຈາກການຢືນຢັນ."</string>
-    <string name="confirm_enable_4k_pages_title" msgid="626987400420355263">"ປິດເປີດໃໝ່ດ້ວຍເຄີເນວທີ່ໃຊ້ໄດ້ກັບໜ້າຂະໜາດ 4KB ບໍ?"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"ອຸປະກອນຈະປິດເປີດໃໝ່ຫຼັງຈາກການຢືນຢັນ."</string>
+    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
+    <skip />
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"ອັບເດດເປັນເຄີເນວທີ່ໃຊ້ໄດ້ກັບໜ້າຂະໜາດ 16KB ບໍ່ສຳເລັດ."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"ກຳລັງນຳໃຊ້ການປ່ຽນແປງ"</string>
-    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"ຈັດຮູບແບບອຸປະກອນໃໝ່ເປັນ ext4 ບໍ?"</string>
-    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"ຕົວເລືອກນັກພັດທະນາແອັບ 16K ຮອງຮັບລະບົບໄຟລ໌ ext4. ລະບົບຈະລ້າງຂໍ້ມູນອຸປະກອນ ແລະ ລະບົບໄຟລ໌ຈະປ່ຽນເປັນ ext4 ຫຼັງຈາກການຢືນຢັນ."</string>
-    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"ຈັດຮູບແບບໃໝ່ ແລະ ລ້າງການແບ່ງປັນຂໍ້ມູນເປັນ ext4 ບໍ່ສຳເລັດ."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"ຕ້ອງປົດລັອກແບບ OEM"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"ອຸປະກອນຈະຕ້ອງປົດລັອກແບບ OEM ກ່ອນຈຶ່ງຈະໃຊ້ຕົວເລືອກນັກພັດທະນາ 16K ໄດ້. ການປົດລັອກແບບ OEM ຕ້ອງໃຊ້ການຈັດຮູບແບບຂໍ້ມູນຜູ້ໃຊ້ນຳ. ກະລຸນາປົດລັອກອຸປະກອນແບບ OEM ແລ້ວລອງໃໝ່."</string>
+    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
+    <skip />
+    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"ເຄື່ອງຈັດການລາຍງານຂໍ້ຜິດພາດ"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"ເລືອກແອັບທີ່ຈະໃຫ້ຈັດການທາງລັດລາຍງານຂໍ້ຜິດພາດຢູ່ອຸປະກອນຂອງທ່ານ."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"ສ່ວນຕົວ"</string>
@@ -4879,7 +4908,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"ສະແດງຕົວຫຼິ້ນ"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"ມີເດຍ"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"ອະນຸຍາດສ່ວນຂະຫຍາຍຊອບແວກ້ອງຖ່າຍຮູບ"</string>
-    <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"ເປີດການນຳໃຊ້ການໃຊ້ຊອບແວເລີ່ມຕົ້ນຂອງຄຸນສົມບັດກ້ອງຖ່າຍຮູບຂັ້ນສູງ, ເຊັ່ນ: ການຖ່າຍວິດີໂອແບບ Eyes Free."</string>
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"ເປີດການນຳໃຊ້ຊອບແວເລີ່ມຕົ້ນຂອງຄຸນສົມບັດກ້ອງຖ່າຍຮູບຂັ້ນສູງ ເຊັ່ນ: HDR, ໂໝດກາງຄືນ ຫຼື ສ່ວນຂະຫຍາຍອື່ນໆຂອງກ້ອງ."</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth ຈະ​ເປີດ"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"ອິນເຕີເນັດ"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM"</string>
@@ -4949,6 +4978,8 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"ໃຊ້ບໍລິການພິມ"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"ອະນຸຍາດຜູ້ໃຊ້ຫຼາຍຄົນ"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"ອະນຸຍາດ, ຫຼາຍຄົນ, ຜູ້ໃຊ້, ອະນຸຍາດ, ຫຼາຍ"</string>
+    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"ໃຊ້ການດີບັກໄຮ້ສາຍ"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"ໃຊ້ການຕັ້ງຄ່າໄດຣເວີກຣາຟິກ"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"ໃຊ້ແສງກາງຄືນ"</string>
@@ -4971,8 +5002,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"ອະນຸຍາດ 2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G ມີຄວາມປອດໄພໜ້ອຍກວ່າ, ແຕ່ອາດປັບປຸງການເຊື່ອມຕໍ່ຂອງທ່ານໄດ້ໃນບາງສະຖານທີ່. ສຳລັບການໂທສຸກເສີນ, ລະບົບຈະອະນຸຍາດໃຫ້ໃຊ້ 2G ໄດ້ຕະຫຼອດ."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> ຕ້ອງການໃຫ້ໃຊ້ 2G ໄດ້"</string>
-    <string name="require_cellular_encryption_title" msgid="7516008146269371585">"ຕ້ອງການການເຂົ້າລະຫັດ"</string>
-    <string name="require_cellular_encryption_summary" msgid="4813823321032908641">"ການເຂົ້າລະຫັດມີຄວາມປອດໄພຍິ່ງຂຶ້ນ, ແຕ່ທ່ານອາດຈະບໍ່ສາມາດເຊື່ອມຕໍ່ໄດ້ໃນບາງສະຖານທີ່. ສຳລັບການໂທສຸກເສີນ, ການເຂົ້າລະຫັດແມ່ນບໍ່ຈຳເປັນເລີຍ"</string>
+    <string name="require_cellular_encryption_title" msgid="6087085031703089235">"ອະນຸຍາດສະເພາະເຄືອຂ່າຍທີ່ໄດ້ຖືກເຂົ້າລະຫັດ"</string>
+    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"ວິທີນີ້ມີຄວາມປອດໄພຫຼາຍກວ່າ ແຕ່ອາດຈຳກັດການເຊື່ອມຕໍ່ເຄືອຂ່າຍມືຖືຂອງທ່ານໃນບາງສະຖານທີ່. ການໂທສຸກເສີນແມ່ນອະນຸຍາດທຸກເທື່ອ."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"ບໍລິການທັງໝົດ"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"ສະແດງການເຂົ້າເຖິງຄລິບບອດ"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"ສະແດງຂໍ້ຄວາມເມື່ອແອັບເຂົ້າເຖິງຂໍ້ຄວາມ, ຮູບພາບ ຫຼື ເນື້ອຫາອື່ນທີ່ທ່ານສຳເນົາໄວ້"</string>
@@ -5195,8 +5226,6 @@
     <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"ບັງຄັບໃຊ້ Software Secure Crypto"</string>
     <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"ບັງຄັບໃຫ້ຈັດການກະແຈ DRM ໃຊ້ການເຂົ້າລະຫັດ White Box ແບບໃຊ້ຊອບແວ"</string>
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"ກະລຸນາອະນາໄມໜ້າຈໍຂອງທ່ານໃກ້ກັບເຊັນເຊີແລ້ວລອງໃໝ່"</string>
-    <!-- no translation found for sim_category_converted_sim (8575548015816988908) -->
-    <skip />
-    <!-- no translation found for sync_across_devices_title (3447757705383089345) -->
-    <skip />
+    <string name="sim_category_converted_sim" msgid="8575548015816988908">"ປ່ຽນແປງເປັນ eSIM ແລ້ວ. ລຶບອອກ ແລະ ຍົກເລີກ."</string>
+    <string name="sync_across_devices_title" msgid="3447757705383089345">"ຊິ້ງຂໍ້ມູນໃນອຸປະກອນ"</string>
 </resources>

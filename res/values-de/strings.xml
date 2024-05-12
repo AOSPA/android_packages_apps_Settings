@@ -578,8 +578,8 @@
     <string name="private_space_hide_dialog_message" msgid="618693520130744836">"Du kannst den privaten Bereich über die Suchleiste deiner App-Liste aufrufen."</string>
     <string name="private_space_hide_dialog_button" msgid="4157191429310035457">"Ok"</string>
     <string name="private_space_category_system" msgid="1286843321867285700">"System"</string>
-    <string name="private_space_delete_title" msgid="636873505724100006">"Privaten Bereich löschen"</string>
-    <string name="private_space_delete_header" msgid="4594429153176776184">"Privaten Bereich löschen?"</string>
+    <string name="private_space_delete_title" msgid="636873505724100006">"Vertraulichen Bereich löschen"</string>
+    <string name="private_space_delete_header" msgid="4594429153176776184">"Vertraulichen Bereich löschen?"</string>
     <string name="private_space_delete_summary" msgid="3344372988408565545">"Dein privater Bereich wird von deinem Gerät entfernt. Alle privaten Apps und Daten werden gelöscht. Diese Aktion lässt sich nicht rückgängig machen."</string>
     <string name="private_space_accounts" msgid="1078277762792056395">"Die folgenden Konten werden aus deinem privaten Bereich entfernt:"</string>
     <string name="private_space_delete_button_label" msgid="1256981385318225002">"Löschen"</string>
@@ -1223,7 +1223,7 @@
     <string name="night_display_summary_on_auto_mode_custom" msgid="2096677025343425755">"Wird automatisch um <xliff:g id="ID_1">%1$s</xliff:g> deaktiviert"</string>
     <string name="night_display_summary_on_auto_mode_twilight" msgid="8070517472000680361">"Wird automatisch bei Sonnenaufgang deaktiviert"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"Nachtlicht nicht aktiviert"</string>
-    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"Zur Bestimmung von Sonnenaufgang und -untergang ist der Gerätestandort erforderlich."</string>
+    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"Zur Bestimmung von Sonnenaufgang und ‑untergang ist der Gerätestandort erforderlich."</string>
     <string name="twilight_mode_launch_location" msgid="7799112373591153956">"Standorteinstellungen"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"Jetzt aktivieren"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"Jetzt deaktivieren"</string>
@@ -1496,9 +1496,8 @@
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Die Netzwerkeinstellungen wurden zurückgesetzt."</string>
     <string name="reset_esim_error_title" msgid="6516110227665862295">"Löschen der eSIMs nicht möglich"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"Ein Fehler ist aufgetreten und deine eSIMs wurden nicht gelöscht.\n\nStarte dein Gerät neu und versuche es noch einmal."</string>
-    <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Privaten Bereich löschen"</string>
-    <!-- no translation found for reset_private_space_delete_dialog (7506471054091800883) -->
-    <skip />
+    <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Vertraulichen Bereich löschen"</string>
+    <string name="reset_private_space_delete_dialog" msgid="7506471054091800883">"Wenn du einen privaten Bereich auf deinem Gerät hast, wird dieser endgültig gelöscht und das zu deinem Bereich hinzugefügte Google-Konto wird entfernt.\n\nAlle Apps in deinem Bereich und deren Daten werden ebenfalls endgültig gelöscht."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Alle Daten löschen (auf Werkseinstellungen zurücksetzen)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Alle Daten löschen"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Musik"</li>\n<li>"Fotos"</li>\n<li>"Sonstige Nutzerdaten"</li></string>
@@ -1811,6 +1810,8 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"App-Shop"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"App-Details"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"App vom <xliff:g id="APP_STORE">%1$s</xliff:g> installiert"</string>
+    <!-- no translation found for app_install_details_different_initiating_package_summary (6093306593167176688) -->
+    <skip />
     <string name="instant_app_details_summary" msgid="417197491598208216">"Weitere Informationen im <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"Aktiv"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(Nie verwendet)"</string>
@@ -2146,7 +2147,7 @@
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Schnelleinstellungen"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Lautstärketasten"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"Lautstärketasten"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Beide Lautstärketasten gedrückt halten"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Halte beide Lautstärketasten gedrückt."</string>
     <string name="accessibility_shortcut_edit_dialog_title_two_finger_double_tap" msgid="2271778556854020996">"Mit zwei Fingern auf das Display doppeltippen"</string>
     <string name="accessibility_shortcut_edit_screen_title_two_finger_double_tap" msgid="8952595692906527694">"2-mal mit %1$d Fingern tippen"</string>
     <string name="accessibility_shortcut_edit_screen_summary_two_finger_double_tap" msgid="385404127425496362">"Tippe das Display 2-mal schnell mit %1$d Fingern an."</string>
@@ -2290,9 +2291,9 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Hörgeräte koppeln"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Wähle auf dem nächsten Bildschirm deine Hörgeräte aus. Das linke und rechte Ohr müssen möglicherweise separat gekoppelt werden.\n\nDeine Hörgeräte müssen eingeschaltet und bereit zum Koppeln sein."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> aktiv"</string>
-    <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, nur links"</string>
-    <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, nur rechts"</string>
-    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, links und rechts"</string>
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="12349058624943107">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / nur links"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="8645789702686724188">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / nur rechts"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="3314103411842694197">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / links und rechts"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> + 1 weiteres"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Neues Gerät koppeln"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Hörgeräte"</string>
@@ -2571,7 +2572,8 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Akkulaufzeit verlängern"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Bei vollem Akku ausschalten"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Deaktivieren ab <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"Der Energiesparmodus wird deaktiviert, wenn der Akku <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> erreicht"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Aktivieren"</string>
@@ -2601,8 +2603,7 @@
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Sobald das Gerät vollständig geladen ist, sind Daten zur Akkunutzung in einigen Stunden verfügbar"</string>
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"jetzt"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"von <xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> bis <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_timestamps_content_description (1927748134271595985) -->
-    <skip />
+    <string name="battery_usage_timestamps_content_description" msgid="1927748134271595985">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> bis <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>"</string>
     <string name="battery_usage_time_info_and_battery_level" msgid="6732629268310936155">"<xliff:g id="TIME_INFO">%1$s</xliff:g> <xliff:g id="BATTERY_LEVEL">%2$s</xliff:g>"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Diagramm zur Akkunutzung"</string>
@@ -2616,8 +2617,7 @@
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Nach Apps filtern"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Nach Systemen filtern"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_less_than_percent_content_description (6265933174815461493) -->
-    <skip />
+    <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"weniger als <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_cycle_count_footer" msgid="3642121059800373545">"Aufgrund von Qualitätsprüfungen vor dem Versand ist die Anzahl der Ladezyklen bei der ersten Verwendung möglicherweise nicht null"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Prozessstatistiken"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Statistiken zu laufenden Prozessen"</string>
@@ -2685,12 +2685,13 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"An"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Aus"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Adaptive Konnektivität verwenden"</string>
-    <string name="cellular_security_title" msgid="7124079732186082924">"Sicherheit von Mobilfunknetzen"</string>
+    <string name="cellular_security_title" msgid="5562899485544677941">"Sicherheit des Mobilfunknetzes"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Netzwerktyp, Verschlüsselung, Benachrichtigungseinstellungen"</string>
-    <string name="cellular_security_settings_title" msgid="116950133456981770">"Sicherheit von Mobilfunknetzen"</string>
+    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Diese Einstellungen tragen zum Schutz deiner Anrufe, Nachrichten und Daten vor veralteten oder unverschlüsselten Netzwerken bei, in denen du möglicherweise einem Diebstahl von Daten oder einer Überwachung ausgesetzt wirst"</string>
+    <string name="cellular_security_settings_title" msgid="7779141923670352595">"Sicherheit des Mobilfunknetzes"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Benachrichtigungen"</string>
-    <string name="cellular_security_notifications_controller_title" msgid="5085567551536606230">"Sicherheitsbenachrichtigungen"</string>
-    <string name="cellular_security_notifications_controller_summary" msgid="2876183397456700377">"Lass dich benachrichtigen, wenn das Mobilfunknetz, mit dem du verbunden bist, wegen fehlender Verschlüsselung nicht sicher ist, oder wenn es deine individuelle Geräte- oder SIM-IDs (IMEI und IMSI) erfasst"</string>
+    <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Netzwerkbenachrichtigungen"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Du kannst dich benachrichtigen lassen, wenn dein Gerät mit einem unverschlüsselten Netzwerk verbunden wird oder wenn ein Netzwerk deine eindeutige Geräte- oder SIM-ID aufzeichnet"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Verschlüsselung"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Mobilfunknetz-Generationen"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Du kannst jede installierte SIM-Karte so konfigurieren, dass eine Verbindung nur mit Mobilfunknetzen hergestellt wird, die 3G, 4G und 5G unterstützen. Die SIM stellt dann keine Verbindung zu älteren, nicht sicheren 2G-Mobilfunknetzen her. Durch diese Einstellung kann die Konnektivität eingeschränkt werden, wenn nur ein 2G-Mobilfunknetz verfügbar ist. 2G kann aber in Notfällen verwendet werden."</string>
@@ -2963,15 +2964,15 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} hat eine Zertifizierungsstelle für dein Arbeitsprofil installiert. Damit können deine geschäftlichen Netzwerkaktivitäten überwacht werden, einschließlich E-Mails, Apps und sicherer Websites.\n\nWeitere Informationen zu diesem Zertifikat erhältst du von deinem Administrator.}other{{orgName} hat Zertifizierungsstellen für dein Arbeitsprofil installiert. Damit können deine geschäftlichen Netzwerkaktivitäten überwacht werden, einschließlich E-Mails, Apps und sicherer Websites.\n\nWeitere Informationen zu diesen Zertifikaten erhältst du von deinem Administrator.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Dritte können deine Netzwerkaktivitäten überwachen, einschließlich E-Mails, Apps und sicherer Websites.\n\nDies wird durch vertrauenswürdige Anmeldedaten ermöglicht, die auf deinem Gerät installiert sind."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Zertifikat prüfen}other{Zertifikate prüfen}}"</string>
-    <string name="user_settings_title" msgid="6550866465409807877">"Mehrere Nutzer"</string>
+    <!-- no translation found for user_settings_title (9208831545558787202) -->
+    <skip />
     <string name="user_list_title" msgid="1387379079186123404">"Nutzer &amp; Profile"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Nutzer oder Profil hinzufügen"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Eingeschränktes Profil"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"Nicht eingerichtet"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"Eingeschränktes Profil nicht eingerichtet"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Nicht eingerichtet – Arbeitsprofil"</string>
-    <!-- no translation found for user_owner (2079206733011361994) -->
-    <skip />
+    <string name="user_owner" msgid="2079206733011361994">"Inhaber"</string>
     <string name="user_admin" msgid="4024553191395768119">"Administrator"</string>
     <string name="user_you" msgid="3070562015202859996">"Ich (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"Du kannst keine weiteren Nutzer hinzufügen. Entferne dazu zuerst einen bisherigen Nutzer."</string>
@@ -4244,7 +4245,7 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Öffne den Startbildschirm, indem du vom unteren Displayrand nach oben wischst. Um zwischen Apps zu wechseln, wische vom unteren Displayrand nach oben, halte und lass dann los. Wenn du zurückgehen möchtest, wische vom linken oder vom rechten Rand nach innen."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Bedienung über 3 Schaltflächen"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Nutze die Schaltflächen unten auf deinem Bildschirm, um zurückzugehen, den Startbildschirm aufzurufen und zwischen Apps zu wechseln."</string>
-    <string name="nav_tutorial_button_description" msgid="6880450051535137024">"Schaltfläche zum Starten des Tutorials für „Bedienung über Gesten“ Zum Aktivieren doppelt tippen."</string>
+    <string name="nav_tutorial_button_description" msgid="6880450051535137024">"Schaltfläche zum Starten des Tutorials für „Bedienung über Gesten“ Zum Aktivieren doppeltippen."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"Systemsteuerung, Bedienung über 2 Schaltflächen, Bedienung über 3 Schaltflächen, Gestensteuerung, Bedienung über Gesten, wischen"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Digitaler Assistent"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Zum Öffnen des Assistenten wischen"</string>
@@ -4644,6 +4645,10 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"Du kannst Nachrichten an beliebige Empfänger versenden, auch an den Rettungsdienst. Sobald wieder ein Mobilfunknetz verfügbar ist, verbindet sich dein Smartphone damit."</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Das Senden von Nachrichten per Satellit kann länger dauern und ist nicht überall verfügbar. Wetterbedingungen und bestimmte Gebäude, Bäume usw. können die Satellitenverbindung beeinträchtigen. Anrufe per Satellit sind nicht verfügbar. Notrufe werden eventuell trotzdem verbunden.\n\nEs kann einige Zeit dauern, bis Kontoänderungen in den Einstellungen angezeigt werden. Weitere Informationen erhältst du bei deinem Mobilfunkanbieter."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Mehr zu Nachrichten per Satellit"</string>
+    <!-- no translation found for satellite_warning_dialog_title (1610117852475376931) -->
+    <skip />
+    <!-- no translation found for satellite_warning_dialog_content (936419945275934955) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Zugangspunkte (APNs)"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Bei Verbindung mit <xliff:g id="CARRIER">%1$s</xliff:g> nicht verfügbar"</string>
@@ -4805,19 +4810,46 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Informationen zu den Arbeitsrichtlinien"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Einstellungen, die von deinem IT-Administrator verwaltet werden"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <string name="enable_16k_pages" msgid="5009476566957520607">"Mit 16K-Seitengröße starten"</string>
-    <string name="enable_16k_pages_summary" msgid="428117226069445198">"Mit 16K-Seitengröße unterstützendem Kernel starten"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="6751570067857011642">"Mit 16-KB-Seiten-kompatiblem Kernel neu starten?"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="702888115148257215">"WARNUNG: Einige Apps sind möglicherweise nicht mit diesem Modus kompatibel. Das Gerät startet nach der Bestätigung neu."</string>
-    <string name="confirm_enable_4k_pages_title" msgid="626987400420355263">"Mit 4-KB-Seiten-kompatiblem Kernel neu starten?"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"Das Gerät startet nach der Bestätigung neu."</string>
+    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
+    <skip />
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Kernel konnte nicht auf mit 16-KB-Seiten kompatiblen Kernel aktualisiert werden."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Änderung wird übernommen"</string>
-    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"Gerät mit ext4 neu formatieren?"</string>
-    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"Die 16K-Entwickleroption wird für das ext4-Dateisystem unterstützt. Nach deiner Bestätigung werden die Daten auf dem Gerät gelöscht und das Dateisystem zu ext4 geändert."</string>
-    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"Beim Löschen und Neuformatieren der Datenpartition mit ext4 ist ein Fehler aufgetreten."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"OEM-Entsperrung erforderlich"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"Für das Gerät ist eine OEM-Entsperrung erforderlich, damit die 16K-Entwickleroption verwendet werden kann. Die OEM-Entsperrung erfordert außerdem eine Formatierung der Nutzerdaten. Hebe die OEM-Sperre des Geräts auf und versuche es noch einmal."</string>
+    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
+    <skip />
+    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Fehlerbericht-Handler"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Bestimmt, welche App die Verknüpfung zum Fehlerbericht auf deinem Gerät verarbeitet"</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Persönlich"</string>
@@ -4879,7 +4911,8 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Player anzeigen"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"Medien"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Kamerasoftware-Erweiterungen zulassen"</string>
-    <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"Dadurch kann die Software von erweiterten Kamerafunktionen wie nicht-visuellen Aufnahmetechniken standardmäßig implementiert werden."</string>
+    <!-- no translation found for camera_extensions_fallback_description (4306833827773277263) -->
+    <skip />
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth wird aktiviert"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM-Karten"</string>
@@ -4949,6 +4982,8 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Druckdienst verwenden"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Mehrere Nutzer zulassen"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"zulassen, mehrere, Nutzer, Erlaubnis, viele"</string>
+    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Debugging über WLAN verwenden"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Grafiktreiber-Einstellungen verwenden"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Nachtlicht verwenden"</string>
@@ -4971,8 +5006,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"2G zulassen"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G ist weniger sicher, bietet aber an manchen Orten eine bessere Verbindung. Für Notrufe ist 2G immer zugelassen."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"Für <xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> muss 2G verfügbar sein"</string>
-    <string name="require_cellular_encryption_title" msgid="7516008146269371585">"Verschlüsselung erforderlich"</string>
-    <string name="require_cellular_encryption_summary" msgid="4813823321032908641">"Die Verschlüsselung ist sicherer, du kannst jedoch an manchen Standorten eventuell keine Verbindung herstellen. Für Notrufe ist eine Verschlüsselung nie erforderlich."</string>
+    <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Nur verschlüsselte Netzwerke zulassen"</string>
+    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Dies ist sicherer, schränkt aber möglicherweise deine Mobilfunkverbindung an einigen Orten ein. Notrufe sind immer erlaubt."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Alle Dienste"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Zugriff auf Zwischenablage anzeigen"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Eine Meldung wird angezeigt, wenn Apps auf Text, Bilder oder andere Inhalte zugreifen, die du kopiert hast"</string>
@@ -5195,8 +5230,6 @@
     <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"Sichere softwarebasierte Kryptografie erzwingen"</string>
     <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Schlüsselverwaltung mit digitaler Rechteverwaltung zwingen, softwarebasierte White-Box-Kryptografie zu verwenden"</string>
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Reinige das Display in der Nähe des Sensors und versuche es noch einmal"</string>
-    <!-- no translation found for sim_category_converted_sim (8575548015816988908) -->
-    <skip />
-    <!-- no translation found for sync_across_devices_title (3447757705383089345) -->
-    <skip />
+    <string name="sim_category_converted_sim" msgid="8575548015816988908">"In eSIM umgewandelt. Herausnehmen und entsorgen."</string>
+    <string name="sync_across_devices_title" msgid="3447757705383089345">"Synchronisierung zwischen Geräten"</string>
 </resources>
