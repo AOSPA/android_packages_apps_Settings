@@ -640,7 +640,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
             @Nullable DevelopmentSettingsDashboardFragment fragment,
             @Nullable BluetoothA2dpConfigStore bluetoothA2dpConfigStore) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new PreferVonrController(context, lifecycle));
         controllers.add(new MemoryUsagePreferenceController(context));
         controllers.add(new BugReportPreferenceController(context));
         controllers.add(new BugReportHandlerPreferenceController(context));

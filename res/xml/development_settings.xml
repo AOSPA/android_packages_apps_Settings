@@ -323,12 +323,6 @@
         android:title="@string/debug_networking_category"
         android:order="400">
 
-        <com.android.settingslib.RestrictedPreference
-            android:fragment="com.android.settings.development.PreferVonrSettings"
-            android:key="prefer_vonr_mode"
-            android:title="@string/prefer_vonr_mode_title"
-            android:summary="@string/prefer_vonr_mode_summary"/>
-
         <SwitchPreferenceCompat
             android:key="wifi_display_certification"
             android:title="@string/wifi_display_certification"
