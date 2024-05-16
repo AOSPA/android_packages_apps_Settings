@@ -250,9 +250,7 @@ public class ApnSettings extends RestrictedSettingsFragment
         // Remove Emergency type, users should not mess with that
         where.append(" AND NOT (type='emergency')");
 
-        // TODO(b/338076914) subId is now hardcoded to invalid
-        final int subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-        int phoneId = SubscriptionManager.getPhoneId(subId);
+        int phoneId = SubscriptionManager.getPhoneId(mSubId);
         Context appContext = getActivity().getApplicationContext();
         boolean isVoLTEEnabled = ImsManager.getInstance(appContext, phoneId)
                 .isEnhanced4gLteModeSettingEnabledByUser();
@@ -280,6 +278,8 @@ public class ApnSettings extends RestrictedSettingsFragment
             // TODO (b/338076914) upstream refactor removed this functionality
             // ApnPreference.setSelectedKey(mSelectedKey);
             cursor.moveToFirst();
+            final int radioTech = networkTypeToRilRidioTechnology(TelephonyManager.getDefault()
+                    .getDataNetworkType(mSubId));
             while (!cursor.isAfterLast()) {
                 String name = cursor.getString(NAME_INDEX);
                 final String apn = cursor.getString(APN_INDEX);
@@ -298,8 +298,6 @@ public class ApnSettings extends RestrictedSettingsFragment
                 int bearer = cursor.getInt(BEARER_INDEX);
                 int bearerBitMask = cursor.getInt(BEARER_BITMASK_INDEX);
                 int fullBearer = ServiceState.getBitmaskForTech(bearer) | bearerBitMask;
-                int radioTech = networkTypeToRilRidioTechnology(TelephonyManager.getDefault()
-                        .getDataNetworkType(subId));
                 if (!ServiceState.bitmaskHasTech(fullBearer, radioTech)
                         && (bearer != 0 || bearerBitMask != 0)) {
                     // In OOS, show APN with bearer as default

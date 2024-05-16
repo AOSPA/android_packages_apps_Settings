@@ -104,9 +104,6 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        if (Flags.isDualSimOnboardingEnabled()) {
-            return CONDITIONALLY_UNAVAILABLE;
-        }
         return subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
                 ? AVAILABLE
                 : AVAILABLE_UNSEARCHABLE;

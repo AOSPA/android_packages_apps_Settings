@@ -30,6 +30,7 @@ import androidx.lifecycle.LifecycleOwner
 import com.android.settings.R
 import com.android.settings.network.telephony.CellInfoUtil
 import com.android.settings.network.telephony.CellInfoUtil.getNetworkTitle
+import com.android.settings.network.telephony.MobileNetworkUtils
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 
 import kotlinx.coroutines.Dispatchers
@@ -115,6 +116,12 @@ class NetworkScanRepository(private val context: Context, subId: Int) {
         val radioAccessSpecifiers = allowedNetworkTypes
             .map { RadioAccessSpecifier(it, null, null) }
             .toTypedArray()
+        var accessMode: Int = NetworkScanRequest.ACCESS_MODE_PLMN
+        var searchType: Int = NetworkScanRequest.SEARCH_TYPE_PLMN_ONLY
+        if (MobileNetworkUtils.isCagSnpnEnabled(context)) {
+            accessMode = MobileNetworkUtils.getAccessMode(context, telephonyManager.getSlotIndex())
+            searchType = NetworkScanRequest.SEARCH_TYPE_PLMN_AND_CAG
+        }
         return NetworkScanRequest(
             NetworkScanRequest.SCAN_TYPE_ONE_SHOT,
             radioAccessSpecifiers,
@@ -123,6 +130,8 @@ class NetworkScanRepository(private val context: Context, subId: Int) {
             true,
             INCREMENTAL_RESULTS_PERIODICITY_SEC,
             null,
+            accessMode,
+            searchType,
         )
     }
 
