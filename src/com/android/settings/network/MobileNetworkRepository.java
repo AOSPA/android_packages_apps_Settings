@@ -772,7 +772,8 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     }
 
     private class PhoneCallStateTelephonyCallback extends TelephonyCallback implements
-            TelephonyCallback.CallStateListener {
+            TelephonyCallback.CallStateListener,
+            TelephonyCallback.ActiveDataSubscriptionIdListener {
 
         private int mCallState = TelephonyManager.CALL_STATE_IDLE;
 
@@ -788,6 +789,12 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                 callback.onCallStateChanged(state);
                 callback.onAnyOngoingCallOnDevice(isAnyCallOngoing);
             }
+        }
+
+        @Override
+        public void onActiveDataSubscriptionIdChanged(int subId) {
+            insertAvailableSubInfoToEntity(
+                    SubscriptionUtil.getSelectableSubscriptionInfoList(mContext));
         }
     }
 
