@@ -25,6 +25,7 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 import android.telephony.UiccCardInfo;
+import android.telephony.UiccSlotInfo;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
@@ -181,12 +182,17 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
 
     @Override
     public void onSubscriptionsChanged() {
-        if ((mSubInfo == null || (!mSubInfo.isEmbedded() &&
-                !mSubscriptionManager.isActiveSubscriptionId(mSubInfo.getSubscriptionId())))
+        if (mSubInfo == null || (!mIsEsimOperation && !isPsimPresent()
+                && !mSubscriptionManager.isActiveSubscriptionId(mSubInfo.getSubscriptionId()))
                 && !isFinishing()) {
             Log.i(TAG, "Finish dialog for inactive sim");
             finish();
         }
+    }
+
+    private boolean isPsimPresent() {
+        return (UiccSlotUtil.getSlotInfos(mTelMgr).stream()
+                .anyMatch(slotInfo -> mSubInfo.getIccId().equals(slotInfo.getCardId())));
     }
 
     @Override
