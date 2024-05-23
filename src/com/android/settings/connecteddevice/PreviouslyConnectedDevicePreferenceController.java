@@ -43,7 +43,6 @@ import com.android.settings.bluetooth.SavedBluetoothDeviceUpdater;
 import com.android.settings.connecteddevice.dock.DockUpdater;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
@@ -94,11 +93,7 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
         mSavedDockUpdater = FeatureFactory.getFeatureFactory().getDockUpdaterFeatureProvider()
                 .getSavedDockUpdater(context, this);
         mIntentFilter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
-        if (Flags.enableSavedDevicesOrderByRecency()) {
-            mBluetoothAdapter = context.getSystemService(BluetoothManager.class).getAdapter();
-        } else {
-            mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        }
+        mBluetoothAdapter = context.getSystemService(BluetoothManager.class).getAdapter();
         manager = Utils.getLocalBtManager(context);
         if ( manager != null) {
             mLocalAdapter = manager.getBluetoothAdapter();
@@ -135,10 +130,8 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
         mContext.registerReceiver(mReceiver, mIntentFilter,
                 Context.RECEIVER_EXPORTED_UNAUDITED);
         mBluetoothDeviceUpdater.refreshPreference();
+        updatePreferenceGroup();
         manager.getEventManager().registerCallback(this);
-        if (Flags.enableSavedDevicesOrderByRecency()) {
-            updatePreferenceGroup();
-        }
     }
 
     @Override
@@ -158,37 +151,17 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
 
     @Override
     public void onDeviceAdded(Preference preference) {
-        if (Flags.enableSavedDevicesOrderByRecency()) {
-            if (preference instanceof BluetoothDevicePreference) {
-                mDevicePreferenceMap.put(
-                        ((BluetoothDevicePreference) preference).getBluetoothDevice().getDevice(),
-                        preference);
-            } else {
-                mDockDevicesList.add(preference);
-            }
-            if (DEBUG) {
-                Log.d(TAG, "onDeviceAdded() " + preference.getTitle());
-            }
-            updatePreferenceGroup();
+        if (preference instanceof BluetoothDevicePreference) {
+            mDevicePreferenceMap.put(
+                    ((BluetoothDevicePreference) preference).getBluetoothDevice().getDevice(),
+                    preference);
         } else {
-            final List<BluetoothDevice> bluetoothDevices =
-                    mBluetoothAdapter.getMostRecentlyConnectedDevices();
-            final int index =
-                    preference instanceof BluetoothDevicePreference
-                            ? bluetoothDevices.indexOf(
-                                    ((BluetoothDevicePreference) preference)
-                                            .getBluetoothDevice()
-                                            .getDevice())
-                            : DOCK_DEVICE_INDEX;
-            if (DEBUG) {
-                Log.d(TAG, "onDeviceAdded() " + preference.getTitle() + ", index of : " + index);
-                for (BluetoothDevice device : bluetoothDevices) {
-                    Log.d(TAG, "onDeviceAdded() most recently device : " + device.getName());
-                }
-            }
-            addPreference(index, preference);
-            updatePreferenceVisibility();
+            mDockDevicesList.add(preference);
         }
+        if (DEBUG) {
+            Log.d(TAG, "onDeviceAdded() " + preference.getTitle());
+        }
+        updatePreferenceGroup();
     }
 
     private void addPreference(int index, Preference preference) {
@@ -239,28 +212,17 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
 
     @Override
     public void onDeviceRemoved(Preference preference) {
-        if (Flags.enableSavedDevicesOrderByRecency()) {
-            if (preference instanceof BluetoothDevicePreference) {
-                mDevicePreferenceMap.remove(
-                        ((BluetoothDevicePreference) preference).getBluetoothDevice().getDevice(),
-                        preference);
-            } else {
-                mDockDevicesList.remove(preference);
-            }
-            if (DEBUG) {
-                Log.d(TAG, "onDeviceRemoved() " + preference.getTitle());
-            }
-            updatePreferenceGroup();
+        if (preference instanceof BluetoothDevicePreference) {
+            mDevicePreferenceMap.remove(
+                    ((BluetoothDevicePreference) preference).getBluetoothDevice().getDevice(),
+                    preference);
         } else {
-            if (preference instanceof BluetoothDevicePreference) {
-                mDevicesList.remove(preference);
-            } else {
-                mDockDevicesList.remove(preference);
-            }
-
-            addPreference();
-            updatePreferenceVisibility();
+            mDockDevicesList.remove(preference);
         }
+        if (DEBUG) {
+            Log.d(TAG, "onDeviceRemoved() " + preference.getTitle());
+        }
+        updatePreferenceGroup();
     }
 
     /** Sort the preferenceGroup by most recently used. */

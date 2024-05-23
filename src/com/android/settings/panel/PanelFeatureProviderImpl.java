@@ -27,6 +27,7 @@ import androidx.annotation.Nullable;
 import com.android.settings.Utils;
 import com.android.settings.flags.Flags;
 
+@Deprecated(forRemoval = true)
 public class PanelFeatureProviderImpl implements PanelFeatureProvider {
 
     @Override
@@ -77,7 +78,14 @@ public class PanelFeatureProviderImpl implements PanelFeatureProvider {
                     context.sendBroadcast(volumeIntent);
                     return null;
                 } else {
-                    return VolumePanel.create(context);
+                    if (Flags.slicesRetirement()) {
+                        Intent volIntent = new Intent(Settings.ACTION_SOUND_SETTINGS);
+                        volIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(volIntent);
+                        return null;
+                    } else {
+                        return VolumePanel.create(context);
+                    }
                 }
         }
 

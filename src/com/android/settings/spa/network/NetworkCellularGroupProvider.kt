@@ -36,11 +36,11 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.android.settings.R
@@ -62,7 +62,6 @@ import com.android.settingslib.spaprivileged.settingsprovider.settingsGlobalBool
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.flowOf
@@ -207,7 +206,7 @@ fun MobileDataSectionImpl(
         }.collectAsStateWithLifecycle(initialValue = null)
 
         val mobileDataStateChanged by remember(mobileDataSelectedId.intValue) {
-            TelephonyRepository(context).isDataEnabled(mobileDataSelectedId.intValue)
+            TelephonyRepository(context).isDataEnabledFlow(mobileDataSelectedId.intValue)
         }.collectAsStateWithLifecycle(initialValue = false)
         val coroutineScope = rememberCoroutineScope()
 
@@ -410,11 +409,22 @@ suspend fun setMobileData(
     enabled: Boolean,
 ): Unit =
     withContext(Dispatchers.Default) {
-        Log.d(NetworkCellularGroupProvider.fileName, "setMobileData: $enabled")
+        Log.d(NetworkCellularGroupProvider.fileName, "setMobileData[$subId]: $enabled")
+
+        var targetSubId = subId
+        val activeSubIdList = subscriptionManager?.activeSubscriptionIdList
+        if (activeSubIdList?.size == 1) {
+            targetSubId = activeSubIdList[0]
+            Log.d(
+                NetworkCellularGroupProvider.fileName,
+                "There is only one sim in the device, correct dds as $targetSubId"
+            )
+        }
+
         if (enabled) {
-            Log.d(NetworkCellularGroupProvider.fileName, "setDefaultData: [$subId]")
-            subscriptionManager?.setDefaultDataSubId(subId)
+            Log.d(NetworkCellularGroupProvider.fileName, "setDefaultData: [$targetSubId]")
+            subscriptionManager?.setDefaultDataSubId(targetSubId)
         }
         TelephonyRepository(context)
-            .setMobileData(subId, enabled, wifiPickerTrackerHelper)
+            .setMobileData(targetSubId, enabled, wifiPickerTrackerHelper)
     }

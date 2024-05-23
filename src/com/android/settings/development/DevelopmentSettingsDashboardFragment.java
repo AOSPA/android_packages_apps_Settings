@@ -18,6 +18,7 @@ package com.android.settings.development;
 
 import static android.provider.Settings.Global.DEVELOPMENT_SETTINGS_ENABLED;
 import static android.service.quicksettings.TileService.ACTION_QS_TILE_PREFERENCES;
+import static android.view.flags.Flags.sensitiveContentAppProtectionApi;
 
 import android.app.Activity;
 import android.app.UiModeManager;
@@ -329,7 +330,12 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
             adapter.getProfileProxy(getActivity(), mBluetoothA2dpServiceListener,
                     BluetoothProfile.A2DP);
         }
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View root = super.onCreateView(inflater, container, savedInstanceState);
+        // Mark the view sensitive to black out the screen during screen share.
+        if (sensitiveContentAppProtectionApi()) {
+            root.setContentSensitivity(View.CONTENT_SENSITIVITY_SENSITIVE);
+        }
+        return root;
     }
 
     @Override
@@ -384,6 +390,13 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                         || enableAngleController.isDefaultValue())) {
                     disableDeveloperOptions();
                 } else {
+                    // Disabling developer options in page-agnostic mode isn't supported as device
+                    // isn't in production state
+                    if (Enable16kUtils.isPageAgnosticModeOn(getContext())) {
+                        Enable16kUtils.showPageAgnosticWarning(getContext());
+                        onDisableDevelopmentOptionsRejected();
+                        return;
+                    }
                     DisableDevSettingsDialogFragment.show(this /* host */);
                 }
             }

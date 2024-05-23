@@ -93,7 +93,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     private AirplaneModeObserver mAirplaneModeObserver;
     private DataRoamingObserver mDataRoamingObserver;
     private MetricsFeatureProvider mMetricsFeatureProvider;
-    private Map<Integer, MobileDataContentObserver> mDataContentObserverMap = new HashMap<>();
     private int mPhysicalSlotIndex = SubscriptionManager.INVALID_SIM_SLOT_INDEX;
     private int mLogicalSlotIndex = SubscriptionManager.INVALID_SIM_SLOT_INDEX;
     private int mCardState = UiccSlotInfo.CARD_STATE_INFO_ABSENT;
@@ -214,6 +213,9 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
      */
     public void addRegister(LifecycleOwner lifecycleOwner,
             MobileNetworkCallback mobileNetworkCallback, int subId) {
+        if (DEBUG) {
+            Log.d(TAG, "addRegister by SUB ID " + subId);
+        }
         if (sCallbacks.isEmpty()) {
             mSubscriptionManager.addOnSubscriptionsChangedListener(mContext.getMainExecutor(),
                     this);
@@ -225,28 +227,12 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         observeAllUiccInfo(lifecycleOwner);
         observeAllMobileNetworkInfo(lifecycleOwner);
         if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            addRegisterBySubId(subId);
             createTelephonyManagerBySubId(subId);
             mDataRoamingObserver.register(mContext, subId);
         }
         // When one client registers callback first time, convey the cached results to the client
         // so that the client is aware of the content therein.
         sendAvailableSubInfoCache(mobileNetworkCallback);
-    }
-
-    public void addRegisterBySubId(int subId) {
-        Log.d(TAG, "MobileDataContentObserver addRegisterBySubId: " + subId);
-        MobileDataContentObserver dataContentObserver = new MobileDataContentObserver(
-                new Handler(Looper.getMainLooper()));
-        dataContentObserver.setOnMobileDataChangedListener(() -> {
-            sExecutor.execute(() -> {
-                Log.d(TAG, "MobileDataContentObserver changed");
-                insertMobileNetworkInfo(mContext, subId,
-                        getTelephonyManagerBySubId(mContext, subId));
-            });
-        });
-        dataContentObserver.register(mContext, subId);
-        mDataContentObserverMap.put(subId, dataContentObserver);
     }
 
     private void createTelephonyManagerBySubId(int subId) {
@@ -258,7 +244,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             return;
         }
         PhoneCallStateTelephonyCallback
-                telephonyCallback = new PhoneCallStateTelephonyCallback();
+                telephonyCallback = new PhoneCallStateTelephonyCallback(subId);
         TelephonyManager telephonyManager = mContext.getSystemService(
                 TelephonyManager.class).createForSubscriptionId(subId);
         telephonyManager.registerTelephonyCallback(mContext.getMainExecutor(),
@@ -297,10 +283,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                 }
             }
         }
-        if (mDataContentObserverMap.containsKey(subId)) {
-            mDataContentObserverMap.get(subId).unRegister(mContext);
-            mDataContentObserverMap.remove(subId);
-        }
     }
 
     public void removeRegister(MobileNetworkCallback mobileNetworkCallback) {
@@ -311,10 +293,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             mSubscriptionManager.removeOnSubscriptionsChangedListener(this);
             mAirplaneModeObserver.unRegister(mContext);
             mDataRoamingObserver.unRegister(mContext);
-            mDataContentObserverMap.forEach((id, observer) -> {
-                observer.unRegister(mContext);
-            });
-            mDataContentObserverMap.clear();
 
             mTelephonyManagerMap.forEach((id, manager) -> {
                 TelephonyCallback callback = mTelephonyCallbackMap.get(id);
@@ -773,7 +751,14 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
 
     private class PhoneCallStateTelephonyCallback extends TelephonyCallback implements
             TelephonyCallback.CallStateListener,
+            TelephonyCallback.UserMobileDataStateListener,
             TelephonyCallback.ActiveDataSubscriptionIdListener {
+
+        private int mSubId;
+
+        public PhoneCallStateTelephonyCallback(int subId) {
+            mSubId = subId;
+        }
 
         private int mCallState = TelephonyManager.CALL_STATE_IDLE;
 
@@ -789,6 +774,15 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                 callback.onCallStateChanged(state);
                 callback.onAnyOngoingCallOnDevice(isAnyCallOngoing);
             }
+        }
+
+        @Override
+        public void onUserMobileDataStateChanged(boolean enabled) {
+            Log.d(TAG, "onUserMobileDataStateChanged enabled " + enabled + " on SUB " + mSubId);
+            sExecutor.execute(() -> {
+                insertMobileNetworkInfo(mContext, mSubId,
+                        getTelephonyManagerBySubId(mContext, mSubId));
+            });
         }
 
         @Override

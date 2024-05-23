@@ -17,6 +17,9 @@ package com.android.settings.network;
 
 import static android.provider.SettingsSlicesContract.KEY_AIRPLANE_MODE;
 
+import static com.android.settings.network.SatelliteWarningDialogActivity.EXTRA_TYPE_OF_SATELLITE_WARNING_DIALOG;
+import static com.android.settings.network.SatelliteWarningDialogActivity.TYPE_IS_AIRPLANE_MODE;
+
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -29,6 +32,7 @@ import android.os.Looper;
 import android.provider.SettingsSlicesContract;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
@@ -43,17 +47,23 @@ import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import com.qti.extphone.ExtTelephonyManager;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class AirplaneModePreferenceController extends TogglePreferenceController
-        implements LifecycleObserver, OnStart, OnStop, OnDestroy,
+        implements LifecycleObserver, OnStart, OnResume, OnStop, OnDestroy,
         AirplaneModeEnabler.OnAirplaneModeChangedListener {
-
+    private static final String TAG = AirplaneModePreferenceController.class.getSimpleName();
     public static final int REQUEST_CODE_EXIT_ECM = 1;
     public static final int REQUEST_CODE_EXIT_SCBM = 2;
 
@@ -70,12 +80,15 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
     private Fragment mFragment;
     private AirplaneModeEnabler mAirplaneModeEnabler;
     private TwoStatePreference mAirplaneModePreference;
+    private SatelliteRepository mSatelliteRepository;
+    @VisibleForTesting
+    AtomicBoolean mIsSatelliteOn = new AtomicBoolean(false);
 
     public AirplaneModePreferenceController(Context context, String key) {
         super(context, key);
-
         if (isAvailable(mContext)) {
             mAirplaneModeEnabler = new AirplaneModeEnabler(mContext, this);
+            mSatelliteRepository = new SatelliteRepository(mContext);
         }
     }
 
@@ -108,6 +121,15 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
                                 .setPackage(Utils.PHONE_PACKAGE_NAME),
                             REQUEST_CODE_EXIT_SCBM);
                 }
+                return true;
+            }
+            if (mIsSatelliteOn.get()) {
+                mContext.startActivity(
+                        new Intent(mContext, SatelliteWarningDialogActivity.class)
+                                .putExtra(
+                                        EXTRA_TYPE_OF_SATELLITE_WARNING_DIALOG,
+                                        TYPE_IS_AIRPLANE_MODE)
+                );
                 return true;
             }
         }
@@ -154,6 +176,17 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
     }
 
     @Override
+    public void onResume() {
+        try {
+            mIsSatelliteOn.set(
+                    mSatelliteRepository.requestIsEnabled(Executors.newSingleThreadExecutor())
+                            .get(2000, TimeUnit.MILLISECONDS));
+        } catch (ExecutionException | TimeoutException | InterruptedException e) {
+            Log.e(TAG, "Error to get satellite status : " + e);
+        }
+    }
+
+    @Override
     public void onStop() {
         if (isAvailable()) {
             mAirplaneModeEnabler.stop();
@@ -189,7 +222,7 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        if (isChecked() == isChecked) {
+        if (isChecked() == isChecked || mIsSatelliteOn.get()) {
             return false;
         }
         if (isAvailable()) {
