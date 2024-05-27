@@ -273,7 +273,7 @@ public class WifiHotspotRepository {
             passphrase = generatePassword(config);
         }
         if (securityType == SECURITY_TYPE_WPA3_OWE) {
-           if (config.getBands().length > 1) {
+           if (config.getChannels().size() > 1) {
                log("Setting band to 2GHz for Enhanced open");
                configBuilder.setBand(BAND_2GHZ);
            } else if (config.getBand() == BAND_2GHZ || config.getBand() == BAND_5GHZ) {
@@ -320,7 +320,7 @@ public class WifiHotspotRepository {
         }
         if ((keyBand & BAND_6GHZ) != 0) {
             keyBand = BAND_6GHZ;
-        } else if (isDualBand() && is5gAvailable() && (config.getBands().length > 1)) {
+        } else if (isDualBand() && is5gAvailable() && (config.getChannels().size() > 1)) {
             keyBand = BAND_2GHZ_5GHZ;
         } else if ((keyBand & BAND_5GHZ) != 0) {
             keyBand = BAND_5GHZ;
