@@ -475,6 +475,11 @@
             android:entries="@array/bluetooth_max_connected_audio_devices"
             android:entryValues="@array/bluetooth_max_connected_audio_devices_values" />
 
+    <SwitchPreference
+            android:key="bluetooth_xpan_dev_settings"
+            android:title="@string/bluetooth_xpan_devoption_title"
+            android:summary="@string/bluetooth_xpan_devoption_description"/>
+
         <SwitchPreferenceCompat
             android:key="nfc_verbose_vendor_log"
             android:title="@string/nfc_verbose_vendor_log_title"
