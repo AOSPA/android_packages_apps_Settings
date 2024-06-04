@@ -57,6 +57,7 @@ import android.util.Log;
 
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
+import com.android.settings.Utils;
 
 import java.util.List;
 
@@ -128,6 +129,7 @@ public class UserPLMNEditorActivity extends PreferenceActivity implements
 
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        Utils.setupEdgeToEdge(this);
         addPreferencesFromResource(R.xml.uplmn_editor);
         mNoSet = getResources().getString(R.string.voicemail_number_not_set);
 

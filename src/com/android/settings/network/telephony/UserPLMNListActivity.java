@@ -63,6 +63,7 @@ import com.android.internal.telephony.uicc.IccUtils;
 import com.android.internal.telephony.uicc.PlmnActRecord;
 import com.android.internal.telephony.uicc.UiccController;
 import com.android.settings.R;
+import com.android.settings.Utils;
 
 import org.codeaurora.internal.IExtTelephony;
 
@@ -179,6 +180,7 @@ public class UserPLMNListActivity extends PreferenceActivity
 
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        Utils.setupEdgeToEdge(this);
         addPreferencesFromResource(R.xml.uplmn_settings);
         mUPLMNListContainer = (PreferenceScreen) findPreference(BUTTON_UPLMN_LIST_KEY);
         int subId = getIntent().getIntExtra(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX,

@@ -1484,6 +1484,22 @@ public final class Utils extends com.android.settingslib.Utils {
                 });
     }
 
+    public static void setupEdgeToEdge(@NonNull Activity activity) {
+        ViewCompat.setOnApplyWindowInsetsListener(activity.findViewById(android.R.id.content),
+                (v, windowInsets) -> {
+                    Insets insets = windowInsets.getInsets(
+                            WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.ime()
+                                    | WindowInsetsCompat.Type.displayCutout());
+
+                    // Apply the insets paddings to the view.
+                    v.setPadding(insets.left, insets.top, insets.right, insets.bottom);
+
+                    // Return CONSUMED if you don't want the window insets to keep being
+                    // passed down to descendant views.
+                    return WindowInsetsCompat.CONSUMED;
+                });
+    }
+
     private static FaceManager.RemovalCallback faceManagerRemovalCallback(int userId) {
         return new FaceManager.RemovalCallback() {
             @Override
