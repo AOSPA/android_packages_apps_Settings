@@ -287,8 +287,12 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
         if (!enableData) {
             final int DDS = SubscriptionManager.getDefaultDataSubscriptionId();
             final int nDDS = MobileNetworkSettings.getNonDefaultDataSub();
-
-            // Store the call state and C_IWLAN-related settings of all active subscriptions
+            // For targets that support MSIM C_IWLAN, the warning is to be shown only for the DDS
+            // when either sub is in a call. For other targets, it will be shown only when there is
+            // a call on the DDS.
+            if (mSubId != DDS) {
+                return false;
+            }
             int[] activeSubIdList = mSubscriptionManager.getActiveSubscriptionIdList();
             mIsSubInCall = new SparseBooleanArray(activeSubIdList.length);
             mIsCiwlanModeSupported = new SparseBooleanArray(activeSubIdList.length);
@@ -307,27 +311,15 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
                 mIsImsRegisteredOnCiwlan.put(subId, MobileNetworkSettings.isImsRegisteredOnCiwlan(
                         subId));
             }
-
-            // For targets that support MSIM C_IWLAN, the warning is to be shown only for the DDS
-            // when either sub is in a call. For other targets, it will be shown only when there is
-            // a call on the DDS.
             boolean isMsimCiwlanSupported = MobileNetworkSettings.isMsimCiwlanSupported();
             int subToCheck = DDS;
             if (isMsimCiwlanSupported) {
-                if (mSubId != DDS) {
-                    // If the code comes here, the user is trying to change the mobile data toggle
-                    // of the nDDS which we don't care about.
-                    return false;
-                } else {
-                    // Otherwise, the user is trying to toggle the mobile data of the DDS. In this
-                    // case, we need to check if the nDDS is in a call. If it is, we will check the
-                    // C_IWLAN related settings belonging to the nDDS. Otherwise, we will check
-                    // those of the DDS.
-                    subToCheck = subToCheckForCiwlanWarningDialog(nDDS, DDS);
-                    Log.d(TAG, "isDialogNeeded DDS = " + DDS + ", subToCheck = " + subToCheck);
-                }
+                // Otherwise, the user is trying to toggle the mobile data of the DDS. In this case,
+                // we need to check if the nDDS is in a call. If it is, we will check the C_IWLAN
+                // related settings of the nDDS. Otherwise, we will check those of the DDS.
+                subToCheck = subToCheckForCiwlanWarningDialog(nDDS, DDS);
+                Log.d(TAG, "isDialogNeeded DDS = " + DDS + ", subToCheck = " + subToCheck);
             }
-
             if (mIsSubInCall.get(subToCheck)) {
                 boolean isCiwlanModeSupported = mIsCiwlanModeSupported.get(subToCheck);
                 boolean isCiwlanEnabled = mIsCiwlanEnabled.get(subToCheck);
