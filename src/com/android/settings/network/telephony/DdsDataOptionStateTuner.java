@@ -68,6 +68,11 @@ public class DdsDataOptionStateTuner extends TelephonyCallback
         // Update default data sub ID
         mDefaultDataSubId = mSubscriptionManager.getDefaultDataSubscriptionId();
         log("register mDefaultDataSubId = " + mDefaultDataSubId);
+        IntentFilter intentFilter =
+                new IntentFilter(TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED);
+        context.registerReceiver(mReceiver, intentFilter);
+        mIsBroadcastRegistered = true;
+
         if (subId != mDefaultDataSubId) {
             // Only attached to DDS sub's instance.
             return;
@@ -77,11 +82,6 @@ public class DdsDataOptionStateTuner extends TelephonyCallback
         log("register mActiveDataSubId = " + mActiveDataSubId
                 + " mNonDdsCallState = " + mNonDdsCallState);
         registerTelephonyCallbackOnNddsSub(context);
-
-        IntentFilter intentFilter =
-                new IntentFilter(TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED);
-        context.registerReceiver(mReceiver, intentFilter);
-        mIsBroadcastRegistered = true;
     }
 
     public void unregister(Context context) {
