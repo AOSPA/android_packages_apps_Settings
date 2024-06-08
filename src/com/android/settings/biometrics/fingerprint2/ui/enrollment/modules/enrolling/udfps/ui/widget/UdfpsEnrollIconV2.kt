@@ -24,6 +24,7 @@ import android.graphics.Canvas
 import android.graphics.ColorFilter
 import android.graphics.Paint
 import android.graphics.PixelFormat
+import android.graphics.PointF
 import android.graphics.Rect
 import android.graphics.RectF
 import android.graphics.drawable.Drawable
@@ -35,9 +36,8 @@ import android.util.PathParser
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.core.animation.addListener
 import androidx.core.graphics.toRect
-import androidx.core.graphics.toRectF
 import com.android.settings.R
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.udfps.ui.viewmodel.StageViewModel
+import com.android.systemui.biometrics.shared.model.UdfpsOverlayParams
 import kotlin.math.sin
 
 /**
@@ -50,11 +50,11 @@ class UdfpsEnrollIconV2 internal constructor(context: Context, attrs: AttributeS
   private val fingerprintDrawable: ShapeDrawable
   private val sensorOutlinePaint: Paint
   private val blueFill: Paint
-  private val helper = UdfpsEnrollHelperV2(context)
   @ColorInt private var enrollIconColor = 0
   @ColorInt private var movingTargetFill = 0
   private var currentScale = 1.0f
   private var alpha = 0
+  private var stopDrawing = false
 
   /**
    * This is the physical location of the sensor. This rect will be updated by [drawSensorRectAt]
@@ -62,15 +62,12 @@ class UdfpsEnrollIconV2 internal constructor(context: Context, attrs: AttributeS
   private val sensorRectBounds: Rect = Rect()
 
   /**
-   * The following values are used to describe where the icon should be drawn. [currX] and [currY]
-   * are changed based on the current guided enrollment step which is given by the
-   * [UdfpsEnrollHelperV2]
+   * The following values are used to describe where the icon should be drawn. [sensorLeftOffset]
+   * and [sensorTopOffset] are changed based on the current guided enrollment step which is given by
+   * the [UdfpsEnrollHelperV2]
    */
-  private var currX = 0f
-  private var currY = 0f
-
-  private var sensorWidth = 0f
-  private var sensorHeight = 0f
+  private var sensorLeftOffset = 0f
+  private var sensorTopOffset = 0f
 
   init {
     fingerprintDrawable = createUdfpsIcon(context)
@@ -88,22 +85,25 @@ class UdfpsEnrollIconV2 internal constructor(context: Context, attrs: AttributeS
         it.recycle()
       }
 
-    sensorOutlinePaint = Paint(0 /* flags */).apply {
-      isAntiAlias = true
-      setColor(movingTargetFill)
-      style = Paint.Style.FILL
-    }
+    sensorOutlinePaint =
+      Paint(0 /* flags */).apply {
+        isAntiAlias = true
+        setColor(movingTargetFill)
+        style = Paint.Style.FILL
+      }
 
-    blueFill = Paint(0 /* flags */).apply {
-      isAntiAlias = true
-      setColor(movingTargetFill)
-      style = Paint.Style.FILL
-    }
+    blueFill =
+      Paint(0 /* flags */).apply {
+        isAntiAlias = true
+        setColor(movingTargetFill)
+        style = Paint.Style.FILL
+      }
 
-    movingTargetFpIcon = context.resources.getDrawable(R.drawable.ic_enrollment_fingerprint, null).apply {
-      setTint(enrollIconColor)
-      mutate()
-    }
+    movingTargetFpIcon =
+      context.resources.getDrawable(R.drawable.ic_enrollment_fingerprint, null).apply {
+        setTint(enrollIconColor)
+        mutate()
+      }
 
     fingerprintDrawable.setTint(enrollIconColor)
     setAlpha(255)
@@ -127,86 +127,68 @@ class UdfpsEnrollIconV2 internal constructor(context: Context, attrs: AttributeS
    * The [sensorRect] coordinates for the sensor area. The [sensorRect] should be the coordinates
    * with respect to its root frameview
    */
-  fun drawSensorRectAt(sensorRect: Rect) {
-    Log.e(TAG, "UdfpsEnrollIcon#drawSensorRect($sensorRect)")
+  fun drawSensorRectAt(overlayParams: UdfpsOverlayParams) {
+    Log.e(TAG, "UdfpsEnrollIcon#drawSensorRect(${overlayParams.sensorBounds})")
+    val sensorRect = overlayParams.sensorBounds
     sensorRectBounds.set(sensorRect)
     fingerprintDrawable.bounds = sensorRect
     movingTargetFpIcon.bounds = sensorRect
-    currX = sensorRect.left.toFloat()
-    currY = sensorRect.top.toFloat()
-    sensorWidth = (sensorRect.right - sensorRect.left).toFloat()
-    sensorHeight = (sensorRect.bottom - sensorRect.top).toFloat()
-    invalidateSelf()
-  }
 
-  /** Update the progress of the icon */
-  fun onEnrollmentProgress(remaining: Int, totalSteps: Int) {
-    helper.onEnrollmentProgress(remaining, totalSteps)
-    val offset = helper.guidedEnrollmentLocation
-    val currentBounds = getCurrLocation().toRect()
-    if (offset != null) {
-      // This is the desired location of the sensor rect, the [EnrollHelper]
-      // offsets the initial sensor rect by a bit to get the user to move their finger a bit more.
-      val targetRect = Rect(sensorRectBounds).toRectF()
-      targetRect.offset(offset.x, offset.y)
-      var shouldAnimateMovement =
-        !currentBounds.equals(targetRect) && offset.x != 0f && offset.y != 0f
-      if (shouldAnimateMovement) {
-        targetAnimatorSet?.let { it.cancel() }
-        animateMovement(currentBounds, targetRect, true)
-      }
-    } else {
-      // If we are not offsetting the sensor, move it back to its original place
-      animateMovement(currentBounds, sensorRectBounds.toRectF(), false)
-    }
+    // End existing animation if we get an update of the sensor rect.
+    targetAnimatorSet?.end()
 
-    invalidateSelf()
-  }
-
-  /** Update the stage of the icon */
-  fun updateStage(it: StageViewModel) {
-    helper.onUpdateStage(it)
     invalidateSelf()
   }
 
   /** Stop drawing the fingerprint icon. */
   fun stopDrawing() {
-    alpha = 0
+    stopDrawing = true
+    invalidateSelf()
   }
 
   /** Resume drawing the fingerprint icon */
   fun startDrawing() {
-    alpha = 255
+    stopDrawing = false
+    invalidateSelf()
   }
 
   override fun draw(canvas: Canvas) {
+    if (stopDrawing) {
+      return
+    }
     movingTargetFpIcon.alpha = alpha
     fingerprintDrawable.setAlpha(alpha)
     sensorOutlinePaint.setAlpha(alpha)
     val currLocation = getCurrLocation()
     canvas.scale(currentScale, currentScale, currLocation.centerX(), currLocation.centerY())
 
-    sensorRectBounds?.let { canvas.drawOval(currLocation, sensorOutlinePaint) }
+    canvas.drawOval(currLocation, sensorOutlinePaint)
     fingerprintDrawable.bounds = currLocation.toRect()
     fingerprintDrawable.draw(canvas)
   }
 
-  private fun getCurrLocation(): RectF =
-    RectF(currX, currY, currX + sensorWidth, currY + sensorHeight)
+  private fun getCurrLocation(): RectF {
+    val x = sensorRectBounds.left + sensorLeftOffset
+    val y = sensorRectBounds.top + sensorTopOffset
+    return RectF(x, y, x + sensorRectBounds.width(), y + sensorRectBounds.height())
+  }
 
-  private fun animateMovement(currentBounds: Rect, offsetRect: RectF, scaleMovement: Boolean) {
-    if (currentBounds.equals(offsetRect)) {
+  private fun animateMovement(leftOffset: Float, topOffset: Float, scaleMovement: Boolean) {
+    if (leftOffset == sensorLeftOffset && topOffset == sensorTopOffset) {
       return
     }
-    val xAnimator = ValueAnimator.ofFloat(currentBounds.left.toFloat(), offsetRect.left)
+
+    val currLocation = getCurrLocation()
+
+    val xAnimator = ValueAnimator.ofFloat(currLocation.left - sensorRectBounds.left, leftOffset)
     xAnimator.addUpdateListener {
-      currX = it.animatedValue as Float
+      sensorLeftOffset = it.animatedValue as Float
       invalidateSelf()
     }
 
-    val yAnimator = ValueAnimator.ofFloat(currentBounds.top.toFloat(), offsetRect.top)
+    val yAnimator = ValueAnimator.ofFloat(currLocation.top - sensorRectBounds.top, topOffset)
     yAnimator.addUpdateListener {
-      currY = it.animatedValue as Float
+      sensorTopOffset = it.animatedValue as Float
       invalidateSelf()
     }
     val animators = mutableListOf(xAnimator, yAnimator)
@@ -224,6 +206,7 @@ class UdfpsEnrollIconV2 internal constructor(context: Context, attrs: AttributeS
       animators.add(scaleAnimator)
     }
 
+    targetAnimatorSet?.cancel()
     targetAnimatorSet = AnimatorSet()
 
     targetAnimatorSet?.let {
@@ -234,6 +217,16 @@ class UdfpsEnrollIconV2 internal constructor(context: Context, attrs: AttributeS
     }
   }
 
+  /**
+   * Indicates a change to guided enrollment has occurred. Also indicates if we are recreating the
+   * view, in which case their is no need to animate the icon to whatever position it was in.
+   */
+  fun updateGuidedEnrollment(point: PointF, isRecreating: Boolean) {
+    val pointIsZero = point.x == 0f && point.y == 0f
+    val shouldAnimateMovement = pointIsZero || !isRecreating
+    animateMovement(point?.x ?: 0f, point?.y ?: 0f, shouldAnimateMovement)
+  }
+
   companion object {
     private const val TAG = "UdfpsEnrollDrawableV2"
     private const val DEFAULT_STROKE_WIDTH = 3f
@@ -242,12 +235,13 @@ class UdfpsEnrollIconV2 internal constructor(context: Context, attrs: AttributeS
 
     private fun createUdfpsIcon(context: Context): ShapeDrawable {
       val fpPath = context.resources.getString(R.string.config_udfpsIcon)
-      val drawable = ShapeDrawable(PathShape(PathParser.createPathFromPathData(fpPath), 72f, 72f)).apply {
-        mutate()
-        paint.style = Paint.Style.STROKE
-        paint.strokeCap = Paint.Cap.ROUND
-        paint.strokeWidth = DEFAULT_STROKE_WIDTH
-      }
+      val drawable =
+        ShapeDrawable(PathShape(PathParser.createPathFromPathData(fpPath), 72f, 72f)).apply {
+          mutate()
+          paint.style = Paint.Style.STROKE
+          paint.strokeCap = Paint.Cap.ROUND
+          paint.strokeWidth = DEFAULT_STROKE_WIDTH
+        }
       return drawable
     }
   }

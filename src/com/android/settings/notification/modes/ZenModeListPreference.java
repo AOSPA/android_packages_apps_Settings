@@ -29,17 +29,15 @@ import com.android.settingslib.RestrictedPreference;
  * Preference representing a single mode item on the modes aggregator page. Clicking on this
  * preference leads to an individual mode's configuration page.
  */
-public class ZenModeListPreference extends RestrictedPreference {
+class ZenModeListPreference extends RestrictedPreference {
     final Context mContext;
     ZenMode mZenMode;
 
     ZenModeListPreference(Context context, ZenMode zenMode) {
         super(context);
         mContext = context;
-        mZenMode = zenMode;
-        setTitle(mZenMode.getRule().getName());
-        setSummary((mZenMode.isActive() ? "ACTIVE" : "inactive") + ": "
-                + mZenMode.getRule().getTriggerDescription());
+        setZenMode(zenMode);
+        setKey(zenMode.getId());
     }
 
     @Override
@@ -60,6 +58,16 @@ public class ZenModeListPreference extends RestrictedPreference {
                     .setSourceMetricsCategory(SettingsEnums.NOTIFICATION_ZEN_MODE_AUTOMATION)
                     .launch();
         }
+    }
 
+    public void setZenMode(ZenMode zenMode) {
+        mZenMode = zenMode;
+        setTitle(mZenMode.getRule().getName());
+        setSummary(mZenMode.getRule().getTriggerDescription());
+
+        FutureUtil.whenDone(
+                mZenMode.getIcon(IconLoader.getInstance(mContext)),
+                icon -> setIcon(icon),
+                mContext.getMainExecutor());
     }
 }

@@ -16,8 +16,6 @@
 
 package com.android.settings.deviceinfo.simstatus;
 
-import static androidx.lifecycle.Lifecycle.Event;
-
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -30,15 +28,12 @@ import android.content.res.Resources;
 import android.os.IBinder;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
-import android.telephony.AccessNetworkConstants;
 import android.telephony.Annotation;
 import android.telephony.CarrierConfigManager;
 import android.telephony.CellBroadcastIntents;
 import android.telephony.CellBroadcastService;
-import android.telephony.CellSignalStrength;
 import android.telephony.ICellBroadcastService;
 import android.telephony.ServiceState;
-import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionManager.OnSubscriptionsChangedListener;
@@ -46,17 +41,14 @@ import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyDisplayInfo;
 import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
-import android.telephony.ims.ImsException;
-import android.telephony.ims.ImsMmTelManager;
-import android.telephony.ims.ImsReasonInfo;
 import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 
 import com.android.settings.R;
 import com.android.settings.network.SubscriptionUtil;
@@ -71,12 +63,14 @@ import static com.android.settings.network.MobileIconGroupExtKt.getSummaryForSub
 import static com.android.settingslib.mobile.MobileMappings.getIconKey;
 import static com.android.settingslib.mobile.MobileMappings.mapIconSets;
 
+import kotlin.Unit;
+
 import java.util.List;
 
 /**
  * Controller for Sim Status information within the About Phone Settings page.
  */
-public class SimStatusDialogController implements LifecycleObserver {
+public class SimStatusDialogController implements DefaultLifecycleObserver {
 
     private final static String TAG = "SimStatusDialogCtrl";
 
@@ -118,33 +112,13 @@ public class SimStatusDialogController implements LifecycleObserver {
             new OnSubscriptionsChangedListener() {
                 @Override
                 public void onSubscriptionsChanged() {
-                    final int prevSubId = (mSubscriptionInfo != null)
-                            ? mSubscriptionInfo.getSubscriptionId()
-                            : SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-
                     mSubscriptionInfo = getPhoneSubscriptionInfo(mSlotIndex);
-
-                    final int nextSubId = (mSubscriptionInfo != null)
-                            ? mSubscriptionInfo.getSubscriptionId()
-                            : SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-
-                    if (prevSubId != nextSubId) {
-                        if (SubscriptionManager.isValidSubscriptionId(prevSubId)) {
-                            unregisterImsRegistrationCallback(prevSubId);
-                        }
-                        if (SubscriptionManager.isValidSubscriptionId(nextSubId)) {
-                            mTelephonyManager =
-                                    getTelephonyManager().createForSubscriptionId(nextSubId);
-                            registerImsRegistrationCallback(nextSubId);
-                        }
-                    }
                     updateSubscriptionStatus();
                 }
             };
 
     private SubscriptionInfo mSubscriptionInfo;
     private TelephonyDisplayInfo mTelephonyDisplayInfo;
-    private ServiceState mPreviousServiceState;
 
     private final int mSlotIndex;
     private TelephonyManager mTelephonyManager;
@@ -250,15 +224,12 @@ public class SimStatusDialogController implements LifecycleObserver {
         // getServiceState() may return null when the subscription is inactive
         // or when there was an error communicating with the phone process.
         final ServiceState serviceState = getTelephonyManager().getServiceState();
-        final SignalStrength signalStrength = getTelephonyManager().getSignalStrength();
 
         updatePhoneNumber();
         updateServiceState(serviceState);
-        updateSignalStrength(signalStrength);
         updateNetworkType();
         updateRoamingStatus(serviceState);
         updateIccidNumber();
-        updateImsRegistrationState();
     }
 
     /**
@@ -277,8 +248,8 @@ public class SimStatusDialogController implements LifecycleObserver {
     /**
      * OnResume lifecycle event, resume listening for phone state or subscription changes.
      */
-    @OnLifecycleEvent(Event.ON_RESUME)
-    public void onResume() {
+    @Override
+    public void onResume(@NonNull LifecycleOwner owner) {
         if (mSubscriptionInfo == null) {
             return;
         }
@@ -288,7 +259,7 @@ public class SimStatusDialogController implements LifecycleObserver {
                 .registerTelephonyCallback(mContext.getMainExecutor(), mTelephonyCallback);
         mSubscriptionManager.addOnSubscriptionsChangedListener(
                 mContext.getMainExecutor(), mOnSubscriptionsChangedListener);
-        registerImsRegistrationCallback(mSubscriptionInfo.getSubscriptionId());
+        collectSimStatusDialogInfo(owner);
 
         if (mShowLatestAreaInfo) {
             updateAreaInfoText();
@@ -303,8 +274,8 @@ public class SimStatusDialogController implements LifecycleObserver {
     /**
      * onPause lifecycle event, no longer listen for phone state or subscription changes.
      */
-    @OnLifecycleEvent(Event.ON_PAUSE)
-    public void onPause() {
+    @Override
+    public void onPause(@NonNull LifecycleOwner owner) {
         if (mSubscriptionInfo == null) {
             if (mIsRegisteredListener) {
                 mSubscriptionManager.removeOnSubscriptionsChangedListener(
@@ -318,7 +289,6 @@ public class SimStatusDialogController implements LifecycleObserver {
             return;
         }
 
-        unregisterImsRegistrationCallback(mSubscriptionInfo.getSubscriptionId());
         mSubscriptionManager.removeOnSubscriptionsChangedListener(mOnSubscriptionsChangedListener);
         getTelephonyManager().unregisterTelephonyCallback(mTelephonyCallback);
 
@@ -462,12 +432,6 @@ public class SimStatusDialogController implements LifecycleObserver {
 
     private void updateServiceState(ServiceState serviceState) {
         final int state = Utils.getCombinedServiceState(serviceState);
-        if (!Utils.isInService(serviceState)) {
-            resetSignalStrength();
-        } else if (!Utils.isInService(mPreviousServiceState)) {
-            // If ServiceState changed from out of service -> in service, update signal strength.
-            updateSignalStrength(getTelephonyManager().getSignalStrength());
-        }
 
         String serviceStateValue;
 
@@ -492,49 +456,11 @@ public class SimStatusDialogController implements LifecycleObserver {
         mDialog.setText(SERVICE_STATE_VALUE_ID, serviceStateValue);
     }
 
-    private void updateSignalStrength(SignalStrength signalStrength) {
-        if (signalStrength == null) {
-            return;
-        }
-        // by default we show the signal strength
-        boolean showSignalStrength = true;
-        if (mSubscriptionInfo != null) {
-            final int subscriptionId = mSubscriptionInfo.getSubscriptionId();
-            final PersistableBundle carrierConfig =
-                    mCarrierConfigManager.getConfigForSubId(subscriptionId);
-            if (carrierConfig != null) {
-                showSignalStrength = carrierConfig.getBoolean(
-                        CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL);
-            }
-        }
-        if (!showSignalStrength) {
-            mDialog.removeSettingFromScreen(SIGNAL_STRENGTH_LABEL_ID);
-            mDialog.removeSettingFromScreen(SIGNAL_STRENGTH_VALUE_ID);
-            return;
-        }
-
-        ServiceState serviceState = getTelephonyManager().getServiceState();
-        if (!Utils.isInService(serviceState)) {
-            return;
-        }
-
-        int signalDbm = getDbm(signalStrength);
-        int signalAsu = getAsuLevel(signalStrength);
-
-        if (signalDbm == -1) {
-            signalDbm = 0;
-        }
-
-        if (signalAsu == -1) {
-            signalAsu = 0;
-        }
-
-        mDialog.setText(SIGNAL_STRENGTH_VALUE_ID, mRes.getString(R.string.sim_signal_strength,
-                signalDbm, signalAsu));
-    }
-
-    private void resetSignalStrength() {
-        mDialog.setText(SIGNAL_STRENGTH_VALUE_ID, "0");
+    private void updateSignalStrength(@Nullable String signalStrength) {
+        boolean isVisible = signalStrength != null;
+        mDialog.setSettingVisibility(SIGNAL_STRENGTH_LABEL_ID, isVisible);
+        mDialog.setSettingVisibility(SIGNAL_STRENGTH_VALUE_ID, isVisible);
+        mDialog.setText(SIGNAL_STRENGTH_VALUE_ID, signalStrength);
     }
 
     private void updateNetworkType() {
@@ -646,115 +572,33 @@ public class SimStatusDialogController implements LifecycleObserver {
         }
     }
 
-    private boolean isImsRegistrationStateShowUp() {
-        if (mSubscriptionInfo == null) {
-            return false;
-        }
-        final int subscriptionId = mSubscriptionInfo.getSubscriptionId();
-        final PersistableBundle carrierConfig =
-                mCarrierConfigManager.getConfigForSubId(subscriptionId);
-        return carrierConfig == null ? false :
-                carrierConfig.getBoolean(
-                        CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL);
+    private void updateImsRegistrationState(@Nullable Boolean imsRegistered) {
+        boolean isVisible = imsRegistered != null;
+        mDialog.setSettingVisibility(IMS_REGISTRATION_STATE_LABEL_ID, isVisible);
+        mDialog.setSettingVisibility(IMS_REGISTRATION_STATE_VALUE_ID, isVisible);
+        int stringId = Boolean.TRUE.equals(imsRegistered)
+                ? com.android.settingslib.R.string.ims_reg_status_registered
+                : com.android.settingslib.R.string.ims_reg_status_not_registered;
+        mDialog.setText(IMS_REGISTRATION_STATE_VALUE_ID, mRes.getString(stringId));
     }
 
-    private void updateImsRegistrationState() {
-        if (isImsRegistrationStateShowUp()) {
-            return;
-        }
-        mDialog.removeSettingFromScreen(IMS_REGISTRATION_STATE_LABEL_ID);
-        mDialog.removeSettingFromScreen(IMS_REGISTRATION_STATE_VALUE_ID);
-    }
-
-    private ImsMmTelManager.RegistrationCallback mImsRegStateCallback =
-            new ImsMmTelManager.RegistrationCallback() {
-        @Override
-        public void onRegistered(@AccessNetworkConstants.TransportType int imsTransportType) {
-            mDialog.setText(IMS_REGISTRATION_STATE_VALUE_ID, mRes.getString(
-                    com.android.settingslib.R.string.ims_reg_status_registered));
-        }
-        @Override
-        public void onRegistering(@AccessNetworkConstants.TransportType int imsTransportType) {
-            mDialog.setText(IMS_REGISTRATION_STATE_VALUE_ID, mRes.getString(
-                    com.android.settingslib.R.string.ims_reg_status_not_registered));
-        }
-        @Override
-        public void onUnregistered(@Nullable ImsReasonInfo info) {
-            mDialog.setText(IMS_REGISTRATION_STATE_VALUE_ID, mRes.getString(
-                    com.android.settingslib.R.string.ims_reg_status_not_registered));
-        }
-        @Override
-        public void onTechnologyChangeFailed(
-                @AccessNetworkConstants.TransportType int imsTransportType,
-                @Nullable ImsReasonInfo info) {
-            mDialog.setText(IMS_REGISTRATION_STATE_VALUE_ID, mRes.getString(
-                    com.android.settingslib.R.string.ims_reg_status_not_registered));
-        }
-    };
-
-    private void registerImsRegistrationCallback(int subId) {
-        if (!isImsRegistrationStateShowUp()) {
-            return;
-        }
-        try {
-            final ImsMmTelManager imsMmTelMgr = ImsMmTelManager.createForSubscriptionId(subId);
-            imsMmTelMgr.registerImsRegistrationCallback(mDialog.getContext().getMainExecutor(),
-                    mImsRegStateCallback);
-        } catch (ImsException exception) {
-            Log.w(TAG, "fail to register IMS status for subId=" + subId, exception);
-        }
-    }
-
-    private void unregisterImsRegistrationCallback(int subId) {
-        if (!isImsRegistrationStateShowUp()) {
-            return;
-        }
-        final ImsMmTelManager imsMmTelMgr = ImsMmTelManager.createForSubscriptionId(subId);
-        imsMmTelMgr.unregisterImsRegistrationCallback(mImsRegStateCallback);
+    private void collectSimStatusDialogInfo(@NonNull LifecycleOwner owner) {
+        new SimStatusDialogRepository(mContext).collectSimStatusDialogInfo(
+                owner, mSlotIndex, (simStatusDialogInfo) -> {
+                    updateSignalStrength(simStatusDialogInfo.getSignalStrength());
+                    updateImsRegistrationState(simStatusDialogInfo.getImsRegistered());
+                    return Unit.INSTANCE;
+                }
+        );
     }
 
     private SubscriptionInfo getPhoneSubscriptionInfo(int slotId) {
         return SubscriptionManager.from(mContext).getActiveSubscriptionInfoForSimSlotIndex(slotId);
     }
 
-    private int getDbm(SignalStrength signalStrength) {
-        List<CellSignalStrength> cellSignalStrengthList = signalStrength.getCellSignalStrengths();
-        int dbm = -1;
-        if (cellSignalStrengthList == null) {
-            return dbm;
-        }
-
-        for (CellSignalStrength cell : cellSignalStrengthList) {
-            if (cell.getDbm() != -1) {
-                dbm = cell.getDbm();
-                break;
-            }
-        }
-
-        return dbm;
-    }
-
-    private int getAsuLevel(SignalStrength signalStrength) {
-        List<CellSignalStrength> cellSignalStrengthList = signalStrength.getCellSignalStrengths();
-        int asu = -1;
-        if (cellSignalStrengthList == null) {
-            return asu;
-        }
-
-        for (CellSignalStrength cell : cellSignalStrengthList) {
-            if (cell.getAsuLevel() != -1) {
-                asu = cell.getAsuLevel();
-                break;
-            }
-        }
-
-        return asu;
-    }
-
     @VisibleForTesting
     class SimStatusDialogTelephonyCallback extends TelephonyCallback implements
             TelephonyCallback.DataConnectionStateListener,
-            TelephonyCallback.SignalStrengthsListener,
             TelephonyCallback.ServiceStateListener,
             TelephonyCallback.DisplayInfoListener {
         @Override
@@ -764,16 +608,10 @@ public class SimStatusDialogController implements LifecycleObserver {
         }
 
         @Override
-        public void onSignalStrengthsChanged(SignalStrength signalStrength) {
-            updateSignalStrength(signalStrength);
-        }
-
-        @Override
         public void onServiceStateChanged(ServiceState serviceState) {
             updateNetworkProvider();
             updateServiceState(serviceState);
             updateRoamingStatus(serviceState);
-            mPreviousServiceState = serviceState;
         }
 
         @Override

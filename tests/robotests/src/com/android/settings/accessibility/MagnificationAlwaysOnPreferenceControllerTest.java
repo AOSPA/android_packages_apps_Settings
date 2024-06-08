@@ -18,6 +18,8 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -26,9 +28,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
 import androidx.preference.PreferenceManager;
@@ -37,7 +36,6 @@ import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -46,8 +44,6 @@ import org.robolectric.shadows.ShadowContentResolver;
 
 @RunWith(RobolectricTestRunner.class)
 public class MagnificationAlwaysOnPreferenceControllerTest {
-
-    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private static final String KEY_ALWAYS_ON =
             Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED;
@@ -97,8 +93,7 @@ public class MagnificationAlwaysOnPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_HIDE_MAGNIFICATION_ALWAYS_ON_TOGGLE_WHEN_WINDOW_MODE_ONLY)
-    public void onResume_flagOn_verifyRegisterCapabilityObserver() {
+    public void onResume_verifyRegisterCapabilityObserver() {
         mController.onResume();
         assertThat(mShadowContentResolver.getContentObservers(
                 Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_MAGNIFICATION_CAPABILITY)))
@@ -106,8 +101,7 @@ public class MagnificationAlwaysOnPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_HIDE_MAGNIFICATION_ALWAYS_ON_TOGGLE_WHEN_WINDOW_MODE_ONLY)
-    public void onPause_flagOn_verifyUnregisterCapabilityObserver() {
+    public void onPause_verifyUnregisterCapabilityObserver() {
         mController.onResume();
         mController.onPause();
         assertThat(mShadowContentResolver.getContentObservers(
@@ -116,17 +110,7 @@ public class MagnificationAlwaysOnPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_HIDE_MAGNIFICATION_ALWAYS_ON_TOGGLE_WHEN_WINDOW_MODE_ONLY)
-    public void updateState_windowModeOnlyAndFlagOff_preferenceIsAvailable() {
-        MagnificationCapabilities.setCapabilities(mContext, MagnificationMode.WINDOW);
-
-        mController.updateState(mSwitchPreference);
-        assertThat(mSwitchPreference.isEnabled()).isTrue();
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_HIDE_MAGNIFICATION_ALWAYS_ON_TOGGLE_WHEN_WINDOW_MODE_ONLY)
-    public void updateState_windowModeOnlyAndFlagOn_preferenceBecomesUnavailable() {
+    public void updateState_windowModeOnly_preferenceBecomesUnavailable() {
         MagnificationCapabilities.setCapabilities(mContext, MagnificationMode.WINDOW);
 
         mController.updateState(mSwitchPreference);
@@ -147,5 +131,16 @@ public class MagnificationAlwaysOnPreferenceControllerTest {
 
         mController.updateState(mSwitchPreference);
         assertThat(mSwitchPreference.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void getAvailableStatus_notInSetupWizard_returnAvailable() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void getAvailableStatus_inSetupWizard_returnConditionallyUnavailable() {
+        mController.setInSetupWizard(true);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 }

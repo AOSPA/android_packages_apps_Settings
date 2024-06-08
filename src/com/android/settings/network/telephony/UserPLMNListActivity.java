@@ -565,15 +565,17 @@ public class UserPLMNListActivity extends PreferenceActivity
             list.add(mUPLMNList.get(i));
         }
 
-        if (oldposition > newposition) {
-            list.remove(oldposition);
-            list.add(newposition, newInfo);
-        } else if (oldposition < newposition) {
-            list.add(newposition + 1, newInfo);
-            list.remove(oldposition);
-        } else {
-            list.remove(oldposition);
-            list.add(oldposition, newInfo);
+        if (oldposition >= 0 && newposition >= 0) {
+            if (oldposition > newposition) {
+                list.remove(oldposition);
+                list.add(newposition, newInfo);
+            } else if (oldposition < newposition) {
+                list.add(newposition + 1, newInfo);
+                list.remove(oldposition);
+            } else {
+                list.remove(oldposition);
+                list.add(oldposition, newInfo);
+            }
         }
 
         updateListPriority(list);

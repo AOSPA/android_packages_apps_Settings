@@ -318,9 +318,6 @@
     <!-- Name shown in the title of individual stylus preference in the connected devices page [CHAR LIMIT=60] -->
     <string name="stylus_connected_devices_title">Stylus</string>
 
-    <!--Text that appears when scanning for nearby audio streams is finished and no streams were found [CHAR LIMIT=40]-->
-    <string name="audio_streams_empty">No nearby audio streams were found.</string>
-
     <!-- Date & time settings screen title -->
     <string name="date_and_time">Date &amp; time</string>
 
@@ -1258,6 +1255,30 @@
     <string name="private_space_fingerprint_unlock_title">Fingerprint Unlock for private space</string>
     <!-- Title for the Face unlock for private space preference. [CHAR LIMIT=60] -->
     <string name="private_space_face_unlock_title">Face Unlock for private space</string>
+    <!-- Title for the Face and Fingerprint preference for private space. [CHAR LIMIT=60] -->
+    <string name="private_space_biometric_unlock_title">Face &amp; Fingerprint Unlock for private space</string>
+    <!-- Introduction title shown in private space fingerprint enrollment [CHAR LIMIT=90] -->
+    <string name="private_space_fingerprint_enroll_introduction_title">Set up Fingerprint Unlock for private space</string>
+    <!-- Introduction detail message shown in private space fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name ="private_space_fingerprint_enroll_introduction_message">Use your fingerprint to unlock your private space or verify it\u2019s you, like when you sign in to apps or approve a purchase</string>
+    <!-- Introduction description message shown in private space fingerprint enrollment introduction screen. [CHAR LIMIT=NONE] -->
+    <string name="private_space_fingerprint_enroll_introduction_footer_message">Your private space can be unlocked when you don\u2019t intend to, like if someone holds up your phone to your finger.</string>
+    <!-- Message shown in fingerprint enrollment dialog once enrollment is completed (private space) [CHAR LIMIT=NONE] -->
+    <string name="private_space_fingerprint_enroll_finish_message">Use your fingerprint to unlock your private space or to approve purchases</string>
+    <!-- Introduction title shown in private space face enrollment [CHAR LIMIT=90] -->
+    <string name="private_space_face_enroll_introduction_title">Set up Face Unlock for private space</string>
+    <!-- Introduction detail message shown in private space face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name ="private_space_face_enroll_introduction_message">Use your face to unlock your private space or verify it\u2019s you, like when you sign in to apps or approve a purchase</string>
+    <!-- Message on the face enrollment introduction page for private space that provides information about what could cause the phone to unlock. [CHAR LIMIT=NONE] -->
+    <string name="private_space_face_enroll_introduction_info_looking">Looking at the phone can unlock private space even when you don\u2019t intend to. Your private space can also be unlocked by someone who looks a lot like you, like an identical sibling, or if someone holds the device up to your face.</string>
+    <!-- Message on the face enrollment introduction page for private space that provides information about the relative security of face for unlocking the phone. [CHAR LIMIT=NONE] -->
+    <string name="private_space_face_enroll_introduction_info_less_secure">Using your face to unlock your private space may be less secure than a strong pattern, PIN, or password</string>
+    <!-- Text shown on the details of a toggle which disables/enables face unlock for private space, depending if the user's eyes are open. [CHAR LIMIT=NONE] -->
+    <string name="private_space_face_settings_require_attention_details">To unlock private space, your eyes must be open. For best results, take off sunglasses.</string>
+    <!-- Text shown in face settings in private space explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="private_space_face_settings_footer">Use your face to unlock your private space.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour private space can be unlocked by someone else if your device is held up to your face.\n\nYour private space can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
+    <!-- Text shown on the details of a toggle which enables/disables confirmation (i.e. confirm button) each time face unlock is used for private space. [CHAR LIMIT=90] -->
+    <string name="private_space_face_settings_require_confirmation_details">When using Face Unlock, always require confirmation step</string>
     <!-- Biometric category title - biometric options for unlocking the device. [CHAR LIMIT=50] -->
     <string name="private_space_category_ways_to_unlock">Ways to unlock</string>
     <!-- Summary for one lock when device screen lock is used as private profile lock. [CHAR LIMIT=40] -->
@@ -1307,7 +1328,7 @@
     <!-- Title for the delete private space page. [CHAR LIMIT=40] -->
     <string name="private_space_delete_header">Delete private space?</string>
     <!-- Description for hide Private Space settings page. [CHAR LIMIT=NONE] -->
-    <string name="private_space_delete_summary">Your private space will be removed from your device. All private apps and data will be deleted. You can’t undo this action.</string>
+    <string name="private_space_delete_summary">Your private space will be permanently deleted from your device. \n\nAll apps in your space and their data will also be permanently deleted from your phone\u2019s <b>internal storage</b>.</string>
     <!-- Text for the accounts added to private space that will be removed. [CHAR LIMIT=90] -->
     <string name="private_space_accounts">The following accounts will be removed from your private space:</string>
     <!-- Label for private space delete button [CHAR LIMIT=30] -->
@@ -1345,7 +1366,7 @@
     <!-- Text shown in private space setup screen which explains notifications from private space apps will not be shown when private space is locked. [CHAR LIMIT=NONE] -->
     <string name="private_space_install_apps_text"><b>Install apps</b>\nYour private space has its own Play Store so you can install apps easily.</string>
     <!-- This is info text to help explain in private space setup screen that the permissions granted to private space apps will not be shown in settings when private space is locked. [CHAR LIMIT=NONE] -->
-    <string name="private_space_apps_permission_text">Apps in your private space won\'t appear in permission manager, privacy dashboard, and other settings when your private space is locked.\n\nYour private space can\'t be moved to a new device. You\'ll need to set up another private space if you want to use it on another device.\n\nAnyone that connects your device to a computer or installs harmful apps on your device may be able to access your private space.</string>
+    <string name="private_space_apps_permission_text">Apps in your private space won\'t appear in permission manager, privacy dashboard, and other settings when your private space is locked.\n\nYour private space can\'t be restored to a new device. You\'ll need to set up another private space if you want to use it on another device.\n\nAnyone that connects your device to a computer or installs malicious apps on your device may be able to access your private space.</string>
     <!-- Private space footer link content description [CHAR LIMIT=40] -->
     <string name="private_space_learn_more_text">Learn more about private space</string>
     <string name="private_space_learn_more_url" translatable="false">https://support.google.com/android?p=private_space</string>
@@ -3472,6 +3493,8 @@
     <string name="error_name_empty">The Name field can\u2019t be empty.</string>
     <!-- APN error dialog messages: -->
     <string name="error_apn_empty">The APN can\u2019t be empty.</string>
+    <!-- APN error message about APN type cannot be empty -->
+    <string name="error_apn_type_empty">The APN type can\u2019t be empty.</string>
     <!-- APN error dialog messages: -->
     <string name="error_mcc_not3">MCC field must be 3 digits.</string>
     <!-- APN error dialog messages: -->
@@ -3538,7 +3561,7 @@
     <!-- Title for the Delete private space settings controller [CHAR LIMIT=40] -->
     <string name="reset_private_space_delete_title">Delete private space</string>
     <!-- Delete private space dialog mentioning that private space and the apps in it along with its data will be permanently deleted [CHAR LIMIT=NONE] -->
-    <string name="reset_private_space_delete_dialog">If you have a private space on your device, it will be permanently deleted and the Google Account added to your space will be removed.\n\nAll apps in your space and their data will also be permanently deleted.</string>
+    <string name="reset_private_space_delete_dialog">If you have a private space on your device, it will be permanently deleted and the Google Account added to your space will be removed. \n\nAll apps in your space and their data will also be permanently deleted from your phone\u2019s <b>internal storage</b>.</string>
 
     <!-- Main Clear -->
     <!-- Button title to factory data reset the entire device [CHAR LIMIT=NONE] -->
@@ -5677,8 +5700,6 @@
     <string name="keywords_color_correction">adjust color </string>
     <!-- List of synonyms used in the settings search bar to find the “Color inversion”. [CHAR LIMIT=NONE] -->
     <string name="keywords_color_inversion">turn screen dark, turn screen light</string>
-    <!-- List of synonyms used in the settings search bar to find the “Contrast”. [CHAR LIMIT=NONE] -->
-    <string name="keywords_contrast">color contrast</string>
     <!-- List of synonyms used in the settings search bar to find the “Accessibility Menu”. [CHAR LIMIT=NONE] -->
     <string name="keywords_accessibility_menu"></string>
     <!-- List of synonyms used in the settings search bar to find the “Switch Access”. [CHAR LIMIT=NONE] -->
@@ -6550,7 +6571,7 @@
     <!-- Message when there are no available trust agents to display -->
     <string name="no_trust_agents">No available trust agents</string>
 
-    <!-- Title for screen to add a device admin app [CHAR LIMIT=40] -->
+    <!-- Title for screen to add a device admin app [CHAR LIMIT=50] -->
     <string name="add_device_admin_msg">Activate device admin app?</string>
     <!-- Label for button to set the active device admin [CHAR_LIMIT=80] -->
     <string name="add_device_admin">Activate this device admin app</string>
@@ -7406,8 +7427,6 @@
     <string name="help_url_insecure_vpn" translatable="false"></string>
     <!-- url for learning more about IT admin policy disabling -->
     <string name="help_url_action_disabled_by_it_admin" translatable="false"></string>
-    <!-- url for learning more about bluetooth audio sharing -->
-    <string name="help_url_audio_sharing" translatable="false"></string>
 
     <!-- User account title [CHAR LIMIT=30] -->
     <string name="user_account_title">Account for content</string>
@@ -7802,7 +7821,7 @@
     <string name="keywords_wallpaper">background, theme, grid, customize, personalize</string>
 
     <!-- List of synonyms for the Styles picker setting, used to match in settings search [CHAR LIMIT=NONE] -->
-    <string name="keywords_styles">icon, accent, color, home screen, lock screen, shortcut, clock size</string>
+    <string name="keywords_styles">icon, icons, accent, color, home screen, lock screen, shortcut, clock size</string>
 
     <!-- List of synonyms for the Default Assist and Voice input setting, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_assist_input">default, assistant</string>
@@ -8059,8 +8078,56 @@
     <!--  Do not disturb: Subtitle for the Visual signals option to toggle on/off visual signals/alerts when the screen is on/when screen is off. [CHAR LIMIT=30] -->
     <string name="zen_mode_visual_signals_settings_subtitle">Allow visual signals</string>
 
+    <!-- Do not disturb: mode page section title [CHAR LIMIT=80] -->
+    <string name="mode_interruption_filter_title">Notifications that can reach you</string>
+    <!-- Do not disturb: mode page section title [CHAR LIMIT=80] -->
+    <string name="mode_device_effects_title">Additional actions</string>
+
+
+    <!-- Do not disturb: display settings title [CHAR LIMIT=80] -->
+    <string name="mode_display_settings_title">Display settings</string>
+    <!-- Do not disturb: display options section header [CHAR LIMIT=80] -->
+    <string name="mode_display_options_section">Display options</string>
+    <!-- Do not disturb: device effect option, title or first in list [CHAR LIMIT=80] -->
+    <string name="mode_grayscale_title">Grayscale</string>
+    <!-- Do not disturb: device effect option, not first in list [CHAR LIMIT=80] -->
+    <string name="mode_grayscale_title_secondary_list">grayscale</string>
+    <!-- Do not disturb: device effect summary [CHAR LIMIT=NONE] -->
+    <string name="mode_grayscale_summary">Change the screen to black and white</string>
+    <!-- Do not disturb: device effect option, title or first in list [CHAR LIMIT=80] -->
+    <string name="mode_aod_title">Keep the screen dark</string>
+    <!-- Do not disturb: device effect option, not first in list [CHAR LIMIT=80] -->
+    <string name="mode_aod_title_secondary_list">keep the screen dark</string>
+    <!-- Do not disturb: device effect summary [CHAR LIMIT=NONE] -->
+    <string name="mode_aod_summary">Disable always on display</string>
+    <!-- Do not disturb: device effect option , title or first in list[CHAR LIMIT=80] -->
+    <string name="mode_wallpaper_title">Dim the wallpaper</string>
+    <!-- Do not disturb: device effect option, not first in list [CHAR LIMIT=80] -->
+    <string name="mode_wallpaper_title_secondary_list">dim the wallpaper</string>
+    <!-- Do not disturb: device effect summary [CHAR LIMIT=NONE] -->
+    <string name="mode_wallpaper_summary">Filter the brightness of the wallpaper</string>
+    <!-- Do not disturb: device effect option, title or first in list [CHAR LIMIT=80] -->
+    <string name="mode_dark_theme_title">Enable dark theme</string>
+    <!-- Do not disturb: device effect option, not first in list [CHAR LIMIT=80] -->
+    <string name="mode_dark_theme_title_secondary_list">enable dark theme</string>
+    <!-- Do not disturb: device effect summary [CHAR LIMIT=NONE] -->
+    <string name="mode_dark_theme_summary">Switch the OS and apps to prefer light text on a dark
+        background, which may be easier on the eyes and confers significant battery savings on some devices</string>
+    <!-- [CHAR LIMIT=NONE] Zen mode settings: Summary for sound interruption settings -->
+    <string name="mode_display_settings_summary">
+        {count, plural, offset:2
+        =0    {No display changes}
+        =1    {{effect_1}}
+        =2    {{effect_1} and {effect_2}}
+        =3    {{effect_1}, {effect_2}, and {effect_3}}
+        other {{effect_1}, {effect_2}, and # more}
+        }
+    </string>
+
+
     <!-- Do not disturb: restrict notifications settings title [CHAR LIMIT=80] -->
-    <string name="zen_mode_restrict_notifications_title">Display options for hidden notifications</string>
+    <string name="zen_mode_restrict_notifications_title">Display options for filtered
+        notifications</string>
     <!-- Do not disturb: Hide notifications screen category title [CHAR LIMIT=100] -->
     <string name="zen_mode_restrict_notifications_category">When Do Not Disturb is on</string>
     <!-- Do not disturb: Mute notifications option [CHAR LIMIT=60] -->
@@ -8082,11 +8149,12 @@
     <!-- Do not disturb: restrict notifications page, menu option [CHAR LIMIT=60] -->
     <string name="zen_mode_restrict_notifications_disable_custom">Remove custom setting</string>
     <!-- Do not disturb: restrict notifications page, menu option [CHAR LIMIT=60] -->
-    <string name="zen_mode_restrict_notifications_summary_muted">No sound from notifications</string>
+    <string name="zen_mode_restrict_notifications_summary_muted">Notifications shown</string>
     <!-- Do not disturb: restrict notifications page, menu option [CHAR LIMIT=60] -->
-    <string name="zen_mode_restrict_notifications_summary_custom">Partially hidden</string>
+    <string name="zen_mode_restrict_notifications_summary_custom">Notifications partially
+        hidden</string>
     <!-- Do not disturb: restrict notifications page, menu option [CHAR LIMIT=100] -->
-    <string name="zen_mode_restrict_notifications_summary_hidden">No visuals or sound from notifications</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden">Notifications hidden</string>
 
     <!-- Do not disturb: what to block title [CHAR LIMIT = 60] -->
     <string name="zen_mode_what_to_block_title">Custom restrictions</string>
@@ -8743,17 +8811,11 @@
     <string name="notif_listener_more_settings_desc">More settings are available inside this app</string>
 
     <!-- Title for Polite Notifications setting  [CHAR LIMIT=30]-->
-    <string name="notification_polite_title">Notification cooldown</string>
-    <string name="notification_polite_all_apps">Apply cooldown to all notifications</string>
-    <string name="notification_polite_all_apps_summary">Gradually lower the notification volume when you get many successive notifications from the same app</string>
-    <string name="notification_polite_conversations">Apply cooldown to conversations</string>
-    <string name="notification_polite_conversations_summary">Gradually lower the notification volume when you get many messages from the same chat within a short period of time</string>
-    <string name="notification_polite_disabled">Don\'t use notification cooldown</string>
-    <string name="notification_polite_disabled_summary">Never lower notification volume, regardless of the amount of successive notifications from the same app</string>
-    <string name="notification_polite_vibrate_unlocked">Vibrate when unlocked</string>
-    <string name="notification_polite_vibrate_unlocked_summary">Only vibrate when screen is unlocked</string>
+    <string name="notification_polite_title">Cooldown</string>
+    <string name="notification_polite_main_control_title">Use Cooldown</string>
+    <string name="notification_polite_description">When you get many notifications within a short time span, your device will minimize sound interruptions and pop-ups on the screen. Calls, alarms, and priority conversations will still alert as notmal, and all delivered notifications are easy to find in the Shade.</string>
     <string name="notification_polite_work">Apply to work profiles</string>
-    <string name="notification_polite_work_summary">Apply the notification cooldown settings from your personal profile to your work profile</string>
+    <string name="notification_polite_work_summary">Apply to work profile apps</string>
 
 
     <!-- Title for managing VR (virtual reality) helper services. [CHAR LIMIT=50] -->
@@ -9223,6 +9285,17 @@
     <string name="zen_mode_events_list">events</string>
     <!-- [CHAR LIMIT=50] Zen mode settings: Events (ie: calendar events) category in a list of sounds when events is the first or only element in the list. For example “Events can interrupt" or “Events and touch sounds can interrupt" -->
     <string name="zen_mode_events_list_first">Events</string>
+
+    <!-- [CHAR LIMIT=80] Zen mode settings: Title for page to select which apps allowed to interrupt dnd -->
+    <string name="zen_mode_apps_title">Apps</string>
+    <!-- [CHAR LIMIT=100] Zen mode settings: subtitle for page to select which apps allowed to interrupt dnd -->
+    <string name="zen_mode_apps_category">Apps that can interrupt</string>
+    <!-- [CHAR LIMIT=60] Zen mode settings: selected apps will be able to bypass dnd -->
+    <string name="zen_mode_apps_priority_apps">Selected apps</string>
+    <!-- [CHAR LIMIT=60] Zen mode settings: no apps will be able to bypass dnd -->
+    <string name="zen_mode_apps_none_apps">None</string>
+    <!-- [CHAR LIMIT=60] Zen mode settings: all apps will be able to bypass dnd -->
+    <string name="zen_mode_apps_all_apps">All</string>
 
     <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND -->
     <string name="zen_mode_bypassing_apps">Allow apps to override</string>
@@ -11489,7 +11562,7 @@
     <string name="media_output_default_summary">This device</string>
 
     <!-- Summary for media output when audio sharing. [CHAR LIMIT=NONE] -->
-    <string name="media_output_audio_sharing">Audio sharing</string>
+    <string name="media_output_audio_sharing">Sharing audio</string>
 
     <!-- Summary for media output settings when device is in ongoing call state. -->
     <string name="media_out_summary_ongoing_call_state">Unavailable during calls</string>
@@ -12030,6 +12103,10 @@
     <string name="sim_onboarding_progressbar_turning_sim_on">Turning on <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g>&#8230;</string>
     <!-- Title of service provider name(SPN) at mobile network settings page. [CHAR LIMIT=30] -->
     <string name="mobile_network_spn_title">Mobile network</string>
+    <!-- At the mobile network page, title for primary IMEI for multi-sim devices -->
+    <string name="imei_primary">IMEI (primary)</string>
+    <!-- At the mobile network page, title for primary MEID for multi-sim devices -->
+    <string name="meid_primary">MEID (primary)</string>
     <!-- Title of phone number at mobile network settings page. [CHAR LIMIT=30] -->
     <string name="mobile_network_phone_number_title">Phone number</string>
     <!-- Title of SIM label and color editor dialog at mobile network settings page. [CHAR LIMIT=30] -->
@@ -12329,12 +12406,12 @@
     <!-- setting Checkbox summary whether to boot with 16K page size[CHAR_LIMIT=50] -->
     <string name="enable_16k_pages_summary">Boot device using 16KB page size supported kernel</string>
     <!-- Confirmation dialog title to ensure user wishes to enable 16K page size -->
-    <string name="confirm_enable_16k_pages_title">Switch from 4kB mode to 16KB mode</string>
+    <string name="confirm_enable_16k_pages_title">Switch from 4KB mode to 16KB mode</string>
     <!-- Warning dialog message to confirm user wishes to enable 16KB page size -->
-    <string name="confirm_enable_16k_pages_text">You are in the page-agnostic mode running a 4kB kernel, and you are switching to the 16KB mode.
+    <string name="confirm_enable_16k_pages_text">You are in the page-agnostic mode running a 4KB kernel, and you are switching to the 16KB mode.
         Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk.
         This will reboot the device. Some features will be disabled in these modes, so some applications may not work.
-        To return the device to production mode, you would need to then, switch back to the 4kB mode and lock the bootloader,
+        To return the device to production mode, you would need to then, switch back to the 4KB mode and lock the bootloader,
         which factory resets the device. After the device successfully boots into Android, disable OEM unlocking in Developer options.</string>
     <!-- dialog title to confirm user wishes to revert to 4k page size kernel -->
     <string name="confirm_enable_4k_pages_title">Switch from 16KB mode to 4KB mode</string>
@@ -12355,6 +12432,8 @@
         then lock the bootloader, which factory resets the device. After the device successfully boots into Android, disable OEM unlocking in Developer options.
         The device will be wiped and the filesystem will be changed to ext4 after confirmation. After this completes, please come back to enable 16KB again.
     </string>
+    <!-- Text for confirmation buttion for ext4 -->
+    <string name="confirm_ext4_button_text">Erase all data</string>
     <!-- Toast on failure to reformat data to ext4 -->
     <string name="format_ext4_failure_toast">Failed to reformat and wipe the data partition to ext4.</string>
     <!-- Dialog to OEM unlock the device before using 16K developer option -->
@@ -13392,11 +13471,7 @@
     <!-- Button to close the dialog without saving in screen flash color selection dialog. [CHAR LIMIT=20] -->
     <string name="color_selector_dialog_cancel">Cancel</string>
 
-    <!-- Title for the contrast preference fragment [CHAR LIMIT=35] -->
-    <string name="contrast_title">Contrast</string>
     <!-- 'Standard' contrast option [CHAR LIMIT=20] -->
-    <string name="contrast_standard">Standard</string>
-    <!-- 'Default' contrast option [CHAR LIMIT=20] -->
     <string name="contrast_default">Default</string>
     <!-- 'Medium' contrast option [CHAR LIMIT=20] -->
     <string name="contrast_medium">Medium</string>
@@ -13494,4 +13569,196 @@
 
     <!-- Title for System dashboard fragment -->
     <string name="device_diagnostics_title">Device diagnostics</string>
+
+    <!-- Title for audio sharing page [CHAR LIMIT=none]-->
+    <string name="audio_sharing_title">Audio sharing</string>
+    <!-- Title for audio sharing primary switch [CHAR LIMIT=none]-->
+    <string name="audio_sharing_switch_title">Share audio</string>
+    <!-- Title for calls and alarms device on audio sharing page [CHAR LIMIT=none]-->
+    <string name="calls_and_alarms_device_title">Calls and alarms</string>
+    <!-- Description for audio sharing page [CHAR LIMIT=none]-->
+    <string name="audio_sharing_description">Let people listen to your media along with you. Listeners need their own LE Audio headphones.</string>
+    <!-- Title for audio sharing device group [CHAR LIMIT=none]-->
+    <string name="audio_sharing_device_group_title">Active media devices</string>
+    <!-- Title for call audio on audio sharing page [CHAR LIMIT=none]-->
+    <string name="audio_sharing_call_audio_title">Call audio</string>
+    <!-- Description for call audio on audio sharing page [CHAR LIMIT=none]-->
+    <string name="audio_sharing_call_audio_description">Play only on <xliff:g example="My buds" id="device_name">%1$s</xliff:g></string>
+    <!-- Title for play test sound on audio sharing page [CHAR LIMIT=none]-->
+    <string name="audio_sharing_test_sound_title">Play a test sound</string>
+    <!-- Description for play test sound on audio sharing page [CHAR LIMIT=none]-->
+    <string name="audio_sharing_test_sound_description">Everyone listening should hear it</string>
+    <!-- Title for stream settings group on audio sharing page [CHAR LIMIT=none]-->
+    <string name="audio_sharing_stream_settings_title">Audio stream settings</string>
+    <!-- Title for stream name on audio sharing page, under stream settings group [CHAR LIMIT=none]-->
+    <string name="audio_sharing_stream_name_title">Name</string>
+    <!-- Title for stream password on audio sharing page, under stream settings group [CHAR LIMIT=none]-->
+    <string name="audio_sharing_stream_password_title">Password</string>
+    <!-- Title for stream compatibility on audio sharing page, under stream settings group [CHAR LIMIT=none]-->
+    <string name="audio_sharing_stream_compatibility_title">Improve compatibility</string>
+    <!-- Description for stream compatibility on audio sharing page [CHAR LIMIT=none]-->
+    <string name="audio_sharing_stream_compatibility_description">Helps some devices, like hearing aids, connect by reducing audio quality</string>
+    <!-- Description for stream compatibility on audio sharing page when audio sharing is on [CHAR LIMIT=none]-->
+    <string name="audio_sharing_stream_compatibility_disabled_description">Turns off the audio sharing to config the compatibility</string>
+    <!-- Title for nearby audio group on audio sharing page [CHAR LIMIT=none]-->
+    <string name="audio_sharing_nearby_audio_title">Listen to nearby audio</string>
+    <!-- Description for audio sharing page footer [CHAR LIMIT=none]-->
+    <string name="audio_sharing_footer_description">Audio sharing supports Auracast™</string>
+    <!-- Title for stream name dialog [CHAR LIMIT=none]-->
+    <string name="audio_sharing_stream_name_dialog_title">Audio stream name</string>
+    <!-- Title for stream password dialog [CHAR LIMIT=none]-->
+    <string name="audio_sharing_stream_password_dialog_title">Audio stream password</string>
+    <!-- Title for media device group during audio sharing [CHAR LIMIT=none]-->
+    <string name="audio_sharing_media_device_group_title">Other media devices</string>
+    <!-- Summary for audio sharing on [CHAR LIMIT=none]-->
+    <string name="audio_sharing_summary_on">On</string>
+    <!-- Summary for audio sharing off [CHAR LIMIT=none]-->
+    <string name="audio_sharing_summary_off">Off</string>
+    <!-- Title for audio sharing share dialog [CHAR LIMIT=none]-->
+    <string name="audio_sharing_share_dialog_title">Share your audio</string>
+    <!-- Subtitle for audio sharing share dialog [CHAR LIMIT=none]-->
+    <string name="audio_sharing_share_dialog_subtitle"><xliff:g example="My buds1" id="device_name1">%1$s</xliff:g> and <xliff:g example="My buds2" id="device_name2">%2$s</xliff:g></string>
+    <!-- Text for audio sharing share button [CHAR LIMIT=none]-->
+    <string name="audio_sharing_share_button_label">Share audio</string>
+    <!-- Text for audio sharing no thanks button [CHAR LIMIT=none]-->
+    <string name="audio_sharing_no_thanks_button_label">No thanks</string>
+    <!-- Title for audio sharing share dialog with one device [CHAR LIMIT=none]-->
+    <string name="audio_sharing_share_with_dialog_title">Share audio with <xliff:g example="My buds" id="device_name">%1$s</xliff:g>?</string>
+    <!-- Title for audio sharing share dialog with more devices [CHAR LIMIT=none]-->
+    <string name="audio_sharing_share_with_more_dialog_title">Share audio with another device</string>
+    <!-- Text for audio sharing share with button [CHAR LIMIT=none]-->
+    <string name="audio_sharing_share_with_button_label">Share with <xliff:g example="My buds" id="device_name">%1$s</xliff:g></string>
+    <!-- Text for audio sharing close button [CHAR LIMIT=none]-->
+    <string name="audio_sharing_close_button_label">Close</string>
+    <!-- Content for audio sharing share dialog with no device, ask users to connect device  [CHAR LIMIT=none]-->
+    <string name="audio_sharing_dialog_connect_device_content">Connect another pair of compatible headphones, or share your stream\'s name and password with the other person</string>
+    <!-- Content for audio sharing share dialog with no device, ask users to pair device  [CHAR LIMIT=none]-->
+    <string name="audio_sharing_dialog_pair_device_content">Pair another set of compatible headphones, or share your audio stream QR code with the other person</string>
+    <!-- Text for sharing audio sharing state [CHAR LIMIT=none]-->
+    <string name="audio_sharing_sharing_label">Sharing audio</string>
+    <!-- Text for audio sharing pair button [CHAR LIMIT=none]-->
+    <string name="audio_sharing_pair_button_label">Pair new device</string>
+    <!-- Text for audio sharing qrcode button [CHAR LIMIT=none]-->
+    <string name="audio_sharing_qrcode_button_label">Show QR code</string>
+    <!-- Title for audio sharing notification [CHAR LIMIT=none]-->
+    <string name="audio_sharing_notification_title">You\'re sharing audio</string>
+    <!-- Content for audio sharing notification [CHAR LIMIT=none]-->
+    <string name="audio_sharing_notification_content">People listening can hear your media. They won\'t hear calls.</string>
+    <!-- Text for audio sharing stop button [CHAR LIMIT=none]-->
+    <string name="audio_sharing_stop_button_label">Stop sharing</string>
+    <!-- Text for audio sharing settings button [CHAR LIMIT=none]-->
+    <string name="audio_sharing_settings_button_label">Settings</string>
+    <!-- Title for audio sharing disconnect dialog [CHAR LIMIT=none]-->
+    <string name="audio_sharing_disconnect_dialog_title">Choose a device to disconnect</string>
+    <!-- Content for audio sharing disconnect dialog [CHAR LIMIT=none]-->
+    <string name="audio_sharing_dialog_disconnect_content">Only 2 devices can share audio at a time</string>
+    <!-- Text for audio sharing disconnect device button [CHAR LIMIT=none]-->
+    <string name="audio_sharing_disconnect_device_button_label">Disconnect <xliff:g example="My buds" id="device_name">%1$s</xliff:g></string>
+    <!-- Title for audio sharing stop dialog [CHAR LIMIT=none]-->
+    <string name="audio_sharing_stop_dialog_title">Connect <xliff:g example="My buds" id="device_name">%1$s</xliff:g> ?</string>
+    <!-- Content for audio sharing stop dialog [CHAR LIMIT=none]-->
+    <string name="audio_sharing_stop_dialog_content">You\'ll stop sharing audio with <xliff:g example="My buds" id="device_name">%1$s</xliff:g></string>
+    <!-- Content for audio sharing stop dialog with two devices [CHAR LIMIT=none]-->
+    <string name="audio_sharing_stop_dialog_with_two_content">You\'ll stop sharing audio with <xliff:g example="My buds1" id="device_name1">%1$s</xliff:g> and <xliff:g example="My buds2" id="device_name2">%2$s</xliff:g></string>
+    <!-- Content for audio sharing stop dialog with more devices  [CHAR LIMIT=none]-->
+    <string name="audio_sharing_stop_dialog_with_more_content">You\'ll stop sharing audio with the connected headphones</string>
+    <!-- Text for audio sharing connect button [CHAR LIMIT=none]-->
+    <string name="audio_sharing_connect_button_label">Connect</string>
+    <!-- Text for sharing audio stop state [CHAR LIMIT=none]-->
+    <string name="audio_sharing_sharing_stopped_label">Audio sharing stopped</string>
+    <!-- Title for audio sharing confirm dialog [CHAR LIMIT=none]-->
+    <string name="audio_sharing_confirm_dialog_title">Connect a compatible device</string>
+    <!-- Content for audio sharing confirm dialog [CHAR LIMIT=none]-->
+    <string name="audio_sharing_comfirm_dialog_content">To start sharing audio, first connect LE Audio headphones to your phone</string>
+
+    <!-- Title for audio streams preference category [CHAR LIMIT=none]-->
+    <string name="audio_streams_category_title">Connect to a LE audio stream</string>
+    <!-- Title for audio streams preference [CHAR LIMIT=none]-->
+    <string name="audio_streams_pref_title">Nearby audio streams</string>
+    <!-- Title for audio streams page [CHAR LIMIT=none]-->
+    <string name="audio_streams_title">Audio streams</string>
+    <!-- Summary for QR code scanning in audio streams page [CHAR LIMIT=none]-->
+    <string name="audio_streams_qr_code_summary">Connect to an audio stream using QR code</string>
+    <!--Text that appears when scanning for nearby audio streams is finished and no streams were found [CHAR LIMIT=40]-->
+    <string name="audio_streams_empty">No nearby audio streams were found.</string>
+    <!-- Disconnect from an audio stream [CHAR LIMIT=none]-->
+    <string name="audio_streams_disconnect">Disconnect</string>
+    <!-- Connect an audio stream [CHAR LIMIT=none]-->
+    <string name="audio_streams_connect">Connect</string>
+    <!-- Hint for QR code process failure [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_qr_code_is_not_valid_format">QR code isn\u0027t a valid format</string>
+    <!-- Le audio QR code scanner sub-title [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_qr_code_scanner">To start listening, center the QR code below</string>
+    <!-- The preference summary when add source response is bad code [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_add_source_bad_code_state_summary">Check password and try again</string>
+    <!-- The preference summary when add source response results in general failure [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_add_source_failed_state_summary">Can\u0027t connect. Try again.</string>
+    <!-- The preference summary when connecting [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_connecting_summary">Connecting\u2026</string>
+    <!-- Le audio streams audio lost dialog title [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_stream_is_not_available">Audio stream isn\u0027t available</string>
+    <!-- Le audio streams audio lost dialog subtitle [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_is_not_playing">This audio stream isn\u0027t playing anything right now</string>
+    <!-- Le audio streams dialog close [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_close">Close</string>
+    <!-- Le audio streams dialog listen [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_listen">Listen</string>
+    <!-- Le audio streams dialog retry button [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_retry">Try again</string>
+    <!-- Le audio streams confirmation dialog title [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_listen_to_audio_stream">Listen to audio stream</string>
+    <!-- Le audio streams confirmation dialog subtitle [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_control_volume">The audio stream will play on <xliff:g example="LE headset" id="device_name">%1$s</xliff:g>. Use this device to control the volume.</string>
+    <!-- Le audio streams failure dialog title [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_cannot_listen">Can\u0027t listen to audio stream</string>
+    <!-- Le audio streams confirm dialog default device [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_default_device">connected compatible headphones</string>
+    <!-- Le audio streams activity title [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_activity_title">Audio streams</string>
+    <!-- Le audio streams no password summary [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_no_password_summary">No password</string>
+    <!-- Le audio streams failure dialog subtitle [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_learn_more">Learn more</string>
+    <!-- Le audio streams failure dialog subtitle [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_cannot_play">Can\u0027t play this audio stream on <xliff:g example="LE headset" id="device_name">%1$s</xliff:g>.</string>
+    <!-- The preference summary when add source succeed [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_listening_now">Listening now</string>
+    <!-- Le audio streams service notification leave broadcast text [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_media_service_notification_leave_broadcast_text">Stop listening</string>
+    <!-- Le audio streams no le device dialog title [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_no_le_device_title">Connect compatible headphones</string>
+    <!-- Le audio streams no le device dialog button [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_no_le_device_button">Connect a device</string>
+    <!-- Le audio streams detail page title [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_detail_page_title">Audio stream details</string>
+    <!-- Le audio streams qr code page title [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_qr_code_page_title">Audio stream QR code</string>
+    <!-- Le audio streams qr code page password text [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_qr_code_page_password">Password: <xliff:g example="123" id="password">%1$s</xliff:g></string>
+    <!-- Le audio streams qr code page description [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_qr_code_page_description">To listen to <xliff:g example="Local Music" id="stream_name">%1$s</xliff:g>, other people can connect compatible headphones to their Android device. They can then scan this QR code.</string>
+    <!-- Le audio streams main page title [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_main_page_title">Find an audio stream</string>
+    <!-- Le audio streams main page subtitle [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_main_page_subtitle">Listen to a device that\u0027s sharing audio or to a nearby Auracast broadcast</string>
+    <!-- Le audio streams main page device preference title [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_main_page_device_title">Your audio device</string>
+    <!-- Le audio streams main page device preference no device summary [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_main_page_no_device_summary">Connect compatible headphones</string>
+    <!-- Le audio streams main page scanning section title [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_main_page_scan_section_title">Audio streams nearby</string>
+    <!-- Le audio streams main page scan qr code preference title [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_main_page_scan_qr_code_title">Scan QR code</string>
+    <!-- Le audio streams main page scan qr code preference summary [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_main_page_scan_qr_code_summary">Start listening by scanning a stream\u0027s QR code</string>
+    <!-- Le audio streams main page password dialog join button [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_main_page_password_dialog_join_button">Listen to stream</string>
+    <!-- Le audio streams main page qr code scanner summary [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_main_page_qr_code_scanner_summary">Scan an audio stream QR code to listen with <xliff:g example="LE headset" id="device_name">%1$s</xliff:g></string>
+    <!-- Le audio streams password dialog  [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_main_page_password_dialog_cannot_edit">Can\u0027t edit password while sharing. To change the password, first turn off audio sharing.</string>
+
+
+    <!-- url for learning more about bluetooth audio sharing -->
+    <string name="help_url_audio_sharing" translatable="false"></string>
 </resources>

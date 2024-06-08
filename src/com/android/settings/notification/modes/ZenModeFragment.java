@@ -20,9 +20,6 @@ import android.app.AutomaticZenRule;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
-
 import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -38,9 +35,17 @@ public class ZenModeFragment extends ZenModeFragmentBase {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        // TODO: fill in with all the elements of this page. Each should be an instance of
-        //       {@link AbstractZenModePreferenceController}.
         List<AbstractPreferenceController> prefControllers = new ArrayList<>();
+        prefControllers.add(new ZenModeHeaderController(context, "header", this, mBackend));
+        prefControllers.add(new ZenModeButtonPreferenceController(context, "activate", mBackend));
+        prefControllers.add(new ZenModePeopleLinkPreferenceController(
+                context, "zen_mode_people", mBackend));
+        prefControllers.add(new ZenModeAppsLinkPreferenceController(
+                context, "zen_mode_apps", mBackend));
+        prefControllers.add(new ZenModeOtherLinkPreferenceController(
+                context, "zen_other_settings", mBackend));
+        prefControllers.add(new ZenModeDisplayLinkPreferenceController(
+                context, "mode_display_settings", mBackend));
         return prefControllers;
     }
 
@@ -55,19 +60,6 @@ public class ZenModeFragment extends ZenModeFragmentBase {
             return;
         }
         getActivity().setTitle(azr.getName());
-
-        // TODO: b/308819292 - implement the real screen!
-        final PreferenceScreen screen = getPreferenceScreen();
-        if (screen == null) {
-            return;
-        }
-
-        Preference tmpPref = screen.findPreference("zen_mode_test");
-        if (tmpPref == null) {
-            return;
-        }
-        tmpPref.setTitle(azr.getTriggerDescription());
-        tmpPref.setSummary("active?: " + mode.isActive());
     }
 
     @Override

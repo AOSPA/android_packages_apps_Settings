@@ -91,6 +91,7 @@ class Injector(step: FingerprintNavigationStep.UiStep) {
     object : OrientationInteractor {
       override val orientation: Flow<Int> = flowOf(Configuration.ORIENTATION_LANDSCAPE)
       override val rotation: Flow<Int> = flowOf(Surface.ROTATION_0)
+      override val rotationFromDefault: Flow<Int> = rotation
 
       override fun getRotationFromDefault(rotation: Int): Int = rotation
     }
@@ -117,7 +118,12 @@ class Injector(step: FingerprintNavigationStep.UiStep) {
 
   var rfpsIconTouchViewModel = RFPSIconTouchViewModel()
   var rfpsViewModel =
-    RFPSViewModel(fingerprintEnrollEnrollingViewModel, navigationViewModel, orientationInteractor)
+    RFPSViewModel(
+      fingerprintEnrollEnrollingViewModel,
+      navigationViewModel,
+      orientationInteractor,
+      interactor,
+    )
 
   val fingerprintEnrollConfirmationViewModel =
     FingerprintEnrollConfirmationViewModel(navigationViewModel, interactor)
@@ -150,7 +156,8 @@ class Injector(step: FingerprintNavigationStep.UiStep) {
           BackgroundViewModel::class.java -> backgroundViewModel
           RFPSIconTouchViewModel::class.java -> rfpsIconTouchViewModel
           FingerprintEnrollEnrollingViewModel::class.java -> fingerprintEnrollEnrollingViewModel
-          FingerprintEnrollConfirmationViewModel::class.java -> fingerprintEnrollConfirmationViewModel
+          FingerprintEnrollConfirmationViewModel::class.java ->
+            fingerprintEnrollConfirmationViewModel
           else -> null
         }
           as T
