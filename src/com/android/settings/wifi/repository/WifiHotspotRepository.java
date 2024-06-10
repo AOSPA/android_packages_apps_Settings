@@ -277,7 +277,7 @@ public class WifiHotspotRepository {
            if (config.getChannels().size() > 1) {
                log("Setting band to 2GHz for Enhanced open");
                configBuilder.setBand(BAND_2GHZ);
-           } else if (config.getBand() == BAND_2GHZ || config.getBand() == BAND_5GHZ) {
+           } else if (config.getBand() == BAND_2GHZ || config.getBand() == BAND_2GHZ_5GHZ) {
                log("OWE to OWE_TRANSITION for 2.4 or 5 GHz");
                securityType = SECURITY_TYPE_WPA3_OWE_TRANSITION;
            }
