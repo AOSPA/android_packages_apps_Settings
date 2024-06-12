@@ -33,13 +33,16 @@ import static com.qti.extphone.ExtPhoneCallbackListener.EVENT_ON_CIWLAN_CONFIG_C
 
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.telephony.CarrierConfigManager;
 import android.telephony.ims.aidl.IImsRegistration;
 import android.telephony.ims.ImsException;
 import android.telephony.ims.ImsManager;
@@ -185,6 +188,18 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                    ciwlanConfig);
            int subId = SubscriptionManager.getSubscriptionId(slotId);
            sCiwlanConfig.put(subId, ciwlanConfig);
+        }
+    };
+
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED
+                    .equals(intent.getAction())) {
+                ThreadUtils.postOnMainThread(() -> {
+                    redrawPreferenceControllers();
+                });
+            }
         }
     };
 
@@ -612,6 +627,8 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         mMobileNetworkRepository.updateEntity();
         // TODO: remove log after fixing b/182326102
         Log.d(LOG_TAG, "onResume() subId=" + mSubId);
+        getActivity().registerReceiver(mBroadcastReceiver,
+                new IntentFilter(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED));
     }
 
     private void onSubscriptionDetailChanged() {
@@ -638,6 +655,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     public void onPause() {
         mMobileNetworkRepository.removeRegister(this);
         super.onPause();
+        getActivity().unregisterReceiver(mBroadcastReceiver);
     }
 
     @Override
