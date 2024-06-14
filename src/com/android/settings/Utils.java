@@ -127,6 +127,7 @@ import com.android.settings.dashboard.profileselector.ProfileFragmentBridge;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment.ProfileType;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.Settings.CreateShortcutActivity;
 import com.android.settingslib.widget.ActionBarShadowController;
 import com.android.settingslib.widget.AdaptiveIcon;
 
@@ -1541,5 +1542,23 @@ public final class Utils extends com.android.settingslib.Utils {
                 }
             }
         };
+    }
+
+    /**
+     * Disables the launcher icon and shortcut picker component for the Settings app corresponding
+     * to the context user.
+     */
+    public static void disableComponentsToHideSettings(@NonNull Context context,
+            @NonNull PackageManager pm) {
+        // Disable settings app launcher icon
+        disableComponent(pm, new ComponentName(context, Settings.class));
+
+        //Disable Shortcut picker
+        disableComponent(pm, new ComponentName(context, com.android.settings.Settings.CreateShortcutActivity.class));
+    }
+
+    private static void disableComponent(PackageManager pm, ComponentName componentName) {
+        pm.setComponentEnabledSetting(componentName,
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
     }
 }
