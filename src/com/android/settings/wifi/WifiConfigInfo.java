@@ -14,6 +14,11 @@
  * limitations under the License.
  */
 
+/* Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.wifi;
 
 import android.app.Activity;
@@ -23,6 +28,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 
 import java.util.List;
 
@@ -37,6 +43,7 @@ public class WifiConfigInfo extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.setupEdgeToEdge(this);
 
         mWifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
         setContentView(R.layout.wifi_config_info);
