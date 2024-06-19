@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.network.telephony;
 
 import android.content.Context;
@@ -59,8 +65,9 @@ public class SatelliteSettingPreferenceController extends
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        if (!Flags.carrierEnabledSatelliteFlag()) {
-            logd("getAvailabilityStatus() : carrierEnabledSatelliteFlag is disabled");
+        if (!Flags.carrierEnabledSatelliteFlag() || (mSatelliteManager == null)) {
+            logd("getAvailabilityStatus() : carrierEnabledSatelliteFlag is disabled " +
+                    "or Satellite Service is not started");
             return UNSUPPORTED_ON_DEVICE;
         }
 
@@ -119,10 +126,15 @@ public class SatelliteSettingPreferenceController extends
 
     private void updateSummary(Preference preference) {
         try {
-            Set<Integer> restrictionReason =
-                    mSatelliteManager.getAttachRestrictionReasonsForCarrier(mSubId);
-            boolean isSatelliteEligible = !restrictionReason.contains(
-                    SatelliteManager.SATELLITE_COMMUNICATION_RESTRICTION_REASON_ENTITLEMENT);
+            Set<Integer> restrictionReason = null;
+            if (mSatelliteManager != null) {
+                restrictionReason = mSatelliteManager.getAttachRestrictionReasonsForCarrier(mSubId);
+            }
+            boolean isSatelliteEligible = false;
+            if (restrictionReason != null) {
+                isSatelliteEligible = !restrictionReason.contains(SatelliteManager
+                        .SATELLITE_COMMUNICATION_RESTRICTION_REASON_ENTITLEMENT);
+            }
             if (mIsSatelliteEligible == null || mIsSatelliteEligible != isSatelliteEligible) {
                 mIsSatelliteEligible = isSatelliteEligible;
                 String summary = mContext.getString(
