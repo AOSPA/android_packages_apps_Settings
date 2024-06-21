@@ -14,13 +14,22 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center are provided under the following license:
+ *
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.network.telephony
 
 import android.content.Context
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
+import android.text.TextUtils;
 import android.util.Log
+import android.util.Pair;
 import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -36,6 +45,7 @@ import com.android.settings.network.SubscriptionUtil
 import com.android.settingslib.Utils
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import com.android.settingslib.spaprivileged.framework.common.userManager
+import com.qti.extphone.QtiImeiInfo;
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -54,6 +64,15 @@ class MobileNetworkImeiPreferenceController(context: Context, key: String) :
     private var simSlot = -1
     private var imei = String()
     private var title = String()
+    private var qtiImeiInfo: Array<QtiImeiInfo?>? = null
+
+    private val isMinHalVersion2_1: Boolean
+        private get() {
+            val radioVersion: Pair<Int, Int> = mTelephonyManager.getHalVersion(
+                    TelephonyManager.HAL_SERVICE_MODEM)
+            val halVersion = makeRadioVersion(radioVersion.first, radioVersion.second)
+            return halVersion > makeRadioVersion(2, 0)
+        }
 
     fun init(fragment: Fragment, subId: Int) {
         this.fragment = fragment
@@ -61,6 +80,8 @@ class MobileNetworkImeiPreferenceController(context: Context, key: String) :
         mSubId = subId
         mTelephonyManager = mContext.getSystemService(TelephonyManager::class.java)
             ?.createForSubscriptionId(mSubId)!!
+        simSlot = mTelephonyManager.slotIndex
+        TelephonyUtils.connectExtTelephonyService(mContext)
     }
 
     override fun getAvailabilityStatus(subId: Int): Int = when {
@@ -125,8 +146,36 @@ class MobileNetworkImeiPreferenceController(context: Context, key: String) :
 
     private fun getImei(): String {
         val phoneType = getPhoneType()
-        return if (phoneType == TelephonyManager.PHONE_TYPE_CDMA) mTelephonyManager.meid?: String()
-                else mTelephonyManager.imei?: String()
+        var imei = String()
+
+        if (phoneType == TelephonyManager.PHONE_TYPE_CDMA) {
+            imei = mTelephonyManager.meid?: String()
+        } else {
+            try {
+                if (isMinHalVersion2_1) {
+                    imei = mTelephonyManager.imei
+                } else {
+                    if (qtiImeiInfo == null) {
+                        qtiImeiInfo = TelephonyUtils.getImeiInfo()
+                    }
+                    if (qtiImeiInfo != null) {
+                        for (i in qtiImeiInfo!!.indices) {
+                            if (qtiImeiInfo!![i] != null
+                                    && qtiImeiInfo!![i]!!.slotId == simSlot) {
+                                imei = qtiImeiInfo!![i]!!.imei
+                                break
+                            }
+                        }
+                    }
+                    if (TextUtils.isEmpty(imei)) {
+                        imei = mTelephonyManager.imei
+                    }
+                }
+            } catch (exception: Exception) {
+                Log.e(TAG, "Imei not available. $exception")
+            }
+        }
+        return imei
     }
 
     private fun getTitleForGsmPhone(): String {
@@ -156,15 +205,35 @@ class MobileNetworkImeiPreferenceController(context: Context, key: String) :
         var primaryImei = String()
 
         try {
-            primaryImei = mTelephonyManager.primaryImei
+            if (isMinHalVersion2_1) {
+                primaryImei = mTelephonyManager.primaryImei
+                return primaryImei != null && primaryImei == imei && isMultiSim()
+            } else {
+                if (qtiImeiInfo == null) {
+                    qtiImeiInfo = TelephonyUtils.getImeiInfo()
+                }
+                if (qtiImeiInfo != null) {
+                    for (i in qtiImeiInfo!!.indices) {
+                        if (qtiImeiInfo!![i] != null
+                                && qtiImeiInfo!![i]!!.slotId == simSlot
+                                && qtiImeiInfo!![i]!!.imeiType == QtiImeiInfo.IMEI_TYPE_PRIMARY) {
+                            return true
+                        }
+                    }
+                }
+            }
         } catch (exception: Exception) {
             Log.e(TAG, "PrimaryImei not available. $exception")
         }
-        return primaryImei == imei && isMultiSim()
+        return false
     }
 
     private fun isMultiSim(): Boolean {
         return mTelephonyManager.activeModemCount > 1
+    }
+
+    private fun makeRadioVersion(major: Int, minor: Int): Int {
+        return if (major < 0 || minor < 0) 0 else major * 100 + minor
     }
 
     fun getPhoneType(): Int {
