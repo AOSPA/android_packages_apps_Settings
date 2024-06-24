@@ -113,6 +113,13 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
         }
 
         final PersistableBundle carrierConfig = getCarrierConfigForSubId(subId);
+        if (!CarrierConfigManager.isConfigForIdentifiedCarrier(carrierConfig)) {
+            // If we only have the default carrier config just return, to avoid popping up the
+            // the VoLTE screen when it's disabled by the carrier.
+            Log.i(TAG, "Not showing 'VoLTE' screen. Carrier config not loaded");
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+
         if ((carrierConfig == null)
                 || carrierConfig.getBoolean(CarrierConfigManager.KEY_HIDE_ENHANCED_4G_LTE_BOOL)) {
             return CONDITIONALLY_UNAVAILABLE;

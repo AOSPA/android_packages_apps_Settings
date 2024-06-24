@@ -74,6 +74,7 @@ public class WifiEntryPreference extends RestrictedPreference implements
     private boolean mShowX; // Shows the Wi-Fi signl icon of Pie+x when it's true.
     private CharSequence mContentDescription;
     private OnButtonClickListener mOnButtonClickListener;
+    private static Boolean sIsWifiStandardDisplaySupported = null;
 
     public WifiEntryPreference(@NonNull Context context, @NonNull WifiEntry wifiEntry) {
         this(context, wifiEntry, new InternetIconInjector(context));
@@ -84,6 +85,10 @@ public class WifiEntryPreference extends RestrictedPreference implements
             @NonNull InternetIconInjector iconInjector) {
         super(context);
 
+        if (sIsWifiStandardDisplaySupported == null) {
+            sIsWifiStandardDisplaySupported = context.getResources().getBoolean(
+                    R.bool.config_show_wifi_standard);
+        }
         setLayoutResource(R.layout.preference_access_point);
         mFrictionSld = getFrictionStateListDrawable();
         mIconInjector = iconInjector;
@@ -165,11 +170,12 @@ public class WifiEntryPreference extends RestrictedPreference implements
             final int standard = mWifiEntry.getWifiStandard();
             final boolean showX = mWifiEntry.shouldShowXLevelIcon();
 
-            if (level != mLevel || showX != mShowX || standard != mWifiStandard) {
+            if (level != mLevel || showX != mShowX
+                    || sIsWifiStandardDisplaySupported && standard != mWifiStandard) {
                 mLevel = level;
                 mWifiStandard = standard;
                 mShowX = showX;
-                updateIcon(mShowX, mLevel, mWifiStandard);
+                updateIcon(mShowX, mLevel, sIsWifiStandardDisplaySupported ? mWifiStandard : 0);
                 notifyChanged();
             }
         }

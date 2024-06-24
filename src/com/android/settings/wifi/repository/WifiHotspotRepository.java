@@ -359,12 +359,10 @@ public class WifiHotspotRepository {
         if (speedType == SPEED_6GHZ) {
             log("setSpeedType(), setBand(BAND_2GHZ_5GHZ_6GHZ)");
             configBuilder.setBand(BAND_2GHZ_5GHZ_6GHZ);
-            if (config.getSecurityType() == SECURITY_TYPE_WPA3_OWE) {
+            if (config.getSecurityType() == SECURITY_TYPE_WPA3_OWE ||
+                config.getSecurityType() == SECURITY_TYPE_WPA3_OWE_TRANSITION) {
                 log("setSpeedType(), setPassphrase(SECURITY_TYPE_WPA3_OWE)");
                 configBuilder.setPassphrase(null, SECURITY_TYPE_WPA3_OWE);
-            } else if ( config.getSecurityType() == SECURITY_TYPE_WPA3_OWE_TRANSITION) {
-                log("setSpeedType(), setPassphrase(SECURITY_TYPE_WPA3_OWE_TRANSITION)");
-                configBuilder.setPassphrase(null, SECURITY_TYPE_WPA3_OWE_TRANSITION);
             } else if (config.getSecurityType() != SECURITY_TYPE_WPA3_SAE) {
                 log("setSpeedType(), setPassphrase(SECURITY_TYPE_WPA3_SAE)");
                 configBuilder.setPassphrase(generatePassword(config), SECURITY_TYPE_WPA3_SAE);
