@@ -15,8 +15,7 @@
  */
 
 /*
- * Changes from Qualcomm Innovation Center are provided under the following license:
- *
+ * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
  * Copyright (c) 2022-2024 Qualcomm Innovation Center, Inc. All rights reserved.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
@@ -180,6 +179,7 @@ public class NetworkSelectSettings extends DashboardFragment implements
                 mCarrierConfigChangeListener);
         mNetworkScanRepository = new NetworkScanRepository(context, mSubId);
         mNetworkSelectRepository = new NetworkSelectRepository(context, mSubId);
+        mSubscriptionsChangeListener.start();
     }
 
     @Keep
@@ -589,6 +589,7 @@ public class NetworkSelectSettings extends DashboardFragment implements
     @Override
     public void onDestroy() {
         Log.d(TAG, "onDestroy()");
+        mSubscriptionsChangeListener.stop();
         mNetworkScanExecutor.shutdown();
         super.onDestroy();
     }
