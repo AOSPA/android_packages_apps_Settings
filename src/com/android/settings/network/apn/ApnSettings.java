@@ -112,6 +112,8 @@ public class ApnSettings extends RestrictedSettingsFragment
     private UserManager mUserManager;
     private int mSubId;
     private PreferredApnRepository mPreferredApnRepository;
+    @Nullable
+    private String mPreferredApnKey;
     private String mMvnoType;
     private String mMvnoMatchData;
 
@@ -208,6 +210,7 @@ public class ApnSettings extends RestrictedSettingsFragment
                 });
 
         mPreferredApnRepository.collectPreferredApn(viewLifecycleOwner, (preferredApn) -> {
+            mPreferredApnKey = preferredApn;
             final PreferenceGroup apnPreferenceList = findPreference(APN_LIST);
             for (int i = 0; i < apnPreferenceList.getPreferenceCount(); i++) {
                 ApnPreference apnPreference = (ApnPreference) apnPreferenceList.getPreference(i);
@@ -327,6 +330,7 @@ public class ApnSettings extends RestrictedSettingsFragment
                 }
                 pref.setDefaultSelectable(defaultSelectable);
                 if (defaultSelectable) {
+                    pref.setIsChecked(key.equals(mPreferredApnKey));
                     apnList.add(pref);
                 } else {
                     mmsApnList.add(pref);
