@@ -14,11 +14,19 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center are provided under the following license:
+ *
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.network.telephony.scan
 
 import android.content.Context
 import android.content.res.Resources
 import android.telephony.AccessNetworkConstants.AccessNetworkType
+import android.telephony.CellIdentity;
 import android.telephony.CellInfo
 import android.telephony.NetworkScanRequest
 import android.telephony.PhoneCapability
@@ -73,11 +81,13 @@ class NetworkScanRepository(private val context: Context, subId: Int) {
         val title: String?,
         val className: String,
         val isRegistered: Boolean,
+        val cellIdentity: CellIdentity,
     ) {
         constructor(cellInfo: CellInfo) : this(
             title = cellInfo.cellIdentity.getNetworkTitle(),
             className = cellInfo.javaClass.name,
             isRegistered = cellInfo.isRegistered,
+            cellIdentity = cellInfo.cellIdentity,
         )
     }
 
