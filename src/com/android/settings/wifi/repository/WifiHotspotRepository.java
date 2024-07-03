@@ -371,7 +371,7 @@ public class WifiHotspotRepository {
             if (speedType == SPEED_5GHZ) {
                 log("setSpeedType(), setBand(BAND_2GHZ_5GHZ)");
                 configBuilder.setBand(BAND_2GHZ_5GHZ);
-            } else if (mIsDualBand) {
+            } else if (isDualBand() && speedType == SPEED_2GHZ_5GHZ) {
                 log("setSpeedType(), setBands(BAND_2GHZ + BAND_2GHZ_5GHZ)");
                 int[] bands = {BAND_2GHZ, BAND_2GHZ_5GHZ};
                 configBuilder.setBands(bands);
@@ -379,10 +379,16 @@ public class WifiHotspotRepository {
                 log("setSpeedType(), setBand(BAND_2GHZ)");
                 configBuilder.setBand(BAND_2GHZ);
             }
-            // Set the security type back to WPA2/WPA3 if we're moving from 6GHz to something else.
+            /* Set the security type back to WPA2/WPA3 if we're moving from 6GHz to something else
+               except for Enhanced open case, moving to OWE transition from OWE*/
             if ((config.getBand() & BAND_6GHZ) != 0) {
-                configBuilder.setPassphrase(
-                        generatePassword(config), SECURITY_TYPE_WPA3_SAE_TRANSITION);
+                if (config.getSecurityType() == SECURITY_TYPE_WPA3_OWE &&
+                    speedType != SPEED_2GHZ_5GHZ) {
+                    configBuilder.setPassphrase(null, SECURITY_TYPE_WPA3_OWE_TRANSITION);
+                } else {
+                    configBuilder.setPassphrase(
+                            generatePassword(config), SECURITY_TYPE_WPA3_SAE_TRANSITION);
+                }
             }
         }
         setSoftApConfiguration(configBuilder.build());
