@@ -160,8 +160,7 @@ public class AutoDataSwitchPreferenceController extends TelephonyTogglePreferenc
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        if (Flags.isDualSimOnboardingEnabled()
-                || !SubscriptionManager.isValidSubscriptionId(subId)
+        if (!SubscriptionManager.isValidSubscriptionId(subId)
                 || SubscriptionManager.getDefaultDataSubscriptionId() == subId
                 || (!hasMobileData())) {
             return CONDITIONALLY_UNAVAILABLE;
