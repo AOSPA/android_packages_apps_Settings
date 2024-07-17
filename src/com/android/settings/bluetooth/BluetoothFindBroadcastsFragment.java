@@ -429,10 +429,6 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
                 Log.d(TAG, "addSource: Remove preference that created by getAllSources()");
                 getActivity().runOnUiThread(() ->
                         mBroadcastSourceListCategory.removePreference(mSelectedPreference));
-                if (mLeBroadcastAssistant != null && !mLeBroadcastAssistant.isSearchInProgress()) {
-                    Log.d(TAG, "addSource: Start Searching For Broadcast Sources");
-                    mLeBroadcastAssistant.startSearchingForSources(getScanFilter());
-                }
             } else {
                 Log.d(TAG, "addSource: Update preference that created by onSourceFound()");
                 // The previous preference status set false after user selects the new Preference.
@@ -443,6 +439,10 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
                         mSelectedPreference.setOrder(1);
                     });
             }
+        }
+        if (mLeBroadcastAssistant != null && !mLeBroadcastAssistant.isSearchInProgress()) {
+            Log.d(TAG, "addSource: Start Searching For Broadcast Sources");
+            mLeBroadcastAssistant.startSearchingForSources(getScanFilter());
         }
         mSelectedPreference = pref;
         mLeBroadcastAssistant.addSource(mCachedDevice.getDevice(),
