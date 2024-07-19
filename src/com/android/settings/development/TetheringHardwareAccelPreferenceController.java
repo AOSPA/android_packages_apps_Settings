@@ -60,7 +60,7 @@ public class TetheringHardwareAccelPreferenceController extends DeveloperOptions
     public void updateState(Preference preference) {
         final int tetheringMode = Settings.Global.getInt(
                 mContext.getContentResolver(),
-                Settings.Global.TETHER_OFFLOAD_DISABLED, 0 /* default */);
+                Settings.Global.TETHER_OFFLOAD_DISABLED, SETTING_VALUE_ON);
         ((SwitchPreference) mPreference).setChecked(tetheringMode != SETTING_VALUE_OFF);
     }
 
@@ -68,7 +68,7 @@ public class TetheringHardwareAccelPreferenceController extends DeveloperOptions
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
         Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.TETHER_OFFLOAD_DISABLED, SETTING_VALUE_OFF);
-        ((SwitchPreference) mPreference).setChecked(false);
+                Settings.Global.TETHER_OFFLOAD_DISABLED, SETTING_VALUE_ON);
+        ((SwitchPreference) mPreference).setChecked(true);
     }
 }
