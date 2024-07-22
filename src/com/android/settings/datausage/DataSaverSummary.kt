@@ -46,8 +46,8 @@ class DataSaverSummary : DashboardFragment() {
         dataSaverBackend = DataSaverBackend(requireContext())
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         switchBar = (activity as SettingsActivity).switchBar.apply {
             setTitle(getString(R.string.data_saver_switch_title))
             show()
