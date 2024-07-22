@@ -19,6 +19,7 @@ import android.app.settings.SettingsEnums
 import android.content.Context
 import android.os.Bundle
 import android.telephony.SubscriptionManager
+import android.view.View
 import android.widget.Switch
 import com.android.settings.R
 import com.android.settings.SettingsActivity
@@ -46,8 +47,8 @@ class DataSaverSummary : DashboardFragment() {
         dataSaverBackend = DataSaverBackend(requireContext())
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         switchBar = (activity as SettingsActivity).switchBar.apply {
             setTitle(getString(R.string.data_saver_switch_title))
             show()
