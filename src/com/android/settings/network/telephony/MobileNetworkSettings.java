@@ -112,7 +112,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     @VisibleForTesting
     static final String KEY_CLICKED_PREF = "key_clicked_pref";
 
-    private static final String KEY_ROAMING_PREF = "button_roaming_key";
     private static final String KEY_DATA_PREF = "data_preference";
     private static final String KEY_CALLS_PREF = "calls_preference";
     private static final String KEY_SMS_PREF = "sms_preference";
@@ -339,6 +338,15 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         return nDDS;
     }
 
+    private BroadcastReceiver mBrocastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED)) {
+                redrawPreferenceControllers();
+            }
+        }
+    };
+
     public MobileNetworkSettings() {
         super(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
     }
@@ -415,8 +423,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
         return Arrays.asList(
                 new DataUsageSummaryPreferenceController(context, mSubId),
-                new RoamingPreferenceController(context, KEY_ROAMING_PREF, getSettingsLifecycle(),
-                        this, mSubId),
                 new DataDefaultSubscriptionController(context, KEY_DATA_PREF,
                         getSettingsLifecycle(), this),
                 new CallsDefaultSubscriptionController(context, KEY_CALLS_PREF,
@@ -505,11 +511,10 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                             null /* WifiPickerTrackerCallback */));
         }
 
-        final RoamingPreferenceController roamingPreferenceController =
-                use(RoamingPreferenceController.class);
+        final RoamingPreferenceControllerAOSP roamingPreferenceController =
+                use(RoamingPreferenceControllerAOSP.class);
         if (roamingPreferenceController != null) {
-            roamingPreferenceController.init(getFragmentManager(), mSubId,
-                    mMobileNetworkInfoEntity);
+            roamingPreferenceController.init(getParentFragmentManager(), mSubId);
         }
         final SatelliteSettingPreferenceController satelliteSettingPreferenceController = use(
                 SatelliteSettingPreferenceController.class);
@@ -625,6 +630,10 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         Log.d(LOG_TAG, "onResume() subId=" + mSubId);
         getActivity().registerReceiver(mBroadcastReceiver,
                 new IntentFilter(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED));
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED);
+        getContext().registerReceiver(mBrocastReceiver, intentFilter, Context.RECEIVER_EXPORTED);
     }
 
     private void onSubscriptionDetailChanged() {
@@ -644,6 +653,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     @Override
     public void onPause() {
         mMobileNetworkRepository.removeRegister(this);
+        getContext().unregisterReceiver(mBrocastReceiver);
         super.onPause();
         getActivity().unregisterReceiver(mBroadcastReceiver);
     }

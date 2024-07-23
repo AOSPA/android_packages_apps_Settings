@@ -33,7 +33,6 @@ import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 import android.telephony.ims.ImsManager;
 import android.telephony.ims.ImsMmTelManager;
-import android.telephony.ims.ProvisioningManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,7 +41,10 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceClickListener;
 import androidx.preference.PreferenceScreen;
@@ -57,7 +59,11 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
+import com.android.settings.network.telephony.wificalling.IWifiCallingRepository;
+import com.android.settings.network.telephony.wificalling.WifiCallingRepository;
 import com.android.settings.widget.SettingsMainSwitchPreference;
+
+import kotlin.Unit;
 
 import java.util.List;
 
@@ -103,7 +109,6 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
 
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private ImsMmTelManager mImsMmTelManager;
-    private ProvisioningManager mProvisioningManager;
     private TelephonyManager mTelephonyManager;
 
     private PhoneTelephonyCallback mTelephonyCallback;
@@ -188,19 +193,6 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
                 return true;
             };
 
-    private final ProvisioningManager.Callback mProvisioningCallback =
-            new ProvisioningManager.Callback() {
-                @Override
-                public void onProvisioningIntChanged(int item, int value) {
-                    if (item == ImsConfig.ConfigConstants.VOICE_OVER_WIFI_SETTING_ENABLED
-                            || item == ImsConfig.ConfigConstants.VLT_SETTING_ENABLED) {
-                        // The provisioning policy might have changed. Update the body to make sure
-                        // this change takes effect if needed.
-                        updateBody();
-                    }
-                }
-            };
-
     @VisibleForTesting
     void showAlert(Intent intent) {
         final Context context = getActivity();
@@ -264,14 +256,6 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     }
 
     @VisibleForTesting
-    ProvisioningManager getImsProvisioningManager() {
-        if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
-            return null;
-        }
-        return ProvisioningManager.createForSubscriptionId(mSubId);
-    }
-
-    @VisibleForTesting
     ImsMmTelManager getImsMmTelManager() {
         if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
             return null;
@@ -294,7 +278,6 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
                     FRAGMENT_BUNDLE_SUBID, SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         }
 
-        mProvisioningManager = getImsProvisioningManager();
         mImsMmTelManager = getImsMmTelManager();
 
         mSwitchBar = (SettingsMainSwitchPreference) findPreference(SWITCH_BAR);
@@ -336,19 +319,33 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        getWifiCallingRepository().collectIsWifiCallingReadyFlow(
+                getLifecycleOwner(), (isWifiWifiCallingReadyFlow) -> {
+                    if (!isWifiWifiCallingReadyFlow) {
+                        // This screen is not allowed to be shown due to provisioning policy and
+                        // should therefore be closed.
+                        finish();
+                    }
+                    return Unit.INSTANCE;
+                });
+    }
+
     @VisibleForTesting
-    boolean isWfcProvisionedOnDevice() {
-        return queryImsState(mSubId).isWifiCallingProvisioned();
+    @NonNull
+    IWifiCallingRepository getWifiCallingRepository() {
+        return new WifiCallingRepository(requireContext(), mSubId);
+    }
+
+    @VisibleForTesting
+    @NonNull
+    LifecycleOwner getLifecycleOwner() {
+        return getViewLifecycleOwner();
     }
 
     private void updateBody() {
-        if (!isWfcProvisionedOnDevice()) {
-            // This screen is not allowed to be shown due to provisioning policy and should
-            // therefore be closed.
-            finish();
-            return;
-        }
-
         final CarrierConfigManager configManager = (CarrierConfigManager)
                 getSystemService(Context.CARRIER_CONFIG_SERVICE);
         boolean isWifiOnlySupported = true;
@@ -486,8 +483,6 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         if (intent.getBooleanExtra(Phone.EXTRA_KEY_ALERT_SHOW, false)) {
             showAlert(intent);
         }
-        // Register callback for provisioning changes.
-        registerProvisioningChangedCallback();
     }
 
     @Override
@@ -500,8 +495,6 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
             mSwitchBar.removeOnSwitchChangeListener(this);
         }
         context.unregisterReceiver(mIntentReceiver);
-        // Remove callback for provisioning changes.
-        unregisterProvisioningChangedCallback();
     }
 
     /**
@@ -738,27 +731,6 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     @VisibleForTesting
     Resources getResourcesForSubId() {
         return SubscriptionManager.getResourcesForSubId(getContext(), mSubId);
-    }
-
-    @VisibleForTesting
-    void registerProvisioningChangedCallback() {
-        if (mProvisioningManager == null) {
-            return;
-        }
-        try {
-            mProvisioningManager.registerProvisioningChangedCallback(getContext().getMainExecutor(),
-                    mProvisioningCallback);
-        } catch (Exception ex) {
-            Log.w(TAG, "onResume: Unable to register callback for provisioning changes.");
-        }
-    }
-
-    @VisibleForTesting
-    void unregisterProvisioningChangedCallback() {
-        if (mProvisioningManager == null) {
-            return;
-        }
-        mProvisioningManager.unregisterProvisioningChangedCallback(mProvisioningCallback);
     }
 
     /**

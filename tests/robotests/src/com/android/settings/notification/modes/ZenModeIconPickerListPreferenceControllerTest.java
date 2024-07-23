@@ -23,9 +23,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.AutomaticZenRule;
 import android.content.Context;
-import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.preference.PreferenceScreen;
@@ -33,6 +31,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.widget.LayoutPreference;
 
 import com.google.common.collect.ImmutableList;
@@ -47,10 +47,7 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class ZenModeIconPickerListPreferenceControllerTest {
 
-    private static final ZenMode ZEN_MODE = new ZenMode(
-            "mode_id",
-            new AutomaticZenRule.Builder("mode name", Uri.parse("mode")).build(),
-            /* isActive= */ false);
+    private static final ZenMode ZEN_MODE = TestModeBuilder.EXAMPLE;
 
     private ZenModesBackend mBackend;
     private ZenModeIconPickerListPreferenceController mController;

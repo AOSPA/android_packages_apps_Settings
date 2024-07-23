@@ -22,6 +22,7 @@ import static org.mockito.Mockito.spy;
 
 import android.content.Context;
 import android.os.Looper;
+import android.platform.test.annotations.DisableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.util.FeatureFlagUtils;
 
@@ -56,12 +57,12 @@ public class NetworkProviderCallsSmsFragmentTest {
         if (Looper.myLooper() == null) {
             Looper.prepare();
         }
-        mSetFlagsRule.disableFlags(Flags.FLAG_IS_DUAL_SIM_ONBOARDING_ENABLED);
     }
 
     @Ignore
     @Test
     @UiThreadTest
+    @DisableFlags(Flags.FLAG_IS_DUAL_SIM_ONBOARDING_ENABLED)
     public void isPageSearchEnabled_shouldIncludeFragmentXml() {
         mPreferenceKeyList =
                 NetworkProviderCallsSmsFragment.SEARCH_INDEX_DATA_PROVIDER
