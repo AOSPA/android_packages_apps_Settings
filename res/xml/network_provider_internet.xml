@@ -31,16 +31,6 @@
         settings:useAdminDisabledSummary="true" />
 
     <com.android.settingslib.RestrictedPreference
-        android:key="calls_and_sms"
-        android:title="@string/calls_and_sms"
-        android:icon="@drawable/ic_calls_sms"
-        android:order="-20"
-        android:summary="@string/summary_placeholder"
-        settings:isPreferenceVisible="@bool/config_show_sim_info"
-        settings:keywords="@string/calls_and_sms"
-        settings:useAdminDisabledSummary="true" />
-
-    <com.android.settingslib.RestrictedPreference
         android:key="mobile_network_list"
         android:title="@string/provider_network_settings_title"
         android:summary="@string/summary_placeholder"
