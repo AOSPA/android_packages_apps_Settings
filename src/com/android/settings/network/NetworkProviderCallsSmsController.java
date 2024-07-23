@@ -54,6 +54,7 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
     private TelephonyManager mTelephonyManager;
     private RestrictedPreference mPreference;
     private boolean mIsRtlMode;
+    private boolean mIsMultiSim;
     private LifecycleOwner mLifecycleOwner;
     private MobileNetworkRepository mMobileNetworkRepository;
     private List<SubscriptionInfoEntity> mSubInfoEntityList;
@@ -198,7 +199,7 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
     @Override
     public boolean isAvailable() {
         return SubscriptionUtil.isSimHardwareVisible(mContext) &&
-                mUserManager.isAdminUser();
+                mIsMultiSim && mUserManager.isAdminUser();
     }
 
     @Override
@@ -231,6 +232,7 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
     @Override
     public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> activeSubInfoList) {
         mSubInfoEntityList = activeSubInfoList;
+        mIsMultiSim = activeSubInfoList != null && activeSubInfoList.size() > 1;
         update();
     }
 
