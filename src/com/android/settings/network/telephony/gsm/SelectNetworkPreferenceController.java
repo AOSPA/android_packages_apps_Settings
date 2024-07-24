@@ -5,9 +5,6 @@
 
 package com.android.settings.network.telephony.gsm;
 
-import static androidx.lifecycle.Lifecycle.Event.ON_START;
-import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
-
 import android.content.Context;
 import android.provider.Settings;
 import android.telephony.SubscriptionManager;
@@ -15,10 +12,11 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.util.Pair;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
@@ -42,7 +40,7 @@ import java.util.List;
  * Preference controller for "Auto Select Network"
  */
 public class SelectNetworkPreferenceController extends TelephonyTogglePreferenceController
-        implements LifecycleObserver {
+        implements DefaultLifecycleObserver {
 
     private static final String LOG_TAG = "SelectNetworkPreferenceController";
     private PreferenceScreen mPreferenceScreen;
@@ -65,14 +63,23 @@ public class SelectNetworkPreferenceController extends TelephonyTogglePreference
         mListeners = new ArrayList<>();
     }
 
-    @OnLifecycleEvent(ON_START)
-    public void onStart() {
+    @Override
+    public void onStart(@NonNull LifecycleOwner lifecycleOwner) {
         Log.i(LOG_TAG, "onStart");
     }
 
-    @OnLifecycleEvent(ON_STOP)
-    public void onStop() {
+    @Override
+    public void onStop(@NonNull LifecycleOwner lifecycleOwner) {
         Log.i(LOG_TAG, "onStop");
+    }
+
+    @Override
+    public void onDestroy(@NonNull LifecycleOwner lifecycleOwner) {
+       Log.i(LOG_TAG, "onDestroy");
+       if (mServiceConnected) {
+           mExtTelephonyManager.unregisterCallback(mExtPhoneCallbackListener);
+           mExtTelephonyManager.disconnectService();
+       }
     }
 
     @Override
@@ -137,6 +144,7 @@ public class SelectNetworkPreferenceController extends TelephonyTogglePreference
             if (mServiceConnected) {
                 mServiceConnected = false;
                 mClient = null;
+                mExtTelephonyManager.unregisterCallback(mExtPhoneCallbackListener);
             }
         }
     };

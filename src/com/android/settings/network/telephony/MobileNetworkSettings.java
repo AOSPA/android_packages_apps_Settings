@@ -170,6 +170,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         @Override
         public void onDisconnected() {
             Log.d(LOG_TAG, "ExtTelephony service disconnected");
+            sExtTelephonyManager.unregisterCallback(mExtPhoneCallbackListener);
             sExtTelServiceConnected = false;
             sClient = null;
         }
