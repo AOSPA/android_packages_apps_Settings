@@ -35,6 +35,7 @@ import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.biometrics.fingerprint2.BiometricsEnvironment;
 import com.android.settings.core.instrumentation.ElapsedTimeUtils;
 import com.android.settings.development.DeveloperOptionsActivityLifecycle;
+import com.android.settings.flags.Flags;
 import com.android.settings.fuelgauge.BatterySettingsStorage;
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.localepicker.LocaleNotificationDataManager;
@@ -53,7 +54,7 @@ import java.lang.ref.WeakReference;
 public class SettingsApplication extends Application {
 
     private WeakReference<SettingsHomepageActivity> mHomeActivity = new WeakReference<>(null);
-    private BiometricsEnvironment mBiometricsEnvironment;
+    @Nullable private BiometricsEnvironment mBiometricsEnvironment;
 
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
@@ -86,7 +87,9 @@ public class SettingsApplication extends Application {
 
         // Set Spa environment.
         setSpaEnvironment();
-        mBiometricsEnvironment = new BiometricsEnvironment(this);
+        if (Flags.fingerprintV2Enrollment()) {
+            mBiometricsEnvironment = new BiometricsEnvironment(this);
+        }
 
         if (ActivityEmbeddingUtils.isSettingsSplitEnabled(this)
                 && FeatureFlagUtils.isEnabled(this,

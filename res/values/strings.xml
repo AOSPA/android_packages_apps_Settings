@@ -160,6 +160,8 @@
     <string name="bluetooth_hearing_device_settings_summary">Shortcut, hearing aid compatibility</string>
     <!-- Connected devices settings. Title for hearing aids presets. A preset is a set of hearing aid settings. User can apply different settings in different environments (e.g. Outdoor, Restaurant, Home) [CHAR LIMIT=60] [BACKUP_MESSAGE_ID=5429761844739722885] -->
     <string name="bluetooth_hearing_aids_presets">Preset</string>
+    <!-- Connected devices settings. Summary of the preference when no preset info is obtained from the remote device [CHAR LIMIT=60] -->
+    <string name="bluetooth_hearing_aids_presets_empty_list_message">There are no presets programmed by your audiologist</string>
     <!-- Message when selecting hearing aids presets failed. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_hearing_aids_presets_error">Couldn\u2019t update preset</string>
     <!-- Connected devices settings. Title of the preference to show the entrance of the audio output page. It can change different types of audio are played on phone or other bluetooth devices. [CHAR LIMIT=35] -->
@@ -1010,7 +1012,7 @@
 
     <!-- Biometric settings --><skip />
     <!-- Title shown for menu item that launches biometric settings. [CHAR LIMIT=66] -->
-    <string name="security_settings_biometric_preference_title">Fingerprint &amp; Face Unlock</string>
+    <string name="security_settings_biometric_preference_title">Face &amp; Fingerprint Unlock</string>
     <!-- Title shown for work menu item that launches biometric settings. [CHAR LIMIT=66] -->
     <string name="security_settings_work_biometric_preference_title">Face &amp; Fingerprint Unlock for work</string>
     <!-- Message shown in summary field of biometric settings. [CHAR LIMIT=66] -->
@@ -2845,6 +2847,9 @@
     <string name="brightness">Brightness level</string>
     <!-- Sound & display settings screen, setting option name to enable adaptive brightness [CHAR LIMIT=30] -->
     <string name="auto_brightness_title">Adaptive brightness</string>
+    <!-- Note: The content description title is only applied in adaptive brightness detailed page in setup wizard flow, to make the consistency with other accessibility suw pages. -->
+    <!-- ContentDescription title for adaptive brightness detailed page footer. [CHAR LIMIT=60] -->
+    <string name="auto_brightness_content_description_title">About adaptive brightness</string>
     <!-- Description about the feature adaptive brightness -->
     <string name="auto_brightness_description">Your screen brightness will automatically adjust to your environment and activities. You can move the slider manually to help adaptive brightness learn your preferences.</string>
     <!-- Setting option summary when adaptive brightness is on [CHAR LIMIT=NONE] -->
@@ -4967,8 +4972,10 @@
     <string name="accessibility_magnification_triple_tap_warning_negative_button">Cancel</string>
     <!-- Title for the accessibility preference screen to enable screen magnification settings. [CHAR LIMIT=35] -->
     <string name="accessibility_magnification_service_settings_title">Magnification settings</string>
-    <!-- Title for accessibility magnification preference where user can move the magnification area by dragging one finger instead of two. [CHAR LIMIT=60] -->
-    <string name="accessibility_magnification_one_finger_panning_title">One-finger panning</string>
+    <!-- Title for accessibility magnification preference where user can move the magnification area by dragging one finger. [CHAR LIMIT=60] -->
+    <string name="accessibility_magnification_one_finger_panning_title">Move magnifier with 1 finger</string>
+    <!-- Summary for accessibility magnification one finger panning feature where user can move the magnification area by dragging one finger. [CHAR LIMIT=60] -->
+    <string name="accessibility_magnification_one_finger_panning_summary">Drag 1 finger to move around the screen</string>
     <!-- Summary for accessibility magnification preference when one finger panning feature is turned on.
          The feature when enabled allows user to move the magnification area by dragging one finger instead of two. [CHAR LIMIT=60] -->
     <string name="accessibility_magnification_one_finger_panning_summary_on">Move the magnification area by dragging one finger.</string>
@@ -5030,6 +5037,30 @@
         {2,number,integer}. Touch & hold anywhere on the screen<br/>
         {3,number,integer}. Drag finger to move around screen<br/>
         {4,number,integer}. Lift finger to stop magnification
+        ]]>
+    </string>
+    <!-- Instructions on the accessibility preference screen teaching the user how to interact with screen magnification when one finger panning feature is turned off. [CHAR LIMIT=none] -->
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off">
+        <![CDATA[
+        <b>To zoom in:</b><br/>
+        {0,number,integer}. Use shortcut to start magnification<br/>
+        {1,number,integer}. Tap the screen<br/>
+        {2,number,integer}. Drag 2 fingers to move around the screen<br/>
+        {3,number,integer}. Pinch with 2 fingers to adjust zoom<br/>
+        {4,number,integer}. Use shortcut to stop magnification<br/><br/>
+        You can also zoom in temporarily and more.
+        ]]>
+    </string>
+    <!-- Instructions on the accessibility preference screen teaching the user how to interact with screen magnification when one finger panning feature is turned on. [CHAR LIMIT=none] -->
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on">
+        <![CDATA[
+        <b>To zoom in:</b><br/>
+        {0,number,integer}. Use shortcut to start magnification<br/>
+        {1,number,integer}. Tap the screen<br/>
+        {2,number,integer}. Drag 1 or 2 fingers to move around the screen<br/>
+        {3,number,integer}. Pinch with 2 fingers to adjust zoom<br/>
+        {4,number,integer}. Use shortcut to stop magnification<br/><br/>
+        You can also zoom in temporarily and more.
         ]]>
     </string>
     <!-- Summary for the accessibility preference screen to enable screen magnification via the nav bar. [CHAR LIMIT=none] -->
@@ -9084,6 +9115,9 @@
     <!-- [CHAR LIMIT=NONE] App notification settings: no channels -->
     <string name="no_channels">This app has not posted any notifications</string>
 
+    <!-- [CHAR LIMIT=NONE] App notification settings: has channels, but hasn't sent notifications recently -->
+    <string name="no_recent_channels">Show unused categories</string>
+
     <!-- [CHAR LIMIT=NONE] App notification settings: link to app notification settings-->
     <string name="app_settings_link">Additional settings in the app</string>
 
@@ -12559,7 +12593,7 @@
     <!-- Toast on failure to reformat data to ext4 -->
     <string name="format_ext4_failure_toast">Failed to reformat and wipe the data partition to ext4.</string>
     <!-- Dialog to OEM unlock the device before using 16K developer option -->
-    <string name="confirm_oem_unlock_for_16k_title">Bootloader Unlock Required for 16KB Mode</string>
+    <string name="confirm_oem_unlock_for_16k_title">Bootloader Unlock Required</string>
     <string name="confirm_oem_unlock_for_16k_text">This device needs to have the bootloader unlocked before using the 16KB developer option.
         Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk.
         All user data and settings will be wiped when activating 16KB mode. Once the bootloader is unlocked, activating the 16KB option will require two reboots.
@@ -12588,10 +12622,10 @@
     <!-- persistent notification 16k page agnostic mode text -->
     <string name="page_agnostic_16k_pages_text_short">You are in the 16KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode,
         and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work.
-        In order to re-enter the production mode, you must, switch back to 4K mode and then lock the bootloader of the device. Tap to read more.</string>
+        In order to re-enter the production mode, you must, switch back to 4KB mode and then lock the bootloader of the device. Tap to read more.</string>
     <string name="page_agnostic_16k_pages_text">You are in the 16KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode,
         and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work.
-        In order to re-enter the production mode, you must, switch back to 4K mode and then lock the bootloader of the device. This would factory reset the device again and
+        In order to re-enter the production mode, you must, switch back to 4KB mode and then lock the bootloader of the device. This would factory reset the device again and
         restore it to production settings. After the device successfully boots into Android, disable OEM unlocking in Developer options.
         If the device fails to boot into Android or is unstable, re-flash the device with the latest factory images from
         &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;

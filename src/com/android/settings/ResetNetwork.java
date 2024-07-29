@@ -53,6 +53,7 @@ import com.android.settings.network.telephony.DomesticRoamUtils;
 import com.android.settings.network.telephony.EuiccRacConnectivityDialogActivity;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPattern;
+import com.android.settings.system.reset.ResetNetworkConfirm;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
 import java.util.ArrayList;

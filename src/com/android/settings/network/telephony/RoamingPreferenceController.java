@@ -291,8 +291,7 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
         if (mTelephonyManager == null) {
             return false;
         }
-        return mMobileNetworkInfoEntity == null ? false
-                : mMobileNetworkInfoEntity.isDataRoamingEnabled;
+        return mMobileNetworkInfoEntity == null ? false : true;
     }
 
     public void init(FragmentManager fragmentManager, int subId, MobileNetworkInfoEntity entity) {

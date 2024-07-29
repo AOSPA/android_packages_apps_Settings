@@ -157,6 +157,7 @@ import com.android.settings.nfc.PaymentSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.NotificationAccessSettings;
 import com.android.settings.notification.NotificationAssistantPicker;
+import com.android.settings.notification.PoliteNotificationsPreferenceFragment;
 import com.android.settings.notification.SoundSettings;
 import com.android.settings.notification.app.AppBubbleNotificationSettings;
 import com.android.settings.notification.app.AppNotificationSettings;
@@ -316,6 +317,7 @@ public class SettingsGateway {
             AppInfoDashboardFragment.class.getName(),
             BatterySaverSettings.class.getName(),
             AppNotificationSettings.class.getName(),
+            PoliteNotificationsPreferenceFragment.class.getName(),
             NotificationAssistantPicker.class.getName(),
             ChannelNotificationSettings.class.getName(),
             SatelliteSetting.class.getName(),
