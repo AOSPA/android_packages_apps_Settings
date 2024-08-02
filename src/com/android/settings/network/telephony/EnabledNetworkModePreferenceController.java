@@ -352,9 +352,14 @@ public class EnabledNetworkModePreferenceController extends
             mTelephonyManager = mTelephonyManager.createForSubscriptionId(mSubId);
             final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(mSubId);
             final boolean flagHidePrefer3gItem = Flags.hidePrefer3gItem();
-            mAllowed5gNetworkType = checkSupportedRadioBitmask(
-                    mTelephonyManager.getAllowedNetworkTypesForReason(
-                            TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_CARRIER),
+            long allowedNetworkTypes = TelephonyManagerConstants.NETWORK_MODE_UNKNOWN;
+            try {
+                allowedNetworkTypes = mTelephonyManager.getAllowedNetworkTypesForReason(
+                        TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_CARRIER);
+            } catch (Exception ex) {
+                Log.e(LOG_TAG, "updateConfig: getAllowedNetworkTypesForReason exception", ex);
+            }
+            mAllowed5gNetworkType = checkSupportedRadioBitmask(allowedNetworkTypes,
                     TelephonyManager.NETWORK_TYPE_BITMASK_NR);
             mSupported5gRadioAccessFamily = checkSupportedRadioBitmask(
                     mTelephonyManager.getSupportedRadioAccessFamily(),
@@ -563,9 +568,14 @@ public class EnabledNetworkModePreferenceController extends
         }
 
         private int getPreferredNetworkMode() {
-            int networkMode = MobileNetworkUtils.getNetworkTypeFromRaf(
-                    (int) mTelephonyManager.getAllowedNetworkTypesForReason(
-                            TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER));
+            long allowedNetworkTypes = TelephonyManagerConstants.NETWORK_MODE_UNKNOWN;
+            try {
+                allowedNetworkTypes = mTelephonyManager.getAllowedNetworkTypesForReason(
+                        TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER);
+            } catch (Exception ex) {
+                Log.e(LOG_TAG, "getAllowedNetworkTypesForReason exception", ex);
+            }
+            int networkMode = MobileNetworkUtils.getNetworkTypeFromRaf((int) allowedNetworkTypes);
             if (!showNrList()) {
                 Log.d(LOG_TAG, "Network mode :" + networkMode + " reduce NR");
                 networkMode = reduceNrToLteNetworkType(networkMode);

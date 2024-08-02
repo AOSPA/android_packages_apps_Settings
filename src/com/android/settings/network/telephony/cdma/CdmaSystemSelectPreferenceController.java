@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.network.telephony.cdma;
 
 import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA;
@@ -67,11 +73,16 @@ public class CdmaSystemSelectPreferenceController extends CdmaBasePreferenceCont
                 }
             }
 
+            long allowedNetworkTypes = NETWORK_MODE_UNKNOWN;
+            try {
+                allowedNetworkTypes = mTelephonyManager.getAllowedNetworkTypesForReason(
+                        TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER);
+            } catch (Exception ex) {
+                Log.e(TAG, "updateState: getAllowedNetworkTypesForReason exception", ex);
+            }
             final int settingsNetworkMode =
                     hasTelephonyMgr ? MobileNetworkUtils.getNetworkTypeFromRaf(
-                            (int) mTelephonyManager.getAllowedNetworkTypesForReason(
-                                    TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER))
-                            : NETWORK_MODE_UNKNOWN;
+                            (int) allowedNetworkTypes) : NETWORK_MODE_UNKNOWN;
             final boolean enableList = settingsNetworkMode != NETWORK_MODE_LTE_GSM_WCDMA
                     && settingsNetworkMode != NETWORK_MODE_NR_LTE_GSM_WCDMA;
             listPreference.setEnabled(enableList);

@@ -24,6 +24,7 @@ package com.android.settings.network.telephony;
 
 import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.LTE;
 import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.NR;
+import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_UNKNOWN;
 
 import android.content.Context;
 import android.database.ContentObserver;
@@ -343,8 +344,13 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
 
     private boolean isCiwlanIncompatibleNwSelected(int subId) {
         TelephonyManager tm = mTelephonyManager.createForSubscriptionId(subId);
-        long preferredRaf = tm.getAllowedNetworkTypesForReason(
-                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER);
+        long preferredRaf = NETWORK_MODE_UNKNOWN;
+        try {
+            preferredRaf = tm.getAllowedNetworkTypesForReason(
+                    TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER);
+        } catch (Exception ex) {
+            Log.e(LOG_TAG, "getAllowedNetworkTypesForReason exception", ex);
+        }
         return (LTE & preferredRaf) == 0 && (NR & preferredRaf) == 0;
     }
 

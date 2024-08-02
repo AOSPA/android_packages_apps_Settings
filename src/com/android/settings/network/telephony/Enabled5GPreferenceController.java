@@ -27,6 +27,13 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
+
+/*
+ * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.network.telephony;
 
 import android.content.BroadcastReceiver;
@@ -57,7 +64,7 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settings.R;
 import com.android.settings.network.AllowedNetworkTypesListener;
 import com.android.settings.network.telephony.MobileNetworkUtils;
-
+import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 
 /**
  * Preference controller for "Enabled 5G Switch"
@@ -278,9 +285,14 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
     }
 
     private int getAllowedNetworkMode() {
-        return MobileNetworkUtils.getNetworkTypeFromRaf(
-                (int) mTelephonyManager.getAllowedNetworkTypesForReason(
-                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER));
+        long allowedNetworkTypes = TelephonyManagerConstants.NETWORK_MODE_UNKNOWN;
+        try {
+            allowedNetworkTypes = mTelephonyManager.getAllowedNetworkTypesForReason(
+                    TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER);
+        } catch (Exception ex) {
+            Log.e(TAG, "getAllowedNetworkTypesForReason exception", ex);
+        }
+        return MobileNetworkUtils.getNetworkTypeFromRaf((int) allowedNetworkTypes);
     }
 
     @Override

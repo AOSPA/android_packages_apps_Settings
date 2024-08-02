@@ -61,9 +61,8 @@ import com.android.settings.network.telephony.TelephonyConstants.TelephonyManage
  */
 public class PreferredNetworkModePreferenceController extends TelephonyBasePreferenceController
         implements ListPreference.OnPreferenceChangeListener, LifecycleObserver {
-    private static final String TAG = "PrefNetworkModeCtrl";
+    private static final String LOG_TAG = "PrefNetworkModeCtrl";
 
-    private static final String LOG_TAG = "PreferredNetworkMode";
     private CarrierConfigCache mCarrierConfigCache;
     private TelephonyManager mTelephonyManager;
     private boolean mIsGlobalCdma;
@@ -256,12 +255,17 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
 
     private int getPreferredNetworkMode() {
         if (mTelephonyManager == null) {
-            Log.w(TAG, "TelephonyManager is null");
+            Log.w(LOG_TAG, "TelephonyManager is null");
             return TelephonyManagerConstants.NETWORK_MODE_UNKNOWN;
         }
-        return MobileNetworkUtils.getNetworkTypeFromRaf(
-                (int) mTelephonyManager.getAllowedNetworkTypesForReason(
-                        TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER));
+        long allowedNetworkTypes = TelephonyManagerConstants.NETWORK_MODE_UNKNOWN;
+        try {
+            allowedNetworkTypes = mTelephonyManager.getAllowedNetworkTypesForReason(
+                    TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER);
+        } catch (Exception ex) {
+            Log.e(LOG_TAG, "getAllowedNetworkTypesForReason exception", ex);
+        }
+        return MobileNetworkUtils.getNetworkTypeFromRaf((int) allowedNetworkTypes);
     }
 
     private int getPreferredNetworkModeSummaryResId(int NetworkMode) {
