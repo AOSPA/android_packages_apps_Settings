@@ -81,6 +81,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     static final String KEY_WIFI_HOTSPOT_SPEED = "wifi_hotspot_speed";
     @VisibleForTesting
     static final String KEY_INSTANT_HOTSPOT = "wifi_hotspot_instant";
+    static final String KEY_WIFI_TETHER_RANDOM_PASSWORD = "wifi_tether_random_password";
 
     @VisibleForTesting
     SettingsMainSwitchBar mMainSwitchBar;
@@ -94,6 +95,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     WifiTetherSecurityPreferenceController mSecurityPreferenceController;
     @VisibleForTesting
     WifiTetherAutoOffPreferenceController mWifiTetherAutoOffPreferenceController;
+    private WifiTetherRandomPasswordPreferenceController mRandomPasswordPreferenceController;
 
     private WifiManager mWifiManager;
     @VisibleForTesting
@@ -206,6 +208,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         mPasswordPreferenceController = use(WifiTetherPasswordPreferenceController.class);
         mWifiTetherAutoOffPreferenceController = use(WifiTetherAutoOffPreferenceController.class);
         mApBandPreferenceController = use(WifiTetherApBandPreferenceController.class);
+        mRandomPasswordPreferenceController = use(WifiTetherRandomPasswordPreferenceController.class);
     }
 
     @Override
@@ -289,6 +292,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         controllers.add(new WifiTetherApBandPreferenceController(context, listener));
         controllers.add(
                 new WifiTetherAutoOffPreferenceController(context, KEY_WIFI_TETHER_AUTO_OFF));
+        controllers.add(new WifiTetherRandomPasswordPreferenceController(context, listener));
 
         return controllers;
     }
@@ -430,6 +434,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                 keys.add(KEY_WIFI_TETHER_NETWORK_PASSWORD);
                 keys.add(KEY_WIFI_TETHER_AUTO_OFF);
                 keys.add(KEY_WIFI_TETHER_NETWORK_AP_BAND);
+                keys.add(KEY_WIFI_TETHER_RANDOM_PASSWORD);
             }
 
             // Remove duplicate
@@ -476,6 +481,13 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         @Override
         public void onReceive(Context content, Intent intent) {
             String action = intent.getAction();
+            if (WifiManager.WIFI_AP_STATE_CHANGED_ACTION.equals(action)) {
+                int state = intent.getIntExtra(WifiManager.EXTRA_WIFI_AP_STATE,
+                        WifiManager.WIFI_AP_STATE_FAILED);
+                if (state == WifiManager.WIFI_AP_STATE_DISABLED) {
+                    mRandomPasswordPreferenceController.onHotspotStopped();
+                }
+            }
             Log.d(TAG, "updating display config due to receiving broadcast action " + action);
             updateDisplayWithNewConfig();
         }
