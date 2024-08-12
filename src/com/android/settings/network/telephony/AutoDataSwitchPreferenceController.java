@@ -43,7 +43,6 @@ import com.android.settings.datausage.DataUsageUtils;
 import com.android.settings.flags.Flags;
 import com.android.settings.network.MobileDataContentObserver;
 import com.android.settings.network.SubscriptionsChangeListener;
-import com.android.settings.network.telephony.wificalling.CrossSimCallingViewModel;
 
 /**
  * Controls whether switch mobile data to the non-default SIM if the non-default SIM has better
@@ -70,8 +69,6 @@ public class AutoDataSwitchPreferenceController extends TelephonyTogglePreferenc
     @Nullable
     private MobileDataContentObserver mMobileDataContentObserver;
     @Nullable
-    private CrossSimCallingViewModel mCrossSimCallingViewModel;
-    @Nullable
     private PreferenceScreen mScreen;
 
     private final BroadcastReceiver mDefaultDataChangedReceiver = new BroadcastReceiver() {
@@ -88,10 +85,9 @@ public class AutoDataSwitchPreferenceController extends TelephonyTogglePreferenc
         super(context, preferenceKey);
     }
 
-    void init(int subId, @Nullable CrossSimCallingViewModel crossSimCallingViewModel) {
+    void init(int subId) {
         this.mSubId = subId;
         mManager = mContext.getSystemService(TelephonyManager.class).createForSubscriptionId(subId);
-        mCrossSimCallingViewModel = crossSimCallingViewModel;
     }
 
     @OnLifecycleEvent(ON_RESUME)
@@ -146,9 +142,6 @@ public class AutoDataSwitchPreferenceController extends TelephonyTogglePreferenc
             mManager.setMobileDataPolicyEnabled(
                     TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH,
                     isChecked);
-        }
-        if (mCrossSimCallingViewModel != null) {
-            mCrossSimCallingViewModel.updateCrossSimCalling();
         }
         return true;
     }

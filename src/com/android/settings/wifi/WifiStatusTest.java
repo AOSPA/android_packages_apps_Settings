@@ -123,7 +123,7 @@ public class WifiStatusTest extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Utils.setupEdgeToEdge(this);
+        WifiUtils.setupEdgeToEdge(this);
 
         mWifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
 

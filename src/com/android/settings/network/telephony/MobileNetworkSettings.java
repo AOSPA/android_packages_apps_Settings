@@ -490,9 +490,10 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         use(BillingCyclePreferenceController.class).init(mSubId);
         use(MmsMessagePreferenceController.class).init(mSubId);
         use(DataDuringCallsPreferenceController.class).init(mSubId);
-        final var crossSimCallingViewModel =
-                new ViewModelProvider(this).get(CrossSimCallingViewModel.class);
-        use(AutoDataSwitchPreferenceController.class).init(mSubId, crossSimCallingViewModel);
+        // CrossSimCallingViewModel is responsible for maintaining the correct cross sim calling
+        // settings (backup calling).
+        new ViewModelProvider(this).get(CrossSimCallingViewModel.class);
+        use(AutoDataSwitchPreferenceController.class).init(mSubId);
         use(DisabledSubscriptionController.class).init(mSubId);
         use(DeleteSimProfilePreferenceController.class).init(mSubId);
         use(DisableSimFooterPreferenceController.class).init(mSubId);
