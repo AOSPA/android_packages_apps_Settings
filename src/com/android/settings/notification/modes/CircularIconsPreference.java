@@ -41,6 +41,7 @@ import com.android.settings.R;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.Utils;
 
+import com.google.common.base.Equivalence;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 
@@ -49,6 +50,8 @@ import java.util.List;
 import java.util.concurrent.Executor;
 
 public class CircularIconsPreference extends RestrictedPreference {
+
+    private static final float DISABLED_ITEM_ALPHA = 0.3f;
 
     private Executor mUiExecutor;
     @Nullable private LinearLayout mIconContainer;
@@ -97,6 +100,14 @@ public class CircularIconsPreference extends RestrictedPreference {
         displayIconsIfPending();
     }
 
+    @Override
+    public void setEnabled(boolean enabled) {
+        super.setEnabled(enabled);
+        if (mIconContainer != null) {
+            applyEnabledToIcons(mIconContainer, enabled);
+        }
+    }
+
     private void displayIconsIfPending() {
         CircularIconSet<?> pendingIconSet = mPendingDisplayIconSet;
         if (pendingIconSet != null) {
@@ -105,8 +116,12 @@ public class CircularIconsPreference extends RestrictedPreference {
         }
     }
 
-    void displayIcons(CircularIconSet<?> iconSet) {
-        if (mIconSet != null && mIconSet.hasSameItemsAs(iconSet)) {
+    <T> void displayIcons(CircularIconSet<T> iconSet) {
+        displayIcons(iconSet, null);
+    }
+
+    <T> void displayIcons(CircularIconSet<T> iconSet, @Nullable Equivalence<T> itemEquivalence) {
+        if (mIconSet != null && mIconSet.hasSameItemsAs(iconSet, itemEquivalence)) {
             return;
         }
         mIconSet = iconSet;
@@ -189,7 +204,6 @@ public class CircularIconsPreference extends RestrictedPreference {
         }
         // ... plus 0/1 TextViews at the end.
         if (extraItems > 0 && !(getLastChild(mIconContainer) instanceof TextView)) {
-            // TODO: b/346551087 - Check TODO in preference_circular_icons_plus_item_background
             TextView plusView = (TextView) inflater.inflate(
                     R.layout.preference_circular_icons_plus_item, mIconContainer, false);
             mIconContainer.addView(plusView);
@@ -207,6 +221,8 @@ public class CircularIconsPreference extends RestrictedPreference {
             textView.setText(getContext().getString(R.string.zen_mode_plus_n_items, extraItems));
         }
 
+        applyEnabledToIcons(mIconContainer, isEnabled());
+
         // Display icons when all are ready (more consistent than randomly loading).
         mPendingLoadIconsFuture = Futures.allAsList(iconFutures);
         FutureUtil.whenDone(
@@ -218,6 +234,13 @@ public class CircularIconsPreference extends RestrictedPreference {
                     }
                 },
                 mUiExecutor);
+    }
+
+    private void applyEnabledToIcons(ViewGroup container, boolean enabled) {
+        for (int i = 0; i < container.getChildCount(); i++) {
+            View child = container.getChildAt(i);
+            child.setAlpha(enabled ? 1.0f : DISABLED_ITEM_ALPHA);
+        }
     }
 
     private static Drawable getPlaceholderImage(Context context) {
@@ -243,6 +266,18 @@ public class CircularIconsPreference extends RestrictedPreference {
             return null;
         }
         return parent.getChildAt(parent.getChildCount() - 1);
+    }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+    List<View> getViews() {
+        if (mIconContainer == null) {
+            return List.of();
+        }
+        ArrayList<View> views = new ArrayList<>();
+        for (int i = 0; i < mIconContainer.getChildCount(); i++) {
+            views.add(mIconContainer.getChildAt(i));
+        }
+        return views;
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
