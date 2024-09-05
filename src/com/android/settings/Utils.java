@@ -25,6 +25,7 @@ import static android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
 import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
 
 import static com.android.settings.password.ConfirmDeviceCredentialActivity.BIOMETRIC_PROMPT_AUTHENTICATORS;
+import static com.android.settings.password.ConfirmDeviceCredentialActivity.BIOMETRIC_PROMPT_HIDE_BACKGROUND;
 import static com.android.settings.password.ConfirmDeviceCredentialActivity.BIOMETRIC_PROMPT_NEGATIVE_BUTTON_TEXT;
 
 import android.app.ActionBar;
@@ -1598,12 +1599,13 @@ public final class Utils extends com.android.settingslib.Utils {
      * to check if all requirements for mandatory biometrics is satisfied
      * before launching biometric prompt.
      *
-     * @param fragment    corresponding fragment of the surface
-     * @param requestCode for starting the new activity
-     * @param userId      user id for the authentication request
+     * @param fragment       corresponding fragment of the surface
+     * @param requestCode    for starting the new activity
+     * @param userId         user id for the authentication request
+     * @param hideBackground if the background activity screen needs to be hidden
      */
     public static void launchBiometricPromptForMandatoryBiometrics(@NonNull Fragment fragment,
-            int requestCode, int userId) {
+            int requestCode, int userId, boolean hideBackground) {
         final Intent intent = new Intent();
         intent.putExtra(BIOMETRIC_PROMPT_AUTHENTICATORS,
                 BiometricManager.Authenticators.MANDATORY_BIOMETRICS);
@@ -1613,6 +1615,7 @@ public final class Utils extends com.android.settingslib.Utils {
                 fragment.getString(R.string.mandatory_biometrics_prompt_description));
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_ALLOW_ANY_USER, true);
         intent.putExtra(EXTRA_USER_ID, userId);
+        intent.putExtra(BIOMETRIC_PROMPT_HIDE_BACKGROUND, hideBackground);
         intent.setClassName(SETTINGS_PACKAGE_NAME,
                 ConfirmDeviceCredentialActivity.InternalActivity.class.getName());
         fragment.startActivityForResult(intent, requestCode);

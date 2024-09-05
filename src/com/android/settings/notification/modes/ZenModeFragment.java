@@ -51,6 +51,7 @@ public class ZenModeFragment extends ZenModeFragmentBase {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         List<AbstractPreferenceController> prefControllers = new ArrayList<>();
         prefControllers.add(new ZenModeHeaderController(context, "header", this));
+        prefControllers.add(new ZenModeBlurbPreferenceController(context, "mode_blurb"));
         prefControllers.add(
                 new ZenModeButtonPreferenceController(context, "activate", this, mBackend));
         prefControllers.add(new ZenModePreferenceCategoryController(context, "modes_filters"));
@@ -64,21 +65,18 @@ public class ZenModeFragment extends ZenModeFragmentBase {
                 new ZenModePreferenceCategoryController(context, "modes_additional_actions"));
         prefControllers.add(new ZenModeDisplayLinkPreferenceController(
                 context, "mode_display_settings", mBackend, mHelperBackend));
-        prefControllers.add(new ZenModeSetTriggerLinkPreferenceController(context,
-                "zen_automatic_trigger_category", this, mBackend));
+        prefControllers.add(new ZenModeTriggerCategoryPreferenceController(context,
+                "zen_automatic_trigger_category"));
+        prefControllers.add(new ZenModeTriggerUpdatePreferenceController(context,
+                "zen_automatic_trigger_settings", mBackend));
+        prefControllers.add(
+                new ZenModeTriggerAddPreferenceController(context, "zen_add_automatic_trigger",
+                        this, mBackend));
         prefControllers.add(new InterruptionFilterPreferenceController(
                 context, "allow_filtering", mBackend));
         prefControllers.add(new ManualDurationPreferenceController(
                 context, "mode_manual_duration", this, mBackend));
         return prefControllers;
-    }
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-
-        // allow duration preference controller to listen for settings changes
-        use(ManualDurationPreferenceController.class).registerSettingsObserver();
     }
 
     @Override
@@ -93,6 +91,9 @@ public class ZenModeFragment extends ZenModeFragmentBase {
             mModeMenuProvider = new ModeMenuProvider(mode);
             activity.addMenuProvider(mModeMenuProvider);
         }
+
+        // allow duration preference controller to listen for settings changes
+        use(ManualDurationPreferenceController.class).registerSettingsObserver();
     }
 
     @Override
@@ -100,13 +101,8 @@ public class ZenModeFragment extends ZenModeFragmentBase {
         if (getActivity() != null) {
             getActivity().removeMenuProvider(mModeMenuProvider);
         }
-        super.onStop();
-    }
-
-    @Override
-    public void onDetach() {
         use(ManualDurationPreferenceController.class).unregisterSettingsObserver();
-        super.onDetach();
+        super.onStop();
     }
 
     @Override
@@ -116,13 +112,13 @@ public class ZenModeFragment extends ZenModeFragmentBase {
     }
 
     @Override
-    protected void updateZenModeState() {
+    protected void onUpdatedZenModeState() {
         // Because this fragment may be asked to finish by the delete menu but not be done doing
         // so yet, ignore any attempts to update info in that case.
         if (getActivity() != null && getActivity().isFinishing()) {
             return;
         }
-        super.updateZenModeState();
+        super.onUpdatedZenModeState();
     }
 
     private class ModeMenuProvider implements MenuProvider {

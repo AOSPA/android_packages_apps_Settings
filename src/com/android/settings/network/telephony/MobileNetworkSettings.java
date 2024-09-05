@@ -500,7 +500,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         use(NrDisabledInDsdsFooterPreferenceController.class).init(mSubId);
 
         use(MobileNetworkSpnPreferenceController.class).init(this, mSubId);
-        use(MobileNetworkPhoneNumberPreferenceController.class).init(this, mSubId);
+        use(MobileNetworkPhoneNumberPreferenceController.class).init(mSubId);
         use(MobileNetworkImeiPreferenceController.class).init(this, mSubId);
 
         final MobileDataPreferenceController mobileDataPreferenceController =
@@ -756,14 +756,10 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                         boolean enabled) {
                     return super.getXmlResourcesToIndex(context, enabled);
                 }
-
-                /** suppress full page if user is not admin */
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    boolean isAirplaneOff = Settings.Global.getInt(context.getContentResolver(),
-                            Settings.Global.AIRPLANE_MODE_ON, 0) == 0;
-                    return isAirplaneOff && SubscriptionUtil.isSimHardwareVisible(context)
-                            && context.getSystemService(UserManager.class).isAdminUser();
+                    return MobileNetworkSettingsSearchIndex
+                            .isMobileNetworkSettingsSearchable(context);
                 }
             };
 
