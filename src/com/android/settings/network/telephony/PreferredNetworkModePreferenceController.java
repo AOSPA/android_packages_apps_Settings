@@ -29,6 +29,8 @@ import static com.android.settings.network.telephony.TelephonyConstants.RadioAcc
 import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.NR;
 
 import android.app.AlertDialog;
+import static com.android.settings.network.telephony.EnabledNetworkModePreferenceControllerHelperKt.getNetworkModePreferenceType;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.ContentObserver;
@@ -53,16 +55,18 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.network.AllowedNetworkTypesListener;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 
 /**
  * Preference controller for "Preferred network mode"
  */
-public class PreferredNetworkModePreferenceController extends TelephonyBasePreferenceController
+public class PreferredNetworkModePreferenceController extends BasePreferenceController
         implements ListPreference.OnPreferenceChangeListener, LifecycleObserver {
-    private static final String LOG_TAG = "PrefNetworkModeCtrl";
+    private static final String TAG = "PrefNetworkModeCtrl";
 
+    private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private CarrierConfigCache mCarrierConfigCache;
     private TelephonyManager mTelephonyManager;
     private boolean mIsGlobalCdma;
@@ -78,25 +82,10 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
     }
 
     @Override
-    public int getAvailabilityStatus(int subId) {
-        final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(subId);
-        boolean visible;
-        if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            visible = false;
-        } else if (carrierConfig == null) {
-            visible = false;
-        } else if (carrierConfig.getBoolean(
-                CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL)
-                || carrierConfig.getBoolean(
-                CarrierConfigManager.KEY_HIDE_PREFERRED_NETWORK_TYPE_BOOL)) {
-            visible = false;
-        } else if (carrierConfig.getBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL)) {
-            visible = true;
-        } else {
-            visible = false;
-        }
-
-        return visible ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+    public int getAvailabilityStatus() {
+        return getNetworkModePreferenceType(mContext, mSubId)
+                == NetworkModePreferenceType.PreferredNetworkMode
+                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @OnLifecycleEvent(ON_START)
@@ -155,7 +144,7 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
         boolean currentSubCiwlanEnabled = MobileNetworkSettings.isCiwlanEnabled(mSubId);
         boolean otherSubCiwlanEnabled = isDDS ? MobileNetworkSettings.isCiwlanEnabled(nDDS) :
                 MobileNetworkSettings.isCiwlanEnabled(DDS);
-        Log.d(LOG_TAG, "isDDS = " + isDDS +
+        Log.d(TAG, "isDDS = " + isDDS +
                 ", currentSubCiwlanEnabled = " + currentSubCiwlanEnabled +
                 ", otherSubCiwlanEnabled = " + otherSubCiwlanEnabled +
                 ", isCiwlanIncompatibleNetworkSelected = " + isCiwlanIncompatibleNetworkSelected);
@@ -255,7 +244,7 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
 
     private int getPreferredNetworkMode() {
         if (mTelephonyManager == null) {
-            Log.w(LOG_TAG, "TelephonyManager is null");
+            Log.w(TAG, "TelephonyManager is null");
             return TelephonyManagerConstants.NETWORK_MODE_UNKNOWN;
         }
         long allowedNetworkTypes = TelephonyManagerConstants.NETWORK_MODE_UNKNOWN;
@@ -263,7 +252,7 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
             allowedNetworkTypes = mTelephonyManager.getAllowedNetworkTypesForReason(
                     TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER);
         } catch (Exception ex) {
-            Log.e(LOG_TAG, "getAllowedNetworkTypesForReason exception", ex);
+            Log.e(TAG, "getAllowedNetworkTypesForReason exception", ex);
         }
         return MobileNetworkUtils.getNetworkTypeFromRaf((int) allowedNetworkTypes);
     }
@@ -356,7 +345,7 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
         if (mCallState != null && mCallState != TelephonyManager.CALL_STATE_IDLE) {
             callStateIdle = false;
         }
-        Log.d(LOG_TAG, "isCallStateIdle:" + callStateIdle);
+        Log.d(TAG, "isCallStateIdle:" + callStateIdle);
         return callStateIdle;
     }
 

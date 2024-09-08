@@ -220,10 +220,10 @@ public class WifiSettings extends RestrictedSettingsFragment
         super.onViewCreated(view, savedInstanceState);
         final Activity activity = getActivity();
         if (activity != null) {
-            mProgressHeader =
-                    setPinnedHeaderView(com.android.settingslib.R.layout.progress_header)
+            mProgressHeader = setPinnedHeaderView(
+                    com.android.settingslib.widget.progressbar.R.layout.progress_header)
                             .findViewById(
-                                    com.android.settingslib.R.id.progress_bar_animation);
+                                com.android.settingslib.widget.progressbar.R.id.progress_bar_animation);
             setProgressBarVisible(false);
         }
         ((SettingsActivity) activity).getSwitchBar().setTitle(
