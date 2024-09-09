@@ -78,6 +78,9 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     @VisibleForTesting
     static final String KEY_WIFI_TETHER_NETWORK_AP_BAND = "wifi_tether_network_ap_band";
     @VisibleForTesting
+    static final String KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY =
+            WifiTetherMaximizeCompatibilityPreferenceController.PREF_KEY;
+    @VisibleForTesting
     static final String KEY_WIFI_HOTSPOT_SECURITY = "wifi_hotspot_security";
     @VisibleForTesting
     static final String KEY_WIFI_HOTSPOT_SPEED = "wifi_hotspot_speed";
@@ -435,12 +438,21 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                     || !mWifiRestriction.isHotspotAvailable(context)) {
                 keys.add(KEY_WIFI_TETHER_NETWORK_NAME);
                 keys.add(KEY_WIFI_TETHER_SECURITY);
+                keys.add(KEY_WIFI_HOTSPOT_SECURITY);
                 keys.add(KEY_WIFI_TETHER_NETWORK_PASSWORD);
                 keys.add(KEY_WIFI_TETHER_AUTO_OFF);
                 keys.add(KEY_WIFI_TETHER_NETWORK_AP_BAND);
+                keys.add(KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY);
+                keys.add(KEY_WIFI_HOTSPOT_SPEED);
                 keys.add(KEY_INSTANT_HOTSPOT);
-            } else if (!mIsInstantHotspotEnabled) {
-                keys.add(KEY_INSTANT_HOTSPOT);
+            } else {
+                if (!isSpeedFeatureAvailable()) {
+                    keys.add(KEY_WIFI_HOTSPOT_SECURITY);
+                    keys.add(KEY_WIFI_HOTSPOT_SPEED);
+                }
+                if (!mIsInstantHotspotEnabled) {
+                    keys.add(KEY_INSTANT_HOTSPOT);
+                }
             }
 
             // Remove duplicate
@@ -466,6 +478,12 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         @Override
         public List<AbstractPreferenceController> createPreferenceControllers(Context context) {
             return buildPreferenceControllers(context, null /* listener */);
+        }
+
+        @VisibleForTesting
+        boolean isSpeedFeatureAvailable() {
+            return FeatureFactory.getFeatureFactory().getWifiFeatureProvider()
+                    .getWifiHotspotRepository().isSpeedFeatureAvailable();
         }
     }
 

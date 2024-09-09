@@ -61,7 +61,7 @@ class MobileNetworkSwitchController @JvmOverloads constructor(
             override val changeable = { changeable }
             override val checked = { checked }
             override val onCheckedChange = { newChecked: Boolean ->
-                SubscriptionUtil.startToggleSubscriptionDialogActivity(mContext, subId, newChecked)
+                SubscriptionUtil.startToggleSubscriptionDialogActivity(mContext, subId, newChecked, false)
             }
         })
     }
