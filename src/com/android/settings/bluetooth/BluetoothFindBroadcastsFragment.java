@@ -26,6 +26,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastAssistant;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
+import android.bluetooth.BluetoothStatusCodes;
 import android.bluetooth.le.ScanFilter;
 import android.content.Context;
 import android.content.Intent;
@@ -120,6 +121,13 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
                 @Override
                 public void onSourceFound(@NonNull BluetoothLeBroadcastMetadata source) {
                     Log.d(TAG, "onSourceFound:");
+                    int broadcastId = source.getBroadcastId();
+                    BluetoothBroadcastSourcePreference item = mBroadcastSourceListCategory.findPreference(
+                            Integer.toString(broadcastId));
+                    if (item != null && item.getKey().equals(Integer.toString(broadcastId))) {
+                        Log.w(TAG, "onSourceFound: already exsits. broadcastId = " + broadcastId);
+                        return;
+                    }
                     getActivity().runOnUiThread(
                             () -> updateListCategoryFromBroadcastMetadata(source, false));
                 }
@@ -143,8 +151,12 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
                 @Override
                 public void onSourceAddFailed(@NonNull BluetoothDevice sink,
                         @NonNull BluetoothLeBroadcastMetadata source, int reason) {
-                    mSelectedPreference = null;
-                    Log.d(TAG, "onSourceAddFailed: clear the mSelectedPreference.");
+                    Log.d(TAG, "onSourceAddFailed: sink = " + sink +
+                            " ,mCachedDevice = " + mCachedDevice.getDevice());
+                    if (mCachedDevice.getDevice().equals(sink)) {
+                        mSelectedPreference = null;
+                        Log.d(TAG, "onSourceAddFailed: clear the mSelectedPreference.");
+                    }
                 }
 
                 @Override
@@ -161,7 +173,7 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
                 public void onSourceRemoved(@NonNull BluetoothDevice sink, int sourceId,
                         int reason) {
                     Log.d(TAG, "onSourceRemoved:");
-                    getActivity().runOnUiThread(() -> handleSourceRemoved());
+                    getActivity().runOnUiThread(() -> handleSourceRemoved(reason));
                 }
 
                 @Override
@@ -363,6 +375,10 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
 
     private void updateListCategoryFromBroadcastMetadata(BluetoothLeBroadcastMetadata source,
             boolean isConnected) {
+        if (source == null) {
+            Log.w(TAG, "updateListCategoryFromBroadcastMetadata: source is null");
+            return;
+        }
         BluetoothBroadcastSourcePreference item = mBroadcastSourceListCategory.findPreference(
                 Integer.toString(source.getBroadcastId()));
         if (item == null) {
@@ -422,6 +438,10 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
     void addSource(BluetoothBroadcastSourcePreference pref) {
         if (mLeBroadcastAssistant == null || mCachedDevice == null) {
             Log.w(TAG, "addSource: LeBroadcastAssistant or CachedDevice is null!");
+            return;
+        }
+        if (mSelectedPreference == pref) {
+            Log.w(TAG, "addSource: Ignored for the same source");
             return;
         }
         if (mSelectedPreference != null) {
@@ -544,15 +564,18 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
         addConnectedSourcePreference();
     }
 
-    private void handleSourceRemoved() {
-        if (mSelectedPreference != null) {
-            if (mSelectedPreference.getBluetoothLeBroadcastMetadata() == null) {
-                mBroadcastSourceListCategory.removePreference(mSelectedPreference);
-            } else {
-                mSelectedPreference.clearReceiveState();
+    private void handleSourceRemoved(int reason) {
+        Log.d(TAG, "handleSourceRemoved: reason = " + reason);
+        if (reason != BluetoothStatusCodes.REASON_LOCAL_STACK_REQUEST) {
+            if (mSelectedPreference != null) {
+                if (mSelectedPreference.getBluetoothLeBroadcastMetadata() == null) {
+                    mBroadcastSourceListCategory.removePreference(mSelectedPreference);
+                } else {
+                    mSelectedPreference.clearReceiveState();
+                }
             }
+            mSelectedPreference = null;
         }
-        mSelectedPreference = null;
     }
 
     private void addConnectedSourcePreference() {
