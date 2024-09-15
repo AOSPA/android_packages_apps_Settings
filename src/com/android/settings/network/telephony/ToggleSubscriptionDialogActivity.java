@@ -42,6 +42,8 @@ import com.android.settings.network.SwitchToRemovableSlotSidecar;
 import com.android.settings.network.UiccSlotUtil;
 import com.android.settings.sim.SimActivationNotifier;
 
+import com.google.common.collect.ImmutableList;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -190,8 +192,12 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
     }
 
     private boolean isPsimPresent() {
-        return (UiccSlotUtil.getSlotInfos(mTelMgr).stream()
-                .anyMatch(slotInfo -> mSubInfo.getIccId().equals(slotInfo.getCardId())));
+        UiccSlotInfo[] slotInfos = mTelMgr.getUiccSlotsInfo();
+        if (slotInfos == null) {
+            return false;
+        }
+        return ImmutableList.copyOf(slotInfos).stream()
+                .anyMatch(slotInfo -> mSubInfo.getIccId().equals(slotInfo.getCardId()));
     }
 
     @Override
@@ -649,7 +655,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
     }
 
     private boolean isRemovableSimEnabled() {
-        return UiccSlotUtil.isRemovableSimEnabled(mTelMgr);
+        return new UiccSlotRepository(mTelMgr).anyRemovablePhysicalSimEnabled();
     }
 
     private boolean isMultipleEnabledProfilesSupported() {
