@@ -166,18 +166,11 @@ public class WifiEntryPreference extends RestrictedPreference implements
         if (mWifiEntry instanceof HotspotNetworkEntry) {
             updateHotspotIcon(((HotspotNetworkEntry) mWifiEntry).getDeviceType());
         } else {
-            final int level = mWifiEntry.getLevel();
-            final int standard = mWifiEntry.getWifiStandard();
-            final boolean showX = mWifiEntry.shouldShowXLevelIcon();
-
-            if (level != mLevel || showX != mShowX
-                    || sIsWifiStandardDisplaySupported && standard != mWifiStandard) {
-                mLevel = level;
-                mWifiStandard = standard;
-                mShowX = showX;
+                mLevel = mWifiEntry.getLevel();
+                mWifiStandard = mWifiEntry.getWifiStandard();
+                mShowX = mWifiEntry.shouldShowXLevelIcon();
                 updateIcon(mShowX, mLevel, sIsWifiStandardDisplaySupported ? mWifiStandard : 0);
                 notifyChanged();
-            }
         }
 
         String summary = mWifiEntry.getSummary(false /* concise */);
