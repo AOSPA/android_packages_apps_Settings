@@ -31,7 +31,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.os.UserManager;
-import android.provider.DeviceConfig;
 import android.sysprop.BluetoothProperties;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
@@ -55,7 +54,6 @@ import com.android.settings.R;
 import com.android.settings.bluetooth.ui.model.FragmentTypeModel;
 import com.android.settings.bluetooth.ui.view.DeviceDetailsFragmentFormatter;
 import com.android.settings.connecteddevice.stylus.StylusDevicesController;
-import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.flags.Flags;
@@ -258,17 +256,13 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
 
         final BluetoothFeatureProvider featureProvider =
                 FeatureFactory.getFeatureFactory().getBluetoothFeatureProvider();
-        final boolean sliceEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_SLICE_SETTINGS_ENABLED, true);
 
         getController(
                 BlockingPrefWithSliceController.class,
                 controller ->
                         controller.setSliceUri(
-                                sliceEnabled
-                                        ? featureProvider.getBluetoothDeviceSettingsUri(
-                                                mCachedDevice.getDevice())
-                                        : null));
+                                featureProvider.getBluetoothDeviceSettingsUri(
+                                        mCachedDevice.getDevice())));
 
         mManager.getEventManager().registerCallback(mBluetoothCallback);
         mBluetoothAdapter.addOnMetadataChangedListener(
@@ -297,8 +291,6 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     private void updateExtraControlUri(int viewWidth) {
         BluetoothFeatureProvider featureProvider =
                 FeatureFactory.getFeatureFactory().getBluetoothFeatureProvider();
-        boolean sliceEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_SLICE_SETTINGS_ENABLED, true);
         Uri controlUri = null;
         String uri = featureProvider.getBluetoothDeviceControlUri(mCachedDevice.getDevice());
         if (!TextUtils.isEmpty(uri)) {
@@ -311,12 +303,13 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         mExtraControlUriLoaded |= controlUri != null;
 
         Uri finalControlUri = controlUri;
-        getController(SlicePreferenceController.class, controller -> {
-            controller.setSliceUri(sliceEnabled ? finalControlUri : null);
-            controller.onStart();
-            controller.displayPreference(getPreferenceScreen());
-        });
-
+        getController(
+                SlicePreferenceController.class,
+                controller -> {
+                    controller.setSliceUri(finalControlUri);
+                    controller.onStart();
+                    controller.displayPreference(getPreferenceScreen());
+                });
 
         // Temporarily fix the issue that the page will be automatically scrolled to a wrong
         // position when entering the page. This will make sure the bluetooth header is shown on top
