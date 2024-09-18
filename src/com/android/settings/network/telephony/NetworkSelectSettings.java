@@ -433,6 +433,7 @@ public class NetworkSelectSettings extends DashboardFragment implements
 
     @VisibleForTesting
     protected void scanResultHandler(NetworkScanRepository.NetworkScanResult results) {
+        int plmnCount = mPreferenceCategory.getPreferenceCount();
         if (isFinishingOrDestroyed()) {
             Log.d(TAG, "scanResultHandler: activity isFinishingOrDestroyed, directly return");
             return;
@@ -443,7 +444,11 @@ public class NetworkSelectSettings extends DashboardFragment implements
         updateAllPreferenceCategory();
         NetworkScanRepository.NetworkScanState state = results.getState();
         if (state == NetworkScanRepository.NetworkScanState.ERROR) {
-            addMessagePreference(R.string.network_query_error);
+            if (plmnCount > 0) {
+                addErrorMessagePreference(R.string.network_scan_error);
+            } else {
+                addMessagePreference(R.string.network_query_error);
+            }
         } else if (mCellInfoList.isEmpty()) {
             addMessagePreference(R.string.empty_networks_list);
         }
@@ -581,7 +586,6 @@ public class NetworkSelectSettings extends DashboardFragment implements
     }
 
     private void addErrorMessagePreference(int messageId) {
-        setProgressBarVisible(false);
         mErrorMsgPreference.setTitle(messageId);
         mErrorMsgCategory.addPreference(mErrorMsgPreference);
     }
