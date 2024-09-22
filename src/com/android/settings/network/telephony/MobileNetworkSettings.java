@@ -63,6 +63,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.Preference;
 
@@ -96,6 +97,9 @@ import com.qti.extphone.ExtTelephonyManager;
 import com.qti.extphone.ServiceCallback;
 
 import java.lang.Runnable;
+
+import kotlin.Unit;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -113,6 +117,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     static final String KEY_CLICKED_PREF = "key_clicked_pref";
 
     private static final String KEY_DATA_PREF = "data_preference";
+    private static final String KEY_ROAMING_PREF = "button_roaming_key";
     private static final String KEY_CALLS_PREF = "calls_preference";
     private static final String KEY_SMS_PREF = "sms_preference";
     private static final String KEY_MOBILE_DATA_PREF = "mobile_data_enable";
@@ -426,6 +431,8 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 new DataUsageSummaryPreferenceController(context, mSubId),
                 new DataDefaultSubscriptionController(context, KEY_DATA_PREF,
                         getSettingsLifecycle(), this),
+                new RoamingPreferenceController(context, KEY_ROAMING_PREF, getSettingsLifecycle(),
+                        this, mSubId),
                 new CallsDefaultSubscriptionController(context, KEY_CALLS_PREF,
                         getSettingsLifecycle(), this),
                 new SmsDefaultSubscriptionController(context, KEY_SMS_PREF, getSettingsLifecycle(),
@@ -512,10 +519,11 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                             null /* WifiPickerTrackerCallback */));
         }
 
-        final RoamingPreferenceControllerAOSP roamingPreferenceController =
-                use(RoamingPreferenceControllerAOSP.class);
+        final RoamingPreferenceController roamingPreferenceController =
+                use(RoamingPreferenceController.class);
         if (roamingPreferenceController != null) {
-            roamingPreferenceController.init(getParentFragmentManager(), mSubId);
+            roamingPreferenceController.init(getFragmentManager(), mSubId,
+                    mMobileNetworkInfoEntity);
         }
         final SatelliteSettingPreferenceController satelliteSettingPreferenceController = use(
                 SatelliteSettingPreferenceController.class);
@@ -624,6 +632,16 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         collectAirplaneModeAndFinishIfOn(this);
+
+        LifecycleOwner viewLifecycleOwner = getViewLifecycleOwner();
+        new SubscriptionRepository(requireContext())
+                .collectSubscriptionVisible(mSubId, viewLifecycleOwner, (isVisible) -> {
+                    if (!isVisible) {
+                        Log.d(LOG_TAG, "Due to subscription not visible, closes page");
+                        finishFragment();
+                    }
+                    return Unit.INSTANCE;
+                });
     }
 
     @Override
@@ -820,11 +838,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 mSubscriptionInfoEntity = entity;
                 Log.d(LOG_TAG, "Set subInfo to default subInfo.");
             }
-        }
-        if (mSubscriptionInfoEntity == null && getActivity() != null) {
-            // If the current subId is not existed, finish it.
-            finishFragment();
-            return;
         }
         onSubscriptionDetailChanged();
     }

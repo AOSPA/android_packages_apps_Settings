@@ -36,8 +36,8 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.network.telephony.euicc.EuiccRepository;
 import com.android.settings.R;
-import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
@@ -89,7 +89,7 @@ public class MobileNetworkListController extends AbstractPreferenceController im
         super.displayPreference(screen);
         mPreferenceScreen = screen;
         mPreferenceScreen.findPreference(KEY_ADD_MORE).setVisible(
-                MobileNetworkUtils.showEuiccSettings(mContext));
+                new EuiccRepository(mContext).showEuiccSettings());
         update();
     }
 
