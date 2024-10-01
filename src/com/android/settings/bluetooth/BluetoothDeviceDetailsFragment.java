@@ -453,12 +453,16 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        List<String> invisibleProfiles = List.of();
         if (Flags.enableBluetoothDeviceDetailsPolish()) {
             mFormatter =
                     FeatureFactory.getFeatureFactory()
                             .getBluetoothFeatureProvider()
                             .getDeviceDetailsFragmentFormatter(
                                     requireContext(), this, mBluetoothAdapter, mCachedDevice);
+            invisibleProfiles =
+                    mFormatter.getInvisibleBluetoothProfiles(
+                            FragmentTypeModel.DeviceDetailsMainFragment.INSTANCE);
         }
         ArrayList<AbstractPreferenceController> controllers = new ArrayList<>();
           if (mCachedDevice == null) return controllers;
@@ -479,7 +483,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
             controllers.add(new BluetoothDetailsSpatialAudioController(context, this, mCachedDevice,
                     lifecycle));
             controllers.add(new BluetoothDetailsProfilesController(context, this, mManager,
-                    mCachedDevice, lifecycle));
+                    mCachedDevice, lifecycle, invisibleProfiles));
             controllers.add(new BluetoothDetailsMacAddressController(context, this, mCachedDevice,
                     lifecycle));
             controllers.add(new StylusDevicesController(context, mInputDevice, mCachedDevice,
