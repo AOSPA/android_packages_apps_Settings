@@ -834,6 +834,10 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Når Bluetooth er slått på, kan enheten kommunisere med Bluetooth-enheter i nærheten.\n\nFor å gi deg en bedre enhetsopplevelse kan apper og tjenester søke etter enheter i nærheten når som helst – selv når Bluetooth er slått av. Dette kan for eksempel brukes for å forbedre posisjonsbaserte funksjoner og tjenester. Du kan endre dette i innstillingene for Bluetooth-skanning."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Når Bluetooth er slått på, kan enheten kommunisere med andre Bluetooth-enheter i nærheten. Funksjoner som Quick Share og Finn enheten min bruker Bluetooth.\n\nApper og tjenester kan fremdeles søke etter enheter i nærheten når som helst – selv når Bluetooth er av. Dette kan for eksempel brukes til å forbedre posisjonsbaserte funksjoner og tjenester. Du kan endre dette i innstillingene for Bluetooth-skanning."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Endre"</string>
+    <string name="bluetooth_key_missing_title" msgid="7799054163548353853">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> er ikke koblet til"</string>
+    <string name="bluetooth_key_missing_message" msgid="2388861106663695319">"Av sikkerhetsgrunner bør du glemme denne enheten og så koble den til på nytt"</string>
+    <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"Glem enheten"</string>
+    <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"Avbryt"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Enhetsdetaljer"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Tastaturinnstillinger"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Flere innstillinger"</string>
@@ -1273,13 +1277,21 @@
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"Blir slått på automatisk ved solnedgang"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"Blir slått på automatisk klokken <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_custom_bedtime" msgid="7759826673214624622">"Blir slått på automatisk ved sengetid"</string>
+    <!-- no translation found for dark_ui_summary_off_auto_mode_modes (2672694802103388896) -->
+    <skip />
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Blir aldri slått av automatisk"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Blir slått av automatisk ved soloppgang"</string>
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Blir slått av automatisk klokken <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"Slås av automatisk etter sengetid"</string>
+    <!-- no translation found for dark_ui_summary_on_auto_mode_modes (7769594183411785087) -->
+    <skip />
     <string name="dark_ui_text" msgid="4392646155331126666">"Mørkt tema bruker en svart bakgrunn for å få batteriet til å vare lenger på noen skjermer. Tidsplaner for mørkt tema blir ikke slått på før skjermen er slått av."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Mørkt tema følger tidsplanen din for sengetidsmodus"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Innstillinger for sengetidsmodus"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (1041117250408363391) -->
+    <skip />
+    <!-- no translation found for dark_ui_modes_footer_action (80671811848446248) -->
+    <skip />
     <string name="even_dimmer_display_title" msgid="6731255736830410149">"Enda mørkere"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"La enheten bli mørkere enn normalt"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Skjermsparer"</string>
@@ -1944,7 +1956,8 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Klikk nederst til høyre"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Klikk nede til høyre på styreflaten for flere alternativer"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Pekerhastighet"</string>
-    <string name="pointer_fill_style" msgid="8413840032931637595">"Markørfyllstil"</string>
+    <!-- no translation found for pointer_fill_style (8794616790175016092) -->
+    <skip />
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Endre markørfyllstilen til svart"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Endre markørfyllstilen til grønn"</string>
     <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"Endre markørfyllstilen til gul"</string>
@@ -1991,10 +2004,8 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"Tilbakestill"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Velg modifikatortast"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Velg en ny tast for <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
-    <!-- no translation found for keyboard_a11y_settings (2564659018555385728) -->
-    <skip />
-    <!-- no translation found for keyboard_a11y_settings_summary (1698531156574098722) -->
-    <skip />
+    <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Tilgjengelighet med fysisk tastatur"</string>
+    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Trege taster, filtertaster, musetaster"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"<xliff:g id="IME_LABEL">%s</xliff:g>-oppsett"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Standard"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Automatisk: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2063,6 +2074,12 @@
     <string name="general_category_title" msgid="6298579528716834157">"Generelt"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Skjerm"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Farge og bevegelse"</string>
+    <!-- no translation found for accessibility_pointer_and_touchpad_title (8719482393177273831) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_and_touchpad_summary (6089872217234956258) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_color_customization_title (3376392766113189508) -->
+    <skip />
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Fargekontrast"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Høyere kontrast gjør at tekst, knapper og ikoner blir enklere å se. Velg kontrasten som ser best ut for deg."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Noen apper støtter kanskje ikke alle innstillinger for farge og tekstkontrast"</string>
@@ -2206,11 +2223,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Avansert"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Tilgjengelighet-knappen er satt til <xliff:g id="SERVICE">%1$s</xliff:g>. For å bruke forstørrelse, trykk på og hold inne Tilgjengelighet-knappen, og velg deretter forstørrelse."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Tilgjengelighetsbevegelsen er satt til <xliff:g id="SERVICE">%1$s</xliff:g>. For å bruke forstørring, sveip opp med to fingre fra bunnen av skjermen og hold. Deretter velger du forstørring."</string>
-    <!-- no translation found for accessibility_global_gesture_preference_title (8866765674372344850) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_title" msgid="8866765674372344850">"Volumtastsnarvei"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Snarvei-innstillinger"</string>
-    <!-- no translation found for accessibility_shortcut_service_on_lock_screen_title (2301019277262462426) -->
-    <skip />
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"Volumtastsnarvei fra låseskjermen"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Tillater at funksjonssnarveien slås på fra låseskjermen. Hold inne begge volumtastene i noen sekunder."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Tilgjengelighet-knapp"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Tilgjengelighet-knapp og bevegelse"</string>
@@ -2230,6 +2245,8 @@
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Gjennomsiktighet når den ikke er i bruk"</string>
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"Gjennomsiktig"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"Ikke-gjennomsiktig"</string>
+    <!-- no translation found for accessibility_button_disabled_button_mode_summary (1978174613270619492) -->
+    <skip />
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Tekst med høy kontrast"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Endre tekstfarge til svart eller hvit. Dette maksimerer kontrasten mot bakgrunnen."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Maksimer tekstkontrasten"</string>
@@ -3351,8 +3368,7 @@
     <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"Av"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ingen}=1{1 tidsplan er angitt}other{# tidsplaner er angitt}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Ikke forstyrr"</string>
-    <!-- no translation found for zen_modes_list_title (4796033710444068729) -->
-    <skip />
+    <string name="zen_modes_list_title" msgid="4796033710444068729">"Moduser"</string>
     <string name="zen_modes_list_intro" msgid="1795379595115088972">"Reduser distraksjoner til et minimum, og ta kontroll på oppmerksomheten med moduser for søvn, jobb, kjøring og alt mulig annet."</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Lag din egen modus"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Bli bare varslet av viktige personer og apper"</string>
@@ -3650,11 +3666,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Den kan svare på meldinger og bruke knapper i varsler, blant annet slumre eller lukke varsler og svare på anrop."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Endre innstillinger"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Den kan slå Ikke forstyrr av eller på samt endre tilknyttede innstillinger."</string>
-    <!-- no translation found for nls_feature_modes_settings_summary (70022458305195595) -->
-    <skip />
+    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"Den kan administrere og aktivere moduser samt endre relaterte innstillinger."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Hvis du slår av varseltilgang for <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, kan tilgang til Ikke forstyrr også bli slått av."</string>
-    <!-- no translation found for notification_listener_disable_modes_warning_summary (7528432011433844158) -->
-    <skip />
+    <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"Hvis du slår av varseltilgangen for <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, kan det også hende at modustilgangen blir slått av."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Slå av"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Avbryt"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"Sanntid"</string>
@@ -3675,7 +3689,7 @@
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Flere innstillinger er tilgjengelige i denne appen"</string>
     <string name="notification_polite_title" msgid="6121016426991791557">"Varseldemping"</string>
     <string name="notification_polite_main_control_title" msgid="5812529809151927149">"Bruk varseldemping"</string>
-    <string name="notification_polite_description" msgid="5497748284893832854">"Når du får mange varsler på kort tid, reduserer enheten volumet og minimerer varsler i opptil to minutter. Anrop, alarmer og prioriterte samtaler berøres ikke. \n\nDu kan se varsler du får mens dempingen er aktiv, ved å dra ned fra toppen av skjermen."</string>
+    <string name="notification_polite_description" msgid="5497748284893832854">"Når du får mange varsler på kort tid, reduserer enheten volumet og minimerer varsler i opptil 2 minutter. Anrop, alarmer og prioriterte samtaler berøres ikke. \n\nDu kan se varsler du får mens dempingen er aktiv, ved å dra ned fra toppen av skjermen."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Bruk for jobbprofiler"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Bruk for apper i jobbprofilen"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Hjelpetjenester for VR"</string>
@@ -3715,12 +3729,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"«Ikke forstyrr»-tilgang"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Kan bruke «Ikke forstyrr»"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Ingen installerte apper har bedt om «Ikke forstyrr»-tilgang"</string>
-    <!-- no translation found for manage_zen_modes_access_title (2520680004915648824) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_detail_switch (4060429747631111299) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_empty_text (8750927923904377110) -->
-    <skip />
+    <string name="manage_zen_modes_access_title" msgid="2520680004915648824">"Modustilgang"</string>
+    <string name="zen_modes_access_detail_switch" msgid="4060429747631111299">"Gi modustilgang"</string>
+    <string name="zen_modes_access_empty_text" msgid="8750927923904377110">"Ingen installerte apper har bedt om modustilgang"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"Du har ikke tillatt varsler fra denne appen"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"I tråd med det du har valgt, blokkerer Android denne varselkategorien fra å vises på denne enheten"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"I tråd med det du har valgt, blokkerer Android denne varselgruppen fra å vises på denne enheten"</string>
@@ -4111,12 +4122,9 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Må være slått på fordi varseltilgang er på"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Vil du trekke tilbake tilgangen til Ikke forstyrr for <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Alle Ikke forstyrr-regler opprettet av denne appen blir fjernet."</string>
-    <!-- no translation found for zen_modes_access_warning_dialog_title (8372164559156809659) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_warning_dialog_summary (2432178679607798200) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (6288548508466545492) -->
-    <skip />
+    <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"Vil du gi <xliff:g id="APP">%1$s</xliff:g> modustilgang?"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"Appen får muligheten til å slå Ikke forstyrr av og på, administrere og aktivere moduser og endre relaterte innstillinger."</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"Vil du oppheve tilgangen til Moduser for <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Alle modusene som er opprettet av denne appen, blir fjernet."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Ikke optimaliser"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimaliser"</string>
@@ -5298,8 +5306,10 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"På"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Av"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"På"</string>
-    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"Lyd %1$d %% venstre, %2$d %% høyre"</string>
-    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"Lyd %1$d %% høyre, %2$d %% venstre"</string>
+    <!-- no translation found for audio_seek_bar_state_left_first (1641359989891833888) -->
+    <skip />
+    <!-- no translation found for audio_seek_bar_state_right_first (6027686565598201061) -->
+    <skip />
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Enhetsnavnet ditt er synlig for apper du har installert. Det kan også ses av andre personer når du kobler til Bluetooth-enheter, kobler til et wifi-nettverk eller konfigurerer en wifi-sone."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Grammatisk kjønn"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Velg grammatisk kjønn"</string>
@@ -5368,8 +5378,7 @@
     <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"Lyddelingen er stoppet"</string>
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Koble til en kompatibel enhet"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Før du kan begynne å dele lyd, må du koble hodetelefoner for LE-lyd til telefonen"</string>
-    <!-- no translation found for audio_sharing_switch_active_button_label (3065600513067122124) -->
-    <skip />
+    <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"Bytt til <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Koble til en LE-lydstrøm"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Lydstrømmer i nærheten"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Lydstrømmer"</string>
@@ -5414,7 +5423,6 @@
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Skann en QR-kode for en lydstrøm for å lytte med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Kan ikke redigere passordet under deling. For å bytte passord, slå først av lyddelingen."</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR-kodeskanner"</string>
-    <!-- no translation found for audio_streams_qr_code_help_with_link (5542328067190486479) -->
-    <skip />
+    <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Trenger du hjelp?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Søk i innstillingene"</string>
 </resources>

@@ -834,6 +834,10 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Apabila Bluetooth dihidupkan, peranti anda dapat berkomunikasi dengan peranti Bluetooth lain yang berada berdekatan.\n\nUntuk meningkatkan pengalaman peranti, apl dan perkhidmatan masih dapat melakukan pengimbasan untuk mengesan peranti berdekatan pada bila-bila masa, meskipun apabila Bluetooth dimatikan. Tetapan ini boleh digunakan, contohnya, untuk meningkatkan ciri dan perkhidmatan berasaskan lokasi. Anda boleh menukar tetapan ini dalam tetapan pengimbasan Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Apabila Bluetooth dihidupkan, peranti anda boleh berkomunikasi dengan peranti Bluetooth lain yang berdekatan. Ciri seperti Quick Share dan Find My Device menggunakan Bluetooth.\n\nApl dan perkhidmatan masih boleh mengimbas peranti berdekatan pada bila-bila masa walaupun semasa Bluetooth dimatikan. Ciri ini boleh digunakan, sebagai contoh, untuk meningkatkan ciri dan perkhidmatan berasaskan lokasi. Anda boleh menukar ciri ini dalam tetapan pengimbasan Bluetooth."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Tukar"</string>
+    <string name="bluetooth_key_missing_title" msgid="7799054163548353853">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> tidak disambungkan"</string>
+    <string name="bluetooth_key_missing_message" msgid="2388861106663695319">"Untuk keselamatan anda, lupakan peranti ini dan buat penggandingan sekali lagi"</string>
+    <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"Lupakan peranti"</string>
+    <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"Batal"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Butiran peranti"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Tetapan papan kekunci"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Lagi tetapan"</string>
@@ -1273,13 +1277,21 @@
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"Akan dihidupkan secara automatik pada waktu matahari terbenam"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"Akan hidup secara automatik pada <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_custom_bedtime" msgid="7759826673214624622">"Akan dihidupkan secara automatik pada waktu tidur"</string>
+    <!-- no translation found for dark_ui_summary_off_auto_mode_modes (2672694802103388896) -->
+    <skip />
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Tidak akan dimatikan secara automatik"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Akan dimatikan secara automatik pada waktu matahari terbit"</string>
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Akan mati secara automatik pada <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"Akan dimatikan secara automatik selepas waktu tidur"</string>
+    <!-- no translation found for dark_ui_summary_on_auto_mode_modes (7769594183411785087) -->
+    <skip />
     <string name="dark_ui_text" msgid="4392646155331126666">"Tema hitam menggunakan latar belakang hitam untuk memastikan bateri tahan lebih lama pada sesetengah skrin. Jadual tema gelap menunggu untuk dihidupkan hingga skrin anda dimatikan."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Tema gelap kini mengikut jadual mod Waktu Tidur anda"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Tetapan mod waktu tidur"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (1041117250408363391) -->
+    <skip />
+    <!-- no translation found for dark_ui_modes_footer_action (80671811848446248) -->
+    <skip />
     <string name="even_dimmer_display_title" msgid="6731255736830410149">"Lebih malap"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Benarkan peranti menjadi lebih malap daripada biasa"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Tamat masa skrin"</string>
@@ -1944,7 +1956,8 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Klik bahagian bawah sebelah kanan"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Klik penjuru bawah sebelah kanan pad sentuh untuk lagi pilihan"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Kelajuan penuding"</string>
-    <string name="pointer_fill_style" msgid="8413840032931637595">"Gaya isian penunjuk"</string>
+    <!-- no translation found for pointer_fill_style (8794616790175016092) -->
+    <skip />
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Tukar gaya isian penunjuk kepada warna hitam"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Tukar gaya isian penunjuk kepada warna hijau"</string>
     <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"Tukar gaya isian penunjuk kepada warna kuning"</string>
@@ -1991,10 +2004,8 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"Tetapkan semula"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Pilih kunci pengubah suai"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Pilih kunci baharu untuk <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
-    <!-- no translation found for keyboard_a11y_settings (2564659018555385728) -->
-    <skip />
-    <!-- no translation found for keyboard_a11y_settings_summary (1698531156574098722) -->
-    <skip />
+    <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Kebolehaksesan papan kekunci fizikal"</string>
+    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Kekunci lekit, Kekunci lantun, Kekunci tetikus"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"Reka letak <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Lalai"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Automatik: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2063,6 +2074,12 @@
     <string name="general_category_title" msgid="6298579528716834157">"Umum"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Paparan"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Warna dan gerakan"</string>
+    <!-- no translation found for accessibility_pointer_and_touchpad_title (8719482393177273831) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_and_touchpad_summary (6089872217234956258) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_color_customization_title (3376392766113189508) -->
+    <skip />
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Kontras warna"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Kontras yang lebih tinggi menjadikan teks, butang dan ikon lebih menonjol. Pilih kontras yang paling sesuai untuk anda."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Sesetengah apl mungkin menyokong hanya sebahagian tetapan kontras warna dan teks"</string>
@@ -2206,11 +2223,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Terperinci"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Butang Kebolehaksesan ditetapkan kepada <xliff:g id="SERVICE">%1$s</xliff:g>. Untuk menggunakan pembesaran, sentuh &amp; tahan butang Kebolehaksesan, kemudian pilih pembesaran."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Gerak isyarat kebolehaksesan ditetapkan pada <xliff:g id="SERVICE">%1$s</xliff:g>. Untuk menggunakan pembesaran, leret ke atas menggunakan dua jari dari bahagian bawah skrin dan tahan. Kemudian, pilih pembesaran."</string>
-    <!-- no translation found for accessibility_global_gesture_preference_title (8866765674372344850) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_title" msgid="8866765674372344850">"Pintasan kekunci kelantangan"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Tetapan pintasan"</string>
-    <!-- no translation found for accessibility_shortcut_service_on_lock_screen_title (2301019277262462426) -->
-    <skip />
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"Pintasan kekunci kelantangan daripada skrin kunci"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Benarkan pintasan ciri dihidupkan daripada skrin kunci. Tekan kedua-dua kekunci kelantangan selama beberapa saat."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Butang kebolehaksesan"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Butang kebolehaksesan &amp; gerak isyarat"</string>
@@ -2230,6 +2245,8 @@
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Kelutsinaran apabila tidak digunakan"</string>
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"Lut sinar"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"Bukan lut sinar"</string>
+    <!-- no translation found for accessibility_button_disabled_button_mode_summary (1978174613270619492) -->
+    <skip />
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Teks kontras tinggi"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Tukar warna teks kepada hitam atau putih. Memaksimumkan kontras dengan latar belakang."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Maksimumkan kontras teks"</string>
@@ -4107,7 +4124,7 @@
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Semua peraturan Jangan Ganggu yang dibuat oleh apl ini akan dialih keluar."</string>
     <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"Benarkan akses kepada Mod untuk <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"Apl ini akan dapat menghidupkan/mematikan Jangan Ganggu, mengurus dan mengaktifkan Mod dan membuat perubahan pada tetapan yang berkaitan."</string>
-    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="6288548508466545492">"Batalkan akses Mod untuk <xliff:g id="APP">%1$s</xliff:g>?"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"Batalkan akses kepada Mod untuk <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Semua mod yang dibuat oleh apl ini akan dialih keluar."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Jangan optimumkan"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimumkan"</string>
@@ -5289,8 +5306,10 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"Hidup"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Mati"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Hidup"</string>
-    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"Audio %1$d%% kiri, %2$d%% kanan"</string>
-    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"Audio %1$d%% kanan, %2$d%% kiri"</string>
+    <!-- no translation found for audio_seek_bar_state_left_first (1641359989891833888) -->
+    <skip />
+    <!-- no translation found for audio_seek_bar_state_right_first (6027686565598201061) -->
+    <skip />
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Nama peranti anda boleh dilihat oleh apl yang anda pasang. Nama peranti anda juga boleh dilihat oleh orang lain apabila anda menyambung kepada peranti Bluetooth, menyambung kepada rangkaian Wi-Fi atau menyediakan tempat liputan Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Jantina tatabahasa"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Pilih Jantina tatabahasa"</string>
@@ -5359,8 +5378,7 @@
     <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"Perkongsian audio dihentikan"</string>
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Sambungkan peranti yang serasi"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Untuk mula berkongsi audio, sambungkan fon kepala LE Audio pada telefon anda dahulu"</string>
-    <!-- no translation found for audio_sharing_switch_active_button_label (3065600513067122124) -->
-    <skip />
+    <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"Beralih kepada <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Sambung kepada strim LE Audio"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Strim audio berdekatan"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Strim audio"</string>
@@ -5405,7 +5423,6 @@
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Imbas kod QR strim audio untuk mendengar dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Tidak dapat mengedit kata laluan semasa perkongsian. Untuk mengubah kata laluan, matikan perkongsian audio dahulu."</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Pengimbas kod QR"</string>
-    <!-- no translation found for audio_streams_qr_code_help_with_link (5542328067190486479) -->
-    <skip />
+    <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Perlukan bantuan?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Tetapan Carian"</string>
 </resources>

@@ -953,6 +953,30 @@
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary">Face, fingerprints, and <xliff:g id="watch" example="Dani's Watch">%s</xliff:g> added</string>
     <!-- Description for mandatory biometrics prompt-->
     <string name="mandatory_biometrics_prompt_description">Identity Check is on and requires a biometric</string>
+    <!-- Text for link to identity check settings [CHAR LIMIT=100] -->
+    <string name="go_to_settings">Go to Settings</string>
+    <!-- Dialog title when identity check auth is requested but biometrics is in lockout state [CHAR LIMIT=NONE] -->
+    <string name="identity_check_lockout_error_title">Identity Check is on and can’t verify it’s you</string>
+    <!-- Dialog message when identity check auth is requested but biometrics is in lockout state. [CHAR LIMIT=NONE] -->
+    <string name="identity_check_lockout_error_description_1">Biometrics failed too many times. Lock and unlock your device to retry.</string>
+    <!-- Dialog message when identity check auth is requested but biometrics is in lockout state and there is a two factor authentication. [CHAR LIMIT=NONE] -->
+    <string name="identity_check_lockout_error_two_factor_auth_description_1">Biometrics failed too many times. Try again.</string>
+    <!-- Dialog message when identity check auth is requested but biometrics is in lockout state. "Go to Settings" launches theft protection settings, in case user wishes to disable the feature. [CHAR LIMIT=NONE] -->
+    <string name="identity_check_lockout_error_description_2">You can manage Identity Check in theft protection settings. Go to Settings</string>
+    <!-- Dialog title when identity check auth is requested but biometric hardware has an error. [CHAR LIMIT=100] -->
+    <string name="identity_check_general_error_title">Biometric required to continue</string>
+    <!-- Dialog message when identity check auth is requested but biometric hardware has an error. [CHAR LIMIT=NONE] -->
+    <string name="identity_check_general_error_description_1">Identity Check is on and requires a biometric, but your face or fingerprint sensor is unavailable\n<ul><li>Check that your camera is on and try again</li>\n<li>You can turn off Identity Check using your Google Account</li></ul></string>
+    <!-- Biometric error dialog button text for user to dismiss the dialog. [CHAR LIMIT=20] -->
+    <string name="identity_check_biometric_error_cancel">Cancel</string>
+    <!-- Biometric error dialog button text for user to acknowledge the message. [CHAR LIMIT=20] -->
+    <string name="identity_check_biometric_error_ok">OK</string>
+    <!-- Biometric error dialog button text to launch identity check settings. [CHAR LIMIT=80] -->
+    <string name="go_to_identity_check">Go to identity check</string>
+    <!-- Biometric error dialog button text to lock screen and recover biometric lockout state. [CHAR LIMIT=60] -->
+    <string name="identity_check_lockout_error_lock_screen">Lock screen</string>
+    <!-- Action for opening identity check settings page [CHAR LIMIT=NONE] [DO NOT TRANSLATE] -->
+    <string name="identity_check_settings_action"></string>
     <!-- RemoteAuth unlock enrollment and settings --><skip />
     <!-- Title shown for menu item that launches watch unlock settings. [CHAR LIMIT=40] -->
     <string name ="security_settings_remoteauth_preference_title">Remote Authenticator Unlock</string>
@@ -1754,9 +1778,12 @@
     <string name="lockpassword_password_recently_used">Device admin doesn\'t allow using a recent
         password</string>
 
-    <!-- [CHAR_LIMIT=NONE] Error shown when the user tries to set an ascending or descending sequence of digits -->
+    <!-- [CHAR_LIMIT=NONE] Error shown when the user tries to set an ascending or descending sequence of digits as PIN -->
     <string name="lockpassword_pin_no_sequential_digits">Ascending, descending, or repeated sequence
         of digits isn\'t allowed</string>
+
+    <!-- Error shown when the user tries to set an ascending or descending sequence of alphanumeric characters in the password [CHAR_LIMIT=NONE] -->
+    <string name="lockpassword_password_no_sequential_characters">Ascending, descending, or repeated sequence of characters isn\'t allowed</string>
 
     <!-- Label for Confirm button when entering PIN / password the second time. [CHAR LIMIT=30] -->
     <string name="lockpassword_confirm_label">Confirm</string>
@@ -2999,6 +3026,8 @@
     <string name="dark_ui_summary_off_auto_mode_custom">Will turn on automatically at <xliff:g name="time" example="6 AM">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of Dark UI when off and will turn on automatically at bedtime. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_off_auto_mode_custom_bedtime">Will turn on automatically at bedtime</string>
+    <!-- Display settings screen, summary of Dark UI when off and controlled by Modes. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_summary_off_auto_mode_modes">Will turn on when <xliff:g name="modeName" example="Bedtime">%1$s</xliff:g> starts</string>
     <!-- Display settings screen, summary of Dark UI when on and will *never* turn off automatically. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_on_auto_mode_never">Will never turn off automatically</string>
     <!-- Display settings screen, summary of Dark UI when on and will turn off automatically at sunrise. [CHAR LIMIT=NONE] -->
@@ -3007,12 +3036,26 @@
     <string name="dark_ui_summary_on_auto_mode_custom">Will turn off automatically at <xliff:g name="time" example="10 PM">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of Dark UI when on and will turn off automatically after bedtime. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime">Will turn off automatically after bedtime</string>
+    <!-- Display settings screen, summary of Dark UI when on and controlled by Modes. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_summary_on_auto_mode_modes">Will turn off when <xliff:g name="modeName" example="Bedtime">%1$s</xliff:g> ends</string>
     <!-- Dark theme screen, description of Dark theme feature. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_text">Dark theme uses a black background to help keep battery alive longer on some screens. Dark theme schedules wait to turn on until your screen is off.</string>
     <!-- Dark UI screen footer summary text shown when the when Dark theme turns on/off automatically according to a user bedtime schedule. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_bedtime_footer_summary">Dark theme is currently following your Bedtime mode schedule</string>
     <!-- Dark UI screen footer action text shown when the when Dark theme turns on/off automatically according to a user bedtime schedule. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_bedtime_footer_action">Bedtime mode settings</string>
+    <!-- Dark UI screen footer summary text shown to indicate Modes may turn on/off Dark theme automatically according to their triggers. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_modes_footer_summary">
+        {count, plural, offset:2
+            =0    {Modes can also activate dark theme}
+            =1    {{mode_1} also activates dark theme}
+            =2    {{mode_1} and {mode_2} also activate dark theme}
+            =3    {{mode_1}, {mode_2}, and {mode_3} also activate dark theme}
+            other {{mode_1}, {mode_2}, and # more also activate dark theme}
+        }
+    </string>
+    <!-- Dark UI screen footer action text linking to Modes settings. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_modes_footer_action">Modes settings</string>
     <!-- Even Dimmer setting title. Allows device to reduce brightness even further than standard range. [CHAR LIMIT=NONE] -->
     <string name="even_dimmer_display_title">Even dimmer</string>
     <!-- Even Dimmer setting summary. [CHAR LIMIT=NONE] -->
@@ -4605,20 +4648,22 @@
     <string name="trackpad_bottom_right_tap_summary">Click in the bottom right corner of the touchpad for more options</string>
     <!-- Title text for 'Pointer speed'. [CHAR LIMIT=35] -->
     <string name="trackpad_pointer_speed">Pointer speed</string>
-    <!-- Title text for mouse pointer fill style. [CHAR LIMIT=35] -->
-    <string name="pointer_fill_style">Pointer fill style</string>
+    <!-- Title text for mouse pointer color. [CHAR LIMIT=35] -->
+    <string name="pointer_fill_style">Pointer color</string>
     <!-- Content description for black pointer fill style. [CHAR LIMIT=60] -->
     <string name="pointer_fill_style_black_button">Change pointer fill style to black</string>
     <!-- Content description for green pointer fill style. [CHAR LIMIT=60] -->
     <string name="pointer_fill_style_green_button">Change pointer fill style to green</string>
-    <!-- Content description for yellow pointer fill style. [CHAR LIMIT=60] -->
-    <string name="pointer_fill_style_yellow_button">Change pointer fill style to yellow</string>
+    <!-- Content description for red pointer fill style. [CHAR LIMIT=60] -->
+    <string name="pointer_fill_style_red_button">Change pointer fill style to red</string>
     <!-- Content description for pink pointer fill style. [CHAR LIMIT=60] -->
     <string name="pointer_fill_style_pink_button">Change pointer fill style to pink</string>
     <!-- Content description for blue pointer fill style. [CHAR LIMIT=60] -->
     <string name="pointer_fill_style_blue_button">Change pointer fill style to blue</string>
-    <!-- Title text for mouse pointer stroke style. [CHAR LIMIT=35] -->
-    <string name="pointer_stroke_style">Pointer stroke style</string>
+    <!-- Content description for purple pointer fill style. [CHAR LIMIT=60] -->
+    <string name="pointer_fill_style_purple_button">Change pointer fill style to purple</string>
+    <!-- Title text for mouse pointer stroke color. [CHAR LIMIT=35] -->
+    <string name="pointer_stroke_style">Pointer stroke color</string>
     <!-- White value for pointer stroke style. [CHAR LIMIT=35] -->
     <string name="pointer_stroke_style_name_white">White</string>
     <!-- Black value pointer stroke style. [CHAR LIMIT=35] -->
@@ -4883,6 +4928,12 @@
     <string name="display_category_title">Display</string>
     <!-- Title for the accessibility color and motion page. [CHAR LIMIT=50] -->
     <string name="accessibility_color_and_motion_title">Color and motion</string>
+    <!-- Title for the accessibility pointer and touchpad page. [CHAR LIMIT=50] -->
+    <string name="accessibility_pointer_and_touchpad_title">Pointer &amp; touchpad accessibility</string>
+    <!-- Summary for the accessibility pointer and touchpad page. [CHAR LIMIT=50] -->
+    <string name="accessibility_pointer_and_touchpad_summary">Pointer color, pointer size &amp; more</string>
+    <!-- Title for the accessibility pointer color customization page. [CHAR LIMIT=50] -->
+    <string name="accessibility_pointer_color_customization_title">Pointer color customization</string>
     <!-- Title for the accessibility color contrast page. [CHAR LIMIT=50] -->
     <string name="accessibility_color_contrast_title">Color contrast</string>
     <!-- Intro for the accessibility color contrast page. [CHAR LIMIT=NONE] -->
@@ -5279,6 +5330,8 @@
     <string name="accessibility_button_low_label">Transparent</string>
     <!-- Label on the right side of transparency adjustment slider [CHAR LIMIT=30] -->
     <string name="accessibility_button_high_label">Non-transparent</string>
+    <!-- Summary for settings that are disabled in the current button mode [CHAR LIMIT=30] -->
+    <string name="accessibility_button_disabled_button_mode_summary">Unavailable while using navigation bar button mode.</string>
     <!-- Title for the accessibility preference to high contrast text. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_high_text_contrast_preference_title">High contrast text</string>
     <!-- Summary for the accessibility preference to high contrast text. [CHAR LIMIT=NONE] -->
@@ -7944,7 +7997,9 @@
     <string name="keywords_keyboard_vibration">keyboard, haptics, vibrate,</string>
 
     <!-- Summary for sound settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
-    <string name="sound_dashboard_summary">Volume, vibration, Do Not Disturb</string>
+    <string name="sound_dashboard_summary">Volume and vibration</string>
+    <!-- Summary for sound settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
+    <string name="sound_dashboard_summary_with_dnd">Volume, vibration, Do Not Disturb</string>
 
     <!-- Sound: Title for the option managing media volume. [CHAR LIMIT=30] -->
     <string name="media_volume_option_title">Media volume</string>
@@ -8079,10 +8134,10 @@
     <string name="spatial_audio_multi_toggle_off">Off</string>
 
     <!-- Bluetooth device details: spatial audio is on. [CHAR LIMIT=20]-->
-    <string name="spatial_audio_multi_toggle_on">Off</string>
+    <string name="spatial_audio_multi_toggle_on">Fixed</string>
 
     <!-- Bluetooth device details: head tracking is on. [CHAR LIMIT=20]-->
-    <string name="spatial_audio_multi_toggle_head_tracking_on">Off</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on">Head Tracking</string>
 
     <!-- Zen Modes: Summary for the Do not Disturb option that describes how many automatic rules (schedules) are enabled [CHAR LIMIT=NONE]-->
     <string name="zen_mode_settings_schedules_summary">
@@ -8298,8 +8353,7 @@
     <!-- Do not disturb: device effect option, not first in list [CHAR LIMIT=80] -->
     <string name="mode_dark_theme_title_secondary_list">enable dark theme</string>
     <!-- Do not disturb: device effect summary [CHAR LIMIT=NONE] -->
-    <string name="mode_dark_theme_summary">Switch the OS and apps to prefer light text on a dark
-        background, which may be easier on the eyes and confers significant battery savings on some devices</string>
+    <string name="mode_dark_theme_summary">Switch the device theme to use a dark background, which is easier on the eyes</string>
     <!-- [CHAR LIMIT=NONE] Zen mode settings: Summary for sound interruption settings -->
     <string name="mode_display_settings_summary">
         {count, plural, offset:2
@@ -12241,7 +12295,7 @@
     <!-- Summary for _satellite_setting_preference_layout. [CHAR LIMIT=NONE]-->
     <string name="satellite_setting_enabled_summary">Send and receive text messages by satellite. Included with your account.</string>
     <!-- Summary for _satellite_setting_preference_layout. [CHAR LIMIT=NONE]-->
-    <string name="satellite_setting_disabled_summary">Send and receive text messages by satellite. Non included with your account.</string>
+    <string name="satellite_setting_disabled_summary">Send and receive text messages by satellite. Not included with your account.</string>
     <!-- Search keywords for "_satellite_setting_preference_layout" [CHAR_LIMIT=NONE] -->
     <string name="keywords_satellite_setting">Satellite messaging</string>
     <!-- Category name "About satellite messaging" [CHAR_LIMIT=NONE] -->
@@ -13564,9 +13618,9 @@
     <!-- Summary of the Live Caption enabled state. -->
     <string name="live_caption_enabled">On</string>
     <!-- State description for the Audio Balance seek bar, with left reported before right. -->
-    <string name="audio_seek_bar_state_left_first">Audio %1$d%% left, %2$d%% right</string>
+    <string name="audio_seek_bar_state_left_first">Audio <xliff:g id="percent_left">%1$s</xliff:g> left, <xliff:g id="percent_right">%2$s</xliff:g> right</string>
     <!-- State description for the Audio Balance seek bar, with right reported before left. -->
-    <string name="audio_seek_bar_state_right_first">Audio %1$d%% right, %2$d%% left</string>
+    <string name="audio_seek_bar_state_right_first">Audio <xliff:g id="percent_right">%1$s</xliff:g> right, <xliff:g id="percent_left">%2$s</xliff:g> left</string>
 
     <!--  Warning text about the visibility of device name. [CHAR LIMIT=NONE] -->
     <string name="about_phone_device_name_warning">Your device name is visible to apps you installed. It may also be seen by other people when you connect to Bluetooth devices, connect to a Wi-Fi network or set up a Wi-Fi hotspot.</string>
@@ -13775,6 +13829,8 @@
     <string name="audio_streams_dialog_cannot_play">Can\u0027t play this audio stream on <xliff:g example="LE headset" id="device_name">%1$s</xliff:g>.</string>
     <!-- The preference summary when add source succeed [CHAR LIMIT=NONE] -->
     <string name="audio_streams_listening_now">Listening now</string>
+    <!-- The preference summary when source is present on sinks [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_present_now">Paused by host</string>
     <!-- Le audio streams service notification leave broadcast text [CHAR LIMIT=NONE] -->
     <string name="audio_streams_media_service_notification_leave_broadcast_text">Stop listening</string>
     <!-- Le audio streams no le device dialog title [CHAR LIMIT=NONE] -->

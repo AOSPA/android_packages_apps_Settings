@@ -834,6 +834,10 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Když je připojení Bluetooth zapnuté, zařízení může komunikovat s ostatními zařízeními Bluetooth v okolí.\n\nZa účelem vylepšení funkcí však můžou aplikace a služby vyhledávat zařízení v okolí kdykoliv, dokonce i tehdy, když je Bluetooth vypnuté. Je tak například možné vylepšit funkce a služby založené na poloze. Toto chování můžete změnit v nastavení vyhledávání Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Když je zapnuté připojení Bluetooth, zařízení může komunikovat s ostatními zařízeními Bluetooth v okolí. Bluetooth využívají například funkce jako Quick Share a Najdi moje zařízení.\n\nAplikace a služby mohou vyhledávat zařízení v okolí, i když je rozhraní Bluetooth vypnuté. Lze to využít například ke zlepšení funkcí a služeb založených na poloze. Toto chování můžete změnit v nastavení vyhledávání Bluetooth."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Změnit"</string>
+    <string name="bluetooth_key_missing_title" msgid="7799054163548353853">"Zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g> nepřipojeno"</string>
+    <string name="bluetooth_key_missing_message" msgid="2388861106663695319">"Z bezpečnostních důvodů tohle zařízení zapomeňte a pak znovu spárujte"</string>
+    <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"Zapomenout zařízení"</string>
+    <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"Zrušit"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Podrobnosti o zařízení"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Nastavení klávesnice"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Další nastavení"</string>
@@ -1273,13 +1277,21 @@
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"Zapne se automaticky za soumraku"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"Zapne se automaticky v <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_custom_bedtime" msgid="7759826673214624622">"Automaticky se zapne během nočního klidu"</string>
+    <!-- no translation found for dark_ui_summary_off_auto_mode_modes (2672694802103388896) -->
+    <skip />
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Nikdy se automaticky nevypne"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Vypne se automaticky za úsvitu"</string>
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Vypne se automaticky v <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"Po skončení režimu nočního klidu se automaticky vypne"</string>
+    <!-- no translation found for dark_ui_summary_on_auto_mode_modes (7769594183411785087) -->
+    <skip />
     <string name="dark_ui_text" msgid="4392646155331126666">"Tmavý motiv u některých obrazovek používá černé pozadí a prodlužuje tak výdrž baterie. Plány tmavého motivu čekají na zapnutí, dokud se obrazovka nevypne."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Tmavý motiv se aktuálně řídí plánem režimu nočního klidu"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Nastavení režimu nočního klidu"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (1041117250408363391) -->
+    <skip />
+    <!-- no translation found for dark_ui_modes_footer_action (80671811848446248) -->
+    <skip />
     <string name="even_dimmer_display_title" msgid="6731255736830410149">"Ještě tmavší"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Povolit větší ztmavení zařízení než obvykle"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Interval vypnutí obrazovky"</string>
@@ -1944,7 +1956,8 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Kliknutí pravým tlačítkem dole"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Kliknutím na pravý dolní roh touchpadu zobrazíte další možnosti"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Rychlost kurzoru"</string>
-    <string name="pointer_fill_style" msgid="8413840032931637595">"Styl vyplnění ukazatele"</string>
+    <!-- no translation found for pointer_fill_style (8794616790175016092) -->
+    <skip />
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Změnit vyplnění ukazatele na černé"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Změnit vyplnění ukazatele na zelené"</string>
     <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"Změnit vyplnění ukazatele na žluté"</string>
@@ -1991,10 +2004,8 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"Resetovat"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Vyberte modifikační klávesu"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Vyberte novou klávesu pro <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
-    <!-- no translation found for keyboard_a11y_settings (2564659018555385728) -->
-    <skip />
-    <!-- no translation found for keyboard_a11y_settings_summary (1698531156574098722) -->
-    <skip />
+    <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Přístupnost na fyzické klávesnici"</string>
+    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Funkce Jedním prstem, klávesy pro opuštění, klávesy pro myš"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"Rozvržení <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Výchozí"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Automatické: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2063,6 +2074,12 @@
     <string name="general_category_title" msgid="6298579528716834157">"Obecné"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Zobrazení"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Barvy a pohyb"</string>
+    <!-- no translation found for accessibility_pointer_and_touchpad_title (8719482393177273831) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_and_touchpad_summary (6089872217234956258) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_color_customization_title (3376392766113189508) -->
+    <skip />
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Barevný kontrast"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Text, tlačítka a ikony při vyšším kontrastu více vyniknou. Vyberte kontrast, který vám nejvíc vyhovuje."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Některé aplikace nemusí podporovat všechna nastavení kontrastu barev a textu."</string>
@@ -2206,11 +2223,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Rozšířená nastavení"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Tlačítko Přístupnost je nastaveno na službu <xliff:g id="SERVICE">%1$s</xliff:g>. Chcete-li použít zvětšení, klepněte na tlačítko Přístupnost, podržte jej a vyberte zvětšení."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Gesto usnadnění přístupu je nastaveno na funkci <xliff:g id="SERVICE">%1$s</xliff:g>. Chcete-li použít zvětšení, přejeďte dvěma prsty ze spodní části obrazovky nahoru a podržte obrazovku. Potom vyberte zvětšení."</string>
-    <!-- no translation found for accessibility_global_gesture_preference_title (8866765674372344850) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_title" msgid="8866765674372344850">"Zkratka tlačítek hlasitosti"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Nastavení zkratek"</string>
-    <!-- no translation found for accessibility_shortcut_service_on_lock_screen_title (2301019277262462426) -->
-    <skip />
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"Zkratka tlačítek hlasitosti z obrazovky uzamčení"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Můžete povolit, aby zkratka přístupnosti fungovala i na obrazovce uzamčení. Stačí, když na několik sekund podržíte obě tlačítka hlasitosti."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Tlačítko přístupnosti"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Tlačítko a gesto přístupnosti"</string>
@@ -2230,6 +2245,8 @@
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Míra průhlednosti při nepoužívání"</string>
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"Průhledné"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"Neprůhledné"</string>
+    <!-- no translation found for accessibility_button_disabled_button_mode_summary (1978174613270619492) -->
+    <skip />
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Text s vysokým kontrastem"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Změnit barvu textu na černou nebo bílou, čímž se maximalizuje kontrast vůči pozadí."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Maximalizovat kontrast textu"</string>
@@ -3351,8 +3368,7 @@
     <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"Vypnuto"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Žádný}=1{Nastaven 1 plán}few{Nastaveny # plány}many{Nastaveno # plánu}other{Nastaveno # plánů}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Nerušit"</string>
-    <!-- no translation found for zen_modes_list_title (4796033710444068729) -->
-    <skip />
+    <string name="zen_modes_list_title" msgid="4796033710444068729">"Režimy"</string>
     <string name="zen_modes_list_intro" msgid="1795379595115088972">"Omezte vyrušení a soustřeďte se na spánek, práci, řízení nebo cokoli jiného."</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Vytvoření vlastního režimu"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Přijímat pouze oznámení od důležitých lidí a z důležitých aplikací"</string>
@@ -3650,11 +3666,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Může odpovídat na zprávy a místo tlačítek odkládat či odmítat oznámení nebo přijímat hovory."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Měnit nastavení"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Může zapínat nebo vypínat režim Nerušit a měnit související nastavení."</string>
-    <!-- no translation found for nls_feature_modes_settings_summary (70022458305195595) -->
-    <skip />
+    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"Může spravovat a aktivovat režimy a měnit související nastavení."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Pokud aplikaci <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> vypnete přístup k oznámením, můžete tím vypnout i přístup k režimu Nerušit."</string>
-    <!-- no translation found for notification_listener_disable_modes_warning_summary (7528432011433844158) -->
-    <skip />
+    <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"Pokud aplikaci <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> vypnete přístup k oznámením, můžete tím vypnout i přístup k režimům."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Vypnout"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Zrušit"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"V reálném čase"</string>
@@ -3715,12 +3729,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Přístup při nastavení Nerušit"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Povolit režim Nerušit"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"O přístup při nastavení Nerušit nepožádaly žádné nainstalované aplikace"</string>
-    <!-- no translation found for manage_zen_modes_access_title (2520680004915648824) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_detail_switch (4060429747631111299) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_empty_text (8750927923904377110) -->
-    <skip />
+    <string name="manage_zen_modes_access_title" msgid="2520680004915648824">"Přístup k režimům"</string>
+    <string name="zen_modes_access_detail_switch" msgid="4060429747631111299">"Povolit přístup k režimům"</string>
+    <string name="zen_modes_access_empty_text" msgid="8750927923904377110">"Žádné nainstalované aplikace o přístup k režimům nepožádaly"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"Oznámení z této aplikace jste nepovolili"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Tato kategorie oznámení je v zařízení na vaši žádost blokována systémem Android."</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Tato skupina oznámení je v zařízení na vaši žádost blokována systémem Android"</string>
@@ -4111,12 +4122,9 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Tato možnost musí zůstat zapnutá, protože je zapnut přístup k oznámením"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Odebrat aplikaci <xliff:g id="APP">%1$s</xliff:g> přístup k režimu Nerušit?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Všechna pravidla pro režim Nerušit vytvořená touto aplikací budou odstraněna."</string>
-    <!-- no translation found for zen_modes_access_warning_dialog_title (8372164559156809659) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_warning_dialog_summary (2432178679607798200) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (6288548508466545492) -->
-    <skip />
+    <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"Povolit aplikaci <xliff:g id="APP">%1$s</xliff:g> přístup k režimům?"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"Aplikace bude moct zapnout/vypnout režim Nerušit, spravovat a aktivovat režimy a provádět změny souvisejících nastavení."</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"Odebrat aplikaci <xliff:g id="APP">%1$s</xliff:g> přístup k režimům?"</string>
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Všechny režimy vytvořené touto aplikací budou odstraněny."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Neoptimalizovat"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimalizovat"</string>
@@ -5300,8 +5308,10 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"Zapnuto"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Vypnuto"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Zapnuto"</string>
-    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"Zvuk %1$d %% vlevo, %2$d %% vpravo"</string>
-    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"Zvuk %1$d %% vpravo, %2$d %% vlevo"</string>
+    <!-- no translation found for audio_seek_bar_state_left_first (1641359989891833888) -->
+    <skip />
+    <!-- no translation found for audio_seek_bar_state_right_first (6027686565598201061) -->
+    <skip />
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Název vašeho zařízení je viditelný pro nainstalované aplikace. Mohou ho vidět také ostatní uživatelé, když se připojíte k zařízení Bluetooth nebo síti Wi-Fi, případně když vytvoříte hotspot Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Gramatický rod"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Vyberte mluvnický rod"</string>
@@ -5370,8 +5380,7 @@
     <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"Sdílení zvuku bylo zastaveno"</string>
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Připojte kompatibilní zařízení"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Pokud chcete zahájit sdílení zvuku, nejdřív k telefonu připojte sluchátka LE Audio"</string>
-    <!-- no translation found for audio_sharing_switch_active_button_label (3065600513067122124) -->
-    <skip />
+    <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"Přepnout na <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Připojení ke zvukovému streamu LE Audio"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Okolní zvukové streamy"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Zvukové streamy"</string>
@@ -5416,7 +5425,6 @@
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Naskenujte QR kód zvukového streamu a poslouchejte na zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Heslo nelze upravit během sdílení. Pokud chcete změnit heslo, nejdříve vypněte sdílení zvuku."</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Čtečka QR kódů"</string>
-    <!-- no translation found for audio_streams_qr_code_help_with_link (5542328067190486479) -->
-    <skip />
+    <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Potřebujete poradit?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Vyhledávat v nastavení"</string>
 </resources>

@@ -834,6 +834,10 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Bluetooth açıkken cihazınız yakındaki diğer Bluetooth cihazlarla iletişim kurabilir.\n\nUygulamalar ve hizmetler, cihaz deneyimini iyileştirmek için Bluetooth kapalıyken bile yakında cihaz olup olmadığını belirlemek amacıyla herhangi bir zamanda tarama yapabilir. Bu özellik, örneğin, konuma dayalı özellikleri ve hizmetleri iyileştirmek için kullanılabilir. Bunu Bluetooth tarama ayarlarından değiştirebilirsiniz."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Bluetooth açık olduğunda, cihazınız yakındaki Bluetooth cihazlarla iletişim kurabilir. Quick Share ve Cihazımı Bul gibi özellikler Bluetooth\'u kullanır.\n\nUygulamalar ve hizmetler, Bluetooth kapalıyken bile yakında cihaz olup olmadığını belirlemek için her zaman tarama yapabilir. Bu özellik, örneğin, konuma dayalı özellikleri ve hizmetleri iyileştirmek için kullanılabilir. Bunu istediğiniz zaman Bluetooth tarama ayarlarından değiştirebilirsiniz."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Değiştir"</string>
+    <string name="bluetooth_key_missing_title" msgid="7799054163548353853">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> bağlı değil"</string>
+    <string name="bluetooth_key_missing_message" msgid="2388861106663695319">"Güvenliğiniz için bu cihazı unutun ve tekrar eşleyin"</string>
+    <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"Cihazı unut"</string>
+    <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"İptal"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Cihaz ayrıntıları"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Klavye ayarları"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Diğer ayarlar"</string>
@@ -1273,13 +1277,21 @@
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"Güneş battığında otomatik olarak açılacak"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"Şu saatte otomatik olarak açılacak: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_custom_bedtime" msgid="7759826673214624622">"Uyku vaktinde otomatik olarak açılır"</string>
+    <!-- no translation found for dark_ui_summary_off_auto_mode_modes (2672694802103388896) -->
+    <skip />
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Hiçbir zaman otomatik olarak kapatılmayacak"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Güneş doğduğunda otomatik olarak kapatılacak"</string>
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Şu saatte otomatik olarak kapatılacak: <xliff:g id="ID_1">%1$s</xliff:g>."</string>
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"Uyku vaktinden sonra otomatik olarak kapatılır"</string>
+    <!-- no translation found for dark_ui_summary_on_auto_mode_modes (7769594183411785087) -->
+    <skip />
     <string name="dark_ui_text" msgid="4392646155331126666">"Koyu tema özelliği, pilinizin daha uzun süre dayanmasını sağlamak için bazı ekranlarda siyah kullanır. Koyu tema, açılmak için ekranınızın kapanmasını beklemeye programlanır."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Koyu tema şu anda Uyku Vakti modu programınıza uyuyor."</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Uyku Vakti modu ayarları"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (1041117250408363391) -->
+    <skip />
+    <!-- no translation found for dark_ui_modes_footer_action (80671811848446248) -->
+    <skip />
     <string name="even_dimmer_display_title" msgid="6731255736830410149">"Parlaklığı azaltın"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Cihazın ekran parlaklığının normalden az olmasına izin verin"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Ekran zaman aşımı"</string>
@@ -1944,7 +1956,8 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Sağ alt tarafı tıkla"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Seçenekler için dokunmatik alanın sağ alt köşesini tıklayın"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"İşaretçi hızı"</string>
-    <string name="pointer_fill_style" msgid="8413840032931637595">"İşaretçi dolgu stili"</string>
+    <!-- no translation found for pointer_fill_style (8794616790175016092) -->
+    <skip />
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"İşaretçi dolgu stilini siyah yapın"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"İşaretçi dolgu stilini yeşil yapın"</string>
     <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"İşaretçi dolgu stilini sarı yapın"</string>
@@ -1991,10 +2004,8 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"Sıfırla"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Değiştirici tuşu seçin"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"<xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g> için yeni bir tuş seçin:"</string>
-    <!-- no translation found for keyboard_a11y_settings (2564659018555385728) -->
-    <skip />
-    <!-- no translation found for keyboard_a11y_settings_summary (1698531156574098722) -->
-    <skip />
+    <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Fiziksel klavye erişilebilirliği"</string>
+    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Yapışkan tuşlar, geri sekme tuşları, fare tuşları"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"<xliff:g id="IME_LABEL">%s</xliff:g> düzeni"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Varsayılan"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Otomatik: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2063,6 +2074,12 @@
     <string name="general_category_title" msgid="6298579528716834157">"Genel"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Ekran"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Renk ve hareket"</string>
+    <!-- no translation found for accessibility_pointer_and_touchpad_title (8719482393177273831) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_and_touchpad_summary (6089872217234956258) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_color_customization_title (3376392766113189508) -->
+    <skip />
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Renk kontrastı"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Kontrast daha yüksek olduğunda metinler, düğmeler ve simgeler daha belirgin hale gelir. Kendinize en uygun kontrastı seçin."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Bazı uygulamalar tüm renk ve metin kontrastı ayarlarını desteklemiyor olabilir"</string>
@@ -2206,11 +2223,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Gelişmiş"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Erişilebilirlik düğmesi <xliff:g id="SERVICE">%1$s</xliff:g> olarak ayarlandı. Büyütmeyi kullanmak için Erişilebilirlik düğmesine dokunup basılı tutun, ardından büyütmeyi seçin."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Erişilebilirlik hareketi <xliff:g id="SERVICE">%1$s</xliff:g> hizmetine ayarlandı. Büyütme özelliğini kullanmak için iki parmağınızla ekranın altından kaydırıp basılı tutun. Ardından büyütmeyi seçin."</string>
-    <!-- no translation found for accessibility_global_gesture_preference_title (8866765674372344850) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_title" msgid="8866765674372344850">"Ses seviyesi tuşları kısayolu"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Kısayol ayarları"</string>
-    <!-- no translation found for accessibility_shortcut_service_on_lock_screen_title (2301019277262462426) -->
-    <skip />
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"Kilit ekranında ses seviyesi tuşları kısayolu"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Özellik kısayolunun kilit ekranından açılmasına izin verin. Ses tuşlarının ikisini birden birkaç saniyeliğine basılı tutun."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Erişilebilirlik düğmesi"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Erişilebilirlik düğmesi ve hareketi"</string>
@@ -2230,6 +2245,8 @@
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Kullanımda değilken şeffaflık"</string>
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"Şeffaf"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"Opak"</string>
+    <!-- no translation found for accessibility_button_disabled_button_mode_summary (1978174613270619492) -->
+    <skip />
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Yüksek kontrastlı metin"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Metin rengini siyah veya beyaz olarak değiştirin. Arka planla kontrast en üst düzeye çıkar."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Metin kontrastını maksimuma çıkar"</string>
@@ -3351,8 +3368,7 @@
     <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"Kapalı"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Yok}=1{1 program ayarlandı}other{# program ayarlandı}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Rahatsız Etmeyin"</string>
-    <!-- no translation found for zen_modes_list_title (4796033710444068729) -->
-    <skip />
+    <string name="zen_modes_list_title" msgid="4796033710444068729">"Modlar"</string>
     <string name="zen_modes_list_intro" msgid="1795379595115088972">"Uyku, çalışma, sürüş gibi çeşitli modlarla dikkat dağıtan unsurları azaltıp istediğiniz yere odaklanın."</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Kendi modunuzu oluşturun"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Yalnızca önemli kişiler ve uygulamalardan gelen bildirimleri alın"</string>
@@ -3650,11 +3666,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Mesajları yanıtlamanın yanı sıra bildirimlerdeki düğmeleri kullanarak bildirimleri erteleme ya da kapatma ve aramaları yanıtlama gibi işlemleri gerçekleştirebilir."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Ayarları değiştirme"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Rahatsız Etmeyin özelliğini açıp kapatabilir ve ilgili ayarları değiştirebilir."</string>
-    <!-- no translation found for nls_feature_modes_settings_summary (70022458305195595) -->
-    <skip />
+    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"Modlar\'ı yönetebilir, etkinleştirebilir ve ilgili ayarları değiştirebilir."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> için bildirim erişimini kapatırsanız Rahatsız Etmeyin erişimi de kapanabilir."</string>
-    <!-- no translation found for notification_listener_disable_modes_warning_summary (7528432011433844158) -->
-    <skip />
+    <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> için bildirimlere erişimi devre dışı bırakırsanız Modlar\'a erişim de devre dışı bırakılabilir."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Kapat"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"İptal"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"Gerçek zamanlı"</string>
@@ -3715,12 +3729,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Rahatsız Etmeyin erişimi"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Rahatsız Etmeyin\'e izin ver"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Yüklü hiçbir uygulama Rahatsız Etmeyin erişimi isteğinde bulunmadı"</string>
-    <!-- no translation found for manage_zen_modes_access_title (2520680004915648824) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_detail_switch (4060429747631111299) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_empty_text (8750927923904377110) -->
-    <skip />
+    <string name="manage_zen_modes_access_title" msgid="2520680004915648824">"Modlar iznine erişim"</string>
+    <string name="zen_modes_access_detail_switch" msgid="4060429747631111299">"Modlar\'a erişim izni ver"</string>
+    <string name="zen_modes_access_empty_text" msgid="8750927923904377110">"Yüklü hiçbir uygulama, Modlar erişimi isteğinde bulunmadı."</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"Bu uygulamadan gelen bildirimlere izin vermediniz"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"İsteğiniz üzerine Android, bu kategorideki bildirimlerin bu cihazda görünmesini engelliyor"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"İsteğiniz üzerine Android, bu bildirim grubunun bu cihazda görünmesini engelliyor"</string>
@@ -4111,12 +4122,9 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Bildirim erişimi açık olduğundan bu ayar açık kalmalı"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"<xliff:g id="APP">%1$s</xliff:g> için Rahatsız Etmeyin özelliğine erişim izni kaldırılsın mı?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Bu uygulama tarafından oluşturulmuş tüm Rahatsız Etmeyin kuralları kaldırılacak."</string>
-    <!-- no translation found for zen_modes_access_warning_dialog_title (8372164559156809659) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_warning_dialog_summary (2432178679607798200) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (6288548508466545492) -->
-    <skip />
+    <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"<xliff:g id="APP">%1$s</xliff:g> uygulamasının Modlar\'a erişmesine izin verilsin mi?"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"Uygulama; Rahatsız Etmeyin özelliğini açıp kapatabilecek, Modlar\'ı yönetip etkinleştirebilecek ve ilgili ayarları değiştirebilecek."</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"<xliff:g id="APP">%1$s</xliff:g> uygulamasının Modlar iznine erişimi iptal edilsin mi?"</string>
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Bu uygulama tarafından oluşturulmuş tüm modlar kaldırılacak."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Optimize etme"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimize et"</string>
@@ -5298,8 +5306,10 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"Açık"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Kapalı"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Açık"</string>
-    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"Ses %%%1$d sol, %%%2$d sağ"</string>
-    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"Ses %%%1$d sağ, %%%2$d sol"</string>
+    <!-- no translation found for audio_seek_bar_state_left_first (1641359989891833888) -->
+    <skip />
+    <!-- no translation found for audio_seek_bar_state_right_first (6027686565598201061) -->
+    <skip />
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Yüklediğiniz uygulamalar, cihazınızın adını görebilecek. Cihazınızın adı ayrıca Bluetooth cihazlara bağlandığınızda, kablosuz ağa bağlandığınızda veya kablosuz hotspot oluşturduğunuzda diğer kişiler tarafından görülecektir."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Dil bilgisine uygun cinsiyet"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Dil bilgisine uygun cinsiyet seçin"</string>
@@ -5368,8 +5378,7 @@
     <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"Ses paylaşımı durduruldu"</string>
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Uyumlu bir cihaz bağlayın"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Ses paylaşmaya başlamak için önce LE Audio kulaklığınızı telefonunuza bağlayın"</string>
-    <!-- no translation found for audio_sharing_switch_active_button_label (3065600513067122124) -->
-    <skip />
+    <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> cihazına geç"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"LE ses akışına bağlanın"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Yakındaki ses akışları"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Ses akışları"</string>
@@ -5414,7 +5423,6 @@
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> adlı cihazda dinlemek için ses yayını QR kodunu tarayın"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Şifre, paylaşım sırasında düzenlenemez. Şifreyi değiştirmek için önce ses paylaşımını kapatın."</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR kodu tarayıcı"</string>
-    <!-- no translation found for audio_streams_qr_code_help_with_link (5542328067190486479) -->
-    <skip />
+    <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Yardıma mı ihtiyacınız var?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Ayarlar\'da ara"</string>
 </resources>
