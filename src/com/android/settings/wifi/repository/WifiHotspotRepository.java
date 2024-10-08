@@ -379,9 +379,11 @@ public class WifiHotspotRepository {
                 log("setSpeedType(), setBand(BAND_2GHZ)");
                 configBuilder.setBand(BAND_2GHZ);
             }
-            /* Set the security type back to WPA2/WPA3 if we're moving from 6GHz to something else
-               except for Enhanced open case, moving to OWE transition from OWE*/
-            if ((config.getBand() & BAND_6GHZ) != 0) {
+            // Set the security type back to WPA2/WPA3 if the password is at least 8 characters and
+            // we're moving from 6GHz to something else.
+            // except for Enhanced open case, moving to OWE transition from OWE
+            String passphrase = generatePassword(config);
+            if ((passphrase.length() >= 8) && (config.getBand() & BAND_6GHZ) != 0) {
                 if (config.getSecurityType() == SECURITY_TYPE_WPA3_OWE &&
                     speedType != SPEED_2GHZ_5GHZ) {
                     configBuilder.setPassphrase(null, SECURITY_TYPE_WPA3_OWE_TRANSITION);

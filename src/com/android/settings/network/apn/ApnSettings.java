@@ -149,8 +149,7 @@ public class ApnSettings extends RestrictedSettingsFragment
         mHideApnsWithRule = b.getStringArray(APN_HIDE_RULE_STRINGS_ARRAY);
         mHideApnsWithIccidRule = b.getStringArray(APN_HIDE_RULE_STRINGS_WITH_ICCIDS_ARRAY);
         if (mAllowAddingApns) {
-            final String[] readOnlyApnTypes = b.getStringArray(
-                    CarrierConfigManager.KEY_READ_ONLY_APN_TYPES_STRING_ARRAY);
+            final String[] readOnlyApnTypes = ApnEditor.getReadOnlyApnTypes(b);
             // if no apn type can be edited, do not allow adding APNs
             if (ApnEditor.hasAllApns(readOnlyApnTypes)) {
                 Log.d(TAG, "not allowing adding APN because all APN types are read only");

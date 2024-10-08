@@ -246,9 +246,16 @@
     <string name="roaming_enable" msgid="7845716016861535340">"Свързване с услуги за данни при роуминг"</string>
     <string name="roaming_disable" msgid="729512894708689604">"Свързване с услуги за данни при роуминг"</string>
     <string name="roaming_warning" msgid="7703647889040229013">"Възможно е да ви бъдат начислени такси за роуминг."</string>
-    <string name="date_time_auto" msgid="4239202185055225869">"Автоматично задаване на часа"</string>
-    <string name="zone_auto_title" msgid="5141692422373097957">"Автоматично задаване"</string>
-    <string name="auto_zone_requires_location_summary" msgid="4831038184260596735">"Местоположението ще служи за задаване на часовата зона, когато превключвателят е включен"</string>
+    <!-- no translation found for date_time_auto (1759599045100040686) -->
+    <skip />
+    <!-- no translation found for date_time_auto_summary (8294938565417729698) -->
+    <skip />
+    <!-- no translation found for zone_auto_title (3520584257065861479) -->
+    <skip />
+    <!-- no translation found for zone_auto_title_summary (6540356783943375071) -->
+    <skip />
+    <!-- no translation found for auto_zone_requires_location_summary (8751995978350701451) -->
+    <skip />
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Използване на стандартния формат за локала"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"24-часов формат"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Час"</string>
@@ -412,6 +419,17 @@
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Лицето, отпечатъкът и <xliff:g id="WATCH">%s</xliff:g> бяха добавени"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Лицето, отпечатъците и <xliff:g id="WATCH">%s</xliff:g> бяха добавени"</string>
     <string name="mandatory_biometrics_prompt_description" msgid="6790144699440050735">"Проверката на самоличността е включена и изисква биометрични данни"</string>
+    <string name="go_to_settings" msgid="4394928396153474179">"Към настройките"</string>
+    <string name="identity_check_lockout_error_title" msgid="7486409651908283892">"Проверката на самоличността е включена и не може да потвърди, че това сте вие"</string>
+    <string name="identity_check_lockout_error_description_1" msgid="4882147327291296884">"Твърде много неуспешни опити за биометрично удостоверяване. За да опитате отново, заключете устройството си и го отключете."</string>
+    <string name="identity_check_lockout_error_two_factor_auth_description_1" msgid="8369894114882274736">"Твърде много неуспешни опити за биометрично удостоверяване. Опитайте отново."</string>
+    <string name="identity_check_lockout_error_description_2" msgid="5512321457771307067">"Можете да управлявате проверката на самоличността от настройките на функцията за защита при кражба. Към настройките"</string>
+    <string name="identity_check_general_error_title" msgid="5073929400896102674">"За да продължите, е необходимо биометрично удостоверяване"</string>
+    <string name="identity_check_general_error_description_1" msgid="5260846996256699095">"Проверката на самоличността е включена и изисква биометрично удостоверяване, но няма достъп до функцията за отключване с лице или сензора за отпечатъци.\n"<ul><li>"Проверете дали камерата ви е включена и опитайте отново."</li>\n<li>"Можете да изключите проверката на самоличността от профила си в Google."</li></ul></string>
+    <string name="identity_check_biometric_error_cancel" msgid="3353689146211669291">"Отказ"</string>
+    <string name="identity_check_biometric_error_ok" msgid="4535306787363107304">"OK"</string>
+    <string name="go_to_identity_check" msgid="5215846637575231800">"Към проверката на самоличността"</string>
+    <string name="identity_check_lockout_error_lock_screen" msgid="3021787511681444051">"Заключен екран"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Отключване с Remote Authenticator"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Добавихте часовник"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Настройване на часовника ви"</string>
@@ -796,6 +814,7 @@
     <string name="lockpassword_password_requires_nonnumerical" msgid="389687423482993365">"{count,plural, =1{Трябва да съдържа поне 1 нецифрен знак}other{Трябва да съдържа поне # нецифрени знака}}"</string>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"Администраторът на у-вото не разрешава ползването на скорошна парола"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"Възходящите, низходящите и повтарящите се поредици от цифри не са разрешени"</string>
+    <string name="lockpassword_password_no_sequential_characters" msgid="2191567105898075606">"Възходящите, низходящите и повтарящите се поредици от знаци не са разрешени"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"Потвърждаване"</string>
     <string name="lockpassword_clear_label" msgid="311359833434539894">"Изчистване"</string>
     <string name="lockpassword_credential_changed" msgid="5934778179732392028">"Опцията за заключване на екрана вече бе променена. Опитайте пак с новата."</string>
@@ -1611,7 +1630,8 @@
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Разрешете на приложенията и услугите да сканират за устройства в близост по всяко време дори когато функцията за Bluetooth e изключена. Това може да послужи например за подобряване на базиращите се на местоположението функции и услуги."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Услуги за местоположение"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"Услуги за местоположение"</string>
-    <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"Използване на местоположението"</string>
+    <!-- no translation found for location_time_zone_detection_toggle_title (720338048522014712) -->
+    <skip />
     <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"Часовата зона не може да се зададе автоматично"</string>
     <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
     <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"Местоположението или услугите за местоположение са изключени"</string>
@@ -1622,11 +1642,13 @@
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"Настройки за местоположението"</string>
     <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"Поправяне на това"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"Отказ"</string>
-    <string name="location_time_zone_detection_auto_is_off" msgid="6264253990141650280">"Автоматичната часова зона е изключена"</string>
+    <!-- no translation found for location_time_zone_detection_auto_is_off (4785540862935730060) -->
+    <skip />
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"Установяването на часовата зона чрез местоположението е деактивирано"</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"Установяването на часовата зона чрез местоположението не се поддържа"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Не се разрешават промени в установяването на часовата зона чрез местоположението"</string>
-    <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"Местоположението може да се използва с цел задаване на часова зона"</string>
+    <!-- no translation found for location_time_zone_detection_auto_is_on (1837317773761632655) -->
+    <skip />
     <string name="about_settings_summary" msgid="4831942939227432513">"Преглед на състоянието, правната информация и версията на софтуера"</string>
     <string name="legal_information" msgid="7509900979811934843">"Правна информация"</string>
     <string name="manual" msgid="3651593989906084868">"Ръководство"</string>
@@ -1952,14 +1974,14 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Кликване долу вдясно"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"За още опции кликнете в долния десен ъгъл на сензорния панел"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Скорост на курсора"</string>
-    <!-- no translation found for pointer_fill_style (8794616790175016092) -->
-    <skip />
+    <string name="pointer_fill_style" msgid="8794616790175016092">"Цвят на курсора"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Запълване на курсора в черно"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Запълване на курсора в зелено"</string>
-    <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"Запълване на курсора в жълто"</string>
+    <string name="pointer_fill_style_red_button" msgid="6424326623906159283">"Запълване на курсора в червено"</string>
     <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"Запълване на курсора в розово"</string>
     <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"Запълване на курсора в синьо"</string>
-    <string name="pointer_stroke_style" msgid="1886986630216050665">"Стил на контура на курсора"</string>
+    <string name="pointer_fill_style_purple_button" msgid="3713175300139801778">"Запълване на курсора в лилаво"</string>
+    <string name="pointer_stroke_style" msgid="139962661485972329">"Цвят на контура на курсора"</string>
     <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Бяло"</string>
     <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Черно"</string>
     <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Без"</string>
@@ -2011,6 +2033,7 @@
     <string name="pointer_scale" msgid="4941564570571663964">"Мащаб на курсора"</string>
     <string name="pointer_scale_decrease_content_description" msgid="4479646756230008068">"Намаляване на мащаба на курсора"</string>
     <string name="pointer_scale_increase_content_description" msgid="1049632123702664450">"Увеличаване на мащаба на курсора"</string>
+    <string name="pointer_scale_keywords" msgid="8939432511048322072">"мащаб, размер, мащаб на курсора, размер на курсора, голям курсор на мишката, голямо, забележимо"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Контролер за игри"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Пренасочване на вибрирането"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Пренасочване на вибрирането към контролера за игри, когато е свързан"</string>
@@ -2070,12 +2093,9 @@
     <string name="general_category_title" msgid="6298579528716834157">"Общи"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Дисплей"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Цвят и движение"</string>
-    <!-- no translation found for accessibility_pointer_and_touchpad_title (8719482393177273831) -->
-    <skip />
-    <!-- no translation found for accessibility_pointer_and_touchpad_summary (6089872217234956258) -->
-    <skip />
-    <!-- no translation found for accessibility_pointer_color_customization_title (3376392766113189508) -->
-    <skip />
+    <string name="accessibility_pointer_and_touchpad_title" msgid="8719482393177273831">"Достъпност за курсора и сензорния панел"</string>
+    <string name="accessibility_pointer_and_touchpad_summary" msgid="6089872217234956258">"Цвят, размер и други характеристики на курсора"</string>
+    <string name="accessibility_pointer_color_customization_title" msgid="3376392766113189508">"Персонализиране на цвета на курсора"</string>
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Контраст на цветовете"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"При по-висок контраст текстът, бутоните и иконите се открояват повече. Изберете най-подходящия според вас контраст."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Възможно е някои приложения да не поддържат всички настройки за контраст на текста и цветовете"</string>
@@ -3315,7 +3335,8 @@
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"винаги включен фонов дисплей, дисплей, открояващ важни неща"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, маркер, четец"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"клавиатура, осезателна обратна връзка, вибриране,"</string>
-    <string name="sound_dashboard_summary" msgid="6574444810552643312">"Сила на звука, вибриране, „Не безпокойте“"</string>
+    <string name="sound_dashboard_summary" msgid="8254699132423665654">"Сила на звука и вибриране"</string>
+    <string name="sound_dashboard_summary_with_dnd" msgid="731956092218394657">"Сила на звука, вибриране, „Не безпокойте“"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Сила на звука за мултимедия"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Сила на звука при предаване"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Сила на звука за обаждания"</string>
@@ -3359,8 +3380,8 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Настройки за свързани устройства"</string>
     <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"Пространствено аудио"</string>
     <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"Изкл."</string>
-    <string name="spatial_audio_multi_toggle_on" msgid="2988769235357633788">"Изкл."</string>
-    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"Изкл."</string>
+    <string name="spatial_audio_multi_toggle_on" msgid="4204808183659033003">"Фиксирано"</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="4156440073634867249">"Просл. на движ. на главата"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Нито един}=1{Зададен е 1 график}other{Зададени са # графика}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Не безпокойте"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Режими"</string>
@@ -3378,7 +3399,7 @@
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Не е зададено"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Деактивирано"</string>
     <string name="zen_mode_new_title" msgid="4934720193004330740">"Създаване на режим"</string>
-    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Персонализирано"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Персонализиран"</string>
     <string name="zen_mode_action_activate" msgid="4832626715234966484">"Включване сега"</string>
     <string name="zen_mode_action_deactivate" msgid="5922468877447186921">"Изключване"</string>
     <string name="zen_mode_not_found_text" msgid="692090778655810329">"Режимът не е намерен"</string>
@@ -3419,7 +3440,7 @@
     <string name="mode_display_options_section" msgid="5151597748243866532">"Опции за показване"</string>
     <string name="mode_grayscale_title" msgid="6027553257331235461">"Сива скала"</string>
     <string name="mode_grayscale_title_secondary_list" msgid="2662593380253642581">"сива скала"</string>
-    <string name="mode_grayscale_summary" msgid="6682099523626777038">"Премахване на цветовете на екрана"</string>
+    <string name="mode_grayscale_summary" msgid="6682099523626777038">"Промяна на екрана в черно-бял"</string>
     <string name="mode_aod_title" msgid="5903435070341237325">"Екранът да остава тъмен"</string>
     <string name="mode_aod_title_secondary_list" msgid="8268180392811027557">"екранът да остава тъмен"</string>
     <string name="mode_aod_summary" msgid="7516159044827627065">"Деактивиране на функцията за винаги включен дисплей"</string>
@@ -3428,7 +3449,7 @@
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Филтриране на яркостта на тапета"</string>
     <string name="mode_dark_theme_title" msgid="8099007897943513209">"Активиране на тъмната тема"</string>
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"активиране на тъмната тема"</string>
-    <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Превключете предпочитанията за операционната система и приложенията така, че да дадете предимство на светлия текст на тъмен фон. Това може да е по-щадящо за очите и да доведе до значителна икономия на батерията на някои устройства"</string>
+    <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Превключете темата за устройството към тъмен фон, който е по-щадящ за очите"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Няма промени в настройките за показване}=1{{effect_1}}=2{{effect_1} и {effect_2}}=3{{effect_1}, {effect_2} и {effect_3}}other{{effect_1}, {effect_2} и още #}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Разрешаване на всички известия"</string>
     <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Хората, приложенията и звуците могат да прекъсват режима"</string>
@@ -3684,7 +3705,7 @@
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Още настройки са налице в приложението"</string>
     <string name="notification_polite_title" msgid="6121016426991791557">"Изчакване за известията"</string>
     <string name="notification_polite_main_control_title" msgid="5812529809151927149">"Използване на функцията за изчакване за известията"</string>
-    <string name="notification_polite_description" msgid="5497748284893832854">"Когато получавате много известия за кратък период от време, устройството ви ще намали силата на звука си и ще сведе до минимум сигналите за период до две минути. Обажданията, будилниците и разговорите с приоритет няма да бъдат засегнати. \n\nПолучените по време на периода на изчакване известия могат да бъдат намерени, като плъзнете надолу от горната част на екрана."</string>
+    <string name="notification_polite_description" msgid="5497748284893832854">"Когато получавате много известия за кратък пе­риод от време, устройството ви ще намали силата на звука си и ще сведе до минимум сигналите за период до две минути. Обажданията, будилниците и разговорите с приоритет няма да бъдат засегнати. \n\nПолучените по време на периода на изчакване известия могат да бъдат намерени, като плъзнете надолу от горната част на екрана."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Прилагане към служебните потребителски профили"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Прилагане за приложенията в служебния потребителски профил"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Помощни услуги за VR"</string>
@@ -3819,7 +3840,7 @@
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Контакти"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Контакти със звезда"</string>
     <string name="zen_mode_none_calls" msgid="2047166006414016327">"Никакви"</string>
-    <string name="zen_mode_none_messages" msgid="1386626352943268342">"Никакви"</string>
+    <string name="zen_mode_none_messages" msgid="1386626352943268342">"Никой"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"Будилници"</string>
     <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"От таймери, будилници, охранителни системи и други приложения"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"будилници"</string>
@@ -3889,6 +3910,8 @@
     <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Създаване на режим"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Персонализиран режим"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Име на режима"</string>
+    <!-- no translation found for zen_mode_edit_choose_icon_title (6452801577128788362) -->
+    <skip />
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Събития от календара"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Час на лягане и ставане"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"По време на шофиране"</string>
@@ -3958,7 +3981,9 @@
     <string name="managing_admin" msgid="2633920317425356619">"Управлява се от <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"Отваряне по подразбиране"</string>
     <string name="app_launch_open_domain_urls_title" msgid="4805388403977096285">"Отваряне на поддържани връзки"</string>
-    <string name="app_launch_top_intro_message" msgid="137370923637482459">"Разрешаване уеб връзките да се отварят в това приложение"</string>
+    <string name="app_launch_open_in_app" msgid="2208182888681699512">"В приложението"</string>
+    <string name="app_launch_open_in_browser" msgid="766170191853009756">"В браузъра ви"</string>
+    <string name="app_launch_top_intro_message" msgid="9037324384325518290">"Изберете как да се отварят уеб връзките за това приложение"</string>
     <string name="app_launch_links_category" msgid="2380467163878760037">"Връзки, които да се отварят в това приложение"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Поддържани връзки"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Други предпочитания по подразбиране"</string>
@@ -4784,14 +4809,15 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Невалиден мрежов режим <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Пренебрегване."</string>
     <string name="satellite_setting_title" msgid="2543034229989047673">"Сателитни съобщения"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Изпращайте и получавайте текстови съобщения чрез сателит. Услугата е включена с профила ви."</string>
-    <string name="satellite_setting_disabled_summary" msgid="6789122487534159857">"Изпращайте и получавайте текстови съобщения чрез сателит. Услугата не е включена с профила ви."</string>
+    <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Изпращайте и получавайте текстови съобщения чрез сателит. Услугата не се предлага с профила ви."</string>
     <string name="keywords_satellite_setting" msgid="3312183289776517695">"Сателитни съобщения"</string>
     <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"Информация за сателитните съобщения"</string>
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"Можете да изпращате и получавате текстови съобщения чрез сателит, ако имате отговарящ на условията профил от <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"Вашият план от <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="title_have_satellite_plan" msgid="2048372355699977947">"Услугата за сателитни съобщения е включена с профила ви"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"Услугата за сателитни съобщения не е включена с профила ви"</string>
-    <string name="summary_add_satellite_setting" msgid="3815254731634052432">"Добавяне на услугата за сателитни съобщения"</string>
+    <!-- no translation found for summary_add_satellite_setting (190359698593056946) -->
+    <skip />
     <string name="category_name_how_it_works" msgid="585303230539269496">"Начин на работа"</string>
     <string name="title_satellite_connection_guide" msgid="3294802307913609072">"Когато нямате достъп до мобилна мрежа"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Телефонът ви ще се свърже автоматично със сателит. За оптимална връзка трябва да сте на място с ясен изглед към небето."</string>
@@ -5303,10 +5329,8 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"Вкл."</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Изкл."</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Вкл."</string>
-    <!-- no translation found for audio_seek_bar_state_left_first (1641359989891833888) -->
-    <skip />
-    <!-- no translation found for audio_seek_bar_state_right_first (6027686565598201061) -->
-    <skip />
+    <string name="audio_seek_bar_state_left_first" msgid="1641359989891833888">"Аудио: ляво: <xliff:g id="PERCENT_LEFT">%1$s</xliff:g>, дясно: <xliff:g id="PERCENT_RIGHT">%2$s</xliff:g>"</string>
+    <string name="audio_seek_bar_state_right_first" msgid="6027686565598201061">"Аудио: дясно: <xliff:g id="PERCENT_RIGHT">%1$s</xliff:g>, ляво: <xliff:g id="PERCENT_LEFT">%2$s</xliff:g>"</string>
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Името на устройството ви е видимо за инсталираните от вас приложения. То може да се вижда и от други хора, когато се свържете с устройства с Bluetooth или с Wi-Fi мрежа или настроите точка за достъп до Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Граматически род"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Изберете граматически род"</string>
@@ -5376,6 +5400,13 @@
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Свързване на съвместимо устройство"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"За да започнете да споделяте звука, първо свържете телефона си със слушалки, които поддържат LE Audio"</string>
     <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"Превключване към <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_progress_dialog_start_stream_content" msgid="1152386358063502897">"Аудиопотокът се стартира…"</string>
+    <string name="audio_sharing_progress_dialog_add_source_content" msgid="2913609550496440710">"Споделя се с(ъс) <xliff:g id="DEVICE_NAME">%1$s</xliff:g>…"</string>
+    <string name="progress_dialog_connect_device_content" msgid="1387370883978461533">"Установява се връзка с(ъс) <xliff:g id="DEVICE_NAME">%1$s</xliff:g>…"</string>
+    <string name="audio_sharing_retry_dialog_title" msgid="3954529199333866445">"Звукът не бе споделен"</string>
+    <string name="audio_sharing_retry_dialog_content" msgid="6014534433894608834">"Нещо се обърка. Моля, опитайте отново."</string>
+    <string name="audio_sharing_incompatible_dialog_title" msgid="4586805264392802115">"Не можете да споделяте звук с(ъс) <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_incompatible_dialog_content" msgid="3943223683620405311">"Споделянето на звука работи само със слушалки, които поддържат LE Audio"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Свързване с аудиопоток от LE"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Аудиопотоци в близост"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Аудиопотоци"</string>
@@ -5402,6 +5433,7 @@
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Научете повече"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Този аудиопоток не може да се възпроизвежда на <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="audio_streams_listening_now" msgid="4205614429222949176">"Слушате сега"</string>
+    <string name="audio_streams_present_now" msgid="1128360774541089402">"Поставено на пауза от хоста"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Спиране на слушането"</string>
     <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Свързване на съвместими слушалки"</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Свързване на устройство"</string>
@@ -5422,4 +5454,10 @@
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Скенер за QR кодове"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Нуждаете се от помощ?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Търсене в настройките"</string>
+    <!-- no translation found for keywords_contacts_storage (9061213057165337893) -->
+    <skip />
+    <!-- no translation found for contacts_storage_settings_title (1574030546525203810) -->
+    <skip />
+    <!-- no translation found for contacts_storage_no_account_set (1548101985417720782) -->
+    <skip />
 </resources>

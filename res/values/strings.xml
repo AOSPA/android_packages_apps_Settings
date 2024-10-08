@@ -586,11 +586,15 @@
     <string name="roaming_warning">Roaming charges may apply.</string>
 
     <!-- Date & time setting screen setting switch title: whether the system clock (Unix epoch time) should be determined automatically [CHAR LIMIT=100] -->
-    <string name="date_time_auto">Set time automatically</string>
+    <string name="date_time_auto">Automatic date and time</string>
+    <!-- Date & time setting screen setting switch summary: whether the system clock (Unix epoch time) should be determined automatically [CHAR LIMIT=100] -->
+    <string name="date_time_auto_summary">Set automatically using your network and wireless signals</string>
     <!-- Date & time setting screen setting switch title: whether the time zone should be determined automatically [CHAR LIMIT=100]  -->
-    <string name="zone_auto_title">Set automatically</string>
+    <string name="zone_auto_title">Automatic time zone</string>
+    <!-- Date & time setting screen setting switch summary: whether the time zone should be determined automatically [CHAR LIMIT=100]  -->
+    <string name="zone_auto_title_summary">Set automatically based on mobile networks near you</string>
     <!-- Date & time setting screen setting switch summary for non-telephony devices [CHAR LIMIT=100] -->
-    <string name="auto_zone_requires_location_summary">Location will be used for setting the time zone when this toggle is on</string>
+    <string name="auto_zone_requires_location_summary">Set automatically using your device location, if available. An active Wifi connection may also be required.</string>
     <!-- Date & time setting screen setting option summary text for the automatic 24 hour setting checkbox [CHAR LIMIT=100] -->
     <string name="date_time_24hour_auto">Use locale default</string>
     <!-- Date & time setting screen setting check box title -->
@@ -975,8 +979,6 @@
     <string name="go_to_identity_check">Go to identity check</string>
     <!-- Biometric error dialog button text to lock screen and recover biometric lockout state. [CHAR LIMIT=60] -->
     <string name="identity_check_lockout_error_lock_screen">Lock screen</string>
-    <!-- Action for opening identity check settings page [CHAR LIMIT=NONE] [DO NOT TRANSLATE] -->
-    <string name="identity_check_settings_action"></string>
     <!-- RemoteAuth unlock enrollment and settings --><skip />
     <!-- Title shown for menu item that launches watch unlock settings. [CHAR LIMIT=40] -->
     <string name ="security_settings_remoteauth_preference_title">Remote Authenticator Unlock</string>
@@ -3856,7 +3858,7 @@
     <string name="location_services_screen_title">Location services</string>
 
     <!-- [CHAR LIMIT=60] Date&Time settings screen, toggle button title -->
-    <string name="location_time_zone_detection_toggle_title">Use location</string>
+    <string name="location_time_zone_detection_toggle_title">Use location for time zone</string>
     <!-- [CHAR LIMIT=50] Date&Time settings screen, title of the dialog when AutoTimeZone is degraded -->
     <string name="location_time_zone_detection_status_title">Cannot set the time zone automatically</string>
     <!-- Date&Time settings screen, summary of the dialog when AutoTimeZone is degraded by settings-->
@@ -3884,7 +3886,7 @@
     <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is not
          applicable due to other settings like the "automatic time zone detection enabled" setting
          being set to "off". -->
-    <string name="location_time_zone_detection_auto_is_off">Automatic time zone is off</string>
+    <string name="location_time_zone_detection_auto_is_off">Not available when automatic time zone is off</string>
     <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is not
          applicable for the user for unspecified reasons. More specific messages are used when there
          is a clear reason. -->
@@ -3895,7 +3897,7 @@
          allowed for the user, e.g. because of device policy -->
     <string name="location_time_zone_detection_not_allowed">Location time zone detection changes are not allowed</string>
     <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is enabled. -->
-    <string name="location_time_zone_detection_auto_is_on">Location may be used to set time zone</string>
+    <string name="location_time_zone_detection_auto_is_on">If your device location is available, it may be used to set your time zone</string>
     <!-- Security & location settings screen, setting check box label if Assisted GPS should be enabled -->
     <string name="assisted_gps">Use assisted GPS</string>
     <!-- Security & location settings screen, setting summary when Assisted GPS check box is selected -->
@@ -4784,6 +4786,8 @@
     <string name="pointer_scale_decrease_content_description">Decrease pointer scale</string>
     <!-- Setting for mouse pointer scale. [CHAR LIMIT=35] -->
     <string name="pointer_scale_increase_content_description">Increase pointer scale</string>
+    <!-- Search keywords for pointer scale, including legacy Large Mouse Pointer. [CHAR LIMIT=NONE] -->
+    <string name="pointer_scale_keywords">scale, size, Pointer Scale, Pointer Size, Large mouse pointer, Large, noticeable</string>
 
     <!-- On Languages & input settings screen, heading. Inside the "Languages & input settings" screen, this is the header for settings that relate to game controller devices. [CHAR LIMIT=40] -->
     <string name="game_controller_settings_category">Game Controller</string>
@@ -8757,6 +8761,13 @@
     <!-- Configure Notifications: Title for the option controlling notifications for work profile. [CHAR LIMIT=30] -->
     <string name="locked_work_profile_notification_title">When work profile is locked</string>
 
+    <!-- Configure notifications: Title for the option controlling whether or not to minimalize the
+    number of notifications to show on the lock screen[CHAR LIMIT=60] -->
+    <string name="lock_screen_notif_minimalism">Lock screen notification minimalism</string>
+
+    <!-- Configure notifications: Summary for option lock_screen_notif_minimalism. [CHAR LIMIT=100] -->
+    <string name="lock_screen_notif_minimalism_summary">Show fewer notifications on lock screen</string>
+
     <!-- Configure notifications: Title for the option controlling whether only new notifications are displayed to the user
     on the lock screen [CHAR LIMIT=60] -->
     <string name="unseen_notifs_lock_screen">Show only new notifications on lock screen</string>
@@ -9691,6 +9702,9 @@
     <!-- Modes: Hint for the EditText for editing a mode's name [CHAR LIMIT=30] -->
     <string name="zen_mode_edit_name_hint">Mode name</string>
 
+    <!-- Modes: Text shown above the list of icons in the mode editor. [CHAR LIMIT=40] -->
+    <string name="zen_mode_edit_choose_icon_title">Choose an icon</string>
+
     <!-- Modes: Trigger title for modes of type SCHEDULE_CALENDAR. [CHAR LIMIT=30] -->
     <string name="zen_mode_trigger_title_schedule_calendar">Calendar events</string>
     <!-- Modes: Trigger title for modes of type BEDTIME. [CHAR LIMIT=30] -->
@@ -9872,8 +9886,10 @@
     <string name="launch_by_default">Open by default</string>
 
     <string name="app_launch_open_domain_urls_title">Open supported links</string>
+    <string name="app_launch_open_in_app">In the app</string>
+    <string name="app_launch_open_in_browser">In your browser</string>
     <!-- Preference title for Supported links open in this app. [CHAR LIMIT=60] -->
-    <string name="app_launch_top_intro_message">Allow web links to open in this app</string>
+    <string name="app_launch_top_intro_message">Choose how to open web links for this app</string>
     <!-- Preference title for Links to open in this app. [CHAR LIMIT=60] -->
     <string name="app_launch_links_category">Links to open in this app</string>
 
@@ -12308,8 +12324,8 @@
     <string name="title_have_satellite_plan">Satellite messaging is included with your account</string>
     <!-- Title for category "Your mobile plan when satellite is not included in plan" [CHAR_LIMIT=NONE] -->
     <string name="title_no_satellite_plan">Satellite messaging isn\u2019t included with your account</string>
-    <!-- text view add satellite messaging" [CHAR_LIMIT=NONE] -->
-    <string name="summary_add_satellite_setting">Add satellite messaging</string>
+    <!-- text view "Learn more" [CHAR_LIMIT=NONE] -->
+    <string name="summary_add_satellite_setting">Learn More</string>
     <!-- Category name "How it works" [CHAR_LIMIT=NONE] -->
     <string name="category_name_how_it_works">How it works</string>
     <!-- Title for satellite connection guide [CHAR_LIMIT=NONE] -->
@@ -13776,6 +13792,20 @@
     <string name="audio_sharing_comfirm_dialog_content">To start sharing audio, first connect LE Audio headphones to your phone</string>
     <!-- Text for audio sharing switch active device button [CHAR LIMIT=none]-->
     <string name="audio_sharing_switch_active_button_label">Switch to <xliff:g example="My buds" id="device_name">%1$s</xliff:g></string>
+    <!-- Content for audio sharing progress dialog when starting audio stream [CHAR LIMIT=none]-->
+    <string name="audio_sharing_progress_dialog_start_stream_content">Starting audio stream\u2026</string>
+    <!-- Content for audio sharing progress dialog when adding source to device [CHAR LIMIT=none]-->
+    <string name="audio_sharing_progress_dialog_add_source_content">Sharing with <xliff:g example="My buds" id="device_name">%1$s</xliff:g>\u2026</string>
+    <!-- Content for progress dialog when connect to device [CHAR LIMIT=none]-->
+    <string name="progress_dialog_connect_device_content">Connecting to <xliff:g example="My buds" id="device_name">%1$s</xliff:g>\u2026</string>
+    <!-- Title for audio sharing retry dialog [CHAR LIMIT=none]-->
+    <string name="audio_sharing_retry_dialog_title">Couldn\'t share audio</string>
+    <!-- Content for audio sharing retry dialog [CHAR LIMIT=none]-->
+    <string name="audio_sharing_retry_dialog_content">Something went wrong. Please try again.</string>
+    <!-- Title for audio sharing incompatible device dialog [CHAR LIMIT=none]-->
+    <string name="audio_sharing_incompatible_dialog_title">Can\'t share audio with <xliff:g example="My buds" id="device_name">%1$s</xliff:g></string>
+    <!-- Content for audio sharing incompatible device dialog [CHAR LIMIT=none]-->
+    <string name="audio_sharing_incompatible_dialog_content">Audio sharing only works with headphones that support LE Audio</string>
 
     <!-- Title for audio streams preference category [CHAR LIMIT=none]-->
     <string name="audio_streams_category_title">Connect to a LE audio stream</string>
@@ -13876,4 +13906,11 @@
 
     <!-- Text for Search bar of Settings home screen [CHAR LIMIT=34] -->
     <string name="homepage_search">Search Settings</string>
+
+    <!-- Keywords for contacts storage item [CHAR LIMIT=NONE] -->
+    <string name="keywords_contacts_storage">contacts, storage, account</string>
+    <!-- Text for Contacts Storage Settings title [CHAR LIMIT=50]-->
+    <string name="contacts_storage_settings_title">Contacts storage</string>
+    <!-- Text for displaying when no account is set as default account [CHAR LIMIT=50] -->
+    <string name="contacts_storage_no_account_set">No default set</string>
 </resources>
