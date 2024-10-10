@@ -614,6 +614,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     }
 
     private class PhoneCallStateTelephonyCallback extends TelephonyCallback implements
+            TelephonyCallback.CallStateListener,
             TelephonyCallback.UserMobileDataStateListener,
             TelephonyCallback.ActiveDataSubscriptionIdListener {
 
@@ -627,6 +628,18 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
 
         public boolean isCallIdle() {
             return mCallState == TelephonyManager.CALL_STATE_IDLE;
+        }
+
+        @Override
+        public void onCallStateChanged(int state) {
+            Log.d(TAG, "onCallStateChanged state : " + state + " on SUB " + mSubId);
+            mCallState = state;
+            final boolean isAnyCallOngoing = isAnyOngoingCallOnDevice();
+            for (MobileNetworkCallback callback : sCallbacks) {
+                callback.onAnyOngoingCallOnDevice(isAnyCallOngoing);
+                Log.d(TAG, "onCallStateChanged state : " + state + " on SUB "
+                        + mSubId + ", isAnyCallOngoing = " + isAnyCallOngoing);
+            }
         }
 
         @Override
