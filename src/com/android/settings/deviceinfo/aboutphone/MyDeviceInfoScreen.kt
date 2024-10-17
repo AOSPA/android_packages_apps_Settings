@@ -33,13 +33,9 @@ import com.android.settings.Settings.MyDeviceInfoActivity
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionScreen
 import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoScreen
-import com.android.settings.deviceinfo.imei.ImeiPreference
-import com.android.settings.deviceinfo.imei.getImeiList
 import com.android.settings.deviceinfo.simstatus.SimEidPreference
 import com.android.settings.flags.Flags
-import com.android.settings.network.telephony.TelephonyUtils
 import com.android.settings.utils.makeLaunchIntent
-import com.android.settings.wifi.utils.activeModemCount
 import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -93,21 +89,23 @@ open class MyDeviceInfoScreen :
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
             +PreferenceCategory(
+                key = BASIC_INFO_CATEGORY,
+                purpose = R.string.basic_info_category_purpose,
+                title = R.string.my_device_info_basic_info_category_title,
+            ) +=
+                {
+                    +FirmwareVersionScreen.KEY order 2
+                }
+            +PreferenceCategory(
                 key = DEVICE_DETAIL_CATEGORY,
                 purpose = R.string.device_detail_category_purpose,
                 title = R.string.my_device_info_device_details_category_title,
             ) +=
                 {
-                    +HardwareInfoScreen.KEY order 30
+                    +HardwareInfoScreen.KEY order 10
                     addAsync(coroutineScope, Dispatchers.Default) {
                         +SimEidPreference(context) order 31
                     }
-                    var slotCount = TelephonyUtils.getSlotsCount(context)
-                    val imeiList = context.getImeiList
-                    for (i in 0 until slotCount) {
-                        +ImeiPreference(context, i, slotCount, imeiList) order (i + 33)
-                    }
-                    +FirmwareVersionScreen.KEY order 42
                 }
         }
 
@@ -116,6 +114,7 @@ open class MyDeviceInfoScreen :
     companion object {
         const val KEY = "my_device_info_pref_screen"
 
+        internal const val BASIC_INFO_CATEGORY = "basic_info_category"
         internal const val DEVICE_DETAIL_CATEGORY = "device_detail_category"
     }
 }
