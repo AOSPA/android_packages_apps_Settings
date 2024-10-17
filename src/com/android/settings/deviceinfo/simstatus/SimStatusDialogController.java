@@ -49,12 +49,18 @@ import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
 import android.text.TextUtils;
 import android.util.Log;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.TtsSpan;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
+
+import com.android.internal.telephony.PhoneConstants;
 
 import com.android.settings.R;
 import com.android.settings.network.SubscriptionUtil;
@@ -110,6 +116,21 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
     final static int IMS_REGISTRATION_STATE_LABEL_ID = R.id.ims_reg_state_label;
     @VisibleForTesting
     final static int IMS_REGISTRATION_STATE_VALUE_ID = R.id.ims_reg_state_value;
+    @VisibleForTesting
+    static final int ID_PRL_VERSION_VALUE = R.id.prl_version_value;
+    private static final int ID_MIN_NUMBER_LABEL = R.id.min_number_label;
+    @VisibleForTesting
+    static final int ID_MIN_NUMBER_VALUE = R.id.min_number_value;
+    @VisibleForTesting
+    static final int ID_MEID_NUMBER_VALUE = R.id.meid_number_value;
+    @VisibleForTesting
+    static final int ID_IMEI_VALUE = R.id.imei_value;
+    @VisibleForTesting
+    static final int ID_IMEI_SV_VALUE = R.id.imei_sv_value;
+    @VisibleForTesting
+    static final int ID_CDMA_SETTINGS = R.id.cdma_settings;
+    @VisibleForTesting
+    static final int ID_GSM_SETTINGS = R.id.gsm_settings;
 
     @VisibleForTesting
     static final int MAX_PHONE_COUNT_SINGLE_SIM = 1;
@@ -139,6 +160,7 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
     private final SubscriptionManager mSubscriptionManager;
     private final CarrierConfigManager mCarrierConfigManager;
     private final EuiccManager mEuiccManager;
+    private final int mSlotId;
     private final Resources mRes;
     private final Context mContext;
 
@@ -198,6 +220,7 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
     public SimStatusDialogController(@NonNull SimStatusDialogFragment dialog, Lifecycle lifecycle,
             int slotId) {
         mDialog = dialog;
+        mSlotId = slotId;
         mContext = dialog.getContext();
         mSlotIndex = slotId;
         mSubscriptionInfo = getPhoneSubscriptionInfo(slotId);
@@ -245,6 +268,12 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
 
         if (mSubscriptionInfo == null) {
             updateDataState(TelephonyManager.DATA_UNKNOWN);
+        }
+
+        if (mTelephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_CDMA) {
+            updateDialogForCdmaPhone();
+        } else {
+            updateDialogForGsmPhone();
         }
     }
 
@@ -631,6 +660,40 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
                 subInfo.getSubscriptionId();
     }
 
+    private void updateDialogForCdmaPhone() {
+        final Resources res = mDialog.getContext().getResources();
+        mDialog.setText(ID_MEID_NUMBER_VALUE, getMeid());
+        mDialog.setText(ID_MIN_NUMBER_VALUE,
+                mSubscriptionInfo != null ? mTelephonyManager.getCdmaMin(
+                        mSubscriptionInfo.getSubscriptionId()) : "");
+
+        if (res.getBoolean(R.bool.config_msid_enable)) {
+            mDialog.setText(ID_MIN_NUMBER_LABEL,
+                    res.getString(R.string.status_msid_number));
+        }
+
+        mDialog.setText(ID_PRL_VERSION_VALUE, getCdmaPrlVersion());
+
+        if (mSubscriptionInfo != null && isCdmaLteEnabled()) {
+            // Show IMEI for LTE device
+            mDialog.setText(ID_IMEI_VALUE,
+                    getTextAsDigits(mTelephonyManager.getImei(mSlotId)));
+            mDialog.setText(ID_IMEI_SV_VALUE,
+                    getTextAsDigits(mTelephonyManager.getDeviceSoftwareVersion(mSlotId)));
+        } else {
+            // device is not GSM/UMTS, do not display GSM/UMTS features
+            mDialog.removeSettingFromScreen(ID_GSM_SETTINGS);
+        }
+    }
+
+    private void updateDialogForGsmPhone() {
+        mDialog.setText(ID_IMEI_VALUE, getTextAsDigits(mTelephonyManager.getImei(mSlotId)));
+        mDialog.setText(ID_IMEI_SV_VALUE,
+                getTextAsDigits(mTelephonyManager.getDeviceSoftwareVersion(mSlotId)));
+        // device is not CDMA, do not display CDMA features
+        mDialog.removeSettingFromScreen(ID_CDMA_SETTINGS);
+    }
+
     @VisibleForTesting
     class SimStatusDialogTelephonyCallback extends TelephonyCallback implements
             TelephonyCallback.DataConnectionStateListener,
@@ -700,5 +763,31 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
             default:
                 return "UNKNOWN";
         }
+    }
+
+    @VisibleForTesting
+    String getCdmaPrlVersion() {
+        return mTelephonyManager.getCdmaPrlVersion();
+    }
+
+    @VisibleForTesting
+    boolean isCdmaLteEnabled() {
+        return mTelephonyManager.getLteOnCdmaMode(mSubscriptionInfo.getSubscriptionId())
+                == PhoneConstants.LTE_ON_CDMA_TRUE;
+    }
+
+    @VisibleForTesting
+    String getMeid() {
+        return mTelephonyManager.getMeid(mSlotId);
+    }
+
+    private static CharSequence getTextAsDigits(CharSequence text) {
+        if (TextUtils.isDigitsOnly(text)) {
+            final Spannable spannable = new SpannableStringBuilder(text);
+            final TtsSpan span = new TtsSpan.DigitsBuilder(text.toString()).build();
+            spannable.setSpan(span, 0, spannable.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            text = spannable;
+        }
+        return text;
     }
 }
