@@ -48,9 +48,6 @@ import com.android.settings.deviceinfo.FccEquipmentIdPreferenceController;
 import com.android.settings.deviceinfo.FeedbackPreferenceController;
 import com.android.settings.deviceinfo.IpAddressPreferenceController;
 import com.android.settings.deviceinfo.ManualPreferenceController;
-// QTI_BEGIN: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
-import com.android.settings.deviceinfo.PhoneNumberPreferenceController;
-// QTI_END: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
 import com.android.settings.deviceinfo.RegulatoryInfoPreferenceController;
 import com.android.settings.deviceinfo.SafetyInfoPreferenceController;
 // QTI_BEGIN: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
@@ -128,9 +125,6 @@ public class MyDeviceInfoFragment extends DashboardFragment
         use(DeviceNamePreferenceController.class).setHost(this /* parent */);
         mBuildNumberPreferenceController = use(BuildNumberPreferenceController.class);
         mBuildNumberPreferenceController.setHost(this /* parent */);
-// QTI_BEGIN: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
-        use(PhoneNumberPreferenceController.class).init(getSettingsLifecycle());
-// QTI_END: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
     }
 
     @Override
