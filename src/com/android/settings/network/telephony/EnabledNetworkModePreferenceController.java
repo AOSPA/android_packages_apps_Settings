@@ -43,6 +43,7 @@ import android.os.RemoteException;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.PhoneStateListener;
+import android.telephony.RadioAccessFamily;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyCallback;
@@ -253,7 +254,7 @@ public class EnabledNetworkModePreferenceController extends
     }
 
     private boolean isCiwlanIncompatibleNetworkSelected(int networkMode) {
-        long raf = MobileNetworkUtils.getRafFromNetworkType(networkMode);
+        long raf = RadioAccessFamily.getRafFromNetworkType(networkMode);
         return (LTE & raf) == 0 && (NR & raf) == 0;
     }
 
@@ -559,7 +560,7 @@ public class EnabledNetworkModePreferenceController extends
             } catch (Exception ex) {
                 Log.e(LOG_TAG, "getAllowedNetworkTypesForReason exception", ex);
             }
-            int networkMode = MobileNetworkUtils.getNetworkTypeFromRaf((int) allowedNetworkTypes);
+            int networkMode = RadioAccessFamily.getNetworkTypeFromRaf((int) allowedNetworkTypes);
             if (!showNrList()) {
                 Log.d(LOG_TAG, "Network mode :" + networkMode + " reduce NR");
                 networkMode = reduceNrToLteNetworkType(networkMode);

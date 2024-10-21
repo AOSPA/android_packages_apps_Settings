@@ -48,6 +48,7 @@ import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.PhoneStateListener;
+import android.telephony.RadioAccessFamily;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -206,7 +207,7 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
         super.updateState(preference);
         final SwitchPreference switchPreference = (SwitchPreference) preference;
         switchPreference.setVisible(isAvailable());
-        long preferredNetworkBitMask = MobileNetworkUtils.getRafFromNetworkType(
+        long preferredNetworkBitMask = RadioAccessFamily.getRafFromNetworkType(
                 getAllowedNetworkMode());
         switchPreference.setChecked(isNrNetworkModeType(preferredNetworkBitMask));
         switchPreference.setEnabled(isCallStateIdle());
@@ -221,7 +222,7 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
         int oldNetworkMode = getAllowedNetworkMode();
         long newNetworkBitMask;
         if (TelephonyManager.NETWORK_MODE_NR_ONLY != oldNetworkMode) {
-            long oldNetworkBitMask = MobileNetworkUtils.getRafFromNetworkType(oldNetworkMode);
+            long oldNetworkBitMask = RadioAccessFamily.getRafFromNetworkType(oldNetworkMode);
             if (isChecked) {
                 long networkTypeBitmap4g = oldNetworkBitMask
                         & TelephonyManager.NETWORK_CLASS_BITMASK_4G;
@@ -231,7 +232,7 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
                     //Enable from 2G to 5G.
                     //Use NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA as default value
                     //with LTE
-                    oldNetworkBitMask = MobileNetworkUtils.getRafFromNetworkType(
+                    oldNetworkBitMask = RadioAccessFamily.getRafFromNetworkType(
                             TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA);
                     cachePreviousSelectedNwType(oldNetworkMode);
                 } else if(networkTypeBitmap4g == 0) {
@@ -239,7 +240,7 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
                     //For EVDO only, map to TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO
                     //as no proper mapping value include LTE.
                     if (oldNetworkMode == TelephonyManager.NETWORK_MODE_EVDO_NO_CDMA) {
-                            oldNetworkBitMask = MobileNetworkUtils.getRafFromNetworkType(
+                            oldNetworkBitMask = RadioAccessFamily.getRafFromNetworkType(
                                 TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO);
                     } else {
                         oldNetworkBitMask = oldNetworkBitMask
@@ -253,7 +254,7 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
             int userSelectedNwMode = getPreviousSelectedNwType();
             if ((userSelectedNwMode != NETWORK_MODE_TYPE_INVALID) && !isChecked) {
                 Log.d(TAG, "userSelectedNwMode: " + userSelectedNwMode);
-                newNetworkBitMask = MobileNetworkUtils
+                newNetworkBitMask = RadioAccessFamily
                         .getRafFromNetworkType(userSelectedNwMode);
                 cachePreviousSelectedNwType(NETWORK_MODE_TYPE_INVALID);
             } else {
@@ -262,7 +263,7 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
                         : (oldNetworkBitMask & ~TelephonyManager.NETWORK_TYPE_BITMASK_NR);
             }
         } else {
-            newNetworkBitMask = MobileNetworkUtils
+            newNetworkBitMask = RadioAccessFamily
                     .getRafFromNetworkType(TelephonyManager.NETWORK_MODE_LTE_ONLY);
         }
         mTelephonyManager.setAllowedNetworkTypesForReason(
@@ -292,12 +293,12 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
         } catch (Exception ex) {
             Log.e(TAG, "getAllowedNetworkTypesForReason exception", ex);
         }
-        return MobileNetworkUtils.getNetworkTypeFromRaf((int) allowedNetworkTypes);
+        return RadioAccessFamily.getNetworkTypeFromRaf((int) allowedNetworkTypes);
     }
 
     @Override
     public boolean isChecked(){
-        long preNetworkBitMask = MobileNetworkUtils.getRafFromNetworkType(
+        long preNetworkBitMask = RadioAccessFamily.getRafFromNetworkType(
                 getAllowedNetworkMode());
         return isNrNetworkModeType(preNetworkBitMask);
     }

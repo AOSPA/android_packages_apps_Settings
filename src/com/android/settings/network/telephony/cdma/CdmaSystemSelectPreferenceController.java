@@ -28,13 +28,12 @@ import static com.android.settings.network.telephony.TelephonyConstants.Telephon
 
 import android.content.Context;
 import android.provider.Settings;
+import android.telephony.RadioAccessFamily;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-
-import com.android.settings.network.telephony.MobileNetworkUtils;
 
 /**
  * Preference controller for "System Select"
@@ -81,7 +80,7 @@ public class CdmaSystemSelectPreferenceController extends CdmaBasePreferenceCont
                 Log.e(TAG, "updateState: getAllowedNetworkTypesForReason exception", ex);
             }
             final int settingsNetworkMode =
-                    hasTelephonyMgr ? MobileNetworkUtils.getNetworkTypeFromRaf(
+                    hasTelephonyMgr ? RadioAccessFamily.getNetworkTypeFromRaf(
                             (int) allowedNetworkTypes) : NETWORK_MODE_UNKNOWN;
             final boolean enableList = settingsNetworkMode != NETWORK_MODE_LTE_GSM_WCDMA
                     && settingsNetworkMode != NETWORK_MODE_NR_LTE_GSM_WCDMA;
