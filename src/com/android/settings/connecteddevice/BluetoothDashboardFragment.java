@@ -25,6 +25,8 @@ import android.view.View;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import androidx.fragment.app.Fragment;
@@ -205,4 +207,9 @@ public class BluetoothDashboardFragment extends DashboardFragment {
      */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.bluetooth_screen);
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return BluetoothDashboardScreen.KEY;
+    }
 }

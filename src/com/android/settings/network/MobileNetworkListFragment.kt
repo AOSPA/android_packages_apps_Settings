@@ -88,4 +88,6 @@ class MobileNetworkListFragment : DashboardFragment() {
                 simRepositoryFactory(context).canEnterMobileNetworkPage()
         }
     }
+
+    override fun getPreferenceScreenBindingKey(context: Context) = MobileNetworkListScreen.KEY
 }

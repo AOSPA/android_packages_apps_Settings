@@ -137,9 +137,8 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                 }
             };
 
-    @Nullable
     @Override
-    public String getPreferenceScreenBindingKey(@NonNull Context context) {
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
         return NetworkDashboardScreen.KEY;
     }
 }
