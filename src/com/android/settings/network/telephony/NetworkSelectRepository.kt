@@ -102,7 +102,7 @@ class NetworkSelectRepository(context: Context, private val subId: Int) {
             true)
 
         return if (shouldFilter) {
-            satelliteManager.getSatellitePlmnsForCarrier(subId)
+            satelliteManager?.getSatellitePlmnsForCarrier(subId) ?: emptyList()
         } else {
             emptyList();
         }
