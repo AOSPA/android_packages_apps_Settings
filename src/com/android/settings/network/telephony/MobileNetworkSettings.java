@@ -431,8 +431,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 new DataUsageSummaryPreferenceController(context, mSubId),
                 new DataDefaultSubscriptionController(context, KEY_DATA_PREF,
                         getSettingsLifecycle(), this),
-                new RoamingPreferenceController(context, KEY_ROAMING_PREF, getSettingsLifecycle(),
-                        this, mSubId),
                 new CallsDefaultSubscriptionController(context, KEY_CALLS_PREF,
                         getSettingsLifecycle(), this),
                 new SmsDefaultSubscriptionController(context, KEY_SMS_PREF, getSettingsLifecycle(),
@@ -522,8 +520,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         final RoamingPreferenceController roamingPreferenceController =
                 use(RoamingPreferenceController.class);
         if (roamingPreferenceController != null) {
-            roamingPreferenceController.init(getFragmentManager(), mSubId,
-                    mMobileNetworkInfoEntity);
+            roamingPreferenceController.init(getFragmentManager(), mSubId);
         }
         final SatelliteSettingPreferenceController satelliteSettingPreferenceController = use(
                 SatelliteSettingPreferenceController.class);

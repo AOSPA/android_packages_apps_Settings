@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
+/*
+* Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
+* Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+* SPDX-License-Identifier: BSD-3-Clause-Clear
+*/
+
 package com.android.settings.network.telephony
 
 import android.content.Context
@@ -54,7 +60,7 @@ class RoamingPreferenceControllerTest {
         }
 
     private val controller =
-        RoamingPreferenceControllerAOSP(context, TEST_KEY, mockMobileDataRepository)
+        RoamingPreferenceController(context, TEST_KEY, mockMobileDataRepository)
 
     @Before
     fun setUp() {

@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center are provided under the following license:
+ *
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
 package com.android.settings.network.telephony
 
 import android.content.Context
@@ -21,6 +27,7 @@ import android.os.UserManager
 import android.telephony.CarrierConfigManager
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
+import android.util.Log
 import androidx.annotation.VisibleForTesting
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -37,7 +44,7 @@ import com.android.settingslib.spaprivileged.model.enterprise.Restrictions
 import com.android.settingslib.spaprivileged.template.preference.RestrictedSwitchPreference
 
 /** Preference controller for "Roaming" */
-class RoamingPreferenceControllerAOSP
+class RoamingPreferenceController
 @JvmOverloads
 constructor(
     context: Context,
@@ -50,11 +57,18 @@ constructor(
     private var telephonyManager = context.getSystemService(TelephonyManager::class.java)!!
     private val carrierConfigRepository = CarrierConfigRepository(context)
     private val roamingSearchItem = RoamingSearchItem(context)
+    private var dialogType = -1
 
     fun init(fragmentManager: FragmentManager, subId: Int) {
         this.fragmentManager = fragmentManager
         this.subId = subId
+        Log.d(TAG, "init() subId: $subId");
         telephonyManager = telephonyManager.createForSubscriptionId(subId)
+        if ((this.subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) ||
+                (telephonyManager == null)) {
+            return;
+        }
+        RoamingPreferenceControllerUtil.init(mContext)
     }
 
     override fun getAvailabilityStatus() =
@@ -71,13 +85,21 @@ constructor(
                 object : SwitchPreferenceModel {
                     override val title = stringResource(R.string.roaming)
                     override val summary = { summary }
+                    override val changeable = {
+                            !RoamingPreferenceControllerUtil.isDisallowed(subId) }
                     override val checked = { isDataRoamingEnabled }
                     override val onCheckedChange: (Boolean) -> Unit = { newChecked ->
                         if (newChecked && isDialogNeeded()) {
-                            showDialog()
+                            dialogType = RoamingDialogFragment.TYPE_ENABLE_DIALOG
+                            showDialog(dialogType, title)
                         } else {
-                            // Update data directly if we don't need dialog
-                            telephonyManager.isDataRoamingEnabled = newChecked
+                            if (RoamingPreferenceControllerUtil.isDialogNeeded(subId)) {
+                                dialogType = RoamingDialogFragment.TYPE_DISABLE_CIWLAN_DIALOG
+                                showDialog(dialogType, title)
+                            } else {
+                                // Update data directly if we don't need dialog
+                                telephonyManager.isDataRoamingEnabled = newChecked
+                            }
                         }
                     }
                 },
@@ -87,17 +109,24 @@ constructor(
 
     @VisibleForTesting
     fun isDialogNeeded(): Boolean {
+        if (telephonyManager == null) {
+            return false;
+        }
+
         // Need dialog if we need to turn on roaming and the roaming charge indication is allowed
         return !carrierConfigRepository.getBoolean(
-            subId, CarrierConfigManager.KEY_DISABLE_CHARGE_INDICATION_BOOL)
+                subId, CarrierConfigManager.KEY_DISABLE_CHARGE_INDICATION_BOOL)
     }
 
-    private fun showDialog() {
-        fragmentManager?.let { RoamingDialogFragment.newInstance("temp", 0, subId, false).show(it, DIALOG_TAG) }
+    private fun showDialog(type: Int, preftitle: String) {
+        Log.d(TAG, "showDialog type: $type")
+        fragmentManager?.let { RoamingDialogFragment.newInstance(preftitle, type, subId,
+                MobileNetworkSettings.isCiwlanModeSupported(subId)).show(it, DIALOG_TAG) }
     }
 
     companion object {
         private const val DIALOG_TAG = "MobileDataDialog"
+        private const val TAG = "RoamingPreferenceController"
 
         class RoamingSearchItem(private val context: Context) : MobileNetworkSettingsSearchItem {
             private val carrierConfigRepository = CarrierConfigRepository(context)
