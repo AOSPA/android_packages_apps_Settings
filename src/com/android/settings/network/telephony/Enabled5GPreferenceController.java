@@ -65,8 +65,7 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settings.R;
 import com.android.settings.network.AllowedNetworkTypesListener;
 import com.android.settings.network.telephony.MobileNetworkUtils;
-import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
-
+import com.android.settings.network.telephony.mode.NetworkModes;
 /**
  * Preference controller for "Enabled 5G Switch"
 */
@@ -286,7 +285,7 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
     }
 
     private int getAllowedNetworkMode() {
-        long allowedNetworkTypes = TelephonyManagerConstants.NETWORK_MODE_UNKNOWN;
+        long allowedNetworkTypes = NetworkModes.NETWORK_MODE_UNKNOWN;
         try {
             allowedNetworkTypes = mTelephonyManager.getAllowedNetworkTypesForReason(
                     TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER);

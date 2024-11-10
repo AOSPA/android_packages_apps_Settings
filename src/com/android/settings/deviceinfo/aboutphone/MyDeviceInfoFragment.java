@@ -29,6 +29,9 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
@@ -274,6 +277,11 @@ public class MyDeviceInfoFragment extends DashboardFragment
     public void onSetDeviceNameConfirm(boolean confirm) {
         final DeviceNamePreferenceController controller = use(DeviceNamePreferenceController.class);
         controller.updateDeviceName(confirm);
+    }
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return MyDeviceInfoScreen.KEY;
     }
 
     /**

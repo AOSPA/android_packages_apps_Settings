@@ -28,6 +28,7 @@ import android.net.Uri;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.FeatureFlagUtils;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -62,8 +63,9 @@ import java.util.List;
 )
 public class SettingsApplication extends Application {
 
+    private static final String TAG = "SettingsApplication";
     private WeakReference<SettingsHomepageActivity> mHomeActivity = new WeakReference<>(null);
-    @Nullable private BiometricsEnvironment mBiometricsEnvironment;
+    @Nullable volatile private BiometricsEnvironment mBiometricsEnvironment;
 
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
@@ -154,20 +156,23 @@ public class SettingsApplication extends Application {
 
     @Nullable
     public BiometricsEnvironment getBiometricEnvironment() {
-        if (Flags.fingerprintV2Enrollment()) {
-            if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
-                final FingerprintManager fpm = getSystemService(FingerprintManager.class);
-                if (mBiometricsEnvironment == null) {
-                    mBiometricsEnvironment = new BiometricsEnvironment(this, fpm);
+        BiometricsEnvironment localEnvironment = mBiometricsEnvironment;
+        if (localEnvironment == null) {
+            synchronized (this) {
+                if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
+                    return null;
                 }
-                return  mBiometricsEnvironment;
-
-            } else {
-                return null;
+                final FingerprintManager fpm = getSystemService(FingerprintManager.class);
+                localEnvironment = mBiometricsEnvironment;
+                if (fpm != null && localEnvironment == null) {
+                    mBiometricsEnvironment = localEnvironment = new BiometricsEnvironment(this,
+                            fpm);
+                } else {
+                    Log.e(TAG, "Error when creating environment, fingerprint manager was null");
+                }
             }
-
         }
-        return null;
+        return localEnvironment;
     }
 
     @Override

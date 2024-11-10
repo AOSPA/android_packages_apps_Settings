@@ -53,6 +53,9 @@ public class WifiTetherSwitchBarController implements
     private final SoftApCallback mSoftApCallback = new SoftApCallback();
 
     @VisibleForTesting
+    boolean mIsSwitchBusy;
+
+    @VisibleForTesting
     DataSaverBackend mDataSaverBackend;
     @VisibleForTesting
     final ConnectivityManager.OnStartTetheringCallback mOnStartTetheringCallback =
@@ -96,8 +99,8 @@ public class WifiTetherSwitchBarController implements
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        // Filter out unnecessary callbacks when switch is disabled.
-        if (!buttonView.isEnabled()) return;
+        // Filter out inappropriate callbacks when switch is busy.
+        if (mIsSwitchBusy) return;
 
         if (isChecked) {
             startTether();
@@ -109,14 +112,14 @@ public class WifiTetherSwitchBarController implements
     void stopTether() {
         if (!isWifiApActivated()) return;
 
-        mSwitchBar.setEnabled(false);
+        mIsSwitchBusy = true;
         mConnectivityManager.stopTethering(TETHERING_WIFI);
     }
 
     void startTether() {
         if (isWifiApActivated()) return;
 
-        mSwitchBar.setEnabled(false);
+        mIsSwitchBusy = true;
         mConnectivityManager.startTethering(TETHERING_WIFI, true /* showProvisioningUi */,
                 mOnStartTetheringCallback, new Handler(Looper.getMainLooper()));
     }
@@ -142,6 +145,7 @@ public class WifiTetherSwitchBarController implements
 
     private void updateWifiSwitch() {
         mSwitchBar.setEnabled(!mDataSaverBackend.isDataSaverEnabled());
+        mIsSwitchBusy = false;
     }
 
     @Override

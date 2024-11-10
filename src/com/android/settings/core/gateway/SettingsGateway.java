@@ -118,6 +118,7 @@ import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverScheduleSettings;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverSettings;
+import com.android.settings.fuelgauge.batteryusage.PowerUsageAdvanced;
 import com.android.settings.fuelgauge.batteryusage.PowerUsageSummary;
 import com.android.settings.gestures.ButtonNavigationSettingsFragment;
 import com.android.settings.gestures.DoubleTapPowerSettings;
@@ -278,6 +279,7 @@ public class SettingsGateway {
             DevelopmentSettingsDashboardFragment.class.getName(),
             WifiDisplaySettings.class.getName(),
             PowerUsageSummary.class.getName(),
+            PowerUsageAdvanced.class.getName(),
             AccountSyncSettings.class.getName(),
             FaceSettings.class.getName(),
             FingerprintSettings.FingerprintSettingsFragment.class.getName(),
@@ -417,6 +419,7 @@ public class SettingsGateway {
             Settings.SoundSettingsActivity.class.getName(),
             Settings.StorageDashboardActivity.class.getName(),
             Settings.PowerUsageSummaryActivity.class.getName(),
+            Settings.PowerUsageAdvancedActivity.class.getName(),
             Settings.AccountDashboardActivity.class.getName(),
             Settings.PrivacySettingsActivity.class.getName(),
             Settings.SecurityDashboardActivity.class.getName(),

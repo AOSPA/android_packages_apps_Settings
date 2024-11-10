@@ -24,12 +24,6 @@ package com.android.settings.network.telephony;
 
 import static android.provider.Telephony.Carriers.ENFORCE_MANAGED_URI;
 
-import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO;
-import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA;
-import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO;
-import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA;
-import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_UNKNOWN;
-
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
@@ -82,8 +76,8 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
-import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 import com.android.settings.network.telephony.wificalling.WifiCallingRepository;
+import com.android.settings.network.telephony.mode.NetworkModes;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.graph.SignalDrawable;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
@@ -339,7 +333,7 @@ public class MobileNetworkUtils {
         }
 
         if (isWorldMode(context, subId)) {
-            long allowedNetworkTypes = NETWORK_MODE_UNKNOWN;
+            long allowedNetworkTypes = NetworkModes.NETWORK_MODE_UNKNOWN;
             try {
                 allowedNetworkTypes = telephonyManager.getAllowedNetworkTypesForReason(
                         TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER);
@@ -348,10 +342,10 @@ public class MobileNetworkUtils {
             }
             final int settingsNetworkMode = RadioAccessFamily.getNetworkTypeFromRaf((int) allowedNetworkTypes);
 
-            if (settingsNetworkMode == NETWORK_MODE_LTE_GSM_WCDMA
-                    || settingsNetworkMode == NETWORK_MODE_LTE_CDMA_EVDO
-                    || settingsNetworkMode == NETWORK_MODE_NR_LTE_GSM_WCDMA
-                    || settingsNetworkMode == NETWORK_MODE_NR_LTE_CDMA_EVDO) {
+            if (settingsNetworkMode == TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA
+                    || settingsNetworkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO
+                    || settingsNetworkMode == TelephonyManager.NETWORK_MODE_NR_LTE_GSM_WCDMA
+                    || settingsNetworkMode == TelephonyManager.NETWORK_MODE_NR_LTE_CDMA_EVDO) {
                 return true;
             }
 
@@ -375,7 +369,7 @@ public class MobileNetworkUtils {
         }
         final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(subId);
-        long allowedNetworkTypes = NETWORK_MODE_UNKNOWN;
+        long allowedNetworkTypes = NetworkModes.NETWORK_MODE_UNKNOWN;
         try {
             allowedNetworkTypes = telephonyManager.getAllowedNetworkTypesForReason(
                     TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER);
@@ -384,10 +378,10 @@ public class MobileNetworkUtils {
         }
         final int networkMode = RadioAccessFamily.getNetworkTypeFromRaf((int) allowedNetworkTypes);
         if (isWorldMode(context, subId)) {
-            if (networkMode == NETWORK_MODE_LTE_CDMA_EVDO
-                    || networkMode == NETWORK_MODE_LTE_GSM_WCDMA
-                    || networkMode == NETWORK_MODE_NR_LTE_CDMA_EVDO
-                    || networkMode == NETWORK_MODE_NR_LTE_GSM_WCDMA) {
+            if (networkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO
+                    || networkMode == TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA
+                    || networkMode == TelephonyManager.NETWORK_MODE_NR_LTE_CDMA_EVDO
+                    || networkMode == TelephonyManager.NETWORK_MODE_NR_LTE_GSM_WCDMA) {
                 return true;
             } else if (shouldSpeciallyUpdateGsmCdma(context, subId)) {
                 return true;
@@ -448,7 +442,7 @@ public class MobileNetworkUtils {
         }
 
         if (isWorldMode(context, subId)) {
-            long allowedNetworkTypes = NETWORK_MODE_UNKNOWN;
+            long allowedNetworkTypes = NetworkModes.NETWORK_MODE_UNKNOWN;
             try {
                 allowedNetworkTypes = telephonyManager.getAllowedNetworkTypesForReason(
                         TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER);
@@ -457,14 +451,14 @@ public class MobileNetworkUtils {
                          + " exception", ex);
             }
             final int networkMode = RadioAccessFamily.getNetworkTypeFromRaf((int) allowedNetworkTypes);
-            if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO) {
+            if (networkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO) {
                 return false;
             }
             if (shouldSpeciallyUpdateGsmCdma(context, subId)) {
                 return false;
             }
 
-            if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA) {
+            if (networkMode == TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA) {
                 return true;
             }
         }
@@ -569,7 +563,7 @@ public class MobileNetworkUtils {
         }
         final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(subId);
-        long allowedNetworkTypes = NETWORK_MODE_UNKNOWN;
+        long allowedNetworkTypes = NetworkModes.NETWORK_MODE_UNKNOWN;
         try {
             allowedNetworkTypes = telephonyManager.getAllowedNetworkTypesForReason(
                     TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER);
@@ -578,13 +572,13 @@ public class MobileNetworkUtils {
                     + " exception", ex);
         }
         final int networkMode = RadioAccessFamily.getNetworkTypeFromRaf((int) allowedNetworkTypes);
-        if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM
-                || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA
-                || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA
-                || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_WCDMA
+        if (networkMode == TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_GSM
+                || networkMode == TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA
+                || networkMode == TelephonyManager.NETWORK_MODE_LTE_TDSCDMA
+                || networkMode == TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_WCDMA
                 || networkMode
-                == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA
-                || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA) {
+                == TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA
+                || networkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA) {
             if (!isTdscdmaSupported(context, subId)) {
                 return true;
             }

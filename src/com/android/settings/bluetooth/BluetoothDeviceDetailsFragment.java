@@ -138,6 +138,14 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                         }
                     }
                 }
+
+                @Override
+                public void onDeviceBondStateChanged(
+                        @NonNull CachedBluetoothDevice cachedDevice, int bondState) {
+                    if (cachedDevice.equals(mCachedDevice)) {
+                        finishFragmentIfNecessary();
+                    }
+                }
             };
 
     private final BluetoothAdapter.OnMetadataChangedListener mExtraControlMetadataListener =
@@ -455,11 +463,13 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         List<String> invisibleProfiles = List.of();
         if (Flags.enableBluetoothDeviceDetailsPolish()) {
-            mFormatter =
-                    FeatureFactory.getFeatureFactory()
-                            .getBluetoothFeatureProvider()
-                            .getDeviceDetailsFragmentFormatter(
-                                    requireContext(), this, mBluetoothAdapter, mCachedDevice);
+            if (mFormatter == null) {
+                mFormatter =
+                        FeatureFactory.getFeatureFactory()
+                                .getBluetoothFeatureProvider()
+                                .getDeviceDetailsFragmentFormatter(
+                                        requireContext(), this, mBluetoothAdapter, mCachedDevice);
+            }
             invisibleProfiles =
                     mFormatter.getInvisibleBluetoothProfiles(
                             FragmentTypeModel.DeviceDetailsMainFragment.INSTANCE);
@@ -483,7 +493,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
             controllers.add(new BluetoothDetailsSpatialAudioController(context, this, mCachedDevice,
                     lifecycle));
             controllers.add(new BluetoothDetailsProfilesController(context, this, mManager,
-                    mCachedDevice, lifecycle, invisibleProfiles));
+                    mCachedDevice, lifecycle, invisibleProfiles, invisibleProfiles == null));
             controllers.add(new BluetoothDetailsMacAddressController(context, this, mCachedDevice,
                     lifecycle));
             controllers.add(new StylusDevicesController(context, mInputDevice, mCachedDevice,
