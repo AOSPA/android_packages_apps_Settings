@@ -84,6 +84,9 @@ public class WifiHotspotSecuritySettings extends DashboardFragment implements
             if (preference == null) {
                 continue;
             }
+            if (preference.isVisible() != viewItem.mIsVisible) {
+                preference.setVisible(viewItem.mIsVisible);
+            }
             if (preference.isChecked() != viewItem.mIsChecked) {
                 preference.setChecked(viewItem.mIsChecked);
             }

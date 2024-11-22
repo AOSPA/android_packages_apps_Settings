@@ -73,6 +73,15 @@ public class WifiHotspotSecurityViewModel extends AndroidViewModel {
                 .getWifiHotspotRepository();
         mWifiHotspotRepository.getSecurityType().observeForever(mSecurityTypeObserver);
         mWifiHotspotRepository.getSpeedType().observeForever(mSpeedTypeObserver);
+
+        if (!mWifiHotspotRepository.isDualBand()) {
+            for (Map.Entry<Integer, ViewItem> entry : mViewItemMap.entrySet()) {
+                 if (entry.getKey() == SECURITY_TYPE_WPA3_OWE) {
+                     entry.getValue().mIsEnabled = false;
+                     entry.getValue().mIsVisible = false;
+                 }
+            }
+        }
     }
 
     @Override
@@ -158,6 +167,7 @@ public class WifiHotspotSecurityViewModel extends AndroidViewModel {
         String mKey;
         boolean mIsChecked;
         boolean mIsEnabled = true;
+        boolean mIsVisible = true;
 
         public ViewItem(String key) {
             mKey = key;
@@ -169,6 +179,7 @@ public class WifiHotspotSecurityViewModel extends AndroidViewModel {
                     .append("Key:").append(mKey)
                     .append(",IsChecked:").append(mIsChecked)
                     .append(",IsEnabled:").append(mIsEnabled)
+                    .append(",isVisible:").append(mIsVisible)
                     .append('}').toString();
         }
     }
