@@ -15,12 +15,14 @@
  */
 
 /*
- * Changes from Qualcomm Innovation Center are provided under the following license:
- * Copyright (c) 2022, 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
+ * Copyright (c) 2022-2024 Qualcomm Innovation Center, Inc. All rights reserved.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
 package com.android.settings.network.telephony;
+
+import static com.qti.extphone.ExtTelephonyManager.FEATURE_TDSCDMA_SUPPORT;
 
 import static android.provider.Telephony.Carriers.ENFORCE_MANAGED_URI;
 
@@ -98,7 +100,6 @@ public class MobileNetworkUtils {
     public static final int NO_CELL_DATA_TYPE_ICON = 0;
     public static final Drawable EMPTY_DRAWABLE = new ColorDrawable(Color.TRANSPARENT);
 
-    private static ExtTelephonyManager mExtTelephonyManager;
     private static final String PROPERTY_CAG_SNPN = "persist.vendor.cag_snpn";
     private static final String NETWORK_ACCESS_MODE = "access_mode";
     private static int mCagSnpnFeatureStatus = -1;
@@ -310,6 +311,11 @@ public class MobileNetworkUtils {
         }
     }
 
+    public static boolean isCdmaSupported(Context context) {
+        final PackageManager pm = context.getPackageManager();
+        return pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY_CDMA);
+    }
+
     /**
      * Return {@code true} if show CDMA category
      */
@@ -476,6 +482,11 @@ public class MobileNetworkUtils {
 
     //TODO(b/117651939): move it to telephony
     private static boolean isTdscdmaSupported(Context context, TelephonyManager telephonyManager) {
+        ExtTelephonyManager extTelephonyMgr = ExtTelephonyManager.getInstance(context);
+        if (!extTelephonyMgr.isFeatureSupported(FEATURE_TDSCDMA_SUPPORT)) {
+            return false;
+        }
+
         final PersistableBundle carrierConfig = CarrierConfigCache.getInstance(context).getConfig();
 
         if (carrierConfig == null) {
@@ -816,9 +827,9 @@ public class MobileNetworkUtils {
 
     public static boolean isCagSnpnEnabled(Context context) {
         if (mCagSnpnFeatureStatus == -1) {
-            mExtTelephonyManager = ExtTelephonyManager.getInstance(context);
-            mCagSnpnFeatureStatus = mExtTelephonyManager.getPropertyValueBool(PROPERTY_CAG_SNPN,
-                false) ? 1 : 0;
+            ExtTelephonyManager extTelephonyMgr = ExtTelephonyManager.getInstance(context);
+            mCagSnpnFeatureStatus = extTelephonyMgr.getPropertyValueBool(PROPERTY_CAG_SNPN, false)
+                    ? 1 : 0;
             Log.d(TAG, "isCagSnpnEnabled, mCagSnpnFeatureStatus = " + mCagSnpnFeatureStatus);
         }
         return mCagSnpnFeatureStatus == 1 ? true : false;

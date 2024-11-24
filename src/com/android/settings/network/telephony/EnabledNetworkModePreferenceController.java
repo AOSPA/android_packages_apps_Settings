@@ -352,9 +352,10 @@ public class EnabledNetworkModePreferenceController extends
                     mTelephonyManager.getSupportedRadioAccessFamily(),
                     TelephonyManager.NETWORK_TYPE_BITMASK_NR);
             if (carrierConfig != null) {
-                mIsGlobalCdma = mTelephonyManager.isLteCdmaEvdoGsmWcdmaEnabled()
+                mIsGlobalCdma = MobileNetworkUtils.isCdmaSupported(mContext)
+                        && mTelephonyManager.isLteCdmaEvdoGsmWcdmaEnabled()
                         && carrierConfig.getBoolean(
-                        CarrierConfigManager.KEY_SHOW_CDMA_CHOICES_BOOL);
+                                CarrierConfigManager.KEY_SHOW_CDMA_CHOICES_BOOL);
                 mShow4gForLTE = carrierConfig.getBoolean(
                         CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL);
                 mDisplay2gOptions = carrierConfig.getBoolean(
@@ -502,7 +503,7 @@ public class EnabledNetworkModePreferenceController extends
             IntStream.range(0, formatList.size()).forEach(entryIndex -> {
                 switch (formatList.get(entryIndex)) {
                     case add1xEntry:
-                        if (mDisplay2gOptions) {
+                        if (MobileNetworkUtils.isCdmaSupported(mContext) && mDisplay2gOptions) {
                             add1xEntry(entryValuesInt[entryIndex]);
                         }
                         break;
@@ -520,10 +521,12 @@ public class EnabledNetworkModePreferenceController extends
                         addGlobalEntry(entryValuesInt[entryIndex]);
                         break;
                     case addWorldModeCdmaEntry:
-                        addCustomEntry(
-                                getResourcesForSubId().getString(
-                                        R.string.network_world_mode_cdma_lte),
-                                entryValuesInt[entryIndex]);
+                        if (MobileNetworkUtils.isCdmaSupported(mContext)) {
+                            addCustomEntry(
+                                    getResourcesForSubId().getString(
+                                            R.string.network_world_mode_cdma_lte),
+                                    entryValuesInt[entryIndex]);
+                        }
                         break;
                     case addWorldModeGsmEntry:
                         addCustomEntry(

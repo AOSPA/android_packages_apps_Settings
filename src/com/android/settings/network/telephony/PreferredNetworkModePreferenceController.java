@@ -60,6 +60,10 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.telephony.mode.NetworkModes;
 
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Preference controller for "Preferred network mode"
  */
@@ -113,6 +117,8 @@ public class PreferredNetworkModePreferenceController extends BasePreferenceCont
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
+        // Remove entries containing CDMA and TDSCDMA choices if unsupported
+        removeCdmaAndTdscdmaChoices();
     }
 
     @Override
@@ -199,6 +205,31 @@ public class PreferredNetworkModePreferenceController extends BasePreferenceCont
         return true;
     }
 
+    private void removeCdmaAndTdscdmaChoices() {
+        final ListPreference listPreference = (ListPreference) mPreference;
+        final CharSequence[] entries = listPreference.getEntries();
+        final CharSequence[] entryValues = listPreference.getEntryValues();
+        final ArrayList<CharSequence> newEntries = new ArrayList<>();
+        final ArrayList<CharSequence> newEntryValues = new ArrayList<>();
+        final boolean cdmaSupported = MobileNetworkUtils.isCdmaSupported(mContext);
+        final boolean tdscdmaSupported = MobileNetworkUtils.isTdscdmaSupported(mContext, mSubId);
+        final Pattern pattern = Pattern.compile("(?<!W|TDS)CDMA|EvDo");
+        for (int i = 0; i < entries.length; i++) {
+            String entry = entries[i].toString();
+            Matcher matcher = pattern.matcher(entry);
+            if (cdmaSupported || !matcher.find()) {
+                newEntries.add(entries[i]);
+                newEntryValues.add(entryValues[i]);
+            }
+            if (!tdscdmaSupported && entry.contains("TDSCDMA")) {
+                newEntries.remove(entries[i]);
+                newEntryValues.remove(entryValues[i]);
+            }
+        }
+        listPreference.setEntries(newEntries.toArray(new CharSequence[0]));
+        listPreference.setEntryValues(newEntryValues.toArray(new CharSequence[0]));
+    }
+
     private boolean isCiwlanIncompatibleNetworkSelected(int networkMode) {
         long raf = RadioAccessFamily.getRafFromNetworkType(networkMode);
         return (LTE & raf) == 0 && (NR & raf) == 0;
@@ -224,7 +255,8 @@ public class PreferredNetworkModePreferenceController extends BasePreferenceCont
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
 
-        mIsGlobalCdma = mTelephonyManager.isLteCdmaEvdoGsmWcdmaEnabled()
+        mIsGlobalCdma = MobileNetworkUtils.isCdmaSupported(mContext)
+                && mTelephonyManager.isLteCdmaEvdoGsmWcdmaEnabled()
                 && carrierConfig.getBoolean(CarrierConfigManager.KEY_SHOW_CDMA_CHOICES_BOOL);
 
         if (mAllowedNetworkTypesListener == null) {
