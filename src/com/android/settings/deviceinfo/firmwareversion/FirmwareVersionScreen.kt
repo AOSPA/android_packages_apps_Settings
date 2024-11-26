@@ -20,6 +20,7 @@ import android.app.settings.SettingsEnums
 import android.content.Context
 import android.os.Build
 import androidx.fragment.app.Fragment
+import co.aospa.settings.deviceinfo.firmwareversion.ParanoidBasebandVersionPreference
 import com.android.settings.R
 import com.android.settings.Settings.FirmwareVersionActivity
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
@@ -73,7 +74,7 @@ open class FirmwareVersionScreen : PreferenceScreenMixin, PreferenceSummaryProvi
             +FirmwareVersionDetailPreference()
             +SecurityPatchLevelPreference()
             +MainlineModuleVersionPreference()
-            +BasebandVersionPreference()
+            +ParanoidBasebandVersionPreference()
             +KernelVersionPreference()
             +SimpleBuildNumberPreference()
         }
