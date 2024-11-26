@@ -61,7 +61,7 @@
         android:summary="@string/summary_placeholder"
         android:selectable="false"
         settings:enableCopying="true"
-        settings:controller="com.android.settings.deviceinfo.firmwareversion.BasebandVersionPreferenceController"/>
+        settings:controller="co.aospa.settings.deviceinfo.firmwareversion.ParanoidBasebandVersionPreferenceController"/>
 
     <!-- Kernel -->
     <Preference
