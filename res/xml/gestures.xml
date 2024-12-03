@@ -61,7 +61,7 @@
         settings:searchable="false"
         settings:controller="com.android.settings.gestures.TapScreenGesturePreferenceController" />
 
-    <Preference
+    <com.android.settingslib.PrimarySwitchPreference
         android:key="gesture_double_tap_screen_input_summary"
         android:title="@string/ambient_display_title"
         android:fragment="com.android.settings.gestures.DoubleTapScreenSettings"
