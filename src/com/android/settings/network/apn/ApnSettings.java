@@ -91,8 +91,8 @@ public class ApnSettings extends RestrictedSettingsFragment
     private static final int APN_INDEX = 2;
     private static final int TYPES_INDEX = 3;
     private static final int EDITED_INDEX = 4;
-    private static final int BEARER_INDEX = 7;
-    private static final int BEARER_BITMASK_INDEX = 8;
+    private static final int BEARER_INDEX = 5;
+    private static final int BEARER_BITMASK_INDEX = 6;
 
     private static final int MENU_NEW = Menu.FIRST;
     private static final int MENU_RESTORE = Menu.FIRST + 1;
