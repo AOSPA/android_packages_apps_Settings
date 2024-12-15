@@ -102,7 +102,6 @@ public class BluetoothDetailsCompanionAppsControllerTest extends
                 associationId,
                 /* userId */ 0,
                 packageName,
-                /* tag */ null,
                 MacAddress.fromString(mCachedDevice.getAddress()),
                 /* displayName */ null,
                 /* deviceProfile */ "",
@@ -114,7 +113,8 @@ public class BluetoothDetailsCompanionAppsControllerTest extends
                 /* timeApprovedMs */ System.currentTimeMillis(),
                 /* lastTimeConnected */ Long.MAX_VALUE,
                 /* systemDataSyncFlags */ -1,
-                /* deviceIcon */ null);
+                /* deviceIcon */ null,
+                /* deviceId */ null);
 
         mAssociations.add(association);
         showScreen(mController);

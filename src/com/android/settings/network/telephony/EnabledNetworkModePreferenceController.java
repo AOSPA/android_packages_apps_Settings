@@ -22,9 +22,6 @@
 
 package com.android.settings.network.telephony;
 
-import static androidx.lifecycle.Lifecycle.Event.ON_START;
-import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
-
 import static com.android.settings.network.telephony.EnabledNetworkModePreferenceControllerHelperKt.getNetworkModePreferenceType;
 import static com.android.settings.network.telephony.EnabledNetworkModePreferenceControllerHelperKt.setAllowedNetworkTypes;
 import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.LTE;
@@ -50,15 +47,17 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
+import android.telephony.satellite.SatelliteManager;
+import android.telephony.satellite.SatelliteModemStateCallback;
+import android.telephony.satellite.SelectedNbIotSatelliteSubscriptionCallback;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.ListPreference;
 import androidx.preference.ListPreferenceDialogFragmentCompat;
 import androidx.preference.Preference;
@@ -85,7 +84,7 @@ import java.util.stream.Stream;
  */
 public class EnabledNetworkModePreferenceController extends
         BasePreferenceController implements
-        ListPreference.OnPreferenceChangeListener, LifecycleObserver,
+        ListPreference.OnPreferenceChangeListener, DefaultLifecycleObserver,
         SubscriptionsChangeListener.SubscriptionsChangeListenerClient {
 
     private static final String LOG_TAG = "EnabledNetworkMode";
@@ -102,6 +101,43 @@ public class EnabledNetworkModePreferenceController extends
     private FragmentManager mFragmentManager;
     private LifecycleOwner mViewLifecycleOwner;
     private PhoneCallStateListener mPhoneStateListener;
+    private SatelliteManager mSatelliteManager;
+    private boolean mIsSatelliteSessionStarted = false;
+    private boolean mIsCurrentSubscriptionForSatellite = false;
+
+    @VisibleForTesting
+    final SelectedNbIotSatelliteSubscriptionCallback mSelectedNbIotSatelliteSubscriptionCallback =
+            new SelectedNbIotSatelliteSubscriptionCallback() {
+                @Override
+                public void onSelectedNbIotSatelliteSubscriptionChanged(int selectedSubId) {
+                    mIsCurrentSubscriptionForSatellite = selectedSubId == mSubId;
+                    updatePreference();
+                }
+            };
+
+    @VisibleForTesting
+    final SatelliteModemStateCallback mSatelliteModemStateCallback =
+            new SatelliteModemStateCallback() {
+                @Override
+                public void onSatelliteModemStateChanged(int state) {
+                    switch (state) {
+                        case SatelliteManager.SATELLITE_MODEM_STATE_OFF:
+                        case SatelliteManager.SATELLITE_MODEM_STATE_UNAVAILABLE:
+                        case SatelliteManager.SATELLITE_MODEM_STATE_UNKNOWN:
+                            if (mIsSatelliteSessionStarted) {
+                                mIsSatelliteSessionStarted = false;
+                                updatePreference();
+                            }
+                            break;
+                        default:
+                            if (!mIsSatelliteSessionStarted) {
+                                mIsSatelliteSessionStarted = true;
+                                updatePreference();
+                            }
+                            break;
+                    }
+                }
+            };
 
     public EnabledNetworkModePreferenceController(Context context, String key) {
         super(context, key);
@@ -109,6 +145,7 @@ public class EnabledNetworkModePreferenceController extends
         if (mTelephonyCallback == null) {
             mTelephonyCallback = new PhoneCallStateTelephonyCallback();
         }
+        mSatelliteManager = context.getSystemService(SatelliteManager.class);
     }
 
     @Override
@@ -122,8 +159,22 @@ public class EnabledNetworkModePreferenceController extends
         return mCallState == TelephonyManager.CALL_STATE_IDLE;
     }
 
-    @OnLifecycleEvent(ON_START)
-    public void onStart() {
+    @Override
+    public void onStart(@NonNull LifecycleOwner owner) {
+        if (com.android.settings.flags.Flags.satelliteOemSettingsUxMigration()) {
+            if (mSatelliteManager != null) {
+                try {
+                    mSatelliteManager.registerForModemStateChanged(
+                            mContext.getMainExecutor(), mSatelliteModemStateCallback);
+                    mSatelliteManager.registerForSelectedNbIotSatelliteSubscriptionChanged(
+                            mContext.getMainExecutor(),
+                            mSelectedNbIotSatelliteSubscriptionCallback);
+                } catch (IllegalStateException e) {
+                    Log.w(LOG_TAG, "IllegalStateException : " + e);
+                }
+            }
+        }
+
         mSubscriptionsListener.start();
         if (mAllowedNetworkTypesListener == null || mTelephonyCallback == null) {
             return;
@@ -136,9 +187,21 @@ public class EnabledNetworkModePreferenceController extends
         mTelephonyCallback.register(mTelephonyManager, mSubId);
     }
 
-    @OnLifecycleEvent(ON_STOP)
-    public void onStop() {
+    @Override
+    public void onStop(@NonNull LifecycleOwner owner) {
         mSubscriptionsListener.stop();
+        if (com.android.settings.flags.Flags.satelliteOemSettingsUxMigration()) {
+            if (mSatelliteManager != null) {
+                try {
+                    mSatelliteManager.unregisterForModemStateChanged(mSatelliteModemStateCallback);
+                    mSatelliteManager.unregisterForSelectedNbIotSatelliteSubscriptionChanged(
+                            mSelectedNbIotSatelliteSubscriptionCallback);
+                } catch (IllegalStateException e) {
+                    Log.w(LOG_TAG, "IllegalStateException : " + e);
+                }
+            }
+        }
+
         if (mAllowedNetworkTypesListener == null || mTelephonyCallback == null) {
             return;
         }
@@ -176,7 +239,7 @@ public class EnabledNetworkModePreferenceController extends
         listPreference.setEntryValues(mBuilder.getEntryValues());
         listPreference.setValue(Integer.toString(mBuilder.getSelectedEntryValue()));
         listPreference.setSummary(mBuilder.getSummary());
-        boolean listPreferenceEnabled = isCallStateIdle();
+        boolean listPreferenceEnabled = isPreferenceShallEnabled();
         listPreference.setEnabled(listPreferenceEnabled);
         if (!listPreferenceEnabled) {
             // If dialog is already opened when ListPreference disabled, dismiss them.
@@ -306,6 +369,14 @@ public class EnabledNetworkModePreferenceController extends
         }
     }
 
+    private boolean isPreferenceShallEnabled() {
+        Log.d(LOG_TAG, "isPreferenceShallEnabled, mIsSatelliteSessionStarted : "
+                + mIsSatelliteSessionStarted + " / mIsCurrentSubscriptionForSatellite : "
+                + mIsCurrentSubscriptionForSatellite);
+        return isCallStateIdle()
+                && !(mIsSatelliteSessionStarted && mIsCurrentSubscriptionForSatellite);
+    }
+
     private final class PreferenceEntriesBuilder {
         private CarrierConfigCache mCarrierConfigCache;
         private Context mContext;
@@ -363,7 +434,7 @@ public class EnabledNetworkModePreferenceController extends
 
                 if (flagHidePrefer3gItem) {
                     mDisplay3gOptions = carrierConfig.getBoolean(
-                        CarrierConfigManager.KEY_PREFER_3G_VISIBILITY_BOOL);
+                            CarrierConfigManager.KEY_PREFER_3G_VISIBILITY_BOOL);
                 } else {
                     mDisplay3gOptions = getResourcesForSubId().getBoolean(
                             R.bool.config_display_network_mode_3g_option);
