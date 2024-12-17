@@ -30,8 +30,8 @@ import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 /**
  * Dialog fragment to show dialog for "Backup Calling"
@@ -42,9 +42,7 @@ import com.android.settings.R;
 public class BackupCallingDialogFragment extends InstrumentedDialogFragment {
 
     private static final String LOG_TAG = "BackupCallingDialogFragment";
-    private static final String ARG_PREF_TITLE = "pref_title";
     private static final String ARG_DIALOG_TYPE = "dialog_type";
-    private static final String ARG_SUB_ID = "subId";
 
     public static final int TYPE_NW_INCOMPATIBLE_ON_DDS_COMPATIBLE_ON_NDDS_ATTEMPT_DDS = 0;
     public static final int TYPE_NW_INCOMPATIBLE_ON_DDS_COMPATIBLE_ON_NDDS_ATTEMPT_NDDS = 1;
@@ -52,13 +50,11 @@ public class BackupCallingDialogFragment extends InstrumentedDialogFragment {
     public static final int TYPE_NW_COMPATIBLE_ON_DDS_INCOMPATIBLE_ON_NDDS_ATTEMPT_NDDS = 3;
     public static final int TYPE_NW_INCOMPATIBLE_ON_DDS_INCOMPATIBLE_ON_NDDS_ATTEMPT_EITHER_SUB = 4;
 
-    private String mPrefTitle;
     private int mType;
 
-    public static BackupCallingDialogFragment newInstance(String prefTitle, int type) {
+    public static BackupCallingDialogFragment newInstance(int type) {
         final BackupCallingDialogFragment dialogFragment = new BackupCallingDialogFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PREF_TITLE, prefTitle);
         args.putInt(ARG_DIALOG_TYPE, type);
         dialogFragment.setArguments(args);
         return dialogFragment;
@@ -69,7 +65,6 @@ public class BackupCallingDialogFragment extends InstrumentedDialogFragment {
         final Bundle bundle = getArguments();
         final Context context = getContext();
 
-        mPrefTitle = bundle.getString(ARG_PREF_TITLE).toLowerCase();
         mType = bundle.getInt(ARG_DIALOG_TYPE);
 
         int dialogBodyTextId;

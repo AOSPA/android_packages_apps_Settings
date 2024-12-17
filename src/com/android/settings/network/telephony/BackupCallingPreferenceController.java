@@ -41,6 +41,7 @@ import android.telephony.ims.ImsMmTelManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.DefaultLifecycleObserver;
@@ -54,7 +55,6 @@ import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.telephony.mode.NetworkModes;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
 
-import com.qti.extphone.CiwlanConfig;
 import com.qti.extphone.ExtTelephonyManager;
 import com.qti.extphone.ServiceCallback;
 
@@ -70,10 +70,7 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
     private static final String LOG_TAG = "BackupCallingPrefCtrl";
     private static final String DIALOG_TAG = "BackupCallingDialog";
 
-    private final String PREFERENCE_KEY = "backup_calling_key";
-
     private Preference mPreference;
-    private PreferenceScreen mScreen;
     private Context mContext;
     private PhoneTelephonyCallback mTelephonyCallback;
     private ExtTelephonyManager mExtTelephonyManager;
@@ -98,30 +95,20 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
     public BackupCallingPreferenceController(Context context, String key) {
         super(context, key);
         mContext = context.getApplicationContext();
-        mExtTelephonyManager = ExtTelephonyManager.getInstance(mContext);
-        mExtTelephonyManager.connectService(mExtTelManagerServiceCallback);
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
         mTelephonyCallback = new PhoneTelephonyCallback();
     }
 
     private ServiceCallback mExtTelManagerServiceCallback = new ServiceCallback() {
-
-        // Since ExtTelephony service is called from TelephonyComponentFactory,
-        // onConnected() is called even before mExtTelephonyManager.connectService
-        // as per ExtTelephonyManager#connectService()
         @Override
         public void onConnected() {
-            Log.d(LOG_TAG, "mExtTelManagerServiceCallback: service connected");
+            Log.d(LOG_TAG, "ExtTelephony service connected");
             mServiceConnected = true;
-            displayPreference(mScreen);
-            if (mScreen != null) {
-                updateState((SwitchPreference) mScreen.findPreference(PREFERENCE_KEY));
-            }
         }
 
         @Override
         public void onDisconnected() {
-            Log.d(LOG_TAG, "mExtTelManagerServiceCallback: service disconnected");
+            Log.d(LOG_TAG, "ExtTelephony service disconnected");
             mServiceConnected = false;
         }
     };
@@ -141,6 +128,21 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
         mCrossSimUri = Uri.withAppendedPath(
                 SubscriptionManager.CROSS_SIM_ENABLED_CONTENT_URI, String.valueOf(mSubId));
         return this;
+    }
+
+    @Override
+    public void  onCreate(@NonNull LifecycleOwner owner) {
+        Log.d(LOG_TAG, "onCreate subId " + mSubId);
+        mExtTelephonyManager = ExtTelephonyManager.getInstance(mContext);
+        mExtTelephonyManager.connectService(mExtTelManagerServiceCallback);
+    }
+
+    @Override
+    public void onDestroy(@NonNull LifecycleOwner owner) {
+        Log.d(LOG_TAG, "onDestroy subId " + mSubId);
+        if (mServiceConnected) {
+            mExtTelephonyManager.disconnectService();
+        }
     }
 
     @Override
@@ -239,10 +241,8 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        mScreen = screen;
-        if (mScreen != null) {
-            super.displayPreference(mScreen);
-        }
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     /**
@@ -355,8 +355,8 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
     }
 
     private void showDialog(int type) {
-        final BackupCallingDialogFragment dialogFragment = BackupCallingDialogFragment.newInstance(
-                mPreference.getTitle().toString(), type);
+        final BackupCallingDialogFragment dialogFragment =
+                BackupCallingDialogFragment.newInstance(type);
         dialogFragment.show(mFragmentManager, DIALOG_TAG);
     }
 
@@ -399,7 +399,6 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
         }
         mCallingPreferenceCategoryController.updateChildVisible(getPreferenceKey(), true);
         SubscriptionInfo subInfo = getSubscriptionInfoFromActiveList(mSubId);
-        mPreference = preference;
         final SwitchPreference switchPreference = (SwitchPreference) preference;
         // Gray out the setting during calls
         switchPreference.setEnabled(mCallState == TelephonyManager.CALL_STATE_IDLE);
