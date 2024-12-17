@@ -136,7 +136,14 @@ public class SimDialogActivity extends FragmentActivity {
             return;
         }
 
-
+        if (Flags.isDualSimOnboardingEnabled()
+                && (dialogType == DATA_PICK
+                || dialogType == CALLS_PICK
+                || dialogType == SMS_PICK)) {
+            Log.d(TAG, "Finish the sim dialog since the sim onboarding is shown");
+            finish();
+            return;
+        }
         final String tag = Integer.toString(dialogType);
         final FragmentManager fragmentManager = getSupportFragmentManager();
         SimDialogFragment fragment = (SimDialogFragment) fragmentManager.findFragmentByTag(tag);

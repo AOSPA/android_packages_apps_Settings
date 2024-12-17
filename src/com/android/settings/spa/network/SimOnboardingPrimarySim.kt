@@ -14,8 +14,15 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.spa.network
 
+import android.provider.Settings
 import android.telephony.SubscriptionManager
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.SignalCellularAlt
@@ -31,6 +38,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settings.network.SimOnboardingService
+import com.android.settings.network.telephony.TelephonyUtils
 import com.android.settingslib.spa.widget.preference.ListPreference
 import com.android.settingslib.spa.widget.preference.ListPreferenceModel
 import com.android.settingslib.spa.widget.preference.ListPreferenceOption
@@ -102,14 +110,19 @@ fun SimOnboardingPrimarySimImpl(
                 onboardingService.targetPrimarySimTexts = it
             },
             actionSetMobileData = {
+                // Save user preferred subscription to settings database
+                val SETTING_USER_PREF_DATA_SUB: String = "user_preferred_data_sub"
+                Settings.Global.putInt(context.getContentResolver(), SETTING_USER_PREF_DATA_SUB, it)
                 mobileDataSelectedId.intValue = it
                 onboardingService.targetPrimarySimMobileData = it
             }
         )
-        AutomaticDataSwitchingPreference(isAutoDataEnabled = { isAutoDataEnabled },
-            setAutoDataEnabled = { newEnabled ->
-                onboardingService.targetPrimarySimAutoDataSwitch.value = newEnabled
-            })
+        if (!TelephonyUtils.isSmartDdsSwitchFeatureAvailable()) {
+            AutomaticDataSwitchingPreference(isAutoDataEnabled = { isAutoDataEnabled },
+                setAutoDataEnabled = { newEnabled ->
+                    onboardingService.targetPrimarySimAutoDataSwitch.value = newEnabled
+                })
+        }
     }
 }
 
@@ -119,7 +132,8 @@ fun CreatePrimarySimListPreference(
         list: List<ListPreferenceOption>,
         selectedId: MutableIntState,
         icon: ImageVector,
-        onIdSelected: (id: Int) -> Unit
+        onIdSelected: (id: Int) -> Unit,
+        isSelectable: Boolean
 ) = ListPreference(
     object : ListPreferenceModel {
         override val title = title
@@ -129,4 +143,9 @@ fun CreatePrimarySimListPreference(
         override val icon = @Composable {
             SettingsIcon(icon)
         }
+        // In case of Calls & SMS preference, this is always true.
+        // For default data preference, the UI is greyed out when
+        // SmartDDS is enabled and device in ECBM/SCBM mode and
+        // when a call is active on any of the subscriptions
+        override val enabled = { isSelectable }
 })

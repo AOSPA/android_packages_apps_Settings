@@ -99,7 +99,8 @@ public class NetworkProviderCallsSmsFragment extends DashboardFragment {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return SubscriptionUtil.isSimHardwareVisible(context)
+                    return !Flags.isDualSimOnboardingEnabled()
+                            && SubscriptionUtil.isSimHardwareVisible(context)
                             && context.getSystemService(UserManager.class).isAdminUser();
                 }
             };

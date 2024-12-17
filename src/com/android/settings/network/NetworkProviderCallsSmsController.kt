@@ -63,6 +63,7 @@ open class NetworkProviderCallsSmsController @JvmOverloads constructor(
     }
 
     override fun getAvailabilityStatus() = when {
+        Flags.isDualSimOnboardingEnabled() -> UNSUPPORTED_ON_DEVICE
         !SubscriptionUtil.isSimHardwareVisible(mContext) -> UNSUPPORTED_ON_DEVICE
         !mContext.userManager.isAdminUser -> DISABLED_FOR_USER
         else -> AVAILABLE

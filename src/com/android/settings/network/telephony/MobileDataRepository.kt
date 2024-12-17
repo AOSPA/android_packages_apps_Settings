@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.network.telephony
 
 import android.content.Context
@@ -109,8 +115,10 @@ class MobileDataRepository(
         if (!SubscriptionManager.isValidSubscriptionId(subId)) return
 
         Log.d(TAG, "setMobileDataEnabled: $enabled")
+        // Return disableOtherSubscriptions as false to support value add
+        // feature where 'Mobile Data' needs to be enabled on both subscriptions
         MobileNetworkUtils.setMobileDataEnabled(
-            context, subId, enabled, /* disableOtherSubscriptions= */ true)
+            context, subId, enabled, /* disableOtherSubscriptions= */ false)
 
         if (wifiPickerTrackerHelper != null &&
             !wifiPickerTrackerHelper.isCarrierNetworkProvisionEnabled(subId)) {

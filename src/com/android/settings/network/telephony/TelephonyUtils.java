@@ -28,16 +28,25 @@
  *
  */
 
+/*
+ * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.network.telephony;
 
 import android.content.Context;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.Settings;
+import android.sysprop.TelephonyProperties;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.settings.network.MobileNetworkRepository;
 import com.qti.extphone.ExtTelephonyManager;
 import com.qti.extphone.QtiImeiInfo;
 import com.qti.extphone.ServiceCallback;
@@ -236,4 +245,68 @@ public final class TelephonyUtils {
             mIsServiceBound = false;
         }
     };
+
+    /*
+     * Check if default data subscription ui preference is selectable
+     * DDS preference needs to be greyed out whenever the following events occur:
+     *  1. SmartDds UI option is enabled
+     *  2. SmartDds option is not enabled and device is in ECBM OR SCBM mode OR
+     *  there is an active voice call on any of the subscriptions.
+     * When 1. OR 2. satisfies, the function returns false and for other use-cases true
+     *
+     * @param context Context
+     * @return true or false
+     */
+    public static boolean isDDSPreferenceSelectable(Context context) {
+        boolean isPreferenceSelectable = true;
+        TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
+        MobileNetworkRepository mobileNetworkRepository
+                = MobileNetworkRepository.getInstance(context);
+        boolean isEcbmEnabled = telephonyManager.getEmergencyCallbackMode();
+        boolean isScbmEnabled = TelephonyProperties.in_scbm().orElse(false);
+        Log.d(TAG, "isDDSPreferenceSelectable: isSmartDdsEnabled=" + isSmartDdsEnabled(context)
+                + " isEcbmEnabled=" + isEcbmEnabled
+                + " isScbmEnabled=" + isScbmEnabled
+                + " isAnyOngoingCallOnDevice=" + isAnyOngoingCallOnDevice(context));
+        if (isSmartDdsEnabled(context)) {
+            isPreferenceSelectable = false;
+        } else {
+            if (isEcbmEnabled || isScbmEnabled || isAnyOngoingCallOnDevice(context)) {
+                isPreferenceSelectable = false;
+            }
+        }
+        return isPreferenceSelectable;
+    }
+
+    /*
+     * Check if SmartDds UI option is enabled on the device
+     *
+     * @param context Context
+     * @return true or false
+     */
+    public static boolean isSmartDdsEnabled(Context context) {
+        return Settings.Global.getInt(context.getContentResolver(),
+                Settings.Global.SMART_DDS_SWITCH, 0) == 1;
+    }
+
+    protected static boolean isAnyOngoingCallOnDevice(Context context) {
+        boolean ongoingCallOnDevice = false;
+        SubscriptionManager subscriptionManager
+                = context.getSystemService(SubscriptionManager.class);
+        TelephonyManager telephonyManager
+                = context.getSystemService(TelephonyManager.class);
+        if (telephonyManager == null || subscriptionManager == null) {
+            return false;
+        }
+        int[] activeSubIdList = subscriptionManager.getActiveSubscriptionIdList();
+        for (int i = 0; i < activeSubIdList.length; i++) {
+            int subId = activeSubIdList[i];
+            TelephonyManager tm = telephonyManager.createForSubscriptionId(subId);
+            if (tm.getCallStateForSubscription() != TelephonyManager.CALL_STATE_IDLE) {
+                ongoingCallOnDevice = true;
+                break;
+            }
+        }
+        return ongoingCallOnDevice;
+    }
 }

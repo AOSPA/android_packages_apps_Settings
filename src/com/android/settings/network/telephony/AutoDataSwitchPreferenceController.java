@@ -175,11 +175,10 @@ public class AutoDataSwitchPreferenceController extends TelephonyTogglePreferenc
                 SubscriptionManager.getSlotIndex(mSubId))) {
             return CONDITIONALLY_UNAVAILABLE;
         }
-
-        // Do not show auto data switch preference on devices where Smart temp DDS switch
-        // feature is available.
-        if (TelephonyUtils.isSmartDdsSwitchFeatureAvailable()) {
-            Log.d(LOG_TAG, "Smart DDS switch feature is available");
+        // Auto data switch preference has been moved to NetworkCellularGroupProvider
+        // as per dual sim onboarding ui enhancements
+        if (Flags.isDualSimOnboardingEnabled()) {
+            Log.d(LOG_TAG, "Dual sim onboarding config is enabled");
             return CONDITIONALLY_UNAVAILABLE;
         }
 

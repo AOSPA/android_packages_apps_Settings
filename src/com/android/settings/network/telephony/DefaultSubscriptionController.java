@@ -100,6 +100,9 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
 
     @Override
     public int getAvailabilityStatus(int subId) {
+        if (Flags.isDualSimOnboardingEnabled()) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
         final boolean visible = mSubInfoEntityList != null && mSubInfoEntityList.size() > 1;
         return visible ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }

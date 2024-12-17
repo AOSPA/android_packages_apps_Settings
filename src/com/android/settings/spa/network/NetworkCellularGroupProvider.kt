@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.spa.network
 
 import android.app.settings.SettingsEnums
@@ -51,6 +57,7 @@ import com.android.settings.network.SubscriptionInfoListViewModel
 import com.android.settings.network.telephony.DataSubscriptionRepository
 import com.android.settings.network.telephony.MobileDataRepository
 import com.android.settings.network.telephony.SimRepository
+import com.android.settings.network.telephony.TelephonyUtils
 import com.android.settings.network.telephony.requireSubscriptionManager
 import com.android.settings.spa.network.PrimarySimRepository.PrimarySimInfo
 import com.android.settings.spa.search.SearchablePage
@@ -238,21 +245,8 @@ fun MobileDataSectionImpl(
         }.collectAsStateWithLifecycle(initialValue = false)
         val coroutineScope = rememberCoroutineScope()
 
-        MobileDataSwitchingPreference(
-            isMobileDataEnabled = { mobileDataStateChanged },
-            setMobileDataEnabled = { newEnabled ->
-                coroutineScope.launch {
-                    setMobileData(
-                        context,
-                        context.getSystemService(SubscriptionManager::class.java),
-                        getWifiPickerTrackerHelper(context, localLifecycleOwner),
-                        mobileDataSelectedId.intValue,
-                        newEnabled
-                    )
-                }
-           },
-        )
-        if (nonDds.intValue != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+        if (nonDds.intValue != SubscriptionManager.INVALID_SUBSCRIPTION_ID
+                && (!TelephonyUtils.isSmartDdsSwitchFeatureAvailable())) {
             AutomaticDataSwitchingPreference(
                 isAutoDataEnabled = { isAutoDataEnabled },
                 setAutoDataEnabled = { newEnabled ->
@@ -288,6 +282,9 @@ fun PrimarySimImpl(
     },
     actionSetMobileData: (Int) -> Unit = {
         coroutineScope.launch {
+            // Save user preferred subscription to settings database
+            val SETTING_USER_PREF_DATA_SUB: String = "user_preferred_data_sub"
+            Settings.Global.putInt(context.getContentResolver(), SETTING_USER_PREF_DATA_SUB, it)
             setDefaultData(
                 context,
                 subscriptionManager,
@@ -302,21 +299,24 @@ fun PrimarySimImpl(
         primarySimInfo.callsList,
         callsSelectedId,
         ImageVector.vectorResource(R.drawable.ic_phone),
-        actionSetCalls
+        actionSetCalls,
+        true
     )
     CreatePrimarySimListPreference(
         stringResource(id = R.string.primary_sim_texts_title),
         primarySimInfo.smsList,
         textsSelectedId,
         Icons.AutoMirrored.Outlined.Message,
-        actionSetTexts
+        actionSetTexts,
+        true
     )
     CreatePrimarySimListPreference(
         stringResource(id = R.string.mobile_data_settings_title),
         primarySimInfo.dataList,
         mobileDataSelectedId,
         Icons.Outlined.DataUsage,
-        actionSetMobileData
+        actionSetMobileData,
+        TelephonyUtils.isDDSPreferenceSelectable(context)
     )
 }
 
