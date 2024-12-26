@@ -32,10 +32,12 @@ import org.mockito.kotlin.stub
 @RunWith(AndroidJUnit4::class)
 class WifiSwitchPreferenceTest {
 
-    private var mockWifiManager = mock<WifiManager>()
+    private val mockWifiManager = mock<WifiManager>()
 
     private val context =
         object : ContextWrapper(ApplicationProvider.getApplicationContext()) {
+            override fun getApplicationContext() = this
+
             override fun getSystemService(name: String): Any? =
                 when (name) {
                     getSystemServiceName(WifiManager::class.java) -> mockWifiManager

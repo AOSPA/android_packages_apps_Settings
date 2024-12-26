@@ -167,6 +167,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
     <uses-permission android:name="android.permission.GET_BACKGROUND_INSTALLED_PACKAGES" />
     <uses-permission android:name="android.permission.SATELLITE_COMMUNICATION" />
     <uses-permission android:name="android.permission.READ_SYSTEM_GRAMMATICAL_GENDER" />
+    <uses-permission android:name="android.permission.MANAGE_COMPANION_DEVICES" />
 
     <application
             android:name=".SettingsApplication"
@@ -4509,6 +4510,19 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             </intent-filter>
         </activity>
 
+        <activity android:name=".security.ActionDisabledByAdvancedProtectionDialog"
+            android:theme="@style/Theme.AlertDialog"
+            android:taskAffinity="com.android.settings.security"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:featureFlag="android.security.aapm_api">
+            <intent-filter android:priority="1">
+                <action android:name="android.security.advancedprotection.action.SHOW_ADVANCED_PROTECTION_SUPPORT_DIALOG" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name="Settings$ManageExternalStorageActivity"
             android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
@@ -5517,7 +5531,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
         </service>
 
         <receiver android:name="com.android.settings.connecteddevice.audiosharing.AudioSharingReceiver"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.android.settings.action.BLUETOOTH_LE_AUDIO_SHARING_STATE_CHANGE" />
                 <action android:name="com.android.settings.action.BLUETOOTH_LE_AUDIO_SHARING_STOP" />

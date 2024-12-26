@@ -24,6 +24,7 @@ import com.android.settings.network.telephony.MobileDataRepository
 import com.android.settings.network.telephony.SubscriptionRepository
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
+import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
@@ -47,8 +48,8 @@ class MobileDataPreference :
     override fun storage(context: Context): KeyValueStore = MobileDataStorage(context)
 
     override fun getReadPermissions(context: Context) =
-        arrayOf(
-            // required by TelephonyManager.isDataEnabledForReason
+        Permissions.anyOf(
+            // TelephonyManager.isDataEnabledForReason
             Manifest.permission.ACCESS_NETWORK_STATE,
             Manifest.permission.READ_PHONE_STATE,
             Manifest.permission.MODIFY_PHONE_STATE,
@@ -56,9 +57,11 @@ class MobileDataPreference :
         )
 
     override fun getWritePermissions(context: Context) =
-        arrayOf(
-            // required by TelephonyManager.setDataEnabledForReason
-            Manifest.permission.MODIFY_PHONE_STATE
+        Permissions.allOf(
+            // SubscriptionManager.createForAllUserProfiles
+            Manifest.permission.INTERACT_ACROSS_PROFILES,
+            // TelephonyManager.setDataEnabledForReason
+            Manifest.permission.MODIFY_PHONE_STATE,
         )
 
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
