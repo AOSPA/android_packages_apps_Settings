@@ -91,7 +91,6 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.RawContacts;
-import android.provider.Settings;
 import android.provider.Telephony;
 import android.service.persistentdata.PersistentDataBlockManager;
 import android.telephony.SubscriptionManager;
@@ -1246,7 +1245,7 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     public static String getString(Context context, String key) {
-        return Settings.Global.getString(context.getContentResolver(), key);
+        return android.provider.Settings.Global.getString(context.getContentResolver(), key);
     }
 
     /** Get {@link Resources} by subscription id if subscription id is valid. */
@@ -1571,7 +1570,7 @@ public final class Utils extends com.android.settingslib.Utils {
         disableComponent(pm, new ComponentName(context, Settings.class));
 
         //Disable Shortcut picker
-        disableComponent(pm, new ComponentName(context, com.android.settings.Settings.CreateShortcutActivity.class));
+        disableComponent(pm, new ComponentName(context, Settings.CreateShortcutActivity.class));
     }
 
     /**
