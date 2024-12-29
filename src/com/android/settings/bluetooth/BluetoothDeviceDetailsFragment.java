@@ -398,6 +398,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
             }
             mFormatter.updateLayout(FragmentTypeModel.DeviceDetailsMainFragment.INSTANCE);
         }
+        setDivider(null);
     }
 
     @Override

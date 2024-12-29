@@ -184,6 +184,16 @@
     <string name="bluetooth_ambient_volume_unmute">Unmute surroundings</string>
     <!-- Message when changing ambient state failed. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_ambient_volume_error">Couldn\u2019t update surroundings</string>
+    <!-- Connected devices settings. Title for hearing device input routing control preference. -->
+    <string name="bluetooth_hearing_device_input_routing_title">Default microphone for calls</string>
+    <!-- Connected devices settings. Title for hearing device input routing control dialog. -->
+    <string name="bluetooth_hearing_device_input_routing_dialog_title">Default microphone</string>
+    <!-- Connected devices settings. Summary for hearing device input routing control dialog. -->
+    <string name="bluetooth_hearing_device_input_routing_dialog_summary">Choose a microphone for calls.</string>
+    <!-- Connected devices settings. One of the input routing option. It will change input routing to hearing aid microphone. -->
+    <string name="bluetooth_hearing_device_input_routing_hearing_device_option">Hearing aid microphone</string>
+    <!-- Connected devices settings. One of the input routing option. It will change input routing to this phone's builtin microphone -->
+    <string name="bluetooth_hearing_device_input_routing_builtin_option">This phone\'s microphone</string>
     <!-- Connected devices settings. Title of the preference to show the entrance of the audio output page. It can change different types of audio are played on phone or other bluetooth devices. [CHAR LIMIT=35] -->
     <string name="bluetooth_audio_routing_title">Audio output</string>
     <!-- Title for bluetooth audio routing page footer. [CHAR LIMIT=30] -->
@@ -483,6 +493,12 @@
 
     <!-- Link for Locale helper page. [CHAR LIMIT=NONE]-->
     <string name="link_locale_picker_footer_learn_more" translatable="false">https://support.google.com/android?p=per_language_app_settings</string>
+
+    <!-- Title for asking to change system region or not. [CHAR LIMIT=50]-->
+    <string name="title_change_system_region">Change region to %s ?</string>
+
+    <!-- The content of a confirmation dialog indicating the impact when the user change the system region. [CHAR LIMIT=NONE]-->
+    <string name="desc_notice_device_region_change">Your device will keep %s as a system language</string>
 
     <!-- Title for asking to change system locale or not. [CHAR LIMIT=50]-->
     <string name="title_change_system_locale">Change system language to %s ?</string>
@@ -822,8 +838,6 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity"></string>
     <!-- Message shown for a toggle which when enabled, allows the user to enroll using a simpler flow for accessibility [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_accessibility_vision"></string>
-    <!-- Message on the face enrollment introduction page that explains privacy controls for face unlock [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_enroll_introduction_learn_more_message"></string>
     <!-- Button text to cancel enrollment from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_face_enroll_introduction_cancel">Cancel</string>
     <!-- Button text to cancel enrollment [CHAR LIMIT=30] -->
@@ -951,8 +965,6 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1">You and your child are in control</string>
     <!-- Introduction title shown in the bottom of fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2">Keep in mind</string>
-    <!-- Introduction title shown in the bottom of fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_enroll_introduction_footer_title_3">Secure and helpful</string>
     <!-- Introduction detail message shown in fingerprint enrollment dialog, when fingerprint unlock is disabled by device admin [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled">Use your fingerprint to unlock your phone or approve purchases.\n\nNote: You can\u2019t use your fingerprint to unlock this device. For more information, contact your organization\u2019s admin.</string>
     <!-- Button text to cancel enrollment from the introduction [CHAR LIMIT=22] -->
@@ -983,8 +995,6 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6">For best results, use a screen protector that\u2019s Made for Google certified. With other screen protectors, your child\u2019s fingerprint may not work.</string>
     <!-- Introduction detail message shown in fingerprint enrollment introduction to learn more about fingerprint [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more"></string>
-    <!-- Introduction detail message shown in fingerprint enrollment introduction to learn more about fingerprint [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more_2"></string>
 
     <!-- Watch unlock enrollment and settings --><skip />
     <!-- Title shown for menu item that launches watch unlock settings. [CHAR LIMIT=40] -->
@@ -5539,9 +5549,9 @@
     <!-- Summary for the accessibility preference for enabling/disabling large icons for mouse/trackpad pointers. [CHAR LIMIT=60] -->
     <string name="accessibility_toggle_large_pointer_icon_summary">Make the mouse pointer more noticeable</string>
     <!-- Title for the accessibility preference for forcing all apps to use dark theme. [CHAR LIMIT=35] -->
-    <string name="accessibility_force_invert_title">Make all apps dark</string>
+    <string name="accessibility_force_invert_title">Make more apps dark</string>
     <!-- Summary for the accessibility preference for forcing all apps to use dark theme. [CHAR LIMIT=100] -->
-    <string name="accessibility_force_invert_summary">Applies to apps without their own dark theme. Some apps may have display issues, like inverted colors.</string>
+    <string name="accessibility_force_invert_summary">Automatically convert light theme apps to dark theme</string>
     <!-- Title for the accessibility preference for disabling animations. [CHAR LIMIT=35] -->
     <string name="accessibility_disable_animations">Remove animations</string>
     <!-- Summary for the accessibility preference for disabling animations. [CHAR LIMIT=60] -->
@@ -12461,11 +12471,6 @@
     <!-- Summary for an item in the page listing multiple mobile service subscriptions, indicating
          that service is inactive and is tied to an eSIM profile [CHAR LIMIT=40] -->
     <string name="mobile_network_inactive_esim">Inactive / eSIM</string>
-    <!-- Title of a dialog that lets a user modify the display name used for a mobile network
-         subscription in various places in the Settings app. The default name is typically just the
-         carrier name, but especially in multi-SIM configurations users may want to use a different
-         name. [CHAR LIMIT=40] -->
-    <string name="mobile_network_sim_name">SIM name &amp; color</string>
     <!-- Label for an item listing the name of the SIM that the user has specified. [CHAR LIMIT=40] -->
     <string name="mobile_network_sim_name_label">Name</string>
     <!-- Label for an item listing the color of the SIM that the user has specified. [CHAR LIMIT=40] -->
