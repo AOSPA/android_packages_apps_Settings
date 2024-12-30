@@ -41,7 +41,6 @@ import com.android.settings.network.MobileNetworkRepository;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
-import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -227,10 +226,6 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         mSubInfoEntityList = subInfoEntityList;
         updateEntries();
         refreshSummary(mPreference);
-    }
-
-    @Override
-    public void onAllUiccInfoChanged(List<UiccInfoEntity> uiccInfoEntityList) {
     }
 
     @Override
