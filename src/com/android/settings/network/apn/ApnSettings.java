@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.network.apn;
 
 import static com.android.settings.network.apn.ApnEditPageProviderKt.INSERT_URL;
@@ -22,7 +28,10 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.settings.SettingsEnums;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources.NotFoundException;
 import android.database.Cursor;
 import android.net.Uri;
@@ -33,6 +42,7 @@ import android.os.UserManager;
 import android.provider.Telephony;
 import android.telephony.CarrierConfigManager;
 import android.telephony.ServiceState;
+import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.data.ApnSetting;
@@ -116,20 +126,35 @@ public class ApnSettings extends RestrictedSettingsFragment
     private String[] mHideApnsWithRule;
     private String[] mHideApnsWithIccidRule;
     private PersistableBundle mHideApnsGroupByIccid;
+    private SubscriptionManager mSubscriptionManager;
+    private IntentFilter mIntentFilter;
     private final static String INCLUDE_COMMON_RULES = "include_common_rules";
     private final static String APN_HIDE_RULE_STRINGS_ARRAY= "apn_hide_rule_strings_array";
     private final static String APN_HIDE_RULE_STRINGS_WITH_ICCIDS_ARRAY = "apn_hide_rule_strings_with_iccids_array";
-
-    private final static String ACTION_VOLTE_ENABLED_STATE_CHANGED
-            = "org.codeaurora.intent.action.ACTION_ENHANCE_4G_SWITCH";
 
     public ApnSettings() {
         super(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
     }
 
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED.equals(action)) {
+                final int subId = intent.getIntExtra(CarrierConfigManager.EXTRA_SUBSCRIPTION_INDEX,
+                        SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+                if (!SubscriptionManager.isUsableSubscriptionId(subId) || subId == mSubId) {
+                    loadCarrierConfig();
+                    if (!mRestoreDefaultApnMode) {
+                        fillList();
+                    }
+                }
+            }
+        }
+    };
+
     private void loadCarrierConfig() {
-        final CarrierConfigManager configManager = (CarrierConfigManager)
-                getSystemService(Context.CARRIER_CONFIG_SERVICE);
+        final CarrierConfigManager configManager = getSystemService(CarrierConfigManager.class);
         final PersistableBundle b = configManager.getConfigForSubId(mSubId);
         if (b == null) {
             return;
@@ -147,6 +172,7 @@ public class ApnSettings extends RestrictedSettingsFragment
             }
         }
         mHidePresetApnDetails = b.getBoolean(CarrierConfigManager.KEY_HIDE_PRESET_APN_DETAILS_BOOL);
+        mHideApnsGroupByIccid = b.getPersistableBundle(getIccid());
    }
 
     @Override
@@ -160,7 +186,9 @@ public class ApnSettings extends RestrictedSettingsFragment
         final Activity activity = getActivity();
         mSubId = activity.getIntent().getIntExtra(SUB_ID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        mIntentFilter = new IntentFilter(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED);
         mPreferredApnRepository = new PreferredApnRepository(activity, mSubId);
+        mSubscriptionManager =  getSystemService(SubscriptionManager.class);
 
         setIfOnlyAvailableForAdmins(true);
 
@@ -217,9 +245,23 @@ public class ApnSettings extends RestrictedSettingsFragment
             return;
         }
 
+        getActivity().registerReceiver(mReceiver, mIntentFilter,
+                Context.RECEIVER_EXPORTED_UNAUDITED);
+
         if (!mRestoreDefaultApnMode) {
             fillList();
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        if (mUnavailable) {
+            return;
+        }
+
+        getActivity().unregisterReceiver(mReceiver);
     }
 
     @Override
@@ -265,10 +307,6 @@ public class ApnSettings extends RestrictedSettingsFragment
             final ArrayList<ApnPreference> apnList = new ArrayList<ApnPreference>();
             final ArrayList<ApnPreference> mmsApnList = new ArrayList<ApnPreference>();
 
-            // ApnPreference.mSelectedKey static variable is shared for MSim case,
-            // need be initialized according to preferred apn id per sub
-            // TODO (b/338076914) upstream refactor removed this functionality
-            // ApnPreference.setSelectedKey(mSelectedKey);
             cursor.moveToFirst();
             final int radioTech = networkTypeToRilRidioTechnology(TelephonyManager.getDefault()
                     .getDataNetworkType(mSubId));
@@ -368,11 +406,9 @@ public class ApnSettings extends RestrictedSettingsFragment
         //    <item value="include_common_rules"/>
         //    <item value="true"/>
         // </string-array>
-        // TODO(b/338076914) re-implement as necessary
-        /*
         if(mHideApnsWithIccidRule != null){
             HashMap<String, String> ruleWithIccid = getApnRuleMap(mHideApnsWithIccidRule);
-            final String iccid = mSubscriptionInfo == null ? "" : mSubscriptionInfo.getIccId();
+            final String iccid = getIccid();
             if(isOperatorIccid(ruleWithIccid, iccid)){
                 String s = ruleWithIccid.get(INCLUDE_COMMON_RULES);
                 includeCommon = !(s != null && s.equalsIgnoreCase(String.valueOf(false)));
@@ -380,7 +416,6 @@ public class ApnSettings extends RestrictedSettingsFragment
                 filterWithKey(ruleWithIccid, where);
             }
         }
-        */
 
         if(includeCommon){
             // Common APN hidden rules,
@@ -394,6 +429,16 @@ public class ApnSettings extends RestrictedSettingsFragment
                filterWithKey(rule, where);
             }
         }
+    }
+
+    private String getIccid() {
+        if (mSubscriptionManager == null) {
+            Log.e(TAG, "mSubscriptionManager is null");
+            return "";
+        }
+        final SubscriptionInfo subscriptionInfo
+                = mSubscriptionManager.getActiveSubscriptionInfo(mSubId);
+        return subscriptionInfo == null ? "" : subscriptionInfo.getIccId();
     }
 
     private void filterWithKey(Map<String, String> rules, StringBuilder where) {
