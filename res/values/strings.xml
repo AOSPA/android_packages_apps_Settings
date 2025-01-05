@@ -461,6 +461,9 @@
     <!-- Category for the locale picker. [CHAR LIMIT=50]-->
     <string name="all_supported_locales_title">All languages</string>
 
+    <!-- Category for the app locale picker. [CHAR LIMIT=50]-->
+    <string name="more_supported_locales_title">More languages</string>
+
     <!-- Category for the locale region picker. [CHAR LIMIT=50]-->
     <string name="all_supported_locales_regions_title">All regions</string>
 
@@ -523,12 +526,20 @@
 
     <!-- Menu item in the locale menu  [CHAR LIMIT=30] -->
     <string name="locale_search_menu">Search</string>
+    <!-- Title for the language and region selection screen [CHAR LIMIT=25] -->
+    <string name="language_and_region_title">Language &amp; region</string>
     <!-- Title for the language selection screen [CHAR LIMIT=25] -->
     <string name="language_selection_title">Add a language</string>
+    <!-- Title for the region picker [CHAR LIMIT=25] -->
+    <string name="region_selection_title">Choose a region</string>
     <!-- Title for the region selection screen [CHAR LIMIT=25] -->
     <string name="country_selection_title">Region preference</string>
     <!-- Hint text in a search edit box (used to filter long language / country lists) [CHAR LIMIT=25] -->
-    <string name="search_language_hint">Type language name</string>
+    <string name="search_language_hint">Search languages</string>
+    <!-- Hint text in a search edit box (used to filter long region) [CHAR LIMIT=25] -->
+    <string name="search_region_hint">Search regions</string>
+    <!-- The title for Choose a region page -->
+    <string name="top_intro_region_title">The region you choose affects how your phone displays time, dates, temperature, and more</string>
     <!-- Category for more language settings. [CHAR LIMIT=NONE]-->
     <string name="more_language_settings_category">More language settings</string>
 
@@ -942,6 +953,8 @@
     <string name="security_settings_fingerprint_settings_preferences_category">When using Fingerprint Unlock</string>
     <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
     <string name="security_settings_work_fingerprint_preference_title">Fingerprint for work</string>
+    <!-- Preference to check enrolled fingerprints -->
+    <string name="fingerprint_check_enrolled_title">Check enrolled fingerprints</string>
     <!-- Preference to add another fingerprint -->
     <string name="fingerprint_add_title">Add fingerprint</string>
     <!-- Message showing the current number of fingerprints set up. Shown for a menu item that launches fingerprint settings or enrollment. -->
@@ -995,7 +1008,10 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6">For best results, use a screen protector that\u2019s Made for Google certified. With other screen protectors, your child\u2019s fingerprint may not work.</string>
     <!-- Introduction detail message shown in fingerprint enrollment introduction to learn more about fingerprint [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more"></string>
-
+    <!-- Description shown on the check enrolled fingerprint dialog -->
+    <string name="fingerprint_check_enroll_touch_sensor">Touch the fingerprint sensor</string>
+    <!-- Description shown on the check enrolled fingerprint dialog -->
+    <string name="fingerprint_check_enroll_not_recognized">Fingerprint not recognized</string>
     <!-- Watch unlock enrollment and settings --><skip />
     <!-- Title shown for menu item that launches watch unlock settings. [CHAR LIMIT=40] -->
     <string name ="security_settings_activeunlock_preference_title">Watch Unlock</string>
@@ -2039,6 +2055,11 @@
     <string name="bluetooth_companion_app_body"><xliff:g id="app_name" example="App Name">%1$s</xliff:g> app will no longer connect to your <xliff:g id="device_name" example="Device Name">%2$s</xliff:g></string>
     <!-- Summary of Bluetooth LE Audio toggle in Device Details. [CHAR LIMIT=40] -->
     <string name="device_details_leaudio_toggle_summary">Experimental. Improves audio quality.</string>
+    <!-- Content Description for battery icon in device details screen [CHAR LIMIT=NONE]-->
+    <string name="device_details_battery">Battery</string>
+    <!-- Content Description for battery charging icon in device details screen [CHAR LIMIT=NONE]-->
+    <string name="device_details_battery_charging">Battery, charging</string>
+
 
     <!--  Bluetooth device details. In the confirmation dialog for unpairing a paired device, this is the label on the button that will complete the unpairing action. -->
     <string name="bluetooth_unpair_dialog_forget_confirm_button">Forget device</string>
@@ -4747,6 +4768,10 @@
     <string name="mouse_swap_primary_button">Swap left and right buttons</string>
     <!-- Summary text for the 'Swap buttons' preference switch indicating to users that when this switch is enabled, their left click will behave as though it is the right click (secondary action) and that the right click will be the primary action. [CHAR LIMIT=NONE] -->
     <string name="mouse_swap_primary_button_summary">Use the left mouse button as your right</string>
+    <!-- Title for the 'Cursor acceleration' preference switch, which dynamically adjusts cursor movement based on speed. [CHAR LIMIT=60] -->
+    <string name="mouse_pointer_acceleration">Cursor acceleration</string>
+    <!-- Summary text for the 'Cursor acceleration' preference switch indicating to users that when this switch is enabled, faster movements with your mouse will move the cursor farther. [CHAR LIMIT=NONE] -->
+    <string name="mouse_pointer_acceleration_summary">Faster movements with your mouse will move the cursor farther</string>
     <!-- page title for Mouse key main page. [CHAR LIMIT=NONE] -->
     <string name="mouse_key_main_page_title">Mouse keys for <xliff:g id="keyboard name" example="my keyboard">%s</xliff:g></string>
     <!-- Summary text for Mouse keys directional image. [CHAR LIMIT=NONE] -->
@@ -4954,6 +4979,10 @@
 
     <!-- Title for the 'Speech' preference category. [CHAR LIMIT=45] -->
     <string name="speech_category_title">Speech</string>
+    <!-- Title for the 'Speech' preference. [CHAR LIMIT=45] -->
+    <string name="speech_preference_title">Speech</string>
+    <!-- Summary text for the 'Speech' preference. [CHAR LIMIT=45] -->
+    <string name="speech_preference_summary">Control speech recognition and output</string>
 
     <!-- On Languages & input settings screen, setting summary.  Setting for mouse pointer speed. [CHAR LIMIT=35] -->
     <string name="pointer_speed">Pointer speed</string>
