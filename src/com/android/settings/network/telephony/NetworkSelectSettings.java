@@ -126,6 +126,8 @@ public class NetworkSelectSettings extends DashboardFragment implements
     private Job mNetworkScanJob = null;
 
     private NetworkSelectRepository mNetworkSelectRepository;
+    private NetworkScanRepository.NetworkScanState mState =
+            NetworkScanRepository.NetworkScanState.ACTIVE;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -433,17 +435,20 @@ public class NetworkSelectSettings extends DashboardFragment implements
 
     @VisibleForTesting
     protected void scanResultHandler(NetworkScanRepository.NetworkScanResult results) {
-        int plmnCount = mPreferenceCategory.getPreferenceCount();
         if (isFinishingOrDestroyed()) {
             Log.d(TAG, "scanResultHandler: activity isFinishingOrDestroyed, directly return");
             return;
         }
 
+        int errorCount = mErrorMsgCategory.getPreferenceCount();
+        if (errorCount > 0) mErrorMsgCategory.removeAll();
+
         mCellInfoList = filterOutSatellitePlmn(results.getCellInfos());
         Log.d(TAG, "CellInfoList: " + CellInfoUtil.cellInfoListToString(mCellInfoList));
         updateAllPreferenceCategory();
-        NetworkScanRepository.NetworkScanState state = results.getState();
-        if (state == NetworkScanRepository.NetworkScanState.ERROR) {
+        mState = results.getState();
+        int plmnCount = mPreferenceCategory.getPreferenceCount();
+        if (mState == NetworkScanRepository.NetworkScanState.ERROR) {
             if (plmnCount > 0) {
                 addErrorMessagePreference(R.string.network_scan_error);
             } else {
@@ -453,7 +458,7 @@ public class NetworkSelectSettings extends DashboardFragment implements
             addMessagePreference(R.string.empty_networks_list);
         }
         // keep showing progress bar, it will be stopped when error or completed
-        setProgressBarVisible(state == NetworkScanRepository.NetworkScanState.ACTIVE);
+        setProgressBarVisible(mState == NetworkScanRepository.NetworkScanState.ACTIVE);
     }
 
     @Keep
@@ -537,6 +542,10 @@ public class NetworkSelectSettings extends DashboardFragment implements
      */
     private void forceUpdateConnectedPreferenceCategory(
             NetworkSelectRepository.NetworkRegistrationAndForbiddenInfo info) {
+        if (mState == NetworkScanRepository.NetworkScanState.ERROR) {
+            Log.d(TAG, "forceUpdateConnectedPreferenceCategory: network scan error");
+            return;
+        }
         mPreferenceCategory.removeAll();
         for (NetworkRegistrationInfo regInfo : info.getNetworkList()) {
             final CellIdentity cellIdentity = regInfo.getCellIdentity();
