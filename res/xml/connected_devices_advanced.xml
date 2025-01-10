@@ -83,6 +83,18 @@
         settings:useAdminDisabledSummary="true"
         settings:userRestriction="no_ultra_wideband_radio" />
 
+    <Preference
+        android:icon="@drawable/ic_aptxacu"
+        android:title="@string/connected_device_codec_preference"
+        android:key="codec_preferences"
+        android:order="1000"
+        settings:allowDividerAbove="true">
+        <intent
+            android:targetPackage="com.qualcomm.qtil.aptxacu"
+            android:action="android.intent.action.MAIN"
+            android:targetClass="com.qualcomm.qtil.aptxacu.aptxacuSettingsActivity"/>
+    </Preference>
+
     <PreferenceCategory
         android:key="dashboard_tile_placeholder"
         android:order="-8" />
