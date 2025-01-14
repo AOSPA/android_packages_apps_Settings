@@ -21,9 +21,9 @@ import android.content.Context
 import com.android.settings.R
 import com.android.settings.widget.MainSwitchBarMetadata
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
-import com.android.settingslib.datastore.DataChangeReason
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.Permissions
+import com.android.settingslib.metadata.PreferenceChangeReason
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
@@ -35,6 +35,9 @@ class DataSaverMainSwitchPreference : MainSwitchBarMetadata, PreferenceLifecycle
 
     override val title
         get() = R.string.data_saver_switch_title
+
+    override val disableWidgetOnCheckedChanged: Boolean
+        get() = false
 
     override fun storage(context: Context) = createDataStore(context)
 
@@ -75,7 +78,7 @@ class DataSaverMainSwitchPreference : MainSwitchBarMetadata, PreferenceLifecycle
         override fun onLastObserverRemoved() = dataSaverBackend.remListener(this)
 
         override fun onDataSaverChanged(isDataSaving: Boolean) =
-            notifyChange(KEY, DataChangeReason.UPDATE)
+            notifyChange(KEY, PreferenceChangeReason.VALUE)
     }
 
     companion object {

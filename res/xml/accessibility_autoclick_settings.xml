@@ -76,6 +76,14 @@
         settings:searchable="false"
         settings:controller="com.android.settings.accessibility.ToggleAutoclickCustomSeekbarController"/>
 
+    <com.android.settingslib.widget.SliderPreference
+        android:key="accessibility_control_autoclick_cursor_area_size"
+        android:title="@string/autoclick_cursor_area_size_title"
+        android:summary="@string/autoclick_cursor_area_size_summary"
+        android:selectable="false"
+        settings:searchable="false"
+        settings:controller="com.android.settings.accessibility.ToggleAutoclickCursorAreaSizeController"/>
+
     <com.android.settings.accessibility.AccessibilityFooterPreference
         android:key="accessibility_autoclick_footer"
         android:title="@string/accessibility_autoclick_description"

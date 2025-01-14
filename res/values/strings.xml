@@ -3231,6 +3231,10 @@
     <string name="screensaver_settings_summary_dock">While docked</string>
     <!-- Display settings screen, summary fragment for screen saver options, activated never [CHAR LIMIT=35] -->
     <string name="screensaver_settings_summary_never">Never</string>
+    <!-- Summary for when screensaver is enabled, only while stationary and upright [CHAR LIMIT=35] -->
+    <string name="screensaver_settings_summary_postured">While postured</string>
+    <!-- Summary for when screensaver is enabled, only while stationary and upright and charging [CHAR LIMIT=35] -->
+    <string name="screensaver_settings_summary_postured_and_charging">While postured and charging</string>
     <!-- Display settings screen, summary for screen saver options, screen saver is turned on [CHAR LIMIT=50] -->
     <string name="screensaver_settings_summary_on">
         On / <xliff:g id="screen_saver" example="Art gallery">%1$s</xliff:g>
@@ -4025,12 +4029,22 @@
     <string name="location_time_zone_detection_not_allowed">Location time zone detection changes are not allowed</string>
     <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is enabled. -->
     <string name="location_time_zone_detection_auto_is_on">If your device location is available, it may be used to set your time zone</string>
+    
     <!-- Security & location settings screen, setting check box label if Assisted GPS should be enabled -->
     <string name="assisted_gps">Use assisted GPS</string>
     <!-- Security & location settings screen, setting summary when Assisted GPS check box is selected -->
     <string name="assisted_gps_enabled">Use server to assist GPS (uncheck to reduce network usage)</string>
     <!-- Security & location settings screen, setting summary when Assisted GPS check box is clear -->
     <string name="assisted_gps_disabled">Use server to assist GPS (uncheck to improve GPS performance)</string>
+
+    <!-- Date&Time settings screen, title of the notification category [CHAR LIMIT=60] -->
+    <string name="time_notifications_title">Notifications</string>
+    <!-- Date&Time settings screen, title of the time zone change notification toggle [CHAR LIMIT=60] -->
+    <string name="time_zone_change_notifications_toggle_title">Time zone change</string>
+    <!-- Date&Time settings screen, summary of the time zone change notification toggle [CHAR_LIMIT=NONE] -->
+    <string name="time_zone_change_notifications_toggle_summary">Receive a notification when your time zone is automatically updated</string>
+    <!-- Search keywords for the time zone notification category / section in Date & Time settings. [CHAR_LIMIT=NONE] -->
+    <string name="keywords_time_notification_category">notification, time, zone, timezone</string>
 
     <!-- Main settings screen, setting summary for the user to go into the About phone screen-->
     <string name="about_settings_summary">View legal info, status, software version</string>
@@ -4761,11 +4775,14 @@
     <!-- Summary text for the accessibility setting 'Mouse keys' preference sub-screen. [CHAR LIMIT=100] -->
     <string name="mouse_keys_summary">Use your keyboard to control the pointer</string>
     <!-- Title for the 'Mouse reverse scrolling' preference switch, which reverses the direction of mouse scroll wheels so that moving the wheel up scrolls the content down. [CHAR LIMIT=60] -->
-    <string name="mouse_reverse_vertical_scrolling">Mouse reverse scrolling</string>
+    <string name="mouse_reverse_vertical_scrolling">Reverse scrolling</string>
     <!-- Summary text for the 'Mouse reverse scrolling' preference switch indicating to users that when the setting is enabled that scrolling up with their mouse wheel will move the page content down. [CHAR LIMIT=NONE] -->
-    <string name="mouse_reverse_vertical_scrolling_summary">Scroll up to move the page down</string>
+    <string name="mouse_reverse_vertical_scrolling_summary">Content moves up when you scroll down</string>
+    <!-- TODO(b/383555305): finalize these strings and mark them translatable. -->
+    <!-- Title for the 'Mouse controlled scrolling' preference switch, which disables the mouse scrolling acceleration so that the scrolling speed becomes directly proportional to the speed at which the wheel is turned. [CHAR LIMIT=60]-->
+    <string name="mouse_scrolling_acceleration" translatable="false">Controlled scrolling</string>
     <!-- Title for the 'Swap buttons' preference switch, which swaps the left and right buttons of connected mice so that right click will be the primary action button and left clicking will be the secondary action, for example showing the context menu. [CHAR LIMIT=60] -->
-    <string name="mouse_swap_primary_button">Swap left and right buttons</string>
+    <string name="mouse_swap_primary_button">Swap primary mouse button</string>
     <!-- Summary text for the 'Swap buttons' preference switch indicating to users that when this switch is enabled, their left click will behave as though it is the right click (secondary action) and that the right click will be the primary action. [CHAR LIMIT=NONE] -->
     <string name="mouse_swap_primary_button_summary">Use the left mouse button as your right</string>
     <!-- Title for the 'Cursor acceleration' preference switch, which dynamically adjusts cursor movement based on speed. [CHAR LIMIT=60] -->
@@ -4788,7 +4805,7 @@
     <string name="mouse_keys_release2_summary">Use the \“<xliff:g id="release_2_label" example="/">%s</xliff:g>\” key to click the secondary mouse button</string>
 
     <!-- Title for the button to trigger the 'keyboard shortcuts helper' dialog. [CHAR LIMIT=35] -->
-    <string name="keyboard_shortcuts_helper">Keyboard shortcuts</string>
+    <string name="keyboard_shortcuts_helper">View keyboard shortcuts</string>
     <!-- Summary text for the 'keyboard shortcuts helper' dialog. [CHAR LIMIT=100] -->
     <string name="keyboard_shortcuts_helper_summary">Show list of shortcuts</string>
     <!-- Title for the 'Work profile keyboards & tools' preference category inside Languages and inputs'. [CHAR LIMIT=50] -->
@@ -4812,9 +4829,9 @@
     <!-- Title text for 'Tap to click'. [CHAR LIMIT=35] -->
     <string name="trackpad_tap_to_click">Tap to click</string>
     <!-- Title text for 'Tap dragging', a touchpad setting which allows dragging of UI elements by tapping the touchpad with a single finger and then moving it. [CHAR LIMIT=35] -->
-    <string name="trackpad_tap_dragging_title">Tap dragging</string>
+    <string name="trackpad_tap_dragging_title">Tap and drag to move items</string>
     <!-- Summary text for 'Tap dragging', a touchpad setting which allows dragging of UI elements by tapping the touchpad with a single finger and then moving it. [CHAR LIMIT=60] -->
-    <string name="trackpad_tap_dragging_summary">Tap and drag your finger on the touchpad to move objects</string>
+    <string name="trackpad_tap_dragging_summary">Double-tap an item, hold down on the second tap, and then drag the item to move it</string>
     <!-- Title text for 'Touchpad gestures' [CHAR LIMIT=35] -->
     <string name="trackpad_touchpad_gesture_title">Touchpad gestures</string>
     <!-- Summary text for 'Touchpad gestures' [CHAR LIMIT=60] -->
@@ -4828,9 +4845,9 @@
     <!-- Summary text for 'Bottom-right click', a setting that allows the user to right-click by pressing in the bottom-right corner of a touchpad [CHAR LIMIT=60] -->
     <string name="trackpad_bottom_right_tap_summary">Click in the bottom right corner of the touchpad for more options</string>
     <!-- Title text for 'Pointer speed'. [CHAR LIMIT=35] -->
-    <string name="trackpad_pointer_speed">Pointer speed</string>
+    <string name="trackpad_pointer_speed">Cursor speed</string>
     <!-- Title text for 'Three finger tap' touchpad preference. This preference allows the user to select an action that will trigger when they tap three fingers on a touchpad. [CHAR LIMIT=60] -->
-    <string name="three_finger_tap_preference_title">Use three finger tap</string>
+    <string name="three_finger_tap_preference_title">Customise 3-finger tap</string>
     <!-- Title text for mouse pointer color. [CHAR LIMIT=35] -->
     <string name="pointer_fill_style">Pointer color</string>
     <!-- Content description for black pointer fill style. [CHAR LIMIT=60] -->
@@ -4903,27 +4920,6 @@
     <!-- Text for 'Done' button in gesture education [CHAR LIMIT=10] -->
     <string name="gesture_button_done">Done</string>
 
-    <!-- Title text for 'Go back' [CHAR LIMIT=35] -->
-    <string name="trackpad_go_back_title">Go back</string>
-    <!-- Summary text for 'Go back' [CHAR LIMIT=60] -->
-    <string name="trackpad_go_back_summary">Swipe left or right with three fingers</string>
-    <!-- Title text for 'Go home' [CHAR LIMIT=35] -->
-    <string name="trackpad_go_home_title">Go home</string>
-    <!-- Summary text for 'Go home' [CHAR LIMIT=60] -->
-    <string name="trackpad_go_home_summary">Swipe up with three fingers</string>
-    <!-- Title text for 'Recent apps' [CHAR LIMIT=35] -->
-    <string name="trackpad_recent_apps_title">Recent apps</string>
-    <!-- Summary text for 'Recent apps' [CHAR LIMIT=60] -->
-    <string name="trackpad_recent_apps_summary">Swipe up with three fingers, then hold</string>
-    <!-- Title text for 'Notifications' [CHAR LIMIT=35] -->
-    <string name="trackpad_notifications_title">Notifications</string>
-    <!-- Summary text for 'Notifications' [CHAR LIMIT=60] -->
-    <string name="trackpad_notifications_summary">Swipe down with three fingers</string>
-    <!-- Title text for 'Switch apps' [CHAR LIMIT=35] -->
-    <string name="trackpad_switch_apps_title">Switch apps</string>
-    <!-- Summary text for 'Switch apps' [CHAR LIMIT=60] -->
-    <string name="trackpad_switch_apps_summary">Swipe left or right with four fingers</string>
-
     <!-- Title for the button to trigger the 'modifier keys settings' page. [CHAR LIMIT=35] -->
     <string name="modifier_keys_settings">Modifier keys</string>
     <!-- Summary text for the 'modifier_keys_settings' page. [CHAR LIMIT=100] -->
@@ -4987,7 +4983,7 @@
     <!-- On Languages & input settings screen, setting summary.  Setting for mouse pointer speed. [CHAR LIMIT=35] -->
     <string name="pointer_speed">Pointer speed</string>
     <!-- Setting for mouse pointer scale. [CHAR LIMIT=35] -->
-    <string name="pointer_scale">Pointer scale</string>
+    <string name="pointer_scale">Cursor size</string>
     <!-- Content description for decreasing pointer scale. [CHAR LIMIT=35] -->
     <string name="pointer_scale_decrease_content_description">Decrease pointer scale</string>
     <!-- Setting for mouse pointer scale. [CHAR LIMIT=35] -->
@@ -5138,21 +5134,23 @@
     <string name="display_category_title">Display</string>
     <!-- Title for the accessibility color and motion page. [CHAR LIMIT=50] -->
     <string name="accessibility_color_and_motion_title">Color and motion</string>
-    <!-- Title for the accessibility pointer and touchpad page. [CHAR LIMIT=50] -->
-    <string name="accessibility_pointer_and_touchpad_title">Pointer &amp; touchpad accessibility</string>
+    <!-- Title for the accessibility cursor and touchpad page. [CHAR LIMIT=50] -->
+    <string name="accessibility_pointer_and_touchpad_title">Cursor &amp; touchpad accessibility</string>
     <!-- Summary for the accessibility pointer and touchpad page. [CHAR LIMIT=50] -->
-    <string name="accessibility_pointer_and_touchpad_summary">Pointer color, pointer size &amp; more</string>
+    <string name="accessibility_pointer_and_touchpad_summary">Size, color, type</string>
     <!-- Title for the accessibility pointer color customization page. [CHAR LIMIT=50] -->
-    <string name="accessibility_pointer_color_customization_title">Pointer color customization</string>
+    <string name="accessibility_pointer_color_customization_title">Cursor color</string>
     <!-- TODO(b/353947750): finalize the four strings below and mark them translatable. -->
+    <!-- Title for the cursor section of the accessibility pointer and touchpad page. -->
+    <string name="accessibility_pointer_title">Cursor</string>
     <!-- Title for the touchpad section of the accessibility pointer and touchpad page. -->
-    <string name="accessibility_touchpad_title" translatable="false">Touchpad</string>
+    <string name="accessibility_touchpad_title">Touchpad</string>
     <!-- Title for a settings toggle that allows the user to enable or disable system gestures (3- or 4-finger swipes for going home, back, to the overview screen, or between apps) being made on a touchpad. -->
-    <string name="accessibility_touchpad_system_gestures_enable_title" translatable="false">Use system gestures</string>
+    <string name="accessibility_touchpad_system_gestures_enable_title">Use 3- or 4-finger gestures </string>
     <!-- Description text for a settings toggle that allows the user to enable or disable system gestures (3- or 4-finger swipes for going home, back, to the overview screen, or between apps) being made on a touchpad. -->
-    <string name="accessibility_touchpad_system_gestures_enable_summary" translatable="false">When turned off, 3- or 4-finger gestures are ignored</string>
+    <string name="accessibility_touchpad_system_gestures_enable_summary">When turned off, your touchpad will ignore 3- or 4-finger gestures</string>
     <!-- List of synonyms used in the settings search bar to find the "Use system gestures" touchpad setting, which allows the user to enable or disable system gestures (3- or 4-finger swipes for going home, back, to the overview screen, or between apps) being made on a touchpad. -->
-    <string name="keywords_accessibility_touchpad_system_gestures_enable" translatable="false">touchpad, trackpad, swipe</string>
+    <string name="keywords_accessibility_touchpad_system_gestures_enable">touchpad, trackpad, swipe</string>
     <!-- Title for the accessibility color contrast page. [CHAR LIMIT=50] -->
     <string name="accessibility_color_contrast_title">Color contrast</string>
     <!-- Intro for the accessibility color contrast page. [CHAR LIMIT=NONE] -->
@@ -5183,6 +5181,12 @@
     <string name="accessibility_tap_assistance_title">Timing controls</string>
     <!-- Title for the accessibility system controls page. [CHAR LIMIT=50] -->
     <string name="accessibility_system_controls_title">System controls</string>
+    <!-- Title for the accessibility feedback preference. [CHAR LIMIT=50] -->
+    <string name="accessibility_feedback_title">Feedback</string>
+    <!-- Summary for the accessibility feedback preference. [CHAR LIMIT=100] -->
+    <string name="accessibility_feedback_summary">Help improve by taking a survey</string>
+    <!-- Summary for the accessibility feedback preference is disabled. [CHAR LIMIT=100] -->
+    <string name="accessibility_feedback_disabled_summary">No surveys available</string>
     <!-- Title for the accessibility preference category of services downloaded by the user. [CHAR LIMIT=50] -->
     <string name="user_installed_services_category_title">Downloaded apps</string>
     <!-- Title for the accessibility preference category of settings considered to be experimental, meaning they might be changed or removed in the future. [CHAR LIMIT=50] -->
@@ -5642,7 +5646,7 @@
     <!-- suffixed to click action texts "Double-tap to " -->
     <string name="accessibility_action_label_panel_slice">enter settings</string>
     <!-- Title for accessibility preference for configuring feature that performs click action soon after mouse/trackpad pointer stops moving. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_autoclick_preference_title">Autoclick (dwell timing)</string>
+    <string name="accessibility_autoclick_preference_title">Autoclick (Dwell timing)</string>
     <!-- Title for accessibility dwell timing footer. [CHAR LIMIT=NONE] -->
     <string name="accessibility_autoclick_about_title">About autoclick (dwell timing)</string>
     <!-- Accessibility dwell timing footer link content description [CHAR LIMIT=NONE] -->
@@ -5673,6 +5677,12 @@
     <string name="accessibility_autoclick_longer_desc">Longer</string>
     <!-- Description for the seekbar that adjust auto click time. [CHAR_LIMIT=NONE] -->
     <string name="accessibility_autoclick_seekbar_desc">Auto click time</string>
+    <!-- Title for the seekbar that adjust auto click cursor area size. [CHAR_LIMIT=NONE] -->
+    <!-- TODO(b/383901288): Update string to translatable once approved by UXW. -->
+    <string name="autoclick_cursor_area_size_title" translatable="false">Cursor area size</string>
+    <!-- Summary for the seekbar that adjust auto click cursor area size. [CHAR_LIMIT=NONE] -->
+    <!-- TODO(b/383901288): Update string to translatable once approved by UXW. -->
+    <string name="autoclick_cursor_area_size_summary" translatable="false">Adjust the autoclick ring indicator area size</string>
     <!-- Title for preference screen for configuring vibrations. [CHAR LIMIT=NONE] -->
     <string name="accessibility_vibration_settings_title">Vibration &amp; haptics</string>
     <!-- Summary for preference screen for configuring vibrations. [CHAR LIMIT=NONE] -->
@@ -8996,14 +9006,8 @@
     <!-- Configure notifications: Value for lockscreen notifications: show all notifications [CHAR LIMIT=60] -->
     <string name="lock_screen_notifs_show_full_list">Full list</string>
 
-    <!-- Configure notifications: Summary for lockscreen notifications: show all notifications [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_notifs_full_list_desc">The current default placement is a full shelf and notification stack.</string>
-
-    <!-- Configure notifications: Value for lockscreen notifications: show compact notifications (minimalism on) [CHAR LIMIT=60] -->
-    <string name="lock_screen_notifs_show_compact">Compact</string>
-
-    <!-- Configure notifications: Summary for lockscreen notifications: show compact notifications (minimalism on) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_notifs_compact_desc">New notifications are collapsed into a shelf on your lockscreen.</string>
+    <!-- Configure notifications: Value for lockscreen notifications: show compact notifications (minimalism on) [CHAR LIMIT=30] -->
+    <string name="lock_screen_notifs_show_compact">Compact View</string>
 
     <!-- Configure notifications: Title for determining which notifications appear on the lock screen [CHAR LIMIT=60] -->
     <string name="lock_screen_notifs_title">Notifications on lock screen</string>
@@ -9067,17 +9071,20 @@
     <!-- Security > Choose PIN/PW/Pattern > Notification redaction interstitial: Message asking the user how they want their profile notifications to appear when the device is locked [CHAR LIMIT=NONE] -->
     <string name="lock_screen_notifications_interstitial_message_profile">When your device is locked, how do you want profile notifications to show?</string>
 
-    <!-- Notification Settings > Notifications on lock screen > Title for hiding seen notifications toggle. [CHAR LIMIT=60] -->
-    <string name="lock_screen_notification_hide_seen_title">Hide seen notifications</string>
+    <!-- Notification Settings > Notifications on lock screen > Title for showing notifications on the lock screen. [CHAR LIMIT=100] -->
+    <string name="lockscreen_notification_what_to_show_title">What to show on lock screen</string>
 
-    <!-- Notification Settings > Notifications on lock screen > Summary for hiding seen notifications toggle. [CHAR LIMIT=100] -->
-    <string name="lock_screen_notification_hide_seen_summary">Seen notifications are removed from the lock screen.</string>
+    <!-- Notification Settings > Notifications on lock screen > Title for showing seen notifications toggle. [CHAR LIMIT=60] -->
+    <string name="lock_screen_notification_show_seen_title">Show seen notifications</string>
 
     <!-- Notification Settings > Notifications on lock screen > Title for hiding silent notifications toggle. [CHAR LIMIT=60] -->
-    <string name="lock_screen_notification_hide_silent_title">Hide silent notifications</string>
+    <string name="lock_screen_notification_show_silent_title">Show silent notifications</string>
 
-    <!-- Notification Settings > Notifications on lock screen > Summary for hiding silent notifications toggle. [CHAR LIMIT=100] -->
-    <string name="lock_screen_notification_hide_silent_summary">Silent notifications and conversations are removed from the lock screen.</string>
+    <!-- Notification Settings > Notifications on lock screen > Title for hiding sensitive notification content on lock screen. [CHAR LIMIT=60] -->
+    <string name="lock_screen_notification_show_sensitive_content_title">Show sensitive content</string>
+
+    <!-- Notification Settings > Notifications on lock screen > Title for hiding sensitive work profile notification content on lock screen. [CHAR LIMIT=100] -->
+    <string name="lock_screen_notification_show_sensitive_work_content_title">Show sensitive work profile content</string>
 
     <!-- Security > Choose PIN/PW/Pattern > Notification redaction interstitial: Title for the screen asking the user how they want their profile notifications to appear when the device is locked [CHAR LIMIT=30] -->
     <string name="lock_screen_notifications_interstitial_title_profile">Profile notifications</string>
@@ -9100,8 +9107,11 @@
     <!-- [CHAR LIMIT=100] Title for switch that says whether this app can appear in the conversation notification section-->
     <string name="conversation_section_switch_title">Conversation section</string>
 
-    <!-- [CHAR LIMIT=100] Summary for switch that says whether this app can appear in the conversation notification section-->
+    <!-- [CHAR LIMIT=100] Summary for switch that says whether this app can appear in the conversation notification section (old)-->
     <string name="conversation_section_switch_summary">Allow app to use conversation section</string>
+
+    <!-- [CHAR LIMIT=100] Summary for switch that says whether this app can appear in the conversation notification section-->
+    <string name="conversation_section_switch_complete_summary">Allow app to use conversation section, although conversation features like prioritization and bubbles are not supported by this app.</string>
 
     <!-- [CHAR LIMIT=NONE] Conversation preference summary, the parent channel this conversation was spawned from (separator) the parent channel group (e.g. an account name)-->
     <string name="notification_conversation_summary" translatable="false">"<xliff:g id="parent_category_name">%1$s</xliff:g> • <xliff:g id="parent_category_group_name">%2$s</xliff:g>"</string>
@@ -9495,8 +9505,11 @@
     <!-- [CHAR LIMIT=NONE] Text appearing when app does not send notifications -->
     <string name="app_notifications_not_send_desc">This app does not send notifications</string>
 
+    <!-- [CHAR LIMIT=NONE] App notification settings: section header for app wide notif settings -->
+    <string name="app_notification_settings">App settings</string>
+
     <!-- [CHAR LIMIT=NONE] App notification settings: channels title -->
-    <string name="notification_channels">Categories</string>
+    <string name="notification_channels">Notification categories</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: non-grouped-channels title -->
     <string name="notification_channels_other">Other</string>
@@ -10834,6 +10847,11 @@
     <!-- Shown in admin details page to warn user about policies the admin can set on a financed device. [CHAR LIMIT=NONE] -->
     <string name="admin_financed_message">Your device administrator may be able to access data
         associated with this device, manage apps, and change this device\’s settings.</string>
+
+    <!-- Title for dialog displayed when user taps a setting on their phone that's blocked by Advanced Protection. [CHAR LIMIT=50] -->
+    <string name="disabled_by_advanced_protection_title">Prevented by Advanced Protection</string>
+    <!-- Short summary for dialog displayed when user taps a setting on their phone that's blocked by Advanced Protection. [CHAR LIMIT=NONE] -->
+    <string name="disabled_by_advanced_protection_message">This action is not allowed because Advanced Protection is on for your device.</string>
 
     <!-- Turn off a conditional state of the device (e.g. airplane mode, or hotspot) [CHAR LIMIT=30] -->
     <string name="condition_turn_off">Turn off</string>
@@ -12596,9 +12614,9 @@
     <!-- Category name "About satellite messaging" [CHAR_LIMIT=NONE] -->
     <string name="category_name_about_satellite_messaging">About <xliff:g id="subject" example="satellite messaging">%1$s</xliff:g></string>
     <!-- Summary for category "About satellite messaging" [CHAR_LIMIT=NONE] -->
-    <string name="title_about_satellite_setting">You can send and receive text messages by satellite as part of an eligible <xliff:g id="carrier_name" example="T-Mobile">%1$s</xliff:g> account</string>
+    <string name="title_about_satellite_setting">You can send and receive text messages by satellite with an eligible <xliff:g id="carrier_name" example="T-Mobile">%1$s</xliff:g> account</string>
     <!-- Category title "Your mobile plan" [CHAR_LIMIT=NONE] -->
-    <string name="category_title_your_satellite_plan">Your <xliff:g id="carrier_name" example="T-Mobile">%1$s</xliff:g> plan</string>
+    <string name="category_title_your_satellite_plan">Your <xliff:g id="carrier_name" example="T-Mobile">%1$s</xliff:g> account</string>
     <!-- Title for category "Your mobile plan when satellite is included in plan" [CHAR_LIMIT=NONE] -->
     <string name="title_have_satellite_plan">Messaging is included with your account</string>
     <!-- Title for category "Your mobile plan when satellite is not included in plan" [CHAR_LIMIT=NONE] -->
@@ -12616,7 +12634,7 @@
     <!-- Summary for satellite supported service [CHAR_LIMIT=NONE] -->
     <string name="summary_supported_service">You can text anyone, including emergency services. Your phone will reconnect to a mobile network when available.</string>
     <!-- learn more text - more about satellite messaging [CHAR_LIMIT=NONE] -->
-    <string name="satellite_setting_summary_more_information"><xliff:g id="subject" example="satellite messaging">%1$s</xliff:g> may take longer and is available only in some areas. Weather and certain structures may affect your satellite connection. Calling by satellite isn\u2019t available. Emergency calls may still connect.\n\nIt may take some time for account changes to show in Settings. Contact <xliff:g id="carrier_name" example="T-Mobile">%1$s</xliff:g> for details.</string>
+    <string name="satellite_setting_summary_more_information"><xliff:g id="subject" example="satellite messaging">%1$s</xliff:g> may take longer and is available only in some areas. Weather and certain structures may affect your satellite connection. Calling by satellite isn\u2019t available. Emergency calls may still connect.\n\nIt may take some time for account changes to show in Settings. Contact <xliff:g id="carrier_name" example="T-Mobile">%2$s</xliff:g> for details.</string>
     <!-- more about satellite messaging [CHAR_LIMIT=NONE] -->
     <string name="more_about_satellite_messaging">More about <xliff:g id="subject" example="satellite messaging">%1$s</xliff:g></string>
     <!-- Title for satellite warning dialog to avoid user using wifi/bluetooth/airplane mode [CHAR_LIMIT=NONE] -->
@@ -13588,7 +13606,7 @@
     <string name="thread_network_settings_learn_more">Learn more about Thread</string>
 
     <!-- URL for Thread network settings learn more link [CHAR_LIMIT=NONE] -->
-    <string name="thread_network_settings_learn_more_link" translatable="false">https://developers.home.google.com</string>
+    <string name="thread_network_settings_learn_more_link" translatable="false">https://support.google.com/android?p=thread_toggle</string>
 
     <!-- Label for the camera use toggle [CHAR LIMIT=40] -->
     <string name="camera_toggle_title">Camera access</string>

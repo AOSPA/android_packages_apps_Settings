@@ -190,6 +190,7 @@ import com.android.settings.regionalpreferences.RegionPickerFragment;
 import com.android.settings.regionalpreferences.RegionalPreferencesEntriesFragment;
 import com.android.settings.regionalpreferences.TemperatureUnitFragment;
 import com.android.settings.safetycenter.MoreSecurityPrivacyFragment;
+import com.android.settings.security.ContentProtectionPreferenceFragment;
 import com.android.settings.security.LockscreenDashboardFragment;
 import com.android.settings.security.MemtagPage;
 import com.android.settings.security.SecurityAdvancedSettings;
@@ -417,7 +418,8 @@ public class SettingsGateway {
             HearingDevicePairingFragment.class.getName(),
             ZenModesListFragment.class.getName(),
             ZenModeFragment.class.getName(),
-            ContactsStorageSettings.class.getName()
+            ContactsStorageSettings.class.getName(),
+            ContentProtectionPreferenceFragment.class.getName(),
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

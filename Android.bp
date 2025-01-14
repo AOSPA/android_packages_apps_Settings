@@ -115,6 +115,7 @@ android_library {
         "setupdesign-lottie-loading-layout",
         "device_policy_aconfig_flags_lib",
         "keyboard_flags_lib",
+        "settings_connectivity_flags",
     ],
 
     plugins: [
@@ -142,6 +143,7 @@ android_library {
         "android.app.flags-aconfig",
         "android.provider.flags-aconfig",
         "android.security.flags-aconfig",
+        "android.view.contentprotection.flags-aconfig",
         "keyboard_flags",
     ],
 }

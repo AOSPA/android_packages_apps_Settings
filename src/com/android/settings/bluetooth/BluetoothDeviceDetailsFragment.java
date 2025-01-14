@@ -151,7 +151,8 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
             (device, key, value) -> {
                 if (key == METADATA_FAST_PAIR_CUSTOMIZED_FIELDS
                         && mExtraControlViewWidth > 0
-                        && !mExtraControlUriLoaded) {
+                        && !mExtraControlUriLoaded
+                        && getActivity() != null) {
                     Log.i(TAG, "Update extra control UI because of metadata change.");
                     updateExtraControlUri(mExtraControlViewWidth);
                 }
@@ -474,6 +475,9 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                             context, this, mCachedDevice, lifecycle));
             controllers.add(new BluetoothDetailsButtonsController(context, this, mCachedDevice,
                     lifecycle));
+            controllers.add(
+                    new BluetoothDetailsAudioSharingController(
+                            context, this, mManager, mCachedDevice, lifecycle));
             controllers.add(new BluetoothDetailsCompanionAppsController(context, this,
                     mCachedDevice, lifecycle));
             controllers.add(new BluetoothDetailsAudioDeviceTypeController(context, this, mManager,
