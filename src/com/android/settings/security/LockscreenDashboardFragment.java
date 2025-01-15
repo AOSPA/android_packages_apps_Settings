@@ -32,6 +32,7 @@ import android.provider.Settings;
 import androidx.annotation.VisibleForTesting;
 
 import co.aospa.settings.display.DozeOnChargePreferenceController;
+import co.aospa.settings.gestures.ScreenOffUdfpsPreferenceController;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -116,6 +117,7 @@ public class LockscreenDashboardFragment extends DashboardFragment
         use(AmbientDisplayNotificationsPreferenceController.class).setConfig(getConfig(context));
         use(DoubleTapScreenPreferenceController.class).setConfig(getConfig(context));
         use(PickupGesturePreferenceController.class).setConfig(getConfig(context));
+        use(ScreenOffUdfpsPreferenceController.class).setConfig(getConfig(context));
 
         mControlsContentObserver = new ContentObserver(
                 new Handler(Looper.getMainLooper())) {
