@@ -5321,7 +5321,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                   android:permission="android.permission.MASTER_CLEAR"
                   android:label="@string/main_clear_title"
                   android:exported="true"
-                  android:theme="@style/SudThemeGlif.Light">
+                  android:theme="@style/SettingsSudThemeGlif.Light">
             <intent-filter>
                 <action android:name="com.android.settings.action.FACTORY_RESET"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -5335,7 +5335,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
         <activity android:name="Settings$FactoryResetConfirmActivity"
                   android:label="@string/main_clear_confirm_title"
                   android:exported="false"
-                  android:theme="@style/SudThemeGlif.Light">
+                  android:theme="@style/SettingsSudThemeGlif.Light">
         </activity>
 
        <activity android:name=".network.telephony.UserPLMNListActivity"

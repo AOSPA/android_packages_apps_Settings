@@ -542,6 +542,10 @@
     <string name="top_intro_region_title">The region you choose affects how your phone displays time, dates, temperature, and more</string>
     <!-- Category for more language settings. [CHAR LIMIT=NONE]-->
     <string name="more_language_settings_category">More language settings</string>
+    <!-- Title for asking to change system locale region or not. [CHAR LIMIT=50]-->
+    <string name="title_change_system_locale_region">Change region to %s ?</string>
+    <!-- Message for asking to change system locale region or not. [CHAR LIMIT=50]-->
+    <string name="body_change_system_locale_region">Your device will keep %s as a system language</string>
 
     <!-- Regional Preferences begin -->
     <!-- The title of the menu entry of regional preferences. [CHAR LIMIT=50] -->
@@ -824,6 +828,12 @@
     <!-- Message shown in summary field when Face Unlock is not set up. [CHAR LIMIT=54] -->
     <string name="security_settings_face_preference_summary_none">Setup needed</string>
     <!-- Title shown for menu item that launches face settings or enrollment. [CHAR LIMIT=32] -->
+    <string name="security_settings_face_preference_title_new">Face</string>
+    <!-- Title shown for menu item that launches face settings or enrollment, for work profile. [CHAR LIMIT=50] -->
+    <string name="security_settings_face_profile_preference_title_new">Face for work</string>
+    <!-- Title shown for menu item that launches face settings or enrollment. [CHAR LIMIT=32] -->
+    <string name="private_space_face_unlock_title_new">Face for private space</string>
+    <!-- Title shown for menu item that launches face settings or enrollment. [CHAR LIMIT=32] -->
     <string name="security_settings_face_preference_title">Face Unlock</string>
     <!-- Title shown for menu item that launches face settings or enrollment, for work profile [CHAR LIMIT=50] -->
     <string name="security_settings_face_profile_preference_title">Face Unlock for work</string>
@@ -953,6 +963,8 @@
     <string name="security_settings_fingerprint_settings_preferences_category">When using Fingerprint Unlock</string>
     <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
     <string name="security_settings_work_fingerprint_preference_title">Fingerprint for work</string>
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title_new">Fingerprint for work</string>
     <!-- Preference to check enrolled fingerprints -->
     <string name="fingerprint_check_enrolled_title">Check enrolled fingerprints</string>
     <!-- Preference to add another fingerprint -->
@@ -1396,6 +1408,8 @@
     <string name="private_space_biometric_summary">Tap to set up</string>
     <!-- Title for the Fingerprint unlock for private space preference. [CHAR LIMIT=60] -->
     <string name="private_space_fingerprint_unlock_title">Fingerprint Unlock for private space</string>
+    <!-- Title for the Fingerprint unlock for private space preference. [CHAR LIMIT=60] -->
+    <string name="private_space_fingerprint_unlock_title_new">Fingerprint for private space</string>
     <!-- Title for the Face unlock for private space preference. [CHAR LIMIT=60] -->
     <string name="private_space_face_unlock_title">Face Unlock for private space</string>
     <!-- Title for the Face and Fingerprint preference for private space. [CHAR LIMIT=60] -->
@@ -4781,6 +4795,8 @@
     <!-- TODO(b/383555305): finalize these strings and mark them translatable. -->
     <!-- Title for the 'Mouse controlled scrolling' preference switch, which disables the mouse scrolling acceleration so that the scrolling speed becomes directly proportional to the speed at which the wheel is turned. [CHAR LIMIT=60]-->
     <string name="mouse_scrolling_acceleration" translatable="false">Controlled scrolling</string>
+    <!-- Title for the 'Scrolling speed' slider seekbar, which controls how fast content scrolls when the user moves the scroll wheel. [CHAR LIMIT=60]-->
+    <string name="mouse_scrolling_speed" translatable="false">Scrolling speed</string>
     <!-- Title for the 'Swap buttons' preference switch, which swaps the left and right buttons of connected mice so that right click will be the primary action button and left clicking will be the secondary action, for example showing the context menu. [CHAR LIMIT=60] -->
     <string name="mouse_swap_primary_button">Swap primary mouse button</string>
     <!-- Summary text for the 'Swap buttons' preference switch indicating to users that when this switch is enabled, their left click will behave as though it is the right click (secondary action) and that the right click will be the primary action. [CHAR LIMIT=NONE] -->
@@ -5683,6 +5699,9 @@
     <!-- Summary for the seekbar that adjust auto click cursor area size. [CHAR_LIMIT=NONE] -->
     <!-- TODO(b/383901288): Update string to translatable once approved by UXW. -->
     <string name="autoclick_cursor_area_size_summary" translatable="false">Adjust the autoclick ring indicator area size</string>
+    <!-- Title for the toggle button that turns on/off the autoclick setting of ignoring minor cursor movement. [CHAR_LIMIT=NONE] -->
+    <!-- TODO(b/388845718): Update string to translatable once approved by UXW. -->
+    <string name="autoclick_ignore_minor_cursor_movement_title" translatable="false">Ignore minor cursor movement</string>
     <!-- Title for preference screen for configuring vibrations. [CHAR LIMIT=NONE] -->
     <string name="accessibility_vibration_settings_title">Vibration &amp; haptics</string>
     <!-- Summary for preference screen for configuring vibrations. [CHAR LIMIT=NONE] -->
@@ -11411,21 +11430,21 @@
     <string name="double_tap_power_for_camera_summary">To quickly open camera, press the power button twice. Works from any screen.</string>
 
     <!-- Title text for double tap power gesture [CHAR LIMIT=80]-->
-    <string name="double_tap_power_title">Double tap power button</string>
+    <string name="double_tap_power_title">Double press power button</string>
     <!-- Summary for double tap power settings [DO NOT TRANSLATE] -->
     <string name="double_tap_power_summary" translatable="false"><xliff:g id="double_tap_power_on_off" example="On">%1$s</xliff:g> / <xliff:g id="double_tap_power_actions" example="Access Wallet">%2$s</xliff:g></string>
     <!-- Switch label to enable/disable double tap power button gesture [CHAR LIMIT=60] -->
-    <string name="double_tap_power_enabled">Use double tap</string>
+    <string name="double_tap_power_enabled">Use double press</string>
     <!-- Category title for double tap power gesture [CHAR_LIMIT=80] -->
-    <string name="double_tap_power_target_action_category">Double Tap Power Button</string>
+    <string name="double_tap_power_target_action_category">Double press power button to open</string>
     <!-- Double Tap Power Gesture camera launch action title [CHAR_LIMIT=60] -->
-    <string name="double_tap_power_camera_action_title">Open Camera</string>
+    <string name="double_tap_power_camera_action_title">Camera</string>
     <!-- Setting summary to describe double tap power button will open camera. [CHAR LIMIT=NONE] -->
-    <string name="double_tap_power_camera_action_summary">Access Camera</string>
+    <string name="double_tap_power_camera_action_summary">Open Camera</string>
     <!-- Double Tap Power Gesture wallet launch action title [CHAR_LIMIT=60] -->
-    <string name="double_tap_power_wallet_action_title">Open Wallet</string>
+    <string name="double_tap_power_wallet_action_title">Wallet</string>
     <!-- Setting summary to describe double tap power button will open wallet. [CHAR LIMIT=NONE] -->
-    <string name="double_tap_power_wallet_action_summary">Access Wallet</string>
+    <string name="double_tap_power_wallet_action_summary">Open Wallet</string>
 
     <!-- Title text for double twist for camera mode [CHAR LIMIT=60]-->
     <string name="double_twist_for_camera_mode_title">Flip camera for selfie</string>
