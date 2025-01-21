@@ -622,7 +622,7 @@ public class FingerprintSettings extends SubSettings {
             // This needs to be after setting ids, otherwise
             // |mRequireScreenOnToAuthPreferenceController.isChecked or mScreenOffUnlockUdfpsPreferenceController.idChecked|
             // is always checking the primary user instead of the user with |mUserId|.
-            if (isSfps() || isUltrasnoicUdfps()) {
+            if (isSfps() || isUdfps()) {
                 scrollToPreference(fpPrefKey);
                 addFingerprintUnlockCategory();
             }
@@ -687,7 +687,7 @@ public class FingerprintSettings extends SubSettings {
                     mRequireScreenOnToAuthPreference.setOnPreferenceChangeListener(
                             restToUnlockPreference.getOnPreferenceChangeListener());
                 }
-            } else if (isUltrasnoicUdfps()) {
+            } else if (isUdfps()) {
                 setupFingerprintUnlockCategoryPreferencesForScreenOffUnlock();
             }
             updateFingerprintUnlockCategoryVisibility();
@@ -975,7 +975,7 @@ public class FingerprintSettings extends SubSettings {
                     }
 
                 }
-            } else if (isUltrasnoicUdfps()) {
+            } else if (isUdfps()) {
                 for (AbstractPreferenceController controller : controllers) {
                     if (controller.getPreferenceKey() == KEY_FINGERPRINT_UNLOCK_CATEGORY) {
                         mFingerprintUnlockCategoryPreferenceController =
