@@ -62,6 +62,8 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.TwoStatePreference;
 
+import co.aospa.settings.biometrics.fingerprint.FingerprintSettingsScreenOffUnlockUdfpsPreferenceController;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
@@ -186,6 +188,17 @@ public class FingerprintSettings extends SubSettings {
                                 context,
                                 KEY_REQUIRE_SCREEN_ON_TO_AUTH
                         ));
+            } else {
+                controllers.add(
+                        new FingerprintUnlockCategoryController(
+                                context,
+                                KEY_FINGERPRINT_UNLOCK_CATEGORY
+                        ));
+                controllers.add(
+                        new FingerprintSettingsScreenOffUnlockUdfpsPreferenceController(
+                                context,
+                                KEY_SCREEN_OFF_FINGERPRINT_UNLOCK
+                        ));
             }
             controllers.add(new FingerprintsEnrolledCategoryPreferenceController(context,
                     KEY_FINGERPRINTS_ENROLLED_CATEGORY));
@@ -212,6 +225,9 @@ public class FingerprintSettings extends SubSettings {
         @VisibleForTesting
         static final String KEY_REQUIRE_SCREEN_ON_TO_AUTH =
                 "security_settings_require_screen_on_to_auth";
+        @VisibleForTesting
+        static final String KEY_SCREEN_OFF_FINGERPRINT_UNLOCK =
+                "security_settings_screen_off_unlock_udfps";
         private static final String KEY_FINGERPRINTS_ENROLLED_CATEGORY =
                 "security_settings_fingerprints_enrolled";
         private static final String KEY_FINGERPRINT_UNLOCK_CATEGORY =
@@ -239,8 +255,11 @@ public class FingerprintSettings extends SubSettings {
                 mFingerprintUnlockCategoryPreferenceController;
         private FingerprintSettingsRequireScreenOnToAuthPreferenceController
                 mRequireScreenOnToAuthPreferenceController;
+        private FingerprintSettingsScreenOffUnlockUdfpsPreferenceController
+                mScreenOffUnlockUdfpsPreferenceController;
         private Preference mAddFingerprintPreference;
         private RestrictedSwitchPreference mRequireScreenOnToAuthPreference;
+        private RestrictedSwitchPreference mScreenOffUnlockUdfpsPreference;
         private PreferenceCategory mFingerprintsEnrolledCategory;
         private PreferenceCategory mFingerprintUnlockCategory;
         private PreferenceCategory mFingerprintUnlockFooter;
@@ -552,6 +571,19 @@ public class FingerprintSettings extends SubSettings {
             return false;
         }
 
+        private boolean isUltrasnoicUdfps() {
+            mFingerprintManager = Utils.getFingerprintManagerOrNull(getActivity());
+            if (mFingerprintManager != null) {
+                mSensorProperties = mFingerprintManager.getSensorPropertiesInternal();
+                for (FingerprintSensorPropertiesInternal prop : mSensorProperties) {
+                    if (prop.isUltrasonicUdfps()) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         protected void removeFingerprintPreference(int fingerprintId) {
             String name = genKey(fingerprintId);
             Preference prefToRemove = findPreference(name);
@@ -588,9 +620,9 @@ public class FingerprintSettings extends SubSettings {
             }
 
             // This needs to be after setting ids, otherwise
-            // |mRequireScreenOnToAuthPreferenceController.isChecked| is always checking the primary
-            // user instead of the user with |mUserId|.
-            if (isSfps()) {
+            // |mRequireScreenOnToAuthPreferenceController.isChecked or mScreenOffUnlockUdfpsPreferenceController.idChecked|
+            // is always checking the primary user instead of the user with |mUserId|.
+            if (isSfps() || isUltrasnoicUdfps()) {
                 scrollToPreference(fpPrefKey);
                 addFingerprintUnlockCategory();
             }
@@ -640,19 +672,23 @@ public class FingerprintSettings extends SubSettings {
 
         private void addFingerprintUnlockCategory() {
             mFingerprintUnlockCategory = findPreference(KEY_FINGERPRINT_UNLOCK_CATEGORY);
-            setupFingerprintUnlockCategoryPreferences();
-            final Preference restToUnlockPreference = FeatureFactory.getFeatureFactory()
-                    .getFingerprintFeatureProvider()
-                    .getSfpsRestToUnlockFeature(getContext())
-                    .getRestToUnlockPreference(getContext());
-            if (restToUnlockPreference != null) {
-                // Use custom featured preference if any.
-                mRequireScreenOnToAuthPreference.setTitle(restToUnlockPreference.getTitle());
-                mRequireScreenOnToAuthPreference.setSummary(restToUnlockPreference.getSummary());
-                mRequireScreenOnToAuthPreference.setChecked(
-                        ((TwoStatePreference) restToUnlockPreference).isChecked());
-                mRequireScreenOnToAuthPreference.setOnPreferenceChangeListener(
-                        restToUnlockPreference.getOnPreferenceChangeListener());
+            if (isSfps()) {
+                setupFingerprintUnlockCategoryPreferencesForScreenOnToAuth();
+                final Preference restToUnlockPreference = FeatureFactory.getFeatureFactory()
+                        .getFingerprintFeatureProvider()
+                        .getSfpsRestToUnlockFeature(getContext())
+                        .getRestToUnlockPreference(getContext());
+                if (restToUnlockPreference != null) {
+                    // Use custom featured preference if any.
+                    mRequireScreenOnToAuthPreference.setTitle(restToUnlockPreference.getTitle());
+                    mRequireScreenOnToAuthPreference.setSummary(restToUnlockPreference.getSummary());
+                    mRequireScreenOnToAuthPreference.setChecked(
+                            ((TwoStatePreference) restToUnlockPreference).isChecked());
+                    mRequireScreenOnToAuthPreference.setOnPreferenceChangeListener(
+                            restToUnlockPreference.getOnPreferenceChangeListener());
+                }
+            } else if (isUltrasnoicUdfps()) {
+                setupFingerprintUnlockCategoryPreferencesForScreenOffUnlock();
             }
             updateFingerprintUnlockCategoryVisibility();
         }
@@ -664,9 +700,15 @@ public class FingerprintSettings extends SubSettings {
                 mFingerprintUnlockCategory.setVisible(
                         mFingerprintUnlockCategoryAvailable);
             }
+            if (mRequireScreenOnToAuthPreferenceController != null) {
+                mRequireScreenOnToAuthPreference.setVisible(mRequireScreenOnToAuthPreferenceController.isAvailable());
+            }
+            if (mScreenOffUnlockUdfpsPreferenceController != null) {
+                mScreenOffUnlockUdfpsPreference.setVisible(mScreenOffUnlockUdfpsPreferenceController.isAvailable());
+            }
         }
 
-        private void setupFingerprintUnlockCategoryPreferences() {
+        private void setupFingerprintUnlockCategoryPreferencesForScreenOnToAuth() {
             mRequireScreenOnToAuthPreference = findPreference(KEY_REQUIRE_SCREEN_ON_TO_AUTH);
             mRequireScreenOnToAuthPreference.setChecked(
                     mRequireScreenOnToAuthPreferenceController.isChecked());
@@ -674,6 +716,18 @@ public class FingerprintSettings extends SubSettings {
                     (preference, newValue) -> {
                         final boolean isChecked = ((TwoStatePreference) preference).isChecked();
                         mRequireScreenOnToAuthPreferenceController.setChecked(!isChecked);
+                        return true;
+                    });
+        }
+
+        private void setupFingerprintUnlockCategoryPreferencesForScreenOffUnlock() {
+            mScreenOffUnlockUdfpsPreference = findPreference(KEY_SCREEN_OFF_FINGERPRINT_UNLOCK);
+            mScreenOffUnlockUdfpsPreference.setChecked(
+                    mScreenOffUnlockUdfpsPreferenceController.isChecked());
+            mScreenOffUnlockUdfpsPreference.setOnPreferenceChangeListener(
+                    (preference, newValue) -> {
+                        final boolean isChecked = ((TwoStatePreference) preference).isChecked();
+                        mScreenOffUnlockUdfpsPreferenceController.setChecked(!isChecked);
                         return true;
                     });
         }
@@ -917,6 +971,18 @@ public class FingerprintSettings extends SubSettings {
                     } else if (controller.getPreferenceKey() == KEY_REQUIRE_SCREEN_ON_TO_AUTH) {
                         mRequireScreenOnToAuthPreferenceController =
                                 (FingerprintSettingsRequireScreenOnToAuthPreferenceController)
+                                        controller;
+                    }
+
+                }
+            } else if (isUltrasnoicUdfps()) {
+                for (AbstractPreferenceController controller : controllers) {
+                    if (controller.getPreferenceKey() == KEY_FINGERPRINT_UNLOCK_CATEGORY) {
+                        mFingerprintUnlockCategoryPreferenceController =
+                                (FingerprintUnlockCategoryController) controller;
+                    } else if (controller.getPreferenceKey() == KEY_SCREEN_OFF_FINGERPRINT_UNLOCK) {
+                        mScreenOffUnlockUdfpsPreferenceController =
+                                (FingerprintSettingsScreenOffUnlockUdfpsPreferenceController)
                                         controller;
                     }
 
