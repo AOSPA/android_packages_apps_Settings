@@ -16,7 +16,7 @@
 
 /*
  * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
- * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Copyright (c) 2024-2025 Qualcomm Innovation Center, Inc. All rights reserved.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
@@ -125,6 +125,24 @@ fun SimOnboardingPrimarySimImpl(
         }
     }
 }
+
+@Composable
+fun CreatePrimarySimListPreference(
+        title: String,
+        list: List<ListPreferenceOption>,
+        selectedId: MutableIntState,
+        icon: ImageVector,
+        onIdSelected: (id: Int) -> Unit,
+) = ListPreference(
+    object : ListPreferenceModel {
+        override val title = title
+        override val options = list
+        override val selectedId = selectedId
+        override val onIdSelected = onIdSelected
+        override val icon = @Composable {
+            SettingsIcon(icon)
+        }
+})
 
 @Composable
 fun CreatePrimarySimListPreference(

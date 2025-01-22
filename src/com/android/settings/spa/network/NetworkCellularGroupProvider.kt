@@ -16,7 +16,7 @@
 
 /*
  * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
- * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Copyright (c) 2024-2025 Qualcomm Innovation Center, Inc. All rights reserved.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
@@ -55,6 +55,7 @@ import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settings.network.SubscriptionInfoListViewModel
 import com.android.settings.network.telephony.DataSubscriptionRepository
+import com.android.settings.network.telephony.DdsPreferenceRepository
 import com.android.settings.network.telephony.MobileDataRepository
 import com.android.settings.network.telephony.SimRepository
 import com.android.settings.network.telephony.TelephonyUtils
@@ -286,7 +287,6 @@ fun PrimarySimImpl(
         callsSelectedId,
         ImageVector.vectorResource(R.drawable.ic_phone),
         actionSetCalls,
-        true
     )
     CreatePrimarySimListPreference(
         stringResource(id = R.string.primary_sim_texts_title),
@@ -294,15 +294,19 @@ fun PrimarySimImpl(
         textsSelectedId,
         Icons.AutoMirrored.Outlined.Message,
         actionSetTexts,
-        true
     )
+
+    val ddsPreferenceRepository = rememberContext(::DdsPreferenceRepository)
+    val isDdsSelectable by remember {
+        ddsPreferenceRepository.isDdsPreferenceSelectableFlow()
+    }.collectAsStateWithLifecycle(initialValue = true)
     CreatePrimarySimListPreference(
         stringResource(id = R.string.mobile_data_settings_title),
         primarySimInfo.dataList,
         mobileDataSelectedId,
         Icons.Outlined.DataUsage,
         actionSetMobileData,
-        TelephonyUtils.isDDSPreferenceSelectable(context)
+        isDdsSelectable,
     )
 }
 
