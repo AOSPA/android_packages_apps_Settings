@@ -318,6 +318,8 @@
 
     <!-- Title for Bluetooth device group with media capability group [CHAR LIMIT=none]-->
     <string name="connected_device_media_device_title">Media devices</string>
+    <!-- Title for temporary bond device group [CHAR LIMIT=none]-->
+    <string name="connected_device_temp_bond_device_title">Guest devices</string>
     <!-- Title for Bluetooth device group with media capability group [CHAR LIMIT=none]-->
     <string name="connected_device_call_device_title">Call devices</string>
     <!-- Title for connected device group [CHAR LIMIT=none]-->
@@ -546,6 +548,7 @@
     <string name="title_change_system_locale_region">Change region to %s ?</string>
     <!-- Message for asking to change system locale region or not. [CHAR LIMIT=50]-->
     <string name="body_change_system_locale_region">Your device will keep %s as a system language</string>
+    <string name="top_intro_numbering_system_title">The digits used will be dependent on the numbering system</string>
 
     <!-- Regional Preferences begin -->
     <!-- The title of the menu entry of regional preferences. [CHAR LIMIT=50] -->
@@ -926,6 +929,10 @@
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">Delete your current face model to set up Face Unlock again.\n\nYour face model will be permanently and securely deleted.\n\nAfter deletion, you will need your fingerprint, PIN, pattern, or password to unlock your phone or for authentication in apps.</string>
     <!-- Title for a category shown for the face settings page. [CHAR LIMIT=20] -->
     <string name="security_settings_face_settings_use_face_category">Use Face Unlock for</string>
+    <!-- Title for a category shown for the face settings page. [CHAR LIMIT=20] -->
+    <string name="security_settings_face_settings_face_category">Face</string>
+    <!-- Title for a category shown for the face settings page. [CHAR LIMIT=20] -->
+    <string name="security_settings_face_settings_use_face_to_category">Use Face to</string>
     <!-- Title for a category shown for the face settings page, followed by items that the user can toggle on/off to require/disable. [CHAR LIMIT=50] -->
     <string name="security_settings_face_settings_preferences_category">When using Face Unlock</string>
     <!-- Text shown on a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=30] -->
@@ -957,6 +964,10 @@
     <!-- Note: Update FingerprintEnrollParentalConsent.CONSENT_STRING_RESOURCES when any _consent_ strings are added or removed. -->
     <!-- Title shown for choose lock options [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint">Fingerprint</string>
+    <!-- Title shown for a category shown for fingerprint settings page. [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_title">Fingerprints</string>
+    <!-- Fingerprint category title - fingerprint options for unlocking the device. [CHAR LIMIT=60] -->
+    <string name="security_settings_category_use_fingerprint">Use fingerprint to</string>
     <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_preference_title">Fingerprint</string>
     <!-- Title for a category shown for the fingerprint settings page, followed by items that the user can toggle on/off to require/disable. [CHAR LIMIT=50] -->
@@ -2135,6 +2146,8 @@
     <string name="external_display_more_options_title">More options</string>
     <!-- External Display settings. -->
     <string name="external_display_topology_hint">Hold and drag to rearrange displays.</string>
+    <!-- External Display settings. -->
+    <string name="external_display_mirroring_title">Mirror built-in display</string>
 
     <!-- Wifi Display settings. The title of the screen. [CHAR LIMIT=40] -->
     <string name="wifi_display_settings_title">Cast</string>
@@ -4864,6 +4877,10 @@
     <string name="trackpad_pointer_speed">Cursor speed</string>
     <!-- Title text for 'Three finger tap' touchpad preference. This preference allows the user to select an action that will trigger when they tap three fingers on a touchpad. [CHAR LIMIT=60] -->
     <string name="three_finger_tap_preference_title">Customise 3-finger tap</string>
+    <!-- Title for the 'Touchpad acceleration' preference switch, which dynamically adjusts cursor movement based on speed. [CHAR LIMIT=60] -->
+    <string name="touchpad_acceleration_title">Touchpad acceleration</string>
+    <!-- Summary text for the 'Touchpad acceleration' preference switch indicating to users that when this switch is enabled, faster movements with your fingers will move the cursor farther. [CHAR LIMIT=NONE] -->
+    <string name="touchpad_acceleration_summary">Faster movements on your touchpad will move the cursor farther</string>
     <!-- Title text for mouse pointer color. [CHAR LIMIT=35] -->
     <string name="pointer_fill_style">Pointer color</string>
     <!-- Content description for black pointer fill style. [CHAR LIMIT=60] -->
@@ -5578,11 +5595,11 @@
     <!-- Title for the notification that high contrast text has been replaced. [CHAR LIMIT=NONE] -->
     <string name="accessibility_notification_high_contrast_text_title">High contrast text has been replaced</string>
     <!-- Text content for the notification that high contrast text has been replaced. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_notification_high_contrast_text_content">Try Maximize text contrast instead. Find it in Settings.</string>
+    <string name="accessibility_notification_high_contrast_text_content">Try Text outlines instead. Find it in Settings.</string>
     <!-- Action for the notification to high contrast text. [CHAR LIMIT=35] -->
     <string name="accessibility_notification_high_contrast_text_action">Open Settings</string>
-    <!-- Title for the accessibility preference to high contrast text. [CHAR LIMIT=35] -->
-    <string name="accessibility_toggle_maximize_text_contrast_preference_title">Maximize text contrast</string>
+    <!-- Title for the accessibility preference that adds an outline behind text to increase contrast and legibility. [CHAR LIMIT=35] -->
+    <string name="accessibility_toggle_maximize_text_contrast_preference_title">Text outlines</string>
     <!-- Summary for the accessibility preference to high contrast text. [CHAR LIMIT=NONE] -->
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary">Add a black or white background around text to increase contrast</string>
     <!-- Title for the accessibility preference to auto update screen magnification. [CHAR LIMIT=35] -->
@@ -5593,10 +5610,6 @@
         screen magnification on app transitions</string>
     <!-- Title for the accessibility preference to power button to end a call. [CHAR LIMIT=35] -->
     <string name="accessibility_power_button_ends_call_prerefence_title">Power button ends call</string>
-    <!-- Title for the accessibility preference for enabling/disabling large icons for mouse/trackpad pointers. [CHAR LIMIT=35] -->
-    <string name="accessibility_toggle_large_pointer_icon_title">Large mouse pointer</string>
-    <!-- Summary for the accessibility preference for enabling/disabling large icons for mouse/trackpad pointers. [CHAR LIMIT=60] -->
-    <string name="accessibility_toggle_large_pointer_icon_summary">Make the mouse pointer more noticeable</string>
     <!-- Title for the accessibility preference for forcing all apps to use dark theme. [CHAR LIMIT=35] -->
     <string name="accessibility_force_invert_title">Make more apps dark</string>
     <!-- Summary for the accessibility preference for forcing all apps to use dark theme. [CHAR LIMIT=100] -->
@@ -6067,6 +6080,8 @@
     <string name="keywords_display_size">screen size, large screen</string>
     <!-- List of synonyms used in the settings search bar to find the “Bold text”. [CHAR LIMIT=NONE] -->
     <string name="keywords_bold_text">High contrast, low vision, bold font, bold face</string>
+    <!-- List of synonyms used in the settings search bar to find "Text outlines", previously known as "High contrast text". [CHAR LIMIT=NONE] -->
+    <string name="keywords_maximize_text_contrast">high contrast text</string>
     <!-- List of synonyms used in the settings search bar to find the “Select to Speak”. [CHAR LIMIT=NONE] -->
     <string name="keywords_select_to_speak"></string>
     <!-- List of synonyms used in the settings search bar to find the “Color correction”. [CHAR LIMIT=NONE] -->
@@ -11477,7 +11492,7 @@
     <string name="legacy_navigation_summary">Go back, Home, and switch apps with buttons at the bottom of your screen.</string>
 
     <!-- Accessibility string for gesture nav tutorial button [CHAR_LIMIT=NONE] -->
-    <string name="nav_tutorial_button_description">Start gesture navigation tutorial, button. Double tap to activate.</string>
+    <string name="nav_tutorial_button_description">Start gesture navigation tutorial.</string>
 
     <!-- Search keywords for System Navigation settings. [CHAR_LIMIT=NONE]-->
     <string name="keywords_system_navigation">system navigation, 2 button navigation, 3 button navigation, gesture navigation, swipe</string>
@@ -13347,10 +13362,6 @@
     <string name="media_controls_lockscreen_title">Show media on lock screen</string>
     <!-- Description of toggle to enable or disable the media resumption on lockscreen [CHAR LIMIT=NONE]-->
     <string name="media_controls_lockscreen_description">To quickly resume playback, media player stays open on lock screen</string>
-    <!-- Title of toggle to enable or disable media recommendations in quick settings [CHAR LIMIT=NONE] -->
-    <string name="media_controls_recommendations_title">Show Assistant media recommendations</string>
-    <!-- Description of toggle to enable or disable media recommendations based on user's activity [CHAR LIMIT=NONE] -->
-    <string name="media_controls_recommendations_description">Based on your activity</string>
     <!-- Subtext for media settings when the player will be hidden [CHAR LIMIT=50] -->
     <string name="media_controls_hide_player">Hide player</string>
     <!-- Subtext for media settings when the player will be shown [CHAR LIMIT=50] -->
@@ -14282,4 +14293,17 @@
 
     <!-- Content description for device details icon on Connected device page [CHAR LIMIT=NONE] -->
     <string name="device_detail_icon_content_description"><xliff:g id="device_name">%1$s</xliff:g>. Configure device detail.</string>
+
+    <!-- Supervision settings -->
+
+    <!-- Title for Supervision settings menu entry [CHAR LIMIT=60] -->
+    <string name="supervision_settings_title">Supervision</string>
+    <!-- Description for Supervision settings menu entry [CHAR LIMIT=NONE] -->
+    <string name="supervision_settings_summary">Content restrictions &amp; other limits</string>
+    <!-- Title of toggle to enable or disable device supervision [CHAR LIMIT=60] -->
+    <string name="device_supervision_switch_title">Use device supervision</string>
+    <!-- Description of device supervision toggle when PIN has never been set up [CHAR LIMIT=NONE] -->
+    <string name="device_supervision_switch_no_pin_summary">Set up PIN to get started</string>
+    <!-- Search keywords for supervision settings [CHAR LIMIT=NONE] -->
+    <string name="keywords_supervision_settings">supervision, parental supervision, parental controls</string>
 </resources>

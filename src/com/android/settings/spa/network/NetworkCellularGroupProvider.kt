@@ -145,7 +145,8 @@ open class NetworkCellularGroupProvider : SettingsPageProvider, SearchablePage {
             if (mobileDataSelectedIdValue != null) {
                 val showMobileDataSection =
                     selectableSubscriptionInfoList.any { subInfo -> subInfo.simSlotIndex > -1 }
-                if (showMobileDataSection) {
+                if (showMobileDataSection
+                        && (!TelephonyUtils.isSmartDdsSwitchFeatureAvailable())) {
                     MobileDataSectionImpl(mobileDataSelectedIdValue, nonDdsRemember.intValue)
                 }
 
@@ -225,7 +226,6 @@ fun MobileDataSectionImpl(mobileDataSelectedId: Int, nonDds: Int) {
     val mobileDataRepository = rememberContext(::MobileDataRepository)
 
     Category(title = stringResource(id = R.string.mobile_data_settings_title)) {
-        MobileDataSwitchPreference(subId = mobileDataSelectedId)
 
         val isAutoDataEnabled by remember(nonDds) {
             mobileDataRepository.isMobileDataPolicyEnabledFlow(

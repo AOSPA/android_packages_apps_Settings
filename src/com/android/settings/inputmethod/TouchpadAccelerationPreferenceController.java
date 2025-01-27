@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 The Android Open Source Project
+ * Copyright 2025 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,46 +14,43 @@
  * limitations under the License.
  */
 
-package com.android.settings.sound;
-
-import static android.provider.Settings.Secure.MEDIA_CONTROLS_RECOMMENDATION;
+package com.android.settings.inputmethod;
 
 import android.content.Context;
-import android.provider.Settings;
+import android.hardware.input.InputSettings;
+
+import androidx.annotation.NonNull;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
-/**
- * Toggle for media controls recommendation setting
- */
-public class MediaControlsRecommendationController extends TogglePreferenceController {
+public class TouchpadAccelerationPreferenceController extends TogglePreferenceController {
 
-    public MediaControlsRecommendationController(Context context, String key) {
+    public TouchpadAccelerationPreferenceController(@NonNull Context context, @NonNull String key) {
         super(context, key);
     }
 
     @Override
     public boolean isChecked() {
-        int val = Settings.Secure.getInt(mContext.getContentResolver(),
-                MEDIA_CONTROLS_RECOMMENDATION, 1);
-        return val == 1;
+        return InputSettings.isTouchpadAccelerationEnabled(mContext);
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        int val = isChecked ? 1 : 0;
-        return Settings.Secure.putInt(mContext.getContentResolver(),
-                MEDIA_CONTROLS_RECOMMENDATION, val);
+        InputSettings.setTouchpadAccelerationEnabled(mContext, isChecked);
+        return true;
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        if (!InputSettings.isPointerAccelerationFeatureFlagEnabled()) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+        return InputPeripheralsSettingsUtils.isTouchpad() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
     public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_sound;
+        return R.string.menu_key_system;
     }
 }
