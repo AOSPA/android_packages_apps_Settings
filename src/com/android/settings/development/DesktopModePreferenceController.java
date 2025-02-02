@@ -57,7 +57,8 @@ public class DesktopModePreferenceController extends DeveloperOptionsPreferenceC
 
     @Override
     public boolean isAvailable() {
-        return DesktopModeStatus.canShowDesktopModeDevOption(mContext);
+        return DesktopModeStatus.canShowDesktopModeDevOption(mContext)
+                && !DesktopModeStatus.canShowDesktopExperienceDevOption(mContext);
     }
 
     @Override

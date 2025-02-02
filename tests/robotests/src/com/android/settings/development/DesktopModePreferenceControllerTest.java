@@ -125,6 +125,14 @@ public class DesktopModePreferenceControllerTest {
         assertThat(mController.isAvailable()).isTrue();
     }
 
+    @EnableFlags(Flags.FLAG_SHOW_DESKTOP_EXPERIENCE_DEV_OPTION)
+    @Test
+    public void isAvailable_whenDesktopExperienceDevOptionIsEnabled_returnsFalse() {
+        mController = spy(mController);
+
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
     @Test
     public void onPreferenceChange_switchEnabled_putsSettingsOverrideOnAndTriggersRestart() {
         mController.onPreferenceChange(mPreference, true /* new value */);
