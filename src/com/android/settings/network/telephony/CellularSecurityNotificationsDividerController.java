@@ -60,9 +60,7 @@ public class CellularSecurityNotificationsDividerController extends
 
     @Override
     public int getAvailabilityStatus() {
-        if (!Flags.enableIdentifierDisclosureTransparencyUnsolEvents()
-                || !Flags.enableModemCipherTransparencyUnsolEvents()
-                || !Flags.enableIdentifierDisclosureTransparency()
+        if (!Flags.enableModemCipherTransparencyUnsolEvents()
                 || !Flags.enableModemCipherTransparency()) {
             return UNSUPPORTED_ON_DEVICE;
         }

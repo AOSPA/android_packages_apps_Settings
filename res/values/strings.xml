@@ -939,6 +939,10 @@
     <string name="security_settings_face_settings_require_attention">Require eyes to be open</string>
     <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
     <string name="security_settings_face_settings_require_attention_details">To unlock the phone, your eyes must be open</string>
+    <!-- Text shown on a toggle which disables/enables face unlock, depending if the gaze supported. [CHAR LIMIT=30] -->
+    <string name="security_settings_face_settings_gaze"></string>
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the gaze supported. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_gaze_details"></string>
     <!-- When authenticating in apps, always require confirmation (e.g. confirm button) after a face is authenticated. [CHAR LIMIT=50] -->
     <string name="security_settings_face_settings_require_confirmation">Always require confirmation</string>
     <!-- When authenticating in apps, always require confirmation (e.g. confirm button) after a face is authenticated. [CHAR LIMIT=70] -->
@@ -5811,6 +5815,8 @@
     <string name="accessibility_shortcut_edit_screen_title">Edit accessibility shortcuts</string>
     <!-- Prompt for editing the shortcuts of multiple accessibility features. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_screen_prompt">Choose your shortcut for %1$s</string>
+    <!-- Summary to display when a shortcut setting is disabled, due to the shortcut being unassigned -->
+    <string name="accessibility_shortcut_unassigned_setting_unavailable_summary">To use this, turn on the %1$s shortcut on an accessibility feature\'s page</string>
 
     <!-- Button text for the accessibility dialog continue to the next screen for hearing aid. [CHAR LIMIT=32] -->
     <string name="accessibility_hearingaid_instruction_continue_button">Continue</string>
@@ -12131,6 +12137,9 @@
     <!-- Help URI, action disabled by restricted settings [DO NOT TRANSLATE] -->
     <string name="help_url_action_disabled_by_restricted_settings" translatable="false"></string>
 
+    <!-- Help URI, action disabled by advanced protection [DO NOT TRANSLATE] -->
+    <string name="help_url_action_disabled_by_advanced_protection" translatable="false"></string>
+
     <!-- Title label for dnd suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
     <string name="zen_suggestion_title">Update Do Not Disturb</string>
 
@@ -14323,4 +14332,6 @@
     <string name="supervision_pin_management_preference_title">Manage PIN</string>
     <!-- Description for supervision PIN management settings entry, in the case of adding a PIN [CHAR LIMIT=NONE] -->
     <string name="supervision_pin_management_preference_summary_add">Add a PIN recovery method</string>
+    <!-- Title for supervision change PIN setting entry [CHAR LIMIT=60] -->
+    <string name="supervision_change_pin_preference_title">Change PIN</string>
 </resources>
