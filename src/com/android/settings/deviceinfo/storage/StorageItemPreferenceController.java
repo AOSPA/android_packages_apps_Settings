@@ -475,7 +475,10 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
             updatePrivateStorageCategoryPreferencesOrder();
             mIsPreferenceOrderedBySize = true;
         }
-        setPrivateStorageCategoryPreferencesVisibility(true);
+
+        if (isValidPrivateVolume()) {
+            setPrivateStorageCategoryPreferencesVisibility(true);
+        }
     }
 
     private StorageCacheHelper.StorageCache getSizeInfo(
