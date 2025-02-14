@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+* Copyright (c) 2024-2025 Qualcomm Innovation Center, Inc. All rights reserved.
 * SPDX-License-Identifier: BSD-3-Clause-Clear
 */
 
@@ -110,28 +110,5 @@ public class RoamingPreferenceControllerUtil {
             subToCheck = dds;
         }
         return subToCheck;
-    }
-
-    /**
-      * When there is a nDDS voice call, it is disallowed to turn off data roaming of
-      * DDS sub after temp DDS is happened.
-      *
-      * @return true if option needs to get greyed out
-      */
-    public static boolean isDisallowed(int subId) {
-        if (sTelephonyManager == null) {
-            return false;
-        }
-        final int DDS = SubscriptionManager.getDefaultDataSubscriptionId();
-        final int nDDS = MobileNetworkSettings.getNonDefaultDataSub();
-        final int activeDataSubId = sSubscriptionManager.getActiveDataSubscriptionId();
-        if (DDS == subId) {
-            TelephonyManager tm = sTelephonyManager.createForSubscriptionId(nDDS);
-            if (tm.getCallStateForSubscription() != TelephonyManager.CALL_STATE_IDLE
-                    && (DDS != activeDataSubId)) {
-                return true;
-            }
-        }
-        return false;
     }
 }

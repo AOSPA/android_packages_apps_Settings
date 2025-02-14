@@ -17,7 +17,7 @@
 /*
  * Changes from Qualcomm Innovation Center are provided under the following license:
  *
- * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Copyright (c) 2024-2025 Qualcomm Innovation Center, Inc. All rights reserved.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 package com.android.settings.network.telephony
@@ -50,6 +50,8 @@ constructor(
     context: Context,
     key: String,
     private val mobileDataRepository: MobileDataRepository = MobileDataRepository(context),
+    private val roamingPreferenceRepository: RoamingPreferenceRepository =
+            RoamingPreferenceRepository(context),
 ) : ComposePreferenceController(context, key) {
     @VisibleForTesting var fragmentManager: FragmentManager? = null
     private var subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID
@@ -80,13 +82,15 @@ constructor(
         val isDataRoamingEnabled by
             remember { mobileDataRepository.isDataRoamingEnabledFlow(subId) }
                 .collectAsStateWithLifecycle(null)
+        val isDisallowed by
+            remember { roamingPreferenceRepository.isDisallowedFlow(subId) }
+                .collectAsStateWithLifecycle(initialValue = false)
         RestrictedSwitchPreference(
             model =
                 object : SwitchPreferenceModel {
                     override val title = stringResource(R.string.roaming)
                     override val summary = { summary }
-                    override val changeable = {
-                            !RoamingPreferenceControllerUtil.isDisallowed(subId) }
+                    override val changeable = { !isDisallowed }
                     override val checked = { isDataRoamingEnabled }
                     override val onCheckedChange: (Boolean) -> Unit = { newChecked ->
                         if (newChecked && isDialogNeeded()) {
