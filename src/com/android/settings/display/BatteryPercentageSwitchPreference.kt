@@ -15,30 +15,32 @@
  */
 package com.android.settings.display
 
-import android.app.settings.SettingsEnums
+import android.app.settings.SettingsEnums.OPEN_BATTERY_PERCENTAGE
 import android.content.Context
 import android.provider.Settings
-import androidx.preference.Preference
+import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.R
 import com.android.settings.Utils
-import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
+import com.android.settings.contract.KEY_BATTERY_PERCENTAGE
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObservableDelegate
 import com.android.settingslib.datastore.SettingsStore
 import com.android.settingslib.datastore.SettingsSystemStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
-import com.android.settingslib.preference.SwitchPreferenceBinding
 
 // LINT.IfChange
 class BatteryPercentageSwitchPreference :
     SwitchPreference(KEY, R.string.battery_percentage, R.string.battery_percentage_description),
-    SwitchPreferenceBinding,
-    PreferenceAvailabilityProvider,
-    Preference.OnPreferenceChangeListener {
+    PreferenceActionMetricsProvider,
+    PreferenceAvailabilityProvider {
+
+    override val preferenceActionMetrics: Int
+        get() = OPEN_BATTERY_PERCENTAGE
+
+    override fun tags(context: Context) = arrayOf(KEY_BATTERY_PERCENTAGE)
 
     override fun storage(context: Context): KeyValueStore =
         BatteryPercentageStorage(context, SettingsSystemStore.get(context))
@@ -65,22 +67,6 @@ class BatteryPercentageSwitchPreference :
 
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
-
-    override fun bind(preference: Preference, metadata: PreferenceMetadata) {
-        super.bind(preference, metadata)
-        preference.onPreferenceChangeListener = this
-    }
-
-    override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {
-        val showPercentage = newValue as Boolean
-
-        featureFactory.metricsFeatureProvider.action(
-            preference.context,
-            SettingsEnums.OPEN_BATTERY_PERCENTAGE,
-            showPercentage,
-        )
-        return true
-    }
 
     @Suppress("UNCHECKED_CAST")
     private class BatteryPercentageStorage(

@@ -98,7 +98,7 @@ public class DesktopExperiencePreferenceController extends DeveloperOptionsPrefe
 
     @Override
     public CharSequence getSummary() {
-        if (DesktopModeStatus.isDeviceEligibleForDesktopMode(mContext)
+        if (DesktopModeStatus.isInternalDisplayEligibleToHostDesktops(mContext)
                 && !DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_MODE.isTrue()) {
             return mContext.getString(
                     R.string.enable_desktop_experience_features_summary_with_desktop);

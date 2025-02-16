@@ -16,9 +16,12 @@
 package com.android.settings.fuelgauge.batterysaver
 
 import android.Manifest
+import android.app.settings.SettingsEnums.ACTION_BATTERY_SAVER
 import android.content.Context
 import android.os.PowerManager
+import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.R
+import com.android.settings.contract.KEY_BATTERY_SAVER
 import com.android.settings.fuelgauge.BatterySaverReceiver
 import com.android.settings.fuelgauge.BatterySaverReceiver.BatterySaverListener
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
@@ -40,7 +43,13 @@ import kotlinx.coroutines.launch
 
 // LINT.IfChange
 class BatterySaverPreference :
-    MainSwitchPreference(KEY, R.string.battery_saver_master_switch_title) {
+    MainSwitchPreference(KEY, R.string.battery_saver_master_switch_title),
+    PreferenceActionMetricsProvider {
+
+    override val preferenceActionMetrics: Int
+        get() = ACTION_BATTERY_SAVER
+
+    override fun tags(context: Context) = arrayOf(KEY_BATTERY_SAVER)
 
     override fun storage(context: Context) = BatterySaverStore(context)
 

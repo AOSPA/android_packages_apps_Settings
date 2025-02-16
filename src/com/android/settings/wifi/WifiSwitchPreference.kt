@@ -17,6 +17,7 @@
 package com.android.settings.wifi
 
 import android.Manifest
+import android.app.settings.SettingsEnums.ACTION_WIFI
 import android.app.settings.SettingsEnums.ACTION_WIFI_OFF
 import android.app.settings.SettingsEnums.ACTION_WIFI_ON
 import android.content.BroadcastReceiver
@@ -29,8 +30,10 @@ import android.provider.Settings
 import android.widget.Toast
 import androidx.preference.Preference
 import androidx.preference.Preference.OnPreferenceChangeListener
+import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
+import com.android.settings.contract.KEY_WIFI
 import com.android.settings.network.SatelliteRepository.Companion.isSatelliteOn
 import com.android.settings.network.SatelliteWarningDialogActivity
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
@@ -54,12 +57,18 @@ import com.android.settingslib.preference.SwitchPreferenceBinding
 class WifiSwitchPreference :
     SwitchPreference(KEY, R.string.wifi),
     SwitchPreferenceBinding,
+    PreferenceActionMetricsProvider,
     OnPreferenceChangeListener,
     PreferenceLifecycleProvider,
     PreferenceRestrictionMixin {
 
     override val keywords: Int
         get() = R.string.keywords_wifi
+
+    override val preferenceActionMetrics: Int
+        get() = ACTION_WIFI
+
+    override fun tags(context: Context) = arrayOf(KEY_WIFI)
 
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 

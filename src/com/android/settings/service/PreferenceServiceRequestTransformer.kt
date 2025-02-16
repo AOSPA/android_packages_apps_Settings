@@ -40,6 +40,7 @@ import com.android.settingslib.graph.proto.PreferenceProto
 import com.android.settingslib.graph.proto.PreferenceValueProto
 import com.android.settingslib.graph.toIntent
 import com.android.settingslib.metadata.PreferenceCoordinate
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 
 /** Transform Catalyst Graph result to Framework GET METADATA result */
@@ -100,9 +101,7 @@ fun transformFrameworkGetValueRequest(
 
 /** Translate Catalyst GET VALUE result to Framework GET VALUE result */
 fun transformCatalystGetValueResponse(
-    context: Context,
-    request: GetValueRequest,
-    response: PreferenceGetterResponse
+    context: Context, request: GetValueRequest, response: PreferenceGetterResponse
 ): GetValueResult? {
     val coord = PreferenceCoordinate(request.screenKey, request.preferenceKey)
     val errorResponse = response.errors[coord]
@@ -117,36 +116,31 @@ fun transformCatalystGetValueResponse(
             return GetValueResult.Builder(errorCode).build()
         }
         valueResponse != null -> {
-            val resultBuilder = GetValueResult.Builder(GetValueResult.RESULT_OK)
-            resultBuilder.setMetadata(valueResponse.toMetadata(context, coord.screenKey))
-            val prefValue = valueResponse.value
-            when (prefValue.valueCase.number) {
-                PreferenceValueProto.BOOLEAN_VALUE_FIELD_NUMBER -> {
-                    resultBuilder.setValue(
-                        SettingsPreferenceValue.Builder(
-                            SettingsPreferenceValue.TYPE_BOOLEAN
-                        ).setBooleanValue(prefValue.booleanValue)
-                            .build()
-                    )
-                    return resultBuilder.build()
-                }
-                PreferenceValueProto.INT_VALUE_FIELD_NUMBER -> {
-                    resultBuilder.setValue(
-                        SettingsPreferenceValue.Builder(
-                            SettingsPreferenceValue.TYPE_INT
-                        ).setIntValue(prefValue.intValue)
-                            .build()
-                    )
-                    return resultBuilder.build()
-                }
-            }
-            return GetValueResult.Builder(
-                GetValueResult.RESULT_UNSUPPORTED
-            ).build()
+            val metadata = valueResponse.toMetadata(context, coord.screenKey)
+            val value = valueResponse.value.toSettingsPreferenceValue()
+            return when (value) {
+                null -> GetValueResult.Builder(GetValueResult.RESULT_UNSUPPORTED)
+                else -> GetValueResult.Builder(GetValueResult.RESULT_OK).setValue(value)
+            }.setMetadata(metadata).build()
         }
         else -> return null
     }
 }
+
+private fun PreferenceValueProto.toSettingsPreferenceValue(): SettingsPreferenceValue? =
+    when (valueCase.number) {
+        PreferenceValueProto.BOOLEAN_VALUE_FIELD_NUMBER -> {
+            SettingsPreferenceValue.Builder(
+                SettingsPreferenceValue.TYPE_BOOLEAN
+            ).setBooleanValue(booleanValue)
+        }
+        PreferenceValueProto.INT_VALUE_FIELD_NUMBER -> {
+            SettingsPreferenceValue.Builder(
+                SettingsPreferenceValue.TYPE_INT
+            ).setIntValue(intValue)
+        }
+        else -> null
+    }?.build()
 
 /** Translate Framework SET VALUE request to Catalyst SET VALUE request */
 fun transformFrameworkSetValueRequest(request: SetValueRequest): PreferenceSetterRequest? {
@@ -190,6 +184,7 @@ private const val KEY_INT_RANGE = "key_int_range"
 private const val KEY_MIN = "key_min"
 private const val KEY_MAX = "key_max"
 private const val KEY_STEP = "key_step"
+private const val KEY_TAGS = "tags"
 
 private fun PreferenceProto.toMetadata(
     context: Context,
@@ -213,13 +208,15 @@ private fun PreferenceProto.toMetadata(
         }
         extras.putBundle(KEY_INT_RANGE, intRange)
     }
+    if (tagsCount > 0) extras.putStringArray(KEY_TAGS, tagsList.toTypedArray())
+    val writePermit = ReadWritePermit.getWritePermit(readWritePermit)
     return SettingsPreferenceMetadata.Builder(screenKey, key)
         .setTitle(title.getText(context))
         .setSummary(summary.getText(context))
         .setEnabled(enabled)
         .setAvailable(available)
         .setRestricted(restricted)
-        .setWritable(persistent)
+        .setWritable(persistent && writePermit == ReadWritePermit.ALLOW)
         .setLaunchIntent(launchIntent.toIntent())
         .setWriteSensitivity(sensitivity)
         // Returns all the permissions that are used, some of which are exclusive (e.g. p1 or p2)

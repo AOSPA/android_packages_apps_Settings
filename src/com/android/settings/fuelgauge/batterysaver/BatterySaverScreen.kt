@@ -17,7 +17,10 @@ package com.android.settings.fuelgauge.batterysaver
 
 import android.content.Context
 import com.android.settings.R
+import com.android.settings.Settings.BatterySaverSettingsActivity
 import com.android.settings.flags.Flags
+import com.android.settings.utils.makeLaunchIntent
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
@@ -41,6 +44,9 @@ open class BatterySaverScreen : PreferenceScreenCreator {
 
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(context, this) { +BatterySaverPreference() order -100 }
+
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
+        makeLaunchIntent(context, BatterySaverSettingsActivity::class.java, metadata?.key)
 
     companion object {
         const val KEY = "battery_saver_screen"

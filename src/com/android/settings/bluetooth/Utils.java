@@ -33,6 +33,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 
@@ -42,17 +43,21 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.BluetoothUtils.ErrorListener;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
+import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager.BluetoothManagerCallback;
 import com.android.settingslib.utils.ThreadUtils;
 
 import com.google.common.base.Supplier;
+import com.google.common.collect.ImmutableList;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
+import java.util.stream.Collectors;
 
 /**
  * Utils is a helper class that contains constants for various
@@ -292,5 +297,31 @@ public final class Utils {
             }
             ThreadUtils.postOnMainThread(runnable);
         });
+    }
+
+    /**
+     * Check if need to block pairing during audio sharing
+     *
+     * @param localBtManager {@link LocalBluetoothManager}
+     * @return if need to block pairing during audio sharing
+     */
+    public static boolean shouldBlockPairingInAudioSharing(
+            @NonNull LocalBluetoothManager localBtManager) {
+        if (!BluetoothUtils.isBroadcasting(localBtManager)) return false;
+        LocalBluetoothLeBroadcastAssistant assistant =
+                localBtManager.getProfileManager().getLeAudioBroadcastAssistantProfile();
+        CachedBluetoothDeviceManager deviceManager = localBtManager.getCachedDeviceManager();
+        List<BluetoothDevice> connectedDevices =
+                assistant == null ? ImmutableList.of() : assistant.getAllConnectedDevices();
+        // Block the pairing if there is ongoing audio sharing session and
+        // a) there is already one temp bond sink connected
+        // or b) there are already two sinks joining the audio sharing
+        return assistant != null && deviceManager != null
+                && (connectedDevices.stream().anyMatch(BluetoothUtils::isTemporaryBondDevice)
+                || connectedDevices.stream().filter(
+                        d -> BluetoothUtils.hasActiveLocalBroadcastSourceForBtDevice(d,
+                                localBtManager))
+                .map(d -> BluetoothUtils.getGroupId(deviceManager.findDevice(d))).collect(
+                        Collectors.toSet()).size() >= 2);
     }
 }

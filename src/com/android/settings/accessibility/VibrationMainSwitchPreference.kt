@@ -15,13 +15,16 @@
  */
 package com.android.settings.accessibility
 
+import android.app.settings.SettingsEnums.ACTION_VIBRATION_HAPTICS
 import android.content.Context
 import android.os.VibrationAttributes
 import android.os.Vibrator
 import android.provider.Settings
 import android.widget.CompoundButton
 import android.widget.CompoundButton.OnCheckedChangeListener
+import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.R
+import com.android.settings.contract.KEY_VIBRATION_HAPTICS
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObservableDelegate
 import com.android.settingslib.datastore.SettingsStore
@@ -39,12 +42,18 @@ class VibrationMainSwitchPreference :
         key = Settings.System.VIBRATE_ON,
         title = R.string.accessibility_vibration_primary_switch_title,
     ),
+    PreferenceActionMetricsProvider,
     PreferenceLifecycleProvider,
     OnCheckedChangeListener {
     override val keywords: Int
         get() = R.string.keywords_accessibility_vibration_primary_switch
 
     lateinit var vibrator: Vibrator
+
+    override val preferenceActionMetrics: Int
+        get() = ACTION_VIBRATION_HAPTICS
+
+    override fun tags(context: Context) = arrayOf(KEY_VIBRATION_HAPTICS)
 
     override fun storage(context: Context): KeyValueStore =
         VibrationMainSwitchToggleStorage(SettingsSystemStore.get(context))

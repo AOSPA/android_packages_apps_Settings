@@ -17,11 +17,14 @@
 package com.android.settings.display.darkmode
 
 import android.Manifest
+import android.app.settings.SettingsEnums.ACTION_DARK_THEME
 import android.content.Context
 import android.os.PowerManager
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
+import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.R
+import com.android.settings.contract.KEY_DARK_THEME
 import com.android.settings.flags.Flags
 import com.android.settingslib.PrimarySwitchPreferenceBinding
 import com.android.settingslib.datastore.KeyValueStore
@@ -42,6 +45,7 @@ class DarkModeScreen(context: Context) :
     PreferenceScreenCreator,
     PreferenceScreenBinding, // binding for screen page
     PrimarySwitchPreferenceBinding, // binding for screen entry point widget
+    PreferenceActionMetricsProvider,
     BooleanValuePreference,
     PreferenceSummaryProvider {
 
@@ -55,6 +59,11 @@ class DarkModeScreen(context: Context) :
 
     override val keywords: Int
         get() = R.string.keywords_dark_ui_mode
+
+    override val preferenceActionMetrics: Int
+        get() = ACTION_DARK_THEME
+
+    override fun tags(context: Context) = arrayOf(KEY_DARK_THEME)
 
     override fun getReadPermissions(context: Context) = Permissions.EMPTY
 

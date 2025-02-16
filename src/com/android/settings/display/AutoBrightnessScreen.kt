@@ -15,6 +15,7 @@
  */
 package com.android.settings.display
 
+import android.app.settings.SettingsEnums.ACTION_ADAPTIVE_BRIGHTNESS
 import android.content.Context
 import android.os.UserManager
 import android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE
@@ -22,8 +23,10 @@ import android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC
 import android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
+import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
+import com.android.settings.contract.KEY_ADAPTIVE_BRIGHTNESS
 import com.android.settings.flags.Flags
 import com.android.settingslib.PrimarySwitchPreferenceBinding
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
@@ -47,6 +50,7 @@ class AutoBrightnessScreen :
     PreferenceScreenCreator,
     PreferenceScreenBinding, // binding for screen page
     PrimarySwitchPreferenceBinding, // binding for screen entry point widget
+    PreferenceActionMetricsProvider,
     PreferenceAvailabilityProvider,
     PreferenceRestrictionMixin,
     BooleanValuePreference {
@@ -55,6 +59,11 @@ class AutoBrightnessScreen :
 
     override val title: Int
         get() = R.string.auto_brightness_title
+
+    override val preferenceActionMetrics: Int
+        get() = ACTION_ADAPTIVE_BRIGHTNESS
+
+    override fun tags(context: Context) = arrayOf(KEY_ADAPTIVE_BRIGHTNESS)
 
     override fun isFlagEnabled(context: Context) = Flags.catalystScreenBrightnessMode()
 

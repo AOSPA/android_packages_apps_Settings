@@ -73,9 +73,6 @@ fun Float.atLeast(n: Number): Float = max(this, n.toFloat())
  * position. In practice the origin will be the upper-left coordinate of the primary display.
  *
  * @param paneWidth width of the pane in view coordinates
- * @param minPaneHeight smallest allowed height of the pane in view coordinates. This will not
- *                      affect the block ratio, but only the final height of the pane and the
- *                      position of the display bounds' center.
  * @param minEdgeLength the smallest length permitted of a display block. This should be set based
  *                      on accessibility requirements, but also accounting for padding that appears
  *                      around each button.
@@ -85,7 +82,7 @@ fun Float.atLeast(n: Number): Float = max(this, n.toFloat())
  * @param displaysPos the absolute topology coordinates for each display in the topology.
  */
 class TopologyScale(
-        paneWidth: Int, minPaneHeight: Float, minEdgeLength: Float, maxEdgeLength: Float,
+        paneWidth: Int, minEdgeLength: Float, maxEdgeLength: Float,
         displaysPos: Collection<RectF>) {
     /** Scale of block sizes to real-world display sizes. Should be less than 1. */
     val blockRatio: Float
@@ -124,12 +121,11 @@ class TopologyScale(
                 // requirements.
                 .atLeast(minEdgeLength / smallestDisplayDim)
 
-        paneHeight = minPaneHeight
-                // A tall pane is likely to result in more scrolling. So we
-                // prevent the height from growing too large here, by limiting vertical padding to
-                // 1.5x of the minEdgeLength on each side. This keeps a comfortable amount of
-                // padding without it resulting in too much deadspace.
-                .atLeast(blockRatio * displayBounds.height() + minEdgeLength * 3f)
+        // A tall pane is likely to result in more scrolling. So we
+        // prevent the height from growing too large here, by limiting vertical padding to
+        // 1.5x of the minEdgeLength on each side. This keeps a comfortable amount of
+        // padding without it resulting in too much deadspace.
+        paneHeight = blockRatio * displayBounds.height() + minEdgeLength * 3f
 
         // Set originPaneXY (the location of 0,0 in display space in the pane's coordinate system)
         // such that the display bounds rect is centered in the pane.
@@ -162,8 +158,6 @@ class TopologyScale(
                 blockRatio, originPaneX, originPaneY, paneHeight)
     }
 }
-
-const val TOPOLOGY_PREFERENCE_KEY = "display_topology_preference"
 
 /** Represents a draggable block in the topology pane. */
 class DisplayBlock(context : Context) : Button(context) {
@@ -244,7 +238,6 @@ class DisplayTopologyPreference(context : Context)
         // Prevent highlight when hovering with mouse.
         isSelectable = false
 
-        key = TOPOLOGY_PREFERENCE_KEY
         isPersistent = false
 
         injector = Injector(context)
@@ -338,12 +331,15 @@ class DisplayTopologyPreference(context : Context)
      * @param displayHeight height of display being dragged in actual (not View) coordinates
      * @param dragOffsetX difference between event rawX coordinate and X of the display in the pane
      * @param dragOffsetY difference between event rawY coordinate and Y of the display in the pane
+     * @param didMove true if we have detected the user intentionally wanted to drag rather than
+     *                just click
      */
     private data class BlockDrag(
             val stationaryDisps : List<Pair<Int, RectF>>,
             val display: DisplayBlock, val displayId: Int,
             val displayWidth: Float, val displayHeight: Float,
-            val dragOffsetX: Float, val dragOffsetY: Float)
+            val dragOffsetX: Float, val dragOffsetY: Float,
+            var didMove: Boolean = false)
 
     private var mTopologyInfo : TopologyInfo? = null
     private var mDrag : BlockDrag? = null
@@ -373,7 +369,7 @@ class DisplayTopologyPreference(context : Context)
         applyTopology(topology)
     }
 
-    @VisibleForTesting var mTimesReceivedSameTopology = 0
+    @VisibleForTesting var mTimesRefreshedBlocks = 0
 
     private fun applyTopology(topology: DisplayTopology) {
         mTopologyHint.text = context.getString(R.string.external_display_topology_hint)
@@ -390,7 +386,6 @@ class DisplayTopologyPreference(context : Context)
                 oldBounds.zip(newBounds).all { (old, new) ->
                     old.first == new.first && sameDisplayPosition(old.second, new.second)
                 }) {
-            mTimesReceivedSameTopology++
             return
         }
 
@@ -404,7 +399,7 @@ class DisplayTopologyPreference(context : Context)
         // pixels, and the display coordinates are in density-independent pixels.
         val dpi = injector.densityDpi
         val scaling = TopologyScale(
-                mPaneContent.width, minPaneHeight = mTopologyInfo?.scaling?.paneHeight ?: 0f,
+                mPaneContent.width,
                 minEdgeLength = DisplayTopology.dpToPx(60f, dpi),
                 maxEdgeLength = DisplayTopology.dpToPx(256f, dpi),
                 newBounds.map { it.second }.toList())
@@ -442,6 +437,7 @@ class DisplayTopologyPreference(context : Context)
             }
         }
         mPaneContent.removeViews(newBounds.size, recycleableBlocks.size)
+        mTimesRefreshedBlocks++
 
         mTopologyInfo = TopologyInfo(topology, scaling, newBounds)
 
@@ -485,6 +481,7 @@ class DisplayTopologyPreference(context : Context)
         val snapRect = clampPosition(drag.stationaryDisps.map { it.second }, dispDragRect)
 
         drag.display.place(topology.scaling.displayToPaneCoor(snapRect.left, snapRect.top))
+        drag.didMove = true
 
         return true
     }
@@ -495,6 +492,15 @@ class DisplayTopologyPreference(context : Context)
         mPaneContent.requestDisallowInterceptTouchEvent(false)
         drag.display.setHighlighted(false)
 
+        mDrag = null
+        if (!drag.didMove) {
+            // If no move event occurred, ignore the drag completely.
+            // TODO(b/352648432): Responding to a single move event no matter how small may be too
+            // sensitive. It is easy to slide by a small amount just by force of pressing down the
+            // mouse button. Keep an eye on this.
+            return true
+        }
+
         val newCoor = topology.scaling.paneToDisplayCoor(
                 drag.display.x, drag.display.y)
         val newTopology = topology.topology.copy()
@@ -503,9 +509,15 @@ class DisplayTopologyPreference(context : Context)
 
         val arr = hashMapOf(*newPositions.toTypedArray())
         newTopology.rearrange(arr)
+
+        // Setting mTopologyInfo to null forces applyTopology to skip the no-op drag check. This is
+        // necessary because we don't know if newTopology.rearrange has mutated the topology away
+        // from what the user has dragged into position.
+        mTopologyInfo = null
+        applyTopology(newTopology)
+
         injector.displayTopology = newTopology
 
-        refreshPane()
         return true
     }
 }

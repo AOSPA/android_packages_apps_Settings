@@ -68,7 +68,6 @@ class FaceEnrollTest {
         currentActivityInstance : FaceEnroll,
         nextActivityClass: Class<out Activity>
     ) {
-        Truth.assertThat(currentActivityInstance.isFinishing).isTrue()
         val nextActivityIntent = Shadows.shadowOf(currentActivityInstance).nextStartedActivity
         assertThat(nextActivityIntent.component!!.className).isEqualTo(nextActivityClass.name)
         assertThat(nextActivityIntent.extras!!.size()).isEqualTo(1)

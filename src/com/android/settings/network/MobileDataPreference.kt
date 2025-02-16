@@ -17,9 +17,12 @@
 package com.android.settings.network
 
 import android.Manifest
+import android.app.settings.SettingsEnums.ACTION_MOBILE_DATA
 import android.content.Context
 import android.telephony.SubscriptionManager
+import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.R
+import com.android.settings.contract.KEY_MOBILE_DATA
 import com.android.settings.network.telephony.MobileDataRepository
 import com.android.settings.network.telephony.SubscriptionRepository
 import com.android.settingslib.datastore.KeyValueStore
@@ -38,7 +41,13 @@ class MobileDataPreference :
         R.string.mobile_data_settings_title,
         R.string.mobile_data_settings_summary,
     ),
+    PreferenceActionMetricsProvider,
     PreferenceAvailabilityProvider {
+
+    override val preferenceActionMetrics: Int
+        get() = ACTION_MOBILE_DATA
+
+    override fun tags(context: Context) = arrayOf(KEY_MOBILE_DATA)
 
     override fun isAvailable(context: Context) =
         SubscriptionRepository(context).getSelectableSubscriptionInfoList().any {
@@ -58,10 +67,8 @@ class MobileDataPreference :
 
     override fun getWritePermissions(context: Context) =
         Permissions.allOf(
-            // SubscriptionManager.createForAllUserProfiles
-            Manifest.permission.INTERACT_ACROSS_PROFILES,
             // TelephonyManager.setDataEnabledForReason
-            Manifest.permission.MODIFY_PHONE_STATE,
+            Manifest.permission.MODIFY_PHONE_STATE
         )
 
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =

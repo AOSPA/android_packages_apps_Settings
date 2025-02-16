@@ -17,9 +17,12 @@
 package com.android.settings.accessibility
 
 import android.annotation.DrawableRes
+import android.app.settings.SettingsEnums.ACTION_REMOVE_ANIMATION
 import android.content.Context
 import android.provider.Settings
+import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.R
+import com.android.settings.contract.KEY_REMOVE_ANIMATION
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObserver
@@ -37,12 +40,18 @@ class RemoveAnimationsPreference :
         R.string.accessibility_disable_animations,
         R.string.accessibility_disable_animations_summary,
     ),
+    PreferenceActionMetricsProvider,
     PreferenceLifecycleProvider {
 
     private var mSettingsKeyedObserver: KeyedObserver<String>? = null
 
     override val icon: Int
         @DrawableRes get() = R.drawable.ic_accessibility_animation
+
+    override val preferenceActionMetrics: Int
+        get() = ACTION_REMOVE_ANIMATION
+
+    override fun tags(context: Context) = arrayOf(KEY_REMOVE_ANIMATION)
 
     override fun onStart(context: PreferenceLifecycleContext) {
         val observer = KeyedObserver<String> { _, _ -> context.notifyPreferenceChange(KEY) }

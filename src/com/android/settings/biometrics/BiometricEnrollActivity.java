@@ -22,6 +22,7 @@ import static android.provider.Settings.EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED;
 import static com.android.settings.biometrics.BiometricEnrollBase.BIOMETRIC_AUTH_REQUEST;
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_CONSENT_DENIED;
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_CONSENT_GRANTED;
+import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED;
 
 import static com.google.android.setupdesign.transition.TransitionHelper.TRANSITION_FADE_THROUGH;
 
@@ -53,6 +54,7 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
+import com.android.settings.biometrics.combination.CombinedBiometricStatusUtils;
 import com.android.settings.core.InstrumentedActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockGeneric;
@@ -131,6 +133,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     private Bundle mParentalOptions;
     @Nullable private Long mGkPwHandle;
     @Nullable private ParentalConsentHelper mParentalConsentHelper;
+    private boolean mIsPreviousEnrollmentCanceled = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -531,6 +534,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                 } else {
                     Log.d(TAG, "Unknown result for set/choose lock: " + resultCode);
                     setResult(resultCode, newResultIntent());
+                    notifySafetyIssueActionLaunchedIfNeeded(resultCode);
                     finish();
                 }
                 break;
@@ -549,16 +553,21 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                     // SetupFingerprintEnroll*/FingerprintEnrollmentActivity to
                     // SetupFaceEnrollIntroduction
                     TransitionHelper.applyForwardTransition(this, TRANSITION_FADE_THROUGH);
+                    mIsPreviousEnrollmentCanceled =
+                            resultCode != BiometricEnrollBase.RESULT_FINISHED;
                     launchFaceOnlyEnroll();
                 } else {
+                    notifySafetyIssueActionLaunchedIfNeeded(resultCode);
                     finishOrLaunchHandToParent(resultCode);
                 }
                 break;
             case REQUEST_SINGLE_ENROLL_FACE:
                 mIsSingleEnrolling = false;
                 if (resultCode == Activity.RESULT_CANCELED && mIsFingerprintEnrollable) {
+                    mIsPreviousEnrollmentCanceled = true;
                     launchFingerprintOnlyEnroll();
                 } else {
+                    notifySafetyIssueActionLaunchedIfNeeded(resultCode);
                     finishOrLaunchHandToParent(resultCode);
                 }
                 break;
@@ -740,6 +749,15 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     private void launchHandoffToParent() {
         final Intent intent = BiometricUtils.getHandoffToParentIntent(this, getIntent());
         startActivityForResult(intent, REQUEST_HANDOFF_PARENT);
+    }
+
+    private void notifySafetyIssueActionLaunchedIfNeeded(int resultCode) {
+        if (getIntent().getBooleanExtra(
+                CombinedBiometricStatusUtils.EXTRA_LAUNCH_FROM_SAFETY_SOURCE_ISSUE, false)
+                && (resultCode != RESULT_FINISHED || mIsPreviousEnrollmentCanceled)) {
+            FeatureFactory.getFeatureFactory().getBiometricsFeatureProvider()
+                    .notifySafetyIssueActionLaunched();
+        }
     }
 
     @Override

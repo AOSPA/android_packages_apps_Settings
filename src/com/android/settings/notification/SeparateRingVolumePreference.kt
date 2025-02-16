@@ -21,6 +21,7 @@ import android.Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED
 import android.app.INotificationManager
 import android.app.NotificationManager
 import android.app.NotificationManager.ACTION_EFFECTS_SUPPRESSOR_CHANGED
+import android.app.settings.SettingsEnums.ACTION_RING_VOLUME
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Context.NOTIFICATION_SERVICE
@@ -39,8 +40,10 @@ import android.os.Vibrator
 import android.service.notification.NotificationListenerService.HINT_HOST_DISABLE_CALL_EFFECTS
 import android.service.notification.NotificationListenerService.HINT_HOST_DISABLE_EFFECTS
 import androidx.preference.Preference
+import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
+import com.android.settings.contract.KEY_RING_VOLUME
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
 import com.android.settingslib.datastore.Permissions
@@ -59,6 +62,7 @@ import com.android.settingslib.preference.PreferenceBinding
 open class SeparateRingVolumePreference :
     IntRangeValuePreference,
     PreferenceBinding,
+    PreferenceActionMetricsProvider,
     PreferenceAvailabilityProvider,
     PreferenceIconProvider,
     PreferenceLifecycleProvider,
@@ -71,6 +75,11 @@ open class SeparateRingVolumePreference :
 
     override val title: Int
         get() = R.string.separate_ring_volume_option_title
+
+    override val preferenceActionMetrics: Int
+        get() = ACTION_RING_VOLUME
+
+    override fun tags(context: Context) = arrayOf(KEY_RING_VOLUME)
 
     override fun getIcon(context: Context) = context.getIconRes()
 

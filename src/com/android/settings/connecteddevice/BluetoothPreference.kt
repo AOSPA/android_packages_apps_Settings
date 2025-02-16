@@ -18,6 +18,7 @@ package com.android.settings.connecteddevice
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.settings.SettingsEnums.ACTION_SETTINGS_MASTER_SWITCH_BLUETOOTH_TOGGLE
 import android.bluetooth.BluetoothAdapter
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -27,8 +28,10 @@ import android.os.UserManager
 import android.provider.Settings
 import android.widget.Toast
 import androidx.preference.Preference
+import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
+import com.android.settings.contract.KEY_BLUETOOTH
 import com.android.settings.network.SatelliteRepository.Companion.isSatelliteOn
 import com.android.settings.network.SatelliteWarningDialogActivity
 import com.android.settings.widget.MainSwitchBarMetadata
@@ -43,13 +46,21 @@ import com.android.settingslib.metadata.SensitivityLevel
 
 @SuppressLint("MissingPermission")
 class BluetoothPreference(private val bluetoothDataStore: BluetoothDataStore) :
-    MainSwitchBarMetadata, PreferenceRestrictionMixin, Preference.OnPreferenceChangeListener {
+    MainSwitchBarMetadata,
+    PreferenceActionMetricsProvider,
+    PreferenceRestrictionMixin,
+    Preference.OnPreferenceChangeListener {
 
     override val key
         get() = KEY
 
     override val title
         get() = R.string.bluetooth_main_switch_title
+
+    override val preferenceActionMetrics: Int
+        get() = ACTION_SETTINGS_MASTER_SWITCH_BLUETOOTH_TOGGLE
+
+    override fun tags(context: Context) = arrayOf(KEY_BLUETOOTH)
 
     override val restrictionKeys: Array<String>
         get() = arrayOf(UserManager.DISALLOW_BLUETOOTH, UserManager.DISALLOW_CONFIG_BLUETOOTH)

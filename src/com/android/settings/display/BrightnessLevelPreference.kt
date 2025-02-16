@@ -15,8 +15,8 @@
  */
 package com.android.settings.display
 
-import android.Manifest
 import android.app.ActivityOptions
+import android.app.settings.SettingsEnums.ACTION_BRIGHTNESS_LEVEL
 import android.content.Context
 import android.content.Intent
 import android.content.Intent.ACTION_SHOW_BRIGHTNESS_DIALOG
@@ -27,9 +27,11 @@ import android.hardware.display.DisplayManager.DisplayListener
 import android.os.UserManager
 import android.provider.Settings.System
 import androidx.preference.Preference
+import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
 import com.android.settings.Utils
+import com.android.settings.contract.KEY_BRIGHTNESS_LEVEL
 import com.android.settings.core.SettingsBaseActivity
 import com.android.settingslib.RestrictedPreference
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
@@ -57,6 +59,7 @@ class BrightnessLevelPreference :
     IntRangeValuePreference,
     PreferenceBinding,
     PreferenceRestrictionMixin,
+    PreferenceActionMetricsProvider,
     PreferenceSummaryProvider,
     Preference.OnPreferenceClickListener {
 
@@ -68,6 +71,11 @@ class BrightnessLevelPreference :
 
     override val keywords: Int
         get() = R.string.keywords_display_brightness_level
+
+    override val preferenceActionMetrics: Int
+        get() = ACTION_BRIGHTNESS_LEVEL
+
+    override fun tags(context: Context) = arrayOf(KEY_BRIGHTNESS_LEVEL)
 
     override fun getSummary(context: Context): CharSequence? =
         NumberFormat.getPercentInstance().format(context.brightnessPercent)
@@ -111,7 +119,7 @@ class BrightnessLevelPreference :
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
-    override fun getWritePermit(context: Context, value: Int?, callingPid: Int, callingUid: Int) =
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.DISALLOW
 
     override val sensitivityLevel

@@ -46,6 +46,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.HearingAidStatsLogUtils;
+import com.android.settingslib.flags.Flags;
 import com.android.settingslib.utils.ThreadUtils;
 
 import com.google.common.collect.ImmutableList;
@@ -62,6 +63,7 @@ import java.util.concurrent.TimeUnit;
 public abstract class BluetoothDevicePairingDetailBase extends DeviceListPreferenceFragment {
     private static final long AUTO_DISMISS_TIME_THRESHOLD_MS = TimeUnit.SECONDS.toMillis(15);
     private static final int AUTO_DISMISS_MESSAGE_ID = 1001;
+    private static final int AUTO_FINISH_MESSAGE_ID = 1002;
     private static final ImmutableList<Integer> AUDIO_SHARING_PROFILES = ImmutableList.of(
             BluetoothProfile.LE_AUDIO,
             BluetoothProfile.LE_AUDIO_BROADCAST_ASSISTANT, BluetoothProfile.VOLUME_CONTROL);
@@ -77,7 +79,7 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
     @Nullable
     ProgressDialogFragment mProgressDialog = null;
     @VisibleForTesting
-    boolean mShouldTriggerAudioSharingShareThenPairFlow = false;
+    boolean mShouldTriggerShareThenPairFlow = false;
     private CopyOnWriteArrayList<BluetoothDevice> mDevicesWithMetadataChangedListener =
             new CopyOnWriteArrayList<>();
 
@@ -89,7 +91,8 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
     // onDeviceBondStateChanged(BOND_BONDED), BluetoothDevicePreference's summary has already
     // change from "Pairing..." to empty since it listens to metadata changes happens earlier.
     //
-    // In share then pair flow, we have to wait on this page till the device is connected.
+    // In pairing flow during audio sharing, we have to wait on this page till the device is
+    // connected to check the device type and handle extra logic for audio sharing.
     // The BluetoothDevicePreference summary will be blank for seconds between "Pairing..." and
     // "Connecting..." To help users better understand the process, we listen to metadata change
     // as well and show a progress dialog with "Connecting to ...." once BluetoothDevice.getState()
@@ -100,10 +103,11 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
                 public void onMetadataChanged(@NonNull BluetoothDevice device, int key,
                         @Nullable byte[] value) {
                     Log.d(getLogTag(), "onMetadataChanged device = " + device + ", key  = " + key);
-                    if (mShouldTriggerAudioSharingShareThenPairFlow && mProgressDialog == null
+                    if ((mShouldTriggerShareThenPairFlow || shouldSetTempBondMetadata())
+                            && mProgressDialog == null
                             && device.getBondState() == BluetoothDevice.BOND_BONDED
                             && mSelectedList.contains(device)) {
-                        triggerAudioSharingShareThenPairFlow(device);
+                        handleDeviceBondedInAudioSharing(device);
                         // Once device is bonded, remove the listener
                         removeOnMetadataChangedListener(device);
                     }
@@ -133,7 +137,7 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
             return;
         }
         updateBluetooth();
-        mShouldTriggerAudioSharingShareThenPairFlow = shouldTriggerAudioSharingShareThenPairFlow();
+        mShouldTriggerShareThenPairFlow = shouldTriggerShareThenPairFlow();
     }
 
     @Override
@@ -177,11 +181,12 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
 
     @Override
     public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice, int bondState) {
+        boolean shouldSetTempBond = shouldSetTempBondMetadata();
         if (bondState == BluetoothDevice.BOND_BONDED) {
-            if (cachedDevice != null && mShouldTriggerAudioSharingShareThenPairFlow) {
+            if (cachedDevice != null && (mShouldTriggerShareThenPairFlow || shouldSetTempBond)) {
                 BluetoothDevice device = cachedDevice.getDevice();
                 if (device != null && mSelectedList.contains(device)) {
-                    triggerAudioSharingShareThenPairFlow(device);
+                    handleDeviceBondedInAudioSharing(device);
                     removeOnMetadataChangedListener(device);
                     return;
                 }
@@ -190,7 +195,7 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
             finish();
             return;
         } else if (bondState == BluetoothDevice.BOND_BONDING) {
-            if (mShouldTriggerAudioSharingShareThenPairFlow && cachedDevice != null) {
+            if ((mShouldTriggerShareThenPairFlow || shouldSetTempBond) && cachedDevice != null) {
                 BluetoothDevice device = cachedDevice.getDevice();
                 if (device != null && mSelectedList.contains(device)) {
                     addOnMetadataChangedListener(device);
@@ -203,7 +208,7 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
                     pageId);
             HearingAidStatsLogUtils.setBondEntryForDevice(bondEntry, cachedDevice);
         } else if (bondState == BluetoothDevice.BOND_NONE) {
-            if (mShouldTriggerAudioSharingShareThenPairFlow && cachedDevice != null) {
+            if ((mShouldTriggerShareThenPairFlow || shouldSetTempBond) && cachedDevice != null) {
                 BluetoothDevice device = cachedDevice.getDevice();
                 if (device != null && mSelectedList.contains(device)) {
                     removeOnMetadataChangedListener(device);
@@ -233,21 +238,29 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
             final BluetoothDevice device = cachedDevice.getDevice();
             if (device != null
                     && mSelectedList.contains(device)) {
-                if (BluetoothUtils.isAudioSharingUIAvailable(getContext())) {
-                    if (mShouldTriggerAudioSharingShareThenPairFlow
-                            && state == BluetoothAdapter.STATE_CONNECTED
-                            && device.equals(mJustBonded)
-                            && AUDIO_SHARING_PROFILES.contains(bluetoothProfile)
-                            && isReadyForAudioSharing(cachedDevice, bluetoothProfile)) {
-                        Log.d(getLogTag(),
-                                "onProfileConnectionStateChanged, ready for audio sharing");
-                        dismissConnectingDialog();
-                        mHandler.removeMessages(AUTO_DISMISS_MESSAGE_ID);
-                        finishFragmentWithResultForAudioSharing(device);
+                var unused = ThreadUtils.postOnBackgroundThread(() -> {
+                    if (BluetoothUtils.isAudioSharingUIAvailable(getContext())) {
+                        if ((mShouldTriggerShareThenPairFlow || shouldSetTempBondMetadata())
+                                && state == BluetoothAdapter.STATE_CONNECTED
+                                && device.equals(mJustBonded)
+                                && AUDIO_SHARING_PROFILES.contains(bluetoothProfile)
+                                && isReadyForAudioSharing(cachedDevice, bluetoothProfile)) {
+                            Log.d(getLogTag(), "onProfileConnectionStateChanged, lea eligible");
+                            dismissConnectingDialog();
+                            BluetoothUtils.setTemporaryBondMetadata(device);
+                            if (mShouldTriggerShareThenPairFlow) {
+                                mHandler.removeMessages(AUTO_DISMISS_MESSAGE_ID);
+                                postOnMainThread(() ->
+                                        finishFragmentWithResultForAudioSharing(device));
+                            } else {
+                                mHandler.removeMessages(AUTO_FINISH_MESSAGE_ID);
+                                postOnMainThread(() -> finish());
+                            }
+                        }
+                    } else {
+                        postOnMainThread(() -> finish());
                     }
-                } else {
-                    finish();
-                }
+                });
             } else {
                 onDeviceDeleted(cachedDevice);
             }
@@ -314,7 +327,7 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
     }
 
     @VisibleForTesting
-    boolean shouldTriggerAudioSharingShareThenPairFlow() {
+    boolean shouldTriggerShareThenPairFlow() {
         if (BluetoothUtils.isAudioSharingUIAvailable(getContext())) {
             Activity activity = getActivity();
             Intent intent = activity == null ? null : activity.getIntent();
@@ -326,6 +339,16 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
                     && args.getBoolean(EXTRA_PAIR_AND_JOIN_SHARING, false);
         }
         return false;
+    }
+
+    private boolean shouldSetTempBondMetadata() {
+        return Flags.enableTemporaryBondDevicesUi()
+                && BluetoothUtils.isAudioSharingUIAvailable(getContext())
+                && BluetoothUtils.isBroadcasting(mLocalManager)
+                && mLocalManager != null
+                && mLocalManager.getCachedDeviceManager() != null
+                && mLocalManager.getProfileManager().getLeAudioBroadcastAssistantProfile() != null
+                && !Utils.shouldBlockPairingInAudioSharing(mLocalManager);
     }
 
     private boolean isReadyForAudioSharing(@NonNull CachedBluetoothDevice cachedDevice,
@@ -382,11 +405,10 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
         });
     }
 
-    private void triggerAudioSharingShareThenPairFlow(
-            @NonNull BluetoothDevice device) {
+    private void handleDeviceBondedInAudioSharing(@Nullable BluetoothDevice device) {
         var unused = ThreadUtils.postOnBackgroundThread(() -> {
             if (mJustBonded != null) {
-                Log.d(getLogTag(), "Skip triggerAudioSharingShareThenPairFlow, already done");
+                Log.d(getLogTag(), "Skip handleDeviceBondedInAudioSharing, already done");
                 return;
             }
             mJustBonded = device;
@@ -395,17 +417,38 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
             String deviceName = TextUtils.isEmpty(aliasName) ? device.getAddress()
                     : aliasName;
             showConnectingDialog(deviceName);
-            // Wait for AUTO_DISMISS_TIME_THRESHOLD_MS and check if the paired device supports audio
-            // sharing.
-            if (!mHandler.hasMessages(AUTO_DISMISS_MESSAGE_ID)) {
-                mHandler.postDelayed(() ->
-                        postOnMainThread(
-                                () -> {
-                                    Log.d(getLogTag(), "Show incompatible dialog when timeout");
-                                    dismissConnectingDialog();
-                                    AudioSharingIncompatibleDialogFragment.show(this, deviceName,
-                                            () -> finish());
-                                }), AUTO_DISMISS_MESSAGE_ID, AUTO_DISMISS_TIME_THRESHOLD_MS);
+            if (mShouldTriggerShareThenPairFlow) {
+                // For share then pair flow, we have strong signal that users wish to pair new
+                // device to join sharing.
+                // So we wait for AUTO_DISMISS_TIME_THRESHOLD_MS, if we find that the bonded device
+                // is lea in onProfileConnectionStateChanged, we finish the activity, set the device
+                // as temp bond and auto add source; otherwise, show dialog to notify that the
+                // device is incompatible for audio sharing.
+                if (!mHandler.hasMessages(AUTO_DISMISS_MESSAGE_ID)) {
+                    mHandler.postDelayed(() ->
+                            postOnMainThread(
+                                    () -> {
+                                        Log.d(getLogTag(),
+                                                "Show incompatible dialog when timeout");
+                                        dismissConnectingDialog();
+                                        AudioSharingIncompatibleDialogFragment.show(this,
+                                                deviceName,
+                                                () -> finish());
+                                    }), AUTO_DISMISS_MESSAGE_ID, AUTO_DISMISS_TIME_THRESHOLD_MS);
+                }
+            } else {
+                // For other pairing request during audio sharing with sinks < 2, we wait for
+                // AUTO_DISMISS_TIME_THRESHOLD_MS, if we find that the bonded device is lea in
+                // onProfileConnectionStateChanged, we finish the activity and set the device as
+                // temp bond; otherwise, we just finish the activity.
+                if (!mHandler.hasMessages(AUTO_FINISH_MESSAGE_ID)) {
+                    mHandler.postDelayed(() ->
+                            postOnMainThread(
+                                    () -> {
+                                        Log.d(getLogTag(), "Finish activity when timeout");
+                                        finish();
+                                    }), AUTO_FINISH_MESSAGE_ID, AUTO_DISMISS_TIME_THRESHOLD_MS);
+                }
             }
         });
     }

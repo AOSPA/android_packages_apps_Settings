@@ -16,55 +16,60 @@
 
 package com.android.settings.accessibility;
 
-import static android.view.accessibility.AccessibilityManager.AUTOCLICK_CURSOR_AREA_SIZE_MAX;
-import static android.view.accessibility.AccessibilityManager.AUTOCLICK_CURSOR_AREA_SIZE_MIN;
-
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.kotlin.VerificationKt.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.view.accessibility.AccessibilityManager;
+import android.widget.RadioGroup;
 
-import androidx.preference.PreferenceScreen;
+import androidx.appcompat.app.AlertDialog;
+import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settingslib.widget.SliderPreference;
-
-import com.google.common.collect.ImmutableList;
+import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowLooper;
 
 /** Tests for {@link ToggleAutoclickCursorAreaSizeController}. */
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+        ShadowAlertDialogCompat.class,
+})
 public class ToggleAutoclickCursorAreaSizeControllerTest {
 
     private static final String PREFERENCE_KEY = "accessibility_control_autoclick_cursor_area_size";
-    private static final String PACKAGE = "package";
 
     @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
-    private final Context mContext = ApplicationProvider.getApplicationContext();
+    @Mock
+    private Preference mPreference;
+    private Context mContext;
     private ToggleAutoclickCursorAreaSizeController mController;
 
     @Before
     public void setUp() {
+        mContext = ApplicationProvider.getApplicationContext();
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
+
+        when(mPreference.getKey()).thenReturn(PREFERENCE_KEY);
         mController = new ToggleAutoclickCursorAreaSizeController(mContext, PREFERENCE_KEY);
     }
 
@@ -76,6 +81,15 @@ public class ToggleAutoclickCursorAreaSizeControllerTest {
     }
 
     @Test
+    public void getSummary() {
+        mController.updateAutoclickCursorAreaSize(
+                mController.RADIO_BUTTON_ID_TO_CURSOR_SIZE.get(
+                        R.id.autoclick_cursor_area_size_value_large));
+        assertThat(mController.getSummary()).isEqualTo(
+                mContext.getString(R.string.autoclick_cursor_area_size_dialog_option_large));
+    }
+
+    @Test
     @DisableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_AUTOCLICK_INDICATOR)
     public void getAvailabilityStatus_conditionallyUnavailableWhenFlagOn() {
         assertThat(mController.getAvailabilityStatus())
@@ -83,90 +97,48 @@ public class ToggleAutoclickCursorAreaSizeControllerTest {
     }
 
     @Test
-    public void onStart_registerOnSharedPreferenceChangeListener() {
-        final SharedPreferences prefs = mock(SharedPreferences.class);
-        final Context context = mock(Context.class);
-        doReturn(PACKAGE).when(context).getPackageName();
-        doReturn(prefs).when(context).getSharedPreferences(anyString(), anyInt());
-        final ToggleAutoclickCursorAreaSizeController controller =
-                new ToggleAutoclickCursorAreaSizeController(context, PREFERENCE_KEY);
+    public void handlePreferenceTreeClick_dialogShows() {
+        mController.handlePreferenceTreeClick(mPreference);
 
-        controller.onStart();
+        AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
 
-        verify(prefs).registerOnSharedPreferenceChangeListener(controller);
+        assertThat(alertDialog.isShowing()).isTrue();
     }
 
     @Test
-    public void onStop_unregisterOnSharedPreferenceChangeListener() {
-        final SharedPreferences prefs = mock(SharedPreferences.class);
-        final Context context = mock(Context.class);
-        doReturn(PACKAGE).when(context).getPackageName();
-        doReturn(prefs).when(context).getSharedPreferences(anyString(), anyInt());
-        final ToggleAutoclickCursorAreaSizeController controller =
-                new ToggleAutoclickCursorAreaSizeController(context, PREFERENCE_KEY);
-
-        controller.onStop();
-
-        verify(prefs).unregisterOnSharedPreferenceChangeListener(controller);
-    }
-
-    @Test
+    @EnableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_AUTOCLICK_INDICATOR)
     public void getProgress_matchesSetting_inRangeValue() {
-        // TODO(388844952): Use parameter testing.
-        for (int size : ImmutableList.of(20, 40, 60, 80, 100)) {
-            updateSetting(size);
+        updateSetting(mController.RADIO_BUTTON_ID_TO_CURSOR_SIZE.get(
+                R.id.autoclick_cursor_area_size_value_extra_large));
+        ShadowLooper.idleMainLooper();
+        mController.handlePreferenceTreeClick(mPreference);
+        AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        RadioGroup radioGroup =  alertDialog.findViewById(
+                    R.id.autoclick_cursor_area_size_value_group);
+        ShadowLooper.idleMainLooper();
 
-            assertThat(mController.getSliderPosition()).isEqualTo(size);
-        }
-    }
-
-    @Test
-    public void getProgress_matchesSetting_aboveMaxValue() {
-        updateSetting(120);
-
-        assertThat(mController.getSliderPosition()).isEqualTo(AUTOCLICK_CURSOR_AREA_SIZE_MAX);
-    }
-
-    @Test
-    public void getProgress_matchesSetting_belowMinValue() {
-        updateSetting(0);
-
-        assertThat(mController.getSliderPosition()).isEqualTo(AUTOCLICK_CURSOR_AREA_SIZE_MIN);
+        assertThat(radioGroup.getCheckedRadioButtonId())
+                .isEqualTo(R.id.autoclick_cursor_area_size_value_extra_large);
     }
 
     @Test
     public void setProgress_updatesSetting_inRangeValue() {
-        // TODO(388844952): Use parameter testing.
-        for (int position : ImmutableList.of(20, 40, 60, 80, 100)) {
-            mController.setSliderPosition(position);
+        mController.handlePreferenceTreeClick(mPreference);
+        AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        RadioGroup radioGroup =  alertDialog.findViewById(
+                    R.id.autoclick_cursor_area_size_value_group);
+        ShadowLooper.idleMainLooper();
+        radioGroup.check(R.id.autoclick_cursor_area_size_value_extra_large);
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).performClick();
+        ShadowLooper.idleMainLooper();
+        assertThat(readSetting()).isEqualTo(100);
 
-            assertThat(readSetting()).isEqualTo(position);
-        }
-    }
-
-    @Test
-    public void setProgress_updatesSetting_aboveMaxValue() {
-        mController.setSliderPosition(120);
-
-        assertThat(readSetting()).isEqualTo(AUTOCLICK_CURSOR_AREA_SIZE_MAX);
-    }
-
-    @Test
-    public void setProgress_updatesSetting_belowMinValue() {
-        mController.setSliderPosition(0);
-
-        assertThat(readSetting()).isEqualTo(AUTOCLICK_CURSOR_AREA_SIZE_MIN);
-    }
-
-    @Test
-    public void sliderPreference_setCorrectInitialValue() {
-        SliderPreference preference = mock(SliderPreference.class);
-        PreferenceScreen screen = mock(PreferenceScreen.class);
-        doReturn(preference).when(screen).findPreference(anyString());
-
-        mController.displayPreference(screen);
-
-        verify(preference).setValue(mController.getSliderPosition());
+        mController.handlePreferenceTreeClick(mPreference);
+        ShadowLooper.idleMainLooper();
+        radioGroup.check(R.id.autoclick_cursor_area_size_value_extra_small);
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).performClick();
+        ShadowLooper.idleMainLooper();
+        assertThat(readSetting()).isEqualTo(20);
     }
 
     private int readSetting() {

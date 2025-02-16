@@ -19,6 +19,7 @@ package com.android.settings.notification
 import android.Manifest.permission.MODIFY_AUDIO_SETTINGS
 import android.Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED
 import android.Manifest.permission.MODIFY_PHONE_STATE
+import android.app.settings.SettingsEnums.ACTION_CALL_VOLUME
 import android.content.Context
 import android.content.pm.PackageManager.FEATURE_AUTOMOTIVE
 import android.media.AudioManager
@@ -26,8 +27,10 @@ import android.media.AudioManager.STREAM_BLUETOOTH_SCO
 import android.media.AudioManager.STREAM_VOICE_CALL
 import android.os.UserManager
 import androidx.preference.Preference
+import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
+import com.android.settings.contract.KEY_CALL_VOLUME
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
 import com.android.settingslib.datastore.Permissions
@@ -44,6 +47,7 @@ import com.android.settingslib.preference.PreferenceBinding
 open class CallVolumePreference :
     IntRangeValuePreference,
     PreferenceBinding,
+    PreferenceActionMetricsProvider,
     PreferenceAvailabilityProvider,
     PreferenceIconProvider,
     PreferenceRestrictionMixin {
@@ -52,6 +56,11 @@ open class CallVolumePreference :
 
     override val title: Int
         get() = R.string.call_volume_option_title
+
+    override val preferenceActionMetrics: Int
+        get() = ACTION_CALL_VOLUME
+
+    override fun tags(context: Context) = arrayOf(KEY_CALL_VOLUME)
 
     override fun getIcon(context: Context) = R.drawable.ic_local_phone_24_lib
 

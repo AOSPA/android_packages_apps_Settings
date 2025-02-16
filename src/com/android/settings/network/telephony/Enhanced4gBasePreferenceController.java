@@ -119,8 +119,12 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
             return CONDITIONALLY_UNAVAILABLE;
         }
 
-        if (!queryState.isReadyToVoLte()) {
-            return CONDITIONALLY_UNAVAILABLE;
+        try {
+            if (!queryState.isReadyToVoLte()) {
+                return CONDITIONALLY_UNAVAILABLE;
+            }
+        } catch (UnsupportedOperationException ex) {
+            return UNSUPPORTED_ON_DEVICE;
         }
         return (isUserControlAllowed(carrierConfig) && queryState.isAllowUserControl())
                 ? AVAILABLE : AVAILABLE_UNSEARCHABLE;

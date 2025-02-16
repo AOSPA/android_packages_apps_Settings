@@ -40,6 +40,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.ServiceState;
@@ -67,9 +68,9 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.Executor;
 
 @RunWith(AndroidJUnit4.class)
 public class SimStatusDialogControllerTest {
@@ -95,6 +96,7 @@ public class SimStatusDialogControllerTest {
 
     private SimStatusDialogController mController;
     private Context mContext;
+    private PackageManager mPackageManager;
     @Mock
     private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
@@ -112,6 +114,12 @@ public class SimStatusDialogControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mDialog.getContext()).thenReturn(mContext);
+        mPackageManager = spy(mContext.getPackageManager());
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_TELEPHONY_RADIO_ACCESS))
+                .thenReturn(true);
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_TELEPHONY_CALLING))
+                .thenReturn(true);
         mLifecycle = new Lifecycle(mLifecycleOwner);
 
         mTelephonyManager = spy(mContext.getSystemService(TelephonyManager.class));

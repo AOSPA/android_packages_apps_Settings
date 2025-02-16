@@ -16,9 +16,11 @@
 
 package com.android.settings.datausage
 
-import android.Manifest
+import android.app.settings.SettingsEnums.ACTION_DATA_SAVER_MODE
 import android.content.Context
+import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.R
+import com.android.settings.contract.KEY_DATA_SAVER
 import com.android.settings.widget.MainSwitchBarMetadata
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.KeyValueStore
@@ -28,7 +30,8 @@ import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 
-class DataSaverMainSwitchPreference : MainSwitchBarMetadata, PreferenceLifecycleProvider {
+class DataSaverMainSwitchPreference :
+    MainSwitchBarMetadata, PreferenceActionMetricsProvider, PreferenceLifecycleProvider {
 
     override val key
         get() = KEY
@@ -39,13 +42,16 @@ class DataSaverMainSwitchPreference : MainSwitchBarMetadata, PreferenceLifecycle
     override val disableWidgetOnCheckedChanged: Boolean
         get() = false
 
+    override val preferenceActionMetrics: Int
+        get() = ACTION_DATA_SAVER_MODE
+
+    override fun tags(context: Context) = arrayOf(KEY_DATA_SAVER)
+
     override fun storage(context: Context) = createDataStore(context)
 
-    override fun getReadPermissions(context: Context) =
-        Permissions.allOf(Manifest.permission.MANAGE_NETWORK_POLICY)
+    override fun getReadPermissions(context: Context) = Permissions.EMPTY
 
-    override fun getWritePermissions(context: Context) =
-        Permissions.allOf(Manifest.permission.MANAGE_NETWORK_POLICY)
+    override fun getWritePermissions(context: Context) = Permissions.EMPTY
 
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW

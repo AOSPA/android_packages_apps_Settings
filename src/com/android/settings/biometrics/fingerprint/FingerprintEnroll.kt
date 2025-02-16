@@ -16,10 +16,13 @@
 
 package com.android.settings.biometrics.fingerprint
 
+import android.app.ComponentCaller
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.android.settings.biometrics.BiometricEnrollBase
+import com.android.settings.biometrics.combination.CombinedBiometricStatusUtils
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 
 /**
@@ -69,9 +72,24 @@ open class FingerprintEnroll: AppCompatActivity() {
          */
         Log.d("FingerprintEnroll", "forward to $nextActivityClass")
         val nextIntent = Intent(this, nextActivityClass)
-        nextIntent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
         nextIntent.putExtras(intent)
-        startActivity(nextIntent)
+        startActivityForResult(nextIntent, 0)
+    }
+
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?,
+        caller: ComponentCaller
+    ) {
+        super.onActivityResult(requestCode, resultCode, data, caller)
+        if (intent.getBooleanExtra(
+                CombinedBiometricStatusUtils.EXTRA_LAUNCH_FROM_SAFETY_SOURCE_ISSUE, false)
+            && resultCode != BiometricEnrollBase.RESULT_FINISHED
+        ) {
+            featureFactory.biometricsFeatureProvider.notifySafetyIssueActionLaunched()
+        }
+        setResult(resultCode, data)
         finish()
     }
 }

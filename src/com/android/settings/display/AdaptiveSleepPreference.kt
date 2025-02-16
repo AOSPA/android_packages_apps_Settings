@@ -16,6 +16,7 @@
 
 package com.android.settings.display
 
+import android.app.settings.SettingsEnums.ACTION_SCREEN_ATTENTION_CHANGED
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -26,8 +27,10 @@ import android.hardware.SensorPrivacyManager.Sensors.CAMERA
 import android.os.PowerManager
 import android.os.UserManager
 import android.provider.Settings
+import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
+import com.android.settings.contract.KEY_SCREEN_ATTENTION
 import com.android.settingslib.RestrictedSwitchPreference
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObservableDelegate
@@ -46,6 +49,7 @@ import com.android.settingslib.preference.SwitchPreferenceBinding
 class AdaptiveSleepPreference :
     BooleanValuePreference,
     SwitchPreferenceBinding,
+    PreferenceActionMetricsProvider,
     PreferenceLifecycleProvider,
     PreferenceBindingPlaceholder, // not needed once controller class is cleaned up
     PreferenceAvailabilityProvider,
@@ -62,6 +66,11 @@ class AdaptiveSleepPreference :
 
     override val summary: Int
         get() = R.string.adaptive_sleep_description
+
+    override val preferenceActionMetrics: Int
+        get() = ACTION_SCREEN_ATTENTION_CHANGED
+
+    override fun tags(context: Context) = arrayOf(KEY_SCREEN_ATTENTION)
 
     override fun isIndexable(context: Context) = false
 

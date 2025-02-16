@@ -19,12 +19,15 @@ package com.android.settings.wifi.calling
 import android.Manifest.permission.MODIFY_PHONE_STATE
 import android.Manifest.permission.READ_PRECISE_PHONE_STATE
 import android.Manifest.permission.READ_PRIVILEGED_PHONE_STATE
+import android.app.settings.SettingsEnums.ACTION_WIFI_CALLING
 import android.content.Context
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
 import android.telephony.ims.ImsMmTelManager
 import android.util.Log
+import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.R
+import com.android.settings.contract.KEY_WIFI_CALLING
 import com.android.settings.network.ims.WifiCallingQueryImsState
 import com.android.settings.network.telephony.wificalling.WifiCallingRepository
 import com.android.settings.widget.SettingsMainSwitchPreference
@@ -47,13 +50,21 @@ import kotlinx.coroutines.runBlocking
  * TODO(b/372732219): apply metadata to UI
  */
 class WifiCallingMainSwitchPreference(private val subId: Int) :
-    BooleanValuePreference, BooleanValuePreferenceBinding, PreferenceAvailabilityProvider {
+    BooleanValuePreference,
+    BooleanValuePreferenceBinding,
+    PreferenceActionMetricsProvider,
+    PreferenceAvailabilityProvider {
 
     override val key: String
         get() = KEY
 
     override val title: Int
         get() = R.string.wifi_calling_main_switch_title
+
+    override val preferenceActionMetrics: Int
+        get() = ACTION_WIFI_CALLING
+
+    override fun tags(context: Context) = arrayOf(KEY_WIFI_CALLING)
 
     override fun isEnabled(context: Context) =
         context.isCallStateIdle(subId) &&

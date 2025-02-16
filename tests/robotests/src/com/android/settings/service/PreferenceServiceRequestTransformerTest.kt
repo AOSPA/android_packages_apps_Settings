@@ -60,9 +60,10 @@ class PreferenceServiceRequestTransformerTest {
 
     @get:Rule val checkFlagsRule: CheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
 
+    private val context: Context = ApplicationProvider.getApplicationContext()
+
     @Test
     fun transformCatalystGetMetadataResponse_emptyGraph_returnsFrameworkResponseWithError() {
-        val context: Context = ApplicationProvider.getApplicationContext()
         val graphProto = PreferenceGraphProto.newBuilder().build()
         val fResult = transformCatalystGetMetadataResponse(context, graphProto)
         with(fResult) {
@@ -73,7 +74,6 @@ class PreferenceServiceRequestTransformerTest {
 
     @Test
     fun transformCatalystGetMetadataResponse_populatedGraph_returnsFrameworkResponseWithSuccess() {
-        val context: Context = ApplicationProvider.getApplicationContext()
         val screen = preferenceScreenProto {
             root = preferenceGroupProto {
                 addAllPreferences(
@@ -143,7 +143,6 @@ class PreferenceServiceRequestTransformerTest {
 
     @Test
     fun transformCatalystGetValueResponse_success_returnsValidFrameworkResponse() {
-        val context: Context = ApplicationProvider.getApplicationContext()
         val fRequest = GetValueRequest.Builder("screen", "key").build()
         val cResult =
             PreferenceGetterResponse(
@@ -203,8 +202,22 @@ class PreferenceServiceRequestTransformerTest {
     }
 
     @Test
+    fun transformCatalystGetValueResponse_success_noValue() {
+        val fRequest = GetValueRequest.Builder("screen", "key").build()
+        val cResult = PreferenceGetterResponse(
+            emptyMap(),
+            mapOf(PreferenceCoordinate(
+                fRequest.screenKey,
+                fRequest.preferenceKey
+            ) to preferenceProto { key = "key" }),
+        )
+        val fResult = transformCatalystGetValueResponse(context, fRequest, cResult)!!
+        assertThat(fResult.resultCode).isEqualTo(GetValueResult.RESULT_UNSUPPORTED)
+        assertThat(fResult.metadata).isNotNull()
+    }
+
+    @Test
     fun transformCatalystGetValueResponse_failure_returnsValidFrameworkResponse() {
-        val context: Context = ApplicationProvider.getApplicationContext()
         val fRequest = GetValueRequest.Builder("screen", "key").build()
         val cResult =
             PreferenceGetterResponse(
@@ -224,7 +237,6 @@ class PreferenceServiceRequestTransformerTest {
 
     @Test
     fun transformCatalystGetValueResponse_invalidResponse_returnsNull() {
-        val context: Context = ApplicationProvider.getApplicationContext()
         val fRequest = GetValueRequest.Builder("screen", "key").build()
         val cResult = PreferenceGetterResponse(emptyMap(), emptyMap())
         val fResult = transformCatalystGetValueResponse(context, fRequest, cResult)

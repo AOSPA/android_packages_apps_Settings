@@ -710,6 +710,14 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="AutoclickDialogRadioButton">
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_gravity">start|center_vertical</item>
+        <item name="android:background">@null</item>
+    </style>
+
     <style name="Widget.PopupWindow.Settings"
            parent="@android:style/Widget.DeviceDefault.PopupWindow">
         <item name="android:clipToPadding">true</item>

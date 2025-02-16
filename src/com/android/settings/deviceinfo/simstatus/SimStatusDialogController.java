@@ -468,8 +468,16 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
         String dataNetworkTypeName = null;
         String voiceNetworkTypeName = null;
         final int subId = mSubscriptionInfo.getSubscriptionId();
-        final int actualDataNetworkType = getTelephonyManager().getDataNetworkType();
-        final int actualVoiceNetworkType = getTelephonyManager().getVoiceNetworkType();
+        int actualDataNetworkType = TelephonyManager.NETWORK_TYPE_UNKNOWN;
+        int actualVoiceNetworkType = TelephonyManager.NETWORK_TYPE_UNKNOWN;
+        PackageManager pm = mContext.getPackageManager();
+        if (pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY_RADIO_ACCESS)) {
+            actualDataNetworkType = getTelephonyManager().getDataNetworkType();
+        }
+        if (pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY_CALLING)) {
+            actualVoiceNetworkType = getTelephonyManager().getVoiceNetworkType();
+        }
+
         final int overrideNetworkType = mTelephonyDisplayInfo == null
                 ? TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NONE
                 : mTelephonyDisplayInfo.getOverrideNetworkType();

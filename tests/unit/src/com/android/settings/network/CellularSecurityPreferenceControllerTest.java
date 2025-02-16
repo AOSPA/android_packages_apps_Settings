@@ -31,7 +31,6 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.platform.test.flag.junit.SetFlagsRule;
 import android.safetycenter.SafetyCenterManager;
 import android.telephony.TelephonyManager;
 
@@ -42,11 +41,8 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
-import com.android.internal.telephony.flags.Flags;
-
 import org.junit.Assume;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -54,8 +50,6 @@ import org.mockito.MockitoAnnotations;
 
 @RunWith(AndroidJUnit4.class)
 public final class CellularSecurityPreferenceControllerTest {
-    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
-
     @Mock
     private TelephonyManager mTelephonyManager;
     private Preference mPreference;
@@ -91,9 +85,6 @@ public final class CellularSecurityPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_hardwareSupported_shouldReturnTrue() {
-        // Enable telephony API flags for testing
-        enableFlags(true);
-
         // Hardware support is enabled
         doReturn(true).when(mTelephonyManager).isNullCipherNotificationsEnabled();
         doReturn(true).when(mTelephonyManager)
@@ -120,9 +111,6 @@ public final class CellularSecurityPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_noHardwareSupport_shouldReturnFalse() {
-        // Enable telephony API flags for testing
-        enableFlags(true);
-
         // Hardware support is disabled
         doThrow(new UnsupportedOperationException("test")).when(mTelephonyManager)
               .isNullCipherNotificationsEnabled();
@@ -132,14 +120,5 @@ public final class CellularSecurityPreferenceControllerTest {
               .isNullCipherAndIntegrityPreferenceEnabled();
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
-    }
-
-    private void enableFlags(boolean enabled) {
-        if (enabled) {
-            mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_MODEM_CIPHER_TRANSPARENCY);
-        } else {
-            mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_MODEM_CIPHER_TRANSPARENCY_UNSOL_EVENTS);
-            mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_MODEM_CIPHER_TRANSPARENCY);
-        }
     }
 }

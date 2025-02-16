@@ -43,6 +43,7 @@ import com.google.common.annotations.VisibleForTesting;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.Locale;
 
 /**
  * Handling smooth migration to the new high contrast text appearance
@@ -57,6 +58,8 @@ public class HighContrastTextMigrationReceiver extends BroadcastReceiver {
     @VisibleForTesting
     static final String ACTION_OPEN_SETTINGS =
             "com.android.settings.accessibility.ACTION_OPEN_HIGH_CONTRAST_TEXT_SETTINGS";
+    private static final String ACTION_NOTIFICATION_DISMISSED =
+            "com.android.settings.accessibility.ACTION_HIGH_CONTRAST_TEXT_NOTIFICATION_DISMISSED";
     @VisibleForTesting
     static final int NOTIFICATION_ID = R.string.accessibility_notification_high_contrast_text_title;
 
@@ -87,6 +90,8 @@ public class HighContrastTextMigrationReceiver extends BroadcastReceiver {
             context.startActivity(settingsIntent);
 
             context.getSystemService(NotificationManager.class).cancel(NOTIFICATION_ID);
+        } else if (ACTION_NOTIFICATION_DISMISSED.equals(intent.getAction())) {
+            Counter.logIncrement("accessibility.value_hct_notification_dismissed");
         } else if (ACTION_RESTORED.equals(intent.getAction())) {
             Log.i(TAG, "HCT attempted to be restored from backup; showing notification for userId: "
                     + context.getUserId());
@@ -128,14 +133,25 @@ public class HighContrastTextMigrationReceiver extends BroadcastReceiver {
         }
     }
 
+    private String getNotificationContentText(Context context) {
+        final String newName = context.getString(
+                R.string.accessibility_toggle_maximize_text_contrast_preference_title);
+        final String oldName = context.getString(
+                R.string.accessibility_toggle_high_text_contrast_preference_title)
+                .toLowerCase(Locale.getDefault());
+        final String settingsAppName = context.getString(R.string.settings_label);
+        return context.getString(
+                R.string.accessibility_notification_high_contrast_text_body,
+                newName, oldName, settingsAppName);
+    }
+
     private void showNotification(Context context) {
         Notification.Builder notificationBuilder = new Notification.Builder(context,
                 NOTIFICATION_CHANNEL)
                 .setSmallIcon(R.drawable.ic_settings_24dp)
                 .setContentTitle(context.getString(
                         R.string.accessibility_notification_high_contrast_text_title))
-                .setContentText(context.getString(
-                        R.string.accessibility_notification_high_contrast_text_content))
+                .setContentText(getNotificationContentText(context))
                 .setFlag(Notification.FLAG_NO_CLEAR, true);
 
         Intent settingsIntent = createHighContrastTextSettingsIntent(context);
@@ -147,10 +163,11 @@ public class HighContrastTextMigrationReceiver extends BroadcastReceiver {
             actionIntent.setAction(ACTION_OPEN_SETTINGS);
             PendingIntent actionPendingIntent = PendingIntent.getBroadcast(context, 0,
                     actionIntent, PendingIntent.FLAG_IMMUTABLE);
+            final int actionResId =
+                    R.string.accessibility_notification_high_contrast_text_action_open_settings;
             Notification.Action settingsAction = new Notification.Action.Builder(
                     /* icon= */ null,
-                    context.getString(
-                            R.string.accessibility_notification_high_contrast_text_action),
+                    context.getString(actionResId, context.getString(R.string.settings_label)),
                     actionPendingIntent
             ).build();
 
@@ -159,6 +176,13 @@ public class HighContrastTextMigrationReceiver extends BroadcastReceiver {
                     .addAction(settingsAction)
                     .setAutoCancel(true);
         }
+
+        Intent deleteIntent = new Intent(context, HighContrastTextMigrationReceiver.class);
+        deleteIntent.setAction(ACTION_NOTIFICATION_DISMISSED);
+        PendingIntent deletePendingIntent = PendingIntent.getBroadcast(context, 0,
+                deleteIntent, PendingIntent.FLAG_IMMUTABLE);
+        notificationBuilder.setDeleteIntent(deletePendingIntent);
+
         NotificationManager notificationManager =
                 context.getSystemService(NotificationManager.class);
         NotificationChannel notificationChannel = new NotificationChannel(

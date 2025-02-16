@@ -15,6 +15,7 @@
  */
 package com.android.settings.display
 
+import android.app.settings.SettingsEnums.ACTION_SMOOTH_DISPLAY
 import android.content.Context
 import android.hardware.display.DisplayManager
 import android.provider.DeviceConfig
@@ -23,7 +24,9 @@ import com.android.internal.display.RefreshRateSettingsUtils.DEFAULT_REFRESH_RAT
 import com.android.internal.display.RefreshRateSettingsUtils.findHighestRefreshRateAmongAllDisplays
 import com.android.internal.display.RefreshRateSettingsUtils.findHighestRefreshRateForDefaultDisplay
 import com.android.server.display.feature.flags.Flags
+import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.R
+import com.android.settings.contract.KEY_SMOOTH_DISPLAY
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObservableDelegate
@@ -41,11 +44,17 @@ import kotlin.math.roundToInt
 // LINT.IfChange
 class PeakRefreshRateSwitchPreference :
     SwitchPreference(KEY, R.string.peak_refresh_rate_title),
+    PreferenceActionMetricsProvider,
     PreferenceAvailabilityProvider,
     PreferenceSummaryProvider,
     PreferenceLifecycleProvider {
 
     private var propertiesChangedListener: DeviceConfig.OnPropertiesChangedListener? = null
+
+    override val preferenceActionMetrics: Int
+        get() = ACTION_SMOOTH_DISPLAY
+
+    override fun tags(context: Context) = arrayOf(KEY_SMOOTH_DISPLAY)
 
     override fun storage(context: Context): KeyValueStore =
         PeakRefreshRateStore(context, SettingsSystemStore.get(context))

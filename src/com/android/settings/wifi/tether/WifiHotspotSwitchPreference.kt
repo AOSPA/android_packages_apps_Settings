@@ -17,7 +17,8 @@
 package com.android.settings.wifi.tether
 
 import android.Manifest
-import android.app.settings.SettingsEnums
+import android.app.settings.SettingsEnums.ACTION_WIFI_HOTSPOT
+import android.app.settings.SettingsEnums.WIFI_TETHER_SETTINGS
 import android.content.Context
 import android.content.Intent
 import android.net.TetheringManager
@@ -27,9 +28,11 @@ import android.net.wifi.WifiManager
 import android.os.UserManager
 import android.text.BidiFormatter
 import android.util.Log
+import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
 import com.android.settings.Utils
+import com.android.settings.contract.KEY_WIFI_HOTSPOT
 import com.android.settings.core.SubSettingLauncher
 import com.android.settings.datausage.DataSaverMainSwitchPreference.Companion.KEY as DATA_SAVER_KEY
 import com.android.settings.wifi.WifiUtils.canShowWifiHotspot
@@ -56,9 +59,15 @@ import com.android.settingslib.wifi.WifiUtils.Companion.getWifiTetherSummaryForC
 class WifiHotspotSwitchPreference(context: Context, dataSaverStore: KeyValueStore) :
     SwitchPreference(KEY, R.string.wifi_hotspot_checkbox_text),
     PrimarySwitchPreferenceBinding,
+    PreferenceActionMetricsProvider,
     PreferenceAvailabilityProvider,
     PreferenceSummaryProvider,
     PreferenceRestrictionMixin {
+
+    override val preferenceActionMetrics: Int
+        get() = ACTION_WIFI_HOTSPOT
+
+    override fun tags(context: Context) = arrayOf(KEY_WIFI_HOTSPOT)
 
     private val wifiHotspotStore = WifiHotspotStore(context, dataSaverStore)
 
@@ -97,7 +106,7 @@ class WifiHotspotSwitchPreference(context: Context, dataSaverStore: KeyValueStor
             .apply {
                 setDestination(WifiTetherSettings::class.java.name)
                 setTitleRes(R.string.wifi_hotspot_checkbox_text)
-                setSourceMetricsCategory(SettingsEnums.WIFI_TETHER_SETTINGS)
+                setSourceMetricsCategory(WIFI_TETHER_SETTINGS)
             }
             .toIntent()
 

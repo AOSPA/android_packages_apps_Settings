@@ -16,10 +16,13 @@
 
 package com.android.settings.fuelgauge
 
+import android.app.settings.SettingsEnums.ACTION_BATTERY_LEVEL
 import android.content.Context
 import androidx.annotation.VisibleForTesting
 import androidx.preference.Preference
+import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.R
+import com.android.settings.contract.KEY_BATTERY_LEVEL
 import com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpdateType.BATTERY_NOT_PRESENT
 import com.android.settingslib.Utils
 import com.android.settingslib.datastore.KeyValueStore
@@ -39,6 +42,7 @@ import com.android.settingslib.widget.UsageProgressBarPreference
 class BatteryHeaderPreference :
     IntRangeValuePreference,
     PreferenceBinding,
+    PreferenceActionMetricsProvider,
     PreferenceLifecycleProvider {
 
     @VisibleForTesting var batteryBroadcastReceiver: BatteryBroadcastReceiver? = null
@@ -48,6 +52,11 @@ class BatteryHeaderPreference :
 
     override val title: Int
         get() = R.string.summary_placeholder
+
+    override val preferenceActionMetrics: Int
+        get() = ACTION_BATTERY_LEVEL
+
+    override fun tags(context: Context) = arrayOf(KEY_BATTERY_LEVEL)
 
     override fun createWidget(context: Context) = UsageProgressBarPreference(context)
 
@@ -108,7 +117,7 @@ class BatteryHeaderPreference :
 
     override fun getWritePermissions(context: Context) = Permissions.EMPTY
 
-    override fun getWritePermit(context: Context, value: Int?, callingPid: Int, callingUid: Int) =
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.DISALLOW
 
     override val sensitivityLevel: Int

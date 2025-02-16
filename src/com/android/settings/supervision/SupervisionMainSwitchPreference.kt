@@ -39,12 +39,8 @@ class SupervisionMainSwitchPreference :
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.DISALLOW
 
-    override fun getWritePermit(
-        context: Context,
-        value: Boolean?,
-        callingPid: Int,
-        callingUid: Int,
-    ) = ReadWritePermit.DISALLOW
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.DISALLOW
 
     override val sensitivityLevel: Int
         get() = SensitivityLevel.HIGH_SENSITIVITY

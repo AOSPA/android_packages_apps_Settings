@@ -186,6 +186,8 @@ class DisplayTopologyPreferenceTest {
     fun dragDisplayDownward() {
         val (leftBlock, _) = setupTwoDisplays()
 
+        preference.mTimesRefreshedBlocks = 0
+
         val downEvent = MotionEventBuilder.newBuilder()
                 .setPointer(0f, 0f)
                 .setAction(MotionEvent.ACTION_DOWN)
@@ -208,11 +210,15 @@ class DisplayTopologyPreferenceTest {
         val child = rootChildren[0]
         assertThat(child.position).isEqualTo(POSITION_LEFT)
         assertThat(child.offset).isWithin(1f).of(82f)
+
+        assertThat(preference.mTimesRefreshedBlocks).isEqualTo(1)
     }
 
     @Test
     fun dragRootDisplayToNewSide() {
         val (leftBlock, rightBlock) = setupTwoDisplays()
+
+        preference.mTimesRefreshedBlocks = 0
 
         val downEvent = MotionEventBuilder.newBuilder()
                 .setAction(MotionEvent.ACTION_DOWN)
@@ -251,6 +257,32 @@ class DisplayTopologyPreferenceTest {
         assertThat(paneChildren[0].x)
                 .isWithin(1f)
                 .of(paneChildren[1].x)
+
+        assertThat(preference.mTimesRefreshedBlocks).isEqualTo(1)
+    }
+
+    @Test
+    fun noRefreshForUnmovingDrag() {
+        val (leftBlock, rightBlock) = setupTwoDisplays()
+
+        preference.mTimesRefreshedBlocks = 0
+
+        val downEvent = MotionEventBuilder.newBuilder()
+                .setAction(MotionEvent.ACTION_DOWN)
+                .setPointer(0f, 0f)
+                .build()
+
+        val upEvent = MotionEventBuilder.newBuilder().setAction(MotionEvent.ACTION_UP).build()
+
+        rightBlock.dispatchTouchEvent(downEvent)
+        rightBlock.dispatchTouchEvent(upEvent)
+
+        // After drag, the original views should still be present.
+        val paneChildren = getPaneChildren()
+        assertThat(paneChildren.indexOf(leftBlock)).isNotEqualTo(-1)
+        assertThat(paneChildren.indexOf(rightBlock)).isNotEqualTo(-1)
+
+        assertThat(preference.mTimesRefreshedBlocks).isEqualTo(0)
     }
 
     @Test
@@ -269,13 +301,15 @@ class DisplayTopologyPreferenceTest {
     @Test
     fun applyNewTopologyViaListenerUpdate() {
         setupTwoDisplays()
+
+        preference.mTimesRefreshedBlocks = 0
         val newTopology = injector.topology!!.copy()
         newTopology.addDisplay(/* displayId= */ 8008, /* width= */ 300f, /* height= */ 320f)
 
         injector.topology = newTopology
         injector.topologyListener!!.accept(newTopology)
 
-        assertThat(preference.mTimesReceivedSameTopology).isEqualTo(0)
+        assertThat(preference.mTimesRefreshedBlocks).isEqualTo(1)
         val paneChildren = getPaneChildren()
         assertThat(paneChildren).hasSize(3)
 
@@ -293,11 +327,11 @@ class DisplayTopologyPreferenceTest {
         injector.topology = twoDisplayTopology(POSITION_TOP, /* offset= */ 12.0f)
         preparePane()
 
-        assertThat(preference.mTimesReceivedSameTopology).isEqualTo(0)
+        preference.mTimesRefreshedBlocks = 0
         injector.topology = twoDisplayTopology(POSITION_TOP, /* offset= */ 12.1f)
         injector.topologyListener!!.accept(injector.topology!!)
 
-        assertThat(preference.mTimesReceivedSameTopology).isEqualTo(1)
+        assertThat(preference.mTimesRefreshedBlocks).isEqualTo(0)
     }
 
     @Test

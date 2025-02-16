@@ -35,7 +35,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.telephony.flags.Flags;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.network.telephony.CellularSecuritySettingsFragment;
@@ -71,9 +70,7 @@ public class CellularSecurityPreferenceController extends BasePreferenceControll
 
     @Override
     public int getAvailabilityStatus() {
-        if (!mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY)
-                || !Flags.enableModemCipherTransparencyUnsolEvents()
-                || !Flags.enableModemCipherTransparency()) {
+        if (!mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY)) {
             return UNSUPPORTED_ON_DEVICE;
         }
         if (mTelephonyManager == null) {

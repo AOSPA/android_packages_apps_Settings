@@ -402,6 +402,8 @@
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Lorsque vous utilisez la reconnaissance faciale"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Exiger des yeux ouverts"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Pour déverrouiller le téléphone, vos yeux doivent être ouverts"</string>
+    <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
+    <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Toujours demander une confirmation"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Toujours confirmer le Déverrouillage par reconnaissance faciale dans les applis"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Supprimer le modèle facial"</string>
@@ -2468,6 +2470,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Toucher l\'écran trois fois"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Modifier les raccourcis d\'accessibilité"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Choisissez votre raccourci pour %1$s"</string>
+    <!-- no translation found for accessibility_shortcut_unassigned_setting_unavailable_summary (993486098872935043) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Continuer"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Appareils auditifs"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Configurer et gérer les prothèses auditives, les implants cochléaires et les autres appareils d\'amplification ASHA et LE Audio"</string>
@@ -3671,16 +3675,11 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Autoriser le report des notifications"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Pastille de notification sur l\'icône de l\'appli"</string>
     <string name="notification_bundles" msgid="3614044525822580826">"Groupes de notifications"</string>
-    <!-- no translation found for notification_summarization_title (1516039882005781529) -->
-    <skip />
-    <!-- no translation found for notification_summarization_on (5692758038788359790) -->
-    <skip />
-    <!-- no translation found for notification_summarization_off (4660131515915234037) -->
-    <skip />
-    <!-- no translation found for notification_summarization_main_control_title (3341727937605794607) -->
-    <skip />
-    <!-- no translation found for notification_summarization_description (3468513132824606481) -->
-    <skip />
+    <string name="notification_summarization_title" msgid="1516039882005781529">"Résumés des notifications"</string>
+    <string name="notification_summarization_on" msgid="5692758038788359790">"Activé"</string>
+    <string name="notification_summarization_off" msgid="4660131515915234037">"Désactivé"</string>
+    <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Utiliser les résumés des notifications"</string>
+    <string name="notification_summarization_description" msgid="3468513132824606481">"Résumez automatiquement les notifications de conversation à partir de n\'importe quelle appli"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Notifications en direct"</string>
     <string name="live_notifications_switch" msgid="50547709843410137">"Afficher les informations en direct"</string>
     <string name="live_notifications_desc" msgid="7383414458419053003">"Les notifications épinglées affichent des informations en direct des applis et apparaissent toujours sur la barre d\'état et l\'écran de verrouillage"</string>
@@ -4136,14 +4135,14 @@
     <string name="storage_summary_format" msgid="5721782272185284276">"<xliff:g id="SIZE">%1$s</xliff:g> utilisé(s) dans : <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="979243131665635278">"stockage interne"</string>
     <string name="storage_type_external" msgid="125078274000280821">"stockage externe"</string>
-    <string name="data_summary_format" msgid="8802057788950096650">"<xliff:g id="SIZE">%1$s</xliff:g> utilisés depuis <xliff:g id="DATE">%2$s</xliff:g>"</string>
+    <string name="data_summary_format" msgid="8802057788950096650">"<xliff:g id="SIZE">%1$s</xliff:g> utilisés depuis le <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="storage_used" msgid="2591194906751432725">"Espace de stockage utilisé"</string>
     <string name="change" msgid="273206077375322595">"Modifier"</string>
     <string name="change_storage" msgid="8773820275624113401">"Modifier type de stockage"</string>
     <string name="notifications_label" msgid="8471624476040164538">"Notifications"</string>
     <string name="notifications_enabled" msgid="7743168481579361019">"Activé"</string>
     <string name="notifications_enabled_with_info" msgid="1808946629277684308">"<xliff:g id="NOTIFICATIONS_SENT">%1$s</xliff:g>/<xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%2$s</xliff:g>"</string>
-    <string name="notifications_disabled" msgid="5603160425378437143">"Désactivé"</string>
+    <string name="notifications_disabled" msgid="5603160425378437143">"Désactivées"</string>
     <string name="notifications_categories_off" msgid="7712037485557237328">"{count,plural, =1{# catégorie désactivée}one{# catégorie désactivée}other{# catégories désactivées}}"</string>
     <string name="runtime_permissions_additional_count" msgid="6071909675951786523">"{count,plural, =1{# autorisation supplémentaire}one{# autorisation supplémentaire}other{# autorisations supplémentaires}}"</string>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Aucune autorisation accordée"</string>
@@ -4181,8 +4180,8 @@
     <string name="default_assist_title" msgid="1182435129627493758">"Appli d\'assistant numérique"</string>
     <string name="default_digital_assistant_title" msgid="5654663086385490838">"Assistant numérique par défaut"</string>
     <string name="assistant_security_warning_agree" msgid="9013334158753473359">"J\'accepte"</string>
-    <string name="default_browser_title" msgid="8342074390782390458">"Appli de navigateur"</string>
-    <string name="default_phone_title" msgid="7616730756650803827">"Appli de téléphonie"</string>
+    <string name="default_browser_title" msgid="8342074390782390458">"Appli de navigation"</string>
+    <string name="default_phone_title" msgid="7616730756650803827">"Appli Téléphone"</string>
     <string name="system_app" msgid="1863291702508355041">"(Système)"</string>
     <string name="apps_storage" msgid="643866814746927111">"Stockage des applis"</string>
     <string name="usage_access" msgid="5487993885373893282">"Accès aux données d\'utilisation"</string>
@@ -5083,12 +5082,9 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Pile"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Panneau Paramètres"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Activer les fenêtres de forme libre"</string>
-    <!-- no translation found for enable_desktop_experience_features (7389235241021706660) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (6021998363632868925) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (6635507335168490646) -->
-    <skip />
+    <string name="enable_desktop_experience_features" msgid="7389235241021706660">"Activer les fonctionnalités pour les ordinateurs"</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="6021998363632868925">"Activez l\'affichage sur ordinateur de bureau sur l\'appareil et les écrans secondaires."</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="6635507335168490646">"Activez l\'affichage sur ordinateur de bureau sur les écrans secondaires."</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Activer les fenêtres de forme libre sur l\'écran secondaire"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Activer éléments non redimensionnables en mode multi-fenêtre"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Activer les applis non redimensionnables en mode multi-fenêtre"</string>
@@ -5624,7 +5620,8 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Erreur lors de la définition du compte par défaut"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Aucun compte par défaut n\'a été défini"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Appareil uniquement"</string>
-    <string name="contacts_storage_account_title" msgid="4939024280942927810">"Appareil et %1$s"</string>
+    <!-- no translation found for contacts_storage_account_title (7334522539665856395) -->
+    <skip />
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Ajoutez un compte pour commencer"</string>
     <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Où enregistrer les contacts"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Encercler et rechercher"</string>
@@ -5635,4 +5632,10 @@
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Utiliser la supervision de l\'appareil"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Configurez le NIP pour commencer"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"supervision, supervision parentale, contrôles parentaux"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (961680798581006465) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (3244161328612671896) -->
+    <skip />
+    <!-- no translation found for supervision_change_pin_preference_title (2288584039438231801) -->
+    <skip />
 </resources>

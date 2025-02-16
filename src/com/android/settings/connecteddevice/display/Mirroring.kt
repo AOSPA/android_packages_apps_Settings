@@ -23,8 +23,6 @@ import androidx.preference.SwitchPreferenceCompat
 
 import com.android.settings.R
 
-const val MIRROR_PREFERENCE_KEY = "mirror_builtin_display"
-
 /**
  * A switch preference which is backed by the MIRROR_BUILT_IN_DISPLAY global setting.
  */
@@ -32,7 +30,6 @@ class MirrorPreference(context: Context): SwitchPreferenceCompat(context) {
     init {
         setTitle(R.string.external_display_mirroring_title)
 
-        key = MIRROR_PREFERENCE_KEY
         isPersistent = false
     }
 
