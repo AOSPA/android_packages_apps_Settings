@@ -430,6 +430,4 @@ suspend fun setMobileData(
             Log.d(NetworkCellularGroupProvider.fileName, "setDefaultData: [$targetSubId]")
             subscriptionManager?.setDefaultDataSubId(targetSubId)
         }
-        MobileDataRepository(context)
-            .setMobileDataEnabled(targetSubId, enabled, wifiPickerTrackerHelper)
     }
