@@ -142,7 +142,7 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
         }
     }
 
-    public boolean isInScbm() {
+    public static boolean isInScbm() {
         return SystemProperties.getBoolean("ril.inscbm", false);
     }
 
