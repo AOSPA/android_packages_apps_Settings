@@ -18,7 +18,7 @@ package com.android.settings.testutils
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
-import com.android.settings.SettingsMetricsLogger
+import com.android.settings.metrics.SettingsMetricsLogger
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider
 import com.android.settingslib.metadata.PreferenceScreenRegistry
 import org.junit.rules.TestWatcher

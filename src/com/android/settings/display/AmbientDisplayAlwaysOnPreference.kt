@@ -23,11 +23,11 @@ import android.os.SystemProperties
 import android.os.UserHandle
 import android.os.UserManager
 import android.provider.Settings.Secure.DOZE_ALWAYS_ON
-import com.android.settings.PreferenceActionMetricsProvider
-import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
 import com.android.settings.contract.KEY_AMBIENT_DISPLAY_ALWAYS_ON
 import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController.isAodSuppressedByBedtime
+import com.android.settings.metrics.PreferenceActionMetricsProvider
+import com.android.settings.restriction.PreferenceRestrictionMixin
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyValueStore

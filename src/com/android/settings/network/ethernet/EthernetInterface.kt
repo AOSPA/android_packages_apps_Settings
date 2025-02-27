@@ -26,13 +26,12 @@ import android.net.IpConfiguration
 import android.os.OutcomeReceiver
 import android.util.Log
 import androidx.core.content.ContextCompat
-import java.util.concurrent.Executor
 
 class EthernetInterface(private val context: Context, private val id: String) :
     EthernetManager.InterfaceStateListener {
-    private val ethernetManager =
+    private val ethernetManager: EthernetManager? =
         context.getSystemService(EthernetManager::class.java)
-    private val connectivityManager =
+    private val connectivityManager: ConnectivityManager? =
         context.getSystemService(ConnectivityManager::class.java)
     private val executor = ContextCompat.getMainExecutor(context)
 
@@ -43,6 +42,8 @@ class EthernetInterface(private val context: Context, private val id: String) :
 
     fun getInterfaceState() = interfaceState
 
+    fun getId() = id
+
     fun getConfiguration(): IpConfiguration {
         return ipConfiguration
     }
@@ -50,7 +51,7 @@ class EthernetInterface(private val context: Context, private val id: String) :
     fun setConfiguration(ipConfiguration: IpConfiguration) {
         val request =
             EthernetNetworkUpdateRequest.Builder().setIpConfiguration(ipConfiguration).build()
-        ethernetManager.updateConfiguration(
+        ethernetManager?.updateConfiguration(
             id,
             request,
             executor,

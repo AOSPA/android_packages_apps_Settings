@@ -51,7 +51,7 @@ class ZenModeButtonPreferenceController extends AbstractZenModePreferenceControl
     @Override
     public boolean isAvailable(ZenMode zenMode) {
         return zenMode.isEnabled()
-                && (zenMode.isActive() || zenMode.getRule().isManualInvocationAllowed());
+                && (zenMode.isActive() || zenMode.isManualInvocationAllowed());
     }
 
     @Override

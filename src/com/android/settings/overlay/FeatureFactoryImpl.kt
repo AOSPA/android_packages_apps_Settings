@@ -20,6 +20,8 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.VpnManager
 import android.os.UserManager
+import com.android.settings.accessibility.AccessibilityFeedbackFeatureProvider
+import com.android.settings.accessibility.AccessibilityFeedbackFeatureProviderImpl
 import com.android.settings.accessibility.AccessibilityMetricsFeatureProvider
 import com.android.settings.accessibility.AccessibilityMetricsFeatureProviderImpl
 import com.android.settings.accessibility.AccessibilitySearchFeatureProvider
@@ -164,6 +166,9 @@ open class FeatureFactoryImpl : FeatureFactory() {
     override val securitySettingsFeatureProvider: SecuritySettingsFeatureProvider by lazy {
         SecuritySettingsFeatureProviderImpl()
     }
+
+    override val accessibilityFeedbackFeatureProvider: AccessibilityFeedbackFeatureProvider
+        by lazy {  AccessibilityFeedbackFeatureProviderImpl() }
 
     override val accessibilitySearchFeatureProvider: AccessibilitySearchFeatureProvider by lazy {
         AccessibilitySearchFeatureProviderImpl()

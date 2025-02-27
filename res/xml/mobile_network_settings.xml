@@ -62,7 +62,6 @@
             android:key="mobile_network_spn"
             android:title="@string/mobile_network_spn_title"
             android:summary="@string/summary_placeholder"
-            android:selectable="false"
             settings:controller="com.android.settings.network.telephony.MobileNetworkSpnPreferenceController"
             settings:allowDividerAbove="true" />
 
@@ -70,7 +69,6 @@
             android:key="phone_number"
             android:title="@string/status_number"
             android:summary="@string/summary_placeholder"
-            android:selectable="false"
             settings:controller="com.android.settings.network.telephony.MobileNetworkPhoneNumberPreferenceController"
             settings:allowDividerBelow="true"
             settings:enableCopying="true"/>
@@ -227,7 +225,7 @@
 
         <PreferenceCategory
             android:key="telephony_satellite_settings_category_key"
-            android:title="@string/satellite_setting_title"
+            android:title="@string/category_title_satellite_connectivity"
             settings:controller="com.android.settings.network.telephony.SatelliteSettingsPreferenceCategoryController">
 
             <com.android.settingslib.RestrictedPreference

@@ -27,12 +27,12 @@ import android.hardware.display.DisplayManager.DisplayListener
 import android.os.UserManager
 import android.provider.Settings.System
 import androidx.preference.Preference
-import com.android.settings.PreferenceActionMetricsProvider
-import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.contract.KEY_BRIGHTNESS_LEVEL
 import com.android.settings.core.SettingsBaseActivity
+import com.android.settings.metrics.PreferenceActionMetricsProvider
+import com.android.settings.restriction.PreferenceRestrictionMixin
 import com.android.settingslib.RestrictedPreference
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.HandlerExecutor

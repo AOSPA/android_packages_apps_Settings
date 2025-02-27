@@ -16,22 +16,40 @@
 
 package com.android.settings.contract
 
-import android.provider.SettingsSlicesContract
+// NOTES:
+//   - Once a key is added, never modify the literal string.
+//   - Remove a key might cause backward compatibility issues.
+//   - Avoid importing other class to reduce dependency whenever possible.
 
-/** Contract key for the "Airplane Mode" setting. */
-const val KEY_AIRPLANE_MODE = SettingsSlicesContract.KEY_AIRPLANE_MODE
+/**
+ * Contract key for the "Airplane Mode" setting, identical to
+ * [android.provider.SettingsSlicesContract.KEY_AIRPLANE_MODE].
+ */
+const val KEY_AIRPLANE_MODE = "airplane_mode"
 
-/** Contract key for the "Battery Saver" setting. */
-const val KEY_BATTERY_SAVER = SettingsSlicesContract.KEY_BATTERY_SAVER
+/**
+ * Contract key for the "Battery Saver" setting, identical to
+ * [android.provider.SettingsSlicesContract.KEY_BATTERY_SAVER].
+ */
+const val KEY_BATTERY_SAVER = "battery_saver"
 
-/** Contract key for the "Bluetooth" setting. */
-const val KEY_BLUETOOTH = SettingsSlicesContract.KEY_BLUETOOTH
+/**
+ * Contract key for the "Bluetooth" setting, identical to
+ * [android.provider.SettingsSlicesContract.KEY_BLUETOOTH].
+ */
+const val KEY_BLUETOOTH = "bluetooth"
 
-/** Contract key for the "Location" setting. */
-const val KEY_LOCATION = SettingsSlicesContract.KEY_LOCATION
+/**
+ * Contract key for the "Location" setting, identical to
+ * [android.provider.SettingsSlicesContract.KEY_LOCATION].
+ */
+const val KEY_LOCATION = "location"
 
-/** Contract key for the "Wi-fi" setting. */
-const val KEY_WIFI = SettingsSlicesContract.KEY_WIFI
+/**
+ * Contract key for the "Wi-fi" setting, identical to
+ * [android.provider.SettingsSlicesContract.KEY_WIFI].
+ */
+const val KEY_WIFI = "wifi"
 
 /** Contract key for the "Use Wi-Fi calling" setting. */
 const val KEY_WIFI_CALLING = "wifi_calling"

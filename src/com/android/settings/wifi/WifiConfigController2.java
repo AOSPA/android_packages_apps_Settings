@@ -77,6 +77,7 @@ import com.android.settings.utils.AndroidKeystoreAliasLoader;
 import com.android.settings.wifi.details2.WifiPrivacyPreferenceController;
 import com.android.settings.wifi.details2.WifiPrivacyPreferenceController2;
 import com.android.settings.wifi.dpp.WifiDppUtils;
+import com.android.settings.wifi.utils.SsidInputGroup;
 import com.android.settingslib.Utils;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.wifi.flags.Flags;
@@ -228,7 +229,7 @@ public class WifiConfigController2 implements TextWatcher,
     private final boolean mHideMeteredAndPrivacy;
     private final WifiManager mWifiManager;
     private final AndroidKeystoreAliasLoader mAndroidKeystoreAliasLoader;
-    private TextView mSsidView;
+    private SsidInputGroup mSsidInputGroup;
 
     private final Context mContext;
 
@@ -298,6 +299,7 @@ public class WifiConfigController2 implements TextWatcher,
             wepWarningLayout.setVisibility(View.VISIBLE);
         }
 
+        mSsidInputGroup = new SsidInputGroup(mContext, mView, R.id.ssid_layout, R.id.ssid);
         mSsidScanButton = (ImageButton) mView.findViewById(R.id.ssid_scanner_button);
         mIpSettingsSpinner = (Spinner) mView.findViewById(R.id.ip_settings);
         mIpSettingsSpinner.setOnItemSelectedListener(this);
@@ -544,13 +546,13 @@ public class WifiConfigController2 implements TextWatcher,
                         && !isValidSaePassword(mPasswordView.getText().toString())))) {
             passwordInvalid = true;
         }
-        if ((mSsidView != null && mSsidView.length() == 0)
-                // If WifiEntry is not saved, apply passwordInvalid check
-                || ((mWifiEntry == null || !mWifiEntry.isSaved()) && passwordInvalid
-                // If WifiEntry is saved (modifying network) and password is changed, apply
-                // Invalid password check
-                || mWifiEntry != null && mWifiEntry.isSaved() && passwordInvalid
-                    && mPasswordView.length() > 0)) {
+        if ((mWifiEntry == null || !mWifiEntry.isSaved()) && passwordInvalid) {
+            // If WifiEntry is not saved, apply passwordInvalid check
+            enabled = false;
+        } else if (mWifiEntry != null && mWifiEntry.isSaved() && passwordInvalid
+                && mPasswordView.length() > 0) {
+            // If WifiEntry is saved (modifying network) and password is changed, apply
+            // Invalid password check
             enabled = false;
         } else {
             enabled = ipAndProxyFieldsAreValid();
@@ -586,16 +588,21 @@ public class WifiConfigController2 implements TextWatcher,
         return enabled;
     }
 
+    boolean canFinish() {
+        if (!mSsidInputGroup.validate()) {
+            Log.w(TAG, "Can't finish because SSID is invalid!");
+            return false;
+        }
+        return true;
+    }
+
     void showWarningMessagesIfAppropriate() {
         mView.findViewById(R.id.no_user_cert_warning).setVisibility(View.GONE);
         mView.findViewById(R.id.no_domain_warning).setVisibility(View.GONE);
         mView.findViewById(R.id.ssid_too_long_warning).setVisibility(View.GONE);
 
-        if (mSsidView != null) {
-            final String ssid = mSsidView.getText().toString();
-            if (WifiUtils.isSSIDTooLong(ssid)) {
-                mView.findViewById(R.id.ssid_too_long_warning).setVisibility(View.VISIBLE);
-            }
+        if (WifiUtils.isSSIDTooLong(mSsidInputGroup.getText())) {
+            mView.findViewById(R.id.ssid_too_long_warning).setVisibility(View.VISIBLE);
         }
         if (mEapCaCertSpinner != null
                 && mView.findViewById(R.id.l_ca_cert).getVisibility() != View.GONE) {
@@ -628,7 +635,7 @@ public class WifiConfigController2 implements TextWatcher,
         WifiConfiguration config;
         if (mWifiEntry == null) {
             config = new WifiConfiguration();
-            config.SSID = "\"" + mSsidView.getText().toString() + "\"";
+            config.SSID = "\"" + mSsidInputGroup.getText() + "\"";
             // If the user adds a network manually, assume that it is hidden.
             config.hiddenSSID = mHiddenSettingsSpinner.getSelectedItemPosition() == HIDDEN_NETWORK;
         } else if (mWifiEntry.isSaved()) {
@@ -1826,8 +1833,7 @@ public class WifiConfigController2 implements TextWatcher,
     private void configureSecuritySpinner() {
         mConfigUi.setTitle(R.string.wifi_add_network);
 
-        mSsidView = (TextView) mView.findViewById(R.id.ssid);
-        mSsidView.addTextChangedListener(this);
+        mSsidInputGroup.addTextChangedListener(this);
         mSecuritySpinner = ((Spinner) mView.findViewById(R.id.security));
         mSecuritySpinner.setOnItemSelectedListener(this);
 

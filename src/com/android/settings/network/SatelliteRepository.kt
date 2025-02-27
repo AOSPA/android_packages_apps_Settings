@@ -23,6 +23,7 @@ import android.telephony.satellite.SatelliteModemStateCallback
 import android.util.Log
 import androidx.annotation.VisibleForTesting
 import androidx.concurrent.futures.CallbackToFutureAdapter
+import com.android.internal.telephony.flags.Flags
 import com.google.common.util.concurrent.Futures.immediateFuture
 import com.google.common.util.concurrent.ListenableFuture
 import java.util.concurrent.Executor
@@ -40,7 +41,7 @@ import kotlinx.coroutines.flow.flowOn
 /**
  * A repository class for interacting with the SatelliteManager API.
  */
-class SatelliteRepository(
+open class SatelliteRepository(
     private val context: Context,
 ) {
 
@@ -194,6 +195,28 @@ class SatelliteRepository(
             SatelliteManager.SATELLITE_MODEM_STATE_UNKNOWN -> false
             else -> true
         }
+    }
+
+    /**
+     *  @return A list with application package names which support Satellite service.
+     *  e.g. "com.android.settings"
+     */
+    open fun getSatelliteDataOptimizedApps(): List<String> {
+        if (!Flags.satellite25q4Apis()) {
+            return emptyList()
+        }
+        val satelliteManager: SatelliteManager? =
+            context.getSystemService(SatelliteManager::class.java)
+        if (satelliteManager == null) {
+            Log.d(TAG, "SatelliteManager is null")
+            return emptyList()
+        }
+        try {
+            return satelliteManager.getSatelliteDataOptimizedApps();
+        } catch (e: IllegalStateException) {
+            Log.w(TAG, "IllegalStateException $e")
+        }
+        return emptyList()
     }
 
     companion object {

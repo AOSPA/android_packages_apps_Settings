@@ -33,6 +33,7 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.core.content.res.TypedArrayUtils;
 import androidx.preference.PreferenceViewHolder;
 
@@ -59,7 +60,8 @@ public class SeekBarPreference extends RestrictedPreference
     private int mHapticFeedbackMode = HAPTIC_FEEDBACK_MODE_NONE;
     private int mDefaultProgress = -1;
 
-    private SeekBar mSeekBar;
+    @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
+    public SeekBar mSeekBar;
     private boolean mShouldBlink;
     private int mAccessibilityRangeInfoType = AccessibilityNodeInfo.RangeInfo.RANGE_TYPE_INT;
     private CharSequence mOverrideSeekBarStateDescription;

@@ -185,7 +185,7 @@
     <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="3023595865822720071">"必须设置 PIN 码，才能设置指纹解锁和人脸解锁。\n\n设备丢失或被盗时，PIN 码可为其提供保护。"</string>
     <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="3039110875534893916">"必须设置解锁图案，才能设置指纹解锁和人脸解锁。\n\n设备丢失或被盗时，解锁图案可为其提供保护。"</string>
     <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="6506194961404887073">"必须设置密码，才能设置指纹解锁和人脸解锁。\n\n设备丢失或被盗时，密码可为其提供保护。"</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="6614355211073480369">"必须设置 PIN 码，才能设置指纹解锁和人脸解锁。\n\n手机丢失或被盗时，PIN 码可为其提供保护。"</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="6614355211073480369">"必须设置 PIN 码，才能设置指纹解锁和人脸解锁。\n\n手机丢失或被盗时，PIN 码可保护手机中的信息。"</string>
     <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="969489650005656159">"必须设置解锁图案，才能设置指纹解锁和人脸解锁。\n\n手机丢失或被盗时，解锁图案可为其提供保护。"</string>
     <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="2934343185175325368">"必须设置密码，才能设置指纹解锁和人脸解锁。\n\n手机丢失或被盗时，密码可为其提供保护。"</string>
     <string name="fingerprint_v2_delete_message" product="default" msgid="8723083814238510088">"确认删除后，手机上存储的与“<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>”关联的指纹图像和模型将被删除"</string>
@@ -267,10 +267,13 @@
     <string name="main_clear_button_text" product="default" msgid="3763748694468489783">"清除所有数据"</string>
     <string name="usb_tethering_subtext" product="default" msgid="5969806206311342779">"通过 USB 共享手机的互联网连接"</string>
     <string name="usb_tethering_subtext" product="tablet" msgid="4550828946207155142">"通过 USB 共享平板电脑的互联网连接"</string>
-    <string name="bluetooth_tethering_subtext" product="tablet" msgid="1339730853653511849">"通过蓝牙共享平板电脑的互联网连接"</string>
+    <string name="usb_tethering_subtext" product="device" msgid="6586391707794559573">"通过 USB 共享设备的网络连接"</string>
     <string name="bluetooth_tethering_subtext" product="default" msgid="3638886236597805392">"通过蓝牙共享手机的互联网连接"</string>
+    <string name="bluetooth_tethering_subtext" product="tablet" msgid="1339730853653511849">"通过蓝牙共享平板电脑的互联网连接"</string>
+    <string name="bluetooth_tethering_subtext" product="device" msgid="4847586521141330988">"通过蓝牙共享设备的网络连接"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="8652438909365718644">"通过以太网共享手机的互联网连接"</string>
     <string name="ethernet_tethering_subtext" product="tablet" msgid="2227710549796706455">"通过以太网共享平板电脑的互联网连接"</string>
+    <string name="ethernet_tethering_subtext" product="device" msgid="454840171632885947">"通过以太网共享设备的网络连接"</string>
     <string name="about_settings" product="tablet" msgid="1471390492111370330">"关于本机"</string>
     <string name="about_settings" product="default" msgid="2621311564780208250">"关于本机"</string>
     <string name="about_settings" product="device" msgid="7595574154492383452">"关于设备"</string>
@@ -315,7 +318,7 @@
     <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="5609616352941038118">"当移动数据流量的使用量达到您设置的上限时，您的平板电脑将关闭移动数据网络。\n\n由于流量用量是由您的平板电脑计算的，而您的运营商对流量用量的计算方式可能有所不同，因此建议您设置一个保守的上限值。"</string>
     <string name="data_usage_limit_dialog_mobile" product="default" msgid="4552449053646826676">"当移动数据流量的使用量达到您设置的上限时，您的手机将关闭移动数据网络。\n\n由于流量用量是由您的手机计算的，而您的运营商对流量用量的计算方式可能有所不同，因此建议您设置一个保守的上限值。"</string>
     <string name="user_settings_footer_text" product="device" msgid="8543171604218174424">"通过添加新用户来共享您的设备。每个用户都将在您的设备上拥有个人空间，以便使用自定义的主屏幕、账号、应用和设置等。"</string>
-    <string name="user_settings_footer_text" product="tablet" msgid="4749331578207116797">"通过添加新用户来共享您的平板电脑。每个用户都将在您的平板电脑上拥有个人空间，以便使用自定义的主屏幕、账号、应用和设置等。"</string>
+    <string name="user_settings_footer_text" product="tablet" msgid="4749331578207116797">"通过添加新用户来共用平板电脑。每位用户都将在平板电脑上拥有个人空间，并且可自定义主屏幕、账号、应用和设置等。"</string>
     <string name="user_settings_footer_text" product="default" msgid="5440172971747221370">"通过添加新用户，您可以与他人共用一部手机。每个用户都将在您的手机上拥有个人空间，并可自行设定主屏幕、账号、应用和设置等。"</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="5566619500245432179">"只有平板电脑的机主可以管理用户。"</string>
     <string name="user_cannot_manage_message" product="default" msgid="8596259161937605316">"只有手机的机主可以管理用户。"</string>

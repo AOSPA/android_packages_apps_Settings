@@ -24,10 +24,10 @@ import android.content.pm.PackageManager.FEATURE_AUTOMOTIVE
 import android.media.AudioManager.STREAM_MUSIC
 import android.os.UserManager
 import androidx.preference.Preference
-import com.android.settings.PreferenceActionMetricsProvider
-import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
 import com.android.settings.contract.KEY_MEDIA_VOLUME
+import com.android.settings.metrics.PreferenceActionMetricsProvider
+import com.android.settings.restriction.PreferenceRestrictionMixin
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
 import com.android.settingslib.datastore.Permissions

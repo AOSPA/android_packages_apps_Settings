@@ -136,6 +136,9 @@
                     android:dialogTitle="@string/select_webview_provider_dialog_title"
                     android:fragment="com.android.settings.webview.WebViewAppPicker" />
 
+        <Preference android:key="webview_launch_devtools"
+                    android:title="@string/webview_launch_devtools_title" />
+
         <SwitchPreferenceCompat
             android:key="color_temperature"
             android:title="@string/color_temperature"
@@ -748,32 +751,6 @@
             android:summary="@string/force_allow_on_external_summary" />
 
         <SwitchPreferenceCompat
-            android:key="force_resizable_activities"
-            android:title="@string/force_resizable_activities"
-            android:summary="@string/force_resizable_activities_summary" />
-
-        <SwitchPreferenceCompat
-            android:key="override_desktop_mode_features"
-            android:title="@string/enable_desktop_mode" />
-
-        <SwitchPreferenceCompat
-            android:key="enable_freeform_support"
-            android:title="@string/enable_freeform_support" />
-
-        <SwitchPreferenceCompat
-            android:key="override_desktop_experience_features"
-            android:title="@string/enable_desktop_experience_features"/>
-
-        <SwitchPreferenceCompat
-            android:key="force_desktop_mode_on_external_displays"
-            android:title="@string/enable_desktop_mode_on_secondary_display"/>
-
-        <SwitchPreferenceCompat
-            android:key="enable_non_resizable_multi_window"
-            android:title="@string/enable_non_resizable_multi_window"
-            android:summary="@string/enable_non_resizable_multi_window_summary" />
-
-        <SwitchPreferenceCompat
             android:key="back_navigation_animation"
             android:title="@string/back_navigation_animation"
             android:summary="@string/back_navigation_animation_summary" />
@@ -795,10 +772,44 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="window_management_category"
+        android:title="@string/window_management_category"
+        android:order="1100">
+
+        <SwitchPreferenceCompat
+            android:key="force_resizable_activities"
+            android:title="@string/force_resizable_activities"
+            android:summary="@string/force_resizable_activities_summary" />
+
+        <SwitchPreferenceCompat
+            android:key="enable_non_resizable_multi_window"
+            android:title="@string/enable_non_resizable_multi_window"
+            android:summary="@string/enable_non_resizable_multi_window_summary" />
+
+        <SwitchPreferenceCompat
+            android:key="override_desktop_mode_features"
+            android:title="@string/enable_desktop_mode" />
+
+        <SwitchPreferenceCompat
+            android:key="enable_freeform_support"
+            android:title="@string/enable_freeform_support" />
+
+        <SwitchPreferenceCompat
+            android:key="override_desktop_experience_features"
+            android:title="@string/enable_desktop_experience_features"/>
+
+        <SwitchPreferenceCompat
+            android:key="force_desktop_mode_on_external_displays"
+            android:title="@string/enable_desktop_mode_on_secondary_display"/>
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="debug_autofill_category"
         android:title="@string/debug_autofill_category"
         settings:searchable="false"
-        android:order="1100"> <!-- Incremented by 100 from last order (i.e. 1000) -->
+        android:order="1200"> <!-- Incremented by 100 from last order (i.e. 1000) -->
 
         <ListPreference
             android:key="autofill_logging_level"
@@ -823,7 +834,7 @@
     <PreferenceCategory
         android:key="storage_category"
         android:title="@string/storage_category"
-        android:order="1200">
+        android:order="1300">
 
         <Preference
             android:key="shared_data"
@@ -838,7 +849,7 @@
     <PreferenceCategory
         android:key="location_category"
         android:title="@string/location_category"
-        android:order="1300">
+        android:order="1400">
 
         <Preference android:key="mock_location_app"
                     android:title="@string/mock_location_app" />
@@ -859,7 +870,7 @@
     <PreferenceCategory
         android:key="input_method_category"
         android:title="@string/input_method_category"
-        android:order="1400">
+        android:order="1500">
 
         <SwitchPreferenceCompat
             android:key="stylus_handwriting"

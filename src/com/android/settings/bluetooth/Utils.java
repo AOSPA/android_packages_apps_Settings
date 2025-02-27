@@ -34,6 +34,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 
@@ -44,6 +45,7 @@ import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.BluetoothUtils.ErrorListener;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
+import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager.BluetoothManagerCallback;
@@ -323,5 +325,34 @@ public final class Utils {
                                 localBtManager))
                 .map(d -> BluetoothUtils.getGroupId(deviceManager.findDevice(d))).collect(
                         Collectors.toSet()).size() >= 2);
+    }
+
+    /**
+     * Show block pairing dialog during audio sharing
+     * @param context The dialog context
+     * @param dialog The dialog if already exists
+     * @param localBtManager {@link LocalBluetoothManager}
+     * @return The block pairing dialog
+     */
+    @Nullable
+    static AlertDialog showBlockPairingDialog(@NonNull Context context,
+            @Nullable AlertDialog dialog, @Nullable LocalBluetoothManager localBtManager) {
+        if (!com.android.settingslib.flags.Flags.enableTemporaryBondDevicesUi()) return null;
+        if (dialog != null && dialog.isShowing()) return dialog;
+        if (dialog == null) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(context)
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .setTitle(R.string.audio_sharing_block_pairing_dialog_title)
+                    .setMessage(R.string.audio_sharing_block_pairing_dialog_content);
+            LocalBluetoothLeBroadcast broadcast = localBtManager == null ? null :
+                    localBtManager.getProfileManager().getLeAudioBroadcastProfile();
+            if (broadcast != null) {
+                builder.setPositiveButton(R.string.audio_sharing_turn_off_button_label,
+                        (dlg, which) -> broadcast.stopLatestBroadcast());
+            }
+            dialog = builder.create();
+        }
+        dialog.show();
+        return dialog;
     }
 }

@@ -66,13 +66,6 @@ public class KeyboardAccessibilitySlowKeysController extends
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        return (super.getAvailabilityStatus() == AVAILABLE)
-                && InputSettings.isAccessibilitySlowKeysFeatureFlagEnabled() ? AVAILABLE
-                : UNSUPPORTED_ON_DEVICE;
-    }
-
-    @Override
     protected void onInputSettingUpdated() {
         if (mPrimarySwitchPreference != null) {
             mPrimarySwitchPreference.setChecked(

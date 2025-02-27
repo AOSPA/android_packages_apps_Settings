@@ -560,6 +560,7 @@ public class ChooseLockPassword extends SettingsActivity {
             setupPasswordRequirementsView(headerLayout);
 
             mPasswordRestrictionView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            mPasswordRestrictionView.setAccessibilityLiveRegion(ACCESSIBILITY_LIVE_REGION_POLITE);
             mPasswordEntry = view.findViewById(R.id.password_entry);
             mPasswordEntry.setOnEditorActionListener(this);
             mPasswordEntry.addTextChangedListener(this);
@@ -770,7 +771,7 @@ public class ChooseLockPassword extends SettingsActivity {
             // If the stage changed, announce the header for accessibility. This
             // is a no-op when accessibility is disabled.
             if (previousStage != stage) {
-                mLayout.announceForAccessibility(mLayout.getHeaderText());
+                getActivity().setTitle(mLayout.getHeaderText());
             }
         }
 

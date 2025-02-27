@@ -55,9 +55,6 @@
     <!-- Icon tint color for battery usage system icon -->
     <color name="battery_usage_system_icon_color">@android:color/white</color>
 
-    <!-- Power anomaly color for icons, button and text -->
-    <color name="power_anomaly_app_warning_hint_color">#FDD663</color>
-
     <!-- UDFPS colors -->
     <color name="udfps_enroll_icon">#7DA7F1</color>
     <color name="udfps_moving_target_fill">#475670</color>
@@ -82,5 +79,12 @@
     <!-- Connected displays -->
     <color name="display_topology_background_color">@color/settingslib_color_charcoal</color>
     <color name="system_secondary">@android:color/system_secondary_dark</color>
+
+    <!-- Volume seekbar colors -->
+    <color name="seekbar_thumb_tint_color">@android:color/system_accent1_100</color>
+    <color name="seekbar_progress_tint_color">@android:color/system_accent1_100</color>
+
+    <!-- Keyboard a11y input dialog -->
+    <color name="input_dialog_slider_progress">@android:color/system_on_primary_container_dark</color>
 </resources>
 

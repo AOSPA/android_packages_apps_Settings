@@ -52,6 +52,7 @@ import com.android.settings.privatespace.PrivateSpaceSetupActivity;
 import com.android.settings.privatespace.delete.PrivateSpaceDeleteActivity;
 import com.android.settings.remoteauth.RemoteAuthActivity;
 import com.android.settings.remoteauth.RemoteAuthActivityInternal;
+import com.android.settingslib.users.CreateUserActivity;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -277,6 +278,10 @@ public class ActivityEmbeddingRulesController {
         }
         String action = mContext.getString(R.string.config_avatar_picker_action);
         addActivityFilter(activityFilters, new Intent(action));
+
+        if (android.multiuser.Flags.placeAddUserDialogWithinActivity()) {
+            addActivityFilter(activityFilters, CreateUserActivity.class);
+        }
 
         ActivityRule activityRule = new ActivityRule.Builder(activityFilters).setAlwaysExpand(true)
                 .build();

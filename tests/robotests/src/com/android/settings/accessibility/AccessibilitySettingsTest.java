@@ -21,7 +21,11 @@ import static com.android.internal.accessibility.common.ShortcutConstants.UserSh
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
@@ -43,6 +47,8 @@ import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.fragment.app.Fragment;
@@ -107,13 +113,15 @@ public class AccessibilitySettingsTest {
     private static final String EMPTY_STRING = "";
     private static final String DEFAULT_SUMMARY = "default summary";
     private static final String DEFAULT_DESCRIPTION = "default description";
+    private static final String DEFAULT_CATEGORY = "default category";
     private static final String DEFAULT_LABEL = "default label";
     private static final Boolean SERVICE_ENABLED = true;
     private static final Boolean SERVICE_DISABLED = false;
 
     @Rule
     public final MockitoRule mocks = MockitoJUnit.rule();
-    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private final Context mContext = ApplicationProvider.getApplicationContext();
     @Spy
     private final AccessibilityServiceInfo mServiceInfo = getMockAccessibilityServiceInfo(
@@ -121,7 +129,13 @@ public class AccessibilitySettingsTest {
     private ShadowAccessibilityManager mShadowAccessibilityManager;
     @Mock
     private LocalBluetoothManager mLocalBluetoothManager;
+    @Mock
+    private Menu mMenu;
+    @Mock
+    private MenuItem mMenuItem;
+
     private ActivityController<SettingsActivity> mActivityController;
+
     private AccessibilitySettings mFragment;
 
     @Before
@@ -436,6 +450,66 @@ public class AccessibilitySettingsTest {
 
         assertThat(preference).isNotNull();
 
+    }
+
+    @Test
+    @EnableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
+    public void onCreateOptionsMenu_enableLowVisionGenericFeedback_shouldAddSendFeedbackMenu() {
+        setupFragment();
+        mFragment.setFeedbackManager(
+                new FeedbackManager(mFragment.getActivity(), PACKAGE_NAME, DEFAULT_CATEGORY));
+        when(mMenu.add(anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(mMenuItem);
+
+        mFragment.onCreateOptionsMenu(mMenu, /* inflater= */ null);
+
+        verify(mMenu).add(anyInt(), eq(AccessibilitySettings.MENU_ID_SEND_FEEDBACK),
+                anyInt(), eq(mContext.getText(R.string.accessibility_send_feedback_title)));
+    }
+
+    @Test
+    @DisableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
+    public void onCreateOptionsMenu_disableLowVisionGenericFeedback_shouldNotAddSendFeedbackMenu() {
+        setupFragment();
+        mFragment.setFeedbackManager(
+                new FeedbackManager(mFragment.getActivity(), PACKAGE_NAME, DEFAULT_CATEGORY));
+        when(mMenu.add(anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(mMenuItem);
+
+        mFragment.onCreateOptionsMenu(mMenu, /* inflater= */ null);
+
+        verify(mMenu, never()).add(anyInt(), eq(AccessibilitySettings.MENU_ID_SEND_FEEDBACK),
+                anyInt(), eq(mContext.getText(R.string.accessibility_send_feedback_title)));
+    }
+
+    @Test
+    @EnableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
+    public void onOptionsItemSelected_enableLowVisionGenericFeedback_shouldStartSendFeedback() {
+        setupFragment();
+        mFragment.setFeedbackManager(
+                new FeedbackManager(mFragment.getActivity(), PACKAGE_NAME, DEFAULT_CATEGORY));
+        when(mMenu.add(anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(mMenuItem);
+        mFragment.onCreateOptionsMenu(mMenu, /* inflater= */ null);
+        when(mMenuItem.getItemId()).thenReturn(AccessibilitySettings.MENU_ID_SEND_FEEDBACK);
+
+        mFragment.onOptionsItemSelected(mMenuItem);
+
+        Intent startedIntent = shadowOf(mFragment.getActivity()).getNextStartedActivity();
+        assertThat(startedIntent).isNotNull();
+    }
+
+    @Test
+    @DisableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
+    public void onOptionsItemSelected_disableLowVisionGenericFeedback_shouldNotStartSendFeedback() {
+        setupFragment();
+        mFragment.setFeedbackManager(
+                new FeedbackManager(mFragment.getActivity(), PACKAGE_NAME, DEFAULT_CATEGORY));
+        when(mMenu.add(anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(mMenuItem);
+        mFragment.onCreateOptionsMenu(mMenu, /* inflater= */ null);
+        when(mMenuItem.getItemId()).thenReturn(AccessibilitySettings.MENU_ID_SEND_FEEDBACK);
+
+        mFragment.onOptionsItemSelected(mMenuItem);
+
+        Intent startedIntent = shadowOf(mFragment.getActivity()).getNextStartedActivity();
+        assertThat(startedIntent).isNull();
     }
 
     @Test

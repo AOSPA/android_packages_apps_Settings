@@ -130,7 +130,7 @@ public final class InterruptionFilterPreferenceControllerTest {
         verify(mBackend).updateMode(captor.capture());
         assertThat(captor.getValue().getPolicy().getPriorityCategoryAlarms())
                 .isEqualTo(STATE_DISALLOW);
-        assertThat(captor.getValue().getRule().getInterruptionFilter())
+        assertThat(captor.getValue().getInterruptionFilter())
                 .isEqualTo(INTERRUPTION_FILTER_PRIORITY);
     }
 
@@ -162,7 +162,7 @@ public final class InterruptionFilterPreferenceControllerTest {
         verify(mBackend).updateMode(captor.capture());
         assertThat(captor.getValue().getPolicy().getPriorityCategoryAlarms())
                 .isEqualTo(STATE_DISALLOW);
-        assertThat(captor.getValue().getRule().getInterruptionFilter())
+        assertThat(captor.getValue().getInterruptionFilter())
                 .isEqualTo(INTERRUPTION_FILTER_ALL);
     }
 }

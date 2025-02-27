@@ -27,10 +27,10 @@ import android.hardware.SensorPrivacyManager.Sensors.CAMERA
 import android.os.PowerManager
 import android.os.UserManager
 import android.provider.Settings
-import com.android.settings.PreferenceActionMetricsProvider
-import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
 import com.android.settings.contract.KEY_SCREEN_ATTENTION
+import com.android.settings.metrics.PreferenceActionMetricsProvider
+import com.android.settings.restriction.PreferenceRestrictionMixin
 import com.android.settingslib.RestrictedSwitchPreference
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObservableDelegate

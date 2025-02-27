@@ -124,6 +124,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:progressBackgroundTint="@color/input_dialog_slider_progress_background"
+                    android:progressTint="@color/input_dialog_slider_progress"
+                    android:thumbTint="@color/input_dialog_slider_progress"
                     android:layout_marginTop="8dp"
                     android:visibility="gone"/>
             </LinearLayout>

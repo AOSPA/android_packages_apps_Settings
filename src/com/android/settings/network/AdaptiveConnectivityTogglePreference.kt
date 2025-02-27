@@ -20,14 +20,13 @@ import android.app.settings.SettingsEnums.ACTION_ADAPTIVE_CONNECTIVITY
 import android.content.Context
 import android.net.wifi.WifiManager
 import android.provider.Settings.Secure.ADAPTIVE_CONNECTIVITY_ENABLED
-import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.R
 import com.android.settings.contract.KEY_ADAPTIVE_CONNECTIVITY
+import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObservableDelegate
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.datastore.SettingsStore
-import com.android.settingslib.datastore.and
 import com.android.settingslib.metadata.MainSwitchPreference
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel

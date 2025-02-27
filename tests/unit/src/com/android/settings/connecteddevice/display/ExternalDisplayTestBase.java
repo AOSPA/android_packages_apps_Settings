@@ -49,6 +49,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 public class ExternalDisplayTestBase {
+    static final int EXTERNAL_DISPLAY_ID = 1;
+    static final int OVERLAY_DISPLAY_ID = 2;
+
     @Mock
     ExternalDisplaySettingsConfiguration.Injector mMockedInjector;
     @Mock
@@ -115,7 +118,7 @@ public class ExternalDisplayTestBase {
     }
 
     Display createExternalDisplay() throws RemoteException {
-        int displayId = 1;
+        int displayId = EXTERNAL_DISPLAY_ID;
         var displayInfo = new DisplayInfo();
         doReturn(displayInfo).when(mMockedIDisplayManager).getDisplayInfo(displayId);
         displayInfo.displayId = displayId;
@@ -134,7 +137,7 @@ public class ExternalDisplayTestBase {
     }
 
     Display createOverlayDisplay() throws RemoteException {
-        int displayId = 2;
+        int displayId = OVERLAY_DISPLAY_ID;
         var displayInfo = new DisplayInfo();
         doReturn(displayInfo).when(mMockedIDisplayManager).getDisplayInfo(displayId);
         displayInfo.displayId = displayId;

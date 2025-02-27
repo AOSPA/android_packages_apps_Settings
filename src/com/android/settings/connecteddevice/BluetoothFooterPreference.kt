@@ -25,28 +25,24 @@ import com.android.settings.R
 import com.android.settings.bluetooth.Utils
 import com.android.settings.core.SubSettingLauncher
 import com.android.settings.location.BluetoothScanningFragment
+import com.android.settings.widget.FooterPreferenceBinding
+import com.android.settings.widget.FooterPreferenceMetadata
 import com.android.settingslib.metadata.PreferenceMetadata
-import com.android.settingslib.metadata.PreferenceSummaryProvider
-import com.android.settingslib.preference.PreferenceBinding
+import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.widget.FooterPreference
 
 class BluetoothFooterPreference(private val bluetoothDataStore: BluetoothDataStore) :
-    PreferenceMetadata, PreferenceBinding, PreferenceSummaryProvider {
+    FooterPreferenceMetadata, FooterPreferenceBinding, PreferenceTitleProvider {
 
     override val key: String
         get() = KEY
-
-    override fun isIndexable(context: Context) = false
 
     override fun dependencies(context: Context) = arrayOf(BluetoothPreference.KEY)
 
     override fun intent(context: Context): Intent? = subSettingLauncher(context).toIntent()
 
-    override fun createWidget(context: Context) = FooterPreference(context)
-
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
-        preference.isSelectable = false
         val bluetoothDisabled = bluetoothDataStore.getBoolean(BluetoothPreference.KEY) != true
         val footerPreference = preference as FooterPreference
         val context = preference.context
@@ -64,7 +60,7 @@ class BluetoothFooterPreference(private val bluetoothDataStore: BluetoothDataSto
             .setDestination(BluetoothScanningFragment::class.java.name)
             .setSourceMetricsCategory(SettingsEnums.BLUETOOTH_FRAGMENT)
 
-    override fun getSummary(context: Context): CharSequence? {
+    override fun getTitle(context: Context): CharSequence? {
         val bluetoothDisabled = bluetoothDataStore.getBoolean(BluetoothPreference.KEY) != true
         val resId =
             if (bluetoothDisabled && Utils.isBluetoothScanningEnabled(context)) {

@@ -63,7 +63,8 @@ public class MouseKeysMainPageFragment extends DashboardFragment
         mMouseKeyImagesPreference = screen.findPreference(KEY_MOUSE_KEY_LIST);
         mInputManager = Preconditions.checkNotNull(getActivity()
                 .getSystemService(InputManager.class));
-        String title = mCurrentInputDevice == null ? getActivity().getString(R.string.mouse_keys)
+        String title = mCurrentInputDevice == null || getHardKeyboards(getContext()).size() == 1
+                ? getActivity().getString(R.string.mouse_keys)
                 : getActivity().getString(R.string.mouse_key_main_page_title,
                         mCurrentInputDevice.getName());
         getActivity().setTitle(title);

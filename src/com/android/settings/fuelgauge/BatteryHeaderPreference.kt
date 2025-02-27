@@ -20,10 +20,10 @@ import android.app.settings.SettingsEnums.ACTION_BATTERY_LEVEL
 import android.content.Context
 import androidx.annotation.VisibleForTesting
 import androidx.preference.Preference
-import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.R
 import com.android.settings.contract.KEY_BATTERY_LEVEL
 import com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpdateType.BATTERY_NOT_PRESENT
+import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settingslib.Utils
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable

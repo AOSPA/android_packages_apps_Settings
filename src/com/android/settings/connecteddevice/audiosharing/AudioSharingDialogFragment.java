@@ -186,14 +186,17 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
             Drawable qrCodeDrawable = metadata == null ? null : getQrCodeDrawable(metadata,
                     getContext()).orElse(null);
             if (qrCodeDrawable != null) {
+                String broadcastName =
+                        metadata.getBroadcastName() == null ? "" : metadata.getBroadcastName();
+                boolean hasPassword = metadata.getBroadcastCode() != null
+                        && metadata.getBroadcastCode().length > 0;
+                String message = hasPassword ? getString(
+                        R.string.audio_sharing_dialog_qr_code_content, broadcastName,
+                        new String(metadata.getBroadcastCode(), StandardCharsets.UTF_8)) :
+                        getString(R.string.audio_sharing_dialog_qr_code_content_no_password,
+                                broadcastName);
                 builder.setCustomImage(qrCodeDrawable)
-                        .setCustomMessage(
-                                getString(
-                                        R.string.audio_sharing_dialog_qr_code_content,
-                                        metadata.getBroadcastName(),
-                                        new String(
-                                                metadata.getBroadcastCode(),
-                                                StandardCharsets.UTF_8)))
+                        .setCustomMessage(message)
                         .setCustomMessage2(R.string.audio_sharing_dialog_pair_new_device_content)
                         .setCustomNegativeButton(R.string.audio_streams_dialog_close,
                                 v -> onCancelClick());

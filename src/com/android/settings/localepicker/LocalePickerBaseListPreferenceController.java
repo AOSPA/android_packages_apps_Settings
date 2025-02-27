@@ -75,9 +75,6 @@ public abstract class LocalePickerBaseListPreferenceController extends
     public LocalePickerBaseListPreferenceController(@NonNull Context context,
             @NonNull String preferenceKey) {
         super(context, preferenceKey);
-        mLocaleList = getLocaleCollectorController(context).getSupportedLocaleList(null,
-                false, false);
-        mLocaleOptions = new ArrayList<>(mLocaleList.size());
         mPreferences = new ArrayMap<>();
         mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
@@ -246,7 +243,7 @@ public abstract class LocalePickerBaseListPreferenceController extends
     private void setupLocaleList() {
         mLocaleList = getLocaleCollectorController(mContext).getSupportedLocaleList(
                 mParentLocale, false, mIsCountryMode);
-        mLocaleOptions.clear();
+        mLocaleOptions = new ArrayList<>(mLocaleList.size());
     }
 
     private List<LocaleStore.LocaleInfo> getSortedLocaleList(
@@ -262,7 +259,9 @@ public abstract class LocalePickerBaseListPreferenceController extends
         boolean shouldShowLocaleEditor = shouldShowLocaleEditor(localeInfo);
         if (shouldShowLocaleEditor) {
             List<LocaleStore.LocaleInfo> feedItemList = getUserLocaleList();
-            feedItemList.add(localeInfo);
+            for (LocaleStore.LocaleInfo locale : mLocaleList) {
+                feedItemList.add(locale);
+            }
             LocaleList localeList = new LocaleList(feedItemList.stream()
                     .map(LocaleStore.LocaleInfo::getLocale)
                     .toArray(Locale[]::new));

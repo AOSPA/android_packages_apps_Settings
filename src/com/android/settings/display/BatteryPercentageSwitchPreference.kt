@@ -18,10 +18,10 @@ package com.android.settings.display
 import android.app.settings.SettingsEnums.OPEN_BATTERY_PERCENTAGE
 import android.content.Context
 import android.provider.Settings
-import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.contract.KEY_BATTERY_PERCENTAGE
+import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObservableDelegate
 import com.android.settingslib.datastore.SettingsStore

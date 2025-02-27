@@ -86,7 +86,7 @@ public class TopLevelStoragePreferenceControllerTest {
         when(mController.getStorageManagerVolumeProvider())
                 .thenReturn(mStorageManagerVolumeProvider);
         final String percentage = NumberFormat.getPercentInstance().format(1);
-        final String freeSpace = Formatter.formatFileSize(mContext, 0);
+        final String[] freeSpace = Formatter.formatFileSize(mContext, 0).split(" ");
         final Preference preference = new Preference(mContext);
 
         // Wait for asynchronous thread to finish, otherwise test will flake.
@@ -103,6 +103,6 @@ public class TopLevelStoragePreferenceControllerTest {
         // the background thread.
         TimeUnit.SECONDS.sleep(5);
         assertThat(preference.getSummary()).isEqualTo(ResourcesUtils.getResourcesString(
-                mContext, "storage_summary", percentage, freeSpace));
+                mContext, "storage_summary", percentage, freeSpace[0], freeSpace[1]));
     }
 }

@@ -23,6 +23,7 @@ import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED_BY
 
 import static com.android.server.notification.Flags.notificationHideUnusedChannels;
 
+import android.annotation.FlaggedApi;
 import android.app.Flags;
 import android.app.INotificationManager;
 import android.app.NotificationChannel;
@@ -67,10 +68,13 @@ import com.android.settingslib.utils.StringUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 public class NotificationBackend {
     private static final String TAG = "NotificationBackend";
@@ -365,6 +369,20 @@ public class NotificationBackend {
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
             return ParceledListSlice.emptyList();
+        }
+    }
+
+    /**
+     * Returns a set of all apps that have any notification channels (not including deleted ones).
+     */
+    @FlaggedApi(Flags.FLAG_NM_BINDER_PERF_GET_APPS_WITH_CHANNELS)
+    public @NonNull Set<String> getPackagesWithAnyChannels(int userId) {
+        try {
+            List<String> packages = sINM.getPackagesWithAnyChannels(userId);
+            return new HashSet<>(packages);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return Collections.EMPTY_SET;
         }
     }
 

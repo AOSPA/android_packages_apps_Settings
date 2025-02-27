@@ -309,6 +309,8 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
         when(mPreference1.getProgress()).thenReturn(TEST_VOLUME_VALUE);
         mController.setPreferenceGroup(mPreferenceGroup);
         mController.onDeviceAdded(mPreference1);
+        shadowOf(Looper.getMainLooper()).idle();
+
         verify(mPreferenceGroup).setVisible(true);
         assertThat(mPreferenceGroup.isVisible()).isTrue();
     }
@@ -365,6 +367,8 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
         mPreferenceGroup.addPreference(mPreference1);
         mController.setPreferenceGroup(mPreferenceGroup);
         mController.onDeviceRemoved(mPreference1);
+        shadowOf(Looper.getMainLooper()).idle();
+
         verify(mPreferenceGroup).setVisible(false);
         assertThat(mPreferenceGroup.isVisible()).isFalse();
     }

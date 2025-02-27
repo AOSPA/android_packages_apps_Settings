@@ -86,6 +86,7 @@ import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.GatekeeperPasswordProvider;
 import com.android.settings.biometrics.IdentityCheckBiometricErrorDialog;
+import com.android.settings.biometrics.fingerprint.feature.ChallengeGeneratedInvoker;
 import com.android.settings.biometrics.fingerprint.feature.FingerprintExtPreferencesProvider;
 import com.android.settings.biometrics.fingerprint.feature.PrimarySwitchIntentPreference;
 import com.android.settings.core.SettingsBaseActivity;
@@ -267,6 +268,7 @@ public class FingerprintSettings extends SubSettings {
         private static final String KEY_HAS_FIRST_ENROLLED = "has_first_enrolled";
         private static final String KEY_IS_ENROLLING = "is_enrolled";
         private static final String KEY_IS_LAUNCHING_EXT_PREF = "is_launching_ext_pref";
+        private static final String KEY_HAS_RUN_CHALLENGE_INVOKER = "has_run_challenge_invoker";
         @VisibleForTesting
         static final String KEY_REQUIRE_SCREEN_ON_TO_AUTH =
                 "security_settings_require_screen_on_to_auth";
@@ -334,6 +336,8 @@ public class FingerprintSettings extends SubSettings {
         @NonNull private String mLaunchedExtPrefKey = "";
         /** key list for changing visibility */
         @NonNull private final ArrayList<String> mExtPrefKeys = new ArrayList<>();
+        /** Use to make sure ChallengeGeneratedInvokers have been run */
+        private boolean mHasRunChallengeInvoker = false;
 
         private long mChallenge;
 
@@ -595,6 +599,8 @@ public class FingerprintSettings extends SubSettings {
                 mIsEnrolling = savedInstanceState.getBoolean(KEY_IS_ENROLLING, mIsEnrolling);
                 mLaunchedExtPrefKey = savedInstanceState.getString(
                         KEY_IS_LAUNCHING_EXT_PREF, mLaunchedExtPrefKey);
+                mHasRunChallengeInvoker = savedInstanceState.getBoolean(
+                        KEY_HAS_RUN_CHALLENGE_INVOKER, /* defaultValue= */ false);
                 mHasFirstEnrolled = savedInstanceState.getBoolean(KEY_HAS_FIRST_ENROLLED,
                         mHasFirstEnrolled);
                 mBiometricsAuthenticationRequested = savedInstanceState.getBoolean(
@@ -1061,8 +1067,11 @@ public class FingerprintSettings extends SubSettings {
                 mRemovalSidecar.setListener(mRemovalListener);
             }
 
-            mCalibrator = FeatureFactory.getFeatureFactory().getFingerprintFeatureProvider()
-                    .getUdfpsEnrollCalibrator(getActivity().getApplicationContext(), null, null);
+            if (!mLaunchedConfirm && !mIsEnrolling) {
+                mCalibrator = FeatureFactory.getFeatureFactory().getFingerprintFeatureProvider()
+                        .getUdfpsEnrollCalibrator(getActivity().getApplicationContext(), null,
+                                null);
+            }
         }
 
         private void updatePreferences() {
@@ -1113,6 +1122,7 @@ public class FingerprintSettings extends SubSettings {
             outState.putBoolean(KEY_IS_ENROLLING, mIsEnrolling);
             outState.putString(KEY_IS_LAUNCHING_EXT_PREF, mLaunchedExtPrefKey);
             outState.putBoolean(KEY_HAS_FIRST_ENROLLED, mHasFirstEnrolled);
+            outState.putBoolean(KEY_HAS_RUN_CHALLENGE_INVOKER, mHasRunChallengeInvoker);
             outState.putBoolean(KEY_BIOMETRICS_AUTHENTICATION_REQUESTED,
                     mBiometricsAuthenticationRequested);
         }
@@ -1265,6 +1275,7 @@ public class FingerprintSettings extends SubSettings {
             if (requestCode == CONFIRM_REQUEST || requestCode == CHOOSE_LOCK_GENERIC_REQUEST) {
                 mLaunchedConfirm = false;
                 if (resultCode == RESULT_FINISHED || resultCode == RESULT_OK) {
+                    runChallengeGeneratedInvokers();
                     if (BiometricUtils.containsGatekeeperPasswordHandle(data)) {
                         if (!mHasFirstEnrolled && !mIsEnrolling) {
                             final Activity activity = getActivity();
@@ -1399,6 +1410,31 @@ public class FingerprintSettings extends SubSettings {
             }
         }
 
+        private void runChallengeGeneratedInvokers() {
+            if (mHasRunChallengeInvoker) {
+                return;
+            }
+            mHasRunChallengeInvoker = true;
+
+            List<ChallengeGeneratedInvoker> invokers = FeatureFactory.getFeatureFactory()
+                    .getFingerprintFeatureProvider().getChallengeGeneratedInvokers();
+            Log.d(TAG, "Num of ChallengeGeneratedInvoker: " + invokers.size());
+            for (ChallengeGeneratedInvoker invoker: invokers) {
+                Bundle bundle = getIntent().getBundleExtra(invoker.getIntentKeyForBundle());
+                if (bundle == null) {
+                    continue;
+                }
+
+                long startTime = System.currentTimeMillis();
+                boolean result = invoker.invoke(this, bundle);
+                Log.d(TAG, "Invoker for " + invoker.getIntentKeyForBundle() + " run "
+                        + (System.currentTimeMillis() - startTime) + "ms, result: " + result);
+
+                // We shall only have at most one invoker for each launching
+                return;
+            }
+        }
+
         @Override
         public void onDestroy() {
             super.onDestroy();
@@ -1484,6 +1520,11 @@ public class FingerprintSettings extends SubSettings {
                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
                 intent.putExtra(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, mChallenge);
             }
+
+            if (mCalibrator != null) {
+                intent.putExtras(mCalibrator.getExtrasForNextIntent());
+            }
+
             startActivityForResult(intent, AUTO_ADD_FIRST_FINGERPRINT_REQUEST);
         }
 

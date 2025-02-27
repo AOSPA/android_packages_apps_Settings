@@ -20,9 +20,9 @@ import android.Manifest
 import android.app.settings.SettingsEnums.ACTION_MOBILE_DATA
 import android.content.Context
 import android.telephony.SubscriptionManager
-import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.R
 import com.android.settings.contract.KEY_MOBILE_DATA
+import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settings.network.telephony.MobileDataRepository
 import com.android.settings.network.telephony.SubscriptionRepository
 import com.android.settingslib.datastore.KeyValueStore

@@ -44,10 +44,12 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
+import com.android.settingslib.bluetooth.LeAudioProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.flags.Flags;
 import com.android.settingslib.utils.ThreadUtils;
 
 import com.google.common.collect.ImmutableList;
@@ -225,6 +227,14 @@ public class AudioSharingDialogHandler {
                             mLocalBtManager, groupedDevices, /* filterByInSharing= */ true);
             AudioSharingStopDialogFragment.DialogEventListener listener =
                     () -> {
+                        if (Flags.adoptPrimaryGroupManagementApi() && mLocalBtManager != null) {
+                            LeAudioProfile profile =
+                                    mLocalBtManager.getProfileManager().getLeAudioProfile();
+                            if (profile != null) {
+                                profile.setBroadcastToUnicastFallbackGroup(
+                                        BluetoothCsipSetCoordinator.GROUP_ID_INVALID);
+                            }
+                        }
                         cachedDevice.setActive();
                         mIsStoppingBroadcast = true;
                         AudioSharingUtils.stopBroadcasting(mLocalBtManager);

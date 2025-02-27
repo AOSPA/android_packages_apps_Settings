@@ -18,12 +18,12 @@ package com.android.settings.network.tether
 import android.content.Context
 import android.net.TetheringManager
 import android.os.UserManager
-import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
 import com.android.settings.Settings.TetherSettingsActivity
 import com.android.settings.datausage.DataSaverMainSwitchPreference
 import com.android.settings.flags.Flags
 import com.android.settings.network.TetherPreferenceController
+import com.android.settings.restriction.PreferenceRestrictionMixin
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settings.wifi.tether.WifiHotspotSwitchPreference
 import com.android.settingslib.TetherUtil

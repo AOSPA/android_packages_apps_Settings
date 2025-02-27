@@ -30,12 +30,12 @@ import android.telephony.TelephonyManager
 import androidx.annotation.DrawableRes
 import androidx.preference.Preference
 import com.android.settings.AirplaneModeEnabler
-import com.android.settings.PreferenceActionMetricsProvider
-import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.contract.KEY_AIRPLANE_MODE
+import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settings.network.SatelliteRepository.Companion.isSatelliteOn
+import com.android.settings.restriction.PreferenceRestrictionMixin
 import com.android.settingslib.RestrictedSwitchPreference
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.KeyValueStore

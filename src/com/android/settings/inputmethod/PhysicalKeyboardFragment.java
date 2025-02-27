@@ -169,16 +169,13 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
             mKeyboardAssistanceCategory.removePreference(
                     findPreference(ACCESSIBILITY_PHYSICAL_KEYBOARD_A11Y));
         }
-        if (!InputSettings.isAccessibilityBounceKeysFeatureEnabled()
-                || isKeyboardAndTouchpadA11yNewPageEnabled) {
+        if (isKeyboardAndTouchpadA11yNewPageEnabled) {
             mKeyboardA11yCategory.removePreference(mAccessibilityBounceKeys);
         }
-        if (!InputSettings.isAccessibilitySlowKeysFeatureFlagEnabled()
-                || isKeyboardAndTouchpadA11yNewPageEnabled) {
+        if (isKeyboardAndTouchpadA11yNewPageEnabled) {
             mKeyboardA11yCategory.removePreference(mAccessibilitySlowKeys);
         }
-        if (!InputSettings.isAccessibilityStickyKeysFeatureEnabled()
-                || isKeyboardAndTouchpadA11yNewPageEnabled) {
+        if (isKeyboardAndTouchpadA11yNewPageEnabled) {
             mKeyboardA11yCategory.removePreference(mAccessibilityStickyKeys);
         }
         if (!InputSettings.isAccessibilityMouseKeysFeatureFlagEnabled()
@@ -338,15 +335,12 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
             mFeatureProvider.registerKeyboardInformationCategory(preferenceScreen);
         }
 
-        if (InputSettings.isAccessibilityBounceKeysFeatureEnabled()
-                || InputSettings.isAccessibilityStickyKeysFeatureEnabled()
-                || InputSettings.isAccessibilitySlowKeysFeatureFlagEnabled()
-                || InputSettings.isAccessibilityMouseKeysFeatureFlagEnabled()) {
-            Objects.requireNonNull(mKeyboardA11yCategory).setOrder(2);
-            preferenceScreen.addPreference(mKeyboardA11yCategory);
-            updateAccessibilityBounceKeysSwitch(context);
-            updateAccessibilitySlowKeysSwitch(context);
-            updateAccessibilityStickyKeysSwitch(context);
+        Objects.requireNonNull(mKeyboardA11yCategory).setOrder(2);
+        preferenceScreen.addPreference(mKeyboardA11yCategory);
+        updateAccessibilityStickyKeysSwitch(context);
+        updateAccessibilityBounceKeysSwitch(context);
+        updateAccessibilitySlowKeysSwitch(context);
+        if (InputSettings.isAccessibilityMouseKeysFeatureFlagEnabled()) {
             updateAccessibilityMouseKeysSwitch(context);
         }
     }
@@ -370,27 +364,21 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
                 false,
                 mContentObserver,
                 UserHandle.myUserId());
-        if (InputSettings.isAccessibilityBounceKeysFeatureEnabled()) {
-            contentResolver.registerContentObserver(
-                    sAccessibilityBounceKeysUri,
-                    false,
-                    mContentObserver,
-                    UserHandle.myUserId());
-        }
-        if (InputSettings.isAccessibilitySlowKeysFeatureFlagEnabled()) {
-            contentResolver.registerContentObserver(
-                    sAccessibilitySlowKeysUri,
-                    false,
-                    mContentObserver,
-                    UserHandle.myUserId());
-        }
-        if (InputSettings.isAccessibilityStickyKeysFeatureEnabled()) {
-            contentResolver.registerContentObserver(
-                    sAccessibilityStickyKeysUri,
-                    false,
-                    mContentObserver,
-                    UserHandle.myUserId());
-        }
+        contentResolver.registerContentObserver(
+                sAccessibilityBounceKeysUri,
+                false,
+                mContentObserver,
+                UserHandle.myUserId());
+        contentResolver.registerContentObserver(
+                sAccessibilitySlowKeysUri,
+                false,
+                mContentObserver,
+                UserHandle.myUserId());
+        contentResolver.registerContentObserver(
+                sAccessibilityStickyKeysUri,
+                false,
+                mContentObserver,
+                UserHandle.myUserId());
         if (InputSettings.isAccessibilityMouseKeysFeatureFlagEnabled()) {
             contentResolver.registerContentObserver(
                     sAccessibilityMouseKeysUri,
@@ -413,25 +401,16 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
     }
 
     private void updateAccessibilityBounceKeysSwitch(@NonNull Context context) {
-        if (!InputSettings.isAccessibilityBounceKeysFeatureEnabled()) {
-            return;
-        }
         Objects.requireNonNull(mAccessibilityBounceKeys).setChecked(
                 InputSettings.isAccessibilityBounceKeysEnabled(context));
     }
 
     private void updateAccessibilitySlowKeysSwitch(@NonNull Context context) {
-        if (!InputSettings.isAccessibilitySlowKeysFeatureFlagEnabled()) {
-            return;
-        }
         Objects.requireNonNull(mAccessibilitySlowKeys).setChecked(
                 InputSettings.isAccessibilitySlowKeysEnabled(context));
     }
 
     private void updateAccessibilityStickyKeysSwitch(@NonNull Context context) {
-        if (!InputSettings.isAccessibilityStickyKeysFeatureEnabled()) {
-            return;
-        }
         Objects.requireNonNull(mAccessibilityStickyKeys).setChecked(
                 InputSettings.isAccessibilityStickyKeysEnabled(context));
     }

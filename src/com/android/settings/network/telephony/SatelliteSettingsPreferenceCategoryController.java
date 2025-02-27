@@ -66,10 +66,6 @@ public class SatelliteSettingsPreferenceCategoryController
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        if (!com.android.internal.telephony.flags.Flags.carrierEnabledSatelliteFlag()) {
-            return UNSUPPORTED_ON_DEVICE;
-        }
-
         if (mSatelliteManager == null) {
             return UNSUPPORTED_ON_DEVICE;
         }

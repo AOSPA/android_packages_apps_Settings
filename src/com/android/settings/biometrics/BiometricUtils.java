@@ -50,8 +50,10 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.SetupChooseLockGeneric;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
+import com.google.android.setupdesign.util.ThemeHelper;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -528,6 +530,16 @@ public class BiometricUtils {
         }
 
         return ssb.toString();
+    }
+
+    /**
+     * Check if device is using Expressive Style theme.
+     * @param context that for applying Expressive Style
+     * @return true if device using Expressive Style theme, otherwise false.
+     */
+    public static boolean isExpressiveStyle(@NonNull Context context) {
+        return SettingsThemeHelper.isExpressiveTheme(context)
+                || ThemeHelper.shouldApplyGlifExpressiveStyle(context);
     }
 
     private static String capitalize(final String input) {

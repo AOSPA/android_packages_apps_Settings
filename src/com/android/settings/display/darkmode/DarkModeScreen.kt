@@ -22,10 +22,10 @@ import android.content.Context
 import android.os.PowerManager
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
-import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.R
 import com.android.settings.contract.KEY_DARK_THEME
 import com.android.settings.flags.Flags
+import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settingslib.PrimarySwitchPreferenceBinding
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.Permissions

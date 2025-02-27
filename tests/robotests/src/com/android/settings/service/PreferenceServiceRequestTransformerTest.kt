@@ -202,6 +202,40 @@ class PreferenceServiceRequestTransformerTest {
     }
 
     @Test
+    fun transformCatalystGetValueResponse_sensitivityLevel() {
+        verifySensitivityLevelMapping(
+            SensitivityLevel.NO_SENSITIVITY, SettingsPreferenceMetadata.NO_SENSITIVITY
+        )
+        verifySensitivityLevelMapping(
+            SensitivityLevel.LOW_SENSITIVITY, SettingsPreferenceMetadata.EXPECT_POST_CONFIRMATION
+        )
+        verifySensitivityLevelMapping(
+            SensitivityLevel.MEDIUM_SENSITIVITY, SettingsPreferenceMetadata.DEEPLINK_ONLY
+        )
+        verifySensitivityLevelMapping(
+            SensitivityLevel.HIGH_SENSITIVITY, SettingsPreferenceMetadata.DEEPLINK_ONLY
+        )
+        verifySensitivityLevelMapping(
+            SensitivityLevel.UNKNOWN_SENSITIVITY, SettingsPreferenceMetadata.NO_DIRECT_ACCESS
+        )
+    }
+
+    private fun verifySensitivityLevelMapping(level: Int, expected: Int) {
+        val request = GetValueRequest.Builder("screen", "key").build()
+        val response = PreferenceGetterResponse(
+            emptyMap(),
+            mapOf(PreferenceCoordinate(
+                request.screenKey, request.preferenceKey
+            ) to preferenceProto {
+                key = "key"
+                sensitivityLevel = level
+            }),
+        )
+        val metadata = transformCatalystGetValueResponse(context, request, response)?.metadata!!
+        assertThat(metadata.writeSensitivity).isEqualTo(expected)
+    }
+
+    @Test
     fun transformCatalystGetValueResponse_success_noValue() {
         val fRequest = GetValueRequest.Builder("screen", "key").build()
         val cResult = PreferenceGetterResponse(

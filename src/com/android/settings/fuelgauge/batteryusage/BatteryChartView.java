@@ -377,7 +377,9 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         mTransomTop = resources.getDimensionPixelSize(R.dimen.chartview_transom_padding_top);
         mTransomLineDefaultColor = Utils.getDisabled(mContext, DIVIDER_COLOR);
         mTransomLineSelectedColor =
-                resources.getColor(R.color.color_battery_anomaly_app_warning_selector);
+                resources.getColor(
+                        com.android.settingslib.widget.preference.banner.R.color
+                                .settingslib_banner_button_background_medium);
         final int slotHighlightColor = Utils.getDisabled(mContext, mTransomLineSelectedColor);
         mTransomIconSize = resources.getDimensionPixelSize(R.dimen.chartview_transom_icon_size);
         mTransomLinePaint = new Paint();

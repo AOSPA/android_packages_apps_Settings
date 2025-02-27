@@ -21,6 +21,7 @@ import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssista
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
+import android.bluetooth.BluetoothStatusCodes;
 
 public class AudioStreamsProgressCategoryCallback extends AudioStreamsBroadcastAssistantCallback {
     private final AudioStreamsProgressCategoryController mCategoryController;
@@ -44,6 +45,9 @@ public class AudioStreamsProgressCategoryCallback extends AudioStreamsBroadcastA
 
     @Override
     public void onSearchStartFailed(int reason) {
+        if (reason == BluetoothStatusCodes.ERROR_ALREADY_IN_TARGET_STATE) {
+            return;
+        }
         super.onSearchStartFailed(reason);
         mCategoryController.showToast("Failed to start scanning. Try again.");
         mCategoryController.setScanning(false);
@@ -57,6 +61,9 @@ public class AudioStreamsProgressCategoryCallback extends AudioStreamsBroadcastA
 
     @Override
     public void onSearchStopFailed(int reason) {
+        if (reason == BluetoothStatusCodes.ERROR_ALREADY_IN_TARGET_STATE) {
+            return;
+        }
         super.onSearchStopFailed(reason);
         mCategoryController.showToast("Failed to stop scanning. Try again.");
     }

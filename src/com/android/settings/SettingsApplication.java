@@ -42,6 +42,7 @@ import com.android.settings.flags.Flags;
 import com.android.settings.fuelgauge.BatterySettingsStorage;
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.localepicker.LocaleNotificationDataManager;
+import com.android.settings.metrics.SettingsMetricsLogger;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.FeatureFactoryImpl;
 import com.android.settings.spa.SettingsSpaEnvironment;

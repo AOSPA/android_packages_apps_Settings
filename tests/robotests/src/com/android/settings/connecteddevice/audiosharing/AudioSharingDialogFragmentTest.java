@@ -93,8 +93,14 @@ public class AudioSharingDialogFragmentTest {
     private static final String METADATA_STR =
             "BLUETOOTH:UUID:184F;BN:VGVzdA==;AT:1;AD:00A1A1A1A1A1;BI:1E240;BC:VGVzdENvZGU=;"
                     + "MD:BgNwVGVzdA==;AS:1;PI:A0;NS:1;BS:3;NB:2;SM:BQNUZXN0BARlbmc=;;";
+    private static final String METADATA_STR_NO_PASSWORD =
+            "BLUETOOTH:UUID:184F;BN:SG9ja2V5;AT:0;AD:AABBCC001122;BI:DE51E9;SQ:1;AS:1;PI:FFFF;"
+                    + "NS:1;BS:1;NB:1;;";
     private static final BluetoothLeBroadcastMetadata METADATA =
             BluetoothLeBroadcastMetadataExt.INSTANCE.convertToBroadcastMetadata(METADATA_STR);
+    private static final BluetoothLeBroadcastMetadata METADATA_NO_PASSWORD =
+            BluetoothLeBroadcastMetadataExt.INSTANCE.convertToBroadcastMetadata(
+                    METADATA_STR_NO_PASSWORD);
 
     private Fragment mParent;
     private FakeFeatureFactory mFeatureFactory;
@@ -272,6 +278,50 @@ public class AudioSharingDialogFragmentTest {
                         METADATA.getBroadcastName(), new String(
                                 METADATA.getBroadcastCode(),
                                 StandardCharsets.UTF_8)));
+        TextView textBottom = dialog.findViewById(R.id.description_text_2);
+        assertThat(textBottom).isNotNull();
+        assertThat(textBottom.getText().toString()).isEqualTo(
+                mParent.getString(R.string.audio_sharing_dialog_pair_new_device_content));
+        Button cancelBtn = dialog.findViewById(R.id.negative_btn);
+        assertThat(cancelBtn).isNotNull();
+        cancelBtn.performClick();
+        shadowMainLooper().idle();
+
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        any(Context.class),
+                        eq(SettingsEnums.ACTION_AUDIO_SHARING_DIALOG_NEGATIVE_BTN_CLICKED),
+                        eq(TEST_EVENT_DATA));
+        assertThat(isCancelBtnClicked.get()).isTrue();
+        assertThat(dialog.isShowing()).isFalse();
+    }
+
+    @Test
+    public void onCreateDialog_noExtraConnectedDevice_hasMetadataNoPassword_showCancelButton() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        AtomicBoolean isCancelBtnClicked = new AtomicBoolean(false);
+        AudioSharingDialogFragment.show(
+                mParent,
+                new ArrayList<>(),
+                METADATA_NO_PASSWORD,
+                new AudioSharingDialogFragment.DialogEventListener() {
+                    @Override
+                    public void onCancelClick() {
+                        isCancelBtnClicked.set(true);
+                    }
+                },
+                TEST_EVENT_DATA_LIST);
+        shadowMainLooper().idle();
+        AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(dialog).isNotNull();
+        ImageView image = dialog.findViewById(R.id.description_image);
+        assertThat(image).isNotNull();
+        TextView text = dialog.findViewById(R.id.description_text);
+        assertThat(text).isNotNull();
+        assertThat(METADATA_NO_PASSWORD).isNotNull();
+        assertThat(text.getText().toString()).isEqualTo(
+                mParent.getString(R.string.audio_sharing_dialog_qr_code_content_no_password,
+                        METADATA_NO_PASSWORD.getBroadcastName()));
         TextView textBottom = dialog.findViewById(R.id.description_text_2);
         assertThat(textBottom).isNotNull();
         assertThat(textBottom.getText().toString()).isEqualTo(

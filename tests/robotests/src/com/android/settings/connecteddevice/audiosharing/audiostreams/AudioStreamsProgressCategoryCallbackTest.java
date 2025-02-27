@@ -22,6 +22,7 @@ import static com.android.settingslib.flags.Flags.FLAG_ENABLE_LE_AUDIO_SHARING;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -125,6 +126,15 @@ public class AudioStreamsProgressCategoryCallbackTest {
     }
 
     @Test
+    public void testOnSearchStartFailed_ignoreAlreadyInTargetState() {
+        mCallback.onSearchStartFailed(/* reason= */
+                BluetoothStatusCodes.ERROR_ALREADY_IN_TARGET_STATE);
+
+        verify(mController, never()).showToast(anyString());
+        verify(mController, never()).setScanning(anyBoolean());
+    }
+
+    @Test
     public void testOnSearchStarted() {
         mCallback.onSearchStarted(/* reason= */ 0);
 
@@ -136,6 +146,14 @@ public class AudioStreamsProgressCategoryCallbackTest {
         mCallback.onSearchStopFailed(/* reason= */ 0);
 
         verify(mController).showToast(anyString());
+    }
+
+    @Test
+    public void testOnSearchStopFailed_ignoreAlreadyInTargetState() {
+        mCallback.onSearchStopFailed(/* reason= */
+                BluetoothStatusCodes.ERROR_ALREADY_IN_TARGET_STATE);
+
+        verify(mController, never()).showToast(anyString());
     }
 
     @Test

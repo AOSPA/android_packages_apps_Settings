@@ -47,6 +47,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.location.LocationManager;
+import android.net.EthernetManager;
+import android.net.IpConfiguration;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -72,6 +74,8 @@ import com.android.settings.AirplaneModeEnabler;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.datausage.DataUsagePreference;
+import com.android.settings.network.ethernet.EthernetInterface;
+import com.android.settings.network.ethernet.EthernetTracker;
 import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.wifi.AddWifiNetworkPreference;
@@ -89,6 +93,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
@@ -101,6 +106,7 @@ import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowToast;
 import org.robolectric.util.ReflectionHelpers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
@@ -157,6 +163,12 @@ public class NetworkProviderSettingsTest {
     PreferenceCategory mFirstWifiEntryPreferenceCategory;
     @Mock
     NetworkProviderSettings.WifiRestriction mWifiRestriction;
+    @Mock
+    EthernetManager mEtherentManager;
+    @Mock
+    EthernetTracker mEthernetTracker;
+    @Mock
+    PreferenceCategory mEthernetPreferenceCategory;
 
     private NetworkProviderSettings mNetworkProviderSettings;
 
@@ -178,6 +190,7 @@ public class NetworkProviderSettingsTest {
         doReturn(mWifiManager).when(mContext).getSystemService(WifiManager.class);
         doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
         doReturn(mLocationManager).when(mContext).getSystemService(LocationManager.class);
+        doReturn(mEtherentManager).when(mContext).getSystemService(Context.ETHERNET_SERVICE);
         when(mUserManager.hasBaseUserRestriction(any(), any())).thenReturn(true);
         doReturn(mContext).when(mPreferenceManager).getContext();
         mNetworkProviderSettings.mAddWifiNetworkPreference = new AddWifiNetworkPreference(mContext);
@@ -190,6 +203,7 @@ public class NetworkProviderSettingsTest {
         mNetworkProviderSettings.mAirplaneModeMsgPreference = mAirplaneModeMsgPreference;
         mNetworkProviderSettings.mAirplaneModeEnabler = mAirplaneModeEnabler;
         mNetworkProviderSettings.mInternetUpdater = mInternetUpdater;
+        mNetworkProviderSettings.mEthernetTracker = mEthernetTracker;
         mNetworkProviderSettings.mWifiStatusMessagePreference = new FooterPreference(mContext);
         doReturn(NetworkProviderSettings.PREF_KEY_CONNECTED_ACCESS_POINTS)
                 .when(mConnectedWifiEntryPreferenceCategory).getKey();
@@ -199,6 +213,7 @@ public class NetworkProviderSettingsTest {
                 .when(mFirstWifiEntryPreferenceCategory).getKey();
         mNetworkProviderSettings.mFirstWifiEntryPreferenceCategory =
                 mFirstWifiEntryPreferenceCategory;
+        mNetworkProviderSettings.mEthernetPreferenceCategory = mEthernetPreferenceCategory;
 
         ReflectionHelpers.setField(mNetworkProviderSettings, "mDashboardFeatureProvider",
                 mock(DashboardFeatureProvider.class));
@@ -745,6 +760,8 @@ public class NetworkProviderSettingsTest {
     public void onStop_shouldRemoveCallbacks() {
         View fragmentView = mock(View.class);
         when(mNetworkProviderSettings.getView()).thenReturn(fragmentView);
+        doNothing().when(mEthernetTracker)
+            .unregisterInterfaceListener(any());
 
         mNetworkProviderSettings.onStop();
 
@@ -919,6 +936,57 @@ public class NetworkProviderSettingsTest {
         mNetworkProviderSettings.launchNetworkDetailsFragment(preference);
 
         verify(mContext).startActivity(any());
+    }
+
+    @Test
+    public void updateEthernetInterfaces_withEmptyInterfaces() {
+        doNothing().when(mEthernetPreferenceCategory).removeAll();
+
+        mNetworkProviderSettings.updateEthernetInterfaces(new ArrayList<EthernetInterface>());
+
+        verify(mEthernetPreferenceCategory).removeAll();
+        verify(mEthernetPreferenceCategory).setVisible(false);
+    }
+
+    @Test
+    public void updateEthernetInterfaces_withConnectedInterface() {
+        List<EthernetInterface> interfaces = new ArrayList<>();
+        EthernetInterface ethernetInterface = new EthernetInterface(mContext, "eth0");
+        ethernetInterface.onInterfaceStateChanged(
+                "eth0", EthernetManager.STATE_LINK_UP, 0, new IpConfiguration());
+
+        interfaces.add(ethernetInterface);
+
+        mNetworkProviderSettings.updateEthernetInterfaces(interfaces);
+
+        ArgumentCaptor<Preference> arg = ArgumentCaptor.forClass(Preference.class);
+
+        verify(mEthernetPreferenceCategory).removeAll();
+        verify(mEthernetPreferenceCategory).setVisible(true);
+        verify(mEthernetPreferenceCategory).addPreference(arg.capture());
+
+        Preference pref = arg.getValue();
+        assertThat(pref.getKey()).isEqualTo("eth0");
+        assertThat(pref.getSummary()).isEqualTo("Connected");
+    }
+
+    @Test
+    public void updateEthernetInterfaces_withDisconnectedInterface() {
+        List<EthernetInterface> interfaces = new ArrayList<>();
+        EthernetInterface ethernetInterface = new EthernetInterface(mContext, "eth0");
+        ethernetInterface.onInterfaceStateChanged(
+                "eth0", EthernetManager.STATE_LINK_DOWN, 0, new IpConfiguration());
+
+        interfaces.add(ethernetInterface);
+
+        mNetworkProviderSettings.updateEthernetInterfaces(interfaces);
+
+        ArgumentCaptor<Preference> arg = ArgumentCaptor.forClass(Preference.class);
+
+        verify(mEthernetPreferenceCategory).addPreference(arg.capture());
+
+        Preference pref = arg.getValue();
+        assertThat(pref.getSummary()).isEqualTo("Disconnected");
     }
 
     @Implements(PreferenceFragmentCompat.class)

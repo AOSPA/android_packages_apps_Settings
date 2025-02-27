@@ -234,6 +234,9 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
 
             activity.getSystemService(WifiManager.class).save(config, saveListener);
         } else {
+            if (!mUIController.canFinish()) {
+                return;
+            }
             Intent intent = new Intent();
             intent.putExtra(WIFI_CONFIG_KEY, config);
             activity.setResult(Activity.RESULT_OK, intent);

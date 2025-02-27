@@ -28,13 +28,13 @@ import android.net.wifi.WifiManager
 import android.os.UserManager
 import android.text.BidiFormatter
 import android.util.Log
-import com.android.settings.PreferenceActionMetricsProvider
-import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.contract.KEY_WIFI_HOTSPOT
 import com.android.settings.core.SubSettingLauncher
 import com.android.settings.datausage.DataSaverMainSwitchPreference.Companion.KEY as DATA_SAVER_KEY
+import com.android.settings.metrics.PreferenceActionMetricsProvider
+import com.android.settings.restriction.PreferenceRestrictionMixin
 import com.android.settings.wifi.WifiUtils.canShowWifiHotspot
 import com.android.settings.wifi.utils.tetheringManager
 import com.android.settings.wifi.utils.wifiApState

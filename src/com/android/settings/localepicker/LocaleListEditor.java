@@ -43,9 +43,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -53,10 +54,12 @@ import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
+import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.search.SearchIndexableRaw;
+import com.android.settingslib.utils.CustomDialogHelper;
 import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.LayoutPreference;
 
@@ -69,6 +72,8 @@ import java.util.Locale;
  */
 @SearchIndexable
 public class LocaleListEditor extends RestrictedSettingsFragment implements View.OnTouchListener {
+    public static final int REQUEST_LOCALE_PICKER = 0;
+
     protected static final String INTENT_LOCALE_KEY = "localeInfo";
     protected static final String EXTRA_SYSTEM_LOCALE_DIALOG_TYPE = "system_locale_dialog_type";
     protected static final String EXTRA_RESULT_LOCALE = "result_locale";
@@ -81,16 +86,16 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
     private static final String INDEX_KEY_ADD_LANGUAGE = "add_language";
     private static final String KEY_LANGUAGES_PICKER = "languages_picker";
     private static final String KEY_CATEGORY_TERMS_OF_ADDRESS = "key_category_terms_of_address";
+    private static final String KEY_ADD_A_LANGUAGE = "add_a_language";
     private static final String TAG_DIALOG_CONFIRM_SYSTEM_DEFAULT = "dialog_confirm_system_default";
     private static final String TAG_DIALOG_NOT_AVAILABLE = "dialog_not_available_locale";
     private static final String TAG_DIALOG_ADD_SYSTEM_LOCALE = "dialog_add_system_locale";
     private static final int MENU_ID_REMOVE = Menu.FIRST + 1;
-    private static final int REQUEST_LOCALE_PICKER = 0;
 
     private LocaleDragAndDropAdapter mAdapter;
     private Menu mMenu;
     private View mAddLanguage;
-    private AlertDialog mSuggestionDialog = null;
+    private Preference mAddLanguagePreference;
     private boolean mRemoveMode;
     private boolean mShowingRemoveDialog;
     private boolean mLocaleAdditionMode = false;
@@ -281,7 +286,11 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
     private void setRemoveMode(boolean mRemoveMode) {
         this.mRemoveMode = mRemoveMode;
         mAdapter.setRemoveMode(mRemoveMode);
-        mAddLanguage.setVisibility(mRemoveMode ? View.INVISIBLE : View.VISIBLE);
+        if (Flags.settingsExpressiveDesignEnabled()) {
+            mAddLanguagePreference.setVisible(!mRemoveMode);
+        } else {
+            mAddLanguage.setVisibility(mRemoveMode ? View.INVISIBLE : View.VISIBLE);
+        }
         updateVisibilityOfRemoveMenu();
     }
 
@@ -330,7 +339,6 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
     private void showDialogForAddedLocale() {
         Log.d(TAG, "show confirmation dialog");
         Intent intent = this.getIntent();
-        String dialogType = intent.getStringExtra(EXTRA_SYSTEM_LOCALE_DIALOG_TYPE);
         String appLocaleTag = intent.getStringExtra(EXTRA_APP_LOCALE);
 
         LocaleStore.LocaleInfo localeInfo = LocaleStore.getLocaleInfo(
@@ -342,17 +350,6 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
         args.putSerializable(LocaleDialogFragment.ARG_TARGET_LOCALE, localeInfo);
         localeDialogFragment.setArguments(args);
         localeDialogFragment.show(mFragmentManager, TAG_DIALOG_ADD_SYSTEM_LOCALE);
-    }
-
-    private void customizeLayout(AlertDialog.Builder dialogBuilder, String language) {
-        View dialogView = getLocaleDialogView();
-        dialogBuilder.setView(dialogView);
-        TextView title = dialogView.findViewById(R.id.dialog_title);
-        title.setText(
-                String.format(getContext().getResources().getString(
-                        R.string.title_system_locale_addition), language));
-        TextView message = dialogView.findViewById(R.id.dialog_msg);
-        message.setText(R.string.desc_system_locale_addition);
     }
 
     protected View getLocaleDialogView() {
@@ -374,25 +371,33 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
             return;
         }
 
+        int messagePaddingLeftRight = getContext().getResources().getDimensionPixelSize(
+                R.dimen.locale_picker_dialog_message_padding_left_right);
+        int messagePaddingBottom = getContext().getResources().getDimensionPixelSize(
+                R.dimen.locale_picker_dialog_message_padding_bottom);
         // All locales selected, warning dialog, can't remove them all
         if (checkedCount == mAdapter.getItemCount()) {
             mShowingRemoveDialog = true;
-            new AlertDialog.Builder(getActivity())
-                    .setTitle(R.string.dlg_remove_locales_error_title)
-                    .setMessage(R.string.dlg_remove_locales_error_message)
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    })
-                    .setOnDismissListener(new DialogInterface.OnDismissListener() {
-                        @Override
-                        public void onDismiss(DialogInterface dialog) {
-                            mShowingRemoveDialog = false;
-                        }
-                    })
-                    .create()
-                    .show();
+
+            CustomDialogHelper dialogHelper = createRegionDialog(getContext(),
+                    getContext().getString(R.string.dlg_remove_locales_error_title));
+            dialogHelper.setMessage(R.string.dlg_remove_locales_error_message)
+                    .setMessagePadding(messagePaddingLeftRight, 0, messagePaddingLeftRight,
+                            messagePaddingBottom)
+                    .setPositiveButton(android.R.string.ok,
+                            view -> {
+                                dialogHelper.getDialog().dismiss();
+                            })
+                    .setBackButton(R.string.cancel, view -> {
+                        dialogHelper.getDialog().dismiss();
+                    });
+            dialogHelper.getDialog().setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(@NonNull DialogInterface dialog) {
+                    mShowingRemoveDialog = false;
+                }
+            });
+            dialogHelper.getDialog().show();
             return;
         }
 
@@ -400,54 +405,63 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
                 R.string.dlg_remove_locales_title);
         mShowingRemoveDialog = true;
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        CustomDialogHelper dialogHelper = createRegionDialog(getContext(), title);
         if (mAdapter.isFirstLocaleChecked()) {
-            builder.setMessage(R.string.dlg_remove_locales_message);
+            dialogHelper.setMessage(R.string.dlg_remove_locales_message)
+                    .setMessagePadding(messagePaddingLeftRight, 0, messagePaddingLeftRight,
+                            messagePaddingBottom);
         }
 
-        builder.setTitle(title)
-                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        setRemoveMode(false);
-                    }
-                })
-                .setPositiveButton(R.string.locale_remove_menu,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // This is a sensitive area to change.
-                                // removeChecked() triggers a system update and "kills" the frame.
-                                // This means that saveState + restoreState are called before
-                                // setRemoveMode is called.
-                                // So we want that mRemoveMode and dialog status have the right
-                                // values
-                                // before that save.
-                                // We can't just call setRemoveMode(false) before calling
-                                // removeCheched
-                                // because that unchecks all items and removeChecked would have
-                                // nothing
-                                // to remove.
-                                mRemoveMode = false;
-                                mShowingRemoveDialog = false;
-                                LocaleStore.LocaleInfo firstLocale =
-                                        mAdapter.getFeedItemList().get(0);
-                                mAdapter.removeChecked();
-                                boolean isFirstRemoved =
-                                        firstLocale != mAdapter.getFeedItemList().get(0);
-                                showConfirmDialog(isFirstRemoved, isFirstRemoved ? firstLocale
-                                        : mAdapter.getFeedItemList().get(0));
-                                setRemoveMode(false);
-                            }
+        dialogHelper.setPositiveButton(R.string.locale_remove_menu,
+                        view -> {
+                            // This is a sensitive area to change.
+                            // removeChecked() triggers a system update and "kills" the frame.
+                            // This means that saveState + restoreState are called before
+                            // setRemoveMode is called.
+                            // So we want that mRemoveMode and dialog status have the right
+                            // values
+                            // before that save.
+                            // We can't just call setRemoveMode(false) before calling
+                            // removeCheched
+                            // because that unchecks all items and removeChecked would have
+                            // nothing
+                            // to remove.
+                            mRemoveMode = false;
+                            mShowingRemoveDialog = false;
+                            LocaleStore.LocaleInfo firstLocale =
+                                    mAdapter.getFeedItemList().get(0);
+                            mAdapter.removeChecked();
+                            boolean isFirstRemoved =
+                                    firstLocale != mAdapter.getFeedItemList().get(0);
+                            showConfirmDialog(isFirstRemoved, isFirstRemoved ? firstLocale
+                                    : mAdapter.getFeedItemList().get(0));
+                            setRemoveMode(false);
+                            dialogHelper.getDialog().dismiss();
                         })
-                .setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        mShowingRemoveDialog = false;
-                    }
-                })
-                .create()
-                .show();
+                .setBackButton(R.string.cancel, view -> {
+                    setRemoveMode(false);
+                    dialogHelper.getDialog().dismiss();
+                });
+        dialogHelper.getDialog().setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(@NonNull DialogInterface dialog) {
+                mShowingRemoveDialog = false;
+            }
+        });
+        dialogHelper.getDialog().show();
+    }
+
+    private CustomDialogHelper createRegionDialog(Context context, String title) {
+        CustomDialogHelper dialogHelper = new CustomDialogHelper(context);
+        dialogHelper.setIcon(context.getDrawable(R.drawable.ic_settings_language_32dp))
+                .setTitle(title)
+                .setIconPadding(0, context.getResources().getDimensionPixelSize(
+                        R.dimen.locale_picker_dialog_icon_padding), 0, 0)
+                .setTitlePadding(0, context.getResources().getDimensionPixelSize(
+                                R.dimen.locale_picker_dialog_title_padding), 0,
+                        context.getResources().getDimensionPixelSize(
+                                R.dimen.locale_picker_dialog_title_padding));
+        return dialogHelper;
     }
 
     @Override
@@ -483,20 +497,23 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
         list.setAdapter(mAdapter);
         list.setOnTouchListener(this);
         list.requestFocus();
+        if (Flags.settingsExpressiveDesignEnabled()) {
+            mAddLanguagePreference = getPreferenceScreen().findPreference(KEY_ADD_A_LANGUAGE);
+        } else {
+            mAddLanguage = layout.findViewById(R.id.add_language);
+            mAddLanguage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(@NonNull View v) {
+                    FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
+                            .logSettingsTileClick(INDEX_KEY_ADD_LANGUAGE, getMetricsCategory());
 
-        mAddLanguage = layout.findViewById(R.id.add_language);
-        mAddLanguage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
-                        .logSettingsTileClick(INDEX_KEY_ADD_LANGUAGE, getMetricsCategory());
-
-                final Intent intent = new Intent(getActivity(),
-                        LocalePickerWithRegionActivity.class);
-                intent.putExtras(getActivity().getIntent().getExtras());
-                startActivityForResult(intent, REQUEST_LOCALE_PICKER);
-            }
-        });
+                    final Intent intent = new Intent(getActivity(),
+                            LocalePickerWithRegionActivity.class);
+                    intent.putExtras(getActivity().getIntent().getExtras());
+                    startActivityForResult(intent, REQUEST_LOCALE_PICKER);
+                }
+            });
+        }
     }
 
     @Override

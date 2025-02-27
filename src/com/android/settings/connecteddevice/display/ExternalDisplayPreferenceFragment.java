@@ -59,6 +59,7 @@ import com.android.settingslib.widget.TwoTargetPreference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * The Settings screen for External Displays configuration and connection management.
@@ -84,8 +85,6 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         // Built-in display link is after per-display settings.
         BUILTIN_DISPLAY_LIST(70, "builtin_display_list_preference",
                 R.string.builtin_display_settings_category),
-
-        DISPLAYS_LIST(80, "displays_list_preference", null),
 
         // If shown, footer should appear below everything.
         FOOTER(90, "footer_preference", null);
@@ -334,15 +333,6 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     }
 
     @NonNull
-    private PreferenceCategory getDisplaysListPreference(@NonNull Context context) {
-        if (mDisplaysPreference == null) {
-            mDisplaysPreference = new PreferenceCategory(context);
-            PrefBasics.DISPLAYS_LIST.apply(mDisplaysPreference);
-        }
-        return mDisplaysPreference;
-    }
-
-    @NonNull
     private PreferenceCategory getBuiltinDisplayListPreference(@NonNull Context context) {
         if (mBuiltinDisplayPreference == null) {
             mBuiltinDisplayPreference = new PreferenceCategory(context);
@@ -455,6 +445,26 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
                 EXTERNAL_DISPLAY_NOT_FOUND_FOOTER_RESOURCE));
     }
 
+    private static PreferenceCategory getCategoryForDisplay(@NonNull Display display,
+            @NonNull PrefRefresh screen, @NonNull Context context) {
+        // The rest of the settings are in a category with the display name as the title.
+        String categoryKey = "expanded_display_items_" + display.getDisplayId();
+        var category = (PreferenceCategory) screen.findUnusedPreference(categoryKey);
+
+        if (category != null) {
+            screen.addPreference(category);
+        } else {
+            category = new PreferenceCategory(context);
+            screen.addPreference(category);
+            category.setPersistent(false);
+            category.setKey(categoryKey);
+            category.setTitle(display.getName());
+            category.setOrder(PrefBasics.BUILTIN_DISPLAY_LIST.order + 1);
+        }
+
+        return category;
+    }
+
     private void showDisplaySettings(@NonNull Display display, @NonNull PrefRefresh screen,
             @NonNull Context context) {
         final var isEnabled = mInjector != null && mInjector.isDisplayEnabled(display);
@@ -469,8 +479,18 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         if (!isTopologyPaneEnabled(mInjector)) {
             screen.addPreference(updateIllustrationImage(context, displayRotation));
         }
-        screen.addPreference(updateResolutionPreference(context, display));
-        screen.addPreference(updateRotationPreference(context, display, displayRotation));
+
+        Consumer<Preference> adder;
+        if (isTopologyPaneEnabled(mInjector)) {
+            adder = getCategoryForDisplay(display, screen, context)::addPreference;
+            // The category may have already been populated if it was retrieved from the PrefRefresh
+            // backup, but we still need to update resolution and rotation items.
+        } else {
+            adder = screen::addPreference;
+        }
+
+        adder.accept(updateResolutionPreference(context, display));
+        adder.accept(updateRotationPreference(context, display, displayRotation));
         if (isResolutionSettingEnabled(mInjector)) {
             // Do not show the footer about changing resolution affecting apps. This is not in the
             // UX design for v2, and there is no good place to put it, since (a) if it is on the
@@ -483,12 +503,12 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             // TODO(b/352648432): probably remove footer once the pane and rest of v2 UI is in
             // place.
             if (!isTopologyPaneEnabled(mInjector)) {
-                screen.addPreference(updateFooterPreference(context,
+                adder.accept(updateFooterPreference(context,
                         EXTERNAL_DISPLAY_CHANGE_RESOLUTION_FOOTER_RESOURCE));
             }
         }
         if (isDisplaySizeSettingEnabled(mInjector)) {
-            screen.addPreference(updateSizePreference(context));
+            adder.accept(updateSizePreference(context));
         }
     }
 
@@ -508,23 +528,28 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     private void showDisplaysList(@NonNull List<Display> displaysToShow,
                                   @NonNull PrefRefresh screen, @NonNull Context context) {
         maybeAddV2Components(context, screen);
-        var displayGroupPref = getDisplaysListPreference(context);
-        if (!displaysToShow.isEmpty()) {
-            screen.addPreference(displayGroupPref);
-        }
-        try (var groupCleanable = new PrefRefresh(displayGroupPref)) {
-            for (var display : displaysToShow) {
-                var pref = getDisplayPreference(context, display, groupCleanable);
-                pref.setSummary(display.getMode().getPhysicalWidth() + " x "
-                                   + display.getMode().getPhysicalHeight());
-            }
+        int order = PrefBasics.BUILTIN_DISPLAY_LIST.order;
+        for (var display : displaysToShow) {
+            var pref = getDisplayPreference(context, display, screen, ++order);
+            pref.setSummary(display.getMode().getPhysicalWidth() + " x "
+                               + display.getMode().getPhysicalHeight());
         }
     }
 
+    @VisibleForTesting
+    static String displayListDisplayCategoryKey(int displayId) {
+        return "display_list_display_category_" + displayId;
+    }
+
+    @VisibleForTesting
+    static String resolutionRotationPreferenceKey(int displayId) {
+        return "display_id_" + displayId;
+    }
+
     private Preference getDisplayPreference(@NonNull Context context,
-            @NonNull Display display, @NonNull PrefRefresh groupCleanable) {
-        var itemKey = "display_id_" + display.getDisplayId();
-        var categoryKey = itemKey + "_category";
+            @NonNull Display display, @NonNull PrefRefresh groupCleanable, int categoryOrder) {
+        var itemKey = resolutionRotationPreferenceKey(display.getDisplayId());
+        var categoryKey = displayListDisplayCategoryKey(display.getDisplayId());
         var category = (PreferenceCategory) groupCleanable.findUnusedPreference(categoryKey);
 
         if (category != null) {
@@ -534,6 +559,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             category = new PreferenceCategory(context);
             category.setPersistent(false);
             category.setKey(categoryKey);
+            category.setOrder(categoryOrder);
             // Must add the category to the hierarchy before adding its descendants. Otherwise
             // the category will not have a preference manager, which causes an exception when a
             // child is added to it.

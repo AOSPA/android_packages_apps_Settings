@@ -17,7 +17,6 @@
 package com.android.settings.restriction
 
 import android.content.Context
-import com.android.settings.PreferenceRestrictionMixin
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.metadata.PreferenceChangeReason

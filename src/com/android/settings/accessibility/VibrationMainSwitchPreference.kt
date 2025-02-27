@@ -22,9 +22,9 @@ import android.os.Vibrator
 import android.provider.Settings
 import android.widget.CompoundButton
 import android.widget.CompoundButton.OnCheckedChangeListener
-import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.R
 import com.android.settings.contract.KEY_VIBRATION_HAPTICS
+import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObservableDelegate
 import com.android.settingslib.datastore.SettingsStore

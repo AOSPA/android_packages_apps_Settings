@@ -22,7 +22,6 @@ import android.telephony.SubscriptionManager
 import android.telephony.SubscriptionManager.OnSubscriptionsChangedListener
 import androidx.preference.Preference
 import androidx.preference.Preference.OnPreferenceClickListener
-import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settings.network.AirplaneModePreference.Companion.isAirplaneModeOn
@@ -30,6 +29,7 @@ import com.android.settings.network.SubscriptionUtil.getUniqueSubscriptionDispla
 import com.android.settings.network.telephony.SimRepository
 import com.android.settings.network.telephony.SubscriptionRepository
 import com.android.settings.network.telephony.euicc.EuiccRepository
+import com.android.settings.restriction.PreferenceRestrictionMixin
 import com.android.settings.spa.network.getAddSimIntent
 import com.android.settings.spa.network.startAddSimFlow
 import com.android.settingslib.RestrictedPreference

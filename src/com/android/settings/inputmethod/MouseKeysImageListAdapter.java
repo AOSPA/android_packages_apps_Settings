@@ -77,6 +77,9 @@ public class MouseKeysImageListAdapter extends
 
     @Override
     public void onBindViewHolder(@NonNull MouseKeyImageViewHolder holder, int position) {
+        if (mComposedSummaryList.isEmpty()) {
+            return;
+        }
         ((MouseKeyImageViewHolder) holder).bindView(DRAWABLE_LIST.get(position),
                 mComposedSummaryList.get(position));
     }

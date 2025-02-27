@@ -155,6 +155,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final boolean isExpressiveStyle = BiometricUtils.isExpressiveStyle(getBaseContext());
 
         if (shouldShowSplitScreenDialog()) {
             BiometricsSplitScreenDialog
@@ -213,28 +214,33 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         mFooterBarMixin = layout.getMixin(FooterBarMixin.class);
         mFooterBarMixin.setPrimaryButton(getPrimaryFooterButton());
         mFooterBarMixin.setSecondaryButton(getSecondaryFooterButton(), true /* usePrimaryStyle */);
-        mFooterBarMixin.getSecondaryButton().setVisibility(
-                mHasScrolledToBottom ? View.VISIBLE : View.INVISIBLE);
+        if (!isExpressiveStyle) {
+            mFooterBarMixin.getSecondaryButton().setVisibility(
+                    mHasScrolledToBottom ? View.VISIBLE : View.INVISIBLE);
+        }
 
         final RequireScrollMixin requireScrollMixin = layout.getMixin(RequireScrollMixin.class);
         requireScrollMixin.requireScrollWithButton(this, getPrimaryFooterButton(),
                 getMoreButtonTextRes(), this::onNextButtonClick);
-        requireScrollMixin.setOnRequireScrollStateChangedListener(
-                scrollNeeded -> {
-                    boolean enrollmentCompleted = checkMaxEnrolled() != 0;
-                    if (!enrollmentCompleted) {
-                        // Update text of primary button from "More" to "Agree".
-                        final int primaryButtonTextRes = scrollNeeded
-                                ? getMoreButtonTextRes()
-                                : getAgreeButtonTextRes();
-                        getPrimaryFooterButton().setText(this, primaryButtonTextRes);
-                    }
+        if (!isExpressiveStyle) {
+            requireScrollMixin.setOnRequireScrollStateChangedListener(
+                    scrollNeeded -> {
+                        boolean enrollmentCompleted = checkMaxEnrolled() != 0;
+                        if (!enrollmentCompleted) {
+                            // Update text of primary button from "More" to "Agree".
+                            final int primaryButtonTextRes = scrollNeeded
+                                    ? getMoreButtonTextRes()
+                                    : getAgreeButtonTextRes();
+                            getPrimaryFooterButton().setText(this, primaryButtonTextRes);
+                        }
 
-                    // Show secondary button once scroll is completed.
-                    getSecondaryFooterButton().setVisibility(
-                            !scrollNeeded && !enrollmentCompleted ? View.VISIBLE : View.INVISIBLE);
-                    mHasScrolledToBottom = !scrollNeeded;
-                });
+                        // Show secondary button once scroll is completed.
+                        getSecondaryFooterButton().setVisibility(
+                                !scrollNeeded && !enrollmentCompleted ? View.VISIBLE
+                                        : View.INVISIBLE);
+                        mHasScrolledToBottom = !scrollNeeded;
+                    });
+        }
 
         final boolean isScrollNeeded = requireScrollMixin.isScrollingRequired();
         final boolean enrollmentCompleted = checkMaxEnrolled() != 0;

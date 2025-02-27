@@ -19,6 +19,7 @@ package com.android.settings.connecteddevice.audiosharing.audiostreams;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamMediaService.BROADCAST_ID;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamMediaService.BROADCAST_TITLE;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamMediaService.DEVICES;
+import static com.android.settingslib.accessibility.AccessibilityUtils.setAccessibilityServiceState;
 import static com.android.settingslib.bluetooth.BluetoothUtils.isAudioSharingHysteresisModeFixAvailable;
 import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant.LocalBluetoothLeBroadcastSourceState;
 import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant.LocalBluetoothLeBroadcastSourceState.DECRYPTION_FAILED;
@@ -30,15 +31,18 @@ import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
 import static java.util.stream.Collectors.toMap;
 
+import android.accessibilityservice.AccessibilityServiceInfo;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeAudioContentMetadata;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.util.Log;
 import android.util.Pair;
+import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentActivity;
@@ -56,9 +60,12 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.common.base.Strings;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -397,6 +404,57 @@ public class AudioStreamsHelper {
                                 == Configuration.ORIENTATION_PORTRAIT;
                 appBarLayout.setExpanded(canAppBarExpand);
             }
+        }
+    }
+
+    /**
+     * Retrieves a set of enabled screen reader services that are pre-installed.
+     *
+     * <p>This method checks the accessibility manager for enabled accessibility services
+     * and filters them based on a list of pre-installed screen reader service component names
+     * defined in the {@code config_preinstalled_screen_reader_services} resource array.</p>
+     *
+     * @param context The context.
+     * @return A set of {@link ComponentName} objects representing the enabled pre-installed
+     * screen reader services, or an empty set if no services are found, or if an error occurs.
+     */
+    public static Set<ComponentName> getEnabledScreenReaderServices(Context context) {
+        AccessibilityManager manager = context.getSystemService(AccessibilityManager.class);
+        if (manager == null) {
+            return Collections.emptySet();
+        }
+        Set<String> screenReaderServices = new HashSet<>();
+        Collections.addAll(screenReaderServices, context.getResources()
+                .getStringArray(R.array.config_preinstalled_screen_reader_services));
+        if (screenReaderServices.isEmpty()) {
+            return Collections.emptySet();
+        }
+        Set<ComponentName> enabledScreenReaderServices = new HashSet<>();
+        List<AccessibilityServiceInfo> enabledServices = manager.getEnabledAccessibilityServiceList(
+                AccessibilityServiceInfo.FEEDBACK_ALL_MASK);
+        for (AccessibilityServiceInfo service : enabledServices) {
+            ComponentName componentName = service.getComponentName();
+            if (screenReaderServices.contains(componentName.flattenToString())) {
+                enabledScreenReaderServices.add(componentName);
+            }
+        }
+        Log.d(TAG, "getEnabledScreenReaderServices(): " + enabledScreenReaderServices);
+        return enabledScreenReaderServices;
+    }
+
+    /**
+     * Turns off the specified accessibility services.
+     *
+     * This method iterates through a set of ComponentName objects, each representing an
+     * accessibility service, and disables them.
+     *
+     * @param context The application context.
+     * @param services A set of ComponentName objects representing the services to disable.
+     */
+    public static void setAccessibilityServiceOff(Context context, Set<ComponentName> services) {
+        for (ComponentName service : services) {
+            Log.d(TAG, "setScreenReaderOff(): " + service);
+            setAccessibilityServiceState(context, service, false);
         }
     }
 }

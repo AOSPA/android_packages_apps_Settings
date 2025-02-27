@@ -24,9 +24,9 @@ import com.android.internal.display.RefreshRateSettingsUtils.DEFAULT_REFRESH_RAT
 import com.android.internal.display.RefreshRateSettingsUtils.findHighestRefreshRateAmongAllDisplays
 import com.android.internal.display.RefreshRateSettingsUtils.findHighestRefreshRateForDefaultDisplay
 import com.android.server.display.feature.flags.Flags
-import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.R
 import com.android.settings.contract.KEY_SMOOTH_DISPLAY
+import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObservableDelegate

@@ -18,9 +18,9 @@ package com.android.settings.datausage
 
 import android.app.settings.SettingsEnums.ACTION_DATA_SAVER_MODE
 import android.content.Context
-import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.R
 import com.android.settings.contract.KEY_DATA_SAVER
+import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settings.widget.MainSwitchBarMetadata
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.KeyValueStore

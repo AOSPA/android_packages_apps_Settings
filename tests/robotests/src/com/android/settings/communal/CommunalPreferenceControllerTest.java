@@ -17,6 +17,7 @@
 package com.android.settings.communal;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.systemui.Flags.FLAG_GLANCEABLE_HUB_V2;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -34,7 +35,6 @@ import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 
 import com.android.settings.R;
-import com.android.settings.flags.Flags;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 
@@ -87,7 +87,7 @@ public class CommunalPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_HUB_MODE_SETTINGS_ON_MOBILE)
+    @EnableFlags(FLAG_GLANCEABLE_HUB_V2)
     public void isAvailable_communalOnMobileEnabled_shouldBeTrueForPrimaryUser() {
         setCommunalEnabled(false);
         setCommunalOnMobileEnabled(true);
@@ -96,7 +96,7 @@ public class CommunalPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_HUB_MODE_SETTINGS_ON_MOBILE)
+    @EnableFlags(FLAG_GLANCEABLE_HUB_V2)
     public void isAvailable_communalOnMobileEnabled_shouldBeFalseForSecondaryUser() {
         setCommunalEnabled(false);
         setCommunalOnMobileEnabled(true);
@@ -105,7 +105,7 @@ public class CommunalPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_HUB_MODE_SETTINGS_ON_MOBILE)
+    @EnableFlags(FLAG_GLANCEABLE_HUB_V2)
     public void isAvailable_communalOnMobileDisabled_shouldBeFalseForPrimaryUser() {
         setCommunalEnabled(false);
         setCommunalOnMobileEnabled(false);
@@ -114,8 +114,8 @@ public class CommunalPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ENABLE_HUB_MODE_SETTINGS_ON_MOBILE)
-    public void isAvailable_hubModeSettingsOnMobileFlagDisabled_shouldBeFalseForPrimaryUser() {
+    @DisableFlags(FLAG_GLANCEABLE_HUB_V2)
+    public void isAvailable_glanceableHubV2FlagDisabled_shouldBeFalseForPrimaryUser() {
         setCommunalEnabled(false);
         setCommunalOnMobileEnabled(true);
         mShadowUserManager.setUserForeground(true);

@@ -51,8 +51,8 @@ import androidx.test.filters.MediumTest;
 import com.android.internal.widget.LockPatternChecker;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockscreenCredential;
-import com.android.settings.biometrics.face.FaceEnrollIntroduction;
-import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroduction;
+import com.android.settings.biometrics.face.FaceEnroll;
+import com.android.settings.biometrics.fingerprint.FingerprintEnroll;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPassword;
@@ -157,8 +157,8 @@ public class BiometricEnrollActivityTest {
         try (ActivityScenario<BiometricEnrollActivity> scenario =
                      ActivityScenario.launch(intent)) {
             intended(hasComponent(mHasFace && !mHasFingerprint
-                    ? FaceEnrollIntroduction.class.getName()
-                    : FingerprintEnrollIntroduction.class.getName()));
+                    ? FaceEnroll.class.getName()
+                    : FingerprintEnroll.class.getName()));
         }
     }
 

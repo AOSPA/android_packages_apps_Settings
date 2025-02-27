@@ -30,7 +30,7 @@ import org.junit.runner.RunWith
 import org.mockito.kotlin.mock
 
 @RunWith(AndroidJUnit4::class)
-class EthernetInterfaceTrackerTest {
+class EthernetTrackerImplTest {
     private val mockEthernetManager = mock<EthernetManager>()
 
     private val context: Context =
@@ -42,38 +42,38 @@ class EthernetInterfaceTrackerTest {
                 }
         }
 
-    private val ethernetInterfaceTracker = EthernetInterfaceTracker(context)
+    private val ethernetTrackerImpl = EthernetTrackerImpl.getInstance(context)
 
     @Test
     fun getInterface_shouldReturnEmpty() {
-        assertNull(ethernetInterfaceTracker.getInterface("id0"))
+        assertNull(ethernetTrackerImpl.getInterface("id0"))
     }
 
     @Test
     fun getAvailableInterfaces_shouldReturnEmpty() {
-        assertEquals(ethernetInterfaceTracker.getAvailableInterfaces().size, 0)
+        assertEquals(ethernetTrackerImpl.availableInterfaces.size, 0)
     }
 
     @Test
     fun interfacesChanged_shouldUpdateInterfaces() {
-        ethernetInterfaceTracker.onInterfaceStateChanged(
+        ethernetTrackerImpl.onInterfaceStateChanged(
             "id0",
             EthernetManager.STATE_LINK_DOWN,
             EthernetManager.ROLE_NONE,
             IpConfiguration(),
         )
 
-        assertNotNull(ethernetInterfaceTracker.getInterface("id0"))
-        assertEquals(ethernetInterfaceTracker.getAvailableInterfaces().size, 1)
+        assertNotNull(ethernetTrackerImpl.getInterface("id0"))
+        assertEquals(ethernetTrackerImpl.availableInterfaces.size, 1)
 
-        ethernetInterfaceTracker.onInterfaceStateChanged(
+        ethernetTrackerImpl.onInterfaceStateChanged(
             "id0",
             EthernetManager.STATE_ABSENT,
             EthernetManager.ROLE_NONE,
             IpConfiguration(),
         )
 
-        assertNull(ethernetInterfaceTracker.getInterface("id0"))
-        assertEquals(ethernetInterfaceTracker.getAvailableInterfaces().size, 0)
+        assertNull(ethernetTrackerImpl.getInterface("id0"))
+        assertEquals(ethernetTrackerImpl.availableInterfaces.size, 0)
     }
 }

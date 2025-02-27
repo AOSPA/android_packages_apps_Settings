@@ -30,13 +30,13 @@ import android.provider.Settings
 import android.widget.Toast
 import androidx.preference.Preference
 import androidx.preference.Preference.OnPreferenceChangeListener
-import com.android.settings.PreferenceActionMetricsProvider
-import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
 import com.android.settings.contract.KEY_WIFI
+import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settings.network.SatelliteRepository.Companion.isSatelliteOn
 import com.android.settings.network.SatelliteWarningDialogActivity
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
+import com.android.settings.restriction.PreferenceRestrictionMixin
 import com.android.settings.wifi.utils.isDefaultNetworkWifi
 import com.android.settings.wifi.utils.isWifiEnabled
 import com.android.settings.wifi.utils.wifiManager

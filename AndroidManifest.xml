@@ -5615,10 +5615,14 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
         </service>
 
         <receiver android:name="com.android.settings.connecteddevice.audiosharing.AudioSharingReceiver"
-            android:exported="true">
+            android:permission="android.permission.BLUETOOTH_PRIVILEGED"
+            android:exported="true"> <!-- Exported for SystemUI. -->
             <intent-filter>
                 <action android:name="com.android.settings.action.BLUETOOTH_LE_AUDIO_SHARING_STATE_CHANGE" />
                 <action android:name="com.android.settings.action.BLUETOOTH_LE_AUDIO_SHARING_STOP" />
+                <action android:name="com.android.settings.action.BLUETOOTH_LE_AUDIO_SHARING_DEVICE_CONNECTED" />
+                <action android:name="com.android.settings.action.BLUETOOTH_LE_AUDIO_SHARING_ADD_SOURCE" />
+                <action android:name="com.android.settings.action.BLUETOOTH_LE_AUDIO_SHARING_CANCEL_NOTIF" />
             </intent-filter>
         </receiver>
 

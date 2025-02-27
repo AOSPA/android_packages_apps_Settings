@@ -23,11 +23,11 @@ import android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC
 import android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
-import com.android.settings.PreferenceActionMetricsProvider
-import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
 import com.android.settings.contract.KEY_ADAPTIVE_BRIGHTNESS
 import com.android.settings.flags.Flags
+import com.android.settings.metrics.PreferenceActionMetricsProvider
+import com.android.settings.restriction.PreferenceRestrictionMixin
 import com.android.settingslib.PrimarySwitchPreferenceBinding
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.HandlerExecutor

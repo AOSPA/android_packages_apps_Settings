@@ -90,7 +90,18 @@
 
     </PreferenceCategory>
 
-    <!-- An optional preference category for feedback. Only displayed up if enabled via flags and config. -->
+    <PreferenceCategory
+        android:key="time_format_preference_category"
+        android:title="@string/time_format_category_title"
+        settings:keywords="@string/keywords_time_format">
+
+        <SwitchPreferenceCompat
+            android:key="24 hour"
+            android:title="@string/date_time_24hour"
+            settings:controller="com.android.settings.datetime.TimeFormatPreferenceController" />
+    </PreferenceCategory>
+
+    <!-- An optional preference category for feedback. Only displayed up if enabled via flags and config. Always put time feedback at the end. -->
     <PreferenceCategory
         android:key="time_feedback_preference_category"
         android:title="@string/time_feedback_category_title"
@@ -102,18 +113,6 @@
             android:title="@string/time_feedback_title"
             settings:controller="com.android.settings.datetime.TimeFeedbackPreferenceController"
             settings:keywords="@string/keywords_time_feedback" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="time_format_preference_category"
-        android:title="@string/time_format_category_title"
-        settings:keywords="@string/keywords_time_format">
-
-        <SwitchPreferenceCompat
-            android:key="24 hour"
-            android:title="@string/date_time_24hour"
-            settings:controller="com.android.settings.datetime.TimeFormatPreferenceController" />
     </PreferenceCategory>
 
 </PreferenceScreen>

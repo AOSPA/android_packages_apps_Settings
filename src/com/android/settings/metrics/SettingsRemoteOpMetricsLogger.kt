@@ -18,7 +18,6 @@ package com.android.settings.metrics
 
 import android.app.settings.SettingsEnums
 import android.content.Context
-import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.core.instrumentation.SettingsStatsLog
 import com.android.settingslib.graph.PreferenceGetterErrorCode
 import com.android.settingslib.graph.PreferenceSetterResult

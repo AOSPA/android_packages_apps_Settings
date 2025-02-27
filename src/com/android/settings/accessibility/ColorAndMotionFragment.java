@@ -68,9 +68,6 @@ public class ColorAndMotionFragment extends DashboardFragment {
 
         mShortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED);
         mShortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED);
-        mShortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
-        mShortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
-        mShortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_QS_TARGETS);
 
         mSettingsContentObserver = new AccessibilitySettingsContentObserver(new Handler());
         mSettingsContentObserver.registerKeysToObserverCallback(mShortcutFeatureKeys,

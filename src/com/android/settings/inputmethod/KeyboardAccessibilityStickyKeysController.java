@@ -61,13 +61,6 @@ public class KeyboardAccessibilityStickyKeysController extends
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        return (super.getAvailabilityStatus() == AVAILABLE)
-                && InputSettings.isAccessibilitySlowKeysFeatureFlagEnabled() ? AVAILABLE
-                : UNSUPPORTED_ON_DEVICE;
-    }
-
-    @Override
     protected void onInputSettingUpdated() {
         if (mTwoStatePreference != null) {
             mTwoStatePreference.setChecked(

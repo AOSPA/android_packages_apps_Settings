@@ -35,6 +35,7 @@ import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.app.LocaleStore;
+import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.ResourcesUtils;
 
@@ -82,11 +83,9 @@ public class LocaleDialogFragmentTest {
         LocaleDialogFragment.LocaleDialogController.DialogContent dialogContent =
                 controller.getDialogContent();
 
-        assertEquals(ResourcesUtils.getResourcesString(
-                        mContext, "button_label_confirmation_of_system_locale_change"),
+        assertEquals(R.string.button_label_confirmation_of_system_locale_change,
                 dialogContent.mPositiveButton);
-        assertEquals(ResourcesUtils.getResourcesString(mContext, "cancel"),
-                dialogContent.mNegativeButton);
+        assertEquals(R.string.cancel, dialogContent.mNegativeButton);
     }
 
     @Test
@@ -99,9 +98,8 @@ public class LocaleDialogFragmentTest {
         LocaleDialogFragment.LocaleDialogController.DialogContent dialogContent =
                 controller.getDialogContent();
 
-        assertEquals(ResourcesUtils.getResourcesString(mContext, "okay"),
-                dialogContent.mPositiveButton);
-        assertTrue(dialogContent.mNegativeButton.isEmpty());
+        assertEquals(R.string.okay, dialogContent.mPositiveButton);
+        assertTrue(dialogContent.mNegativeButton == 0);
     }
 
     @Test

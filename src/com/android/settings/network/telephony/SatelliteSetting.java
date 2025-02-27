@@ -19,11 +19,14 @@ package com.android.settings.network.telephony;
 import static android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC;
 import static android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL;
 import static android.telephony.CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT;
+import static android.telephony.CarrierConfigManager.KEY_EMERGENCY_MESSAGING_SUPPORTED_BOOL;
 import static android.telephony.CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL;
+import static android.telephony.CarrierConfigManager.KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL;
 import static android.telephony.CarrierConfigManager.KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING;
 
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -47,7 +50,6 @@ import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
-import com.android.internal.telephony.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settingslib.HelpUtils;
@@ -91,16 +93,14 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        use(SatelliteAppListCategoryController.class).init();
+    }
+
+    @Override
     public void onCreate(@NonNull Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // In case carrier roaming satellite is not supported, do nothing.
-        if (!Flags.carrierEnabledSatelliteFlag()) {
-            Log.d(TAG, "SatelliteSettings: satellite feature is not supported, do nothing.");
-            finish();
-            return;
-        }
-
         mActivity = getActivity();
 
         mSatelliteManager = mActivity.getSystemService(SatelliteManager.class);
@@ -165,8 +165,14 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
     }
 
     private void updateMobilePlan(boolean isSatelliteEligible) {
-        // Your mobile plan
         PreferenceCategory prefCategory = findPreference(PREF_KEY_CATEGORY_YOUR_SATELLITE_PLAN);
+        if (prefCategory == null || !mConfigBundle.getBoolean(
+                KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL)) {
+            prefCategory.setVisible(false);
+            return;
+        }
+
+        // Your mobile plan
         prefCategory.setTitle(getResources().getString(R.string.category_title_your_satellite_plan,
                 mSimOperatorName));
         Preference messagingPreference = findPreference(PREF_KEY_YOUR_SATELLITE_PLAN);
@@ -227,9 +233,11 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
         // More about satellite messaging
         FooterPreference footerPreference = findPreference(KEY_FOOTER_PREFERENCE);
         if (footerPreference != null) {
-            footerPreference.setSummary(
-                    getResources().getString(R.string.satellite_setting_summary_more_information,
-                            getSubjectString(), mSimOperatorName));
+            int summary = mConfigBundle.getBoolean(KEY_EMERGENCY_MESSAGING_SUPPORTED_BOOL)
+                    ? R.string.satellite_setting_summary_more_information
+                    : R.string.satellite_setting_summary_more_information_no_emergency_messaging;
+            footerPreference.setSummary(getResources().getString(summary,
+                    getSubjectString(), mSimOperatorName));
 
             final String[] link = new String[1];
             link[0] = readSatelliteMoreInfoString();
@@ -273,7 +281,9 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
             bundle = carrierConfigManager.getConfigForSubId(subId,
                     KEY_SATELLITE_ATTACH_SUPPORTED_BOOL,
                     KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING,
-                    KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT);
+                    KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                    KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL,
+                    KEY_EMERGENCY_MESSAGING_SUPPORTED_BOOL);
             if (bundle.isEmpty()) {
                 Log.d(TAG, "SatelliteSettings: getDefaultConfig");
                 bundle = CarrierConfigManager.getDefaultConfig();

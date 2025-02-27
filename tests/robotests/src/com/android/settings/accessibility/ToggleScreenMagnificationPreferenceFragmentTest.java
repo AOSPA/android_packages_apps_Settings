@@ -64,6 +64,8 @@ import com.android.server.accessibility.Flags;
 import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums;
+import com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode;
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 import com.android.settings.testutils.shadow.ShadowStorageManager;
@@ -550,7 +552,8 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         ToggleScreenMagnificationPreferenceFragment fragment = mFragController.create(
                 R.id.main_content, /* bundle= */ null).start().resume().get();
 
-        DialogCreatable dialogDelegate = ReflectionHelpers.getField(fragment, "mDialogDelegate");
+        DialogCreatable dialogDelegate = ReflectionHelpers.getField(fragment,
+                "mMagnificationModeDialogDelegate");
         List<LifecycleObserver> lifecycleObservers = ReflectionHelpers.getField(
                 fragment.getSettingsLifecycle(), "mObservers");
         assertThat(dialogDelegate).isInstanceOf(MagnificationModePreferenceController.class);
@@ -592,19 +595,19 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     }
 
     @Test
-    public void onCreateDialog_setDialogDelegate_invokeDialogDelegate() {
+    public void onCreateDialog_setMagnificationModeDialogDelegate_invokeDialogDelegate() {
         ToggleScreenMagnificationPreferenceFragment fragment =
                 mFragController.create(
                         R.id.main_content, /* bundle= */ null).start().resume().get();
         final DialogCreatable dialogDelegate = mock(DialogCreatable.class, RETURNS_DEEP_STUBS);
-        when(dialogDelegate.getDialogMetricsCategory(anyInt())).thenReturn(1);
-        fragment.setDialogDelegate(dialogDelegate);
+        final int dialogId = DialogEnums.DIALOG_MAGNIFICATION_MODE;
+        when(dialogDelegate.getDialogMetricsCategory(anyInt())).thenReturn(dialogId);
+        fragment.setMagnificationModeDialogDelegate(dialogDelegate);
 
-        fragment.onCreateDialog(1);
-        fragment.getDialogMetricsCategory(1);
-
-        verify(dialogDelegate).onCreateDialog(1);
-        verify(dialogDelegate).getDialogMetricsCategory(1);
+        fragment.onCreateDialog(dialogId);
+        fragment.getDialogMetricsCategory(dialogId);
+        verify(dialogDelegate).onCreateDialog(dialogId);
+        verify(dialogDelegate).getDialogMetricsCategory(dialogId);
     }
 
     @Test

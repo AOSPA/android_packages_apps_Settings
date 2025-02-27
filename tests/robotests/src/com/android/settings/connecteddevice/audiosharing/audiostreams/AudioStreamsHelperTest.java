@@ -36,22 +36,28 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.accessibilityservice.AccessibilityServiceInfo;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.bluetooth.BluetoothStatusCodes;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.UserHandle;
 import android.platform.test.flag.junit.SetFlagsRule;
+import android.view.accessibility.AccessibilityManager;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.testutils.shadow.ShadowAccessibilityManager;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowThreadUtils;
+import com.android.settingslib.accessibility.AccessibilityUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
@@ -75,11 +81,14 @@ import org.robolectric.shadow.api.Shadow;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(
         shadows = {
+                ShadowAccessibilityManager.class,
             ShadowThreadUtils.class,
             ShadowBluetoothAdapter.class,
         })
@@ -100,11 +109,17 @@ public class AudioStreamsHelperTest {
     @Mock private CachedBluetoothDevice mCachedDevice;
     @Mock private BluetoothDevice mDevice;
     @Mock private BluetoothDevice mSourceDevice;
+    @Mock
+    private AccessibilityServiceInfo mTalkbackServiceInfo;
+    private ShadowAccessibilityManager mShadowAccessibilityManager;
     private AudioStreamsHelper mHelper;
 
     @Before
     public void setUp() {
         mSetFlagsRule.disableFlags(FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
+        mShadowAccessibilityManager = Shadow.extract(
+                mContext.getSystemService(AccessibilityManager.class));
+        mShadowAccessibilityManager.setEnabledAccessibilityServiceList(new ArrayList<>());
         ShadowBluetoothAdapter shadowBluetoothAdapter = Shadow.extract(
                 BluetoothAdapter.getDefaultAdapter());
         shadowBluetoothAdapter.setEnabled(true);
@@ -346,6 +361,54 @@ public class AudioStreamsHelperTest {
         AudioStreamsHelper.configureAppBarByOrientation(fragmentActivity);
 
         verify(appBarLayout).setExpanded(eq(true));
+    }
+
+    @Test
+    public void getEnabledScreenReaderServices_noAccessibilityManager_returnEmpty() {
+        mShadowAccessibilityManager = null;
+        Set<ComponentName> result = AudioStreamsHelper.getEnabledScreenReaderServices(mContext);
+
+        assertThat(result).isEmpty();
+    }
+
+    @Test
+    public void getEnabledScreenReaderServices_notEnabled_returnEmpty() {
+        Resources resources = spy(mContext.getResources());
+        when(mContext.getResources()).thenReturn(resources);
+        when(resources.getStringArray(R.array.config_preinstalled_screen_reader_services))
+                .thenReturn(new String[]{"pkg/serviceClassName"});
+        mShadowAccessibilityManager.setEnabledAccessibilityServiceList(
+                new ArrayList<>());
+        Set<ComponentName> result = AudioStreamsHelper.getEnabledScreenReaderServices(mContext);
+
+        assertThat(result).isEmpty();
+    }
+
+    @Test
+    public void getEnabledScreenReaderServices_enabled_returnService() {
+        Resources resources = spy(mContext.getResources());
+        when(mContext.getResources()).thenReturn(resources);
+        when(resources.getStringArray(R.array.config_preinstalled_screen_reader_services))
+                .thenReturn(new String[]{"pkg/serviceClassName"});
+        ComponentName expected = new ComponentName("pkg", "serviceClassName");
+        when(mTalkbackServiceInfo.getComponentName()).thenReturn(expected);
+        mShadowAccessibilityManager.setEnabledAccessibilityServiceList(
+                new ArrayList<>(List.of(mTalkbackServiceInfo)));
+        Set<ComponentName> result = AudioStreamsHelper.getEnabledScreenReaderServices(mContext);
+
+        assertThat(result).isNotEmpty();
+        assertThat(result.iterator().next()).isEqualTo(expected);
+    }
+
+    @Test
+    public void setAccessibilityServiceOff_valueOff() {
+        ComponentName componentName = new ComponentName("pkg", "serviceClassName");
+        var target = new HashSet<ComponentName>();
+        target.add(componentName);
+        AudioStreamsHelper.setAccessibilityServiceOff(mContext, target);
+
+        assertThat(AccessibilityUtils.getEnabledServicesFromSettings(mContext,
+                UserHandle.myUserId())).isEmpty();
     }
 
     private void setUpFragment(

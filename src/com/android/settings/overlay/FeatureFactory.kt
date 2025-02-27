@@ -16,6 +16,7 @@
 package com.android.settings.overlay
 
 import android.content.Context
+import com.android.settings.accessibility.AccessibilityFeedbackFeatureProvider
 import com.android.settings.accessibility.AccessibilityMetricsFeatureProvider
 import com.android.settings.accessibility.AccessibilitySearchFeatureProvider
 import com.android.settings.accounts.AccountFeatureProvider
@@ -132,6 +133,11 @@ abstract class FeatureFactory {
      * Retrieves implementation for SecuritySettings feature.
      */
     abstract val securitySettingsFeatureProvider: SecuritySettingsFeatureProvider
+
+    /**
+     * Retrieves implementation for Accessibility feedback category feature.
+     */
+    abstract val accessibilityFeedbackFeatureProvider: AccessibilityFeedbackFeatureProvider
 
     /**
      * Retrieves implementation for Accessibility search index feature.

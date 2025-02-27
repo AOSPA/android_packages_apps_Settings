@@ -194,6 +194,7 @@ private fun PreferenceProto.toMetadata(
         SensitivityLevel.NO_SENSITIVITY -> SettingsPreferenceMetadata.NO_SENSITIVITY
         SensitivityLevel.LOW_SENSITIVITY -> SettingsPreferenceMetadata.EXPECT_POST_CONFIRMATION
         SensitivityLevel.MEDIUM_SENSITIVITY -> SettingsPreferenceMetadata.DEEPLINK_ONLY
+        SensitivityLevel.HIGH_SENSITIVITY -> SettingsPreferenceMetadata.DEEPLINK_ONLY
         else -> SettingsPreferenceMetadata.NO_DIRECT_ACCESS
     }
     val extras = Bundle()

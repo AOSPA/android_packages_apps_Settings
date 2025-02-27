@@ -25,9 +25,9 @@ import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
 import android.telephony.ims.ImsMmTelManager
 import android.util.Log
-import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.R
 import com.android.settings.contract.KEY_WIFI_CALLING
+import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settings.network.ims.WifiCallingQueryImsState
 import com.android.settings.network.telephony.wificalling.WifiCallingRepository
 import com.android.settings.widget.SettingsMainSwitchPreference

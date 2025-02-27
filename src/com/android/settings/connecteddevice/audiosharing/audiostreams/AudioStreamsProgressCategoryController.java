@@ -16,6 +16,8 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsHelper.getEnabledScreenReaderServices;
+import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsHelper.setAccessibilityServiceOff;
 import static com.android.settingslib.bluetooth.BluetoothUtils.isAudioSharingHysteresisModeFixAvailable;
 import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant.LocalBluetoothLeBroadcastSourceState.DECRYPTION_FAILED;
 import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant.LocalBluetoothLeBroadcastSourceState.PAUSED;
@@ -32,8 +34,10 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.bluetooth.BluetoothProfile;
+import android.content.ComponentName;
 import android.content.Context;
 import android.util.Log;
+import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -59,6 +63,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -102,6 +107,9 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                     }
                 }
             };
+
+    private final AccessibilityManager.AccessibilityServicesStateChangeListener
+            mAccessibilityListener = manager -> init();
 
     private final Comparator<AudioStreamPreference> mComparator =
             Comparator.<AudioStreamPreference, Boolean>comparing(
@@ -148,6 +156,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
     private SourceOriginForLogging mSourceFromQrCodeOriginForLogging;
     @Nullable private AudioStreamsProgressCategoryPreference mCategoryPreference;
     @Nullable private Fragment mFragment;
+    @Nullable AccessibilityManager mAccessibilityManager;
 
     public AudioStreamsProgressCategoryController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -159,6 +168,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
         mBroadcastAssistantCallback = new AudioStreamsProgressCategoryCallback(this);
         mHysteresisModeFixAvailable = BluetoothUtils.isAudioSharingHysteresisModeFixAvailable(
                 mContext);
+        mAccessibilityManager = context.getSystemService(AccessibilityManager.class);
     }
 
     @Override
@@ -177,6 +187,10 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
         if (mBluetoothManager != null) {
             mBluetoothManager.getEventManager().registerCallback(mBluetoothCallback);
         }
+        if (mAccessibilityManager != null) {
+            mAccessibilityManager.addAccessibilityServicesStateChangeListener(
+                    mExecutor, mAccessibilityListener);
+        }
         mExecutor.execute(this::init);
     }
 
@@ -184,6 +198,10 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
     public void onStop(@NonNull LifecycleOwner owner) {
         if (mBluetoothManager != null) {
             mBluetoothManager.getEventManager().unregisterCallback(mBluetoothCallback);
+        }
+        if (mAccessibilityManager != null) {
+            mAccessibilityManager.removeAccessibilityServicesStateChangeListener(
+                    mAccessibilityListener);
         }
         mExecutor.execute(this::stopScanning);
     }
@@ -504,6 +522,12 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                                         SourceOriginForLogging.UNKNOWN)
                                 : addNewPreference(receiveState, AudioStreamState.SOURCE_PRESENT);
                     }
+                    // Some LE devices might keep retrying with bad code, in this case we don't
+                    // switch to this intermediate state.
+                    if (existingPreference.getAudioStreamState()
+                            == AudioStreamState.ADD_SOURCE_BAD_CODE) {
+                        return existingPreference;
+                    }
                     if (existingPreference.getAudioStreamState() == AudioStreamState.WAIT_FOR_SYNC
                             && existingPreference.getAudioStreamBroadcastId() == UNSET_BROADCAST_ID
                             && mSourceFromQrCode != null) {
@@ -542,6 +566,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
         boolean hasConnected =
                 AudioStreamsHelper.getCachedBluetoothDeviceInSharingOrLeConnected(mBluetoothManager)
                         .isPresent();
+        Set<ComponentName> screenReaderServices = getEnabledScreenReaderServices(mContext);
         AudioSharingUtils.postOnMainThread(
                 mContext,
                 () -> {
@@ -550,27 +575,27 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                         mCategoryPreference.setVisible(hasConnected);
                     }
                 });
-        if (hasConnected) {
+        if (hasConnected && screenReaderServices.isEmpty()) {
             startScanning();
-            AudioSharingUtils.postOnMainThread(
-                    mContext,
-                    () -> {
-                        if (mFragment != null) {
-                            AudioStreamsDialogFragment.dismissAll(mFragment);
-                        }
-                    });
+            AudioSharingUtils.postOnMainThread(mContext,
+                    () -> AudioStreamsDialogFragment.dismissAll(mFragment));
         } else {
             stopScanning();
-            AudioSharingUtils.postOnMainThread(
-                    mContext,
-                    () -> {
-                        if (mFragment != null) {
-                            AudioStreamsDialogFragment.show(
-                                    mFragment,
-                                    getNoLeDeviceDialog(),
-                                    SettingsEnums.DIALOG_AUDIO_STREAM_MAIN_NO_LE_DEVICE);
-                        }
-                    });
+            if (!hasConnected) {
+                AudioSharingUtils.postOnMainThread(
+                        mContext, () -> AudioStreamsDialogFragment.show(
+                                mFragment,
+                                getNoLeDeviceDialog(),
+                                SettingsEnums.DIALOG_AUDIO_STREAM_MAIN_NO_LE_DEVICE)
+                );
+            } else if (!screenReaderServices.isEmpty()) {
+                AudioSharingUtils.postOnMainThread(
+                        mContext, () -> AudioStreamsDialogFragment.show(
+                                mFragment,
+                                getTurnOffTalkbackDialog(screenReaderServices),
+                                SettingsEnums.DIALOG_AUDIO_STREAM_MAIN_TURN_OFF_TALKBACK)
+                );
+            }
         }
     }
 
@@ -600,6 +625,9 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                                 (device, stateList) ->
                                         stateList.forEach(
                                                 state -> handleSourcePaused(device, state)));
+                    }
+                    if (DEBUG) {
+                        Log.d(TAG, "startScanning()");
                     }
                     mLeBroadcastAssistant.startSearchingForSources(emptyList());
                     mMediaControlHelper.start();
@@ -732,6 +760,33 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                                     .setSourceMetricsCategory(
                                             SettingsEnums.DIALOG_AUDIO_STREAM_MAIN_NO_LE_DEVICE)
                                     .launch();
+                            dialog.dismiss();
+                        });
+    }
+
+    private AudioStreamsDialogFragment.DialogBuilder getTurnOffTalkbackDialog(
+            Set<ComponentName> enabledScreenReader) {
+        return new AudioStreamsDialogFragment.DialogBuilder(mContext)
+                .setTitle(mContext.getString(R.string.audio_streams_dialog_turn_off_talkback_title))
+                .setSubTitle2(mContext.getString(
+                        R.string.audio_streams_dialog_turn_off_talkback_subtitle))
+                .setLeftButtonText(mContext.getString(R.string.cancel))
+                .setLeftButtonOnClickListener(dialog -> {
+                    dialog.dismiss();
+                    if (mFragment != null && mFragment.getActivity() != null) {
+                        // Navigate back
+                        mFragment.getActivity().finish();
+                    }
+                })
+                .setRightButtonText(
+                        mContext.getString(R.string.audio_streams_dialog_turn_off_talkback_button))
+                .setRightButtonOnClickListener(
+                        dialog -> {
+                            ThreadUtils.postOnBackgroundThread(() -> {
+                                if (!enabledScreenReader.isEmpty()) {
+                                    setAccessibilityServiceOff(mContext, enabledScreenReader);
+                                }
+                            });
                             dialog.dismiss();
                         });
     }

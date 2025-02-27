@@ -419,4 +419,97 @@ class DisplayTopologyPreferenceTest {
                 .build())
         assertThat(leftBlock.background).isEqualTo(leftBlock.mUnselectedImage)
     }
+
+    fun dragBlockWithOneMoveEvent(
+            block: DisplayBlock, startTimeMs: Long, endTimeMs: Long, xDiff: Float, yDiff: Float) {
+        block.dispatchTouchEvent(MotionEventBuilder.newBuilder()
+                .setAction(MotionEvent.ACTION_DOWN)
+                .setPointer(0f, 0f)
+                .setEventTime(startTimeMs)
+                .build())
+        block.dispatchTouchEvent(MotionEventBuilder.newBuilder()
+                .setAction(MotionEvent.ACTION_MOVE)
+                .setPointer(xDiff, yDiff)
+                .setEventTime((startTimeMs + endTimeMs) / 2)
+                .build())
+        block.dispatchTouchEvent(MotionEventBuilder.newBuilder()
+                .setAction(MotionEvent.ACTION_UP)
+                .setPointer(xDiff, yDiff)
+                .setEventTime(endTimeMs)
+                .build())
+    }
+
+    @Test
+    fun accidentalDrag_LittleAndBriefEnoughToBeAccidental() {
+        val (leftBlock, _) = setupTwoDisplays(POSITION_LEFT, childOffset = 42f)
+        val startTime = 424242L
+        val startX = leftBlock.x
+        val startY = leftBlock.y
+
+        preference.mTimesRefreshedBlocks = 0
+        dragBlockWithOneMoveEvent(
+                leftBlock, startTime,
+                endTimeMs = startTime + preference.accidentalDragTimeLimitMs - 10,
+                xDiff = preference.accidentalDragDistancePx - 1f, yDiff = 0f,
+        )
+        assertThat(leftBlock.x).isEqualTo(startX)
+        assertThat(preference.mTimesRefreshedBlocks).isEqualTo(0)
+
+        dragBlockWithOneMoveEvent(
+                leftBlock, startTime,
+                endTimeMs = startTime + preference.accidentalDragTimeLimitMs - 10,
+                xDiff = 0f, yDiff = preference.accidentalDragDistancePx - 1f,
+        )
+        assertThat(leftBlock.y).isEqualTo(startY)
+        assertThat(preference.mTimesRefreshedBlocks).isEqualTo(0)
+    }
+
+    @Test
+    fun accidentalDrag_TooFarToBeAccidentalXAxis() {
+        val (topBlock, _) = setupTwoDisplays(POSITION_TOP, childOffset = -42f)
+        val startTime = 88888L
+        val startX = topBlock.x
+
+        preference.mTimesRefreshedBlocks = 0
+        dragBlockWithOneMoveEvent(
+                topBlock, startTime,
+                endTimeMs = startTime + preference.accidentalDragTimeLimitMs - 10,
+                xDiff = preference.accidentalDragDistancePx + 1f, yDiff = 0f,
+        )
+        assertThat(preference.mTimesRefreshedBlocks).isEqualTo(1)
+        assertThat(topBlock.x).isNotEqualTo(startX)
+    }
+
+    @Test
+    fun accidentalDrag_TooFarToBeAccidentalYAxis() {
+        val (leftBlock, _) = setupTwoDisplays(POSITION_LEFT, childOffset = 42f)
+        val startTime = 88888L
+        val startY = leftBlock.y
+
+        preference.mTimesRefreshedBlocks = 0
+        dragBlockWithOneMoveEvent(
+                leftBlock, startTime,
+                endTimeMs = startTime + preference.accidentalDragTimeLimitMs - 10,
+                xDiff = 0f, yDiff = preference.accidentalDragDistancePx + 1f,
+        )
+        assertThat(leftBlock.y).isNotEqualTo(startY)
+        assertThat(preference.mTimesRefreshedBlocks).isEqualTo(1)
+    }
+
+    @Test
+    fun accidentalDrag_TooSlowToBeAccidental() {
+        val (topBlock, _) = setupTwoDisplays(POSITION_TOP, childOffset = -42f)
+        val startTime = 88888L
+        val startX = topBlock.x
+        val startY = topBlock.y
+
+        preference.mTimesRefreshedBlocks = 0
+        dragBlockWithOneMoveEvent(
+                topBlock, startTime,
+                endTimeMs = startTime + preference.accidentalDragTimeLimitMs + 10,
+                xDiff = preference.accidentalDragDistancePx - 1f, yDiff = 0f,
+        )
+        assertThat(topBlock.x).isNotEqualTo(startX)
+        assertThat(preference.mTimesRefreshedBlocks).isEqualTo(1)
+    }
 }
