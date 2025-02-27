@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
+ * Copyright (c) 2024-2025 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.deviceinfo.imei;
 
 import android.content.Context;
@@ -58,6 +64,7 @@ public class ImeiInfoDialogController {
     private final SubscriptionInfo mSubscriptionInfo;
     private final int mSlotId;
     private QtiImeiInfo mQtiImeiInfo[];
+    private boolean mIsDsdsToSsConfigValid;
 
     public ImeiInfoDialogController(@NonNull ImeiInfoDialogFragment dialog, int slotId) {
         mDialog = dialog;
@@ -66,10 +73,11 @@ public class ImeiInfoDialogController {
         mSubscriptionInfo = context.getSystemService(SubscriptionManager.class)
                 .getActiveSubscriptionInfoForSimSlotIndex(slotId);
         TelephonyManager tm = context.getSystemService(TelephonyManager.class);
+        mIsDsdsToSsConfigValid = TelephonyUtils.isDsdsToSsConfigValid();
         if (mSubscriptionInfo != null) {
             mTelephonyManager = context.getSystemService(TelephonyManager.class)
                     .createForSubscriptionId(mSubscriptionInfo.getSubscriptionId());
-        } else if(isValidSlotIndex(slotId, tm)) {
+        } else if (isValidSlotIndex(slotId, tm) || mIsDsdsToSsConfigValid) {
             mTelephonyManager = tm;
         } else {
             mTelephonyManager = null;
@@ -81,7 +89,7 @@ public class ImeiInfoDialogController {
     private String getImei(int slot) {
         String imei = null;
         try {
-            if (isMinHalVersion2_1()) {
+            if (isMinHalVersion2_1() && !mIsDsdsToSsConfigValid) {
                 imei = mTelephonyManager.getImei(slot);
             } else {
                 if (mQtiImeiInfo == null) {
@@ -110,6 +118,9 @@ public class ImeiInfoDialogController {
      */
     public void populateImeiInfo() {
         if (mTelephonyManager == null) {
+            if (mIsDsdsToSsConfigValid) {
+                updateDialogForGsmPhone();
+            }
             Log.w(TAG, "TelephonyManager for this slot is null. Invalid slot? id=" + mSlotId);
             return;
         }
