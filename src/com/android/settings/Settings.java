@@ -863,4 +863,5 @@ public class Settings extends SettingsActivity {
             }
         }
     }
+    public static class ParanoidSettingsActivity extends SettingsActivity { /* empty */}
 }
