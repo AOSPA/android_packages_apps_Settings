@@ -53,6 +53,7 @@ constructor(
 
     private var videoCallEditable = false
     private var isInCall = false
+    private var isEnabled = false
 
     /** Init instance of VideoCallingPreferenceController. */
     fun init(
@@ -66,22 +67,24 @@ constructor(
     }
 
     // Availability is controlled in onViewCreated() and VideoCallingSearchItem.
-    override fun getAvailabilityStatus() = AVAILABLE
+    override fun getAvailabilityStatus(): Int {
+        return if (isEnabled) AVAILABLE else CONDITIONALLY_UNAVAILABLE
+    }
 
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
         preference = screen.findPreference(preferenceKey)
         Log.d(TAG, "init ui")
-        preference?.isVisible = false
-        callingPreferenceCategoryController?.updateChildVisible(preferenceKey, false)
     }
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
+        preference?.isVisible = false
+        callingPreferenceCategoryController?.updateChildVisible(preferenceKey, false)
         videoCallingRepository.isVideoCallReadyFlow(subId)
             .collectLatestWithLifecycle(viewLifecycleOwner) { isReady ->
-                Log.d(TAG, "isVideoCallReadyFlow: update visible")
-                preference?.isVisible = isReady
-                callingPreferenceCategoryController?.updateChildVisible(preferenceKey, isReady)
+                Log.d(TAG, "isVideoCallReadyFlow: update visible isReady = $isReady")
+                isEnabled = isReady
+                updatePreference()
             }
         callStateRepository.callStateFlow(subId).collectLatestWithLifecycle(viewLifecycleOwner) {
             callState ->
@@ -92,12 +95,14 @@ constructor(
 
     override fun updateState(preference: Preference) {
         super.updateState(preference)
-        videoCallEditable =
-            queryVoLteState(subId).isEnabledByUser && queryImsState(subId).isAllowUserControl
         updatePreference()
     }
 
     private fun updatePreference() {
+        preference?.isVisible = isEnabled
+        callingPreferenceCategoryController?.updateChildVisible(preferenceKey, isEnabled)
+        videoCallEditable = isEnabled &&
+            queryVoLteState(subId).isEnabledByUser && queryImsState(subId).isAllowUserControl
         preference?.isEnabled = videoCallEditable && !isInCall
         preference?.isChecked = videoCallEditable && isChecked
     }
