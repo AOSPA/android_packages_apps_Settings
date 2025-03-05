@@ -17,10 +17,15 @@
 package com.android.settings.accessibility
 
 import android.content.Context
+import android.hardware.display.ColorDisplayManager
 import com.android.settings.R
 import com.android.settings.Settings.ColorAndMotionActivity
+import com.android.settings.display.darkmode.DarkModeScreen
 import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
+import com.android.settingslib.metadata.PreferenceCategory
+import com.android.settingslib.metadata.PreferenceGroup
+import com.android.settingslib.metadata.PreferenceHierarchy
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
@@ -39,14 +44,34 @@ class ColorAndMotionScreen : PreferenceScreenCreator {
 
     override fun isFlagEnabled(context: Context) = Flags.catalystAccessibilityColorAndMotion()
 
-    override fun hasCompleteHierarchy(): Boolean = false
+    override fun hasCompleteHierarchy(): Boolean = true
 
     override fun fragmentClass() = ColorAndMotionFragment::class.java
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) {
-            +RemoveAnimationsPreference()
+    override fun getPreferenceHierarchy(context: Context): PreferenceHierarchy {
+        // LINT.IfChange(ui_hierarchy)
+        if (ColorDisplayManager.isColorTransformAccelerated(context)) {
+            return preferenceHierarchy(context, this) {
+                +DaltonizerPreference()
+                +ColorInversionPreference()
+                +DarkModeScreen.KEY
+                +RemoveAnimationsPreference()
+            }
+        } else {
+            return preferenceHierarchy(context, this) {
+                +ColorInversionPreference()
+                +DarkModeScreen.KEY
+                +PreferenceCategory(
+                    "experimental_category",
+                    R.string.experimental_category_title
+                ) += {
+                    +DaltonizerPreference()
+                    +RemoveAnimationsPreference()
+                }
+            }
         }
+        // LINT.ThenChange(/res/xml/accessibility_color_and_motion.xml, /src/com/android/settings/accessibility/ColorAndMotionFragment.java:ui_hierarchy)
+    }
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         makeLaunchIntent(context, ColorAndMotionActivity::class.java, metadata?.key)

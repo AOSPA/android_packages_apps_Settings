@@ -63,15 +63,17 @@ public class ColorAndMotionFragment extends DashboardFragment {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        initializeAllPreferences();
-        updateSystemPreferences();
 
-        mShortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED);
-        mShortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED);
+        if (!isCatalystEnabled()) {
+            initializeAllPreferences();
+            updateSystemPreferences();
+            mShortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED);
+            mShortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED);
 
-        mSettingsContentObserver = new AccessibilitySettingsContentObserver(new Handler());
-        mSettingsContentObserver.registerKeysToObserverCallback(mShortcutFeatureKeys,
-                key -> updatePreferencesState());
+            mSettingsContentObserver = new AccessibilitySettingsContentObserver(new Handler());
+            mSettingsContentObserver.registerKeysToObserverCallback(mShortcutFeatureKeys,
+                    key -> updatePreferencesState());
+        }
     }
 
     private void updatePreferencesState() {
@@ -84,15 +86,17 @@ public class ColorAndMotionFragment extends DashboardFragment {
     @Override
     public void onStart() {
         super.onStart();
-
-        mSettingsContentObserver.register(getContentResolver());
+        if (!isCatalystEnabled()) {
+            mSettingsContentObserver.register(getContentResolver());
+        }
     }
 
     @Override
     public void onStop() {
         super.onStop();
-
-        mSettingsContentObserver.unregister(getContentResolver());
+        if (!isCatalystEnabled()) {
+            mSettingsContentObserver.unregister(getContentResolver());
+        }
     }
 
     @Override
@@ -116,9 +120,11 @@ public class ColorAndMotionFragment extends DashboardFragment {
     /**
      * Updates preferences related to system configurations.
      */
+    // LINT.IfChange(ui_hierarchy)
     private void updateSystemPreferences() {
         final PreferenceCategory experimentalCategory = getPreferenceScreen().findPreference(
                 CATEGORY_EXPERIMENTAL);
+
         if (ColorDisplayManager.isColorTransformAccelerated(getContext())) {
             getPreferenceScreen().removePreference(experimentalCategory);
         } else {
@@ -130,6 +136,7 @@ public class ColorAndMotionFragment extends DashboardFragment {
             experimentalCategory.addPreference(mToggleDisableAnimationsPreference);
         }
     }
+    // LINT.ThenChange(/src/com/android/settings/accessibility/ColorAndMotionScreen.kt:ui_hierarchy)
 
     @Nullable
     @Override

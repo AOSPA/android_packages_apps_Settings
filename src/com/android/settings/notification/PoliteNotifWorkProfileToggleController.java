@@ -131,6 +131,7 @@ public class PoliteNotifWorkProfileToggleController extends TogglePreferenceCont
     public void updateState(@Nullable Preference preference) {
         if (preference == null) return;
         preference.setVisible(isAvailable());
+        super.updateState(preference);
     }
 
     private boolean isCoolDownEnabledForPrimary() {

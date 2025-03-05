@@ -32,6 +32,7 @@ import com.android.settingslib.bluetooth.AmbientVolumeUiController;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.VolumeControlProfile;
+import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -83,6 +84,9 @@ public class BluetoothDetailsAmbientVolumePreferenceController extends Bluetooth
         mPreference = new AmbientVolumePreference(deviceControls.getContext());
         mPreference.setKey(KEY_AMBIENT_VOLUME);
         mPreference.setOrder(ORDER_AMBIENT_VOLUME);
+        if (mFragment instanceof Instrumentable) {
+            mPreference.setMetricsCategory(((Instrumentable) mFragment).getMetricsCategory());
+        }
         deviceControls.addPreference(mPreference);
 
         mAmbientUiController = new AmbientVolumeUiController(mContext, mBluetoothManager,

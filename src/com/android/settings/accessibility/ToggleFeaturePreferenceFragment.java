@@ -308,7 +308,10 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         getActivity().setTitle(title);
     }
 
-    protected void onProcessArguments(Bundle arguments) {
+    protected void onProcessArguments(@Nullable Bundle arguments) {
+        if (arguments == null) {
+            return;
+        }
         // Key.
         mPreferenceKey = arguments.getString(AccessibilitySettings.EXTRA_PREFERENCE_KEY);
 
@@ -432,7 +435,8 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     private void initToggleServiceSwitchPreference() {
         mToggleServiceSwitchPreference = new SettingsMainSwitchPreference(getPrefContext());
         mToggleServiceSwitchPreference.setKey(getUseServicePreferenceKey());
-        if (getArguments().containsKey(AccessibilitySettings.EXTRA_CHECKED)) {
+        if (getArguments() != null
+                && getArguments().containsKey(AccessibilitySettings.EXTRA_CHECKED)) {
             final boolean enabled = getArguments().getBoolean(AccessibilitySettings.EXTRA_CHECKED);
             mToggleServiceSwitchPreference.setChecked(enabled);
         }

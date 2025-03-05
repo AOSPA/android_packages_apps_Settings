@@ -69,7 +69,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        if (isCatalystEnabled()) {
+        if (!isCatalystEnabled()) {
             use(AirplaneModePreferenceController.class).setFragment(this);
         }
         use(NetworkProviderCallsSmsController.class).init(this);
@@ -124,7 +124,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         switch (requestCode) {
             case AirplaneModePreferenceController.REQUEST_CODE_EXIT_ECM:
             case AirplaneModePreferenceController.REQUEST_CODE_EXIT_SCBM:
-                if (isCatalystEnabled()) {
+                if (!isCatalystEnabled()) {
                     use(AirplaneModePreferenceController.class)
                             .onActivityResult(requestCode, resultCode, data);
                 }

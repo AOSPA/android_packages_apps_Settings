@@ -128,6 +128,16 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
             mIllustrationLottie.setAnimation(R.raw.face_education_lottie);
             mIllustrationLottie.setVisibility(View.VISIBLE);
             mIllustrationLottie.playAnimation();
+            mIllustrationLottie.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (mIllustrationLottie.isAnimating()) {
+                        mIllustrationLottie.pauseAnimation();
+                    } else {
+                        mIllustrationLottie.resumeAnimation();
+                    }
+                }
+            });
         }
 
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);

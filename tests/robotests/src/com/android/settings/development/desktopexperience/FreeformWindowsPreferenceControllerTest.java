@@ -25,6 +25,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -53,6 +54,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
@@ -78,8 +80,6 @@ public class FreeformWindowsPreferenceControllerTest {
     @Mock
     private DevelopmentSettingsDashboardFragment mFragment;
     @Mock
-    private FragmentActivity mActivity;
-    @Mock
     private FragmentManager mFragmentManager;
     @Mock
     private FragmentTransaction mTransaction;
@@ -89,9 +89,11 @@ public class FreeformWindowsPreferenceControllerTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
+        FragmentActivity activity = spy(Robolectric.buildActivity(
+                FragmentActivity.class).create().get());
         doReturn(mTransaction).when(mFragmentManager).beginTransaction();
-        doReturn(mFragmentManager).when(mActivity).getSupportFragmentManager();
-        doReturn(mActivity).when(mFragment).getActivity();
+        doReturn(mFragmentManager).when(activity).getSupportFragmentManager();
+        doReturn(activity).when(mFragment).requireActivity();
         doReturn(true).when(mResources).getBoolean(R.bool.config_isDesktopModeSupported);
         doReturn(true).when(mResources).getBoolean(R.bool.config_canInternalDisplayHostDesktops);
         mController = new FreeformWindowsPreferenceController(mContext, mFragment);

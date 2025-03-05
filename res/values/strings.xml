@@ -82,11 +82,6 @@
 
     <!-- Content description for preview pager. [CHAR LIMIT=NONE] -->
     <string name="preview_pager_content_description">Preview</string>
-    <!-- Previous button for preview pager. [CHAR LIMIT=NONE] -->
-    <string name="preview_pager_previous_button">Previous preview</string>
-    <!-- Next button for preview pager. [CHAR LIMIT=NONE] -->
-    <string name="preview_pager_next_button">Next preview</string>
-
     <!-- Content description for qrcode image. [CHAR LIMIT=none]-->
     <string name="qr_code_content_description">QR code</string>
 
@@ -1969,7 +1964,7 @@
     <string name="lockpattern_tutorial_continue_label">Next</string>
 
     <!-- Title of preference to manage device admin apps, which are used by IT admins to manage devices -->
-    <string name="manage_device_admin">Device admin apps</string>
+    <string name="manage_device_admin">Device admin</string>
 
     <!-- Summary of preference to manage device admin apps, informing the user that currently no device admin apps are installed and active -->
     <string name="number_of_device_admins_none">No active apps</string>
@@ -7022,7 +7017,7 @@
     <!-- Label for button to deactivate and uninstall the device admin app [CHAR_LIMIT=50]-->
     <string name="remove_and_uninstall_device_admin">Deactivate &amp; uninstall</string>
     <!-- Label for screen showing to select device admin apps -->
-    <string name="select_device_admin_msg">Device admin apps</string>
+    <string name="select_device_admin_msg">Device admin</string>
 
     <!-- Message when there are no available device admin apps to display -->
     <string name="no_device_admins">No device admin apps available</string>
@@ -9441,7 +9436,7 @@
     <!-- Title for Polite Notifications setting  [CHAR LIMIT=45]-->
     <string name="notification_polite_title">Notification cooldown</string>
     <string name="notification_polite_main_control_title">Use notification cooldown</string>
-    <string name="notification_polite_description">When you receive many notifications within a short time, your device will lower its volume and minimize alerts for up to 2 minutes. Calls, alarms, and priority conversations are not affected.
+    <string name="notification_polite_description">When you receive many notifications within a short time, your device will lower its volume and minimize alerts for up to 1 minute. Calls, alarms, and priority conversations are not affected.
         \n\nNotifications received during the cooldown can be found by pulling down from the top of the screen.</string>
     <string name="notification_polite_work">Apply to work profiles</string>
     <string name="notification_polite_work_summary">Apply to work profile apps</string>

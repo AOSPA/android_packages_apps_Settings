@@ -155,7 +155,8 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final boolean isExpressiveStyle = BiometricUtils.isExpressiveStyle(getBaseContext());
+        final boolean isExpressiveStyle = BiometricUtils.isExpressiveStyle(
+                getBaseContext(), false);
 
         if (shouldShowSplitScreenDialog()) {
             BiometricsSplitScreenDialog

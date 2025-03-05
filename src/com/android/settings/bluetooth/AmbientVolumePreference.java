@@ -37,6 +37,7 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.AmbientVolumeUi;
 import com.android.settingslib.widget.SliderPreference;
 
@@ -58,6 +59,10 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
     private static final int ORDER_AMBIENT_VOLUME_CONTROL_UNIFIED = 0;
     private static final int ORDER_AMBIENT_VOLUME_CONTROL_SEPARATED = 1;
 
+    private static final String METRIC_KEY_AMBIENT_SLIDER = "ambient_slider";
+    private static final String METRIC_KEY_AMBIENT_MUTE = "ambient_mute";
+    private static final String METRIC_KEY_AMBIENT_EXPAND = "ambient_expand";
+
     @Nullable
     private AmbientVolumeUiListener mListener;
     @Nullable
@@ -71,12 +76,17 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
     private final BiMap<Integer, SliderPreference> mSideToSliderMap = HashBiMap.create();
     private int mVolumeLevel = AMBIENT_VOLUME_LEVEL_DEFAULT;
 
+    private int mMetricsCategory;
+
     private final OnPreferenceChangeListener mPreferenceChangeListener =
             (slider, v) -> {
                 if (slider instanceof SliderPreference && v instanceof final Integer value) {
                     final Integer side = mSideToSliderMap.inverse().get(slider);
-                    if (mListener != null && side != null) {
-                        mListener.onSliderValueChange(side, value);
+                    if (side != null) {
+                        logMetrics(METRIC_KEY_AMBIENT_SLIDER, side);
+                        if (mListener != null) {
+                            mListener.onSliderValueChange(side, value);
+                        }
                     }
                     return true;
                 }
@@ -106,6 +116,7 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
                 return;
             }
             setMuted(!mMuted);
+            logMetrics(METRIC_KEY_AMBIENT_MUTE, mMuted ? 1 : 0);
             if (mListener != null) {
                 mListener.onAmbientVolumeIconClick();
             }
@@ -115,6 +126,7 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
         mExpandIcon = holder.itemView.requireViewById(R.id.expand_icon);
         mExpandIcon.setOnClickListener(v -> {
             setExpanded(!mExpanded);
+            logMetrics(METRIC_KEY_AMBIENT_EXPAND, mExpanded ? 1 : 0);
             if (mListener != null) {
                 mListener.onExpandIconClick();
             }
@@ -249,6 +261,15 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
         updateVolumeLevel();
     }
 
+    /** Sets the metrics category. */
+    public void setMetricsCategory(int category) {
+        mMetricsCategory = category;
+    }
+
+    private int getMetricsCategory() {
+        return mMetricsCategory;
+    }
+
     private void updateVolumeLevel() {
         int leftLevel, rightLevel;
         if (mExpanded) {
@@ -328,5 +349,10 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
     @VisibleForTesting
     Map<Integer, SliderPreference> getSliders() {
         return mSideToSliderMap;
+    }
+
+    private void logMetrics(String key, int value) {
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().changed(
+                getMetricsCategory(), key, value);
     }
 }

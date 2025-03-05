@@ -54,6 +54,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowSystemProperties;
@@ -76,8 +77,6 @@ public class DesktopModePreferenceControllerTest {
     @Mock
     private DevelopmentSettingsDashboardFragment mFragment;
     @Mock
-    private FragmentActivity mActivity;
-    @Mock
     private FragmentManager mFragmentManager;
     @Mock
     private FragmentTransaction mTransaction;
@@ -90,10 +89,13 @@ public class DesktopModePreferenceControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
 
+        FragmentActivity activity = spy(Robolectric.buildActivity(
+                FragmentActivity.class).create().get());
+
         mContext = spy(ApplicationProvider.getApplicationContext());
         doReturn(mTransaction).when(mFragmentManager).beginTransaction();
-        doReturn(mFragmentManager).when(mActivity).getSupportFragmentManager();
-        doReturn(mActivity).when(mFragment).getActivity();
+        doReturn(mFragmentManager).when(activity).getSupportFragmentManager();
+        doReturn(activity).when(mFragment).requireActivity();
 
         mResources = spy(mContext.getResources());
         when(mContext.getResources()).thenReturn(mResources);

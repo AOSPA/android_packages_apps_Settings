@@ -535,11 +535,13 @@ public class BiometricUtils {
     /**
      * Check if device is using Expressive Style theme.
      * @param context that for applying Expressive Style
+     * @param isSettingsPreference Apply Expressive style on Settings Preference or not.
      * @return true if device using Expressive Style theme, otherwise false.
      */
-    public static boolean isExpressiveStyle(@NonNull Context context) {
-        return SettingsThemeHelper.isExpressiveTheme(context)
-                || ThemeHelper.shouldApplyGlifExpressiveStyle(context);
+    public static boolean isExpressiveStyle(@NonNull Context context,
+            boolean isSettingsPreference) {
+        return isSettingsPreference ? SettingsThemeHelper.isExpressiveTheme(context) :
+                ThemeHelper.shouldApplyGlifExpressiveStyle(context);
     }
 
     private static String capitalize(final String input) {
