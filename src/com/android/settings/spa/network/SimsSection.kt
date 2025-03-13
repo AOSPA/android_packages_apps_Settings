@@ -81,7 +81,8 @@ private fun SimPreference(subInfo: SubscriptionInfo) {
     val coroutineScope = rememberCoroutineScope()
     RestrictedTwoTargetSwitchPreference(
         model = object : SwitchPreferenceModel {
-            override val title = subInfo.displayName.toString()
+            override val title = SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                subInfo.subscriptionId, context).toString()
             override val summary = {
                 if (isConvertedPsim) {
                     context.getString(R.string.sim_category_converted_sim)

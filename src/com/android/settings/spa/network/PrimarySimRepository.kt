@@ -45,7 +45,8 @@ class PrimarySimRepository(private val context: Context) {
         for (info in selectableSubscriptionInfoList) {
             val item = ListPreferenceOption(
                 id = info.subscriptionId,
-                text = "${info.displayName}",
+                text = SubscriptionUtil.getUniqueSubscriptionDisplayName(info.subscriptionId,
+                    context).toString(),
                 summary = SubscriptionUtil.getBidiFormattedPhoneNumber(context, info) ?: "",
             )
             callsList += item
