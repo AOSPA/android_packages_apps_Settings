@@ -227,7 +227,10 @@ public class AudioSharingDialogHandler {
                             mLocalBtManager, groupedDevices, /* filterByInSharing= */ true);
             AudioSharingStopDialogFragment.DialogEventListener listener =
                     () -> {
-                        if (Flags.adoptPrimaryGroupManagementApi() && mLocalBtManager != null) {
+                        if (mLocalBtManager != null && (Flags.adoptPrimaryGroupManagementApi() || (
+                                mContext != null && Flags.audioSharingDeveloperOption()
+                                        && BluetoothUtils.getAudioSharingPreviewValue(
+                                        mContext.getContentResolver())))) {
                             LeAudioProfile profile =
                                     mLocalBtManager.getProfileManager().getLeAudioProfile();
                             if (profile != null) {

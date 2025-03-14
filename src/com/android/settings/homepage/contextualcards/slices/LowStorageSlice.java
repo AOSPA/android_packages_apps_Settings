@@ -65,7 +65,7 @@ public class LowStorageSlice implements CustomSliceable {
         // Generate Low storage Slice.
         final String percentageString = NumberFormat.getPercentInstance().format(usedPercentage);
         final String[] freeSizeString =
-                Formatter.formatFileSize(mContext, info.freeBytes).split(" ");
+                Formatter.formatFileSize(mContext, info.freeBytes).split("\\s");
 
         final ListBuilder listBuilder = new ListBuilder(mContext,
                 CustomSliceRegistry.LOW_STORAGE_SLICE_URI, ListBuilder.INFINITY).setAccentColor(

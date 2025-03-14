@@ -545,13 +545,13 @@ public class WifiConfigController implements TextWatcher,
                         && !isValidSaePassword(mPasswordView.getText().toString())))) {
             passwordInvalid = true;
         }
-        if ((mSsidView != null && mSsidView.length() == 0)
-                // If Accesspoint is not saved, apply passwordInvalid check
-                || ((mAccessPoint == null || !mAccessPoint.isSaved()) && passwordInvalid
-                // If AccessPoint is saved (modifying network) and password is changed, apply
-                // Invalid password check
-                || mAccessPoint != null && mAccessPoint.isSaved() && passwordInvalid
-                    && mPasswordView.length() > 0)) {
+        if ((mAccessPoint == null || !mAccessPoint.isSaved()) && passwordInvalid) {
+            // If Accesspoint is not saved, apply passwordInvalid check
+            enabled = false;
+        } else if (mAccessPoint != null && mAccessPoint.isSaved() && passwordInvalid
+                && mPasswordView.length() > 0) {
+            // If AccessPoint is saved (modifying network) and password is changed, apply
+            // Invalid password check
             enabled = false;
         } else {
             enabled = ipAndProxyFieldsAreValid();

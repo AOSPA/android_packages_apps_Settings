@@ -41,10 +41,6 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Suspended"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Unknown"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Preview"</string>
-    <!-- no translation found for preview_pager_previous_button (607771113300838313) -->
-    <skip />
-    <!-- no translation found for preview_pager_next_button (8700907912508927271) -->
-    <skip />
     <string name="qr_code_content_description" msgid="1852208464419291347">"QR code"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Make smaller"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Make larger"</string>
@@ -101,6 +97,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"About audio output"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Route sounds to your hearing device or phone speaker"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Related"</string>
+    <string name="bluetooth_try_nearby_share_title" msgid="4996427014054610877">"Try sharing with <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="329823028635487822">"The fastest way to send files to nearby Android devices"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Ringtone and alarms"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Audio during calls"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Media and system sounds"</string>
@@ -231,12 +229,9 @@
     <string name="search_region_hint" msgid="1748708432568237552">"Search regions"</string>
     <string name="top_intro_region_title" msgid="2336323415395642117">"The region you choose affects how your phone displays time, dates, temperature, and more"</string>
     <string name="more_language_settings_category" msgid="3669703092480725416">"More language settings"</string>
-    <!-- no translation found for title_change_system_locale_region (1977530992614685128) -->
-    <skip />
-    <!-- no translation found for body_change_system_locale_region (9064318449821043189) -->
-    <skip />
-    <!-- no translation found for top_intro_numbering_system_title (8234587334207926397) -->
-    <skip />
+    <string name="title_change_system_locale_region" msgid="1977530992614685128">"Change region to <xliff:g id="SYSTEM_LANGUAGE_REGION">%1$s</xliff:g> ?"</string>
+    <string name="body_change_system_locale_region" msgid="9064318449821043189">"Your device will keep <xliff:g id="SYSTEM_LANGUAGE">%1$s</xliff:g> as a system language"</string>
+    <string name="top_intro_numbering_system_title" msgid="8234587334207926397">"Most apps will use your regional preferences"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regional preferences"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Set units and number preferences"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Let apps know your regional preferences so they can personalize your experience."</string>
@@ -893,7 +888,7 @@
     <string name="lockpassword_credential_changed" msgid="5934778179732392028">"Screen lock was already changed. Try again with the new screen lock."</string>
     <string name="lockpattern_tutorial_cancel_label" msgid="775215267818384016">"Cancel"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="1329049481210689408">"Next"</string>
-    <string name="manage_device_admin" msgid="1044620606203916275">"Device admin apps"</string>
+    <string name="manage_device_admin" msgid="7272894919651600481">"Device admin"</string>
     <string name="number_of_device_admins_none" msgid="152926922020437312">"No active apps"</string>
     <string name="number_of_device_admins" msgid="3402909995362162876">"{count,plural, =1{# active app}other{# active apps}}"</string>
     <string name="manage_trust_agents" msgid="6410149930029992356">"Trust agents"</string>
@@ -1284,12 +1279,9 @@
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
     <string name="emergency_address_title" msgid="8102786488994263815">"Emergency address"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"Used as your location when you make an emergency call over Wi‑Fi"</string>
-    <!-- no translation found for private_dns_title (1180823690693258572) -->
-    <skip />
-    <!-- no translation found for private_dns_field_require (2318400923953435586) -->
-    <skip />
-    <!-- no translation found for private_dns_hostname_invalid (5085498734835552780) -->
-    <skip />
+    <string name="private_dns_title" msgid="1180823690693258572">"Hostname"</string>
+    <string name="private_dns_field_require" msgid="2318400923953435586">"The field is required"</string>
+    <string name="private_dns_hostname_invalid" msgid="5085498734835552780">"The hostname you typed isn’t valid"</string>
     <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"Learn more"</annotation>" about Private DNS features"</string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"On"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"Activate Wi‑Fi Calling"</string>
@@ -2057,7 +2049,10 @@
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"Use mouse keys"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Use your keyboard to control the pointer"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Reverse scrolling"</string>
-    <string name="mouse_reverse_vertical_scrolling_summary" msgid="4403637093982742165">"Content moves up when you scroll down"</string>
+    <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Scroll up to move the page down"</string>
+    <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"Scrolling"</string>
+    <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"Controlled scrolling"</string>
+    <string name="mouse_scrolling_speed" msgid="3999483025392860903">"Scrolling speed"</string>
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"Swap primary mouse button"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Use the left mouse button as your right"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"Cursor acceleration"</string>
@@ -2238,6 +2233,7 @@
     <string name="accessibility_feedback_title" msgid="6690472705407526006">"Feedback"</string>
     <string name="accessibility_feedback_summary" msgid="4576591591334314827">"Help improve by taking a survey"</string>
     <string name="accessibility_feedback_disabled_summary" msgid="3652321859452620942">"No surveys available"</string>
+    <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Send feedback"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Downloaded apps"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimental"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Feature flags"</string>
@@ -2969,7 +2965,7 @@
     <string name="remove_device_admin" msgid="3143059558744287259">"Deactivate this device admin app"</string>
     <string name="uninstall_device_admin" msgid="4481095209503956916">"Uninstall app"</string>
     <string name="remove_and_uninstall_device_admin" msgid="707912012681691559">"Deactivate &amp; uninstall"</string>
-    <string name="select_device_admin_msg" msgid="5501360309040114486">"Device admin apps"</string>
+    <string name="select_device_admin_msg" msgid="2506262585633022884">"Device admin"</string>
     <string name="no_device_admins" msgid="8888779888103079854">"No device admin apps available"</string>
     <string name="no_trust_agents" msgid="8659098725864191600">"No available trust agents"</string>
     <string name="add_device_admin_msg" msgid="7730006568970042119">"Activate device admin app?"</string>
@@ -3860,7 +3856,7 @@
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"More settings are available inside this app"</string>
     <string name="notification_polite_title" msgid="6121016426991791557">"Notification cooldown"</string>
     <string name="notification_polite_main_control_title" msgid="5812529809151927149">"Use notification cooldown"</string>
-    <string name="notification_polite_description" msgid="5497748284893832854">"When you receive many notifications within a short time, your device will lower its volume and minimize alerts for up to 2 minutes. Calls, alarms, and priority conversations are not affected. \n\nNotifications received during the cooldown can be found by pulling down from the top of the screen."</string>
+    <string name="notification_polite_description" msgid="6137533404978878957">"When you receive many notifications within a short time, your device will lower its volume and minimize alerts for up to 1 minute. Calls, alarms, and priority conversations are not affected. \n\nNotifications received during the cooldown can be found by pulling down from the top of the screen."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Apply to work profiles"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Apply to work profile apps"</string>
     <string name="notification_bundle_title" msgid="460988459835922719">"Bundled notifications"</string>
@@ -4368,7 +4364,7 @@
     <string name="disconnected" msgid="3469373726996129247">"Not connected"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Not connected"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> apps installed"</string>
-    <string name="storage_summary" msgid="5903562203143572768">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> used - <xliff:g id="FREE_SPACE">%2$s</xliff:g> free"</string>
+    <string name="storage_summary" msgid="7631468664968572688">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> used - <xliff:g id="FREE_SPACE_VALUE">%2$s</xliff:g> <xliff:g id="FREE_SPACE_UNITS">%3$s</xliff:g> free"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Dark theme, font size, brightness"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Avg <xliff:g id="USED_MEMORY">%1$s</xliff:g> of <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> memory used"</string>
     <string name="users_summary" msgid="8473589474976307510">"Signed in as <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -4437,6 +4433,7 @@
     <string name="ethernet_data_usage" msgid="4552227880905679761">"Ethernet data usage"</string>
     <string name="wifi" msgid="2932584495223243842">"Wi-Fi"</string>
     <string name="ethernet" msgid="4665162609974492983">"Ethernet"</string>
+    <string name="ethernet_interface_title" msgid="1634881244068292765">"Ethernet <xliff:g id="INTERFACEID">%1$s</xliff:g>"</string>
     <string name="cell_data_template" msgid="6077963976103260821">"<xliff:g id="AMOUNT">^1</xliff:g> mobile data"</string>
     <string name="wifi_data_template" msgid="935934798340307438">"<xliff:g id="AMOUNT">^1</xliff:g> Wi-Fi data"</string>
     <string name="ethernet_data_template" msgid="1429173767445201145">"<xliff:g id="AMOUNT">^1</xliff:g> ethernet data"</string>
@@ -5011,6 +5008,9 @@
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"satellite connectivity"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"satellite messaging"</string>
     <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"Use of data is included with your account"</string>
+    <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Supported apps on your phone"</string>
+    <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"see all apps"</string>
+    <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Supported apps on your phone"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Access Point Names"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Unavailable when connected to <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5178,27 +5178,27 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Your work policy info"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Settings managed by your IT admin"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <string name="enable_16k_pages" msgid="8001470927566110689">"Boot with 16KB page size"</string>
-    <string name="enable_16k_pages_summary" msgid="1964363364670306912">"Boot device using 16KB page size supported kernel"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="611010487387251491">"Switch from 4KB mode to 16KB mode"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="6129208614283750541">"You are in the page-agnostic mode running a 4KB kernel, and you are switching to the 16KB mode. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. This will reboot the device. Some features will be disabled in these modes, so some applications may not work. To return the device to production mode, you would need to then, switch back to the 4KB mode and lock the bootloader, which factory resets the device. After the device successfully boots into Android, disable OEM unlocking in Developer options."</string>
-    <string name="confirm_enable_4k_pages_title" msgid="3210360137887034659">"Switch from 16KB mode to 4KB mode"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"You are in the page-agnostic mode running a 16KB kernel, and you are switching to the 4KB mode. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. This will reboot the device. Some features will be disabled in these modes, so some applications may not work. To return the device to production mode, you would need to then lock the bootloader, which factory resets the device. After the device successfully boots into Android, disable OEM unlocking in Developer options."</string>
-    <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Failed to update kernel to 16KB pages compatible kernel."</string>
+    <string name="enable_16k_pages" msgid="1758111531461408337">"Boot with 16 KB page size"</string>
+    <string name="enable_16k_pages_summary" msgid="1937836453571509085">"Boot device using 16 KB page size supported kernel"</string>
+    <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"Switch from 4 KB mode to 16 KB mode"</string>
+    <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"You are in the page-agnostic mode running a 4 KB kernel, and you are switching to the 16 KB mode. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. This will reboot the device. Some features will be disabled in these modes, so some applications may not work. To return the device to production mode, you would need to then, switch back to the 4 KB mode and lock the bootloader, which factory resets the device. After the device successfully boots into Android, disable OEM unlocking in Developer options."</string>
+    <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"Switch from 16 KB mode to 4 KB mode"</string>
+    <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"You are in the page-agnostic mode running a 16 KB kernel, and you are switching to the 4 KB mode. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. This will reboot the device. Some features will be disabled in these modes, so some applications may not work. To return the device to production mode, you would need to then lock the bootloader, which factory resets the device. After the device successfully boots into Android, disable OEM unlocking in Developer options."</string>
+    <string name="toast_16k_update_failed_text" msgid="7848383020572918850">"Failed to update kernel to 16 KB pages compatible kernel."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Applying change"</string>
-    <string name="confirm_format_ext4_title" msgid="6696191800594435577">"Reformat device to ext4? (required for 16KB mode)"</string>
-    <string name="confirm_format_ext4_text" msgid="7940372488624630214">"This device’s data partition needs to be converted to ext4 before using the 16KB developer option. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. Activating the 16KB option will require one more reboot after this. Once you are in this mode, you can switch back and forth between 4KB and 16KB mode with a single reboot. Some features will be disabled in these modes, so some applications may not work. To return the device to production mode, you would need to switch back to 4KB mode and then lock the bootloader, which factory resets the device. After the device successfully boots into Android, disable OEM unlocking in Developer options. The device will be wiped and the filesystem will be changed to ext4 after confirmation. After this completes, please come back to enable 16KB again."</string>
+    <string name="confirm_format_ext4_title" msgid="4754057414728537125">"Reformat device to ext4? (required for 16 KB mode)"</string>
+    <string name="confirm_format_ext4_text" msgid="432847493298532536">"This device’s data partition needs to be converted to ext4 before using the 16 KB developer option. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. Activating the 16 KB option will require one more reboot after this. Once you are in this mode, you can switch back and forth between 4 KB and 16 KB mode with a single reboot. Some features will be disabled in these modes, so some applications may not work. To return the device to production mode, you would need to switch back to 4 KB mode and then lock the bootloader, which factory resets the device. After the device successfully boots into Android, disable OEM unlocking in Developer options. The device will be wiped and the filesystem will be changed to ext4 after confirmation. After this completes, please come back to enable 16 KB again."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Erase all data"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Failed to reformat and wipe the data partition to ext4."</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Bootloader Unlock Required"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"This device needs to have the bootloader unlocked before using the 16KB developer option. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. All user data and settings will be wiped when activating 16KB mode. Once the bootloader is unlocked, activating the 16KB option will require two reboots. Once you are in this mode, you can switch back and forth between 4KB and 16KB mode with a single reboot. Some features will be disabled in these modes, so some applications may not work. To return the device to production mode, you would need to switch back to 4KB mode and then OEM/bootloader lock (which factory resets) the device. Please unlock the bootloader and try again. You can see instructions for how to do this at &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
-    <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Using 4KB page-agnostic mode"</string>
-    <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"You are in the 4KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work. In order to re-enter the production mode, you must lock the bootloader of the device. Tap to read more."</string>
-    <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"You are in the 4KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work. In order to re-enter the production mode, you must lock the bootloader of the device. This would factory reset the device again and restore it to production settings. After the device successfully boots into Android, disable OEM unlocking in Developer options. If the device fails to boot into Android or is unstable, re-flash the device with the latest factory images from &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; and select \'Wipe Device\', \'Lock Bootloader\' and \'Force Flash all partitions\'."</string>
-    <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Using 16KB page-agnostic mode"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"You are in the 16KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work. In order to re-enter the production mode, you must, switch back to 4KB mode and then lock the bootloader of the device. Tap to read more."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"You are in the 16KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work. In order to re-enter the production mode, you must, switch back to 4KB mode and then lock the bootloader of the device. This would factory reset the device again and restore it to production settings. After the device successfully boots into Android, disable OEM unlocking in Developer options. If the device fails to boot into Android or is unstable, re-flash the device with the latest factory images from &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; and select \'Wipe Device\', \'Lock Bootloader\' and \'Force Flash all partitions\'."</string>
-    <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16KB Page-agnostic Mode"</string>
+    <string name="confirm_oem_unlock_for_16k_text" msgid="8089310116854544106">"This device needs to have the bootloader unlocked before using the 16 KB developer option. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. All user data and settings will be wiped when activating 16 KB mode. Once the bootloader is unlocked, activating the 16 KB option will require two reboots. Once you are in this mode, you can switch back and forth between 4 KB and 16 KB mode with a single reboot. Some features will be disabled in these modes, so some applications may not work. To return the device to production mode, you would need to switch back to 4 KB mode and then OEM/bootloader lock (which factory resets) the device. Please unlock the bootloader and try again. You can see instructions for how to do this at &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
+    <string name="page_agnostic_4k_pages_title" msgid="293797217034340398">"Using 4 KB page-agnostic mode"</string>
+    <string name="page_agnostic_4k_pages_text_short" msgid="731597455785555266">"You are in the 4 KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work. In order to re-enter the production mode, you must lock the bootloader of the device. Tap to read more."</string>
+    <string name="page_agnostic_4k_pages_text" msgid="7572233914423063169">"You are in the 4 KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work. In order to re-enter the production mode, you must lock the bootloader of the device. This would factory reset the device again and restore it to production settings. After the device successfully boots into Android, disable OEM unlocking in Developer options. If the device fails to boot into Android or is unstable, re-flash the device with the latest factory images from &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; and select \'Wipe Device\', \'Lock Bootloader\' and \'Force Flash all partitions\'."</string>
+    <string name="page_agnostic_16k_pages_title" msgid="8940585327969638637">"Using 16 KB page-agnostic mode"</string>
+    <string name="page_agnostic_16k_pages_text_short" msgid="7613206944532151035">"You are in the 16 KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work. In order to re-enter the production mode, you must, switch back to 4 KB mode and then lock the bootloader of the device. Tap to read more."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2860363435021452169">"You are in the 16 KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work. In order to re-enter the production mode, you must, switch back to 4 KB mode and then lock the bootloader of the device. This would factory reset the device again and restore it to production settings. After the device successfully boots into Android, disable OEM unlocking in Developer options. If the device fails to boot into Android or is unstable, re-flash the device with the latest factory images from &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; and select \'Wipe Device\', \'Lock Bootloader\' and \'Force Flash all partitions\'."</string>
+    <string name="page_agnostic_notification_channel_name" msgid="2058933148654316447">"16 KB Page-agnostic Mode"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Read more"</string>
     <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"Run app with page size compat mode"</string>
     <string name="enable_16k_app_compat_details" msgid="3389401258168314266">"App will be run in page size compatibility mode on 16 KB device when toggled."</string>
@@ -5575,8 +5575,7 @@
     <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"Close"</string>
     <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"Connect another pair of compatible headphones, or share your stream\'s name and password with the other person"</string>
     <string name="audio_sharing_dialog_qr_code_content" msgid="2246980817848351361">"Let others scan this code and listen to your audio\n\nStream name: <xliff:g id="STREAM_NAME">%1$s</xliff:g>\nPassword: <xliff:g id="PASSWORD">%2$s</xliff:g>"</string>
-    <!-- no translation found for audio_sharing_dialog_qr_code_content_no_password (7824076083031650113) -->
-    <skip />
+    <string name="audio_sharing_dialog_qr_code_content_no_password" msgid="7824076083031650113">"Let others scan this code and listen to your audio\n\nStream name: <xliff:g id="STREAM_NAME">%1$s</xliff:g>"</string>
     <string name="audio_sharing_dialog_pair_new_device_content" msgid="6720472590211440206">"or pair another set of compatible headphones"</string>
     <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"Pair another set of compatible headphones, or share your audio stream QR code with the other person"</string>
     <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"Sharing audio"</string>
@@ -5608,6 +5607,7 @@
     <string name="audio_sharing_block_pairing_dialog_title" msgid="1756723860075818856">"Turn off Audio Sharing"</string>
     <string name="audio_sharing_block_pairing_dialog_content" msgid="6352030314206654722">"To pair a new device, turn off Audio Sharing first."</string>
     <string name="audio_sharing_turn_off_button_label" msgid="1934956352475393641">"Turn off"</string>
+    <string name="share_audio_notification_title" msgid="5201976754820387782">"Share audio with <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Connect to a LE audio stream"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Nearby audio streams"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Audio streams"</string>
@@ -5637,6 +5637,9 @@
     <string name="audio_streams_present_now" msgid="7519818719382756366">"Stream paused"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Stop listening"</string>
     <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Connect compatible headphones"</string>
+    <string name="audio_streams_dialog_turn_off_talkback_title" msgid="6824585115302786690">"Turn off Talkback temporarily"</string>
+    <string name="audio_streams_dialog_turn_off_talkback_subtitle" msgid="2394295776096273919">"Talkback cannot be used when listening to audio streams. Turn off talkback to start listening."</string>
+    <string name="audio_streams_dialog_turn_off_talkback_button" msgid="8049097689955037626">"Turn off"</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Connect a device"</string>
     <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Audio stream details"</string>
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"Audio stream QR code"</string>

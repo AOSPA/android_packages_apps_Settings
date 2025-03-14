@@ -36,6 +36,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
 import com.android.settings.R;
@@ -45,6 +46,7 @@ import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.flags.Flags;
 
 import com.google.common.collect.ImmutableList;
 
@@ -129,8 +131,9 @@ public class AudioSharingReceiver extends BroadcastReceiver {
                 cancelSharingNotification(context, ADD_SOURCE_NOTIFICATION_ID);
                 break;
             case LocalBluetoothLeBroadcast.ACTION_LE_AUDIO_SHARING_DEVICE_CONNECTED:
-                if (!BluetoothUtils.isAudioSharingUIAvailable(context)) {
-                    Log.d(TAG, "Skip ACTION_LE_AUDIO_SHARING_DEVICE_CONNECTED, feature disabled.");
+                if (!Flags.promoteAudioSharingForSecondAutoConnectedLeaDevice()
+                        || !BluetoothUtils.isAudioSharingUIAvailable(context)) {
+                    Log.d(TAG, "Skip ACTION_LE_AUDIO_SHARING_DEVICE_CONNECTED, flag/feature off");
                     return;
                 }
                 BluetoothDevice device = intent.getParcelableExtra(EXTRA_BLUETOOTH_DEVICE,
@@ -144,53 +147,24 @@ public class AudioSharingReceiver extends BroadcastReceiver {
                     Log.d(TAG, "App in foreground, show share audio dialog");
                 } else {
                     Log.d(TAG, "App not in foreground, show share audio notification");
-                    showAddSourceNotification(context, device);
+                    LocalBluetoothManager manager = Utils.getLocalBtManager(context);
+                    if (!validToAddSource(device, action, manager).isEmpty()) {
+                        showAddSourceNotification(context, device);
+                    }
                 }
                 break;
             case ACTION_LE_AUDIO_SHARING_ADD_SOURCE:
-                if (!BluetoothUtils.isAudioSharingUIAvailable(context)) {
-                    Log.d(TAG, "Skip ACTION_LE_AUDIO_SHARING_ADD_SOURCE, feature disabled.");
+                if (!Flags.promoteAudioSharingForSecondAutoConnectedLeaDevice()
+                        || !BluetoothUtils.isAudioSharingUIAvailable(context)) {
+                    Log.d(TAG, "Skip ACTION_LE_AUDIO_SHARING_ADD_SOURCE, flag/feature off");
                     cancelSharingNotification(context, ADD_SOURCE_NOTIFICATION_ID);
                     return;
                 }
                 BluetoothDevice sink = intent.getParcelableExtra(EXTRA_BLUETOOTH_DEVICE,
                         BluetoothDevice.class);
-                if (sink == null) {
-                    Log.d(TAG, "Skip ACTION_LE_AUDIO_SHARING_ADD_SOURCE, null device");
-                    cancelSharingNotification(context, ADD_SOURCE_NOTIFICATION_ID);
-                    return;
-                }
                 LocalBluetoothManager manager = Utils.getLocalBtManager(context);
-                boolean isBroadcasting = BluetoothUtils.isBroadcasting(manager);
-                if (!isBroadcasting) {
-                    Log.d(TAG, "Skip ACTION_LE_AUDIO_SHARING_ADD_SOURCE, not broadcasting");
-                    cancelSharingNotification(context, ADD_SOURCE_NOTIFICATION_ID);
-                    return;
-                }
-                Map<Integer, List<BluetoothDevice>> groupedDevices =
-                        AudioSharingUtils.fetchConnectedDevicesByGroupId(manager);
-                int groupId = groupedDevices.entrySet().stream().filter(
-                        entry -> entry.getValue().contains(sink)).findFirst().map(
-                        Map.Entry::getKey).orElse(BluetoothCsipSetCoordinator.GROUP_ID_INVALID);
-                if (groupId == BluetoothCsipSetCoordinator.GROUP_ID_INVALID) {
-                    Log.d(TAG, "Skip ACTION_LE_AUDIO_SHARING_ADD_SOURCE, no valid group id");
-                    cancelSharingNotification(context, ADD_SOURCE_NOTIFICATION_ID);
-                    return;
-                }
-                List<BluetoothDevice> sinksToAdd = groupedDevices.getOrDefault(groupId,
-                        ImmutableList.of()).stream().filter(
-                            d -> !BluetoothUtils.hasConnectedBroadcastSourceForBtDevice(d,
-                                manager)).toList();
-                if (sinksToAdd.isEmpty()) {
-                    Log.d(TAG, "Skip ACTION_LE_AUDIO_SHARING_ADD_SOURCE, already has source");
-                } else if (groupedDevices.entrySet().stream().filter(
-                        entry -> entry.getKey() != groupId && entry.getValue().stream().anyMatch(
-                                d -> BluetoothUtils.hasConnectedBroadcastSourceForBtDevice(d,
-                                        manager))).toList().size() >= 2) {
-                    Log.d(TAG, "Skip ACTION_LE_AUDIO_SHARING_ADD_SOURCE, already 2 sinks");
-                } else {
-                    AudioSharingUtils.addSourceToTargetSinks(sinksToAdd, manager);
-                }
+                ImmutableList<BluetoothDevice> sinksToAdd = validToAddSource(sink, action, manager);
+                AudioSharingUtils.addSourceToTargetSinks(sinksToAdd, manager);
                 cancelSharingNotification(context, ADD_SOURCE_NOTIFICATION_ID);
                 break;
             case ACTION_LE_AUDIO_SHARING_CANCEL_NOTIF:
@@ -200,8 +174,45 @@ public class AudioSharingReceiver extends BroadcastReceiver {
                 }
                 break;
             default:
-                Log.w(TAG, "Received unexpected intent " + intent.getAction());
+                Log.w(TAG, "Received unexpected intent " + action);
         }
+    }
+
+    private ImmutableList<BluetoothDevice> validToAddSource(@Nullable BluetoothDevice sink,
+            @NonNull String action, @Nullable LocalBluetoothManager btManager) {
+        if (sink == null) {
+            Log.d(TAG, "Skip " + action + ", null device");
+            return ImmutableList.of();
+        }
+        boolean isBroadcasting = BluetoothUtils.isBroadcasting(btManager);
+        if (!isBroadcasting) {
+            Log.d(TAG, "Skip " + action + ", not broadcasting");
+            return ImmutableList.of();
+        }
+        Map<Integer, List<BluetoothDevice>> groupedDevices =
+                AudioSharingUtils.fetchConnectedDevicesByGroupId(btManager);
+        int groupId = groupedDevices.entrySet().stream().filter(
+                entry -> entry.getValue().contains(sink)).findFirst().map(
+                Map.Entry::getKey).orElse(BluetoothCsipSetCoordinator.GROUP_ID_INVALID);
+        if (groupId == BluetoothCsipSetCoordinator.GROUP_ID_INVALID) {
+            Log.d(TAG, "Skip " + action + ", no valid group id");
+            return ImmutableList.of();
+        }
+        List<BluetoothDevice> sinksToAdd = groupedDevices.getOrDefault(groupId,
+                ImmutableList.of()).stream().filter(
+                    d -> !BluetoothUtils.hasConnectedBroadcastSourceForBtDevice(d,
+                        btManager)).toList();
+        if (sinksToAdd.isEmpty()) {
+            Log.d(TAG, "Skip " + action + ", already has source");
+            return ImmutableList.of();
+        } else if (groupedDevices.entrySet().stream().filter(
+                entry -> entry.getKey() != groupId && entry.getValue().stream().anyMatch(
+                        d -> BluetoothUtils.hasConnectedBroadcastSourceForBtDevice(d,
+                                btManager))).toList().size() >= 2) {
+            Log.d(TAG, "Skip " + action + ", already 2 sinks");
+            return ImmutableList.of();
+        }
+        return ImmutableList.copyOf(sinksToAdd);
     }
 
     private void showSharingNotification(@NonNull Context context) {
@@ -273,12 +284,14 @@ public class AudioSharingReceiver extends BroadcastReceiver {
         Intent addSourceIntent =
                 new Intent(ACTION_LE_AUDIO_SHARING_ADD_SOURCE).setPackage(context.getPackageName())
                         .putExtra(EXTRA_BLUETOOTH_DEVICE, device);
+        // Use PendingIntent.FLAG_UPDATE_CURRENT here because intent extra (device) could be updated
         PendingIntent addSourcePendingIntent =
                 PendingIntent.getBroadcast(
                         context,
                         R.string.audio_sharing_share_button_label,
                         addSourceIntent,
-                        PendingIntent.FLAG_IMMUTABLE);
+                        PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_UPDATE_CURRENT
+                                | PendingIntent.FLAG_IMMUTABLE);
         NotificationCompat.Action addSourceAction =
                 new NotificationCompat.Action.Builder(
                         0,

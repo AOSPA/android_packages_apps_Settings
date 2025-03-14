@@ -70,8 +70,7 @@ public class RedactionInterstitial extends SettingsActivity {
 
     @Override
     protected void onCreate(Bundle savedInstance) {
-        setTheme(SetupWizardUtils.getTheme(this, getIntent()));
-        ThemeHelper.trySetDynamicColor(this);
+        ThemeHelper.trySetSuwTheme(this);
         super.onCreate(savedInstance);
         findViewById(R.id.content_parent).setFitsSystemWindows(false);
     }

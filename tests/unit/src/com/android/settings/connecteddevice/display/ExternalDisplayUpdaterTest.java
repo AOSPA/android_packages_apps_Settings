@@ -63,6 +63,7 @@ public class ExternalDisplayUpdaterTest extends ExternalDisplayTestBase {
             return null;
         }).when(mMockedCallback).onDeviceAdded(any());
         mUpdater.initPreference(mContext, mMockedInjector);
+        mUpdater.refreshPreference();
         mUpdater.registerCallback();
         mHandler.flush();
         assertThat(mPreferenceAdded).isNotNull();
@@ -85,6 +86,7 @@ public class ExternalDisplayUpdaterTest extends ExternalDisplayTestBase {
             return null;
         }).when(mMockedCallback).onDeviceRemoved(any());
         mUpdater.initPreference(mContext, mMockedInjector);
+        mUpdater.refreshPreference();
         mUpdater.registerCallback();
         mHandler.flush();
         assertThat(mPreferenceAdded).isNotNull();

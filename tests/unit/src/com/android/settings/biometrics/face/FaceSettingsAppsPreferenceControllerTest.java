@@ -18,10 +18,17 @@ package com.android.settings.biometrics.face;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.verify;
+
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,10 +38,12 @@ import org.junit.runner.RunWith;
 public class FaceSettingsAppsPreferenceControllerTest {
     private Context mContext;
     private FaceSettingsAppsPreferenceController mController;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mController = new FaceSettingsAppsPreferenceController(
                 mContext, "biometric_settings_face_app");
     }
@@ -42,5 +51,19 @@ public class FaceSettingsAppsPreferenceControllerTest {
     @Test
     public void isSliceable_returnFalse() {
         assertThat(mController.isSliceable()).isFalse();
+    }
+
+    @Test
+    public void setChecked_checked_updateMetrics() {
+        mController.setChecked(true);
+        verify(mFeatureFactory.metricsFeatureProvider).action(any(),
+                eq(SettingsEnums.ACTION_FACE_ENABLED_FOR_APP), eq(true));
+    }
+
+    @Test
+    public void setChecked_unchecked_updateMetrics() {
+        mController.setChecked(false);
+        verify(mFeatureFactory.metricsFeatureProvider).action(any(),
+                eq(SettingsEnums.ACTION_FACE_ENABLED_FOR_APP), eq(false));
     }
 }

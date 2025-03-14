@@ -17,43 +17,64 @@ package com.android.settings.network;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-
+import android.os.Bundle;
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
+import androidx.preference.SwitchPreferenceCompat;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.flags.Flags;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
-/**
- * Adaptive connectivity is a feature which automatically manages network connections.
- */
+/** Adaptive connectivity is a feature which automatically manages network connections. */
 @SearchIndexable
 public class AdaptiveConnectivitySettings extends DashboardFragment {
 
-    private static final String TAG = "AdaptiveConnectivitySettings";
+  private static final String TAG = "AdaptiveConnectivitySettings";
+  protected static final String ADAPTIVE_CONNECTIVITY_WIFI_ENABLED =
+      "adaptive_connectivity_wifi_enabled";
+  protected static final String ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED =
+      "adaptive_connectivity_mobile_network_enabled";
 
-    @Override
-    public int getMetricsCategory() {
-        return SettingsEnums.ADAPTIVE_CONNECTIVITY_CATEGORY;
+  @Override
+  public int getMetricsCategory() {
+    return SettingsEnums.ADAPTIVE_CONNECTIVITY_CATEGORY;
+  }
+
+  @Override
+  protected String getLogTag() {
+    return TAG;
+  }
+
+  @Override
+  protected int getPreferenceScreenResId() {
+    return R.xml.adaptive_connectivity_settings;
+  }
+
+  public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+      new BaseSearchIndexProvider(R.xml.adaptive_connectivity_settings);
+
+  @Override
+  public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+    return AdaptiveConnectivityScreen.KEY;
+  }
+
+  @Override
+  public void onCreatePreferences(@NonNull Bundle savedInstanceState, @NonNull String rootKey) {
+    Log.i("Settings", "onCreatePreferences");
+    super.onCreatePreferences(savedInstanceState, rootKey);
+    if (Flags.enableNestedToggleSwitches()) {
+      setSwitchVisibility(ADAPTIVE_CONNECTIVITY_WIFI_ENABLED, true);
+      setSwitchVisibility(ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED, true);
     }
+  }
 
-    @Override
-    protected String getLogTag() {
-        return TAG;
+  private void setSwitchVisibility(String key, boolean isVisible) {
+    SwitchPreferenceCompat switchPreference = findPreference(key);
+    if (switchPreference != null) {
+      switchPreference.setVisible(isVisible);
     }
-
-    @Override
-    protected int getPreferenceScreenResId() {
-        return R.xml.adaptive_connectivity_settings;
-    }
-
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.adaptive_connectivity_settings);
-
-    @Override
-    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
-        return AdaptiveConnectivityScreen.KEY;
-    }
+  }
 }

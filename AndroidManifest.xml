@@ -5585,6 +5585,24 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                        android:value="com.android.settings.applications.contacts.ContactsStorageSettings"/>
         </activity>
 
+        <activity
+            android:name="com.android.settings.connecteddevice.audiosharing.AudioSharingJoinHandlerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTop"
+            android:permission="android.permission.BLUETOOTH_PRIVILEGED"
+            android:taskAffinity="com.android.settings.connecteddevice.audiosharing.AudioSharingJoinHandlerActivity"
+            android:theme="@style/Transparent"
+            android:exported="false">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.AUDIO_SHARING_JOIN_HANDLER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data
+                android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.connecteddevice.audiosharing.AudioSharingJoinHandlerDashboardFragment" />
+        </activity>
+
         <service
             android:name="com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamMediaService"
             android:foregroundServiceType="mediaPlayback"

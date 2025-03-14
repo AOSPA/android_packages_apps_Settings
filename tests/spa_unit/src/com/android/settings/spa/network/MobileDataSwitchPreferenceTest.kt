@@ -20,6 +20,8 @@ import android.content.Context
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsEnabled
+import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
@@ -27,6 +29,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.network.telephony.MobileDataRepository
+import com.android.settings.network.telephony.SubscriptionActivationRepository
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flowOf
@@ -41,18 +44,30 @@ import org.mockito.kotlin.stub
 
 @RunWith(AndroidJUnit4::class)
 class MobileDataSwitchPreferenceTest {
-    @get:Rule val composeTestRule = createComposeRule()
+    @get:Rule
+    val composeTestRule = createComposeRule()
 
     private val context: Context = spy(ApplicationProvider.getApplicationContext()) {}
 
     private val mockMobileDataRepository =
         mock<MobileDataRepository> { on { isMobileDataEnabledFlow(any()) } doReturn emptyFlow() }
 
+    private val mockSubscriptionActivationRepository =
+        mock<SubscriptionActivationRepository> {
+            on { isActivationChangeableFlow() } doReturn flowOf(
+                true
+            )
+        }
+
     @Test
     fun title_displayed() {
         composeTestRule.setContent {
             CompositionLocalProvider(LocalContext provides context) {
-                MobileDataSwitchPreference(SUB_ID, mockMobileDataRepository) {}
+                MobileDataSwitchPreference(
+                    SUB_ID,
+                    mockMobileDataRepository,
+                    mockSubscriptionActivationRepository
+                ) {}
             }
         }
 
@@ -65,7 +80,11 @@ class MobileDataSwitchPreferenceTest {
     fun summary_displayed() {
         composeTestRule.setContent {
             CompositionLocalProvider(LocalContext provides context) {
-                MobileDataSwitchPreference(SUB_ID, mockMobileDataRepository) {}
+                MobileDataSwitchPreference(
+                    SUB_ID,
+                    mockMobileDataRepository,
+                    mockSubscriptionActivationRepository
+                ) {}
             }
         }
 
@@ -82,7 +101,11 @@ class MobileDataSwitchPreferenceTest {
         var newCheckedCalled: Boolean? = null
         composeTestRule.setContent {
             CompositionLocalProvider(LocalContext provides context) {
-                MobileDataSwitchPreference(SUB_ID, mockMobileDataRepository) {
+                MobileDataSwitchPreference(
+                    SUB_ID,
+                    mockMobileDataRepository,
+                    mockSubscriptionActivationRepository
+                ) {
                     newCheckedCalled = it
                 }
             }
@@ -93,6 +116,58 @@ class MobileDataSwitchPreferenceTest {
             .performClick()
 
         assertThat(newCheckedCalled).isTrue()
+    }
+
+    @Test
+    fun changeable_activationIsNotChangeable_notEnabled() {
+        mockMobileDataRepository.stub {
+            on { isMobileDataEnabledFlow(SUB_ID) } doReturn flowOf(true)
+        }
+
+        mockSubscriptionActivationRepository.stub {
+            on { isActivationChangeableFlow() } doReturn flowOf(false)
+        }
+
+        composeTestRule.setContent {
+            CompositionLocalProvider(LocalContext provides context) {
+                MobileDataSwitchPreference(
+                    SUB_ID,
+                    mockMobileDataRepository,
+                    mockSubscriptionActivationRepository
+                ) {
+                }
+            }
+        }
+
+        composeTestRule
+            .onNodeWithText(context.getString(R.string.mobile_data_settings_title))
+            .assertIsNotEnabled()
+    }
+
+    @Test
+    fun changeable_activationIsChangeable_enabled() {
+        mockMobileDataRepository.stub {
+            on { isMobileDataEnabledFlow(SUB_ID) } doReturn flowOf(true)
+        }
+
+        mockSubscriptionActivationRepository.stub {
+            on { isActivationChangeableFlow() } doReturn flowOf(true)
+        }
+
+        composeTestRule.setContent {
+            CompositionLocalProvider(LocalContext provides context) {
+                MobileDataSwitchPreference(
+                    SUB_ID,
+                    mockMobileDataRepository,
+                    mockSubscriptionActivationRepository
+                ) {
+                }
+            }
+        }
+
+        composeTestRule
+            .onNodeWithText(context.getString(R.string.mobile_data_settings_title))
+            .assertIsEnabled()
     }
 
     private companion object {

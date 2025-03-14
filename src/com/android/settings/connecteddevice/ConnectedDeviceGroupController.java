@@ -93,6 +93,7 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
     public void onStart() {
         if (mExternalDisplayUpdater != null) {
             mExternalDisplayUpdater.registerCallback();
+            mExternalDisplayUpdater.refreshPreference();
         }
 
         if (mBluetoothDeviceUpdater != null) {

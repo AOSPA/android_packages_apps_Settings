@@ -41,10 +41,6 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Satt på vent"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Ukjent"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Forhåndsvisning"</string>
-    <!-- no translation found for preview_pager_previous_button (607771113300838313) -->
-    <skip />
-    <!-- no translation found for preview_pager_next_button (8700907912508927271) -->
-    <skip />
     <string name="qr_code_content_description" msgid="1852208464419291347">"QR-kode"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Gjør mindre"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Gjør større"</string>
@@ -101,6 +97,10 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Om lyd"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Send lyder til høreapparatet eller telefonhøyttaleren"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Relaterte"</string>
+    <!-- no translation found for bluetooth_try_nearby_share_title (4996427014054610877) -->
+    <skip />
+    <!-- no translation found for bluetooth_try_nearby_share_summary (329823028635487822) -->
+    <skip />
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Ringelyd og alarmer"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Lyd i samtaler"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Medie- og systemlyder"</string>
@@ -231,12 +231,9 @@
     <string name="search_region_hint" msgid="1748708432568237552">"Søk etter regioner"</string>
     <string name="top_intro_region_title" msgid="2336323415395642117">"Regionen du velger, påvirker hvordan telefonen viser tidspunkter, datoer, temperaturer med mer."</string>
     <string name="more_language_settings_category" msgid="3669703092480725416">"Flere språkinnstillinger"</string>
-    <!-- no translation found for title_change_system_locale_region (1977530992614685128) -->
-    <skip />
-    <!-- no translation found for body_change_system_locale_region (9064318449821043189) -->
-    <skip />
-    <!-- no translation found for top_intro_numbering_system_title (8234587334207926397) -->
-    <skip />
+    <string name="title_change_system_locale_region" msgid="1977530992614685128">"Vil du bytte region til <xliff:g id="SYSTEM_LANGUAGE_REGION">%1$s</xliff:g>?"</string>
+    <string name="body_change_system_locale_region" msgid="9064318449821043189">"Enheten beholder <xliff:g id="SYSTEM_LANGUAGE">%1$s</xliff:g> som systemspråk"</string>
+    <string name="top_intro_numbering_system_title" msgid="8234587334207926397">"De fleste apper bruker regionsinnstillingene dine"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regionsinnstillinger"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Angi innstillinger for enheter og tall"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"La apper bruke regionsinnstillingene dine til å tilpasse opplevelsen din"</string>
@@ -893,7 +890,8 @@
     <string name="lockpassword_credential_changed" msgid="5934778179732392028">"Skjermlåsen har allerede blitt endret. Prøv på nytt med den nye skjermlåsen."</string>
     <string name="lockpattern_tutorial_cancel_label" msgid="775215267818384016">"Avbryt"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="1329049481210689408">"Neste"</string>
-    <string name="manage_device_admin" msgid="1044620606203916275">"Apper for enhetsadministrator"</string>
+    <!-- no translation found for manage_device_admin (7272894919651600481) -->
+    <skip />
     <string name="number_of_device_admins_none" msgid="152926922020437312">"Ingen aktive apper"</string>
     <string name="number_of_device_admins" msgid="3402909995362162876">"{count,plural, =1{# aktiv app}other{# aktive apper}}"</string>
     <string name="manage_trust_agents" msgid="6410149930029992356">"Pålitelige agenter"</string>
@@ -1127,7 +1125,7 @@
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Passord for wifi-sone: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Automatisk tilkobling"</string>
     <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Tillat tilkobling til dette nettverket når det er innen rekkevidde"</string>
-    <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Legg til en enhet"</string>
+    <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Legg til enhet"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Bruk en QR-kode for å legge til en enhet på dette nettverket"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR-kode er ikke et gyldig format"</string>
     <string name="retry" msgid="7542103800274026915">"Prøv på nytt"</string>
@@ -1284,12 +1282,9 @@
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
     <string name="emergency_address_title" msgid="8102786488994263815">"Adresse for nødssituasjoner"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"Brukes som posisjonen din når du gjør et nødanrop over Wifi"</string>
-    <!-- no translation found for private_dns_title (1180823690693258572) -->
-    <skip />
-    <!-- no translation found for private_dns_field_require (2318400923953435586) -->
-    <skip />
-    <!-- no translation found for private_dns_hostname_invalid (5085498734835552780) -->
-    <skip />
+    <string name="private_dns_title" msgid="1180823690693258572">"Vertsnavn"</string>
+    <string name="private_dns_field_require" msgid="2318400923953435586">"Feltet er obligatorisk"</string>
+    <string name="private_dns_hostname_invalid" msgid="5085498734835552780">"Vertsnavn du skrev inn, er ikke gyldig"</string>
     <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"Finn ut mer"</annotation>" om funksjoner for privat DNS"</string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"På"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"Aktivér wifi-anrop"</string>
@@ -2057,7 +2052,13 @@
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"Bruk musetaster"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Bruk tastaturet til å kontrollere pekeren"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Omvendt rulling"</string>
-    <string name="mouse_reverse_vertical_scrolling_summary" msgid="4403637093982742165">"Innholdet flyttes opp når du ruller ned"</string>
+    <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Rull opp for å flytte siden ned"</string>
+    <!-- no translation found for mouse_scrolling_category_title (2992126595687187296) -->
+    <skip />
+    <!-- no translation found for mouse_scrolling_acceleration (7119758828203396430) -->
+    <skip />
+    <!-- no translation found for mouse_scrolling_speed (3999483025392860903) -->
+    <skip />
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"Bytt primær museknapp"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Bruk venstre museknapp som høyre"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"Markørakselerasjon"</string>
@@ -2238,6 +2239,7 @@
     <string name="accessibility_feedback_title" msgid="6690472705407526006">"Tilbakemelding"</string>
     <string name="accessibility_feedback_summary" msgid="4576591591334314827">"Bidra til å gjøre tjenesten bedre ved å svare på en undersøkelse"</string>
     <string name="accessibility_feedback_disabled_summary" msgid="3652321859452620942">"Ingen undersøkelser er tilgjengelige"</string>
+    <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Send tilbakemelding"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Nedlastede apper"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"På forsøksstadiet"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Funksjonsflagg"</string>
@@ -2494,10 +2496,8 @@
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Fortsett"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Høreapparater"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Konfigurer og administrer høreapparater, cochlea-implantater og andre forsterkningsenheter som bruker ASHA eller LE-lyd"</string>
-    <!-- no translation found for accessibility_hearingaid_asha_only_intro (7402419984664822832) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_hap_only_intro (3332144138443825311) -->
-    <skip />
+    <string name="accessibility_hearingaid_asha_only_intro" msgid="7402419984664822832">"Konfigurer og administrer høreapparater, cochlea-implantater og andre forsterkningsenheter som bruker ASHA"</string>
+    <string name="accessibility_hearingaid_hap_only_intro" msgid="3332144138443825311">"Konfigurer og administrer høreapparater, cochlea-implantater og andre forsterkningsenheter som bruker LE-lyd"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"Ingen høreapparater er tilkoblet"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Legg til høreapparater"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Koble til høreapparater"</string>
@@ -2517,14 +2517,10 @@
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"Om høreapparater"</string>
     <string name="accessibility_hearing_device_footer_summary" msgid="5513620078219951077">"For å finne andre høreapparater som ikke har støtte for ASHA eller LE-lyd, trykk på &lt;b&gt;Koble til en ny enhet&lt;/b&gt; &gt; &lt;b&gt;Se flere enheter&lt;/b&gt;"</string>
     <string name="accessibility_hearing_device_footer_summary_tts" msgid="955527026890456959">"For å finne andre høreapparater som ikke har støtte for ASHA eller LE-lyd, trykk på "<b>"Koble til en ny enhet"</b>" og deretter "<b>"Se flere enheter"</b></string>
-    <!-- no translation found for accessibility_hearing_device_footer_asha_only_summary (3377169209330540616) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_footer_asha_only_summary_tts (8192971114504608531) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_footer_hap_only_summary (3531758698830915205) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_footer_hap_only_summary_tts (4440097982533045507) -->
-    <skip />
+    <string name="accessibility_hearing_device_footer_asha_only_summary" msgid="3377169209330540616">"For å finne andre høreapparater som ikke har støtte for ASHA, trykk på &lt;b&gt;Koble til en ny enhet&lt;/b&gt; &gt; &lt;b&gt;Se flere enheter&lt;/b&gt;"</string>
+    <string name="accessibility_hearing_device_footer_asha_only_summary_tts" msgid="8192971114504608531">"For å finne andre høreapparater som ikke har støtte for ASHA, trykk på "<b>"Koble til en ny enhet"</b>" og deretter på "<b>"Se flere enheter"</b></string>
+    <string name="accessibility_hearing_device_footer_hap_only_summary" msgid="3531758698830915205">"For å finne andre høreapparater som ikke har støtte for LE-lyd, trykk på &lt;b&gt;Koble til en ny enhet&lt;/b&gt; &gt; &lt;b&gt;Se flere enheter&lt;/b&gt;"</string>
+    <string name="accessibility_hearing_device_footer_hap_only_summary_tts" msgid="4440097982533045507">"For å finne andre høreapparater som ikke har støtte for LE-lyd, trykk på "<b>"Koble til en ny enhet"</b>" og deretter på "<b>"Se flere enheter"</b></string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Koble til høreapparat"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"Du kan koble sammen ASHA- og LE-lyd-høreapparater på denne siden. Forsikre deg om at høreapparatet ditt er slått på og klart til sammenkobling."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Tilgjengelige høreapparater"</string>
@@ -2975,7 +2971,8 @@
     <string name="remove_device_admin" msgid="3143059558744287259">"Deaktiver denne administratorappen for enheten"</string>
     <string name="uninstall_device_admin" msgid="4481095209503956916">"Avinstaller appen"</string>
     <string name="remove_and_uninstall_device_admin" msgid="707912012681691559">"Deaktiver og avinstaller"</string>
-    <string name="select_device_admin_msg" msgid="5501360309040114486">"Apper for enhetsadministrator"</string>
+    <!-- no translation found for select_device_admin_msg (2506262585633022884) -->
+    <skip />
     <string name="no_device_admins" msgid="8888779888103079854">"Ingen apper for enhetsadministrator er tilgjengelige"</string>
     <string name="no_trust_agents" msgid="8659098725864191600">"Ingen tilgjengelige pålitelige agenter"</string>
     <string name="add_device_admin_msg" msgid="7730006568970042119">"Vil du aktivere administratorappen?"</string>
@@ -3866,7 +3863,8 @@
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Flere innstillinger er tilgjengelige i denne appen"</string>
     <string name="notification_polite_title" msgid="6121016426991791557">"Varseldemping"</string>
     <string name="notification_polite_main_control_title" msgid="5812529809151927149">"Bruk varseldemping"</string>
-    <string name="notification_polite_description" msgid="5497748284893832854">"Når du får mange varsler på kort tid, reduserer enheten volumet og minimerer varsler i opptil 2 minutter. Anrop, alarmer og prioriterte samtaler berøres ikke. \n\nDu kan se varsler du får mens dempingen er aktiv, ved å dra ned fra toppen av skjermen."</string>
+    <!-- no translation found for notification_polite_description (6137533404978878957) -->
+    <skip />
     <string name="notification_polite_work" msgid="8823596456640216391">"Bruk for jobbprofiler"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Bruk for apper i jobbprofilen"</string>
     <string name="notification_bundle_title" msgid="460988459835922719">"Grupperte varsler"</string>
@@ -4374,7 +4372,8 @@
     <string name="disconnected" msgid="3469373726996129247">"Ikke tilkoblet"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Ikke tilkoblet"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> apper er installert"</string>
-    <string name="storage_summary" msgid="5903562203143572768">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> brukt – <xliff:g id="FREE_SPACE">%2$s</xliff:g> ledig"</string>
+    <!-- no translation found for storage_summary (7631468664968572688) -->
+    <skip />
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Mørkt tema, skriftstørrelse, lysstyrke"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Gjennomsnittlig er <xliff:g id="USED_MEMORY">%1$s</xliff:g> av <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> minne brukt"</string>
     <string name="users_summary" msgid="8473589474976307510">"Logget på som <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -4443,6 +4442,8 @@
     <string name="ethernet_data_usage" msgid="4552227880905679761">"Ethernet-databruk"</string>
     <string name="wifi" msgid="2932584495223243842">"Wifi"</string>
     <string name="ethernet" msgid="4665162609974492983">"Ethernet"</string>
+    <!-- no translation found for ethernet_interface_title (1634881244068292765) -->
+    <skip />
     <string name="cell_data_template" msgid="6077963976103260821">"<xliff:g id="AMOUNT">^1</xliff:g> mobildata"</string>
     <string name="wifi_data_template" msgid="935934798340307438">"<xliff:g id="AMOUNT">^1</xliff:g> Wifi-data"</string>
     <string name="ethernet_data_template" msgid="1429173767445201145">"<xliff:g id="AMOUNT">^1</xliff:g> ethernet-data"</string>
@@ -4994,8 +4995,7 @@
     <string name="satellite_setting_title" msgid="2543034229989047673">"Satellittmeldinger"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Send og motta tekstmeldinger via satellitt. Inkludert med kontoen din."</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Send og motta tekstmeldinger via satellitt. Ikke inkludert med kontoen din."</string>
-    <!-- no translation found for satellite_setting_summary_without_entitlement (5284998840770992554) -->
-    <skip />
+    <string name="satellite_setting_summary_without_entitlement" msgid="5284998840770992554">"Send og motta tekstmeldinger via satellitt. Kontakt operatøren din for å få vite mer."</string>
     <string name="keywords_satellite_setting" msgid="613553612424945946">"Satellittmeldinger, satellittilkobling"</string>
     <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"Om <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="title_about_satellite_setting" msgid="3563087940535642558">"Du kan sende og motta tekstmeldinger via satellitt med en kvalifisert <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-konto"</string>
@@ -5009,8 +5009,7 @@
     <string name="title_supported_service" msgid="4275535165812691571">"Når telefonen kobles til en satellitt"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"Du kan sende melding til hvem som helst, inkludert nødtjenester. Telefonen kobles til et mobilnettverk igjen når det er tilgjengelig."</string>
     <string name="satellite_setting_summary_more_information" msgid="1028146147094166868">"<xliff:g id="SUBJECT">%1$s</xliff:g> kan ta lengre tid og er bare tilgjengelig i noen områder. Været og visse bygninger kan påvirke satellittilkoblingen. Anrop via satellitt er ikke tilgjengelig. Nødanrop kan fortsatt kobles til.\n\nDet kan ta litt tid før kontoendringer vises i innstillingene. Kontakt <xliff:g id="CARRIER_NAME">%2$s</xliff:g> for å finne ut mer."</string>
-    <!-- no translation found for satellite_setting_summary_more_information_no_emergency_messaging (8042240156141790447) -->
-    <skip />
+    <string name="satellite_setting_summary_more_information_no_emergency_messaging" msgid="8042240156141790447">"<xliff:g id="SUBJECT">%1$s</xliff:g> kan ta lengre tid og er bare tilgjengelig i noen områder. Været og visse bygninger kan påvirke satellittilkoblingen. Anrop via satellitt er ikke tilgjengelig. Nødanrop kan fortsatt kobles til. Det kan hende at tekstmeldinger til nødtjenester ikke er tilgjengelige i alle områder.\n\nDet kan ta litt tid før kontoendringer vises i innstillingene. Kontakt <xliff:g id="CARRIER_NAME">%2$s</xliff:g> for å finne ut mer."</string>
     <string name="more_about_satellite_messaging" msgid="1039277943532711584">"Mer om <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Kan ikke slå på <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"For å slå på <xliff:g id="FUNCTION">%1$s</xliff:g>, avslutt først satellittilkoblingen"</string>
@@ -5019,6 +5018,9 @@
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"satellittilkobling"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"satellittmeldinger"</string>
     <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"Bruk av data er inkludert med kontoen din"</string>
+    <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Støttede apper på telefonen"</string>
+    <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"se alle appene"</string>
+    <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Støttede apper på telefonen"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Navn på tilgangspunkt"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Utilgjengelig når du er koblet til <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5186,27 +5188,44 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Informasjon om jobbretningslinjene dine"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Innstillingene administreres av IT-administratoren din"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <string name="enable_16k_pages" msgid="8001470927566110689">"Start med sidestørrelse på 16 kB"</string>
-    <string name="enable_16k_pages_summary" msgid="1964363364670306912">"Start med kjerne med støtte for sidestr. på 16 kB"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="611010487387251491">"Bytt fra modusen for 4 kB til modusen for 16 kB"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="6129208614283750541">"Du er i den sideagnostiske modusen med en kjerne på 4 kB og bytter til modusen for 16 kB. I denne modusen kan ikke programvareintegriteten garanteres, og eventuelle data som er lagret på telefonen mens oppstartsinnlasteren er låst opp, kan være utsatt for fare. Dette fører til at enheten startes på nytt. Noen funksjoner deaktiveres i disse modusene, så det er ikke sikkert at alle apper fungerer. For å gå tilbake til produksjonsmodusen på enheten må du bytte tilbake til modusen for 4 kB og låse oppstartsinnlasteren. Da tilbakestilles enheten til fabrikkstandard. Når enheten har startet i Android, kan du deaktivere fjerning av produsentsperre i utvikleralternativene."</string>
-    <string name="confirm_enable_4k_pages_title" msgid="3210360137887034659">"Bytt fra modusen for 16 kB til modusen for 4 kB"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"Du er i den sideagnostiske modusen med en kjerne på 16 kB og bytter til modusen for 4 kB. I denne modusen kan ikke programvareintegriteten garanteres, og eventuelle data som er lagret på telefonen mens oppstartsinnlasteren er låst opp, kan være utsatt for fare. Dette fører til at enheten startes på nytt. Noen funksjoner deaktiveres i disse modusene, så det er ikke sikkert at alle apper fungerer. For å gå tilbake til produksjonsmodusen på enheten må du låse oppstartsinnlasteren. Da tilbakestilles enheten til fabrikkstandard. Når enheten har startet i Android, kan du deaktivere fjerning av produsentsperre i utvikleralternativene."</string>
-    <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Kunne ikke oppdatere kjernen til en kjerne som er kompatibel med 16 kB-sider."</string>
+    <!-- no translation found for enable_16k_pages (1758111531461408337) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1937836453571509085) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (5477376227161609124) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (6211693250692246982) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3001009010581393119) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (3398001587586470689) -->
+    <skip />
+    <!-- no translation found for toast_16k_update_failed_text (7848383020572918850) -->
+    <skip />
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Tar i bruk endringen"</string>
-    <string name="confirm_format_ext4_title" msgid="6696191800594435577">"Vil du omformatere enheten til ext4? (kreves for modusen for 16 kB)"</string>
-    <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Datapartisjonen på denne enheten må konverteres til ext4 før du kan bruke utvikleralternativet for 16 kB. I denne modusen kan ikke programvareintegriteten garanteres, og eventuelle data som er lagret på telefonen mens oppstartsinnlasteren er låst opp, kan være utsatt for fare. Hvis du aktiverer alternativet for 16 kB, må du starte enheten på nytt én gang til etter dette. Når du er i denne modusen, kan du bytte mellom modusen for 4 kB og modusen for 16 kB ved bare å starte enheten på nytt én gang. Noen funksjoner deaktiveres i disse modusene, så det er ikke sikkert at alle apper fungerer. For å gå tilbake til produksjonsmodusen på enheten må du bytte tilbake til modusen for 4 kB og så låse oppstartsinnlasteren. Da tilbakestilles enheten til fabrikkstandard. Når enheten har startet i Android, kan du deaktivere fjerning av produsentsperre i utvikleralternativene. Når du bekrefter, blir alle dataene på enheten visket ut, og filsystemet blir byttet til ext4. Når dette er ferdig, kan du komme tilbake for å aktivere 16 kB igjen."</string>
+    <!-- no translation found for confirm_format_ext4_title (4754057414728537125) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (432847493298532536) -->
+    <skip />
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Tøm alle data"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Kunne ikke omformatere og viske ut datapartisjonen til ext4"</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Opplåsing av oppstartsinnlasteren kreves"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Denne enheten krever at oppstartsinnlasteren er låst opp, før utvikleralternativet for 16 kB kan brukes. I denne modusen kan ikke programvareintegriteten garanteres, og eventuelle data som er lagret på telefonen mens oppstartsinnlasteren er låst opp, kan være utsatt for fare. Alle brukerdata og innstillinger viskes ut når modusen for 16 kB aktiveres. Når oppstartsinnlasteren er låst opp, kreves det to omstarter for å aktivere alternativet for 16 kB. Når du er i denne modusen, kan du bytte mellom modusen for 4 kB og modusen for 16 kB ved bare å starte enheten på nytt én gang. Noen funksjoner deaktiveres i disse modusene, så det er ikke sikkert at alle apper fungerer. For å gå tilbake til produksjonsmodusen på enheten må du bytte tilbake til modusen for 4 kB og så låse enheten via produsenten eller oppstartsinnlasteren (og da tilbakestilles enheten til fabrikkstandard). Lås opp oppstartsinnlasteren, og prøv på nytt. Du finner veiledning om hvordan du gjør dette, på &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
-    <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Bruker den sideagnostiske modusen for 4 kB"</string>
-    <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Du er i modusen for 4 kB av den sideagnostiske modusen. I denne modusen kan ikke programvareintegriteten garanteres, og eventuelle data som er lagret på telefonen mens oppstartsinnlasteren er låst opp, kan være utsatt for fare. Noen funksjoner deaktiveres i disse modusene, så det er ikke sikkert at alle apper fungerer. For å gå tilbake til produksjonsmodusen, må du låse oppstartsinnlasteren på enheten. Trykk for å finne ut mer."</string>
-    <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Du er i modusen for 4 kB av den sideagnostiske modusen. I denne modusen kan ikke programvareintegriteten garanteres, og eventuelle data som er lagret på telefonen mens oppstartsinnlasteren er låst opp, kan være utsatt for fare. Noen funksjoner deaktiveres i disse modusene, så det er ikke sikkert at alle apper fungerer. For å gå tilbake til produksjonsmodusen, må du låse oppstartsinnlasteren på enheten. Da tilbakestilles enheten til fabrikkstandard, og produksjonsinnstillingene gjenopprettes. Når enheten har startet i Android, kan du deaktivere fjerning av produsentsperre i utvikleralternativene. Hvis enheten ikke starter opp i Android, eller hvis den er ustabil, bør du flashe enheten på nytt med de siste fabrikkavbildningene fra &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; eller bruke &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; og velge «Wipe Device» (visk ut alt på enheten), «Lock Bootloader» (lås oppstartsinnlasteren) og «Force Flash all partitions» (tving gjennom flashing av alle partisjoner)."</string>
-    <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Bruker den sideagnostiske modusen for 16 kB"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"Du er i modusen for 16 kB av den sideagnostiske modusen. I denne modusen kan ikke programvareintegriteten garanteres, og eventuelle data som er lagret på telefonen mens oppstartsinnlasteren er låst opp, kan være utsatt for fare. Noen funksjoner deaktiveres i disse modusene, så det er ikke sikkert at alle apper fungerer. For å gå tilbake til produksjonsmodusen må du bytte tilbake til modusen for 4 Kb og låse oppstartsinnlasteren på enheten. Trykk for å finne ut mer."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"Du er i modusen for 16 kB av den sideagnostiske modusen. I denne modusen kan ikke programvareintegriteten garanteres, og eventuelle data som er lagret på telefonen mens oppstartsinnlasteren er låst opp, kan være i fare. Noen funksjoner deaktiveres i disse modusene, så det er ikke sikkert at alle apper fungerer. For å gå tilbake til produksjonsmodusen må du bytte tilbake til modusen for 4 Kb og låse oppstartsinnlasteren på enheten. Da tilbakestilles enheten til fabrikkstandard, og produksjonsinnstillingene gjenopprettes. Når enheten har startet i Android, kan du deaktivere fjerning av produsentsperre i utvikleralternativene. Hvis enheten ikke starter opp i Android, eller hvis den er ustabil, bør du flashe enheten på nytt med de siste fabrikkavbildningene fra &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; eller bruke &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; og velge «Wipe Device» (visk ut alt på enheten), «Lock Bootloader» (lås oppstartsinnlasteren) og «Force Flash all partitions» (tving gjennom flashing av alle partisjoner)."</string>
-    <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Sideagnostisk modus for 16 kB"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (8089310116854544106) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (293797217034340398) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (731597455785555266) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (7572233914423063169) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (8940585327969638637) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (7613206944532151035) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2860363435021452169) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (2058933148654316447) -->
+    <skip />
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Les mer"</string>
     <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"Kjør appen i modus for kompatibilitet med sidestørrelse"</string>
     <string name="enable_16k_app_compat_details" msgid="3389401258168314266">"Når dette er slått på, kjøres appen i modusen for kompatibilitet med sidestørrelse på 16 kB-enheter."</string>
@@ -5583,8 +5602,7 @@
     <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"Lukk"</string>
     <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"Koble til et nytt par med kompatible hodetelefoner, eller del navnet og passordet for strømmen din med den andre personen"</string>
     <string name="audio_sharing_dialog_qr_code_content" msgid="2246980817848351361">"La andre skanne denne koden og lytte til lyden din\n\nNavn på strøm: <xliff:g id="STREAM_NAME">%1$s</xliff:g>\nPassord: <xliff:g id="PASSWORD">%2$s</xliff:g>"</string>
-    <!-- no translation found for audio_sharing_dialog_qr_code_content_no_password (7824076083031650113) -->
-    <skip />
+    <string name="audio_sharing_dialog_qr_code_content_no_password" msgid="7824076083031650113">"La andre skanne denne koden og høre på lyden din\n\nNavn på strømmen: <xliff:g id="STREAM_NAME">%1$s</xliff:g>"</string>
     <string name="audio_sharing_dialog_pair_new_device_content" msgid="6720472590211440206">"eller koble til et nytt sett med kompatible hodetelefoner"</string>
     <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"Koble til et nytt sett med kompatible hodetelefoner, eller del QR-koden for lydstrømmen med den andre personen"</string>
     <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"Deler lyd"</string>
@@ -5613,11 +5631,10 @@
     <string name="audio_sharing_retry_dialog_content" msgid="6014534433894608834">"Noe gikk galt. Prøv på nytt."</string>
     <string name="audio_sharing_incompatible_dialog_title" msgid="4586805264392802115">"Kan ikke dele lyd med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_sharing_incompatible_dialog_content" msgid="3943223683620405311">"Lyddeling fungerer bare med hodetelefoner som støtter LE-lyd"</string>
-    <!-- no translation found for audio_sharing_block_pairing_dialog_title (1756723860075818856) -->
-    <skip />
-    <!-- no translation found for audio_sharing_block_pairing_dialog_content (6352030314206654722) -->
-    <skip />
-    <!-- no translation found for audio_sharing_turn_off_button_label (1934956352475393641) -->
+    <string name="audio_sharing_block_pairing_dialog_title" msgid="1756723860075818856">"Slå av lyddeling"</string>
+    <string name="audio_sharing_block_pairing_dialog_content" msgid="6352030314206654722">"For å koble til en ny enhet, slå av lyddeling først."</string>
+    <string name="audio_sharing_turn_off_button_label" msgid="1934956352475393641">"Slå av"</string>
+    <!-- no translation found for share_audio_notification_title (5201976754820387782) -->
     <skip />
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Koble til en LE-lydstrøm"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Lydstrømmer i nærheten"</string>
@@ -5648,6 +5665,9 @@
     <string name="audio_streams_present_now" msgid="7519818719382756366">"Strømming på pause"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Slutt å lytte"</string>
     <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Koble til kompatible hodetelefoner"</string>
+    <string name="audio_streams_dialog_turn_off_talkback_title" msgid="6824585115302786690">"Slå av TalkBack midlertidig"</string>
+    <string name="audio_streams_dialog_turn_off_talkback_subtitle" msgid="2394295776096273919">"TalkBack kan ikke brukes når du lytter til lydstrømmer. Slå av TalkBack for å begynne å lytte."</string>
+    <string name="audio_streams_dialog_turn_off_talkback_button" msgid="8049097689955037626">"Slå av"</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Koble til en enhet"</string>
     <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Detaljer om lydstrømmen"</string>
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"QR-kode for lydstrømmen"</string>

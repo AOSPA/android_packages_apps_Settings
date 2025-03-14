@@ -27,6 +27,7 @@ import android.service.settings.preferences.MetadataResult
 import android.service.settings.preferences.SetValueRequest
 import android.service.settings.preferences.SetValueResult
 import android.service.settings.preferences.SettingsPreferenceService
+import android.util.Log
 import com.android.settings.metrics.SettingsRemoteOpMetricsLogger
 import com.android.settingslib.graph.GetPreferenceGraphApiHandler
 import com.android.settingslib.graph.GetPreferenceGraphRequest
@@ -70,6 +71,7 @@ class PreferenceService : SettingsPreferenceService() {
         // MUST get pid/uid in binder thread
         val callingPid = Binder.getCallingPid()
         val callingUid = Binder.getCallingUid()
+        Log.i(TAG, "GetAllPreferenceMetadata pid=$callingPid uid=$callingUid")
         scope.launch {
             val graphProto =
                 graphApi.invoke(
@@ -90,6 +92,7 @@ class PreferenceService : SettingsPreferenceService() {
         // MUST get pid/uid in binder thread
         val callingPid = Binder.getCallingPid()
         val callingUid = Binder.getCallingUid()
+        Log.i(TAG, "GetPreferenceValue pid=$callingPid uid=$callingUid")
         scope.launch {
             val apiRequest = transformFrameworkGetValueRequest(request)
             val response = getApiHandler.invoke(application, callingPid, callingUid, apiRequest)
@@ -110,6 +113,7 @@ class PreferenceService : SettingsPreferenceService() {
         // MUST get pid/uid in binder thread
         val callingPid = Binder.getCallingPid()
         val callingUid = Binder.getCallingUid()
+        Log.i(TAG, "SetPreferenceValue pid=$callingPid uid=$callingUid")
         scope.launch {
             val apiRequest = transformFrameworkSetValueRequest(request)
             if (apiRequest == null) {
@@ -122,5 +126,9 @@ class PreferenceService : SettingsPreferenceService() {
                 callback.onResult(transformCatalystSetValueResponse(response))
             }
         }
+    }
+
+    companion object {
+        private const val TAG = "PreferenceService"
     }
 }

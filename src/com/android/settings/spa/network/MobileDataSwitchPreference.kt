@@ -26,6 +26,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settings.network.telephony.MobileDataRepository
+import com.android.settings.network.telephony.SubscriptionActivationRepository
 import com.android.settings.network.telephony.subscriptionManager
 import com.android.settingslib.spa.framework.compose.rememberContext
 import com.android.settingslib.spa.widget.preference.SwitchPreference
@@ -38,6 +39,7 @@ fun MobileDataSwitchPreference(subId: Int) {
     MobileDataSwitchPreference(
         subId = subId,
         mobileDataRepository = rememberContext(::MobileDataRepository),
+        subscriptionActivationRepository = rememberContext(::SubscriptionActivationRepository),
         setMobileData = setMobileDataImpl(subId),
     )
 }
@@ -47,19 +49,24 @@ fun MobileDataSwitchPreference(subId: Int) {
 fun MobileDataSwitchPreference(
     subId: Int,
     mobileDataRepository: MobileDataRepository,
+    subscriptionActivationRepository: SubscriptionActivationRepository,
     setMobileData: (newChecked: Boolean) -> Unit,
 ) {
     val mobileDataSummary = stringResource(id = R.string.mobile_data_settings_summary)
     val isMobileDataEnabled by
-        remember(subId) { mobileDataRepository.isMobileDataEnabledFlow(subId) }
-            .collectAsStateWithLifecycle(initialValue = null)
-
+    remember(subId) { mobileDataRepository.isMobileDataEnabledFlow(subId) }
+        .collectAsStateWithLifecycle(initialValue = null)
+    val changeable by remember {
+        subscriptionActivationRepository.isActivationChangeableFlow()
+    }.collectAsStateWithLifecycle(initialValue = true)
     SwitchPreference(
         object : SwitchPreferenceModel {
             override val title = stringResource(id = R.string.mobile_data_settings_title)
             override val summary = { mobileDataSummary }
             override val checked = { isMobileDataEnabled }
             override val onCheckedChange = setMobileData
+            override val changeable: () -> Boolean
+                get() = { changeable }
         }
     )
 }

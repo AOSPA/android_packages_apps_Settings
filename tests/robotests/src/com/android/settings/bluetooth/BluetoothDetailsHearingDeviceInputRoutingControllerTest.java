@@ -36,6 +36,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.HearingDeviceInputRoutingPreference.InputRoutingValue;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.HapClientProfile;
 
 import org.junit.Rule;
@@ -49,6 +50,7 @@ import org.robolectric.RobolectricTestRunner;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /** Tests for {@link BluetoothDetailsHearingDeviceInputRoutingController}. */
 
@@ -59,11 +61,14 @@ public class BluetoothDetailsHearingDeviceInputRoutingControllerTest extends
     public final MockitoRule mockito = MockitoJUnit.rule();
 
     private static final String TEST_ADDRESS = "55:66:77:88:99:AA";
+    private static final String TEST_ADDRESS_2 = "55:66:77:88:99:BB";
 
     @Mock
     private BluetoothDevice mBluetoothDevice;
     @Mock
     private HapClientProfile mHapClientProfile;
+    @Mock
+    private CachedBluetoothDevice mMemberCachedDevice;
     @Spy
     private AudioManager mAudioManager;
 
@@ -160,6 +165,18 @@ public class BluetoothDetailsHearingDeviceInputRoutingControllerTest extends
         when(mCachedDevice.getProfiles()).thenReturn(List.of(mHapClientProfile));
 
         assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void isAvailable_validInputMember_supportHapProfile_returnTrue() {
+        when(mCachedDevice.getMemberDevice()).thenReturn(Set.of(mMemberCachedDevice));
+        when(mCachedDevice.getAddress()).thenReturn(TEST_ADDRESS);
+        when(mMemberCachedDevice.getAddress()).thenReturn(TEST_ADDRESS_2);
+        AudioDeviceInfo[] mockInfo = new AudioDeviceInfo[] {mockTestAddressInfo(TEST_ADDRESS_2)};
+        when(mAudioManager.getDevices(AudioManager.GET_DEVICES_INPUTS)).thenReturn(mockInfo);
+        when(mCachedDevice.getProfiles()).thenReturn(List.of(mHapClientProfile));
+
+        assertThat(mController.isAvailable()).isTrue();
     }
 
     private AudioDeviceInfo mockTestAddressInfo(String address) {

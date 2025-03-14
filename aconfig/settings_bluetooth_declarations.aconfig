@@ -44,3 +44,13 @@ flag {
       purpose: PURPOSE_BUGFIX
   }
 }
+
+flag {
+  name: "enable_nearby_share_entrypoint"
+  namespace: "cross_device_experiences"
+  description: "Show Nearby Share entrypoint in Bluetooth Sharing page"
+  bug: "381799866"
+  metadata {
+      purpose: PURPOSE_BUGFIX
+  }
+}

@@ -32,6 +32,7 @@ import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
@@ -73,6 +74,7 @@ class ColorInversionPreferenceTest {
         )
     }
 
+    @Ignore("b/398023330")
     @Test
     fun onStart_settingChanges_notifyPrefChange() {
         colorInversionPreference.onStart(mockLifecycleContext)

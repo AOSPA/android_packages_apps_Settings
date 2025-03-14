@@ -41,10 +41,6 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Прыпынена"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Невядома"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Перадпрагляд"</string>
-    <!-- no translation found for preview_pager_previous_button (607771113300838313) -->
-    <skip />
-    <!-- no translation found for preview_pager_next_button (8700907912508927271) -->
-    <skip />
     <string name="qr_code_content_description" msgid="1852208464419291347">"QR-код"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Паменшыць"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Павялічыць"</string>
@@ -101,6 +97,10 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Пра аўдыявыхад"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Выводзіць гук на слыхавы апарат або дынамік тэлефона"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Звязанае"</string>
+    <!-- no translation found for bluetooth_try_nearby_share_title (4996427014054610877) -->
+    <skip />
+    <!-- no translation found for bluetooth_try_nearby_share_summary (329823028635487822) -->
+    <skip />
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Рынгтон і будзільнікі"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Гук падчас выклікаў"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Гукі мультымедыя і сістэмы"</string>
@@ -231,12 +231,9 @@
     <string name="search_region_hint" msgid="1748708432568237552">"Пошук рэгіёнаў"</string>
     <string name="top_intro_region_title" msgid="2336323415395642117">"Выбар рэгіёна ўплывае на тое, як тэлефон адлюстроўвае час, даты, тэмпературу і іншае."</string>
     <string name="more_language_settings_category" msgid="3669703092480725416">"Іншыя налады мовы"</string>
-    <!-- no translation found for title_change_system_locale_region (1977530992614685128) -->
-    <skip />
-    <!-- no translation found for body_change_system_locale_region (9064318449821043189) -->
-    <skip />
-    <!-- no translation found for top_intro_numbering_system_title (8234587334207926397) -->
-    <skip />
+    <string name="title_change_system_locale_region" msgid="1977530992614685128">"Змяніць рэгіён на \"<xliff:g id="SYSTEM_LANGUAGE_REGION">%1$s</xliff:g>\"?"</string>
+    <string name="body_change_system_locale_region" msgid="9064318449821043189">"У якасці мовы сістэмы прылада захавае наступную: <xliff:g id="SYSTEM_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="top_intro_numbering_system_title" msgid="8234587334207926397">"Большасць праграм будзе выкарыстоўваць вашы рэгіянальныя налады"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Рэгіянальныя налады"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Задаць налады адзінак вымярэння і лічбаў"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"З мэтай персаналізацыі задайце для праграм рэгіянальныя налады."</string>
@@ -589,7 +586,7 @@
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Прыкладзіце палец да датчыка адным бокам і ўтрымлівайце яго, потым павярніце іншым бокам"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Не наладжваць доступ па адбітку пальца?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Вы вырашылі выкарыстоўваць свой адбітак пальца як адзін са спосабаў разблакіроўкі тэлефона. Калі вы прапусціце гэты крок зараз, вам трэба будзе наладзіць спосаб пазней. Наладжванне займае ўсяго каля хвіліны."</string>
-    <string name="lock_screen_skip_setup_title" msgid="6979006375138175111">"Прапусціць наладжванне <xliff:g id="OPTIONS">%s</xliff:g>?"</string>
+    <string name="lock_screen_skip_setup_title" msgid="6979006375138175111">"<xliff:g id="OPTIONS">%s</xliff:g>: прапусціць наладжванне?"</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Прапусціць наладку PIN-кода?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Прапусціць наладжванне PIN-кода і твару?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Прапусціць наладжванне PIN-кода і адбітка пальца?"</string>
@@ -893,7 +890,8 @@
     <string name="lockpassword_credential_changed" msgid="5934778179732392028">"Блакіроўка экрана ўжо зменена. Паўтарыце спробу з новай блакіроўкай экрана."</string>
     <string name="lockpattern_tutorial_cancel_label" msgid="775215267818384016">"Скасаваць"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="1329049481210689408">"Наступны"</string>
-    <string name="manage_device_admin" msgid="1044620606203916275">"Праграмы адміністратара прылады"</string>
+    <!-- no translation found for manage_device_admin (7272894919651600481) -->
+    <skip />
     <string name="number_of_device_admins_none" msgid="152926922020437312">"Няма актыўных праграм"</string>
     <string name="number_of_device_admins" msgid="3402909995362162876">"{count,plural, =1{# актыўная праграма}one{# актыўная праграма}few{# актыўныя праграмы}many{# актыўных праграм}other{# актыўнай праграмы}}"</string>
     <string name="manage_trust_agents" msgid="6410149930029992356">"Даверчыя агенты"</string>
@@ -1284,12 +1282,9 @@
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
     <string name="emergency_address_title" msgid="8102786488994263815">"Экстранны адрас"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"Выкарыстоўваецца як ваша месцазнаходжанне, калі вы робіце экстранны выклік праз Wi‑Fi"</string>
-    <!-- no translation found for private_dns_title (1180823690693258572) -->
-    <skip />
-    <!-- no translation found for private_dns_field_require (2318400923953435586) -->
-    <skip />
-    <!-- no translation found for private_dns_hostname_invalid (5085498734835552780) -->
-    <skip />
+    <string name="private_dns_title" msgid="1180823690693258572">"Імя хоста"</string>
+    <string name="private_dns_field_require" msgid="2318400923953435586">"Гэта поле абавязковае для запаўнення"</string>
+    <string name="private_dns_hostname_invalid" msgid="5085498734835552780">"Вы ўвялі несапраўднае імя хоста"</string>
     <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"Дадатковыя звесткі"</annotation>" аб функцыях Прыватнай DNS"</string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"Уключана"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"Актываваць Wi-Fi-тэлефанію"</string>
@@ -2057,7 +2052,13 @@
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"Выкарыстоўваць клавішы мышы"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Выкарыстоўвайце клавіятуру, каб кіраваць паказальнікам"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Гартанне ў адваротны бок"</string>
-    <string name="mouse_reverse_vertical_scrolling_summary" msgid="4403637093982742165">"Пры гартанні ўніз змесціва рухаецца ўверх"</string>
+    <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Калі прагортваць уверх, старонка будзе перамяшчацца ўніз"</string>
+    <!-- no translation found for mouse_scrolling_category_title (2992126595687187296) -->
+    <skip />
+    <!-- no translation found for mouse_scrolling_acceleration (7119758828203396430) -->
+    <skip />
+    <!-- no translation found for mouse_scrolling_speed (3999483025392860903) -->
+    <skip />
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"Змяніць асноўную кнопку мышы"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Прызначце для левай кнопкі мышы функцыі правай"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"Паскарэнне курсора"</string>
@@ -2238,6 +2239,7 @@
     <string name="accessibility_feedback_title" msgid="6690472705407526006">"Водгук"</string>
     <string name="accessibility_feedback_summary" msgid="4576591591334314827">"Прайдзіце апытанне, каб дапамагчы нам палепшыць сэрвіс"</string>
     <string name="accessibility_feedback_disabled_summary" msgid="3652321859452620942">"Даступных апытанняў няма"</string>
+    <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Адправіць водгук"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Спампаваныя праграмы"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Эксперыментальныя"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Эксперыментальныя функцыі"</string>
@@ -2392,7 +2394,7 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Высокая кантраснасць тэксту"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Змяняйце колер тэксту на чорны ці белы, каб павысіць яго кантраст з фонам."</string>
     <string name="accessibility_notification_high_contrast_text_title" msgid="2297915407152953323">"Палепшыць кантраснасць тэксту"</string>
-    <string name="accessibility_notification_high_contrast_text_body" msgid="4111896614825062003">"<xliff:g id="OUTLINE_TEXT">%1$s</xliff:g> замяніў <xliff:g id="HIGH_CONTRAST_TEXT">%2$s</xliff:g>. Каб уключыць, перайдзіце ў <xliff:g id="SETTINGS">%3$s</xliff:g>."</string>
+    <string name="accessibility_notification_high_contrast_text_body" msgid="4111896614825062003">"Замест параметра \"<xliff:g id="HIGH_CONTRAST_TEXT">%2$s</xliff:g>\" зараз даступны \"<xliff:g id="OUTLINE_TEXT">%1$s</xliff:g>\". Каб уключыць, перайдзіце ў <xliff:g id="SETTINGS">%3$s</xliff:g>."</string>
     <string name="accessibility_notification_high_contrast_text_action_open_settings" msgid="5945069315472850294">"Перайсці ў <xliff:g id="SETTINGS">%1$s</xliff:g>"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8848579943445806659">"Дадаць контур тэксту"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Дадаць да тэксту чорны ці белы фон, каб павялічыць кантрастнасць"</string>
@@ -2494,10 +2496,8 @@
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Далей"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Слыхавыя апараты"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Наладжвайце кахлеарныя імпланты, слыхавыя апараты ASHA і LE Audio і іншыя прылады для ўзмацнення гуку і кіруйце імі"</string>
-    <!-- no translation found for accessibility_hearingaid_asha_only_intro (7402419984664822832) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_hap_only_intro (3332144138443825311) -->
-    <skip />
+    <string name="accessibility_hearingaid_asha_only_intro" msgid="7402419984664822832">"Наладжвайце кахлеарныя імпланты, слыхавыя апараты ASHA і іншыя прылады для ўзмацнення гуку і кіруйце імі"</string>
+    <string name="accessibility_hearingaid_hap_only_intro" msgid="3332144138443825311">"Наладжвайце кахлеарныя імпланты, слыхавыя апараты LE Audio і іншыя прылады для ўзмацнення гуку і кіруйце імі"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"Няма падключаных слыхавых апаратаў"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Дадаць слыхавыя апараты"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Спалучыце слыхавы апарат"</string>
@@ -2517,14 +2517,10 @@
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"Пра слыхавыя апараты"</string>
     <string name="accessibility_hearing_device_footer_summary" msgid="5513620078219951077">"Каб знайсці іншыя слыхавыя апараты, якія не падтрымліваюць тэхналогію ASHA або LE Audio, націсніце &lt;b&gt;Спалучыць новую прыладу&lt;/b&gt; &gt; &lt;b&gt;Іншыя прылады&lt;/b&gt;"</string>
     <string name="accessibility_hearing_device_footer_summary_tts" msgid="955527026890456959">"Каб знайсці іншыя слыхавыя апараты, якія не падтрымліваюць тэхналогію ASHA або LE Audio, націсніце "<b>"Спалучыць новую прыладу"</b>", а потым "<b>"Іншыя прылады"</b></string>
-    <!-- no translation found for accessibility_hearing_device_footer_asha_only_summary (3377169209330540616) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_footer_asha_only_summary_tts (8192971114504608531) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_footer_hap_only_summary (3531758698830915205) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_footer_hap_only_summary_tts (4440097982533045507) -->
-    <skip />
+    <string name="accessibility_hearing_device_footer_asha_only_summary" msgid="3377169209330540616">"Каб знайсці іншыя слыхавыя апараты, якія не падтрымліваюць тэхналогію ASHA, націсніце &lt;b&gt;Спалучыць новую прыладу&lt;/b&gt; &gt; &lt;b&gt;Іншыя прылады&lt;/b&gt;"</string>
+    <string name="accessibility_hearing_device_footer_asha_only_summary_tts" msgid="8192971114504608531">"Каб знайсці іншыя слыхавыя апараты, якія не падтрымліваюць тэхналогію ASHA, націсніце "<b>"Спалучыць новую прыладу"</b>", а потым "<b>"Іншыя прылады"</b></string>
+    <string name="accessibility_hearing_device_footer_hap_only_summary" msgid="3531758698830915205">"Каб знайсці іншыя слыхавыя апараты, якія не падтрымліваюць тэхналогію LE Audio, націсніце &lt;b&gt;Спалучыць новую прыладу&lt;/b&gt; &gt; &lt;b&gt;Іншыя прылады&lt;/b&gt;"</string>
+    <string name="accessibility_hearing_device_footer_hap_only_summary_tts" msgid="4440097982533045507">"Каб знайсці іншыя слыхавыя апараты, якія не падтрымліваюць тэхналогію LE Audio, націсніце "<b>"Спалучыць новую прыладу"</b>", а потым "<b>"Іншыя прылады"</b></string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Спалучэнне слыхавога апарата"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"На гэтай старонцы можна спалучыць слыхавыя апараты ASHA і LE Audio. Упэўніцеся, што слыхавы апарат уключаны і гатовы да спалучэння."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Даступныя слыхавыя апараты"</string>
@@ -2975,7 +2971,8 @@
     <string name="remove_device_admin" msgid="3143059558744287259">"Дэактываваць гэту праграму адміністратара прылады"</string>
     <string name="uninstall_device_admin" msgid="4481095209503956916">"Выдалiць праграму"</string>
     <string name="remove_and_uninstall_device_admin" msgid="707912012681691559">"Дэактываваць і выдаліць"</string>
-    <string name="select_device_admin_msg" msgid="5501360309040114486">"Праграмы адміністратара прылады"</string>
+    <!-- no translation found for select_device_admin_msg (2506262585633022884) -->
+    <skip />
     <string name="no_device_admins" msgid="8888779888103079854">"Няма даступных праграм адміністратара прылады"</string>
     <string name="no_trust_agents" msgid="8659098725864191600">"Няма даступных давераных агентаў"</string>
     <string name="add_device_admin_msg" msgid="7730006568970042119">"Актываваць праграму адміністратара?"</string>
@@ -3866,7 +3863,8 @@
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Іншыя налады даступныя ўнутры гэтай праграмы"</string>
     <string name="notification_polite_title" msgid="6121016426991791557">"Зніжэнне гучнасці апавяшчэнняў"</string>
     <string name="notification_polite_main_control_title" msgid="5812529809151927149">"Выкарыстаць зніжэнне гучнасці апавяшчэнняў"</string>
-    <string name="notification_polite_description" msgid="5497748284893832854">"Калі вам будзе прыходзіць многа апавяшчэнняў за кароткі час, прылада паменшыць іх гучнасць і абмяжуе абвесткі на перыяд да 2 хвілін. Гэта не закране выклікі, будзільнікі і прыярытэтныя размовы. \n\nКаб праглядзець апавяшчэнні, атрыманыя ў перыяд зніжэння гучнасці, правядзіце пальцам уніз ад верхняга краю экрана."</string>
+    <!-- no translation found for notification_polite_description (6137533404978878957) -->
+    <skip />
     <string name="notification_polite_work" msgid="8823596456640216391">"Прымяніць да працоўных профіляў"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Прымяняць да праграм працоўнага профілю"</string>
     <string name="notification_bundle_title" msgid="460988459835922719">"Згрупаваныя апавяшчэнні"</string>
@@ -4374,7 +4372,7 @@
     <string name="disconnected" msgid="3469373726996129247">"Падключэння няма"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Падключэння няма"</string>
     <string name="apps_summary" msgid="4007416751775414252">"Усталявана праграм: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
-    <string name="storage_summary" msgid="5903562203143572768">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> выкарыстана – <xliff:g id="FREE_SPACE">%2$s</xliff:g> свабодна"</string>
+    <string name="storage_summary" msgid="7631468664968572688">"Выкарыстана: <xliff:g id="PERCENTAGE">%1$s</xliff:g>. Вольна: <xliff:g id="FREE_SPACE_VALUE">%2$s</xliff:g> <xliff:g id="FREE_SPACE_UNITS">%3$s</xliff:g>."</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Цёмная тэма, памер шрыфту, яркасць"</string>
     <string name="memory_summary" msgid="8221954450951651735">"У сярэднім <xliff:g id="USED_MEMORY">%1$s</xliff:g> з <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> памяці выкарыстана"</string>
     <string name="users_summary" msgid="8473589474976307510">"Вы ўвайшлі як <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -4443,6 +4441,7 @@
     <string name="ethernet_data_usage" msgid="4552227880905679761">"Выкарыстанне даных Ethernet"</string>
     <string name="wifi" msgid="2932584495223243842">"Wi-Fi"</string>
     <string name="ethernet" msgid="4665162609974492983">"Ethernet"</string>
+    <string name="ethernet_interface_title" msgid="1634881244068292765">"Ethernet <xliff:g id="INTERFACEID">%1$s</xliff:g>"</string>
     <string name="cell_data_template" msgid="6077963976103260821">"<xliff:g id="AMOUNT">^1</xliff:g> мабільнага трафіку"</string>
     <string name="wifi_data_template" msgid="935934798340307438">"<xliff:g id="AMOUNT">^1</xliff:g> трафіку Wi-Fi"</string>
     <string name="ethernet_data_template" msgid="1429173767445201145">"<xliff:g id="AMOUNT">^1</xliff:g> трафіку Ethernet"</string>
@@ -5017,6 +5016,9 @@
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"спадарожнікавае падключэнне"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"абмен паведамленнямі па спадарожнікавай сувязі"</string>
     <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"Ваш уліковы запіс дазваляе выкарыстоўваць перадачу даных"</string>
+    <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Праграмы, якія падтрымліваюцца на тэлефоне"</string>
+    <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"паказаць усе праграмы"</string>
+    <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Праграмы, якія падтрымліваюцца на тэлефоне"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Назвы пунктаў доступу"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Недаступна праз аператара \"<xliff:g id="CARRIER">%1$s</xliff:g>\""</string>
@@ -5184,27 +5186,44 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Інфармацыя пра вашу працоўную палітыку"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Наладамі кіруе ваш ІТ-адміністратар"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"Графічны працэсар"</string>
-    <string name="enable_16k_pages" msgid="8001470927566110689">"Загрузіць са старонкамі ў 16 КБ"</string>
-    <string name="enable_16k_pages_summary" msgid="1964363364670306912">"Загрузіць прыладу з ядром для старонак у 16 КБ"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="611010487387251491">"Пераключэнне з рэжыму 4 КБ на рэжым 16 КБ"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="6129208614283750541">"У вас уключаны рэжым, які не залежыць ад памеру старонкі памяці і працуе з ядром для старонак памяці памерам 4 КБ, і вы пераключаецеся на рэжым з ядром для старонак памяці памерам 16 КБ. У гэтым рэжыме цэласнасць праграмнага забеспячэння не гарантуецца і ёсць рызыка страціць даныя, якія захоўваюцца на тэлефоне пры разблакіраваным загрузчыку. Прылада будзе перазагружана. Асобныя функцыі будуць адключаны ў гэтых рэжымах, з-за чаго некаторыя праграмы могуць не працаваць. Каб вярнуць прыладу ў эксплуатацыйны рэжым, неабходна будзе пераключыцца ў рэжым 4 КБ і заблакіраваць загрузчык, што прывядзе да скіду прылады да заводскіх налад. Пасля загрузкі Android выключыце разблакіроўку OEM у Параметрах распрацоўшчыка."</string>
-    <string name="confirm_enable_4k_pages_title" msgid="3210360137887034659">"Пераключэнне з рэжыму 16 КБ на рэжым 4 КБ"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"У вас уключаны рэжым, які не залежыць ад памеру старонкі памяці і працуе з ядром для старонак памяці памерам 16 КБ, і вы пераключаецеся на рэжым з ядром для старонак памяці памерам 4 КБ. У гэтым рэжыме цэласнасць праграмнага забеспячэння не гарантуецца. Існуе рызыка страціць даныя, якія былі захаваны на тэлефоне, калі загрузчык быў разблакіраваны. Прылада будзе перазагружана. Асобныя функцыі будуць адключаны ў гэтых рэжымах, з-за чаго некаторыя праграмы могуць не працаваць. Каб вярнуць прыладу ў эксплуатацыйны рэжым, вам трэба заблакіраваць загрузчык, што прывядзе да скіду прылады да заводскіх налад. Пасля загрузкі Android на прыладзе выключыце разблакіроўку OEM у Параметрах распрацоўшчыка."</string>
-    <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Не ўдалося змяніць ядро на сумяшчальнае са старонкамі памерам 16 КБ."</string>
+    <!-- no translation found for enable_16k_pages (1758111531461408337) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1937836453571509085) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (5477376227161609124) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (6211693250692246982) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3001009010581393119) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (3398001587586470689) -->
+    <skip />
+    <!-- no translation found for toast_16k_update_failed_text (7848383020572918850) -->
+    <skip />
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Прымяняецца змяненне"</string>
-    <string name="confirm_format_ext4_title" msgid="6696191800594435577">"Перафармаціраваць прыладу ў ext4? (Патрабуецца для рэжыму 16 КБ)"</string>
-    <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Каб выкарыстоўваць рэжым 16 КБ у параметрах распрацоўшчыка, раздзел даных на гэтай прыладзе трэба пераўтварыць у ext4. У гэтым рэжыме цэласнасць праграмнага забеспячэння не гарантуецца. Існуе рызыка страціць даныя, якія былі захаваны на тэлефоне, калі загрузчык быў разблакіраваны. Для ўключэння параметра 16 КБ патрабуецца паўторная перазагрузка. Пасля таго як вы ўключыце гэты рэжым, пераключэнне паміж рэжымамі 4 КБ і 16 КБ будзе суправаджацца толькі адной перазагрузкай. Асобныя функцыі будуць адключаны ў гэтых рэжымах, з-за чаго некаторыя праграмы могуць не працаваць. Каб вярнуць прыладу ў эксплуатацыйны рэжым, вам трэба пераключыцца ў рэжым 4 КБ і заблакіраваць загрузчык, што прывядзе да скіду прылады да заводскіх налад. Пасля загрузкі Android на прыладзе выключыце разблакіроўку OEM у Параметрах распрацоўшчыка. Усе даныя будуць выдалены з прылады, а файлавая сістэма пасля пацвярджэння будзе зменена на ext4. Пасля завяршэння вярніцеся, каб зноў уключыць рэжым 16 КБ."</string>
+    <!-- no translation found for confirm_format_ext4_title (4754057414728537125) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (432847493298532536) -->
+    <skip />
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Сцерці ўсе даныя"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Не ўдалося ачысціць раздзел даных і перафармаціраваць яго ў ext4."</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Патрабуецца разблакіроўка загрузчыка"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Каб выкарыстоўваць рэжым 16 КБ у параметрах распрацоўшчыка, трэба разблакіраваць загрузчык на прыладзе. У гэтым рэжыме цэласнасць праграмнага забеспячэння не гарантуецца. Існуе рызыка страціць даныя, якія былі захаваны на тэлефоне, калі загрузчык быў разблакіраваны. Калі рэжым 16 КБ уключыцца, усе даныя і налады карыстальніка будуць выдалены. Калі загрузчык будзе разблакіраваны, для ўключэння параметра 16 КБ спатрэбяцца дзве перазагрузкі. Пасля таго як вы ўключыце гэты рэжым, пераключэнне паміж рэжымамі 4 КБ і 16 КБ будзе суправаджацца толькі адной перазагрузкай. Асобныя функцыі будуць адключаны ў гэтых рэжымах, з-за чаго некаторыя праграмы могуць не працаваць. Каб вярнуць прыладу ў эксплуатацыйны рэжым, вам трэба пераключыцца ў рэжым 4 КБ і заблакіраваць OEM ці загрузчык (што прывядзе да скіду прылады да заводскіх налад). Разблакіруйце загрузчык і паўтарыце спробу. Інструкцыі, як гэта зрабіць, глядзіце на старонцы &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;."</string>
-    <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Дзейнічае рэжым 4 КБ, які не залежыць ад памеру старонкі памяці"</string>
-    <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"У вас уключаны рэжым, які не залежыць ад памеру старонкі памяці і працуе з ядром для старонак памяці памерам 4 КБ. У гэтым рэжыме цэласнасць праграмнага забеспячэння не гарантуецца. Існуе рызыка страціць даныя, якія былі захаваны на тэлефоне, калі загрузчык быў разблакіраваны. Асобныя функцыі будуць адключаны ў гэтых рэжымах, з-за чаго некаторыя праграмы могуць не працаваць. Каб паўторна ўвайсці ў эксплуатацыйны рэжым, заблакіруйце загрузчык на прыладзе. Націсніце, каб чытаць далей."</string>
-    <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"У вас уключаны рэжым, які не залежыць ад памеру старонкі памяці і працуе з ядром для старонак памяці памерам 4 КБ. У гэтым рэжыме цэласнасць праграмнага забеспячэння не гарантуецца. Існуе рызыка страціць даныя, якія былі захаваны на тэлефоне, калі загрузчык быў разблакіраваны. Асобныя функцыі будуць адключаны ў гэтых рэжымах, з-за чаго некаторыя праграмы могуць не працаваць. Каб паўторна ўвайсці ў эксплуатацыйны рэжым, заблакіруйце загрузчык на прыладзе. Пасля гэтага адбудзецца яе паўторны скід да заводскіх налад. Пасля загрузкі Android на прыладзе выключыце разблакіроўку OEM у Параметрах распрацоўшчыка. Калі на прыладзе не ўдаецца запусціць АС Android ці яе праца нестабільная, перапрашыйце прыладу, выкарыстоўваючы апошнія версіі заводскіх вобразаў, якія можна спампаваць тут: &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;. Або перайдзіце па спасылцы &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; і выберыце \"Ачысціць прыладу\", \"Заблакіраваць загрузчык\" і \"Перапрашыць усе раздзелы\"."</string>
-    <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Дзейнічае рэжым 16 КБ, які не залежыць ад памеру старонкі памяці"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"У вас уключаны рэжым, які не залежыць ад памеру старонкі памяці і працуе з ядром для старонак памяці памерам 16 КБ. У гэтым рэжыме цэласнасць праграмнага забеспячэння не гарантуецца і ёсць рызыка страціць даныя, якія захоўваюцца на тэлефоне пры разблакіраваным загрузчыку. Асобныя функцыі будуць адключаны ў гэтых рэжымах, з-за чаго некаторыя праграмы могуць не працаваць. Каб паўторна ўвайсці ў эксплуатацыйны рэжым, пераключыцеся на рэжым 4 КБ і заблакіруйце загрузчык на прыладзе. Націсніце, каб чытаць далей."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"У вас уключаны рэжым, які не залежыць ад памеру старонкі памяці і працуе з ядром для старонак памяці памерам 16 КБ. У гэтым рэжыме цэласнасць праграмнага забеспячэння не гарантуецца і ёсць рызыка страціць даныя, якія захоўваюцца на тэлефоне пры разблакіраваным загрузчыку. Асобныя функцыі будуць адключаны ў гэтых рэжымах, з-за чаго некаторыя праграмы могуць не працаваць. Каб паўторна ўвайсці ў эксплуатацыйны рэжым, пераключыцеся на рэжым 4 КБ і заблакіруйце загрузчык на прыладзе. Пасля гэтага адбудзецца яе паўторны скід да заводскіх налад. Пасля загрузкі Android выключыце разблакіроўку OEM у Параметрах распрацоўшчыка. Калі на прыладзе не ўдаецца запусціць АС Android ці яе праца нестабільная, перапрашыйце прыладу, выкарыстоўваючы апошнія версіі заводскіх вобразаў, якія можна спампаваць тут: &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;. Або перайдзіце па спасылцы &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; і выберыце \"Ачысціць прыладу\", \"Заблакіраваць загрузчык\" і \"Перапрашыць усе раздзелы\"."</string>
-    <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Рэжым, які не залежыць ад памеру старонкі памяці і працуе з ядром для старонак памяці памерам 16 КБ"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (8089310116854544106) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (293797217034340398) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (731597455785555266) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (7572233914423063169) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (8940585327969638637) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (7613206944532151035) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2860363435021452169) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (2058933148654316447) -->
+    <skip />
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Чытаць далей"</string>
     <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"Запусціць праграму ў рэжыме сумяшчальнасці з памерам старонкі"</string>
     <string name="enable_16k_app_compat_details" msgid="3389401258168314266">"Праграма будзе запушчана ў рэжыме сумяшчальнасці з памерам старонкі на прыладзе, калі на ёй уключана падтрымка 16 КБ."</string>
@@ -5583,8 +5602,7 @@
     <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"Закрыць"</string>
     <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"Падключыце яшчэ адну пару сумяшчальных навушнікаў або абагульце з другім карыстальнікам пароль і назву плыні"</string>
     <string name="audio_sharing_dialog_qr_code_content" msgid="2246980817848351361">"Дазвольце іншым карыстальнікам адсканіраваць гэты QR-код, каб слухаць ваша аўдыя\n\nНазва плыні: <xliff:g id="STREAM_NAME">%1$s</xliff:g>\nПароль: <xliff:g id="PASSWORD">%2$s</xliff:g>"</string>
-    <!-- no translation found for audio_sharing_dialog_qr_code_content_no_password (7824076083031650113) -->
-    <skip />
+    <string name="audio_sharing_dialog_qr_code_content_no_password" msgid="7824076083031650113">"Дазвольце іншым карыстальнікам адсканіраваць гэты QR-код, каб слухаць ваша аўдыя\n\nНазва плыні: <xliff:g id="STREAM_NAME">%1$s</xliff:g>"</string>
     <string name="audio_sharing_dialog_pair_new_device_content" msgid="6720472590211440206">"ці спалучыце іншую пару сумяшчальных навушнікаў"</string>
     <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"Спалучыце яшчэ адну пару сумяшчальных навушнікаў або адпраўце другому карыстальніку QR-код вашай аўдыяплыні"</string>
     <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"Ідзе абагульванне аўдыя"</string>
@@ -5616,6 +5634,7 @@
     <string name="audio_sharing_block_pairing_dialog_title" msgid="1756723860075818856">"Выключыць абагульванне аўдыя"</string>
     <string name="audio_sharing_block_pairing_dialog_content" msgid="6352030314206654722">"Каб спалучыць новую прыладу, спачатку выключыце абагульванне аўдыя."</string>
     <string name="audio_sharing_turn_off_button_label" msgid="1934956352475393641">"Выключыць"</string>
+    <string name="share_audio_notification_title" msgid="5201976754820387782">"Абагуліць аўдыя з прыладай \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\""</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Падключыцца да аўдыяплыні LE"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Аўдыяплыні паблізу"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Аўдыяплыні"</string>
@@ -5645,6 +5664,9 @@
     <string name="audio_streams_present_now" msgid="7519818719382756366">"Плынь прыпынена"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Спыніць праслухоўванне"</string>
     <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Падключэнне сумяшчальных навушнікаў"</string>
+    <string name="audio_streams_dialog_turn_off_talkback_title" msgid="6824585115302786690">"Часова выключыць TalkBack"</string>
+    <string name="audio_streams_dialog_turn_off_talkback_subtitle" msgid="2394295776096273919">"TalkBack нельга выкарыстоўваць падчас праслухоўвання аўдыяплыней. Каб пачаць праслухоўванне, трэба выключыць TalkBack."</string>
+    <string name="audio_streams_dialog_turn_off_talkback_button" msgid="8049097689955037626">"Выключыць"</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Падключыць прыладу"</string>
     <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Падрабязныя звесткі пра аўдыяплынь"</string>
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"QR-код аўдыяплыні"</string>

@@ -339,9 +339,16 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
         if (side == SIDE_LEFT) {
             slider.setTitle(
                     getContext().getString(R.string.bluetooth_ambient_volume_control_left));
+            slider.setSliderContentDescription(getContext().getString(
+                    R.string.bluetooth_ambient_volume_control_left_description));
         } else if (side == SIDE_RIGHT) {
             slider.setTitle(
                     getContext().getString(R.string.bluetooth_ambient_volume_control_right));
+            slider.setSliderContentDescription(getContext().getString(
+                    R.string.bluetooth_ambient_volume_control_right_description));
+        } else {
+            slider.setSliderContentDescription(getContext().getString(
+                    R.string.bluetooth_ambient_volume_control_description));
         }
         mSideToSliderMap.put(side, slider);
     }

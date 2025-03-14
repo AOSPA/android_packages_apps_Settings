@@ -56,4 +56,27 @@
         android:key="recs"
         android:title="@*android:string/recs_notification_channel_label"
         settings:controller="com.android.settings.notification.BundleTypePreferenceController"/>
+
+    <PreferenceCategory
+        android:key="notification_bundle_excluded_apps_list"
+        android:title="@string/notification_excluded_apps"
+        settings:controller="com.android.settings.notification.AdjustmentExcludedAppsPreferenceController">
+        <com.android.settingslib.widget.TopIntroPreference
+            android:key="excluded_description"
+            android:title="@string/notification_bundle_excluded_description"/>
+
+        <!-- apps are added here -->
+
+        <Preference
+            android:key="notification_bundle_manage_apps"
+            android:order="1000"
+            android:icon="@drawable/ic_chevron_right_24dp"
+            android:title="@string/notification_summarization_manage_excluded_apps"
+            settings:controller="com.android.settings.notification.BundleManageAppsPreferenceController"
+            android:fragment="com.android.settings.applications.manageapplications.ManageApplications">
+            <extra
+                android:name="classname"
+                android:value="com.android.settings.Settings$NotificationExcludeClassificationActivity"/>
+        </Preference>
+    </PreferenceCategory>
 </PreferenceScreen>

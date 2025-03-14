@@ -711,7 +711,7 @@ public final class Utils extends com.android.settingslib.Utils {
         final SpannableString str = new SpannableString(displayText);
         str.setSpan(new TtsSpan.TextBuilder(accessibileText).build(), 0,
                 displayText.length(),
-                Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return str;
     }
 

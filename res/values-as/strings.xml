@@ -41,10 +41,6 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"স্থগিত"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"অজ্ঞাত"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"পূৰ্বদৰ্শন"</string>
-    <!-- no translation found for preview_pager_previous_button (607771113300838313) -->
-    <skip />
-    <!-- no translation found for preview_pager_next_button (8700907912508927271) -->
-    <skip />
     <string name="qr_code_content_description" msgid="1852208464419291347">"কিউআৰ ক’ড"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"সৰু কৰক"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"ডাঙৰ কৰক"</string>
@@ -101,6 +97,10 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"অডিঅ’ আউটপুটৰ বিষয়ে"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"আপোনাৰ শুনাৰ ডিভাইচ অথবা ফ’নৰ স্পীকাৰলৈ ধ্বনি পঠিয়াওক"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"প্ৰাসংগিক"</string>
+    <!-- no translation found for bluetooth_try_nearby_share_title (4996427014054610877) -->
+    <skip />
+    <!-- no translation found for bluetooth_try_nearby_share_summary (329823028635487822) -->
+    <skip />
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"ৰিংট’ন আৰু এলাৰ্ম"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"কল কৰি থকাৰ সময়ত অডিঅ’"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"মিডিয়া আৰু ছিষ্টেমৰ ধ্বনি"</string>
@@ -231,12 +231,9 @@
     <string name="search_region_hint" msgid="1748708432568237552">"অঞ্চল সন্ধান কৰক"</string>
     <string name="top_intro_region_title" msgid="2336323415395642117">"আপোনাৰ ফ’নটোৱে সময়, তাৰিখ, তাপমান আৰু অধিক কেনেকৈ প্ৰদৰ্শন কৰে সেয়া আপুনি বাছনি কৰা অঞ্চলটোৰ ওপৰত নিৰ্ভৰ কৰে।"</string>
     <string name="more_language_settings_category" msgid="3669703092480725416">"অধিক ভাষাৰ ছেটিং"</string>
-    <!-- no translation found for title_change_system_locale_region (1977530992614685128) -->
-    <skip />
-    <!-- no translation found for body_change_system_locale_region (9064318449821043189) -->
-    <skip />
-    <!-- no translation found for top_intro_numbering_system_title (8234587334207926397) -->
-    <skip />
+    <string name="title_change_system_locale_region" msgid="1977530992614685128">"অঞ্চলটো <xliff:g id="SYSTEM_LANGUAGE_REGION">%1$s</xliff:g>লৈ সলনি কৰিবনে?"</string>
+    <string name="body_change_system_locale_region" msgid="9064318449821043189">"আপোনাৰ ডিভাইচটোৱে <xliff:g id="SYSTEM_LANGUAGE">%1$s</xliff:g>ক ছিষ্টেমৰ ভাষা হিচাপে ৰাখিব"</string>
+    <string name="top_intro_numbering_system_title" msgid="8234587334207926397">"বেছিভাগ এপে আপোনাৰ আঞ্চলিক অগ্ৰাধিকাৰ ব্যৱহাৰ কৰিব"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"আঞ্চলিক অগ্ৰাধিকাৰ"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"একক আৰু সংখ্যাৰ অগ্ৰাধিকাৰ ছেট কৰক"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"এপ্‌সমূহক আপোনাৰ আঞ্চলিক অগ্ৰাধিকাৰসমূহ জানিবলৈ দিয়ক যাতে সেইবোৰে আপোনাৰ অভিজ্ঞতা ব্যক্তিগতকৰণ কৰিব পাৰে।"</string>
@@ -893,7 +890,8 @@
     <string name="lockpassword_credential_changed" msgid="5934778179732392028">"স্ক্ৰীন লক ইতিমধ্যে সলনি কৰা হৈছে। নতুন স্ক্ৰীন লকটোৰ সৈতে আকৌ চেষ্টা কৰক।"</string>
     <string name="lockpattern_tutorial_cancel_label" msgid="775215267818384016">"বাতিল কৰক"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="1329049481210689408">"পৰৱৰ্তী"</string>
-    <string name="manage_device_admin" msgid="1044620606203916275">"ডিভাইচৰ প্ৰশাসকৰ এপ্‌সমূহ"</string>
+    <!-- no translation found for manage_device_admin (7272894919651600481) -->
+    <skip />
     <string name="number_of_device_admins_none" msgid="152926922020437312">"কোনো সক্ৰিয় এপ্ নাই"</string>
     <string name="number_of_device_admins" msgid="3402909995362162876">"{count,plural, =1{# টা সক্ৰিয় এপ্‌}one{# টা সক্ৰিয় এপ্‌}other{# টা সক্ৰিয় এপ্‌}}"</string>
     <string name="manage_trust_agents" msgid="6410149930029992356">"বিশ্বাসী এজেণ্টসমূহ"</string>
@@ -1284,12 +1282,9 @@
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
     <string name="emergency_address_title" msgid="8102786488994263815">"জৰুৰীকালীন ঠিকনা"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"আপুনি ৱাই-ফাইৰ জৰিয়তে জৰুৰীকালীন কল কৰাৰ সময়ত আপোনাৰ অৱস্থান হিচাপে ব্যৱহাৰ কৰা হৈছে"</string>
-    <!-- no translation found for private_dns_title (1180823690693258572) -->
-    <skip />
-    <!-- no translation found for private_dns_field_require (2318400923953435586) -->
-    <skip />
-    <!-- no translation found for private_dns_hostname_invalid (5085498734835552780) -->
-    <skip />
+    <string name="private_dns_title" msgid="1180823690693258572">"হ’ষ্টনাম"</string>
+    <string name="private_dns_field_require" msgid="2318400923953435586">"ক্ষেত্ৰটো আৱশ্যকীয়"</string>
+    <string name="private_dns_hostname_invalid" msgid="5085498734835552780">"আপুনি টাইপ কৰা হ’ষ্টনামটো বৈধ নহয়"</string>
     <string name="private_dns_help_message" msgid="851221502063782306">"ব্যক্তিগত ডিএনএছ সুবিধাসমূহৰ বিষয়ে "<annotation id="url">"অধিক জানক"</annotation></string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"অন আছে"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"ৱাই-ফাইৰ জৰিয়তে কল কৰা সুবিধা সক্ৰিয় কৰক"</string>
@@ -1928,7 +1923,7 @@
     <string name="filter_apps_disabled" msgid="5068011814871004105">"নিষ্ক্ৰিয় এপ্‌সমূহ"</string>
     <string name="filter_apps_third_party" msgid="9049447784849114843">"ডাউনল’ড কৰা হোৱা"</string>
     <string name="filter_apps_running" msgid="535465683273284141">"চলি আছে"</string>
-    <string name="not_installed" msgid="5074606858798519449">"এই ব্যৱহাৰকাৰীজনৰ বাবে ইনষ্টল কৰা হোৱা নাই"</string>
+    <string name="not_installed" msgid="5074606858798519449">"এই ব্যৱহাৰকাৰীগৰাকীৰ বাবে ইনষ্টল কৰা হোৱা নাই"</string>
     <string name="installed" msgid="2837449358488825884">"ইনষ্টল হ’ল"</string>
     <string name="no_applications" msgid="985069304755391640">"কোনো এপ্‌ নাই।"</string>
     <string name="internal_storage" msgid="999496851424448809">"আভ্যন্তৰীণ ষ্ট’ৰেজ"</string>
@@ -2057,7 +2052,13 @@
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"মাউছৰ কীসমূহ ব্যৱহাৰ কৰক"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"পইণ্টাৰ নিয়ন্ত্ৰণ কৰিবলৈ আপোনাৰ কীব’ৰ্ড ব্যৱহাৰ কৰক"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"বিপৰীত দিশলৈ স্ক্ৰ’ল কৰাৰ সুবিধা"</string>
-    <string name="mouse_reverse_vertical_scrolling_summary" msgid="4403637093982742165">"আপুনি তললৈ স্ক্ৰ’ল কৰিলে সমল ওপৰলৈ যায়"</string>
+    <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"পৃষ্ঠাটো তললৈ নিবলৈ ওপৰলৈ স্ক্ৰ’ল কৰক"</string>
+    <!-- no translation found for mouse_scrolling_category_title (2992126595687187296) -->
+    <skip />
+    <!-- no translation found for mouse_scrolling_acceleration (7119758828203396430) -->
+    <skip />
+    <!-- no translation found for mouse_scrolling_speed (3999483025392860903) -->
+    <skip />
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"মাউছৰ প্ৰাথমিক বুটাম সলনি-সলনি কৰক"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"মাউছৰ বাওঁফালৰ বুটামটো আপোনাৰ সোঁফালৰ হিচাপে ব্যৱহাৰ কৰক"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"কাৰ্ছৰৰ এক্সিলাৰেশ্বন"</string>
@@ -2238,6 +2239,7 @@
     <string name="accessibility_feedback_title" msgid="6690472705407526006">"মতামত"</string>
     <string name="accessibility_feedback_summary" msgid="4576591591334314827">"এটা সমীক্ষাত ভাগ লৈ উন্নত কৰাত সহায় কৰক"</string>
     <string name="accessibility_feedback_disabled_summary" msgid="3652321859452620942">"কোনো সমীক্ষা উপলব্ধ নহয়"</string>
+    <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"মতামত পঠিয়াওক"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"ডাউনল’ড কৰা এপ্"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"পৰীক্ষামূলক"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"বৈশিষ্ট সম্পৰ্কীয় পতাকাবোৰ"</string>
@@ -2490,16 +2492,12 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"স্ক্রীনত তিনিবাৰ টিপা"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"সাধ্য সুবিধাৰ শ্বৰ্টকাটসমূহ সম্পাদনা কৰক"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"%1$sৰ বাবে আপোনাৰ শ্বৰ্টকাটটো বাছনি কৰক"</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for accessibility_shortcut_unassigned_setting_unavailable_summary (993486098872935043) -->
-    <skip />
+    <string name="accessibility_shortcut_unassigned_setting_unavailable_summary" msgid="993486098872935043">"ইয়াক ব্যৱহাৰ কৰিবলৈ, দিব্যাংগসকলৰ বাবে সুবিধাৰ পৃষ্ঠাত %1$s শ্বৰ্টকাট অন কৰক"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"অব্যাহত ৰাখক"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"শুনাৰ ডিভাইচ"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"ASHA আৰু LE অডিঅ’ শ্ৰৱণ যন্ত্ৰ, ক’ক্লিয়াৰ ইমপ্লাণ্ট, আৰু অন্য ধ্বনি পৰিৱৰ্ধক ডিভাইচসমূহ ছেট আপ আৰু পৰিচালনা কৰক"</string>
-    <!-- no translation found for accessibility_hearingaid_asha_only_intro (7402419984664822832) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_hap_only_intro (3332144138443825311) -->
-    <skip />
+    <string name="accessibility_hearingaid_asha_only_intro" msgid="7402419984664822832">"ASHA শ্ৰৱণ যন্ত্ৰ, ক’ক্লিয়াৰ ইমপ্লাণ্ট আৰু অন্য ধ্বনি পৰিৱৰ্ধক ডিভাইচসমূহ ছেট আপ আৰু পৰিচালনা কৰক"</string>
+    <string name="accessibility_hearingaid_hap_only_intro" msgid="3332144138443825311">"LE অডিঅ’ শ্ৰৱণ যন্ত্ৰ, ক’ক্লিয়াৰ ইমপ্লাণ্ট আৰু অন্য ধ্বনি পৰিৱৰ্ধক ডিভাইচসমূহ ছেট আপ আৰু পৰিচালনা কৰক"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"কোনো শুনাৰ ডিভাইচ সংযোগ হৈ থকা নাই"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"শ্ৰৱণ যন্ত্ৰ যোগ কৰক"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"শ্ৰৱণ যন্ত্ৰ পেয়াৰ কৰক"</string>
@@ -2519,14 +2517,10 @@
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"শুনাৰ ডিভাইচৰ বিষয়ে"</string>
     <string name="accessibility_hearing_device_footer_summary" msgid="5513620078219951077">"ASHA বা LE অডিঅ’ই সমৰ্থন নকৰা অন্য শুনাৰ ডিভাইচ বিচাৰিবলৈ, &lt;b&gt;নতুন ডিভাইচ পেয়াৰ কৰক&lt;/b&gt; &gt; &lt;b&gt;অধিক ডিভাইচ চাওক&lt;/b&gt;ত টিপক"</string>
     <string name="accessibility_hearing_device_footer_summary_tts" msgid="955527026890456959">"ASHA বা LE অডিঅ’ই সমৰ্থন নকৰা অন্য শুনাৰ ডিভাইচ বিচাৰিবলৈ, "<b>"নতুন ডিভাইচ পেয়াৰ কৰক"</b>" আৰু তাৰ পাছত "<b>"অধিক ডিভাইচ চাওক"</b>"ত টিপক"</string>
-    <!-- no translation found for accessibility_hearing_device_footer_asha_only_summary (3377169209330540616) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_footer_asha_only_summary_tts (8192971114504608531) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_footer_hap_only_summary (3531758698830915205) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_footer_hap_only_summary_tts (4440097982533045507) -->
-    <skip />
+    <string name="accessibility_hearing_device_footer_asha_only_summary" msgid="3377169209330540616">"ASHAই সমৰ্থন নকৰা অন্য শুনাৰ ডিভাইচ বিচাৰিবলৈ, &lt;b&gt;নতুন ডিভাইচ পেয়াৰ কৰক&lt;/b&gt; &gt; &lt;b&gt;অধিক ডিভাইচ চাওক&lt;/b&gt;ত টিপক"</string>
+    <string name="accessibility_hearing_device_footer_asha_only_summary_tts" msgid="8192971114504608531">"ASHAই সমৰ্থন নকৰা অন্য শুনাৰ ডিভাইচ বিচাৰিবলৈ, "<b>"নতুন ডিভাইচ পেয়াৰ কৰক"</b>" আৰু তাৰ পাছত "<b>"অধিক ডিভাইচ চাওক"</b>"ত টিপক"</string>
+    <string name="accessibility_hearing_device_footer_hap_only_summary" msgid="3531758698830915205">"LE অডিঅ’ই সমৰ্থন নকৰা অন্য শুনাৰ ডিভাইচ বিচাৰিবলৈ, &lt;b&gt;নতুন ডিভাইচ পেয়াৰ কৰক&lt;/b&gt; &gt; &lt;b&gt;অধিক ডিভাইচ চাওক&lt;/b&gt;ত টিপক"</string>
+    <string name="accessibility_hearing_device_footer_hap_only_summary_tts" msgid="4440097982533045507">"LE অডিঅ’ই সমৰ্থন নকৰা অন্য শুনাৰ ডিভাইচ বিচাৰিবলৈ, "<b>"নতুন ডিভাইচ পেয়াৰ কৰক"</b>" আৰু তাৰ পাছত "<b>"অধিক ডিভাইচ চাওক"</b>"ত টিপক"</string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"শুনাৰ ডিভাইচত পেয়াৰ কৰক"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"আপুনি এই পৃষ্ঠাখনত ASHA আৰু LE অডিঅ’ৰ শুনাৰ ডিভাইচ পেয়াৰ কৰিব পাৰে। আপোনাৰ শুনাৰ ডিভাইচটো অন হৈ থকাৰ লগতে পেয়াৰ কৰিবলৈ সাজু হৈ থকাটো নিশ্চিত কৰক।"</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"উপলব্ধ শুনাৰ ডিভাইচ"</string>
@@ -2977,7 +2971,8 @@
     <string name="remove_device_admin" msgid="3143059558744287259">"এই ডিভাইচ প্ৰশাসক এপ্‌টো অক্ষম কৰক"</string>
     <string name="uninstall_device_admin" msgid="4481095209503956916">"এপ্ আনইনষ্টল কৰক"</string>
     <string name="remove_and_uninstall_device_admin" msgid="707912012681691559">"নিষ্ক্ৰিয় আৰু আনইনষ্টল কৰক"</string>
-    <string name="select_device_admin_msg" msgid="5501360309040114486">"ডিভাইচৰ প্ৰশাসকৰ এপ্‌সমূহ"</string>
+    <!-- no translation found for select_device_admin_msg (2506262585633022884) -->
+    <skip />
     <string name="no_device_admins" msgid="8888779888103079854">"কোনো ডিভাইচ প্ৰশাসকৰ এপ্ উপলব্ধ নাই"</string>
     <string name="no_trust_agents" msgid="8659098725864191600">"কোনো বিশ্বাসী এজেণ্ট পোৱা নগ\'ল"</string>
     <string name="add_device_admin_msg" msgid="7730006568970042119">"এই ডিভাইচ প্ৰশাসক এপ্‌টো সক্ৰিয় কৰেনে?"</string>
@@ -3201,7 +3196,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"লক স্ক্ৰীনৰ পৰা নতুন ব্যৱহাৰকাৰী যোগ দিয়ক"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"ডক কৰিলে প্ৰশাসক ব্যৱহাৰকাৰীলৈ সলনি কৰক"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"নিজেই মচিবনে?"</string>
-    <string name="user_confirm_remove_title" msgid="3626559103278006002">"এই ব্যৱহাৰকাৰীজন মচিবনে?"</string>
+    <string name="user_confirm_remove_title" msgid="3626559103278006002">"এই ব্যৱহাৰকাৰীক মচিবনে?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"এই প্ৰ\'ফাইলটো আঁতৰাইনে?"</string>
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"কৰ্মস্থানৰ প্ৰ\'ফাইল আঁতহৰাইনে?"</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"আটাইবোৰ এপ্ আৰু ডেটা মচা হ\'ব।"</string>
@@ -3868,7 +3863,8 @@
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"এই এপ্‌টোৰ ভিতৰত অধিক ছেটিং উপলব্ধ"</string>
     <string name="notification_polite_title" msgid="6121016426991791557">"জাননী কুলডাউন কৰা"</string>
     <string name="notification_polite_main_control_title" msgid="5812529809151927149">"জাননী কুলডাউন কৰাটো ব্যৱহাৰ কৰক"</string>
-    <string name="notification_polite_description" msgid="5497748284893832854">"আপুনি কম সময়ৰ ভিতৰতে বহুতো জাননী পালে, আপোনাৰ ডিভাইচটোৱে নিজৰ ভলিউম কমাব আৰু ২ মিনিটলৈকে সতৰ্কবাৰ্তাসমূহ মিনিমাইজ কৰিব। কল, এৰ্লাম আৰু অগ্ৰাধিকাৰপ্ৰাপ্ত বাৰ্তালাপত প্ৰভাৱ নপৰে। \n\nকুলডাউনৰ সময়ত পোৱা জাননী স্ক্ৰীনখনৰ একেবাৰে ওপৰৰ পৰা তললৈ টানি পাব পাৰি।"</string>
+    <!-- no translation found for notification_polite_description (6137533404978878957) -->
+    <skip />
     <string name="notification_polite_work" msgid="8823596456640216391">"কৰ্মস্থানৰ প্ৰ’ফাইলত প্ৰয়োগ কৰক"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"কৰ্মস্থানৰ প্ৰ’ফাইলৰ এপত প্ৰয়োগ কৰক"</string>
     <string name="notification_bundle_title" msgid="460988459835922719">"বাণ্ডল কৰা জাননী"</string>
@@ -4376,7 +4372,8 @@
     <string name="disconnected" msgid="3469373726996129247">"সংযোজিত হৈ থকা নাই"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"সংযোগ নোহোৱা অৱস্থাত আছে"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g>টা এপ্‌ ইনষ্টল কৰা হৈছে"</string>
-    <string name="storage_summary" msgid="5903562203143572768">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> ব্যৱহৃত - <xliff:g id="FREE_SPACE">%2$s</xliff:g> খালী"</string>
+    <!-- no translation found for storage_summary (7631468664968572688) -->
+    <skip />
     <string name="display_dashboard_summary" msgid="1599453894989339454">"গাঢ় ৰঙৰ থীম, ফণ্টৰ আকাৰ, উজ্জ্বলতা"</string>
     <string name="memory_summary" msgid="8221954450951651735">"<xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>ৰ ভিতৰত গড় <xliff:g id="USED_MEMORY">%1$s</xliff:g> মেম\'ৰি ব্যৱহৃত হৈছে"</string>
     <string name="users_summary" msgid="8473589474976307510">"<xliff:g id="USER_NAME">%1$s</xliff:g> হিচাপে ছাইন কৰিছে"</string>
@@ -4445,6 +4442,8 @@
     <string name="ethernet_data_usage" msgid="4552227880905679761">"ইথাৰনেট ডেটাৰ ব্যৱহাৰ"</string>
     <string name="wifi" msgid="2932584495223243842">"ৱাই-ফাই"</string>
     <string name="ethernet" msgid="4665162609974492983">"ইথাৰনেট"</string>
+    <!-- no translation found for ethernet_interface_title (1634881244068292765) -->
+    <skip />
     <string name="cell_data_template" msgid="6077963976103260821">"<xliff:g id="AMOUNT">^1</xliff:g> ম’বাইল ডেটা"</string>
     <string name="wifi_data_template" msgid="935934798340307438">"<xliff:g id="AMOUNT">^1</xliff:g> ৱাই-ফাই ডেটা"</string>
     <string name="ethernet_data_template" msgid="1429173767445201145">"<xliff:g id="AMOUNT">^1</xliff:g> ইথাৰনেটৰ ডেটা"</string>
@@ -4996,8 +4995,7 @@
     <string name="satellite_setting_title" msgid="2543034229989047673">"উপগ্ৰহৰ জৰিয়তে বাৰ্তা বিনিময় কৰা"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"উপগ্ৰহৰ জৰিয়তে পাঠ বাৰ্তা পঠিয়াওক আৰু লাভ কৰক। আপোনাৰ একাউণ্টত অন্তৰ্ভুক্ত কৰা হয়।"</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"উপগ্ৰহৰ জৰিয়তে পাঠ বাৰ্তা পঠিয়াওক আৰু লাভ কৰক। আপোনাৰ একাউণ্টৰ সৈতে অন্তৰ্ভুক্ত নহয়।"</string>
-    <!-- no translation found for satellite_setting_summary_without_entitlement (5284998840770992554) -->
-    <skip />
+    <string name="satellite_setting_summary_without_entitlement" msgid="5284998840770992554">"উপগ্ৰহৰ জৰিয়তে পাঠ বাৰ্তা পঠিয়াওক আৰু লাভ কৰক। সবিশেষৰ বাবে আপোনাৰ বাহকৰ সৈতে যোগাযোগ কৰক।"</string>
     <string name="keywords_satellite_setting" msgid="613553612424945946">"উপগ্ৰহৰ দ্বাৰা বাৰ্তা বিনিময়, উপগ্ৰহৰ সংযোগ"</string>
     <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"<xliff:g id="SUBJECT">%1$s</xliff:g>ৰ বিষয়ে"</string>
     <string name="title_about_satellite_setting" msgid="3563087940535642558">"এটা যোগ্য <xliff:g id="CARRIER_NAME">%1$s</xliff:g> একাউণ্টৰ জৰিয়তে আপুনি বাৰ্তা পঠিয়াব আৰু গ্ৰহণ কৰিব পাৰে"</string>
@@ -5011,8 +5009,7 @@
     <string name="title_supported_service" msgid="4275535165812691571">"আপোনাৰ ফ’নটো এটা উপগ্ৰহৰ সৈতে সংযুক্ত হোৱাৰ পাছত"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"আপুনি জৰুৰীকালীন সেৱাকে ধৰি যিকোনো ব্যক্তিকে পাঠ বাৰ্তা পঠিয়াব পাৰে। আপোনাৰ ফ’নটোৱে উপলব্ধ হ’লে কোনো ম’বাইল নেটৱৰ্কৰ সৈতে পুনৰ সংযোগ কৰিব।"</string>
     <string name="satellite_setting_summary_more_information" msgid="1028146147094166868">"<xliff:g id="SUBJECT">%1$s</xliff:g>এ অধিক সময় ল\'ব পাৰে আৰু ই কেৱল কিছুমান অঞ্চলতহে উপলব্ধ। বতৰ আৰু নিৰ্দিষ্ট কিছুমান গাঁথনিয়ে আপোনাৰ উপগ্ৰহৰ সংযোগত প্ৰভাৱ পেলাব পাৰে। উপগ্ৰহৰ জৰিয়তে কল কৰাৰ সুবিধাটো উপলব্ধ নহয়। জৰুৰীকালীন কলসমূহ তথাপি সংযোগ হ\'ব পাৰে।\n\nএকাউণ্টৰ সালসলনিসমূহ ছেটিঙত দেখুৱাবলৈ কিছু সময় লাগিব পাৰে। সবিশেষৰ বাবে <xliff:g id="CARRIER_NAME">%2$s</xliff:g>ৰ সৈতে যোগাযোগ কৰক।"</string>
-    <!-- no translation found for satellite_setting_summary_more_information_no_emergency_messaging (8042240156141790447) -->
-    <skip />
+    <string name="satellite_setting_summary_more_information_no_emergency_messaging" msgid="8042240156141790447">"<xliff:g id="SUBJECT">%1$s</xliff:g>এ অধিক সময় ল’ব পাৰে আৰু এইটো কেৱল কিছুমান অঞ্চলতহে উপলব্ধ। বতৰ আৰু নিৰ্দিষ্ট কিছুমান গাঁথনিয়ে আপোনাৰ উপগ্ৰহৰ সংযোগত প্ৰভাৱ পেলাব পাৰে। উপগ্ৰহৰ জৰিয়তে কল কৰাৰ সুবিধাটো উপলব্ধ নহয়। জৰুৰীকালীন কল তথাপি সংযোগ হ’ব পাৰে। আটাইবোৰ এলেকাতে জৰুৰীকালীন সেৱাৰ সৈতে পাঠ বাৰ্তা বিনিময় কৰাৰ সুবিধা উপলব্ধ নহ’বও পাৰে।\n\nএকাউণ্টত কৰা সালসলনিসমূহ ছেটিঙত দেখুৱাবলৈ কিছু সময় লাগিব পাৰে। সবিশেষৰ বাবে <xliff:g id="CARRIER_NAME">%2$s</xliff:g>ৰ সৈতে যোগাযোগ কৰক।"</string>
     <string name="more_about_satellite_messaging" msgid="1039277943532711584">"<xliff:g id="SUBJECT">%1$s</xliff:g>ৰ বিষয়ে অধিক"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"<xliff:g id="FUNCTION">%1$s</xliff:g> অন কৰিব নোৱাৰি"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"<xliff:g id="FUNCTION">%1$s</xliff:g> অন কৰিবলৈ, প্ৰথমে উপগ্ৰহৰ সংযোগ সমাপ্ত কৰক"</string>
@@ -5021,6 +5018,9 @@
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"উপগ্ৰহৰ সংযোগ"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"উপগ্ৰহৰ দ্বাৰা বাৰ্তা বিনিময়"</string>
     <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"আপোনাৰ একাউণ্টত ডেটা ব্যৱহাৰ কৰাটো অন্তর্ভুক্ত"</string>
+    <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"আপোনাৰ ফ’নৰ সমৰ্থিত এপ্‌"</string>
+    <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"আটাইবোৰ এপ্‌ চাওক"</string>
+    <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"আপোনাৰ ফ’নৰ সমৰ্থিত এপ্‌"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"এক্সেছ পইণ্টৰ নাম"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"এপিএন"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g>ৰ সৈতে সংযোগ কৰিলে উপলব্ধ নহয়"</string>
@@ -5188,27 +5188,44 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"আপোনাৰ কর্মস্থান নীতিৰ তথ্য"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"আপোনাৰ আইটি প্ৰশাসকে পৰিচালনা কৰা ছেটিং"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <string name="enable_16k_pages" msgid="8001470927566110689">"১৬ কেবি পৃষ্ঠাৰ আকাৰৰ জৰিয়তে বুট কৰক"</string>
-    <string name="enable_16k_pages_summary" msgid="1964363364670306912">"১৬ কেবি পৃষ্ঠা আকাৰৰ সমৰ্থিত কাৰ্নেল ব্যৱহাৰ কৰি ডিভাইচ বুট কৰক"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="611010487387251491">"৪ কেবি ম’ডৰ পৰা ১৬ কেবি ম’ডলৈ সলনি কৰক"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="6129208614283750541">"আপুনি এটা ৪ কেবি কাৰ্ণেল চলাই থকা পেজ-এগন’ষ্টিক ম’ডত আছে আৰু আপুনি ১৬ কেবি ম’ডলৈ সলনি কৰি আছে। এই ম’ডত ছফ্টৱেৰৰ অখণ্ডতা নিশ্চিত কৰিব নোৱাৰি আৰু বুটল’ডাৰ আনলক হৈ থকাৰ সময়ত ফ’নত ষ্ট’ৰ কৰা যিকোনো ডেটাৰ ক্ষেত্ৰত বিপদাশংকা থাকিব পাৰে। ই ডিভাইচটো ৰিবুট কৰিব। এই ম’ডসমূহত কিছুমান সুবিধা অক্ষম কৰা হ’ব, গতিকে কিছুমান এপ্লিকেশ্বনে কাম নকৰিবও পাৰে। ডিভাইচটোক উৎপাদন ম’ডলৈ উভতাই নিবলৈ, আপুনি তেতিয়া, ৪ কেবি ম’ডলৈ পুনৰ সলনি কৰিব লাগিব আৰু বুটল’ডাৰ লক কৰিব লাগিব, যিয়ে ডিভাইচটো ফেক্টৰী ৰিছেট কৰে। ডিভাইচটোৱে Androidত সফলতাৰে বুট কৰাৰ পাছত, বিকাশকৰ্তাৰ বিকল্পসমূহত OEM আনলক কৰাটো অক্ষম কৰক।"</string>
-    <string name="confirm_enable_4k_pages_title" msgid="3210360137887034659">"১৬ কেবি ম’ডৰ পৰা ৪ কেবি ম’ডলৈ সলনি কৰক"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"আপুনি এটা ১৬ কেবি কাৰ্ণেল চলাই থকা পেজ-এগন’ষ্টিক ম’ডত আছে আৰু আপুনি ৪ কেবি ম’ডলৈ সলনি কৰি আছে। এই ম’ডত ছফ্টৱেৰৰ অখণ্ডতা নিশ্চিত কৰিব নোৱাৰি আৰু বুটল’ডাৰ আনলক হৈ থকাৰ সময়ত ফ’নত ষ্ট’ৰ কৰা যিকোনো ডেটাৰ ক্ষেত্ৰত বিপদাশংকা থাকিব পাৰে। ই ডিভাইচটো ৰিবুট কৰিব। এই ম’ডসমূহত কিছুমান সুবিধা অক্ষম কৰা হ’ব, গতিকে কিছুমান এপ্লিকেশ্বনে কাম নকৰিবও পাৰে। ডিভাইচটোক উৎপাদন ম’ডলৈ উভতাই নিবলৈ, আপুনি তেতিয়া বুটল’ডাৰ লক কৰিব লাগিব, যিয়ে ডিভাইচটো ফেক্টৰী ৰিছেট কৰে। ডিভাইচটোৱে Androidত সফলতাৰে বুট কৰাৰ পাছত, বিকাশকৰ্তাৰ বিকল্পসমূহত OEM আনলক কৰাটো অক্ষম কৰক।"</string>
-    <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"কাৰ্নেলক ১৬ কেবি পৃষ্ঠাৰ সৈতে সমিল কাৰ্নেললৈ আপডে’ট কৰিব পৰা নগ’ল।"</string>
+    <!-- no translation found for enable_16k_pages (1758111531461408337) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1937836453571509085) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (5477376227161609124) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (6211693250692246982) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3001009010581393119) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (3398001587586470689) -->
+    <skip />
+    <!-- no translation found for toast_16k_update_failed_text (7848383020572918850) -->
+    <skip />
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"সালসলনি প্ৰয়োগ কৰি থকা হৈছে"</string>
-    <string name="confirm_format_ext4_title" msgid="6696191800594435577">"ডিভাইচ ext4 হিচাপে পুনৰ ফৰ্মেট কৰিবনে? (১৬ কেবি ম’ডৰ বাবে আৱশ্যক)"</string>
-    <string name="confirm_format_ext4_text" msgid="7940372488624630214">"১৬ কেবি বিকাশকৰ্তাৰ বিকল্প ব্যৱহাৰ কৰাৰ আগতে এই ডিভাইচৰ ডেটা বিভাজন ext4 লৈ ৰূপান্তৰ কৰিব লাগিব। এই ম’ডত ছফ্টৱেৰৰ অখণ্ডতা নিশ্চিত কৰিব নোৱাৰি আৰু বুটল’ডাৰ আনলক হৈ থকাৰ সময়ত ফ’নত ষ্ট’ৰ কৰা যিকোনো ডেটাৰ ক্ষেত্ৰত বিপদাশংকা থাকিব পাৰে। ১৬ কেবি বিকল্প সক্ৰিয় কৰাৰ বাবে ইয়াৰ পাছত আৰু এবাৰ ৰিবুট কৰাৰ প্ৰয়োজন হ’ব। আপুনি এবাৰ এই ম’ডত থাকিলে, আপুনি এবাৰ ৰিবুট কৰিয়েই ৪ কেবি আৰু ১৬ কেবি ম’ডৰ মাজত আগ-পিছ কৰিব পাৰিব। এই ম’ডসমূহত কিছুমান সুবিধা অক্ষম কৰা হ’ব, গতিকে কিছুমান এপ্লিকেশ্বনে কাম নকৰিবও পাৰে। ডিভাইচটোক উৎপাদন ম’ডলৈ উভতাই নিবলৈ, আপুনি ৪ কেবি ম’ডলৈ পুনৰ সলনি কৰিব লাগিব আৰু বুটল’ডাৰ লক কৰিব লাগিব, যিয়ে ডিভাইচটো ফেক্টৰী ৰিছেট কৰে। ডিভাইচটোৱে Androidত সফলতাৰে বুট কৰাৰ পাছত, বিকাশকৰ্তাৰ বিকল্পসমূহত OEM আনলক কৰাটো অক্ষম কৰক। ডিভাইচটো মচি পেলোৱা হ’ব আৰু নিশ্চিতকৰণৰ পাছত ফাইলছিষ্টেম ext4লৈ সলনি কৰা হ’ব। এইটো সম্পূৰ্ণ হোৱাৰ পাছত, ১৬ কেবি পুনৰ সক্ষম কৰিবলৈ কৰিবলৈ অনুগ্ৰহ কৰি উভতি আহক।"</string>
+    <!-- no translation found for confirm_format_ext4_title (4754057414728537125) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (432847493298532536) -->
+    <skip />
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"আটাইবোৰ ডেটা মচক"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"ডেটা বিভাজন মচিব আৰু ext4 হিচাপে পুনৰ ফৰ্মেট কৰিব পৰা নগ’ল।"</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"বুটল’ডাৰ আনলক কৰাৰ আৱশ্যক"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"১৬ কেবি বিকাশকৰ্তাৰ বিকল্প ব্যৱহাৰ কৰাৰ আগতে এই ডিভাইচত বুটল’ডাৰ আনলক কৰিব লাগিব। এই ম’ডত ছফ্টৱেৰৰ অখণ্ডতা নিশ্চিত কৰিব নোৱাৰি আৰু বুটল’ডাৰ আনলক হৈ থকাৰ সময়ত ফ’নত ষ্ট’ৰ কৰা যিকোনো ডেটাৰ ক্ষেত্ৰত বিপদাশংকা থাকিব পাৰে। ১৬ কেবি ম’ড সক্ৰিয় কৰাৰ সময়ত ব্যৱহাৰকাৰীৰ আটাইবোৰ ডেটা আৰু ছেটিং মচি পেলোৱা হ’ব। এবাৰ বুটল’ডাৰ আনলক কৰা হ’লে, ১৬ কেবি বিকল্প সক্ৰিয় কৰিবলৈ দুবাৰ ৰিবুট কৰাৰ প্ৰয়োজন হ’ব। আপুনি এবাৰ এই ম’ডত থাকিলে, আপুনি এবাৰ ৰিবুট কৰিয়েই ৪ কেবি আৰু ১৬ কেবি ম’ডৰ মাজত আগ-পিছ কৰিব পাৰিব। এই ম’ডসমূহত কিছুমান সুবিধা অক্ষম কৰা হ’ব, গতিকে কিছুমান এপ্লিকেশ্বনে কাম নকৰিবও পাৰে। ডিভাইচটোক উৎপাদন ম’ডলৈ উভতাই নিবলৈ, আপুনি ৪ কেবি ম’ডলৈ পুনৰ সলনি কৰিব লাগিব আৰু ডিভাইচটো OEM/বুটল’ডাৰ লক (যিয়ে ফেক্টৰী ৰিছেট কৰে) কৰিব লাগিব। অনুগ্ৰহ কৰি বুটল’ডাৰ আনলক কৰক আৰু পুনৰ চেষ্টা কৰক। আপুনি এইটো কেনেকৈ কৰিব লাগে তাৰ নিৰ্দেশনা &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;ত চাব পাৰে"</string>
-    <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"৪ কেবি পেজ-এগন’ষ্টিক ম’ড ব্যৱহাৰ কৰি থকা হৈছে"</string>
-    <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"আপুনি পেজ-এগন’ষ্টিক ম’ডৰ ৪ কেবি ম’ডত আছে। এই ম’ডত ছফ্টৱেৰৰ অখণ্ডতা নিশ্চিত কৰিব নোৱাৰি আৰু বুটল’ডাৰ আনলক হৈ থকাৰ সময়ত ফ’নত ষ্ট’ৰ কৰা যিকোনো ডেটাৰ ক্ষেত্ৰত বিপদাশংকা থাকিব পাৰে। এই ম’ডসমূহত কিছুমান সুবিধা অক্ষম কৰা হ’ব, গতিকে কিছুমান এপ্লিকেশ্বনে কাম নকৰিবও পাৰে। উৎপাদন ম’ডত পুনৰ প্ৰৱেশ কৰিবলৈ, আপুনি ডিভাইচৰ বুটল’ডাৰ লক কৰিবই লাগিব। অধিক পঢ়িবলৈ টিপক।"</string>
-    <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"আপুনি পেজ-এগন’ষ্টিক ম’ডৰ ৪ কেবি ম’ডত আছে। এই ম’ডত ছফ্টৱেৰৰ অখণ্ডতা নিশ্চিত কৰিব নোৱাৰি আৰু বুটল’ডাৰ আনলক হৈ থকাৰ সময়ত ফ’নত ষ্ট’ৰ কৰা যিকোনো ডেটাৰ ক্ষেত্ৰত বিপদাশংকা থাকিব পাৰে। এই ম’ডসমূহত কিছুমান সুবিধা অক্ষম কৰা হ’ব, গতিকে কিছুমান এপ্লিকেশ্বনে কাম নকৰিবও পাৰে। উৎপাদন ম’ডত পুনৰ প্ৰৱেশ কৰিবলৈ, আপুনি ডিভাইচৰ বুটল’ডাৰ লক কৰিবই লাগিব। ই ডিভাইচটো পুনৰ ফেক্টৰী ৰিছেট কৰিব আৰু সেইটোক উৎপাদন ছেটিঙলৈ পুনঃস্থাপন কৰিব। ডিভাইচটোৱে Androidত সফলতাৰে বুট কৰাৰ পাছত, বিকাশকৰ্তাৰ বিকল্পসমূহত OEM আনলক কৰাটো অক্ষম কৰক। যদি ডিভাইচটো Androidত বুট কৰিব পৰা নাযায় বা অস্থিৰ হয়, তেন্তে &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt;ৰ পৰা শেহতীয়া ফেক্টৰী প্ৰতিচ্ছবিসমূহৰ সৈতে ডিভাইচটো পুনৰ ফ্লেশ্ব কৰক আৰু \'ডিভাইচ মচি পেলাওক\', \'বুটল’ডাৰ লক কৰক\' আৰু \'আটাইবোৰ বিভাজন বলপূৰ্বক ফ্লেশ্ব কৰক\' বাছনি কৰক।"</string>
-    <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"১৬ কেবি পেজ-এগন’ষ্টিক ম’ড ব্যৱহাৰ কৰি থকা হৈছে"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"আপুনি পেজ-এগন’ষ্টিক ম’ডৰ ১৬ কেবি ম’ডত আছে। এই ম’ডত ছফ্টৱেৰৰ অখণ্ডতা নিশ্চিত কৰিব নোৱাৰি আৰু বুটল’ডাৰ আনলক হৈ থকাৰ সময়ত ফ’নত ষ্ট’ৰ কৰা যিকোনো ডেটাৰ ক্ষেত্ৰত বিপদাশংকা থাকিব পাৰে। এই ম’ডসমূহত কিছুমান সুবিধা অক্ষম কৰা হ’ব, গতিকে কিছুমান এপ্লিকেশ্বনে কাম নকৰিবও পাৰে। উৎপাদন ম’ডত পুনৰ প্ৰৱেশ কৰিবলৈ, আপুনি ৪ কেবি ম’ডলৈ উভতি যাবই লাগিব আৰু তাৰ পাছত ডিভাইচৰ বুটল’ডাৰ লক কৰিবই লাগিব। অধিক পঢ়িবলৈ টিপক।"</string>
-    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"আপুনি পেজ-এগন’ষ্টিক ম’ডৰ ১৬ কেবি ম’ডত আছে। এই ম’ডত ছফ্টৱেৰৰ অখণ্ডতা নিশ্চিত কৰিব নোৱাৰি আৰু বুটল’ডাৰ আনলক হৈ থকাৰ সময়ত ফ’নত ষ্ট’ৰ কৰা যিকোনো ডেটাৰ ক্ষেত্ৰত বিপদাশংকা থাকিব পাৰে। এই ম’ডসমূহত কিছুমান সুবিধা অক্ষম কৰা হ’ব, গতিকে কিছুমান এপ্লিকেশ্বনে কাম নকৰিবও পাৰে। উৎপাদন ম’ডত পুনৰ প্ৰৱেশ কৰিবলৈ, আপুনি ৪ কেবি ম’ডলৈ উভতি যাবই লাগিব আৰু তাৰ পাছত ডিভাইচৰ বুটল’ডাৰ লক কৰিবই লাগিব। ই ডিভাইচটো পুনৰ ফেক্টৰী ৰিছেট কৰিব আৰু সেইটোক উৎপাদন ছেটিঙলৈ পুনঃস্থাপন কৰিব। ডিভাইচটোৱে Androidত সফলতাৰে বুট কৰাৰ পাছত, বিকাশকৰ্তাৰ বিকল্পসমূহত OEM আনলক কৰাটো অক্ষম কৰক। যদি ডিভাইচটো Androidত বুট কৰিব পৰা নাযায় বা অস্থিৰ হয়, তেন্তে &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt;ৰ পৰা শেহতীয়া ফেক্টৰী প্ৰতিচ্ছবিসমূহৰ সৈতে ডিভাইচটো পুনৰ ফ্লেশ্ব কৰক আৰু \'ডিভাইচৰ ডেটা মচি পেলাওক\', \'বুটল’ডাৰ লক কৰক\' আৰু \'আটাইবোৰ বিভাজন বলপূৰ্বক ফ্লেশ্ব কৰক\' বাছনি কৰক।"</string>
-    <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"১৬ কেবি পেজ-এগন’ষ্টিক ম’ড"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (8089310116854544106) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (293797217034340398) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (731597455785555266) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (7572233914423063169) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (8940585327969638637) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (7613206944532151035) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2860363435021452169) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (2058933148654316447) -->
+    <skip />
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"অধিক পঢ়ক"</string>
     <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"এপ্‌টো পৃষ্ঠাৰ আকাৰৰ সুসমতা ম’ডৰ জৰিয়তে চলাওক"</string>
     <string name="enable_16k_app_compat_details" msgid="3389401258168314266">"ট’গল কৰা হ’লে এপ্‌টো ১৬ কেবি ডিভাইচত পৃষ্ঠাৰ আকাৰৰ সুসমতা ম’ডত চলোৱা হ’ব।"</string>
@@ -5585,8 +5602,7 @@
     <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"বন্ধ কৰক"</string>
     <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"অন্য এযোৰা সুসংগত হেডফ’ন সংযোগ কৰক অথবা আপোনাৰ ষ্ট্ৰীমৰ নাম আৰু পাছৱৰ্ড অন্য লোকজনৰ সৈতে শ্বেয়াৰ কৰক"</string>
     <string name="audio_sharing_dialog_qr_code_content" msgid="2246980817848351361">"আনসকলক এই ক’ডটো স্কেন কৰিবলৈ আৰু আপোনাৰ অডিঅ’ শুনিবলৈ দিয়ক\n\nষ্ট্ৰীমৰ নাম: <xliff:g id="STREAM_NAME">%1$s</xliff:g>\nপাছৱৰ্ড: <xliff:g id="PASSWORD">%2$s</xliff:g>"</string>
-    <!-- no translation found for audio_sharing_dialog_qr_code_content_no_password (7824076083031650113) -->
-    <skip />
+    <string name="audio_sharing_dialog_qr_code_content_no_password" msgid="7824076083031650113">"আনসকলক এই ক’ডটো স্কেন কৰিবলৈ আৰু আপোনাৰ অডিঅ’ শুনিবলৈ দিয়ক\n\nষ্ট্ৰীমৰ নাম: <xliff:g id="STREAM_NAME">%1$s</xliff:g>"</string>
     <string name="audio_sharing_dialog_pair_new_device_content" msgid="6720472590211440206">"বা আন এটা সমিল হেডফ’নৰ ছেট যোৰা লগাওক"</string>
     <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"অন্য এযোৰা সুসংগত হেডফ’ন পেয়াৰ কৰক অথবা আপোনাৰ অডিঅ’ ষ্ট্ৰীমৰ কিউআৰ ক’ডটো অন্য লোকজনৰ সৈতে শ্বেয়াৰ কৰক"</string>
     <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"অডিঅ’ শ্বেয়াৰ কৰি থকা হৈছে"</string>
@@ -5615,11 +5631,10 @@
     <string name="audio_sharing_retry_dialog_content" msgid="6014534433894608834">"কিবা ভুল হ’ল। অনুগ্ৰহ কৰি পুনৰ চেষ্টা কৰক।"</string>
     <string name="audio_sharing_incompatible_dialog_title" msgid="4586805264392802115">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>ৰ সৈতে অডিঅ’ শ্বেয়াৰ কৰিব নোৱাৰি"</string>
     <string name="audio_sharing_incompatible_dialog_content" msgid="3943223683620405311">"অডিঅ’ শ্বেয়াৰিঙে কেৱল LE অডিঅ’ সমৰ্থন কৰা হেডফ’নৰ সৈতেহে কাম কৰে"</string>
-    <!-- no translation found for audio_sharing_block_pairing_dialog_title (1756723860075818856) -->
-    <skip />
-    <!-- no translation found for audio_sharing_block_pairing_dialog_content (6352030314206654722) -->
-    <skip />
-    <!-- no translation found for audio_sharing_turn_off_button_label (1934956352475393641) -->
+    <string name="audio_sharing_block_pairing_dialog_title" msgid="1756723860075818856">"অডিঅ’ শ্বেয়াৰিং অফ কৰক"</string>
+    <string name="audio_sharing_block_pairing_dialog_content" msgid="6352030314206654722">"কোনো নতুন ডিভাইচ পেয়াৰ কৰিবলৈ প্ৰথমে অডিঅ’ শ্বেয়াৰিং অফ কৰক।"</string>
+    <string name="audio_sharing_turn_off_button_label" msgid="1934956352475393641">"অফ কৰক"</string>
+    <!-- no translation found for share_audio_notification_title (5201976754820387782) -->
     <skip />
     <string name="audio_streams_category_title" msgid="4878022761829895463">"এটা LE অডিঅ’ ষ্ট্ৰীমৰ সৈতে সংযোগ কৰক"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"নিকটৱৰ্তী অডিঅ’ ষ্ট্ৰীম"</string>
@@ -5650,6 +5665,9 @@
     <string name="audio_streams_present_now" msgid="7519818719382756366">"ষ্ট্ৰীম পজ কৰা হৈছে"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"শুনা বন্ধ কৰক"</string>
     <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"সুসংগত হেডফ’ন সংযোগ কৰক"</string>
+    <string name="audio_streams_dialog_turn_off_talkback_title" msgid="6824585115302786690">"সাময়িকভাৱে TalkBack অফ কৰক"</string>
+    <string name="audio_streams_dialog_turn_off_talkback_subtitle" msgid="2394295776096273919">"অডিঅ’ ষ্ট্ৰীম শুনি থকাৰ সময়ত TalkBack ব্যৱহাৰ কৰিব নোৱাৰি। শুনা আৰম্ভ কৰিবলৈ TalkBack অফ কৰক।"</string>
+    <string name="audio_streams_dialog_turn_off_talkback_button" msgid="8049097689955037626">"অফ কৰক"</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"এটা ডিভাইচ সংযোগ কৰক"</string>
     <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"অডিঅ’ ষ্ট্ৰীমৰ সবিশেষ"</string>
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"অডিঅ’ ষ্ট্ৰীমৰ কিউআৰ ক’ড"</string>

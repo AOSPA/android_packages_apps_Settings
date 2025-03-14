@@ -41,10 +41,6 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Angehalten"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Unbekannt"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Vorschau"</string>
-    <!-- no translation found for preview_pager_previous_button (607771113300838313) -->
-    <skip />
-    <!-- no translation found for preview_pager_next_button (8700907912508927271) -->
-    <skip />
     <string name="qr_code_content_description" msgid="1852208464419291347">"QR-Code"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Verkleinern"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Vergrößern"</string>
@@ -101,6 +97,10 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Informationen zur Audioausgabe"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Audio an dein Hörgerät oder den Lautsprecher deines Smartphones weiterleiten lassen"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Ähnlich"</string>
+    <!-- no translation found for bluetooth_try_nearby_share_title (4996427014054610877) -->
+    <skip />
+    <!-- no translation found for bluetooth_try_nearby_share_summary (329823028635487822) -->
+    <skip />
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Klingeltöne und Wecker"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Audio bei Anrufen"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Medien- und Systemtöne"</string>
@@ -231,12 +231,9 @@
     <string name="search_region_hint" msgid="1748708432568237552">"Regionen suchen"</string>
     <string name="top_intro_region_title" msgid="2336323415395642117">"Die Auswahl deiner Region bestimmt, wie die Uhrzeit, das Datum, die Temperatur und andere Informationen angezeigt werden"</string>
     <string name="more_language_settings_category" msgid="3669703092480725416">"Weitere Spracheinstellungen"</string>
-    <!-- no translation found for title_change_system_locale_region (1977530992614685128) -->
-    <skip />
-    <!-- no translation found for body_change_system_locale_region (9064318449821043189) -->
-    <skip />
-    <!-- no translation found for top_intro_numbering_system_title (8234587334207926397) -->
-    <skip />
+    <string name="title_change_system_locale_region" msgid="1977530992614685128">"Region in „<xliff:g id="SYSTEM_LANGUAGE_REGION">%1$s</xliff:g>“ ändern?"</string>
+    <string name="body_change_system_locale_region" msgid="9064318449821043189">"Dein Gerät verwendet weiterhin <xliff:g id="SYSTEM_LANGUAGE">%1$s</xliff:g> als Systemsprache"</string>
+    <string name="top_intro_numbering_system_title" msgid="8234587334207926397">"Die meisten Apps verwenden deine regionalen Einstellungen"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regionale Einstellungen"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Einstellungen für Einheiten und Zahlen festlegen"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Wenn du Apps deine regionalen Einstellungen mitteilst, können ihre Dienste für dich personalisiert werden."</string>
@@ -893,7 +890,8 @@
     <string name="lockpassword_credential_changed" msgid="5934778179732392028">"Die Displaysperre wurde bereits geändert. Versuch es mit der neuen Displaysperre noch mal."</string>
     <string name="lockpattern_tutorial_cancel_label" msgid="775215267818384016">"Abbrechen"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="1329049481210689408">"Weiter"</string>
-    <string name="manage_device_admin" msgid="1044620606203916275">"Apps zur Geräteverwaltung"</string>
+    <!-- no translation found for manage_device_admin (7272894919651600481) -->
+    <skip />
     <string name="number_of_device_admins_none" msgid="152926922020437312">"Keine aktiven Apps"</string>
     <string name="number_of_device_admins" msgid="3402909995362162876">"{count,plural, =1{# aktive App}other{# aktive Apps}}"</string>
     <string name="manage_trust_agents" msgid="6410149930029992356">"Trust Agents"</string>
@@ -1284,12 +1282,9 @@
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
     <string name="emergency_address_title" msgid="8102786488994263815">"Notfalladresse"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"Wird als dein Standort verwendet, wenn du einen Notruf über WLAN tätigst"</string>
-    <!-- no translation found for private_dns_title (1180823690693258572) -->
-    <skip />
-    <!-- no translation found for private_dns_field_require (2318400923953435586) -->
-    <skip />
-    <!-- no translation found for private_dns_hostname_invalid (5085498734835552780) -->
-    <skip />
+    <string name="private_dns_title" msgid="1180823690693258572">"Hostname"</string>
+    <string name="private_dns_field_require" msgid="2318400923953435586">"Das ist ein Pflichtfeld"</string>
+    <string name="private_dns_hostname_invalid" msgid="5085498734835552780">"Der eingegebene Hostname ist ungültig"</string>
     <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"Weitere Informationen zu Funktionen eines privaten DNS"</annotation></string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"An"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"WLAN-Telefonie aktivieren"</string>
@@ -1393,7 +1388,7 @@
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Modi können auch das dunkle Design aktivieren}=1{{mode_1} aktiviert auch das dunkle Design}=2{{mode_1} und {mode_2} aktivieren auch das dunkle Design}=3{{mode_1}, {mode_2} und {mode_3} aktivieren auch das dunkle Design}other{{mode_1}, {mode_2} und # weitere Modi aktivieren auch das dunkle Design}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Einstellungen für Modi"</string>
     <string name="even_dimmer_display_title" msgid="4509732439977906028">"Extradunkel"</string>
-    <string name="even_dimmer_display_summary" msgid="120301078873242172">"Erlauben, dass das Gerät dunkler als normal wird"</string>
+    <string name="even_dimmer_display_summary" msgid="120301078873242172">"Erlauben, dass das Display dunkler wird, als üblich"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Display automatisch ausschalten"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> ohne Aktivität"</string>
     <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Nicht festgelegt"</string>
@@ -2057,7 +2052,13 @@
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"Tastaturmaus verwenden"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Zum Steuern des Mauszeigers die Tastatur verwenden"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Scrollrichtung umkehren"</string>
-    <string name="mouse_reverse_vertical_scrolling_summary" msgid="4403637093982742165">"Inhalte bewegen sich nach oben, wenn du nach unten scrollst"</string>
+    <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Wenn du nach oben scrollst, wird die Seite nach unten verschoben"</string>
+    <!-- no translation found for mouse_scrolling_category_title (2992126595687187296) -->
+    <skip />
+    <!-- no translation found for mouse_scrolling_acceleration (7119758828203396430) -->
+    <skip />
+    <!-- no translation found for mouse_scrolling_speed (3999483025392860903) -->
+    <skip />
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"Primäre Maustaste tauschen"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Die linke Maustaste übernimmt die Funktion der rechten Maustaste (und umgekehrt)"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"Cursorbeschleunigung"</string>
@@ -2238,6 +2239,7 @@
     <string name="accessibility_feedback_title" msgid="6690472705407526006">"Feedback"</string>
     <string name="accessibility_feedback_summary" msgid="4576591591334314827">"Hilf uns, die Funktionen zu verbessern, indem du an einer Umfrage teilnimmst"</string>
     <string name="accessibility_feedback_disabled_summary" msgid="3652321859452620942">"Keine Umfragen verfügbar"</string>
+    <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Feedback geben"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Heruntergeladene Apps"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimentell"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Funktions-Flags"</string>
@@ -2494,10 +2496,8 @@
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Weiter"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Hörgeräte"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Du kannst Hörgeräte, Cochlea-Implantate und andere Verstärker, die mit ASHA und LE Audio kompatibel sind, einrichten und verwalten"</string>
-    <!-- no translation found for accessibility_hearingaid_asha_only_intro (7402419984664822832) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_hap_only_intro (3332144138443825311) -->
-    <skip />
+    <string name="accessibility_hearingaid_asha_only_intro" msgid="7402419984664822832">"Du kannst Hörgeräte, Cochlea-Implantate und andere Verstärker, die mit ASHA kompatibel sind, einrichten und verwalten"</string>
+    <string name="accessibility_hearingaid_hap_only_intro" msgid="3332144138443825311">"Du kannst Hörgeräte, Cochlea-Implantate und andere Verstärker, die mit LE Audio kompatibel sind, einrichten und verwalten"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"Keine Hörgeräte verbunden"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Hörgeräte hinzufügen"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Hörgeräte koppeln"</string>
@@ -2517,14 +2517,10 @@
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"Informationen zu Hörgeräten"</string>
     <string name="accessibility_hearing_device_footer_summary" msgid="5513620078219951077">"Tippe zum Suchen nach anderen Hörgeräten, die nicht mit ASHA oder LE Audio kompatibel sind, auf &lt;b&gt;Neues Gerät koppeln&lt;/b&gt; &gt; &lt;b&gt;Mehr Geräte ansehen&lt;/b&gt;"</string>
     <string name="accessibility_hearing_device_footer_summary_tts" msgid="955527026890456959">"Tippe zum Suchen nach anderen Hörgeräten, die nicht mit ASHA oder LE Audio kompatibel sind, auf "<b>"Neues Gerät koppeln"</b>" und dann auf "<b>"Mehr Geräte ansehen"</b></string>
-    <!-- no translation found for accessibility_hearing_device_footer_asha_only_summary (3377169209330540616) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_footer_asha_only_summary_tts (8192971114504608531) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_footer_hap_only_summary (3531758698830915205) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_footer_hap_only_summary_tts (4440097982533045507) -->
-    <skip />
+    <string name="accessibility_hearing_device_footer_asha_only_summary" msgid="3377169209330540616">"Tippe zum Suchen nach anderen Hörgeräten, die nicht mit ASHA kompatibel sind, auf &lt;b&gt;Neues Gerät koppeln&lt;/b&gt; &gt; &lt;b&gt;Mehr Geräte ansehen&lt;/b&gt;"</string>
+    <string name="accessibility_hearing_device_footer_asha_only_summary_tts" msgid="8192971114504608531">"Tippe zum Suchen nach anderen Hörgeräten, die nicht mit ASHA kompatibel sind, auf "<b>"Neues Gerät koppeln"</b>" und dann auf "<b>"Mehr Geräte ansehen"</b></string>
+    <string name="accessibility_hearing_device_footer_hap_only_summary" msgid="3531758698830915205">"Tippe zum Suchen nach anderen Hörgeräten, die nicht mit LE Audio kompatibel sind, auf &lt;b&gt;Neues Gerät koppeln&lt;/b&gt; &gt; &lt;b&gt;Mehr Geräte ansehen&lt;/b&gt;"</string>
+    <string name="accessibility_hearing_device_footer_hap_only_summary_tts" msgid="4440097982533045507">"Tippe zum Suchen nach anderen Hörgeräten, die nicht mit LE Audio kompatibel sind, auf "<b>"Neues Gerät koppeln"</b>" und dann auf "<b>"Mehr Geräte ansehen"</b></string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Hörgerät koppeln"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"Auf dieser Seite kannst du ASHA- und LE Audio-Hörgeräte koppeln. Dein Hörgerät muss eingeschaltet und bereit zum Koppeln sein."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Verfügbare Hörgeräte"</string>
@@ -2975,7 +2971,8 @@
     <string name="remove_device_admin" msgid="3143059558744287259">"Diese App zur Geräteverwaltung deaktivieren"</string>
     <string name="uninstall_device_admin" msgid="4481095209503956916">"App deinstallieren"</string>
     <string name="remove_and_uninstall_device_admin" msgid="707912012681691559">"Deaktivieren &amp; deinstallieren"</string>
-    <string name="select_device_admin_msg" msgid="5501360309040114486">"Apps zur Geräteverwaltung"</string>
+    <!-- no translation found for select_device_admin_msg (2506262585633022884) -->
+    <skip />
     <string name="no_device_admins" msgid="8888779888103079854">"Keine App zur Geräteverwaltung verfügbar"</string>
     <string name="no_trust_agents" msgid="8659098725864191600">"Keine verfügbaren Trust Agents"</string>
     <string name="add_device_admin_msg" msgid="7730006568970042119">"App zur Geräteverwaltung aktivieren?"</string>
@@ -3866,7 +3863,8 @@
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Weitere Einstellungen sind in dieser App verfügbar"</string>
     <string name="notification_polite_title" msgid="6121016426991791557">"Benachrichtigungen reduzieren"</string>
     <string name="notification_polite_main_control_title" msgid="5812529809151927149">"„Benachrichtigungen reduzieren” aktivieren"</string>
-    <string name="notification_polite_description" msgid="5497748284893832854">"Wenn du viele Benachrichtigungen hintereinander erhältst, verringert dein Gerät für bis zu 2 Minuten die Lautstärke der Benachrichtigungssignale und minimiert die Benachrichtigungen. Anrufe, Wecker und priorisierte Unterhaltungen sind davon nicht betroffen. \n\nDie während dieser Zeit eingegangenen Benachrichtigungen kannst du dir ansehen, indem du vom oberen Rand des Displays nach unten wischst."</string>
+    <!-- no translation found for notification_polite_description (6137533404978878957) -->
+    <skip />
     <string name="notification_polite_work" msgid="8823596456640216391">"Auf Arbeitsprofile anwenden"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Auf Apps im Arbeitsprofil anwenden"</string>
     <string name="notification_bundle_title" msgid="460988459835922719">"Gruppierte Benachrichtigungen"</string>
@@ -4374,7 +4372,8 @@
     <string name="disconnected" msgid="3469373726996129247">"Nicht verbunden"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Nicht verbunden"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> Apps installiert"</string>
-    <string name="storage_summary" msgid="5903562203143572768">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> belegt – <xliff:g id="FREE_SPACE">%2$s</xliff:g> frei"</string>
+    <!-- no translation found for storage_summary (7631468664968572688) -->
+    <skip />
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Dunkles Design, Schriftgröße, Helligkeit"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Im Mittel werden <xliff:g id="USED_MEMORY">%1$s</xliff:g> von <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> genutzt"</string>
     <string name="users_summary" msgid="8473589474976307510">"Angemeldet als <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -4443,6 +4442,8 @@
     <string name="ethernet_data_usage" msgid="4552227880905679761">"Ethernet-Datennutzung"</string>
     <string name="wifi" msgid="2932584495223243842">"WLAN"</string>
     <string name="ethernet" msgid="4665162609974492983">"Ethernet"</string>
+    <!-- no translation found for ethernet_interface_title (1634881244068292765) -->
+    <skip />
     <string name="cell_data_template" msgid="6077963976103260821">"<xliff:g id="AMOUNT">^1</xliff:g> mobile Daten"</string>
     <string name="wifi_data_template" msgid="935934798340307438">"<xliff:g id="AMOUNT">^1</xliff:g> WLAN-Datennutzung"</string>
     <string name="ethernet_data_template" msgid="1429173767445201145">"<xliff:g id="AMOUNT">^1</xliff:g> Ethernet-Datennutzung"</string>
@@ -4994,8 +4995,7 @@
     <string name="satellite_setting_title" msgid="2543034229989047673">"Nachrichten per Satellit"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Nachrichten per Satellitenfunk senden und empfangen. Dein Konto unterstützt diesen Dienst."</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Nachrichten per Satellitenfunk senden und empfangen. Dein Konto unterstützt diesen Dienst nicht."</string>
-    <!-- no translation found for satellite_setting_summary_without_entitlement (5284998840770992554) -->
-    <skip />
+    <string name="satellite_setting_summary_without_entitlement" msgid="5284998840770992554">"Nachrichten per Satellitenfunk senden und empfangen. Weitere Informationen erhältst du bei deinem Mobilfunkanbieter."</string>
     <string name="keywords_satellite_setting" msgid="613553612424945946">"Nachrichten per Satellit, Satellitenverbindung"</string>
     <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"Funktion „<xliff:g id="SUBJECT">%1$s</xliff:g>“"</string>
     <string name="title_about_satellite_setting" msgid="3563087940535642558">"Mit einem berechtigten <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-Konto kannst du Nachrichten per Satellitenfunk versenden und empfangen"</string>
@@ -5009,8 +5009,7 @@
     <string name="title_supported_service" msgid="4275535165812691571">"Nach Verbindung deines Smartphones mit einem Satelliten"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"Du kannst Nachrichten an beliebige Empfänger versenden, auch an den Rettungsdienst. Sobald wieder ein Mobilfunknetz verfügbar ist, verbindet sich dein Smartphone damit."</string>
     <string name="satellite_setting_summary_more_information" msgid="1028146147094166868">"„<xliff:g id="SUBJECT">%1$s</xliff:g>“ ist nicht überall verfügbar und kann die Übertragung verlangsamen. Wetterbedingungen und bestimmte Gebäude, Bäume usw. können die Satellitenverbindung beeinträchtigen. Anrufe per Satellit sind nicht verfügbar. Notrufe funktionieren eventuell trotzdem.\n\nEs kann einige Zeit dauern, bis Kontoänderungen in den Einstellungen angezeigt werden. Wenn du mehr erfahren möchtest, wende dich an <xliff:g id="CARRIER_NAME">%2$s</xliff:g>."</string>
-    <!-- no translation found for satellite_setting_summary_more_information_no_emergency_messaging (8042240156141790447) -->
-    <skip />
+    <string name="satellite_setting_summary_more_information_no_emergency_messaging" msgid="8042240156141790447">"<xliff:g id="SUBJECT">%1$s</xliff:g> kann länger dauern und ist nicht überall verfügbar. Wetterbedingungen und bestimmte Gebäude, Bäume usw. können die Satellitenverbindung beeinträchtigen. Anrufe per Satellit sind nicht verfügbar. Notrufe werden eventuell trotzdem verbunden. Möglicherweise können Nachrichten mit Rettungsdiensten nicht überall ausgetauscht werden.\n\nEs kann einige Zeit dauern, bis Kontoänderungen in den Einstellungen angezeigt werden. Wenn du mehr erfahren möchtest, wende dich an <xliff:g id="CARRIER_NAME">%2$s</xliff:g>."</string>
     <string name="more_about_satellite_messaging" msgid="1039277943532711584">"Weitere Informationen zu „<xliff:g id="SUBJECT">%1$s</xliff:g>“"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Aktivieren von „<xliff:g id="FUNCTION">%1$s</xliff:g>“ fehlgeschlagen"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Um die Funktion „<xliff:g id="FUNCTION">%1$s</xliff:g>“ zu aktivieren, beende zuerst die Satellitenverbindung"</string>
@@ -5019,6 +5018,9 @@
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"Satellitenverbindung"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"Nachrichten per Satellit"</string>
     <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"Dein Konto unterstützt Datennutzung"</string>
+    <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Unterstützte Apps auf deinem Smartphone"</string>
+    <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"alle Apps ansehen"</string>
+    <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Unterstützte Apps auf deinem Smartphone"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Zugangspunkte (APNs)"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Bei Verbindung mit <xliff:g id="CARRIER">%1$s</xliff:g> nicht verfügbar"</string>
@@ -5186,27 +5188,44 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Informationen zu den Arbeitsrichtlinien"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Einstellungen, die von deinem IT-Administrator verwaltet werden"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <string name="enable_16k_pages" msgid="8001470927566110689">"Mit Seitengröße von 16 KB starten"</string>
-    <string name="enable_16k_pages_summary" msgid="1964363364670306912">"Mit Kernel starten, der 16-KB-Seiten unterstützt"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="611010487387251491">"Vom 4‑KB-Modus zum 16‑KB-Modus wechseln"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="6129208614283750541">"Du befindest dich zurzeit im speicherseitenunabhängigen Modus mit einem 4‑KB-Kernel und bist dabei, zum 16‑KB-Modus zu wechseln. Beachte, dass bei entsperrtem Bootloader die Softwareintegrität nicht sichergestellt werden kann und alle auf dem Smartphone gespeicherten Daten gefährdet sind. Wenn du dennoch wechselst, wird das Gerät neu gestartet. Einige Funktionen werden in diesen Modi deaktiviert, weshalb bestimmte Anwendungen möglicherweise nicht funktionieren. Wenn du das Gerät in den Produktionsmodus zurückversetzen möchtest, musst du zurück in den 4‑KB-Modus wechseln und dann den Bootloader sperren. Dadurch wird das Gerät auf die Werkseinstellungen zurückgesetzt. Nachdem das Gerät hochgefahren und Android gestartet wurde, deaktiviere in den Entwickleroptionen die OEM-Entsperrung."</string>
-    <string name="confirm_enable_4k_pages_title" msgid="3210360137887034659">"Vom 16‑KB-Modus zum 4‑KB-Modus wechseln"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"Du befindest dich zurzeit im speicherseitenunabhängigen Modus mit einem 16‑KB-Kernel und bist dabei, zum 4‑KB-Modus zu wechseln. Beachte, dass bei entsperrtem Bootloader die Softwareintegrität nicht sichergestellt werden kann und alle auf dem Smartphone gespeicherten Daten gefährdet sind. Wenn du dennoch wechselst, wird das Gerät neu gestartet. Einige Funktionen werden in diesen Modi deaktiviert, weshalb bestimmte Anwendungen möglicherweise nicht funktionieren. Wenn du das Gerät in den Produktionsmodus zurückversetzen möchtest, musst du zuerst den Bootloader sperren. Dadurch wird das Gerät auf die Werkseinstellungen zurückgesetzt. Nachdem das Gerät hochgefahren und Android gestartet wurde, deaktiviere in den Entwickleroptionen die OEM-Entsperrung."</string>
-    <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Kernel konnte nicht auf mit 16-KB-Seiten kompatiblen Kernel aktualisiert werden."</string>
+    <!-- no translation found for enable_16k_pages (1758111531461408337) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1937836453571509085) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (5477376227161609124) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (6211693250692246982) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3001009010581393119) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (3398001587586470689) -->
+    <skip />
+    <!-- no translation found for toast_16k_update_failed_text (7848383020572918850) -->
+    <skip />
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Änderung wird übernommen"</string>
-    <string name="confirm_format_ext4_title" msgid="6696191800594435577">"Gerät mit ext4 neu formatieren (für den 16‑KB-Modus erforderlich)?"</string>
-    <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Bevor die 16‑KB-Entwickleroption verwendet werden kann, muss die Datenpartition des Geräts in ext4 umgewandelt werden. Beachte, dass bei entsperrtem Bootloader die Softwareintegrität nicht sichergestellt werden kann und alle auf dem Smartphone gespeicherten Daten gefährdet sind. Zum Aktivieren der 16‑KB-Option muss das Gerät danach noch einmal neu gestartet werden. Wenn du dann in diesem Modus bist, reicht für den Wechsel zwischen dem 4‑KB-Modus und dem 16‑KB-Modus ein einmaliger Neustart aus. Einige Funktionen werden in diesen Modi deaktiviert, weshalb bestimmte Anwendungen möglicherweise nicht funktionieren. Wenn du das Gerät in den Produktionsmodus zurückversetzen möchtest, musst du zurück in den 4‑KB-Modus wechseln und dann den Bootloader sperren. Dadurch wird das Gerät auf die Werkseinstellungen zurückgesetzt. Nachdem das Gerät hochgefahren und Android gestartet wurde, deaktiviere in den Entwickleroptionen die OEM-Entsperrung. Alle Daten auf dem Gerät werden gelöscht und das Dateisystem wird nach entsprechender Bestätigung in ext4 geändert. Nach Abschluss dieses Vorgangs kannst du hierher zurückkehren, um den 16‑KB-Modus zu aktivieren."</string>
+    <!-- no translation found for confirm_format_ext4_title (4754057414728537125) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (432847493298532536) -->
+    <skip />
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Alle Daten löschen"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Die Datenpartition konnte nicht gelöscht und mit ext4 neu formatiert werden."</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Entsperrren des Bootloaders erforderlich"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Bevor auf diesem Gerät die 16‑KB-Entwickleroption verwendet werden kann, muss der Bootloader entsperrt werden. Beachte, dass bei entsperrtem Bootloader die Softwareintegrität nicht sichergestellt werden kann und alle auf dem Smartphone gespeicherten Daten gefährdet sind. Durch Aktivieren des 16‑KB-Modus werden alle Nutzerdaten und ‑einstellungen gelöscht. Nachdem der Bootloader entsperrt wurde, sind zur Aktivierung des 16‑KB-Modus zwei Neustarts erforderlich. Wenn du dann in diesem Modus bist, reicht für den Wechsel zwischen dem 4‑KB-Modus und dem 16‑KB-Modus ein einmaliger Neustart aus. Einige Funktionen werden in diesen Modi deaktiviert, weshalb bestimmte Anwendungen möglicherweise nicht funktionieren. Wenn du das Gerät in den Produktionsmodus zurückversetzen möchtest, musst du zurück in den 4‑KB-Modus wechseln und dann die OEM-/Bootloader-Sperre einrichten. Dadurch wird das Gerät auf die Werkseinstellungen zurückgesetzt. Bitte entsperre den Bootloader und versuch es noch einmal. Eine Anleitung hierzu findest du unter &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;."</string>
-    <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Speicherseitenunabhängigen 4‑KB-Modus verwenden"</string>
-    <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Du befindest dich im 4‑KB-Modus des speicherseitenunabhängigen Modus. Beachte, dass bei entsperrtem Bootloader die Softwareintegrität nicht sichergestellt werden kann und alle auf dem Smartphone gespeicherten Daten gefährdet sind. Einige Funktionen werden in diesen Modi deaktiviert, weshalb bestimmte Anwendungen möglicherweise nicht funktionieren. Wenn du wieder in den Produktionsmodus wechseln möchtest, musst du den Bootloader des Geräts sperren. Wenn du mehr erfahren möchtest, tippe hier."</string>
-    <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Du befindest dich im 4‑KB-Modus des speicherseitenunabhängigen Modus. Beachte, dass bei entsperrtem Bootloader die Softwareintegrität nicht sichergestellt werden kann und alle auf dem Smartphone gespeicherten Daten gefährdet sind. Einige Funktionen werden in diesen Modi deaktiviert, weshalb bestimmte Anwendungen möglicherweise nicht funktionieren. Wenn du wieder in den Produktionsmodus wechseln möchtest, musst du den Bootloader des Geräts sperren. Dadurch wird das Gerät wieder auf die Werkseinstellungen zurückgesetzt und die Produktionseinstellungen werden wiederhergestellt. Nachdem das Gerät hochgefahren und Android gestartet wurde, deaktiviere in den Entwickleroptionen die OEM-Entsperrung. Wenn Android auf dem Gerät nicht gestartet werden kann oder das Gerät instabil ist, flashe das aktuelle Factory Image unter &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; oder verwende &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; und wähle „Gerätedaten löschen“, „Bootloader sperren“ und „Flashen aller Partitionen erzwingen“ aus."</string>
-    <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Hinweis zu speicherseitenunabhängigem 16‑KB-Modus"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"Du befindest dich im 16‑KB-Modus des speicherseitenunabhängigen Modus. Beachte, dass bei entsperrtem Bootloader die Softwareintegrität nicht sichergestellt werden kann und alle auf dem Smartphone gespeicherten Daten gefährdet sind. Einige Funktionen werden in diesen Modi deaktiviert, weshalb bestimmte Anwendungen möglicherweise nicht funktionieren. Wenn du wieder in den Produktionsmodus wechseln möchtest, musst du zurück zum 4‑KB-Modus wechseln und dann den Bootloader des Geräts sperren. Wenn du mehr erfahren möchtest, tippe hier."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"Du befindest dich im 16‑KB-Modus des speicherseitenunabhängigen Modus. Beachte, dass bei entsperrtem Bootloader die Softwareintegrität nicht sichergestellt werden kann und alle auf dem Smartphone gespeicherten Daten gefährdet sind. Einige Funktionen werden in diesen Modi deaktiviert, weshalb bestimmte Anwendungen möglicherweise nicht funktionieren. Wenn du wieder in den Produktionsmodus wechseln möchtest, musst du zurück zum 4‑KB-Modus wechseln und dann den Bootloader des Geräts sperren. Dadurch wird das Gerät wieder auf die Werkseinstellungen zurückgesetzt und die Produktionseinstellungen werden wiederhergestellt. Nachdem das Gerät hochgefahren und Android gestartet wurde, deaktiviere in den Entwickleroptionen die OEM-Entsperrung. Wenn Android auf dem Gerät nicht gestartet werden kann oder das Gerät instabil ist, flashe das aktuelle Factory Image unter &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; oder verwende &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; und wähle „Gerätedaten löschen“, „Bootloader sperren“ und „Flashen aller Partitionen erzwingen“ aus."</string>
-    <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Speicherseitenunabhängiger 16‑KB-Modus"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (8089310116854544106) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (293797217034340398) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (731597455785555266) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (7572233914423063169) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (8940585327969638637) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (7613206944532151035) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2860363435021452169) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (2058933148654316447) -->
+    <skip />
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Weitere Informationen"</string>
     <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"App im Kompatibilitätsmodus für die Seitengröße ausführen"</string>
     <string name="enable_16k_app_compat_details" msgid="3389401258168314266">"Wenn diese Funktion aktiviert ist, wird die App auf 16‑KB-Geräten im Kompatibilitätsmodus für die Seitengröße ausgeführt."</string>
@@ -5583,8 +5602,7 @@
     <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"Schließen"</string>
     <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"Verbinde ein weiteres Paar kompatibler Kopfhörer oder teile den Namen des Streams und das Passwort mit der anderen Person"</string>
     <string name="audio_sharing_dialog_qr_code_content" msgid="2246980817848351361">"Wenn andere Personen diesen Code scannen, können sie deinen Audioinhalt abspielen\n\nStreamname: <xliff:g id="STREAM_NAME">%1$s</xliff:g>\nPasswort: <xliff:g id="PASSWORD">%2$s</xliff:g>"</string>
-    <!-- no translation found for audio_sharing_dialog_qr_code_content_no_password (7824076083031650113) -->
-    <skip />
+    <string name="audio_sharing_dialog_qr_code_content_no_password" msgid="7824076083031650113">"Wenn andere Personen diesen Code scannen, können sie deinen Audioinhalt abspielen\n\nStreamname: <xliff:g id="STREAM_NAME">%1$s</xliff:g>"</string>
     <string name="audio_sharing_dialog_pair_new_device_content" msgid="6720472590211440206">"oder ein weiteres Paar kompatibler Kopfhörer koppeln"</string>
     <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"Kopple ein weiteres Paar kompatibler Kopfhörer oder teile den QR-Code deines Audiostreams mit der anderen Person"</string>
     <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"Audioinhalte werden freigegeben"</string>
@@ -5613,11 +5631,10 @@
     <string name="audio_sharing_retry_dialog_content" msgid="6014534433894608834">"Ein Fehler ist aufgetreten. Bitte versuche es noch einmal."</string>
     <string name="audio_sharing_incompatible_dialog_title" msgid="4586805264392802115">"Audio kann nicht mit „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“ geteilt werden"</string>
     <string name="audio_sharing_incompatible_dialog_content" msgid="3943223683620405311">"Die Audiofreigabe funktioniert nur bei Kopfhörern, die LE Audio unterstützen"</string>
-    <!-- no translation found for audio_sharing_block_pairing_dialog_title (1756723860075818856) -->
-    <skip />
-    <!-- no translation found for audio_sharing_block_pairing_dialog_content (6352030314206654722) -->
-    <skip />
-    <!-- no translation found for audio_sharing_turn_off_button_label (1934956352475393641) -->
+    <string name="audio_sharing_block_pairing_dialog_title" msgid="1756723860075818856">"Audiofreigabe deaktivieren"</string>
+    <string name="audio_sharing_block_pairing_dialog_content" msgid="6352030314206654722">"Wenn du ein neues Gerät koppeln möchtest, deaktiviere zuerst die Audiofreigabe."</string>
+    <string name="audio_sharing_turn_off_button_label" msgid="1934956352475393641">"Deaktivieren"</string>
+    <!-- no translation found for share_audio_notification_title (5201976754820387782) -->
     <skip />
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Mit LE Audio-Stream verbinden"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Audiostreams in der Nähe"</string>
@@ -5648,6 +5665,9 @@
     <string name="audio_streams_present_now" msgid="7519818719382756366">"Stream pausiert"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Zuhören beenden"</string>
     <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Kompatible Kopfhörer verbinden"</string>
+    <string name="audio_streams_dialog_turn_off_talkback_title" msgid="6824585115302786690">"TalkBack vorübergehend deaktivieren"</string>
+    <string name="audio_streams_dialog_turn_off_talkback_subtitle" msgid="2394295776096273919">"TalkBack kann nicht verwendet werden, wenn du dir Audiostreams anhörst. Deaktiviere TalkBack, um Streams zu hören."</string>
+    <string name="audio_streams_dialog_turn_off_talkback_button" msgid="8049097689955037626">"Deaktivieren"</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Gerät verbinden"</string>
     <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Details zum Audiostream"</string>
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"QR-Code des Audiostreams"</string>

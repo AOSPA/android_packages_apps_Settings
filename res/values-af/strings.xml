@@ -41,10 +41,6 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Afgelas"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Onbekend"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Voorskou"</string>
-    <!-- no translation found for preview_pager_previous_button (607771113300838313) -->
-    <skip />
-    <!-- no translation found for preview_pager_next_button (8700907912508927271) -->
-    <skip />
     <string name="qr_code_content_description" msgid="1852208464419291347">"QR-kode"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Maak kleiner"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Maak groter"</string>
@@ -101,6 +97,10 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Meer oor oudio-uitvoer"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Roeteer klanke na jou gehoortoestel of foon se luidspreker"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Soortgelyk"</string>
+    <!-- no translation found for bluetooth_try_nearby_share_title (4996427014054610877) -->
+    <skip />
+    <!-- no translation found for bluetooth_try_nearby_share_summary (329823028635487822) -->
+    <skip />
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Luitoon en wekkers"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Oudio tydens oproepe"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Media- en stelselklanke"</string>
@@ -231,12 +231,9 @@
     <string name="search_region_hint" msgid="1748708432568237552">"Deursoek streke"</string>
     <string name="top_intro_region_title" msgid="2336323415395642117">"Die streek wat jy kies beïnvloed hoe jou foon tyd, datums, temperatuur en meer vertoon"</string>
     <string name="more_language_settings_category" msgid="3669703092480725416">"Meer taalinstellings"</string>
-    <!-- no translation found for title_change_system_locale_region (1977530992614685128) -->
-    <skip />
-    <!-- no translation found for body_change_system_locale_region (9064318449821043189) -->
-    <skip />
-    <!-- no translation found for top_intro_numbering_system_title (8234587334207926397) -->
-    <skip />
+    <string name="title_change_system_locale_region" msgid="1977530992614685128">"Verander streek na <xliff:g id="SYSTEM_LANGUAGE_REGION">%1$s</xliff:g> ?"</string>
+    <string name="body_change_system_locale_region" msgid="9064318449821043189">"Jou toestel sal <xliff:g id="SYSTEM_LANGUAGE">%1$s</xliff:g> as ’n stelseltaal behou"</string>
+    <string name="top_intro_numbering_system_title" msgid="8234587334207926397">"Meeste apps sal jou streeksvoorkeure gebruik"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Streeksvoorkeure"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Stel eenheid- en nommervoorkeure"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Lig apps in oor jou streekvoorkeure sodat hulle jou ervaring kan personaliseer."</string>
@@ -893,7 +890,8 @@
     <string name="lockpassword_credential_changed" msgid="5934778179732392028">"Skermslot is reeds verander. Probeer weer met die nuwe skermslot."</string>
     <string name="lockpattern_tutorial_cancel_label" msgid="775215267818384016">"Kanselleer"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="1329049481210689408">"Volgende"</string>
-    <string name="manage_device_admin" msgid="1044620606203916275">"Toesteladministrasie-apps"</string>
+    <!-- no translation found for manage_device_admin (7272894919651600481) -->
+    <skip />
     <string name="number_of_device_admins_none" msgid="152926922020437312">"Geen aktiewe apps nie"</string>
     <string name="number_of_device_admins" msgid="3402909995362162876">"{count,plural, =1{# aktiewe app}other{# aktiewe apps}}"</string>
     <string name="manage_trust_agents" msgid="6410149930029992356">"Vertrouensagente"</string>
@@ -1284,12 +1282,9 @@
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
     <string name="emergency_address_title" msgid="8102786488994263815">"Noodadres"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"Word as jou ligging gebruik wanneer jy \'n noodoproep oor Wi-Fi maak"</string>
-    <!-- no translation found for private_dns_title (1180823690693258572) -->
-    <skip />
-    <!-- no translation found for private_dns_field_require (2318400923953435586) -->
-    <skip />
-    <!-- no translation found for private_dns_hostname_invalid (5085498734835552780) -->
-    <skip />
+    <string name="private_dns_title" msgid="1180823690693258572">"Gasheernaam"</string>
+    <string name="private_dns_field_require" msgid="2318400923953435586">"Die veld word vereis"</string>
+    <string name="private_dns_hostname_invalid" msgid="5085498734835552780">"Die gasheernaam wat jy getik het, is nie geldig nie"</string>
     <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"Meer inligting"</annotation>" oor Private DNS-kenmerke"</string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"Aan"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"Aktiveer Wi-Fi-oproepe"</string>
@@ -2057,7 +2052,13 @@
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"Gebruik muissleutels"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Gebruik jou sleutelbord om die wyser te beheer"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Omgekeerde rollees"</string>
-    <string name="mouse_reverse_vertical_scrolling_summary" msgid="4403637093982742165">"Inhoud beweeg op wanneer jy ondertoe rollees"</string>
+    <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Rollees op om die bladsy af te beweeg"</string>
+    <!-- no translation found for mouse_scrolling_category_title (2992126595687187296) -->
+    <skip />
+    <!-- no translation found for mouse_scrolling_acceleration (7119758828203396430) -->
+    <skip />
+    <!-- no translation found for mouse_scrolling_speed (3999483025392860903) -->
+    <skip />
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"Ruil primêre muisknoppie"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Gebruik die muis se linkerknoppie as jou regterknoppie"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"Skermpyltjieversnelling"</string>
@@ -2238,6 +2239,7 @@
     <string name="accessibility_feedback_title" msgid="6690472705407526006">"Terugvoer"</string>
     <string name="accessibility_feedback_summary" msgid="4576591591334314827">"Help ons om te verbeter deur ’n opname te voltooi"</string>
     <string name="accessibility_feedback_disabled_summary" msgid="3652321859452620942">"Geen opnames is beskikbaar nie"</string>
+    <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Stuur terugvoer"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Afgelaaide apps"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Eksperimenteel"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Kenmerkvlae"</string>
@@ -2494,10 +2496,8 @@
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Gaan voort"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Gehoortoestelle"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Stel ASHA- en LE-oudio-gehoortoestelle, kogleêre inplantings en ander klankversterkingtoestelle op en bestuur hulle"</string>
-    <!-- no translation found for accessibility_hearingaid_asha_only_intro (7402419984664822832) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_hap_only_intro (3332144138443825311) -->
-    <skip />
+    <string name="accessibility_hearingaid_asha_only_intro" msgid="7402419984664822832">"Stel ASHA-gehoortoestelle, kogleêre inplantings en ander klankversterkingtoestelle op en bestuur hulle"</string>
+    <string name="accessibility_hearingaid_hap_only_intro" msgid="3332144138443825311">"Stel LE-oudio-gehoortoestelle, kogleêre inplantings en ander klankversterkingtoestelle op en bestuur hulle"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"Geen gehoortoestelle is gekoppel nie"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Voeg gehoortoestelle by"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Bind gehoortoestelle saam"</string>
@@ -2517,14 +2517,10 @@
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"Meer oor gehoortoestelle"</string>
     <string name="accessibility_hearing_device_footer_summary" msgid="5513620078219951077">"Tik op &lt;b&gt;Bind nuwe toestel saam&lt;/b&gt; &gt; &lt;b&gt;Sien meer toestelle&lt;/b&gt; om ander gehoortoestelle te kry wat nie deur ASHA- of LE-oudio gesteun word nie"</string>
     <string name="accessibility_hearing_device_footer_summary_tts" msgid="955527026890456959">"Tik op "<b>"Bind nuwe toestel saam"</b>" en dan op "<b>"Sien meer toestelle"</b>" om ander gehoortoestelle te kry wat nie deur ASHA- of LE-oudio gesteun word nie"</string>
-    <!-- no translation found for accessibility_hearing_device_footer_asha_only_summary (3377169209330540616) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_footer_asha_only_summary_tts (8192971114504608531) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_footer_hap_only_summary (3531758698830915205) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_footer_hap_only_summary_tts (4440097982533045507) -->
-    <skip />
+    <string name="accessibility_hearing_device_footer_asha_only_summary" msgid="3377169209330540616">"Tik op &lt;b&gt;Bind nuwe toestel saam&lt;/b&gt; &gt; &lt;b&gt;Sien meer toestelle&lt;/b&gt; om ander gehoortoestelle te kry wat nie deur ASHA gesteun word nie"</string>
+    <string name="accessibility_hearing_device_footer_asha_only_summary_tts" msgid="8192971114504608531">"Tik op "<b>"Bind nuwe toestel saam"</b>" en dan op "<b>"Sien meer toestelle"</b>" om ander gehoortoestelle te kry wat nie deur ASHA gesteun word nie"</string>
+    <string name="accessibility_hearing_device_footer_hap_only_summary" msgid="3531758698830915205">"Tik op &lt;b&gt;Bind nuwe toestel saam&lt;/b&gt; &gt; &lt;b&gt;Sien meer toestelle&lt;/b&gt; om ander gehoortoestelle te kry wat nie deur LE-oudio gesteun word nie"</string>
+    <string name="accessibility_hearing_device_footer_hap_only_summary_tts" msgid="4440097982533045507">"Tik op "<b>"Bind nuwe toestel saam"</b>" en dan op "<b>"Sien meer toestelle"</b>" om ander gehoortoestelle te kry wat nie deur LE-oudio gesteun word nie"</string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Bind gehoortoestel saam"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"Jy kan ASHA- en LE-oudio-gehoortoestelle op hierdie bladsy saambind. Maak seker dat jou gehoortoestel aangeskakel en gereed is om saam te bind."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Beskikbare gehoortoestelle"</string>
@@ -2975,7 +2971,8 @@
     <string name="remove_device_admin" msgid="3143059558744287259">"Deaktiveer hierdie toesteladministrasie-app"</string>
     <string name="uninstall_device_admin" msgid="4481095209503956916">"Deïnstalleer app"</string>
     <string name="remove_and_uninstall_device_admin" msgid="707912012681691559">"Deaktiveer en deïnstalleer"</string>
-    <string name="select_device_admin_msg" msgid="5501360309040114486">"Toesteladministrateurprogramme"</string>
+    <!-- no translation found for select_device_admin_msg (2506262585633022884) -->
+    <skip />
     <string name="no_device_admins" msgid="8888779888103079854">"Geen toesteladministrateurprogramme beskikbaar nie"</string>
     <string name="no_trust_agents" msgid="8659098725864191600">"Geen beskikbare vertrouensagente nie"</string>
     <string name="add_device_admin_msg" msgid="7730006568970042119">"Aktiveer toesteladministrasie-app?"</string>
@@ -3866,7 +3863,8 @@
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Meer instellings is binne hierdie app beskikbaar"</string>
     <string name="notification_polite_title" msgid="6121016426991791557">"Kennisgewingdemping"</string>
     <string name="notification_polite_main_control_title" msgid="5812529809151927149">"Gebruik kennisgewingdemping"</string>
-    <string name="notification_polite_description" msgid="5497748284893832854">"Wanneer jy binne ’n kort tydperk baie kennisgewings kry, sal jou toestel vir tot 2 minute die volume sagter stel en waarskuwings minimeer. Oproepe, wekkers en prioriteitgesprekke word nie geraak nie. \n\nKennisgewings wat jy tydens demping kry, kan gekry word deur van die bokant van die skerm af te trek."</string>
+    <!-- no translation found for notification_polite_description (6137533404978878957) -->
+    <skip />
     <string name="notification_polite_work" msgid="8823596456640216391">"Pas toe op werkprofiele"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Pas toe op werkprofielapps"</string>
     <string name="notification_bundle_title" msgid="460988459835922719">"Gebondelde kennisgewings"</string>
@@ -4374,7 +4372,8 @@
     <string name="disconnected" msgid="3469373726996129247">"Nie gekoppel nie"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Nie gekoppel nie"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> programme is geïnstalleer"</string>
-    <string name="storage_summary" msgid="5903562203143572768">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> gebruik – <xliff:g id="FREE_SPACE">%2$s</xliff:g> beskikbaar"</string>
+    <!-- no translation found for storage_summary (7631468664968572688) -->
+    <skip />
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Donkertema, lettergrootte, helderheid"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Gemiddeld <xliff:g id="USED_MEMORY">%1$s</xliff:g> van <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> berging gebruik"</string>
     <string name="users_summary" msgid="8473589474976307510">"Aangemeld as <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -4443,6 +4442,8 @@
     <string name="ethernet_data_usage" msgid="4552227880905679761">"Ethernet-datagebruik"</string>
     <string name="wifi" msgid="2932584495223243842">"Wi-fi"</string>
     <string name="ethernet" msgid="4665162609974492983">"Ethernet"</string>
+    <!-- no translation found for ethernet_interface_title (1634881244068292765) -->
+    <skip />
     <string name="cell_data_template" msgid="6077963976103260821">"<xliff:g id="AMOUNT">^1</xliff:g> mobiele data"</string>
     <string name="wifi_data_template" msgid="935934798340307438">"<xliff:g id="AMOUNT">^1</xliff:g> Wi-Fi-data"</string>
     <string name="ethernet_data_template" msgid="1429173767445201145">"<xliff:g id="AMOUNT">^1</xliff:g> ethernetdata"</string>
@@ -4994,8 +4995,7 @@
     <string name="satellite_setting_title" msgid="2543034229989047673">"Satellietboodskappe"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Stuur en ontvang teksboodskappe via satelliet. Ingesluit by jou rekening."</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Stuur en ontvang teksboodskappe via satelliet. Nie by jou rekening ingesluit nie."</string>
-    <!-- no translation found for satellite_setting_summary_without_entitlement (5284998840770992554) -->
-    <skip />
+    <string name="satellite_setting_summary_without_entitlement" msgid="5284998840770992554">"Stuur en ontvang teksboodskappe via satelliet. Kontak jou diensverskaffer vir besonderhede"</string>
     <string name="keywords_satellite_setting" msgid="613553612424945946">"Satellietboodskappe, satellietkonnektiwiteit"</string>
     <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"Meer oor <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="title_about_satellite_setting" msgid="3563087940535642558">"Jy kan teksboodskappe via satelliet stuur en ontvang met ’n geldige <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-rekening"</string>
@@ -5009,8 +5009,7 @@
     <string name="title_supported_service" msgid="4275535165812691571">"Nadat jou foon aan ’n satelliet verbind"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"Jy kan ’n teksboodskap na enigiemand stuur, insluitend nooddienste. Jou foon sal weer aan ’n selnetwerk verbind wanneer dit beskikbaar is."</string>
     <string name="satellite_setting_summary_more_information" msgid="1028146147094166868">"<xliff:g id="SUBJECT">%1$s</xliff:g> kan langer neem en is net in sekere gebiede beskikbaar. Die weer en sekere strukture kan jou satellietverbinding affekteer. Satellietoproepe is nie beskikbaar nie. Noodfoonoproepe kan dalk steeds koppel.\n\nDit kan ’n rukkie neem vir rekeningveranderinge om in Instellings te wys. Kontak <xliff:g id="CARRIER_NAME">%2$s</xliff:g> vir besonderhede."</string>
-    <!-- no translation found for satellite_setting_summary_more_information_no_emergency_messaging (8042240156141790447) -->
-    <skip />
+    <string name="satellite_setting_summary_more_information_no_emergency_messaging" msgid="8042240156141790447">"<xliff:g id="SUBJECT">%1$s</xliff:g> kan langer neem en is net in sekere gebiede beskikbaar. Die weer en sekere strukture kan jou satellietverbinding affekteer. Satellietoproepe is nie beskikbaar nie. Noodoproepe kan dalk steeds verbind. Teksboodskappe aan nooddienste is dalk nie in alle gebiede beskikbaar nie.\n\nDit kan ’n rukkie neem voordat rekeningveranderinge in Instellings wys. Kontak <xliff:g id="CARRIER_NAME">%2$s</xliff:g> vir besonderhede."</string>
     <string name="more_about_satellite_messaging" msgid="1039277943532711584">"Meer oor <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Kan nie <xliff:g id="FUNCTION">%1$s</xliff:g> aanskakel nie"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Beëindig eers die satellietverbinding om <xliff:g id="FUNCTION">%1$s</xliff:g> aan te skakel."</string>
@@ -5019,6 +5018,9 @@
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"satellietkonnektiwiteit"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"satellietboodskappe"</string>
     <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"Gebruik van data is by jou rekening ingesluit"</string>
+    <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Gesteunde apps op jou foon"</string>
+    <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"sien alle apps"</string>
+    <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Gesteunde apps op jou foon"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Toegangspuntname"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Onbeskikbaar wanneer gekoppel aan <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5186,27 +5188,44 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Jou werkbeleidinligting"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Instellings wat deur jou IT-admin bestuur word"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <string name="enable_16k_pages" msgid="8001470927566110689">"Selflaai met 16KB-bladsygrootte"</string>
-    <string name="enable_16k_pages_summary" msgid="1964363364670306912">"Selflaai toestel met 16KB-bladsygrootte gesteunde korrel"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="611010487387251491">"Skakel van 4 KB-modus oor na 16 KB-modus"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="6129208614283750541">"Jy is in die bladsy-agnostiese modus wat ’n 4 KB-korrel gebruik, en jy skakel oor na die 16 KB-modus. Die sagteware se integriteit kan nie in hierdie modus gewaarborg word nie, en enige data wat op die foon gestoor word terwyl die selflaaiprogram ontsluit is, is dalk in gevaar. Dit sal die toestel herselflaai. Sommige kenmerke sal gedeaktiveer word in hierdie modusse, so sommige apps sal dalk nie werk nie. Jy sal moet terugskakel na die 4 KB-modus en die selflaaiprogram moet sluit wat ’n fabriekterugstelling op die toestel doen om die toestel na produksiemodus terug te neem. Jy moet die OEM-ontsluiting in Ontwikkelaaropsies deaktiveer nadat die toestel suksesvol in Android geselflaai het."</string>
-    <string name="confirm_enable_4k_pages_title" msgid="3210360137887034659">"Skakel van 16KB-modus oor na 4KB-modus"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"Jy is in die bladsy-agnostiese modus wat ’n 16KB-korrel gebruik, en jy skakel oor na die 4KB-modus. Die sagteware se integriteit kan nie in hierdie modus gewaarborg word nie, en enige data wat op die foon gestoor word terwyl die selflaaiprogram ontsluit is, is dalk in gevaar. Dit sal die toestel herselflaai. Sommige kenmerke sal gedeaktiveer word in hierdie modusse, so sommige apps sal dalk nie werk nie. Jy sal dan die selflaaiprogram moet sluit wat ’n fabriekterugstelling op die toestel doen om die toestel na produksiemodus terug te neem. Jy moet die OEM-ontsluiting in Ontwikkelaaropsies deaktiveer nadat die toestel suksesvol in Android geselflaai het."</string>
-    <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Kon nie kern opdateer na 16KB-bladsy versoenbare kern nie."</string>
+    <!-- no translation found for enable_16k_pages (1758111531461408337) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1937836453571509085) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (5477376227161609124) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (6211693250692246982) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3001009010581393119) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (3398001587586470689) -->
+    <skip />
+    <!-- no translation found for toast_16k_update_failed_text (7848383020572918850) -->
+    <skip />
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Pas tans verandering toe"</string>
-    <string name="confirm_format_ext4_title" msgid="6696191800594435577">"Herformateer toestel na ext4? (word vereis vir 16KB-modus)"</string>
-    <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Hierdie toestel se data-afdeling moet na ext4 omgeskakel word voordat die 16KB-ontwikkelaaropsie gebruik word. Die sagteware se integriteit kan nie in hierdie modus gewaarborg word nie, en enige data wat op die foon gestoor word terwyl die selflaaiprogram ontsluit is, is dalk in gevaar. Die aktivering van die 16KB-opsie sal daarna nog een herselflaai vereis. Sodra jy in hierdie modus is, kan jy heen en weer oorskakel tussen 4KB- en 16KB-modus met ’n enkele herselflaai. Sommige kenmerke sal gedeaktiveer word in hierdie modusse, so sommige apps sal dalk nie werk nie. Jy sal moet terugskakel na die 4KB-modus en dan die selflaaiprogram moet sluit wat ’n fabriekterugstelling op die toestel doen om die toestel na produksiemodus terug te neem. Jy moet die OEM-ontsluiting in Ontwikkelaaropsies deaktiveer nadat die toestel suksesvol in Android geselflaai het. Die toestel sal skoongevee word en die lêerstelsel sal ná bevestiging na ext4 verander word. Nadat dit voltooi is, moet jy terugkom om 16KB weer te aktiveer."</string>
+    <!-- no translation found for confirm_format_ext4_title (4754057414728537125) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (432847493298532536) -->
+    <skip />
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Vee alle data uit"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Kon nie herformateer en die data-afdeling na ext4 skoonvee nie."</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Ontsluiting van selflaaiprogram is nodig"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Hierdie toestel moet die selflaaiprogram ontsluit hê voordat die 16KB-ontwikkelaaropsie gebruik word. Die sagteware se integriteit kan nie in hierdie modus gewaarborg word nie, en enige data wat op die foon gestoor word terwyl die selflaaiprogram ontsluit is, is dalk in gevaar. Alle gebruikerdata en -instellings sal skoongevee word wanneer 16KB-modus geaktiveer word. Sodra die selflaaiprogram ontsluit is, sal die aktivering van die 16KB-opsie twee herselflaaie vereis. Sodra jy in hierdie modus is, kan jy heen en weer oorskakel tussen 4KB- en 16KB-modus met ’n enkele herselflaai. Sommige kenmerke sal gedeaktiveer word in hierdie modusse, so sommige apps sal dalk nie werk nie. Jy sal moet terugskakel na die 4KB-modus en dan die toestel moet sluit met die OEM/selflaaiprogramslot (wat ’n fabriekterugstelling op die toestel doen) om die toestel na produksiemodus terug te neem. Ontsluit asseblief die selflaaiprogram en probeer weer. Jy kan instruksies sien oor hoe om dit te doen by &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
-    <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Gebruik 4KB-bladsy-agnostiese modus"</string>
-    <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Jy is in die 4KB-modus van die bladsy-agnostiese modus. Die sagteware se integriteit kan nie in hierdie modus gewaarborg word nie, en enige data wat op die foon gestoor word terwyl die selflaaiprogram ontsluit is, is dalk in gevaar. Sommige kenmerke sal gedeaktiveer word in hierdie modusse, so sommige apps sal dalk nie werk nie. Jy moet die selflaaiprogram van die toestel sluit om weer in die produksiemodus te gaan. Tik om meer te lees."</string>
-    <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Jy is in die 4KB-modus van die bladsy-agnostiese modus. Die sagteware se integriteit kan nie in hierdie modus gewaarborg word nie, en enige data wat op die foon gestoor word terwyl die selflaaiprogram ontsluit is, is dalk in gevaar. Sommige kenmerke sal gedeaktiveer word in hierdie modusse, so sommige apps sal dalk nie werk nie. Jy moet die selflaaiprogram van die toestel sluit om weer in die produksiemodus te gaan. Dit sal weer ’n fabriekterugstelling op die toestel doen en dit na produksie-instellings terugstel. Jy moet die OEM-ontsluiting in Ontwikkelaaropsies deaktiveer nadat die toestel suksesvol in Android geselflaai het. As die toestel nie in Android kon selflaai nie of onstabiel is, moet jy die toestel herflits met die jongste fabriekstelselkopie vanaf &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; of gebruik &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; en kies “Vee toestel skoon”, “Sluit selflaaiprogram” en “Verpligflits alle afdelings”."</string>
-    <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Gebruik 16KB-bladsy-agnostiese modus"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"Jy is in die 16 KB-modus van die niebladgebonde modus. Die sagteware se integriteit kan nie in hierdie modus gewaarborg word nie, en enige data wat op die foon gestoor word terwyl die selflaaiprogram ontsluit is, is dalk in gevaar. Sommige kenmerke sal gedeaktiveer word in hierdie modusse, so sommige apps sal dalk nie werk nie. Jy moet terugskakel na 4 KB-modus en dan die selflaaiprogram van die toestel sluit om weer in die produksiemodus te gaan. Tik om meer te lees."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"Jy is in die 16 KB-modus van die niebladgebonde modus. Die sagteware se integriteit kan nie in hierdie modus gewaarborg word nie, en enige data wat op die foon gestoor word terwyl die selflaaiprogram ontsluit is, is dalk in gevaar. Sommige kenmerke sal gedeaktiveer word in hierdie modusse, so sommige apps sal dalk nie werk nie. Jy moet terugskakel na 4 KB-modus en dan die selflaaiprogram van die toestel sluit om weer in die produksiemodus te gaan. Dit sal weer ’n fabriekterugstelling op die toestel doen en dit na produksie-instellings terugstel. Jy moet die OEM-ontsluiting in Ontwikkelaaropsies deaktiveer nadat die toestel suksesvol in Android geselflaai het. As die toestel nie in Android kon selflaai nie of onstabiel is, moet jy die toestel herflits met die jongste fabriekstelselkopie vanaf &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; of gebruik &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; en kies “Vee toestel skoon”, “Sluit selflaaiprogram” en “Verpligflits alle afdelings”."</string>
-    <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16KB-bladsy-agnostiese modus"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (8089310116854544106) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (293797217034340398) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (731597455785555266) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (7572233914423063169) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (8940585327969638637) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (7613206944532151035) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2860363435021452169) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (2058933148654316447) -->
+    <skip />
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Lees meer"</string>
     <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"Laat loop app met bladsygrootte-versoenbaarheidmodus"</string>
     <string name="enable_16k_app_compat_details" msgid="3389401258168314266">"App sal op bladsygrootte-versoenbaarheidmodus loop op 16 KB-toestel wanneer dit gewissel word."</string>
@@ -5583,8 +5602,7 @@
     <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"Maak toe"</string>
     <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"Koppel ’n ander stel versoenbare oorfone of deel jou stroom se naam en wagwoord met die ander persoon"</string>
     <string name="audio_sharing_dialog_qr_code_content" msgid="2246980817848351361">"Laat ander hierdie kode skandeer en na jou oudio luister\n\nStroomnaam: <xliff:g id="STREAM_NAME">%1$s</xliff:g>\nWagwoord: <xliff:g id="PASSWORD">%2$s</xliff:g>"</string>
-    <!-- no translation found for audio_sharing_dialog_qr_code_content_no_password (7824076083031650113) -->
-    <skip />
+    <string name="audio_sharing_dialog_qr_code_content_no_password" msgid="7824076083031650113">"Laat ander hierdie kode skandeer en na jou oudio luister\n\nStroomnaam: <xliff:g id="STREAM_NAME">%1$s</xliff:g>"</string>
     <string name="audio_sharing_dialog_pair_new_device_content" msgid="6720472590211440206">"of bind ’n ander stel versoenbare oorfone saam"</string>
     <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"Bind ’n ander stel versoenbare oorfone saam of deel jou oudiostroom se QR-kode met die ander persoon"</string>
     <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"Deel tans oudio"</string>
@@ -5613,11 +5631,10 @@
     <string name="audio_sharing_retry_dialog_content" msgid="6014534433894608834">"Iets het skeefgeloop. Probeer asseblief weer."</string>
     <string name="audio_sharing_incompatible_dialog_title" msgid="4586805264392802115">"Kan nie oudio met <xliff:g id="DEVICE_NAME">%1$s</xliff:g> deel nie …"</string>
     <string name="audio_sharing_incompatible_dialog_content" msgid="3943223683620405311">"Oudiodeling werk net met oorfone wat LE-oudio steun"</string>
-    <!-- no translation found for audio_sharing_block_pairing_dialog_title (1756723860075818856) -->
-    <skip />
-    <!-- no translation found for audio_sharing_block_pairing_dialog_content (6352030314206654722) -->
-    <skip />
-    <!-- no translation found for audio_sharing_turn_off_button_label (1934956352475393641) -->
+    <string name="audio_sharing_block_pairing_dialog_title" msgid="1756723860075818856">"Skakel oudiodeling af"</string>
+    <string name="audio_sharing_block_pairing_dialog_content" msgid="6352030314206654722">"Skakel eers oudiodeling af om ’n nuwe toestel saam te bind."</string>
+    <string name="audio_sharing_turn_off_button_label" msgid="1934956352475393641">"Skakel af"</string>
+    <!-- no translation found for share_audio_notification_title (5201976754820387782) -->
     <skip />
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Koppel aan ’n LE-oudiostroom"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Oudiostrome naby"</string>
@@ -5648,6 +5665,9 @@
     <string name="audio_streams_present_now" msgid="7519818719382756366">"Stroom is onderbreek"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Hou op luister"</string>
     <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Koppel versoenbare oorfone"</string>
+    <string name="audio_streams_dialog_turn_off_talkback_title" msgid="6824585115302786690">"Skakel TalkBack tydelik af"</string>
+    <string name="audio_streams_dialog_turn_off_talkback_subtitle" msgid="2394295776096273919">"TalkBack kan nie gebruik word wanneer jy na oudiostrome luister nie. Skakel TalkBack af om te begin luister."</string>
+    <string name="audio_streams_dialog_turn_off_talkback_button" msgid="8049097689955037626">"Skakel af"</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Koppel ’n toestel"</string>
     <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Besonderhede van oudiostroom"</string>
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"QR-kode van oudiostroom"</string>

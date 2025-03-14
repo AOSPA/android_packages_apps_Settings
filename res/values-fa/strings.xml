@@ -41,10 +41,6 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"معلق"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"نامشخص"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"پیش‌نمایش"</string>
-    <!-- no translation found for preview_pager_previous_button (607771113300838313) -->
-    <skip />
-    <!-- no translation found for preview_pager_next_button (8700907912508927271) -->
-    <skip />
     <string name="qr_code_content_description" msgid="1852208464419291347">"رمزینه پاسخ‌سریع"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"کوچک‌تر کردن"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"بزرگ‌تر کردن"</string>
@@ -101,6 +97,10 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"درباره خروجی صوتی"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"انتقال صدا به دستگاه کمک‌شنوایی یا بلندگوی تلفن"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"مرتبط شده"</string>
+    <!-- no translation found for bluetooth_try_nearby_share_title (4996427014054610877) -->
+    <skip />
+    <!-- no translation found for bluetooth_try_nearby_share_summary (329823028635487822) -->
+    <skip />
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"آهنگ زنگ و هشدار"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"صدا درطول تماس"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"صداهای رسانه و سیستم"</string>
@@ -231,12 +231,9 @@
     <string name="search_region_hint" msgid="1748708432568237552">"جستجوی منطقه‌ها"</string>
     <string name="top_intro_region_title" msgid="2336323415395642117">"منطقه‌ای که انتخاب می‌کنید بر نحوه‌ای که تلفنتان زمان، تاریخ، دما، و موارد بیشتر را نشان می‌دهد تأثیر می‌گذارد."</string>
     <string name="more_language_settings_category" msgid="3669703092480725416">"تنظیمات زبان بیشتر"</string>
-    <!-- no translation found for title_change_system_locale_region (1977530992614685128) -->
-    <skip />
-    <!-- no translation found for body_change_system_locale_region (9064318449821043189) -->
-    <skip />
-    <!-- no translation found for top_intro_numbering_system_title (8234587334207926397) -->
-    <skip />
+    <string name="title_change_system_locale_region" msgid="1977530992614685128">"منطقه به <xliff:g id="SYSTEM_LANGUAGE_REGION">%1$s</xliff:g> تغییر داده شود؟"</string>
+    <string name="body_change_system_locale_region" msgid="9064318449821043189">"دستگاهتان <xliff:g id="SYSTEM_LANGUAGE">%1$s</xliff:g> را به‌عنوان زبان سیستم حفظ خواهد کرد"</string>
+    <string name="top_intro_numbering_system_title" msgid="8234587334207926397">"بیشتر برنامه‌ها از اولویت‌های منطقه‌ای شما استفاده خواهند کرد"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"اولویت‌های منطقه‌ای"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"تنظیم اولویت‌های واحد و عدد"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"به برنامه‌ها اجازه می‌دهد اولویت‌های منطقه‌ای شما را بدانند تا بتوانند تجربه‌تان را شخصی‌سازی کنند."</string>
@@ -352,7 +349,7 @@
     <string name="security_dashboard_summary" msgid="7571035662779425918">"قفل صفحه، «پیدا کردن دستگاهم»، امنیت برنامه"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"امنیت و حریم خصوصی"</string>
     <string name="safety_center_summary" msgid="3554867379951053869">"امنیت برنامه، قفل دستگاه، اجازه‌ها"</string>
-    <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"چهره افزوده شده است"</string>
+    <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"چهره افزوده شد"</string>
     <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"راه‌اندازی لازم است"</string>
     <string name="security_settings_face_preference_title_new" msgid="7680231874730796331">"چهره"</string>
     <string name="security_settings_face_profile_preference_title_new" msgid="685550153608106166">"چهره برای نمایه کاری"</string>
@@ -409,12 +406,12 @@
     <string name="security_settings_face_settings_face_category" msgid="60058016983772899">"چهره"</string>
     <string name="security_settings_face_settings_use_face_to_category" msgid="3349153603335284583">"استفاده از چهره برای"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"هنگام استفاده از «قفل‌گشایی با چهره»"</string>
-    <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"چشم‌ها باید باز باشد"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"نیاز به باز بودن چشم‌ها"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"برای باز کردن قفل تلفن، چشمک‌هایتان باید باز باشد"</string>
     <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
     <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"همیشه نیاز به تأیید باشد"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"استفاده از «قفل‌گشایی با چهره» در برنامه‌ها، همیشه به تأیید نیاز دارد"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"هنگام استفاده از «قفل‌گشایی با چهره»، همیشه به مرحله تأیید نیاز است"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"حذف مدل چهره"</string>
     <string name="security_settings_face_settings_enroll" msgid="3726313826693825029">"راه‌اندازی «قفل‌گشایی با چهره»"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"مدل چهره حذف شود؟"</string>
@@ -893,7 +890,8 @@
     <string name="lockpassword_credential_changed" msgid="5934778179732392028">"قفل صفحه قبلاً تغییر کرده است. با قفل صفحه جدید، دوباره امتحان کنید."</string>
     <string name="lockpattern_tutorial_cancel_label" msgid="775215267818384016">"لغو"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="1329049481210689408">"بعدی"</string>
-    <string name="manage_device_admin" msgid="1044620606203916275">"برنامه‌های سرپرست دستگاه"</string>
+    <!-- no translation found for manage_device_admin (7272894919651600481) -->
+    <skip />
     <string name="number_of_device_admins_none" msgid="152926922020437312">"برنامه فعالی موجود نیست"</string>
     <string name="number_of_device_admins" msgid="3402909995362162876">"{count,plural, =1{# برنامه فعال}one{# برنامه فعال}other{# برنامه فعال}}"</string>
     <string name="manage_trust_agents" msgid="6410149930029992356">"عامل‌های معتبر"</string>
@@ -1284,12 +1282,9 @@
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
     <string name="emergency_address_title" msgid="8102786488994263815">"نشانی اضطراری"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"‏وقتی ازطریق Wi-Fi تماس اضطراری برقرار می‌کنید به‌عنوان مکان شما استفاده می‌شود"</string>
-    <!-- no translation found for private_dns_title (1180823690693258572) -->
-    <skip />
-    <!-- no translation found for private_dns_field_require (2318400923953435586) -->
-    <skip />
-    <!-- no translation found for private_dns_hostname_invalid (5085498734835552780) -->
-    <skip />
+    <string name="private_dns_title" msgid="1180823690693258572">"نام میزبان"</string>
+    <string name="private_dns_field_require" msgid="2318400923953435586">"پر کردن این فیلد الزامی است"</string>
+    <string name="private_dns_hostname_invalid" msgid="5085498734835552780">"نام میزبانی که وارد کرده‌اید معتبر نیست"</string>
     <string name="private_dns_help_message" msgid="851221502063782306">"‏درباره قابلیت‌های DNS خصوصی "<annotation id="url">"بیشتر بدانید"</annotation></string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"روشن"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"‏فعال کردن تماس ازطریق Wi-Fi"</string>
@@ -2057,7 +2052,13 @@
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"استفاده از کلیدهای موشواره"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"استفاده از صفحه‌کلید برای کنترل کردن اشاره‌گر"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"پیمایش معکوس"</string>
-    <string name="mouse_reverse_vertical_scrolling_summary" msgid="4403637093982742165">"وقتی به‌پایین پیمایش کنید، محتوا به‌بالا حرکت می‌کند"</string>
+    <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"برای رفتن به‌پایین صفحه، به‌بالا پیمایش کنید"</string>
+    <!-- no translation found for mouse_scrolling_category_title (2992126595687187296) -->
+    <skip />
+    <!-- no translation found for mouse_scrolling_acceleration (7119758828203396430) -->
+    <skip />
+    <!-- no translation found for mouse_scrolling_speed (3999483025392860903) -->
+    <skip />
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"جابه‌جایی دکمه اصلی موشواره"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"استفاده از دکمه چپ موشواره به‌عنوان کلیک راست"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"شتاب مکان‌نما"</string>
@@ -2238,6 +2239,7 @@
     <string name="accessibility_feedback_title" msgid="6690472705407526006">"بازخورد"</string>
     <string name="accessibility_feedback_summary" msgid="4576591591334314827">"با شرکت در نظرسنجی به بهبود ما کمک کنید"</string>
     <string name="accessibility_feedback_disabled_summary" msgid="3652321859452620942">"هیچ نظرسنجی‌ای دردسترس نیست"</string>
+    <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"ارسال بازخورد"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"برنامه‌های بارگیری‌شده"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"آزمایشی"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"پرچم‌های ویژه"</string>
@@ -2494,10 +2496,8 @@
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"ادامه"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"دستگاه‌های کمک‌شنوایی"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"راه‌اندازی و مدیریت سمعک‌های سازگار با «جاری‌سازی صوتی ویژه سمعک‌ها» و «صدای کم‌مصرف»، کاشت حلزون، و دیگر دستگاه‌های تقویت صدا"</string>
-    <!-- no translation found for accessibility_hearingaid_asha_only_intro (7402419984664822832) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_hap_only_intro (3332144138443825311) -->
-    <skip />
+    <string name="accessibility_hearingaid_asha_only_intro" msgid="7402419984664822832">"راه‌اندازی و مدیریت کردن سمعک‌های سازگار با «جاری‌سازی صوتی ویژه سمعک‌ها»، کاشت حلزونی، و دیگر دستگاه‌های تقویت صدا"</string>
+    <string name="accessibility_hearingaid_hap_only_intro" msgid="3332144138443825311">"راه‌اندازی و مدیریت کردن سمعک‌های سازگار با «صدای کم‌مصرف»، کاشت حلزونی، و دیگر دستگاه‌های تقویت صدا"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"هیچ دستگاه کمک‌شنوایی‌ای متصل نشده است"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"افزودن سمعک‌ها"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"جفت کردن سمعک"</string>
@@ -2517,14 +2517,10 @@
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"درباره دستگاه‌های کمک‌شنوایی"</string>
     <string name="accessibility_hearing_device_footer_summary" msgid="5513620078219951077">"‏برای پیدا کردن سایر سمعک‌هایی که از «جاری‌سازی صوتی ویژه سمعک‌ها» یا «صدای کم‌مصرف» پشتیبانی نمی‌کنند، روی &lt;b&gt;جفت کردن دستگاه جدید&lt;/b&gt; &gt; &lt;b&gt;دیدن دستگاه‌های بیشتر&lt;/b&gt; تک‌ضرب بزنید"</string>
     <string name="accessibility_hearing_device_footer_summary_tts" msgid="955527026890456959">"برای پیدا کردن سایر سمعک‌هایی که از «جاری‌سازی صوتی ویژه سمعک‌ها» یا «صدای کم‌مصرف» پشتیبانی نمی‌کند، روی "<b>"جفت کردن دستگاه جدید"</b>" &gt; "<b>"دیدن دستگاه‌های بیشتر"</b>" تک‌ضرب بزنید"</string>
-    <!-- no translation found for accessibility_hearing_device_footer_asha_only_summary (3377169209330540616) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_footer_asha_only_summary_tts (8192971114504608531) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_footer_hap_only_summary (3531758698830915205) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_footer_hap_only_summary_tts (4440097982533045507) -->
-    <skip />
+    <string name="accessibility_hearing_device_footer_asha_only_summary" msgid="3377169209330540616">"‏برای پیدا کردن سایر سمعک‌هایی که «جاری‌سازی صوتی ویژه سمعک‌ها» (ASHA) از آن‌ها پشتیبانی نمی‌کند، روی &lt;b&gt;جفت کردن دستگاه جدید&lt;/b&gt; &gt; &lt;b&gt;دیدن دستگاه‌های بیشتر&lt;/b&gt; تک‌ضرب بزنید"</string>
+    <string name="accessibility_hearing_device_footer_asha_only_summary_tts" msgid="8192971114504608531">"‏برای پیدا کردن سایر سمعک‌هایی که «جاری‌سازی صوتی ویژه سمعک‌ها» (ASHA) از آن‌ها پشتیبانی نمی‌کند، روی "<b>"جفت کردن دستگاه جدید"</b>" سپس "<b>"دیدن دستگاه‌های بیشتر"</b>" تک‌ضرب بزنید"</string>
+    <string name="accessibility_hearing_device_footer_hap_only_summary" msgid="3531758698830915205">"‏برای پیدا کردن سایر سمعک‌هایی که «صدای کم‌مصرف» از آن‌ها پشتیبانی نمی‌کند، روی &lt;b&gt;جفت کردن دستگاه جدید&lt;/b&gt; &gt; &lt;b&gt;دیدن دستگاه‌های بیشتر&lt;/b&gt; تک‌ضرب بزنید"</string>
+    <string name="accessibility_hearing_device_footer_hap_only_summary_tts" msgid="4440097982533045507">"برای پیدا کردن سایر سمعک‌هایی که «صدای کم‌مصرف» از آن‌ها پشتیبانی نمی‌کند، روی "<b>"جفت کردن دستگاه جدید"</b>" سپس "<b>"دیدن دستگاه‌های بیشتر"</b>" تک‌ضرب بزنید"</string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"جفت کردن دستگاه کمک‌شنوایی"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"‏می‌توانید سمعک‌های سازگار با «جاری‌سازی صوتی ویژه سمعک‌ها» (ASHA) و «صدای کم‌مصرف» را در این صفحه جفت کنید. مطمئن شوید سمعک روشن و برای جفت کردن آماده باشد."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"دستگاه‌های کمک‌شنوایی موجود"</string>
@@ -2975,7 +2971,8 @@
     <string name="remove_device_admin" msgid="3143059558744287259">"غیرفعال کردن این برنامه سرپرست دستگاه"</string>
     <string name="uninstall_device_admin" msgid="4481095209503956916">"حذف نصب برنامه"</string>
     <string name="remove_and_uninstall_device_admin" msgid="707912012681691559">"غیرفعال‌ کردن و حذف نصب"</string>
-    <string name="select_device_admin_msg" msgid="5501360309040114486">"برنامه‌های سرپرست دستگاه"</string>
+    <!-- no translation found for select_device_admin_msg (2506262585633022884) -->
+    <skip />
     <string name="no_device_admins" msgid="8888779888103079854">"هیچ‌یک از برنامه‌‌های سرپرست دستگاه در دسترس نیستند"</string>
     <string name="no_trust_agents" msgid="8659098725864191600">"عامل‌های معتبر دردسترس نیست"</string>
     <string name="add_device_admin_msg" msgid="7730006568970042119">"برنامه سرپرست دستگاه فعال شود؟"</string>
@@ -3743,7 +3740,7 @@
     <string name="silent_notifications_status_bar" msgid="6113307620588767516">"پنهان کردن اعلان‌های ساکت در نوار وضعیت"</string>
     <string name="notification_pulse_title" msgid="8013178454646671529">"نور چشمک‌زن"</string>
     <string name="lock_screen_notifications_title" msgid="2876323153692406203">"حریم خصوصی"</string>
-    <string name="lockscreen_bypass_title" msgid="6519964196744088573">"رد کردن صفحه قفل"</string>
+    <string name="lockscreen_bypass_title" msgid="6519964196744088573">"رد شدن از صفحه قفل"</string>
     <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"پس‌از قفل‌گشایی، آخرین صفحه استفاده‌شده باز می‌شود. اعلان‌ها در صفحه قفل نشان داده نمی‌شود. برای دیدن آن‌ها، از بالای صفحه تند به‌پایین بکشید."</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"صفحه قفل، صفحه‌قفل، رد کردن، نادیده گرفتن"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"وقتی نمایه کاری قفل است"</string>
@@ -3864,9 +3861,10 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"این برنامه از تنظیمات پیشرفته پشتیبانی نمی‌کند"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"تنظیمات بیشتر"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"تنظیمات بیشتر داخل این برنامه دردسترس است"</string>
-    <string name="notification_polite_title" msgid="6121016426991791557">"استراحت اعلان‌ها"</string>
-    <string name="notification_polite_main_control_title" msgid="5812529809151927149">"استفاده از استراحت اعلان‌ها"</string>
-    <string name="notification_polite_description" msgid="5497748284893832854">"وقتی در مدت کوتاهی اعلان‌های زیادی دریافت کنید، دستگاهتان تا ۲ دقیقه میزان صدایش را کاهش می‌دهد و هشدارها را به‌حداقل می‌رساند. تماس‌ها، زنگ‌های ساعت، و مکالمه‌های اولویت‌دار تحت‌تأثیر قرار نمی‌گیرند. \n\nاعلان‌های دریافت‌شده در زمان استراحت را می‌توان با پایین کشیدن انگشت از بالای صفحه‌نمایش پیدا کرد."</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"آرام‌سازی اعلان‌ها"</string>
+    <string name="notification_polite_main_control_title" msgid="5812529809151927149">"استفاده از آرام‌سازی اعلان‌ها"</string>
+    <!-- no translation found for notification_polite_description (6137533404978878957) -->
+    <skip />
     <string name="notification_polite_work" msgid="8823596456640216391">"اعمال کردن بر نمایه‌های کاری"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"برای برنامه‌های نمایه کاری اعمال می‌شود"</string>
     <string name="notification_bundle_title" msgid="460988459835922719">"اعلان‌های دسته‌بندی‌شده"</string>
@@ -4374,7 +4372,7 @@
     <string name="disconnected" msgid="3469373726996129247">"متصل نیست"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"متصل نیست"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> برنامه نصب‌شده"</string>
-    <string name="storage_summary" msgid="5903562203143572768">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> استفاده‌شده - <xliff:g id="FREE_SPACE">%2$s</xliff:g> آزاد"</string>
+    <string name="storage_summary" msgid="7631468664968572688">"‫<xliff:g id="PERCENTAGE">%1$s</xliff:g> استفاده شده - <xliff:g id="FREE_SPACE_VALUE">%2$s</xliff:g> <xliff:g id="FREE_SPACE_UNITS">%3$s</xliff:g> آزاد"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"زمینه تاریک، اندازه قلم، روشنایی"</string>
     <string name="memory_summary" msgid="8221954450951651735">"به‌طور متوسط <xliff:g id="USED_MEMORY">%1$s</xliff:g> از <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> حافظه استفاده شده است"</string>
     <string name="users_summary" msgid="8473589474976307510">"به‌عنوان <xliff:g id="USER_NAME">%1$s</xliff:g> به سیستم وارد شده‌اید"</string>
@@ -4443,6 +4441,7 @@
     <string name="ethernet_data_usage" msgid="4552227880905679761">"میزان مصرف داده اترنت"</string>
     <string name="wifi" msgid="2932584495223243842">"Wi-Fi"</string>
     <string name="ethernet" msgid="4665162609974492983">"اترنت"</string>
+    <string name="ethernet_interface_title" msgid="1634881244068292765">"اترنت <xliff:g id="INTERFACEID">%1$s</xliff:g>"</string>
     <string name="cell_data_template" msgid="6077963976103260821">"<xliff:g id="AMOUNT">^1</xliff:g> داده شبکه تلفن همراه"</string>
     <string name="wifi_data_template" msgid="935934798340307438">"‏<xliff:g id="AMOUNT">^1</xliff:g> داده‌های Wi-Fi"</string>
     <string name="ethernet_data_template" msgid="1429173767445201145">"<xliff:g id="AMOUNT">^1</xliff:g> داده‌ اترنت"</string>
@@ -4555,7 +4554,7 @@
     <string name="keywords_long_background_tasks" msgid="5788956269136054574">"کارهای طولانی، انتقال داده، کارهای پس‌زمینه"</string>
     <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"‏بازنشانی محدودکننده سرعت ShortcutManager"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"‏محدودکننده سرعت ShortcutManager بازنشانی شد"</string>
-    <string name="notification_suggestion_title" msgid="6309263655965785411">"کنترل بافت صفحه قفل"</string>
+    <string name="notification_suggestion_title" msgid="6309263655965785411">"کنترل اطلاعات روی صفحه قفل"</string>
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"نمایش یا پنهان کردن محتوای اعلان"</string>
     <string name="page_tab_title_support" msgid="3235725053332345773">"نکته‌ها و پشتیبانی"</string>
     <string name="developer_smallest_width" msgid="632354817870920911">"کوچک‌ترین عرض"</string>
@@ -4994,8 +4993,7 @@
     <string name="satellite_setting_title" msgid="2543034229989047673">"پیام‌رسانی ماهواره‌ای"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"پیامک‌ها را ازطریق ماهواره ارسال و دریافت کنید. با حساب شما ارائه شده است."</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"پیامک‌ها را ازطریق ماهواره ارسال و دریافت کنید. در حساب شما گنجانده نشده است."</string>
-    <!-- no translation found for satellite_setting_summary_without_entitlement (5284998840770992554) -->
-    <skip />
+    <string name="satellite_setting_summary_without_entitlement" msgid="5284998840770992554">"پیامک‌ها را ازطریق ماهواره ارسال و دریافت کنید. برای اطلاع از جزئیات با شرکت مخابراتی‌تان تماس بگیرید."</string>
     <string name="keywords_satellite_setting" msgid="613553612424945946">"پیام‌رسانی ماهواره‌ای، اتصال‌پذیری ماهواره"</string>
     <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"درباره <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="title_about_satellite_setting" msgid="3563087940535642558">"با حساب واجدشرایط <xliff:g id="CARRIER_NAME">%1$s</xliff:g>، می‌توانید ازطریق ماهواره پیام نوشتاری ارسال و دریافت کنید"</string>
@@ -5009,8 +5007,7 @@
     <string name="title_supported_service" msgid="4275535165812691571">"بعداز اتصال تلفن به ماهواره"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"می‌توانید برای هرکسی پیام ارسال کنید، ازجمله خدمات اضطراری. هروقت شبکه تلفن همراه دردسترس قرار بگیرد، تلفن دوباره به آن متصل خواهد شد."</string>
     <string name="satellite_setting_summary_more_information" msgid="1028146147094166868">"<xliff:g id="SUBJECT">%1$s</xliff:g> ممکن است مدت زمان بیشتری طول بکشد و فقط در برخی مناطق دردسترس است. ممکن است وضعیت آب‌وهوا و برخی ساختمان‌ها بر اتصال ماهواره اثر بگذارند. تماس ماهواره‌ای دردسترس نیست. ممکن است تماس‌های اضطراری همچنان وصل شود.\n\nشاید کمی طول بکشد تا تغییرات حساب در «تنظیمات» نمایش داده شود. برای اطلاع از جزئیات، با <xliff:g id="CARRIER_NAME">%2$s</xliff:g> تماس بگیرید."</string>
-    <!-- no translation found for satellite_setting_summary_more_information_no_emergency_messaging (8042240156141790447) -->
-    <skip />
+    <string name="satellite_setting_summary_more_information_no_emergency_messaging" msgid="8042240156141790447">"<xliff:g id="SUBJECT">%1$s</xliff:g> ممکن است مدت زمان بیشتری طول بکشد و فقط در برخی مناطق دردسترس است. ممکن است وضعیت آب‌وهوا و برخی ساختمان‌ها بر اتصال ماهواره اثر بگذارند. تماس ماهواره‌ای دردسترس نیست. ممکن است تماس‌های اضطراری همچنان متصل شوند. ارسال پیامک به خدمات اضطراری ممکن است در همه مناطق دردسترس نباشد.\n\nممکن است مدتی طول بکشد تا تغییرات حساب در «تنظیمات» نشان داده شود. برای اطلاع از جزئیات، با <xliff:g id="CARRIER_NAME">%2$s</xliff:g> تماس بگیرید."</string>
     <string name="more_about_satellite_messaging" msgid="1039277943532711584">"اطلاعات بیشتر درباره <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"‫<xliff:g id="FUNCTION">%1$s</xliff:g> روشن نشد"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"برای روشن کردن <xliff:g id="FUNCTION">%1$s</xliff:g>، ابتدا اتصال ماهواره را قطع کنید"</string>
@@ -5019,6 +5016,9 @@
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"اتصال‌پذیری ماهواره"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"پیام‌رسانی ماهواره‌ای"</string>
     <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"استفاده از داده در حسابتان ارائه شده است"</string>
+    <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"برنامه‌های پشتیبانی‌شده در تلفن شما"</string>
+    <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"دیدن همه برنامه‌ها"</string>
+    <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"برنامه‌های پشتیبانی‌شده در تلفن شما"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"نام‌های نقطه دسترسی"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"هنگام اتصال به <xliff:g id="CARRIER">%1$s</xliff:g>، دردسترس نیست"</string>
@@ -5186,27 +5186,44 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"اطلاعات خط‌مشی کار شما"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"تنظیمات مدیریت‌شده توسط سرپرست فناوری اطلاعات شما"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"‏واحد پردازش گرافیکی (GPU)"</string>
-    <string name="enable_16k_pages" msgid="8001470927566110689">"راه‌اندازی با اندازه صفحه ۱۶ ک.ب"</string>
-    <string name="enable_16k_pages_summary" msgid="1964363364670306912">"راه‌اندازی با هسته دارای پشتیبانی صفحه ۱۶ ک.ب"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="611010487387251491">"رفتن از حالت ۴ کیلوبایتی به حالت ۱۶ کیلوبایتی"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="6129208614283750541">"‏در حالت مستقل از صفحه هستید که از هسته ۴ کیلوبایتی استفاده می‌کند و می‌خواهید به حالت ۱۶ کیلوبایتی بروید. در این حالت تمامیت نرم‌افزار را نمی‌توان تضمین کرد و هرگونه داده‌ای که درمدت باز بودن قفل bootloader در تلفن ذخیره می‌شود می‌تواند در معرض خطر باشد. با این کار دستگاه بازراه‌اندازی می‌شود. برخی‌از ویژگی‌ها در این حالت‌ها غیرفعال می‌شوند بنابراین ممکن است بعضی‌از برنامه‌ها کار نکنند. برای برگرداندن دستگاه به حالت تولید، باید به حالت ۴ کیلوبایتی برگردید و bootloader را قفل کنید که با این کار، دستگاه بازنشانی کارخانه‌ای می‌شود. پس‌از آنکه دستگاه باموفقیت با سیستم‌عامل Android راه‌اندازی شد، «باز کردن قفل سازنده اصلی محصول» را در «گزینه‌های توسعه‌دهندگان» غیرفعال کنید."</string>
-    <string name="confirm_enable_4k_pages_title" msgid="3210360137887034659">"رفتن از حالت ۱۶ کیلوبایتی به حالت ۴ کیلوبایتی"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"‏در حالت مستقل از صفحه هستید که از هسته ۱۶ کیلوبایتی استفاده می‌کند و می‌خواهید به حالت ۴ کیلوبایتی بروید. در این حالت تمامیت نرم‌افزار را نمی‌توان تضمین کرد و هرگونه داده‌ای که درمدت باز بودن قفل bootloader در تلفن ذخیره می‌شود می‌تواند در معرض خطر باشد. با این کار دستگاه بازراه‌اندازی می‌شود. برخی‌از ویژگی‌ها در این حالت‌ها غیرفعال می‌شوند بنابراین ممکن است بعضی‌از برنامه‌ها کار نکنند. برای برگرداندن دستگاه به حالت تولید، bootloader را قفل کنید که با این کار،‌ دستگاه بازنشانی کارخانه‌ای می‌شود. پس‌از آنکه دستگاه باموفقیت با سیستم‌عامل Android راه‌اندازی شد، «باز کردن قفل سازنده اصلی محصول» را در «گزینه‌های توسعه‌دهندگان» غیرفعال کنید."</string>
-    <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"ارتقا هسته به هسته سازگار با صفحه ۱۶ کیلوبایتی انجام نشد."</string>
+    <!-- no translation found for enable_16k_pages (1758111531461408337) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1937836453571509085) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (5477376227161609124) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (6211693250692246982) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3001009010581393119) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (3398001587586470689) -->
+    <skip />
+    <!-- no translation found for toast_16k_update_failed_text (7848383020572918850) -->
+    <skip />
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"اعمال تغییرات"</string>
-    <string name="confirm_format_ext4_title" msgid="6696191800594435577">"‏دستگاه مجدداً به ext4 قالب‌بندی شود؟ (الزامی برای حالت ۱۶ کیلوبایتی)"</string>
-    <string name="confirm_format_ext4_text" msgid="7940372488624630214">"‏پیش‌از استفاده از گزینه توسعه‌دهنده ۱۶ کیلوبایتی، پارتیشن داده‌های این دستگاه باید به ext4 تبدیل شود. در این حالت تمامیت نرم‌افزار را نمی‌توان تضمین کرد و هرگونه داده‌ای که درمدت باز بودن قفل bootloader در تلفن ذخیره می‌شود می‌تواند در معرض خطر باشد. فعال کردن گزینه ۱۶ کیلوبایتی به بازراه‌اندازی دیگری بعداز این بازراه‌اندازی نیاز خواهد داشت. بعداز رفتن به این حالت، می‌توانید با یک بار بازراه‌اندازی بین حالت‌های ۴ کیلوبایتی و ۱۶ کیلوبایتی جابجا شوید. برخی‌از ویژگی‌ها در این حالت‌ها غیرفعال می‌شوند بنابراین ممکن است بعضی‌از برنامه‌ها کار نکنند. برای برگرداندن دستگاه به حالت تولید، باید به حالت ۴ کیلوبایتی برگردید و سپس bootloader را قفل کنید که با این کار،‌ دستگاه بازنشانی کارخانه‌ای می‌شود. پس‌از آنکه دستگاه باموفقیت با سیستم‌عامل Android راه‌اندازی شد، «باز کردن قفل سازنده اصلی محصول» را در «گزینه‌های توسعه‌دهندگان» غیرفعال کنید. داده‌های دستگاه محو می‌شود و سیستم فایل به ext4 تغییر می‌کند. بعداز تکمیل کار،‌ لطفاً به اینجا برگردید تا دوباره حالت ۱۶ کیلوبایتی را فعال کنید."</string>
+    <!-- no translation found for confirm_format_ext4_title (4754057414728537125) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (432847493298532536) -->
+    <skip />
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"پاک کردن همه داده‌ها"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"‏محو کردن داده و قالب‌بندی مجدد پارتیشن داده به ext4 انجام نشد."</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"‏قفل Bootloader باید باز شود"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"‏پیش‌از استفاده از گزینه توسعه‌دهنده ۱۶ کیلوبایتی، قفل bootloader باید در این دستگاه باز شود. نمی‌توان تمامیت نرم‌افزار را در این حالت تضمین کرد و هرگونه داده‌ای که درمدت باز بودن قفل bootloader در تلفن ذخیره می‌شود می‌تواند در معرض خطر باشد. با فعال کردن حالت ۱۶ کیلوبایتی، همه تنظیمات و داده‌های کاربر محو خواهند شد. بعداز باز کردن قفل bootloader، گزینه ۱۶ کیلوبایتی به انجام دو بازراه‌اندازی نیاز دارد. بعداز رفتن به این حالت، می‌توانید با یک بار بازراه‌اندازی بین حالت‌های ۴ کیلوبایتی و ۱۶ کیلوبایتی جابجا شوید. برخی‌از ویژگی‌ها در این حالت‌ها غیرفعال می‌شوند بنابراین ممکن است بعضی‌از برنامه‌ها کار نکنند. برای برگرداندن دستگاه به حالت تولید، باید به حالت ۴ کیلوبایتی برگردید و سپس سازنده اصلی محصول/ bootloader دستگاه را قفل کنید (که با این کار،‌ دستگاه بازنشانی کارخانه‌ای می‌شود). لطفاً قفل bootloader را باز و دوباره امتحان کنید. می‌توانید دستورالعمل‌های نحوه انجام این کار را از اینجا دریافت کنید: &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
-    <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"درحال استفاده از حالت مستقل با صفحه ۴ کیلوبایتی"</string>
-    <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"‏در حالت ۴ کیلوبایتی حالت مستقل از صفحه هستید. در این حالت، تمامیت نرم‌افزار را نمی‌توان تضمین کرد و هرگونه داده‌ای که درمدت باز بودن قفل bootloader در تلفن ذخیره می‌شود می‌تواند در معرض خطر باشد. برخی‌از ویژگی‌ها در این حالت‌ها غیرفعال می‌شوند بنابراین ممکن است بعضی‌از برنامه‌ها کار نکنند. برای ورود دوباره به حالت تولید، باید bootloader دستگاه را قفل کنید. برای مطالعه بیشتر، تک‌ضرب بزنید."</string>
-    <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"‏در حالت ۴ کیلوبایتی حالت مستقل از صفحه هستید. در این حالت تمامیت نرم‌افزار را نمی‌توان تضمین کرد و هرگونه داده‌ای که درمدت باز بودن قفل bootloader در تلفن ذخیره می‌شود می‌تواند در معرض خطر باشد. برخی‌از ویژگی‌ها در این حالت‌ها غیرفعال می‌شوند بنابراین ممکن است بعضی‌از برنامه‌ها کار نکنند. برای ورود دوباره به حالت تولید، باید bootloader دستگاه را قفل کنید. با این کار، دستگاه دوباره بازنشانی کارخانه‌ای می‌شود و به تنظیمات تولید بازگردانده می‌شود. پس‌از آنکه دستگاه باموفقیت با سیستم‌عامل Android راه‌اندازی شد، «باز کردن قفل سازنده اصلی محصول» را در «گزینه‌های توسعه‌دهندگان» غیرفعال کنید. اگر دستگاه نتوانست باموفقیت با سیستم‌عامل Android راه‌اندازی شود یا ناپایدار بود، دستگاه را با جدیدترین تصویر تنظیمات کارخانه از &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; دوباره فلاش کنید و «محو کردن داده‌های دستگاه»، «قفل کردن bootloader»، و «فلاش کردن اجباری همه پارتیشن‌ها» را انتخاب کنید."</string>
-    <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"درحال استفاده از حالت مستقل از صفحه ۱۶ کیلوبایتی"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"‏در حالت ۱۶ کیلوبایتی حالت مستقل از صفحه هستید. نمی‌توان تمامیت نرم‌افزار را در این حالت تضمین کرد و هرگونه داده‌ای که درمدت باز بودن قفل bootloader در تلفن ذخیره می‌شود می‌تواند درمعرض خطر باشد. برخی‌از ویژگی‌ها در این حالت‌ها غیرفعال می‌شوند بنابراین ممکن است بعضی‌از برنامه‌ها کار نکنند. برای ورود دوباره به حالت تولید، باید به حالت ۴ کیلوبایتی برگردید و سپس bootloader دستگاه را قفل کنید. برای مطالعه بیشتر، تک‌ضرب بزنید."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"‏در حالت ۱۶ کیلوبایتی حالت مستقل از صفحه هستید. نمی‌توان تمامیت نرم‌افزار را در این حالت تضمین کرد و هرگونه داده‌ای که درمدت باز بودن قفل bootloader در تلفن ذخیره می‌شود می‌تواند درمعرض خطر باشد. برخی‌از ویژگی‌ها در این حالت‌ها غیرفعال می‌شوند بنابراین ممکن است بعضی‌از برنامه‌ها کار نکنند. برای ورود دوباره به حالت تولید، باید به حالت ۴ کیلوبایتی برگردید و سپس bootloader دستگاه را قفل کنید. با این کار، دستگاه دوباره بازنشانی کارخانه‌ای می‌شود و به تنظیمات تولید بازگردانده می‌شود. پس‌از آنکه دستگاه باموفقیت با سیستم‌عامل Android راه‌اندازی شد، «باز کردن قفل سازنده اصلی محصول» را در «گزینه‌های توسعه‌دهندگان» غیرفعال کنید. اگر دستگاه نتوانست باموفقیت با سیستم‌عامل Android راه‌اندازی شود یا ناپایدار بود، دستگاه را با جدیدترین تصویر تنظیمات کارخانه از &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; دوباره فلاش کنید و «محو کردن داده‌های دستگاه»، «قفل کردن Bootloader»، و «فلاش کردن اجباری همه پارتیشن‌ها» را انتخاب کنید."</string>
-    <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"حالت مستقل از صفحه ۱۶ کیلوبایتی"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (8089310116854544106) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (293797217034340398) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (731597455785555266) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (7572233914423063169) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (8940585327969638637) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (7613206944532151035) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2860363435021452169) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (2058933148654316447) -->
+    <skip />
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"خواندن شرح بلندتر"</string>
     <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"اجرای برنامه در حالت سازگاری با اندازه صفحه"</string>
     <string name="enable_16k_app_compat_details" msgid="3389401258168314266">"وقتی برنامه روشن باشد در دستگاه ۱۶ کیلوبایتی در حالت سازگاری با اندازه صفحه اجرا خواهد شد."</string>
@@ -5368,7 +5385,7 @@
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"وقتی برنامه‌ها به نوشتار، تصویر، یا محتوای دیگری که کپی کرده‌اید دسترسی پیدا می‌کنند، پیامی نشان داده می‌شود"</string>
     <string name="all_apps" msgid="3054120149509114789">"همه برنامه‌ها"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"اجازه ندادن"</string>
-    <string name="virtual_device_connected" msgid="6082030549955977794">"متصل"</string>
+    <string name="virtual_device_connected" msgid="6082030549955977794">"وصل شد"</string>
     <string name="virtual_device_disconnected" msgid="4148915248176291618">"متصل نیست"</string>
     <string name="virtual_device_unknown" msgid="3592486476918448088">"دستگاه نامشخص"</string>
     <string name="virtual_device_details_title" msgid="2298529342462505596">"جزئیات دستگاه"</string>
@@ -5583,8 +5600,7 @@
     <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"بستن"</string>
     <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"یک جفت هدفون سازگار دیگر وصل کنید یا نام و گذرواژه جاری‌سازی‌تان را دراختیار شخص مقابل قرار دهید"</string>
     <string name="audio_sharing_dialog_qr_code_content" msgid="2246980817848351361">"اجازه دهید دیگران این کد را اسکن کنند و به فایل‌های صوتی شما گوش دهند\n\nنام جاری‌سازی: <xliff:g id="STREAM_NAME">%1$s</xliff:g>\nگذرواژه: <xliff:g id="PASSWORD">%2$s</xliff:g>"</string>
-    <!-- no translation found for audio_sharing_dialog_qr_code_content_no_password (7824076083031650113) -->
-    <skip />
+    <string name="audio_sharing_dialog_qr_code_content_no_password" msgid="7824076083031650113">"اجازه دهید دیگران این کد را اسکن کنند و به فایل‌های صوتی شما گوش دهند\n\nنام جاری‌سازی: <xliff:g id="STREAM_NAME">%1$s</xliff:g>"</string>
     <string name="audio_sharing_dialog_pair_new_device_content" msgid="6720472590211440206">"یا هدفون سازگار دیگری را جفت کنید"</string>
     <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"هدفون سازگار دیگری را جفت کنید یا رمزینه پاسخ‌سریع جاری‌سازی صوتی‌تان را دراختیار شخص مقابل قرار دهید"</string>
     <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"درحال هم‌رسانی صدا"</string>
@@ -5613,12 +5629,10 @@
     <string name="audio_sharing_retry_dialog_content" msgid="6014534433894608834">"مشکلی پیش آمد. لطفاً دوباره امتحان کنید."</string>
     <string name="audio_sharing_incompatible_dialog_title" msgid="4586805264392802115">"نمی‌توان صدا را با <xliff:g id="DEVICE_NAME">%1$s</xliff:g> به‌اشتراک گذاشت"</string>
     <string name="audio_sharing_incompatible_dialog_content" msgid="3943223683620405311">"اشتراک صدا فقط با هدفون‌هایی کار می‌کند که از «صدای کم‌مصرف» پشتیبانی می‌کنند"</string>
-    <!-- no translation found for audio_sharing_block_pairing_dialog_title (1756723860075818856) -->
-    <skip />
-    <!-- no translation found for audio_sharing_block_pairing_dialog_content (6352030314206654722) -->
-    <skip />
-    <!-- no translation found for audio_sharing_turn_off_button_label (1934956352475393641) -->
-    <skip />
+    <string name="audio_sharing_block_pairing_dialog_title" msgid="1756723860075818856">"خاموش کردن «اشتراک صدا»"</string>
+    <string name="audio_sharing_block_pairing_dialog_content" msgid="6352030314206654722">"برای جفت کردن دستگاه جدید، ابتدا «اشتراک صدا» را خاموش کنید."</string>
+    <string name="audio_sharing_turn_off_button_label" msgid="1934956352475393641">"خاموش شود"</string>
+    <string name="share_audio_notification_title" msgid="5201976754820387782">"هم‌رسانی صدا با <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"اتصال به جاری‌سازی صوتی کم‌مصرف"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"جاری‌سازی‌های صوتی اطراف"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"جاری‌سازی‌های صوتی"</string>
@@ -5648,6 +5662,9 @@
     <string name="audio_streams_present_now" msgid="7519818719382756366">"جاری‌سازی موقتاً متوقف شد"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"توقف گوش دادن"</string>
     <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"متصل کردن هدفون سازگار"</string>
+    <string name="audio_streams_dialog_turn_off_talkback_title" msgid="6824585115302786690">"‏‫TalkBack را موقتاً خاموش کنید"</string>
+    <string name="audio_streams_dialog_turn_off_talkback_subtitle" msgid="2394295776096273919">"‏هنگام گوش دادن به جاری‌سازی صوتی نمی‌توان از TalkBack استفاده کرد. برای گوش دادن، TalkBack را خاموش کنید."</string>
+    <string name="audio_streams_dialog_turn_off_talkback_button" msgid="8049097689955037626">"خاموش کردن"</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"متصل کردن دستگاه"</string>
     <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"جزئیات جاری‌سازی صوتی"</string>
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"رمزینه پاسخ‌سریع جاری‌سازی صوتی"</string>

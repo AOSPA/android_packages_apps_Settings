@@ -162,8 +162,8 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
     @Override
     public int getAvailabilityStatus(int subId) {
         if (mTelephonyManager == null) {
-            Log.w(LOG_TAG, "Telephony manager not yet initialized");
-            mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
+            Log.w(LOG_TAG, "getAvailabilityStatus: Telephony manager not yet initialized");
+            return CONDITIONALLY_UNAVAILABLE;
         }
         boolean visible =
                 SubscriptionManager.isUsableSubscriptionId(subId)
@@ -189,6 +189,10 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
             return false;
         }
 
+        if (mTelephonyManager == null) {
+            Log.w(LOG_TAG, "isChecked: Telephony manager not yet initialized");
+            return false;
+        }
         long currentlyAllowedNetworkTypes = mTelephonyManager.getAllowedNetworkTypesForReason(
                 mTelephonyManager.ALLOWED_NETWORK_TYPES_REASON_ENABLE_2G);
         return (currentlyAllowedNetworkTypes & BITMASK_2G) != 0;
@@ -214,6 +218,12 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
         if (!SubscriptionManager.isUsableSubscriptionId(mSubId)) {
             return false;
         }
+
+        if (mTelephonyManager == null) {
+            Log.w(LOG_TAG, "setChecked: Telephony manager not yet initialized");
+            return false;
+        }
+
         long currentlyAllowedNetworkTypes = mTelephonyManager.getAllowedNetworkTypesForReason(
                 mTelephonyManager.ALLOWED_NETWORK_TYPES_REASON_ENABLE_2G);
         boolean enabled = (currentlyAllowedNetworkTypes & BITMASK_2G) != 0;

@@ -28,6 +28,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
+import com.android.settings.wifi.utils.SsidInputGroup;
+import com.android.settings.wifi.utils.WifiDialogHelper;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.wifi.AccessPoint;
@@ -62,6 +64,7 @@ public class WifiDialog extends AlertDialog implements WifiConfigUiBase,
     private View mView;
     private WifiConfigController mController;
     private boolean mHideSubmitButton;
+    private WifiDialogHelper mDialogHelper;
 
     /**
      * Creates a WifiDialog with no additional style. It displays as a dialog above the current
@@ -115,6 +118,9 @@ public class WifiDialog extends AlertDialog implements WifiConfigUiBase,
         if (mAccessPoint == null) {
             mController.hideForgetButton();
         }
+
+        mDialogHelper = new WifiDialogHelper(this,
+                new SsidInputGroup(getContext(), mView, R.id.ssid_layout, R.id.ssid));
     }
 
     @SuppressWarnings("MissingSuperCall") // TODO: Fix me
@@ -155,9 +161,6 @@ public class WifiDialog extends AlertDialog implements WifiConfigUiBase,
     public void onClick(DialogInterface dialogInterface, int id) {
         if (mListener != null) {
             switch (id) {
-                case BUTTON_SUBMIT:
-                    mListener.onSubmit(this);
-                    break;
                 case BUTTON_FORGET:
                     if (WifiUtils.isNetworkLockedDown(getContext(), mAccessPoint.getConfig())) {
                         RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(),
@@ -168,6 +171,11 @@ public class WifiDialog extends AlertDialog implements WifiConfigUiBase,
                     break;
             }
         }
+    }
+
+    /** Return true to tell the parent activity to call onSubmit before onDismiss. */
+    public boolean shouldSubmitBeforeFinish() {
+        return mDialogHelper.isPositive();
     }
 
     @Override

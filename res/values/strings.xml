@@ -84,6 +84,10 @@
     <string name="preview_pager_content_description">Preview</string>
     <!-- Content description for qrcode image. [CHAR LIMIT=none]-->
     <string name="qr_code_content_description">QR code</string>
+    <!-- Previous button for preview pager. [CHAR LIMIT=NONE] -->
+    <string name="preview_pager_previous_button">Previous preview</string>
+    <!-- Next button for preview pager. [CHAR LIMIT=NONE] -->
+    <string name="preview_pager_next_button">Next preview</string>
 
     <!-- Description for the button that makes interface elements smaller. [CHAR_LIMIT=NONE] -->
     <string name="font_size_make_smaller_desc">Make smaller</string>
@@ -178,6 +182,12 @@
     <string name="bluetooth_ambient_volume_control_left">Left</string>
     <!-- Connected devices settings. The text to show the control is for right side device. [CHAR LIMIT=30] -->
     <string name="bluetooth_ambient_volume_control_right">Right</string>
+    <!-- Connected devices settings. Content description for unified ambient control slider. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_ambient_volume_control_description">Surroundings</string>
+    <!-- Connected devices settings. Content description for left ambient control slider. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_ambient_volume_control_left_description">Left surroundings</string>
+    <!-- Connected devices settings. Content description for right ambient control slider.. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_ambient_volume_control_right_description">Right surroundings</string>
     <!-- Connected devices settings. Content description for a button, that mute ambient volume [CHAR_LIMIT=NONE] -->
     <string name="bluetooth_ambient_volume_mute">Mute surroundings</string>
     <!-- Connected devices settings. Content description for a button, that unmute ambient volume [CHAR LIMIT=NONE] -->
@@ -202,6 +212,10 @@
     <string name="bluetooth_audio_routing_summary">Route sounds to your hearing device or phone speaker</string>
     <!-- Title for related tools section. This section will list related tools below. [CHAR LIMIT=15] -->
     <string name="bluetooth_screen_related">Related</string>
+    <!-- Title for trying Nearby Sharing in Bluetooth Sharing screen. -->
+    <string name="bluetooth_try_nearby_share_title">Try sharing with <xliff:g id="Nearby Sharing app label" example="Nearby Sharing">%s</xliff:g></string>
+    <!-- Summary for trying Nearby Sharing in Bluetooth Sharing screen. -->
+    <string name="bluetooth_try_nearby_share_summary">The fastest way to send files to nearby Android devices</string>
 
     <!-- Bluetooth audio output settings. Title of the option managing ringtone and alarms audio path. [CHAR LIMIT=30] -->
     <string name="bluetooth_ringtone_title">Ringtone and alarms</string>
@@ -532,6 +546,8 @@
     <string name="language_selection_title">Add a language</string>
     <!-- Title for the region picker [CHAR LIMIT=25] -->
     <string name="region_selection_title">Choose a region</string>
+    <!-- Title for the numbering system selection screen [CHAR LIMIT=25] -->
+    <string name="numbering_system_selection_title">Number System</string>
     <!-- Title for the region selection screen [CHAR LIMIT=25] -->
     <string name="country_selection_title">Region preference</string>
     <!-- Hint text in a search edit box (used to filter long language / country lists) [CHAR LIMIT=25] -->
@@ -547,7 +563,7 @@
     <!-- Message for asking to change system locale region or not. [CHAR LIMIT=50]-->
     <string name="body_change_system_locale_region">Your device will keep <xliff:g id="system_language" example="English">%1$s</xliff:g> as a system language</string>
     <!-- Description for the numbering system language. [CHAR LIMIT=NONE]-->
-    <string name="top_intro_numbering_system_title">Most apps will use your regional preferences</string>
+    <string name="top_intro_numbering_system_title">Choose how your device, websites, and apps display numbers</string>
 
     <!-- Regional Preferences begin -->
     <!-- The title of the menu entry of regional preferences. [CHAR LIMIT=50] -->
@@ -3220,6 +3236,7 @@
     <string name="dark_ui_summary_on_auto_mode_modes">Will turn off when <xliff:g name="modeName" example="Bedtime">%1$s</xliff:g> ends</string>
     <!-- Dark theme screen, description of Dark theme feature. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_text">Dark theme uses a black background to help keep battery alive longer on some screens. Dark theme schedules wait to turn on until your screen is off.</string>
+    <string name="dark_ui_text_force_invert">Use a dark background to make your screen more comfortable to view and reduce battery usage on some screens. Your theme will change if you have a schedule, when the screen is off.</string>
     <!-- Dark UI screen footer summary text shown when the when Dark theme turns on/off automatically according to a user bedtime schedule. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_bedtime_footer_summary">Dark theme is currently following your Bedtime mode schedule</string>
     <!-- Dark UI screen footer action text shown when the when Dark theme turns on/off automatically according to a user bedtime schedule. [CHAR LIMIT=NONE] -->
@@ -4833,14 +4850,13 @@
     <!-- Title for the 'Mouse reverse scrolling' preference switch, which reverses the direction of mouse scroll wheels so that moving the wheel up scrolls the content down. [CHAR LIMIT=60] -->
     <string name="mouse_reverse_vertical_scrolling">Reverse scrolling</string>
     <!-- Summary text for the 'Mouse reverse scrolling' preference switch indicating to users that when the setting is enabled that scrolling up with their mouse wheel will move the page content down. [CHAR LIMIT=NONE] -->
-    <string name="mouse_reverse_vertical_scrolling_summary">Content moves up when you scroll down</string>
-    <!-- TODO(b/383555305): finalize these strings and mark them translatable. -->
+    <string name="mouse_reverse_vertical_scrolling_summary">Scroll up to move the page down</string>
     <!-- Title for the scrolling section of the mouse settings page. [CHAR LIMIT=60] -->
-    <string name="mouse_scrolling_category_title" translatable="false">Scrolling</string>
+    <string name="mouse_scrolling_category_title">Scrolling</string>
     <!-- Title for the 'Mouse controlled scrolling' preference switch, which disables the mouse scrolling acceleration so that the scrolling speed becomes directly proportional to the speed at which the wheel is turned. [CHAR LIMIT=60]-->
-    <string name="mouse_scrolling_acceleration" translatable="false">Controlled scrolling</string>
+    <string name="mouse_scrolling_acceleration">Controlled scrolling</string>
     <!-- Title for the 'Scrolling speed' slider seekbar, which controls how fast content scrolls when the user moves the scroll wheel. [CHAR LIMIT=60]-->
-    <string name="mouse_scrolling_speed" translatable="false">Scrolling speed</string>
+    <string name="mouse_scrolling_speed">Scrolling speed</string>
     <!-- Title for the 'Swap buttons' preference switch, which swaps the left and right buttons of connected mice so that right click will be the primary action button and left clicking will be the secondary action, for example showing the context menu. [CHAR LIMIT=60] -->
     <string name="mouse_swap_primary_button">Swap primary mouse button</string>
     <!-- Summary text for the 'Swap buttons' preference switch indicating to users that when this switch is enabled, their left click will behave as though it is the right click (secondary action) and that the right click will be the primary action. [CHAR LIMIT=NONE] -->
@@ -4943,8 +4959,8 @@
     <string name="keywords_touchpad">trackpad, track pad, mouse, cursor, scroll, swipe, right click, click, pointer</string>
     <!-- Search keywords for 'Bottom-right tap', the name of the touchpad setting that allows the user to click the bottom right corner of the touchpad for more options. -->
     <string name="keywords_trackpad_bottom_right_tap">right click, tap</string>
-    <!-- Radio button text for 'middle click' action. This is one of multiple actions the user can select from the three finger tap customization radio group. The action if selected will act as a middle-click when a three-finger tap is performed on a touchpad. [CHAR LIMIT=35] -->
-    <string name="three_finger_tap_middle_click">Middle click</string>
+    <!-- Radio button text for 'mouse middle click button' action. This is one of multiple actions the user can select from the three finger tap customization radio group. The action if selected will act as a middle-click when a three-finger tap is performed on a touchpad. [CHAR LIMIT=35] -->
+    <string name="three_finger_tap_middle_click">Mouse middle click button</string>
     <!-- Radio button text for 'launch assistant' action. This is one of multiple actions the user can select from the three finger tap customization radio group. The action if selected will launch the Assistant when a three-finger tap is performed on a touchpad. [CHAR LIMIT=35] -->
     <string name="three_finger_tap_launch_gemini">Launch Assistant</string>
     <!-- Radio button text for 'Go home' action. This is one of multiple actions the user can select from the three finger tap customization radio group. The action if selected will take the user home when a three-finger tap is performed on a touchpad. [CHAR LIMIT=35] -->
@@ -5646,7 +5662,7 @@
     <!-- Title for the accessibility preference for forcing all apps to use dark theme. [CHAR LIMIT=35] -->
     <string name="accessibility_force_invert_title">Make more apps dark</string>
     <!-- Summary for the accessibility preference for forcing all apps to use dark theme. [CHAR LIMIT=100] -->
-    <string name="accessibility_force_invert_summary">Automatically convert light theme apps to dark theme</string>
+    <string name="accessibility_force_invert_summary">Expands dark theme to more apps. May not work with all apps.</string>
     <!-- Title for the accessibility preference for disabling animations. [CHAR LIMIT=35] -->
     <string name="accessibility_disable_animations">Remove animations</string>
     <!-- Summary for the accessibility preference for disabling animations. [CHAR LIMIT=60] -->
@@ -5739,6 +5755,9 @@
     <string name="accessibility_autoclick_longer_desc">Longer</string>
     <!-- Description for the seekbar that adjust auto click time. [CHAR_LIMIT=NONE] -->
     <string name="accessibility_autoclick_seekbar_desc">Auto click time</string>
+    <!-- Title for the toggle button that turns on/off the autoclick shortcut. [CHAR_LIMIT=NONE] -->
+    <!-- TODO(b/394683600): Update string to translatable once approved by UXW. -->
+    <string name="accessibility_autoclick_shortcut_title" translatable="false">Autoclick shortcut</string>
     <!-- Title for the alert dialog that adjust auto click cursor area size. [CHAR_LIMIT=NONE] -->
     <!-- TODO(b/394683600): Update string to translatable once approved by UXW. -->
     <string name="autoclick_cursor_area_size_title" translatable="false">Click area</string>
@@ -6854,7 +6873,15 @@
     <string name="adaptive_connectivity_switch_off">Off</string>
     <!-- Title for adaptive connectivity main switch preferences. [CHAR LIMIT=50] -->
     <string name="adaptive_connectivity_main_switch_title">Use adaptive connectivity</string>
-
+    <!-- Title for adaptive connectivity wi-fi switch preferences. [CHAR LIMIT=50] -->
+    <string name="adaptive_connectivity_wifi_switch_title">Auto\u2011switch Wi\u2011Fi to Cellular</string>
+    <!-- Summary for adaptive connectivity wi-fi switch preferences. [CHAR LIMIT=NONE] -->
+    <string name="adaptive_connectivity_wifi_switch_summary">Automatically use cellular data when Wi\u2011Fi connection is poor or unavailable.
+Data usage charges may apply.</string>
+    <!-- Title for adaptive connectivity mobile network switch preferences. [CHAR LIMIT=50] -->
+    <string name="adaptive_connectivity_mobile_network_switch_title">Auto\u2011switch mobile network for battery life</string>
+    <!-- Summary for adaptive connectivity mobile network switch preferences. [CHAR LIMIT=NONE] -->
+    <string name="adaptive_connectivity_mobile_network_switch_summary">Extend battery life by automatically managing network connections</string>
     <!-- Cellular security related strings -->
     <!-- Title of Cellular security tile in Network & Internet settings page. [CHAR LIMIT=60]-->
     <string name="cellular_security_title">Mobile network security</string>
@@ -6917,8 +6944,8 @@
     <string name="credentials_erased">Credential storage is erased.</string>
     <!-- Toast message [CHAR LIMIT=30] when credential storage containing private keys and certificates could not be erased (opposite of string credentials_erased) -->
     <string name="credentials_not_erased">Credential storage couldn\u2019t be erased.</string>
-    <!-- Title of Usage Access preference item [CHAR LIMIT=30] -->
-    <string name="usage_access_title">Apps with usage access</string>
+    <!-- Title of Usage Access preference item [CHAR LIMIT=40] -->
+    <string name="usage_access_title">Apps with access to app usage data</string>
     <!-- Title of CA certificate [CHAR LIMIT=30] -->
     <string name="ca_certificate">CA certificate</string>
     <!-- Title of User certificate [CHAR LIMIT=30] -->
@@ -7056,7 +7083,8 @@
 
     <!-- Message displayed to let the user know that some of the options are disabled by admin. [CHAR LIMIT=NONE] -->
     <string name="admin_disabled_other_options">Other options are disabled by your admin</string>
-    <string name="admin_more_details">Learn more</string>
+    <!-- Text on the link that lets user learn more about restricted screen timeout options. [CHAR LIMIT=NONE] -->
+    <string name="admin_more_details">Learn more about disabled screen timeout options</string>
     <string name="notification_log_title">Notification log</string>
 
     <string name="notification_history_title">Notification history</string>
@@ -9405,7 +9433,7 @@
     <string name="nls_feature_settings_summary">It can turn Do Not Disturb on or off and change related settings.</string>
     <string name="nls_feature_modes_settings_summary">It can manage and activate Modes, and change related settings.</string>
     <string name="notification_listener_disable_warning_summary">
-        If you turn off notification access for <xliff:g id="notification_listener_name">%1$s</xliff:g>, Do Not Disturb access may also be turned off.
+        If you turn off notification access for <xliff:g id="notification_listener_name">%1$s</xliff:g>, Do Not Disturb control may also be turned off.
     </string>
     <string name="notification_listener_disable_modes_warning_summary">
         If you turn off notification access for <xliff:g id="notification_listener_name">%1$s</xliff:g>, Modes access may also be turned off.
@@ -9588,14 +9616,14 @@
     The placeholder would be the app name (e.g. Calendar). [CHAR LIMIT=NONE]-->
     <string name="interact_across_profiles_install_app_summary">Tap to get the app</string>
 
-    <!-- Sound & notification > Advanced section: Title for managing Do Not Disturb access option. [CHAR LIMIT=40] -->
-    <string name="manage_zen_access_title">Do Not Disturb access</string>
+    <!-- Sound & notification > Advanced section: Title for managing Do Not Disturb control option. [CHAR LIMIT=40] -->
+    <string name="manage_zen_access_title">Do Not Disturb control</string>
 
     <!-- Button title that grants 'Do Not Disturb' permission to an app [CHAR_LIMIT=60]-->
     <string name="zen_access_detail_switch">Allow Do Not Disturb</string>
 
-    <!-- Sound & notification > Do Not Disturb access > Text to display when the list is empty. [CHAR LIMIT=NONE] -->
-    <string name="zen_access_empty_text">No installed apps have requested Do Not Disturb access</string>
+    <!-- Sound & notification > Do Not Disturb control > Text to display when the list is empty. [CHAR LIMIT=NONE] -->
+    <string name="zen_access_empty_text">No installed apps have requested Do Not Disturb control</string>
 
     <!-- Special App Access: Title for managing Modes access option. [CHAR LIMIT=40] -->
     <string name="manage_zen_modes_access_title">Modes access</string>
@@ -9603,7 +9631,7 @@
     <!-- Button title that grants 'Modes' permission to an app [CHAR_LIMIT=60]-->
     <string name="zen_modes_access_detail_switch">Allow Modes access</string>
 
-    <!-- Special App Access > Do Not Disturb access > Text to display when the list is empty. [CHAR LIMIT=NONE] -->
+    <!-- Special App Access > Do Not Disturb control > Text to display when the list is empty. [CHAR LIMIT=NONE] -->
     <string name="zen_modes_access_empty_text">No installed apps have requested Modes access</string>
 
     <!-- [CHAR LIMIT=NONE] Text appearing when app notifications are off -->
@@ -10481,16 +10509,16 @@
     <string name="apps_storage">Apps storage</string>
 
     <!-- Title of usage access screen [CHAR LIMIT=30] -->
-    <string name="usage_access">Usage access</string>
+    <string name="usage_access">App usage data</string>
 
     <!-- Label for setting which controls whether app has usage access [CHAR LIMIT=45] -->
-    <string name="permit_usage_access">Permit usage access</string>
+    <string name="permit_usage_access">Permit access to app usage data</string>
 
     <!-- Link title to show stats about how much time user spent in an app [CHAR LIMIT=45] -->
     <string name="time_spent_in_app_pref_title">Screen time</string>
 
     <!-- Description of the usage access setting [CHAR LIMIT=NONE] -->
-    <string name="usage_access_description">Usage access allows an app to track what other apps you\u2019re using and how often, as well as your carrier, language settings, and other details.</string>
+    <string name="usage_access_description">App usage data allows an app to track what other apps you\u2019re using and how often, as well as your carrier, language settings, and other details.</string>
 
     <!-- Title for screen showing recent memory usage of device [CHAR LIMIT=30]-->
     <string name="memory_settings_title">Memory</string>
@@ -10783,7 +10811,7 @@
     <string name="app_list_preference_none">None</string>
 
     <!-- Warning message about disabling usage access on profile owner [CHAR LIMIT=NONE] -->
-    <string name="work_profile_usage_access_warning">Turning off usage access for this app doesn\'t
+    <string name="work_profile_usage_access_warning">Turning off app usage data for this app doesn\'t
         prevent your admin from tracking data usage for apps in your work profile</string>
 
     <!-- System Alert Window settings -->
@@ -12739,7 +12767,7 @@
     <!-- Category title "Your mobile plan" [CHAR_LIMIT=NONE] -->
     <string name="category_title_your_satellite_plan">Your <xliff:g id="carrier_name" example="T-Mobile">%1$s</xliff:g> account</string>
     <!-- Title for category "Your mobile plan when satellite is included in plan" [CHAR_LIMIT=NONE] -->
-    <string name="title_have_satellite_plan">Messaging is included with your account</string>
+    <string name="title_have_satellite_plan">Satellite messaging is included with your account</string>
     <!-- Title for category "Your mobile plan when satellite is not included in plan" [CHAR_LIMIT=NONE] -->
     <string name="title_no_satellite_plan">Satellite messaging isn\u2019t included with your account</string>
     <!-- text view "Learn more" [CHAR_LIMIT=NONE] -->
@@ -12748,16 +12776,24 @@
     <string name="category_name_how_it_works">How it works</string>
     <!-- Title for satellite connection guide [CHAR_LIMIT=NONE] -->
     <string name="title_satellite_connection_guide">When you don\u2019t have a mobile network</string>
+    <!-- Title for satellite connection guide for NTN manual connection type. [CHAR_LIMIT=NONE] -->
+    <string name="title_satellite_connection_guide_for_manual_type">Text a phone number</string>
     <!-- Summary for satellite connection guide [CHAR_LIMIT=NONE] -->
     <string name="summary_satellite_connection_guide">Your phone will auto-connect to a satellite. For the best connection, keep a clear view of the sky.</string>
+    <!-- Summary for satellite connection guide for NTN manual connection type. [CHAR_LIMIT=NONE] -->
+    <string name="summary_satellite_connection_guide_for_manual_type">If you don\u2019t have a mobile network, you\u2019ll see an option to use satellite messaging.</string>
     <!-- Title for satellite supported service [CHAR_LIMIT=NONE] -->
     <string name="title_supported_service">After your phone connects to a satellite</string>
+    <!-- Title for satellite supported service for NTN manual connection type. [CHAR_LIMIT=NONE] -->
+    <string name="title_supported_service_for_manual_type">Follow steps to connect to the satellite</string>
     <!-- Summary for satellite supported service [CHAR_LIMIT=NONE] -->
     <string name="summary_supported_service">You can text anyone, including emergency services. Your phone will reconnect to a mobile network when available.</string>
+    <!-- Summary for satellite supported service for NTN manual connection type. [CHAR_LIMIT=NONE] -->
+    <string name="summary_supported_service_for_manual_type">After your phone is connected, you can text anyone, including emergency services.</string>
     <!-- learn more text - more about satellite messaging [CHAR_LIMIT=NONE] -->
-    <string name="satellite_setting_summary_more_information"><xliff:g id="subject" example="satellite messaging">%1$s</xliff:g> may take longer and is available only in some areas. Weather and certain structures may affect your satellite connection. Calling by satellite isn\u2019t available. Emergency calls may still connect.\n\nIt may take some time for account changes to show in Settings. Contact <xliff:g id="carrier_name" example="T-Mobile">%2$s</xliff:g> for details.</string>
+    <string name="satellite_setting_summary_more_information">A satellite connection may be slower and is available only in some areas. Weather and certain structures may affect the connection. Calling by satellite isn\u2019t available. Emergency calls may still connect.\n\nIt may take some time for account changes to show in Settings. Contact <xliff:g id="carrier_name" example="T-Mobile">%1$s</xliff:g> for details.</string>
     <!-- learn more text - more about satellite messaging without emergency messaging support. [CHAR_LIMIT=NONE] -->
-    <string name="satellite_setting_summary_more_information_no_emergency_messaging"><xliff:g id="subject" example="satellite messaging">%1$s</xliff:g> may take longer and is available only in some areas. Weather and certain structures may affect your satellite connection. Calling by satellite isn\u2019t available. Emergency calls may still connect. Texting with emergency services may not be available in all areas.\n\nIt may take some time for account changes to show in Settings. Contact <xliff:g id="carrier_name" example="T-Mobile">%2$s</xliff:g> for details.</string>
+    <string name="satellite_setting_summary_more_information_no_emergency_messaging">A satellite connection may be slower and is available only in some areas. Weather and certain structures may affect the connection. Calling by satellite isn\u2019t available. Emergency calls may still connect. Texting with emergency services may not be available in all areas.\n\nIt may take some time for account changes to show in Settings. Contact <xliff:g id="carrier_name" example="T-Mobile">%1$s</xliff:g> for details.</string>
     <!-- more about satellite messaging [CHAR_LIMIT=NONE] -->
     <string name="more_about_satellite_messaging">More about <xliff:g id="subject" example="satellite messaging">%1$s</xliff:g></string>
     <!-- Title for satellite warning dialog to avoid user using wifi/bluetooth/airplane mode [CHAR_LIMIT=NONE] -->
@@ -13229,36 +13265,36 @@
     <!-- Developer Settings: Search keywords for the Profile HWUI rendering. [CHAR_LIMIT=NONE] -->
     <string name="track_frame_time_keywords">GPU</string>
 
-    <!-- setting Checkbox title whether to boot with 16KB page size [CHAR_LIMIT=35] -->
-    <string name="enable_16k_pages">Boot with 16KB page size</string>
-    <!-- setting Checkbox summary whether to boot with 16K page size[CHAR_LIMIT=50] -->
-    <string name="enable_16k_pages_summary">Boot device using 16KB page size supported kernel</string>
-    <!-- Confirmation dialog title to ensure user wishes to enable 16K page size -->
-    <string name="confirm_enable_16k_pages_title">Switch from 4KB mode to 16KB mode</string>
-    <!-- Warning dialog message to confirm user wishes to enable 16KB page size -->
-    <string name="confirm_enable_16k_pages_text">You are in the page-agnostic mode running a 4KB kernel, and you are switching to the 16KB mode.
+    <!-- setting Checkbox title whether to boot with 16 KB page size [CHAR_LIMIT=35] -->
+    <string name="enable_16k_pages">Boot with 16 KB page size</string>
+    <!-- setting Checkbox summary whether to boot with 16 KB page size[CHAR_LIMIT=50] -->
+    <string name="enable_16k_pages_summary">Boot device using 16 KB page size supported kernel</string>
+    <!-- Confirmation dialog title to ensure user wishes to enable 16 KB page size -->
+    <string name="confirm_enable_16k_pages_title">Switch from 4 KB mode to 16 KB mode</string>
+    <!-- Warning dialog message to confirm user wishes to enable 16 KB page size -->
+    <string name="confirm_enable_16k_pages_text">You are in the page-agnostic mode running a 4 KB kernel, and you are switching to the 16 KB mode.
         Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk.
         This will reboot the device. Some features will be disabled in these modes, so some applications may not work.
-        To return the device to production mode, you would need to then, switch back to the 4KB mode and lock the bootloader,
+        To return the device to production mode, you would need to then, switch back to the 4 KB mode and lock the bootloader,
         which factory resets the device. After the device successfully boots into Android, disable OEM unlocking in Developer options.</string>
     <!-- dialog title to confirm user wishes to revert to 4k page size kernel -->
-    <string name="confirm_enable_4k_pages_title">Switch from 16KB mode to 4KB mode</string>
+    <string name="confirm_enable_4k_pages_title">Switch from 16 KB mode to 4 KB mode</string>
     <!-- dialog message to confirm user wishes to enable 4K page size -->
-    <string name="confirm_enable_4k_pages_text">You are in the page-agnostic mode running a 16KB kernel, and you are switching to the 4KB mode.
+    <string name="confirm_enable_4k_pages_text">You are in the page-agnostic mode running a 16 KB kernel, and you are switching to the 4 KB mode.
         Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk.
         This will reboot the device. Some features will be disabled in these modes, so some applications may not work. To return the device to production mode,
         you would need to then lock the bootloader, which factory resets the device. After the device successfully boots into Android, disable OEM unlocking in Developer options.</string>
     <!-- Toast message when 16k OTA update fails -->
-    <string name="toast_16k_update_failed_text">Failed to update kernel to 16KB pages compatible kernel.</string>
+    <string name="toast_16k_update_failed_text">Failed to update kernel to 16 KB pages compatible kernel.</string>
     <string name="progress_16k_ota_title">Applying change</string>
     <!-- Confirmation dialog title and text to reformat data to ext4 -->
-    <string name="confirm_format_ext4_title">Reformat device to ext4? (required for 16KB mode)</string>
-    <string name="confirm_format_ext4_text">This device’s data partition needs to be converted to ext4 before using the 16KB developer option.
+    <string name="confirm_format_ext4_title">Reformat device to ext4? (required for 16 KB mode)</string>
+    <string name="confirm_format_ext4_text">This device’s data partition needs to be converted to ext4 before using the 16 KB developer option.
         Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk.
-        Activating the 16KB option will require one more reboot after this. Once you are in this mode, you can switch back and forth between 4KB and 16KB mode with a single reboot.
-        Some features will be disabled in these modes, so some applications may not work. To return the device to production mode, you would need to switch back to 4KB mode and
+        Activating the 16 KB option will require one more reboot after this. Once you are in this mode, you can switch back and forth between 4 KB and 16 KB mode with a single reboot.
+        Some features will be disabled in these modes, so some applications may not work. To return the device to production mode, you would need to switch back to 4 KB mode and
         then lock the bootloader, which factory resets the device. After the device successfully boots into Android, disable OEM unlocking in Developer options.
-        The device will be wiped and the filesystem will be changed to ext4 after confirmation. After this completes, please come back to enable 16KB again.
+        The device will be wiped and the filesystem will be changed to ext4 after confirmation. After this completes, please come back to enable 16 KB again.
     </string>
     <!-- Text for confirmation buttion for ext4 -->
     <string name="confirm_ext4_button_text">Erase all data</string>
@@ -13266,22 +13302,22 @@
     <string name="format_ext4_failure_toast">Failed to reformat and wipe the data partition to ext4.</string>
     <!-- Dialog to OEM unlock the device before using 16K developer option -->
     <string name="confirm_oem_unlock_for_16k_title">Bootloader Unlock Required</string>
-    <string name="confirm_oem_unlock_for_16k_text">This device needs to have the bootloader unlocked before using the 16KB developer option.
+    <string name="confirm_oem_unlock_for_16k_text">This device needs to have the bootloader unlocked before using the 16 KB developer option.
         Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk.
-        All user data and settings will be wiped when activating 16KB mode. Once the bootloader is unlocked, activating the 16KB option will require two reboots.
-        Once you are in this mode, you can switch back and forth between 4KB and 16KB mode with a single reboot. Some features will be disabled in these modes,
-        so some applications may not work. To return the device to production mode, you would need to switch back to 4KB mode and then OEM/bootloader lock (which factory resets) the device.
+        All user data and settings will be wiped when activating 16 KB mode. Once the bootloader is unlocked, activating the 16 KB option will require two reboots.
+        Once you are in this mode, you can switch back and forth between 4 KB and 16 KB mode with a single reboot. Some features will be disabled in these modes,
+        so some applications may not work. To return the device to production mode, you would need to switch back to 4 KB mode and then OEM/bootloader lock (which factory resets) the device.
         Please unlock the bootloader and try again. You can see instructions for how to do this at
         &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;
     </string>
     <!-- persistent notification 4k page agnostic mode title -->
-    <string name="page_agnostic_4k_pages_title">Using 4KB page-agnostic mode</string>
+    <string name="page_agnostic_4k_pages_title">Using 4 KB page-agnostic mode</string>
     <!-- persistent notification 4k page agnostic mode text -->
-    <string name="page_agnostic_4k_pages_text_short">You are in the 4KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode,
+    <string name="page_agnostic_4k_pages_text_short">You are in the 4 KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode,
         and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work.
         In order to re-enter the production mode, you must lock the bootloader of the device. Tap to read more.</string>
     <!-- persistent notification 16k page agnostic mode title -->
-    <string name="page_agnostic_4k_pages_text">You are in the 4KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode,
+    <string name="page_agnostic_4k_pages_text">You are in the 4 KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode,
         and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work.
         In order to re-enter the production mode, you must lock the bootloader of the device. This would factory reset the device again and restore it to production settings.
         After the device successfully boots into Android, disable OEM unlocking in Developer options.
@@ -13290,20 +13326,20 @@
         or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt;
         and select \'Wipe Device\', \'Lock Bootloader\' and \'Force Flash all partitions\'.</string>
     <!-- persistent notification 16k page agnostic mode title -->
-    <string name="page_agnostic_16k_pages_title">Using 16KB page-agnostic mode</string>
+    <string name="page_agnostic_16k_pages_title">Using 16 KB page-agnostic mode</string>
     <!-- persistent notification 16k page agnostic mode text -->
-    <string name="page_agnostic_16k_pages_text_short">You are in the 16KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode,
+    <string name="page_agnostic_16k_pages_text_short">You are in the 16 KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode,
         and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work.
-        In order to re-enter the production mode, you must, switch back to 4KB mode and then lock the bootloader of the device. Tap to read more.</string>
-    <string name="page_agnostic_16k_pages_text">You are in the 16KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode,
+        In order to re-enter the production mode, you must, switch back to 4 KB mode and then lock the bootloader of the device. Tap to read more.</string>
+    <string name="page_agnostic_16k_pages_text">You are in the 16 KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode,
         and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work.
-        In order to re-enter the production mode, you must, switch back to 4KB mode and then lock the bootloader of the device. This would factory reset the device again and
+        In order to re-enter the production mode, you must, switch back to 4 KB mode and then lock the bootloader of the device. This would factory reset the device again and
         restore it to production settings. After the device successfully boots into Android, disable OEM unlocking in Developer options.
         If the device fails to boot into Android or is unstable, re-flash the device with the latest factory images from
         &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;
         or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt;
         and select \'Wipe Device\', \'Lock Bootloader\' and \'Force Flash all partitions\'.</string>
-    <string name="page_agnostic_notification_channel_name">16KB Page-agnostic Mode</string>
+    <string name="page_agnostic_notification_channel_name">16 KB Page-agnostic Mode</string>
     <string name="page_agnostic_notification_action">Read more</string>
 
     <string name= "enable_16k_app_compat_title">Run app with page size compat mode</string>

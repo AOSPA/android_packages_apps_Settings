@@ -33,7 +33,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 
-import com.android.internal.telephony.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.network.ims.VolteQueryImsState;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -233,15 +232,11 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
             }
             // assign current call state so that it helps to show correct preference state even
             // before first onCallStateChanged() by initial registration.
-            if (Flags.enforceTelephonyFeatureMappingForPublicApis()) {
-                try {
-                    mCallState = mTelephonyManager.getCallState(subId);
-                } catch (UnsupportedOperationException e) {
-                    // Device doesn't support FEATURE_TELEPHONY_CALLING
-                    mCallState = TelephonyManager.CALL_STATE_IDLE;
-                }
-            } else {
+            try {
                 mCallState = mTelephonyManager.getCallState(subId);
+            } catch (UnsupportedOperationException e) {
+                // Device doesn't support FEATURE_TELEPHONY_CALLING
+                mCallState = TelephonyManager.CALL_STATE_IDLE;
             }
             mTelephonyManager.registerTelephonyCallback(
                     mContext.getMainExecutor(), mTelephonyCallback);

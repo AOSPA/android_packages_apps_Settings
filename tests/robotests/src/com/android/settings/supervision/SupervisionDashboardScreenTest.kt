@@ -20,8 +20,11 @@ import android.content.Context
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
+import androidx.fragment.app.testing.FragmentScenario
+import androidx.preference.Preference
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settingslib.widget.MainSwitchPreference
 import com.google.common.truth.Truth.assertThat
 import org.junit.Rule
 import org.junit.Test
@@ -50,5 +53,23 @@ class SupervisionDashboardScreenTest {
     @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_SCREEN)
     fun flagDisabled() {
         assertThat(preferenceScreenCreator.isFlagEnabled(context)).isFalse()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_SCREEN)
+    fun toggleMainSwitch_disablesChildPreferences() {
+        FragmentScenario.launchInContainer(preferenceScreenCreator.fragmentClass()).onFragment {
+            fragment ->
+            val mainSwitchPreference =
+                fragment.findPreference<MainSwitchPreference>(SupervisionMainSwitchPreference.KEY)!!
+            val childPreference =
+                fragment.findPreference<Preference>(SupervisionPinManagementScreen.KEY)!!
+
+            assertThat(childPreference.isEnabled).isFalse()
+
+            mainSwitchPreference.performClick()
+
+            assertThat(childPreference.isEnabled).isTrue()
+        }
     }
 }

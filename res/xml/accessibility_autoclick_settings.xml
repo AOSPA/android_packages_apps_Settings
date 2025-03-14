@@ -30,6 +30,11 @@
         settings:searchable="false"
         settings:lottie_rawRes="@drawable/accessibility_dwell"/>
 
+    <com.android.settings.accessibility.ShortcutPreference
+        android:key="autoclick_shortcut_preference"
+        android:title="@string/accessibility_autoclick_shortcut_title"
+        android:persistent="false"/>
+
     <!-- Items in a list should not be searchable. -->
     <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="accessibility_control_autoclick_default"
@@ -81,7 +86,7 @@
         android:persistent="false"
         settings:searchable="false"
         android:title="@string/autoclick_cursor_area_size_title"
-        settings:controller="com.android.settings.accessibility.ToggleAutoclickCursorAreaSizeController" />
+        settings:controller="com.android.settings.accessibility.ToggleAutoclickCursorAreaSizeController"/>
 
     <SwitchPreferenceCompat
         android:key="accessibility_control_autoclick_ignore_minor_cursor_movement"

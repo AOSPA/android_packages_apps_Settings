@@ -62,8 +62,10 @@ import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.widget.IllustrationPreference;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
+import com.google.android.setupdesign.util.ThemeHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,9 +115,14 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
             @NonNull Bundle savedInstanceState) {
         mFeatureName = getString(R.string.accessibility_screen_magnification_title);
+        final boolean useExpressiveTheme = WizardManagerHelper.isAnySetupWizard(getIntent())
+                ? ThemeHelper.shouldApplyGlifExpressiveStyle(getPrefContext())
+                : SettingsThemeHelper.isExpressiveTheme(getPrefContext());
         mImageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
                 .authority(getPrefContext().getPackageName())
-                .appendPath(String.valueOf(R.raw.a11y_magnification_banner))
+                .appendPath(String.valueOf(useExpressiveTheme
+                        ? R.raw.accessibility_magnification_banner_expressive
+                        : R.raw.a11y_magnification_banner))
                 .build();
         mTouchExplorationStateChangeListener = isTouchExplorationEnabled -> {
             mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));

@@ -15,7 +15,7 @@
  */
 package com.android.settings.datetime;
 
-import static android.provider.DeviceConfig.NAMESPACE_SETTINGS_UI;
+import static android.provider.DeviceConfig.NAMESPACE_SYSTEM_TIME;
 
 import android.provider.DeviceConfig;
 
@@ -47,6 +47,6 @@ final class DateTimeLaunchUtils {
     private static boolean isFeedbackFeatureSupportedOnThisDevice() {
         boolean defaultIsSupported = false;
         return DeviceConfig.getBoolean(
-                NAMESPACE_SETTINGS_UI, KEY_HELP_AND_FEEDBACK_FEATURE_SUPPORTED, defaultIsSupported);
+                NAMESPACE_SYSTEM_TIME, KEY_HELP_AND_FEEDBACK_FEATURE_SUPPORTED, defaultIsSupported);
     }
 }

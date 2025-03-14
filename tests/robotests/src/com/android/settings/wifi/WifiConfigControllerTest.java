@@ -146,14 +146,6 @@ public class WifiConfigControllerTest {
     }
 
     @Test
-    public void isSubmittable_noSSID_shouldReturnFalse() {
-        final TextView ssid = mView.findViewById(R.id.ssid);
-        assertThat(ssid).isNotNull();
-        ssid.setText("");
-        assertThat(mController.isSubmittable()).isFalse();
-    }
-
-    @Test
     public void isSubmittable_longPsk_shouldReturnFalse() {
         final TextView password = mView.findViewById(R.id.password);
         assertThat(password).isNotNull();

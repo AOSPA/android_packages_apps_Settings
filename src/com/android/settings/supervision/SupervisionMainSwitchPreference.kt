@@ -17,17 +17,27 @@ package com.android.settings.supervision
 
 import android.app.supervision.SupervisionManager
 import android.content.Context
+import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
 import com.android.settingslib.metadata.MainSwitchPreference
+import com.android.settingslib.metadata.PreferenceLifecycleContext
+import com.android.settingslib.metadata.PreferenceLifecycleProvider
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
+import com.android.settingslib.preference.MainSwitchPreferenceBinding
+import com.android.settingslib.preference.forEachRecursively
 
 /** Main toggle to enable or disable device supervision. */
 class SupervisionMainSwitchPreference :
-    MainSwitchPreference(KEY, R.string.device_supervision_switch_title), PreferenceSummaryProvider {
+    MainSwitchPreference(KEY, R.string.device_supervision_switch_title),
+    PreferenceSummaryProvider,
+    MainSwitchPreferenceBinding,
+    Preference.OnPreferenceChangeListener,
+    PreferenceLifecycleProvider {
 
     // TODO(b/383568136): Make presence of summary conditional on whether PIN
     // has been set up before or not.
@@ -45,6 +55,43 @@ class SupervisionMainSwitchPreference :
     override val sensitivityLevel: Int
         get() = SensitivityLevel.HIGH_SENSITIVITY
 
+    override fun bind(preference: Preference, metadata: PreferenceMetadata) {
+        super.bind(preference, metadata)
+        preference.onPreferenceChangeListener = this
+    }
+
+    override fun onResume(context: PreferenceLifecycleContext) {
+        val currentValue = storage(context.applicationContext)?.getBoolean(key) ?: false
+
+        updateDependentPreferencesEnabledState(
+            context.findPreference<Preference>(KEY),
+            currentValue,
+        )
+    }
+
+    override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {
+        if (newValue !is Boolean) return true
+
+        updateDependentPreferencesEnabledState(preference, newValue)
+
+        return true
+    }
+
+    private fun updateDependentPreferencesEnabledState(
+        preference: Preference?,
+        isChecked: Boolean,
+    ) {
+        preference?.parent?.forEachRecursively {
+            if (
+                it.parent?.key?.toString() ==
+                    SupervisionDashboardScreen.SUPERVISION_DYNAMIC_GROUP_1 ||
+                    it.key?.toString() == SupervisionPinManagementScreen.KEY
+            ) {
+                it.isEnabled = isChecked
+            }
+        }
+    }
+
     @Suppress("UNCHECKED_CAST")
     private class SupervisionMainSwitchStorage(private val context: Context) :
         NoOpKeyedObservable<String>(), KeyValueStore {
@@ -59,7 +106,7 @@ class SupervisionMainSwitchPreference :
             // TODO(b/392694561): add PIN protection to main toggle.
             if (key == KEY && value is Boolean) {
                 val supervisionManager = context.getSystemService(SupervisionManager::class.java)
-                supervisionManager.setSupervisionEnabled(value)
+                supervisionManager?.setSupervisionEnabled(value)
             }
         }
     }

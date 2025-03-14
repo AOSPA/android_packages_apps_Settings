@@ -41,10 +41,6 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"待命"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"不明"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"預覽"</string>
-    <!-- no translation found for preview_pager_previous_button (607771113300838313) -->
-    <skip />
-    <!-- no translation found for preview_pager_next_button (8700907912508927271) -->
-    <skip />
     <string name="qr_code_content_description" msgid="1852208464419291347">"QR code"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"縮小"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"放大"</string>
@@ -101,6 +97,10 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"關於音訊輸出"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"將聲音轉送至助聽器或手機喇叭"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"相關工具"</string>
+    <!-- no translation found for bluetooth_try_nearby_share_title (4996427014054610877) -->
+    <skip />
+    <!-- no translation found for bluetooth_try_nearby_share_summary (329823028635487822) -->
+    <skip />
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"鈴聲和鬧鐘"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"通話期間的音訊"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"媒體和系統音效"</string>
@@ -231,12 +231,9 @@
     <string name="search_region_hint" msgid="1748708432568237552">"搜尋區域"</string>
     <string name="top_intro_region_title" msgid="2336323415395642117">"所選區域會影響手機顯示時間、日期和溫度等資訊的方式。"</string>
     <string name="more_language_settings_category" msgid="3669703092480725416">"更多語言設定"</string>
-    <!-- no translation found for title_change_system_locale_region (1977530992614685128) -->
-    <skip />
-    <!-- no translation found for body_change_system_locale_region (9064318449821043189) -->
-    <skip />
-    <!-- no translation found for top_intro_numbering_system_title (8234587334207926397) -->
-    <skip />
+    <string name="title_change_system_locale_region" msgid="1977530992614685128">"要將地區變更為<xliff:g id="SYSTEM_LANGUAGE_REGION">%1$s</xliff:g>嗎？"</string>
+    <string name="body_change_system_locale_region" msgid="9064318449821043189">"裝置將繼續使用<xliff:g id="SYSTEM_LANGUAGE">%1$s</xliff:g>做為系統語言"</string>
+    <string name="top_intro_numbering_system_title" msgid="8234587334207926397">"大部分應用程式都會採用你的地區偏好設定"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"地區偏好設定"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"設定單位和數字偏好設定"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"讓應用程式取得地區偏好設定，為你提供個人化體驗。"</string>
@@ -893,7 +890,8 @@
     <string name="lockpassword_credential_changed" msgid="5934778179732392028">"螢幕鎖定設定已變更，請使用新的螢幕鎖定設定再試一次。"</string>
     <string name="lockpattern_tutorial_cancel_label" msgid="775215267818384016">"取消"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="1329049481210689408">"下一步"</string>
-    <string name="manage_device_admin" msgid="1044620606203916275">"裝置管理員應用程式"</string>
+    <!-- no translation found for manage_device_admin (7272894919651600481) -->
+    <skip />
     <string name="number_of_device_admins_none" msgid="152926922020437312">"沒有使用中的應用程式"</string>
     <string name="number_of_device_admins" msgid="3402909995362162876">"{count,plural, =1{# 個使用中的應用程式}other{# 個使用中的應用程式}}"</string>
     <string name="manage_trust_agents" msgid="6410149930029992356">"信任的代理程式"</string>
@@ -1284,12 +1282,9 @@
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
     <string name="emergency_address_title" msgid="8102786488994263815">"緊急聯絡地址"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"當你透過 Wi‑Fi 網路撥打緊急電話時，系統會判定你位於這個地址"</string>
-    <!-- no translation found for private_dns_title (1180823690693258572) -->
-    <skip />
-    <!-- no translation found for private_dns_field_require (2318400923953435586) -->
-    <skip />
-    <!-- no translation found for private_dns_hostname_invalid (5085498734835552780) -->
-    <skip />
+    <string name="private_dns_title" msgid="1180823690693258572">"主機名稱"</string>
+    <string name="private_dns_field_require" msgid="2318400923953435586">"這是必填欄位"</string>
+    <string name="private_dns_hostname_invalid" msgid="5085498734835552780">"輸入的主機名稱無效"</string>
     <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"進一步瞭解"</annotation>"私人 DNS 功能"</string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"已開啟"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"啟用 Wi-Fi 通話功能"</string>
@@ -2057,7 +2052,13 @@
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"啟用滑鼠按鍵"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"使用鍵盤控制游標"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"反向捲動"</string>
-    <string name="mouse_reverse_vertical_scrolling_summary" msgid="4403637093982742165">"當你向下捲動時，內容會向上移動"</string>
+    <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"向上捲動即可將頁面向下移動"</string>
+    <!-- no translation found for mouse_scrolling_category_title (2992126595687187296) -->
+    <skip />
+    <!-- no translation found for mouse_scrolling_acceleration (7119758828203396430) -->
+    <skip />
+    <!-- no translation found for mouse_scrolling_speed (3999483025392860903) -->
+    <skip />
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"調換滑鼠主按鈕"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"將滑鼠左鍵做為右鍵使用"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"游標加速"</string>
@@ -2238,6 +2239,7 @@
     <string name="accessibility_feedback_title" msgid="6690472705407526006">"意見回饋"</string>
     <string name="accessibility_feedback_summary" msgid="4576591591334314827">"請填寫問卷調查，協助我們提升服務品質"</string>
     <string name="accessibility_feedback_disabled_summary" msgid="3652321859452620942">"沒有可用的問卷調查"</string>
+    <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"提供意見"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"下載的應用程式"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"實驗性"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"功能標記"</string>
@@ -2494,10 +2496,8 @@
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"繼續"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"助聽器"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"設定及管理 ASHA 和 LE Audio 助聽器、人工電子耳和其他擴音裝置"</string>
-    <!-- no translation found for accessibility_hearingaid_asha_only_intro (7402419984664822832) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_hap_only_intro (3332144138443825311) -->
-    <skip />
+    <string name="accessibility_hearingaid_asha_only_intro" msgid="7402419984664822832">"設定及管理 ASHA 助聽器、人工電子耳和其他擴音裝置"</string>
+    <string name="accessibility_hearingaid_hap_only_intro" msgid="3332144138443825311">"設定及管理 LE Audio 助聽器、人工電子耳和其他擴音裝置"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"未連接助聽器"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"新增助聽器"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"配對助聽器"</string>
@@ -2517,14 +2517,10 @@
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"關於助聽器"</string>
     <string name="accessibility_hearing_device_footer_summary" msgid="5513620078219951077">"如要查看 ASHA 或 LE Audio 不支援的其他助聽器，請依序輕觸「配對新裝置」&lt;b&gt;&lt;/b&gt;&gt;「查看更多裝置」&lt;b&gt;&lt;/b&gt;"</string>
     <string name="accessibility_hearing_device_footer_summary_tts" msgid="955527026890456959">"如要查看 ASHA 或 LE Audio 不支援的其他助聽器，請依序輕觸「配對新裝置」"<b></b>"和「查看更多裝置」"<b></b></string>
-    <!-- no translation found for accessibility_hearing_device_footer_asha_only_summary (3377169209330540616) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_footer_asha_only_summary_tts (8192971114504608531) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_footer_hap_only_summary (3531758698830915205) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_footer_hap_only_summary_tts (4440097982533045507) -->
-    <skip />
+    <string name="accessibility_hearing_device_footer_asha_only_summary" msgid="3377169209330540616">"如要查看 ASHA 不支援的其他助聽器，請依序輕觸「配對新裝置」&lt;b&gt;&lt;/b&gt;&gt;「查看更多裝置」&lt;b&gt;&lt;/b&gt;"</string>
+    <string name="accessibility_hearing_device_footer_asha_only_summary_tts" msgid="8192971114504608531">"如要查看 ASHA 不支援的其他助聽器，請依序輕觸「配對新裝置」"<b></b>"和「查看更多裝置」"<b></b></string>
+    <string name="accessibility_hearing_device_footer_hap_only_summary" msgid="3531758698830915205">"如要查看 LE Audio 不支援的其他助聽器，請依序輕觸「配對新裝置」&lt;b&gt;&lt;/b&gt;&gt;「查看更多裝置」&lt;b&gt;&lt;/b&gt;"</string>
+    <string name="accessibility_hearing_device_footer_hap_only_summary_tts" msgid="4440097982533045507">"如要查看 LE Audio 不支援的其他助聽器，請依序輕觸「配對新裝置」"<b></b>"和「查看更多裝置」"<b></b></string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"配對助聽器"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"你可以在這裡配對 ASHA 和 LE Audio 助聽器。請確認助聽器已開啟並可進行配對。"</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"可用的助聽器"</string>
@@ -2975,7 +2971,8 @@
     <string name="remove_device_admin" msgid="3143059558744287259">"停用這個裝置管理員應用程式"</string>
     <string name="uninstall_device_admin" msgid="4481095209503956916">"解除安裝應用程式"</string>
     <string name="remove_and_uninstall_device_admin" msgid="707912012681691559">"停用並解除安裝"</string>
-    <string name="select_device_admin_msg" msgid="5501360309040114486">"裝置管理員應用程式"</string>
+    <!-- no translation found for select_device_admin_msg (2506262585633022884) -->
+    <skip />
     <string name="no_device_admins" msgid="8888779888103079854">"沒有可用的裝置管理員應用程式"</string>
     <string name="no_trust_agents" msgid="8659098725864191600">"沒有信任的代理程式可供使用"</string>
     <string name="add_device_admin_msg" msgid="7730006568970042119">"要啟用裝置管理員應用程式嗎？"</string>
@@ -3866,7 +3863,8 @@
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"應用程式內提供更多設定"</string>
     <string name="notification_polite_title" msgid="6121016426991791557">"通知冷卻"</string>
     <string name="notification_polite_main_control_title" msgid="5812529809151927149">"使用通知冷卻"</string>
-    <string name="notification_polite_description" msgid="5497748284893832854">"如果短時間內收到多則通知，裝置就會降低音量並減少通知數量，持續時間最多 2 分鐘。來電、鬧鐘和重要對話則不受影響。\n\n如要在冷卻期間查看通知，請從螢幕頂端往下拉。"</string>
+    <!-- no translation found for notification_polite_description (6137533404978878957) -->
+    <skip />
     <string name="notification_polite_work" msgid="8823596456640216391">"套用至工作資料夾"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"套用到工作資料夾應用程式"</string>
     <string name="notification_bundle_title" msgid="460988459835922719">"組合式通知"</string>
@@ -4374,7 +4372,7 @@
     <string name="disconnected" msgid="3469373726996129247">"未連線"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"未連接"</string>
     <string name="apps_summary" msgid="4007416751775414252">"已安裝 <xliff:g id="COUNT">%1$d</xliff:g> 個應用程式"</string>
-    <string name="storage_summary" msgid="5903562203143572768">"已使用：<xliff:g id="PERCENTAGE">%1$s</xliff:g> - 可用空間：<xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
+    <string name="storage_summary" msgid="7631468664968572688">"已使用：<xliff:g id="PERCENTAGE">%1$s</xliff:g> - 可用空間：<xliff:g id="FREE_SPACE_VALUE">%2$s</xliff:g> <xliff:g id="FREE_SPACE_UNITS">%3$s</xliff:g>"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"深色主題、字型大小、亮度"</string>
     <string name="memory_summary" msgid="8221954450951651735">"平均記憶體用量為 <xliff:g id="USED_MEMORY">%1$s</xliff:g> (共 <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>)"</string>
     <string name="users_summary" msgid="8473589474976307510">"登入身分：<xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -4443,6 +4441,7 @@
     <string name="ethernet_data_usage" msgid="4552227880905679761">"乙太網路數據用量"</string>
     <string name="wifi" msgid="2932584495223243842">"Wi-Fi"</string>
     <string name="ethernet" msgid="4665162609974492983">"乙太網路"</string>
+    <string name="ethernet_interface_title" msgid="1634881244068292765">"乙太網路 <xliff:g id="INTERFACEID">%1$s</xliff:g>"</string>
     <string name="cell_data_template" msgid="6077963976103260821">"<xliff:g id="AMOUNT">^1</xliff:g> 行動數據"</string>
     <string name="wifi_data_template" msgid="935934798340307438">"<xliff:g id="AMOUNT">^1</xliff:g> Wi-Fi 數據"</string>
     <string name="ethernet_data_template" msgid="1429173767445201145">"<xliff:g id="AMOUNT">^1</xliff:g> 乙太網路數據"</string>
@@ -4994,8 +4993,7 @@
     <string name="satellite_setting_title" msgid="2543034229989047673">"衛星訊息"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"透過衛星收發訊息。你的帳戶支援這項功能。"</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"透過衛星收發訊息 (你的帳戶不支援這項功能)。"</string>
-    <!-- no translation found for satellite_setting_summary_without_entitlement (5284998840770992554) -->
-    <skip />
+    <string name="satellite_setting_summary_without_entitlement" msgid="5284998840770992554">"透過衛星收發訊息。詳情請與你的電信業者聯絡。"</string>
     <string name="keywords_satellite_setting" msgid="613553612424945946">"衛星訊息, 衛星連線"</string>
     <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"關於<xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="title_about_satellite_setting" msgid="3563087940535642558">"你可以在符合資格的「<xliff:g id="CARRIER_NAME">%1$s</xliff:g>」帳戶中透過衛星收發訊息"</string>
@@ -5009,8 +5007,7 @@
     <string name="title_supported_service" msgid="4275535165812691571">"手機連上衛星後"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"你可以傳送訊息給任何人，包括緊急救援服務。如果有可用的行動網路，手機就會重新連線。"</string>
     <string name="satellite_setting_summary_more_information" msgid="1028146147094166868">"<xliff:g id="SUBJECT">%1$s</xliff:g>可能需要比較長的時間才會送達，而且這項功能僅支援部分地區。天氣和特定結構可能會影響衛星連線的品質。系統不支援衛星電話，但你仍可撥打緊急電話。\n\n「設定」頁面可能要一段時間後才會顯示帳戶變動，詳情請洽「<xliff:g id="CARRIER_NAME">%2$s</xliff:g>」。"</string>
-    <!-- no translation found for satellite_setting_summary_more_information_no_emergency_messaging (8042240156141790447) -->
-    <skip />
+    <string name="satellite_setting_summary_more_information_no_emergency_messaging" msgid="8042240156141790447">"<xliff:g id="SUBJECT">%1$s</xliff:g>可能需要比較長的時間才會送達，而且這項功能僅支援部分地區。天氣和特定結構可能會影響衛星連線的品質。系統不支援衛星電話，但緊急電話可能仍會接通。在某些地區可能無法使用緊急救援服務傳送訊息。\n\n「設定」頁面可能要一段時間後才會顯示帳戶變動，詳情請洽「<xliff:g id="CARRIER_NAME">%2$s</xliff:g>」。"</string>
     <string name="more_about_satellite_messaging" msgid="1039277943532711584">"進一步瞭解<xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"無法開啟<xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"如要開啟<xliff:g id="FUNCTION">%1$s</xliff:g>，請先中斷衛星連線"</string>
@@ -5019,6 +5016,9 @@
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"衛星連線"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"衛星訊息"</string>
     <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"你的帳戶可透過衛星傳送資料"</string>
+    <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"手機支援的應用程式"</string>
+    <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"查看所有應用程式"</string>
+    <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"手機支援的應用程式"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"存取點名稱"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"無法在連線到「<xliff:g id="CARRIER">%1$s</xliff:g>」時使用"</string>
@@ -5186,27 +5186,44 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"你的工作政策資訊"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"由 IT 管理員管理的設定"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <string name="enable_16k_pages" msgid="8001470927566110689">"以 16KB 頁面大小啟動"</string>
-    <string name="enable_16k_pages_summary" msgid="1964363364670306912">"使用支援 16KB 頁面大小的核心啟動裝置"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="611010487387251491">"從 4KB 模式切換為 16KB 模式"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="6129208614283750541">"你正處於執行 4KB 核心的可變頁面模式，即將切換為 16KB 模式。此模式無法保證軟體完整性，且系統啟動載入程式解鎖時，手機上的資料可能面臨風險。這樣做會重新啟動裝置。在這類模式中，部分功能會停用，因此有些應用程式可能無法運作。如要讓裝置返回實際工作環境模式，必須切換回 4KB 模式並鎖定系統啟動載入程式，裝置就會恢復原廠設定。裝置成功啟動 Android 系統後，請在開發人員選項中停用 OEM 解鎖設定。"</string>
-    <string name="confirm_enable_4k_pages_title" msgid="3210360137887034659">"從 16KB 模式切換回 4KB 模式"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"你正處於執行 16KB 核心的可變頁面模式，即將切換為 4KB 模式。此模式無法保證軟體完整性，且系統啟動載入程式解鎖時，手機上的資料可能面臨風險。這樣做會重新啟動裝置。在這類模式中，部分功能會停用，因此有些應用程式可能無法運作。如要返回實際工作環境模式，必須鎖定系統啟動載入程式，裝置就會恢復原廠設定。裝置成功啟動 Android 系統後，請在開發人員選項中停用 OEM 解鎖設定。"</string>
-    <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"無法將核心更新為 16 KB 頁面相容核心。"</string>
+    <!-- no translation found for enable_16k_pages (1758111531461408337) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1937836453571509085) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (5477376227161609124) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (6211693250692246982) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3001009010581393119) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (3398001587586470689) -->
+    <skip />
+    <!-- no translation found for toast_16k_update_failed_text (7848383020572918850) -->
+    <skip />
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"正在套用變更"</string>
-    <string name="confirm_format_ext4_title" msgid="6696191800594435577">"要將裝置重新格式化為 ext4 嗎？(啟用 16KB 模式需執行這項操作)"</string>
-    <string name="confirm_format_ext4_text" msgid="7940372488624630214">"必須先將這部裝置的資料分區轉換為 ext4，才能使用 16KB 開發人員選項。此模式無法保證軟體完整性，且系統啟動載入程式解鎖時，手機上的資料可能面臨風險。在此之後還必須再重新啟動一次，才能啟用 16KB 選項。當你處於此模式時，可以在 4KB 和 16KB 模式之間來回切換，每次切換都要重新啟動一次。在這類模式中，部分功能會停用，因此有些應用程式可能無法運作。如要返回實際工作環境模式，必須切換回 4KB 模式並鎖定系統啟動載入程式，裝置就會恢復原廠設定。裝置成功啟動 Android 系統後，請在開發人員選項中停用 OEM 解鎖設定。裝置資料將會抹除，檔案系統會在確認後變更為 ext4。完成此步驟之後，請再次返回啟用 16KB。"</string>
+    <!-- no translation found for confirm_format_ext4_title (4754057414728537125) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (432847493298532536) -->
+    <skip />
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"清除所有資料"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"無法抹除資料分區並重新格式化為 ext4。"</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"必須解鎖系統啟動載入程式"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"必須先將這部裝置的系統啟動載入程式解鎖，才能使用 16KB 開發人員選項。此模式無法保證軟體完整性，且系統啟動載入程式解鎖時，手機上的資料可能面臨風險。啟用 16KB 模式時，所有使用者資料和設定都將抹除。系統啟動載入程式解鎖後，需要經過兩次重新啟動，才能啟用 16KB 選項。當你處於此模式時，可以在 4KB 和 16KB 模式之間來回切換，每次切換都要重新啟動一次。在這類模式中，部分功能會停用，因此有些應用程式可能無法運作。如要返回實際工作環境模式，必須切換回 4KB 模式，OEM/系統啟動載入程式就會鎖定裝置，裝置也將恢復原廠設定。請解鎖系統啟動載入程式，然後再試一次。操作方法如以下網址說明：&lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
-    <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"目前使用 4KB 可變頁面模式"</string>
-    <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"你目前處於可變頁面模式的 4KB 模式。此模式無法保證軟體完整性，且系統啟動載入程式解鎖時，手機上的資料可能面臨風險。在這類模式中，部分功能會停用，因此有些應用程式可能無法運作。如要再次進入實際工作環境模式，你必須鎖定裝置的系統啟動載入程式。輕觸即可閱讀更多內容。"</string>
-    <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"你目前處於可變頁面模式的 4KB 模式。此模式無法保證軟體完整性，且系統啟動載入程式解鎖時，手機上的資料可能面臨風險。在這類模式中，部分功能會停用，因此有些應用程式可能無法運作。如要再次進入實際工作環境模式，你必須鎖定裝置的系統啟動載入程式。這樣做會使裝置再次恢復原廠設定，並將裝置還原為實際工作環境設定。裝置成功啟動 Android 系統後，請在開發人員選項中停用 OEM 解鎖設定。如果裝置無法啟動 Android 或狀態不穩，可透過以下任一方式重新刷新裝置：使用最新原廠映像檔 (&lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;) 或 &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; 工具，依序選取「Wipe Device」、「Lock Bootloader」和「Force Flash all partitions」。"</string>
-    <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"目前使用 16KB 可變頁面模式"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"你目前處於可變頁面模式的 16KB 模式。此模式無法保證軟體完整性，且系統啟動載入程式解鎖時，手機上的資料可能會有風險。在這類模式中，部分功能會停用，因此有些應用程式可能無法運作。如要再次進入實際工作環境模式，必須切換回 4KB 模式，然後鎖定裝置的系統啟動載入程式。輕觸即可閱讀完整內容。"</string>
-    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"你目前處於可變頁面模式的 16KB 模式。此模式無法保證軟體完整性，且系統啟動載入程式解鎖時，手機上的資料可能會有風險。在這類模式中，部分功能會停用，因此有些應用程式可能無法運作。如要再次進入實際工作環境模式，必須切換回 4KB 模式，然後鎖定裝置的系統啟動載入程式。這樣做會使裝置再次恢復原廠設定，並還原為實際工作環境設定。裝置成功啟動 Android 系統後，請停用「開發人員選項」中的「OEM 解鎖」設定。如果裝置無法啟動 Android 或狀態不穩，可透過以下任一方式重新刷新裝置：使用最新原廠映像檔 (&lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;)，或前往 &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; 使用工具，依序選取「Wipe Device」、「Lock Bootloader」和「Force Flash all partitions」。"</string>
-    <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16KB 可變頁面模式"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (8089310116854544106) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (293797217034340398) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (731597455785555266) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (7572233914423063169) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (8940585327969638637) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (7613206944532151035) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2860363435021452169) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (2058933148654316447) -->
+    <skip />
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"閱讀完整內容"</string>
     <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"以頁面大小相容模式執行應用程式"</string>
     <string name="enable_16k_app_compat_details" msgid="3389401258168314266">"切換為 16 KB 裝置後，應用程式將以頁面大小相容模式執行。"</string>
@@ -5583,8 +5600,7 @@
     <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"關閉"</string>
     <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"連線至另一對相容耳機，或者與其他人分享音訊串流名稱和密碼"</string>
     <string name="audio_sharing_dialog_qr_code_content" msgid="2246980817848351361">"其他人掃描這個 QR code 就能聆聽你的音訊\n\n串流名稱：<xliff:g id="STREAM_NAME">%1$s</xliff:g>\n密碼：<xliff:g id="PASSWORD">%2$s</xliff:g>"</string>
-    <!-- no translation found for audio_sharing_dialog_qr_code_content_no_password (7824076083031650113) -->
-    <skip />
+    <string name="audio_sharing_dialog_qr_code_content_no_password" msgid="7824076083031650113">"其他人掃描這個 QR code 就能聆聽你的音訊\n\n串流名稱：<xliff:g id="STREAM_NAME">%1$s</xliff:g>"</string>
     <string name="audio_sharing_dialog_pair_new_device_content" msgid="6720472590211440206">"或與另一組相容耳機配對"</string>
     <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"配對另一組相容耳機，或者與其他人分享音訊串流 QR code"</string>
     <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"分享音訊"</string>
@@ -5613,12 +5629,10 @@
     <string name="audio_sharing_retry_dialog_content" msgid="6014534433894608834">"發生錯誤，請再試一次。"</string>
     <string name="audio_sharing_incompatible_dialog_title" msgid="4586805264392802115">"無法將音訊分享給「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」"</string>
     <string name="audio_sharing_incompatible_dialog_content" msgid="3943223683620405311">"只有支援 LE Audio 的耳機才能使用音訊分享功能"</string>
-    <!-- no translation found for audio_sharing_block_pairing_dialog_title (1756723860075818856) -->
-    <skip />
-    <!-- no translation found for audio_sharing_block_pairing_dialog_content (6352030314206654722) -->
-    <skip />
-    <!-- no translation found for audio_sharing_turn_off_button_label (1934956352475393641) -->
-    <skip />
+    <string name="audio_sharing_block_pairing_dialog_title" msgid="1756723860075818856">"關閉音訊分享"</string>
+    <string name="audio_sharing_block_pairing_dialog_content" msgid="6352030314206654722">"如要配對新裝置，請先關閉音訊分享功能。"</string>
+    <string name="audio_sharing_turn_off_button_label" msgid="1934956352475393641">"關閉"</string>
+    <string name="share_audio_notification_title" msgid="5201976754820387782">"與「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」分享音訊"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"連線至 LE 音訊串流"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"附近的音訊串流"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"音訊串流"</string>
@@ -5648,6 +5662,9 @@
     <string name="audio_streams_present_now" msgid="7519818719382756366">"串流已暫停"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"停止聆聽"</string>
     <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"連線至相容耳機"</string>
+    <string name="audio_streams_dialog_turn_off_talkback_title" msgid="6824585115302786690">"暫時關閉 TalkBack"</string>
+    <string name="audio_streams_dialog_turn_off_talkback_subtitle" msgid="2394295776096273919">"TalkBack 無法在聆聽音訊串流時使用。請先關閉 Talkback，再開始聆聽音訊。"</string>
+    <string name="audio_streams_dialog_turn_off_talkback_button" msgid="8049097689955037626">"關閉"</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"連線至裝置"</string>
     <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"音訊串流詳細資料"</string>
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"音訊串流 QR code"</string>

@@ -83,9 +83,11 @@ public class LocaleDialogFragmentTest {
         LocaleDialogFragment.LocaleDialogController.DialogContent dialogContent =
                 controller.getDialogContent();
 
-        assertEquals(R.string.button_label_confirmation_of_system_locale_change,
-                dialogContent.mPositiveButton);
-        assertEquals(R.string.cancel, dialogContent.mNegativeButton);
+        assertEquals(ResourcesUtils.getResourcesString(
+                        mContext, "button_label_confirmation_of_system_locale_change"),
+                mContext.getString(dialogContent.mPositiveButton));
+        assertEquals(ResourcesUtils.getResourcesString(mContext, "cancel"),
+                mContext.getString(dialogContent.mNegativeButton));
     }
 
     @Test
@@ -98,7 +100,8 @@ public class LocaleDialogFragmentTest {
         LocaleDialogFragment.LocaleDialogController.DialogContent dialogContent =
                 controller.getDialogContent();
 
-        assertEquals(R.string.okay, dialogContent.mPositiveButton);
+        assertEquals(ResourcesUtils.getResourcesString(mContext, "okay"),
+                mContext.getString(dialogContent.mPositiveButton));
         assertTrue(dialogContent.mNegativeButton == 0);
     }
 

@@ -104,14 +104,17 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        mShortcutPreference = new ShortcutPreference(getPrefContext(), /* attrs= */ null);
-        mShortcutPreference.setPersistent(false);
-        mShortcutPreference.setKey(getShortcutPreferenceKey());
+        mShortcutPreference =
+                getPreferenceScreen().findPreference(getShortcutPreferenceKey());
+        if (mShortcutPreference == null) {
+            mShortcutPreference = new ShortcutPreference(getPrefContext(), /* attrs= */ null);
+            mShortcutPreference.setPersistent(false);
+            mShortcutPreference.setKey(getShortcutPreferenceKey());
+            getPreferenceScreen().addPreference(mShortcutPreference);
+        }
+
         mShortcutPreference.setOnClickCallback(this);
         mShortcutPreference.setTitle(getShortcutTitle());
-
-        getPreferenceScreen().addPreference(mShortcutPreference);
-
         mTouchExplorationStateChangeListener = isTouchExplorationEnabled -> {
             mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
         };

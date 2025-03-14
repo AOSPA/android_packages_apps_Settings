@@ -20,11 +20,13 @@ import static com.android.settings.bluetooth.BluetoothDetailsHearingDeviceContro
 import static com.android.settings.bluetooth.BluetoothDetailsHearingDeviceController.ORDER_HEARING_DEVICE_INPUT_ROUTING;
 
 import android.content.Context;
+import android.media.AudioDeviceInfo;
 import android.media.AudioManager;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.collection.ArraySet;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
@@ -38,6 +40,7 @@ import com.android.settingslib.bluetooth.HearingAidAudioRoutingHelper;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.Arrays;
+import java.util.Set;
 
 /**
  * The controller of the hearing device input routing
@@ -66,15 +69,25 @@ public class BluetoothDetailsHearingDeviceInputRoutingController extends
 
     @Override
     public boolean isAvailable() {
-        boolean isSupportedProfile = mCachedDevice.getProfiles().stream().anyMatch(
+        final Set<CachedBluetoothDevice> memberDevices = mCachedDevice.getMemberDevice();
+        final AudioDeviceInfo[] inputInfos = mAudioManager.getDevices(
+                AudioManager.GET_DEVICES_INPUTS);
+        final Set<String> supportedInputDeviceAddresses = new ArraySet<>();
+        supportedInputDeviceAddresses.add(mCachedDevice.getAddress());
+        if (!memberDevices.isEmpty()) {
+            memberDevices.forEach(member -> supportedInputDeviceAddresses.add(member.getAddress()));
+        }
+
+        boolean isHapHearingDevice = mCachedDevice.getProfiles().stream().anyMatch(
                 profile -> profile instanceof HapClientProfile);
-        boolean isSupportedInputDevice = Arrays.stream(
-                mAudioManager.getDevices(AudioManager.GET_DEVICES_INPUTS)).anyMatch(
-                    info -> mCachedDevice.getAddress().equals(info.getAddress()));
-        if (isSupportedProfile && !isSupportedInputDevice) {
+        // Not support ASHA hearing device for input routing feature
+        boolean isValidInputDevice = Arrays.stream(inputInfos).anyMatch(
+                info -> supportedInputDeviceAddresses.contains(info.getAddress()));
+
+        if (isHapHearingDevice && !isValidInputDevice) {
             Log.d(TAG, "Not supported input type hearing device.");
         }
-        return isSupportedProfile && isSupportedInputDevice;
+        return isHapHearingDevice && isValidInputDevice;
     }
 
     @Override
@@ -121,6 +134,18 @@ public class BluetoothDetailsHearingDeviceInputRoutingController extends
         if (!status) {
             Log.d(TAG, "Fail to configure setPreferredInputDeviceForCalls");
         }
-        mCachedDevice.getDevice().setMicrophonePreferredForCalls(!useBuiltinMic);
+        setMicrophonePreferredForCallsForDeviceSet(mCachedDevice, !useBuiltinMic);
+    }
+
+    private void setMicrophonePreferredForCallsForDeviceSet(CachedBluetoothDevice device,
+            boolean enabled) {
+        if (device == null) {
+            return;
+        }
+        device.getDevice().setMicrophonePreferredForCalls(enabled);
+        final Set<CachedBluetoothDevice> memberDevices = device.getMemberDevice();
+        if (!memberDevices.isEmpty()) {
+            memberDevices.forEach(d -> d.getDevice().setMicrophonePreferredForCalls(enabled));
+        }
     }
 }

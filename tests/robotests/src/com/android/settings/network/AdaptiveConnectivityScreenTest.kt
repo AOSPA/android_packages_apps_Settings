@@ -16,13 +16,17 @@
 
 package com.android.settings.network
 
+import androidx.preference.SwitchPreferenceCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.flags.Flags
+import com.android.settings.network.AdaptiveConnectivitySettings.ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED
+import com.android.settings.network.AdaptiveConnectivitySettings.ADAPTIVE_CONNECTIVITY_WIFI_ENABLED
 import com.android.settingslib.preference.CatalystScreenTestCase
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 
+@Suppress("DEPRECATION")
 @RunWith(AndroidJUnit4::class)
 class AdaptiveConnectivityScreenTest : CatalystScreenTestCase() {
     override val preferenceScreenCreator = AdaptiveConnectivityScreen()
@@ -35,4 +39,23 @@ class AdaptiveConnectivityScreenTest : CatalystScreenTestCase() {
     fun key() {
         assertThat(preferenceScreenCreator.key).isEqualTo(AdaptiveConnectivityScreen.KEY)
     }
+
+    @Test
+    fun flagDefaultDisabled_noSwitchPreferenceCompatExists() {
+        // create fragment
+        val fragment: AdaptiveConnectivitySettings =
+            preferenceScreenCreator.fragmentClass().newInstance()
+        // check if switch preference exists
+        assertSwitchPreferenceCompatIsNull(ADAPTIVE_CONNECTIVITY_WIFI_ENABLED, fragment)
+        assertSwitchPreferenceCompatIsNull(ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED, fragment)
+    }
+
+    private fun assertSwitchPreferenceCompatIsNull(
+        key: String,
+        fragment: AdaptiveConnectivitySettings
+    ) {
+        val switchPreference = fragment.findPreference<SwitchPreferenceCompat>(key)
+        assertThat(switchPreference).isNull()
+    }
+
 }

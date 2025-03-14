@@ -16,7 +16,7 @@
 
 package com.android.settings.datetime;
 
-import static android.provider.DeviceConfig.NAMESPACE_SETTINGS_UI;
+import static android.provider.DeviceConfig.NAMESPACE_SYSTEM_TIME;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
@@ -93,7 +93,7 @@ public class TimeFeedbackPreferenceControllerTest {
     @Test
     @EnableFlags({Flags.FLAG_DATETIME_FEEDBACK})
     public void validIntentUri_targetHandlerNotFound_returnsConditionallyUnavailable() {
-        DeviceConfig.setProperty(NAMESPACE_SETTINGS_UI,
+        DeviceConfig.setProperty(NAMESPACE_SYSTEM_TIME,
                 DateTimeLaunchUtils.KEY_HELP_AND_FEEDBACK_FEATURE_SUPPORTED, "true", true);
         when(mMockPackageManager.resolveActivity(any(), anyInt())).thenReturn(null);
 
@@ -107,7 +107,7 @@ public class TimeFeedbackPreferenceControllerTest {
     @Test
     @EnableFlags({Flags.FLAG_DATETIME_FEEDBACK})
     public void validIntentUri_targetHandlerAvailable_returnsAvailable() {
-        DeviceConfig.setProperty(NAMESPACE_SETTINGS_UI,
+        DeviceConfig.setProperty(NAMESPACE_SYSTEM_TIME,
                 DateTimeLaunchUtils.KEY_HELP_AND_FEEDBACK_FEATURE_SUPPORTED, "true", true);
         when(mMockPackageManager.resolveActivity(any(), anyInt())).thenReturn(
                 createDummyResolveInfo());

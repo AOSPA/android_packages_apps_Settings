@@ -346,6 +346,9 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
     @Override
     public void onDismiss(DialogInterface dialogInterface) {
         mDialog2 = null;
+        if (mDialog != null && mDialog.shouldSubmitBeforeFinish()) {
+            onSubmit(mDialog);
+        }
         mDialog = null;
         finish();
     }

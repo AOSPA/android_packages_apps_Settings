@@ -18,6 +18,7 @@ package com.android.settings.biometrics.fingerprint;
 
 import static android.provider.Settings.Secure.FINGERPRINT_KEYGUARD_ENABLED;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.hardware.fingerprint.FingerprintManager;
 import android.provider.Settings;
@@ -51,6 +52,8 @@ public class FingerprintSettingsKeyguardUnlockPreferenceController
 
     @Override
     public boolean setChecked(boolean isChecked) {
+        mMetricsFeatureProvider.action(mContext,
+                SettingsEnums.ACTION_FINGERPRINT_ENABLED_ON_KEYGUARD, isChecked);
         return Settings.Secure.putIntForUser(mContext.getContentResolver(),
                 FINGERPRINT_KEYGUARD_ENABLED, isChecked ? ON : OFF, getUserId());
     }

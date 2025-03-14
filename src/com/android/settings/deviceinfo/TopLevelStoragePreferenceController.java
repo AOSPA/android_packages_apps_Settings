@@ -93,7 +93,7 @@ public class TopLevelStoragePreferenceController extends BasePreferenceControlle
     private String getSummary(long usedBytes, long totalBytes) {
         NumberFormat percentageFormat = NumberFormat.getPercentInstance();
         final String[] freeSpace =
-                Formatter.formatFileSize(mContext, totalBytes - usedBytes).split(" ");
+                Formatter.formatFileSize(mContext, totalBytes - usedBytes).split("\\s");
         return mContext.getString(R.string.storage_summary,
                 totalBytes == 0L ? "0" : percentageFormat.format(((double) usedBytes) / totalBytes),
                 freeSpace[0], freeSpace[1]);

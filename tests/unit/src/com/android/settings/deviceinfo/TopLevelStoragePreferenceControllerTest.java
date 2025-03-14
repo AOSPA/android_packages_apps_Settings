@@ -86,7 +86,7 @@ public class TopLevelStoragePreferenceControllerTest {
         when(mController.getStorageManagerVolumeProvider())
                 .thenReturn(mStorageManagerVolumeProvider);
         final String percentage = NumberFormat.getPercentInstance().format(1);
-        final String[] freeSpace = Formatter.formatFileSize(mContext, 0).split(" ");
+        final String[] freeSpace = Formatter.formatFileSize(mContext, 0).split("\\s");
         final Preference preference = new Preference(mContext);
 
         // Wait for asynchronous thread to finish, otherwise test will flake.

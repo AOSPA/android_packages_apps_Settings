@@ -55,7 +55,7 @@ public class ExternalDisplayUpdater {
     private final DisplayListener mListener =  new DisplayListener() {
         @Override
         public void update(int displayId) {
-            scheduleUpdate();
+            refreshPreference();
         }
     };
 
@@ -91,8 +91,6 @@ public class ExternalDisplayUpdater {
                     .launch();
             return true;
         });
-
-        scheduleUpdate();
     }
 
     /**
@@ -151,7 +149,10 @@ public class ExternalDisplayUpdater {
         return null;
     }
 
-    private void scheduleUpdate() {
+    /**
+     * Updates preference, possibly removing it entirely.
+     */
+    public void refreshPreference() {
         if (mInjector == null) {
             return;
         }

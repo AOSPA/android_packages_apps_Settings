@@ -24,6 +24,7 @@ import static com.google.common.truth.Truth.assertThat;
 import android.app.AlertDialog;
 import android.hardware.input.InputSettings;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.RadioGroup;
 
 import androidx.fragment.app.testing.FragmentScenario;
@@ -70,7 +71,8 @@ public class KeyboardAccessibilityBounceKeysDialogFragmentTest {
         RadioGroup radioGroup = mAlertDialog.findViewById(R.id.input_setting_keys_value_group);
         radioGroup.check(R.id.input_setting_keys_value_200);
 
-        mAlertDialog.getButton(AlertDialog.BUTTON_POSITIVE).performClick();
+        Button doneButton = mAlertDialog.findViewById(R.id.done_button);
+        doneButton.performClick();
         ShadowLooper.idleMainLooper();
 
         assertThat(mAlertDialog.isShowing()).isFalse();

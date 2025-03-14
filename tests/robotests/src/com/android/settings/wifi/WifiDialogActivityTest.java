@@ -349,4 +349,14 @@ public class WifiDialogActivityTest {
 
         verify(mActivity).dismissDialog();
     }
+
+    @Test
+    public void onDismiss_shouldSubmitBeforeFinish_callOnSubmit() {
+        mActivity.mDialog = mWifiDialog;
+        when(mWifiDialog.shouldSubmitBeforeFinish()).thenReturn(true);
+
+        mActivity.onDismiss(mWifiDialog);
+
+        verify(mActivity).onSubmit(mWifiDialog);
+    }
 }

@@ -259,7 +259,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                         mDailyChartIndex, mHourlyChartIndex));
         refreshUi();
         mHandler.post(
-                () -> mDailyChartView.announceForAccessibility(getAccessibilityAnnounceMessage()));
+                () -> mDailyChartView.setAccessibilityPaneTitle(getAccessibilityAnnounceMessage()));
         if (mOnSelectedIndexUpdatedListener != null) {
             mOnSelectedIndexUpdatedListener.onSelectedIndexUpdated();
         }
@@ -299,7 +299,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                     refreshUi();
                     mHandler.post(
                             () ->
-                                    mDailyChartView.announceForAccessibility(
+                                    mDailyChartView.setAccessibilityPaneTitle(
                                             getAccessibilityAnnounceMessage()));
                     mMetricsFeatureProvider.action(
                             mPrefContext,
@@ -326,7 +326,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                     refreshUi();
                     mHandler.post(
                             () ->
-                                    mHourlyChartView.announceForAccessibility(
+                                    mHourlyChartView.setAccessibilityPaneTitle(
                                             getAccessibilityAnnounceMessage()));
                     mMetricsFeatureProvider.action(
                             mPrefContext,

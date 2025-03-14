@@ -36,4 +36,29 @@
         android:key="global_pref"
         android:title="@string/notification_summarization_main_control_title"
         settings:controller="com.android.settings.notification.SummarizationGlobalPreferenceController" />
+
+    <PreferenceCategory
+        android:key="notification_summarization_excluded_apps_list"
+        android:title="@string/notification_excluded_apps"
+        settings:controller="com.android.settings.notification.AdjustmentExcludedAppsPreferenceController">
+        <com.android.settingslib.widget.TopIntroPreference
+            android:key="excluded_description"
+            android:title="@string/notification_summarization_excluded_description"/>
+
+        <!-- apps are added here -->
+
+        <Preference
+            android:key="notification_summarization_manage_apps"
+            android:order="1000"
+            android:icon="@drawable/ic_chevron_right_24dp"
+            android:title="@string/notification_summarization_manage_excluded_apps"
+            settings:controller="com.android.settings.notification.SummarizationManageAppsPreferenceController"
+            android:fragment="com.android.settings.applications.manageapplications.ManageApplications">
+            <extra
+                android:name="classname"
+                android:value="com.android.settings.Settings$NotificationExcludeSummarizationActivity"/>
+        </Preference>
+    </PreferenceCategory>
+
+
 </PreferenceScreen>

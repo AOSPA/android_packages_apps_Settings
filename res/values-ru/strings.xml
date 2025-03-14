@@ -41,10 +41,6 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Приостановлено"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Неизвестно"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Просмотр"</string>
-    <!-- no translation found for preview_pager_previous_button (607771113300838313) -->
-    <skip />
-    <!-- no translation found for preview_pager_next_button (8700907912508927271) -->
-    <skip />
     <string name="qr_code_content_description" msgid="1852208464419291347">"QR-код"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Уменьшить"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Увеличить"</string>
@@ -101,6 +97,10 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"О выводе звука"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Выводить звук на слуховой аппарат или динамик телефона"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Похожие"</string>
+    <!-- no translation found for bluetooth_try_nearby_share_title (4996427014054610877) -->
+    <skip />
+    <!-- no translation found for bluetooth_try_nearby_share_summary (329823028635487822) -->
+    <skip />
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Рингтон и будильники"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Звук во время звонков"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Медиа и системные звуки"</string>
@@ -231,12 +231,9 @@
     <string name="search_region_hint" msgid="1748708432568237552">"Поиск региона"</string>
     <string name="top_intro_region_title" msgid="2336323415395642117">"От вашего выбора зависит в том числе, как на телефоне будут отображаться время, дата и температура."</string>
     <string name="more_language_settings_category" msgid="3669703092480725416">"Другие языковые настройки"</string>
-    <!-- no translation found for title_change_system_locale_region (1977530992614685128) -->
-    <skip />
-    <!-- no translation found for body_change_system_locale_region (9064318449821043189) -->
-    <skip />
-    <!-- no translation found for top_intro_numbering_system_title (8234587334207926397) -->
-    <skip />
+    <string name="title_change_system_locale_region" msgid="1977530992614685128">"Новый регион – <xliff:g id="SYSTEM_LANGUAGE_REGION">%1$s</xliff:g>. Сохранить изменение?"</string>
+    <string name="body_change_system_locale_region" msgid="9064318449821043189">"<xliff:g id="SYSTEM_LANGUAGE">%1$s</xliff:g> останется языком системы."</string>
+    <string name="top_intro_numbering_system_title" msgid="8234587334207926397">"Большинство приложений будут использовать ваши региональные настройки"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Региональные настройки"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Укажите предпочтительные единицы измерения и форматы отображения чисел"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Приложения используют эти параметры для персонализации."</string>
@@ -893,7 +890,8 @@
     <string name="lockpassword_credential_changed" msgid="5934778179732392028">"Данные для разблокировки экрана были изменены. Попробуйте еще раз."</string>
     <string name="lockpattern_tutorial_cancel_label" msgid="775215267818384016">"Отмена"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="1329049481210689408">"Далее"</string>
-    <string name="manage_device_admin" msgid="1044620606203916275">"Приложения администратора устройства"</string>
+    <!-- no translation found for manage_device_admin (7272894919651600481) -->
+    <skip />
     <string name="number_of_device_admins_none" msgid="152926922020437312">"Нет активных приложений"</string>
     <string name="number_of_device_admins" msgid="3402909995362162876">"{count,plural, =1{# активное приложение}one{# активное приложение}few{# активных приложения}many{# активных приложений}other{# активного приложения}}"</string>
     <string name="manage_trust_agents" msgid="6410149930029992356">"Агенты доверия"</string>
@@ -1284,12 +1282,9 @@
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
     <string name="emergency_address_title" msgid="8102786488994263815">"Адрес на случай чрезвычайных ситуаций"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"Ваше местоположение при экстренном вызове по Wi‑Fi"</string>
-    <!-- no translation found for private_dns_title (1180823690693258572) -->
-    <skip />
-    <!-- no translation found for private_dns_field_require (2318400923953435586) -->
-    <skip />
-    <!-- no translation found for private_dns_hostname_invalid (5085498734835552780) -->
-    <skip />
+    <string name="private_dns_title" msgid="1180823690693258572">"Имя хоста"</string>
+    <string name="private_dns_field_require" msgid="2318400923953435586">"Это поле необходимо заполнить."</string>
+    <string name="private_dns_hostname_invalid" msgid="5085498734835552780">"Недействительное имя хоста."</string>
     <string name="private_dns_help_message" msgid="851221502063782306">"Подробнее "<annotation id="url">"о частном DNS-сервере"</annotation>"…"</string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"Включен"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"Активируйте звонки по Wi-Fi"</string>
@@ -1928,7 +1923,7 @@
     <string name="filter_apps_disabled" msgid="5068011814871004105">"Отключенные приложения"</string>
     <string name="filter_apps_third_party" msgid="9049447784849114843">"Сторонние"</string>
     <string name="filter_apps_running" msgid="535465683273284141">"Работающие"</string>
-    <string name="not_installed" msgid="5074606858798519449">"Не установлено"</string>
+    <string name="not_installed" msgid="5074606858798519449">"Не установлено для пользователя"</string>
     <string name="installed" msgid="2837449358488825884">"Установлено"</string>
     <string name="no_applications" msgid="985069304755391640">"Нет приложений."</string>
     <string name="internal_storage" msgid="999496851424448809">"Внутр. накопитель"</string>
@@ -2057,7 +2052,13 @@
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"Управлять указателем с помощью клавиш"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Управлять указателем с помощью клавиатуры"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Прокрутка в обратную сторону"</string>
-    <string name="mouse_reverse_vertical_scrolling_summary" msgid="4403637093982742165">"При прокручивании вниз контент перемещается вверх"</string>
+    <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Если прокрутить вверх, страница прокрутится вниз"</string>
+    <!-- no translation found for mouse_scrolling_category_title (2992126595687187296) -->
+    <skip />
+    <!-- no translation found for mouse_scrolling_acceleration (7119758828203396430) -->
+    <skip />
+    <!-- no translation found for mouse_scrolling_speed (3999483025392860903) -->
+    <skip />
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"Поменять местами левую и правую кнопки мыши"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Использовать левую кнопку мыши в качестве правой"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"Ускорение курсора"</string>
@@ -2238,6 +2239,7 @@
     <string name="accessibility_feedback_title" msgid="6690472705407526006">"Отзыв"</string>
     <string name="accessibility_feedback_summary" msgid="4576591591334314827">"Помогите нам стать лучше, пройдя опрос"</string>
     <string name="accessibility_feedback_disabled_summary" msgid="3652321859452620942">"Нет доступных опросов"</string>
+    <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Отправить отзыв"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Скачанные приложения"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Экспериментальные функции"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Экспериментальные функции"</string>
@@ -2494,10 +2496,8 @@
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Далее"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Слуховые аппараты"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Управляйте слуховыми аппаратами ASHA и LE Audio, кохлеарными имплантатами и другими устройствами усиления звука"</string>
-    <!-- no translation found for accessibility_hearingaid_asha_only_intro (7402419984664822832) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_hap_only_intro (3332144138443825311) -->
-    <skip />
+    <string name="accessibility_hearingaid_asha_only_intro" msgid="7402419984664822832">"Настройка слуховых аппаратов, совместимых с ASHA, кохлеарных имплантатов и других устройств для усиления звука."</string>
+    <string name="accessibility_hearingaid_hap_only_intro" msgid="3332144138443825311">"Настройка слуховых аппаратов, совместимых с LE Audio, кохлеарных имплантатов и других устройств для усиления звука."</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"Слуховые аппараты не подключены"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Добавить слуховой аппарат"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Подключите аппараты"</string>
@@ -2517,14 +2517,10 @@
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"О слуховых аппаратах"</string>
     <string name="accessibility_hearing_device_footer_summary" msgid="5513620078219951077">"Чтобы найти другие слуховые аппараты, которые не поддерживают протокол ASHA или технологию LE Audio, нажмите &lt;b&gt;Добавить устройство&lt;/b&gt; &gt; &lt;b&gt;Другие устройства&lt;/b&gt;."</string>
     <string name="accessibility_hearing_device_footer_summary_tts" msgid="955527026890456959">"Чтобы найти другие слуховые аппараты, которые не поддерживают протокол ASHA или технологию LE Audio, нажмите "<b>"Добавить устройство"</b>", а затем "<b>"Другие устройства"</b></string>
-    <!-- no translation found for accessibility_hearing_device_footer_asha_only_summary (3377169209330540616) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_footer_asha_only_summary_tts (8192971114504608531) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_footer_hap_only_summary (3531758698830915205) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_footer_hap_only_summary_tts (4440097982533045507) -->
-    <skip />
+    <string name="accessibility_hearing_device_footer_asha_only_summary" msgid="3377169209330540616">"Чтобы найти другие слуховые аппараты, которые не поддерживают ASHA, нажмите &lt;b&gt;Добавить устройство&lt;/b&gt; &gt; &lt;b&gt;Другие устройства&lt;/b&gt;."</string>
+    <string name="accessibility_hearing_device_footer_asha_only_summary_tts" msgid="8192971114504608531">"Чтобы найти другие слуховые аппараты, которые не поддерживают ASHA, нажмите "<b>"Добавить устройство"</b>", а затем "<b>"Другие устройства"</b></string>
+    <string name="accessibility_hearing_device_footer_hap_only_summary" msgid="3531758698830915205">"Чтобы найти другие слуховые аппараты, которые не поддерживают LE Audio, нажмите &lt;b&gt;Добавить устройство&lt;/b&gt; &gt; &lt;b&gt;Другие устройства&lt;/b&gt;."</string>
+    <string name="accessibility_hearing_device_footer_hap_only_summary_tts" msgid="4440097982533045507">"Чтобы найти другие слуховые аппараты, которые не поддерживают LE Audio, нажмите "<b>"Добавить устройство"</b>", а затем "<b>"Другие устройства"</b></string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Подключение аппарата"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"На этой странице вы можете подключить слуховые устройства ASHA и LE Audio. Убедитесь, что ваш слуховой аппарат работает и готов к подключению."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Доступные слуховые аппараты"</string>
@@ -2975,7 +2971,8 @@
     <string name="remove_device_admin" msgid="3143059558744287259">"Отключить это приложение администратора"</string>
     <string name="uninstall_device_admin" msgid="4481095209503956916">"Удалить приложение"</string>
     <string name="remove_and_uninstall_device_admin" msgid="707912012681691559">"Отключить и удалить"</string>
-    <string name="select_device_admin_msg" msgid="5501360309040114486">"Приложения администратора"</string>
+    <!-- no translation found for select_device_admin_msg (2506262585633022884) -->
+    <skip />
     <string name="no_device_admins" msgid="8888779888103079854">"Нет доступных приложений администратора устройства"</string>
     <string name="no_trust_agents" msgid="8659098725864191600">"Нет агентов доверия."</string>
     <string name="add_device_admin_msg" msgid="7730006568970042119">"Активировать приложение администратора?"</string>
@@ -3866,7 +3863,8 @@
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Дополнительные настройки доступны в приложении"</string>
     <string name="notification_polite_title" msgid="6121016426991791557">"Снижение громкости уведомлений"</string>
     <string name="notification_polite_main_control_title" msgid="5812529809151927149">"Использовать снижение громкости уведомлений"</string>
-    <string name="notification_polite_description" msgid="5497748284893832854">"Если вам будет поступать много уведомлений за короткое время, то устройство на две минуты понизит уровень громкости и сократит количество оповещений. Это не распространяется на звонки, будильники и важные разговоры. \n\nЧтобы увидеть уведомления, полученные в этом режиме, проведите пальцем вниз от верхнего края экрана."</string>
+    <!-- no translation found for notification_polite_description (6137533404978878957) -->
+    <skip />
     <string name="notification_polite_work" msgid="8823596456640216391">"Применить к рабочим профилям"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Применить для приложений в рабочем профиле"</string>
     <string name="notification_bundle_title" msgid="460988459835922719">"Сгруппированные уведомления"</string>
@@ -4374,7 +4372,7 @@
     <string name="disconnected" msgid="3469373726996129247">"Не подключено"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Не подключена"</string>
     <string name="apps_summary" msgid="4007416751775414252">"Установлено приложений: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
-    <string name="storage_summary" msgid="5903562203143572768">"Занято <xliff:g id="PERCENTAGE">%1$s</xliff:g> - Свободно <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
+    <string name="storage_summary" msgid="7631468664968572688">"Занято: <xliff:g id="PERCENTAGE">%1$s</xliff:g>. Свободно: <xliff:g id="FREE_SPACE_VALUE">%2$s</xliff:g> <xliff:g id="FREE_SPACE_UNITS">%3$s</xliff:g>."</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Тёмная тема, размер шрифта, яркость"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Используется в среднем <xliff:g id="USED_MEMORY">%1$s</xliff:g> из <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
     <string name="users_summary" msgid="8473589474976307510">"Вы вошли как <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -4443,6 +4441,7 @@
     <string name="ethernet_data_usage" msgid="4552227880905679761">"Передача данных Ethernet"</string>
     <string name="wifi" msgid="2932584495223243842">"Wi-Fi"</string>
     <string name="ethernet" msgid="4665162609974492983">"Ethernet"</string>
+    <string name="ethernet_interface_title" msgid="1634881244068292765">"Ethernet <xliff:g id="INTERFACEID">%1$s</xliff:g>"</string>
     <string name="cell_data_template" msgid="6077963976103260821">"<xliff:g id="AMOUNT">^1</xliff:g> мобильного трафика"</string>
     <string name="wifi_data_template" msgid="935934798340307438">"<xliff:g id="AMOUNT">^1</xliff:g> (Wi-Fi)"</string>
     <string name="ethernet_data_template" msgid="1429173767445201145">"<xliff:g id="AMOUNT">^1</xliff:g> (Ethernet)"</string>
@@ -5017,6 +5016,9 @@
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"Обмен данными со спутником"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"Спутниковый обмен сообщениями"</string>
     <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"В вашем аккаунте есть возможность передавать данные"</string>
+    <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Совместимые приложения на устройстве"</string>
+    <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"Показать все приложения"</string>
+    <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Совместимые приложения на устройстве"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Точки доступа"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"точка доступа"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Недоступны при подключении к <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5184,27 +5186,44 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Сведения о правилах организации"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Настройки, доступные системному администратору"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"Графический процессор"</string>
-    <string name="enable_16k_pages" msgid="8001470927566110689">"Загрузка с размером страницы 16 кБ"</string>
-    <string name="enable_16k_pages_summary" msgid="1964363364670306912">"Загрузка с ядром, совместимым с размером 16 кБ"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="611010487387251491">"Увеличение размера страницы памяти с 4 до 16 КБ"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="6129208614283750541">"Вы используете режим работы, который не зависит от страниц памяти, и ядро с размером страницы 4 КБ. Вы собираетесь увеличить размер до 16 КБ. После этого гарантировать целостность программного обеспечения будет невозможно. Любые данные, сохраненные на телефоне, пока загрузчик операционной системы разблокирован, могут быть под угрозой. Устройство будет перезагружено. Некоторые функции будут отключены, поэтому отдельные приложения могут не работать. Чтобы сбросить настройки и вернуть устройство в производственный режим, вновь уменьшите размер страницы памяти до 4 КБ и заблокируйте загрузчик операционной системы. После запуска Android отключите разблокировку загрузчика в разделе \"Для разработчиков\"."</string>
-    <string name="confirm_enable_4k_pages_title" msgid="3210360137887034659">"Уменьшение размера страницы памяти с 16 до 4 кБ"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"Вы используете режим работы, который не зависит от страниц памяти, и ядро с размером страницы 16 КБ. Вы собираетесь уменьшить размер до 4 КБ. После этого гарантировать целостность программного обеспечения будет невозможно. Любые данные, сохраненные на телефоне, пока загрузчик операционной системы разблокирован, могут быть под угрозой. Устройство будет перезагружено. Некоторые функции будут отключены, поэтому отдельные приложения могут не работать. Чтобы сбросить настройки и вернуть устройство в производственный режим, заблокируйте загрузчик операционной системы. После успешного запуска Android отключите разблокировку загрузчика в разделе \"Для разработчиков\"."</string>
-    <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Не удалось обеспечить совместимость ядра с размером страницы 16 КБ."</string>
+    <!-- no translation found for enable_16k_pages (1758111531461408337) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1937836453571509085) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (5477376227161609124) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (6211693250692246982) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3001009010581393119) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (3398001587586470689) -->
+    <skip />
+    <!-- no translation found for toast_16k_update_failed_text (7848383020572918850) -->
+    <skip />
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Применение изменения…"</string>
-    <string name="confirm_format_ext4_title" msgid="6696191800594435577">"Отформатировать в ext4? Обязательно при ядре 16 КБ"</string>
-    <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Прежде чем использовать параметр для разработчиков и менять размер страницы памяти на 16 КБ, преобразуйте раздел данных на этом устройстве в файловую систему ext4. После этого гарантировать целостность программного обеспечения будет невозможно. Любые данные, сохраненные на телефоне, пока загрузчик операционной системы разблокирован, могут быть под угрозой. При выполнении процедуры устройство нужно будет перезагрузить ещё раз. В этом режиме для переключения между размерами страницы памяти (4 КБ и 16 КБ) требуется одна перезагрузка. Некоторые функции будут отключены, поэтому отдельные приложения могут не работать. Чтобы сбросить настройки и вернуть устройство в производственный режим, вновь уменьшите размер страницы памяти до 4 КБ и заблокируйте загрузчик операционной системы. После успешного запуска Android отключите разблокировку загрузчика в разделе \"Для разработчиков\". При подтверждении данные с вашего устройства будут удалены, а файловая система будет изменена на ext4. Затем снова увеличьте размер страницы памяти до 16 КБ."</string>
+    <!-- no translation found for confirm_format_ext4_title (4754057414728537125) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (432847493298532536) -->
+    <skip />
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Удалить все данные"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Не удалось отформатировать раздел данных и сменить файловую систему на ext4."</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Необходимо разблокировать загрузчик операционной системы"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Прежде чем использовать параметр для разработчиков и менять размер страницы памяти на 16 кБ, разблокируйте загрузчик операционной системы на этом устройстве. После этого гарантировать целостность программного обеспечения будет невозможно. Любые данные, сохраненные на телефоне, пока загрузчик операционной системы разблокирован, могут быть под угрозой. При повышении размера до 16 кБ все пользовательские данные и настройки будут удалены. После разблокировки загрузчика операционной системы потребуется перезагрузить устройство два раза. В этом режиме для переключения между размерами страницы памяти (4 кБ и 16 кБ) требуется одна перезагрузка. Некоторые функции будут отключены, поэтому отдельные приложения могут не работать. Чтобы сбросить настройки и вернуть устройство в производственный режим, вновь уменьшите размер до 4 кБ и заблокируйте загрузчик операционной системы. Разблокируйте загрузчик и повторите попытку. Сведения о том, как это сделать, опубликованы на странице &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;."</string>
-    <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Режим, который не зависит от страниц, с ядром 4 KБ"</string>
-    <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Вы используете режим работы, который не зависит от страниц, с размером страницы 4 КБ. Гарантировать целостность программного обеспечения при этом невозможно. Любые данные, сохраненные на телефоне, пока загрузчик операционной системы разблокирован, могут быть под угрозой. Некоторые функции будут отключены, поэтому отдельные приложения могут не работать. Чтобы вернуться в производственный режим, заблокируйте загрузчик операционной системы. Нажмите, чтобы узнать подробности."</string>
-    <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Вы используете режим работы, который не зависит от страниц, с размером страницы 4 КБ. Гарантировать целостность программного обеспечения при этом невозможно. Любые данные, сохраненные на телефоне, пока загрузчик операционной системы разблокирован, могут быть под угрозой. Некоторые функции будут отключены, поэтому отдельные приложения могут не работать. Чтобы вернуться в производственный режим, заблокируйте загрузчик операционной системы. Настройки устройства при этом сбросятся. После успешного запуска Android отключите разблокировку загрузчика в разделе \"Для разработчиков\". Перепрошейте устройство, если оно работает нестабильно или Android на нем не запускается. Для этого используйте последние заводские образы с сайта &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; или &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&amp;gt. Затем нажмите \"Удалить данные с устройства\", \"Заблокировать загрузчик операционной системы\" и \"Принудительно прошить все разделы\"."</string>
-    <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Используется режим работы, который не зависит от страниц, с размером страницы 16 кБ."</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"Вы используете режим, независимый от размера страницы, с размером страницы 16 кБ. Гарантировать целостность программного обеспечения при этом невозможно. Пока разблокирован загрузчик операционной системы, любые данные, хранящиеся на телефоне, подвергаются риску. Некоторые функции будут отключены, поэтому отдельные приложения могут не работать. Чтобы вернуться в производственный режим, уменьшите размер страницы памяти до 4 кБ и заблокируйте загрузчик операционной системы. Нажмите, чтобы узнать подробности."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"Вы используете режим, независимый от размера страницы, с размером страницы 16 кБ. Гарантировать целостность программного обеспечения при этом невозможно. Пока разблокирован загрузчик операционной системы, любые данные, хранящиеся на телефоне, подвергаются риску. Некоторые функции будут отключены, поэтому отдельные приложения могут не работать. Чтобы вернуться в производственный режим, уменьшите размер страницы памяти до 4 кБ и заблокируйте загрузчик операционной системы. Настройки устройства при этом будут сброшены. После запуска Android отключите разблокировку загрузчика в разделе \"Для разработчиков\". Перепрошейте устройство, если оно работает нестабильно или Android на нем не запускается. Для этого используйте последние заводские образы с сайта &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; или &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt;. Затем нажмите \"Удалить данные с устройства\", \"Заблокировать загрузчик операционной системы\" и \"Принудительно прошить все разделы\"."</string>
-    <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Режим работы, который не зависит от страниц, с размером страницы 16 кБ."</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (8089310116854544106) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (293797217034340398) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (731597455785555266) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (7572233914423063169) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (8940585327969638637) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (7613206944532151035) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2860363435021452169) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (2058933148654316447) -->
+    <skip />
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Ещё"</string>
     <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"Запускать приложение в режиме совместимости с размером страницы"</string>
     <string name="enable_16k_app_compat_details" msgid="3389401258168314266">"Приложение будет запускаться в режиме совместимости на устройстве, где установлен размер страницы 16 КБ"</string>
@@ -5583,8 +5602,7 @@
     <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"Закрыть"</string>
     <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"Подключите ещё одну пару совместимых наушников или отправьте другому пользователю название и пароль вашего потока."</string>
     <string name="audio_sharing_dialog_qr_code_content" msgid="2246980817848351361">"Чтобы аудио на вашем устройстве могли слушать другие пользователи, попросите их отсканировать этот код.\n\nНазвание аудиопотока: <xliff:g id="STREAM_NAME">%1$s</xliff:g>.\nПароль: <xliff:g id="PASSWORD">%2$s</xliff:g>."</string>
-    <!-- no translation found for audio_sharing_dialog_qr_code_content_no_password (7824076083031650113) -->
-    <skip />
+    <string name="audio_sharing_dialog_qr_code_content_no_password" msgid="7824076083031650113">"Чтобы аудио на вашем устройстве могли слушать другие пользователи, попросите их отсканировать этот код.\n\nНазвание аудиопотока: <xliff:g id="STREAM_NAME">%1$s</xliff:g>."</string>
     <string name="audio_sharing_dialog_pair_new_device_content" msgid="6720472590211440206">"Вы также можете подключить другие совместимые наушники."</string>
     <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"Подключите ещё одну пару совместимых наушников или отправьте другому пользователю QR-код вашего потока."</string>
     <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"Включена передача аудио"</string>
@@ -5616,6 +5634,7 @@
     <string name="audio_sharing_block_pairing_dialog_title" msgid="1756723860075818856">"Отключение передачи аудио"</string>
     <string name="audio_sharing_block_pairing_dialog_content" msgid="6352030314206654722">"Чтобы связать новое устройство, отключите передачу аудио."</string>
     <string name="audio_sharing_turn_off_button_label" msgid="1934956352475393641">"Отключить"</string>
+    <string name="share_audio_notification_title" msgid="5201976754820387782">"Передавать аудио на устройство \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"?"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Подключение к потоку LE Audio"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Аудиопотоки рядом"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Аудиопотоки"</string>
@@ -5645,6 +5664,9 @@
     <string name="audio_streams_present_now" msgid="7519818719382756366">"Аудиопоток приостановлен"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Остановить прослушивание"</string>
     <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Подключение совместимых наушников"</string>
+    <string name="audio_streams_dialog_turn_off_talkback_title" msgid="6824585115302786690">"Временно отключите TalkBack"</string>
+    <string name="audio_streams_dialog_turn_off_talkback_subtitle" msgid="2394295776096273919">"Слушать аудиотрансляцию и одновременно использовать TalkBack невозможно. Чтобы начать прослушивание, отключите TalkBack."</string>
+    <string name="audio_streams_dialog_turn_off_talkback_button" msgid="8049097689955037626">"Отключить"</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Подключить устройство"</string>
     <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Информация об аудиопотоке"</string>
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"QR-код аудиопотока"</string>
