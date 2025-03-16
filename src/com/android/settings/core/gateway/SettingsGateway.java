@@ -16,12 +16,6 @@
 
 package com.android.settings.core.gateway;
 
-import co.aospa.settings.display.DcDimmingSettings;
-import co.aospa.settings.display.RefreshRateSettings;
-import co.aospa.settings.gestures.PowerButtonTorchSettings;
-import co.aospa.settings.sound.AdaptivePlaybackSoundSettings;
-import co.aospa.settings.gestures.VolumeButtonMusicControlGestureSettings;
-
 import com.android.settings.AllInOneTetherSettings;
 import com.android.settings.DisplaySettings;
 import com.android.settings.IccLockSettings;
@@ -351,11 +345,6 @@ public class SettingsGateway {
             MainClearConfirm.class.getName(),
             ResetDashboardFragment.class.getName(),
             NightDisplaySettings.class.getName(),
-            RefreshRateSettings.class.getName(),
-            DcDimmingSettings.class.getName(),
-            AdaptivePlaybackSoundSettings.class.getName(),
-            PowerButtonTorchSettings.class.getName(),
-            VolumeButtonMusicControlGestureSettings.class.getName(),
             ManageDomainUrls.class.getName(),
             AutomaticStorageManagerSettings.class.getName(),
             StorageDashboardFragment.class.getName(),
