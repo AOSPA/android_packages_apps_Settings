@@ -269,9 +269,6 @@ fun PrimarySimImpl(
     },
     actionSetMobileData: (Int) -> Unit = {
         coroutineScope.launch {
-            // Save user preferred subscription to settings database
-            val SETTING_USER_PREF_DATA_SUB: String = "user_preferred_data_sub"
-            Settings.Global.putInt(context.getContentResolver(), SETTING_USER_PREF_DATA_SUB, it)
             setDefaultData(
                 context,
                 subscriptionManager,
@@ -397,7 +394,10 @@ suspend fun setDefaultData(
     subscriptionManager: SubscriptionManager?,
     wifiPickerTrackerHelper: WifiPickerTrackerHelper?,
     subId: Int
-): Unit =
+): Unit {
+    // Save user preferred subscription to settings database
+    val SETTING_USER_PREF_DATA_SUB: String = "user_preferred_data_sub"
+    Settings.Global.putInt(context.getContentResolver(), SETTING_USER_PREF_DATA_SUB, subId)
     setMobileData(
         context,
         subscriptionManager,
@@ -405,6 +405,7 @@ suspend fun setDefaultData(
         subId,
         true
     )
+}
 
 suspend fun setMobileData(
     context: Context,
