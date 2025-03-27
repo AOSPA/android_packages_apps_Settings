@@ -22,10 +22,9 @@ import android.service.notification.Adjustment;
 
 import androidx.annotation.NonNull;
 
-import com.android.settings.widget.SettingsMainSwitchPreferenceController;
+import com.android.settings.core.TogglePreferenceController;
 
-public class BundleTypePreferenceController extends
-        SettingsMainSwitchPreferenceController {
+public class BundleTypePreferenceController extends TogglePreferenceController {
 
     static final String PROMO_KEY = "promotions";
     static final String NEWS_KEY = "news";

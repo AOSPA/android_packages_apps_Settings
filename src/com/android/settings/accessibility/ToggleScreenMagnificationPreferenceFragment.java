@@ -35,6 +35,7 @@ import android.os.Bundle;
 import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.view.InputDevice;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -92,6 +93,8 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     private TouchExplorationStateChangeListener mTouchExplorationStateChangeListener;
     @Nullable
     private DialogCreatable mMagnificationModeDialogDelegate;
+    @Nullable
+    private DialogCreatable mMagnificationCursorFollowingModeDialogDelegate;
 
     @Nullable
     MagnificationOneFingerPanningPreferenceController mOneFingerPanningPreferenceController;
@@ -101,6 +104,12 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     @VisibleForTesting
     public void setMagnificationModeDialogDelegate(@NonNull DialogCreatable delegate) {
         mMagnificationModeDialogDelegate = delegate;
+    }
+
+    @VisibleForTesting
+    public void setMagnificationCursorFollowingModeDialogDelegate(
+            @NonNull DialogCreatable delegate) {
+        mMagnificationCursorFollowingModeDialogDelegate = delegate;
     }
 
     @Override
@@ -185,6 +194,9 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             case DialogEnums.DIALOG_MAGNIFICATION_TRIPLE_TAP_WARNING:
                 return Preconditions.checkNotNull(mMagnificationModeDialogDelegate)
                         .onCreateDialog(dialogId);
+            case DialogEnums.DIALOG_MAGNIFICATION_CURSOR_FOLLOWING_MODE:
+                return Preconditions.checkNotNull(mMagnificationCursorFollowingModeDialogDelegate)
+                        .onCreateDialog(dialogId);
             case DialogEnums.GESTURE_NAVIGATION_TUTORIAL:
                 return AccessibilityShortcutsTutorial
                         .showAccessibilityGestureTutorialDialog(getPrefContext());
@@ -200,6 +212,11 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 PackageManager.FEATURE_WINDOW_MAGNIFICATION);
     }
 
+    private static boolean isMagnificationCursorFollowingModeDialogSupported() {
+        // TODO(b/398066000): Hide the setting when no pointer device exists for most form factors.
+        return com.android.settings.accessibility.Flags.enableMagnificationCursorFollowingDialog();
+    }
+
     @Override
     protected void initSettingsPreference() {
         final PreferenceCategory generalCategory = findPreference(KEY_GENERAL_CATEGORY);
@@ -212,6 +229,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             addJoystickSetting(generalCategory);
             // LINT.ThenChange(:search_data)
         }
+        addCursorFollowingSetting(generalCategory);
         addFeedbackSetting(generalCategory);
     }
 
@@ -231,9 +249,32 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
         if (!arguments.containsKey(AccessibilitySettings.EXTRA_HTML_DESCRIPTION)
                 && !Flags.enableMagnificationOneFingerPanningGesture()) {
-            String summary = MessageFormat.format(
-                    context.getString(R.string.accessibility_screen_magnification_summary),
-                    new Object[]{1, 2, 3, 4, 5});
+            String summary = "";
+            boolean hasTouchscreen = hasTouchscreen();
+            if (Flags.enableMagnificationKeyboardControl() && hasHardKeyboard()) {
+                // Include the keyboard summary when a keyboard is plugged in.
+                final String meta = context.getString(R.string.modifier_keys_meta);
+                final String alt = context.getString(R.string.modifier_keys_alt);
+                summary += MessageFormat.format(
+                        context.getString(
+                                R.string.accessibility_screen_magnification_keyboard_summary,
+                                meta, alt, meta, alt),
+                        new Object[]{1, 2, 3, 4});
+                if (hasTouchscreen) {
+                    // Add a newline before the touchscreen text.
+                    summary += "<br/><br/>";
+                }
+
+            }
+            if (hasTouchscreen || TextUtils.isEmpty(summary)) {
+                // Always show the touchscreen summary if there is no summary yet, even if the
+                // touchscreen is missing.
+                // If the keyboard summary is present and there is no touchscreen, then we can
+                // ignore the touchscreen summary.
+                summary += MessageFormat.format(
+                        context.getString(R.string.accessibility_screen_magnification_summary),
+                        new Object[]{1, 2, 3, 4, 5});
+            }
             arguments.putCharSequence(AccessibilitySettings.EXTRA_HTML_DESCRIPTION, summary);
         }
 
@@ -260,6 +301,31 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         getSettingsLifecycle().addObserver(magnificationModePreferenceController);
         magnificationModePreferenceController.displayPreference(getPreferenceScreen());
         addPreferenceController(magnificationModePreferenceController);
+    }
+
+    private static Preference createCursorFollowingPreference(Context context) {
+        final Preference pref = new Preference(context);
+        pref.setTitle(R.string.accessibility_magnification_cursor_following_title);
+        pref.setKey(MagnificationCursorFollowingModePreferenceController.PREF_KEY);
+        pref.setPersistent(false);
+        return pref;
+    }
+
+    private void addCursorFollowingSetting(PreferenceCategory generalCategory) {
+        if (!isMagnificationCursorFollowingModeDialogSupported()) {
+            return;
+        }
+
+        generalCategory.addPreference(createCursorFollowingPreference(getPrefContext()));
+
+        final MagnificationCursorFollowingModePreferenceController controller =
+                new MagnificationCursorFollowingModePreferenceController(
+                        getContext(),
+                        MagnificationCursorFollowingModePreferenceController.PREF_KEY);
+        controller.setDialogHelper(/* dialogHelper= */this);
+        mMagnificationCursorFollowingModeDialogDelegate = controller;
+        controller.displayPreference(getPreferenceScreen());
+        addPreferenceController(controller);
     }
 
     private static Preference createFollowTypingPreference(Context context) {
@@ -486,6 +552,9 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             case DialogEnums.DIALOG_MAGNIFICATION_TRIPLE_TAP_WARNING:
                 return Preconditions.checkNotNull(mMagnificationModeDialogDelegate)
                         .getDialogMetricsCategory(dialogId);
+            case DialogEnums.DIALOG_MAGNIFICATION_CURSOR_FOLLOWING_MODE:
+                return Preconditions.checkNotNull(mMagnificationCursorFollowingModeDialogDelegate)
+                        .getDialogMetricsCategory(dialogId);
             case DialogEnums.GESTURE_NAVIGATION_TUTORIAL:
                 return SettingsEnums.DIALOG_TOGGLE_SCREEN_MAGNIFICATION_GESTURE_NAVIGATION;
             case DialogEnums.ACCESSIBILITY_BUTTON_TUTORIAL:
@@ -610,6 +679,25 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 getPrefContext(), MAGNIFICATION_CONTROLLER_NAME);
     }
 
+    private boolean hasHardKeyboard() {
+        final int[] devices = InputDevice.getDeviceIds();
+        for (int i = 0; i < devices.length; i++) {
+            InputDevice device = InputDevice.getDevice(devices[i]);
+            if (device == null || device.isVirtual() || !device.isFullKeyboard()) {
+                continue;
+            }
+
+            return true;
+        }
+        return false;
+    }
+
+    private boolean hasTouchscreen() {
+        return getPackageManager()
+                .hasSystemFeature(PackageManager.FEATURE_TOUCHSCREEN)
+                || getPackageManager().hasSystemFeature(PackageManager.FEATURE_FAKETOUCH);
+    }
+
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 // LINT.IfChange(search_data)
@@ -624,6 +712,11 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                         return rawData;
                     }
 
+                    // Add all preferences to search raw data so that they are included in
+                    // indexing, which happens infrequently. Irrelevant preferences should be
+                    // hidden from the live returned search results by `getNonIndexableKeys`,
+                    // which is called every time a search occurs. This allows for dynamic search
+                    // entries that hide or show depending on current device state.
                     rawData.add(createShortcutPreferenceSearchData(context));
                     Stream.of(
                                     createMagnificationModePreference(context),
@@ -631,6 +724,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                                     createOneFingerPanningPreference(context),
                                     createAlwaysOnPreference(context),
                                     createJoystickPreference(context),
+                                    createCursorFollowingPreference(context),
                                     createFeedbackPreference(context)
                             )
                             .forEach(pref ->
@@ -669,6 +763,10 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                         if (!isJoystickSupported()) {
                             niks.add(MagnificationJoystickPreferenceController.PREF_KEY);
                         }
+                    }
+
+                    if (!isMagnificationCursorFollowingModeDialogSupported()) {
+                        niks.add(MagnificationCursorFollowingModePreferenceController.PREF_KEY);
                     }
 
                     if (!Flags.enableLowVisionHats()) {

@@ -28,6 +28,7 @@ import android.view.MenuItem;
 import android.window.OnBackInvokedCallback;
 
 import androidx.core.view.ViewCompat;
+import androidx.fragment.app.FragmentManager;
 
 import com.android.internal.app.LocalePickerWithRegion;
 import com.android.internal.app.LocaleStore;
@@ -49,10 +50,15 @@ public class LocalePickerWithRegionActivity extends SettingsBaseActivity
     private static final String TAG = LocalePickerWithRegionActivity.class.getSimpleName();
     private static final String PARENT_FRAGMENT_NAME = "localeListEditor";
     private static final String CHILD_FRAGMENT_NAME = "LocalePickerWithRegion";
-    private static final int DIALOG_CHANGE_LOCALE_REGION = 1;
+    private static final int DIALOG_CHANGE_SYSTEM_LOCALE_REGION = 1;
+    private static final int DIALOG_CHANGE_PREFERRED_LOCALE_REGION = 2;
     private static final String ARG_DIALOG_TYPE = "arg_dialog_type";
     private static final String ARG_TARGET_LOCALE = "arg_target_locale";
+    private static final String ARG_REPLACED_TARGET_LOCALE = "arg_replaced_target_locale";
     private static final String TAG_DIALOG_CHANGE_REGION = "dialog_change_region";
+    private static final int DISPOSE = -1;
+    private static final int SHOW_DIALOG_FOR_SYSTEM_LANGUAGE = 0;
+    private static final int SHOW_DIALOG_FOR_PREFERRED_LANGUAGE = 1;
 
     private LocalePickerWithRegion mSelector;
 
@@ -111,19 +117,65 @@ public class LocalePickerWithRegionActivity extends SettingsBaseActivity
     @Override
     public void onLocaleSelected(LocaleStore.LocaleInfo locale) {
         if (Flags.regionalPreferencesApiEnabled()) {
-            if (sameLanguageAndScript(locale.getLocale(), LocaleList.getDefault().get(0))) {
-                Bundle args = new Bundle();
-                args.putInt(ARG_DIALOG_TYPE, DIALOG_CHANGE_LOCALE_REGION);
-                args.putSerializable(ARG_TARGET_LOCALE, locale);
-                RegionDialogFragment regionDialogFragment = RegionDialogFragment.newInstance();
-                regionDialogFragment.setArguments(args);
-                regionDialogFragment.show(getSupportFragmentManager(), TAG_DIALOG_CHANGE_REGION);
-            } else {
-                dispose(locale);
+            int index = indexOfSameLanguageAndScript(locale.getLocale());
+            switch(getDialogEvent(index)) {
+                case SHOW_DIALOG_FOR_SYSTEM_LANGUAGE:
+                    showDialogForSystemLanguage(locale, getSupportFragmentManager());
+                    break;
+                case SHOW_DIALOG_FOR_PREFERRED_LANGUAGE:
+                    Locale replacedLocale = LocaleList.getDefault().get(index);
+                    showDialogForPreferredLanguage(
+                            locale, replacedLocale, getSupportFragmentManager());
+                    break;
+                default:
+                    dispose(locale);
             }
         } else {
             dispose(locale);
         }
+    }
+
+    private static void showDialogForSystemLanguage(
+            LocaleStore.LocaleInfo locale, FragmentManager fragmentManager) {
+        Bundle args = new Bundle();
+        args.putInt(ARG_DIALOG_TYPE, DIALOG_CHANGE_SYSTEM_LOCALE_REGION);
+        args.putSerializable(ARG_TARGET_LOCALE, locale);
+        RegionDialogFragment regionDialogFragment = RegionDialogFragment.newInstance();
+        regionDialogFragment.setArguments(args);
+        regionDialogFragment.show(fragmentManager, TAG_DIALOG_CHANGE_REGION);
+    }
+
+    private static void showDialogForPreferredLanguage(
+            LocaleStore.LocaleInfo locale, Locale replacedLocale, FragmentManager fragmentManager) {
+        Bundle args = new Bundle();
+        args.putInt(ARG_DIALOG_TYPE, DIALOG_CHANGE_PREFERRED_LOCALE_REGION);
+        args.putSerializable(ARG_TARGET_LOCALE, locale);
+        args.putSerializable(ARG_REPLACED_TARGET_LOCALE, replacedLocale);
+        RegionDialogFragment regionDialogFragment = RegionDialogFragment.newInstance();
+        regionDialogFragment.setArguments(args);
+        regionDialogFragment.show(fragmentManager, TAG_DIALOG_CHANGE_REGION);
+    }
+
+    private static int getDialogEvent(int index) {
+        if (index == -1) {
+            return DISPOSE;
+        }
+
+        return index == 0
+            ? SHOW_DIALOG_FOR_SYSTEM_LANGUAGE
+            : SHOW_DIALOG_FOR_PREFERRED_LANGUAGE;
+    }
+
+    private static int indexOfSameLanguageAndScript(Locale source) {
+        int index = -1;
+        LocaleList localeList = LocaleList.getDefault();
+        for (int i = 0; i < localeList.size(); i++) {
+            Locale target = localeList.get(i);
+            if (sameLanguageAndScript(source, target)) {
+                index = i;
+            }
+        }
+        return index;
     }
 
     private static boolean sameLanguageAndScript(Locale source, Locale target) {

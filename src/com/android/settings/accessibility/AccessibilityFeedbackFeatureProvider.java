@@ -15,8 +15,6 @@
  */
 package com.android.settings.accessibility;
 
-import android.content.ComponentName;
-
 import androidx.annotation.Nullable;
 
 /**
@@ -25,11 +23,11 @@ import androidx.annotation.Nullable;
 public interface AccessibilityFeedbackFeatureProvider {
 
     /**
-     * Returns value according to the {@code componentName}.
+     * Returns value according to the {@code pageId}.
      *
-     * @param componentName the component name of the downloaded service or activity
-     * @return Feedback bucket ID
+     * @param pageId The unique identifier of the page.
+     * @return Feedback bucket ID associated with the page, or {@code null} if is not found.
      */
     @Nullable
-    String getCategory(@Nullable ComponentName componentName);
+    String getCategory(int pageId);
 }

@@ -34,9 +34,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
-import android.platform.test.annotations.RequiresFlagsEnabled;
-import android.platform.test.flag.junit.CheckFlagsRule;
-import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.util.Pair;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
@@ -45,10 +42,8 @@ import com.android.settings.testutils.shadow.ShadowAudioManager;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowCachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.flags.Flags;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -68,9 +63,6 @@ public class ConnectedBluetoothDeviceUpdaterTest {
 
     private static final String MAC_ADDRESS = "04:52:C7:0B:D8:3C";
     private static final String TEST_EXCLUSIVE_MANAGER = "com.test.manager";
-
-    @Rule
-    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     @Mock
     private DashboardFragment mDashboardFragment;
@@ -365,7 +357,6 @@ public class ConnectedBluetoothDeviceUpdaterTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_HIDE_EXCLUSIVELY_MANAGED_BLUETOOTH_DEVICE)
     public void update_notExclusiveManagedDevice_addDevice() {
         setUpDeviceUpdaterWithAudioMode(AudioManager.MODE_NORMAL);
         when(mBluetoothDeviceUpdater
@@ -380,7 +371,6 @@ public class ConnectedBluetoothDeviceUpdaterTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_HIDE_EXCLUSIVELY_MANAGED_BLUETOOTH_DEVICE)
     public void update_exclusivelyManagedDevice_packageNotInstalled_addDevice()
             throws Exception {
         setUpDeviceUpdaterWithAudioMode(AudioManager.MODE_NORMAL);
@@ -398,7 +388,6 @@ public class ConnectedBluetoothDeviceUpdaterTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_HIDE_EXCLUSIVELY_MANAGED_BLUETOOTH_DEVICE)
     public void update_exclusivelyManagedDevice_packageNotEnabled_addDevice()
             throws Exception {
         ApplicationInfo appInfo = new ApplicationInfo();
@@ -417,7 +406,6 @@ public class ConnectedBluetoothDeviceUpdaterTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_HIDE_EXCLUSIVELY_MANAGED_BLUETOOTH_DEVICE)
     public void update_exclusivelyManagedDevice_packageInstalledAndEnabled_removePreference()
             throws Exception {
         setUpDeviceUpdaterWithAudioMode(AudioManager.MODE_NORMAL);

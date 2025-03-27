@@ -43,6 +43,7 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.VerifyCredentialResponse;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
+import com.android.settings.biometrics.face.FaceEnroll;
 import com.android.settings.biometrics.fingerprint.FingerprintEnroll;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollFindSensor;
 import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollFindSensor;
@@ -282,9 +283,7 @@ public class BiometricUtils {
      */
     public static Intent getFaceIntroIntent(@NonNull Context context,
             @NonNull Intent activityIntent) {
-        final Intent intent = new Intent(context,
-                FeatureFactory.getFeatureFactory().getFaceFeatureProvider()
-                        .getEnrollActivityClassProvider().getNext());
+        final Intent intent = new Intent(context, FaceEnroll.class);
         WizardManagerHelper.copyWizardManagerExtras(activityIntent, intent);
         return intent;
     }

@@ -19,6 +19,7 @@ package com.android.settings.widget
 import android.content.Context
 import androidx.preference.Preference
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.getPreferenceTitle
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.FooterPreference
 import com.android.settingslib.widget.preference.footer.R

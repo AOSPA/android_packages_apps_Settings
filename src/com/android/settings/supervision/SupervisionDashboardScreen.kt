@@ -58,7 +58,7 @@ class SupervisionDashboardScreen : PreferenceScreenCreator {
         preferenceHierarchy(context, this) {
             +SupervisionMainSwitchPreference()
             +TitlelessPreferenceGroup(SUPERVISION_DYNAMIC_GROUP_1) += {
-                // Empty category for dynamic injection targeting.
+                +SupervisionWebContentFiltersScreen.KEY
             }
             +SupervisionPinManagementScreen.KEY
         }

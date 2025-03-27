@@ -32,10 +32,6 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-import android.platform.test.annotations.RequiresFlagsDisabled;
-import android.platform.test.annotations.RequiresFlagsEnabled;
-import android.platform.test.flag.junit.CheckFlagsRule;
-import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.util.Pair;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
@@ -44,10 +40,8 @@ import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
-import com.android.settingslib.flags.Flags;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -66,9 +60,6 @@ public class SavedBluetoothDeviceUpdaterTest {
 
     private static final String MAC_ADDRESS = "04:52:C7:0B:D8:3C";
     private static final String TEST_EXCLUSIVE_MANAGER = "com.test.manager";
-
-    @Rule
-    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     @Mock
     private DashboardFragment mDashboardFragment;
@@ -119,29 +110,6 @@ public class SavedBluetoothDeviceUpdaterTest {
         mCachedDevices.add(mCachedBluetoothDevice);
         when(mBluetoothManager.getCachedDeviceManager()).thenReturn(mDeviceManager);
         when(mDeviceManager.getCachedDevicesCopy()).thenReturn(mCachedDevices);
-    }
-
-    @Test
-    @RequiresFlagsDisabled(Flags.FLAG_ENABLE_HIDE_EXCLUSIVELY_MANAGED_BLUETOOTH_DEVICE)
-    public void update_filterMatch_addPreference() {
-        doReturn(BluetoothDevice.BOND_BONDED).when(mBluetoothDevice).getBondState();
-        doReturn(false).when(mBluetoothDevice).isConnected();
-
-        mBluetoothDeviceUpdater.update(mCachedBluetoothDevice);
-
-        verify(mBluetoothDeviceUpdater).addPreference(mCachedBluetoothDevice,
-                BluetoothDevicePreference.SortType.TYPE_NO_SORT);
-    }
-
-    @Test
-    @RequiresFlagsDisabled(Flags.FLAG_ENABLE_HIDE_EXCLUSIVELY_MANAGED_BLUETOOTH_DEVICE)
-    public void update_filterNotMatch_removePreference() {
-        doReturn(BluetoothDevice.BOND_NONE).when(mBluetoothDevice).getBondState();
-        doReturn(true).when(mBluetoothDevice).isConnected();
-
-        mBluetoothDeviceUpdater.update(mCachedBluetoothDevice);
-
-        verify(mBluetoothDeviceUpdater).removePreference(mCachedBluetoothDevice);
     }
 
     @Test
@@ -317,7 +285,6 @@ public class SavedBluetoothDeviceUpdaterTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_HIDE_EXCLUSIVELY_MANAGED_BLUETOOTH_DEVICE)
     public void update_notExclusivelyManagedDevice_addDevice() {
         final Collection<CachedBluetoothDevice> cachedDevices = new ArrayList<>();
         cachedDevices.add(mCachedBluetoothDevice);
@@ -337,7 +304,6 @@ public class SavedBluetoothDeviceUpdaterTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_HIDE_EXCLUSIVELY_MANAGED_BLUETOOTH_DEVICE)
     public void update_existingExclusivelyManagedDevice_packageEnabled_removePreference()
             throws Exception {
         final Collection<CachedBluetoothDevice> cachedDevices = new ArrayList<>();
@@ -360,7 +326,6 @@ public class SavedBluetoothDeviceUpdaterTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_HIDE_EXCLUSIVELY_MANAGED_BLUETOOTH_DEVICE)
     public void update_newExclusivelyManagedDevice_packageEnabled_doNotAddPreference()
             throws Exception {
         final Collection<CachedBluetoothDevice> cachedDevices = new ArrayList<>();
@@ -383,7 +348,6 @@ public class SavedBluetoothDeviceUpdaterTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_HIDE_EXCLUSIVELY_MANAGED_BLUETOOTH_DEVICE)
     public void update_exclusivelyManagedDevice_packageNotInstalled_addDevice()
             throws Exception {
         final Collection<CachedBluetoothDevice> cachedDevices = new ArrayList<>();
@@ -405,7 +369,6 @@ public class SavedBluetoothDeviceUpdaterTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_HIDE_EXCLUSIVELY_MANAGED_BLUETOOTH_DEVICE)
     public void update_exclusivelyManagedDevice_packageNotEnabled_addDevice()
             throws Exception {
         final Collection<CachedBluetoothDevice> cachedDevices = new ArrayList<>();

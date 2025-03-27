@@ -31,6 +31,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.core.app.NotificationCompat;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -62,6 +63,7 @@ public class AppLocaleAllListPreferenceController extends
     private static final String KEY_PREFERENCE_CATEGORY_ADD_LANGUAGE_ALL_SUPPORTED =
             "system_language_all_supported_category";
 
+    private Activity mActivity;
     @SuppressWarnings("NullAway")
     private PreferenceCategory mPreferenceCategory;
     private Set<LocaleStore.LocaleInfo> mLocaleList;
@@ -84,12 +86,15 @@ public class AppLocaleAllListPreferenceController extends
     @SuppressWarnings("NullAway")
     public AppLocaleAllListPreferenceController(@NonNull Context context,
             @NonNull String preferenceKey, @Nullable String packageName,
-            boolean isNumberingSystemMode, @NonNull LocaleStore.LocaleInfo parentLocale) {
+            boolean isNumberingSystemMode, @NonNull LocaleStore.LocaleInfo parentLocale,
+            @NonNull Activity activity, @NonNull AppLocaleCollector appLocaleCollector) {
         super(context, preferenceKey);
         mPackageName = packageName;
         mIsNumberingSystemMode = isNumberingSystemMode;
         mParentLocale = parentLocale;
         mIsCountryMode = mParentLocale != null;
+        mActivity = activity;
+        mAppLocaleCollector = appLocaleCollector;
     }
 
     @Override
@@ -137,7 +142,8 @@ public class AppLocaleAllListPreferenceController extends
         setupSupportedPreference(newList, existingSupportedPreferences);
     }
 
-    private void setupSupportedPreference(List<LocaleStore.LocaleInfo> localeInfoList,
+    @VisibleForTesting
+    void setupSupportedPreference(List<LocaleStore.LocaleInfo> localeInfoList,
             Map<String, Preference> existingSupportedPreferences) {
         if (mIsNumberingSystemMode) {
             mPreferenceCategory.setTitle("");
@@ -163,6 +169,7 @@ public class AppLocaleAllListPreferenceController extends
             // TODO: b/388199937 - Switch to correct fragment.
             Log.d(TAG, "setupPreference: mIsCountryMode = " + mIsCountryMode);
             switchFragment(mContext, locale, shouldShowAppLanguage(locale));
+            mActivity.finish();
             return true;
         });
         mSupportedPreferences.put(locale.getId(), pref);
@@ -173,7 +180,8 @@ public class AppLocaleAllListPreferenceController extends
         return AVAILABLE;
     }
 
-    private void switchFragment(Context context, LocaleStore.LocaleInfo localeInfo,
+    @VisibleForTesting
+    void switchFragment(Context context, LocaleStore.LocaleInfo localeInfo,
             boolean shouldShowAppLanguage) {
         if (shouldShowAppLanguage) {
             LocaleUtils.onLocaleSelected(mContext, localeInfo, mPackageName);
@@ -190,10 +198,10 @@ public class AppLocaleAllListPreferenceController extends
                     .setArguments(extra)
                     .launch();
         }
-        ((Activity) mContext).finish();
     }
 
-    private boolean shouldShowAppLanguage(LocaleStore.LocaleInfo localeInfo) {
+    @VisibleForTesting
+    boolean shouldShowAppLanguage(LocaleStore.LocaleInfo localeInfo) {
         boolean isSystemLocale = localeInfo.isSystemLocale();
         boolean isRegionLocale = localeInfo.getParent() != null;
         boolean mayHaveDifferentNumberingSystem = localeInfo.hasNumberingSystems();

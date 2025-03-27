@@ -9,6 +9,13 @@ flag {
 }
 
 flag {
+    name: "catalyst_media_controls"
+    namespace: "android_settings"
+    description: "Flag for media page"
+    bug: "337243570"
+}
+
+flag {
     name: "catalyst_vibration_intensity_screen"
     namespace: "android_settings"
     description: "Flag for vibration and haptics page"

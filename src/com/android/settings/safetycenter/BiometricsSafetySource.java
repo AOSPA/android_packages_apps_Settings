@@ -35,6 +35,7 @@ import com.android.settings.biometrics.activeunlock.ActiveUnlockStatusUtils;
 import com.android.settings.biometrics.combination.CombinedBiometricStatusUtils;
 import com.android.settings.biometrics.face.FaceStatusUtils;
 import com.android.settings.biometrics.fingerprint.FingerprintStatusUtils;
+import com.android.settings.flags.Flags;
 import com.android.settingslib.RestrictedLockUtils;
 
 /** Combined Biometrics Safety Source for Safety Center. */
@@ -47,6 +48,10 @@ public final class BiometricsSafetySource {
     /** Sets biometric safety data for Safety Center. */
     public static void setSafetySourceData(Context context, SafetyEvent safetyEvent) {
         if (!SafetyCenterManagerWrapper.get().isEnabled(context)) {
+            return;
+        }
+        if (Flags.biometricsOnboardingEducation()) { // this source is effectively turned off
+            sendNullData(context, safetyEvent);
             return;
         }
 
@@ -63,9 +68,7 @@ public final class BiometricsSafetySource {
                 && userManager.isPrivateProfile()) {
             // SC always expects a response from the source if the broadcast has been sent for this
             // source, therefore, we need to send a null SafetySourceData.
-            SafetyCenterManagerWrapper.get()
-                    .setSafetySourceData(
-                            context, SAFETY_SOURCE_ID, /* safetySourceData= */ null, safetyEvent);
+            sendNullData(context, safetyEvent);
             return;
         }
 
@@ -174,6 +177,10 @@ public final class BiometricsSafetySource {
             return;
         }
 
+        sendNullData(context, safetyEvent);
+    }
+
+    private static void sendNullData(Context context, SafetyEvent safetyEvent) {
         SafetyCenterManagerWrapper.get()
                 .setSafetySourceData(
                         context, SAFETY_SOURCE_ID, /* safetySourceData= */ null, safetyEvent);

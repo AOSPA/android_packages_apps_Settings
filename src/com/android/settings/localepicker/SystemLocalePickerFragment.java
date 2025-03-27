@@ -69,6 +69,7 @@ public class SystemLocalePickerFragment extends DashboardFragment implements
 
     private static final String TAG = "SystemLocalePickerFragment";
     private static final String EXTRA_EXPAND_SEARCH_VIEW = "expand_search_view";
+    private static final String EXTRA_SEARCH_VIEW_QUERY = "search_view_query";
     private static final String KEY_PREFERENCE_SYSTEM_LOCALE_LIST = "system_locale_list";
     private static final String KEY_PREFERENCE_SYSTEM_LOCALE_SUGGESTED_LIST =
             "system_locale_suggested_list";
@@ -90,6 +91,7 @@ public class SystemLocalePickerFragment extends DashboardFragment implements
     private RecyclerView mRecyclerView;
     private Activity mActivity;
     private boolean mExpandSearch;
+    private CharSequence mPreviousSearch = null;
 
     @Override
     public void onCreate(@NonNull Bundle icicle) {
@@ -103,6 +105,7 @@ public class SystemLocalePickerFragment extends DashboardFragment implements
         mExpandSearch = mActivity.getIntent().getBooleanExtra(EXTRA_EXPAND_SEARCH_VIEW, false);
         if (icicle != null) {
             mExpandSearch = icicle.getBoolean(EXTRA_EXPAND_SEARCH_VIEW);
+            mPreviousSearch = icicle.getCharSequence(EXTRA_SEARCH_VIEW_QUERY);
         }
 
         SystemLocaleCollector systemLocaleCollector = new SystemLocaleCollector(getContext(), null);
@@ -135,6 +138,7 @@ public class SystemLocalePickerFragment extends DashboardFragment implements
         super.onSaveInstanceState(outState);
         if (mSearchView != null) {
             outState.putBoolean(EXTRA_EXPAND_SEARCH_VIEW, !mSearchView.isIconified());
+            outState.putCharSequence(EXTRA_SEARCH_VIEW_QUERY, mSearchView.getQuery());
         }
     }
 
@@ -152,6 +156,15 @@ public class SystemLocalePickerFragment extends DashboardFragment implements
             mSearchView.setMaxWidth(Integer.MAX_VALUE);
             if (mExpandSearch) {
                 searchMenuItem.expandActionView();
+            }
+            // Restore previous search status
+            if (!TextUtils.isEmpty(mPreviousSearch)) {
+                searchMenuItem.expandActionView();
+                mSearchView.setIconified(false);
+                mSearchView.setActivated(true);
+                mSearchView.setQuery(mPreviousSearch, true /* submit */);
+            } else {
+                mSearchView.setQuery(null, false /* submit */);
             }
         }
     }

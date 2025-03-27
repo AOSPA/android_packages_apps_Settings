@@ -69,6 +69,25 @@
         <item name="android:scrollbarStyle">outsideOverlay</item>
     </style>
 
+    <style name="Theme.Network" parent="@style/Theme.Material3.DynamicColors.DayNight">
+        <item name="textInputStyle">@style/Widget.Network.TextInputLayout</item>
+    </style>
+
+    <style name="Widget.Network.TextInputLayout"
+           parent="Widget.Material3.TextInputLayout.FilledBox"/>
+
+    <style name="Widget.Network.TextInputLayout.WifiConfig">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">@android:style/TextAppearance.Material.Medium</item>
+        <item name="android:textAlignment">viewStart</item>
+    </style>
+
+    <style name="Widget.Network.TextInputLayout.WifiConfig.EditText">
+        <item name="android:textAppearance">@android:style/TextAppearance.Material.Body1</item>
+        <item name="android:maxLength">500</item>
+    </style>
+
     <style name="wifi_item">
         <item name="android:layout_marginTop">8dip</item>
         <item name="android:layout_marginStart">8dip</item>
@@ -186,6 +205,10 @@
         <item name="android:textAlignment">viewStart</item>
         <item name="android:minHeight">@dimen/min_tap_target_size</item>
         <item name="android:textColorHint">?android:attr/textColorSecondary</item>
+    </style>
+
+    <style name="vpn_input_label" parent="vpn_label">
+        <item name="android:paddingBottom">8dp</item>
     </style>
 
     <style name="vpn_warning">

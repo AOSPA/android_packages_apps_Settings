@@ -16,7 +16,9 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.android.settings.SettingsActivity;
 import com.android.settingslib.bluetooth.BluetoothUtils;
@@ -31,6 +33,23 @@ public class AudioSharingJoinHandlerActivity extends SettingsActivity {
         if (!Flags.promoteAudioSharingForSecondAutoConnectedLeaDevice()
                 || !BluetoothUtils.isAudioSharingUIAvailable(this)) {
             finish();
+        }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (!Flags.promoteAudioSharingForSecondAutoConnectedLeaDevice()
+                || !BluetoothUtils.isAudioSharingUIAvailable(this)) {
+            finish();
+        }
+        if (intent != null) {
+            Log.d(TAG, "onNewIntent = " + intent);
+            getSupportFragmentManager().getFragments().stream().filter(
+                            frag -> frag instanceof AudioSharingJoinHandlerDashboardFragment)
+                    .findFirst().ifPresent(
+                            frag -> ((AudioSharingJoinHandlerDashboardFragment) frag)
+                                    .handleDeviceConnectedFromIntent(intent));
         }
     }
 

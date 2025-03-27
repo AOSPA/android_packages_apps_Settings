@@ -74,6 +74,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
@@ -370,7 +371,12 @@ public class AudioSharingReceiverTest {
         verify(mNm, never()).notify(
                 eq(com.android.settings.R.string.share_audio_notification_title),
                 any(Notification.class));
-        // TODO: verify show dialog once impl complete
+        ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        verify(mContext).startActivity(intentCaptor.capture());
+        assertThat(intentCaptor.getValue().getComponent().getClassName()).isEqualTo(
+                AudioSharingJoinHandlerActivity.class.getName());
+        assertThat(intentCaptor.getValue().getParcelableExtra(EXTRA_BLUETOOTH_DEVICE,
+                BluetoothDevice.class)).isEqualTo(mDevice);
     }
 
     @Test
@@ -513,7 +519,7 @@ public class AudioSharingReceiverTest {
         AudioSharingReceiver audioSharingReceiver = getAudioSharingReceiver(intent);
         audioSharingReceiver.onReceive(mContext, intent);
 
-        // TODO: verify no dialog once impl complete
+        verify(mContext, never()).startActivity(any());
         verify(mNm).notify(eq(com.android.settings.R.string.share_audio_notification_title),
                 any(Notification.class));
     }

@@ -31,8 +31,6 @@ import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
@@ -57,6 +55,11 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeature
     @Override
     public int getMetricsCategory() {
         return getArguments().getInt(AccessibilitySettings.EXTRA_METRICS_CATEGORY);
+    }
+
+    @Override
+    public int getFeedbackCategory() {
+        return getArguments().getInt(AccessibilitySettings.EXTRA_FEEDBACK_CATEGORY);
     }
 
     @Override
@@ -113,13 +116,6 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeature
     @Override
     ComponentName getTileComponentName() {
         return mTileComponentName;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // Do not call super. We don't want to see the "Help & feedback" option on this page so as
-        // not to confuse users who think they might be able to send feedback about a specific
-        // accessibility service from this page.
     }
 
     // IMPORTANT: Refresh the info since there are dynamically changing capabilities.

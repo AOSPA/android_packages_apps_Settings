@@ -379,7 +379,7 @@
     <!-- HTTP proxy settings. Button to clear the proxy box. -->
     <string name="proxy_clear_text">Clear</string>
     <!-- HTTP proxy settings. The port number label. -->
-    <string name="proxy_port_label">Proxy port</string>
+    <string name="proxy_port_label">Proxy port (optional)</string>
     <!-- HTTP proxy settings. The exclusion list label. -->
     <string name="proxy_exclusionlist_label">Bypass proxy for</string>
     <!-- HTTP proxy settings. The button to restore the defaults. -->
@@ -387,7 +387,7 @@
     <!-- HTTP proxy settings. The button to save. -->
     <string name="proxy_action_text">Done</string>
     <!-- HTTP proxy settings. The text field for the hostname -->
-    <string name="proxy_hostname_label">Proxy hostname</string>
+    <string name="proxy_hostname_label">Proxy hostname (optional)</string>
     <!-- HTTP proxy settings. Title if there is an error-->
     <string name="proxy_error">Attention</string>
     <!-- HTTP proxy settings. Button to get rid of error box-->
@@ -516,6 +516,9 @@
 
     <!-- The content of a confirmation dialog indicating the impact when the user change the system region. [CHAR LIMIT=NONE]-->
     <string name="desc_notice_device_region_change">Your device will keep %s as a system language</string>
+
+    <!-- The content of a confirmation dialog indicating the impact when the user change the region of the preferred languages. [CHAR LIMIT=NONE]-->
+    <string name="desc_notice_device_region_change_for_preferred_language">%1$s will replace %2$s in your preferred languages</string>
 
     <!-- Title for asking to change system locale or not. [CHAR LIMIT=50]-->
     <string name="title_change_system_locale">Change system language to %s ?</string>
@@ -1069,6 +1072,7 @@
     <!-- Watch unlock enrollment and settings --><skip />
     <!-- Title shown for menu item that launches watch unlock settings. [CHAR LIMIT=40] -->
     <string name ="security_settings_activeunlock_preference_title">Watch Unlock</string>
+    <string name="security_settings_activeunlock">Watch</string>
     <!-- Introduction shown in face and fingerprint page to introduce the biometric feature. [CHAR LIMIT=NONE]-->
     <string name="biometric_settings_intro_with_activeunlock">When you set up Face Unlock and Fingerprint Unlock, your phone will ask for your fingerprint when you wear a mask or are in a dark area.\n\nWatch Unlock is another convenient way to unlock your phone, for example, when your fingers are wet or face isn\u2019t recognized.</string>
     <!-- Introduction shown in fingerprint page to explain that watch unlock can be used if fingerprint isn't recognized. [CHAR LIMIT=NONE]-->
@@ -1753,6 +1757,11 @@
 
     <!-- Summary specifying that this is the current screen lock setting [CHAR LIMIT=45] -->
     <string name="current_screen_lock">Current screen lock</string>
+
+    <!-- Accessibility description of the PIN password view. [CHAR_LIMIT=none] -->
+    <string name="unlock_accessibility_pin_area">PIN area</string>
+    <!-- Accessibility description of the normal password view. [CHAR_LIMIT=none] -->
+    <string name="unlock_accessibility_password">Device password</string>
 
     <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
     <string name="fingerprint_unlock_set_unlock_pattern">Pattern \u2022 Fingerprint</string>
@@ -3077,9 +3086,8 @@
     <string name="screen_resolution_option_full">Max resolution</string>
     <!-- The footer message for switch screen resolution [CHAR LIMIT=NONE] -->
     <string name="screen_resolution_footer">Max resolution uses more of your battery. Switching your resolution may cause some apps to restart.</string>
-    <!-- Message announced to a11y users when they selected one resolution [CHAR LIMIT=NONE] -->
-    <string name="screen_resolution_selected_a11y">Selected</string>
-
+    <!-- Screen resolution a11y message announced to replace 'x' in entry e.g. 600 by 800 [CHAR LIMIT=NONE] -->
+    <string name="screen_resolution_delimiter_a11y"><xliff:g id="width">%1$s</xliff:g> by <xliff:g id="height">%2$s</xliff:g></string>
     <!-- Display settings screen, Color mode settings title [CHAR LIMIT=30] -->
     <string name="color_mode_title">Colors</string>
     <!-- Display settings screen, Color mode option for "natural(sRGB) color"  [CHAR LIMIT=45] -->
@@ -3253,11 +3261,6 @@
     </string>
     <!-- Dark UI screen footer action text linking to Modes settings. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_modes_footer_action">Modes settings</string>
-    <!-- Even Dimmer setting title. Allows device to reduce brightness even further than standard range. [CHAR LIMIT=NONE] -->
-    <string name="even_dimmer_display_title">Extra dim</string>
-    <!-- Even Dimmer setting summary. [CHAR LIMIT=NONE] -->
-    <string name="even_dimmer_display_summary">Allow device to go dimmer than usual</string>
-
 
     <!-- Sound & display settings screen, setting option name to change screen timeout -->
     <string name="screen_timeout">Screen timeout</string>
@@ -3452,11 +3455,11 @@
     <!-- About phone, title of EID -->
     <string name="status_eid">E&#x200B;ID</string>
     <!-- About phone, title of EID for multi-sim devices -->
-    <string name="eid_multi_sim">E&#x200B;ID (sim slot <xliff:g id="eid_slot_id">%1$d</xliff:g>)</string>
+    <string name="eid_multi_sim">E&#x200B;ID (SIM slot <xliff:g id="eid_slot_id">%1$d</xliff:g>)</string>
     <!-- About phone screen, title for IMEI for multi-sim devices -->
-    <string name="imei_multi_sim">IMEI (sim slot <xliff:g id="imei_slot_id">%1$d</xliff:g>)</string>
+    <string name="imei_multi_sim">IMEI (SIM slot <xliff:g id="imei_slot_id">%1$d</xliff:g>)</string>
     <!-- About phone screen, title for primary IMEI for multi-sim devices -->
-    <string name="imei_multi_sim_primary">IMEI (sim slot <xliff:g id="imei_slot_id_primary">%1$d</xliff:g>) (primary)</string>
+    <string name="imei_multi_sim_primary">IMEI (SIM slot <xliff:g id="imei_slot_id_primary">%1$d</xliff:g>) (primary)</string>
     <!-- About phone screen, summary of the MAC address [CHAR LIMIT=80] -->
     <string name="view_saved_network">To view, choose saved network</string>
     <!-- About phone, status item title. This translation is for specific language only. Like: fr-CA -->
@@ -3472,9 +3475,9 @@
     <!-- About phone, status item title.  The phone PRL Version of the current device.-->
     <string name="status_prl_version">PRL version</string>
     <!-- About phone screen, title for MEID for multi-sim devices -->
-    <string name="meid_multi_sim">MEID (sim slot <xliff:g id="meid_slot_id">%1$d</xliff:g>)</string>
+    <string name="meid_multi_sim">MEID (SIM slot <xliff:g id="meid_slot_id">%1$d</xliff:g>)</string>
     <!-- About phone screen, title for primary MEID for multi-sim devices -->
-    <string name="meid_multi_sim_primary">MEID (sim slot <xliff:g id="meid_slot_id_primary">%1$d</xliff:g>) (primary)</string>
+    <string name="meid_multi_sim_primary">MEID (SIM slot <xliff:g id="meid_slot_id_primary">%1$d</xliff:g>) (primary)</string>
     <!-- The status text when (Wi-Fi or Bluetooth) scanning is on. [CHAR LIMIT=100] -->
     <string name="scanning_status_text_on">On</string>
     <!-- The status text when (Wi-Fi or Bluetooth) scanning is off. [CHAR LIMIT=100] -->
@@ -3649,6 +3652,8 @@
     <string name="storage_wizard_init_v2_external_title">Format SD card for portable storage</string>
     <!-- Subtext for a line item. Below this subtext, a user can tap a button to select this option if they want to use their SD card as portable device storage. [CHAR LIMIT=NONE] -->
     <string name="storage_wizard_init_v2_external_summary">Store photos, videos, music, and more and access them from other devices. &lt;a href="https://support.google.com/android/answer/12153449"&gt;Learn more about setting up an SD card&lt;/a&gt;.</string>
+    <!-- Subtext for a line item. Below this subtext, a user can tap a button to select this option if they want to use their USB drive as portable device storage. [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_init_v2_external_summary_non_sd_card">Store photos, videos, music, and more and access them from other devices.</string>
     <!-- Button text. A user can tap this button if they want to use their SD card as portable device storage. [CHAR LIMIT=32] -->
     <string name="storage_wizard_init_v2_external_action">Format</string>
     <!-- Button text. A user can tap this button if they want to delay setting up their SD card until a later time. [CHAR LIMIT=32] -->
@@ -3662,7 +3667,7 @@
     <!-- Body of a dialog. This text is confirming that the user wants to use their SD card as portable storage, but the formatting process will erase existing content on the card. The first placeholder is for the name of the device (e.g. a brand name of the SD card or USB drive). The second and third placeholders are for the general references (e.g. SD card, USB drive). [CHAR LIMIT=NONE] -->
     <string name="storage_wizard_format_confirm_v2_body_external">This <xliff:g id="name" example="SanDisk SD card">^1</xliff:g> needs to be formatted to store photos, videos, music, and more.
         \n\nFormatting will erase existing content on the <xliff:g id="name" example="SD card">^2</xliff:g>. To avoid losing content, back it up to another <xliff:g id="name" example="SD card">^3</xliff:g> or device.</string>
-    <!-- Button text. If a user taps this button, their SD card or USB device will be formatted and used as extra phone storage. The placeholder is for the specific device (e.g. SD card, USB drive, etc.). [CHAR LIMIT=16] -->
+    <!-- Button or title text. If a user taps this button, their SD card or USB device will be formatted and used as extra phone storage. The placeholder is for the specific device (e.g. SD card, USB drive, etc.). [CHAR LIMIT=16] -->
     <string name="storage_wizard_format_confirm_v2_action">Format <xliff:g id="name" example="SD card">^1</xliff:g></string>
 
     <!-- Title of a full-screen message. This string is confirming that a user wants to move their content to the storage device. They can press a button at the bottom of the screen to move their content. The placeholder is for the specific device (e.g. SD card, USB drive, etc.). [CHAR LIMIT=32] -->
@@ -5309,6 +5314,16 @@
     <string name="accessibility_screen_magnification_title">Magnification</string>
     <!-- Title for accessibility shortcut preference for magnification. [CHAR LIMIT=60] -->
     <string name="accessibility_screen_magnification_shortcut_title">Magnification shortcut</string>
+    <!-- Title of cursor following mode preference for magnification. [CHAR LIMIT=60] -->
+    <string name="accessibility_magnification_cursor_following_title">Cursor following</string>
+    <!-- Header message of cursor following mode dialog for magnification. [CHAR LIMIT=none] -->
+    <string name="accessibility_magnification_cursor_following_header">Choose how Magnification follows your cursor.</string>
+    <!-- Option title of cursor following continuous mode in the mode selection dialog. [CHAR LIMIT=none] -->
+    <string name="accessibility_magnification_cursor_following_continuous">Move screen continuously as mouse moves</string>
+    <!-- Option title of cursor following center mode in the mode selection dialog. [CHAR LIMIT=none] -->
+    <string name="accessibility_magnification_cursor_following_center">Move screen keeping mouse at center of screen</string>
+    <!-- Option title of cursor following edge mode in the mode selection dialog. [CHAR LIMIT=none] -->
+    <string name="accessibility_magnification_cursor_following_edge">Move screen when mouse touches edges of screen</string>
     <!-- Title for accessibility follow typing preference for magnification. [CHAR LIMIT=35] -->
     <string name="accessibility_screen_magnification_follow_typing_title">Magnify typing</string>
     <!-- Summary for accessibility follow typing preference for magnification. [CHAR LIMIT=none] -->
@@ -5430,6 +5445,16 @@
         {2,number,integer}. Touch & hold anywhere on the screen<br/>
         {3,number,integer}. Drag finger to move around screen<br/>
         {4,number,integer}. Lift finger to stop magnification
+        ]]>
+    </string>
+    <!-- Instructions on the accessibility preference screen teaching the user how to control magnification with a keyboard. [CHAR LIMIT=none] -->
+    <string name="accessibility_screen_magnification_keyboard_summary">
+        <![CDATA[
+        <b>To zoom with the keyboard:</b><br/>
+        {0,number,integer}. Use the shortcut to start magnification<br/>
+        {1,number,integer}. Hold down <xliff:g id="meta1">%1$s</xliff:g> and <xliff:g id="alt1">%2$s</xliff:g> and press + or - to zoom in or out<br/>
+        {2,number,integer}. Hold down <xliff:g id="meta2">%3$s</xliff:g> and <xliff:g id="alt2">%4$s</xliff:g> and press the arrow keys to move around the screen<br/>
+        {3,number,integer}. Use the shortcut to stop magnification
         ]]>
     </string>
     <!-- Instructions on the accessibility preference screen teaching the user how to interact with screen magnification when one finger panning feature is turned off. [CHAR LIMIT=none] -->
@@ -5643,8 +5668,8 @@
     <string name="accessibility_toggle_high_text_contrast_preference_summary">Change text color to black or white. Maximizes contrast with the background.</string>
     <!-- Title for the notification that high contrast text has been replaced. [CHAR LIMIT=NONE] -->
     <string name="accessibility_notification_high_contrast_text_title">Improve text contrast</string>
-    <!-- Text content for the notification that high contrast text has been replaced. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_notification_high_contrast_text_body"><xliff:g example="Outline text" id="outline_text">%1$s</xliff:g> has replaced <xliff:g example="high contrast text" id="high_contrast_text">%2$s</xliff:g>. You can turn it on in <xliff:g example="Settings" id="settings">%3$s</xliff:g>.</string>
+    <!-- Text content for the notification that the accessibility feature called "high contrast text" has been replaced by a new feature called "outline text". [CHAR LIMIT=NONE] -->
+    <string name="accessibility_notification_high_contrast_text_body_message">Outline text has replaced high contrast text. You can turn it on in <xliff:g example="Settings" id="settings">%1$s</xliff:g>.</string>
     <!-- Action for the notification to high contrast text to open the Settings app. [CHAR LIMIT=35] -->
     <string name="accessibility_notification_high_contrast_text_action_open_settings">Go to <xliff:g example="Settings" id="settings">%1$s</xliff:g></string>
     <!-- Title for the accessibility preference that adds an outline behind text to increase contrast and legibility. [CHAR LIMIT=35] -->
@@ -5782,6 +5807,9 @@
     <!-- Title for the toggle button that turns on/off the autoclick setting of ignoring minor cursor movement. [CHAR_LIMIT=NONE] -->
     <!-- TODO(b/388845718): Update string to translatable once approved by UXW. -->
     <string name="autoclick_ignore_minor_cursor_movement_title" translatable="false">Ignore minor cursor movement</string>
+    <!-- TODO(b/394683600): Update string to translatable once approved by UXW. -->
+    <!-- Title for the switch setting to toggle on/off the revert to left click after action. [CHAR LIMIT=NONE] -->
+    <string name="autoclick_revert_to_left_click_title" translatable="false">Revert to left click after action</string>
     <!-- Title for preference screen for configuring vibrations. [CHAR LIMIT=NONE] -->
     <string name="accessibility_vibration_settings_title">Vibration &amp; haptics</string>
     <!-- Summary for preference screen for configuring vibrations. [CHAR LIMIT=NONE] -->
@@ -6677,8 +6705,12 @@
     <string name="battery_usage_timestamps_content_description"><xliff:g id="from_timestamp">%1$s</xliff:g> to <xliff:g id="to_timestamp">%2$s</xliff:g></string>
     <!-- [CHAR_LIMIT=NONE] The first slot is a week day (e.g. "Monday"); the second slot is a hourly time span (e.g. "6 AM - 8 AM"). -->
     <string name="battery_usage_day_and_hour"><xliff:g id="day">%1$s</xliff:g> <xliff:g id="hour">%2$s</xliff:g></string>
-    <!-- [CHAR_LIMIT=NONE] Accessibility content description for each slot in battery chart view. -->
-    <string name="battery_usage_time_info_and_battery_level"><xliff:g id="time_info" example="Battery usage for Monday 6 AM - 8 AM">%1$s</xliff:g> <xliff:g id="battery_level" example="Battery level percentage from 83% to 59%">%2$s</xliff:g></string>
+    <!-- [CHAR_LIMIT=NONE] Accessibility content description for each slot in battery chart view. Please reuse the words in tc/6732629268310936155 -->
+    <string name="battery_usage_status_time_info_and_battery_level"><xliff:g id="selected_status" example="Selected">%1$s</xliff:g>, <xliff:g id="time_info" example="Battery usage for Monday 6 AM - 8 AM">%2$s</xliff:g> <xliff:g id="battery_level" example="Battery level percentage from 83% to 59%">%3$s</xliff:g></string>
+    <!-- [CHAR_LIMIT=NONE] Accessibility content description for the battery usage slot is selected. -->
+    <string name="battery_chart_slot_status_selected">Selected</string>
+    <!-- [CHAR_LIMIT=NONE] Accessibility content description for the battery usage slot is not selected -->
+    <string name="battery_chart_slot_status_unselected">Unselected</string>
     <!-- [CHAR_LIMIT=NONE] Accessibility content description for battery chart view. -->
     <string name="battery_usage_chart">Battery usage chart</string>
     <!-- [CHAR_LIMIT=NONE] Accessibility content description for daily battery chart view. -->
@@ -7319,15 +7351,15 @@ Data usage charges may apply.</string>
     <string name="data_usage_metered_yes">Metered</string>
 
     <!-- Input label for the name of a VPN profile. [CHAR LIMIT=40] -->
-    <string name="vpn_name">Name</string>
+    <string name="vpn_name">Name*</string>
     <!-- Input label for the type of a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_type">Type</string>
     <!-- Input label for the server address of a VPN profile. [CHAR LIMIT=40] -->
-    <string name="vpn_server">Server address</string>
+    <string name="vpn_server">Server address*</string>
     <!-- Input label for the IPSec identifier of a VPN profile. [CHAR LIMIT=40] -->
-    <string name="vpn_ipsec_identifier">IPSec identifier</string>
+    <string name="vpn_ipsec_identifier">IPSec identifier*</string>
     <!-- Input label for the IPSec pre-shared key of a VPN profile. [CHAR LIMIT=40] -->
-    <string name="vpn_ipsec_secret">IPSec pre-shared key</string>
+    <string name="vpn_ipsec_secret">IPSec pre-shared key*</string>
     <!-- Selection label for the IPSec user certificate of a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_ipsec_user_cert">IPSec user certificate</string>
     <!-- Selection label for the IPSec CA certificate of a VPN profile. [CHAR LIMIT=40] -->
@@ -7336,10 +7368,14 @@ Data usage charges may apply.</string>
     <string name="vpn_ipsec_server_cert">IPSec server certificate</string>
     <!-- Checkbox label to show advanced options of a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_show_options">Show advanced options</string>
-    <!-- Input label for the username of a VPN profile. [CHAR LIMIT=40] -->
-    <string name="vpn_username">Username</string>
-    <!-- Input label for the password of a VPN profile. [CHAR LIMIT=40] -->
-    <string name="vpn_password">Password</string>
+    <!-- Input label for the optional username of a VPN profile. [CHAR LIMIT=40] -->
+    <string name="vpn_username_optional">Username (optional)</string>
+    <!-- Input label for the optional password of a VPN profile. [CHAR LIMIT=40] -->
+    <string name="vpn_password_optional">Password (optional)</string>
+    <!-- Input label for the required username of a VPN profile. [CHAR LIMIT=40] -->
+    <string name="vpn_username_required">Username*</string>
+    <!-- Input label for the required password of a VPN profile. [CHAR LIMIT=40] -->
+    <string name="vpn_password_required">Password*</string>
     <!-- Checkbox label to save the username and the password in a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_save_login">Save account information</string>
     <!-- Hint for not using an optional feature in a VPN profile. [CHAR LIMIT=40] -->
@@ -7352,6 +7388,9 @@ Data usage charges may apply.</string>
         generic error. [CHAR LIMIT=120] -->
     <string name="vpn_always_on_invalid_reason_other">The information entered doesn\'t support
         always-on VPN</string>
+    <!-- Hint for a required field in a VPN profile. [CHAR LIMIT=40] -->
+    <!-- Error message displayed below the VPN EditText when the filed is required. [CHAR LIMIT=NONE] -->
+    <string name="vpn_field_required">*required</string>
 
     <!-- Button label to cancel changing a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_cancel">Cancel</string>
@@ -8088,7 +8127,7 @@ Data usage charges may apply.</string>
     <!-- SIM status title  [CHAR LIMIT=40] -->
     <string name="sim_status_title">SIM status</string>
     <!-- SIM status title  [CHAR LIMIT=40] -->
-    <string name="sim_status_title_sim_slot">SIM status (sim slot %1$d)</string>
+    <string name="sim_status_title_sim_slot">SIM status (SIM slot %1$d)</string>
     <!-- Summary text describing signal strength to the user.  [CHAR LIMIT=60] -->
     <string name="sim_signal_strength"><xliff:g id="dbm">%1$d</xliff:g> dBm <xliff:g id="asu">%2$d</xliff:g> asu</string>
     <!-- Title for SIM notification.  [CHAR LIMIT=40] -->
@@ -10990,9 +11029,17 @@ Data usage charges may apply.</string>
         associated with this device, manage apps, and change this device\’s settings.</string>
 
     <!-- Title for dialog displayed when user taps a setting on their phone that's blocked by Advanced Protection. [CHAR LIMIT=50] -->
-    <string name="disabled_by_advanced_protection_title">Prevented by Advanced Protection</string>
-    <!-- Short summary for dialog displayed when user taps a setting on their phone that's blocked by Advanced Protection. [CHAR LIMIT=NONE] -->
-    <string name="disabled_by_advanced_protection_message">This action is not allowed because Advanced Protection is on for your device.</string>
+    <string name="disabled_by_advanced_protection_title">Restricted by Advanced Protection</string>
+    <!-- Short summary for dialog displayed when user taps an enabled setting on their phone that's blocked by Advanced Protection. [CHAR LIMIT=NONE] -->
+    <string name="disabled_by_advanced_protection_setting_is_on_message">For your security, Advanced Protection requires this setting to remain on</string>
+    <!-- Short summary for dialog displayed when user taps a disabled setting on their phone that's blocked by Advanced Protection. [CHAR LIMIT=NONE] -->
+    <string name="disabled_by_advanced_protection_setting_is_off_message">For your security, Advanced Protection requires this setting to remain off</string>
+    <!-- Short summary for dialog displayed when user performs an action on their phone that's blocked by Advanced Protection. [CHAR LIMIT=NONE] -->
+    <string name="disabled_by_advanced_protection_action_message">For your security, Advanced Protection prevents this action</string>
+    <!-- Short summary for dialog displayed when user tries to connect to a Wi-Fi Wired Equivalent Privacy (WEP) network on their phone that's blocked by Advanced Protection. [CHAR LIMIT=NONE] -->
+    <string name="disabled_by_advanced_protection_wep_action_message">This network uses WEP, an outdated encryption method that can put your data at risk. WEP connections are blocked by Advanced Protection.</string>
+    <!-- Title for a button that will resolve to a help URL explaining what Advanced Protection is. [CHAR LIMIT=50] -->
+    <string name="disabled_by_advanced_protection_help_button_title">Settings</string>
 
     <!-- Turn off a conditional state of the device (e.g. airplane mode, or hotspot) [CHAR LIMIT=30] -->
     <string name="condition_turn_off">Turn off</string>
@@ -11637,6 +11684,9 @@ Data usage charges may apply.</string>
 
     <!-- Title for the screen to show all the gesture navigation settings [CHAR LIMIT=80] -->
     <string name="gesture_settings_activity_title">Gesture Navigation</string>
+
+    <!-- Title for the screen to show the gesture navigation tutorial [CHAR LIMIT=80] -->
+    <string name="gesture_navigation_tutorial_title">Try a demo</string>
 
     <!-- Title for the screen to show all the 2- and 3-button navigation settings. [CHAR LIMIT=80] -->
     <string name="button_navigation_settings_activity_title">Button navigation</string>
@@ -13075,12 +13125,12 @@ Data usage charges may apply.</string>
     <!-- Title for a toggle that enables freeform windows. Freeform windows enables users to freely arrange and resize overlapping apps. [CHAR LIMIT=50] -->
     <string name="enable_desktop_mode">Enable freeform windows</string>
 
-    <!-- Title for a toggle that enables desktop experience features. This includes desktop view and connected displays. [CHAR LIMIT=50] -->
+    <!-- Title for a toggle that enables desktop experience features. This includes desktop windowing and connected displays. [CHAR LIMIT=50] -->
     <string name="enable_desktop_experience_features">Enable desktop experience features</string>
     <!-- Summary for a toggle that enables desktop experience features when the device itself can show the desktop (but it is not available without the developer option). [CHAR LIMIT=NONE] -->
-    <string name="enable_desktop_experience_features_summary_with_desktop">Enable Desktop View on the device and on secondary displays.</string>
-    <!-- Summary for a toggle that enables desktop experience features when desktop views don't need to be enable. [CHAR LIMIT=NONE] -->
-    <string name="enable_desktop_experience_features_summary_without_desktop">Enable Desktop View on secondary displays.</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop">Enable desktop windowing on the device and on secondary displays.</string>
+    <!-- Summary for a toggle that enables desktop experience features when desktop windowing doesn't need to be enabled. [CHAR LIMIT=NONE] -->
+    <string name="enable_desktop_experience_features_summary_without_desktop">Enable desktop windowing on secondary displays.</string>
 
     <!-- Title for a toggle that enables freeform windows on secondary display. Freeform windows enables users to freely arrange and resize overlapping apps. [CHAR LIMIT=50] -->
     <string name="enable_desktop_mode_on_secondary_display">Enable freeform windows on secondary display</string>
@@ -13343,7 +13393,11 @@ Data usage charges may apply.</string>
     <string name="page_agnostic_notification_action">Read more</string>
 
     <string name= "enable_16k_app_compat_title">Run app with page size compat mode</string>
-    <string name= "enable_16k_app_compat_details">App will be run in page size compatibility mode on 16 KB device when toggled.</string>
+    <string name= "enable_16k_app_compat_details">App will be stopped and run in page size compatibility mode on 16 KB device when toggled.</string>
+
+    <string name="stop_app_dlg_title">Stop app?</string>
+    <!-- [CHAR LIMIT=200] Manage applications, text for dialog when killing persistent apps-->
+    <string name="stop_app_dlg_text">Application will be stopped to apply page size compat setting.</string>
 
     <!-- DSU Loader. Do not translate. -->
 
@@ -14155,6 +14209,9 @@ Data usage charges may apply.</string>
     <!-- Content description for setting password complete-->
     <string name="accessibility_setup_password_complete">Password is now set up</string>
 
+    <!-- Content description for setting PIN complete-->
+    <string name="accessibility_setup_pin_complete">PIN is now set up</string>
+
     <!-- Authority of the content provider that support methods restartPhoneProcess and restartRild. Will be overlaid by OEM.-->
     <string name="reset_telephony_stack_content_provider_authority" translatable="false"></string>
 
@@ -14472,4 +14529,8 @@ Data usage charges may apply.</string>
     <string name="supervision_change_pin_preference_title">Change PIN</string>
     <!-- Title for supervision forgot PIN setting entry [CHAR LIMIT=60] -->
     <string name="supervision_add_forgot_pin_preference_title">Forgot PIN</string>
+    <!-- Title for web content filters entry [CHAR LIMIT=60] -->
+    <string name="supervision_web_content_filters_title">Web content filters</string>
+    <!-- Generic content description that is attached to the preview illustration at the top of an Accessibility feature toggle page. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_illustration_content_description"><xliff:g id="feature" example="Select to Speak">%1$s</xliff:g> animation</string>
 </resources>

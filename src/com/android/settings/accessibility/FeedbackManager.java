@@ -16,7 +16,6 @@
 package com.android.settings.accessibility;
 
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Intent;
 import android.text.TextUtils;
 
@@ -46,23 +45,14 @@ public class FeedbackManager {
      * Constructs a new FeedbackManager.
      *
      * @param activity The activity context. A WeakReference is used to prevent memory leaks.
+     * @param pageId The unique identifier of the page associated with the feedback.
      */
-    public FeedbackManager(@Nullable Activity activity) {
-        this(activity, /* componentName= */ null);
-    }
-
-    /**
-     * Constructs a new FeedbackManager.
-     *
-     * @param activity The activity context. A WeakReference is used to prevent memory leaks.
-     * @param componentName The component name associated with the feedback.
-     */
-    public FeedbackManager(@Nullable Activity activity, @Nullable ComponentName componentName) {
+    public FeedbackManager(@Nullable Activity activity, int pageId) {
         this(activity,
                 DeviceInfoUtils.getFeedbackReporterPackage(activity),
                 FeatureFactory.getFeatureFactory()
                         .getAccessibilityFeedbackFeatureProvider()
-                        .getCategory(componentName));
+                        .getCategory(pageId));
     }
 
     /**

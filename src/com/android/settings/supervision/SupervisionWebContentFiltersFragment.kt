@@ -13,22 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package com.android.settings.wifi.utils
+package com.android.settings.supervision
 
 import android.content.Context
-import android.view.View
-import com.android.settings.R
+import com.android.settingslib.preference.PreferenceFragment
 
-/** TextInputGroup for Wi-Fi SSID. */
-class SsidInputGroup(private val context: Context, view: View, layoutId: Int, editTextId: Int) :
-    TextInputGroup(view, layoutId, editTextId) {
-
-    fun validate(): Boolean {
-        if (getText().isEmpty()) {
-            setError(context.getString(R.string.wifi_ssid_hint))
-            return false
-        }
-        return true
-    }
+/**
+ * Fragment to display the Supervision web content filters page (Settings > Supervision> Web content
+ * filters).
+ *
+ * See [SupervisionWebContentFiltersScreen] for details on the page contents.
+ */
+class SupervisionWebContentFiltersFragment : PreferenceFragment() {
+    override fun getPreferenceScreenBindingKey(context: Context) =
+        SupervisionWebContentFiltersScreen.KEY
 }

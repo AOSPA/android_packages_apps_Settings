@@ -29,6 +29,7 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
+import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 
 @ProvidePreferenceScreen(DisplayScreen.KEY)
 open class DisplayScreen :
@@ -41,6 +42,7 @@ open class DisplayScreen :
 
     override fun getIcon(context: Context) =
         when {
+            isExpressiveTheme(context) -> R.drawable.ic_homepage_display
             Flags.homepageRevamp() -> R.drawable.ic_settings_display_filled
             else -> R.drawable.ic_settings_display_white
         }

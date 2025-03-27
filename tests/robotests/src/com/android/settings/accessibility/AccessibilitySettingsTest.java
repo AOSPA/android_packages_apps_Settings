@@ -22,7 +22,6 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -458,12 +457,10 @@ public class AccessibilitySettingsTest {
         setupFragment();
         mFragment.setFeedbackManager(
                 new FeedbackManager(mFragment.getActivity(), PACKAGE_NAME, DEFAULT_CATEGORY));
-        when(mMenu.add(anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(mMenuItem);
 
         mFragment.onCreateOptionsMenu(mMenu, /* inflater= */ null);
 
-        verify(mMenu).add(anyInt(), eq(AccessibilitySettings.MENU_ID_SEND_FEEDBACK),
-                anyInt(), eq(mContext.getText(R.string.accessibility_send_feedback_title)));
+        verify(mMenu).add(anyInt(), anyInt(), anyInt(), anyInt());
     }
 
     @Test
@@ -472,12 +469,10 @@ public class AccessibilitySettingsTest {
         setupFragment();
         mFragment.setFeedbackManager(
                 new FeedbackManager(mFragment.getActivity(), PACKAGE_NAME, DEFAULT_CATEGORY));
-        when(mMenu.add(anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(mMenuItem);
 
         mFragment.onCreateOptionsMenu(mMenu, /* inflater= */ null);
 
-        verify(mMenu, never()).add(anyInt(), eq(AccessibilitySettings.MENU_ID_SEND_FEEDBACK),
-                anyInt(), eq(mContext.getText(R.string.accessibility_send_feedback_title)));
+        verify(mMenu, never()).add(anyInt(), anyInt(), anyInt(), anyInt());
     }
 
     @Test
@@ -486,8 +481,6 @@ public class AccessibilitySettingsTest {
         setupFragment();
         mFragment.setFeedbackManager(
                 new FeedbackManager(mFragment.getActivity(), PACKAGE_NAME, DEFAULT_CATEGORY));
-        when(mMenu.add(anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(mMenuItem);
-        mFragment.onCreateOptionsMenu(mMenu, /* inflater= */ null);
         when(mMenuItem.getItemId()).thenReturn(AccessibilitySettings.MENU_ID_SEND_FEEDBACK);
 
         mFragment.onOptionsItemSelected(mMenuItem);
@@ -502,8 +495,6 @@ public class AccessibilitySettingsTest {
         setupFragment();
         mFragment.setFeedbackManager(
                 new FeedbackManager(mFragment.getActivity(), PACKAGE_NAME, DEFAULT_CATEGORY));
-        when(mMenu.add(anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(mMenuItem);
-        mFragment.onCreateOptionsMenu(mMenu, /* inflater= */ null);
         when(mMenuItem.getItemId()).thenReturn(AccessibilitySettings.MENU_ID_SEND_FEEDBACK);
 
         mFragment.onOptionsItemSelected(mMenuItem);

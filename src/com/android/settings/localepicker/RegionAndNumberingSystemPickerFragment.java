@@ -37,6 +37,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.internal.app.AppLocaleCollector;
 import com.android.internal.app.LocaleHelper;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
@@ -329,13 +330,14 @@ public class RegionAndNumberingSystemPickerFragment extends DashboardFragment im
             controllers.add(mSuggestedListPreferenceController);
             controllers.add(mSystemLocaleAllListPreferenceController);
         } else {
+            AppLocaleCollector appLocaleCollector = new AppLocaleCollector(context, mPackageName);
             mAppLocaleSuggestedListPreferenceController =
                     new AppLocaleSuggestedListPreferenceController(context,
                             KEY_PREFERENCE_APP_LOCALE_SUGGESTED_LIST, mPackageName,
-                            mIsNumberingMode, mLocaleInfo);
+                            mIsNumberingMode, mLocaleInfo, getActivity(), appLocaleCollector);
             mAppLocaleAllListPreferenceController = new AppLocaleAllListPreferenceController(
                     context, KEY_PREFERENCE_APP_LOCALE_LIST, mPackageName, mIsNumberingMode,
-                    mLocaleInfo);
+                    mLocaleInfo, getActivity(), appLocaleCollector);
             controllers.add(mAppLocaleSuggestedListPreferenceController);
             controllers.add(mAppLocaleAllListPreferenceController);
         }

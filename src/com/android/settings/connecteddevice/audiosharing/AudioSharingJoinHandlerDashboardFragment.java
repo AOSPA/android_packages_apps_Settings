@@ -17,11 +17,16 @@
 package com.android.settings.connecteddevice.audiosharing;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settingslib.utils.ThreadUtils;
 
 public class AudioSharingJoinHandlerDashboardFragment extends DashboardFragment {
     private static final String TAG = "AudioSharingJoinHandlerFrag";
@@ -49,7 +54,26 @@ public class AudioSharingJoinHandlerDashboardFragment extends DashboardFragment 
         super.onAttach(context);
         mController = use(AudioSharingJoinHandlerController.class);
         if (mController != null) {
+            Log.d(TAG, "onAttach, init controller");
             mController.init(this);
         }
+    }
+
+    /** Handle just connected device via intent. */
+    public void handleDeviceConnectedFromIntent(@NonNull Intent intent) {
+        var unused =
+                ThreadUtils.postOnBackgroundThread(
+                        () -> {
+                            if (mController != null) {
+                                Log.d(TAG, "handleDeviceConnectedFromIntent");
+                                mController.handleDeviceConnectedFromIntent(intent);
+                            }
+                        });
+    }
+
+    /** Test only: set mock controllers for the {@link AudioSharingJoinHandlerDashboardFragment} */
+    @VisibleForTesting
+    void setController(AudioSharingJoinHandlerController controller) {
+        mController = controller;
     }
 }

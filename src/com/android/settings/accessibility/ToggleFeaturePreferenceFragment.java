@@ -40,6 +40,9 @@ import android.service.quicksettings.TileService;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
@@ -48,6 +51,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -64,6 +68,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.flags.Flags;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settings.widget.SettingsMainSwitchPreference;
+import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.IllustrationPreference;
 import com.android.settingslib.widget.TopIntroPreference;
 
@@ -89,6 +94,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     // <img src="R.drawable.fileName"/>, a11y settings will get the resources successfully.
     private static final String IMG_PREFIX = "R.drawable.";
     private static final String DRAWABLE_FOLDER = "drawable";
+    static final int MENU_ID_SEND_FEEDBACK = 0;
 
     protected TopIntroPreference mTopIntroPreference;
     protected SettingsMainSwitchPreference mToggleServiceSwitchPreference;
@@ -102,6 +108,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     protected Intent mSettingsIntent;
     // The mComponentName maybe null, such as Magnify
     protected ComponentName mComponentName;
+    @Nullable private FeedbackManager mFeedbackManager;
     protected CharSequence mFeatureName;
     protected Uri mImageUri;
     protected CharSequence mHtmlDescription;
@@ -241,6 +248,24 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     }
 
     @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        if (getFeedbackManager().isAvailable()) {
+            menu.add(Menu.NONE, MENU_ID_SEND_FEEDBACK, Menu.NONE,
+                    R.string.accessibility_send_feedback_title);
+        }
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == MENU_ID_SEND_FEEDBACK) {
+            getFeedbackManager().sendFeedback();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public int getDialogMetricsCategory(int dialogId) {
         switch (dialogId) {
             case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
@@ -285,6 +310,11 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
 
     protected CharSequence getShortcutTitle() {
         return getString(R.string.accessibility_shortcut_title, mFeatureName);
+    }
+
+    @VisibleForTesting
+    CharSequence getContentDescriptionForAnimatedIllustration() {
+        return getString(R.string.accessibility_illustration_content_description, mFeatureName);
     }
 
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
@@ -403,22 +433,38 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
 
         return drawable;
     }
-
     private void initAnimatedImagePreference() {
-        if (mImageUri == null) {
+        initAnimatedImagePreference(mImageUri, new IllustrationPreference(getPrefContext()));
+    }
+
+    @VisibleForTesting
+    void initAnimatedImagePreference(
+            @Nullable Uri imageUri,
+            @NonNull IllustrationPreference preference) {
+        if (imageUri == null) {
             return;
         }
 
         final int displayHalfHeight =
                 AccessibilityUtil.getDisplayBounds(getPrefContext()).height() / 2;
-        final IllustrationPreference illustrationPreference =
-                new IllustrationPreference(getPrefContext());
-        illustrationPreference.setImageUri(mImageUri);
-        illustrationPreference.setSelectable(false);
-        illustrationPreference.setMaxHeight(displayHalfHeight);
-        illustrationPreference.setKey(KEY_ANIMATED_IMAGE);
-
-        getPreferenceScreen().addPreference(illustrationPreference);
+        preference.setImageUri(imageUri);
+        preference.setSelectable(false);
+        preference.setMaxHeight(displayHalfHeight);
+        preference.setKey(KEY_ANIMATED_IMAGE);
+        preference.setOnBindListener(view -> {
+            // isAnimatable is decided in
+            // {@link IllustrationPreference#onBindViewHolder(PreferenceViewHolder)}. Therefore, we
+            // wait until the view is bond to set the content description for it.
+            // The content description is added for an animation illustration only. Since the static
+            // images are decorative.
+            ThreadUtils.getUiThreadHandler().post(() -> {
+                if (preference.isAnimatable()) {
+                    preference.setContentDescription(
+                            getContentDescriptionForAnimatedIllustration());
+                }
+            });
+        });
+        getPreferenceScreen().addPreference(preference);
     }
 
     @VisibleForTesting
@@ -738,5 +784,29 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         RecyclerView recyclerView =
                 super.onCreateRecyclerView(inflater, parent, savedInstanceState);
         return AccessibilityFragmentUtils.addCollectionInfoToAccessibilityDelegate(recyclerView);
+    }
+
+    @VisibleForTesting
+    void setFeedbackManager(FeedbackManager feedbackManager) {
+        this.mFeedbackManager = feedbackManager;
+    }
+
+    private FeedbackManager getFeedbackManager() {
+        if (mFeedbackManager == null) {
+            mFeedbackManager = new FeedbackManager(getActivity(), getFeedbackCategory());
+        }
+        return mFeedbackManager;
+    }
+
+    /**
+     * Returns the category of the feedback page.
+     *
+     * <p>By default, this method returns {@link SettingsEnums#PAGE_UNKNOWN}. This indicates that
+     * the feedback category is unknown, and the absence of a feedback menu.
+     *
+     * @return The feedback category, which is {@link SettingsEnums#PAGE_UNKNOWN} by default.
+     */
+    protected int getFeedbackCategory() {
+        return SettingsEnums.PAGE_UNKNOWN;
     }
 }

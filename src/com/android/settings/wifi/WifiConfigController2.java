@@ -77,7 +77,7 @@ import com.android.settings.utils.AndroidKeystoreAliasLoader;
 import com.android.settings.wifi.details2.WifiPrivacyPreferenceController;
 import com.android.settings.wifi.details2.WifiPrivacyPreferenceController2;
 import com.android.settings.wifi.dpp.WifiDppUtils;
-import com.android.settings.wifi.utils.SsidInputGroup;
+import com.android.settings.wifi.utils.TextInputGroup;
 import com.android.settingslib.Utils;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.wifi.flags.Flags;
@@ -229,7 +229,7 @@ public class WifiConfigController2 implements TextWatcher,
     private final boolean mHideMeteredAndPrivacy;
     private final WifiManager mWifiManager;
     private final AndroidKeystoreAliasLoader mAndroidKeystoreAliasLoader;
-    private SsidInputGroup mSsidInputGroup;
+    private TextInputGroup mSsidInputGroup;
 
     private final Context mContext;
 
@@ -299,7 +299,8 @@ public class WifiConfigController2 implements TextWatcher,
             wepWarningLayout.setVisibility(View.VISIBLE);
         }
 
-        mSsidInputGroup = new SsidInputGroup(mContext, mView, R.id.ssid_layout, R.id.ssid);
+        mSsidInputGroup = new TextInputGroup(mView, R.id.ssid_layout, R.id.ssid,
+                R.string.wifi_ssid_hint);
         mSsidScanButton = (ImageButton) mView.findViewById(R.id.ssid_scanner_button);
         mIpSettingsSpinner = (Spinner) mView.findViewById(R.id.ip_settings);
         mIpSettingsSpinner.setOnItemSelectedListener(this);

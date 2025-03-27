@@ -18,19 +18,26 @@ package com.android.settings.connecteddevice.audiosharing;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothStatusCodes;
+import android.content.Intent;
 import android.os.Bundle;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 
+import androidx.fragment.app.FragmentManager;
+
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settingslib.flags.Flags;
+
+import com.google.common.collect.ImmutableList;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -66,9 +73,9 @@ public class AudioSharingJoinHandlerActivityTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_PROMOTE_AUDIO_SHARING_FOR_SECOND_AUTO_CONNECTED_LEA_DEVICE)
+    @DisableFlags({Flags.FLAG_ENABLE_LE_AUDIO_SHARING,
+            Flags.FLAG_PROMOTE_AUDIO_SHARING_FOR_SECOND_AUTO_CONNECTED_LEA_DEVICE})
     public void onCreate_flagOff_finish() {
-        mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mActivity.onCreate(new Bundle());
         verify(mActivity).finish();
     }
@@ -90,5 +97,27 @@ public class AudioSharingJoinHandlerActivityTest {
     @Test
     public void isValidFragment_returnsFalse() {
         assertThat(mActivity.isValidFragment("")).isFalse();
+    }
+
+    @Test
+    @DisableFlags({Flags.FLAG_ENABLE_LE_AUDIO_SHARING,
+            Flags.FLAG_PROMOTE_AUDIO_SHARING_FOR_SECOND_AUTO_CONNECTED_LEA_DEVICE})
+    public void onNewIntent_flagOff_finish() {
+        Intent intent = new Intent();
+        mActivity.onNewIntent(intent);
+    }
+
+    @Test
+    @EnableFlags({Flags.FLAG_ENABLE_LE_AUDIO_SHARING,
+            Flags.FLAG_PROMOTE_AUDIO_SHARING_FOR_SECOND_AUTO_CONNECTED_LEA_DEVICE})
+    public void onNewIntent_flagOn_handleDeviceConnectedFromIntent() {
+        FragmentManager fragmentManager = mock(FragmentManager.class);
+        AudioSharingJoinHandlerDashboardFragment fragment = mock(
+                AudioSharingJoinHandlerDashboardFragment.class);
+        when(mActivity.getSupportFragmentManager()).thenReturn(fragmentManager);
+        when(fragmentManager.getFragments()).thenReturn(ImmutableList.of(fragment));
+        Intent intent = new Intent();
+        mActivity.onNewIntent(intent);
+        verify(fragment).handleDeviceConnectedFromIntent(intent);
     }
 }

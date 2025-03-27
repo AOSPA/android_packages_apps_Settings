@@ -23,7 +23,6 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -35,13 +34,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums;
 import com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode;
@@ -257,34 +254,5 @@ public class MagnificationModePreferenceControllerTest {
     private void showPreferenceOnTheScreen(Bundle savedInstanceState) {
         mController.onCreate(savedInstanceState);
         mController.displayPreference(mScreen);
-    }
-
-    private static class TestDialogHelper implements DialogCreatable, DialogHelper {
-        private DialogCreatable mDialogDelegate;
-        private Dialog mDialog;
-
-        @Override
-        public void showDialog(int dialogId) {
-            mDialog = onCreateDialog(dialogId);
-        }
-
-        public void setDialogDelegate(@NonNull DialogCreatable delegate) {
-            mDialogDelegate = delegate;
-        }
-
-        @NonNull
-        @Override
-        public Dialog onCreateDialog(int dialogId) {
-            return mDialogDelegate.onCreateDialog(dialogId);
-        }
-
-        @Override
-        public int getDialogMetricsCategory(int dialogId) {
-            return mDialogDelegate.getDialogMetricsCategory(dialogId);
-        }
-
-        public Dialog getDialog() {
-            return mDialog;
-        }
     }
 }

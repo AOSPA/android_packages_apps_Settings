@@ -26,6 +26,7 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
+import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 
 @ProvidePreferenceScreen(MyDeviceInfoScreen.KEY)
 class MyDeviceInfoScreen :
@@ -41,12 +42,12 @@ class MyDeviceInfoScreen :
             ?: Build.MODEL
     }
 
-    override fun getIcon(context: Context): Int {
-        return when (Flags.homepageRevamp()) {
-            true -> R.drawable.ic_settings_about_device_filled
-            false -> R.drawable.ic_settings_about_device
+    override fun getIcon(context: Context) =
+        when {
+            isExpressiveTheme(context) -> R.drawable.ic_homepage_about
+            Flags.homepageRevamp() -> R.drawable.ic_settings_about_device_filled
+            else -> R.drawable.ic_settings_about_device
         }
-    }
 
     override fun isFlagEnabled(context: Context) = Flags.catalystMyDeviceInfoPrefScreen()
 

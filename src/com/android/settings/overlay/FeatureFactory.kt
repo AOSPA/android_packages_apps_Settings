@@ -17,7 +17,7 @@ package com.android.settings.overlay
 
 import android.content.Context
 import com.android.settings.accessibility.AccessibilityFeedbackFeatureProvider
-import com.android.settings.accessibility.AccessibilityMetricsFeatureProvider
+import com.android.settings.accessibility.AccessibilityPageIdFeatureProvider
 import com.android.settings.accessibility.AccessibilitySearchFeatureProvider
 import com.android.settings.accounts.AccountFeatureProvider
 import com.android.settings.applications.ApplicationFeatureProvider
@@ -145,9 +145,9 @@ abstract class FeatureFactory {
     abstract val accessibilitySearchFeatureProvider: AccessibilitySearchFeatureProvider
 
     /**
-     * Retrieves implementation for Accessibility metrics category feature.
+     * Retrieves implementation for Accessibility page id category feature.
      */
-    abstract val accessibilityMetricsFeatureProvider: AccessibilityMetricsFeatureProvider
+    abstract val accessibilityPageIdFeatureProvider: AccessibilityPageIdFeatureProvider
 
     /**
      * Retrieves implementation for advanced vpn feature.

@@ -17,12 +17,12 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:theme="@style/Theme.Network"
     android:id="@+id/l_wifidialog"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingBottom="8dip"
-    android:theme="@style/Theme.AppCompat.DayNight">
+    android:paddingBottom="8dip">
 
     <LinearLayout android:id="@+id/wep_warning_layout"
         android:layout_width="match_parent"
@@ -58,19 +58,14 @@
                 android:orientation="horizontal">
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/ssid_layout"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    style="@style/Widget.Network.TextInputLayout.WifiConfig"
                     android:layout_weight="1"
                     android:hint="@string/wifi_ssid"
-                    android:theme="@style/Theme.Settings"
                     android:textDirection="locale"
-                    app:endIconMode="clear_text"
-                    app:errorEnabled="true">
-
+                    app:endIconMode="clear_text">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/ssid"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        style="@style/Widget.Network.TextInputLayout.WifiConfig.EditText"
                         android:inputType="textNoSuggestions"
                         android:singleLine="true"/>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -346,18 +341,17 @@
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       style="@style/wifi_item">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/wifi_item_label"
-                android:text="@string/wifi_password"/>
-
-            <EditText android:id="@+id/password"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      style="@style/wifi_item_edit_content"
-                      android:inputType="textPassword"
-                      android:singleLine="true"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/password_input_layout"
+                style="@style/Widget.Network.TextInputLayout.WifiConfig"
+                android:hint="@string/wifi_password"
+                app:endIconMode="password_toggle">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/password"
+                    style="@style/Widget.Network.TextInputLayout.WifiConfig.EditText"
+                    android:inputType="textPassword"
+                    android:singleLine="true"/>
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
         <LinearLayout android:id="@+id/show_password_layout"
@@ -368,13 +362,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/wifi_item_label"/>
+                style="@style/wifi_item_label"
+                android:visibility="gone"/>
 
             <CheckBox android:id="@+id/show_password"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       style="@style/wifi_item_content"
-                      android:text="@string/wifi_show_password"/>
+                      android:text="@string/wifi_show_password"
+                      android:visibility="gone"/>
         </LinearLayout>
     </LinearLayout>
 

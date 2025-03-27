@@ -1853,6 +1853,38 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
         </activity>
 
         <activity
+            android:name=".Settings$MagnificationActivity"
+            android:label="@string/accessibility_screen_magnification_title"
+            android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.MAGNIFICATION_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_accessibility"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity
+            android:name=".Settings$FlashNotificationsActivity"
+            android:label="@string/flash_notifications_title"
+            android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.FLASH_NOTIFICATIONS_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.accessibility.FlashNotificationsPreferenceFragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_accessibility"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity
             android:name="SettingsLicenseActivity"
             android:label="@string/settings_license_activity_title"
             android:exported="true"
@@ -4571,7 +4603,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
         </activity>
 
         <activity android:name=".security.ActionDisabledByAdvancedProtectionDialog"
-            android:theme="@style/Theme.AlertDialog"
+            android:theme="@style/Theme.SpaLib.Dialog"
             android:taskAffinity="com.android.settings.security"
             android:excludeFromRecents="true"
             android:exported="false"

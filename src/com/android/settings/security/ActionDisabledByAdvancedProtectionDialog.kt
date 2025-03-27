@@ -16,44 +16,99 @@
 
 package com.android.settings.security;
 
-import android.app.Activity
-import android.content.DialogInterface
-import android.os.Bundle
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
+import android.content.Intent
+import android.security.advancedprotection.AdvancedProtectionManager.EXTRA_SUPPORT_DIALOG_FEATURE
+import android.security.advancedprotection.AdvancedProtectionManager.EXTRA_SUPPORT_DIALOG_TYPE
+import android.security.advancedprotection.AdvancedProtectionManager.FEATURE_ID_DISALLOW_CELLULAR_2G
+import android.security.advancedprotection.AdvancedProtectionManager.FEATURE_ID_DISALLOW_INSTALL_UNKNOWN_SOURCES
+import android.security.advancedprotection.AdvancedProtectionManager.FEATURE_ID_DISALLOW_WEP
+import android.security.advancedprotection.AdvancedProtectionManager.FEATURE_ID_ENABLE_MTE
+import android.security.advancedprotection.AdvancedProtectionManager.SUPPORT_DIALOG_TYPE_BLOCKED_INTERACTION
+import android.security.advancedprotection.AdvancedProtectionManager.SUPPORT_DIALOG_TYPE_DISABLED_SETTING
+import android.security.advancedprotection.AdvancedProtectionManager.SUPPORT_DIALOG_TYPE_UNKNOWN
+import android.util.Log
+import android.view.WindowManager
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.painterResource
 import com.android.settings.R
+import com.android.settingslib.spa.SpaDialogWindowTypeActivity
+import com.android.settingslib.spa.widget.dialog.AlertDialogButton
+import com.android.settingslib.spa.widget.dialog.SettingsAlertDialogContent
+import com.android.settingslib.wifi.WifiUtils.Companion.DIALOG_WINDOW_TYPE
 
-import androidx.appcompat.app.AlertDialog;
+class ActionDisabledByAdvancedProtectionDialog : SpaDialogWindowTypeActivity() {
 
-class ActionDisabledByAdvancedProtectionDialog : Activity(), DialogInterface.OnDismissListener {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val dialogView = layoutInflater.inflate(R.layout.support_details_dialog, null) as ViewGroup
-        val builder = AlertDialog.Builder(this)
-            .setPositiveButton(R.string.okay, null)
-            .setView(dialogView)
-            .setOnDismissListener(this)
-        initializeDialogView(dialogView)
-        builder.show()
+    @Composable
+    override fun Content() {
+        SettingsAlertDialogContent(
+            confirmButton = AlertDialogButton(getString(R.string.okay)) { finish() },
+            dismissButton = getSupportButtonIfExists(),
+            title = getString(R.string.disabled_by_advanced_protection_title),
+            icon = {
+                Icon(
+                    painter = painterResource(R.drawable.ic_settings_safety_center),
+                    contentDescription = null
+                )
+            },
+            text = { Text(getDialogMessage()) })
     }
 
-    override fun onDismiss(dialog: DialogInterface) {
-        finish()
+    private fun getDialogMessage(): String {
+        val featureId = intent.getIntExtra(EXTRA_SUPPORT_DIALOG_FEATURE, -1)
+        val type = intent.getIntExtra(EXTRA_SUPPORT_DIALOG_TYPE, SUPPORT_DIALOG_TYPE_UNKNOWN)
+        val messageId = when (type) {
+            SUPPORT_DIALOG_TYPE_DISABLED_SETTING -> {
+                if (featureIdsWithSettingOn.contains(featureId)) {
+                    R.string.disabled_by_advanced_protection_setting_is_on_message
+                } else if (featureIdsWithSettingOff.contains(featureId)) {
+                    R.string.disabled_by_advanced_protection_setting_is_off_message
+                } else {
+                    defaultMessageId
+                }
+            }
+            SUPPORT_DIALOG_TYPE_BLOCKED_INTERACTION -> {
+                if (featureId == FEATURE_ID_DISALLOW_WEP) {
+                    R.string.disabled_by_advanced_protection_wep_action_message
+                } else {
+                    R.string.disabled_by_advanced_protection_action_message
+                }
+            }
+            else -> defaultMessageId
+        }
+        return getString(messageId)
     }
 
-    private fun initializeDialogView(dialogView: View) {
-        setSupportTitle(dialogView)
-        setSupportDetails(dialogView)
+    private fun getSupportButtonIfExists(): AlertDialogButton? {
+        try {
+            val helpIntentUri = getString(R.string.help_url_action_disabled_by_advanced_protection)
+            val helpIntent = Intent.parseUri(helpIntentUri, Intent.URI_INTENT_SCHEME)
+            if (helpIntent == null) return null
+            val helpActivityInfo = packageManager.resolveActivity(helpIntent, /* flags */ 0)
+                ?.activityInfo
+            if (helpActivityInfo == null) return null
+            return AlertDialogButton(
+                getString(R.string.disabled_by_advanced_protection_help_button_title)
+            ) {
+                startActivity(helpIntent)
+                finish()
+            }
+        } catch (e: Exception) {
+            Log.w(TAG, "Tried to set up help button, but this exception was thrown: ${e.message}")
+        }
+        return null
     }
 
-    private fun setSupportTitle(root: View) {
-        val titleView: TextView = root.findViewById(R.id.admin_support_dialog_title) ?: return
-        titleView.setText(R.string.disabled_by_advanced_protection_title)
-    }
+    override fun getDialogWindowType(): Int? = if (intent.hasExtra(DIALOG_WINDOW_TYPE)) {
+        intent.getIntExtra(DIALOG_WINDOW_TYPE, WindowManager.LayoutParams.FIRST_APPLICATION_WINDOW)
+    } else null
 
-    private fun setSupportDetails(root: View) {
-        val textView: TextView = root.findViewById(R.id.admin_support_msg)
-        textView.setText(R.string.disabled_by_advanced_protection_message)
+    private companion object {
+        const val TAG = "AdvancedProtectionDlg"
+        val defaultMessageId = R.string.disabled_by_advanced_protection_action_message
+        val featureIdsWithSettingOn = setOf(FEATURE_ID_DISALLOW_CELLULAR_2G, FEATURE_ID_ENABLE_MTE)
+        val featureIdsWithSettingOff =
+            setOf(FEATURE_ID_DISALLOW_WEP, FEATURE_ID_DISALLOW_INSTALL_UNKNOWN_SOURCES)
     }
 }

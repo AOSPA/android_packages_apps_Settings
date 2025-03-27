@@ -24,6 +24,7 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
+import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 
 @ProvidePreferenceScreen(LocationScreen.KEY)
 class LocationScreen : PreferenceScreenCreator, PreferenceSummaryProvider, PreferenceIconProvider {
@@ -47,6 +48,7 @@ class LocationScreen : PreferenceScreenCreator, PreferenceSummaryProvider, Prefe
 
     override fun getIcon(context: Context) =
         when {
+            isExpressiveTheme(context) -> R.drawable.ic_homepage_location
             Flags.homepageRevamp() -> R.drawable.ic_settings_location_filled
             else -> R.drawable.ic_settings_location
         }

@@ -18,6 +18,7 @@ package com.android.settings.gestures;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.LabeledSeekBarPreference;
 import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.ButtonPreference;
 
 /**
  * A fragment to include all the settings related to Gesture Navigation mode.
@@ -41,9 +43,14 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
 
     public static final String GESTURE_NAVIGATION_SETTINGS =
             "com.android.settings.GESTURE_NAVIGATION_SETTINGS";
+    static final String ACTION_GESTURE_SANDBOX = "com.android.quickstep.action.GESTURE_SANDBOX";
 
     private static final String LEFT_EDGE_SEEKBAR_KEY = "gesture_left_back_sensitivity";
     private static final String RIGHT_EDGE_SEEKBAR_KEY = "gesture_right_back_sensitivity";
+    private static final String GESTURE_TUTORIAL_KEY = "assistant_gesture_navigation_tutorial";
+    final Intent mLaunchTutorialIntent =  new Intent(ACTION_GESTURE_SANDBOX)
+            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            .putExtra("use_tutorial_menu", true);
 
     private WindowManager mWindowManager;
     private BackGestureIndicatorView mIndicatorView;
@@ -75,6 +82,7 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
 
         initSeekBarPreference(LEFT_EDGE_SEEKBAR_KEY);
         initSeekBarPreference(RIGHT_EDGE_SEEKBAR_KEY);
+        initTutorialButton();
     }
 
     @Override
@@ -111,6 +119,26 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.SETTINGS_GESTURE_NAV_BACK_SENSITIVITY_DLG;
+    }
+
+    private void initTutorialButton() {
+        final ButtonPreference pref = getPreferenceScreen().findPreference(GESTURE_TUTORIAL_KEY);
+        if (pref == null) {
+            return;
+        }
+        if (!isGestureTutorialAvailable()) {
+            pref.setVisible(false);
+            return;
+        }
+        pref.setOnClickListener(preference -> {
+            startActivity(mLaunchTutorialIntent);
+        });
+    }
+
+    private boolean isGestureTutorialAvailable() {
+        Context context = getContext();
+        return context != null
+                && mLaunchTutorialIntent.resolveActivity(context.getPackageManager()) != null;
     }
 
     private void initSeekBarPreference(final String key) {

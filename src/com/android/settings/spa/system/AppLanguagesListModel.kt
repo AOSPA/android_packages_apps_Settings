@@ -33,7 +33,6 @@ import com.android.settings.R
 import com.android.settings.applications.AppLocaleUtil
 import com.android.settings.applications.appinfo.AppLocaleDetails
 import com.android.settings.core.SubSettingLauncher
-import com.android.settings.flags.Flags
 import com.android.settings.localepicker.AppLocalePickerActivity
 import com.android.settings.localepicker.AppLocalePickerFragment
 import com.android.settingslib.spa.framework.util.filterItem
@@ -43,6 +42,7 @@ import com.android.settingslib.spaprivileged.model.app.AppRecord
 import com.android.settingslib.spaprivileged.model.app.userHandle
 import com.android.settingslib.spaprivileged.template.app.AppListItem
 import com.android.settingslib.spaprivileged.template.app.AppListItemModel
+import com.android.settingslib.widget.SettingsThemeHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
@@ -99,7 +99,7 @@ class AppLanguagesListModel(private val context: Context) : AppListModel<AppLang
     @Composable
     override fun AppListItemModel<AppLanguagesRecord>.AppItem() {
         AppListItem {
-            if (Flags.settingsExpressiveDesignEnabled()) {
+            if (SettingsThemeHelper.isExpressiveTheme(context)) {
                 val extra = Bundle()
                 extra.putString(AppLocalePickerFragment.ARG_PACKAGE_NAME, record.app.packageName)
                 extra.putInt(AppLocalePickerFragment.ARG_PACKAGE_UID, context.userId)

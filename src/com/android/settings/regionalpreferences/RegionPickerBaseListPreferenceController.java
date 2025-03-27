@@ -169,7 +169,7 @@ public abstract class RegionPickerBaseListPreferenceController extends BasePrefe
         mFragmentManager = mParent.getChildFragmentManager();
         Bundle args = new Bundle();
         args.putInt(RegionDialogFragment.ARG_DIALOG_TYPE,
-                RegionDialogFragment.DIALOG_CHANGE_LOCALE_REGION);
+                RegionDialogFragment.DIALOG_CHANGE_SYSTEM_LOCALE_REGION);
         args.putSerializable(RegionDialogFragment.ARG_TARGET_LOCALE, localeInfo);
         RegionDialogFragment regionDialogFragment = RegionDialogFragment.newInstance();
         regionDialogFragment.setArguments(args);

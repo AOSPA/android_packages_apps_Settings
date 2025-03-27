@@ -97,7 +97,7 @@ class DaltonizerPreferenceTest {
     fun getSummary_daltonizerOn_verifySummary() {
         SettingsSecureStore.get(appContext).setInt(SETTING_KEY, AccessibilityUtil.State.ON)
 
-        assertThat(daltonizerPreference.getPreferenceSummary(appContext)).isEqualTo(
+        assertThat(daltonizerPreference.getSummary(appContext)).isEqualTo(
             appContext.getText(
                 R.string.daltonizer_state_on
             )
@@ -108,7 +108,7 @@ class DaltonizerPreferenceTest {
     fun getSummary_daltonizerOff_verifySummary() {
         SettingsSecureStore.get(appContext).setInt(SETTING_KEY, AccessibilityUtil.State.OFF)
 
-        assertThat(daltonizerPreference.getPreferenceSummary(appContext)).isEqualTo(
+        assertThat(daltonizerPreference.getSummary(appContext)).isEqualTo(
             appContext.getText(
                 R.string.daltonizer_state_off
             )

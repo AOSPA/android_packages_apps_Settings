@@ -19,7 +19,6 @@ package com.android.settings.connecteddevice.display;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_HELP_URL;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_NOT_FOUND_RESOURCE;
-import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.isDisplayAllowed;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.isDisplaySizeSettingEnabled;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.isResolutionSettingEnabled;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.isRotationSettingEnabled;
@@ -30,11 +29,7 @@ import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.SystemClock;
-import android.view.Choreographer;
-import android.view.Display;
 import android.view.View;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.window.DesktopExperienceFlags;
 
@@ -48,18 +43,14 @@ import androidx.preference.PreferenceGroup;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragmentBase;
-import com.android.settings.accessibility.AccessibilitySeekBarPreference;
-import com.android.settings.accessibility.DisplaySizeData;
 import com.android.settings.accessibility.TextReadingPreferenceFragment;
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DisplayListener;
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.Injector;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settingslib.display.DisplayDensityUtils;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.IllustrationPreference;
 import com.android.settingslib.widget.MainSwitchPreference;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -355,36 +346,20 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     }
 
     @NonNull
-    private AccessibilitySeekBarPreference reuseSizePreference(Context context,
-            PrefRefresh refresh, int displayId, int position) {
-        AccessibilitySeekBarPreference pref =
+    private ExternalDisplaySizePreference reuseSizePreference(Context context,
+            PrefRefresh refresh, DisplayDevice display, int position) {
+        ExternalDisplaySizePreference pref =
                 refresh.findUnusedPreference(PrefBasics.EXTERNAL_DISPLAY_SIZE.keyForNth(position));
         if (pref == null) {
-            pref = new AccessibilitySeekBarPreference(context, /* attrs= */ null);
-            pref.setIconStart(R.drawable.ic_remove_24dp);
-            pref.setIconStartContentDescription(R.string.screen_zoom_make_smaller_desc);
-            pref.setIconEnd(R.drawable.ic_add_24dp);
-            pref.setIconEndContentDescription(R.string.screen_zoom_make_larger_desc);
+            pref = new ExternalDisplaySizePreference(context, /* attrs= */ null);
             PrefBasics.EXTERNAL_DISPLAY_SIZE.apply(pref, position);
-
-            setStateForDisplaySizePreference(context, displayId, pref);
+        }
+        if (display.getMode() != null) {
+            pref.setStateForPreference(display.getMode().getPhysicalWidth(),
+                    display.getMode().getPhysicalHeight(), display.getId());
         }
         refresh.addPreference(pref);
         return pref;
-    }
-
-    private void setStateForDisplaySizePreference(Context context, int displayId,
-            AccessibilitySeekBarPreference preference) {
-        var displaySizeData = new DisplaySizeData(context,
-                new DisplayDensityUtils(context, (info) -> info.displayId == displayId));
-        ExternalDisplaySizePreferenceStateHandler seekBarChangeHandler =
-                new ExternalDisplaySizePreferenceStateHandler(
-                        displaySizeData, preference);
-
-        preference.setMax(displaySizeData.getValues().size() - 1);
-        preference.setProgress(displaySizeData.getInitialIndex());
-        preference.setContinuousUpdates(false);
-        preference.setOnSeekBarChangeListener(seekBarChangeHandler);
     }
 
     private void update() {
@@ -398,7 +373,8 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     }
 
     private void updateScreen(final PrefRefresh screen, Context context) {
-        final var displaysToShow = externalDisplaysToShow();
+        final var displaysToShow = mInjector == null
+                ? List.<DisplayDevice>of() : mInjector.getConnectedDisplays();
 
         if (displaysToShow.isEmpty()) {
             showTextWhenNoDisplaysToShow(screen, context, /* position= */ 0);
@@ -438,18 +414,13 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         return category;
     }
 
-    private void showDisplaySettings(Display display, PrefRefresh refresh,
+    private void showDisplaySettings(DisplayDevice display, PrefRefresh refresh,
             Context context, boolean includeV1Helpers, int position) {
-        final var isEnabled = mInjector != null && mInjector.isDisplayEnabled(display);
         if (isUseDisplaySettingEnabled(mInjector)) {
-            addUseDisplayPreferenceForDisplay(context, refresh, display, isEnabled, position);
+            addUseDisplayPreferenceForDisplay(context, refresh, display, position);
         }
-        if (!isEnabled) {
-            // Skip all other settings
-            return;
-        }
-        final var displayRotation = getDisplayRotation(display.getDisplayId());
-        if (includeV1Helpers) {
+        final var displayRotation = getDisplayRotation(display.getId());
+        if (includeV1Helpers && display.isEnabled() == DisplayIsEnabled.YES) {
             addIllustrationImage(context, refresh, displayRotation);
         }
 
@@ -466,13 +437,13 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             // inconsistent with the topology pane, which shows that display.
             // TODO(b/352648432): probably remove footer once the pane and rest of v2 UI is in
             // place.
-            if (includeV1Helpers) {
+            if (includeV1Helpers && display.isEnabled() == DisplayIsEnabled.YES) {
                 addFooterPreference(
                         context, refresh, EXTERNAL_DISPLAY_CHANGE_RESOLUTION_FOOTER_RESOURCE);
             }
         }
         if (isDisplaySizeSettingEnabled(mInjector)) {
-            addSizePreference(context, refresh, display.getDisplayId(), position);
+            addSizePreference(context, refresh, display, position);
         }
     }
 
@@ -489,7 +460,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         }
     }
 
-    private void showDisplaysList(@NonNull List<Display> displaysToShow,
+    private void showDisplaysList(@NonNull List<DisplayDevice> displaysToShow,
             @NonNull PrefRefresh screen, @NonNull Context context) {
         maybeAddV2Components(context, screen);
         int position = 0;
@@ -508,19 +479,6 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         }
     }
 
-    private List<Display> externalDisplaysToShow() {
-        if (mInjector == null) {
-            return List.of();
-        }
-        var displaysToShow = new ArrayList<Display>();
-        for (var display : mInjector.getAllDisplays()) {
-            if (display != null && isDisplayAllowed(display, mInjector)) {
-                displaysToShow.add(display);
-            }
-        }
-        return displaysToShow;
-    }
-
     private void addUseDisplayPreferenceNoDisplaysFound(Context context, PrefRefresh refresh,
             int position) {
         final var pref = reuseUseDisplayPreference(context, refresh, position);
@@ -530,9 +488,9 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     }
 
     private void addUseDisplayPreferenceForDisplay(final Context context,
-            PrefRefresh refresh, final Display display, boolean isEnabled, int position) {
+            PrefRefresh refresh, final DisplayDevice display, int position) {
         final var pref = reuseUseDisplayPreference(context, refresh, position);
-        pref.setChecked(isEnabled);
+        pref.setChecked(display.isEnabled() == DisplayIsEnabled.YES);
         pref.setEnabled(true);
         pref.setOnPreferenceChangeListener((p, newValue) -> {
             writePreferenceClickMetric(p);
@@ -541,9 +499,9 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
                 return false;
             }
             if ((Boolean) newValue) {
-                result = mInjector.enableConnectedDisplay(display.getDisplayId());
+                result = mInjector.enableConnectedDisplay(display.getId());
             } else {
-                result = mInjector.disableConnectedDisplay(display.getDisplayId());
+                result = mInjector.disableConnectedDisplay(display.getId());
             }
             if (result) {
                 pref.setChecked((Boolean) newValue);
@@ -562,8 +520,8 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         }
     }
 
-    private void addRotationPreference(final Context context,
-            PrefRefresh refresh, final Display display, final int displayRotation, int position) {
+    private void addRotationPreference(final Context context, PrefRefresh refresh,
+            final DisplayDevice display, final int displayRotation, int position) {
         var pref = reuseRotationPreference(context, refresh, position);
         if (mRotationEntries == null || mRotationEntriesValues == null) {
             mRotationEntries = new String[] {
@@ -580,38 +538,41 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         pref.setOnPreferenceChangeListener((p, newValue) -> {
             writePreferenceClickMetric(p);
             var rotation = Integer.parseInt((String) newValue);
-            var displayId = display.getDisplayId();
+            var displayId = display.getId();
             if (mInjector == null || !mInjector.freezeDisplayRotation(displayId, rotation)) {
                 return false;
             }
             pref.setValueIndex(rotation);
             return true;
         });
-        pref.setEnabled(isRotationSettingEnabled(mInjector));
+        pref.setEnabled(display.isEnabled() == DisplayIsEnabled.YES
+                && isRotationSettingEnabled(mInjector));
     }
 
     private void addResolutionPreference(final Context context, PrefRefresh refresh,
-            final Display display, int position) {
+            final DisplayDevice display, int position) {
         var pref = reuseResolutionPreference(context, refresh, position);
         pref.setSummary(display.getMode().getPhysicalWidth() + " x "
                 + display.getMode().getPhysicalHeight());
         pref.setOnPreferenceClickListener((Preference p) -> {
             writePreferenceClickMetric(p);
-            launchResolutionSelector(context, display.getDisplayId());
+            launchResolutionSelector(context, display.getId());
             return true;
         });
-        pref.setEnabled(isResolutionSettingEnabled(mInjector));
+        pref.setEnabled(display.isEnabled() == DisplayIsEnabled.YES
+                && isResolutionSettingEnabled(mInjector));
     }
 
-    private void addSizePreference(final Context context, PrefRefresh refresh, int displayId,
-            int position) {
-        var pref = reuseSizePreference(context, refresh, displayId, position);
+    private void addSizePreference(final Context context, PrefRefresh refresh,
+            DisplayDevice display, int position) {
+        var pref = reuseSizePreference(context, refresh, display, position);
         pref.setSummary(EXTERNAL_DISPLAY_SIZE_SUMMARY_RESOURCE);
         pref.setOnPreferenceClickListener(
                 (Preference p) -> {
                     writePreferenceClickMetric(p);
                     return true;
                 });
+        pref.setEnabled(display.isEnabled() == DisplayIsEnabled.YES);
     }
 
     private int getDisplayRotation(int displayId) {
@@ -652,54 +613,6 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             launchBuiltinDisplaySettings();
             return true;
         }
-    }
-
-    private static class ExternalDisplaySizePreferenceStateHandler
-            implements SeekBar.OnSeekBarChangeListener {
-        private static final long MIN_COMMIT_INTERVAL_MS = 800;
-        private static final long CHANGE_BY_BUTTON_DELAY_MS = 300;
-        private final DisplaySizeData mDisplaySizeData;
-        private int mLastDisplayProgress;
-        private long mLastCommitTime;
-        private final AccessibilitySeekBarPreference mPreference;
-        ExternalDisplaySizePreferenceStateHandler(DisplaySizeData displaySizeData,
-                AccessibilitySeekBarPreference preference) {
-            mDisplaySizeData = displaySizeData;
-            mPreference = preference;
-        }
-
-        final Choreographer.FrameCallback mCommit = this::tryCommitDisplaySizeConfig;
-
-        private void tryCommitDisplaySizeConfig(long unusedFrameTimeNanos) {
-            final int displayProgress = mPreference.getProgress();
-            if (displayProgress != mLastDisplayProgress) {
-                mDisplaySizeData.commit(displayProgress);
-                mLastDisplayProgress = displayProgress;
-            }
-            mLastCommitTime = SystemClock.elapsedRealtime();
-        }
-
-        private void postCommitDelayed() {
-            var commitDelayMs = CHANGE_BY_BUTTON_DELAY_MS;
-            if (SystemClock.elapsedRealtime() - mLastCommitTime < MIN_COMMIT_INTERVAL_MS) {
-                commitDelayMs += MIN_COMMIT_INTERVAL_MS;
-            }
-
-            final Choreographer choreographer = Choreographer.getInstance();
-            choreographer.removeFrameCallback(mCommit);
-            choreographer.postFrameCallbackDelayed(mCommit, commitDelayMs);
-        }
-
-        @Override
-        public void onProgressChanged(@NonNull SeekBar seekBar, int i, boolean b) {
-            postCommitDelayed();
-        }
-
-        @Override
-        public void onStartTrackingTouch(@NonNull SeekBar seekBar) {}
-
-        @Override
-        public void onStopTrackingTouch(@NonNull SeekBar seekBar) {}
     }
 
     private static class PrefRefresh implements AutoCloseable {

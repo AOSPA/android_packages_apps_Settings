@@ -44,6 +44,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
@@ -54,7 +55,6 @@ import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
-import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
@@ -62,6 +62,7 @@ import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.utils.CustomDialogHelper;
 import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.LayoutPreference;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -235,7 +236,9 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
             localeInfo = mAdapter.getFeedItemList().get(0);
             if (resultCode == Activity.RESULT_OK) {
                 mAdapter.doTheUpdate();
-                if (!localeInfo.isTranslated()) {
+                boolean showNotTranslatedDialog = data.getBooleanExtra(
+                        LocaleDialogFragment.ARG_SHOW_DIALOG_FOR_NOT_TRANSLATED, true);
+                if (showNotTranslatedDialog && !localeInfo.isTranslated()) {
                     Bundle args = new Bundle();
                     args.putInt(LocaleDialogFragment.ARG_DIALOG_TYPE,
                             LocaleDialogFragment.DIALOG_NOT_AVAILABLE_LOCALE);
@@ -286,7 +289,7 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
     private void setRemoveMode(boolean mRemoveMode) {
         this.mRemoveMode = mRemoveMode;
         mAdapter.setRemoveMode(mRemoveMode);
-        if (Flags.settingsExpressiveDesignEnabled()) {
+        if (SettingsThemeHelper.isExpressiveTheme(getContext())) {
             mAddLanguagePreference.setVisible(!mRemoveMode);
         } else {
             mAddLanguage.setVisibility(mRemoveMode ? View.INVISIBLE : View.VISIBLE);
@@ -428,13 +431,10 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
                             // to remove.
                             mRemoveMode = false;
                             mShowingRemoveDialog = false;
-                            LocaleStore.LocaleInfo firstLocale =
-                                    mAdapter.getFeedItemList().get(0);
+                            Locale defaultBeforeRemoval = Locale.getDefault();
                             mAdapter.removeChecked();
-                            boolean isFirstRemoved =
-                                    firstLocale != mAdapter.getFeedItemList().get(0);
-                            showConfirmDialog(isFirstRemoved, isFirstRemoved ? firstLocale
-                                    : mAdapter.getFeedItemList().get(0));
+                            showConfirmDialog(mAdapter.getFeedItemList().get(0),
+                                    defaultBeforeRemoval);
                             setRemoveMode(false);
                             dialogHelper.getDialog().dismiss();
                         })
@@ -497,7 +497,7 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
         list.setAdapter(mAdapter);
         list.setOnTouchListener(this);
         list.requestFocus();
-        if (Flags.settingsExpressiveDesignEnabled()) {
+        if (SettingsThemeHelper.isExpressiveTheme(getContext())) {
             mAddLanguagePreference = getPreferenceScreen().findPreference(KEY_ADD_A_LANGUAGE);
         } else {
             mAddLanguage = layout.findViewById(R.id.add_language);
@@ -520,25 +520,71 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
     public boolean onTouch(View v, MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_UP
                 || event.getAction() == MotionEvent.ACTION_CANCEL) {
-            showConfirmDialog(false, mAdapter.getFeedItemList().get(0));
+            showConfirmDialog(mAdapter.getFeedItemList().get(0), null);
         }
         return false;
     }
 
-    public void showConfirmDialog(boolean isFirstRemoved, LocaleStore.LocaleInfo localeInfo) {
+    protected void showConfirmDialog(LocaleStore.LocaleInfo localeInfo,
+            @Nullable Locale defaultLocaleBeforeRemoval) {
         Locale currentSystemLocale = LocalePicker.getLocales().get(0);
         if (!localeInfo.getLocale().equals(currentSystemLocale)) {
-            final LocaleDialogFragment localeDialogFragment =
-                    LocaleDialogFragment.newInstance();
-            Bundle args = new Bundle();
-            args.putInt(LocaleDialogFragment.ARG_DIALOG_TYPE, DIALOG_CONFIRM_SYSTEM_DEFAULT);
-            args.putSerializable(LocaleDialogFragment.ARG_TARGET_LOCALE,
-                    isFirstRemoved ? LocaleStore.getLocaleInfo(currentSystemLocale) : localeInfo);
-            localeDialogFragment.setArguments(args);
-            localeDialogFragment.show(mFragmentManager, TAG_DIALOG_CONFIRM_SYSTEM_DEFAULT);
+            displayDialogFragment(localeInfo, true);
         } else {
-            mAdapter.doTheUpdate();
+            if (!localeInfo.isTranslated()) {
+                if (defaultLocaleBeforeRemoval == null) {
+                    showDialogDueToDragAndDrop();
+                } else {
+                    showDialogDueToRemoval(defaultLocaleBeforeRemoval);
+                }
+            } else {
+                mAdapter.doTheUpdate();
+            }
         }
+    }
+
+    private void showDialogDueToDragAndDrop() {
+        LocaleStore.LocaleInfo newLocale = mAdapter.getFeedItemList().stream().filter(
+                i -> i.isTranslated()).findFirst().orElse(null);
+        if (newLocale == null) {
+            return;
+        }
+        LocaleStore.LocaleInfo oldLocale = null;
+        final LocaleList localeList = LocalePicker.getLocales();
+        for (int i = 0; i < localeList.size(); i++) {
+            LocaleStore.LocaleInfo temp = LocaleStore.getLocaleInfo(localeList.get(i));
+            if (temp.isTranslated()) {
+                oldLocale = temp;
+                break;
+            }
+        }
+        if (oldLocale != null && !newLocale.getLocale().equals(
+                oldLocale.getLocale())) {
+            displayDialogFragment(newLocale, false);
+        }
+    }
+
+    private void showDialogDueToRemoval(Locale preDefault) {
+        if (preDefault == null) {
+            return;
+        }
+        LocaleStore.LocaleInfo currentDefault = mAdapter.getFeedItemList().stream().filter(
+                i -> i.isTranslated()).findFirst().orElse(null);
+        if (currentDefault != null && !preDefault.equals(currentDefault.getLocale())) {
+            displayDialogFragment(currentDefault, false);
+        }
+    }
+
+    private void displayDialogFragment(LocaleStore.LocaleInfo localeInfo,
+            boolean showDialogForNotTranslated) {
+        final LocaleDialogFragment localeDialogFragment = LocaleDialogFragment.newInstance();
+        Bundle args = new Bundle();
+        args.putBoolean(LocaleDialogFragment.ARG_SHOW_DIALOG_FOR_NOT_TRANSLATED,
+                showDialogForNotTranslated);
+        args.putInt(LocaleDialogFragment.ARG_DIALOG_TYPE, DIALOG_CONFIRM_SYSTEM_DEFAULT);
+        args.putSerializable(LocaleDialogFragment.ARG_TARGET_LOCALE, localeInfo);
+        localeDialogFragment.setArguments(args);
+        localeDialogFragment.show(mFragmentManager, TAG_DIALOG_CONFIRM_SYSTEM_DEFAULT);
     }
 
     // Hide the "Remove" menu if there is only one locale in the list, show it otherwise

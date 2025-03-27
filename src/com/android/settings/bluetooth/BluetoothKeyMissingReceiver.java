@@ -33,6 +33,7 @@ import androidx.core.app.NotificationCompat;
 
 import com.android.settings.R;
 import com.android.settings.flags.Flags;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 
 /**
  * BluetoothKeyMissingReceiver is a receiver for Bluetooth key missing error when reconnecting to a
@@ -57,6 +58,11 @@ public final class BluetoothKeyMissingReceiver extends BroadcastReceiver {
         PowerManager powerManager = context.getSystemService(PowerManager.class);
         if (TextUtils.equals(action, BluetoothDevice.ACTION_KEY_MISSING)) {
             Log.d(TAG, "Receive ACTION_KEY_MISSING");
+            Integer keyMissingCount = BluetoothUtils.getKeyMissingCount(device);
+            if (keyMissingCount != null && keyMissingCount != 1) {
+                Log.d(TAG, "Key missing count is " + keyMissingCount  + ", skip.");
+                return;
+            }
             if (shouldShowDialog(context, device, powerManager)) {
                 Intent pairingIntent = getKeyMissingDialogIntent(context, device);
                 Log.d(TAG, "Show key missing dialog:" + device);

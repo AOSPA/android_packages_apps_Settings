@@ -26,6 +26,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.core.app.NotificationCompat;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -55,6 +56,7 @@ public class AppLocaleSuggestedListPreferenceController extends
     private static final String KEY_PREFERENCE_CATEGORY_ADD_A_LANGUAGE_SUGGESTED =
             "system_language_suggested_category";
 
+    private Activity mActivity;
     @SuppressWarnings("NullAway")
     private PreferenceCategory mPreferenceCategory;
     private Set<LocaleStore.LocaleInfo> mLocaleList;
@@ -76,12 +78,15 @@ public class AppLocaleSuggestedListPreferenceController extends
     @SuppressWarnings("NullAway")
     public AppLocaleSuggestedListPreferenceController(@NonNull Context context,
             @NonNull String preferenceKey, @Nullable String packageName,
-            boolean isNumberingSystemMode, @NonNull LocaleStore.LocaleInfo parentLocale) {
+            boolean isNumberingSystemMode, @NonNull LocaleStore.LocaleInfo parentLocale,
+            @NonNull Activity activity, @NonNull AppLocaleCollector appLocaleCollector) {
         super(context, preferenceKey);
         mPackageName = packageName;
         mIsNumberingSystemMode = isNumberingSystemMode;
         mParentLocale = parentLocale;
         mIsCountryMode = mParentLocale != null;
+        mActivity = activity;
+        mAppLocaleCollector = appLocaleCollector;
     }
 
     @Override
@@ -92,7 +97,6 @@ public class AppLocaleSuggestedListPreferenceController extends
                         ? KEY_PREFERENCE_CATEGORY_ADD_A_LANGUAGE_SUGGESTED
                         : KEY_PREFERENCE_CATEGORY_APP_LANGUAGE_SUGGESTED);
 
-        mAppLocaleCollector = new AppLocaleCollector(mContext, mPackageName);
         mSuggestedPreferences = new ArrayMap<>();
         mLocaleOptions = new ArrayList<>();
         updatePreferences();
@@ -129,7 +133,8 @@ public class AppLocaleSuggestedListPreferenceController extends
         setupSuggestedPreference(newList, existingSuggestedPreferences);
     }
 
-    private void setupSuggestedPreference(List<LocaleStore.LocaleInfo> localeInfoList,
+    @VisibleForTesting
+    void setupSuggestedPreference(List<LocaleStore.LocaleInfo> localeInfoList,
             Map<String, Preference> existingSuggestedPreferences) {
         for (LocaleStore.LocaleInfo locale : localeInfoList) {
             if (mIsNumberingSystemMode || mIsCountryMode) {
@@ -150,7 +155,7 @@ public class AppLocaleSuggestedListPreferenceController extends
                 }
             }
         }
-        Log.d(TAG, "setupSuggestedPreference, mPreferenceCategory setVisible"
+        Log.d(TAG, "setupSuggestedPreference, mPreferenceCategory setVisible = "
                 + (mPreferenceCategory.getPreferenceCount() > 0));
         mPreferenceCategory.setVisible(mPreferenceCategory.getPreferenceCount() > 0);
     }
@@ -167,7 +172,7 @@ public class AppLocaleSuggestedListPreferenceController extends
         pref.setKey(locale.toString());
         pref.setOnPreferenceClickListener(clickedPref -> {
             LocaleUtils.onLocaleSelected(mContext, locale, mPackageName);
-            ((Activity) mContext).finish();
+            mActivity.finish();
             return true;
         });
         mSuggestedPreferences.put(locale.getId(), pref);

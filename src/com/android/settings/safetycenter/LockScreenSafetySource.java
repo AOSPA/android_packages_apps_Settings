@@ -131,6 +131,7 @@ public final class LockScreenSafetySource {
         if (Flags.biometricsOnboardingEducation()) {
             FaceSafetySource.onBiometricsChanged(context);
             FingerprintSafetySource.onBiometricsChanged(context);
+            WearSafetySource.onBiometricsChanged(context);
         } else {
             BiometricsSafetySource.onBiometricsChanged(context);
         }

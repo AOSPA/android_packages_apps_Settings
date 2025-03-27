@@ -28,7 +28,6 @@ import android.content.Intent;
 import android.safetycenter.SafetyCenterManager;
 import android.safetycenter.SafetyEvent;
 
-import com.android.settings.flags.Flags;
 import com.android.settings.privatespace.PrivateSpaceSafetySource;
 import com.android.settings.security.ScreenLockPreferenceDetailsUtils;
 
@@ -75,34 +74,30 @@ public class SafetySourceBroadcastReceiver extends BroadcastReceiver {
                     context, new ScreenLockPreferenceDetailsUtils(context), safetyEvent);
         }
 
-        if (sourceIds.contains(BiometricsSafetySource.SAFETY_SOURCE_ID)
-                && !Flags.biometricsOnboardingEducation()) {
+        if (sourceIds.contains(BiometricsSafetySource.SAFETY_SOURCE_ID)) {
             BiometricsSafetySource.setSafetySourceData(context, safetyEvent);
         }
-
         if (sourceIds.contains(PrivateSpaceSafetySource.SAFETY_SOURCE_ID)) {
             PrivateSpaceSafetySource.setSafetySourceData(context, safetyEvent);
         }
-        if (sourceIds.contains(FaceSafetySource.SAFETY_SOURCE_ID)
-                && Flags.biometricsOnboardingEducation()) {
+        if (sourceIds.contains(FaceSafetySource.SAFETY_SOURCE_ID)) {
             FaceSafetySource.setSafetySourceData(context, safetyEvent);
         }
-        if (sourceIds.contains(FingerprintSafetySource.SAFETY_SOURCE_ID)
-                && Flags.biometricsOnboardingEducation()) {
+        if (sourceIds.contains(FingerprintSafetySource.SAFETY_SOURCE_ID)) {
             FingerprintSafetySource.setSafetySourceData(context, safetyEvent);
+        }
+        if (sourceIds.contains(WearSafetySource.SAFETY_SOURCE_ID)) {
+            WearSafetySource.setSafetySourceData(context, safetyEvent);
         }
     }
 
     private static void refreshAllSafetySources(Context context, SafetyEvent safetyEvent) {
         LockScreenSafetySource.setSafetySourceData(
                 context, new ScreenLockPreferenceDetailsUtils(context), safetyEvent);
-        if (!Flags.biometricsOnboardingEducation()) {
-            BiometricsSafetySource.setSafetySourceData(context, safetyEvent);
-        }
+        BiometricsSafetySource.setSafetySourceData(context, safetyEvent);
         PrivateSpaceSafetySource.setSafetySourceData(context, safetyEvent);
-        if (Flags.biometricsOnboardingEducation()) {
-            FaceSafetySource.setSafetySourceData(context, safetyEvent);
-            FingerprintSafetySource.setSafetySourceData(context, safetyEvent);
-        }
+        FaceSafetySource.setSafetySourceData(context, safetyEvent);
+        FingerprintSafetySource.setSafetySourceData(context, safetyEvent);
+        WearSafetySource.setSafetySourceData(context, safetyEvent);
     }
 }

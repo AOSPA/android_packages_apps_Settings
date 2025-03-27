@@ -117,7 +117,9 @@ public class UtilsTest {
         when(mDeviceManager.findDevice(device)).thenReturn(cachedDevice);
         when(cachedDevice.getGroupId()).thenReturn(1);
         when(cachedDevice.getDevice()).thenReturn(device);
+        when(cachedDevice.getBondState()).thenReturn(BluetoothDevice.BOND_BONDED);
         when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(device));
+        when(mDeviceManager.getCachedDevicesCopy()).thenReturn(ImmutableList.of(cachedDevice));
         BluetoothLeBroadcastReceiveState state = mock(BluetoothLeBroadcastReceiveState.class);
         when(state.getBroadcastId()).thenReturn(1);
         when(mAssistant.getAllSources(device)).thenReturn(ImmutableList.of(state));
@@ -133,9 +135,11 @@ public class UtilsTest {
         when(mDeviceManager.findDevice(device)).thenReturn(cachedDevice);
         when(cachedDevice.getGroupId()).thenReturn(1);
         when(cachedDevice.getDevice()).thenReturn(device);
-        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(device));
+        when(cachedDevice.getBondState()).thenReturn(BluetoothDevice.BOND_BONDED);
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of());
+        when(mDeviceManager.getCachedDevicesCopy()).thenReturn(ImmutableList.of(cachedDevice));
         BluetoothLeBroadcastReceiveState state = mock(BluetoothLeBroadcastReceiveState.class);
-        when(state.getBroadcastId()).thenReturn(1);
+        when(state.getBroadcastId()).thenReturn(0);
         when(mAssistant.getAllSources(device)).thenReturn(ImmutableList.of(state));
         when(device.getMetadata(METADATA_FAST_PAIR_CUSTOMIZED_FIELDS))
                 .thenReturn(TEMP_BOND_METADATA.getBytes());
@@ -154,9 +158,13 @@ public class UtilsTest {
         when(mDeviceManager.findDevice(device2)).thenReturn(cachedDevice2);
         when(cachedDevice1.getGroupId()).thenReturn(1);
         when(cachedDevice2.getGroupId()).thenReturn(2);
+        when(cachedDevice1.getBondState()).thenReturn(BluetoothDevice.BOND_BONDED);
         when(cachedDevice1.getDevice()).thenReturn(device1);
         when(cachedDevice2.getDevice()).thenReturn(device2);
+        when(cachedDevice2.getBondState()).thenReturn(BluetoothDevice.BOND_BONDED);
         when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(device1, device2));
+        when(mDeviceManager.getCachedDevicesCopy()).thenReturn(
+                ImmutableList.of(cachedDevice1, cachedDevice2));
         BluetoothLeBroadcastReceiveState state = mock(BluetoothLeBroadcastReceiveState.class);
         when(state.getBroadcastId()).thenReturn(1);
         when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of(state));

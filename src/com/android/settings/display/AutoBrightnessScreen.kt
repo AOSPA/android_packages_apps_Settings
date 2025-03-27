@@ -21,8 +21,6 @@ import android.os.UserManager
 import android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE
 import android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC
 import android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL
-import androidx.preference.Preference
-import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.contract.KEY_ADAPTIVE_BRIGHTNESS
 import com.android.settings.flags.Flags
@@ -37,19 +35,16 @@ import com.android.settingslib.datastore.SettingsStore
 import com.android.settingslib.datastore.SettingsSystemStore
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceScreenBinding
 import com.android.settingslib.preference.PreferenceScreenCreator
 
 @ProvidePreferenceScreen(AutoBrightnessScreen.KEY)
 class AutoBrightnessScreen :
     PreferenceScreenCreator,
-    PreferenceScreenBinding, // binding for screen page
-    PrimarySwitchPreferenceBinding, // binding for screen entry point widget
+    PrimarySwitchPreferenceBinding,
     PreferenceActionMetricsProvider,
     PreferenceAvailabilityProvider,
     PreferenceRestrictionMixin,
@@ -105,12 +100,6 @@ class AutoBrightnessScreen :
 
     override val useAdminDisabledSummary: Boolean
         get() = true
-
-    override fun bind(preference: Preference, metadata: PreferenceMetadata) =
-        when (preference) {
-            is PreferenceScreen -> super<PreferenceScreenBinding>.bind(preference, metadata)
-            else -> super<PrimarySwitchPreferenceBinding>.bind(preference, metadata)
-        }
 
     /**
      * The datastore for brightness, which is persisted as integer but the external type is boolean.

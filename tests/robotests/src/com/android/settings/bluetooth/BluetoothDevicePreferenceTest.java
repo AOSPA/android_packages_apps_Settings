@@ -34,6 +34,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Looper;
 import android.os.UserManager;
+import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.util.Pair;
@@ -175,6 +176,7 @@ public class BluetoothDevicePreferenceTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_TEMPORARY_BOND_DEVICES_UI)
     public void onClicked_deviceNotBonded_shouldLogBluetoothPairEvent() {
         when(mCachedBluetoothDevice.isConnected()).thenReturn(false);
         when(mCachedBluetoothDevice.getBondState()).thenReturn(BluetoothDevice.BOND_NONE);
@@ -192,6 +194,7 @@ public class BluetoothDevicePreferenceTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_TEMPORARY_BOND_DEVICES_UI)
     public void onClicked_deviceNotBonded_shouldLogBluetoothPairEventAndPairWithoutNameEvent() {
         when(mCachedBluetoothDevice.isConnected()).thenReturn(false);
         when(mCachedBluetoothDevice.getBondState()).thenReturn(BluetoothDevice.BOND_NONE);

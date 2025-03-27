@@ -20,7 +20,7 @@ import static org.mockito.Mockito.mock;
 import android.content.Context;
 
 import com.android.settings.accessibility.AccessibilityFeedbackFeatureProvider;
-import com.android.settings.accessibility.AccessibilityMetricsFeatureProvider;
+import com.android.settings.accessibility.AccessibilityPageIdFeatureProvider;
 import com.android.settings.accessibility.AccessibilitySearchFeatureProvider;
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
@@ -93,7 +93,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public WifiTrackerLibProvider wifiTrackerLibProvider;
     public SecuritySettingsFeatureProvider securitySettingsFeatureProvider;
     public AccessibilitySearchFeatureProvider mAccessibilitySearchFeatureProvider;
-    public AccessibilityMetricsFeatureProvider mAccessibilityMetricsFeatureProvider;
+    public AccessibilityPageIdFeatureProvider mAccessibilityPageIdFeatureProvider;
     public AdvancedVpnFeatureProvider mAdvancedVpnFeatureProvider;
     public WifiFeatureProvider mWifiFeatureProvider;
     public KeyboardSettingsFeatureProvider mKeyboardSettingsFeatureProvider;
@@ -146,7 +146,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         wifiTrackerLibProvider = mock(WifiTrackerLibProvider.class);
         securitySettingsFeatureProvider = mock(SecuritySettingsFeatureProvider.class);
         mAccessibilitySearchFeatureProvider = mock(AccessibilitySearchFeatureProvider.class);
-        mAccessibilityMetricsFeatureProvider = mock(AccessibilityMetricsFeatureProvider.class);
+        mAccessibilityPageIdFeatureProvider = mock(AccessibilityPageIdFeatureProvider.class);
         mAdvancedVpnFeatureProvider = mock(AdvancedVpnFeatureProvider.class);
         mWifiFeatureProvider = mock(WifiFeatureProvider.class);
         mKeyboardSettingsFeatureProvider = mock(KeyboardSettingsFeatureProvider.class);
@@ -295,8 +295,8 @@ public class FakeFeatureFactory extends FeatureFactory {
     }
 
     @Override
-    public AccessibilityMetricsFeatureProvider getAccessibilityMetricsFeatureProvider() {
-        return mAccessibilityMetricsFeatureProvider;
+    public AccessibilityPageIdFeatureProvider getAccessibilityPageIdFeatureProvider() {
+        return mAccessibilityPageIdFeatureProvider;
     }
 
     @Override

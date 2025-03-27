@@ -21,10 +21,9 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import com.android.settings.widget.SettingsMainSwitchPreferenceController;
+import com.android.settings.core.TogglePreferenceController;
 
-public class BundleGlobalPreferenceController extends
-        SettingsMainSwitchPreferenceController {
+public class BundleGlobalPreferenceController extends TogglePreferenceController {
 
     NotificationBackend mBackend;
 

@@ -21,7 +21,6 @@ import android.app.settings.SettingsEnums.ACTION_DARK_THEME
 import android.content.Context
 import android.os.PowerManager
 import androidx.preference.Preference
-import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.contract.KEY_DARK_THEME
 import com.android.settings.flags.Flags
@@ -36,15 +35,13 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceScreenBinding
 import com.android.settingslib.preference.PreferenceScreenCreator
 
 // LINT.IfChange
 @ProvidePreferenceScreen(DarkModeScreen.KEY)
 class DarkModeScreen(context: Context) :
     PreferenceScreenCreator,
-    PreferenceScreenBinding, // binding for screen page
-    PrimarySwitchPreferenceBinding, // binding for screen entry point widget
+    PrimarySwitchPreferenceBinding,
     PreferenceActionMetricsProvider,
     BooleanValuePreference,
     PreferenceSummaryProvider {
@@ -94,11 +91,8 @@ class DarkModeScreen(context: Context) :
     override fun storage(context: Context): KeyValueStore = darkModeStorage
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
+        super.bind(preference, metadata)
         if (preference is DarkModePreference) preference.setCatalystEnabled(true)
-        when (preference) {
-            is PreferenceScreen -> super<PreferenceScreenBinding>.bind(preference, metadata)
-            else -> super<PrimarySwitchPreferenceBinding>.bind(preference, metadata)
-        }
     }
 
     override fun isEnabled(context: Context) = !context.isPowerSaveMode()

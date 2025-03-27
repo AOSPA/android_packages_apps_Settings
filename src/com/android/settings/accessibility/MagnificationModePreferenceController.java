@@ -128,7 +128,7 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
         super.displayPreference(screen);
         mModePreference = screen.findPreference(getPreferenceKey());
         mLinkPreference = screen.findPreference(
-                ToggleFeaturePreferenceFragment.KEY_SHORTCUT_PREFERENCE);
+                ToggleScreenMagnificationPreferenceFragment.KEY_MAGNIFICATION_SHORTCUT_PREFERENCE);
         Preconditions.checkNotNull(mModePreference).setOnPreferenceClickListener(preference -> {
             mModeCache = MagnificationCapabilities.getCapabilities(mContext);
             Preconditions.checkNotNull(mDialogHelper).showDialog(
@@ -176,8 +176,12 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
                 mContext, mModeInfos, this::onMagnificationModeSelected);
 
         final View headerView = LayoutInflater.from(mContext).inflate(
-                R.layout.accessibility_magnification_mode_header,
-                getMagnificationModesListView(), /* attachToRoot= */false);
+                R.layout.accessibility_dialog_header, getMagnificationModesListView(),
+                /* attachToRoot= */false);
+        final TextView textView = Preconditions.checkNotNull(headerView.findViewById(
+                R.id.accessibility_dialog_header_text_view));
+        textView.setText(
+                mContext.getString(R.string.accessibility_magnification_area_settings_message));
         getMagnificationModesListView().addHeaderView(headerView, /* data= */null,
                 /* isSelectable= */false);
 

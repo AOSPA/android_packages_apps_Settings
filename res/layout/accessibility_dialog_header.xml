@@ -21,9 +21,9 @@
     android:padding="?android:attr/dialogPreferredPadding">
 
     <TextView
+        android:id="@+id/accessibility_dialog_header_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/accessibility_magnification_area_settings_message"
         android:textSize="16sp"
         style="?android:attr/textAppearanceMedium"
         android:textColor="?android:attr/textColorAlertDialogListItem"/>

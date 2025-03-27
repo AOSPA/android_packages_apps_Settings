@@ -120,7 +120,7 @@ public class TextReadingPreviewPreference extends Preference {
                 R.string.preview_pager_previous_button));
         nextButton.setOnClickListener((view) ->
                 viewPager.setCurrentItem(getCurrentItem() + 1));
-        previousButton.setContentDescription(getContext().getString(
+        nextButton.setContentDescription(getContext().getString(
                 R.string.preview_pager_next_button));
     }
 

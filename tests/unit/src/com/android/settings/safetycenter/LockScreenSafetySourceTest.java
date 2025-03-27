@@ -527,6 +527,9 @@ public class LockScreenSafetySourceTest {
         verify(mSafetyCenterManagerWrapper)
                 .setSafetySourceData(
                         any(), eq(FingerprintSafetySource.SAFETY_SOURCE_ID), any(), any());
+        verify(mSafetyCenterManagerWrapper)
+                .setSafetySourceData(
+                        any(), eq(WearSafetySource.SAFETY_SOURCE_ID), any(), any());
     }
 
     @Test

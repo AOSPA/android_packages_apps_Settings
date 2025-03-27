@@ -97,6 +97,7 @@ public class AccessibilitySettings extends DashboardFragment implements
     static final String EXTRA_HTML_DESCRIPTION = "html_description";
     static final String EXTRA_TIME_FOR_LOGGING = "start_time_to_log_a11y_tool";
     static final String EXTRA_METRICS_CATEGORY = "metrics_category";
+    static final String EXTRA_FEEDBACK_CATEGORY = "feedback_category";
 
     // Timeout before we update the services if packages are added/removed
     // since the AccessibilityManagerService has to do that processing first
@@ -255,7 +256,7 @@ public class AccessibilitySettings extends DashboardFragment implements
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         if (getFeedbackManager().isAvailable()) {
             menu.add(Menu.NONE, MENU_ID_SEND_FEEDBACK, Menu.NONE,
-                    getPrefContext().getText(R.string.accessibility_send_feedback_title));
+                    R.string.accessibility_send_feedback_title);
         }
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -286,7 +287,7 @@ public class AccessibilitySettings extends DashboardFragment implements
 
     private FeedbackManager getFeedbackManager() {
         if (mFeedbackManager == null) {
-            mFeedbackManager = new FeedbackManager(getActivity());
+            mFeedbackManager = new FeedbackManager(getActivity(), SettingsEnums.ACCESSIBILITY);
         }
         return mFeedbackManager;
     }

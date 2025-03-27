@@ -42,6 +42,8 @@
     <string name="radioInfo_unknown" msgid="2892562356748600367">"తెలియదు"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"ప్రివ్యూ"</string>
     <string name="qr_code_content_description" msgid="1852208464419291347">"QR కోడ్"</string>
+    <string name="preview_pager_previous_button" msgid="607771113300838313">"మునుపటి ప్రివ్యూ"</string>
+    <string name="preview_pager_next_button" msgid="8700907912508927271">"తర్వాతి ప్రివ్యూ"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"చిన్నదిగా చేస్తుంది"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"పెద్దదిగా చేస్తుంది"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"ఎల్లప్పుడూ యాక్టివ్‌గా ఉంచండి"</string>
@@ -85,6 +87,9 @@
     <string name="bluetooth_ambient_volume_control_collapse" msgid="7103189728479091531">"యూనిఫైడ్ కంట్రోల్‌కు కుదించండి"</string>
     <string name="bluetooth_ambient_volume_control_left" msgid="1927760358765239141">"ఎడమ వైపునకు"</string>
     <string name="bluetooth_ambient_volume_control_right" msgid="5783836267230662002">"కుడి వైపునకు"</string>
+    <string name="bluetooth_ambient_volume_control_description" msgid="8652460879432504546">"పరిసరాలు"</string>
+    <string name="bluetooth_ambient_volume_control_left_description" msgid="7907887057591335693">"ఎడమ వైపు పరిసరాలు"</string>
+    <string name="bluetooth_ambient_volume_control_right_description" msgid="7651747671161021283">"కుడి వైపు పరిసరాలు"</string>
     <string name="bluetooth_ambient_volume_mute" msgid="2700088105160838096">"మరిన్ని పరిసరాలు"</string>
     <string name="bluetooth_ambient_volume_unmute" msgid="8055038818824925188">"పరిసరాలను అన్‌మ్యూట్ చేయండి"</string>
     <string name="bluetooth_ambient_volume_error" msgid="259328969488233714">"పరిసరాలను అప్‌డేట్ చేయడం సాధ్యం కాలేదు"</string>
@@ -97,10 +102,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"ఆడియో అవుట్‌పుట్ గురించి"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"మీ వినికిడి పరికరం లేదా ఫోన్ స్పీకర్ కోసం రూట్ సౌండ్‌లు"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"సంబంధిత టూల్స్"</string>
-    <!-- no translation found for bluetooth_try_nearby_share_title (4996427014054610877) -->
-    <skip />
-    <!-- no translation found for bluetooth_try_nearby_share_summary (329823028635487822) -->
-    <skip />
+    <string name="bluetooth_try_nearby_share_title" msgid="4996427014054610877">"<xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>తో షేర్ చేసి చూడండి"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="329823028635487822">"సమీపంలోని Android పరికరాలకు ఫైల్స్‌ను పంపడానికి వేగవంతమైన మార్గం"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"రింగ్‌టోన్, అలారాలు"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"కాల్స్ జరిగే సమయంలో ఆడియో"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"మీడియా, సిస్టమ్ సౌండ్స్"</string>
@@ -226,6 +229,7 @@
     <string name="language_and_region_title" msgid="8374151891112162767">"భాష &amp; ప్రాంతం"</string>
     <string name="language_selection_title" msgid="968179636453982415">"భాషను జోడించండి"</string>
     <string name="region_selection_title" msgid="3630336682851020349">"ఒక ప్రాంతాన్ని ఎంచుకోండి"</string>
+    <string name="numbering_system_selection_title" msgid="1065458493488382214">"నంబర్ సిస్టమ్"</string>
     <string name="country_selection_title" msgid="5376929821458644732">"ప్రాంతం ప్రాధాన్యత"</string>
     <string name="search_language_hint" msgid="6738370354628565338">"భాషలను సెర్చ్ చేయండి"</string>
     <string name="search_region_hint" msgid="1748708432568237552">"ప్రాంతాలను సెర్చ్ చేయండి"</string>
@@ -233,7 +237,7 @@
     <string name="more_language_settings_category" msgid="3669703092480725416">"మరిన్ని భాషా సెట్టింగ్‌లు"</string>
     <string name="title_change_system_locale_region" msgid="1977530992614685128">"ప్రాంతాన్ని <xliff:g id="SYSTEM_LANGUAGE_REGION">%1$s</xliff:g>‌కు మార్చాలా ?"</string>
     <string name="body_change_system_locale_region" msgid="9064318449821043189">"మీ పరికరం <xliff:g id="SYSTEM_LANGUAGE">%1$s</xliff:g>‌ను సిస్టమ్ భాషగా ఉంచుతుంది"</string>
-    <string name="top_intro_numbering_system_title" msgid="8234587334207926397">"చాలా యాప్‌లు మీ ప్రాంతీయ ప్రాధాన్యతలను ఉపయోగిస్తాయి"</string>
+    <string name="top_intro_numbering_system_title" msgid="3962000662073238392">"మీ పరికరం, వెబ్‌సైట్‌లు, యాప్స్ నంబర్‌లను ఎలా డిస్‌ప్లే చేయాలో ఎంచుకోండి"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"ప్రాంతీయ ప్రాధాన్యతలు"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"యానిట్‌లు, నంబర్ ప్రాధాన్యతలను సెట్ చేయండి"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"యాప్‌లకు మీ ప్రాంతీయ ప్రాధాన్యతలను తెలియజేయండి, తద్వారా అవి మీ అనుభవాన్ని వ్యక్తిగతీకరించగలుగుతాయి."</string>
@@ -457,6 +461,8 @@
     <string name="fingerprint_check_enroll_touch_sensor" msgid="5010063281557456236">"వేలిముద్ర సెన్సార్‌ను తాకండి"</string>
     <string name="fingerprint_check_enroll_not_recognized" msgid="2779520550437394431">"వేలిముద్ర (ఫింగర్-ప్రింట్) మ్యాచ్ కాలేదు"</string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"వాచ్ అన్‌లాక్"</string>
+    <!-- no translation found for security_settings_activeunlock (8922823742770802651) -->
+    <skip />
     <string name="biometric_settings_intro_with_activeunlock" msgid="5032953826653108646">"మీరు ఫేస్ అన్‌లాక్, వేలిముద్ర అన్‌లాక్‌ను సెటప్ చేసినప్పుడు, మీరు మాస్క్ ధరించి ఉంటే లేదా చీకటి ప్రదేశంలో ఉంటే మీ ఫోన్, మీ వేలిముద్రను అడుగుతుంది.\n\nవాచ్ అన్‌లాక్ అనేది ఉదాహరణకు, మీ వేళ్లు తడిగా ఉన్నప్పుడు లేదా ముఖం గుర్తించబడనప్పుడు మీ ఫోన్‌ను అన్‌లాక్ చేయడానికి మరొక అనుకూలమైన మార్గం."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="5881355884547769337">"వాచ్ అన్‌లాక్ అనేది ఉదాహరణకు, మీ వేలిముద్ర గుర్తించబడనప్పుడు మీ ఫోన్‌ను అన్‌లాక్ చేయడానికి మరొక అనుకూలమైన మార్గం."</string>
     <string name="biometric_settings_intro_with_face" msgid="7671919122230588521">"వాచ్ అన్‌లాక్ అనేది ఉదాహరణకు, మీ ముఖం గుర్తించబడనప్పుడు మీ ఫోన్‌ను అన్‌లాక్ చేయడానికి మరొక అనుకూలమైన మార్గం."</string>
@@ -586,7 +592,7 @@
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"సెన్సార్‌పై మీ వేలిముద్రలో కొంత భాగాన్ని ఒక వైపునకు నొక్కి ఉంచి, ఆపై మరొక వైపునకు మార్చండి"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"వేలిముద్ర సెటప్‌ను దాటవేయాలా?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"మీరు మీ ఫోన్‌ను అన్‌లాక్ చేయడానికి మీ వేలిముద్రను ఒక మార్గంగా ఎంచుకున్నారు. ఇప్పుడు దాటవేసినా, దీన్ని తర్వాత సెటప్ చేయాల్సి ఉంటుంది. కేవలం ఒక నిమిషంలో సెటప్‌ను పూర్తి చేయవచ్చు."</string>
-    <string name="lock_screen_skip_setup_title" msgid="6979006375138175111">"<xliff:g id="OPTIONS">%s</xliff:g> కోసం సెటప్‌ను స్కిప్ చేయాలా?"</string>
+    <string name="lock_screen_skip_setup_title" msgid="6979006375138175111">"<xliff:g id="OPTIONS">%s</xliff:g> సెటప్‌ను స్కిప్ చేయాలా?"</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"పిన్ సెటప్‌ను దాటవేయాలా?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"PIN, ముఖం కోసం సెటప్‌ను స్కిప్ చేయాలా?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"PIN, వేలిముద్ర కోసం సెటప్‌ను స్కిప్ చేయాలా?"</string>
@@ -775,6 +781,8 @@
     <string name="unlock_set_unlock_password_title" msgid="2559842616268607041">"పాస్‌వర్డ్"</string>
     <string name="unlock_set_do_later_title" msgid="6565575303676064364">"ఇప్పుడు కాదు"</string>
     <string name="current_screen_lock" msgid="1367883977261098017">"ప్రస్తుత స్క్రీన్ లాక్"</string>
+    <string name="unlock_accessibility_pin_area" msgid="437104569661316525">"PINను ఎంటర్ చేసే చోటు"</string>
+    <string name="unlock_accessibility_password" msgid="5404713613573232309">"పరికరం పాస్‌వర్డ్"</string>
     <string name="fingerprint_unlock_set_unlock_pattern" msgid="2229689425933043901">"ఆకృతి • వేలిముద్ర"</string>
     <string name="fingerprint_unlock_set_unlock_pin" msgid="7979848492740627674">"PIN • వేలిముద్ర"</string>
     <string name="fingerprint_unlock_set_unlock_password" msgid="6207676267295036963">"పాస్‌వర్డ్ • వేలిముద్ర"</string>
@@ -890,8 +898,7 @@
     <string name="lockpassword_credential_changed" msgid="5934778179732392028">"స్క్రీన్ లాక్ ఇప్పటికే మార్చబడింది. కొత్త స్క్రీన్ లాక్‌తో మళ్లీ ట్రై చేయండి."</string>
     <string name="lockpattern_tutorial_cancel_label" msgid="775215267818384016">"రద్దు చేయండి"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="1329049481210689408">"తర్వాత"</string>
-    <!-- no translation found for manage_device_admin (7272894919651600481) -->
-    <skip />
+    <string name="manage_device_admin" msgid="7272894919651600481">"పరికర అడ్మిన్"</string>
     <string name="number_of_device_admins_none" msgid="152926922020437312">"యాప్‌లేవీ యాక్టివ్‌గా లేవు"</string>
     <string name="number_of_device_admins" msgid="3402909995362162876">"{count,plural, =1{యాక్టివ్‌గా ఉన్న # యాప్}other{యాక్టివ్‌గా ఉన్న # యాప్‌లు}}"</string>
     <string name="manage_trust_agents" msgid="6410149930029992356">"విశ్వసనీయ ఏజెంట్‌లు"</string>
@@ -1309,7 +1316,8 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"అధిక రిజల్యూషన్"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"పూర్తి రిజల్యూషన్"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"పూర్తి రిజల్యూషన్, మీ బ్యాటరీని ఎక్కువగా వినియోగిస్తుంది. పూర్తి రిజల్యూషన్‌కు మారడం వల్ల కొన్ని యాప్‌లు రీస్టార్ట్ అయ్యే అవకాశం ఉంది."</string>
-    <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"ఎంచుకోబడింది"</string>
+    <!-- no translation found for screen_resolution_delimiter_a11y (5826162120538795842) -->
+    <skip />
     <string name="color_mode_title" msgid="8666690832113906028">"రంగులు"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"సహజం"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"మెరుగుపరిచినవి"</string>
@@ -1383,12 +1391,11 @@
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"నిద్రించే సమయం తర్వాత ఆటోమేటిక్‌గా ఆఫ్ అవుతుంది"</string>
     <string name="dark_ui_summary_on_auto_mode_modes" msgid="7769594183411785087">"<xliff:g id="ID_1">%1$s</xliff:g> ముగిసినప్పుడు ఆఫ్ అవుతాయి"</string>
     <string name="dark_ui_text" msgid="4392646155331126666">"మీ బ్యాటరీ ఎక్కువ సేపు పని చేయడానికి సహాయపడేలా ముదురు రంగు థీమ్ అనేది కొన్ని స్క్రీన్‌ల మీద నలుపు బ్యాక్‌గ్రౌండ్‌ను ఉపయోగిస్తుంది. ఆన్ చేయాల్సిన నిరీక్షణ సమయాన్ని ముదురు రంగు థీమ్ అనేది మీ స్క్రీన్ ఆఫ్ అయ్యే వరకు షెడ్యూల్ చేస్తుంది."</string>
+    <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"డార్క్ బ్యాక్‌గ్రౌండ్‌ను ఉపయోగించి మీ స్క్రీన్‌ను చూసేందుకు మరింత సౌకర్యవంతంగా చేయండి, కొన్ని స్క్రీన్‌లలో బ్యాటరీ వినియోగాన్ని తగ్గించండి. స్క్రీన్ ఆఫ్‌లో ఉన్నప్పుడు, మీకు షెడ్యూల్ ఉంటే, మీ థీమ్ మారుతుంది."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"డార్క్ థీమ్‌ ప్రస్తుతం మీ నిద్రించే సమయ మోడ్ షెడ్యూల్‌ను ఫాలో అవుతోంది"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"నిద్రించే సమయ మోడ్ సెట్టింగ్‌లు"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{మోడ్‌లు డార్క్ థీమ్‌ను కూడా యాక్టివేట్ చేయగలవు}=1{{mode_1} డార్క్ థీమ్‌ను కూడా యాక్టివేట్ చేయగలదు}=2{{mode_1}, {mode_2} డార్క్ థీమ్‌ను కూడా యాక్టివేట్ చేయగలవు}=3{{mode_1}, {mode_2}, {mode_3} డార్క్ థీమ్‌ను కూడా యాక్టివేట్ చేయగలవు}other{{mode_1}, {mode_2}, మరో # డార్క్ థీమ్‌ను కూడా యాక్టివేట్ చేయగలవు}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"మోడ్‌ల సెట్టింగ్‌లు"</string>
-    <string name="even_dimmer_display_title" msgid="4509732439977906028">"కాంతిని మరింత డిమ్ చేయండి"</string>
-    <string name="even_dimmer_display_summary" msgid="120301078873242172">"పరికర లైటింగ్‌ను సాధారణ స్థాయి కంటే తక్కువగా ఉంచండి"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"ఆటోమేటిక్ స్క్రీన్ గడువు ముగింపు"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"ఇన్‌యాక్టివ్‌గా ఉన్న <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> తర్వాత"</string>
     <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"సెట్ చేయనివి"</string>
@@ -1784,7 +1791,7 @@
     <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"ముఖాన్ని లేదా వేలిముద్రను ఉపయోగించడానికి PINను సెట్ చేయండి"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"మీ పాస్‌వర్డ్‌ను మరచిపోయారా?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"మీ ఆకృతిని మర్చిపోయారా?"</string>
-    <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"మీ పిన్‌ను మర్చిపోయారా?"</string>
+    <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"మీ PINను మర్చిపోయారా?"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7401165571170203743">"కొనసాగడానికి మీ ఆకృతిని డ్రా చేయండి"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="8990266101852808091">"కొనసాగడానికి మీ PINను ఎంటర్ చేయండి"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="8823867445451497224">"కొనసాగడానికి మీ పాస్‌వర్డ్‌ను ఎంటర్ చేయండి"</string>
@@ -1802,7 +1809,7 @@
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"పాస్‌వర్డ్‌ని ధృవీకరించండి"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"ఇది మీరే అని వెరిఫై చేయండి"</string>
     <string name="lockpassword_remote_validation_pattern_details" msgid="4655537780358707983">"Google ఖాతాలు, సెట్టింగ్‌లు మరియు మరిన్నింటిని బదిలీ చేయడానికి, మీ ఇతర పరికర ఆకృతిని నమోదు చేయండి. మీ ఆకృతి ఎన్‌క్రిప్ట్ చేయబడింది."</string>
-    <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"Google ఖాతాలు, సెట్టింగ్‌లు మరియు మరిన్నింటిని బదిలీ చేయడానికి, మీ ఇతర పరికర PINను నమోదు చేయండి. మీ PIN ఎన్‌క్రిప్ట్ చేయబడింది."</string>
+    <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"Google ఖాతాలు, సెట్టింగ్‌లు, మరిన్నింటిని బదిలీ (ట్రాన్స్‌ఫర్) చేయడానికి, మీ ఇతర పరికర PINను ఎంటర్ చేయండి. మీ PIN ఎన్‌క్రిప్ట్ చేయబడింది."</string>
     <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"Google ఖాతాలు, సెట్టింగ్‌లు మరియు మరిన్నింటిని బదిలీ చేయడానికి, మీ ఇతర పరికర పాస్‌వర్డ్‌ను నమోదు చేయండి. మీ పాస్‌వర్డ్ ఎన్‌క్రిప్ట్ చేయబడింది."</string>
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"ఈ పరికరాన్ని అన్‌లాక్ చేయడానికి ఆకృతిని కూడా ఉపయోగించండి"</string>
     <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"ఈ పరికరాన్ని అన్‌లాక్ చేయడానికి PINను కూడా ఉపయోగించండి"</string>
@@ -2053,12 +2060,9 @@
     <string name="mouse_keys_summary" msgid="7030731235143286467">"మీ కీబోర్డ్‌ను ఉపయోగించి పాయింటర్‌ను కంట్రోల్ చేయండి"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"రివర్స్ స్క్రోలింగ్"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"పేజీని కిందికి కదిలించడానికి పైకి స్క్రోల్ చేయండి"</string>
-    <!-- no translation found for mouse_scrolling_category_title (2992126595687187296) -->
-    <skip />
-    <!-- no translation found for mouse_scrolling_acceleration (7119758828203396430) -->
-    <skip />
-    <!-- no translation found for mouse_scrolling_speed (3999483025392860903) -->
-    <skip />
+    <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"స్క్రోలింగ్"</string>
+    <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"కంట్రోల్ చేయబడే స్క్రోలింగ్"</string>
+    <string name="mouse_scrolling_speed" msgid="3999483025392860903">"స్క్రోలింగ్ వేగం"</string>
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"ప్రాథమిక మౌస్ బటన్‌ను మార్చండి"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"ఎడమ మౌస్ బటన్‌ను, కుడి బటన్‌గా ఉపయోగించండి"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"కర్సర్ యాక్సిలరేషన్"</string>
@@ -2107,7 +2111,7 @@
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"ట‌చ్‌ప్యాడ్ సంజ్ఞల‌ను తెలుసుకోండి"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"ట్రాక్‌ప్యాడ్, ట్రాక్ ప్యాడ్, మౌస్, కర్సర్, స్క్రోల్, స్వైప్, కుడి క్లిక్, క్లిక్, పాయింటర్"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"కుడి క్లిక్, ట్యాప్"</string>
-    <string name="three_finger_tap_middle_click" msgid="5274906692591143158">"మిడిల్ క్లిక్"</string>
+    <string name="three_finger_tap_middle_click" msgid="1759914275939765929">"మౌస్ మిడిల్ క్లిక్ బటన్"</string>
     <string name="three_finger_tap_launch_gemini" msgid="4030401656711588982">"Assistantను ప్రారంభించండి"</string>
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"మొదటి ట్యాబ్‌కు వెళ్లండి"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"వెనుకకు వెళ్లండి"</string>
@@ -2260,6 +2264,16 @@
     <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"క్యాప్షన్‌ ప్రాధాన్యతల గురించి మరింత తెలుసుకోండి"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"మ్యాగ్నిఫికేషన్"</string>
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"మ్యాగ్నిఫికేషన్ షార్ట్‌కట్"</string>
+    <!-- no translation found for accessibility_magnification_cursor_following_title (29531257984012743) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_cursor_following_header (7283095798622223509) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_cursor_following_continuous (1119319218662522794) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_cursor_following_center (3504798009192014460) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_cursor_following_edge (8675207762416655758) -->
+    <skip />
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"టైపింగ్‌ను మ్యాగ్నిఫై చేయండి"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"మీరు టైప్ చేస్తున్నప్పుడు మ్యాగ్నిఫయర్ టెక్స్ట్‌ను ఫాలో అవుతుంది"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"యాప్‌ల మధ్య మారినప్పుడు ఆన్‌లో ఉంచండి"</string>
@@ -2313,6 +2327,7 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"జూమ్ చేయడం కోసం బటన్‌ని నొక్కండి"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"కంటెంట్‌ను పెద్దదిగా చేయడానికి స్క్రీన్‌పై త్వరగా జూమ్ - ఇన్ చేయండి"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;జూమ్ చేయడానికి:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. మ్యాగ్నిఫికేషన్‌ను ప్రారంభించడానికి షార్ట్‌కట్‌ను ఉపయోగించండి&lt;br/&gt; {1,number,integer}. స్క్రీన్‌ను ట్యాప్ చేయండి&lt;br/&gt; {2,number,integer}. స్క్రీన్ చుట్టూ కదిలేందుకు 2 వేళ్లతో లాగండి&lt;br/&gt; {3,number,integer}. జూమ్ చేయడాన్ని సర్దుబాటు చేయడానికి 2 వేళ్లతో స్క్రీన్‌ను నియంత్రించండి&lt;br/&gt; {4,number,integer}. మ్యాగ్నిఫికేషన్‌ను ఆపివేయడానికి షార్ట్‌కట్‌ను ఉపయోగించండి&lt;br/&gt;&lt;br/&gt;&lt;b&gt;తాత్కాలికంగా జూమ్ చేయడానికి:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. మీ మ్యాగ్నిఫికేషన్ రకం ఫుల్ స్క్రీన్‌కు సెట్ చేయబడిందని నిర్ధారించుకోండి&lt;br/&gt; {1,number,integer}. మ్యాగ్నిఫికేషన్‌ను ప్రారంభించడానికి షార్ట్‌కట్‌ను ఉపయోగించండి&lt;br/&gt; {2,number,integer}. స్క్రీన్‌పై ఎక్కడైనా తాకి &amp; హోల్డ్ చేయండి&lt;br/&gt; {3,number,integer}. స్క్రీన్ చుట్టూ కదిలేందుకు వేలితో లాగండి&lt;br/&gt; {4,number,integer}. మ్యాగ్నిఫికేషన్‌ను ఆపివేయడానికి వేలును స్క్రీన్‌పై నుండి తీసివేయండి"</string>
+    <string name="accessibility_screen_magnification_keyboard_summary" msgid="2504303274186294767">"&lt;b&gt;ఈ విధంగా కీబోర్డ్‌తో జూమ్ చేయండి:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. మాగ్నిఫికేషన్‌ను ప్రారంభించడానికి షార్ట్‌కట్‌ను ఉపయోగించండి&lt;br/&gt; {1,number,integer}. &lt;xliff:g id=meta1&gt;%1$s&lt;/xliff:g&gt;ను, &lt;xliff:g id=alt1&gt;%2$s&lt;/xliff:g&gt;ను హోల్డ్ చేసి, జూమ్ - ఇన్ లేదా జూమ్ - అవుట్ చేయడానికి + లేదా - నొక్కండి&lt;br/&gt; {2,number,integer}. &lt;xliff:g id=meta2&gt;%3$s&lt;/xliff:g&gt;ను, &lt;xliff:g id=alt2&gt;%4$s&lt;/xliff:g&gt;ను హోల్డ్ చేసి, స్క్రీన్ అంతటా కావలసిన చోటుకు మూవ్ చేయడానికి బాణం కీలను నొక్కండి&lt;br/&gt; {3,number,integer}. మ్యాగ్నిఫికేషన్‌ను ఆపడానికి షార్ట్‌కట్‌ను ఉపయోగించండి"</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;జూమ్ - ఇన్ చేయడానికి:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. మాగ్నిఫికేషన్‌ను ప్రారంభించడానికి షార్ట్‌కట్‌ను ఉపయోగించండి&lt;br/&gt; {1,number,integer}. స్క్రీన్‌ను ట్యాప్ చేయండి&lt;br/&gt; {2,number,integer}. స్క్రీన్ చుట్టూ కదిలేందుకు 2 వేళ్లతో లాగండి&lt;br/&gt; {3,number,integer}. జూమ్ చేయడాన్ని సర్దుబాటు చేయడానికి 2 వేళ్లతో స్క్రీన్‌ను నియంత్రించండి&lt;br/&gt; {4,number,integer}. మ్యాగ్నిఫికేషన్‌ను ఆపడానికి షార్ట్‌కట్‌ను ఉపయోగించండి&lt;br/&gt;&lt;br/&gt; మీరు తాత్కాలికంగా కూడా జూమ్ - ఇన్ చేయవచ్చు, ఇంకా మరిన్ని చేయవచ్చు."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;జూమ్ - ఇన్ చేయడానికి:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. మాగ్నిఫికేషన్‌ను ప్రారంభించడానికి షార్ట్‌కట్‌ను ఉపయోగించండి&lt;br/&gt; {1,number,integer}. స్క్రీన్‌ను ట్యాప్ చేయండి&lt;br/&gt; {2,number,integer}. స్క్రీన్ చుట్టూ కదిలేందుకు 1 వేలితో లేదా 2 వేళ్లతో లాగండి&lt;br/&gt; {3,number,integer}. జూమ్ చేయడాన్ని సర్దుబాటు చేయడానికి 2 వేళ్లతో స్క్రీన్‌ను నియంత్రించండి&lt;br/&gt; {4,number,integer}. మ్యాగ్నిఫికేషన్‌ను ఆపడానికి షార్ట్‌కట్‌ను ఉపయోగించండి&lt;br/&gt;&lt;br/&gt; మీరు తాత్కాలికంగా కూడా జూమ్ - ఇన్ చేయవచ్చు, ఇంకా మరిన్ని చేయవచ్చు."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"మ్యాగ్నిఫికేషన్‌ను ఆన్ చేసినప్పుడు, మీ స్క్రీన్‌పైన దగ్గరకు జూమ్ చేయవచ్చు.\n\n"<b>"జూమ్ చేయడానికి"</b>", మ్యాగ్నిఫికేషన్‌ను ప్రారంభించి, తర్వాత స్క్రీన్‌పై ఎక్కడైనా నొక్కండి.\n"<ul><li>"స్క్రోల్ చేయడానికి 2 లేదా అంతకంటే ఎక్కువ వేళ్లతో లాగండి"</li>\n<li>"జూమ్‌ను సర్దుబాటు చేయడానికి 2 లేదా అంతకంటే ఎక్కువ వేళ్లను దగ్గరకు లేదా దూరానికి లాగండి"</li></ul>\n\n<b>"తాత్కాలికంగా జూమ్ చేయడానికి"</b>", మ్యాగ్నిఫికేషన్‌ను ప్రారంభించి, తర్వాత స్క్రీన్‌ను ఎక్కడైనా తాకి &amp; పట్టుకోండి.\n"<ul><li>"స్క్రీన్ పైన కదలడానికి లాగండి"</li>\n<li>"దూరంగా జూమ్ చేయడానికి వేలిని పైకి ఎత్తండి"</li></ul>\n\n"కీబోర్డ్‌లో లేదా నావిగేషన్ బార్‌లో మీరు దగ్గరగా జూమ్ చేయలేరు."</string>
@@ -2394,15 +2409,15 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"అధిక కాంట్రాస్ట్ టెక్స్ట్"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"టెక్స్ట్ రంగును నలుపు లేదా తెలుపు రంగుకు మార్చండి. బ్యాక్‌గ్రౌండ్‌తో కాంట్రాస్ట్‌ను పెంచుతుంది."</string>
     <string name="accessibility_notification_high_contrast_text_title" msgid="2297915407152953323">"టెక్స్ట్ కాంట్రాస్ట్‌ను మెరుగుపరచండి"</string>
-    <string name="accessibility_notification_high_contrast_text_body" msgid="4111896614825062003">"<xliff:g id="OUTLINE_TEXT">%1$s</xliff:g> <xliff:g id="HIGH_CONTRAST_TEXT">%2$s</xliff:g>‌ను రీప్లేస్ చేసింది. మీరు దీన్ని <xliff:g id="SETTINGS">%3$s</xliff:g>‌లో ఆన్ చేయవచ్చు."</string>
-    <string name="accessibility_notification_high_contrast_text_action_open_settings" msgid="5945069315472850294">"<xliff:g id="SETTINGS">%1$s</xliff:g>‌కు వెళ్లండి"</string>
+    <string name="accessibility_notification_high_contrast_text_body" msgid="4111896614825062003">"<xliff:g id="OUTLINE_TEXT">%1$s</xliff:g> <xliff:g id="HIGH_CONTRAST_TEXT">%2$s</xliff:g>‌ను రీప్లేస్ చేసింది. మీరు దీన్ని \'<xliff:g id="SETTINGS">%3$s</xliff:g>‌\'లో ఆన్ చేయవచ్చు."</string>
+    <string name="accessibility_notification_high_contrast_text_action_open_settings" msgid="5945069315472850294">"\'<xliff:g id="SETTINGS">%1$s</xliff:g>‌\'కు వెళ్లండి"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8848579943445806659">"అవుట్‌లైన్ టెక్స్ట్"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"కాంట్రాస్ట్‌ను పెంచడానికి టెక్స్ట్ చుట్టూ నలుపు లేదా తెలుపు బ్యాక్‌గ్రౌండ్‌ను జోడించండి"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"స్క్రీన్ వర్ధనాన్ని ఆటోమేటిక్‌గా అప్‌డేట్ చేయండి"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"యాప్‌ పరివర్తనాల్లో స్క్రీన్ వర్ధనాన్ని అప్‌డేట్ చేయండి"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"పవర్ బటన్ కాల్‌ను ముగిస్తుంది"</string>
     <string name="accessibility_force_invert_title" msgid="5248504501753732051">"యాప్‌లన్నింటిలో డార్క్ థీమ్ వాడండి"</string>
-    <string name="accessibility_force_invert_summary" msgid="179237803986895815">"లైట్ థీమ్ యాప్‌లను ఆటోమేటిక్‌గా డార్క్ థీమ్‌గా మార్చండి"</string>
+    <string name="accessibility_force_invert_summary" msgid="257503086198180749">"మరిన్ని యాప్స్‌కు డార్క్ థీమ్‌ను అందుబాటులోకి తెస్తోంది. యాప్స్ అన్నింటితో పని చేయకపోవచ్చు."</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"యానిమేషన్‌లను తీసివేయండి"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"స్క్రీన్ మీద కదలికను తగ్గించండి"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"మోనో ఆడియో"</string>
@@ -2818,7 +2833,12 @@
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> - <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_timestamps_content_description" msgid="1927748134271595985">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> నుండి <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g> వరకు"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>⁠"</string>
-    <string name="battery_usage_time_info_and_battery_level" msgid="6732629268310936155">"<xliff:g id="TIME_INFO">%1$s</xliff:g> <xliff:g id="BATTERY_LEVEL">%2$s</xliff:g>"</string>
+    <!-- no translation found for battery_usage_status_time_info_and_battery_level (5158088815445378555) -->
+    <skip />
+    <!-- no translation found for battery_chart_slot_status_selected (4196580689444438148) -->
+    <skip />
+    <!-- no translation found for battery_chart_slot_status_unselected (6930198843537021396) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"బ్యాటరీ వినియోగం చార్ట్"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"రోజువారీ బ్యాటరీ వినియోగ చార్ట్"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"గంటలవారీ బ్యాటరీ వినియోగ చార్ట్"</string>
@@ -2898,6 +2918,10 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"ఆన్"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"ఆఫ్"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"అనుకూల కనెక్టివిటీని ఉపయోగించండి"</string>
+    <string name="adaptive_connectivity_wifi_switch_title" msgid="5899985025046319472">"Wi‑Fiని సెల్యులార్‌కు ఆటోమేటిక్‌గా మార్చండి"</string>
+    <string name="adaptive_connectivity_wifi_switch_summary" msgid="4650230240134029595">"Wi‑Fi కనెక్షన్ సరిగా లేనప్పుడు లేదా అందుబాటులో లేనప్పుడు సెల్యులార్ డేటాను ఆటోమేటిక్‌గా ఉపయోగించండి. డేటా వినియోగ ఛార్జీలు వర్తించవచ్చు."</string>
+    <string name="adaptive_connectivity_mobile_network_switch_title" msgid="2473274404695643218">"బ్యాటరీ లైఫ్‌కై మొబైల్ నెట్‌వర్క్ ఆటోస్విచ్ చేయండి"</string>
+    <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="2432517485362085341">"నెట్‌వర్క్ కనెక్షన్‌లను ఆటోమేటిక్‌గా మేనేజ్ చేయడం ద్వారా బ్యాటరీ లైఫ్‌ను పొడిగించండి"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"మొబైల్ నెట్‌వర్క్ సెక్యూరిటీ"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"నెట్‌వర్క్ రకం, ఎన్‌క్రిప్షన్, నోటిఫికేషన్ కంట్రోల్స్"</string>
     <string name="cellular_security_top_intro" msgid="6749166804080092892">"కాలం చెల్లిన లేదా ఎన్‌క్రిప్ట్ కాని నెట్‌వర్క్‌ల గుండా వెళ్లే  మీ కాల్స్‌ను, మెసేజ్‌లను, డేటాను రక్షించడానికి  ఈ సెట్టింగ్‌లు సహాయపడతాయి. తద్వారా, మీ డేటా చోరీ కాకుండా లేదా మానిటరింగ్‌లో బహిర్గతం కాకుండా రక్షింపబడుతుంది."</string>
@@ -2926,7 +2950,7 @@
     <string name="credentials_reset_hint" msgid="4054601857203464867">"అన్ని కంటెంట్‌లను తీసివేయాలా?"</string>
     <string name="credentials_erased" msgid="9121052044566053345">"ఆధారాల స్టోరేజ్‌ ఎరేజ్ చేయబడింది."</string>
     <string name="credentials_not_erased" msgid="3611058412683184031">"ఆధారాల నిల్వను ఎరేజ్ చేయడం సాధ్యపడలేదు."</string>
-    <string name="usage_access_title" msgid="1580006124578134850">"వినియోగ యాక్సెస్ గల యాప్‌లు"</string>
+    <string name="usage_access_title" msgid="8784394396356369568">"యాప్ వినియోగ డేటాకు యాక్సెస్ గల యాప్స్"</string>
     <string name="ca_certificate" msgid="3076484307693855611">"CA సర్టిఫికెట్"</string>
     <string name="user_certificate" msgid="6897024598058566466">"VPN &amp; యాప్ యూజర్ సర్టిఫికెట్"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Wi‑Fi సర్టిఫికెట్"</string>
@@ -2971,8 +2995,7 @@
     <string name="remove_device_admin" msgid="3143059558744287259">"ఈ పరికర అడ్మిన్ యాప్‌ను డీయాక్టివేట్ చేయండి"</string>
     <string name="uninstall_device_admin" msgid="4481095209503956916">"యాప్‌ను అన్‌ఇన్‌స్టాల్ చేయి"</string>
     <string name="remove_and_uninstall_device_admin" msgid="707912012681691559">"నిష్క్రియం చేసి, అన్ఇన్‌స్టాల్ చేయి"</string>
-    <!-- no translation found for select_device_admin_msg (2506262585633022884) -->
-    <skip />
+    <string name="select_device_admin_msg" msgid="2506262585633022884">"పరికర అడ్మిన్"</string>
     <string name="no_device_admins" msgid="8888779888103079854">"పరికర నిర్వాహకుల యాప్‌లు అందుబాటులో లేవు"</string>
     <string name="no_trust_agents" msgid="8659098725864191600">"విశ్వసనీయ ఏజెంట్‌లు అందుబాటులో లేరు"</string>
     <string name="add_device_admin_msg" msgid="7730006568970042119">"పరికర అడ్మిన్‌ యాప్‌ యాక్టివేట్‌ చేయాలా?"</string>
@@ -2985,7 +3008,7 @@
     <string name="profile_owner_add_title_simplified" msgid="2320828996993774182">"పర్యవేక్షణను అనుమతించాలా?"</string>
     <string name="adding_profile_owner_warning" msgid="6868275476058020513">"కొనసాగిస్తే, మీ యూజర్‌ను మీ అడ్మిన్ మేనేజ్ చేయగలరు, దాని వలన మీ వ్యక్తిగత డేటాతో పాటు అనుబంధితంగా ఉన్న డేటా కూడా స్టోర్ చేయబడవచ్చు.\n\nమీ అడ్మిన్ నెట్‌వర్క్ యాక్టివిటీ, మీ డివైజ్ యొక్క లొకేషన్ సమాచారంతో పాటు ఈ యూజర్‌కు అనుబంధితంగా ఉన్న సెట్టింగ్‌లు, యాక్సెస్, యాప్‌లు మరియు డేటాను పర్యవేక్షించగలరు, మేనేజ్ చేయగలరు."</string>
     <string name="admin_disabled_other_options" msgid="8122039047419172139">"ఇతర ఎంపికలను మీ నిర్వాహకులు నిలిపివేసారు"</string>
-    <string name="admin_more_details" msgid="4928985331640193758">"మరింత తెలుసుకోండి"</string>
+    <string name="admin_more_details" msgid="6091028872148388357">"డిజేబుల్ చేసిన ఆటోమేటిక్ స్క్రీన్ గడువు ముగింపు ఆప్షన్‌ల గురించి మరింత తెలుసుకోండి"</string>
     <string name="notification_log_title" msgid="2812594935014664891">"నోటిఫికేషన్ లాగ్"</string>
     <string name="notification_history_title" msgid="8821060912502593309">"నోటిఫికేషన్ హిస్టరీ"</string>
     <string name="notification_history_today" msgid="6081829638548808795">"చివరి %d గంటలు"</string>
@@ -3103,6 +3126,12 @@
     <string name="vpn_no_ca_cert" msgid="3687379414088677735">"(సర్వర్‌ను ధృవీకరించదు)"</string>
     <string name="vpn_no_server_cert" msgid="8106540968643125407">"(సర్వర్ నుండి స్వీకరించబడింది)"</string>
     <string name="vpn_always_on_invalid_reason_other" msgid="4571905303713233321">"ఎంటర్ చేసిన సమాచారానికి ఎల్లప్పుడూ ఆన్‌లో ఉండే VPN సపోర్ట్ చేయదు"</string>
+    <!-- no translation found for vpn_optional (3085880299239180702) -->
+    <skip />
+    <!-- no translation found for vpn_required (2538500165710360491) -->
+    <skip />
+    <!-- no translation found for vpn_field_required (952531424443686800) -->
+    <skip />
     <string name="vpn_cancel" msgid="5929410618112404383">"రద్దు చేయండి"</string>
     <string name="vpn_done" msgid="5137858784289564985">"తీసివేయండి"</string>
     <string name="vpn_save" msgid="683868204634860888">"సేవ్ చేయండి"</string>
@@ -3841,7 +3870,7 @@
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"సెట్టింగ్‌లను మార్చడం"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"ఇది \'అంతరాయం కలిగించవద్దు\'ను ఆన్ లేదా ఆఫ్ చేయగలదు, అలాగే సంబంధిత సెట్టింగ్‌లను మార్చగలదు."</string>
     <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"ఇది మోడ్‌లను మేనేజ్ చేయగలదు, యాక్టివేట్ చేయగలదు, ఇంకా సంబంధిత సెట్టింగ్‌లను మార్చగలదు."</string>
-    <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"మీరు <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> కోసం నోటిఫికేషన్ యాక్సెస్‌ను ఆఫ్ చేస్తే, అంతరాయం కలిగించవద్దు ఎంపిక యాక్సెస్ కూడా ఆఫ్ చేయబడవచ్చు."</string>
+    <string name="notification_listener_disable_warning_summary" msgid="205200471571837170">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>‌కు మీరు నోటిఫికేషన్ యాక్సెస్‌ను ఆఫ్ చేస్తే, \'అంతరాయం కలిగించవద్దు\' కంట్రోల్ కూడా ఆఫ్ కావచ్చు."</string>
     <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"మీరు <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> కోసం నోటిఫికేషన్ యాక్సెస్‌ను ఆఫ్ చేస్తే, మోడ్‌లు కూడా ఆఫ్ అయ్యే అవకాశం ఉంది."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"ఆఫ్ చేయండి"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"రద్దు చేయండి"</string>
@@ -3863,8 +3892,7 @@
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"ఈ యాప్‌లో మరిన్ని సెట్టింగ్‌లు అందుబాటులో ఉన్నాయి"</string>
     <string name="notification_polite_title" msgid="6121016426991791557">"నోటిఫికేషన్ కూల్‌డౌన్"</string>
     <string name="notification_polite_main_control_title" msgid="5812529809151927149">"నోటిఫికేషన్ కూల్‌డౌన్‌ను ఉపయోగించండి"</string>
-    <!-- no translation found for notification_polite_description (6137533404978878957) -->
-    <skip />
+    <string name="notification_polite_description" msgid="6137533404978878957">"తక్కువ వ్యవధిలో మీరు పలు నోటిఫికేషన్‌లను పొందినప్పుడు, 1 నిమిషానికి మీ పరికర వాల్యూమ్‌ను తగ్గించి, అలర్ట్‌లను కుదిస్తుంది. కాల్స్, అలారాలు, ప్రాధాన్య సంభాషణలు ప్రభావితం కావు. \n\nకూల్‌డౌన్ సమయంలో అందుకున్న నోటిఫికేషన్‌లను, స్క్రీన్‌ను పై నుండి కిందికి లాగడం ద్వారా కనుగొనవచ్చు."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"వర్క్ ప్రొఫైల్‌లకు వర్తింపజేయండి"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"వర్క్ ప్రొఫైల్ యాప్‌లకు వర్తింపజేయండి"</string>
     <string name="notification_bundle_title" msgid="460988459835922719">"బండిల్ చేసిన నోటిఫికేషన్‌లు"</string>
@@ -3910,9 +3938,9 @@
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"ఈ యాప్‌లను కనెక్ట్ చేయడానికి, మీ ఆఫీస్ ప్రొఫైల్‌లో <xliff:g id="NAME">%1$s</xliff:g>ను ఇన్‌స్టాల్ చేయండి"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"ఈ యాప్‌లను కనెక్ట్ చేయడానికి, మీ వ్యక్తిగత ప్రొఫైల్‌లో <xliff:g id="NAME">%1$s</xliff:g>ను ఇన్‌స్టాల్ చేయండి"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"యాప్‌ను పొందడానికి ట్యాప్ చేయండి"</string>
-    <string name="manage_zen_access_title" msgid="1562322900340107269">"అంతరాయం కలిగించవద్దు యాక్సెస్"</string>
+    <string name="manage_zen_access_title" msgid="4123905441114743974">"\'అంతరాయం కలిగించవద్దు\' కంట్రోల్"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"\'అంతరాయం కలిగించవద్దు\' ఫీచర్‌ను అనుమతించండి"</string>
-    <string name="zen_access_empty_text" msgid="3779921853282293080">"ఇన్‌స్టాల్ చేసిన యాప్‌లేవీ అంతరాయం కలిగించవద్దు యాక్సెస్ రిక్వెస్ట్ చేయలేదు"</string>
+    <string name="zen_access_empty_text" msgid="2662270585004373785">"ఇన్‌స్టాల్ చేసిన యాప్‌లేవీ \'అంతరాయం కలిగించవద్దు\' కంట్రోల్‌ను రిక్వెస్ట్ చేయలేదు"</string>
     <string name="manage_zen_modes_access_title" msgid="2520680004915648824">"మోడ్స్ యాక్సెస్"</string>
     <string name="zen_modes_access_detail_switch" msgid="4060429747631111299">"మోడ్స్ యాక్సెస్‌ను అనుమతించండి"</string>
     <string name="zen_modes_access_empty_text" msgid="8750927923904377110">"ఇన్‌స్టాల్ చేసిన యాప్‌లేవీ మోడ్‌లకు యాక్సెస్‌ను రిక్వెస్ట్ చేయలేదు"</string>
@@ -4223,10 +4251,10 @@
     <string name="default_phone_title" msgid="7616730756650803827">"ఫోన్ యాప్"</string>
     <string name="system_app" msgid="1863291702508355041">"(సిస్టమ్)"</string>
     <string name="apps_storage" msgid="643866814746927111">"యాప్‌ల స్టోరేజ్"</string>
-    <string name="usage_access" msgid="5487993885373893282">"వినియోగ యాక్సెస్"</string>
-    <string name="permit_usage_access" msgid="179630895262172674">"వినియోగ యాక్సెస్‌ను అనుమతించండి"</string>
+    <string name="usage_access" msgid="640680494210288246">"యాప్ వినియోగ డేటా"</string>
+    <string name="permit_usage_access" msgid="1590518257313260262">"యాప్ వినియోగ డేటాకు యాక్సెస్‌ను ఇవ్వండి"</string>
     <string name="time_spent_in_app_pref_title" msgid="25327097913383330">"స్క్రీన్ టైం"</string>
-    <string name="usage_access_description" msgid="8547716253713890707">"\'వినియోగ యాక్సెస్\' ద్వారా యాప్, మీరు ఏయే ఇతర యాప్‌లను ఉపయోగిస్తున్నారో, వాటిని ఎంత తరచుగా ఉపయోగిస్తున్నారో, అలాగే మీ క్యారియర్, భాష సెట్టింగ్‌లు, ఇతర వివరాలను ట్రాక్ చేయగలదు."</string>
+    <string name="usage_access_description" msgid="2593955296993609047">"యాప్ వినియోగ డేటాతో ఒక యాప్ మీరు ఉపయోగించే ఇతర యాప్‌ల గురించి, వాటిని ఎంత తరచుగా ఉపయోగిస్తున్నారనే దాని గురించి అలాగే మీ క్యారియర్, భాష సెట్టింగ్‌లు, ఇతర వివరాలను ట్రాక్ చేయగలదు."</string>
     <string name="memory_settings_title" msgid="6582588646363308430">"మెమరీ"</string>
     <string name="always_running" msgid="9012705720688200252">"ఎల్లప్పుడూ అమలు చేయబడుతోంది (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
     <string name="sometimes_running" msgid="7954947311082655448">"కొన్నిసార్లు అమలు చేయబడుతోంది (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
@@ -4288,7 +4316,7 @@
     <string name="assist_access_screenshot_summary" msgid="5276593070956201863">"స్క్రీన్ ఇమేజ్‌ను యాక్సెస్ చేయడానికి సహాయక యాప్‌ను అనుమతిస్తుంది"</string>
     <string name="assist_flash_title" msgid="5449512572885550108">"స్క్రీన్‌ను ఫ్లాష్ చేయడం"</string>
     <string name="assist_flash_summary" msgid="3032289860177784594">"స్క్రీన్‌పై ఉండే, లేదా ఏదైనా స్క్రీన్‌షాట్‌లో ఉండే టెక్స్ట్‌ను సహాయక యాప్ యాక్సెస్ చేసినప్పుడు, స్క్రీన్ అంచులను ఫ్లాష్ చేస్తుంది"</string>
-    <string name="assist_footer" msgid="8248015363806299068">"సహాయక యాప్‌లు మీరు వీక్షిస్తున్న స్క్రీన్‌లోని సమాచారం ఆధారంగా మీకు సహాయపడగలవు. కొన్ని యాప్‌లు మీకు సమగ్రమైన సహాయాన్ని అందించడానికి లాంచర్‌కు, వాయిస్ ఇన్‌పుట్ సర్వీసులకు రెండింటికీ సపోర్ట్‌ చేస్తాయి."</string>
+    <string name="assist_footer" msgid="8248015363806299068">"మీ ముందున్న స్క్రీన్‌లోని సమాచారం ఆధారంగా సహాయక (అసిస్ట్) యాప్‌లు, మీకు హెల్ప్ చేయగలవు. కొన్ని యాప్‌లు, మీకు ఈజీగా సాయం చేయడానికి లాంచర్‌కు, వాయిస్ ఇన్‌పుట్ సర్వీసులకు రెండింటికీ సపోర్ట్‌ ఇస్తాయి."</string>
     <string name="average_memory_use" msgid="717313706368825388">"సగటు మెమరీ వినియోగం"</string>
     <string name="maximum_memory_use" msgid="2171779724001152933">"గరిష్ట మెమరీ వినియోగం"</string>
     <string name="memory_usage" msgid="5594133403819880617">"మెమరీ వినియోగం"</string>
@@ -4324,7 +4352,7 @@
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"మీ బ్యాటరీ మరింత త్వరగా వినియోగించబడవచ్చు. ఇకపై ఈ యాప్ నేపథ్య బ్యాటరీ వినియోగం పరిమితం చేయబడదు."</string>
     <string name="ignore_optimizations_off_desc" msgid="3324571675983286177">"మెరుగైన బ్యాటరీ సామర్థ్యం కోసం సిఫార్సు చేయబడింది"</string>
     <string name="app_list_preference_none" msgid="1635406344616653756">"ఏదీ లేదు"</string>
-    <string name="work_profile_usage_access_warning" msgid="3477719910927319122">"ఈ యాప్‌లో వినియోగ యాక్సెస్‌ను ఆఫ్ చేసినా కూడా మీ కార్యాలయ ప్రొఫైల్‌లోని యాప్‌ డేటా వినియోగాన్ని ట్రాక్ చేయకుండా మీ నిర్వాహకులు నివారించబడరు"</string>
+    <string name="work_profile_usage_access_warning" msgid="7579246573371327219">"ఈ యాప్‌నకు యాప్ వినియోగ డేటాను ఆఫ్ చేయడం వలన మీ వర్క్ ప్రొఫైల్‌లో యాప్స్‌కు సంబంధించిన డేటా వినియోగాన్ని ట్రాక్ చేయకుండా మీ అడ్మిన్‌ను నివారించడం జరగదు"</string>
     <string name="draw_overlay" msgid="7902083260500573027">"ఇతర యాప్‌ల ఎగువున ప్రదర్శించండి"</string>
     <string name="system_alert_window_settings" msgid="6458633954424862521">"ఇతర యాప్‌ల ఎగువున ప్రదర్శించండి"</string>
     <string name="permit_draw_overlay" msgid="4468994037192804075">"ఇతర యాప్‌ల ఎగువున కనిపించడానికి అనుమతించండి"</string>
@@ -4396,8 +4424,18 @@
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"సెట్టింగ్‌లు, అనుమతులు, కార్పొరేట్ యాక్సెస్, నెట్‌వర్క్ యాక్టివిటీ మరియు డివైజ్ యొక్క లొకేషన్ సమాచారంతో పాటు ఈ యూజర్‌కు అనుబంధితంగా ఉన్న యాప్‌లు, డేటాను మీ అడ్మిన్ పర్యవేక్షించగలరు, మేనేజ్ చేయగలరు."</string>
     <string name="admin_device_owner_message" msgid="5503131744126520590">"సెట్టింగ్‌లు, అనుమతులు, కార్పొరేట్ యాక్సెస్, నెట్‌వర్క్ యాక్టివిటీ మరియు డివైజ్  యొక్క లొకేషన్ సమాచారంతో పాటు ఈ డివైజ్‌కు అనుబంధితంగా ఉన్న యాప్‌లు మరియు డేటాను మీ అడ్మిన్ పర్యవేక్షించగలరు, మేనేజ్ చేయగలరు."</string>
     <string name="admin_financed_message" msgid="1156197630834947884">"మీ పరికర అడ్మినిస్ట్రేటర్ ఈ పరికరంతో అనుబంధించబడిన డేటాను యాక్సెస్ చేయవచ్చు, యాప్‌లను మేనేజ్ చేయవచ్చు అలాగే ఈ పరికరాల సెట్టింగ్‌లను మార్చవచ్చు."</string>
-    <string name="disabled_by_advanced_protection_title" msgid="766656508280098112">"అడ్వాన్స్‌డ్ ప్రొటెక్షన్ ద్వారా నివారించబడింది"</string>
-    <string name="disabled_by_advanced_protection_message" msgid="5515085544669304056">"మీ పరికరంలో అడ్వాన్స్‌డ్ ప్రొటెక్షన్ ఆన్ చేసి ఉన్నందున ఈ చర్య అనుమతించబడదు."</string>
+    <!-- no translation found for disabled_by_advanced_protection_title (9051476417559262469) -->
+    <skip />
+    <!-- no translation found for disabled_by_advanced_protection_setting_is_on_message (4242986779932956593) -->
+    <skip />
+    <!-- no translation found for disabled_by_advanced_protection_setting_is_off_message (7777487013672230696) -->
+    <skip />
+    <!-- no translation found for disabled_by_advanced_protection_action_message (7164789633582857150) -->
+    <skip />
+    <!-- no translation found for disabled_by_advanced_protection_wep_action_message (239574547298386495) -->
+    <skip />
+    <!-- no translation found for disabled_by_advanced_protection_help_button_title (6539346613660731777) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"ఆఫ్ చేయండి"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"ఆన్ చేయండి"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"చూపుతుంది"</string>
@@ -4556,7 +4594,7 @@
     <string name="keywords_long_background_tasks" msgid="5788956269136054574">"ఎక్కువ సేపు నడిచే పనులు, డేటా బదిలీ, బ్యాక్‌గ్రౌండ్ టాస్క్‌లు"</string>
     <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"ShortcutManager రేట్-లిమిటింగ్ ప్రక్రియను రీసెట్ చేయండి"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"ShortcutManager రేట్-లిమిటింగ్ ప్రక్రియను రీసెట్ చేయబడింది"</string>
-    <string name="notification_suggestion_title" msgid="6309263655965785411">"లాక్ స్క్రీన్‌పై నియంత్రణ సమాచారం"</string>
+    <string name="notification_suggestion_title" msgid="6309263655965785411">"లాక్ స్క్రీన్‌పై ఏ సమాచారం కనబడాలో కంట్రోల్ చేయండి"</string>
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"నోటిఫికేషన్ కంటెంట్‌ను చూపు లేదా దాచు"</string>
     <string name="page_tab_title_support" msgid="3235725053332345773">"చిట్కాలు &amp; సపోర్ట్"</string>
     <string name="developer_smallest_width" msgid="632354817870920911">"అతితక్కువ వెడల్పు"</string>
@@ -4624,6 +4662,8 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"సెన్సిటివిటీ ఎక్కువగా ఉంటే, అది అంచుల వెంబడి జరిగే ఏవైనా యాప్ సంజ్ఞలతో పరస్పరం విరుద్ధంగా వ్యవహరించే అవకాశం ఉంది."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"వెనుకకు వెళ్లే సంజ్ఞ యొక్క సెన్సిటివిటీ"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"సంజ్ఞ నావిగేషన్"</string>
+    <!-- no translation found for gesture_navigation_tutorial_title (1605955266131665429) -->
+    <skip />
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"బటన్ నావిగేషన్"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"సంజ్ఞ నావిగేషన్, వెనుకకు వెళ్లే సంజ్ఞ సెన్సిటివిటీ, వెనుక సంజ్ఞ"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"నావిగేషన్, హోమ్ బటన్"</string>
@@ -5000,16 +5040,20 @@
     <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"<xliff:g id="SUBJECT">%1$s</xliff:g> గురించి"</string>
     <string name="title_about_satellite_setting" msgid="3563087940535642558">"అర్హత గల <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ఖాతాతో శాటిలైట్ సర్వీస్ ద్వారా మీరు టెక్స్ట్ మెసేజ్‌లను పంపవచ్చు, స్వీకరించవచ్చు"</string>
     <string name="category_title_your_satellite_plan" msgid="8169426217950247126">"మీ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ఖాతా"</string>
-    <string name="title_have_satellite_plan" msgid="857337944804101443">"మీ ఖాతాతో మెసేజింగ్ చేర్చబడింది"</string>
+    <string name="title_have_satellite_plan" msgid="2048372355699977947">"మీ ఖాతాతో శాటిలైట్ మెసేజింగ్ చేర్చబడింది"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"మీ ఖాతాతో శాటిలైట్ మెసేజింగ్ చేర్చబడలేదు"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"మరింత తెలుసుకోండి"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"ఇది ఎలా పని చేస్తుంది"</string>
     <string name="title_satellite_connection_guide" msgid="3294802307913609072">"మీ మొబైల్‌లో నెట్‌వర్క్ లేనప్పుడు"</string>
+    <string name="title_satellite_connection_guide_for_manual_type" msgid="7223875100977941341">"ఫోన్ నంబర్‌కు టెక్స్ట్ మెసేజ్ పంపండి"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"మీ ఫోన్ శాటిలైట్‌కు ఆటోమేటిక్‌గా కనెక్ట్ అవుతుంది. ఉత్తమ కనెక్షన్ కోసం, దయచేసి ఆకాశం స్పష్టంగా కనిపించే ప్రాంతంలో ఉంచండి."</string>
+    <string name="summary_satellite_connection_guide_for_manual_type" msgid="5075149380084376662">"మీకు మొబైల్ నెట్‌వర్క్ లేకుంటే, శాటిలైట్ మెసేజింగ్‌ను ఉపయోగించే ఆప్షన్ కనిపిస్తుంది."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"మీ ఫోన్ శాటిలైట్‌కు కనెక్ట్ అయిన తర్వాత"</string>
+    <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"శాటిలైట్‌కు కనెక్ట్ చేయడానికి దశలను ఫాలో అవ్వండి"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"మీరు ఎమర్జెన్సీ సర్వీసులతో సహా ఎవరికైనా టెక్స్ట్ మెసేజ్ పంపవచ్చు. అందుబాటులో ఉన్నప్పుడు మీ ఫోన్ మొబైల్ నెట్‌వర్క్‌కు మళ్లీ కనెక్ట్ అవుతుంది."</string>
-    <string name="satellite_setting_summary_more_information" msgid="1028146147094166868">"<xliff:g id="SUBJECT">%1$s</xliff:g> కోసం ఎక్కువ సమయం పట్టవచ్చు, ఇది కొన్ని ప్రాంతాలలో మాత్రమే అందుబాటులో ఉంటుంది. వాతావరణం, నిర్దిష్ట నిర్మాణాలు మీ శాటిలైట్ కనెక్షన్‌ను ప్రభావితం చేయవచ్చు. శాటిలైట్ ద్వారా కాల్ చేయడం అందుబాటులో లేదు. శాటిలైట్ ద్వారా కాల్ చేయడం అందుబాటులో లేదు.\n\nఖాతా మార్పులు సెట్టింగ్‌లలో కనిపించడానికి కొంత సమయం పట్టవచ్చు. వివరాల కోసం <xliff:g id="CARRIER_NAME">%2$s</xliff:g>‌ను సంప్రదించండి."</string>
-    <string name="satellite_setting_summary_more_information_no_emergency_messaging" msgid="8042240156141790447">"<xliff:g id="SUBJECT">%1$s</xliff:g> కోసం ఎక్కువ సమయం పట్టవచ్చు, ఇది కొన్ని ప్రాంతాల్లో మాత్రమే అందుబాటులో ఉంటుంది. వాతావరణం, నిర్దిష్ట నిర్మాణాలు మీ శాటిలైట్ కనెక్షన్‌ను ప్రభావితం చేయవచ్చు. శాటిలైట్ ద్వారా కాల్ చేసే సదుపాయం అందుబాటులో లేదు. అయినప్పటికీ ఎమర్జెన్సీ కాల్స్ కనెక్ట్ అయ్యే అవకాశం ఉంది. ఎమర్జెన్సీ సర్వీసులకు టెక్స్ట్ మెసేజ్‌లను పంపడం, స్వీకరించడం అన్ని ప్రాంతాల్లోనూ అందుబాటులో ఉండకపోవచ్చు.\n\nఖాతాలో జరిగిన మార్పులు సెట్టింగ్‌లలో కనిపించడానికి కొంత సమయం పట్టవచ్చు. వివరాల కోసం <xliff:g id="CARRIER_NAME">%2$s</xliff:g>‌ను సంప్రదించండి."</string>
+    <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"మీ ఫోన్ కనెక్ట్ అయిన తర్వాత, మీరు ఎమర్జెన్సీ సర్వీసులతో సహా ఎవరికైనా టెక్స్ట్ మెసేజ్ పంపవచ్చు."</string>
+    <string name="satellite_setting_summary_more_information" msgid="276312352285564071">"శాటిలైట్ కనెక్షన్ నెమ్మదిగా ఉండవచ్చు, ఇంకా కొన్ని ప్రాంతాల్లో మాత్రమే అందుబాటులో ఉండవచ్చు. వాతావరణం, నిర్దిష్ట నిర్మాణాలు కనెక్షన్‌ను ప్రభావితం చేయవచ్చు. శాటిలైట్ ద్వారా కాల్ చేయడం అందుబాటులో లేదు. ఎమర్జెన్సీ కాల్‌లు ఇప్పటికీ కనెక్ట్ చేయబడవచ్చు.\n\nఖాతా మార్పులు సెట్టింగ్‌లలో కనిపించడానికి కొంత సమయం పట్టవచ్చు. వివరాల కోసం <xliff:g id="CARRIER_NAME">%1$s</xliff:g>‌ను సంప్రదించండి."</string>
+    <string name="satellite_setting_summary_more_information_no_emergency_messaging" msgid="2090170250936862158">"శాటిలైట్ కనెక్షన్ నెమ్మదిగా ఉండవచ్చు, ఇంకా కొన్ని ప్రాంతాల్లో మాత్రమే అందుబాటులో ఉండవచ్చు. వాతావరణం, నిర్దిష్ట నిర్మాణాలు కనెక్షన్‌ను ప్రభావితం చేయవచ్చు. శాటిలైట్ ద్వారా కాల్ చేయడం అందుబాటులో లేదు. అయినప్పటికీ ఎమర్జెన్సీ కాల్స్ కనెక్ట్ అయ్యే అవకాశం ఉంది. ఎమర్జెన్సీ సర్వీసులకు టెక్స్ట్ మెసేజ్‌లను పంపడం, స్వీకరించడం అన్ని ప్రాంతాల్లోనూ అందుబాటులో ఉండకపోవచ్చు.\n\nఖాతాలో జరిగిన మార్పులు సెట్టింగ్‌లలో కనిపించడానికి కొంత సమయం పట్టవచ్చు. వివరాల కోసం <xliff:g id="CARRIER_NAME">%1$s</xliff:g>‌ను సంప్రదించండి."</string>
     <string name="more_about_satellite_messaging" msgid="1039277943532711584">"<xliff:g id="SUBJECT">%1$s</xliff:g> గురించి మరింత సమాచారం"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"<xliff:g id="FUNCTION">%1$s</xliff:g>‌ను ఆన్ చేయడం సాధ్యపడలేదు"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"<xliff:g id="FUNCTION">%1$s</xliff:g>‌ను ఆన్ చేయడానికి, ముందుగా శాటిలైట్ కనెక్షన్‌ను డిస్‌కనెక్ట్ చేయండి"</string>
@@ -5130,8 +5174,10 @@
     <string name="settings_panel_title" msgid="346363079938069215">"సెట్టింగ్‌ల ప్యానెల్"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"ఫ్రీఫార్మ్ విండోలను ఎనేబుల్ చేయండి"</string>
     <string name="enable_desktop_experience_features" msgid="7389235241021706660">"డెస్క్‌టాప్ ఎక్స్‌పీరియన్స్ ఫీచర్‌లు ఎనేబుల్ చేయి"</string>
-    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="6021998363632868925">"పరికరంలో, సెకండరీ డిస్‌ప్లేలలో డెస్క్‌టాప్ వీక్షణను ఎనేబుల్ చేయండి."</string>
-    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="6635507335168490646">"సెకండరీ డిస్‌ప్లేలలో డెస్క్‌టాప్ వీక్షణను ఎనేబుల్ చేయండి."</string>
+    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (8586716390362684564) -->
+    <skip />
+    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (7567963048658976895) -->
+    <skip />
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"2వ డిస్‌ప్లేలో ఫ్రీఫార్మ్ విండోలను ఎనేబుల్ చేయండి"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"మల్టీ-విండోలో సైజ్ మార్చలేని వాటిని ఎనేబుల్ చేయండి"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"సైజ్ మార్చలేని యాప్‌లను మల్టీ-విండోలో ఉండేందుకు అనుమతిస్తుంది"</string>
@@ -5188,47 +5234,33 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"మీ వర్క్ పాలసీకి సంబంధించిన సమాచారం"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"మీ IT అడ్మిన్ ద్వారా సెట్టింగ్‌లు మేనేజ్ చేయబడతాయి."</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <!-- no translation found for enable_16k_pages (1758111531461408337) -->
-    <skip />
-    <!-- no translation found for enable_16k_pages_summary (1937836453571509085) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_title (5477376227161609124) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_text (6211693250692246982) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_title (3001009010581393119) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_text (3398001587586470689) -->
-    <skip />
-    <!-- no translation found for toast_16k_update_failed_text (7848383020572918850) -->
-    <skip />
+    <string name="enable_16k_pages" msgid="1758111531461408337">"16 KB పేజీ సైజ్‌తో బూట్ చేయండి"</string>
+    <string name="enable_16k_pages_summary" msgid="1937836453571509085">"16 KB పేజీ సైజ్ సపోర్టెడ్ కెర్నెల్‌తో పరికర బూట్"</string>
+    <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"4 KB మోడ్ నుండి 16 KB మోడ్‌కు స్విచ్ అవ్వండి"</string>
+    <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"మీరు 4 KB కెర్నెల్ రన్ అవుతున్న పేజీ సైజ్ ప్రభావం చూపని మోడ్‌లో ఉన్నారు, ఇప్పుడు 16 KB మోడ్‌కు స్విచ్ అవుతున్నారు. ఈ మోడ్‌లో సాఫ్ట్‌వేర్ ఇంటిగ్రిటీకి (ఖచ్చితత్వానికి) హామీ ఉండదు. బూట్‌లోడర్ అన్‌లాక్ అయినప్పుడు ఫోన్‌లో స్టోర్ అయిన ఏదైనా డేటా రిస్క్‌లో పడే అవకాశం ఉంది. ఇది పరికరాన్ని రీబూట్ చేస్తుంది. ఈ మోడ్‌లలో కొన్ని ఫీచర్‌లు డిజేబుల్ అవుతాయి, కాబట్టి కొన్ని అప్లికేషన్‌లు పని చేయకపోవచ్చు. పరికరాన్ని ప్రొడక్షన్ మోడ్‌కు తీసుకెళ్లడానికి, మీరు 4 KB మోడ్‌కు స్విచ్ అవ్వాల్సి ఉంటుంది. ఆపై బూట్‌లోడర్‌ను లాక్ చేయాలి. ఇలా చేయడం ద్వారా పరికరం, ఫ్యాక్టరీ రీసెట్ అవుతుంది. పరికరం విజయవంతంగా Androidలోకి బూట్ అయిన తర్వాత, డెవలపర్ ఆప్షన్‌లలో OEM అన్‌లాకింగ్‌ను డిజేబుల్ చేయండి."</string>
+    <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"16 KB మోడ్ నుండి 4 KB మోడ్‌కు స్విచ్ అవ్వండి"</string>
+    <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"మీరు 16 KB కెర్నెల్ రన్ అవుతున్న, పేజీ సైజ్ ప్రభావం చూపని మోడ్‌లో ఉన్నారు, ఇప్పుడు 4 KB మోడ్‌కు స్విచ్ అవుతున్నారు. ఈ మోడ్‌లో సాఫ్ట్‌వేర్ ఇంటిగ్రిటీకి (ఖచ్చితత్వానికి) హామీ ఉండదు. బూట్‌లోడర్ అన్‌లాక్ అయినప్పుడు ఫోన్‌లో స్టోర్ అయిన ఏదైనా డేటా రిస్క్‌లో పడే అవకాశం ఉంది. ఇది పరికరాన్ని రీబూట్ చేస్తుంది. ఈ మోడ్‌లలో కొన్ని ఫీచర్‌లు డిజేబుల్ అవుతాయి, కాబట్టి కొన్ని అప్లికేషన్‌లు పని చేయకపోవచ్చు. పరికరాన్ని ప్రొడక్షన్ మోడ్‌కు అందించడానికి, మీరు పరికరాన్ని ఫ్యాక్టరీ రీసెట్ చేసే బూట్‌లోడర్‌ను లాక్ చేయాలి. పరికరం విజయవంతంగా Androidలోకి బూట్ అయిన తర్వాత, డెవలపర్ ఆప్షన్‌లలో OEM అన్‌లాకింగ్‌ను డిజేబుల్ చేయండి."</string>
+    <string name="toast_16k_update_failed_text" msgid="7848383020572918850">"కెర్నెల్‌ను 16 KB పేజీల అనుకూల కెర్నెల్‌తో అప్‌డేట్ చేయడం విఫలమైంది."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"మార్పు వర్తింపజేయబడుతోంది"</string>
-    <!-- no translation found for confirm_format_ext4_title (4754057414728537125) -->
-    <skip />
-    <!-- no translation found for confirm_format_ext4_text (432847493298532536) -->
-    <skip />
+    <string name="confirm_format_ext4_title" msgid="4754057414728537125">"పరికరాన్ని ext4కి రీఫార్మాట్ చేయాలా? (16 KB మోడ్ కోసం ఇది అవసరం)"</string>
+    <string name="confirm_format_ext4_text" msgid="432847493298532536">"16 KB డెవలపర్ ఆప్షన్‌ను ఉపయోగించే ముందు ఈ పరికరం తాలూకు డేటా పార్టిషన్‌ను ext4కి మార్చాలి. ఈ మోడ్‌లో సాఫ్ట్‌వేర్ ఇంటిగ్రిటీకి (ఖచ్చితత్వానికి) హామీ ఉండదు. బూట్‌లోడర్ అన్‌లాక్ అయినప్పుడు ఫోన్‌లో స్టోర్ అయిన ఏదైనా డేటా రిస్క్‌లో పడే అవకాశం ఉంది. 16 KB ఆప్షన్‌ను యాక్టివేట్ చేయడానికి దీని తర్వాత మరొక సారి రీబూట్ చేయాల్సిన అవసరం ఉంది. మీరు ఈ మోడ్‌లో ఉన్న తర్వాత, మీరు ఒకసారి రీబూట్ చేయడం ద్వారా 4 KB, 16 KB మోడ్‌ల మధ్య ముందుకు వెనుకకు స్విచ్ అవ్వవచ్చు. ఈ మోడ్‌లలో కొన్ని ఫీచర్‌లు డిజేబుల్ అవుతాయి, కాబట్టి కొన్ని అప్లికేషన్‌లు పని చేయకపోవచ్చు. పరికరాన్ని ప్రొడక్షన్ మోడ్‌కు తీసుకెళ్లడానికి, మీరు 4 KB మోడ్‌కు స్విచ్ అవ్వాల్సి ఉంటుంది. ఆపై బూట్‌లోడర్‌ను లాక్ చేయాలి. ఇలా చేయడం ద్వారా పరికరం, ఫ్యాక్టరీ రీసెట్ అవుతుంది. పరికరం విజయవంతంగా Androidలోకి బూట్ అయిన తర్వాత, డెవలపర్ ఆప్షన్‌లలో OEM అన్‌లాకింగ్‌ను డిజేబుల్ చేయండి. నిర్ధారించిన తర్వాత పరికరం పూర్తిగా తొలగించబడుతుంది, ఫైల్‌సిస్టమ్ ext4కి మారుతుంది. ఇది పూర్తయిన తర్వాత, దయచేసి 16 KBని మళ్లీ ఎనేబుల్ చేయడానికి తిరిగి రండి."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"మొత్తం డేటాను ఫ్యాక్టరీ రీసెట్ చేయండి"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"డేటా పార్టిషన్‌ను ext4కి రీఫార్మాట్ చేయడం, పూర్తిగా తొలగించడం విఫలమైంది."</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"బూట్‌లోడర్ అన్‌లాక్ అవసరం"</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_text (8089310116854544106) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_title (293797217034340398) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text_short (731597455785555266) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text (7572233914423063169) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_title (8940585327969638637) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text_short (7613206944532151035) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2860363435021452169) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_channel_name (2058933148654316447) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_text" msgid="8089310116854544106">"ఈ పరికరం 16 KB డెవలపర్ ఆప్షన్‌ను ఉపయోగించే ముందు బూట్‌లోడర్‌ను అన్‌లాక్ చేసి ఉండాలి. ఈ మోడ్‌లో సాఫ్ట్‌వేర్ ఇంటిగ్రిటీకి (ఖచ్చితత్వానికి) హామీ ఉండదు. బూట్‌లోడర్ అన్‌లాక్ అయినప్పుడు ఫోన్‌లో స్టోర్ అయిన ఏదైనా డేటా రిస్క్‌లో పడే అవకాశం ఉంది. 16 KB మోడ్‌ను యాక్టివేట్ చేసినప్పుడు మొత్తం యూజర్ డేటా, సెట్టింగ్‌లు పూర్తిగా తొలగిపోతాయి. ఒక్కసారి బూట్‌లోడర్‌ను అన్‌లాక్ చేసిన తర్వాత, 16 KB ఆప్షన్‌ను యాక్టివేట్ చేయడానికి రెండుసార్లు రీబూట్ చేయాల్సిన అవసరం ఉంది. మీరు ఈ మోడ్‌లో ఉన్న తర్వాత, మీరు ఒకసారి రీబూట్ చేయడం ద్వారా 4 KB, 16 KB మోడ్‌ల మధ్య ముందుకు వెనుకకు స్విచ్ అవ్వవచ్చు. ఈ మోడ్‌లలో కొన్ని ఫీచర్‌లు డిజేబుల్ అవుతాయి, కాబట్టి కొన్ని అప్లికేషన్‌లు పని చేయకపోవచ్చు. పరికరాన్ని తిరిగి ప్రొడక్షన్ మోడ్‌కు తీసుకెళ్లడానికి, మీరు 4 KB మోడ్‌కు స్విచ్ అవ్వాల్సి ఉంటుంది. ఆపై పరికరాన్ని OEM/బూట్‌లోడర్ లాక్ (దీనితో పరికరం ఫ్యాక్టరీ రీసెట్ అవుతుంది) చేయాలి. దయచేసి బూట్‌లోడర్‌ను అన్‌లాక్ చేసి, మళ్లీ ట్రై చేయండి. మీరు దీన్ని ఎలా చేయాలో సూచనలను &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt; లింక్‌లో చూడవచ్చు"</string>
+    <string name="page_agnostic_4k_pages_title" msgid="293797217034340398">"4 KB పేజీ సైజ్ ప్రభావం చూపని మోడ్‌ను ఉపయోగించడం"</string>
+    <string name="page_agnostic_4k_pages_text_short" msgid="731597455785555266">"మీరు పేజీ సైజ్ ప్రభావం చూపని మోడ్‌కు సంబంధించిన 4 KB మోడ్‌లో ఉన్నారు. ఈ మోడ్‌లో సాఫ్ట్‌వేర్ ఇంటిగ్రిటీకి (ఖచ్చితత్వానికి) హామీ ఉండదు. బూట్‌లోడర్ అన్‌లాక్ అయినప్పుడు ఫోన్‌లో స్టోర్ అయిన ఏదైనా డేటా రిస్క్‌లో పడే అవకాశం ఉంది. ఈ మోడ్‌లలో కొన్ని ఫీచర్‌లు డిజేబుల్ అవుతాయి, కాబట్టి కొన్ని అప్లికేషన్‌లు పని చేయకపోవచ్చు. ప్రొడక్షన్ మోడ్‌లోకి మళ్లీ ఎంటర్ అవ్వడానికి, మీరు తప్పనిసరిగా పరికరం తాలూకు బూట్‌లోడర్‌ను లాక్ చేయాలి. మరింత చదవడానికి ట్యాప్ చేయండి."</string>
+    <string name="page_agnostic_4k_pages_text" msgid="7572233914423063169">"మీరు పేజీ సైజ్ ప్రభావం చూపని మోడ్‌కు సంబంధించిన 4 KB మోడ్‌లో ఉన్నారు. ఈ మోడ్‌లో సాఫ్ట్‌వేర్ ఇంటిగ్రిటీకి (ఖచ్చితత్వానికి) హామీ ఉండదు. బూట్‌లోడర్ అన్‌లాక్ అయినప్పుడు ఫోన్‌లో స్టోర్ అయిన ఏదైనా డేటా రిస్క్‌లో పడే అవకాశం ఉంది. ఈ మోడ్‌లలో కొన్ని ఫీచర్‌లు డిజేబుల్ అవుతాయి, కాబట్టి కొన్ని అప్లికేషన్‌లు పని చేయకపోవచ్చు. ప్రొడక్షన్ మోడ్‌లోకి మళ్లీ ఎంటర్ అవ్వడానికి, మీరు తప్పనిసరిగా పరికరం తాలూకు బూట్‌లోడర్‌ను లాక్ చేయాలి. ఇది పరికరాన్ని మళ్లీ ఫ్యాక్టరీ రీసెట్ చేసి, ప్రొడక్షన్ సెట్టింగ్‌లకు రీస్టోర్ చేస్తుంది. పరికరం విజయవంతంగా Androidలోకి బూట్ అయిన తర్వాత, డెవలపర్ ఆప్షన్‌లలో OEM అన్‌లాకింగ్‌ను డిజేబుల్ చేయండి. పరికరం Androidలో బూట్ చేయడంలో విఫలమైతే లేదా స్థిరంగా లేకపోతే, &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; వెబ్‌సైట్ నుండి తాజా ఫ్యాక్టరీ ఫర్మ్‌వేర్ ఇమేజ్‌లతో పరికరాన్ని మళ్లీ ఫ్లాష్ చేయండి లేదా &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; వెబ్‌సైట్‌ను ఉపయోగించండి, అలాగే \'పరికరాన్ని పూర్తిగా తొలగించండి\', \'బూట్‌లోడర్‌ను లాక్ చేయండి\', \'అన్ని పార్టిషన్‌లను బలవంతంగా ఫ్లాష్ చేయండి\' వంటి ఆప్షన్‌లను ఎంచుకోండి."</string>
+    <string name="page_agnostic_16k_pages_title" msgid="8940585327969638637">"16 KB పేజీ సైజ్ ప్రభావం చూపని మోడ్‌ను ఉపయోగించడం"</string>
+    <string name="page_agnostic_16k_pages_text_short" msgid="7613206944532151035">"మీరు పేజీ సైజ్ ప్రభావం చూపని మోడ్‌కు సంబంధించిన 16 KB మోడ్‌లో ఉన్నారు. ఈ మోడ్‌లో సాఫ్ట్‌వేర్ ఇంటిగ్రిటీకి (ఖచ్చితత్వానికి) హామీ ఉండదు. బూట్‌లోడర్ అన్‌లాక్ అయినప్పుడు ఫోన్‌లో స్టోర్ అయిన ఏదైనా డేటా రిస్క్‌లో పడే అవకాశం ఉంది. ఈ మోడ్‌లలో కొన్ని ఫీచర్‌లు డిజేబుల్ అవుతాయి, కాబట్టి కొన్ని అప్లికేషన్‌లు పని చేయకపోవచ్చు. ప్రొడక్షన్ మోడ్‌లోకి మళ్లీ ఎంటర్ అవ్వడానికి, మీరు తప్పనిసరిగా 4 KB మోడ్‌కు స్విచ్ అవ్వాలి, ఆపై పరికరం తాలూకు బూట్‌లోడర్‌ను లాక్ చేయాలి. మరింత చదవడానికి ట్యాప్ చేయండి."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2860363435021452169">"మీరు పేజీ సైజ్ ప్రభావం చూపని మోడ్‌కు సంబంధించిన 16 KB మోడ్‌లో ఉన్నారు. ఈ మోడ్‌లో సాఫ్ట్‌వేర్ ఇంటిగ్రిటీకి (ఖచ్చితత్వానికి) హామీ ఉండదు. బూట్‌లోడర్ అన్‌లాక్ అయినప్పుడు ఫోన్‌లో స్టోర్ అయిన ఏదైనా డేటా రిస్క్‌లో పడే అవకాశం ఉంది. ఈ మోడ్‌లలో కొన్ని ఫీచర్‌లు డిజేబుల్ అవుతాయి, కాబట్టి కొన్ని అప్లికేషన్‌లు పని చేయకపోవచ్చు. ప్రొడక్షన్ మోడ్‌లోకి మళ్లీ ఎంటర్ అవ్వడానికి, మీరు తప్పనిసరిగా 4 KB మోడ్‌కు స్విచ్ అవ్వాలి, ఆపై పరికరం తాలూకు బూట్‌లోడర్‌ను లాక్ చేయాలి. ఇది పరికరాన్ని మళ్లీ ఫ్యాక్టరీ రీసెట్ చేసి, ప్రొడక్షన్ సెట్టింగ్‌లకు రీస్టోర్ చేస్తుంది. పరికరం విజయవంతంగా Androidలోకి బూట్ అయిన తర్వాత, డెవలపర్ ఆప్షన్‌లలో OEM అన్‌లాకింగ్‌ను డిజేబుల్ చేయండి. పరికరం Androidలో బూట్ చేయడంలో విఫలమైతే లేదా స్థిరంగా లేకపోతే, &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; వెబ్‌సైట్ నుండి తాజా ఫ్యాక్టరీ ఫర్మ్‌వేర్ ఇమేజ్‌లతో పరికరాన్ని మళ్లీ ఫ్లాష్ చేయండి లేదా &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; వెబ్‌సైట్‌ను ఉపయోగించండి, అలాగే \'పరికరాన్ని పూర్తిగా తొలగించండి\', \'బూట్‌లోడర్‌ను లాక్ చేయండి\', \'అన్ని పార్టిషన్‌లను బలవంతంగా ఫ్లాష్ చేయండి\' వంటి ఆప్షన్‌లను ఎంచుకోండి."</string>
+    <string name="page_agnostic_notification_channel_name" msgid="2058933148654316447">"16 KB పేజీ సైజ్ ప్రభావం చూపని మోడ్"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"మరింత చదవండి"</string>
     <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"పేజీ సైజ్ కంపాట్ మోడ్‌తో యాప్‌ను రన్ చేయండి"</string>
-    <string name="enable_16k_app_compat_details" msgid="3389401258168314266">"టోగుల్ చేసినప్పుడు, 16 KB డివైజ్‌లో పేజీ సైజ్ కంపాటిబిలిటీ (అనుకూలత) మోడ్‌లో యాప్‌ రన్ అవుతుంది."</string>
+    <!-- no translation found for enable_16k_app_compat_details (5382562613011853452) -->
+    <skip />
+    <string name="stop_app_dlg_title" msgid="3153921585174512587">"యాప్‌ను ఆపివేయాలా?"</string>
+    <string name="stop_app_dlg_text" msgid="4373849065005318901">"పేజీ సైజు అనుకూలత సెట్టింగ్‌ను వర్తింపజేయడానికి యాప్‌ను నిలిపివేయడం జరుగుతుంది."</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"బగ్ రిపోర్ట్‌ హ్యాండ్లర్"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"మీ డివైజ్‌లో బగ్ రిపోర్ట్ షార్ట్‌కట్‌ను ఏ యాప్ నిర్వహించాలో నిర్ణయిస్తుంది."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"వ్యక్తిగతం"</string>
@@ -5562,6 +5594,7 @@
     <string name="content_protection_preference_subpage_summary" msgid="3595621220981703364"></string>
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
     <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"పాస్‌వర్డ్ ఇప్పుడు సెటప్ చేయబడింది"</string>
+    <string name="accessibility_setup_pin_complete" msgid="7626702882001984236">"PIN సెట్ అప్ ఇప్పుడు పూర్తయింది"</string>
     <string name="show_stylus_pointer_icon" msgid="1010583689203665786">"మౌస్ కర్సర్‌ను ఉంచేటప్పుడు పాయింటర్‌ను చూపండి"</string>
     <string name="media_drm_settings_title" msgid="897424966554739867">"మీడియా DRM సెట్టింగ్‌లు"</string>
     <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"సాఫ్ట్‌వేర్ సెక్యూర్ క్రిప్టోను ఫోర్స్ చేయండి"</string>
@@ -5710,4 +5743,7 @@
     <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"PIN రికవరీ పద్ధతిని జోడించండి"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"PINను మార్చండి"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"PINను మర్చిపోయాను"</string>
+    <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"వెబ్ కంటెంట్ ఫిల్టర్‌లు"</string>
+    <!-- no translation found for accessibility_illustration_content_description (557376174860150903) -->
+    <skip />
 </resources>

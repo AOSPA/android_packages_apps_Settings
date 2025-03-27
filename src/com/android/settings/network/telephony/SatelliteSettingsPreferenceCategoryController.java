@@ -23,6 +23,7 @@ import static android.telephony.CarrierConfigManager.KEY_SATELLITE_ESOS_SUPPORTE
 import static android.telephony.NetworkRegistrationInfo.SERVICE_TYPE_SMS;
 
 import android.content.Context;
+import android.os.OutcomeReceiver;
 import android.os.PersistableBundle;
 import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
@@ -41,6 +42,8 @@ import com.android.settings.network.CarrierConfigCache;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /** Preference controller for Satellite functions in mobile network settings. */
 public class SatelliteSettingsPreferenceCategoryController
@@ -55,6 +58,8 @@ public class SatelliteSettingsPreferenceCategoryController
     private SatelliteManager mSatelliteManager;
     private TelephonyManager mTelephonyManager;
     private PreferenceScreen mPreferenceScreen;
+    @VisibleForTesting
+    AtomicBoolean mIsSatelliteSupported = new AtomicBoolean(false);
 
     public SatelliteSettingsPreferenceCategoryController(Context context, String key) {
         super(context, key);
@@ -71,6 +76,7 @@ public class SatelliteSettingsPreferenceCategoryController
         mCarrierConfigCache = CarrierConfigCache.getInstance(mContext);
         mSatelliteManager = mContext.getSystemService(SatelliteManager.class);
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
+        requestIsSatelliteSupported();
     }
 
     @Override
@@ -93,7 +99,7 @@ public class SatelliteSettingsPreferenceCategoryController
             return UNSUPPORTED_ON_DEVICE;
         }
 
-        if (mSatelliteManager == null) {
+        if (!mIsSatelliteSupported.get()) {
             return UNSUPPORTED_ON_DEVICE;
         }
 
@@ -140,6 +146,21 @@ public class SatelliteSettingsPreferenceCategoryController
                 mTelephonyManager.unregisterTelephonyCallback(mCarrierRoamingNtnModeCallback);
             }
         }
+    }
+
+    private void requestIsSatelliteSupported() {
+        if (mSatelliteManager == null) {
+            Log.d(TAG, "SatelliteManager is null");
+            return;
+        }
+        mSatelliteManager.requestIsSupported(Executors.newSingleThreadExecutor(),
+                new OutcomeReceiver<>() {
+                    @Override
+                    public void onResult(Boolean result) {
+                        mIsSatelliteSupported.set(result);
+                        SatelliteSettingsPreferenceCategoryController.this.displayPreference();
+                    }
+                });
     }
 
     @VisibleForTesting

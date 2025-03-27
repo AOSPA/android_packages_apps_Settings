@@ -40,6 +40,7 @@ import android.hardware.face.FaceManager;
 import android.os.UserHandle;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
+import android.platform.test.annotations.RequiresFlagsDisabled;
 import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.safetycenter.SafetyEvent;
@@ -65,7 +66,6 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-@RequiresFlagsEnabled(Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
 @RunWith(AndroidJUnit4.class)
 public class FaceSafetySourceTest {
 
@@ -112,6 +112,7 @@ public class FaceSafetySourceTest {
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
     public void setSafetyData_whenSafetyCenterIsDisabled_doesNotSetData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(false);
 
@@ -122,6 +123,18 @@ public class FaceSafetySourceTest {
     }
 
     @Test
+    @RequiresFlagsDisabled(Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
+    public void setSafetySourceData_whenSeparateBiometricsFlagOff_setsNullData() {
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
+
+        FaceSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
+
+        verify(mSafetyCenterManagerWrapper)
+                .setSafetySourceData(any(), eq(FaceSafetySource.SAFETY_SOURCE_ID), eq(null), any());
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
     public void setSafetySourceData_whenSafetyCenterIsEnabled_withoutFaceHardware_setsNullData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(false);
@@ -133,6 +146,7 @@ public class FaceSafetySourceTest {
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
     public void setSafetySourceData_setsDataForFaceSource() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
@@ -145,6 +159,7 @@ public class FaceSafetySourceTest {
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
     public void setSafetySourceData_setsDataWithCorrectSafetyEvent() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
@@ -157,6 +172,7 @@ public class FaceSafetySourceTest {
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
     @DisableFlags(android.app.supervision.flags.Flags.FLAG_DEPRECATE_DPM_SUPERVISION_APIS)
     public void setSafetySourceData_withFaceNotEnrolled_whenDisabledByAdmin_setsData() {
         when(mDevicePolicyManager.getProfileOwnerOrDeviceOwnerSupervisionComponent(USER_HANDLE))
@@ -175,6 +191,7 @@ public class FaceSafetySourceTest {
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
     @EnableFlags(android.app.supervision.flags.Flags.FLAG_DEPRECATE_DPM_SUPERVISION_APIS)
     public void setSafetySourceData_withFaceNotEnrolled_whenSupervisionIsOn_setsData() {
         when(mSupervisionManager.isSupervisionEnabledForUser(USER_ID)).thenReturn(true);
@@ -192,6 +209,7 @@ public class FaceSafetySourceTest {
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
     public void setSafetySourceData_withFaceNotEnrolled_whenNotDisabledByAdmin_setsData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
@@ -207,6 +225,7 @@ public class FaceSafetySourceTest {
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
     @DisableFlags(android.app.supervision.flags.Flags.FLAG_DEPRECATE_DPM_SUPERVISION_APIS)
     public void setSafetySourceData_withFaceEnrolled_whenDisabledByAdmin_setsData() {
         when(mDevicePolicyManager.getProfileOwnerOrDeviceOwnerSupervisionComponent(USER_HANDLE))
@@ -225,6 +244,7 @@ public class FaceSafetySourceTest {
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
     @EnableFlags(android.app.supervision.flags.Flags.FLAG_DEPRECATE_DPM_SUPERVISION_APIS)
     public void setSafetySourceData_withFaceEnrolled_whenSupervisionIsOn_setsData() {
         when(mSupervisionManager.isSupervisionEnabledForUser(USER_ID)).thenReturn(true);
@@ -242,6 +262,7 @@ public class FaceSafetySourceTest {
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
     public void setSafetySourceData_withFaceEnrolled_whenNotDisabledByAdmin_setsData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
@@ -257,6 +278,7 @@ public class FaceSafetySourceTest {
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
     public void setSafetySourceData_face_whenEnrolled_setsInfoSeverity() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
@@ -274,6 +296,7 @@ public class FaceSafetySourceTest {
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
     public void setSafetySourceData_face_whenNotEnrolled_setsUnspSeverity() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);

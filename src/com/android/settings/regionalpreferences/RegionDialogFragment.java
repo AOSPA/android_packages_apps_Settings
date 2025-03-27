@@ -47,9 +47,11 @@ import java.util.Set;
  */
 public class RegionDialogFragment extends InstrumentedDialogFragment {
     private static final String TAG = "RegionDialogFragment";
-    static final int DIALOG_CHANGE_LOCALE_REGION = 1;
+    static final int DIALOG_CHANGE_SYSTEM_LOCALE_REGION = 1;
+    static final int DIALOG_CHANGE_PREFERRED_LOCALE_REGION = 2;
     static final String ARG_DIALOG_TYPE = "arg_dialog_type";
     static final String ARG_TARGET_LOCALE = "arg_target_locale";
+    static final String ARG_REPLACED_TARGET_LOCALE = "arg_replaced_target_locale";
 
     /**
      * Use this factory method to create a new instance of
@@ -113,6 +115,7 @@ public class RegionDialogFragment extends InstrumentedDialogFragment {
         private final Context mContext;
         private final int mDialogType;
         private final LocaleStore.LocaleInfo mLocaleInfo;
+        private final Locale mReplacedLocale;
         private final MetricsFeatureProvider mMetricsFeatureProvider;
 
         RegionDialogController(
@@ -121,23 +124,26 @@ public class RegionDialogFragment extends InstrumentedDialogFragment {
             Bundle arguments = dialogFragment.getArguments();
             mDialogType = arguments.getInt(ARG_DIALOG_TYPE);
             mLocaleInfo = (LocaleStore.LocaleInfo) arguments.getSerializable(ARG_TARGET_LOCALE);
+            mReplacedLocale = (Locale) arguments.getSerializable(ARG_REPLACED_TARGET_LOCALE);
             mMetricsFeatureProvider =
                 FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         }
 
         @Override
         public void onClick(@NonNull DialogInterface dialog, int which) {
-            if (mDialogType == DIALOG_CHANGE_LOCALE_REGION) {
+            if (mDialogType == DIALOG_CHANGE_SYSTEM_LOCALE_REGION
+                    || mDialogType == DIALOG_CHANGE_PREFERRED_LOCALE_REGION) {
                 if (which == DialogInterface.BUTTON_POSITIVE) {
                     updateRegion(mLocaleInfo.getLocale().toLanguageTag());
                     mMetricsFeatureProvider.action(
                             mContext,
                             SettingsEnums.ACTION_CHANGE_REGION_DIALOG_POSITIVE_BTN_CLICKED);
-                }
-                if (which == DialogInterface.BUTTON_NEGATIVE) {
+                    // TODO: add new metrics for DIALOG_CHANGE_PREFERRED_LOCALE_REGION
+                } else {
                     mMetricsFeatureProvider.action(
                             mContext,
                             SettingsEnums.ACTION_CHANGE_REGION_DIALOG_NEGATIVE_BTN_CLICKED);
+                    // TODO: add new metrics for DIALOG_CHANGE_PREFERRED_LOCALE_REGION
                 }
                 dismiss();
                 if (getActivity() != null) {
@@ -150,13 +156,25 @@ public class RegionDialogFragment extends InstrumentedDialogFragment {
         DialogContent getDialogContent() {
             DialogContent dialogContent = new DialogContent();
             switch (mDialogType) {
-                case DIALOG_CHANGE_LOCALE_REGION:
+                case DIALOG_CHANGE_SYSTEM_LOCALE_REGION:
                     dialogContent.mTitle = String.format(mContext.getString(
                         R.string.title_change_system_region),
                         mLocaleInfo.getLocale().getDisplayCountry());
                     dialogContent.mMessage = mContext.getString(
                         R.string.desc_notice_device_region_change,
                         Locale.getDefault().getDisplayLanguage());
+                    dialogContent.mPositiveButton = mContext.getString(
+                        R.string.button_label_confirmation_of_system_locale_change);
+                    dialogContent.mNegativeButton = mContext.getString(R.string.cancel);
+                    break;
+                case DIALOG_CHANGE_PREFERRED_LOCALE_REGION:
+                    dialogContent.mTitle = String.format(mContext.getString(
+                            R.string.title_change_system_region),
+                        mLocaleInfo.getLocale().getDisplayCountry());
+                    dialogContent.mMessage = mContext.getString(
+                        R.string.desc_notice_device_region_change_for_preferred_language,
+                        mLocaleInfo.getFullNameNative(),
+                        LocaleStore.getLocaleInfo(mReplacedLocale).getFullNameNative());
                     dialogContent.mPositiveButton = mContext.getString(
                         R.string.button_label_confirmation_of_system_locale_change);
                     dialogContent.mNegativeButton = mContext.getString(R.string.cancel);
@@ -168,10 +186,27 @@ public class RegionDialogFragment extends InstrumentedDialogFragment {
         }
 
         private void updateRegion(String selectedLanguageTag) {
+            Locale[] newLocales = getUpdatedLocales(Locale.forLanguageTag(selectedLanguageTag));
+            LocalePicker.updateLocales(new LocaleList(newLocales));
+        }
+
+        private Locale[] getUpdatedLocales(Locale selectedLocale) {
             LocaleList localeList = LocaleList.getDefault();
+            Locale[] newLocales = new Locale[localeList.size()];
+            for (int i = 0; i < localeList.size(); i++) {
+                Locale target = localeList.get(i);
+                if (sameLanguageAndScript(selectedLocale, target)) {
+                    newLocales[i] = appendLocaleExtension(selectedLocale);
+                } else {
+                    newLocales[i] = localeList.get(i);
+                }
+            }
+            return newLocales;
+        }
+
+        private Locale appendLocaleExtension(Locale selectedLocale) {
             Locale systemLocale = Locale.getDefault();
             Set<Character> extensionKeys = systemLocale.getExtensionKeys();
-            Locale selectedLocale = Locale.forLanguageTag(selectedLanguageTag);
             Locale.Builder builder = new Locale.Builder();
             builder.setLocale(selectedLocale);
             if (!extensionKeys.isEmpty()) {
@@ -179,13 +214,21 @@ public class RegionDialogFragment extends InstrumentedDialogFragment {
                     builder.setExtension(extKey, systemLocale.getExtension(extKey));
                 }
             }
-            Locale newLocale = builder.build();
-            Locale[] resultLocales = new Locale[localeList.size()];
-            resultLocales[0] = newLocale;
-            for (int i = 1; i < localeList.size(); i++) {
-                resultLocales[i] = localeList.get(i);
+            return builder.build();
+        }
+
+        private static boolean sameLanguageAndScript(Locale source, Locale target) {
+            String sourceLanguage = source.getLanguage();
+            String targetLanguage = target.getLanguage();
+            String sourceLocaleScript = source.getScript();
+            String targetLocaleScript = target.getScript();
+            if (sourceLanguage.equals(targetLanguage)) {
+                if (!sourceLocaleScript.isEmpty() && !targetLocaleScript.isEmpty()) {
+                    return sourceLocaleScript.equals(targetLocaleScript);
+                }
+                return true;
             }
-            LocalePicker.updateLocales(new LocaleList(resultLocales));
+            return false;
         }
 
         @VisibleForTesting

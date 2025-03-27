@@ -28,11 +28,11 @@
         settings:controller="com.android.settings.inputmethod.MousePointerAccelerationPreferenceController" />
 
     <com.android.settings.widget.SeekBarPreference
-        android:key="trackpad_pointer_speed"
-        android:title="@string/trackpad_pointer_speed"
+        android:key="pointer_speed"
+        android:title="@string/pointer_speed"
         android:order="20"
         android:selectable="false"
-        settings:controller="com.android.settings.inputmethod.TouchpadPointerSpeedPreferenceController"/>
+        settings:controller="com.android.settings.inputmethod.MousePointerSpeedPreferenceController"/>
 
     <SwitchPreferenceCompat
         android:key="mouse_swap_primary_button"

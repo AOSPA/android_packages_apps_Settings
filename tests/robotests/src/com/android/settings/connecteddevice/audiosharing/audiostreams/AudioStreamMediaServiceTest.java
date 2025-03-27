@@ -28,7 +28,6 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -52,7 +51,9 @@ import android.media.session.ISession;
 import android.media.session.ISessionController;
 import android.media.session.MediaSessionManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.os.RemoteException;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.util.DisplayMetrics;
@@ -81,14 +82,12 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.android.util.concurrent.InlineExecutorService;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(
@@ -122,6 +121,7 @@ public class AudioStreamMediaServiceTest {
     @Mock private PackageManager mPackageManager;
     @Mock private DisplayMetrics mDisplayMetrics;
     @Mock private Context mContext;
+    @Mock private Handler mHandler;
     private FakeFeatureFactory mFeatureFactory;
     private AudioStreamMediaService mAudioStreamMediaService;
 
@@ -145,11 +145,18 @@ public class AudioStreamMediaServiceTest {
         when(mCachedBluetoothDevice.getName()).thenReturn(DEVICE_NAME);
         when(mLocalBluetoothProfileManager.getVolumeControlProfile())
                 .thenReturn(mVolumeControlProfile);
-
-        mAudioStreamMediaService = spy(new AudioStreamMediaService());
+        when(mHandler.post(any(Runnable.class))).thenAnswer(invocation -> {
+            ((Runnable) invocation.getArgument(0)).run();
+            return null;
+        });
+        when(mHandler.getLooper()).thenReturn(Looper.getMainLooper());
+        mAudioStreamMediaService = spy(new AudioStreamMediaService() {
+            @Override
+            Handler getHandler() {
+                return mHandler;
+            }
+        });
         ReflectionHelpers.setField(mAudioStreamMediaService, "mBase", mContext);
-        ReflectionHelpers.setField(
-                mAudioStreamMediaService, "mExecutor", new InlineExecutorService());
         when(mAudioStreamMediaService.getSystemService(anyString()))
                 .thenReturn(mMediaSessionManager);
         when(mMediaSessionManager.createSession(any(), anyString(), any())).thenReturn(mISession);
@@ -383,31 +390,6 @@ public class AudioStreamMediaServiceTest {
         assertThat(mAudioStreamMediaService.mBluetoothCallback).isNotNull();
         mAudioStreamMediaService.onStartCommand(setupIntent(), /* flags= */ 0, /* startId= */ 0);
 
-        mAudioStreamMediaService.mBluetoothCallback.onProfileConnectionStateChanged(
-                mCachedBluetoothDevice,
-                BluetoothAdapter.STATE_DISCONNECTED,
-                BluetoothProfile.LE_AUDIO_BROADCAST_ASSISTANT);
-
-        verify(mAudioStreamMediaService).stopSelf();
-    }
-
-    @Test
-    public void bluetoothCallback_onMemberDeviceDisconnect_stopSelf() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
-        when(mCachedBluetoothDevice.getDevice()).thenReturn(mock(BluetoothDevice.class));
-        CachedBluetoothDevice member = mock(CachedBluetoothDevice.class);
-        when(mCachedBluetoothDevice.getMemberDevice()).thenReturn(Set.of(member));
-        when(member.getDevice()).thenReturn(mDevice);
-        var devices = new ArrayList<BluetoothDevice>();
-        devices.add(mDevice);
-
-        Intent intent = new Intent();
-        intent.putExtra(BROADCAST_ID, 1);
-        intent.putParcelableArrayListExtra(DEVICES, devices);
-
-        mAudioStreamMediaService.onCreate();
-        assertThat(mAudioStreamMediaService.mBluetoothCallback).isNotNull();
-        mAudioStreamMediaService.onStartCommand(intent, /* flags= */ 0, /* startId= */ 0);
         mAudioStreamMediaService.mBluetoothCallback.onProfileConnectionStateChanged(
                 mCachedBluetoothDevice,
                 BluetoothAdapter.STATE_DISCONNECTED,

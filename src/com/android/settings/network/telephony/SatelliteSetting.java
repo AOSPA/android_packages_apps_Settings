@@ -152,7 +152,7 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
     }
 
     private void updateTitle() {
-        getActivity().setTitle(getSubjectString());
+        findPreference("satellite_setting").setTitle(getSubjectString());
     }
 
     // About satellite content
@@ -315,7 +315,6 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
     }
 
     private boolean isSatelliteAttachSupported(int subId) {
-
         return mConfigBundle.getBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, false);
     }
 

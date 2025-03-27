@@ -1277,42 +1277,6 @@ public class FingerprintSettings extends SubSettings {
                 if (resultCode == RESULT_FINISHED || resultCode == RESULT_OK) {
                     runChallengeGeneratedInvokers();
                     if (BiometricUtils.containsGatekeeperPasswordHandle(data)) {
-                        if (!mHasFirstEnrolled && !mIsEnrolling) {
-                            final Activity activity = getActivity();
-                            if (activity != null) {
-                                // Apply pending transition for auto adding first fingerprint case
-                                activity.overridePendingTransition(
-                                        com.google.android.setupdesign.R.anim.sud_slide_next_in,
-                                        com.google.android.setupdesign.R.anim.sud_slide_next_out);
-                            }
-
-                            // To have smoother animation, change flow to let next visible activity
-                            // to generateChallenge, then pass it back through activity result.
-                            // Token and challenge will be updated later through the activity result
-                            // of AUTO_ADD_FIRST_FINGERPRINT_REQUEST.
-                            mIsEnrolling = true;
-                            addFirstFingerprint(
-                                    BiometricUtils.getGatekeeperPasswordHandle(data));
-                        } else {
-                            mFingerprintManager.generateChallenge(mUserId,
-                                    (sensorId, userId, challenge) -> {
-                                        final Activity activity = getActivity();
-                                        if (activity == null || activity.isFinishing()) {
-                                            // Stop everything
-                                            Log.w(TAG, "activity detach or finishing");
-                                            return;
-                                        }
-
-                                        final GatekeeperPasswordProvider provider =
-                                                new GatekeeperPasswordProvider(
-                                                        new LockPatternUtils(activity));
-                                        mToken = provider.requestGatekeeperHat(data, challenge,
-                                                mUserId);
-                                        mChallenge = challenge;
-                                        provider.removeGatekeeperPasswordHandle(data, false);
-                                        updateAddPreference();
-                                    });
-                        }
                         final Utils.BiometricStatus biometricAuthStatus =
                                 Utils.requestBiometricAuthenticationForMandatoryBiometrics(
                                         getActivity(),
@@ -1321,12 +1285,14 @@ public class FingerprintSettings extends SubSettings {
                         if (biometricAuthStatus == Utils.BiometricStatus.OK) {
                             Utils.launchBiometricPromptForMandatoryBiometrics(this,
                                     BIOMETRIC_AUTH_REQUEST,
-                                    mUserId, true /* hideBackground */);
+                                    mUserId, true /* hideBackground */, data);
                         } else if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
                             IdentityCheckBiometricErrorDialog
                                     .showBiometricErrorDialogAndFinishActivityOnDismiss(
                                             getActivity(),
                                             biometricAuthStatus);
+                        } else {
+                            handleAuthenticationSuccessful(data);
                         }
                     } else {
                         Log.d(TAG, "Data null or GK PW missing");
@@ -1380,7 +1346,9 @@ public class FingerprintSettings extends SubSettings {
                 updateAddPreference();
             } else if (requestCode == BIOMETRIC_AUTH_REQUEST) {
                 mBiometricsAuthenticationRequested = false;
-                if (resultCode != RESULT_OK) {
+                if (resultCode == RESULT_OK) {
+                    handleAuthenticationSuccessful(data);
+                } else {
                     if (resultCode
                             == ConfirmDeviceCredentialActivity.BIOMETRIC_LOCKOUT_ERROR_RESULT) {
                         IdentityCheckBiometricErrorDialog
@@ -1432,6 +1400,45 @@ public class FingerprintSettings extends SubSettings {
 
                 // We shall only have at most one invoker for each launching
                 return;
+            }
+        }
+
+        private void handleAuthenticationSuccessful(Intent data) {
+            if (!mHasFirstEnrolled && !mIsEnrolling) {
+                final Activity activity = getActivity();
+                if (activity != null) {
+                    // Apply pending transition for auto adding first fingerprint case
+                    activity.overridePendingTransition(
+                            com.google.android.setupdesign.R.anim.sud_slide_next_in,
+                            com.google.android.setupdesign.R.anim.sud_slide_next_out);
+                }
+
+                // To have smoother animation, change flow to let next visible activity
+                // to generateChallenge, then pass it back through activity result.
+                // Token and challenge will be updated later through the activity result
+                // of AUTO_ADD_FIRST_FINGERPRINT_REQUEST.
+                mIsEnrolling = true;
+                addFirstFingerprint(
+                        BiometricUtils.getGatekeeperPasswordHandle(data));
+            } else {
+                mFingerprintManager.generateChallenge(mUserId,
+                        (sensorId, userId, challenge) -> {
+                            final Activity activity = getActivity();
+                            if (activity == null || activity.isFinishing()) {
+                                // Stop everything
+                                Log.w(TAG, "activity detach or finishing");
+                                return;
+                            }
+
+                            final GatekeeperPasswordProvider provider =
+                                    new GatekeeperPasswordProvider(
+                                            new LockPatternUtils(activity));
+                            mToken = provider.requestGatekeeperHat(data, challenge,
+                                    mUserId);
+                            mChallenge = challenge;
+                            provider.removeGatekeeperPasswordHandle(data, false);
+                            updateAddPreference();
+                        });
             }
         }
 

@@ -76,6 +76,7 @@ public class AppLocalePickerFragment extends DashboardFragment implements
 
     private static final String TAG = "AppLocalePickerFragment";
     private static final String EXTRA_EXPAND_SEARCH_VIEW = "expand_search_view";
+    private static final String EXTRA_SEARCH_VIEW_QUERY = "search_view_query";
     private static final String KEY_PREFERENCE_APP_LOCALE_LIST = "app_locale_list";
     private static final String KEY_PREFERENCE_APP_LOCALE_SUGGESTED_LIST =
             "app_locale_suggested_list";
@@ -108,6 +109,7 @@ public class AppLocalePickerFragment extends DashboardFragment implements
     @Nullable
     private ApplicationInfo mApplicationInfo;
     private boolean mIsNumberingMode;
+    private CharSequence mPreviousSearch = null;
 
     @Override
     public void onCreate(@NonNull Bundle icicle) {
@@ -137,6 +139,7 @@ public class AppLocalePickerFragment extends DashboardFragment implements
         mExpandSearch = mActivity.getIntent().getBooleanExtra(EXTRA_EXPAND_SEARCH_VIEW, false);
         if (icicle != null) {
             mExpandSearch = icicle.getBoolean(EXTRA_EXPAND_SEARCH_VIEW);
+            mPreviousSearch = icicle.getCharSequence(EXTRA_SEARCH_VIEW_QUERY);
         }
 
         AppLocaleCollector appLocaleCollector = new AppLocaleCollector(mActivity, mPackageName);
@@ -163,6 +166,7 @@ public class AppLocalePickerFragment extends DashboardFragment implements
         super.onSaveInstanceState(outState);
         if (mSearchView != null) {
             outState.putBoolean(EXTRA_EXPAND_SEARCH_VIEW, !mSearchView.isIconified());
+            outState.putCharSequence(EXTRA_SEARCH_VIEW_QUERY, mSearchView.getQuery());
         }
     }
 
@@ -180,6 +184,15 @@ public class AppLocalePickerFragment extends DashboardFragment implements
             mSearchView.setMaxWidth(Integer.MAX_VALUE);
             if (mExpandSearch) {
                 searchMenuItem.expandActionView();
+            }
+            // Restore previous search status
+            if (!TextUtils.isEmpty(mPreviousSearch)) {
+                searchMenuItem.expandActionView();
+                mSearchView.setIconified(false);
+                mSearchView.setActivated(true);
+                mSearchView.setQuery(mPreviousSearch, true /* submit */);
+            } else {
+                mSearchView.setQuery(null, false /* submit */);
             }
         }
     }
@@ -400,13 +413,14 @@ public class AppLocalePickerFragment extends DashboardFragment implements
         mIsNumberingMode = args.getBoolean(
                 RegionAndNumberingSystemPickerFragment.EXTRA_IS_NUMBERING_SYSTEM);
 
+        AppLocaleCollector appLocaleCollector = new AppLocaleCollector(context, mPackageName);
         mSuggestedListPreferenceController =
                 new AppLocaleSuggestedListPreferenceController(context,
                         KEY_PREFERENCE_APP_LOCALE_SUGGESTED_LIST, mPackageName, mIsNumberingMode,
-                        mLocaleInfo);
+                        mLocaleInfo, getActivity(), appLocaleCollector);
         mAppLocaleAllListPreferenceController = new AppLocaleAllListPreferenceController(
                 context, KEY_PREFERENCE_APP_LOCALE_LIST, mPackageName, mIsNumberingMode,
-                mLocaleInfo);
+                mLocaleInfo, getActivity(), appLocaleCollector);
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(mSuggestedListPreferenceController);
         controllers.add(mAppLocaleAllListPreferenceController);

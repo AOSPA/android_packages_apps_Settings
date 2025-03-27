@@ -217,6 +217,7 @@ public class RestrictedPreferenceHelper {
         extras.putInt(AccessibilitySettings.EXTRA_ANIMATED_IMAGE_RES, imageRes);
         extras.putString(AccessibilitySettings.EXTRA_HTML_DESCRIPTION, htmlDescription);
         extras.putInt(AccessibilitySettings.EXTRA_METRICS_CATEGORY, metricsCategory);
+        extras.putInt(AccessibilitySettings.EXTRA_FEEDBACK_CATEGORY, metricsCategory);
     }
 
     /**

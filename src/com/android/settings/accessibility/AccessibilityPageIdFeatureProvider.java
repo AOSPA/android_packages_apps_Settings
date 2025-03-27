@@ -21,9 +21,9 @@ import android.content.ComponentName;
 import androidx.annotation.Nullable;
 
 /**
- * Provider for Accessibility metrics related features.
+ * Provider for Accessibility page id related features.
  */
-public interface AccessibilityMetricsFeatureProvider {
+public interface AccessibilityPageIdFeatureProvider {
 
     /**
      * Returns {@link android.app.settings.SettingsEnums} value according to the {@code
@@ -32,5 +32,5 @@ public interface AccessibilityMetricsFeatureProvider {
      * @param componentName the component name of the downloaded service or activity
      * @return value in {@link android.app.settings.SettingsEnums}
      */
-    int getDownloadedFeatureMetricsCategory(@Nullable ComponentName componentName);
+    int getCategory(@Nullable ComponentName componentName);
 }

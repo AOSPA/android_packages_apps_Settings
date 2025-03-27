@@ -16,6 +16,8 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast.EXTRA_BLUETOOTH_DEVICE;
 
 import android.Manifest;
@@ -143,8 +145,12 @@ public class AudioSharingReceiver extends BroadcastReceiver {
                     return;
                 }
                 if (isAppInForeground(context)) {
-                    // TODO: show dialog
                     Log.d(TAG, "App in foreground, show share audio dialog");
+                    Intent dialogIntent = new Intent();
+                    dialogIntent.setClass(context, AudioSharingJoinHandlerActivity.class);
+                    dialogIntent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                    dialogIntent.putExtra(EXTRA_BLUETOOTH_DEVICE, device);
+                    context.startActivity(dialogIntent);
                 } else {
                     Log.d(TAG, "App not in foreground, show share audio notification");
                     LocalBluetoothManager manager = Utils.getLocalBtManager(context);

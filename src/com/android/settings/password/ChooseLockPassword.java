@@ -25,6 +25,7 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.REENTER_W
 import static android.app.admin.DevicePolicyResources.Strings.Settings.SET_WORK_PROFILE_PASSWORD_HEADER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.SET_WORK_PROFILE_PIN_HEADER;
 import static android.app.admin.DevicePolicyResources.UNDEFINED;
+import static android.view.View.ACCESSIBILITY_LIVE_REGION_ASSERTIVE;
 import static android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE;
 
 import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_NONE;
@@ -70,6 +71,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.accessibility.AccessibilityManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.CheckBox;
 import android.widget.ImeAwareEditText;
@@ -585,10 +587,10 @@ public class ChooseLockPassword extends SettingsActivity {
                     : (InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD));
             if (mIsAlphaMode) {
                 mPasswordEntry.setContentDescription(
-                        getString(R.string.unlock_set_unlock_password_title));
+                        getString(R.string.unlock_accessibility_password));
             } else {
                 mPasswordEntry.setContentDescription(
-                        getString(R.string.unlock_set_unlock_pin_title));
+                        getString(R.string.unlock_accessibility_pin_area));
             }
             // Can't set via XML since setInputType resets the fontFamily to null
             mPasswordEntry.setTypeface(Typeface.create(
@@ -1126,16 +1128,24 @@ public class ChooseLockPassword extends SettingsActivity {
 
             mPasswordEntry.setText("");
 
+            final AccessibilityManager accessibilityManager =
+                    (AccessibilityManager) getActivity().getSystemService(
+                            Context.ACCESSIBILITY_SERVICE);
+
+            if (accessibilityManager.isEnabled()) {
+                if (mPasswordEntry != null) {
+                    mPasswordEntry.setAccessibilityLiveRegion(ACCESSIBILITY_LIVE_REGION_ASSERTIVE);
+                    mPasswordEntry.setStateDescription(
+                            mIsAlphaMode ? getString(R.string.accessibility_setup_password_complete)
+                                    : getString(R.string.accessibility_setup_pin_complete));
+                }
+            }
+
             if (!wasSecureBefore) {
                 Intent intent = getRedactionInterstitialIntent(getActivity());
                 if (intent != null) {
                     startActivity(intent);
                 }
-            }
-
-            if (mLayout != null) {
-                mLayout.announceForAccessibility(
-                        getString(R.string.accessibility_setup_password_complete));
             }
 
             getActivity().finish();

@@ -15,8 +15,6 @@
  */
 package com.android.settings.accessibility;
 
-import android.content.ComponentName;
-
 import androidx.annotation.Nullable;
 
 /** Default implementation of {@link AccessibilityFeedbackFeatureProvider}. */
@@ -25,7 +23,7 @@ public class AccessibilityFeedbackFeatureProviderImpl implements
 
     @Override
     @Nullable
-    public String getCategory(@Nullable ComponentName componentName) {
-        return "";
+    public String getCategory(int pageId) {
+        return null;
     }
 }

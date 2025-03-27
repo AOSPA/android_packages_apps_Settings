@@ -743,10 +743,11 @@ public class ChooseLockPattern extends SettingsActivity {
             // header text, footer text, visibility and
             // enabled state all known from the stage
             if (stage == Stage.ChoiceTooShort) {
-                layout.setDescriptionText(
-                        getResources().getString(
-                                stage.headerMessage,
-                                LockPatternUtils.MIN_LOCK_PATTERN_SIZE));
+                final String desc = getResources().getString(
+                        stage.headerMessage,
+                        LockPatternUtils.MIN_LOCK_PATTERN_SIZE);
+                layout.setDescriptionText(desc);
+                layout.setContentDescription(desc);
             } else {
                 layout.setDescriptionText(stage.headerMessage);
             }
@@ -885,11 +886,6 @@ public class ChooseLockPattern extends SettingsActivity {
                 if (intent != null) {
                     startActivity(intent);
                 }
-            }
-
-            if (mSudContent != null) {
-                mSudContent.announceForAccessibility(
-                        getString(R.string.accessibility_setup_password_complete));
             }
 
             getActivity().finish();

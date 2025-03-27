@@ -58,10 +58,12 @@ import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.HeadsetProfile;
 import com.android.settingslib.bluetooth.HearingAidProfile;
 import com.android.settingslib.bluetooth.LeAudioProfile;
+import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.flags.Flags;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.Locale;
@@ -83,6 +85,7 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
     @Nullable private final CachedBluetoothDeviceManager mDeviceManager;
     @Nullable private final BluetoothEventManager mEventManager;
     @Nullable private final LocalBluetoothProfileManager mProfileManager;
+    @Nullable private final LocalBluetoothLeBroadcast mBroadcast;
     @Nullable private final LocalBluetoothLeBroadcastAssistant mAssistant;
     private final Executor mExecutor;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
@@ -190,6 +193,7 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
         mEventManager = mBtManager == null ? null : mBtManager.getEventManager();
         mDeviceManager = mBtManager == null ? null : mBtManager.getCachedDeviceManager();
         mProfileManager = mBtManager == null ? null : mBtManager.getProfileManager();
+        mBroadcast = mProfileManager == null ? null : mProfileManager.getLeAudioBroadcastProfile();
         mAssistant =
                 mProfileManager == null
                         ? null
@@ -334,8 +338,15 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
             @NonNull CachedBluetoothDevice cachedDevice,
             @ConnectionState int state,
             int bluetoothProfile) {
-        if (mDialogHandler == null || mAssistant == null || mFragment == null) {
+        if (mDialogHandler == null || mBroadcast == null || mAssistant == null
+                || mFragment == null) {
             Log.d(TAG, "Ignore onProfileConnectionStateChanged, not init correctly");
+            return;
+        }
+        if (Flags.promoteAudioSharingForSecondAutoConnectedLeaDevice() && mBroadcast.isEnabled(
+                null)) {
+            Log.d(TAG, "Ignore onProfileConnectionStateChanged, in broadcast");
+            // Device connected in broadcast will be handled in sysui via settingslib
             return;
         }
         if (!isMediaDevice(cachedDevice)) {
@@ -344,13 +355,15 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
         }
         // Close related dialogs if the BT remote device is disconnected.
         if (state == BluetoothAdapter.STATE_DISCONNECTED) {
-            boolean isLeAudioSupported = AudioSharingUtils.isLeAudioSupported(cachedDevice);
+            boolean isLeAudioSupported = BluetoothUtils.isLeAudioSupported(cachedDevice);
             if (isLeAudioSupported
                     && bluetoothProfile == BluetoothProfile.LE_AUDIO_BROADCAST_ASSISTANT) {
+                Log.d(TAG, "closeOpeningDialogsForLeaDevice");
                 mDialogHandler.closeOpeningDialogsForLeaDevice(cachedDevice);
                 return;
             }
             if (!isLeAudioSupported && !cachedDevice.isConnected()) {
+                Log.d(TAG, "closeOpeningDialogsForNonLeaDevice");
                 mDialogHandler.closeOpeningDialogsForNonLeaDevice(cachedDevice);
                 return;
             }
@@ -360,6 +373,13 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
             return;
         }
         handleOnProfileStateChanged(cachedDevice, bluetoothProfile);
+    }
+
+    @Override
+    public void onBluetoothStateChanged(@AdapterState int bluetoothState) {
+        if (bluetoothState == BluetoothAdapter.STATE_OFF && mDialogHandler != null) {
+            mDialogHandler.closeOpeningDialogsOtherThan("");
+        }
     }
 
     @Override
@@ -421,7 +441,7 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
 
     private void handleOnProfileStateChanged(
             @NonNull CachedBluetoothDevice cachedDevice, int bluetoothProfile) {
-        boolean isLeAudioSupported = AudioSharingUtils.isLeAudioSupported(cachedDevice);
+        boolean isLeAudioSupported = BluetoothUtils.isLeAudioSupported(cachedDevice);
         // For eligible (LE audio) remote device, we only check its connected LE audio assistant
         // profile.
         if (isLeAudioSupported
@@ -441,12 +461,8 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
                             + " non le audio device");
             return;
         }
-        if (DEBUG) {
-            Log.d(
-                    TAG,
-                    "Start handling onProfileConnectionStateChanged for "
-                            + cachedDevice.getDevice().getAnonymizedAddress());
-        }
+        Log.d(TAG, "Start handling onProfileConnectionStateChanged for "
+                + cachedDevice.getDevice().getAnonymizedAddress());
         // Check nullability to pass NullAway check
         if (mDialogHandler != null) {
             mDialogHandler.handleDeviceConnected(cachedDevice, /* userTriggered= */ false);

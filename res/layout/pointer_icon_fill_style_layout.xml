@@ -38,21 +38,13 @@
 
     <LinearLayout
         android:id="@+id/button_holder"
-        android:layout_width="@dimen/pointer_fill_container_max_width"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/pointer_fill_container_height"
         android:layout_marginBottom="@dimen/pointer_fill_style_circle_padding"
         android:layout_marginTop="@dimen/pointer_fill_style_circle_padding"
-        android:gravity="center"
+        android:gravity="left|center_vertical"
         android:paddingTop="@dimen/pointer_fill_style_container_padding"
         android:paddingBottom="@dimen/pointer_fill_style_container_padding">
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:focusable="false"
-            android:clickable="false"
-            android:importantForAccessibility="no"
-            android:layout_weight="1" />
 
         <ImageView
             android:id="@+id/button_black"
@@ -66,12 +58,11 @@
             android:src="@drawable/pointer_icon_fill_color_background" />
 
         <View
-            android:layout_width="0dp"
+            android:layout_width="@dimen/pointer_fill_style_circle_spacer"
             android:layout_height="match_parent"
             android:focusable="false"
             android:clickable="false"
-            android:importantForAccessibility="no"
-            android:layout_weight="1" />
+            android:importantForAccessibility="no"/>
 
         <ImageView
             android:id="@+id/button_green"
@@ -85,12 +76,11 @@
             android:src="@drawable/pointer_icon_fill_color_background" />
 
         <View
-            android:layout_width="0dp"
+            android:layout_width="@dimen/pointer_fill_style_circle_spacer"
             android:layout_height="match_parent"
             android:focusable="false"
             android:clickable="false"
-            android:importantForAccessibility="no"
-            android:layout_weight="1" />
+            android:importantForAccessibility="no"/>
 
         <ImageView
             android:id="@+id/button_red"
@@ -104,12 +94,11 @@
             android:src="@drawable/pointer_icon_fill_color_background" />
 
         <View
-            android:layout_width="0dp"
+            android:layout_width="@dimen/pointer_fill_style_circle_spacer"
             android:layout_height="match_parent"
             android:focusable="false"
             android:clickable="false"
-            android:importantForAccessibility="no"
-            android:layout_weight="1" />
+            android:importantForAccessibility="no"/>
 
         <ImageView
             android:id="@+id/button_pink"
@@ -123,12 +112,11 @@
             android:src="@drawable/pointer_icon_fill_color_background" />
 
         <View
-            android:layout_width="0dp"
+            android:layout_width="@dimen/pointer_fill_style_circle_spacer"
             android:layout_height="match_parent"
             android:focusable="false"
             android:clickable="false"
-            android:importantForAccessibility="no"
-            android:layout_weight="1" />
+            android:importantForAccessibility="no"/>
 
         <ImageView
             android:id="@+id/button_blue"
@@ -142,12 +130,11 @@
             android:src="@drawable/pointer_icon_fill_color_background" />
 
         <View
-            android:layout_width="0dp"
+            android:layout_width="@dimen/pointer_fill_style_circle_spacer"
             android:layout_height="match_parent"
             android:focusable="false"
             android:clickable="false"
-            android:importantForAccessibility="no"
-            android:layout_weight="1" />
+            android:importantForAccessibility="no"/>
 
         <ImageView
             android:id="@+id/button_purple"
@@ -160,13 +147,6 @@
             android:scaleType="center"
             android:src="@drawable/pointer_icon_fill_color_background" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:focusable="false"
-            android:clickable="false"
-            android:importantForAccessibility="no"
-            android:layout_weight="1" />
     </LinearLayout>
 
 </LinearLayout>

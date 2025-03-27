@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 The Android Open Source Project
+ * Copyright (C) 2025 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,17 +16,26 @@
 
 package com.android.settings.accessibility;
 
-import android.app.settings.SettingsEnums;
-import android.content.ComponentName;
+import android.app.Dialog;
 
-/**
- * Provider implementation for Accessibility metrics related features.
- */
-public class AccessibilityMetricsFeatureProviderImpl implements
-        AccessibilityMetricsFeatureProvider {
+import androidx.annotation.NonNull;
+
+import com.android.settings.DialogCreatable;
+
+public class TestDialogHelper implements DialogHelper {
+    private DialogCreatable mDialogDelegate;
+    private Dialog mDialog;
 
     @Override
-    public int getDownloadedFeatureMetricsCategory(ComponentName componentName) {
-        return SettingsEnums.ACCESSIBILITY_SERVICE;
+    public void showDialog(int dialogId) {
+        mDialog = mDialogDelegate.onCreateDialog(dialogId);
+    }
+
+    public void setDialogDelegate(@NonNull DialogCreatable delegate) {
+        mDialogDelegate = delegate;
+    }
+
+    public Dialog getDialog() {
+        return mDialog;
     }
 }

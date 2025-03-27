@@ -273,6 +273,7 @@ public class AudioSharingJoinHandlerControllerTest {
         verify(mDeviceManager, never()).findDevice(any(BluetoothDevice.class));
         verify(mDialogHandler, never())
                 .handleDeviceConnected(any(CachedBluetoothDevice.class), anyBoolean());
+        verify(mActivity).finish();
     }
 
     @Test
@@ -285,10 +286,30 @@ public class AudioSharingJoinHandlerControllerTest {
         Intent intent = new Intent();
         intent.putExtra(EXTRA_BLUETOOTH_DEVICE, device);
         doReturn(intent).when(mActivity).getIntent();
+        when(mDialogHandler.handleDeviceConnected(any(), anyBoolean())).thenReturn(true);
         mController.displayPreference(mScreen);
         shadowOf(Looper.getMainLooper()).idle();
 
         verify(mDialogHandler).handleDeviceConnected(cachedDevice, /* userTriggered = */ false);
+        verify(mActivity, never()).finish();
+    }
+
+    @Test
+    @EnableFlags({Flags.FLAG_ENABLE_LE_AUDIO_SHARING,
+            Flags.FLAG_PROMOTE_AUDIO_SHARING_FOR_SECOND_AUTO_CONNECTED_LEA_DEVICE})
+    public void handleDeviceClickFromIntent_noDialogToShow_finish() {
+        CachedBluetoothDevice cachedDevice = mock(CachedBluetoothDevice.class);
+        BluetoothDevice device = mock(BluetoothDevice.class);
+        when(mDeviceManager.findDevice(device)).thenReturn(cachedDevice);
+        Intent intent = new Intent();
+        intent.putExtra(EXTRA_BLUETOOTH_DEVICE, device);
+        doReturn(intent).when(mActivity).getIntent();
+        when(mDialogHandler.handleDeviceConnected(any(), anyBoolean())).thenReturn(false);
+        mController.displayPreference(mScreen);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        verify(mDialogHandler).handleDeviceConnected(cachedDevice, /* userTriggered = */ false);
+        verify(mActivity).finish();
     }
 
     @Test
@@ -322,5 +343,21 @@ public class AudioSharingJoinHandlerControllerTest {
 
         // Above callbacks won't dismiss stale dialogs
         verifyNoInteractions(mDialogHandler);
+    }
+
+    @Test
+    public void onBluetoothStateChanged_stateOn_doNothing() {
+        mController.onBluetoothStateChanged(BluetoothAdapter.STATE_ON);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        verify(mActivity, never()).finish();
+    }
+
+    @Test
+    public void onBluetoothStateChanged_stateOff_finish() {
+        mController.onBluetoothStateChanged(BluetoothAdapter.STATE_OFF);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        verify(mActivity).finish();
     }
 }

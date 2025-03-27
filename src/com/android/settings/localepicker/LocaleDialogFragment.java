@@ -26,11 +26,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.window.OnBackInvokedCallback;
 import android.window.OnBackInvokedDispatcher;
 
@@ -57,6 +52,7 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
     static final String ARG_DIALOG_TYPE = "arg_dialog_type";
     static final String ARG_TARGET_LOCALE = "arg_target_locale";
     static final String ARG_SHOW_DIALOG = "arg_show_dialog";
+    static final String ARG_SHOW_DIALOG_FOR_NOT_TRANSLATED = "arg_show_dialog_for_not_translated";
 
     private boolean mShouldKeepDialog;
     private OnBackInvokedDispatcher mBackDispatcher;
@@ -185,6 +181,7 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
         private final int mDialogType;
         private final LocaleStore.LocaleInfo mLocaleInfo;
         private final MetricsFeatureProvider mMetricsFeatureProvider;
+        private final boolean mShowDialogForNotTranslated;
 
         private LocaleListEditor mParent;
 
@@ -194,6 +191,7 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
             mContext = context;
             Bundle arguments = dialogFragment.getArguments();
             mDialogType = arguments.getInt(ARG_DIALOG_TYPE);
+            mShowDialogForNotTranslated = arguments.getBoolean(ARG_SHOW_DIALOG_FOR_NOT_TRANSLATED);
             mLocaleInfo = (LocaleStore.LocaleInfo) arguments.getSerializable(ARG_TARGET_LOCALE);
             mMetricsFeatureProvider =
                     FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
@@ -215,6 +213,7 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
                 bundle.putInt(ARG_DIALOG_TYPE, mDialogType);
                 bundle.putSerializable(LocaleDialogFragment.ARG_TARGET_LOCALE, mLocaleInfo);
                 intent.putExtras(bundle);
+                intent.putExtra(ARG_SHOW_DIALOG_FOR_NOT_TRANSLATED, mShowDialogForNotTranslated);
                 mParent.onActivityResult(mDialogType, result, intent);
                 mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_CHANGE_LANGUAGE,
                         changed);

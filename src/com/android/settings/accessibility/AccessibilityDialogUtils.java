@@ -104,6 +104,11 @@ public class AccessibilityDialogUtils {
          * screen / Switch between full and partial screen > Save.
          */
         int DIALOG_MAGNIFICATION_TRIPLE_TAP_WARNING = 1011;
+
+        /**
+         * OPEN: Settings > Accessibility > Magnification > Cursor following.
+         */
+        int DIALOG_MAGNIFICATION_CURSOR_FOLLOWING_MODE = 1012;
     }
 
     /**

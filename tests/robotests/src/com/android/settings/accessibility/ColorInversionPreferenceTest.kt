@@ -97,7 +97,7 @@ class ColorInversionPreferenceTest {
     fun getSummary_colorInversionOn_verifySummary() {
         SettingsSecureStore.get(appContext).setInt(SETTING_KEY, AccessibilityUtil.State.ON)
 
-        assertThat(colorInversionPreference.getPreferenceSummary(appContext)).isEqualTo(
+        assertThat(colorInversionPreference.getSummary(appContext)).isEqualTo(
             appContext.getText(
                 R.string.color_inversion_state_on
             )
@@ -108,7 +108,7 @@ class ColorInversionPreferenceTest {
     fun getSummary_colorInversionOff_verifySummary() {
         SettingsSecureStore.get(appContext).setInt(SETTING_KEY, AccessibilityUtil.State.OFF)
 
-        assertThat(colorInversionPreference.getPreferenceSummary(appContext)).isEqualTo(
+        assertThat(colorInversionPreference.getSummary(appContext)).isEqualTo(
             appContext.getText(
                 R.string.color_inversion_state_off
             )

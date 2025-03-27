@@ -21,7 +21,7 @@ import androidx.appcompat.app.AlertDialog
 
 class WifiDialogHelper(
     alertDialog: AlertDialog,
-    private val ssidInputGroup: SsidInputGroup? = null,
+    private val ssidInputGroup: TextInputGroup? = null,
 ) : AlertDialogHelper(alertDialog) {
 
     override fun canDismiss(): Boolean {

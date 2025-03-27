@@ -239,10 +239,19 @@ public class AudioSharingJoinHandlerController extends BasePreferenceController
             boolean isLeAudioSupported = BluetoothUtils.isLeAudioSupported(cachedDevice);
             if (isLeAudioSupported
                     && bluetoothProfile == BluetoothProfile.LE_AUDIO_BROADCAST_ASSISTANT) {
+                Log.d(TAG, "closeOpeningDialogsForLeaDevice");
                 mDialogHandler.closeOpeningDialogsForLeaDevice(cachedDevice);
             } else if (!isLeAudioSupported && !cachedDevice.isConnected()) {
+                Log.d(TAG, "closeOpeningDialogsForNonLeaDevice");
                 mDialogHandler.closeOpeningDialogsForNonLeaDevice(cachedDevice);
             }
+        }
+    }
+
+    @Override
+    public void onBluetoothStateChanged(@AdapterState int bluetoothState) {
+        if (bluetoothState == BluetoothAdapter.STATE_OFF) {
+            finishActivity();
         }
     }
 
@@ -256,15 +265,29 @@ public class AudioSharingJoinHandlerController extends BasePreferenceController
                         ? null
                         : mDeviceManager.findDevice(device);
         if (cachedDevice == null) {
-            Log.d(TAG, "Skip handleDeviceConnectedFromIntent, device is null");
+            Log.d(TAG, "Skip handleDeviceConnectedFromIntent and finish activity, device is null");
+            finishActivity();
             return;
         }
         if (mDialogHandler == null) {
-            Log.d(TAG, "Skip handleDeviceConnectedFromIntent, handler is null");
+            Log.d(TAG, "Skip handleDeviceConnectedFromIntent and finish activity, handler is null");
+            finishActivity();
             return;
         }
         Log.d(TAG, "handleDeviceConnectedFromIntent, device = " + device.getAnonymizedAddress());
-        mDialogHandler.handleDeviceConnected(cachedDevice, /* userTriggered= */ false);
+        if (!mDialogHandler.handleDeviceConnected(cachedDevice, /* userTriggered= */ false)) {
+            Log.d(TAG, "handleDeviceConnectedFromIntent, finish activity");
+            finishActivity();
+        }
+    }
+
+    private void finishActivity() {
+        AudioSharingUtils.postOnMainThread(mContext, () -> {
+            if (mFragment != null && mFragment.getActivity() != null) {
+                Log.d(TAG, "Finish activity");
+                mFragment.getActivity().finish();
+            }
+        });
     }
 
     @VisibleForTesting
