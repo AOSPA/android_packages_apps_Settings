@@ -18,6 +18,7 @@ package com.android.settings.network.telephony
 
 import android.content.Context
 import android.content.Intent
+import android.sysprop.TelephonyProperties
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager.ACTION_SHOW_NOTICE_ECM_BLOCK_OTHERS
 import android.util.Log
@@ -25,6 +26,7 @@ import com.android.settings.Utils
 import com.android.settings.flags.Flags
 import com.android.settings.network.SatelliteRepository
 import com.android.settings.network.SimOnboardingActivity.Companion.startSimOnboardingActivity
+import com.qti.extphone.ExtTelephonyManager.ACTION_SHOW_NOTICE_SCM_BLOCK_OTHERS
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
@@ -59,11 +61,22 @@ class SubscriptionActivationRepository(
             context.startActivity(intent)
             return
         }
+        if (isInScbm()) {
+            val intent = Intent(ACTION_SHOW_NOTICE_SCM_BLOCK_OTHERS).apply {
+                setPackage(Utils.PHONE_PACKAGE_NAME)
+            }
+            context.startActivity(intent)
+            return
+        }
         if (active && Flags.isDualSimOnboardingEnabled()) {
             startSimOnboardingActivity(context, subId)
             return
         }
         context.startActivity(ToggleSubscriptionDialogActivity.getIntent(context, subId, active))
+    }
+
+    private suspend fun isInScbm(): Boolean {
+        return TelephonyProperties.in_scbm().orElse(false)
     }
 
     private suspend fun isEmergencyCallbackMode(subId: Int) = withContext(Dispatchers.Default) {

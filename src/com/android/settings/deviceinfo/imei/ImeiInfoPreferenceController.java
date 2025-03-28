@@ -116,6 +116,13 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
         // Loop through all active SIMs or all slots if mIsDsdsToSsConfigValid is enabled
         for (int simSlotNumber = 0; simSlotNumber < mSlotSimStatus.size()
                 || (mIsDsdsToSsConfigValid && simSlotNumber < mSlotCount); simSlotNumber++) {
+            if (Utils.isSupportCTPA(mContext)) {
+                final int phoneType = mTelephonyManager.getCurrentPhoneTypeForSlot(simSlotNumber);
+                if (PHONE_TYPE_CDMA == phoneType) {
+                    continue;
+                }
+            }
+
             Preference multiImeiPreference = createNewPreference(screen.getContext());
             multiImeiPreference.setOrder(imeiPreferenceOrder + 1 + simSlotNumber);
             multiImeiPreference.setKey(DEFAULT_KEY + (1 + simSlotNumber));
@@ -131,7 +138,6 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
 
         /* current code will parse the slot id from the preference key value
          * the key for the CT new preference is populated as below
-         *  current phone count + 1:  new one MEID preference for slot 0
          *  current phone count + 2:  new one IMEI preference for slot 0
          *  current phone count + 3:  new one IMEI preference for slot 1
          */
@@ -140,10 +146,7 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
             final int slot0PhoneType = mTelephonyManager.getCurrentPhoneTypeForSlot(0);
             final int slot1PhoneType = mTelephonyManager.getCurrentPhoneTypeForSlot(1);
             int order = imeiPreferenceOrder + phoneCount + 1;
-            if (PHONE_TYPE_CDMA != slot0PhoneType && PHONE_TYPE_CDMA != slot1PhoneType) {
-                addPreferenceNotInList(screen, order, DEFAULT_KEY + (phoneCount + 1),
-                        category, true);
-            } else if (PHONE_TYPE_CDMA == slot0PhoneType){
+            if (PHONE_TYPE_CDMA == slot0PhoneType) {
                 addPreferenceNotInList(screen, order, DEFAULT_KEY + (phoneCount + 2),
                         category, false);
             } else if (PHONE_TYPE_CDMA == slot1PhoneType) {
