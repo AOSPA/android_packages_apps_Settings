@@ -213,8 +213,8 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     private static boolean isMagnificationCursorFollowingModeDialogSupported() {
-        // TODO(b/398066000): Hide the setting when no pointer device exists for most form factors.
-        return com.android.settings.accessibility.Flags.enableMagnificationCursorFollowingDialog();
+        return com.android.settings.accessibility.Flags.enableMagnificationCursorFollowingDialog()
+                && hasMouse();
     }
 
     @Override
@@ -677,6 +677,21 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     protected int getUserPreferredShortcutTypes() {
         return PreferredShortcuts.retrieveUserShortcutType(
                 getPrefContext(), MAGNIFICATION_CONTROLLER_NAME);
+    }
+
+    /**
+     * Returns if a mouse is attached.
+     */
+    private static boolean hasMouse() {
+        final int[] devices = InputDevice.getDeviceIds();
+        for (int i = 0; i < devices.length; i++) {
+            InputDevice device = InputDevice.getDevice(devices[i]);
+            if (device != null && (device.getSources() & InputDevice.SOURCE_MOUSE)
+                    == InputDevice.SOURCE_MOUSE) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean hasHardKeyboard() {

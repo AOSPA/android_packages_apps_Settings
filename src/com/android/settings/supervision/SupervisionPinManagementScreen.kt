@@ -17,15 +17,19 @@ package com.android.settings.supervision
 
 import android.content.Context
 import com.android.settings.R
+import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
 /** Pin Management landing page (Settings > Supervision > Manage Pin). */
 @ProvidePreferenceScreen(SupervisionPinManagementScreen.KEY)
-class SupervisionPinManagementScreen : PreferenceScreenCreator {
+class SupervisionPinManagementScreen : PreferenceScreenCreator, PreferenceAvailabilityProvider {
     override val key: String
         get() = KEY
+
+    override fun isAvailable(context: Context) =
+        SupervisionHelper.getInstance(context).isSupervisingCredentialSet()
 
     override val title: Int
         get() = R.string.supervision_pin_management_preference_title
@@ -36,7 +40,7 @@ class SupervisionPinManagementScreen : PreferenceScreenCreator {
 
     // TODO(b/391994031): dynamically update the icon according to PIN status.
     override val icon: Int
-        get() = R.drawable.ic_pin
+        get() = R.drawable.ic_pin_outline
 
     override fun fragmentClass() = SupervisionPinManagementFragment::class.java
 

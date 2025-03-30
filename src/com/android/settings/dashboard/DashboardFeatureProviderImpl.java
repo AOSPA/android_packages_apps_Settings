@@ -80,6 +80,7 @@ import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.AdaptiveIcon;
 import com.android.settingslib.widget.SettingsThemeHelper;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 
 import java.util.ArrayList;
@@ -95,6 +96,20 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     private static final String DASHBOARD_TILE_PREF_KEY_PREFIX = "dashboard_tile_pref_";
     private static final String META_DATA_KEY_INTENT_ACTION = "com.android.settings.intent.action";
     private static final String TOP_LEVEL_ACCOUNT_CATEGORY = "top_level_account_category";
+
+    private static final Map<String, Pair<Integer, Integer>> COLOR_SCHEMES = ImmutableMap.of(
+            "blue_variant", new Pair<>(
+                    R.color.homepage_blue_variant_fg, R.color.homepage_blue_variant_bg),
+            "blue", new Pair<>(R.color.homepage_blue_fg, R.color.homepage_blue_bg),
+            "pink", new Pair<>(R.color.homepage_pink_fg, R.color.homepage_pink_bg),
+            "orange", new Pair<>(R.color.homepage_orange_fg, R.color.homepage_orange_bg),
+            "yellow", new Pair<>(R.color.homepage_yellow_fg, R.color.homepage_yellow_bg),
+            "green", new Pair<>(R.color.homepage_green_fg, R.color.homepage_green_bg),
+            "grey", new Pair<>(R.color.homepage_grey_fg, R.color.homepage_grey_bg),
+            "cyan", new Pair<>(R.color.homepage_cyan_fg, R.color.homepage_cyan_bg),
+            "red", new Pair<>(R.color.homepage_red_fg, R.color.homepage_red_bg),
+            "purple", new Pair<>(R.color.homepage_purple_fg, R.color.homepage_purple_bg)
+    );
 
     protected final Context mContext;
 
@@ -486,18 +501,18 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             @Nullable String iconPackage) {
         if (TextUtils.equals(tile.getGroupKey(), TOP_LEVEL_ACCOUNT_CATEGORY)
                 && iconPackage == null) {
-            // Normalize size for homepage account type raw icons
+            // Normalize size for homepage account type raw image
             LayerDrawable drawable = new LayerDrawable(new Drawable[] {iconDrawable});
             int size = mContext.getResources().getDimensionPixelSize(
                     R.dimen.dashboard_tile_image_size);
             drawable.setLayerSize(0, size, size);
             return drawable;
-        } else if (TextUtils.equals(tile.getPackageName(),
-                mPackageManager.getWellbeingPackageName())) {
-            return getRoundedIcon(iconDrawable,
-                    R.color.homepage_wellbeing_foreground, R.color.homepage_wellbeing_background);
         }
-        // For future injections, please add the package name and color resources here.
+
+        Pair<Integer, Integer> colors = getSchemedColors(tile);
+        if (colors != null) {
+            return getRoundedIcon(iconDrawable, colors.first, colors.second);
+        }
 
         iconDrawable.setTint(Utils.getHomepageIconColor(mContext));
         return iconDrawable;
@@ -508,6 +523,21 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         AdaptiveIcon roundedIcon = new AdaptiveIcon(mContext, iconDrawable);
         roundedIcon.setBackgroundColor(mContext.getColor(bgColorId));
         return roundedIcon;
+    }
+
+    @VisibleForTesting
+    @Nullable
+    Pair<Integer, Integer> getSchemedColors(Tile tile) {
+        String scheme = tile.getIconColorScheme(mContext);
+        if (TextUtils.isEmpty(scheme)) {
+            return null;
+        }
+
+        Pair<Integer, Integer> colors = COLOR_SCHEMES.get(scheme);
+        if (colors == null) {
+            Log.w(TAG, "Invalid color scheme: " + scheme);
+        }
+        return colors;
     }
 
     private void launchPendingIntentOrSelectProfile(FragmentActivity activity, Tile tile,

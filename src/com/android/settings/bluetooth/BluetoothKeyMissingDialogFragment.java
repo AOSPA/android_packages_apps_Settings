@@ -30,17 +30,18 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 /**
- * A dialogFragment used by {@link BluetoothKeyMissingDialog} to create a dialog for the
- * bluetooth device.
+ * A dialogFragment used by {@link BluetoothKeyMissingDialog} to create a dialog for the bluetooth
+ * device.
  */
 public class BluetoothKeyMissingDialogFragment extends InstrumentedDialogFragment
         implements OnClickListener {
 
-    private static final String TAG = "BTKeyMissingDialogFragment";
+    private static final String TAG = "BTKeyMissingDialogFrg";
     private static final String KEY_CACHED_DEVICE_ADDRESS = "cached_device";
 
     private BluetoothDevice mBluetoothDevice;
@@ -65,10 +66,10 @@ public class BluetoothKeyMissingDialogFragment extends InstrumentedDialogFragmen
         View view = getActivity().getLayoutInflater().inflate(R.layout.bluetooth_key_missing, null);
         TextView keyMissingTitle = view.findViewById(R.id.bluetooth_key_missing_title);
         keyMissingTitle.setText(
-                getString(R.string.bluetooth_key_missing_title, mBluetoothDevice.getName()));
+                getString(R.string.bluetooth_key_missing_title, mBluetoothDevice.getAlias()));
         builder.setView(view);
-        builder.setPositiveButton(getString(R.string.bluetooth_key_missing_forget), this);
-        builder.setNegativeButton(getString(R.string.bluetooth_key_missing_cancel), this);
+        builder.setPositiveButton(getString(R.string.bluetooth_key_missing_device_settings), this);
+        builder.setNegativeButton(getString(R.string.bluetooth_key_missing_close), this);
         AlertDialog dialog = builder.create();
         dialog.setCanceledOnTouchOutside(false);
         return dialog;
@@ -85,11 +86,18 @@ public class BluetoothKeyMissingDialogFragment extends InstrumentedDialogFragmen
     @Override
     public void onClick(DialogInterface dialog, int which) {
         if (which == DialogInterface.BUTTON_POSITIVE) {
-            Log.i(
-                    TAG,
-                    "Positive button clicked, remove bond for "
-                            + mBluetoothDevice.getAnonymizedAddress());
-            mBluetoothDevice.removeBond();
+            Log.i(TAG, "Positive button clicked for " + mBluetoothDevice.getAnonymizedAddress());
+            Bundle args = new Bundle();
+            args.putString(
+                    BluetoothDeviceDetailsFragment.KEY_DEVICE_ADDRESS,
+                    mBluetoothDevice.getAddress());
+
+            new SubSettingLauncher(requireContext())
+                    .setDestination(BluetoothDeviceDetailsFragment.class.getName())
+                    .setArguments(args)
+                    .setTitleRes(R.string.device_details_title)
+                    .setSourceMetricsCategory(getMetricsCategory())
+                    .launch();
         } else if (which == DialogInterface.BUTTON_NEGATIVE) {
             Log.i(TAG, "Negative button clicked for " + mBluetoothDevice.getAnonymizedAddress());
         }

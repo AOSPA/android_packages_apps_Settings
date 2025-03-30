@@ -20,6 +20,7 @@ import static android.provider.Settings.ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY
 import static android.provider.Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY;
 import static android.provider.Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_INTENT_URI;
 
+import static com.android.settings.SettingsActivity.EXTRA_IS_DEEPLINK_HOME_STARTED_FROM_SEARCH;
 import static com.android.settings.SettingsActivity.EXTRA_USER_HANDLE;
 
 import android.animation.LayoutTransition;
@@ -232,7 +233,9 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             }
         }
 
-        if (!isTaskRoot) {
+        final boolean isDeepLinkStartedFromSearch = getIntent().getBooleanExtra(
+                EXTRA_IS_DEEPLINK_HOME_STARTED_FROM_SEARCH, false /* defaultValue */);
+        if (!isTaskRoot && !isDeepLinkStartedFromSearch) {
             if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_NEW_TASK) != 0) {
                 Log.i(TAG, "Activity has been started, finishing");
             } else {
@@ -775,6 +778,16 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         // Prevent inner RecyclerView gets focus and invokes scrolling.
         view.setFocusableInTouchMode(true);
         view.requestFocus();
+
+        if (Flags.extendedScreenshotsExcludeNestedScrollables()) {
+            // Force scroll capture to select the NestedScrollView, instead of the non-scrollable
+            // RecyclerView which is contained inside it with no height constraint.
+            final View scrollableContainer = findViewById(R.id.main_content_scrollable_container);
+            if (scrollableContainer != null) {
+                scrollableContainer.setScrollCaptureHint(
+                        View.SCROLL_CAPTURE_HINT_EXCLUDE_DESCENDANTS);
+            }
+        }
     }
 
     private void updateHomepageAppBar() {

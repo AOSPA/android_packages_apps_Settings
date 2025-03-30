@@ -29,8 +29,7 @@ import com.android.settings.contract.KEY_SMOOTH_DISPLAY
 import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyValueStore
-import com.android.settingslib.datastore.KeyedObservableDelegate
-import com.android.settingslib.datastore.SettingsStore
+import com.android.settingslib.datastore.KeyValueStoreDelegate
 import com.android.settingslib.datastore.SettingsSystemStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
@@ -112,18 +111,16 @@ class PeakRefreshRateSwitchPreference :
     @Suppress("UNCHECKED_CAST")
     private class PeakRefreshRateStore(
         private val context: Context,
-        private val settingsStore: SettingsStore,
-    ) : KeyedObservableDelegate<String>(settingsStore), KeyValueStore {
+        private val settingsStore: KeyValueStore,
+    ) : KeyValueStoreDelegate {
 
-        override fun contains(key: String) = settingsStore.contains(key)
+        override val keyValueStoreDelegate
+            get() = settingsStore
 
-        override fun <T : Any> getDefaultValue(key: String, valueType: Class<T>): T? {
-            if (key != KEY) return super.getDefaultValue(key, valueType)
-            return context.defaultPeakRefreshRate.refreshRateAsBoolean(context) as T
-        }
+        override fun <T : Any> getDefaultValue(key: String, valueType: Class<T>) =
+            context.defaultPeakRefreshRate.refreshRateAsBoolean(context) as T
 
         override fun <T : Any> getValue(key: String, valueType: Class<T>): T? {
-            if (key != KEY) return null
             val refreshRate = settingsStore.getFloat(KEY) ?: context.defaultPeakRefreshRate
             return refreshRate.refreshRateAsBoolean(context) as T
         }

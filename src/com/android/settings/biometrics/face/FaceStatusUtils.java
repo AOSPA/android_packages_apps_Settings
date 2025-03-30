@@ -98,11 +98,14 @@ public class FaceStatusUtils {
             return mContext.getString(
                     com.android.settingslib.widget.restricted.R.string.disabled_by_admin);
         } else {
+            int summaryNoneResId = Flags.biometricsOnboardingEducation()
+                    ? R.string.security_settings_face_preference_summary_none_new
+                    : R.string.security_settings_face_preference_summary_none;
             return mContext.getResources()
                     .getString(
                             hasEnrolled()
                                     ? R.string.security_settings_face_preference_summary
-                                    : R.string.security_settings_face_preference_summary_none);
+                                    : summaryNoneResId);
         }
     }
 

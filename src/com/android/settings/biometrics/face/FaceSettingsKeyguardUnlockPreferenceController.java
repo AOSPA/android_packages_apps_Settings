@@ -52,7 +52,7 @@ public class FaceSettingsKeyguardUnlockPreferenceController extends
     @Override
     public boolean setChecked(boolean isChecked) {
         mMetricsFeatureProvider.action(mContext,
-                SettingsEnums.ACTION_FACE_ENABLED_ON_KEYGUARD, isChecked);
+                SettingsEnums.ACTION_FACE_ENABLED_ON_KEYGUARD_SETTINGS, isChecked);
         return Settings.Secure.putIntForUser(mContext.getContentResolver(),
                 FACE_KEYGUARD_ENABLED, isChecked ? ON : OFF, getUserId());
     }

@@ -110,4 +110,28 @@ public class ScreenResolutionFragmentTest {
 
         assertThat(preference.getSummary().toString().contentEquals(summary)).isTrue();
     }
+
+    @Test
+    public void testResolutionString_widthAndHeightAboveThreshold() {
+        String result = ScreenResolutionFragment.getResolutionString(1080, 1280);
+        assertThat(result).isEqualTo("1\u00A0080\u00A0x\u00A01\u00A0280");
+    }
+
+    @Test
+    public void testResolutionString_widthAboveThreshold_heightBelowThreshold() {
+        String result = ScreenResolutionFragment.getResolutionString(1080, 980);
+        assertThat(result).isEqualTo("1\u00A0080\u00A0x\u00A0980");
+    }
+
+    @Test
+    public void testResolutionString_widthBelowThreshold_heightBelowThreshold() {
+        String result = ScreenResolutionFragment.getResolutionString(980, 980);
+        assertThat(result).isEqualTo("980\u00A0x\u00A0980");
+    }
+
+    @Test
+    public void testResolutionString_widthBelowThreshold_heightAboveThreshold() {
+        String result = ScreenResolutionFragment.getResolutionString(980, 1080);
+        assertThat(result).isEqualTo("980\u00A0x\u00A01\u00A0080");
+    }
 }

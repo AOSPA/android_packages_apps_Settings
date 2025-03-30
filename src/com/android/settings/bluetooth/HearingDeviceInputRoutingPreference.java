@@ -80,7 +80,7 @@ public class HearingDeviceInputRoutingPreference extends CustomDialogPreferenceC
         setDialogTitle(R.string.bluetooth_hearing_device_input_routing_dialog_title);
         setDialogLayoutResource(R.layout.hearing_device_input_routing_dialog);
         setNegativeButtonText(R.string.cancel);
-        setPositiveButtonText(R.string.done_button);
+        setPositiveButtonText(R.string.done);
     }
 
     /**

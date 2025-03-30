@@ -108,7 +108,9 @@ public class FingerprintStatusUtils {
                     R.string.security_settings_fingerprint_preference_summary);
         } else {
             return mContext.getString(
-                    R.string.security_settings_fingerprint_preference_summary_none);
+                    Flags.biometricsOnboardingEducation()
+                            ? R.string.security_settings_fingerprint_preference_summary_none_new
+                            : R.string.security_settings_fingerprint_preference_summary_none);
         }
     }
 

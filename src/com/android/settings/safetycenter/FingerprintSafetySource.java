@@ -27,6 +27,7 @@ import android.os.UserManager;
 import android.safetycenter.SafetyEvent;
 
 import com.android.settings.Utils;
+import com.android.settings.biometrics.BiometricEnrollActivity;
 import com.android.settings.biometrics.BiometricNavigationUtils;
 import com.android.settings.biometrics.fingerprint.FingerprintStatusUtils;
 import com.android.settings.flags.Flags;
@@ -74,6 +75,11 @@ public final class FingerprintSafetySource {
         Context profileParentContext = context.createContextAsUser(profileParentUserHandle, 0);
 
         if (Utils.hasFingerprintHardware(context)) {
+            boolean isMultipleBiometricsEnrollmentNeeded =
+                    BiometricSourcesUtils.isMultipleBiometricsEnrollmentNeeded(context, userId);
+            String settingClassName = isMultipleBiometricsEnrollmentNeeded
+                            ? BiometricEnrollActivity.InternalActivity.class.getName()
+                            : fingerprintStatusUtils.getSettingsClassName();
             RestrictedLockUtils.EnforcedAdmin disablingAdmin =
                     fingerprintStatusUtils.getDisablingAdmin();
             BiometricSourcesUtils.setBiometricSafetySourceData(
@@ -86,7 +92,7 @@ public final class FingerprintSafetySource {
                             biometricNavigationUtils
                                     .getBiometricSettingsIntent(
                                             context,
-                                            fingerprintStatusUtils.getSettingsClassName(),
+                                            settingClassName,
                                             disablingAdmin,
                                             Bundle.EMPTY)
                                     .setIdentifier(Integer.toString(userId)),

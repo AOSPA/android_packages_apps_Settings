@@ -17,16 +17,18 @@
 package com.android.settings.wifi.utils
 
 import android.content.DialogInterface
+import android.content.DialogInterface.BUTTON_POSITIVE
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
 
-open class AlertDialogHelper(val alertDialog: AlertDialog) {
-
-    var isPositive = false
+open class AlertDialogHelper(
+    val alertDialog: AlertDialog,
+    val onClickListener: DialogInterface.OnClickListener? = null,
+) {
 
     init {
         alertDialog.setOnShowListener {
-            alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)?.setOnClickListener {
+            alertDialog.getButton(BUTTON_POSITIVE)?.setOnClickListener {
                 onPositiveButtonClicked()
             } ?: Log.e(TAG, "Can't get the positive button!")
         }
@@ -37,7 +39,7 @@ open class AlertDialogHelper(val alertDialog: AlertDialog) {
             Log.w(TAG, "Can't dismiss dialog!")
             return
         }
-        isPositive = true
+        onClickListener?.onClick(alertDialog, BUTTON_POSITIVE)
         alertDialog.dismiss()
     }
 

@@ -17,16 +17,18 @@ package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 import static org.robolectric.shadows.ShadowLooper.shadowMainLooper;
 
 import android.bluetooth.BluetoothDevice;
+import android.content.Intent;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 
+import com.android.settings.SettingsActivity;
+import com.android.settings.SubSettings;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -40,6 +42,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowIntent;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowAlertDialogCompat.class, ShadowBluetoothUtils.class})
@@ -71,18 +74,23 @@ public class BluetoothKeyMissingDialogTest {
     }
 
     @Test
-    public void clickForgetDevice_removeBond() {
+    public void clickDeviceSettings_launchDeviceDetails() {
         mFragment.onClick(mFragment.getDialog(), AlertDialog.BUTTON_POSITIVE);
 
-        verify(mBluetoothDevice).removeBond();
+        Intent startedIntent = shadowOf(mActivity).getNextStartedActivity();
+        ShadowIntent shadowIntent = shadowOf(startedIntent);
+        assertThat(shadowIntent.getIntentClass()).isEqualTo(SubSettings.class);
+        assertThat(startedIntent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(BluetoothDeviceDetailsFragment.class.getName());
         assertThat(mActivity.isFinishing()).isTrue();
     }
 
     @Test
-    public void clickCancel_notRemoveBond() {
+    public void clickCancel_notLaunchDeviceDetails() {
         mFragment.onClick(mFragment.getDialog(), AlertDialog.BUTTON_NEGATIVE);
 
-        verify(mBluetoothDevice, never()).removeBond();
+        Intent startedIntent = shadowOf(mActivity).getNextStartedActivity();
+        assertThat(startedIntent).isNull();
         assertThat(mActivity.isFinishing()).isTrue();
     }
 }

@@ -57,13 +57,13 @@ public class FaceSettingsAppsPreferenceControllerTest {
     public void setChecked_checked_updateMetrics() {
         mController.setChecked(true);
         verify(mFeatureFactory.metricsFeatureProvider).action(any(),
-                eq(SettingsEnums.ACTION_FACE_ENABLED_FOR_APP), eq(true));
+                eq(SettingsEnums.ACTION_FACE_ENABLED_FOR_APP_SETTINGS), eq(true));
     }
 
     @Test
     public void setChecked_unchecked_updateMetrics() {
         mController.setChecked(false);
         verify(mFeatureFactory.metricsFeatureProvider).action(any(),
-                eq(SettingsEnums.ACTION_FACE_ENABLED_FOR_APP), eq(false));
+                eq(SettingsEnums.ACTION_FACE_ENABLED_FOR_APP_SETTINGS), eq(false));
     }
 }

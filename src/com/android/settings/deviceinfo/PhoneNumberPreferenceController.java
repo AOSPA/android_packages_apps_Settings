@@ -100,9 +100,10 @@ public class PhoneNumberPreferenceController extends BasePreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        if (!SubscriptionUtil.isSimHardwareVisible(mContext)) {
+        if (!isAvailable()) {
             return;
         }
+
         final Preference preference = screen.findPreference(getPreferenceKey());
         final PreferenceCategory category = screen.findPreference(KEY_PREFERENCE_CATEGORY);
         mPreferenceList.add(preference);

@@ -26,6 +26,9 @@ import static com.android.settingslib.flags.Flags.FLAG_ENABLE_LE_AUDIO_SHARING;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -39,6 +42,7 @@ import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.bluetooth.BluetoothStatusCodes;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.lifecycle.LifecycleOwner;
@@ -52,6 +56,7 @@ import com.android.settings.testutils.shadow.ShadowThreadUtils;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.flags.Flags;
 import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.After;
@@ -254,6 +259,7 @@ public class AudioStreamHeaderControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_AUDIO_STREAM_MEDIA_SERVICE_BY_RECEIVE_STATE)
     public void testCallback_onReceiveStateChanged_updateButton() {
         when(mAudioStreamsHelper.getConnectedBroadcastIdAndState(anyBoolean()))
                 .thenReturn(Map.of(BROADCAST_ID, STREAMING));
@@ -271,6 +277,7 @@ public class AudioStreamHeaderControllerTest {
         verify(mHeaderController, times(2))
                 .setSummary(mContext.getString(AUDIO_STREAM_HEADER_LISTENING_NOW_SUMMARY));
         verify(mHeaderController, times(2)).done(true);
+        verify(mAudioStreamsHelper, never()).startMediaService(any(), anyInt(), anyString());
     }
 
     @Test

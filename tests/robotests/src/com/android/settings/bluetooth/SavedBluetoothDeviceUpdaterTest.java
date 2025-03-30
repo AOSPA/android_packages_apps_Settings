@@ -106,7 +106,8 @@ public class SavedBluetoothDeviceUpdaterTest {
         mPreference = new BluetoothDevicePreference(mContext, mCachedBluetoothDevice,
                 false, BluetoothDevicePreference.SortType.TYPE_DEFAULT);
         doNothing().when(mBluetoothDeviceUpdater).addPreference(any());
-        doNothing().when(mBluetoothDeviceUpdater).removePreference(any());
+        doNothing().when(mBluetoothDeviceUpdater).removePreference(
+                any(CachedBluetoothDevice.class));
         mCachedDevices.add(mCachedBluetoothDevice);
         when(mBluetoothManager.getCachedDeviceManager()).thenReturn(mDeviceManager);
         when(mDeviceManager.getCachedDevicesCopy()).thenReturn(mCachedDevices);

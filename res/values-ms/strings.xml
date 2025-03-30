@@ -41,6 +41,9 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Digantung"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Tidak diketahui"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Pratonton"</string>
+    <string name="preview_pager_home_content_description" msgid="3961399947853424786">"Pratonton skrin utama"</string>
+    <string name="preview_pager_message_content_description" msgid="3018855090807833755">"Pratonton mesej"</string>
+    <string name="preview_pager_email_content_description" msgid="100055784235660338">"Pratonton e-mel"</string>
     <string name="qr_code_content_description" msgid="1852208464419291347">"Kod QR"</string>
     <string name="preview_pager_previous_button" msgid="607771113300838313">"Pratonton sebelumnya"</string>
     <string name="preview_pager_next_button" msgid="8700907912508927271">"Pratonton seterusnya"</string>
@@ -167,11 +170,11 @@
     <string name="date_and_time" msgid="1788358029823431692">"Tarikh &amp; masa"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Proksi"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Padam bersih"</string>
-    <string name="proxy_port_label" msgid="4647357286461712574">"Port proksi"</string>
+    <string name="proxy_port_label" msgid="6698001018215165848">"Port proksi (pilihan)"</string>
     <string name="proxy_exclusionlist_label" msgid="2598613986784917542">"Pintas proksi untuk"</string>
     <string name="proxy_defaultView_text" msgid="6795150505379688451">"Pulihkan lalai"</string>
     <string name="proxy_action_text" msgid="1103328484441449542">"Selesai"</string>
-    <string name="proxy_hostname_label" msgid="5504327742505848063">"Nama hos proksi"</string>
+    <string name="proxy_hostname_label" msgid="345510072664361960">"Nama hos proksi (pilihan)"</string>
     <string name="proxy_error" msgid="3615905975598084126">"Perhatian"</string>
     <string name="proxy_error_dismiss" msgid="4207430265140873078">"OK"</string>
     <string name="proxy_error_invalid_host" msgid="3814412792702059247">"Nama hos yang anda taipkan tidak sah."</string>
@@ -216,9 +219,10 @@
     <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Peranti, apl dan laman web anda menggunakan bahasa pertama yang disokong daripada senarai bahasa pilihan anda.\n\nPelbagai apl juga akan menggunakan rantau daripada bahasa pilihan anda untuk memformatkan tarikh, nombor dan unit. Untuk menukar rantau anda, tambahkan bahasa, kemudian pilih rantau pilihan anda."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Untuk memilih bahasa bagi setiap apl, pergi ke tetapan bahasa apl."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Ketahui lebih lanjut tentang bahasa apl"</string>
-    <string name="title_change_system_region" msgid="5476591184463491936">"Tukar rantau kepada %s ?"</string>
+    <string name="title_change_system_region" msgid="9196602029960380112">"Tukar rantau kepada %s?"</string>
     <string name="desc_notice_device_region_change" msgid="6702773189066944100">"Peranti anda akan mengekalkan %s sebagai bahasa sistem"</string>
-    <string name="title_change_system_locale" msgid="8589844586256566951">"Tukar bahasa sistem kepada %s ?"</string>
+    <string name="desc_notice_device_region_change_for_preferred_language" msgid="408517366942324267">"%1$s akan menggantikan %2$s dalam bahasa pilihan anda"</string>
+    <string name="title_change_system_locale" msgid="4102991236063984803">"Tukar bahasa sistem kepada %s?"</string>
     <string name="title_system_locale_addition" msgid="8218683660751479466">"Tambahkan %s pada bahasa pilihan?"</string>
     <string name="desc_system_locale_addition" msgid="3409917362651596070">"Tindakan ini membolehkan apl dan laman web mengetahui bahawa anda juga memilih bahasa ini."</string>
     <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Tetapan dan pilihan wilayah peranti anda akan berubah."</string>
@@ -235,7 +239,7 @@
     <string name="search_region_hint" msgid="1748708432568237552">"Cari rantau"</string>
     <string name="top_intro_region_title" msgid="2336323415395642117">"Rantau yang anda pilih mempengaruhi cara telefon anda memaparkan masa, tarikh, suhu dan banyak lagi"</string>
     <string name="more_language_settings_category" msgid="3669703092480725416">"Lebih banyak tetapan bahasa"</string>
-    <string name="title_change_system_locale_region" msgid="1977530992614685128">"Tukar rantau kepada <xliff:g id="SYSTEM_LANGUAGE_REGION">%1$s</xliff:g> ?"</string>
+    <string name="title_change_system_locale_region" msgid="4401478579429442695">"Tukar rantau kepada <xliff:g id="SYSTEM_LANGUAGE_REGION">%1$s</xliff:g>?"</string>
     <string name="body_change_system_locale_region" msgid="9064318449821043189">"Peranti anda akan mengekalkan <xliff:g id="SYSTEM_LANGUAGE">%1$s</xliff:g> sebagai bahasa sistem"</string>
     <string name="top_intro_numbering_system_title" msgid="3962000662073238392">"Pilih cara peranti, laman web dan apl anda memaparkan nombor"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Tetapan wilayah"</string>
@@ -260,8 +264,8 @@
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"Jika apl tidak menyokong tetapan wilayah, tetapan penempatan lalai akan digunakan."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Ketahui lebih lanjut tentang pilihan bahasa."</string>
     <string name="metric_measurement_system" msgid="7489725697268321541">"Metrik"</string>
-    <string name="us_measurement_system" msgid="8738587232938189052">"Imperial (AS)"</string>
-    <string name="uk_measurement_system" msgid="4196897001775627597">"Imperial (UK)"</string>
+    <string name="us_measurement_system" msgid="8406695347890345490">"AS"</string>
+    <string name="uk_measurement_system" msgid="1814065008707689505">"UK"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"Pilihan tambahan"</string>
     <string name="terms_of_address_title" msgid="7338630812197476808">"Pilih panggilan hormat anda"</string>
     <string name="terms_of_address_summary" msgid="7802443422612600620">"Peranti anda boleh memeribadikan panggilan hormat anda"</string>
@@ -355,6 +359,7 @@
     <string name="safety_center_summary" msgid="3554867379951053869">"Keselamatan apl, kunci peranti, kebenaran"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Wajah ditambahkan"</string>
     <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"Persediaan diperlukan"</string>
+    <string name="security_settings_face_preference_summary_none_new" msgid="1963253146734002815">"Tambahkan wajah"</string>
     <string name="security_settings_face_preference_title_new" msgid="7680231874730796331">"Wajah"</string>
     <string name="security_settings_face_profile_preference_title_new" msgid="685550153608106166">"Wajah untuk profil kerja"</string>
     <string name="private_space_face_unlock_title_new" msgid="2079622608951402509">"Wajah untuk ruang privasi"</string>
@@ -437,6 +442,7 @@
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Tambahkan cap jari"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Cap jari ditambahkan}other{# cap jari ditambahkan}}"</string>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1146977379031250790">"Persediaan diperlukan"</string>
+    <string name="security_settings_fingerprint_preference_summary_none_new" msgid="510376523784190149">"Tambahkan cap jari"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Sediakan cap jari anda"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Benarkan buka kunci cap jari"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Gunakan cap jari anda"</string>
@@ -461,8 +467,7 @@
     <string name="fingerprint_check_enroll_touch_sensor" msgid="5010063281557456236">"Sentuh penderia cap jari"</string>
     <string name="fingerprint_check_enroll_not_recognized" msgid="2779520550437394431">"Cap jari tidak dikenali"</string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Buka Kunci Jam Tangan"</string>
-    <!-- no translation found for security_settings_activeunlock (8922823742770802651) -->
-    <skip />
+    <string name="security_settings_activeunlock" msgid="8922823742770802651">"Tonton"</string>
     <string name="biometric_settings_intro_with_activeunlock" msgid="5032953826653108646">"Semasa anda menyediakan Buka Kunci Wajah dan Buka Kunci Cap Jari, telefon akan meminta cap jari apabila anda memakai pelitup muka atau berada di kawasan gelap.\n\nBuka Kunci Jam Tangan merupakan cara mudah yang lain untuk membuka kunci telefon, sebagai contoh, apabila jari anda basah atau wajah tidak dapat dicam."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="5881355884547769337">"Buka Kunci Jam Tangan merupakan cara mudah yang lain untuk membuka kunci telefon anda, sebagai contoh, apabila cap jari anda tidak dapat dicam."</string>
     <string name="biometric_settings_intro_with_face" msgid="7671919122230588521">"Buka Kunci Jam Tangan merupakan cara mudah yang lain untuk membuka kunci telefon anda, sebagai contoh, apabila wajah anda tidak dapat dicam."</string>
@@ -781,10 +786,8 @@
     <string name="unlock_set_unlock_password_title" msgid="2559842616268607041">"Kata laluan"</string>
     <string name="unlock_set_do_later_title" msgid="6565575303676064364">"Bukan sekarang"</string>
     <string name="current_screen_lock" msgid="1367883977261098017">"Kunci skrin semasa"</string>
-    <!-- no translation found for unlock_accessibility_pin_area (437104569661316525) -->
-    <skip />
-    <!-- no translation found for unlock_accessibility_password (5404713613573232309) -->
-    <skip />
+    <string name="unlock_accessibility_pin_area" msgid="437104569661316525">"Bahagian PIN"</string>
+    <string name="unlock_accessibility_password" msgid="5404713613573232309">"Kata laluan peranti"</string>
     <string name="fingerprint_unlock_set_unlock_pattern" msgid="2229689425933043901">"Corak • Cap Jari"</string>
     <string name="fingerprint_unlock_set_unlock_pin" msgid="7979848492740627674">"PIN • Cap Jari"</string>
     <string name="fingerprint_unlock_set_unlock_password" msgid="6207676267295036963">"Kata Laluan • Cap Jari"</string>
@@ -795,6 +798,7 @@
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Teruskan tanpa Buka Kunci Wajah"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"Teruskan tanpa cap jari atau wajah"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Tiada"</string>
+    <string name="unlock_set_unlock_mode_off_new" msgid="865396805830816266">"Tambahkan PIN, corak, kata laluan atau leret"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Leret"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"Corak"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="9028659554829888373">"PIN"</string>
@@ -933,10 +937,14 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Apabila Bluetooth dihidupkan, peranti anda dapat berkomunikasi dengan peranti Bluetooth lain yang berada berdekatan.\n\nUntuk meningkatkan pengalaman peranti, apl dan perkhidmatan masih dapat melakukan pengimbasan untuk mengesan peranti berdekatan pada bila-bila masa, meskipun apabila Bluetooth dimatikan. Tetapan ini boleh digunakan, contohnya, untuk meningkatkan ciri dan perkhidmatan berasaskan lokasi. Anda boleh menukar tetapan ini dalam tetapan pengimbasan Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Apabila Bluetooth dihidupkan, peranti anda boleh berkomunikasi dengan peranti Bluetooth lain yang berdekatan. Ciri seperti Quick Share dan Find My Device menggunakan Bluetooth.\n\nApl dan perkhidmatan masih boleh mengimbas peranti berdekatan pada bila-bila masa walaupun semasa Bluetooth dimatikan. Ciri ini boleh digunakan, sebagai contoh, untuk meningkatkan ciri dan perkhidmatan berasaskan lokasi. Anda boleh menukar ciri ini dalam tetapan pengimbasan Bluetooth."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Tukar"</string>
-    <string name="bluetooth_key_missing_title" msgid="7799054163548353853">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> tidak disambungkan"</string>
-    <string name="bluetooth_key_missing_message" msgid="2388861106663695319">"Untuk keselamatan anda, lupakan peranti ini dan buat penggandingan sekali lagi"</string>
+    <string name="bluetooth_key_missing_title" msgid="8462010102528132965">"Tidak dapat menyambungkan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="bluetooth_key_missing_message" msgid="3188093580372443815">"Untuk mendapatkan butiran lanjut, akses tetapan peranti"</string>
     <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"Lupakan peranti"</string>
     <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"Batal"</string>
+    <string name="bluetooth_key_missing_device_settings" msgid="5512091368141961890">"Tetapan peranti"</string>
+    <string name="bluetooth_key_missing_close" msgid="6724520133374312040">"Tutup"</string>
+    <!-- no translation found for bluetooth_key_missing_toast (8692796546000643569) -->
+    <skip />
     <string name="device_details_title" msgid="1155622417516195481">"Butiran peranti"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Tetapan papan kekunci"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Lagi tetapan"</string>
@@ -951,6 +959,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Eksperimen. Tingkatkan kualiti audio."</string>
     <string name="device_details_battery" msgid="5466987755790847884">"Bateri"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"Bateri, pengecasan"</string>
+    <string name="device_details_key_missing_title" msgid="3568401701538114387">"Cuba mulakan semula <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Jika langkah ini tidak berjaya, lupakan peranti. Untuk keselamatan anda, hanya gandingkan peranti tersebut sekali lagi apabila anda tidak berada di tempat awam \n\nJika peranti ini tidak berada berdekatan, anda tidak perlu melakukan apa-apa."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Lupakan peranti"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Putuskan sambungan apl"</string>
     <string name="device_details_more_settings" msgid="950302792331611271">"Lagi tetapan"</string>
@@ -1063,7 +1072,7 @@
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Pilihan terperinci"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Pilihan Terperinci senarai lungsur"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"kembangkan"</string>
-    <string name="wifi_ssid" msgid="2713062130735103151">"Nama rangkaian"</string>
+    <string name="wifi_ssid" msgid="5139273830867723030">"Nama rangkaian*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Masukkan SSID"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Keselamatan"</string>
     <string name="wifi_hidden_network" msgid="6466834025375485596">"Rangkaian tersembunyi"</string>
@@ -1086,7 +1095,9 @@
     <string name="wifi_eap_user_cert" msgid="3569182430929173220">"Sijil pengguna"</string>
     <string name="wifi_eap_identity" msgid="3629406902174137028">"Identiti"</string>
     <string name="wifi_eap_anonymous" msgid="8630332141751267000">"Identiti tanpa nama"</string>
-    <string name="wifi_password" msgid="1458802324849513755">"Kata laluan"</string>
+    <string name="wifi_password" msgid="165204973532996861">"Kata laluan*"</string>
+    <string name="wifi_password_optional" msgid="6770706664834070705">"Kata laluan (pilihan)"</string>
+    <string name="wifi_password_invalid" msgid="8884500804472828356">"Kata laluan tidak sah"</string>
     <string name="wifi_show_password" msgid="6865993988238157923">"Tunjukkan kata laluan"</string>
     <string name="wifi_ap_choose_2G" msgid="1436802195991542016">"Jalur 2.4 GHz"</string>
     <string name="wifi_ap_prefer_5G" msgid="2520628479818369902">"Jalur 5.0 GHz diutamakan"</string>
@@ -1152,6 +1163,7 @@
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"Untuk memperbaik ketepatan lokasi dan untuk tujuan lain, apl tidak diketahui ingin menghidupkan pengimbasan rangkaian, meskipun Wi-Fi dimatikan.\n\nBenarkan hal ini untuk semua apl yang ingin mengimbas?"</string>
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Benarkan"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Tolak"</string>
+    <string name="wifi_field_required" msgid="6312381745503042588">"*diperlukan"</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Rangkaian ini tiada akses Internet. Kekal bersambung?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Sesetengah apl dan perkhidmatan mungkin tidak berfungsi kerana kesambungan terhad. Gunakan juga?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Jangan minta rangkaian ini lagi"</string>
@@ -1318,8 +1330,7 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Peleraian tinggi"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Peleraian maksimum"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"Peleraian maksimum menggunakan lebih banyak bateri anda. Penukaran peleraian anda mungkin menyebabkan sesetengah apl dimulakan semula."</string>
-    <!-- no translation found for screen_resolution_delimiter_a11y (5826162120538795842) -->
-    <skip />
+    <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> kali <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Warna"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Asli"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Ditingkatkan"</string>
@@ -1371,6 +1382,8 @@
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"Cahaya Malam tidak dihidupkan"</string>
     <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"Lokasi peranti diperlukan untuk menentukan masa matahari terbenam dan matahari terbit."</string>
     <string name="twilight_mode_launch_location" msgid="7799112373591153956">"Tetapan lokasi"</string>
+    <!-- no translation found for twilight_mode_pending_location (6829434234071614405) -->
+    <skip />
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"Hidupkan sekarang"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"Matikan sekarang"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"Hidupkan hingga matahari terbit"</string>
@@ -1480,17 +1493,17 @@
     <string name="storage_settings_for_app" msgid="229425418984637483">"Storan &amp; cache"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Tetapan storan"</string>
     <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
-    <string name="eid_multi_sim" msgid="6551259348909791790">"E​ID (slot SIM <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="imei_multi_sim" msgid="9001570420423929507">"IMEI (slot sim <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI (slot sim <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (utama)"</string>
+    <string name="eid_multi_sim" msgid="6659492335576379274">"E​ID (slot SIM <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
+    <string name="imei_multi_sim" msgid="27798473711249145">"IMEI (slot SIM <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
+    <string name="imei_multi_sim_primary" msgid="4320457587114117400">"IMEI (slot SIM <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (utama)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Untuk melihat, pilih rangkaian yang disimpan"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
     <string name="status_imei_sv" msgid="6908985558726440951">"IMEI SV"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"Versi PRL"</string>
-    <string name="meid_multi_sim" msgid="1460689549266621286">"MEID (slot sim <xliff:g id="MEID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="meid_multi_sim_primary" msgid="8921262417580407201">"MEID (slot sim <xliff:g id="MEID_SLOT_ID_PRIMARY">%1$d</xliff:g>) (utama)"</string>
+    <string name="meid_multi_sim" msgid="5076814185188481456">"MEID (slot SIM <xliff:g id="MEID_SLOT_ID">%1$d</xliff:g>)"</string>
+    <string name="meid_multi_sim_primary" msgid="6269908735700854437">"MEID (slot SIM <xliff:g id="MEID_SLOT_ID_PRIMARY">%1$d</xliff:g>) (utama)"</string>
     <string name="scanning_status_text_on" msgid="3846571210578042940">"Hidup"</string>
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Mati"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
@@ -1558,6 +1571,7 @@
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Atau"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Formatkan kad SD untuk storan mudah alih"</string>
     <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"Simpan foto, video, muzik dan banyak lagi, serta akses daripada peranti lain. &lt;a href=https://support.google.com/android/answer/12153449&gt;Ketahui lebih lanjut tentang persediaan kad SD&lt;/a&gt;."</string>
+    <string name="storage_wizard_init_v2_external_summary_non_sd_card" msgid="6638380506793421312">"Simpan foto, video, muzik dan banyak lagi, serta akses kandungan tersebut daripada peranti lain."</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Format"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Sediakan kemudian"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Formatkan <xliff:g id="NAME">^1</xliff:g> ini?"</string>
@@ -1582,7 +1596,13 @@
     <string name="battery_level_title" msgid="1371765298786083448">"Aras bateri"</string>
     <string name="communal_settings_title" msgid="2845678473945902115">"Umum"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Tetapan umum"</string>
-    <string name="satellite_setting" msgid="4171265534842459910">"Pemesejan satelit"</string>
+    <string name="hub_mode_category_title" msgid="5290081595872103974">"Mod hab"</string>
+    <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Widget pada skrin kunci"</string>
+    <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Waktu untuk memaparkan secara automatik"</string>
+    <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Tidak sekali-kali"</string>
+    <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Semasa mengecas"</string>
+    <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"Semasa mengecas dan menegak"</string>
+    <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"Semasa didok"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Edit titik akses"</string>
     <string name="apn_add" msgid="9069613192201630934">"Tambahkan titik akses"</string>
@@ -1690,6 +1710,11 @@
     <string name="tether_preference_summary_off" msgid="6266799346319794630">"Mati"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"Penambatan USB"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Penambatan Bluetooth"</string>
+    <string name="ethernet_ip_address" msgid="4218340787862242573">"Alamat IP"</string>
+    <string name="ethernet_mac_address_title" msgid="3235879195237611007">"Alamat MAC"</string>
+    <string name="tx_ethernet_speed" msgid="4785035505065551012">"Kelajuan pautan transit"</string>
+    <string name="rx_ethernet_speed" msgid="6642000569214969711">"Kelajuan pautan terima"</string>
+    <string name="ethernet_network_usage" msgid="3795965384177426780">"Penggunaan rangkaian"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Penambatan Ethernet"</string>
     <string name="tethering_footer_info" msgid="6824352505979800594">"Gunakan tempat liputan dan penambatan untuk menyediakan Internet kepada peranti lain melalui sambungan data anda. Apl juga boleh membuat tempat liputan untuk berkongsi kandungan dengan peranti berdekatan."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Gunakan tempat liputan dan penambatan untuk menyediakan Internet kepada peranti lain melalui Wi-Fi atau sambungan data mudah alih anda. Apl juga boleh membuat tempat liputan untuk berkongsi kandungan dengan peranti berdekatan."</string>
@@ -1834,7 +1859,7 @@
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Alihkan jari apabila selesai"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Sambung sekurang-kurangnya <xliff:g id="NUMBER">%d</xliff:g> titik. Cuba lagi."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Corak direkodkan"</string>
-    <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Lukis corak sekali lagi untuk mengesahkan"</string>
+    <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Lukis corak sekali lagi untuk pengesahan"</string>
     <string name="lockpattern_pattern_confirmed_header" msgid="2969990617475456153">"Corak buka kunci baharu anda"</string>
     <string name="lockpattern_confirm_button_text" msgid="6122815520373044089">"Sahkan"</string>
     <string name="lockpattern_restart_button_text" msgid="255339375151895998">"Lukis semula"</string>
@@ -2096,7 +2121,8 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Klik bahagian bawah sebelah kanan"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Klik penjuru bawah sebelah kanan pad sentuh untuk lagi pilihan"</string>
     <string name="trackpad_pointer_speed" msgid="5672221910698079303">"Kelajuan kursor"</string>
-    <string name="three_finger_tap_preference_title" msgid="3779242412749283386">"Sesuaikan ketikan 3 jari"</string>
+    <!-- no translation found for three_finger_tap_preference_title (1836080810837854140) -->
+    <skip />
     <string name="touchpad_acceleration_title" msgid="176627555191021888">"Pecutan pad sentuh"</string>
     <string name="touchpad_acceleration_summary" msgid="8057075483967535793">"Pergerakan lebih pantas pada pad sentuh anda akan menggerakkan kursor lebih jauh"</string>
     <string name="pointer_fill_style" msgid="8794616790175016092">"Warna penuding"</string>
@@ -2113,7 +2139,8 @@
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Ketahui gerak isyarat pad sentuh"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"pad jejak, pad jejak, tetikus, kursor, tatal, leret, klik kanan, klik, penuding"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"klik kanan, ketik"</string>
-    <string name="three_finger_tap_middle_click" msgid="1759914275939765929">"Butang klik tengah tetikus"</string>
+    <!-- no translation found for three_finger_tap_middle_click (7898931632908866867) -->
+    <skip />
     <string name="three_finger_tap_launch_gemini" msgid="4030401656711588982">"Lancarkan Assistant"</string>
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Akses laman utama"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"Kembali"</string>
@@ -2266,16 +2293,11 @@
     <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Ketahui lebih lanjut tentang pilihan sari kata"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Pembesaran"</string>
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Pintasan pembesaran"</string>
-    <!-- no translation found for accessibility_magnification_cursor_following_title (29531257984012743) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_cursor_following_header (7283095798622223509) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_cursor_following_continuous (1119319218662522794) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_cursor_following_center (3504798009192014460) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_cursor_following_edge (8675207762416655758) -->
-    <skip />
+    <string name="accessibility_magnification_cursor_following_title" msgid="29531257984012743">"Kursor mengikut"</string>
+    <string name="accessibility_magnification_cursor_following_header" msgid="7283095798622223509">"Pilih cara Pembesaran mengikut kursor anda."</string>
+    <string name="accessibility_magnification_cursor_following_continuous" msgid="1119319218662522794">"Gerakkan skrin secara berterusan semasa tetikus digerakkan"</string>
+    <string name="accessibility_magnification_cursor_following_center" msgid="3504798009192014460">"Gerakkan skrin semasa tetikus dibiarkan di tengah-tengah skrin"</string>
+    <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Gerakkan skrin apabila tetikus menyentuh sisi skrin"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Besarkan taipan"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Kanta pembesar mengikut teks semasa anda menaip"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Kekal aktif semasa beralih apl"</string>
@@ -2329,8 +2351,7 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Ketik butang untuk mengezum"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Zum masuk dengan pantas pada skrin untuk menjadikan kandungan lebih besar"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Untuk mengezum masuk:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gunakan pintasan untuk memulakan pembesaran&lt;br/&gt; {1,number,integer}. Ketik skrin&lt;br/&gt; {2,number,integer}. Seret 2 jari untuk menerokai skrin&lt;br/&gt; {3,number,integer}. Jepit dengan 2 jari untuk melaraskan zum&lt;br/&gt; {4,number,integer}. Gunakan pintasan untuk menghentikan pembesaran&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Untuk mengezum masuk sementara:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Pastikan jenis pembesaran ditetapkan kepada skrin penuh&lt;br/&gt; {1,number,integer}. Gunakan pintasan untuk memulakan pembesaran&lt;br/&gt; {2,number,integer}. Sentuh &amp; tahan di mana-mana pada skrin&lt;br/&gt; {3,number,integer}. Seret jari untuk menerokai skrin&lt;br/&gt; {4,number,integer}. Angkat jari untuk menghentikan pembesaran"</string>
-    <!-- no translation found for accessibility_screen_magnification_keyboard_summary (2504303274186294767) -->
-    <skip />
+    <string name="accessibility_screen_magnification_keyboard_summary" msgid="2504303274186294767">"&lt;b&gt;Untuk mengezum dengan papan kekunci:&lt;/b&gt;&lt;br/&gt; {0,nombor,integer}. Gunakan pintasan untuk memulakan pembesaran&lt;br/&gt; {1,nombor,integer}. Tahan &lt;xliff:g id=meta1&gt;%1$s&lt;/xliff:g&gt; dan &lt;xliff:g id=alt1&gt;%2$s&lt;/xliff:g&gt; dan tekan + atau - untuk mengezum masuk atau keluar&lt;br/&gt; {2,nombor,integer}. Tahan &lt;xliff:g id=meta2&gt;%3$s&lt;/xliff:g&gt; dan &lt;xliff:g id=alt2&gt;%4$s&lt;/xliff:g&gt; dan tekan kekunci anak panah untuk bergerak sekitar skrin&lt;br/&gt; {3,nombor,integer}. Gunakan pintasan untuk menghentikan pembesaran"</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;Untuk mengezum masuk:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gunakan pintasan untuk memulakan pembesaran&lt;br/&gt; {1,number,integer}. Ketik skrin&lt;br/&gt; {2,number,integer}. Seret 2 jari untuk menerokai skrin&lt;br/&gt; {3,number,integer}. Cubit dengan 2 jari untuk melaraskan zum&lt;br/&gt; {4,number,integer}. Gunakan pintasan untuk menghentikan pembesaran&lt;br/&gt;&lt;br/&gt; Anda juga boleh mengezum masuk untuk sementara waktu dan banyak lagi."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Untuk mengezum masuk:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gunakan pintasan untuk memulakan pembesaran&lt;br/&gt; {1,number,integer}. Ketik skrin&lt;br/&gt; {2,number,integer}. Seret 1 atau 2 jari untuk menerokai skrin&lt;br/&gt; {3,number,integer}. Cubit dengan 2 jari untuk melaraskan zum&lt;br/&gt; {4,number,integer}. Gunakan pintasan untuk menghentikan pembesaran&lt;br/&gt;&lt;br/&gt; Anda juga boleh mengezum masuk untuk sementara waktu dan banyak lagi."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Apabila pembesaran dihidupkan, anda boleh mengezum masuk pada skrin.\n\n"<b>"Untuk mengezum"</b>", mulakan pembesaran, kemudian ketik di mana-mana pada skrin.\n"<ul><li>"Seret sekurang-kurangnya 2 jari untuk menatal"</li>\n<li>"Cubit menggunakan sekurang-kurangnya 2 jari untuk melaraskan zum"</li></ul>\n\n<b>"Untuk mengezum sementara"</b>", mulakan pembesaran, kemudian sentuh &amp; tahan di mana-mana pada skrin.\n"<ul><li>"Seret untuk beralih-alih di sekitar skrin"</li>\n<li>"Angkat jari untuk mengezum keluar"</li></ul>\n\n"Anda tidak boleh mengezum masuk pada papan kekunci atau bar navigasi."</string>
@@ -2412,7 +2433,7 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Teks kontras tinggi"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Tukar warna teks kepada hitam atau putih. Memaksimumkan kontras dengan latar belakang."</string>
     <string name="accessibility_notification_high_contrast_text_title" msgid="2297915407152953323">"Tingkatkan kontras teks"</string>
-    <string name="accessibility_notification_high_contrast_text_body" msgid="4111896614825062003">"<xliff:g id="OUTLINE_TEXT">%1$s</xliff:g> telah menggantikan <xliff:g id="HIGH_CONTRAST_TEXT">%2$s</xliff:g>. Anda boleh menghidupkan ciri ini dalam <xliff:g id="SETTINGS">%3$s</xliff:g>."</string>
+    <string name="accessibility_notification_high_contrast_text_body_message" msgid="6846453833480117658">"Teks rangka telah menggantikan teks kontras tinggi. Anda boleh menghidupkan ciri ini dalam <xliff:g id="SETTINGS">%1$s</xliff:g>."</string>
     <string name="accessibility_notification_high_contrast_text_action_open_settings" msgid="5945069315472850294">"Akses <xliff:g id="SETTINGS">%1$s</xliff:g>"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8848579943445806659">"Teks rangka"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Tambahkan latar berwarna hitam atau putih di sekeliling teks untuk meningkatkan kontras"</string>
@@ -2836,12 +2857,9 @@
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> - <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_timestamps_content_description" msgid="1927748134271595985">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> hingga <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_status_time_info_and_battery_level (5158088815445378555) -->
-    <skip />
-    <!-- no translation found for battery_chart_slot_status_selected (4196580689444438148) -->
-    <skip />
-    <!-- no translation found for battery_chart_slot_status_unselected (6930198843537021396) -->
-    <skip />
+    <string name="battery_usage_status_time_info_and_battery_level" msgid="5158088815445378555">"<xliff:g id="SELECTED_STATUS">%1$s</xliff:g>, <xliff:g id="TIME_INFO">%2$s</xliff:g> <xliff:g id="BATTERY_LEVEL">%3$s</xliff:g>"</string>
+    <string name="battery_chart_slot_status_selected" msgid="4196580689444438148">"Dipilih"</string>
+    <string name="battery_chart_slot_status_unselected" msgid="6930198843537021396">"Dinyahpilih"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Carta penggunaan bateri"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Carta penggunaan bateri harian"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Carta penggunaan bateri setiap jam"</string>
@@ -3113,28 +3131,25 @@
     <string name="data_usage_uninstalled_apps_users" msgid="1262228664057122983">"Apl dan pengguna yang dialih keluar"</string>
     <string name="wifi_metered_title" msgid="6623732965268033931">"Penggunaan rangkaian"</string>
     <string name="data_usage_metered_yes" msgid="4262598072030135223">"Bermeter"</string>
-    <string name="vpn_name" msgid="3806456074909253262">"Nama"</string>
+    <string name="vpn_name" msgid="1119885022967213297">"Nama*"</string>
     <string name="vpn_type" msgid="5533202873260826663">"Jenis"</string>
-    <string name="vpn_server" msgid="2908816134941973935">"Alamat pelayan"</string>
-    <string name="vpn_ipsec_identifier" msgid="8511842694369254801">"Pengecam IPSec"</string>
-    <string name="vpn_ipsec_secret" msgid="532007567355505963">"Kunci prakongsi IPSec"</string>
+    <string name="vpn_server" msgid="5771717512763639505">"Alamat pelayan*"</string>
+    <string name="vpn_ipsec_identifier" msgid="6976476088030400883">"Pengecam IPSec*"</string>
+    <string name="vpn_ipsec_secret" msgid="3110033645671775202">"Kunci prakongsi IPSec*"</string>
     <string name="vpn_ipsec_user_cert" msgid="2714372103705048405">"Sijil pengguna IPSec"</string>
     <string name="vpn_ipsec_ca_cert" msgid="5558498943577474987">"Sijil CA IPSec"</string>
     <string name="vpn_ipsec_server_cert" msgid="1411390470454731396">"Sijil pelayan IPSec"</string>
     <string name="vpn_show_options" msgid="6105437733943318667">"Tunjukkan pilihan terperinci"</string>
-    <string name="vpn_username" msgid="8671768183475960068">"Nama pengguna"</string>
-    <string name="vpn_password" msgid="1183746907642628127">"Kata laluan"</string>
+    <string name="vpn_username_optional" msgid="8564310631984689947">"Nama pengguna (pilihan)"</string>
+    <string name="vpn_password_optional" msgid="1255147723869461543">"Kata laluan (pilihan)"</string>
+    <string name="vpn_username_required" msgid="1808631251331232149">"Nama pengguna*"</string>
+    <string name="vpn_password_required" msgid="1916107706318825437">"Kata laluan*"</string>
     <string name="vpn_save_login" msgid="5986762519977472618">"Simpan maklumat akaun"</string>
     <string name="vpn_not_used" msgid="7229312881336083354">"(tidak digunakan)"</string>
     <string name="vpn_no_ca_cert" msgid="3687379414088677735">"(jangan sahkan pelayan)"</string>
     <string name="vpn_no_server_cert" msgid="8106540968643125407">"(diterima daripada pelayan)"</string>
     <string name="vpn_always_on_invalid_reason_other" msgid="4571905303713233321">"Maklumat yang dimasukkan tidak menyokong VPN sentiasa hidup"</string>
-    <!-- no translation found for vpn_optional (3085880299239180702) -->
-    <skip />
-    <!-- no translation found for vpn_required (2538500165710360491) -->
-    <skip />
-    <!-- no translation found for vpn_field_required (952531424443686800) -->
-    <skip />
+    <string name="vpn_field_required" msgid="582849543970781302">"*diperlukan"</string>
     <string name="vpn_cancel" msgid="5929410618112404383">"Batal"</string>
     <string name="vpn_done" msgid="5137858784289564985">"Ketepikan"</string>
     <string name="vpn_save" msgid="683868204634860888">"Simpan"</string>
@@ -3365,7 +3380,7 @@
     <string name="color_orange" msgid="216547825489739010">"Jingga"</string>
     <string name="color_purple" msgid="6603701972079904843">"Ungu"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"Status SIM"</string>
-    <string name="sim_status_title_sim_slot" msgid="4932996839194493313">"Status SIM (slot sim %1$d)"</string>
+    <string name="sim_status_title_sim_slot" msgid="5421926522479103027">"Status SIM (slot SIM %1$d)"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_notification_title" msgid="6839556577405929262">"SIM anda telah ditukar"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Ketik untuk menyediakan"</string>
@@ -3799,8 +3814,8 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Tunjukkan semua kandungan pemberitahuan kerja"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Sembunyikan kandungan kerja yang sensitif"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Apabila peranti anda dikunci, bagaimanakah pemberitahuan profil harus dipaparkan?"</string>
-    <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"Pemberitahuan yang mahu ditunjukkan pada skrin kunci"</string>
-    <string name="lock_screen_notification_show_seen_title" msgid="1407033848315515970">"Tunjukkan pemberitahuan yang dilihat"</string>
+    <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"Perkara yang akan ditunjukkan pada skrin kunci"</string>
+    <string name="lock_screen_notification_show_seen_title" msgid="1407033848315515970">"Tunjukkan pemberitahuan yang telah dilihat"</string>
     <string name="lock_screen_notification_show_silent_title" msgid="9177971841517814916">"Tunjukkan pemberitahuan senyap"</string>
     <string name="lock_screen_notification_show_sensitive_content_title" msgid="3184973371036065258">"Tunjukkan kandungan sensitif"</string>
     <string name="lock_screen_notification_show_sensitive_work_content_title" msgid="532300440507441426">"Tunjukkan kandungan profil kerja sensitif"</string>
@@ -4403,7 +4418,7 @@
     <string name="disconnected" msgid="3469373726996129247">"Tidak disambungkan"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Tidak disambungkan"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> apl dipasang"</string>
-    <string name="storage_summary" msgid="7631468664968572688">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> digunakan - <xliff:g id="FREE_SPACE_VALUE">%2$s</xliff:g> <xliff:g id="FREE_SPACE_UNITS">%3$s</xliff:g> kosong"</string>
+    <string name="storage_toplevel_summary" msgid="6708203706751754934">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> digunakan - <xliff:g id="FREE_SPACE">%2$s</xliff:g> kosong"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Tema gelap, saiz fon, kecerahan"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Purata <xliff:g id="USED_MEMORY">%1$s</xliff:g> daripada <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> memori digunakan"</string>
     <string name="users_summary" msgid="8473589474976307510">"Dilog masuk sebagai <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -4426,18 +4441,12 @@
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"Pentadbir anda boleh memantau dan mengurus apl serta data yang berkaitan dengan pengguna ini, termasuk tetapan, kebenaran, akses korporat, aktiviti rangkaian dan maklumat lokasi peranti."</string>
     <string name="admin_device_owner_message" msgid="5503131744126520590">"Pentadbir anda boleh memantau dan mengurus apl serta data yang berkaitan dengan peranti ini, termasuk tetapan, kebenaran, akses korporat, aktiviti rangkaian dan maklumat lokasi peranti."</string>
     <string name="admin_financed_message" msgid="1156197630834947884">"Pentadbir peranti anda mungkin dapat mengakses data yang dikaitkan dengan peranti ini, mengurus apl dan menukar tetapan peranti ini."</string>
-    <!-- no translation found for disabled_by_advanced_protection_title (9051476417559262469) -->
-    <skip />
-    <!-- no translation found for disabled_by_advanced_protection_setting_is_on_message (4242986779932956593) -->
-    <skip />
-    <!-- no translation found for disabled_by_advanced_protection_setting_is_off_message (7777487013672230696) -->
-    <skip />
-    <!-- no translation found for disabled_by_advanced_protection_action_message (7164789633582857150) -->
-    <skip />
-    <!-- no translation found for disabled_by_advanced_protection_wep_action_message (239574547298386495) -->
-    <skip />
-    <!-- no translation found for disabled_by_advanced_protection_help_button_title (6539346613660731777) -->
-    <skip />
+    <string name="disabled_by_advanced_protection_title" msgid="9051476417559262469">"Dihadkan oleh Perlindungan Lanjutan"</string>
+    <string name="disabled_by_advanced_protection_setting_is_on_message" msgid="4242986779932956593">"Untuk keselamatan anda, Perlindungan Lanjutan memerlukan tetapan ini untuk kekal dihidupkan"</string>
+    <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"Untuk keselamatan anda, Perlindungan Lanjutan memerlukan tetapan ini kekal dimatikan"</string>
+    <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"Untuk keselamatan anda, Perlindungan Lanjutan menghalang tindakan ini"</string>
+    <string name="disabled_by_advanced_protection_wep_action_message" msgid="239574547298386495">"Rangkaian ini menggunakan WEP, kaedah penyulitan lapuk yang boleh mendatangkan risiko kepada data anda. Sambungan WEP disekat oleh Perlindungan Lanjutan."</string>
+    <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"Tetapan"</string>
     <string name="condition_turn_off" msgid="402707350778441939">"Matikan"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Hidupkan"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"Tunjukkan"</string>
@@ -4663,8 +4672,7 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Kepekaan yang lebih tinggi mungkin mempengaruhi fungsi gerak isyarat apl di tepi skrin."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Kepekaan Bahagian Belakang"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"Navigasi Gerak Isyarat"</string>
-    <!-- no translation found for gesture_navigation_tutorial_title (1605955266131665429) -->
-    <skip />
+    <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"Cuba tunjuk cara"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Navigasi butang"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"navigasi gerak isyarat, kepekaan ke belakang, gerak isyarat ke belakang"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"navigasi, butang skrin utama"</string>
@@ -5033,13 +5041,13 @@
     <string name="roaming_alert_title" msgid="9052791521868787985">"Benarkan perayauan data?"</string>
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"Semak dengan penyedia rangkaian untuk mendapatkan harga."</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Mod Rangkaian <xliff:g id="NETWORKMODEID">%1$d</xliff:g> Tidak Sah. Abaikan."</string>
-    <string name="satellite_setting_title" msgid="2543034229989047673">"Pemesejan satelit"</string>
+    <string name="satellite_setting" msgid="4650503806634496443">"Kesambungan satelit"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Hantar dan terima mesej teks melalui satelit. Disertakan dengan akaun anda."</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Hantar dan terima mesej teks melalui satelit. Tidak disertakan dengan akaun anda."</string>
     <string name="satellite_setting_summary_without_entitlement" msgid="5284998840770992554">"Hantar dan terima mesej teks melalui satelit. Hubungi pembawa anda untuk mendapatkan butiran."</string>
     <string name="keywords_satellite_setting" msgid="613553612424945946">"Permesejan satelit, kesambungan satelit"</string>
-    <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"Perihal <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
-    <string name="title_about_satellite_setting" msgid="3563087940535642558">"Anda boleh menghantar dan menerima mesej teks melalui satelit dengan akaun <xliff:g id="CARRIER_NAME">%1$s</xliff:g> yang layak"</string>
+    <string name="category_name_about_satellite_connectivity" msgid="3971142716898783631">"Perihal kesambungan satelit"</string>
+    <string name="description_about_satellite_setting" msgid="5539359064330584941">"Anda boleh menghantar dan menerima mesej teks dan menggunakan beberapa apl melalui satelit dengan akaun <xliff:g id="CARRIER_NAME">%1$s</xliff:g> yang layak"</string>
     <string name="category_title_your_satellite_plan" msgid="8169426217950247126">"Akaun <xliff:g id="CARRIER_NAME">%1$s</xliff:g> anda"</string>
     <string name="title_have_satellite_plan" msgid="2048372355699977947">"Pemesejan satelit disertakan dengan akaun anda"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"Pemesejan satelit tidak disertakan dengan akaun anda"</string>
@@ -5053,12 +5061,27 @@
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Ikut langkah penyambungan kepada satelit"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"Anda boleh menghantar teks kepada sesiapa sahaja, termasuk perkhidmatan kecemasan. Telefon anda akan disambungkan semula kepada rangkaian mudah alih jika tersedia."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"Selepas telefon anda disambungkan, anda boleh menghantar teks kepada sesiapa sahaja, termasuk perkhidmatan kecemasan."</string>
-    <string name="satellite_setting_summary_more_information" msgid="276312352285564071">"Sambungan satelit mungkin lebih perlahan dan tersedia di sesetengah kawasan sahaja. Cuaca dan struktur tertentu boleh menjejaskan sambungan. Panggilan melalui satelit tidak tersedia. Panggilan kecemasan masih boleh disambungkan.\n\nPerubahan pada akaun mungkin memerlukan sedikit masa untuk dipaparkan dalam Tetapan. Hubungi <xliff:g id="CARRIER_NAME">%1$s</xliff:g> untuk mendapatkan butiran."</string>
-    <string name="satellite_setting_summary_more_information_no_emergency_messaging" msgid="2090170250936862158">"Sambungan satelit mungkin lebih perlahan dan tersedia di sesetengah kawasan sahaja. Cuaca dan struktur tertentu boleh menjejaskan sambungan. Panggilan melalui satelit tidak tersedia. Panggilan kecemasan masih boleh disambungkan. Penghantaran teks dengan perkhidmatan kecemasan mungkin tidak tersedia di semua kawasan.\n\nPerubahan pada akaun mungkin memerlukan sedikit masa untuk dipaparkan dalam Tetapan. Hubungi <xliff:g id="CARRIER_NAME">%1$s</xliff:g> untuk mendapatkan butiran."</string>
-    <string name="more_about_satellite_messaging" msgid="1039277943532711584">"Maklumat lanjut tentang <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
+    <!-- no translation found for satellite_footer_content_section_0 (4169483813004415556) -->
+    <skip />
+    <!-- no translation found for satellite_footer_content_section_1 (7925931577373229601) -->
+    <skip />
+    <!-- no translation found for satellite_footer_content_section_2 (7699185178461362541) -->
+    <skip />
+    <!-- no translation found for satellite_footer_content_section_3 (4652426135622555607) -->
+    <skip />
+    <!-- no translation found for satellite_footer_content_section_4 (2294227482962815751) -->
+    <skip />
+    <!-- no translation found for satellite_footer_content_section_5 (3053256489735265540) -->
+    <skip />
+    <!-- no translation found for satellite_footer_content_section_6 (1448633393918612418) -->
+    <skip />
+    <!-- no translation found for satellite_footer_content_section_7 (5524773673918954918) -->
+    <skip />
+    <!-- no translation found for more_about_satellite_connectivity (9110502891919936054) -->
+    <skip />
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Tidak dapat menghidupkan <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Untuk menghidupkan <xliff:g id="FUNCTION">%1$s</xliff:g>, tamatkan sambungan satelit dahulu"</string>
-    <string name="category_title_satellite_connectivity" msgid="7540022356863917632">"Kesambungan satelit"</string>
+    <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Satelit"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Kesambungan satelit"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"kesambungan satelit"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"permesejan satelit"</string>
@@ -5149,7 +5172,8 @@
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Untuk menggunakan data mudah alih, ciri panggilan dan SMS pada masa akan datang, pergi ke tetapan rangkaian anda"</string>
     <string name="sim_card_label" msgid="6263064316075963775">"SIM"</string>
     <string name="erase_sim_dialog_title" msgid="4742077437653028326">"Padam eSIM ini?"</string>
-    <string name="erase_sim_dialog_text" msgid="1406141218170595272">"Tindakan ini akan mengalih keluar perkhidmatan <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> daripada peranti ini tetapi pelan <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> tidak akan dibatalkan."</string>
+    <!-- no translation found for erase_sim_dialog_text (3982216582200709197) -->
+    <skip />
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Padam"</string>
     <string name="erasing_sim" msgid="4237180547590463930">"Memadamkan eSIM…"</string>
     <string name="erase_sim_fail_title" msgid="1445700500168357303">"Tidak dapat memadamkan eSIM"</string>
@@ -5175,10 +5199,8 @@
     <string name="settings_panel_title" msgid="346363079938069215">"Panel Tetapan"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Dayakan tetingkap bentuk bebas"</string>
     <string name="enable_desktop_experience_features" msgid="7389235241021706660">"Dayakan ciri pengalaman desktop"</string>
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (8586716390362684564) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (7567963048658976895) -->
-    <skip />
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="8586716390362684564">"Dayakan tetingkap desktop pada peranti dan pada paparan kedua."</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="7567963048658976895">"Dayakan tetingkap desktop pada paparan kedua."</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Dayakan tetingkap bentuk bebas pada paparan kedua"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Dayakan tidak boleh diubah saiz dalam berbilang tetingkap"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Benarkan apl tidak boleh diubah saiz dalam berbilang tetingkap"</string>
@@ -5258,12 +5280,11 @@
     <string name="page_agnostic_notification_channel_name" msgid="2058933148654316447">"Mod Halaman agnostik 16 KB"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Baca lebih lanjut"</string>
     <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"Jalankan apl dengan mod keserasian saiz halaman"</string>
-    <!-- no translation found for enable_16k_app_compat_details (5382562613011853452) -->
-    <skip />
-    <!-- no translation found for stop_app_dlg_title (3153921585174512587) -->
-    <skip />
-    <!-- no translation found for stop_app_dlg_text (4373849065005318901) -->
-    <skip />
+    <string name="enable_16k_app_compat_details" msgid="5382562613011853452">"Apl akan dihentikan dan dijalankan dalam mod keserasian saiz halaman pada peranti 16 KB apabila ditogol."</string>
+    <string name="stop_app_dlg_title" msgid="3153921585174512587">"Hentikan apl?"</string>
+    <string name="stop_app_dlg_text" msgid="4373849065005318901">"Aplikasi akan dihentikan untuk menggunakan tetapan keserasian saiz halaman."</string>
+    <string name="error_pending_updates" msgid="7196832772265874760">"Kemaskinian kernel gagal. Semak dan pasang mana-mana kemaskinian yang belum selesai."</string>
+    <string name="error_ota_failed" msgid="4762376085470989653">"Kemaskinian kernel gagal. Ralat berlaku semasa menggunakan OTA."</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Pengendali laporan pepijat"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Menentukan apl yang mengendalikan pintasan Laporan Pepijat pada peranti anda."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Peribadi"</string>
@@ -5412,8 +5433,8 @@
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Masukkan nombor Telefon"</string>
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Tiada nombor telefon."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
-    <string name="enable_2g_title" msgid="8184757884636162942">"Benarkan 2G"</string>
-    <string name="enable_2g_summary" msgid="2794534052372565914">"2G kurang selamat, tetapi mungkin meningkatkan sambungan anda di sesetengah lokasi. Untuk panggilan kecemasan, 2G sentiasa dibenarkan."</string>
+    <string name="enable_2g_title" msgid="5657132300321750181">"Perlindungan rangkaian 2G"</string>
+    <string name="enable_2g_summary" msgid="6317192326100541563">"Elakkan rangkaian 2G yang kurang selamat. Tindakan ini mungkin mengehadkan kesambungan di sesetengah tempat. Panggilan kecemasan sentiasa dibenarkan."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> memerlukan 2G tersedia"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Hanya benarkan rangkaian yang disulitkan"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Penyulitan ini lebih selamat tetapi mungkin mengehadkan sambungan rangkaian mudah alih anda di sesetengah lokasi. Panggilan kecemasan sentiasa dibenarkan."</string>
@@ -5531,12 +5552,6 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> oleh <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Apl akan dimulakan semula apabila anda mengubah nisbah bidang. Anda mungkin kehilangan perubahan yang belum disimpan. Sesetengah apl mungkin tidak dioptimumkan untuk nisbah bidang tertentu."</string>
-    <string name="aspect_ratio_experimental_title" msgid="9088785421062044831">"Nisbah bidang (percubaan)"</string>
-    <string name="aspect_ratio_experiment_title" msgid="128614319422121040">"Nisbah bidang (percubaan)"</string>
-    <string name="aspect_ratio_labs_title" msgid="6733893837442759383">"Nisbah bidang (makmal)"</string>
-    <string name="aspect_ratio_experimental_label" msgid="6319009297672567578">"Percubaan"</string>
-    <string name="aspect_ratio_experiment_label" msgid="7861871612376167784">"Percubaan"</string>
-    <string name="aspect_ratio_labs_label" msgid="7008498116297651342">"Makmal"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Penderia cap jari"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Pemberitahuan denyar"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Perihal pemberitahuan denyar"</string>
@@ -5597,8 +5612,7 @@
     <string name="content_protection_preference_subpage_summary" msgid="3595621220981703364"></string>
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
     <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"Kini kata laluan telah disediakan"</string>
-    <!-- no translation found for accessibility_setup_pin_complete (7626702882001984236) -->
-    <skip />
+    <string name="accessibility_setup_pin_complete" msgid="7626702882001984236">"PIN kini disediakan"</string>
     <string name="show_stylus_pointer_icon" msgid="1010583689203665786">"Tunjukkan penuding semasa menuding"</string>
     <string name="media_drm_settings_title" msgid="897424966554739867">"Tetapan DRM Media"</string>
     <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"Paksa Kripto Selamat Perisian"</string>
@@ -5746,8 +5760,16 @@
     <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"Tambahkan kaedah pemulihan PIN"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Tukar PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Terlupa PIN"</string>
-    <!-- no translation found for supervision_web_content_filters_title (3653430162065686156) -->
-    <skip />
-    <!-- no translation found for accessibility_illustration_content_description (557376174860150903) -->
-    <skip />
+    <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Penapis kandungan web"</string>
+    <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome dan Web"</string>
+    <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Cuba sekat laman yang eksplisit"</string>
+    <string name="supervision_web_content_filters_browser_block_explicit_sites_summary" msgid="1477766506765966613">"Tiada penapis yang sempurna tetapi ciri ini boleh menyembunyikan laman yang berunsur seks eksplisit"</string>
+    <string name="supervision_web_content_filters_browser_allow_all_sites_title" msgid="3909739592466381845">"Benarkan semua laman"</string>
+    <string name="supervision_web_content_filters_search_title" msgid="726335318009305564">"Google Search"</string>
+    <string name="supervision_web_content_filters_search_filter_on_title" msgid="4855846261141136285">"Penapisan SafeSearch DIHIDUPKAN"</string>
+    <string name="supervision_web_content_filters_search_filter_on_summary" msgid="1162258144140293269">"Membantu untuk menapis imej eksplisit, teks dan pautan daripada hasil carian pada peranti ini"</string>
+    <string name="supervision_web_content_filters_search_filter_off_title" msgid="6049461395304222346">"Penapisan SafeSearch DIMATIKAN"</string>
+    <string name="supervision_web_content_filters_search_filter_off_summary" msgid="3834238970190924433">"Tetapan akaun masih akan menapis atau mengaburkan hasil carian eksplisit"</string>
+    <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Masukkan PIN pengawasan"</string>
+    <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animasi <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
 </resources>

@@ -368,6 +368,7 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
             mAssistant.registerServiceCallBack(mExecutor, mBroadcastAssistantCallback);
             mVolumeControl.registerCallback(mExecutor, mVolumeControlCallback);
             mBluetoothDeviceUpdater.registerCallback();
+            mBluetoothDeviceUpdater.refreshPreference();
             mContentResolver.registerContentObserver(
                     Settings.Secure.getUriFor(BluetoothUtils.getPrimaryGroupIdUriForBroadcast()),
                     false,
@@ -418,7 +419,8 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
         int groupId = BluetoothUtils.getGroupId(cachedDevice);
         // The fallback device rank first among the audio sharing device list.
         return (groupId != BluetoothCsipSetCoordinator.GROUP_ID_INVALID
-                && groupId == BluetoothUtils.getPrimaryGroupIdForBroadcast(mContentResolver))
+                && groupId == BluetoothUtils.getPrimaryGroupIdForBroadcast(mContentResolver,
+                mBtManager))
                 ? 0
                 : 1;
     }

@@ -250,17 +250,19 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
         TextView messageViewCaptionHint = (TextView) view.findViewById(R.id.pin_values_hint);
         TextView messageView2 = (TextView) view.findViewById(R.id.message_below_pin);
         CheckBox alphanumericPin = (CheckBox) view.findViewById(R.id.alphanumeric_pin);
-        CheckBox contactSharing = (CheckBox) view.findViewById(
-                R.id.phonebook_sharing_message_entry_pin);
-        contactSharing.setText(getString(R.string.bluetooth_pairing_shares_phonebook));
+
+        CheckBox contactSharing =
+                (CheckBox) view.findViewById(R.id.phonebook_sharing_message_entry_pin);
+        if (contactSharing != null) {
+            contactSharing.setText(getString(R.string.bluetooth_pairing_shares_phonebook));
+            contactSharing.setVisibility(
+                    mPairingController.isContactSharingVisible() ? View.VISIBLE : View.GONE);
+            mPairingController.setContactSharingState();
+            contactSharing.setOnCheckedChangeListener(mPairingController);
+            contactSharing.setChecked(mPairingController.getContactSharingState());
+        }
+
         EditText pairingView = (EditText) view.findViewById(R.id.text);
-
-        contactSharing.setVisibility(
-                mPairingController.isContactSharingVisible() ? View.VISIBLE : View.GONE);
-        mPairingController.setContactSharingState();
-        contactSharing.setOnCheckedChangeListener(mPairingController);
-        contactSharing.setChecked(mPairingController.getContactSharingState());
-
         mPairingView = pairingView;
 
         pairingView.setInputType(InputType.TYPE_CLASS_NUMBER);

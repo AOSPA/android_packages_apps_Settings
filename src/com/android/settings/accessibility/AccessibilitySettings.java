@@ -30,9 +30,6 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArrayMap;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.NonNull;
@@ -45,6 +42,7 @@ import com.android.internal.accessibility.util.AccessibilityUtils;
 import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.AccessibilityServiceFragmentType;
+import com.android.settings.accessibility.actionbar.FeedbackMenuController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -105,8 +103,6 @@ public class AccessibilitySettings extends DashboardFragment implements
     // presentation.
     private static final long DELAY_UPDATE_SERVICES_MILLIS = 1000;
 
-    static final int MENU_ID_SEND_FEEDBACK = 0;
-
     private final Handler mHandler = new Handler();
 
     private final Runnable mUpdateRunnable = new Runnable() {
@@ -150,8 +146,6 @@ public class AccessibilitySettings extends DashboardFragment implements
     };
 
     private AccessibilitySettingsContentObserver mSettingsContentObserver;
-
-    private FeedbackManager mFeedbackManager;
 
     private final Map<String, PreferenceCategory> mCategoryToPrefCategoryMap =
             new ArrayMap<>();
@@ -216,6 +210,7 @@ public class AccessibilitySettings extends DashboardFragment implements
         mNeedPreferencesUpdate = false;
         registerContentMonitors();
         registerInputDeviceListener();
+        FeedbackMenuController.init(this, SettingsEnums.ACCESSIBILITY);
     }
 
     @Override
@@ -253,24 +248,6 @@ public class AccessibilitySettings extends DashboardFragment implements
     }
 
     @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        if (getFeedbackManager().isAvailable()) {
-            menu.add(Menu.NONE, MENU_ID_SEND_FEEDBACK, Menu.NONE,
-                    R.string.accessibility_send_feedback_title);
-        }
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == MENU_ID_SEND_FEEDBACK) {
-            getFeedbackManager().sendFeedback();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     protected int getPreferenceScreenResId() {
         return R.xml.accessibility_settings;
     }
@@ -278,18 +255,6 @@ public class AccessibilitySettings extends DashboardFragment implements
     @Override
     protected String getLogTag() {
         return TAG;
-    }
-
-    @VisibleForTesting
-    void setFeedbackManager(FeedbackManager feedbackManager) {
-        this.mFeedbackManager = feedbackManager;
-    }
-
-    private FeedbackManager getFeedbackManager() {
-        if (mFeedbackManager == null) {
-            mFeedbackManager = new FeedbackManager(getActivity(), SettingsEnums.ACCESSIBILITY);
-        }
-        return mFeedbackManager;
     }
 
     /**

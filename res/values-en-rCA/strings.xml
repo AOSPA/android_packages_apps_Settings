@@ -41,6 +41,9 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Suspended"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Unknown"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Preview"</string>
+    <string name="preview_pager_home_content_description" msgid="3961399947853424786">"Home screen preview"</string>
+    <string name="preview_pager_message_content_description" msgid="3018855090807833755">"Message preview"</string>
+    <string name="preview_pager_email_content_description" msgid="100055784235660338">"Email preview"</string>
     <string name="qr_code_content_description" msgid="1852208464419291347">"QR code"</string>
     <string name="preview_pager_previous_button" msgid="607771113300838313">"Previous preview"</string>
     <string name="preview_pager_next_button" msgid="8700907912508927271">"Next preview"</string>
@@ -167,11 +170,11 @@
     <string name="date_and_time" msgid="1788358029823431692">"Date and time"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Proxy"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Clear"</string>
-    <string name="proxy_port_label" msgid="4647357286461712574">"Proxy port"</string>
+    <string name="proxy_port_label" msgid="6698001018215165848">"Proxy port (optional)"</string>
     <string name="proxy_exclusionlist_label" msgid="2598613986784917542">"Bypass proxy for"</string>
     <string name="proxy_defaultView_text" msgid="6795150505379688451">"Restore defaults"</string>
     <string name="proxy_action_text" msgid="1103328484441449542">"Done"</string>
-    <string name="proxy_hostname_label" msgid="5504327742505848063">"Proxy hostname"</string>
+    <string name="proxy_hostname_label" msgid="345510072664361960">"Proxy hostname (optional)"</string>
     <string name="proxy_error" msgid="3615905975598084126">"Attention"</string>
     <string name="proxy_error_dismiss" msgid="4207430265140873078">"OK"</string>
     <string name="proxy_error_invalid_host" msgid="3814412792702059247">"The hostname you typed isn’t valid."</string>
@@ -216,9 +219,10 @@
     <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Your device, apps, and websites use the first supported language from your preferred language list.\n\nMany apps will also use the region from your preferred language to format dates, numbers, and units. To change your region, add a language, then choose your preferred region."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"To select a language for each app, go to app language settings."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Learn more about app languages"</string>
-    <string name="title_change_system_region" msgid="5476591184463491936">"Change region to %s ?"</string>
+    <string name="title_change_system_region" msgid="9196602029960380112">"Change region to %s?"</string>
     <string name="desc_notice_device_region_change" msgid="6702773189066944100">"Your device will keep %s as a system language"</string>
-    <string name="title_change_system_locale" msgid="8589844586256566951">"Change system language to %s ?"</string>
+    <string name="desc_notice_device_region_change_for_preferred_language" msgid="408517366942324267">"%1$s will replace %2$s in your preferred languages"</string>
+    <string name="title_change_system_locale" msgid="4102991236063984803">"Change system language to %s?"</string>
     <string name="title_system_locale_addition" msgid="8218683660751479466">"Add %s to preferred languages?"</string>
     <string name="desc_system_locale_addition" msgid="3409917362651596070">"This lets apps and websites know you also prefer this language."</string>
     <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Your device settings and regional preferences will change."</string>
@@ -235,7 +239,7 @@
     <string name="search_region_hint" msgid="1748708432568237552">"Search regions"</string>
     <string name="top_intro_region_title" msgid="2336323415395642117">"The region you choose affects how your phone displays time, dates, temperature, and more"</string>
     <string name="more_language_settings_category" msgid="3669703092480725416">"More language settings"</string>
-    <string name="title_change_system_locale_region" msgid="1977530992614685128">"Change region to <xliff:g id="SYSTEM_LANGUAGE_REGION">%1$s</xliff:g> ?"</string>
+    <string name="title_change_system_locale_region" msgid="4401478579429442695">"Change region to <xliff:g id="SYSTEM_LANGUAGE_REGION">%1$s</xliff:g>?"</string>
     <string name="body_change_system_locale_region" msgid="9064318449821043189">"Your device will keep <xliff:g id="SYSTEM_LANGUAGE">%1$s</xliff:g> as a system language"</string>
     <string name="top_intro_numbering_system_title" msgid="3962000662073238392">"Choose how your device, websites, and apps display numbers"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regional preferences"</string>
@@ -260,8 +264,8 @@
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"If an app doesn’t support regional preferences, the app will use its default locale settings."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Learn more about language preferences."</string>
     <string name="metric_measurement_system" msgid="7489725697268321541">"Metric"</string>
-    <string name="us_measurement_system" msgid="8738587232938189052">"Imperial (US)"</string>
-    <string name="uk_measurement_system" msgid="4196897001775627597">"Imperial (UK)"</string>
+    <string name="us_measurement_system" msgid="8406695347890345490">"US"</string>
+    <string name="uk_measurement_system" msgid="1814065008707689505">"UK"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"Additional preferences"</string>
     <string name="terms_of_address_title" msgid="7338630812197476808">"Choose how youre addressed"</string>
     <string name="terms_of_address_summary" msgid="7802443422612600620">"Your device can personalize how youre addressed"</string>
@@ -355,6 +359,7 @@
     <string name="safety_center_summary" msgid="3554867379951053869">"App security, device lock, permissions"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Face added"</string>
     <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"Setup needed"</string>
+    <string name="security_settings_face_preference_summary_none_new" msgid="1963253146734002815">"Add face"</string>
     <string name="security_settings_face_preference_title_new" msgid="7680231874730796331">"Face"</string>
     <string name="security_settings_face_profile_preference_title_new" msgid="685550153608106166">"Face for work"</string>
     <string name="private_space_face_unlock_title_new" msgid="2079622608951402509">"Face for private space"</string>
@@ -437,6 +442,7 @@
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Add fingerprint"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Fingerprint added}other{# fingerprints added}}"</string>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1146977379031250790">"Setup needed"</string>
+    <string name="security_settings_fingerprint_preference_summary_none_new" msgid="510376523784190149">"Add fingerprint"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Set up your fingerprint"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Allow fingerprint unlock"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Use your fingerprint"</string>
@@ -792,6 +798,7 @@
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Continue without Face Unlock"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"Continue without fingerprint or face"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"None"</string>
+    <string name="unlock_set_unlock_mode_off_new" msgid="865396805830816266">"Add PIN, pattern, password, or swipe"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Swipe"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"Pattern"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="9028659554829888373">"PIN"</string>
@@ -930,10 +937,13 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"When Bluetooth is turned on, your device can communicate with other nearby Bluetooth devices.\n\nTo improve device experience, apps and services can still scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services. You can change this in Bluetooth scanning settings."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"When Bluetooth is on, your device can communicate with other nearby Bluetooth devices. Features like Quick Share and Find My Device use Bluetooth.\n\nApps and services can still scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services. You can change this in Bluetooth scanning settings."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Change"</string>
-    <string name="bluetooth_key_missing_title" msgid="7799054163548353853">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> not connected"</string>
-    <string name="bluetooth_key_missing_message" msgid="2388861106663695319">"For your security, forget this device, then pair it again"</string>
+    <string name="bluetooth_key_missing_title" msgid="8462010102528132965">"Can’t connect <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="bluetooth_key_missing_message" msgid="3188093580372443815">"For more details, go to device settings"</string>
     <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"Forget device"</string>
     <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"Cancel"</string>
+    <string name="bluetooth_key_missing_device_settings" msgid="5512091368141961890">"Device settings"</string>
+    <string name="bluetooth_key_missing_close" msgid="6724520133374312040">"Close"</string>
+    <string name="bluetooth_key_missing_toast" msgid="8692796546000643569">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> failed to connect"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Device details"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Keyboard settings"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"More settings"</string>
@@ -948,6 +958,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Experimental. Improves audio quality."</string>
     <string name="device_details_battery" msgid="5466987755790847884">"Battery"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"Battery, charging"</string>
+    <string name="device_details_key_missing_title" msgid="3568401701538114387">"Try restarting <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. If that doesn’t work, forget the device. For your security, only pair it again when you aren’t in a public space.\n\nIf this device isn’t nearby, you don’t need to do anything."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Forget device"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Disconnect app"</string>
     <string name="device_details_more_settings" msgid="950302792331611271">"More settings"</string>
@@ -1060,7 +1071,7 @@
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Advanced options"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Drop down list Advanced Options"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"expand"</string>
-    <string name="wifi_ssid" msgid="2713062130735103151">"Network name"</string>
+    <string name="wifi_ssid" msgid="5139273830867723030">"Network name*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Enter the SSID"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Security"</string>
     <string name="wifi_hidden_network" msgid="6466834025375485596">"Hidden network"</string>
@@ -1083,7 +1094,9 @@
     <string name="wifi_eap_user_cert" msgid="3569182430929173220">"User certificate"</string>
     <string name="wifi_eap_identity" msgid="3629406902174137028">"Identity"</string>
     <string name="wifi_eap_anonymous" msgid="8630332141751267000">"Anonymous identity"</string>
-    <string name="wifi_password" msgid="1458802324849513755">"Password"</string>
+    <string name="wifi_password" msgid="165204973532996861">"Password*"</string>
+    <string name="wifi_password_optional" msgid="6770706664834070705">"Password (optional)"</string>
+    <string name="wifi_password_invalid" msgid="8884500804472828356">"The password is invalid"</string>
     <string name="wifi_show_password" msgid="6865993988238157923">"Show password"</string>
     <string name="wifi_ap_choose_2G" msgid="1436802195991542016">"2.4 GHz Band"</string>
     <string name="wifi_ap_prefer_5G" msgid="2520628479818369902">"5.0 GHz Band preferred"</string>
@@ -1149,6 +1162,7 @@
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"To improve location accuracy and for other purposes, an unknown app wants to turn on network scanning, even when Wi‑Fi is off.\n\nAllow this for all apps that want to scan?"</string>
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Allow"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Deny"</string>
+    <string name="wifi_field_required" msgid="6312381745503042588">"*required"</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"This network has no internet access. Stay connected?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Some apps and services may not work due to limited connectivity. Use anyway?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Don’t ask again for this network"</string>
@@ -1367,6 +1381,7 @@
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"Night Light not currently on"</string>
     <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"Device location needed to determine your sunset and sunrise times."</string>
     <string name="twilight_mode_launch_location" msgid="7799112373591153956">"Location settings"</string>
+    <string name="twilight_mode_pending_location" msgid="6829434234071614405">"Location services are active. Schedule will activate once location is determined."</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"Turn on now"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"Turn off now"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"Turn on until sunrise"</string>
@@ -1476,17 +1491,17 @@
     <string name="storage_settings_for_app" msgid="229425418984637483">"Storage and cache"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Storage settings"</string>
     <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
-    <string name="eid_multi_sim" msgid="6551259348909791790">"E​ID (sim slot <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="imei_multi_sim" msgid="9001570420423929507">"IMEI (sim slot <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI (sim slot <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (primary)"</string>
+    <string name="eid_multi_sim" msgid="6659492335576379274">"E​ID (SIM slot <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
+    <string name="imei_multi_sim" msgid="27798473711249145">"IMEI (SIM slot <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
+    <string name="imei_multi_sim_primary" msgid="4320457587114117400">"IMEI (SIM slot <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (primary)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"To view, choose saved network"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
     <string name="status_imei_sv" msgid="6908985558726440951">"IMEI SV"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"PRL version"</string>
-    <string name="meid_multi_sim" msgid="1460689549266621286">"MEID (sim slot <xliff:g id="MEID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="meid_multi_sim_primary" msgid="8921262417580407201">"MEID (sim slot <xliff:g id="MEID_SLOT_ID_PRIMARY">%1$d</xliff:g>) (primary)"</string>
+    <string name="meid_multi_sim" msgid="5076814185188481456">"MEID (SIM slot <xliff:g id="MEID_SLOT_ID">%1$d</xliff:g>)"</string>
+    <string name="meid_multi_sim_primary" msgid="6269908735700854437">"MEID (SIM slot <xliff:g id="MEID_SLOT_ID_PRIMARY">%1$d</xliff:g>) (primary)"</string>
     <string name="scanning_status_text_on" msgid="3846571210578042940">"On"</string>
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Off"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
@@ -1554,6 +1569,7 @@
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Or"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Format SD card for portable storage"</string>
     <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"Store photos, videos, music, and more and access them from other devices. &lt;a href=https://support.google.com/android/answer/12153449&gt;Learn more about setting up an SD card&lt;/a&gt;."</string>
+    <string name="storage_wizard_init_v2_external_summary_non_sd_card" msgid="6638380506793421312">"Store photos, videos, music, and more and access them from other devices."</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Format"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Set up later"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Format this <xliff:g id="NAME">^1</xliff:g>?"</string>
@@ -1578,7 +1594,13 @@
     <string name="battery_level_title" msgid="1371765298786083448">"Battery level"</string>
     <string name="communal_settings_title" msgid="2845678473945902115">"Communal"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Communal settings"</string>
-    <string name="satellite_setting" msgid="4171265534842459910">"Satellite messaging"</string>
+    <string name="hub_mode_category_title" msgid="5290081595872103974">"Hub mode"</string>
+    <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Widgets on lock screen"</string>
+    <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"When to automatically show"</string>
+    <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Never"</string>
+    <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"While charging"</string>
+    <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"While charging and upright"</string>
+    <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"While docked"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APNs"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Edit access point"</string>
     <string name="apn_add" msgid="9069613192201630934">"Add access point"</string>
@@ -1686,6 +1708,11 @@
     <string name="tether_preference_summary_off" msgid="6266799346319794630">"Off"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"USB tethering"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Bluetooth tethering"</string>
+    <string name="ethernet_ip_address" msgid="4218340787862242573">"IP address"</string>
+    <string name="ethernet_mac_address_title" msgid="3235879195237611007">"MAC address"</string>
+    <string name="tx_ethernet_speed" msgid="4785035505065551012">"Transit link speed"</string>
+    <string name="rx_ethernet_speed" msgid="6642000569214969711">"Receive link speed"</string>
+    <string name="ethernet_network_usage" msgid="3795965384177426780">"Network usage"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernet tethering"</string>
     <string name="tethering_footer_info" msgid="6824352505979800594">"Use hotspot and tethering to provide internet to other devices through your data connection. Apps can also create a hotspot to share content with nearby devices."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Use hotspot and tethering to provide internet to other devices through your Wi‑Fi or mobile data connection. Apps can also create a hotspot to share content with nearby devices."</string>
@@ -2092,7 +2119,8 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Bottom-right click"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Click in the bottom right corner of the touchpad for more options"</string>
     <string name="trackpad_pointer_speed" msgid="5672221910698079303">"Cursor speed"</string>
-    <string name="three_finger_tap_preference_title" msgid="3779242412749283386">"Customize 3-finger tap"</string>
+    <!-- no translation found for three_finger_tap_preference_title (1836080810837854140) -->
+    <skip />
     <string name="touchpad_acceleration_title" msgid="176627555191021888">"Touchpad acceleration"</string>
     <string name="touchpad_acceleration_summary" msgid="8057075483967535793">"Faster movements on your touchpad will move the cursor farther"</string>
     <string name="pointer_fill_style" msgid="8794616790175016092">"Pointer color"</string>
@@ -2109,7 +2137,8 @@
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Learn touchpad gestures"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"trackpad, track pad, mouse, cursor, scroll, swipe, right click, click, pointer"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"right click, tap"</string>
-    <string name="three_finger_tap_middle_click" msgid="1759914275939765929">"Mouse middle click button"</string>
+    <!-- no translation found for three_finger_tap_middle_click (7898931632908866867) -->
+    <skip />
     <string name="three_finger_tap_launch_gemini" msgid="4030401656711588982">"Launch Assistant"</string>
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Go home"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"Go back"</string>
@@ -2262,16 +2291,11 @@
     <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Learn more about caption preferences"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Magnification"</string>
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Magnification shortcut"</string>
-    <!-- no translation found for accessibility_magnification_cursor_following_title (29531257984012743) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_cursor_following_header (7283095798622223509) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_cursor_following_continuous (1119319218662522794) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_cursor_following_center (3504798009192014460) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_cursor_following_edge (8675207762416655758) -->
-    <skip />
+    <string name="accessibility_magnification_cursor_following_title" msgid="29531257984012743">"Cursor following"</string>
+    <string name="accessibility_magnification_cursor_following_header" msgid="7283095798622223509">"Choose how Magnification follows your cursor."</string>
+    <string name="accessibility_magnification_cursor_following_continuous" msgid="1119319218662522794">"Move screen continuously as mouse moves"</string>
+    <string name="accessibility_magnification_cursor_following_center" msgid="3504798009192014460">"Move screen keeping mouse at center of screen"</string>
+    <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Move screen when mouse touches edges of screen"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Magnify typing"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Magnifier follows text as you type"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Keep on while switching apps"</string>
@@ -2407,7 +2431,7 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"High contrast text"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Change text color to black or white. Maximizes contrast with the background."</string>
     <string name="accessibility_notification_high_contrast_text_title" msgid="2297915407152953323">"Improve text contrast"</string>
-    <string name="accessibility_notification_high_contrast_text_body" msgid="4111896614825062003">"<xliff:g id="OUTLINE_TEXT">%1$s</xliff:g> has replaced <xliff:g id="HIGH_CONTRAST_TEXT">%2$s</xliff:g>. You can turn it on in <xliff:g id="SETTINGS">%3$s</xliff:g>."</string>
+    <string name="accessibility_notification_high_contrast_text_body_message" msgid="6846453833480117658">"Outline text has replaced high contrast text. You can turn it on in <xliff:g id="SETTINGS">%1$s</xliff:g>."</string>
     <string name="accessibility_notification_high_contrast_text_action_open_settings" msgid="5945069315472850294">"Go to <xliff:g id="SETTINGS">%1$s</xliff:g>"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8848579943445806659">"Outline text"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Add a black or white background around text to increase contrast"</string>
@@ -2831,12 +2855,9 @@
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> - <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_timestamps_content_description" msgid="1927748134271595985">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> to <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_status_time_info_and_battery_level (5158088815445378555) -->
-    <skip />
-    <!-- no translation found for battery_chart_slot_status_selected (4196580689444438148) -->
-    <skip />
-    <!-- no translation found for battery_chart_slot_status_unselected (6930198843537021396) -->
-    <skip />
+    <string name="battery_usage_status_time_info_and_battery_level" msgid="5158088815445378555">"<xliff:g id="SELECTED_STATUS">%1$s</xliff:g>, <xliff:g id="TIME_INFO">%2$s</xliff:g> <xliff:g id="BATTERY_LEVEL">%3$s</xliff:g>"</string>
+    <string name="battery_chart_slot_status_selected" msgid="4196580689444438148">"Selected"</string>
+    <string name="battery_chart_slot_status_unselected" msgid="6930198843537021396">"Unselected"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Battery usage chart"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Daily battery usage chart"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Hourly battery usage chart"</string>
@@ -3108,28 +3129,25 @@
     <string name="data_usage_uninstalled_apps_users" msgid="1262228664057122983">"Removed apps and users"</string>
     <string name="wifi_metered_title" msgid="6623732965268033931">"Network usage"</string>
     <string name="data_usage_metered_yes" msgid="4262598072030135223">"Metered"</string>
-    <string name="vpn_name" msgid="3806456074909253262">"Name"</string>
+    <string name="vpn_name" msgid="1119885022967213297">"Name*"</string>
     <string name="vpn_type" msgid="5533202873260826663">"Type"</string>
-    <string name="vpn_server" msgid="2908816134941973935">"Server address"</string>
-    <string name="vpn_ipsec_identifier" msgid="8511842694369254801">"IPSec identifier"</string>
-    <string name="vpn_ipsec_secret" msgid="532007567355505963">"IPSec pre-shared key"</string>
+    <string name="vpn_server" msgid="5771717512763639505">"Server address*"</string>
+    <string name="vpn_ipsec_identifier" msgid="6976476088030400883">"IPSec identifier*"</string>
+    <string name="vpn_ipsec_secret" msgid="3110033645671775202">"IPSec pre-shared key*"</string>
     <string name="vpn_ipsec_user_cert" msgid="2714372103705048405">"IPSec user certificate"</string>
     <string name="vpn_ipsec_ca_cert" msgid="5558498943577474987">"IPSec CA certificate"</string>
     <string name="vpn_ipsec_server_cert" msgid="1411390470454731396">"IPSec server certificate"</string>
     <string name="vpn_show_options" msgid="6105437733943318667">"Show advanced options"</string>
-    <string name="vpn_username" msgid="8671768183475960068">"Username"</string>
-    <string name="vpn_password" msgid="1183746907642628127">"Password"</string>
+    <string name="vpn_username_optional" msgid="8564310631984689947">"Username (optional)"</string>
+    <string name="vpn_password_optional" msgid="1255147723869461543">"Password (optional)"</string>
+    <string name="vpn_username_required" msgid="1808631251331232149">"Username*"</string>
+    <string name="vpn_password_required" msgid="1916107706318825437">"Password*"</string>
     <string name="vpn_save_login" msgid="5986762519977472618">"Save account information"</string>
     <string name="vpn_not_used" msgid="7229312881336083354">"(not used)"</string>
     <string name="vpn_no_ca_cert" msgid="3687379414088677735">"(don’t verify server)"</string>
     <string name="vpn_no_server_cert" msgid="8106540968643125407">"(received from server)"</string>
     <string name="vpn_always_on_invalid_reason_other" msgid="4571905303713233321">"The information entered doesn\'t support always-on VPN"</string>
-    <!-- no translation found for vpn_optional (3085880299239180702) -->
-    <skip />
-    <!-- no translation found for vpn_required (2538500165710360491) -->
-    <skip />
-    <!-- no translation found for vpn_field_required (952531424443686800) -->
-    <skip />
+    <string name="vpn_field_required" msgid="582849543970781302">"*required"</string>
     <string name="vpn_cancel" msgid="5929410618112404383">"Cancel"</string>
     <string name="vpn_done" msgid="5137858784289564985">"Dismiss"</string>
     <string name="vpn_save" msgid="683868204634860888">"Save"</string>
@@ -3360,7 +3378,7 @@
     <string name="color_orange" msgid="216547825489739010">"Orange"</string>
     <string name="color_purple" msgid="6603701972079904843">"Purple"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"SIM status"</string>
-    <string name="sim_status_title_sim_slot" msgid="4932996839194493313">"SIM status (sim slot %1$d)"</string>
+    <string name="sim_status_title_sim_slot" msgid="5421926522479103027">"SIM status (SIM slot %1$d)"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_notification_title" msgid="6839556577405929262">"Your SIMs changed"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Tap to set up"</string>
@@ -4398,7 +4416,7 @@
     <string name="disconnected" msgid="3469373726996129247">"Not connected"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Not connected"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> apps installed"</string>
-    <string name="storage_summary" msgid="7631468664968572688">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> used - <xliff:g id="FREE_SPACE_VALUE">%2$s</xliff:g> <xliff:g id="FREE_SPACE_UNITS">%3$s</xliff:g> free"</string>
+    <string name="storage_toplevel_summary" msgid="6708203706751754934">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> used - <xliff:g id="FREE_SPACE">%2$s</xliff:g> free"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Dark theme, font size, brightness"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Avg <xliff:g id="USED_MEMORY">%1$s</xliff:g> of <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> memory used"</string>
     <string name="users_summary" msgid="8473589474976307510">"Signed in as <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -5021,13 +5039,13 @@
     <string name="roaming_alert_title" msgid="9052791521868787985">"Allow data roaming?"</string>
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"Check with your network provider for pricing."</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Invalid Network Mode <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignore."</string>
-    <string name="satellite_setting_title" msgid="2543034229989047673">"Satellite messaging"</string>
+    <string name="satellite_setting" msgid="4650503806634496443">"Satellite connectivity"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Send and receive text messages by satellite. Included with your account."</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Send and receive text messages by satellite. Not included with your account."</string>
     <string name="satellite_setting_summary_without_entitlement" msgid="5284998840770992554">"Send and receive text messages by satellite. Contact your carrier for details."</string>
     <string name="keywords_satellite_setting" msgid="613553612424945946">"Satellite messaging, satellite connectivity"</string>
-    <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"About <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
-    <string name="title_about_satellite_setting" msgid="3563087940535642558">"You can send and receive text messages by satellite with an eligible <xliff:g id="CARRIER_NAME">%1$s</xliff:g> account"</string>
+    <string name="category_name_about_satellite_connectivity" msgid="3971142716898783631">"About satellite connectivity"</string>
+    <string name="description_about_satellite_setting" msgid="5539359064330584941">"You can send and receive text messages and use some apps by satellite with an eligible <xliff:g id="CARRIER_NAME">%1$s</xliff:g> account"</string>
     <string name="category_title_your_satellite_plan" msgid="8169426217950247126">"Your <xliff:g id="CARRIER_NAME">%1$s</xliff:g> account"</string>
     <string name="title_have_satellite_plan" msgid="2048372355699977947">"Satellite messaging is included with your account"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"Satellite messaging isn’t included with your account"</string>
@@ -5041,12 +5059,18 @@
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Follow steps to connect to the satellite"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"You can text anyone, including emergency services. Your phone will reconnect to a mobile network when available."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"After your phone is connected, you can text anyone, including emergency services."</string>
-    <string name="satellite_setting_summary_more_information" msgid="276312352285564071">"A satellite connection may be slower and is available only in some areas. Weather and certain structures may affect the connection. Calling by satellite isn’t available. Emergency calls may still connect.\n\nIt may take some time for account changes to show in Settings. Contact <xliff:g id="CARRIER_NAME">%1$s</xliff:g> for details."</string>
-    <string name="satellite_setting_summary_more_information_no_emergency_messaging" msgid="2090170250936862158">"A satellite connection may be slower and is available only in some areas. Weather and certain structures may affect the connection. Calling by satellite isn’t available. Emergency calls may still connect. Texting with emergency services may not be available in all areas.\n\nIt may take some time for account changes to show in Settings. Contact <xliff:g id="CARRIER_NAME">%1$s</xliff:g> for details."</string>
-    <string name="more_about_satellite_messaging" msgid="1039277943532711584">"More about <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
+    <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Keep in mind"</string>
+    <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"Satellite connectivity may take longer and is available only in some areas."</string>
+    <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"Weather and certain structures may affect your satellite connection."</string>
+    <string name="satellite_footer_content_section_3" msgid="4652426135622555607">"Calling by satellite isn’t available."</string>
+    <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"Emergency calls may still connect."</string>
+    <string name="satellite_footer_content_section_5" msgid="3053256489735265540">"Mobile or Wi‑Fi network required to view external links."</string>
+    <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"Texting with emergency services may not be available in all areas."</string>
+    <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"It may take some time for account changes to show in Settings. Contact <xliff:g id="CARRIER_NAME">%1$s</xliff:g> for details."</string>
+    <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"More about satellite connectivity"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Can’t turn on <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"To turn on <xliff:g id="FUNCTION">%1$s</xliff:g>, first end the satellite connection"</string>
-    <string name="category_title_satellite_connectivity" msgid="7540022356863917632">"Satellite connectivity"</string>
+    <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Satellite"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Satellite connectivity"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"satellite connectivity"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"satellite messaging"</string>
@@ -5137,7 +5161,7 @@
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"To use mobile data, call features, and SMS at a later time, go to your network settings"</string>
     <string name="sim_card_label" msgid="6263064316075963775">"SIM"</string>
     <string name="erase_sim_dialog_title" msgid="4742077437653028326">"Erase this eSIM?"</string>
-    <string name="erase_sim_dialog_text" msgid="1406141218170595272">"This removes <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> service from this device, but your <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> plan won\'t be canceled."</string>
+    <string name="erase_sim_dialog_text" msgid="3982216582200709197">"Erasing this eSIM removes <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> service from this device. Service for <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> won’t be canceled. To request a new eSIM, you’ll need to contact your carrier."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Erase"</string>
     <string name="erasing_sim" msgid="4237180547590463930">"Erasing eSIM…"</string>
     <string name="erase_sim_fail_title" msgid="1445700500168357303">"Can\'t erase eSIM"</string>
@@ -5163,10 +5187,8 @@
     <string name="settings_panel_title" msgid="346363079938069215">"Settings Panel"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Enable freeform windows"</string>
     <string name="enable_desktop_experience_features" msgid="7389235241021706660">"Enable desktop experience features"</string>
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (8586716390362684564) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (7567963048658976895) -->
-    <skip />
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="8586716390362684564">"Enable desktop windowing on the device and on secondary displays."</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="7567963048658976895">"Enable desktop windowing on secondary displays."</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Enable freeform windows on secondary display"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Enable non-resizable in multi window"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Allows non-resizable apps to be in multi window"</string>
@@ -5249,6 +5271,8 @@
     <string name="enable_16k_app_compat_details" msgid="5382562613011853452">"App will be stopped and run in page size compatibility mode on 16 KB device when toggled."</string>
     <string name="stop_app_dlg_title" msgid="3153921585174512587">"Stop app?"</string>
     <string name="stop_app_dlg_text" msgid="4373849065005318901">"Application will be stopped to apply page size compat setting."</string>
+    <string name="error_pending_updates" msgid="7196832772265874760">"Kernel update failed. Check and install any pending updates."</string>
+    <string name="error_ota_failed" msgid="4762376085470989653">"Kernel update failed. Error occurred while applying OTA."</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Bug report handler"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Determines which app handles the Bug Report shortcut on your device."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Personal"</string>
@@ -5397,8 +5421,8 @@
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Enter Phone number"</string>
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Phone number is missing."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
-    <string name="enable_2g_title" msgid="8184757884636162942">"Allow 2G"</string>
-    <string name="enable_2g_summary" msgid="2794534052372565914">"2G is less secure, but may improve your connection in some locations. For emergency calls, 2G is always allowed."</string>
+    <string name="enable_2g_title" msgid="5657132300321750181">"2G network protection"</string>
+    <string name="enable_2g_summary" msgid="6317192326100541563">"Avoids 2G networks, which are less secure. This may limit connectivity in some places. Emergency calling is always allowed."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> requires 2G to be available"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Allow only encrypted networks"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"This is more secure but may limit your mobile network connection in some locations. Emergency calling is always allowed."</string>
@@ -5516,12 +5540,6 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> by <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"The app will restart when you change aspect ratio. You may lose unsaved changes. Some apps may not be optimized for certain aspect ratios."</string>
-    <string name="aspect_ratio_experimental_title" msgid="9088785421062044831">"Aspect ratio (experimental)"</string>
-    <string name="aspect_ratio_experiment_title" msgid="128614319422121040">"Aspect ratio (experiment)"</string>
-    <string name="aspect_ratio_labs_title" msgid="6733893837442759383">"Aspect ratio (labs)"</string>
-    <string name="aspect_ratio_experimental_label" msgid="6319009297672567578">"Experimental"</string>
-    <string name="aspect_ratio_experiment_label" msgid="7861871612376167784">"Experiment"</string>
-    <string name="aspect_ratio_labs_label" msgid="7008498116297651342">"Labs"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Fingerprint sensor"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Flash notifications"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"About flash notifications"</string>
@@ -5731,6 +5749,15 @@
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Change PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Forgot PIN"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Web content filters"</string>
-    <!-- no translation found for accessibility_illustration_content_description (557376174860150903) -->
-    <skip />
+    <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome and Web"</string>
+    <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Try to block explicit sites"</string>
+    <string name="supervision_web_content_filters_browser_block_explicit_sites_summary" msgid="1477766506765966613">"No filter is perfect, but this should help hide sexually explicit sites"</string>
+    <string name="supervision_web_content_filters_browser_allow_all_sites_title" msgid="3909739592466381845">"Allow all sites"</string>
+    <string name="supervision_web_content_filters_search_title" msgid="726335318009305564">"Google Search"</string>
+    <string name="supervision_web_content_filters_search_filter_on_title" msgid="4855846261141136285">"SafeSearch filtering ON"</string>
+    <string name="supervision_web_content_filters_search_filter_on_summary" msgid="1162258144140293269">"Helps filter out explicit images, text, and links from search results on this device"</string>
+    <string name="supervision_web_content_filters_search_filter_off_title" msgid="6049461395304222346">"SafeSearch filtering OFF"</string>
+    <string name="supervision_web_content_filters_search_filter_off_summary" msgid="3834238970190924433">"Account settings may still filter or blur explicit results"</string>
+    <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Enter supervision PIN"</string>
+    <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> animation"</string>
 </resources>

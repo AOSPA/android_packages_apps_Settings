@@ -45,6 +45,7 @@ import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.bluetooth.BluetoothProfile;
 import android.bluetooth.BluetoothStatusCodes;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -79,6 +80,7 @@ import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothEventManager;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.HeadsetProfile;
@@ -144,6 +146,7 @@ public class AudioSharingDevicePreferenceControllerTest {
     @Mock private LeAudioProfile mLeAudioProfile;
     @Mock private A2dpProfile mA2dpProfile;
     @Mock private HeadsetProfile mHeadsetProfile;
+    @Mock private ContentResolver mContentResolver;
 
     private Context mContext;
     private AudioSharingDevicePreferenceController mController;
@@ -156,7 +159,7 @@ public class AudioSharingDevicePreferenceControllerTest {
 
     @Before
     public void setUp() {
-        mContext = ApplicationProvider.getApplicationContext();
+        mContext = spy(ApplicationProvider.getApplicationContext());
         mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
         mShadowBluetoothAdapter.setEnabled(true);
         mShadowBluetoothAdapter.setIsLeAudioBroadcastSourceSupported(
@@ -185,6 +188,7 @@ public class AudioSharingDevicePreferenceControllerTest {
         when(mA2dpProfile.getProfileId()).thenReturn(BluetoothProfile.A2DP);
         when(mLeAudioProfile.getProfileId()).thenReturn(BluetoothProfile.LE_AUDIO);
         when(mLeAudioProfile.isEnabled(mDevice)).thenReturn(true);
+        when(mContext.getContentResolver()).thenReturn(mContentResolver);
         when(mScreen.getContext()).thenReturn(mContext);
         mPreferenceGroup = spy(new PreferenceCategory(mContext));
         doReturn(mPreferenceManager).when(mPreferenceGroup).getPreferenceManager();
@@ -211,6 +215,12 @@ public class AudioSharingDevicePreferenceControllerTest {
         verify(mAssistant, never())
                 .registerServiceCallBack(
                         any(Executor.class), any(BluetoothLeBroadcastAssistant.Callback.class));
+        verify(mContentResolver, never())
+                .registerContentObserver(
+                        Settings.Secure.getUriFor(
+                                BluetoothUtils.getPrimaryGroupIdUriForBroadcast()),
+                        false,
+                        mController.mSettingsObserver);
         verify(mBluetoothDeviceUpdater, never()).registerCallback();
         verify(mBluetoothDeviceUpdater, never()).refreshPreference();
     }
@@ -224,6 +234,12 @@ public class AudioSharingDevicePreferenceControllerTest {
         verify(mAssistant)
                 .registerServiceCallBack(
                         any(Executor.class), any(BluetoothLeBroadcastAssistant.Callback.class));
+        verify(mContentResolver)
+                .registerContentObserver(
+                        Settings.Secure.getUriFor(
+                                BluetoothUtils.getPrimaryGroupIdUriForBroadcast()),
+                        false,
+                        mController.mSettingsObserver);
         verify(mBluetoothDeviceUpdater).registerCallback();
         verify(mBluetoothDeviceUpdater).refreshPreference();
     }
@@ -236,6 +252,7 @@ public class AudioSharingDevicePreferenceControllerTest {
         verify(mDialogHandler, never()).unregisterCallbacks();
         verify(mAssistant, never())
                 .unregisterServiceCallBack(any(BluetoothLeBroadcastAssistant.Callback.class));
+        verify(mContentResolver, never()).unregisterContentObserver(mController.mSettingsObserver);
         verify(mBluetoothDeviceUpdater, never()).unregisterCallback();
     }
 
@@ -247,6 +264,7 @@ public class AudioSharingDevicePreferenceControllerTest {
         verify(mDialogHandler).unregisterCallbacks();
         verify(mAssistant)
                 .unregisterServiceCallBack(any(BluetoothLeBroadcastAssistant.Callback.class));
+        verify(mContentResolver).unregisterContentObserver(mController.mSettingsObserver);
         verify(mBluetoothDeviceUpdater).unregisterCallback();
     }
 
@@ -483,6 +501,12 @@ public class AudioSharingDevicePreferenceControllerTest {
         mController.onProfileConnectionStateChanged(
                 mCachedDevice, BluetoothAdapter.STATE_CONNECTED, BluetoothProfile.A2DP);
         verifyNoInteractions(mDialogHandler);
+    }
+
+    @Test
+    public void onFallbackDeviceChanged_updateSummary() {
+        mController.mSettingsObserver.onChange(true);
+        verify(mBluetoothDeviceUpdater).refreshPreference();
     }
 
     @Test

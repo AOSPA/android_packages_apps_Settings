@@ -20,6 +20,13 @@
     android:title="@string/device_details_title">
 
     <com.android.settingslib.widget.LayoutPreference
+        android:key="bluetooth_details_banner"
+        android:layout="@layout/bluetooth_details_banner"
+        android:selectable="false"
+        settings:allowDividerBelow="true"
+        settings:searchable="false"/>
+
+    <com.android.settingslib.widget.LayoutPreference
         android:key="bluetooth_device_header"
         android:layout="@layout/settings_entity_header"
         android:selectable="false"

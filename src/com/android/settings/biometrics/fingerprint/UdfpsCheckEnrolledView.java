@@ -24,6 +24,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.util.RotationUtils;
 import android.view.DisplayInfo;
+import android.view.MotionEvent;
 import android.view.Surface;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -61,6 +62,13 @@ public class UdfpsCheckEnrolledView extends RelativeLayout {
         super.onFinishInflate();
         mFingerprintView = findViewById(R.id.udfps_fingerprint_sensor_view);
         mFingerprintView.setImageDrawable(mFingerprintDrawable);
+        mFingerprintView.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                Log.d(TAG, "Fingerprint view touched!");
+                return true;
+            }
+            return false;
+        });
     }
 
     /**

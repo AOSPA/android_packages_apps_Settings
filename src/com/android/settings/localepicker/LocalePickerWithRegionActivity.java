@@ -18,6 +18,14 @@ package com.android.settings.localepicker;
 
 import static android.window.OnBackInvokedDispatcher.PRIORITY_DEFAULT;
 
+import static com.android.settings.regionalpreferences.RegionDialogFragment.ARG_CALLING_PAGE;
+import static com.android.settings.regionalpreferences.RegionDialogFragment.CALLING_PAGE_LANGUAGE_CHOOSE_A_REGION;
+import static com.android.settings.regionalpreferences.RegionDialogFragment.DIALOG_CHANGE_SYSTEM_LOCALE_REGION;
+import static com.android.settings.regionalpreferences.RegionDialogFragment.DIALOG_CHANGE_PREFERRED_LOCALE_REGION;
+import static com.android.settings.regionalpreferences.RegionDialogFragment.ARG_DIALOG_TYPE;
+import static com.android.settings.regionalpreferences.RegionDialogFragment.ARG_TARGET_LOCALE;
+import static com.android.settings.regionalpreferences.RegionDialogFragment.ARG_REPLACED_TARGET_LOCALE;
+
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,11 +58,6 @@ public class LocalePickerWithRegionActivity extends SettingsBaseActivity
     private static final String TAG = LocalePickerWithRegionActivity.class.getSimpleName();
     private static final String PARENT_FRAGMENT_NAME = "localeListEditor";
     private static final String CHILD_FRAGMENT_NAME = "LocalePickerWithRegion";
-    private static final int DIALOG_CHANGE_SYSTEM_LOCALE_REGION = 1;
-    private static final int DIALOG_CHANGE_PREFERRED_LOCALE_REGION = 2;
-    private static final String ARG_DIALOG_TYPE = "arg_dialog_type";
-    private static final String ARG_TARGET_LOCALE = "arg_target_locale";
-    private static final String ARG_REPLACED_TARGET_LOCALE = "arg_replaced_target_locale";
     private static final String TAG_DIALOG_CHANGE_REGION = "dialog_change_region";
     private static final int DISPOSE = -1;
     private static final int SHOW_DIALOG_FOR_SYSTEM_LANGUAGE = 0;
@@ -139,6 +142,7 @@ public class LocalePickerWithRegionActivity extends SettingsBaseActivity
             LocaleStore.LocaleInfo locale, FragmentManager fragmentManager) {
         Bundle args = new Bundle();
         args.putInt(ARG_DIALOG_TYPE, DIALOG_CHANGE_SYSTEM_LOCALE_REGION);
+        args.putInt(ARG_CALLING_PAGE, CALLING_PAGE_LANGUAGE_CHOOSE_A_REGION);
         args.putSerializable(ARG_TARGET_LOCALE, locale);
         RegionDialogFragment regionDialogFragment = RegionDialogFragment.newInstance();
         regionDialogFragment.setArguments(args);
@@ -149,6 +153,7 @@ public class LocalePickerWithRegionActivity extends SettingsBaseActivity
             LocaleStore.LocaleInfo locale, Locale replacedLocale, FragmentManager fragmentManager) {
         Bundle args = new Bundle();
         args.putInt(ARG_DIALOG_TYPE, DIALOG_CHANGE_PREFERRED_LOCALE_REGION);
+        args.putInt(ARG_CALLING_PAGE, CALLING_PAGE_LANGUAGE_CHOOSE_A_REGION);
         args.putSerializable(ARG_TARGET_LOCALE, locale);
         args.putSerializable(ARG_REPLACED_TARGET_LOCALE, replacedLocale);
         RegionDialogFragment regionDialogFragment = RegionDialogFragment.newInstance();

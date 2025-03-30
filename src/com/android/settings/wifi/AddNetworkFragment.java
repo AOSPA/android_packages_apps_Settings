@@ -206,7 +206,7 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
 
     @VisibleForTesting
     void handleSubmitAction() {
-        if (!mUIController.canFinish()) {
+        if (!mUIController.getValidator().validate()) {
             return;
         }
         successfullyFinish(mUIController.getConfig());

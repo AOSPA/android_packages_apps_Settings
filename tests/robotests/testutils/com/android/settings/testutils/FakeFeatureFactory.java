@@ -28,6 +28,7 @@ import com.android.settings.biometrics.BiometricsFeatureProvider;
 import com.android.settings.biometrics.face.FaceFeatureProvider;
 import com.android.settings.biometrics.fingerprint.FingerprintFeatureProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
+import com.android.settings.connecteddevice.audiosharing.AudioSharingFeatureProvider;
 import com.android.settings.connecteddevice.fastpair.FastPairFeatureProvider;
 import com.android.settings.connecteddevice.stylus.StylusFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
@@ -105,6 +106,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public DisplayFeatureProvider mDisplayFeatureProvider;
     public SyncAcrossDevicesFeatureProvider mSyncAcrossDevicesFeatureProvider;
     public AccessibilityFeedbackFeatureProvider mAccessibilityFeedbackFeatureProvider;
+    public AudioSharingFeatureProvider mAudioSharingFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -155,6 +157,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         mPrivateSpaceLoginFeatureProvider = mock(PrivateSpaceLoginFeatureProvider.class);
         mDisplayFeatureProvider = mock(DisplayFeatureProvider.class);
         mSyncAcrossDevicesFeatureProvider = mock(SyncAcrossDevicesFeatureProvider.class);
+        mAudioSharingFeatureProvider = mock(AudioSharingFeatureProvider.class);
     }
 
     @Override
@@ -346,5 +349,10 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public AccessibilityFeedbackFeatureProvider getAccessibilityFeedbackFeatureProvider() {
         return mAccessibilityFeedbackFeatureProvider;
+    }
+
+    @Override
+    public AudioSharingFeatureProvider getAudioSharingFeatureProvider() {
+        return mAudioSharingFeatureProvider;
     }
 }

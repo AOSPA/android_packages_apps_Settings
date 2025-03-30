@@ -161,6 +161,12 @@ public class SettingsActivity extends SettingsBaseActivity
     public static final String EXTRA_SHOW_FRAGMENT_TAB =
             ":settings:show_fragment_tab";
 
+    /**
+     * Whether the settings homepage activity is initiated from a search result deeplink.
+     */
+    public static final String EXTRA_IS_DEEPLINK_HOME_STARTED_FROM_SEARCH =
+            ":settings:is_deeplink_home_started_from_search";
+
     public static final String META_DATA_KEY_FRAGMENT_CLASS =
             "com.android.settings.FRAGMENT_CLASS";
 

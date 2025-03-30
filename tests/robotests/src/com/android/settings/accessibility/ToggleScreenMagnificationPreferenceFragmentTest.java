@@ -547,6 +547,45 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     }
 
     @Test
+    @DisableFlags(com.android.settings.accessibility.Flags
+                .FLAG_ENABLE_MAGNIFICATION_CURSOR_FOLLOWING_DIALOG)
+    @Config(shadows = ShadowInputDevice.class)
+    public void onCreateView_cursorFollowingModeDisabled_settingsPreferenceIsNull() {
+        addMouseDevice();
+
+        mFragController.create(R.id.main_content, /* bundle= */null).start().resume().get();
+
+        final Preference preference = mFragController.get().findPreference(
+                MagnificationCursorFollowingModePreferenceController.PREF_KEY);
+        assertThat(preference).isNull();
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.accessibility.Flags
+                .FLAG_ENABLE_MAGNIFICATION_CURSOR_FOLLOWING_DIALOG)
+    public void onCreateView_cursorFollowingModeEnabled_settingsPreferenceIsNullWithoutMouse() {
+        mFragController.create(R.id.main_content, /* bundle= */null).start().resume().get();
+
+        final Preference preference = mFragController.get().findPreference(
+                MagnificationCursorFollowingModePreferenceController.PREF_KEY);
+        assertThat(preference).isNull();
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.accessibility.Flags
+                .FLAG_ENABLE_MAGNIFICATION_CURSOR_FOLLOWING_DIALOG)
+    @Config(shadows = ShadowInputDevice.class)
+    public void onCreateView_cursorFollowingModeEnabled_settingsPreferenceIsNotNullWithMouse() {
+        addMouseDevice();
+
+        mFragController.create(R.id.main_content, /* bundle= */null).start().resume().get();
+
+        final Preference preference = mFragController.get().findPreference(
+                MagnificationCursorFollowingModePreferenceController.PREF_KEY);
+        assertThat(preference).isNotNull();
+    }
+
+    @Test
     public void onCreateView_setDialogDelegateAndAddTheControllerToLifeCycleObserver() {
         Correspondence instanceOf = Correspondence.transforming(
                 observer -> (observer instanceof MagnificationModePreferenceController),
@@ -903,11 +942,13 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
             Flags.FLAG_ENABLE_LOW_VISION_HATS,
             com.android.settings.accessibility.Flags
                     .FLAG_ENABLE_MAGNIFICATION_CURSOR_FOLLOWING_DIALOG})
+    @Config(shadows = ShadowInputDevice.class)
     public void getNonIndexableKeys_hasShortcutAndAllFeaturesEnabled_allItemsSearchable() {
         mShadowAccessibilityManager.setAccessibilityShortcutTargets(
                 TRIPLETAP, List.of(MAGNIFICATION_CONTROLLER_NAME));
         setAlwaysOnSupported(true);
         setJoystickSupported(true);
+        addMouseDevice();
 
         final List<String> niks = ToggleScreenMagnificationPreferenceFragment
                 .SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
@@ -1024,6 +1065,14 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     private void setKeyJoystickEnabled(boolean enabled) {
         Settings.Secure.putInt(mContext.getContentResolver(), KEY_JOYSTICK,
                 enabled ? ON : OFF);
+    }
+
+    private void addMouseDevice() {
+        int deviceId = 1;
+        ShadowInputDevice.sDeviceIds = new int[]{deviceId};
+        InputDevice device = ShadowInputDevice.makeInputDevicebyIdWithSources(deviceId,
+                InputDevice.SOURCE_MOUSE);
+        ShadowInputDevice.addDevice(deviceId, device);
     }
 
     private String getStringFromSettings(String key) {

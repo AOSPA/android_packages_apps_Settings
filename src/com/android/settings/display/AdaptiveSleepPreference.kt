@@ -33,9 +33,8 @@ import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settings.restriction.PreferenceRestrictionMixin
 import com.android.settingslib.RestrictedSwitchPreference
 import com.android.settingslib.datastore.KeyValueStore
-import com.android.settingslib.datastore.KeyedObservableDelegate
+import com.android.settingslib.datastore.KeyValueStoreDelegate
 import com.android.settingslib.datastore.SettingsSecureStore
-import com.android.settingslib.datastore.SettingsStore
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
@@ -106,16 +105,14 @@ class AdaptiveSleepPreference :
     @Suppress("UNCHECKED_CAST")
     private class Storage(
         private val context: Context,
-        private val settingsStore: SettingsStore = SettingsSecureStore.get(context),
-    ) : KeyedObservableDelegate<String>(settingsStore), KeyValueStore {
+        private val settingsStore: KeyValueStore = SettingsSecureStore.get(context),
+    ) : KeyValueStoreDelegate {
 
-        override fun contains(key: String) = settingsStore.contains(key)
+        override val keyValueStoreDelegate
+            get() = settingsStore
 
         override fun <T : Any> getValue(key: String, valueType: Class<T>) =
             (context.canBeEnabled() && settingsStore.getBoolean(key) == true) as T
-
-        override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) =
-            settingsStore.setBoolean(key, value as Boolean?)
     }
 
     override fun onStart(context: PreferenceLifecycleContext) {

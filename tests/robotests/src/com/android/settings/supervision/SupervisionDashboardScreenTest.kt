@@ -15,6 +15,7 @@
  */
 package com.android.settings.supervision
 
+import android.app.Activity
 import android.app.supervision.flags.Flags
 import android.content.Context
 import android.platform.test.annotations.DisableFlags
@@ -24,6 +25,7 @@ import androidx.fragment.app.testing.FragmentScenario
 import androidx.preference.Preference
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.supervision.SupervisionMainSwitchPreference.Companion.REQUEST_CODE_CONFIRM_SUPERVISION_CREDENTIALS
 import com.android.settingslib.widget.MainSwitchPreference
 import com.google.common.truth.Truth.assertThat
 import org.junit.Rule
@@ -57,19 +59,49 @@ class SupervisionDashboardScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_SCREEN)
-    fun toggleMainSwitch_disablesChildPreferences() {
+    fun toggleMainSwitch_pinVerificationSucceeded_enablesChildPreferences() {
         FragmentScenario.launchInContainer(preferenceScreenCreator.fragmentClass()).onFragment {
             fragment ->
             val mainSwitchPreference =
                 fragment.findPreference<MainSwitchPreference>(SupervisionMainSwitchPreference.KEY)!!
             val childPreference =
-                fragment.findPreference<Preference>(SupervisionPinManagementScreen.KEY)!!
+                fragment.findPreference<Preference>(SupervisionWebContentFiltersScreen.KEY)!!
 
             assertThat(childPreference.isEnabled).isFalse()
 
             mainSwitchPreference.performClick()
+            // Pretend the PIN verification succeeded.
+            fragment.onActivityResult(
+                requestCode = REQUEST_CODE_CONFIRM_SUPERVISION_CREDENTIALS,
+                resultCode = Activity.RESULT_OK,
+                data = null,
+            )
 
             assertThat(childPreference.isEnabled).isTrue()
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_SCREEN)
+    fun toggleMainSwitch_pinVerificationFailed_childPreferencesRemainDisabled() {
+        FragmentScenario.launchInContainer(preferenceScreenCreator.fragmentClass()).onFragment {
+            fragment ->
+            val mainSwitchPreference =
+                fragment.findPreference<MainSwitchPreference>(SupervisionMainSwitchPreference.KEY)!!
+            val childPreference =
+                fragment.findPreference<Preference>(SupervisionWebContentFiltersScreen.KEY)!!
+
+            assertThat(childPreference.isEnabled).isFalse()
+
+            mainSwitchPreference.performClick()
+            // Pretend the PIN verification failed.
+            fragment.onActivityResult(
+                requestCode = REQUEST_CODE_CONFIRM_SUPERVISION_CREDENTIALS,
+                resultCode = Activity.RESULT_CANCELED,
+                data = null,
+            )
+
+            assertThat(childPreference.isEnabled).isFalse()
         }
     }
 }

@@ -18,7 +18,6 @@ package com.android.settings.regionalpreferences;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.LocaleList;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -92,7 +91,7 @@ public abstract class RegionPickerBaseListPreferenceController extends BasePrefe
                     ? getSuggestedLocaleList()
                     : getSupportedLocaleList();
         if (getPreferenceCategoryKey().contains(KEY_SUGGESTED)) {
-            Locale systemLocale = LocaleList.getDefault().get(0);
+            Locale systemLocale = Locale.getDefault();
             LocaleStore.LocaleInfo localeInfo = LocaleStore.getLocaleInfo(systemLocale);
             result.add(localeInfo);
         }
@@ -106,7 +105,7 @@ public abstract class RegionPickerBaseListPreferenceController extends BasePrefe
             mPreferenceCategory.addPreference(pref);
             pref.setTitle(locale.getFullCountryNameNative());
             pref.setKey(locale.toString());
-            if (locale.getLocale().equals(LocaleList.getDefault().get(0))) {
+            if (locale.getLocale().equals(Locale.getDefault())) {
                 pref.setChecked(true);
             } else {
                 pref.setChecked(false);
@@ -154,7 +153,7 @@ public abstract class RegionPickerBaseListPreferenceController extends BasePrefe
 
     private List<LocaleStore.LocaleInfo> getSortedLocaleList(
             List<LocaleStore.LocaleInfo> localeInfos) {
-        final Locale sortingLocale = LocaleList.getDefault().get(0);
+        final Locale sortingLocale = Locale.getDefault();
         final LocaleHelper.LocaleInfoComparator comp =
                 new LocaleHelper.LocaleInfoComparator(sortingLocale, true);
         Collections.sort(localeInfos, comp);
@@ -162,14 +161,18 @@ public abstract class RegionPickerBaseListPreferenceController extends BasePrefe
     }
 
     private void switchRegion(LocaleStore.LocaleInfo localeInfo) {
-        if (localeInfo.getLocale().equals(LocaleList.getDefault().get(0))) {
+        if (localeInfo.getLocale().equals(Locale.getDefault())) {
             return;
         }
 
         mFragmentManager = mParent.getChildFragmentManager();
         Bundle args = new Bundle();
-        args.putInt(RegionDialogFragment.ARG_DIALOG_TYPE,
+        args.putInt(
+                RegionDialogFragment.ARG_DIALOG_TYPE,
                 RegionDialogFragment.DIALOG_CHANGE_SYSTEM_LOCALE_REGION);
+        args.putInt(
+                RegionDialogFragment.ARG_CALLING_PAGE,
+                RegionDialogFragment.CALLING_PAGE_REGIONAL_PREFERENCES_REGION_PICKER);
         args.putSerializable(RegionDialogFragment.ARG_TARGET_LOCALE, localeInfo);
         RegionDialogFragment regionDialogFragment = RegionDialogFragment.newInstance();
         regionDialogFragment.setArguments(args);

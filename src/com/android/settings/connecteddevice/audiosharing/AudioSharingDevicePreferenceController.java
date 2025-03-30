@@ -26,9 +26,14 @@ import android.bluetooth.BluetoothLeBroadcastAssistant;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.bluetooth.BluetoothProfile;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.ContentObserver;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.provider.Settings;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -87,6 +92,7 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
     @Nullable private final LocalBluetoothProfileManager mProfileManager;
     @Nullable private final LocalBluetoothLeBroadcast mBroadcast;
     @Nullable private final LocalBluetoothLeBroadcastAssistant mAssistant;
+    @Nullable private final ContentResolver mContentResolver;
     private final Executor mExecutor;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     @Nullable private PreferenceGroup mPreferenceGroup;
@@ -187,6 +193,17 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
                         @NonNull BluetoothLeBroadcastReceiveState state) {}
             };
 
+    @VisibleForTesting
+    ContentObserver mSettingsObserver = new ContentObserver(new Handler(Looper.getMainLooper())) {
+        @Override
+        public void onChange(boolean selfChange) {
+            Log.d(TAG, "onChange, primary group id has been changed, refresh list");
+            if (mBluetoothDeviceUpdater != null) {
+                mBluetoothDeviceUpdater.refreshPreference();
+            }
+        }
+    };
+
     public AudioSharingDevicePreferenceController(Context context) {
         super(context, KEY);
         mBtManager = Utils.getLocalBtManager(mContext);
@@ -198,6 +215,7 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
                 mProfileManager == null
                         ? null
                         : mProfileManager.getLeAudioBroadcastAssistantProfile();
+        mContentResolver = context.getContentResolver();
         mExecutor = Executors.newSingleThreadExecutor();
         mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
@@ -217,6 +235,7 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
             if (mEventManager == null
                     || mAssistant == null
                     || mDialogHandler == null
+                    || mContentResolver == null
                     || mBluetoothDeviceUpdater == null) {
                 Log.d(TAG, "Skip onStart(), profile is not ready.");
                 return;
@@ -225,6 +244,10 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
             mEventManager.registerCallback(this);
             mAssistant.registerServiceCallBack(mExecutor, mBroadcastAssistantCallback);
             mDialogHandler.registerCallbacks(mExecutor);
+            mContentResolver.registerContentObserver(
+                    Settings.Secure.getUriFor(BluetoothUtils.getPrimaryGroupIdUriForBroadcast()),
+                    false,
+                    mSettingsObserver);
             mBluetoothDeviceUpdater.registerCallback();
             mBluetoothDeviceUpdater.refreshPreference();
             mIsAudioModeOngoingCall.set(isAudioModeOngoingCall(mContext));
@@ -245,6 +268,7 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
             if (mEventManager == null
                     || mAssistant == null
                     || mDialogHandler == null
+                    || mContentResolver == null
                     || mBluetoothDeviceUpdater == null) {
                 Log.d(TAG, "Skip onStop(), profile is not ready.");
                 return;
@@ -253,6 +277,7 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
             mEventManager.unregisterCallback(this);
             mAssistant.unregisterServiceCallBack(mBroadcastAssistantCallback);
             mDialogHandler.unregisterCallbacks();
+            mContentResolver.unregisterContentObserver(mSettingsObserver);
             mBluetoothDeviceUpdater.unregisterCallback();
         });
     }

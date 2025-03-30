@@ -51,7 +51,7 @@ public class FaceSettingsAppsPreferenceController extends
     @Override
     public boolean setChecked(boolean isChecked) {
         mMetricsFeatureProvider.action(mContext,
-                SettingsEnums.ACTION_FACE_ENABLED_FOR_APP, isChecked);
+                SettingsEnums.ACTION_FACE_ENABLED_FOR_APP_SETTINGS, isChecked);
         return Settings.Secure.putIntForUser(mContext.getContentResolver(), FACE_APP_ENABLED,
                 isChecked ? ON : OFF, getUserId());
     }

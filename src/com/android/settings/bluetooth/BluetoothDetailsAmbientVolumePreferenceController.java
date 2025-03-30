@@ -20,6 +20,7 @@ import static com.android.settings.bluetooth.BluetoothDetailsHearingDeviceContro
 import static com.android.settings.bluetooth.BluetoothDetailsHearingDeviceController.ORDER_AMBIENT_VOLUME;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -133,11 +134,17 @@ public class BluetoothDetailsAmbientVolumePreferenceController extends Bluetooth
 
     @Override
     public boolean isAvailable() {
-        return mCachedDevice.isHearingDevice()
-                && mCachedDevice.getProfiles().stream().anyMatch(
-                        profile -> profile instanceof VolumeControlProfile)
-                && mAmbientUiController != null
-                && mAmbientUiController.isAmbientControlAvailable();
+        boolean isHearingDevice = mCachedDevice.isHearingDevice();
+        boolean supportVcp = mCachedDevice.getProfiles().stream().anyMatch(
+                profile -> profile instanceof VolumeControlProfile);
+        boolean hasAmbientControl =
+                mAmbientUiController != null && mAmbientUiController.isAmbientControlAvailable();
+        if (DEBUG) {
+            Log.v(TAG, "isAvailable, isHearingDevice=" + isHearingDevice
+                    + ", supportVcp=" + supportVcp
+                    + ", hasAmbientControl=" + hasAmbientControl);
+        }
+        return isHearingDevice && supportVcp && hasAmbientControl;
     }
 
     @Nullable

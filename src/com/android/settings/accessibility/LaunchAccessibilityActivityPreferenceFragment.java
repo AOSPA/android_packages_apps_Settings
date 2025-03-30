@@ -17,6 +17,8 @@
 package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilityStatsLogUtils.logAccessibilityServiceEnabled;
+import static com.android.settingslib.widget.ButtonPreference.SIZE_EXTRA_LARGE;
+import static com.android.settingslib.widget.ButtonPreference.TYPE_TONAL;
 
 import android.accessibilityservice.AccessibilityShortcutInfo;
 import android.app.ActivityOptions;
@@ -39,6 +41,8 @@ import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settingslib.widget.ButtonPreference;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -147,8 +151,14 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeature
     }
 
     private void initLaunchPreference() {
-        final Preference launchPreference = new Preference(getPrefContext());
-        launchPreference.setLayoutResource(R.layout.accessibility_launch_activity_preference);
+        final Preference launchPreference;
+        if (SettingsThemeHelper.isExpressiveTheme(getPrefContext())) {
+            launchPreference = new ButtonPreference(getPrefContext());
+            ((ButtonPreference) launchPreference).setButtonStyle(TYPE_TONAL, SIZE_EXTRA_LARGE);
+        } else {
+            launchPreference = new Preference(getPrefContext());
+            launchPreference.setLayoutResource(R.layout.accessibility_launch_activity_preference);
+        }
         launchPreference.setKey(KEY_LAUNCH_PREFERENCE);
 
         final AccessibilityShortcutInfo info = getAccessibilityShortcutInfo();

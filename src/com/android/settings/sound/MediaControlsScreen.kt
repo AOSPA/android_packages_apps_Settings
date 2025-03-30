@@ -17,21 +17,18 @@
 package com.android.settings.sound
 
 import android.content.Context
-
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.HandlerExecutor
-import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.KeyValueStore
-import com.android.settingslib.datastore.KeyedObservableDelegate
+import com.android.settingslib.datastore.KeyValueStoreDelegate
+import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSecureStore
-import com.android.settingslib.datastore.SettingsStore
 import com.android.settingslib.metadata.PreferenceChangeReason
-import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-
 import com.android.settingslib.preference.PreferenceScreenCreator
 
 // LINT.IfChange
@@ -83,17 +80,12 @@ class MediaControlsScreen(context: Context) :
         }
 
     @Suppress("UNCHECKED_CAST")
-    class MediaControlsStore(private val settingsStore: SettingsStore) :
-        KeyedObservableDelegate<String>(settingsStore), KeyValueStore {
-        override fun contains(key: String) = settingsStore.contains(key)
+    class MediaControlsStore(private val settingsStore: KeyValueStore) : KeyValueStoreDelegate {
+
+        override val keyValueStoreDelegate
+            get() = settingsStore
 
         override fun <T : Any> getDefaultValue(key: String, valueType: Class<T>) = true as T
-
-        override fun <T : Any> getValue(key: String, valueType: Class<T>) =
-            settingsStore.getValue(key, valueType) ?: getDefaultValue(key, valueType)
-
-        override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) =
-            settingsStore.setValue(key, valueType, value)
     }
 
     companion object {

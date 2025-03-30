@@ -18,22 +18,30 @@ package com.android.settings.network.ethernet
 
 import android.content.Context
 import android.content.ContextWrapper
+import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.mock
 
 @RunWith(AndroidJUnit4::class)
 class EthernetInterfaceDetailsControllerTest {
     private val ethernetInterfaceDetailsFragment = EthernetInterfaceDetailsFragment()
+    private val lifecycle = mock<Lifecycle>()
 
     private val context: Context =
         object : ContextWrapper(ApplicationProvider.getApplicationContext()) {}
 
     private val ethernetInterfaceDetailsController =
-        EthernetInterfaceDetailsController(context, ethernetInterfaceDetailsFragment, "eth0")
+        EthernetInterfaceDetailsController(
+            context,
+            ethernetInterfaceDetailsFragment,
+            "eth0",
+            lifecycle,
+        )
 
     @Test
     fun isAvailable_ShouldReturnTrue() {

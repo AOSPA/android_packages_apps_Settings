@@ -36,9 +36,8 @@ import com.android.settings.network.SatelliteRepository.Companion.isSatelliteOn
 import com.android.settings.restriction.PreferenceRestrictionMixin
 import com.android.settingslib.RestrictedSwitchPreference
 import com.android.settingslib.datastore.KeyValueStore
-import com.android.settingslib.datastore.KeyedObservableDelegate
+import com.android.settingslib.datastore.KeyValueStoreDelegate
 import com.android.settingslib.datastore.SettingsGlobalStore
-import com.android.settingslib.datastore.SettingsStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -93,16 +92,14 @@ class AirplaneModePreference :
     @Suppress("UNCHECKED_CAST")
     private class AirplaneModeStorage(
         private val context: Context,
-        private val settingsStore: SettingsStore = SettingsGlobalStore.get(context),
-    ) : KeyedObservableDelegate<String>(settingsStore), KeyValueStore {
+        private val settingsStore: KeyValueStore = SettingsGlobalStore.get(context),
+    ) : KeyValueStoreDelegate {
 
-        override fun contains(key: String) = settingsStore.contains(KEY)
+        override val keyValueStoreDelegate
+            get() = settingsStore
 
         override fun <T : Any> getDefaultValue(key: String, valueType: Class<T>) =
             DEFAULT_VALUE as T
-
-        override fun <T : Any> getValue(key: String, valueType: Class<T>): T =
-            (settingsStore.getBoolean(key) ?: DEFAULT_VALUE) as T
 
         override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
             settingsStore.setValue(key, valueType, value)

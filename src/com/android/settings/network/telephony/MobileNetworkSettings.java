@@ -81,6 +81,8 @@ import com.android.settings.network.telephony.cdma.CdmaSystemSelectPreferenceCon
 import com.android.settings.network.telephony.gsm.AutoSelectPreferenceController;
 import com.android.settings.network.telephony.gsm.OpenNetworkSelectPagePreferenceController;
 import com.android.settings.network.telephony.gsm.SelectNetworkPreferenceController;
+import com.android.settings.network.telephony.satellite.SatelliteSettingPreferenceController;
+import com.android.settings.network.telephony.satellite.SatelliteSettingsPreferenceCategoryController;
 import com.android.settings.network.telephony.wificalling.CrossSimCallingViewModel;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.wifi.WifiPickerTrackerHelper;

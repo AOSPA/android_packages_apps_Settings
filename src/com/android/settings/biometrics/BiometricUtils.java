@@ -17,6 +17,8 @@
 package com.android.settings.biometrics;
 
 
+import static com.android.settings.biometrics.BiometricEnrollActivity.EXTRA_SKIP_INTRO;
+
 import android.annotation.IntDef;
 import android.app.Activity;
 import android.app.PendingIntent;
@@ -45,8 +47,7 @@ import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.biometrics.face.FaceEnroll;
 import com.android.settings.biometrics.fingerprint.FingerprintEnroll;
-import com.android.settings.biometrics.fingerprint.FingerprintEnrollFindSensor;
-import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollFindSensor;
+import com.android.settings.biometrics.fingerprint.FingerprintEnrollActivityClassProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
@@ -252,8 +253,12 @@ public class BiometricUtils {
     public static Intent getFingerprintFindSensorIntent(@NonNull Context context,
             @NonNull Intent activityIntent) {
         final boolean isSuw =  WizardManagerHelper.isAnySetupWizard(activityIntent);
+        FingerprintEnrollActivityClassProvider clsProvider = FeatureFactory
+                .getFeatureFactory().getFingerprintFeatureProvider()
+                .getEnrollActivityClassProvider(context);
         final Intent intent = new Intent(context, isSuw
-                ? SetupFingerprintEnrollFindSensor.class : FingerprintEnrollFindSensor.class);
+                ? clsProvider.getSetupSkipIntro() : clsProvider.getSkipIntro());
+        intent.putExtra(EXTRA_SKIP_INTRO, true);
         if (isSuw) {
             SetupWizardUtils.copySetupExtras(activityIntent, intent);
         }

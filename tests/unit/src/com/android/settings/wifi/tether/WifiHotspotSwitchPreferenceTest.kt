@@ -30,7 +30,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mockito.verify
-import org.mockito.kotlin.anyVararg
+import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
@@ -77,7 +77,7 @@ class WifiHotspotSwitchPreferenceTest {
     fun setValue_valueOn_startTethering() {
         preference.storage(context).setBoolean(WifiHotspotSwitchPreference.KEY, true)
 
-        verify(mockTetheringManager).startTethering(eq(TETHERING_WIFI), anyVararg(), anyVararg())
+        verify(mockTetheringManager).startTethering(eq(TETHERING_WIFI), any(), any())
     }
 
     @Test

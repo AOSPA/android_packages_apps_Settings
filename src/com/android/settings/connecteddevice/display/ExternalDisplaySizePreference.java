@@ -81,9 +81,11 @@ public class ExternalDisplaySizePreference extends AccessibilitySeekBarPreferenc
             implements SeekBar.OnSeekBarChangeListener {
         private static final long MIN_COMMIT_INTERVAL_MS = 800;
         private static final long CHANGE_BY_BUTTON_DELAY_MS = 300;
+        private static final long CHANGE_BY_SEEKBAR_DELAY_MS = 100;
         private final DisplaySizeData mDisplaySizeData;
         private int mLastDisplayProgress;
         private long mLastCommitTime;
+        private boolean mSeekByTouch;
         ExternalDisplaySizePreferenceStateHandler(DisplaySizeData displaySizeData) {
             mDisplaySizeData = displaySizeData;
         }
@@ -99,8 +101,7 @@ public class ExternalDisplaySizePreference extends AccessibilitySeekBarPreferenc
             mLastCommitTime = SystemClock.elapsedRealtime();
         }
 
-        private void postCommitDelayed() {
-            var commitDelayMs = CHANGE_BY_BUTTON_DELAY_MS;
+        private void postCommitDelayed(long commitDelayMs) {
             if (SystemClock.elapsedRealtime() - mLastCommitTime < MIN_COMMIT_INTERVAL_MS) {
                 commitDelayMs += MIN_COMMIT_INTERVAL_MS;
             }
@@ -112,13 +113,18 @@ public class ExternalDisplaySizePreference extends AccessibilitySeekBarPreferenc
 
         @Override
         public void onProgressChanged(@NonNull SeekBar seekBar, int i, boolean b) {
-            postCommitDelayed();
+            if (!mSeekByTouch) postCommitDelayed(CHANGE_BY_BUTTON_DELAY_MS);
         }
 
         @Override
-        public void onStartTrackingTouch(@NonNull SeekBar seekBar) {}
+        public void onStartTrackingTouch(@NonNull SeekBar seekBar) {
+            mSeekByTouch = true;
+        }
 
         @Override
-        public void onStopTrackingTouch(@NonNull SeekBar seekBar) {}
+        public void onStopTrackingTouch(@NonNull SeekBar seekBar) {
+            mSeekByTouch = false;
+            postCommitDelayed(CHANGE_BY_SEEKBAR_DELAY_MS);
+        }
     }
 }

@@ -103,7 +103,7 @@ public class AudioSharingDisconnectDialogFragment extends InstrumentedDialogFrag
             return false;
         }
         Lifecycle.State currentState = host.getLifecycle().getCurrentState();
-        if (!currentState.isAtLeast(Lifecycle.State.STARTED)) {
+        if (!currentState.isAtLeast(Lifecycle.State.CREATED)) {
             Log.d(TAG, "Fail to show dialog with state: " + currentState);
             return false;
         }

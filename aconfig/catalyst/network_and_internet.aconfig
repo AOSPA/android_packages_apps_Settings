@@ -30,6 +30,13 @@ flag {
 }
 
 flag {
+  name: "catalyst_tether_settings_25q3"
+  namespace: "android_settings"
+  description: "Flag for widgets inside Hotspot & tethering for 25q3 release"
+  bug: "352179685"
+}
+
+flag {
   name: "catalyst_adaptive_connectivity"
   namespace: "android_settings"
   description: "Flag for Adaptive connectivity"

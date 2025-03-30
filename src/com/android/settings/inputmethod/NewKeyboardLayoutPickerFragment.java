@@ -31,6 +31,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
@@ -48,10 +49,10 @@ public class NewKeyboardLayoutPickerFragment extends Fragment {
             mKeyboardLayoutSelectedCallback =
             new NewKeyboardLayoutPickerController.KeyboardLayoutSelectedCallback() {
                 @Override
-                public void onSelected(KeyboardLayout keyboardLayout) {
+                public void onSelected(@Nullable KeyboardLayout keyboardLayout) {
                     if (mInputManager != null
                             && mKeyboardLayoutPreview != null
-                            && mKeyboardLayoutPreviewText != null && keyboardLayout != null) {
+                            && mKeyboardLayoutPreviewText != null) {
                         Drawable previewDrawable = mInputManager.getKeyboardLayoutPreview(
                                 keyboardLayout,
                                 DEFAULT_KEYBOARD_PREVIEW_WIDTH, DEFAULT_KEYBOARD_PREVIEW_HEIGHT);
@@ -60,9 +61,12 @@ public class NewKeyboardLayoutPickerFragment extends Fragment {
                         mKeyboardLayoutPreviewText.setVisibility(
                                 previewDrawable == null ? GONE : VISIBLE);
                         if (previewDrawable != null) {
-                            mKeyboardLayoutPreviewText.setText(keyboardLayout.getLabel());
                             mKeyboardLayoutPreview.setImageDrawable(previewDrawable);
                         }
+                        mKeyboardLayoutPreviewText.setText(
+                                keyboardLayout != null ? keyboardLayout.getLabel()
+                                        : requireContext().getString(
+                                                R.string.keyboard_default_layout));
                     }
                 }
             };

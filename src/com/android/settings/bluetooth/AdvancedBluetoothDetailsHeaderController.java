@@ -476,6 +476,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
             Supplier<Integer> preloadedLowBatteryLevel,
             Supplier<Boolean> preloadedIsUntethered,
             Supplier<Integer> preloadedNativeBatteryLevel) {
+        linearLayout.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
         final BluetoothDevice bluetoothDevice = mCachedDevice.getDevice();
         final String iconUri = preloadedIconUri.get();
         final ImageView imageView = linearLayout.findViewById(R.id.header_icon);
@@ -685,6 +686,9 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
     private void updateDisconnectLayout() {
         mLayoutPreference.findViewById(R.id.layout_left).setVisibility(View.GONE);
         mLayoutPreference.findViewById(R.id.layout_right).setVisibility(View.GONE);
+        mLayoutPreference
+                .findViewById(R.id.layout_middle)
+                .setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
 
         // Hide title, battery icon and battery summary
         final LinearLayout linearLayout = mLayoutPreference.findViewById(R.id.layout_middle);

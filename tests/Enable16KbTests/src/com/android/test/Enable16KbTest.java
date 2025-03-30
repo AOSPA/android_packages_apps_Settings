@@ -115,9 +115,9 @@ public class Enable16KbTest extends BaseHostJUnit4Test {
 
     private void prepareDevice() throws Exception {
         // Verify that device is online before running test and enable root
-        getDevice().waitForDeviceOnline(DEVICE_WAIT_TIMEOUT);
+        getDevice().waitForDeviceAvailable(DEVICE_WAIT_TIMEOUT);
         getDevice().enableAdbRoot();
-        getDevice().waitForDeviceOnline(DEVICE_WAIT_TIMEOUT);
+        getDevice().waitForDeviceAvailable(DEVICE_WAIT_TIMEOUT);
 
         getDevice().executeShellCommand("input keyevent KEYCODE_WAKEUP");
         getDevice().executeShellCommand("wm dismiss-keyguard");

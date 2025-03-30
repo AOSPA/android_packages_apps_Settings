@@ -122,20 +122,38 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginTop="8dp"
                         android:visibility="gone"/>
-                    <SeekBar
-                        android:id="@+id/input_setting_keys_value_custom_slider"
-                        android:paddingStart="8dp"
-                        android:paddingEnd="36dp"
-                        android:min="1"
-                        android:max="50"
-                        android:progressBackgroundTint="@color/input_dialog_slider_progress_background"
-                        android:progressTint="@color/input_dialog_slider_progress"
-                        android:thumbTint="@color/input_dialog_slider_progress"
+                    <LinearLayout
+                        android:id="@+id/input_setting_keys_custom_seekbar_layout"
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginTop="8dp"
-                        android:visibility="gone"/>
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingEnd="36dp">
+                        <ImageView
+                            android:layout_marginTop="8dp"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:tint="@androidprv:color/materialColorPrimary"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/ic_remove_24dp" />
+                        <SeekBar
+                            android:id="@+id/input_setting_keys_value_custom_slider"
+                            style="@android:style/Widget.Material.SeekBar"
+                            android:min="1"
+                            android:max="50"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="8dp" />
+                        <ImageView
+                            android:layout_marginTop="8dp"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:tint="@androidprv:color/materialColorPrimary"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/ic_add_24dp" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </RadioGroup>

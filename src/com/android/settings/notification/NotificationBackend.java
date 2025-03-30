@@ -751,6 +751,19 @@ public class NotificationBackend {
         return false;
     }
 
+    public Set<Integer> getAllowedBundleTypes() {
+        try {
+            Set<Integer> allowed = new HashSet<>();
+            for (int type : sINM.getAllowedAdjustmentKeyTypes()) {
+                allowed.add(type);
+            }
+            return allowed;
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return new HashSet<>();
+        }
+    }
+
     public void setBundleTypeState(@Adjustment.Types int type, boolean enabled) {
         try {
             sINM.setAssistantAdjustmentKeyTypeState(type, enabled);

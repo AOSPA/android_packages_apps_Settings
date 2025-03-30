@@ -17,6 +17,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
@@ -26,10 +27,21 @@
     android:clickable="false"
     android:orientation="horizontal">
 
-    <include
-        layout="@layout/settingslib_icon_frame"
+    <LinearLayout
+        android:id="@+id/icon_frame"
         android:layout_width="48dp"
-        android:layout_height="48dp"/>
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:layout_marginEnd="@dimen/settingslib_expressive_space_extrasmall6"
+        android:filterTouchesWhenObscured="false">
+        <androidx.preference.internal.PreferenceImageView
+            android:id="@android:id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:maxWidth="48dp"
+            app:maxHeight="48dp" />
+    </LinearLayout>
 
     <TextView
         android:id="@android:id/title"
@@ -48,6 +60,7 @@
         android:padding="10dp"
         android:contentDescription="@null"
         android:tint="@androidprv:color/materialColorOnPrimaryContainer"
-        android:src="@drawable/ic_keyboard_arrow_down"/>
+        android:src="@drawable/ic_keyboard_arrow_down"
+        android:background="@drawable/ambient_expand_icon_background"/>
 
 </LinearLayout>

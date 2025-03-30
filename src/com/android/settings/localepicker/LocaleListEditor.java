@@ -529,7 +529,11 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
             @Nullable Locale defaultLocaleBeforeRemoval) {
         Locale currentSystemLocale = LocalePicker.getLocales().get(0);
         if (!localeInfo.getLocale().equals(currentSystemLocale)) {
-            displayDialogFragment(localeInfo, true);
+            if (Locale.getDefault().equals(localeInfo.getLocale())) {
+                mAdapter.doTheUpdate();
+            } else {
+                displayDialogFragment(localeInfo, true);
+            }
         } else {
             if (!localeInfo.isTranslated()) {
                 if (defaultLocaleBeforeRemoval == null) {

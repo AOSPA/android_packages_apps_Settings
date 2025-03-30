@@ -515,9 +515,10 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
         mAudioManager.setMode(audioMode);
         mBluetoothDeviceUpdater =
                 spy(new AvailableMediaBluetoothDeviceUpdater(
-                                mContext, mDevicePreferenceCallback, /* metricsCategory= */ 0));
+                        mContext, mDevicePreferenceCallback, /* metricsCategory= */ 0));
         mBluetoothDeviceUpdater.setPrefContext(mContext);
         doNothing().when(mBluetoothDeviceUpdater).addPreference(any());
-        doNothing().when(mBluetoothDeviceUpdater).removePreference(any());
+        doNothing().when(mBluetoothDeviceUpdater).removePreference(
+                any(CachedBluetoothDevice.class));
     }
 }

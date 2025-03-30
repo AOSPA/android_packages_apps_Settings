@@ -25,7 +25,7 @@ import com.android.settings.R
 import com.android.settings.contract.KEY_VIBRATION_HAPTICS
 import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settingslib.datastore.KeyValueStore
-import com.android.settingslib.datastore.KeyedObservableDelegate
+import com.android.settingslib.datastore.KeyValueStoreDelegate
 import com.android.settingslib.datastore.SettingsSystemStore
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -96,17 +96,12 @@ class VibrationMainSwitchPreference :
 class VibrationMainSwitchStore(
     context: Context,
     private val settingsStore: KeyValueStore = SettingsSystemStore.get(context),
-) : KeyedObservableDelegate<String>(settingsStore), KeyValueStore {
+) : KeyValueStoreDelegate {
 
-    override fun contains(key: String) = settingsStore.contains(key)
+    override val keyValueStoreDelegate
+        get() = settingsStore
 
     override fun <T : Any> getDefaultValue(key: String, valueType: Class<T>) = DEFAULT_VALUE as T
-
-    override fun <T : Any> getValue(key: String, valueType: Class<T>) =
-        settingsStore.getValue(key, valueType) ?: getDefaultValue(key, valueType)
-
-    override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) =
-        settingsStore.setValue(key, valueType, value)
 
     companion object {
         private const val DEFAULT_VALUE = true

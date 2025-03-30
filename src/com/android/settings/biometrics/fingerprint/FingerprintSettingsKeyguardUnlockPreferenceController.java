@@ -53,7 +53,7 @@ public class FingerprintSettingsKeyguardUnlockPreferenceController
     @Override
     public boolean setChecked(boolean isChecked) {
         mMetricsFeatureProvider.action(mContext,
-                SettingsEnums.ACTION_FINGERPRINT_ENABLED_ON_KEYGUARD, isChecked);
+                SettingsEnums.ACTION_FINGERPRINTS_ENABLED_ON_KEYGUARD_SETTINGS, isChecked);
         return Settings.Secure.putIntForUser(mContext.getContentResolver(),
                 FINGERPRINT_KEYGUARD_ENABLED, isChecked ? ON : OFF, getUserId());
     }

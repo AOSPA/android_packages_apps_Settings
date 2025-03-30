@@ -16,19 +16,16 @@
 
 package com.android.settings.wifi.utils
 
-import android.util.Log
+import android.content.DialogInterface
 import androidx.appcompat.app.AlertDialog
 
 class WifiDialogHelper(
     alertDialog: AlertDialog,
-    private val ssidInputGroup: TextInputGroup? = null,
-) : AlertDialogHelper(alertDialog) {
+    onClickListener: DialogInterface.OnClickListener?,
+    private val validator: TextInputValidator,
+) : AlertDialogHelper(alertDialog, onClickListener) {
 
-    override fun canDismiss(): Boolean {
-        val isValid = ssidInputGroup?.validate() ?: true
-        if (!isValid) Log.w(TAG, "SSID is invalid!")
-        return isValid
-    }
+    override fun canDismiss(): Boolean = validator.validate()
 
     companion object {
         const val TAG = "WifiDialogHelper"

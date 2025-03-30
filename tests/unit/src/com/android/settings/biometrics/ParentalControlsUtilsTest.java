@@ -27,13 +27,12 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.app.admin.DevicePolicyManager;
 import android.app.supervision.SupervisionManager;
 import android.content.ComponentName;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.hardware.biometrics.BiometricAuthenticator;
 import android.os.UserHandle;
@@ -44,6 +43,7 @@ import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 
 import androidx.annotation.Nullable;
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settingslib.RestrictedLockUtils;
@@ -53,22 +53,29 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 
 @RunWith(AndroidJUnit4.class)
 public class ParentalControlsUtilsTest {
-    @Rule public final CheckFlagsRule checkFlags = DeviceFlagsValueProvider.createCheckFlagsRule();
+    @Rule
+    public final CheckFlagsRule checkFlags = DeviceFlagsValueProvider.createCheckFlagsRule();
+    @Rule
+    public final MockitoRule mocks = MockitoJUnit.rule();
 
-    @Mock private Context mContext;
-    @Mock private DevicePolicyManager mDpm;
-    @Mock private SupervisionManager mSm;
+    private Context mContext;
+    @Mock
+    private DevicePolicyManager mDpm;
+    @Mock
+    private SupervisionManager mSm;
 
-    private ComponentName mSupervisionComponentName = new ComponentName("pkg", "cls");
+    private final ComponentName mSupervisionComponent = new ComponentName("pkg", "cls");
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        when(mContext.getContentResolver()).thenReturn(mock(ContentResolver.class));
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        when(mContext.getSystemService(DevicePolicyManager.class)).thenReturn(mDpm);
+        when(mContext.getSystemService(SupervisionManager.class)).thenReturn(mSm);
     }
 
     /**
@@ -85,7 +92,7 @@ public class ParentalControlsUtilsTest {
                 .thenReturn(keyguardDisabledFlags);
 
         return ParentalControlsUtils.parentConsentRequiredInternal(
-                mDpm, mSm, modality, new UserHandle(UserHandle.myUserId()));
+                mContext, modality, new UserHandle(UserHandle.myUserId()));
     }
 
     /**
@@ -97,11 +104,13 @@ public class ParentalControlsUtilsTest {
             boolean supervisionEnabled,
             @BiometricAuthenticator.Modality int modality,
             int keyguardDisabledFlags) {
-        when(mSm.isSupervisionEnabledForUser(anyInt())).thenReturn(supervisionEnabled);
         when(mDpm.getKeyguardDisabledFeatures(eq(null))).thenReturn(keyguardDisabledFlags);
+        when(mSm.isSupervisionEnabledForUser(anyInt())).thenReturn(supervisionEnabled);
+        when(mSm.getActiveSupervisionAppPackage()).thenReturn(
+                supervisionEnabled ? mSupervisionComponent.getPackageName() : null);
 
         return ParentalControlsUtils.parentConsentRequiredInternal(
-                mDpm, mSm, modality, new UserHandle(UserHandle.myUserId()));
+                mContext, modality, new UserHandle(UserHandle.myUserId()));
     }
 
     @Test
@@ -115,11 +124,11 @@ public class ParentalControlsUtilsTest {
 
         for (int i = 0; i < tests.length; i++) {
             RestrictedLockUtils.EnforcedAdmin admin = getEnforcedAdminForCombination(
-                    mSupervisionComponentName, tests[i][0] /* modality */,
+                    mSupervisionComponent, tests[i][0] /* modality */,
                     tests[i][1] /* keyguardDisableFlags */);
             assertNotNull(admin);
             assertEquals(UserManager.DISALLOW_BIOMETRIC, admin.enforcedRestriction);
-            assertEquals(mSupervisionComponentName, admin.component);
+            assertEquals(mSupervisionComponent, admin.component);
         }
     }
 

@@ -36,6 +36,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.UserHandle;
@@ -52,6 +53,7 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.biometrics.BiometricEnrollActivity;
 import com.android.settings.biometrics.fingerprint.FingerprintSettings;
 import com.android.settings.flags.Flags;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -87,6 +89,7 @@ public class FingerprintSafetySourceTest {
     @Mock private PackageManager mPackageManager;
     @Mock private DevicePolicyManager mDevicePolicyManager;
     @Mock private FingerprintManager mFingerprintManager;
+    @Mock private FaceManager mFaceManager;
     @Mock private LockPatternUtils mLockPatternUtils;
     @Mock private SafetyCenterManagerWrapper mSafetyCenterManagerWrapper;
     @Mock private SupervisionManager mSupervisionManager;
@@ -100,6 +103,7 @@ public class FingerprintSafetySourceTest {
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FACE)).thenReturn(true);
         when(mApplicationContext.getSystemService(Context.FINGERPRINT_SERVICE))
                 .thenReturn(mFingerprintManager);
+        when(mApplicationContext.getSystemService(Context.FACE_SERVICE)).thenReturn(mFaceManager);
         when(mApplicationContext.getSystemService(Context.DEVICE_POLICY_SERVICE))
                 .thenReturn(mDevicePolicyManager);
         when(mApplicationContext.getSystemService(Context.SUPERVISION_SERVICE))
@@ -203,7 +207,7 @@ public class FingerprintSafetySourceTest {
 
         assertSafetySourceDisabledDataSetWithSingularSummary(
                 "security_settings_fingerprint",
-                "security_settings_fingerprint_preference_summary_none");
+                "security_settings_fingerprint_preference_summary_none_new");
     }
 
     @Test
@@ -211,6 +215,7 @@ public class FingerprintSafetySourceTest {
     @EnableFlags(android.app.supervision.flags.Flags.FLAG_DEPRECATE_DPM_SUPERVISION_APIS)
     public void setSafetySourceData_withFingerprintNotEnrolled_whenSupervisionIsOn_setsData() {
         when(mSupervisionManager.isSupervisionEnabledForUser(USER_ID)).thenReturn(true);
+        when(mSupervisionManager.getActiveSupervisionAppPackage()).thenReturn("supervision.pkg");
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mFingerprintManager.hasEnrolledFingerprints(anyInt())).thenReturn(false);
@@ -222,15 +227,17 @@ public class FingerprintSafetySourceTest {
 
         assertSafetySourceDisabledDataSetWithSingularSummary(
                 "security_settings_fingerprint",
-                "security_settings_fingerprint_preference_summary_none");
+                "security_settings_fingerprint_preference_summary_none_new");
     }
 
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
-    public void setSafetySourceData_withFingerprintNotEnrolled_whenNotDisabledByAdmin_setsData() {
+    public void setSafetySourceData_onlyFingerprintNotEnrolled_whenNotDisabledByAdmin_setsData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mFingerprintManager.hasEnrolledFingerprints(anyInt())).thenReturn(false);
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+        when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(true);
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME)).thenReturn(0);
 
         FingerprintSafetySource.setSafetySourceData(
@@ -238,8 +245,27 @@ public class FingerprintSafetySourceTest {
 
         assertSafetySourceEnabledDataSetWithSingularSummary(
                 "security_settings_fingerprint",
-                "security_settings_fingerprint_preference_summary_none",
+                "security_settings_fingerprint_preference_summary_none_new",
                 FingerprintSettings.class.getName());
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
+    public void setSafetySourceData_noBiometricEnrolled_whenNotDisabledByAdmin_setsData() {
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mFingerprintManager.hasEnrolledFingerprints(anyInt())).thenReturn(false);
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+        when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(false);
+        when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME)).thenReturn(0);
+
+        FingerprintSafetySource.setSafetySourceData(
+                mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
+
+        assertSafetySourceEnabledDataSetWithSingularSummary(
+                "security_settings_fingerprint",
+                "security_settings_fingerprint_preference_summary_none_new",
+                BiometricEnrollActivity.InternalActivity.class.getName());
     }
 
     @Test
@@ -272,6 +298,7 @@ public class FingerprintSafetySourceTest {
     public void setSafetySourceData_withFingerprintsEnrolled_whenSupervisionIsOn_setsData() {
         int enrolledFingerprintsCount = 2;
         when(mSupervisionManager.isSupervisionEnabledForUser(USER_ID)).thenReturn(true);
+        when(mSupervisionManager.getActiveSupervisionAppPackage()).thenReturn("supervision.pkg");
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mFingerprintManager.hasEnrolledFingerprints(anyInt())).thenReturn(true);

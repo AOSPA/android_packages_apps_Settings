@@ -154,7 +154,7 @@ import com.android.settings.network.apn.ApnSettings;
 import com.android.settings.network.telephony.CellularSecuritySettingsFragment;
 import com.android.settings.network.telephony.MobileNetworkSettings;
 import com.android.settings.network.telephony.NetworkSelectSettings;
-import com.android.settings.network.telephony.SatelliteSetting;
+import com.android.settings.network.telephony.satellite.SatelliteSetting;
 import com.android.settings.network.tether.TetherSettings;
 import com.android.settings.nfc.PaymentSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;

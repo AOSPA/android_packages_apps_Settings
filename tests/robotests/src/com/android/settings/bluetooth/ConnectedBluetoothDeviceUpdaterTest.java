@@ -429,6 +429,7 @@ public class ConnectedBluetoothDeviceUpdaterTest {
                 mDevicePreferenceCallback, /* metricsCategory= */ 0));
         mBluetoothDeviceUpdater.setPrefContext(mContext);
         doNothing().when(mBluetoothDeviceUpdater).addPreference(any());
-        doNothing().when(mBluetoothDeviceUpdater).removePreference(any());
+        doNothing().when(mBluetoothDeviceUpdater).removePreference(
+                any(CachedBluetoothDevice.class));
     }
 }

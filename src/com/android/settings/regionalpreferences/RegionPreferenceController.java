@@ -17,7 +17,6 @@
 package com.android.settings.regionalpreferences;
 
 import android.content.Context;
-import android.os.LocaleList;
 
 import androidx.annotation.NonNull;
 import androidx.preference.Preference;
@@ -26,6 +25,8 @@ import androidx.preference.PreferenceScreen;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.flags.Flags;
+
+import java.util.Locale;
 
 /** A controller for the entry of region picker page */
 public class RegionPreferenceController extends BasePreferenceController {
@@ -39,7 +40,7 @@ public class RegionPreferenceController extends BasePreferenceController {
         super.displayPreference(screen);
         Preference preference = screen.findPreference(getPreferenceKey());
         LocaleStore.LocaleInfo localeInfo = LocaleStore.getLocaleInfo(
-                LocaleList.getDefault().get(0));
+                Locale.getDefault());
         preference.setSummary(localeInfo.getFullCountryNameNative());
     }
 

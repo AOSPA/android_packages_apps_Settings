@@ -40,6 +40,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
+import com.android.settingslib.flags.Flags;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.LayoutPreference;
 
@@ -88,8 +89,10 @@ public class AudioStreamHeaderController extends BasePreferenceController
                     var localSourceState = getLocalSourceState(state);
                     if (localSourceState == STREAMING) {
                         updateSummary();
-                        mAudioStreamsHelper.startMediaService(
-                                mContext, mBroadcastId, mBroadcastName);
+                        if (!Flags.audioStreamMediaServiceByReceiveState()) {
+                            mAudioStreamsHelper.startMediaService(
+                                    mContext, mBroadcastId, mBroadcastName);
+                        }
                     } else if (mHysteresisModeFixAvailable && localSourceState == PAUSED) {
                         // if source paused, only update the summary
                         updateSummary();

@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodSubtype;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -58,7 +59,7 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
     private PreferenceScreen mScreen;
     private String mPreviousSelection;
     private String mFinalSelectedLayoutDescriptor;
-    private String mSelectedLayoutDescriptor;
+    @Nullable private String mSelectedLayoutDescriptor;
     private MetricsFeatureProvider mMetricsFeatureProvider;
     private KeyboardLayoutSelectedCallback mKeyboardLayoutSelectedCallback;
 
@@ -186,7 +187,8 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
             pref = new TickButtonPreference(mScreen.getContext());
             pref.setTitle(layout.getLabel());
 
-            if (mSelectedLayoutDescriptor.equals(layout.getDescriptor())) {
+            if (mSelectedLayoutDescriptor != null && mSelectedLayoutDescriptor.equals(
+                    layout.getDescriptor())) {
                 if (mKeyboardLayoutSelectedCallback != null) {
                     mKeyboardLayoutSelectedCallback.onSelected(layout);
                 }
@@ -196,6 +198,12 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
             pref.setKey(layout.getDescriptor());
             mScreen.addPreference(pref);
             mPreferenceMap.put(pref, layout);
+        }
+
+        if (mSelectedLayoutDescriptor == null && mKeyboardLayoutSelectedCallback != null) {
+            // Pass null here since getKeyboardLayoutPreview() accept null layout, which will
+            // return default preview image
+            mKeyboardLayoutSelectedCallback.onSelected(null);
         }
     }
 
@@ -233,6 +241,6 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
         /**
          * Called when KeyboardLayout been selected.
          */
-        void onSelected(KeyboardLayout keyboardLayout);
+        void onSelected(@Nullable KeyboardLayout keyboardLayout);
     }
 }

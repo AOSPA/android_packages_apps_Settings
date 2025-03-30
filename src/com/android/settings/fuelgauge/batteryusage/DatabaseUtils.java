@@ -45,6 +45,7 @@ import com.android.settings.fuelgauge.BatteryUsageHistoricalLogEntry.Action;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batteryusage.bugreport.BatteryUsageLogUtils;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.fuelgauge.BatteryStatus;
 
 import java.io.PrintWriter;
@@ -67,7 +68,6 @@ public final class DatabaseUtils {
     private static final String SHARED_PREFS_FILE = "battery_usage_shared_prefs";
     private static final long INVALID_TIMESTAMP = 0L;
 
-    static final int DATA_RETENTION_INTERVAL_DAY = 9;
     static final String KEY_LAST_LOAD_FULL_CHARGE_TIME = "last_load_full_charge_time";
     static final String KEY_LAST_UPLOAD_FULL_CHARGE_TIME = "last_upload_full_charge_time";
     static final String KEY_LAST_USAGE_SOURCE = "last_usage_source";
@@ -468,11 +468,14 @@ public final class DatabaseUtils {
         AsyncTask.execute(
                 () -> {
                     try {
+                        final int dataRetentionDays =
+                                FeatureFactory.getFeatureFactory()
+                                        .getPowerUsageFeatureProvider().getDataRetentionDays();
                         final BatteryStateDatabase database =
                                 BatteryStateDatabase.getInstance(context.getApplicationContext());
                         final long earliestTimestamp =
                                 Clock.systemUTC().millis()
-                                        - Duration.ofDays(DATA_RETENTION_INTERVAL_DAY).toMillis();
+                                        - Duration.ofDays(dataRetentionDays).toMillis();
                         database.appUsageEventDao().clearAllBefore(earliestTimestamp);
                         database.batteryEventDao().clearAllBefore(earliestTimestamp);
                         database.batteryStateDao().clearAllBefore(earliestTimestamp);

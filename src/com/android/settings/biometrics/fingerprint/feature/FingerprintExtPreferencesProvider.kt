@@ -27,14 +27,13 @@ import com.android.settingslib.RestrictedPreference
  *
  * @see com.android.settings.biometrics.fingerprint.FingerprintSettings
  */
-open class FingerprintExtPreferencesProvider {
+open class FingerprintExtPreferencesProvider(protected val context: Context) {
 
     open val size: Int = 0
 
     open fun newPreference(
         index: Int,
         inflater: PreferenceInflater,
-        context: Context
     ): RestrictedPreference? = null
 
     interface PreferenceInflater {

@@ -39,6 +39,7 @@ import androidx.preference.PreferenceViewHolder;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.AmbientVolumeUi;
+import com.android.settingslib.widget.SettingsThemeHelper;
 import com.android.settingslib.widget.SliderPreference;
 
 import com.google.common.collect.BiMap;
@@ -68,6 +69,8 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
     @Nullable
     private View mExpandIcon;
     @Nullable
+    private View mVolumeIconFrame;
+    @Nullable
     private ImageView mVolumeIcon;
     private boolean mExpandable = true;
     private boolean mExpanded = false;
@@ -95,7 +98,10 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
 
     public AmbientVolumePreference(@NonNull Context context) {
         super(context, null);
-        setLayoutResource(R.layout.preference_ambient_volume);
+        int resId = SettingsThemeHelper.isExpressiveTheme(context)
+                ? R.layout.preference_ambient_volume_expressive
+                : R.layout.preference_ambient_volume;
+        setLayoutResource(resId);
         setIcon(com.android.settingslib.R.drawable.ic_ambient_volume);
         setTitle(R.string.bluetooth_ambient_volume_control);
         setSelectable(false);
@@ -110,8 +116,12 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
         mVolumeIcon = holder.itemView.requireViewById(com.android.internal.R.id.icon);
         mVolumeIcon.getDrawable().mutate().setTint(getContext().getColor(
                 com.android.internal.R.color.materialColorOnPrimaryContainer));
-        final View iconView = holder.itemView.requireViewById(R.id.icon_frame);
-        iconView.setOnClickListener(v -> {
+        mVolumeIconFrame = holder.itemView.requireViewById(R.id.icon_frame);
+        int volumeIconBackgroundResId = SettingsThemeHelper.isExpressiveTheme(getContext())
+                ? R.drawable.ambient_icon_background_expressive
+                : R.drawable.ambient_icon_background;
+        mVolumeIconFrame.setBackgroundResource(volumeIconBackgroundResId);
+        mVolumeIconFrame.setOnClickListener(v -> {
             if (!mMutable) {
                 return;
             }
@@ -313,7 +323,7 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
     }
 
     private void updateVolumeIcon() {
-        if (mVolumeIcon == null) {
+        if (mVolumeIcon == null || mVolumeIconFrame == null) {
             return;
         }
         mVolumeIcon.setImageLevel(mMuted ? 0 : mVolumeLevel);
@@ -321,10 +331,10 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
             final int stringRes = mMuted ? R.string.bluetooth_ambient_volume_unmute
                     : R.string.bluetooth_ambient_volume_mute;
             mVolumeIcon.setContentDescription(getContext().getString(stringRes));
-            mVolumeIcon.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES);
+            mVolumeIconFrame.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES);
         }  else {
             mVolumeIcon.setContentDescription(null);
-            mVolumeIcon.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
+            mVolumeIconFrame.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
         }
     }
 

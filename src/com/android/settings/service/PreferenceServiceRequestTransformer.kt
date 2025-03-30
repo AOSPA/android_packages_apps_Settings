@@ -38,6 +38,7 @@ import com.android.settingslib.graph.proto.PreferenceGraphProto
 import com.android.settingslib.graph.proto.PreferenceOrGroupProto
 import com.android.settingslib.graph.proto.PreferenceProto
 import com.android.settingslib.graph.proto.PreferenceValueProto
+import com.android.settingslib.graph.toBundle
 import com.android.settingslib.graph.toIntent
 import com.android.settingslib.metadata.PreferenceCoordinate
 import com.android.settingslib.metadata.ReadWritePermit
@@ -71,6 +72,14 @@ fun transformCatalystGetMetadataResponse(
     for ((screenKey, screen) in graph.screensMap) {
         for (groupOrPref in screen.root.preferencesList) {
             traverseGroupOrPref(screenKey, groupOrPref)
+        }
+        for (parameterizedScreen in screen.parameterizedScreensList) {
+            val args = parameterizedScreen.args.toBundle()
+            // TODO: support parameterized screen with non empty arguments
+            if (!args.isEmpty) continue
+            for (groupOrPref in parameterizedScreen.screen.root.preferencesList) {
+                traverseGroupOrPref(screenKey, groupOrPref)
+            }
         }
     }
 

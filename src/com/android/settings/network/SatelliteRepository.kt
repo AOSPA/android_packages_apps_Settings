@@ -202,9 +202,6 @@ open class SatelliteRepository(
      *  e.g. "com.android.settings"
      */
     open fun getSatelliteDataOptimizedApps(): List<String> {
-        if (!Flags.satellite25q4Apis()) {
-            return emptyList()
-        }
         val satelliteManager: SatelliteManager? =
             context.getSystemService(SatelliteManager::class.java)
         if (satelliteManager == null) {

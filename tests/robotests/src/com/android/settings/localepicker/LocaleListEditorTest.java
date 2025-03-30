@@ -275,6 +275,7 @@ public class LocaleListEditorTest {
     public void showConfirmDialog_systemLocaleSelected_shouldShowLocaleChangeDialog()
             throws Exception {
         //pre-condition
+        Locale.setDefault(Locale.forLanguageTag("zh-TW"));
         setUpLocaleConditions(true);
         final Configuration config = new Configuration();
         config.setLocales((LocaleList.forLanguageTags("zh-TW,en-US")));
@@ -379,6 +380,7 @@ public class LocaleListEditorTest {
     @Test
     public void onTouch_dragDifferentLocaleToTop_showConfirmDialog() throws Exception {
         MotionEvent event = MotionEvent.obtain(0L, 0L, MotionEvent.ACTION_UP, 0.0f, 0.0f, 0);
+        Locale.setDefault(Locale.forLanguageTag("zh-TW"));
         setUpLocaleConditions(true);
         final Configuration config = new Configuration();
         config.setLocales((LocaleList.forLanguageTags("zh-TW,en-US")));

@@ -207,7 +207,7 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
                                     (AudioSharingDeviceItem item) -> {
                                         int currentCallAudioGroupId =
                                                 BluetoothUtils.getPrimaryGroupIdForBroadcast(
-                                                        mContext.getContentResolver());
+                                                        mContext.getContentResolver(), mBtManager);
                                         int clickedGroupId = item.getGroupId();
                                         if (clickedGroupId == currentCallAudioGroupId) {
                                             Log.d(TAG, "Skip set call audio device: unchanged");
@@ -414,7 +414,8 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
     private Pair<Integer, AudioSharingDeviceItem> getActiveItemWithIndex() {
         List<AudioSharingDeviceItem> deviceItems = new ArrayList<>(mDeviceItemsInSharingSession);
         int fallbackActiveGroupId =
-                BluetoothUtils.getPrimaryGroupIdForBroadcast(mContext.getContentResolver());
+                BluetoothUtils.getPrimaryGroupIdForBroadcast(mContext.getContentResolver(),
+                        mBtManager);
         if (fallbackActiveGroupId != BluetoothCsipSetCoordinator.GROUP_ID_INVALID) {
             for (AudioSharingDeviceItem item : deviceItems) {
                 if (item.getGroupId() == fallbackActiveGroupId) {

@@ -365,6 +365,7 @@ Pair<Drawable, String> pair = mCachedDevice.getDrawableWithDescription();
         if (mNeedNotifyHierarchyChanged) {
             notifyHierarchyChanged();
         }
+        Log.d(TAG, "onPreferenceAttributesChanged, complete updating for device " + mCachedDevice.getName());
     }
 
     @Override

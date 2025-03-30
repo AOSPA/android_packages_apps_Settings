@@ -46,24 +46,23 @@ public class TextReadingPreviewPreference extends Preference {
 
     private int mLayoutMinHorizontalPadding = 0;
     private int mBackgroundMinHorizontalPadding = 0;
-
     private final ViewPager.OnPageChangeListener mPageChangeListener =
             new ViewPager.OnPageChangeListener() {
-        @Override
-        public void onPageScrolled(int i, float v, int i1) {
-            // Do nothing
-        }
+                @Override
+                public void onPageScrolled(int i, float v, int i1) {
+                    // Do nothing
+                }
 
-        @Override
-        public void onPageSelected(int i) {
-            mCurrentItem = i;
-        }
+                @Override
+                public void onPageSelected(int i) {
+                    mCurrentItem = i;
+                }
 
-        @Override
-        public void onPageScrollStateChanged(int i) {
-            // Do nothing
-        }
-    };
+                @Override
+                public void onPageScrollStateChanged(int i) {
+                    // Do nothing
+                }
+            };
 
     TextReadingPreviewPreference(Context context) {
         super(context);

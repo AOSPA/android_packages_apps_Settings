@@ -18,7 +18,14 @@ package com.android.settings.network.ethernet
 
 import android.content.Context
 import android.net.EthernetManager
+import android.net.IpConfiguration
+import android.net.LinkProperties
+import android.net.StaticIpConfiguration
 import android.widget.ImageView
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
+import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
@@ -30,12 +37,24 @@ class EthernetInterfaceDetailsController(
     context: Context,
     private val fragment: PreferenceFragmentCompat,
     private val preferenceId: String,
-) : AbstractPreferenceController(context) {
+    private val lifecycle: Lifecycle,
+) :
+    AbstractPreferenceController(context),
+    EthernetInterface.EthernetInterfaceStateListener,
+    LifecycleEventObserver {
     private val KEY_HEADER = "ethernet_details"
 
     private val ethernetManager = context.getSystemService(EthernetManager::class.java)
     private val ethernetInterface =
         EthernetTrackerImpl.getInstance(context).getInterface(preferenceId)
+
+    private lateinit var entityHeaderController: EntityHeaderController
+
+    private var ipAddressPref: Preference? = null
+
+    init {
+        lifecycle.addObserver(this)
+    }
 
     override fun isAvailable(): Boolean {
         return true
@@ -45,10 +64,24 @@ class EthernetInterfaceDetailsController(
         return KEY_HEADER
     }
 
+    override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
+        when (event) {
+            Lifecycle.Event.ON_START -> {
+                ethernetInterface?.registerListener(this)
+            }
+
+            Lifecycle.Event.ON_STOP -> {
+                ethernetInterface?.unregisterListener(this)
+            }
+
+            else -> {}
+        }
+    }
+
     override fun displayPreference(screen: PreferenceScreen) {
         val headerPref: LayoutPreference? = screen.findPreference(KEY_HEADER)
 
-        val mEntityHeaderController =
+        entityHeaderController =
             EntityHeaderController.newInstance(
                 fragment.getActivity(),
                 fragment,
@@ -59,17 +92,49 @@ class EthernetInterfaceDetailsController(
 
         iconView?.setScaleType(ImageView.ScaleType.CENTER_INSIDE)
 
-        mEntityHeaderController
-            .setLabel("Ethernet")
-            .setSummary(
-                if (ethernetInterface?.getInterfaceState() == EthernetManager.STATE_LINK_UP) {
-                    mContext.getString(R.string.network_connected)
-                } else {
-                    mContext.getString(R.string.network_disconnected)
-                }
-            )
-            .setSecondSummary("")
-            .setIcon(mContext.getDrawable(R.drawable.ic_settings_ethernet))
-            .done(true /* rebind */)
+        if (entityHeaderController != null) {
+            entityHeaderController
+                .setLabel("Ethernet")
+                .setSummary(
+                    if (ethernetInterface?.getInterfaceState() == EthernetManager.STATE_LINK_UP) {
+                        mContext.getString(R.string.network_connected)
+                    } else {
+                        mContext.getString(R.string.network_disconnected)
+                    }
+                )
+                .setSecondSummary("")
+                .setIcon(mContext.getDrawable(R.drawable.ic_settings_ethernet))
+                .done(true /* rebind */)
+        }
+
+        ipAddressPref = screen.findPreference<Preference>("ethernet_ip_address")
+
+        if (ethernetInterface?.getInterfaceState() == EthernetManager.STATE_LINK_UP) {
+            initializeIpDetails()
+        }
+    }
+
+    override fun interfaceUpdated() {
+        entityHeaderController?.setSummary(
+            if (ethernetInterface?.getInterfaceState() == EthernetManager.STATE_LINK_UP) {
+                mContext.getString(R.string.network_connected)
+            } else {
+                mContext.getString(R.string.network_disconnected)
+            }
+        )
+        initializeIpDetails()
+    }
+
+    private fun initializeIpDetails() {
+        val ipConfiguration: IpConfiguration? = ethernetInterface?.getConfiguration()
+        val linkProperties: LinkProperties? = ethernetInterface?.getLinkProperties()
+
+        if (ipConfiguration?.getIpAssignment() == IpConfiguration.IpAssignment.STATIC) {
+            val staticIp: StaticIpConfiguration? = ipConfiguration?.getStaticIpConfiguration()
+            ipAddressPref?.setSummary(staticIp?.getIpAddress().toString())
+        } else {
+            val addresses = linkProperties?.getAddresses()
+            ipAddressPref?.setSummary(addresses?.first().toString())
+        }
     }
 }

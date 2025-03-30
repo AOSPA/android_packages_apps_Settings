@@ -122,6 +122,8 @@ public abstract class KeyboardAccessibilityKeysDialogFragment extends DialogFrag
                     R.id.input_setting_keys_value_custom);
             TextView customValueTextView = accessibilityKeyDialog.findViewById(
                     R.id.input_setting_keys_value_custom_value);
+            View seekbarView = accessibilityKeyDialog.findViewById(
+                    R.id.input_setting_keys_custom_seekbar_layout);
             SeekBar customProgressBar = accessibilityKeyDialog.findViewById(
                     R.id.input_setting_keys_value_custom_slider);
             TextView titleTextView = accessibilityKeyDialog.findViewById(
@@ -147,7 +149,7 @@ public abstract class KeyboardAccessibilityKeysDialogFragment extends DialogFrag
                 customValueTextView.setVisibility(isChecked ? View.VISIBLE : View.GONE);
                 customValueTextView.setText(
                         progressToThresholdInSecond(customProgressBar.getProgress()));
-                customProgressBar.setVisibility(isChecked ? View.VISIBLE : View.GONE);
+                seekbarView.setVisibility(isChecked ? View.VISIBLE : View.GONE);
                 buttonView.setChecked(isChecked);
             });
             cannedValueRadioGroup.setOnCheckedChangeListener(
@@ -174,14 +176,14 @@ public abstract class KeyboardAccessibilityKeysDialogFragment extends DialogFrag
                 // setting
                 initStateBasedOnThreshold(cannedValueRadioGroup, customRadioButton,
                         customValueTextView,
-                        customProgressBar);
+                        customProgressBar, seekbarView);
             } else if (customRadioButton.isChecked()) {
                 cannedValueRadioGroup.clearCheck();
                 customRadioButton.setChecked(true);
                 customValueTextView.setVisibility(View.VISIBLE);
                 customValueTextView.setText(
                         progressToThresholdInSecond(customProgressBar.getProgress()));
-                customProgressBar.setVisibility(View.VISIBLE);
+                seekbarView.setVisibility(View.VISIBLE);
             }
         });
 
@@ -199,7 +201,7 @@ public abstract class KeyboardAccessibilityKeysDialogFragment extends DialogFrag
 
     private void initStateBasedOnThreshold(RadioGroup cannedValueRadioGroup,
             RadioButton customRadioButton, TextView customValueTextView,
-            SeekBar customProgressBar) {
+            SeekBar customProgressBar, View seekbarView) {
         int inputSettingKeysThreshold = getInputSettingKeysValue();
         switch (inputSettingKeysThreshold) {
             case 600 -> cannedValueRadioGroup.check(R.id.input_setting_keys_value_600);
@@ -213,5 +215,6 @@ public abstract class KeyboardAccessibilityKeysDialogFragment extends DialogFrag
                 customRadioButton.setChecked(true);
             }
         }
+        seekbarView.setVisibility(customRadioButton.isChecked() ? View.VISIBLE : View.GONE);
     }
 }

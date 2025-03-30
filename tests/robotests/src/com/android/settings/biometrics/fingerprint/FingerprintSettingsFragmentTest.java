@@ -70,6 +70,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.biometrics.fingerprint.feature.FingerprintExtPreferencesProvider;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -79,6 +80,7 @@ import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowSettingsPreferenceFragment;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.After;
@@ -123,6 +125,12 @@ public class FingerprintSettingsFragmentTest {
     private PackageManager mPackageManager;
     @Mock
     private BiometricManager mBiometricManager;
+    @Mock
+    private FingerprintExtPreferencesProvider mExtPreferencesProvider;
+    @Mock
+    private RestrictedPreference mRestrictedPreference0;
+    @Mock
+    private RestrictedPreference mRestrictedPreference1;
 
     @Captor
     private ArgumentCaptor<CancellationSignal> mCancellationSignalArgumentCaptor =
@@ -159,6 +167,11 @@ public class FingerprintSettingsFragmentTest {
         when(mFakeFeatureFactory.getFingerprintFeatureProvider()
                 .getFingerprintSettingsFeatureProvider())
                 .thenReturn(mFingerprintSettingsFeatureProvider);
+
+        when(mFakeFeatureFactory.getFingerprintFeatureProvider()
+                .getExtPreferenceProvider(mContext))
+                .thenReturn(mExtPreferencesProvider);
+        when(mExtPreferencesProvider.getSize()).thenReturn(0);
     }
 
     @After
@@ -415,6 +428,33 @@ public class FingerprintSettingsFragmentTest {
         final Preference checkEnrolledPerf =
                 mFragment.findPreference("key_fingerprint_check_enrolled");
         assertThat(checkEnrolledPerf).isNull();
+    }
+
+    @Test
+    public void testHasExtPreferences() {
+        String key0 = "ExtKey0";
+        String key1 = "ExtKey1";
+        when(mRestrictedPreference0.getKey()).thenReturn(key0);
+        when(mRestrictedPreference1.getKey()).thenReturn(key1);
+        when(mExtPreferencesProvider.getSize()).thenReturn(2);
+        when(mExtPreferencesProvider.newPreference(eq(0),
+                any(FingerprintExtPreferencesProvider.PreferenceInflater.class)))
+                .thenReturn(mRestrictedPreference0);
+        when(mExtPreferencesProvider.newPreference(eq(1),
+                any(FingerprintExtPreferencesProvider.PreferenceInflater.class)))
+                .thenReturn(mRestrictedPreference1);
+
+        Fingerprint fingerprint = new Fingerprint("Test", 0, 0);
+        doReturn(List.of(fingerprint)).when(mFingerprintManager).getEnrolledFingerprints(anyInt());
+        setUpFragment(false, PRIMARY_USER_ID, TYPE_UDFPS_OPTICAL, 5);
+
+        shadowOf(Looper.getMainLooper()).idle();
+
+        Preference preference0 = mFragment.findPreference(key0);
+        assertThat(preference0).isEqualTo(mRestrictedPreference0);
+
+        Preference preference1 = mFragment.findPreference(key1);
+        assertThat(preference1).isEqualTo(mRestrictedPreference1);
     }
 
     private void setSensor(@FingerprintSensorProperties.SensorType int sensorType,

@@ -155,6 +155,7 @@ public class FaceStatusUtilsTest {
     @EnableFlags(android.app.supervision.flags.Flags.FLAG_DEPRECATE_DPM_SUPERVISION_APIS)
     public void getDisabledAdmin_whenFaceDisabled_returnsRestriction() {
         when(mSupervisionManager.isSupervisionEnabledForUser(USER_ID)).thenReturn(true);
+        when(mSupervisionManager.getActiveSupervisionAppPackage()).thenReturn("supervision.pkg");
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(null))
                 .thenReturn(DevicePolicyManager.KEYGUARD_DISABLE_FACE);
 
@@ -172,13 +173,25 @@ public class FaceStatusUtilsTest {
     }
 
     @Test
-    public void getSummary_whenNotEnrolled_returnsSummaryNone() {
+    @DisableFlags(com.android.settings.flags.Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
+    public void getSummary_whenNotEnrolled_flagOff_returnsSummaryNone() {
         when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(false);
 
         assertThat(mFaceStatusUtils.getSummary())
                 .isEqualTo(ResourcesUtils.getResourcesString(
                         mApplicationContext,
                         "security_settings_face_preference_summary_none"));
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
+    public void getSummary_whenNotEnrolled_flagOn_returnsSummaryNone() {
+        when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(false);
+
+        assertThat(mFaceStatusUtils.getSummary())
+                .isEqualTo(ResourcesUtils.getResourcesString(
+                        mApplicationContext,
+                        "security_settings_face_preference_summary_none_new"));
     }
 
     @Test

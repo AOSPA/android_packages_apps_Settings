@@ -194,52 +194,6 @@ public class WifiConfigController2Test {
     }
 
     @Test
-    public void isSubmittable_longPsk_shouldReturnFalse() {
-        createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
-        final TextView password = mView.findViewById(R.id.password);
-        assertThat(password).isNotNull();
-        password.setText(LONG_PSK);
-        assertThat(mController.isSubmittable()).isFalse();
-    }
-
-    @Test
-    public void isSubmittable_shortPsk_shouldReturnFalse() {
-        createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
-        final TextView password = mView.findViewById(R.id.password);
-        assertThat(password).isNotNull();
-        password.setText(SHORT_PSK);
-        assertThat(mController.isSubmittable()).isFalse();
-    }
-
-    @Test
-    public void isSubmittable_goodPsk_shouldReturnTrue() {
-        createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
-        final TextView password = mView.findViewById(R.id.password);
-        assertThat(password).isNotNull();
-        password.setText(GOOD_PSK);
-        assertThat(mController.isSubmittable()).isTrue();
-    }
-
-    @Test
-    public void isSubmittable_hexPsk_shouldReturnTrue() {
-        createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
-        final TextView password = mView.findViewById(R.id.password);
-        assertThat(password).isNotNull();
-        password.setText(HEX_PSK);
-        assertThat(mController.isSubmittable()).isTrue();
-    }
-
-    @Test
-    public void isSubmittable_savedConfigZeroLengthPassword_shouldReturnTrue() {
-        createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
-        final TextView password = mView.findViewById(R.id.password);
-        assertThat(password).isNotNull();
-        password.setText("");
-        when(mWifiEntry.isSaved()).thenReturn(true);
-        assertThat(mController.isSubmittable()).isTrue();
-    }
-
-    @Test
     public void isSubmittable_nullWifiEntry_noException() {
         createController(null, WifiConfigUiBase2.MODE_CONNECT, false);
         mController.isSubmittable();
@@ -1037,24 +991,6 @@ public class WifiConfigController2Test {
         mController.setAnonymousIdVisible();
 
         verify(mController.mEapAnonymousView, never()).setText(any(String.class));
-    }
-
-    @Test
-    public void canFinish_ssidIsEmpty_returnFalse() {
-        createController(null, WifiConfigUiBase2.MODE_CONNECT, false);
-        TextView ssid = mView.findViewById(R.id.ssid);
-        ssid.setText("");
-
-        assertThat(mController.canFinish()).isFalse();
-    }
-
-    @Test
-    public void canFinish_ssidIsGood_returnTrue() {
-        createController(null, WifiConfigUiBase2.MODE_CONNECT, false);
-        TextView ssid = mView.findViewById(R.id.ssid);
-        ssid.setText(GOOD_SSID);
-
-        assertThat(mController.canFinish()).isTrue();
     }
 
     private void setUpModifyingSavedCertificateConfigController(String savedCaCertificate,

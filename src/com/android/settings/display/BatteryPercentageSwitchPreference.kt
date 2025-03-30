@@ -23,8 +23,7 @@ import com.android.settings.Utils
 import com.android.settings.contract.KEY_BATTERY_PERCENTAGE
 import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settingslib.datastore.KeyValueStore
-import com.android.settingslib.datastore.KeyedObservableDelegate
-import com.android.settingslib.datastore.SettingsStore
+import com.android.settingslib.datastore.KeyValueStoreDelegate
 import com.android.settingslib.datastore.SettingsSystemStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.ReadWritePermit
@@ -71,17 +70,11 @@ class BatteryPercentageSwitchPreference :
     @Suppress("UNCHECKED_CAST")
     private class BatteryPercentageStorage(
         private val context: Context,
-        private val settingsStore: SettingsStore,
-    ) : KeyedObservableDelegate<String>(settingsStore), KeyValueStore {
+        private val settingsStore: KeyValueStore,
+    ) : KeyValueStoreDelegate {
 
-        override fun contains(key: String) = settingsStore.contains(KEY)
-
-        override fun <T : Any> getValue(key: String, valueType: Class<T>) =
-            (settingsStore.getBoolean(key) ?: getDefaultValue(key, valueType)) as T
-
-        override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
-            settingsStore.setBoolean(key, value as Boolean)
-        }
+        override val keyValueStoreDelegate
+            get() = settingsStore
 
         override fun <T : Any> getDefaultValue(key: String, valueType: Class<T>) =
             context.resources.getBoolean(

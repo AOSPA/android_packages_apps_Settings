@@ -69,6 +69,12 @@ const val KEY_SCREEN_ATTENTION = "screen_attention"
 /** Contract key for the "Use adaptive connectivity" setting. */
 const val KEY_ADAPTIVE_CONNECTIVITY = "adaptive_connectivity"
 
+/** Contract key for the "Auto-switch Wi-Fi to Cellular" setting. */
+const val KEY_ADAPTIVE_WIFI_SCORER = "adaptive_wifi_scorer"
+
+/** Contract key for the " Auto-switch mobile network for battery life" setting. */
+const val KEY_ADAPTIVE_MOBILE_NETWORK = "adaptive_mobile_network"
+
 /** Contract key for the "WiFi hotspot" setting. */
 const val KEY_WIFI_HOTSPOT = "enable_wifi_ap"
 
@@ -104,3 +110,9 @@ const val KEY_RING_VOLUME = "separate_ring_volume"
 
 /** Contract key for the "Remove animation" setting. */
 const val KEY_REMOVE_ANIMATION = "remove_animation"
+
+/** Contract key for the "Pin media player. */
+const val KEY_PIN_MEDIA_PLAYER = "pin_media_player"
+
+/** Contract key for the "Show media on lock screen. */
+const val KEY_SHOW_MEDIA_ON_LOCK_SCREEN = "show_media_on_lock_screen"

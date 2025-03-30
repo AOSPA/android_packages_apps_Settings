@@ -18,14 +18,19 @@ package com.android.settings.network.ethernet
 
 import android.content.Context
 import android.content.ContextWrapper
+import android.net.ConnectivityManager
 import android.net.EthernetManager
 import android.net.EthernetManager.STATE_ABSENT
 import android.net.EthernetManager.STATE_LINK_DOWN
 import android.net.EthernetManager.STATE_LINK_UP
 import android.net.IpConfiguration
+import android.net.LinkProperties
+import android.net.Network
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.mock
@@ -34,12 +39,15 @@ import org.mockito.kotlin.mock
 class EthernetInterfaceTest {
 
     private val mockEthernetManager = mock<EthernetManager>()
+    private val mockConnectivityManager = mock<ConnectivityManager>()
+    private val mockNetwork = mock<Network>()
 
     private val context: Context =
         object : ContextWrapper(ApplicationProvider.getApplicationContext()) {
             override fun getSystemService(name: String): Any? =
                 when (name) {
                     Context.ETHERNET_SERVICE -> mockEthernetManager
+                    Context.CONNECTIVITY_SERVICE -> mockConnectivityManager
                     else -> super.getSystemService(name)
                 }
         }
@@ -84,5 +92,28 @@ class EthernetInterfaceTest {
             ethernetInterface.getConfiguration().getIpAssignment(),
             IpConfiguration.IpAssignment.UNASSIGNED,
         )
+    }
+
+    @Test
+    fun linkPropertiesChanged_shouldUpdate() {
+        val linkProperties = LinkProperties()
+        linkProperties.setInterfaceName("eth0")
+        linkProperties.setUsePrivateDns(true)
+
+        ethernetInterface.networkCallback.onLinkPropertiesChanged(mockNetwork, linkProperties)
+
+        assertEquals(ethernetInterface.getLinkProperties().getInterfaceName(), "eth0")
+        assertTrue(ethernetInterface.getLinkProperties().isPrivateDnsActive())
+    }
+
+    @Test
+    fun linkPropertiesChanged_iddoesnotmatch_shouldNotUpdate() {
+        val linkProperties = LinkProperties()
+        linkProperties.setInterfaceName("eth1")
+        linkProperties.setUsePrivateDns(true)
+
+        ethernetInterface.networkCallback.onLinkPropertiesChanged(mockNetwork, linkProperties)
+
+        assertFalse(ethernetInterface.getLinkProperties().isPrivateDnsActive())
     }
 }

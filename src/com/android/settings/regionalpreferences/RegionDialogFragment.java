@@ -16,8 +16,13 @@
 
 package com.android.settings.regionalpreferences;
 
+import static android.app.settings.SettingsEnums.ACTION_CHANGE_PREFERRED_LANGUAGE_REGION_POSITIVE_BTN_CLICKED;
+import static android.app.settings.SettingsEnums.ACTION_CHANGE_PREFERRED_LANGUAGE_REGION_NEGATIVE_BTN_CLICKED;
+import static android.app.settings.SettingsEnums.ACTION_CHANGE_REGION_DIALOG_NEGATIVE_BTN_CLICKED;
+import static android.app.settings.SettingsEnums.ACTION_CHANGE_REGION_DIALOG_POSITIVE_BTN_CLICKED;
+import static android.app.settings.SettingsEnums.CHANGE_REGION_DIALOG;
+
 import android.app.Dialog;
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -46,12 +51,17 @@ import java.util.Set;
  * Create a dialog for system region events.
  */
 public class RegionDialogFragment extends InstrumentedDialogFragment {
+
+    public static final String ARG_CALLING_PAGE = "arg_calling_page";
+    public static final int CALLING_PAGE_LANGUAGE_CHOOSE_A_REGION = 0;
+    public static final int CALLING_PAGE_REGIONAL_PREFERENCES_REGION_PICKER = 1;
+    public static final int DIALOG_CHANGE_SYSTEM_LOCALE_REGION = 1;
+    public static final int DIALOG_CHANGE_PREFERRED_LOCALE_REGION = 2;
+    public static final String ARG_DIALOG_TYPE = "arg_dialog_type";
+    public static final String ARG_TARGET_LOCALE = "arg_target_locale";
+    public static final String ARG_REPLACED_TARGET_LOCALE = "arg_replaced_target_locale";
+
     private static final String TAG = "RegionDialogFragment";
-    static final int DIALOG_CHANGE_SYSTEM_LOCALE_REGION = 1;
-    static final int DIALOG_CHANGE_PREFERRED_LOCALE_REGION = 2;
-    static final String ARG_DIALOG_TYPE = "arg_dialog_type";
-    static final String ARG_TARGET_LOCALE = "arg_target_locale";
-    static final String ARG_REPLACED_TARGET_LOCALE = "arg_replaced_target_locale";
 
     /**
      * Use this factory method to create a new instance of
@@ -66,7 +76,7 @@ public class RegionDialogFragment extends InstrumentedDialogFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.CHANGE_REGION_DIALOG;
+        return CHANGE_REGION_DIALOG;
     }
 
     @NonNull
@@ -114,6 +124,7 @@ public class RegionDialogFragment extends InstrumentedDialogFragment {
     class RegionDialogController implements DialogInterface.OnClickListener {
         private final Context mContext;
         private final int mDialogType;
+        private final int mCallingPage;
         private final LocaleStore.LocaleInfo mLocaleInfo;
         private final Locale mReplacedLocale;
         private final MetricsFeatureProvider mMetricsFeatureProvider;
@@ -123,6 +134,7 @@ public class RegionDialogFragment extends InstrumentedDialogFragment {
             mContext = context;
             Bundle arguments = dialogFragment.getArguments();
             mDialogType = arguments.getInt(ARG_DIALOG_TYPE);
+            mCallingPage = arguments.getInt(ARG_CALLING_PAGE);
             mLocaleInfo = (LocaleStore.LocaleInfo) arguments.getSerializable(ARG_TARGET_LOCALE);
             mReplacedLocale = (Locale) arguments.getSerializable(ARG_REPLACED_TARGET_LOCALE);
             mMetricsFeatureProvider =
@@ -137,17 +149,22 @@ public class RegionDialogFragment extends InstrumentedDialogFragment {
                     updateRegion(mLocaleInfo.getLocale().toLanguageTag());
                     mMetricsFeatureProvider.action(
                             mContext,
-                            SettingsEnums.ACTION_CHANGE_REGION_DIALOG_POSITIVE_BTN_CLICKED);
-                    // TODO: add new metrics for DIALOG_CHANGE_PREFERRED_LOCALE_REGION
+                            mDialogType == DIALOG_CHANGE_SYSTEM_LOCALE_REGION
+                                ? ACTION_CHANGE_REGION_DIALOG_POSITIVE_BTN_CLICKED
+                                : ACTION_CHANGE_PREFERRED_LANGUAGE_REGION_POSITIVE_BTN_CLICKED,
+                            mCallingPage);
+                    dismiss();
+                    if (getActivity() != null) {
+                        getActivity().finish();
+                    }
                 } else {
                     mMetricsFeatureProvider.action(
                             mContext,
-                            SettingsEnums.ACTION_CHANGE_REGION_DIALOG_NEGATIVE_BTN_CLICKED);
-                    // TODO: add new metrics for DIALOG_CHANGE_PREFERRED_LOCALE_REGION
-                }
-                dismiss();
-                if (getActivity() != null) {
-                    getActivity().finish();
+                            mDialogType == DIALOG_CHANGE_SYSTEM_LOCALE_REGION
+                                ? ACTION_CHANGE_REGION_DIALOG_NEGATIVE_BTN_CLICKED
+                                : ACTION_CHANGE_PREFERRED_LANGUAGE_REGION_NEGATIVE_BTN_CLICKED,
+                            mCallingPage);
+                    dismiss();
                 }
             }
         }

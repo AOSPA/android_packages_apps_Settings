@@ -147,6 +147,9 @@ public class ActiveUnlockContentListener {
             @NonNull String contentKey) {
         ContentResolver contentResolver = context.getContentResolver();
         ContentProviderClient client = contentResolver.acquireContentProviderClient(uri);
+        if (client == null) {
+            return null;
+        }
 
         @Nullable Bundle bundle = null;
 

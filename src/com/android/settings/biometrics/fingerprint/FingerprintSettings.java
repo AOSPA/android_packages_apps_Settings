@@ -468,12 +468,10 @@ public class FingerprintSettings extends SubSettings {
          * Add new preferences from FingerprintExtPreferencesProvider
          */
         public void setupExtFingerprintPreferences() {
-            final FingerprintExtPreferencesProvider preferencesProvider =
-                    FeatureFactory.getFeatureFactory().getFingerprintFeatureProvider()
-                            .getExtPreferenceProvider(requireContext());
+            FingerprintExtPreferencesProvider preferencesProvider = getExtPreferenceProvider();
             for (int index = 0; index < preferencesProvider.getSize(); ++index) {
                 final RestrictedPreference preference = preferencesProvider.newPreference(
-                        index, this::inflateFromResource, requireContext());
+                        index, this::inflateFromResource);
                 if (preference == null || findPreference(preference.getKey()) != null) {
                     continue;
                 }
@@ -483,6 +481,12 @@ public class FingerprintSettings extends SubSettings {
                 mExtPrefKeys.add(preference.getKey());
                 mFingerprintUnlockCategory.addPreference(preference);
             }
+        }
+
+        @NonNull
+        private FingerprintExtPreferencesProvider getExtPreferenceProvider() {
+            return FeatureFactory.getFeatureFactory().getFingerprintFeatureProvider()
+                    .getExtPreferenceProvider(requireContext());
         }
 
         /**
@@ -748,7 +752,8 @@ public class FingerprintSettings extends SubSettings {
             // This needs to be after setting ids, otherwise
             // |mRequireScreenOnToAuthPreferenceController.isChecked| is always checking the primary
             // user instead of the user with |mUserId|.
-            if (isSfps() || (screenOffUnlockUdfps() && isScreenOffUnlcokSupported())) {
+            if (isSfps() || (screenOffUnlockUdfps() && isScreenOffUnlcokSupported())
+                    || getExtPreferenceProvider().getSize() > 0) {
                 scrollToPreference(fpPrefKey);
                 addFingerprintUnlockCategory();
             }
@@ -1266,6 +1271,16 @@ public class FingerprintSettings extends SubSettings {
 
                 }
             }
+
+            if (mFingerprintUnlockCategoryPreferenceController == null
+                    && getExtPreferenceProvider().getSize() > 0 && controllers != null) {
+                for (AbstractPreferenceController controller : controllers) {
+                    if (KEY_FINGERPRINT_UNLOCK_CATEGORY.equals(controller.getPreferenceKey())) {
+                        mFingerprintUnlockCategoryPreferenceController =
+                                (FingerprintUnlockCategoryController) controller;
+                    }
+                }
+            }
             return controllers;
         }
 
@@ -1654,7 +1669,10 @@ public class FingerprintSettings extends SubSettings {
 
             private static final String KEY_USER_ID = "user_id";
             private static final String KEY_SENSOR_PROPERTIES = "sensor_properties";
+            private static final String EXTRA_FAILURE_COUNT = "failure_count";
+            private static final int MAX_FAILURE_COUNT = 3;
             private int mUserId;
+            private int mFailureCount;
             private @Nullable CancellationSignal mCancellationSignal;
             private @Nullable FingerprintSensorPropertiesInternal mSensorPropertiesInternal;
 
@@ -1663,6 +1681,9 @@ public class FingerprintSettings extends SubSettings {
                     @NonNull LayoutInflater inflater,
                     @Nullable ViewGroup container,
                     @Nullable Bundle savedInstanceState) {
+                if (savedInstanceState != null) {
+                    mFailureCount = savedInstanceState.getInt(EXTRA_FAILURE_COUNT, 0);
+                }
                 return inflater.inflate(
                         R.layout.fingerprint_check_enrolled_dialog, container, false);
             }
@@ -1682,10 +1703,20 @@ public class FingerprintSettings extends SubSettings {
                         final UdfpsCheckEnrolledView v =
                                 dialog.findViewById(R.id.udfps_check_enrolled_view);
                         v.setSensorProperties(mSensorPropertiesInternal);
+                        v.setOnTouchListener((view, event) -> {
+                            Log.d(TAG, "CheckEnrollDialog dismissed: touch outside");
+                            dialog.dismiss();
+                            return false;
+                        });
                     });
                 }
-
                 return dialog;
+            }
+
+            @Override
+            public void onSaveInstanceState(@NonNull Bundle outState) {
+                super.onSaveInstanceState(outState);
+                outState.putInt(EXTRA_FAILURE_COUNT, mFailureCount);
             }
 
             @Override
@@ -1725,7 +1756,7 @@ public class FingerprintSettings extends SubSettings {
                                     int errorCode, @NonNull CharSequence errString) {
                                 mMetricsFeatureProvider.action(
                                         getContext(),
-                                        SettingsEnums.ACTION_CHECK_FINGERPRINT,
+                                        SettingsEnums.ACTION_CHECK_FINGERPRINT_SETTINGS,
                                         false);
                                 dialog.dismiss();
                             }
@@ -1739,7 +1770,7 @@ public class FingerprintSettings extends SubSettings {
                                 parent.highlightFingerprintItem(fingerId);
                                 mMetricsFeatureProvider.action(
                                         getContext(),
-                                        SettingsEnums.ACTION_CHECK_FINGERPRINT,
+                                        SettingsEnums.ACTION_CHECK_FINGERPRINT_SETTINGS,
                                         true);
                                 dialog.dismiss();
                             }
@@ -1752,6 +1783,11 @@ public class FingerprintSettings extends SubSettings {
                                 message.postDelayed(() -> {
                                     message.setText(R.string.fingerprint_check_enroll_touch_sensor);
                                 }, 2000);
+                                mFailureCount++;
+                                if (mFailureCount >= MAX_FAILURE_COUNT) {
+                                    Log.d(TAG, "CheckEnrollDialog dismissed: failed 3 times");
+                                    dialog.dismiss();
+                                }
                             }
                         },
                         null /* handler */,

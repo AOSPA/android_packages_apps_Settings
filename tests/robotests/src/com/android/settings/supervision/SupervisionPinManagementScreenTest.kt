@@ -15,23 +15,71 @@
  */
 package com.android.settings.supervision
 
+import android.app.KeyguardManager
 import android.content.Context
+import android.content.ContextWrapper
+import android.content.pm.UserInfo
+import android.os.UserManager
+import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.google.common.truth.Truth.assertThat
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 
 @RunWith(AndroidJUnit4::class)
 class SupervisionPinManagementScreenTest {
-    private val context: Context = ApplicationProvider.getApplicationContext()
+    private val mockKeyguardManager = mock<KeyguardManager>()
+    private val mockUserManager = mock<UserManager>()
+
+    private val context: Context =
+        object : ContextWrapper(ApplicationProvider.getApplicationContext()) {
+            override fun getSystemService(name: String): Any? =
+                when (name) {
+                    Context.KEYGUARD_SERVICE -> mockKeyguardManager
+                    Context.USER_SERVICE -> mockUserManager
+                    else -> super.getSystemService(name)
+                }
+        }
 
     private val supervisionPinManagementScreen = SupervisionPinManagementScreen()
+
+    @Before
+    fun setup() {
+        SupervisionHelper.sInstance = null
+    }
 
     @Test
     fun key() {
         assertThat(supervisionPinManagementScreen.key).isEqualTo(SupervisionPinManagementScreen.KEY)
+    }
+
+    @Test
+    fun isAvailable() {
+        whenever(mockUserManager.users).thenReturn(listOf(SUPERVISING_USER_INFO))
+        whenever(mockKeyguardManager.isDeviceSecure(SUPERVISING_USER_ID)).thenReturn(true)
+
+        assertThat(supervisionPinManagementScreen.isAvailable(context)).isTrue()
+    }
+
+    @Test
+    fun isAvailable_noSupervisingUser_returnsFalse() {
+        whenever(mockUserManager.users).thenReturn(emptyList())
+        whenever(mockKeyguardManager.isDeviceSecure(SUPERVISING_USER_ID)).thenReturn(true)
+
+        assertThat(supervisionPinManagementScreen.isAvailable(context)).isFalse()
+    }
+
+    @Test
+    fun isAvailable_noSupervisingCredential_returnsFalse() {
+        whenever(mockUserManager.users).thenReturn(listOf(SUPERVISING_USER_INFO))
+        whenever(mockKeyguardManager.isDeviceSecure(SUPERVISING_USER_ID)).thenReturn(false)
+
+        assertThat(supervisionPinManagementScreen.isAvailable(context)).isFalse()
     }
 
     @Test
@@ -44,5 +92,17 @@ class SupervisionPinManagementScreenTest {
     fun getSummary_addPin() {
         assertThat(supervisionPinManagementScreen.summary)
             .isEqualTo(R.string.supervision_pin_management_preference_summary_add)
+    }
+
+    private companion object {
+        const val SUPERVISING_USER_ID = 5
+        val SUPERVISING_USER_INFO =
+            UserInfo(
+                SUPERVISING_USER_ID,
+                /* name */ "supervising",
+                /* iconPath */ "",
+                /* flags */ 0,
+                USER_TYPE_PROFILE_SUPERVISING,
+            )
     }
 }

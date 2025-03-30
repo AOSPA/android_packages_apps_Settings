@@ -27,7 +27,7 @@
         android:order="10"
         settings:controller="com.android.settings.inputmethod.MousePointerAccelerationPreferenceController" />
 
-    <com.android.settings.widget.SeekBarPreference
+    <com.android.settings.widget.LabeledSeekBarPreference
         android:key="pointer_speed"
         android:title="@string/pointer_speed"
         android:order="20"
@@ -50,32 +50,24 @@
         android:summary="@string/accessibility_pointer_and_touchpad_summary"
         settings:searchable="true"/>
 
-    <PreferenceCategory
-        android:key="pointer_category"
-        android:persistent="false"
-        android:order="51"
-        android:title="@string/mouse_scrolling_category_title">
+    <SwitchPreferenceCompat
+        android:key="mouse_reverse_vertical_scrolling"
+        android:order="52"
+        android:title="@string/mouse_reverse_vertical_scrolling"
+        android:summary="@string/mouse_reverse_vertical_scrolling_summary"
+        settings:controller="com.android.settings.inputmethod.MouseReverseVerticalScrollingPreferenceController" />
 
-        <SwitchPreferenceCompat
-            android:key="mouse_reverse_vertical_scrolling"
-            android:order="52"
-            android:title="@string/mouse_reverse_vertical_scrolling"
-            android:summary="@string/mouse_reverse_vertical_scrolling_summary"
-            settings:controller="com.android.settings.inputmethod.MouseReverseVerticalScrollingPreferenceController" />
+    <SwitchPreferenceCompat
+        android:order="55"
+        android:key="mouse_scrolling_acceleration"
+        android:title="@string/mouse_scrolling_acceleration"
+        settings:controller="com.android.settings.inputmethod.MouseScrollingAccelerationPreferenceController" />
 
-        <SwitchPreferenceCompat
-            android:order="55"
-            android:key="mouse_scrolling_acceleration"
-            android:title="@string/mouse_scrolling_acceleration"
-            settings:controller="com.android.settings.inputmethod.MouseScrollingAccelerationPreferenceController" />
-
-        <com.android.settings.widget.SeekBarPreference
-            android:key="mouse_scrolling_speed"
-            android:title="@string/mouse_scrolling_speed"
-            android:order="60"
-            android:selectable="false"
-            settings:controller="com.android.settings.inputmethod.MouseScrollingSpeedPreferenceController"/>
-
-    </PreferenceCategory>
+    <com.android.settings.widget.LabeledSeekBarPreference
+        android:key="mouse_scrolling_speed"
+        android:title="@string/mouse_scrolling_speed"
+        android:order="60"
+        android:selectable="false"
+        settings:controller="com.android.settings.inputmethod.MouseScrollingSpeedPreferenceController"/>
 
 </PreferenceScreen>

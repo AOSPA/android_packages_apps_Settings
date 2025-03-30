@@ -16,29 +16,38 @@
 
 package com.android.settings.sound
 
+import android.app.settings.SettingsEnums.ACTION_PIN_MEDIA_PLAYER
 import android.content.Context
 import android.provider.Settings.Secure.MEDIA_CONTROLS_RESUME
-
+import com.android.settings.R
+import com.android.settings.contract.KEY_PIN_MEDIA_PLAYER
+import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
-import com.android.settings.R
 
 // LINT.IfChange
 class MediaControlsSwitchPreference(
-    private val mediaControlsStore: MediaControlsScreen.MediaControlsStore,
-) : SwitchPreference(
-    KEY,
-    R.string.media_controls_resume_title,
-    R.string.media_controls_resume_description,
-) {
+    private val mediaControlsStore: MediaControlsScreen.MediaControlsStore
+) :
+    SwitchPreference(
+        KEY,
+        R.string.media_controls_resume_title,
+        R.string.media_controls_resume_description,
+    ),
+    PreferenceActionMetricsProvider {
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 
     override val keywords: Int
         get() = R.string.keywords_media_controls
+
+    override val preferenceActionMetrics: Int
+        get() = ACTION_PIN_MEDIA_PLAYER
+
+    override fun tags(context: Context) = arrayOf(KEY_PIN_MEDIA_PLAYER)
 
     override fun getReadPermissions(context: Context) = SettingsSecureStore.getReadPermissions()
 

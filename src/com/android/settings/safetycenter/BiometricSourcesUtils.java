@@ -19,10 +19,14 @@ package com.android.settings.safetycenter;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.face.FaceManager;
+import android.hardware.fingerprint.FingerprintManager;
 import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceData;
 import android.safetycenter.SafetySourceIssue;
 import android.safetycenter.SafetySourceStatus;
+
+import com.android.settings.Utils;
 
 /** Static helpers for setting SafetyCenter data for biometric safety sources. */
 public final class BiometricSourcesUtils {
@@ -87,6 +91,15 @@ public final class BiometricSourcesUtils {
 
         SafetyCenterManagerWrapper.get()
                 .setSafetySourceData(context, safetySourceId, safetySourceData, safetyEvent);
+    }
+
+    /** Check whether the multiple biometrics enrollment is needed. */
+    public static boolean isMultipleBiometricsEnrollmentNeeded(Context context, int userId) {
+        FaceManager faceManager = Utils.getFaceManagerOrNull(context);
+        FingerprintManager fingerprintManager = Utils.getFingerprintManagerOrNull(context);
+        return Utils.isMultipleBiometricsSupported(context)
+                && !faceManager.hasEnrolledTemplates(userId)
+                && !fingerprintManager.hasEnrolledFingerprints(userId);
     }
 
     /** Helper method for creating a pending intent. */

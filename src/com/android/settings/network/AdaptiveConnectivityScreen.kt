@@ -37,6 +37,10 @@ class AdaptiveConnectivityScreen : PreferenceScreenCreator {
 
     override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {
         +AdaptiveConnectivityTogglePreference()
+        if (Flags.enableNestedToggleSwitches()) {
+            +WifiScorerTogglePreference()
+            +AdaptiveMobileNetworkTogglePreference()
+        }
     }
 
     override fun hasCompleteHierarchy() = false

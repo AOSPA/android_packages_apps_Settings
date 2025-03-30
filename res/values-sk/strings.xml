@@ -41,6 +41,9 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Pozastavená"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Neznáme"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Ukážka"</string>
+    <string name="preview_pager_home_content_description" msgid="3961399947853424786">"Ukážka plochy"</string>
+    <string name="preview_pager_message_content_description" msgid="3018855090807833755">"Ukážky správy"</string>
+    <string name="preview_pager_email_content_description" msgid="100055784235660338">"Ukážka e‑mailovej správy"</string>
     <string name="qr_code_content_description" msgid="1852208464419291347">"QR kód"</string>
     <string name="preview_pager_previous_button" msgid="607771113300838313">"Predchádzajúca ukážka"</string>
     <string name="preview_pager_next_button" msgid="8700907912508927271">"Ďalšia ukážka"</string>
@@ -167,11 +170,11 @@
     <string name="date_and_time" msgid="1788358029823431692">"Dátum a čas"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Proxy server"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Vymazať"</string>
-    <string name="proxy_port_label" msgid="4647357286461712574">"Port proxy"</string>
+    <string name="proxy_port_label" msgid="6698001018215165848">"Port proxy servera (nepovinné)"</string>
     <string name="proxy_exclusionlist_label" msgid="2598613986784917542">"Nepoužívať proxy server pre"</string>
     <string name="proxy_defaultView_text" msgid="6795150505379688451">"Obnoviť predvolené nastavenia"</string>
     <string name="proxy_action_text" msgid="1103328484441449542">"Hotovo"</string>
-    <string name="proxy_hostname_label" msgid="5504327742505848063">"Názov hostiteľa proxy servera"</string>
+    <string name="proxy_hostname_label" msgid="345510072664361960">"Názov hostiteľa proxy servera (nepovinné)"</string>
     <string name="proxy_error" msgid="3615905975598084126">"Upozornenie"</string>
     <string name="proxy_error_dismiss" msgid="4207430265140873078">"OK"</string>
     <string name="proxy_error_invalid_host" msgid="3814412792702059247">"Zadaný názov hostiteľa nie je platný."</string>
@@ -216,9 +219,10 @@
     <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Vaše zariadenie, aplikácie a weby používajú prvý podporovaný jazyk z vášho zoznamu preferovaných jazykov.\n\nVeľa aplikácií bude pomocou vášho regiónu z vašich preferovaných jazykov formátovať dátumy, čísla a jednotky. Ak chcete svoj región zmeniť, pridajte jazyk a vyberte preferovaný región."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Ak chcete vybrať jazyk pre konkrétnu aplikáciu, prejdite do nastavení jazyka tejto aplikácie."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Ďalšie informácie o jazykoch aplikácií"</string>
-    <string name="title_change_system_region" msgid="5476591184463491936">"Chcete región zmeniť na región %s?"</string>
+    <string name="title_change_system_region" msgid="9196602029960380112">"Chcete región zmeniť na krajinu %s?"</string>
     <string name="desc_notice_device_region_change" msgid="6702773189066944100">"V zariadení zostane %s ako jazyk systému"</string>
-    <string name="title_change_system_locale" msgid="8589844586256566951">"Chcete zmeniť jazyk systému na možnosť %s?"</string>
+    <string name="desc_notice_device_region_change_for_preferred_language" msgid="408517366942324267">"%1$s nahradí %2$s vo vašich preferovaných jazykoch"</string>
+    <string name="title_change_system_locale" msgid="4102991236063984803">"Chcete zmeniť jazyk systému na jazyk %s?"</string>
     <string name="title_system_locale_addition" msgid="8218683660751479466">"Pridať jazyk %s medzi preferované?"</string>
     <string name="desc_system_locale_addition" msgid="3409917362651596070">"Aplikácie aj weby tým informujete, že preferujete aj tento jazyk."</string>
     <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Nastavenia zariadenia a regionálne nastavenia sa zmenia."</string>
@@ -235,7 +239,7 @@
     <string name="search_region_hint" msgid="1748708432568237552">"Vyhľadajte regióny"</string>
     <string name="top_intro_region_title" msgid="2336323415395642117">"Vybraný región ovplyvňuje spôsob zobrazovania času, dátumov, teploty a ďalších údajov v telefóne."</string>
     <string name="more_language_settings_category" msgid="3669703092480725416">"Ďalšie nastavenia jazyka"</string>
-    <string name="title_change_system_locale_region" msgid="1977530992614685128">"Chcete zmeniť na región <xliff:g id="SYSTEM_LANGUAGE_REGION">%1$s</xliff:g>?"</string>
+    <string name="title_change_system_locale_region" msgid="4401478579429442695">"Chcete zmeniť na región na krajinu <xliff:g id="SYSTEM_LANGUAGE_REGION">%1$s</xliff:g>?"</string>
     <string name="body_change_system_locale_region" msgid="9064318449821043189">"V zariadení zostane <xliff:g id="SYSTEM_LANGUAGE">%1$s</xliff:g> ako jazyk systému"</string>
     <string name="top_intro_numbering_system_title" msgid="3962000662073238392">"Vyberte, ako sa majú čísla zobrazovať vo vašom zariadení, na weboch a v aplikáciách"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regionálne nastavenia"</string>
@@ -260,8 +264,10 @@
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"Ak aplikácia regionálne nastavenia nepodporuje, bude v nej použité predvolené miestne nastavenie."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Ďalšie informácie o jazykových nastaveniach"</string>
     <string name="metric_measurement_system" msgid="7489725697268321541">"Metrický"</string>
-    <string name="us_measurement_system" msgid="8738587232938189052">"Britsko-americký (Spojené štáty)"</string>
-    <string name="uk_measurement_system" msgid="4196897001775627597">"Britsko-americký (Spojené kráľovstvo)"</string>
+    <!-- no translation found for us_measurement_system (8406695347890345490) -->
+    <skip />
+    <!-- no translation found for uk_measurement_system (1814065008707689505) -->
+    <skip />
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"Ďalšie predvoľby"</string>
     <string name="terms_of_address_title" msgid="7338630812197476808">"Vyberte, aké oslovenie preferujete"</string>
     <string name="terms_of_address_summary" msgid="7802443422612600620">"Vaše zariadenie môže prispôsobiť, ako vás oslovuje"</string>
@@ -355,6 +361,7 @@
     <string name="safety_center_summary" msgid="3554867379951053869">"Zabezpečenie aplikácií, zámka zariadenia, povolenia"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Tvár bola pridaná"</string>
     <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"Vyžaduje sa nastavenie"</string>
+    <string name="security_settings_face_preference_summary_none_new" msgid="1963253146734002815">"Pridajte tvár"</string>
     <string name="security_settings_face_preference_title_new" msgid="7680231874730796331">"Tvár"</string>
     <string name="security_settings_face_profile_preference_title_new" msgid="685550153608106166">"Tvár pre prácu"</string>
     <string name="private_space_face_unlock_title_new" msgid="2079622608951402509">"Tvár pre súkromný priestor"</string>
@@ -437,6 +444,7 @@
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Pridať odtlačok prsta"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Bol pridaný odtlačok prsta}few{Boli pridané # odtlačky prsta}many{# fingerprints added}other{Bolo pridaných # odtlačkov prsta}}"</string>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1146977379031250790">"Vyžaduje sa nastavenie"</string>
+    <string name="security_settings_fingerprint_preference_summary_none_new" msgid="510376523784190149">"Pridajte odtlačok prsta"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Nastavenie odtlačku prsta"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Povoľte odomk. odtlačk. prsta"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Používanie odtlačku prsta"</string>
@@ -461,8 +469,7 @@
     <string name="fingerprint_check_enroll_touch_sensor" msgid="5010063281557456236">"Dotknite sa senzora odtlačkov prstov"</string>
     <string name="fingerprint_check_enroll_not_recognized" msgid="2779520550437394431">"Odtlačok prsta nebol rozpoznaný"</string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Odomknutie hodinkami"</string>
-    <!-- no translation found for security_settings_activeunlock (8922823742770802651) -->
-    <skip />
+    <string name="security_settings_activeunlock" msgid="8922823742770802651">"Hodinky"</string>
     <string name="biometric_settings_intro_with_activeunlock" msgid="5032953826653108646">"Keď si nastavíte odomknutie tvárou aj odtlačkom prsta a budete sa nachádzať v tmavom prostredí alebo mať masku na tvári, telefón vás požiada o odtlačok prsta.\n\nOdomknutie hodinkami je ďalší praktický spôsob, ako odomknúť telefón, keď máte napríklad vlhké prsty alebo zariadenie nedokáže rozpoznať vašu tvár."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="5881355884547769337">"Odomknutie hodinkami je ďalší praktický spôsob, ako odomknúť telefón, keď napríklad zariadenie nedokáže rozpoznať váš odtlačok prsta."</string>
     <string name="biometric_settings_intro_with_face" msgid="7671919122230588521">"Odomknutie hodinkami je ďalší praktický spôsob, ako odomknúť telefón, keď napríklad zariadenie nedokáže rozpoznať vašu tvár."</string>
@@ -793,6 +800,7 @@
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Pokračovať bez odomknutia tvárou"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"Pokračovať bez odtlačku prsta či tváre"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Bez zabezpečenia"</string>
+    <string name="unlock_set_unlock_mode_off_new" msgid="865396805830816266">"Pridajte PIN, vzor, heslo či gesto potiahn."</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Potiahnutie"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"Vzor"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="9028659554829888373">"PIN"</string>
@@ -931,10 +939,18 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Keď je zapnuté rozhranie Bluetooth, zariadenie môže komunikovať s ostatnými zariadeniami s rozhraním Bluetooth v okolí.\n\nNa zlepšenie prostredia zariadenia môžu aplikácie a služby kedykoľvek vyhľadávať zariadenia v okolí, a to aj vtedy, keď je rozhranie Bluetooth vypnuté. Vďaka tomu je napríklad možné zlepšiť funkcie a služby podmienené polohou. Môžete to zmeniť v nastaveniach vyhľadávania zariadení Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Keď je zapnuté rozhranie Bluetooth, zariadenie môže komunikovať s inými zariadeniami Bluetooth v okolí. Funkcie ako Quick Share a Nájdi moje zariadenie používajú Bluetooth.\n\nAplikácie a služby môžu kedykoľvek vyhľadávať zariadenia v okolí, a to aj vtedy, keď je rozhranie Bluetooth vypnuté. Môžete to napríklad využiť, keď chcete zlepšiť funkcie a služby podmienené polohou. Môžete to zmeniť v nastaveniach vyhľadávania zariadení Bluetooth."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Zmeniť"</string>
-    <string name="bluetooth_key_missing_title" msgid="7799054163548353853">"Zariadenie <xliff:g id="DEVICE_NAME">%1$s</xliff:g> nie je pripojené"</string>
-    <string name="bluetooth_key_missing_message" msgid="2388861106663695319">"Z bezpečnostných dôvodov zabudnite toto zariadenie a potom ho znova spárujte"</string>
+    <!-- no translation found for bluetooth_key_missing_title (8462010102528132965) -->
+    <skip />
+    <!-- no translation found for bluetooth_key_missing_message (3188093580372443815) -->
+    <skip />
     <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"Zabudnúť zariadenie"</string>
     <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"Zrušiť"</string>
+    <!-- no translation found for bluetooth_key_missing_device_settings (5512091368141961890) -->
+    <skip />
+    <!-- no translation found for bluetooth_key_missing_close (6724520133374312040) -->
+    <skip />
+    <!-- no translation found for bluetooth_key_missing_toast (8692796546000643569) -->
+    <skip />
     <string name="device_details_title" msgid="1155622417516195481">"O zariadení"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Nastavenia klávesnice"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Ďalšie nastavenia"</string>
@@ -949,6 +965,8 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Experimentálne. Zlepší kvalitu zvuku."</string>
     <string name="device_details_battery" msgid="5466987755790847884">"Batéria"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"Batéria, nabíjanie"</string>
+    <!-- no translation found for device_details_key_missing_title (3568401701538114387) -->
+    <skip />
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Zabudnúť zariadenie"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Odpojiť aplikáciu"</string>
     <string name="device_details_more_settings" msgid="950302792331611271">"Ďalšie nastavenia"</string>
@@ -1061,7 +1079,7 @@
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Rozšírené možnosti"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Rozbaľovací zoznam Pokročilé možnosti"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"rozbaliť"</string>
-    <string name="wifi_ssid" msgid="2713062130735103151">"Názov siete"</string>
+    <string name="wifi_ssid" msgid="5139273830867723030">"Názov siete*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Zadajte SSID"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Zabezpečenie"</string>
     <string name="wifi_hidden_network" msgid="6466834025375485596">"Skrytá sieť"</string>
@@ -1084,7 +1102,10 @@
     <string name="wifi_eap_user_cert" msgid="3569182430929173220">"Certifikát používateľa"</string>
     <string name="wifi_eap_identity" msgid="3629406902174137028">"Identita"</string>
     <string name="wifi_eap_anonymous" msgid="8630332141751267000">"Anonymná identita"</string>
-    <string name="wifi_password" msgid="1458802324849513755">"Heslo"</string>
+    <string name="wifi_password" msgid="165204973532996861">"Heslo*"</string>
+    <!-- no translation found for wifi_password_optional (6770706664834070705) -->
+    <skip />
+    <string name="wifi_password_invalid" msgid="8884500804472828356">"Heslo je neplatné."</string>
     <string name="wifi_show_password" msgid="6865993988238157923">"Zobrazovať heslo"</string>
     <string name="wifi_ap_choose_2G" msgid="1436802195991542016">"Pásmo 2,4 GHz"</string>
     <string name="wifi_ap_prefer_5G" msgid="2520628479818369902">"Preferuje sa pásmo 5 GHz"</string>
@@ -1150,6 +1171,7 @@
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"Neznáma aplikácia chce na zlepšenie presnosti určovania polohy a ďalšie účely zapnúť vyhľadávanie sietí, aj keď je vypnutá funkcia Wi‑Fi.\n\nChcete to povoliť všetkým aplikáciám, ktoré chcú vyhľadávať siete?"</string>
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Povoliť"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Zamietnuť"</string>
+    <string name="wifi_field_required" msgid="6312381745503042588">"* povinné"</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Táto sieť nemá prístup k internetu. Zachovať pripojenie?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Niektoré aplikácie a služby nemusia fungovať z dôvodu obmedzeného pripojenia. Chcete sieť napriek tomu použiť?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Nabudúce sa na túto sieť nepýtať"</string>
@@ -1316,8 +1338,7 @@
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Vysoké rozlíšenie"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Maximálne rozlíšenie"</string>
     <string name="screen_resolution_footer" msgid="1230761249204935717">"Maximálne rozlíšenie viac spotrebúva batériu. Ak rozlíšenie prepnete, niektoré aplikácie sa môžu reštartovať."</string>
-    <!-- no translation found for screen_resolution_delimiter_a11y (5826162120538795842) -->
-    <skip />
+    <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> – <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Farby"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Prirodzené"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Zosilnené"</string>
@@ -1369,6 +1390,8 @@
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"Nočný režim nie je zapnutý"</string>
     <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"Na určenie časov západu a východu slnka je potrebná poloha zariadenia."</string>
     <string name="twilight_mode_launch_location" msgid="7799112373591153956">"Nastavenia polohy"</string>
+    <!-- no translation found for twilight_mode_pending_location (6829434234071614405) -->
+    <skip />
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"Zapnúť"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"Vypnúť"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"Zapnúť do východu slnka"</string>
@@ -1474,21 +1497,21 @@
     <string name="module_version" msgid="1787518340082046658">"Aktualizácia systému Google Play"</string>
     <string name="battery_info" msgid="7873528123969546728">"Informácie o batérii"</string>
     <string name="device_info_not_available" msgid="4804474466616712326">"Nie je k dispozícii"</string>
-    <string name="storage_settings" msgid="7472188817781592677">"Priestor"</string>
+    <string name="storage_settings" msgid="7472188817781592677">"Ukladací priestor"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"Ukladací priestor a vyrovnávacia pamäť"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Nastavenia úložiska"</string>
     <string name="status_eid" msgid="3588471107671992684">"EID"</string>
-    <string name="eid_multi_sim" msgid="6551259348909791790">"EID (slot na sim kartu <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="imei_multi_sim" msgid="9001570420423929507">"IMEI (<xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>. slot na SIM kartu)"</string>
-    <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI (<xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>. slot na SIM kartu) (hlavný)"</string>
+    <string name="eid_multi_sim" msgid="6659492335576379274">"EID (<xliff:g id="EID_SLOT_ID">%1$d</xliff:g>. slot na SIM kartu)"</string>
+    <string name="imei_multi_sim" msgid="27798473711249145">"IMEI (<xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>. slot na SIM kartu)"</string>
+    <string name="imei_multi_sim_primary" msgid="4320457587114117400">"IMEI (<xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>. slot na SIM kartu, hlavný)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Zobrazte výberom uloženej siete"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
     <string name="status_imei_sv" msgid="6908985558726440951">"IMEI SV"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"Verzia PRL"</string>
-    <string name="meid_multi_sim" msgid="1460689549266621286">"MEID (slot na SIM kartu <xliff:g id="MEID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="meid_multi_sim_primary" msgid="8921262417580407201">"MEID (slot na SIM kartu <xliff:g id="MEID_SLOT_ID_PRIMARY">%1$d</xliff:g>) (hlavný)"</string>
+    <string name="meid_multi_sim" msgid="5076814185188481456">"MEID (<xliff:g id="MEID_SLOT_ID">%1$d</xliff:g>. slot na SIM kartu)"</string>
+    <string name="meid_multi_sim_primary" msgid="6269908735700854437">"MEID (<xliff:g id="MEID_SLOT_ID_PRIMARY">%1$d</xliff:g>. slot na SIM kartu, hlavný)"</string>
     <string name="scanning_status_text_on" msgid="3846571210578042940">"Zapnuté"</string>
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Vypnuté"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
@@ -1556,6 +1579,7 @@
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Alebo"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Formátovať SD kartu ako prenosné úložisko"</string>
     <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"Ukladajte fotky, videá, hudbu aj ďalší obsah a získavajte k nim prístup v iných zariadeniach. &lt;a href=https://support.google.com/android/answer/12153449&gt;Ďalšie informácie o nastavení SD karty&lt;/a&gt;."</string>
+    <string name="storage_wizard_init_v2_external_summary_non_sd_card" msgid="6638380506793421312">"Ukladajte fotky, videá, hudbu aj ďalší obsah a získavajte k nim prístup v iných zariadeniach."</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Formátovať"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Nastaviť neskôr"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Formátovať úložisko <xliff:g id="NAME">^1</xliff:g>?"</string>
@@ -1580,7 +1604,13 @@
     <string name="battery_level_title" msgid="1371765298786083448">"Nabitie batérie"</string>
     <string name="communal_settings_title" msgid="2845678473945902115">"Spoločné"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Spoločné nastavenia"</string>
-    <string name="satellite_setting" msgid="4171265534842459910">"Správy cez satelit"</string>
+    <string name="hub_mode_category_title" msgid="5290081595872103974">"Režim centra"</string>
+    <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Miniaplikácie na uzamknutej obrazovke"</string>
+    <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Kedy sa má automaticky zobrazovať"</string>
+    <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Nikdy"</string>
+    <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Keď sa nabíja"</string>
+    <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"Pri nabíjaní a v kolmej polohe"</string>
+    <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"Keď je v doku"</string>
     <string name="apn_settings" msgid="4295467389400441299">"Prístupové body"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Úprava prístup. bodu"</string>
     <string name="apn_add" msgid="9069613192201630934">"Pridanie prístup. bodu"</string>
@@ -1688,6 +1718,11 @@
     <string name="tether_preference_summary_off" msgid="6266799346319794630">"Vypnuté"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"Tethering cez USB"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Tethering cez Bluetooth"</string>
+    <string name="ethernet_ip_address" msgid="4218340787862242573">"Adresa IP"</string>
+    <string name="ethernet_mac_address_title" msgid="3235879195237611007">"Adresa MAC"</string>
+    <string name="tx_ethernet_speed" msgid="4785035505065551012">"Rýchlosť prenosu"</string>
+    <string name="rx_ethernet_speed" msgid="6642000569214969711">"Rýchlosť pripojenia (prijímanie)"</string>
+    <string name="ethernet_network_usage" msgid="3795965384177426780">"Využitie siete"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Tethering cez ethernet"</string>
     <string name="tethering_footer_info" msgid="6824352505979800594">"Hotspot a zdieľanie dátového pripojenia umožňujú poskytovať internet ostatným zariadeniam prostredníctvom vášho dátového pripojenia. Aj aplikácie môžu vytvoriť hotspot na zdieľanie obsahu so zariadeniami v okolí."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Hotspot a tethering umožňujú poskytovať internet iným zariadeniam prostredníctvom vášho pripojenia Wi‑Fi alebo mobilného dátového pripojenia. Aplikácie tiež môžu vytvárať hostpot na zdieľanie obsahu so zariadeniami v okolí."</string>
@@ -1875,7 +1910,7 @@
     <string name="advanced_settings" msgid="2368905204839169094">"Rozšírené nastavenia"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Povoliť ďalšie možnosti nastavení"</string>
     <string name="application_info_label" msgid="1015706497694165866">"O aplikácii"</string>
-    <string name="storage_label" msgid="2522307545547515733">"Priestor"</string>
+    <string name="storage_label" msgid="2522307545547515733">"Ukladací priestor"</string>
     <string name="auto_launch_label" msgid="4069860409309364872">"Predvolené otváranie"</string>
     <string name="auto_launch_label_generic" msgid="5033137408273064599">"Predvolené"</string>
     <string name="screen_compatibility_label" msgid="7549658546078613431">"Kompatibilita obrazovky"</string>
@@ -2094,7 +2129,8 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Kliknutie vpravo dole"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Kliknutím v pravom dolnom rohu touchpadu zobrazíte ďalšie možnosti"</string>
     <string name="trackpad_pointer_speed" msgid="5672221910698079303">"Rýchlosť kurzora"</string>
-    <string name="three_finger_tap_preference_title" msgid="3779242412749283386">"Prispôsobenie klepnutia tromi prstami"</string>
+    <!-- no translation found for three_finger_tap_preference_title (1836080810837854140) -->
+    <skip />
     <string name="touchpad_acceleration_title" msgid="176627555191021888">"Zrýchlenie touchpadu"</string>
     <string name="touchpad_acceleration_summary" msgid="8057075483967535793">"Rýchlejším pohybmi na touchpade pohnete kurzor ďalej"</string>
     <string name="pointer_fill_style" msgid="8794616790175016092">"Farba kurzora"</string>
@@ -2111,7 +2147,8 @@
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Naučiť sa gestá touchpadu"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"trackpad, myš, kurzor, posúvať, potiahnuť, kliknúť pravým tlačidlom, kliknúť, ukazovateľ"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"kliknúť pravým tlačidlom, klepnúť"</string>
-    <string name="three_finger_tap_middle_click" msgid="1759914275939765929">"Stredné tlačidlo myši"</string>
+    <!-- no translation found for three_finger_tap_middle_click (7898931632908866867) -->
+    <skip />
     <string name="three_finger_tap_launch_gemini" msgid="4030401656711588982">"Spustiť Asistenta"</string>
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Prejdenie na plochu"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"Prejsť späť"</string>
@@ -2264,16 +2301,11 @@
     <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Ďalšie informácie o predvoľbách titulkov"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Zväčšenie"</string>
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Skratka zväčšenia"</string>
-    <!-- no translation found for accessibility_magnification_cursor_following_title (29531257984012743) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_cursor_following_header (7283095798622223509) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_cursor_following_continuous (1119319218662522794) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_cursor_following_center (3504798009192014460) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_cursor_following_edge (8675207762416655758) -->
-    <skip />
+    <string name="accessibility_magnification_cursor_following_title" msgid="29531257984012743">"Sledovanie kurzora"</string>
+    <string name="accessibility_magnification_cursor_following_header" msgid="7283095798622223509">"Vyberte, ako má zväčšenie sledovať kurzor."</string>
+    <string name="accessibility_magnification_cursor_following_continuous" msgid="1119319218662522794">"Posúvať obrazovku plynule s pohybom myši"</string>
+    <string name="accessibility_magnification_cursor_following_center" msgid="3504798009192014460">"Posúvať obrazovku a myš udržovať v jej strede"</string>
+    <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Posúvať obrazovku, keď sa myš dotkne jej okraja"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Zväčšovať zadávaný text"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Lupa sleduje zadávaný text"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Nechať zapnuté pri prepínaní aplikácií"</string>
@@ -2409,7 +2441,7 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Text s vysokým kontrastom"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Zmeňte farbu textu na čiernu alebo bielu, aby lepšie vynikol na pozadí"</string>
     <string name="accessibility_notification_high_contrast_text_title" msgid="2297915407152953323">"Zlepšenie kontrastu textu"</string>
-    <string name="accessibility_notification_high_contrast_text_body" msgid="4111896614825062003">"<xliff:g id="OUTLINE_TEXT">%1$s</xliff:g> nahradil <xliff:g id="HIGH_CONTRAST_TEXT">%2$s</xliff:g>. Môžete ho zapnúť v aplikácii <xliff:g id="SETTINGS">%3$s</xliff:g>."</string>
+    <string name="accessibility_notification_high_contrast_text_body_message" msgid="6846453833480117658">"Text s vysokým kontrastom bol nahradený textom s kontúrami. Môžete to zapnúť v sekcii <xliff:g id="SETTINGS">%1$s</xliff:g>."</string>
     <string name="accessibility_notification_high_contrast_text_action_open_settings" msgid="5945069315472850294">"Prejsť na <xliff:g id="SETTINGS">%1$s</xliff:g>"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8848579943445806659">"Obrys textu"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Zvyšovať kontrast pridaním čierneho alebo bieleho pozadia okolo textu"</string>
@@ -2833,12 +2865,9 @@
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> – <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_timestamps_content_description" msgid="1927748134271595985">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> – <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_status_time_info_and_battery_level (5158088815445378555) -->
-    <skip />
-    <!-- no translation found for battery_chart_slot_status_selected (4196580689444438148) -->
-    <skip />
-    <!-- no translation found for battery_chart_slot_status_unselected (6930198843537021396) -->
-    <skip />
+    <string name="battery_usage_status_time_info_and_battery_level" msgid="5158088815445378555">"<xliff:g id="SELECTED_STATUS">%1$s</xliff:g>, <xliff:g id="TIME_INFO">%2$s</xliff:g> <xliff:g id="BATTERY_LEVEL">%3$s</xliff:g>"</string>
+    <string name="battery_chart_slot_status_selected" msgid="4196580689444438148">"Vybrané"</string>
+    <string name="battery_chart_slot_status_unselected" msgid="6930198843537021396">"Nevybrané"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Graf spotreby batérie"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Graf spotreby batérie za deň"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Graf spotreby batérie za hodinu"</string>
@@ -3110,28 +3139,25 @@
     <string name="data_usage_uninstalled_apps_users" msgid="1262228664057122983">"Odstránené aplikácie a používatelia"</string>
     <string name="wifi_metered_title" msgid="6623732965268033931">"Využitie siete"</string>
     <string name="data_usage_metered_yes" msgid="4262598072030135223">"Merané"</string>
-    <string name="vpn_name" msgid="3806456074909253262">"Názov"</string>
+    <string name="vpn_name" msgid="1119885022967213297">"Názov*"</string>
     <string name="vpn_type" msgid="5533202873260826663">"Typ"</string>
-    <string name="vpn_server" msgid="2908816134941973935">"Adresa servera"</string>
-    <string name="vpn_ipsec_identifier" msgid="8511842694369254801">"Identifikátor protokolu IPSec"</string>
-    <string name="vpn_ipsec_secret" msgid="532007567355505963">"Predzdieľaný kľúč protokolu IPSec"</string>
+    <string name="vpn_server" msgid="5771717512763639505">"Adresa servera*"</string>
+    <string name="vpn_ipsec_identifier" msgid="6976476088030400883">"Identifikátor štandardu IPSec*"</string>
+    <string name="vpn_ipsec_secret" msgid="3110033645671775202">"Predzdieľaný kľúč štandardu IPSec"</string>
     <string name="vpn_ipsec_user_cert" msgid="2714372103705048405">"Používateľský certifikát protokolu IPSec"</string>
     <string name="vpn_ipsec_ca_cert" msgid="5558498943577474987">"Certifikát CA protokolu IPSec"</string>
     <string name="vpn_ipsec_server_cert" msgid="1411390470454731396">"Certifikát servera IPSec"</string>
     <string name="vpn_show_options" msgid="6105437733943318667">"Zobraziť rozšírené možnosti"</string>
-    <string name="vpn_username" msgid="8671768183475960068">"Používateľské meno"</string>
-    <string name="vpn_password" msgid="1183746907642628127">"Heslo"</string>
+    <string name="vpn_username_optional" msgid="8564310631984689947">"Používateľské meno (nepovinné)"</string>
+    <string name="vpn_password_optional" msgid="1255147723869461543">"Heslo (nepovinné)"</string>
+    <string name="vpn_username_required" msgid="1808631251331232149">"Používateľské meno*"</string>
+    <string name="vpn_password_required" msgid="1916107706318825437">"Heslo*"</string>
     <string name="vpn_save_login" msgid="5986762519977472618">"Uložiť informácie o účte"</string>
     <string name="vpn_not_used" msgid="7229312881336083354">"(nepoužité)"</string>
     <string name="vpn_no_ca_cert" msgid="3687379414088677735">"(neoverovať server)"</string>
     <string name="vpn_no_server_cert" msgid="8106540968643125407">"(prijatý zo servera)"</string>
     <string name="vpn_always_on_invalid_reason_other" msgid="4571905303713233321">"Zadané informácie nepodporujú vždy zapnuté siete VPN"</string>
-    <!-- no translation found for vpn_optional (3085880299239180702) -->
-    <skip />
-    <!-- no translation found for vpn_required (2538500165710360491) -->
-    <skip />
-    <!-- no translation found for vpn_field_required (952531424443686800) -->
-    <skip />
+    <string name="vpn_field_required" msgid="582849543970781302">"*povinné"</string>
     <string name="vpn_cancel" msgid="5929410618112404383">"Zrušiť"</string>
     <string name="vpn_done" msgid="5137858784289564985">"Zavrieť"</string>
     <string name="vpn_save" msgid="683868204634860888">"Uložiť"</string>
@@ -3362,7 +3388,7 @@
     <string name="color_orange" msgid="216547825489739010">"Oranžová"</string>
     <string name="color_purple" msgid="6603701972079904843">"Purpurová"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"Stav SIM karty"</string>
-    <string name="sim_status_title_sim_slot" msgid="4932996839194493313">"Stav SIM karty (slot na SIM kartu %1$d)"</string>
+    <string name="sim_status_title_sim_slot" msgid="5421926522479103027">"Stav SIM karty (%1$d. slot na SIM kartu)"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_notification_title" msgid="6839556577405929262">"SIM karty boli vymenené"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Klepnutím prejdete do Nastavení"</string>
@@ -3577,7 +3603,7 @@
     <string name="zen_mode_not_found_text" msgid="692090778655810329">"Režim sa nenašiel"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Obmedzenie vyrušení"</string>
     <string name="zen_mode_setup_page_summary" msgid="7568908001205193154">"Blokujte vyrušenia a rozptyľovanie"</string>
-    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"Nastaviť <xliff:g id="MODE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"Nastaviť režim <xliff:g id="MODE">%1$s</xliff:g>"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Zapnite režim bez vyrušení"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Budíky a zvuky médií môžu vyrušiť"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Plány"</string>
@@ -4400,7 +4426,8 @@
     <string name="disconnected" msgid="3469373726996129247">"Nepripojené"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Nepripojené"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> nainštalovaných aplikácií"</string>
-    <string name="storage_summary" msgid="7631468664968572688">"Využité: <xliff:g id="PERCENTAGE">%1$s</xliff:g>, voľné: <xliff:g id="FREE_SPACE_VALUE">%2$s</xliff:g> <xliff:g id="FREE_SPACE_UNITS">%3$s</xliff:g>"</string>
+    <!-- no translation found for storage_toplevel_summary (6708203706751754934) -->
+    <skip />
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Tmavý motív, veľkosť písma, jas"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Využíva sa v priemere <xliff:g id="USED_MEMORY">%1$s</xliff:g> z celkovej pamäte <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
     <string name="users_summary" msgid="8473589474976307510">"Prihlásený používateľ <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -4423,18 +4450,12 @@
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"Správca môže sledovať a spravovať aplikácie a údaje priradené k tomuto používateľovi vrátane nastavení, povolení, firemného prístupu, aktivity siete a informácií o polohe zariadenia."</string>
     <string name="admin_device_owner_message" msgid="5503131744126520590">"Správca môže sledovať a spravovať aplikácie a údaje priradené k tomuto zariadeniu vrátane nastavení, povolení, firemného prístupu, aktivity siete a informácií o polohe zariadenia."</string>
     <string name="admin_financed_message" msgid="1156197630834947884">"Správca vášho zariadenia môže mať prístup k údajom spojeným s týmto zariadením, spravovať aplikácie a meniť jeho nastavenia."</string>
-    <!-- no translation found for disabled_by_advanced_protection_title (9051476417559262469) -->
-    <skip />
-    <!-- no translation found for disabled_by_advanced_protection_setting_is_on_message (4242986779932956593) -->
-    <skip />
-    <!-- no translation found for disabled_by_advanced_protection_setting_is_off_message (7777487013672230696) -->
-    <skip />
-    <!-- no translation found for disabled_by_advanced_protection_action_message (7164789633582857150) -->
-    <skip />
-    <!-- no translation found for disabled_by_advanced_protection_wep_action_message (239574547298386495) -->
-    <skip />
-    <!-- no translation found for disabled_by_advanced_protection_help_button_title (6539346613660731777) -->
-    <skip />
+    <string name="disabled_by_advanced_protection_title" msgid="9051476417559262469">"Obmedzené rozšírenou ochranou"</string>
+    <string name="disabled_by_advanced_protection_setting_is_on_message" msgid="4242986779932956593">"Rozšírená ochrana vyžaduje z bezpečnostných dôvodov, aby toto nastavenie zostalo zapnuté"</string>
+    <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"Rozšírená ochrana vyžaduje z bezpečnostných dôvodov, aby toto nastavenie zostalo vypnuté"</string>
+    <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"Rozšírená ochrana zabráni z bezpečnostných dôvodov tejto akcii"</string>
+    <string name="disabled_by_advanced_protection_wep_action_message" msgid="239574547298386495">"Táto sieť používa WEP, zastaraný spôsob šifrovania, ktorý môže ohroziť vaše údaje. Rozšírená ochrana blokuje pripojenia WEP."</string>
+    <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"Nastavenia"</string>
     <string name="condition_turn_off" msgid="402707350778441939">"Vypnúť"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Zapnúť"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"Zobraziť"</string>
@@ -4660,8 +4681,7 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Vyššia citlivosť môže kolidovať s gestami aplikácie pri okrajoch obrazovky."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Citlivosť prechádzania späť"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"Navigácia gestami"</string>
-    <!-- no translation found for gesture_navigation_tutorial_title (1605955266131665429) -->
-    <skip />
+    <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"Vyskúšať ukážku"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Navigácia tlačidlami"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"navigácia gestami, citlivosť prechádzania späť, gesto späť"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"navigácia, tlačidlo plochy"</string>
@@ -5030,13 +5050,16 @@
     <string name="roaming_alert_title" msgid="9052791521868787985">"Chcete povoliť dátový roaming?"</string>
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"Informácie o cenách získate od svojho poskytovateľa siete."</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Neplatný režim siete <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignorovať."</string>
-    <string name="satellite_setting_title" msgid="2543034229989047673">"Správy cez satelit"</string>
+    <!-- no translation found for satellite_setting (4650503806634496443) -->
+    <skip />
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Odosielajte a prijímajte textové správy cez satelit. Táto možnosť je zahrnutá vo vašom účte."</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Odosielajte a prijímajte textové správy cez satelit. Táto možnosť nie je vo vašom účte k dispozícii."</string>
     <string name="satellite_setting_summary_without_entitlement" msgid="5284998840770992554">"Odosielajte a prijímajte textové správy cez satelit. Podrobnosti vám poskytne váš operátor."</string>
     <string name="keywords_satellite_setting" msgid="613553612424945946">"Správy cez satelit, pripojenie cez satelit"</string>
-    <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"<xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
-    <string name="title_about_satellite_setting" msgid="3563087940535642558">"Textové správy môžete odosielať a prijímať cez satelit s oprávneným účtom <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for category_name_about_satellite_connectivity (3971142716898783631) -->
+    <skip />
+    <!-- no translation found for description_about_satellite_setting (5539359064330584941) -->
+    <skip />
     <string name="category_title_your_satellite_plan" msgid="8169426217950247126">"Váš účet <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="title_have_satellite_plan" msgid="2048372355699977947">"Správy cez satelit sú zahrnuté vo vašom účte"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"Správy cez satelit nie sú zahrnuté vo vašom účte"</string>
@@ -5050,12 +5073,28 @@
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Pripojte sa k satelitu podľa uvedených krokov"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"Textové správy môžete posielať komukoľvek, aj tiesňovej linke. Keď bude k dispozícii mobilná sieť, váš telefón sa k nej znova pripojí."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"Keď sa váš telefón pripojí, budete môcť posielať správy komukoľvek, aj tiesňovej linke."</string>
-    <string name="satellite_setting_summary_more_information" msgid="276312352285564071">"Pripojenie cez satelit môže byť pomalšie a je k dispozícii iba v niektorých oblastiach. Na pripojenie môžu mať vplyv počasie a určité budovy. Volanie cez satelit nie je k dispozícii. Tiesňové volania môžu byť naďalej prepájané.\n\nMôže chvíľu trvať, kým sa zmeny účtu zobrazia v Nastaveniach. Viac informácií vám poskytne <xliff:g id="CARRIER_NAME">%1$s</xliff:g>."</string>
-    <string name="satellite_setting_summary_more_information_no_emergency_messaging" msgid="2090170250936862158">"Pripojenie cez satelit môže byť pomalšie a je k dispozícii iba v niektorých oblastiach. Na pripojenie môžu mať vplyv počasie a určité budovy. Volanie cez satelit nie je k dispozícii. Tiesňové volania môžu byť naďalej prepájané. Posielanie textových správ tiesňovej linke nemusí byť k dispozícii vo všetkých oblastiach.\n\nMôže chvíľu trvať, kým sa zmeny účtu zobrazia v Nastaveniach. Viac informácií vám poskytne <xliff:g id="CARRIER_NAME">%1$s</xliff:g>."</string>
-    <string name="more_about_satellite_messaging" msgid="1039277943532711584">"<xliff:g id="SUBJECT">%1$s</xliff:g> – ďalšie informácie"</string>
+    <!-- no translation found for satellite_footer_content_section_0 (4169483813004415556) -->
+    <skip />
+    <!-- no translation found for satellite_footer_content_section_1 (7925931577373229601) -->
+    <skip />
+    <!-- no translation found for satellite_footer_content_section_2 (7699185178461362541) -->
+    <skip />
+    <!-- no translation found for satellite_footer_content_section_3 (4652426135622555607) -->
+    <skip />
+    <!-- no translation found for satellite_footer_content_section_4 (2294227482962815751) -->
+    <skip />
+    <!-- no translation found for satellite_footer_content_section_5 (3053256489735265540) -->
+    <skip />
+    <!-- no translation found for satellite_footer_content_section_6 (1448633393918612418) -->
+    <skip />
+    <!-- no translation found for satellite_footer_content_section_7 (5524773673918954918) -->
+    <skip />
+    <!-- no translation found for more_about_satellite_connectivity (9110502891919936054) -->
+    <skip />
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"<xliff:g id="FUNCTION">%1$s</xliff:g> sa nedá zapnúť"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Ak chcete zapnúť <xliff:g id="FUNCTION">%1$s</xliff:g>, zrušte pripojenie cez satelit"</string>
-    <string name="category_title_satellite_connectivity" msgid="7540022356863917632">"Pripojenie cez satelit"</string>
+    <!-- no translation found for category_title_satellite_connectivity (7740500012311192133) -->
+    <skip />
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Pripojenie cez satelit"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"Pripojenie cez satelit"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"Správy cez satelit"</string>
@@ -5146,7 +5185,8 @@
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Ak budete chcieť neskôr použiť mobilné dáta, funkcie hovorov a SMS, prejdite do nastavení siete"</string>
     <string name="sim_card_label" msgid="6263064316075963775">"SIM karta"</string>
     <string name="erase_sim_dialog_title" msgid="4742077437653028326">"Chcete vymazať túto eSIM kartu?"</string>
-    <string name="erase_sim_dialog_text" msgid="1406141218170595272">"Týmto odstránite službu <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> z tohto zariadenia, ale tarifa <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> sa nezruší."</string>
+    <!-- no translation found for erase_sim_dialog_text (3982216582200709197) -->
+    <skip />
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Vymazať"</string>
     <string name="erasing_sim" msgid="4237180547590463930">"Vymazáva sa eSIM…"</string>
     <string name="erase_sim_fail_title" msgid="1445700500168357303">"eSIM sa nedá vymazať"</string>
@@ -5172,10 +5212,8 @@
     <string name="settings_panel_title" msgid="346363079938069215">"Panel s nastaveniami"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Povolenie meniteľných okien"</string>
     <string name="enable_desktop_experience_features" msgid="7389235241021706660">"Povoliť funkcie prostredia pre počítače"</string>
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (8586716390362684564) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (7567963048658976895) -->
-    <skip />
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="8586716390362684564">"Povoliť windowing počítača v danom zariadení aj na sekundárnych obrazovkách."</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="7567963048658976895">"Povoliť windowing počítača na sekundárnych obrazovkách."</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Povoliť meniteľné okná na sekundárnej obrazovke"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Povoliť v režime viac. okien aplik. bez možn. zmeny veľkosti"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Povoliť v režime viacerých okien aplikácie bez možnosti zmeny veľkosti"</string>
@@ -5255,10 +5293,11 @@
     <string name="page_agnostic_notification_channel_name" msgid="2058933148654316447">"Režim 16 kB nezohľadňujúci stránkovanie"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Ďalšie informácie"</string>
     <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"Spustiť aplikáciu v režime kompatibility s veľkosťou stránok"</string>
-    <!-- no translation found for enable_16k_app_compat_details (5382562613011853452) -->
-    <skip />
+    <string name="enable_16k_app_compat_details" msgid="5382562613011853452">"Aplikácia bude po prepnutí zastavená a spustí sa v 16 kB zariadení v režime kompatibility s veľkosťou stránok."</string>
     <string name="stop_app_dlg_title" msgid="3153921585174512587">"Chcete zastaviť aplikáciu?"</string>
     <string name="stop_app_dlg_text" msgid="4373849065005318901">"Aplikácia bude zastavená, aby sa použilo nastavenie kompatibility s veľkosťou stránky."</string>
+    <string name="error_pending_updates" msgid="7196832772265874760">"Jadro sa nepodarilo aktualizovať. Skontrolujte dostupnosť aktualizácii a nainštalujte všetky čakajúce."</string>
+    <string name="error_ota_failed" msgid="4762376085470989653">"Jadro sa nepodarilo aktualizovať. Pri aktualizácii OTA sa vyskytla chyba."</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Obsluha hlásení chýb"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Určuje, ktorá aplikácia vo vašom zariadení obsluhuje odkaz na hlásenie chýb."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Osobné"</string>
@@ -5409,8 +5448,8 @@
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Zadajte telefónne číslo"</string>
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Chýba telefónne číslo."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
-    <string name="enable_2g_title" msgid="8184757884636162942">"Povoliť 2G"</string>
-    <string name="enable_2g_summary" msgid="2794534052372565914">"Sieť 2G je menej bezpečná, ale na niektorých miestach môže zlepšiť pripojenie. V prípade tiesňových volaní je sieť 2G stále povolená."</string>
+    <string name="enable_2g_title" msgid="5657132300321750181">"Ochrana v sieti 2G"</string>
+    <string name="enable_2g_summary" msgid="6317192326100541563">"Nepoužívajte siete 2G, ktoré sú menej zabezpečené. Na niektorých miestach môže byť pripojenie obmedzené. Tiesňové volanie je vždy povolené."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> vyžaduje dostupnosť siete 2G"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Povoliť iba šifrované siete"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Táto možnosť je zabezpečenejšia, ale môže v niektorých oblastiach obmedziť vaše pripojenie k mobilnej sieti. Tiesňové volanie je vždy povolené."</string>
@@ -5528,12 +5567,6 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> – <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Keď zmeníte pomer strán, aplikácia sa reštartuje. Môžete prísť o neuložené zmeny. Niektoré aplikácie nemusia byť optimalizované pre určité pomery strán."</string>
-    <string name="aspect_ratio_experimental_title" msgid="9088785421062044831">"Pomer strán (experimentálne)"</string>
-    <string name="aspect_ratio_experiment_title" msgid="128614319422121040">"Pomer strán (experiment)"</string>
-    <string name="aspect_ratio_labs_title" msgid="6733893837442759383">"Pomer strán (laboratóriá)"</string>
-    <string name="aspect_ratio_experimental_label" msgid="6319009297672567578">"Experimentálne"</string>
-    <string name="aspect_ratio_experiment_label" msgid="7861871612376167784">"Experiment"</string>
-    <string name="aspect_ratio_labs_label" msgid="7008498116297651342">"Laboratóriá"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Senzor odtlačkov prstov"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Svetelné upozornenia"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Svetelné upozornenia"</string>
@@ -5743,6 +5776,20 @@
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Zmeniť kód PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Zabudnutý kód PIN"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filtre webového obsahu"</string>
-    <!-- no translation found for accessibility_illustration_content_description (557376174860150903) -->
+    <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome a internet"</string>
+    <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Pokúsiť sa blokovať explicitné weby"</string>
+    <string name="supervision_web_content_filters_browser_block_explicit_sites_summary" msgid="1477766506765966613">"Žiadny filter nie je dokonalý, no malo by to pomôcť skrývať weby so sexuálne explicitným obsahom"</string>
+    <string name="supervision_web_content_filters_browser_allow_all_sites_title" msgid="3909739592466381845">"Povoliť všetky weby"</string>
+    <!-- no translation found for supervision_web_content_filters_search_title (726335318009305564) -->
     <skip />
+    <!-- no translation found for supervision_web_content_filters_search_filter_on_title (4855846261141136285) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_search_filter_on_summary (1162258144140293269) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_search_filter_off_title (6049461395304222346) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_search_filter_off_summary (3834238970190924433) -->
+    <skip />
+    <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Zadajte kód PIN dohľadu"</string>
+    <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animácia <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
 </resources>

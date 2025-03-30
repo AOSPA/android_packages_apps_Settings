@@ -24,4 +24,36 @@
         android:selectable="false"
         android:order="-10000"/>
 
+    <ListPreference
+        android:key="metered"
+        android:icon="@drawable/ic_attach_money_black_24dp"
+        android:title="@string/wifi_metered_title"
+        android:entries="@array/wifi_metered_entries"
+        android:entryValues="@array/wifi_metered_values"/>
+
+   <!-- Network Details -->
+   <PreferenceCategory
+           android:key="ip_details_category">
+       <Preference
+               android:key="ethernet_ip_address"
+               android:title="@string/ethernet_ip_address"
+               android:selectable="false"
+               settings:enableCopying="true"/>
+       <Preference
+               android:key="ethernet_mac_address"
+               android:title="@string/ethernet_mac_address_title"
+               android:selectable="false"
+               settings:enableCopying="true"/>
+       <Preference
+               android:key="ethernet_tx_link_speed"
+               android:title="@string/tx_ethernet_speed"
+               android:selectable="false"
+               settings:enableCopying="true"/>
+       <Preference
+               android:key="ethernet_rx_link_speed"
+               android:title="@string/rx_ethernet_speed"
+               android:selectable="false"
+               settings:enableCopying="true"/>
+   </PreferenceCategory>
+
 </PreferenceScreen>

@@ -61,7 +61,7 @@
         settings:controller="com.android.settings.inputmethod.TouchpadAccelerationPreferenceController"
         android:order="38"/>
 
-    <com.android.settings.widget.SeekBarPreference
+    <com.android.settings.widget.LabeledSeekBarPreference
         android:key="touchpad_pointer_speed"
         android:title="@string/trackpad_pointer_speed"
         android:order="40"

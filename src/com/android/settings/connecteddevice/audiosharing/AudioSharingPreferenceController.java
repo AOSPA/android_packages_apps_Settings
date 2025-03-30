@@ -37,19 +37,22 @@ import com.android.settingslib.bluetooth.BluetoothEventManager;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class AudioSharingPreferenceController extends BasePreferenceController
-        implements DefaultLifecycleObserver, BluetoothCallback {
+        implements DefaultLifecycleObserver, BluetoothCallback,
+        LocalBluetoothProfileManager.ServiceListener {
     private static final String TAG = "AudioSharingPreferenceController";
     private static final String CONNECTED_DEVICES_PREF_KEY =
             "connected_device_audio_sharing_settings";
     private static final String CONNECTION_PREFERENCES_PREF_KEY = "audio_sharing_settings";
 
     @Nullable private final LocalBluetoothManager mBtManager;
+    @Nullable private final LocalBluetoothProfileManager mProfileManager;
     @Nullable private final BluetoothEventManager mEventManager;
     @Nullable private final LocalBluetoothLeBroadcast mBroadcast;
     @Nullable private Preference mPreference;
@@ -94,11 +97,9 @@ public class AudioSharingPreferenceController extends BasePreferenceController
     public AudioSharingPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mBtManager = Utils.getLocalBtManager(context);
+        mProfileManager = mBtManager == null ? null : mBtManager.getProfileManager();
         mEventManager = mBtManager == null ? null : mBtManager.getEventManager();
-        mBroadcast =
-                mBtManager == null
-                        ? null
-                        : mBtManager.getProfileManager().getLeAudioBroadcastProfile();
+        mBroadcast = mProfileManager == null ? null : mProfileManager.getLeAudioBroadcastProfile();
         mExecutor = Executors.newSingleThreadExecutor();
     }
 
@@ -114,6 +115,13 @@ public class AudioSharingPreferenceController extends BasePreferenceController
         }
         mEventManager.registerCallback(this);
         mBroadcast.registerServiceCallBack(mExecutor, mBroadcastCallback);
+        if (!AudioSharingUtils.isAudioSharingProfileReady(mProfileManager)) {
+            if (mProfileManager != null) {
+                mProfileManager.addServiceListener(this);
+            }
+            Log.d(TAG, "Skip updateVisibility. Profile is not ready.");
+            return;
+        }
         updateVisibility();
     }
 
@@ -129,6 +137,9 @@ public class AudioSharingPreferenceController extends BasePreferenceController
         }
         mEventManager.unregisterCallback(this);
         mBroadcast.unregisterServiceCallBack(mBroadcastCallback);
+        if (mProfileManager != null) {
+            mProfileManager.removeServiceListener(this);
+        }
     }
 
     @Override
@@ -141,7 +152,6 @@ public class AudioSharingPreferenceController extends BasePreferenceController
         if (mPreference != null && CONNECTED_DEVICES_PREF_KEY.equals(getPreferenceKey())) {
             mPreference.setVisible(false);
         }
-        updateVisibility();
     }
 
     @Override
@@ -149,6 +159,20 @@ public class AudioSharingPreferenceController extends BasePreferenceController
         return BluetoothUtils.isAudioSharingUIAvailable(mContext) ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
     }
+
+    @Override
+    public void onServiceConnected() {
+        if (AudioSharingUtils.isAudioSharingProfileReady(mProfileManager)) {
+            Log.d(TAG, "onServiceConnected, audio sharing ready");
+            refreshPreference();
+            if (mProfileManager != null) {
+                mProfileManager.removeServiceListener(this);
+            }
+        }
+    }
+
+    @Override
+    public void onServiceDisconnected() {}
 
     @Override
     public CharSequence getSummary() {

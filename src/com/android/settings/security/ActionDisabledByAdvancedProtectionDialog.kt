@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-package com.android.settings.security;
+package com.android.settings.security
 
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.security.advancedprotection.AdvancedProtectionManager
 import android.security.advancedprotection.AdvancedProtectionManager.EXTRA_SUPPORT_DIALOG_FEATURE
 import android.security.advancedprotection.AdvancedProtectionManager.EXTRA_SUPPORT_DIALOG_TYPE
 import android.security.advancedprotection.AdvancedProtectionManager.FEATURE_ID_DISALLOW_CELLULAR_2G
@@ -28,6 +30,7 @@ import android.security.advancedprotection.AdvancedProtectionManager.SUPPORT_DIA
 import android.security.advancedprotection.AdvancedProtectionManager.SUPPORT_DIALOG_TYPE_UNKNOWN
 import android.util.Log
 import android.view.WindowManager
+import androidx.annotation.VisibleForTesting
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -43,7 +46,10 @@ class ActionDisabledByAdvancedProtectionDialog : SpaDialogWindowTypeActivity() {
     @Composable
     override fun Content() {
         SettingsAlertDialogContent(
-            confirmButton = AlertDialogButton(getString(R.string.okay)) { finish() },
+            confirmButton = AlertDialogButton(getString(R.string.okay)) {
+                finish()
+                logDialogShown(learnMoreClicked = false)
+            },
             dismissButton = getSupportButtonIfExists(),
             title = getString(R.string.disabled_by_advanced_protection_title),
             icon = {
@@ -56,8 +62,8 @@ class ActionDisabledByAdvancedProtectionDialog : SpaDialogWindowTypeActivity() {
     }
 
     private fun getDialogMessage(): String {
-        val featureId = intent.getIntExtra(EXTRA_SUPPORT_DIALOG_FEATURE, -1)
-        val type = intent.getIntExtra(EXTRA_SUPPORT_DIALOG_TYPE, SUPPORT_DIALOG_TYPE_UNKNOWN)
+        val featureId = getIntentFeatureId()
+        val type = getIntentDialogueType()
         val messageId = when (type) {
             SUPPORT_DIALOG_TYPE_DISABLED_SETTING -> {
                 if (featureIdsWithSettingOn.contains(featureId)) {
@@ -80,11 +86,15 @@ class ActionDisabledByAdvancedProtectionDialog : SpaDialogWindowTypeActivity() {
         return getString(messageId)
     }
 
-    private fun getSupportButtonIfExists(): AlertDialogButton? {
+    @VisibleForTesting
+    fun getSupportButtonIfExists(): AlertDialogButton? {
         try {
-            val helpIntentUri = getString(R.string.help_url_action_disabled_by_advanced_protection)
+            val helpIntentUri = getString(
+                com.android.internal.R.string.config_help_url_action_disabled_by_advanced_protection
+            )
             val helpIntent = Intent.parseUri(helpIntentUri, Intent.URI_INTENT_SCHEME)
             if (helpIntent == null) return null
+            helpIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             val helpActivityInfo = packageManager.resolveActivity(helpIntent, /* flags */ 0)
                 ?.activityInfo
             if (helpActivityInfo == null) return null
@@ -93,6 +103,7 @@ class ActionDisabledByAdvancedProtectionDialog : SpaDialogWindowTypeActivity() {
             ) {
                 startActivity(helpIntent)
                 finish()
+                logDialogShown(learnMoreClicked = true)
             }
         } catch (e: Exception) {
             Log.w(TAG, "Tried to set up help button, but this exception was thrown: ${e.message}")
@@ -100,9 +111,28 @@ class ActionDisabledByAdvancedProtectionDialog : SpaDialogWindowTypeActivity() {
         return null
     }
 
+    private fun logDialogShown(learnMoreClicked: Boolean) {
+        // We should always have this permission, but just in case we don't, we should not log.
+        if (checkSelfPermission(android.Manifest.permission.MANAGE_ADVANCED_PROTECTION_MODE)
+                != PackageManager.PERMISSION_GRANTED) {
+            return
+        }
+
+        this.getSystemService(AdvancedProtectionManager::class.java)
+                .logDialogShown(getIntentFeatureId(), getIntentDialogueType(), learnMoreClicked)
+    }
+
     override fun getDialogWindowType(): Int? = if (intent.hasExtra(DIALOG_WINDOW_TYPE)) {
-        intent.getIntExtra(DIALOG_WINDOW_TYPE, WindowManager.LayoutParams.FIRST_APPLICATION_WINDOW)
+        intent.getIntExtra(DIALOG_WINDOW_TYPE, WindowManager.LayoutParams.TYPE_APPLICATION)
     } else null
+
+    private fun getIntentFeatureId(): Int {
+        return intent.getIntExtra(EXTRA_SUPPORT_DIALOG_FEATURE, -1)
+    }
+
+    private fun getIntentDialogueType(): Int {
+        return intent.getIntExtra(EXTRA_SUPPORT_DIALOG_TYPE, SUPPORT_DIALOG_TYPE_UNKNOWN)
+    }
 
     private companion object {
         const val TAG = "AdvancedProtectionDlg"

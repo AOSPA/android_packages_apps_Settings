@@ -82,6 +82,12 @@
 
     <!-- Content description for preview pager. [CHAR LIMIT=NONE] -->
     <string name="preview_pager_content_description">Preview</string>
+    <!-- Content description for home screen preview. [CHAR LIMIT=NONE] -->
+    <string name="preview_pager_home_content_description">Home screen preview</string>
+    <!-- Content description for message preview. [CHAR LIMIT=NONE] -->
+    <string name="preview_pager_message_content_description">Message preview</string>
+    <!-- Content description for email preview. [CHAR LIMIT=NONE] -->
+    <string name="preview_pager_email_content_description">Email preview</string>
     <!-- Content description for qrcode image. [CHAR LIMIT=none]-->
     <string name="qr_code_content_description">QR code</string>
     <!-- Previous button for preview pager. [CHAR LIMIT=NONE] -->
@@ -512,7 +518,7 @@
     <string name="link_locale_picker_footer_learn_more" translatable="false">https://support.google.com/android?p=per_language_app_settings</string>
 
     <!-- Title for asking to change system region or not. [CHAR LIMIT=50]-->
-    <string name="title_change_system_region">Change region to %s ?</string>
+    <string name="title_change_system_region">Change region to %s?</string>
 
     <!-- The content of a confirmation dialog indicating the impact when the user change the system region. [CHAR LIMIT=NONE]-->
     <string name="desc_notice_device_region_change">Your device will keep %s as a system language</string>
@@ -521,7 +527,7 @@
     <string name="desc_notice_device_region_change_for_preferred_language">%1$s will replace %2$s in your preferred languages</string>
 
     <!-- Title for asking to change system locale or not. [CHAR LIMIT=50]-->
-    <string name="title_change_system_locale">Change system language to %s ?</string>
+    <string name="title_change_system_locale">Change system language to %s?</string>
 
     <!-- The title of a confirmation dialog to indicate adding a system locale. [CHAR LIMIT=50]-->
     <string name="title_system_locale_addition">Add %s to preferred languages?</string>
@@ -562,7 +568,7 @@
     <!-- Category for more language settings. [CHAR LIMIT=NONE]-->
     <string name="more_language_settings_category">More language settings</string>
     <!-- Title for asking to change system locale region or not. [CHAR LIMIT=50]-->
-    <string name="title_change_system_locale_region">Change region to <xliff:g id="system_language_region" example="Canada">%1$s</xliff:g> ?</string>
+    <string name="title_change_system_locale_region">Change region to <xliff:g id="system_language_region" example="Canada">%1$s</xliff:g>?</string>
     <!-- Message for asking to change system locale region or not. [CHAR LIMIT=50]-->
     <string name="body_change_system_locale_region">Your device will keep <xliff:g id="system_language" example="English">%1$s</xliff:g> as a system language</string>
     <!-- Description for the numbering system language. [CHAR LIMIT=NONE]-->
@@ -615,10 +621,10 @@
     <string name="regional_pref_footer_learn_more_link" translatable="false">https://support.google.com/android?p=regional_preferences</string>
     <!-- The title of metric for preference of measurement system. [CHAR LIMIT=50] -->
     <string name="metric_measurement_system">Metric</string>
-    <!-- The title of imperial US for preference of measurement system. [CHAR LIMIT=50] -->
-    <string name="us_measurement_system">Imperial (US)</string>
-    <!-- The title of imperial UK for preference of measurement system. [CHAR LIMIT=50] -->
-    <string name="uk_measurement_system">Imperial (UK)</string>
+    <!-- The title of the measurement system used in the US, for example temperature is in Fahrenheit, and wind speed is mph. [CHAR LIMIT=50] -->
+    <string name="us_measurement_system">US</string>
+    <!-- The title of the measurement system used in the UK, for example temperature is in Celsius, and wind speed is mph. [CHAR LIMIT=50] -->
+    <string name="uk_measurement_system">UK</string>
 
     <!-- Category for the terms of address. [CHAR LIMIT=NONE]-->
     <string name="category_title_terms_of_address">Additional preferences</string>
@@ -848,6 +854,8 @@
     <string name="security_settings_face_preference_summary">Face added</string>
     <!-- Message shown in summary field when Face Unlock is not set up. [CHAR LIMIT=54] -->
     <string name="security_settings_face_preference_summary_none">Setup needed</string>
+    <!-- Message shown in summary field when Face Unlock is not set up. [CHAR LIMIT=54] -->
+    <string name="security_settings_face_preference_summary_none_new">Add face</string>
     <!-- Title shown for menu item that launches face settings or enrollment. [CHAR LIMIT=32] -->
     <string name="security_settings_face_preference_title_new">Face</string>
     <!-- Title shown for menu item that launches face settings or enrollment, for work profile. [CHAR LIMIT=50] -->
@@ -1021,6 +1029,8 @@
         }</string>
     <!-- message shown in summary field when no fingerprints are registered -->
     <string name="security_settings_fingerprint_preference_summary_none">Setup needed</string>
+    <!-- message shown in summary field when no fingerprints are registered -->
+    <string name="security_settings_fingerprint_preference_summary_none_new">Add fingerprint</string>
     <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
     <string name="security_settings_fingerprint_enroll_introduction_title">Set up your fingerprint</string>
     <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
@@ -1363,6 +1373,10 @@
     <string name="lock_screen_pattern_skip_fingerprint_title">Skip setup for pattern and fingerprint?</string>
     <!-- Title of dialog shown when the user tries to skip setting up a pattern, warning them of potential consequences of not doing so [CHAR LIMIT=48]-->
     <string name="lock_screen_pattern_skip_biometrics_title">Skip setup for pattern, face, and fingerprint?</string>
+    <!-- Accessibility action label for resuming animation -->
+    <string name="resume_animation">Resume animation</string>
+    <!-- Accessibility action label for pausing animation -->
+    <string name="pause_animation">Pause animation</string>
 
     <!-- Button text to setup screen lock in onboard dialog [CHAR LIMIT=34] -->
     <string name="security_settings_fingerprint_enroll_setup_screen_lock">Set up screen lock</string>
@@ -1786,6 +1800,8 @@
 
     <!-- Summary for "Configure lockscreen" when lock screen is off [CHAR LIMIT=45] -->
     <string name="unlock_set_unlock_mode_off">None</string>
+    <!-- Summary for "Configure lockscreen" when lock screen is off [CHAR LIMIT=45] -->
+    <string name="unlock_set_unlock_mode_off_new">Add PIN, pattern, password, or swipe</string>
     <!-- Summary for "Configure lockscreen" when security is disabled [CHAR LIMIT=45] -->
     <string name="unlock_set_unlock_mode_none">Swipe</string>
     <!-- Summary for "Configure lockscreen" when security pattern is enabled [CHAR LIMIT=45] -->
@@ -2091,13 +2107,19 @@
     <string name="bluetooth_scan_change">Change</string>
 
     <!-- Dialog title when key is missing in a Bluetooth device -->
-    <string name="bluetooth_key_missing_title"><xliff:g id="device_name">%1$s</xliff:g> not connected</string>
+    <string name="bluetooth_key_missing_title">Can’t connect <xliff:g id="device_name">%1$s</xliff:g></string>
     <!-- Dialog content when key is missing in a Bluetooth device -->
-    <string name="bluetooth_key_missing_message">For your security, forget this device, then pair it again</string>
+    <string name="bluetooth_key_missing_message">For more details, go to device settings</string>
     <!-- Button text to forget device when bluetooth key is missing -->
     <string name="bluetooth_key_missing_forget">Forget device</string>
     <!-- Button text to cancel when bluetooth key is missing-->
     <string name="bluetooth_key_missing_cancel">Cancel</string>
+    <!-- Button text to go to device settings when bluetooth key is missing -->
+    <string name="bluetooth_key_missing_device_settings">Device settings</string>
+    <!-- Button text to close the bluetooth key missing dialog-->
+    <string name="bluetooth_key_missing_close">Close</string>
+    <!-- Toast text to when bluetooth key is missing -->
+    <string name="bluetooth_key_missing_toast"><xliff:g id="device_name">%1$s</xliff:g> failed to connect</string>
 
     <!-- Title of device details screen [CHAR LIMIT=28]-->
     <string name="device_details_title">Device details</string>
@@ -2127,6 +2149,8 @@
     <string name="device_details_battery">Battery</string>
     <!-- Content Description for battery charging icon in device details screen [CHAR LIMIT=NONE]-->
     <string name="device_details_battery_charging">Battery, charging</string>
+    <!-- Title of item to let user know the bluetooth key is missing [CHAR LIMIT=NONE]-->
+    <string name="device_details_key_missing_title">Try restarting <xliff:g id="device_name">%1$s</xliff:g>. If that doesn’t work, forget the device. For your security, only pair it again when you aren’t in a public space.\n\nIf this device isn’t nearby, you don’t need to do anything.</string>
 
 
     <!--  Bluetooth device details. In the confirmation dialog for unpairing a paired device, this is the label on the button that will complete the unpairing action. -->
@@ -2400,7 +2424,7 @@
     <!-- Extended message for talkback to say when Advanced Options is collapsed. (e.g., Double-tap to expand) [CHAR LIMIT=NONE] -->
     <string name="wifi_advanced_toggle_description_collapsed">expand</string>
     <!-- Label for the SSID of the network -->
-    <string name="wifi_ssid">Network name</string>
+    <string name="wifi_ssid">Network name*</string>
     <!-- Hint for a text field to enter the SSID of a hidden wifi network. [CHAR LIMIT=35] -->
     <string name="wifi_ssid_hint">Enter the SSID</string>
     <!-- Label for the security of the connection -->
@@ -2446,7 +2470,11 @@
     <!-- Label for the EAP anonymous identity of the network -->
     <string name="wifi_eap_anonymous">Anonymous identity</string>
     <!-- Label for the password of the secured network -->
-    <string name="wifi_password">Password</string>
+    <string name="wifi_password">Password*</string>
+    <!-- Label for the optional password of the secured network -->
+    <string name="wifi_password_optional">Password (optional)</string>
+    <!-- Label for the password of the secured network -->
+    <string name="wifi_password_invalid">The password is invalid</string>
     <!-- Label for the check box to show password -->
     <string name="wifi_show_password">Show password</string>
     <!-- Label for the radio button to choose wifi ap 2.4 GHz band -->
@@ -2586,6 +2614,8 @@
     <string name="wifi_scan_always_turn_on_message_unknown">To improve location accuracy and for other purposes, an unknown app wants to turn on network scanning, even when Wi\u2011Fi is off.\n\nAllow this for all apps that want to scan?</string>
     <string name="wifi_scan_always_confirm_allow">Allow</string>
     <string name="wifi_scan_always_confirm_deny">Deny</string>
+    <!-- Error message displayed below the Wi-Fi EditText when the filed is required. [CHAR LIMIT=NONE] -->
+    <string name="wifi_field_required">*required</string>
 
     <!-- Dialog text to tell the user that the selected network does not have Internet access. -->
     <string name="no_internet_access_text">This network has no internet access. Stay connected?</string>
@@ -3198,6 +3228,8 @@
     <string name="twilight_mode_location_off_dialog_message">Device location needed to determine your sunset and sunrise times.</string>
     <!-- When location mode is off, twilight scheduling does not function. [CHAR LIMIT=40] -->
     <string name="twilight_mode_launch_location">Location settings</string>
+    <!-- When location mode is on but a location could not be determined, twilight scheduling does not function. [CHAR LIMIT=120] -->
+    <string name="twilight_mode_pending_location">Location services are active. Schedule will activate once location is determined.</string>
 
     <!--    Dark ui screen-->
     <!-- Display settings screen, activation button action for manual mode. [CHAR LIMIT=40] -->
@@ -3716,10 +3748,21 @@
     <string name="communal_settings_title">Communal</string>
     <!-- Summary of the communal settings under Settings > Communal [CHAR LIMIT=50] -->
     <string name="communal_settings_summary">Communal settings</string>
+    <!-- Title of Hub mode category [CHAR LIMIT=30] -->
+    <string name="hub_mode_category_title">Hub mode</string>
+    <!-- Title of the "widgets on lockscreen" settings page. [CHAR LIMIT=NONE] -->
+    <string name="widgets_on_lockscreen_title">Widgets on lock screen</string>
 
-    <!-- _satellite_setting_preference_layout -->
-    <!-- _satellite_setting_preference_layout screen title-->
-    <string name="satellite_setting">Satellite messaging</string>
+    <!-- Title of a setting to control when to automatically show widgets on the lockscren. [CHAR LIMIT=NONE] -->
+    <string name="when_to_auto_show_hubmode_title">When to automatically show</string>
+    <!-- Summary for when to automatically show hub mode (widgets on lockscreen): never  [CHAR LIMIT=100] -->
+    <string name="when_to_show_hubmode_never">Never</string>
+    <!-- Summary for when to automatically show hub mode (widgets on lockscreen): charging  [CHAR LIMIT=100] -->
+    <string name="when_to_show_hubmode_charging">While charging</string>
+    <!-- Summary for when to automatically show hub mode (widgets on lockscreen): charging and upright  [CHAR LIMIT=100] -->
+    <string name="when_to_show_hubmode_charging_and_upright">While charging and upright</string>
+    <!-- Summary for when to automatically show hub mode (widgets on lockscreen): docked  [CHAR LIMIT=100] -->
+    <string name="when_to_show_hubmode_docked">While docked</string>
 
     <!-- APN Settings -->
     <!-- APN settings screen title -->
@@ -3978,6 +4021,18 @@
     <!-- Bluetooth Tethering settings-->
     <!-- Label for bluetooth tether checkbox [CHAR LIMIT=25]-->
     <string name="bluetooth_tether_checkbox_text">Bluetooth tethering</string>
+
+    <!-- Ethernet settings-->
+    <!-- Label for ethernet IP address [CHAR LIMIT=NONE]-->
+    <string name="ethernet_ip_address">IP address</string>
+    <!-- Label for ethernet MAC address [CHAR LIMIT=NONE]-->
+    <string name="ethernet_mac_address_title">MAC address</string>
+    <!-- Label for ethernet transfer speed [CHAR LIMIT=NONE]-->
+    <string name="tx_ethernet_speed">Transit link speed</string>
+    <!-- Label for ethernet receive speed [CHAR LIMIT=NONE]-->
+    <string name="rx_ethernet_speed">Receive link speed</string>
+    <!-- Label for ethernet network usage [CHAR LIMIT=NONE]-->
+    <string name="ethernet_network_usage">Network usage</string>
 
     <!-- Ethernet Tethering settings-->
     <!-- Label for ethernet tether checkbox [CHAR LIMIT=NONE]-->
@@ -4928,7 +4983,7 @@
     <!-- Title text for 'Pointer speed'. [CHAR LIMIT=35] -->
     <string name="trackpad_pointer_speed">Cursor speed</string>
     <!-- Title text for 'Three finger tap' touchpad preference. This preference allows the user to select an action that will trigger when they tap three fingers on a touchpad. [CHAR LIMIT=60] -->
-    <string name="three_finger_tap_preference_title">Customize 3-finger tap</string>
+    <string name="three_finger_tap_preference_title">Use three-finger tap</string>
     <!-- Title for the 'Touchpad acceleration' preference switch, which dynamically adjusts cursor movement based on speed. [CHAR LIMIT=60] -->
     <string name="touchpad_acceleration_title">Touchpad acceleration</string>
     <!-- Summary text for the 'Touchpad acceleration' preference switch indicating to users that when this switch is enabled, faster movements with your fingers will move the cursor farther. [CHAR LIMIT=NONE] -->
@@ -4964,8 +5019,8 @@
     <string name="keywords_touchpad">trackpad, track pad, mouse, cursor, scroll, swipe, right click, click, pointer</string>
     <!-- Search keywords for 'Bottom-right tap', the name of the touchpad setting that allows the user to click the bottom right corner of the touchpad for more options. -->
     <string name="keywords_trackpad_bottom_right_tap">right click, tap</string>
-    <!-- Radio button text for 'mouse middle click button' action. This is one of multiple actions the user can select from the three finger tap customization radio group. The action if selected will act as a middle-click when a three-finger tap is performed on a touchpad. [CHAR LIMIT=35] -->
-    <string name="three_finger_tap_middle_click">Mouse middle click button</string>
+    <!-- Radio button text for 'middle click' action. This is one of multiple actions the user can select from the three finger tap customization radio group. The action if selected will act as a middle-click when a three-finger tap is performed on a touchpad. [CHAR LIMIT=35] -->
+    <string name="three_finger_tap_middle_click">Middle mouse button</string>
     <!-- Radio button text for 'launch assistant' action. This is one of multiple actions the user can select from the three finger tap customization radio group. The action if selected will launch the Assistant when a three-finger tap is performed on a touchpad. [CHAR LIMIT=35] -->
     <string name="three_finger_tap_launch_gemini">Launch Assistant</string>
     <!-- Radio button text for 'Go home' action. This is one of multiple actions the user can select from the three finger tap customization radio group. The action if selected will take the user home when a three-finger tap is performed on a touchpad. [CHAR LIMIT=35] -->
@@ -5780,6 +5835,9 @@
     <string name="accessibility_autoclick_longer_desc">Longer</string>
     <!-- Description for the seekbar that adjust auto click time. [CHAR_LIMIT=NONE] -->
     <string name="accessibility_autoclick_seekbar_desc">Auto click time</string>
+    <!-- Title for the toggle button that turns on/off the autoclick setting. [CHAR_LIMIT=NONE] -->
+    <!-- TODO(b/394683600): Update string to translatable once approved by UXW. -->
+    <string name="accessibility_autoclick_main_switch_title" translatable="false">Use autoclick</string>
     <!-- Title for the toggle button that turns on/off the autoclick shortcut. [CHAR_LIMIT=NONE] -->
     <!-- TODO(b/394683600): Update string to translatable once approved by UXW. -->
     <string name="accessibility_autoclick_shortcut_title" translatable="false">Autoclick shortcut</string>
@@ -5969,6 +6027,10 @@
     <string name="accessibility_hearing_device_pairing_page_title">Pair hearing device</string>
     <!-- Subtitle for the pair hearing device page. [CHAR LIMIT=NONE] -->
     <string name="accessibility_hearing_device_pairing_intro">You can pair ASHA and LE Audio hearing devices on this page. Make sure your hearing device is turned on and ready to pair.</string>
+    <!-- Subtitle for the pair hearing device page. This string is for device that only supports ASHA hearing aids. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_hearing_device_pairing_asha_only_intro">You can pair ASHA hearing devices on this page. Make sure your hearing device is turned on and ready to pair.</string>
+    <!-- Subtitle for the pair hearing device page. This string is for device that only supports LE Audio hearing aids. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_hearing_device_pairing_hap_only_intro">You can pair LE Audio hearing devices on this page. Make sure your hearing device is turned on and ready to pair.</string>
     <!-- Title for the preference category containing the list of the available hearing during and after bluetooth scanning devices. [CHAR LIMIT=30] -->
     <string name="accessibility_found_hearing_devices">Available hearing devices</string>
     <!-- Title for the preference category containing the all bluetooth devices during and after bluetooth scanning devices. Used when people can not find their hearing device in hearing device pairing list. [CHAR LIMIT=45] -->
@@ -10970,7 +11032,7 @@ Data usage charges may apply.</string>
     <string name="apps_summary"><xliff:g id="count" example="24">%1$d</xliff:g> apps installed</string>
 
     <!-- Summary of storage usage [CHAR LIMIT=NONE] -->
-    <string name="storage_summary"><xliff:g id="percentage" example="54%">%1$s</xliff:g> used - <xliff:g id="free_space_value" example="32">%2$s</xliff:g> <xliff:g id="free_space_units" example="GB">%3$s</xliff:g> free</string>
+    <string name="storage_toplevel_summary"><xliff:g id="percentage" example="54%">%1$s</xliff:g> used - <xliff:g id="free_space" example="32GB">%2$s</xliff:g> free</string>
 
     <!-- Summary for Display settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
     <string name="display_dashboard_summary">Dark theme, font size, brightness</string>
@@ -12285,9 +12347,6 @@ Data usage charges may apply.</string>
     <!-- Help URI, action disabled by restricted settings [DO NOT TRANSLATE] -->
     <string name="help_url_action_disabled_by_restricted_settings" translatable="false"></string>
 
-    <!-- Help URI, action disabled by advanced protection [DO NOT TRANSLATE] -->
-    <string name="help_url_action_disabled_by_advanced_protection" translatable="false"></string>
-
     <!-- Title label for dnd suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
     <string name="zen_suggestion_title">Update Do Not Disturb</string>
 
@@ -12800,8 +12859,10 @@ Data usage charges may apply.</string>
 
     <!-- Summary to show the current network mode is invalid. [CHAR LIMIT=NONE]-->
     <string name="mobile_network_mode_error">Invalid Network Mode <xliff:g id="networkModeId" example="0">%1$d</xliff:g>. Ignore.</string>
-    <!-- Title for satellite setting preference in mobile network settings [CHAR LIMIT=60] -->
-    <string name="satellite_setting_title">Satellite messaging</string>
+
+    <!-- _satellite_setting_preference_layout -->
+    <!-- _satellite_setting_preference_layout screen title-->
+    <string name="satellite_setting">Satellite connectivity</string>
     <!-- Summary for satellite setting preference. [CHAR LIMIT=NONE]-->
     <string name="satellite_setting_enabled_summary">Send and receive text messages by satellite. Included with your account.</string>
     <!-- Summary for satellite setting preference. [CHAR LIMIT=NONE]-->
@@ -12810,10 +12871,10 @@ Data usage charges may apply.</string>
     <string name="satellite_setting_summary_without_entitlement">Send and receive text messages by satellite. Contact your carrier for details.</string>
     <!-- Search keywords for "_satellite_setting_preference_layout" [CHAR_LIMIT=NONE] -->
     <string name="keywords_satellite_setting">Satellite messaging, satellite connectivity</string>
-    <!-- Category name "About satellite messaging" [CHAR_LIMIT=NONE] -->
-    <string name="category_name_about_satellite_messaging">About <xliff:g id="subject" example="satellite messaging">%1$s</xliff:g></string>
-    <!-- Summary for category "About satellite messaging" [CHAR_LIMIT=NONE] -->
-    <string name="title_about_satellite_setting">You can send and receive text messages by satellite with an eligible <xliff:g id="carrier_name" example="T-Mobile">%1$s</xliff:g> account</string>
+    <!-- Category name "About satellite connectivity" [CHAR_LIMIT=NONE] -->
+    <string name="category_name_about_satellite_connectivity">About satellite connectivity</string>
+    <!-- Description for category "About satellite connectivity" [CHAR_LIMIT=NONE] -->
+    <string name="description_about_satellite_setting">You can send and receive text messages and use some apps by satellite with an eligible <xliff:g id="carrier_name" example="T-Mobile">%1$s</xliff:g> account</string>
     <!-- Category title "Your mobile plan" [CHAR_LIMIT=NONE] -->
     <string name="category_title_your_satellite_plan">Your <xliff:g id="carrier_name" example="T-Mobile">%1$s</xliff:g> account</string>
     <!-- Title for category "Your mobile plan when satellite is included in plan" [CHAR_LIMIT=NONE] -->
@@ -12840,18 +12901,30 @@ Data usage charges may apply.</string>
     <string name="summary_supported_service">You can text anyone, including emergency services. Your phone will reconnect to a mobile network when available.</string>
     <!-- Summary for satellite supported service for NTN manual connection type. [CHAR_LIMIT=NONE] -->
     <string name="summary_supported_service_for_manual_type">After your phone is connected, you can text anyone, including emergency services.</string>
-    <!-- learn more text - more about satellite messaging [CHAR_LIMIT=NONE] -->
-    <string name="satellite_setting_summary_more_information">A satellite connection may be slower and is available only in some areas. Weather and certain structures may affect the connection. Calling by satellite isn\u2019t available. Emergency calls may still connect.\n\nIt may take some time for account changes to show in Settings. Contact <xliff:g id="carrier_name" example="T-Mobile">%1$s</xliff:g> for details.</string>
-    <!-- learn more text - more about satellite messaging without emergency messaging support. [CHAR_LIMIT=NONE] -->
-    <string name="satellite_setting_summary_more_information_no_emergency_messaging">A satellite connection may be slower and is available only in some areas. Weather and certain structures may affect the connection. Calling by satellite isn\u2019t available. Emergency calls may still connect. Texting with emergency services may not be available in all areas.\n\nIt may take some time for account changes to show in Settings. Contact <xliff:g id="carrier_name" example="T-Mobile">%1$s</xliff:g> for details.</string>
-    <!-- more about satellite messaging [CHAR_LIMIT=NONE] -->
-    <string name="more_about_satellite_messaging">More about <xliff:g id="subject" example="satellite messaging">%1$s</xliff:g></string>
+    <!-- learn more text - title of disclaimer of satellite connectivity  [CHAR_LIMIT=NONE] -->
+    <string name="satellite_footer_content_section_0">Keep in mind</string>
+    <!-- learn more text - part 1 of disclaimer of satellite connectivity [CHAR_LIMIT=NONE] -->
+    <string name="satellite_footer_content_section_1">Satellite connectivity may take longer and is available only in some areas.</string>
+    <!-- learn more text - part 2 of disclaimer of satellite connectivity [CHAR_LIMIT=NONE] -->
+    <string name="satellite_footer_content_section_2">Weather and certain structures may affect your satellite connection.</string>
+    <!-- learn more text - part 3 of disclaimer of satellite connectivity [CHAR_LIMIT=NONE] -->
+    <string name="satellite_footer_content_section_3">Calling by satellite isn\u2019t available.</string>
+    <!-- learn more text - part 4 of disclaimer of satellite connectivity [CHAR_LIMIT=NONE] -->
+    <string name="satellite_footer_content_section_4">Emergency calls may still connect.</string>
+    <!-- learn more text - part 5 of disclaimer of satellite connectivity [CHAR_LIMIT=NONE] -->
+    <string name="satellite_footer_content_section_5">Mobile or Wi\u2011Fi network required to view external links.</string>
+    <!-- learn more text - part 6 of disclaimer of satellite connectivity [CHAR_LIMIT=NONE] -->
+    <string name="satellite_footer_content_section_6">Texting with emergency services may not be available in all areas.</string>
+    <!-- learn more text - part 7 of disclaimer of satellite connectivity [CHAR_LIMIT=NONE] -->
+    <string name="satellite_footer_content_section_7">It may take some time for account changes to show in Settings. Contact <xliff:g id="carrier_name" example="T-Mobile">%1$s</xliff:g> for details.</string>
+    <!-- more about satellite connectivity with link resource [CHAR_LIMIT=NONE] -->
+    <string name="more_about_satellite_connectivity">More about satellite connectivity</string>
     <!-- Title for satellite warning dialog to avoid user using wifi/bluetooth/airplane mode [CHAR_LIMIT=NONE] -->
     <string name="satellite_warning_dialog_title">Can’t turn on <xliff:g id="function" example="bluetooth">%1$s</xliff:g></string>
     <!-- Content for satellite warning dialog to avoid user using wifi/bluetooth/airplane mode [CHAR_LIMIT=NONE] -->
     <string name="satellite_warning_dialog_content">To turn on <xliff:g id="function" example="bluetooth">%1$s</xliff:g>, first end the satellite connection</string>
     <!-- Category title for satellite functions with data transmission in mobile network settings [CHAR LIMIT=60] -->
-    <string name="category_title_satellite_connectivity">Satellite connectivity</string>
+    <string name="category_title_satellite_connectivity">Satellite</string>
     <!-- Title for satellite functions with data transmission in mobile network settings [CHAR LIMIT=60] -->
     <string name="title_satellite_setting_connectivity">Satellite connectivity</string>
     <!-- Description of satellite function with data transmission [CHAR LIMIT=60] -->
@@ -12866,6 +12939,10 @@ Data usage charges may apply.</string>
     <string name="title_satellite_supported_app_list_entry">see all apps</string>
     <!-- Title for a page of apps list page with Satellite service supported.  [CHAR LIMIT=60] -->
     <string name="title_satellite_supported_app_list_page">Supported apps on your phone</string>
+    <!-- Title for showing a dialog to notify user sim restriction.  [CHAR LIMIT=60] -->
+    <string name="title_satellite_dialog_for_sim_restriction">Can\u2019t add a SIM</string>
+    <!-- Description for showing a dialog to notify user sim restriction.  [CHAR LIMIT=NONE] -->
+    <string name="description_satellite_dialog_for_sim_restriction">End the satellite connection before you add a SIM</string>
 
     <!-- Title for Apn settings in mobile network settings [CHAR LIMIT=60] -->
     <string name="mobile_network_apn_title">Access Point Names</string>
@@ -13066,7 +13143,7 @@ Data usage charges may apply.</string>
     <!-- Title on confirmation dialog asking the user if they want to erase the eSIM from the device. [CHAR_LIMIT=NONE] -->
     <string name="erase_sim_dialog_title">Erase this eSIM?</string>
     <!-- Body text in confirmation dialog indicating what erasing a SIM entails. [CHAR_LIMIT=NONE] -->
-    <string name="erase_sim_dialog_text">This removes <xliff:g id="carrier_name_a" example="Google Fi">%1$s</xliff:g> service from this device, but your <xliff:g id="carrier_name_b" example="Google Fi">%1$s</xliff:g> plan won\'t be canceled.</string>
+    <string name="erase_sim_dialog_text">Erasing this eSIM removes <xliff:g id="carrier_name_a" example="Google Fi">%1$s</xliff:g> service from this device. Service for <xliff:g id="carrier_name_b" example="Google Fi">%1$s</xliff:g> won’t be canceled. To request a new eSIM, you’ll need to contact your carrier.</string>
     <!-- Button label to erase the eSIM [CHAR_LIMIT=20] -->
     <string name="erase_sim_confirm_button">Erase</string>
     <!-- Status message indicating the device is in the process of erasing the SIM. [CHAR_LIMIT=NONE] -->
@@ -13398,6 +13475,11 @@ Data usage charges may apply.</string>
     <string name="stop_app_dlg_title">Stop app?</string>
     <!-- [CHAR LIMIT=200] Manage applications, text for dialog when killing persistent apps-->
     <string name="stop_app_dlg_text">Application will be stopped to apply page size compat setting.</string>
+
+    <!-- Error messages for 16 KB Developer option-->
+    <string name="error_pending_updates">Kernel update failed. Check and install any pending updates.</string>
+
+    <string name="error_ota_failed">Kernel update failed. Error occurred while applying OTA.</string>
 
     <!-- DSU Loader. Do not translate. -->
 
@@ -13762,9 +13844,9 @@ Data usage charges may apply.</string>
     <string name="smart_forwarding_missing_alert_dialog_text">OK</string>
 
     <!-- Title for toggle if user wants to enable 2G [CHAR LIMIT=40] -->
-    <string name="enable_2g_title">Allow 2G</string>
+    <string name="enable_2g_title">2G network protection</string>
     <!-- Title for toggle if user wants to enable 2G [CHAR LIMIT=NONE] -->
-    <string name="enable_2g_summary">2G is less secure, but may improve your connection in some locations. For emergency calls, 2G is always allowed.</string>
+    <string name="enable_2g_summary">Avoids 2G networks, which are less secure. This may limit connectivity in some places. Emergency calling is always allowed.</string>
     <!-- Title for if toggle access is disabled by carrier [CHAR LIMIT=NONE] -->
     <string name="enable_2g_summary_disabled_carrier"><xliff:g id="carrier_name_2g" example="Google Fi">%1$s</xliff:g> requires 2G to be available</string>
 
@@ -14057,20 +14139,6 @@ Data usage charges may apply.</string>
     <string name="user_aspect_ratio_option_a11y"><xliff:g id="numerator">%1$s</xliff:g> by <xliff:g id="denominator">%2$s</xliff:g></string>
     <!-- [CHAR LIMIT=NONE] Warning description for app info aspect ratio page -->
     <string name="app_aspect_ratio_footer">The app will restart when you change aspect ratio. You may lose unsaved changes. Some apps may not be optimized for certain aspect ratios.</string>
-
-    <!-- TODO(b/300219974): Change aspect ratio title and clean up unused titles -->
-    <!-- [CHAR LIMIT=60] Aspect ratio experimental title settings to choose app aspect ratio -->
-    <string name="aspect_ratio_experimental_title">Aspect ratio (experimental)</string>
-    <!-- [CHAR LIMIT=60] Aspect ratio experiment title settings to choose app aspect ratio -->
-    <string name="aspect_ratio_experiment_title">Aspect ratio (experiment)</string>
-    <!-- [CHAR LIMIT=60] Aspect ratio labs title settings to choose app aspect ratio -->
-    <string name="aspect_ratio_labs_title">Aspect ratio (labs)</string>
-    <!-- [CHAR LIMIT=60] Aspect ratio experimental title label -->
-    <string name="aspect_ratio_experimental_label">Experimental</string>
-    <!-- [CHAR LIMIT=60] Aspect ratio experiment title label -->
-    <string name="aspect_ratio_experiment_label">Experiment</string>
-    <!-- [CHAR LIMIT=60] Aspect ratio labs title label -->
-    <string name="aspect_ratio_labs_label">Labs</string>
 
     <!-- Accessibility label for fingerprint sensor [CHAR LIMIT=NONE] -->
     <string name="accessibility_fingerprint_label">Fingerprint sensor</string>
@@ -14531,6 +14599,26 @@ Data usage charges may apply.</string>
     <string name="supervision_add_forgot_pin_preference_title">Forgot PIN</string>
     <!-- Title for web content filters entry [CHAR LIMIT=60] -->
     <string name="supervision_web_content_filters_title">Web content filters</string>
+    <!-- Title for web content filters browser category [CHAR LIMIT=60] -->
+    <string name="supervision_web_content_filters_browser_title">Google Chrome and Web</string>
+    <!-- Title for web content filters browser category block explicit sites option [CHAR LIMIT=60] -->
+    <string name="supervision_web_content_filters_browser_block_explicit_sites_title">Try to block explicit sites</string>
+    <!-- Summary for web content filters browser category block explicit sites option [CHAR LIMIT=None] -->
+    <string name="supervision_web_content_filters_browser_block_explicit_sites_summary">No filter is perfect, but this should help hide sexually explicit sites</string>
+    <!-- Title for web content filters browser category allow all sites option [CHAR LIMIT=60] -->
+    <string name="supervision_web_content_filters_browser_allow_all_sites_title">Allow all sites</string>
+    <!-- Title for web content filters search category [CHAR LIMIT=60] -->
+    <string name="supervision_web_content_filters_search_title">Google Search</string>
+    <!-- Title for web content filters search category filter on option [CHAR LIMIT=60] -->
+    <string name="supervision_web_content_filters_search_filter_on_title">SafeSearch filtering ON</string>
+    <!-- Summary for web content filters search category filter on option [CHAR LIMIT=None] -->
+    <string name="supervision_web_content_filters_search_filter_on_summary">Helps filter out explicit images, text, and links from search results on this device</string>
+    <!-- Title for web content filters search category filter off option [CHAR LIMIT=60] -->
+    <string name="supervision_web_content_filters_search_filter_off_title">SafeSearch filtering OFF</string>
+    <!-- Summary for web content filters search category filter off option [CHAR LIMIT=None] -->
+    <string name="supervision_web_content_filters_search_filter_off_summary">Account settings may still filter or blur explicit results</string>
     <!-- Generic content description that is attached to the preview illustration at the top of an Accessibility feature toggle page. [CHAR LIMIT=NONE] -->
+    <!-- Title for supervision PIN verification screen [CHAR LIMIT=60] -->
+    <string name="supervision_full_screen_pin_verification_title">Enter supervision PIN</string>
     <string name="accessibility_illustration_content_description"><xliff:g id="feature" example="Select to Speak">%1$s</xliff:g> animation</string>
 </resources>

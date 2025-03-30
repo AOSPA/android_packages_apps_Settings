@@ -73,7 +73,7 @@ public interface FingerprintFeatureProvider {
     default FingerprintExtPreferencesProvider getExtPreferenceProvider(
             @NonNull Context context
     ) {
-        return new FingerprintExtPreferencesProvider();
+        return new FingerprintExtPreferencesProvider(context);
     }
 
     /**

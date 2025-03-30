@@ -25,6 +25,7 @@ import com.android.settings.biometrics.BiometricsFeatureProvider
 import com.android.settings.biometrics.face.FaceFeatureProvider
 import com.android.settings.biometrics.fingerprint.FingerprintFeatureProvider
 import com.android.settings.bluetooth.BluetoothFeatureProvider
+import com.android.settings.connecteddevice.audiosharing.AudioSharingFeatureProvider
 import com.android.settings.connecteddevice.fastpair.FastPairFeatureProvider
 import com.android.settings.connecteddevice.stylus.StylusFeatureProvider
 import com.android.settings.dashboard.DashboardFeatureProvider
@@ -178,6 +179,11 @@ abstract class FeatureFactory {
      * Gets implementation for Fast Pair device updater provider.
      */
     abstract val fastPairFeatureProvider: FastPairFeatureProvider
+
+    /**
+     * Gets implementation for audio sharing related feature.
+     */
+    abstract val audioSharingFeatureProvider: AudioSharingFeatureProvider
 
     /**
      * Gets implementation for Private Space account login feature.

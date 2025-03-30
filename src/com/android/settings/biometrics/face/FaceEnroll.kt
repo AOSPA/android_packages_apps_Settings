@@ -23,7 +23,6 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED
 import com.android.settings.biometrics.combination.CombinedBiometricStatusUtils
-
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 
 class FaceEnroll: AppCompatActivity() {
@@ -39,18 +38,33 @@ class FaceEnroll: AppCompatActivity() {
     private val enrollActivityProvider: FaceEnrollActivityClassProvider
         get() = featureFactory.faceFeatureProvider.enrollActivityClassProvider
 
+    private var isLaunched = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        /**
-         *  Logs the next activity to be launched, creates an intent for that activity,
-         *  adds flags to forward the result, includes any existing extras from the current intent,
-         *  starts the new activity and then finishes the current one
-         */
-        Log.d("FaceEnroll", "forward to $nextActivityClass")
-        val nextIntent = Intent(this, nextActivityClass)
-        nextIntent.putExtras(intent)
-        startActivityForResult(nextIntent, 0)
+        if (savedInstanceState != null) {
+            isLaunched = savedInstanceState.getBoolean(KEY_IS_LAUNCHED, isLaunched)
+        }
+
+        if (!isLaunched) {
+            /**
+             *  Logs the next activity to be launched, creates an intent for that activity,
+             *  adds flags to forward the result, includes any existing extras from the current intent,
+             *  starts the new activity and then finishes the current one
+             */
+            Log.d("FaceEnroll", "forward to $nextActivityClass")
+            val nextIntent = Intent(this, nextActivityClass)
+            nextIntent.putExtras(intent)
+            startActivityForResult(nextIntent, 0)
+
+            isLaunched = true
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putBoolean(KEY_IS_LAUNCHED, isLaunched)
+        super.onSaveInstanceState(outState)
     }
 
     override fun onActivityResult(
@@ -60,6 +74,7 @@ class FaceEnroll: AppCompatActivity() {
         caller: ComponentCaller
     ) {
         super.onActivityResult(requestCode, resultCode, data, caller)
+        isLaunched = false
         if (intent.getBooleanExtra(
                 CombinedBiometricStatusUtils.EXTRA_LAUNCH_FROM_SAFETY_SOURCE_ISSUE, false)
             && resultCode != RESULT_FINISHED) {
@@ -67,5 +82,9 @@ class FaceEnroll: AppCompatActivity() {
         }
         setResult(resultCode, data)
         finish()
+    }
+
+    private companion object {
+        const val KEY_IS_LAUNCHED = "isLaunched"
     }
 }

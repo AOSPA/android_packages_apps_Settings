@@ -40,9 +40,6 @@ import android.service.quicksettings.TileService;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
@@ -57,12 +54,14 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
+import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.internal.accessibility.util.ShortcutUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.accessibility.actionbar.FeedbackMenuController;
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.flags.Flags;
@@ -73,6 +72,7 @@ import com.android.settingslib.widget.IllustrationPreference;
 import com.android.settingslib.widget.TopIntroPreference;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
+import com.google.android.setupdesign.util.ThemeHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,7 +94,6 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     // <img src="R.drawable.fileName"/>, a11y settings will get the resources successfully.
     private static final String IMG_PREFIX = "R.drawable.";
     private static final String DRAWABLE_FOLDER = "drawable";
-    static final int MENU_ID_SEND_FEEDBACK = 0;
 
     protected TopIntroPreference mTopIntroPreference;
     protected SettingsMainSwitchPreference mToggleServiceSwitchPreference;
@@ -108,7 +107,6 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     protected Intent mSettingsIntent;
     // The mComponentName maybe null, such as Magnify
     protected ComponentName mComponentName;
-    @Nullable private FeedbackManager mFeedbackManager;
     protected CharSequence mFeatureName;
     protected Uri mImageUri;
     protected CharSequence mHtmlDescription;
@@ -142,6 +140,8 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
 
         mSettingsContentObserver = new AccessibilitySettingsContentObserver(new Handler());
         registerKeysToObserverCallback(mSettingsContentObserver);
+
+        FeedbackMenuController.init(this, getFeedbackCategory());
     }
 
     protected void registerKeysToObserverCallback(
@@ -248,24 +248,6 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     }
 
     @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        if (getFeedbackManager().isAvailable()) {
-            menu.add(Menu.NONE, MENU_ID_SEND_FEEDBACK, Menu.NONE,
-                    R.string.accessibility_send_feedback_title);
-        }
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == MENU_ID_SEND_FEEDBACK) {
-            getFeedbackManager().sendFeedback();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public int getDialogMetricsCategory(int dialogId) {
         switch (dialogId) {
             case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
@@ -278,6 +260,18 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.ACCESSIBILITY_SERVICE;
+    }
+
+    /**
+     * Returns the category of the feedback page.
+     *
+     * <p>By default, this method returns {@link SettingsEnums#PAGE_UNKNOWN}. This indicates that
+     * the feedback category is unknown, and the absence of a feedback menu.
+     *
+     * @return The feedback category, which is {@link SettingsEnums#PAGE_UNKNOWN} by default.
+     */
+    protected int getFeedbackCategory() {
+        return SettingsEnums.PAGE_UNKNOWN;
     }
 
     @Override
@@ -434,7 +428,19 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         return drawable;
     }
     private void initAnimatedImagePreference() {
-        initAnimatedImagePreference(mImageUri, new IllustrationPreference(getPrefContext()));
+        initAnimatedImagePreference(mImageUri, new IllustrationPreference(getPrefContext()) {
+            @Override
+            public void onBindViewHolder(PreferenceViewHolder holder) {
+                super.onBindViewHolder(holder);
+                if (ThemeHelper.shouldApplyGlifExpressiveStyle(getContext())
+                        && isAnySetupWizard()) {
+                    View illustrationFrame = holder.findViewById(R.id.illustration_frame);
+                    final ViewGroup.LayoutParams lp = illustrationFrame.getLayoutParams();
+                    lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                    illustrationFrame.setLayoutParams(lp);
+                }
+            }
+        });
     }
 
     @VisibleForTesting
@@ -784,29 +790,5 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         RecyclerView recyclerView =
                 super.onCreateRecyclerView(inflater, parent, savedInstanceState);
         return AccessibilityFragmentUtils.addCollectionInfoToAccessibilityDelegate(recyclerView);
-    }
-
-    @VisibleForTesting
-    void setFeedbackManager(FeedbackManager feedbackManager) {
-        this.mFeedbackManager = feedbackManager;
-    }
-
-    private FeedbackManager getFeedbackManager() {
-        if (mFeedbackManager == null) {
-            mFeedbackManager = new FeedbackManager(getActivity(), getFeedbackCategory());
-        }
-        return mFeedbackManager;
-    }
-
-    /**
-     * Returns the category of the feedback page.
-     *
-     * <p>By default, this method returns {@link SettingsEnums#PAGE_UNKNOWN}. This indicates that
-     * the feedback category is unknown, and the absence of a feedback menu.
-     *
-     * @return The feedback category, which is {@link SettingsEnums#PAGE_UNKNOWN} by default.
-     */
-    protected int getFeedbackCategory() {
-        return SettingsEnums.PAGE_UNKNOWN;
     }
 }

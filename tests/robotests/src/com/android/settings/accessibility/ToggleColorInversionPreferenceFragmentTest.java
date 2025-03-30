@@ -31,6 +31,7 @@ import static org.mockito.Mockito.when;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
@@ -82,6 +83,8 @@ public class ToggleColorInversionPreferenceFragmentTest {
     private PreferenceManager mPreferenceManager;
     @Mock
     private FragmentActivity mActivity;
+    @Mock
+    private Resources mResources;
 
     @Before
     public void setUpTestFragment() {
@@ -93,6 +96,7 @@ public class ToggleColorInversionPreferenceFragmentTest {
         when(mFragment.getContext()).thenReturn(mContext);
         when(mFragment.getActivity()).thenReturn(mActivity);
         when(mActivity.getContentResolver()).thenReturn(mContext.getContentResolver());
+        when(mActivity.getResources()).thenReturn(mResources);
 
         mScreen = spy(new PreferenceScreen(mContext, /* attrs= */ null));
         when(mScreen.findPreference(mFragment.getUseServicePreferenceKey()))

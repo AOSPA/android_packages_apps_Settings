@@ -50,6 +50,13 @@ class EthernetInterfaceDetailsFragment : DashboardFragment() {
     override public fun createPreferenceControllers(
         context: Context
     ): List<AbstractPreferenceController> {
-        return listOf(EthernetInterfaceDetailsController(context, this, preferenceId ?: ""))
+        return listOf(
+            EthernetInterfaceDetailsController(
+                context,
+                this,
+                preferenceId ?: "",
+                getSettingsLifecycle(),
+            )
+        )
     }
 }

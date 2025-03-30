@@ -198,6 +198,7 @@ public class CombinedBiometricStatusUtilsTest {
     @EnableFlags(android.app.supervision.flags.Flags.FLAG_DEPRECATE_DPM_SUPERVISION_APIS)
     public void getDisabledAdmin_whenFingerprintDisabled_whenFaceDisabled_returnsRestrictions() {
         when(mSupervisionManager.isSupervisionEnabledForUser(USER_ID)).thenReturn(true);
+        when(mSupervisionManager.getActiveSupervisionAppPackage()).thenReturn("supervision.pkg");
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(null))
                 .thenReturn(KEYGUARD_DISABLE_FACE | KEYGUARD_DISABLE_FINGERPRINT);
 

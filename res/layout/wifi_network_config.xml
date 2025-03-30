@@ -62,6 +62,8 @@
                     android:layout_weight="1"
                     android:hint="@string/wifi_ssid"
                     android:textDirection="locale"
+                    app:helperTextEnabled="true"
+                    app:helperText="@string/wifi_field_required"
                     app:endIconMode="clear_text">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/ssid"
@@ -345,6 +347,8 @@
                 android:id="@+id/password_input_layout"
                 style="@style/Widget.Network.TextInputLayout.WifiConfig"
                 android:hint="@string/wifi_password"
+                app:helperTextEnabled="true"
+                app:helperText="@string/wifi_field_required"
                 app:endIconMode="password_toggle">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/password"

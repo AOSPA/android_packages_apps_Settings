@@ -33,6 +33,8 @@ import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.os.UserHandle;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
@@ -68,9 +70,12 @@ public class BluetoothKeyMissingReceiverTest {
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
     @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
+    private static final String TEST_EXCLUSIVE_MANAGER = "com.test.manager";
+
     private Context mContext;
     private ShadowApplication mShadowApplication;
     private ShadowBluetoothAdapter mShadowBluetoothAdapter;
+    @Mock private PackageManager mPackageManager;
     @Mock private LocalBluetoothManager mLocalBtManager;
     @Mock private NotificationManager mNm;
     @Mock private BluetoothDevice mBluetoothDevice;
@@ -78,6 +83,7 @@ public class BluetoothKeyMissingReceiverTest {
     @Before
     public void setUp() {
         mContext = spy(RuntimeEnvironment.getApplication());
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
         mShadowApplication = Shadow.extract(mContext);
         mShadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNm);
         mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
@@ -122,11 +128,30 @@ public class BluetoothKeyMissingReceiverTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_BLUETOOTH_KEY_MISSING_DIALOG)
+    public void broadcastReceiver_exclusiveManaged_skip() throws Exception {
+        Intent intent = spy(new Intent(BluetoothDevice.ACTION_KEY_MISSING));
+        when(intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)).thenReturn(mBluetoothDevice);
+        when(mBluetoothDevice.getBondState()).thenReturn(BluetoothDevice.BOND_BONDED);
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_EXCLUSIVE_MANAGER)).thenReturn(
+                TEST_EXCLUSIVE_MANAGER.getBytes());
+        when(mPackageManager.getApplicationInfo(
+                TEST_EXCLUSIVE_MANAGER, 0)).thenReturn(new ApplicationInfo());
+        BluetoothKeyMissingReceiver bluetoothKeyMissingReceiver = getReceiver(intent);
+
+        bluetoothKeyMissingReceiver.onReceive(mContext, intent);
+
+        verifyNoInteractions(mNm);
+        verify(mContext, never()).startActivityAsUser(any(), any());
+    }
+
+    @Test
     @Ignore("Cannot test reflection")
     @EnableFlags(Flags.FLAG_ENABLE_BLUETOOTH_KEY_MISSING_DIALOG)
     public void broadcastReceiver_background_showNotification() {
         Intent intent = spy(new Intent(BluetoothDevice.ACTION_KEY_MISSING));
         when(intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)).thenReturn(mBluetoothDevice);
+        when(mBluetoothDevice.getBondState()).thenReturn(BluetoothDevice.BOND_BONDED);
         BluetoothKeyMissingReceiver bluetoothKeyMissingReceiver = getReceiver(intent);
         bluetoothKeyMissingReceiver.onReceive(mContext, intent);
 
@@ -141,6 +166,7 @@ public class BluetoothKeyMissingReceiverTest {
         when(mLocalBtManager.isForegroundActivity()).thenReturn(true);
         Intent intent = spy(new Intent(BluetoothDevice.ACTION_KEY_MISSING));
         when(intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)).thenReturn(mBluetoothDevice);
+        when(mBluetoothDevice.getBondState()).thenReturn(BluetoothDevice.BOND_BONDED);
         BluetoothKeyMissingReceiver bluetoothKeyMissingReceiver = getReceiver(intent);
         bluetoothKeyMissingReceiver.onReceive(mContext, intent);
 

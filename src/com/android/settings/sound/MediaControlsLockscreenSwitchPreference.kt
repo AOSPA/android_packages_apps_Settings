@@ -16,24 +16,32 @@
 
 package com.android.settings.sound
 
+import android.app.settings.SettingsEnums.ACTION_SHOW_MEDIA_ON_LOCK_SCREEN
 import android.content.Context
 import android.provider.Settings.Secure.MEDIA_CONTROLS_LOCK_SCREEN
-
+import com.android.settings.R
+import com.android.settings.contract.KEY_SHOW_MEDIA_ON_LOCK_SCREEN
+import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settingslib.datastore.KeyValueStore
-import com.android.settingslib.datastore.KeyedObservableDelegate
+import com.android.settingslib.datastore.KeyValueStoreDelegate
 import com.android.settingslib.datastore.SettingsSecureStore
-import com.android.settingslib.datastore.SettingsStore
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
-import com.android.settings.R
 
 // LINT.IfChange
-class MediaControlsLockscreenSwitchPreference : SwitchPreference(
-    KEY,
-    R.string.media_controls_lockscreen_title,
-    R.string.media_controls_lockscreen_description,
-) {
+class MediaControlsLockscreenSwitchPreference :
+    SwitchPreference(
+        KEY,
+        R.string.media_controls_lockscreen_title,
+        R.string.media_controls_lockscreen_description,
+    ),
+    PreferenceActionMetricsProvider {
+
+    override val preferenceActionMetrics: Int
+        get() = ACTION_SHOW_MEDIA_ON_LOCK_SCREEN
+
+    override fun tags(context: Context) = arrayOf(KEY_SHOW_MEDIA_ON_LOCK_SCREEN)
 
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
@@ -52,17 +60,13 @@ class MediaControlsLockscreenSwitchPreference : SwitchPreference(
         MediaControlsLockscreenStore(SettingsSecureStore.get(context))
 
     @Suppress("UNCHECKED_CAST")
-    private class MediaControlsLockscreenStore(private val settingsStore: SettingsStore) :
-        KeyedObservableDelegate<String>(settingsStore), KeyValueStore {
-        override fun contains(key: String) = settingsStore.contains(key)
+    private class MediaControlsLockscreenStore(private val settingsStore: KeyValueStore) :
+        KeyValueStoreDelegate {
+
+        override val keyValueStoreDelegate
+            get() = settingsStore
 
         override fun <T : Any> getDefaultValue(key: String, valueType: Class<T>) = true as T
-
-        override fun <T : Any> getValue(key: String, valueType: Class<T>) =
-            settingsStore.getValue(key, valueType) ?: getDefaultValue(key, valueType)
-
-        override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) =
-            settingsStore.setValue(key, valueType, value)
     }
 
     companion object {

@@ -57,13 +57,13 @@ public class FaceSettingsKeyguardUnlockPreferenceControllerTest {
     public void setChecked_checked_updateMetrics() {
         mController.setChecked(true);
         verify(mFeatureFactory.metricsFeatureProvider).action(any(),
-                eq(SettingsEnums.ACTION_FACE_ENABLED_ON_KEYGUARD), eq(true));
+                eq(SettingsEnums.ACTION_FACE_ENABLED_ON_KEYGUARD_SETTINGS), eq(true));
     }
 
     @Test
     public void setChecked_unchecked_updateMetrics() {
         mController.setChecked(false);
         verify(mFeatureFactory.metricsFeatureProvider).action(any(),
-                eq(SettingsEnums.ACTION_FACE_ENABLED_ON_KEYGUARD), eq(false));
+                eq(SettingsEnums.ACTION_FACE_ENABLED_ON_KEYGUARD_SETTINGS), eq(false));
     }
 }

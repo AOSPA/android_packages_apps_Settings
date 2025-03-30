@@ -30,6 +30,11 @@
         settings:searchable="false"
         settings:lottie_rawRes="@drawable/accessibility_dwell"/>
 
+    <com.android.settingslib.widget.MainSwitchPreference
+        android:key="accessibility_autoclick_main_switch"
+        android:title="@string/accessibility_autoclick_main_switch_title"
+        settings:controller="com.android.settings.accessibility.ToggleAutoclickMainSwitchPreferenceController"/>
+
     <com.android.settings.accessibility.ShortcutPreference
         android:key="autoclick_shortcut_preference"
         android:title="@string/accessibility_autoclick_shortcut_title"

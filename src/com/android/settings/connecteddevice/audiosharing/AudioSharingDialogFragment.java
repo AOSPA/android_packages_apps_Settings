@@ -40,7 +40,9 @@ import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothPairingDetail;
 import com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsQrCodeFragment;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settingslib.bluetooth.BluetoothLeBroadcastMetadataExt;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 
 import com.google.common.collect.Iterables;
@@ -74,6 +76,9 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
     @Nullable private static DialogEventListener sListener;
     private static Pair<Integer, Object>[] sEventData = new Pair[0];
     @Nullable private static Fragment sHost;
+
+    AudioSharingFeatureProvider audioSharingFeatureProvider =
+            FeatureFactory.getFeatureFactory().getAudioSharingFeatureProvider();
 
     @Override
     public int getMetricsCategory() {
@@ -158,6 +163,9 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
             Log.d(TAG, "Create dialog error: null deviceItems");
             return builder.build();
         }
+        BluetoothLeBroadcastMetadata metadata = arguments.getParcelable(
+                BUNDLE_KEY_BROADCAST_METADATA, BluetoothLeBroadcastMetadata.class);
+        Drawable qrCodeDrawable = null;
         if (deviceItems.isEmpty()) {
             builder.setTitle(R.string.audio_sharing_share_dialog_title)
                     .setCustomPositiveButton(
@@ -181,9 +189,7 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
                                 }
                                 launcher.launch();
                             });
-            BluetoothLeBroadcastMetadata metadata = arguments.getParcelable(
-                    BUNDLE_KEY_BROADCAST_METADATA, BluetoothLeBroadcastMetadata.class);
-            Drawable qrCodeDrawable = metadata == null ? null : getQrCodeDrawable(metadata,
+            qrCodeDrawable = metadata == null ? null : getQrCodeDrawable(metadata,
                     getContext()).orElse(null);
             if (qrCodeDrawable != null) {
                 String broadcastName =
@@ -195,8 +201,7 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
                         new String(metadata.getBroadcastCode(), StandardCharsets.UTF_8)) :
                         getString(R.string.audio_sharing_dialog_qr_code_content_no_password,
                                 broadcastName);
-                builder.setCustomImage(qrCodeDrawable)
-                        .setCustomMessage(message)
+                builder.setCustomMessage(message)
                         .setCustomMessage2(R.string.audio_sharing_dialog_pair_new_device_content)
                         .setCustomNegativeButton(R.string.audio_streams_dialog_close,
                                 v -> onCancelClick());
@@ -251,7 +256,17 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
                     .setCustomNegativeButton(
                             com.android.settings.R.string.cancel, v -> onCancelClick());
         }
-        return builder.build();
+        Dialog dialog = builder.build();
+        dialog.show();
+        if (deviceItems.isEmpty() && qrCodeDrawable != null) {
+            audioSharingFeatureProvider.setQrCode(
+                    this,
+                    dialog.getWindow().getDecorView(),
+                    R.id.description_image,
+                    qrCodeDrawable,
+                    BluetoothLeBroadcastMetadataExt.INSTANCE.toQrCodeString(metadata));
+        }
+        return dialog;
     }
 
     private void onCancelClick() {

@@ -32,10 +32,13 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
 import android.platform.test.annotations.RequiresFlagsDisabled;
 import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -64,6 +67,8 @@ public class ScreenLockPreferenceDetailsUtilsTest {
     private static final int SOURCE_METRICS_CATEGORY = 10;
     private static final int USER_ID = 11;
 
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     @Rule
     public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
     @Mock
@@ -118,8 +123,20 @@ public class ScreenLockPreferenceDetailsUtilsTest {
     }
 
     @Test
-    public void getSummary_unsecureAndDisabledPattern_shouldReturnUnlockModeOff() {
+    @DisableFlags(com.android.settings.flags.Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
+    public void getSummary_unsecureAndDisabledPattern_flagOff_shouldReturnUnlockModeOff() {
         final String summary = prepareString("unlock_set_unlock_mode_off", "unlockModeOff");
+
+        when(mLockPatternUtils.isSecure(USER_ID)).thenReturn(false);
+        when(mLockPatternUtils.isLockScreenDisabled(anyInt())).thenReturn(true);
+
+        assertThat(mScreenLockPreferenceDetailsUtils.getSummary(USER_ID)).isEqualTo(summary);
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
+    public void getSummary_unsecureAndDisabledPattern_flagOn_shouldReturnUnlockModeOff() {
+        final String summary = prepareString("unlock_set_unlock_mode_off_new", "unlockModeOff");
 
         when(mLockPatternUtils.isSecure(USER_ID)).thenReturn(false);
         when(mLockPatternUtils.isLockScreenDisabled(anyInt())).thenReturn(true);

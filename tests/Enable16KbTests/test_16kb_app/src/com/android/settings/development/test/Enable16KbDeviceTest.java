@@ -41,7 +41,7 @@ import java.util.Locale;
 
 @RunWith(AndroidJUnit4.class)
 public class Enable16KbDeviceTest {
-    private static final long TIMEOUT = 2000;
+    private static final long TIMEOUT = 3000;
 
     private static final String ENABLE_16K_TOGGLE = "Boot with 16 KB page size";
     private static final String BUILD_NUMBER = "Build number";

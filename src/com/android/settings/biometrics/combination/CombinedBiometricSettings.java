@@ -204,5 +204,11 @@ public class CombinedBiometricSettings extends BiometricsSettingsBase {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new CombinedBiometricSearchIndexProvider(R.xml.security_settings_combined_biometric);
+            new CombinedBiometricSearchIndexProvider(R.xml.security_settings_combined_biometric) {
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return super.isPageSearchEnabled(context)
+                            && !Flags.biometricsOnboardingEducation();
+                }
+            };
 }

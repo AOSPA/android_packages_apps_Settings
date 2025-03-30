@@ -18,6 +18,7 @@ package com.android.settings.supervision
 import android.app.supervision.flags.Flags
 import android.content.Context
 import com.android.settings.R
+import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
@@ -41,10 +42,29 @@ class SupervisionWebContentFiltersScreen : PreferenceScreenCreator {
 
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(context, this) {
-            // TODO(b/395134536) implement the screen.
+            +PreferenceCategory(
+                BROWSER_RADIO_BUTTON_GROUP,
+                R.string.supervision_web_content_filters_browser_title,
+            ) +=
+                {
+                    val dataStore = SupervisionSafeSitesDataStore(context)
+                    +SupervisionBlockExplicitSitesPreference(dataStore)
+                    +SupervisionAllowAllSitesPreference(dataStore)
+                }
+            +PreferenceCategory(
+                SEARCH_RADIO_BUTTON_GROUP,
+                R.string.supervision_web_content_filters_search_title,
+            ) +=
+                {
+                    val dataStore = SupervisionSafeSearchDataStore(context)
+                    +SupervisionSearchFilterOnPreference(dataStore)
+                    +SupervisionSearchFilterOffPreference(dataStore)
+                }
         }
 
     companion object {
         const val KEY = "supervision_web_content_filters"
+        internal const val BROWSER_RADIO_BUTTON_GROUP = "browser_radio_button_group"
+        internal const val SEARCH_RADIO_BUTTON_GROUP = "search_radio_button_group"
     }
 }
