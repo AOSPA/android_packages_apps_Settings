@@ -53,7 +53,7 @@ public class FaceFeatureProviderImpl implements FaceFeatureProvider {
 
     @Override
     public boolean isAttentionSupported(Context context) {
-        return true;
+        return false;
     }
 
     @Override
