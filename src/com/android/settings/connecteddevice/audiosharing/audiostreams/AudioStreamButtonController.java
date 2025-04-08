@@ -20,6 +20,8 @@ import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssista
 import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant.LocalBluetoothLeBroadcastSourceState.STREAMING;
 import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant.getLocalSourceState;
 
+import static java.util.Collections.emptyList;
+
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastAssistant;
@@ -54,6 +56,7 @@ public class AudioStreamButtonController extends BasePreferenceController
     private static final String TAG = "AudioStreamButtonController";
     private static final String KEY = "audio_stream_button";
     private static final int SOURCE_ORIGIN_REPOSITORY = SourceOriginForLogging.REPOSITORY.ordinal();
+    private static final boolean DEBUG = BluetoothUtils.D;
 
     @VisibleForTesting
     final BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
@@ -171,6 +174,12 @@ public class AudioStreamButtonController extends BasePreferenceController
                             ThreadUtils.postOnBackgroundThread(
                                     () -> {
                                         mAudioStreamsHelper.removeSource(mBroadcastId);
+                                        if (mLeBroadcastAssistant.isSearchInProgress()) {
+                                            if (DEBUG) {
+                                                Log.d(TAG, "Search is in progress, stop scanning");
+                                            }
+                                            mLeBroadcastAssistant.stopSearchingForSources();
+                                        }
                                         mMetricsFeatureProvider.action(
                                                 mContext,
                                                 SettingsEnums
@@ -202,6 +211,12 @@ public class AudioStreamButtonController extends BasePreferenceController
                                                 mAudioStreamsRepository.getSavedMetadata(
                                                         mContext, mBroadcastId);
                                         if (metadata != null) {
+                                            if (!mLeBroadcastAssistant.isSearchInProgress()) {
+                                                if (DEBUG) {
+                                                     Log.d(TAG, "Start scanning before addSource");
+                                                }
+                                                mLeBroadcastAssistant.startSearchingForSources(emptyList());
+                                            }
                                             mAudioStreamsHelper.addSource(metadata);
                                             mMetricsFeatureProvider.action(
                                                     mContext,
