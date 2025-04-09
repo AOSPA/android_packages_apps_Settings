@@ -141,7 +141,7 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
          *  current phone count + 2:  new one IMEI preference for slot 0
          *  current phone count + 3:  new one IMEI preference for slot 1
          */
-        int phoneCount = mTelephonyManager.getPhoneCount();
+        int phoneCount = mIsDsdsToSsConfigValid ? mSlotCount : mTelephonyManager.getPhoneCount();
         if (Utils.isSupportCTPA(mContext) && phoneCount >= 2) {
             final int slot0PhoneType = mTelephonyManager.getCurrentPhoneTypeForSlot(0);
             final int slot1PhoneType = mTelephonyManager.getCurrentPhoneTypeForSlot(1);
@@ -269,7 +269,7 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
 
     private CharSequence getTitleForCdmaPhone(int simSlot, boolean isPrimaryImei) {
         int titleId = isPrimaryImei ? R.string.meid_multi_sim_primary : R.string.meid_multi_sim;
-        return isMultiSim() ? mContext.getString(titleId, simSlot + 1)
+        return isMultiSim() || mIsDsdsToSsConfigValid ? mContext.getString(titleId, simSlot + 1)
                 : mContext.getString(R.string.status_meid_number);
     }
 
@@ -303,7 +303,8 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
     }
 
     private int convertSlotId(int simSlot) {
-        final int phoneCount = mTelephonyManager.getPhoneCount();
+        final int phoneCount =
+                mIsDsdsToSsConfigValid ? mSlotCount : mTelephonyManager.getPhoneCount();
         if (simSlot < phoneCount) {
             return simSlot;
         }
@@ -330,7 +331,8 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
 
     public int getPhoneType(int slotIndex) {
         if (Utils.isSupportCTPA(mContext)) {
-            final int phoneCount = mTelephonyManager.getPhoneCount();
+            final int phoneCount =
+                    mIsDsdsToSsConfigValid ? mSlotCount : mTelephonyManager.getPhoneCount();
             if (slotIndex == phoneCount) {
                 return PHONE_TYPE_CDMA;
             } else if (slotIndex > phoneCount) {
