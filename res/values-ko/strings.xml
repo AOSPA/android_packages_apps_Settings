@@ -344,7 +344,8 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{사용 - 앱 #개가 위치 정보에 액세스할 수 있음}other{사용 - 앱 #개가 위치 정보에 액세스할 수 있음}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"로드 중…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"근처 기기 권한이 있는 앱이 연결된 기기의 상대적인 위치를 파악할 수 있습니다."</string>
-    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"앱 및 서비스에 대한 위치 정보 액세스가 사용 중지되어 있습니다. 그래도 긴급 전화번호로 전화를 걸거나 문자 메시지를 보내면 기기의 위치 정보가 긴급 구조원에게 전달될 수 있습니다."</string>
+    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"위치 설정에 대해 자세히 알아보기"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"변경하려면 ChromeOS 설정 &gt; 개인 정보 보호 및 보안 &gt; 개인 정보 보호 설정 &gt; 위치 액세스로 이동하세요."</string>
     <string name="account_settings_title" msgid="9138880127246241885">"계정"</string>
@@ -610,6 +611,10 @@
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"패턴 및 얼굴 인식 설정을 건너뛰시겠습니까?"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"패턴 및 지문 설정을 건너뛰시겠습니까?"</string>
     <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"패턴, 얼굴 인식, 지문 설정을 건너뛰시겠습니까?"</string>
+    <!-- no translation found for resume_animation (5259729861893297887) -->
+    <skip />
+    <!-- no translation found for pause_animation (2209064682137909056) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"화면 잠금 설정"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"완료"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"죄송합니다. 센서가 아닙니다."</string>
@@ -943,8 +948,7 @@
     <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"취소"</string>
     <string name="bluetooth_key_missing_device_settings" msgid="5512091368141961890">"기기 설정"</string>
     <string name="bluetooth_key_missing_close" msgid="6724520133374312040">"닫기"</string>
-    <!-- no translation found for bluetooth_key_missing_toast (8692796546000643569) -->
-    <skip />
+    <string name="bluetooth_key_missing_toast" msgid="8692796546000643569">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> 기기를 연결할 수 없음"</string>
     <string name="device_details_title" msgid="1155622417516195481">"기기 세부정보"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"키보드 설정"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"설정 더보기"</string>
@@ -1437,6 +1441,8 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"사용 안함"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"표시 시간"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"기기를 들어 대기 모드 해제"</string>
+    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
+    <skip />
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"절전 모드 자동 해제"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"표시 시점"</string>
     <string name="doze_title" msgid="1523090408230862316">"알림 수신 시 화면 켜짐"</string>
@@ -1603,6 +1609,8 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"충전 중"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"충전 중이고 똑바로 세워져 있을 때"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"도킹하는 동안"</string>
+    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
+    <skip />
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"액세스 포인트 수정"</string>
     <string name="apn_add" msgid="9069613192201630934">"액세스 포인트 추가"</string>
@@ -2269,10 +2277,9 @@
     <string name="interaction_control_category_title" msgid="2696474616743882372">"상호작용 관리"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"타이밍 제어"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"시스템 제어"</string>
-    <string name="accessibility_feedback_title" msgid="6690472705407526006">"의견"</string>
-    <string name="accessibility_feedback_summary" msgid="4576591591334314827">"설문조사에 참여하여 서비스 개선에 동참해 주세요."</string>
-    <string name="accessibility_feedback_disabled_summary" msgid="3652321859452620942">"참여 가능한 설문조사 없음"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"의견 보내기"</string>
+    <!-- no translation found for accessibility_send_survey_title (7899716184811587023) -->
+    <skip />
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"다운로드한 앱"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"실험"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"기능 플래그"</string>
@@ -2562,6 +2569,10 @@
     <string name="accessibility_hearing_device_footer_hap_only_summary_tts" msgid="4440097982533045507">"LE 오디오가 지원되지 않는 다른 청각 보조 기기를 찾으려면 "<b>"새 기기와 페어링"</b>", "<b>"기기 더보기"</b>"를 차례로 탭하세요"</string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"보청기 페어링"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"이 페이지에서 보청기용 오디오 스트리밍 및 LE 오디오 청각 보조 기기를 페어링할 수 있습니다. 청각 보조 기기의 전원이 켜져 있으며 페어링할 준비가 되어 있는지 확인하세요"</string>
+    <!-- no translation found for accessibility_hearing_device_pairing_asha_only_intro (5679230908462987522) -->
+    <skip />
+    <!-- no translation found for accessibility_hearing_device_pairing_hap_only_intro (2233661046254311681) -->
+    <skip />
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"사용 가능한 청각 보조 기기"</string>
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"청각 보조 기기가 표시되지 않나요?"</string>
     <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"기기 더보기"</string>
@@ -5061,24 +5072,15 @@
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"단계에 따라 위성에 연결하세요"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"응급 서비스를 포함해 누구에게나 문자 메시지를 보낼 수 있습니다. 모바일 네트워크가 사용 가능해지면 휴대전화가 네트워크에 다시 연결됩니다."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"휴대전화가 연결되면 응급 서비스를 포함해 누구에게나 문자 메시지를 보낼 수 있습니다."</string>
-    <!-- no translation found for satellite_footer_content_section_0 (4169483813004415556) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_1 (7925931577373229601) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_2 (7699185178461362541) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_3 (4652426135622555607) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_4 (2294227482962815751) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_5 (3053256489735265540) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_6 (1448633393918612418) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_7 (5524773673918954918) -->
-    <skip />
-    <!-- no translation found for more_about_satellite_connectivity (9110502891919936054) -->
-    <skip />
+    <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"주의사항"</string>
+    <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"위성 연결에는 시간이 더 오래 소요될 수 있으며, 일부 지역에서만 사용 가능합니다."</string>
+    <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"날씨 및 특정 구조물이 위성 연결에 영향을 미칠 수 있습니다."</string>
+    <string name="satellite_footer_content_section_3" msgid="4652426135622555607">"위성 통화를 사용할 수 없습니다."</string>
+    <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"긴급 전화는 계속 연결될 수 있습니다."</string>
+    <string name="satellite_footer_content_section_5" msgid="3053256489735265540">"외부 링크를 보려면 모바일 또는 Wi-Fi 네트워크가 필요합니다."</string>
+    <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"일부 지역에서는 응급 서비스에 문자 메시지를 전송할 수 없습니다."</string>
+    <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"계정 변경사항이 설정에 표시되는 데 다소 시간이 걸릴 수 있습니다. 자세한 정보는 <xliff:g id="CARRIER_NAME">%1$s</xliff:g>에 문의하세요."</string>
+    <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"위성 연결에 관해 자세히 알아보기"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"<xliff:g id="FUNCTION">%1$s</xliff:g> 기능을 사용 설정할 수 없음"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"<xliff:g id="FUNCTION">%1$s</xliff:g> 기능을 사용 설정하려면 먼저 위성 연결을 해제하세요."</string>
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"위성"</string>
@@ -5089,6 +5091,10 @@
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"휴대전화에 설치된 지원되는 앱"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"앱 모두 보기"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"휴대전화에 설치된 지원되는 앱"</string>
+    <!-- no translation found for title_satellite_dialog_for_sim_restriction (454718192423216397) -->
+    <skip />
+    <!-- no translation found for description_satellite_dialog_for_sim_restriction (5465487347427595435) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"액세스 포인트 네임(APN)"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g>에 연결된 경우 사용할 수 없음"</string>
@@ -5767,16 +5773,11 @@
     <!-- no translation found for supervision_web_content_filters_browser_block_explicit_sites_summary (1477766506765966613) -->
     <skip />
     <string name="supervision_web_content_filters_browser_allow_all_sites_title" msgid="3909739592466381845">"모든 사이트 허용"</string>
-    <!-- no translation found for supervision_web_content_filters_search_title (726335318009305564) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_on_title (4855846261141136285) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_on_summary (1162258144140293269) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_off_title (6049461395304222346) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_off_summary (3834238970190924433) -->
-    <skip />
+    <string name="supervision_web_content_filters_search_title" msgid="726335318009305564">"Google 검색"</string>
+    <string name="supervision_web_content_filters_search_filter_on_title" msgid="4855846261141136285">"세이프서치 필터링 사용 설정됨"</string>
+    <string name="supervision_web_content_filters_search_filter_on_summary" msgid="1162258144140293269">"이 기기의 검색 결과에서 선정적인 이미지, 텍스트, 링크를 필터링할 수 있습니다."</string>
+    <string name="supervision_web_content_filters_search_filter_off_title" msgid="6049461395304222346">"세이프서치 필터링 사용 중지됨"</string>
+    <string name="supervision_web_content_filters_search_filter_off_summary" msgid="3834238970190924433">"계정 설정으로 인해 선정적인 검색 결과가 필터링되거나 흐리게 처리될 수 있습니다"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"감독 PIN 입력"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> 애니메이션"</string>
 </resources>

@@ -26,6 +26,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.server.accessibility.Flags;
 import com.android.settings.R;
@@ -97,6 +99,12 @@ public class ToggleAutoclickPreferenceFragment
     @Override
     protected String getShortcutPreferenceKey() {
         return KEY_AUTOCLICK_SHORTCUT_PREFERENCE;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        use(ToggleAutoclickDelayBeforeClickController.class).setFragment(this);
     }
 
     @Override

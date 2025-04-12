@@ -36,7 +36,15 @@ class PreferenceDataApiTest {
             "key1" to PreferenceData(icon = 1, title = "Title 1", summary = "Summary 1"),
             "key2" to PreferenceData(title = "Title 2"),
             "key3" to PreferenceData(icon = 3, summary = "Summary 3"),
-            "key4" to PreferenceData()
+            "key4" to PreferenceData(),
+            "key5" to PreferenceData(
+                icon = 1,
+                title = "Title 1",
+                summary = "Summary 1",
+                action = "android.settings.SUPERVISION_UPGRADE",
+                trailingIcon = 2,
+                targetPackage = "com.google.android.gms.kids"
+            ),
         )
         val encoded = api.responseCodec.encode(response)
         val decoded = api.responseCodec.decode(encoded)

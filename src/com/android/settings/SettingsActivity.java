@@ -510,6 +510,17 @@ public class SettingsActivity extends SettingsBaseActivity
         super.onApplyThemeResource(theme, resid, first);
     }
 
+    /** Returns the current theme and checks if needing to apply expressive theme. */
+    @Override
+    public Theme getTheme() {
+        Theme theme = super.getTheme();
+        theme.applyStyle(
+                SettingsThemeHelper.isExpressiveTheme(this)
+                        ? R.style.Theme_SubSettings_Expressive
+                        : R.style.Theme_SubSettings, true);
+        return theme;
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

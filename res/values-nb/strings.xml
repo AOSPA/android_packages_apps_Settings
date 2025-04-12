@@ -264,10 +264,8 @@
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"Apper som ikke støtter regionsinnstillinger, bruker sine egne standardinnstillinger for lokalitet."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Finn ut mer om språkinnstillinger."</string>
     <string name="metric_measurement_system" msgid="7489725697268321541">"Metriske enheter"</string>
-    <!-- no translation found for us_measurement_system (8406695347890345490) -->
-    <skip />
-    <!-- no translation found for uk_measurement_system (1814065008707689505) -->
-    <skip />
+    <string name="us_measurement_system" msgid="8406695347890345490">"USA"</string>
+    <string name="uk_measurement_system" msgid="1814065008707689505">"Storbritannia"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"Flere innstillinger"</string>
     <string name="terms_of_address_title" msgid="7338630812197476808">"Velg hvordan du tiltales"</string>
     <string name="terms_of_address_summary" msgid="7802443422612600620">"Enheten din kan tilpasse hvordan du tiltales"</string>
@@ -346,7 +344,8 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{På / # app har tilgang til posisjon}other{På / # apper har tilgang til posisjon}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Laster inn …"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Apper med tillatelsen for enheter i nærheten kan fastslå den relative posisjonen til tilkoblede enheter."</string>
-    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Posisjonstilgang er av for apper og tjenester. Enhetsposisjonen kan fremdeles sendes til utrykningspersonell når du ringer eller sender tekstmelding til et nødnummer."</string>
+    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Finn ut mer om posisjonsinnstillinger"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"For å bytte, gå til ChromeOS-innstillingene &gt; Personvern og sikkerhet &gt; Personverninnstillinger &gt; Posisjonstilgang"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Kontoer"</string>
@@ -612,6 +611,10 @@
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"Hopp over konfigurering av mønster og ansikt?"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"Hopp over konfig. av mønster og fingeravtrykk?"</string>
     <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"Avbryt konfig. mønster, ansikt og fingeravtrykk?"</string>
+    <!-- no translation found for resume_animation (5259729861893297887) -->
+    <skip />
+    <!-- no translation found for pause_animation (2209064682137909056) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"Konfigurer skjermlås"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Ferdig"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Ops, det er ikke sensoren"</string>
@@ -939,18 +942,13 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Når Bluetooth er slått på, kan enheten kommunisere med Bluetooth-enheter i nærheten.\n\nFor å gi deg en bedre enhetsopplevelse kan apper og tjenester søke etter enheter i nærheten når som helst – selv når Bluetooth er slått av. Dette kan for eksempel brukes for å forbedre posisjonsbaserte funksjoner og tjenester. Du kan endre dette i innstillingene for Bluetooth-skanning."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Når Bluetooth er slått på, kan enheten kommunisere med andre Bluetooth-enheter i nærheten. Funksjoner som Quick Share og Finn enheten min bruker Bluetooth.\n\nApper og tjenester kan fremdeles søke etter enheter i nærheten når som helst – selv når Bluetooth er av. Dette kan for eksempel brukes til å forbedre posisjonsbaserte funksjoner og tjenester. Du kan endre dette i innstillingene for Bluetooth-skanning."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Endre"</string>
-    <!-- no translation found for bluetooth_key_missing_title (8462010102528132965) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_message (3188093580372443815) -->
-    <skip />
+    <string name="bluetooth_key_missing_title" msgid="8462010102528132965">"Kan ikke koble til <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="bluetooth_key_missing_message" msgid="3188093580372443815">"Gå til enhetsinnstillingene for å se mer informasjon"</string>
     <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"Glem enheten"</string>
     <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"Avbryt"</string>
-    <!-- no translation found for bluetooth_key_missing_device_settings (5512091368141961890) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_close (6724520133374312040) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_toast (8692796546000643569) -->
-    <skip />
+    <string name="bluetooth_key_missing_device_settings" msgid="5512091368141961890">"Enhetsinnstillinger"</string>
+    <string name="bluetooth_key_missing_close" msgid="6724520133374312040">"Lukk"</string>
+    <string name="bluetooth_key_missing_toast" msgid="8692796546000643569">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> kunne ikke koble til"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Enhetsdetaljer"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Tastaturinnstillinger"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Flere innstillinger"</string>
@@ -965,8 +963,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"På forsøksstadiet. Bedrer lydkvaliteten."</string>
     <string name="device_details_battery" msgid="5466987755790847884">"Batteri"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"Batteri, lader"</string>
-    <!-- no translation found for device_details_key_missing_title (3568401701538114387) -->
-    <skip />
+    <string name="device_details_key_missing_title" msgid="3568401701538114387">"Prøv å starte <xliff:g id="DEVICE_NAME">%1$s</xliff:g> på nytt. Hvis ikke det fungerer, kan du glemme enheten. For sikkerhets skyld bør du bare koble den til på nytt når du ikke er på et offentlig sted.\n\nHvis ikke denne enheten er i nærheten, trenger du ikke å gjøre noe."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Glem enheten"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Koble fra appen"</string>
     <string name="device_details_more_settings" msgid="950302792331611271">"Flere innstillinger"</string>
@@ -1103,8 +1100,7 @@
     <string name="wifi_eap_identity" msgid="3629406902174137028">"Identitet"</string>
     <string name="wifi_eap_anonymous" msgid="8630332141751267000">"Anonym identitet"</string>
     <string name="wifi_password" msgid="165204973532996861">"Passord*"</string>
-    <!-- no translation found for wifi_password_optional (6770706664834070705) -->
-    <skip />
+    <string name="wifi_password_optional" msgid="6770706664834070705">"Passord (valgfritt)"</string>
     <string name="wifi_password_invalid" msgid="8884500804472828356">"Passordet er ugyldig"</string>
     <string name="wifi_show_password" msgid="6865993988238157923">"Vis passord"</string>
     <string name="wifi_ap_choose_2G" msgid="1436802195991542016">"2,4 GHz-bånd"</string>
@@ -1445,6 +1441,8 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Av"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Starttidspunkt"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Aktiver enheten med løftebevegelser"</string>
+    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
+    <skip />
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Passiv skjerm"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Når skal det vises?"</string>
     <string name="doze_title" msgid="1523090408230862316">"Vekk skjermen ved varsler"</string>
@@ -1611,6 +1609,8 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Når enheten lades"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"Når enheten lades og er oppreist"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"Når enheten er i dokken"</string>
+    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
+    <skip />
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Rediger tilgangspunkt"</string>
     <string name="apn_add" msgid="9069613192201630934">"Legg til tilgangspunkt"</string>
@@ -2277,10 +2277,9 @@
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Interaksjonskontroller"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Tidskontroller"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Systemkontroller"</string>
-    <string name="accessibility_feedback_title" msgid="6690472705407526006">"Tilbakemelding"</string>
-    <string name="accessibility_feedback_summary" msgid="4576591591334314827">"Bidra til å gjøre tjenesten bedre ved å svare på en undersøkelse"</string>
-    <string name="accessibility_feedback_disabled_summary" msgid="3652321859452620942">"Ingen undersøkelser er tilgjengelige"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Send tilbakemelding"</string>
+    <!-- no translation found for accessibility_send_survey_title (7899716184811587023) -->
+    <skip />
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Nedlastede apper"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"På forsøksstadiet"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Funksjonsflagg"</string>
@@ -2570,6 +2569,10 @@
     <string name="accessibility_hearing_device_footer_hap_only_summary_tts" msgid="4440097982533045507">"For å finne andre høreapparater som ikke har støtte for LE-lyd, trykk på "<b>"Koble til en ny enhet"</b>" og deretter på "<b>"Se flere enheter"</b></string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Koble til høreapparat"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"Du kan koble sammen ASHA- og LE-lyd-høreapparater på denne siden. Forsikre deg om at høreapparatet ditt er slått på og klart til sammenkobling."</string>
+    <!-- no translation found for accessibility_hearing_device_pairing_asha_only_intro (5679230908462987522) -->
+    <skip />
+    <!-- no translation found for accessibility_hearing_device_pairing_hap_only_intro (2233661046254311681) -->
+    <skip />
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Tilgjengelige høreapparater"</string>
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"Ser du ikke høreapparatet ditt?"</string>
     <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"Se flere enheter"</string>
@@ -4426,8 +4429,7 @@
     <string name="disconnected" msgid="3469373726996129247">"Ikke tilkoblet"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Ikke tilkoblet"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> apper er installert"</string>
-    <!-- no translation found for storage_toplevel_summary (6708203706751754934) -->
-    <skip />
+    <string name="storage_toplevel_summary" msgid="6708203706751754934">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> brukt – <xliff:g id="FREE_SPACE">%2$s</xliff:g> ledig"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Mørkt tema, skriftstørrelse, lysstyrke"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Gjennomsnittlig er <xliff:g id="USED_MEMORY">%1$s</xliff:g> av <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> minne brukt"</string>
     <string name="users_summary" msgid="8473589474976307510">"Logget på som <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -4498,7 +4500,7 @@
     <string name="wifi_data_usage" msgid="6868503699134605707">"Wifi-databruk"</string>
     <string name="non_carrier_data_usage" msgid="6494603202578414755">"Databruk utenfor operatøren"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"Ethernet-databruk"</string>
-    <string name="wifi" msgid="2932584495223243842">"Wifi"</string>
+    <string name="wifi" msgid="2932584495223243842">"wifi"</string>
     <string name="ethernet" msgid="4665162609974492983">"Ethernet"</string>
     <string name="ethernet_interface_title" msgid="1634881244068292765">"Ethernet <xliff:g id="INTERFACEID">%1$s</xliff:g>"</string>
     <string name="cell_data_template" msgid="6077963976103260821">"<xliff:g id="AMOUNT">^1</xliff:g> mobildata"</string>
@@ -5050,16 +5052,13 @@
     <string name="roaming_alert_title" msgid="9052791521868787985">"Vil du tillate data-roaming?"</string>
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"Sjekk med nettverksleverandøren din for priser."</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Ugyldig nettverksmodus (<xliff:g id="NETWORKMODEID">%1$d</xliff:g>). Ignorer."</string>
-    <!-- no translation found for satellite_setting (4650503806634496443) -->
-    <skip />
+    <string name="satellite_setting" msgid="4650503806634496443">"Satellittilkobling"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Send og motta tekstmeldinger via satellitt. Inkludert med kontoen din."</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Send og motta tekstmeldinger via satellitt. Ikke inkludert med kontoen din."</string>
     <string name="satellite_setting_summary_without_entitlement" msgid="5284998840770992554">"Send og motta tekstmeldinger via satellitt. Kontakt operatøren din for å få vite mer."</string>
     <string name="keywords_satellite_setting" msgid="613553612424945946">"Satellittmeldinger, satellittilkobling"</string>
-    <!-- no translation found for category_name_about_satellite_connectivity (3971142716898783631) -->
-    <skip />
-    <!-- no translation found for description_about_satellite_setting (5539359064330584941) -->
-    <skip />
+    <string name="category_name_about_satellite_connectivity" msgid="3971142716898783631">"Om satellittilkobling"</string>
+    <string name="description_about_satellite_setting" msgid="5539359064330584941">"Du kan sende og motta tekstmeldinger og bruke noen apper via satellitt med en kvalifisert <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-konto"</string>
     <string name="category_title_your_satellite_plan" msgid="8169426217950247126">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>-kontoen din"</string>
     <string name="title_have_satellite_plan" msgid="2048372355699977947">"Satellittmeldinger er inkludert med kontoen din"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"Satellittmeldinger er ikke inkludert med kontoen din"</string>
@@ -5073,28 +5072,18 @@
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Følg trinnene for å koble til satellitten"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"Du kan sende melding til hvem som helst, inkludert nødtjenester. Telefonen kobles til et mobilnettverk igjen når det er tilgjengelig."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"Når telefonen er tilkoblet, kan du sende melding til hvem som helst, inkludert nødtjenester."</string>
-    <!-- no translation found for satellite_footer_content_section_0 (4169483813004415556) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_1 (7925931577373229601) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_2 (7699185178461362541) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_3 (4652426135622555607) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_4 (2294227482962815751) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_5 (3053256489735265540) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_6 (1448633393918612418) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_7 (5524773673918954918) -->
-    <skip />
-    <!-- no translation found for more_about_satellite_connectivity (9110502891919936054) -->
-    <skip />
+    <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Husk"</string>
+    <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"Satellittilkobling kan ta lengre tid og er bare tilgjengelig i noen områder."</string>
+    <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"Været og visse bygninger kan påvirke satellittilkoblingen."</string>
+    <string name="satellite_footer_content_section_3" msgid="4652426135622555607">"Anrop via satellitt er ikke tilgjengelig."</string>
+    <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"Nødanrop kan fortsatt kobles til."</string>
+    <string name="satellite_footer_content_section_5" msgid="3053256489735265540">"Krever mobil- eller wifi-nettverk for å se eksterne linker."</string>
+    <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"Det kan hende at tekstmeldinger til nødtjenester ikke er tilgjengelige i alle områder."</string>
+    <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"Det kan ta litt tid før kontoendringer vises i innstillingene. Kontakt <xliff:g id="CARRIER_NAME">%1$s</xliff:g> for å finne ut mer."</string>
+    <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"Mer om satellittilkobling"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Kan ikke slå på <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"For å slå på <xliff:g id="FUNCTION">%1$s</xliff:g>, avslutt først satellittilkoblingen"</string>
-    <!-- no translation found for category_title_satellite_connectivity (7740500012311192133) -->
-    <skip />
+    <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Satellitt"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Satellittilkobling"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"satellittilkobling"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"satellittmeldinger"</string>
@@ -5102,6 +5091,10 @@
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Støttede apper på telefonen"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"se alle appene"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Støttede apper på telefonen"</string>
+    <!-- no translation found for title_satellite_dialog_for_sim_restriction (454718192423216397) -->
+    <skip />
+    <!-- no translation found for description_satellite_dialog_for_sim_restriction (5465487347427595435) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Navn på tilgangspunkt"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Utilgjengelig når du er koblet til <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5778,16 +5771,11 @@
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Prøv å blokkere ikke-barnevennlige nettsteder"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_summary" msgid="1477766506765966613">"Ingen filtre er perfekte, men dette bør bidra til å skjule nettsteder med seksuelt innhold"</string>
     <string name="supervision_web_content_filters_browser_allow_all_sites_title" msgid="3909739592466381845">"Tillat alle nettsteder"</string>
-    <!-- no translation found for supervision_web_content_filters_search_title (726335318009305564) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_on_title (4855846261141136285) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_on_summary (1162258144140293269) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_off_title (6049461395304222346) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_off_summary (3834238970190924433) -->
-    <skip />
+    <string name="supervision_web_content_filters_search_title" msgid="726335318009305564">"Google Søk"</string>
+    <string name="supervision_web_content_filters_search_filter_on_title" msgid="4855846261141136285">"Sikkert søk-filtrering er PÅ"</string>
+    <string name="supervision_web_content_filters_search_filter_on_summary" msgid="1162258144140293269">"Bidrar til å filtrere bort ikke-barnevennlige bilder, tekster og linker fra søkeresultater på denne enheten"</string>
+    <string name="supervision_web_content_filters_search_filter_off_title" msgid="6049461395304222346">"Sikkert søk-filtrering er AV"</string>
+    <string name="supervision_web_content_filters_search_filter_off_summary" msgid="3834238970190924433">"Kontoinnstillingene kan fortsatt filtrere bort ikke-barnevennlige resultater eller gjøre dem uskarpe"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Legg inn PIN-koden for tilsyn"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g>-animasjon"</string>
 </resources>

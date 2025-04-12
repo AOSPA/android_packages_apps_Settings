@@ -1,0 +1,9 @@
+package: "com.android.settings.flags"
+container: "system_ext"
+
+flag {
+  name: "catalyst_app_list"
+  namespace: "android_settings"
+  description: "Basic support for App List pages"
+  bug: "404280548"
+}

@@ -264,10 +264,8 @@
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"Если в приложении нельзя выбрать регион, будут использоваться настройки по умолчанию."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Узнайте больше о языковых настройках"</string>
     <string name="metric_measurement_system" msgid="7489725697268321541">"Метрическая"</string>
-    <!-- no translation found for us_measurement_system (8406695347890345490) -->
-    <skip />
-    <!-- no translation found for uk_measurement_system (1814065008707689505) -->
-    <skip />
+    <string name="us_measurement_system" msgid="8406695347890345490">"Американская система"</string>
+    <string name="uk_measurement_system" msgid="1814065008707689505">"Британская система"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"Дополнительные настройки"</string>
     <string name="terms_of_address_title" msgid="7338630812197476808">"Выберите, как к вам обращаться"</string>
     <string name="terms_of_address_summary" msgid="7802443422612600620">"Настроить обращение к вам на устройстве"</string>
@@ -346,7 +344,8 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Включено. Доступ к данным о местоположении есть у # приложения.}one{Включено. Доступ к данным о местоположении есть у # приложения.}few{Включено. Доступ к данным о местоположении есть у # приложений.}many{Включено. Доступ к данным о местоположении есть у # приложений.}other{Включено. Доступ к данным о местоположении есть у # приложения.}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Загрузка…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Приложения, у которых есть разрешение \"Устройства поблизости\", могут определять относительное местоположение подключенных устройств."</string>
-    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Доступ к данным о местоположении для приложений и сервисов отключен. Если вы позвоните по номеру экстренной службы или отправите на него сообщение, данные о местоположении вашего устройства могут быть переданы спасателям."</string>
+    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Подробнее о настройках местоположения…"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Чтобы внести изменения, выберите \"Настройки ChromeOS &gt; Конфиденциальность и безопасность &gt; Настройки конфиденциальности &gt; Доступ к геоданным\""</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Аккаунты"</string>
@@ -612,6 +611,10 @@
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"Пропустить настройку ключа и фейсконтроля?"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"Пропустить настройку ключа и отпечатка пальца?"</string>
     <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"Пропустить настройку ключа, фейсконтроля и отпечатка?"</string>
+    <!-- no translation found for resume_animation (5259729861893297887) -->
+    <skip />
+    <!-- no translation found for pause_animation (2209064682137909056) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"Настроить блокировку экрана"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Готово"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Мимо! Это не сканер отпечатков пальцев..."</string>
@@ -939,18 +942,13 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Функция Bluetooth позволяет устанавливать подключение к устройствам Bluetooth поблизости.\n\nОбратите внимание, что для улучшения работы устройства, например повышения точности геолокации, приложения и сервисы могут искать устройства поблизости, даже если вы отключили Bluetooth. Чтобы запретить им это, отключите поиск устройств Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Если вы включите Bluetooth, устройство сможет обмениваться данными с другими Bluetooth-устройствами поблизости. Эта технология используется в таких функциях и сервисах, как \"Быстрая отправка\" и \"Найти устройство\".\n\nДаже если вы отключите Bluetooth, приложения и сервисы смогут в любой момент выполнять поиск устройств поблизости, например для улучшения работы функций и сервисов, использующих данные о местоположении. Вы можете изменить это в настройках поиска Bluetooth-устройств."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Изменить"</string>
-    <!-- no translation found for bluetooth_key_missing_title (8462010102528132965) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_message (3188093580372443815) -->
-    <skip />
+    <string name="bluetooth_key_missing_title" msgid="8462010102528132965">"Не удается подключить устройство \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\""</string>
+    <string name="bluetooth_key_missing_message" msgid="3188093580372443815">"Более подробную информацию вы найдете в настройках устройства."</string>
     <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"Удалить устройство"</string>
     <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"Отмена"</string>
-    <!-- no translation found for bluetooth_key_missing_device_settings (5512091368141961890) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_close (6724520133374312040) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_toast (8692796546000643569) -->
-    <skip />
+    <string name="bluetooth_key_missing_device_settings" msgid="5512091368141961890">"Настройки устройства"</string>
+    <string name="bluetooth_key_missing_close" msgid="6724520133374312040">"Закрыть"</string>
+    <string name="bluetooth_key_missing_toast" msgid="8692796546000643569">"Не удалось подключить устройство \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Об устройстве"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Настройки клавиатуры"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Дополнительные настройки"</string>
@@ -965,8 +963,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Улучш. качества звука (экспериментальн.)"</string>
     <string name="device_details_battery" msgid="5466987755790847884">"Батарея"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"Батарея, идет зарядка"</string>
-    <!-- no translation found for device_details_key_missing_title (3568401701538114387) -->
-    <skip />
+    <string name="device_details_key_missing_title" msgid="3568401701538114387">"Перезагрузите устройство \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\". Если это не поможет, удалите его из списка. Чтобы не подвергать устройство опасности, не следует заново подключать его в общественном месте.\n\nЕсли этого устройства поблизости нет, никаких действий не требуется."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"ОК"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Отключение приложения"</string>
     <string name="device_details_more_settings" msgid="950302792331611271">"Дополнительные настройки"</string>
@@ -1103,8 +1100,7 @@
     <string name="wifi_eap_identity" msgid="3629406902174137028">"Пользователь"</string>
     <string name="wifi_eap_anonymous" msgid="8630332141751267000">"Анонимный пользователь"</string>
     <string name="wifi_password" msgid="165204973532996861">"Пароль*"</string>
-    <!-- no translation found for wifi_password_optional (6770706664834070705) -->
-    <skip />
+    <string name="wifi_password_optional" msgid="6770706664834070705">"Пароль (необязательно)"</string>
     <string name="wifi_password_invalid" msgid="8884500804472828356">"Неверный пароль"</string>
     <string name="wifi_show_password" msgid="6865993988238157923">"Показать пароль"</string>
     <string name="wifi_ap_choose_2G" msgid="1436802195991542016">"2,4 ГГц"</string>
@@ -1445,6 +1441,8 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Отключено"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Когда запускать"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Активация в вертикальном положении"</string>
+    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
+    <skip />
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Автоматич. включение экрана"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Когда включать экран"</string>
     <string name="doze_title" msgid="1523090408230862316">"Включать экран при получении уведомлений"</string>
@@ -1611,6 +1609,8 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Во время зарядки"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"Во время зарядки в вертикальном положении"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"На док-станции"</string>
+    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
+    <skip />
     <string name="apn_settings" msgid="4295467389400441299">"Точки доступа"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Изменить точку доступа"</string>
     <string name="apn_add" msgid="9069613192201630934">"Добавить точку доступа"</string>
@@ -2277,10 +2277,9 @@
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Элементы управления"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Настройка времени задержки"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Управление системой"</string>
-    <string name="accessibility_feedback_title" msgid="6690472705407526006">"Отзыв"</string>
-    <string name="accessibility_feedback_summary" msgid="4576591591334314827">"Помогите нам стать лучше, пройдя опрос"</string>
-    <string name="accessibility_feedback_disabled_summary" msgid="3652321859452620942">"Нет доступных опросов"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Отправить отзыв"</string>
+    <!-- no translation found for accessibility_send_survey_title (7899716184811587023) -->
+    <skip />
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Скачанные приложения"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Экспериментальные функции"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Экспериментальные функции"</string>
@@ -2570,6 +2569,10 @@
     <string name="accessibility_hearing_device_footer_hap_only_summary_tts" msgid="4440097982533045507">"Чтобы найти слуховые аппараты, которые не поддерживают LE Audio, нажмите  "<b>"Добавить устройство"</b>", а затем "<b>"Другие устройства"</b></string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Подключение аппарата"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"На этой странице вы можете подключить слуховые устройства ASHA и LE Audio. Убедитесь, что ваш слуховой аппарат работает и готов к подключению."</string>
+    <!-- no translation found for accessibility_hearing_device_pairing_asha_only_intro (5679230908462987522) -->
+    <skip />
+    <!-- no translation found for accessibility_hearing_device_pairing_hap_only_intro (2233661046254311681) -->
+    <skip />
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Доступные слуховые аппараты"</string>
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"Не нашли свой слуховой аппарат?"</string>
     <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"Другие устройства"</string>
@@ -4426,8 +4429,7 @@
     <string name="disconnected" msgid="3469373726996129247">"Не подключено"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Не подключена"</string>
     <string name="apps_summary" msgid="4007416751775414252">"Установлено приложений: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
-    <!-- no translation found for storage_toplevel_summary (6708203706751754934) -->
-    <skip />
+    <string name="storage_toplevel_summary" msgid="6708203706751754934">"Занято: <xliff:g id="PERCENTAGE">%1$s</xliff:g>. Свободно: <xliff:g id="FREE_SPACE">%2$s</xliff:g>."</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Тёмная тема, размер шрифта, яркость"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Используется в среднем <xliff:g id="USED_MEMORY">%1$s</xliff:g> из <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
     <string name="users_summary" msgid="8473589474976307510">"Вы вошли как <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -5050,16 +5052,13 @@
     <string name="roaming_alert_title" msgid="9052791521868787985">"Разрешить интернет-роуминг?"</string>
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"Информацию о тарифах вы можете получить у интернет-провайдера."</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Недопустимый режим сети (<xliff:g id="NETWORKMODEID">%1$d</xliff:g>). Не используется."</string>
-    <!-- no translation found for satellite_setting (4650503806634496443) -->
-    <skip />
+    <string name="satellite_setting" msgid="4650503806634496443">"Спутниковая связь"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Обмен текстовыми сообщениями по спутниковой связи включен для вашего аккаунта."</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Обмен текстовыми сообщениями по спутниковой связи. Недоступен для вашего аккаунта."</string>
     <string name="satellite_setting_summary_without_entitlement" msgid="5284998840770992554">"Обмен текстовыми сообщениями по спутниковой связи. За подробными сведениями обращайтесь к своему оператору связи."</string>
     <string name="keywords_satellite_setting" msgid="613553612424945946">"спутниковый обмен сообщениями, обмен данными со спутником"</string>
-    <!-- no translation found for category_name_about_satellite_connectivity (3971142716898783631) -->
-    <skip />
-    <!-- no translation found for description_about_satellite_setting (5539359064330584941) -->
-    <skip />
+    <string name="category_name_about_satellite_connectivity" msgid="3971142716898783631">"О спутниковой связи"</string>
+    <string name="description_about_satellite_setting" msgid="5539359064330584941">"Чтобы отправлять и принимать сообщения, а также использовать некоторые приложения при помощи спутниковой связи, аккаунт оператора \"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>\" должен соответствовать требованиям."</string>
     <string name="category_title_your_satellite_plan" msgid="8169426217950247126">"Ваш аккаунт <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="title_have_satellite_plan" msgid="2048372355699977947">"В вашем аккаунте есть возможность обмениваться сообщениями по спутниковой связи"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"В вашем аккаунте нет возможности обмениваться сообщениями по спутниковой связи"</string>
@@ -5073,28 +5072,18 @@
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Подключитесь к спутнику, следуя инструкциям"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"Вы можете отправлять текстовые сообщения кому угодно, в том числе экстренным службам. Ваш телефон повторно подключится к мобильной сети, когда она станет доступна."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"После подключения к спутнику вы сможете отправлять текстовые сообщения кому угодно, в том числе экстренным службам."</string>
-    <!-- no translation found for satellite_footer_content_section_0 (4169483813004415556) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_1 (7925931577373229601) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_2 (7699185178461362541) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_3 (4652426135622555607) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_4 (2294227482962815751) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_5 (3053256489735265540) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_6 (1448633393918612418) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_7 (5524773673918954918) -->
-    <skip />
-    <!-- no translation found for more_about_satellite_connectivity (9110502891919936054) -->
-    <skip />
+    <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Важно!"</string>
+    <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"Обмен данными по спутниковой связи может занять больше времени и доступен только в некоторых регионах."</string>
+    <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"Иногда качество соединения снижается из-за погодных условий или внешних препятствий."</string>
+    <string name="satellite_footer_content_section_3" msgid="4652426135622555607">"Звонки по спутниковой связи недоступны."</string>
+    <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"Однако могут работать экстренные вызовы."</string>
+    <string name="satellite_footer_content_section_5" msgid="3053256489735265540">"Чтобы просматривать внешние ссылки, подключитесь к мобильному интернету или сети Wi-Fi."</string>
+    <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"Обмен текстовыми сообщениями с экстренными службами может быть доступен не во всех регионах."</string>
+    <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"Изменения в аккаунте могут отразиться в настройках не сразу. За дополнительной информацией обратитесь к оператору \"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>\"."</string>
+    <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"Подробнее о спутниковой связи…"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Не удается включить функцию \"<xliff:g id="FUNCTION">%1$s</xliff:g>\""</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Чтобы включить функцию \"<xliff:g id="FUNCTION">%1$s</xliff:g>\", сначала отключите спутниковую связь."</string>
-    <!-- no translation found for category_title_satellite_connectivity (7740500012311192133) -->
-    <skip />
+    <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Спутник"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Обмен данными со спутником"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"Обмен данными со спутником"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"Спутниковый обмен сообщениями"</string>
@@ -5102,6 +5091,10 @@
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Совместимые приложения на устройстве"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"Показать все приложения"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Совместимые приложения на устройстве"</string>
+    <!-- no translation found for title_satellite_dialog_for_sim_restriction (454718192423216397) -->
+    <skip />
+    <!-- no translation found for description_satellite_dialog_for_sim_restriction (5465487347427595435) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Точки доступа"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"точка доступа"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Недоступны при подключении к <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5780,16 +5773,11 @@
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Блокировать сайты для взрослых"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_summary" msgid="1477766506765966613">"Идеальных фильтров не существует, но этот вариант поможет скрывать сайты с откровенным контентом"</string>
     <string name="supervision_web_content_filters_browser_allow_all_sites_title" msgid="3909739592466381845">"Разрешить доступ ко всем сайтам"</string>
-    <!-- no translation found for supervision_web_content_filters_search_title (726335318009305564) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_on_title (4855846261141136285) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_on_summary (1162258144140293269) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_off_title (6049461395304222346) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_off_summary (3834238970190924433) -->
-    <skip />
+    <string name="supervision_web_content_filters_search_title" msgid="726335318009305564">"Google Поиск"</string>
+    <string name="supervision_web_content_filters_search_filter_on_title" msgid="4855846261141136285">"Включить Безопасный поиск"</string>
+    <string name="supervision_web_content_filters_search_filter_on_summary" msgid="1162258144140293269">"Скрывать из результатов поиска на этом устройстве текст, изображения и ссылки для взрослых"</string>
+    <string name="supervision_web_content_filters_search_filter_off_title" msgid="6049461395304222346">"Отключить Безопасный поиск"</string>
+    <string name="supervision_web_content_filters_search_filter_off_summary" msgid="3834238970190924433">"Результаты для взрослых все равно могут скрываться или размываться из-за настроек аккаунта"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Ввести PIN-код родительского контроля"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> (анимация)"</string>
 </resources>

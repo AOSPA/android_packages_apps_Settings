@@ -344,7 +344,8 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Be / # alkalmazás hozzáfér a helyadatokhoz}other{Be / # alkalmazás hozzáfér a helyadatokhoz}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Betöltés…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"A közeli eszközökre vonatkozó engedéllyel rendelkező alkalmazások meghatározhatják a csatlakoztatott eszközök relatív pozícióját."</string>
-    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"A helyhozzáférés ki van kapcsolva az alkalmazásoknál és a szolgáltatásoknál. A rendszer azonban így is elküldheti az eszköz helyét a segélyszolgálatoknak, ha Ön segélyhívó számot hív, vagy SMS-t küld rá."</string>
+    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"További információ a helybeállításokról"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"A módosításához lépjen a következő menübe ChromeOS-eszközén: Beállítások &gt; Adatvédelem és biztonság &gt; Adatvédelmi beállítások &gt; Helyhozzáférés"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Fiókok"</string>
@@ -610,6 +611,10 @@
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"Kihagyja a minta és arc beállítását?"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"Kihagyja a minta és ujjlenyomat beállítását?"</string>
     <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"Kihagyja a minta, arc, ujjlenyomat beállítását?"</string>
+    <!-- no translation found for resume_animation (5259729861893297887) -->
+    <skip />
+    <!-- no translation found for pause_animation (2209064682137909056) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"Képernyőzár beállítása"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Kész"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Hoppá! Az nem az érzékelő"</string>
@@ -943,8 +948,7 @@
     <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"Mégse"</string>
     <string name="bluetooth_key_missing_device_settings" msgid="5512091368141961890">"Eszközbeállítások"</string>
     <string name="bluetooth_key_missing_close" msgid="6724520133374312040">"Bezárás"</string>
-    <!-- no translation found for bluetooth_key_missing_toast (8692796546000643569) -->
-    <skip />
+    <string name="bluetooth_key_missing_toast" msgid="8692796546000643569">"Nem sikerült csatlakoztatni a(z) <xliff:g id="DEVICE_NAME">%1$s</xliff:g> eszközt"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Eszközadatok"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Billentyűzetbeállítások"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"További beállítások"</string>
@@ -1437,6 +1441,8 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Ki"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Kezdés ideje"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Felébresztéshez emelje meg"</string>
+    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
+    <skip />
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Környezeti kijelző"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Mikor jelenjen meg?"</string>
     <string name="doze_title" msgid="1523090408230862316">"Képernyő ébresztése értesítéskor"</string>
@@ -1603,6 +1609,8 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Töltés közben"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"Töltés közben, álló helyzetben"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"Dokkolt állapotban"</string>
+    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
+    <skip />
     <string name="apn_settings" msgid="4295467389400441299">"APN-ek"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Hozzáférési pont szerkesztése"</string>
     <string name="apn_add" msgid="9069613192201630934">"Hozzáférési pont hozzáadása"</string>
@@ -2269,10 +2277,9 @@
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Interakcióvezérlők"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Időzítési vezérlők"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Rendszerbeállítások"</string>
-    <string name="accessibility_feedback_title" msgid="6690472705407526006">"Visszajelzés"</string>
-    <string name="accessibility_feedback_summary" msgid="4576591591334314827">"Segítsen a továbbfejlesztésben egy felmérés kitöltésével"</string>
-    <string name="accessibility_feedback_disabled_summary" msgid="3652321859452620942">"Nem állnak rendelkezésre felmérések"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Visszajelzés küldése"</string>
+    <!-- no translation found for accessibility_send_survey_title (7899716184811587023) -->
+    <skip />
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Letöltött alkalmazások"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Kísérleti"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Funkciókapcsolók"</string>
@@ -2562,6 +2569,10 @@
     <string name="accessibility_hearing_device_footer_hap_only_summary_tts" msgid="4440097982533045507">"Az alacsony energiaszintű hangátvitelt nem támogató egyéb hallókészülékek kereséséhez koppintson az "<b>"Új eszköz párosítása"</b>", majd a "<b>"További eszközök megjelenítése"</b>" lehetőségre."</string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Hallásjavító párosítása"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"Ezen az oldalon az ASHA protokollt és az alacsony energiaszintű hangátvitelt támogató hallókészülékeket párosíthatja. Győződjön meg arról, hogy a hallókészüléke be van kapcsolva, és készen áll a párosításra."</string>
+    <!-- no translation found for accessibility_hearing_device_pairing_asha_only_intro (5679230908462987522) -->
+    <skip />
+    <!-- no translation found for accessibility_hearing_device_pairing_hap_only_intro (2233661046254311681) -->
+    <skip />
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Elérhető hallókészülékek"</string>
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"Nem látja a hallásjavító eszközt?"</string>
     <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"További eszközök megjelenítése"</string>
@@ -5061,24 +5072,15 @@
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"A műholdhoz való csatlakozáshoz kövesse a lépéseket"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"Bárkinek küldhet szöveges üzeneteket, a segélyhívó szolgálatokat is beleértve. A telefon újracsatlakozik az adott mobilhálózatra (ha rendelkezésre áll)."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"Miután telefonja csatlakozott, Ön bárkinek küldhet SMS-t, a segélyhívó szolgálatot is beleértve."</string>
-    <!-- no translation found for satellite_footer_content_section_0 (4169483813004415556) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_1 (7925931577373229601) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_2 (7699185178461362541) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_3 (4652426135622555607) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_4 (2294227482962815751) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_5 (3053256489735265540) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_6 (1448633393918612418) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_7 (5524773673918954918) -->
-    <skip />
-    <!-- no translation found for more_about_satellite_connectivity (9110502891919936054) -->
-    <skip />
+    <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Fontos tudnivalók"</string>
+    <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"A műholdas kapcsolódás hosszabb időt vehet igénybe, és csak bizonyos területeken áll rendelkezésre."</string>
+    <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"Az időjárás és bizonyos építmények befolyásolhatják a műholdas kapcsolatot."</string>
+    <string name="satellite_footer_content_section_3" msgid="4652426135622555607">"Műholdas telefonálásra nincs lehetőség."</string>
+    <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"Ettől függetlenül előfordulhat, hogy a segélyhívásokat kapcsolják."</string>
+    <string name="satellite_footer_content_section_5" msgid="3053256489735265540">"A külső linkek megtekintéséhez mobil- vagy Wi‑Fi-hálózat szükséges."</string>
+    <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"Előfordulhat, hogy a segélyhívó szolgálattal való üzenetküldés nem minden területen áll rendelkezésre."</string>
+    <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"Némi időbe telhet, amíg a fiókkal kapcsolatos változtatások megjelennek a Beállításokban. A részletekért keresse szolgáltatóját: <xliff:g id="CARRIER_NAME">%1$s</xliff:g>."</string>
+    <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"További információ a műholdas kapcsolatról"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Nem lehetséges a(z) <xliff:g id="FUNCTION">%1$s</xliff:g> bekapcsolása"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"A(z) <xliff:g id="FUNCTION">%1$s</xliff:g> bekapcsolásához előbb szakítsa meg a műholdas kapcsolatot"</string>
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Műhold"</string>
@@ -5089,6 +5091,10 @@
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Támogatott alkalmazások a telefonon"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"az összes alkalmazás megjelenítése"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Támogatott alkalmazások a telefonon"</string>
+    <!-- no translation found for title_satellite_dialog_for_sim_restriction (454718192423216397) -->
+    <skip />
+    <!-- no translation found for description_satellite_dialog_for_sim_restriction (5465487347427595435) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Hozzáférési pontok nevei"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Nem hozzáférhető, amikor a következőhöz csatlakozik: <xliff:g id="CARRIER">%1$s</xliff:g>"</string>

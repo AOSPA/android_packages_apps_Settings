@@ -344,7 +344,8 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{ON / # 個のアプリに位置情報へのアクセスを許可}other{ON / # 個のアプリに位置情報へのアクセスを許可}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"読み込んでいます…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"付近のデバイスへのアクセス許可を持つアプリは、接続されたデバイスの相対位置を確認できます。"</string>
-    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"アプリとサービスの位置情報へのアクセスは OFF になっています。緊急通報番号に電話をかけたりテキスト メッセージを送信したりした場合は、デバイスの位置情報が緊急サービスに送信されることがあります。"</string>
+    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"位置情報の設定の詳細"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"変更するには ChromeOS の [設定] &gt; [プライバシーとセキュリティ] &gt; [プライバシー管理] &gt; [位置情報へのアクセス] に移動します"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"アカウント"</string>
@@ -610,6 +611,10 @@
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"パターンと顔の設定をスキップしますか？"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"パターンと指紋の設定をスキップしますか？"</string>
     <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"パターン、顔、指紋の設定をスキップしますか？"</string>
+    <!-- no translation found for resume_animation (5259729861893297887) -->
+    <skip />
+    <!-- no translation found for pause_animation (2209064682137909056) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"画面ロックを設定"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"完了"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"これはセンサーではありません"</string>
@@ -1381,8 +1386,7 @@
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"夜間モードは現在 OFF です"</string>
     <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"日の入りと日の出の時刻を使用するには、位置情報へのアクセスを許可してください。"</string>
     <string name="twilight_mode_launch_location" msgid="7799112373591153956">"位置情報の設定"</string>
-    <!-- no translation found for twilight_mode_pending_location (6829434234071614405) -->
-    <skip />
+    <string name="twilight_mode_pending_location" msgid="6829434234071614405">"位置情報サービスは有効です。位置情報が特定されると、スケジュールが有効になります。"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"今すぐ ON にする"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"OFF にする"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"日の出まで ON にする"</string>
@@ -1436,6 +1440,8 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"OFF"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"起動するタイミング"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"指を離してスリープ状態から復帰"</string>
+    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
+    <skip />
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"アンビエント表示"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"表示するタイミング"</string>
     <string name="doze_title" msgid="1523090408230862316">"通知で画面を ON にする"</string>
@@ -1602,6 +1608,8 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"充電中"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"縦置きで充電中"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"ドッキング時"</string>
+    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
+    <skip />
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"アクセスポイントの編集"</string>
     <string name="apn_add" msgid="9069613192201630934">"アクセス ポイントを追加"</string>
@@ -2120,8 +2128,7 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"右下をクリック"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"タッチパッドの右下をクリックするとオプションが表示されます"</string>
     <string name="trackpad_pointer_speed" msgid="5672221910698079303">"カーソル速度"</string>
-    <!-- no translation found for three_finger_tap_preference_title (1836080810837854140) -->
-    <skip />
+    <string name="three_finger_tap_preference_title" msgid="1836080810837854140">"3 本の指でタップ"</string>
     <string name="touchpad_acceleration_title" msgid="176627555191021888">"タッチパッド アクセラレーション"</string>
     <string name="touchpad_acceleration_summary" msgid="8057075483967535793">"タッチパッド上でより速く動かすとカーソルの移動幅が大きくなります"</string>
     <string name="pointer_fill_style" msgid="8794616790175016092">"ポインタの色"</string>
@@ -2138,8 +2145,7 @@
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"タッチパッド ジェスチャーを学ぶ"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"トラックパッド, マウス, カーソル, スクロール, スワイプ, 右クリック, クリック, ポインタ"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"右クリック, タップ"</string>
-    <!-- no translation found for three_finger_tap_middle_click (7898931632908866867) -->
-    <skip />
+    <string name="three_finger_tap_middle_click" msgid="7898931632908866867">"マウスの中央のボタン"</string>
     <string name="three_finger_tap_launch_gemini" msgid="4030401656711588982">"アシスタントを起動"</string>
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"ホームに移動"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"戻る"</string>
@@ -2268,10 +2274,9 @@
     <string name="interaction_control_category_title" msgid="2696474616743882372">"操作のコントロール"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"タイミングの調節"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"システム操作"</string>
-    <string name="accessibility_feedback_title" msgid="6690472705407526006">"フィードバック"</string>
-    <string name="accessibility_feedback_summary" msgid="4576591591334314827">"サービスの改善に関するアンケートにご協力ください"</string>
-    <string name="accessibility_feedback_disabled_summary" msgid="3652321859452620942">"実施しているアンケートはありません"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"フィードバックを送信"</string>
+    <!-- no translation found for accessibility_send_survey_title (7899716184811587023) -->
+    <skip />
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"ダウンロードしたアプリ"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"試験運用機能"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"機能フラグ"</string>
@@ -2561,6 +2566,8 @@
     <string name="accessibility_hearing_device_footer_hap_only_summary_tts" msgid="4440097982533045507">"LE Audio に対応していない他の補聴器を探すには、["<b>"新しいデバイスとペア設定"</b>"] &gt; ["<b>"他のデバイスを見る"</b>"] をタップします"</string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"補聴器とのペア設定"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"このページで ASHA と LE Audio 補聴器をペア設定できます。補聴器の電源が入っていて、ペア設定できる状態であることをご確認ください。"</string>
+    <string name="accessibility_hearing_device_pairing_asha_only_intro" msgid="5679230908462987522">"このページで ASHA 補聴器をペア設定できます。補聴器の電源が入っていて、ペア設定できる状態であることをご確認ください。"</string>
+    <string name="accessibility_hearing_device_pairing_hap_only_intro" msgid="2233661046254311681">"このページで LE Audio 補聴器をペア設定できます。補聴器の電源が入っていて、ペア設定できる状態であることをご確認ください。"</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"使用可能な補聴器"</string>
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"補聴器が表示されない場合"</string>
     <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"他のデバイスを見る"</string>
@@ -5079,6 +5086,8 @@
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"スマートフォンでサポートされているアプリ"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"アプリをすべて表示"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"スマートフォンでサポートされているアプリ"</string>
+    <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"SIM を追加できません"</string>
+    <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"SIM を追加する前に衛星通信を終了してください"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"アクセス ポイント名"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> への接続時は利用できません"</string>
@@ -5162,8 +5171,7 @@
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"モバイルデータ、電話機能、SMS を後で使用するには、ネットワークの設定に移動してください"</string>
     <string name="sim_card_label" msgid="6263064316075963775">"SIM"</string>
     <string name="erase_sim_dialog_title" msgid="4742077437653028326">"この eSIM を消去しますか？"</string>
-    <!-- no translation found for erase_sim_dialog_text (3982216582200709197) -->
-    <skip />
+    <string name="erase_sim_dialog_text" msgid="3982216582200709197">"この eSIM を消去すると、このデバイスから <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> サービスが削除されます。<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> のサービスが解約されるわけではありません。新しい eSIM をリクエストするには、携帯通信会社にお問い合わせください。"</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"消去"</string>
     <string name="erasing_sim" msgid="4237180547590463930">"eSIM を消去しています…"</string>
     <string name="erase_sim_fail_title" msgid="1445700500168357303">"eSIM を消去できません"</string>

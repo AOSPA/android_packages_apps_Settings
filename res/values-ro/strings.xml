@@ -264,10 +264,8 @@
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"Dacă o aplicație nu acceptă preferințele regionale, aceasta va folosi setările prestabilite pentru codul local."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Află mai multe despre preferințele de limbă"</string>
     <string name="metric_measurement_system" msgid="7489725697268321541">"Metric"</string>
-    <!-- no translation found for us_measurement_system (8406695347890345490) -->
-    <skip />
-    <!-- no translation found for uk_measurement_system (1814065008707689505) -->
-    <skip />
+    <string name="us_measurement_system" msgid="8406695347890345490">"S.U.A."</string>
+    <string name="uk_measurement_system" msgid="1814065008707689505">"Regatul Unit"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"Preferințe suplimentare"</string>
     <string name="terms_of_address_title" msgid="7338630812197476808">"Alege cum să ți se adreseze"</string>
     <string name="terms_of_address_summary" msgid="7802443422612600620">"Dispozitivul tău poate personaliza modul în care ți se adresează"</string>
@@ -346,7 +344,8 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Activată / # aplicație are acces la locație}few{Activată / # aplicații au acces la locație}other{Activată / # de aplicații au acces la locație}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Se încarcă…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Aplicațiile cu permisiunea Dispozitive din apropiere pot stabili poziția relativă a dispozitivelor conectate."</string>
-    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Accesul la locație este dezactivat pentru aplicații și servicii. Locația dispozitivului poate fi trimisă serviciilor de urgență atunci când suni sau trimiți un mesaj la un număr de urgență."</string>
+    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Află mai multe despre Setările privind locația"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Ca să schimbi, accesează Setările ChromeOS &gt; Confidențialitate și securitate &gt; Opțiuni de confidențialitate &gt; Acces la locație"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Conturi"</string>
@@ -612,6 +611,10 @@
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"Omiți configurarea modelului și a chipului?"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"Omiți configurarea modelului și a amprentei?"</string>
     <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"Omiți configurarea modelului, a chipului și a amprentei?"</string>
+    <!-- no translation found for resume_animation (5259729861893297887) -->
+    <skip />
+    <!-- no translation found for pause_animation (2209064682137909056) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"Configurează blocarea ecranului"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Gata"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Hopa, acela nu este senzorul"</string>
@@ -939,18 +942,13 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Când Bluetooth este activat, dispozitivul poate să comunice cu alte dispozitive Bluetooth din apropiere.\n\nPentru a îmbunătăți experiența dispozitivului, aplicațiile și serviciile pot să caute în continuare dispozitive din apropiere chiar și atunci când Bluetooth este dezactivat. Această opțiune poate fi folosită, de exemplu, pentru a îmbunătăți funcțiile și serviciile bazate pe locație. Poți să-ți schimbi preferințele în setările pentru scanarea Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Când funcția Bluetooth este activată, dispozitivul poate să comunice cu alte dispozitive Bluetooth din apropiere. Funcții precum Quick Share și Găsește-mi dispozitivul folosesc Bluetooth.\n\nChiar dacă Bluetooth este dezactivat, aplicațiile și serviciile pot totuși să caute dispozitive din apropiere în orice moment. Această permisiune poate fi folosită, de exemplu, pentru a îmbunătăți funcțiile și serviciile bazate pe locație. Poți modifica această opțiune în setările pentru scanarea Bluetooth."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Modifică"</string>
-    <!-- no translation found for bluetooth_key_missing_title (8462010102528132965) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_message (3188093580372443815) -->
-    <skip />
+    <string name="bluetooth_key_missing_title" msgid="8462010102528132965">"Nu se poate conecta <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="bluetooth_key_missing_message" msgid="3188093580372443815">"Pentru mai multe detalii, accesează setările dispozitivului"</string>
     <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"Elimină dispozitivul"</string>
     <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"Anulează"</string>
-    <!-- no translation found for bluetooth_key_missing_device_settings (5512091368141961890) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_close (6724520133374312040) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_toast (8692796546000643569) -->
-    <skip />
+    <string name="bluetooth_key_missing_device_settings" msgid="5512091368141961890">"Setările dispozitivului"</string>
+    <string name="bluetooth_key_missing_close" msgid="6724520133374312040">"Închide"</string>
+    <string name="bluetooth_key_missing_toast" msgid="8692796546000643569">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> nu s-a conectat"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Detalii despre dispozitiv"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Setări tastatură"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Mai multe setări"</string>
@@ -965,8 +963,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Experimental. Ameliorează calitatea audio."</string>
     <string name="device_details_battery" msgid="5466987755790847884">"Baterie"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"Baterie, se încarcă"</string>
-    <!-- no translation found for device_details_key_missing_title (3568401701538114387) -->
-    <skip />
+    <string name="device_details_key_missing_title" msgid="3568401701538114387">"Încearcă să repornești <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Dacă nu funcționează, șterge dispozitivul. Pentru siguranța ta, asociază-l din nou doar dacă nu te afli într-un spațiu public.\n\nDacă acest dispozitiv nu se află în apropiere, nu trebuie să faci nimic."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Elimină dispozitivul"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Deconectează aplicația"</string>
     <string name="device_details_more_settings" msgid="950302792331611271">"Mai multe setări"</string>
@@ -1103,8 +1100,7 @@
     <string name="wifi_eap_identity" msgid="3629406902174137028">"Identitate"</string>
     <string name="wifi_eap_anonymous" msgid="8630332141751267000">"Identitate anonimă"</string>
     <string name="wifi_password" msgid="165204973532996861">"Parolă*"</string>
-    <!-- no translation found for wifi_password_optional (6770706664834070705) -->
-    <skip />
+    <string name="wifi_password_optional" msgid="6770706664834070705">"Parolă (opțional)"</string>
     <string name="wifi_password_invalid" msgid="8884500804472828356">"Parola este nevalidă"</string>
     <string name="wifi_show_password" msgid="6865993988238157923">"Afișează parola"</string>
     <string name="wifi_ap_choose_2G" msgid="1436802195991542016">"Banda de 2,4 GHz"</string>
@@ -1445,6 +1441,8 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Dezactivat"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Când pornește"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Ridică pentru a reactiva"</string>
+    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
+    <skip />
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Afișaj ambiental"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Când se afișează"</string>
     <string name="doze_title" msgid="1523090408230862316">"Activează ecranul pentru notificări"</string>
@@ -1611,6 +1609,8 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"În timpul încărcării"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"În timpul încărcării și în poziție verticală"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"Când dispozitivul este andocat"</string>
+    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
+    <skip />
     <string name="apn_settings" msgid="4295467389400441299">"Nume APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Modifică punctul de acces"</string>
     <string name="apn_add" msgid="9069613192201630934">"Adaugă un punct de acces"</string>
@@ -2277,10 +2277,9 @@
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Comenzi pentru interacțiune"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Comenzi de sincronizare"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Comenzile sistemului"</string>
-    <string name="accessibility_feedback_title" msgid="6690472705407526006">"Feedback"</string>
-    <string name="accessibility_feedback_summary" msgid="4576591591334314827">"Contribuie la îmbunătățire participând la un sondaj"</string>
-    <string name="accessibility_feedback_disabled_summary" msgid="3652321859452620942">"Nu sunt disponibile sondaje"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Trimite feedback"</string>
+    <!-- no translation found for accessibility_send_survey_title (7899716184811587023) -->
+    <skip />
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Aplicații descărcate"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimentale"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Semnalări ale funcției"</string>
@@ -2570,6 +2569,10 @@
     <string name="accessibility_hearing_device_footer_hap_only_summary_tts" msgid="4440097982533045507">"Ca să găsești alte aparate auditive care nu sunt compatibile cu LE Audio, atinge "<b>"Asociază un nou dispozitiv"</b>", apoi "<b>"Vezi mai multe dispozitive"</b></string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Asociază aparatul auditiv"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"Poți să asociezi aparate auditive ASHA și LE Audio din această pagină. Verifică dacă aparatul auditiv este pornit și gata de asociat."</string>
+    <!-- no translation found for accessibility_hearing_device_pairing_asha_only_intro (5679230908462987522) -->
+    <skip />
+    <!-- no translation found for accessibility_hearing_device_pairing_hap_only_intro (2233661046254311681) -->
+    <skip />
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Aparate auditive disponibile"</string>
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"Nu vezi aparatul tău auditiv?"</string>
     <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"Vezi mai multe dispozitive"</string>
@@ -4426,8 +4429,7 @@
     <string name="disconnected" msgid="3469373726996129247">"Neconectat"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Neconectată"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> aplicații instalate"</string>
-    <!-- no translation found for storage_toplevel_summary (6708203706751754934) -->
-    <skip />
+    <string name="storage_toplevel_summary" msgid="6708203706751754934">"Spațiu folosit: <xliff:g id="PERCENTAGE">%1$s</xliff:g>; spațiu liber: <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Tema întunecată, mărimea fontului, luminozitate"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Memorie folosită în medie: <xliff:g id="USED_MEMORY">%1$s</xliff:g> din <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
     <string name="users_summary" msgid="8473589474976307510">"Te-ai conectat ca <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -5050,16 +5052,13 @@
     <string name="roaming_alert_title" msgid="9052791521868787985">"Permiți roamingul de date?"</string>
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"Consultă furnizorul de rețea în privința prețurilor."</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Mod nevalid de rețea <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignoră."</string>
-    <!-- no translation found for satellite_setting (4650503806634496443) -->
-    <skip />
+    <string name="satellite_setting" msgid="4650503806634496443">"Conectivitate prin satelit"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Trimite și primește mesaje text prin satelit. Opțiunea este inclusă în contul tău."</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Trimite și primește mesaje text prin satelit. Opțiunea nu este inclusă în contul tău."</string>
     <string name="satellite_setting_summary_without_entitlement" msgid="5284998840770992554">"Trimite și primește mesaje text prin satelit. Contactează operatorul pentru detalii."</string>
     <string name="keywords_satellite_setting" msgid="613553612424945946">"Mesaje prin satelit, conectivitate prin satelit"</string>
-    <!-- no translation found for category_name_about_satellite_connectivity (3971142716898783631) -->
-    <skip />
-    <!-- no translation found for description_about_satellite_setting (5539359064330584941) -->
-    <skip />
+    <string name="category_name_about_satellite_connectivity" msgid="3971142716898783631">"Despre conectivitatea prin satelit"</string>
+    <string name="description_about_satellite_setting" msgid="5539359064330584941">"Dacă ai un cont <xliff:g id="CARRIER_NAME">%1$s</xliff:g> eligibil, poți să trimiți și să primești mesaje text și să folosești anumite aplicații prin satelit"</string>
     <string name="category_title_your_satellite_plan" msgid="8169426217950247126">"Contul tău <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="title_have_satellite_plan" msgid="2048372355699977947">"Mesajele prin satelit sunt incluse în contul tău"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"Mesajele prin satelit nu sunt incluse în contul tău"</string>
@@ -5073,28 +5072,18 @@
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Urmează pașii ca să te conectezi la satelit"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"Poți să trimiți mesaje oricui, inclusiv serviciilor de urgență. Telefonul se va reconecta la o rețea mobilă când va fi disponibilă."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"După ce telefonul este conectat, poți să trimiți mesaje oricui, inclusiv serviciilor de urgență."</string>
-    <!-- no translation found for satellite_footer_content_section_0 (4169483813004415556) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_1 (7925931577373229601) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_2 (7699185178461362541) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_3 (4652426135622555607) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_4 (2294227482962815751) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_5 (3053256489735265540) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_6 (1448633393918612418) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_7 (5524773673918954918) -->
-    <skip />
-    <!-- no translation found for more_about_satellite_connectivity (9110502891919936054) -->
-    <skip />
+    <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Reține"</string>
+    <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"Conectivitatea prin satelit poate dura mai mult și este disponibilă doar în anumite zone."</string>
+    <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"Condițiile meteo și anumite structuri pot afecta conexiunea prin satelit."</string>
+    <string name="satellite_footer_content_section_3" msgid="4652426135622555607">"Apelarea prin satelit nu este disponibilă."</string>
+    <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"Este posibil ca apelurile de urgență să se conecteze în continuare."</string>
+    <string name="satellite_footer_content_section_5" msgid="3053256489735265540">"Este necesară o rețea mobilă sau Wi‑Fi pentru a vedea linkuri externe."</string>
+    <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"Este posibil ca trimiterea de mesaje către serviciile de urgență să nu fie disponibilă în toate zonele."</string>
+    <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"Poate dura un timp pentru ca modificările aduse contului să apară în Setări. Contactează <xliff:g id="CARRIER_NAME">%1$s</xliff:g> pentru detalii."</string>
+    <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"Mai multe despre conectivitatea prin satelit"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Nu se poate activa <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Ca să activezi <xliff:g id="FUNCTION">%1$s</xliff:g>, oprește conexiunea prin satelit"</string>
-    <!-- no translation found for category_title_satellite_connectivity (7740500012311192133) -->
-    <skip />
+    <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Satelit"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Conectivitate prin satelit"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"conectivitate prin satelit"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"mesaje prin satelit"</string>
@@ -5102,6 +5091,10 @@
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Aplicații acceptate pe telefon"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"Vezi toate aplicațiile"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Aplicații acceptate pe telefon"</string>
+    <!-- no translation found for title_satellite_dialog_for_sim_restriction (454718192423216397) -->
+    <skip />
+    <!-- no translation found for description_satellite_dialog_for_sim_restriction (5465487347427595435) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Numele punctelor de acces"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Indisponibil când este conectat la <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5779,16 +5772,11 @@
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Încearcă să blochezi site-urile cu conținut explicit"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_summary" msgid="1477766506765966613">"Filtrele nu sunt perfecte, dar pot contribui la ascunderea site-urilor cu conținut sexual explicit"</string>
     <string name="supervision_web_content_filters_browser_allow_all_sites_title" msgid="3909739592466381845">"Permite toate site-urile"</string>
-    <!-- no translation found for supervision_web_content_filters_search_title (726335318009305564) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_on_title (4855846261141136285) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_on_summary (1162258144140293269) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_off_title (6049461395304222346) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_off_summary (3834238970190924433) -->
-    <skip />
+    <string name="supervision_web_content_filters_search_title" msgid="726335318009305564">"Căutare Google"</string>
+    <string name="supervision_web_content_filters_search_filter_on_title" msgid="4855846261141136285">"Filtrarea Căutării sigure este activată"</string>
+    <string name="supervision_web_content_filters_search_filter_on_summary" msgid="1162258144140293269">"Ajută la filtrarea imaginilor, a textelor și a linkurilor cu conținut explicit din rezultatele căutării de pe acest dispozitiv"</string>
+    <string name="supervision_web_content_filters_search_filter_off_title" msgid="6049461395304222346">"Filtrarea Căutării sigure este dezactivată"</string>
+    <string name="supervision_web_content_filters_search_filter_off_summary" msgid="3834238970190924433">"Setările contului pot să filtreze sau să estompeze în continuare rezultatele cu conținut explicit"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Introdu codul PIN de supraveghere"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animație pentru <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
 </resources>

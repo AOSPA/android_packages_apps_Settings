@@ -264,10 +264,8 @@
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"اگر برنامه‌ای از اولویت‌های منطقه‌ای پشتیبانی نکند، آن برنامه از تنظیمات منطقه زبانی پیش‌فرض استفاده می‌کند."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"درباره اولویت‌های زبان بیشتر بدانید."</string>
     <string name="metric_measurement_system" msgid="7489725697268321541">"دستگاه متریک"</string>
-    <!-- no translation found for us_measurement_system (8406695347890345490) -->
-    <skip />
-    <!-- no translation found for uk_measurement_system (1814065008707689505) -->
-    <skip />
+    <string name="us_measurement_system" msgid="8406695347890345490">"ایالات متحده"</string>
+    <string name="uk_measurement_system" msgid="1814065008707689505">"پادشاهی متحد"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"اولویت‌های اضافی"</string>
     <string name="terms_of_address_title" msgid="7338630812197476808">"انتخاب نحوه خطاب شدن"</string>
     <string name="terms_of_address_summary" msgid="7802443422612600620">"دستگاهتان می‌تواند نحوه خطاب شدن شما را شخصی‌سازی کند"</string>
@@ -346,7 +344,8 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{روشن / # برنامه به مکان دسترسی دارد}one{روشن / # برنامه به مکان دسترسی دارد}other{روشن / # برنامه به مکان دسترسی دارند}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"درحال بارگیری…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"برنامه‌هایی که اجازه دستگاه‌های اطراف را دارند می‌توانند موقعیت نسبی دستگاه‌های متصل را تشخیص دهند."</string>
-    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"دسترسی به مکان برای برنامه‌ها و سرویس‌ها خاموش است. وقتی با شماره تلفن اضطراری تماس می‌گیرید یا به آن پیامک ارسال می‌کنید، ممکن است مکان دستگاهتان همچنان برای مسئولان خدمات اضطراری ارسال شود."</string>
+    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"درباره «تنظیمات مکان» بیشتر بدانید"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"‏برای تغییر، به «تنظیمات ChromeOS ‏&lt; حریم خصوصی و امنیت &lt; کنترل‌های حریم خصوصی &lt; دسترسی مکان» بروید"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"حساب‌ها"</string>
@@ -612,6 +611,10 @@
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"راه‌اندازی الگو و چهره رد شود؟"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"راه‌اندازی الگو و اثر انگشت رد شود؟"</string>
     <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"راه‌اندازی الگو، چهره، و اثر انگشت رد شود؟"</string>
+    <!-- no translation found for resume_animation (5259729861893297887) -->
+    <skip />
+    <!-- no translation found for pause_animation (2209064682137909056) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"تنظیم قفل صفحه"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"تمام"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"اووه، آن حسگر نیست"</string>
@@ -939,18 +942,13 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"وقتی بلوتوث روشن است، دستگاهتان می‌تواند با دیگر دستگاه‌های بلوتوث اطراف ارتباط برقرار کند.\n\nبرای بهبود تجربه استفاده از دستگاه، برنامه‌ها و سرویس‌ها همچنان می‌توانند در هرزمانی دستگاه‌های اطراف را اسکن کنند، حتی وقتی بلوتوث خاموش باشد. برای مثال، از این ویژگی می‌توان برای بهبود ویژگی‌ها و سرویس‌های مکان‌مبنا استفاده کرد. می‌توانید این ویژگی را در تنظیمات اسکن دستگاه‌های بلوتوث تغییر دهید."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"وقتی بلوتوث روشن باشد، دستگاهتان می‌تواند با دیگر دستگاه‌های بلوتوث اطراف ارتباط داشته باشد. ویژگی‌هایی مانند «هم‌رسانی سریع» و «پیدا کردن دستگاهم» از بلوتوث استفاده می‌کنند.\n\nبرنامه‌ها و سرویس‌ها همچنان می‌توانند دستگاه‌های اطراف را درهر زمانی اسکن کنند، حتی وقتی بلوتوث خاموش باشد. برای مثال از این تنظیم می‌توان برای بهبود ویژگی‌ها و سرویس‌های مکان‌محور استفاده کرد. می‌توانید این تنظیم را در تنظیمات اسکن دستگاه‌های بلوتوث تغییر دهید."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"تغییر"</string>
-    <!-- no translation found for bluetooth_key_missing_title (8462010102528132965) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_message (3188093580372443815) -->
-    <skip />
+    <string name="bluetooth_key_missing_title" msgid="8462010102528132965">"اتصال به <xliff:g id="DEVICE_NAME">%1$s</xliff:g> موفق نبود"</string>
+    <string name="bluetooth_key_missing_message" msgid="3188093580372443815">"برای جزئیات بیشتر، به تنظیمات دستگاه بروید"</string>
     <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"فراموش کردن دستگاه"</string>
     <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"لغو کردن"</string>
-    <!-- no translation found for bluetooth_key_missing_device_settings (5512091368141961890) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_close (6724520133374312040) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_toast (8692796546000643569) -->
-    <skip />
+    <string name="bluetooth_key_missing_device_settings" msgid="5512091368141961890">"تنظیمات دستگاه"</string>
+    <string name="bluetooth_key_missing_close" msgid="6724520133374312040">"بستن"</string>
+    <string name="bluetooth_key_missing_toast" msgid="8692796546000643569">"‫<xliff:g id="DEVICE_NAME">%1$s</xliff:g> متصل نشد"</string>
     <string name="device_details_title" msgid="1155622417516195481">"جزئیات دستگاه"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"تنظیمات صفحه‌کلید"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"تنظیمات بیشتر"</string>
@@ -965,8 +963,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"آزمایشی. کیفیت صدا را بهبود می‌بخشد."</string>
     <string name="device_details_battery" msgid="5466987755790847884">"باتری"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"باتری، درحال شارژ"</string>
-    <!-- no translation found for device_details_key_missing_title (3568401701538114387) -->
-    <skip />
+    <string name="device_details_key_missing_title" msgid="3568401701538114387">"‫<xliff:g id="DEVICE_NAME">%1$s</xliff:g> را بازراه‌اندازی کنید. اگر کارساز نبود، از گزینه فراموش کردن دستگاه استفاده کنید. برای امنیت خود، فقط زمانی دوباره آن را جفت کنید که در فضای عمومی نباشید.\n\nاگر این دستگاه در نزدیکی‌تان نیست، نیازی نیست کاری انجام دهید."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"فراموش کردن دستگاه"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"قطع ارتباط برنامه"</string>
     <string name="device_details_more_settings" msgid="950302792331611271">"تنظیمات بیشتر"</string>
@@ -1103,8 +1100,7 @@
     <string name="wifi_eap_identity" msgid="3629406902174137028">"هویت"</string>
     <string name="wifi_eap_anonymous" msgid="8630332141751267000">"هویت ناشناس"</string>
     <string name="wifi_password" msgid="165204973532996861">"گذرواژه*"</string>
-    <!-- no translation found for wifi_password_optional (6770706664834070705) -->
-    <skip />
+    <string name="wifi_password_optional" msgid="6770706664834070705">"گذرواژه (اختیاری)"</string>
     <string name="wifi_password_invalid" msgid="8884500804472828356">"گذرواژه نامعتبر است"</string>
     <string name="wifi_show_password" msgid="6865993988238157923">"نمایش گذرواژه"</string>
     <string name="wifi_ap_choose_2G" msgid="1436802195991542016">"باند ۲٫۴ گیگاهرتزی"</string>
@@ -1390,8 +1386,7 @@
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"درحال‌حاضر «نورشب» روشن نیست"</string>
     <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"برای تعیین زمان غروب و طلوع، به مکان دستگاه نیاز است."</string>
     <string name="twilight_mode_launch_location" msgid="7799112373591153956">"تنظیمات مکان"</string>
-    <!-- no translation found for twilight_mode_pending_location (6829434234071614405) -->
-    <skip />
+    <string name="twilight_mode_pending_location" msgid="6829434234071614405">"خدمات مکان فعال است. برنامه زمانی پس‌از تعیین موقعیت مکان فعال خواهد شد."</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"اکنون روشن شود"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"اکنون خاموش شود"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"تا طلوع آفتاب روشن باشد"</string>
@@ -1445,6 +1440,8 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"خاموش"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"زمان شروع شدن"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"بیدار شدن با بالا بردن"</string>
+    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
+    <skip />
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"نمایشگر محیط"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"کی نشان داده شود"</string>
     <string name="doze_title" msgid="1523090408230862316">"صفحه برای اعلان بیدار شود"</string>
@@ -1611,6 +1608,8 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"هنگام شارژ شدن"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"هنگام شارژ شدن و در حالت عمودی"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"هنگام متصل بودن به پایه"</string>
+    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
+    <skip />
     <string name="apn_settings" msgid="4295467389400441299">"نام‌های نقاط دستیابی"</string>
     <string name="apn_edit" msgid="2003683641840248741">"ویرایش نقطه دستیابی"</string>
     <string name="apn_add" msgid="9069613192201630934">"افزودن نقطه دسترسی"</string>
@@ -2277,10 +2276,9 @@
     <string name="interaction_control_category_title" msgid="2696474616743882372">"کنترل‌های تعامل"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"کنترل‌های زمان‌بندی"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"کنترل‌های سیستم"</string>
-    <string name="accessibility_feedback_title" msgid="6690472705407526006">"بازخورد"</string>
-    <string name="accessibility_feedback_summary" msgid="4576591591334314827">"با شرکت در نظرسنجی به بهبود ما کمک کنید"</string>
-    <string name="accessibility_feedback_disabled_summary" msgid="3652321859452620942">"هیچ نظرسنجی‌ای دردسترس نیست"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"ارسال بازخورد"</string>
+    <!-- no translation found for accessibility_send_survey_title (7899716184811587023) -->
+    <skip />
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"برنامه‌های بارگیری‌شده"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"آزمایشی"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"پرچم‌های ویژه"</string>
@@ -2570,6 +2568,10 @@
     <string name="accessibility_hearing_device_footer_hap_only_summary_tts" msgid="4440097982533045507">"برای پیدا کردن سایر سمعک‌هایی که «صدای کم‌مصرف» از آن‌ها پشتیبانی نمی‌کند، روی "<b>"جفت کردن دستگاه جدید"</b>" سپس "<b>"دیدن دستگاه‌های بیشتر"</b>" تک‌ضرب بزنید"</string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"جفت کردن دستگاه کمک‌شنوایی"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"‏می‌توانید سمعک‌های سازگار با «جاری‌سازی صوتی ویژه سمعک‌ها» (ASHA) و «صدای کم‌مصرف» را در این صفحه جفت کنید. مطمئن شوید سمعک روشن و برای جفت کردن آماده باشد."</string>
+    <!-- no translation found for accessibility_hearing_device_pairing_asha_only_intro (5679230908462987522) -->
+    <skip />
+    <!-- no translation found for accessibility_hearing_device_pairing_hap_only_intro (2233661046254311681) -->
+    <skip />
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"دستگاه‌های کمک‌شنوایی موجود"</string>
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"دستگاه کمک‌شنوایی‌تان را نمی‌بینید؟"</string>
     <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"دیدن دستگاه‌های بیشتر"</string>
@@ -3926,7 +3928,7 @@
     <string name="notification_bundle_off" msgid="1550261372988157377">"خاموش"</string>
     <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"استفاده از دسته‌بندی اعلان"</string>
     <string name="notification_bundle_description" msgid="3896142878395333784">"اعلان‌های دارای زمینه مشابه بی‌صدا و گروه‌بندی می‌شوند تا تجربه بی‌صداتری داشته باشید. دسته‌بندی باعث ملغی شدن تنظیمات اعلان خود برنامه می‌شود."</string>
-    <string name="notification_app_level_bundle_title" msgid="8917807675495480483">"اعلان‌های دسته‌ای"</string>
+    <string name="notification_app_level_bundle_title" msgid="8917807675495480483">"اعلان‌های بسته‌ای"</string>
     <string name="notification_app_level_bundle_subtext" msgid="7330731485247761388">"اعلان‌های دارای زمینه مشابه بی‌صدا و گروه‌بندی می‌شوند تا تجربه بی‌صداتری داشته باشید"</string>
     <string name="notification_bundle_excluded_description" msgid="7249934130756103812">"اعلان‌های این برنامه‌ها به‌صورت دسته‌ای نمایش داده نخواهند شد"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="7019831234073590293">"مجاز کردن دسته‌بندی اعلان‌ها برای برنامه‌ها"</string>
@@ -4426,8 +4428,7 @@
     <string name="disconnected" msgid="3469373726996129247">"متصل نیست"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"متصل نیست"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> برنامه نصب‌شده"</string>
-    <!-- no translation found for storage_toplevel_summary (6708203706751754934) -->
-    <skip />
+    <string name="storage_toplevel_summary" msgid="6708203706751754934">"‫<xliff:g id="PERCENTAGE">%1$s</xliff:g> استفاده‌شده - <xliff:g id="FREE_SPACE">%2$s</xliff:g> آزاد"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"زمینه تاریک، اندازه قلم، روشنایی"</string>
     <string name="memory_summary" msgid="8221954450951651735">"به‌طور متوسط <xliff:g id="USED_MEMORY">%1$s</xliff:g> از <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> حافظه استفاده شده است"</string>
     <string name="users_summary" msgid="8473589474976307510">"به‌عنوان <xliff:g id="USER_NAME">%1$s</xliff:g> به سیستم وارد شده‌اید"</string>
@@ -5050,16 +5051,13 @@
     <string name="roaming_alert_title" msgid="9052791521868787985">"فراگردی داده مجاز است؟"</string>
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"برای قیمت با ارائه‌دهنده شبکه‌تان بررسی کنید."</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"حالت شبکه نامعتبر <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. نادیده گرفته شود."</string>
-    <!-- no translation found for satellite_setting (4650503806634496443) -->
-    <skip />
+    <string name="satellite_setting" msgid="4650503806634496443">"اتصال‌پذیری ماهواره‌ای"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"پیامک‌ها را ازطریق ماهواره ارسال و دریافت کنید. با حساب شما ارائه شده است."</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"پیامک‌ها را ازطریق ماهواره ارسال و دریافت کنید. در حساب شما گنجانده نشده است."</string>
     <string name="satellite_setting_summary_without_entitlement" msgid="5284998840770992554">"پیامک‌ها را ازطریق ماهواره ارسال و دریافت کنید. برای اطلاع از جزئیات با شرکت مخابراتی‌تان تماس بگیرید."</string>
     <string name="keywords_satellite_setting" msgid="613553612424945946">"پیام‌رسانی ماهواره‌ای، اتصال‌پذیری ماهواره"</string>
-    <!-- no translation found for category_name_about_satellite_connectivity (3971142716898783631) -->
-    <skip />
-    <!-- no translation found for description_about_satellite_setting (5539359064330584941) -->
-    <skip />
+    <string name="category_name_about_satellite_connectivity" msgid="3971142716898783631">"درباره اتصال‌پذیری ماهواره‌ای"</string>
+    <string name="description_about_satellite_setting" msgid="5539359064330584941">"با داشتن حساب <xliff:g id="CARRIER_NAME">%1$s</xliff:g> واجدشرایط می‌توانید ازطریق ماهواره پیامک ارسال و دریافت کنید و از برخی برنامه‌ها استفاده کنید"</string>
     <string name="category_title_your_satellite_plan" msgid="8169426217950247126">"حساب <xliff:g id="CARRIER_NAME">%1$s</xliff:g> شما"</string>
     <string name="title_have_satellite_plan" msgid="2048372355699977947">"پیام‌رسانی ماهواره‌ای با حسابتان ارائه شده است"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"پیام‌رسانی ماهواره‌ای با حسابتان ارائه نشده است"</string>
@@ -5073,28 +5071,18 @@
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"دنبال کردن مراحل برای اتصال به ماهواره"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"می‌توانید برای هرکسی پیام ارسال کنید، ازجمله خدمات اضطراری. هروقت شبکه تلفن همراه دردسترس قرار بگیرد، تلفن دوباره به آن متصل خواهد شد."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"پس‌از متصل شدن تلفن، می‌توانید به هرکسی پیامک ارسال کنید، ازجمله خدمات اضطراری."</string>
-    <!-- no translation found for satellite_footer_content_section_0 (4169483813004415556) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_1 (7925931577373229601) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_2 (7699185178461362541) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_3 (4652426135622555607) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_4 (2294227482962815751) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_5 (3053256489735265540) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_6 (1448633393918612418) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_7 (5524773673918954918) -->
-    <skip />
-    <!-- no translation found for more_about_satellite_connectivity (9110502891919936054) -->
-    <skip />
+    <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"به‌خاطر داشته باشید"</string>
+    <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"اتصال ماهواره‌ای ممکن است مدت زمان بیشتری طول بکشد و فقط در برخی مناطق دردسترس است."</string>
+    <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"ممکن است وضعیت آب‌وهوا و برخی ساختمان‌ها بر اتصال ماهواره اثر بگذارند."</string>
+    <string name="satellite_footer_content_section_3" msgid="4652426135622555607">"تماس ماهواره‌ای دردسترس نیست."</string>
+    <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"ممکن است تماس‌های اضطراری همچنان وصل شود."</string>
+    <string name="satellite_footer_content_section_5" msgid="3053256489735265540">"‏برای مشاهده پیوندهای خارجی به شبکه تلفن همراه یا Wi-Fi نیاز است."</string>
+    <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"ارسال پیامک به خدمات اضطراری ممکن است در همه مناطق دردسترس نباشد."</string>
+    <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"شاید کمی طول بکشد تا تغییرات حساب در «تنظیمات» نمایش داده شود. برای اطلاع از جزئیات، با <xliff:g id="CARRIER_NAME">%1$s</xliff:g> تماس بگیرید."</string>
+    <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"اطلاعات بیشتر درباره اتصال ماهواره‌ای"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"‫<xliff:g id="FUNCTION">%1$s</xliff:g> روشن نشد"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"برای روشن کردن <xliff:g id="FUNCTION">%1$s</xliff:g>، ابتدا اتصال ماهواره را قطع کنید"</string>
-    <!-- no translation found for category_title_satellite_connectivity (7740500012311192133) -->
-    <skip />
+    <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"ماهواره"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"اتصال‌پذیری ماهواره"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"اتصال‌پذیری ماهواره"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"پیام‌رسانی ماهواره‌ای"</string>
@@ -5102,6 +5090,10 @@
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"برنامه‌های پشتیبانی‌شده در تلفن شما"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"دیدن همه برنامه‌ها"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"برنامه‌های پشتیبانی‌شده در تلفن شما"</string>
+    <!-- no translation found for title_satellite_dialog_for_sim_restriction (454718192423216397) -->
+    <skip />
+    <!-- no translation found for description_satellite_dialog_for_sim_restriction (5465487347427595435) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"نام‌های نقطه دسترسی"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"هنگام اتصال به <xliff:g id="CARRIER">%1$s</xliff:g>، دردسترس نیست"</string>
@@ -5185,8 +5177,7 @@
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"برای استفاده از داده تلفن همراه، ویژگی‌های تماس تلفنی، و بعدتر پیامک، به تنظیمات شبکه‌تان بروید"</string>
     <string name="sim_card_label" msgid="6263064316075963775">"سیم‌کارت"</string>
     <string name="erase_sim_dialog_title" msgid="4742077437653028326">"این سیم‌کارت داخلی پاک شود؟"</string>
-    <!-- no translation found for erase_sim_dialog_text (3982216582200709197) -->
-    <skip />
+    <string name="erase_sim_dialog_text" msgid="3982216582200709197">"با پاک‌سازی این سیم‌کارت داخلی، سرویس <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> از این دستگاه برداشته می‌شود. سرویس مربوط به <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> لغو نمی‌شود. برای درخواست یک سیم‌کارت داخلی جدید، باید با شرکت مخابراتی خود تماس بگیرید."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"پاک‌سازی"</string>
     <string name="erasing_sim" msgid="4237180547590463930">"درحال پاک کردن سیم‌کارت داخلی…"</string>
     <string name="erase_sim_fail_title" msgid="1445700500168357303">"سیم‌کارت داخلی پاک نشد"</string>
@@ -5778,16 +5769,11 @@
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"سایت‌های صریح مسدود شود"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_summary" msgid="1477766506765966613">"هیچ فیلتری بی‌نقص نیست، اما این کار می‌تواند به پنهان کردن سایت‌هایی که محتوای صریح جنسی دارند کمک کند"</string>
     <string name="supervision_web_content_filters_browser_allow_all_sites_title" msgid="3909739592466381845">"مجاز کردن همه سایت‌ها"</string>
-    <!-- no translation found for supervision_web_content_filters_search_title (726335318009305564) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_on_title (4855846261141136285) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_on_summary (1162258144140293269) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_off_title (6049461395304222346) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_off_summary (3834238970190924433) -->
-    <skip />
+    <string name="supervision_web_content_filters_search_title" msgid="726335318009305564">"‏جستجوی Google"</string>
+    <string name="supervision_web_content_filters_search_filter_on_title" msgid="4855846261141136285">"روشن کردن فیلتر «جستجوی ایمن»"</string>
+    <string name="supervision_web_content_filters_search_filter_on_summary" msgid="1162258144140293269">"کمک می‌کند تصاویر، نوشتار، و پیوند نتایج جستجوی صریح در این دستگاه فیلتر شوند"</string>
+    <string name="supervision_web_content_filters_search_filter_off_title" msgid="6049461395304222346">"خاموش کردن فیلتر «جستجوی ایمن»"</string>
+    <string name="supervision_web_content_filters_search_filter_off_summary" msgid="3834238970190924433">"ممکن است تنظیمات حساب همچنان نتایج صریح را فیلتر یا محو کند"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"پین نظارت را وارد کنید"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"پویانمایی <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
 </resources>

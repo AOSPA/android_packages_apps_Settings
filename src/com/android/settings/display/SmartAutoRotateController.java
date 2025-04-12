@@ -85,8 +85,7 @@ public class SmartAutoRotateController extends TogglePreferenceController implem
         mPrivacyManager = SensorPrivacyManager.getInstance(context);
         mPowerManager = context.getSystemService(PowerManager.class);
         mDeviceStateAutoRotateSettingsManager =
-                DeviceStateAutoRotateSettingManagerProvider.getSingletonInstance(
-                        context);
+                DeviceStateAutoRotateSettingManagerProvider.getSingletonInstance(context);
     }
 
     @Override
@@ -100,7 +99,12 @@ public class SmartAutoRotateController extends TogglePreferenceController implem
 
     protected boolean isRotationLocked() {
         if (DeviceStateAutoRotationHelper.isDeviceStateRotationEnabled(mContext)) {
-            return mDeviceStateAutoRotateSettingsManager.isRotationLockedForAllStates();
+            // It is highly unlikely to receive null value here. In the improbable event of null, a
+            // non-null update will follow shortly, and the users will potentially see incorrect
+            // state for a short time.
+            final Boolean isRotationLockedForAllStates =
+                    mDeviceStateAutoRotateSettingsManager.isRotationLockedForAllStates();
+            return isRotationLockedForAllStates == null || isRotationLockedForAllStates;
         }
         return RotationPolicy.isRotationLocked(mContext);
     }

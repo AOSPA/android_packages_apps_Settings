@@ -50,6 +50,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.test.annotation.UiThreadTest;
 
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -80,6 +81,7 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@UiThreadTest
 @Config(shadows = {ShadowRestrictedLockUtilsInternal.class})
 public class AppDataUsageTest {
 

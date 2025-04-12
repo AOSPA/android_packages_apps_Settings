@@ -17,15 +17,38 @@ package com.android.settings.supervision.ipc
 
 import android.os.Bundle
 
+/**
+ * Data class representing preference information, used for displaying preference items.
+ *
+ * This class encapsulates data such as icons, titles, summaries, actions, action icons,
+ * and target packages.
+ * It provides constructors for creating instances from a Bundle and for converting instances back
+ * to a Bundle.
+ *
+ * @property icon Optional icon resource ID for the preference.
+ * @property title Optional title text for the preference.
+ * @property summary Optional summary text for the preference.
+ * @property action Optional {@link Intent} action to be performed when the preference is clicked,
+ * such as {@link #ACTION_VIEW}.
+ * @property trailingIcon Optional trailing icon resource ID.
+ * @property targetPackage Optional target package name for limiting the applications that can
+ * perform the action.
+ */
 data class PreferenceData(
     val icon: Int? = null,
     val title: CharSequence? = null,
-    val summary: CharSequence? = null
+    val summary: CharSequence? = null,
+    var action: CharSequence? = null,
+    var trailingIcon: Int? = null,
+    var targetPackage: CharSequence? = null
 ) {
     constructor(bundle: Bundle) : this(
         icon = bundle.getInt(ICON, -1).takeIf { it != -1 },
         title = bundle.getCharSequence(TITLE),
-        summary = bundle.getCharSequence(SUMMARY)
+        summary = bundle.getCharSequence(SUMMARY),
+        action = bundle.getCharSequence(ACTION),
+        trailingIcon = bundle.getInt(ACTION_ICON, -1).takeIf { it != -1 },
+        targetPackage = bundle.getCharSequence(TARGET_PACKAGE)
     )
 
     fun toBundle(): Bundle {
@@ -33,6 +56,9 @@ data class PreferenceData(
             icon?.let { putInt(ICON, it) }
             title?.let { putCharSequence(TITLE, it) }
             summary?.let { putCharSequence(SUMMARY, it) }
+            action?.let { putCharSequence(ACTION, it) }
+            trailingIcon?.let { putInt(ACTION_ICON, it) }
+            targetPackage?.let { putCharSequence(TARGET_PACKAGE, it) }
         }
     }
 
@@ -40,5 +66,8 @@ data class PreferenceData(
         private const val ICON = "icon"
         private const val TITLE = "title"
         private const val SUMMARY = "summary"
+        private const val ACTION = "action"
+        private const val ACTION_ICON = "trailing_icon"
+        private const val TARGET_PACKAGE = "target_package"
     }
 }

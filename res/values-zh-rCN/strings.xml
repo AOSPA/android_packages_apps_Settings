@@ -264,10 +264,8 @@
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"不支持地区偏好设置的应用将使用默认语言区域设置。"</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"详细了解语言偏好设置。"</string>
     <string name="metric_measurement_system" msgid="7489725697268321541">"公制"</string>
-    <!-- no translation found for us_measurement_system (8406695347890345490) -->
-    <skip />
-    <!-- no translation found for uk_measurement_system (1814065008707689505) -->
-    <skip />
+    <string name="us_measurement_system" msgid="8406695347890345490">"美国"</string>
+    <string name="uk_measurement_system" msgid="1814065008707689505">"英国"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"更多偏好设置"</string>
     <string name="terms_of_address_title" msgid="7338630812197476808">"选择您想被如何称呼"</string>
     <string name="terms_of_address_summary" msgid="7802443422612600620">"您的设备可以量身定制对您的称呼方式"</string>
@@ -346,7 +344,8 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{已开启 / # 个应用有权访问位置信息}other{已开启 / # 个应用有权访问位置信息}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"正在加载…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"具有附近设备权限的应用可以确定已连接设备的相对位置。"</string>
-    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"应用和服务的位置信息使用权处于关闭状态。在您拨打紧急电话号码或向该号码发送短信时，系统可能仍会将您的设备位置信息发送给紧急救援人员。"</string>
+    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"详细了解位置信息设置"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"如要进行更改，请依次前往 ChromeOS 的“设置”&gt;“隐私和安全”&gt;“隐私控制”&gt;“位置信息使用权”"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"账号"</string>
@@ -612,6 +611,10 @@
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"要跳过解锁图案和人脸设置吗？"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"要跳过解锁图案和指纹设置吗？"</string>
     <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"要跳过解锁图案、人脸和指纹设置吗？"</string>
+    <!-- no translation found for resume_animation (5259729861893297887) -->
+    <skip />
+    <!-- no translation found for pause_animation (2209064682137909056) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"设置屏幕锁定"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"完成"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"糟糕，这不是传感器"</string>
@@ -939,18 +942,13 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"蓝牙功能处于开启状态时，您的设备可以与附近的其他蓝牙设备通信。\n\n为了提升设备的使用体验，即使蓝牙功能已关闭，应用和服务仍可以随时扫描附近的设备。例如，此功能可用于改进基于地理位置的功能和服务。您可以在蓝牙扫描设置中更改此设置。"</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"蓝牙处于开启状态时，您的设备可以与附近的其他蓝牙设备通信。“快速分享”“查找我的设备”等功能会使用蓝牙。\n\n即使蓝牙已关闭，应用和服务仍可以随时扫描附近的设备。此功能有多种用途，例如可用于改进基于地理位置的功能和服务。您可在蓝牙扫描设置中更改此设置。"</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"更改"</string>
-    <!-- no translation found for bluetooth_key_missing_title (8462010102528132965) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_message (3188093580372443815) -->
-    <skip />
+    <string name="bluetooth_key_missing_title" msgid="8462010102528132965">"无法连接“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”"</string>
+    <string name="bluetooth_key_missing_message" msgid="3188093580372443815">"如需了解详情，请前往设备设置"</string>
     <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"与设备取消配对"</string>
     <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"取消"</string>
-    <!-- no translation found for bluetooth_key_missing_device_settings (5512091368141961890) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_close (6724520133374312040) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_toast (8692796546000643569) -->
-    <skip />
+    <string name="bluetooth_key_missing_device_settings" msgid="5512091368141961890">"设备设置"</string>
+    <string name="bluetooth_key_missing_close" msgid="6724520133374312040">"关闭"</string>
+    <string name="bluetooth_key_missing_toast" msgid="8692796546000643569">"无法连接“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”"</string>
     <string name="device_details_title" msgid="1155622417516195481">"设备详细信息"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"键盘设置"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"更多设置"</string>
@@ -965,8 +963,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"实验性功能。可改善音频质量。"</string>
     <string name="device_details_battery" msgid="5466987755790847884">"电池"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"电池，正在充电"</string>
-    <!-- no translation found for device_details_key_missing_title (3568401701538114387) -->
-    <skip />
+    <string name="device_details_key_missing_title" msgid="3568401701538114387">"请尝试重新启动“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”。如果这样做无法解决问题，请取消保存设备。为了安全起见，请勿在公共场所重新配对。\n\n如果此设备不在附近，您无需执行任何操作。"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"取消保存"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"取消与该应用的关联"</string>
     <string name="device_details_more_settings" msgid="950302792331611271">"更多设置"</string>
@@ -1103,8 +1100,7 @@
     <string name="wifi_eap_identity" msgid="3629406902174137028">"身份"</string>
     <string name="wifi_eap_anonymous" msgid="8630332141751267000">"匿名身份"</string>
     <string name="wifi_password" msgid="165204973532996861">"密码*"</string>
-    <!-- no translation found for wifi_password_optional (6770706664834070705) -->
-    <skip />
+    <string name="wifi_password_optional" msgid="6770706664834070705">"密码（选填）"</string>
     <string name="wifi_password_invalid" msgid="8884500804472828356">"密码无效"</string>
     <string name="wifi_show_password" msgid="6865993988238157923">"显示密码"</string>
     <string name="wifi_ap_choose_2G" msgid="1436802195991542016">"2.4 GHz 频段"</string>
@@ -1445,6 +1441,8 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"已关闭"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"启用时机"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"拿起设备时唤醒"</string>
+    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
+    <skip />
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"主动显示"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"何时显示"</string>
     <string name="doze_title" msgid="1523090408230862316">"收到通知时唤醒屏幕"</string>
@@ -1611,6 +1609,8 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"充电时"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"充电且竖直放置时"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"插入基座时"</string>
+    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
+    <skip />
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"修改接入点"</string>
     <string name="apn_add" msgid="9069613192201630934">"添加接入点"</string>
@@ -2277,10 +2277,9 @@
     <string name="interaction_control_category_title" msgid="2696474616743882372">"互动控制"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"定时控制"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"系统控制"</string>
-    <string name="accessibility_feedback_title" msgid="6690472705407526006">"反馈"</string>
-    <string name="accessibility_feedback_summary" msgid="4576591591334314827">"请填写调查问卷，帮助我们改进"</string>
-    <string name="accessibility_feedback_disabled_summary" msgid="3652321859452620942">"没有可用的调查问卷"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"发送反馈"</string>
+    <!-- no translation found for accessibility_send_survey_title (7899716184811587023) -->
+    <skip />
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"已下载的应用"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"实验性功能"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"功能标记"</string>
@@ -2570,6 +2569,10 @@
     <string name="accessibility_hearing_device_footer_hap_only_summary_tts" msgid="4440097982533045507">"如需查找 LE 音频不支持的其他助听装置，请依次点按"<b>"与新设备配对"</b>"和"<b>"查看更多设备"</b></string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"与助听设备配对"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"您可以在此页面上配对 ASHA 和 LE Audio 助听装置。请确保您的助听装置已开启且可随时配对。"</string>
+    <!-- no translation found for accessibility_hearing_device_pairing_asha_only_intro (5679230908462987522) -->
+    <skip />
+    <!-- no translation found for accessibility_hearing_device_pairing_hap_only_intro (2233661046254311681) -->
+    <skip />
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"可用的助听装置"</string>
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"没有看到您的助听装置？"</string>
     <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"查看更多设备"</string>
@@ -3243,7 +3246,7 @@
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"未设置 - 工作资料"</string>
     <string name="user_owner" msgid="2079206733011361994">"机主"</string>
     <string name="user_admin" msgid="4024553191395768119">"管理员"</string>
-    <string name="user_you" msgid="3070562015202859996">"您（<xliff:g id="NAME">%s</xliff:g>）"</string>
+    <string name="user_you" msgid="3070562015202859996">"我（<xliff:g id="NAME">%s</xliff:g>）"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"您无法再添加任何用户。若要添加新用户，请先移除一个现有用户。"</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"受限个人资料无法添加账号"</string>
     <string name="user_remove_user_menu" msgid="2183714948094429367">"将<xliff:g id="USER_NAME">%1$s</xliff:g>从此设备中删除"</string>
@@ -4429,8 +4432,7 @@
     <string name="disconnected" msgid="3469373726996129247">"未连接"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"未连接"</string>
     <string name="apps_summary" msgid="4007416751775414252">"已安装 <xliff:g id="COUNT">%1$d</xliff:g> 个应用"</string>
-    <!-- no translation found for storage_toplevel_summary (6708203706751754934) -->
-    <skip />
+    <string name="storage_toplevel_summary" msgid="6708203706751754934">"已使用 <xliff:g id="PERCENTAGE">%1$s</xliff:g> - 还剩 <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"深色主题、字体大小、亮度"</string>
     <string name="memory_summary" msgid="8221954450951651735">"平均内存用量为 <xliff:g id="USED_MEMORY">%1$s</xliff:g>，共 <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
     <string name="users_summary" msgid="8473589474976307510">"目前的登录身份：<xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -5069,16 +5071,13 @@
     <string name="roaming_alert_title" msgid="9052791521868787985">"允许数据漫游？"</string>
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"请与您的网络服务提供商联系以了解定价。"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"无效的网络模式<xliff:g id="NETWORKMODEID">%1$d</xliff:g>。忽略。"</string>
-    <!-- no translation found for satellite_setting (4650503806634496443) -->
-    <skip />
+    <string name="satellite_setting" msgid="4650503806634496443">"卫星连接"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"通过卫星收发短信。您的账号支持此功能。"</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"通过卫星收发短信。您的账号不支持此功能。"</string>
     <string name="satellite_setting_summary_without_entitlement" msgid="5284998840770992554">"通过卫星收发短信。请联系您的运营商了解详情。"</string>
     <string name="keywords_satellite_setting" msgid="613553612424945946">"卫星消息, 卫星连接, Satellite messaging, satellite connectivity"</string>
-    <!-- no translation found for category_name_about_satellite_connectivity (3971142716898783631) -->
-    <skip />
-    <!-- no translation found for description_about_satellite_setting (5539359064330584941) -->
-    <skip />
+    <string name="category_name_about_satellite_connectivity" msgid="3971142716898783631">"关于卫星连接"</string>
+    <string name="description_about_satellite_setting" msgid="5539359064330584941">"您可以使用符合条件的<xliff:g id="CARRIER_NAME">%1$s</xliff:g>账号，通过卫星收发短信和使用某些应用"</string>
     <string name="category_title_your_satellite_plan" msgid="8169426217950247126">"您的<xliff:g id="CARRIER_NAME">%1$s</xliff:g>账号"</string>
     <string name="title_have_satellite_plan" msgid="2048372355699977947">"您的账号支持卫星消息功能"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"您的账号不支持卫星消息功能"</string>
@@ -5092,28 +5091,18 @@
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"按照步骤连接到卫星"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"您可以给任何对象发短信，包括应急服务机构。当有可用的移动网络时，您的手机将重新连接到移动网络。"</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"手机连接后，您可以给任何对象发短信，包括应急服务机构。"</string>
-    <!-- no translation found for satellite_footer_content_section_0 (4169483813004415556) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_1 (7925931577373229601) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_2 (7699185178461362541) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_3 (4652426135622555607) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_4 (2294227482962815751) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_5 (3053256489735265540) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_6 (1448633393918612418) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_7 (5524773673918954918) -->
-    <skip />
-    <!-- no translation found for more_about_satellite_connectivity (9110502891919936054) -->
-    <skip />
+    <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"注意事项"</string>
+    <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"卫星连接可能需要较长的时间进行通信，而且此功能目前仅覆盖部分地区。"</string>
+    <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"天气和某些建筑物可能会影响卫星连接质量。"</string>
+    <string name="satellite_footer_content_section_3" msgid="4652426135622555607">"不支持卫星通话。"</string>
+    <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"紧急呼叫或许仍可连通。"</string>
+    <string name="satellite_footer_content_section_5" msgid="3053256489735265540">"需要使用移动网络或 Wi-Fi 网络才能查看外部链接。"</string>
+    <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"向应急服务发短信的功能可能并非在所有地区均可用。"</string>
+    <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"账号更改可能要过一段时间才能显示在“设置”中。详情请联系<xliff:g id="CARRIER_NAME">%1$s</xliff:g>查询。"</string>
+    <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"详细了解卫星连接"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"无法开启<xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"若要开启<xliff:g id="FUNCTION">%1$s</xliff:g>，请先断开卫星连接"</string>
-    <!-- no translation found for category_title_satellite_connectivity (7740500012311192133) -->
-    <skip />
+    <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"卫星"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"卫星连接"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"卫星连接"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"卫星消息"</string>
@@ -5121,6 +5110,10 @@
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"您的手机上支持的应用"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"查看所有应用"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"您的手机上支持的应用"</string>
+    <!-- no translation found for title_satellite_dialog_for_sim_restriction (454718192423216397) -->
+    <skip />
+    <!-- no translation found for description_satellite_dialog_for_sim_restriction (5465487347427595435) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"接入点名称"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"连接到<xliff:g id="CARRIER">%1$s</xliff:g>时无法使用"</string>
@@ -5231,8 +5224,8 @@
     <string name="settings_panel_title" msgid="346363079938069215">"设置面板"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"启用可自由调整的窗口"</string>
     <string name="enable_desktop_experience_features" msgid="7389235241021706660">"启用桌面版体验功能"</string>
-    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="8586716390362684564">"在设备和辅助显示屏上启用桌面窗口化功能。"</string>
-    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="7567963048658976895">"在辅助显示屏上启用桌面窗口化功能。"</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="8586716390362684564">"在设备和辅助显示屏上启用窗口化模式。"</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="7567963048658976895">"在辅助显示屏上启用窗口化模式。"</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"在辅助显示屏上启用可自由调整的窗口"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"允许以多窗口模式显示不可调整大小的应用"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"允许通过多窗口模式显示不可调整大小的应用"</string>
@@ -5798,16 +5791,11 @@
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"尽量屏蔽含露骨内容的网站"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_summary" msgid="1477766506765966613">"过滤器并非万无一失，但有助于隐藏包含露骨色情内容的网站"</string>
     <string name="supervision_web_content_filters_browser_allow_all_sites_title" msgid="3909739592466381845">"允许访问所有网站"</string>
-    <!-- no translation found for supervision_web_content_filters_search_title (726335318009305564) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_on_title (4855846261141136285) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_on_summary (1162258144140293269) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_off_title (6049461395304222346) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_off_summary (3834238970190924433) -->
-    <skip />
+    <string name="supervision_web_content_filters_search_title" msgid="726335318009305564">"Google 搜索"</string>
+    <string name="supervision_web_content_filters_search_filter_on_title" msgid="4855846261141136285">"启用安全搜索过滤功能"</string>
+    <string name="supervision_web_content_filters_search_filter_on_summary" msgid="1162258144140293269">"帮助您在此设备上滤除搜索结果中的露骨图片、文字和链接"</string>
+    <string name="supervision_web_content_filters_search_filter_off_title" msgid="6049461395304222346">"停用安全搜索过滤功能"</string>
+    <string name="supervision_web_content_filters_search_filter_off_summary" msgid="3834238970190924433">"当前账号设置仍可能会使系统滤除或模糊处理含有露骨内容的搜索结果"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"输入监督 PIN 码"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"“<xliff:g id="FEATURE">%1$s</xliff:g>”动画"</string>
 </resources>

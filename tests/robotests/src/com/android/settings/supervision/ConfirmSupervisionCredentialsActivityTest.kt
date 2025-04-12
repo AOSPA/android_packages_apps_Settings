@@ -28,7 +28,6 @@ import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.spy
-import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import org.robolectric.Robolectric
@@ -61,8 +60,8 @@ class ConfirmSupervisionCredentialsActivityTest {
 
         mActivity.onCreate(null)
 
-        verify(mActivity, times(1)).setResult(Activity.RESULT_CANCELED)
-        verify(mActivity, times(1)).finish()
+        verify(mActivity).setResult(Activity.RESULT_CANCELED)
+        verify(mActivity).finish()
     }
 
     @Test
@@ -83,8 +82,8 @@ class ConfirmSupervisionCredentialsActivityTest {
 
         mActivity.onCreate(null)
 
-        verify(mActivity, times(1)).setResult(Activity.RESULT_CANCELED)
-        verify(mActivity, times(1)).finish()
+        verify(mActivity).setResult(Activity.RESULT_CANCELED)
+        verify(mActivity).finish()
     }
 
     @Test
@@ -106,7 +105,7 @@ class ConfirmSupervisionCredentialsActivityTest {
 
         mActivity.onCreate(null)
 
-        verify(mActivity, times(1)).setResult(Activity.RESULT_CANCELED)
-        verify(mActivity, times(1)).finish()
+        verify(mActivity).setResult(Activity.RESULT_CANCELED)
+        verify(mActivity).finish()
     }
 }

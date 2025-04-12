@@ -5842,6 +5842,12 @@
     <!-- Title for the toggle button that turns on/off the autoclick shortcut. [CHAR_LIMIT=NONE] -->
     <!-- TODO(b/394683600): Update string to translatable once approved by UXW. -->
     <string name="accessibility_autoclick_shortcut_title" translatable="false">Autoclick shortcut</string>
+    <!-- Title for the alert dialog that adjust the time for the mouse to hover before autoclick performs. [CHAR_LIMIT=NONE] -->
+    <!-- TODO(b/394683600): Update string to translatable once approved by UXW. -->
+    <string name="autoclick_delay_before_click_title" translatable="false">Delay before click</string>
+    <!-- Summary for the alert dialog that adjust the time for the mouse to hover before autoclick performs. [CHAR_LIMIT=NONE] -->
+    <!-- TODO(b/394683600): Update string to translatable once approved by UXW. -->
+    <string name="autoclick_delay_before_click_summary" translatable="false">Time it takes to click after the cursor stops moving</string>
     <!-- Title for the alert dialog that adjust auto click cursor area size. [CHAR_LIMIT=NONE] -->
     <!-- TODO(b/394683600): Update string to translatable once approved by UXW. -->
     <string name="autoclick_cursor_area_size_title" translatable="false">Click area</string>
@@ -6121,7 +6127,7 @@
         }</string>
 
     <!-- Summary for autoclick seekbar settings preference when user selected custom item. [CHAR LIMIT=35] -->
-    <string name="accessibilty_autoclick_delay_unit_second">{count, plural,
+    <string name="accessibility_autoclick_delay_unit_second">{count, plural,
         =1      {{time} second}
         other   {{time} seconds}
         }</string>
@@ -8211,8 +8217,6 @@ Data usage charges may apply.</string>
 
     <!-- Title for setting tile leading to network and Internet settings [CHAR LIMIT=40]-->
     <string name="network_dashboard_title">Network &amp; internet</string>
-    <!-- Summary for Network and Internet settings, explaining it contains mobile, wifi setting and data usage settings [CHAR LIMIT=NONE]-->
-    <string name="network_dashboard_summary_mobile">Mobile, Wi\u2011Fi, hotspot</string>
     <!-- Summary for Network and Internet settings, explaining it contains wifi and data usage setting [CHAR LIMIT=NONE]-->
     <string name="network_dashboard_summary_no_mobile">Wi\u2011Fi, hotspot</string>
 
@@ -14513,6 +14517,10 @@ Data usage charges may apply.</string>
     <string name="audio_streams_qr_code_page_password">Password: <xliff:g example="123" id="password">%1$s</xliff:g></string>
     <!-- Le audio streams qr code page description [CHAR LIMIT=NONE] -->
     <string name="audio_streams_qr_code_page_description">To listen to <xliff:g example="Local Music" id="stream_name">%1$s</xliff:g>, other people can connect compatible headphones to their Android device. They can then scan this QR code.</string>
+    <!-- Le audio streams preference subtitle [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_preference_subtitle">Listen to Auracast broadcast</string>
+    <!-- Le audio streams preference subtitle when audio sharing is on[CHAR LIMIT=NONE] -->
+    <string name="audio_streams_preference_subtitle_audio_sharing_on">Turn off audio sharing to find audio streams</string>
     <!-- Le audio streams main page title [CHAR LIMIT=NONE] -->
     <string name="audio_streams_main_page_title">Find an audio stream</string>
     <!-- Le audio streams main page subtitle [CHAR LIMIT=NONE] -->
@@ -14598,13 +14606,19 @@ Data usage charges may apply.</string>
     <string name="supervision_change_pin_preference_title">Change PIN</string>
     <!-- Title for supervision forgot PIN setting entry [CHAR LIMIT=60] -->
     <string name="supervision_add_forgot_pin_preference_title">Forgot PIN</string>
+    <!-- Title for supervision update PIN recovery email setting entry [CHAR LIMIT=60] -->
+    <string name="supervision_update_recovery_email_preference_title">Update recovery email</string>
+    <!-- Title for supervision delete pin setting entry [CHAR LIMIT=60] -->
+    <string name="supervision_delete_pin_preference_title">Delete PIN</string>
+    <!-- Summary for supervision delete pin setting entry [CHAR LIMIT=NONE] -->
+    <string name="supervision_delete_pin_preference_summary">This will reset all your supervision settings</string>
     <!-- Title for web content filters entry [CHAR LIMIT=60] -->
     <string name="supervision_web_content_filters_title">Web content filters</string>
     <!-- Title for web content filters browser category [CHAR LIMIT=60] -->
     <string name="supervision_web_content_filters_browser_title">Google Chrome and Web</string>
     <!-- Title for web content filters browser category block explicit sites option [CHAR LIMIT=60] -->
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title">Try to block explicit sites</string>
-    <!-- Summary for web content filters browser category block explicit sites option [CHAR LIMIT=None] -->
+    <!-- Summary for web content filters browser category block explicit sites option [CHAR LIMIT=NONE] -->
     <string name="supervision_web_content_filters_browser_block_explicit_sites_summary">No filter is perfect, but this should help hide sexually explicit sites</string>
     <!-- Title for web content filters browser category allow all sites option [CHAR LIMIT=60] -->
     <string name="supervision_web_content_filters_browser_allow_all_sites_title">Allow all sites</string>
@@ -14612,11 +14626,11 @@ Data usage charges may apply.</string>
     <string name="supervision_web_content_filters_search_title">Google Search</string>
     <!-- Title for web content filters search category filter on option [CHAR LIMIT=60] -->
     <string name="supervision_web_content_filters_search_filter_on_title">SafeSearch filtering ON</string>
-    <!-- Summary for web content filters search category filter on option [CHAR LIMIT=None] -->
+    <!-- Summary for web content filters search category filter on option [CHAR LIMIT=NONE] -->
     <string name="supervision_web_content_filters_search_filter_on_summary">Helps filter out explicit images, text, and links from search results on this device</string>
     <!-- Title for web content filters search category filter off option [CHAR LIMIT=60] -->
     <string name="supervision_web_content_filters_search_filter_off_title">SafeSearch filtering OFF</string>
-    <!-- Summary for web content filters search category filter off option [CHAR LIMIT=None] -->
+    <!-- Summary for web content filters search category filter off option [CHAR LIMIT=NONE] -->
     <string name="supervision_web_content_filters_search_filter_off_summary">Account settings may still filter or blur explicit results</string>
     <!-- Generic content description that is attached to the preview illustration at the top of an Accessibility feature toggle page. [CHAR LIMIT=NONE] -->
     <!-- Title for supervision PIN verification screen [CHAR LIMIT=60] -->

@@ -344,7 +344,8 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{On / # app ha accesso alla posizione}other{On / # app hanno accesso alla posizione}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Caricamento…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Le app con autorizzazione di accesso ai dispositivi nelle vicinanze possono stabilire la posizione relativa dei dispositivi connessi."</string>
-    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"L\'accesso alla posizione è disattivato per app e servizi. La posizione del dispositivo potrebbe essere comunque inviata ai servizi di emergenza se chiami o invii un SMS a un numero di emergenza."</string>
+    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Scopri di più sulle impostazioni di localizzazione"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Per apportare modifiche, vai alle Impostazioni di ChromeOS &gt; Privacy e sicurezza &gt; Controlli per la privacy &gt; Accesso alla posizione"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Account"</string>
@@ -610,6 +611,8 @@
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"Saltare l\'impostazione di sequenza e volto?"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"Saltare l\'impostazione di sequenza e impronta?"</string>
     <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"Saltare impostaz. di sequenza, volto e impronta?"</string>
+    <string name="resume_animation" msgid="5259729861893297887">"Riprendi animazione"</string>
+    <string name="pause_animation" msgid="2209064682137909056">"Metti in pausa animazione"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"Imposta blocco schermo"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Fine"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Ops, questo non è il sensore"</string>
@@ -943,8 +946,7 @@
     <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"Annulla"</string>
     <string name="bluetooth_key_missing_device_settings" msgid="5512091368141961890">"Impostazioni del dispositivo"</string>
     <string name="bluetooth_key_missing_close" msgid="6724520133374312040">"Chiudi"</string>
-    <!-- no translation found for bluetooth_key_missing_toast (8692796546000643569) -->
-    <skip />
+    <string name="bluetooth_key_missing_toast" msgid="8692796546000643569">"Connessione di <xliff:g id="DEVICE_NAME">%1$s</xliff:g> non riuscita"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Dettagli dispositivo"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Impostazioni tastiera"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Altre impostazioni"</string>
@@ -1437,6 +1439,8 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Off"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Quando avviare"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Solleva per riattivare"</string>
+    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
+    <skip />
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Display ambient"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Quando mostrare"</string>
     <string name="doze_title" msgid="1523090408230862316">"Riattiva schermo per notifiche"</string>
@@ -1603,6 +1607,8 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Durante la ricarica"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"Durante la ricarica e verso l\'alto"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"Quando agganciato alla base"</string>
+    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
+    <skip />
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Modifica punto di accesso"</string>
     <string name="apn_add" msgid="9069613192201630934">"Aggiungi punto di accesso"</string>
@@ -2121,8 +2127,7 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Clic in basso a destra"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Per altre opzioni, fai clic sull\'angolo inferiore destro del touchpad"</string>
     <string name="trackpad_pointer_speed" msgid="5672221910698079303">"Velocità del cursore"</string>
-    <!-- no translation found for three_finger_tap_preference_title (1836080810837854140) -->
-    <skip />
+    <string name="three_finger_tap_preference_title" msgid="1836080810837854140">"Usa il tocco con tre dita"</string>
     <string name="touchpad_acceleration_title" msgid="176627555191021888">"Accelerazione del touchpad"</string>
     <string name="touchpad_acceleration_summary" msgid="8057075483967535793">"Con movimenti più rapidi sul touchpad, il cursore verrà spostato più lontano"</string>
     <string name="pointer_fill_style" msgid="8794616790175016092">"Colore del puntatore"</string>
@@ -2139,8 +2144,7 @@
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Impara i gesti con il touchpad"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"trackpad, track pad, mouse, cursore, scorrimento, scorrere, clic con il tasto destro del mouse, clic, puntatore"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"clic con il tasto destro del mouse, tocco"</string>
-    <!-- no translation found for three_finger_tap_middle_click (7898931632908866867) -->
-    <skip />
+    <string name="three_finger_tap_middle_click" msgid="7898931632908866867">"Tasto centrale del mouse"</string>
     <string name="three_finger_tap_launch_gemini" msgid="4030401656711588982">"Avvia l\'assistente"</string>
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Vai alla schermata Home"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"Indietro"</string>
@@ -2269,10 +2273,9 @@
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Controlli di interazione"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Controlli basati sul tempo"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Controlli di sistema"</string>
-    <string name="accessibility_feedback_title" msgid="6690472705407526006">"Feedback"</string>
-    <string name="accessibility_feedback_summary" msgid="4576591591334314827">"Aiutaci a migliorare partecipando a un sondaggio"</string>
-    <string name="accessibility_feedback_disabled_summary" msgid="3652321859452620942">"Nessun sondaggio disponibile"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Invia feedback"</string>
+    <!-- no translation found for accessibility_send_survey_title (7899716184811587023) -->
+    <skip />
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"App scaricate"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Sperimentali"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Flag funzionalità"</string>
@@ -2562,6 +2565,8 @@
     <string name="accessibility_hearing_device_footer_hap_only_summary_tts" msgid="4440097982533045507">"Per trovare altre protesi uditive non supportate da LE Audio, tocca "<b>"Accoppia nuovo dispositivo"</b>" e poi "<b>"Visualizza altri dispositivi"</b></string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Accoppia protesi uditiva"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"In questa pagina, puoi accoppiare le protesi uditive ASHA e LE audio. Assicurati che la tua protesi uditiva sia accesa e pronta per l\'accoppiamento."</string>
+    <string name="accessibility_hearing_device_pairing_asha_only_intro" msgid="5679230908462987522">"In questa pagina, puoi accoppiare le protesi uditive ASHA. Assicurati che la tua protesi uditiva sia accesa e pronta per l\'accoppiamento."</string>
+    <string name="accessibility_hearing_device_pairing_hap_only_intro" msgid="2233661046254311681">"In questa pagina, puoi accoppiare le protesi uditive LE Audio. Assicurati che la tua protesi uditiva sia accesa e pronta per l\'accoppiamento."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Protesi uditive disponibili"</string>
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"Non trovi la tua protesi uditiva?"</string>
     <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"Visualizza altri dispositivi"</string>
@@ -5061,24 +5066,15 @@
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Segui i passaggi per connetterti al satellite"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"Puoi inviare un messaggio a chiunque, anche ai servizi di emergenza. Quando sarà disponibile, lo smartphone si riconnetterà a una rete mobile."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"Una volta che lo smartphone è connesso, puoi inviare un messaggio a chiunque, inclusi i servizi di emergenza."</string>
-    <!-- no translation found for satellite_footer_content_section_0 (4169483813004415556) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_1 (7925931577373229601) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_2 (7699185178461362541) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_3 (4652426135622555607) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_4 (2294227482962815751) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_5 (3053256489735265540) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_6 (1448633393918612418) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_7 (5524773673918954918) -->
-    <skip />
-    <!-- no translation found for more_about_satellite_connectivity (9110502891919936054) -->
-    <skip />
+    <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Aspetti da considerare"</string>
+    <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"La connettività satellitare potrebbe essere più lenta ed essere disponibile solo in alcune zone."</string>
+    <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"Il meteo e determinate strutture potrebbero influire sulla connessione satellitare."</string>
+    <string name="satellite_footer_content_section_3" msgid="4652426135622555607">"Le chiamate via satellite non sono disponibili."</string>
+    <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"Le chiamate di emergenza potrebbero invece ancora riuscire."</string>
+    <string name="satellite_footer_content_section_5" msgid="3053256489735265540">"È richiesta una rete mobile o Wi‑Fi per visualizzare i link esterni."</string>
+    <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"L\'invio di messaggi ai servizi di emergenza potrebbe non essere disponibile in tutte le aree."</string>
+    <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"Potrebbe passare del tempo prima che le modifiche al tuo account siano visibili nelle Impostazioni. Contatta <xliff:g id="CARRIER_NAME">%1$s</xliff:g> per maggiori dettagli."</string>
+    <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"Scopri di più sulla connettività satellitare"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Impossibile attivare la modalità <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Per attivare la funzionalità <xliff:g id="FUNCTION">%1$s</xliff:g>, devi prima terminare la connessione satellitare"</string>
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Satellite"</string>
@@ -5089,6 +5085,8 @@
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"App supportate sullo smartphone"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"mostra tutte le app"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"App supportate sullo smartphone"</string>
+    <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Impossibile aggiungere una SIM"</string>
+    <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Termina la connessione satellitare prima di aggiungere una SIM"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nomi punti di accesso"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Non disponibile se è attiva la connessione a <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5629,7 +5627,7 @@
     <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"Audio della chiamata"</string>
     <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"Riproduci solo su <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"Riproduci un suono di prova"</string>
-    <string name="audio_sharing_test_sound_description" msgid="4072462502371937399">"Chiunque stia ascoltando dovrebbe sentire questi contenuti"</string>
+    <string name="audio_sharing_test_sound_description" msgid="4072462502371937399">"Chiunque stia ascoltando dovrebbe sentirlo"</string>
     <string name="audio_sharing_stream_settings_title" msgid="1374391898689242036">"Impostazioni stream audio"</string>
     <string name="audio_sharing_stream_name_title" msgid="8156859441897180940">"Nome"</string>
     <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Password"</string>
@@ -5765,16 +5763,11 @@
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Prova a bloccare i siti con contenuti espliciti"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_summary" msgid="1477766506765966613">"Nessun filtro è perfetto, ma questo dovrebbe aiutarti a nascondere i siti con contenuti sessualmente espliciti"</string>
     <string name="supervision_web_content_filters_browser_allow_all_sites_title" msgid="3909739592466381845">"Consenti tutti i siti"</string>
-    <!-- no translation found for supervision_web_content_filters_search_title (726335318009305564) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_on_title (4855846261141136285) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_on_summary (1162258144140293269) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_off_title (6049461395304222346) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_off_summary (3834238970190924433) -->
-    <skip />
+    <string name="supervision_web_content_filters_search_title" msgid="726335318009305564">"Ricerca Google"</string>
+    <string name="supervision_web_content_filters_search_filter_on_title" msgid="4855846261141136285">"Filtro SafeSearch ATTIVO"</string>
+    <string name="supervision_web_content_filters_search_filter_on_summary" msgid="1162258144140293269">"Aiuta a filtrare immagini, testo e link espliciti dai risultati di ricerca su questo dispositivo"</string>
+    <string name="supervision_web_content_filters_search_filter_off_title" msgid="6049461395304222346">"Filtro SafeSearch DISATTIVATO"</string>
+    <string name="supervision_web_content_filters_search_filter_off_summary" msgid="3834238970190924433">"Le impostazioni dell\'account potrebbero comunque filtrare o sfocare i risultati espliciti"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Inserisci il PIN di supervisione"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animazione di <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
 </resources>

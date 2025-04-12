@@ -264,10 +264,8 @@
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"Si une appli ne prend pas en charge les préférences régionales, elle utilisera ses paramètres régionaux par défaut."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Découvrez-en davantage sur les préférences linguistiques."</string>
     <string name="metric_measurement_system" msgid="7489725697268321541">"Métrique"</string>
-    <!-- no translation found for us_measurement_system (8406695347890345490) -->
-    <skip />
-    <!-- no translation found for uk_measurement_system (1814065008707689505) -->
-    <skip />
+    <string name="us_measurement_system" msgid="8406695347890345490">"États-Unis"</string>
+    <string name="uk_measurement_system" msgid="1814065008707689505">"Royaume-Uni"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"Autres préférences"</string>
     <string name="terms_of_address_title" msgid="7338630812197476808">"Choisissez comment on s\'adresse à vous"</string>
     <string name="terms_of_address_summary" msgid="7802443422612600620">"Votre appareil peut personnaliser la façon dont on s\'adresse à vous"</string>
@@ -289,7 +287,7 @@
     <string name="activity_picker_label" msgid="351250401590691126">"Sélectionner une activité"</string>
     <string name="cancel" msgid="5780102414089664898">"Annuler"</string>
     <string name="okay" msgid="4827099303045669054">"OK"</string>
-    <string name="forget" msgid="3754013654135912783">"Supprimer"</string>
+    <string name="forget" msgid="3754013654135912783">"Oublier"</string>
     <string name="save" msgid="3125033126936493822">"Enregistrer"</string>
     <string name="done" msgid="7497982645646431310">"Terminé"</string>
     <string name="apply" msgid="7834684883190163536">"Appliquer"</string>
@@ -346,7 +344,8 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Activée/# appli a accès à la position}one{Activée/# appli a accès à la position}other{Activée/# applis ont accès à la position}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Chargement…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Les applis ayant l\'autorisation de détecter les appareils à proximité peuvent déterminer la position relative des appareils connectés."</string>
-    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"L\'accès à la position est désactivé pour les applis et les services. La position de votre appareil peut toujours être envoyée aux services d\'urgence lorsque vous les contactez par téléphone ou SMS."</string>
+    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"En savoir plus sur les paramètres de localisation."</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Pour apporter des modifications, rendez-vous dans Paramètres de ChromeOS &gt; Confidentialité et sécurité &gt; Paramètres de confidentialité &gt; Accès à la position"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Comptes"</string>
@@ -612,6 +611,10 @@
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"Ne pas configurer de schéma ni de visage ?"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"Ne pas configurer de schéma ni d\'empreinte ?"</string>
     <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"Passer cette étape de configuration ?"</string>
+    <!-- no translation found for resume_animation (5259729861893297887) -->
+    <skip />
+    <!-- no translation found for pause_animation (2209064682137909056) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"Verrouillage de l\'écran"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"OK"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Petit problème… Il ne s\'agit pas du capteur"</string>
@@ -939,18 +942,13 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Quand le Bluetooth est activé, votre appareil peut communiquer avec d\'autres appareils Bluetooth à proximité.\n\nQuand il ne l\'est pas, les applis et services peuvent quand même rechercher les appareils à proximité à tout moment, afin d\'améliorer l\'expérience, par exemple, les fonctionnalités et services basés sur la localisation. Vous pouvez modifier ce réglage dans les paramètres de recherche Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"L\'activation du Bluetooth permet à votre appareil de communiquer avec les appareils Bluetooth à proximité. Certaines fonctionnalités, telles que Quick Share et Localiser mon appareil, utilisent le Bluetooth.\n\nLes applis et services sont toujours en mesure de rechercher les appareils à proximité, même si le Bluetooth est désactivé. Cela peut servir, par exemple, à améliorer les services et fonctionnalités utilisant la localisation. Rendez-vous dans les paramètres de recherche Bluetooth pour modifier cela."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Modifier"</string>
-    <!-- no translation found for bluetooth_key_missing_title (8462010102528132965) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_message (3188093580372443815) -->
-    <skip />
+    <string name="bluetooth_key_missing_title" msgid="8462010102528132965">"Impossible de connecter <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="bluetooth_key_missing_message" msgid="3188093580372443815">"Pour en savoir plus, accédez aux paramètres de l\'appareil"</string>
     <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"Oublier l\'appareil"</string>
     <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"Annuler"</string>
-    <!-- no translation found for bluetooth_key_missing_device_settings (5512091368141961890) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_close (6724520133374312040) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_toast (8692796546000643569) -->
-    <skip />
+    <string name="bluetooth_key_missing_device_settings" msgid="5512091368141961890">"Paramètres de l\'appareil"</string>
+    <string name="bluetooth_key_missing_close" msgid="6724520133374312040">"Fermer"</string>
+    <string name="bluetooth_key_missing_toast" msgid="8692796546000643569">"Échec de la connexion de <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Infos sur l\'appareil"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Paramètres du clavier"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Plus de paramètres"</string>
@@ -965,8 +963,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Expérimental. Améliore la qualité audio."</string>
     <string name="device_details_battery" msgid="5466987755790847884">"Batterie"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"Batterie, en charge"</string>
-    <!-- no translation found for device_details_key_missing_title (3568401701538114387) -->
-    <skip />
+    <string name="device_details_key_missing_title" msgid="3568401701538114387">"Essayez de redémarrer <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Si cela ne fonctionne pas, dissociez l\'appareil. Pour votre sécurité, veillez à ne pas vous trouver dans un espace public lorsque vous l\'associerez à nouveau.\n\nSi cet appareil n\'est pas à proximité, vous n\'avez rien à faire."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Dissocier l\'appareil"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Dissocier l\'appli"</string>
     <string name="device_details_more_settings" msgid="950302792331611271">"Plus de paramètres"</string>
@@ -1103,8 +1100,7 @@
     <string name="wifi_eap_identity" msgid="3629406902174137028">"Identité"</string>
     <string name="wifi_eap_anonymous" msgid="8630332141751267000">"Identité anonyme"</string>
     <string name="wifi_password" msgid="165204973532996861">"Mot de passe*"</string>
-    <!-- no translation found for wifi_password_optional (6770706664834070705) -->
-    <skip />
+    <string name="wifi_password_optional" msgid="6770706664834070705">"Mot de passe (facultatif)"</string>
     <string name="wifi_password_invalid" msgid="8884500804472828356">"Le mot de passe n\'est pas valide"</string>
     <string name="wifi_show_password" msgid="6865993988238157923">"Afficher le mot de passe"</string>
     <string name="wifi_ap_choose_2G" msgid="1436802195991542016">"Bande 2,4 GHz"</string>
@@ -1390,8 +1386,7 @@
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"Éclairage nocturne inactif"</string>
     <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"L\'accès à la position de l\'appareil est nécessaire pour déterminer les heures de coucher et de lever du soleil."</string>
     <string name="twilight_mode_launch_location" msgid="7799112373591153956">"Paramètres de localisation"</string>
-    <!-- no translation found for twilight_mode_pending_location (6829434234071614405) -->
-    <skip />
+    <string name="twilight_mode_pending_location" msgid="6829434234071614405">"Les services de localisation sont actifs. La planification s\'activera une fois la position déterminée."</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"Activer maintenant"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"Désactiver maintenant"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"Activer jusqu\'au lever du soleil"</string>
@@ -1445,6 +1440,8 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Désactivé"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Quand l\'activer"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Soulever pour activer"</string>
+    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
+    <skip />
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Affichage en mode Veille"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Quand l\'afficher"</string>
     <string name="doze_title" msgid="1523090408230862316">"Activer l\'écran si notifications"</string>
@@ -1611,6 +1608,8 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Lorsque l\'appareil est en charge"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"Lorsque l\'appareil est en charge et en position verticale"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"Lorsque l\'appareil est connecté à une station d\'accueil"</string>
+    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
+    <skip />
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Modifier le point d\'accès"</string>
     <string name="apn_add" msgid="9069613192201630934">"Ajouter un point d\'accès"</string>
@@ -2277,10 +2276,9 @@
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Commandes d\'interaction"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Contrôle du temps d\'appui"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Commandes système"</string>
-    <string name="accessibility_feedback_title" msgid="6690472705407526006">"Commentaires"</string>
-    <string name="accessibility_feedback_summary" msgid="4576591591334314827">"Aidez-nous à améliorer nos services en répondant à une enquête"</string>
-    <string name="accessibility_feedback_disabled_summary" msgid="3652321859452620942">"Aucune enquête disponible"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Envoyer des commentaires"</string>
+    <!-- no translation found for accessibility_send_survey_title (7899716184811587023) -->
+    <skip />
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Applications téléchargées"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Paramètres expérimentaux"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Flags de fonctionnalités"</string>
@@ -2570,6 +2568,10 @@
     <string name="accessibility_hearing_device_footer_hap_only_summary_tts" msgid="4440097982533045507">"Pour détecter d\'autres appareils auditifs qui ne sont pas pris en charge par le protocole LE Audio, appuyez sur "<b>"Associer un nouvel appareil"</b>", puis sur "<b>"Voir d\'autres appareils"</b></string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Associer appareil auditif"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"Vous pouvez associer des appareils auditifs ASHA et LE Audio sur cette page. Vérifiez que votre appareil auditif est allumé et prêt à être associé."</string>
+    <!-- no translation found for accessibility_hearing_device_pairing_asha_only_intro (5679230908462987522) -->
+    <skip />
+    <!-- no translation found for accessibility_hearing_device_pairing_hap_only_intro (2233661046254311681) -->
+    <skip />
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Appareils auditifs disponibles"</string>
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"Vous ne voyez pas votre appareil auditif ?"</string>
     <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"Voir d\'autres appareils"</string>
@@ -4426,8 +4428,7 @@
     <string name="disconnected" msgid="3469373726996129247">"Non connecté"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Non connecté"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> applications installées"</string>
-    <!-- no translation found for storage_toplevel_summary (6708203706751754934) -->
-    <skip />
+    <string name="storage_toplevel_summary" msgid="6708203706751754934">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> utilisés - <xliff:g id="FREE_SPACE">%2$s</xliff:g> disponibles"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Thème sombre, taille de la police, luminosité"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Utilisation d\'environ <xliff:g id="USED_MEMORY">%1$s</xliff:g> sur <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> de mémoire"</string>
     <string name="users_summary" msgid="8473589474976307510">"Connecté en tant que \"<xliff:g id="USER_NAME">%1$s</xliff:g>\""</string>
@@ -5050,16 +5051,13 @@
     <string name="roaming_alert_title" msgid="9052791521868787985">"Autoriser l\'itinérance des données ?"</string>
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"Vérifiez le tarif auprès de votre opérateur."</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Mode réseau non valide <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Action ignorée."</string>
-    <!-- no translation found for satellite_setting (4650503806634496443) -->
-    <skip />
+    <string name="satellite_setting" msgid="4650503806634496443">"Connectivité satellite"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Envoyez et recevez des messages par satellite. Inclus dans votre compte."</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Envoyez et recevez des messages par satellite. Non inclus dans votre compte."</string>
     <string name="satellite_setting_summary_without_entitlement" msgid="5284998840770992554">"Envoyez et recevez des messages par satellite. Pour en savoir plus, contactez votre opérateur."</string>
     <string name="keywords_satellite_setting" msgid="613553612424945946">"Messagerie par satellite, connectivité satellite"</string>
-    <!-- no translation found for category_name_about_satellite_connectivity (3971142716898783631) -->
-    <skip />
-    <!-- no translation found for description_about_satellite_setting (5539359064330584941) -->
-    <skip />
+    <string name="category_name_about_satellite_connectivity" msgid="3971142716898783631">"À propos de la connectivité satellite"</string>
+    <string name="description_about_satellite_setting" msgid="5539359064330584941">"Vous pouvez envoyer et recevoir des messages par satellite et utiliser certaines applis avec un compte <xliff:g id="CARRIER_NAME">%1$s</xliff:g> éligible"</string>
     <string name="category_title_your_satellite_plan" msgid="8169426217950247126">"Votre compte <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="title_have_satellite_plan" msgid="2048372355699977947">"La messagerie par satellite est incluse dans votre compte"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"La messagerie par satellite n\'est pas incluse dans votre compte"</string>
@@ -5073,28 +5071,18 @@
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Suivez les étapes pour vous connecter au satellite"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"Vous pouvez envoyer un message à n\'importe qui, y compris les services d\'urgence. Votre téléphone se reconnectera à un réseau mobile le cas échéant."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"Une fois que votre téléphone est connecté, vous pouvez envoyer un message à n\'importe qui, y compris aux services d\'urgence."</string>
-    <!-- no translation found for satellite_footer_content_section_0 (4169483813004415556) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_1 (7925931577373229601) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_2 (7699185178461362541) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_3 (4652426135622555607) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_4 (2294227482962815751) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_5 (3053256489735265540) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_6 (1448633393918612418) -->
-    <skip />
-    <!-- no translation found for satellite_footer_content_section_7 (5524773673918954918) -->
-    <skip />
-    <!-- no translation found for more_about_satellite_connectivity (9110502891919936054) -->
-    <skip />
+    <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"À noter"</string>
+    <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"La connectivité par satellite peut prendre plus de temps et n\'est disponible que dans certaines zones."</string>
+    <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"La météo et certaines structures peuvent avoir une incidence sur votre connexion satellite."</string>
+    <string name="satellite_footer_content_section_3" msgid="4652426135622555607">"Il n\'est pas possible d\'appeler par satellite."</string>
+    <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"Il est toutefois possible de passer des appels d\'urgence."</string>
+    <string name="satellite_footer_content_section_5" msgid="3053256489735265540">"Une connexion mobile ou Wi-Fi est requise pour ouvrir les liens externes."</string>
+    <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"Il se peut que l\'envoi de messages aux services d\'urgence ne soit pas disponible dans toutes les zones."</string>
+    <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"La prise en compte de ces modifications dans les paramètres peut prendre un certain temps. Contactez <xliff:g id="CARRIER_NAME">%1$s</xliff:g> pour plus d\'informations."</string>
+    <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"En savoir plus sur la connectivité par satellite"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Impossible d\'activer le <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Pour activer le <xliff:g id="FUNCTION">%1$s</xliff:g>, coupez d\'abord la connexion satellite"</string>
-    <!-- no translation found for category_title_satellite_connectivity (7740500012311192133) -->
-    <skip />
+    <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Satellite"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Connectivité satellite"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"connectivité satellite"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"messagerie par satellite"</string>
@@ -5102,6 +5090,10 @@
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Applis compatibles sur votre téléphone"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"Voir toutes les applis"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Applis compatibles sur votre téléphone"</string>
+    <!-- no translation found for title_satellite_dialog_for_sim_restriction (454718192423216397) -->
+    <skip />
+    <!-- no translation found for description_satellite_dialog_for_sim_restriction (5465487347427595435) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Noms des points d\'accès"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Indisponible lorsque connecté à <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5185,8 +5177,7 @@
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Pour utiliser ultérieurement les données mobiles, les fonctionnalités d\'appel et les SMS, accédez à vos paramètres réseau"</string>
     <string name="sim_card_label" msgid="6263064316075963775">"SIM"</string>
     <string name="erase_sim_dialog_title" msgid="4742077437653028326">"Effacer cette eSIM ?"</string>
-    <!-- no translation found for erase_sim_dialog_text (3982216582200709197) -->
-    <skip />
+    <string name="erase_sim_dialog_text" msgid="3982216582200709197">"Si vous effacez cette carte eSIM, le service <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> sera supprimé de cet appareil. Votre service <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> ne sera pas résilié. Pour demander une nouvelle carte, vous devez contacter votre opérateur."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Effacer"</string>
     <string name="erasing_sim" msgid="4237180547590463930">"Effacement de la carte eSIM…"</string>
     <string name="erase_sim_fail_title" msgid="1445700500168357303">"Impossible d\'effacer la carte eSIM"</string>
@@ -5207,7 +5198,7 @@
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Connexion à l\'appareil…"</string>
     <string name="bluetooth_left_name" msgid="7440064067910080502">"Gauche"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"Droite"</string>
-    <string name="bluetooth_middle_name" msgid="3909371955137442319">"Étui de transport"</string>
+    <string name="bluetooth_middle_name" msgid="3909371955137442319">"Étui"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Batterie"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Panneau des paramètres"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Activer les fenêtres de forme libre"</string>
@@ -5635,14 +5626,14 @@
     <string name="sync_across_devices_title" msgid="3447757705383089345">"Synchronisation entre les appareils"</string>
     <string name="device_diagnostics_title" msgid="2914523189695727897">"Diagnostic de l\'appareil"</string>
     <string name="audio_sharing_title" msgid="4144157137502923821">"Partage audio"</string>
-    <string name="audio_sharing_switch_title" msgid="7052827328670825701">"Partager l\'audio"</string>
+    <string name="audio_sharing_switch_title" msgid="7052827328670825701">"Partager le flux audio"</string>
     <string name="calls_and_alarms_device_title" msgid="6993559028175454198">"Appels et alarmes"</string>
-    <string name="audio_sharing_description" msgid="1660255584523640628">"Permettez à vos proches d\'écouter votre audio en même temps que vous. Ils doivent disposer de leur propre casque ou de leurs propres écouteurs LE Audio."</string>
+    <string name="audio_sharing_description" msgid="1660255584523640628">"Partagez ce que vous écoutez avec d\'autres personnes pour qu\'elles puissent suivre en même temps que vous sur leur propre appareil LE Audio (casque ou écouteurs)."</string>
     <string name="audio_sharing_device_group_title" msgid="3019780581643956943">"Périphériques multimédias actifs"</string>
-    <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"Périphériques de sortie audio"</string>
-    <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"À lire uniquement avec <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"Son des appels"</string>
+    <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"Lire uniquement sur : <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"Tester le son"</string>
-    <string name="audio_sharing_test_sound_description" msgid="4072462502371937399">"Tous ceux qui écoutent devraient l\'entendre"</string>
+    <string name="audio_sharing_test_sound_description" msgid="4072462502371937399">"Lire un son pour vérifier que tous ceux qui écoutent peuvent l\'entendre"</string>
     <string name="audio_sharing_stream_settings_title" msgid="1374391898689242036">"Paramètres du flux audio"</string>
     <string name="audio_sharing_stream_name_title" msgid="8156859441897180940">"Nom"</string>
     <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Mot de passe"</string>
@@ -5656,17 +5647,17 @@
     <string name="audio_sharing_media_device_group_title" msgid="4850674234590549565">"Autres périphériques multimédias"</string>
     <string name="audio_sharing_summary_on" msgid="611197542982323788">"Activé"</string>
     <string name="audio_sharing_summary_off" msgid="8833198995257547378">"Désactivé"</string>
-    <string name="audio_sharing_share_dialog_title" msgid="427514648577553621">"Partager votre audio"</string>
+    <string name="audio_sharing_share_dialog_title" msgid="427514648577553621">"Partager votre flux audio"</string>
     <string name="audio_sharing_share_dialog_subtitle" msgid="5208582843732057871">"<xliff:g id="DEVICE_NAME1">%1$s</xliff:g> et <xliff:g id="DEVICE_NAME2">%2$s</xliff:g>"</string>
-    <string name="audio_sharing_share_button_label" msgid="3895900668317105537">"Partager l\'audio"</string>
+    <string name="audio_sharing_share_button_label" msgid="3895900668317105537">"Partager le flux audio"</string>
     <string name="audio_sharing_no_thanks_button_label" msgid="5822491984114744357">"Non merci"</string>
     <string name="audio_sharing_share_with_dialog_title" msgid="3934377530640830364">"Partager le contenu audio avec <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ?"</string>
     <string name="audio_sharing_share_with_more_dialog_title" msgid="2840069088858232267">"Partager l\'audio avec un autre appareil"</string>
     <string name="audio_sharing_share_with_button_label" msgid="4146194430380237357">"Partager avec <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"Fermer"</string>
     <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"Connectez un autre casque compatible ou partagez le nom et le mot de passe de votre flux avec l\'autre personne"</string>
-    <string name="audio_sharing_dialog_qr_code_content" msgid="2246980817848351361">"Autorisez les autres à scanner ce code et à écouter votre audio\n\nNom du flux : <xliff:g id="STREAM_NAME">%1$s</xliff:g>\nMot de passe : <xliff:g id="PASSWORD">%2$s</xliff:g>"</string>
-    <string name="audio_sharing_dialog_qr_code_content_no_password" msgid="7824076083031650113">"Autorisez d\'autres personnes à scanner ce code et à écouter votre audio\n\nNom du flux : <xliff:g id="STREAM_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_dialog_qr_code_content" msgid="2246980817848351361">"Autorisez d\'autres personnes à scanner ce code et à écouter votre flux audio\n\nNom du flux : <xliff:g id="STREAM_NAME">%1$s</xliff:g>\nMot de passe : <xliff:g id="PASSWORD">%2$s</xliff:g>"</string>
+    <string name="audio_sharing_dialog_qr_code_content_no_password" msgid="7824076083031650113">"Autorisez d\'autres personnes à scanner ce code et à écouter votre flux audio\n\nNom du flux : <xliff:g id="STREAM_NAME">%1$s</xliff:g>"</string>
     <string name="audio_sharing_dialog_pair_new_device_content" msgid="6720472590211440206">"ou associez un autre casque compatible"</string>
     <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"Associer un autre casque compatible ou partager le QR code de votre flux audio avec l\'autre personne"</string>
     <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"Audio partagé"</string>
@@ -5687,7 +5678,7 @@
     <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"Arrêt du partage audio"</string>
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Connecter un appareil compatible"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Pour commencer à partager du contenu audio, connectez d\'abord votre casque LE Audio à votre téléphone"</string>
-    <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"Passer à <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"Basculer sur <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_sharing_progress_dialog_start_stream_content" msgid="1152386358063502897">"Démarrage du flux audio…"</string>
     <string name="audio_sharing_progress_dialog_add_source_content" msgid="2913609550496440710">"Partage avec <xliff:g id="DEVICE_NAME">%1$s</xliff:g>…"</string>
     <string name="progress_dialog_connect_device_content" msgid="1387370883978461533">"Connexion à <xliff:g id="DEVICE_NAME">%1$s</xliff:g>…"</string>
@@ -5778,16 +5769,11 @@
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Essayer de bloquer les sites au contenu explicite"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_summary" msgid="1477766506765966613">"Aucun filtre n\'est parfait, mais celui-ci devrait contribuer à masquer les sites à caractère sexuel explicite"</string>
     <string name="supervision_web_content_filters_browser_allow_all_sites_title" msgid="3909739592466381845">"Autoriser tous les sites"</string>
-    <!-- no translation found for supervision_web_content_filters_search_title (726335318009305564) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_on_title (4855846261141136285) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_on_summary (1162258144140293269) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_off_title (6049461395304222346) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_off_summary (3834238970190924433) -->
-    <skip />
+    <string name="supervision_web_content_filters_search_title" msgid="726335318009305564">"Recherche Google"</string>
+    <string name="supervision_web_content_filters_search_filter_on_title" msgid="4855846261141136285">"Filtrage SafeSearch activé"</string>
+    <string name="supervision_web_content_filters_search_filter_on_summary" msgid="1162258144140293269">"Permet de filtrer les images, textes et liens au contenu explicite dans les résultats de recherche sur cet appareil"</string>
+    <string name="supervision_web_content_filters_search_filter_off_title" msgid="6049461395304222346">"Filtrage SafeSearch désactivé"</string>
+    <string name="supervision_web_content_filters_search_filter_off_summary" msgid="3834238970190924433">"Les paramètres de compte peuvent toujours filtrer ou flouter les résultats explicites"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Saisir le code de supervision"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animation <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
 </resources>
