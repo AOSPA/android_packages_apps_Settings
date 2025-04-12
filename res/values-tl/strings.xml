@@ -611,10 +611,8 @@
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"Laktawan ang pag-set up para sa pattern at mukha?"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"Laktawan ang pag-set up para sa pattern at fingerprint?"</string>
     <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"Laktawan ang pag-set up para sa pattern, mukha, at fingerprint?"</string>
-    <!-- no translation found for resume_animation (5259729861893297887) -->
-    <skip />
-    <!-- no translation found for pause_animation (2209064682137909056) -->
-    <skip />
+    <string name="resume_animation" msgid="5259729861893297887">"Ituloy ang animation"</string>
+    <string name="pause_animation" msgid="2209064682137909056">"I-pause ang animation"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"I-set up ang screen lock"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Tapos na"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Naku, hindi iyan ang sensor"</string>
@@ -1032,6 +1030,8 @@
     <string name="android_beam_explained" msgid="5684416131846701256">"Kapag naka-on ang feature na ito, maaari mong i-beam ang content ng app sa iba pang device na may NFC sa pamamagitan ng paglalapit sa mga device. Halimbawa, maaari kang mag-beam ng mga web page, video sa YouTube, contact, at higit pa.\n\nPaglapitin lang ang mga device (karaniwang magkatalikuran) at pagkatapos ay i-tap ang iyong screen. Tutukuyin ng app kung ano ang ibi-beam."</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi‑Fi"</string>
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Gumamit ng Wi‑Fi"</string>
+    <!-- no translation found for wifi_networks_category (8011323954745036753) -->
+    <skip />
     <string name="wifi_settings_category" msgid="3523464780563778321">"Mga setting ng Wi-Fi"</string>
     <string name="wifi_select_network" msgid="6692897876718813259">"Pumili ng Wi-Fi"</string>
     <string name="wifi_starting" msgid="6147022683967506341">"Ino-on ang Wi‑Fi…"</string>
@@ -1212,6 +1212,22 @@
     <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> ‑ Nagcha-charge"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"Koneksyon sa hotspot"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"Lakas ng koneksyon"</string>
+    <!-- no translation found for ethernet_dns1 (6487470669719468602) -->
+    <skip />
+    <!-- no translation found for ethernet_dns2 (484620572555181363) -->
+    <skip />
+    <!-- no translation found for ethernet_gateway (4064061619318875567) -->
+    <skip />
+    <!-- no translation found for ethernet_network_prefix_length (3693127271457763198) -->
+    <skip />
+    <!-- no translation found for ethernet_ip_settings (3344064201878792090) -->
+    <skip />
+    <!-- no translation found for ethernet_config_submit (724743720212124025) -->
+    <skip />
+    <!-- no translation found for ethernet_config_cancel (986322993908814366) -->
+    <skip />
+    <!-- no translation found for ethernet_config_title (4784063109810004382) -->
+    <skip />
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Naka-save na network"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Mga Subscription"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Iba pang network"</string>
@@ -1723,6 +1739,8 @@
     <string name="rx_ethernet_speed" msgid="6642000569214969711">"Bilis ng pagtanggap ng link"</string>
     <string name="ethernet_network_usage" msgid="3795965384177426780">"Paggamit ng network"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Pag-tether ng Ethernet"</string>
+    <!-- no translation found for ethernet_modify (1326316717004440503) -->
+    <skip />
     <string name="tethering_footer_info" msgid="6824352505979800594">"Gamitin ang hotspot at pag-tether para magbigay ng internet sa iba pang device sa pamamagitan ng iyong koneksyon sa data. Puwede ring gumawa ang mga app ng hotspot para magbahagi ng content sa mga kalapit na device."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Gamitin ang hotspot at pag-tether para magbigay ng internet sa iba pang device sa pamamagitan ng iyong koneksyon sa Wi‑Fi o mobile data. Puwede ring gumawa ng hotspot ang mga app para magbahagi ng content sa mga kalapit na device."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Tulong"</string>
@@ -2275,8 +2293,7 @@
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Mga kontrol sa timing"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Mga kontrol ng system"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Magpadala ng feedback"</string>
-    <!-- no translation found for accessibility_send_survey_title (7899716184811587023) -->
-    <skip />
+    <string name="accessibility_send_survey_title" msgid="7899716184811587023">"I-rate kami"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Mga na-download na app"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Pang-eksperimento"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Mga flag ng feature"</string>
@@ -2604,7 +2621,8 @@
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{Maikli ({time} segundo)}one{Maikli ({time} segundo)}other{Maikli ({time} na segundo)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{Katamtaman ({time} segundo)}one{Katamtaman ({time} segundo)}other{Katamtaman ({time} na segundo)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{Matagal ({time} segundo)}one{Matagal ({time} segundo)}other{Matagal ({time} na segundo)}}"</string>
-    <string name="accessibilty_autoclick_delay_unit_second" msgid="5979297390686370567">"{count,plural, =1{{time} segundo}one{{time} segundo}other{{time} na segundo}}"</string>
+    <!-- no translation found for accessibility_autoclick_delay_unit_second (1562809410497613173) -->
+    <skip />
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Mga Setting"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"Naka-on"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"Naka-off"</string>
@@ -3395,7 +3413,6 @@
     <string name="sim_selection_channel_title" msgid="3193666315607572484">"Pagpipilian ng SIM"</string>
     <string name="dashboard_title" msgid="5660733037244683387">"Mga Setting"</string>
     <string name="network_dashboard_title" msgid="788543070557731240">"Network at internet"</string>
-    <string name="network_dashboard_summary_mobile" msgid="7750924671970583670">"Mobile, Wi‑Fi, hotspot"</string>
     <string name="network_dashboard_summary_no_mobile" msgid="4022575916334910790">"Wi‑Fi, hotspot"</string>
     <string name="connected_devices_dashboard_title" msgid="19868275519754895">"Mga nakakonektang device"</string>
     <string name="connected_devices_dashboard_default_summary" msgid="7211769956193710397">"Bluetooth, pagpapares"</string>
@@ -5721,6 +5738,10 @@
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"QR code ng audio stream"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Password: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Para makinig sa <xliff:g id="STREAM_NAME">%1$s</xliff:g>, puwedeng magkonekta ang ibang tao ng compatible na headphones sa kanilang Android device. Puwede nilang i-scan ang QR code na ito."</string>
+    <!-- no translation found for audio_streams_preference_subtitle (4098552511880220046) -->
+    <skip />
+    <!-- no translation found for audio_streams_preference_subtitle_audio_sharing_on (2382924714414148028) -->
+    <skip />
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Maghanap ng audio stream"</string>
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Makinig sa device na nagbabahagi ng audio o sa malapit na Auracast broadcast"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"Audio device mo"</string>
@@ -5758,6 +5779,12 @@
     <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"Magdagdag ng paraan ng pag-recover ng PIN"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Palitan ang PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Nakalimutan ang PIN"</string>
+    <!-- no translation found for supervision_update_recovery_email_preference_title (2057393838251915087) -->
+    <skip />
+    <!-- no translation found for supervision_delete_pin_preference_title (8447541098148430866) -->
+    <skip />
+    <!-- no translation found for supervision_delete_pin_preference_summary (4865713157106413979) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Mga filter ng content sa web"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome at Web"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Subukang i-block ang mga explicit na site"</string>

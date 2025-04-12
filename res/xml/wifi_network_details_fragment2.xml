@@ -139,58 +139,47 @@
         <Preference
                 android:key="type"
                 android:title="@string/wifi_type_title"
-                android:selectable="false"
                 settings:enableCopying="true"/>
         <Preference
                 android:key="ssid"
                 android:title="@string/wifi_advanced_ssid_title"
-                android:selectable="false"
                 settings:enableCopying="true"/>
         <Preference
                 android:key="eap_sim_subscription"
                 android:title="@string/sim_card"
-                android:selectable="false"
                 settings:enableCopying="true"/>
         <Preference
                 android:key="mac_address"
                 android:title="@string/wifi_advanced_randomized_mac_address_title"
-                android:selectable="false"
                 settings:enableCopying="true"/>
         <Preference
                 android:key="ip_address"
                 android:title="@string/wifi_ip_address"
-                android:selectable="false"
                 settings:enableCopying="true"/>
         <Preference
                 android:key="gateway"
                 android:title="@string/wifi_gateway"
-                android:selectable="false"
                 settings:enableCopying="true"/>
         <Preference
                 android:key="subnet_mask"
                 android:title="@string/wifi_details_subnet_mask"
-                android:selectable="false"
                 settings:enableCopying="true"/>
         <Preference
                 android:key="dns"
                 android:title="@string/wifi_details_dns"
-                android:selectable="false"
                 settings:enableCopying="true"/>
         <Preference
                 android:key="tx_link_speed"
                 android:title="@string/tx_wifi_speed"
-                android:selectable="false"
                 settings:enableCopying="true"/>
         <Preference
                 android:key="rx_link_speed"
                 android:title="@string/rx_wifi_speed"
-                android:selectable="false"
                 settings:enableCopying="true"/>
         <!-- IPv6 address -->
         <Preference
             android:title="@string/wifi_details_ipv6_address_header"
             android:key="ipv6_addresses"
-            android:selectable="false"
             settings:enableCopying="true"/>
     </PreferenceCategory>
 </PreferenceScreen>

@@ -81,6 +81,7 @@ import com.android.settings.wifi.AddWifiNetworkPreference;
 import com.android.settings.wifi.ConfigureWifiEntryFragment;
 import com.android.settings.wifi.ConnectedWifiEntryPreference;
 import com.android.settings.wifi.LongPressWifiEntryPreference;
+import com.android.settings.wifi.WifiCategory;
 import com.android.settings.wifi.WifiConfigUiBase2;
 import com.android.settings.wifi.WifiDialog2;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
@@ -232,10 +233,7 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
 
     private WifiDialog2 mDialog;
 
-    @VisibleForTesting
-    PreferenceCategory mConnectedWifiEntryPreferenceCategory;
-    @VisibleForTesting
-    PreferenceCategory mFirstWifiEntryPreferenceCategory;
+    private WifiCategory mWifiCategory;
     @VisibleForTesting
     PreferenceCategory mWifiEntryPreferenceCategory;
     @VisibleForTesting
@@ -388,8 +386,7 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
     private void addPreferences() {
         mAirplaneModeMsgPreference = findPreference(PREF_KEY_AIRPLANE_MODE_MSG);
         updateAirplaneModeMsgPreference(mAirplaneModeEnabler.isAirplaneModeOn() /* visible */);
-        mConnectedWifiEntryPreferenceCategory = findPreference(PREF_KEY_CONNECTED_ACCESS_POINTS);
-        mFirstWifiEntryPreferenceCategory = findPreference(PREF_KEY_FIRST_ACCESS_POINTS);
+        mWifiCategory = new WifiCategory(this);
         mWifiEntryPreferenceCategory = findPreference(PREF_KEY_ACCESS_POINTS);
         mConfigureWifiSettingsPreference = findPreference(PREF_KEY_CONFIGURE_NETWORK_SETTINGS);
         mSavedNetworksPreference = findPreference(PREF_KEY_SAVED_NETWORKS);
@@ -479,8 +476,6 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
         mInternetResetHelper = new InternetResetHelper(getContext(), getLifecycle(),
                 mNetworkMobileProviderController,
                 findPreference(WifiSwitchPreferenceController.KEY),
-                mConnectedWifiEntryPreferenceCategory,
-                mFirstWifiEntryPreferenceCategory,
                 mWifiEntryPreferenceCategory,
                 mResetInternetPreference);
         mInternetResetHelper.checkRecovering();
@@ -917,19 +912,19 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
                 break;
 
             case WifiManager.WIFI_STATE_ENABLING:
-                removeConnectedWifiEntryPreference();
+                mWifiCategory.removeWifiEntryPreferences();
                 removeWifiEntryPreference();
                 setProgressBarVisible(true);
                 break;
 
             case WifiManager.WIFI_STATE_DISABLING:
-                removeConnectedWifiEntryPreference();
+                mWifiCategory.removeWifiEntryPreferences();
                 removeWifiEntryPreference();
                 break;
 
             case WifiManager.WIFI_STATE_DISABLED:
                 setWifiScanMessage(/* isWifiEnabled */ false);
-                removeConnectedWifiEntryPreference();
+                mWifiCategory.removeWifiEntryPreferences();
                 removeWifiEntryPreference();
                 setAdditionalSettingsSummaries();
                 setProgressBarVisible(false);
@@ -1031,13 +1026,12 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
         mWifiEntryPreferenceCategory.setVisible(true);
 
         final WifiEntry connectedEntry = mWifiPickerTracker.getConnectedWifiEntry();
-        PreferenceCategory connectedWifiPreferenceCategory = getConnectedWifiPreferenceCategory();
-        connectedWifiPreferenceCategory.setVisible(connectedEntry != null);
+        PreferenceCategory connectedWifiPreferenceCategory = mWifiCategory.getPreferenceCategory();
         if (connectedEntry != null) {
             final LongPressWifiEntryPreference connectedPref =
                     connectedWifiPreferenceCategory.findPreference(connectedEntry.getKey());
             if (connectedPref == null || connectedPref.getWifiEntry() != connectedEntry) {
-                connectedWifiPreferenceCategory.removeAll();
+                mWifiCategory.removeWifiEntryPreferences();
                 final ConnectedWifiEntryPreference pref =
                         createConnectedWifiEntryPreference(connectedEntry);
                 pref.setKey(connectedEntry.getKey());
@@ -1061,7 +1055,7 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
                 }
             }
         } else {
-            connectedWifiPreferenceCategory.removeAll();
+            mWifiCategory.removeWifiEntryPreferences();
         }
 
         int index = 0;
@@ -1137,19 +1131,6 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
     }
 
     @VisibleForTesting
-    PreferenceCategory getConnectedWifiPreferenceCategory() {
-        if (mInternetUpdater.getInternetType() == InternetUpdater.INTERNET_WIFI) {
-            mFirstWifiEntryPreferenceCategory.setVisible(false);
-            mFirstWifiEntryPreferenceCategory.removeAll();
-            return mConnectedWifiEntryPreferenceCategory;
-        }
-
-        mConnectedWifiEntryPreferenceCategory.setVisible(false);
-        mConnectedWifiEntryPreferenceCategory.removeAll();
-        return mFirstWifiEntryPreferenceCategory;
-    }
-
-    @VisibleForTesting
     ConnectedWifiEntryPreference createConnectedWifiEntryPreference(WifiEntry wifiEntry) {
         if (mInternetUpdater.getInternetType() == InternetUpdater.INTERNET_WIFI) {
             return new ConnectedWifiEntryPreference(getPrefContext(), wifiEntry, this);
@@ -1203,15 +1184,6 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
                 .setSourceMetricsCategory(getMetricsCategory())
                 .setResultListener(this, ADD_NETWORK_REQUEST)
                 .launch();
-    }
-
-    /** Removes all preferences and hide the {@link #mConnectedWifiEntryPreferenceCategory} and
-     *  {@link #mFirstWifiEntryPreferenceCategory}. */
-    private void removeConnectedWifiEntryPreference() {
-        mConnectedWifiEntryPreferenceCategory.removeAll();
-        mConnectedWifiEntryPreferenceCategory.setVisible(false);
-        mFirstWifiEntryPreferenceCategory.setVisible(false);
-        mFirstWifiEntryPreferenceCategory.removeAll();
     }
 
     private void removeWifiEntryPreference() {

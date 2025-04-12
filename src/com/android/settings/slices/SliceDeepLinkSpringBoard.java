@@ -26,6 +26,7 @@ import android.util.Log;
 import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settings.notification.zen.ZenModeSliceBuilder;
 
+@Deprecated(forRemoval = true)
 public class SliceDeepLinkSpringBoard extends Activity {
 
     private static final String TAG = "DeeplinkSpringboard";

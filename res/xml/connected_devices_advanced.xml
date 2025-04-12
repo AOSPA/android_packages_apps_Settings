@@ -83,9 +83,8 @@
         android:summary="@string/summary_placeholder"
         android:title="@string/print_settings" />
 
-    <PreferenceCategory
+    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
         android:key="virtual_device_list"
-        android:layout="@layout/preference_category_no_label"
         android:order="99"
         settings:controller="com.android.settings.connecteddevice.virtual.VirtualDeviceListController"
         settings:searchable="true"/>

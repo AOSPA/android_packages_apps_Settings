@@ -24,9 +24,8 @@
         android:title="@string/regional_preferences_main_page_sub_title"
         android:persistent="false"/>
 
-    <PreferenceCategory
-        android:key="regional_preferences_category"
-        android:layout="@layout/settingslib_preference_category_no_title">
+    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
+        android:key="regional_preferences_category">
         <Preference
             android:key="key_temperature_unit"
             android:title="@string/temperature_preferences_title"
@@ -59,7 +58,7 @@
                 android:name="arg_key_regional_preference"
                 android:value="arg_value_language_select"/>
         </Preference>
-    </PreferenceCategory>
+    </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference
         android:key="regional_pref_footer"

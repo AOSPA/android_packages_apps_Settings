@@ -18,7 +18,6 @@ package com.android.settings.network.telephony
 
 import android.content.Context
 import android.content.pm.PackageManager
-import android.content.Intent
 import android.os.UserHandle
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
@@ -72,6 +71,7 @@ class SubscriptionActivationRepositoryTest {
     fun isActivationChangeableFlow_changeable() = runBlocking {
         mockCallStateRepository.stub {
             on { isInCallFlow() } doReturn flowOf(false)
+            on { isInEmergencyCallFlow() } doReturn flowOf(false)
         }
         mockSatelliteRepository.stub {
             on { getIsSessionStartedFlow() } doReturn flowOf(false)
@@ -86,6 +86,7 @@ class SubscriptionActivationRepositoryTest {
     fun isActivationChangeableFlow_inCall_notChangeable() = runBlocking {
         mockCallStateRepository.stub {
             on { isInCallFlow() } doReturn flowOf(true)
+            on { isInEmergencyCallFlow() } doReturn flowOf(false)
         }
         mockSatelliteRepository.stub {
             on { getIsSessionStartedFlow() } doReturn flowOf(false)
@@ -100,9 +101,25 @@ class SubscriptionActivationRepositoryTest {
     fun isActivationChangeableFlow_satelliteSessionStarted_notChangeable() = runBlocking {
         mockCallStateRepository.stub {
             on { isInCallFlow() } doReturn flowOf(false)
+            on { isInEmergencyCallFlow() } doReturn flowOf(false)
         }
         mockSatelliteRepository.stub {
             on { getIsSessionStartedFlow() } doReturn flowOf(true)
+        }
+
+        val changeable = repository.isActivationChangeableFlow().firstWithTimeoutOrNull()
+
+        assertThat(changeable).isFalse()
+    }
+
+    @Test
+    fun isActivationChangeableFlow_inEmergencyCall_notChangeable() = runBlocking {
+        mockCallStateRepository.stub {
+            on { isInCallFlow() } doReturn flowOf(false)
+            on { isInEmergencyCallFlow() } doReturn flowOf(true)
+        }
+        mockSatelliteRepository.stub {
+            on { getIsSessionStartedFlow() } doReturn flowOf(false)
         }
 
         val changeable = repository.isActivationChangeableFlow().firstWithTimeoutOrNull()

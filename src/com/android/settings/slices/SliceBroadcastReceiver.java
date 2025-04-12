@@ -46,6 +46,7 @@ import com.android.settings.overlay.FeatureFactory;
 /**
  * Responds to actions performed on slices and notifies slices of updates in state changes.
  */
+@Deprecated(forRemoval = true)
 public class SliceBroadcastReceiver extends BroadcastReceiver {
 
     private static String TAG = "SettSliceBroadcastRec";

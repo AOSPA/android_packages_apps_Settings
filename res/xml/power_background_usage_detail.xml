@@ -24,9 +24,8 @@
         android:key="header_view"
         android:selectable="false"/>
 
-    <PreferenceCategory
+    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
         android:key="battery_optimization_mode_category"
-        android:layout="@layout/settingslib_preference_category_no_title"
         settings:controller="com.android.settings.fuelgauge.BatteryOptimizationModePreferenceController">
 
         <com.android.settingslib.widget.MainSwitchPreference
@@ -42,7 +41,7 @@
             android:key="unrestricted_preference"
             android:title="@string/manager_battery_usage_unrestricted_title"
             android:summary="@string/manager_battery_usage_unrestricted_summary"/>
-    </PreferenceCategory>
+    </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference
         android:key="app_usage_footer_preference"

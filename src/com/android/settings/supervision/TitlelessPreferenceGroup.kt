@@ -19,6 +19,7 @@ import androidx.preference.Preference
 import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.preference.PreferenceCategoryBinding
+import com.android.settingslib.widget.SettingsThemeHelper
 import com.android.settingslib.widget.theme.R
 
 /**
@@ -29,7 +30,11 @@ class TitlelessPreferenceGroup(override val key: String) :
     PreferenceCategory(key, title = 0), PreferenceCategoryBinding {
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
-        preference.layoutResource = R.layout.settingslib_preference_category_no_title
+        preference.layoutResource = if (SettingsThemeHelper.isExpressiveTheme(preference.context)) {
+            R.layout.settingslib_expressive_preference_category_no_title
+        } else {
+            R.layout.settingslib_preference_category_no_title
+        }
         super.bind(preference, metadata)
     }
 }

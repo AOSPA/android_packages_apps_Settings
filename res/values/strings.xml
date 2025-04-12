@@ -2326,6 +2326,8 @@
 
     <!-- Used in the Wi-Fi settings screen to control turning on/off Wi-Fi entirely [CHAR LIMIT=30]-->
     <string name="wifi_settings_primary_switch_title">Use Wi\u2011Fi</string>
+    <!-- Category name of Wi-fi networks [CHAR LIMIT=60] -->
+    <string name="wifi_networks_category">Networks</string>
     <!-- Title of the Wi-fi settings screen -->
     <string name="wifi_settings_category">Wi\u2011Fi settings</string>
     <!-- Used by Account creation for turning on Wi-Fi  [CHAR LIMIT=60] -->
@@ -2719,6 +2721,32 @@
     <string name="hotspot_connection_category">Hotspot connection</string>
     <!-- Connection strength preference in Hotspot connection preference category [CHAR LIMIT=NONE]-->
     <string name="hotspot_connection_strength">Connection strength</string>
+    <!-- Hint text for the IP address -->
+    <string name="ethernet_ip_address_hint" translatable="false">192.168.1.128</string>
+    <!-- Hint text for DNS -->
+    <string name="ethernet_dns1_hint" translatable="false">8.8.8.8</string>
+    <!-- Hint text for DNS -->
+    <string name="ethernet_dns2_hint" translatable="false">8.8.4.4</string>
+    <!-- Hint text for the gateway -->
+    <string name="ethernet_gateway_hint" translatable="false">192.168.1.1</string>
+    <!-- Hint text for network prefix length -->
+    <string name="ethernet_network_prefix_length_hint" translatable="false">24</string>
+    <!-- Label for the DNS (first one) -->
+    <string name="ethernet_dns1">DNS 1 (unless overridden by private DNS)</string>
+    <!-- Label for the DNS (second one)-->
+    <string name="ethernet_dns2">DNS 2 (unless overridden by private DNS)</string>
+    <!-- Label for the gateway of the network -->
+    <string name="ethernet_gateway">Gateway</string>
+    <!-- Label for the network prefix of the network [CHAR LIMIT=25]-->
+    <string name="ethernet_network_prefix_length">Network prefix length</string>
+    <!-- Label for the spinner to show ip settings [CHAR LIMIT=25] -->
+    <string name="ethernet_ip_settings">IP settings</string>
+    <!-- Label for the ethernet config dialog submit button [CHAR LIMIT=25] -->
+    <string name="ethernet_config_submit">Submit</string>
+    <!-- Label for the ethernet config dialog cancel button [CHAR LIMIT=25] -->
+    <string name="ethernet_config_cancel">Cancel</string>
+    <!-- Label for the ethernet config dialog title [CHAR LIMIT=25] -->
+    <string name="ethernet_config_title">Ethernet Settings</string>
 
     <!-- Wifi saved access points.  Used as a label under the shortcut icon that goes to Wifi saved access points. [CHAR LIMIT=20] -->
     <string name="wifi_saved_access_points_label">Saved networks</string>
@@ -4042,6 +4070,9 @@
     <!-- Ethernet Tethering settings-->
     <!-- Label for ethernet tether checkbox [CHAR LIMIT=NONE]-->
     <string name="ethernet_tether_checkbox_text">Ethernet tethering</string>
+
+    <!-- Button label to modify a Ethernet network -->
+    <string name="ethernet_modify">Modify</string>
 
     <!-- Tethering footer info [CHAR LIMIT=NONE]-->
     <string name="tethering_footer_info">Use hotspot and tethering to provide internet to other devices through your data connection. Apps can also create a hotspot to share content with nearby devices.</string>

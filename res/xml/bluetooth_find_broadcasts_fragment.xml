@@ -26,9 +26,8 @@
         settings:allowDividerBelow="true"
         settings:searchable="false" />
 
-    <PreferenceCategory
-        android:key="broadcast_source_list"
-        android:layout="@layout/preference_category_no_label"/>
+    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
+        android:key="broadcast_source_list"/>
 
 </PreferenceScreen>
 

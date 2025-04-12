@@ -27,11 +27,10 @@
         android:key="use_sim_switch"
         settings:controller="com.android.settings.network.telephony.MobileNetworkSwitchController"/>
 
-    <PreferenceCategory
+    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
         android:key="enabled_state_container"
         android:title="@string/summary_placeholder"
-        settings:controller="com.android.settings.network.telephony.DisabledSubscriptionController"
-        android:layout="@layout/preference_category_no_label">
+        settings:controller="com.android.settings.network.telephony.DisabledSubscriptionController">
 
         <com.android.settings.datausage.DataUsageSummaryPreference
             android:key="status_header"
@@ -357,7 +356,7 @@
             android:key="nr_advanced_calling"
             settings:searchable="false"
             settings:controller="com.android.settings.network.telephony.NrAdvancedCallingPreferenceController"/>
-    </PreferenceCategory>
+    </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
 
     <Preference
         android:key="convert_to_esim"

@@ -47,6 +47,7 @@ import java.util.Map;
 /**
  * A registry of custom slice Uris.
  */
+@Deprecated(forRemoval = true)
 public class CustomSliceRegistry {
 
     /**
