@@ -155,9 +155,18 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeature
         if (SettingsThemeHelper.isExpressiveTheme(getPrefContext())) {
             launchPreference = new ButtonPreference(getPrefContext());
             ((ButtonPreference) launchPreference).setButtonStyle(TYPE_TONAL, SIZE_EXTRA_LARGE);
+            ((ButtonPreference) launchPreference).setOnClickListener(view -> {
+                logAccessibilityServiceEnabled(mComponentName, /* enabled= */ true);
+                launchShortcutTargetActivity(getPrefContext().getDisplayId(), mComponentName);
+            });
         } else {
             launchPreference = new Preference(getPrefContext());
             launchPreference.setLayoutResource(R.layout.accessibility_launch_activity_preference);
+            launchPreference.setOnPreferenceClickListener(preference -> {
+                logAccessibilityServiceEnabled(mComponentName, /* enabled= */ true);
+                launchShortcutTargetActivity(getPrefContext().getDisplayId(), mComponentName);
+                return true;
+            });
         }
         launchPreference.setKey(KEY_LAUNCH_PREFERENCE);
 
@@ -166,12 +175,6 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeature
                 R.string.accessibility_service_primary_open_title,
                 info.getActivityInfo().loadLabel(getPackageManager()));
         launchPreference.setTitle(switchBarText);
-
-        launchPreference.setOnPreferenceClickListener(preference -> {
-            logAccessibilityServiceEnabled(mComponentName, /* enabled= */ true);
-            launchShortcutTargetActivity(getPrefContext().getDisplayId(), mComponentName);
-            return true;
-        });
         getPreferenceScreen().addPreference(launchPreference);
     }
 

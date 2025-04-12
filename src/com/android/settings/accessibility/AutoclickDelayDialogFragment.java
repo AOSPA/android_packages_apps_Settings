@@ -17,7 +17,7 @@
 
 package com.android.settings.accessibility;
 
-import static android.view.accessibility.AccessibilityManager.AUTOCLICK_DELAY_DEFAULT;
+import static android.view.accessibility.AccessibilityManager.AUTOCLICK_DELAY_WITH_INDICATOR_DEFAULT;
 
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
@@ -78,8 +78,7 @@ public class AutoclickDelayDialogFragment extends InstrumentedDialogFragment {
                             int checkedRadioButtonId =
                                     radioGroup.getCheckedRadioButtonId();
 
-                            // TODO(b/390460859): Update AUTOCLICK_DELAY_DEFAULT value to 1 sec.
-                            int delay = AUTOCLICK_DELAY_DEFAULT;
+                            int delay = AUTOCLICK_DELAY_WITH_INDICATOR_DEFAULT;
                             if (RADIO_BUTTON_ID_TO_DELAY_TIME
                                     .containsKey(checkedRadioButtonId)) {
                                 delay = RADIO_BUTTON_ID_TO_DELAY_TIME.get(checkedRadioButtonId);
@@ -102,7 +101,7 @@ public class AutoclickDelayDialogFragment extends InstrumentedDialogFragment {
         // TODO(b/390460859): Add custom seekbar for other delay time values.
         final int autoclickDelay = Settings.Secure.getInt(getContext().getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY,
-                AccessibilityManager.AUTOCLICK_DELAY_DEFAULT);
+                AccessibilityManager.AUTOCLICK_DELAY_WITH_INDICATOR_DEFAULT);
 
         Integer radioButtonId = RADIO_BUTTON_ID_TO_DELAY_TIME.inverse().get(autoclickDelay);
         if (radioButtonId != null) {

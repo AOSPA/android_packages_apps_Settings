@@ -16,7 +16,7 @@
 
 package com.android.settings.accessibility;
 
-import static android.view.accessibility.AccessibilityManager.AUTOCLICK_DELAY_DEFAULT;
+import static android.view.accessibility.AccessibilityManager.AUTOCLICK_DELAY_WITH_INDICATOR_DEFAULT;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -49,7 +49,7 @@ public class AutoclickDelayDialogFragmentTest {
         Settings.Secure.putInt(
                 ApplicationProvider.getApplicationContext().getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY,
-                AUTOCLICK_DELAY_DEFAULT);
+                AUTOCLICK_DELAY_WITH_INDICATOR_DEFAULT);
 
         mFragmentScenario = FragmentScenario.launch(
                 AutoclickDelayDialogFragment.class,
@@ -92,7 +92,7 @@ public class AutoclickDelayDialogFragmentTest {
         final int autoclickDelay = Settings.Secure.getInt(
                 ApplicationProvider.getApplicationContext().getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY,
-                AUTOCLICK_DELAY_DEFAULT);
+                AUTOCLICK_DELAY_WITH_INDICATOR_DEFAULT);
 
         assertThat(autoclickDelay).isEqualTo(800);
     }
