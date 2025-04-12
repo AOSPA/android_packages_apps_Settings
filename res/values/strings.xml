@@ -810,7 +810,7 @@
     <!-- Location settings footer warning text when location is off [CHAR LIMIT=NONE] -->
     <string name="location_settings_footer_location_off">
         Location access is off for apps and services. Your device location may still be sent to
-        emergency responders when you call or text an emergency number.
+        emergency responders when you contact an emergency number.
     </string>
     <!-- Location settings footer link to support page [CHAR LIMIT=NONE] -->
     <string name="location_settings_footer_learn_more_link" translatable="false">
@@ -3348,6 +3348,8 @@
     <string name="screensaver_settings_when_to_dream">When to start</string>
     <!-- [CHAR LIMIT=40] Display settings screen, setting option name to change whether the device wakes up when a lift gesture is detected. -->
     <string name="lift_to_wake_title">Lift to wake</string>
+    <!-- Title of toggle preference in screensaver "when to start" screen to restrict to starting only when charging wirelessly [CHAR LIMIT=NONE] -->
+    <string name="screensaver_restrict_to_wireless_charging_title">Restrict to wireless charging</string>
 
     <!-- [CHAR LIMIT=30] Title of the preference that opens the Ambient display settings screen. -->
     <string name="ambient_display_screen_title">Ambient display</string>
@@ -3763,6 +3765,9 @@
     <string name="when_to_show_hubmode_charging_and_upright">While charging and upright</string>
     <!-- Summary for when to automatically show hub mode (widgets on lockscreen): docked  [CHAR LIMIT=100] -->
     <string name="when_to_show_hubmode_docked">While docked</string>
+
+    <!-- Title of toggle preference in glanceable hub "when to start" screen to restrict to starting only when charging wirelessly [CHAR LIMIT=NONE] -->
+    <string name="hub_restrict_to_wireless_charging_title">Restrict to wireless charging</string>
 
     <!-- APN Settings -->
     <!-- APN settings screen title -->
@@ -5321,14 +5326,10 @@
     <string name="accessibility_tap_assistance_title">Timing controls</string>
     <!-- Title for the accessibility system controls page. [CHAR LIMIT=50] -->
     <string name="accessibility_system_controls_title">System controls</string>
-    <!-- Title for the accessibility feedback preference. [CHAR LIMIT=50] -->
-    <string name="accessibility_feedback_title">Feedback</string>
-    <!-- Summary for the accessibility feedback preference. [CHAR LIMIT=100] -->
-    <string name="accessibility_feedback_summary">Help improve by taking a survey</string>
-    <!-- Summary for the accessibility feedback preference is disabled. [CHAR LIMIT=100] -->
-    <string name="accessibility_feedback_disabled_summary">No surveys available</string>
     <!-- The menu item to start the feedback process for the accessibility [CHAR LIMIT=30] -->
     <string name="accessibility_send_feedback_title">Send feedback</string>
+    <!-- The menu item to start the survey process for the accessibility [CHAR LIMIT=30] -->
+    <string name="accessibility_send_survey_title">Rate us</string>
     <!-- Title for the accessibility preference category of services downloaded by the user. [CHAR LIMIT=50] -->
     <string name="user_installed_services_category_title">Downloaded apps</string>
     <!-- Title for the accessibility preference category of settings considered to be experimental, meaning they might be changed or removed in the future. [CHAR LIMIT=50] -->

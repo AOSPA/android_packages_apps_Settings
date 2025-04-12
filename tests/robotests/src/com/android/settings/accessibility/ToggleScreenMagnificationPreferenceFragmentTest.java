@@ -341,26 +341,6 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
-    public void onResume_enableLowVisionHaTS_feedbackPreferenceShouldReturnNotNull() {
-        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
-
-        final Preference feedbackPreference = mFragController.get().findPreference(
-                MagnificationFeedbackPreferenceController.PREF_KEY);
-        assertThat(feedbackPreference).isNotNull();
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
-    public void onResume_disableLowVisionHaTS_feedbackPreferenceShouldReturnNull() {
-        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
-
-        final Preference feedbackPreference = mFragController.get().findPreference(
-                MagnificationFeedbackPreferenceController.PREF_KEY);
-        assertThat(feedbackPreference).isNull();
-    }
-
-    @Test
     public void onResume_haveRegisterToSpecificUris() {
         ShadowContentResolver shadowContentResolver = Shadows.shadowOf(
                 mContext.getContentResolver());
@@ -883,8 +863,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
                 MagnificationOneFingerPanningPreferenceController.PREF_KEY,
                 MagnificationAlwaysOnPreferenceController.PREF_KEY,
                 MagnificationJoystickPreferenceController.PREF_KEY,
-                MagnificationCursorFollowingModePreferenceController.PREF_KEY,
-                MagnificationFeedbackPreferenceController.PREF_KEY);
+                MagnificationCursorFollowingModePreferenceController.PREF_KEY);
 
         final List<SearchIndexableRaw> rawData = ToggleScreenMagnificationPreferenceFragment
                 .SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, true);
@@ -914,32 +893,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     @Test
     @EnableFlags({
             com.android.settings.accessibility.Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH,
-            Flags.FLAG_ENABLE_LOW_VISION_HATS})
-    public void
-            getNonIndexableKeys_windowMagnificationNotSupportedHatsOn_shortcutFeedbackSearchable() {
-        setWindowMagnificationSupported(false, false);
-
-        final List<String> niks = ToggleScreenMagnificationPreferenceFragment
-                .SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
-        final List<SearchIndexableRaw> rawData = ToggleScreenMagnificationPreferenceFragment
-                .SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, true);
-        // Expect all search data, except the shortcut preference and feedback preference, to be in
-        // NIKs.
-        final List<String> expectedNiks = rawData.stream().map(raw -> raw.key)
-                .filter(key ->
-                        !key.equals(KEY_MAGNIFICATION_SHORTCUT_PREFERENCE)
-                        && !key.equals(MagnificationFeedbackPreferenceController.PREF_KEY))
-                .toList();
-
-        // In NonIndexableKeys == not searchable
-        assertThat(niks).containsExactlyElementsIn(expectedNiks);
-    }
-
-    @Test
-    @EnableFlags({
-            com.android.settings.accessibility.Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH,
             Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE,
-            Flags.FLAG_ENABLE_LOW_VISION_HATS,
             com.android.settings.accessibility.Flags
                     .FLAG_ENABLE_MAGNIFICATION_CURSOR_FOLLOWING_DIALOG})
     @Config(shadows = ShadowInputDevice.class)
@@ -1006,16 +960,6 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
         // In NonIndexableKeys == not searchable
         assertThat(niks).contains(MagnificationJoystickPreferenceController.PREF_KEY);
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
-    public void getNonIndexableKeys_hatsNotSupported_notSearchable() {
-        final List<String> niks = ToggleScreenMagnificationPreferenceFragment
-                .SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
-
-        // In NonIndexableKeys == not searchable
-        assertThat(niks).contains(MagnificationFeedbackPreferenceController.PREF_KEY);
     }
 
     private void putStringIntoSettings(String key, String componentName) {

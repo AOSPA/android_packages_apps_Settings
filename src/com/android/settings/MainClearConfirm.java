@@ -54,6 +54,7 @@ import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.template.FooterButton.ButtonType;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.GlifLayout;
+import com.google.android.setupdesign.util.ThemeHelper;
 
 /**
  * Confirm and execute a reset of the device to a clean "just out of the box"
@@ -234,7 +235,6 @@ public class MainClearConfirm extends InstrumentedFragment {
                         .setText(R.string.main_clear_button_text)
                         .setListener(mFinalClickListener)
                         .setButtonType(ButtonType.OTHER)
-                        .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                         .build()
         );
     }
@@ -242,6 +242,7 @@ public class MainClearConfirm extends InstrumentedFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+        ThemeHelper.trySetSuwTheme(getContext());
         final EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
                 getActivity(), UserManager.DISALLOW_FACTORY_RESET, UserHandle.myUserId());
         if (RestrictedLockUtilsInternal.hasBaseUserRestriction(getActivity(),

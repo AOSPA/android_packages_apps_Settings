@@ -28,12 +28,10 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.PersistableBundle;
 import android.telephony.TelephonyManager;
-import android.telephony.satellite.SatelliteManager;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
@@ -44,8 +42,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.network.telephony.TelephonyBasePreferenceController;
 import com.android.settingslib.Utils;
-
-import java.util.Set;
 
 /** A controller to control content of "Your mobile plan". */
 public class SatelliteSettingAccountInfoController extends TelephonyBasePreferenceController {
@@ -164,19 +160,6 @@ public class SatelliteSettingAccountInfoController extends TelephonyBasePreferen
                 == CARRIER_ROAMING_NTN_CONNECT_MANUAL) {
             return mIsSmsAvailable;
         }
-        SatelliteManager satelliteManager = mContext.getSystemService(SatelliteManager.class);
-        if (satelliteManager == null) {
-            Log.d(TAG, "SatelliteManager is null.");
-            return false;
-        }
-        try {
-            Set<Integer> restrictionReason =
-                    satelliteManager.getAttachRestrictionReasonsForCarrier(mSubId);
-            return !restrictionReason.contains(
-                    SatelliteManager.SATELLITE_COMMUNICATION_RESTRICTION_REASON_ENTITLEMENT);
-        } catch (SecurityException | IllegalStateException | IllegalArgumentException ex) {
-            Log.d(TAG, "Error to getAttachRestrictionReasonsForCarrier : " + ex.toString());
-            return false;
-        }
+        return SatelliteCarrierSettingUtils.isSatelliteAccountEligible(mContext, mSubId);
     }
 }

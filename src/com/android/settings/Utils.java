@@ -229,9 +229,18 @@ public final class Utils extends com.android.settingslib.Utils {
      * Returns whether the device is voice-capable (meaning, it is also a phone).
      */
     public static boolean isVoiceCapable(Context context) {
+        if (isTelephonyDisabled(context)) return false;
         final TelephonyManager telephony =
                 (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        return telephony != null && telephony.isVoiceCapable();
+        return telephony != null && telephony.isDeviceVoiceCapable();
+    }
+
+    /**
+     * Returns whether telephony features are completely disabled in the app, regardless
+     * of the TelephonyManager reported capabilities or the PackageManager flags declared.
+     */
+    private static boolean isTelephonyDisabled(Context context) {
+        return !context.getResources().getBoolean(R.bool.config_show_sim_info);
     }
 
     /**

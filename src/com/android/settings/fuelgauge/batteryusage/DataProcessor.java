@@ -177,6 +177,7 @@ public final class DataProcessor {
                 new BatteryUsageStatsQuery.Builder()
                         .includeBatteryHistory()
                         .includeProcessStateData()
+                        .accumulated()
                         .build();
         final BatteryUsageStats batteryUsageStats =
                 context.getSystemService(BatteryStatsManager.class)

@@ -61,6 +61,7 @@ class SupervisionDashboardScreen : PreferenceScreenCreator {
                 +SupervisionWebContentFiltersScreen.KEY
             }
             +SupervisionPinManagementScreen.KEY
+            +SupervisionPromoFooterPreference()
         }
 
     companion object {

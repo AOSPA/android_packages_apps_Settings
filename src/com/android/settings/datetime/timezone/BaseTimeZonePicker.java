@@ -147,10 +147,11 @@ public abstract class BaseTimeZonePicker extends InstrumentedFragment
             }
 
             // Set zero margin and padding to align with the text horizontally in the preference
-            final TextView searchViewView = (TextView) mSearchView.findViewById(
+            final TextView searchViewTextView = (TextView) mSearchView.findViewById(
                     com.android.internal.R.id.search_src_text);
-            searchViewView.setPadding(0, searchViewView.getPaddingTop(), 0,
-                    searchViewView.getPaddingBottom());
+            searchViewTextView.setPadding(0, searchViewTextView.getPaddingTop(), 0,
+                    searchViewTextView.getPaddingBottom());
+            searchViewTextView.setTextAppearance(R.style.TextAppearance_SearchBar);
             final View editFrame = mSearchView.findViewById(
                     com.android.internal.R.id.search_edit_frame);
             final LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) editFrame

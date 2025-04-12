@@ -90,3 +90,10 @@ flag {
     purpose: PURPOSE_BUGFIX
   }
 }
+
+flag {
+  name: "touchpad_settings_design_update"
+  namespace: "android_settings"
+  description: "All touchpad settings pages should either migrate to non-custom implementations or be updated"
+  bug: "400647661"
+}

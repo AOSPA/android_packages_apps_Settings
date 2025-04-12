@@ -20,7 +20,6 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import com.android.settings.R;
-import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -28,7 +27,7 @@ import com.android.settingslib.search.SearchIndexable;
  * Fragment for flash notifications.
  */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class FlashNotificationsPreferenceFragment extends DashboardFragment {
+public class FlashNotificationsPreferenceFragment extends BaseSupportFragment {
 
     @Override
     protected int getPreferenceScreenResId() {

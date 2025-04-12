@@ -46,12 +46,13 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.accessibility.actionbar.FeedbackMenuController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.GearPreference;
-import com.android.settingslib.widget.SliderPreference;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.ActionButtonsPreference;
+import com.android.settingslib.widget.SliderPreference;
 
 import java.text.Collator;
 import java.util.ArrayList;
@@ -219,6 +220,8 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
 
         setTtsUtteranceProgressListener();
         initSettings();
+
+        FeedbackMenuController.init(this, SettingsEnums.TTS_TEXT_TO_SPEECH);
     }
 
     @Override

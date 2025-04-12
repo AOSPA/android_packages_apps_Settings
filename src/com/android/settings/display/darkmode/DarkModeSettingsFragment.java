@@ -15,16 +15,18 @@
 package com.android.settings.display.darkmode;
 
 import android.app.Dialog;
+import android.app.UiModeManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.PowerManager;
 
+import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.accessibility.BaseSupportFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
@@ -36,11 +38,12 @@ import java.util.List;
  * Settings screen for Dark UI Mode
  */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class DarkModeSettingsFragment extends DashboardFragment {
+public class DarkModeSettingsFragment extends BaseSupportFragment {
 
     private static final String TAG = "DarkModeSettingsFrag";
     private static final String DARK_THEME_END_TIME = "dark_theme_end_time";
     private static final String DARK_THEME_START_TIME = "dark_theme_start_time";
+    public static final String FORCE_INVERT_SURVEY_KEY = "A11yForceInvertUser";
     private DarkModeObserver mContentObserver;
     private DarkModeCustomPreferenceController mCustomStartController;
     private DarkModeCustomPreferenceController mCustomEndController;
@@ -131,6 +134,17 @@ public class DarkModeSettingsFragment extends DashboardFragment {
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.DARK_UI_SETTINGS;
+    }
+
+    @Override
+    @NonNull
+    public String getSurveyKey() {
+        final UiModeManager uiModeManager = getContext().getSystemService(UiModeManager.class);
+        if (uiModeManager != null
+                && uiModeManager.getForceInvertState() == UiModeManager.FORCE_INVERT_TYPE_DARK) {
+            return FORCE_INVERT_SURVEY_KEY;
+        }
+        return super.getSurveyKey();
     }
 
     @Override

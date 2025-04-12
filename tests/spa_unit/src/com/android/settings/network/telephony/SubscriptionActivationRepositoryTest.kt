@@ -17,6 +17,7 @@
 package com.android.settings.network.telephony
 
 import android.content.Context
+import android.content.pm.PackageManager
 import android.content.Intent
 import android.os.UserHandle
 import android.telephony.SubscriptionManager
@@ -47,6 +48,10 @@ import org.mockito.kotlin.whenever
 @RunWith(AndroidJUnit4::class)
 class SubscriptionActivationRepositoryTest {
 
+    private val mockPackageManager = mock<PackageManager>() {
+        on { hasSystemFeature(PackageManager.FEATURE_TELEPHONY) } doReturn true
+    }
+
     private val mockTelephonyManager = mock<TelephonyManager> {
         on { createForSubscriptionId(SUB_ID) } doReturn mock
     }
@@ -54,6 +59,7 @@ class SubscriptionActivationRepositoryTest {
     private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
         doNothing().whenever(mock).startActivity(any())
         on { getSystemService(TelephonyManager::class.java) } doReturn mockTelephonyManager
+        on { packageManager } doReturn mockPackageManager
     }
 
     private val mockCallStateRepository = mock<CallStateRepository>()

@@ -61,9 +61,7 @@ import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.internal.accessibility.util.ShortcutUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.accessibility.actionbar.FeedbackMenuController;
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
-import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.flags.Flags;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settings.widget.SettingsMainSwitchPreference;
@@ -82,7 +80,7 @@ import java.util.Set;
  * Base class for accessibility fragments with toggle, shortcut, some helper functions
  * and dialog management.
  */
-public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
+public abstract class ToggleFeaturePreferenceFragment extends BaseSupportFragment
         implements ShortcutPreference.OnClickCallback, OnCheckedChangeListener {
 
     public static final String KEY_GENERAL_CATEGORY = "general_categories";
@@ -140,8 +138,6 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
 
         mSettingsContentObserver = new AccessibilitySettingsContentObserver(new Handler());
         registerKeysToObserverCallback(mSettingsContentObserver);
-
-        FeedbackMenuController.init(this, getFeedbackCategory());
     }
 
     protected void registerKeysToObserverCallback(
@@ -260,18 +256,6 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.ACCESSIBILITY_SERVICE;
-    }
-
-    /**
-     * Returns the category of the feedback page.
-     *
-     * <p>By default, this method returns {@link SettingsEnums#PAGE_UNKNOWN}. This indicates that
-     * the feedback category is unknown, and the absence of a feedback menu.
-     *
-     * @return The feedback category, which is {@link SettingsEnums#PAGE_UNKNOWN} by default.
-     */
-    protected int getFeedbackCategory() {
-        return SettingsEnums.PAGE_UNKNOWN;
     }
 
     @Override

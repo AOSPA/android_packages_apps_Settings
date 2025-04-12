@@ -39,7 +39,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums;
-import com.android.settings.core.BasePreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,8 +46,8 @@ import java.util.List;
 /**
  * Controller that shows the magnification cursor following mode and the preference click behavior.
  */
-public class MagnificationCursorFollowingModePreferenceController extends
-        BasePreferenceController implements DialogCreatable {
+public class MagnificationCursorFollowingModePreferenceController
+        extends MagnificationBasePreferenceController implements DialogCreatable {
     static final String PREF_KEY =
             Settings.Secure.ACCESSIBILITY_MAGNIFICATION_CURSOR_FOLLOWING_MODE;
 
@@ -88,7 +87,7 @@ public class MagnificationCursorFollowingModePreferenceController extends
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return isInSetupWizard() ? CONDITIONALLY_UNAVAILABLE : AVAILABLE;
     }
 
     @NonNull

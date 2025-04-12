@@ -17,10 +17,13 @@
 package com.android.settings.dream;
 
 import static android.service.dreams.Flags.allowDreamWhenPostured;
+import static android.service.dreams.Flags.dreamsV2;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.widget.RadioButtonPickerFragment;
@@ -33,13 +36,31 @@ import java.util.List;
 public class WhenToDreamPicker extends RadioButtonPickerFragment {
 
     private static final String TAG = "WhenToDreamPicker";
+
+    private Context mContext;
     private DreamBackend mBackend;
     private boolean mDreamsSupportedOnBattery;
+    private RadioButtonPickerExtraSwitchController mRestrictToWirelessChargingController;
+
+    private final RadioButtonPickerExtraSwitchController.PreferenceAccessor
+            mWirelessChargingPreferenceAccessor =
+            new RadioButtonPickerExtraSwitchController.PreferenceAccessor() {
+                @Override
+                public void setValue(boolean value) {
+                    mBackend.setRestrictToWirelessCharging(value);
+                }
+
+                @Override
+                public boolean getValue() {
+                    return mBackend.getRestrictToWirelessCharging();
+                }
+            };
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
+        mContext = context;
         mBackend = DreamBackend.getInstance(context);
         mDreamsSupportedOnBattery = getResources().getBoolean(
                 com.android.internal.R.bool.config_dreamsEnabledOnBattery);
@@ -75,6 +96,22 @@ public class WhenToDreamPicker extends RadioButtonPickerFragment {
         }
 
         return candidates;
+    }
+
+    @Override
+    protected void addStaticPreferences(PreferenceScreen screen) {
+        if (!dreamsV2()) {
+            return;
+        }
+
+        if (mRestrictToWirelessChargingController == null) {
+            mRestrictToWirelessChargingController =
+                    new RadioButtonPickerExtraSwitchController(
+                            mContext,
+                            R.string.screensaver_restrict_to_wireless_charging_title,
+                            mWirelessChargingPreferenceAccessor);
+            mRestrictToWirelessChargingController.addToScreen(screen);
+        }
     }
 
     private String[] entries() {

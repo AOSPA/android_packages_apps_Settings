@@ -45,7 +45,6 @@ import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums;
 import com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode;
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.utils.AnnotationSpan;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
@@ -55,8 +54,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Controller that shows the magnification area mode summary and the preference click behavior. */
-public class MagnificationModePreferenceController extends BasePreferenceController implements
-        DialogCreatable, LifecycleObserver, OnCreate, OnSaveInstanceState {
+public class MagnificationModePreferenceController extends MagnificationBasePreferenceController
+        implements DialogCreatable, LifecycleObserver, OnCreate, OnSaveInstanceState {
 
     static final String PREF_KEY = "screen_magnification_mode";
     static final String EXTRA_MODE = "mode";
@@ -106,7 +105,7 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return isInSetupWizard() ? CONDITIONALLY_UNAVAILABLE : AVAILABLE;
     }
 
     @NonNull
