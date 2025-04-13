@@ -67,6 +67,7 @@ import java.util.stream.Collectors;
  * Utility class to build Slices objects and Preference Controllers based on the Database managed
  * by {@link SlicesDatabaseHelper}
  */
+@Deprecated(forRemoval = true)
 public class SliceBuilderUtils {
 
     private static final String TAG = "SliceBuilder";

@@ -17,15 +17,15 @@ package com.android.settings.supervision
 
 import android.app.supervision.flags.Flags
 import android.content.Context
-import com.android.settings.R
 import androidx.preference.Preference
+import com.android.settings.R
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 
-class SupervisionPinRecoveryPreference : PreferenceMetadata,
-    PreferenceAvailabilityProvider, Preference.OnPreferenceClickListener {
+class SupervisionPinRecoveryPreference :
+    PreferenceMetadata, PreferenceAvailabilityProvider, Preference.OnPreferenceClickListener {
     override val key: String
-        get() = SupervisionPinRecoveryPreference.KEY
+        get() = KEY
 
     override val title: Int
         get() = R.string.supervision_add_forgot_pin_preference_title

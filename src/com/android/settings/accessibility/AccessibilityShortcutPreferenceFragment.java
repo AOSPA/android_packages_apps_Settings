@@ -44,7 +44,6 @@ import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.internal.accessibility.util.ShortcutUtils;
 import com.android.settings.R;
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
-import com.android.settings.dashboard.RestrictedDashboardFragment;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
@@ -55,7 +54,7 @@ import java.util.Set;
 /**
  * Base class for accessibility fragments shortcut functions and dialog management.
  */
-public abstract class AccessibilityShortcutPreferenceFragment extends RestrictedDashboardFragment
+public abstract class AccessibilityShortcutPreferenceFragment extends BaseRestrictedSupportFragment
         implements ShortcutPreference.OnClickCallback {
     private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
 

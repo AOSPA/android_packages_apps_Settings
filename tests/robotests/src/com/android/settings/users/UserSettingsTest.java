@@ -366,6 +366,36 @@ public class UserSettingsTest {
     }
 
     @Test
+    public void withCurrentUserAdmin_ShouldAddRemoveUserAction() {
+        doReturn(SWITCHABILITY_STATUS_OK).when(mUserManager).getUserSwitchability();
+        mUserCapabilities.mIsMain = false;
+        mUserCapabilities.mIsAdmin = true;
+
+        Menu menu = mock(Menu.class);
+        MenuItem menuItem = mock(MenuItem.class);
+        final String title = "title";
+
+        doReturn(title).when(menuItem).getTitle();
+        doReturn(menuItem).when(menu).add(
+                anyInt(), eq(Menu.FIRST), anyInt(), any(CharSequence.class));
+
+        mFragment.onCreateOptionsMenu(menu, mock(MenuInflater.class));
+
+        verify(menu).add(eq(0), anyInt(), anyInt(), any(CharSequence.class));
+    }
+
+    @Test
+    public void withCurrentUserMain_ShouldNotAddRemoveUserAction() {
+        mUserCapabilities.mIsMain = true;
+        doReturn(SWITCHABILITY_STATUS_OK).when(mUserManager).getUserSwitchability();
+        Menu menu = mock(Menu.class);
+
+        mFragment.onCreateOptionsMenu(menu, mock(MenuInflater.class));
+
+        verify(menu, never()).add(anyInt(), anyInt(), anyInt(), any(CharSequence.class));
+    }
+
+    @Test
     public void withoutDisallowRemoveUser_ShouldNotDisableRemoveUser() {
         // Arrange
         doReturn(SWITCHABILITY_STATUS_OK).when(mUserManager).getUserSwitchability();

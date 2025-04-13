@@ -60,7 +60,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     private static final String TAG = UserDetailsSettings.class.getSimpleName();
 
     private static final String KEY_SWITCH_USER = "switch_user";
-    private static final String KEY_ENABLE_TELEPHONY = "enable_calling";
+    private static final String KEY_ENABLE_TELEPHONY_CALLING = "enable_calling";
     private static final String KEY_REMOVE_USER = "remove_user";
     private static final String KEY_GRANT_ADMIN = "user_grant_admin";
     private static final String KEY_APP_AND_CONTENT_ACCESS = "app_and_content_access";
@@ -346,7 +346,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         mUserInfo = mUserManager.getUserInfo(userId);
 
         mSwitchUserPref = findPreference(KEY_SWITCH_USER);
-        mPhonePref = findPreference(KEY_ENABLE_TELEPHONY);
+        mPhonePref = findPreference(KEY_ENABLE_TELEPHONY_CALLING);
         mRemoveUserPref = findPreference(KEY_REMOVE_USER);
         mAppAndContentAccessPref = findPreference(KEY_APP_AND_CONTENT_ACCESS);
         mAppCopyingPref = findPreference(KEY_APP_COPYING);
@@ -385,19 +385,19 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         }
 
         if (!mUserManager.isAdminUser()) { // non admin users can't remove users and allow calls
-            removePreference(KEY_ENABLE_TELEPHONY);
+            removePreference(KEY_ENABLE_TELEPHONY_CALLING);
             removePreference(KEY_REMOVE_USER);
             removePreference(KEY_APP_AND_CONTENT_ACCESS);
             removePreference(KEY_APP_COPYING);
         } else {
             if (!Utils.isVoiceCapable(context)) { // no telephony
-                removePreference(KEY_ENABLE_TELEPHONY);
+                removePreference(KEY_ENABLE_TELEPHONY_CALLING);
             }
             if (mUserInfo.isMain() || UserManager.isHeadlessSystemUserMode()) {
-                removePreference(KEY_ENABLE_TELEPHONY);
+                removePreference(KEY_ENABLE_TELEPHONY_CALLING);
             }
             if (mUserInfo.isRestricted()) {
-                removePreference(KEY_ENABLE_TELEPHONY);
+                removePreference(KEY_ENABLE_TELEPHONY_CALLING);
                 if (isNewUser) {
                     // for newly created restricted users we should open the apps and content access
                     // screen to initialize the default restrictions
@@ -408,7 +408,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             }
 
             if (mUserInfo.isGuest()) {
-                removePreference(KEY_ENABLE_TELEPHONY);
+                removePreference(KEY_ENABLE_TELEPHONY_CALLING);
                 mRemoveUserPref.setTitle(mGuestUserAutoCreated
                         ? com.android.settingslib.R.string.guest_reset_guest
                         : com.android.settingslib.R.string.guest_exit_guest);

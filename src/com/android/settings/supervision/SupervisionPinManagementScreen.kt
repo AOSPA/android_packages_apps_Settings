@@ -46,12 +46,17 @@ class SupervisionPinManagementScreen : PreferenceScreenCreator, PreferenceAvaila
 
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(context, this) {
-            +SupervisionPinRecoveryPreference()
-            // TODO(b/391992481) implement the screen.
-            +SupervisionChangePinPreference()
+            +TitlelessPreferenceGroup(GROUP_KEY) += {
+                +SupervisionPinRecoveryPreference()
+                // TODO(b/391992481) implement the screen.
+                +SupervisionChangePinPreference()
+                +SupervisionUpdateRecoveryEmailPreference()
+            }
+            +SupervisionDeletePinPreference()
         }
 
     companion object {
         const val KEY = "supervision_pin_management"
+        internal const val GROUP_KEY = "pin_management_group"
     }
 }

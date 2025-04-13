@@ -25,10 +25,9 @@
         android:title="@string/regional_preferences_option_page_sub_title"
         android:persistent="false" />
 
-    <PreferenceCategory
+    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
         android:key="first_day_of_week_item_category"
         android:title="@string/summary_placeholder"
-        android:layout="@layout/preference_category_no_label"
         settings:controller="com.android.settings.regionalpreferences.FirstDayOfWeekItemCategoryController"/>
 
 </PreferenceScreen>

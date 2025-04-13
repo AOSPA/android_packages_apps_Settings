@@ -46,6 +46,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.bluetooth.VolumeControlProfile;
+import com.android.settingslib.flags.Flags;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -341,6 +342,12 @@ public class AudioSharingUtils {
                 profileManager.getLeAudioBroadcastAssistantProfile();
         if (assistant == null || !assistant.isProfileReady()) {
             return false;
+        }
+        if (Flags.adoptPrimaryGroupManagementApiV2()) {
+            LeAudioProfile leAudio = profileManager.getLeAudioProfile();
+            if (leAudio == null || !leAudio.isProfileReady()) {
+                return false;
+            }
         }
         VolumeControlProfile vc = profileManager.getVolumeControlProfile();
         return vc != null && vc.isProfileReady();

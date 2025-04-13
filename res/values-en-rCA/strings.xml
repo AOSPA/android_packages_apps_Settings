@@ -344,7 +344,7 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{On / # app has access to location}other{On / # apps have access to location}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Loading…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Apps with the nearby devices permission can determine the relative position of connected devices."</string>
-    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Location access is off for apps and services. Your device location may still be sent to emergency responders when you call or text an emergency number."</string>
+    <string name="location_settings_footer_location_off" msgid="5332879932827940511">"Location access is off for apps and services. Your device location may still be sent to emergency responders when you contact an emergency number."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Learn more about Location settings"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"To change go to ChromeOS Settings &gt; Privacy and security &gt; Privacy controls &gt; Location access"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Accounts"</string>
@@ -610,6 +610,8 @@
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"Skip setup for pattern and face?"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"Skip setup for pattern and fingerprint?"</string>
     <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"Skip setup for pattern, face, and fingerprint?"</string>
+    <string name="resume_animation" msgid="5259729861893297887">"Resume animation"</string>
+    <string name="pause_animation" msgid="2209064682137909056">"Pause animation"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"Set up screen lock"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Done"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Whoops, that’s not the sensor"</string>
@@ -1027,6 +1029,8 @@
     <string name="android_beam_explained" msgid="5684416131846701256">"When this feature is turned on, you can beam app content to another NFC-capable device by holding the devices close together. For example, you can beam web pages, YouTube videos, contacts, and more.\n\nJust bring the devices together (typically back to back) and then tap your screen. The app determines what gets beamed."</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi‑Fi"</string>
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Use Wi‑Fi"</string>
+    <!-- no translation found for wifi_networks_category (8011323954745036753) -->
+    <skip />
     <string name="wifi_settings_category" msgid="3523464780563778321">"Wi‑Fi settings"</string>
     <string name="wifi_select_network" msgid="6692897876718813259">"Select Wi‑Fi"</string>
     <string name="wifi_starting" msgid="6147022683967506341">"Turning Wi‑Fi on…"</string>
@@ -1207,6 +1211,22 @@
     <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> ‑ Charging"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"Hotspot connection"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"Connection strength"</string>
+    <!-- no translation found for ethernet_dns1 (6487470669719468602) -->
+    <skip />
+    <!-- no translation found for ethernet_dns2 (484620572555181363) -->
+    <skip />
+    <!-- no translation found for ethernet_gateway (4064061619318875567) -->
+    <skip />
+    <!-- no translation found for ethernet_network_prefix_length (3693127271457763198) -->
+    <skip />
+    <!-- no translation found for ethernet_ip_settings (3344064201878792090) -->
+    <skip />
+    <!-- no translation found for ethernet_config_submit (724743720212124025) -->
+    <skip />
+    <!-- no translation found for ethernet_config_cancel (986322993908814366) -->
+    <skip />
+    <!-- no translation found for ethernet_config_title (4784063109810004382) -->
+    <skip />
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Saved networks"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Subscriptions"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Other networks"</string>
@@ -1435,6 +1455,7 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Off"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"When to start"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Lift to wake"</string>
+    <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Restrict to wireless charging"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Ambient display"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"When to show"</string>
     <string name="doze_title" msgid="1523090408230862316">"Wake screen for notifications"</string>
@@ -1601,6 +1622,7 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"While charging"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"While charging and upright"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"While docked"</string>
+    <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"Restrict to wireless charging"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APNs"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Edit access point"</string>
     <string name="apn_add" msgid="9069613192201630934">"Add access point"</string>
@@ -1714,6 +1736,8 @@
     <string name="rx_ethernet_speed" msgid="6642000569214969711">"Receive link speed"</string>
     <string name="ethernet_network_usage" msgid="3795965384177426780">"Network usage"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernet tethering"</string>
+    <!-- no translation found for ethernet_modify (1326316717004440503) -->
+    <skip />
     <string name="tethering_footer_info" msgid="6824352505979800594">"Use hotspot and tethering to provide internet to other devices through your data connection. Apps can also create a hotspot to share content with nearby devices."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Use hotspot and tethering to provide internet to other devices through your Wi‑Fi or mobile data connection. Apps can also create a hotspot to share content with nearby devices."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Help"</string>
@@ -2119,8 +2143,7 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Bottom-right click"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Click in the bottom right corner of the touchpad for more options"</string>
     <string name="trackpad_pointer_speed" msgid="5672221910698079303">"Cursor speed"</string>
-    <!-- no translation found for three_finger_tap_preference_title (1836080810837854140) -->
-    <skip />
+    <string name="three_finger_tap_preference_title" msgid="1836080810837854140">"Use three-finger tap"</string>
     <string name="touchpad_acceleration_title" msgid="176627555191021888">"Touchpad acceleration"</string>
     <string name="touchpad_acceleration_summary" msgid="8057075483967535793">"Faster movements on your touchpad will move the cursor farther"</string>
     <string name="pointer_fill_style" msgid="8794616790175016092">"Pointer color"</string>
@@ -2137,8 +2160,7 @@
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Learn touchpad gestures"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"trackpad, track pad, mouse, cursor, scroll, swipe, right click, click, pointer"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"right click, tap"</string>
-    <!-- no translation found for three_finger_tap_middle_click (7898931632908866867) -->
-    <skip />
+    <string name="three_finger_tap_middle_click" msgid="7898931632908866867">"Middle mouse button"</string>
     <string name="three_finger_tap_launch_gemini" msgid="4030401656711588982">"Launch Assistant"</string>
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Go home"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"Go back"</string>
@@ -2267,10 +2289,8 @@
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Interaction controls"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Timing controls"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"System controls"</string>
-    <string name="accessibility_feedback_title" msgid="6690472705407526006">"Feedback"</string>
-    <string name="accessibility_feedback_summary" msgid="4576591591334314827">"Help improve by taking a survey"</string>
-    <string name="accessibility_feedback_disabled_summary" msgid="3652321859452620942">"No surveys available"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Send feedback"</string>
+    <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Rate us"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Downloaded apps"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimental"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Feature flags"</string>
@@ -2560,6 +2580,8 @@
     <string name="accessibility_hearing_device_footer_hap_only_summary_tts" msgid="4440097982533045507">"To find other hearing devices that aren’t supported by LE Audio, tap "<b>"Pair new device"</b>" then "<b>"See more devices"</b></string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Pair hearing device"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"You can pair ASHA and LE Audio hearing devices on this page. Make sure your hearing device is turned on and ready to pair."</string>
+    <string name="accessibility_hearing_device_pairing_asha_only_intro" msgid="5679230908462987522">"You can pair ASHA hearing devices on this page. Make sure your hearing device is turned on and ready to pair."</string>
+    <string name="accessibility_hearing_device_pairing_hap_only_intro" msgid="2233661046254311681">"You can pair LE Audio hearing devices on this page. Make sure your hearing device is turned on and ready to pair."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Available hearing devices"</string>
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"Don’t see your hearing device?"</string>
     <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"See more devices"</string>
@@ -2596,7 +2618,8 @@
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{Short ({time} second)}other{Short ({time} seconds)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{Medium ({time} second)}other{Medium ({time} seconds)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{Long ({time} second)}other{Long ({time} seconds)}}"</string>
-    <string name="accessibilty_autoclick_delay_unit_second" msgid="5979297390686370567">"{count,plural, =1{{time} second}other{{time} seconds}}"</string>
+    <!-- no translation found for accessibility_autoclick_delay_unit_second (1562809410497613173) -->
+    <skip />
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Settings"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"On"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"Off"</string>
@@ -3387,7 +3410,6 @@
     <string name="sim_selection_channel_title" msgid="3193666315607572484">"SIM selection"</string>
     <string name="dashboard_title" msgid="5660733037244683387">"Settings"</string>
     <string name="network_dashboard_title" msgid="788543070557731240">"Network and Internet"</string>
-    <string name="network_dashboard_summary_mobile" msgid="7750924671970583670">"Mobile, Wi‑Fi, hotspot"</string>
     <string name="network_dashboard_summary_no_mobile" msgid="4022575916334910790">"Wi‑Fi, hotspot"</string>
     <string name="connected_devices_dashboard_title" msgid="19868275519754895">"Connected devices"</string>
     <string name="connected_devices_dashboard_default_summary" msgid="7211769956193710397">"Bluetooth, pairing"</string>
@@ -5078,6 +5100,8 @@
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Supported apps on your phone"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"see all apps"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Supported apps on your phone"</string>
+    <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Can’t add a SIM"</string>
+    <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"End the satellite connection before you add a SIM"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Access Point Names"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Unavailable when connected to <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5711,6 +5735,8 @@
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"Audio stream QR code"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Password: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"To listen to <xliff:g id="STREAM_NAME">%1$s</xliff:g>, other people can connect compatible headphones to their Android device. They can then scan this QR code."</string>
+    <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"Listen to Auracast broadcast"</string>
+    <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"Turn off audio sharing to find audio streams"</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Find an audio stream"</string>
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Listen to a device that\'s sharing audio or to a nearby Auracast broadcast"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"Your audio device"</string>
@@ -5748,6 +5774,9 @@
     <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"Add a PIN recovery method"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Change PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Forgot PIN"</string>
+    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Update recovery email"</string>
+    <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Delete PIN"</string>
+    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"This will reset all your supervision settings"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Web content filters"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome and Web"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Try to block explicit sites"</string>

@@ -17,6 +17,7 @@
 package com.android.settings.network.telephony
 
 import android.content.Context
+import android.content.pm.PackageManager
 import android.os.UserManager
 import android.provider.Settings
 import android.telephony.SubscriptionInfo
@@ -45,6 +46,8 @@ class MobileNetworkSettingsSearchIndexTest {
 
     private val mockUserManager = mock<UserManager> { on { isAdminUser } doReturn true }
 
+    private val mockPackageManager = mock<PackageManager>()
+
     private val mockSubscriptionManager =
         mock<SubscriptionManager> {
             on { activeSubscriptionInfoList } doReturn listOf(SUB_INFO_1, SUB_INFO_2)
@@ -55,6 +58,7 @@ class MobileNetworkSettingsSearchIndexTest {
             on { getSystemService(UserManager::class.java) } doReturn mockUserManager
             on { getSystemService(SubscriptionManager::class.java) } doReturn
                 mockSubscriptionManager
+            on { packageManager } doReturn mockPackageManager
         }
 
     private val resources =
@@ -75,12 +79,17 @@ class MobileNetworkSettingsSearchIndexTest {
     @Before
     fun setUp() {
         context.stub { on { resources } doReturn resources }
+
+        // By default, searchable
+        mockUserManager.stub { on { isAdminUser } doReturn true }
+        mockPackageManager.stub {
+            on { hasSystemFeature(PackageManager.FEATURE_TELEPHONY) } doReturn true
+        }
     }
 
     @Test
-    fun isMobileNetworkSettingsSearchable_adminUser_returnTrue() {
-        mockUserManager.stub { on { isAdminUser } doReturn true }
-
+    fun isMobileNetworkSettingsSearchable_default_returnTrue() {
+        // Use defaults
         val isSearchable = isMobileNetworkSettingsSearchable(context)
 
         assertThat(isSearchable).isTrue()
@@ -89,6 +98,17 @@ class MobileNetworkSettingsSearchIndexTest {
     @Test
     fun isMobileNetworkSettingsSearchable_nonAdminUser_returnFalse() {
         mockUserManager.stub { on { isAdminUser } doReturn false }
+
+        val isSearchable = isMobileNetworkSettingsSearchable(context)
+
+        assertThat(isSearchable).isFalse()
+    }
+
+    @Test
+    fun isMobileNetworkSettingsSearchable_noTelephony_returnFalse() {
+        mockPackageManager.stub {
+            on { hasSystemFeature(PackageManager.FEATURE_TELEPHONY) } doReturn false
+        }
 
         val isSearchable = isMobileNetworkSettingsSearchable(context)
 

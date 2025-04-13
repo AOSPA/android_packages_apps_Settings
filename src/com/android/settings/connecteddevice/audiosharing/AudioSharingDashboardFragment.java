@@ -33,7 +33,6 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsCategoryController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.bluetooth.BluetoothUtils;
@@ -55,7 +54,6 @@ public class AudioSharingDashboardFragment extends DashboardFragment
     private AudioSharingDeviceVolumeGroupController mAudioSharingDeviceVolumeGroupController;
     private AudioSharingCallAudioPreferenceController mAudioSharingCallAudioPreferenceController;
     private AudioSharingPlaySoundPreferenceController mAudioSharingPlaySoundPreferenceController;
-    private AudioStreamsCategoryController mAudioStreamsCategoryController;
     private AudioSharingSwitchBarController mAudioSharingSwitchBarController;
 
     public AudioSharingDashboardFragment() {
@@ -94,7 +92,6 @@ public class AudioSharingDashboardFragment extends DashboardFragment
         mAudioSharingCallAudioPreferenceController.init(this);
         mAudioSharingPlaySoundPreferenceController =
                 use(AudioSharingPlaySoundPreferenceController.class);
-        mAudioStreamsCategoryController = use(AudioStreamsCategoryController.class);
     }
 
     @Override
@@ -184,12 +181,10 @@ public class AudioSharingDashboardFragment extends DashboardFragment
             AudioSharingDeviceVolumeGroupController volumeGroupController,
             AudioSharingCallAudioPreferenceController callAudioController,
             AudioSharingPlaySoundPreferenceController playSoundController,
-            AudioStreamsCategoryController streamsCategoryController,
             AudioSharingSwitchBarController switchBarController) {
         mAudioSharingDeviceVolumeGroupController = volumeGroupController;
         mAudioSharingCallAudioPreferenceController = callAudioController;
         mAudioSharingPlaySoundPreferenceController = playSoundController;
-        mAudioStreamsCategoryController = streamsCategoryController;
         mAudioSharingSwitchBarController = switchBarController;
     }
 
@@ -197,7 +192,6 @@ public class AudioSharingDashboardFragment extends DashboardFragment
         mAudioSharingDeviceVolumeGroupController.updateVisibility();
         mAudioSharingCallAudioPreferenceController.updateVisibility();
         mAudioSharingPlaySoundPreferenceController.updateVisibility();
-        mAudioStreamsCategoryController.updateVisibility();
     }
 
     private void onProfilesConnectedForAttachedPreferences() {

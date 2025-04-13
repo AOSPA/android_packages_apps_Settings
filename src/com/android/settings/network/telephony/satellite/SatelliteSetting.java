@@ -23,7 +23,9 @@ import static android.telephony.CarrierConfigManager.KEY_EMERGENCY_MESSAGING_SUP
 import static android.telephony.CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL;
 import static android.telephony.CarrierConfigManager.KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL;
 import static android.telephony.CarrierConfigManager.KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING;
-import static android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED;
+
+import static com.android.settings.network.telephony.satellite.SatelliteCarrierSettingUtils.isSatelliteAccountEligible;
+import static com.android.settings.network.telephony.satellite.SatelliteCarrierSettingUtils.isSatelliteDataRestricted;
 
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
@@ -44,8 +46,6 @@ import androidx.preference.PreferenceCategory;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
-
-import java.util.Set;
 
 /** Handle Satellite Setting Preference Layout. */
 public class SatelliteSetting extends RestrictedDashboardFragment {
@@ -108,7 +108,7 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        boolean isSatelliteEligible = isSatelliteEligible();
+        boolean isSatelliteEligible = isSatelliteAccountEligible(getContext(), mSubId);
         updateHowItWorksContent(isSatelliteEligible);
     }
 
@@ -139,22 +139,6 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
         Preference supportedService = findPreference(KEY_SUPPORTED_SERVICE);
         supportedService.setTitle(R.string.title_supported_service_for_manual_type);
         supportedService.setSummary(R.string.summary_supported_service_for_manual_type);
-    }
-
-    private boolean isSatelliteEligible() {
-        if (isCarrierRoamingNtnConnectedTypeManual()) {
-            return mIsSmsAvailableForManualType;
-        }
-        try {
-            Set<Integer> restrictionReason =
-                    mSatelliteManager.getAttachRestrictionReasonsForCarrier(mSubId);
-            Log.d(TAG, "Restriction reason : " + restrictionReason);
-            return !restrictionReason.contains(
-                    SatelliteManager.SATELLITE_COMMUNICATION_RESTRICTION_REASON_ENTITLEMENT);
-        } catch (SecurityException | IllegalStateException | IllegalArgumentException ex) {
-            loge(ex.toString());
-            return false;
-        }
     }
 
     private PersistableBundle fetchCarrierConfigData(int subId) {
@@ -189,21 +173,6 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
 
     private boolean isDataAvailableAndNotRestricted() {
         return getIntent().getBooleanExtra(EXTRA_IS_SERVICE_DATA_TYPE, false)
-                && !isDataRestricted();
-    }
-
-    private boolean isDataRestricted() {
-        int dataMode = SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED;
-        try {
-            dataMode = mSatelliteManager.getSatelliteDataSupportMode(mSubId);
-            Log.d(TAG, "Data mode : " + dataMode);
-        } catch (IllegalStateException e) {
-            Log.d(TAG, "Failed to get data mode : " + e);
-        }
-        return dataMode <= SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED;
-    }
-
-    private static void loge(String message) {
-        Log.e(TAG, message);
+                && !isSatelliteDataRestricted(getContext(), mSubId);
     }
 }

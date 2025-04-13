@@ -113,7 +113,11 @@ public class DeviceStateAutoRotateSettingController extends TogglePreferenceCont
 
     @Override
     public boolean isChecked() {
-        return !mAutoRotateSettingsManager.isRotationLocked(mDeviceState);
+        // It is highly unlikely to receive null value here. In the improbable event of null, a
+        // non-null update will follow shortly, and the users will potentially see incorrect
+        // state for a short time.
+        final Boolean isRotationLocked = mAutoRotateSettingsManager.isRotationLocked(mDeviceState);
+        return isRotationLocked != null && !isRotationLocked;
     }
 
     @Override

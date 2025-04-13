@@ -38,6 +38,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.Map;
 
+/** The top-level preference controller that handles the three finger tap behaviour. */
 public class TouchpadThreeFingerTapPreferenceController extends BasePreferenceController
         implements LifecycleEventObserver {
 

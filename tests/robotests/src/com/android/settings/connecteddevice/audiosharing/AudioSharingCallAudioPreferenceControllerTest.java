@@ -34,6 +34,7 @@ import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothCsipSetCoordinator;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothLeAudio;
 import android.bluetooth.BluetoothLeBroadcastAssistant;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
@@ -174,6 +175,7 @@ public class AudioSharingCallAudioPreferenceControllerTest {
         when(mBtProfileManager.getLeAudioBroadcastProfile()).thenReturn(mBroadcast);
         when(mBtProfileManager.getLeAudioBroadcastAssistantProfile()).thenReturn(mAssistant);
         when(mBtProfileManager.getVolumeControlProfile()).thenReturn(mVolumeControl);
+        when(mLeaProfile.isProfileReady()).thenReturn(true);
         when(mBroadcast.isProfileReady()).thenReturn(true);
         when(mAssistant.isProfileReady()).thenReturn(true);
         when(mVolumeControl.isProfileReady()).thenReturn(true);
@@ -222,13 +224,15 @@ public class AudioSharingCallAudioPreferenceControllerTest {
                                 BluetoothUtils.getPrimaryGroupIdUriForBroadcast()),
                         false,
                         mContentObserver);
+        verify(mLeaProfile, never()).registerCallback(any(), any(BluetoothLeAudio.Callback.class));
         verify(mAssistant, never())
                 .registerServiceCallBack(any(), any(BluetoothLeBroadcastAssistant.Callback.class));
     }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
-    public void onStart_flagOn_registerCallback() {
+    @DisableFlags(Flags.FLAG_ADOPT_PRIMARY_GROUP_MANAGEMENT_API_V2)
+    public void onStart_flagOn_registerCallbackIncludingContentObserver() {
         mController.onStart(mLifecycleOwner);
         verify(mBtEventManager).registerCallback(mController);
         verify(mContentResolver)
@@ -237,6 +241,24 @@ public class AudioSharingCallAudioPreferenceControllerTest {
                                 BluetoothUtils.getPrimaryGroupIdUriForBroadcast()),
                         false,
                         mContentObserver);
+        verify(mLeaProfile, never()).registerCallback(any(), any(BluetoothLeAudio.Callback.class));
+        verify(mAssistant)
+                .registerServiceCallBack(any(), any(BluetoothLeBroadcastAssistant.Callback.class));
+    }
+
+    @Test
+    @EnableFlags({Flags.FLAG_ENABLE_LE_AUDIO_SHARING,
+            Flags.FLAG_ADOPT_PRIMARY_GROUP_MANAGEMENT_API_V2})
+    public void onStart_flagOn_registerCallbackIncludingLeaProfile() {
+        mController.onStart(mLifecycleOwner);
+        verify(mBtEventManager).registerCallback(mController);
+        verify(mContentResolver, never())
+                .registerContentObserver(
+                        Settings.Secure.getUriFor(
+                                BluetoothUtils.getPrimaryGroupIdUriForBroadcast()),
+                        false,
+                        mContentObserver);
+        verify(mLeaProfile).registerCallback(any(), any(BluetoothLeAudio.Callback.class));
         verify(mAssistant)
                 .registerServiceCallBack(any(), any(BluetoothLeBroadcastAssistant.Callback.class));
     }
@@ -248,6 +270,7 @@ public class AudioSharingCallAudioPreferenceControllerTest {
         mController.onStop(mLifecycleOwner);
         verify(mBtEventManager, never()).unregisterCallback(mController);
         verify(mContentResolver, never()).unregisterContentObserver(mContentObserver);
+        verify(mLeaProfile, never()).registerCallback(any(), any(BluetoothLeAudio.Callback.class));
         verify(mAssistant, never())
                 .unregisterServiceCallBack(any(BluetoothLeBroadcastAssistant.Callback.class));
     }
@@ -259,17 +282,33 @@ public class AudioSharingCallAudioPreferenceControllerTest {
         mController.onStop(mLifecycleOwner);
         verify(mBtEventManager, never()).unregisterCallback(mController);
         verify(mContentResolver, never()).unregisterContentObserver(mContentObserver);
+        verify(mLeaProfile, never()).registerCallback(any(), any(BluetoothLeAudio.Callback.class));
         verify(mAssistant, never())
                 .unregisterServiceCallBack(any(BluetoothLeBroadcastAssistant.Callback.class));
     }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
-    public void onStop_flagOn_registered_unregisterCallback() {
+    @DisableFlags(Flags.FLAG_ADOPT_PRIMARY_GROUP_MANAGEMENT_API_V2)
+    public void onStop_flagOn_registered_unregisterCallbackIncludingContentObserver() {
         mController.setCallbacksRegistered(true);
         mController.onStop(mLifecycleOwner);
         verify(mBtEventManager).unregisterCallback(mController);
         verify(mContentResolver).unregisterContentObserver(mContentObserver);
+        verify(mLeaProfile, never()).unregisterCallback(any(BluetoothLeAudio.Callback.class));
+        verify(mAssistant)
+                .unregisterServiceCallBack(any(BluetoothLeBroadcastAssistant.Callback.class));
+    }
+
+    @Test
+    @EnableFlags({Flags.FLAG_ENABLE_LE_AUDIO_SHARING,
+            Flags.FLAG_ADOPT_PRIMARY_GROUP_MANAGEMENT_API_V2})
+    public void onStop_flagOn_registered_unregisterCallbackIncludingLeaProfile() {
+        mController.setCallbacksRegistered(true);
+        mController.onStop(mLifecycleOwner);
+        verify(mBtEventManager).unregisterCallback(mController);
+        verify(mContentResolver, never()).unregisterContentObserver(mContentObserver);
+        verify(mLeaProfile).unregisterCallback(any(BluetoothLeAudio.Callback.class));
         verify(mAssistant)
                 .unregisterServiceCallBack(any(BluetoothLeBroadcastAssistant.Callback.class));
     }
@@ -367,7 +406,8 @@ public class AudioSharingCallAudioPreferenceControllerTest {
         shadowOf(Looper.getMainLooper()).idle();
         mPreference.setSummary("test");
 
-        mContentObserver.onChange(true);
+        mController.mLeAudioCallback.onBroadcastToUnicastFallbackGroupChanged(
+                TEST_DEVICE_GROUP_ID1);
         shadowOf(Looper.getMainLooper()).idle();
         assertThat(mPreference.getSummary().toString())
                 .isEqualTo(

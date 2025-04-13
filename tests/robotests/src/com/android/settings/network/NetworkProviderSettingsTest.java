@@ -158,10 +158,6 @@ public class NetworkProviderSettingsTest {
     @Mock
     InternetUpdater mInternetUpdater;
     @Mock
-    PreferenceCategory mConnectedWifiEntryPreferenceCategory;
-    @Mock
-    PreferenceCategory mFirstWifiEntryPreferenceCategory;
-    @Mock
     NetworkProviderSettings.WifiRestriction mWifiRestriction;
     @Mock
     EthernetManager mEtherentManager;
@@ -205,14 +201,6 @@ public class NetworkProviderSettingsTest {
         mNetworkProviderSettings.mInternetUpdater = mInternetUpdater;
         mNetworkProviderSettings.mEthernetTracker = mEthernetTracker;
         mNetworkProviderSettings.mWifiStatusMessagePreference = new FooterPreference(mContext);
-        doReturn(NetworkProviderSettings.PREF_KEY_CONNECTED_ACCESS_POINTS)
-                .when(mConnectedWifiEntryPreferenceCategory).getKey();
-        mNetworkProviderSettings.mConnectedWifiEntryPreferenceCategory =
-                mConnectedWifiEntryPreferenceCategory;
-        doReturn(NetworkProviderSettings.PREF_KEY_FIRST_ACCESS_POINTS)
-                .when(mFirstWifiEntryPreferenceCategory).getKey();
-        mNetworkProviderSettings.mFirstWifiEntryPreferenceCategory =
-                mFirstWifiEntryPreferenceCategory;
         mNetworkProviderSettings.mEthernetPreferenceCategory = mEthernetPreferenceCategory;
 
         ReflectionHelpers.setField(mNetworkProviderSettings, "mDashboardFeatureProvider",
@@ -604,24 +592,6 @@ public class NetworkProviderSettingsTest {
         mNetworkProviderSettings.onAirplaneModeChanged(false);
 
         verify(mAirplaneModeMsgPreference).setVisible(false);
-    }
-
-    @Test
-    public void getConnectedWifiPreferenceCategory_internetWiFi_getConnectedAccessPoints() {
-        doReturn(InternetUpdater.INTERNET_WIFI).when(mInternetUpdater).getInternetType();
-
-        final PreferenceCategory pc = mNetworkProviderSettings.getConnectedWifiPreferenceCategory();
-
-        assertThat(pc.getKey()).isEqualTo(NetworkProviderSettings.PREF_KEY_CONNECTED_ACCESS_POINTS);
-    }
-
-    @Test
-    public void getConnectedWifiPreferenceCategory_internetCellular_getFirstAccessPoints() {
-        doReturn(InternetUpdater.INTERNET_CELLULAR).when(mInternetUpdater).getInternetType();
-
-        final PreferenceCategory pc = mNetworkProviderSettings.getConnectedWifiPreferenceCategory();
-
-        assertThat(pc.getKey()).isEqualTo(NetworkProviderSettings.PREF_KEY_FIRST_ACCESS_POINTS);
     }
 
     @Test

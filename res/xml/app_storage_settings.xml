@@ -67,15 +67,14 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory
+    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
         android:key="uri_category"
-        android:layout="@layout/preference_category_no_label"
         settings:allowDividerAbove="false"
         settings:allowDividerBelow="false">
         <com.android.settingslib.widget.LayoutPreference
             android:key="clear_uri_button"
             android:layout="@layout/single_button_panel"
             android:selectable="false" />
-    </PreferenceCategory>
+    </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
 
 </PreferenceScreen>

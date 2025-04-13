@@ -28,7 +28,7 @@ import com.android.settingslib.preference.PreferenceScreenCreator
 
 // TODO(b/368359967): The entry point logic is not yet migrated
 @ProvidePreferenceScreen(ScreenTimeoutScreen.KEY)
-class ScreenTimeoutScreen : PreferenceScreenCreator {
+open class ScreenTimeoutScreen : PreferenceScreenCreator {
 
     override val key: String
         get() = KEY

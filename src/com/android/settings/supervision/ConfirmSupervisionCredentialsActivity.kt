@@ -17,17 +17,23 @@ package com.android.settings.supervision
 
 import android.Manifest.permission.USE_BIOMETRIC
 import android.app.Activity
+import android.app.role.RoleManager
 import android.content.pm.PackageManager
 import android.hardware.biometrics.BiometricManager
 import android.hardware.biometrics.BiometricPrompt
 import android.hardware.biometrics.BiometricPrompt.AuthenticationCallback
+import android.os.Binder
 import android.os.Bundle
 import android.os.CancellationSignal
+import android.os.Process
 import android.util.Log
+import androidx.annotation.OpenForTesting
 import androidx.annotation.RequiresPermission
+import androidx.annotation.VisibleForTesting
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import com.android.settings.R
+import com.android.settingslib.supervision.SupervisionLog
 
 /**
  * Activity for confirming supervision credentials using device credential authentication.
@@ -46,11 +52,15 @@ import com.android.settings.R
  * Permissions:
  * - Requires `android.permission.USE_BIOMETRIC`.
  */
-class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
+@OpenForTesting
+open class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
     private val mAuthenticationCallback =
         object : AuthenticationCallback() {
             override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
-                Log.w(TAG, "onAuthenticationError(errorCode=$errorCode, errString=$errString)")
+                Log.w(
+                    SupervisionLog.TAG,
+                    "onAuthenticationError(errorCode=$errorCode, errString=$errString)",
+                )
                 setResult(Activity.RESULT_CANCELED)
                 finish()
             }
@@ -67,19 +77,24 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
         }
 
     @RequiresPermission(USE_BIOMETRIC)
-    override fun onCreate(savedInstanceState: Bundle?) {
+    public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // TODO(b/392961554): Check if caller is the SYSTEM_SUPERVISION role holder. Call
-        // RoleManager#getRoleHolders(SYSTEM_SUPERVISION) and check if getCallingPackage() is in the
-        // list.
-        if (checkCallingOrSelfPermission(USE_BIOMETRIC) == PackageManager.PERMISSION_GRANTED) {
-            showBiometricPrompt()
+        // TODO(b/392961554): adapts to new user profile type to trigger PIN verification dialog.
+        if (!callerHasSupervisionRole() && !callerIsSystemUid()) {
+            setResult(Activity.RESULT_CANCELED)
+            finish()
+            return
         }
+        if (checkCallingOrSelfPermission(USE_BIOMETRIC) != PackageManager.PERMISSION_GRANTED) {
+            setResult(Activity.RESULT_CANCELED)
+            finish()
+            return
+        }
+        showBiometricPrompt()
     }
 
     @RequiresPermission(USE_BIOMETRIC)
     fun showBiometricPrompt() {
-        // TODO(b/392961554): adapts to new user profile type to trigger PIN verification dialog.
         val biometricPrompt =
             BiometricPrompt.Builder(this)
                 .setTitle(getString(R.string.supervision_full_screen_pin_verification_title))
@@ -93,9 +108,23 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
         )
     }
 
-    companion object {
-        // TODO(b/392961554): remove this tag and use shared tag after http://ag/31997167 is
-        // submitted.
-        const val TAG = "SupervisionSettings"
+    private fun callerHasSupervisionRole(): Boolean {
+        val roleManager = getSystemService(RoleManager::class.java)
+        if (roleManager == null) {
+            Log.w(SupervisionLog.TAG, "null RoleManager")
+            return false
+        }
+        return roleManager
+            .getRoleHolders(RoleManager.ROLE_SYSTEM_SUPERVISION)
+            .contains(callingPackage)
+    }
+
+    private fun callerIsSystemUid(): Boolean {
+        val callingUid = Binder.getCallingUid()
+        if (callingUid != Process.SYSTEM_UID) {
+            Log.w(SupervisionLog.TAG, "callingUid: $callingUid is not SYSTEM_UID")
+            return false
+        }
+        return true
     }
 }

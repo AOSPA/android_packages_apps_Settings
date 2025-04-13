@@ -30,7 +30,6 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
-import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
@@ -40,7 +39,7 @@ import java.util.List;
 
 /** Accessibility settings for color and motion. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class ColorAndMotionFragment extends DashboardFragment {
+public class ColorAndMotionFragment extends BaseSupportFragment {
 
     private static final String TAG = "ColorAndMotionFragment";
 

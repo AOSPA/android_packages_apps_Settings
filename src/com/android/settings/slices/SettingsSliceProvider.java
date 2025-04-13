@@ -87,6 +87,7 @@ import java.util.stream.Collectors;
  * {@link com.android.settings.core.BasePreferenceController} indexed as
  * {@link SlicesDatabaseHelper.IndexColumns#CONTROLLER} to manipulate the setting.
  */
+@Deprecated(forRemoval = true)
 public class SettingsSliceProvider extends SliceProvider {
 
     private static final String TAG = "SettingsSliceProvider";

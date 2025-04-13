@@ -83,7 +83,7 @@ public class NotificationVolumePreferenceControllerTest {
     @Test
     public void isAvailable_singleVolume_shouldReturnFalse() {
         when(mHelper.isSingleVolume()).thenReturn(true);
-        when(mTelephonyManager.isVoiceCapable()).thenReturn(false);
+        when(mTelephonyManager.isDeviceVoiceCapable()).thenReturn(false);
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -101,7 +101,9 @@ public class NotificationVolumePreferenceControllerTest {
                 new NotificationVolumePreferenceController(mContext);
 
         when(mHelper.isSingleVolume()).thenReturn(false);
-        when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
+        when(mTelephonyManager.isDeviceVoiceCapable()).thenReturn(true);
+        when(mResources.getBoolean(com.android.settings.R.bool.config_show_sim_info))
+                .thenReturn(true);
 
         assertThat(controller.isAvailable()).isTrue();
     }
@@ -119,7 +121,21 @@ public class NotificationVolumePreferenceControllerTest {
         when(mResources.getBoolean(
                 com.android.settings.R.bool.config_show_notification_volume)).thenReturn(true);
         when(mHelper.isSingleVolume()).thenReturn(false);
-        when(mTelephonyManager.isVoiceCapable()).thenReturn(false);
+        when(mTelephonyManager.isDeviceVoiceCapable()).thenReturn(false);
+        when(mResources.getBoolean(com.android.settings.R.bool.config_show_sim_info))
+                .thenReturn(true);
+
+        assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void isAvailable_notSingleVolume_telephonyDisabled_shouldReturnTrue() {
+        when(mResources.getBoolean(
+                com.android.settings.R.bool.config_show_notification_volume)).thenReturn(true);
+        when(mHelper.isSingleVolume()).thenReturn(false);
+        when(mTelephonyManager.isDeviceVoiceCapable()).thenReturn(true);
+        when(mResources.getBoolean(com.android.settings.R.bool.config_show_sim_info))
+                .thenReturn(false);
 
         assertThat(mController.isAvailable()).isTrue();
     }

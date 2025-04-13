@@ -20,12 +20,16 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
 import com.android.settings.Settings.TestingSettingsActivity;
 
 
 public class TestingSettingsBroadcastReceiver extends BroadcastReceiver {
+    private final static String TAG = "TestingSettingsBroadcastReceiver";
 
     public TestingSettingsBroadcastReceiver() {
     }
@@ -33,12 +37,21 @@ public class TestingSettingsBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent != null && intent.getAction() != null
-                && intent.getAction().equals(TelephonyManager.ACTION_SECRET_CODE)
-                && !isDisabled(context)) {
-            Intent i = new Intent(Intent.ACTION_MAIN);
-            i.setClass(context, TestingSettingsActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            context.startActivity(i);
+            && intent.getAction().equals(TelephonyManager.ACTION_SECRET_CODE)
+            && !isDisabled(context)) {
+            UserManager userManager = context.getSystemService(UserManager.class);
+            if (userManager != null) {
+                if (userManager.getUserInfo(context.getUserId()).isMain()) {
+                    Intent i = new Intent(Intent.ACTION_MAIN);
+                    i.setClass(context, TestingSettingsActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    context.startActivity(i);
+                } else {
+                    Log.d(TAG, "Not main user, not starting TestingSettingsActivity.");
+                }
+            } else {
+                Log.w(TAG, "UserManager is null, not starting TestingSettingsActivity");
+            }
         }
     }
 

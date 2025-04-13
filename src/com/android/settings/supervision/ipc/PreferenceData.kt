@@ -1,0 +1,73 @@
+/*
+ * Copyright (C) 2025 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.android.settings.supervision.ipc
+
+import android.os.Bundle
+
+/**
+ * Data class representing preference information, used for displaying preference items.
+ *
+ * This class encapsulates data such as icons, titles, summaries, actions, action icons,
+ * and target packages.
+ * It provides constructors for creating instances from a Bundle and for converting instances back
+ * to a Bundle.
+ *
+ * @property icon Optional icon resource ID for the preference.
+ * @property title Optional title text for the preference.
+ * @property summary Optional summary text for the preference.
+ * @property action Optional {@link Intent} action to be performed when the preference is clicked,
+ * such as {@link #ACTION_VIEW}.
+ * @property trailingIcon Optional trailing icon resource ID.
+ * @property targetPackage Optional target package name for limiting the applications that can
+ * perform the action.
+ */
+data class PreferenceData(
+    val icon: Int? = null,
+    val title: CharSequence? = null,
+    val summary: CharSequence? = null,
+    var action: CharSequence? = null,
+    var trailingIcon: Int? = null,
+    var targetPackage: CharSequence? = null
+) {
+    constructor(bundle: Bundle) : this(
+        icon = bundle.getInt(ICON, -1).takeIf { it != -1 },
+        title = bundle.getCharSequence(TITLE),
+        summary = bundle.getCharSequence(SUMMARY),
+        action = bundle.getCharSequence(ACTION),
+        trailingIcon = bundle.getInt(ACTION_ICON, -1).takeIf { it != -1 },
+        targetPackage = bundle.getCharSequence(TARGET_PACKAGE)
+    )
+
+    fun toBundle(): Bundle {
+        return Bundle().apply {
+            icon?.let { putInt(ICON, it) }
+            title?.let { putCharSequence(TITLE, it) }
+            summary?.let { putCharSequence(SUMMARY, it) }
+            action?.let { putCharSequence(ACTION, it) }
+            trailingIcon?.let { putInt(ACTION_ICON, it) }
+            targetPackage?.let { putCharSequence(TARGET_PACKAGE, it) }
+        }
+    }
+
+    companion object {
+        private const val ICON = "icon"
+        private const val TITLE = "title"
+        private const val SUMMARY = "summary"
+        private const val ACTION = "action"
+        private const val ACTION_ICON = "trailing_icon"
+        private const val TARGET_PACKAGE = "target_package"
+    }
+}

@@ -19,6 +19,8 @@ package com.android.settings.connecteddevice.audiosharing;
 import android.annotation.IntRange;
 import android.bluetooth.BluetoothCsipSetCoordinator;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothLeAudio;
+import android.bluetooth.BluetoothLeAudioCodecStatus;
 import android.bluetooth.BluetoothLeBroadcastAssistant;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
@@ -46,10 +48,12 @@ import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.LeAudioProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.bluetooth.VolumeControlProfile;
+import com.android.settingslib.flags.Flags;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -65,6 +69,7 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
 
     @Nullable private final LocalBluetoothManager mBtManager;
     @Nullable private final LocalBluetoothProfileManager mProfileManager;
+    @Nullable private final LeAudioProfile mLeAudio;
     @Nullable private final LocalBluetoothLeBroadcastAssistant mAssistant;
     @Nullable private final VolumeControlProfile mVolumeControl;
     @Nullable private final ContentResolver mContentResolver;
@@ -173,10 +178,37 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
                         @NonNull BluetoothLeBroadcastReceiveState state) {}
             };
 
+    @VisibleForTesting
+    final BluetoothLeAudio.Callback mLeAudioCallback = new BluetoothLeAudio.Callback() {
+        @Override
+        public void onBroadcastToUnicastFallbackGroupChanged(int groupId) {
+            if (!Flags.adoptPrimaryGroupManagementApiV2()) return;
+            Log.d(TAG, "onBroadcastToUnicastFallbackGroupChanged, group id = " + groupId);
+            for (AudioSharingDeviceVolumePreference preference : mVolumePreferences) {
+                int order = getPreferenceOrderForDevice(preference.getCachedDevice());
+                AudioSharingUtils.postOnMainThread(mContext, () -> preference.setOrder(order));
+            }
+        }
+
+        @Override
+        public void onCodecConfigChanged(int i,
+                @NonNull BluetoothLeAudioCodecStatus bluetoothLeAudioCodecStatus) {}
+
+        @Override
+        public void onGroupNodeAdded(@NonNull BluetoothDevice bluetoothDevice, int i) {}
+
+        @Override
+        public void onGroupNodeRemoved(@NonNull BluetoothDevice bluetoothDevice, int i) {}
+
+        @Override
+        public void onGroupStatusChanged(int i, int i1) {}
+    };
+
     public AudioSharingDeviceVolumeGroupController(Context context) {
         super(context, KEY);
         mBtManager = Utils.getLocalBtManager(mContext);
         mProfileManager = mBtManager == null ? null : mBtManager.getProfileManager();
+        mLeAudio = mProfileManager == null ? null : mProfileManager.getLeAudioProfile();
         mAssistant =
                 mProfileManager == null
                         ? null
@@ -194,6 +226,8 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
 
         @Override
         public void onChange(boolean selfChange) {
+            if (Flags.adoptPrimaryGroupManagementApiV2()) return;
+            // TODO: remove content observer once switch to API
             Log.d(TAG, "onChange, fallback device group id has been changed");
             for (AudioSharingDeviceVolumePreference preference : mVolumePreferences) {
                 int order = getPreferenceOrderForDevice(preference.getCachedDevice());
@@ -358,7 +392,8 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
         if (mAssistant == null
                 || mVolumeControl == null
                 || mBluetoothDeviceUpdater == null
-                || mContentResolver == null
+                || (Flags.adoptPrimaryGroupManagementApiV2() ? mLeAudio == null
+                : mContentResolver == null)
                 || !AudioSharingUtils.isAudioSharingProfileReady(mProfileManager)) {
             Log.d(TAG, "Skip registerCallbacks(). Profile is not ready.");
             return;
@@ -369,10 +404,19 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
             mVolumeControl.registerCallback(mExecutor, mVolumeControlCallback);
             mBluetoothDeviceUpdater.registerCallback();
             mBluetoothDeviceUpdater.refreshPreference();
-            mContentResolver.registerContentObserver(
-                    Settings.Secure.getUriFor(BluetoothUtils.getPrimaryGroupIdUriForBroadcast()),
-                    false,
-                    mSettingsObserver);
+            if (Flags.adoptPrimaryGroupManagementApiV2()) {
+                if (mLeAudio != null) { // To pass nullability pre-submit
+                    mLeAudio.registerCallback(mExecutor, mLeAudioCallback);
+                }
+            } else {
+                if (mContentResolver != null) { // To pass nullability pre-submit
+                    mContentResolver.registerContentObserver(
+                            Settings.Secure.getUriFor(
+                                    BluetoothUtils.getPrimaryGroupIdUriForBroadcast()),
+                            false,
+                            mSettingsObserver);
+                }
+            }
             mCallbacksRegistered.set(true);
         }
     }
@@ -385,7 +429,8 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
         if (mAssistant == null
                 || mVolumeControl == null
                 || mBluetoothDeviceUpdater == null
-                || mContentResolver == null
+                || (Flags.adoptPrimaryGroupManagementApiV2() ? mLeAudio == null
+                : mContentResolver == null)
                 || !AudioSharingUtils.isAudioSharingProfileReady(mProfileManager)) {
             Log.d(TAG, "Skip unregisterCallbacks(). Profile is not ready.");
             return;
@@ -395,7 +440,15 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
             mAssistant.unregisterServiceCallBack(mBroadcastAssistantCallback);
             mVolumeControl.unregisterCallback(mVolumeControlCallback);
             mBluetoothDeviceUpdater.unregisterCallback();
-            mContentResolver.unregisterContentObserver(mSettingsObserver);
+            if (Flags.adoptPrimaryGroupManagementApiV2()) {
+                if (mLeAudio != null) { // To pass nullability pre-submit
+                    mLeAudio.unregisterCallback(mLeAudioCallback);
+                }
+            } else {
+                if (mContentResolver != null) { // To pass nullability pre-submit
+                    mContentResolver.unregisterContentObserver(mSettingsObserver);
+                }
+            }
             mValueMap.clear();
             mCallbacksRegistered.set(false);
         }

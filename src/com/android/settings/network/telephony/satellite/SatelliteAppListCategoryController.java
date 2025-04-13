@@ -38,7 +38,6 @@ import com.android.settings.network.telephony.TelephonyBasePreferenceController;
 import com.android.settingslib.Utils;
 
 import java.util.List;
-import java.util.Set;
 
 /** A controller to show some of apps info which supported on Satellite service. */
 public class SatelliteAppListCategoryController extends TelephonyBasePreferenceController {
@@ -58,7 +57,7 @@ public class SatelliteAppListCategoryController extends TelephonyBasePreferenceC
         super(context, preferenceKey);
     }
 
-    /** Initialize the necessary applications' data*/
+    /** Initialize the necessary applications' data */
     public void init(int subId, @NonNull PersistableBundle configBundle, boolean isSmsAvailable,
             boolean isDataAvailable) {
         mSubId = subId;
@@ -121,20 +120,7 @@ public class SatelliteAppListCategoryController extends TelephonyBasePreferenceC
                 == CARRIER_ROAMING_NTN_CONNECT_MANUAL) {
             return mIsSmsAvailable;
         }
-        SatelliteManager satelliteManager = mContext.getSystemService(SatelliteManager.class);
-        if (satelliteManager == null) {
-            Log.d(TAG, "SatelliteManager is null.");
-            return false;
-        }
-        try {
-            Set<Integer> restrictionReason =
-                    satelliteManager.getAttachRestrictionReasonsForCarrier(mSubId);
-            return !restrictionReason.contains(
-                    SatelliteManager.SATELLITE_COMMUNICATION_RESTRICTION_REASON_ENTITLEMENT);
-        } catch (SecurityException | IllegalStateException | IllegalArgumentException ex) {
-            Log.d(TAG, "Error to getAttachRestrictionReasonsForCarrier : " + ex);
-            return false;
-        }
+        return SatelliteCarrierSettingUtils.isSatelliteAccountEligible(mContext, mSubId);
     }
 
     static ApplicationInfo getApplicationInfo(Context context, String packageName) {

@@ -696,6 +696,15 @@
         <item>Long</item>
     </string-array>
 
+    <!-- Ethernet IP settings. -->
+    <!-- Note that adding/removing/moving the items will need ethernet settings code change. -->
+    <string-array name="ethernet_ip_settings">
+        <!-- Use DHCP (Dynamic Host Configuration Protocol) for obtaining IP settings [CHAR LIMIT=25] -->
+        <item>DHCP</item>
+        <!-- Use statically defined IP settings [CHAR LIMIT=25]-->
+        <item>Static</item>
+    </string-array>
+
     <!-- Values for the list of long press timeout options. -->
     <string-array name="long_press_timeout_selector_values" translatable="false">
         <item>400</item>

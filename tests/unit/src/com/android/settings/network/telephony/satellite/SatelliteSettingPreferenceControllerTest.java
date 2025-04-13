@@ -59,7 +59,7 @@ import org.mockito.junit.MockitoRule;
 
 @RunWith(AndroidJUnit4.class)
 @UiThreadTest
-public class SatelliteSettingsPreferenceControllerTest {
+public class SatelliteSettingPreferenceControllerTest {
     private static final String KEY = "SatelliteSettingsPreferenceControllerTest";
     private static final int TEST_SUB_ID = 5;
 

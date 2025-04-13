@@ -810,7 +810,7 @@
     <!-- Location settings footer warning text when location is off [CHAR LIMIT=NONE] -->
     <string name="location_settings_footer_location_off">
         Location access is off for apps and services. Your device location may still be sent to
-        emergency responders when you call or text an emergency number.
+        emergency responders when you contact an emergency number.
     </string>
     <!-- Location settings footer link to support page [CHAR LIMIT=NONE] -->
     <string name="location_settings_footer_learn_more_link" translatable="false">
@@ -2326,6 +2326,8 @@
 
     <!-- Used in the Wi-Fi settings screen to control turning on/off Wi-Fi entirely [CHAR LIMIT=30]-->
     <string name="wifi_settings_primary_switch_title">Use Wi\u2011Fi</string>
+    <!-- Category name of Wi-fi networks [CHAR LIMIT=60] -->
+    <string name="wifi_networks_category">Networks</string>
     <!-- Title of the Wi-fi settings screen -->
     <string name="wifi_settings_category">Wi\u2011Fi settings</string>
     <!-- Used by Account creation for turning on Wi-Fi  [CHAR LIMIT=60] -->
@@ -2719,6 +2721,32 @@
     <string name="hotspot_connection_category">Hotspot connection</string>
     <!-- Connection strength preference in Hotspot connection preference category [CHAR LIMIT=NONE]-->
     <string name="hotspot_connection_strength">Connection strength</string>
+    <!-- Hint text for the IP address -->
+    <string name="ethernet_ip_address_hint" translatable="false">192.168.1.128</string>
+    <!-- Hint text for DNS -->
+    <string name="ethernet_dns1_hint" translatable="false">8.8.8.8</string>
+    <!-- Hint text for DNS -->
+    <string name="ethernet_dns2_hint" translatable="false">8.8.4.4</string>
+    <!-- Hint text for the gateway -->
+    <string name="ethernet_gateway_hint" translatable="false">192.168.1.1</string>
+    <!-- Hint text for network prefix length -->
+    <string name="ethernet_network_prefix_length_hint" translatable="false">24</string>
+    <!-- Label for the DNS (first one) -->
+    <string name="ethernet_dns1">DNS 1 (unless overridden by private DNS)</string>
+    <!-- Label for the DNS (second one)-->
+    <string name="ethernet_dns2">DNS 2 (unless overridden by private DNS)</string>
+    <!-- Label for the gateway of the network -->
+    <string name="ethernet_gateway">Gateway</string>
+    <!-- Label for the network prefix of the network [CHAR LIMIT=25]-->
+    <string name="ethernet_network_prefix_length">Network prefix length</string>
+    <!-- Label for the spinner to show ip settings [CHAR LIMIT=25] -->
+    <string name="ethernet_ip_settings">IP settings</string>
+    <!-- Label for the ethernet config dialog submit button [CHAR LIMIT=25] -->
+    <string name="ethernet_config_submit">Submit</string>
+    <!-- Label for the ethernet config dialog cancel button [CHAR LIMIT=25] -->
+    <string name="ethernet_config_cancel">Cancel</string>
+    <!-- Label for the ethernet config dialog title [CHAR LIMIT=25] -->
+    <string name="ethernet_config_title">Ethernet Settings</string>
 
     <!-- Wifi saved access points.  Used as a label under the shortcut icon that goes to Wifi saved access points. [CHAR LIMIT=20] -->
     <string name="wifi_saved_access_points_label">Saved networks</string>
@@ -3348,6 +3376,8 @@
     <string name="screensaver_settings_when_to_dream">When to start</string>
     <!-- [CHAR LIMIT=40] Display settings screen, setting option name to change whether the device wakes up when a lift gesture is detected. -->
     <string name="lift_to_wake_title">Lift to wake</string>
+    <!-- Title of toggle preference in screensaver "when to start" screen to restrict to starting only when charging wirelessly [CHAR LIMIT=NONE] -->
+    <string name="screensaver_restrict_to_wireless_charging_title">Restrict to wireless charging</string>
 
     <!-- [CHAR LIMIT=30] Title of the preference that opens the Ambient display settings screen. -->
     <string name="ambient_display_screen_title">Ambient display</string>
@@ -3764,6 +3794,9 @@
     <!-- Summary for when to automatically show hub mode (widgets on lockscreen): docked  [CHAR LIMIT=100] -->
     <string name="when_to_show_hubmode_docked">While docked</string>
 
+    <!-- Title of toggle preference in glanceable hub "when to start" screen to restrict to starting only when charging wirelessly [CHAR LIMIT=NONE] -->
+    <string name="hub_restrict_to_wireless_charging_title">Restrict to wireless charging</string>
+
     <!-- APN Settings -->
     <!-- APN settings screen title -->
     <string name="apn_settings">APNs</string>
@@ -4037,6 +4070,9 @@
     <!-- Ethernet Tethering settings-->
     <!-- Label for ethernet tether checkbox [CHAR LIMIT=NONE]-->
     <string name="ethernet_tether_checkbox_text">Ethernet tethering</string>
+
+    <!-- Button label to modify a Ethernet network -->
+    <string name="ethernet_modify">Modify</string>
 
     <!-- Tethering footer info [CHAR LIMIT=NONE]-->
     <string name="tethering_footer_info">Use hotspot and tethering to provide internet to other devices through your data connection. Apps can also create a hotspot to share content with nearby devices.</string>
@@ -5321,14 +5357,10 @@
     <string name="accessibility_tap_assistance_title">Timing controls</string>
     <!-- Title for the accessibility system controls page. [CHAR LIMIT=50] -->
     <string name="accessibility_system_controls_title">System controls</string>
-    <!-- Title for the accessibility feedback preference. [CHAR LIMIT=50] -->
-    <string name="accessibility_feedback_title">Feedback</string>
-    <!-- Summary for the accessibility feedback preference. [CHAR LIMIT=100] -->
-    <string name="accessibility_feedback_summary">Help improve by taking a survey</string>
-    <!-- Summary for the accessibility feedback preference is disabled. [CHAR LIMIT=100] -->
-    <string name="accessibility_feedback_disabled_summary">No surveys available</string>
     <!-- The menu item to start the feedback process for the accessibility [CHAR LIMIT=30] -->
     <string name="accessibility_send_feedback_title">Send feedback</string>
+    <!-- The menu item to start the survey process for the accessibility [CHAR LIMIT=30] -->
+    <string name="accessibility_send_survey_title">Rate us</string>
     <!-- Title for the accessibility preference category of services downloaded by the user. [CHAR LIMIT=50] -->
     <string name="user_installed_services_category_title">Downloaded apps</string>
     <!-- Title for the accessibility preference category of settings considered to be experimental, meaning they might be changed or removed in the future. [CHAR LIMIT=50] -->
@@ -5841,6 +5873,12 @@
     <!-- Title for the toggle button that turns on/off the autoclick shortcut. [CHAR_LIMIT=NONE] -->
     <!-- TODO(b/394683600): Update string to translatable once approved by UXW. -->
     <string name="accessibility_autoclick_shortcut_title" translatable="false">Autoclick shortcut</string>
+    <!-- Title for the alert dialog that adjust the time for the mouse to hover before autoclick performs. [CHAR_LIMIT=NONE] -->
+    <!-- TODO(b/394683600): Update string to translatable once approved by UXW. -->
+    <string name="autoclick_delay_before_click_title" translatable="false">Delay before click</string>
+    <!-- Summary for the alert dialog that adjust the time for the mouse to hover before autoclick performs. [CHAR_LIMIT=NONE] -->
+    <!-- TODO(b/394683600): Update string to translatable once approved by UXW. -->
+    <string name="autoclick_delay_before_click_summary" translatable="false">Time it takes to click after the cursor stops moving</string>
     <!-- Title for the alert dialog that adjust auto click cursor area size. [CHAR_LIMIT=NONE] -->
     <!-- TODO(b/394683600): Update string to translatable once approved by UXW. -->
     <string name="autoclick_cursor_area_size_title" translatable="false">Click area</string>
@@ -6120,7 +6158,7 @@
         }</string>
 
     <!-- Summary for autoclick seekbar settings preference when user selected custom item. [CHAR LIMIT=35] -->
-    <string name="accessibilty_autoclick_delay_unit_second">{count, plural,
+    <string name="accessibility_autoclick_delay_unit_second">{count, plural,
         =1      {{time} second}
         other   {{time} seconds}
         }</string>
@@ -8210,8 +8248,6 @@ Data usage charges may apply.</string>
 
     <!-- Title for setting tile leading to network and Internet settings [CHAR LIMIT=40]-->
     <string name="network_dashboard_title">Network &amp; internet</string>
-    <!-- Summary for Network and Internet settings, explaining it contains mobile, wifi setting and data usage settings [CHAR LIMIT=NONE]-->
-    <string name="network_dashboard_summary_mobile">Mobile, Wi\u2011Fi, hotspot</string>
     <!-- Summary for Network and Internet settings, explaining it contains wifi and data usage setting [CHAR LIMIT=NONE]-->
     <string name="network_dashboard_summary_no_mobile">Wi\u2011Fi, hotspot</string>
 
@@ -14512,6 +14548,10 @@ Data usage charges may apply.</string>
     <string name="audio_streams_qr_code_page_password">Password: <xliff:g example="123" id="password">%1$s</xliff:g></string>
     <!-- Le audio streams qr code page description [CHAR LIMIT=NONE] -->
     <string name="audio_streams_qr_code_page_description">To listen to <xliff:g example="Local Music" id="stream_name">%1$s</xliff:g>, other people can connect compatible headphones to their Android device. They can then scan this QR code.</string>
+    <!-- Le audio streams preference subtitle [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_preference_subtitle">Listen to Auracast broadcast</string>
+    <!-- Le audio streams preference subtitle when audio sharing is on[CHAR LIMIT=NONE] -->
+    <string name="audio_streams_preference_subtitle_audio_sharing_on">Turn off audio sharing to find audio streams</string>
     <!-- Le audio streams main page title [CHAR LIMIT=NONE] -->
     <string name="audio_streams_main_page_title">Find an audio stream</string>
     <!-- Le audio streams main page subtitle [CHAR LIMIT=NONE] -->
@@ -14597,13 +14637,19 @@ Data usage charges may apply.</string>
     <string name="supervision_change_pin_preference_title">Change PIN</string>
     <!-- Title for supervision forgot PIN setting entry [CHAR LIMIT=60] -->
     <string name="supervision_add_forgot_pin_preference_title">Forgot PIN</string>
+    <!-- Title for supervision update PIN recovery email setting entry [CHAR LIMIT=60] -->
+    <string name="supervision_update_recovery_email_preference_title">Update recovery email</string>
+    <!-- Title for supervision delete pin setting entry [CHAR LIMIT=60] -->
+    <string name="supervision_delete_pin_preference_title">Delete PIN</string>
+    <!-- Summary for supervision delete pin setting entry [CHAR LIMIT=NONE] -->
+    <string name="supervision_delete_pin_preference_summary">This will reset all your supervision settings</string>
     <!-- Title for web content filters entry [CHAR LIMIT=60] -->
     <string name="supervision_web_content_filters_title">Web content filters</string>
     <!-- Title for web content filters browser category [CHAR LIMIT=60] -->
     <string name="supervision_web_content_filters_browser_title">Google Chrome and Web</string>
     <!-- Title for web content filters browser category block explicit sites option [CHAR LIMIT=60] -->
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title">Try to block explicit sites</string>
-    <!-- Summary for web content filters browser category block explicit sites option [CHAR LIMIT=None] -->
+    <!-- Summary for web content filters browser category block explicit sites option [CHAR LIMIT=NONE] -->
     <string name="supervision_web_content_filters_browser_block_explicit_sites_summary">No filter is perfect, but this should help hide sexually explicit sites</string>
     <!-- Title for web content filters browser category allow all sites option [CHAR LIMIT=60] -->
     <string name="supervision_web_content_filters_browser_allow_all_sites_title">Allow all sites</string>
@@ -14611,11 +14657,11 @@ Data usage charges may apply.</string>
     <string name="supervision_web_content_filters_search_title">Google Search</string>
     <!-- Title for web content filters search category filter on option [CHAR LIMIT=60] -->
     <string name="supervision_web_content_filters_search_filter_on_title">SafeSearch filtering ON</string>
-    <!-- Summary for web content filters search category filter on option [CHAR LIMIT=None] -->
+    <!-- Summary for web content filters search category filter on option [CHAR LIMIT=NONE] -->
     <string name="supervision_web_content_filters_search_filter_on_summary">Helps filter out explicit images, text, and links from search results on this device</string>
     <!-- Title for web content filters search category filter off option [CHAR LIMIT=60] -->
     <string name="supervision_web_content_filters_search_filter_off_title">SafeSearch filtering OFF</string>
-    <!-- Summary for web content filters search category filter off option [CHAR LIMIT=None] -->
+    <!-- Summary for web content filters search category filter off option [CHAR LIMIT=NONE] -->
     <string name="supervision_web_content_filters_search_filter_off_summary">Account settings may still filter or blur explicit results</string>
     <!-- Generic content description that is attached to the preview illustration at the top of an Accessibility feature toggle page. [CHAR LIMIT=NONE] -->
     <!-- Title for supervision PIN verification screen [CHAR LIMIT=60] -->

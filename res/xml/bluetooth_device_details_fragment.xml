@@ -75,9 +75,8 @@
         settings:controller="com.android.settings.slices.SlicePreferenceController"
         settings:allowDividerAbove="true"/>
 
-    <PreferenceCategory
-        android:key="audio_sharing_control"
-        android:layout="@layout/settingslib_preference_category_no_title"/>
+    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
+        android:key="audio_sharing_control"/>
 
     <PreferenceCategory
         android:key="bt_device_slice_category"

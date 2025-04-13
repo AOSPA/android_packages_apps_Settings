@@ -39,9 +39,10 @@ class SubscriptionActivationRepository(
 ) {
     fun isActivationChangeableFlow(): Flow<Boolean> = combine(
         callStateRepository.isInCallFlow(),
+        callStateRepository.isInEmergencyCallFlow(),
         satelliteRepository.getIsSessionStartedFlow()
-    ) { isInCall, isSatelliteModemEnabled ->
-        !isInCall && !isSatelliteModemEnabled
+    ) { isInCall, isInEmergencyCallFlow, isSatelliteModemEnabled ->
+        !isInCall && !isInEmergencyCallFlow && !isSatelliteModemEnabled
     }
 
     /**

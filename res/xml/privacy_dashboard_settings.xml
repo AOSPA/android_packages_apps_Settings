@@ -106,9 +106,8 @@
             "com.android.settings.sound.MediaControlsLockScreenPreferenceController" />
 
     <!-- Privacy Service -->
-    <PreferenceCategory
-        android:key="privacy_services"
-        android:layout="@layout/preference_category_no_label"/>
+    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
+        android:key="privacy_services"/>
 
     <PreferenceCategory
         android:key="dashboard_tile_placeholder"/>

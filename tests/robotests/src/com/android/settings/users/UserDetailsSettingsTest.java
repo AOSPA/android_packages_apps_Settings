@@ -42,6 +42,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
+import android.content.res.Resources;
 import android.multiuser.Flags;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -103,6 +104,8 @@ public class UserDetailsSettingsTest {
 
     @Mock
     private TelephonyManager mTelephonyManager;
+    @Mock
+    private Resources mResources;
 
     private ShadowUserManager mUserManager;
 
@@ -136,6 +139,7 @@ public class UserDetailsSettingsTest {
 
         mActivity = spy(ActivityController.of(new FragmentActivity()).get());
         mContext = spy(RuntimeEnvironment.application);
+        doReturn(mResources).when(mContext).getResources();
         mUserCapabilities = UserCapabilities.create(mContext);
         mUserCapabilities.mUserSwitcherEnabled = true;
         mFragment = spy(new UserDetailsSettings());
@@ -289,9 +293,11 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    public void initialize_adminWithTelephony_shouldShowPhonePreference() {
+    public void initialize_adminWithTelephonyVoiceCapable_shouldShowPhonePreference() {
         setupSelectedUser();
-        doReturn(true).when(mTelephonyManager).isVoiceCapable();
+        doReturn(true).when(mTelephonyManager).isDeviceVoiceCapable();
+        doReturn(true).when(mResources)
+                .getBoolean(com.android.settings.R.bool.config_show_sim_info);
         mUserManager.setIsAdminUser(true);
 
         mFragment.initialize(mActivity, mArguments);
@@ -301,9 +307,11 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    public void initialize_adminNoTelephony_shouldNotShowPhonePreference() {
+    public void initialize_adminNoVoiceCapable_shouldNotShowPhonePreference() {
         setupSelectedUser();
-        doReturn(false).when(mTelephonyManager).isVoiceCapable();
+        doReturn(false).when(mTelephonyManager).isDeviceVoiceCapable();
+        doReturn(true).when(mResources)
+                .getBoolean(com.android.settings.R.bool.config_show_sim_info);
         mUserManager.setIsAdminUser(true);
         doReturn(null).when(mActivity).getSystemService(Context.TELEPHONY_SERVICE);
 
@@ -313,9 +321,25 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    public void initialize_nonAdminWithTelephony_shouldNotShowPhonePreference() {
+    public void initialize_adminNoTelephony_shouldNotShowPhonePreference() {
         setupSelectedUser();
-        doReturn(true).when(mTelephonyManager).isVoiceCapable();
+        doReturn(true).when(mTelephonyManager).isDeviceVoiceCapable();
+        doReturn(false).when(mResources)
+                .getBoolean(com.android.settings.R.bool.config_show_sim_info);
+        mUserManager.setIsAdminUser(true);
+        doReturn(null).when(mActivity).getSystemService(Context.TELEPHONY_SERVICE);
+
+        mFragment.initialize(mActivity, mArguments);
+
+        verify(mFragment).removePreference(KEY_ENABLE_TELEPHONY);
+    }
+
+    @Test
+    public void initialize_nonAdminWithTelephonyVoiceCapable_shouldNotShowPhonePreference() {
+        setupSelectedUser();
+        doReturn(true).when(mTelephonyManager).isDeviceVoiceCapable();
+        doReturn(true).when(mResources)
+                .getBoolean(com.android.settings.R.bool.config_show_sim_info);
         mUserManager.setIsAdminUser(false);
 
         mFragment.initialize(mActivity, mArguments);
@@ -371,7 +395,9 @@ public class UserDetailsSettingsTest {
     public void initialize_adminSelectsRestrictedUser_shouldSetupPreferences() {
         setupSelectedRestrictedUser();
         mUserManager.setIsAdminUser(true);
-        doReturn(true).when(mTelephonyManager).isVoiceCapable();
+        doReturn(true).when(mTelephonyManager).isDeviceVoiceCapable();
+        doReturn(true).when(mResources)
+                .getBoolean(com.android.settings.R.bool.config_show_sim_info);
 
         mFragment.initialize(mActivity, mArguments);
 

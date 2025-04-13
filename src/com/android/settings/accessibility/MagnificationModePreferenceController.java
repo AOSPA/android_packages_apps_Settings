@@ -45,7 +45,6 @@ import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums;
 import com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode;
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.utils.AnnotationSpan;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
@@ -55,8 +54,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Controller that shows the magnification area mode summary and the preference click behavior. */
-public class MagnificationModePreferenceController extends BasePreferenceController implements
-        DialogCreatable, LifecycleObserver, OnCreate, OnSaveInstanceState {
+public class MagnificationModePreferenceController extends MagnificationBasePreferenceController
+        implements DialogCreatable, LifecycleObserver, OnCreate, OnSaveInstanceState {
 
     static final String PREF_KEY = "screen_magnification_mode";
     static final String EXTRA_MODE = "mode";
@@ -93,20 +92,22 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
     private void initModeInfos() {
         mModeInfos.add(new MagnificationModeInfo(mContext.getText(
                 R.string.accessibility_magnification_mode_dialog_option_full_screen), null,
-                R.drawable.a11y_magnification_mode_fullscreen, MagnificationMode.FULLSCREEN));
+                R.drawable.accessibility_magnification_mode_fullscreen,
+                MagnificationMode.FULLSCREEN));
         mModeInfos.add(new MagnificationModeInfo(
                 mContext.getText(R.string.accessibility_magnification_mode_dialog_option_window),
-                null, R.drawable.a11y_magnification_mode_window, MagnificationMode.WINDOW));
+                null, R.drawable.accessibility_magnification_mode_window,
+                MagnificationMode.WINDOW));
         mModeInfos.add(new MagnificationModeInfo(
                 mContext.getText(R.string.accessibility_magnification_mode_dialog_option_switch),
                 mContext.getText(
                         R.string.accessibility_magnification_area_settings_mode_switch_summary),
-                R.drawable.a11y_magnification_mode_switch, MagnificationMode.ALL));
+                R.drawable.accessibility_magnification_mode_switch, MagnificationMode.ALL));
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return isInSetupWizard() ? CONDITIONALLY_UNAVAILABLE : AVAILABLE;
     }
 
     @NonNull
