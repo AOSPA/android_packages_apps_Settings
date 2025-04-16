@@ -262,13 +262,10 @@ public abstract class LocalePickerBaseListPreferenceController extends
         boolean shouldShowLocaleEditor = shouldShowLocaleEditor(localeInfo);
         if (shouldShowLocaleEditor) {
             List<LocaleStore.LocaleInfo> feedItemList = getUserLocaleList();
-            for (LocaleStore.LocaleInfo locale : mLocaleList) {
-                feedItemList.add(locale);
-            }
+            feedItemList.add(localeInfo);
             LocaleList localeList = new LocaleList(feedItemList.stream()
                     .map(LocaleStore.LocaleInfo::getLocale)
                     .toArray(Locale[]::new));
-
             LocaleList.setDefault(localeList);
             LocalePicker.updateLocales(localeList);
             mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_ADD_LANGUAGE);

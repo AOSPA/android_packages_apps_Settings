@@ -65,6 +65,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.AirplaneModeEnabler;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.datausage.DataUsagePreference;
@@ -428,7 +429,8 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
      */
     @VisibleForTesting
     boolean showAnySubscriptionInfo(Context context) {
-        return (context != null) && SubscriptionUtil.isSimHardwareVisible(context);
+        return (context != null) && (Utils.isMobileDataCapable(context)
+                                         || Utils.isVoiceCapable(context));
     }
 
     private void addNetworkMobileProviderController() {

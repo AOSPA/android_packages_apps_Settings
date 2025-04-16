@@ -18,6 +18,7 @@ package com.android.settings.accessibility
 import android.app.settings.SettingsEnums.ACTION_VIBRATION_HAPTICS
 import android.content.Context
 import android.os.VibrationAttributes
+import android.os.VibrationAttributes.Usage
 import android.os.Vibrator
 import android.provider.Settings
 import androidx.preference.Preference
@@ -75,13 +76,10 @@ class VibrationMainSwitchPreference :
         preference.onPreferenceChangeListener = this
     }
 
-    override fun onPreferenceChange(preference: Preference, newValue: Any): Boolean {
-        if (newValue == true) {
+    override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {
+        if (newValue as Boolean) {
             // Play a haptic as preview for the main toggle only when touch feedback is enabled.
-            VibrationPreferenceConfig.playVibrationPreview(
-                preference.context.vibrator,
-                VibrationAttributes.USAGE_TOUCH,
-            )
+            preference.context.playVibrationSettingsPreview(VibrationAttributes.USAGE_TOUCH)
         }
         return true
     }
@@ -92,15 +90,12 @@ class VibrationMainSwitchPreference :
 }
 
 /** Provides SettingsStore for vibration main switch with custom default value. */
-@Suppress("UNCHECKED_CAST")
 class VibrationMainSwitchStore(
     context: Context,
-    private val settingsStore: KeyValueStore = SettingsSystemStore.get(context),
+    override val keyValueStoreDelegate: KeyValueStore = SettingsSystemStore.get(context),
 ) : KeyValueStoreDelegate {
 
-    override val keyValueStoreDelegate
-        get() = settingsStore
-
+    @Suppress("UNCHECKED_CAST")
     override fun <T : Any> getDefaultValue(key: String, valueType: Class<T>) = DEFAULT_VALUE as T
 
     companion object {
@@ -108,7 +103,11 @@ class VibrationMainSwitchStore(
     }
 }
 
-val Context.vibrator: Vibrator
-    get() = getSystemService(Vibrator::class.java)!!
+/** Play vibration preview for given usage. */
+fun Context.playVibrationSettingsPreview(@Usage vibrationUsage: Int) {
+    getSystemService(Vibrator::class.java)?.let {
+        VibrationPreferenceConfig.playVibrationPreview(it, vibrationUsage)
+    }
+}
 
 // LINT.ThenChange(VibrationMainSwitchPreferenceController.java)

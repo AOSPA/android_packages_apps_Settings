@@ -16,7 +16,9 @@
 package com.android.settings.connecteddevice.display;
 
 import static android.view.Display.INVALID_DISPLAY;
+import static android.provider.Settings.Secure.MIRROR_BUILT_IN_DISPLAY;
 
+import static com.android.server.display.feature.flags.Flags.FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT;
 import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.EXTERNAL_DISPLAY_CHANGE_RESOLUTION_FOOTER_RESOURCE;
 import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.EXTERNAL_DISPLAY_NOT_FOUND_FOOTER_RESOURCE;
 import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.EXTERNAL_DISPLAY_SETTINGS_RESOURCE;
@@ -37,6 +39,8 @@ import static org.mockito.Mockito.verify;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.platform.test.annotations.EnableFlags;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.TextView;
 
@@ -228,6 +232,32 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
     @UiThreadTest
     public void testShowEnabledDisplay_OnlyOneDisplayAvailable_displaySizeDisabled() {
         mFlags.setFlag(FLAG_DISPLAY_SIZE_CONNECTED_DISPLAY_SETTING, false);
+        // Only one display available
+        doReturn(List.of(mDisplays.get(0))).when(mMockedInjector).getConnectedDisplays();
+        // Init
+        initFragment();
+        mHandler.flush();
+        assertDisplayListCount(1);
+        var category = getExternalDisplayCategory(0);
+        var pref = category.findPreference(PrefBasics.EXTERNAL_DISPLAY_RESOLUTION.keyForNth(0));
+        assertThat(pref).isNotNull();
+        pref = category.findPreference(PrefBasics.EXTERNAL_DISPLAY_ROTATION.keyForNth(0));
+        assertThat(pref).isNotNull();
+        var footerPref = category.findPreference(PrefBasics.FOOTER.key);
+        assertThat(footerPref).isNotNull();
+        var sizePref = category.findPreference(PrefBasics.EXTERNAL_DISPLAY_SIZE.keyForNth(0));
+        assertThat(sizePref).isNull();
+        assertThat("" + footerPref.getTitle())
+                .isEqualTo(getText(EXTERNAL_DISPLAY_CHANGE_RESOLUTION_FOOTER_RESOURCE));
+    }
+
+    @Test
+    @UiThreadTest
+    @EnableFlags(FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT)
+    public void testShowEnabledDisplay_displaySizeDisabled_isInMirrorMode_doNotShowSizePref() {
+        // Mirror built in display
+        Settings.Secure.putInt(
+                mContext.getContentResolver(), MIRROR_BUILT_IN_DISPLAY, 1);
         // Only one display available
         doReturn(List.of(mDisplays.get(0))).when(mMockedInjector).getConnectedDisplays();
         // Init

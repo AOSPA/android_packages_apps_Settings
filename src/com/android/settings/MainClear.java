@@ -69,7 +69,6 @@ import com.android.settings.biometrics.IdentityCheckBiometricErrorDialog;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settings.flags.Flags;
-import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settings.password.ConfirmLockPattern;
@@ -426,7 +425,8 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
      */
     @VisibleForTesting
     boolean showAnySubscriptionInfo(Context context) {
-        return (context != null) && SubscriptionUtil.isSimHardwareVisible(context);
+        return (context != null) && (Utils.isMobileDataCapable(context)
+                                         || Utils.isVoiceCapable(context));
     }
 
     /**

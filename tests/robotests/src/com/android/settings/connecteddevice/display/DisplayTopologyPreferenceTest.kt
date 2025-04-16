@@ -110,7 +110,8 @@ class DisplayTopologyPreferenceTest {
         val primaryId = 22;
 
         val root = DisplayTopology.TreeNode(
-                primaryId, /* width= */ 200f, /* height= */ 160f, POSITION_LEFT, /* offset= */ 0f)
+                primaryId, /* logicalWidth= */ 200, /* logicalHeight= */ 160,
+                /* logicalDensity= */ 160, POSITION_LEFT, /* offset= */ 0f)
 
         return DisplayTopology(root, primaryId)
     }
@@ -119,10 +120,11 @@ class DisplayTopologyPreferenceTest {
         val primaryId = 1
 
         val child = DisplayTopology.TreeNode(
-                /* displayId= */ 42, /* width= */ 100f, /* height= */ 80f,
-                childPosition, childOffset)
+                /* displayId= */ 42, /* logicalWidth= */ 100, /* logicalHeight= */ 80,
+                /* logicalDensity= */ 160, childPosition, childOffset)
         val root = DisplayTopology.TreeNode(
-                primaryId, /* width= */ 200f, /* height= */ 160f, POSITION_LEFT, /* offset= */ 0f)
+                primaryId, /* logicalWidth= */ 200, /* logicalHeight= */ 160,
+                /* logicalDensity= */ 160, POSITION_LEFT, /* offset= */ 0f)
         root.addChild(child)
 
         return DisplayTopology(root, primaryId)
@@ -289,7 +291,7 @@ class DisplayTopologyPreferenceTest {
     fun keepOriginalViewsWhenAddingMore() {
         setupTwoDisplays()
         val childrenBefore = getPaneChildren()
-        injector.topology!!.addDisplay(/* displayId= */ 101, 320f, 240f)
+        injector.topology!!.addDisplay(/* displayId= */ 101, 320, 240, /* logicalDensity= */ 160)
         preference.refreshPane()
         val childrenAfter = getPaneChildren()
 
@@ -304,7 +306,8 @@ class DisplayTopologyPreferenceTest {
 
         preference.mTimesRefreshedBlocks = 0
         val newTopology = injector.topology!!.copy()
-        newTopology.addDisplay(/* displayId= */ 8008, /* width= */ 300f, /* height= */ 320f)
+        newTopology.addDisplay(/* displayId= */ 8008, /* logicalWidth= */ 300,
+                /* logicalHeight= */ 320, /* logicalDensity= */ 160)
 
         injector.topology = newTopology
         injector.topologyListener!!.accept(newTopology)

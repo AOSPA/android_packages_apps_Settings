@@ -20,6 +20,8 @@ import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.os.Bundle
 import com.android.settings.R
+import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
+import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.flags.Flags
 import com.android.settings.spa.app.storage.StorageType
 import com.android.settingslib.datastore.KeyValueStore
@@ -64,6 +66,9 @@ class AppInfoStorageScreen(
 
     override val screenTitle: Int
         get() = R.string.storage_label
+
+    override fun tags(context: Context) =
+        arrayOf(TAG_DEVICE_STATE_SCREEN, TAG_DEVICE_STATE_PREFERENCE)
 
     override fun getTitle(context: Context): CharSequence? {
         return appInfo.loadLabel(context.packageManager).toString()

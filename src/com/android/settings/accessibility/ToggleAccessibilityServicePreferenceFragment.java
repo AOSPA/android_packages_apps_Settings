@@ -52,7 +52,6 @@ import com.android.settingslib.accessibility.AccessibilityUtils;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /** Fragment for providing toggle bar and basic accessibility service setup. */
 public class ToggleAccessibilityServicePreferenceFragment extends
@@ -60,7 +59,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     private static final String TAG = "ToggleAccessibilityServicePreferenceFragment";
     private static final String KEY_HAS_LOGGED = "has_logged";
-    private final AtomicBoolean mIsDialogShown = new AtomicBoolean(/* initialValue= */ false);
 
     private Dialog mWarningDialog;
     private ComponentName mTileComponentName;
@@ -222,8 +220,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                 return SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_ENABLE;
             case DialogEnums.DISABLE_WARNING_FROM_TOGGLE:
                 return SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_DISABLE;
-            case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
-                return SettingsEnums.DIALOG_ACCESSIBILITY_TUTORIAL;
             default:
                 return super.getDialogMetricsCategory(dialogId);
         }
@@ -312,7 +308,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                             .isAccessibilityServiceWarningRequired(getAccessibilityServiceInfo());
             if (isWarningRequired) {
                 preference.setChecked(false);
-                showPopupDialog(DialogEnums.ENABLE_WARNING_FROM_SHORTCUT_TOGGLE);
+                showDialog(DialogEnums.ENABLE_WARNING_FROM_SHORTCUT_TOGGLE);
             } else {
                 onAllowButtonFromShortcutToggleClicked();
             }
@@ -331,7 +327,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                 getPrefContext().getSystemService(AccessibilityManager.class)
                         .isAccessibilityServiceWarningRequired(getAccessibilityServiceInfo());
         if (isWarningRequired) {
-            showPopupDialog(DialogEnums.ENABLE_WARNING_FROM_SHORTCUT);
+            showDialog(DialogEnums.ENABLE_WARNING_FROM_SHORTCUT);
         } else {
             onAllowButtonFromShortcutClicked();
         }
@@ -444,8 +440,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     private void onAllowButtonFromEnableToggleClicked() {
         handleConfirmServiceEnabled(/* confirmed= */ true);
         if (serviceSupportsAccessibilityButton()) {
-            mIsDialogShown.set(false);
-            showPopupDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
+            showShortcutsTutorialDialog();
         }
         if (mWarningDialog != null) {
             mWarningDialog.dismiss();
@@ -466,8 +461,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                 .enableShortcutsForTargets(true, shortcutTypes,
                         Set.of(mComponentName.flattenToString()), getPrefContext().getUserId());
 
-        mIsDialogShown.set(false);
-        showPopupDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
+        showShortcutsTutorialDialog();
 
         if (mWarningDialog != null) {
             mWarningDialog.dismiss();
@@ -483,7 +477,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     }
 
     private void onAllowButtonFromShortcutClicked() {
-        mIsDialogShown.set(false);
         EditShortcutsPreferenceFragment.showEditShortcutScreen(
                 getContext(),
                 getMetricsCategory(),
@@ -510,7 +503,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                     getPrefContext().getSystemService(AccessibilityManager.class)
                             .isAccessibilityServiceWarningRequired(getAccessibilityServiceInfo());
             if (isWarningRequired) {
-                showPopupDialog(DialogEnums.ENABLE_WARNING_FROM_TOGGLE);
+                showDialog(DialogEnums.ENABLE_WARNING_FROM_TOGGLE);
             } else {
                 onAllowButtonFromEnableToggleClicked();
             }
@@ -521,15 +514,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
             showDialog(DialogEnums.DISABLE_WARNING_FROM_TOGGLE);
         }
         return true;
-    }
-
-    private void showPopupDialog(int dialogId) {
-        if (mIsDialogShown.compareAndSet(/* expect= */ false, /* update= */ true)) {
-            showDialog(dialogId);
-            setOnDismissListener(
-                    dialog -> mIsDialogShown.compareAndSet(/* expect= */ true, /* update= */
-                            false));
-        }
     }
 
     private void logDisabledState(String packageName) {

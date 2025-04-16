@@ -93,19 +93,30 @@ public class LocationSettingsFooterPreferenceController extends LocationBasePref
     }
 
     private void updateFooterPreference() {
-        String footerString = mContext.getString(R.string.location_settings_footer_general);
+        StringBuilder footerString = new StringBuilder();
         if (mLocationEnabled) {
             if (!TextUtils.isEmpty(mInjectedFooterString)) {
-                footerString = Html.escapeHtml(mInjectedFooterString) + PARAGRAPH_SEPARATOR
-                        + footerString;
+                footerString.append(Html.escapeHtml(mInjectedFooterString) + PARAGRAPH_SEPARATOR);
             }
         } else {
-            footerString = mContext.getString(R.string.location_settings_footer_location_off)
-                    + PARAGRAPH_SEPARATOR
-                    + footerString;
+            if (mPackageManager.hasSystemFeature(PackageManager.FEATURE_TELEPHONY_CALLING)
+                    || mPackageManager.hasSystemFeature(
+                            PackageManager.FEATURE_TELEPHONY_MESSAGING)) {
+                footerString.append(
+                        mContext.getString(
+                                R.string.location_settings_footer_location_off_with_telephony));
+            } else {
+                footerString.append(
+                        mContext.getString(
+                                R.string.location_settings_footer_location_off_no_telephony));
+            }
+            footerString.append(PARAGRAPH_SEPARATOR);
         }
+
+        footerString.append(mContext.getString(R.string.location_settings_footer_general));
+
         if (mFooterPreference != null) {
-            mFooterPreference.setTitle(Html.fromHtml(footerString));
+            mFooterPreference.setTitle(Html.fromHtml(footerString.toString()));
             mFooterPreference.setLearnMoreAction(v -> openLocationLearnMoreLink());
             mFooterPreference.setLearnMoreText(mContext.getString(
                     R.string.location_settings_footer_learn_more_content_description));

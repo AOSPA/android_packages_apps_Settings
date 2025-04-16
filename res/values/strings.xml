@@ -807,10 +807,14 @@
         Apps with the nearby devices permission can determine the
         relative position of connected devices.
     </string>
-    <!-- Location settings footer warning text when location is off [CHAR LIMIT=NONE] -->
-    <string name="location_settings_footer_location_off">
+    <!-- Location settings footer warning text when location is off and calling and messaging are supported [CHAR LIMIT=NONE] -->
+    <string name="location_settings_footer_location_off_with_telephony">
         Location access is off for apps and services. Your device location may still be sent to
         emergency responders when you contact an emergency number.
+    </string>
+    <!-- Location settings footer warning text when location is off and calling and messaging are not supported [CHAR LIMIT=NONE] -->
+    <string name="location_settings_footer_location_off_no_telephony">
+        Location access is off for apps and services.
     </string>
     <!-- Location settings footer link to support page [CHAR LIMIT=NONE] -->
     <string name="location_settings_footer_learn_more_link" translatable="false">
@@ -5065,6 +5069,11 @@
     <string name="three_finger_tap_go_back">Go back</string>
     <!-- Radio button text for 'View recent apps' action. This is one of multiple actions the user can select from the three finger tap customization radio group. The action if selected will show the recent apps when a three-finger tap is performed on a touchpad. [CHAR LIMIT=35] -->
     <string name="three_finger_tap_recent_apps">View recent apps</string>
+
+    <!-- Title text for 'Open another app' action preference. This preference allows the user to select an installed app to to launch when a three-finger tap is performed on a touchpad. [CHAR LIMIT=35] -->
+    <string name="three_finger_tap_launch_app_title">Open another app</string>
+    <!-- Summary text for the 'Open another app' action Preference. [CHAR LIMIT=NONE] -->
+    <string name="three_finger_tap_launch_app_summary">Choose from a list of installed apps</string>
 
     <!-- Title text for 'Go home' gesture education [CHAR LIMIT=35] -->
     <string name="gesture_title_go_home">Go home</string>
@@ -11715,6 +11724,15 @@ Data usage charges may apply.</string>
     <string name="double_tap_power_wallet_action_title">Wallet</string>
     <!-- Setting summary to describe double tap power button will open wallet. [CHAR LIMIT=NONE] -->
     <string name="double_tap_power_wallet_action_summary">Open Wallet</string>
+    <!-- Title text for tip suggesting user to modify lockscreen shortcut. [CHAR LIMIT=100] -->
+    <string name="double_tap_power_lockscreen_shortcut_tip_title">Change lock screen shortcut?</string>
+    <!-- Description text for tip suggesting user to modify lockscreen shortcut. [CHAR LIMIT=200]-->
+    <string name="double_tap_power_lockscreen_shortcut_tip_description"><xliff:g id="double_tap_power_target_action" example="Camera">%1$s</xliff:g> is also your lock screen shortcut. Want to change it?</string>
+    <!-- Title for footer explaining why wallet is not available for the double tap power gesture. [CHAR LIMIT=200]-->
+    <string name="double_tap_power_wallet_footer_title">Wallet is not available. Your current default wallet app does not support the gesture.</string>
+    <!-- Summary for footer explaining why wallet is not available for the double tap power gesture. [CHAR LIMIT=100]-->
+    <string name="double_tap_power_wallet_footer_learn_more_text">Tap here to change it.</string>
+
 
     <!-- Title text for double twist for camera mode [CHAR LIMIT=60]-->
     <string name="double_twist_for_camera_mode_title">Flip camera for selfie</string>

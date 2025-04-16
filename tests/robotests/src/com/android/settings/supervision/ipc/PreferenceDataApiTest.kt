@@ -20,50 +20,52 @@ import org.junit.Test
 
 class PreferenceDataApiTest {
 
-    private val api = PreferenceDataApi()
+    private val preferenceDataApi = PreferenceDataApi()
 
     @Test
     fun testRequestCodec() {
         val request = PreferenceDataRequest(listOf("key1", "key2"))
-        val encoded = api.requestCodec.encode(request)
-        val decoded = api.requestCodec.decode(encoded)
+        val encoded = preferenceDataApi.requestCodec.encode(request)
+        val decoded = preferenceDataApi.requestCodec.decode(encoded)
         assertEquals(request, decoded)
     }
 
     @Test
     fun testResponseCodec() {
-        val response = mapOf(
-            "key1" to PreferenceData(icon = 1, title = "Title 1", summary = "Summary 1"),
-            "key2" to PreferenceData(title = "Title 2"),
-            "key3" to PreferenceData(icon = 3, summary = "Summary 3"),
-            "key4" to PreferenceData(),
-            "key5" to PreferenceData(
-                icon = 1,
-                title = "Title 1",
-                summary = "Summary 1",
-                action = "android.settings.SUPERVISION_UPGRADE",
-                trailingIcon = 2,
-                targetPackage = "com.google.android.gms.kids"
-            ),
-        )
-        val encoded = api.responseCodec.encode(response)
-        val decoded = api.responseCodec.decode(encoded)
+        val response =
+            mapOf(
+                "key1" to PreferenceData(icon = 1, title = "Title 1", summary = "Summary 1"),
+                "key2" to PreferenceData(title = "Title 2"),
+                "key3" to PreferenceData(icon = 3, summary = "Summary 3"),
+                "key4" to PreferenceData(),
+                "key5" to
+                    PreferenceData(
+                        icon = 1,
+                        title = "Title 1",
+                        summary = "Summary 1",
+                        action = "android.settings.SUPERVISION_UPGRADE",
+                        trailingIcon = 2,
+                        targetPackage = "com.google.android.gms.kids",
+                    ),
+            )
+        val encoded = preferenceDataApi.responseCodec.encode(response)
+        val decoded = preferenceDataApi.responseCodec.decode(encoded)
         assertEquals(response, decoded)
     }
 
     @Test
     fun testRequestCodec_emptyList() {
         val request = PreferenceDataRequest(emptyList())
-        val encoded = api.requestCodec.encode(request)
-        val decoded = api.requestCodec.decode(encoded)
+        val encoded = preferenceDataApi.requestCodec.encode(request)
+        val decoded = preferenceDataApi.requestCodec.decode(encoded)
         assertEquals(request, decoded)
     }
 
     @Test
     fun testResponseCodec_emptyMap() {
         val response = emptyMap<String, PreferenceData>()
-        val encoded = api.responseCodec.encode(response)
-        val decoded = api.responseCodec.decode(encoded)
+        val encoded = preferenceDataApi.responseCodec.encode(response)
+        val decoded = preferenceDataApi.responseCodec.decode(encoded)
         assertEquals(response, decoded)
     }
 }

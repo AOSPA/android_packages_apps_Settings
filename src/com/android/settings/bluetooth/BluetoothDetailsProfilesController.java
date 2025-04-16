@@ -576,19 +576,21 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             }
         }
 
-        Preference preference = mProfilesContainer.findPreference(KEY_BOTTOM_PREFERENCE);
-        if (preference == null) {
-            preference = new Preference(mContext);
-            if (mHasExtraSpace) {
-                preference.setLayoutResource(R.layout.preference_bluetooth_profile_category);
-            } else {
-                preference.setLayoutResource(R.layout.preference_category_bluetooth_no_padding);
+        if (!Flags.enableBluetoothSettingsExpressiveDesign()) {
+            Preference preference = mProfilesContainer.findPreference(KEY_BOTTOM_PREFERENCE);
+            if (preference == null) {
+                preference = new Preference(mContext);
+                if (mHasExtraSpace) {
+                    preference.setLayoutResource(R.layout.preference_bluetooth_profile_category);
+                } else {
+                    preference.setLayoutResource(R.layout.preference_category_bluetooth_no_padding);
+                }
+                preference.setEnabled(false);
+                preference.setKey(KEY_BOTTOM_PREFERENCE);
+                preference.setOrder(ORDINAL);
+                preference.setSelectable(false);
+                mProfilesContainer.addPreference(preference);
             }
-            preference.setEnabled(false);
-            preference.setKey(KEY_BOTTOM_PREFERENCE);
-            preference.setOrder(ORDINAL);
-            preference.setSelectable(false);
-            mProfilesContainer.addPreference(preference);
         }
 
         Set<String> additionalInvisibleProfiles = mAdditionalInvisibleProfiles.get();

@@ -17,16 +17,12 @@
 package com.android.settings.accessibility;
 
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.DEFAULT;
-import static com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums;
 import static com.android.settings.accessibility.AccessibilityUtil.getShortcutSummaryList;
 import static com.android.settings.accessibility.ToggleFeaturePreferenceFragment.KEY_GENERAL_CATEGORY;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
-import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
@@ -59,7 +55,6 @@ public abstract class AccessibilityShortcutPreferenceFragment extends BaseRestri
     private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
 
     protected ShortcutPreference mShortcutPreference;
-    protected Dialog mDialog;
     private AccessibilityManager.TouchExplorationStateChangeListener
             mTouchExplorationStateChangeListener;
     private AccessibilitySettingsContentObserver mSettingsContentObserver;
@@ -142,40 +137,8 @@ public abstract class AccessibilityShortcutPreferenceFragment extends BaseRestri
         super.onPause();
     }
 
-    @Override
-    public Dialog onCreateDialog(int dialogId) {
-        switch (dialogId) {
-            case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
-                if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
-                    mDialog = AccessibilityShortcutsTutorial
-                            .createAccessibilityTutorialDialogForSetupWizard(
-                                    getPrefContext(), getUserPreferredShortcutTypes(),
-                                    this::callOnTutorialDialogButtonClicked, getLabelName());
-                } else {
-                    mDialog = AccessibilityShortcutsTutorial
-                            .createAccessibilityTutorialDialog(
-                                    getPrefContext(), getUserPreferredShortcutTypes(),
-                                    this::callOnTutorialDialogButtonClicked, getLabelName());
-                }
-                mDialog.setCanceledOnTouchOutside(false);
-                return mDialog;
-            default:
-                throw new IllegalArgumentException("Unsupported dialogId " + dialogId);
-        }
-    }
-
     protected CharSequence getShortcutTitle() {
         return getString(R.string.accessibility_shortcut_title, getLabelName());
-    }
-
-    @Override
-    public int getDialogMetricsCategory(int dialogId) {
-        switch (dialogId) {
-            case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
-                return SettingsEnums.DIALOG_ACCESSIBILITY_TUTORIAL;
-            default:
-                return SettingsEnums.ACTION_UNKNOWN;
-        }
     }
 
     @Override
@@ -202,7 +165,11 @@ public abstract class AccessibilityShortcutPreferenceFragment extends BaseRestri
                 isChecked, shortcutTypes,
                 Set.of(getComponentName().flattenToString()), getPrefContext().getUserId());
         if (isChecked) {
-            showDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
+            AccessibilityShortcutsTutorial.DialogFragment.showDialog(
+                    getChildFragmentManager(),
+                    getUserPreferredShortcutTypes(),
+                    getLabelName(),
+                    WizardManagerHelper.isAnySetupWizard(getIntent()));
         }
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
     }
@@ -234,16 +201,6 @@ public abstract class AccessibilityShortcutPreferenceFragment extends BaseRestri
             resId = R.string.accessibility_shortcut_edit_summary_software;
         }
         return context.getText(resId);
-    }
-
-    /**
-     * This method will be invoked when a button in the tutorial dialog is clicked.
-     *
-     * @param dialog The dialog that received the click
-     * @param which  The button that was clicked
-     */
-    private void callOnTutorialDialogButtonClicked(DialogInterface dialog, int which) {
-        dialog.dismiss();
     }
 
     @VisibleForTesting

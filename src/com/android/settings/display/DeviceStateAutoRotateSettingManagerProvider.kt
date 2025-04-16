@@ -18,14 +18,13 @@ package com.android.settings.display
 
 import android.content.Context
 import android.hardware.devicestate.DeviceStateManager
-import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import com.android.internal.annotations.VisibleForTesting
 import com.android.settingslib.devicestate.AndroidSecureSettings
 import com.android.settingslib.devicestate.DeviceStateAutoRotateSettingManager
 import com.android.settingslib.devicestate.DeviceStateAutoRotateSettingManagerProvider.createInstance
-import com.android.settingslib.devicestate.PosturesHelper
+import com.android.settingslib.devicestate.PostureDeviceStateConverter
 import com.android.settingslib.utils.ThreadUtils
 import com.android.window.flags.Flags
 
@@ -48,7 +47,10 @@ object DeviceStateAutoRotateSettingManagerProvider {
             ThreadUtils.getBackgroundExecutor(),
             AndroidSecureSettings(context.contentResolver),
             Handler(Looper.getMainLooper()),
-            PosturesHelper(context, context.getSystemService(DeviceStateManager::class.java))
+            PostureDeviceStateConverter(
+                context,
+                context.getSystemService(DeviceStateManager::class.java)
+            )
         ).also {
             nullableSingletonSettingManager = it
         }

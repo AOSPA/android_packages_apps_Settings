@@ -17,6 +17,7 @@
 package com.android.settings.sound;
 
 import static com.android.settingslib.media.flags.Flags.enableOutputSwitcherForSystemRouting;
+import static com.android.media.flags.Flags.enableOutputSwitcherPersonalAudioSharing;
 
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcast;
@@ -192,7 +193,9 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
         }
         if (isDeviceBroadcasting()) {
             mPreference.setSummary(R.string.media_output_audio_sharing);
-            mPreference.setEnabled(false);
+            if (!enableOutputSwitcherPersonalAudioSharing()) {
+                mPreference.setEnabled(false);
+            }
         } else {
             mPreference.setSummary(
                     (activeDevice == null)
