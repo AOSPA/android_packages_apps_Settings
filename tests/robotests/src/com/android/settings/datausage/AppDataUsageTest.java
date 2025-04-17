@@ -38,11 +38,13 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
 import android.net.NetworkPolicyManager;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.os.Process;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 import android.util.ArraySet;
 import android.util.FeatureFlagUtils;
 
@@ -52,6 +54,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.annotation.UiThreadTest;
 
+import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
@@ -87,18 +90,27 @@ public class AppDataUsageTest {
 
     @Mock
     private PackageManager mPackageManager;
+    @Mock
+    private TelephonyManager mTelephonyManager;
 
     private IntroPreference mIntroPreference;
 
     private AppDataUsage mFragment;
 
     private Context mContext;
+    private Resources mResources;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
+        when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
+        when(mTelephonyManager.isDataCapable()).thenReturn(true);
+
+        mResources = spy(mContext.getResources());
+        when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(true);
+
         mIntroPreference = new IntroPreference(mContext);
         FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_ENABLE_SPA, true);
     }
@@ -298,11 +310,6 @@ public class AppDataUsageTest {
 
         @Override
         void initCycle(List<Integer> uidList) {
-        }
-
-        @Override
-        public boolean isSimHardwareVisible(Context context) {
-            return true;
         }
     }
 }

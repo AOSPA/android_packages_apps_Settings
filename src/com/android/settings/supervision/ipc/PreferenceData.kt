@@ -20,35 +20,36 @@ import android.os.Bundle
 /**
  * Data class representing preference information, used for displaying preference items.
  *
- * This class encapsulates data such as icons, titles, summaries, actions, action icons,
- * and target packages.
- * It provides constructors for creating instances from a Bundle and for converting instances back
- * to a Bundle.
+ * This class encapsulates data such as icons, titles, summaries, actions, action icons, and target
+ * packages. It provides constructors for creating instances from a Bundle and for converting
+ * instances back to a Bundle.
  *
  * @property icon Optional icon resource ID for the preference.
  * @property title Optional title text for the preference.
  * @property summary Optional summary text for the preference.
  * @property action Optional {@link Intent} action to be performed when the preference is clicked,
- * such as {@link #ACTION_VIEW}.
+ *   such as {@link #ACTION_VIEW}.
  * @property trailingIcon Optional trailing icon resource ID.
  * @property targetPackage Optional target package name for limiting the applications that can
- * perform the action.
+ *   perform the action.
  */
 data class PreferenceData(
     val icon: Int? = null,
     val title: CharSequence? = null,
     val summary: CharSequence? = null,
-    var action: CharSequence? = null,
+    var action: String? = null,
     var trailingIcon: Int? = null,
-    var targetPackage: CharSequence? = null
+    var targetPackage: String? = null,
 ) {
-    constructor(bundle: Bundle) : this(
+    constructor(
+        bundle: Bundle
+    ) : this(
         icon = bundle.getInt(ICON, -1).takeIf { it != -1 },
         title = bundle.getCharSequence(TITLE),
         summary = bundle.getCharSequence(SUMMARY),
-        action = bundle.getCharSequence(ACTION),
+        action = bundle.getString(ACTION),
         trailingIcon = bundle.getInt(ACTION_ICON, -1).takeIf { it != -1 },
-        targetPackage = bundle.getCharSequence(TARGET_PACKAGE)
+        targetPackage = bundle.getString(TARGET_PACKAGE),
     )
 
     fun toBundle(): Bundle {
@@ -56,9 +57,9 @@ data class PreferenceData(
             icon?.let { putInt(ICON, it) }
             title?.let { putCharSequence(TITLE, it) }
             summary?.let { putCharSequence(SUMMARY, it) }
-            action?.let { putCharSequence(ACTION, it) }
+            action?.let { putString(ACTION, it) }
             trailingIcon?.let { putInt(ACTION_ICON, it) }
-            targetPackage?.let { putCharSequence(TARGET_PACKAGE, it) }
+            targetPackage?.let { putString(TARGET_PACKAGE, it) }
         }
     }
 

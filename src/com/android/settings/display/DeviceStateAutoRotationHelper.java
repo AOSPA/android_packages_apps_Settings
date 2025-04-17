@@ -78,7 +78,7 @@ public class DeviceStateAutoRotationHelper {
             int order = -numDeviceStates + i;
             controllers.add(new DeviceStateAutoRotateSettingController(
                     context,
-                    settableDeviceState.getDeviceState(),
+                    settableDeviceState.deviceState(),
                     deviceStateSettingDescriptions[i],
                     order
             ));

@@ -28,11 +28,10 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
+import com.android.settings.Utils
 import com.android.settings.core.BasePreferenceController
 import com.android.settings.deviceinfo.PhoneNumberUtil
-import com.android.settings.network.SubscriptionUtil
 import com.android.settingslib.CustomDialogPreferenceCompat
-import com.android.settingslib.Utils
 import com.android.settingslib.qrcode.QrCodeGenerator
 import com.android.settingslib.spaprivileged.framework.common.userManager
 import kotlinx.coroutines.CoroutineScope
@@ -65,8 +64,8 @@ class SimEidPreferenceController(context: Context, preferenceKey: String) :
      * asynchronously later.
      */
     override fun getAvailabilityStatus() = when {
-        !SubscriptionUtil.isSimHardwareVisible(mContext)
-            || Utils.isWifiOnly(mContext) -> UNSUPPORTED_ON_DEVICE
+        !Utils.isMobileDataCapable(mContext)
+            && !Utils.isVoiceCapable(mContext) -> UNSUPPORTED_ON_DEVICE
         !mContext.userManager.isAdminUser -> DISABLED_FOR_USER
         else -> AVAILABLE
     }

@@ -27,10 +27,11 @@
 
     <PreferenceCategory
         android:key="vibration_category_call"
-        android:title="@string/accessibility_call_vibration_category_title">
+        android:title="@string/accessibility_call_vibration_category_title"
+        android:persistent="false">
 
         <SwitchPreferenceCompat
-            android:key="vibration_preference_ring"
+            android:key="ring_vibration_intensity"
             android:title="@string/accessibility_ring_vibration_title"
             app:keywords="@string/keywords_ring_vibration"
             app:controller="com.android.settings.accessibility.RingVibrationTogglePreferenceController" />

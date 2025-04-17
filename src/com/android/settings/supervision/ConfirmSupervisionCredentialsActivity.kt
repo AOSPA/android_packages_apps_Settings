@@ -15,10 +15,9 @@
  */
 package com.android.settings.supervision
 
-import android.Manifest.permission.USE_BIOMETRIC
+import android.Manifest.permission.USE_BIOMETRIC_INTERNAL
 import android.app.Activity
 import android.app.role.RoleManager
-import android.content.pm.PackageManager
 import android.hardware.biometrics.BiometricManager
 import android.hardware.biometrics.BiometricPrompt
 import android.hardware.biometrics.BiometricPrompt.AuthenticationCallback
@@ -29,7 +28,6 @@ import android.os.Process
 import android.util.Log
 import androidx.annotation.OpenForTesting
 import androidx.annotation.RequiresPermission
-import androidx.annotation.VisibleForTesting
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import com.android.settings.R
@@ -76,16 +74,10 @@ open class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
             }
         }
 
-    @RequiresPermission(USE_BIOMETRIC)
+    @RequiresPermission(USE_BIOMETRIC_INTERNAL)
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // TODO(b/392961554): adapts to new user profile type to trigger PIN verification dialog.
         if (!callerHasSupervisionRole() && !callerIsSystemUid()) {
-            setResult(Activity.RESULT_CANCELED)
-            finish()
-            return
-        }
-        if (checkCallingOrSelfPermission(USE_BIOMETRIC) != PackageManager.PERMISSION_GRANTED) {
             setResult(Activity.RESULT_CANCELED)
             finish()
             return
@@ -93,18 +85,28 @@ open class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
         showBiometricPrompt()
     }
 
-    @RequiresPermission(USE_BIOMETRIC)
+    @RequiresPermission(USE_BIOMETRIC_INTERNAL)
     fun showBiometricPrompt() {
+        val supervisingUserId =
+            SupervisionHelper.getInstance(this).getSupervisingUserHandle()?.identifier
+        if (supervisingUserId == null) {
+            Log.w(SupervisionLog.TAG, "supervisingUserId is null")
+            setResult(Activity.RESULT_CANCELED)
+            finish()
+            return
+        }
+
         val biometricPrompt =
             BiometricPrompt.Builder(this)
                 .setTitle(getString(R.string.supervision_full_screen_pin_verification_title))
                 .setConfirmationRequired(true)
                 .setAllowedAuthenticators(BiometricManager.Authenticators.DEVICE_CREDENTIAL)
                 .build()
-        biometricPrompt.authenticate(
+        biometricPrompt.authenticateUser(
             CancellationSignal(),
             ContextCompat.getMainExecutor(this),
             mAuthenticationCallback,
+            supervisingUserId,
         )
     }
 

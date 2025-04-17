@@ -17,6 +17,7 @@
 package com.android.settings.bluetooth;
 
 import static com.android.settings.bluetooth.Utils.preloadAndRun;
+import static com.android.settingslib.flags.Flags.refactorBatteryLevelDisplay;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -51,6 +52,7 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.flags.Flags;
 import com.android.settings.fuelgauge.BatteryMeterView;
+import com.android.settingslib.bluetooth.BatteryLevelsInfo;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -256,12 +258,21 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                     Suppliers.memoize(() -> !mCachedDevice.isConnected() || mCachedDevice.isBusy());
             Supplier<Boolean> isUntetheredHeadset =
                     Suppliers.memoize(() -> isUntetheredHeadset(mCachedDevice.getDevice()));
+            Supplier<BatteryLevelsInfo> battery =
+                    Suppliers.memoize(() -> mCachedDevice.getBatteryLevelsInfo());
             Supplier<String> summaryText =
                     Suppliers.memoize(
                             () -> {
                                 if (disconnected.get() || isUntetheredHeadset.get()) {
                                     return mCachedDevice.getConnectionSummary(
                                             /* shortSummary= */ true);
+                                }
+                                if (refactorBatteryLevelDisplay()) {
+                                    return mCachedDevice.getConnectionSummary(
+                                            battery.get() != null
+                                                    && battery.get().getOverallBatteryLevel()
+                                                            > BluetoothDevice
+                                                                    .BATTERY_LEVEL_UNKNOWN);
                                 }
                                 return mCachedDevice.getConnectionSummary(
                                         BluetoothUtils.getIntMetaData(
@@ -294,7 +305,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                                             mCachedDevice.getDevice(),
                                             BluetoothDevice.METADATA_UNTETHERED_CASE_BATTERY));
             preloadAndRun(
-                    List.of(deviceName, disconnected, isUntetheredHeadset, summaryText),
+                    List.of(deviceName, disconnected, isUntetheredHeadset, summaryText, battery),
                     () -> {
                         final TextView title =
                                 mLayoutPreference.findViewById(R.id.entity_header_title);
@@ -302,14 +313,25 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                         final TextView summary =
                                 mLayoutPreference.findViewById(R.id.entity_header_summary);
 
-                        final boolean isBatteryLevelAvailable =
-                                Flags.enableBatteryLevelDisplay()
-                                        && isBattEnabled.get()
-                                        && (leftBatteryLevel.get() > BluetoothUtils.META_INT_ERROR
-                                                || rightBatteryLevel.get()
-                                                        > BluetoothUtils.META_INT_ERROR
-                                                || caseBatteryLevel.get()
-                                                        > BluetoothUtils.META_INT_ERROR);
+                        final boolean isBatteryLevelAvailable;
+                        if (refactorBatteryLevelDisplay()) {
+                            isBatteryLevelAvailable =
+                                    Flags.enableBatteryLevelDisplay()
+                                            && isBattEnabled.get()
+                                            && battery.get() != null
+                                            && battery.get().getOverallBatteryLevel()
+                                                    > BluetoothDevice.BATTERY_LEVEL_UNKNOWN;
+                        } else {
+                            isBatteryLevelAvailable =
+                                    Flags.enableBatteryLevelDisplay()
+                                            && isBattEnabled.get()
+                                            && (leftBatteryLevel.get()
+                                                            > BluetoothUtils.META_INT_ERROR
+                                                    || rightBatteryLevel.get()
+                                                            > BluetoothUtils.META_INT_ERROR
+                                                    || caseBatteryLevel.get()
+                                                            > BluetoothUtils.META_INT_ERROR);
+                        }
 
                         if (disconnected.get() && !isBatteryLevelAvailable) {
                             summary.setText(summaryText.get());
@@ -322,6 +344,9 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                                     mLayoutPreference.findViewById(R.id.layout_left),
                                     BluetoothDevice.METADATA_UNTETHERED_LEFT_ICON,
                                     BluetoothDevice.METADATA_UNTETHERED_LEFT_BATTERY,
+                                    battery.get() != null
+                                            ? battery.get().getLeftBatteryLevel()
+                                            : BluetoothDevice.BATTERY_LEVEL_UNKNOWN,
                                     BluetoothDevice.METADATA_UNTETHERED_LEFT_LOW_BATTERY_THRESHOLD,
                                     BluetoothDevice.METADATA_UNTETHERED_LEFT_CHARGING,
                                     R.string.bluetooth_left_name,
@@ -331,6 +356,9 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                                     mLayoutPreference.findViewById(R.id.layout_middle),
                                     BluetoothDevice.METADATA_UNTETHERED_CASE_ICON,
                                     BluetoothDevice.METADATA_UNTETHERED_CASE_BATTERY,
+                                    battery.get() != null
+                                            ? battery.get().getCaseBatteryLevel()
+                                            : BluetoothDevice.BATTERY_LEVEL_UNKNOWN,
                                     BluetoothDevice.METADATA_UNTETHERED_CASE_LOW_BATTERY_THRESHOLD,
                                     BluetoothDevice.METADATA_UNTETHERED_CASE_CHARGING,
                                     R.string.bluetooth_middle_name,
@@ -340,6 +368,9 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                                     mLayoutPreference.findViewById(R.id.layout_right),
                                     BluetoothDevice.METADATA_UNTETHERED_RIGHT_ICON,
                                     BluetoothDevice.METADATA_UNTETHERED_RIGHT_BATTERY,
+                                    battery.get() != null
+                                            ? battery.get().getRightBatteryLevel()
+                                            : BluetoothDevice.BATTERY_LEVEL_UNKNOWN,
                                     BluetoothDevice.METADATA_UNTETHERED_RIGHT_LOW_BATTERY_THRESHOLD,
                                     BluetoothDevice.METADATA_UNTETHERED_RIGHT_CHARGING,
                                     R.string.bluetooth_right_name,
@@ -359,6 +390,9 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                                     mLayoutPreference.findViewById(R.id.layout_middle),
                                     BluetoothDevice.METADATA_MAIN_ICON,
                                     BluetoothDevice.METADATA_MAIN_BATTERY,
+                                    battery.get() != null
+                                            ? battery.get().getOverallBatteryLevel()
+                                            : BluetoothDevice.BATTERY_LEVEL_UNKNOWN,
                                     BluetoothDevice.METADATA_MAIN_LOW_BATTERY_THRESHOLD,
                                     BluetoothDevice.METADATA_MAIN_CHARGING,
                                     /* titleResId= */ 0,
@@ -401,6 +435,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
             LinearLayout linearLayout,
             int iconMetaKey,
             int batteryMetaKey,
+            int batteryValue,
             int lowBatteryMetaKey,
             int chargeMetaKey,
             int titleResId,
@@ -425,8 +460,14 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                                     BluetoothUtils.getIntMetaData(
                                             bluetoothDevice, lowBatteryMetaKey);
                             if (level == BluetoothUtils.META_INT_ERROR) {
-                                if (batteryMetaKey
-                                        == BluetoothDevice.METADATA_UNTETHERED_CASE_BATTERY) {
+                                if ((refactorBatteryLevelDisplay()
+                                        && lowBatteryMetaKey
+                                        == BluetoothDevice
+                                        .METADATA_UNTETHERED_CASE_LOW_BATTERY_THRESHOLD)
+                                        || (!refactorBatteryLevelDisplay()
+                                        && batteryMetaKey
+                                        == BluetoothDevice
+                                        .METADATA_UNTETHERED_CASE_BATTERY)) {
                                     level = CASE_LOW_BATTERY_LEVEL;
                                 } else {
                                     level = LOW_BATTERY_LEVEL;
@@ -454,6 +495,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                                 chargeMetaKey,
                                 titleResId,
                                 deviceId,
+                                batteryValue,
                                 iconUri,
                                 batteryLevel,
                                 charging,
@@ -470,6 +512,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
             int chargeMetaKey,
             int titleResId,
             int deviceId,
+            int batteryValue,
             Supplier<String> preloadedIconUri,
             Supplier<Integer> preloadedBatteryLevel,
             Supplier<Boolean> preloadedCharging,
@@ -488,7 +531,12 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
             imageView.setImageDrawable(pair.first);
             imageView.setContentDescription(pair.second);
         }
-        final int batteryLevel = preloadedBatteryLevel.get();
+        final int batteryLevel;
+        if (refactorBatteryLevelDisplay()) {
+            batteryLevel = batteryValue;
+        } else {
+            batteryLevel = preloadedBatteryLevel.get();
+        }
         final boolean charging = preloadedCharging.get();
         int lowBatteryLevel = preloadedLowBatteryLevel.get();
 
@@ -496,7 +544,8 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                 + ", updateSubLayout() icon : " + iconMetaKey + ", battery : " + batteryMetaKey
                 + ", charge : " + chargeMetaKey + ", batteryLevel : " + batteryLevel
                 + ", charging : " + charging + ", iconUri : " + iconUri
-                + ", lowBatteryLevel : " + lowBatteryLevel);
+                + ", lowBatteryLevel : " + lowBatteryLevel
+                + ", refactored : " + refactorBatteryLevelDisplay());
 
         if (deviceId == LEFT_DEVICE_ID || deviceId == RIGHT_DEVICE_ID) {
             showBatteryPredictionIfNecessary(linearLayout, deviceId, batteryLevel);
@@ -515,17 +564,26 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                     linearLayout.setVisibility(View.VISIBLE);
                     linearLayout.findViewById(R.id.bt_battery_icon).setVisibility(View.GONE);
 
-                    int level = preloadedNativeBatteryLevel.get();
-                    if (level != BluetoothDevice.BATTERY_LEVEL_UNKNOWN
-                            && level != BluetoothDevice.BATTERY_LEVEL_BLUETOOTH_OFF) {
-                        batterySummaryView.setText(
-                                com.android.settings.Utils.formatPercentage(level));
-                        batterySummaryView.setVisibility(View.VISIBLE);
-                        showBatteryRing(linearLayout, level);
-                    } else {
+                    if (refactorBatteryLevelDisplay()) {
                         batterySummaryView.setVisibility(View.GONE);
                         if (Flags.enableBluetoothDeviceDetailsPolish()) {
                             linearLayout.findViewById(R.id.battery_ring).setVisibility(View.GONE);
+                        }
+                    } else {
+                        int level = preloadedNativeBatteryLevel.get();
+                        if (level != BluetoothDevice.BATTERY_LEVEL_UNKNOWN
+                                && level != BluetoothDevice.BATTERY_LEVEL_BLUETOOTH_OFF) {
+                            batterySummaryView.setText(
+                                    com.android.settings.Utils.formatPercentage(level));
+                            batterySummaryView.setVisibility(View.VISIBLE);
+                            showBatteryRing(linearLayout, level);
+                        } else {
+                            batterySummaryView.setVisibility(View.GONE);
+                            if (Flags.enableBluetoothDeviceDetailsPolish()) {
+                                linearLayout
+                                        .findViewById(R.id.battery_ring)
+                                        .setVisibility(View.GONE);
+                            }
                         }
                     }
                 } else {

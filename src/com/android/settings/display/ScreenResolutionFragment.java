@@ -28,7 +28,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Display;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
@@ -53,15 +52,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 /** Preference fragment used for switch screen resolution */
 @SearchIndexable
 public class ScreenResolutionFragment extends RadioButtonPickerFragment {
-    public static final String NON_BREAKING_SPACE = "\u00A0";
-
     private static final String TAG = "ScreenResolution";
 
     private Resources mResources;
     private static final String SCREEN_RESOLUTION = "user_selected_resolution";
     private static final String SCREEN_RESOLUTION_KEY = "screen_resolution";
-    private static final int RESOLUTION_SPACE_THRESHOLD = 1_000;
-    private static final int RESOLUTION_SPACE_THRESHOLD_DIGIT_AMOUNT = 3;
     private Display mDefaultDisplay;
     private String[] mScreenResolutionOptions;
     private Set<Point> mResolutions;
@@ -99,43 +94,10 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
 
 
     private SpannableString getResolutionSpannable(int width, int height) {
-        String resolutionString = getResolutionString(width, height);
+        String resolutionString = width + " x " + height;
         String accessibleText = mResources.getString(
                 R.string.screen_resolution_delimiter_a11y, width, height);
         return Utils.createAccessibleSequence(resolutionString, accessibleText);
-    }
-
-    /**
-     * Formats the given width and height into a resolution string, inserting non-breaking
-     * spaces as thousand separators if the values exceed a specified threshold.
-     *
-     * @param width  The width value.
-     * @param height The height value.
-     * @return A formatted string representing the resolution (e.g., "1 080 x 1 280").
-     * Non-breaking spaces are used to ensure the numbers and 'x' stay together.
-     * If the width or height is less than RESOLUTION_SPACE_THRESHOLD, no spaces are added.
-     */
-    @NonNull
-    @VisibleForTesting
-    static String getResolutionString(int width, int height) {
-        StringBuilder resolutionStrBldr = new StringBuilder(String.valueOf(width));
-        if (width >= RESOLUTION_SPACE_THRESHOLD) {
-            int insertWidthPosition =
-                    resolutionStrBldr.length() - RESOLUTION_SPACE_THRESHOLD_DIGIT_AMOUNT;
-            resolutionStrBldr.insert(insertWidthPosition, NON_BREAKING_SPACE);
-        }
-        resolutionStrBldr.append(NON_BREAKING_SPACE);
-        resolutionStrBldr.append("x");
-        resolutionStrBldr.append(NON_BREAKING_SPACE);
-
-        resolutionStrBldr.append(String.valueOf(height));
-        if (height >= RESOLUTION_SPACE_THRESHOLD) {
-            int insertHeightPosition =
-                    resolutionStrBldr.length() - RESOLUTION_SPACE_THRESHOLD_DIGIT_AMOUNT;
-            resolutionStrBldr.insert(insertHeightPosition, NON_BREAKING_SPACE);
-        }
-
-        return resolutionStrBldr.toString();
     }
 
     @Override

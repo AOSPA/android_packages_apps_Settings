@@ -30,10 +30,10 @@ import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.viewModels
 import androidx.preference.Preference
 import com.android.settings.R
+import com.android.settings.Utils
 import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.datausage.lib.BillingCycleRepository
 import com.android.settings.datausage.lib.NetworkUsageData
-import com.android.settings.network.SubscriptionUtil
 import com.android.settings.network.telephony.SubscriptionRepository
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import com.android.settingslib.spaprivileged.framework.common.userManager
@@ -100,7 +100,7 @@ open class DataUsageList : DashboardFragment() {
         val warningPreference = findPreference<Preference>(KEY_WARNING)!!
         if (template.matchRule != NetworkTemplate.MATCH_WIFI) {
             warningPreference.setSummary(R.string.operator_warning)
-        } else if (SubscriptionUtil.isSimHardwareVisible(context)) {
+        } else if (Utils.isMobileDataCapable(context)) {
             warningPreference.setSummary(R.string.non_carrier_data_usage_warning)
         }
     }

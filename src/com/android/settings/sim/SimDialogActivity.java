@@ -41,9 +41,9 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.flags.Flags;
 import com.android.settings.network.CarrierConfigCache;
-import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.network.telephony.SubscriptionActionDialogActivity;
@@ -84,8 +84,8 @@ public class SimDialogActivity extends FragmentActivity {
             finish();
             return;
         }
-        if (!SubscriptionUtil.isSimHardwareVisible(this)) {
-            Log.d(TAG, "Not support on device without SIM.");
+        if (!Utils.isMobileDataCapable(this) && !Utils.isVoiceCapable(this)) {
+            Log.d(TAG, "No support on device without data or voice capabilities.");
             finish();
             return;
         }

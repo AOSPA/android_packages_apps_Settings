@@ -45,7 +45,6 @@ import android.text.TextUtils;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.settings.R;
 import com.android.settings.network.telephony.SubscriptionActionDialogActivity;
 
 import org.junit.Before;
@@ -562,23 +561,6 @@ public class SubscriptionUtilTest {
     @Test
     public void isInactiveInsertedPSim_nullSubInfo_doesNotCrash() {
         assertThat(SubscriptionUtil.isInactiveInsertedPSim(null)).isFalse();
-    }
-
-    @Test
-    public void isSimHardwareVisible_configAsInvisible_returnFalse() {
-        when(mResources.getBoolean(R.bool.config_show_sim_info))
-                .thenReturn(false);
-
-        assertThat(SubscriptionUtil.isSimHardwareVisible(mContext)).isFalse();
-    }
-
-    @Test
-    @Ignore("b/339149463")
-    public void isSimHardwareVisible_configAsVisible_returnTrue() {
-        when(mResources.getBoolean(R.bool.config_show_sim_info))
-                .thenReturn(true);
-
-        assertTrue(SubscriptionUtil.isSimHardwareVisible(mContext));
     }
 
     @Test

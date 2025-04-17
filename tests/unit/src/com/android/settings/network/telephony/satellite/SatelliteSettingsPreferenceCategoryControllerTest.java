@@ -77,6 +77,8 @@ public class SatelliteSettingsPreferenceCategoryControllerTest {
         CarrierConfigCache.setTestInstance(mContext, mCarrierConfigCache);
         mController = new SatelliteSettingsPreferenceCategoryController(mContext, KEY);
         when(mCarrierConfigCache.getConfigForSubId(TEST_SUB_ID)).thenReturn(mPersistableBundle);
+        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC);
         when(mContext.getSystemService(SatelliteManager.class)).thenReturn(satelliteManager);
         mController.mIsSatelliteSupported.set(true);
     }
@@ -95,7 +97,10 @@ public class SatelliteSettingsPreferenceCategoryControllerTest {
     @Test
     @EnableFlags(Flags.FLAG_CARRIER_ENABLED_SATELLITE_FLAG)
     public void getAvailabilityStatus_deviceUnsupported_returnUnsupported() {
+        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                CARRIER_ROAMING_NTN_CONNECT_MANUAL);
         mController.mIsSatelliteSupported.set(false);
+        mController.init(TEST_SUB_ID);
 
         int result = mController.getAvailabilityStatus(TEST_SUB_ID);
 

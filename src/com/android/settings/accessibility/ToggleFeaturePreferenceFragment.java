@@ -18,15 +18,12 @@ package com.android.settings.accessibility;
 
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.DEFAULT;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
-import static com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums;
 import static com.android.settings.accessibility.AccessibilityUtil.getShortcutSummaryList;
 
-import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -63,7 +60,6 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
 import com.android.settings.flags.Flags;
-import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.IllustrationPreference;
@@ -100,7 +96,6 @@ public abstract class ToggleFeaturePreferenceFragment extends BaseSupportFragmen
     @Nullable protected AccessibilityFooterPreference mHtmlFooterPreference;
     protected AccessibilityFooterPreferenceController mFooterPreferenceController;
     protected String mPreferenceKey;
-    protected Dialog mDialog;
     protected CharSequence mSettingsTitle;
     protected Intent mSettingsIntent;
     // The mComponentName maybe null, such as Magnify
@@ -184,34 +179,12 @@ public abstract class ToggleFeaturePreferenceFragment extends BaseSupportFragmen
     }
 
     @Override
-    public Dialog onCreateDialog(int dialogId) {
-        switch (dialogId) {
-            case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
-                if (isAnySetupWizard()) {
-                    mDialog = AccessibilityShortcutsTutorial
-                            .createAccessibilityTutorialDialogForSetupWizard(
-                                    getPrefContext(), getUserPreferredShortcutTypes(),
-                                    this::callOnTutorialDialogButtonClicked, mFeatureName);
-                } else {
-                    mDialog = AccessibilityShortcutsTutorial
-                            .createAccessibilityTutorialDialog(
-                                    getPrefContext(), getUserPreferredShortcutTypes(),
-                                    this::callOnTutorialDialogButtonClicked, mFeatureName);
-                }
-                mDialog.setCanceledOnTouchOutside(false);
-                return mDialog;
-            default:
-                throw new IllegalArgumentException("Unsupported dialogId " + dialogId);
-        }
-    }
-
-    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final SettingsActivity settingsActivity = (SettingsActivity) getActivity();
-        final SettingsMainSwitchBar switchBar = settingsActivity.getSwitchBar();
-        switchBar.hide();
+        if (getActivity() instanceof SettingsActivity settingsActivity) {
+            settingsActivity.getSwitchBar().hide();
+        }
 
         writeConfigDefaultAccessibilityServiceIntoShortcutTargetServiceIfNeeded(getContext());
     }
@@ -241,16 +214,6 @@ public abstract class ToggleFeaturePreferenceFragment extends BaseSupportFragmen
     public void onDestroyView() {
         super.onDestroyView();
         removeActionBarToggleSwitch();
-    }
-
-    @Override
-    public int getDialogMetricsCategory(int dialogId) {
-        switch (dialogId) {
-            case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
-                return SettingsEnums.DIALOG_ACCESSIBILITY_TUTORIAL;
-            default:
-                return SettingsEnums.ACTION_UNKNOWN;
-        }
     }
 
     @Override
@@ -631,16 +594,6 @@ public abstract class ToggleFeaturePreferenceFragment extends BaseSupportFragmen
         return getShortcutSummaryList(context, shortcutTypes);
     }
 
-    /**
-     * This method will be invoked when a button in the tutorial dialog is clicked.
-     *
-     * @param dialog The dialog that received the click
-     * @param which  The button that was clicked
-     */
-    private void callOnTutorialDialogButtonClicked(DialogInterface dialog, int which) {
-        dialog.dismiss();
-    }
-
     protected void updateShortcutPreferenceData() {
         if (mComponentName == null) {
             return;
@@ -683,9 +636,18 @@ public abstract class ToggleFeaturePreferenceFragment extends BaseSupportFragmen
                 isChecked, shortcutTypes,
                 Set.of(mComponentName.flattenToString()), getPrefContext().getUserId());
         if (isChecked) {
-            showDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
+            showShortcutsTutorialDialog();
         }
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
+    }
+
+    protected void showShortcutsTutorialDialog() {
+        AccessibilityShortcutsTutorial.DialogFragment.showDialog(
+                getChildFragmentManager(),
+                getUserPreferredShortcutTypes(),
+                mFeatureName,
+                isAnySetupWizard()
+        );
     }
 
     @Override

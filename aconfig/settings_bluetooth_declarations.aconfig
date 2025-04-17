@@ -62,3 +62,13 @@ flag {
   description: "Allow to disassociate when to forget a BT pair device"
   bug: "365613753"
  }
+
+flag {
+  name: "enable_bluetooth_settings_expressive_design"
+  namespace: "cross_device_experiences"
+  description: "Enable Bluetooth Settings expressive design UI changes"
+  bug: "399532172"
+  metadata {
+      purpose: PURPOSE_BUGFIX
+  }
+}

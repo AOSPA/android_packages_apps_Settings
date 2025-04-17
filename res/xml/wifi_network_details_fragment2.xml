@@ -114,20 +114,22 @@
             android:summary="@string/wifi_subscription_summary"/>
     </PreferenceCategory>
 
-    <SwitchPreferenceCompat
-        android:key="auto_connect"
-        android:title="@string/wifi_auto_connect_title"
-        android:summary="@string/wifi_auto_connect_summary"/>
+    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+      <SwitchPreferenceCompat
+          android:key="auto_connect"
+          android:title="@string/wifi_auto_connect_title"
+          android:summary="@string/wifi_auto_connect_summary"/>
 
-    <com.android.settings.spa.preference.ComposePreference
-        android:key="certificate_details"
-        settings:controller="com.android.settings.wifi.details2.CertificateDetailsPreferenceController"/>
+      <com.android.settings.spa.preference.ComposePreference
+          android:key="certificate_details"
+          settings:controller="com.android.settings.wifi.details2.CertificateDetailsPreferenceController"/>
 
-    <!-- Add device Preference -->
-    <Preference
-        android:key="add_device_to_network"
-        android:title="@string/wifi_dpp_add_device"
-        android:summary="@string/wifi_dpp_connect_network_using_qr_code"/>
+      <!-- Add device Preference -->
+      <Preference
+          android:key="add_device_to_network"
+          android:title="@string/wifi_dpp_add_device"
+          android:summary="@string/wifi_dpp_connect_network_using_qr_code"/>
+    </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
 
     <!-- Network Details -->
     <PreferenceCategory

@@ -55,9 +55,10 @@ class SoundScreen : PreferenceScreenCreator, PreferenceIconProvider {
 
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(context, this) {
-            +MediaVolumePreference() order -180
-            +CallVolumePreference() order -170
-            +SeparateRingVolumePreference() order -155
+            val audioHelper = AudioHelper(context)
+            +MediaVolumePreference(audioHelper) order -180
+            +CallVolumePreference(audioHelper) order -170
+            +SeparateRingVolumePreference(audioHelper) order -155
             +MediaControlsScreen.KEY order -100
             +DialPadTonePreference() order -50
         }

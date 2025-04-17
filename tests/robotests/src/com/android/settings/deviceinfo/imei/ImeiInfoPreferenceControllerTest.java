@@ -98,6 +98,7 @@ public class ImeiInfoPreferenceControllerTest {
         // Availability defaults
         when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(true);
         when(mTelephonyManager.isDataCapable()).thenReturn(true);
+        when(mTelephonyManager.isDeviceVoiceCapable()).thenReturn(true);
         when(mUserManager.isAdminUser()).thenReturn(true);
 
         when(mScreen.getContext()).thenReturn(mContext);
@@ -233,7 +234,7 @@ public class ImeiInfoPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_showSimInfo_telephonyDataCapable_userAdmindisplayed() {
+    public void getAvailabilityStatus_default() {
         setupPhoneCount(1, PHONE_TYPE_GSM, PHONE_TYPE_NONE);
 
         // Use defaults
@@ -242,7 +243,7 @@ public class ImeiInfoPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_notShowSimInfo_telephonyDataCapable_userAdmin_notDisplayed() {
+    public void getAvailabilityStatus_notShowSimInfo_notDisplayed() {
         setupPhoneCount(1, PHONE_TYPE_GSM, PHONE_TYPE_NONE);
 
         when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(false);
@@ -251,9 +252,30 @@ public class ImeiInfoPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_showSimInfo_notTelephonyDataCapable_userAdmin_notDisplayed() {
+    public void getAvailabilityStatus_voiceCapable_notDataCapable_displayed() {
         setupPhoneCount(1, PHONE_TYPE_GSM, PHONE_TYPE_NONE);
 
+        when(mTelephonyManager.isDeviceVoiceCapable()).thenReturn(true);
+        when(mTelephonyManager.isDataCapable()).thenReturn(false);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_notVoiceCapable_dataCapable_displayed() {
+        setupPhoneCount(1, PHONE_TYPE_GSM, PHONE_TYPE_NONE);
+
+        when(mTelephonyManager.isDeviceVoiceCapable()).thenReturn(false);
+        when(mTelephonyManager.isDataCapable()).thenReturn(true);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_notVoiceCapable_notDataCapable_notDisplayed() {
+        setupPhoneCount(1, PHONE_TYPE_GSM, PHONE_TYPE_NONE);
+
+        when(mTelephonyManager.isDeviceVoiceCapable()).thenReturn(false);
         when(mTelephonyManager.isDataCapable()).thenReturn(false);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.UNSUPPORTED_ON_DEVICE);

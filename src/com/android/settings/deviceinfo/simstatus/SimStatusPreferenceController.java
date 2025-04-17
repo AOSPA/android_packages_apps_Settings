@@ -32,10 +32,9 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.telephony.DomesticRoamUtils;
-import com.android.settingslib.Utils;
 import com.android.settingslib.search.SearchIndexableRaw;
 
 import java.util.List;
@@ -74,8 +73,7 @@ public class SimStatusPreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        if (!SubscriptionUtil.isSimHardwareVisible(mContext)
-                || Utils.isWifiOnly(mContext)
+        if ((!Utils.isMobileDataCapable(mContext) && !Utils.isVoiceCapable(mContext))
                 || getSimSlotIndex() == SubscriptionManager.INVALID_SIM_SLOT_INDEX) {
             return UNSUPPORTED_ON_DEVICE;
         }
@@ -88,7 +86,7 @@ public class SimStatusPreferenceController extends BasePreferenceController {
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        if ((!SubscriptionUtil.isSimHardwareVisible(mContext)) || (mSlotSimStatus == null)) {
+        if (!isAvailable() || (mSlotSimStatus == null)) {
             return;
         }
         String basePreferenceKey = mSlotSimStatus.getPreferenceKey(

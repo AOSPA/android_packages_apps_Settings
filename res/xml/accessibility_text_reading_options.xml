@@ -60,8 +60,11 @@
         android:summary="@string/accessibility_toggle_maximize_text_contrast_preference_summary"
         settings:keywords="@string/keywords_maximize_text_contrast"/>
 
-    <com.android.settings.accessibility.TextReadingResetPreference
+    <com.android.settingslib.widget.ButtonPreference
         android:key="reset"
-        android:persistent="false"
-        android:selectable="false" />
+        android:title="@string/accessibility_text_reading_reset_button_title"
+        settings:buttonPreferenceSize="normal"
+        settings:buttonPreferenceType="tonal"
+        android:icon="@drawable/ic_history"
+        android:persistent="false" />
 </PreferenceScreen>

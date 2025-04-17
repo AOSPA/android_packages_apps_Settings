@@ -34,13 +34,7 @@ class MirrorPreference(context: Context, val contentModeEnabled: Boolean):
         super.onAttached()
 
         isEnabled = contentModeEnabled
-        if (contentModeEnabled) {
-            setChecked(0 != Settings.Secure.getInt(context.contentResolver, MIRROR_SETTING, 0))
-        } else {
-            setChecked(0 == Settings.Global.getInt(
-                    context.contentResolver,
-                    Settings.Global.DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS, 0))
-        }
+        isChecked = isDisplayInMiroringMode(context)
     }
 
     override fun onClick() {

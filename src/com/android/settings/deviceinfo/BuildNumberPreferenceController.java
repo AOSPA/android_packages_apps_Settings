@@ -130,19 +130,17 @@ public class BuildNumberPreferenceController extends BasePreferenceController im
         }
 
         if (mUm.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES)) {
-            if (mUm.isDemoUser()) {
-                // Route to demo device owner to lift the debugging restriction.
-                final ComponentName componentName = Utils.getDeviceOwnerComponent(mContext);
-                if (componentName != null) {
-                    final Intent requestDebugFeatures = new Intent()
-                            .setPackage(componentName.getPackageName())
-                            .setAction("com.android.settings.action.REQUEST_DEBUG_FEATURES");
-                    final ResolveInfo resolveInfo = mContext.getPackageManager().resolveActivity(
-                            requestDebugFeatures, 0);
-                    if (resolveInfo != null) {
-                        mContext.startActivity(requestDebugFeatures);
-                        return false;
-                    }
+            // Route to active device admin to lift the debugging restriction.
+            if (mDebuggingFeaturesDisallowedAdmin != null
+                    && mDebuggingFeaturesDisallowedAdmin.component != null) {
+                final Intent requestDebugFeatures = new Intent()
+                        .setPackage(mDebuggingFeaturesDisallowedAdmin.component.getPackageName())
+                        .setAction("com.android.settings.action.REQUEST_DEBUG_FEATURES");
+                final ResolveInfo resolveInfo = mContext.getPackageManager().resolveActivity(
+                        requestDebugFeatures, 0);
+                if (resolveInfo != null) {
+                    mContext.startActivity(requestDebugFeatures);
+                    return false;
                 }
             }
             if (mDebuggingFeaturesDisallowedAdmin != null &&

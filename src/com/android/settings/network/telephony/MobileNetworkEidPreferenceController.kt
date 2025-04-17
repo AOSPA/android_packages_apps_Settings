@@ -35,12 +35,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
+import com.android.settings.Utils
 import com.android.settings.deviceinfo.PhoneNumberUtil
 import com.android.settings.flags.Flags
 import com.android.settings.network.SubscriptionInfoListViewModel
 import com.android.settings.network.SubscriptionUtil
 import com.android.settingslib.CustomDialogPreferenceCompat
-import com.android.settingslib.Utils
 import com.android.settingslib.qrcode.QrCodeGenerator
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import com.android.settingslib.spaprivileged.framework.common.userManager
@@ -70,8 +70,8 @@ open class MobileNetworkEidPreferenceController(context: Context, key: String) :
     }
 
     override fun getAvailabilityStatus(subId: Int): Int = when {
-        !SubscriptionUtil.isSimHardwareVisible(mContext)
-                || Utils.isWifiOnly(mContext) -> UNSUPPORTED_ON_DEVICE
+        !Utils.isMobileDataCapable(mContext)
+                && !Utils.isVoiceCapable(mContext) -> UNSUPPORTED_ON_DEVICE
         !mContext.userManager.isAdminUser -> DISABLED_FOR_USER
         !Flags.isDualSimOnboardingEnabled()
                 || !SubscriptionManager.isValidSubscriptionId(subId)

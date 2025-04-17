@@ -46,7 +46,6 @@ import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.datausage.lib.DataUsageFormatter;
 import com.android.settings.datausage.lib.NetworkTemplates;
-import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.NetworkPolicyEditor;
@@ -109,7 +108,7 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
         super.onCreate(icicle);
 
         final Context context = getContext();
-        if (!SubscriptionUtil.isSimHardwareVisible(context)) {
+        if (!DataUsageUtils.hasMobileData(context)) {
             finish();
             return;
         }
@@ -529,7 +528,6 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     return (!MobileNetworkUtils.isMobileNetworkUserRestricted(context))
-                            && SubscriptionUtil.isSimHardwareVisible(context)
                             && DataUsageUtils.hasMobileData(context);
                 }
             };

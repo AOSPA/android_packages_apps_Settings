@@ -70,6 +70,7 @@ import com.android.net.module.util.NetUtils;
 import com.android.net.module.util.ProxyUtils;
 import com.android.settings.ProxySelector;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.utils.AndroidKeystoreAliasLoader;
 import com.android.settings.wifi.details2.WifiPrivacyPreferenceController;
@@ -77,7 +78,6 @@ import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settings.wifi.utils.TextInputGroup;
 import com.android.settings.wifi.utils.TextInputValidator;
 import com.android.settings.wifi.utils.WifiPasswordInput;
-import com.android.settingslib.Utils;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.wifi.flags.Flags;
@@ -272,7 +272,7 @@ public class WifiConfigController implements TextWatcher,
         final Resources res = mContext.getResources();
 
         mLevels = res.getStringArray(R.array.wifi_signal);
-        if (Utils.isWifiOnly(mContext) || !mContext.getResources().getBoolean(
+        if (!Utils.isMobileDataCapable(mContext) || !mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_eap_sim_based_auth_supported)) {
             mPhase2PeapAdapter = getSpinnerAdapter(R.array.wifi_peap_phase2_entries);
         } else {
@@ -1040,7 +1040,7 @@ public class WifiConfigController implements TextWatcher,
                 // WAP3-Enterprise 192-bit only allows EAP method TLS
                 mEapMethodSpinner.setSelection(Eap.TLS);
                 mEapMethodSpinner.setEnabled(false);
-            } else if (Utils.isWifiOnly(mContext) || !mContext.getResources().getBoolean(
+            } else if (!Utils.isMobileDataCapable(mContext) || !mContext.getResources().getBoolean(
                     com.android.internal.R.bool.config_eap_sim_based_auth_supported)) {
                 eapMethodSpinnerAdapter = getSpinnerAdapter(R.array.eap_method_without_sim_auth);
                 mEapMethodSpinner.setAdapter(eapMethodSpinnerAdapter);
@@ -1834,7 +1834,7 @@ public class WifiConfigController implements TextWatcher,
             CharSequence[] contentDescriptions) {
         final SpannableString[] accessibleEntries = new SpannableString[entries.length];
         for (int i = 0; i < entries.length; i++) {
-            accessibleEntries[i] = com.android.settings.Utils.createAccessibleSequence(entries[i],
+            accessibleEntries[i] = Utils.createAccessibleSequence(entries[i],
                     contentDescriptions[i].toString());
         }
         return accessibleEntries;

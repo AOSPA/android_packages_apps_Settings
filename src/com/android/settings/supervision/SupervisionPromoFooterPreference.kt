@@ -16,6 +16,7 @@
 package com.android.settings.supervision
 
 import android.content.Context
+import android.content.Intent
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -25,22 +26,25 @@ import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.CardPreference
 import kotlinx.coroutines.launch
 
-/**
- * A bottom banner promoting other supervision features offered by the supervision app.
- */
-class SupervisionPromoFooterPreference :
+/** A bottom banner promoting other supervision features offered by the supervision app. */
+class SupervisionPromoFooterPreference(private val preferenceDataProvider: PreferenceDataProvider) :
     PreferenceMetadata,
     PreferenceBinding,
     PreferenceLifecycleProvider,
     PreferenceTitleProvider,
     PreferenceSummaryProvider {
 
-    //TODO(b/399497788): Remove this and get title from supervision app
+    // Operation to be performed when the preference is clicked
+    private var intent: Intent? = null
+
+    // TODO(b/399497788): Remove this and get title from supervision app
     override fun getTitle(context: Context) = "Full parental controls"
 
-    //TODO(b/399497788): Remove this and get summary from supervision app
+    // TODO(b/399497788): Remove this and get summary from supervision app
     override fun getSummary(context: Context) =
         "Set up an account for your kid & help them manage it (required for kids under [AOC])"
+
+    override fun intent(context: Context): Intent? = intent
 
     override val key: String
         get() = KEY
@@ -53,8 +57,28 @@ class SupervisionPromoFooterPreference :
         if (preference != null) {
             context.lifecycleScope.launch {
                 // TODO(b/399497788) Get title & summary from supervision app.
+                val preferenceData =
+                    preferenceDataProvider.getPreferenceData(listOf(KEY)).await()[KEY]
+                intent = intent ?: Intent()
+                intent?.setAction(preferenceData?.action)
+                intent?.setPackage(preferenceData?.targetPackage)
+                // Hide the preference if the target package can not respond to the action
+                if (!canTargetPackageRespondToAction(preference.context)) {
+                    preference.isVisible = false
+                }
             }
         }
+    }
+
+    private fun canTargetPackageRespondToAction(context: Context): Boolean {
+        if (intent?.action == null || intent?.`package` == null) {
+            return false
+        }
+
+        intent!!.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        val activities =
+            context.packageManager.queryIntentActivitiesAsUser(intent!!, 0, context.userId)
+        return activities.isNotEmpty()
     }
 
     companion object {
