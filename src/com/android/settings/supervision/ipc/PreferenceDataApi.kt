@@ -22,8 +22,8 @@ import com.android.settingslib.ipc.MessageCodec
 /**
  * Message API between UI(Settings App) and data provider(i.e. System Supervision role holder)
  *
- * Request: a list of preference keys to get new preference data of.
- * Response: a map of preference key to preference data.
+ * Request: a list of preference keys to get new preference data of. Response: a map of preference
+ * key to preference data.
  *
  * All fields in [PreferenceData] are nullable, null fields will be ignored by UI.
  */
@@ -31,18 +31,15 @@ class PreferenceDataApi : ApiDescriptor<PreferenceDataRequest, Map<String, Prefe
     override val id: Int
         get() = 1
 
-    override val requestCodec: MessageCodec<PreferenceDataRequest>
-        get() =
-            object : MessageCodec<PreferenceDataRequest> {
-                override fun encode(data: PreferenceDataRequest) =
-                    data.toBundle()
+    override val requestCodec: MessageCodec<PreferenceDataRequest> =
+        object : MessageCodec<PreferenceDataRequest> {
+            override fun encode(data: PreferenceDataRequest) = data.toBundle()
 
-                override fun decode(data: Bundle) =
-                    PreferenceDataRequest(data)
-            }
+            override fun decode(data: Bundle) = PreferenceDataRequest(data)
+        }
 
-    override val responseCodec: MessageCodec<Map<String, PreferenceData>>
-        get() = object : MessageCodec<Map<String, PreferenceData>> {
+    override val responseCodec: MessageCodec<Map<String, PreferenceData>> =
+        object : MessageCodec<Map<String, PreferenceData>> {
             override fun encode(data: Map<String, PreferenceData>) =
                 Bundle().apply {
                     for ((key, preferenceData) in data) {
@@ -53,9 +50,7 @@ class PreferenceDataApi : ApiDescriptor<PreferenceDataRequest, Map<String, Prefe
             override fun decode(data: Bundle): Map<String, PreferenceData> {
                 val resultMap = mutableMapOf<String, PreferenceData>()
                 for (key in data.keySet()) {
-                    data.getBundle(key)?.let {
-                        resultMap[key] = PreferenceData(it)
-                    }
+                    data.getBundle(key)?.let { resultMap[key] = PreferenceData(it) }
                 }
                 return resultMap
             }

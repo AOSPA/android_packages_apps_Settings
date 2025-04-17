@@ -66,13 +66,14 @@ public class ExternalDisplaySizePreference extends AccessibilitySeekBarPreferenc
     private void setStateForPreferenceInternal() {
         var displaySizeData = new DisplaySizeData(mContext,
                 new DisplayDensityUtils(mContext, (info) -> info.displayId == mDisplayId));
+        setMax(displaySizeData.getValues().size() - 1);
+        setProgress(displaySizeData.getInitialIndex());
+
         ExternalDisplaySizePreferenceStateHandler
                 seekBarChangeHandler =
                 new ExternalDisplaySizePreferenceStateHandler(
                         displaySizeData);
 
-        setMax(displaySizeData.getValues().size() - 1);
-        setProgress(displaySizeData.getInitialIndex());
         setContinuousUpdates(false);
         setOnSeekBarChangeListener(seekBarChangeHandler);
     }
@@ -83,7 +84,7 @@ public class ExternalDisplaySizePreference extends AccessibilitySeekBarPreferenc
         private static final long CHANGE_BY_BUTTON_DELAY_MS = 300;
         private static final long CHANGE_BY_SEEKBAR_DELAY_MS = 100;
         private final DisplaySizeData mDisplaySizeData;
-        private int mLastDisplayProgress;
+        private int mLastDisplayProgress = getProgress();
         private long mLastCommitTime;
         private boolean mSeekByTouch;
         ExternalDisplaySizePreferenceStateHandler(DisplaySizeData displaySizeData) {

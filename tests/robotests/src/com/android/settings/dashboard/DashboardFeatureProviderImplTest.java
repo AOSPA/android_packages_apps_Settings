@@ -70,6 +70,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.dashboard.DashboardFeatureProviderImpl.ColorScheme;
 import com.android.settings.homepage.TopLevelHighlightMixin;
 import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.search.SearchFeatureProviderImpl;
@@ -824,22 +825,22 @@ public class DashboardFeatureProviderImplTest {
     }
 
     @Test
-    public void getSchemedColors_schemeNotSpecified_returnNull() {
+    public void getSchemedColors_schemeNotSpecified_returnGrey() {
         Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
 
-        Pair<Integer, Integer> colors = mImpl.getSchemedColors(tile);
+        ColorScheme scheme = mImpl.getColorScheme(tile);
 
-        assertThat(colors).isNull();
+        assertThat(scheme).isEqualTo(ColorScheme.grey);
     }
 
     @Test
-    public void getSchemedColors_undefinedScheme_returnNull() {
+    public void getSchemedColors_undefinedScheme_returnGrey() {
         Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         mActivityInfo.metaData.putString(META_DATA_PREFERENCE_ICON_COLOR_SCHEME, "abc");
 
-        Pair<Integer, Integer> colors = mImpl.getSchemedColors(tile);
+        ColorScheme scheme = mImpl.getColorScheme(tile);
 
-        assertThat(colors).isNull();
+        assertThat(scheme).isEqualTo(ColorScheme.grey);
     }
 
     @Test
@@ -847,10 +848,10 @@ public class DashboardFeatureProviderImplTest {
         Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         mActivityInfo.metaData.putString(META_DATA_PREFERENCE_ICON_COLOR_SCHEME, "blue_variant");
 
-        Pair<Integer, Integer> colors = mImpl.getSchemedColors(tile);
+        ColorScheme scheme = mImpl.getColorScheme(tile);
 
-        assertThat(colors.first).isEqualTo(R.color.homepage_blue_variant_fg);
-        assertThat(colors.second).isEqualTo(R.color.homepage_blue_variant_bg);
+        assertThat(scheme.foregroundColor).isEqualTo(R.color.homepage_blue_variant_fg);
+        assertThat(scheme.backgroundColor).isEqualTo(R.color.homepage_blue_variant_bg);
     }
 
     @Test
@@ -858,10 +859,10 @@ public class DashboardFeatureProviderImplTest {
         Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         mActivityInfo.metaData.putString(META_DATA_PREFERENCE_ICON_COLOR_SCHEME, "blue");
 
-        Pair<Integer, Integer> colors = mImpl.getSchemedColors(tile);
+        ColorScheme scheme = mImpl.getColorScheme(tile);
 
-        assertThat(colors.first).isEqualTo(R.color.homepage_blue_fg);
-        assertThat(colors.second).isEqualTo(R.color.homepage_blue_bg);
+        assertThat(scheme.foregroundColor).isEqualTo(R.color.homepage_blue_fg);
+        assertThat(scheme.backgroundColor).isEqualTo(R.color.homepage_blue_bg);
     }
 
     @Test
@@ -869,10 +870,10 @@ public class DashboardFeatureProviderImplTest {
         Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         mActivityInfo.metaData.putString(META_DATA_PREFERENCE_ICON_COLOR_SCHEME, "pink");
 
-        Pair<Integer, Integer> colors = mImpl.getSchemedColors(tile);
+        ColorScheme scheme = mImpl.getColorScheme(tile);
 
-        assertThat(colors.first).isEqualTo(R.color.homepage_pink_fg);
-        assertThat(colors.second).isEqualTo(R.color.homepage_pink_bg);
+        assertThat(scheme.foregroundColor).isEqualTo(R.color.homepage_pink_fg);
+        assertThat(scheme.backgroundColor).isEqualTo(R.color.homepage_pink_bg);
     }
 
     @Test
@@ -880,10 +881,10 @@ public class DashboardFeatureProviderImplTest {
         Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         mActivityInfo.metaData.putString(META_DATA_PREFERENCE_ICON_COLOR_SCHEME, "orange");
 
-        Pair<Integer, Integer> colors = mImpl.getSchemedColors(tile);
+        ColorScheme scheme = mImpl.getColorScheme(tile);
 
-        assertThat(colors.first).isEqualTo(R.color.homepage_orange_fg);
-        assertThat(colors.second).isEqualTo(R.color.homepage_orange_bg);
+        assertThat(scheme.foregroundColor).isEqualTo(R.color.homepage_orange_fg);
+        assertThat(scheme.backgroundColor).isEqualTo(R.color.homepage_orange_bg);
     }
 
     @Test
@@ -891,10 +892,10 @@ public class DashboardFeatureProviderImplTest {
         Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         mActivityInfo.metaData.putString(META_DATA_PREFERENCE_ICON_COLOR_SCHEME, "yellow");
 
-        Pair<Integer, Integer> colors = mImpl.getSchemedColors(tile);
+        ColorScheme scheme = mImpl.getColorScheme(tile);
 
-        assertThat(colors.first).isEqualTo(R.color.homepage_yellow_fg);
-        assertThat(colors.second).isEqualTo(R.color.homepage_yellow_bg);
+        assertThat(scheme.foregroundColor).isEqualTo(R.color.homepage_yellow_fg);
+        assertThat(scheme.backgroundColor).isEqualTo(R.color.homepage_yellow_bg);
     }
 
     @Test
@@ -902,10 +903,10 @@ public class DashboardFeatureProviderImplTest {
         Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         mActivityInfo.metaData.putString(META_DATA_PREFERENCE_ICON_COLOR_SCHEME, "green");
 
-        Pair<Integer, Integer> colors = mImpl.getSchemedColors(tile);
+        ColorScheme scheme = mImpl.getColorScheme(tile);
 
-        assertThat(colors.first).isEqualTo(R.color.homepage_green_fg);
-        assertThat(colors.second).isEqualTo(R.color.homepage_green_bg);
+        assertThat(scheme.foregroundColor).isEqualTo(R.color.homepage_green_fg);
+        assertThat(scheme.backgroundColor).isEqualTo(R.color.homepage_green_bg);
     }
 
     @Test
@@ -913,10 +914,10 @@ public class DashboardFeatureProviderImplTest {
         Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         mActivityInfo.metaData.putString(META_DATA_PREFERENCE_ICON_COLOR_SCHEME, "grey");
 
-        Pair<Integer, Integer> colors = mImpl.getSchemedColors(tile);
+        ColorScheme scheme = mImpl.getColorScheme(tile);
 
-        assertThat(colors.first).isEqualTo(R.color.homepage_grey_fg);
-        assertThat(colors.second).isEqualTo(R.color.homepage_grey_bg);
+        assertThat(scheme.foregroundColor).isEqualTo(R.color.homepage_grey_fg);
+        assertThat(scheme.backgroundColor).isEqualTo(R.color.homepage_grey_bg);
     }
 
     @Test
@@ -924,10 +925,10 @@ public class DashboardFeatureProviderImplTest {
         Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         mActivityInfo.metaData.putString(META_DATA_PREFERENCE_ICON_COLOR_SCHEME, "cyan");
 
-        Pair<Integer, Integer> colors = mImpl.getSchemedColors(tile);
+        ColorScheme scheme = mImpl.getColorScheme(tile);
 
-        assertThat(colors.first).isEqualTo(R.color.homepage_cyan_fg);
-        assertThat(colors.second).isEqualTo(R.color.homepage_cyan_bg);
+        assertThat(scheme.foregroundColor).isEqualTo(R.color.homepage_cyan_fg);
+        assertThat(scheme.backgroundColor).isEqualTo(R.color.homepage_cyan_bg);
     }
 
     @Test
@@ -935,10 +936,10 @@ public class DashboardFeatureProviderImplTest {
         Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         mActivityInfo.metaData.putString(META_DATA_PREFERENCE_ICON_COLOR_SCHEME, "red");
 
-        Pair<Integer, Integer> colors = mImpl.getSchemedColors(tile);
+        ColorScheme scheme = mImpl.getColorScheme(tile);
 
-        assertThat(colors.first).isEqualTo(R.color.homepage_red_fg);
-        assertThat(colors.second).isEqualTo(R.color.homepage_red_bg);
+        assertThat(scheme.foregroundColor).isEqualTo(R.color.homepage_red_fg);
+        assertThat(scheme.backgroundColor).isEqualTo(R.color.homepage_red_bg);
     }
 
     @Test
@@ -946,10 +947,10 @@ public class DashboardFeatureProviderImplTest {
         Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         mActivityInfo.metaData.putString(META_DATA_PREFERENCE_ICON_COLOR_SCHEME, "purple");
 
-        Pair<Integer, Integer> colors = mImpl.getSchemedColors(tile);
+        ColorScheme scheme = mImpl.getColorScheme(tile);
 
-        assertThat(colors.first).isEqualTo(R.color.homepage_purple_fg);
-        assertThat(colors.second).isEqualTo(R.color.homepage_purple_bg);
+        assertThat(scheme.foregroundColor).isEqualTo(R.color.homepage_purple_fg);
+        assertThat(scheme.backgroundColor).isEqualTo(R.color.homepage_purple_bg);
     }
 
     private static class TestFragment extends DashboardFragment {

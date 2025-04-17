@@ -34,11 +34,12 @@ import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 import com.android.settings.display.PreviewPagerAdapter;
 import com.android.settings.widget.DotsPageIndicator;
+import com.android.settingslib.widget.GroupSectionDividerMixin;
 
 /**
  * A {@link Preference} that could show the preview related to the text and reading options.
  */
-public class TextReadingPreviewPreference extends Preference {
+public class TextReadingPreviewPreference extends Preference implements GroupSectionDividerMixin {
     private static final String KEY_LAST_INDEX = "last_preview_index";
     private int mCurrentItem;
     private int mLastLayerIndex;

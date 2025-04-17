@@ -17,9 +17,12 @@ package com.android.settings.supervision
 
 import android.app.Activity
 import android.app.role.RoleManager
-import android.content.pm.PackageManager
+import android.content.pm.UserInfo
 import android.os.Build
 import android.os.Process
+import android.os.UserManager
+import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
+import android.os.UserManager.USER_TYPE_PROFILE_TEST
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -38,6 +41,7 @@ import org.robolectric.shadows.ShadowBinder
 @RunWith(RobolectricTestRunner::class)
 class ConfirmSupervisionCredentialsActivityTest {
     private val mockRoleManager = mock<RoleManager>()
+    private val mockUserManager = mock<UserManager>()
 
     private lateinit var mActivity: ConfirmSupervisionCredentialsActivity
 
@@ -45,29 +49,21 @@ class ConfirmSupervisionCredentialsActivityTest {
 
     @Before
     fun setUp() {
+        SupervisionHelper.sInstance = null
         mActivity =
             spy(
                 Robolectric.buildActivity(ConfirmSupervisionCredentialsActivity::class.java).get()
             ) {
                 on { getSystemService(RoleManager::class.java) } doReturn mockRoleManager
+                on { getSystemService(UserManager::class.java) } doReturn mockUserManager
                 on { callingPackage } doReturn callingPackage
             }
     }
 
     @Test
-    fun onCreate_noRequiredPermission_finish() {
-        whenever(mActivity.checkCallingOrSelfPermission(any())).thenReturn(PackageManager.PERMISSION_DENIED)
-
-        mActivity.onCreate(null)
-
-        verify(mActivity).setResult(Activity.RESULT_CANCELED)
-        verify(mActivity).finish()
-    }
-
-    @Test
     fun onCreate_callerHasSupervisionRole_doesNotFinish() {
-        whenever(mActivity.checkCallingOrSelfPermission(any())).thenReturn(PackageManager.PERMISSION_GRANTED)
         whenever(mockRoleManager.getRoleHolders(any())).thenReturn(listOf(callingPackage))
+        whenever(mockUserManager.users).thenReturn(listOf(SUPERVISING_USER_INFO))
 
         mActivity.onCreate(null)
 
@@ -78,7 +74,6 @@ class ConfirmSupervisionCredentialsActivityTest {
     fun onCreate_callerNotHasSupervisionRole_finish() {
         val otherPackage = "com.example.other"
         whenever(mockRoleManager.getRoleHolders(any())).thenReturn(listOf(otherPackage))
-        whenever(mActivity.checkCallingOrSelfPermission(any())).thenReturn(PackageManager.PERMISSION_GRANTED)
 
         mActivity.onCreate(null)
 
@@ -89,8 +84,8 @@ class ConfirmSupervisionCredentialsActivityTest {
     @Test
     @Config(sdk = [Build.VERSION_CODES.BAKLAVA])
     fun onCreate_callerIsSystemUid_doesNotFinish() {
-        whenever(mActivity.checkCallingOrSelfPermission(any())).thenReturn(PackageManager.PERMISSION_GRANTED)
         ShadowBinder.setCallingUid(Process.SYSTEM_UID)
+        whenever(mockUserManager.users).thenReturn(listOf(SUPERVISING_USER_INFO))
 
         mActivity.onCreate(null)
 
@@ -100,12 +95,43 @@ class ConfirmSupervisionCredentialsActivityTest {
     @Test
     @Config(sdk = [Build.VERSION_CODES.BAKLAVA])
     fun onCreate_callerIsUnknownUid_finish() {
-        whenever(mActivity.checkCallingOrSelfPermission(any())).thenReturn(PackageManager.PERMISSION_GRANTED)
         ShadowBinder.setCallingUid(Process.NOBODY_UID)
 
         mActivity.onCreate(null)
 
         verify(mActivity).setResult(Activity.RESULT_CANCELED)
         verify(mActivity).finish()
+    }
+
+    @Test
+    fun onCreate_noSupervisingCredential_finish() {
+        whenever(mockRoleManager.getRoleHolders(any())).thenReturn(listOf(callingPackage))
+        whenever(mockUserManager.users).thenReturn(listOf(TESTING_USER_INFO))
+
+        mActivity.onCreate(null)
+
+        verify(mActivity).setResult(Activity.RESULT_CANCELED)
+        verify(mActivity).finish()
+    }
+
+    private companion object {
+        const val SUPERVISING_USER_ID = 5
+        val SUPERVISING_USER_INFO =
+            UserInfo(
+                SUPERVISING_USER_ID,
+                /* name */ "supervising",
+                /* iconPath */ "",
+                /* flags */ 0,
+                USER_TYPE_PROFILE_SUPERVISING,
+            )
+        const val TESTING_USER_ID = 6
+        val TESTING_USER_INFO =
+            UserInfo(
+                TESTING_USER_ID,
+                /* name */ "testing",
+                /* iconPath */ "",
+                /* flags */ 0,
+                USER_TYPE_PROFILE_TEST,
+            )
     }
 }

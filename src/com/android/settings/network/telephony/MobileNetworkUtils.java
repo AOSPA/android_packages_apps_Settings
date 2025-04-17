@@ -804,7 +804,7 @@ public class MobileNetworkUtils {
     }
 
     public static void launchMobileNetworkSettings(Context context, SubscriptionInfo info) {
-        if (!SubscriptionUtil.isSimHardwareVisible(context)) {
+        if (!Utils.isMobileDataCapable(context) && !Utils.isVoiceCapable(context)) {
             Log.e(TAG, "launchMobileNetworkSettings fail, device without such UI.");
             return;
         }

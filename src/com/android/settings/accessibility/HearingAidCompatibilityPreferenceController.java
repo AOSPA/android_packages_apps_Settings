@@ -62,7 +62,7 @@ public class HearingAidCompatibilityPreferenceController extends TogglePreferenc
     @Override
     public boolean isChecked() {
         final int hac = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.HEARING_AID, HAC_DISABLED);
+                Settings.System.HEARING_AID_COMPATIBILITY, HAC_DISABLED);
         return hac == HAC_ENABLED;
     }
 
@@ -71,7 +71,8 @@ public class HearingAidCompatibilityPreferenceController extends TogglePreferenc
         FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().changed(
                 getMetricsCategory(), getPreferenceKey(), isChecked ? 1 : 0);
         setAudioParameterHacEnabled(isChecked);
-        return Settings.System.putInt(mContext.getContentResolver(), Settings.System.HEARING_AID,
+        return Settings.System.putInt(mContext.getContentResolver(),
+                Settings.System.HEARING_AID_COMPATIBILITY,
                 (isChecked ? HAC_ENABLED : HAC_DISABLED));
     }
 

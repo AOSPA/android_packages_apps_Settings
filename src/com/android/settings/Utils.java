@@ -236,6 +236,15 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
+     * Returns whether the device is mobile data capable.
+     */
+    public static boolean isMobileDataCapable(Context context) {
+        if (isTelephonyDisabled(context)) return false;
+        final TelephonyManager telephony = context.getSystemService(TelephonyManager.class);
+        return telephony != null && telephony.isDataCapable();
+    }
+
+    /**
      * Returns whether telephony features are completely disabled in the app, regardless
      * of the TelephonyManager reported capabilities or the PackageManager flags declared.
      */

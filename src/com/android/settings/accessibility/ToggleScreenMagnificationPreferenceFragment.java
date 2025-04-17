@@ -196,9 +196,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             case DialogEnums.DIALOG_MAGNIFICATION_CURSOR_FOLLOWING_MODE:
                 return Preconditions.checkNotNull(mMagnificationCursorFollowingModeDialogDelegate)
                         .onCreateDialog(dialogId);
-            case DialogEnums.GESTURE_NAVIGATION_TUTORIAL:
-                return AccessibilityShortcutsTutorial
-                        .showAccessibilityGestureTutorialDialog(getPrefContext());
             default:
                 return super.onCreateDialog(dialogId);
         }
@@ -531,10 +528,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             case DialogEnums.DIALOG_MAGNIFICATION_CURSOR_FOLLOWING_MODE:
                 return Preconditions.checkNotNull(mMagnificationCursorFollowingModeDialogDelegate)
                         .getDialogMetricsCategory(dialogId);
-            case DialogEnums.GESTURE_NAVIGATION_TUTORIAL:
-                return SettingsEnums.DIALOG_TOGGLE_SCREEN_MAGNIFICATION_GESTURE_NAVIGATION;
-            case DialogEnums.ACCESSIBILITY_BUTTON_TUTORIAL:
-                return SettingsEnums.DIALOG_TOGGLE_SCREEN_MAGNIFICATION_ACCESSIBILITY_BUTTON;
             default:
                 return super.getDialogMetricsCategory(dialogId);
         }
@@ -556,7 +549,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         if (enabled && TextUtils.equals(
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED,
                 preferenceKey)) {
-            showDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
+            showShortcutsTutorialDialog();
         }
         Settings.Secure.putInt(getContentResolver(), preferenceKey, enabled ? ON : OFF);
     }
@@ -574,7 +567,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 Set.of(MAGNIFICATION_CONTROLLER_NAME), getPrefContext().getUserId()
         );
         if (preference.isChecked()) {
-            showDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
+            showShortcutsTutorialDialog();
         }
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
     }

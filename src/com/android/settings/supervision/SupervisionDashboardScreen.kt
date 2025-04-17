@@ -61,7 +61,7 @@ class SupervisionDashboardScreen : PreferenceScreenCreator {
                 +SupervisionWebContentFiltersScreen.KEY
             }
             +SupervisionPinManagementScreen.KEY
-            +SupervisionPromoFooterPreference()
+            // TODO(b/399497788) Add SupervisionPromoFooterPreference with messenger service tests
         }
 
     companion object {

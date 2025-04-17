@@ -283,7 +283,7 @@ public class ResetNetwork extends InstrumentedFragment {
     }
 
     private List<SubscriptionInfo> getActiveSubscriptionInfoList() {
-        if (!SubscriptionUtil.isSimHardwareVisible(getActivity())) {
+        if (!Utils.isMobileDataCapable(getActivity()) && !Utils.isVoiceCapable(getActivity())) {
             return Collections.emptyList();
         }
         SubscriptionManager mgr = getActivity().getSystemService(SubscriptionManager.class);
@@ -323,7 +323,7 @@ public class ResetNetwork extends InstrumentedFragment {
     }
 
     private boolean showEuiccSettings(Context context) {
-        if (!SubscriptionUtil.isSimHardwareVisible(context)) {
+        if (!Utils.isMobileDataCapable(getActivity()) && !Utils.isVoiceCapable(getActivity())) {
             return false;
         }
         EuiccManager euiccManager =

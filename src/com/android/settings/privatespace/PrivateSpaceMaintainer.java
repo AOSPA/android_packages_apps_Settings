@@ -180,7 +180,7 @@ public class PrivateSpaceMaintainer {
 
         List<UserInfo> users = mUserManager.getProfiles(mContext.getUserId());
         for (UserInfo user : users) {
-            if (user.isPrivateProfile()) {
+            if (user.isPrivateProfile() && user.isEnabled()) {
                 mUserHandle = user.getUserHandle();
                 registerBroadcastReceiver();
                 return true;

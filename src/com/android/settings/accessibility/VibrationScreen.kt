@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
@@ -51,12 +52,26 @@ class VibrationScreen : PreferenceScreenCreator, PreferenceAvailabilityProvider 
 
     override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {
         +VibrationMainSwitchPreference()
+        // The preferences below are migrated behind a different flag from the screen migration.
+        // They should only be declared in this screen hierarchy if their migration is enabled.
+        if (Flags.catalystVibrationIntensityScreen25q4()) {
+            +CallVibrationPreferenceCategory() += {
+                +RingVibrationIntensitySwitchPreference()
+            }
+        }
     }
 
     companion object {
         const val KEY = "vibration_screen"
     }
 }
+
+/** Call vibration preferences (e.g. ringtone, ramping ringer, etc). */
+private class CallVibrationPreferenceCategory :
+    PreferenceCategory(
+        "vibration_category_call",
+        R.string.accessibility_call_vibration_category_title,
+    )
 
 /** Returns true if the device has a system vibrator, false otherwise. */
 fun Context.isVibratorAvailable(): Boolean =

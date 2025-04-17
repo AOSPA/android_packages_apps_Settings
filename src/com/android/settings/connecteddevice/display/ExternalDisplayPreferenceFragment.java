@@ -24,6 +24,7 @@ import static com.android.settings.connecteddevice.display.ExternalDisplaySettin
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.isRotationSettingEnabled;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.isTopologyPaneEnabled;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.isUseDisplaySettingEnabled;
+import static com.android.settings.connecteddevice.display.ExternalDisplayUtilsKt.isDisplayInMiroringMode;
 
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
@@ -442,7 +443,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
                         context, refresh, EXTERNAL_DISPLAY_CHANGE_RESOLUTION_FOOTER_RESOURCE);
             }
         }
-        if (isDisplaySizeSettingEnabled(mInjector)) {
+        if (isDisplaySizeSettingEnabled(mInjector) && !isDisplayInMiroringMode(context)) {
             addSizePreference(context, refresh, display, position);
         }
     }

@@ -41,4 +41,11 @@
         android:key="recent_apps"
         android:title="@string/three_finger_tap_recent_apps"
         settings:controller="com.android.settings.inputmethod.TouchpadThreeFingerTapActionPreferenceController"/>
+    <Preference
+        android:key="launch_app"
+        android:title="@string/three_finger_tap_launch_app_title"
+        android:summary="@string/three_finger_tap_launch_app_summary"
+        android:fragment="com.android.settings.inputmethod.TouchpadThreeFingerTapAppSelectionFragment"
+        android:featureFlag="com.android.settings.flags.three_finger_tap_app_launch"/>
+
 </PreferenceScreen>
