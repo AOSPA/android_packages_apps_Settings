@@ -259,7 +259,8 @@ public class NotificationBackend {
             return null;
         }
         try {
-            return sINM.getNotificationChannelForPackage(pkg, uid, channelId, conversationId, true);
+            return sINM.getNotificationChannelForPackage(
+                    pkg, uid, channelId, conversationId, false);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
             return null;

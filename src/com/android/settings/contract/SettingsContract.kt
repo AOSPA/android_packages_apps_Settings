@@ -108,6 +108,12 @@ const val KEY_CALL_VOLUME = "call_volume"
 /** Contract key for the "Ring volume" setting. */
 const val KEY_RING_VOLUME = "separate_ring_volume"
 
+/** Contract key for the "Notification volume" setting. */
+const val KEY_NOTIFICATION_VOLUME = "notification_volume"
+
+/** Contract key for the "Alarm volume" setting. */
+const val KEY_ALARM_VOLUME = "alarm_volume"
+
 /** Contract key for the "Remove animation" setting. */
 const val KEY_REMOVE_ANIMATION = "remove_animation"
 

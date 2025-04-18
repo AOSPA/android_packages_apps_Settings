@@ -31,6 +31,7 @@ import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
 
+import com.android.server.display.feature.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.development.DevelopmentSettingsDashboardFragment;
@@ -80,6 +81,12 @@ public class DesktopExperiencePreferenceController extends DeveloperOptionsPrefe
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
+        if (Flags.enableDisplayContentModeManagement()) {
+            ((TwoStatePreference) preference).setChecked(true);
+            preference.setEnabled(false);
+            return;
+        }
+        preference.setEnabled(true);
         // Use overridden state, if not present, then use default state
         final int overrideInt = Settings.Global.getInt(mContext.getContentResolver(),
                 DEVELOPMENT_OVERRIDE_DESKTOP_EXPERIENCE_FEATURES, OVERRIDE_UNSET.getSetting());
@@ -89,7 +96,7 @@ public class DesktopExperiencePreferenceController extends DeveloperOptionsPrefe
             case OVERRIDE_OFF, OVERRIDE_UNSET -> false;
             case OVERRIDE_ON -> true;
         };
-        ((TwoStatePreference) mPreference).setChecked(shouldDevOptionBeEnabled);
+        ((TwoStatePreference) preference).setChecked(shouldDevOptionBeEnabled);
     }
 
     @Override

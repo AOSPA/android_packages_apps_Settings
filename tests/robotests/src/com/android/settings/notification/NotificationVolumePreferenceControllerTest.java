@@ -42,6 +42,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+// LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowDeviceConfig.class})
 public class NotificationVolumePreferenceControllerTest {
@@ -189,3 +190,4 @@ public class NotificationVolumePreferenceControllerTest {
     }
 
 }
+// LINT.ThenChange(NotificationVolumePreferenceTest.kt)

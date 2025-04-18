@@ -59,6 +59,10 @@ class SoundScreen : PreferenceScreenCreator, PreferenceIconProvider {
             +MediaVolumePreference(audioHelper) order -180
             +CallVolumePreference(audioHelper) order -170
             +SeparateRingVolumePreference(audioHelper) order -155
+            if (Flags.catalystSoundScreen25q3()) {
+                +NotificationVolumePreference(audioHelper) order -150
+                +AlarmVolumePreference(audioHelper) order -140
+            }
             +MediaControlsScreen.KEY order -100
             +DialPadTonePreference() order -50
         }

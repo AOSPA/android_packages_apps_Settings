@@ -20,9 +20,11 @@ import static android.app.NotificationChannel.NEWS_ID;
 import static android.app.NotificationChannel.PROMOTIONS_ID;
 import static android.app.NotificationChannel.RECS_ID;
 import static android.app.NotificationChannel.SOCIAL_MEDIA_ID;
+import static android.service.notification.Adjustment.KEY_TYPE;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 import android.app.NotificationChannel;
@@ -50,6 +52,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 
+import java.util.List;
+
 @RunWith(RobolectricTestRunner.class)
 @SmallTest
 @EnableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION)
@@ -69,6 +73,9 @@ public class BundleListPreferenceControllerTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         mContext = ApplicationProvider.getApplicationContext();
+
+        when(mBackend.getAllowedAssistantAdjustments(anyString())).thenReturn(List.of(KEY_TYPE));
+        when(mBackend.isNotificationBundlingSupported()).thenReturn(true);
 
         mAppRow = new NotificationBackend.AppRow();
         mAppRow.pkg = "pkg";
@@ -95,7 +102,18 @@ public class BundleListPreferenceControllerTest {
     public void isAvailable_null() {
         mController.onResume(null, null, null, null, null, null, null);
         assertThat(mController.isAvailable()).isFalse();
-        mAppRow.banned = true;
+    }
+
+    @Test
+    public void isAvailable_featureOff() {
+        when(mBackend.isNotificationBundlingSupported()).thenReturn(false);
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void isAvailable_featureOffForPackage() {
+        when(mBackend.getAllowedAssistantAdjustments(anyString())).thenReturn(List.of());
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
@@ -172,7 +190,9 @@ public class BundleListPreferenceControllerTest {
         mController.updateState(mGroupList);
         assertThat(mGroupList.getPreferenceCount()).isEqualTo(4);
 
-        assertThat(((PrimarySwitchPreference) mGroupList.findPreference(NEWS_ID)).isChecked())
-                .isEqualTo(false);
+        if (!android.app.Flags.notificationClassificationUi()) {
+            assertThat(((PrimarySwitchPreference) mGroupList.findPreference(NEWS_ID)).isChecked())
+                    .isEqualTo(false);
+        }
     }
 }
