@@ -24,6 +24,7 @@ import android.content.Intent.EXTRA_BRIGHTNESS_DIALOG_IS_FULL_WIDTH
 import android.hardware.display.BrightnessInfo
 import android.hardware.display.DisplayManager
 import android.hardware.display.DisplayManager.DisplayListener
+import android.os.UserHandle
 import android.os.UserManager
 import android.provider.Settings.System
 import androidx.preference.Preference
@@ -51,6 +52,7 @@ import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.transition.SettingsTransitionHelper
+import com.android.systemui.shared.Flags.brightnessDialogOnSystemUser
 import java.math.BigDecimal
 import java.text.NumberFormat
 
@@ -188,7 +190,11 @@ class BrightnessLevelPreference :
                 android.R.anim.fade_in,
                 android.R.anim.fade_out,
             )
-        context.startActivityForResult(preference.key, intent(context), 0, options.toBundle())
+        if (brightnessDialogOnSystemUser()) {
+            context.startActivityAsUser(intent(context)!!, options.toBundle(), UserHandle.SYSTEM)
+        } else {
+            context.startActivityForResult(preference.key, intent(context), 0, options.toBundle())
+        }
         return true
     }
 
