@@ -344,7 +344,9 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Aktiviert (# App hat Zugriff auf den Standort)}other{Aktiviert (# Apps haben Zugriff auf den Standort)}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Wird geladen…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Apps mit der Berechtigung zum Zugriff auf Geräte in der Nähe können die relative Positionierung von verbundenen Geräten ermitteln."</string>
-    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <!-- no translation found for location_settings_footer_location_off_with_telephony (5600725945541382556) -->
+    <skip />
+    <!-- no translation found for location_settings_footer_location_off_no_telephony (2709958040008816610) -->
     <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Weitere Informationen zu Standorteinstellungen"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Um Änderungen vorzunehmen, gehe zu den ChromeOS-Einstellungen &gt; Datenschutz und Sicherheit &gt; Datenschutzeinstellungen &gt; Standortzugriff"</string>
@@ -364,7 +366,7 @@
     <string name="security_settings_face_preference_title_new" msgid="7680231874730796331">"Gesicht"</string>
     <string name="security_settings_face_profile_preference_title_new" msgid="685550153608106166">"Gesicht (Arbeit)"</string>
     <string name="private_space_face_unlock_title_new" msgid="2079622608951402509">"Gesicht (vertrauliches Profil)"</string>
-    <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Entsperrung per Gesicht"</string>
+    <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Entsperrung per Gesichtserkennung"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Entsperrung per Gesichtserkennung für die Arbeit"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"Entsperrung per Gesichts­erkennung einrichten"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"Entsperrung per Gesichtserkennung einrichten"</string>
@@ -611,10 +613,8 @@
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"Einrichtung für Muster &amp; Gesicht überspringen?"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"Einrichtung für Muster &amp; Fingerabdruck überspringen?"</string>
     <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"Einrichtung für Muster, Gesicht &amp; Fingerabdruck überspringen?"</string>
-    <!-- no translation found for resume_animation (5259729861893297887) -->
-    <skip />
-    <!-- no translation found for pause_animation (2209064682137909056) -->
-    <skip />
+    <string name="resume_animation" msgid="5259729861893297887">"Animation fortsetzen"</string>
+    <string name="pause_animation" msgid="2209064682137909056">"Animation pausieren"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"Displaysperre einrichten"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Fertig"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Das ist nicht der Sensor"</string>
@@ -712,7 +712,7 @@
     <string name="private_space_hide_apps_summary" msgid="4418722947376042418">"Du kannst private Apps in einem separaten Profil verbergen, das sich sperren lässt. Für zusätzliche Sicherheit kannst du dafür ein eigenes Google-Konto verwenden."</string>
     <string name="private_space_setup_sub_header" msgid="550476876393954356">"Funktionsweise"</string>
     <string name="private_space_separate_account_text" msgid="790319706810190320"><b>"Google-Konto für dein Profil erstellen"</b>\n"Wenn du ein eigenes Konto verwendest, vermeidest du, dass synchronisierte Dateien, Fotos und E‑Mails außerhalb deines Profils erscheinen"</string>
-    <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"Sperre einrichten"</b>\n"Du kannst deinen privaten Bereich sperren, damit andere nicht darauf zugreifen können"</string>
+    <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"Sperre einrichten"</b>\n"Du kannst dein vertrauliches Profil sperren, damit andere nicht darauf zugreifen können"</string>
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Apps installieren"</b>\n"Du kannst in deinem Profil Apps installieren, die privat bleiben sollen"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Wichtige Hinweise"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Apps werden beendet, wenn du dein Profil sperrst"</b>\n"Wenn du dein Profil sperrst, werden die Apps darin beendet und du erhältst von ihnen keine Benachrichtigungen"</string>
@@ -1032,8 +1032,7 @@
     <string name="android_beam_explained" msgid="5684416131846701256">"Wenn diese Funktion aktiviert ist, kannst du App-Inhalte auf ein anderes NFC-fähiges Gerät übertragen, indem du die Geräte aneinanderhältst. Du kannst beispielsweise Webseiten, YouTube-Videos und Kontakte übertragen.\n\nHalte die Geräte einfach aneinander, am besten Rückseite an Rückseite, und berühre den Bildschirm. Was übertragen wird, hängt von der App ab."</string>
     <string name="wifi_settings" msgid="8313301946393559700">"WLAN"</string>
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"WLAN verwenden"</string>
-    <!-- no translation found for wifi_networks_category (8011323954745036753) -->
-    <skip />
+    <string name="wifi_networks_category" msgid="8011323954745036753">"Netzwerke"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"WLAN-Einstellungen"</string>
     <string name="wifi_select_network" msgid="6692897876718813259">"WLAN auswählen"</string>
     <string name="wifi_starting" msgid="6147022683967506341">"WLAN wird aktiviert…"</string>
@@ -1047,7 +1046,7 @@
     <string name="wifi_allow_wep_networks_summary" msgid="3033397893296724615">"WEP ist ein älteres Sicherheitsprotokoll, das weniger sicher ist"</string>
     <string name="wifi_allow_wep_networks_summary_carrier_not_allow" msgid="6298103289728210026">"Dein Mobilfunkanbieter lässt keine WEP-Netzwerke zu, weil sie weniger sicher sind"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"WLAN automatisch aktivieren"</string>
-    <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Die WLAN-Funktion wird automatisch eingeschaltet, wenn du in den Abdeckungsbereich gespeicherter WLANs kommst und die Signalqualität gut ist."</string>
+    <string name="wifi_wakeup_summary" msgid="5778059083790221465">"WLAN automatisch aktivieren, wenn ein gespeichertes WLAN in der Nähe verfügbar und die Signalqualität gut ist"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Nicht verfügbar, weil die Einstellung \"Standort\" deaktiviert ist. Aktiviere die Einstellung "<annotation id="link">"Standort"</annotation>"."</string>
     <string name="wifi_install_credentials" msgid="5192903644606839972">"Zertifikate installieren"</string>
     <string name="wifi_scan_notify_text" msgid="7163137260385995873">"Zur Verbesserung der Standortgenauigkeit können Apps und Dienste weiter nach WLANs suchen, auch wenn die WLAN-Funktion deaktiviert ist. Dadurch können beispielsweise standortbasierte Funktionen und Dienste verbessert werden. Dies lässt sich in den <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>Einstellungen für die WLAN-Suche<xliff:g id="LINK_END_1">LINK_END</xliff:g> ändern."</string>
@@ -1063,7 +1062,7 @@
     <string name="wifi_empty_list_wifi_on" msgid="2448010040478321376">"Netzwerke werden gesucht…"</string>
     <string name="wifi_empty_list_user_restricted" msgid="454861411536708709">"Du verfügst nicht über die Berechtigung zum Ändern des WLAN-Netzwerks."</string>
     <string name="wifi_settings_scanning_required_title" msgid="1088663325396007484">"WLAN-Suche aktivieren?"</string>
-    <string name="wifi_settings_scanning_required_summary" msgid="4770243653675416569">"Damit die WLAN-Funktion automatisch aktiviert werden kann, muss die Funktion „WLAN-Suche“ aktiviert sein."</string>
+    <string name="wifi_settings_scanning_required_summary" msgid="4770243653675416569">"Damit die WLAN-Funktion automatisch aktiviert werden kann, muss die WLAN-Suche aktiviert sein."</string>
     <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"Wenn die Funktion „WLAN-Suche“ aktiviert ist, dürfen Apps und Dienste immer nach WLANs suchen, auch wenn die WLAN-Funktion deaktiviert ist. Das hilft z. B. dabei, standortbasierte Funktionen und Dienste zu verbessern."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"Aktivieren"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"WLAN-Suche aktiviert"</string>
@@ -1214,22 +1213,14 @@
     <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> – Wird geladen"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"Hotspot-Verbindung"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"Verbindungsstärke"</string>
-    <!-- no translation found for ethernet_dns1 (6487470669719468602) -->
-    <skip />
-    <!-- no translation found for ethernet_dns2 (484620572555181363) -->
-    <skip />
-    <!-- no translation found for ethernet_gateway (4064061619318875567) -->
-    <skip />
-    <!-- no translation found for ethernet_network_prefix_length (3693127271457763198) -->
-    <skip />
-    <!-- no translation found for ethernet_ip_settings (3344064201878792090) -->
-    <skip />
-    <!-- no translation found for ethernet_config_submit (724743720212124025) -->
-    <skip />
-    <!-- no translation found for ethernet_config_cancel (986322993908814366) -->
-    <skip />
-    <!-- no translation found for ethernet_config_title (4784063109810004382) -->
-    <skip />
+    <string name="ethernet_dns1" msgid="6487470669719468602">"DNS 1 (sofern nicht von privatem DNS überschrieben)"</string>
+    <string name="ethernet_dns2" msgid="484620572555181363">"DNS 2 (sofern nicht von privatem DNS überschrieben)"</string>
+    <string name="ethernet_gateway" msgid="4064061619318875567">"Gateway"</string>
+    <string name="ethernet_network_prefix_length" msgid="3693127271457763198">"Länge des Netzwerkpräfixes"</string>
+    <string name="ethernet_ip_settings" msgid="3344064201878792090">"IP-Einstellungen"</string>
+    <string name="ethernet_config_submit" msgid="724743720212124025">"Senden"</string>
+    <string name="ethernet_config_cancel" msgid="986322993908814366">"Abbrechen"</string>
+    <string name="ethernet_config_title" msgid="4784063109810004382">"Ethernet-Einstellungen"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Gespeicherte WLANs"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Abos"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Andere Netzwerke"</string>
@@ -1426,7 +1417,7 @@
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Wird automatisch um <xliff:g id="ID_1">%1$s</xliff:g> deaktiviert"</string>
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"Wird automatisch nach der Schlafenszeit deaktiviert"</string>
     <string name="dark_ui_summary_on_auto_mode_modes" msgid="7769594183411785087">"Wird deaktiviert, wenn der Modus „<xliff:g id="ID_1">%1$s</xliff:g>“ endet"</string>
-    <string name="dark_ui_text" msgid="4392646155331126666">"Beim dunklen Design ist der Hintergrund einiger Bildschirme schwarz, damit dein Akku länger hält. Zeitpläne für das dunkle Design werden erst aktiviert, wenn das Display aus ist."</string>
+    <string name="dark_ui_text" msgid="4392646155331126666">"Beim dunklen Design ist der Hintergrund einiger Bildschirme schwarz, damit dein Akku länger hält. Das dunkle Design wird erst automatisch aktiviert, wenn das Display aus ist."</string>
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Mit einem dunklen Hintergrund werden die Augen weniger beansprucht und der Akkuverbrauch auf einigen Displays reduziert. Wenn du einen Zeitplan festgelegt hast, wird dein Design geändert, wenn das Display aus ist."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"„Dunkles Design“ wird aktuell gemäß deinem Zeitplan für den Schlafenszeitmodus aktiviert"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Schlafenszeitmodus – Einstellungen"</string>
@@ -1458,8 +1449,7 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Aus"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Zeitpunkt der Aktivierung"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Zum Aktivieren anheben"</string>
-    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
-    <skip />
+    <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Nur kabellos Laden"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Inaktivitätsdisplay"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Bildschirmverhalten"</string>
     <string name="doze_title" msgid="1523090408230862316">"Display bei Benachrichtigungen aktivieren"</string>
@@ -1626,8 +1616,7 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Beim Aufladen"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"Beim Aufladen in aufrechter Position"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"Wenn angedockt"</string>
-    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
-    <skip />
+    <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"Nur kabellos Laden"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APNs"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Zugangspunkt bearbeiten"</string>
     <string name="apn_add" msgid="9069613192201630934">"Zugangspunkt hinzufügen"</string>
@@ -1699,7 +1688,7 @@
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Musik"</li>\n<li>"Fotos"</li>\n<li>"Sonstige Nutzerdaten"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIMs"</li></string>
     <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"Dein Mobilfunkvertrag wird dadurch nicht gekündigt."</string>
-    <string name="main_clear_final_desc" msgid="5800877928569039580">"Alle deine personenbezogenen Daten und heruntergeladenen Apps werden gelöscht. Dieser Vorgang kann nicht rückgängig gemacht werden."</string>
+    <string name="main_clear_final_desc" msgid="5800877928569039580">"Alle deine persönlichen Daten und heruntergeladenen Apps werden gelöscht. Dieser Vorgang kann nicht rückgängig gemacht werden."</string>
     <string name="main_clear_final_desc_esim" msgid="6592404057237813989">"Alle deine persönlichen Inhalte und Daten sowie die heruntergeladenen Apps und eSIMs werden gelöscht. Diese Aktion lässt sich nicht rückgängig machen."</string>
     <string name="main_clear_confirm_title" msgid="6577071819657853713">"Alle Daten löschen?"</string>
     <string name="main_clear_not_available" msgid="3433795327146684827">"Das Zurücksetzen auf Werkseinstellungen ist für diesen Nutzer nicht verfügbar."</string>
@@ -1741,8 +1730,7 @@
     <string name="rx_ethernet_speed" msgid="6642000569214969711">"Geschwindigkeit abrufen"</string>
     <string name="ethernet_network_usage" msgid="3795965384177426780">"Netzwerknutzung"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernet-Tethering"</string>
-    <!-- no translation found for ethernet_modify (1326316717004440503) -->
-    <skip />
+    <string name="ethernet_modify" msgid="1326316717004440503">"Ändern"</string>
     <string name="tethering_footer_info" msgid="6824352505979800594">"Mithilfe der Hotspot- und Tethering-Funktion kannst du deine Datenverbindung für andere Geräte freigeben, damit diese eine Internetverbindung erhalten. Apps können ebenfalls einen Hotspot erstellen und so das Teilen von Inhalten mit Geräten in der Nähe ermöglichen."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Mithilfe der Hotspot- und Tethering-Funktion kannst du anderen Geräten erlauben, deine Internetverbindung (WLAN oder mobile Daten) mitzunutzen. Es gibt auch Apps für das Erstellen eines Hotspots, damit Inhalte mit Geräten in der Nähe geteilt werden können."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Hilfe"</string>
@@ -2170,6 +2158,8 @@
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Startseite aufrufen"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"Zurück"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"Letzte Apps aufrufen"</string>
+    <string name="three_finger_tap_launch_app_title" msgid="55761877549896819">"Eine andere App öffnen"</string>
+    <string name="three_finger_tap_launch_app_summary" msgid="2015894823281420733">"Wähle eine App aus der Liste mit installierten Apps aus"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"Zum Start­bildschirm"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"Wische irgendwo auf dem Touchpad mit drei Fingern nach oben"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"Zurück"</string>
@@ -2280,7 +2270,7 @@
     <string name="accessibility_touchpad_system_gestures_enable_summary" msgid="7076378989016181266">"Wenn diese Option deaktiviert ist, werden Touch-Gesten mit drei oder vier Fingern vom Touchpad ignoriert"</string>
     <string name="keywords_accessibility_touchpad_system_gestures_enable" msgid="4406441971607855466">"touchpad, wischen"</string>
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Farbkontrast"</string>
-    <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Durch einen stärkeren Kontrast stechen Texte, Schaltflächen und Symbole mehr hervor. Wähle den Kontrast, der für dich am besten aussieht."</string>
+    <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Durch einen stärkeren Kontrast heben sich Texte, Schaltflächen und Symbole besser ab. Wähle den Kontrast, der für dich am besten aussieht."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Einige Apps unterstützen eventuell noch nicht alle Farb- und Textkontrasteinstellungen."</string>
     <string name="color_contrast_preview" msgid="6791430227535363883">"Vorschau"</string>
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"Helen, Adam"</string>
@@ -2295,8 +2285,7 @@
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Einstellungen für Zeitvorgaben"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"System­steuerelemente"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Feedback geben"</string>
-    <!-- no translation found for accessibility_send_survey_title (7899716184811587023) -->
-    <skip />
+    <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Bewerten"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Heruntergeladene Apps"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimentell"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Funktions-Flags"</string>
@@ -2412,7 +2401,7 @@
     <string name="accessibility_shortcut_edit_dialog_summary_floating_button" msgid="6266489864614886247">"Tippe auf die unverankerte Schaltfläche."</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="4775049370625630546">"Touch-Geste für Bedienungshilfen"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8315934725362849788">"Tippe unten auf dem Display auf die Schaltfläche „Bedienungshilfen“ <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>. Um zwischen den Funktionen umzuschalten, halte diese Schaltfläche gedrückt."</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{Wische vom unteren Displayrand nach oben. Wenn du zwischen Funktionen umschalten möchtest, wische nach oben und halte.}other{Wische vom unteren Displayrand mit # Fingern nach oben. Wenn du zwischen Funktionen umschalten möchtest, wische mit # Fingern nach oben und halte.}}"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{Wische vom unteren Displayrand nach oben. Wenn du zwischen Funktionen umschalten möchtest, wische nach oben und halte das Display gedrückt.}other{Wische vom unteren Displayrand mit # Fingern nach oben. Wenn du zwischen Funktionen umschalten möchtest, wische mit # Fingern nach oben und halte das Display gedrückt.}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Weitere Optionen"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Weitere Informationen zu <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Schnelleinstellungen"</string>
@@ -2457,9 +2446,9 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Text mit hohem Kontrast"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Textfarbe in Schwarz oder Weiß ändern. Maximiert den Kontrast zum Hintergrund."</string>
     <string name="accessibility_notification_high_contrast_text_title" msgid="2297915407152953323">"Textkontrast verbessern"</string>
-    <string name="accessibility_notification_high_contrast_text_body_message" msgid="6846453833480117658">"Die Funktion „Text mit hohem Kontrast“ wurde durch „Textkontur hinzufügen“ ersetzt. Du kannst die neue Funktion in den <xliff:g id="SETTINGS">%1$s</xliff:g> aktivieren."</string>
+    <string name="accessibility_notification_high_contrast_text_body_message" msgid="6846453833480117658">"Die Funktion „Text mit hohem Kontrast“ wurde durch „Text mit Kontur“ ersetzt. Du kannst die neue Funktion in den <xliff:g id="SETTINGS">%1$s</xliff:g> aktivieren."</string>
     <string name="accessibility_notification_high_contrast_text_action_open_settings" msgid="5945069315472850294">"Zu den <xliff:g id="SETTINGS">%1$s</xliff:g>"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8848579943445806659">"Textkontur hinzufügen"</string>
+    <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8848579943445806659">"Text mit Kontur"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Schwarzen oder weißen Hintergrund für Text hinzufügen, um den Kontrast zu erhöhen"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Vergrößerung automatisch aktualisieren"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Vergrößerung bei App-Übergängen aktualisieren"</string>
@@ -2585,7 +2574,7 @@
     <string name="accessibility_hearing_device_footer_hap_only_summary" msgid="3531758698830915205">"Tippe zum Suchen nach anderen Hörgeräten, die nicht mit LE Audio kompatibel sind, auf &lt;b&gt;Neues Gerät koppeln&lt;/b&gt; &gt; &lt;b&gt;Mehr Geräte ansehen&lt;/b&gt;"</string>
     <string name="accessibility_hearing_device_footer_hap_only_summary_tts" msgid="4440097982533045507">"Tippe zum Suchen nach anderen Hörgeräten, die nicht mit LE Audio kompatibel sind, auf "<b>"Neues Gerät koppeln"</b>" und dann auf "<b>"Mehr Geräte ansehen"</b></string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Hörgerät koppeln"</string>
-    <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"Auf dieser Seite kannst du ASHA- und LE Audio-Hörgeräte koppeln. Dein Hörgerät muss eingeschaltet und bereit zum Koppeln sein."</string>
+    <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"Auf dieser Seite kannst du ASHA- und LE Audio-Hörgeräte koppeln. Dein Hörgerät muss eingeschaltet und bereit zum Koppeln sein."</string>
     <string name="accessibility_hearing_device_pairing_asha_only_intro" msgid="5679230908462987522">"Auf dieser Seite kannst du ASHA-Hörgeräte koppeln. Dein Hörgerät muss eingeschaltet und bereit zum Koppeln sein."</string>
     <string name="accessibility_hearing_device_pairing_hap_only_intro" msgid="2233661046254311681">"Auf dieser Seite kannst du LE Audio-Hörgeräte koppeln. Dein Hörgerät muss eingeschaltet und bereit zum Koppeln sein."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Verfügbare Hörgeräte"</string>
@@ -2624,8 +2613,7 @@
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{Kurz ({time} Sekunde)}other{Kurz ({time} Sekunden)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{Mittel ({time} Sekunde)}other{Mittel ({time} Sekunden)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{Lang ({time} Sekunde)}other{Lang ({time} Sekunden)}}"</string>
-    <!-- no translation found for accessibility_autoclick_delay_unit_second (1562809410497613173) -->
-    <skip />
+    <string name="accessibility_autoclick_delay_unit_second" msgid="1562809410497613173">"{count,plural, =1{{time} Sekunde}other{{time} Sekunden}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Einstellungen"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"An"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"Aus"</string>
@@ -3858,7 +3846,7 @@
     <string name="demote_conversation_summary" msgid="4319929331165604112">"Aus dem Bereich „Unterhaltungen“ entfernen"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"Dies ist eine Unterhaltung"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Dem Bereich „Unterhaltungen“ hinzufügen"</string>
-    <string name="priority_conversation_count_zero" msgid="3862289535537564713">"Keine vorrangigen Unterhaltungen"</string>
+    <string name="priority_conversation_count_zero" msgid="3862289535537564713">"Keine priorisierten Unterhaltungen"</string>
     <string name="priority_conversation_count" msgid="7291234530844412077">"{count,plural, =1{# priorisierte Unterhaltung}other{# priorisierte Unterhaltungen}}"</string>
     <string name="important_conversations" msgid="1233893707189659401">"Vorrangige Unterhaltungen"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Oben im Bereich „Unterhaltungen“ und als unverankerte Bubbles anzeigen"</string>
@@ -3871,7 +3859,7 @@
     <string name="recent_convo_removed" msgid="8686414146325958281">"Unterhaltung wurde entfernt"</string>
     <string name="clear" msgid="5092178335409471100">"Löschen"</string>
     <string name="clear_conversation" msgid="5564321180363279096">"<xliff:g id="CONVERSATION_NAME">%1$s</xliff:g> löschen"</string>
-    <string name="conversation_onboarding_title" msgid="5194559958353468484">"Hier werden vorrangige und geänderte Unterhaltungen angezeigt"</string>
+    <string name="conversation_onboarding_title" msgid="5194559958353468484">"Hier werden priorisierte und geänderte Unterhaltungen angezeigt"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Wenn du einer Unterhaltung Priorität gibst oder andere Änderungen daran vornimmst, wird sie hier angezeigt. \n\nSo änderst du die Einstellungen für eine Unterhaltung:\nWische vom oberen Displayrand nach unten, um die Benachrichtigungsleiste zu öffnen, und halte die entsprechende Unterhaltung gedrückt."</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"Minimieren"</string>
     <string name="notification_importance_high_title" msgid="394129291760607808">"Popup auf dem Bildschirm"</string>
@@ -3936,7 +3924,7 @@
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Weitere Einstellungen sind in dieser App verfügbar"</string>
     <string name="notification_polite_title" msgid="6121016426991791557">"Benachrichtigungen reduzieren"</string>
     <string name="notification_polite_main_control_title" msgid="5812529809151927149">"„Benachrichtigungen reduzieren” aktivieren"</string>
-    <string name="notification_polite_description" msgid="6137533404978878957">"Wenn du viele Benachrichtigungen innerhalb kurzer Zeit erhältst, verringert dein Gerät für bis zu eine Minute die Lautstärke und minimiert Benachrichtigungen. Anrufe, Wecker und priorisierte Unterhaltungen sind davon nicht betroffen. \n\nWenn du Benachrichtigungen sehen möchtest, die während des Verringerns der Lautstärke eingegangen sind, wische vom oberen Rand des Displays nach unten."</string>
+    <string name="notification_polite_description" msgid="6137533404978878957">"Wenn du viele Benachrichtigungen innerhalb kurzer Zeit erhältst, verringert dein Gerät für bis zu eine Minute die Lautstärke und minimiert Benachrichtigungen. Anrufe, Wecker und priorisierte Unterhaltungen sind davon nicht betroffen. \n\nWenn du Benachrichtigungen sehen möchtest, die in dieser Zeit eingegangen sind, wische vom oberen Rand des Displays nach unten."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Auf Arbeitsprofile anwenden"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Auf Apps im Arbeitsprofil anwenden"</string>
     <string name="notification_bundle_title" msgid="460988459835922719">"Gruppierte Benachrichtigungen"</string>
@@ -4513,7 +4501,7 @@
     <string name="cellular_data_usage" msgid="5874156338825285334">"Mobile Datennutzung"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"Datennutzung durch Apps"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"WLAN-Datennutzung"</string>
-    <string name="non_carrier_data_usage" msgid="6494603202578414755">"Datennutzung ohne Mobilfunknetzdaten"</string>
+    <string name="non_carrier_data_usage" msgid="6494603202578414755">"Datennutzung ohne Mobilfunkdaten"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"Ethernet-Datennutzung"</string>
     <string name="wifi" msgid="2932584495223243842">"WLAN"</string>
     <string name="ethernet" msgid="4665162609974492983">"Ethernet"</string>
@@ -4673,6 +4661,12 @@
     <string name="double_tap_power_camera_action_summary" msgid="4942585540579590444">"Kamera öffnen"</string>
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Wallet"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Wallet öffnen"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"Verknüpfung für Sperrbildschirm ändern?"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> ist auch die Verknüpfung für den Sperrbildschirm. Möchtest du sie ändern?"</string>
+    <!-- no translation found for double_tap_power_wallet_footer_title (5417023303339032410) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (1267822422365445657) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Für Selfie-Modus Handgelenk drehen"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Navigationsmodus"</string>
@@ -5158,7 +5152,7 @@
     <string name="primary_sim_calls_title" msgid="4961189133582615685">"Anrufe"</string>
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"SMS"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"SIM für Daten automatisch wechseln"</string>
-    <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"Du kannst angeben, dass die für mobile Daten verwendete SIM automatisch gewechselt wird, wenn die andere SIM-Karte bei der aktuellen Abdeckung und Verfügbarkeit besser funktioniert"</string>
+    <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"Festlegen, dass die für mobile Daten verwendete SIM automatisch gewechselt wird, wenn die andere SIM-Karte bei der aktuellen Abdeckung und Verfügbarkeit besser funktioniert"</string>
     <string name="sim_action_restart_dialog_title" msgid="3507413479633430120">"Neu starten, um zwei SIMs zu verwenden"</string>
     <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"Wenn du zwei SIMs gleichzeitig verwenden möchtest, starte dein Gerät neu und aktiviere beide SIMs"</string>
     <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"Nur <xliff:g id="CARRIER_NAME">%1$s</xliff:g> verwenden"</string>
@@ -5362,7 +5356,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Player anzeigen"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"Medien"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Kamerasoftware-Erweiterungen zulassen"</string>
-    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Aktiviert die Standard-Software-Implementierung erweiterter Kamerafunktionen, wie „HDR“ oder „Nacht“."</string>
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Aktiviert die Standard-Software-Implementierung erweiterter Kamerafunktionen, wie „HDR“ oder „Nacht“"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth wird aktiviert"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM-Karten"</string>
@@ -5741,10 +5735,8 @@
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"QR-Code des Audiostreams"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Passwort: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Wenn andere Personen den Audiostream „<xliff:g id="STREAM_NAME">%1$s</xliff:g>“ anhören möchten, können sie kompatible Kopfhörer mit ihrem Android-Gerät verbinden. Sie können dann diesen QR-Code scannen."</string>
-    <!-- no translation found for audio_streams_preference_subtitle (4098552511880220046) -->
-    <skip />
-    <!-- no translation found for audio_streams_preference_subtitle_audio_sharing_on (2382924714414148028) -->
-    <skip />
+    <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"Nachricht an alle über Auracast anhören"</string>
+    <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"Deaktiviere die Audiofreigabe, um Audiostreams zu finden"</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Audiostream finden"</string>
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Audioinhalte, die auf einem Gerät freigegeben wurden, oder eine Auracast-Übertragung anhören"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"Mein Audiogerät"</string>
@@ -5782,12 +5774,9 @@
     <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"PIN-Wiederherstellungsmethode hinzufügen"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"PIN ändern"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"PIN vergessen"</string>
-    <!-- no translation found for supervision_update_recovery_email_preference_title (2057393838251915087) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_title (8447541098148430866) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_summary (4865713157106413979) -->
-    <skip />
+    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"E‑Mail-Adresse zur Kontowiederherstellung aktualisieren"</string>
+    <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"PIN löschen"</string>
+    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Dadurch werden alle Einstellungen für die Elternaufsicht zurückgesetzt"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filter für Webinhalte"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome &amp; Web"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Versuchen, anstößige Websites zu blockieren"</string>

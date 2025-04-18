@@ -344,7 +344,9 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{روشن / # برنامه به مکان دسترسی دارد}one{روشن / # برنامه به مکان دسترسی دارد}other{روشن / # برنامه به مکان دسترسی دارند}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"درحال بارگیری…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"برنامه‌هایی که اجازه دستگاه‌های اطراف را دارند می‌توانند موقعیت نسبی دستگاه‌های متصل را تشخیص دهند."</string>
-    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <!-- no translation found for location_settings_footer_location_off_with_telephony (5600725945541382556) -->
+    <skip />
+    <!-- no translation found for location_settings_footer_location_off_no_telephony (2709958040008816610) -->
     <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"درباره «تنظیمات مکان» بیشتر بدانید"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"‏برای تغییر، به «تنظیمات ChromeOS ‏&lt; حریم خصوصی و امنیت &lt; کنترل‌های حریم خصوصی &lt; دسترسی مکان» بروید"</string>
@@ -611,10 +613,8 @@
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"راه‌اندازی الگو و چهره رد شود؟"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"راه‌اندازی الگو و اثر انگشت رد شود؟"</string>
     <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"راه‌اندازی الگو، چهره، و اثر انگشت رد شود؟"</string>
-    <!-- no translation found for resume_animation (5259729861893297887) -->
-    <skip />
-    <!-- no translation found for pause_animation (2209064682137909056) -->
-    <skip />
+    <string name="resume_animation" msgid="5259729861893297887">"ازسرگیری پویانمایی"</string>
+    <string name="pause_animation" msgid="2209064682137909056">"توقف موقت پویانمایی"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"تنظیم قفل صفحه"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"تمام"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"اووه، آن حسگر نیست"</string>
@@ -1032,8 +1032,7 @@
     <string name="android_beam_explained" msgid="5684416131846701256">"‏اگر این ویژگی روشن باشد، می‌توانید با نگه‌داشتن دستگاه‌ها نزدیک به یکدیگر، محتوای برنامه را به دستگاه مجهز به NFC دیگری با پرتو ارسال کنید. مثلاً، می‌توانید صفحات وب، ویدیوهای YouTube، مخاطبین و موارد دیگر را ازطریق پرتو ارسال کنید.\n\n کافی است دستگاه‌ها را نزدیک هم بگذارید (معمولاً پشت به پشت) و سپس روی صفحه تک‌ضرب بزنید. برنامه‌ تعیین می‌کند که چه چیزی ازطریق پرتو ارسال شود."</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi‑Fi"</string>
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"‏استفاده از Wi-Fi"</string>
-    <!-- no translation found for wifi_networks_category (8011323954745036753) -->
-    <skip />
+    <string name="wifi_networks_category" msgid="8011323954745036753">"شبکه‌ها"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"‏تنظیمات Wi-Fi"</string>
     <string name="wifi_select_network" msgid="6692897876718813259">"‏انتخاب Wi-Fi"</string>
     <string name="wifi_starting" msgid="6147022683967506341">"‏روشن کردن Wi-Fi…"</string>
@@ -1214,22 +1213,14 @@
     <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"‫<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> - درحال شارژ"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"ارتباط نقطه اتصال"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"قدرت اتصال"</string>
-    <!-- no translation found for ethernet_dns1 (6487470669719468602) -->
-    <skip />
-    <!-- no translation found for ethernet_dns2 (484620572555181363) -->
-    <skip />
-    <!-- no translation found for ethernet_gateway (4064061619318875567) -->
-    <skip />
-    <!-- no translation found for ethernet_network_prefix_length (3693127271457763198) -->
-    <skip />
-    <!-- no translation found for ethernet_ip_settings (3344064201878792090) -->
-    <skip />
-    <!-- no translation found for ethernet_config_submit (724743720212124025) -->
-    <skip />
-    <!-- no translation found for ethernet_config_cancel (986322993908814366) -->
-    <skip />
-    <!-- no translation found for ethernet_config_title (4784063109810004382) -->
-    <skip />
+    <string name="ethernet_dns1" msgid="6487470669719468602">"ساناد ۱ (مگراینکه ساناد خصوصی آن را ملغی کند)"</string>
+    <string name="ethernet_dns2" msgid="484620572555181363">"ساناد ۲ (مگراینکه ساناد خصوصی آن را ملغی کند)"</string>
+    <string name="ethernet_gateway" msgid="4064061619318875567">"دروازه"</string>
+    <string name="ethernet_network_prefix_length" msgid="3693127271457763198">"طول پیشوند شبکه"</string>
+    <string name="ethernet_ip_settings" msgid="3344064201878792090">"‏تنظیمات IP"</string>
+    <string name="ethernet_config_submit" msgid="724743720212124025">"ارسال کردن"</string>
+    <string name="ethernet_config_cancel" msgid="986322993908814366">"لغو کردن"</string>
+    <string name="ethernet_config_title" msgid="4784063109810004382">"تنظیمات اترنت"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"شبکه‌های ذخیره‌شده"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"اشتراک‌ها"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"شبکه‌های دیگر"</string>
@@ -1458,8 +1449,7 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"خاموش"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"زمان شروع شدن"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"بیدار شدن با بالا بردن"</string>
-    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
-    <skip />
+    <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"محدود به شارژ بی‌سیم"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"نمایشگر محیط"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"کی نشان داده شود"</string>
     <string name="doze_title" msgid="1523090408230862316">"صفحه برای اعلان بیدار شود"</string>
@@ -1513,7 +1503,7 @@
     <string name="battery_info" msgid="7873528123969546728">"اطلاعات باتری"</string>
     <string name="device_info_not_available" msgid="4804474466616712326">"موجود نیست"</string>
     <string name="storage_settings" msgid="7472188817781592677">"فضای ذخیره‌سازی"</string>
-    <string name="storage_settings_for_app" msgid="229425418984637483">"فضای ذخیره‌سازی و حافظه پنهان"</string>
+    <string name="storage_settings_for_app" msgid="229425418984637483">"فضای ذخیره‌سازی و حافظه نهان"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"تنظیمات ذخیره‌سازی"</string>
     <string name="status_eid" msgid="3588471107671992684">"‏سند شناسایی جاسازی‌شده (EID)"</string>
     <string name="eid_multi_sim" msgid="6659492335576379274">"‏‫EID (شیار سیم‌کارت <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
@@ -1626,8 +1616,7 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"هنگام شارژ شدن"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"هنگام شارژ شدن و در حالت عمودی"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"هنگام متصل بودن به پایه"</string>
-    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
-    <skip />
+    <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"محدود به شارژ بی‌سیم"</string>
     <string name="apn_settings" msgid="4295467389400441299">"نام‌های نقاط دستیابی"</string>
     <string name="apn_edit" msgid="2003683641840248741">"ویرایش نقطه دستیابی"</string>
     <string name="apn_add" msgid="9069613192201630934">"افزودن نقطه دسترسی"</string>
@@ -1741,8 +1730,7 @@
     <string name="rx_ethernet_speed" msgid="6642000569214969711">"سرعت پیوند دریافت"</string>
     <string name="ethernet_network_usage" msgid="3795965384177426780">"مصرف شبکه"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"اشتراک‌گذاری اینترنت با اترنت"</string>
-    <!-- no translation found for ethernet_modify (1326316717004440503) -->
-    <skip />
+    <string name="ethernet_modify" msgid="1326316717004440503">"اصلاح کردن"</string>
     <string name="tethering_footer_info" msgid="6824352505979800594">"برای ارائه اینترنت به سایر دستگاه‌ها ازطریق اتصال داده، از نقطه اتصال و اشتراک‌گذاری اینترنت استفاده کنید. همچنین برنامه‌ها می‌توانند نقطه اتصالی ایجاد کنند تا محتوا را با دستگاه‌های اطراف هم‌رسانی کند."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"‏برای ارائه اینترنت به سایر دستگاه‌ها ازطریق اتصال داده تلفن همراه یا Wi-Fi، از نقطه اتصال و اشتراک‌گذاری اینترنت استفاده کنید. برنامه‌ها همچنین می‌تواند نقطه اتصالی ایجاد کند تا محتوا را با دستگاه‌های اطراف هم‌رسانی کند."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"راهنمایی"</string>
@@ -1888,7 +1876,7 @@
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"الگو ضبط شد"</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"برای تأیید، دوباره الگو را بکشید"</string>
     <string name="lockpattern_pattern_confirmed_header" msgid="2969990617475456153">"الگوی جدید بازگشایی قفل"</string>
-    <string name="lockpattern_confirm_button_text" msgid="6122815520373044089">"تأیید"</string>
+    <string name="lockpattern_confirm_button_text" msgid="6122815520373044089">"تأیید کردن"</string>
     <string name="lockpattern_restart_button_text" msgid="255339375151895998">"کشیدن مجدد"</string>
     <string name="lockpattern_retry_button_text" msgid="4229668933251849760">"پاک کردن"</string>
     <string name="lockpattern_continue_button_text" msgid="5253269556259503537">"ادامه"</string>
@@ -2170,6 +2158,8 @@
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"رفتن به صفحه اصلی"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"برگشتن"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"مشاهده برنامه‌های اخیر"</string>
+    <string name="three_finger_tap_launch_app_title" msgid="55761877549896819">"باز کردن برنامه دیگری"</string>
+    <string name="three_finger_tap_launch_app_summary" msgid="2015894823281420733">"انتخاب از فهرست برنامه‌های نصب‌شده"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"رفتن به صفحه اصلی"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"هر جایی از صفحه لمسی را با سه انگشت تند به‌بالا بکشید"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"برگشتن"</string>
@@ -2295,8 +2285,7 @@
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"کنترل‌های زمان‌بندی"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"کنترل‌های سیستم"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"ارسال بازخورد"</string>
-    <!-- no translation found for accessibility_send_survey_title (7899716184811587023) -->
-    <skip />
+    <string name="accessibility_send_survey_title" msgid="7899716184811587023">"به ما رتبه بدهید"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"برنامه‌های بارگیری‌شده"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"آزمایشی"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"پرچم‌های ویژه"</string>
@@ -2588,8 +2577,8 @@
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"‏می‌توانید سمعک‌های سازگار با «جاری‌سازی صوتی ویژه سمعک‌ها» (ASHA) و «صدای کم‌مصرف» را در این صفحه جفت کنید. مطمئن شوید سمعک روشن و برای جفت کردن آماده باشد."</string>
     <string name="accessibility_hearing_device_pairing_asha_only_intro" msgid="5679230908462987522">"در این صفحه می‌توانید سمعک سازگار با «جاری‌سازی صوتی ویژه سمعک‌ها» را جفت کنید. مطمئن شوید سمعک روشن و برای جفت کردن آماده باشد."</string>
     <string name="accessibility_hearing_device_pairing_hap_only_intro" msgid="2233661046254311681">"در این صفحه می‌توانید سمعک سازگار با «صدای کم‌مصرف» را جفت کنید. مطمئن شوید سمعک روشن و برای جفت کردن آماده باشد."</string>
-    <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"دستگاه‌های کمک‌شنوایی موجود"</string>
-    <string name="accessibility_found_all_devices" msgid="7817834722148556520">"دستگاه کمک‌شنوایی‌تان را نمی‌بینید؟"</string>
+    <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"سمعک‌های موجود"</string>
+    <string name="accessibility_found_all_devices" msgid="7817834722148556520">"سمعک‌تان را نمی‌بینید؟"</string>
     <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"دیدن دستگاه‌های بیشتر"</string>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"تنظیم صدا"</string>
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"شرح صوتی"</string>
@@ -2624,8 +2613,7 @@
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{کوتاه ({time} ثانیه)}one{کوتاه ({time} ثانیه)}other{کوتاه ({time} ثانیه)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{متوسط ({time} ثانیه)}one{متوسط ({time} ثانیه)}other{متوسط ({time} ثانیه)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{طولانی ({time} ثانیه)}one{طولانی ({time} ثانیه)}other{طولانی ({time} ثانیه)}}"</string>
-    <!-- no translation found for accessibility_autoclick_delay_unit_second (1562809410497613173) -->
-    <skip />
+    <string name="accessibility_autoclick_delay_unit_second" msgid="1562809410497613173">"{count,plural, =1{‫{time} ثانیه}one{‫{time} ثانیه}other{‫{time} ثانیه}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"تنظیمات"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"فعال"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"غیرفعال"</string>
@@ -2961,11 +2949,11 @@
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"امن نیست"</string>
     <string name="vpn_settings_single_insecure_multiple_total" msgid="6107225844641301139">"<xliff:g id="VPN_COUNT">%d</xliff:g> امن نیست"</string>
     <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> امن نیست"</string>
-    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"اتصال تطبیقی"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"اتصال‌پذیری تطبیقی"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"مدیریت خودکار اتصال‌های شبکه، عمر باتری را افزایش می‌دهد و عملکرد دستگاه را بهبود می‌بخشد"</string>
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"روشن"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"خاموش"</string>
-    <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"استفاده از «اتصال‌پذیری سازگار»"</string>
+    <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"استفاده از «اتصال‌پذیری تطبیقی»"</string>
     <string name="adaptive_connectivity_wifi_switch_title" msgid="5899985025046319472">"‏جابه‌جایی خودکار Wi-Fi به شبکه همراه"</string>
     <string name="adaptive_connectivity_wifi_switch_summary" msgid="4650230240134029595">"‏وقتی اتصال Wi-Fi ضعیف باشد یا دردسترس نباشد، به‌طور خودکار از داده شبکه تلفن همراه استفاده می‌شود. ممکن است هزینه‌های مصرف داده اعمال شود."</string>
     <string name="adaptive_connectivity_mobile_network_switch_title" msgid="2473274404695643218">"جابه‌جایی خودکار شبکه تلفن همراه برای عمر باتری"</string>
@@ -3345,7 +3333,7 @@
     <string name="extreme_threats_summary" msgid="3560742429496902008">"دریافت هشدار برای تهدیدهای بسیار جدی جانی و مالی"</string>
     <string name="severe_threats_title" msgid="8962959394373974324">"تهدیدهای جدی"</string>
     <string name="severe_threats_summary" msgid="4982256198071601484">"دریافت هشدار برای تهدیدهای جدی جانی و مالی"</string>
-    <string name="amber_alerts_title" msgid="5238275758191804575">"‏هشدارهای AMBER"</string>
+    <string name="amber_alerts_title" msgid="5238275758191804575">"هشدارهای امبر"</string>
     <string name="amber_alerts_summary" msgid="5755221775246075883">"دریافت بولتن‌های مربوط به کودک‌ربایی"</string>
     <string name="repeat_title" msgid="8676570486899483606">"تکرار"</string>
     <string name="cell_broadcast_settings" msgid="2416980110093867199">"هشدارهای اضطراری بی‌سیم"</string>
@@ -4324,7 +4312,7 @@
     <string name="usb_use_power_only" msgid="3408055485802114621">"شارژ کردن دستگاه متصل"</string>
     <string name="usb_use_file_transfers" msgid="483915710802018503">"انتقال فایل"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
-    <string name="usb_use_uvc_webcam" msgid="6595429508472038732">"وب‌بین"</string>
+    <string name="usb_use_uvc_webcam" msgid="6595429508472038732">"وب‌کم"</string>
     <string name="usb_transcode_files" msgid="2441954752105119109">"‏تبدیل ویدیو به AVC"</string>
     <string name="usb_transcode_files_summary" msgid="307102635711961513">"ویدیوها در پخش‌کننده‌های رسانه بیشتری پخش خواهند شد، اما ممکن است کیفیت کاهش پیدا کند"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"‏اشتراک‌گذاری اینترنت با USB"</string>
@@ -4347,12 +4335,12 @@
     <string name="usb_summary_tether" msgid="2554569836525075702">"‏اشتراک‌گذاری اینترنت با USB"</string>
     <string name="usb_summary_photo_transfers" msgid="7331503733435780492">"PTP"</string>
     <string name="usb_summary_MIDI" msgid="2372443732675899571">"MIDI"</string>
-    <string name="usb_summary_UVC" msgid="8733131110899174299">"وب‌بین"</string>
+    <string name="usb_summary_UVC" msgid="8733131110899174299">"وب‌کم"</string>
     <string name="usb_summary_file_transfers_power" msgid="2788374660532868630">"انتقال فایل و شارژ دستگاه"</string>
     <string name="usb_summary_tether_power" msgid="4853034392919904792">"‏اشتراک‌گذاری اینترنت با USB و شارژ دستگاه"</string>
     <string name="usb_summary_photo_transfers_power" msgid="9077173567697482239">"‏PTP و شارژ دستگاه"</string>
     <string name="usb_summary_MIDI_power" msgid="1184681982025435815">"‏حالت MIDI و شارژ دستگاه"</string>
-    <string name="usb_summary_UVC_power" msgid="226810354412154061">"وب‌بین و تأمین برق"</string>
+    <string name="usb_summary_UVC_power" msgid="226810354412154061">"وب‌کم و تأمین برق"</string>
     <string name="background_check_pref" msgid="5304564658578987535">"بررسی پس‌زمینه"</string>
     <string name="assist_access_context_title" msgid="5201495523514096201">"استفاده از نوشتار صفحه"</string>
     <string name="assist_access_context_summary" msgid="6951814413185646275">"اجازه به برنامه همیار برای دسترسی به محتوای صفحه به‌عنوان نوشتار"</string>
@@ -4673,6 +4661,12 @@
     <string name="double_tap_power_camera_action_summary" msgid="4942585540579590444">"بازکردن دوربین"</string>
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"کیف پول"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"باز کردن «کیف پول»"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"میان‌بر صفحه قفل تغییر کند؟"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> نیز میان‌بر صفحه قفل است. می‌خواهید آن را تغییر دهید؟"</string>
+    <!-- no translation found for double_tap_power_wallet_footer_title (5417023303339032410) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (1267822422365445657) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"سلفی با چرخاندن دوربین"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"حالت پیمایش"</string>
@@ -5741,10 +5735,8 @@
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"رمزینه پاسخ‌سریع جاری‌سازی صوتی"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"گذرواژه: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"‏برای گوش دادن به <xliff:g id="STREAM_NAME">%1$s</xliff:g>، دیگران می‌توانند هدفون سازگاری را به دستگاه Android خود وصل کنند. سپس می‌توانند این رمزینه پاسخ‌سریع را اسکن کنند."</string>
-    <!-- no translation found for audio_streams_preference_subtitle (4098552511880220046) -->
-    <skip />
-    <!-- no translation found for audio_streams_preference_subtitle_audio_sharing_on (2382924714414148028) -->
-    <skip />
+    <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"‏گوش دادن به همه‌فرستی Auracast"</string>
+    <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"برای پیدا کردن جاری‌سازی صوتی، اشتراک صدا را خاموش کنید"</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"پیدا کردن جاری‌سازی صوتی"</string>
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"‏گوش دادن به دستگاهی که درحال هم‌رسانی صدا است یا گوش دادن به همه‌فرستی Auracast در این اطراف"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"دستگاه صوتی شما"</string>
@@ -5782,12 +5774,9 @@
     <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"افزودن روش بازیابی پین"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"تغییر پین"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"پین را فراموش کردم"</string>
-    <!-- no translation found for supervision_update_recovery_email_preference_title (2057393838251915087) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_title (8447541098148430866) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_summary (4865713157106413979) -->
-    <skip />
+    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"ایمیل بازیابی را به‌روزرسانی کنید"</string>
+    <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"حذف پین"</string>
+    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"با این کار همه تنظیمات نظارت شما بازنشانی خواهد شد"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"فیلترهای محتوای وب"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"‏‫Google Chrome و وب"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"سایت‌های صریح مسدود شود"</string>

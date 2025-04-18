@@ -344,7 +344,9 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{사용 - 앱 #개가 위치 정보에 액세스할 수 있음}other{사용 - 앱 #개가 위치 정보에 액세스할 수 있음}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"로드 중…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"근처 기기 권한이 있는 앱이 연결된 기기의 상대적인 위치를 파악할 수 있습니다."</string>
-    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <!-- no translation found for location_settings_footer_location_off_with_telephony (5600725945541382556) -->
+    <skip />
+    <!-- no translation found for location_settings_footer_location_off_no_telephony (2709958040008816610) -->
     <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"위치 설정에 대해 자세히 알아보기"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"변경하려면 ChromeOS 설정 &gt; 개인 정보 보호 및 보안 &gt; 개인 정보 보호 설정 &gt; 위치 액세스로 이동하세요."</string>
@@ -611,10 +613,8 @@
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"패턴 및 얼굴 인식 설정을 건너뛰시겠습니까?"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"패턴 및 지문 설정을 건너뛰시겠습니까?"</string>
     <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"패턴, 얼굴 인식, 지문 설정을 건너뛰시겠습니까?"</string>
-    <!-- no translation found for resume_animation (5259729861893297887) -->
-    <skip />
-    <!-- no translation found for pause_animation (2209064682137909056) -->
-    <skip />
+    <string name="resume_animation" msgid="5259729861893297887">"애니메이션 재개"</string>
+    <string name="pause_animation" msgid="2209064682137909056">"애니메이션 일시중지"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"화면 잠금 설정"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"완료"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"죄송합니다. 센서가 아닙니다."</string>
@@ -1032,8 +1032,7 @@
     <string name="android_beam_explained" msgid="5684416131846701256">"이 기능을 사용 설정하면 기기를 서로 가까이 두어 앱 콘텐츠를 다른 NFC 지원 기기와 공유할 수 있습니다. 예를 들어 웹페이지, YouTube 동영상, 연락처 등을 공유할 수 있습니다.\n\n기기를 서로 가까이 두고(일반적으로 뒷면끼리 맞댐) 화면을 탭하기만 하면 됩니다. 공유할 대상은 앱에서 결정합니다."</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi-Fi"</string>
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Wi-Fi 사용"</string>
-    <!-- no translation found for wifi_networks_category (8011323954745036753) -->
-    <skip />
+    <string name="wifi_networks_category" msgid="8011323954745036753">"네트워크"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Wi-Fi 설정"</string>
     <string name="wifi_select_network" msgid="6692897876718813259">"Wi-Fi 선택"</string>
     <string name="wifi_starting" msgid="6147022683967506341">"Wi-Fi 사용 설정 중..."</string>
@@ -1214,22 +1213,14 @@
     <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> ‑ 충전 중"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"핫스팟 연결"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"연결 강도"</string>
-    <!-- no translation found for ethernet_dns1 (6487470669719468602) -->
-    <skip />
-    <!-- no translation found for ethernet_dns2 (484620572555181363) -->
-    <skip />
-    <!-- no translation found for ethernet_gateway (4064061619318875567) -->
-    <skip />
-    <!-- no translation found for ethernet_network_prefix_length (3693127271457763198) -->
-    <skip />
-    <!-- no translation found for ethernet_ip_settings (3344064201878792090) -->
-    <skip />
-    <!-- no translation found for ethernet_config_submit (724743720212124025) -->
-    <skip />
-    <!-- no translation found for ethernet_config_cancel (986322993908814366) -->
-    <skip />
-    <!-- no translation found for ethernet_config_title (4784063109810004382) -->
-    <skip />
+    <string name="ethernet_dns1" msgid="6487470669719468602">"DNS 2(비공개 DNS가 우선 적용되지 않는 경우)"</string>
+    <string name="ethernet_dns2" msgid="484620572555181363">"DNS 2(비공개 DNS가 우선 적용되지 않는 경우)"</string>
+    <string name="ethernet_gateway" msgid="4064061619318875567">"게이트웨이"</string>
+    <string name="ethernet_network_prefix_length" msgid="3693127271457763198">"네트워크 접두어 길이"</string>
+    <string name="ethernet_ip_settings" msgid="3344064201878792090">"IP 설정"</string>
+    <string name="ethernet_config_submit" msgid="724743720212124025">"제출"</string>
+    <string name="ethernet_config_cancel" msgid="986322993908814366">"취소"</string>
+    <string name="ethernet_config_title" msgid="4784063109810004382">"이더넷 설정"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"저장된 네트워크"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"구독"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"기타 네트워크"</string>
@@ -1458,8 +1449,7 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"사용 안함"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"표시 시간"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"기기를 들어 대기 모드 해제"</string>
-    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
-    <skip />
+    <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"무선 충전으로 제한"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"절전 모드 자동 해제"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"표시 시점"</string>
     <string name="doze_title" msgid="1523090408230862316">"알림 수신 시 화면 켜짐"</string>
@@ -1626,8 +1616,7 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"충전 중"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"충전 중이고 똑바로 세워져 있을 때"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"도킹하는 동안"</string>
-    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
-    <skip />
+    <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"무선 충전으로 제한"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"액세스 포인트 수정"</string>
     <string name="apn_add" msgid="9069613192201630934">"액세스 포인트 추가"</string>
@@ -1741,8 +1730,7 @@
     <string name="rx_ethernet_speed" msgid="6642000569214969711">"수신 링크 속도"</string>
     <string name="ethernet_network_usage" msgid="3795965384177426780">"네트워크 사용량"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"이더넷 테더링"</string>
-    <!-- no translation found for ethernet_modify (1326316717004440503) -->
-    <skip />
+    <string name="ethernet_modify" msgid="1326316717004440503">"수정"</string>
     <string name="tethering_footer_info" msgid="6824352505979800594">"핫스팟 및 테더링을 사용하면 다른 기기에서 내 데이터와 연결하여 인터넷을 사용할 수 있습니다. 또한 앱을 통해 핫스팟으로 주변 기기와 콘텐츠를 공유할 수 있습니다."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"핫스팟 및 테더링으로 다른 기기에서 내 Wi-Fi 또는 모바일 데이터 연결을 통해 인터넷을 사용할 수 있도록 합니다. 앱에서도 핫스팟을 만들어 주변 기기와 콘텐츠를 공유할 수 있습니다."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"고객센터"</string>
@@ -1896,7 +1884,7 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"패턴 설정"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"화면 잠금을 해제하려면 패턴을 그려야 합니다."</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"패턴 표시"</string>
-    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"향상된 PIN 개인 정보 보호"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"PIN 개인 정보 보호 강화"</string>
     <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"PIN 입력 시 애니메이션 사용 중지"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"프로필 패턴 표시"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"탭하면 진동"</string>
@@ -2170,6 +2158,8 @@
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"홈으로 이동"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"뒤로"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"최근 앱 보기"</string>
+    <string name="three_finger_tap_launch_app_title" msgid="55761877549896819">"다른 앱 열기"</string>
+    <string name="three_finger_tap_launch_app_summary" msgid="2015894823281420733">"설치된 앱 목록에서 선택하기"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"홈으로 이동"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"터치패드 아무 곳에서나 세 손가락을 사용해 위로 스와이프하세요."</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"돌아가기"</string>
@@ -2295,8 +2285,7 @@
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"타이밍 제어"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"시스템 제어"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"의견 보내기"</string>
-    <!-- no translation found for accessibility_send_survey_title (7899716184811587023) -->
-    <skip />
+    <string name="accessibility_send_survey_title" msgid="7899716184811587023">"평가"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"다운로드한 앱"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"실험"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"기능 플래그"</string>
@@ -2624,8 +2613,7 @@
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{짧은 지연({time}초)}other{짧은 지연({time}초)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{중간 지연({time}초)}other{중간 지연({time}초)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{긴 지연({time}초)}other{긴 지연({time}초)}}"</string>
-    <!-- no translation found for accessibility_autoclick_delay_unit_second (1562809410497613173) -->
-    <skip />
+    <string name="accessibility_autoclick_delay_unit_second" msgid="1562809410497613173">"{count,plural, =1{{time}초}other{{time}초}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"설정"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"사용"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"사용 안함"</string>
@@ -4673,6 +4661,12 @@
     <string name="double_tap_power_camera_action_summary" msgid="4942585540579590444">"카메라 열기"</string>
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"월렛"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"월렛 열기"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"잠금 화면 바로가기를 변경하시겠습니까?"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g>은(는) 잠금 화면 바로가기로도 설정되어 있습니다. 변경하시겠습니까?"</string>
+    <!-- no translation found for double_tap_power_wallet_footer_title (5417023303339032410) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (1267822422365445657) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"뒤집어서 셀피용 카메라로 전환"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"탐색 모드"</string>
@@ -5741,10 +5735,8 @@
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"오디오 스트림 QR 코드"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"비밀번호: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"다른 사용자가 <xliff:g id="STREAM_NAME">%1$s</xliff:g> 스트림을 들으려면 사용 중인 Android 기기에 호환되는 헤드폰을 연결합니다. 그런 다음 이 QR 코드를 스캔합니다."</string>
-    <!-- no translation found for audio_streams_preference_subtitle (4098552511880220046) -->
-    <skip />
-    <!-- no translation found for audio_streams_preference_subtitle_audio_sharing_on (2382924714414148028) -->
-    <skip />
+    <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"Auracast 브로드캐스트 듣기"</string>
+    <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"오디오 스트림을 찾으려면 오디오 공유를 사용 중지하세요"</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"오디오 스트림 찾기"</string>
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"오디오를 공유 중인 기기 또는 주변 Auracast 방송을 들으세요."</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"내 오디오 기기"</string>
@@ -5782,12 +5774,9 @@
     <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"PIN 복구 방법 추가"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"PIN 변경"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"PIN 찾기"</string>
-    <!-- no translation found for supervision_update_recovery_email_preference_title (2057393838251915087) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_title (8447541098148430866) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_summary (4865713157106413979) -->
-    <skip />
+    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"복구 이메일 업데이트"</string>
+    <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"PIN 삭제"</string>
+    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"이렇게 하면 모든 감독 설정이 재설정됩니다."</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"웹 콘텐츠 필터"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Chrome 및 웹"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"선정적인 사이트 차단 시도"</string>

@@ -344,7 +344,9 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Päällä / # sovelluksella on pääsyoikeus sijaintiin}other{Päällä / # sovelluksella on pääsyoikeus sijaintiin}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Ladataan…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Sovellukset, joilla on lähellä olevien laitteiden lupa, voivat määrittää yhdistettyjen laitteiden suhteellisen sijainnin."</string>
-    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <!-- no translation found for location_settings_footer_location_off_with_telephony (5600725945541382556) -->
+    <skip />
+    <!-- no translation found for location_settings_footer_location_off_no_telephony (2709958040008816610) -->
     <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Lue lisää sijaintiasetuksista"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Voit vaihtaa valintaa avaamalla ChromeOS:n asetukset &gt; Yksityisyys ja turvallisuus &gt; Yksityisyysasetukset &gt; Pääsy sijaintiin"</string>
@@ -474,7 +476,7 @@
     <string name="biometric_settings_intro_with_face" msgid="7671919122230588521">"Kelloavaus on kätevä tapa avata puhelin, esimerkiksi jos kasvojen tunnistus ei onnistu."</string>
     <string name="biometric_settings_use_fingerprint_or_watch_for" msgid="1160830065613858095">"Käytä sormenjälkeä tai kelloa:"</string>
     <string name="biometric_settings_use_face_or_watch_for" msgid="1507077107150278532">"Käytä kasvoja tai kelloa:"</string>
-    <string name="biometric_settings_use_face_fingerprint_or_watch_for" msgid="7495835723072020641">"Käytä kasvoja, sormenjälkeä tai kelloa:"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_for" msgid="7495835723072020641">"Kasvojen, sormenjäljen tai kellon käyttö:"</string>
     <string name="biometric_settings_use_watch_for" msgid="5454545622244040110">"Käytä kelloa:"</string>
     <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Kasvoilla tai kellolla"</string>
     <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Sormenjäljellä tai kellolla"</string>
@@ -611,10 +613,8 @@
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"Ohitetaanko kuvio ja kasvot?"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"Ohitetaanko kuvio ja sormenjälki?"</string>
     <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"Ohitetaanko kuvio, kasvot ja sormenjälki?"</string>
-    <!-- no translation found for resume_animation (5259729861893297887) -->
-    <skip />
-    <!-- no translation found for pause_animation (2209064682137909056) -->
-    <skip />
+    <string name="resume_animation" msgid="5259729861893297887">"Jatka animaatiota"</string>
+    <string name="pause_animation" msgid="2209064682137909056">"Keskeytä animaatio"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"Ota näytön lukitus käyttöön"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Valmis"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Hups, anturi ei ole siinä."</string>
@@ -1032,8 +1032,7 @@
     <string name="android_beam_explained" msgid="5684416131846701256">"Kun tämä ominaisuus on käytössä, voit jakaa sovellusten sisältöä toiselle NFC-yhteensopivalle laitteelle asettamalla laitteet lähekkäin. Voit jakaa esimerkiksi verkkosivuja, YouTube-videoita ja yhteystietoja.\n\nAseta vain laitteet vierekkäin (yleensä takakannet vastakkain) ja kosketa näyttöä. Jaettava sisältö riippuu sovelluksesta."</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi-Fi"</string>
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Käytä Wi-Fi-yhteyttä"</string>
-    <!-- no translation found for wifi_networks_category (8011323954745036753) -->
-    <skip />
+    <string name="wifi_networks_category" msgid="8011323954745036753">"Verkot"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Wi-Fi-asetukset"</string>
     <string name="wifi_select_network" msgid="6692897876718813259">"Valitse Wi-Fi-verkko"</string>
     <string name="wifi_starting" msgid="6147022683967506341">"Wi-Fi-yhteyttä otetaan käyttöön…"</string>
@@ -1044,7 +1043,7 @@
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Ilmoita julkisista verkoista"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Ilmoita, kun käytettävissä on laadukkaita julkisia verkkoja"</string>
     <string name="wifi_allow_wep_networks" msgid="8772342993235292010">"Salli WEP-verkot"</string>
-    <string name="wifi_allow_wep_networks_summary" msgid="3033397893296724615">"WEP on vanhempi tietoturvaprotokolla, joka on vähemmän turvallinen"</string>
+    <string name="wifi_allow_wep_networks_summary" msgid="3033397893296724615">"WEP on vanha ja vähemmän turvallinen tietoturvaprotokolla"</string>
     <string name="wifi_allow_wep_networks_summary_carrier_not_allow" msgid="6298103289728210026">"Operaattori ei salli WEP-verkkoja, koska ne ovat vähemmän turvallisia"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Laita Wi-Fi päälle automaattisesti"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wi-Fi laitetaan automaattisesti päälle, kun lähistöllä on kotiverkkosi tai muita laadukkaita tallennettuja verkkoja"</string>
@@ -1214,22 +1213,14 @@
     <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> – Ladataan"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"Hotspot-yhteys"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"Yhteyden vahvuus"</string>
-    <!-- no translation found for ethernet_dns1 (6487470669719468602) -->
-    <skip />
-    <!-- no translation found for ethernet_dns2 (484620572555181363) -->
-    <skip />
-    <!-- no translation found for ethernet_gateway (4064061619318875567) -->
-    <skip />
-    <!-- no translation found for ethernet_network_prefix_length (3693127271457763198) -->
-    <skip />
-    <!-- no translation found for ethernet_ip_settings (3344064201878792090) -->
-    <skip />
-    <!-- no translation found for ethernet_config_submit (724743720212124025) -->
-    <skip />
-    <!-- no translation found for ethernet_config_cancel (986322993908814366) -->
-    <skip />
-    <!-- no translation found for ethernet_config_title (4784063109810004382) -->
-    <skip />
+    <string name="ethernet_dns1" msgid="6487470669719468602">"DNS 1 (ellei ohitettu yksityisellä DNS:llä)"</string>
+    <string name="ethernet_dns2" msgid="484620572555181363">"DNS 2 (ellei ohitettu yksityisellä DNS:llä)"</string>
+    <string name="ethernet_gateway" msgid="4064061619318875567">"Yhdyskäytävä"</string>
+    <string name="ethernet_network_prefix_length" msgid="3693127271457763198">"Verkon etuliitteen pituus"</string>
+    <string name="ethernet_ip_settings" msgid="3344064201878792090">"IP-asetukset"</string>
+    <string name="ethernet_config_submit" msgid="724743720212124025">"Lähetä"</string>
+    <string name="ethernet_config_cancel" msgid="986322993908814366">"Peru"</string>
+    <string name="ethernet_config_title" msgid="4784063109810004382">"Ethernet-asetukset"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Tallennetut verkot"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Tilaukset"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Muut verkot"</string>
@@ -1349,9 +1340,9 @@
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Kasvojentunnistus"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Lue lisää automaattisesta käännöstä"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Näytön resoluutio"</string>
-    <string name="screen_resolution_option_high" msgid="2617496842852992853">"Korkea resoluutio"</string>
-    <string name="screen_resolution_option_full" msgid="4456839315039000517">"Maksimaalinen resoluutio"</string>
-    <string name="screen_resolution_footer" msgid="1230761249204935717">"Maksimaalinen resoluutio kuluttaa enemmän akkua. Jotkin sovellukset käynnistyvät uudelleen, kun vaihdat resoluutiota."</string>
+    <string name="screen_resolution_option_high" msgid="2617496842852992853">"Suuri resoluutio"</string>
+    <string name="screen_resolution_option_full" msgid="4456839315039000517">"Suurin resoluutio"</string>
+    <string name="screen_resolution_footer" msgid="1230761249204935717">"Suurin resoluutio kuluttaa enemmän akkuvirtaa. Jotkin sovellukset käynnistyvät uudelleen, kun vaihdat resoluutiota."</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g>, <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Värit"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Luonnollinen"</string>
@@ -1458,8 +1449,7 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Pois päältä"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Aloitus"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Herätä nostamalla"</string>
-    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
-    <skip />
+    <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Rajoita langattomaan lataukseen"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Himmennetty näyttö"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Näyttämisaika"</string>
     <string name="doze_title" msgid="1523090408230862316">"Ilmoitukset herättävät näytön"</string>
@@ -1626,8 +1616,7 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Latauksen aikana"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"Latauksen aikana ja pystyasennossa"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"Telakoituna"</string>
-    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
-    <skip />
+    <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"Rajoita langattomaan lataukseen"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN:t"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Muokkaa tukiasemaa"</string>
     <string name="apn_add" msgid="9069613192201630934">"Lisää tukiasema"</string>
@@ -1709,7 +1698,7 @@
     <string name="call_settings_summary" msgid="8244293779053318053">"Ota käyttöön puhelinvastaaja, soitonsiirrot, koputuspalvelu, soittajan tunnus"</string>
     <string name="tether_settings_title_usb" msgid="5926474044238409099">"Jaettu yhteys USB:n kautta"</string>
     <string name="tether_settings_title_wifi" msgid="4327056146425282159">"Kannettava yhteyspiste"</string>
-    <string name="tether_settings_title_bluetooth" msgid="8878813702520141084">"Jaettu Bluetooth-yhteys"</string>
+    <string name="tether_settings_title_bluetooth" msgid="8878813702520141084">"Bluetoothin jakaminen"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="4437274151658505496">"Jaettu yhteys"</string>
     <string name="tether_settings_title_all" msgid="6807525590937697228">"Hotspot ja yhteyden jako"</string>
     <string name="tether_settings_summary_hotspot_on_tether_on" msgid="6110241048260139633">"Hotspot päällä, jaettu yhteys"</string>
@@ -1734,15 +1723,14 @@
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Internetyhteyttä ei jaeta muille laitteille."</string>
     <string name="tether_preference_summary_off" msgid="6266799346319794630">"Pois päältä"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"Internetin jakaminen USB:n kautta"</string>
-    <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Jaettu Bluetooth-yhteys"</string>
+    <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Bluetoothin jakaminen"</string>
     <string name="ethernet_ip_address" msgid="4218340787862242573">"IP-osoite"</string>
     <string name="ethernet_mac_address_title" msgid="3235879195237611007">"MAC-osoite"</string>
     <string name="tx_ethernet_speed" msgid="4785035505065551012">"Julkisen liikenteen linkin nopeus"</string>
     <string name="rx_ethernet_speed" msgid="6642000569214969711">"Vastaanottolinkin nopeus"</string>
     <string name="ethernet_network_usage" msgid="3795965384177426780">"Verkon käyttö"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernetin jakaminen"</string>
-    <!-- no translation found for ethernet_modify (1326316717004440503) -->
-    <skip />
+    <string name="ethernet_modify" msgid="1326316717004440503">"Muokkaa"</string>
     <string name="tethering_footer_info" msgid="6824352505979800594">"Hotspot- ja puhelimen käyttäminen modeemina ‑ominaisuuksien avulla voit jakaa internetyhteyden muille laitteille datayhteydellä. Sovellukset voivat myös luoda hotspotin ja jakaa sisältöä lähellä oleville laitteille."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Jaa internetyhteys muille laitteille Wi-Fin tai mobiilidatan avulla hotspotilla tai käyttämällä puhelinta modeemina. Sovellukset voivat myös luoda hotspotin ja jakaa sisältöä lähellä oleville laitteille."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Ohjeet"</string>
@@ -1816,7 +1804,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"Valitse PIN-koodi"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Valitse työ-PIN"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Valitse kuvio"</string>
-    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"Paranna suojausta lisäämällä kuvio laitteen lukituksen avaamiseksi"</string>
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"Paranna suojausta lisäämällä kuvio laitteen lukituksen avaamiseen"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Valitse työkuvio"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Sormenjälki: aseta salasana"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Sormenjälki: aseta kuvio"</string>
@@ -2170,6 +2158,8 @@
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Siirry etusivulle"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"Takaisin"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"Katso viimeisimmät sovellukset"</string>
+    <string name="three_finger_tap_launch_app_title" msgid="55761877549896819">"Avaa toinen sovellus"</string>
+    <string name="three_finger_tap_launch_app_summary" msgid="2015894823281420733">"Valitse asennettujen sovellusten listalta"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"Siirry aloitusnäytölle"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"Pyyhkäise ylös 3 sormella mistä tahansa kosketuslevyllä"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"Takaisin"</string>
@@ -2280,7 +2270,7 @@
     <string name="accessibility_touchpad_system_gestures_enable_summary" msgid="7076378989016181266">"Kun tämä on poissa päältä, kosketuslevy ohittaa kolmen tai neljän sormen eleet"</string>
     <string name="keywords_accessibility_touchpad_system_gestures_enable" msgid="4406441971607855466">"kosketuslevy, ohjauslevy, pyyhkäisy"</string>
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Värikontrasti"</string>
-    <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Korkeampi kontrasti tekee tekstistä, painikkeista ja kuvakkeista näkyvämpiä. Valitse haluamasi kontrasti."</string>
+    <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Suurempi kontrasti tekee tekstistä, painikkeista ja kuvakkeista näkyvämpiä. Valitse haluamasi kontrasti."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Jotkin sovellukset eivät välttämättä tue kaikkia väri‑ ja tekstikontrastin asetuksia"</string>
     <string name="color_contrast_preview" msgid="6791430227535363883">"Esikatselu"</string>
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"Helena, Aatu"</string>
@@ -2295,8 +2285,7 @@
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Ajoitussäätimet"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Järjestelmän hallinta"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Lähetä palautetta"</string>
-    <!-- no translation found for accessibility_send_survey_title (7899716184811587023) -->
-    <skip />
+    <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Arvioi meidät"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Ladatut sovellukset"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Kokeellinen"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Ominaisuusilmoitukset"</string>
@@ -2460,7 +2449,7 @@
     <string name="accessibility_notification_high_contrast_text_body_message" msgid="6846453833480117658">"Voimakkaan kontrastin teksti on korvattu ääriviivatekstillä. Voit laittaa sen päälle kohdasta <xliff:g id="SETTINGS">%1$s</xliff:g>."</string>
     <string name="accessibility_notification_high_contrast_text_action_open_settings" msgid="5945069315472850294">"Avaa <xliff:g id="SETTINGS">%1$s</xliff:g>"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8848579943445806659">"Lisää tekstiin ääriviivat"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Vahvista kontrastia lisäämällä tekstin ympärille musta tai valkoinen tausta"</string>
+    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Lisää kontrastia lisäämällä tekstin ympärille musta tai valkoinen tausta"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Päivitä näytön suurennus automaatt."</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Päivitä näytön suurennus sovellussiirtymissä"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Puhelun katkaisu virtapainikkeella"</string>
@@ -2574,7 +2563,7 @@
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Kuulolaitteet"</string>
     <string name="accessibility_hearing_device_saved_title" msgid="7573926212664909296">"Tallennetut laitteet"</string>
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"Kuulolaitteen ohjaimet"</string>
-    <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Kuulolaitteen pikakomento"</string>
+    <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Kuulolaitepikakomento"</string>
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Kuulolaiteyhteensopivuus"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Parantaa yhteensopivuutta induktiosilmukan kanssa ja vähentää ei-toivottuja ääniä"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"Tietoa kuulolaitteista"</string>
@@ -2624,8 +2613,7 @@
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{Lyhyt ({time} sekunti)}other{Lyhyt ({time} sekuntia)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{Keskipitkä ({time} sekunti)}other{Keskipitkä ({time} sekuntia)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{Pitkä ({time} sekunti)}other{Pitkä ({time} sekuntia)}}"</string>
-    <!-- no translation found for accessibility_autoclick_delay_unit_second (1562809410497613173) -->
-    <skip />
+    <string name="accessibility_autoclick_delay_unit_second" msgid="1562809410497613173">"{count,plural, =1{{time} sekunti}other{{time} sekuntia}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Asetukset"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"Päällä"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"Ei päällä"</string>
@@ -3371,7 +3359,7 @@
     <string name="preferred_network_type_title" msgid="812509938714590857">"Ensisijainen verkko"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (suositus)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"MMS-viestit"</string>
-    <string name="mms_message_summary" msgid="2855847140141698341">"Lähetä ja vastaanota, kun mobiilidata ei ole käytössä"</string>
+    <string name="mms_message_summary" msgid="2855847140141698341">"Lähetä ja vastaanota, kun mobiilidata ei ole päällä"</string>
     <string name="auto_data_switch_title" msgid="5862200603753603464">"Vaihda mobiilidata automaattisesti"</string>
     <string name="auto_data_switch_summary" msgid="1934340931995429057">"Käytä tätä verkkoa, kun sen saatavuus on parempi"</string>
     <string name="work_sim_title" msgid="8999872928646924429">"SIM-kortti (työ)"</string>
@@ -4257,7 +4245,7 @@
     <string name="notifications_categories_off" msgid="7712037485557237328">"{count,plural, =1{# luokka laitettu pois päältä}other{# luokkaa laitettu pois päältä}}"</string>
     <string name="runtime_permissions_additional_count" msgid="6071909675951786523">"{count,plural, =1{# lisälupa}other{# lisälupaa}}"</string>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Käyttöoikeuksia ei ole myönnetty"</string>
-    <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Käyttöoikeuksia ei ole pyydetty"</string>
+    <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Lupia ei pyydetty"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Päätä sovelluksen pääsystä dataasi"</string>
     <string name="permissions_usage_title" msgid="2942741460679049132">"Yksityisyydenhallintapaneeli"</string>
     <string name="permissions_usage_summary" msgid="6784310472062516454">"Näytä, mitkä sovellukset ovat käyttäneet lupia äskettäin"</string>
@@ -4478,7 +4466,7 @@
     <string name="condition_expand_show" msgid="1501084007540953213">"Näytä"</string>
     <string name="condition_expand_hide" msgid="8347564076209121058">"Piilota"</string>
     <string name="condition_hotspot_title" msgid="7903918338790641071">"Hotspot on aktiivinen"</string>
-    <string name="condition_airplane_title" msgid="5847967403687381705">"Lentokonetila on käytössä"</string>
+    <string name="condition_airplane_title" msgid="5847967403687381705">"Lentokonetila on päällä"</string>
     <string name="condition_airplane_summary" msgid="1964500689287879888">"Ei verkkoja saatavilla"</string>
     <string name="condition_zen_title" msgid="7674761111934567490">"Älä häiritse ‑tila on käytössä"</string>
     <string name="condition_zen_summary_phone_muted" msgid="6516753722927681820">"Puhelin mykistetty"</string>
@@ -4673,6 +4661,12 @@
     <string name="double_tap_power_camera_action_summary" msgid="4942585540579590444">"Avaa kamera"</string>
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Wallet"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Avaa Wallet"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"Vaihdetaanko lukitusnäytön pikakuvaketta?"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> on myös lukitusnäytön pikakuvake. Haluatko muuttaa sitä?"</string>
+    <!-- no translation found for double_tap_power_wallet_footer_title (5417023303339032410) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (1267822422365445657) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Ota selfie kääntämällä kameraa"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Navigointitila"</string>
@@ -5623,7 +5617,7 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Laitteesi nimi näkyy asentamillesi sovelluksille. Myös muut käyttäjät voivat nähdä nimen, kun muodostat Bluetooth-yhteyden laitteisiin, yhteyden Wi-Fi-verkkoon tai aktivoit Wi-Fi-hotspotin."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Kieliopillinen suku"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Valitse kieliopillinen suku"</string>
-    <string name="content_protection_preference_title" msgid="5069260032659193074">"Tarkistetaan löytyykö petollisia sovelluksia"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"Tarkistus petollisten sovellusten varalta"</string>
     <string name="content_protection_preference_summary" msgid="2252393849408445391">"Tarkista sovellustoiminta tietojenkalastelun osalta"</string>
     <string name="content_protection_preference_user_consent_switch_title" msgid="1797782616799594426">"Käytä tarkistusta petollisten sovellusten havaitsemiseen"</string>
     <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"Käytä tarkistusta petollisten työsovellusten havaitsemiseen"</string>
@@ -5637,7 +5631,7 @@
     <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Pakota DRM-avaimen hallinta käyttämään ohjelmistopohjaista whitebox-salausta"</string>
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Puhdista näyttö anturin läheltä ja yritä uudelleen"</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"Muunnettu eSIM-muotoon. Poista ja hävitä kortti."</string>
-    <string name="sync_across_devices_title" msgid="3447757705383089345">"Synkronoi laitteiden välillä"</string>
+    <string name="sync_across_devices_title" msgid="3447757705383089345">"Synkronointi laitteiden välillä"</string>
     <string name="device_diagnostics_title" msgid="2914523189695727897">"Laitediagnostiikka"</string>
     <string name="audio_sharing_title" msgid="4144157137502923821">"Audion jakaminen"</string>
     <string name="audio_sharing_switch_title" msgid="7052827328670825701">"Jaa audio"</string>
@@ -5741,10 +5735,8 @@
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"Audiostriimin QR-koodi"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Salasana: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Jos muut haluavat kuunnella audiota, jota <xliff:g id="STREAM_NAME">%1$s</xliff:g> toistaa, he voivat yhdistää yhteensopivat kuulokkeet Android-laitteeseen. Sen jälkeen he voivat skannata QR-koodin."</string>
-    <!-- no translation found for audio_streams_preference_subtitle (4098552511880220046) -->
-    <skip />
-    <!-- no translation found for audio_streams_preference_subtitle_audio_sharing_on (2382924714414148028) -->
-    <skip />
+    <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"Kuuntele Auracast-lähetystä"</string>
+    <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"Laita audionjako pois päältä, niin voit löytää audiostriimejä"</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Etsi audiostriimi"</string>
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Kuuntele audiota jakavaa laitetta tai lähellä olevaa Auracast-lähetystä"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"Audiolaitteesi"</string>
@@ -5782,12 +5774,9 @@
     <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"Lisää PIN-koodin palauttamismenetelmä"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Vaihda PIN-koodi"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"PIN-koodi unohtunut"</string>
-    <!-- no translation found for supervision_update_recovery_email_preference_title (2057393838251915087) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_title (8447541098148430866) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_summary (4865713157106413979) -->
-    <skip />
+    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Päivitä varasähköposti"</string>
+    <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Poista PIN-koodi"</string>
+    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Tämä nollaa kaikki valvonta-asetukset"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Verkkosisällön suodattimet"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome ja Web"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Pyri estämään aikuisille tarkoitetut sivustot"</string>

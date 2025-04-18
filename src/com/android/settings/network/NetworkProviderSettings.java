@@ -77,6 +77,7 @@ import com.android.settings.network.ethernet.EthernetSwitchPreferenceController;
 import com.android.settings.network.ethernet.EthernetTracker;
 import com.android.settings.network.ethernet.EthernetTrackerImpl;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.widget.GearPreference;
 import com.android.settings.wifi.AddNetworkFragment;
 import com.android.settings.wifi.AddWifiNetworkPreference;
 import com.android.settings.wifi.ConfigureWifiEntryFragment;
@@ -1107,13 +1108,16 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
         setAdditionalSettingsSummaries();
     }
 
+    @SuppressWarnings("NullAway")
     void updateEthernetInterfaces(Collection<EthernetInterface> interfaces) {
         int index = 0;
         mEthernetPreferenceCategory.removeAll();
+        mEthernetPreferenceCategory.addPreference(mEthernetSwitchPreference);
         if (interfaces.size() > 0) {
             for (EthernetInterface ethernetInterface : interfaces) {
-                Preference pref = new Preference(getPrefContext());
+                GearPreference pref = new GearPreference(getPrefContext(), null /* AttributeSet */);
                 pref.setOrder(index++);
+                pref.setIcon(getContext().getDrawable(R.drawable.ic_settings_ethernet));
                 pref.setKey(ethernetInterface.getId());
                 pref.setTitle(getContext().getString(R.string.ethernet_interface_title, index));
                 pref.setSummary(
@@ -1123,6 +1127,9 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
                 pref.setOnPreferenceClickListener(preference -> {
                     launchEthernetInterfaceDetailsFragment(preference);
                     return true;
+                });
+                pref.setOnGearClickListener(preference -> {
+                    launchEthernetInterfaceDetailsFragment(preference);
                 });
                 mEthernetPreferenceCategory.addPreference(pref);
             }

@@ -344,7 +344,9 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{ચાલુ છે / # ઍપ લોકેશનનો ઍક્સેસ ધરાવે છે}one{ચાલુ છે / # ઍપ લોકેશનનો ઍક્સેસ ધરાવે છે}other{ચાલુ છે / # ઍપ લોકેશનનો ઍક્સેસ ધરાવે છે}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"લોડ કરી રહ્યું છે…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"નજીકના ડિવાઇસ જોવાની પરવાનગી ધરાવતી બધી ઍપ, કનેક્ટ કરેલા ડિવાઇસના લોકેશન નિર્ધારિત કરી શકે છે."</string>
-    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <!-- no translation found for location_settings_footer_location_off_with_telephony (5600725945541382556) -->
+    <skip />
+    <!-- no translation found for location_settings_footer_location_off_no_telephony (2709958040008816610) -->
     <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"લોકેશન સેટિંગ વિશે વધુ જાણો"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"ફેરફાર કરવા માટે, ChromeOS સેટિંગ &gt; પ્રાઇવસી અને સુરક્ષા &gt; પ્રાઇવસીને લગતા નિયંત્રણો &gt; લોકેશન ઍક્સેસ પર જાઓ"</string>
@@ -611,10 +613,8 @@
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"પૅટર્ન અને ચહેરાનું સેટઅપ છોડીએ?"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"પૅટર્ન અને ફિંગરપ્રિન્ટનું સેટઅપ છોડીએ?"</string>
     <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"પૅટર્ન, ફેસ અને ફિંગરપ્રિન્ટનું સેટઅપ છોડીએ?"</string>
-    <!-- no translation found for resume_animation (5259729861893297887) -->
-    <skip />
-    <!-- no translation found for pause_animation (2209064682137909056) -->
-    <skip />
+    <string name="resume_animation" msgid="5259729861893297887">"ઍનિમેશન ફરી શરૂ કરો"</string>
+    <string name="pause_animation" msgid="2209064682137909056">"ઍનિમેશન થોભાવો"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"સ્ક્રીન લૉક સેટ કરો"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"થઈ ગયું"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"ઓહ, તે સેન્સર નથી"</string>
@@ -712,7 +712,7 @@
     <string name="private_space_hide_apps_summary" msgid="4418722947376042418">"કોઈ અલગ સ્પેસમાં ખાનગી ઍપને છુપાવો કે લૉક કરો. વધારાની સુરક્ષા માટે, કોઈ સમર્પિત Google એકાઉન્ટનો ઉપયોગ કરો."</string>
     <string name="private_space_setup_sub_header" msgid="550476876393954356">"તેની કાર્ય કરવાની રીત"</string>
     <string name="private_space_separate_account_text" msgid="790319706810190320"><b>"તમારી સ્પેસ માટે કોઈ Google એકાઉન્ટ બનાવો"</b>\n"જો તમે કોઈ ખાસ એકાઉન્ટનો ઉપયોગ કરો, તો તેનાથી સિંક કરેલી ફાઇલો, ફોટા અને ઇમેઇલને તમારી સ્પેસની બહાર દેખાવાથી રોકવામાં સહાય મળે છે"</string>
-    <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"કોઈ લૉક સેટ કરો"</b>\n"તમારી સ્પેસને લૉક કરી રાખો, જેથી અન્ય લોકો તેને ખાલી ન શકે"</string>
+    <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"કોઈ લૉક સેટ કરો"</b>\n"તમારી સ્પેસને લૉક કરી રાખો, જેથી અન્ય લોકો તેને ખોલી ન શકે"</string>
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"ઍપ ઇન્સ્ટૉલ કરો"</b>\n"તમે તમારી સ્પેસમાં ખાનગી રાખવા માગતા હો, તે ઍપ ઇન્સ્ટૉલ કરો"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"ધ્યાનમાં રાખો"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"જ્યારે તમે તમારી સ્પેસ લૉક કરશો, ત્યારે ઍપ બંધ થઈ જશે"</b>\n"જ્યારે તમે તમારી સ્પેસ લૉક કરશો, ત્યારે તમારી સ્પેસમાંની ઍપ બંધ થઈ જશે અને તમને તેમના તરફથી કોઈ નોટિફિકેશન મળશે નહીં"</string>
@@ -1032,8 +1032,7 @@
     <string name="android_beam_explained" msgid="5684416131846701256">"જ્યારે આ સુવિધા ચાલુ હોય, ત્યારે તમે ઉપકરણોને એકબીજાની નજીક રાખીને ઍપ્લિકેશનના કન્ટેન્ટને બીજા NFC-સક્ષમ ઉપકરણ પર બીમ કરી શકો છો. ઉદાહરણ તરીકે, તમે વેબ પેજ, YouTube વીડિઓ, સંપર્કો અને વધુને બીમ કરી શકો છો.\n\nબસ ઉપકરણોને એકબીજાની નજીક લાવો (સામાન્ય રીતે એકબીજાની પાછળ) અને પછી તમારી સ્ક્રીનને ટૅપ કરો. શું બીમ થાય તે ઍપ્લિકેશન નક્કી કરે છે."</string>
     <string name="wifi_settings" msgid="8313301946393559700">"વાઇ-ફાઇ"</string>
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"વાઇ-ફાઇનો ઉપયોગ કરો"</string>
-    <!-- no translation found for wifi_networks_category (8011323954745036753) -->
-    <skip />
+    <string name="wifi_networks_category" msgid="8011323954745036753">"નેટવર્ક"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"વાઇ-ફાઇ સેટિંગ"</string>
     <string name="wifi_select_network" msgid="6692897876718813259">"વાઇ-ફાઇ પસંદ કરો"</string>
     <string name="wifi_starting" msgid="6147022683967506341">"વાઇ-ફાઇ ચાલુ કરી રહ્યું છે…"</string>
@@ -1042,7 +1041,7 @@
     <string name="wifi_sap_no_channel_error" msgid="2126487622024749402">"આ દેશમાં 5 GHz બેન્ડ ઉપલબ્ધ નથી"</string>
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"એરપ્લેન મોડમાં"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"સાર્વજનિક નેટવર્ક માટે નોટિફિકેશન મેળવો"</string>
-    <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"જ્યારે ઉચ્ચ ગુણવત્તાવાળું સાર્વજનિક નેટવર્ક ઉપલબ્ધ હોય ત્યારે નોટિફિકેશન આપો"</string>
+    <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"જ્યારે ઉચ્ચ ક્વૉલિટીવાળું સાર્વજનિક નેટવર્ક ઉપલબ્ધ હોય ત્યારે નોટિફિકેશન આપો"</string>
     <string name="wifi_allow_wep_networks" msgid="8772342993235292010">"WEP નેટવર્કને મંજૂરી આપો"</string>
     <string name="wifi_allow_wep_networks_summary" msgid="3033397893296724615">"WEP એ જૂનો સુરક્ષા પ્રોટોકૉલ છે, જે ઓછો સુરક્ષિત છે"</string>
     <string name="wifi_allow_wep_networks_summary_carrier_not_allow" msgid="6298103289728210026">"તમારા મોબાઇલ ઑપરેટર WEP નેટવર્કને મંજૂરી આપતા નથી કારણ કે તે ઓછા સુરક્ષિત છે"</string>
@@ -1214,22 +1213,14 @@
     <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> ‑ ચાર્જિંગ"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"હૉટસ્પૉટ કનેક્શન"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"કનેક્શનની સશક્તતા"</string>
-    <!-- no translation found for ethernet_dns1 (6487470669719468602) -->
-    <skip />
-    <!-- no translation found for ethernet_dns2 (484620572555181363) -->
-    <skip />
-    <!-- no translation found for ethernet_gateway (4064061619318875567) -->
-    <skip />
-    <!-- no translation found for ethernet_network_prefix_length (3693127271457763198) -->
-    <skip />
-    <!-- no translation found for ethernet_ip_settings (3344064201878792090) -->
-    <skip />
-    <!-- no translation found for ethernet_config_submit (724743720212124025) -->
-    <skip />
-    <!-- no translation found for ethernet_config_cancel (986322993908814366) -->
-    <skip />
-    <!-- no translation found for ethernet_config_title (4784063109810004382) -->
-    <skip />
+    <string name="ethernet_dns1" msgid="6487470669719468602">"DNS 1 (સિવાય કે ખાનગી DNS દ્વારા ઓવરરાઇડ કર્યું હોય)"</string>
+    <string name="ethernet_dns2" msgid="484620572555181363">"DNS 2 (સિવાય કે ખાનગી DNS દ્વારા ઓવરરાઇડ કર્યું હોય)"</string>
+    <string name="ethernet_gateway" msgid="4064061619318875567">"ગેટવે"</string>
+    <string name="ethernet_network_prefix_length" msgid="3693127271457763198">"નેટવર્ક ઉપસર્ગની લંબાઈ"</string>
+    <string name="ethernet_ip_settings" msgid="3344064201878792090">"IP સેટિંગ"</string>
+    <string name="ethernet_config_submit" msgid="724743720212124025">"સબમિટ કરો"</string>
+    <string name="ethernet_config_cancel" msgid="986322993908814366">"રદ કરો"</string>
+    <string name="ethernet_config_title" msgid="4784063109810004382">"ઇથરનેટ સેટિંગ"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"સાચવેલા નેટવર્ક"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"સબ્સ્ક્રિપ્શન"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"અન્ય નેટવર્ક"</string>
@@ -1458,8 +1449,7 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"બંધ"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"ક્યારે શરૂ કરવું"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"જાગૃત કરવા માટે લિફ્ટ કરો"</string>
-    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
-    <skip />
+    <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"વાયરલેસ ચાર્જિંગ સુધી મર્યાદિત કરો"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"ઍમ્બિઅન્ટ ડિસ્પ્લે"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"ક્યારે બતાવવું"</string>
     <string name="doze_title" msgid="1523090408230862316">"નોટિફિકેશન માટે સ્ક્રીન સક્રિય"</string>
@@ -1626,8 +1616,7 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"ચાર્જ થતું હોય ત્યારે"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"ચાર્જ થતું હોય અને સીધું હોય ત્યારે"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"ડૉક કરેલું હોય ત્યારે"</string>
-    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
-    <skip />
+    <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"વાયરલેસ ચાર્જિંગ સુધી મર્યાદિત કરો"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APNs"</string>
     <string name="apn_edit" msgid="2003683641840248741">"અ‍ૅક્સેસ પૉઇન્ટમાં ફેરફાર કરો"</string>
     <string name="apn_add" msgid="9069613192201630934">"ઍક્સેસ પૉઇન્ટ ઉમેરો"</string>
@@ -1741,10 +1730,9 @@
     <string name="rx_ethernet_speed" msgid="6642000569214969711">"લિંક પ્રાપ્ત કરવાની ઝડપ"</string>
     <string name="ethernet_network_usage" msgid="3795965384177426780">"નેટવર્કનો વપરાશ"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"ઇથરનેટ ટિથરિંગ"</string>
-    <!-- no translation found for ethernet_modify (1326316717004440503) -->
-    <skip />
+    <string name="ethernet_modify" msgid="1326316717004440503">"ફેરફાર કરો"</string>
     <string name="tethering_footer_info" msgid="6824352505979800594">"તમારા મોબાઇલ ડેટા કનેક્શન મારફતે અન્ય ડિવાઇસને ઇન્ટરનેટ પૂરું પાડવા માટે હૉટસ્પૉટ અને ઇન્ટરનેટ શેર કરવાની સુવિધાનો ઉપયોગ કરો. નજીકના ડિવાઇસ સાથે કન્ટેન્ટ શેર કરવા માટે ઍપ પણ હૉટસ્પૉટ બનાવી શકે છે."</string>
-    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"તમારા વાઇ-ફાઇ અથવા મોબાઇલ ડેટા કનેક્શન મારફત અન્ય ડિવાઇસને ઇન્ટરનેટ પૂરું પાડવા માટે હૉટસ્પૉટ અને ઇન્ટરનેટ શેર કરવાની સુવિધાનો ઉપયોગ કરો. ઍપ નજીકના ડિવાઇસ સાથે કન્ટેન્ટ શેર કરવા માટે પણ હૉટસ્પૉટ બનાવી શકે છે."</string>
+    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"તમારા વાઇ-ફાઇ અથવા મોબાઇલ ડેટા કનેક્શન મારફતે અન્ય ડિવાઇસને ઇન્ટરનેટ પૂરું પાડવા માટે હૉટસ્પૉટ અને ઇન્ટરનેટ શેર કરવાની સુવિધાનો ઉપયોગ કરો. ઍપ નજીકના ડિવાઇસ સાથે કન્ટેન્ટ શેર કરવા માટે પણ હૉટસ્પૉટ બનાવી શકે છે."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"સહાય"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"મોબાઇલ નેટવર્ક"</string>
     <string name="sms_application_title" msgid="4791107002724108809">"SMS ઍપ્લિકેશન"</string>
@@ -2148,8 +2136,7 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"સૌથી નીચે-રાઇટ ક્લિક કરો"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"વધુ વિકલ્પો માટે, ટચપૅડના સૌથી નીચેના જમણા ખૂણા પર ક્લિક કરો"</string>
     <string name="trackpad_pointer_speed" msgid="5672221910698079303">"કર્સરની ઝડપ"</string>
-    <!-- no translation found for three_finger_tap_preference_title (1836080810837854140) -->
-    <skip />
+    <string name="three_finger_tap_preference_title" msgid="1836080810837854140">"\"ત્રણ-આંગળી વડે ટૅપ\"નો ઉપયોગ કરો"</string>
     <string name="touchpad_acceleration_title" msgid="176627555191021888">"ટચપૅડ ઍક્સલરેશન"</string>
     <string name="touchpad_acceleration_summary" msgid="8057075483967535793">"તમારા ટચપૅડને ઝડપથી ખસેડવાથી કર્સર આગળ ખસેડાશે"</string>
     <string name="pointer_fill_style" msgid="8794616790175016092">"પૉઇન્ટરનો રંગ"</string>
@@ -2166,12 +2153,13 @@
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"ટચપૅડના સંકેતો વિશે જાણો"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"ટ્રૅકપૅડ, ટ્રૅક પૅડ, માઉસ, કર્સર, સ્ક્રોલ કરો, સ્વાઇપ કરો, રાઇટ ક્લિક કરો, ક્લિક કરો, પૉઇન્ટર"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"રાઇટ ક્લિક કરો, ટૅપ કરો"</string>
-    <!-- no translation found for three_finger_tap_middle_click (7898931632908866867) -->
-    <skip />
+    <string name="three_finger_tap_middle_click" msgid="7898931632908866867">"વચ્ચેનું માઉસ બટન"</string>
     <string name="three_finger_tap_launch_gemini" msgid="4030401656711588982">"Assistant લૉન્ચ કરો"</string>
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"હોમ પર જાઓ"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"પાછા જાઓ"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"તાજેતરની ઍપ જુઓ"</string>
+    <string name="three_finger_tap_launch_app_title" msgid="55761877549896819">"બીજી ઍપ ખોલો"</string>
+    <string name="three_finger_tap_launch_app_summary" msgid="2015894823281420733">"ઇન્સ્ટૉલ કરેલી ઍપની સૂચિમાંથી પસંદ કરો"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"હોમ પર જાઓ"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"તમારા ટચપૅડ પર ગમે ત્યાં ત્રણ આંગળી વડે ઉપરની તરફ સ્વાઇપ કરો"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"પાછા જાઓ"</string>
@@ -2297,8 +2285,7 @@
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"સમયના નિયંત્રણો"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"સિસ્ટમના નિયંત્રણો"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"પ્રતિસાદ મોકલો"</string>
-    <!-- no translation found for accessibility_send_survey_title (7899716184811587023) -->
-    <skip />
+    <string name="accessibility_send_survey_title" msgid="7899716184811587023">"અમને રેટિંગ આપો"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"ડાઉનલોડ કરેલી ઍપ"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"પ્રાયોગિક"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"સુવિધાની માહિતી દર્શાવતા ફ્લેગ"</string>
@@ -2486,7 +2473,7 @@
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"પગલાં લેવાનો સમય"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"સમયની આ પસંદગીઓને બધી ઍપ દ્વારા સપોર્ટ આપવામાં આવતો નથી"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"તમને ક્રિયા કરવાનું કહેતા હોય, તેવા હંગામી રૂપે દેખાતા મેસેજને કેટલા સમય સુધી બતાવવા તે પસંદ કરો"</string>
-    <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"ટચ કરી અને પકડવા પર વિલંબ"</string>
+    <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"ટચ કરીને થોડીવાર દબાવી રાખવા પર વિલંબ"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"વિપરીત રંગમાં બદલવું"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"વિપરીત રંગમાં બદલવાનો ઉપયોગ કરો"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"વિપરીત રંગમાં બદલવાનો શૉર્ટકટ"</string>
@@ -2560,7 +2547,7 @@
     <string name="accessibility_shortcut_unassigned_setting_unavailable_summary" msgid="993486098872935043">"આનો ઉપયોગ કરવા માટે, ઍક્સેસિબિલિટી સુવિધાના પેજ પર %1$s શૉર્ટકટ ચાલુ કરો"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"આગળ ચાલુ રાખો"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"સાંભળવામાં મદદ આપતા ડિવાઇસ"</string>
-    <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"ASHA અને LE ઑડિયોના સાંભળવામાં મદદ કરતા યંત્રો, કૉક્લિઅર ઇમ્પ્લાન્ટ અને અન્ય ઍમ્પ્લિફિકેશન ડિવાઇસનું સેટઅપ કરો અને તેને મેનેજ કરો"</string>
+    <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"ASHA અને LE ઑડિયોના સાંભળવામાં મદદ આપતા યંત્રો, કૉક્લિઅર ઇમ્પ્લાન્ટ અને અન્ય ઍમ્પ્લિફિકેશન ડિવાઇસનું સેટઅપ કરો અને તેને મેનેજ કરો"</string>
     <string name="accessibility_hearingaid_asha_only_intro" msgid="7402419984664822832">"ASHAના સાંભળવામાં મદદ કરતા યંત્રો, કૉક્લિઅર ઇમ્પ્લાન્ટ અને અન્ય ઍમ્પ્લિફિકેશન ડિવાઇસનું સેટઅપ કરો અને તેને મેનેજ કરો"</string>
     <string name="accessibility_hearingaid_hap_only_intro" msgid="3332144138443825311">"LE ઑડિયોના સાંભળવામાં મદદ કરતા યંત્રો, કૉક્લિઅર ઇમ્પ્લાન્ટ અને અન્ય ઍમ્પ્લિફિકેશન ડિવાઇસનું સેટઅપ કરો અને તેને મેનેજ કરો"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"સાંભળવામાં મદદ આપતું કોઈ ડિવાઇસ કનેક્ટેડ નથી"</string>
@@ -2580,7 +2567,7 @@
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"શ્રવણ યંત્રની સુસંગતતા"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"ટેલિકૉઇલ સાથેની સુસંગતતા વધારે છે અને વણજોઈતો અવાજ ઘટાડે છે"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"સાંભળવામાં સહાય કરતા ડિવાઇસ વિશે"</string>
-    <string name="accessibility_hearing_device_footer_summary" msgid="5513620078219951077">"ASHA કે LE ઑડિયો દ્વારા સપોર્ટ આપવામાં આવતો ન હોય તેવા સાંભળવામાં મદદ કરતા અન્ય ડિવાઇસ શોધવા માટે, &lt;b&gt;નવા ડિવાઇસનું જોડાણ કરો&lt;/b&gt; &gt; &lt;b&gt;વધુ ડિવાઇસ જુઓ&lt;/b&gt; પર ટૅપ કરો"</string>
+    <string name="accessibility_hearing_device_footer_summary" msgid="5513620078219951077">"ASHA કે LE ઑડિયો દ્વારા સપોર્ટ આપવામાં આવતો ન હોય તેવા સાંભળવામાં મદદ આપતા અન્ય ડિવાઇસ શોધવા માટે, &lt;b&gt;નવા ડિવાઇસનું જોડાણ કરો&lt;/b&gt; &gt; &lt;b&gt;વધુ ડિવાઇસ જુઓ&lt;/b&gt; પર ટૅપ કરો"</string>
     <string name="accessibility_hearing_device_footer_summary_tts" msgid="955527026890456959">"ASHA કે LE ઑડિયો દ્વારા સપોર્ટ આપવામાં આવતો ન હોય તેવા સાંભળવામાં મદદ કરતા અન્ય ડિવાઇસ શોધવા માટે, "<b>"નવા ડિવાઇસનું જોડાણ કરો"</b>" પછી "<b>"વધુ ડિવાઇસ જુઓ"</b>" પર ટૅપ કરો"</string>
     <string name="accessibility_hearing_device_footer_asha_only_summary" msgid="3377169209330540616">"ASHA દ્વારા સપોર્ટ આપવામાં આવતો ન હોય તેવા સાંભળવામાં મદદ કરતા અન્ય ડિવાઇસ શોધવા માટે, &lt;b&gt;નવા ડિવાઇસનું જોડાણ કરો&lt;/b&gt; &gt; &lt;b&gt;વધુ ડિવાઇસ જુઓ&lt;/b&gt; પર ટૅપ કરો"</string>
     <string name="accessibility_hearing_device_footer_asha_only_summary_tts" msgid="8192971114504608531">"ASHA દ્વારા સપોર્ટ આપવામાં આવતો ન હોય તેવા સાંભળવામાં મદદ કરતા અન્ય ડિવાઇસ શોધવા માટે, "<b>"નવા ડિવાઇસનું જોડાણ કરો"</b>" પછી "<b>"વધુ ડિવાઇસ જુઓ"</b>" પર ટૅપ કરો"</string>
@@ -2588,12 +2575,10 @@
     <string name="accessibility_hearing_device_footer_hap_only_summary_tts" msgid="4440097982533045507">"LE ઑડિયો દ્વારા સપોર્ટ આપવામાં આવતો ન હોય તેવા સાંભળવામાં મદદ કરતા અન્ય ડિવાઇસ શોધવા માટે, "<b>"નવા ડિવાઇસનું જોડાણ કરો"</b>" પછી "<b>"વધુ ડિવાઇસ જુઓ"</b>" પર ટૅપ કરો"</string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"સાંભળવામાં મદદ આપતા યંત્રનું જોડાણ બનાવો"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"આ પેજ પર તમે ASHA અને LE ઑડિયો સાંભળવામાં મદદ આપતા ડિવાઇસનું જોડાણ કરી શકો છો. ખાતરી કરો કે તમારું સાંભળવામાં મદદ આપતું ડિવાઇસ ચાલુ છે અને જોડાણ કરવા માટે તૈયાર છે."</string>
-    <!-- no translation found for accessibility_hearing_device_pairing_asha_only_intro (5679230908462987522) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_pairing_hap_only_intro (2233661046254311681) -->
-    <skip />
-    <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"સાંભળવાના સહાયક ઉપલબ્ધ ડિવાઇસ"</string>
-    <string name="accessibility_found_all_devices" msgid="7817834722148556520">"તમારું સાંભળવામાં મદદ કરતું ડિવાઇસ નથી દેખાતું?"</string>
+    <string name="accessibility_hearing_device_pairing_asha_only_intro" msgid="5679230908462987522">"તમે આ પેજ પર ASHA સાંભળવામાં મદદ આપતા ડિવાઇસનું જોડાણ કરી શકો છો. ખાતરી કરો કે તમારું સાંભળવામાં મદદ આપતું ડિવાઇસ ચાલુ છે અને જોડાણ કરવા માટે તૈયાર છે."</string>
+    <string name="accessibility_hearing_device_pairing_hap_only_intro" msgid="2233661046254311681">"આ પેજ પર તમે LE ઑડિયો સાંભળવામાં મદદ આપતા ડિવાઇસનું જોડાણ કરી શકો છો. ખાતરી કરો કે તમારું સાંભળવામાં મદદ આપતું ડિવાઇસ ચાલુ છે અને જોડાણ કરવા માટે તૈયાર છે."</string>
+    <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"ઉપલબ્ધ સાંભળવામાં મદદ આપતા ડિવાઇસ"</string>
+    <string name="accessibility_found_all_devices" msgid="7817834722148556520">"તમારું સાંભળવામાં મદદ આપતું ડિવાઇસ નથી દેખાતું?"</string>
     <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"વધુ ડિવાઇસ જુઓ"</string>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"ઑડિયોની ગોઠવણી"</string>
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"ઑડિયો વર્ણન"</string>
@@ -2628,8 +2613,7 @@
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{ટૂંકો વિલંબિત સમય ({time} સેકન્ડ)}one{ટૂંકો વિલંબિત સમય ({time} સેકન્ડ)}other{ટૂંકો વિલંબિત સમય ({time} સેકન્ડ)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{મધ્યમ વિલંબિત સમય ({time} સેકન્ડ)}one{મધ્યમ વિલંબિત સમય ({time} સેકન્ડ)}other{મધ્યમ વિલંબિત સમય ({time} સેકન્ડ)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{લાંબો વિલંબિત સમય ({time} સેકન્ડ)}one{લાંબો વિલંબિત સમય ({time} સેકન્ડ)}other{લાંબો વિલંબિત સમય ({time} સેકન્ડ)}}"</string>
-    <!-- no translation found for accessibility_autoclick_delay_unit_second (1562809410497613173) -->
-    <skip />
+    <string name="accessibility_autoclick_delay_unit_second" msgid="1562809410497613173">"{count,plural, =1{{time} સેકન્ડ}one{{time} સેકન્ડ}other{{time} સેકન્ડ}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"સેટિંગ"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"ચાલુ"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"બંધ"</string>
@@ -2969,7 +2953,7 @@
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"તમારા નેટવર્ક કનેક્શનને ઑટોમૅટિક રીતે મેનેજ કરીને બૅટરીની આવરદા વધારે છે અને ડિવાઇસનું કાર્યપ્રદર્શન બહેતર બનાવે છે"</string>
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"ચાલુ કરો"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"બંધ કરો"</string>
-    <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Adaptive Connectivityનો ઉપયોગ કરો"</string>
+    <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"અડૅપ્ટિવ કનેક્ટિવિટીનો ઉપયોગ કરો"</string>
     <string name="adaptive_connectivity_wifi_switch_title" msgid="5899985025046319472">"વાઇ-ફાઇ અથવા સેલ્યુલર પર ઑટો-સ્વિચ કરો"</string>
     <string name="adaptive_connectivity_wifi_switch_summary" msgid="4650230240134029595">"જ્યારે વાઇ-ફાઇ કનેક્શન નબળું હોય અથવા અનુપલબ્ધ હોય, ત્યારે ઑટોમૅટિક રીતે સેલ્યુલર ડેટાનો ઉપયોગ કરો. ડેટા વપરાશ શુલ્ક લાગુ થઈ શકે છે."</string>
     <string name="adaptive_connectivity_mobile_network_switch_title" msgid="2473274404695643218">"બૅટરી આવરદા માટે મોબાઇલ નેટવર્ક ઑટો-સ્વિચ કરો"</string>
@@ -3778,7 +3762,7 @@
     <string name="notification_history_view_settings" msgid="5269317798670449002">"નોટિફિકેશનના સેટિંગ જુઓ"</string>
     <string name="notification_history_open_notification" msgid="2655071846911258371">"નોટિફિકેશન ખોલો"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"નોટિફિકેશન સ્નૂઝ કરવાની મંજૂરી આપો"</string>
-    <string name="notification_badging_title" msgid="5469616894819568917">"ઍપ આઇકન પર નોટિફિકેશનનું ચિહ્ન"</string>
+    <string name="notification_badging_title" msgid="5469616894819568917">"ઍપ આઇકન પર નોટિફિકેશન ડૉટ"</string>
     <string name="notification_bundles" msgid="3614044525822580826">"નોટિફિકેશન બંડલ"</string>
     <string name="notification_summarization_title" msgid="1516039882005781529">"નોટિફિકેશનના સારાંશો"</string>
     <string name="notification_summarization_on" msgid="5692758038788359790">"ચાલુ"</string>
@@ -3903,7 +3887,7 @@
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"કઈ ઍપ અને ડિવાઇસ નોટિફિકેશન વાંચી શકશે તેનું નિયંત્રણ કરો"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"કાર્યાલયની પ્રોફાઇલની સૂચનાઓનો ઍક્સેસ બ્લૉક કરવામાં આવ્યો છે"</string>
     <string name="notification_assistant_title" msgid="5889201903272393099">"વધારાના નોટિફિકેશન"</string>
-    <string name="notification_assistant_summary" msgid="1957783114840908887">"સૂચવેલી ક્રિયાઓ, જવાબો અને બીજું ઘણું મેળવો"</string>
+    <string name="notification_assistant_summary" msgid="1957783114840908887">"સૂચવેલી ઍક્શન, જવાબો અને બીજું ઘણું મેળવો"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"એકપણ નહીં"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"કોઈ ઇન્સ્ટોલ કરેલ એપ્લિકેશન્સે નોટિફિકેશન ઍક્સેસની વિનંતી કરી નથી."</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"નોટિફિકેશન ઍક્સેસ કરવાની મંજૂરી આપો"</string>
@@ -4247,7 +4231,7 @@
     <string name="app_launch_supported_links_title" msgid="2457931321701095763">"{count,plural, =1{# સપોર્ટેડ લિંક}one{# સપોર્ટેડ લિંક}other{# સપોર્ટેડ લિંક}}"</string>
     <string name="app_launch_supported_links_add" msgid="3271247750388016131">"ઉમેરો"</string>
     <string name="app_launch_supported_links_subtext" msgid="4268004019469184113">"<xliff:g id="APP_LABEL">%s</xliff:g>માં ખૂલે છે"</string>
-    <string name="storage_summary_format" msgid="5721782272185284276">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g> માં <xliff:g id="SIZE">%1$s</xliff:g> ઉપયોગમાં લેવાયું"</string>
+    <string name="storage_summary_format" msgid="5721782272185284276">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g>માં <xliff:g id="SIZE">%1$s</xliff:g> ઉપયોગમાં લેવાયું"</string>
     <string name="storage_type_internal" msgid="979243131665635278">"આંતરિક સ્ટોરેજ"</string>
     <string name="storage_type_external" msgid="125078274000280821">"બાહ્ય સ્ટોરેજ"</string>
     <string name="data_summary_format" msgid="8802057788950096650">"<xliff:g id="DATE">%2$s</xliff:g>થી <xliff:g id="SIZE">%1$s</xliff:g> ઉપયોગ કર્યો"</string>
@@ -4340,7 +4324,7 @@
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"ફાઇલ ટ્રાન્સફર કરવાના વિકલ્પો"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USBની પસંદગીઓ"</string>
-    <string name="usb_control_title" msgid="1946791559052157693">"આના દ્વારા નિયંત્રિત USB"</string>
+    <string name="usb_control_title" msgid="1946791559052157693">"આના દ્વારા USB નિયંત્રિત થાય છે"</string>
     <string name="usb_control_host" msgid="7404215921555021871">"કનેક્ટ થયેલું ડિવાઇસ"</string>
     <string name="usb_control_device" msgid="527916783743021577">"આ ડિવાઇસ"</string>
     <string name="usb_switching" msgid="3654709188596609354">"સ્વિચ કરી રહ્યાં છીએ…"</string>
@@ -4541,7 +4525,7 @@
     <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_2">%2$s</xliff:g> દરમિયાન <xliff:g id="ID_1">%1$s</xliff:g>નો ઉપયોગ કર્યો"</string>
     <string name="configure" msgid="1499586749829665889">"ગોઠવો"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"વપરાશમાં અન્ય ઍપ્લિકેશનોનો સમાવેશ થાય છે"</string>
-    <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{જ્યારે ડેટા સેવર ચાલુ હોય, ત્યારે 1 ઍપને અમર્યાદિત મોબાઇલ ડેટાનો ઉપયોગ કરવાની મંજૂરી છે}one{જ્યારે ડેટા સેવર ચાલુ હોય, ત્યારે # ઍપને અમર્યાદિત મોબાઇલ ડેટાનો ઉપયોગ કરવાની મંજૂરી છે}other{જ્યારે ડેટા સેવર ચાલુ હોય, ત્યારે # ઍપને અમર્યાદિત મોબાઇલ ડેટાનો ઉપયોગ કરવાની મંજૂરી છે}}"</string>
+    <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{જ્યારે ડેટા સેવર ચાલુ હોય, ત્યારે 1 ઍપને અસીમિત મોબાઇલ ડેટાનો ઉપયોગ કરવાની મંજૂરી છે}one{જ્યારે ડેટા સેવર ચાલુ હોય, ત્યારે # ઍપને અમર્યાદિત મોબાઇલ ડેટાનો ઉપયોગ કરવાની મંજૂરી છે}other{જ્યારે ડેટા સેવર ચાલુ હોય, ત્યારે # ઍપને અમર્યાદિત મોબાઇલ ડેટાનો ઉપયોગ કરવાની મંજૂરી છે}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"પ્રાથમિક ડેટા"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"વાઇ-ફાઇ ડેટા"</string>
     <string name="data_used_formatted" msgid="7913920278059077938">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g> ડેટાનો વપરાશ થયો"</string>
@@ -4677,6 +4661,14 @@
     <string name="double_tap_power_camera_action_summary" msgid="4942585540579590444">"કૅમેરા ખોલો"</string>
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Wallet"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Wallet ખોલો"</string>
+    <!-- no translation found for double_tap_power_lockscreen_shortcut_tip_title (9210589521260265387) -->
+    <skip />
+    <!-- no translation found for double_tap_power_lockscreen_shortcut_tip_description (1894710205138218048) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_footer_title (5417023303339032410) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (1267822422365445657) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"સેલ્ફી માટે કૅમેરાને ફ્લિપ કરો"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"નૅવિગેશન મોડ"</string>
@@ -4687,7 +4679,7 @@
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"સંકેત દ્વારા નૅવિગેશન"</string>
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"હોમ પર જવા માટે, સ્ક્રીનના નીચેના ભાગથી ઉપરની તરફ સ્વાઇપ કરો. ઍપ સ્વિચ કરવા માટે, સૌથી નીચેથી ઉપરની તરફ સ્વાઇપ કરો, દબાવી રાખો પછી છોડી દો. પરત ફરવા માટે, ડાબી અથવા જમણી કિનારીએથી સ્વાઇપ કરો."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"3-બટનથી નૅવિગેશન"</string>
-    <string name="legacy_navigation_summary" msgid="5905301067778326433">"પરત ફરો, હોમ પર જાઓ અને તમારી સ્ક્રીનના નીચેના ભાગે આવેલાં બટન વડે ઍપ સ્વિચ કરો."</string>
+    <string name="legacy_navigation_summary" msgid="5905301067778326433">"પરત ફરો, હોમ પર જાઓ અને તમારી સ્ક્રીનના નીચેના ભાગે આવેલા બટન વડે ઍપ સ્વિચ કરો."</string>
     <string name="nav_tutorial_button_description" msgid="7195363082216233970">"સંકેતથી નૅવિગેશનનું ટ્યૂટૉરિઅલ શરૂ કરો."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"સિસ્ટમ નૅવિગેશન, 2-બટનથી નૅવિગેશન, 3-બટનથી નૅવિગેશન, સંકેત દ્વારા નૅવિગેશન, સ્વાઇપ કરો"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"ડિજિટલ આસિસ્ટંટ"</string>
@@ -5110,10 +5102,8 @@
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"તમારા ફોનમાં સપોર્ટ કરતી ઍપ"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"તમામ ઍપ જુઓ"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"તમારા ફોનમાં સપોર્ટ કરતી ઍપ"</string>
-    <!-- no translation found for title_satellite_dialog_for_sim_restriction (454718192423216397) -->
-    <skip />
-    <!-- no translation found for description_satellite_dialog_for_sim_restriction (5465487347427595435) -->
-    <skip />
+    <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"સિમ કાર્ડ ઉમેરી શકાતું નથી"</string>
+    <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"તમે સિમ કાર્ડ ઉમેરતાં પહેલાં સૅટલાઇટ કનેક્શન સમાપ્ત કરો"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"ઍક્સેસ પૉઇન્ટના નામ"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"જ્યારે <xliff:g id="CARRIER">%1$s</xliff:g> સાથે કનેક્ટ થયેલ હોય, ત્યારે ઉપલબ્ધ નથી"</string>
@@ -5747,10 +5737,8 @@
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"ઑડિયો સ્ટ્રીમનો QR કોડ"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"પાસવર્ડ: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"<xliff:g id="STREAM_NAME">%1$s</xliff:g> સાંભળવા માટે, અન્ય લોકો તેમના Android ડિવાઇસ સાથે સુસંગત હૅડફોન કનેક્ટ કરી શકે છે. ત્યારબાદ તેઓ આ QR કોડ સ્કૅન કરી શકે છે."</string>
-    <!-- no translation found for audio_streams_preference_subtitle (4098552511880220046) -->
-    <skip />
-    <!-- no translation found for audio_streams_preference_subtitle_audio_sharing_on (2382924714414148028) -->
-    <skip />
+    <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"Auracast બ્રોડકાસ્ટ સાંભળો"</string>
+    <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"ઑડિયો સ્ટ્રીમ શોધવા માટે ઑડિયો શેરિંગની સુવિધા બંધ કરો"</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"કોઈ ઑડિયો સ્ટ્રીમ શોધો"</string>
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"ઑડિયો શેર કરી રહેલા કોઈ ડિવાઇસને અથવા નજીકના Auracast બ્રોડકાસ્ટને સાંભળો"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"તમારું ઑડિયો ડિવાઇસ"</string>
@@ -5788,12 +5776,9 @@
     <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"પિન રિકવર કરવાની કોઈ પદ્ધતિ ઉમેરો"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"પિન બદલો"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"પિન ભૂલી ગયા"</string>
-    <!-- no translation found for supervision_update_recovery_email_preference_title (2057393838251915087) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_title (8447541098148430866) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_summary (4865713157106413979) -->
-    <skip />
+    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"રિકવરી ઇમેઇલ ઍડ્રેસ અપડેટ કરો"</string>
+    <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"પિન ડિલીટ કરો"</string>
+    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"આમ કરવાથી નિરીક્ષણ માટેના તમારા બધા સેટિંગ રીસેટ થઈ જશે"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"વેબ કન્ટેન્ટના ફિલ્ટર"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome અને વેબ"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"અયોગ્ય સાઇટને બ્લૉક કરવાનો પ્રયાસ કરો"</string>

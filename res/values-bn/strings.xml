@@ -344,7 +344,9 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{চালু আছে / #টি অ্যাপ লোকেশন অ্যাক্সেস করতে পারবে}one{চালু আছে / #টি অ্যাপ লোকেশন অ্যাক্সেস করতে পারবে}other{চালু আছে / #টি অ্যাপ লোকেশন অ্যাক্সেস করতে পারবে}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"লোড হচ্ছে…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"কাছাকাছি ডিভাইসের অনুমতি থাকা অ্যাপ, কানেক্ট করা ডিভাইসের আপেক্ষিক অবস্থান নির্ণয় করতে পারে।"</string>
-    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <!-- no translation found for location_settings_footer_location_off_with_telephony (5600725945541382556) -->
+    <skip />
+    <!-- no translation found for location_settings_footer_location_off_no_telephony (2709958040008816610) -->
     <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"\'লোকেশন সেটিংস\' সম্পর্কে আরও জানুন"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"পরিবর্তন করতে, \'ChromeOS সেটিংস &gt; গোপনীয়তা ও সুরক্ষা &gt; গোপনীয়তা নিয়ন্ত্রণ &gt; লোকেশন অ্যাক্সেস\' বিকল্পে যান"</string>
@@ -611,10 +613,8 @@
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"প্যাটার্ন ও মুখের সেট আপ এড়িয়ে যাবেন?"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"প্যাটার্ন ও ফিঙ্গারপ্রিন্ট সেট আপ এড়িয়ে যাবেন?"</string>
     <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"প্যাটার্ন, মুখ ও ফিঙ্গারপ্রিন্ট সেট আপ এড়িয়ে যাবেন?"</string>
-    <!-- no translation found for resume_animation (5259729861893297887) -->
-    <skip />
-    <!-- no translation found for pause_animation (2209064682137909056) -->
-    <skip />
+    <string name="resume_animation" msgid="5259729861893297887">"অ্যানিমেশন আবার চালু করুন"</string>
+    <string name="pause_animation" msgid="2209064682137909056">"অ্যানিমেশন পজ করুন"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"স্ক্রিন লক সেট-আপ করুন"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"হয়ে গেছে"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"ওহো, সেটি সেন্সর ছিল না"</string>
@@ -1032,8 +1032,7 @@
     <string name="android_beam_explained" msgid="5684416131846701256">"যখন এই বৈশিষ্ট্যটি চালু থাকে, তখন আপনি আরও একটি NFC-সক্ষম ডিভাইসের কাছে ডিভাইসগুলি ধরে সামগ্রী বীম করতে পারবেন। উদাহরণস্বরূপ, আপনি ওয়েব পৃষ্ঠা, YouTube ভিডিও, পরিচিতি এবং আরও অনেক কিছু বীম করতে পারবেন।\n\nশুধু ডিভাইসগুলিকে একসাথে আনুন (সাধারণতঃ পর পর) এবং তারপর আপনার স্ক্রিনে আলতো চাপুন। অ্যাপ্লিকেশনটি নির্ধারণ করবে যে কি বীম করা হবে।"</string>
     <string name="wifi_settings" msgid="8313301946393559700">"ওয়াই-ফাই"</string>
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"ওয়াই-ফাই ব্যবহার করুন"</string>
-    <!-- no translation found for wifi_networks_category (8011323954745036753) -->
-    <skip />
+    <string name="wifi_networks_category" msgid="8011323954745036753">"নেটওয়ার্ক"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"ওয়াই-ফাই সেটিংস"</string>
     <string name="wifi_select_network" msgid="6692897876718813259">"ওয়াই-ফাই বেছে নিন"</string>
     <string name="wifi_starting" msgid="6147022683967506341">"ওয়াই-ফাই চালু করা হচ্ছে..."</string>
@@ -1055,7 +1054,7 @@
     <string name="wifi_cellular_data_fallback_title" msgid="2844653839490977040">"স্বয়ংক্রিয়ভাবে মোবাইল ডেটাতে চলে যান"</string>
     <string name="wifi_cellular_data_fallback_summary" msgid="7039944853033554386">"ওয়াই-ফাই এ ইন্টারনেট অ্যাক্সেস না থাকলে মোবাইল ডেটা ব্যবহার করুন৷ ডেটা ব্যবহারের চার্জ প্রযোজ্য।"</string>
     <string name="wifi_add_network" msgid="4178564862173751181">"নেটওয়ার্ক যোগ করুন"</string>
-    <string name="wifi_configure_settings_preference_title" msgid="2536725796700696566">"ওয়াই-ফাইয়ের অভিরুচি"</string>
+    <string name="wifi_configure_settings_preference_title" msgid="2536725796700696566">"ওয়াই-ফাই সংক্রান্ত পছন্দ"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="7822368955551467382">"ওয়াই-ফাই অটোমেটিক আবার চালু হয়"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="5710203586018223864">"ওয়াই-ফাই অটোমেটিক আবার চালু হয় না"</string>
     <string name="wifi_menu_p2p" msgid="5234165837732940385">"ওয়াই-ফাই ডাইরেক্ট"</string>
@@ -1214,22 +1213,14 @@
     <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> ‑ চার্জ হচ্ছে"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"হটস্পট কানেকশন"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"কানেকশন কোয়ালিটি"</string>
-    <!-- no translation found for ethernet_dns1 (6487470669719468602) -->
-    <skip />
-    <!-- no translation found for ethernet_dns2 (484620572555181363) -->
-    <skip />
-    <!-- no translation found for ethernet_gateway (4064061619318875567) -->
-    <skip />
-    <!-- no translation found for ethernet_network_prefix_length (3693127271457763198) -->
-    <skip />
-    <!-- no translation found for ethernet_ip_settings (3344064201878792090) -->
-    <skip />
-    <!-- no translation found for ethernet_config_submit (724743720212124025) -->
-    <skip />
-    <!-- no translation found for ethernet_config_cancel (986322993908814366) -->
-    <skip />
-    <!-- no translation found for ethernet_config_title (4784063109810004382) -->
-    <skip />
+    <string name="ethernet_dns1" msgid="6487470669719468602">"ডিএনএস ১ (ব্যক্তিগত ডিএনএস ওভাররাইড না করা পর্যন্ত)"</string>
+    <string name="ethernet_dns2" msgid="484620572555181363">"ডিএনএস ২ (ব্যক্তিগত ডিএনএস ওভাররাইড না করা পর্যন্ত)"</string>
+    <string name="ethernet_gateway" msgid="4064061619318875567">"গেটওয়ে"</string>
+    <string name="ethernet_network_prefix_length" msgid="3693127271457763198">"নেটওয়ার্ক প্রিফিক্সের দৈর্ঘ্য"</string>
+    <string name="ethernet_ip_settings" msgid="3344064201878792090">"IP সেটিংস"</string>
+    <string name="ethernet_config_submit" msgid="724743720212124025">"জমা দিন"</string>
+    <string name="ethernet_config_cancel" msgid="986322993908814366">"বাতিল করুন"</string>
+    <string name="ethernet_config_title" msgid="4784063109810004382">"ইথারনেট সেটিংস"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"সেভ করা নেটওয়ার্ক"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"সাবস্ক্রিপশন"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"অন্যান্য নেটওয়ার্ক"</string>
@@ -1347,7 +1338,7 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"চালু আছে"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"চালু আছে - মুখের হিসেবে"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"ফেস ডিটেকশন"</string>
-    <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"\'নিজে থেকে ঘুরবে\' সেটিং সম্পর্কে আরও জানুন"</string>
+    <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"অটো-রোটেট সম্পর্কে আরও জানুন"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"স্ক্রিন রেজোলিউশন"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"হাই রেজোলিউশন"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"সর্বাধিক রেজোলিউশন"</string>
@@ -1458,8 +1449,7 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"বন্ধ আছে"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"কখন শুরু করবেন"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"সক্রিয় করতে লিফ্ট করুন"</string>
-    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
-    <skip />
+    <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"ওয়্যারলেস চার্জিংয়ের সময় চালু করুন"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"অ্যাম্বিয়েন্ট ডিসপ্লে"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"কখন দেখানো হবে"</string>
     <string name="doze_title" msgid="1523090408230862316">"বিজ্ঞপ্তি পেলে স্ক্রিন চালু করুন"</string>
@@ -1626,8 +1616,7 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"চার্জ করার সময়"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"সোজা করে রাখলে ও চার্জ হওয়ার সময়"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"ডক করে রাখার সময়"</string>
-    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
-    <skip />
+    <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"ওয়্যারলেস চার্জিংয়ের সময় চালু করুন"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"অ্যাক্সেস পয়েন্ট এডিট করুন"</string>
     <string name="apn_add" msgid="9069613192201630934">"অ্যাক্সেস পয়েন্ট যোগ করুন"</string>
@@ -1741,8 +1730,7 @@
     <string name="rx_ethernet_speed" msgid="6642000569214969711">"যে লিঙ্কে কানেকশন আসবে তার স্পিড"</string>
     <string name="ethernet_network_usage" msgid="3795965384177426780">"নেটওয়ার্কের ব্যবহার"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"ইথারনেট টিথারিং"</string>
-    <!-- no translation found for ethernet_modify (1326316717004440503) -->
-    <skip />
+    <string name="ethernet_modify" msgid="1326316717004440503">"পরিবর্তন করুন"</string>
     <string name="tethering_footer_info" msgid="6824352505979800594">"আপনার ডেটা কানেকশনের মাধ্যমে অন্যান্য ডিভাইসে ইন্টারনেট কানেকশন দিতে, হটস্পট ও টিথারিং ব্যবহার করুন। আশেপাশের ডিভাইসের সাথে কন্টেন্ট শেয়ার করার জন্য অ্যাপও হটস্পট তৈরি করতে পারে।"</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"আপনার মোবাইল ডেটা কানেকশন অথবা ওয়াই-ফাই থেকে অন্যান্য ডিভাইসে ইন্টারনেট কানেকশন দিতে হটস্পট এবং টিথারিং ব্যবহার করুন। অ্যাপগুলিও আশেপাশের ডিভাইসের সাথে কন্টেন্ট শেয়ার করার জন্য হটস্পট তৈরি করে নিতে পারে।"</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"সহায়তা"</string>
@@ -2170,6 +2158,8 @@
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"হোমে যান"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"ফিরে যান"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"সম্প্রতি ব্যবহার করা অ্যাপ দেখুন"</string>
+    <string name="three_finger_tap_launch_app_title" msgid="55761877549896819">"অন্য অ্যাপ খুলুন"</string>
+    <string name="three_finger_tap_launch_app_summary" msgid="2015894823281420733">"ইনস্টল করা অ্যাপের কোনও তালিকা থেকে বেছে নিন"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"হোম স্ক্রিনে যান"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"আপনার টাচপ্যাডে তিনটি আঙুলের সাহায্যে উপরের দিকে সোয়াইপ করুন"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"ফিরে যান"</string>
@@ -2295,8 +2285,7 @@
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"সময় সংক্রান্ত কন্ট্রোল"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"সিস্টেম কন্ট্রোল"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"মতামত জানান"</string>
-    <!-- no translation found for accessibility_send_survey_title (7899716184811587023) -->
-    <skip />
+    <string name="accessibility_send_survey_title" msgid="7899716184811587023">"আমাদের রেটিং দিন"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"ডাউনলোড করা অ্যাপ"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"পরীক্ষামূলক"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"ফিচারের ফ্ল্যাগ"</string>
@@ -2312,7 +2301,7 @@
     <string name="talkback_title" msgid="8756080454514251327">"টকব্যাক"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"স্ক্রিন রিডার প্রাথমিকভাবে অন্ধত্ব এবং কম দৃষ্টি সম্পন্ন ব্যক্তিদের জন্য"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"স্ক্রিনের আইটেমগুলিতে আলতো চাপ দিলে সেগুলি উচ্চারণ করে শোনানো হবে"</string>
-    <string name="accessibility_captioning_title" msgid="4561871958958925225">"ক্যাপশন অভিরুচি"</string>
+    <string name="accessibility_captioning_title" msgid="4561871958958925225">"ক্যাপশন সংক্রান্ত পছন্দ"</string>
     <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"ক্যাপশন সংক্রান্ত পছন্দের বিষয়ে"</string>
     <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"ক্যাপশন সংক্রান্ত পছন্দের বিষয়ে আরও জানুন"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"বড় করে দেখা"</string>
@@ -2539,7 +2528,7 @@
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"রঙ সংশোধন ফিচারটি ব্যবহার করুন"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"রঙ সংশোধন করার শর্টকাট"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"কালার কারেকশন বিষয়ক"</string>
-    <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"কালার কারেকশনের বিষয়ে আরও জানুন"</string>
+    <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"রং সংশোধন ফিচারের বিষয়ে আরও জানুন"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"কালার ইনভার্সন বিষয়ক"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"কালার ইনভার্সনের বিষয়ে আরও জানুন"</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"ক্যাপশন দেখুন"</string>
@@ -2613,7 +2602,7 @@
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"প্রোটানোম্যালি"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"ট্রিট্যানোম্যালি"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"অতিরিক্ত কম উজ্জ্বলতা"</string>
-    <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"স্ক্রিন অতিরিক্ত কম উজ্জ্বল করুন"</string>
+    <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"স্ক্রিনের উজ্জ্বলতা অতিরিক্ত কম করুন"</string>
     <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"অতিরিক্ত কম উজ্জ্বলতার শর্টকাট"</string>
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"অতিরিক্ত কম ব্রাইটনেস বিষয়ক"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"স্ক্রিনের আলো কম করুন যাতে এতে থাকা কন্টেন্ট সহজেই পড়া যায়"</string>
@@ -2624,8 +2613,7 @@
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{অল্প সময় ({time} সেকেন্ড)}one{অল্প সময় ({time} সেকেন্ড)}other{অল্প সময় ({time} সেকেন্ড)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{মাঝারি সময় ({time} সেকেন্ড)}one{মাঝারি সময় ({time} সেকেন্ড)}other{মাঝারি সময় ({time} সেকেন্ড)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{বেশি সময় ({time} সেকেন্ড)}one{বেশি সময় ({time} সেকেন্ড)}other{বেশি সময় ({time} সেকেন্ড)}}"</string>
-    <!-- no translation found for accessibility_autoclick_delay_unit_second (1562809410497613173) -->
-    <skip />
+    <string name="accessibility_autoclick_delay_unit_second" msgid="1562809410497613173">"{count,plural, =1{{time} সেকেন্ড}one{{time} সেকেন্ড}other{{time} সেকেন্ড}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"সেটিংস"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"চালু আছে"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"বন্ধ আছে"</string>
@@ -2965,7 +2953,7 @@
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"আপনার নেটওয়ার্ক কানেকশন অটোমেটিক ম্যানেজ করে ব্যাটারি আরও বেশিক্ষণ ব্যবহার করুন এবং ডিভাইসের পারফর্ম্যান্স উন্নত করুন"</string>
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"চালু আছে"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"বন্ধ আছে"</string>
-    <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Adaptive Connectivity ব্যবহার করুন"</string>
+    <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"অ্যাডাপ্টিভ কানেক্টিভিটি ব্যবহার করুন"</string>
     <string name="adaptive_connectivity_wifi_switch_title" msgid="5899985025046319472">"ওয়াই-ফাই থেকে মোবাইল ডেটায় অটোমেটিক সুইচ করুন"</string>
     <string name="adaptive_connectivity_wifi_switch_summary" msgid="4650230240134029595">"ওয়াই-ফাই কানেকশন খারাপ হলে অথবা উপলভ্য না থাকলে মোবাইল ডেটা অটোমেটিক ব্যবহার করুন। ডেটার ব্যবহারের চার্জ প্রযোজ্য হতে পারে।"</string>
     <string name="adaptive_connectivity_mobile_network_switch_title" msgid="2473274404695643218">"ব্যাটারির আয়ু বাড়াতে মোবাইল নেটওয়ার্ক অটোমেটিক সুইচ করুন"</string>
@@ -3750,7 +3738,7 @@
     <string name="conversation_notifs_category" msgid="2549844862379963273">"কথোপকথন"</string>
     <string name="general_notification_header" msgid="3669031068980713359">"ম্যানেজ করুন"</string>
     <string name="app_notification_field" msgid="3208079070539894909">"অ্যাপ বিজ্ঞপ্তি"</string>
-    <string name="app_notification_field_summary" msgid="5981393613897713471">"প্রতিটি অ্যাপ থেকে বিজ্ঞপ্তি নিয়ন্ত্রণ করুন"</string>
+    <string name="app_notification_field_summary" msgid="5981393613897713471">"আলাদা আলাদা অ্যাপ থেকে আসা বিজ্ঞপ্তি নিয়ন্ত্রণ করুন"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"সাধারণ"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"অফিস প্রোফাইলের বিজ্ঞপ্তি"</string>
     <string name="profile_section_header_for_advanced_privacy" msgid="8385775428904838579">"অফিস প্রোফাইল"</string>
@@ -4012,7 +4000,7 @@
     <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"\'বিরক্ত করবে না\' ওভাররাইড করুন"</string>
     <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"\'বিরক্ত করবে না\' মোড চালু থাকলেও এই বিজ্ঞপ্তিগুলির জন্য আওয়াজ হতে দিন"</string>
     <string name="app_notification_visibility_override_title" msgid="7778628150022065920">"লক স্ক্রিন"</string>
-    <string name="app_notifications_dialog_done" msgid="573716608705273004">"সম্পন্ন হয়েছে"</string>
+    <string name="app_notifications_dialog_done" msgid="573716608705273004">"হয়ে গেছে"</string>
     <string name="notification_show_lights_title" msgid="5564315979007438583">"মিটমিট করা আলো"</string>
     <string name="notification_vibrate_title" msgid="1422330728336623351">"ভাইব্রেশন"</string>
     <string name="notification_channel_sound_title" msgid="9018031231387273476">"সাউন্ড"</string>
@@ -4335,8 +4323,8 @@
     <string name="usb_power_title" msgid="5602112548385798646">"পাওয়ারের বিভিন্ন বিকল্প"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"ফাইল ট্রান্সফার করার বিকল্প"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
-    <string name="usb_preference" msgid="5084550082591493765">"ইউএসবি অভিরুচি"</string>
-    <string name="usb_control_title" msgid="1946791559052157693">"ইউএসবি দ্বারা নিয়ন্ত্রিত"</string>
+    <string name="usb_preference" msgid="5084550082591493765">"USB সংক্রান্ত পছন্দ"</string>
+    <string name="usb_control_title" msgid="1946791559052157693">"USB যে ডিভাইস দ্বারা নিয়ন্ত্রিত"</string>
     <string name="usb_control_host" msgid="7404215921555021871">"কানেক্ট থাকা ডিভাইস"</string>
     <string name="usb_control_device" msgid="527916783743021577">"এই ডিভাইসটি"</string>
     <string name="usb_switching" msgid="3654709188596609354">"পাল্টানো হচ্ছে…"</string>
@@ -4673,6 +4661,12 @@
     <string name="double_tap_power_camera_action_summary" msgid="4942585540579590444">"ক্যামেরা চালু করুন"</string>
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Wallet"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Wallet খুলুন"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"লক স্ক্রিনের শর্টকাট পরিবর্তন করবেন?"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"এছাড়া <xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> হল আপনার লক স্ক্রিনের শর্টকাট। এটি পরিবর্তন করতে চান?"</string>
+    <!-- no translation found for double_tap_power_wallet_footer_title (5417023303339032410) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (1267822422365445657) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"সেল্ফির জন্য ক্যামেরা ঘোরান"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"নেভিগেশন মোড"</string>
@@ -5191,7 +5185,7 @@
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"পরে মোবাইল ডেটা, কল ফিচার এবং এসএমএস ব্যবহার করতে, আপনার \'নেটওয়ার্ক\' সেটিংসে যান"</string>
     <string name="sim_card_label" msgid="6263064316075963775">"সিম কার্ড"</string>
     <string name="erase_sim_dialog_title" msgid="4742077437653028326">"ই-সিম মুছবেন?"</string>
-    <string name="erase_sim_dialog_text" msgid="3982216582200709197">"এই ই-সিম মুছে দিলে, এই ডিভাইসে <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> পরিষেবা আর পাওয়া যাবে না। <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>-এর জন্য পরিষেবা বাতিল করা যাবে না। নতুন ই-সিমের অনুরোধ করতে, আপনাকে পরিষেবা প্রদানকারীর সাথে যোগাযোগ করতে হবে।"</string>
+    <string name="erase_sim_dialog_text" msgid="3982216582200709197">"এই ই-সিম মুছে দিলে, এই ডিভাইসে <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> পরিষেবা আর পাওয়া যাবে না। <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>-এর জন্য পরিষেবা বাতিল হবে না। নতুন ই-সিমের অনুরোধ করতে, আপনাকে পরিষেবা প্রদানকারীর সাথে যোগাযোগ করতে হবে।"</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"মুছুন"</string>
     <string name="erasing_sim" msgid="4237180547590463930">"ই-সিম মোছা হচ্ছে…"</string>
     <string name="erase_sim_fail_title" msgid="1445700500168357303">"ই-সিম মোছা যাচ্ছে না"</string>
@@ -5741,10 +5735,8 @@
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"অডিও স্ট্রিম QR কোড"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"পাসওয়ার্ড: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"<xliff:g id="STREAM_NAME">%1$s</xliff:g> শুনতে, অন্য লোকজন তাদের Android ডিভাইসে মানানসই হেডফোন কানেক্ট করতে পারবেন। তারপরে তারা এই QR কোড স্ক্যান করতে পারবে।"</string>
-    <!-- no translation found for audio_streams_preference_subtitle (4098552511880220046) -->
-    <skip />
-    <!-- no translation found for audio_streams_preference_subtitle_audio_sharing_on (2382924714414148028) -->
-    <skip />
+    <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"Auracast ব্রডকাস্ট শুনুন"</string>
+    <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"অডিও স্ট্রিম খুঁজতে অডিও শেয়ারিং বন্ধ করুন"</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"অডিও স্ট্রিম খুঁজুন"</string>
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"অডিও শেয়ার করছে এমন ডিভাইস অথবা আশেপাশের Auracast ব্রডকাস্ট শুনুন"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"আপনার অডিও ডিভাইস"</string>
@@ -5782,12 +5774,9 @@
     <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"পিন ফিরে পাওয়ার পদ্ধতি যোগ করুন"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"পিন পরিবর্তন করুন"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"পিন ভুলে গেছি"</string>
-    <!-- no translation found for supervision_update_recovery_email_preference_title (2057393838251915087) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_title (8447541098148430866) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_summary (4865713157106413979) -->
-    <skip />
+    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"অ্যাকাউন্ট ফিরিয়ে আনার ইমেল আপডেট করুন"</string>
+    <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"পিন মুছুন"</string>
+    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"এর ফলে আপনার তত্ত্বাবধান সম্পর্কিত সব সেটিংস রিসেট হয়ে যাবে"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"ওয়েব কন্টেন্টের ফিল্টার"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome ও ওয়েব"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"অনুপযুক্ত সাইট ব্লক করে দেখুন"</string>

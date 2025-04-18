@@ -933,11 +933,11 @@ public class NetworkProviderSettingsTest {
 
         verify(mEthernetPreferenceCategory).removeAll();
         verify(mEthernetPreferenceCategory).setVisible(true);
-        verify(mEthernetPreferenceCategory).addPreference(arg.capture());
+        verify(mEthernetPreferenceCategory, times(2)).addPreference(arg.capture());
 
-        Preference pref = arg.getValue();
-        assertThat(pref.getKey()).isEqualTo("eth0");
-        assertThat(pref.getSummary()).isEqualTo("Connected");
+        List<Preference> prefs = arg.getAllValues();
+        assertThat(prefs.get(1).getKey()).isEqualTo("eth0");
+        assertThat(prefs.get(1).getSummary()).isEqualTo("Connected");
     }
 
     @Test
@@ -953,10 +953,10 @@ public class NetworkProviderSettingsTest {
 
         ArgumentCaptor<Preference> arg = ArgumentCaptor.forClass(Preference.class);
 
-        verify(mEthernetPreferenceCategory).addPreference(arg.capture());
+        verify(mEthernetPreferenceCategory, times(2)).addPreference(arg.capture());
 
-        Preference pref = arg.getValue();
-        assertThat(pref.getSummary()).isEqualTo("Disconnected");
+        List<Preference> prefs = arg.getAllValues();
+        assertThat(prefs.get(1).getSummary()).isEqualTo("Disconnected");
     }
 
     @Implements(PreferenceFragmentCompat.class)

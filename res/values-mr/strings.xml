@@ -300,7 +300,7 @@
     <string name="airplane_mode" msgid="3196085857882526817">"विमान मोड"</string>
     <string name="wireless_networks_settings_title" msgid="8557542379234105369">"वायरलेस आणि नेटवर्क"</string>
     <string name="roaming" msgid="3055365654530847985">"रोमिंग"</string>
-    <string name="roaming_enable" msgid="7845716016861535340">"रोमिंग असताना डेटा सेवांवर कनेक्ट करा"</string>
+    <string name="roaming_enable" msgid="7845716016861535340">"रोमिंगमध्ये असताना डेटा सेवांवर कनेक्ट करा"</string>
     <string name="roaming_disable" msgid="729512894708689604">"रोमिंगमध्ये असताना डेटा सेवांना कनेक्ट करा"</string>
     <string name="roaming_warning" msgid="7703647889040229013">"रोमिंग शुल्क आकारले जाऊ शकते."</string>
     <string name="date_time_auto" msgid="1759599045100040686">"ऑटोमॅटिक तारीख आणि वेळ"</string>
@@ -334,7 +334,7 @@
     <string name="lock_after_timeout" msgid="8682769000437403444">"स्क्रीन टाइमआउटनंतर लॉक करा"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"टाइमआउटनंतर <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"टाइमआउटनंतर तात्काळ, <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> द्वारे अनलॉक केलेले ठेवले असते ते वगळून"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> टाइमआउटनंतर, <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> द्वारे अनलॉक केलेले ठेवले असते ते वगळून"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"टाइमआउटनंतर <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> झाल्यावर, <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> द्वारे अनलॉक करून ठेवले असल्यास ते वगळून"</string>
     <string name="owner_info_settings_title" msgid="3555626140700093017">"लॉक स्‍क्रीनवर मजकूर जोडा"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"काहीही नाही"</string>
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"उदा. Joe चे Android."</string>
@@ -344,7 +344,9 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{सुरू आहे / # अ‍ॅपला स्थानाचा अ‍ॅक्सेस आहे}other{सुरू आहे / # अ‍ॅप्सना स्थानाचा अ‍ॅक्सेस आहे}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"लोड करत आहे…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"जवळपासच्या डिव्हाइसची परवानगी असणारी ॲप्स कनेक्ट केलेल्या डिव्हाइसचे संबंधित स्थान निर्धारित करू शकतात."</string>
-    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <!-- no translation found for location_settings_footer_location_off_with_telephony (5600725945541382556) -->
+    <skip />
+    <!-- no translation found for location_settings_footer_location_off_no_telephony (2709958040008816610) -->
     <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"स्थान सेटिंग्जबद्दल अधिक जाणून घ्या"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"बदलण्यासाठी ChromeOS सेटिंग्ज &gt; गोपनीयता आणि सुरक्षा &gt; गोपनीयता नियंत्रणे &gt; स्थान अ‍ॅक्सेस वर जा"</string>
@@ -1030,8 +1032,7 @@
     <string name="android_beam_explained" msgid="5684416131846701256">"जेव्हा हे वैशिष्ट्य सुरू केलेले असते तेव्हा, तुम्ही डिव्हाइस एकत्र जवळ धरून दुसर्‍या NFC-सक्षम डिव्हाइस वर अ‍ॅपचा आशय बीम करू शकता. उदाहरणार्थ, तुम्ही वेब पेज, YouTube व्हिडिओ, संपर्क आणि बरेच काही बीम करू शकता.\n\nफक्त डिव्हाइस एकत्र आणा (विशेषतः पाठोपाठ) आणि नंतर स्क्रीन टॅप करा. काय बीम केले जाते हे अ‍ॅप निर्धारित करते."</string>
     <string name="wifi_settings" msgid="8313301946393559700">"वाय-फाय"</string>
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"वाय-फाय वापरा"</string>
-    <!-- no translation found for wifi_networks_category (8011323954745036753) -->
-    <skip />
+    <string name="wifi_networks_category" msgid="8011323954745036753">"नेटवर्क"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"वाय-फाय सेटिंग्ज"</string>
     <string name="wifi_select_network" msgid="6692897876718813259">"वाय-फाय निवडा"</string>
     <string name="wifi_starting" msgid="6147022683967506341">"वाय-फाय सुरू करत आहे..."</string>
@@ -1083,8 +1084,8 @@
     <string name="wifi_hidden_network_warning" msgid="3937433813754746158">"जर तुमच्या राउटरद्वारे नेटवर्क आयडी प्रसारित केला जात नसेल पण भविष्यात तुम्हाला कनेक्ट करायचे असेल, तर तुम्ही नेटवर्कला लपवलेले म्हणून सेट करू शकता.\n\nयामुळे एक सुरक्षा धोका निर्माण होऊ शकतो, कारण नेटवर्क शोधण्यासाठी तुमच्या फोनद्वारे नियमितपणे सिग्नल प्रसारित केला जाईल.\n\nनेटवर्कला \'लपवलेले\' म्हणून सेट केल्यामुळे तुमची राउटर सेटिंग्ज बदलणार नाहीत."</string>
     <string name="wifi_signal" msgid="4442182285304271424">"सिग्नल क्षमता"</string>
     <string name="wifi_status" msgid="5349199188871002778">"स्थिती"</string>
-    <string name="tx_wifi_speed" msgid="2368986629172050673">"ट्रान्समिट लिंकचा वेग"</string>
-    <string name="rx_wifi_speed" msgid="5167966079215111232">"रिसीव्ह लिंकचा वेग"</string>
+    <string name="tx_wifi_speed" msgid="2368986629172050673">"ट्रान्समिट लिंक स्पीड"</string>
+    <string name="rx_wifi_speed" msgid="5167966079215111232">"रिसीव्ह लिंक स्पीड"</string>
     <string name="wifi_speed" msgid="6562147734565434513">"लिंक गती"</string>
     <string name="wifi_frequency" msgid="3120998420184702834">"फ्रीक्वेन्सी"</string>
     <string name="wifi_ip_address" msgid="8903577251845268209">"आयपी अ‍ॅड्रेस"</string>
@@ -1150,11 +1151,11 @@
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"आपोआप कनेक्‍ट करा"</string>
     <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"रेंजमध्ये असताना या नेटवर्कला कनेक्शनची अनुमती द्या"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"डिव्हाइस जोडा"</string>
-    <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"या नेटवर्कमध्ये डिव्हाइस जोडण्यासाठी QR कोड वापरा"</string>
+    <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"डिव्हाइस या नेटवर्कशी जोडण्यासाठी QR कोड वापरा"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR कोडचा फॉरमॅट चुकीचा आहे"</string>
     <string name="retry" msgid="7542103800274026915">"पुन्हा प्रयत्न करा"</string>
     <string name="wifi_shared" msgid="8850748923537589782">"इतर डिव्हाइस वापरकर्त्यांसह शेअर करा"</string>
-    <string name="wifi_unchanged" msgid="8026045290856150191">"(अजून तेच आहे)"</string>
+    <string name="wifi_unchanged" msgid="8026045290856150191">"(बदल केलेला नाही)"</string>
     <string name="wifi_unspecified" msgid="4561964943472312208">"कृपया निवडा"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(एकाधिक प्रमाणपत्रे जोडली)"</string>
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"सिस्टीम प्रमाणपत्रे वापरा"</string>
@@ -1192,7 +1193,7 @@
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{एक नेटवर्क आणि सदस्यत्व}other{# नेटवर्क आणि सदस्यत्वे}}"</string>
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"डिव्हाइसचा MAC ॲड्रेस"</string>
-    <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"रँडमाइझ केलेला MAC पत्ता"</string>
+    <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"रँडमाइझ केलेला MAC ॲड्रेस"</string>
     <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"रँडमाइझ केलेला MAC ॲड्रेस (शेवटी वापरला गेला होता)"</string>
     <string name="wifi_certificate_summary_Certificates" msgid="7849788154375655654">"<xliff:g id="NUMBER">%d</xliff:g> प्रमाणपत्रे"</string>
     <string name="wifi_certificate_summary_system" msgid="6521297326433133669">"सिस्टीम प्रमाणपत्र"</string>
@@ -1212,22 +1213,14 @@
     <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> ‑ चार्ज होत आहे"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"हॉटस्पॉट कनेक्शन"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"कनेक्शनची क्षमता"</string>
-    <!-- no translation found for ethernet_dns1 (6487470669719468602) -->
-    <skip />
-    <!-- no translation found for ethernet_dns2 (484620572555181363) -->
-    <skip />
-    <!-- no translation found for ethernet_gateway (4064061619318875567) -->
-    <skip />
-    <!-- no translation found for ethernet_network_prefix_length (3693127271457763198) -->
-    <skip />
-    <!-- no translation found for ethernet_ip_settings (3344064201878792090) -->
-    <skip />
-    <!-- no translation found for ethernet_config_submit (724743720212124025) -->
-    <skip />
-    <!-- no translation found for ethernet_config_cancel (986322993908814366) -->
-    <skip />
-    <!-- no translation found for ethernet_config_title (4784063109810004382) -->
-    <skip />
+    <string name="ethernet_dns1" msgid="6487470669719468602">"DNS 1 (खाजगी DNS ओव्हरराइड करेपर्यंत)"</string>
+    <string name="ethernet_dns2" msgid="484620572555181363">"DNS 2 (खाजगी DNS ओव्हरराइड करेपर्यंत)"</string>
+    <string name="ethernet_gateway" msgid="4064061619318875567">"गेटवे"</string>
+    <string name="ethernet_network_prefix_length" msgid="3693127271457763198">"नेटवर्क उपसर्ग लांबी"</string>
+    <string name="ethernet_ip_settings" msgid="3344064201878792090">"IP सेटिंग्ज"</string>
+    <string name="ethernet_config_submit" msgid="724743720212124025">"सबमिट करा"</string>
+    <string name="ethernet_config_cancel" msgid="986322993908814366">"रद्द करा"</string>
+    <string name="ethernet_config_title" msgid="4784063109810004382">"इथरनेट सेटिंग्ज"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"सेव्ह केलेली नेटवर्क"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"सदस्यत्वे"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"इतर नेटवर्क"</string>
@@ -1340,7 +1333,7 @@
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"वैयक्तिक खाते - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"शोधा"</string>
     <string name="display_settings" msgid="7197750639709493852">"डिस्प्ले"</string>
-    <string name="accelerometer_title" msgid="7745991950833748909">"ऑटो-रोटेट स्क्रीन"</string>
+    <string name="accelerometer_title" msgid="7745991950833748909">"ऑटोमॅटिक रोटेट स्क्रीन"</string>
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"बंद"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"सुरू"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"सुरू - चेहऱ्यावर आधारित"</string>
@@ -1386,7 +1379,7 @@
     <string name="auto_rotate_manage_permission_button" msgid="2591146085906382385">"परवानग्या व्यवस्थापित करा"</string>
     <string name="night_display_title" msgid="8532432776487216581">"रात्रीचा प्रकाश"</string>
     <string name="night_display_text" msgid="4789324042428095383">"रात्रीचा प्रकाश तुमच्या स्क्रीनला अँबर छटा देतो. यामुळे मंद प्रकाशात तुमची स्क्रीन पाहणे किंवा वाचणे सोपे होते आणि तुम्हाला झोप येण्यात मदत होऊ शकते."</string>
-    <string name="night_display_auto_mode_title" msgid="5869128421470824381">"शेड्युल"</string>
+    <string name="night_display_auto_mode_title" msgid="5869128421470824381">"शेड्यूल"</string>
     <string name="night_display_auto_mode_never" msgid="2721729920187175239">"काहीही नाही"</string>
     <string name="night_display_auto_mode_custom" msgid="3938791496034086916">"ठरावीक वेळी सुरू होतो"</string>
     <string name="night_display_auto_mode_twilight" msgid="4291855156158833997">"सूर्यास्त-सूर्योदय सुरू राहतो"</string>
@@ -1456,8 +1449,7 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"बंद"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"कधी सुरू करायचे"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"सक्रिय करण्‍यासाठी लिफ्‍ट"</string>
-    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
-    <skip />
+    <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"वायरलेस चार्जिंगपुरते प्रतिबंधित करा"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"अँबियंट डिस्प्ले"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"कधी दाखवायचे"</string>
     <string name="doze_title" msgid="1523090408230862316">"नोटिफिकेशनसाठी स्क्रीन सुरू करा"</string>
@@ -1624,8 +1616,7 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"चार्ज करताना"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"चार्जिंग करताना आणि सरळ असताना"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"डॉक केलेले असताना"</string>
-    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
-    <skip />
+    <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"वायरलेस चार्जिंगपुरते प्रतिबंधित करा"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"अ‍ॅक्सेस पॉइंट संपादित करा"</string>
     <string name="apn_add" msgid="9069613192201630934">"ॲक्सेस पॉइंट जोडा"</string>
@@ -1739,8 +1730,7 @@
     <string name="rx_ethernet_speed" msgid="6642000569214969711">"लिंक गती मिळवा"</string>
     <string name="ethernet_network_usage" msgid="3795965384177426780">"नेटवर्कचा वापर"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"इथरनेट टेदरिंग"</string>
-    <!-- no translation found for ethernet_modify (1326316717004440503) -->
-    <skip />
+    <string name="ethernet_modify" msgid="1326316717004440503">"फेरबदल करा"</string>
     <string name="tethering_footer_info" msgid="6824352505979800594">"तुमच्या डेटा कनेक्शनने इतर डिव्हाइसना इंटरनेट देण्यासाठी हॉटस्पॉट आणि टेदरिंगचा वापर करा. जवळपासच्या डिव्हाइससोबत आशय शेअर करण्यासाठी अ‍ॅप्स हॉटस्‍पॉट देखील तयार करू शकतात."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"तुमच्या मोबाइल डेटा कनेक्शन किंवा वाय-फाय द्वारे इतर डिव्हाइसना इंटरनेट पुरवण्यासाठी हॉटस्पॉट आणि टेदरिंगचा वापर करा. जवळपासच्या डिव्हाइससह आशय शेअर करण्यासाठी अ‍ॅप्स हॉटस्पॉटदेखील तयार करू शकतात."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"मदत"</string>
@@ -2168,6 +2158,8 @@
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"होमवर जा"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"मागे जा"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"अलीकडील अ‍ॅप्स पहा"</string>
+    <string name="three_finger_tap_launch_app_title" msgid="55761877549896819">"दुसरे ॲप उघडा"</string>
+    <string name="three_finger_tap_launch_app_summary" msgid="2015894823281420733">"इंस्टॉल केलेल्या ॲप्सच्या सूचीमधून निवडा"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"होमवर जा"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"तुमच्या टचपॅडवर कुठेही तीन बोटांनी वरती स्‍वाइप करा"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"मागे जा"</string>
@@ -2463,7 +2455,7 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"पॉवर बटण कॉल समाप्त करते"</string>
     <string name="accessibility_force_invert_title" msgid="5248504501753732051">"आणखी अ‍ॅप्सना गडद थीम लागू करा"</string>
     <string name="accessibility_force_invert_summary" msgid="257503086198180749">"आणखी अ‍ॅप्सवर गडद थीमचा विस्तार करते. कदाचित सर्व अ‍ॅप्ससह काम करणार नाही."</string>
-    <string name="accessibility_disable_animations" msgid="2993529829457179058">"अ‍ॅनिमेशन काढा"</string>
+    <string name="accessibility_disable_animations" msgid="2993529829457179058">"अ‍ॅनिमेशन काढून टाका"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"स्क्रीनवरील हालचाल कमी करा"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"मोनो ऑडिओ"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"ऑडिओ प्ले करताना चॅनल एकत्र करा"</string>
@@ -2481,7 +2473,7 @@
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"कृतीसाठी लागणारा वेळ"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"या वेळेच्या प्राधान्याला सर्व ॲप्स सपोर्ट करत नाहीत"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"तुम्हाला कृती करण्यास सांगणारे तात्पुरते मेसेज किती वेळ दाखवायचे ते निवडा"</string>
-    <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"स्पर्श आणि धरण्याचा विलंब"</string>
+    <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"स्पर्श करून ठेवण्याचा वेळ"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"कलर इन्व्हर्जन"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"कलर इन्व्हर्जन वापरा"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"कलर इन्व्हर्जनचा शॉर्टकट"</string>
@@ -2586,7 +2578,7 @@
     <string name="accessibility_hearing_device_pairing_asha_only_intro" msgid="5679230908462987522">"तुम्ही या पेजवर ASHA ऑडिओ श्रवणयंत्रे पेअर करू शकता. तुमचे श्रवणयंत्र सुरू केले असून ते पेअर करण्यासाठी तयार असल्याची खात्री करा."</string>
     <string name="accessibility_hearing_device_pairing_hap_only_intro" msgid="2233661046254311681">"तुम्ही या पेजवर LE ऑडिओ श्रवणयंत्रे पेअर करू शकता. तुमचे श्रवणयंत्र सुरू केले असून ते पेअर करण्यासाठी तयार असल्याची खात्री करा."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"उपलब्ध श्रवणयंत्रे"</string>
-    <string name="accessibility_found_all_devices" msgid="7817834722148556520">"तुमचे श्रवणयंत्र डिव्हाइस दिसत नाही का?"</string>
+    <string name="accessibility_found_all_devices" msgid="7817834722148556520">"तुमचे श्रवणयंत्र दिसत नाही का?"</string>
     <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"आणखी डिव्हाइस पहा"</string>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"ऑडिओ अ‍ॅडजस्टमेंट"</string>
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"ऑडिओ वर्णन"</string>
@@ -2621,8 +2613,7 @@
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{लहान ({time} सेकंद)}other{लहान ({time} सेकंद)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{मध्यम ({time} सेकंद)}other{मध्यम ({time} सेकंद)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{लांब ({time} सेकंद)}other{लांब ({time} सेकंद)}}"</string>
-    <!-- no translation found for accessibility_autoclick_delay_unit_second (1562809410497613173) -->
-    <skip />
+    <string name="accessibility_autoclick_delay_unit_second" msgid="1562809410497613173">"{count,plural, =1{{time} सेकंद}other{{time} सेकंद}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"सेटिंग्ज"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"सुरू"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"बंद"</string>
@@ -3342,7 +3333,7 @@
     <string name="extreme_threats_summary" msgid="3560742429496902008">"जीवन आणि मालमत्तेस असलेल्या अत्याधिक धोक्यांसाठी सूचना मिळवा"</string>
     <string name="severe_threats_title" msgid="8962959394373974324">"गंभीर धोके"</string>
     <string name="severe_threats_summary" msgid="4982256198071601484">"जीवन आणि मालमत्तेस असलेल्या गंभीर धोक्यांसाठी सूचना मिळवा"</string>
-    <string name="amber_alerts_title" msgid="5238275758191804575">"अँबर सूचना"</string>
+    <string name="amber_alerts_title" msgid="5238275758191804575">"अँबर अलर्ट"</string>
     <string name="amber_alerts_summary" msgid="5755221775246075883">"बाल अपहरणाविषयी बुलेटिन मिळवा"</string>
     <string name="repeat_title" msgid="8676570486899483606">"पुनरावृत्ती"</string>
     <string name="cell_broadcast_settings" msgid="2416980110093867199">"आणीबाणीच्या वायरलेस सूचना"</string>
@@ -3747,7 +3738,7 @@
     <string name="conversation_notifs_category" msgid="2549844862379963273">"संभाषण"</string>
     <string name="general_notification_header" msgid="3669031068980713359">"व्यवस्थापित करा"</string>
     <string name="app_notification_field" msgid="3208079070539894909">"अ‍ॅप नोटिफिकेशन"</string>
-    <string name="app_notification_field_summary" msgid="5981393613897713471">"विशिष्ट ॲप्समधून सूचना नियंत्रित करा"</string>
+    <string name="app_notification_field_summary" msgid="5981393613897713471">"विशिष्ट ॲप्समधून नोटिफिकेशन नियंत्रित करा"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"साधारण"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"कार्य सूचना"</string>
     <string name="profile_section_header_for_advanced_privacy" msgid="8385775428904838579">"कार्य प्रोफाइल"</string>
@@ -3761,13 +3752,13 @@
     <string name="asst_importance_reset_summary" msgid="684794589254282667">"वापरकर्त्याने बदललेली महत्त्वपूर्ण सेटिंग्ज रीसेट करा आणि सूचना असिस्टंटला प्राधान्य देण्याची परवानगी द्या"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"सुचवलेली कृती आणि उत्तरे"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"सुचवलेली कृती आणि उत्तरे आपोआप दाखवा"</string>
-    <string name="notification_history_summary" msgid="5434741516307706892">"अलीकडील आणि स्नूझ केलेल्या सूचना दाखवा"</string>
+    <string name="notification_history_summary" msgid="5434741516307706892">"अलीकडील आणि स्नूझ केलेली नोटिफिकेशन दाखवा"</string>
     <string name="notification_history" msgid="8663811361243456201">"नोटिफिकेशन इतिहास"</string>
     <string name="notification_history_toggle" msgid="9093762294928569030">"नोटिफिकेशन इतिहास वापरा"</string>
-    <string name="notification_history_off_title_extended" msgid="853807652537281601">"सूचना इतिहास बंद आहे"</string>
-    <string name="notification_history_off_summary" msgid="671359587084797617">"अलीकडील सूचना आणि स्नूझ केलेल्या सूचना पाहण्यासाठी सूचना इतिहास सुरू करा"</string>
-    <string name="history_toggled_on_title" msgid="4518001110492652830">"अलीकडील कोणत्याही सूचना नाहीत"</string>
-    <string name="history_toggled_on_summary" msgid="9034278971358282728">"तुमच्या अलीकडील आणि स्नूझ केलेल्या सूचना येथे दिसतील"</string>
+    <string name="notification_history_off_title_extended" msgid="853807652537281601">"नोटिफिकेशन इतिहास बंद आहे"</string>
+    <string name="notification_history_off_summary" msgid="671359587084797617">"अलीकडील नोटिफिकेशन आणि स्नूझ केलेली नोटिफिकेशन पाहण्यासाठी नोटिफिकेशन इतिहास सुरू करा"</string>
+    <string name="history_toggled_on_title" msgid="4518001110492652830">"अलीकडील कोणतीही नोटिफिकेशन नाहीत"</string>
+    <string name="history_toggled_on_summary" msgid="9034278971358282728">"तुमची अलीकडील आणि स्नूझ केलेली नोटिफिकेशन इथे दिसतील"</string>
     <string name="notification_history_view_settings" msgid="5269317798670449002">"सूचना सेटिंग्ज पहा"</string>
     <string name="notification_history_open_notification" msgid="2655071846911258371">"सूचना उघडा"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"नोटिफिकेशन स्नूझ करण्याची अनुमती द्या"</string>
@@ -3821,17 +3812,17 @@
     <string name="lock_screen_notifs_show_full_list" msgid="6767009263807771108">"संपूर्ण सूची"</string>
     <string name="lock_screen_notifs_show_compact" msgid="1944867696357706016">"संक्षिप्त दृश्य"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"लॉक स्‍क्रीनवरील नोटिफिकेशन"</string>
-    <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"संभाषणे, डीफॉल्ट आणि सायलंट असलेल्या सूचना दाखवा"</string>
+    <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"संभाषणे, डीफॉल्ट आणि सायलंट असलेली नोटिफिकेशन दाखवा"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"संभाषणे, डीफॉल्ट आणि सायलंट असलेल्या सूचना दाखवा"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"सायलंट असलेली संभाषणे आणि नोटिफिकेशन लपवा"</string>
-    <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"कोणत्याही सूचना दाखवू नका"</string>
+    <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"कोणतीही नोटिफिकेशन दाखवू नका"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"संवेदनशील नोटिफिकेशन"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"लॉक केलेली असताना संवेदनशील आशय दाखवा"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"संवेदनशील कार्य प्रोफाइलच्या सूचना"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"लॉक केलेली असताना संवेदनशील कार्य प्रोफाइलचा आशय दाखवा"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"नोटिफिकेशनमधील सर्व आशय दाखवा"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"संवेदनशील आशय केवळ अनलॉक केलेले असताना दाखवा"</string>
-    <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"सूचना अजिबात दाखवू नका"</string>
+    <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"नोटिफिकेशन अजिबात दाखवू नका"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6326229471276829730">"तुम्हाला तुमच्या लॉक स्क्रीनने काय दाखवावे असे वाटते?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"लॉक स्क्रीन"</string>
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"सर्व कार्य सूचना आशय दर्शवा"</string>
@@ -3869,7 +3860,7 @@
     <string name="clear" msgid="5092178335409471100">"साफ करा"</string>
     <string name="clear_conversation" msgid="5564321180363279096">"<xliff:g id="CONVERSATION_NAME">%1$s</xliff:g> साफ करा"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"प्राधान्य असलेली आणि बदल केलेली संभाषणे येथे दिसतील"</string>
-    <string name="conversation_onboarding_summary" msgid="2484845363368486941">"तुम्ही संभाषणावर प्राधान्य असलेले म्हणून खूण केल्यास किंवा संभाषणांमध्ये इतर कोणतेही बदल केल्यास, ते येथे दिसतील. \n\nसंभाषण सेटिंग्ज बदलण्यासाठी: \nपुल-डाउन शेड उघडण्यासाठी स्क्रीनच्या सर्वात वरच्या भागातून खाली स्वाइप करा त्यानंतर स्पर्श करा आणि संभाषण धरून ठेवा."</string>
+    <string name="conversation_onboarding_summary" msgid="2484845363368486941">"तुम्ही संभाषणावर प्राधान्य असलेले म्हणून खूण केल्यास किंवा संभाषणांमध्ये इतर कोणतेही बदल केल्यास, ते येथे दिसतील. \n\nसंभाषण सेटिंग्ज बदलण्यासाठी: \nपुल-डाउन शेड उघडण्यासाठी स्क्रीनच्या सर्वात वरच्या भागातून खाली स्वाइप करा, त्यानंतर एखादे संभाषण स्पर्श करून धरून ठेवा."</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"लहान करा"</string>
     <string name="notification_importance_high_title" msgid="394129291760607808">"स्क्रीनवरील पॉप"</string>
     <string name="notification_silence_title" msgid="4085829874452944989">"सायलंट"</string>
@@ -3890,17 +3881,17 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"सर्व \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" सूचना"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"सर्व <xliff:g id="APP_NAME">%1$s</xliff:g> वरील सूचना"</string>
     <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{प्रति दिवस साधारण # सूचना}other{प्रति दिवस साधारण # सूचना}}"</string>
-    <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{प्रति आठवडा साधारण # सूचना}other{प्रति आठवडा साधारण # सूचना}}"</string>
+    <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{प्रति आठवडा साधारण # नोटिफिकेशन}other{प्रति आठवडा साधारण # नोटिफिकेशन}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"कधीही नाही"</string>
     <string name="manage_notification_access_title" msgid="4154723216570646451">"नोटिफिकेशन वाचा, उत्तर द्या आणि नियंत्रित करा"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"कोणती ॲप्स आणि डिव्हाइस नोटिफिकेशन वाचू शकतात हे नियंत्रित करा"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"कार्य प्रोफाइल सूचनांचा ॲक्‍सेस ब्‍लॉक आहे"</string>
-    <string name="notification_assistant_title" msgid="5889201903272393099">"वर्धित सूचना"</string>
+    <string name="notification_assistant_title" msgid="5889201903272393099">"वर्धित नोटिफिकेशन"</string>
     <string name="notification_assistant_summary" msgid="1957783114840908887">"सुचवलेल्या कृती, उत्तरे आणि आणखी बरेच काही मिळवा"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"काहीही नाही"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"इंस्टॉल केलेल्या कोणत्याही अ‍ॅप्सने सूचना प्रवेशाची विनंती केली नाही."</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"सूचना ॲक्सेसला अनुमती द्या"</string>
-    <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Android 12 मधील Android ॲडॅप्टिव्ह नोटिफिकेशन हे वैशिष्ट्य बदलून आता वर्धित नोटिफिकेशन झाले आहे. हे वैशिष्ट्य सुचवलेल्या कृती आणि उत्तरे दाखवते व तुमच्या नोटिफिकेशन व्यवस्थापित करते. \n\nवर्धित नोटिफिकेशन हे वैशिष्ट्य संपर्कांची नावे आणि मेसेज यांसारख्या वैयक्तिक माहितीसह सर्व नोटिफिकेशनचा आशय ॲक्सेस करू शकते. हे वैशिष्ट्य फोन कॉलना उत्तर देणे आणि व्यत्यय आणू नका नियंत्रित करणे यांसारख्या कृती करून नोटिफिकेशन डिसमिस करू शकते किंवा त्यांना प्रतिसाद देऊ शकते."</string>
+    <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Android 12 मधील Android ॲडॅप्टिव्ह नोटिफिकेशन हे वैशिष्ट्य बदलून आता वर्धित नोटिफिकेशन झाले आहे. हे वैशिष्ट्य सुचवलेल्या कृती आणि उत्तरे दाखवते व तुमची नोटिफिकेशन व्यवस्थापित करते. \n\nवर्धित नोटिफिकेशन हे वैशिष्ट्य संपर्कांची नावे आणि मेसेज यांसारख्या वैयक्तिक माहितीसह सर्व नोटिफिकेशनचा आशय ॲक्सेस करू शकते. हे वैशिष्ट्य फोन कॉलना उत्तर देणे आणि व्यत्यय आणू नका नियंत्रित करणे यांसारख्या कृती करून नोटिफिकेशन डिसमिस करू शकते किंवा त्यांना प्रतिसाद देऊ शकते."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g> साठी सूचना अ‍ॅक्सेसला अनुमती द्यायची?"</string>
     <string name="notification_listener_security_warning_summary" msgid="1131986567509818121">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> अ‍ॅपला संपर्क नावे, फोटो आणि तुम्ही मिळवता त्या सर्व मेसेजचा मजकूर यांसारख्या वैयक्तिक माहितीच्या समावेशासह सर्व सूचना वाचता येतील. हे ॲप फोन कॉलना उत्तर देण्याच्या समावेशासह सूचना स्नूझ किंवा डिसमिस करू शकेल अथवा सूचनांमधील बटणवर कृती करू शकेल. \n\nहे ॲपला व्यत्यय आणू नका सुरू किंवा बंद करण्याची आणि संबंधित सेटिंग्ज बदलण्याची क्षमतादेखील देईल."</string>
     <string name="nls_warning_prompt" msgid="1486887096703743841">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> अ‍ॅप हे पुढील गोष्टी करू शकेल:"</string>
@@ -3933,7 +3924,7 @@
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"या अ‍ॅपमध्ये अधिक सेटिंग्ज उपलब्ध आहेत"</string>
     <string name="notification_polite_title" msgid="6121016426991791557">"नोटिफिकेशन कूलडाउन"</string>
     <string name="notification_polite_main_control_title" msgid="5812529809151927149">"नोटिफिकेशन कूलडाउन वापरा"</string>
-    <string name="notification_polite_description" msgid="6137533404978878957">"तुम्हाला थोड्या कालावधीमध्ये बरीच नोटिफिकेशन मिळतात, तेव्हा तुमचे डिव्हाइस त्याचा व्हॉल्यूम कमी करेल आणि सूचनांना १ मिनिटांपर्यंत कमी करेल. कॉल, अलार्म आणि प्राधान्य दिलेल्या संभाषणांवर परिणाम होत नाही. \n\nकूलडाउनदरम्यान मिळालेली नोटिफिकेशन स्क्रीनच्या सर्वात वरून खालपर्यंत स्वाइप करून शोधली जाऊ शकतात."</string>
+    <string name="notification_polite_description" msgid="6137533404978878957">"तुम्हाला थोड्या कालावधीमध्ये बरीच नोटिफिकेशन मिळतात, तेव्हा तुमचे डिव्हाइस त्याचा व्हॉल्यूम कमी करेल आणि अलर्ट १ मिनिटांपर्यंत कमी करेल. कॉल, अलार्म आणि प्राधान्य दिलेल्या संभाषणांवर परिणाम होत नाही. \n\nकूलडाउनदरम्यान मिळालेली नोटिफिकेशन स्क्रीनच्या सर्वात वरून खालपर्यंत स्वाइप करून शोधली जाऊ शकतात."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"कार्य प्रोफाइलला लागू करा"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"कार्य प्रोफाइलच्या अ‍ॅप्सना लागू करा"</string>
     <string name="notification_bundle_title" msgid="460988459835922719">"बंडल केलेली नोटिफिकेशन"</string>
@@ -4264,7 +4255,7 @@
     <string name="unused_apps_switch" msgid="7595419855882245772">"न वापरल्यास अ‍ॅप अ‍ॅक्टिव्हिटी थांबवा"</string>
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"परवानग्या काढून टाका, तात्पुरत्या फाइल हटवा आणि सूचना थांबवा"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"न वापरल्यास, ॲप व्यवस्थापित करा"</string>
-    <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"परवानग्या काढून टाका, तात्पुरत्या फाइल हटवा, सूचना थांबवा आणि ॲप संग्रहित करा"</string>
+    <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"परवानग्या काढून टाका, तात्पुरत्या फाइल हटवा, नोटिफिकेशन थांबवा आणि ॲप संग्रहित करा"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"सर्व अ‍ॅप्स"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"इंस्टॉल केलेली अ‍ॅप्स"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"इन्स्टंट अ‍ॅप्स"</string>
@@ -4670,6 +4661,12 @@
     <string name="double_tap_power_camera_action_summary" msgid="4942585540579590444">"कॅमेरा उघडा"</string>
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Wallet"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Wallet उघडा"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"लॉक स्‍क्रीनवरील शॉर्टकट बदलायचा आहे का?"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> हा देखील तुमचा लॉक स्‍क्रीनवरील शॉर्टकट आहे. तुम्हाला तो बदलायचा आहे का?"</string>
+    <!-- no translation found for double_tap_power_wallet_footer_title (5417023303339032410) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (1267822422365445657) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"सेल्फीसाठी कॅमेरा फ्लिप करा"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"नेव्हिगेशन मोड"</string>
@@ -4685,7 +4682,7 @@
     <string name="keywords_system_navigation" msgid="3131782378486554934">"सिस्टीम नेव्हिगेशन, दोन बटण नेव्हिगेशन, तीन बटण नेव्हिगेशन, जेश्चर नेव्हिगेशन, स्वाइप"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"डिजिटल असिस्टंट"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"असिस्टंट अ‍ॅक्टिव्हेट करण्यासाठी स्वाइप करा"</string>
-    <string name="assistant_corner_gesture_summary" msgid="5012534700233017955">"डिजिटल असिस्टंट अ‍ॅपची विनंती करण्यासाठी तळाच्या कोपऱ्यापासून वर स्वाइप करा"</string>
+    <string name="assistant_corner_gesture_summary" msgid="5012534700233017955">"डिजिटल असिस्टंट अ‍ॅप ॲक्टिव्हेट करण्यासाठी तळाच्या कोपऱ्यापासून वर स्वाइप करा"</string>
     <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"असिस्टंट अ‍ॅक्टिव्हेट करण्यासाठी होम बटण धरून ठेवा"</string>
     <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"डिजिटल असिस्टंट अ‍ॅप अ‍ॅक्टिव्हेट करण्यासाठी होम बटण प्रेस करून धरून ठेवा."</string>
     <string name="low_label" msgid="6525629096999711220">"कमी"</string>
@@ -5359,7 +5356,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"प्‍लेअर दाखवा"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"मीडिया"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"कॅमेरा सॉफ्टवेअरच्या एक्स्टेंशनना अनुमती द्या"</string>
-    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"HDR, नाइट आणि इतर एक्स्टेंशन यांसारख्या प्रगत कॅमेरा वैशिष्ट्यांच्या डीफॉल्ट सॉफ्टवेअरची अंमलबजावणी सुरू करते."</string>
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"HDR, नाइट किंवा इतर कॅमेरा एक्स्टेंशन यांसारख्या प्रगत कॅमेरा वैशिष्ट्यांच्या डीफॉल्ट सॉफ्टवेअरची अंमलबजावणी सुरू करते."</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"ब्लूटूथ सुरू होईल"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"इंटरनेट"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"सिम"</string>
@@ -5399,7 +5396,7 @@
     <string name="mobile_data_temp_connection_active" msgid="3430470299756236413">"तात्पुरते कनेक्ट केलेले"</string>
     <string name="mobile_data_temp_using" msgid="5211002380149434155">"<xliff:g id="SUBNAME">%1$s</xliff:g> तात्पुरता वापरत आहे"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"कोणतेही कनेक्शन नाही"</string>
-    <string name="mobile_data_off_summary" msgid="1884248776904165539">"मोबाइल डेटा ऑटो-कनेक्ट होणार नाही"</string>
+    <string name="mobile_data_off_summary" msgid="1884248776904165539">"मोबाइल डेटा आपोआप कनेक्ट होणार नाही"</string>
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"मोबाइल डेटा बंद करायचा आहे का?"</string>
     <string name="mobile_data_disable_message" msgid="7829414836454769970">"तुम्हाला <xliff:g id="CARRIER">%s</xliff:g> वापरून डेटा किंवा इंटरनेटचा अ‍ॅक्सेस नसेल. इंटरनेट फक्त वाय-फाय मार्फत उपलब्ध असेल."</string>
     <string name="mobile_data_disable_message_default_carrier" msgid="4449469407705838612">"तुमचा वाहक"</string>
@@ -5574,7 +5571,7 @@
     <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"सुरू आहे / कॅमेराचा फ्लॅश"</string>
     <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"सुरू आहे / स्क्रीनचा फ्लॅश"</string>
     <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"सुरू आहे / कॅमेरा आणि स्क्रीनचा फ्लॅश"</string>
-    <string name="flash_notifications_intro" msgid="8409873413480928249">"तुम्हाला सूचना मिळाल्यावर किंवा अलार्म वाजल्यावर कॅमेराचा लाइट किंवा स्क्रीन फ्लॅश करा"</string>
+    <string name="flash_notifications_intro" msgid="8409873413480928249">"तुम्हाला नोटिफिकेशन मिळाल्यावर किंवा अलार्म वाजल्यावर कॅमेराचा लाइट किंवा स्क्रीन फ्लॅश करा"</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"तुम्हाला सूचना मिळाल्यावर किंवा अलार्म वाजल्यावर स्क्रीन फ्लॅश करा"</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"तुम्ही प्रकाशाबाबत संवेदनशील असाल, तर फ्लॅश नोटिफिकेशन सावधगिरीने वापरा"</string>
     <string name="flash_notifications_keywords" msgid="2458759275318514836">"फ्लॅश, प्रकाश, श्रवणदोष असणारे, ऐकू न येणे"</string>
@@ -5738,10 +5735,8 @@
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"ऑडिओ स्ट्रीमचा QR कोड"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"पासवर्ड: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"<xliff:g id="STREAM_NAME">%1$s</xliff:g> ऐकण्यासाठी, इतर लोक त्यांच्या Android डिव्हाइसशी कंपॅटिबल हेडफोन कनेक्ट करू शकतात. त्यानंतर ते हा QR कोड स्कॅन करू शकतात."</string>
-    <!-- no translation found for audio_streams_preference_subtitle (4098552511880220046) -->
-    <skip />
-    <!-- no translation found for audio_streams_preference_subtitle_audio_sharing_on (2382924714414148028) -->
-    <skip />
+    <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"Auracast ब्रॉडकास्ट ऐका"</string>
+    <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"ऑडिओ स्ट्रीम शोधण्यासाठी ऑडिओ शेअरिंग बंद करा"</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"ऑडिओ स्ट्रीम शोधा"</string>
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"ऑडिओ शेअर करणारे डिव्हाइस किंवा जवळपासचे Auracast ब्रॉडकास्ट ऐका"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"तुमचे ऑडिओ डिव्हाइस"</string>
@@ -5779,12 +5774,9 @@
     <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"पिन रिकव्‍हरी पद्धत जोडा"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"पिन बदला"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"पिन विसरलात"</string>
-    <!-- no translation found for supervision_update_recovery_email_preference_title (2057393838251915087) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_title (8447541098148430866) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_summary (4865713157106413979) -->
-    <skip />
+    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"रिकव्हरी ईमेल अपडेट करा"</string>
+    <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"पिन हटवा"</string>
+    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"यामुळे तुमच्या सर्व पर्यवेक्षण सेटिंग्ज रीसेट होतील"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"वेब आशय फिल्टर"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome आणि वेब"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"भडक आशय असलेल्या साइट ब्लॉक करण्याचा प्रयत्न करा"</string>

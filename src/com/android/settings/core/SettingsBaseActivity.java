@@ -104,7 +104,7 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
             finish();
         }
         final long startTime = System.currentTimeMillis();
-        if (Flags.enforceEdgeToEdge()) {
+        if (Flags.enforceEdgeToEdge() && !isAnySetupWizard) {
             Utils.setupEdgeToEdge(this);
             hideInternalActionBar();
         }
@@ -134,6 +134,10 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
             getToolbarDelegate().initCollapsingToolbar(mCollapsingToolbarLayout, mAppBarLayout);
         } else {
             super.setContentView(R.layout.settings_base_layout);
+        }
+
+        if (isAnySetupWizard) {
+            findViewById(R.id.content_parent).setFitsSystemWindows(false);
         }
 
         // This is to hide the toolbar from those pages which don't need a toolbar originally.

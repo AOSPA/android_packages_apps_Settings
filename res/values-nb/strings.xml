@@ -58,7 +58,7 @@
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Aldri"</string>
     <string name="sleep_on_fold_summary" msgid="4191753338303043456">"Den ytre skjermen slås av og låses når du legger sammen enheten"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Bruk automatisk rotasjon"</string>
-    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Ansiktsgjenkjenning bruker frontkameraet til å forbedre nøyaktigheten til automatisk rotasjon. Bilder blir aldri lagret eller sendt til Google."</string>
+    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Ansiktsgjenkjenning bruker frontkameraet for å forbedre nøyaktigheten av automatisk rotasjon. Bilder blir aldri lagret eller sendt til Google."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
     <string name="bluetooth_is_discoverable" msgid="4798961627677790935">"Synlig for alle Bluetooth-enheter i nærheten (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="8122823110652921674">"Synlig for alle Bluetooth-enheter i nærheten"</string>
@@ -344,7 +344,9 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{På / # app har tilgang til posisjon}other{På / # apper har tilgang til posisjon}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Laster inn …"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Apper med tillatelsen for enheter i nærheten kan fastslå den relative posisjonen til tilkoblede enheter."</string>
-    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <!-- no translation found for location_settings_footer_location_off_with_telephony (5600725945541382556) -->
+    <skip />
+    <!-- no translation found for location_settings_footer_location_off_no_telephony (2709958040008816610) -->
     <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Finn ut mer om posisjonsinnstillinger"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"For å bytte, gå til ChromeOS-innstillingene &gt; Personvern og sikkerhet &gt; Personverninnstillinger &gt; Posisjonstilgang"</string>
@@ -414,7 +416,7 @@
     <string name="security_settings_face_footer_description_class3" msgid="2639208414351635622"></string>
     <string name="security_settings_face_footer_learn_more_description" msgid="1418112576619086897"></string>
     <string name="security_settings_face_settings_face_category" msgid="60058016983772899">"Ansikt"</string>
-    <string name="security_settings_face_settings_use_face_to_category" msgid="3349153603335284583">"Bruk ansiktet til å"</string>
+    <string name="security_settings_face_settings_use_face_to_category" msgid="3349153603335284583">"Bruk ansiktet til dette"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Når du bruker ansiktslås"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Øynene må være åpne"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Øynene dine må være åpne for å låse opp telefonen"</string>
@@ -460,8 +462,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Når du ser dette ikonet, kan du autentisere med fingeravtrykk, f.eks. når du logger på apper eller godkjenner kjøp"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"Vær obs på dette"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Slik fungerer det"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Opplåsing med fingeravtrykk lager en unik modell av fingeravtrykket ditt for å bekrefte identiteten din. For å opprette denne fingeravtrykkmodellen under konfigureringen tar du bilder av fingeravtrykket ditt fra forskjellige posisjoner."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Opplåsing med fingeravtrykk lager en unik modell av fingeravtrykket til barnet ditt for å bekrefte barnets identitet. For å opprette denne fingeravtrykkmodellen under konfigureringen tar hen bilder av fingeravtrykket sitt fra forskjellige posisjoner."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Opplåsing med fingeravtrykk lager en unik modell av fingeravtrykket ditt for å bekrefte identiteten din. For å lage denne fingeravtrykkmodellen under konfigureringen tar du bilder av fingeravtrykket ditt fra forskjellige posisjoner."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Opplåsing med fingeravtrykk lager en unik modell av fingeravtrykket til barnet ditt for å bekrefte barnets identitet. For å lage denne fingeravtrykkmodellen under konfigureringen tar hen bilder av fingeravtrykket sitt fra forskjellige posisjoner."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Du får best resultater ved å bruke en skjermbeskytter som er Made For Google-sertifisert. Fingeravtrykket ditt fungerer muligens ikke med andre skjermbeskyttere."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Du får best resultater ved å bruke en skjermbeskytter som er Made For Google-sertifisert. Fingeravtrykket til barnet ditt fungerer muligens ikke med andre skjermbeskyttere."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
@@ -611,10 +613,8 @@
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"Hopp over konfigurering av mønster og ansikt?"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"Hopp over konfig. av mønster og fingeravtrykk?"</string>
     <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"Avbryt konfig. mønster, ansikt og fingeravtrykk?"</string>
-    <!-- no translation found for resume_animation (5259729861893297887) -->
-    <skip />
-    <!-- no translation found for pause_animation (2209064682137909056) -->
-    <skip />
+    <string name="resume_animation" msgid="5259729861893297887">"Gjenoppta animasjonen"</string>
+    <string name="pause_animation" msgid="2209064682137909056">"Sett animasjonen på pause"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"Konfigurer skjermlås"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Ferdig"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Ops, det er ikke sensoren"</string>
@@ -669,7 +669,7 @@
     <string name="private_space_face_enroll_introduction_info_looking" msgid="5694757845303924042">"Hvis du ser på telefonen, kan du låse opp det private området selv om det ikke er meningen. Det private området kan også låses opp av noen som ligner veldig på deg, for eksempel en tvilling, eller hvis noen holder enheten mot ansiktet ditt."</string>
     <string name="private_space_face_enroll_introduction_info_less_secure" msgid="8460719783943533172">"Bruk av ansiktet for å låse opp det private området kan være mindre sikkert enn et sterkt mønster, en sterk PIN-kode eller et sterkt passord"</string>
     <string name="private_space_face_settings_require_attention_details" msgid="2799569069549999689">"Øynene dine må være åpne for å låse opp det private området. Ta av solbriller for å oppnå best mulig resultat."</string>
-    <string name="private_space_face_settings_footer" msgid="7722256209563543711">"Bruk ansiktet til å låse opp det private området.\n\nMerk:\nDu kan bare ha ett ansikt konfigurert om gangen. For å legge til et annet ansikt, slett det nåværende ansiktet.\n\nHvis du ser på telefonen, kan det låses opp, selv om det ikke er meningen.\n\nDet private området kan låses opp av noen andre hvis enheten holdes mot ansiktet ditt.\n\nDet private området kan låses opp av noen som ser veldig ut som deg, for eksempel en tvilling."</string>
+    <string name="private_space_face_settings_footer" msgid="7722256209563543711">"Bruk ansiktet til å låse opp det private området.\n\nMerk:\nDu kan bare ha ett ansikt konfigurert om gangen. For å legge til et annet ansikt, slett det nåværende ansiktet.\n\nHvis du ser på telefonen, kan det låses opp, selv om det ikke er meningen.\n\nDet private området kan låses opp av noen andre hvis enheten holdes mot ansiktet ditt.\n\nDet private området kan låses opp av noen som ligner veldig på deg, for eksempel en tvilling."</string>
     <string name="private_space_face_settings_require_confirmation_details" msgid="5406498664903812249">"Krev alltid bekreftelse ved bruk av ansiktslås"</string>
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"Måter å låse opp på"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Den samme som skjermlåsen for enheten"</string>
@@ -1032,8 +1032,7 @@
     <string name="android_beam_explained" msgid="5684416131846701256">"Når denne funksjonen er slått på, kan du beame appinnhold til en annen enhet som støtter nærfeltskommunikasjon (NFC). Du gjør dette ved å holde enhetene tett sammen. Du kan for eksempel beame nettsider, YouTube-videoer, kontakter med mer.\n\nDu holder bare enhetene mot hverandre (vanligvis rygg mot rygg) og trykker på skjermen. Appen avgjør hva som beames."</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wifi"</string>
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Bruk Wifi"</string>
-    <!-- no translation found for wifi_networks_category (8011323954745036753) -->
-    <skip />
+    <string name="wifi_networks_category" msgid="8011323954745036753">"Kanaler"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Innstillinger for wifi"</string>
     <string name="wifi_select_network" msgid="6692897876718813259">"Velg Wifi-nettverk"</string>
     <string name="wifi_starting" msgid="6147022683967506341">"Slår på Wifi …"</string>
@@ -1214,22 +1213,14 @@
     <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> – lader"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"Tilkobling til wifi-sone"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"Tilkoblingsstyrke"</string>
-    <!-- no translation found for ethernet_dns1 (6487470669719468602) -->
-    <skip />
-    <!-- no translation found for ethernet_dns2 (484620572555181363) -->
-    <skip />
-    <!-- no translation found for ethernet_gateway (4064061619318875567) -->
-    <skip />
-    <!-- no translation found for ethernet_network_prefix_length (3693127271457763198) -->
-    <skip />
-    <!-- no translation found for ethernet_ip_settings (3344064201878792090) -->
-    <skip />
-    <!-- no translation found for ethernet_config_submit (724743720212124025) -->
-    <skip />
-    <!-- no translation found for ethernet_config_cancel (986322993908814366) -->
-    <skip />
-    <!-- no translation found for ethernet_config_title (4784063109810004382) -->
-    <skip />
+    <string name="ethernet_dns1" msgid="6487470669719468602">"DNS 1 (med mindre det overstyres av privat DNS)"</string>
+    <string name="ethernet_dns2" msgid="484620572555181363">"DNS 2 (med mindre det overstyres av privat DNS)"</string>
+    <string name="ethernet_gateway" msgid="4064061619318875567">"Gateway"</string>
+    <string name="ethernet_network_prefix_length" msgid="3693127271457763198">"Nettverksprefiks-lengde"</string>
+    <string name="ethernet_ip_settings" msgid="3344064201878792090">"IP-innstillinger"</string>
+    <string name="ethernet_config_submit" msgid="724743720212124025">"Send inn"</string>
+    <string name="ethernet_config_cancel" msgid="986322993908814366">"Avbryt"</string>
+    <string name="ethernet_config_title" msgid="4784063109810004382">"Ethernet-innstillinger"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Lagrede nettverk"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Abonnementer"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Andre nettverk"</string>
@@ -1458,8 +1449,7 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Av"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Starttidspunkt"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Aktiver enheten med løftebevegelser"</string>
-    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
-    <skip />
+    <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Begrens til trådløs lading"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Passiv skjerm"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Når skal det vises?"</string>
     <string name="doze_title" msgid="1523090408230862316">"Vekk skjermen ved varsler"</string>
@@ -1626,8 +1616,7 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Når enheten lades"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"Når enheten lades og er oppreist"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"Når enheten er i dokken"</string>
-    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
-    <skip />
+    <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"Begrens til trådløs lading"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Rediger tilgangspunkt"</string>
     <string name="apn_add" msgid="9069613192201630934">"Legg til tilgangspunkt"</string>
@@ -1741,8 +1730,7 @@
     <string name="rx_ethernet_speed" msgid="6642000569214969711">"Linkhastighet for mottak"</string>
     <string name="ethernet_network_usage" msgid="3795965384177426780">"Nettverksbruk"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernet-internettdeling"</string>
-    <!-- no translation found for ethernet_modify (1326316717004440503) -->
-    <skip />
+    <string name="ethernet_modify" msgid="1326316717004440503">"Endre"</string>
     <string name="tethering_footer_info" msgid="6824352505979800594">"Bruk wifi-sone og internettdeling for å gi andre enheter tilgang til internett via datatilkoblingen din. Apper kan også opprette en wifi-sone for å dele innhold med enheter i nærheten."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Bruk wifi-sone og internettdeling for å gi andre enheter tilgang til internett via mobildataforbindelsen din. Apper kan også opprette en wifi-sone for å dele innhold med enheter i nærheten."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Hjelp"</string>
@@ -2170,6 +2158,8 @@
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Gå til startsiden"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"Gå tilbake"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"Se nylige apper"</string>
+    <string name="three_finger_tap_launch_app_title" msgid="55761877549896819">"Åpne en annen app"</string>
+    <string name="three_finger_tap_launch_app_summary" msgid="2015894823281420733">"Velg fra en liste over installerte apper"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"Gå til startsiden"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"Sveip opp med tre fingre hvor som helst på styreflaten"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"Gå tilbake"</string>
@@ -2295,8 +2285,7 @@
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Tidskontroller"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Systemkontroller"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Send tilbakemelding"</string>
-    <!-- no translation found for accessibility_send_survey_title (7899716184811587023) -->
-    <skip />
+    <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Gi oss en vurdering"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Nedlastede apper"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"På forsøksstadiet"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Funksjonsflagg"</string>
@@ -2620,12 +2609,11 @@
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensitet"</string>
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Mørkere"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"Lysere"</string>
-    <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"La være på etter at enheten starter på nytt"</string>
+    <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"La være på etter at enheten har startet på nytt"</string>
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{Kort ({time} sekund)}other{Kort ({time} sekunder)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{Middels ({time} sekund)}other{Middels ({time} sekunder)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{Lang ({time} sekund)}other{Lang ({time} sekunder)}}"</string>
-    <!-- no translation found for accessibility_autoclick_delay_unit_second (1562809410497613173) -->
-    <skip />
+    <string name="accessibility_autoclick_delay_unit_second" msgid="1562809410497613173">"{count,plural, =1{{time} sekund}other{{time} sekunder}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Innstillinger"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"På"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"Av"</string>
@@ -4673,6 +4661,12 @@
     <string name="double_tap_power_camera_action_summary" msgid="4942585540579590444">"Åpne Kamera"</string>
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Wallet"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Åpne Wallet"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"Vil du endre snarveien på låseskjermen?"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> er også snarveien på låseskjermen. Vil du endre den?"</string>
+    <!-- no translation found for double_tap_power_wallet_footer_title (5417023303339032410) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (1267822422365445657) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Vend kameraet for å ta selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Navigasjonsmodus"</string>
@@ -4961,7 +4955,7 @@
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"Vibrere"</string>
     <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"Slå av lyden"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Vibrer"</string>
-    <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Ignorer"</string>
+    <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Slå av lyd"</string>
     <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"For å slå på dette, endre først «Trykk og hold på av/på-knappen» til av/på-menyen."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Nettverksdetaljer"</string>
     <string name="devices_title" msgid="649715719278562515">"Enheter"</string>
@@ -5741,10 +5735,8 @@
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"QR-kode for lydstrømmen"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Passord: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"For å lytte til <xliff:g id="STREAM_NAME">%1$s</xliff:g> kan folk koble kompatible hodetelefoner til Android-enheten sin. Deretter kan de skanne denne QR-koden."</string>
-    <!-- no translation found for audio_streams_preference_subtitle (4098552511880220046) -->
-    <skip />
-    <!-- no translation found for audio_streams_preference_subtitle_audio_sharing_on (2382924714414148028) -->
-    <skip />
+    <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"Lytt til Auracast-kringkasting"</string>
+    <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"Slå av lyddeling for å finne lydstrømmer"</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Finn en lydstrøm"</string>
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Lytt til en enhet som deler lyd, eller lytt til en Auracast-kringkasting i nærheten"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"Lydenheten din"</string>
@@ -5782,12 +5774,9 @@
     <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"Legg til en metode for PIN-gjenoppretting"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Endre PIN-koden"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Glemt PIN-kode"</string>
-    <!-- no translation found for supervision_update_recovery_email_preference_title (2057393838251915087) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_title (8447541098148430866) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_summary (4865713157106413979) -->
-    <skip />
+    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Oppdater gjenopprettingsadressen"</string>
+    <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Slett PIN-koden"</string>
+    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Dette tilbakestiller alle tilsynsinnstillingene dine"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Nettinnholdsfiltre"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome og nettet"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Prøv å blokkere ikke-barnevennlige nettsteder"</string>

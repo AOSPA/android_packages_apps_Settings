@@ -25,6 +25,7 @@ import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoScreen
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionScreen
 import com.android.settings.deviceinfo.legal.LegalSettingsScreen
 import com.android.settings.deviceinfo.legal.ModuleLicensesScreen
+import com.android.settings.deviceinfo.storage.StoragePreferenceScreen
 import com.android.settings.display.AutoBrightnessScreen
 import com.android.settings.display.DisplayScreen
 import com.android.settings.display.ScreenTimeoutScreen
@@ -40,8 +41,11 @@ import com.android.settings.network.NetworkProviderScreen
 import com.android.settings.network.tether.TetherScreen
 import com.android.settings.notification.SoundScreen
 import com.android.settings.security.LockScreenPreferenceScreen
+import com.android.settings.spa.app.catalyst.AllAppsScreen
+import com.android.settings.spa.app.catalyst.AppStorageAppListScreen
 import com.android.settings.supervision.SupervisionDashboardScreen
 import com.android.settings.supervision.SupervisionPinManagementScreen
+import com.android.settingslib.metadata.PreferenceHierarchyGenerator
 
 enum class DeviceStateCategory(val functionId: String) {
     UNCATEGORIZED("getUncategorizedDeviceState"),
@@ -67,7 +71,7 @@ enum class DeviceStateCategory(val functionId: String) {
  * @param hintText additional context about the device state
  */
 data class DeviceStateItemConfig(
-    val enabled: Boolean,
+    val enabled: Boolean = true,
     val settingKey: String,
     val settingScreenKey: String,
     val hintText: String = "",
@@ -79,12 +83,16 @@ data class DeviceStateItemConfig(
  * @param enabled whether expose device states on this screen to App Functions.
  * @param screenKey the unique ID for the screen.
  * @param category the device state category of the screen. The default is UNCATEGORIZED.
+ * @param defaultType class type associated with [PreferenceHierarchyGenerator] for PreferenceScreen
+ * @param defaultTypeValue value to pass in to [PreferenceHierarchyGenerator.generatePreferenceHierarchy]
  */
 data class PerScreenConfig(
     val enabled: Boolean,
     val screenKey: String,
     // TODO(b/405344827): map categories to PreferenceMetadata#tags
-    val category: Set<DeviceStateCategory> = setOf(DeviceStateCategory.UNCATEGORIZED)
+    val category: Set<DeviceStateCategory> = setOf(DeviceStateCategory.UNCATEGORIZED),
+    val defaultType: Class<*>? = null,
+    val defaultTypeValue: Any? = null
 )
 
 fun getScreenConfigs() = listOf(
@@ -210,6 +218,23 @@ fun getScreenConfigs() = listOf(
     PerScreenConfig(
         enabled = true,
         screenKey = VibrationScreen.KEY,
+    ),
+    PerScreenConfig(
+        enabled = true,
+        screenKey = AppStorageAppListScreen.KEY,
+        category = setOf(DeviceStateCategory.STORAGE),
+        defaultType = Boolean::class.java,
+        defaultTypeValue = false, // do not include system apps
+    ),
+    PerScreenConfig(
+        enabled = true,
+        screenKey = AllAppsScreen.KEY,
+        category = setOf(DeviceStateCategory.STORAGE)
+    ),
+    PerScreenConfig(
+        enabled = true,
+        screenKey = StoragePreferenceScreen.KEY,
+        category = setOf(DeviceStateCategory.STORAGE)
     )
 )
 

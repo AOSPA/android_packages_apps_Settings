@@ -131,13 +131,12 @@ public class TouchpadThreeFingerTapActionPreferenceController extends BasePrefer
     }
 
     private void setGesture(int customGestureType) {
-        boolean isUnspecified = customGestureType == KeyGestureEvent.KEY_GESTURE_TYPE_UNSPECIFIED;
-        InputGestureData gestureData = isUnspecified ? null : new InputGestureData.Builder()
-                .setTrigger(TouchpadThreeFingerTapUtils.TRIGGER)
-                .setKeyGestureType(customGestureType)
-                .build();
         mInputManager.removeAllCustomInputGestures(InputGestureData.Filter.TOUCHPAD);
-        if (!isUnspecified) {
+        if (customGestureType != KeyGestureEvent.KEY_GESTURE_TYPE_UNSPECIFIED) {
+            InputGestureData gestureData = new InputGestureData.Builder()
+                    .setTrigger(TouchpadThreeFingerTapUtils.TRIGGER)
+                    .setKeyGestureType(customGestureType)
+                    .build();
             mInputManager.addCustomInputGesture(gestureData);
         }
         TouchpadThreeFingerTapUtils.setGestureType(mContentResolver, customGestureType);

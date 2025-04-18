@@ -344,7 +344,9 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Activado / # aplicación ten acceso á localización}other{Activado / # aplicacións teñen acceso á localización}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Cargando…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"As aplicacións con permiso para buscar dispositivos próximos poden determinar a posición relativa dos dispositivos conectados."</string>
-    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <!-- no translation found for location_settings_footer_location_off_with_telephony (5600725945541382556) -->
+    <skip />
+    <!-- no translation found for location_settings_footer_location_off_no_telephony (2709958040008816610) -->
     <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Máis información sobre a configuración de localización"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Para facer o cambio, vai á configuración de ChromeOS &gt; Privacidade e seguranza &gt; Controis de privacidade &gt; Acceso á localización"</string>
@@ -611,10 +613,8 @@
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"Omitir configuración (padrón e cara)?"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"Omitir configuración (padrón e impresión)?"</string>
     <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"Omitir configuración (padrón, cara e impresión)?"</string>
-    <!-- no translation found for resume_animation (5259729861893297887) -->
-    <skip />
-    <!-- no translation found for pause_animation (2209064682137909056) -->
-    <skip />
+    <string name="resume_animation" msgid="5259729861893297887">"Retomar a animación"</string>
+    <string name="pause_animation" msgid="2209064682137909056">"Pór a animación en pausa"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"Configurar bloqueo da pantalla"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Feito"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Iso non é o sensor"</string>
@@ -1032,8 +1032,7 @@
     <string name="android_beam_explained" msgid="5684416131846701256">"Cando esta función está activada, podes transferir contido de aplicacións a outros dispositivos compatibles con NFC achegando os dispositivos entre si. Por exemplo, podes transmitir páxinas web, vídeos de YouTube, contactos etc.\n\nSimplemente achega os dispositivos entre si (normalmente as súas partes posteriores) e, a continuación, toca a pantalla. A aplicación determina o que se transfire."</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wifi"</string>
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Usar wifi"</string>
-    <!-- no translation found for wifi_networks_category (8011323954745036753) -->
-    <skip />
+    <string name="wifi_networks_category" msgid="8011323954745036753">"Redes"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Configuración da wifi"</string>
     <string name="wifi_select_network" msgid="6692897876718813259">"Seleccionar wifi"</string>
     <string name="wifi_starting" msgid="6147022683967506341">"Activando a wifi..."</string>
@@ -1214,22 +1213,14 @@
     <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> ‑ Cargando"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"Conexión de zona wifi"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"Calidade da conexión"</string>
-    <!-- no translation found for ethernet_dns1 (6487470669719468602) -->
-    <skip />
-    <!-- no translation found for ethernet_dns2 (484620572555181363) -->
-    <skip />
-    <!-- no translation found for ethernet_gateway (4064061619318875567) -->
-    <skip />
-    <!-- no translation found for ethernet_network_prefix_length (3693127271457763198) -->
-    <skip />
-    <!-- no translation found for ethernet_ip_settings (3344064201878792090) -->
-    <skip />
-    <!-- no translation found for ethernet_config_submit (724743720212124025) -->
-    <skip />
-    <!-- no translation found for ethernet_config_cancel (986322993908814366) -->
-    <skip />
-    <!-- no translation found for ethernet_config_title (4784063109810004382) -->
-    <skip />
+    <string name="ethernet_dns1" msgid="6487470669719468602">"DNS 1 (a menos que o anule un DNS privado)"</string>
+    <string name="ethernet_dns2" msgid="484620572555181363">"DNS 2 (a menos que o anule un DNS privado)"</string>
+    <string name="ethernet_gateway" msgid="4064061619318875567">"Pasarela"</string>
+    <string name="ethernet_network_prefix_length" msgid="3693127271457763198">"Lonxitude prefixo de rede"</string>
+    <string name="ethernet_ip_settings" msgid="3344064201878792090">"Configuración do IP"</string>
+    <string name="ethernet_config_submit" msgid="724743720212124025">"Enviar"</string>
+    <string name="ethernet_config_cancel" msgid="986322993908814366">"Cancelar"</string>
+    <string name="ethernet_config_title" msgid="4784063109810004382">"Configuración de Ethernet"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Redes gardadas"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Subscricións"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Outras redes"</string>
@@ -1458,8 +1449,7 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Desactivado"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Cando comezar"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Levantar para acender"</string>
-    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
-    <skip />
+    <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Restrinxir á carga sen fíos"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Pantalla en suspensión"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Cando mostrar a pantalla"</string>
     <string name="doze_title" msgid="1523090408230862316">"Reactivar coas notificacións"</string>
@@ -1626,8 +1616,7 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Mentres está cargando"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"Mentres está cargando e en vertical"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"Mentres está na base"</string>
-    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
-    <skip />
+    <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"Restrinxir á carga sen fíos"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Editar o punto de acceso"</string>
     <string name="apn_add" msgid="9069613192201630934">"Engadir o punto de acceso"</string>
@@ -1741,8 +1730,7 @@
     <string name="rx_ethernet_speed" msgid="6642000569214969711">"Velocidade da ligazón de recepción"</string>
     <string name="ethernet_network_usage" msgid="3795965384177426780">"Uso da rede"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Conexión por Ethernet"</string>
-    <!-- no translation found for ethernet_modify (1326316717004440503) -->
-    <skip />
+    <string name="ethernet_modify" msgid="1326316717004440503">"Modificar"</string>
     <string name="tethering_footer_info" msgid="6824352505979800594">"Utiliza a zona wifi e a conexión compartida para ofrecer acceso a Internet a outros dispositivos mediante a túa conexión de datos. As aplicacións tamén poden crear unha zona wifi para compartir contido cos aparellos próximos."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Utiliza a zona wifi e a conexión compartida para ofrecer acceso a Internet a outros dispositivos mediante a túa wifi ou a túa conexión de datos móbiles. As aplicacións tamén poden crear unha zona wifi para compartir contido cos dispositivos que están cerca."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Axuda"</string>
@@ -2170,6 +2158,8 @@
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Ir á páxina de inicio"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"Volver"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"Ver aplicacións recentes"</string>
+    <string name="three_finger_tap_launch_app_title" msgid="55761877549896819">"Abrir outra aplicación"</string>
+    <string name="three_finger_tap_launch_app_summary" msgid="2015894823281420733">"Fai a escolla nunha lista de aplicacións instaladas"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"Ir a Inicio"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"Pasa 3 dedos cara arriba en calquera parte do panel táctil"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"Atrás"</string>
@@ -2295,8 +2285,7 @@
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Controis de tempo"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Controis do sistema"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Enviar comentarios"</string>
-    <!-- no translation found for accessibility_send_survey_title (7899716184811587023) -->
-    <skip />
+    <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Valóranos"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Aplicacións descargadas"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimental"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Funcións experimentais"</string>
@@ -2459,7 +2448,7 @@
     <string name="accessibility_notification_high_contrast_text_title" msgid="2297915407152953323">"Mellora o contraste do texto"</string>
     <string name="accessibility_notification_high_contrast_text_body_message" msgid="6846453833480117658">"O texto con contorno substituíu o texto de alto contraste. Podes activar esta opción en <xliff:g id="SETTINGS">%1$s</xliff:g>."</string>
     <string name="accessibility_notification_high_contrast_text_action_open_settings" msgid="5945069315472850294">"Ir a <xliff:g id="SETTINGS">%1$s</xliff:g>"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8848579943445806659">"texto con contorno"</string>
+    <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8848579943445806659">"Texto con contorno"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Engade un fondo branco ou negro ao redor do texto para aumentar o contraste"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Actualizar aumento automaticamente"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Actualizar aumento pantalla en transicións de apps"</string>
@@ -2626,8 +2615,7 @@
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{Curto ({time} segundo)}other{Curto ({time} segundos)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{Medio ({time} segundo)}other{Medio ({time} segundos)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{Longo ({time} segundo)}other{Longo ({time} segundos)}}"</string>
-    <!-- no translation found for accessibility_autoclick_delay_unit_second (1562809410497613173) -->
-    <skip />
+    <string name="accessibility_autoclick_delay_unit_second" msgid="1562809410497613173">"{count,plural, =1{{time} segundo}other{{time} segundos}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Configuración"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"Si"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"Non"</string>
@@ -3828,13 +3816,13 @@
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notificacións na pantalla de bloqueo"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Mostra conversas predeterminadas e silenciadas"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Mostrar conversas predeterminadas e silenciadas"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Oculta conversas e notificacións silenciadas"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Ocultar conversas e notificacións silenciadas"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Non mostrar ningunha notificación"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Notificacións sobre contido confidencial"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Mostra contido confidencial na pantalla de bloqueo"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Notificacións de contido confidencial do perfil de traballo"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Mostra contido confidencial do perfil de traballo na pantalla de bloqueo"</string>
-    <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Mostrar todo o contido das notificacións"</string>
+    <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Mostra todo o contido das notificacións"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Mostrar contido confidencial só tras o desbloqueo"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Non mostrar ningunha notificación"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6326229471276829730">"Que queres que mostre a túa pantalla de bloqueo?"</string>
@@ -4672,6 +4660,12 @@
     <string name="double_tap_power_camera_action_summary" msgid="4942585540579590444">"Abrir a cámara"</string>
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Wallet"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Abrir Wallet"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"Queres cambiar o atallo da pantalla de bloqueo?"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> tamén é o teu atallo da pantalla de bloqueo. Queres cambialo?"</string>
+    <!-- no translation found for double_tap_power_wallet_footer_title (5417023303339032410) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (1267822422365445657) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Xirar para cambiar á cámara dianteira"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Modo de navegación"</string>
@@ -5088,7 +5082,7 @@
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"Cando o teléfono estea conectado, poderás intercambiar mensaxes de texto con calquera persoa, mesmo cos servizos de emerxencia."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Importante"</string>
     <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"A conectividade por satélite pode tardar máis e só está dispoñible en certas zonas."</string>
-    <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"As condiciones meteorolóxicas e algunhas estruturas poden afectar á túa conexión por satélite."</string>
+    <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"As condicións meteorolóxicas e algunhas estruturas poden afectar á túa conexión por satélite."</string>
     <string name="satellite_footer_content_section_3" msgid="4652426135622555607">"A función de chamada por satélite non está dispoñible."</string>
     <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"Quizais poidas facer chamadas de emerxencia."</string>
     <string name="satellite_footer_content_section_5" msgid="3053256489735265540">"Para ver as ligazóns externas, cómpre dispor dunha rede wifi ou de telefonía móbil."</string>
@@ -5740,10 +5734,8 @@
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"Código QR da emisión de audio"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Contrasinal: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Para escoitar <xliff:g id="STREAM_NAME">%1$s</xliff:g>, as demais persoas poden conectar auriculares compatibles ao seu dispositivo Android. Despois poden escanear este código QR."</string>
-    <!-- no translation found for audio_streams_preference_subtitle (4098552511880220046) -->
-    <skip />
-    <!-- no translation found for audio_streams_preference_subtitle_audio_sharing_on (2382924714414148028) -->
-    <skip />
+    <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"Escoita a emisión de Auracast"</string>
+    <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"Desactiva o audio compartido para atopar emisións de audio"</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Buscar unha emisión de audio"</string>
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Escoita o audio compartido dun dispositivo ou unha emisión de Auracast próxima"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"O teu dispositivo de audio"</string>
@@ -5781,12 +5773,9 @@
     <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"Engade un método de recuperación do PIN"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Cambiar PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Esquecín o PIN"</string>
-    <!-- no translation found for supervision_update_recovery_email_preference_title (2057393838251915087) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_title (8447541098148430866) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_summary (4865713157106413979) -->
-    <skip />
+    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Actualizar correo electrónico de recuperación"</string>
+    <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Eliminar PIN"</string>
+    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Restableceranse todas as opcións de configuración da supervisión"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filtros de contido web"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome e Web"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Tentar bloquear sitios con contido explícito"</string>

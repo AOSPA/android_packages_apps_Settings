@@ -18,11 +18,11 @@ package com.android.settings.inputmethod;
 import static android.hardware.input.InputGestureData.TOUCHPAD_GESTURE_TYPE_THREE_FINGER_TAP;
 import static android.hardware.input.InputGestureData.createTouchpadTrigger;
 
+import android.app.ActivityManager;
 import android.content.ContentResolver;
 import android.hardware.input.InputGestureData;
 import android.hardware.input.KeyGestureEvent;
 import android.net.Uri;
-import android.os.UserHandle;
 import android.provider.Settings;
 
 import androidx.annotation.NonNull;
@@ -57,7 +57,7 @@ public final class TouchpadThreeFingerTapUtils {
                 resolver,
                 TARGET_ACTION,
                 KeyGestureEvent.KEY_GESTURE_TYPE_UNSPECIFIED,
-                UserHandle.USER_CURRENT);
+                ActivityManager.getCurrentUser());
     }
 
     /**
@@ -76,9 +76,15 @@ public final class TouchpadThreeFingerTapUtils {
      */
     public static void setGestureType(@NonNull ContentResolver resolver, int gestureType) {
         Settings.System.putIntForUser(
-                resolver,
-                TouchpadThreeFingerTapUtils.TARGET_ACTION,
-                gestureType,
-                UserHandle.USER_CURRENT);
+                resolver, TARGET_ACTION, gestureType, ActivityManager.getCurrentUser());
+    }
+
+    /**
+     * Set KEY_GESTURE_TYPE_LAUNCH_APPLICATION as the gesture type
+     * @param resolver ContentResolver
+     */
+    public static void setLaunchAppAsGestureType(@NonNull ContentResolver resolver) {
+        setGestureType(
+                resolver, /* gestureType = */ KeyGestureEvent.KEY_GESTURE_TYPE_LAUNCH_APPLICATION);
     }
 }

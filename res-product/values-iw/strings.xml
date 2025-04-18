@@ -310,8 +310,8 @@
     <string name="wifi_add_app_networks_summary" product="default" msgid="7014504084783236696">"התקבלה בקשה מהאפליקציה <xliff:g id="APPNAME">%1$s</xliff:g> לשמור את הרשתות האלה בטלפון"</string>
     <string name="wifi_add_app_networks_summary" product="tablet" msgid="6433255556506891439">"התקבלה בקשה מהאפליקציה <xliff:g id="APPNAME">%1$s</xliff:g> לשמור את הרשתות האלה בטאבלט"</string>
     <string name="wifi_add_app_networks_summary" product="desktop" msgid="4238956725252527159">"האפליקציה <xliff:g id="APPNAME">%1$s</xliff:g> מבקשת לשמור את הרשתות האלה במכשיר"</string>
-    <string name="auto_rotate_screen_summary" product="default" msgid="5562937346878935483">"שינוי אוטומטי של כיוון המסך כשהופכים את הטלפון ממצב של תצוגה לאורך למצב של תצוגה לרוחב"</string>
-    <string name="auto_rotate_screen_summary" product="tablet" msgid="3163709742477804994">"שינוי אוטומטי של כיוון המסך כשהופכים את הטאבלט ממצב של תצוגה לאורך למצב של תצוגה לרוחב"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="5562937346878935483">"כשהופכים את המכשיר מתצוגה לאורך לתצוגה לרוחב, כיוון המסך משתנה אוטומטית"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="3163709742477804994">"כשהופכים את המכשיר מתצוגה לאורך לתצוגה לרוחב, כיוון המסך משתנה אוטומטית"</string>
     <string name="auto_rotate_screen_summary" product="desktop" msgid="3805199344834364732">"כשהופכים את המכשיר מתצוגה לאורך לתצוגה לרוחב, כיוון המסך משתנה אוטומטית"</string>
     <string name="sim_lock_on" product="tablet" msgid="227481196121403470">"דרוש קוד גישה כדי להשתמש בטאבלט"</string>
     <string name="sim_lock_on" product="default" msgid="6896034657274595838">"צריך קוד גישה כדי להשתמש בטלפון"</string>
@@ -371,7 +371,7 @@
     <string name="about_settings" product="desktop" msgid="7595574154492383452">"מידע על המכשיר"</string>
     <string name="about_settings" product="emulator" msgid="1099246296173401003">"מידע על מכשיר בגרסת האמולטור"</string>
     <string name="install_all_warning" product="tablet" msgid="1732116924846572063">"הטאבלט והנתונים האישיים שלך פגיעים יותר להתקפות של אפליקציות לא מוכרות. על ידי התקנת אפליקציות מהמקור הזה, מקובל עליך שתחול עליך האחריות לכל נזק לטאבלט או לכל אובדן של נתונים שעשויים להיגרם כתוצאה מהשימוש באפליקציות אלה."</string>
-    <string name="install_all_warning" product="default" msgid="4597256179485325694">"הטלפון והנתונים האישיים שלך פגיעים יותר להתקפות של אפליקציות לא מוכרות. התקנת אפליקציות מהמקור הזה מהווה את הסכמתך לכך שהאחריות היא שלך לכל נזק לטלפון או לכל אובדן של נתונים שעשויים להיגרם כתוצאה מהשימוש באפליקציות האלה."</string>
+    <string name="install_all_warning" product="default" msgid="4597256179485325694">"הטלפון והנתונים האישיים שלך יהיו חשופים יותר להתקפות של אפליקציות לא מוכרות. התקנת אפליקציות מהמקור הזה מהווה את הסכמתך לכך שהאחריות היא שלך לכל נזק לטלפון או לכל אובדן של נתונים שעשויים להיגרם כתוצאה מהשימוש באפליקציות האלה."</string>
     <string name="install_all_warning" product="device" msgid="6293002353591632851">"המכשיר והנתונים האישיים שלך פגיעים יותר להתקפות של אפליקציות לא מוכרות. התקנת אפליקציות מהמקור הזה מבטאת את הסכמתך לכך שהאחריות לכל נזק למכשיר או לכל אובדן של נתונים שעשויים להיגרם כתוצאה מהשימוש באפליקציות אלה היא שלך בלבד."</string>
     <string name="install_all_warning" product="desktop" msgid="6293002353591632851">"המכשיר והנתונים האישיים שלך פגיעים יותר להתקפות של אפליקציות לא מוכרות. התקנת אפליקציות מהמקור הזה מבטאת את הסכמתך לכך שהאחריות לכל נזק למכשיר או לכל אובדן של נתונים שעשויים להיגרם כתוצאה מהשימוש באפליקציות אלה היא שלך בלבד."</string>
     <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="6321057186549848774">"אם תפסיק שירות זה, תכונות מסוימות של הטאבלט עלולות להפסיק לפעול כהלכה עד לכיבוי המכשיר והפעלתו מחדש."</string>
@@ -519,6 +519,5 @@
     <string name="audio_sharing_confirm_dialog_content_with_link" product="device" msgid="668964968208427465">"‏כדי להתחיל לשתף אודיו, צריך לחבר את אוזניות LE Audio למכשיר. "<annotation id="link">"מידע נוסף על מכשירים תואמים"</annotation></string>
     <string name="audio_sharing_confirm_dialog_content_with_link" product="desktop" msgid="668964968208427465">"‏כדי להתחיל לשתף אודיו, צריך לחבר את אוזניות LE Audio למכשיר. "<annotation id="link">"מידע נוסף על מכשירים תואמים"</annotation></string>
     <string name="network_dashboard_summary_mobile" product="default" msgid="1856501121269595911">"‏נייד, Wi‑Fi, נקודת אינטרנט (Hotspot)"</string>
-    <!-- no translation found for network_dashboard_summary_mobile (8770767156162473221) -->
-    <skip />
+    <string name="network_dashboard_summary_mobile" product="desktop" msgid="8770767156162473221">"‏‫Wi‑Fi, נייד, נקודה לשיתוף אינטרנט (Hotspot)"</string>
 </resources>

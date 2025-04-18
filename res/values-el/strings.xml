@@ -344,7 +344,9 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Ενεργή / # εφαρμογή έχει πρόσβαση στην τοποθεσία}other{Ενεργή / # εφαρμογές έχουν πρόσβαση στην τοποθεσία}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Φόρτωση…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Οι εφαρμογές που έχουν την άδεια Συσκευές σε κοντινή απόσταση μπορούν να προσδιορίσουν τη σχετική θέση των συνδεδεμένων συσκευών."</string>
-    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <!-- no translation found for location_settings_footer_location_off_with_telephony (5600725945541382556) -->
+    <skip />
+    <!-- no translation found for location_settings_footer_location_off_no_telephony (2709958040008816610) -->
     <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Μάθετε περισσότερα σχετικά με τις Ρυθμίσεις τοποθεσίας"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Για αλλαγή, μεταβείτε στις Ρυθμίσεις του ChromeOS &gt; Απόρρητο και ασφάλεια &gt; Στοιχεία ελέγχου απορρήτου &gt; Πρόσβαση στην τοποθεσία"</string>
@@ -611,10 +613,8 @@
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"Παράβλεψη ρύθμισης για μοτίβο και πρόσωπο;"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"Παράβλεψη ρύθμισης για μοτίβο και δακτ. αποτύπωμα;"</string>
     <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"Παράβλεψη ρύθμ. για μοτίβο, πρόσωπο και δακτ. αποτ.;"</string>
-    <!-- no translation found for resume_animation (5259729861893297887) -->
-    <skip />
-    <!-- no translation found for pause_animation (2209064682137909056) -->
-    <skip />
+    <string name="resume_animation" msgid="5259729861893297887">"Συνέχιση κινούμενης εικόνας"</string>
+    <string name="pause_animation" msgid="2209064682137909056">"Παύση κινούμενης εικόνας"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"Ρύθμιση κλειδώματος οθόνης"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Τέλος"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Ωχ, αυτό δεν είναι ο αισθητήρας"</string>
@@ -1032,8 +1032,7 @@
     <string name="android_beam_explained" msgid="5684416131846701256">"Όταν αυτή η λειτουργία είναι ενεργοποιημένη, μπορείτε να μεταδώσετε μέσω ζεύξης περιεχόμενο μιας εφαρμογής σε μια άλλη συσκευή με δυνατότητα NFC, κρατώντας τις συσκευές σε κοντινή απόσταση μεταξύ τους. Για παράδειγμα μπορείτε να μεταδώσετε ιστοσελίδες, βίντεο στο YouTube, επαφές και πολλά άλλα.\n\nΑπλώς τοποθετήστε τις δύο συσκευές κοντά τη μία στην άλλη (συνήθως, πλάτη με πλάτη) και έπειτα πατήστε την οθόνη σας. Η εφαρμογή θα αποφασίσει ποιο περιεχόμενο θα μεταδοθεί μέσω της ζεύξης."</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi-Fi"</string>
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Χρήση Wi-Fi"</string>
-    <!-- no translation found for wifi_networks_category (8011323954745036753) -->
-    <skip />
+    <string name="wifi_networks_category" msgid="8011323954745036753">"Δίκτυα"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Ρυθμίσεις Wi-Fi"</string>
     <string name="wifi_select_network" msgid="6692897876718813259">"Επιλογή δικτύου Wi-Fi"</string>
     <string name="wifi_starting" msgid="6147022683967506341">"Ενεργοποίηση του Wi-Fi…"</string>
@@ -1214,22 +1213,14 @@
     <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> ‑ Φόρτιση σε εξέλιξη"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"Σύνδεση σε σημείο πρόσβασης Wi-Fi"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"Ισχύς σύνδεσης"</string>
-    <!-- no translation found for ethernet_dns1 (6487470669719468602) -->
-    <skip />
-    <!-- no translation found for ethernet_dns2 (484620572555181363) -->
-    <skip />
-    <!-- no translation found for ethernet_gateway (4064061619318875567) -->
-    <skip />
-    <!-- no translation found for ethernet_network_prefix_length (3693127271457763198) -->
-    <skip />
-    <!-- no translation found for ethernet_ip_settings (3344064201878792090) -->
-    <skip />
-    <!-- no translation found for ethernet_config_submit (724743720212124025) -->
-    <skip />
-    <!-- no translation found for ethernet_config_cancel (986322993908814366) -->
-    <skip />
-    <!-- no translation found for ethernet_config_title (4784063109810004382) -->
-    <skip />
+    <string name="ethernet_dns1" msgid="6487470669719468602">"DNS 1 (εκτός αν παρακάμπτεται από ιδιωτικό DNS)"</string>
+    <string name="ethernet_dns2" msgid="484620572555181363">"DNS 2 (εκτός αν παρακάμπτεται από ιδιωτικό DNS)"</string>
+    <string name="ethernet_gateway" msgid="4064061619318875567">"Πύλη"</string>
+    <string name="ethernet_network_prefix_length" msgid="3693127271457763198">"Μήκος προθέματος δικτύου"</string>
+    <string name="ethernet_ip_settings" msgid="3344064201878792090">"Ρυθμίσεις IP"</string>
+    <string name="ethernet_config_submit" msgid="724743720212124025">"Υποβολή"</string>
+    <string name="ethernet_config_cancel" msgid="986322993908814366">"Ακύρωση"</string>
+    <string name="ethernet_config_title" msgid="4784063109810004382">"Ρυθμίσεις Ethernet"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Αποθηκευμένα δίκτυα"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Συνδρομές"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Άλλα δίκτυα"</string>
@@ -1458,8 +1449,7 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Απενεργοποίηση"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Πότε να ξεκινάει"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Σηκώστε για ενεργοποίηση"</string>
-    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
-    <skip />
+    <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Περιορισμός κατά την ασύρματη φόρτιση"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Οθόνη περιβάλλοντος"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Χρόνος εμφάνισης"</string>
     <string name="doze_title" msgid="1523090408230862316">"Αφύπν. οθόνης για ειδοποιήσεις"</string>
@@ -1626,8 +1616,7 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Κατά τη φόρτιση"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"Κατά τη φόρτιση και σε όρθια θέση"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"Κατά τη σύνδεση σε βάση"</string>
-    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
-    <skip />
+    <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"Περιορισμός κατά την ασύρματη φόρτιση"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Επεξ/σία σημ. πρόσβ."</string>
     <string name="apn_add" msgid="9069613192201630934">"Προσθήκη σημείου πρόσβασης"</string>
@@ -1741,8 +1730,7 @@
     <string name="rx_ethernet_speed" msgid="6642000569214969711">"Ταχύτητα λήψης συνδέσμου"</string>
     <string name="ethernet_network_usage" msgid="3795965384177426780">"Χρήση δικτύου"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Σύνδεση Ethernet"</string>
-    <!-- no translation found for ethernet_modify (1326316717004440503) -->
-    <skip />
+    <string name="ethernet_modify" msgid="1326316717004440503">"Τροποποίηση"</string>
     <string name="tethering_footer_info" msgid="6824352505979800594">"Χρησιμοποιήστε το σημείο πρόσβασης Wi-Fi και τη σύνδεση, για να παρέχετε σύνδεση στο διαδίκτυο σε άλλες συσκευές, μέσω της σύνδεσης δεδομένων που χρησιμοποιείτε. Οι εφαρμογές μπορούν επίσης να δημιουργούν ένα σημείο πρόσβασης Wi-Fi, για να μοιράζονται περιεχόμενο με συσκευές σε κοντινή απόσταση."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Χρησιμοποιήστε το σημείο πρόσβασης Wi-Fi και τη σύνδεση, για να παρέχετε σύνδεση στο διαδίκτυο σε άλλες συσκευές, μέσω του δικτύου Wi-Fi ή της σύνδεσης δεδομένων κινητής τηλεφωνίας που χρησιμοποιείτε. Οι εφαρμογές μπορούν επίσης να δημιουργούν ένα σημείο πρόσβασης Wi-Fi, για να μοιράζονται περιεχόμενο με κοντινές συσκευές."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Βοήθεια"</string>
@@ -2170,6 +2158,8 @@
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Μετάβαση στην αρχική σελίδα"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"Επιστροφή"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"Προβολή πρόσφατων εφαρμογών"</string>
+    <string name="three_finger_tap_launch_app_title" msgid="55761877549896819">"Άνοιγμα άλλης εφαρμογής"</string>
+    <string name="three_finger_tap_launch_app_summary" msgid="2015894823281420733">"Επιλέξτε από μια λίστα εγκατεστημένων εφαρμογών"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"Μετάβαση στην αρχική οθόνη"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"Σύρετε επάνω με τρία δάχτ. από οποιοδ. σημείο της επιφ. αφής"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"Επιστροφή"</string>
@@ -2623,8 +2613,7 @@
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{Μικρή καθυστέρηση ({time} δευτερόλεπτο)}other{Μικρή καθυστέρηση ({time} δευτερόλεπτα)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{Μεσαία καθυστέρηση ({time} δευτερόλεπτο)}other{Μεσαία καθυστέρηση ({time} δευτερόλεπτα)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{Μεγάλη καθυστέρηση ({time} δευτερόλεπτο)}other{Μεγάλη καθυστέρηση ({time} δευτερόλεπτα)}}"</string>
-    <!-- no translation found for accessibility_autoclick_delay_unit_second (1562809410497613173) -->
-    <skip />
+    <string name="accessibility_autoclick_delay_unit_second" msgid="1562809410497613173">"{count,plural, =1{{time} δευτερόλεπτο}other{{time} δευτερόλεπτα}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Ρυθμίσεις"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"Ενεργή"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"Ανενεργό"</string>
@@ -3803,7 +3792,7 @@
     <string name="bubble_app_setting_all" msgid="312524752846978277">"Όλες οι συζητήσεις έχουν δυνατότητα προβολής σε συννεφάκι."</string>
     <string name="bubble_app_setting_selected" msgid="4324386074198040675">"Οι επιλεγμένες συζητήσεις μπορούν να εμφανίζονται σε συννεφάκι."</string>
     <string name="bubble_app_setting_none" msgid="8643594711863996418">"Καμία συνομιλία δεν έχει δυνατότητα προβολής σε συννεφάκι."</string>
-    <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"Συζητήσεις"</string>
+    <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"Συνομιλίες"</string>
     <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"Όλες οι συζητήσεις μπορούν να προσθέτουν συννεφάκια εκτός από"</string>
     <string name="bubble_app_setting_unbubble_conversation" msgid="1769789500566080427">"Απενεργοποιήστε τα συννεφάκια για αυτήν τη συζήτηση"</string>
     <string name="bubble_app_setting_bubble_conversation" msgid="1461981680982964285">"Ενεργοποιήστε τα συννεφάκια για αυτήν τη συζήτηση"</string>
@@ -3849,7 +3838,7 @@
     <string name="app_notifications_title" msgid="248374669037385148">"Ειδοπ/σεις εφ/γών"</string>
     <string name="notification_channel_title" msgid="8859880871692797611">"Κατηγορία ειδοπ."</string>
     <string name="notification_importance_title" msgid="1545158655988342703">"Συμπεριφορά"</string>
-    <string name="conversations_category_title" msgid="5586541340846847798">"Συζητήσεις"</string>
+    <string name="conversations_category_title" msgid="5586541340846847798">"Συνομιλίες"</string>
     <string name="conversation_section_switch_title" msgid="3332885377659473775">"Ενότητα συζητήσεων"</string>
     <string name="conversation_section_switch_summary" msgid="6123587625929439674">"Να επιτρέπεται στην εφαρμογή η χρήση της ενότητας συζητήσεων."</string>
     <string name="conversation_section_switch_complete_summary" msgid="6326149637059423284">"Να επιτρέπεται η χρήση ενότητας συζητήσεων, παρότι οι λειτουργίες συζητήσεων, όπως προτεραιότητα και συννεφάκια, δεν υποστηρίζονται."</string>
@@ -3919,7 +3908,7 @@
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Ακύρωση"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"Σε πραγματικό χρόνο"</string>
     <string name="notif_type_ongoing_summary" msgid="2348867528527573574">"Επικοινωνία σε εξέλιξη από εφαρμογές που χρησιμοποιούνται, πλοήγηση, τηλεφωνικές κλήσεις και περισσότερα"</string>
-    <string name="notif_type_conversation" msgid="4383931408641374979">"Συζητήσεις"</string>
+    <string name="notif_type_conversation" msgid="4383931408641374979">"Συνομιλίες"</string>
     <string name="notif_type_conversation_summary" msgid="179142405410217101">"SMS, μηνύματα κειμένου και άλλη επικοινωνία"</string>
     <string name="notif_type_alerting" msgid="4713073696855718576">"Ειδοποιήσεις"</string>
     <string name="notif_type_alerting_summary" msgid="4681068287836313604">"Ενδέχεται να κουδουνίζει ή να δονείται βάσει των ρυθμίσεων"</string>
@@ -4049,7 +4038,7 @@
     <string name="zen_mode_custom_behavior_category_title" msgid="7815612569425733764">"Για \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\""</string>
     <string name="summary_divider_text" msgid="8836285171484563986">", "</string>
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g> - <xliff:g id="END">%2$s</xliff:g>"</string>
-    <string name="zen_mode_conversations_title" msgid="5491912973456026379">"Συζητήσεις"</string>
+    <string name="zen_mode_conversations_title" msgid="5491912973456026379">"Συνομιλίες"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Όλες οι συζητήσεις"</string>
     <string name="zen_mode_from_all_conversations_second" msgid="6781738302202989293">"όλες οι συζητήσεις"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Συζητήσεις προτεραιότητας"</string>
@@ -4672,6 +4661,12 @@
     <string name="double_tap_power_camera_action_summary" msgid="4942585540579590444">"Άνοιγμα κάμερας"</string>
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Πορτοφόλι"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Άνοιγμα Πορτοφολιού"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"Θέλετε να αλλάξετε τη συντόμευση οθόνης κλειδώματος;"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"Η ενέργεια <xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> είναι επίσης συντόμευση οθόνης κλειδώματος. Θέλετε να την αλλάξετε;"</string>
+    <!-- no translation found for double_tap_power_wallet_footer_title (5417023303339032410) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (1267822422365445657) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Αναστροφή κάμερας για selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Λειτουργία πλοήγησης"</string>
@@ -5209,8 +5204,8 @@
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Εμφάνιση όλων"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Αναζήτηση συσκευής…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Σύνδεση με συσκευή…"</string>
-    <string name="bluetooth_left_name" msgid="7440064067910080502">"Αριστερά"</string>
-    <string name="bluetooth_right_name" msgid="7588088072444124949">"Δεξιά"</string>
+    <string name="bluetooth_left_name" msgid="7440064067910080502">"Αριστερό"</string>
+    <string name="bluetooth_right_name" msgid="7588088072444124949">"Δεξί"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Θήκη"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Μπαταρία"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Πλαίσιο ρυθμίσεων"</string>
@@ -5740,10 +5735,8 @@
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"Κωδικός QR ροής ήχου"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Κωδικός πρόσβασης: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Για να ακούσουν τη ροή <xliff:g id="STREAM_NAME">%1$s</xliff:g>, τα άλλα άτομα μπορούν να συνδέσουν συμβατά ακουστικά στη συσκευή Android που διαθέτουν. Στη συνέχεια, θα μπορούν να σαρώσουν αυτόν τον κωδικό QR."</string>
-    <!-- no translation found for audio_streams_preference_subtitle (4098552511880220046) -->
-    <skip />
-    <!-- no translation found for audio_streams_preference_subtitle_audio_sharing_on (2382924714414148028) -->
-    <skip />
+    <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"Ακρόαση μετάδοσης Auracast"</string>
+    <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"Απενεργοποίηση κοινής χρήσης ήχου για εύρεση ροών ήχου"</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Εύρεση ροής ήχου"</string>
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Ακρόαση μιας συσκευής που κάνει κοινή χρήση ήχου ή μιας κοντινής μετάδοσης Auracast"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"Η συσκευή ήχου σας"</string>
@@ -5781,12 +5774,9 @@
     <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"Προσθήκη μεθόδου ανάκτησης PIN"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Αλλαγή PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Ξέχασα το PIN"</string>
-    <!-- no translation found for supervision_update_recovery_email_preference_title (2057393838251915087) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_title (8447541098148430866) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_summary (4865713157106413979) -->
-    <skip />
+    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Ενημέρωση διεύθυνσης ηλεκτρονικού ταχυδρομείου ανάκτησης"</string>
+    <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Διαγραφή PIN"</string>
+    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Με αυτή την ενέργεια, θα γίνει επαναφορά όλων των ρυθμίσεων επίβλεψης"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Φίλτρα περιεχομένου ιστού"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome και ιστός"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Απόπειρα αποκλεισμού ιστοτόπων με άσεμνο περιεχόμενο"</string>

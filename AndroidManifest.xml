@@ -5665,7 +5665,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
 
         <!-- Service to expose Preference Metadata and Get/Set functionality -->
         <service
-            android:name=".service.PreferenceService"
+            android:name="com.android.settingslib.service.SettingsPreferenceService"
             android:exported="true"
             android:featureFlag="com.android.settingslib.flags.settings_catalyst"
             android:permission="android.permission.READ_SYSTEM_PREFERENCES">

@@ -44,7 +44,7 @@ class AppStorageAppListScreen : PreferenceScreenCreator, PreferenceHierarchyGene
 
     override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
 
-    override fun isFlagEnabled(context: Context) = Flags.catalystAppList()
+    override fun isFlagEnabled(context: Context) = Flags.catalystAppList() || Flags.deviceState()
 
     override fun hasCompleteHierarchy() = false
 
