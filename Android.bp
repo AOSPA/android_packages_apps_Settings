@@ -66,6 +66,7 @@ android_library {
         "res-export", // for external usage
         "res-product",
     ],
+    optional_uses_libs: ["com.android.extensions.appfunctions"],
     static_libs: [
         // External dependencies
         "androidx.navigation_navigation-fragment-ktx",
@@ -117,6 +118,12 @@ android_library {
         "keyboard_flags_lib",
         "com_android_systemui_flags_lib",
         "settings_connectivity_flags_lib",
+
+        // app function dependencies
+        "androidx.appsearch_appsearch",
+        "androidx.appsearch_appsearch-builtin-types",
+        "com.android.extensions.appfunctions.impl",
+        "device-state-schema",
     ],
 
     plugins: [
@@ -189,6 +196,11 @@ android_app {
 android_library_import {
     name: "contextualcards",
     aars: ["libs/contextualcards.aar"],
+}
+
+android_library_import {
+    name: "device-state-schema",
+    aars: ["libs/appfunctions_schema_androidx_archive.aar"],
 }
 
 filegroup {

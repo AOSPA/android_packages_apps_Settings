@@ -17,21 +17,29 @@
 package com.android.settings.spa.app.catalyst
 
 import android.content.Context
+import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.os.Bundle
+import android.os.UserHandle
+import androidx.core.net.toUri
 import com.android.settings.R
 import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.flags.Flags
 import com.android.settings.spa.app.storage.StorageType
+import com.android.settingslib.applications.StorageStatsSource
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
 import com.android.settingslib.metadata.PersistentPreference
+import com.android.settingslib.metadata.PreferenceHierarchy
+import com.android.settingslib.metadata.PreferenceHierarchyGenerator
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
+import com.android.settingslib.metadata.asyncPreferenceHierarchy
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceFragment
 import com.android.settingslib.preference.PreferenceScreenCreator
@@ -46,6 +54,7 @@ class AppInfoStorageScreen(
     private val context: Context,
     override val arguments: Bundle
 ) : PreferenceScreenCreator,
+    PreferenceHierarchyGenerator<Int>,
     PreferenceSummaryProvider,
     PreferenceTitleProvider,
     PersistentPreference<Long> {
@@ -78,7 +87,7 @@ class AppInfoStorageScreen(
         return AppStorageRepositoryImpl(context).formatSize(appInfo)
     }
 
-    override fun isFlagEnabled(context: Context) = Flags.catalystAppList()
+    override fun isFlagEnabled(context: Context) = Flags.catalystAppList() || Flags.deviceState()
 
     override fun extras(context: Context): Bundle? {
         return Bundle(1).apply {
@@ -90,8 +99,36 @@ class AppInfoStorageScreen(
 
     override fun fragmentClass() = PreferenceFragment::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {
-        // TODO(b/404280477): app info screen contents
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? {
+        return Intent("com.android.settings.APP_STORAGE_SETTINGS").apply {
+            data = "package:${appInfo.packageName}".toUri()
+        }
+    }
+
+    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {}
+
+    override val defaultType: Int
+        get() = context.userId
+
+    override suspend fun generatePreferenceHierarchy(
+        context: Context,
+        type: Int // userId
+    ): PreferenceHierarchy = asyncPreferenceHierarchy(context, this) {
+        val source = StorageStatsSource(context)
+        val repo = AppStorageRepositoryImpl(context)
+        try {
+            val stats = source.getStatsForPackage(
+                appInfo.volumeUuid,
+                appInfo.packageName,
+                UserHandle.of(type)
+            )
+            +AppSizePreference(stats, repo)
+            +AppUserDataSizePreference(stats, repo)
+            +AppCacheSizePreference(stats, repo)
+            +AppTotalSizePreference(stats, repo)
+        } catch (_: Exception) {
+            // error during lookup, return no result
+        }
     }
 
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
@@ -149,5 +186,72 @@ private class AppStorageStore(
         value: T?
     ) {
     }
+}
 
+private class AppSizePreference(
+    private val stats: StorageStatsSource.AppStorageStats,
+    private val repo: AppStorageRepositoryImpl
+) : PreferenceMetadata,
+    PreferenceSummaryProvider {
+
+    override val key: String
+        get() = "app_size"
+
+    override val title: Int
+        get() = R.string.application_size_label
+
+    override fun getSummary(context: Context): CharSequence? {
+        return repo.formatSizeBytes(stats.codeBytes)
+    }
+}
+
+private class AppUserDataSizePreference(
+    private val stats: StorageStatsSource.AppStorageStats,
+    private val repo: AppStorageRepositoryImpl
+) : PreferenceMetadata,
+    PreferenceSummaryProvider {
+
+    override val key: String
+        get() = "data_size"
+
+    override val title: Int
+        get() = R.string.data_size_label
+
+    override fun getSummary(context: Context): CharSequence? {
+        return repo.formatSizeBytes(stats.dataBytes - stats.cacheBytes)
+    }
+}
+
+private class AppCacheSizePreference(
+    private val stats: StorageStatsSource.AppStorageStats,
+    private val repo: AppStorageRepositoryImpl
+) : PreferenceMetadata,
+    PreferenceSummaryProvider {
+
+    override val key: String
+        get() = "cache_size"
+
+    override val title: Int
+        get() = R.string.cache_size_label
+
+    override fun getSummary(context: Context): CharSequence? {
+        return repo.formatSizeBytes(stats.cacheBytes)
+    }
+}
+
+private class AppTotalSizePreference(
+    private val stats: StorageStatsSource.AppStorageStats,
+    private val repo: AppStorageRepositoryImpl
+) : PreferenceMetadata,
+    PreferenceSummaryProvider {
+
+    override val key: String
+        get() = "total_size"
+
+    override val title: Int
+        get() = R.string.total_size_label
+
+    override fun getSummary(context: Context): CharSequence? {
+        return repo.formatSizeBytes(stats.totalBytes)
+    }
 }

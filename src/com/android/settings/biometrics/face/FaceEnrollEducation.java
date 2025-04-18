@@ -44,6 +44,8 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
+import com.android.settings.biometrics.BiometricsOnboardingProto;
+import com.android.settings.biometrics.metrics.BiometricsLogger;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.SetupSkipDialog;
 import com.android.systemui.unfold.compat.ScreenSizeFoldProvider;
@@ -187,6 +189,11 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         mSwitchDiversity = findViewById(R.id.toggle_diversity);
         mSwitchDiversity.setListener(mSwitchDiversityListener);
         mSwitchDiversity.setOnClickListener(v -> {
+            updateOnboardingScreenInfoActions(
+                    mSwitchDiversity.isChecked()
+                            ? BiometricsOnboardingProto.OnboardingAction.ACTION_FACE_A11Y_ON_VALUE
+                            : BiometricsOnboardingProto.OnboardingAction.ACTION_FACE_A11Y_OFF_VALUE
+            );
             mSwitchDiversity.getSwitch().toggle();
         });
 
@@ -277,6 +284,16 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         intent.putExtra(BiometricUtils.EXTRA_ENROLL_REASON,
                 getIntent().getIntExtra(BiometricUtils.EXTRA_ENROLL_REASON, -1));
 
+        updateOnboardingScreenInfoActions(
+                BiometricsOnboardingProto.OnboardingAction.ACTION_NEXT_VALUE);
+        if (mOnboardingEvent != null && mBiometricsLogger != null) {
+            addScreenInfoToEvent();
+            intent.putExtra(
+                    BiometricsLogger.EXTRA_BIOMETRICS_ONBOARDING_EVENT_BYTES,
+                    mBiometricsLogger.eventToMessageByteArray(mOnboardingEvent)
+            );
+        }
+
         if (!mSwitchDiversity.isChecked() && mAccessibilityEnabled) {
             FaceEnrollAccessibilityDialog dialog = FaceEnrollAccessibilityDialog.newInstance();
             dialog.setPositiveButtonListener((dialog1, which) -> {
@@ -301,7 +318,9 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     protected void onSkipButtonClick(View view) {
         if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST,
                 "edu_skip")) {
-            setResult(RESULT_SKIP);
+            updateOnboardingScreenInfoActions(
+                    BiometricsOnboardingProto.OnboardingAction.ACTION_SKIP_VALUE);
+            setResult(RESULT_SKIP, newResultIntent());
             finish();
         }
     }
@@ -342,6 +361,11 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         }
         mNextLaunched = false;
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected int getOnboardingScreen() {
+        return BiometricsOnboardingProto.OnboardingScreen.SCREEN_EDUCATION_VALUE;
     }
 
     @VisibleForTesting

@@ -16,9 +16,11 @@
 
 package com.android.settings.backup;
 
+import android.app.AppGlobals;
 import android.app.backup.BackupAgentHelper;
 import android.util.Log;
 
+import com.android.settings.applications.appcompat.UserAspectRatioBackupHelper;
 import com.android.settings.flags.Flags;
 import com.android.settings.onboarding.OnboardingFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
@@ -32,6 +34,7 @@ public class SettingsBackupHelper extends BackupAgentHelper {
     public static final String SOUND_BACKUP_HELPER = "SoundSettingsBackup";
     public static final String ACCESSIBILITY_APPEARANCE_BACKUP_HELPER =
             "AccessibilityAppearanceSettingsBackup";
+    private static final String USER_ASPECT_RATIO_BACKUP_HELPER = "UserAspectRatioSettingsBackup";
 
     @Override
     public void onCreate() {
@@ -53,6 +56,15 @@ public class SettingsBackupHelper extends BackupAgentHelper {
                         onboardingFeatureProvider.getAccessibilityAppearanceBackupHelper(
                             this, this.getBackupRestoreEventLogger()));
             }
+        }
+
+        // Since the aconfig flag below is read-only, this class would not compile, and tests would
+        // fail to find the class, even if they are testing only code beyond the flag-guarded code.
+        final UserAspectRatioBackupHelper userAspectRatioBackupHelper =
+                new UserAspectRatioBackupHelper(this, AppGlobals.getPackageManager(),
+                        getBackupRestoreEventLogger());
+        if (com.android.window.flags.Flags.backupAndRestoreForUserAspectRatioSettings()) {
+            addHelper(USER_ASPECT_RATIO_BACKUP_HELPER, userAspectRatioBackupHelper);
         }
     }
 

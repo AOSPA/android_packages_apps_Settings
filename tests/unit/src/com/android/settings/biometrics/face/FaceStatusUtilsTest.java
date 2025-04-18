@@ -209,7 +209,7 @@ public class FaceStatusUtilsTest {
         when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(false);
 
         assertThat(mFaceStatusUtils.getSettingsClassName())
-                .isEqualTo(FaceEnrollIntroductionInternal.class.getName());
+                .isEqualTo(FaceEnroll.class.getName());
     }
 
     @Test
