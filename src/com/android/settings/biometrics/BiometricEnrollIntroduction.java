@@ -51,6 +51,8 @@ import com.google.android.setupdesign.span.LinkSpan;
 import com.google.android.setupdesign.template.RequireScrollMixin;
 import com.google.android.setupdesign.util.DynamicColorPalette;
 
+import java.util.List;
+
 /**
  * Abstract base class for the intro onboarding activity for biometric enrollment.
  */
@@ -236,6 +238,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         requireScrollMixin.requireScrollWithButton(this, getPrimaryFooterButton(),
                 getMoreButtonTextRes(), this::onNextButtonClick);
         if (!isExpressiveStyle) {
+            final int theme = com.google.android.setupdesign.R.style.SudGlifButton_Primary;
             requireScrollMixin.setOnRequireScrollStateChangedListener(
                     scrollNeeded -> {
                         boolean enrollmentCompleted = checkMaxEnrolled() != 0;
@@ -244,7 +247,13 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                             final int primaryButtonTextRes = scrollNeeded
                                     ? getMoreButtonTextRes()
                                     : getAgreeButtonTextRes();
-                            getPrimaryFooterButton().setText(this, primaryButtonTextRes);
+                            final FooterButton primaryButton = new FooterButton.Builder(this)
+                                    .setText(primaryButtonTextRes)
+                                    .setButtonType(FooterButton.ButtonType.OPT_IN)
+                                    .setListener(this::onNextButtonClick)
+                                    .setTheme(theme)
+                                    .build();
+                            mFooterBarMixin.setPrimaryButton(primaryButton);
                         }
 
                         // Show secondary button once scroll is completed.
@@ -259,6 +268,19 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         final boolean enrollmentCompleted = checkMaxEnrolled() != 0;
         getSecondaryFooterButton().setVisibility(
                 !isScrollNeeded && !enrollmentCompleted ? View.VISIBLE : View.INVISIBLE);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (!getPackageName().equals(getCallingPackage())) {
+            for (String key : List.of(MultiBiometricEnrollHelper.EXTRA_SKIP_PENDING_ENROLL,
+                    MultiBiometricEnrollHelper.EXTRA_ENROLL_AFTER_FACE,
+                    MultiBiometricEnrollHelper.EXTRA_ENROLL_AFTER_FINGERPRINT)) {
+                getIntent().removeExtra(key);
+            }
+        }
     }
 
     @Override
@@ -520,14 +542,15 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         getIntent().removeExtra(MultiBiometricEnrollHelper.EXTRA_ENROLL_AFTER_FINGERPRINT);
     }
 
-    protected void removeEnrollNextBiometricIfSkipEnroll(@Nullable Intent data) {
+    private void removeEnrollNextBiometricIfSkipEnroll(@Nullable Intent data) {
         if (data != null
                 && data.getBooleanExtra(
                         MultiBiometricEnrollHelper.EXTRA_SKIP_PENDING_ENROLL, false)) {
             removeEnrollNextBiometric();
         }
     }
-    protected void handleBiometricResultSkipOrFinished(int resultCode, @Nullable Intent data) {
+
+    private void handleBiometricResultSkipOrFinished(int resultCode, @Nullable Intent data) {
         removeEnrollNextBiometricIfSkipEnroll(data);
         if (resultCode == RESULT_SKIP) {
             onEnrollmentSkipped(data);

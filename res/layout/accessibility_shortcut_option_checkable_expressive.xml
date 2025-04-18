@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (C) 2023 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2025 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -15,8 +14,7 @@
   ~ limitations under the License.
   -->
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/a11y_shortcut_option_container"
@@ -24,14 +22,16 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:minHeight="?android:attr/listPreferredItemHeight"
-    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-    android:paddingVertical="20dp">
+    android:paddingBottom="@dimen/settingslib_expressive_space_small4"
+    android:paddingEnd="@dimen/settingslib_expressive_space_small1"
+    android:paddingStart="@dimen/settingslib_expressive_space_small1"
+    android:paddingTop="@dimen/settingslib_expressive_space_extrasmall6">
 
     <CheckBox
         android:id="@android:id/checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/settingslib_expressive_space_extrasmall6"
         android:background="@null"
         android:clickable="false"
         android:focusable="false"
@@ -40,19 +40,19 @@
         app:layout_constrainedHeight="true"
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="@android:id/title"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@android:id/title"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@android:id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:hyphenationFrequency="normalFast"
         android:lineBreakWordStyle="phrase"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@android:id/checkbox"
+        app:layout_constraintEnd_toStartOf="@android:id/checkbox"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Shortcut option title" />
 
@@ -60,31 +60,33 @@
         android:id="@android:id/summary"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/settingslib_expressive_space_extrasmall6"
         android:hyphenationFrequency="normalFast"
         android:lineBreakWordStyle="phrase"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="?android:attr/textColorSecondary"
         app:layout_constrainedHeight="true"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/image"
+        app:layout_constraintEnd_toEndOf="@android:id/title"
         app:layout_constraintStart_toStartOf="@android:id/title"
         app:layout_constraintTop_toBottomOf="@android:id/title"
+        app:layout_goneMarginBottom="@dimen/settingslib_expressive_space_extrasmall6"
         tools:text="Shortcut option summary" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/image"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/settingslib_illustration_padding"
-        android:layout_marginBottom="@dimen/settingslib_illustration_padding"
+        android:layout_marginTop="@dimen/settingslib_expressive_space_small1"
         android:adjustViewBounds="true"
         android:maxHeight="@dimen/accessibility_imageview_size"
         android:scaleType="fitStart"
         app:layout_constrainedHeight="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="@android:id/title"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@android:id/summary"
-        app:layout_constraintWidth_max="@dimen/settingslib_illustration_width"
         tools:src="@drawable/accessibility_shortcut_type_volume_keys" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

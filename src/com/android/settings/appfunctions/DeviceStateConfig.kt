@@ -83,16 +83,12 @@ data class DeviceStateItemConfig(
  * @param enabled whether expose device states on this screen to App Functions.
  * @param screenKey the unique ID for the screen.
  * @param category the device state category of the screen. The default is UNCATEGORIZED.
- * @param defaultType class type associated with [PreferenceHierarchyGenerator] for PreferenceScreen
- * @param defaultTypeValue value to pass in to [PreferenceHierarchyGenerator.generatePreferenceHierarchy]
  */
 data class PerScreenConfig(
     val enabled: Boolean,
     val screenKey: String,
     // TODO(b/405344827): map categories to PreferenceMetadata#tags
     val category: Set<DeviceStateCategory> = setOf(DeviceStateCategory.UNCATEGORIZED),
-    val defaultType: Class<*>? = null,
-    val defaultTypeValue: Any? = null
 )
 
 fun getScreenConfigs() = listOf(
@@ -223,8 +219,6 @@ fun getScreenConfigs() = listOf(
         enabled = true,
         screenKey = AppStorageAppListScreen.KEY,
         category = setOf(DeviceStateCategory.STORAGE),
-        defaultType = Boolean::class.java,
-        defaultTypeValue = false, // do not include system apps
     ),
     PerScreenConfig(
         enabled = true,

@@ -30,7 +30,7 @@ import com.android.settings.spa.app.storage.StorageType
 import com.android.settingslib.applications.StorageStatsSource
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
-import com.android.settingslib.metadata.PersistentPreference
+import com.android.settingslib.metadata.LongValuePreference
 import com.android.settingslib.metadata.PreferenceHierarchy
 import com.android.settingslib.metadata.PreferenceHierarchyGenerator
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -54,10 +54,10 @@ class AppInfoStorageScreen(
     private val context: Context,
     override val arguments: Bundle
 ) : PreferenceScreenCreator,
+    LongValuePreference,
     PreferenceHierarchyGenerator<Int>,
     PreferenceSummaryProvider,
-    PreferenceTitleProvider,
-    PersistentPreference<Long> {
+    PreferenceTitleProvider {
 
 
     private val appInfo by lazy {
@@ -66,9 +66,6 @@ class AppInfoStorageScreen(
 
     override val key: String
         get() = KEY
-
-    override val valueType: Class<Long>
-        get() = Long::class.javaObjectType
 
     override val sensitivityLevel: @SensitivityLevel Int
         get() = SensitivityLevel.NO_SENSITIVITY

@@ -104,7 +104,8 @@ public class TouchpadThreeFingerTapAppSelectionPreferenceControllerTest {
     private final Context mContext = RuntimeEnvironment.application;
     private ContentResolver mContentResolver;
     private TouchpadThreeFingerTapAppSelectionPreferenceController mController;
-    private InputGestureData mCustomInputGesture = null;
+    private InputGestureData mCustomInputGesture;
+    private LauncherApps.Callback mLauncherAppsCallback;
 
     @Before
     public void setup() {
@@ -185,7 +186,7 @@ public class TouchpadThreeFingerTapAppSelectionPreferenceControllerTest {
     public void updateState_whenActionIsLaunchApp_correspondingAppChecked() {
         ArgumentCaptor<SelectorWithWidgetPreference> captor = capturePrefs();
 
-        setupLaunchingApp(/* matchingIndex = */ 1);
+        setupAppSelection(/* matchingIndex = */ 1);
         mController.updateState(mMockPreferenceScreen);
 
         List<SelectorWithWidgetPreference> prefs = captor.getAllValues();
@@ -212,8 +213,7 @@ public class TouchpadThreeFingerTapAppSelectionPreferenceControllerTest {
         mController.onRadioButtonClicked(captor.getAllValues().get(clickingIndex));
 
         // Settings key is updated
-        int gesture = TouchpadThreeFingerTapUtils.getCurrentGestureType(mContentResolver);
-        assertThat(gesture).isEqualTo(KeyGestureEvent.KEY_GESTURE_TYPE_LAUNCH_APPLICATION);
+        assertTrue(TouchpadThreeFingerTapUtils.isGestureTypeLaunchApp(mContentResolver));
 
         // InputManager gesture is updated
         assertThat(mCustomInputGesture).isNotNull();
@@ -229,6 +229,42 @@ public class TouchpadThreeFingerTapAppSelectionPreferenceControllerTest {
         assertThat(prefs.get(1).isChecked()).isFalse();
     }
 
+    @Test
+    public void onPackageRemoved_isNotSelectedApp_doNothing() {
+        ArgumentCaptor<LauncherApps.Callback> captor =
+                ArgumentCaptor.forClass(LauncherApps.Callback.class);
+        verify(mMockLauncherApps).registerCallback(captor.capture());
+        mLauncherAppsCallback = captor.getValue();
+
+        int selectedAppIndex = 0;
+        setupAppSelection(/* matchingIndex = */ selectedAppIndex);
+        mController.updateState(mMockPreferenceScreen);
+
+        mLauncherAppsCallback.onPackageRemoved(
+                TEST_PACKAGE_PREFIX + 1, UserHandle.CURRENT);
+
+        assertTrue(TouchpadThreeFingerTapUtils.isGestureTypeLaunchApp(mContentResolver));
+    }
+
+    @Test
+    public void onPackageRemoved_isSelectedApp_setToDefaultGesture() {
+        ArgumentCaptor<LauncherApps.Callback> captor =
+                ArgumentCaptor.forClass(LauncherApps.Callback.class);
+        verify(mMockLauncherApps).registerCallback(captor.capture());
+        mLauncherAppsCallback = captor.getValue();
+
+        int selectedAppIndex = 0;
+        setupAppSelection(/* matchingIndex = */ selectedAppIndex);
+        mController.updateState(mMockPreferenceScreen);
+
+        mLauncherAppsCallback.onPackageRemoved(
+                TEST_PACKAGE_PREFIX + selectedAppIndex, UserHandle.CURRENT);
+
+        // Settings key is updated
+        int gesture = TouchpadThreeFingerTapUtils.getCurrentGestureType(mContentResolver);
+        assertThat(gesture).isEqualTo(TouchpadThreeFingerTapUtils.DEFAULT_GESTURE_TYPE);
+    }
+
     private ArgumentCaptor<SelectorWithWidgetPreference> capturePrefs() {
         ArgumentCaptor<SelectorWithWidgetPreference> captor =
                 ArgumentCaptor.forClass(SelectorWithWidgetPreference.class);
@@ -242,7 +278,7 @@ public class TouchpadThreeFingerTapAppSelectionPreferenceControllerTest {
         return captor;
     }
 
-    private void setupLaunchingApp(int matchingIndex) {
+    private void setupAppSelection(int matchingIndex) {
         AppLaunchData appLaunchData = createLaunchDataForComponent(
                 TEST_PACKAGE_PREFIX + matchingIndex, TEST_CLASS_PREFIX + matchingIndex);
 
