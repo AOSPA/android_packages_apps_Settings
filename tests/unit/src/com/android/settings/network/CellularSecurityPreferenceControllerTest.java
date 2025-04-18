@@ -21,6 +21,8 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -81,6 +83,31 @@ public final class CellularSecurityPreferenceControllerTest {
         mPreference.setKey(PREF_KEY);
         mPreferenceScreen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
         mPreferenceScreen.addPreference(mPreference);
+    }
+
+    @Test
+    public void handlePreferenceTreeClick_launchCellularSecuritySettingsFragment() {
+        boolean result = mController.handlePreferenceTreeClick(mPreference);
+
+        assertTrue(result);
+    }
+
+    @Test
+    public void handlePreferenceTreeClick_preferenceKeyNotMatch() {
+        mPreference.setKey("PREF_KEY");
+
+        boolean result = mController.handlePreferenceTreeClick(mPreference);
+
+        assertFalse(result);
+    }
+
+    @Test
+    public void handlePreferenceTreeClick_SafetyCenterManagerIsNull() {
+        when(mContext.getSystemService(SafetyCenterManager.class)).thenReturn(null);
+
+        boolean result = mController.handlePreferenceTreeClick(mPreference);
+
+        assertFalse(result);
     }
 
     @Test
