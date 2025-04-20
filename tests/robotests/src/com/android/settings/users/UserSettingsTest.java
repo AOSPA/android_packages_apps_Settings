@@ -486,6 +486,8 @@ public class UserSettingsTest {
 
         positiveButton.performClick();
 
+        shadowOf(Looper.getMainLooper()).idle();
+
         assertThat(mFragment.runUserRemovalKeyguardConfirmation()).isFalse();
         verify(mFragment, never()).startActivityForResult(any(Intent.class),
                 eq(REQUEST_DELETE_USER), any());

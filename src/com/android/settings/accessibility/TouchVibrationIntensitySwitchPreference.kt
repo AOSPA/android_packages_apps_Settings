@@ -19,7 +19,7 @@ import android.os.VibrationAttributes
 import android.provider.Settings
 import com.android.settings.R
 
-/** Accessibility settings for touch haptic feedback. */
+/** Accessibility settings for touch haptic feedback, as a switch toggle */
 // LINT.IfChange
 class TouchVibrationIntensitySwitchPreference :
     VibrationIntensitySwitchPreference(

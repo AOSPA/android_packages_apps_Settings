@@ -31,6 +31,7 @@ class VibrationIntensitySettingsStoreTest {
     private companion object {
         const val KEY: String = Settings.System.HAPTIC_FEEDBACK_INTENSITY
         const val DEFAULT_INTENSITY: Int = Vibrator.VIBRATION_INTENSITY_MEDIUM
+        const val SUPPORTED_INTENSITIES: Int = Vibrator.VIBRATION_INTENSITY_HIGH
     }
 
     private val context: Context = ApplicationProvider.getApplicationContext()
@@ -40,6 +41,7 @@ class VibrationIntensitySettingsStoreTest {
         vibrationUsage = VibrationAttributes.USAGE_RINGTONE,
         keyValueStoreDelegate = settingsStore,
         defaultIntensity = DEFAULT_INTENSITY,
+        supportedIntensityLevels = SUPPORTED_INTENSITIES,
     )
 
     @Test
@@ -70,8 +72,17 @@ class VibrationIntensitySettingsStoreTest {
     }
 
     @Test
-    fun getValue_valueIntensityInt_returnValueSet() {
+    fun getValue_valueIntensityIntSupported_returnValueSet() {
         setIntValue(Vibrator.VIBRATION_INTENSITY_HIGH)
+
+        assertThat(settingsStore.getInt(KEY)).isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH)
+        assertThat(store.getBoolean(KEY)).isTrue()
+        assertThat(store.getInt(KEY)).isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH)
+    }
+
+    @Test
+    fun getValue_valueIntensityIntUnsupported_returnMaxSupported() {
+        setIntValue(Vibrator.VIBRATION_INTENSITY_HIGH + 1)
 
         assertThat(settingsStore.getInt(KEY)).isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH)
         assertThat(store.getBoolean(KEY)).isTrue()
@@ -112,6 +123,67 @@ class VibrationIntensitySettingsStoreTest {
         assertThat(settingsStore.getInt(KEY)).isEqualTo(DEFAULT_INTENSITY)
         assertThat(store.getBoolean(KEY)).isTrue()
         assertThat(store.getInt(KEY)).isEqualTo(DEFAULT_INTENSITY)
+    }
+
+    @Test
+    fun setUnsupportedIntValue_updatesWithinSupportedLevels() {
+        setIntValue(Vibrator.VIBRATION_INTENSITY_HIGH + 1)
+
+        assertThat(settingsStore.getInt(KEY)).isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH)
+        assertThat(store.getBoolean(KEY)).isTrue()
+        assertThat(store.getInt(KEY)).isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH)
+    }
+
+    @Test
+    fun supportsOneLevel_usesDefaultIntensity() {
+        val testStore = VibrationIntensitySettingsStore(
+            context = context,
+            vibrationUsage = VibrationAttributes.USAGE_RINGTONE,
+            keyValueStoreDelegate = settingsStore,
+            defaultIntensity = Vibrator.VIBRATION_INTENSITY_MEDIUM,
+            supportedIntensityLevels = 1,
+        )
+
+        testStore.setInt(KEY, null)
+
+        assertThat(settingsStore.getInt(KEY)).isNull()
+        assertThat(testStore.getBoolean(KEY)).isTrue()
+        assertThat(testStore.getInt(KEY)).isEqualTo(1)
+
+        testStore.setInt(KEY, 1)
+
+        assertThat(settingsStore.getInt(KEY)).isEqualTo(Vibrator.VIBRATION_INTENSITY_MEDIUM)
+        assertThat(testStore.getBoolean(KEY)).isTrue()
+        assertThat(testStore.getInt(KEY)).isEqualTo(1)
+    }
+
+    @Test
+    fun supportsTwoLevels_usesLowAndHighIntensities() {
+        val testStore = VibrationIntensitySettingsStore(
+            context = context,
+            vibrationUsage = VibrationAttributes.USAGE_RINGTONE,
+            keyValueStoreDelegate = settingsStore,
+            defaultIntensity = Vibrator.VIBRATION_INTENSITY_MEDIUM,
+            supportedIntensityLevels = 2,
+        )
+
+        testStore.setInt(KEY, null)
+
+        assertThat(settingsStore.getInt(KEY)).isNull()
+        assertThat(testStore.getBoolean(KEY)).isTrue()
+        assertThat(testStore.getInt(KEY)).isEqualTo(2)
+
+        testStore.setInt(KEY, 1)
+
+        assertThat(settingsStore.getInt(KEY)).isEqualTo(Vibrator.VIBRATION_INTENSITY_LOW)
+        assertThat(testStore.getBoolean(KEY)).isTrue()
+        assertThat(testStore.getInt(KEY)).isEqualTo(1)
+
+        testStore.setInt(KEY, 2)
+
+        assertThat(settingsStore.getInt(KEY)).isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH)
+        assertThat(testStore.getBoolean(KEY)).isTrue()
+        assertThat(testStore.getInt(KEY)).isEqualTo(2)
     }
 
     private fun setIntValue(value: Int?) =

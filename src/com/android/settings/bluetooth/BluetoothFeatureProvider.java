@@ -16,7 +16,6 @@
 
 package com.android.settings.bluetooth;
 
-import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.ComponentName;
 import android.content.Context;
@@ -26,11 +25,8 @@ import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 
-import com.android.settings.bluetooth.ui.view.DeviceDetailsFragmentFormatter;
-import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.devicesettings.data.repository.DeviceSettingRepository;
-import com.android.settingslib.core.AbstractPreferenceController;
 
 import kotlinx.coroutines.CoroutineScope;
 
@@ -94,15 +90,5 @@ public interface BluetoothFeatureProvider {
     @NonNull
     DeviceSettingRepository getDeviceSettingRepository(
             @NonNull Context context,
-            @NonNull BluetoothAdapter bluetoothAdapter,
             @NonNull CoroutineScope scope);
-
-    /** Gets device details fragment layout formatter. */
-    @NonNull
-    DeviceDetailsFragmentFormatter getDeviceDetailsFragmentFormatter(
-            @NonNull Context context,
-            @NonNull DashboardFragment fragment,
-            @NonNull BluetoothAdapter bluetoothAdapter,
-            @NonNull CachedBluetoothDevice cachedDevice,
-            @NonNull List<AbstractPreferenceController> controllers);
 }

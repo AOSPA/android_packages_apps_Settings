@@ -23,7 +23,6 @@ import static com.android.internal.accessibility.common.ShortcutConstants.UserSh
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TWOFINGER_DOUBLETAP;
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
-import static com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode;
 import static com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragment.KEY_MAGNIFICATION_SHORTCUT_PREFERENCE;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -854,7 +853,6 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
     public void getRawDataToIndex_returnsAllPreferenceKeys() {
         final List<String> expectedSearchKeys = List.of(
                 KEY_MAGNIFICATION_SHORTCUT_PREFERENCE,
@@ -873,7 +871,6 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
     public void getNonIndexableKeys_windowMagnificationNotSupported_onlyShortcutSearchable() {
         setWindowMagnificationSupported(false, false);
 
@@ -892,7 +889,6 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
     @Test
     @EnableFlags({
-            com.android.settings.accessibility.Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH,
             Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE,
             com.android.settings.accessibility.Flags
                     .FLAG_ENABLE_MAGNIFICATION_CURSOR_FOLLOWING_DIALOG})
@@ -912,7 +908,6 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
     public void getNonIndexableKeys_noShortcut_alwaysOnSupported_notSearchable() {
         mShadowAccessibilityManager.setAccessibilityShortcutTargets(
                 TRIPLETAP, List.of());
@@ -926,7 +921,6 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
     public void getNonIndexableKeys_hasShortcut_alwaysOnNotSupported_notSearchable() {
         mShadowAccessibilityManager.setAccessibilityShortcutTargets(
                 TRIPLETAP, List.of(MAGNIFICATION_CONTROLLER_NAME));
@@ -940,7 +934,6 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
     @DisableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
     public void getNonIndexableKeys_oneFingerPanningNotSupported_notSearchable() {
         final List<String> niks = ToggleScreenMagnificationPreferenceFragment
@@ -951,7 +944,6 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
     public void getNonIndexableKeys_joystickNotSupported_notSearchable() {
         setJoystickSupported(false);
 
@@ -960,10 +952,6 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
         // In NonIndexableKeys == not searchable
         assertThat(niks).contains(MagnificationJoystickPreferenceController.PREF_KEY);
-    }
-
-    private void putStringIntoSettings(String key, String componentName) {
-        Settings.Secure.putString(mContext.getContentResolver(), key, componentName);
     }
 
     private void putUserShortcutTypeIntoSharedPreference(Context context,
@@ -1018,16 +1006,6 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
                 InputDevice.SOURCE_MOUSE);
         ShadowInputDevice.addDevice(deviceId, device);
     }
-
-    private String getStringFromSettings(String key) {
-        return Settings.Secure.getString(mContext.getContentResolver(), key);
-    }
-
-    private boolean getMagnificationTripleTapStatus() {
-        return Settings.Secure.getInt(mContext.getContentResolver(), TRIPLETAP_SHORTCUT_KEY, OFF)
-                == ON;
-    }
-
     private void setWindowMagnificationSupported(boolean magnificationAreaSupported,
             boolean windowMagnificationSupported) {
         when(mSpyResources.getBoolean(

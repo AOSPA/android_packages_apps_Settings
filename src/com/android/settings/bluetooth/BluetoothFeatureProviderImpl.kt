@@ -15,7 +15,6 @@
  */
 package com.android.settings.bluetooth
 
-import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.content.ComponentName
 import android.content.Context
@@ -23,14 +22,10 @@ import android.media.AudioManager
 import android.media.Spatializer
 import android.net.Uri
 import androidx.preference.Preference
-import com.android.settings.bluetooth.ui.view.DeviceDetailsFragmentFormatter
-import com.android.settings.bluetooth.ui.view.DeviceDetailsFragmentFormatterImpl
-import com.android.settings.dashboard.DashboardFragment
 import com.android.settingslib.bluetooth.BluetoothUtils
 import com.android.settingslib.bluetooth.CachedBluetoothDevice
 import com.android.settingslib.bluetooth.devicesettings.data.repository.DeviceSettingRepository
 import com.android.settingslib.bluetooth.devicesettings.data.repository.DeviceSettingRepositoryImpl
-import com.android.settingslib.core.AbstractPreferenceController
 import com.google.common.collect.ImmutableList
 import com.google.common.collect.ImmutableSet
 import kotlinx.coroutines.CoroutineScope
@@ -72,25 +67,8 @@ open class BluetoothFeatureProviderImpl : BluetoothFeatureProvider {
 
     override fun getDeviceSettingRepository(
         context: Context,
-        bluetoothAdapter: BluetoothAdapter,
         scope: CoroutineScope
     ): DeviceSettingRepository =
-        DeviceSettingRepositoryImpl(context, bluetoothAdapter, scope, Dispatchers.IO)
+        DeviceSettingRepositoryImpl(context, scope, Dispatchers.IO)
 
-    override fun getDeviceDetailsFragmentFormatter(
-        context: Context,
-        fragment: DashboardFragment,
-        bluetoothAdapter: BluetoothAdapter,
-        cachedDevice: CachedBluetoothDevice,
-        controllers: List<AbstractPreferenceController>,
-    ): DeviceDetailsFragmentFormatter {
-        return DeviceDetailsFragmentFormatterImpl(
-            context,
-            fragment,
-            controllers,
-            bluetoothAdapter,
-            cachedDevice,
-            Dispatchers.IO
-        )
-    }
 }

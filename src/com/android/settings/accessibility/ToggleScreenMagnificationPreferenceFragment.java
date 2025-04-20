@@ -692,10 +692,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                     final List<SearchIndexableRaw> rawData =
                             super.getRawDataToIndex(context, enabled);
 
-                    if (!com.android.settings.accessibility.Flags.fixA11ySettingsSearch()) {
-                        return rawData;
-                    }
-
                     // Add all preferences to search raw data so that they are included in
                     // indexing, which happens infrequently. Irrelevant preferences should be
                     // hidden from the live returned search results by `getNonIndexableKeys`,
@@ -719,11 +715,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 @Override
                 public List<String> getNonIndexableKeys(@NonNull Context context) {
                     final List<String> niks = super.getNonIndexableKeys(context);
-
-                    if (!com.android.settings.accessibility.Flags.fixA11ySettingsSearch()) {
-                        return niks;
-                    }
-
                     if (!isWindowMagnificationSupported(context)) {
                         niks.add(MagnificationModePreferenceController.PREF_KEY);
                         niks.add(MagnificationFollowTypingPreferenceController.PREF_KEY);

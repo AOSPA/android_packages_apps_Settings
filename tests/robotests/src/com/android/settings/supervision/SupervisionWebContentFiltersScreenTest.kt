@@ -81,18 +81,18 @@ class SupervisionWebContentFiltersScreenTest {
                     fragment.findPreference<SelectorWithWidgetPreference>(
                         SupervisionBlockExplicitSitesPreference.KEY
                     )!!
+
                 assertThat(allowAllSitesPreference.isChecked).isTrue()
                 assertThat(blockExplicitSitesPreference.isChecked).isFalse()
 
                 blockExplicitSitesPreference.performClick()
 
                 // Pretend the PIN verification succeeded.
-                fragment.onActivityResult(
-                    requestCode =
-                        SupervisionBlockExplicitSitesPreference
-                            .REQUEST_CODE_SUPERVISION_CREDENTIALS,
-                    resultCode = Activity.RESULT_OK,
-                    data = null,
+                val activity = shadowOf(fragment.activity)
+                activity.receiveResult(
+                    activity.nextStartedActivityForResult.intent,
+                    Activity.RESULT_OK,
+                    null,
                 )
 
                 assertThat(blockExplicitSitesPreference.isChecked).isTrue()
@@ -120,11 +120,11 @@ class SupervisionWebContentFiltersScreenTest {
                 blockExplicitSitesPreference.performClick()
 
                 // Pretend the PIN verification succeeded.
-                fragment.onActivityResult(
-                    requestCode =
-                        SupervisionAllowAllSitesPreference.REQUEST_CODE_SUPERVISION_CREDENTIALS,
-                    resultCode = Activity.RESULT_CANCELED,
-                    data = null,
+                val activity = shadowOf(fragment.activity)
+                activity.receiveResult(
+                    activity.nextStartedActivityForResult.intent,
+                    Activity.RESULT_CANCELED,
+                    null,
                 )
 
                 assertThat(blockExplicitSitesPreference.isChecked).isFalse()

@@ -185,4 +185,4 @@ public class RingVibrationTogglePreferenceControllerTest {
         return Settings.System.getInt(mContext.getContentResolver(), settingKey);
     }
 }
-// LINT.ThenChange(RingVibrationIntensitySwitchPreferenceTest.java)
+// LINT.ThenChange(RingVibrationIntensitySwitchPreferenceTest.kt)

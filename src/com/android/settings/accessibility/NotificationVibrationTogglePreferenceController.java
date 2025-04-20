@@ -34,4 +34,4 @@ public class NotificationVibrationTogglePreferenceController
         return AVAILABLE;
     }
 }
-// LINT.ThenChange(NotificationVibrationIntensitySwitchPreference.java)
+// LINT.ThenChange(NotificationVibrationIntensitySwitchPreference.kt)

@@ -176,4 +176,4 @@ public class HapticFeedbackTogglePreferenceControllerTest {
         return Settings.System.getInt(mContext.getContentResolver(), settingKey);
     }
 }
-// LINT.ThenChange(TouchVibrationIntensitySwitchPreferenceTest.java)
+// LINT.ThenChange(TouchVibrationIntensitySwitchPreferenceTest.kt)

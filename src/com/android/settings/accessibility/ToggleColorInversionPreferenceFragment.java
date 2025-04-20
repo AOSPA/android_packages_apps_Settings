@@ -78,7 +78,7 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
         mTopIntroTitle = getText(R.string.accessibility_display_inversion_preference_intro_text);
         mImageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
                 .authority(getPrefContext().getPackageName())
-                .appendPath(String.valueOf(R.raw.a11y_color_inversion_banner))
+                .appendPath(String.valueOf(R.raw.accessibility_color_inversion_banner))
                 .build();
         final View view = super.onCreateView(inflater, container, savedInstanceState);
         updateFooterPreference();
@@ -201,13 +201,11 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
                             R.string.accessibility_display_inversion_shortcut_title);
                     rawData.add(raw);
 
-                    if (Flags.fixA11ySettingsSearch()) {
-                        SearchIndexableRaw mainPreferenceRaw = new SearchIndexableRaw(context);
-                        mainPreferenceRaw.key = KEY_SWITCH_PREFERENCE;
-                        mainPreferenceRaw.title = context.getString(
-                                R.string.accessibility_display_inversion_switch_title);
-                        rawData.add(mainPreferenceRaw);
-                    }
+                    SearchIndexableRaw mainPreferenceRaw = new SearchIndexableRaw(context);
+                    mainPreferenceRaw.key = KEY_SWITCH_PREFERENCE;
+                    mainPreferenceRaw.title = context.getString(
+                            R.string.accessibility_display_inversion_switch_title);
+                    rawData.add(mainPreferenceRaw);
                     return rawData;
                 }
             };

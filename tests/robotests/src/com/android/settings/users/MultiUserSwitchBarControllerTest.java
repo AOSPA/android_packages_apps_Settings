@@ -23,11 +23,8 @@ import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.content.pm.UserInfo;
-import android.multiuser.Flags;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.platform.test.annotations.RequiresFlagsDisabled;
-import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 
@@ -72,19 +69,6 @@ public class MultiUserSwitchBarControllerTest {
     }
 
     @Test
-    @RequiresFlagsDisabled({Flags.FLAG_FIX_DISABLING_OF_MU_TOGGLE_WHEN_RESTRICTION_APPLIED})
-    public void onStart_disallowUserSwitch_shouldSetDisabledByAdmin() {
-        mUserManager.setUserRestriction(UserHandle.of(UserHandle.myUserId()),
-                UserManager.DISALLOW_USER_SWITCH, true);
-
-        final MultiUserSwitchBarController controller = new MultiUserSwitchBarController(mContext,
-                mSwitchWidgetController, null);
-
-        verify(mSwitchWidgetController).setDisabledByAdmin(any());
-    }
-
-    @Test
-    @RequiresFlagsEnabled({Flags.FLAG_FIX_DISABLING_OF_MU_TOGGLE_WHEN_RESTRICTION_APPLIED})
     public void onStart_disallowUserSwitchEnforcedByAdmin_shouldSetDisabledByAdminUnchecked() {
         int userId = UserHandle.myUserId();
         List<UserManager.EnforcingUser> enforcingUsers = new ArrayList<>();
@@ -102,7 +86,6 @@ public class MultiUserSwitchBarControllerTest {
     }
 
     @Test
-    @RequiresFlagsEnabled({Flags.FLAG_FIX_DISABLING_OF_MU_TOGGLE_WHEN_RESTRICTION_APPLIED})
     public void onStart_disallowUserSwitch_userNotMain_shouldSetDisabledUnchecked() {
         mUserManager.setUserRestriction(UserHandle.of(UserHandle.myUserId()),
                 UserManager.DISALLOW_USER_SWITCH, true);
@@ -114,7 +97,6 @@ public class MultiUserSwitchBarControllerTest {
     }
 
     @Test
-    @RequiresFlagsEnabled({Flags.FLAG_FIX_DISABLING_OF_MU_TOGGLE_WHEN_RESTRICTION_APPLIED})
     public void onStart_allowUserSwitch_notMainUser_shouldSetDisabled() {
         mUserManager.setUserRestriction(UserHandle.of(UserHandle.myUserId()),
                 UserManager.DISALLOW_USER_SWITCH, false);

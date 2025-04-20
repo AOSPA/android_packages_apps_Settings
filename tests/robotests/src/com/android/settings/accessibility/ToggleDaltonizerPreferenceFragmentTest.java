@@ -27,9 +27,6 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.widget.PopupWindow;
 
@@ -43,7 +40,6 @@ import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -57,8 +53,6 @@ import java.util.List;
 /** Tests for {@link ToggleDaltonizerPreferenceFragment} */
 @RunWith(RobolectricTestRunner.class)
 public class ToggleDaltonizerPreferenceFragmentTest {
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private ActivityController<SettingsActivity> mActivityController;
 
@@ -156,17 +150,7 @@ public class ToggleDaltonizerPreferenceFragmentTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
-    public void getRawDataToIndex_flagOff_returnEmptyData() {
-        List<SearchIndexableRaw> rawData = ToggleDaltonizerPreferenceFragment
-                .SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, /* enabled= */ true);
-
-        assertThat(rawData).isEmpty();
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
-    public void getRawDataToIndex_flagOn_returnAllIndexablePreferences() {
+    public void getRawDataToIndex_returnAllIndexablePreferences() {
         String[] expectedKeys = {KEY_SHORTCUT_PREFERENCE, KEY_SWITCH_PREFERENCE};
         String[] expectedTitles = {
                 mContext.getString(R.string.accessibility_daltonizer_shortcut_title),

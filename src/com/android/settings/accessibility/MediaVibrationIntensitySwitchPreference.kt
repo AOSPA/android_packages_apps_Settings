@@ -22,7 +22,7 @@ import android.provider.Settings
 import com.android.settings.R
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 
-/** Accessibility settings for media vibration. */
+/** Accessibility settings for media vibration, as a switch toggle. */
 // LINT.IfChange
 class MediaVibrationIntensitySwitchPreference :
     VibrationIntensitySwitchPreference(
@@ -41,7 +41,7 @@ class MediaVibrationIntensitySwitchPreference :
 }
 
 /** Returns true is media vibration preference is supported by this device. */
-private fun Context.isMediaVibrationPreferenceSupported(): Boolean =
+fun Context.isMediaVibrationPreferenceSupported(): Boolean =
     resources.getBoolean(R.bool.config_media_vibration_supported)
 
 // LINT.ThenChange(MediaVibrationTogglePreferenceController.java)

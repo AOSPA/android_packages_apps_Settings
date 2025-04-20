@@ -21,6 +21,9 @@ import android.content.Intent
 import android.provider.Settings
 import android.provider.Settings.Secure.BROWSER_CONTENT_FILTERS_ENABLED
 import android.provider.Settings.SettingNotFoundException
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.preference.Preference
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -34,16 +37,19 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.mock
+import org.mockito.Mockito.`when`
+import org.mockito.kotlin.any
 import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.doReturn
-import org.mockito.kotlin.eq
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
 
 @RunWith(AndroidJUnit4::class)
 class SupervisionSafeSitesPreferenceTest {
-    private val mockLifeCycleContext = mock(PreferenceLifecycleContext::class.java)
     private val context: Context = ApplicationProvider.getApplicationContext()
+
+    private lateinit var mockLifeCycleContext: PreferenceLifecycleContext
+    private lateinit var mockActivityResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var dataStore: SupervisionSafeSitesDataStore
     private lateinit var allowAllSitesPreference: SupervisionAllowAllSitesPreference
     private lateinit var blockExplicitSitesPreference: SupervisionBlockExplicitSitesPreference
@@ -51,6 +57,10 @@ class SupervisionSafeSitesPreferenceTest {
     @Before
     fun setUp() {
         dataStore = SupervisionSafeSitesDataStore(context)
+        mockLifeCycleContext = mock(PreferenceLifecycleContext::class.java)
+        mockActivityResultLauncher =
+            mock(ActivityResultLauncher::class.java) as ActivityResultLauncher<Intent>
+        mockConfirmSupervisionCredentialsActivity()
         allowAllSitesPreference = SupervisionAllowAllSitesPreference(dataStore)
         allowAllSitesPreference.onCreate(mockLifeCycleContext)
         blockExplicitSitesPreference = SupervisionBlockExplicitSitesPreference(dataStore)
@@ -101,19 +111,19 @@ class SupervisionSafeSitesPreferenceTest {
 
         blockExplicitSitesWidget.performClick()
 
-        verifyConfirmSupervisionCredentialsActivityStarted(
-            SupervisionBlockExplicitSitesPreference.REQUEST_CODE_SUPERVISION_CREDENTIALS
+        verifyConfirmSupervisionCredentialsActivity()
+        blockExplicitSitesPreference.onConfirmCredentials(
+            ActivityResult(Activity.RESULT_CANCELED, null)
         )
 
-        val result =
-            blockExplicitSitesPreference.onActivityResult(
-                mockLifeCycleContext,
-                SupervisionBlockExplicitSitesPreference.REQUEST_CODE_SUPERVISION_CREDENTIALS,
-                Activity.RESULT_CANCELED,
-                null,
+        assertThat(blockExplicitSitesWidget.isChecked).isFalse()
+        assertThat(
+                Settings.Secure.getInt(
+                    context.getContentResolver(),
+                    BROWSER_CONTENT_FILTERS_ENABLED,
+                )
             )
-
-        assertThat(result).isFalse()
+            .isEqualTo(0)
     }
 
     @Test
@@ -124,19 +134,9 @@ class SupervisionSafeSitesPreferenceTest {
 
         blockExplicitSitesWidget.performClick()
 
-        verifyConfirmSupervisionCredentialsActivityStarted(
-            SupervisionBlockExplicitSitesPreference.REQUEST_CODE_SUPERVISION_CREDENTIALS
-        )
+        verifyConfirmSupervisionCredentialsActivity()
+        blockExplicitSitesPreference.onConfirmCredentials(ActivityResult(Activity.RESULT_OK, null))
 
-        val result =
-            blockExplicitSitesPreference.onActivityResult(
-                mockLifeCycleContext,
-                SupervisionBlockExplicitSitesPreference.REQUEST_CODE_SUPERVISION_CREDENTIALS,
-                Activity.RESULT_OK,
-                null,
-            )
-
-        assertThat(result).isTrue()
         assertThat(blockExplicitSitesWidget.isChecked).isTrue()
         assertThat(
                 Settings.Secure.getInt(
@@ -154,19 +154,9 @@ class SupervisionSafeSitesPreferenceTest {
         assertThat(allowAllSitesWidget.isChecked).isFalse()
         allowAllSitesWidget.performClick()
 
-        verifyConfirmSupervisionCredentialsActivityStarted(
-            SupervisionAllowAllSitesPreference.REQUEST_CODE_SUPERVISION_CREDENTIALS
-        )
+        verifyConfirmSupervisionCredentialsActivity()
+        allowAllSitesPreference.onConfirmCredentials(ActivityResult(Activity.RESULT_OK, null))
 
-        val result =
-            allowAllSitesPreference.onActivityResult(
-                mockLifeCycleContext,
-                SupervisionAllowAllSitesPreference.REQUEST_CODE_SUPERVISION_CREDENTIALS,
-                Activity.RESULT_OK,
-                null,
-            )
-
-        assertThat(result).isTrue()
         assertThat(allowAllSitesWidget.isChecked).isTrue()
         assertThat(
                 Settings.Secure.getInt(
@@ -202,14 +192,16 @@ class SupervisionSafeSitesPreferenceTest {
         return widget
     }
 
-    private fun verifyConfirmSupervisionCredentialsActivityStarted(requestCode: Int) {
-        val intentCaptor = argumentCaptor<Intent>()
+    private fun mockConfirmSupervisionCredentialsActivity() {
+        `when`(mockLifeCycleContext.registerForActivityResult(any<StartActivityForResult>(), any()))
+            .thenReturn(mockActivityResultLauncher)
+    }
 
-        verify(mockLifeCycleContext)
-            .startActivityForResult(intentCaptor.capture(), eq(requestCode), eq(null))
+    private fun verifyConfirmSupervisionCredentialsActivity() {
+        val intentCaptor = argumentCaptor<Intent>()
+        verify(mockActivityResultLauncher).launch(intentCaptor.capture())
 
         assertThat(intentCaptor.allValues.size).isEqualTo(1)
-
         assertThat(intentCaptor.firstValue.component?.className)
             .isEqualTo(ConfirmSupervisionCredentialsActivity::class.java.name)
     }

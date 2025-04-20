@@ -19,6 +19,7 @@ package com.android.settings.accessibility;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
+import static com.android.settings.testutils.AccessibilityTestUtils.assertEditShortcutsScreenShown;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -27,13 +28,10 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.icu.text.CaseMap;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -50,9 +48,6 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
-import com.android.settings.SubSettings;
-import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager;
 import com.android.settings.testutils.shadow.ShadowFragment;
 
@@ -166,14 +161,7 @@ public class AccessibilityShortcutPreferenceFragmentTest {
 
         mFragment.onSettingsClicked(shortcutPreference);
 
-        Intent intent = shadowOf(
-                (Application) context.getApplicationContext()).getNextStartedActivity();
-        assertThat(intent).isNotNull();
-        assertThat(intent.getAction()).isEqualTo(Intent.ACTION_MAIN);
-        assertThat(intent.getComponent()).isEqualTo(
-                new ComponentName(context, SubSettings.class));
-        assertThat(intent.getExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
-                .isEqualTo(EditShortcutsPreferenceFragment.class.getName());
+        assertEditShortcutsScreenShown(mFragment);
     }
 
     @Test

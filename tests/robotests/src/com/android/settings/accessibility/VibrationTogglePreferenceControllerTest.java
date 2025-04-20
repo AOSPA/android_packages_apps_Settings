@@ -171,4 +171,4 @@ public class VibrationTogglePreferenceControllerTest {
         return Settings.System.getInt(mContext.getContentResolver(), settingKey);
     }
 }
-// LINT.ThenChange(VibrationIntensitySwitchPreferenceTestCase.java)
+// LINT.ThenChange(VibrationIntensitySwitchPreferenceTestCase.kt)

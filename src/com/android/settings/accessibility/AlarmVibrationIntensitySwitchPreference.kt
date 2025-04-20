@@ -19,7 +19,7 @@ import android.os.VibrationAttributes
 import android.provider.Settings
 import com.android.settings.R
 
-/** Accessibility settings for alarm vibration. */
+/** Accessibility settings for alarm vibration, as a switch toggle. */
 // LINT.IfChange
 class AlarmVibrationIntensitySwitchPreference :
     VibrationIntensitySwitchPreference(

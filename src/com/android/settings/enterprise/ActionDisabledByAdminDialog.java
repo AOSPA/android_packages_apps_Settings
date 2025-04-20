@@ -31,6 +31,9 @@ import android.security.advancedprotection.AdvancedProtectionManager;
 
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.widget.SettingsThemeHelper;
+import com.android.settingslib.widget.theme.R;
+import com.android.settingslib.widget.theme.flags.Flags;
 
 public class ActionDisabledByAdminDialog extends Activity
         implements DialogInterface.OnDismissListener {
@@ -39,6 +42,9 @@ public class ActionDisabledByAdminDialog extends Activity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (Flags.isExpressiveDesignEnabled() && SettingsThemeHelper.isExpressiveTheme(this)) {
+            setTheme(R.style.Theme_AlertDialog_SettingsLib_Expressive);
+        }
         super.onCreate(savedInstanceState);
         final RestrictedLockUtils.EnforcedAdmin enforcedAdmin =
                 getAdminDetailsFromIntent(getIntent());

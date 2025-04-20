@@ -18,7 +18,6 @@ package com.android.settings.spa.app.catalyst
 
 import android.content.Context
 import android.content.Intent
-import android.content.pm.ApplicationInfo
 import android.os.Bundle
 import android.os.UserHandle
 import androidx.core.net.toUri
@@ -28,17 +27,12 @@ import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.flags.Flags
 import com.android.settings.spa.app.storage.StorageType
 import com.android.settingslib.applications.StorageStatsSource
-import com.android.settingslib.datastore.KeyValueStore
-import com.android.settingslib.datastore.NoOpKeyedObservable
-import com.android.settingslib.metadata.LongValuePreference
 import com.android.settingslib.metadata.PreferenceHierarchy
 import com.android.settingslib.metadata.PreferenceHierarchyGenerator
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
-import com.android.settingslib.metadata.ReadWritePermit
-import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.asyncPreferenceHierarchy
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceFragment
@@ -54,7 +48,6 @@ class AppInfoStorageScreen(
     private val context: Context,
     override val arguments: Bundle
 ) : PreferenceScreenCreator,
-    LongValuePreference,
     PreferenceHierarchyGenerator<Int>,
     PreferenceSummaryProvider,
     PreferenceTitleProvider {
@@ -66,9 +59,6 @@ class AppInfoStorageScreen(
 
     override val key: String
         get() = KEY
-
-    override val sensitivityLevel: @SensitivityLevel Int
-        get() = SensitivityLevel.NO_SENSITIVITY
 
     override val screenTitle: Int
         get() = R.string.storage_label
@@ -128,16 +118,6 @@ class AppInfoStorageScreen(
         }
     }
 
-    override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
-        ReadWritePermit.ALLOW
-
-    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
-        ReadWritePermit.DISALLOW
-
-    override fun storage(context: Context): KeyValueStore {
-        return AppStorageStore(context, appInfo)
-    }
-
     companion object {
         const val KEY = "app_info_storage_screen"
 
@@ -156,32 +136,6 @@ class AppInfoStorageScreen(
                 }
             }
         }
-    }
-}
-
-private class AppStorageStore(
-    private val context: Context,
-    private val appInfo: ApplicationInfo
-) :
-    NoOpKeyedObservable<String>(),
-    KeyValueStore {
-
-    override fun contains(key: String): Boolean {
-        return true
-    }
-
-    override fun <T : Any> getValue(
-        key: String,
-        valueType: Class<T>
-    ): T? {
-        return (AppStorageRepositoryImpl(context).calculateSizeBytes(appInfo) ?: 0L) as T
-    }
-
-    override fun <T : Any> setValue(
-        key: String,
-        valueType: Class<T>,
-        value: T?
-    ) {
     }
 }
 

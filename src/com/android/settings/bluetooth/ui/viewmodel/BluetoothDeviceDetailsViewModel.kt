@@ -41,7 +41,6 @@ import kotlinx.coroutines.flow.map
 
 class BluetoothDeviceDetailsViewModel(
     private val application: Application,
-    private val bluetoothAdapter: BluetoothAdapter,
     private val cachedDevice: CachedBluetoothDevice,
     backgroundCoroutineContext: CoroutineContext,
 ) : AndroidViewModel(application) {
@@ -49,12 +48,11 @@ class BluetoothDeviceDetailsViewModel(
     private val deviceSettingRepository =
         featureFactory.bluetoothFeatureProvider.getDeviceSettingRepository(
             application,
-            bluetoothAdapter,
             viewModelScope,
         )
 
     private val items =
-        viewModelScope.async(backgroundCoroutineContext, start = CoroutineStart.LAZY) {
+        viewModelScope.async(start = CoroutineStart.LAZY) {
             deviceSettingRepository.getDeviceSettingsConfig(cachedDevice)
         }
 
@@ -137,7 +135,6 @@ class BluetoothDeviceDetailsViewModel(
 
     class Factory(
         private val application: Application,
-        private val bluetoothAdapter: BluetoothAdapter,
         private val cachedDevice: CachedBluetoothDevice,
         private val backgroundCoroutineContext: CoroutineContext,
     ) : ViewModelProvider.Factory {
@@ -145,7 +142,6 @@ class BluetoothDeviceDetailsViewModel(
             @Suppress("UNCHECKED_CAST")
             return BluetoothDeviceDetailsViewModel(
                 application,
-                bluetoothAdapter,
                 cachedDevice,
                 backgroundCoroutineContext,
             )

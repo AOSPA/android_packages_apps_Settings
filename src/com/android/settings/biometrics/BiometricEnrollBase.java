@@ -25,6 +25,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.os.UserHandle;
+import android.text.Layout;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -324,6 +325,7 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
 
     protected void setHeaderText(int resId, boolean force) {
         TextView layoutTitle = getLayout().getHeaderTextView();
+        layoutTitle.setHyphenationFrequency(Layout.HYPHENATION_FREQUENCY_NONE);
         CharSequence previousTitle = layoutTitle.getText();
         CharSequence title = getText(resId);
         if (previousTitle != title || force) {

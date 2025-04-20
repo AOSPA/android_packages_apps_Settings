@@ -119,11 +119,7 @@ public class AccessibilityHearingAidsFragment extends AccessibilityShortcutPrefe
             new BaseSearchIndexProvider(R.xml.accessibility_hearing_aids) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    if (Flags.fixA11ySettingsSearch()) {
-                        return AccessibilityHearingAidsFragment.isPageSearchEnabled(context);
-                    } else {
-                        return super.isPageSearchEnabled(context);
-                    }
+                    return AccessibilityHearingAidsFragment.isPageSearchEnabled(context);
                 }
             };
 }

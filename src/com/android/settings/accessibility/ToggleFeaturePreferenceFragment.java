@@ -59,7 +59,6 @@ import com.android.internal.accessibility.util.ShortcutUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
-import com.android.settings.flags.Flags;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.IllustrationPreference;
@@ -481,9 +480,6 @@ public abstract class ToggleFeaturePreferenceFragment extends BaseSupportFragmen
     @VisibleForTesting
     @Nullable
     Preference createAppInfoPreference() {
-        if (!Flags.accessibilityShowAppInfoButton()) {
-            return null;
-        }
         // App Info is not available in Setup Wizard.
         if (isAnySetupWizard()) {
             return null;

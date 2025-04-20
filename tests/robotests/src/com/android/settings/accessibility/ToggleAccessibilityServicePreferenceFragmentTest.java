@@ -17,18 +17,16 @@
 package com.android.settings.accessibility;
 
 import static com.android.internal.accessibility.common.ShortcutConstants.USER_SHORTCUT_TYPES;
+import static com.android.settings.testutils.AccessibilityTestUtils.assertEditShortcutsScreenShown;
+import static com.android.settings.testutils.AccessibilityTestUtils.assertShortcutsTutorialDialogShown;
 
 import static com.google.common.truth.Truth.assertThat;
-
-import static org.robolectric.Shadows.shadowOf;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.ContextWrapper;
-import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -46,9 +44,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.accessibility.common.ShortcutConstants;
-import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager;
 
 import org.junit.After;
@@ -221,9 +217,8 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
 
         mFragment.mShortcutPreference.setChecked(true);
         mFragment.onToggleClicked(mFragment.mShortcutPreference);
-        ShadowLooper.idleMainLooper();
 
-        assertShortcutsTutorialDialogShown();
+        assertShortcutsTutorialDialogShown(mFragment);
     }
 
     @Test
@@ -254,10 +249,7 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
         showFragment(serviceInfo);
         mFragment.onSettingsClicked(mFragment.mShortcutPreference);
 
-        Intent intent = shadowOf((ContextWrapper) mFragment.getContext()).peekNextStartedActivity();
-        assertThat(intent).isNotNull();
-        assertThat(intent.getExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT)).isEqualTo(
-                EditShortcutsPreferenceFragment.class.getName());
+        assertEditShortcutsScreenShown(mFragment);
     }
 
     @Test
@@ -459,14 +451,6 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
         int dialogId =
                 ((SettingsPreferenceFragment.SettingsDialogFragment) dialogFragment).getDialogId();
         assertThat(dialogId).isEqualTo(dialogEnum);
-    }
-
-    private void assertShortcutsTutorialDialogShown() {
-        List<Fragment> fragments = mFragment.getChildFragmentManager().getFragments();
-        assertThat(fragments).isNotEmpty();
-        assertThat(fragments).hasSize(1);
-        assertThat(fragments.getFirst()).isInstanceOf(
-                AccessibilityShortcutsTutorial.DialogFragment.class);
     }
 
     private void assertEnabledShortcuts(ComponentName componentName, int expectedShortcutTypes) {

@@ -1057,6 +1057,8 @@
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks">Not now</string>
     <!-- Button text to agree the consent and continue to the next screen from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_introduction_agree">I agree</string>
+    <!-- The content description for rename a fingerprint. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_rename_description">Double tap to rename</string>
     <!-- Title of dialog shown when the user tries to skip setting up fingerprint after adding lock screen during initial setup. [CHAR LIMIT=30] -->
     <string name="setup_fingerprint_enroll_skip_title">Skip fingerprint?</string>
     <!-- Body text of dialog shown when the user tries to skip setting up fingerprint after adding lock screen during initial setup [CHAR LIMIT=NONE] -->
@@ -3356,20 +3358,20 @@
     <string name="screensaver_settings_when_to_dream_bedtime">Unavailable because bedtime mode is on</string>
     <!-- The title for the toggle which disables/enables screen savers [CHAR_LIMIT=30] -->
     <string name="screensaver_settings_toggle_title">Use screen saver</string>
-    <!-- Display settings screen, summary fragment for screen saver options, activated when docked or asleep and charging [CHAR LIMIT=35] -->
+    <!-- Display settings screen, summary fragment for screen saver options, activated when docked or asleep and charging [CHAR LIMIT=40] -->
     <string name="screensaver_settings_summary_either_long">While charging or docked</string>
-    <!-- Display settings screen, summary fragment for screen saver options, actived while docked and charging [CHAR LIMIT=35] -->
+    <!-- Display settings screen, summary fragment for screen saver options, actived while docked and charging [CHAR LIMIT=40] -->
     <string name="screensaver_settings_summary_dock_and_charging">While docked and charging</string>
-    <!-- Display settings screen, summary fragment for screen saver options, activated when asleep and charging [CHAR LIMIT=35] -->
+    <!-- Display settings screen, summary fragment for screen saver options, activated when asleep and charging [CHAR LIMIT=40] -->
     <string name="screensaver_settings_summary_sleep">While charging</string>
-    <!-- Display settings screen, summary fragment for screen saver options, activated when docked [CHAR LIMIT=35] -->
+    <!-- Display settings screen, summary fragment for screen saver options, activated when docked [CHAR LIMIT=40] -->
     <string name="screensaver_settings_summary_dock">While docked</string>
-    <!-- Display settings screen, summary fragment for screen saver options, activated never [CHAR LIMIT=35] -->
+    <!-- Display settings screen, summary fragment for screen saver options, activated never [CHAR LIMIT=40] -->
     <string name="screensaver_settings_summary_never">Never</string>
-    <!-- Summary for when screensaver is enabled, only while stationary and upright [CHAR LIMIT=35] -->
-    <string name="screensaver_settings_summary_postured">While postured</string>
-    <!-- Summary for when screensaver is enabled, only while stationary and upright and charging [CHAR LIMIT=35] -->
-    <string name="screensaver_settings_summary_postured_and_charging">While postured and charging</string>
+    <!-- Summary for when screensaver is enabled, only while stationary and upright [CHAR LIMIT=40] -->
+    <string name="screensaver_settings_summary_postured">While upright</string>
+    <!-- Summary for when screensaver is enabled, only while stationary and upright and charging [CHAR LIMIT=40] -->
+    <string name="screensaver_settings_summary_postured_and_charging">While upright and charging</string>
     <!-- Display settings screen, summary for screen saver options, screen saver is turned on [CHAR LIMIT=50] -->
     <string name="screensaver_settings_summary_on">
         On / <xliff:g id="screen_saver" example="Art gallery">%1$s</xliff:g>
@@ -3793,10 +3795,10 @@
     <string name="when_to_show_hubmode_never">Never</string>
     <!-- Summary for when to automatically show hub mode (widgets on lockscreen): charging  [CHAR LIMIT=100] -->
     <string name="when_to_show_hubmode_charging">While charging</string>
-    <!-- Summary for when to automatically show hub mode (widgets on lockscreen): charging and upright  [CHAR LIMIT=100] -->
-    <string name="when_to_show_hubmode_charging_and_upright">While charging and upright</string>
-    <!-- Summary for when to automatically show hub mode (widgets on lockscreen): docked  [CHAR LIMIT=100] -->
-    <string name="when_to_show_hubmode_docked">While docked</string>
+    <!-- Summary for when to automatically show hub mode (widgets on lockscreen): upright and charging  [CHAR LIMIT=100] -->
+    <string name="when_to_show_hubmode_charging_and_upright">While upright and charging</string>
+    <!-- Summary for when to automatically show hub mode (widgets on lockscreen): docked and charging [CHAR LIMIT=100] -->
+    <string name="when_to_show_hubmode_docked">While docked and charging</string>
 
     <!-- Title of toggle preference in glanceable hub "when to start" screen to restrict to starting only when charging wirelessly [CHAR LIMIT=NONE] -->
     <string name="hub_restrict_to_wireless_charging_title">Restrict to wireless charging</string>
@@ -11736,9 +11738,9 @@ Data usage charges may apply.</string>
     <!-- Description text for tip suggesting user to modify lockscreen shortcut. [CHAR LIMIT=200]-->
     <string name="double_tap_power_lockscreen_shortcut_tip_description"><xliff:g id="double_tap_power_target_action" example="Camera">%1$s</xliff:g> is also your lock screen shortcut. Want to change it?</string>
     <!-- Title for footer explaining why wallet is not available for the double tap power gesture. [CHAR LIMIT=200]-->
-    <string name="double_tap_power_wallet_footer_title">Wallet is not available. Your current default wallet app does not support the gesture.</string>
+    <string name="double_tap_power_wallet_footer_title">Your current default wallet app does not support this gesture</string>
     <!-- Summary for footer explaining why wallet is not available for the double tap power gesture. [CHAR LIMIT=100]-->
-    <string name="double_tap_power_wallet_footer_learn_more_text">Tap here to change it.</string>
+    <string name="double_tap_power_wallet_footer_learn_more_text">Change default wallet</string>
 
 
     <!-- Title text for double twist for camera mode [CHAR LIMIT=60]-->
@@ -12925,41 +12927,41 @@ Data usage charges may apply.</string>
     <!-- _satellite_setting_preference_layout screen title-->
     <string name="satellite_setting">Satellite connectivity</string>
     <!-- Summary for satellite setting preference. [CHAR LIMIT=NONE]-->
-    <string name="satellite_setting_enabled_summary">Send and receive text messages by satellite. Included with your account.</string>
+    <string name="satellite_setting_enabled_summary">Send and receive text messages over satellite. Included with your account.</string>
     <!-- Summary for satellite setting preference. [CHAR LIMIT=NONE]-->
-    <string name="satellite_setting_disabled_summary">Send and receive text messages by satellite. Not included with your account.</string>
+    <string name="satellite_setting_disabled_summary">Send and receive text messages over satellite. Not included with your account.</string>
     <!-- Summary for satellite setting preference without entitlement [CHAR LIMIT=NONE]-->
-    <string name="satellite_setting_summary_without_entitlement">Send and receive text messages by satellite. Contact your carrier for details.</string>
+    <string name="satellite_setting_summary_without_entitlement">Send and receive text messages over satellite. Contact your carrier for details.</string>
     <!-- Search keywords for "_satellite_setting_preference_layout" [CHAR_LIMIT=NONE] -->
     <string name="keywords_satellite_setting">Satellite messaging, satellite connectivity</string>
     <!-- Category name "About satellite connectivity" [CHAR_LIMIT=NONE] -->
     <string name="category_name_about_satellite_connectivity">About satellite connectivity</string>
     <!-- Description for category "About satellite connectivity" [CHAR_LIMIT=NONE] -->
-    <string name="description_about_satellite_setting">You can send and receive text messages and use some apps by satellite with an eligible <xliff:g id="carrier_name" example="T-Mobile">%1$s</xliff:g> account</string>
+    <string name="description_about_satellite_setting">You can send and receive text messages over satellite with an eligible <xliff:g id="carrier_name" example="T-Mobile">%1$s</xliff:g> account</string>
     <!-- Category title "Your mobile plan" [CHAR_LIMIT=NONE] -->
     <string name="category_title_your_satellite_plan">Your <xliff:g id="carrier_name" example="T-Mobile">%1$s</xliff:g> account</string>
     <!-- Title for category "Your mobile plan when satellite is included in plan" [CHAR_LIMIT=NONE] -->
-    <string name="title_have_satellite_plan">Satellite messaging is included with your account</string>
+    <string name="title_have_satellite_plan">Messaging is included with your account</string>
     <!-- Title for category "Your mobile plan when satellite is not included in plan" [CHAR_LIMIT=NONE] -->
-    <string name="title_no_satellite_plan">Satellite messaging isn\u2019t included with your account</string>
+    <string name="title_no_satellite_plan">Messaging isn\u2019t included with your account</string>
     <!-- text view "Learn more" [CHAR_LIMIT=NONE] -->
     <string name="summary_add_satellite_setting">Learn More</string>
     <!-- Category name "How it works" [CHAR_LIMIT=NONE] -->
     <string name="category_name_how_it_works">How it works</string>
     <!-- Title for satellite connection guide [CHAR_LIMIT=NONE] -->
-    <string name="title_satellite_connection_guide">When you don\u2019t have a mobile network</string>
+    <string name="title_satellite_connection_guide">When you don\u2019t have a mobile or Wi-Fi network</string>
     <!-- Title for satellite connection guide for NTN manual connection type. [CHAR_LIMIT=NONE] -->
     <string name="title_satellite_connection_guide_for_manual_type">Text a phone number</string>
     <!-- Summary for satellite connection guide [CHAR_LIMIT=NONE] -->
     <string name="summary_satellite_connection_guide">Your phone will auto-connect to a satellite. For the best connection, keep a clear view of the sky.</string>
     <!-- Summary for satellite connection guide for NTN manual connection type. [CHAR_LIMIT=NONE] -->
-    <string name="summary_satellite_connection_guide_for_manual_type">If you don\u2019t have a mobile network, you\u2019ll see an option to use satellite messaging.</string>
+    <string name="summary_satellite_connection_guide_for_manual_type">If you don\u2019t have a mobile network, you\u2019ll see an option to use satellite.</string>
     <!-- Title for satellite supported service [CHAR_LIMIT=NONE] -->
     <string name="title_supported_service">After your phone connects to a satellite</string>
     <!-- Title for satellite supported service for NTN manual connection type. [CHAR_LIMIT=NONE] -->
     <string name="title_supported_service_for_manual_type">Follow steps to connect to the satellite</string>
     <!-- Summary for satellite supported service [CHAR_LIMIT=NONE] -->
-    <string name="summary_supported_service">You can text anyone, including emergency services. Your phone will reconnect to a mobile network when available.</string>
+    <string name="summary_supported_service">You can text anyone, including emergency services, and use limited data on some apps. Your phone will reconnect to a mobile network when available.</string>
     <!-- Summary for satellite supported service for NTN manual connection type. [CHAR_LIMIT=NONE] -->
     <string name="summary_supported_service_for_manual_type">After your phone is connected, you can text anyone, including emergency services.</string>
     <!-- learn more text - title of disclaimer of satellite connectivity  [CHAR_LIMIT=NONE] -->
@@ -12969,11 +12971,11 @@ Data usage charges may apply.</string>
     <!-- learn more text - part 2 of disclaimer of satellite connectivity [CHAR_LIMIT=NONE] -->
     <string name="satellite_footer_content_section_2">Weather and certain structures may affect your satellite connection.</string>
     <!-- learn more text - part 3 of disclaimer of satellite connectivity [CHAR_LIMIT=NONE] -->
-    <string name="satellite_footer_content_section_3">Calling by satellite isn\u2019t available.</string>
+    <string name="satellite_footer_content_section_3">Calling over satellite isn\u2019t available.</string>
     <!-- learn more text - part 4 of disclaimer of satellite connectivity [CHAR_LIMIT=NONE] -->
     <string name="satellite_footer_content_section_4">Emergency calls may still connect.</string>
     <!-- learn more text - part 5 of disclaimer of satellite connectivity [CHAR_LIMIT=NONE] -->
-    <string name="satellite_footer_content_section_5">Mobile or Wi\u2011Fi network required to view external links.</string>
+    <string name="satellite_footer_content_section_5">A mobile or Wi\u2011Fi network is required to view external links.</string>
     <!-- learn more text - part 6 of disclaimer of satellite connectivity [CHAR_LIMIT=NONE] -->
     <string name="satellite_footer_content_section_6">Texting with emergency services may not be available in all areas.</string>
     <!-- learn more text - part 7 of disclaimer of satellite connectivity [CHAR_LIMIT=NONE] -->
@@ -12997,7 +12999,7 @@ Data usage charges may apply.</string>
     <!-- Category title for Satellite supported apps info  [CHAR LIMIT=60] -->
     <string name="category_title_satellite_supported_apps">Supported apps on your phone</string>
     <!-- Title for a entry to start apps list page with Satellite service supported.  [CHAR LIMIT=60] -->
-    <string name="title_satellite_supported_app_list_entry">see all apps</string>
+    <string name="title_satellite_supported_app_list_entry">See all apps supported by satellite</string>
     <!-- Title for a page of apps list page with Satellite service supported.  [CHAR LIMIT=60] -->
     <string name="title_satellite_supported_app_list_page">Supported apps on your phone</string>
     <!-- Title for showing a dialog to notify user sim restriction.  [CHAR LIMIT=60] -->

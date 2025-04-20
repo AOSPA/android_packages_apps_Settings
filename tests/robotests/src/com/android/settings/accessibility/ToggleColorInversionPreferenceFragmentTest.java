@@ -33,9 +33,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,7 +51,6 @@ import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -72,8 +68,6 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowFragment.class)
 public class ToggleColorInversionPreferenceFragmentTest {
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private TestToggleColorInversionPreferenceFragment mFragment;
     private PreferenceScreen mScreen;
@@ -187,21 +181,7 @@ public class ToggleColorInversionPreferenceFragmentTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
-    public void getRawDataToIndex_flagOff_returnShortcutIndexablePreferences() {
-        List<SearchIndexableRaw> rawData = ToggleColorInversionPreferenceFragment
-                .SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, /* enabled= */ true);
-
-        assertThat(rawData).hasSize(1);
-        assertThat(rawData.get(0).key).isEqualTo(KEY_SHORTCUT_PREFERENCE);
-        assertThat(rawData.get(0).title).isEqualTo(mContext.getString(
-                R.string.accessibility_display_inversion_shortcut_title));
-
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
-    public void getRawDataToIndex_flagOn_returnAllIndexablePreferences() {
+    public void getRawDataToIndex_returnAllIndexablePreferences() {
         String[] expectedKeys = {KEY_SHORTCUT_PREFERENCE, KEY_SWITCH_PREFERENCE};
         String[] expectedTitles = {
                 mContext.getString(R.string.accessibility_display_inversion_shortcut_title),

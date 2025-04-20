@@ -72,18 +72,18 @@ class SupervisionMainSwitchPreference(context: Context) :
     }
 
     override fun onActivityResult(
-        context: PreferenceLifecycleContext,
+        unused: PreferenceLifecycleContext,
         requestCode: Int,
         resultCode: Int,
         data: Intent?,
     ): Boolean {
         if (resultCode == Activity.RESULT_OK) {
             val mainSwitchPreference =
-                context.requirePreference<com.android.settingslib.widget.MainSwitchPreference>(KEY)
+                lifeCycleContext.requirePreference<com.android.settingslib.widget.MainSwitchPreference>(KEY)
             val newValue = !supervisionMainSwitchStorage.getBoolean(KEY)!!
             mainSwitchPreference.setChecked(newValue)
             updateDependentPreferencesEnabledState(mainSwitchPreference, newValue)
-            context.notifyPreferenceChange(SupervisionPinManagementScreen.KEY)
+            lifeCycleContext.notifyPreferenceChange(SupervisionPinManagementScreen.KEY)
         }
 
         return true

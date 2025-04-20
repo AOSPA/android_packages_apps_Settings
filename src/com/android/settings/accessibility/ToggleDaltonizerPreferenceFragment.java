@@ -210,19 +210,17 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
                     final List<SearchIndexableRaw> rawData =
                             super.getRawDataToIndex(context, enabled);
 
-                    if (Flags.fixA11ySettingsSearch()) {
-                        SearchIndexableRaw shortcutRaw = new SearchIndexableRaw(context);
-                        shortcutRaw.key = KEY_SHORTCUT_PREFERENCE;
-                        shortcutRaw.title = context.getString(
-                                R.string.accessibility_daltonizer_shortcut_title);
-                        rawData.add(shortcutRaw);
+                    SearchIndexableRaw shortcutRaw = new SearchIndexableRaw(context);
+                    shortcutRaw.key = KEY_SHORTCUT_PREFERENCE;
+                    shortcutRaw.title = context.getString(
+                            R.string.accessibility_daltonizer_shortcut_title);
+                    rawData.add(shortcutRaw);
 
-                        SearchIndexableRaw mainSwitchRaw = new SearchIndexableRaw(context);
-                        mainSwitchRaw.key = KEY_SWITCH_PREFERENCE;
-                        mainSwitchRaw.title = context.getString(
-                                R.string.accessibility_daltonizer_primary_switch_title);
-                        rawData.add(mainSwitchRaw);
-                    }
+                    SearchIndexableRaw mainSwitchRaw = new SearchIndexableRaw(context);
+                    mainSwitchRaw.key = KEY_SWITCH_PREFERENCE;
+                    mainSwitchRaw.title = context.getString(
+                            R.string.accessibility_daltonizer_primary_switch_title);
+                    rawData.add(mainSwitchRaw);
                     return rawData;
                 }
             };

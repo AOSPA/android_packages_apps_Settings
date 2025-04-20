@@ -43,15 +43,11 @@ public class AccessibilityButtonPreferenceController extends BasePreferenceContr
 
     @Override
     public int getAvailabilityStatus() {
-        if (!com.android.settings.accessibility.Flags.fixA11ySettingsSearch()) {
-            return AVAILABLE;
+        if (mContext.getSystemService(AccessibilityManager.class)
+                .getAccessibilityShortcutTargets(SOFTWARE).isEmpty()) {
+            return DISABLED_DEPENDENT_SETTING;
         } else {
-            if (mContext.getSystemService(AccessibilityManager.class)
-                    .getAccessibilityShortcutTargets(SOFTWARE).isEmpty()) {
-                return DISABLED_DEPENDENT_SETTING;
-            } else {
-                return AVAILABLE;
-            }
+            return AVAILABLE;
         }
     }
 
