@@ -58,7 +58,7 @@
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Nooit"</string>
     <string name="sleep_on_fold_summary" msgid="4191753338303043456">"Het scherm aan de voorkant gaat uit en wordt vergrendeld als je het apparaat dichtvouwt"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Automatisch draaien gebruiken"</string>
-    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Gezichtsherkenning gebruikt de camera aan de voorzijde om de nauwkeurigheid van automatisch draaien te verbeteren. Afbeeldingen worden nooit opgeslagen of naar Google gestuurd."</string>
+    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Gezichtsherkenning gebruikt de camera aan de voorkant om de nauwkeurigheid van automatisch draaien te verbeteren. De afbeeldingen worden nooit opgeslagen of naar Google gestuurd."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
     <string name="bluetooth_is_discoverable" msgid="4798961627677790935">"Zichtbaar voor alle Bluetooth-apparaten in de buurt (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="8122823110652921674">"Zichtbaar voor alle Bluetooth-apparaten in de buurt"</string>
@@ -344,7 +344,9 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Aan: # app heeft toegang tot de locatie}other{Aan: # apps hebben toegang tot de locatie}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Laden…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Apps met rechten voor apparaten in de buurt kunnen de relatieve positie van verbonden apparaten bepalen."</string>
-    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <!-- no translation found for location_settings_footer_location_off_with_telephony (5600725945541382556) -->
+    <skip />
+    <!-- no translation found for location_settings_footer_location_off_no_telephony (2709958040008816610) -->
     <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Meer informatie over locatie-instellingen"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Wijzig dit via ChromeOS-instellingen &gt; Privacy en beveiliging &gt; Privacyopties &gt; Locatietoegang"</string>
@@ -414,7 +416,7 @@
     <string name="security_settings_face_footer_description_class3" msgid="2639208414351635622"></string>
     <string name="security_settings_face_footer_learn_more_description" msgid="1418112576619086897"></string>
     <string name="security_settings_face_settings_face_category" msgid="60058016983772899">"Gezicht"</string>
-    <string name="security_settings_face_settings_use_face_to_category" msgid="3349153603335284583">"Gezicht gebruiken om"</string>
+    <string name="security_settings_face_settings_use_face_to_category" msgid="3349153603335284583">"Gezicht gebruiken om het volgende te doen"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Als je ontgrendelt via gezichtsherkenning"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Vereisen dat ogen open zijn"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Je ogen moeten open zijn om de telefoon te ontgrendelen"</string>
@@ -709,9 +711,9 @@
     <string name="private_space_setup_title" msgid="2272968244329821450">"Privégedeelte"</string>
     <string name="private_space_hide_apps_summary" msgid="4418722947376042418">"Verberg of vergrendel privé-apps in een afzonderlijk gedeelte. Gebruik voor extra beveiliging een apart Google-account."</string>
     <string name="private_space_setup_sub_header" msgid="550476876393954356">"Hoe het werkt"</string>
-    <string name="private_space_separate_account_text" msgid="790319706810190320"><b>"Een Google account maken voor je gedeelte"</b>\n"Als je een speciaal account gebruikt, kan dit voorkomen dat gesynchroniseerde bestanden, foto\'s en e-mails buiten je gedeelte verschijnen"</string>
-    <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"Stel een vergrendeling in"</b>\n"Vergrendel je privégedeelte, zodat anderen het niet kunnen openen."</string>
-    <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Apps installeren"</b>\n"Installeer apps die je privé wilt houden in je gedeelte"</string>
+    <string name="private_space_separate_account_text" msgid="790319706810190320"><b>"Maak een Google account voor je gedeelte"</b>\n"Een afzonderlijk account gebruiken helpt voorkomen dat gesynchroniseerde bestanden, foto\'s en e-mails buiten je gedeelte verschijnen"</string>
+    <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"Stel een vergrendeling in"</b>\n"Vergrendel je privégedeelte, zodat anderen het niet kunnen openen"</string>
+    <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Installeer apps"</b>\n"Installeer apps die je privé wilt houden in je gedeelte"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Goed om te weten"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Apps stoppen als je je gedeelte vergrendelt"</b>\n"Als je je gedeelte vergrendelt, worden apps in je gedeelte gestopt en krijg je geen meldingen van de apps"</string>
     <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Privégedeelten zijn niet geschikt voor apps die op de achtergrond moeten worden uitgevoerd of die kritieke meldingen sturen, zoals medische apps. Dit komt omdat meldingen en achtergrondactiviteit worden gestopt als je gedeelte is vergrendeld.\n\nApps in je privégedeelte verschijnen niet in rechtenbeheer, het privacydashboard en andere instellingen als je privégedeelte is vergrendeld.\n\nJe privégedeelte kan niet worden verplaatst naar een nieuw apparaat. Je moet een nieuw privégedeelte instellen als je dit wilt gebruiken op een ander apparaat.\n\nIedereen die je apparaat aan een computer koppelt of schadelijke apps op je apparaat installeert, heeft mogelijk toegang tot je privégedeelte."</string>
@@ -755,7 +757,7 @@
     <string name="encryption_settings_title" msgid="2848716008695618360">"Versleuteling"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"Versleuteld"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Schermvergrendeling instellen"</string>
-    <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Stel een pincode, patroon of wachtwoord in voor dit apparaat voor extra beveiliging"</string>
+    <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Stel een pincode, patroon of wachtwoord in voor dit apparaat voor extra beveiliging."</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Schermvergrendeling instellen"</string>
     <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"Een schermvergrendeling instellen"</string>
     <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"Stel een pincode, patroon of wachtwoord in voor dit apparaat voor extra beveiliging."</string>
@@ -1030,8 +1032,7 @@
     <string name="android_beam_explained" msgid="5684416131846701256">"Als deze functie aanstaat, kun je app-content naar een ander NFC-apparaat beamen door de apparaten bij elkaar te houden. Je kunt bijvoorbeeld webpagina\'s, YouTube-video\'s, contacten en meer beamen.\n\nHoud de apparaten bij elkaar (meestal met de achterkanten tegen elkaar aan) en tik op je scherm. De app bepaalt wat er wordt gebeamd."</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wifi"</string>
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Wifi gebruiken"</string>
-    <!-- no translation found for wifi_networks_category (8011323954745036753) -->
-    <skip />
+    <string name="wifi_networks_category" msgid="8011323954745036753">"Netwerken"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Wifi-instellingen"</string>
     <string name="wifi_select_network" msgid="6692897876718813259">"Wifi selecteren"</string>
     <string name="wifi_starting" msgid="6147022683967506341">"Wifi aanzetten…"</string>
@@ -1041,7 +1042,7 @@
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"In vliegtuigmodus"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Melding voor openbare netwerken tonen"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Laat weten als er een netwerk van hoge kwaliteit beschikbaar is"</string>
-    <string name="wifi_allow_wep_networks" msgid="8772342993235292010">"WEP-netwerk toestaan"</string>
+    <string name="wifi_allow_wep_networks" msgid="8772342993235292010">"WEP-netwerken toestaan"</string>
     <string name="wifi_allow_wep_networks_summary" msgid="3033397893296724615">"WEP is een ouder beveiligingsprotocol dat minder goed beveiligd is"</string>
     <string name="wifi_allow_wep_networks_summary_carrier_not_allow" msgid="6298103289728210026">"Je provider staat WEP-netwerken niet toe omdat deze minder goed beveiligd zijn"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Wifi automatisch aanzetten"</string>
@@ -1212,22 +1213,14 @@
     <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> ‑ Opladen"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"Hotspot-verbinding"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"Verbindingssterkte"</string>
-    <!-- no translation found for ethernet_dns1 (6487470669719468602) -->
-    <skip />
-    <!-- no translation found for ethernet_dns2 (484620572555181363) -->
-    <skip />
-    <!-- no translation found for ethernet_gateway (4064061619318875567) -->
-    <skip />
-    <!-- no translation found for ethernet_network_prefix_length (3693127271457763198) -->
-    <skip />
-    <!-- no translation found for ethernet_ip_settings (3344064201878792090) -->
-    <skip />
-    <!-- no translation found for ethernet_config_submit (724743720212124025) -->
-    <skip />
-    <!-- no translation found for ethernet_config_cancel (986322993908814366) -->
-    <skip />
-    <!-- no translation found for ethernet_config_title (4784063109810004382) -->
-    <skip />
+    <string name="ethernet_dns1" msgid="6487470669719468602">"DNS 1 (tenzij overschreven door privé-DNS)"</string>
+    <string name="ethernet_dns2" msgid="484620572555181363">"DNS 2 (tenzij overschreven door privé-DNS)"</string>
+    <string name="ethernet_gateway" msgid="4064061619318875567">"Gateway"</string>
+    <string name="ethernet_network_prefix_length" msgid="3693127271457763198">"Lengte van netwerkprefix"</string>
+    <string name="ethernet_ip_settings" msgid="3344064201878792090">"IP-instellingen"</string>
+    <string name="ethernet_config_submit" msgid="724743720212124025">"Sturen"</string>
+    <string name="ethernet_config_cancel" msgid="986322993908814366">"Annuleren"</string>
+    <string name="ethernet_config_title" msgid="4784063109810004382">"Ethernet-instellingen"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Opgeslagen netwerken"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Abonnementen"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Andere netwerken"</string>
@@ -1375,7 +1368,7 @@
     <string name="adaptive_sleep_summary_no_permission" msgid="5822591289468803691">"Cameratoegang is vereist voor schermaandacht. Tik om de rechten voor personalisatieservices voor apparaat te beheren."</string>
     <string name="adaptive_sleep_manage_permission_button" msgid="1404510197847664846">"Rechten beheren"</string>
     <string name="adaptive_sleep_description" msgid="1835321775327187860">"Voorkom dat je scherm uitgaat als je ernaar kijkt"</string>
-    <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Schermaandacht gebruikt de camera aan de voorzijde om te zien of er iemand naar het scherm kijkt. Deze functie werkt op het apparaat zelf. De afbeeldingen worden nooit opgeslagen of naar Google gestuurd."</string>
+    <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Schermaandacht gebruikt de camera aan de voorkant om te zien of er iemand naar het scherm kijkt. Deze functie werkt op het apparaat zelf. De afbeeldingen worden nooit opgeslagen of naar Google gestuurd."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Schermaandacht aanzetten"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Houd het scherm aan als je ernaar kijkt"</string>
     <string name="power_consumption_footer_summary" msgid="4901490700555257237">"Een langere time-out voor het scherm verbruikt meer batterijlading."</string>
@@ -1456,8 +1449,7 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Uit"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Wanneer starten"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Optillen om te activeren"</string>
-    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
-    <skip />
+    <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Beperken tot draadloos opladen"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Inactief scherm"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Wanneer tonen"</string>
     <string name="doze_title" msgid="1523090408230862316">"Scherm activeren voor meldingen"</string>
@@ -1624,8 +1616,7 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Tijdens opladen"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"Tijdens rechtop opladen"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"Terwijl gedockt"</string>
-    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
-    <skip />
+    <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"Beperken tot draadloos opladen"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN\'s"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Toegangspunt bewerken"</string>
     <string name="apn_add" msgid="9069613192201630934">"Toegangspunt toevoegen"</string>
@@ -1739,8 +1730,7 @@
     <string name="rx_ethernet_speed" msgid="6642000569214969711">"Linksnelheid voor ontvangen"</string>
     <string name="ethernet_network_usage" msgid="3795965384177426780">"Netwerkgebruik"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernet-tethering"</string>
-    <!-- no translation found for ethernet_modify (1326316717004440503) -->
-    <skip />
+    <string name="ethernet_modify" msgid="1326316717004440503">"Aanpassen"</string>
     <string name="tethering_footer_info" msgid="6824352505979800594">"Gebruik hotspot en tethering om je dataverbinding te delen met andere apparaten. Apps kunnen ook hotspots maken om content te delen met apparaten in de buurt."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Gebruik hotspot en tethering om je wifi- of mobiele dataverbinding te delen met andere apparaten. Apps kunnen ook hotspots maken om content te delen met apparaten in de buurt."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Hulp"</string>
@@ -2168,6 +2158,8 @@
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Naar startscherm"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"Terug"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"Recente apps bekijken"</string>
+    <string name="three_finger_tap_launch_app_title" msgid="55761877549896819">"Andere app openen"</string>
+    <string name="three_finger_tap_launch_app_summary" msgid="2015894823281420733">"Kies uit een lijst met geïnstalleerde apps"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"Naar de homepage"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"Swipe ergens op je touchpad omhoog met 3 vingers"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"Terug"</string>
@@ -2392,10 +2384,10 @@
     <string name="accessibility_tutorial_dialog_twofinger_doubletap_instruction" msgid="1007756360115974649">"Tik snel 2 keer op het scherm met %1$d vingers om vergroting te starten en te stoppen"</string>
     <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="3715446725334547432">"{count,plural, =1{Swipe omlaag vanaf de bovenkant van het scherm om deze functie te gebruiken. Zoek daarna de tegel {featureName}.}other{Swipe met # vingers omlaag vanaf de bovenkant van het scherm om deze functie te gebruiken. Zoek daarna de tegel {featureName}.}}"</string>
     <string name="accessibility_tutorial_dialog_shortcut_unavailable_in_suw" msgid="3847728530771929959">"Dit snelle gebaar is beschikbaar nadat je het apparaat hebt ingesteld."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Als je deze functie wilt gebruiken, swipe je met twee vingers omhoog vanaf de onderkant van het scherm.\n\nSwipe met twee vingers omhoog en houd vast om tussen functies te schakelen."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Als je deze functie wilt gebruiken, swipe je met 2 vingers omhoog vanaf de onderkant van het scherm.\n\nSwipe met 2 vingers omhoog en houd je vingers op het scherm om tussen functies te wisselen."</string>
     <string name="accessibility_tutorial_dialog_gesture_shortcut_instruction" msgid="7349950768250852308">"{count,plural, =1{Als je deze functie wilt gebruiken, swipe je omhoog vanaf de onderkant van het scherm}other{Als je deze functie wilt gebruiken, swipe je met # vingers omhoog vanaf de onderkant van het scherm}}"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Als je deze functie wilt gebruiken, swipe je met 3 vingers omhoog vanaf de onderkant van het scherm.\n\nSwipe met 3 vingers omhoog en houd vast om tussen functies te schakelen."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Als je een toegankelijkheidsfunctie wilt gebruiken, swipe je met twee vingers omhoog vanaf de onderkant van het scherm.\n\nSwipe met twee vingers omhoog en houd vast om tussen functies te schakelen."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Als je een toegankelijkheidsfunctie wilt gebruiken, swipe je met 2 vingers omhoog vanaf de onderkant van het scherm.\n\nSwipe met 2 vingers omhoog en houd je vingers op het scherm om tussen functies te wisselen."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Als je een toegankelijkheidsfunctie wilt gebruiken, swipe je met 3 vingers omhoog vanaf de onderkant van het scherm.\n\nSwipe met 3 vingers omhoog en houd vast om tussen functies te schakelen."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
     <string name="accessibility_tutorial_dialog_link_button" msgid="13364319079385020">"Knop aanpassen"</string>
@@ -2613,7 +2605,7 @@
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Scherm extra dimmen"</string>
     <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Snelkoppeling voor extra dimmen"</string>
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Over extra dimmen"</string>
-    <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"Zet de helderheid van je scherm lager zodat je prettiger kunt lezen"</string>
+    <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"Dim het scherm nog wat meer om prettiger te kunnen lezen"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensiteit"</string>
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Minder helder"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"Helderder"</string>
@@ -2621,8 +2613,7 @@
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{Kort ({time} seconde)}other{Kort ({time} seconden)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{Gemiddeld ({time} seconde)}other{Gemiddeld ({time} seconden)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{Lang ({time} seconde)}other{Lang ({time} seconden)}}"</string>
-    <!-- no translation found for accessibility_autoclick_delay_unit_second (1562809410497613173) -->
-    <skip />
+    <string name="accessibility_autoclick_delay_unit_second" msgid="1562809410497613173">"{count,plural, =1{{time} seconde}other{{time} seconden}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Instellingen"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"Aan"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"Uit"</string>
@@ -3795,7 +3786,7 @@
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"Als je bubbels gebruikt voor deze app, worden bubbels ook gebruikt voor je apparaat.\n\nDit is van invloed op andere apps of gesprekken die als bubbel mogen worden getoond."</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="2042628067101419871">"Aanzetten"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Annuleren"</string>
-    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Aan: gesprekken kunnen als zwevende iconen worden getoond"</string>
+    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Aan/Gesprekken kunnen als zwevende iconen worden getoond"</string>
     <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"Toestaan dat apps bubbels tonen"</string>
     <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"Sommige gesprekken worden bovenop andere apps weergegeven als zwevende iconen"</string>
     <string name="bubble_app_setting_all" msgid="312524752846978277">"Alle gesprekken kunnen als bubbel worden getoond"</string>
@@ -4670,6 +4661,12 @@
     <string name="double_tap_power_camera_action_summary" msgid="4942585540579590444">"Camera openen"</string>
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Wallet"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Wallet openen"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"Snelkoppeling voor vergrendelscherm wijzigen?"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> is ook je snelkoppeling op het vergrendelscherm. Wil je deze wijzigen?"</string>
+    <!-- no translation found for double_tap_power_wallet_footer_title (5417023303339032410) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (1267822422365445657) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Camera omdraaien voor selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Navigatiemodus"</string>
@@ -4713,7 +4710,7 @@
     <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"Er worden meldingen en instellingen getoond"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Dubbeltik op je scherm om de tijd, meldingen en andere informatie te bekijken."</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"Scherm activeren"</string>
-    <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Tik op je scherm om de tijd, meldingen en andere informatie te checken"</string>
+    <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Tik op je scherm om de tijd, meldingen en andere informatie te checken."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"SOS"</string>
     <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"SOS gebruiken"</string>
     <string name="emergency_gesture_screen_summary" msgid="6640521030845132507">"Druk snel minstens 5 keer op de aan/uit-knop om de onderstaande acties te activeren"</string>
@@ -5738,10 +5735,8 @@
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"QR-code van audiostream"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Wachtwoord: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Andere mensen kunnen een geschikte koptelefoon met hun Android-apparaat verbinden als ze naar <xliff:g id="STREAM_NAME">%1$s</xliff:g> willen luisteren. Daarna moeten ze deze QR-code scannen."</string>
-    <!-- no translation found for audio_streams_preference_subtitle (4098552511880220046) -->
-    <skip />
-    <!-- no translation found for audio_streams_preference_subtitle_audio_sharing_on (2382924714414148028) -->
-    <skip />
+    <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"Luister naar Auracast-uitzending"</string>
+    <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"Zet audio delen uit om audiostreams te vinden"</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Een audiostream zoeken"</string>
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Luister naar een apparaat dat audio deelt of luister naar een Auracast-uitzending in de buurt"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"Je audio-apparaat"</string>
@@ -5779,12 +5774,9 @@
     <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"Een methode voor pincodeherstel toevoegen"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Pincode wijzigen"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Pincode vergeten"</string>
-    <!-- no translation found for supervision_update_recovery_email_preference_title (2057393838251915087) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_title (8447541098148430866) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_summary (4865713157106413979) -->
-    <skip />
+    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Je herstelmailadres updaten"</string>
+    <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Pincode verwijderen"</string>
+    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Hiermee worden al je instellingen voor toezicht gereset"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Webcontentfilters"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome en Web"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Sites met expliciete content zo mogelijk blokkeren"</string>

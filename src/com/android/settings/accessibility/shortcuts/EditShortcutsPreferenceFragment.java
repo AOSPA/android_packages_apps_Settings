@@ -36,6 +36,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.ContentObserver;
+import android.graphics.drawable.Drawable;
 import android.icu.text.ListFormatter;
 import android.net.Uri;
 import android.os.Bundle;
@@ -52,6 +53,7 @@ import android.view.accessibility.AccessibilityManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
@@ -268,8 +270,10 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
             if (intent != null) {
                 title = intent.getStringExtra(EXTRA_SHOW_FRAGMENT_TITLE);
             }
+            final Drawable icon = AppCompatResources.getDrawable(requireContext(),
+                    R.drawable.ic_accessibility_visibility);
             AccessibilitySetupWizardUtils.updateGlifPreferenceLayout(getContext(), layout, title,
-                    /* description= */ null, /* icon= */ null);
+                    /* description= */ null, icon);
 
             FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
             AccessibilitySetupWizardUtils.setPrimaryButton(getContext(), mixin, R.string.done,

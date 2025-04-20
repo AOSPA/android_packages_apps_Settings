@@ -5362,7 +5362,12 @@
     <string name="accessibility_turn_screen_darker_title">Turn screen darker</string>
     <!-- Title for the accessibility preference category of interaction control services and settings. [CHAR LIMIT=50] -->
     <string name="interaction_control_category_title">Interaction controls</string>
-    <!-- Title for the accessibility tap assistance page. [CHAR LIMIT=50] -->
+    <!--
+        A name of a group of settings related to touch action timing or duration.
+        This group includes a setting to change the duration that a temporary actionable
+        message is shown on the screen before disappearing, and a setting for the duration the
+        system waits before a touch & hold is recognized as a long-press. [CHAR LIMIT=50]
+    -->
     <string name="accessibility_tap_assistance_title">Timing controls</string>
     <!-- Title for the accessibility system controls page. [CHAR LIMIT=50] -->
     <string name="accessibility_system_controls_title">System controls</string>
@@ -6056,6 +6061,8 @@
     <string name="accessibility_hac_mode_title">Hearing aid compatibility</string>
     <!--Summary for the Hearing Aid Compatibility preference in the accessibility page. [CHAR LIMIT=NONE] -->
     <string name="accessibility_hac_mode_summary">Improves compatibility with telecoils and reduces unwanted noise</string>
+    <!-- Message for the Hearing Aid Compatibility disclaimer dialog. The dialog will not show if this string is empty. [CHAR LIMIT=NONE] -->
+    <string name="hac_disclaimer_message"></string>
     <!-- Title for accessibility hearing device page footer. [CHAR LIMIT=40] -->
     <string name="accessibility_hearing_device_about_title">About hearing devices</string>
     <!-- Description for text in accessibility hearing aids footer. [CHAR LIMIT=NONE] -->

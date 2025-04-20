@@ -16,18 +16,32 @@
 
 package com.android.settings.accessibility;
 
+import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.media.AudioManager;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentManager;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 
 /** Preference controller for Hearing Aid Compatibility (HAC) settings */
 public class HearingAidCompatibilityPreferenceController extends TogglePreferenceController {
+
+    private static final String TAG =
+            HearingAidCompatibilityPreferenceController.class.getSimpleName();
 
     // Hearing Aid Compatibility settings values
     static final String HAC_KEY = "HACSetting";
@@ -40,12 +54,17 @@ public class HearingAidCompatibilityPreferenceController extends TogglePreferenc
 
     private final TelephonyManager mTelephonyManager;
     private final AudioManager mAudioManager;
+    private FragmentManager mFragmentManager;
 
     public HearingAidCompatibilityPreferenceController(Context context,
             String preferenceKey) {
         super(context, preferenceKey);
         mTelephonyManager = context.getSystemService(TelephonyManager.class);
         mAudioManager = context.getSystemService(AudioManager.class);
+    }
+
+    void init(DashboardFragment fragment) {
+        mFragmentManager = fragment.getParentFragmentManager();
     }
 
     @Override
@@ -68,6 +87,9 @@ public class HearingAidCompatibilityPreferenceController extends TogglePreferenc
 
     @Override
     public boolean setChecked(boolean isChecked) {
+        if (isChecked && shouldShowDisclaimer()) {
+            HacDisclaimerDialog.newInstance().show(mFragmentManager, TAG);
+        }
         FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().changed(
                 getMetricsCategory(), getPreferenceKey(), isChecked ? 1 : 0);
         setAudioParameterHacEnabled(isChecked);
@@ -83,5 +105,31 @@ public class HearingAidCompatibilityPreferenceController extends TogglePreferenc
 
     private void setAudioParameterHacEnabled(boolean enabled) {
         mAudioManager.setParameters(HAC_KEY + "=" + (enabled ? HAC_VAL_ON : HAC_VAL_OFF) + ";");
+    }
+
+    private boolean shouldShowDisclaimer() {
+        return !TextUtils.isEmpty(mContext.getText(R.string.hac_disclaimer_message));
+    }
+
+    /** Dialog to tell user about the disclaimer to turn on HAC */
+    public static class HacDisclaimerDialog extends InstrumentedDialogFragment {
+
+        static HacDisclaimerDialog newInstance() {
+            return new HacDisclaimerDialog();
+        }
+
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+            return new AlertDialog.Builder(getActivity())
+                    .setMessage(R.string.hac_disclaimer_message)
+                    .setPositiveButton(android.R.string.ok, null)
+                    .create();
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return SettingsEnums.DIALOG_HAC_DISCLAIMER;
+        }
     }
 }

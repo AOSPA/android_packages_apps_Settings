@@ -344,8 +344,8 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{On / # app ha accesso alla posizione}other{On / # app hanno accesso alla posizione}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Caricamento…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Le app con autorizzazione di accesso ai dispositivi nelle vicinanze possono stabilire la posizione relativa dei dispositivi connessi."</string>
-    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
-    <skip />
+    <string name="location_settings_footer_location_off_with_telephony" msgid="5600725945541382556">"L\'accesso alla posizione è disattivato per app e servizi. La posizione del dispositivo potrebbe essere comunque inviata al personale di primo intervento se contatti un numero di emergenza."</string>
+    <string name="location_settings_footer_location_off_no_telephony" msgid="2709958040008816610">"L\'accesso alla posizione è disattivato per app e servizi."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Scopri di più sulle impostazioni di localizzazione"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Per apportare modifiche, vai alle Impostazioni di ChromeOS &gt; Privacy e sicurezza &gt; Controlli per la privacy &gt; Accesso alla posizione"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Account"</string>
@@ -1030,8 +1030,7 @@
     <string name="android_beam_explained" msgid="5684416131846701256">"Quando questa funzione è attiva, puoi trasmettere contenuti di app a un altro dispositivo che supporta la tecnologia NFC tenendo vicini i dispositivi. Ad esempio, puoi trasmettere pagine web, video di YouTube, contatti e altro ancora.\n\nÈ sufficiente avvicinare i dispositivi (generalmente mettendo a contatto le parti posteriori), quindi toccare lo schermo. L\'app stabilisce quali dati trasferire."</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi‑Fi"</string>
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Utilizza Wi-Fi"</string>
-    <!-- no translation found for wifi_networks_category (8011323954745036753) -->
-    <skip />
+    <string name="wifi_networks_category" msgid="8011323954745036753">"Reti"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Impostazioni Wi‑Fi"</string>
     <string name="wifi_select_network" msgid="6692897876718813259">"Seleziona Wi-Fi"</string>
     <string name="wifi_starting" msgid="6147022683967506341">"Attivazione Wi‑Fi…"</string>
@@ -1212,22 +1211,14 @@
     <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> ‑ In carica"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"Connessione tramite hotspot"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"Potenza connessione"</string>
-    <!-- no translation found for ethernet_dns1 (6487470669719468602) -->
-    <skip />
-    <!-- no translation found for ethernet_dns2 (484620572555181363) -->
-    <skip />
-    <!-- no translation found for ethernet_gateway (4064061619318875567) -->
-    <skip />
-    <!-- no translation found for ethernet_network_prefix_length (3693127271457763198) -->
-    <skip />
-    <!-- no translation found for ethernet_ip_settings (3344064201878792090) -->
-    <skip />
-    <!-- no translation found for ethernet_config_submit (724743720212124025) -->
-    <skip />
-    <!-- no translation found for ethernet_config_cancel (986322993908814366) -->
-    <skip />
-    <!-- no translation found for ethernet_config_title (4784063109810004382) -->
-    <skip />
+    <string name="ethernet_dns1" msgid="6487470669719468602">"DNS 1 (a meno che non venga sostituito da DNS privato)"</string>
+    <string name="ethernet_dns2" msgid="484620572555181363">"DNS 2 (a meno che non venga sostituito da DNS privato)"</string>
+    <string name="ethernet_gateway" msgid="4064061619318875567">"Gateway"</string>
+    <string name="ethernet_network_prefix_length" msgid="3693127271457763198">"Lunghezza prefisso rete"</string>
+    <string name="ethernet_ip_settings" msgid="3344064201878792090">"Impostazioni IP"</string>
+    <string name="ethernet_config_submit" msgid="724743720212124025">"Invia"</string>
+    <string name="ethernet_config_cancel" msgid="986322993908814366">"Annulla"</string>
+    <string name="ethernet_config_title" msgid="4784063109810004382">"Impostazioni Ethernet"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Reti salvate"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Iscrizioni"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Altre reti"</string>
@@ -1254,7 +1245,7 @@
     <string name="wifi_p2p_cancel_connect_message" msgid="2409074184473879809">"Vuoi annullare l\'invito a connettersi con <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="4880242270742385699">"Eliminare questo gruppo?"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="1549663436920597006">"Hotspot Wi‑Fi"</string>
-    <string name="wifi_hotspot_off_subtext" msgid="2751383134504362078">"Non stai condividendo la connessione a Internet o i contenuti con altri dispositivi"</string>
+    <string name="wifi_hotspot_off_subtext" msgid="2751383134504362078">"Non stai condividendo la connessione a internet o i contenuti con altri dispositivi"</string>
     <string name="wifi_hotspot_no_password_subtext" msgid="3685689196772398783">"Nessuna password impostata"</string>
     <string name="wifi_hotspot_name_title" msgid="6633480190014369846">"Nome hotspot"</string>
     <string name="wifi_hotspot_password_title" msgid="9096340919454296786">"Password hotspot"</string>
@@ -1456,8 +1447,7 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Off"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Quando avviare"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Solleva per riattivare"</string>
-    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
-    <skip />
+    <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Limita alla ricarica wireless"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Display ambient"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Quando mostrare"</string>
     <string name="doze_title" msgid="1523090408230862316">"Riattiva schermo per notifiche"</string>
@@ -1624,8 +1614,7 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Durante la ricarica"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"Durante la ricarica e verso l\'alto"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"Quando agganciato alla base"</string>
-    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
-    <skip />
+    <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"Limita alla ricarica wireless"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Modifica punto di accesso"</string>
     <string name="apn_add" msgid="9069613192201630934">"Aggiungi punto di accesso"</string>
@@ -1739,10 +1728,9 @@
     <string name="rx_ethernet_speed" msgid="6642000569214969711">"Velocità in ricezione"</string>
     <string name="ethernet_network_usage" msgid="3795965384177426780">"Utilizzo della rete"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Tethering Ethernet"</string>
-    <!-- no translation found for ethernet_modify (1326316717004440503) -->
-    <skip />
+    <string name="ethernet_modify" msgid="1326316717004440503">"Modifica"</string>
     <string name="tethering_footer_info" msgid="6824352505979800594">"Utilizza hotspot e tethering per consentire ad altri dispositivi di accedere a internet tramite la tua connessione dati. Le app possono, inoltre, creare un hotspot per condividere contenuti con i dispositivi vicini."</string>
-    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Utilizza hotspot e tethering per consentire ad altri dispositivi di accedere a Internet usando la tua connessione Wi-Fi o dati mobili. Le app possono inoltre creare un hotspot per condividere contenuti con i dispositivi nelle vicinanze."</string>
+    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Utilizza hotspot e tethering per consentire ad altri dispositivi di accedere a internet usando la tua connessione Wi-Fi o dati mobili. Le app possono inoltre creare un hotspot per condividere contenuti con i dispositivi nelle vicinanze."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Guida"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"Rete mobile"</string>
     <string name="sms_application_title" msgid="4791107002724108809">"SMS"</string>
@@ -1838,7 +1826,7 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="622276003801157839">"Scegli password per Sblocco con il Volto"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="7333603579958317102">"Scegli sequenza per Sblocco con il Volto"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="704061826984851309">"Scegli PIN per Sblocco con il Volto"</string>
-    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Imposta password per Sblocco con il Volto o con l\'impronta"</string>
+    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Imposta password per Sblocco con il Volto o con l\'Impronta"</string>
     <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4038476475293734905">"Imposta sequenza per Sblocco con il Volto o con l\'impronta"</string>
     <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"Imposta un PIN per usare il volto o l\'impronta"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Hai dimenticato la password?"</string>
@@ -2168,6 +2156,8 @@
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Vai alla schermata Home"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"Indietro"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"Visualizza app recenti"</string>
+    <string name="three_finger_tap_launch_app_title" msgid="55761877549896819">"Apri un\'altra app"</string>
+    <string name="three_finger_tap_launch_app_summary" msgid="2015894823281420733">"Scegli da un elenco di app installate"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"Vai alla schermata Home"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"Scorri in alto con 3 dita su un punto qualsiasi del touchpad"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"Vai indietro"</string>
@@ -2456,7 +2446,7 @@
     <string name="accessibility_notification_high_contrast_text_title" msgid="2297915407152953323">"Migliora il contrasto del testo"</string>
     <string name="accessibility_notification_high_contrast_text_body_message" msgid="6846453833480117658">"Il testo con contorni ha sostituito il testo ad alto contrasto. Puoi attivarlo nelle <xliff:g id="SETTINGS">%1$s</xliff:g>."</string>
     <string name="accessibility_notification_high_contrast_text_action_open_settings" msgid="5945069315472850294">"Vai a <xliff:g id="SETTINGS">%1$s</xliff:g>"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8848579943445806659">"testo con contorni"</string>
+    <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8848579943445806659">"Testo con contorni"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Aggiungi uno sfondo bianco o nero attorno al testo per aumentare il contrasto"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Aggiorn. autom. ingrandim. schermo"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Aggiorna ingrandimento schermo per transizioni app"</string>
@@ -2621,8 +2611,7 @@
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{Breve ({time} secondo)}other{Breve ({time} secondi)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{Medio ({time} secondo)}other{Medio ({time} secondi)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{Lungo ({time} secondo)}other{Lungo ({time} secondi)}}"</string>
-    <!-- no translation found for accessibility_autoclick_delay_unit_second (1562809410497613173) -->
-    <skip />
+    <string name="accessibility_autoclick_delay_unit_second" msgid="1562809410497613173">"{count,plural, =1{{time} secondo}other{{time} secondi}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Impostazioni"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"On"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"Off"</string>
@@ -3933,7 +3922,7 @@
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Altre impostazioni sono disponibili all\'interno di quest\'app"</string>
     <string name="notification_polite_title" msgid="6121016426991791557">"Attenuazione delle notifiche"</string>
     <string name="notification_polite_main_control_title" msgid="5812529809151927149">"Usa attenuazione delle notifiche"</string>
-    <string name="notification_polite_description" msgid="6137533404978878957">"Quando ricevi molte notifiche in un breve periodo di tempo, il dispositivo abbasserà il volume e ridurrà al minimo gli avvisi per un massimo di 1 minuto. Non ci sono ripercussioni su chiamate, sveglie e conversazioni prioritarie. \n\nLe notifiche ricevute durante l\'attenuazione possono essere trovare facendo scorrere lo schermo dall\'alto verso il basso."</string>
+    <string name="notification_polite_description" msgid="6137533404978878957">"Quando ricevi molte notifiche in un breve periodo di tempo, il dispositivo abbasserà il volume e ridurrà al minimo gli avvisi per un massimo di 1 minuto. Non ci sono ripercussioni su chiamate, sveglie e conversazioni prioritarie. \n\nLe notifiche ricevute durante l\'attenuazione possono essere trovate facendo scorrere lo schermo dall\'alto verso il basso."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Applica ai profili di lavoro"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Applica alle app del profilo di lavoro"</string>
     <string name="notification_bundle_title" msgid="460988459835922719">"Notifiche raggruppate"</string>
@@ -4670,6 +4659,12 @@
     <string name="double_tap_power_camera_action_summary" msgid="4942585540579590444">"Apri Fotocamera"</string>
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Wallet"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Apri Wallet"</string>
+    <!-- no translation found for double_tap_power_lockscreen_shortcut_tip_title (9210589521260265387) -->
+    <skip />
+    <!-- no translation found for double_tap_power_lockscreen_shortcut_tip_description (1894710205138218048) -->
+    <skip />
+    <string name="double_tap_power_wallet_footer_title" msgid="5417023303339032410">"Wallet non è disponibile. L\'app Wallet predefinita corrente non supporta il gesto."</string>
+    <string name="double_tap_power_wallet_footer_learn_more_text" msgid="1267822422365445657">"Tocca qui per modificare."</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Cambia fotocamera per selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Modalità di navigazione"</string>
@@ -5207,8 +5202,8 @@
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Mostra tutte"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Ricerca del dispositivo…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Connessione al dispositivo…"</string>
-    <string name="bluetooth_left_name" msgid="7440064067910080502">"Sinistra"</string>
-    <string name="bluetooth_right_name" msgid="7588088072444124949">"Destra"</string>
+    <string name="bluetooth_left_name" msgid="7440064067910080502">"Sinistro"</string>
+    <string name="bluetooth_right_name" msgid="7588088072444124949">"Destro"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Custodia"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Batteria"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Riquadro delle impostazioni"</string>
@@ -5431,7 +5426,7 @@
     <string name="multiple_users_title_keywords" msgid="2395593167746225172">"più, utenti, profili, persone, account, sensore, molti"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Usa debug wireless"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Usa Preferenze del driver di grafica"</string>
-    <string name="night_light_main_switch_title" msgid="3428298022467805219">"Usa luminosità notturna"</string>
+    <string name="night_light_main_switch_title" msgid="3428298022467805219">"Usa Luminosità notturna"</string>
     <string name="nfc_main_switch_title" msgid="6295839988954817432">"Usa NFC"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Usa la luminosità adattiva"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Usa Chiamate Wi-Fi"</string>
@@ -5738,10 +5733,8 @@
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"Codice QR stream audio"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Password: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Per ascoltare <xliff:g id="STREAM_NAME">%1$s</xliff:g>, altre persone possono connettere cuffie compatibili al loro dispositivo Android. Possono scansionare questo codice QR."</string>
-    <!-- no translation found for audio_streams_preference_subtitle (4098552511880220046) -->
-    <skip />
-    <!-- no translation found for audio_streams_preference_subtitle_audio_sharing_on (2382924714414148028) -->
-    <skip />
+    <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"Ascolta il broadcast Auracast"</string>
+    <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"Disattiva la condivisione audio per trovare stream audio"</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Trova uno stream audio"</string>
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Ascolta un dispositivo che sta condividendo audio o un broadcast Auracast nelle vicinanze"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"Il tuo dispositivo audio"</string>
@@ -5779,12 +5772,9 @@
     <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"Aggiungi un metodo di recupero del PIN"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Cambia PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"PIN dimenticato"</string>
-    <!-- no translation found for supervision_update_recovery_email_preference_title (2057393838251915087) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_title (8447541098148430866) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_summary (4865713157106413979) -->
-    <skip />
+    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Aggiorna email di recupero"</string>
+    <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Elimina PIN"</string>
+    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Questa operazione ripristinerà tutte le impostazioni di supervisione"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filtri dei contenuti web"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome e web"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Prova a bloccare i siti con contenuti espliciti"</string>

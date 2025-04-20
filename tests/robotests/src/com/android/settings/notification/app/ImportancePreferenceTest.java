@@ -154,12 +154,7 @@ public class ImportancePreferenceTest {
         preference.onBindViewHolder(holder);
 
         TextView tv = holder.itemView.findViewById(R.id.silence_summary);
-
-        preference.setDisplayInStatusBar(true);
-        preference.setDisplayOnLockscreen(true);
-
         preference.setImportanceSummary((ViewGroup) holder.itemView, IMPORTANCE_LOW, true);
-
         assertThat(tv.getText()).isEqualTo(
                 mContext.getString(R.string.notification_channel_summary_low));
     }
@@ -176,12 +171,7 @@ public class ImportancePreferenceTest {
         preference.onBindViewHolder(holder);
 
         TextView tv = holder.itemView.findViewById(R.id.alert_summary);
-
-        preference.setDisplayInStatusBar(true);
-        preference.setDisplayOnLockscreen(true);
-
         preference.setImportanceSummary((ViewGroup) holder.itemView, IMPORTANCE_DEFAULT, true);
-
         assertThat(tv.getText()).isEqualTo(
                 mContext.getString(R.string.notification_channel_summary_default));
     }

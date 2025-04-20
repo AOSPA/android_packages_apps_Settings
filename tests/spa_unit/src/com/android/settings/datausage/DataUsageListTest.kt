@@ -23,6 +23,7 @@ import android.os.UserManager
 import android.provider.Settings
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
+import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.testing.launchFragment
 import androidx.fragment.app.testing.withFragment
@@ -33,6 +34,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.datausage.DataUsageList.Companion.KEY_WARNING
 import com.android.settingslib.spaprivileged.framework.common.userManager
+import com.android.settingslib.widget.LayoutPreference
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -156,7 +158,9 @@ class DataUsageListTest {
         val scenario = launchFragment<TestDataUsageList>(initialState = Lifecycle.State.CREATED)
 
         scenario.withFragment {
-            assertThat(findPreference<Preference>(KEY_WARNING)!!.summary)
+            val preference = findPreference<LayoutPreference>(KEY_WARNING)!!
+            val textView = preference.findViewById<TextView>(R.id.text)!!
+            assertThat(textView.text)
                 .isEqualTo(context.getString(R.string.non_carrier_data_usage_warning))
         }
     }
@@ -174,7 +178,9 @@ class DataUsageListTest {
         val scenario = launchFragment<TestDataUsageList>(initialState = Lifecycle.State.CREATED)
 
         scenario.withFragment {
-            assertThat(findPreference<Preference>(KEY_WARNING)!!.summary).isNull()
+            val preference = findPreference<LayoutPreference>(KEY_WARNING)!!
+            val textView = preference.findViewById<TextView>(R.id.text)!!
+            assertThat(textView.text.length).isEqualTo(0)
         }
     }
 
@@ -191,7 +197,9 @@ class DataUsageListTest {
         val scenario = launchFragment<TestDataUsageList>(initialState = Lifecycle.State.CREATED)
 
         scenario.withFragment {
-            assertThat(findPreference<Preference>(KEY_WARNING)!!.summary).isNull()
+            val preference = findPreference<LayoutPreference>(KEY_WARNING)!!
+            val textView = preference.findViewById<TextView>(R.id.text)!!
+            assertThat(textView.text.length).isEqualTo(0)
         }
     }
 
@@ -205,8 +213,9 @@ class DataUsageListTest {
         val scenario = launchFragment<TestDataUsageList>(initialState = Lifecycle.State.CREATED)
 
         scenario.withFragment {
-            assertThat(findPreference<Preference>(KEY_WARNING)!!.summary)
-                .isEqualTo(context.getString(R.string.operator_warning))
+            val preference = findPreference<LayoutPreference>(KEY_WARNING)!!
+            val textView = preference.findViewById<TextView>(R.id.text)!!
+            assertThat(textView.text).isEqualTo(context.getString(R.string.operator_warning))
         }
     }
 }

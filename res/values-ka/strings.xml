@@ -344,8 +344,8 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{ჩართულია — # აპს აქვს მდებარეობაზე წვდომა}other{ჩართულია — # აპს აქვს მდებარეობაზე წვდომა}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"მიმდინარეობს ჩატვირთვა…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"ახლომდებარე მოწყობილობების ნებართვების მქონე აპებს შეუძლია დაკავშირებული მოწყობილობების პოზიციის განსაზღვრა."</string>
-    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
-    <skip />
+    <string name="location_settings_footer_location_off_with_telephony" msgid="5600725945541382556">"აპებისა და სერვისების მდებარეობაზე წვდომა გამორთულია. თქვენი მოწყობილობის მდებარეობა მაინც გაიგზავნება გადაუდებელი დახმარების სამსახურში, როცა გადაუდებელი დახმარების სამსახურის ნომერს უკავშირდებით."</string>
+    <string name="location_settings_footer_location_off_no_telephony" msgid="2709958040008816610">"აპებისა და სერვისების მდებარეობაზე წვდომა გამორთულია."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"შეიტყვეთ მეტი მდებარეობის პარამეტრების შესახებ"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"შესაცვლელად გადადით ChromeOS-ის პარამეტრებში &amp;gt კონფიდენციალურობა და უსაფრთხოება &gt; კონფიდენციალურობის მართვის პარამეტრები &gt; მდებარეობაზე წვდომა"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"ანგარიშები"</string>
@@ -1030,8 +1030,7 @@
     <string name="android_beam_explained" msgid="5684416131846701256">"როცა ეს ფუნქცია ჩართულია, შესაძლებელია აპების კონტენტის სხვა NFC-სთან თავსებად მოწყობილობებზე სხივით გადაცემა, რისთვისაც საჭიროა მოწყობილობების ერთმანეთთან ახლოს მოთავსება. მაგალითად, შეგიძლიათ გადასცეთ ვებგვერდები, YouTube ვიდეოები, კონტაქტები და სხვა კონტენტი.\n\nუბრალოდ, მიადეთ მოწყობილობები ერთმანეთს (ჩვეულებრივ, უკანა მხრით) და შეეხეთ ეკრანს. აპი თავად მიხვდება, რა ტიპის კონტენტი უნდა გადაიცეს სხივით."</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi‑Fi"</string>
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Wi-Fi-ს გამოყენება"</string>
-    <!-- no translation found for wifi_networks_category (8011323954745036753) -->
-    <skip />
+    <string name="wifi_networks_category" msgid="8011323954745036753">"ქსელები"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Wi‑Fi პარამეტრები"</string>
     <string name="wifi_select_network" msgid="6692897876718813259">"აირჩიეთ Wi‑Fi"</string>
     <string name="wifi_starting" msgid="6147022683967506341">"Wi‑Fi ირთვება…"</string>
@@ -1212,22 +1211,14 @@
     <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> – იტენება"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"უსადენო ქსელთან კავშირი"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"კავშირის სიძლიერე"</string>
-    <!-- no translation found for ethernet_dns1 (6487470669719468602) -->
-    <skip />
-    <!-- no translation found for ethernet_dns2 (484620572555181363) -->
-    <skip />
-    <!-- no translation found for ethernet_gateway (4064061619318875567) -->
-    <skip />
-    <!-- no translation found for ethernet_network_prefix_length (3693127271457763198) -->
-    <skip />
-    <!-- no translation found for ethernet_ip_settings (3344064201878792090) -->
-    <skip />
-    <!-- no translation found for ethernet_config_submit (724743720212124025) -->
-    <skip />
-    <!-- no translation found for ethernet_config_cancel (986322993908814366) -->
-    <skip />
-    <!-- no translation found for ethernet_config_title (4784063109810004382) -->
-    <skip />
+    <string name="ethernet_dns1" msgid="6487470669719468602">"DNS 1 (სანამ არ არის უგულებელყოფილი პირადი DNS-ის მიერ)"</string>
+    <string name="ethernet_dns2" msgid="484620572555181363">"DNS 2 (სანამ არ არის უგულებელყოფილი პირადი DNS-ის მიერ)"</string>
+    <string name="ethernet_gateway" msgid="4064061619318875567">"გეითვეი"</string>
+    <string name="ethernet_network_prefix_length" msgid="3693127271457763198">"ქსელის პრეფიქსის სიგრძე"</string>
+    <string name="ethernet_ip_settings" msgid="3344064201878792090">"IP პარამეტრები"</string>
+    <string name="ethernet_config_submit" msgid="724743720212124025">"გაგზავნა"</string>
+    <string name="ethernet_config_cancel" msgid="986322993908814366">"გაუქმება"</string>
+    <string name="ethernet_config_title" msgid="4784063109810004382">"Ethernet-ის პარამეტრები"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"დამახს. ქსელები"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"გამოწერები"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"სხვა ქსელები"</string>
@@ -1456,8 +1447,7 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"გამორთული"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"გაშვების დრო"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"გაღვიძება აწევისას"</string>
-    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
-    <skip />
+    <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"უსადენო დატენაზე შეზღუდვა"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"ემბიენტური ეკრანი"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"ჩვენების დრო"</string>
     <string name="doze_title" msgid="1523090408230862316">"ეკრ. გაღვიძება შეტყობინებაზე"</string>
@@ -1624,8 +1614,7 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"დატენისას"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"დატენისას და ვერტიკალურ პოზიციაში"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"სანამ ჩამაგრებულია"</string>
-    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
-    <skip />
+    <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"უსადენო დატენაზე შეზღუდვა"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN-ები"</string>
     <string name="apn_edit" msgid="2003683641840248741">"წვდომის წერტილის რედაქტირება"</string>
     <string name="apn_add" msgid="9069613192201630934">"დაამატეთ წვდომის წერტილი"</string>
@@ -1739,8 +1728,7 @@
     <string name="rx_ethernet_speed" msgid="6642000569214969711">"მონაცემთა მიღების სიჩქარე"</string>
     <string name="ethernet_network_usage" msgid="3795965384177426780">"ქსელის გამოყენება"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernet-ტეტერინგი"</string>
-    <!-- no translation found for ethernet_modify (1326316717004440503) -->
-    <skip />
+    <string name="ethernet_modify" msgid="1326316717004440503">"შეცვლა"</string>
     <string name="tethering_footer_info" msgid="6824352505979800594">"უსადენო ქსელი და ტეტერინგი მონაცემთა კავშირით ინტერნეტის სხვა მოწყობილობებთან გაზიარების საშუალებას მოგცემთ. აპებს ასევე შეუძლიათ უსადენო ქსელის შექმნა, რათა გაუზიარონ კონტენტი ახლომახლო მოწყობილობებს."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"უსადენო ქსელი და ტეტერინგი საშუალებას მოგცემთ, გაუზიაროთ მობილური ინტერნეტი ან Wi‑Fi კავშირი სხვა მოწყობილობებს. უსადენო ქსელის შექმნა შეუძლია აპებსაც, კონტენტის გასაზიარებლად ახლომახლო მოწყობილობებთან."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"დახმარება"</string>
@@ -2168,6 +2156,8 @@
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"მთავარზე გადასვლა"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"უკან დაბრუნება"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"ბოლო აპების ნახვა"</string>
+    <string name="three_finger_tap_launch_app_title" msgid="55761877549896819">"სხვა აპის გახსნა"</string>
+    <string name="three_finger_tap_launch_app_summary" msgid="2015894823281420733">"დაინსტალირებული აპების სიიდან არჩევა"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"მთავარზე გადასვლა"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"სენსორ. პანელზე სამი თითით გადაფურცლეთ ნებისმ. მიმართულებით"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"უკან დაბრუნება"</string>
@@ -2621,8 +2611,7 @@
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{ხანმოკლე ({time} წამი)}other{ხანმოკლე ({time} წამი)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{საშუალო ({time} წამი)}other{საშუალო ({time} წამი)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{ხანგრძლივი ({time} წამი)}other{ხანგრძლივი ({time} წამი)}}"</string>
-    <!-- no translation found for accessibility_autoclick_delay_unit_second (1562809410497613173) -->
-    <skip />
+    <string name="accessibility_autoclick_delay_unit_second" msgid="1562809410497613173">"{count,plural, =1{{time} წამი}other{{time} წამი}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"პარამეტრები"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"ჩართული"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"გამორთული"</string>
@@ -4670,6 +4659,10 @@
     <string name="double_tap_power_camera_action_summary" msgid="4942585540579590444">"კამერის გახსნა"</string>
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"საფულე"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"საფულის გახსნა"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"გსურთ ჩაკეტილი ეკრანის მალსახმობის შეცვლა?"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> თქვენი ჩაკეტილი ეკრანის მალსახმობიცაა. გსურთ მისი შეცვლა?"</string>
+    <string name="double_tap_power_wallet_footer_title" msgid="5417023303339032410">"საფულე არ არის ხელმისაწვდომი. თქვენი მიმდინარე ნაგულისხმევი საფულის აპი არ უჭერს მხარს ჟესტს."</string>
+    <string name="double_tap_power_wallet_footer_learn_more_text" msgid="1267822422365445657">"შეეხეთ აქ, რათა შეცვალოთ."</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"კამერის ამობრუნება სელფისთვის"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"ნავიგაციის რეჟიმი"</string>
@@ -5738,10 +5731,8 @@
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"აუდიო ნაკადის QR კოდი"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"პაროლი: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"<xliff:g id="STREAM_NAME">%1$s</xliff:g> ნაკადის მოსმენის მიზნით სხვა პირებს შეუძლიათ თავიანთ Android მოწყობილობებს დაუკავშირონ თავსებადი ყურსასმენები. შემდეგ, შეუძლიათ დაასკანირონ ეს QR კოდი."</string>
-    <!-- no translation found for audio_streams_preference_subtitle (4098552511880220046) -->
-    <skip />
-    <!-- no translation found for audio_streams_preference_subtitle_audio_sharing_on (2382924714414148028) -->
-    <skip />
+    <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"Auracast ტრანსლაციის მოსმენა"</string>
+    <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"გამორთეთ აუდიოს გაზიარება, რათა იპოვოთ აუდიონაკადები"</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"აუდიო ნაკადის პოვნა"</string>
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"მოუსმინეთ აუდიოს გამზიარებელ მოწყობილობას ან ახლომახლო Auracast ტრანსლაციას"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"თქვენი აუდიო მოწყობილობა"</string>
@@ -5779,12 +5770,9 @@
     <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"PIN-კოდის აღდგენის მეთოდის დამატება"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"PIN-კოდის შეცვლა"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"PIN-კოდი დამავიწყდა"</string>
-    <!-- no translation found for supervision_update_recovery_email_preference_title (2057393838251915087) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_title (8447541098148430866) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_summary (4865713157106413979) -->
-    <skip />
+    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"აღდგენის ელფოსტის განახლება"</string>
+    <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"PIN-კოდის წაშლა"</string>
+    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"ეს გადააყენებს ზედამხედველობის ყველა პარამეტრს"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"ვებკონტენტის ფილტრები"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome და ვები"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"გამოკვეთილად სექსუალური ხასიათის საიტების დაბლოკვის ცდა"</string>

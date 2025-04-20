@@ -21,6 +21,8 @@ import static android.window.DesktopModeFlags.ToggleOverride.OVERRIDE_OFF;
 import static android.window.DesktopModeFlags.ToggleOverride.OVERRIDE_ON;
 import static android.window.DesktopModeFlags.ToggleOverride.OVERRIDE_UNSET;
 
+import static com.android.server.display.feature.flags.Flags.FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -120,6 +122,7 @@ public class DesktopExperiencePreferenceControllerTest {
     }
 
     @Test
+    @DisableFlags(FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT)
     public void onPreferenceChange_switchEnabled_putsSettingsOverrideOnAndTriggersRestart() {
         mController.onPreferenceChange(mPreference, true /* new value */);
 
@@ -130,6 +133,7 @@ public class DesktopExperiencePreferenceControllerTest {
     }
 
     @Test
+    @DisableFlags(FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT)
     public void onPreferenceChange_switchDisabled_putsSettingsOverrideOffAndTriggersRestart() {
         mController.onPreferenceChange(mPreference, false /* new value */);
 
@@ -140,6 +144,7 @@ public class DesktopExperiencePreferenceControllerTest {
     }
 
     @Test
+    @DisableFlags(FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT)
     public void updateState_overrideOn_checksPreference() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 DEVELOPMENT_OVERRIDE_DESKTOP_EXPERIENCE_FEATURES, OVERRIDE_ON.getSetting());
@@ -150,6 +155,7 @@ public class DesktopExperiencePreferenceControllerTest {
     }
 
     @Test
+    @DisableFlags(FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT)
     public void updateState_overrideOff_unchecksPreference() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 DEVELOPMENT_OVERRIDE_DESKTOP_EXPERIENCE_FEATURES, OVERRIDE_OFF.getSetting());
@@ -160,6 +166,7 @@ public class DesktopExperiencePreferenceControllerTest {
     }
 
     @Test
+    @DisableFlags(FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT)
     public void updateState_noOverride_noNewSettingsOverride() {
         // Set no override
         Settings.Global.putString(mContext.getContentResolver(),
@@ -173,6 +180,7 @@ public class DesktopExperiencePreferenceControllerTest {
     }
 
     @Test
+    @DisableFlags(FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT)
     public void onDeveloperOptionsSwitchDisabled_putsSettingsOverrideOff() {
         mController.onDeveloperOptionsSwitchDisabled();
 
@@ -182,7 +190,8 @@ public class DesktopExperiencePreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ENABLE_DESKTOP_WINDOWING_MODE)
+    @DisableFlags({Flags.FLAG_ENABLE_DESKTOP_WINDOWING_MODE,
+            FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT})
     public void updateState_whenDesktopModeAvailableButNotEnabled_checkSummary() {
         SwitchPreference pref = new SwitchPreference(mContext);
 
@@ -193,6 +202,7 @@ public class DesktopExperiencePreferenceControllerTest {
     }
 
     @Test
+    @DisableFlags(FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT)
     @EnableFlags(Flags.FLAG_ENABLE_DESKTOP_WINDOWING_MODE)
     public void updateState_whenDesktopModeAvailableAndEnabled_checkSummary() {
         SwitchPreference pref = new SwitchPreference(mContext);
@@ -201,5 +211,16 @@ public class DesktopExperiencePreferenceControllerTest {
 
         assertThat(pref.getSummary()).isEqualTo(mContext.getString(
                 R.string.enable_desktop_experience_features_summary_without_desktop));
+    }
+
+    @Test
+    @EnableFlags(FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT)
+    public void updateState_whenContentModeEnabled_checkDisabled() {
+        SwitchPreference pref = new SwitchPreference(mContext);
+
+        mController.updateState(pref);
+
+        assertThat(pref.isEnabled()).isFalse();
+        assertThat(pref.isChecked()).isTrue();
     }
 }

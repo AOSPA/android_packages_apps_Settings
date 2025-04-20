@@ -15,6 +15,7 @@
  */
 package com.android.settings.supervision
 
+import android.app.Activity
 import android.app.supervision.flags.Flags
 import android.content.Context
 import android.platform.test.annotations.DisableFlags
@@ -68,7 +69,39 @@ class SupervisionWebContentFiltersScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN)
-    fun switchSafeSitesPreferences() {
+    fun switchSafeSitesPreferences_succeedWithParentPin() {
+        FragmentScenario.launchInContainer(supervisionWebContentFiltersScreen.fragmentClass())
+            .onFragment { fragment ->
+                val allowAllSitesPreference =
+                    fragment.findPreference<SelectorWithWidgetPreference>(
+                        SupervisionAllowAllSitesPreference.KEY
+                    )!!
+                val blockExplicitSitesPreference =
+                    fragment.findPreference<SelectorWithWidgetPreference>(
+                        SupervisionBlockExplicitSitesPreference.KEY
+                    )!!
+                assertThat(allowAllSitesPreference.isChecked).isTrue()
+                assertThat(blockExplicitSitesPreference.isChecked).isFalse()
+
+                blockExplicitSitesPreference.performClick()
+
+                // Pretend the PIN verification succeeded.
+                fragment.onActivityResult(
+                    requestCode =
+                        SupervisionBlockExplicitSitesPreference
+                            .REQUEST_CODE_SUPERVISION_CREDENTIALS,
+                    resultCode = Activity.RESULT_OK,
+                    data = null,
+                )
+
+                assertThat(blockExplicitSitesPreference.isChecked).isTrue()
+                assertThat(allowAllSitesPreference.isChecked).isFalse()
+            }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN)
+    fun switchSafeSitesPreferences_failWithoutParentPin() {
         FragmentScenario.launchInContainer(supervisionWebContentFiltersScreen.fragmentClass())
             .onFragment { fragment ->
                 val allowAllSitesPreference =
@@ -85,8 +118,16 @@ class SupervisionWebContentFiltersScreenTest {
 
                 blockExplicitSitesPreference.performClick()
 
-                assertThat(blockExplicitSitesPreference.isChecked).isTrue()
-                assertThat(allowAllSitesPreference.isChecked).isFalse()
+                // Pretend the PIN verification succeeded.
+                fragment.onActivityResult(
+                    requestCode =
+                        SupervisionAllowAllSitesPreference.REQUEST_CODE_SUPERVISION_CREDENTIALS,
+                    resultCode = Activity.RESULT_CANCELED,
+                    data = null,
+                )
+
+                assertThat(blockExplicitSitesPreference.isChecked).isFalse()
+                assertThat(allowAllSitesPreference.isChecked).isTrue()
             }
     }
 

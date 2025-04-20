@@ -51,6 +51,7 @@ public class AccessibilityHearingAidsFragment extends AccessibilityShortcutPrefe
         super.onAttach(context);
         use(AvailableHearingDevicePreferenceController.class).init(this);
         use(SavedHearingDevicePreferenceController.class).init(this);
+        use(HearingAidCompatibilityPreferenceController.class).init(this);
     }
 
     @Override

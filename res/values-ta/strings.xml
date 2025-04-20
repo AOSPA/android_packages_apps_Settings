@@ -344,7 +344,9 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{ஆன் / # ஆப்ஸ் இருப்பிடத்திற்கான அணுகலைக் கொண்டுள்ளது}other{ஆன் / # ஆப்ஸ் இருப்பிடத்திற்கான அணுகலைக் கொண்டுள்ளன}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"ஏற்றுகிறது…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"இணைக்கப்பட்டுள்ள சாதனங்கள் எவ்வளவு தூரத்தில், எந்தத் திசையில் உள்ளன என்பதை அருகிலுள்ள சாதனங்களைக் கண்டறிவதற்கான அனுமதியைப் பெற்றுள்ள ஆப்ஸால் தீர்மானிக்க முடியும்."</string>
-    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <!-- no translation found for location_settings_footer_location_off_with_telephony (5600725945541382556) -->
+    <skip />
+    <!-- no translation found for location_settings_footer_location_off_no_telephony (2709958040008816610) -->
     <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"இருப்பிட அமைப்புகள் குறித்து மேலும் அறிக"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"மாற்ற, ChromeOS அமைப்புகள் &gt; தனியுரிமை மற்றும் பாதுகாப்பு &gt; தனியுரிமைக் கட்டுப்பாடுகள் &gt; இருப்பிட அணுகல் என்பதற்குச் செல்லவும்"</string>
@@ -611,10 +613,8 @@
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"பேட்டர்ன் மற்றும் முகத்திற்கான அமைவை தவிர்க்கவா?"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"பேட்டர்ன் மற்றும் கைரேகைக்கான அமைவை தவிர்க்கவா?"</string>
     <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"பேட்டர்ன், முகம், கைரேகைக்கான அமைவை தவிர்க்கவா?"</string>
-    <!-- no translation found for resume_animation (5259729861893297887) -->
-    <skip />
-    <!-- no translation found for pause_animation (2209064682137909056) -->
-    <skip />
+    <string name="resume_animation" msgid="5259729861893297887">"அனிமேஷனை மீண்டும் தொடங்கும்"</string>
+    <string name="pause_animation" msgid="2209064682137909056">"அனிமேஷனை இடைநிறுத்தும்"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"திரைப் பூட்டை அமை"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"முடிந்தது"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"அச்சச்சோ, அது சென்சார் இல்லை"</string>
@@ -1032,8 +1032,7 @@
     <string name="android_beam_explained" msgid="5684416131846701256">"இந்த அம்சம் இயக்கப்பட்டிருக்கும் போது, சாதனங்களை அருகில் வைத்துப் பிடித்து, ஆப்ஸ் உள்ளடக்கத்தை மற்றொரு NFC திறன் வாய்ந்த சாதனத்தில் தெரியுமாறு புரொஜக்ட் செய்யலாம். எடுத்துக்காட்டாக, உங்கள் இணையப் பக்கங்கள், YouTube வீடியோக்கள், தொடர்புகள், மேலும் பலவற்றை மற்றொரு சாதனத்தில் தெரியுமாறு புரொஜக்ட் செய்யலாம்.\n\nசாதனங்களின் பின்புறத்தை அருகில் கொண்டுவந்து, உங்கள் திரையில் தட்டவும். புரொஜக்ட் செய்ய வேண்டிய உள்ளடக்கத்தை மற்றொரு சாதனத்தில் இந்த அம்சம் காட்டும்."</string>
     <string name="wifi_settings" msgid="8313301946393559700">"வைஃபை"</string>
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"வைஃபையைப் பயன்படுத்து"</string>
-    <!-- no translation found for wifi_networks_category (8011323954745036753) -->
-    <skip />
+    <string name="wifi_networks_category" msgid="8011323954745036753">"நெட்வொர்க்குகள்"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"வைஃபை அமைப்பு"</string>
     <string name="wifi_select_network" msgid="6692897876718813259">"வைஃபையைத் தேர்ந்தெடு"</string>
     <string name="wifi_starting" msgid="6147022683967506341">"வைஃபையை இயக்குகிறது…"</string>
@@ -1047,7 +1046,7 @@
     <string name="wifi_allow_wep_networks_summary" msgid="3033397893296724615">"WEP என்பது பாதுகாப்பு குறைவான பழைய பாதுகாப்பு நெறிமுறையாகும்"</string>
     <string name="wifi_allow_wep_networks_summary_carrier_not_allow" msgid="6298103289728210026">"WEP நெட்வொர்க்குகள் பாதுகாப்பு குறைவானவை என்பதால் உங்கள் மொபைல் நிறுவனம் அவற்றை அனுமதிப்பதில்லை"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"தானாகவே வைஃபையை இயக்கு"</string>
-    <string name="wifi_wakeup_summary" msgid="5778059083790221465">"உயர்தரம் எனச் சேமிக்கப்பட்ட நெட்வொர்க்குகளுக்கு அருகில் இருக்கும் போது, வைஃபை இயக்கப்படும். உதாரணமாக, உங்கள் வீட்டு நெட்வொர்க்."</string>
+    <string name="wifi_wakeup_summary" msgid="5778059083790221465">"சேமிக்கப்பட்ட உயர்தர நெட்வொர்க்குகளுக்கு அருகில் இருக்கும் போது, வைஃபை இயக்கப்படும். உதாரணமாக, உங்கள் வீட்டு நெட்வொர்க்."</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"இருப்பிடம் ஆஃப் செய்யப்பட்டுள்ளதால், கிடைக்கவில்லை. "<annotation id="link">"இருப்பிடத்தை"</annotation>" ஆன் செய்யவும்."</string>
     <string name="wifi_install_credentials" msgid="5192903644606839972">"சான்றிதழ்களை நிறுவுதல்"</string>
     <string name="wifi_scan_notify_text" msgid="7163137260385995873">"இருப்பிடத் துல்லியத்தை மேம்படுத்த, வைஃபை ஆஃப் செய்ய ஆஃப் செய்யப்பட்டிருந்தாலும்கூட எந்தநேரத்திலும் ஆப்ஸும் சேவைகளும் வைஃபை நெட்வொர்க்குகளைத் தேடலாம். உதாரணத்திற்கு, இருப்பிடம் சார்ந்த அம்சங்கள் மற்றும் சேவைகளை மேம்படுத்துவதற்கு இதைப் பயன்படுத்தலாம். <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>வைஃபை ஸ்கேனிங் அமைப்புகளில்<xliff:g id="LINK_END_1">LINK_END</xliff:g> இதை மாற்றிக்கொள்ளலாம்."</string>
@@ -1214,22 +1213,14 @@
     <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> ‑ சார்ஜாகிறது"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"ஹாட்ஸ்பாட் இணைப்பு"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"இணைப்பின் வலிமை"</string>
-    <!-- no translation found for ethernet_dns1 (6487470669719468602) -->
-    <skip />
-    <!-- no translation found for ethernet_dns2 (484620572555181363) -->
-    <skip />
-    <!-- no translation found for ethernet_gateway (4064061619318875567) -->
-    <skip />
-    <!-- no translation found for ethernet_network_prefix_length (3693127271457763198) -->
-    <skip />
-    <!-- no translation found for ethernet_ip_settings (3344064201878792090) -->
-    <skip />
-    <!-- no translation found for ethernet_config_submit (724743720212124025) -->
-    <skip />
-    <!-- no translation found for ethernet_config_cancel (986322993908814366) -->
-    <skip />
-    <!-- no translation found for ethernet_config_title (4784063109810004382) -->
-    <skip />
+    <string name="ethernet_dns1" msgid="6487470669719468602">"DNS 1 (தனிப்பட்ட DNS மீறிச் செயல்படாத வரை)"</string>
+    <string name="ethernet_dns2" msgid="484620572555181363">"DNS 2 (தனிப்பட்ட DNS மீறிச் செயல்படாத வரை)"</string>
+    <string name="ethernet_gateway" msgid="4064061619318875567">"கேட்வே"</string>
+    <string name="ethernet_network_prefix_length" msgid="3693127271457763198">"நெட்வொர்க் முன்னொட்டு நீளம்"</string>
+    <string name="ethernet_ip_settings" msgid="3344064201878792090">"IP அமைப்புகள்"</string>
+    <string name="ethernet_config_submit" msgid="724743720212124025">"சமர்ப்பி"</string>
+    <string name="ethernet_config_cancel" msgid="986322993908814366">"ரத்துசெய்"</string>
+    <string name="ethernet_config_title" msgid="4784063109810004382">"ஈதர்நெட் அமைப்புகள்"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"சேமித்த நெட்வொர்க்குகள்"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"சந்தா செலுத்தியவை"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"பிற நெட்வொர்க்குகள்"</string>
@@ -1376,7 +1367,7 @@
     <string name="adaptive_sleep_title_no_permission" msgid="1719759921214237016">"கேமரா அணுகல் தேவை"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="5822591289468803691">"திரை மீது கவனம் அம்சத்திற்குக் கேமரா அணுகல் தேவை. \'சாதனப் பிரத்தியேகமாக்குதல் சேவைகளுக்கான\' அனுமதிகளை நிர்வகிக்கத் தட்டுங்கள்"</string>
     <string name="adaptive_sleep_manage_permission_button" msgid="1404510197847664846">"அனுமதிகளை நிர்வகியுங்கள்"</string>
-    <string name="adaptive_sleep_description" msgid="1835321775327187860">"நீங்கள் பார்த்துக் கொண்டிருக்கையில் திரை ஆஃப் ஆவதைத் தவிர்க்கும்"</string>
+    <string name="adaptive_sleep_description" msgid="1835321775327187860">"நீங்கள் பார்த்துக் கொண்டிருக்கையில் திரை அணைவதைத் தவிர்க்கும்"</string>
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"முன்பக்கக் கேமராவைப் பயன்படுத்தி திரையை யாராவது பார்க்கிறார்களா என்பதை \'திரை மீது கவனம்\' எனும் அம்சம் அறியும். இது சாதன அளவிலேயே இயங்கும், படங்கள் சேமிக்கப்படவோ Googleளுக்கு அனுப்பப்படவோ மாட்டாது."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"\'திரை மீது கவனத்தை\' ஆன் செய்தல்"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"பார்க்கும்போது திரையை ஆனில் வைத்திருக்கும்"</string>
@@ -1458,8 +1449,7 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"ஆஃப்"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"தொடங்க வேண்டிய நேரம்"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"விரலை எடுக்கும் போது இயங்கு"</string>
-    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
-    <skip />
+    <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"வயர்லெஸ் சார்ஜிங்கின்போது என்று கட்டுப்படுத்துதல்"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"சூழல்சார் திரை"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"எப்போது காட்டுவது"</string>
     <string name="doze_title" msgid="1523090408230862316">"அறிவிப்பிற்கு திரை விழித்தல்"</string>
@@ -1626,8 +1616,7 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"சார்ஜிங்கின்போது"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"நேராக வைத்து சார்ஜ் செய்யும்போது"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"டாக்கில் இணைக்கப்பட்டிருக்கும்போது"</string>
-    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
-    <skip />
+    <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"வயர்லெஸ் சார்ஜிங்கின்போது என்று கட்டுப்படுத்துதல்"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN பட்டியல்"</string>
     <string name="apn_edit" msgid="2003683641840248741">"ஆக்சஸ் பாயிண்ட்டைத் திருத்து"</string>
     <string name="apn_add" msgid="9069613192201630934">"ஆக்சஸ் பாயின்ட்டைச் சேர்த்தல்"</string>
@@ -1741,8 +1730,7 @@
     <string name="rx_ethernet_speed" msgid="6642000569214969711">"பெறும் இணைப்பின் வேகம்"</string>
     <string name="ethernet_network_usage" msgid="3795965384177426780">"நெட்வொர்க் பயன்பாடு"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"ஈத்தர்நெட் டெதெரிங்"</string>
-    <!-- no translation found for ethernet_modify (1326316717004440503) -->
-    <skip />
+    <string name="ethernet_modify" msgid="1326316717004440503">"மாற்று"</string>
     <string name="tethering_footer_info" msgid="6824352505979800594">"டேட்டா இணைப்பு மூலம், மற்ற சாதனங்களுக்கு இணைய இணைப்பை வழங்க, ஹாட்ஸ்பாட்டையும் இணைப்பு முறையையும் பயன்படுத்துங்கள். அருகிலுள்ள சாதனங்களுடன் உள்ளடக்கத்தைப் பகிர, ஆப்ஸும் ஹாட்ஸ்பாட்டை உருவாக்கலாம்."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"உங்கள் வைஃபை அல்லது மொபைல் டேட்டா மூலம் வேறு சாதனங்களுக்கு இணைய இணைப்பை வழங்க ஹாட்ஸ்பாட்டையும் டெதரிங் இணைப்பு முறையையும் பயன்படுத்தும். மேலும், அருகிலுள்ள சாதனங்களுடன் உள்ளடக்கத்தைப் பகிர, தனியாக ஒரு ஹாட்ஸ்பாட்டையும் ஆப்ஸ் உருவாக்கலாம்."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"உதவி"</string>
@@ -2170,6 +2158,8 @@
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"முகப்பிற்குச் செல்"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"பின்செல்"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"சமீபத்திய ஆப்ஸைக் காட்டு"</string>
+    <string name="three_finger_tap_launch_app_title" msgid="55761877549896819">"வேறொரு ஆப்ஸைத் திற"</string>
+    <string name="three_finger_tap_launch_app_summary" msgid="2015894823281420733">"நிறுவப்பட்டுள்ள ஆப்ஸ் பட்டியலில் இருந்து தேர்ந்தெடுக்கலாம்"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"முகப்பிற்குச் செல்"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"டச்பேடில் மூன்று விரல்களால் மேல்நோக்கி ஸ்வைப் செய்யுங்கள்"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"பின்செல்"</string>
@@ -2600,7 +2590,7 @@
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"ஆஃப்"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"செயல்படவில்லை. தகவலுக்கு, தட்டவும்."</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"இந்தச் சேவை சரியாகச் செயல்படவில்லை."</string>
-    <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"அணுகல்தன்மை ஷார்ட்கட்கள்"</string>
+    <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"மாற்றுத்திறன் வசதி ஷார்ட்கட்கள்"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"விரைவு அமைப்புகளில் காட்டு"</string>
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3229433065035047931">"சிவப்பு-பச்சை, பச்சை நிறக்குறைபாடு"</string>
     <string name="daltonizer_mode_protanomaly_title" msgid="2572040492905945405">"சிவப்பு-பச்சை, சிவப்பு நிறக்குறைபாடு"</string>
@@ -2623,8 +2613,7 @@
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{குறைவு ({time} வினாடி)}other{குறைவு ({time} வினாடிகள்)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{நடுத்தரம் ({time} வினாடி)}other{நடுத்தரம் ({time} வினாடிகள்)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{அதிகம் ({time} வினாடி)}other{அதிகம் ({time} வினாடிகள்)}}"</string>
-    <!-- no translation found for accessibility_autoclick_delay_unit_second (1562809410497613173) -->
-    <skip />
+    <string name="accessibility_autoclick_delay_unit_second" msgid="1562809410497613173">"{count,plural, =1{{time} வினாடி}other{{time} வினாடிகள்}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"அமைப்புகள்"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"ஆன்"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"ஆஃப்"</string>
@@ -2692,11 +2681,11 @@
     <string name="keywords_3_button_navigation" msgid="436361965016404218">"மூன்று பட்டன்கள்"</string>
     <string name="keywords_touch_and_hold_delay" msgid="7854640156419599912">"கைத்திறன், உடல் இயக்கத் திறன், முதியோர், கீல்வாதம், rsi, பக்கவாதம், நடுக்கம், மல்ட்டிபில் ஸ்க்லரோசிஸ், செரிப்ரல் பால்சி, ஷேக்கிங், திரும்பத் திரும்ப ஏற்படும் காயம், கை"</string>
     <string name="keywords_accessibility_timeout" msgid="8903766864902000346">"தாமதம், கைத்திறன், முதியோர்"</string>
-    <string name="print_settings" msgid="8519810615863882491">"அச்சிடுதல்"</string>
+    <string name="print_settings" msgid="8519810615863882491">"பிரிண்ட்டிங்"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"ஆஃப்"</string>
     <string name="print_settings_summary" msgid="1458773840720811915">"{count,plural, =1{1 பிரிண்ட் சேவை இயக்கப்பட்டுள்ளது}other{# பிரிண்ட் சேவைகள் இயக்கப்பட்டுள்ளன}}"</string>
     <string name="print_jobs_summary" msgid="7040836482336577323">"{count,plural, =1{1 அச்சுப் பணி}other{# அச்சுப் பணிகள்}}"</string>
-    <string name="print_settings_title" msgid="7680498284751129935">"அச்சிடுதல் சேவைகள்"</string>
+    <string name="print_settings_title" msgid="7680498284751129935">"பிரிண்ட் சேவைகள்"</string>
     <string name="print_no_services_installed" msgid="7554057966540602692">"சேவைகள் எதுவும் நிறுவப்படவில்லை"</string>
     <string name="print_no_printers_found" msgid="4833082484646109486">"அச்சுப்பொறிகள் எதுவுமில்லை"</string>
     <string name="print_menu_item_settings" msgid="8202755044784599740">"அமைப்பு"</string>
@@ -2964,7 +2953,7 @@
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"உங்கள் நெட்வொர்க் இணைப்புகளைத் தானாக நிர்வகிப்பதன் மூலம் பேட்டரி ஆயுளை நீட்டிப்பதோடு சாதனச் செயல்திறனையும் மேம்படுத்தும்"</string>
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"ஆன்"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"ஆஃப்"</string>
-    <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Adaptive Connectivity சேவையைப் பயன்படுத்துதல்"</string>
+    <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"சூழல்சார் இணைப்புநிலையைப் பயன்படுத்துதல்"</string>
     <string name="adaptive_connectivity_wifi_switch_title" msgid="5899985025046319472">"வைஃபையிலிருந்து தானாக மொபைல் டேட்டாவுக்கு மாறுதல்"</string>
     <string name="adaptive_connectivity_wifi_switch_summary" msgid="4650230240134029595">"வைஃபை இணைப்பு இல்லாதபோதோ மோசமாக உள்ளபோதோ தானாகவே மொபைல் டேட்டாவைப் பயன்படுத்தும். டேட்டா பயன்பாட்டிற்கான கட்டணங்கள் விதிக்கப்படலாம்."</string>
     <string name="adaptive_connectivity_mobile_network_switch_title" msgid="2473274404695643218">"பேட்டரிக்காக மொபைல் நெட்வொர்க்கைத் தானாக மாற்றுதல்"</string>
@@ -3584,8 +3573,8 @@
     <string name="emergency_tone_alert" msgid="1977698889522966589">"டோன்கள்"</string>
     <string name="emergency_tone_vibrate" msgid="6282296789406984698">"அதிர்வுகள்"</string>
     <string name="boot_sounds_title" msgid="5033062848948884111">"ஒலிகளை இயக்கு"</string>
-    <string name="live_caption_title" msgid="8617086825712756983">"உடனடி வசன உரை"</string>
-    <string name="live_caption_summary" msgid="2898451867595161809">"வசன உரைகளைத் தானாக எழுதும்"</string>
+    <string name="live_caption_title" msgid="8617086825712756983">"உடனடி வசனம்"</string>
+    <string name="live_caption_summary" msgid="2898451867595161809">"வசனங்களைத் தானாகக் காட்டும்"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"வயருள்ள ஹெட்ஃபோன்கள்"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"இணக்கமான மீடியாவிலிருந்து வரும் ஆடியோ இன்னும் ஆழ்ந்த இசை அனுபவத்தைத் தரும்"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"ஆஃப்"</string>
@@ -3825,7 +3814,7 @@
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"லாக்ஸ்கிரீனில் அறிவிப்புகள்"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"உரையாடல்கள், இயல்புநிலை &amp; ஒலியில்லா அறிவிப்புகளைக் காட்டும்"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"உரையாடல், இயல்புநிலை மற்றும் ஒலியில்லா அறிவிப்புகளைக் காட்டு"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"ஒலியில்லாத உரையாடல்களையும் அறிவிப்புகளையும் மறைக்கலாம்"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"ஒலியில்லாத உரையாடல்களையும் அறிவிப்புகளையும் மறை"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"எந்த அறிவிப்புகளையும் காட்டாதே"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"சென்சிட்டிவான அறிவிப்புகள்"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"பாதுகாக்க வேண்டிய விவரங்களைப் பூட்டப்பட்டிருந்தாலும் காட்டும்"</string>
@@ -3902,7 +3891,7 @@
     <string name="no_notification_assistant" msgid="2533323397091834096">"ஏதுமில்லை"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"அறிவிப்பு அணுகலைக் கோரும் ஆப்ஸ் எதுவும் நிறுவப்படவில்லை."</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"அறிவிப்பு அணுகலை அனுமதி"</string>
-    <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Android 12 பதிப்பில் \'Android சூழலுக்கேற்ற அறிவிப்புகள்\' அம்சத்திற்குப் பதிலாக \'மேம்பட்ட அறிவிப்புகள்\' கொடுக்கப்பட்டுள்ளது. இந்த அம்சம், பரிந்துரைக்கப்படும் செயல்களையும் பதில்களையும் காட்டுவதுடன் உங்கள் அறிவிப்புகளையும் ஒழுங்கமைக்கும். \n\nதொடர்புகளின் பெயர்கள், மெசேஜ்கள் போன்ற தனிப்பட்ட தகவல்கள் உட்பட அனைத்து அறிவிப்பு உள்ளடக்கத்தையும் \'மேம்பட்ட அறிவிப்புகள்\' அணுக முடியும். மேலும் இந்த அம்சத்தால் அறிவிப்புகளை நிராகரிக்கவும் அவற்றுக்குப் பதிலளிக்கவும் முடியும் (அழைப்புகளுக்குப் பதிலளிப்பது, \'தொந்தரவு செய்ய வேண்டாம்\' அம்சத்தைக் கட்டுப்படுத்துவது போன்றவை)."</string>
+    <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Android 12 பதிப்பில் \'Android சூழலுக்கேற்ற அறிவிப்புகள்\' அம்சத்திற்குப் பதிலாக \'மேம்பட்ட அறிவிப்புகள்\' கொடுக்கப்பட்டுள்ளது. இந்த அம்சம், பரிந்துரைக்கப்படும் செயல்களையும் பதில்களையும் காட்டுவதுடன் உங்கள் அறிவிப்புகளையும் ஒழுங்கமைக்கும். \n\nதொடர்புகளின் பெயர்கள், மெசேஜ்கள் போன்ற தனிப்பட்ட தகவல்கள் உட்பட அனைத்து அறிவிப்பு உள்ளடக்கத்தையும் \'மேம்பட்ட அறிவிப்புகள்\' அணுக முடியும். மேலும் இந்த அம்சத்தால் அறிவிப்புகளை நிராகரிக்கவும் அவற்றுக்குப் பதிலளிக்கவும் முடியும் (எ.கா. அழைப்புகளுக்குப் பதிலளிப்பது) மற்றும் \'தொந்தரவு செய்ய வேண்டாம்\' அம்சத்தைக் கட்டுப்படுத்தவும் முடியும்."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g>க்கான அறிவிப்பு அணுகலை அனுமதிக்கவா?"</string>
     <string name="notification_listener_security_warning_summary" msgid="1131986567509818121">"தொடர்புகளின் பெயர்கள், படங்கள், உங்களுக்கு வரும் மெசேஜ்களின் உள்ளடக்கம் போன்ற தனிப்பட்ட தகவல்கள் உட்பட அனைத்து அறிவிப்புகளையும் <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ஆப்ஸால் படிக்க முடியும். அத்துடன், இந்த ஆப்ஸால் அறிவிப்புகளை நிராகரிக்கவும் சற்றுநேரம் நிறுத்திவைக்கவும் முடியும், அறிவிப்புகளில் உள்ள பட்டன்களில் குறிப்பிட்டிருக்கும் செயல்களையும் (அழைப்புகளுக்குப் பதிலளிப்பது உட்பட) செய்ய முடியும். \n\nஅதுமட்டுமின்றி, ஆப்ஸால் \'தொந்தரவு செய்ய வேண்டாம்\' அம்சத்தை ஆன்/ஆஃப் செய்ய முடியும், அது தொடர்பான அமைப்புகளை மாற்ற முடியும்."</string>
     <string name="nls_warning_prompt" msgid="1486887096703743841">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ஆப்ஸால் இவற்றைச் செய்ய முடியும்:"</string>
@@ -4672,6 +4661,12 @@
     <string name="double_tap_power_camera_action_summary" msgid="4942585540579590444">"கேமராவைத் திற"</string>
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"வாலட்"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Wallet ஆப்ஸைத் திற"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"பூட்டுத் திரைக்கான ஷார்ட்கட்டை மாற்றவா?"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> பூட்டுத் திரைக்கான ஷார்ட்கட்டாகவும் உள்ளது. இதை மாற்ற விரும்புகிறீர்களா?"</string>
+    <!-- no translation found for double_tap_power_wallet_footer_title (5417023303339032410) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (1267822422365445657) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"செல்ஃபி எடுக்க கேமராவை ஃப்ளிப் செய்தல்"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"வழிசெலுத்தல் பயன்முறை"</string>
@@ -5157,7 +5152,7 @@
     <string name="primary_sim_calls_title" msgid="4961189133582615685">"அழைப்புகள்"</string>
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"மெசேஜ்கள்"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"தானியங்கு டேட்டா மாற்றம்"</string>
-    <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"கவரேஜ் மற்றும் கிடைக்கும் நிலையைப் பொறுத்து சிம்மில் இருந்து டேட்டாவைப் பயன்படுத்தும்"</string>
+    <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"கவரேஜ் மற்றும் கிடைக்கும் நிலையைப் பொறுத்து  டேட்டாவிற்கான சிம்மை மாற்றும்"</string>
     <string name="sim_action_restart_dialog_title" msgid="3507413479633430120">"2 சிம்களைப் பயன்படுத்த மீண்டும் தொடங்குங்கள்"</string>
     <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"ஒரே நேரத்தில் 2 சிம்களைப் பயன்படுத்த, உங்கள் சாதனத்தை மீண்டும் தொடங்கி பிறகு இரண்டு சிம்களையும் இயக்கவும்"</string>
     <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ஐ மட்டும் பயன்படுத்து"</string>
@@ -5740,10 +5735,8 @@
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"ஆடியோ ஸ்ட்ரீமின் QR குறியீடு"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"கடவுச்சொல்: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"<xliff:g id="STREAM_NAME">%1$s</xliff:g> ஐக் கேட்க, மற்றவர்கள் தங்கள் Android சாதனத்துடன் இணக்கமான ஹெட்ஃபோன்களை இணைக்க முடியும். அவர்கள் இந்த QR குறியீட்டை ஸ்கேன் செய்யலாம்."</string>
-    <!-- no translation found for audio_streams_preference_subtitle (4098552511880220046) -->
-    <skip />
-    <!-- no translation found for audio_streams_preference_subtitle_audio_sharing_on (2382924714414148028) -->
-    <skip />
+    <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"Auracast பிராட்காஸ்ட்டைக் கேளுங்கள்"</string>
+    <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"ஆடியோ ஸ்ட்ரீம்களைக் கண்டறிய ஆடியோ பகிர்வை ஆஃப் செய்யுங்கள்"</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"ஆடியோ ஸ்ட்ரீமைக் கண்டறிதல்"</string>
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"ஆடியோவைப் பகிரும் சாதனம் அல்லது அருகிலுள்ள Auracast பிராட்காஸ்ட்டைக் கேளுங்கள்"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"உங்கள் ஆடியோ சாதனம்"</string>
@@ -5781,12 +5774,9 @@
     <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"பின் (PIN) மீட்பு முறையைச் சேர்க்கும்"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"பின்னை மாற்றுதல்"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"பின் மறந்துவிட்டது"</string>
-    <!-- no translation found for supervision_update_recovery_email_preference_title (2057393838251915087) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_title (8447541098148430866) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_summary (4865713157106413979) -->
-    <skip />
+    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"மீட்பு மின்னஞ்சல் முகவரியைச் சேருங்கள்"</string>
+    <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"பின்னை நீக்குதல்"</string>
+    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"இது உங்கள் கண்காணிப்பு அமைப்புகள் அனைத்தையும் மீட்டமைக்கும்"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"இணைய உள்ளடக்க வடிப்பான்கள்"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome மற்றும் Web"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"வெளிப்படையான உள்ளடக்கம் உள்ள தளங்களைத் தடுக்க முயற்சித்தல்"</string>

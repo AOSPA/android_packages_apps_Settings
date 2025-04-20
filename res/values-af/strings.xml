@@ -198,7 +198,7 @@
     <string name="language_picker_category_title" msgid="1792199453060454565">"Voorkeurtaalvolgorde"</string>
     <string name="desc_current_default_language" msgid="1901157141663662859">"Stelseltaal"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Verwyder"</string>
-    <string name="add_a_language" msgid="2126220398077503271">"Voeg \'n taal by"</string>
+    <string name="add_a_language" msgid="2126220398077503271">"Voeg ’n taal by"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Taal"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Voorkeurtaal"</string>
     <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Apptale"</string>
@@ -344,7 +344,9 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Aan/# app het toegang tot ligging}other{Aan/# apps het toegang tot ligging}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Laai tans …"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Apps met die Toestelle in die Omtrek-toestemming kan die relatiewe posisie van gekoppelde toestelle bepaal."</string>
-    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <!-- no translation found for location_settings_footer_location_off_with_telephony (5600725945541382556) -->
+    <skip />
+    <!-- no translation found for location_settings_footer_location_off_no_telephony (2709958040008816610) -->
     <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Meer inligting oor ligginginstellings"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Gaan na ChromeOS-instellings &gt; Privaatheid en sekuriteit &gt; Privaatheidkontroles &gt; Liggingtoegang om dit te verander"</string>
@@ -531,7 +533,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Kom meer te wete oor Horlosieontsluiting"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Voeg horlosie by"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Verwyder horlosie"</string>
-    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Gesigslot en vingerafdrukslot"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Gesigslot en Vingerafdrukslot"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Gesig- en Vingerafdrukslot vir werk"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Opstelling is nodig"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Gesig en vingerafdrukke is bygevoeg"</string>
@@ -611,10 +613,8 @@
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"Slaan opstelling vir patroon en gesig oor?"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"Slaan patroon- en vingerafdrukopstelling oor?"</string>
     <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"Los patroon-, gesig- en vingerafdrukopstelling?"</string>
-    <!-- no translation found for resume_animation (5259729861893297887) -->
-    <skip />
-    <!-- no translation found for pause_animation (2209064682137909056) -->
-    <skip />
+    <string name="resume_animation" msgid="5259729861893297887">"Hervat animasie"</string>
+    <string name="pause_animation" msgid="2209064682137909056">"Onderbreek animasie"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"Stel skermslot op"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Klaar"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Oeps, dis nie die sensor nie"</string>
@@ -652,7 +652,7 @@
     <string name="private_space_lock_title" msgid="7230836881433350526">"Privaatruimte-slot"</string>
     <string name="private_space_one_lock_summary" msgid="2106513606571219068">"Jy kan jou privaat ruimte ontsluit nes jy jou toestel ontsluit of jy kan ’n ander slot kies"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Gebruik toestelskermslot"</string>
-    <string name="private_space_biometric_title" msgid="3934339826674553174">"Gesig- en Vingerafdrukslot"</string>
+    <string name="private_space_biometric_title" msgid="3934339826674553174">"Gesigslot en Vingerafdrukslot"</string>
     <string name="private_space_fingerprint_title" msgid="5989254643211889931">"Vingerafdrukslot"</string>
     <string name="private_space_face_title" msgid="3290402865367663079">"Gesigslot"</string>
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"Tik om op te stel"</string>
@@ -756,8 +756,8 @@
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Jy sal nie jou vingerafdruk kan gebruik om jou werkprofiel te ontsluit, aankope te magtig of by werkprogramme aan te meld nie."</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Enkripsie"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"Geënkripteer"</string>
-    <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Stel \'n skermslot"</string>
-    <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Stel \'n PIN, patroon of wagwoord vir hierdie toestel vir bykomende sekuriteit."</string>
+    <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Stel ’n skermslot"</string>
+    <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Stel ’n PIN, patroon of wagwoord vir hierdie toestel vir bykomende sekuriteit."</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Stel skermslot"</string>
     <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"Stel ’n skermslot"</string>
     <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"Stel ’n PIN, patroon of wagwoord vir hierdie toestel vir bykomende sekuriteit."</string>
@@ -1032,8 +1032,7 @@
     <string name="android_beam_explained" msgid="5684416131846701256">"Wanneer hierdie kenmerk aangeskakel is, kan jy appinhoud na \'n ander toestel met NFC-vermoë straal deur die toestelle na aan mekaar te hou. Jy kan byvoorbeeld webbladsye, YouTube-video\'s, kontakte en meer straal.\n\nHou eenvoudig die toestelle bymekaar (gewoonlik rug aan rug) en tik dan op jou skerm. Die app bepaal wat gestraal word."</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi-fi"</string>
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Gebruik Wi-Fi"</string>
-    <!-- no translation found for wifi_networks_category (8011323954745036753) -->
-    <skip />
+    <string name="wifi_networks_category" msgid="8011323954745036753">"Netwerke"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Wi-Fi-instellings"</string>
     <string name="wifi_select_network" msgid="6692897876718813259">"Kies Wi-Fi"</string>
     <string name="wifi_starting" msgid="6147022683967506341">"Skakel tans Wi-Fi aan…"</string>
@@ -1055,7 +1054,7 @@
     <string name="wifi_cellular_data_fallback_title" msgid="2844653839490977040">"Skakel outomaties oor na mobiele data"</string>
     <string name="wifi_cellular_data_fallback_summary" msgid="7039944853033554386">"Gebruik mobiele data wanneer Wi-Fi geen internettoegang het nie. Datagebruik kan geld."</string>
     <string name="wifi_add_network" msgid="4178564862173751181">"Voeg netwerk by"</string>
-    <string name="wifi_configure_settings_preference_title" msgid="2536725796700696566">"Wi‑Fi-voorkeure"</string>
+    <string name="wifi_configure_settings_preference_title" msgid="2536725796700696566">"Wi‑fi-voorkeure"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="7822368955551467382">"Wi‑fi skakel outomaties weer aan"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="5710203586018223864">"Wi‑fi skakel nie outomaties weer aan nie"</string>
     <string name="wifi_menu_p2p" msgid="5234165837732940385">"Wi-Fi Direct"</string>
@@ -1122,7 +1121,7 @@
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Sentreer die QR-kode hieronder om aan “<xliff:g id="SSID">%1$s</xliff:g>” te koppel"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Skandeer \'n QR-kode om by wi-fi aan te sluit"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Deel wi-fi"</string>
-    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"Skandeer hierdie QR-kode met \'n ander toestel om by “<xliff:g id="SSID">%1$s</xliff:g>” aan te sluit"</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"Skandeer hierdie QR-kode met ’n ander toestel om by “<xliff:g id="SSID">%1$s</xliff:g>” aan te sluit"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"Skandeer hierdie QR-kode om aan “<xliff:g id="SSID">%1$s</xliff:g>” te koppel"</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"Probeer weer. Kontak die toestelvervaardiger as die kwessie voortduur"</string>
     <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"Iets is fout"</string>
@@ -1214,22 +1213,14 @@
     <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> – Laai tans"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"Warmkolverbinding"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"Verbindingsterkte"</string>
-    <!-- no translation found for ethernet_dns1 (6487470669719468602) -->
-    <skip />
-    <!-- no translation found for ethernet_dns2 (484620572555181363) -->
-    <skip />
-    <!-- no translation found for ethernet_gateway (4064061619318875567) -->
-    <skip />
-    <!-- no translation found for ethernet_network_prefix_length (3693127271457763198) -->
-    <skip />
-    <!-- no translation found for ethernet_ip_settings (3344064201878792090) -->
-    <skip />
-    <!-- no translation found for ethernet_config_submit (724743720212124025) -->
-    <skip />
-    <!-- no translation found for ethernet_config_cancel (986322993908814366) -->
-    <skip />
-    <!-- no translation found for ethernet_config_title (4784063109810004382) -->
-    <skip />
+    <string name="ethernet_dns1" msgid="6487470669719468602">"DNS 1 (tensy deur private DNS geïgnoreer)"</string>
+    <string name="ethernet_dns2" msgid="484620572555181363">"DNS 1 (tensy deur private DNS geïgnoreer)"</string>
+    <string name="ethernet_gateway" msgid="4064061619318875567">"Deurgang"</string>
+    <string name="ethernet_network_prefix_length" msgid="3693127271457763198">"Lengte van netwerkvoorvoegsel"</string>
+    <string name="ethernet_ip_settings" msgid="3344064201878792090">"IP-instellings"</string>
+    <string name="ethernet_config_submit" msgid="724743720212124025">"Dien in"</string>
+    <string name="ethernet_config_cancel" msgid="986322993908814366">"Kanselleer"</string>
+    <string name="ethernet_config_title" msgid="4784063109810004382">"Ethernet-instellings"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Gestoorde netwerke"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Intekeninge"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Ander netwerke"</string>
@@ -1458,8 +1449,7 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Af"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Wanneer om te begin"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Lig op om wakker te maak"</string>
-    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
-    <skip />
+    <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Beperk tot draadlose batterylaai"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Stemmingvertoning"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Wanneer om te wys"</string>
     <string name="doze_title" msgid="1523090408230862316">"Maak skerm wakker vir kennisgewings"</string>
@@ -1626,8 +1616,7 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Terwyl dit laai"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"Terwyl dit laai en regop is"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"Terwyl dit gedok is"</string>
-    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
-    <skip />
+    <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"Beperk tot draadlose batterylaai"</string>
     <string name="apn_settings" msgid="4295467389400441299">"Toegangspuntname"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Redigeer toegangspunt"</string>
     <string name="apn_add" msgid="9069613192201630934">"Voeg toegangspunt by"</string>
@@ -1741,10 +1730,9 @@
     <string name="rx_ethernet_speed" msgid="6642000569214969711">"Ontvangskakelspoed"</string>
     <string name="ethernet_network_usage" msgid="3795965384177426780">"Netwerkgebruik"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernet-verbinding"</string>
-    <!-- no translation found for ethernet_modify (1326316717004440503) -->
-    <skip />
+    <string name="ethernet_modify" msgid="1326316717004440503">"Wysig"</string>
     <string name="tethering_footer_info" msgid="6824352505979800594">"Gebruik warmkol en verbinding om deur jou mobiele dataverbinding internet aan ander toestelle te verskaf. Apps kan ook ’n warmkol skep om inhoud met toestelle in die omtrek te deel."</string>
-    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Gebruik warmkol en verbinding om deur jou wi-fi- of mobiele dataverbinding internet aan ander toestelle te verskaf. Apps kan ook \'n warmkol skep om inhoud met toestelle in die omtrek te deel."</string>
+    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Gebruik warmkol en verbinding om deur jou wi-fi- of mobieledataverbinding internet aan ander toestelle te verskaf. Apps kan ook ’n warmkol skep om inhoud met toestelle in die omtrek te deel."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Hulp"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"Mobiele netwerk"</string>
     <string name="sms_application_title" msgid="4791107002724108809">"SMS-app"</string>
@@ -2170,6 +2158,8 @@
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Gaan na tuisskerm"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"Gaan terug"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"Bekyk onlangse apps"</string>
+    <string name="three_finger_tap_launch_app_title" msgid="55761877549896819">"Maak ’n ander app oop"</string>
+    <string name="three_finger_tap_launch_app_summary" msgid="2015894823281420733">"Kies uit ’n lys geïnstalleerde apps"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"Gaan na tuisskerm"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"Swiep op met drie vingers enige plek op jou raakpaneel"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"Gaan terug"</string>
@@ -2287,7 +2277,7 @@
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"2 dae gelede"</string>
     <string name="color_contrast_preview_email_badge" msgid="4845484039428505392">"Volg op?"</string>
     <string name="color_contrast_preview_email_title" msgid="198712116139754823">"Sakereisverslag"</string>
-    <string name="color_contrast_preview_email_body" msgid="2714343154965937945">"Kontak my of Helen vir verdere hulp. Hierdie verslag sal"</string>
+    <string name="color_contrast_preview_email_body" msgid="2714343154965937945">"Kontak my of Helen vir verdere hulp. Hierdie verslag bevat"</string>
     <string name="color_contrast_preview_email_attachment_name" msgid="852407311884814746">"Kliëntuitgawes"</string>
     <string name="color_contrast_about_title" msgid="5939566801408667867">"Meer oor kleurkontras"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Maak skerm donkerder"</string>
@@ -2623,8 +2613,7 @@
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{Kort ({time} sekonde)}other{Kort ({time} sekondes)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{Medium ({time} sekonde)}other{Medium ({time} sekondes)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{Lank ({time} sekonde)}other{Lank ({time} sekondes)}}"</string>
-    <!-- no translation found for accessibility_autoclick_delay_unit_second (1562809410497613173) -->
-    <skip />
+    <string name="accessibility_autoclick_delay_unit_second" msgid="1562809410497613173">"{count,plural, =1{{time} sekonde}other{{time} sekondes}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Instellings"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"Aan"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"Af"</string>
@@ -3871,7 +3860,7 @@
     <string name="clear" msgid="5092178335409471100">"Vee uit"</string>
     <string name="clear_conversation" msgid="5564321180363279096">"Vee uit <xliff:g id="CONVERSATION_NAME">%1$s</xliff:g>"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Prioriteit- en gewysigde gesprekke sal hier verskyn"</string>
-    <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Nadat jy \'n gesprek as prioriteit gemerk het, of enige ander veranderinge aan gesprekke gemaak het, sal hulle hier verskyn. \n\nHoe om gesprekinstellings te verander: \nSwiep van die bokant van die skerm af om die kennisgewingskerm oop te maak, en raak en hou dan \'n gesprek."</string>
+    <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Nadat jy ’n gesprek as prioriteit gemerk het, of enige ander veranderinge aan gesprekke gemaak het, sal hulle hier verskyn. \n\nHoe om gesprekinstellings te verander: \nSwiep van die bokant van die skerm af om die kennisgewingskerm oop te maak, en raak en hou dan ’n gesprek."</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"Minimeer"</string>
     <string name="notification_importance_high_title" msgid="394129291760607808">"Spring op skerm"</string>
     <string name="notification_silence_title" msgid="4085829874452944989">"Stil"</string>
@@ -4672,6 +4661,14 @@
     <string name="double_tap_power_camera_action_summary" msgid="4942585540579590444">"Maak Kamera oop"</string>
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Wallet"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Maak Wallet oop"</string>
+    <!-- no translation found for double_tap_power_lockscreen_shortcut_tip_title (9210589521260265387) -->
+    <skip />
+    <!-- no translation found for double_tap_power_lockscreen_shortcut_tip_description (1894710205138218048) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_footer_title (5417023303339032410) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (1267822422365445657) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Draai kamera om vir selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Navigasiemodus"</string>
@@ -5361,7 +5358,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Wys speler"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Laat kamerasagteware-uitbreidings toe"</string>
-    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Aktiveer die versteksagteware-implementering van gevorderde kamera-eienskappe soos HDR, Nag, of ander kamera-uitbreidings."</string>
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Aktiveer die versteksagteware-implementering van gevorderde kamera-kenmerke soos HDR, Nag, of ander kamera-uitbreidings."</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth sal aanskakel"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM\'s"</string>
@@ -5740,10 +5737,8 @@
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"QR-kode van oudiostroom"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Wagwoord: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Ander mense kan versoenbare oorfone aan hul Android-toestel koppel om na <xliff:g id="STREAM_NAME">%1$s</xliff:g> te luister. Hulle kan dan hierdie QR-kode skandeer."</string>
-    <!-- no translation found for audio_streams_preference_subtitle (4098552511880220046) -->
-    <skip />
-    <!-- no translation found for audio_streams_preference_subtitle_audio_sharing_on (2382924714414148028) -->
-    <skip />
+    <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"Luister na Auracast-uitsending"</string>
+    <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"Skakel oudiodeling af om oudiostrome te kry"</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Vind ’n oudiostroom"</string>
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Luister na ’n toestel wat oudio deel of na ’n Auracast-uitsending in die omtrek"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"Jou oudiotoestel"</string>
@@ -5781,12 +5776,9 @@
     <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"Voeg ’n PIN-terugstelmetode by"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Verander PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Het PIN vergeet"</string>
-    <!-- no translation found for supervision_update_recovery_email_preference_title (2057393838251915087) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_title (8447541098148430866) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_summary (4865713157106413979) -->
-    <skip />
+    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Dateer terugstel-e-posadres op"</string>
+    <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Vee PIN uit"</string>
+    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Dit sal al jou toesiginstellings terugstel"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Webinhoudfilters"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome en web"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Probeer om eksplisiete werwe te blokkeer"</string>

@@ -47,7 +47,7 @@
         android:id="@android:id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="?android:attr/listPreferredItemPaddingStart"
+        android:layout_marginStart="16dp"
         android:hyphenationFrequency="normalFast"
         android:lineBreakWordStyle="phrase"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -84,6 +84,7 @@
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="@android:id/title"
         app:layout_constraintTop_toBottomOf="@android:id/summary"
-        app:layout_constraintWidth_max="@dimen/settingslib_illustration_width" />
+        app:layout_constraintWidth_max="@dimen/settingslib_illustration_width"
+        tools:src="@drawable/accessibility_shortcut_type_volume_keys" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

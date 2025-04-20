@@ -344,7 +344,9 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{অন আছে / # টা এপে অৱস্থান এক্সেছ কৰিব পাৰে}one{অন আছে / # টা এপে অৱস্থান এক্সেছ কৰিব পাৰে}other{অন আছে / # টা এপে অৱস্থান এক্সেছ কৰিব পাৰে}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"ল’ড হৈ আছে…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"নিকটৱৰ্তী ডিভাইচৰ সৈতে যোগাযোগ কৰিব পৰাৰ অনুমতি থকা এপ্‌সমূহে সংযুক্ত হৈ থকা ডিভাইচৰ আপেক্ষিক স্থান নিৰ্ধাৰণ কৰিব পাৰে।"</string>
-    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <!-- no translation found for location_settings_footer_location_off_with_telephony (5600725945541382556) -->
+    <skip />
+    <!-- no translation found for location_settings_footer_location_off_no_telephony (2709958040008816610) -->
     <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"অৱস্থানৰ ছেটিঙৰ বিষয়ে অধিক জানক"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"সলনি কৰিবলৈ ChromeOS ছেটিং &gt; গোপনীয়তা আৰু সুৰক্ষা &gt; গোপনীয়তাৰ নিয়ন্ত্ৰণ &gt; অৱস্থানৰ এক্সেছলৈ যাওক"</string>
@@ -1030,8 +1032,7 @@
     <string name="android_beam_explained" msgid="5684416131846701256">"এই সুবিধাটো সক্ষম কৰিলে, আপুনি এপৰ সমল অইন এটা NFC-সক্ষম ডিভাইচলৈ দুয়োটা ডিভাইচ ওচৰা-ওচৰিকৈ ৰাখি বীম কৰিব পাৰিব। উদাহৰণস্বৰূপে, আপুনি ৱেব পৃষ্ঠা, YouTubeৰ ভিডিঅ\' আৰু সম্পৰ্ক সূচীকে আদি কৰি অইন বহুত সমল বীম কৰিব পাৰিব।\n\nদুয়োটা ডিভাইচ ওচৰা-ওচৰিকৈ ৰাখক (সাধাৰণতে, পিঠিয়া-পিঠিকৈ) আৰু তাৰ পাছত স্ক্ৰীনত টিপক। কি কি বীম কৰা হয় তাক এপ্‌টোৱে নিৰ্ধাৰিত কৰে।"</string>
     <string name="wifi_settings" msgid="8313301946393559700">"ৱাই-ফাই"</string>
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"ৱাই-ফাই ব্যৱহাৰ কৰক"</string>
-    <!-- no translation found for wifi_networks_category (8011323954745036753) -->
-    <skip />
+    <string name="wifi_networks_category" msgid="8011323954745036753">"নেটৱৰ্ক"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"ৱাই-ফাই ছেটিং"</string>
     <string name="wifi_select_network" msgid="6692897876718813259">"ৱাই-ফাই বাছনি কৰক"</string>
     <string name="wifi_starting" msgid="6147022683967506341">"ৱাই-ফাই অন কৰি থকা হৈছে…"</string>
@@ -1212,22 +1213,14 @@
     <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> ‑ চাৰ্জ হৈ আছে"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"হটস্পটৰ সৈতে সংযোগ"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"সংযোগৰ ক্ষমতা"</string>
-    <!-- no translation found for ethernet_dns1 (6487470669719468602) -->
-    <skip />
-    <!-- no translation found for ethernet_dns2 (484620572555181363) -->
-    <skip />
-    <!-- no translation found for ethernet_gateway (4064061619318875567) -->
-    <skip />
-    <!-- no translation found for ethernet_network_prefix_length (3693127271457763198) -->
-    <skip />
-    <!-- no translation found for ethernet_ip_settings (3344064201878792090) -->
-    <skip />
-    <!-- no translation found for ethernet_config_submit (724743720212124025) -->
-    <skip />
-    <!-- no translation found for ethernet_config_cancel (986322993908814366) -->
-    <skip />
-    <!-- no translation found for ethernet_config_title (4784063109810004382) -->
-    <skip />
+    <string name="ethernet_dns1" msgid="6487470669719468602">"DNS ১ (যদিহে ব্যক্তিগত DNSএ অ’ভাৰৰাইড কৰা নাই)"</string>
+    <string name="ethernet_dns2" msgid="484620572555181363">"DNS ২ (যদিহে ব্যক্তিগত DNSএ অ’ভাৰৰাইড কৰা নাই)"</string>
+    <string name="ethernet_gateway" msgid="4064061619318875567">"গে’টৱে’"</string>
+    <string name="ethernet_network_prefix_length" msgid="3693127271457763198">"নেটৱৰ্ক প্ৰিফিক্সৰ দীঘ"</string>
+    <string name="ethernet_ip_settings" msgid="3344064201878792090">"আইপি ছেটিং"</string>
+    <string name="ethernet_config_submit" msgid="724743720212124025">"দাখিল কৰক"</string>
+    <string name="ethernet_config_cancel" msgid="986322993908814366">"বাতিল কৰক"</string>
+    <string name="ethernet_config_title" msgid="4784063109810004382">"ইথাৰনেটৰ ছেটিং"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"ছেভ কৰি ৰখা নেটৱৰ্কসমূহ"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"গ্ৰাহকভুক্তি"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"অন্য নেটৱৰ্ক"</string>
@@ -1456,8 +1449,7 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"অফ হৈ আছে"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"ষ্টাৰ্ট কৰাৰ সময়"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"সক্ৰিয় কৰিবলৈ দাঙক"</string>
-    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
-    <skip />
+    <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"বেতাঁৰ চাৰ্জিঙত সীমাবদ্ধ কৰক"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"স্তিমিত ডিছপ্লে’"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"কেতিয়া দেখুওৱা হ\'ব"</string>
     <string name="doze_title" msgid="1523090408230862316">"জাননী আহিলে স্ক্ৰীন জাগ্ৰত কৰক"</string>
@@ -1624,8 +1616,7 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"চাৰ্জিঙৰ সময়ত"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"চাৰ্জিং কৰা আৰু ওপৰমুৱা কৰি থোৱাৰ সময়ত"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"ডক হৈ থাকোঁতে"</string>
-    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
-    <skip />
+    <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"বেতাঁৰ চাৰ্জিঙত সীমাবদ্ধ কৰক"</string>
     <string name="apn_settings" msgid="4295467389400441299">"এপিএনসমূহ"</string>
     <string name="apn_edit" msgid="2003683641840248741">"এক্সেছ পইণ্ট সম্পাদনা কৰক"</string>
     <string name="apn_add" msgid="9069613192201630934">"এক্সেছ পইণ্ট যোগ দিয়ক"</string>
@@ -1739,8 +1730,7 @@
     <string name="rx_ethernet_speed" msgid="6642000569214969711">"লিংকৰ গতিবেগ পোৱা"</string>
     <string name="ethernet_network_usage" msgid="3795965384177426780">"নেটৱৰ্কৰ ব্যৱহাৰ"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"ইথাৰনেট টে\'ডাৰিং"</string>
-    <!-- no translation found for ethernet_modify (1326316717004440503) -->
-    <skip />
+    <string name="ethernet_modify" msgid="1326316717004440503">"সংশোধন কৰক"</string>
     <string name="tethering_footer_info" msgid="6824352505979800594">"আপোনাৰ ডেটা সংযোগৰ যোগেৰে আন ডিভাইচলৈ ইণ্টাৰনেট যোগান ধৰিবলৈ হটস্পট আৰু টেডাৰিং সুবিধা ব্যৱহাৰ কৰক। নিকটৱৰ্তী ডিভাইচৰ সৈতে সমল শ্বেয়াৰ কৰিবলৈ এপেও হটস্পট সৃষ্টি কৰিব পাৰে।"</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"আপোনাৰ ৱাই-ফাই অথবা ম’বাইল ডেটাৰ জৰিয়তে অন্য ডিভাইচসমূহক ইণ্টাৰনেট প্ৰদান কৰিবলৈ হটস্পট আৰু টে\'ডাৰিং ব্যৱহাৰ কৰক। নিকটৱৰ্তী ডিভাইচসমূহৰ সৈতে সমল শ্বেয়াৰ কৰিবলৈ এপ্‌সমূহেও এটা হটস্পট সৃষ্টি কৰিব পাৰে।"</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"সহায়"</string>
@@ -2168,6 +2158,8 @@
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"গৃহ পৃষ্ঠালৈ যাওক"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"উভতি যাওক"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"শেহতীয়া এপ্‌সমূহ চাওক"</string>
+    <string name="three_finger_tap_launch_app_title" msgid="55761877549896819">"অন্য এটা এপ্ খোলক"</string>
+    <string name="three_finger_tap_launch_app_summary" msgid="2015894823281420733">"ইনষ্টল কৰা এপ্‌সমূহৰ সূচীখনৰ পৰা বাছনি কৰক"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"গৃহ পৃষ্ঠালৈ যাওক"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"আপোনাৰ টাচ্চপেডৰ যিকোনো ঠাইত তিনিটা আঙুলিৰে ওপৰলৈ ছোৱাইপ কৰক"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"উভতি যাওক"</string>
@@ -2621,8 +2613,7 @@
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{চুটি ({time} ছেকেণ্ড)}one{চুটি ({time} ছেকেণ্ড)}other{চুটি ({time} ছেকেণ্ড)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{মধ্যমীয়া ({time} ছেকেণ্ড)}one{মধ্যমীয়া ({time} ছেকেণ্ড)}other{মধ্যমীয়া ({time} ছেকেণ্ড)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{দীঘলীয়া ({time} ছেকেণ্ড)}one{দীঘলীয়া ({time} ছেকেণ্ড)}other{দীঘলীয়া ({time} ছেকেণ্ড)}}"</string>
-    <!-- no translation found for accessibility_autoclick_delay_unit_second (1562809410497613173) -->
-    <skip />
+    <string name="accessibility_autoclick_delay_unit_second" msgid="1562809410497613173">"{count,plural, =1{{time} ছেকেণ্ড}one{{time} ছেকেণ্ড}other{{time} ছেকেণ্ড}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"ছেটিং"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"অন হৈ আছে"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"অফ হৈ আছে"</string>
@@ -4670,6 +4661,14 @@
     <string name="double_tap_power_camera_action_summary" msgid="4942585540579590444">"কেমেৰা খোলক"</string>
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Wallet"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Wallet খোলক"</string>
+    <!-- no translation found for double_tap_power_lockscreen_shortcut_tip_title (9210589521260265387) -->
+    <skip />
+    <!-- no translation found for double_tap_power_lockscreen_shortcut_tip_description (1894710205138218048) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_footer_title (5417023303339032410) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (1267822422365445657) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"ছেল্ফীৰ বাবে কেমেৰা লুটিয়াওক"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"নেভিগেশ্বন ম’ড"</string>
@@ -5738,10 +5737,8 @@
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"অডিঅ’ ষ্ট্ৰীমৰ কিউআৰ ক’ড"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"পাছৱৰ্ড: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"<xliff:g id="STREAM_NAME">%1$s</xliff:g> শুনিবলৈ, অন্য লোকসকলে নিজৰ Android ডিভাইচৰ সৈতে সুসংগত হেডফ’নসমূহ সংযোগ কৰিব পাৰে। তেওঁলোকে তাৰ পাছত এই কিউআৰ ক’ডটো স্কেন কৰিব পাৰে।"</string>
-    <!-- no translation found for audio_streams_preference_subtitle (4098552511880220046) -->
-    <skip />
-    <!-- no translation found for audio_streams_preference_subtitle_audio_sharing_on (2382924714414148028) -->
-    <skip />
+    <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"Auracastৰ সম্প্ৰচাৰ শুনক"</string>
+    <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"অডিঅ’ ষ্ট্ৰীম বিচাৰি পাবলৈ অডিঅ’ শ্বেয়াৰিং অফ কৰক"</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"অডিঅ’ ষ্ট্ৰীম বিচাৰক"</string>
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"অডিঅ’ শ্বেয়াৰ কৰি থকা ডিভাইচ এটা অথবা কোনো নিকটৱৰ্তী Auracast সম্প্ৰচাৰ শুনক"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"আপোনাৰ অডিঅ’ ডিভাইচ"</string>
@@ -5779,12 +5776,9 @@
     <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"এটা পিন পুনৰুদ্ধাৰ কৰাৰ পদ্ধতি যোগ দিয়ক"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"পিন সলনি কৰক"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"পিনটো পাহৰিছোঁ"</string>
-    <!-- no translation found for supervision_update_recovery_email_preference_title (2057393838251915087) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_title (8447541098148430866) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_summary (4865713157106413979) -->
-    <skip />
+    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"একাউণ্ট পুনৰুদ্ধাৰৰ বাবে ছেট কৰা ইমেইল আপডে’ট কৰক"</string>
+    <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"পিনটো মচক"</string>
+    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"এইটোৱে আপোনাৰ আটাইবোৰ তদাৰক কৰাৰ ছেটিং ৰিছেট কৰিব"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"ৱেব সমলৰ ফিল্টাৰ"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome আৰু ৱেব"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"অশ্লীল ছাইট অৱৰোধ কৰিবলৈ চেষ্টা কৰক"</string>

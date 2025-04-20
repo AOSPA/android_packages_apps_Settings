@@ -15,11 +15,15 @@
  */
 package com.android.settings.supervision
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.metadata.BooleanValuePreference
+import com.android.settingslib.metadata.PreferenceLifecycleContext
+import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
@@ -30,7 +34,15 @@ import com.android.settingslib.widget.SelectorWithWidgetPreference
 /** Base class of web content filters Safe sites preferences. */
 sealed class SupervisionSafeSitesPreference(
     protected val dataStore: SupervisionSafeSitesDataStore
-) : BooleanValuePreference, SelectorWithWidgetPreference.OnClickListener, PreferenceBinding {
+) :
+    BooleanValuePreference,
+    SelectorWithWidgetPreference.OnClickListener,
+    PreferenceBinding,
+    PreferenceLifecycleProvider {
+    private lateinit var lifeCycleContext: PreferenceLifecycleContext
+
+    abstract val supervisionCredentialRequestCode: Int
+
     override fun storage(context: Context) = dataStore
 
     override fun getReadPermissions(context: Context) = Permissions.EMPTY
@@ -52,12 +64,18 @@ sealed class SupervisionSafeSitesPreference(
 
     override fun createWidget(context: Context) = SelectorWithWidgetPreference(context)
 
-    override fun onRadioButtonClicked(emiter: SelectorWithWidgetPreference) {
-        emiter.parent?.forEachRecursively {
-            if (it is SelectorWithWidgetPreference) {
-                it.isChecked = it == emiter
-            }
-        }
+    override fun onCreate(context: PreferenceLifecycleContext) {
+        lifeCycleContext = context
+    }
+
+    override fun onRadioButtonClicked(emitter: SelectorWithWidgetPreference) {
+        val intent = Intent(lifeCycleContext, ConfirmSupervisionCredentialsActivity::class.java)
+
+        lifeCycleContext.startActivityForResult(
+            intent,
+            supervisionCredentialRequestCode,
+            /* options= */ null,
+        )
     }
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
@@ -67,12 +85,31 @@ sealed class SupervisionSafeSitesPreference(
             it.setOnClickListener(this)
         }
     }
+
+    override fun onActivityResult(
+        context: PreferenceLifecycleContext,
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?,
+    ): Boolean {
+        if (requestCode != supervisionCredentialRequestCode) return false
+        if (resultCode == Activity.RESULT_OK) {
+            val preference = context.findPreference<SelectorWithWidgetPreference>(key)
+            // Iterate through the SafeSites options and update the checked status.
+            preference?.parent?.forEachRecursively {
+                if (it is SelectorWithWidgetPreference) {
+                    it.isChecked = it.key == key
+                }
+            }
+            return true
+        }
+        return false
+    }
 }
 
 /** The "Try to block explicit sites" preference. */
 class SupervisionBlockExplicitSitesPreference(dataStore: SupervisionSafeSitesDataStore) :
     SupervisionSafeSitesPreference(dataStore) {
-
     override val key
         get() = KEY
 
@@ -82,22 +119,27 @@ class SupervisionBlockExplicitSitesPreference(dataStore: SupervisionSafeSitesDat
     override val summary
         get() = R.string.supervision_web_content_filters_browser_block_explicit_sites_summary
 
+    override val supervisionCredentialRequestCode = REQUEST_CODE_SUPERVISION_CREDENTIALS
+
     companion object {
         const val KEY = "web_content_filters_browser_block_explicit_sites"
+        const val REQUEST_CODE_SUPERVISION_CREDENTIALS = 10
     }
 }
 
 /** The "Allow all sites" preference. */
 class SupervisionAllowAllSitesPreference(dataStore: SupervisionSafeSitesDataStore) :
     SupervisionSafeSitesPreference(dataStore) {
-
     override val key
         get() = KEY
 
     override val title
         get() = R.string.supervision_web_content_filters_browser_allow_all_sites_title
 
+    override val supervisionCredentialRequestCode = REQUEST_CODE_SUPERVISION_CREDENTIALS
+
     companion object {
         const val KEY = "web_content_filters_browser_allow_all_sites"
+        const val REQUEST_CODE_SUPERVISION_CREDENTIALS = 11
     }
 }

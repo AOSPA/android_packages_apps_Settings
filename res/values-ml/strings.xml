@@ -344,7 +344,9 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{ഓണാണ് / # ആപ്പിന് ലൊക്കേഷനിലേക്ക് ആക്‌സസ് ഉണ്ട്}other{ഓണാണ് / # ആപ്പുകൾക്ക് ലൊക്കേഷനിലേക്ക് ആക്‌സസ് ഉണ്ട്}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"ലോഡ് ചെയ്യുന്നു…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"സമീപമുള്ള ഉപകരണങ്ങളുടെ അനുമതിയുള്ള ആപ്പുകൾക്ക്, കണക്‌റ്റ് ചെയ്‌തിരിക്കുന്ന ഉപകരണങ്ങളുടെ ഏകദേശ സ്ഥാനം നിർണ്ണയിക്കാനാകും."</string>
-    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <!-- no translation found for location_settings_footer_location_off_with_telephony (5600725945541382556) -->
+    <skip />
+    <!-- no translation found for location_settings_footer_location_off_no_telephony (2709958040008816610) -->
     <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"ലൊക്കേഷൻ ക്രമീകരണത്തെക്കുറിച്ച് കൂടുതലറിയുക"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"മാറ്റാൻ, ChromeOS ക്രമീകരണം &gt; സ്വകാര്യതയും സുരക്ഷയും &gt; സ്വകാര്യതാ നിയന്ത്രണങ്ങൾ &gt; ലൊക്കേഷൻ ആക്സസ് എന്നിങ്ങനെ പോകുക"</string>
@@ -1030,8 +1032,7 @@
     <string name="android_beam_explained" msgid="5684416131846701256">"ഈ ഫീച്ചർ ഓണായിരിക്കുമ്പോൾ, ഉപകരണങ്ങൾ വളരെ അടുത്തടുത്തായി പിടിച്ചുകൊണ്ട് NFC പ്രവർത്തനക്ഷമമാക്കിയ മറ്റൊരു ഉപകരണത്തിലേക്ക് നിങ്ങൾക്ക് ആപ്പ് ഉള്ളടക്കം ബീം ചെയ്യാനാകും. ഉദാഹരണത്തിന്, വെബ് പേജുകളും YouTube വീഡിയോകളും കോൺടാക്റ്റുകളും മറ്റും നിങ്ങൾക്ക് ബീം ചെയ്യാം.\n\nഉപകരണങ്ങൾ ഒരുമിച്ച് കൊണ്ടുവന്ന് (സാധാരണ ഗതിയിൽ പിൻഭാഗങ്ങൾ ചേർത്തുപിടിച്ച്) നിങ്ങളുടെ സ്‌ക്രീനിൽ ടാപ്പുചെയ്യുകയേ വേണ്ടൂ. എന്തൊക്കെ ബീം ചെയ്യണമെന്നത് ആപ്പാണ് നിർണ്ണയിക്കുന്നത്."</string>
     <string name="wifi_settings" msgid="8313301946393559700">"വൈഫൈ"</string>
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"വൈഫൈ ഉപയോഗിക്കുക"</string>
-    <!-- no translation found for wifi_networks_category (8011323954745036753) -->
-    <skip />
+    <string name="wifi_networks_category" msgid="8011323954745036753">"നെറ്റ്‌വർക്കുകൾ"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"വൈഫൈ ക്രമീകരണങ്ങൾ"</string>
     <string name="wifi_select_network" msgid="6692897876718813259">"വൈഫൈ തിരഞ്ഞെടുക്കുക"</string>
     <string name="wifi_starting" msgid="6147022683967506341">"വൈഫൈ ഓണാക്കുന്നു…"</string>
@@ -1212,22 +1213,14 @@
     <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> ‑ ചാർജ് ചെയ്യുന്നു"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"ഹോട്ട്‌സ്‌പോട്ട് കണക്ഷൻ"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"കണക്ഷൻ ശക്തി"</string>
-    <!-- no translation found for ethernet_dns1 (6487470669719468602) -->
-    <skip />
-    <!-- no translation found for ethernet_dns2 (484620572555181363) -->
-    <skip />
-    <!-- no translation found for ethernet_gateway (4064061619318875567) -->
-    <skip />
-    <!-- no translation found for ethernet_network_prefix_length (3693127271457763198) -->
-    <skip />
-    <!-- no translation found for ethernet_ip_settings (3344064201878792090) -->
-    <skip />
-    <!-- no translation found for ethernet_config_submit (724743720212124025) -->
-    <skip />
-    <!-- no translation found for ethernet_config_cancel (986322993908814366) -->
-    <skip />
-    <!-- no translation found for ethernet_config_title (4784063109810004382) -->
-    <skip />
+    <string name="ethernet_dns1" msgid="6487470669719468602">"DNS 1 (സ്വകാര്യ DNS അസാധുവാക്കിയില്ലെങ്കിൽ)"</string>
+    <string name="ethernet_dns2" msgid="484620572555181363">"DNS 2 (സ്വകാര്യ DNS അസാധുവാക്കിയില്ലെങ്കിൽ)"</string>
+    <string name="ethernet_gateway" msgid="4064061619318875567">"ഗേറ്റ്‌വേ"</string>
+    <string name="ethernet_network_prefix_length" msgid="3693127271457763198">"നെറ്റ്‌വർക്ക് പ്രിഫിക്സ് ദൈർഘ്യം"</string>
+    <string name="ethernet_ip_settings" msgid="3344064201878792090">"IP ക്രമീകരണം"</string>
+    <string name="ethernet_config_submit" msgid="724743720212124025">"സമർപ്പിക്കുക"</string>
+    <string name="ethernet_config_cancel" msgid="986322993908814366">"റദ്ദാക്കുക"</string>
+    <string name="ethernet_config_title" msgid="4784063109810004382">"ഇതർനെറ്റ് ക്രമീകരണം"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"സംരക്ഷിച്ച നെറ്റ്‌വർക്ക്"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"സബ്‌സ്‌ക്രിപ്‌ഷനുകൾ"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"മറ്റ് നെറ്റ്‌വർക്കുകൾ"</string>
@@ -1456,8 +1449,7 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"ഓഫ്"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"എപ്പോൾ തുടങ്ങണം"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"സജീവമാക്കാൻ ലിഫ്റ്റുചെയ്യുക"</string>
-    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
-    <skip />
+    <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"വയർലെസ് ചാർജ്ജിംഗ് ആയി പരിമിതപ്പെടുത്തുക"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"പാതിമയക്ക ഡിസ്‌പ്ലേ"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"കാണിക്കേണ്ട സമയം"</string>
     <string name="doze_title" msgid="1523090408230862316">"അറിയിപ്പിന് സ്‌ക്രീൻ സജീവമാക്കുക"</string>
@@ -1624,8 +1616,7 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"ചാർജ് ചെയ്യുമ്പോൾ"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"നേരെ വച്ച് ചാർജ് ചെയ്യുമ്പോൾ"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"ഡോക്ക് ചെയ്‌തിരിക്കുമ്പോൾ"</string>
-    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
-    <skip />
+    <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"വയർലെസ് ചാർജ്ജിംഗ് ആയി പരിമിതപ്പെടുത്തുക"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN-കൾ"</string>
     <string name="apn_edit" msgid="2003683641840248741">"ആക്‌സസ് പോയിന്റ് എഡിറ്റ് ചെയ്യുക"</string>
     <string name="apn_add" msgid="9069613192201630934">"ആക്സസ് പോയിന്റ് ചേർക്കുക"</string>
@@ -1739,8 +1730,7 @@
     <string name="rx_ethernet_speed" msgid="6642000569214969711">"സ്വീകരിക്കുന്ന ലിങ്കിന്റെ വേഗത"</string>
     <string name="ethernet_network_usage" msgid="3795965384177426780">"നെറ്റ്‌വർക്ക് ഉപയോഗം"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"ഇതർനെറ്റ് ടെതറിംഗ്"</string>
-    <!-- no translation found for ethernet_modify (1326316717004440503) -->
-    <skip />
+    <string name="ethernet_modify" msgid="1326316717004440503">"പരിഷ്കരിക്കുക"</string>
     <string name="tethering_footer_info" msgid="6824352505979800594">"നിങ്ങളുടെ ഡാറ്റ കണക്ഷനിലൂടെ മറ്റ് ഉപകരണങ്ങളിലേക്ക് ഇന്റർനെറ്റ് നൽകാൻ, ഹോട്ട്‌സ്‌പോട്ടും ടെതറിംഗും ഉപയോഗിക്കുക. സമീപമുള്ള ഉപകരണങ്ങളുമായി ഉള്ളടക്കം പങ്കിടാൻ ആപ്പുകൾക്കും ഹോട്ട്‌സ്‌പോട്ട് സൃഷ്‌ടിക്കാനാകും."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"നിങ്ങളുടെ വൈഫൈ വഴിയോ മൊബൈൽ ഡാറ്റാ കണക്ഷൻ വഴിയോ മറ്റ് ഉപകരണങ്ങളിലേക്ക് ഇന്റർനെറ്റ് നൽകാൻ ഹോട്ട്‌സ്പോട്ടും ടെതറിംഗും ഉപയോഗിക്കുക. സമീപമുള്ള ഉപകരണങ്ങളുമായി ഉള്ളടക്കം പങ്കിടാൻ ആപ്പുകൾക്ക് ഹോട്ട്‌സ്പോട്ട് സൃഷ്‌ടിക്കാനുമാവും."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"സഹായം"</string>
@@ -2168,6 +2158,8 @@
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"ഹോമിലേക്ക് പോകുക"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"മടങ്ങുക"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"അടുത്തിടെയുള്ള ആപ്പുകൾ കാണുക"</string>
+    <string name="three_finger_tap_launch_app_title" msgid="55761877549896819">"മറ്റൊരു ആപ്പ് തുറക്കുക"</string>
+    <string name="three_finger_tap_launch_app_summary" msgid="2015894823281420733">"ഇൻസ്‌റ്റാൾ ചെയ്‌ത ആപ്പുകളുടെ ലിസ്‌റ്റിൽ നിന്ന് തിരഞ്ഞെടുക്കുക"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"ഹോമിലേക്ക് പോകുക"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"ടച്ച്‌പാഡിൽ മൂന്ന് വിരൽ കൊണ്ട് മുകളിലേക്ക് സ്വൈപ്പ് ചെയ്യുക"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"മടങ്ങുക"</string>
@@ -2621,8 +2613,7 @@
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{വളരെ കുറച്ച് സമയം ({time} സെക്കൻഡ്)}other{വളരെ കുറച്ച് സമയം ({time} സെക്കൻഡ്)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{കുറച്ച് സമയം ({time} സെക്കൻഡ്)}other{കുറച്ച് സമയം ({time} സെക്കൻഡ്)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{കൂടുതൽ സമയം ({time} സെക്കൻഡ്)}other{കൂടുതൽ സമയം ({time} സെക്കൻഡ്)}}"</string>
-    <!-- no translation found for accessibility_autoclick_delay_unit_second (1562809410497613173) -->
-    <skip />
+    <string name="accessibility_autoclick_delay_unit_second" msgid="1562809410497613173">"{count,plural, =1{{time} സെക്കൻഡ്}other{{time} സെക്കൻഡ്}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"ക്രമീകരണം"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"ഓണാണ്"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"ഓഫ്"</string>
@@ -4670,6 +4661,12 @@
     <string name="double_tap_power_camera_action_summary" msgid="4942585540579590444">"ക്യാമറ തുറക്കുക"</string>
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Wallet"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Wallet തുറക്കുക"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"ലോക്ക് സ്‌ക്രീൻ കുറുക്കുവഴി മാറ്റണോ?"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g>, നിങ്ങളുടെ ലോക്ക് സ്ക്രീൻ കുറുക്കുവഴി കൂടിയാണ്. ഇത് മാറ്റണമെന്നുണ്ടോ?"</string>
+    <!-- no translation found for double_tap_power_wallet_footer_title (5417023303339032410) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (1267822422365445657) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"സെൽഫിക്ക് ക്യാമറ ഫ്ലിപ്പ് ചെയ്യുക"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"നാവിഗേഷൻ മോഡ്"</string>
@@ -5738,10 +5735,8 @@
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"ഓഡിയോ സ്ട്രീം QR കോഡ്"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"പാസ്‌വേഡ്: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"<xliff:g id="STREAM_NAME">%1$s</xliff:g> കേൾക്കാൻ, മറ്റുള്ളവർക്ക് അവരുടെ Android ഉപകരണത്തിലേക്ക് അനുയോജ്യമായ ഹെഡ്‌ഫോണുകൾ കണക്റ്റ് ചെയ്യാം. തുടർന്ന്, അവർക്ക് ഈ QR കോഡ് സ്കാൻ ചെയ്യാം."</string>
-    <!-- no translation found for audio_streams_preference_subtitle (4098552511880220046) -->
-    <skip />
-    <!-- no translation found for audio_streams_preference_subtitle_audio_sharing_on (2382924714414148028) -->
-    <skip />
+    <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"Auracast ബ്രോഡ്‌കാസ്‌റ്റ് കേൾക്കുക"</string>
+    <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"ഓഡിയോ സ്‌ട്രീമുകൾ കണ്ടെത്താൻ, ഓഡിയോ പങ്കിടൽ ഓഫാക്കുക"</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"ഓഡിയോ സ്ട്രീം കണ്ടെത്തുക"</string>
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"സമീപമുള്ള Auracast ബ്രോഡ്‌കാസ്റ്റോ ഓഡിയോ പങ്കിടുന്ന ഉപകരണമോ കേൾക്കുക"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"നിങ്ങളുടെ ഓഡിയോ ഉപകരണം"</string>
@@ -5779,19 +5774,16 @@
     <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"പിൻ വീണ്ടെടുക്കൽ രീതി ചേർക്കുക"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"പിൻ മാറ്റുക"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"പിൻ മറന്നു"</string>
-    <!-- no translation found for supervision_update_recovery_email_preference_title (2057393838251915087) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_title (8447541098148430866) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_summary (4865713157106413979) -->
-    <skip />
+    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"വീണ്ടെടുക്കൽ ഇമെയിൽ അപ്‌ഡേറ്റ് ചെയ്യുക"</string>
+    <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"പിൻ ഇല്ലാതാക്കുക"</string>
+    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"ഇത് നിങ്ങളുടെ എല്ലാ മേൽനോട്ട ക്രമീകരണവും റീസെറ്റ് ചെയ്യും"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"വെബ് ഉള്ളടക്ക ഫിൽട്ടറുകൾ"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome-ഉം വെബും"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"മുതിർന്നവർക്കുള്ള സെെറ്റുകൾ ബ്ലോക്ക് ചെയ്യാൻ ശ്രമിക്കുക"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_summary" msgid="1477766506765966613">"ഒരു ഫിൽട്ടറും കുറ്റമറ്റതല്ല, എന്നാൽ ലൈംഗികത പ്രകടമാക്കുന്ന സൈറ്റുകൾ മറയ്ക്കാൻ ഇത് സഹായിക്കും"</string>
     <string name="supervision_web_content_filters_browser_allow_all_sites_title" msgid="3909739592466381845">"എല്ലാ സൈറ്റുകളെയും അനുവദിക്കുക"</string>
     <string name="supervision_web_content_filters_search_title" msgid="726335318009305564">"Google Search"</string>
-    <string name="supervision_web_content_filters_search_filter_on_title" msgid="4855846261141136285">"SafeSearch ഫിൽട്ടർ ചെയ്യൽ ഓണാക്കുക"</string>
+    <string name="supervision_web_content_filters_search_filter_on_title" msgid="4855846261141136285">"SafeSearch ഫിൽട്ടറിംഗ് ഓണാക്കുക"</string>
     <string name="supervision_web_content_filters_search_filter_on_summary" msgid="1162258144140293269">"ഈ ഉപകരണത്തിലെ തിരയൽ ഫലങ്ങളിൽ നിന്ന് പ്രായപൂർത്തിയായവർക്കുള്ള ചിത്രങ്ങളും ടെക്സ്റ്റും ലിങ്കുകളും ഫിൽട്ടർ ചെയ്ത് ഒഴിവാക്കാൻ സഹായിക്കുന്നു"</string>
     <string name="supervision_web_content_filters_search_filter_off_title" msgid="6049461395304222346">"SafeSearch ഫിൽട്ടറിംഗ് ഓഫാക്കുക"</string>
     <string name="supervision_web_content_filters_search_filter_off_summary" msgid="3834238970190924433">"അക്കൗണ്ട് ക്രമീകരണം, പ്രായപൂർത്തിയായവർക്കുള്ള ഫലങ്ങൾ തുടർന്നും ഫിൽട്ടർ ചെയ്യുകയോ മങ്ങിക്കുകയോ ചെയ്തേക്കാം"</string>

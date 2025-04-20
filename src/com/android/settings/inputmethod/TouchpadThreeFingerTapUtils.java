@@ -18,11 +18,11 @@ package com.android.settings.inputmethod;
 import static android.hardware.input.InputGestureData.TOUCHPAD_GESTURE_TYPE_THREE_FINGER_TAP;
 import static android.hardware.input.InputGestureData.createTouchpadTrigger;
 
+import android.app.ActivityManager;
 import android.content.ContentResolver;
 import android.hardware.input.InputGestureData;
 import android.hardware.input.KeyGestureEvent;
 import android.net.Uri;
-import android.os.UserHandle;
 import android.provider.Settings;
 
 import androidx.annotation.NonNull;
@@ -41,6 +41,10 @@ public final class TouchpadThreeFingerTapUtils {
     static final InputGestureData.Trigger TRIGGER =
             createTouchpadTrigger(TOUCHPAD_GESTURE_TYPE_THREE_FINGER_TAP);
 
+    // Note that KEY_GESTURE_TYPE_UNSPECIFIED is the "mouse mid click" action
+    static final Integer DEFAULT_GESTURE_TYPE =
+            KeyGestureEvent.KEY_GESTURE_TYPE_UNSPECIFIED;
+
     private static final Map<String, Integer> PREF_KEY_TO_GESTURE_TYPE = Map.ofEntries(
             Map.entry("launch_gemini", KeyGestureEvent.KEY_GESTURE_TYPE_LAUNCH_ASSISTANT),
             Map.entry("go_home", KeyGestureEvent.KEY_GESTURE_TYPE_HOME),
@@ -57,7 +61,16 @@ public final class TouchpadThreeFingerTapUtils {
                 resolver,
                 TARGET_ACTION,
                 KeyGestureEvent.KEY_GESTURE_TYPE_UNSPECIFIED,
-                UserHandle.USER_CURRENT);
+                ActivityManager.getCurrentUser());
+    }
+
+    /**
+     * Return if KEY_GESTURE_TYPE_LAUNCH_APPLICATION is the cuurent the gesture type
+     * @param resolver ContentResolver
+     */
+    public static boolean isGestureTypeLaunchApp(@NonNull ContentResolver resolver) {
+        return getCurrentGestureType(resolver)
+                == KeyGestureEvent.KEY_GESTURE_TYPE_LAUNCH_APPLICATION;
     }
 
     /**
@@ -76,9 +89,24 @@ public final class TouchpadThreeFingerTapUtils {
      */
     public static void setGestureType(@NonNull ContentResolver resolver, int gestureType) {
         Settings.System.putIntForUser(
-                resolver,
-                TouchpadThreeFingerTapUtils.TARGET_ACTION,
-                gestureType,
-                UserHandle.USER_CURRENT);
+                resolver, TARGET_ACTION, gestureType, ActivityManager.getCurrentUser());
+    }
+
+    /**
+     * Set KeyGestureEvent.KEY_GESTURE_TYPE_UNSPECIFIED as the gesture type
+     * @param resolver ContentResolver
+     */
+    public static void setDefaultGestureType(@NonNull ContentResolver resolver) {
+        Settings.System.putIntForUser(
+                resolver, TARGET_ACTION, DEFAULT_GESTURE_TYPE, ActivityManager.getCurrentUser());
+    }
+
+    /**
+     * Set KeyGestureEvent.KEY_GESTURE_TYPE_LAUNCH_APPLICATION as the gesture type
+     * @param resolver ContentResolver
+     */
+    public static void setLaunchAppAsGestureType(@NonNull ContentResolver resolver) {
+        setGestureType(
+                resolver, /* gestureType = */ KeyGestureEvent.KEY_GESTURE_TYPE_LAUNCH_APPLICATION);
     }
 }

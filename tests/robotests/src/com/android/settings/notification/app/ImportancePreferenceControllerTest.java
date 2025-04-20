@@ -27,7 +27,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -220,9 +219,8 @@ public class ImportancePreferenceControllerTest {
 
         verify(pref, times(1)).setConfigurable(anyBoolean());
         verify(pref, times(1)).setImportance(IMPORTANCE_HIGH);
-        verify(pref, times(1)).setDisplayInStatusBar(false);
     }
-    
+
     @Test
     public void testImportanceLowToHigh() {
         NotificationChannel channel =

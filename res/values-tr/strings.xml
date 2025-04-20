@@ -344,7 +344,9 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Açık - # uygulamanın konuma erişimi var}other{Açık - # uygulamanın konuma erişimi var}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Yükleniyor…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Yakındaki cihazlarla bağlanma izni olan uygulamalar, bağlı cihazların göreli konumunu belirleyebilir."</string>
-    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <!-- no translation found for location_settings_footer_location_off_with_telephony (5600725945541382556) -->
+    <skip />
+    <!-- no translation found for location_settings_footer_location_off_no_telephony (2709958040008816610) -->
     <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Konum ayarları hakkında daha fazla bilgi edinin"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Değiştirmek için ChromeOS Ayarları &gt; Gizlilik ve güvenlik &gt; Gizlilik denetimleri &gt; Konum erişimi bölümüne gidin"</string>
@@ -421,7 +423,7 @@
     <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
     <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Her zaman onay gerekli"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Uygulamalarda Yüz Tanıma Kilidi kullanırken daima onay adımı gerektir"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Uygulamalarda Yüz Tanıma Kilidi kullanırken daima onay adımı gerekli olsun."</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Yüz modelini sil"</string>
     <string name="security_settings_face_settings_enroll" msgid="3726313826693825029">"Yüz Tanıma Kilidi\'ni kur"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Yüz modeli silinsin mi?"</string>
@@ -611,10 +613,8 @@
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"Desen ve yüz tanıma kurulumu atlansın mı?"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"Desen ve parmak izi kurulumu atlansın mı?"</string>
     <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"Desen, yüz ve parmak izi kurulumu atlansın mı?"</string>
-    <!-- no translation found for resume_animation (5259729861893297887) -->
-    <skip />
-    <!-- no translation found for pause_animation (2209064682137909056) -->
-    <skip />
+    <string name="resume_animation" msgid="5259729861893297887">"Animasyonu devam ettir"</string>
+    <string name="pause_animation" msgid="2209064682137909056">"Animasyonu duraklat"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"Ekran kilidini ayarla"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Bitti"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Yanlış oldu, bu sensör değil"</string>
@@ -1032,8 +1032,7 @@
     <string name="android_beam_explained" msgid="5684416131846701256">"Bu özellik açık olduğunda, cihazları birbirine yakın tutarak uygulama içeriğini NFC özelliği olan başka bir cihaza ışınlayabilirsiniz. Örneğin, web sayfalarını, YouTube videolarını, kişileri ve diğer verileri ışınlayabilirsiniz.\n\nCihazları bir araya getirmeniz (genellikle sırt sırta) ve ekranınıza dokunmanız yeterli. Uygulama nelerin ışınlanacağını belirler."</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Kablosuz"</string>
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Kablosuz bağlantıyı kullan"</string>
-    <!-- no translation found for wifi_networks_category (8011323954745036753) -->
-    <skip />
+    <string name="wifi_networks_category" msgid="8011323954745036753">"Ağlar"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Kablosuz ayarları"</string>
     <string name="wifi_select_network" msgid="6692897876718813259">"Kablosuz bağlantı seç"</string>
     <string name="wifi_starting" msgid="6147022683967506341">"Kablosuz açılıyor…"</string>
@@ -1214,22 +1213,14 @@
     <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> ‑ Şarj ediliyor"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"Hotspot bağlantısı"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"Bağlantı gücü"</string>
-    <!-- no translation found for ethernet_dns1 (6487470669719468602) -->
-    <skip />
-    <!-- no translation found for ethernet_dns2 (484620572555181363) -->
-    <skip />
-    <!-- no translation found for ethernet_gateway (4064061619318875567) -->
-    <skip />
-    <!-- no translation found for ethernet_network_prefix_length (3693127271457763198) -->
-    <skip />
-    <!-- no translation found for ethernet_ip_settings (3344064201878792090) -->
-    <skip />
-    <!-- no translation found for ethernet_config_submit (724743720212124025) -->
-    <skip />
-    <!-- no translation found for ethernet_config_cancel (986322993908814366) -->
-    <skip />
-    <!-- no translation found for ethernet_config_title (4784063109810004382) -->
-    <skip />
+    <string name="ethernet_dns1" msgid="6487470669719468602">"DNS 1 (gizli DNS tarafından geçersiz kılınmadığı sürece)"</string>
+    <string name="ethernet_dns2" msgid="484620572555181363">"DNS 2 (gizli DNS tarafından geçersiz kılınmadığı sürece)"</string>
+    <string name="ethernet_gateway" msgid="4064061619318875567">"Ağ geçidi"</string>
+    <string name="ethernet_network_prefix_length" msgid="3693127271457763198">"Ağ önek uzunluğu"</string>
+    <string name="ethernet_ip_settings" msgid="3344064201878792090">"IP ayarları"</string>
+    <string name="ethernet_config_submit" msgid="724743720212124025">"Gönder"</string>
+    <string name="ethernet_config_cancel" msgid="986322993908814366">"İptal"</string>
+    <string name="ethernet_config_title" msgid="4784063109810004382">"Ethernet Ayarları"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Kayıtlı ağlar"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Abonelikler"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Diğer ağlar"</string>
@@ -1458,8 +1449,7 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Kapalı"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Başlama zamanı"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Kaldırarak uyandır"</string>
-    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
-    <skip />
+    <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Yalnızca kablosuz şarj olurken"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Ortam ekranı"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Ne zaman gösterilsin?"</string>
     <string name="doze_title" msgid="1523090408230862316">"Bildirimlerde ekranı uyandır"</string>
@@ -1626,8 +1616,7 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Şarj olurken"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"Şarj olurken ve dik konumdayken"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"Yuvaya yerleştirilmiş durumdayken"</string>
-    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
-    <skip />
+    <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"Yalnızca kablosuz şarj olurken"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN\'ler"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Erişim noktasını düzenleyin"</string>
     <string name="apn_add" msgid="9069613192201630934">"Erişim noktası ekle"</string>
@@ -1741,8 +1730,7 @@
     <string name="rx_ethernet_speed" msgid="6642000569214969711">"Bağlantı alma hızı"</string>
     <string name="ethernet_network_usage" msgid="3795965384177426780">"Ağ kullanımı"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernet tethering"</string>
-    <!-- no translation found for ethernet_modify (1326316717004440503) -->
-    <skip />
+    <string name="ethernet_modify" msgid="1326316717004440503">"Değiştir"</string>
     <string name="tethering_footer_info" msgid="6824352505979800594">"Veri bağlantınızdan başka cihazlara internet bağlantısı sağlamak için hotspot ve tethering\'i kullanın. Yakınlardaki cihazlarla içerik paylaşmak için uygulamalar da hotspot oluşturabilir."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Kablosuz veya mobil veri bağlantınızdan başka cihazlara internet bağlantısı sağlamak için hotspot ve tethering\'i kullanın. Yakınlardaki cihazlarla içerik paylaşmak için uygulamalar da hotspot oluşturabilir."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Yardım"</string>
@@ -2170,6 +2158,8 @@
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Ana sayfaya git"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"Geri dön"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"Son uygulamaları göster"</string>
+    <string name="three_finger_tap_launch_app_title" msgid="55761877549896819">"Başka bir uygulama aç"</string>
+    <string name="three_finger_tap_launch_app_summary" msgid="2015894823281420733">"Yüklü uygulamalar listesinden seçim yap"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"Ana ekrana gidin"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"Dokunmatik alanda üç parmağınızla yukarı kaydırın"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"Geri dön"</string>
@@ -2295,8 +2285,7 @@
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Zamanlama kontrolleri"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Sistem kontrolleri"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Geri bildirim gönder"</string>
-    <!-- no translation found for accessibility_send_survey_title (7899716184811587023) -->
-    <skip />
+    <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Bize puan verin"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"İndirilen uygulamalar"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Deneysel"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Özellik bayrakları"</string>
@@ -2625,8 +2614,7 @@
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{Kısa ({time} saniye)}other{Kısa ({time} saniye)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{Orta ({time} saniye)}other{Orta ({time} saniye)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{Uzun ({time} saniye)}other{Uzun ({time} saniye)}}"</string>
-    <!-- no translation found for accessibility_autoclick_delay_unit_second (1562809410497613173) -->
-    <skip />
+    <string name="accessibility_autoclick_delay_unit_second" msgid="1562809410497613173">"{count,plural, =1{{time} saniye}other{{time} saniye}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Ayarlar"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"Açık"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"Kapalı"</string>
@@ -2966,7 +2954,7 @@
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Ağ bağlantılarınızı otomatik olarak yöneterek pil ömrünü uzatır ve cihaz performansını iyileştirir"</string>
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Açık"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Kapalı"</string>
-    <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Uyarlanabilir bağlantıyı kullanın"</string>
+    <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Uyarlanabilir bağlantıyı kullan"</string>
     <string name="adaptive_connectivity_wifi_switch_title" msgid="5899985025046319472">"Kablosuz ağı hücresel ağa otomatik olarak geçir"</string>
     <string name="adaptive_connectivity_wifi_switch_summary" msgid="4650230240134029595">"Kablosuz bağlantı zayıf olduğunda veya kullanılamadığında otomatik olarak hücresel veri kullanın. Veri kullanımı için ücret alınabilir."</string>
     <string name="adaptive_connectivity_mobile_network_switch_title" msgid="2473274404695643218">"Uzun pil ömrünü için mobil ağı otomatik değiştir"</string>
@@ -4674,6 +4662,14 @@
     <string name="double_tap_power_camera_action_summary" msgid="4942585540579590444">"Kamerayı aç"</string>
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Cüzdan"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Cüzdan\'ı aç"</string>
+    <!-- no translation found for double_tap_power_lockscreen_shortcut_tip_title (9210589521260265387) -->
+    <skip />
+    <!-- no translation found for double_tap_power_lockscreen_shortcut_tip_description (1894710205138218048) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_footer_title (5417023303339032410) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (1267822422365445657) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Selfie için kamerayı değiştir"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Gezinme modu"</string>
@@ -5742,10 +5738,8 @@
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"Ses yayını QR kodu"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Şifre: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Diğer kullanıcılar, <xliff:g id="STREAM_NAME">%1$s</xliff:g> yayınını dinlemek için uyumlu kulaklıkları Android cihazlarına bağlayabilir. Ardından bu QR kodunu tarayabilirler."</string>
-    <!-- no translation found for audio_streams_preference_subtitle (4098552511880220046) -->
-    <skip />
-    <!-- no translation found for audio_streams_preference_subtitle_audio_sharing_on (2382924714414148028) -->
-    <skip />
+    <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"Auracast yayınını dinleyin"</string>
+    <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"Ses yayınlarını bulmak için ses paylaşımını kapatın"</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Ses yayını bulun"</string>
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Ses paylaşan bir cihazı veya yakındaki bir Auracast yayınını dinleyin"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"Ses sisteminiz"</string>
@@ -5783,12 +5777,9 @@
     <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"PIN kurtarma yöntemi ekleyin"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"PIN\'i değiştir"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"PIN\'i unuttum"</string>
-    <!-- no translation found for supervision_update_recovery_email_preference_title (2057393838251915087) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_title (8447541098148430866) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_summary (4865713157106413979) -->
-    <skip />
+    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Kurtarma e-postasını güncelleme"</string>
+    <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"PIN\'i silme"</string>
+    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Bu işlem tüm gözetim ayarlarınızı sıfırlar"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Web içeriği filtreleri"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome ve Web"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Uygunsuz siteleri engellemeye çalış"</string>

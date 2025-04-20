@@ -344,7 +344,9 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{ಆನ್ ಆಗಿದೆ / # ಆ್ಯಪ್ ಸ್ಥಳಕ್ಕೆ ಆ್ಯಕ್ಸೆಸ್ ಅನ್ನು ಹೊಂದಿದೆ}one{ಆನ್ ಆಗಿದೆ / # ಆ್ಯಪ್‌ಗಳು ಸ್ಥಳಕ್ಕೆ ಆ್ಯಕ್ಸೆಸ್ ಅನ್ನು ಹೊಂದಿವೆ}other{ಆನ್ ಆಗಿದೆ / # ಆ್ಯಪ್‌ಗಳು ಸ್ಥಳಕ್ಕೆ ಆ್ಯಕ್ಸೆಸ್ ಅನ್ನು ಹೊಂದಿವೆ}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"ಲೋಡ್ ಆಗುತ್ತಿದೆ…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"ಸಮೀಪದ ಸಾಧನಗಳ ಅನುಮತಿ ಹೊಂದಿರುವ ಆ್ಯಪ್‌ಗಳು ಕನೆಕ್ಟ್ ಮಾಡಿರುವ ಸಾಧನಗಳ ಸಂಬಂಧಿತ ಸ್ಥಾನವನ್ನು ನಿರ್ಧರಿಸಬಹುದು."</string>
-    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <!-- no translation found for location_settings_footer_location_off_with_telephony (5600725945541382556) -->
+    <skip />
+    <!-- no translation found for location_settings_footer_location_off_no_telephony (2709958040008816610) -->
     <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"ಸ್ಥಳ ಸೆಟ್ಟಿಂಗ್‌ಗಳ ಕುರಿತು ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"ಬದಲಾಯಿಸಲು, ChromeOS ಸೆಟ್ಟಿಂಗ್‌ಗಳು &gt; ಗೌಪ್ಯತೆ ಮತ್ತು ಭದ್ರತೆ &gt; ಗೌಪ್ಯತೆ ನಿಯಂತ್ರಣಗಳು &gt; ಸ್ಥಳ ಆ್ಯಕ್ಸೆಸ್ ಎಂಬಲ್ಲಿಗೆ ಹೋಗಿ"</string>
@@ -1030,8 +1032,7 @@
     <string name="android_beam_explained" msgid="5684416131846701256">"ಈ ವೈಶಿಷ್ಟ್ಯವು ಆನ್‌ ಆಗಿರುವಾಗ, ಸಾಧನಗಳನ್ನು ಒಂದಕ್ಕೊಂದು ಹತ್ತಿರ ತರುವ ಮೂಲಕ ಮತ್ತೊಂದು NFC-ಸಾಮರ್ಥ್ಯದ ಸಾಧನಕ್ಕೆ ಆ್ಯಪ್ ವಿಷಯವನ್ನು ಬೀಮ್ ಮಾಡಬಹುದು. ಉದಾಹರಣೆಗೆ, ವೆಬ್‌ ಪುಟಗಳು, YouTube ವೀಡಿಯೊಗಳು, ಜನರ ಸಂಪರ್ಕಗಳು ಮತ್ತು ಇನ್ನೂ ಹಲವನ್ನು ನೀವು ಬೀಮ್ ಮಾಡಬಹುದು.\n\n ಸಾಧನಗಳನ್ನು ಹತ್ತಿರ ತನ್ನಿ ಸಾಕು (ಹಿಮ್ಮುಖವಾಗಿ), ನಂತರ ನಿಮ್ಮ ಪರದೆಯನ್ನು ಟ್ಯಾಪ್ ಮಾಡಿ. ಯಾವುದನ್ನು ಬೀಮ್ ಮಾಡಬೇಕು ಎಂಬುದನ್ನು ಆ್ಯಪ್ ನಿರ್ಧರಿಸುತ್ತದೆ."</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi‑Fi"</string>
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"ವೈ-ಫೈ ಬಳಸಿ"</string>
-    <!-- no translation found for wifi_networks_category (8011323954745036753) -->
-    <skip />
+    <string name="wifi_networks_category" msgid="8011323954745036753">"ನೆಟ್‌ವರ್ಕ್‌ಗಳು"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Wi‑Fi ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
     <string name="wifi_select_network" msgid="6692897876718813259">"Wi‑Fi ಆಯ್ಕೆಮಾಡಿ"</string>
     <string name="wifi_starting" msgid="6147022683967506341">"Wi‑Fi ಆನ್‌ ಮಾಡಲಾಗುತ್ತಿದೆ…"</string>
@@ -1212,22 +1213,14 @@
     <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> ‑ ಚಾರ್ಜಿಂಗ್ ಆಗುತ್ತಿದೆ"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"ಹಾಟ್‌ಸ್ಪಾಟ್ ಕನೆಕ್ಷನ್"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"ಕನೆಕ್ಷನ್ ಸಾಮರ್ಥ್ಯ"</string>
-    <!-- no translation found for ethernet_dns1 (6487470669719468602) -->
-    <skip />
-    <!-- no translation found for ethernet_dns2 (484620572555181363) -->
-    <skip />
-    <!-- no translation found for ethernet_gateway (4064061619318875567) -->
-    <skip />
-    <!-- no translation found for ethernet_network_prefix_length (3693127271457763198) -->
-    <skip />
-    <!-- no translation found for ethernet_ip_settings (3344064201878792090) -->
-    <skip />
-    <!-- no translation found for ethernet_config_submit (724743720212124025) -->
-    <skip />
-    <!-- no translation found for ethernet_config_cancel (986322993908814366) -->
-    <skip />
-    <!-- no translation found for ethernet_config_title (4784063109810004382) -->
-    <skip />
+    <string name="ethernet_dns1" msgid="6487470669719468602">"DNS 1 (ಖಾಸಗಿ DNS ನಿಂದ ಅತಿಕ್ರಮಿಸದಿದ್ದರೆ)"</string>
+    <string name="ethernet_dns2" msgid="484620572555181363">"DNS 2 (ಖಾಸಗಿ DNS ನಿಂದ ಅತಿಕ್ರಮಿಸದಿದ್ದರೆ)"</string>
+    <string name="ethernet_gateway" msgid="4064061619318875567">"ಗೇಟ್‌ವೇ"</string>
+    <string name="ethernet_network_prefix_length" msgid="3693127271457763198">"ನೆಟ್‌ವರ್ಕ್ ಪೂರ್ವಪ್ರತ್ಯಯ ಉದ್ದ"</string>
+    <string name="ethernet_ip_settings" msgid="3344064201878792090">"IP ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
+    <string name="ethernet_config_submit" msgid="724743720212124025">"ಸಲ್ಲಿಸಿ"</string>
+    <string name="ethernet_config_cancel" msgid="986322993908814366">"ರದ್ದುಮಾಡಿ"</string>
+    <string name="ethernet_config_title" msgid="4784063109810004382">"ಇಥರ್ನೆಟ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"ಸೇವ್ ಮಾಡಿದ ನೆಟ್‌ವರ್ಕ್‌"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"ಸಬ್‌ಸ್ಕ್ರಿಪ್ಶನ್‌ಗಳು"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"ಇತರ ನೆಟ್‌ವರ್ಕ್‌ಗಳು"</string>
@@ -1355,7 +1348,7 @@
     <string name="color_mode_option_natural" msgid="6192875655101283303">"ಸ್ವಾಭಾವಿಕ"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"ಬೂಸ್ಟ್ ಮಾಡಿರುವುದು"</string>
     <string name="color_mode_option_saturated" msgid="3413853820158447300">"ಸ್ಯಾಚುರೇಟೆಡ್"</string>
-    <string name="color_mode_option_automatic" msgid="2281217686509980870">"ಅಡಾಪ್ಟಿವ್"</string>
+    <string name="color_mode_option_automatic" msgid="2281217686509980870">"ರೂಪಾಂತರಗೊಳ್ಳುವಿಕೆ"</string>
     <string name="brightness" msgid="6216871641021779698">"ಪ್ರಖರತೆಯ ಮಟ್ಟ"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"ಅಡಾಪ್ಟಿವ್‌ ಪ್ರಖರತೆ"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"ನಿಮ್ಮ ಸ್ಕ್ರೀನ್‌ನ ಪ್ರಖರತೆಯು ನಿಮ್ಮ ಪರಿಸರ ಮತ್ತು ಚಟುವಟಿಕೆಗಳಿಗೆ ಅನುಗುಣವಾಗಿ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಅಡ್ಜಸ್ಟ್ ಆಗುತ್ತದೆ. ನಿಮ್ಮ ಆದ್ಯತೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಲು ಅಡಾಪ್ಟಿವ್ ಪ್ರಖರತೆಗೆ ಸಹಾಯ ಮಾಡಲು ನೀವು ಹಸ್ತಚಾಲಿತವಾಗಿ ಸ್ಲೈಡರ್ ಅನ್ನು ಸರಿಸಬಹುದು."</string>
@@ -1456,8 +1449,7 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"ಆಫ್"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"ಯಾವಾಗ ಪ್ರಾರಂಭಿಸಬೇಕು"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"ಎಬ್ಬಿಸಲು ಎತ್ತಿರಿ"</string>
-    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
-    <skip />
+    <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"ವೈರ್‌ಲೆಸ್ ಚಾರ್ಜಿಂಗ್ ಅನ್ನು ನಿರ್ಬಂಧಿಸಿ"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"ಆಂಬಿಯೆಂಟ್ ಡಿಸ್‌ಪ್ಲೇ"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"ಯಾವಾಗ ತೋರಿಸಬೇಕು"</string>
     <string name="doze_title" msgid="1523090408230862316">"ನೋಟಿಫಿಕೇಶನ್‌ಗಾಗಿ ಸ್ಕ್ರೀನ್ ಆನ್"</string>
@@ -1624,8 +1616,7 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"ಚಾರ್ಜ್ ಮಾಡುವಾಗ"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"ಚಾರ್ಜ್ ಆಗುತ್ತಿರುವಾಗ ಮತ್ತು ನೇರವಾಗಿರುವಾಗ"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"ಡಾಕ್ ಆಗಿರುವಾಗ"</string>
-    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
-    <skip />
+    <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"ವೈರ್‌ಲೆಸ್ ಚಾರ್ಜಿಂಗ್ ಅನ್ನು ನಿರ್ಬಂಧಿಸಿ"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN ಗಳು"</string>
     <string name="apn_edit" msgid="2003683641840248741">"ಆ್ಯಕ್ಸೆಸ್ ಪಾಯಿಂಟ್ ಎಡಿಟ್ ಮಾಡಿ"</string>
     <string name="apn_add" msgid="9069613192201630934">"ಆ್ಯಕ್ಸೆಸ್ ಪಾಯಿಂಟ್ ಅನ್ನು ಸೇರಿಸಿ"</string>
@@ -1739,8 +1730,7 @@
     <string name="rx_ethernet_speed" msgid="6642000569214969711">"ಲಿಂಕ್ ವೇಗವನ್ನು ಸ್ವೀಕರಿಸಿ"</string>
     <string name="ethernet_network_usage" msgid="3795965384177426780">"ನೆಟ್‌ವರ್ಕ್ ಬಳಕೆ"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"ಇಥರ್ನೆಟ್ ಟೆಥರಿಂಗ್"</string>
-    <!-- no translation found for ethernet_modify (1326316717004440503) -->
-    <skip />
+    <string name="ethernet_modify" msgid="1326316717004440503">"ಮಾರ್ಪಡಿಸಿ"</string>
     <string name="tethering_footer_info" msgid="6824352505979800594">"ನಿಮ್ಮ ಡೇಟಾ ಕನೆಕ್ಷನ್‌ ಮೂಲಕ ಇತರ ಸಾಧನಗಳಿಗೆ ಇಂಟರ್ನೆಟ್ ಒದಗಿಸಲು ಹಾಟ್‌ಸ್ಪಾಟ್ ಮತ್ತು ಟೆಥರಿಂಗ್ ಬಳಸಿ. ಹತ್ತಿರದ ಸಾಧನಗಳೊಂದಿಗೆ ಕಂಟೆಂಟ್‌ ಅನ್ನು ಹಂಚಿಕೊಳ್ಳಲು ಆ್ಯಪ್‌ಗಳು ಹಾಟ್‌ಸ್ಪಾಟ್ ಅನ್ನು ಸಹ ರಚಿಸಬಹುದು."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"ನಿಮ್ಮ ವೈ-ಫೈ ಅಥವಾ ಮೊಬೈಲ್ ಡೇಟಾ ಕನೆಕ್ಷನ್ ಮೂಲಕ ಇತರ ಸಾಧನಗಳಿಗೆ ಇಂಟರ್ನೆಟ್ ಸಂಪರ್ಕವನ್ನು ಒದಗಿಸಲು ಹಾಟ್‌ಸ್ಪಾಟ್ ಮತ್ತು ಟೆಥರಿಂಗ್ ಅನ್ನು ಬಳಸಿ. ಸಮೀಪದಲ್ಲಿರುವ ಸಾಧನಗಳ ಜೊತೆಗೆ ವಿಷಯಗಳನ್ನು ಹಂಚಿಕೊಳ್ಳಲು ಆ್ಯಪ್‌ಗಳು ಹಾಟ್‌ಸ್ಪಾಟ್ ಅನ್ನು ಸಹ ರಚಿಸಬಹುದು."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"ಸಹಾಯ"</string>
@@ -2168,6 +2158,8 @@
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"ಮುಖಪುಟಕ್ಕೆ ಹೋಗಿ"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"ಹಿಂದಿರುಗಿ"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"ಇತ್ತೀಚಿನ ಆ್ಯಪ್‌ಗಳನ್ನು ವೀಕ್ಷಿಸಿ"</string>
+    <string name="three_finger_tap_launch_app_title" msgid="55761877549896819">"ಮತ್ತೊಂದು ಆ್ಯಪ್ ಅನ್ನು ತೆರೆಯಿರಿ"</string>
+    <string name="three_finger_tap_launch_app_summary" msgid="2015894823281420733">"ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಲಾದ ಆ್ಯಪ್‌ಗಳ ಪಟ್ಟಿಯಿಂದ ಆಯ್ಕೆಮಾಡಿ"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"ಹೋಮ್‌ಗೆ ಹೋಗಿ"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"ಟಚ್‌ಪ್ಯಾಡ್‌ನಲ್ಲಿ ಎಲ್ಲಿಯಾದರೂ ಮೂರು ಬೆರಳಿಂದ ಮೇಲಕ್ಕೆ ಸ್ವೈಪ್ ಮಾಡಿ"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"ಹಿಂದಿರುಗಿ"</string>
@@ -2283,7 +2275,7 @@
     <string name="color_contrast_preview" msgid="6791430227535363883">"ಪೂರ್ವವೀಕ್ಷಿಸಿ"</string>
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"ಹೆಲೆನ್, ಆಡಮ್"</string>
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"2 ದಿನಗಳ ಹಿಂದೆ"</string>
-    <string name="color_contrast_preview_email_badge" msgid="4845484039428505392">"ಅನುಸರಿಸುವಿರಾ?"</string>
+    <string name="color_contrast_preview_email_badge" msgid="4845484039428505392">"ಫಾಲೋ ಅಪ್ ಮಾಡಬೇಕೆ?"</string>
     <string name="color_contrast_preview_email_title" msgid="198712116139754823">"ವ್ಯಾಪಾರ ಪ್ರವಾಸದ ವರದಿ"</string>
     <string name="color_contrast_preview_email_body" msgid="2714343154965937945">"ಹೆಚ್ಚಿನ ಸಹಾಯಕ್ಕಾಗಿ, ದಯವಿಟ್ಟು ನನ್ನನ್ನು ಅಥವಾ ಹೆಲೆನ್ ಅನ್ನು ಸಂಪರ್ಕಿಸಿ. ಈ ವರದಿ ಹೀಗೆ ಇರಲಿದೆ"</string>
     <string name="color_contrast_preview_email_attachment_name" msgid="852407311884814746">"ಕ್ಲೈಂಟ್ ವೆಚ್ಚಗಳು"</string>
@@ -2621,8 +2613,7 @@
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{ಕಡಿಮೆ ({time} ಸೆಕೆಂಡ್)}one{ಕಡಿಮೆ ({time} ಸೆಕೆಂಡ್‌ಗಳು)}other{ಕಡಿಮೆ ({time} ಸೆಕೆಂಡ್‌ಗಳು)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{ಮಧ್ಯಮ ({time} ಸೆಕೆಂಡ್)}one{ಮಧ್ಯಮ ({time} ಸೆಕೆಂಡ್‌ಗಳು)}other{ಮಧ್ಯಮ ({time} ಸೆಕೆಂಡ್‌ಗಳು)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{ದೀರ್ಘ ({time} ಸೆಕೆಂಡ್)}one{ದೀರ್ಘ ({time} ಸೆಕೆಂಡ್‌ಗಳು)}other{ದೀರ್ಘ ({time} ಸೆಕೆಂಡ್‌ಗಳು)}}"</string>
-    <!-- no translation found for accessibility_autoclick_delay_unit_second (1562809410497613173) -->
-    <skip />
+    <string name="accessibility_autoclick_delay_unit_second" msgid="1562809410497613173">"{count,plural, =1{{time} ಸೆಕೆಂಡ್}one{{time} ಸೆಕೆಂಡ್‌ಗಳು}other{{time} ಸೆಕೆಂಡ್‌ಗಳು}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"ಆನ್"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"ಆಫ್"</string>
@@ -3892,7 +3883,7 @@
     <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{ಪ್ರತಿ ದಿನಕ್ಕೆ ಸುಮಾರು # ನೋಟಿಫಿಕೇಶನ್}one{ಪ್ರತಿ ದಿನಕ್ಕೆ ಸುಮಾರು # ನೋಟಿಫಿಕೇಶನ್‌ಗಳು}other{ಪ್ರತಿ ದಿನಕ್ಕೆ ಸುಮಾರು # ನೋಟಿಫಿಕೇಶನ್‌ಗಳು}}"</string>
     <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{ಪ್ರತಿ ವಾರಕ್ಕೆ ಸುಮಾರು # ನೋಟಿಫಿಕೇಶನ್}one{ಪ್ರತಿ ವಾರಕ್ಕೆ ಸುಮಾರು # ನೋಟಿಫಿಕೇಶನ್‌ಗಳು}other{ಪ್ರತಿ ವಾರಕ್ಕೆ ಸುಮಾರು # ನೋಟಿಫಿಕೇಶನ್‌ಗಳು}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"ಎಂದೂ ಇಲ್ಲ"</string>
-    <string name="manage_notification_access_title" msgid="4154723216570646451">"ನೋಟಿಫಿಕೇಶನ್ ಅನ್ನು ಓದಿ, ಪ್ರತ್ಯುತ್ತರ &amp; ನಿಯಂತ್ರಣ"</string>
+    <string name="manage_notification_access_title" msgid="4154723216570646451">"ನೋಟಿಫಿಕೇಶನ್ ಓದುವಿಕೆ, ಪ್ರತ್ಯುತ್ತರ ಮತ್ತು ನಿಯಂತ್ರಣ"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"ಯಾವ ಆ್ಯಪ್‌ಗಳು ಮತ್ತು ಸಾಧನಗಳು ನೋಟಿಫಿಕೇಶನ್‌ಗಳನ್ನು ಓದಬಹುದು ಎಂಬುದನ್ನು ನಿಯಂತ್ರಿಸಿ"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"ಉದ್ಯೋಗ ಪ್ರೊಫೈಲ್‌ ಅಧಿಸೂಚನೆಗಳಿಗೆ ಪ್ರವೇಶವನ್ನು ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ"</string>
     <string name="notification_assistant_title" msgid="5889201903272393099">"ವರ್ಧಿತ ಅಧಿಸೂಚನೆಗಳು"</string>
@@ -4329,7 +4320,7 @@
     <string name="usb_use" msgid="6783183432648438528">"USB ಅನ್ನು ಇದಕ್ಕಾಗಿ ಬಳಸಿ"</string>
     <string name="usb_default_label" msgid="3372838450371060750">"ಡಿಫಾಲ್ಟ್‌‌ USB ಕಾನ್ಫಿಗರೇಶನ್"</string>
     <string name="usb_default_info" msgid="167172599497085266">"ಮತ್ತೊಂದು ಸಾಧನವನ್ನು ಸಂಪರ್ಕಿಸಿದಾಗ ಮತ್ತು ನಿಮ್ಮ ಫೋನ್ ಅನ್‌ಲಾಕ್ ಆಗಿರುವಾಗ, ಈ ಸೆಟ್ಟಿಂಗ್‍ಗಳನ್ನು ಅನ್ವಯಿಸಲಾಗುತ್ತದೆ. ವಿಶ್ವಾಸಾರ್ಹ ಸಾಧನಗಳನ್ನು ಮಾತ್ರ ಸಂಪರ್ಕಿಸಿ."</string>
-    <string name="usb_power_title" msgid="5602112548385798646">"ಪವರ್‌ ಸಂಬಂಧಿತ ಆಯ್ಕೆಗಳು"</string>
+    <string name="usb_power_title" msgid="5602112548385798646">"ಪವರ್‌ ಬಳಸುವ ಆಯ್ಕೆಗಳು"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"ಫೈಲ್ ವರ್ಗಾವಣೆಯ ಆಯ್ಕೆಗಳು"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB ಆದ್ಯತೆಗಳು"</string>
@@ -4670,6 +4661,12 @@
     <string name="double_tap_power_camera_action_summary" msgid="4942585540579590444">"ಕ್ಯಾಮರಾ ತೆರೆಯಿರಿ"</string>
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"ವಾಲೆಟ್"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Wallet ಅನ್ನು ತೆರೆಯಿರಿ"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"ಲಾಕ್ ಸ್ಕ್ರೀನ್ ಶಾರ್ಟ್‌ಕಟ್ ಬದಲಾಯಿಸುವುದೇ?"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> ನಿಮ್ಮ ಲಾಕ್ ಸ್ಕ್ರೀನ್ ಶಾರ್ಟ್‌ಕಟ್ ಕೂಡ ಆಗಿದೆ. ಅದನ್ನು ಬದಲಾಯಿಸಲು ಬಯಸುವಿರಾ?"</string>
+    <!-- no translation found for double_tap_power_wallet_footer_title (5417023303339032410) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (1267822422365445657) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"ಸೆಲ್ಫೀ ತೆಗೆಯಲು ಕ್ಯಾಮರಾ ತಿರುಗಿಸಿ"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"ನ್ಯಾವಿಗೇಶನ್ ಮೋಡ್"</string>
@@ -4694,7 +4691,7 @@
     <string name="right_edge" msgid="1505309103265829121">"ಬಲ ತುದಿ"</string>
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"ಅಧಿಕ ಸೆನ್ಸಿಟಿವಿಟಿಯು ಸ್ಕ್ರೀನ್‌ನ ತುದಿಗಳುದ್ದಕ್ಕೂ ಬಳಸಲಾಗುವ ಯಾವುದೇ ಆ್ಯಪ್‌ ಗೆಸ್ಚರ್‌ಗಳ ಜೊತೆಗೆ ಸಂಘರ್ಷವನ್ನು ಉಂಟುಮಾಡಬಹುದು."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"ಬ್ಯಾಕ್ ಸೆನ್ಸಿಟಿವಿಟಿ"</string>
-    <string name="gesture_settings_activity_title" msgid="1882463161833981820">"ಗೆಸ್ಚರ್ ನ್ಯಾವಿಗೇಶನ್"</string>
+    <string name="gesture_settings_activity_title" msgid="1882463161833981820">"ಜೆಸ್ಚರ್ ನ್ಯಾವಿಗೇಶನ್"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"ಡೆಮೋ ಪ್ರಯತ್ನಿಸಿ ನೋಡಿ"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"ಬಟನ್ ನ್ಯಾವಿಗೇಶನ್"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"ಗೆಸ್ಚರ್ ನ್ಯಾವಿಗೇಶನ್, ಹಿಂಬದಿ ಸೂಕ್ಷ್ಮತೆ, ಹಿಂಬದಿ ಗೆಸ್ಚರ್"</string>
@@ -5620,7 +5617,7 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"ನೀವು ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿದ ಆ್ಯಪ್‌ಗಳಿಗೆ ನಿಮ್ಮ ಸಾಧನದ ಹೆಸರು ಗೋಚರಿಸುತ್ತದೆ. ನೀವು ಬ್ಲೂಟೂತ್ ಸಾಧನಗಳಿಗೆ ಕನೆಕ್ಟ್ ಮಾಡಿದಾಗ, ವೈ-ಫೈ ನೆಟ್‌ವರ್ಕ್‌ಗೆ ಕನೆಕ್ಟ್ ಮಾಡಿದಾಗ ಅಥವಾ ವೈ-ಫೈ ಹಾಟ್‌ಸ್ಪಾಟ್ ಅನ್ನು ಸೆಟಪ್ ಮಾಡಿದಾಗ ಇತರ ಜನರು ಸಹ ಅದನ್ನು ನೋಡಬಹುದು."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"ವ್ಯಾಕರಣ ಲಿಂಗ"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"ವ್ಯಾಕರಣದ ಲಿಂಗವನ್ನು ಆಯ್ಕೆಮಾಡಿ"</string>
-    <string name="content_protection_preference_title" msgid="5069260032659193074">"ಮೋಸಗೊಳಿಸುವ ಆ್ಯಪ್‌ಗಳಿಗಾಗಿ ಸ್ಕ್ಯಾನ್ ಮಾಡಲಾಗುತ್ತಿದೆ"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"ಮೋಸಗೊಳಿಸುವ ಆ್ಯಪ್‌ಗಳಿವೆಯೇ ಎಂದು ಸ್ಕ್ಯಾನ್ ಮಾಡಲಾಗುತ್ತಿದೆ"</string>
     <string name="content_protection_preference_summary" msgid="2252393849408445391">"ಫಿಶಿಂಗ್‌ಗಾಗಿ ಆ್ಯಪ್‌ನ ಚಟುವಟಿಕೆಯನ್ನು ಪರಿಶೀಲಿಸಿ"</string>
     <string name="content_protection_preference_user_consent_switch_title" msgid="1797782616799594426">"ಮೋಸಗೊಳಿಸುವ ಆ್ಯಪ್‌ಗಳನ್ನು ಪತ್ತೆಹಚ್ಚಲು ಸ್ಕ್ಯಾನಿಂಗ್ ಬಳಸಿ"</string>
     <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"ಕೆಲಸದ ಸ್ಥಳದಲ್ಲಿ ಮೋಸಗೊಳಿಸುವ ಆ್ಯಪ್‌ಗಳನ್ನು ಪತ್ತೆಹಚ್ಚಲು ಸ್ಕ್ಯಾನಿಂಗ್ ಬಳಸಿ"</string>
@@ -5738,10 +5735,8 @@
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"ಆಡಿಯೋ ಸ್ಟ್ರೀಮ್ QR ಕೋಡ್‌"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"ಪಾಸ್‌ವರ್ಡ್: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"<xliff:g id="STREAM_NAME">%1$s</xliff:g> ಅನ್ನು ಆಲಿಸಲು, ಇತರ ಜನರು ತಮ್ಮ Android ಸಾಧನದಲ್ಲಿ ಹೊಂದಾಣಿಕೆಯ ಹೆಡ್‌ಫೋನ್‌ಗಳನ್ನು ಕನೆಕ್ಟ್‌ ಮಾಡಬಹುದು. ನಂತರ ಅವರು ಈ QR ಕೋಡ್ ಅನ್ನು ಸ್ಕ್ಯಾನ್ ಮಾಡಬಹುದು."</string>
-    <!-- no translation found for audio_streams_preference_subtitle (4098552511880220046) -->
-    <skip />
-    <!-- no translation found for audio_streams_preference_subtitle_audio_sharing_on (2382924714414148028) -->
-    <skip />
+    <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"Auracast ಪ್ರಸಾರವನ್ನು ಆಲಿಸಿ"</string>
+    <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"ಆಡಿಯೋ ಸ್ಟ್ರೀಮ್‌ಗಳನ್ನು ಹುಡುಕಲು ಆಡಿಯೋ ಹಂಚಿಕೊಳ್ಳುವಿಕೆಯನ್ನು ಆಫ್ ಮಾಡಿ"</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"ಆಡಿಯೋ ಸ್ಟ್ರೀಮ್ ಅನ್ನು ಹುಡುಕಿ"</string>
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"ಆಡಿಯೋವನ್ನು ಹಂಚಿಕೊಳ್ಳುವ ಸಾಧನ ಅಥವಾ ಸಮೀಪದಲ್ಲಿರುವ Auracast ಪ್ರಸಾರವನ್ನು ಆಲಿಸಿ"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"ನಿಮ್ಮ ಆಡಿಯೋ ಸಾಧನ"</string>
@@ -5779,12 +5774,9 @@
     <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"ಪಿನ್ ರಿಕವರಿ ವಿಧಾನವನ್ನು ಸೇರಿಸಿ"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"ಪಿನ್‌ ಬದಲಾಯಿಸಿ"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"ಪಿನ್ ಮರೆತಿರುವಿರಾ"</string>
-    <!-- no translation found for supervision_update_recovery_email_preference_title (2057393838251915087) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_title (8447541098148430866) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_summary (4865713157106413979) -->
-    <skip />
+    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"ಮರುಪ್ರಾಪ್ತಿ ಇಮೇಲ್ ಅನ್ನು ಅಪ್‌ಡೇಟ್‌ ಮಾಡಿ"</string>
+    <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"ಪಿನ್ ಅನ್ನು ಅಳಿಸಿ"</string>
+    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"ಇದು ನಿಮ್ಮ ಎಲ್ಲಾ ಮೇಲ್ವಿಚಾರಣೆ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ರೀಸೆಟ್ ಮಾಡುತ್ತದೆ"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"ವೆಬ್ ಕಂಟೆಂಟ್ ಫಿಲ್ಟರ್‌ಗಳು"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome ಮತ್ತು ವೆಬ್"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"ಅಶ್ಲೀಲ ಸೈಟ್‌ಗಳನ್ನು ನಿರ್ಬಂಧಿಸಲು ಪ್ರಯತ್ನಿಸಿ"</string>

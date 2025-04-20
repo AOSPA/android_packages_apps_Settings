@@ -58,7 +58,7 @@
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Không bao giờ"</string>
     <string name="sleep_on_fold_summary" msgid="4191753338303043456">"Màn hình ngoài sẽ tắt và khoá khi bạn gập thiết bị"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Sử dụng chế độ tự động xoay"</string>
-    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Công nghệ Phát hiện khuôn mặt sử dụng máy ảnh trước để cải thiện độ chính xác của chế độ tự động xoay. Hình ảnh không bao giờ được lưu trữ hoặc gửi cho Google."</string>
+    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Công nghệ Phát hiện khuôn mặt sử dụng camera trước để cải thiện độ chính xác của chế độ tự động xoay. Hình ảnh không bao giờ được lưu trữ hoặc gửi cho Google."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
     <string name="bluetooth_is_discoverable" msgid="4798961627677790935">"Hiển thị với tất cả th.bị Bluetooth gần đó (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="8122823110652921674">"Hiển thị với tất cả các thiết bị Bluetooth gần đó"</string>
@@ -344,7 +344,9 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Đang bật / # ứng dụng có quyền truy cập vào thông tin vị trí}other{Đang bật / # ứng dụng có quyền truy cập vào thông tin vị trí}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Đang tải…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Những ứng dụng có quyền đối với các thiết bị ở gần có thể xác định vị trí tương đối của các thiết bị đã kết nối."</string>
-    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <!-- no translation found for location_settings_footer_location_off_with_telephony (5600725945541382556) -->
+    <skip />
+    <!-- no translation found for location_settings_footer_location_off_no_telephony (2709958040008816610) -->
     <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Tìm hiểu thêm về chế độ Cài đặt vị trí"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Để thay đổi, hãy chuyển đến phần Cài đặt ChromeOS &gt; Quyền riêng tư và bảo mật &gt; Chế độ kiểm soát quyền riêng tư &gt; Quyền truy cập thông tin vị trí"</string>
@@ -611,10 +613,8 @@
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"Bỏ qua bước thiết lập hình mở khóa và khuôn mặt?"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"Bỏ qua bước thiết lập hình mở khóa và vân tay?"</string>
     <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"Bỏ qua bước thiết lập hình mở khóa, khuôn mặt và vân tay?"</string>
-    <!-- no translation found for resume_animation (5259729861893297887) -->
-    <skip />
-    <!-- no translation found for pause_animation (2209064682137909056) -->
-    <skip />
+    <string name="resume_animation" msgid="5259729861893297887">"Tiếp tục ảnh động"</string>
+    <string name="pause_animation" msgid="2209064682137909056">"Tạm dừng ảnh động"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"Thiết lập phương thức khóa màn hình"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Xong"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Rất tiếc, đó không phải là cảm biến"</string>
@@ -1032,8 +1032,7 @@
     <string name="android_beam_explained" msgid="5684416131846701256">"Khi bật tính năng này, bạn có thể truyền nội dung ứng dụng tới một thiết bị hỗ trợ NFC khác bằng cách giữ các thiết bị gần nhau. Ví dụ: bạn có thể truyền các trang web, video trên YouTube, liên hệ và nhiều nội dung khác.\n\nBạn chỉ cần đưa các thiết bị lại gần nhau (thường là chạm lưng vào nhau) rồi nhấn vào màn hình. Ứng dụng sẽ quyết định nội dung nào được truyền."</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi‑Fi"</string>
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Sử dụng Wi-Fi"</string>
-    <!-- no translation found for wifi_networks_category (8011323954745036753) -->
-    <skip />
+    <string name="wifi_networks_category" msgid="8011323954745036753">"Mạng"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Cài đặt Wi‑Fi"</string>
     <string name="wifi_select_network" msgid="6692897876718813259">"Chọn Wi‑Fi"</string>
     <string name="wifi_starting" msgid="6147022683967506341">"Đang bật Wi‑Fi…"</string>
@@ -1214,22 +1213,14 @@
     <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> – Đang sạc"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"Kết nối điểm phát sóng"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"Cường độ tín hiệu kết nối"</string>
-    <!-- no translation found for ethernet_dns1 (6487470669719468602) -->
-    <skip />
-    <!-- no translation found for ethernet_dns2 (484620572555181363) -->
-    <skip />
-    <!-- no translation found for ethernet_gateway (4064061619318875567) -->
-    <skip />
-    <!-- no translation found for ethernet_network_prefix_length (3693127271457763198) -->
-    <skip />
-    <!-- no translation found for ethernet_ip_settings (3344064201878792090) -->
-    <skip />
-    <!-- no translation found for ethernet_config_submit (724743720212124025) -->
-    <skip />
-    <!-- no translation found for ethernet_config_cancel (986322993908814366) -->
-    <skip />
-    <!-- no translation found for ethernet_config_title (4784063109810004382) -->
-    <skip />
+    <string name="ethernet_dns1" msgid="6487470669719468602">"DNS 1 (nếu không bị DNS riêng ghi đè)"</string>
+    <string name="ethernet_dns2" msgid="484620572555181363">"DNS 2 (nếu không bị DNS riêng ghi đè)"</string>
+    <string name="ethernet_gateway" msgid="4064061619318875567">"Cổng"</string>
+    <string name="ethernet_network_prefix_length" msgid="3693127271457763198">"Độ dài tiền tố mạng"</string>
+    <string name="ethernet_ip_settings" msgid="3344064201878792090">"Cài đặt IP"</string>
+    <string name="ethernet_config_submit" msgid="724743720212124025">"Gửi"</string>
+    <string name="ethernet_config_cancel" msgid="986322993908814366">"Huỷ"</string>
+    <string name="ethernet_config_title" msgid="4784063109810004382">"Cài đặt Ethernet"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Mạng đã lưu"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Gói thuê bao"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Các mạng khác"</string>
@@ -1458,8 +1449,7 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Tắt"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Thời điểm khởi động"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Nhấc lên để đánh thức"</string>
-    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
-    <skip />
+    <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Chỉ cho phép sạc không dây"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Màn hình sáng"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Thời điểm hiển thị"</string>
     <string name="doze_title" msgid="1523090408230862316">"Đánh thức màn hình để xem thông báo"</string>
@@ -1626,8 +1616,7 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Trong khi sạc"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"Khi đang sạc và đứng thẳng"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"Trong khi gắn vào đế sạc"</string>
-    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
-    <skip />
+    <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"Chỉ cho phép sạc không dây"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Chỉnh sửa điểm truy cập"</string>
     <string name="apn_add" msgid="9069613192201630934">"Thêm điểm truy cập"</string>
@@ -1741,8 +1730,7 @@
     <string name="rx_ethernet_speed" msgid="6642000569214969711">"Tốc độ của đường liên kết nhận"</string>
     <string name="ethernet_network_usage" msgid="3795965384177426780">"Mức sử dụng mạng"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Chia sẻ Internet qua Ethernet"</string>
-    <!-- no translation found for ethernet_modify (1326316717004440503) -->
-    <skip />
+    <string name="ethernet_modify" msgid="1326316717004440503">"Sửa đổi"</string>
     <string name="tethering_footer_info" msgid="6824352505979800594">"Sử dụng tính năng điểm phát sóng và chia sẻ Internet để cho phép các thiết bị khác kết nối Internet thông qua kết nối dữ liệu của bạn. Các ứng dụng cũng có thể tạo điểm phát sóng để chia sẻ nội dung với thiết bị ở gần."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Dùng tính năng điểm phát sóng và chia sẻ Internet để cho phép các thiết bị khác kết nối với Internet thông qua dữ liệu di động hoặc Wi-Fi của bạn. Các ứng dụng cũng có thể tạo điểm phát sóng để chia sẻ nội dung với thiết bị ở gần."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Trợ giúp"</string>
@@ -2170,6 +2158,8 @@
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Chuyển đến màn hình chính"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"Quay lại"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"Xem các ứng dụng gần đây"</string>
+    <string name="three_finger_tap_launch_app_title" msgid="55761877549896819">"Mở một ứng dụng khác"</string>
+    <string name="three_finger_tap_launch_app_summary" msgid="2015894823281420733">"Chọn trong danh sách ứng dụng đã cài đặt"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"Chuyển đến màn hình chính"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"Dùng 3 ngón tay vuốt lên vị trí bất kỳ trên bàn di chuột"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"Quay lại"</string>
@@ -2295,8 +2285,7 @@
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Điều khiển có hẹn giờ"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Điều khiển hệ thống"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Gửi phản hồi"</string>
-    <!-- no translation found for accessibility_send_survey_title (7899716184811587023) -->
-    <skip />
+    <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Đánh giá chúng tôi"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Ứng dụng đã tải xuống"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Thử nghiệm"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Cờ tính năng"</string>
@@ -2624,8 +2613,7 @@
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{Ngắn ({time} giây)}other{Ngắn ({time} giây)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{Trung bình ({time} giây)}other{Trung bình ({time} giây)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{Dài ({time} giây)}other{Dài ({time} giây)}}"</string>
-    <!-- no translation found for accessibility_autoclick_delay_unit_second (1562809410497613173) -->
-    <skip />
+    <string name="accessibility_autoclick_delay_unit_second" msgid="1562809410497613173">"{count,plural, =1{{time} giây}other{{time} giây}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Cài đặt"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"Đang bật"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"Đang tắt"</string>
@@ -3697,7 +3685,7 @@
     <string name="zen_mode_block_effect_summary_none" msgid="6688519142395714659">"Không bao giờ"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="6989818116297061488">"Khi màn hình đang tắt"</string>
     <string name="zen_mode_block_effect_summary_screen_on" msgid="4876016548834916087">"Khi màn hình đang bật"</string>
-    <string name="zen_mode_block_effect_summary_sound" msgid="1559968890497946901">"Âm thanh và rung"</string>
+    <string name="zen_mode_block_effect_summary_sound" msgid="1559968890497946901">"Âm thanh và kiểu rung"</string>
     <string name="zen_mode_block_effect_summary_some" msgid="2730383453754229650">"Âm thanh, rung và một số tín hiệu hình ảnh của thông báo"</string>
     <string name="zen_mode_block_effect_summary_all" msgid="3131918059492425222">"Âm thanh, rung và tín hiệu hình ảnh của thông báo"</string>
     <string name="zen_mode_blocked_effects_footer" msgid="6403365663466620328">"Các thông báo cần thiết cho trạng thái và hoạt động cơ bản trên thiết bị sẽ không bao giờ bị ẩn."</string>
@@ -4673,6 +4661,12 @@
     <string name="double_tap_power_camera_action_summary" msgid="4942585540579590444">"Mở ứng dụng Máy ảnh"</string>
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Wallet"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Mở Wallet"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"Thay đổi lối tắt trên màn hình khoá?"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> cũng là lối tắt trên màn hình khoá. Bạn muốn thay đổi?"</string>
+    <!-- no translation found for double_tap_power_wallet_footer_title (5417023303339032410) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (1267822422365445657) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Lật máy ảnh để selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Chế độ thao tác"</string>
@@ -4716,7 +4710,7 @@
     <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"Thông báo và chế độ cài đặt sẽ xuất hiện."</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Để xem giờ, thông báo và thông tin khác, hãy nhấn đúp vào màn hình."</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"Đánh thức màn hình"</string>
-    <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Để xem giờ, thông báo và thông tin khác, hãy nhấn vào màn hình."</string>
+    <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Để xem giờ, thông báo và thông tin khác, hãy chạm vào màn hình."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"SOS khẩn cấp"</string>
     <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"Sử dụng tính năng SOS khẩn cấp"</string>
     <string name="emergency_gesture_screen_summary" msgid="6640521030845132507">"Nhấn nhanh nút Nguồn 5 lần trở lên để kích hoạt các thao tác ở bên dưới"</string>
@@ -5741,10 +5735,8 @@
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"Mã QR của luồng âm thanh"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Mật khẩu: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Để nghe <xliff:g id="STREAM_NAME">%1$s</xliff:g>, những người khác có thể kết nối tai nghe tương thích với thiết bị Android của họ. Sau đó họ có thể quét mã QR này."</string>
-    <!-- no translation found for audio_streams_preference_subtitle (4098552511880220046) -->
-    <skip />
-    <!-- no translation found for audio_streams_preference_subtitle_audio_sharing_on (2382924714414148028) -->
-    <skip />
+    <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"Nghe nguồn phát Auracast"</string>
+    <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"Tắt tính năng chia sẻ âm thanh để tìm luồng âm thanh"</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Tìm một luồng âm thanh"</string>
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Nghe âm thanh do một thiết bị đang chia sẻ hoặc một nguồn phát Auracast ở gần"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"Thiết bị âm thanh của bạn"</string>
@@ -5782,12 +5774,9 @@
     <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"Thêm một phương thức khôi phục mã PIN"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Thay đổi mã PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Quên mã PIN"</string>
-    <!-- no translation found for supervision_update_recovery_email_preference_title (2057393838251915087) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_title (8447541098148430866) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_summary (4865713157106413979) -->
-    <skip />
+    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Cập nhật email khôi phục"</string>
+    <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Xoá mã PIN"</string>
+    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Thao tác này sẽ đặt lại tất cả chế độ cài đặt tính năng giám sát của bạn"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Bộ lọc nội dung trên web"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome và Web"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Cố gắng chặn các trang web có nội dung phản cảm"</string>

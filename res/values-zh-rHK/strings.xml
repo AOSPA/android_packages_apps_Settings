@@ -344,7 +344,9 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{開啟/ # 個應用程式可存取位置資訊}other{開啟/ # 個應用程式可存取位置資訊}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"正在載入…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"應用程式如可存取附近的裝置，就能判斷已連接裝置的相對位置。"</string>
-    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <!-- no translation found for location_settings_footer_location_off_with_telephony (5600725945541382556) -->
+    <skip />
+    <!-- no translation found for location_settings_footer_location_off_no_telephony (2709958040008816610) -->
     <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"進一步瞭解「位置設定」"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"如要變更設定，請前往 ChromeOS 設定 &gt; [私隱與安全] &gt; [私隱權設定] &gt; [位置資料存取權]"</string>
@@ -611,10 +613,8 @@
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"要略過圖案和面孔的設定程序嗎？"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"要略過圖案和指紋的設定程序嗎？"</string>
     <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"要略過圖案、面孔和指紋的設定程序嗎？"</string>
-    <!-- no translation found for resume_animation (5259729861893297887) -->
-    <skip />
-    <!-- no translation found for pause_animation (2209064682137909056) -->
-    <skip />
+    <string name="resume_animation" msgid="5259729861893297887">"恢復播放動畫"</string>
+    <string name="pause_animation" msgid="2209064682137909056">"停播動畫"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"設定螢幕鎖定"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"完成"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"糟糕，這不是感應器"</string>
@@ -996,7 +996,7 @@
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"投放"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"鏡像"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"啟用無線螢幕分享"</string>
-    <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"找不到附近的裝置。"</string>
+    <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"附近找不到裝置。"</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"連線中"</string>
     <string name="wifi_display_status_connected" msgid="2189925211258519539">"已連線"</string>
     <string name="wifi_display_status_in_use" msgid="5904009697167947449">"使用中"</string>
@@ -1032,8 +1032,7 @@
     <string name="android_beam_explained" msgid="5684416131846701256">"開啟此功能後，只需將裝置靠在一起，即可將應用程式內容傳送至另一部支援 NFC 的裝置。例如，你可以傳送網頁、YouTube 影片、聯絡人和其他內容。\n\n只需將裝置靠在一起 (通常是背靠背)，然後輕按螢幕，應用程式便會隨即決定要傳送的內容。"</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi‑Fi"</string>
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"使用 Wi-Fi"</string>
-    <!-- no translation found for wifi_networks_category (8011323954745036753) -->
-    <skip />
+    <string name="wifi_networks_category" msgid="8011323954745036753">"網絡"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Wi-Fi 設定"</string>
     <string name="wifi_select_network" msgid="6692897876718813259">"選取 Wi-Fi"</string>
     <string name="wifi_starting" msgid="6147022683967506341">"正在開啟 Wi-Fi..."</string>
@@ -1214,22 +1213,14 @@
     <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> ‑ 充電中"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"熱點連線"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"連線強度"</string>
-    <!-- no translation found for ethernet_dns1 (6487470669719468602) -->
-    <skip />
-    <!-- no translation found for ethernet_dns2 (484620572555181363) -->
-    <skip />
-    <!-- no translation found for ethernet_gateway (4064061619318875567) -->
-    <skip />
-    <!-- no translation found for ethernet_network_prefix_length (3693127271457763198) -->
-    <skip />
-    <!-- no translation found for ethernet_ip_settings (3344064201878792090) -->
-    <skip />
-    <!-- no translation found for ethernet_config_submit (724743720212124025) -->
-    <skip />
-    <!-- no translation found for ethernet_config_cancel (986322993908814366) -->
-    <skip />
-    <!-- no translation found for ethernet_config_title (4784063109810004382) -->
-    <skip />
+    <string name="ethernet_dns1" msgid="6487470669719468602">"DNS 1 (除非由私人 DNS 覆寫)"</string>
+    <string name="ethernet_dns2" msgid="484620572555181363">"DNS 2 (除非由私人 DNS 覆寫)"</string>
+    <string name="ethernet_gateway" msgid="4064061619318875567">"閘道"</string>
+    <string name="ethernet_network_prefix_length" msgid="3693127271457763198">"網絡前置字元長度"</string>
+    <string name="ethernet_ip_settings" msgid="3344064201878792090">"IP 設定"</string>
+    <string name="ethernet_config_submit" msgid="724743720212124025">"提交"</string>
+    <string name="ethernet_config_cancel" msgid="986322993908814366">"取消"</string>
+    <string name="ethernet_config_title" msgid="4784063109810004382">"以太網絡設定"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"已儲存的網絡"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"訂閱"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"其他網絡"</string>
@@ -1357,7 +1348,7 @@
     <string name="color_mode_option_natural" msgid="6192875655101283303">"自然"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"強化"</string>
     <string name="color_mode_option_saturated" msgid="3413853820158447300">"飽和"</string>
-    <string name="color_mode_option_automatic" msgid="2281217686509980870">"自動調整"</string>
+    <string name="color_mode_option_automatic" msgid="2281217686509980870">"自動調節"</string>
     <string name="brightness" msgid="6216871641021779698">"亮度"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"自動調校光暗"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"系統會根據你所在的環境和活動自動調校螢幕光暗。你可以移動滑桿，幫助自動調校光暗功能瞭解你偏好的亮度。"</string>
@@ -1458,8 +1449,7 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"關閉"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"啟用時間"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"拿起即可喚醒"</string>
-    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
-    <skip />
+    <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"只限無線充電"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"微光螢幕"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"何時顯示"</string>
     <string name="doze_title" msgid="1523090408230862316">"喚醒螢幕顯示通知"</string>
@@ -1626,8 +1616,7 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"充電時"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"垂直充電時"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"放在插座充電時"</string>
-    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
-    <skip />
+    <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"只限無線充電"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"編輯存取點"</string>
     <string name="apn_add" msgid="9069613192201630934">"新增存取點"</string>
@@ -1741,8 +1730,7 @@
     <string name="rx_ethernet_speed" msgid="6642000569214969711">"接收連結速度"</string>
     <string name="ethernet_network_usage" msgid="3795965384177426780">"網絡用量"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"以太網網絡共享"</string>
-    <!-- no translation found for ethernet_modify (1326316717004440503) -->
-    <skip />
+    <string name="ethernet_modify" msgid="1326316717004440503">"修改"</string>
     <string name="tethering_footer_info" msgid="6824352505979800594">"使用熱點和網絡共享功能，透過你的數據連線提供互聯網服務給其他裝置。應用程式也可以建立熱點，與附近的裝置分享內容。"</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"使用熱點和網絡共享功能，讓其他裝置透過 Wi‑Fi 或流動數據連接到互聯網。應用程式亦可以建立熱點，與附近的裝置分享內容。"</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"說明"</string>
@@ -1840,9 +1828,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="622276003801157839">"如要使用「面孔解鎖」，請設定密碼"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="7333603579958317102">"如要使用「面孔解鎖」，請設定圖案"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="704061826984851309">"如要使用「面孔解鎖」，請設定 PIN"</string>
-    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"設定面孔或指紋解鎖的備用密碼"</string>
+    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"設定密碼作為面孔或指紋解鎖以外的備用解鎖方式"</string>
     <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4038476475293734905">"設定面孔或指紋解鎖的備用圖案"</string>
-    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"設定面孔或指紋解鎖的備用 PIN"</string>
+    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"設定 PIN 作為面孔或指紋解鎖以外的備用解鎖方式"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"忘記密碼嗎？"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"要忘記圖案嗎？"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"忘記 PIN 嗎？"</string>
@@ -2170,6 +2158,8 @@
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"返回主畫面"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"返回"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"查看最近使用的應用程式"</string>
+    <string name="three_finger_tap_launch_app_title" msgid="55761877549896819">"開啟另一個應用程式"</string>
+    <string name="three_finger_tap_launch_app_summary" msgid="2015894823281420733">"選擇清單中已安裝的應用程式"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"返回主畫面"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"用三隻手指在觸控板的任何位置向上滑動"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"返回"</string>
@@ -2623,8 +2613,7 @@
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{短 ({time} 秒)}other{短 ({time} 秒)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{中 ({time} 秒)}other{中 ({time} 秒)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{長 ({time} 秒)}other{長 ({time} 秒)}}"</string>
-    <!-- no translation found for accessibility_autoclick_delay_unit_second (1562809410497613173) -->
-    <skip />
+    <string name="accessibility_autoclick_delay_unit_second" msgid="1562809410497613173">"{count,plural, =1{{time} 秒}other{{time} 秒}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"設定"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"開啟"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"關閉"</string>
@@ -3870,7 +3859,7 @@
     <string name="recent_convo_removed" msgid="8686414146325958281">"已移除對話"</string>
     <string name="clear" msgid="5092178335409471100">"清除"</string>
     <string name="clear_conversation" msgid="5564321180363279096">"清除<xliff:g id="CONVERSATION_NAME">%1$s</xliff:g>"</string>
-    <string name="conversation_onboarding_title" msgid="5194559958353468484">"優先對話和已修改的對話會顯示在這裡"</string>
+    <string name="conversation_onboarding_title" msgid="5194559958353468484">"優先對話和修改過的對話會顯示在這裡"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"這裡會顯示你標記為優先對話或有其他變更的對話。\n\n如要變更對話設定，請按照下列步驟操作：\n從螢幕頂部向下滑動以開啟下拉式面板，然後輕觸並按住對話。"</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"最小化"</string>
     <string name="notification_importance_high_title" msgid="394129291760607808">"在螢幕上彈出"</string>
@@ -4195,7 +4184,7 @@
     <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"已開啟"</string>
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"關閉"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"固定應用程式"</string>
-    <string name="app_pinning_intro" msgid="6409063008733004245">"應用程式固定功能可讓目前使用的應用程式持續在畫面上顯示，直到你取消固定為止。此功能可讓信任的朋友玩特定遊戲。"</string>
+    <string name="app_pinning_intro" msgid="6409063008733004245">"固定應用程式功能可讓目前使用的應用程式持續在畫面上顯示，直到你取消固定為止。此功能可讓信任的朋友玩特定遊戲。"</string>
     <string name="screen_pinning_description" msgid="5822120806426139396">"固定應用程式後，該應用程式可開啟其他應用程式，亦能存取個人資料。\n\n請按照下列步驟使用固定應用程式功能：	\n{0,number,integer}. 開啟固定應用程式功能 	\n{1,number,integer}. 開啟概覽 	\n{2,number,integer}. 輕按畫面頂部的應用程式圖示，然後輕按 [固定]"</string>
     <string name="screen_pinning_guest_user_description" msgid="2307270321127139579">"固定應用程式後，該應用程式可開啟其他應用程式，亦能存取個人資料。\n\n如要安全地與他人共用裝置，建議你改用訪客使用者。\n\n請按照下列步驟使用固定應用程式功能：	\n{0,number,integer}. 開啟固定應用程式功能 	\n{1,number,integer}. 開啟概覽 	\n{2,number,integer}. 輕按畫面頂部的應用程式圖示，然後輕按 [固定]"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"固定應用程式後：\n\n•	 該應用程式可存取個人資料\n		(例如聯絡人和電郵內容)\n•	 固定的應用程式可開啟其他應用程式\n\n僅與你信任的人使用應用程式固定功能。"</string>
@@ -4672,6 +4661,12 @@
     <string name="double_tap_power_camera_action_summary" msgid="4942585540579590444">"開啟「相機」"</string>
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"錢包"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"開啟「錢包」"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"要變更上鎖畫面快速鍵嗎？"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g>也是你的上鎖畫面快速鍵。要變更嗎？"</string>
+    <!-- no translation found for double_tap_power_wallet_footer_title (5417023303339032410) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (1267822422365445657) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"反轉相機自拍"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"導覽模式"</string>
@@ -5740,10 +5735,8 @@
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"音訊串流 QR 碼"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"密碼：<xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"如要收聽「<xliff:g id="STREAM_NAME">%1$s</xliff:g>」，其他使用者只要將兼容耳機連線至 Android 裝置，然後掃瞄此 QR 碼便可。"</string>
-    <!-- no translation found for audio_streams_preference_subtitle (4098552511880220046) -->
-    <skip />
-    <!-- no translation found for audio_streams_preference_subtitle_audio_sharing_on (2382924714414148028) -->
-    <skip />
+    <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"聆聽 Auracast 廣播"</string>
+    <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"關閉音訊分享功能即可尋找音訊串流"</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"尋找音訊串流"</string>
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"收聽裝置分享的音訊或附近的 Auracast 廣播"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"你的音響裝置"</string>
@@ -5781,12 +5774,9 @@
     <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"新增 PIN 復原方式"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"變更 PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"忘記 PIN"</string>
-    <!-- no translation found for supervision_update_recovery_email_preference_title (2057393838251915087) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_title (8447541098148430866) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_summary (4865713157106413979) -->
-    <skip />
+    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"更新備援電郵地址"</string>
+    <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"刪除 PIN"</string>
+    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"這會重設所有監管功能設定"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"網絡內容篩選器"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome 和網絡"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"嘗試封鎖露骨色情網站"</string>

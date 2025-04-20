@@ -344,7 +344,9 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Til / # app har adgang til din lokation}one{Til / # app har adgang til din lokation}other{Til / # apps har adgang til din lokation}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Indlæser…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Apps med tilladelse fra enheder i nærheden kan fastslå den relative positionering af forbundne enheder."</string>
-    <!-- no translation found for location_settings_footer_location_off (5332879932827940511) -->
+    <!-- no translation found for location_settings_footer_location_off_with_telephony (5600725945541382556) -->
+    <skip />
+    <!-- no translation found for location_settings_footer_location_off_no_telephony (2709958040008816610) -->
     <skip />
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Få flere oplysninger om lokationsindstillinger"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Du kan skifte ved at gå til Indstillinger for ChromeOS &gt; Privatliv og sikkerhed &gt; Privatlivsindstillinger &gt; Lokationsadgang"</string>
@@ -611,10 +613,8 @@
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"Vil du udelade konfiguration af mønster og ansigt?"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"Vil du udelade konfiguration af mønster og fingeraftryk?"</string>
     <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"Vil du udelade konfiguration af mønster, ansigt og fingeraftryk?"</string>
-    <!-- no translation found for resume_animation (5259729861893297887) -->
-    <skip />
-    <!-- no translation found for pause_animation (2209064682137909056) -->
-    <skip />
+    <string name="resume_animation" msgid="5259729861893297887">"Genoptag animation"</string>
+    <string name="pause_animation" msgid="2209064682137909056">"Sæt animation på pause"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"Konfigurer skærmlås"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Udfør"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Hov! Dette er ikke sensoren"</string>
@@ -1032,8 +1032,7 @@
     <string name="android_beam_explained" msgid="5684416131846701256">"Når denne funktion er slået til, kan du overføre appindhold til en anden NFC-kompatibel enhed ved at placere enhederne tæt på hinanden. Du kan f.eks. overføre websider, YouTube-videoer, kontakter og meget mere.\n\nDu skal blot placere enhederne tæt på hinanden (normalt bagside mod bagside) og derefter trykke på din skærm. Appen bestemmer, hvad der overføres."</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi-Fi"</string>
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Brug Wi-Fi"</string>
-    <!-- no translation found for wifi_networks_category (8011323954745036753) -->
-    <skip />
+    <string name="wifi_networks_category" msgid="8011323954745036753">"Netværk"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Indstillinger for Wi-Fi"</string>
     <string name="wifi_select_network" msgid="6692897876718813259">"Vælg Wi-Fi-netværk"</string>
     <string name="wifi_starting" msgid="6147022683967506341">"Aktiverer Wi-Fi..."</string>
@@ -1214,22 +1213,14 @@
     <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> – oplades"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"Hotspot-forbindelse"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"Signalstyrke"</string>
-    <!-- no translation found for ethernet_dns1 (6487470669719468602) -->
-    <skip />
-    <!-- no translation found for ethernet_dns2 (484620572555181363) -->
-    <skip />
-    <!-- no translation found for ethernet_gateway (4064061619318875567) -->
-    <skip />
-    <!-- no translation found for ethernet_network_prefix_length (3693127271457763198) -->
-    <skip />
-    <!-- no translation found for ethernet_ip_settings (3344064201878792090) -->
-    <skip />
-    <!-- no translation found for ethernet_config_submit (724743720212124025) -->
-    <skip />
-    <!-- no translation found for ethernet_config_cancel (986322993908814366) -->
-    <skip />
-    <!-- no translation found for ethernet_config_title (4784063109810004382) -->
-    <skip />
+    <string name="ethernet_dns1" msgid="6487470669719468602">"DNS 1 (undtagen ved tilsidesættelse med privat DNS)"</string>
+    <string name="ethernet_dns2" msgid="484620572555181363">"DNS 2 (undtagen ved tilsidesættelse med privat DNS)"</string>
+    <string name="ethernet_gateway" msgid="4064061619318875567">"Gateway"</string>
+    <string name="ethernet_network_prefix_length" msgid="3693127271457763198">"Længde på netværkspræfiks"</string>
+    <string name="ethernet_ip_settings" msgid="3344064201878792090">"IP-indstillinger"</string>
+    <string name="ethernet_config_submit" msgid="724743720212124025">"Send"</string>
+    <string name="ethernet_config_cancel" msgid="986322993908814366">"Annuller"</string>
+    <string name="ethernet_config_title" msgid="4784063109810004382">"Ethernet-indstillinger"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Gemte netværk"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Abonnementer"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Andre netværk"</string>
@@ -1458,8 +1449,7 @@
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Fra"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Starttidspunkt"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Løft enheden for at vække den"</string>
-    <!-- no translation found for screensaver_restrict_to_wireless_charging_title (8016059995446029358) -->
-    <skip />
+    <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Begræns til trådløs opladning"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Aktiv låseskærm"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Hvornår skal det vises"</string>
     <string name="doze_title" msgid="1523090408230862316">"Væk skærmen ved notifikationer"</string>
@@ -1626,8 +1616,7 @@
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Når enheden oplades"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"Når enheden oplader i stående position"</string>
     <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"Når enheden er docket"</string>
-    <!-- no translation found for hub_restrict_to_wireless_charging_title (2234080978449692163) -->
-    <skip />
+    <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"Begræns til trådløs opladning"</string>
     <string name="apn_settings" msgid="4295467389400441299">"Adgangspunkter"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Rediger adgangspunkt"</string>
     <string name="apn_add" msgid="9069613192201630934">"Tilføj adgangspunkt"</string>
@@ -1741,8 +1730,7 @@
     <string name="rx_ethernet_speed" msgid="6642000569214969711">"Modtag linkhastighed"</string>
     <string name="ethernet_network_usage" msgid="3795965384177426780">"Netværksbrug"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Netdeling via Ethernet"</string>
-    <!-- no translation found for ethernet_modify (1326316717004440503) -->
-    <skip />
+    <string name="ethernet_modify" msgid="1326316717004440503">"Rediger"</string>
     <string name="tethering_footer_info" msgid="6824352505979800594">"Brug hotspot og netdeling til at give andre enheder adgang til internettet via din dataforbindelse. Apps kan også oprette et hotspot for at dele indhold med enheder i nærheden."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Brug hotspot og netdeling til at give andre enheder adgang til internettet via din Wi-Fi- eller mobildataforbindelse. Apps kan også oprette et hotspot til at dele indhold med enheder i nærheden."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Hjælp"</string>
@@ -2170,6 +2158,8 @@
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Gå til startsiden"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"Gå tilbage"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"Se seneste apps"</string>
+    <string name="three_finger_tap_launch_app_title" msgid="55761877549896819">"Åbn en anden app"</string>
+    <string name="three_finger_tap_launch_app_summary" msgid="2015894823281420733">"Vælg fra en liste over installerede apps"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"Gå til startskærmen"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"Stryg opad med tre fingre et vilkårligt sted på touchpladen"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"Gå tilbage"</string>
@@ -2295,8 +2285,7 @@
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Tidsrelaterede styringselementer"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Systemstyring"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Send feedback"</string>
-    <!-- no translation found for accessibility_send_survey_title (7899716184811587023) -->
-    <skip />
+    <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Bedøm os"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Apps, du har downloadet"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Eksperimentel"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Aktivering og deaktivering af demofunktioner"</string>
@@ -2509,7 +2498,7 @@
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Varighed af automatisk klik"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibration og haptik"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Tilpas vibrationsstyrken til forskellige brugsformer"</string>
-    <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"Aktiveret"</string>
+    <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"Til"</string>
     <string name="accessibility_vibration_settings_state_off" msgid="7946588741954981703">"Deaktiveret"</string>
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Indstillingen er deaktiveret, fordi enheden er sat på lydløs"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Opkald"</string>
@@ -2624,8 +2613,7 @@
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{Kort ({time} sekund)}one{Kort ({time} sekund)}other{Kort ({time} sekunder)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{Mellem ({time} sekund)}one{Mellem ({time} sekund)}other{Mellem ({time} sekunder)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{Lang ({time} sekund)}one{Lang ({time} sekund)}other{Lang ({time} sekunder)}}"</string>
-    <!-- no translation found for accessibility_autoclick_delay_unit_second (1562809410497613173) -->
-    <skip />
+    <string name="accessibility_autoclick_delay_unit_second" msgid="1562809410497613173">"{count,plural, =1{{time} sekund}one{{time} sekund}other{{time} sekunder}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Indstillinger"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"Til"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"Fra"</string>
@@ -4325,7 +4313,7 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Filoverførsel"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
     <string name="usb_use_uvc_webcam" msgid="6595429508472038732">"Webcam"</string>
-    <string name="usb_transcode_files" msgid="2441954752105119109">"Konverter videoer til AVC"</string>
+    <string name="usb_transcode_files" msgid="2441954752105119109">"Konvertér videoer til AVC"</string>
     <string name="usb_transcode_files_summary" msgid="307102635711961513">"Videoer afspilles på flere medieafspillere, men dette kan gå ud over kvaliteten."</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"Netdeling via USB"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
@@ -4673,6 +4661,14 @@
     <string name="double_tap_power_camera_action_summary" msgid="4942585540579590444">"Åbn Kamera"</string>
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Wallet"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Åbn Wallet"</string>
+    <!-- no translation found for double_tap_power_lockscreen_shortcut_tip_title (9210589521260265387) -->
+    <skip />
+    <!-- no translation found for double_tap_power_lockscreen_shortcut_tip_description (1894710205138218048) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_footer_title (5417023303339032410) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (1267822422365445657) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Vend kameraet for at tage en selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Navigationstilstand"</string>
@@ -5741,10 +5737,8 @@
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"QR-kode til lydstream"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Adgangskode: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Andre personer, som vil lytte til <xliff:g id="STREAM_NAME">%1$s</xliff:g>, kan forbinde kompatible høretelefoner til deres Android-enhed. De kan derefter scanne denne QR-kode."</string>
-    <!-- no translation found for audio_streams_preference_subtitle (4098552511880220046) -->
-    <skip />
-    <!-- no translation found for audio_streams_preference_subtitle_audio_sharing_on (2382924714414148028) -->
-    <skip />
+    <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"Lyt til indhold, der udsendes via Auracast"</string>
+    <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"Deaktiver lyddeling for at finde lydstreams"</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Find en lydstream"</string>
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Lyt til en enhed, der deler lyd, eller til lydindhold, der deles via Auracast i nærheden"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"Din lydenhed"</string>
@@ -5782,12 +5776,9 @@
     <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"Tilføj en metode til gendannelse af pinkode"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Skift pinkode"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Har du glemt pinkoden?"</string>
-    <!-- no translation found for supervision_update_recovery_email_preference_title (2057393838251915087) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_title (8447541098148430866) -->
-    <skip />
-    <!-- no translation found for supervision_delete_pin_preference_summary (4865713157106413979) -->
-    <skip />
+    <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Opdater mailadresse til gendannelse"</string>
+    <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Slet pinkode"</string>
+    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Dette nulstiller alle dine indstillinger for forældrestyring"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Indholdsfiltre til webindhold"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome og Web"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Prøv at blokere eksplicitte websites"</string>

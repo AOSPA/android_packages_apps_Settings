@@ -35,6 +35,7 @@ import android.os.SystemClock;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
 import com.android.internal.app.LocaleHelper;
@@ -244,7 +245,7 @@ public class LocaleUtils {
      * @param isCountryMode Whether the locale page is in country mode or not.
      * @return localeInfos list of locale Infos
      */
-    public static @NonNull List<LocaleStore.LocaleInfo> getSortedLocaleList(
+    private static @NonNull List<LocaleStore.LocaleInfo> getSortedLocaleList(
             @NonNull List<LocaleStore.LocaleInfo> localeInfos, boolean isCountryMode) {
         final Locale sortingLocale = Locale.getDefault();
         final LocaleHelper.LocaleInfoComparator comp = new LocaleHelper.LocaleInfoComparator(
@@ -261,17 +262,22 @@ public class LocaleUtils {
      * @param isCountryMode Whether the locale page is in country mode or not.
      * @return localeInfos list of locale Infos
      */
-    public static @NonNull List<LocaleStore.LocaleInfo> getSortedLocaleFromSearchList(
+    public static @NonNull List<LocaleStore.LocaleInfo>  getSortedLocaleFromSearchList(
+            @Nullable CharSequence prefix,
             @NonNull List<LocaleStore.LocaleInfo> searchList,
             @NonNull List<LocaleStore.LocaleInfo> localeList,
             boolean isCountryMode) {
-        List<LocaleStore.LocaleInfo> searchItem = localeList.stream()
-                .filter(suggested -> searchList.stream()
-                        .anyMatch(option -> option.getLocale() != null
-                                && option.getLocale().getLanguage().equals(
-                                suggested.getLocale().getLanguage())))
-                .distinct()
-                .collect(Collectors.toList());
+
+        List<LocaleStore.LocaleInfo> searchItem = new ArrayList<>();
+        if (prefix == null || prefix.isEmpty()) {
+            return getSortedLocaleList(localeList, isCountryMode);
+        }
+
+        for (LocaleStore.LocaleInfo option : searchList) {
+            if (localeList.contains(option)) {
+                searchItem.add(option);
+            }
+        }
         return getSortedLocaleList(searchItem, isCountryMode);
     }
 }
