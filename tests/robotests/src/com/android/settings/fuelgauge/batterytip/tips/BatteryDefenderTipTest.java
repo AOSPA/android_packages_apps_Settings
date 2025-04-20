@@ -19,6 +19,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -151,7 +152,8 @@ public class BatteryDefenderTipTest {
     public void updatePreference_whenNotCharging_SetPositiveButtonVisibleToBeFalse() {
         mBatteryDefenderTip.updatePreference(mCardPreference);
 
-        verify(mCardPreference).setPositiveButtonVisible(false);
+        // Once for init, once for update
+        verify(mCardPreference, times(2)).setPositiveButtonVisible(false);
     }
 
     private String getLastErrorLog() {

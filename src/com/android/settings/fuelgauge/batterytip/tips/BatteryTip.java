@@ -170,7 +170,12 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
         final BannerMessagePreference cardPreference =
                 castToBannerMassagePreferenceSafely(preference);
         if (cardPreference != null) {
+            // Initializes message preference when tip type change
             cardPreference.setAttentionLevel(AttentionLevel.NORMAL);
+            cardPreference.setDismissButtonVisible(false);
+            cardPreference.setPositiveButtonVisible(false);
+            cardPreference.setNegativeButtonVisible(false);
+            cardPreference.setOnPreferenceClickListener(null);
         }
     }
 

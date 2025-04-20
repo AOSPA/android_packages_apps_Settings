@@ -231,7 +231,7 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
 
         activity.setTitle(titles.first);
         if (titles.second != null || !Flags.toggleFeatureFragmentCollectionInfo()) {
-            descriptionPref.setSummary(titles.second);
+            descriptionPref.setTitle(titles.second);
         } else {
             descriptionPref.setVisible(false);
         }

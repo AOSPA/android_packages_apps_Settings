@@ -411,7 +411,6 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
         if (com.android.settings.connectivity.Flags.ethernetSettings()) {
             addEthernetSwitchPreferenceController();
         } else {
-            mEthernetSwitchPreference.setVisible(false);
             addConnectedEthernetNetworkController();
         }
         mWifiStatusMessagePreference = findPreference(PREF_KEY_WIFI_STATUS_MESSAGE);

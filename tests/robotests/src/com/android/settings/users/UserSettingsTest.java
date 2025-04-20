@@ -20,6 +20,9 @@ import static android.os.UserManager.SWITCHABILITY_STATUS_OK;
 import static android.os.UserManager.SWITCHABILITY_STATUS_USER_IN_CALL;
 import static android.os.UserManager.SWITCHABILITY_STATUS_USER_SWITCH_DISALLOWED;
 
+import static com.android.settings.users.UserSettings.DIALOG_CONFIRM_REMOVE;
+import static com.android.settings.users.UserSettings.REQUEST_DELETE_USER;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -37,6 +40,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
+import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
@@ -62,6 +66,7 @@ import android.text.SpannableStringBuilder;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
@@ -73,6 +78,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
+import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
@@ -106,6 +112,7 @@ import java.util.List;
         ShadowUserManager.class,
         ShadowDevicePolicyManager.class,
         SettingsShadowResources.class,
+        ShadowLockPatternUtils.class,
         com.android.settings.testutils.shadow.ShadowFragment.class,
 })
 public class UserSettingsTest {
@@ -418,6 +425,72 @@ public class UserSettingsTest {
         SpannableStringBuilder defaultTitle = new SpannableStringBuilder(title);
         verify(menuItem, never()).setTitle(AdditionalMatchers.not(eq(defaultTitle)));
     }
+
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_REQUIRE_PIN_BEFORE_USER_DELETION)
+    public void removeUserSelf_userHasScreenlock_shouldAskForCredentials() {
+        doReturn(SWITCHABILITY_STATUS_OK).when(mUserManager).getUserSwitchability();
+
+        ShadowLockPatternUtils.setKeyguardStoredPasswordQuality(
+                DevicePolicyManager.PASSWORD_QUALITY_NUMERIC);
+
+        doReturn(mUserManager).when(mActivity).getSystemService(Context.USER_SERVICE);
+        doNothing().when(mFragment).startActivityForResult(any(), anyInt(), any());
+
+        UserInfo user =  new UserInfo(UserHandle.myUserId(),
+                SECONDARY_USER_NAME, null,
+                UserInfo.FLAG_FULL | UserInfo.FLAG_INITIALIZED,
+                UserManager.USER_TYPE_FULL_SECONDARY);
+        doReturn(user).when(mUserManager).getUserInfo(anyInt());
+        doReturn(UserHandle.myUserId()).when(mUserManager).getCredentialOwnerProfile(anyInt());
+
+        doReturn(new int[]{UserHandle.myUserId()}).when(mUserManager)
+                .getProfileIdsWithDisabled(UserHandle.myUserId());
+
+        Dialog confirmDialog = mFragment.onCreateDialog(DIALOG_CONFIRM_REMOVE);
+        confirmDialog.show();
+
+        Button positiveButton = confirmDialog.findViewById(android.R.id.button1);
+        assertThat(positiveButton).isNotNull();
+
+        positiveButton.performClick();
+
+        assertThat(mFragment.runUserRemovalKeyguardConfirmation()).isTrue();
+        verify(mFragment).startActivityForResult(any(Intent.class), eq(REQUEST_DELETE_USER), any());
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_REQUIRE_PIN_BEFORE_USER_DELETION)
+    public void removeUserSelf_userHasNoScreenlock_shouldNotAskForCredentials() {
+        doReturn(SWITCHABILITY_STATUS_OK).when(mUserManager).getUserSwitchability();
+
+        doReturn(mUserManager).when(mActivity).getSystemService(Context.USER_SERVICE);
+        doNothing().when(mFragment).startActivityForResult(any(), anyInt(), any());
+
+        UserInfo user =  new UserInfo(UserHandle.myUserId(),
+                SECONDARY_USER_NAME, null,
+                UserInfo.FLAG_FULL | UserInfo.FLAG_INITIALIZED,
+                UserManager.USER_TYPE_FULL_SECONDARY);
+        doReturn(user).when(mUserManager).getUserInfo(anyInt());
+        doReturn(UserHandle.myUserId()).when(mUserManager).getCredentialOwnerProfile(anyInt());
+
+        doReturn(new int[]{UserHandle.myUserId()}).when(mUserManager)
+                .getProfileIdsWithDisabled(UserHandle.myUserId());
+
+        Dialog confirmDialog = mFragment.onCreateDialog(DIALOG_CONFIRM_REMOVE);
+        confirmDialog.show();
+
+        Button positiveButton = confirmDialog.findViewById(android.R.id.button1);
+        assertThat(positiveButton).isNotNull();
+
+        positiveButton.performClick();
+
+        assertThat(mFragment.runUserRemovalKeyguardConfirmation()).isFalse();
+        verify(mFragment, never()).startActivityForResult(any(Intent.class),
+                eq(REQUEST_DELETE_USER), any());
+    }
+
 
     @Test
     public void updateUserList_canAddUserAndSwitchUser_shouldShowAddUser() {

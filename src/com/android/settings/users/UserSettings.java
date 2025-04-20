@@ -77,6 +77,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.password.ChooseLockGeneric;
+import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.MainSwitchBarController;
 import com.android.settings.widget.SettingsMainSwitchBar;
@@ -151,7 +152,8 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private static final IntentFilter USER_REMOVED_INTENT_FILTER;
 
-    private static final int DIALOG_CONFIRM_REMOVE = 1;
+    @VisibleForTesting
+    static final int DIALOG_CONFIRM_REMOVE = 1;
     private static final int DIALOG_ADD_USER = 2;
     // Dialogs with id 3 and 4 got removed
     private static final int DIALOG_USER_CANNOT_MANAGE = 5;
@@ -177,6 +179,8 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final int REQUEST_CHOOSE_LOCK = 10;
     private static final int REQUEST_EDIT_GUEST = 11;
     private static final int REQUEST_ADD_USER = 12;
+    @VisibleForTesting
+    static final int REQUEST_DELETE_USER = 13;
 
     static final int RESULT_GUEST_REMOVED = 100;
 
@@ -213,6 +217,7 @@ public class UserSettings extends SettingsPreferenceFragment
     SparseArray<Bitmap> mUserIcons = new SparseArray<>();
     private int mRemovingUserId = -1;
     private boolean mAddingUser;
+    private boolean mUserRemovalCredentialConfirmationPending;
     private boolean mGuestUserAutoCreated;
     private String mConfigSupervisedUserCreationPackage;
     private String mAddingUserName;
@@ -589,6 +594,13 @@ public class UserSettings extends SettingsPreferenceFragment
         } else if (mGuestUserAutoCreated && requestCode == REQUEST_EDIT_GUEST
                 && resultCode == RESULT_GUEST_REMOVED) {
             scheduleGuestCreation();
+        } else if (Flags.requirePinBeforeUserDeletion() && requestCode == REQUEST_DELETE_USER) {
+            if (resultCode == Activity.RESULT_OK) {
+                removeUserNow();
+            } else {
+                mRemovingUserId = -1;
+                mUserRemovalCredentialConfirmationPending = false;
+            }
         } else {
             mCreateUserDialogController.onActivityResult(requestCode, resultCode, data);
             mEditUserInfoController.onActivityResult(requestCode, resultCode, data);
@@ -721,6 +733,11 @@ public class UserSettings extends SettingsPreferenceFragment
                         UserDialogs.createRemoveDialog(getActivity(), mRemovingUserId,
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
+                                        if (Flags.requirePinBeforeUserDeletion()
+                                                && runUserRemovalKeyguardConfirmation()) {
+                                            mUserRemovalCredentialConfirmationPending = true;
+                                            return;
+                                        }
                                         removeUserNow();
                                     }
                                 }
@@ -889,6 +906,21 @@ public class UserSettings extends SettingsPreferenceFragment
         }
     }
 
+    /**
+     * Shows keyguard validation activity if screen lock is set for a user being deleted. If screen
+     * lock is not set up, no activity is launched.
+     *
+     * @return true if the authentication activity has been launched.
+     */
+    @VisibleForTesting
+    boolean runUserRemovalKeyguardConfirmation() {
+        final ChooseLockSettingsHelper.Builder builder =
+                new ChooseLockSettingsHelper.Builder(getActivity(), this);
+        return builder
+                .setRequestCode(REQUEST_DELETE_USER)
+                .show();
+    }
+
     private Dialog buildEditCurrentUserDialog() {
         final Activity activity = getActivity();
         if (activity == null) {
@@ -1000,7 +1032,13 @@ public class UserSettings extends SettingsPreferenceFragment
     private void removeUserNow() {
         if (mRemovingUserId == UserHandle.myUserId()) {
             removeThisUser();
-        } else {
+            synchronized (mUserLock) {
+                mRemovingUserId = -1;
+                mUserRemovalCredentialConfirmationPending = false;
+            }
+        } else if (!Flags.requirePinBeforeUserDeletion()) {
+            // This method is only called when a user deletes themselves so this part of code is
+            // never executed and can be removed.
             ThreadUtils.postOnBackgroundThread(new Runnable() {
                 @Override
                 public void run() {
@@ -1745,7 +1783,9 @@ public class UserSettings extends SettingsPreferenceFragment
     @Override
     public void onDismiss(DialogInterface dialog) {
         synchronized (mUserLock) {
-            mRemovingUserId = -1;
+            if (!mUserRemovalCredentialConfirmationPending) {
+                mRemovingUserId = -1;
+            }
             updateUserList();
             if (mCreateUserDialogController.isActive()) {
                 mCreateUserDialogController.finish();

@@ -18,11 +18,13 @@ package com.android.settings.users;
 
 import static android.os.UserHandle.USER_NULL;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.UserInfo;
+import android.multiuser.Flags;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.Trace;
@@ -30,6 +32,9 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
@@ -38,6 +43,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
@@ -80,9 +86,12 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     /** Whether to enable the app_copying fragment. */
     private static final boolean SHOW_APP_COPYING_PREF = false;
     private static final int MESSAGE_PADDING = 20;
+    @VisibleForTesting
+    static final int REQUEST_CONFIRM_REMOVE = 1;
 
     private UserManager mUserManager;
     private UserCapabilities mUserCaps;
+    private ActivityResultLauncher mUserRemovalCredentialConfirmationActivityResultLauncher;
     private boolean mGuestUserAutoCreated;
     private final AtomicBoolean mGuestCreationScheduled = new AtomicBoolean();
     private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
@@ -121,6 +130,11 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 com.android.internal.R.bool.config_guestUserAutoCreated);
 
         initialize(context, getArguments());
+        if (Flags.requirePinBeforeUserDeletion()) {
+            mUserRemovalCredentialConfirmationActivityResultLauncher = registerForActivityResult(
+                    new ActivityResultContracts.StartActivityForResult(),
+                    result -> onRemoveUserConfirmationActivityLauncherResult(result));
+        }
     }
 
     @Override
@@ -516,8 +530,36 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     }
 
     private void removeUser() {
+        if (Flags.requirePinBeforeUserDeletion() && runUserRemovalKeyguardConfirmation()) {
+            // User deletion will be handled when the credential authentication result is successful
+            return;
+        }
         mUserManager.removeUser(mUserInfo.id);
         finishFragment();
+    }
+
+    /**
+     * Shows keyguard validation activity if screen lock is set for the current user. If screen lock
+     * is not set up, no activity is launched.
+     *
+     * @return true if the authentication activity has been launched.
+     */
+    @VisibleForTesting
+    boolean runUserRemovalKeyguardConfirmation() {
+        final ChooseLockSettingsHelper.Builder builder =
+                new ChooseLockSettingsHelper.Builder(getActivity(), this);
+        return builder
+                .setActivityResultLauncher(mUserRemovalCredentialConfirmationActivityResultLauncher)
+                .setRequestCode(REQUEST_CONFIRM_REMOVE)
+                .setUserId(UserHandle.myUserId())
+                .show();
+    }
+
+    private void onRemoveUserConfirmationActivityLauncherResult(ActivityResult result) {
+        if (result.getResultCode() == Activity.RESULT_OK) {
+            mUserManager.removeUser(mUserInfo.id);
+            finishFragment();
+        }
     }
 
     /**

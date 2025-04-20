@@ -20,6 +20,8 @@ import static android.os.UserManager.SWITCHABILITY_STATUS_OK;
 import static android.os.UserManager.SWITCHABILITY_STATUS_USER_IN_CALL;
 import static android.os.UserManager.SWITCHABILITY_STATUS_USER_SWITCH_DISALLOWED;
 
+import static com.android.settings.users.UserDetailsSettings.REQUEST_CONFIRM_REMOVE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assume.assumeTrue;
@@ -61,6 +63,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
+import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
@@ -88,7 +91,8 @@ import java.util.List;
 @Config(shadows = {
         ShadowUserManager.class,
         com.android.settings.testutils.shadow.ShadowFragment.class,
-        ShadowDevicePolicyManager.class
+        ShadowDevicePolicyManager.class,
+        ShadowLockPatternUtils.class
 })
 public class UserDetailsSettingsTest {
 
@@ -625,6 +629,42 @@ public class UserDetailsSettingsTest {
         verify(mMetricsFeatureProvider).action(any(), eq(SettingsEnums.ACTION_REMOVE_USER));
         verify(mFragment).canDeleteUser();
         verify(mFragment).showDialog(DIALOG_CONFIRM_REMOVE);
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_REQUIRE_PIN_BEFORE_USER_DELETION)
+    public void runKeyguardConfirmation_userHasScreenLock_shouldLaunchAuthenticationActivity() {
+        setupSelectedUser();
+        mFragment.mUserInfo = mUserInfo;
+        mUserManager.setIsAdminUser(true);
+
+        mUserManager.addProfile(new UserInfo(UserHandle.myUserId(), "Bob", null,
+                UserInfo.FLAG_FULL | UserInfo.FLAG_MAIN));
+
+        ShadowLockPatternUtils.setKeyguardStoredPasswordQuality(
+                DevicePolicyManager.PASSWORD_QUALITY_NUMERIC);
+        doNothing().when(mFragment).startActivityForResult(any(), anyInt(), any());
+        ShadowUserManager.getShadow().setProfileIdsWithDisabled(new int[]{UserHandle.myUserId()});
+
+        assertThat(mFragment.runUserRemovalKeyguardConfirmation()).isTrue();
+        verify(mFragment).startActivityForResult(any(Intent.class), eq(REQUEST_CONFIRM_REMOVE),
+                any());
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_REQUIRE_PIN_BEFORE_USER_DELETION)
+    public void runKeyguardConfirmation_userHasNoScreenLock_shouldNotLaunchAuthentication() {
+        setupSelectedUser();
+        mFragment.mUserInfo = mUserInfo;
+        mUserManager.setIsAdminUser(true);
+
+        mUserManager.addProfile(new UserInfo(UserHandle.myUserId(), "Bob", null,
+                UserInfo.FLAG_FULL | UserInfo.FLAG_MAIN));
+
+        ShadowUserManager.getShadow().setProfileIdsWithDisabled(new int[]{UserHandle.myUserId()});
+        assertThat(mFragment.runUserRemovalKeyguardConfirmation()).isFalse();
+        verify(mFragment, never()).startActivityForResult(any(Intent.class),
+                eq(REQUEST_CONFIRM_REMOVE), any());
     }
 
     @Test

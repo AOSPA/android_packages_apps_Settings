@@ -16,6 +16,7 @@
 
 package com.android.settings.appfunctions
 
+import android.content.Context
 import com.android.settings.accessibility.ColorAndMotionScreen
 import com.android.settings.accessibility.VibrationIntensityScreen
 import com.android.settings.accessibility.VibrationScreen
@@ -42,10 +43,12 @@ import com.android.settings.network.tether.TetherScreen
 import com.android.settings.notification.SoundScreen
 import com.android.settings.security.LockScreenPreferenceScreen
 import com.android.settings.spa.app.catalyst.AllAppsScreen
+import com.android.settings.spa.app.catalyst.AppInfoStorageScreen
 import com.android.settings.spa.app.catalyst.AppStorageAppListScreen
 import com.android.settings.supervision.SupervisionDashboardScreen
 import com.android.settings.supervision.SupervisionPinManagementScreen
-import com.android.settingslib.metadata.PreferenceHierarchyGenerator
+import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.getPreferenceSummary
 
 enum class DeviceStateCategory(val functionId: String) {
     UNCATEGORIZED("getUncategorizedDeviceState"),
@@ -74,7 +77,8 @@ data class DeviceStateItemConfig(
     val enabled: Boolean = true,
     val settingKey: String,
     val settingScreenKey: String,
-    val hintText: String = "",
+    // TODO hint text should come from a "description" field, which currently only exists on Screens
+    val hintText: (Context, PreferenceMetadata) -> String? = { _, _ -> null },
 )
 
 /**
@@ -547,5 +551,91 @@ fun getDeviceStateItemList() = listOf(
         enabled = true,
         settingKey = "vibrate_on",
         settingScreenKey = VibrationScreen.KEY
+    ),
+    DeviceStateItemConfig(
+        enabled = true,
+        settingKey = AppInfoStorageScreen.KEY,
+        settingScreenKey =  AppStorageAppListScreen.KEY,
+        hintText = { context, metadata ->
+            metadata.extras(context)?.getString(AppInfoStorageScreen.KEY_EXTRA_PACKAGE_NAME)
+        }
+    ),
+    DeviceStateItemConfig(
+        enabled = true,
+        settingKey = StoragePreferenceScreen.KEY_SUMMARY_USED,
+        settingScreenKey = StoragePreferenceScreen.KEY,
+        hintText = { _, _ -> "Total device storage currently used" }
+    ),
+    DeviceStateItemConfig(
+        enabled = true,
+        settingKey = StoragePreferenceScreen.KEY_SUMMARY_TOTAL,
+        settingScreenKey = StoragePreferenceScreen.KEY,
+        hintText = { _, _ -> "Total device storage" }
+    ),
+    DeviceStateItemConfig(
+        enabled = true,
+        settingKey = StoragePreferenceScreen.KEY_FREE_UP_SPACE,
+        settingScreenKey = StoragePreferenceScreen.KEY,
+        hintText = { context, metadata -> metadata.getPreferenceSummary(context).toString() }
+    ),
+    DeviceStateItemConfig(
+        enabled = true,
+        settingKey = StoragePreferenceScreen.KEY_PREF_APPS,
+        settingScreenKey = StoragePreferenceScreen.KEY,
+        hintText = { _, _ -> "Total device storage used by apps" }
+    ),
+    DeviceStateItemConfig(
+        enabled = true,
+        settingKey = StoragePreferenceScreen.KEY_PREF_GAMES,
+        settingScreenKey = StoragePreferenceScreen.KEY,
+        hintText = { _, _ -> "Total device storage used by games" }
+    ),
+    DeviceStateItemConfig(
+        enabled = true,
+        settingKey = StoragePreferenceScreen.KEY_PREF_DOCUMENTS,
+        settingScreenKey = StoragePreferenceScreen.KEY,
+        hintText = { _, _ -> "Total device storage used by document files" }
+    ),
+    DeviceStateItemConfig(
+        enabled = true,
+        settingKey = StoragePreferenceScreen.KEY_PREF_VIDEOS,
+        settingScreenKey = StoragePreferenceScreen.KEY,
+        hintText = { _, _ -> "Total device storage used by video files" }
+    ),
+    DeviceStateItemConfig(
+        enabled = true,
+        settingKey = StoragePreferenceScreen.KEY_PREF_AUDIO,
+        settingScreenKey = StoragePreferenceScreen.KEY,
+        hintText = { _, _ -> "Total device storage used by audio files" }
+    ),
+    DeviceStateItemConfig(
+        enabled = true,
+        settingKey = StoragePreferenceScreen.KEY_PREF_IMAGES,
+        settingScreenKey = StoragePreferenceScreen.KEY,
+        hintText = { _, _ -> "Total device storage used by image files" }
+    ),
+    DeviceStateItemConfig(
+        enabled = true,
+        settingKey = StoragePreferenceScreen.KEY_PREF_TRASH,
+        settingScreenKey = StoragePreferenceScreen.KEY,
+        hintText = { _, _ -> "Total device storage used by files in trash" }
+    ),
+    DeviceStateItemConfig(
+        enabled = true,
+        settingKey = StoragePreferenceScreen.KEY_PREF_OTHER,
+        settingScreenKey = StoragePreferenceScreen.KEY,
+        hintText = { _, _ -> "Total device storage used by other files" }
+    ),
+    DeviceStateItemConfig(
+        enabled = true,
+        settingKey = StoragePreferenceScreen.KEY_PREF_SYSTEM,
+        settingScreenKey = StoragePreferenceScreen.KEY,
+        hintText = { _, _ -> "Total device storage used by the operating system" }
+    ),
+    DeviceStateItemConfig(
+        enabled = true,
+        settingKey = StoragePreferenceScreen.KEY_PREF_TEMP,
+        settingScreenKey = StoragePreferenceScreen.KEY,
+        hintText = { _, _ -> "Total device storage used by temporary system files" }
     ),
 )

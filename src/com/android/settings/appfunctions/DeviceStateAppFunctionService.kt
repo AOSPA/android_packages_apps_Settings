@@ -42,6 +42,7 @@ import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenRegistry
 import com.android.settingslib.metadata.getPreferenceScreenTitle
 import com.android.settingslib.metadata.getPreferenceSummary
+import com.android.settingslib.metadata.getPreferenceTitle
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateResponse
 import com.google.android.appfunctions.schema.common.v1.devicestate.LocalizedString
@@ -116,7 +117,9 @@ class DeviceStateAppFunctionService : AppFunctionService() {
             }
         }
 
-        perScreenDeviceStatesList.add(buildNotificationsScreenStates())
+        if (requestCategory in setOf(DeviceStateCategory.UNCATEGORIZED)) {
+            perScreenDeviceStatesList.add(buildNotificationsScreenStates())
+        }
 
         return DeviceStateResponse(
             perScreenDeviceStates = perScreenDeviceStatesList,
@@ -138,6 +141,7 @@ class DeviceStateAppFunctionService : AppFunctionService() {
                 PreferenceScreenCoordinate(screenKey, null),
             ) ?: return null
         val deviceStateItemList: MutableList<DeviceStateItem> = ArrayList()
+        // TODO if child node is PreferenceScreen, recursively process it
         screenMetaData.getPreferenceHierarchy().forEachRecursively {
             val metadata = it.metadata
             val config = settingConfigMap[metadata.key]
@@ -155,10 +159,12 @@ class DeviceStateAppFunctionService : AppFunctionService() {
             deviceStateItemList.add(
                 DeviceStateItem(
                     key = metadata.key,
-                    // TODO check dynamic title
-                    name = getLocalizedString(metadata.title),
+                    name = LocalizedString(
+                        english = metadata.getPreferenceTitle(englishContext).toString(),
+                        localized = metadata.getPreferenceTitle(applicationContext).toString()
+                    ),
                     jsonValue = jsonValue,
-                    hintText = config?.hintText ?: ""
+                    hintText = config?.hintText(englishContext, metadata)
                 )
             )
         }
@@ -178,17 +184,6 @@ class DeviceStateAppFunctionService : AppFunctionService() {
                 generatePreferenceHierarchy(applicationContext, defaultType)
             else -> getPreferenceHierarchy(applicationContext)
         }
-
-    private fun getLocalizedString(resId: Int): LocalizedString? {
-        return try {
-            LocalizedString(
-                english = englishContext.getString(resId),
-                localized = applicationContext.getString(resId)
-            )
-        } catch (_: Resources.NotFoundException) {
-            null
-        }
-    }
 
     private fun createEnglishContext(): Context {
         val configuration = Configuration(applicationContext.resources.configuration)
