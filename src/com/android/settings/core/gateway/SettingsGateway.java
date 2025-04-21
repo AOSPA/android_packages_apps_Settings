@@ -161,6 +161,7 @@ import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.LockScreenNotificationsPreferencePageFragment;
 import com.android.settings.notification.NotificationAccessSettings;
 import com.android.settings.notification.NotificationAssistantPicker;
+import com.android.settings.notification.BundlePreferenceFragment;
 import com.android.settings.notification.PoliteNotificationsPreferenceFragment;
 import com.android.settings.notification.SoundSettings;
 import com.android.settings.notification.app.AppBubbleNotificationSettings;
@@ -424,6 +425,7 @@ public class SettingsGateway {
             ContentProtectionPreferenceFragment.class.getName(),
             ToggleScreenMagnificationPreferenceFragment.class.getName(),
             FlashNotificationsPreferenceFragment.class.getName(),
+            BundlePreferenceFragment.class.getName(),
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

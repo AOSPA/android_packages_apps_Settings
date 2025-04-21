@@ -44,6 +44,8 @@ import com.android.settings.connecteddevice.fastpair.FastPairFeatureProvider
 import com.android.settings.connecteddevice.fastpair.FastPairFeatureProviderImpl
 import com.android.settings.connecteddevice.stylus.StylusFeatureProvider
 import com.android.settings.connecteddevice.stylus.StylusFeatureProviderImpl
+import com.android.settings.connecteddevice.threadnetwork.ThreadNetworkFeatureProvider
+import com.android.settings.connecteddevice.threadnetwork.ThreadNetworkFeatureProviderImpl
 import com.android.settings.core.instrumentation.SettingsMetricsFeatureProvider
 import com.android.settings.dashboard.DashboardFeatureProviderImpl
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider
@@ -190,6 +192,10 @@ open class FeatureFactoryImpl : FeatureFactory() {
 
     override val stylusFeatureProvider: StylusFeatureProvider by lazy {
         StylusFeatureProviderImpl()
+    }
+
+    override val threadNetworkFeatureProvider: ThreadNetworkFeatureProvider by lazy {
+        ThreadNetworkFeatureProviderImpl()
     }
 
     override val fastPairFeatureProvider: FastPairFeatureProvider by lazy {

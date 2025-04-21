@@ -33,6 +33,11 @@ import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceFragment
 import com.android.settingslib.preference.PreferenceScreenCreator
 
+/**
+ * This DND mode screen is dedicated for device state. It functions via a virtual key and is
+ * separate from the current Settings user interface, which it does not affect. Obviously, this is
+ * not fully migrated page.
+ */
 @ProvidePreferenceScreen(ZenModeDndScreen.KEY)
 class ZenModeDndScreen :
     PreferenceScreenCreator,
@@ -62,9 +67,10 @@ class ZenModeDndScreen :
                 .putExtra(EXTRA_AUTOMATIC_ZEN_RULE_ID, context.getDndMode()?.id)
         else null
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {}
+    override fun getPreferenceHierarchy(context: Context) =
+        preferenceHierarchy(context, this) { +ZenModeButtonPreference(context.getDndMode()!!) }
 
     companion object {
-        const val KEY = "device_state_dnd_mode_screen"
+        const val KEY = "device_state_dnd_mode_screen" // only for device state.
     }
 }

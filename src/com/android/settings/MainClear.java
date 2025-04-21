@@ -68,7 +68,6 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.biometrics.IdentityCheckBiometricErrorDialog;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
-import com.android.settings.flags.Flags;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settings.password.ConfirmLockPattern;
@@ -484,14 +483,12 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
                         .setListener(mInitiateListener)
                         .setButtonType(ButtonType.OTHER)
                         .build());
-        if (Flags.showFactoryResetCancelButton()) {
-            mixin.setSecondaryButton(
-                    new FooterButton.Builder(activity)
-                            .setText(android.R.string.cancel)
-                            .setListener(view -> activity.onBackPressed())
-                            .setButtonType(ButtonType.CANCEL)
-                            .build());
-        }
+        mixin.setSecondaryButton(
+                new FooterButton.Builder(activity)
+                        .setText(android.R.string.cancel)
+                        .setListener(view -> activity.onBackPressed())
+                        .setButtonType(ButtonType.CANCEL)
+                        .build());
         mInitiateButton = mixin.getPrimaryButton();
     }
 

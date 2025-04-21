@@ -20,6 +20,8 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.os.UserManager.DISALLOW_ADD_WIFI_CONFIG;
 import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 
+import static com.android.wifitrackerlib.WifiEntry.CONNECTED_STATE_CONNECTED;
+
 import android.app.KeyguardManager;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -44,6 +46,7 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
+import com.android.settings.connectivity.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.core.lifecycle.ObservableActivity;
@@ -109,11 +112,14 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
 
     // The received intent supports a key of WifiTrackerLib or SettingsLib.
     private boolean mIsWifiTrackerLib;
+    // Whether to use WifiDialog2 when user clicks on "Add network".
+    private boolean mUseWifiDialog2ForAddNetwork;
 
     private Intent mIntent;
     private NetworkDetailsTracker mNetworkDetailsTracker;
     private HandlerThread mWorkerThread;
-    private WifiManager mWifiManager;
+    @VisibleForTesting
+    WifiManager mWifiManager;
     private LockScreenMonitor mLockScreenMonitor;
 
     @Override
@@ -130,6 +136,11 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
         }
 
         mIsWifiTrackerLib = !TextUtils.isEmpty(mIntent.getStringExtra(KEY_CHOSEN_WIFIENTRY_KEY));
+        if (Flags.wifiMultiuser()) {
+            mUseWifiDialog2ForAddNetwork =
+                TextUtils.isEmpty(mIntent.getStringExtra(KEY_CHOSEN_WIFIENTRY_KEY))
+                && TextUtils.isEmpty(mIntent.getStringExtra(KEY_ACCESS_POINT_STATE));
+        }
 
         if (mIsWifiTrackerLib) {
             mWorkerThread = new HandlerThread(
@@ -171,11 +182,12 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
         if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
             createDialogWithSuwTheme();
         } else {
-            if (mIsWifiTrackerLib) {
+            if (mIsWifiTrackerLib || mUseWifiDialog2ForAddNetwork) {
                 mDialog2 = new WifiDialog2(this, this,
-                        mNetworkDetailsTracker.getWifiEntry(), WifiConfigUiBase2.MODE_CONNECT,
-                        0 /* style */, false /* hideSubmitButton */,
-                        false /* hideMeteredAndPrivacy */,
+                        mNetworkDetailsTracker == null
+                                ? null : mNetworkDetailsTracker.getWifiEntry(),
+                        WifiConfigUiBase2.MODE_CONNECT, 0 /* style */,
+                        false /* hideSubmitButton */, false /* hideMeteredAndPrivacy */,
                         Utils.SYSTEMUI_PACKAGE_NAME.equals(getLaunchedFromPackage()));
             } else {
                 mDialog = WifiDialog.createModal(
@@ -183,7 +195,7 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
             }
         }
 
-        if (mIsWifiTrackerLib) {
+        if (mIsWifiTrackerLib || mUseWifiDialog2ForAddNetwork) {
             if (mDialog2 != null) {
                 mDialog2.show();
                 mDialog2.setOnDismissListener(this);
@@ -205,9 +217,9 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
         final int targetStyle = ThemeHelper.isSetupWizardDayNightEnabled(this)
                 ? R.style.SuwAlertDialogThemeCompat_DayNight :
                 R.style.SuwAlertDialogThemeCompat_Light;
-        if (mIsWifiTrackerLib) {
+        if (mIsWifiTrackerLib || mUseWifiDialog2ForAddNetwork) {
             mDialog2 = new WifiDialog2(this, this,
-                    mNetworkDetailsTracker.getWifiEntry(),
+                    mNetworkDetailsTracker == null ? null : mNetworkDetailsTracker.getWifiEntry(),
                     WifiConfigUiBase2.MODE_CONNECT, targetStyle);
         } else {
             mDialog = WifiDialog.createModal(this, this, mAccessPoint,
@@ -224,11 +236,13 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
 
     @Override
     public void onDestroy() {
-        if (mIsWifiTrackerLib) {
+        if (mIsWifiTrackerLib || mUseWifiDialog2ForAddNetwork) {
             if (mDialog2 != null && mDialog2.isShowing()) {
                 mDialog2 = null;
             }
-            mWorkerThread.quit();
+            if (mWorkerThread != null) {
+                mWorkerThread.quit();
+            }
         } else {
             if (mDialog != null && mDialog.isShowing()) {
                 mDialog = null;
@@ -290,10 +304,17 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
         final WifiConfiguration config = dialog.getController().getConfig();
 
         if (getIntent().getBooleanExtra(KEY_CONNECT_FOR_CALLER, true)) {
-            if (config == null && wifiEntry != null && wifiEntry.canConnect()) {
-                wifiEntry.connect(null /* callback */);
+            if (config == null) {
+                if (wifiEntry != null && wifiEntry.canConnect()) {
+                    wifiEntry.connect(null /* callback */);
+                }
             } else {
-                mWifiManager.connect(config, null /* listener */);
+                mWifiManager.save(config, null /* listener */);
+                // wifiEntry is null for "Add network"
+                if (wifiEntry != null
+                        && wifiEntry.getConnectedState() != CONNECTED_STATE_CONNECTED) {
+                    mWifiManager.connect(config, null /* listener */);
+                }
             }
         }
 

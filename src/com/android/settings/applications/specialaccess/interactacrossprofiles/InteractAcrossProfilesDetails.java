@@ -55,10 +55,12 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.stats.devicepolicy.DevicePolicyEnums;
 import android.util.IconDrawableFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Space;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -70,7 +72,9 @@ import com.android.settings.applications.AppStoreUtil;
 import com.android.settings.widget.CardPreference;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -120,7 +124,14 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         mAppLabel = mPackageInfo.applicationInfo.loadLabel(mPackageManager).toString();
         mInstallAppIntent = AppStoreUtil.getAppStoreLink(mContext, mPackageName);
 
-        addPreferencesFromResource(R.xml.interact_across_profiles_permissions_details);
+        if (SettingsThemeHelper.isExpressiveTheme(mContext)) {
+            addPreferencesFromResource(
+                    R.xml.interact_across_profiles_permissions_details_expressive);
+            hideFooterPreferenceIcon("interact_across_profiles_summary_2");
+            hideFooterPreferenceIcon("interact_across_profiles_extra_summary");
+        } else {
+            addPreferencesFromResource(R.xml.interact_across_profiles_permissions_details);
+        }
     }
 
     @Override
@@ -325,6 +336,11 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         dialogSummary.setText(mDpm.getResources().getString(CONNECT_APPS_DIALOG_SUMMARY,
                 () -> getString(
                         R.string.interact_across_profiles_consent_dialog_summary)));
+
+        if (SettingsThemeHelper.isExpressiveTheme(mContext)) {
+            Space padding = dialogView.findViewById(R.id.dialog_extra_padding_bottom);
+            padding.setVisibility(View.VISIBLE);
+        }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(dialogView)
@@ -597,4 +613,14 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
                 .map(pkg -> new HashSet<>(Arrays.asList(pkg.split(","))))
                 .orElseGet(HashSet::new);
     }
+
+    private void hideFooterPreferenceIcon(String preferenceKey) {
+        Preference preference = findPreference(preferenceKey);
+        if (preference instanceof FooterPreference) {
+            ((FooterPreference) preference).setIconVisibility(View.GONE);
+        } else {
+            Log.d(TAG, "Could not find preference " + preferenceKey);
+        }
+    }
+
 }

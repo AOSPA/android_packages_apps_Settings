@@ -18,22 +18,28 @@ package com.android.settings.accessibility
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.res.Resources
+import android.media.AudioManager
 import android.os.Vibrator
+import androidx.core.content.getSystemService
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.flags.Flags
+import com.android.settings.testutils.shadow.ShadowAudioManager
 import com.android.settingslib.preference.CatalystScreenTestCase
 import com.google.common.truth.Truth.assertThat
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
+import org.robolectric.annotation.Config
 
 // LINT.IfChange
 @RunWith(AndroidJUnit4::class)
+@Config(shadows = [ShadowAudioManager::class])
 class VibrationIntensityScreenTest : CatalystScreenTestCase() {
     private lateinit var mockVibrator: Vibrator
 
@@ -55,6 +61,11 @@ class VibrationIntensityScreenTest : CatalystScreenTestCase() {
 
     override val flagName: String
         get() = Flags.FLAG_CATALYST_VIBRATION_INTENSITY_SCREEN
+
+    @Before
+    fun setUp() {
+        setRingerMode(AudioManager.RINGER_MODE_NORMAL)
+    }
 
     @Test
     fun key() {
@@ -86,6 +97,12 @@ class VibrationIntensityScreenTest : CatalystScreenTestCase() {
             on { getInteger(R.integer.config_vibration_supported_intensity_levels) } doReturn 2
         }
         assertThat(preferenceScreenCreator.isAvailable(context)).isTrue()
+    }
+
+    private fun setRingerMode(ringerMode: Int) {
+        val audioManager = context.getSystemService<AudioManager>()
+        audioManager?.ringerModeInternal = ringerMode
+        assertThat(audioManager?.ringerModeInternal).isEqualTo(ringerMode)
     }
 }
 // LINT.ThenChange(VibrationPreferenceControllerTest.java)

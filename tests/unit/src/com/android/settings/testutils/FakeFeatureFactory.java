@@ -31,6 +31,7 @@ import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.connecteddevice.audiosharing.AudioSharingFeatureProvider;
 import com.android.settings.connecteddevice.fastpair.FastPairFeatureProvider;
 import com.android.settings.connecteddevice.stylus.StylusFeatureProvider;
+import com.android.settings.connecteddevice.threadnetwork.ThreadNetworkFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.display.DisplayFeatureProvider;
@@ -99,6 +100,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public WifiFeatureProvider mWifiFeatureProvider;
     public KeyboardSettingsFeatureProvider mKeyboardSettingsFeatureProvider;
     public StylusFeatureProvider mStylusFeatureProvider;
+    public ThreadNetworkFeatureProvider mThreadNetworkFeatureProvider;
     public OnboardingFeatureProvider mOnboardingFeatureProvider;
     public FastPairFeatureProvider mFastPairFeatureProvider;
     public PrivateSpaceLoginFeatureProvider mPrivateSpaceLoginFeatureProvider;
@@ -153,6 +155,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         mWifiFeatureProvider = mock(WifiFeatureProvider.class);
         mKeyboardSettingsFeatureProvider = mock(KeyboardSettingsFeatureProvider.class);
         mStylusFeatureProvider = mock(StylusFeatureProvider.class);
+        mThreadNetworkFeatureProvider = mock(ThreadNetworkFeatureProvider.class);
         mOnboardingFeatureProvider = mock(OnboardingFeatureProvider.class);
         mFastPairFeatureProvider = mock(FastPairFeatureProvider.class);
         mPrivateSpaceLoginFeatureProvider = mock(PrivateSpaceLoginFeatureProvider.class);
@@ -320,6 +323,11 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public StylusFeatureProvider getStylusFeatureProvider() {
         return mStylusFeatureProvider;
+    }
+
+    @Override
+    public ThreadNetworkFeatureProvider getThreadNetworkFeatureProvider() {
+        return mThreadNetworkFeatureProvider;
     }
 
     @Override

@@ -49,7 +49,7 @@ class SupervisionMainSwitchPreferenceTest {
         object : ContextWrapper(appContext) {
             override fun getSystemService(name: String): Any =
                 when (name) {
-                    Context.SUPERVISION_SERVICE -> mockSupervisionManager
+                    getSystemServiceName(SupervisionManager::class.java) -> mockSupervisionManager
                     else -> super.getSystemService(name)
                 }
         }

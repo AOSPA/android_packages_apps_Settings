@@ -189,4 +189,4 @@ public class MediaVibrationTogglePreferenceControllerTest {
         return Settings.System.getInt(mContext.getContentResolver(), settingKey);
     }
 }
-// LINT.ThenChange(MediaVibrationIntensitySwitchPreferenceTest.java)
+// LINT.ThenChange(MediaVibrationIntensitySwitchPreferenceTest.kt)

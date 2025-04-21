@@ -30,7 +30,7 @@ import com.android.settingslib.preference.PreferenceScreenCreator
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 
 @ProvidePreferenceScreen(SoundScreen.KEY)
-class SoundScreen : PreferenceScreenCreator, PreferenceIconProvider {
+open class SoundScreen : PreferenceScreenCreator, PreferenceIconProvider {
     override val key: String
         get() = KEY
 

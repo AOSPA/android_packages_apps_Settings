@@ -16,6 +16,8 @@
 
 package com.android.settings.dream;
 
+import static android.service.dreams.Flags.dreamsV2;
+
 import static com.android.settings.dream.DreamMainSwitchPreferenceController.MAIN_SWITCH_PREF_KEY;
 
 import android.app.settings.SettingsEnums;
@@ -55,6 +57,7 @@ public class DreamSettings extends DashboardFragment implements OnCheckedChangeL
     static final String EITHER_CHARGING_OR_DOCKED = "either_charging_or_docked";
     static final String WHILE_POSTURED_ONLY = "while_postured_only";
     static final String NEVER_DREAM = "never";
+    private static final String SPACE_PREF_KEY = "dream_space_preference";
 
     private MainSwitchPreference mMainSwitchPreference;
     private Button mPreviewButton;
@@ -224,6 +227,12 @@ public class DreamSettings extends DashboardFragment implements OnCheckedChangeL
 
         if (mDreamPickerController != null) {
             mDreamPickerController.addCallback(mCallback);
+        }
+
+        // Remove the space preference manually only if the flag is enabled, which removes the
+        // floating preview button, making the extra space unnecessary.
+        if (dreamsV2()) {
+            removePreference(SPACE_PREF_KEY);
         }
     }
 

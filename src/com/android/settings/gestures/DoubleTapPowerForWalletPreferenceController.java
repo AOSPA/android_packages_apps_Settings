@@ -54,9 +54,7 @@ public class DoubleTapPowerForWalletPreferenceController extends BasePreferenceC
                     if (uri.equals(
                             DoubleTapPowerSettingsUtils
                                     .DOUBLE_TAP_POWER_BUTTON_GESTURE_ENABLED_URI)) {
-                        mPreference.setEnabled(
-                                DoubleTapPowerSettingsUtils
-                                        .isDoubleTapPowerButtonGestureEnabled(mContext));
+                        mPreference.setEnabled(isPreferenceEnabled());
                     } else if (uri.equals(
                             DoubleTapPowerSettingsUtils
                                     .DOUBLE_TAP_POWER_BUTTON_GESTURE_TARGET_ACTION_URI)) {

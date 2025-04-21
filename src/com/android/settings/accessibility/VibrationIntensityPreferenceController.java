@@ -33,6 +33,7 @@ import com.android.settingslib.widget.SliderPreference;
  * Abstract preference controller for a vibration intensity setting, that displays multiple
  * intensity levels to the user as a slider.
  */
+// LINT.IfChange
 public abstract class VibrationIntensityPreferenceController extends SliderPreferenceController
         implements LifecycleObserver, OnStart, OnStop {
 
@@ -139,3 +140,4 @@ public abstract class VibrationIntensityPreferenceController extends SliderPrefe
         return position;
     }
 }
+// LINT.ThenChange(VibrationIntensitySliderPreference.kt)

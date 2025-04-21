@@ -40,8 +40,6 @@ import android.content.res.Resources;
 import android.icu.text.CaseMap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,7 +55,6 @@ import androidx.preference.PreferenceViewHolder;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
-import com.android.settings.flags.Flags;
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settingslib.widget.IllustrationPreference;
@@ -92,8 +89,6 @@ import java.util.Locale;
 public class ToggleFeaturePreferenceFragmentTest {
     @Rule
     public final MockitoRule mocks = MockitoJUnit.rule();
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private static final String PLACEHOLDER_PACKAGE_NAME = "com.placeholder.example";
     private static final String PLACEHOLDER_CLASS_NAME = PLACEHOLDER_PACKAGE_NAME + ".placeholder";
@@ -290,7 +285,6 @@ public class ToggleFeaturePreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ACCESSIBILITY_SHOW_APP_INFO_BUTTON)
     public void createAppInfoPreference_withValidComponentName() {
         when(mPackageManager.isPackageAvailable(PLACEHOLDER_PACKAGE_NAME)).thenReturn(true);
         mFragment.mComponentName = PLACEHOLDER_COMPONENT_NAME;
@@ -305,7 +299,6 @@ public class ToggleFeaturePreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ACCESSIBILITY_SHOW_APP_INFO_BUTTON)
     public void createAppInfoPreference_noComponentName_shouldBeNull() {
         mFragment.mComponentName = null;
 
@@ -315,7 +308,6 @@ public class ToggleFeaturePreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ACCESSIBILITY_SHOW_APP_INFO_BUTTON)
     public void createAppInfoPreference_withUnavailablePackage_shouldBeNull() {
         when(mPackageManager.isPackageAvailable(PLACEHOLDER_PACKAGE_NAME)).thenReturn(false);
         mFragment.mComponentName = PLACEHOLDER_COMPONENT_NAME;
@@ -326,7 +318,6 @@ public class ToggleFeaturePreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ACCESSIBILITY_SHOW_APP_INFO_BUTTON)
     public void createAppInfoPreference_inSetupWizard_shouldBeNull() {
         when(mFragment.isAnySetupWizard()).thenReturn(true);
         mFragment.mComponentName = PLACEHOLDER_COMPONENT_NAME;

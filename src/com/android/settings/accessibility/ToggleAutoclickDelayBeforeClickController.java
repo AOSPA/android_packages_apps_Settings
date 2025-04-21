@@ -17,28 +17,73 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
+import android.database.ContentObserver;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
+import android.provider.Settings;
 import android.text.TextUtils;
+import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.server.accessibility.Flags;
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 /** Controller class that controls accessibility autoclick delay time settings. */
-public class ToggleAutoclickDelayBeforeClickController extends BasePreferenceController {
+public class ToggleAutoclickDelayBeforeClickController
+        extends BasePreferenceController implements DefaultLifecycleObserver {
 
     public static final String TAG =
             ToggleAutoclickDelayBeforeClickController.class.getSimpleName();
 
+    static final Uri ACCESSIBILITY_AUTOCLICK_DELAY_URI =
+            Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY);
+
     @Nullable private FragmentManager mFragmentManager;
+    @Nullable private Preference mPreference;
+
+    final ContentObserver mSettingsObserver =
+            new ContentObserver(new Handler(Looper.getMainLooper())) {
+                @Override
+                public void onChange(boolean selfChange, @Nullable Uri uri) {
+                    if (mPreference == null || uri == null) {
+                        return;
+                    }
+                    updateState(mPreference);
+                }
+            };
 
     public ToggleAutoclickDelayBeforeClickController(@NonNull Context context,
             @NonNull String preferenceKey) {
         super(context, preferenceKey);
+    }
+
+    @Override
+    public void displayPreference(@NonNull PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
+    }
+
+    @Override
+    public void onStart(@NonNull LifecycleOwner owner) {
+        mContext.getContentResolver().registerContentObserver(
+                ACCESSIBILITY_AUTOCLICK_DELAY_URI,
+                /* notifyForDescendants= */ false,
+                mSettingsObserver);
+    }
+
+    @Override
+    public void onStop(@NonNull LifecycleOwner owner) {
+        mContext.getContentResolver().unregisterContentObserver(mSettingsObserver);
     }
 
     public void setFragment(@NonNull Fragment fragment) {
@@ -60,4 +105,15 @@ public class ToggleAutoclickDelayBeforeClickController extends BasePreferenceCon
     public int getAvailabilityStatus() {
         return Flags.enableAutoclickIndicator() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
+
+    @Override
+    public @NonNull CharSequence getSummary() {
+        final int autoclickDelay = Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY,
+                AccessibilityManager.AUTOCLICK_DELAY_WITH_INDICATOR_DEFAULT);
+        return AutoclickUtils.getAutoclickDelaySummary(
+                        mContext, R.string.accessibility_autoclick_delay_unit_second,
+                        autoclickDelay);
+    }
+
 }

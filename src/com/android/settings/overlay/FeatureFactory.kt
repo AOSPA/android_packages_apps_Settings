@@ -28,6 +28,7 @@ import com.android.settings.bluetooth.BluetoothFeatureProvider
 import com.android.settings.connecteddevice.audiosharing.AudioSharingFeatureProvider
 import com.android.settings.connecteddevice.fastpair.FastPairFeatureProvider
 import com.android.settings.connecteddevice.stylus.StylusFeatureProvider
+import com.android.settings.connecteddevice.threadnetwork.ThreadNetworkFeatureProvider
 import com.android.settings.dashboard.DashboardFeatureProvider
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider
 import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProvider
@@ -169,6 +170,11 @@ abstract class FeatureFactory {
      * Retrieves implementation for stylus feature.
      */
     abstract val stylusFeatureProvider: StylusFeatureProvider
+
+    /**
+     * Retrieves implementation for Thread network feature.
+     */
+    abstract val threadNetworkFeatureProvider: ThreadNetworkFeatureProvider
 
     /**
      * Retrieves implementation for Onboarding related feature.

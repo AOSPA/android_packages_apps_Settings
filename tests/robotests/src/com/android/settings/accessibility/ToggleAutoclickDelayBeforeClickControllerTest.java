@@ -26,6 +26,7 @@ import android.os.Looper;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
+import android.provider.Settings;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.testing.FragmentScenario;
@@ -49,6 +50,10 @@ public class ToggleAutoclickDelayBeforeClickControllerTest {
 
     private static final String PREFERENCE_KEY =
             "accessibility_control_autoclick_delay_before_click";
+
+    private static final int TEST_AUTOCLICK_DELAY_MILLISECOND = 300;
+    private static final String DEFAULT_AUTOCLICK_DELAY_SUMMARY = "1 second";
+    private static final String TEST_AUTOCLICK_DELAY_SUMMARY = "0.3 seconds";
 
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
@@ -107,5 +112,21 @@ public class ToggleAutoclickDelayBeforeClickControllerTest {
         Fragment dialogFrag = mFragment.getChildFragmentManager()
                 .findFragmentByTag(ToggleAutoclickDelayBeforeClickController.TAG);
         assertThat(dialogFrag).isInstanceOf(AutoclickDelayDialogFragment.class);
+    }
+
+    @Test
+    public void getSummary_matchesDelayTimeInSettings() {
+        assertThat(mController.getSummary().toString()).isEqualTo(
+                DEFAULT_AUTOCLICK_DELAY_SUMMARY);
+        updateSetting(TEST_AUTOCLICK_DELAY_MILLISECOND);
+        assertThat(mController.getSummary().toString()).isEqualTo(
+                TEST_AUTOCLICK_DELAY_SUMMARY);
+    }
+
+    private void updateSetting(int value) {
+        Settings.Secure.putInt(
+                mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY,
+                value);
     }
 }

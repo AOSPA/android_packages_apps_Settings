@@ -181,7 +181,6 @@ public class AccessibilityButtonPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
     public void getAvailabilityStatus_settingEmpty_disabled() {
         mShadowAccessibilityManager.setAccessibilityShortcutTargets(SOFTWARE, List.of());
 
@@ -189,7 +188,6 @@ public class AccessibilityButtonPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
     public void getAvailabilityStatus_settingNotEmpty_available() {
         mShadowAccessibilityManager.setAccessibilityShortcutTargets(SOFTWARE, List.of("Foo"));
 

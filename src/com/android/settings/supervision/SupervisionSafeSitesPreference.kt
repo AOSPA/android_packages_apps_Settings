@@ -18,6 +18,10 @@ package com.android.settings.supervision
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
+import androidx.annotation.VisibleForTesting
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settingslib.datastore.Permissions
@@ -41,7 +45,7 @@ sealed class SupervisionSafeSitesPreference(
     PreferenceLifecycleProvider {
     private lateinit var lifeCycleContext: PreferenceLifecycleContext
 
-    abstract val supervisionCredentialRequestCode: Int
+    private lateinit var supervisionCredentialLauncher: ActivityResultLauncher<Intent>
 
     override fun storage(context: Context) = dataStore
 
@@ -66,16 +70,13 @@ sealed class SupervisionSafeSitesPreference(
 
     override fun onCreate(context: PreferenceLifecycleContext) {
         lifeCycleContext = context
+        supervisionCredentialLauncher =
+            context.registerForActivityResult(StartActivityForResult(), ::onConfirmCredentials)
     }
 
     override fun onRadioButtonClicked(emitter: SelectorWithWidgetPreference) {
         val intent = Intent(lifeCycleContext, ConfirmSupervisionCredentialsActivity::class.java)
-
-        lifeCycleContext.startActivityForResult(
-            intent,
-            supervisionCredentialRequestCode,
-            /* options= */ null,
-        )
+        supervisionCredentialLauncher.launch(intent)
     }
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
@@ -86,24 +87,16 @@ sealed class SupervisionSafeSitesPreference(
         }
     }
 
-    override fun onActivityResult(
-        context: PreferenceLifecycleContext,
-        requestCode: Int,
-        resultCode: Int,
-        data: Intent?,
-    ): Boolean {
-        if (requestCode != supervisionCredentialRequestCode) return false
-        if (resultCode == Activity.RESULT_OK) {
-            val preference = context.findPreference<SelectorWithWidgetPreference>(key)
-            // Iterate through the SafeSites options and update the checked status.
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    fun onConfirmCredentials(result: ActivityResult) {
+        if (result.resultCode == Activity.RESULT_OK) {
+            val preference = lifeCycleContext.findPreference<SelectorWithWidgetPreference>(key)
             preference?.parent?.forEachRecursively {
                 if (it is SelectorWithWidgetPreference) {
                     it.isChecked = it.key == key
                 }
             }
-            return true
         }
-        return false
     }
 }
 
@@ -119,11 +112,8 @@ class SupervisionBlockExplicitSitesPreference(dataStore: SupervisionSafeSitesDat
     override val summary
         get() = R.string.supervision_web_content_filters_browser_block_explicit_sites_summary
 
-    override val supervisionCredentialRequestCode = REQUEST_CODE_SUPERVISION_CREDENTIALS
-
     companion object {
         const val KEY = "web_content_filters_browser_block_explicit_sites"
-        const val REQUEST_CODE_SUPERVISION_CREDENTIALS = 10
     }
 }
 
@@ -136,10 +126,7 @@ class SupervisionAllowAllSitesPreference(dataStore: SupervisionSafeSitesDataStor
     override val title
         get() = R.string.supervision_web_content_filters_browser_allow_all_sites_title
 
-    override val supervisionCredentialRequestCode = REQUEST_CODE_SUPERVISION_CREDENTIALS
-
     companion object {
         const val KEY = "web_content_filters_browser_allow_all_sites"
-        const val REQUEST_CODE_SUPERVISION_CREDENTIALS = 11
     }
 }

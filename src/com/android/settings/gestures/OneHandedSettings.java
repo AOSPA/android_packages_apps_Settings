@@ -167,9 +167,6 @@ public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
                         boolean enabled) {
                     final List<SearchIndexableRaw> rawData =
                             super.getRawDataToIndex(context, enabled);
-                    if (!com.android.settings.accessibility.Flags.fixA11ySettingsSearch()) {
-                        return rawData;
-                    }
                     rawData.add(createShortcutPreferenceSearchData(context));
                     return rawData;
                 }

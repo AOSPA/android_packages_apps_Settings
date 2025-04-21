@@ -33,4 +33,4 @@ public class AlarmVibrationTogglePreferenceController extends VibrationTogglePre
         return AVAILABLE;
     }
 }
-// LINT.ThenChange(AlarmVibrationIntensitySwitchPreference.java)
+// LINT.ThenChange(AlarmVibrationIntensitySwitchPreference.kt)

@@ -31,4 +31,4 @@ public class RingVibrationTogglePreferenceController extends VibrationTogglePref
         return AVAILABLE;
     }
 }
-// LINT.ThenChange(RingVibrationIntensitySwitchPreference.java)
+// LINT.ThenChange(RingVibrationIntensitySwitchPreference.kt)

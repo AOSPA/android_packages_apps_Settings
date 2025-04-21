@@ -18,8 +18,13 @@ package com.android.settings.accessibility
 import android.content.Context
 import androidx.fragment.app.Fragment
 import com.android.settings.R
+import com.android.settings.Settings.VibrationIntensitySettingsActivity
+import com.android.settings.accessibility.AlarmVibrationIntensitySwitchPreference
+import com.android.settings.accessibility.NotificationVibrationIntensitySwitchPreference
 import com.android.settings.flags.Flags
+import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
@@ -54,7 +59,29 @@ class VibrationIntensityScreen : PreferenceScreenCreator, PreferenceAvailability
 
     override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {
         +VibrationMainSwitchPreference()
+        // The preferences below are migrated behind a different flag from the screen migration.
+        // They should only be declared in this screen hierarchy if their migration is enabled.
+        if (Flags.catalystVibrationIntensityScreen25q4()) {
+            +CallVibrationPreferenceCategory() += {
+                +RingVibrationIntensitySliderPreference()
+            }
+            +NotificationAlarmVibrationPreferenceCategory() += {
+                +NotificationVibrationIntensitySliderPreference()
+                +AlarmVibrationIntensitySliderPreference()
+            }
+            +InteractiveHapticsPreferenceCategory() += {
+                +TouchVibrationIntensitySliderPreference()
+                +MediaVibrationIntensitySliderPreference()
+            }
+        }
     }
+
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
+        if (Flags.deviceState()) {
+            makeLaunchIntent(context, VibrationIntensitySettingsActivity::class.java, metadata?.key)
+        } else {
+            super.getLaunchIntent(context, metadata)
+        }
 
     companion object {
         const val KEY = "vibration_intensity_screen"

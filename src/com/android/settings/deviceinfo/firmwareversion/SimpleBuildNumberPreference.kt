@@ -22,6 +22,7 @@ import android.text.BidiFormatter
 import android.view.View.LAYOUT_DIRECTION_RTL
 import androidx.preference.Preference
 import com.android.settings.R
+import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.preference.PreferenceBinding
@@ -35,6 +36,8 @@ class SimpleBuildNumberPreference :
 
     override val title: Int
         get() = R.string.build_number
+
+    override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_PREFERENCE)
 
     override fun isIndexable(context: Context) = false
 

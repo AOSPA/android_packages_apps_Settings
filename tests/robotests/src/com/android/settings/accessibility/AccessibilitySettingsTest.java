@@ -39,9 +39,6 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.database.ContentObserver;
 import android.os.Build;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.view.accessibility.AccessibilityManager;
 
@@ -113,8 +110,6 @@ public class AccessibilitySettingsTest {
 
     @Rule
     public final MockitoRule mocks = MockitoJUnit.rule();
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private final Context mContext = ApplicationProvider.getApplicationContext();
     @Spy
     private final AccessibilityServiceInfo mServiceInfo = getMockAccessibilityServiceInfo(
@@ -161,22 +156,8 @@ public class AccessibilitySettingsTest {
         assertThat(indexableRawList).isNull();
     }
 
-    @DisableFlags(Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
     @Test
-    public void getDynamicRawDataToIndex_hasInstalledA11yFeatures_flagOff_returnEmpty() {
-        mShadowAccessibilityManager.setInstalledAccessibilityServiceList(
-                List.of(mServiceInfo));
-        mShadowAccessibilityManager.setInstalledAccessibilityShortcutListAsUser(
-                List.of(getMockAccessibilityShortcutInfo()));
-
-        assertThat(AccessibilitySettings.SEARCH_INDEX_DATA_PROVIDER.getDynamicRawDataToIndex(
-                mContext, /* enabled= */ true))
-                .isEmpty();
-    }
-
-    @EnableFlags(Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
-    @Test
-    public void getDynamicRawDataToIndex_hasInstalledA11yFeatures_flagOn_returnRawDataForInstalledA11yFeatures() {
+    public void getDynamicRawDataToIndex_hasInstalledA11yFeatures_returnRawDataForInstalledA11yFeatures() {
         mShadowAccessibilityManager.setInstalledAccessibilityServiceList(
                 List.of(mServiceInfo));
         mShadowAccessibilityManager.setInstalledAccessibilityShortcutListAsUser(

@@ -2016,8 +2016,14 @@ public class FingerprintSettings extends SubSettings {
         public void onBindViewHolder(PreferenceViewHolder view) {
             super.onBindViewHolder(view);
             mView = view.itemView;
+            final TextView title = (TextView) view.findViewById(android.R.id.title);
             mDeleteView = view.itemView.findViewById(R.id.delete_button);
             if (mFingerprint != null) {
+                if (title != null) {
+                    title.setContentDescription(
+                            mFingerprint.getName().toString() + " " + getContext().getString(
+                                    R.string.security_settings_fingerprint_rename_description));
+                }
                 mDeleteView.setContentDescription(
                         mDeleteView.getContentDescription()
                                 + " " + mFingerprint.getName().toString());

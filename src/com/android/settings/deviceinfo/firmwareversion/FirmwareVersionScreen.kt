@@ -19,7 +19,11 @@ package com.android.settings.deviceinfo.firmwareversion
 import android.content.Context
 import android.os.Build
 import com.android.settings.R
+import com.android.settings.Settings.FirmwareVersionActivity
+import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.flags.Flags
+import com.android.settings.utils.makeLaunchIntent
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
@@ -27,6 +31,8 @@ import com.android.settingslib.preference.PreferenceScreenCreator
 
 @ProvidePreferenceScreen(FirmwareVersionScreen.KEY)
 class FirmwareVersionScreen : PreferenceScreenCreator, PreferenceSummaryProvider {
+
+    override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
 
     override fun isFlagEnabled(context: Context) = Flags.catalystFirmwareVersion()
 
@@ -42,7 +48,11 @@ class FirmwareVersionScreen : PreferenceScreenCreator, PreferenceSummaryProvider
     override val keywords: Int
         get() = R.string.keywords_android_version
 
+    // Once fully launch, change to PreferenceFragment and clean up FirmwareVersionScreenTest
     override fun fragmentClass() = FirmwareVersionSettings::class.java
+
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
+        makeLaunchIntent(context, FirmwareVersionActivity::class.java, metadata?.key)
 
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(context, this) {

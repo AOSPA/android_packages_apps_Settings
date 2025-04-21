@@ -35,4 +35,4 @@ public class MediaVibrationTogglePreferenceController extends VibrationTogglePre
                 AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 }
-// LINT.ThenChange(MediaVibrationIntensitySwitchPreference.java)
+// LINT.ThenChange(MediaVibrationIntensitySwitchPreference.kt)

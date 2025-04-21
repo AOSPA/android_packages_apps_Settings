@@ -13,7 +13,7 @@
      limitations under the License.
 -->
 
-<resources
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
 
     <style name="Widget.ActionBar.Base"
@@ -673,14 +673,20 @@
     </style>
 
     <style name="TextAppearance.NotificationImportanceDetail">
-        <item name="android:textSize">@dimen/notification_importance_description_text</item>
-        <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
+        <item name="android:textSize" android:featureFlag="!android.app.notifications_redesign_fonts">@dimen/notification_importance_description_text</item>
+
+        <item name="android:fontFamily" android:featureFlag="android.app.notifications_redesign_fonts">variable-body-medium</item>
+        <item name="android:fontFamily" android:featureFlag="!android.app.notifications_redesign_fonts">@*android:string/config_bodyFontFamily</item>
+
         <item name="android:gravity">center</item>
     </style>
 
     <style name="TextAppearance.NotificationImportanceButton">
-        <item name="android:textSize">@dimen/notification_importance_button_text</item>
-        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
+        <item name="android:textSize" android:featureFlag="!android.app.notifications_redesign_fonts">@dimen/notification_importance_button_text</item>
+
+        <item name="android:fontFamily" android:featureFlag="android.app.notifications_redesign_fonts">variable-title-small-emphasized</item>
+        <item name="android:fontFamily" android:featureFlag="!android.app.notifications_redesign_fonts">@*android:string/config_headlineFontFamilyMedium</item>
+
         <item name="android:gravity">center</item>
     </style>
 

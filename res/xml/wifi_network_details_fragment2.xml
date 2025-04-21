@@ -74,20 +74,17 @@
     <PreferenceCategory>
         <Preference
             android:key="signal_strength"
-            android:title="@string/wifi_signal"
-            android:selectable="false"/>
+            android:title="@string/wifi_signal" />
 
         <Preference
             android:key="frequency"
             android:icon="@drawable/ic_frequency_antenna"
-            android:title="@string/wifi_frequency"
-            android:selectable="false"/>
+            android:title="@string/wifi_frequency" />
 
         <Preference
             android:key="security"
             android:icon="@drawable/ic_security_lock_24dp"
-            android:title="@string/wifi_security"
-            android:selectable="false"/>
+            android:title="@string/wifi_security" />
 
         <ListPreference
             android:key="metered"

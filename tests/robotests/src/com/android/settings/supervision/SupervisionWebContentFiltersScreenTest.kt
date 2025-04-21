@@ -31,6 +31,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.Shadows.shadowOf
 
 @RunWith(AndroidJUnit4::class)
 class SupervisionWebContentFiltersScreenTest {
@@ -80,18 +81,18 @@ class SupervisionWebContentFiltersScreenTest {
                     fragment.findPreference<SelectorWithWidgetPreference>(
                         SupervisionBlockExplicitSitesPreference.KEY
                     )!!
+
                 assertThat(allowAllSitesPreference.isChecked).isTrue()
                 assertThat(blockExplicitSitesPreference.isChecked).isFalse()
 
                 blockExplicitSitesPreference.performClick()
 
                 // Pretend the PIN verification succeeded.
-                fragment.onActivityResult(
-                    requestCode =
-                        SupervisionBlockExplicitSitesPreference
-                            .REQUEST_CODE_SUPERVISION_CREDENTIALS,
-                    resultCode = Activity.RESULT_OK,
-                    data = null,
+                val activity = shadowOf(fragment.activity)
+                activity.receiveResult(
+                    activity.nextStartedActivityForResult.intent,
+                    Activity.RESULT_OK,
+                    null,
                 )
 
                 assertThat(blockExplicitSitesPreference.isChecked).isTrue()
@@ -119,11 +120,11 @@ class SupervisionWebContentFiltersScreenTest {
                 blockExplicitSitesPreference.performClick()
 
                 // Pretend the PIN verification succeeded.
-                fragment.onActivityResult(
-                    requestCode =
-                        SupervisionAllowAllSitesPreference.REQUEST_CODE_SUPERVISION_CREDENTIALS,
-                    resultCode = Activity.RESULT_CANCELED,
-                    data = null,
+                val activity = shadowOf(fragment.activity)
+                activity.receiveResult(
+                    activity.nextStartedActivityForResult.intent,
+                    Activity.RESULT_CANCELED,
+                    null,
                 )
 
                 assertThat(blockExplicitSitesPreference.isChecked).isFalse()
@@ -133,7 +134,39 @@ class SupervisionWebContentFiltersScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN)
-    fun switchSafeSearchPreferences() {
+    fun switchSafeSearchPreferences_succeedWithParentPin() {
+        FragmentScenario.launchInContainer(supervisionWebContentFiltersScreen.fragmentClass())
+            .onFragment { fragment ->
+                val searchFilterOffWidget =
+                    fragment.findPreference<SelectorWithWidgetPreference>(
+                        SupervisionSearchFilterOffPreference.KEY
+                    )!!
+                val searchFilterOnWidget =
+                    fragment.findPreference<SelectorWithWidgetPreference>(
+                        SupervisionSearchFilterOnPreference.KEY
+                    )!!
+
+                assertThat(searchFilterOffWidget.isChecked).isTrue()
+                assertThat(searchFilterOnWidget.isChecked).isFalse()
+
+                searchFilterOnWidget.performClick()
+
+                // Pretend the PIN verification succeeded.
+                val activity = shadowOf(fragment.activity)
+                activity.receiveResult(
+                    activity.nextStartedActivityForResult.intent,
+                    Activity.RESULT_OK,
+                    null,
+                )
+
+                assertThat(searchFilterOnWidget.isChecked).isTrue()
+                assertThat(searchFilterOffWidget.isChecked).isFalse()
+            }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN)
+    fun switchSafeSearchPreferences_failedWithParentPin() {
         FragmentScenario.launchInContainer(supervisionWebContentFiltersScreen.fragmentClass())
             .onFragment { fragment ->
                 val searchFilterOffPreference =
@@ -150,8 +183,16 @@ class SupervisionWebContentFiltersScreenTest {
 
                 searchFilterOnPreference.performClick()
 
-                assertThat(searchFilterOnPreference.isChecked).isTrue()
-                assertThat(searchFilterOffPreference.isChecked).isFalse()
+                // Pretend the PIN verification failed.
+                val activity = shadowOf(fragment.activity)
+                activity.receiveResult(
+                    activity.nextStartedActivityForResult.intent,
+                    Activity.RESULT_CANCELED,
+                    null,
+                )
+
+                assertThat(searchFilterOnPreference.isChecked).isFalse()
+                assertThat(searchFilterOffPreference.isChecked).isTrue()
             }
     }
 }

@@ -135,20 +135,6 @@ public class AccessibilityButtonFragmentTest {
     }
 
     @Test
-    @DisableFlags(com.android.settings.accessibility.Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
-    public void getNonIndexableKeys_existInXmlLayout() {
-        final List<String> niks = AccessibilityButtonFragment.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(mContext);
-        final List<String> keys =
-                XmlTestUtils.getKeysFromPreferenceXml(mContext,
-                        R.xml.accessibility_button_settings);
-
-        assertThat(keys).isNotNull();
-        assertThat(niks).containsAtLeastElementsIn(keys);
-    }
-
-    @Test
-    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
     public void getNonIndexableKeys_noTargets_doesNotExistInXmlLayout() {
         Settings.Secure.putStringForUser(mContext.getContentResolver(),
                 ShortcutUtils.convertToKey(SOFTWARE), "", mContext.getUserId());
@@ -163,7 +149,6 @@ public class AccessibilityButtonFragmentTest {
     }
 
     @Test
-    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
     public void getNonIndexableKeys_hasTargets_expectedKeys() {
         Settings.Secure.putStringForUser(mContext.getContentResolver(),
                 ShortcutUtils.convertToKey(SOFTWARE), "Foo", mContext.getUserId());

@@ -33,4 +33,4 @@ public class HapticFeedbackTogglePreferenceController extends VibrationTogglePre
         return AVAILABLE;
     }
 }
-// LINT.ThenChange(TouchVibrationIntensitySwitchPreference.java)
+// LINT.ThenChange(TouchVibrationIntensitySwitchPreference.kt)

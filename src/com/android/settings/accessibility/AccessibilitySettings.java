@@ -560,9 +560,6 @@ public class AccessibilitySettings extends BaseSupportFragment implements
                     if (dynamicRawData == null) {
                         dynamicRawData = new ArrayList<>();
                     }
-                    if (!Flags.fixA11ySettingsSearch()) {
-                        return dynamicRawData;
-                    }
 
                     AccessibilityManager a11yManager = context.getSystemService(
                             AccessibilityManager.class);

@@ -19,7 +19,7 @@ import android.os.VibrationAttributes
 import android.provider.Settings
 import com.android.settings.R
 
-/** Accessibility settings for ring vibration. */
+/** Accessibility settings for ring vibration, using a switch toggle. */
 // LINT.IfChange
 class RingVibrationIntensitySwitchPreference :
     VibrationIntensitySwitchPreference(

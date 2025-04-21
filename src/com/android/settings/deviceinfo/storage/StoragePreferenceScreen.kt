@@ -73,7 +73,7 @@ class StoragePreferenceScreen(
 
         // Storage Used
         +StoragePreference(
-            "storage_summary_used",
+            KEY_SUMMARY_USED,
             0,
             { null },
             { null },
@@ -89,7 +89,7 @@ class StoragePreferenceScreen(
 
         // Storage Total
         +StoragePreference(
-            "storage_summary_total",
+            KEY_SUMMARY_TOTAL,
             0,
             { null },
             { null },
@@ -104,7 +104,7 @@ class StoragePreferenceScreen(
 
         // Free up space
         +StoragePreference(
-            "free_up_space",
+            KEY_FREE_UP_SPACE,
             R.string.storage_free_up_space_title,
             { c ->
                 Intent(StorageManager.ACTION_MANAGE_STORAGE).apply {
@@ -116,7 +116,7 @@ class StoragePreferenceScreen(
 
         // Apps
         +StoragePreference(
-            "pref_apps",
+            KEY_PREF_APPS,
             R.string.storage_apps,
             { c ->
                 Intent("android.intent.action.MANAGE_PACKAGE_STORAGE")
@@ -129,7 +129,7 @@ class StoragePreferenceScreen(
 
         // Trash
         +StoragePreference(
-            "pref_trash",
+            KEY_PREF_TRASH,
             R.string.storage_trash,
             { c ->
                 val intent = Intent("android.settings.VIEW_TRASH")
@@ -148,7 +148,7 @@ class StoragePreferenceScreen(
 
         // Images
         +StoragePreference(
-            "pref_images",
+            KEY_PREF_IMAGES,
             R.string.storage_images,
             { c ->
                 Intent(Intent.ACTION_VIEW).apply {
@@ -162,7 +162,7 @@ class StoragePreferenceScreen(
 
         // Games
         +StoragePreference(
-            "pref_games",
+            KEY_PREF_GAMES,
             R.string.storage_games,
             {
                 // TODO no intent for games storage exposed
@@ -175,7 +175,7 @@ class StoragePreferenceScreen(
 
         // Documents
         +StoragePreference(
-            "pref_documents",
+            KEY_PREF_DOCUMENTS,
             R.string.storage_documents,
             { c ->
                 Intent(Intent.ACTION_VIEW).apply {
@@ -189,7 +189,7 @@ class StoragePreferenceScreen(
 
         // Other
         +StoragePreference(
-            "pref_other",
+            KEY_PREF_OTHER,
             R.string.storage_other,
             { c ->
                 Intent(Intent.ACTION_VIEW).apply {
@@ -203,7 +203,7 @@ class StoragePreferenceScreen(
 
         // Audio
         +StoragePreference(
-            "pref_audio",
+            KEY_PREF_AUDIO,
             R.string.storage_audio,
             { c ->
                 Intent(Intent.ACTION_VIEW).apply {
@@ -217,7 +217,7 @@ class StoragePreferenceScreen(
 
         // Video
         +StoragePreference(
-            "pref_videos",
+            KEY_PREF_VIDEOS,
             R.string.storage_videos,
             { c ->
                 Intent(Intent.ACTION_VIEW).apply {
@@ -231,7 +231,7 @@ class StoragePreferenceScreen(
 
         // System - OS
         +StoragePreference(
-            "pref_system",
+            KEY_PREF_SYSTEM,
             0,
             { null },
             {
@@ -244,7 +244,7 @@ class StoragePreferenceScreen(
 
         // System - Temp
         +StoragePreference(
-            "temporary_files",
+            KEY_PREF_TEMP,
             R.string.storage_temporary_files,
             { null },
             {
@@ -342,5 +342,19 @@ class StoragePreferenceScreen(
 
     companion object {
         const val KEY = "storage_dashboard_fragment"
+
+        const val KEY_SUMMARY_USED = "storage_summary_used"
+        const val KEY_SUMMARY_TOTAL = "storage_summary_total"
+        const val KEY_FREE_UP_SPACE = "free_up_space"
+        const val KEY_PREF_APPS = "pref_apps"
+        const val KEY_PREF_GAMES = "pref_games"
+        const val KEY_PREF_DOCUMENTS = "pref_documents"
+        const val KEY_PREF_VIDEOS = "pref_videos"
+        const val KEY_PREF_AUDIO = "pref_audio"
+        const val KEY_PREF_IMAGES = "pref_images"
+        const val KEY_PREF_TRASH = "pref_trash"
+        const val KEY_PREF_OTHER = "pref_other"
+        const val KEY_PREF_SYSTEM = "pref_system"
+        const val KEY_PREF_TEMP = "temporary_files"
     }
 }

@@ -238,7 +238,6 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         requireScrollMixin.requireScrollWithButton(this, getPrimaryFooterButton(),
                 getMoreButtonTextRes(), this::onNextButtonClick);
         if (!isExpressiveStyle) {
-            final int theme = com.google.android.setupdesign.R.style.SudGlifButton_Primary;
             requireScrollMixin.setOnRequireScrollStateChangedListener(
                     scrollNeeded -> {
                         boolean enrollmentCompleted = checkMaxEnrolled() != 0;
@@ -247,13 +246,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                             final int primaryButtonTextRes = scrollNeeded
                                     ? getMoreButtonTextRes()
                                     : getAgreeButtonTextRes();
-                            final FooterButton primaryButton = new FooterButton.Builder(this)
-                                    .setText(primaryButtonTextRes)
-                                    .setButtonType(FooterButton.ButtonType.OPT_IN)
-                                    .setListener(this::onNextButtonClick)
-                                    .setTheme(theme)
-                                    .build();
-                            mFooterBarMixin.setPrimaryButton(primaryButton);
+                            getPrimaryFooterButton().setText(this, primaryButtonTextRes);
                         }
 
                         // Show secondary button once scroll is completed.

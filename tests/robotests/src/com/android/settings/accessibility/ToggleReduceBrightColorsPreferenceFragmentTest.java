@@ -22,15 +22,12 @@ import static com.android.settings.accessibility.ToggleReduceBrightColorsPrefere
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settingslib.search.SearchIndexableRaw;
 
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -41,13 +38,9 @@ import java.util.List;
 /** Tests for {@link ToggleReduceBrightColorsPreferenceFragment} */
 @RunWith(RobolectricTestRunner.class)
 public class ToggleReduceBrightColorsPreferenceFragmentTest {
-
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private final Context mContext = ApplicationProvider.getApplicationContext();
 
     @Test
-    @EnableFlags(Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
     public void getRawDataToIndex_flagOn_returnPreferencesCreatedInCodes() {
         String[] expectedKeys = {KEY_SHORTCUT, KEY_SWITCH};
         String[] expectedTitles = {

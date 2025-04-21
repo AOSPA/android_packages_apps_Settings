@@ -152,4 +152,4 @@ public class AlarmVibrationTogglePreferenceControllerTest {
         return Settings.System.getInt(mContext.getContentResolver(), settingKey);
     }
 }
-// LINT.ThenChange(AlarmVibrationIntensitySwitchPreferenceTest.java)
+// LINT.ThenChange(AlarmVibrationIntensitySwitchPreferenceTest.kt)

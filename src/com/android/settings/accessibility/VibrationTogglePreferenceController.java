@@ -28,8 +28,8 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
-// LINT.IfChange
 /** Abstract preference controller for a vibration intensity setting, that has only ON/OFF states */
+// LINT.IfChange
 public abstract class VibrationTogglePreferenceController extends TogglePreferenceController
         implements LifecycleObserver, OnStart, OnStop {
 
@@ -100,4 +100,4 @@ public abstract class VibrationTogglePreferenceController extends TogglePreferen
         return R.string.menu_key_accessibility;
     }
 }
-// LINT.ThenChange(VibrationIntensitySwitchPreference.java)
+// LINT.ThenChange(VibrationIntensitySwitchPreference.kt)
