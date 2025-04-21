@@ -79,10 +79,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.conflate
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.merge
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -356,22 +358,28 @@ fun rememberWifiPickerTrackerHelper(): WifiPickerTrackerHelper {
 }
 
 private fun Context.defaultVoiceSubscriptionFlow(): Flow<Int> =
-        merge(
-                flowOf(null), // kick an initial value
-                broadcastReceiverFlow(
-                        IntentFilter(TelephonyManager.ACTION_DEFAULT_VOICE_SUBSCRIPTION_CHANGED)
-                ),
-        ).map { SubscriptionManager.getDefaultVoiceSubscriptionId() }
-                .conflate().flowOn(Dispatchers.Default)
+        broadcastReceiverFlow(
+            IntentFilter(TelephonyManager.ACTION_DEFAULT_VOICE_SUBSCRIPTION_CHANGED)
+        )
+        .map { it.getIntExtra(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID) }
+        .onStart { emit(SubscriptionManager.getDefaultVoiceSubscriptionId()) }
+        .distinctUntilChanged()
+        .conflate()
+        .onEach { Log.d("NetworkCellularGroupProvider", "defaultVoiceSubscriptionFlow: $it") }
+        .flowOn(Dispatchers.Default)
 
 private fun Context.defaultSmsSubscriptionFlow(): Flow<Int> =
-        merge(
-                flowOf(null), // kick an initial value
-                broadcastReceiverFlow(
-                        IntentFilter(SubscriptionManager.ACTION_DEFAULT_SMS_SUBSCRIPTION_CHANGED)
-                ),
-        ).map { SubscriptionManager.getDefaultSmsSubscriptionId() }
-                .conflate().flowOn(Dispatchers.Default)
+        broadcastReceiverFlow(
+            IntentFilter(SubscriptionManager.ACTION_DEFAULT_SMS_SUBSCRIPTION_CHANGED)
+        )
+        .map { it.getIntExtra(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID) }
+        .onStart { emit(SubscriptionManager.getDefaultSmsSubscriptionId()) }
+        .distinctUntilChanged()
+        .conflate()
+        .onEach { Log.d("NetworkCellularGroupProvider", "defaultSmsSubscriptionFlow: $it") }
+        .flowOn(Dispatchers.Default)
 
 suspend fun setDefaultVoice(
     subscriptionManager: SubscriptionManager?,
