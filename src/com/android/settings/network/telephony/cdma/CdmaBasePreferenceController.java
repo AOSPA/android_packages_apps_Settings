@@ -63,7 +63,8 @@ public abstract class CdmaBasePreferenceController extends TelephonyBasePreferen
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        return MobileNetworkUtils.isCdmaOptions(mContext, subId)
+        return MobileNetworkUtils.isCdmaSupported(mContext)
+                && MobileNetworkUtils.isCdmaOptions(mContext, subId)
                 ? AVAILABLE
                 : CONDITIONALLY_UNAVAILABLE;
     }
