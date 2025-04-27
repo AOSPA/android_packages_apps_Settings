@@ -38,13 +38,6 @@ flag {
 }
 
 flag {
-  name: "enable_hearing_aid_preset_control"
-  namespace: "accessibility"
-  description: "Allows users to control hearing aid preset in the Bluetooth device details page."
-  bug: "300015207"
-}
-
-flag {
   name: "enable_hearing_aid_volume_offset_control"
   namespace: "accessibility"
   description: "Allows users to control hearing aid volume offset in the Bluetooth device details page."
@@ -63,16 +56,6 @@ flag {
   namespace: "accessibility"
   description: "Decides whether to show the magnification focus following dialog in Settings app."
   bug: "388336111"
-}
-
-flag {
-  name: "hide_magnification_always_on_toggle_when_window_mode_only"
-  namespace: "accessibility"
-  description: "Decides whether to hide the magnification always on setting when capabilities is window mode only."
-  bug: "328787031"
-  metadata {
-    purpose: PURPOSE_BUGFIX
-  }
 }
 
 flag {

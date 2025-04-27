@@ -50,6 +50,7 @@ public class WhenToStartHubPicker extends RadioButtonPickerFragment {
     private static final String SHOW_NEVER = "never";
 
     private Context mContext;
+    private boolean mShowRestrictToWirelessCharging;
 
     @Nullable
     private RadioButtonPickerExtraSwitchController mRestrictToWirelessChargingController = null;
@@ -83,6 +84,8 @@ public class WhenToStartHubPicker extends RadioButtonPickerFragment {
         super.onAttach(context);
 
         mContext = context;
+        mShowRestrictToWirelessCharging =
+                getResources().getBoolean(R.bool.config_show_restrict_to_wireless_charging);
     }
 
     @Override
@@ -116,7 +119,7 @@ public class WhenToStartHubPicker extends RadioButtonPickerFragment {
 
     @Override
     protected void addStaticPreferences(PreferenceScreen screen) {
-        if (mRestrictToWirelessChargingController == null) {
+        if (mShowRestrictToWirelessCharging && mRestrictToWirelessChargingController == null) {
             mRestrictToWirelessChargingController =
                     new RadioButtonPickerExtraSwitchController(
                             mContext,

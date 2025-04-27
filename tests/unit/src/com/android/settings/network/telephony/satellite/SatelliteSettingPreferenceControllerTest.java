@@ -48,6 +48,7 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.network.CarrierConfigCache;
+import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -198,8 +199,8 @@ public class SatelliteSettingPreferenceControllerTest {
         preferenceScreen.addPreference(preference);
         mController.displayPreference(preferenceScreen);
 
-        assertThat(preference.getSummary()).isEqualTo(
-                "Send and receive text messages by satellite. Contact your carrier for details.");
+        assertThat(preference.getSummary()).isEqualTo(ResourcesUtils.getResourcesString(mContext,
+                "satellite_setting_summary_without_entitlement"));
     }
 
     @Test
@@ -219,8 +220,8 @@ public class SatelliteSettingPreferenceControllerTest {
         mController.mCarrierRoamingNtnModeCallback.onCarrierRoamingNtnAvailableServicesChanged(
                 new int[]{SERVICE_TYPE_SMS});
 
-        assertThat(preference.getSummary()).isEqualTo(
-                "Send and receive text messages by satellite. Included with your account.");
+        assertThat(preference.getSummary()).isEqualTo(ResourcesUtils.getResourcesString(mContext,
+                        "satellite_setting_enabled_summary"));
     }
 
     @Test
@@ -243,7 +244,7 @@ public class SatelliteSettingPreferenceControllerTest {
         mController.mCarrierRoamingNtnModeCallback.onCarrierRoamingNtnAvailableServicesChanged(
                 new int[]{});
 
-        assertThat(preference.getSummary()).isEqualTo(
-                "Send and receive text messages by satellite. Not included with your account.");
+        assertThat(preference.getSummary()).isEqualTo(ResourcesUtils.getResourcesString(mContext,
+                "satellite_setting_disabled_summary"));
     }
 }

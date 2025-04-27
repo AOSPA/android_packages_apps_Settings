@@ -16,6 +16,8 @@
 
 package com.android.settings.dream;
 
+import static android.service.dreams.Flags.dreamsV2;
+
 import android.annotation.LayoutRes;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -54,6 +56,7 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         private final ImageView mPreviewView;
         private final ImageView mPreviewPlaceholderView;
         private final Button mCustomizeButton;
+        private final View mPreviewButton;
         private final Context mContext;
         private final float mDisabledAlphaValue;
 
@@ -64,7 +67,12 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             mPreviewPlaceholderView = view.findViewById(R.id.preview_placeholder);
             mTitleView = view.findViewById(R.id.title_text);
             mSummaryView = view.findViewById(R.id.summary_text);
-            mCustomizeButton = view.findViewById(R.id.customize_button);
+
+            final int customizeButtonResId =
+                    dreamsV2() ? R.id.customize_button_new : R.id.customize_button;
+            mCustomizeButton = view.findViewById(customizeButtonResId);
+
+            mPreviewButton = view.findViewById(R.id.preview_button);
             mDisabledAlphaValue = ColorUtil.getDisabledAlpha(context);
         }
 
@@ -89,6 +97,11 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     R.dimen.dream_item_icon_size);
             icon.setBounds(0, 0, iconSize, iconSize);
             mTitleView.setCompoundDrawablesRelative(icon, null, null, null);
+
+            if (dreamsV2()) {
+                mTitleView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+                mTitleView.setSingleLine();
+            }
 
             itemView.setOnClickListener(v -> {
                 item.onItemClicked();
@@ -118,18 +131,34 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     mPreviewPlaceholderView.setVisibility(View.VISIBLE);
                 }
 
-                mCustomizeButton.setOnClickListener(v -> item.onCustomizeClicked());
-                mCustomizeButton.setVisibility(
-                        item.allowCustomization() && mEnabled ? View.VISIBLE : View.GONE);
-                // This must be called AFTER itemView.setSelected above, in order to keep the
-                // customize button in an unselected state.
-                mCustomizeButton.setSelected(false);
-                mCustomizeButton.setContentDescription(
-                        mContext.getResources().getString(R.string.customize_button_description,
-                                item.getTitle()));
+                configureButtons(item);
+                setEnabledStateOnViews(itemView, mEnabled);
+            }
+        }
+
+        private void configureButtons(IDreamItem item) {
+            if (dreamsV2()) {
+                configureNewPreviewButton(item);
             }
 
-            setEnabledStateOnViews(itemView, mEnabled);
+            mCustomizeButton.setVisibility(
+                    item.allowCustomization() && mEnabled ? View.VISIBLE : View.GONE);
+            setupCustomizeButtonListeners(item);
+        }
+
+        private void configureNewPreviewButton(IDreamItem item) {
+            // Show preview button if dream is active and enabled
+            mPreviewButton.setVisibility(item.isActive() && mEnabled ? View.VISIBLE : View.GONE);
+            mPreviewButton.setSelected(false);
+            mPreviewButton.setOnClickListener(v -> item.onPreviewClicked());
+        }
+
+        private void setupCustomizeButtonListeners(IDreamItem item) {
+            mCustomizeButton.setOnClickListener(v -> item.onCustomizeClicked());
+            mCustomizeButton.setSelected(false);
+            mCustomizeButton.setContentDescription(
+                    mContext.getResources().getString(R.string.customize_button_description,
+                            item.getTitle()));
         }
 
         /**

@@ -40,15 +40,6 @@
         settings:controller="com.android.settings.accessibility.AccessibilityButtonLocationPreferenceController" />
 
     <ListPreference
-        android:entries="@array/accessibility_button_gesture_selector_titles"
-        android:entryValues="@array/accessibility_button_gesture_selector_values"
-        android:key="accessibility_button_or_gesture"
-        android:persistent="false"
-        android:summary="%s"
-        android:title="@string/accessibility_button_or_gesture_title"
-        settings:controller="com.android.settings.accessibility.AccessibilityButtonGesturePreferenceController" />
-
-    <ListPreference
         android:entries="@array/accessibility_button_size_selector_titles"
         android:entryValues="@array/accessibility_button_size_selector_values"
         android:key="accessibility_button_size"

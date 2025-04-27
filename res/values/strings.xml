@@ -104,10 +104,6 @@
     <string name="stay_awake_on_fold_title">Always</string>
     <!-- Summary for stay awake on fold radio button. [CHAR_LIMIT=NONE] -->
     <string name="stay_awake_on_fold_summary">Front display turns on when you fold your device</string>
-    <!-- Title for selective stay awake radio button. [CHAR_LIMIT=NONE] -->
-    <string name="selective_stay_awake_title">Only games, videos, and more</string>
-    <!-- Summary for selective stay awake radio button. [CHAR_LIMIT=NONE] -->
-    <string name="selective_stay_awake_summary">Front display turns on for apps that stop your screen going idle</string>
     <!-- Title for fold grace period radio button that, on fold, goes to the lockscreen. [CHAR_LIMIT=NONE] -->
     <string name="stay_awake_on_lockscreen_title">Swipe up to continue</string>
     <!-- Summary for folding grace period radio button that, on fold, goes to the lockscreen. [CHAR_LIMIT=NONE] -->
@@ -464,7 +460,7 @@
     <string name="app_locales_picker_menu_title">App languages</string>
 
     <!-- Summary for the app's locale picker activity. [CHAR LIMIT=50]-->
-    <string name="app_locale_picker_summary">Set the language for each app</string>
+    <string name="app_locale_picker_summary">Choose the language for each app</string>
 
     <!-- Title for the App's locale picker activity. [CHAR LIMIT=50]-->
     <string name="app_locale_picker_title">App language</string>
@@ -503,7 +499,9 @@
     <string name="desc_app_locale_disclaimer">Language may differ from languages available in the app. Some apps may not support this setting.</string>
 
     <!-- Description for introduction of the locale selection supported of app list [CHAR LIMIT=NONE]-->
-    <string name="desc_app_locale_selection_supported">Set the language for each app.</string>
+    <string name="desc_app_locale_selection_supported">Choose the language for each app.</string>
+    <!-- Description for introduction of the locale selection supported of app list with disclaimer if the feature is in opt-out mode [CHAR LIMIT=NONE]-->
+    <string name="desc_app_locale_selection_supported_with_disclaimer">Choose the language for each app. Language may differ from languages available in the app. Some apps may not support this setting.</string>
 
     <!-- Description for the introduction to language picker activity. [CHAR LIMIT=NONE]-->
     <string name="desc_introduction_of_language_picker">Your device, apps, and websites use the first supported language from your preferred language list.\n\nMany apps will also use the region from your preferred language to format dates, numbers, and units. To change your region, add a language, then choose your preferred region.</string>
@@ -3379,7 +3377,7 @@
     <!-- Display settings screen, summary for screen saver options, screen saver is turned off [CHAR LIMIT=20] -->
     <string name="screensaver_settings_summary_off">Off</string>
     <!-- Dream settings screen, action label, when to dream [CHAR LIMIT=20] -->
-    <string name="screensaver_settings_when_to_dream">When to start</string>
+    <string name="screensaver_settings_when_to_dream">When to show</string>
     <!-- [CHAR LIMIT=40] Display settings screen, setting option name to change whether the device wakes up when a lift gesture is detected. -->
     <string name="lift_to_wake_title">Lift to wake</string>
     <!-- Title of toggle preference in screensaver "when to start" screen to restrict to starting only when charging wirelessly [CHAR LIMIT=NONE] -->
@@ -3396,8 +3394,22 @@
     <string name="doze_summary">When screen is dark, it turns on for new notifications</string>
     <!-- [CHAR LIMIT=30] Display settings screen, setting option name to change whether the always-on ambient display feature is enabled. -->
     <string name="doze_always_on_title">Always show time and info</string>
+    <!-- [CHAR LIMIT=30] Display settings screen, setting option name to change whether the always-on ambient display feature is enabled. -->
+    <string name="doze_always_on_title2">Always-on display</string>
     <!-- [CHAR LIMIT=NONE] Display settings screen, setting description for the always-on ambient display feature. -->
     <string name="doze_always_on_summary">Increased battery usage</string>
+    <!-- [CHAR LIMIT=NONE] Display settings screen, setting description for the always-on ambient display feature with wallpaper visible on AOD. -->
+    <string name="doze_always_on_summary_with_wallpaper">Show lock screen wallpaper when screen is off</string>
+    <!-- [CHAR LIMIT=NONE] Display settings screen, setting description for the always-on ambient display feature with wallpaper not visible on AOD. -->
+    <string name="doze_always_on_summary_without_wallpaper">Hide lock screen wallpaper when screen is off</string>
+    <!-- [CHAR LIMIT=NONE] Display settings screen, always-on display, long description-->
+    <string name="doze_always_on_summary_long">Always-on display shows the time, date, and more when the screen is off</string>
+    <!-- [CHAR LIMIT=50] Title for a group of settings related to the wallpaper on always-on display-->
+    <string name="doze_always_on_wallpaper_options">Wallpaper options</string>
+    <!-- [CHAR LIMIT=50] Title for always-on display that will enable the wallpaper to be visible-->
+    <string name="doze_always_on_wallpaper_title">Show lock screen wallpaper</string>
+    <!-- [CHAR LIMIT=NONE] Description for always-on display that will enable the wallpaper to be visible-->
+    <string name="doze_always_on_wallpaper_description">Lock screen wallpaper is visible with always-on display</string>
     <!-- [CHAR LIMIT=30] Display and accessibility settings screens, setting option name to force bold text. -->
     <string name="force_bold_text">Bold text</string>
     <!-- [CHAR LIMIT=30] Sound & display settings screen, setting option name to change font size -->
@@ -5023,7 +5035,7 @@
     <!-- Summary text for 'Bottom-right click', a setting that allows the user to right-click by pressing in the bottom-right corner of a touchpad [CHAR LIMIT=60] -->
     <string name="trackpad_bottom_right_tap_summary">Click in the bottom right corner of the touchpad for more options</string>
     <!-- Title text for 'Pointer speed'. [CHAR LIMIT=35] -->
-    <string name="trackpad_pointer_speed">Cursor speed</string>
+    <string name="trackpad_pointer_speed">Pointer speed</string>
     <!-- Title text for 'Three finger tap' touchpad preference. This preference allows the user to select an action that will trigger when they tap three fingers on a touchpad. [CHAR LIMIT=60] -->
     <string name="three_finger_tap_preference_title">Use three-finger tap</string>
     <!-- Title for the 'Touchpad acceleration' preference switch, which dynamically adjusts cursor movement based on speed. [CHAR LIMIT=60] -->
@@ -5377,6 +5389,14 @@
     <string name="accessibility_send_feedback_title">Send feedback</string>
     <!-- The menu item to start the survey process for the accessibility [CHAR LIMIT=30] -->
     <string name="accessibility_send_survey_title">Rate us</string>
+    <!-- Channel name for the accessibility survey notification. [CHAR LIMIT=50] -->
+    <string name="accessibility_send_survey_notification_channel">Accessibility Survey</string>
+    <!-- Title of a survey notification about dark theme. [CHAR LIMIT=50] -->
+    <string name="dark_theme_survey_notification_title">Enjoying Dark theme in more apps?</string>
+    <!-- Summary for a survey notification about dark theme. [CHAR LIMIT=100] -->
+    <string name="dark_theme_survey_notification_summary">Share your feedback</string>
+    <!-- Action for a survey notification about dark theme. [CHAR LIMIT=50] -->
+    <string name="dark_theme_survey_notification_action">Take survey</string>
     <!-- Title for the accessibility preference category of services downloaded by the user. [CHAR LIMIT=50] -->
     <string name="user_installed_services_category_title">Downloaded apps</string>
     <!-- Title for the accessibility preference category of settings considered to be experimental, meaning they might be changed or removed in the future. [CHAR LIMIT=50] -->
@@ -5431,6 +5451,16 @@
     <string name="accessibility_screen_magnification_follow_typing_title">Magnify typing</string>
     <!-- Summary for accessibility follow typing preference for magnification. [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_follow_typing_summary">Magnifier follows text as you type</string>
+    <!-- Title for focus following keyboard focus preference for magnification. [CHAR LIMIT=none] -->
+    <string name="accessibility_screen_magnification_follow_keyboard_title">Magnify keyboard focus</string>
+    <!-- Title for focus following keyboard focus preference for magnification. [CHAR LIMIT=none] -->
+    <string name="accessibility_screen_magnification_follow_keyboard_summary">Magnifier follows keyboard focus</string>
+    <!-- Title for accessibility magnifier preference allowing the magnification of navigation bar and IME. [CHAR LIMIT=35] -->
+    <string name="accessibility_screen_magnification_nav_ime_title">Magnify keyboard</string>
+    <!-- Summary for accessibility magnifier preference allowing the magnification of navigation bar and IME. [CHAR LIMIT=35] -->
+    <string name="accessibility_screen_magnification_nav_ime_summary">Keyboard is magnified with your content</string>
+    <!-- Summary for accessibility magnifier preference allowing the magnification of navigation bar and IME. [CHAR LIMIT=35] -->
+    <string name="accessibility_screen_magnification_nav_ime_unavailable_summary">Unavailable while only magnifying part of the screen</string>
     <!-- Title for accessibility magnifier preference where the magnifier never turns off while switching apps. [CHAR LIMIT=60] -->
     <string name="accessibility_screen_magnification_always_on_title">Keep on while switching apps</string>
     <!-- Summary for accessibility magnifier preference where the magnifier never turns off while switching apps. [CHAR LIMIT=none] -->
@@ -5600,8 +5630,6 @@
     <string name="accessibility_tutorial_dialog_title_quick_setting">Quick Settings shortcut</string>
     <!-- Title for the accessibility tutorial dialog in accessibility service with gesture. [CHAR LIMIT=50] -->
     <string name="accessibility_tutorial_dialog_title_gesture">Accessibility gesture shortcut</string>
-    <!-- Title for the accessibility tutorial dialog in gesture navigation settings. [CHAR LIMIT=50] -->
-    <string name="accessibility_tutorial_dialog_title_gesture_settings">Use accessibility gesture</string>
     <!-- Message for the accessibility tutorial dialog when user enables an accessibility service while using the 3-button nav bar. [CHAR LIMIT=NONE] -->
     <string name="accessibility_tutorial_dialog_message_button">To use this feature, tap the accessibility button <xliff:g id="accessibility_icon" example="[Icon]">%s</xliff:g> at the bottom of your screen.\n\nTo switch between features, touch &amp; hold the accessibility button.</string>
     <!-- Message for the accessibility tutorial dialog when user enables an accessibility service while using the accessibility floating button. [CHAR LIMIT=100] -->
@@ -5630,10 +5658,6 @@
         }</string>
     <!-- Message for the accessibility tutorial dialog when user enables an accessibility service while using gesture navigation and touch exploration is enabled. [CHAR LIMIT=NONE] -->
     <string name="accessibility_tutorial_dialog_message_gesture_talkback">To use this feature, swipe up from the bottom of the screen with 3 fingers.\n\nTo switch between features, swipe up with 3 fingers and hold.</string>
-    <!-- Message for the accessibility tutorial dialog when user chooses gesture navigation in navigation settings, an accessibility service is using the accessibility button, and touch exploration is disabled. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_tutorial_dialog_message_gesture_settings">To use an accessibility feature, swipe up from the bottom of the screen with 2 fingers.\n\nTo switch between features, swipe up with 2 fingers and hold.</string>
-    <!-- Message for the accessibility tutorial dialog when user chooses gesture navigation in navigation settings, an accessibility service is using the accessibility button, and touch exploration is enabled. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback">To use an accessibility feature, swipe up from the bottom of the screen with 3 fingers.\n\nTo switch between features, swipe up with 3 fingers and hold.</string>
     <!-- Button for the accessibility tutorial dialog to dismiss the dialog when user clicks it. [CHAR LIMIT=10] -->
     <string name="accessibility_tutorial_dialog_button">Got it</string>
     <!-- Button for the accessibility tutorial dialog to open the Accessibility button settings page. [CHAR LIMIT=30] -->
@@ -5715,8 +5739,6 @@
     <string name="accessibility_shortcut_description">Allow feature shortcut to turn on from the lock screen. Hold both volume keys for a few seconds.</string>
     <!-- Title for the accessibility button page. [CHAR LIMIT=35] -->
     <string name="accessibility_button_title">Accessibility button</string>
-    <!-- Title for the accessibility button & gesture page. [CHAR LIMIT=35] -->
-    <string name="accessibility_button_gesture_title">Accessibility button &amp; gesture</string>
     <!-- Introduction for the accessibility button page. [CHAR LIMIT=NONE] -->
     <string name="accessibility_button_intro_text">Quickly access accessibility features from any screen</string>
     <!-- Title for the accessibility button footer. [CHAR LIMIT=35] -->
@@ -5729,15 +5751,6 @@
     <string name="accessibility_button_intro">Using the accessibility button. The gesture isn\u2019t available with 3-button navigation.</string>
     <!-- Summary text for the accessibility button preference. [CHAR LIMIT=50] -->
     <string name="accessibility_button_summary">Quickly access accessibility features</string>
-    <!-- Description for the accessibility button in gesture navigation. Explain how this page works in numbered ordered list. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_button_gesture_description">
-        <![CDATA[
-        <b>To get started</b><br/>
-        {0,number,integer}. Go to accessibility settings<br/>
-        {1,number,integer}. Select a feature and tap the shortcut<br/>
-        {2,number,integer}. Choose whether you want to use a button or gesture to access the feature<br/>
-        ]]>
-    </string>
     <!-- Description for the accessibility button page. Explain how this page works in numbered ordered list. [CHAR LIMIT=NONE] -->
     <string name="accessibility_button_description">
         <![CDATA[
@@ -5747,8 +5760,6 @@
         {2,number,integer}. Choose the button to access the feature<br/>
         ]]>
     </string>
-    <!-- Title for the button or gesture of the accessibility button. [CHAR LIMIT=35] -->
-    <string name="accessibility_button_or_gesture_title">Use button or gesture</string>
     <!-- Title for the location of the accessibility button. [CHAR LIMIT=35] -->
     <string name="accessibility_button_location_title">Location</string>
     <!-- Title for the size of the accessibility button. [CHAR LIMIT=35] -->
@@ -8398,6 +8409,7 @@ Data usage charges may apply.</string>
     <string name="keywords_wallet">wallet</string>
     <string name="keywords_payment_settings">pay, tap, payments</string>
     <string name="keywords_backup">backup, back up</string>
+    <string name="keywords_fingerprint_unlock">fingerprint, unlock, auth, sign in</string>
     <string name="keywords_face_unlock">face, unlock, auth, sign in</string>
     <string name="keywords_biometric_unlock">face, unlock, auth, sign in, fingerprint, biometric</string>
     <string name="keywords_imei_info">imei, meid, min, prl version, imei sv</string>
@@ -12610,7 +12622,7 @@ Data usage charges may apply.</string>
     <!-- Available networks screen, text when a network cannot be connected [CHAR LIMIT=60] -->
     <string name="network_could_not_connect">Couldn\u2019t connect</string>
     <!-- Available networks screen, text when no networks are found [CHAR LIMIT=NONE] -->
-    <string name="empty_networks_list">No networks found.</string>
+    <string name="empty_networks_list">No networks found</string>
     <!-- Available networks screen, toast when an error is encountered when searching for networks [CHAR LIMIT=NONE] -->
     <string name="network_query_error">Couldn\u2019t find networks. Try again.</string>
     <!-- Available networks screen, toast when an error is encountered when searching for networks [CHAR LIMIT=NONE] -->
@@ -14500,6 +14512,8 @@ Data usage charges may apply.</string>
     <string name="audio_sharing_turn_off_button_label">Turn off</string>
     <!-- Title for audio sharing notification to share audio with headset [CHAR LIMIT=none]-->
     <string name="share_audio_notification_title">Share audio with <xliff:g example="My buds" id="device_name">%1$s</xliff:g></string>
+    <!-- Content description for accessibility: audio sharing device volume sliders [CHAR LIMIT=NONE] -->
+    <string name="audio_sharing_device_volume_description"><xliff:g example="My buds" id="device_name">%1$s</xliff:g> volume</string>
 
     <!-- Title for audio streams preference category [CHAR LIMIT=none]-->
     <string name="audio_streams_category_title">Connect to a LE audio stream</string>
@@ -14601,6 +14615,8 @@ Data usage charges may apply.</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit">Can\u0027t edit password while sharing. To change the password, first turn off audio sharing.</string>
     <!-- Le audio streams password dialog password format alert [CHAR LIMIT=NONE] -->
     <string name="audio_streams_main_page_password_dialog_format_alert">Your password must contain 4-16 characters and use only letters, numbers and symbols</string>
+    <!-- Le audio streams name dialog password format alert [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_main_page_name_dialog_format_alert">Your audio stream name must contain 4-32 characters and use only letters, numbers and symbols</string>
     <!-- Text for audio sharing qrcode scanner [CHAR LIMIT=none]-->
     <string name="audio_streams_qr_code_scanner_label">QR code scanner</string>
     <!-- Learn more link for audio sharing qrcode [CHAR LIMIT=none]-->
@@ -14647,7 +14663,7 @@ Data usage charges may apply.</string>
     <!-- Supervision settings -->
 
     <!-- Title for Supervision settings menu entry [CHAR LIMIT=60] -->
-    <string name="supervision_settings_title">Supervision</string>
+    <string name="supervision_settings_title">Parental controls</string>
     <!-- Description for Supervision settings menu entry [CHAR LIMIT=NONE] -->
     <string name="supervision_settings_summary">Content restrictions &amp; other limits</string>
     <!-- Title of toggle to enable or disable device supervision [CHAR LIMIT=60] -->
@@ -14658,8 +14674,10 @@ Data usage charges may apply.</string>
     <string name="keywords_supervision_settings">supervision, parental supervision, parental controls</string>
     <!-- Title for supervision PIN management settings entry [CHAR LIMIT=60] -->
     <string name="supervision_pin_management_preference_title">Manage PIN</string>
-    <!-- Description for supervision PIN management settings entry, in the case of adding a PIN [CHAR LIMIT=NONE] -->
-    <string name="supervision_pin_management_preference_summary_add">Add a PIN recovery method</string>
+    <!-- Description for supervision PIN management settings entry, in the case of adding a PIN recovery method[CHAR LIMIT=NONE] -->
+    <string name="supervision_pin_management_preference_summary_add">Add PIN recovery</string>
+    <!-- Description for supervision PIN management settings entry, in the case of verifying the PIN recovery method[CHAR LIMIT=NONE] -->
+    <string name="supervision_pin_management_preference_summary_verify_recovery">Verify PIN recovery</string>
     <!-- Title for supervision change PIN setting entry [CHAR LIMIT=60] -->
     <string name="supervision_change_pin_preference_title">Change PIN</string>
     <!-- Title for supervision forgot PIN setting entry [CHAR LIMIT=60] -->
@@ -14670,6 +14688,8 @@ Data usage charges may apply.</string>
     <string name="supervision_delete_pin_preference_title">Delete PIN</string>
     <!-- Summary for supervision delete pin setting entry [CHAR LIMIT=NONE] -->
     <string name="supervision_delete_pin_preference_summary">This will reset all your supervision settings</string>
+    <!-- Title for adding supervision PIN recovery setting entry [CHAR LIMIT=NONE] -->
+    <string name="supervision_add_pin_recovery_title">Tap to add recovery</string>
     <!-- Title for web content filters entry [CHAR LIMIT=60] -->
     <string name="supervision_web_content_filters_title">Web content filters</string>
     <!-- Title for web content filters browser category [CHAR LIMIT=60] -->
@@ -14693,5 +14713,24 @@ Data usage charges may apply.</string>
     <!-- Generic content description that is attached to the preview illustration at the top of an Accessibility feature toggle page. [CHAR LIMIT=NONE] -->
     <!-- Title for supervision PIN verification screen [CHAR LIMIT=60] -->
     <string name="supervision_full_screen_pin_verification_title">Enter supervision PIN</string>
+    <!-- Title on activity to choose lock for supervision setup [CHAR LIMIT=NONE] -->
+    <string name="supervision_lock_setup_title">Choose lock for supervision</string>
+    <!-- description on activity to choose lock supervision setup [CHAR LIMIT=NONE] -->
+    <string name="supervision_lock_setup_description">You can unlock supervision settings with this code</string>
+    <string name ="supervision_pin_reset_success_toast">Parental control PIN reset</string>
     <string name="accessibility_illustration_content_description"><xliff:g id="feature" example="Select to Speak">%1$s</xliff:g> animation</string>
+
+    <!-- Light theme customization for lottie illustration. Not translatable. -->
+    <string-array name="va_animation_customization" translatable="false">
+        <item>.surfaceContainer:@sud_system_surface_container_light</item>
+        <item>.primary:@sud_system_primary_light</item>
+        <item>.primaryContainer:@sud_system_primary_container_light</item>
+        <item>.onPrimary:@sud_system_on_primary_light</item>
+        <item>.sContainerLowest:@sud_system_surface_container_lowest_light</item>
+        <item>.secondaryContainer:@sud_system_secondary_container_light</item>
+        <item>.onSecondary:@sud_system_on_secondary_light</item>
+        <item>.tertiary:@sud_system_tertiary_light</item>
+        <item>.inversePrimary:@sud_system_primary_inverse_light</item>
+    </string-array>
+
 </resources>

@@ -63,6 +63,7 @@ import com.android.settings.network.telephony.scan.NetworkScanRepository;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.ThreadUtils;
+import com.android.settingslib.widget.ZeroStatePreference;
 
 import com.google.common.collect.ImmutableList;
 
@@ -101,7 +102,7 @@ public class NetworkSelectSettings extends DashboardFragment implements
     NetworkOperatorPreference mSelectedPreference;
     NetworkOperatorPreference mConnectedPreference;
     private View mProgressHeader;
-    private Preference mStatusMessagePreference;
+    private ZeroStatePreference mStatusMessagePreference;
     private Preference mErrorMsgPreference;
     @VisibleForTesting
     @NonNull
@@ -153,8 +154,6 @@ public class NetworkSelectSettings extends DashboardFragment implements
         mErrorMsgCategory = getPreferenceCategory(PREF_KEY_ERROR_MSG);
         mErrorMsgPreference = new Preference(getContext());
         mErrorMsgPreference.setSelectable(false);
-        mStatusMessagePreference = new Preference(context);
-        mStatusMessagePreference.setSelectable(false);
         mSelectedPreference = null;
         mConnectedPreference = null;
         mTelephonyManager = getTelephonyManager(context, mSubId);
@@ -584,6 +583,11 @@ public class NetworkSelectSettings extends DashboardFragment implements
     }
 
     private void addMessagePreference(int messageId) {
+        if (mStatusMessagePreference == null) {
+            mStatusMessagePreference = new ZeroStatePreference(getContext());
+            mStatusMessagePreference.setIcon(R.drawable.cell_tower_24px);
+            mStatusMessagePreference.setSelectable(false);
+        }
         mStatusMessagePreference.setTitle(messageId);
         mPreferenceCategory.removeAll();
         mPreferenceCategory.addPreference(mStatusMessagePreference);

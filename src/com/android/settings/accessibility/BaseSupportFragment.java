@@ -16,16 +16,23 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.notification.NotificationConstants.EXTRA_SOURCE;
+import static com.android.settings.accessibility.notification.NotificationConstants.SOURCE_START_SURVEY;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
+import com.android.server.accessibility.Flags;
 import com.android.settings.accessibility.actionbar.FeedbackMenuController;
 import com.android.settings.accessibility.actionbar.SurveyMenuController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.overlay.SurveyFeatureProvider;
 
 /**
  * Base fragment for dashboard style UI containing support-related items.
@@ -38,18 +45,10 @@ public abstract class BaseSupportFragment extends DashboardFragment {
     @Override
     public void onCreate(@NonNull Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        handleFeedbackFlow();
 
-        int feedbackCategory = getFeedbackCategory();
-        if (feedbackCategory != SettingsEnums.PAGE_UNKNOWN) {
-            FeedbackMenuController.init(this, getFeedbackCategory());
-        }
-
-        String surveyKey = getSurveyKey();
-        if (!TextUtils.isEmpty(surveyKey)) {
-            final Context context = getActivity();
-            if (context != null) {
-                SurveyMenuController.init(this, context, surveyKey);
-            }
+        if (Flags.enableLowVisionHats()) {
+            handleSurveyFlow();
         }
     }
 
@@ -81,7 +80,44 @@ public abstract class BaseSupportFragment extends DashboardFragment {
         return getMetricsCategory();
     }
 
+    @NonNull
     protected String getSurveyKey() {
         return "";
+    }
+
+    private void handleSurveyFlow() {
+        final Context context = getActivity();
+        if (context == null) {
+            return;
+        }
+
+        final String surveyKey = getSurveyKey();
+        if (TextUtils.isEmpty(surveyKey)) {
+            return;
+        }
+
+        // Handle direct survey triggers; no need to initialize survey menu.
+        final Intent intent = getIntent();
+        if (intent != null
+                && intent.getStringExtra(EXTRA_SOURCE) != null
+                && TextUtils.equals(intent.getStringExtra(EXTRA_SOURCE), SOURCE_START_SURVEY)) {
+            final SurveyFeatureProvider surveyFeatureProvider =
+                    FeatureFactory.getFeatureFactory().getSurveyFeatureProvider(context);
+            if (surveyFeatureProvider != null) {
+                surveyFeatureProvider.sendActivityIfAvailable(surveyKey);
+            }
+            return;
+        }
+
+        SurveyMenuController.init(this, context, surveyKey, getFeedbackCategory());
+    }
+
+    private void handleFeedbackFlow() {
+        int feedbackCategory = getFeedbackCategory();
+        if (feedbackCategory == SettingsEnums.PAGE_UNKNOWN) {
+            return;
+        }
+
+        FeedbackMenuController.init(this, feedbackCategory);
     }
 }

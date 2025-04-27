@@ -344,10 +344,8 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Yoniq / # ta ilova joylashuvdan foydalanadi}other{Yoniq / # ta ilova joylashuvdan foydalanadi}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Yuklanmoqda…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Yaqin-atrofdagi qurilmalarga ruxsati bor ilovalar ulangan qurilmalarning nisbiy holatini aniqlay oladi."</string>
-    <!-- no translation found for location_settings_footer_location_off_with_telephony (5600725945541382556) -->
-    <skip />
-    <!-- no translation found for location_settings_footer_location_off_no_telephony (2709958040008816610) -->
-    <skip />
+    <string name="location_settings_footer_location_off_with_telephony" msgid="5600725945541382556">"Ilovalar va xizmatlar uchun joylashuv axborotiga ruxsat yoqilmagan. Favqulodda xizmat raqamiga murojaat qilganingizda, qurilmangiz favqulodda xizmatlarga joylashuvingizni yuborishi mumkin."</string>
+    <string name="location_settings_footer_location_off_no_telephony" msgid="2709958040008816610">"Ilovalar va xizmatlar uchun joylashuv axborotiga ruxsat yoqilmagan."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Joylashuv sozlamalari haqida batafsil"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Oʻzgartirish uchun ChromeOS sozlamalari &gt; Maxfiylik va xavfsizlik &gt; Maxfiylik sozlamalari &gt; Joylashuv axborotiga ruxsat sahifasini oching"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Hisoblar"</string>
@@ -457,6 +455,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Bekor qilish"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"Hozir emas"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Roziman"</string>
+    <string name="security_settings_fingerprint_rename_description" msgid="6301505700382531086">"Qayta nomlash uchun ikki marta tegining"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Barmoq izi sozlanmasinmi?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Barmoq izini sozlash bir yoki ikki daqiqa vaqt oladi. Ularni keyinchalik qurilma sozlamalari orqali kiritishingiz mumkin."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Bu belgi chiqsa, barmoq izingiz yordamida ilovaga kirish yoki xarid tasdiqi bajarilayotganini bildiradi."</string>
@@ -1443,8 +1442,8 @@
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Quvvat olayotganda"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Dok-stansiyaga ulanganda"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Hech qachon"</string>
-    <string name="screensaver_settings_summary_postured" msgid="1184119124847691954">"Harakatsiz turganda"</string>
-    <string name="screensaver_settings_summary_postured_and_charging" msgid="1952047156927637506">"Harakatsiz va quvvat olayotganda"</string>
+    <string name="screensaver_settings_summary_postured" msgid="6346392320858994892">"Tik holatda"</string>
+    <string name="screensaver_settings_summary_postured_and_charging" msgid="5111797042509819055">"Tik va quvvat olayotganda"</string>
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"Yoniq / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Oʻchiq"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Qachon boshlansin"</string>
@@ -1614,8 +1613,8 @@
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Qachon avtomatik chiqsin"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Hech qachon"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Quvvat olayotganda"</string>
-    <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"Quvvat olish va tik holatida"</string>
-    <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"Dok-stansiyaga ulanganda"</string>
+    <string name="when_to_show_hubmode_charging_and_upright" msgid="537039046490426922">"Tik va quvvat olayotganda"</string>
+    <string name="when_to_show_hubmode_docked" msgid="8876633401873168284">"Dokka ulanganda yoki quvvatlanganda"</string>
     <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"Faqat simsiz quvvatlashda"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Ulanish nuqtasini tahrirlash"</string>
@@ -2313,6 +2312,12 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Ekranni sichqoncha chekkaga yaqinlashganda surish"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Kattalashtirib yozish"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Matn kiritilganda soʻzlar avtomatik kattalashadi"</string>
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_title (8804501318161774285) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_summary (3054371947104552843) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_unavailable_summary (2248787024685382054) -->
+    <skip />
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Ilovalarga almashganda oʻchirilmasin"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"Lupa yoniq qoladi. Ilovalarga oʻtganda masshtab kichiklashadi."</string>
     <string name="accessibility_screen_magnification_always_on_unavailable_summary" msgid="3844732482037416038">"Faqat ekran qismini kattalashtirishda ishlamaydi"</string>
@@ -2566,6 +2571,7 @@
     <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Eshitish qurilmasi tezkor tugmasi"</string>
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Eshitish apparati bilan moslik"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Induktiv gʻaltaklar bilan moslikni yaxshilaydi va shovqinni kamaytiradi"</string>
+    <string name="hac_disclaimer_message" msgid="5279579026956312543"></string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"Eshitish apparatlari haqida"</string>
     <string name="accessibility_hearing_device_footer_summary" msgid="5513620078219951077">"ASHA yoki LE Audio bilan ishlamaydigan boshqa eshitish qurilmalarini topish uchun &lt;b&gt;Yangi qurilmani ulash&lt;/b&gt; &gt; &lt;b&gt;Boshqa qurilmalarni koʻrish&lt;/b&gt; ustiga bosing"</string>
     <string name="accessibility_hearing_device_footer_summary_tts" msgid="955527026890456959">"ASHA yoki LE Audio bilan ishlamaydigan boshqa eshitish qurilmalarini topish uchun "<b>"Yangi qurilmani ulash"</b>", keyin "<b>"Boshqa qurilmalarni koʻrish"</b>" ustiga bosing"</string>
@@ -4663,10 +4669,8 @@
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Wallet xizmatini ochish"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"Ekran qulfi yorligʻini oʻzgartirasizmi?"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> ham sizning ekran qulfi yorligʻingizdir. Uni oʻzgartirmoqchimisiz?"</string>
-    <!-- no translation found for double_tap_power_wallet_footer_title (5417023303339032410) -->
-    <skip />
-    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (1267822422365445657) -->
-    <skip />
+    <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"Joriy birlamchi hamyon ilovangizda bu ishora ishlamaydi"</string>
+    <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"Birlamchi hamyonni oʻzgartirish"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Selfi uchun old kamera"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Navigatsiya rejimi"</string>
@@ -5062,31 +5066,31 @@
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"Paketlar narxlari haqidagi ma’lumotni internet provayderingizdan olishingiz mumkin."</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Notanish tarmoq rejimi: <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Inkor qilish"</string>
     <string name="satellite_setting" msgid="4650503806634496443">"Sputnik aloqasi"</string>
-    <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Sputnik orqali matnli xabar yuborish va qabul qilish. Hisobingizga kiritilgan."</string>
-    <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Sputnik orqali matnli xabar yuborish va qabul qilish. Hisobingizda mavjud emas."</string>
-    <string name="satellite_setting_summary_without_entitlement" msgid="5284998840770992554">"Sputnik orqali matnli xabar yuborish va qabul qilish. Tafsilotlar uchun aloqa operatoringizga murojaat qiling."</string>
+    <string name="satellite_setting_enabled_summary" msgid="2114544331827193266">"Sputnik orqali matnli xabar yuborish va qabul qilish. Hisobingizga kiritilgan."</string>
+    <string name="satellite_setting_disabled_summary" msgid="8193743637158939283">"Sputnik orqali matnli xabar yuborish va qabul qilish. Hisobingizda mavjud emas."</string>
+    <string name="satellite_setting_summary_without_entitlement" msgid="7010003955751606421">"Sputnik orqali matnli xabar yuborish va qabul qilish. Tafsilotlar uchun aloqa operatoringizga murojaat qiling."</string>
     <string name="keywords_satellite_setting" msgid="613553612424945946">"sunʼiy yoʻldosh orqali xabarlashuv, sunʼiy yoʻldosh aloqasi"</string>
     <string name="category_name_about_satellite_connectivity" msgid="3971142716898783631">"Sputnik aloqasi haqida"</string>
-    <string name="description_about_satellite_setting" msgid="5539359064330584941">"Sputnik orqali xabar yuborish va qabul qilish hamda ayrim ilovalardan foydalanish uchun <xliff:g id="CARRIER_NAME">%1$s</xliff:g> hisobi talablarga muvofiq boʻlishi kerak"</string>
+    <string name="description_about_satellite_setting" msgid="8212911110428998767">"Mos <xliff:g id="CARRIER_NAME">%1$s</xliff:g> hisobi bilan sputnik orqali SMS yuborishingiz va qabul qilishingiz mumkin"</string>
     <string name="category_title_your_satellite_plan" msgid="8169426217950247126">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> hisobingiz"</string>
-    <string name="title_have_satellite_plan" msgid="2048372355699977947">"Sputnik orqali xabarlashuv hisobingizga kiritilgan"</string>
-    <string name="title_no_satellite_plan" msgid="2876056203035197505">"Sputnik orqali xabarlashuv hisobingizga kiritilmagan"</string>
+    <string name="title_have_satellite_plan" msgid="857337944804101443">"Xabarlashish hisobingizga kiritilgan"</string>
+    <string name="title_no_satellite_plan" msgid="7255726881685672846">"Xabarlashuv hisobingizga kiritilmagan"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Batafsil"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Ishlash tartibi"</string>
-    <string name="title_satellite_connection_guide" msgid="3294802307913609072">"Mobil tarmoq mavjud boʻlmaganda"</string>
+    <string name="title_satellite_connection_guide" msgid="4730763872034574368">"Sizda mobil yoki Wi-Fi tarmoq yoʻqligida"</string>
     <string name="title_satellite_connection_guide_for_manual_type" msgid="7223875100977941341">"Telefon raqamiga xabar yuborish"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Telefoningiz sputnikka avtomatik ulanadi. Yaxshiroq aloqa uchun ochiq osmon ostida turing."</string>
-    <string name="summary_satellite_connection_guide_for_manual_type" msgid="5075149380084376662">"Mobil tarmoq mavjud boʻlmasa, sputnik orqali xabarlashuv bandi chiqadi."</string>
+    <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"Mobil tarmoq mavjud boʻlmasa, sputnik bandi chiqadi."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"Telefoningiz spurtnikka ulangandan keyin"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Sputnikka ulanish uchun quyidagi amallarni bajaring"</string>
-    <string name="summary_supported_service" msgid="4320535903444834786">"Istalgan kishiga, shuningdek, favqulodda xizmatlarga ham xabar yubora olasiz. Telefoningiz mobil tarmoq ishlashi bilan unga ulanadi."</string>
+    <string name="summary_supported_service" msgid="6380533552383355977">"Istalgan kishiga, shuningdek, favqulodda xizmatlarga ham xabar yuborish va ayrim ilovalarda cheklangan maʼlumotlardan foydalanish mumkin. Telefoningiz mobil tarmoq ishlashi bilan unga ulanadi."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"Telefoningiz ulangach, istalgan kishiga, jumladan, favqulodda xizmatlarga ham xabar yubora olasiz."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Yodda tuting"</string>
     <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"Sputnik aloqasi uzoqroq vaqt olishi mumkin va faqat ayrim hududlarda ishlaydi."</string>
     <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"Ob-havo va ayrim tuzilmalar sputnik ulanishiga taʼsir qilishi mumkin."</string>
-    <string name="satellite_footer_content_section_3" msgid="4652426135622555607">"Sputnik orqali chaqiruv mavjud emas."</string>
+    <string name="satellite_footer_content_section_3" msgid="4686525535095321485">"Sputnik orqali chaqiruv ishlamaydi."</string>
     <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"Favqulodda chaqiruvlar hanuz ulanishi mumkin."</string>
-    <string name="satellite_footer_content_section_5" msgid="3053256489735265540">"Tashqi havolalarni ochish uchun mobil internet yoki Wi-Fi tarmoqqa ulaning."</string>
+    <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"Tashqi havolalarni koʻrish uchun mobil yoki Wi-Fi tarmoq zarur."</string>
     <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"Favqulodda xizmatlarga matnli xabar yuborish ayrim hududlarda ishlamasligi mumkin."</string>
     <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"Sozlamalarda ushbu hisob oʻzgarishlarining aks etishi biroz vaqt olishi mumkin. Batafsil axborot uchun <xliff:g id="CARRIER_NAME">%1$s</xliff:g> xizmatiga murojaat qiling."</string>
     <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"Sputnik aloqasi haqida batafsil"</string>
@@ -5098,7 +5102,7 @@
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"sunʼiy yoʻldosh orqali xabarlashuv"</string>
     <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"Internetdan foydalanish hisobingizga kiritilgan"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Telefoningizdagi mos ilovalar"</string>
-    <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"hamma ilovalar"</string>
+    <string name="title_satellite_supported_app_list_entry" msgid="891155574898209245">"Sputnik bilan ishlaydigan barcha ilovalarni koʻrish"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Telefoningizdagi mos ilovalar"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"SIM karta kiritilmadi"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"SIM karta qoʻshishdan oldin sputnik aloqasini tugating"</string>

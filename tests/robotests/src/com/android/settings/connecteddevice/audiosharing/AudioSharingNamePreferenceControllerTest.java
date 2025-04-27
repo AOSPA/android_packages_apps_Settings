@@ -305,15 +305,21 @@ public class AudioSharingNamePreferenceControllerTest {
 
     @Test
     public void idTextValid_emptyString() {
+        mController.displayPreference(mScreen);
+        ShadowLooper.idleMainLooper();
         boolean valid = mController.isTextValid("");
 
         assertThat(valid).isFalse();
+        verify(mPreference).showEditTextFormatAlert(true);
     }
 
     @Test
     public void idTextValid_validName() {
+        mController.displayPreference(mScreen);
+        ShadowLooper.idleMainLooper();
         boolean valid = mController.isTextValid("valid name");
 
         assertThat(valid).isTrue();
+        verify(mPreference).showEditTextFormatAlert(false);
     }
 }

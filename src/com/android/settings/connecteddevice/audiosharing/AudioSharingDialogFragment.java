@@ -40,8 +40,8 @@ import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothPairingDetail;
 import com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsQrCodeFragment;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.BluetoothLeBroadcastMetadataExt;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 
@@ -82,7 +82,7 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.DIALOG_AUDIO_SHARING_ADD_DEVICE;
+        return SettingsEnums.DIALOG_AUDIO_SHARING_MAIN;
     }
 
     /**

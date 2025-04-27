@@ -109,6 +109,17 @@
                 android:gravity="center_vertical"
                 android:contentDescription="@string/bluetooth_pairing_phonebook_toggle_text"
                 android:switchMinWidth="48dp" />
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:theme="@style/Theme.Material3.DynamicColors.DayNight"
+                android:id="@+id/phonebook_sharing_message_confirm_pin_expressive"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:contentDescription="@string/bluetooth_pairing_phonebook_toggle_text"
+                android:switchMinWidth="48dp"
+                android:focusable="true"
+                android:clickable="true"
+                style="@style/SettingslibSwitchStyle.Expressive" />
         </LinearLayout>
     </LinearLayout>
 

@@ -16,6 +16,7 @@
 
 package com.android.settings.notification.modes.devicestate
 
+import android.app.AutomaticZenRule.TYPE_BEDTIME
 import android.content.Context
 import android.service.notification.ZenModeConfig.MANUAL_RULE_ID
 import com.android.settings.R
@@ -29,6 +30,11 @@ internal fun Context.getBackend() = ZenModesBackend.getInstance(this)
 internal fun Context.hasDndMode() = (getBackend().getMode(MANUAL_RULE_ID) != null)
 
 internal fun Context.getDndMode(): ZenMode? = getBackend().getMode(MANUAL_RULE_ID)
+
+internal fun Context.hasBedtimeMode() = getBackend().modes.any { it.type == TYPE_BEDTIME }
+
+internal fun Context.getBedtimeMode(): ZenMode? =
+    getBackend().modes.find { it.type == TYPE_BEDTIME }
 
 internal fun Context.getZenModeScreenSummary(zenMode: ZenMode?): String {
     if (zenMode == null) return ""

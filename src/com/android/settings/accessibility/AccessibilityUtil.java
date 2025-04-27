@@ -46,7 +46,6 @@ import android.view.accessibility.AccessibilityManager;
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
-import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType;
 import com.android.internal.accessibility.util.ShortcutUtils;
@@ -204,11 +203,6 @@ public final class AccessibilityUtil {
             @NonNull ComponentName componentName) {
         int shortcutTypes = UserShortcutType.DEFAULT;
         for (int shortcutType : AccessibilityUtil.SHORTCUTS_ORDER_IN_UI) {
-            if (!android.provider.Flags.a11yStandaloneGestureEnabled()) {
-                if ((shortcutType & GESTURE) == GESTURE) {
-                    continue;
-                }
-            }
             if (ShortcutUtils.isShortcutContained(
                     context, shortcutType, componentName.flattenToString())) {
                 shortcutTypes |= shortcutType;
@@ -292,10 +286,6 @@ public final class AccessibilityUtil {
         final List<CharSequence> list = new ArrayList<>();
 
         for (int shortcutType : AccessibilityUtil.SHORTCUTS_ORDER_IN_UI) {
-            if (!android.provider.Flags.a11yStandaloneGestureEnabled()
-                    && (shortcutType & GESTURE) == GESTURE) {
-                continue;
-            }
             if (!com.android.server.accessibility.Flags
                     .enableMagnificationMultipleFingerMultipleTapGesture()
                     && (shortcutType & TWOFINGER_DOUBLETAP) == TWOFINGER_DOUBLETAP) {
@@ -306,7 +296,8 @@ public final class AccessibilityUtil {
                 list.add(switch (shortcutType) {
                     case QUICK_SETTINGS -> context.getText(
                             R.string.accessibility_feature_shortcut_setting_summary_quick_settings);
-                    case SOFTWARE -> getSoftwareShortcutSummary(context);
+                    case SOFTWARE -> context.getText(
+                            R.string.accessibility_shortcut_edit_summary_software);
                     case GESTURE -> context.getText(
                             R.string.accessibility_shortcut_edit_summary_software_gesture);
                     case HARDWARE -> context.getText(
@@ -323,21 +314,5 @@ public final class AccessibilityUtil {
         list.sort(CharSequence::compare);
         return CaseMap.toTitle().wholeString().noLowercase().apply(Locale.getDefault(), /* iter= */
                 null, LocaleUtils.getConcatenatedString(list));
-    }
-
-    @VisibleForTesting
-    static CharSequence getSoftwareShortcutSummary(Context context) {
-        if (android.provider.Flags.a11yStandaloneGestureEnabled()) {
-            return context.getText(R.string.accessibility_shortcut_edit_summary_software);
-        }
-        int resId;
-        if (AccessibilityUtil.isFloatingMenuEnabled(context)) {
-            resId = R.string.accessibility_shortcut_edit_summary_software;
-        } else if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
-            resId = R.string.accessibility_shortcut_edit_summary_software_gesture;
-        } else {
-            resId = R.string.accessibility_shortcut_edit_summary_software;
-        }
-        return context.getText(resId);
     }
 }

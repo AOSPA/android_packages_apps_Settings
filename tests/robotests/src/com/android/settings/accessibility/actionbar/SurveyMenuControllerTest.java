@@ -17,18 +17,22 @@
 package com.android.settings.accessibility.actionbar;
 
 import static com.android.settings.accessibility.actionbar.SurveyMenuController.MENU_SEND_SURVEY;
+import static com.android.settings.accessibility.notification.NotificationConstants.EXTRA_DISMISS_NOTIFICATION;
 
+import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.doAnswer;
+import static org.robolectric.Shadows.shadowOf;
 
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -37,6 +41,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.testing.EmptyFragmentActivity;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
+import com.android.settings.accessibility.notification.SurveyNotificationService;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.overlay.SurveyFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -58,7 +63,8 @@ import org.robolectric.annotation.Config;
 })
 @RunWith(RobolectricTestRunner.class)
 public class SurveyMenuControllerTest {
-    private static final String SURVEY_TRIGGER_KEY = "surveyTriggerKey";
+    private static final String TEST_SURVEY_TRIGGER_KEY = "surveyTriggerKey";
+    private static final int TEST_PAGE_ID = 10;
 
     @Rule
     public final MockitoRule mMocks = MockitoJUnit.rule();
@@ -95,7 +101,7 @@ public class SurveyMenuControllerTest {
     public void init_shouldAttachToLifecycle() {
         when(mHost.getSettingsLifecycle()).thenReturn(mLifecycle);
 
-        SurveyMenuController.init(mHost, mActivity, SURVEY_TRIGGER_KEY);
+        SurveyMenuController.init(mHost, mActivity, TEST_SURVEY_TRIGGER_KEY, TEST_PAGE_ID);
 
         verify(mLifecycle).addObserver(any(SurveyMenuController.class));
     }
@@ -104,7 +110,8 @@ public class SurveyMenuControllerTest {
     public void init_withSurveyFeatureProvider_shouldAttachToLifecycle() {
         when(mHost.getSettingsLifecycle()).thenReturn(mLifecycle);
 
-        SurveyMenuController.init(mHost, mSurveyFeatureProvider, SURVEY_TRIGGER_KEY);
+        SurveyMenuController.init(mHost, mSurveyFeatureProvider, TEST_SURVEY_TRIGGER_KEY,
+                TEST_PAGE_ID);
 
         verify(mLifecycle).addObserver(any(SurveyMenuController.class));
     }
@@ -112,7 +119,8 @@ public class SurveyMenuControllerTest {
     @Test
     public void onCreateOptionsMenu_surveyAvailable_shouldAddSurveyMenu() {
         setupSurveyAvailability(/* available= */ true);
-        SurveyMenuController.init(mHost, mSurveyFeatureProvider, SURVEY_TRIGGER_KEY);
+        SurveyMenuController.init(mHost, mSurveyFeatureProvider, TEST_SURVEY_TRIGGER_KEY,
+                TEST_PAGE_ID);
 
         mHost.getSettingsLifecycle().onCreateOptionsMenu(mMenu, /* inflater= */ null);
 
@@ -122,7 +130,8 @@ public class SurveyMenuControllerTest {
     @Test
     public void onCreateOptionsMenu_surveyUnavailable_shouldNotAddSurveyMenu() {
         setupSurveyAvailability(/* available= */ false);
-        SurveyMenuController.init(mHost, mSurveyFeatureProvider, SURVEY_TRIGGER_KEY);
+        SurveyMenuController.init(mHost, mSurveyFeatureProvider, TEST_SURVEY_TRIGGER_KEY,
+                TEST_PAGE_ID);
 
         mHost.getSettingsLifecycle().onCreateOptionsMenu(mMenu, /* inflater= */ null);
 
@@ -130,22 +139,54 @@ public class SurveyMenuControllerTest {
     }
 
     @Test
-    public void onOptionsItemSelected_surveyMenuAdded_shouldStartSurvey() {
+    public void onOptionsItemSelected_surveyMenuAdded_shouldStartAndHideSurveyEntry() {
         when(mMenuItem.getItemId()).thenReturn(MENU_SEND_SURVEY);
-        SurveyMenuController.init(mHost, mSurveyFeatureProvider, SURVEY_TRIGGER_KEY);
+        SurveyMenuController.init(mHost, mSurveyFeatureProvider, TEST_SURVEY_TRIGGER_KEY,
+                TEST_PAGE_ID);
 
         mHost.getSettingsLifecycle().onOptionsItemSelected(mMenuItem);
 
-        verify(mSurveyFeatureProvider).sendActivityIfAvailable(SURVEY_TRIGGER_KEY);
+        // Verify it start to send survey
+        verify(mSurveyFeatureProvider).sendActivityIfAvailable(TEST_SURVEY_TRIGGER_KEY);
+        // Verify that menu is hidden
+        verify(mMenuItem).setVisible(false);
+        // Verify notification dismissal service started
+        Intent intent = shadowOf(mActivity).getNextStartedService();
+        assertThat(intent.getComponent().getClassName()).isEqualTo(
+                SurveyNotificationService.class.getName());
+        assertThat(intent.getBooleanExtra(EXTRA_DISMISS_NOTIFICATION, false)).isTrue();
     }
 
     @Test
     public void onOptionsItemSelected_surveyMenuNotAdded_shouldNotStartSurvey() {
-        SurveyMenuController.init(mHost, mSurveyFeatureProvider, SURVEY_TRIGGER_KEY);
+        SurveyMenuController.init(mHost, mSurveyFeatureProvider, TEST_SURVEY_TRIGGER_KEY,
+                TEST_PAGE_ID);
 
         mHost.getSettingsLifecycle().onOptionsItemSelected(mMenuItem);
 
-        verify(mSurveyFeatureProvider, never()).sendActivityIfAvailable(SURVEY_TRIGGER_KEY);
+        verify(mSurveyFeatureProvider, never()).sendActivityIfAvailable(TEST_SURVEY_TRIGGER_KEY);
+    }
+
+    @Test
+    public void startSurvey_withSurveyFeatureProvider_shouldStartSurvey() {
+        final SurveyMenuController controller =
+                SurveyMenuController.init(mHost, mSurveyFeatureProvider, TEST_SURVEY_TRIGGER_KEY,
+                        TEST_PAGE_ID);
+
+        controller.startSurvey();
+
+        verify(mSurveyFeatureProvider).sendActivityIfAvailable(TEST_SURVEY_TRIGGER_KEY);
+    }
+
+    @Test
+    public void startSurvey_nullSurveyFeatureProvider_shouldNotStartSurvey() {
+        final SurveyMenuController controller =
+                SurveyMenuController.init(mHost, (SurveyFeatureProvider) null,
+                        TEST_SURVEY_TRIGGER_KEY, TEST_PAGE_ID);
+
+        controller.startSurvey();
+
+        verify(mSurveyFeatureProvider, never()).sendActivityIfAvailable(TEST_SURVEY_TRIGGER_KEY);
     }
 
     private void setupSurveyAvailability(boolean available) {

@@ -16,6 +16,8 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
+import static com.android.settings.connecteddevice.audiosharing.AudioSharingUtils.MetricKey.METRIC_KEY_DEVICE_CONNECTION_TYPE;
+import static com.android.settings.connecteddevice.audiosharing.AudioSharingUtils.MetricKey.METRIC_KEY_DEVICE_IS_TEMP_BOND;
 import static com.android.settingslib.Utils.isAudioModeOngoingCall;
 
 import android.app.settings.SettingsEnums;
@@ -78,9 +80,20 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
 
     @VisibleForTesting
     enum ChangeCallAudioType {
-        UNKNOWN,
-        CONNECTED_EARLIER,
-        CONNECTED_LATER
+        UNKNOWN("UNKNOWN"),
+        CONNECTED_EARLIER("CONNECTED_EARLIER"),
+        CONNECTED_LATER("CONNECTED_LATER");
+
+        private final String mName;
+
+        ChangeCallAudioType(@NonNull String name) {
+            this.mName = name;
+        }
+
+        @NonNull
+        public String getName() {
+            return mName;
+        }
     }
 
     @Nullable private final LocalBluetoothManager mBtManager;
@@ -483,7 +496,7 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
     }
 
     @VisibleForTesting
-    void logCallAudioDeviceChange(int currentGroupId, CachedBluetoothDevice target) {
+    void logCallAudioDeviceChange(int currentGroupId, @NonNull CachedBluetoothDevice target) {
         var unused =
                 ThreadUtils.postOnBackgroundThread(
                         () -> {
@@ -519,10 +532,17 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
                                                     : ChangeCallAudioType.CONNECTED_EARLIER;
                                 }
                             }
+                            Pair<Integer, Object>[] eventData = new Pair[]{
+                                    Pair.create(METRIC_KEY_DEVICE_CONNECTION_TYPE.getId(),
+                                            type.getName()),
+                                    Pair.create(METRIC_KEY_DEVICE_IS_TEMP_BOND.getId(),
+                                            BluetoothUtils.isTemporaryBondDevice(target.getDevice())
+                                                    ? 1 : 0)
+                            };
                             mMetricsFeatureProvider.action(
                                     mContext,
                                     SettingsEnums.ACTION_AUDIO_SHARING_CHANGE_CALL_AUDIO,
-                                    type.ordinal());
+                                    eventData);
                         });
     }
 }

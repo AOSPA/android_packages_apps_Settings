@@ -1083,16 +1083,27 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                   android:theme="@style/Theme.LocalePickerWithRegionActivity">
         </activity>
 
+        <activity android:name="Settings$SystemLanguageSettingsActivity"
+                  android:label="@string/language_selection_title"
+                  android:excludeFromRecents="true"
+                  android:configChanges="orientation|keyboardHidden|screenSize"
+                  android:exported="false">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.localepicker.SystemLocalePickerFragment" />
+        </activity>
+
         <activity
-            android:name=".localepicker.AppLocalePickerActivity"
+            android:name="Settings$AppLanguageSettingsActivity"
             android:label="@string/app_locale_picker_title"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:exported="true" >
-            <intent-filter>
+            <intent-filter android:priority="1">
                 <action android:name="android.settings.APP_LOCALE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <data android:scheme="package" />
+                <data android:scheme="package"/>
             </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.localepicker.AppLocalePickerFragment"/>
         </activity>
 
         <activity android:name=".localepicker.NotificationActionActivity"
@@ -1476,6 +1487,18 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                        android:value="com.android.settings.notification.modes.ZenModeFragment"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
+        </activity>
+
+        <activity
+            android:name="Settings$ModeDisplaySettingsActivity"
+            android:exported="true"
+            android:featureFlag="android.app.modes_ui">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.notification.modes.ZenModeDisplayFragment"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_priority_modes"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
         </activity>
 
         <activity
@@ -2585,6 +2608,12 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                        android:value="@string/menu_key_security"/>
         </activity>
 
+        <service
+            android:name=".accessibility.notification.SurveyNotificationService"
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.POST_NOTIFICATIONS"/>
+
         <activity
             android:name="Settings$AccessibilitySettingsActivity"
             android:label="@string/accessibility_settings"
@@ -2896,6 +2925,12 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".supervision.SetupSupervisionActivity" android:exported="false" />
+
+        <activity
+            android:name=".supervision.SupervisionPinRecoveryActivity"
+            android:exported="false" />
 
         <activity android:name=".SetupRedactionInterstitial"
             android:enabled="false"
@@ -4301,7 +4336,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
         <!-- Show regulatory info (from settings item or dialing "*#07#") -->
         <activity
             android:name="RegulatoryInfoDisplayActivity"
-            android:theme="@style/Theme.AlertDialog"
+            android:theme="@style/Transparent"
             android:label="@string/regulatory_labels"
             android:exported="true"
             android:enabled="@bool/config_show_regulatory_info">

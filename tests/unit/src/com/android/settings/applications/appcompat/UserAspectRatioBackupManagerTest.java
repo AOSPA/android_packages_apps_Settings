@@ -21,6 +21,7 @@ import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_SPLIT_SCRE
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_UNSET;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
@@ -40,10 +41,15 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageManager;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.HandlerThread;
+import android.os.Process;
 import android.os.RemoteException;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import com.android.settings.testutils.FakeInstantSource;
+import com.android.settings.testutils.FakeSharedPreferences;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -52,6 +58,7 @@ import org.mockito.Mock;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -79,20 +86,28 @@ public class UserAspectRatioBackupManagerTest {
     @Mock
     private PackageManager mMockPackageManager;
 
+    private Context mContext;
+    private FakeSharedPreferences mFakeSharedPreferences;
+
     private UserAspectRatioBackupManager mBackupManager;
 
-    private final BackupRestoreEventLogger mBackupLogger = new BackupRestoreEventLogger(
-            BackupAnnotations.OperationType.BACKUP);
-    private final BackupRestoreEventLogger mRestoreLogger = new BackupRestoreEventLogger(
-            BackupAnnotations.OperationType.RESTORE);
+    private final BackupRestoreEventLogger mLogger = new BackupRestoreEventLogger(
+            BackupAnnotations.OperationType.UNKNOWN);
 
     @Before
     public void setUp() throws Exception {
-        Context context = spy(ApplicationProvider.getApplicationContext());
+        mContext = spy(ApplicationProvider.getApplicationContext());
         mMockIPackageManager = mock(IPackageManager.class);
         mMockPackageManager = mock(PackageManager.class);
-        mBackupManager = new UserAspectRatioBackupManager(context, mMockIPackageManager,
-                mMockPackageManager);
+
+        HandlerThread broadcastHandlerThread = new HandlerThread("UARTest",
+                Process.THREAD_PRIORITY_BACKGROUND);
+        broadcastHandlerThread.start();
+        setupMockSharedPreferences();
+
+        mBackupManager = new UserAspectRatioBackupManager(mContext, mMockIPackageManager,
+                mMockPackageManager, mLogger, broadcastHandlerThread.getThreadHandler(),
+                new FakeInstantSource());
     }
 
     @Test
@@ -100,7 +115,7 @@ public class UserAspectRatioBackupManagerTest {
             throws Exception {
         setUpInstalledPackages(List.of());
 
-        verifyPayloadForAppAspectRatio(Map.of(), mBackupManager.getBackupPayload(mBackupLogger));
+        verifyPayloadForAppAspectRatio(Map.of(), mBackupManager.getBackupPayload());
     }
 
     @Test
@@ -108,7 +123,7 @@ public class UserAspectRatioBackupManagerTest {
         setUpAspectRatioForPackage(DEFAULT_PACKAGE_NAME, USER_MIN_ASPECT_RATIO_UNSET);
         setUpInstalledPackages(List.of(DEFAULT_PACKAGE_NAME));
 
-        verifyPayloadForAppAspectRatio(Map.of(), mBackupManager.getBackupPayload(mBackupLogger));
+        verifyPayloadForAppAspectRatio(Map.of(), mBackupManager.getBackupPayload());
     }
 
     @Test
@@ -116,7 +131,7 @@ public class UserAspectRatioBackupManagerTest {
         setUpAspectRatioForPackage(DEFAULT_PACKAGE_NAME, USER_MIN_ASPECT_RATIO_FULLSCREEN);
         setUpInstalledPackages(List.of(DEFAULT_PACKAGE_NAME));
 
-        final byte[] payload = mBackupManager.getBackupPayload(mBackupLogger);
+        final byte[] payload = mBackupManager.getBackupPayload();
 
         verifyPayloadForAppAspectRatio(DEFAULT_PACKAGE_ASPECT_RATIO_MAP, payload);
     }
@@ -128,7 +143,7 @@ public class UserAspectRatioBackupManagerTest {
         doThrow(new RemoteException("mock")).when(mMockIPackageManager).getUserMinAspectRatio(
                 anyString(), anyInt());
 
-        verifyPayloadForAppAspectRatio(Map.of(), mBackupManager.getBackupPayload(mBackupLogger));
+        verifyPayloadForAppAspectRatio(Map.of(), mBackupManager.getBackupPayload());
     }
 
     @Test
@@ -143,36 +158,36 @@ public class UserAspectRatioBackupManagerTest {
                 .getUserMinAspectRatio(
                         eq(OTHER_PACKAGE_NAME), anyInt());
 
-        byte[] payload = mBackupManager.getBackupPayload(mBackupLogger);
+        byte[] payload = mBackupManager.getBackupPayload();
 
         verifyPayloadForAppAspectRatio(DEFAULT_PACKAGE_ASPECT_RATIO_MAP, payload);
     }
 
     @Test
     public void testRestore_emptyPayload_nothingRestored() throws Exception {
-        mBackupManager.stageAndApplyRestoredPayload(/* payload= */ new byte[0],
-                mRestoreLogger);
+        mBackupManager.stageAndApplyRestoredPayload(/* payload= */ new byte[0]);
 
         verifyNothingRestored();
     }
 
     @Test
     public void testRestore_zeroLengthPayload_nothingRestored() throws Exception {
-        mBackupManager.stageAndApplyRestoredPayload(/* payload= */ writeEmptyTestPayload(),
-                mRestoreLogger);
+        mBackupManager.stageAndApplyRestoredPayload(/* payload= */ writeEmptyTestPayload());
 
         verifyNothingRestored();
     }
 
     @Test
-    public void testRestore_appNotInstalled_nothingIsRestored() throws Exception {
+    public void testRestore_appNotInstalled_aspectRatioStored() throws Exception {
         final byte[] out = writeTestPayload(DEFAULT_PACKAGE_ASPECT_RATIO_MAP);
         // Backed up app is not installed on the restore device.
         setUpInstalledPackages(List.of());
 
-        mBackupManager.stageAndApplyRestoredPayload(out, mRestoreLogger);
+        mBackupManager.stageAndApplyRestoredPayload(out);
 
         verifyNothingRestored();
+        assertEquals(USER_MIN_ASPECT_RATIO_FULLSCREEN, mFakeSharedPreferences.getInt(
+                DEFAULT_PACKAGE_NAME, USER_MIN_ASPECT_RATIO_UNSET));
     }
 
     @Test
@@ -181,9 +196,9 @@ public class UserAspectRatioBackupManagerTest {
         setUpInstalledPackages(List.of(DEFAULT_PACKAGE_NAME));
         setUpAspectRatioForPackage(DEFAULT_PACKAGE_NAME, USER_MIN_ASPECT_RATIO_UNSET);
 
-        mBackupManager.stageAndApplyRestoredPayload(out, mRestoreLogger);
+        mBackupManager.stageAndApplyRestoredPayload(out);
 
-        // Locales were restored.
+        // User aspect ratio is restored.
         verify(mMockIPackageManager).setUserMinAspectRatio(DEFAULT_PACKAGE_NAME,
                 DEFAULT_USER_ID, USER_MIN_ASPECT_RATIO_FULLSCREEN);
     }
@@ -194,11 +209,26 @@ public class UserAspectRatioBackupManagerTest {
         setUpInstalledPackages(List.of(DEFAULT_PACKAGE_NAME));
         setUpAspectRatioForPackage(DEFAULT_PACKAGE_NAME, USER_MIN_ASPECT_RATIO_SPLIT_SCREEN);
 
-        mBackupManager.stageAndApplyRestoredPayload(out, mRestoreLogger);
+        mBackupManager.stageAndApplyRestoredPayload(out);
 
         verifyNothingRestored();
     }
 
+    @Test
+    public void testPackageAdded_aspectRatioRestored() throws Exception {
+        final byte[] out = writeTestPayload(DEFAULT_PACKAGE_ASPECT_RATIO_MAP);
+        // Backed up app is not installed on the restore device.
+        setUpInstalledPackages(List.of());
+        // Restored data should be stored and wait until package is installed.
+        mBackupManager.stageAndApplyRestoredPayload(out);
+
+        setUpInstalledPackages(List.of(DEFAULT_PACKAGE_NAME));
+        mBackupManager.mPackageMonitor.onPackageAdded(DEFAULT_PACKAGE_NAME, DEFAULT_USER_ID);
+
+        // User aspect ratio is restored.
+        verify(mMockIPackageManager).setUserMinAspectRatio(DEFAULT_PACKAGE_NAME,
+                DEFAULT_USER_ID, USER_MIN_ASPECT_RATIO_FULLSCREEN);
+    }
 
     /**
      * Verifies that nothing was restored for any package.
@@ -250,6 +280,13 @@ public class UserAspectRatioBackupManagerTest {
             throws Exception {
         doReturn(aspectRatio).when(mMockIPackageManager).getUserMinAspectRatio(
                 eq(packageName), anyInt());
+    }
+
+    private void setupMockSharedPreferences() {
+        mFakeSharedPreferences = new FakeSharedPreferences();
+        doReturn(mContext).when(mContext).createDeviceProtectedStorageContext();
+        doReturn(mFakeSharedPreferences).when(mContext).getSharedPreferences(any(File.class),
+                eq(Context.MODE_PRIVATE));
     }
 
     private void verifyPayloadForAppAspectRatio(Map<String, Integer> expectedPkgAspectRatioMap,

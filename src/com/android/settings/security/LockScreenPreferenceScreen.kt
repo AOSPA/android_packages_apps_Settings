@@ -34,6 +34,7 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
+import com.android.systemui.shared.Flags.ambientAod
 
 @ProvidePreferenceScreen(LockScreenPreferenceScreen.KEY)
 open class LockScreenPreferenceScreen(private val context: Context) :
@@ -79,7 +80,9 @@ open class LockScreenPreferenceScreen(private val context: Context) :
 
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(context, this) {
-            +AmbientDisplayAlwaysOnPreference()
+            if (!ambientAod()) {
+                +AmbientDisplayAlwaysOnPreference()
+            }
         }
 
     companion object {

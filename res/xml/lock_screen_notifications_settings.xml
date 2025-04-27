@@ -29,14 +29,14 @@
         android:key="compact_illustration"
         settings:searchable="false"
         android:selectable="false"
-        settings:lottie_rawRes="@raw/lottie_lock_screen_notification_minimalism_compact_view"
+        settings:lottie_rawRes="@drawable/lock_screen_notification_compact_view"
         settings:dynamicColor="true"/>
 
     <com.android.settingslib.widget.IllustrationPreference
         android:key="full_list_illustration"
         settings:searchable="false"
         android:selectable="false"
-        settings:lottie_rawRes="@raw/lottie_lock_screen_notification_minimalism_full_list"
+        settings:lottie_rawRes="@drawable/lock_screen_notification_full_list_view"
         settings:dynamicColor="true"/>
 
     <com.android.settingslib.widget.LayoutPreference

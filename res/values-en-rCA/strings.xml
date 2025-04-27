@@ -455,6 +455,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Cancel"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"Not now"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"I agree"</string>
+    <string name="security_settings_fingerprint_rename_description" msgid="6301505700382531086">"Double tap to rename"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Skip fingerprint?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Fingerprint setup only takes a minute or two. If you skip this, you can add your fingerprint later in Settings."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"When you see this icon, use your fingerprint for authentication, like when you sign in to apps or approve a purchase"</string>
@@ -1441,8 +1442,8 @@
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"While charging"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"While docked"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Never"</string>
-    <string name="screensaver_settings_summary_postured" msgid="1184119124847691954">"While postured"</string>
-    <string name="screensaver_settings_summary_postured_and_charging" msgid="1952047156927637506">"While postured and charging"</string>
+    <string name="screensaver_settings_summary_postured" msgid="6346392320858994892">"While upright"</string>
+    <string name="screensaver_settings_summary_postured_and_charging" msgid="5111797042509819055">"While upright and charging"</string>
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"On / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Off"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"When to start"</string>
@@ -1612,8 +1613,8 @@
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"When to automatically show"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Never"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"While charging"</string>
-    <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"While charging and upright"</string>
-    <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"While docked"</string>
+    <string name="when_to_show_hubmode_charging_and_upright" msgid="537039046490426922">"While upright and charging"</string>
+    <string name="when_to_show_hubmode_docked" msgid="8876633401873168284">"While docked and charging"</string>
     <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"Restrict to wireless charging"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APNs"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Edit access point"</string>
@@ -2311,6 +2312,9 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Move screen when mouse touches edges of screen"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Magnify typing"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Magnifier follows text as you type"</string>
+    <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"Magnify keyboard"</string>
+    <string name="accessibility_screen_magnification_nav_ime_summary" msgid="3054371947104552843">"Keyboard is magnified with your content"</string>
+    <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"Unavailable while only magnifying part of the screen"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Keep on while switching apps"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"Magnifier stays on and zooms out when you switch apps"</string>
     <string name="accessibility_screen_magnification_always_on_unavailable_summary" msgid="3844732482037416038">"Unavailable while only magnifying part of the screen"</string>
@@ -2564,6 +2568,7 @@
     <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Hearing device shortcut"</string>
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Hearing aid compatibility"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Improves compatibility with telecoils and reduces unwanted noise"</string>
+    <string name="hac_disclaimer_message" msgid="5279579026956312543"></string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"About hearing devices"</string>
     <string name="accessibility_hearing_device_footer_summary" msgid="5513620078219951077">"To find other hearing devices that aren’t supported by ASHA or LE Audio, tap &lt;b&gt;Pair new device&lt;/b&gt; &gt; &lt;b&gt;See more devices&lt;/b&gt;"</string>
     <string name="accessibility_hearing_device_footer_summary_tts" msgid="955527026890456959">"To find other hearing devices that aren’t supported by ASHA or LE Audio, tap "<b>"Pair new device"</b>" then "<b>"See more devices"</b></string>
@@ -4661,8 +4666,8 @@
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Open Wallet"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"Change lock screen shortcut?"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> is also your lock screen shortcut. Want to change it?"</string>
-    <string name="double_tap_power_wallet_footer_title" msgid="5417023303339032410">"Wallet is not available. Your current default wallet app does not support the gesture."</string>
-    <string name="double_tap_power_wallet_footer_learn_more_text" msgid="1267822422365445657">"Tap here to change it."</string>
+    <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"Your current default wallet app does not support this gesture"</string>
+    <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"Change default wallet"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Flip camera for selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Navigation mode"</string>
@@ -5058,31 +5063,31 @@
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"Check with your network provider for pricing."</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Invalid Network Mode <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignore."</string>
     <string name="satellite_setting" msgid="4650503806634496443">"Satellite connectivity"</string>
-    <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Send and receive text messages by satellite. Included with your account."</string>
-    <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Send and receive text messages by satellite. Not included with your account."</string>
-    <string name="satellite_setting_summary_without_entitlement" msgid="5284998840770992554">"Send and receive text messages by satellite. Contact your carrier for details."</string>
+    <string name="satellite_setting_enabled_summary" msgid="2114544331827193266">"Send and receive text messages over satellite. Included with your account."</string>
+    <string name="satellite_setting_disabled_summary" msgid="8193743637158939283">"Send and receive text messages over satellite. Not included with your account."</string>
+    <string name="satellite_setting_summary_without_entitlement" msgid="7010003955751606421">"Send and receive text messages over satellite. Contact your carrier for details."</string>
     <string name="keywords_satellite_setting" msgid="613553612424945946">"Satellite messaging, satellite connectivity"</string>
     <string name="category_name_about_satellite_connectivity" msgid="3971142716898783631">"About satellite connectivity"</string>
-    <string name="description_about_satellite_setting" msgid="5539359064330584941">"You can send and receive text messages and use some apps by satellite with an eligible <xliff:g id="CARRIER_NAME">%1$s</xliff:g> account"</string>
+    <string name="description_about_satellite_setting" msgid="8212911110428998767">"You can send and receive text messages over satellite with an eligible <xliff:g id="CARRIER_NAME">%1$s</xliff:g> account"</string>
     <string name="category_title_your_satellite_plan" msgid="8169426217950247126">"Your <xliff:g id="CARRIER_NAME">%1$s</xliff:g> account"</string>
-    <string name="title_have_satellite_plan" msgid="2048372355699977947">"Satellite messaging is included with your account"</string>
-    <string name="title_no_satellite_plan" msgid="2876056203035197505">"Satellite messaging isn’t included with your account"</string>
+    <string name="title_have_satellite_plan" msgid="857337944804101443">"Messaging is included with your account"</string>
+    <string name="title_no_satellite_plan" msgid="7255726881685672846">"Messaging isn’t included with your account"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Learn More"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"How it works"</string>
-    <string name="title_satellite_connection_guide" msgid="3294802307913609072">"When you don’t have a mobile network"</string>
+    <string name="title_satellite_connection_guide" msgid="4730763872034574368">"When you don’t have a mobile or Wi-Fi network"</string>
     <string name="title_satellite_connection_guide_for_manual_type" msgid="7223875100977941341">"Text a phone number"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Your phone will auto-connect to a satellite. For the best connection, keep a clear view of the sky."</string>
-    <string name="summary_satellite_connection_guide_for_manual_type" msgid="5075149380084376662">"If you don’t have a mobile network, you’ll see an option to use satellite messaging."</string>
+    <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"If you don’t have a mobile network, you’ll see an option to use satellite."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"After your phone connects to a satellite"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Follow steps to connect to the satellite"</string>
-    <string name="summary_supported_service" msgid="4320535903444834786">"You can text anyone, including emergency services. Your phone will reconnect to a mobile network when available."</string>
+    <string name="summary_supported_service" msgid="6380533552383355977">"You can text anyone, including emergency services, and use limited data on some apps. Your phone will reconnect to a mobile network when available."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"After your phone is connected, you can text anyone, including emergency services."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Keep in mind"</string>
     <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"Satellite connectivity may take longer and is available only in some areas."</string>
     <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"Weather and certain structures may affect your satellite connection."</string>
-    <string name="satellite_footer_content_section_3" msgid="4652426135622555607">"Calling by satellite isn’t available."</string>
+    <string name="satellite_footer_content_section_3" msgid="4686525535095321485">"Calling over satellite isn’t available."</string>
     <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"Emergency calls may still connect."</string>
-    <string name="satellite_footer_content_section_5" msgid="3053256489735265540">"Mobile or Wi‑Fi network required to view external links."</string>
+    <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"A mobile or Wi‑Fi network is required to view external links."</string>
     <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"Texting with emergency services may not be available in all areas."</string>
     <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"It may take some time for account changes to show in Settings. Contact <xliff:g id="CARRIER_NAME">%1$s</xliff:g> for details."</string>
     <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"More about satellite connectivity"</string>
@@ -5094,7 +5099,7 @@
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"satellite messaging"</string>
     <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"Use of data is included with your account"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Supported apps on your phone"</string>
-    <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"see all apps"</string>
+    <string name="title_satellite_supported_app_list_entry" msgid="891155574898209245">"See all apps supported by satellite"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Supported apps on your phone"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Can’t add a SIM"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"End the satellite connection before you add a SIM"</string>

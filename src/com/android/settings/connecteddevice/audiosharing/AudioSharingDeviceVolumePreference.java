@@ -74,6 +74,7 @@ public class AudioSharingDeviceVolumePreference extends SeekBarPreference {
     public void initialize() {
         setMax(MAX_VOLUME);
         setMin(MIN_VOLUME);
+        refreshPreference();
     }
 
     @Override
@@ -131,9 +132,17 @@ public class AudioSharingDeviceVolumePreference extends SeekBarPreference {
     }
 
     void onPreferenceAttributesChanged() {
+        refreshPreference();
+    }
+
+    private void refreshPreference() {
         var unused = ThreadUtils.postOnBackgroundThread(() -> {
             String name = mCachedDevice.getName();
-            AudioSharingUtils.postOnMainThread(mContext, () -> setTitle(name));
+            AudioSharingUtils.postOnMainThread(mContext, () -> {
+                setTitle(name);
+                setSeekBarContentDescription(
+                        mContext.getString(R.string.audio_sharing_device_volume_description, name));
+            });
         });
     }
 

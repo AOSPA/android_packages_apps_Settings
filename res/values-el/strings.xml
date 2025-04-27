@@ -344,10 +344,8 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Ενεργή / # εφαρμογή έχει πρόσβαση στην τοποθεσία}other{Ενεργή / # εφαρμογές έχουν πρόσβαση στην τοποθεσία}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Φόρτωση…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Οι εφαρμογές που έχουν την άδεια Συσκευές σε κοντινή απόσταση μπορούν να προσδιορίσουν τη σχετική θέση των συνδεδεμένων συσκευών."</string>
-    <!-- no translation found for location_settings_footer_location_off_with_telephony (5600725945541382556) -->
-    <skip />
-    <!-- no translation found for location_settings_footer_location_off_no_telephony (2709958040008816610) -->
-    <skip />
+    <string name="location_settings_footer_location_off_with_telephony" msgid="5600725945541382556">"Η πρόσβαση στην τοποθεσία είναι απενεργοποιημένη για εφαρμογές και υπηρεσίες. Η τοποθεσία της συσκευής σας ενδέχεται ωστόσο να αποστέλλεται σε ομάδες έκτακτης ανάγκης, όταν επικοινωνείτε με έναν αριθμό έκτακτης ανάγκης."</string>
+    <string name="location_settings_footer_location_off_no_telephony" msgid="2709958040008816610">"Η πρόσβαση στην τοποθεσία είναι απενεργοποιημένη για εφαρμογές και υπηρεσίες."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Μάθετε περισσότερα σχετικά με τις Ρυθμίσεις τοποθεσίας"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Για αλλαγή, μεταβείτε στις Ρυθμίσεις του ChromeOS &gt; Απόρρητο και ασφάλεια &gt; Στοιχεία ελέγχου απορρήτου &gt; Πρόσβαση στην τοποθεσία"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Λογαριασμοί"</string>
@@ -457,6 +455,8 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Ακύρωση"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"Όχι τώρα"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Συμφωνώ"</string>
+    <!-- no translation found for security_settings_fingerprint_rename_description (6301505700382531086) -->
+    <skip />
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Παράβλεψη δακτ. αποτυπώματος;"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Απαιτούνται ένα έως δύο λεπτά για τη ρύθμιση δακτυλικού αποτυπώματος. Εάν παραβλέψετε αυτό το βήμα, μπορείτε να προσθέσετε το δακτυλικό αποτύπωμά σας αργότερα στις ρυθμίσεις."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Όταν βλέπετε αυτό το εικονίδιο, χρησιμοποιήστε το δακτυλικό σας αποτύπωμα για έλεγχο ταυτότητας, όπως για σύνδεση σε εφαρμογές ή έγκριση αγορών"</string>
@@ -470,7 +470,7 @@
     <string name="fingerprint_check_enroll_touch_sensor" msgid="5010063281557456236">"Αγγίξτε τον αισθητήρα δακτυλικών αποτυπωμάτων"</string>
     <string name="fingerprint_check_enroll_not_recognized" msgid="2779520550437394431">"Δεν είναι δυνατή η αναγνώριση του δακτυλικού αποτυπώματος"</string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Ξεκλείδωμα ρολογιού"</string>
-    <string name="security_settings_activeunlock" msgid="8922823742770802651">"Παρακολούθηση"</string>
+    <string name="security_settings_activeunlock" msgid="8922823742770802651">"Ρολόι"</string>
     <string name="biometric_settings_intro_with_activeunlock" msgid="5032953826653108646">"Όταν ρυθμίσετε το Ξεκλείδωμα με το πρόσωπο και το Ξεκλείδωμα με δακτυλικό αποτύπωμα, το τηλέφωνό σας θα ζητά το δακτυλικό σας αποτύπωμα όταν φοράτε μάσκα ή βρίσκεστε σε σκοτεινό χώρο.\n\nΤο Ξεκλείδωμα ρολογιού είναι ένας άλλος βολικός τρόπος για να ξεκλειδώνετε το τηλέφωνό σας όταν, για παράδειγμα, τα δάχτυλά σας είναι βρεγμένα ή όταν δεν αναγνωρίζεται το πρόσωπό σας."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="5881355884547769337">"Το Ξεκλείδωμα ρολογιού είναι ένας άλλος βολικός τρόπος για να ξεκλειδώνετε το τηλέφωνό σας όταν, για παράδειγμα, δεν αναγνωρίζεται το δακτυλικό σας αποτύπωμα."</string>
     <string name="biometric_settings_intro_with_face" msgid="7671919122230588521">"Το Ξεκλείδωμα ρολογιού είναι ένας άλλος βολικός τρόπος για να ξεκλειδώνετε το τηλέφωνό σας, για παράδειγμα, όταν δεν αναγνωρίζεται το πρόσωπό σας."</string>
@@ -542,7 +542,7 @@
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"Τρόποι ξεκλειδώματος"</string>
     <string name="biometric_settings_category_use_face_fingerprint" msgid="4377659744376863913">"Χρήση προσώπου ή δακτυλικού αποτυπώματος για"</string>
     <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"Ξεκλείδωμα του τηλεφώνου"</string>
-    <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"Επαληθεύστε την ταυτότητά σας σε εφαρμογές"</string>
+    <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"Επαλήθευση της ταυτότητάς σας σε εφαρμογές"</string>
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Χρήση προσώπου"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Χρήση δακτυλικού αποτυπώματος"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Χρήση προσώπου ή δακτυλικού αποτυπώματος"</string>
@@ -704,7 +704,7 @@
     <string name="private_space_unlocked" msgid="9091600948712932046">"Ο απόρρητος χώρος ξεκλειδώθηκε"</string>
     <string name="no_device_lock_title" msgid="1078223464721029954">"Ορισμός κλειδώματος οθόνης"</string>
     <string name="no_device_lock_summary" msgid="7436025227616244687">"Για να χρησιμοποιήσετε τον ιδιωτικό χώρο σας, ορίστε ένα κλείδωμα οθόνης στη συσκευή"</string>
-    <string name="no_device_lock_action_label" msgid="2640487005629001288">"Ρύθμιση κλειδώματος οθόνης"</string>
+    <string name="no_device_lock_action_label" msgid="2640487005629001288">"Ορισμός κλειδώματος οθόνης"</string>
     <string name="no_device_lock_cancel" msgid="4412602160321228863">"Ακύρωση"</string>
     <string name="private_space_cancel_label" msgid="379259667396956886">"Ακύρωση"</string>
     <string name="private_space_setup_button_label" msgid="2094882154623560585">"Ρύθμιση"</string>
@@ -765,7 +765,7 @@
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"Προσθέστε δακτυλικό αποτύπωμα για ξεκλείδωμα"</string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Επιλογή κλειδ. οθ."</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Επιλογή κλειδώματος οθόνης"</string>
-    <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Επιλογή νέου κλείδ. οθόνης"</string>
+    <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Επιλογή νέου κλειδώματος οθόνης"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Επιλογή κλειδώμ. εφ. εργασ."</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Επιλογή νέου κλειδ. εργασ."</string>
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Για πρόσθετη ασφάλεια, ορίστε ένα εφεδρικό κλείδωμα οθόνης"</string>
@@ -803,7 +803,7 @@
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Συνέχεια χωρίς Ξεκλείδωμα με το πρόσωπο"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"Συνέχεια χωρίς δακτυλικό αποτύπωμα ή πρόσωπο"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Κανένα"</string>
-    <string name="unlock_set_unlock_mode_off_new" msgid="865396805830816266">"Προσθήκη PIN, μοτίβου, κωδ. πρόσβ. ή σύρματος"</string>
+    <string name="unlock_set_unlock_mode_off_new" msgid="865396805830816266">"Προσθήκη PIN, μοτίβου, κωδ. πρόσβ. ή ολίσθ."</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Ολίσθηση"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"Μοτίβο"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="9028659554829888373">"PIN"</string>
@@ -1443,8 +1443,10 @@
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Στη φόρτιση"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Στη βάση"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Ποτέ"</string>
-    <string name="screensaver_settings_summary_postured" msgid="1184119124847691954">"Σε όρθια θέση"</string>
-    <string name="screensaver_settings_summary_postured_and_charging" msgid="1952047156927637506">"Σε όρθια θέση και κατά τη φόρτιση"</string>
+    <!-- no translation found for screensaver_settings_summary_postured (6346392320858994892) -->
+    <skip />
+    <!-- no translation found for screensaver_settings_summary_postured_and_charging (5111797042509819055) -->
+    <skip />
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"Ενεργοποιημένη / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Απενεργοποίηση"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Πότε να ξεκινάει"</string>
@@ -1614,8 +1616,10 @@
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Πότε να εμφανίζεται αυτόματα"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Ποτέ"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Κατά τη φόρτιση"</string>
-    <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"Κατά τη φόρτιση και σε όρθια θέση"</string>
-    <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"Κατά τη σύνδεση σε βάση"</string>
+    <!-- no translation found for when_to_show_hubmode_charging_and_upright (537039046490426922) -->
+    <skip />
+    <!-- no translation found for when_to_show_hubmode_docked (8876633401873168284) -->
+    <skip />
     <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"Περιορισμός κατά την ασύρματη φόρτιση"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Επεξ/σία σημ. πρόσβ."</string>
@@ -1883,7 +1887,7 @@
     <string name="lockpattern_settings_title" msgid="9223165804553269083">"Μοτίβο ξεκλειδώματος"</string>
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"Απαιτείται μοτίβο"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"Πρέπει να σχεδιάσετε το μοτίβο για το ξεκλείδωμα της οθόνης"</string>
-    <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Να γίνει το μοτίβο ορατό"</string>
+    <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Να γίνεται το μοτίβο ορατό"</string>
     <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"Βελτιωμένη προστασία απορρήτου PIN"</string>
     <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"Απενεργοποίηση κινούμενων εικόνων κατά την εισαγωγή του PIN"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Να γίνει το μοτίβο προφίλ ορατό"</string>
@@ -2313,6 +2317,12 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Μετακίνηση της οθόνης όταν το ποντίκι αγγίζει τις άκρες της οθόνης"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Μεγέθυνση πληκτρολόγησης"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Ο μεγεθυντικός φακός ακολουθεί το κείμενο καθώς πληκτρολογείτε"</string>
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_title (8804501318161774285) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_summary (3054371947104552843) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_unavailable_summary (2248787024685382054) -->
+    <skip />
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Ενεργός κατά την εναλλαγή εφαρμογών"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"Ο μεγεθυντικός φακός παραμένει ενεργός και κάνει σμίκρυνση κατά την εναλλαγή εφαρμογών"</string>
     <string name="accessibility_screen_magnification_always_on_unavailable_summary" msgid="3844732482037416038">"Μη διαθέσιμο όταν μεγιστοποιείται μόνο ένα τμήμα της οθόνης"</string>
@@ -2566,6 +2576,7 @@
     <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Συντόμευση συσκευής ακοής"</string>
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Συμβατότητα βοηθημάτων ακοής"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Βελτιώνει τη συμβατότητα με telecoil και μειώνει τον ανεπιθύμητο θόρυβο"</string>
+    <string name="hac_disclaimer_message" msgid="5279579026956312543"></string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"Σχετικά με τις συσκευές ακοής"</string>
     <string name="accessibility_hearing_device_footer_summary" msgid="5513620078219951077">"Για να βρείτε άλλες συσκευές ακοής που δεν υποστηρίζονται από το ASHA ή το LE Audio, πατήστε &lt;b&gt;Σύζευξη νέας συσκευής&lt;/b&gt; &gt; &lt;b&gt;Εμφάνιση περισσότερων συσκευών&lt;/b&gt;"</string>
     <string name="accessibility_hearing_device_footer_summary_tts" msgid="955527026890456959">"Για να βρείτε άλλες συσκευές ακοής που δεν υποστηρίζονται από το ASHA ή το LE Audio, πατήστε "<b>"Σύζευξη νέας συσκευής"</b>" και έπειτα "<b>"Εμφάνιση περισσότερων συσκευών"</b></string>
@@ -4663,9 +4674,9 @@
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Άνοιγμα Πορτοφολιού"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"Θέλετε να αλλάξετε τη συντόμευση οθόνης κλειδώματος;"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"Η ενέργεια <xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> είναι επίσης συντόμευση οθόνης κλειδώματος. Θέλετε να την αλλάξετε;"</string>
-    <!-- no translation found for double_tap_power_wallet_footer_title (5417023303339032410) -->
+    <!-- no translation found for double_tap_power_wallet_footer_title (4626950875173822614) -->
     <skip />
-    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (1267822422365445657) -->
+    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (4871482943751760132) -->
     <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Αναστροφή κάμερας για selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
@@ -4704,7 +4715,7 @@
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Χρήση της συντόμευσης για"</string>
     <string name="one_handed_mode_intro_text" msgid="7921988617828924342">"Σύρετε προς τα κάτω το επάνω μισό της οθόνης σας, έτσι ώστε να είναι πιο εύκολη η πρόσβαση με το ένα χέρι"</string>
     <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"Πώς να χρησιμοποιήσετε τη λειτουργία ενός χεριού"</b>\n" • Βεβαιωθείτε ότι η πλοήγηση με κινήσεις είναι επιλεγμένη στις ρυθμίσεις πλοήγησης του συστήματος\n • Σύρετε προς τα κάτω κοντά στο κάτω άκρο της οθόνης"</string>
-    <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Τραβήξτε την οθόνη για να φτάνετε"</string>
+    <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Τράβηγμα οθόνης για να φτάνετε"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Το επάνω τμήμα της οθόνης θα μετακινηθεί σε σημείο που φτάνετε με τον αντίχειρά σας."</string>
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Εμφάνιση ειδοποιήσεων"</string>
     <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"Οι ειδοποιήσεις και οι ρυθμίσεις θα εμφανίζονται."</string>
@@ -5062,31 +5073,41 @@
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"Επικοινωνήστε με τον πάροχο του δικτύου για πληροφορίες σχετικά με τις τιμές."</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Μη έγκυρη λειτουργία δικτύου <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Παράβλεψη."</string>
     <string name="satellite_setting" msgid="4650503806634496443">"Δορυφορική συνδεσιμότητα"</string>
-    <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Στείλτε και λάβετε μηνύματα κειμένου μέσω δορυφόρου. Περιλαμβάνεται στον λογαριασμό σας."</string>
-    <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Στείλτε και λάβετε μηνύματα κειμένου μέσω δορυφόρου. Δεν περιλαμβάνεται στον λογαριασμό σας."</string>
-    <string name="satellite_setting_summary_without_entitlement" msgid="5284998840770992554">"Στείλτε και λάβετε μηνύματα κειμένου μέσω δορυφόρου. Επικοινωνήστε με την εταιρεία κινητής τηλεφωνίας που χρησιμοποιείτε για λεπτομέρειες."</string>
+    <!-- no translation found for satellite_setting_enabled_summary (2114544331827193266) -->
+    <skip />
+    <!-- no translation found for satellite_setting_disabled_summary (8193743637158939283) -->
+    <skip />
+    <!-- no translation found for satellite_setting_summary_without_entitlement (7010003955751606421) -->
+    <skip />
     <string name="keywords_satellite_setting" msgid="613553612424945946">"Ανταλλαγή μηνυμάτων μέσω δορυφόρου, δορυφορική συνδεσιμότητα"</string>
     <string name="category_name_about_satellite_connectivity" msgid="3971142716898783631">"Σχετικά με τη δορυφορική συνδεσιμότητα"</string>
-    <string name="description_about_satellite_setting" msgid="5539359064330584941">"Μπορείτε να στείλετε και να λάβετε μηνύματα κειμένου, καθώς και να χρησιμοποιήσετε ορισμένες εφαρμογές μέσω δορυφόρου με έναν κατάλληλο λογαριασμό <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for description_about_satellite_setting (8212911110428998767) -->
+    <skip />
     <string name="category_title_your_satellite_plan" msgid="8169426217950247126">"Ο λογαριασμός σας <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
-    <string name="title_have_satellite_plan" msgid="2048372355699977947">"Η ανταλλαγή μηνυμάτων μέσω δορυφόρου συμπεριλαμβάνεται στον λογαριασμό σας"</string>
-    <string name="title_no_satellite_plan" msgid="2876056203035197505">"Η ανταλλαγή μηνυμάτων μέσω δορυφόρου δεν συμπεριλαμβάνεται στον λογαριασμό σας"</string>
+    <string name="title_have_satellite_plan" msgid="857337944804101443">"Η ανταλλαγή μηνυμάτων συμπεριλαμβάνεται στον λογαριασμό σας"</string>
+    <!-- no translation found for title_no_satellite_plan (7255726881685672846) -->
+    <skip />
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Μάθετε περισσότερα"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Πώς λειτουργεί"</string>
-    <string name="title_satellite_connection_guide" msgid="3294802307913609072">"Όταν δεν έχετε δίκτυο κινητής τηλεφωνίας"</string>
+    <!-- no translation found for title_satellite_connection_guide (4730763872034574368) -->
+    <skip />
     <string name="title_satellite_connection_guide_for_manual_type" msgid="7223875100977941341">"Αποστολή μηνύματος σε έναν αριθμό τηλεφώνου"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Το τηλέφωνό σας θα συνδεθεί αυτόματα με έναν δορυφόρο. Για την καλύτερη δυνατή σύνδεση, φροντίστε να φαίνεται ο ουρανός χωρίς να παρεμβάλλονται εμπόδια."</string>
-    <string name="summary_satellite_connection_guide_for_manual_type" msgid="5075149380084376662">"Εάν δεν έχετε συνδεθεί σε δίκτυο κινητής τηλεφωνίας, θα δείτε μια επιλογή για τη χρήση της ανταλλαγής μηνυμάτων μέσω δορυφόρου."</string>
+    <!-- no translation found for summary_satellite_connection_guide_for_manual_type (2106091974353287661) -->
+    <skip />
     <string name="title_supported_service" msgid="4275535165812691571">"Μετά τη σύνδεση του τηλεφώνου σας με έναν δορυφόρο"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Ακολουθήστε τα βήματα, για να συνδεθείτε στον δορυφόρο"</string>
-    <string name="summary_supported_service" msgid="4320535903444834786">"Μπορείτε να στέλνετε μηνύματα σε οποιονδήποτε, ακόμα και στις υπηρεσίες έκτακτης ανάγκης. Το τηλέφωνό σας θα συνδεθεί ξανά σε ένα δίκτυο κινητής τηλεφωνίας όταν είναι διαθέσιμο."</string>
+    <!-- no translation found for summary_supported_service (6380533552383355977) -->
+    <skip />
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"Αφού συνδεθεί το τηλέφωνό σας, μπορείτε να στέλνετε μηνύματα σε οποιονδήποτε, συμπεριλαμβανομένων των υπηρεσιών έκτακτης ανάγκης."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Έχετε υπόψη τα εξής"</string>
     <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"Η συνδεσιμότητα μέσω δορυφόρου μπορεί να διαρκέσει περισσότερο και είναι διαθέσιμη μόνο σε ορισμένες περιοχές."</string>
     <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"Ο καιρός και ορισμένες κατασκευές ενδέχεται να επηρεάσουν τη δορυφορική σύνδεση."</string>
-    <string name="satellite_footer_content_section_3" msgid="4652426135622555607">"Η σύνδεση μέσω δορυφόρου δεν είναι διαθέσιμη."</string>
+    <!-- no translation found for satellite_footer_content_section_3 (4686525535095321485) -->
+    <skip />
     <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"Η σύνδεση για κλήσεις έκτακτης ανάγκης μπορεί να εξακολουθεί να είναι δυνατή."</string>
-    <string name="satellite_footer_content_section_5" msgid="3053256489735265540">"Απαιτείται δίκτυο κινητής τηλεφωνίας ή Wi‑Fi για προβολή εξωτερικών συνδέσμων."</string>
+    <!-- no translation found for satellite_footer_content_section_5 (2466353040832630785) -->
+    <skip />
     <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"Η επικοινωνία μέσω μηνυμάτων με τις υπηρεσίες έκτακτης ανάγκης μπορεί να μην είναι διαθέσιμη σε όλες τις περιοχές."</string>
     <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"Ίσως χρειαστεί λίγος χρόνος για να εμφανιστούν οι αλλαγές λογαριασμού στις Ρυθμίσεις. Για λεπτομέρειες, επικοινωνήστε με την εταιρεία <xliff:g id="CARRIER_NAME">%1$s</xliff:g>."</string>
     <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"Περισσότερα σχετικά με τη συνδεσιμότητα μέσω δορυφόρου"</string>
@@ -5098,7 +5119,8 @@
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"ανταλλαγή μηνυμάτων μέσω δορυφόρου"</string>
     <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"Η χρήση δεδομένων συμπεριλαμβάνεται στον λογαριασμό σας"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Υποστηριζόμενες εφαρμογές στο τηλέφωνό σας"</string>
-    <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"εμφάνιση όλων των εφαρμογών"</string>
+    <!-- no translation found for title_satellite_supported_app_list_entry (891155574898209245) -->
+    <skip />
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Υποστηριζόμενες εφαρμογές στο τηλέφωνό σας"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Δεν είναι δυνατή η προσθήκη μιας SIM"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Τερματίστε τη δορυφορική σύνδεση, προτού προσθέσετε μια κάρτα SIM"</string>

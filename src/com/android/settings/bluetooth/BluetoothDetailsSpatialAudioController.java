@@ -150,7 +150,11 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
     @Override
     protected void init(PreferenceScreen screen) {
         mProfilesContainer = screen.findPreference(getPreferenceKey());
-        if (com.android.settings.flags.Flags.enableBluetoothDeviceDetailsPolish()) {
+        if (com.android.settings.flags.Flags.enableBluetoothSettingsExpressiveDesign()) {
+            mProfilesContainer.setLayoutResource(
+                    com.android.settingslib.widget.theme.R.layout
+                            .settingslib_expressive_preference_category_no_title);
+        } else if (com.android.settings.flags.Flags.enableBluetoothDeviceDetailsPolish()) {
             mProfilesContainer.setLayoutResource(R.layout.preference_category_bluetooth_no_padding);
         }
         refresh();

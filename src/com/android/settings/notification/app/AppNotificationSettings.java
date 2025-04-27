@@ -128,7 +128,6 @@ public class AppNotificationSettings extends NotificationSettings {
         mControllers.add(new InvalidConversationPreferenceController(context, mBackend));
         mControllers.add(new BubbleSummaryPreferenceController(context, mBackend));
         mControllers.add(new NotificationsOffPreferenceController(context));
-        mControllers.add(new DeletedChannelsPreferenceController(context, mBackend));
         mControllers.add(new ShowMorePreferenceController(
                 context, mDependentFieldListener, mBackend));
         mControllers.add(new BundleListPreferenceController(context, mBackend));

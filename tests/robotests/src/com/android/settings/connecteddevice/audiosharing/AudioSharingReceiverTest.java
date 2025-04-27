@@ -324,6 +324,7 @@ public class AudioSharingReceiverTest {
         verify(mNm, never()).notify(
                 eq(com.android.settings.R.string.share_audio_notification_title),
                 any(Notification.class));
+        verifyNoInteractions(mFeatureFactory.metricsFeatureProvider);
     }
 
     @Test
@@ -340,6 +341,7 @@ public class AudioSharingReceiverTest {
         verify(mNm, never()).notify(
                 eq(com.android.settings.R.string.share_audio_notification_title),
                 any(Notification.class));
+        verifyNoInteractions(mFeatureFactory.metricsFeatureProvider);
     }
 
     @Test
@@ -355,6 +357,7 @@ public class AudioSharingReceiverTest {
         verify(mNm, never()).notify(
                 eq(com.android.settings.R.string.share_audio_notification_title),
                 any(Notification.class));
+        verifyNoInteractions(mFeatureFactory.metricsFeatureProvider);
     }
 
     @Test
@@ -377,6 +380,7 @@ public class AudioSharingReceiverTest {
                 AudioSharingJoinHandlerActivity.class.getName());
         assertThat(intentCaptor.getValue().getParcelableExtra(EXTRA_BLUETOOTH_DEVICE,
                 BluetoothDevice.class)).isEqualTo(mDevice);
+        verifyNoInteractions(mFeatureFactory.metricsFeatureProvider);
     }
 
     @Test
@@ -395,6 +399,7 @@ public class AudioSharingReceiverTest {
         verify(mNm, never()).notify(
                 eq(com.android.settings.R.string.share_audio_notification_title),
                 any(Notification.class));
+        verifyNoInteractions(mFeatureFactory.metricsFeatureProvider);
     }
 
     @Test
@@ -420,6 +425,7 @@ public class AudioSharingReceiverTest {
         verify(mNm, never()).notify(
                 eq(com.android.settings.R.string.share_audio_notification_title),
                 any(Notification.class));
+        verifyNoInteractions(mFeatureFactory.metricsFeatureProvider);
     }
 
     @Test
@@ -456,13 +462,14 @@ public class AudioSharingReceiverTest {
         verify(mNm, never()).notify(
                 eq(com.android.settings.R.string.share_audio_notification_title),
                 any(Notification.class));
+        verifyNoInteractions(mFeatureFactory.metricsFeatureProvider);
     }
 
     @Test
     @EnableFlags({Flags.FLAG_ENABLE_LE_AUDIO_SHARING, Flags.FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX,
             Flags.FLAG_PROMOTE_AUDIO_SHARING_FOR_SECOND_AUTO_CONNECTED_LEA_DEVICE})
     public void
-            broadcastReceiver_receiveAudioSharingDeviceConnected_alreadyHasSource_cancelNotif() {
+            broadcastReceiver_receiveAudioSharingDeviceConnected_alreadyHasSource_noNotif() {
         setAppInForeground(false);
         when(mBroadcast.isEnabled(null)).thenReturn(true);
         when(mBroadcast.getLatestBroadcastId()).thenReturn(1);
@@ -486,6 +493,7 @@ public class AudioSharingReceiverTest {
         verify(mNm, never()).notify(
                 eq(com.android.settings.R.string.share_audio_notification_title),
                 any(Notification.class));
+        verifyNoInteractions(mFeatureFactory.metricsFeatureProvider);
     }
 
     @Test
@@ -522,6 +530,8 @@ public class AudioSharingReceiverTest {
         verify(mContext, never()).startActivity(any());
         verify(mNm).notify(eq(com.android.settings.R.string.share_audio_notification_title),
                 any(Notification.class));
+        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
+                SettingsEnums.ACTION_SHOW_ADD_SOURCE_NOTIFICATION);
     }
 
     @Test
@@ -540,6 +550,7 @@ public class AudioSharingReceiverTest {
         verify(mAssistant, never()).addSource(eq(mDevice), any(BluetoothLeBroadcastMetadata.class),
                 anyBoolean());
         verify(mNm).cancel(com.android.settings.R.string.share_audio_notification_title);
+        verifyNoInteractions(mFeatureFactory.metricsFeatureProvider);
     }
 
     @Test
@@ -554,6 +565,7 @@ public class AudioSharingReceiverTest {
         verify(mAssistant, never()).addSource(any(BluetoothDevice.class),
                 any(BluetoothLeBroadcastMetadata.class), anyBoolean());
         verify(mNm).cancel(com.android.settings.R.string.share_audio_notification_title);
+        verifyNoInteractions(mFeatureFactory.metricsFeatureProvider);
     }
 
     @Test
@@ -571,6 +583,7 @@ public class AudioSharingReceiverTest {
         verify(mAssistant, never()).addSource(eq(mDevice), any(BluetoothLeBroadcastMetadata.class),
                 anyBoolean());
         verify(mNm).cancel(com.android.settings.R.string.share_audio_notification_title);
+        verifyNoInteractions(mFeatureFactory.metricsFeatureProvider);
     }
 
     @Test
@@ -589,6 +602,7 @@ public class AudioSharingReceiverTest {
         verify(mAssistant, never()).addSource(eq(mDevice), any(BluetoothLeBroadcastMetadata.class),
                 anyBoolean());
         verify(mNm).cancel(com.android.settings.R.string.share_audio_notification_title);
+        verifyNoInteractions(mFeatureFactory.metricsFeatureProvider);
     }
 
     @Test
@@ -613,6 +627,7 @@ public class AudioSharingReceiverTest {
         verify(mAssistant, never()).addSource(eq(mDevice), any(BluetoothLeBroadcastMetadata.class),
                 anyBoolean());
         verify(mNm).cancel(com.android.settings.R.string.share_audio_notification_title);
+        verifyNoInteractions(mFeatureFactory.metricsFeatureProvider);
     }
 
     @Test
@@ -648,6 +663,7 @@ public class AudioSharingReceiverTest {
         verify(mAssistant, never()).addSource(eq(mDevice), any(BluetoothLeBroadcastMetadata.class),
                 anyBoolean());
         verify(mNm).cancel(com.android.settings.R.string.share_audio_notification_title);
+        verifyNoInteractions(mFeatureFactory.metricsFeatureProvider);
     }
 
     @Test
@@ -676,6 +692,7 @@ public class AudioSharingReceiverTest {
         verify(mAssistant, never()).addSource(eq(mDevice), any(BluetoothLeBroadcastMetadata.class),
                 anyBoolean());
         verify(mNm).cancel(com.android.settings.R.string.share_audio_notification_title);
+        verifyNoInteractions(mFeatureFactory.metricsFeatureProvider);
     }
 
     @Test
@@ -710,6 +727,13 @@ public class AudioSharingReceiverTest {
 
         verify(mAssistant).addSource(mDevice, metadata, /* isGroupOp= */ false);
         verify(mNm).cancel(com.android.settings.R.string.share_audio_notification_title);
+        verify(mFeatureFactory.metricsFeatureProvider, never()).action(mContext,
+                SettingsEnums.ACTION_CANCEL_ADD_SOURCE_NOTIFICATION);
+        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
+                SettingsEnums.ACTION_AUDIO_SHARING_ADD_SOURCE,
+                AudioSharingUtils.buildAddSourceEventData(
+                        SettingsEnums.ACTION_SHOW_ADD_SOURCE_NOTIFICATION,
+                        /* userTriggered= */ false));
     }
 
     @Test
@@ -723,6 +747,8 @@ public class AudioSharingReceiverTest {
         audioSharingReceiver.onReceive(mContext, intent);
 
         verify(mNm).cancel(com.android.settings.R.string.share_audio_notification_title);
+        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
+                SettingsEnums.ACTION_CANCEL_ADD_SOURCE_NOTIFICATION);
     }
 
     private AudioSharingReceiver getAudioSharingReceiver(Intent intent) {

@@ -216,7 +216,7 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"このアプリの言語は [設定] から選択できません。"</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"アプリで利用できない言語の可能性があります。一部のアプリはこの設定に対応していない可能性があります。"</string>
     <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"アプリごとに言語を設定できます。"</string>
-    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"デバイス、アプリ、ウェブサイトでは、優先言語の一覧の中からサポートされている最初の言語が使用されます。\n\nその他の多くのアプリでも優先言語の地域を使用して、日付、数値、単位の形式を設定します。地域を変更するには、言語を追加してから、優先する地域を選択してください。"</string>
+    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"デバイス、アプリ、ウェブサイトでは、優先言語の一覧の中からサポートされている最初の言語が使用されます。\n\nその他の多くのアプリでも、優先言語の地域に基づいて、日付、数値、単位の形式が設定されます。地域を変更するには、言語を追加してから、優先する地域を選択してください。"</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"アプリごとに言語を選択するには、アプリの言語設定に移動してください。"</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"アプリの言語の詳細"</string>
     <string name="title_change_system_region" msgid="9196602029960380112">"地域を%sに変更しますか？"</string>
@@ -303,9 +303,9 @@
     <string name="roaming_enable" msgid="7845716016861535340">"ローミング中にデータサービスに接続します"</string>
     <string name="roaming_disable" msgid="729512894708689604">"ローミング中にデータサービスに接続します"</string>
     <string name="roaming_warning" msgid="7703647889040229013">"ローミング料金が発生する場合があります。"</string>
-    <string name="date_time_auto" msgid="1759599045100040686">"日時の自動設定"</string>
+    <string name="date_time_auto" msgid="1759599045100040686">"日時を自動設定"</string>
     <string name="date_time_auto_summary" msgid="8294938565417729698">"ネットワークとワイヤレス通信を使用して自動的に設定します"</string>
-    <string name="zone_auto_title" msgid="3520584257065861479">"タイムゾーンの自動設定"</string>
+    <string name="zone_auto_title" msgid="3520584257065861479">"タイムゾーンを自動設定"</string>
     <string name="zone_auto_title_summary" msgid="6540356783943375071">"付近のモバイル ネットワークに基づいて自動的に設定します"</string>
     <string name="auto_zone_requires_location_summary" msgid="2366567167956530124">"可能であればデバイスの位置情報で自動設定します"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"言語 / 地域で一般的な形式を使用する"</string>
@@ -455,6 +455,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"キャンセル"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"後で"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"同意する"</string>
+    <string name="security_settings_fingerprint_rename_description" msgid="6301505700382531086">"名前を変更するにはダブルタップします"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"指紋の設定をスキップしますか？"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"指紋の設定にかかる時間は 1～2 分です。スキップした場合は、後で設定から指紋を追加できます。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"このアイコンが表示される場合は、アプリへのログイン時や購入の承認時などの認証に指紋を使用してください"</string>
@@ -806,7 +807,7 @@
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"パターン"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="9028659554829888373">"PIN"</string>
     <string name="unlock_set_unlock_mode_password" msgid="8810609692771987513">"パスワード"</string>
-    <string name="unlock_disable_frp_warning_title" msgid="2545569051372893686">"デバイスのすべての種類のロック解除を削除しますか？"</string>
+    <string name="unlock_disable_frp_warning_title" msgid="2545569051372893686">"デバイスのロック解除をすべて削除しますか？"</string>
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"プロファイル保護を削除しますか？"</string>
     <string name="unlock_disable_frp_warning_content_pattern" msgid="6246242612158828147">"パターンは、紛失したり盗難に遭ったりした場合にスマートフォンを保護するものです"</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2259825377085781801">"パターンは、紛失したり盗難に遭ったりした場合にスマートフォンを保護するものです。<xliff:g id="EMPTY_LINE">
@@ -1029,7 +1030,7 @@
     <string name="nfc_disabled_summary" msgid="8737797364522502351">"NFC が OFF のため使用できません"</string>
     <string name="android_beam_explained" msgid="5684416131846701256">"この機能を ON にすると、別の NFC 対応のデバイスを近づけて持ち、アプリのコンテンツをビームすることができます。たとえば、ウェブページ、YouTube の動画、連絡先などをビームできます。\n\n2 つのデバイスを近づけて（通常は背面を向かい合わせにして）、画面をタップします。何をビームするかはアプリが判断します。"</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi-Fi"</string>
-    <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Wi-Fi の使用"</string>
+    <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Wi-Fi を使用"</string>
     <string name="wifi_networks_category" msgid="8011323954745036753">"ネットワーク"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Wi-Fiの設定"</string>
     <string name="wifi_select_network" msgid="6692897876718813259">"Wi-Fiを選択"</string>
@@ -1142,7 +1143,7 @@
     <string name="wifi_dpp_device_found" msgid="633646744759830603">"デバイスが見つかりました"</string>
     <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="7250369936882080107">"Wi‑Fi をこのデバイスと共有しています…"</string>
     <string name="wifi_dpp_connecting" msgid="2312769193202897589">"接続しています…"</string>
-    <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"アクセス ポイントの共有"</string>
+    <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"アクセス ポイントを共有"</string>
     <string name="wifi_dpp_lockscreen_title" msgid="5246641326066972419">"本人確認"</string>
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Wi‑Fi パスワード: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"アクセス ポイントのパスワード: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
@@ -1441,8 +1442,8 @@
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"充電時"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"ドッキング時"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"なし"</string>
-    <string name="screensaver_settings_summary_postured" msgid="1184119124847691954">"静止中"</string>
-    <string name="screensaver_settings_summary_postured_and_charging" msgid="1952047156927637506">"静止して充電中"</string>
+    <string name="screensaver_settings_summary_postured" msgid="6346392320858994892">"縦置き中"</string>
+    <string name="screensaver_settings_summary_postured_and_charging" msgid="5111797042509819055">"縦置きで充電中"</string>
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"ON / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"OFF"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"起動するタイミング"</string>
@@ -1612,8 +1613,8 @@
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"自動的に表示するタイミング"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"なし"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"充電中"</string>
-    <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"縦置きで充電中"</string>
-    <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"ドッキング時"</string>
+    <string name="when_to_show_hubmode_charging_and_upright" msgid="537039046490426922">"縦置きで充電中"</string>
+    <string name="when_to_show_hubmode_docked" msgid="8876633401873168284">"ホルダーで充電中"</string>
     <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"ワイヤレス充電の場合のみ"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"アクセスポイントの編集"</string>
@@ -1679,7 +1680,7 @@
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"ネットワーク設定をリセットしました"</string>
     <string name="reset_esim_error_title" msgid="6516110227665862295">"eSIM を消去できません"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"エラーが発生したため eSIM を消去できませんでした。\n\nデバイスを再起動してもう一度お試しください。"</string>
-    <string name="reset_private_space_delete_title" msgid="2555885198282572990">"プライベート スペースの削除"</string>
+    <string name="reset_private_space_delete_title" msgid="2555885198282572990">"プライベート スペースを削除"</string>
     <string name="reset_private_space_delete_dialog" msgid="2325106559507364385">"デバイスにプライベート スペースがある場合は完全に削除され、スペースに追加されていた Google アカウントはスペースから削除されます。\n\nスペースに含まれるすべてのアプリとそのデータも、スマートフォンの"<b>"内部ストレージ"</b>"から完全に削除されます。"</string>
     <string name="main_clear_title" msgid="277664302144837723">"すべてのデータを消去（初期設定にリセット）"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"すべてのデータを消去（初期設定にリセット）"</string>
@@ -1755,7 +1756,7 @@
     <string name="location_low_battery_use" msgid="5218950289737996431">"バッテリー使用量: 低"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="5004781272733434794">"Wi‑Fi スキャン"</string>
     <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"アプリやサービスに対し、Wi‑Fi が OFF の場合でも、常に Wi-Fi ネットワークをスキャンすることを許可します。位置情報を使用する機能やサービスで利便性が向上するなどの効果があります。"</string>
-    <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Bluetooth のスキャン"</string>
+    <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Bluetooth をスキャン"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"アプリやサービスに対し、Bluetooth が OFF の場合でも、常に付近のデバイスをスキャンすることを許可します。位置情報を使用する機能やサービスで利便性が向上するなどの効果があります。"</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"位置情報サービス"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"位置情報サービス"</string>
@@ -1774,7 +1775,7 @@
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"位置情報によるタイムゾーン検出は無効です"</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"位置情報によるタイムゾーン検出はサポートされていません"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"位置情報によるタイムゾーン検出は変更できません"</string>
-    <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"デバイスの位置情報が使用可能な場合、タイムゾーンの設定に使用されることがあります"</string>
+    <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"デバイスの位置情報が ON の場合、タイムゾーンの設定に活用します"</string>
     <string name="time_notifications_title" msgid="8654754577463543558">"通知"</string>
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"タイムゾーンの変更"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"タイムゾーンが自動的に更新されたときに通知を受け取る"</string>
@@ -1808,12 +1809,12 @@
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"指紋認証にはパターンが必要です"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"セキュリティ強化のため、PIN を設定してください"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"指紋認証には PIN が必要です"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"パスワードの再入力"</string>
+    <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"パスワードを再入力"</string>
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"仕事パスワードをもう一度入力してください"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"仕事用のパスワードを入力"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"パターンの確認"</string>
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"仕事用のパターンを入力"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"PIN の再入力"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"PIN を再入力"</string>
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"仕事用 PIN をもう一度入力してください"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"仕事用の PIN を入力"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"パスワードが一致しません"</string>
@@ -2311,6 +2312,12 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"マウスが画面の端に触れたときに画面を移動する"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"入力しながら拡大"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"文字の入力にあわせて拡大鏡が移動します"</string>
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_title (8804501318161774285) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_summary (3054371947104552843) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_unavailable_summary (2248787024685382054) -->
+    <skip />
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"アプリを切り替えても ON の状態を維持"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"拡大鏡は OFF にならず、アプリを切り替えるとズームアウトします"</string>
     <string name="accessibility_screen_magnification_always_on_unavailable_summary" msgid="3844732482037416038">"画面の一部のみを拡大している間は利用できません"</string>
@@ -2564,6 +2571,7 @@
     <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"補聴器のショートカット"</string>
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"補聴器両立性"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"テレコイルとの両立性を改善し、不要なノイズを軽減できます"</string>
+    <string name="hac_disclaimer_message" msgid="5279579026956312543"></string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"補聴器について"</string>
     <string name="accessibility_hearing_device_footer_summary" msgid="5513620078219951077">"ASHA や LE Audio に対応していない他の補聴器を探すには、[&lt;b&gt;新しいデバイスとペア設定&lt;/b&gt;] &gt; [&lt;b&gt;他のデバイスを見る&lt;/b&gt;] をタップします"</string>
     <string name="accessibility_hearing_device_footer_summary_tts" msgid="955527026890456959">"ASHA や LE Audio に対応していない他の補聴器を探すには、["<b>"新しいデバイスとペア設定"</b>"] &gt; ["<b>"他のデバイスを見る"</b>"] をタップします"</string>
@@ -3357,7 +3365,7 @@
     <string name="preferred_network_type_title" msgid="812509938714590857">"優先ネットワークタイプ"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE（推奨）"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"MMS メッセージ"</string>
-    <string name="mms_message_summary" msgid="2855847140141698341">"モバイルデータが OFF のときに送受信します"</string>
+    <string name="mms_message_summary" msgid="2855847140141698341">"モバイルデータが OFF でも送受信します"</string>
     <string name="auto_data_switch_title" msgid="5862200603753603464">"モバイルデータを自動的に切替"</string>
     <string name="auto_data_switch_summary" msgid="1934340931995429057">"接続状況に応じて、このネットワークを一時的に使用します"</string>
     <string name="work_sim_title" msgid="8999872928646924429">"仕事用SIM"</string>
@@ -4137,14 +4145,14 @@
     <string name="zen_mode_summary_alarms_only_by_hour" msgid="7400910210950788163">"{count,plural, =1{{time}まで1時間、アラームのみに変更します}other{{time}まで#時間、アラームのみに変更します}}"</string>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"<xliff:g id="FORMATTEDTIME">%1$s</xliff:g>までアラームのみに変更します"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"常に割り込みに変更します"</string>
-    <string name="zen_mode_rename_title" msgid="8146882272966214558">"モードの編集"</string>
+    <string name="zen_mode_rename_title" msgid="8146882272966214558">"モードを編集"</string>
     <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"モードの作成"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"カスタムモード"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"モード名"</string>
     <string name="zen_mode_edit_name_empty_error" msgid="5788063278827188275">"モード名を指定してください"</string>
     <string name="zen_mode_edit_choose_icon_title" msgid="6452801577128788362">"アイコンを選択してください"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"カレンダーの予定"</string>
-    <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"おやすみ時間のルーティン"</string>
+    <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"おやすみ時間のスケジュール"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"車の運転中"</string>
     <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"アプリの設定"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"<xliff:g id="APP_NAME">%1$s</xliff:g>の情報と設定"</string>
@@ -4158,7 +4166,7 @@
     <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"通常のスケジュールに沿うモードを設定します"</string>
     <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"カレンダーの予定や招待の返答を同期するモードを設定します"</string>
     <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"心地よい眠りを習慣にできるよう、アラームを設定し、画面を暗くして、通知をブロックします。"</string>
-    <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"運転中の安全を向上させて、運転に集中できるようにします。"</string>
+    <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"安全第一で運転に集中できるようにします。"</string>
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"集中の妨げになるものをデバイスからブロックします"</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"気を散らすものを排除して、静かな環境を作ります"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"デバイスの環境や設定をユーザーごとにカスタマイズします"</string>
@@ -4166,7 +4174,7 @@
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"定期的なスケジュールに沿うモードを設定"</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"一日の予定をデバイスで常に把握"</string>
     <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"最高の気分で目覚めましょう"</string>
-    <string name="zen_mode_inspiration_driving" msgid="8237825783857483135">"運転中は安全第一"</string>
+    <string name="zen_mode_inspiration_driving" msgid="8237825783857483135">"運転中は安全を最優先してください"</string>
     <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"集中して力を最大限に発揮"</string>
     <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"礼儀を尽くす必要があるとき"</string>
     <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"使いこなせるようにサポート"</string>
@@ -4661,8 +4669,8 @@
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"ウォレットを開く"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"ロック画面のショートカットを変更しますか？"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g>はロック画面のショートカットでもあります。変更しますか？"</string>
-    <string name="double_tap_power_wallet_footer_title" msgid="5417023303339032410">"ウォレットは利用できません。現在のデフォルトのウォレット アプリはジェスチャーに対応していません。"</string>
-    <string name="double_tap_power_wallet_footer_learn_more_text" msgid="1267822422365445657">"変更するには、ここをタップしてください。"</string>
+    <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"現在のデフォルトのウォレット アプリは、このジェスチャーに対応していません。"</string>
+    <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"デフォルトのウォレットを変更する"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"フリップしてカメラを切り替え"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"ナビゲーション モード"</string>
@@ -5058,31 +5066,31 @@
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"価格設定については、ネットワーク プロバイダにお問い合わせください。"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"ネットワーク モード <xliff:g id="NETWORKMODEID">%1$d</xliff:g> は無効です。無視してください。"</string>
     <string name="satellite_setting" msgid="4650503806634496443">"衛星接続"</string>
-    <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"衛星通信によりテキスト メッセージを送受信します。お客様のアカウントに含まれています。"</string>
-    <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"衛星通信によりテキスト メッセージを送受信します。お客様のアカウントではご利用になれません。"</string>
-    <string name="satellite_setting_summary_without_entitlement" msgid="5284998840770992554">"衛星通信によりテキスト メッセージを送受信します。詳細については携帯通信会社にお問い合わせください。"</string>
+    <string name="satellite_setting_enabled_summary" msgid="2114544331827193266">"衛星経由でテキスト メッセージを送受信します。お客様のアカウントに含まれています。"</string>
+    <string name="satellite_setting_disabled_summary" msgid="8193743637158939283">"衛星経由でテキスト メッセージを送受信します。お客様のアカウントではご利用になれません。"</string>
+    <string name="satellite_setting_summary_without_entitlement" msgid="7010003955751606421">"衛星経由でテキスト メッセージを送受信します。詳しくは携帯通信会社にお問い合わせください。"</string>
     <string name="keywords_satellite_setting" msgid="613553612424945946">"衛星通信メッセージ, 衛星接続"</string>
     <string name="category_name_about_satellite_connectivity" msgid="3971142716898783631">"衛星接続について"</string>
-    <string name="description_about_satellite_setting" msgid="5539359064330584941">"対応する <xliff:g id="CARRIER_NAME">%1$s</xliff:g> アカウントを使用して、衛星経由でテキスト メッセージを送受信したり、一部のアプリを使用したりできます"</string>
+    <string name="description_about_satellite_setting" msgid="8212911110428998767">"対象の <xliff:g id="CARRIER_NAME">%1$s</xliff:g> アカウントを使用して、衛星経由でテキスト メッセージを送受信できます"</string>
     <string name="category_title_your_satellite_plan" msgid="8169426217950247126">"あなたの <xliff:g id="CARRIER_NAME">%1$s</xliff:g> アカウント"</string>
-    <string name="title_have_satellite_plan" msgid="2048372355699977947">"衛星通信メッセージはお客様のアカウントに含まれています"</string>
-    <string name="title_no_satellite_plan" msgid="2876056203035197505">"衛星通信メッセージはお客様のアカウントに含まれていません"</string>
+    <string name="title_have_satellite_plan" msgid="857337944804101443">"お客様のアカウントはメッセージの送信が可能です"</string>
+    <string name="title_no_satellite_plan" msgid="7255726881685672846">"お客様のアカウントはメッセージ機能を利用できません"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"詳細"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"仕組み"</string>
-    <string name="title_satellite_connection_guide" msgid="3294802307913609072">"モバイル ネットワークがない場合"</string>
+    <string name="title_satellite_connection_guide" msgid="4730763872034574368">"モバイル ネットワークや Wi-Fi ネットワークが利用できない場合"</string>
     <string name="title_satellite_connection_guide_for_manual_type" msgid="7223875100977941341">"電話番号にテキストを送信する"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"お使いのスマートフォンを衛星通信に自動接続します。接続を最大限良好にするには、外に出て、空がよく見える場所に移動してください"</string>
-    <string name="summary_satellite_connection_guide_for_manual_type" msgid="5075149380084376662">"モバイル ネットワークを利用できない場合、衛星通信メッセージを使用するためのオプションが表示されます。"</string>
+    <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"モバイル ネットワークを利用できない場合、衛星を使用するためのオプションが表示されます。"</string>
     <string name="title_supported_service" msgid="4275535165812691571">"スマートフォンが衛星通信に接続された後"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"手順に沿って衛星に接続します"</string>
-    <string name="summary_supported_service" msgid="4320535903444834786">"テキスト メッセージは、緊急サービスを含め誰にでも送信できます。モバイル ネットワークが利用できる状態になると再接続されます。"</string>
+    <string name="summary_supported_service" msgid="6380533552383355977">"テキスト メッセージは、緊急サービスを含め誰にでも送信できます。一部のアプリでは、データの使用（上限あり）も可能です。モバイル ネットワークが利用できる状態になると再接続されます。"</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"スマートフォンが接続されたら、緊急サービスを含め誰にでもテキスト メッセージを送信できます。"</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"留意点"</string>
     <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"衛星接続は、利用できるエリアが制限され、通常より時間がかかることがあります。"</string>
     <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"天候やなんらかの構造物が、衛星接続の接続に影響することがあります。"</string>
-    <string name="satellite_footer_content_section_3" msgid="4652426135622555607">"衛星通信による通話はご利用いただけません。"</string>
+    <string name="satellite_footer_content_section_3" msgid="4686525535095321485">"衛星による通話はご利用いただけません。"</string>
     <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"緊急通報はつながる場合があります。"</string>
-    <string name="satellite_footer_content_section_5" msgid="3053256489735265540">"外部リンクを表示するには、モバイル ネットワークまたは Wi-Fi ネットワークが必要です。"</string>
+    <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"外部リンクを表示するには、モバイル ネットワークまたは Wi-Fi ネットワークが必要です。"</string>
     <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"緊急サービスへのテキスト送信は、地域によっては利用できない場合があります。"</string>
     <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"変更内容がアカウントの [設定] に反映されるまでに時間がかかることがあります。詳細については、<xliff:g id="CARRIER_NAME">%1$s</xliff:g> にお問い合わせください。"</string>
     <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"衛星接続の詳細"</string>
@@ -5094,7 +5102,7 @@
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"衛星通信メッセージ"</string>
     <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"お客様のアカウントはデータの送信が可能です"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"スマートフォンでサポートされているアプリ"</string>
-    <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"アプリをすべて表示"</string>
+    <string name="title_satellite_supported_app_list_entry" msgid="891155574898209245">"衛星通信を利用できるアプリをすべて表示する"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"スマートフォンでサポートされているアプリ"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"SIM を追加できません"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"SIM を追加する前に衛星通信を終了してください"</string>
@@ -5345,7 +5353,7 @@
     <string name="disable_screen_share_protections_for_apps_and_notifications_summary" msgid="5379583403909210858">"開始予定の画面共有セッションでアプリのデリケートなコンテンツに対するシステム保護を OFF にします"</string>
     <string name="media_controls_title" msgid="403271085636252597">"メディア"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"メディア プレーヤーを固定する"</string>
-    <string name="media_controls_resume_description" msgid="3163482266454802097">"再生をすばやく再開できるよう、[クイック設定] にメディア プレーヤーを開いたままにします"</string>
+    <string name="media_controls_resume_description" msgid="3163482266454802097">"再生をすばやく再開できるよう、[クイック設定] にメディア プレーヤーを開いたままにする"</string>
     <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"ロック画面にメディアを表示する"</string>
     <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"再生をすばやく再開できるよう、ロック画面にメディア プレーヤーを開いたままにする"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"プレーヤーを非表示"</string>
@@ -5442,7 +5450,7 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"電話番号が指定されていません。"</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
     <string name="enable_2g_title" msgid="5657132300321750181">"2G ネットワークの保護"</string>
-    <string name="enable_2g_summary" msgid="6317192326100541563">"安全性の低い 2G ネットワークは使用されません。一部の地域では接続が制限される場合があります。緊急通報は常に利用可能です。"</string>
+    <string name="enable_2g_summary" msgid="6317192326100541563">"安全性の低い 2G ネットワークを使用しません。ON にすると、一部の地域では接続が制限される場合があります。緊急通報は常に利用可能です。"</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> を利用するには、2G が必要です"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"暗号化されたネットワークのみを許可する"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"セキュリティは強化されますが、場所によってモバイル ネットワーク接続が制限される可能性があります。緊急通報は常に許可されます。"</string>

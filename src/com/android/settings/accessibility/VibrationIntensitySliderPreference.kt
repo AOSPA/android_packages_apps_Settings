@@ -25,8 +25,8 @@ import androidx.preference.Preference.OnPreferenceChangeListener
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.IntRangeValuePreference
 import com.android.settingslib.metadata.PreferenceMetadata
-import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.SliderPreference
+import com.android.settingslib.widget.SliderPreferenceBinding
 import kotlin.math.min
 
 /**
@@ -41,9 +41,7 @@ open class VibrationIntensitySliderPreference(
     @Usage val vibrationUsage: Int,
     @StringRes override val title: Int = 0,
     @StringRes override val summary: Int = 0,
-) : IntRangeValuePreference,
-    OnPreferenceChangeListener,
-    PreferenceBinding {
+) : IntRangeValuePreference, SliderPreferenceBinding, OnPreferenceChangeListener {
 
     override fun getMinValue(context: Context) = Vibrator.VIBRATION_INTENSITY_OFF
 
@@ -55,8 +53,6 @@ open class VibrationIntensitySliderPreference(
     override fun storage(context: Context): KeyValueStore =
         VibrationIntensitySettingsStore(context, vibrationUsage)
 
-    override fun createWidget(context: Context) = SliderPreference(context)
-
     @CallSuper
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
@@ -65,7 +61,6 @@ open class VibrationIntensitySliderPreference(
             // Haptics previews played by the Settings app don't bypass user settings to be played.
             // The sliders continuously updates the intensity value so the previews can apply them.
             updatesContinuously = true
-            value = preferenceDataStore!!.getInt(key, 0)
         }
     }
 

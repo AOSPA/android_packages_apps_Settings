@@ -24,8 +24,6 @@ import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
 import static android.service.notification.Adjustment.KEY_TYPE;
 
-import static com.android.server.notification.Flags.notificationHideUnusedChannels;
-
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.app.settings.SettingsEnums;

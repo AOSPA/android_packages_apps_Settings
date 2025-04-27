@@ -548,6 +548,21 @@ public class BiometricUtils {
                 ThemeHelper.shouldApplyGlifExpressiveStyle(context);
     }
 
+    /**
+     * Check if current SUW/Settings Page is using Expressive Style or Pre-Expressive Style.
+     * @param context that for applying Expressive Style
+     * @param intent intent The original intent that was used to start the step, usually
+     *               via {@link Activity#getIntent()}, Null will assume calling from Settings Flow.
+     * @return true if device using Expressive Style theme, otherwise false.
+     */
+    public static boolean useExpressiveStyle(@NonNull Context context, @Nullable Intent intent) {
+        if (WizardManagerHelper.isAnySetupWizard(intent)) {
+            return ThemeHelper.shouldApplyGlifExpressiveStyle(context);
+        } else {
+            return SettingsThemeHelper.isExpressiveTheme(context);
+        }
+    }
+
     private static String capitalize(final String input) {
         return Character.toUpperCase(input.charAt(0)) + input.substring(1);
     }

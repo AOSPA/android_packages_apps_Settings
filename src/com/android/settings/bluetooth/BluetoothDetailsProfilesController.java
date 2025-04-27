@@ -128,19 +128,16 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         refresh();
     }
 
-    /** Sets whether it should show an extra padding on top of the preference. */
-    public void setHasExtraSpace(boolean hasExtraSpace) {
-        if (hasExtraSpace) {
-            mProfilesContainer.setLayoutResource(R.layout.preference_bluetooth_profile_category);
-        } else {
-            mProfilesContainer.setLayoutResource(R.layout.preference_category_bluetooth_no_padding);
-        }
-    }
-
     @Override
     protected void init(PreferenceScreen screen) {
         mProfilesContainer = (PreferenceCategory) screen.findPreference(getPreferenceKey());
-        mProfilesContainer.setLayoutResource(R.layout.preference_bluetooth_profile_category);
+        if (Flags.enableBluetoothSettingsExpressiveDesign()) {
+            mProfilesContainer.setLayoutResource(
+                    com.android.settingslib.widget.theme.R.layout
+                            .settingslib_expressive_preference_category_no_title);
+        } else {
+            mProfilesContainer.setLayoutResource(R.layout.preference_bluetooth_profile_category);
+        }
         // Call refresh here even though it will get called later in onResume, to avoid the
         // list of switches appearing to "pop" into the page.
         refresh();

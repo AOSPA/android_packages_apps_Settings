@@ -18,6 +18,8 @@ package com.android.settings.supervision
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.content.pm.ResolveInfo
 import android.provider.Settings
 import android.provider.Settings.Secure.SEARCH_CONTENT_FILTERS_ENABLED
 import android.provider.Settings.SettingNotFoundException
@@ -36,11 +38,13 @@ import org.junit.Assert.assertThrows
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
 import org.mockito.kotlin.any
 import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.never
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
 
@@ -50,6 +54,7 @@ class SupervisionSafeSearchPreferenceTest {
 
     private lateinit var mockLifeCycleContext: PreferenceLifecycleContext
     private lateinit var mockActivityResultLauncher: ActivityResultLauncher<Intent>
+    private lateinit var mockPackageManager: PackageManager
     private lateinit var dataStore: SupervisionSafeSearchDataStore
     private lateinit var searchFilterOffPreference: SupervisionSearchFilterOffPreference
     private lateinit var searchFilterOnPreference: SupervisionSearchFilterOnPreference
@@ -60,6 +65,7 @@ class SupervisionSafeSearchPreferenceTest {
         mockLifeCycleContext = mock(PreferenceLifecycleContext::class.java)
         mockActivityResultLauncher =
             mock(ActivityResultLauncher::class.java) as ActivityResultLauncher<Intent>
+        mockPackageManager = mock(PackageManager::class.java)
         mockConfirmSupervisionCredentialsActivity()
         searchFilterOffPreference = SupervisionSearchFilterOffPreference(dataStore)
         searchFilterOffPreference.onCreate(mockLifeCycleContext)
@@ -108,7 +114,7 @@ class SupervisionSafeSearchPreferenceTest {
     }
 
     @Test
-    fun clickBlockExplicitSites_failedToEnablesFilter_activityFailed() {
+    fun clickFilterOn_failedToEnablesFilter_activityFailed() {
         Settings.Secure.putInt(context.getContentResolver(), SEARCH_CONTENT_FILTERS_ENABLED, 0)
         val filterOnWidget = getFilterOnWidget()
         assertThat(filterOnWidget.isChecked).isFalse()
@@ -127,7 +133,26 @@ class SupervisionSafeSearchPreferenceTest {
     }
 
     @Test
-    fun clickBlockExplicitSites_enablesFilter() {
+    fun clickFilterOn_unresolvedIntent_activityNotLaunched() {
+        `when`(mockPackageManager.queryIntentActivitiesAsUser(any<Intent>(), anyInt(), anyInt()))
+            .thenReturn(emptyList<ResolveInfo>())
+
+        Settings.Secure.putInt(context.getContentResolver(), SEARCH_CONTENT_FILTERS_ENABLED, 0)
+        val filterOnWidget = getFilterOnWidget()
+        assertThat(filterOnWidget.isChecked).isFalse()
+
+        filterOnWidget.performClick()
+
+        verify(mockActivityResultLauncher, never()).launch(any())
+        assertThat(
+                Settings.Secure.getInt(context.getContentResolver(), SEARCH_CONTENT_FILTERS_ENABLED)
+            )
+            .isEqualTo(0)
+        assertThat(filterOnWidget.isChecked).isFalse()
+    }
+
+    @Test
+    fun clickFilterOn_enablesFilter() {
         Settings.Secure.putInt(context.getContentResolver(), SEARCH_CONTENT_FILTERS_ENABLED, 0)
         val filterOnWidget = getFilterOnWidget()
         assertThat(filterOnWidget.isChecked).isFalse()
@@ -144,7 +169,7 @@ class SupervisionSafeSearchPreferenceTest {
     }
 
     @Test
-    fun clickAllowAllSites_disablesFilter() {
+    fun clickFilterOff_disablesFilter() {
         Settings.Secure.putInt(context.getContentResolver(), SEARCH_CONTENT_FILTERS_ENABLED, 1)
         val filterOffWidget = getFilterOffWidget()
         assertThat(filterOffWidget.isChecked).isFalse()
@@ -185,6 +210,9 @@ class SupervisionSafeSearchPreferenceTest {
     }
 
     private fun mockConfirmSupervisionCredentialsActivity() {
+        `when`(mockPackageManager.queryIntentActivitiesAsUser(any<Intent>(), anyInt(), anyInt()))
+            .thenReturn(listOf(ResolveInfo()))
+        `when`(mockLifeCycleContext.packageManager).thenReturn(mockPackageManager)
         `when`(mockLifeCycleContext.registerForActivityResult(any<StartActivityForResult>(), any()))
             .thenReturn(mockActivityResultLauncher)
     }
@@ -194,7 +222,9 @@ class SupervisionSafeSearchPreferenceTest {
         verify(mockActivityResultLauncher).launch(intentCaptor.capture())
 
         assertThat(intentCaptor.allValues.size).isEqualTo(1)
-        assertThat(intentCaptor.firstValue.component?.className)
-            .isEqualTo(ConfirmSupervisionCredentialsActivity::class.java.name)
+        val intent = intentCaptor.firstValue
+        assertThat(intent.action)
+            .isEqualTo("android.app.supervision.action.CONFIRM_SUPERVISION_CREDENTIALS")
+        assertThat(intent.`package`).isEqualTo("com.android.settings")
     }
 }

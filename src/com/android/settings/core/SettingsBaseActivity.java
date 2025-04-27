@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,6 +45,7 @@ import com.android.settingslib.collapsingtoolbar.FloatingToolbarHandler;
 import com.android.settingslib.collapsingtoolbar.widget.ScrollableToolbarItemLayout;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 import com.android.settingslib.transition.SettingsTransitionHelper.TransitionType;
+import com.android.settingslib.widget.ExpressiveDesignEnabledProvider;
 import com.android.settingslib.widget.SettingsThemeHelper;
 import com.android.window.flags.Flags;
 
@@ -59,7 +61,7 @@ import java.util.List;
 
 /** Base activity for Settings pages */
 public class SettingsBaseActivity extends FragmentActivity implements CategoryHandler,
-        FloatingToolbarHandler {
+        FloatingToolbarHandler, ExpressiveDesignEnabledProvider {
 
     /**
      * What type of page transition should be apply.
@@ -74,6 +76,9 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
             com.android.settingslib.collapsingtoolbar.R.layout.settingslib_expressive_collapsing_toolbar_base_layout;
     private static final int COLLAPSING_LAYOUT_ID =
             com.android.settingslib.collapsingtoolbar.R.layout.collapsing_toolbar_base_layout;
+
+    private static final String SETUPWIZARD_THEME_PROP = "setupwizard.theme";
+    private static final String SETUPWIZARD_THEME_PREFIX = "glif_expressive";
 
 
     protected CategoryMixin mCategoryMixin;
@@ -320,6 +325,15 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
             mToolbardelegate = new CollapsingToolbarDelegate(new EmptyDelegateCallback(), true);
         }
         return mToolbardelegate;
+    }
+
+    @Override
+    public boolean isExpressiveDesignEnabled() {
+        if (!WizardManagerHelper.isAnySetupWizard(getIntent())) {
+            return SettingsThemeHelper.isExpressiveDesignEnabled();
+        }
+
+        return SystemProperties.get(SETUPWIZARD_THEME_PROP).startsWith(SETUPWIZARD_THEME_PREFIX);
     }
 
     private class EmptyDelegateCallback implements CollapsingToolbarDelegate.HostCallback {

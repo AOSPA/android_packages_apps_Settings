@@ -16,14 +16,16 @@
 package com.android.settings.supervision
 
 import android.app.KeyguardManager
+import android.app.role.RoleManager
 import android.content.Context
 import android.os.UserHandle
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
+import android.util.Log
 import androidx.annotation.VisibleForTesting
 
 /** Convenience methods for interacting with the supervising user profile. */
-open class SupervisionHelper private constructor(context: Context) {
+open class SupervisionHelper private constructor(private val context: Context) {
     private val mUserManager = context.getSystemService(UserManager::class.java)
     private val mKeyguardManager = context.getSystemService(KeyguardManager::class.java)
 
@@ -41,7 +43,28 @@ open class SupervisionHelper private constructor(context: Context) {
         return mKeyguardManager?.isDeviceSecure(supervisingUserId) ?: false
     }
 
+    /**
+     * Retrieves the package name of the system supervision app.
+     *
+     * @return The package name of the system supervision app, or null if not found.
+     */
+    fun getSupervisionPackageName(): String? {
+        val roleManager = context.getSystemService(RoleManager::class.java)
+        if (roleManager == null) {
+            Log.w(TAG, "RoleManager service not available.")
+            return null
+        }
+
+        val roleHolders = roleManager.getRoleHolders(RoleManager.ROLE_SYSTEM_SUPERVISION)
+        if (roleHolders.isEmpty()) Log.w(TAG, "No package holding the system supervision role.")
+
+        // supervision role is exclusive, only one app may hold this role in a user
+        return roleHolders.firstOrNull()
+    }
+
     companion object {
+        private const val TAG = "SupervisionSettings"
+
         @Volatile @VisibleForTesting var sInstance: SupervisionHelper? = null
 
         fun getInstance(context: Context): SupervisionHelper {

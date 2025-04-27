@@ -26,45 +26,32 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.accessibility.AccessibilityShortcutController;
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityFragmentUtils;
-import com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment;
+import com.android.settings.accessibility.ShortcutFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
-import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.widget.IllustrationPreference;
 import com.android.settingslib.widget.MainSwitchPreference;
-
-import java.util.List;
 
 /**
  * Fragment for One-handed mode settings
  *
- * <p>The child {@link AccessibilityShortcutPreferenceFragment} shows the actual UI for
+ * <p>The child {@link ShortcutFragment} shows the actual UI for
  * providing basic accessibility shortcut service setup.
  */
 @SearchIndexable(forTarget = SearchIndexable.MOBILE)
-public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
+public class OneHandedSettings extends ShortcutFragment {
 
     private static final String TAG = "OneHandedSettings";
-    @VisibleForTesting
-    static final String ONE_HANDED_SHORTCUT_KEY = "one_handed_shortcuts_preference";
     private static final String ONE_HANDED_ILLUSTRATION_KEY = "one_handed_header";
     protected static final String ONE_HANDED_MAIN_SWITCH_KEY =
             "gesture_one_handed_mode_enabled_main_switch";
-    private String mFeatureName;
     private OneHandedSettingsUtils mUtils;
-
-    /**
-     * One handed settings no need to set any restriction key for pin protected.
-     */
-    public OneHandedSettings() {
-        super(/* restrictionKey= */ null);
-    }
 
     @Override
     protected void updatePreferenceStates() {
@@ -97,21 +84,6 @@ public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
     }
 
     @Override
-    protected String getShortcutPreferenceKey() {
-        return ONE_HANDED_SHORTCUT_KEY;
-    }
-
-    @Override
-    protected CharSequence getShortcutTitle() {
-        return getText(R.string.one_handed_mode_shortcut_title);
-    }
-
-    @Override
-    protected boolean showGeneralCategory() {
-        return true;
-    }
-
-    @Override
     public void onStart() {
         super.onStart();
         mUtils = new OneHandedSettingsUtils(this.getContext());
@@ -130,16 +102,6 @@ public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
     }
 
     @Override
-    protected ComponentName getComponentName() {
-        return AccessibilityShortcutController.ONE_HANDED_COMPONENT_NAME;
-    }
-
-    @Override
-    protected CharSequence getLabelName() {
-        return mFeatureName;
-    }
-
-    @Override
     protected int getPreferenceScreenResId() {
         return R.xml.one_handed_settings;
     }
@@ -149,33 +111,11 @@ public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
         return TAG;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        mFeatureName = getContext().getString(R.string.one_handed_title);
-        super.onCreate(savedInstanceState);
-    }
-
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.one_handed_settings) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     return OneHandedSettingsUtils.isSupportOneHandedMode();
-                }
-
-                @Override
-                public List<SearchIndexableRaw> getRawDataToIndex(Context context,
-                        boolean enabled) {
-                    final List<SearchIndexableRaw> rawData =
-                            super.getRawDataToIndex(context, enabled);
-                    rawData.add(createShortcutPreferenceSearchData(context));
-                    return rawData;
-                }
-
-                private SearchIndexableRaw createShortcutPreferenceSearchData(Context context) {
-                    final SearchIndexableRaw raw = new SearchIndexableRaw(context);
-                    raw.key = ONE_HANDED_SHORTCUT_KEY;
-                    raw.title = context.getString(R.string.one_handed_mode_shortcut_title);
-                    return raw;
                 }
             };
 
@@ -185,5 +125,17 @@ public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
         RecyclerView recyclerView =
                 super.onCreateRecyclerView(inflater, parent, savedInstanceState);
         return AccessibilityFragmentUtils.addCollectionInfoToAccessibilityDelegate(recyclerView);
+    }
+
+    @NonNull
+    @Override
+    public CharSequence getFeatureName() {
+        return getText(R.string.one_handed_title);
+    }
+
+    @NonNull
+    @Override
+    public ComponentName getFeatureComponentName() {
+        return AccessibilityShortcutController.ONE_HANDED_COMPONENT_NAME;
     }
 }

@@ -29,10 +29,10 @@ import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupdesign.GlifPreferenceLayout;
-import com.google.android.setupdesign.util.ThemeHelper;
 
 public class ToggleSelectToSpeakPreferenceFragmentForSetupWizard
         extends InvisibleToggleAccessibilityServicePreferenceFragment {
@@ -78,7 +78,7 @@ public class ToggleSelectToSpeakPreferenceFragmentForSetupWizard
 
     @Override
     protected RecyclerView.Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
-        if (ThemeHelper.shouldApplyGlifExpressiveStyle(getContext())) {
+        if (SettingsThemeHelper.isExpressiveTheme(requireContext())) {
             return new PreferenceAdapterInSuw(preferenceScreen);
         }
         return super.onCreateAdapter(preferenceScreen);

@@ -16,8 +16,6 @@
 
 package com.android.settings.gestures;
 
-import static com.android.settings.gestures.OneHandedSettings.ONE_HANDED_SHORTCUT_KEY;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
@@ -27,8 +25,6 @@ import android.os.SystemProperties;
 import android.provider.SearchIndexableResource;
 
 import androidx.test.core.app.ApplicationProvider;
-
-import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -89,15 +85,6 @@ public class OneHandedSettingsTest {
                 ReflectionHelpers.ClassParameter.from(Context.class, mContext));
         final boolean isEnabled = (Boolean) obj;
         assertThat(isEnabled).isFalse();
-    }
-
-    @Test
-    public void getRawDataToIndex_returnsOnlyShortcutKey() {
-        final List<SearchIndexableRaw> rawData = OneHandedSettings
-                .SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, true);
-        final List<String> actualSearchKeys = rawData.stream().map(raw -> raw.key).toList();
-
-        assertThat(actualSearchKeys).containsExactly(ONE_HANDED_SHORTCUT_KEY);
     }
 
     @Test

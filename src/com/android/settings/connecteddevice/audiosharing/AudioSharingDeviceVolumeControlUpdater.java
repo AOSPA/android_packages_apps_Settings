@@ -87,7 +87,6 @@ public class AudioSharingDeviceVolumeControlUpdater extends BluetoothDeviceUpdat
             vPreference.initialize();
             vPreference.setKey(getPreferenceKeyPrefix() + cachedDevice.hashCode());
             vPreference.setIcon(com.android.settingslib.R.drawable.ic_bt_untethered_earbuds);
-            vPreference.setTitle(cachedDevice.getName());
             mPreferenceMap.put(device, vPreference);
             mDevicePreferenceCallback.onDeviceAdded(vPreference);
         }

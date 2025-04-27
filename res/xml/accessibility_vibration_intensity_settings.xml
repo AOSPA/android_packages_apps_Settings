@@ -30,7 +30,7 @@
         android:title="@string/accessibility_call_vibration_category_title">
 
         <com.android.settingslib.widget.SliderPreference
-            android:key="vibration_intensity_preference_ring"
+            android:key="ring_vibration_intensity"
             android:title="@string/accessibility_ring_vibration_title"
             app:keywords="@string/keywords_ring_vibration"
             app:controller="com.android.settings.accessibility.RingVibrationIntensityPreferenceController" />
@@ -48,13 +48,13 @@
         android:title="@string/accessibility_notification_alarm_vibration_category_title">
 
         <com.android.settingslib.widget.SliderPreference
-            android:key="vibration_intensity_preference_notification"
+            android:key="notification_vibration_intensity"
             android:title="@string/accessibility_notification_vibration_title"
             app:keywords="@string/keywords_notification_vibration"
             app:controller="com.android.settings.accessibility.NotificationVibrationIntensityPreferenceController" />
 
         <com.android.settingslib.widget.SliderPreference
-            android:key="vibration_intensity_preference_alarm"
+            android:key="alarm_vibration_intensity"
             android:title="@string/accessibility_alarm_vibration_title"
             app:keywords="@string/keywords_alarm_vibration"
             app:controller="com.android.settings.accessibility.AlarmVibrationIntensityPreferenceController" />
@@ -66,13 +66,13 @@
         android:title="@string/accessibility_interactive_haptics_category_title">
 
         <com.android.settingslib.widget.SliderPreference
-            android:key="vibration_intensity_preference_touch"
+            android:key="haptic_feedback_intensity"
             android:title="@string/accessibility_touch_vibration_title"
             app:keywords="@string/keywords_touch_vibration"
             app:controller="com.android.settings.accessibility.HapticFeedbackIntensityPreferenceController" />
 
         <com.android.settingslib.widget.SliderPreference
-            android:key="vibration_intensity_preference_media"
+            android:key="media_vibration_intensity"
             android:title="@string/accessibility_media_vibration_title"
             app:keywords="@string/keywords_media_vibration"
             app:controller="com.android.settings.accessibility.MediaVibrationIntensityPreferenceController" />

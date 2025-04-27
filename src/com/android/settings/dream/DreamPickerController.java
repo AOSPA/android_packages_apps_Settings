@@ -160,6 +160,11 @@ public class DreamPickerController extends BasePreferenceController {
         }
 
         @Override
+        public void onPreviewClicked() {
+            mBackend.preview(mDreamInfo.componentName);
+        }
+
+        @Override
         public void onCustomizeClicked() {
             mBackend.launchSettings(mContext, mDreamInfo);
         }

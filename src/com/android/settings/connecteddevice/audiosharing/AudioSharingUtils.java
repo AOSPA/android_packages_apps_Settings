@@ -60,11 +60,25 @@ public class AudioSharingUtils {
     private static final boolean DEBUG = BluetoothUtils.D;
 
     public enum MetricKey {
-        METRIC_KEY_SOURCE_PAGE_ID,
-        METRIC_KEY_PAGE_ID,
-        METRIC_KEY_USER_TRIGGERED,
-        METRIC_KEY_DEVICE_COUNT_IN_SHARING,
-        METRIC_KEY_CANDIDATE_DEVICE_COUNT
+        METRIC_KEY_SOURCE_PAGE_ID(0),
+        METRIC_KEY_PAGE_ID(1),
+        METRIC_KEY_USER_TRIGGERED(2),
+        METRIC_KEY_DEVICE_COUNT_IN_SHARING(3),
+        METRIC_KEY_CANDIDATE_DEVICE_COUNT(4),
+        METRIC_KEY_DEVICE_CONNECTION_TYPE(5),
+        METRIC_KEY_DEVICE_IS_TEMP_BOND(6),
+        METRIC_KEY_DEVICE_IS_PRIMARY(7),
+        METRIC_KEY_SOURCE_PACKAGE_NAME(8);
+
+        private final int mId;
+
+        MetricKey(int id) {
+            this.mId = id;
+        }
+
+        public int getId() {
+            return mId;
+        }
     }
 
     /**
@@ -392,11 +406,29 @@ public class AudioSharingUtils {
             int deviceCountInSharing,
             int candidateDeviceCount) {
         return new Pair[] {
-            Pair.create(METRIC_KEY_SOURCE_PAGE_ID.ordinal(), sourcePageId),
-            Pair.create(METRIC_KEY_PAGE_ID.ordinal(), pageId),
-            Pair.create(METRIC_KEY_USER_TRIGGERED.ordinal(), userTriggered ? 1 : 0),
-            Pair.create(METRIC_KEY_DEVICE_COUNT_IN_SHARING.ordinal(), deviceCountInSharing),
-            Pair.create(METRIC_KEY_CANDIDATE_DEVICE_COUNT.ordinal(), candidateDeviceCount)
+            Pair.create(METRIC_KEY_SOURCE_PAGE_ID.getId(), sourcePageId),
+            Pair.create(METRIC_KEY_PAGE_ID.getId(), pageId),
+            Pair.create(METRIC_KEY_USER_TRIGGERED.getId(), userTriggered ? 1 : 0),
+            Pair.create(METRIC_KEY_DEVICE_COUNT_IN_SHARING.getId(), deviceCountInSharing),
+            Pair.create(METRIC_KEY_CANDIDATE_DEVICE_COUNT.getId(), candidateDeviceCount)
+        };
+    }
+
+    /**
+     * Build add source log event data
+     *
+     * @param sourcePageId  The source page id on which the add source is triggered.
+     * @param userTriggered Indicates whether the add source or the source page is triggered by user
+     *                      click.
+     * @return The event data to be attached to the add source action logs.
+     */
+    @NonNull
+    public static Pair<Integer, Object>[] buildAddSourceEventData(
+            int sourcePageId,
+            boolean userTriggered) {
+        return new Pair[] {
+                Pair.create(METRIC_KEY_SOURCE_PAGE_ID.getId(), sourcePageId),
+                Pair.create(METRIC_KEY_USER_TRIGGERED.getId(), userTriggered ? 1 : 0)
         };
     }
 

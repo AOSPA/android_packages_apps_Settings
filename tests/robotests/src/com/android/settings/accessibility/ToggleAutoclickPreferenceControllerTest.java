@@ -155,6 +155,7 @@ public class ToggleAutoclickPreferenceControllerTest {
     }
 
     @Test
+    @DisableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_AUTOCLICK_INDICATOR)
     public void onSharedPreferenceChanged_customMode_shouldShowCustomSeekbar() {
         setUpController(KEY_PREF_CUSTOM);
         mController.displayPreference(mScreen);

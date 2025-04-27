@@ -17,12 +17,14 @@ package com.android.settings.display
 
 import android.content.ContextWrapper
 import android.content.res.Resources
+import android.platform.test.annotations.DisableFlags
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.internal.widget.LockPatternUtils
 import com.android.settings.flags.Flags
 import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settings.testutils.SystemProperty
 import com.android.settingslib.preference.CatalystScreenTestCase
+import com.android.systemui.shared.Flags as SharedFlags
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -66,6 +68,8 @@ class DisplayScreenTest : CatalystScreenTestCase() {
         assertThat(preferenceScreenCreator.isAvailable(context)).isFalse()
     }
 
+    @Test
+    @DisableFlags(SharedFlags.FLAG_AMBIENT_AOD)
     override fun migration() {
         // avoid UnsupportedOperationException when getDisplay from context
         SystemProperty("robolectric.createActivityContexts", "true").use {

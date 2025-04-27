@@ -262,7 +262,7 @@
     <string name="friday_first_day_of_week" msgid="7074795061812083541">"Vrydag"</string>
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"Saterdag"</string>
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"As ’n app nie streeksvoorkeure steun nie, sal die app sy versteklocale-instellings gebruik."</string>
-    <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Kom meer te wete oor taalvoorkeure."</string>
+    <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Kry meer inligting oor taalvoorkeure."</string>
     <string name="metric_measurement_system" msgid="7489725697268321541">"Metriek"</string>
     <string name="us_measurement_system" msgid="8406695347890345490">"VSA"</string>
     <string name="uk_measurement_system" msgid="1814065008707689505">"VK"</string>
@@ -344,10 +344,8 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Aan/# app het toegang tot ligging}other{Aan/# apps het toegang tot ligging}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Laai tans …"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Apps met die Toestelle in die Omtrek-toestemming kan die relatiewe posisie van gekoppelde toestelle bepaal."</string>
-    <!-- no translation found for location_settings_footer_location_off_with_telephony (5600725945541382556) -->
-    <skip />
-    <!-- no translation found for location_settings_footer_location_off_no_telephony (2709958040008816610) -->
-    <skip />
+    <string name="location_settings_footer_location_off_with_telephony" msgid="5600725945541382556">"Liggingtoegang is af vir apps en dienste. Jou toestelligging kan steeds aan nooddienspersoneel gestuur word wanneer jy ’n noodnommer kontak."</string>
+    <string name="location_settings_footer_location_off_no_telephony" msgid="2709958040008816610">"Liggingtoegang is af vir apps en dienste."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Meer inligting oor ligginginstellings"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Gaan na ChromeOS-instellings &gt; Privaatheid en sekuriteit &gt; Privaatheidkontroles &gt; Liggingtoegang om dit te verander"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Rekeninge"</string>
@@ -457,6 +455,8 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Kanselleer"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"Nie nou nie"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Ek stem in"</string>
+    <!-- no translation found for security_settings_fingerprint_rename_description (6301505700382531086) -->
+    <skip />
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Slaan vingerafdruk oor?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Vingerafdrukopstelling neem net \'n minuut of twee. As jy dit oorslaan, kan jy jou vingerafdruk later in instellings byvoeg."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Wanneer jy dié ikoon sien, moet jy jou vingerafdruk vir stawing gebruik, soos wanneer jy by programme aanmeld of \'n aankoop goedkeur"</string>
@@ -1031,7 +1031,7 @@
     <string name="nfc_disabled_summary" msgid="8737797364522502351">"Nie beskikbaar nie want NFC is afgeskakel"</string>
     <string name="android_beam_explained" msgid="5684416131846701256">"Wanneer hierdie kenmerk aangeskakel is, kan jy appinhoud na \'n ander toestel met NFC-vermoë straal deur die toestelle na aan mekaar te hou. Jy kan byvoorbeeld webbladsye, YouTube-video\'s, kontakte en meer straal.\n\nHou eenvoudig die toestelle bymekaar (gewoonlik rug aan rug) en tik dan op jou skerm. Die app bepaal wat gestraal word."</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi-fi"</string>
-    <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Gebruik Wi-Fi"</string>
+    <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Gebruik wi-fi"</string>
     <string name="wifi_networks_category" msgid="8011323954745036753">"Netwerke"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Wi-Fi-instellings"</string>
     <string name="wifi_select_network" msgid="6692897876718813259">"Kies Wi-Fi"</string>
@@ -1443,8 +1443,10 @@
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Terwyl dit laai"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Terwyl dit gedok is"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Nooit"</string>
-    <string name="screensaver_settings_summary_postured" msgid="1184119124847691954">"Terwyl dit geposisioneer is"</string>
-    <string name="screensaver_settings_summary_postured_and_charging" msgid="1952047156927637506">"Terwyl dit geposisioneer is en laai"</string>
+    <!-- no translation found for screensaver_settings_summary_postured (6346392320858994892) -->
+    <skip />
+    <!-- no translation found for screensaver_settings_summary_postured_and_charging (5111797042509819055) -->
+    <skip />
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"Aan/<xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Af"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Wanneer om te begin"</string>
@@ -1614,8 +1616,10 @@
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Wanneer om outomaties te wys"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Nooit"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Terwyl dit laai"</string>
-    <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"Terwyl dit laai en regop is"</string>
-    <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"Terwyl dit gedok is"</string>
+    <!-- no translation found for when_to_show_hubmode_charging_and_upright (537039046490426922) -->
+    <skip />
+    <!-- no translation found for when_to_show_hubmode_docked (8876633401873168284) -->
+    <skip />
     <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"Beperk tot draadlose batterylaai"</string>
     <string name="apn_settings" msgid="4295467389400441299">"Toegangspuntname"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Redigeer toegangspunt"</string>
@@ -2146,7 +2150,7 @@
     <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"Verander wyserinvulstyl na pienk"</string>
     <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"Verander wyserinvulstyl na blou"</string>
     <string name="pointer_fill_style_purple_button" msgid="3713175300139801778">"Verander wyser se vulstyl na pers"</string>
-    <string name="pointer_stroke_style" msgid="139962661485972329">"Kleur van wyser se buitelyndikte"</string>
+    <string name="pointer_stroke_style" msgid="139962661485972329">"Wyserstreepkleur"</string>
     <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Wit"</string>
     <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Swart"</string>
     <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Geen"</string>
@@ -2313,6 +2317,12 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Beweeg skerm wanneer muis aan kante van skerm raak"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Vergroot tikwerk"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Vergrootglas volg teks terwyl jy tik"</string>
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_title (8804501318161774285) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_summary (3054371947104552843) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_unavailable_summary (2248787024685382054) -->
+    <skip />
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Hou aan terwyl apps gewissel word"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"Vergrootglas bly aan en zoem uit wanneer jy apps wissel"</string>
     <string name="accessibility_screen_magnification_always_on_unavailable_summary" msgid="3844732482037416038">"Onbeskikbaar terwyl net ’n deel van die skerm vergroot word"</string>
@@ -2502,7 +2512,7 @@
     <string name="accessibility_vibration_settings_state_off" msgid="7946588741954981703">"Af"</string>
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Instelling is gedeaktiveer omdat die toestel op stil gestel is"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Oproepe"</string>
-    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Kennisgewings en alarms"</string>
+    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Kennisgewings en wekkers"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Interaktiewe fisiese terugvoer"</string>
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Gebruik vibrasie en fisiese terugvoer"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Wekkervibrasie"</string>
@@ -2566,6 +2576,7 @@
     <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Gehoortoestelkortpad"</string>
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Gehoortoestelversoenbaarheid"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Verbeter versoenbaarheid met teleklosse en verminder ongewenste geraas"</string>
+    <string name="hac_disclaimer_message" msgid="5279579026956312543"></string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"Meer oor gehoortoestelle"</string>
     <string name="accessibility_hearing_device_footer_summary" msgid="5513620078219951077">"Tik op &lt;b&gt;Bind nuwe toestel saam&lt;/b&gt; &gt; &lt;b&gt;Sien meer toestelle&lt;/b&gt; om ander gehoortoestelle te kry wat nie deur ASHA- of LE-oudio gesteun word nie"</string>
     <string name="accessibility_hearing_device_footer_summary_tts" msgid="955527026890456959">"Tik op "<b>"Bind nuwe toestel saam"</b>" en dan op "<b>"Sien meer toestelle"</b>" om ander gehoortoestelle te kry wat nie deur ASHA- of LE-oudio gesteun word nie"</string>
@@ -3678,7 +3689,7 @@
     <string name="zen_mode_block_effect_intent" msgid="7621578645742903531">"Moenie skerm aanskakel nie"</string>
     <string name="zen_mode_block_effect_light" msgid="1997222991427784993">"Moenie lig laat flikker nie"</string>
     <string name="zen_mode_block_effect_peek" msgid="2525844009475266022">"Geen skerm-opspringkennisgewings nie"</string>
-    <string name="zen_mode_block_effect_status" msgid="5765965061064691918">"Versteek statusbalk boaan skerm"</string>
+    <string name="zen_mode_block_effect_status" msgid="5765965061064691918">"Versteek statusbalkikone boaan skerm"</string>
     <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"Versteek kennisgewingkolle op appikone"</string>
     <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"Moenie wakker maak vir kennisgewings nie"</string>
     <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"Versteek op aftrekskerm"</string>
@@ -4661,13 +4672,11 @@
     <string name="double_tap_power_camera_action_summary" msgid="4942585540579590444">"Maak Kamera oop"</string>
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Wallet"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Maak Wallet oop"</string>
-    <!-- no translation found for double_tap_power_lockscreen_shortcut_tip_title (9210589521260265387) -->
+    <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"Verander sluitskermkortpad?"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> is ook jou sluitskermkortpad. Wil jy dit verander?"</string>
+    <!-- no translation found for double_tap_power_wallet_footer_title (4626950875173822614) -->
     <skip />
-    <!-- no translation found for double_tap_power_lockscreen_shortcut_tip_description (1894710205138218048) -->
-    <skip />
-    <!-- no translation found for double_tap_power_wallet_footer_title (5417023303339032410) -->
-    <skip />
-    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (1267822422365445657) -->
+    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (4871482943751760132) -->
     <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Draai kamera om vir selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
@@ -5064,31 +5073,41 @@
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"Kry pryse by jou netwerkverskaffer."</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Ongeldige netwerkmodus <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignoreer."</string>
     <string name="satellite_setting" msgid="4650503806634496443">"Satellietkonnektiwiteit"</string>
-    <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Stuur en ontvang teksboodskappe via satelliet. Ingesluit by jou rekening."</string>
-    <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Stuur en ontvang teksboodskappe via satelliet. Nie by jou rekening ingesluit nie."</string>
-    <string name="satellite_setting_summary_without_entitlement" msgid="5284998840770992554">"Stuur en ontvang teksboodskappe via satelliet. Kontak jou diensverskaffer vir besonderhede"</string>
+    <!-- no translation found for satellite_setting_enabled_summary (2114544331827193266) -->
+    <skip />
+    <!-- no translation found for satellite_setting_disabled_summary (8193743637158939283) -->
+    <skip />
+    <!-- no translation found for satellite_setting_summary_without_entitlement (7010003955751606421) -->
+    <skip />
     <string name="keywords_satellite_setting" msgid="613553612424945946">"Satellietboodskappe, satellietkonnektiwiteit"</string>
     <string name="category_name_about_satellite_connectivity" msgid="3971142716898783631">"Meer oor satellietkonnektiwiteit"</string>
-    <string name="description_about_satellite_setting" msgid="5539359064330584941">"Jy kan met ’n kwalifiserende <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-rekening teksboodskappe stuur en ontvang en sommige apps via satelliet gebruik"</string>
+    <!-- no translation found for description_about_satellite_setting (8212911110428998767) -->
+    <skip />
     <string name="category_title_your_satellite_plan" msgid="8169426217950247126">"Jou <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-rekening"</string>
-    <string name="title_have_satellite_plan" msgid="2048372355699977947">"Satellietboodskappe is by jou rekening ingesluit"</string>
-    <string name="title_no_satellite_plan" msgid="2876056203035197505">"Satellietboodskappe is nie by jou rekening ingesluit nie"</string>
+    <string name="title_have_satellite_plan" msgid="857337944804101443">"Boodskappe is by jou rekening ingesluit"</string>
+    <!-- no translation found for title_no_satellite_plan (7255726881685672846) -->
+    <skip />
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Kry meer inligting"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Hoe dit werk"</string>
-    <string name="title_satellite_connection_guide" msgid="3294802307913609072">"As jy nie ’n selnetwerk het nie"</string>
+    <!-- no translation found for title_satellite_connection_guide (4730763872034574368) -->
+    <skip />
     <string name="title_satellite_connection_guide_for_manual_type" msgid="7223875100977941341">"Stuur ’n teksboodskap na ’n foonnommer"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Jou foon sal outomaties aan ’n satelliet verbind. Vir die beste verbinding, maak seker jy kan die lug duidelik sien."</string>
-    <string name="summary_satellite_connection_guide_for_manual_type" msgid="5075149380084376662">"As jy nie ’n selnetwerk het nie, sal jy ’n opsie sien om satellietboodskappe te gebruik."</string>
+    <!-- no translation found for summary_satellite_connection_guide_for_manual_type (2106091974353287661) -->
+    <skip />
     <string name="title_supported_service" msgid="4275535165812691571">"Nadat jou foon aan ’n satelliet verbind"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Volg die stappe om aan die satelliet te koppel"</string>
-    <string name="summary_supported_service" msgid="4320535903444834786">"Jy kan ’n teksboodskap na enigiemand stuur, insluitend nooddienste. Jou foon sal weer aan ’n selnetwerk verbind wanneer dit beskikbaar is."</string>
+    <!-- no translation found for summary_supported_service (6380533552383355977) -->
+    <skip />
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"Jy kan vir enige iemand ’n teksboodskap stuur nadat jou foon gekoppel is, insluitend nooddienste."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Hou in gedagte"</string>
     <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"Satellietkonnektiwiteit kan langer neem en is net in sekere gebiede beskikbaar."</string>
     <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"Die weer en sekere strukture kan jou satellietverbinding affekteer."</string>
-    <string name="satellite_footer_content_section_3" msgid="4652426135622555607">"Satellietoproepe is nie beskikbaar nie."</string>
+    <!-- no translation found for satellite_footer_content_section_3 (4686525535095321485) -->
+    <skip />
     <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"Noodoproepe kan dalk steeds verbind."</string>
-    <string name="satellite_footer_content_section_5" msgid="3053256489735265540">"Selfoon- of wi-fi-netwerk is nodig om eksterne skakels te bekyk."</string>
+    <!-- no translation found for satellite_footer_content_section_5 (2466353040832630785) -->
+    <skip />
     <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"Die stuur van teksboodskappe na nooddienste toe sal dalk nie in alle gebiede beskikbaar wees nie."</string>
     <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"Dit kan ’n tyd neem voor rekeningveranderinge in Instellings sal wys. Kontak <xliff:g id="CARRIER_NAME">%1$s</xliff:g> vir besonderhede."</string>
     <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"Meer oor satellietkonnektiwiteit"</string>
@@ -5100,7 +5119,8 @@
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"satellietboodskappe"</string>
     <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"Gebruik van data is by jou rekening ingesluit"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Gesteunde apps op jou foon"</string>
-    <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"sien alle apps"</string>
+    <!-- no translation found for title_satellite_supported_app_list_entry (891155574898209245) -->
+    <skip />
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Gesteunde apps op jou foon"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Kan nie ’n SIM byvoeg nie"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Beëindig die satellietverbinding voordat jy ’n SIM byvoeg"</string>
@@ -5448,7 +5468,7 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Foonnommer ontbreek."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
     <string name="enable_2g_title" msgid="5657132300321750181">"2G-netwerkbeskerming"</string>
-    <string name="enable_2g_summary" msgid="6317192326100541563">"/vermy 2G-netwerke wat minder veilig is. Dit kan konnektiwiteit in sommige plekke beperk. Noodoproepe word altyd toegelaat."</string>
+    <string name="enable_2g_summary" msgid="6317192326100541563">"Vermy 2G-netwerke wat minder veilig is. Dit kan konnektiwiteit in sommige plekke beperk. Noodoproepe word altyd toegelaat."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> vereis 2G om beskikbaar te wees"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Laat slegs geënkripteerde netwerke toe"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Dit is veiliger, maar kan jou selnetwerkverbinding in sekere liggings beperk. Noodoproepe word altyd toegelaat."</string>

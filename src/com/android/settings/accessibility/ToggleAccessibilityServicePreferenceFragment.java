@@ -16,12 +16,14 @@
 
 package com.android.settings.accessibility;
 
+import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
+
 import static com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums;
 import static com.android.settings.accessibility.AccessibilityStatsLogUtils.logAccessibilityServiceEnabled;
+import static com.android.internal.accessibility.dialog.AccessibilityServiceWarning.createAccessibilityServiceWarningDialogContentView;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
@@ -39,10 +41,15 @@ import android.os.SystemClock;
 import android.text.BidiFormatter;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.CompoundButton;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.settings.R;
@@ -146,6 +153,24 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         return null;
     }
 
+    private AlertDialog createAccessibilityServiceWarningDialog(
+            @NonNull AccessibilityServiceInfo info,
+            @NonNull View.OnClickListener allowListener,
+            @NonNull View.OnClickListener denyListener,
+            @NonNull View.OnClickListener uninstallListener) {
+        final Context context = getPrefContext();
+        final AlertDialog ad = new AlertDialog.Builder(context)
+                .setView(createAccessibilityServiceWarningDialogContentView(
+                        context, info, allowListener, denyListener, uninstallListener))
+                .setCancelable(true)
+                .create();
+        Window window = ad.getWindow();
+        WindowManager.LayoutParams params = window.getAttributes();
+        params.privateFlags |= SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
+        window.setAttributes(params);
+        return ad;
+    }
+
     @Override
     public Dialog onCreateDialog(int dialogId) {
         final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
@@ -154,34 +179,28 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                 if (info == null) {
                     return null;
                 }
-                mWarningDialog =
-                        com.android.internal.accessibility.dialog.AccessibilityServiceWarning
-                                .createAccessibilityServiceWarningDialog(getPrefContext(), info,
-                                        v -> onAllowButtonFromEnableToggleClicked(),
-                                        v -> onDenyButtonFromEnableToggleClicked(),
-                                        v -> onDialogButtonFromUninstallClicked());
+                mWarningDialog = createAccessibilityServiceWarningDialog(info,
+                        v -> onAllowButtonFromEnableToggleClicked(),
+                        v -> onDenyButtonFromEnableToggleClicked(),
+                        v -> onDialogButtonFromUninstallClicked());
                 return mWarningDialog;
             case DialogEnums.ENABLE_WARNING_FROM_SHORTCUT_TOGGLE:
                 if (info == null) {
                     return null;
                 }
-                mWarningDialog =
-                        com.android.internal.accessibility.dialog.AccessibilityServiceWarning
-                                .createAccessibilityServiceWarningDialog(getPrefContext(), info,
-                                        v -> onAllowButtonFromShortcutToggleClicked(),
-                                        v -> onDenyButtonFromShortcutToggleClicked(),
-                                        v -> onDialogButtonFromUninstallClicked());
+                mWarningDialog = createAccessibilityServiceWarningDialog(info,
+                        v -> onAllowButtonFromShortcutToggleClicked(),
+                        v -> onDenyButtonFromShortcutToggleClicked(),
+                        v -> onDialogButtonFromUninstallClicked());
                 return mWarningDialog;
             case DialogEnums.ENABLE_WARNING_FROM_SHORTCUT:
                 if (info == null) {
                     return null;
                 }
-                mWarningDialog =
-                        com.android.internal.accessibility.dialog.AccessibilityServiceWarning
-                                .createAccessibilityServiceWarningDialog(getPrefContext(), info,
-                                        v -> onAllowButtonFromShortcutClicked(),
-                                        v -> onDenyButtonFromShortcutClicked(),
-                                        v -> onDialogButtonFromUninstallClicked());
+                mWarningDialog = createAccessibilityServiceWarningDialog(info,
+                        v -> onAllowButtonFromShortcutClicked(),
+                        v -> onDenyButtonFromShortcutClicked(),
+                        v -> onDialogButtonFromUninstallClicked());
                 return mWarningDialog;
             case DialogEnums.DISABLE_WARNING_FROM_TOGGLE:
                 if (info == null) {
@@ -314,9 +333,9 @@ public class ToggleAccessibilityServicePreferenceFragment extends
             }
         } else {
             getPrefContext().getSystemService(AccessibilityManager.class)
-                            .enableShortcutsForTargets(false, shortcutTypes,
-                                    Set.of(mComponentName.flattenToString()),
-                                    getPrefContext().getUserId());
+                    .enableShortcutsForTargets(false, shortcutTypes,
+                            Set.of(mComponentName.flattenToString()),
+                            getPrefContext().getUserId());
         }
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
     }

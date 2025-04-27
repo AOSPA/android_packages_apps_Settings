@@ -16,6 +16,8 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
+import static com.android.settings.connecteddevice.audiosharing.AudioSharingUtils.MetricKey.METRIC_KEY_SOURCE_PAGE_ID;
+import static com.android.settings.connecteddevice.audiosharing.AudioSharingUtils.MetricKey.METRIC_KEY_USER_TRIGGERED;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast.EXTRA_START_LE_AUDIO_SHARING;
@@ -122,12 +124,14 @@ import java.util.concurrent.Executor;
                 ShadowAlertDialogCompat.class
         })
 public class AudioSharingSwitchBarControllerTest {
+    private static final String EXTRA_SOURCE_METRICS = ":settings:source_metrics";
     private static final String TEST_DEVICE_NAME1 = "test1";
     private static final String TEST_DEVICE_NAME2 = "test2";
     private static final String TEST_DEVICE_ANONYMIZED_ADDR1 = "XX:XX:01";
     private static final String TEST_DEVICE_ANONYMIZED_ADDR2 = "XX:XX:02";
     private static final int TEST_DEVICE_GROUP_ID1 = 1;
     private static final int TEST_DEVICE_GROUP_ID2 = 2;
+    private static final int TEST_SOURCE_METRICS = SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY;
     private static final Correspondence<Fragment, String> CLAZZNAME_EQUALS =
             Correspondence.from(
                     (Fragment fragment, String clazzName) ->
@@ -512,6 +516,8 @@ public class AudioSharingSwitchBarControllerTest {
         when(mBroadcast.getLatestBroadcastId()).thenReturn(1);
         mController.onCheckedChanged(mBtnView, /* isChecked= */ false);
         verify(mBroadcast, never()).stopBroadcast(anyInt());
+        verify(mFeatureFactory.metricsFeatureProvider, never()).action(
+                mContext, SettingsEnums.ACTION_AUDIO_SHARING_MAIN_SWITCH_OFF);
     }
 
     @Test
@@ -522,6 +528,8 @@ public class AudioSharingSwitchBarControllerTest {
         doNothing().when(mBroadcast).stopBroadcast(anyInt());
         mController.onCheckedChanged(mBtnView, /* isChecked= */ false);
         verify(mBroadcast).stopBroadcast(1);
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                mContext, SettingsEnums.ACTION_AUDIO_SHARING_MAIN_SWITCH_OFF);
     }
 
     @Test
@@ -555,8 +563,11 @@ public class AudioSharingSwitchBarControllerTest {
         mController.mBroadcastCallback.onBroadcastMetadataChanged(/* reason= */ 1, mMetadata);
         shadowOf(Looper.getMainLooper()).idle();
 
-        verify(mFeatureFactory.metricsFeatureProvider)
-                .action(any(Context.class), eq(SettingsEnums.ACTION_AUTO_JOIN_AUDIO_SHARING));
+        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
+                SettingsEnums.ACTION_AUDIO_SHARING_ADD_SOURCE,
+                Pair.create(METRIC_KEY_SOURCE_PAGE_ID.getId(),
+                        SettingsEnums.ACTION_AUTO_JOIN_AUDIO_SHARING),
+                Pair.create(METRIC_KEY_USER_TRIGGERED.getId(), 0));
 
         childFragments = mParentFragment.getChildFragmentManager().getFragments();
         // No audio sharing dialog.
@@ -577,8 +588,9 @@ public class AudioSharingSwitchBarControllerTest {
         shadowOf(Looper.getMainLooper()).idle();
 
         verify(mAssistant, never()).addSource(any(), any(), anyBoolean());
-        verify(mFeatureFactory.metricsFeatureProvider, never())
-                .action(any(Context.class), eq(SettingsEnums.ACTION_AUTO_JOIN_AUDIO_SHARING));
+        verify(mFeatureFactory.metricsFeatureProvider, never()).action(any(Context.class),
+                eq(SettingsEnums.ACTION_AUDIO_SHARING_ADD_SOURCE), any(Pair.class),
+                any(Pair.class));
 
         List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
         // No audio sharing dialog.
@@ -606,6 +618,16 @@ public class AudioSharingSwitchBarControllerTest {
         shadowOf(Looper.getMainLooper()).idle();
 
         verify(mBroadcast).startPrivateBroadcast();
+        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
+                SettingsEnums.ACTION_AUDIO_SHARING_MAIN_SWITCH_ON,
+                Pair.create(AudioSharingUtils.MetricKey.METRIC_KEY_SOURCE_PAGE_ID.getId(),
+                        SettingsEnums.AUDIO_SHARING_SETTINGS),
+                Pair.create(
+                        AudioSharingUtils.MetricKey.METRIC_KEY_SOURCE_PACKAGE_NAME.getId(),
+                        mContext.getPackageName()),
+                Pair.create(
+                        AudioSharingUtils.MetricKey.METRIC_KEY_CANDIDATE_DEVICE_COUNT.getId(),
+                        1));
         List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
         assertThat(childFragments).comparingElementsUsing(CLAZZNAME_EQUALS).containsExactly(
                 AudioSharingProgressDialogFragment.class.getName());
@@ -615,8 +637,12 @@ public class AudioSharingSwitchBarControllerTest {
         mController.mBroadcastCallback.onBroadcastMetadataChanged(/* reason= */ 1, realMetadata);
         shadowOf(Looper.getMainLooper()).idle();
 
-        verify(mFeatureFactory.metricsFeatureProvider)
-                .action(any(Context.class), eq(SettingsEnums.ACTION_AUTO_JOIN_AUDIO_SHARING));
+        verify(mAssistant).addSource(mDevice2, realMetadata, /* isGroupOp= */ false);
+        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
+                SettingsEnums.ACTION_AUDIO_SHARING_ADD_SOURCE,
+                Pair.create(METRIC_KEY_SOURCE_PAGE_ID.getId(),
+                        SettingsEnums.ACTION_AUTO_JOIN_AUDIO_SHARING),
+                Pair.create(METRIC_KEY_USER_TRIGGERED.getId(), 0));
 
         when(mState.getBisSyncState()).thenReturn(ImmutableList.of(1L));
         mController.mBroadcastAssistantCallback.onSourceAdded(mDevice2, /* sourceId= */
@@ -639,20 +665,20 @@ public class AudioSharingSwitchBarControllerTest {
                 .asList()
                 .containsExactly(
                         Pair.create(
-                                AudioSharingUtils.MetricKey.METRIC_KEY_SOURCE_PAGE_ID.ordinal(),
+                                AudioSharingUtils.MetricKey.METRIC_KEY_SOURCE_PAGE_ID.getId(),
                                 SettingsEnums.AUDIO_SHARING_SETTINGS),
                         Pair.create(
-                                AudioSharingUtils.MetricKey.METRIC_KEY_PAGE_ID.ordinal(),
-                                SettingsEnums.DIALOG_AUDIO_SHARING_ADD_DEVICE),
+                                AudioSharingUtils.MetricKey.METRIC_KEY_PAGE_ID.getId(),
+                                SettingsEnums.DIALOG_AUDIO_SHARING_MAIN),
                         Pair.create(
-                                AudioSharingUtils.MetricKey.METRIC_KEY_USER_TRIGGERED.ordinal(), 0),
+                                AudioSharingUtils.MetricKey.METRIC_KEY_USER_TRIGGERED.getId(), 0),
                         Pair.create(
                                 AudioSharingUtils.MetricKey.METRIC_KEY_DEVICE_COUNT_IN_SHARING
-                                        .ordinal(),
+                                        .getId(),
                                 1),
                         Pair.create(
                                 AudioSharingUtils.MetricKey.METRIC_KEY_CANDIDATE_DEVICE_COUNT
-                                        .ordinal(),
+                                        .getId(),
                                 0));
 
         childFragments.forEach(fragment -> ((DialogFragment) fragment).dismiss());
@@ -670,6 +696,15 @@ public class AudioSharingSwitchBarControllerTest {
         shadowOf(Looper.getMainLooper()).idle();
 
         verify(mBroadcast).startPrivateBroadcast();
+        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
+                SettingsEnums.ACTION_AUDIO_SHARING_MAIN_SWITCH_ON,
+                Pair.create(AudioSharingUtils.MetricKey.METRIC_KEY_SOURCE_PAGE_ID.getId(),
+                        SettingsEnums.AUDIO_SHARING_SETTINGS),
+                Pair.create(
+                        AudioSharingUtils.MetricKey.METRIC_KEY_SOURCE_PACKAGE_NAME.getId(),
+                        mContext.getPackageName()),
+                Pair.create(AudioSharingUtils.MetricKey.METRIC_KEY_CANDIDATE_DEVICE_COUNT.getId(),
+                        2));
         List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
         assertThat(childFragments).comparingElementsUsing(CLAZZNAME_EQUALS).containsExactly(
                 AudioSharingProgressDialogFragment.class.getName());
@@ -684,8 +719,12 @@ public class AudioSharingSwitchBarControllerTest {
         mController.mBroadcastCallback.onBroadcastMetadataChanged(/* reason= */ 1, mMetadata);
         shadowOf(Looper.getMainLooper()).idle();
 
-        verify(mFeatureFactory.metricsFeatureProvider)
-                .action(any(Context.class), eq(SettingsEnums.ACTION_AUTO_JOIN_AUDIO_SHARING));
+        verify(mAssistant).addSource(mDevice2, mMetadata, /* isGroupOp= */ false);
+        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
+                SettingsEnums.ACTION_AUDIO_SHARING_ADD_SOURCE,
+                Pair.create(METRIC_KEY_SOURCE_PAGE_ID.getId(),
+                        SettingsEnums.ACTION_AUTO_JOIN_AUDIO_SHARING),
+                Pair.create(METRIC_KEY_USER_TRIGGERED.getId(), 0));
         expectedMessage = mContext.getString(
                 R.string.audio_sharing_progress_dialog_add_source_content, TEST_DEVICE_NAME2);
         checkProgressDialogMessage(progressFragment, expectedMessage);
@@ -707,20 +746,20 @@ public class AudioSharingSwitchBarControllerTest {
                 .asList()
                 .containsExactly(
                         Pair.create(
-                                AudioSharingUtils.MetricKey.METRIC_KEY_SOURCE_PAGE_ID.ordinal(),
+                                AudioSharingUtils.MetricKey.METRIC_KEY_SOURCE_PAGE_ID.getId(),
                                 SettingsEnums.AUDIO_SHARING_SETTINGS),
                         Pair.create(
-                                AudioSharingUtils.MetricKey.METRIC_KEY_PAGE_ID.ordinal(),
-                                SettingsEnums.DIALOG_AUDIO_SHARING_ADD_DEVICE),
+                                AudioSharingUtils.MetricKey.METRIC_KEY_PAGE_ID.getId(),
+                                SettingsEnums.DIALOG_AUDIO_SHARING_MAIN),
                         Pair.create(
-                                AudioSharingUtils.MetricKey.METRIC_KEY_USER_TRIGGERED.ordinal(), 0),
+                                AudioSharingUtils.MetricKey.METRIC_KEY_USER_TRIGGERED.getId(), 0),
                         Pair.create(
                                 AudioSharingUtils.MetricKey.METRIC_KEY_DEVICE_COUNT_IN_SHARING
-                                        .ordinal(),
+                                        .getId(),
                                 1),
                         Pair.create(
                                 AudioSharingUtils.MetricKey.METRIC_KEY_CANDIDATE_DEVICE_COUNT
-                                        .ordinal(),
+                                        .getId(),
                                 1));
 
         childFragments.forEach(fragment -> ((DialogFragment) fragment).dismiss());
@@ -753,6 +792,11 @@ public class AudioSharingSwitchBarControllerTest {
         shadowMainLooper().idle();
 
         verify(mAssistant).addSource(mDevice1, mMetadata, /* isGroupOp= */ false);
+        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
+                SettingsEnums.ACTION_AUDIO_SHARING_ADD_SOURCE,
+                Pair.create(METRIC_KEY_SOURCE_PAGE_ID.getId(),
+                        SettingsEnums.DIALOG_AUDIO_SHARING_MAIN),
+                Pair.create(METRIC_KEY_USER_TRIGGERED.getId(), 1));
         assertThat(dialog.isShowing()).isFalse();
         // Progress dialog shows sharing progress for the user chosen sink.
         List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
@@ -794,6 +838,11 @@ public class AudioSharingSwitchBarControllerTest {
         shadowMainLooper().idle();
 
         verify(mAssistant, never()).addSource(mDevice1, mMetadata, /* isGroupOp= */ false);
+        verify(mFeatureFactory.metricsFeatureProvider, never()).action(mContext,
+                SettingsEnums.ACTION_AUDIO_SHARING_ADD_SOURCE,
+                Pair.create(METRIC_KEY_SOURCE_PAGE_ID.getId(),
+                        SettingsEnums.DIALOG_AUDIO_SHARING_MAIN),
+                Pair.create(METRIC_KEY_USER_TRIGGERED.getId(), 1));
         assertThat(dialog.isShowing()).isFalse();
         // Progress dialog shows sharing progress for the auto add active sink.
         List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
@@ -1056,13 +1105,31 @@ public class AudioSharingSwitchBarControllerTest {
         shadowOf(Looper.getMainLooper()).idle();
 
         verify(mBroadcast).startPrivateBroadcast();
+        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
+                SettingsEnums.ACTION_AUDIO_SHARING_MAIN_SWITCH_ON,
+                Pair.create(AudioSharingUtils.MetricKey.METRIC_KEY_SOURCE_PAGE_ID.getId(),
+                        TEST_SOURCE_METRICS),
+                Pair.create(
+                        AudioSharingUtils.MetricKey.METRIC_KEY_SOURCE_PACKAGE_NAME.getId(),
+                        ""),
+                Pair.create(
+                        AudioSharingUtils.MetricKey.METRIC_KEY_CANDIDATE_DEVICE_COUNT.getId(),
+                        2));
         mController.mBroadcastCallback.onBroadcastMetadataChanged(/* reason= */ 1, mMetadata);
         shadowOf(Looper.getMainLooper()).idle();
 
-        verify(mFeatureFactory.metricsFeatureProvider)
-                .action(any(Context.class), eq(SettingsEnums.ACTION_AUTO_JOIN_AUDIO_SHARING));
         verify(mAssistant).addSource(mDevice1, mMetadata, /* isGroupOp= */ false);
         verify(mAssistant).addSource(mDevice2, mMetadata, /* isGroupOp= */ false);
+        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
+                SettingsEnums.ACTION_AUDIO_SHARING_ADD_SOURCE,
+                Pair.create(METRIC_KEY_SOURCE_PAGE_ID.getId(),
+                        SettingsEnums.ACTION_AUTO_JOIN_AUDIO_SHARING),
+                Pair.create(METRIC_KEY_USER_TRIGGERED.getId(), 0));
+        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
+                SettingsEnums.ACTION_AUDIO_SHARING_ADD_SOURCE,
+                Pair.create(METRIC_KEY_SOURCE_PAGE_ID.getId(),
+                        SettingsEnums.ACTION_AUTO_JOIN_AUDIO_SHARING),
+                Pair.create(METRIC_KEY_USER_TRIGGERED.getId(), 1));
         List<Fragment> childFragments = parentFragment.getChildFragmentManager().getFragments();
         // Skip audio sharing dialog.
         assertThat(childFragments).comparingElementsUsing(CLAZZNAME_EQUALS).containsExactly(
@@ -1085,6 +1152,11 @@ public class AudioSharingSwitchBarControllerTest {
         shadowOf(Looper.getMainLooper()).idle();
 
         verify(mAssistant).addSource(mDevice1, mMetadata, /* isGroupOp= */ false);
+        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
+                SettingsEnums.ACTION_AUDIO_SHARING_ADD_SOURCE,
+                Pair.create(METRIC_KEY_SOURCE_PAGE_ID.getId(),
+                        SettingsEnums.BLUETOOTH_PAIRING),
+                Pair.create(METRIC_KEY_USER_TRIGGERED.getId(), 1));
         List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
         assertThat(childFragments).comparingElementsUsing(CLAZZNAME_EQUALS).containsExactly(
                 AudioSharingProgressDialogFragment.class.getName());
@@ -1094,6 +1166,7 @@ public class AudioSharingSwitchBarControllerTest {
         Bundle args = new Bundle();
         args.putBoolean(EXTRA_START_LE_AUDIO_SHARING, true);
         Intent intent = new Intent();
+        intent.putExtra(EXTRA_SOURCE_METRICS, TEST_SOURCE_METRICS);
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS, args);
         Fragment fragment = new Fragment();
         FragmentController.of(fragment, intent)

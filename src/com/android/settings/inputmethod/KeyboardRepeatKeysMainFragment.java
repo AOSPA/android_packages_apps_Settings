@@ -38,8 +38,8 @@ import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.keyboard.Flags;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.LabeledSeekBarPreference;
 import com.android.settingslib.utils.ThreadUtils;
+import com.android.settingslib.widget.SliderPreference;
 
 import java.util.List;
 
@@ -62,9 +62,9 @@ public class KeyboardRepeatKeysMainFragment extends DashboardFragment
     private InputManager mInputManager;
     private ContentResolver mContentResolver;
     @Nullable
-    private LabeledSeekBarPreference mRepeatTimeoutPreference;
+    private SliderPreference mRepeatTimeoutPreference;
     @Nullable
-    private LabeledSeekBarPreference mRepeatDelayPreference;
+    private SliderPreference mRepeatDelayPreference;
 
     @Override
     public int getMetricsCategory() {
@@ -117,6 +117,8 @@ public class KeyboardRepeatKeysMainFragment extends DashboardFragment
         if (mRepeatTimeoutPreference != null && mRepeatDelayPreference != null) {
             mRepeatTimeoutPreference.setEnabled(isRepeatKeyEnabled);
             mRepeatDelayPreference.setEnabled(isRepeatKeyEnabled);
+            mRepeatTimeoutPreference.setTickVisible(true);
+            mRepeatDelayPreference.setTickVisible(true);
         }
     }
 

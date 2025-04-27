@@ -16,7 +16,6 @@
 
 package com.android.settings.notification.app;
 
-import static com.android.server.notification.Flags.notificationHideUnusedChannels;
 
 import android.content.Context;
 
@@ -47,9 +46,6 @@ public class ShowMorePreferenceController extends NotificationPreferenceControll
 
     @Override
     public boolean isAvailable() {
-        if (!notificationHideUnusedChannels()) {
-            return false;
-        }
         if (mAppRow == null) {
             return false;
         }

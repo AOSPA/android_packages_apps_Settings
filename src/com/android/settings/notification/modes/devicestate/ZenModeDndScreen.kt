@@ -68,7 +68,10 @@ class ZenModeDndScreen :
         else null
 
     override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) { +ZenModeButtonPreference(context.getDndMode()!!) }
+        preferenceHierarchy(context, this) {
+            +ZenModeButtonPreference(context.getDndMode()!!)
+            +ZenModeDndDisplayScreen.KEY
+        }
 
     companion object {
         const val KEY = "device_state_dnd_mode_screen" // only for device state.

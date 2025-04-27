@@ -41,6 +41,9 @@ import com.android.settings.network.NetworkDashboardScreen
 import com.android.settings.network.NetworkProviderScreen
 import com.android.settings.network.tether.TetherScreen
 import com.android.settings.notification.SoundScreen
+import com.android.settings.notification.modes.devicestate.ZenModeBedtimeScreen
+import com.android.settings.notification.modes.devicestate.ZenModeButtonPreference
+import com.android.settings.notification.modes.devicestate.ZenModeDndDisplayScreen
 import com.android.settings.notification.modes.devicestate.ZenModeDndScreen
 import com.android.settings.security.LockScreenPreferenceScreen
 import com.android.settings.spa.app.catalyst.AllAppsScreen
@@ -173,6 +176,16 @@ fun getScreenConfigs() =
         PerScreenConfig(
             enabled = true,
             screenKey = ZenModeDndScreen.KEY,
+            category = setOf(DeviceStateCategory.UNCATEGORIZED),
+        ),
+        PerScreenConfig(
+            enabled = true,
+            screenKey = ZenModeDndDisplayScreen.KEY,
+            category = setOf(DeviceStateCategory.UNCATEGORIZED),
+        ),
+        PerScreenConfig(
+            enabled = true,
+            screenKey = ZenModeBedtimeScreen.KEY,
             category = setOf(DeviceStateCategory.UNCATEGORIZED),
         ),
     )
@@ -493,6 +506,11 @@ fun getDeviceStateItemList() =
             enabled = true,
             settingKey = "vibrate_on",
             settingScreenKey = VibrationScreen.KEY,
+        ),
+        DeviceStateItemConfig(
+            enabled = true,
+            settingKey = ZenModeButtonPreference.KEY,
+            settingScreenKey = ZenModeDndScreen.KEY,
         ),
         DeviceStateItemConfig(
             enabled = true,

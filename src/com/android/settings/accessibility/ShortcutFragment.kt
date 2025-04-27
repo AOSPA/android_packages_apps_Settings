@@ -23,11 +23,14 @@ import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragm
 import com.google.android.setupcompat.util.WizardManagerHelper
 
 /**
- * Base class for Fragment that holds a [ShortcutPreference]
+ * Base class for Fragment that holds a [ShortcutPreference]. By default, the fragment
+ * is not restricted. If the fragment should be restricted, pass the restriction key when calling
+ * super's constructor. See [com.android.settings.dashboard.RestrictedDashboardFragment]
  */
-abstract class ShortcutFragment : BaseSupportFragment() {
+abstract class ShortcutFragment(restrictionKey: String? = null) :
+    BaseRestrictedSupportFragment(restrictionKey) {
 
-    abstract fun getShortcutLabel(): CharSequence
+    abstract fun getFeatureName(): CharSequence
     abstract fun getFeatureComponentName(): ComponentName
     open fun getShortcutPreferenceController(): ToggleShortcutPreferenceController {
         return use<ToggleShortcutPreferenceController>(ToggleShortcutPreferenceController::class.java)
@@ -41,7 +44,7 @@ abstract class ShortcutFragment : BaseSupportFragment() {
                 AccessibilityShortcutsTutorial.DialogFragment.showDialog(
                     getChildFragmentManager(),
                     prefController.getUserPreferredShortcutTypes(getFeatureComponentName()),
-                    getShortcutLabel(),
+                    getFeatureName(),
                     WizardManagerHelper.isAnySetupWizard(getIntent())
                 )
             }

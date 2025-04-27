@@ -39,12 +39,6 @@ public class ToggleAutoclickPreferenceFragment extends ShortcutFragment {
 
     @NonNull
     @Override
-    public CharSequence getShortcutLabel() {
-        return requireContext().getString(R.string.accessibility_autoclick_shortcut_title);
-    }
-
-    @NonNull
-    @Override
     public ToggleShortcutPreferenceController getShortcutPreferenceController() {
         return use(ToggleAutoclickShortcutPreferenceController.class);
     }
@@ -53,6 +47,12 @@ public class ToggleAutoclickPreferenceFragment extends ShortcutFragment {
     @Override
     public ComponentName getFeatureComponentName() {
         return AUTOCLICK_COMPONENT_NAME;
+    }
+
+    @NonNull
+    @Override
+    public CharSequence getFeatureName() {
+        return getText(R.string.accessibility_autoclick_preference_title);
     }
 
     @Override
@@ -83,5 +83,4 @@ public class ToggleAutoclickPreferenceFragment extends ShortcutFragment {
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.accessibility_autoclick_settings);
-
 }

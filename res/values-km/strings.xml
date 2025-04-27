@@ -455,6 +455,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"បោះបង់"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"កុំទាន់"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"ខ្ញុំយល់ព្រម"</string>
+    <string name="security_settings_fingerprint_rename_description" msgid="6301505700382531086">"ចុចពីរដង ដើម្បីប្ដូរ​ឈ្មោះ"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"រំលង​ស្នាម​ម្រាមដៃឬ?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"ការរៀបចំស្នាមម្រាមដៃ​ចំណាយពេលត្រឹមតែមួយទៅពីរនាទីប៉ុណ្ណោះ។ ប្រសិនបើ​អ្នករំលងវា អ្នកអាច​បញ្ចូលស្នាមម្រាមដៃ​របស់អ្នក​ក្នុងការកំណត់​នៅពេលក្រោយបាន។"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"នៅពេលដែលអ្នកឃើញរូបតំណាងនេះ សូមប្រើស្នាមម្រាមដៃរបស់អ្នកសម្រាប់ការផ្ទៀងផ្ទាត់ដូចជា នៅពេលអ្នកចូលកម្មវិធី ឬយល់ព្រមលើការទិញជាដើម"</string>
@@ -1441,8 +1442,8 @@
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"ពេលសាកថ្ម"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"ពេល​​ភ្ជាប់"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"កុំឲ្យសោះ"</string>
-    <string name="screensaver_settings_summary_postured" msgid="1184119124847691954">"ពេលបញ្ឈរនៅស្ងៀម"</string>
-    <string name="screensaver_settings_summary_postured_and_charging" msgid="1952047156927637506">"ពេលបញ្ឈរនៅស្ងៀម និងសាកថ្ម"</string>
+    <string name="screensaver_settings_summary_postured" msgid="6346392320858994892">"ពេលដាក់បញ្ឈរ"</string>
+    <string name="screensaver_settings_summary_postured_and_charging" msgid="5111797042509819055">"ពេលដាក់បញ្ឈរ និងសាកថ្ម"</string>
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"បើក / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"បិទ"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"ពេលដែលត្រូវចាប់ផ្តើម"</string>
@@ -1612,8 +1613,8 @@
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"ពេលដែលត្រូវបង្ហាញដោយស្វ័យប្រវត្តិ"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"កុំឱ្យសោះ"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"ពេលសាកថ្ម"</string>
-    <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"ពេលសាកថ្ម និងដាក់បញ្ឈរ"</string>
-    <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"ពេល​​ភ្ជាប់"</string>
+    <string name="when_to_show_hubmode_charging_and_upright" msgid="537039046490426922">"ពេលដាក់បញ្ឈរ និងសាកថ្ម"</string>
+    <string name="when_to_show_hubmode_docked" msgid="8876633401873168284">"ពេលភ្ជាប់ និងសាកថ្ម"</string>
     <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"ដាក់កំហិតចំពោះការសាកថ្មឥតខ្សែ"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APNs"</string>
     <string name="apn_edit" msgid="2003683641840248741">"កែ​ចំណុច​ចូលប្រើប្រាស់"</string>
@@ -2311,6 +2312,12 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"រំកិលអេក្រង់ នៅពេលម៉ៅស៍ប៉ះគែមអេក្រង់"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"ពង្រីកការវាយបញ្ចូល"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"កែវពង្រីកប្រែប្រួលតាមពាក្យឬឃ្លាដែលអ្នកវាយបញ្ចូល"</string>
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_title (8804501318161774285) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_summary (3054371947104552843) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_unavailable_summary (2248787024685382054) -->
+    <skip />
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"បន្តបើក ពេលប្ដូរកម្មវិធី"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"កែវពង្រីកបន្តបើក ហើយបង្រួម នៅពេលអ្នកប្ដូរកម្មវិធី"</string>
     <string name="accessibility_screen_magnification_always_on_unavailable_summary" msgid="3844732482037416038">"មិនអាចប្រើបានទេ ពេលពង្រីកតែផ្នែកនៃអេក្រង់"</string>
@@ -2545,7 +2552,7 @@
     <string name="accessibility_shortcut_unassigned_setting_unavailable_summary" msgid="993486098872935043">"ដើម្បីប្រើប្រាស់មុខងារនេះ សូមបើកផ្លូវកាត់ %1$s នៅលើទំព័ររបស់មុខងារភាពងាយស្រួល"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"បន្ត"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"ឧបករណ៍ជំនួយការស្ដាប់"</string>
-    <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"រៀបចំ និងគ្រប់គ្រងឧបករណ៍​ជំនួយការ​ស្ដាប់ ASHA និង LE Audio, ឧបករណ៍​អេឡិចត្រូនិក​ក្នុងខ្លួនមនុស្ស​សម្រាប់ជំនួយការស្ដាប់ និងឧបករណ៍បង្កើនសំឡេង"</string>
+    <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"រៀបចំ និងគ្រប់គ្រងឧបករណ៍​ជំនួយការ​ស្ដាប់ ASHA និង LE Audio, ឧបករណ៌ផ្សាំ Cochlear និងឧបករណ៍ស្រូបសំឡេងផ្សេងទៀត"</string>
     <string name="accessibility_hearingaid_asha_only_intro" msgid="7402419984664822832">"រៀបចំ និងគ្រប់គ្រងឧបករណ៍​ជំនួយការ​ស្ដាប់ ASHA, ឧបករណ៍​អេឡិចត្រូនិក​ក្នុងខ្លួនមនុស្ស​សម្រាប់ជំនួយការស្ដាប់ និងឧបករណ៍បង្កើនសំឡេងផ្សេងទៀត"</string>
     <string name="accessibility_hearingaid_hap_only_intro" msgid="3332144138443825311">"រៀបចំ និងគ្រប់គ្រងឧបករណ៍​ជំនួយការ​ស្ដាប់ LE Audio, ឧបករណ៍​អេឡិចត្រូនិក​ក្នុងខ្លួនមនុស្ស​សម្រាប់ជំនួយការស្ដាប់ និងឧបករណ៍បង្កើនសំឡេងផ្សេងទៀត"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"មិនបានភ្ជាប់ឧបករណ៍ជំនួយការស្ដាប់ទេ"</string>
@@ -2564,6 +2571,7 @@
     <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"ផ្លូវកាត់ឧបករណ៍ជំនួយការស្ដាប់"</string>
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"ភាពត្រូវគ្នាជាមួយនឹង​ឧបករណ៍​ជំនួយការ​ស្ដាប់"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"កែលម្អភាពត្រូវគ្នាជាមួយឧបករណ៍ទទួលសញ្ញា និងកាត់បន្ថយសំឡេងរំខានដែលមិនចង់បាន"</string>
+    <string name="hac_disclaimer_message" msgid="5279579026956312543"></string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"អំពីឧបករណ៍ជំនួយការស្ដាប់"</string>
     <string name="accessibility_hearing_device_footer_summary" msgid="5513620078219951077">"ដើម្បីស្វែងរកឧបករណ៍ជំនួយការស្ដាប់ផ្សេងទៀតដែលមិនអាចប្រើជាមួយ ASHA ឬ LE Audio សូមចុច &lt;b&gt;ផ្គូផ្គងឧបករណ៍ថ្មី&lt;/b&gt; &gt; &lt;b&gt;មើលឧបករណ៍ច្រើនទៀត&lt;/b&gt;"</string>
     <string name="accessibility_hearing_device_footer_summary_tts" msgid="955527026890456959">"ដើម្បីស្វែងរកឧបករណ៍ជំនួយការស្ដាប់ផ្សេងទៀតដែលមិនអាចប្រើជាមួយ ASHA ឬ LE Audio សូមចុច"<b>"ផ្គូផ្គងឧបករណ៍ថ្មី"</b>" បន្ទាប់មក "<b>"មើលឧបករណ៍ច្រើនទៀត"</b></string>
@@ -4661,8 +4669,8 @@
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"បើក Wallet"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"ផ្លាស់ប្ដូរផ្លូវ​កាត់សម្រាប់ចាក់សោអេក្រង់ឬ?"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> ក៏ជាផ្លូវ​កាត់សម្រាប់ចាក់សោអេក្រង់របស់អ្នកផងដែរ។ ចង់ផ្លាស់ប្ដូរផ្លូវកាត់នោះឬ?"</string>
-    <string name="double_tap_power_wallet_footer_title" msgid="5417023303339032410">"មិនអាចប្រើកាបូបបានទេ។ កម្មវិធីកាបូបលំនាំដើមរបស់អ្នកនាពេលបច្ចុប្បន្នមិនអាចប្រើចលនាបានទេ។"</string>
-    <string name="double_tap_power_wallet_footer_learn_more_text" msgid="1267822422365445657">"ចុចទីនេះ ដើម្បីប្ដូរវា។"</string>
+    <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"កម្មវិធីកាបូបលំនាំដើមរបស់អ្នកនាពេលបច្ចុប្បន្នមិនអាចប្រើចលនានេះបានទេ"</string>
+    <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"ប្ដូរកាបូបលំនាំដើម"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"ត្រឡប់​កាមេរ៉ា​ដើម្បីថត​សែលហ្វី"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"មុខងារ​រុករក"</string>
@@ -5058,31 +5066,31 @@
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"ពិនិត្យមើល​តម្លៃ​ជាមួយ​ក្រុមហ៊ុន​ផ្ដល់​សេវា​​បណ្ដាញ​​របស់​អ្នក។"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"មុខងារបណ្ដាញ​មិនត្រឹមត្រូវ <xliff:g id="NETWORKMODEID">%1$d</xliff:g>។ សូមកុំអើពើ។"</string>
     <string name="satellite_setting" msgid="4650503806634496443">"ការតភ្ជាប់ផ្កាយរណប"</string>
-    <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"ផ្ញើ និងទទួលសារជាអក្សរតាមផ្កាយរណប។ រួមបញ្ចូលជាមួយគណនីរបស់អ្នក។"</string>
-    <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"ផ្ញើ និងទទួលសារជាអក្សរតាមផ្កាយរណប។ មិនរួមបញ្ចូលជាមួយគណនីរបស់អ្នកទេ។"</string>
-    <string name="satellite_setting_summary_without_entitlement" msgid="5284998840770992554">"ផ្ញើ និងទទួលសារជាអក្សរតាមផ្កាយរណប។ សូមទាក់ទងទៅក្រុមហ៊ុន​សេវាទូរសព្ទ​របស់អ្នក ដើម្បីទទួលបាន​ព័ត៌មានលម្អិត។"</string>
+    <string name="satellite_setting_enabled_summary" msgid="2114544331827193266">"ផ្ញើ និងទទួលសារជាអក្សរតាមផ្កាយរណប។ មានរួមបញ្ចូលជាមួយគណនីរបស់អ្នក។"</string>
+    <string name="satellite_setting_disabled_summary" msgid="8193743637158939283">"ផ្ញើ និងទទួលសារជាអក្សរតាមផ្កាយរណប។ មិនរួមបញ្ចូលជាមួយគណនីរបស់អ្នកទេ។"</string>
+    <string name="satellite_setting_summary_without_entitlement" msgid="7010003955751606421">"ផ្ញើ និងទទួលសារជាអក្សរតាមផ្កាយរណប។ សូមទាក់ទងទៅក្រុមហ៊ុន​សេវាទូរសព្ទ​របស់អ្នក ដើម្បីទទួលបាន​ព័ត៌មានលម្អិត។"</string>
     <string name="keywords_satellite_setting" msgid="613553612424945946">"ការ​ផ្ញើ​សារតាមផ្កាយរណប ការតភ្ជាប់ផ្កាយរណប"</string>
     <string name="category_name_about_satellite_connectivity" msgid="3971142716898783631">"អំពីការតភ្ជាប់ផ្កាយរណប"</string>
-    <string name="description_about_satellite_setting" msgid="5539359064330584941">"អ្នកអាចផ្ញើ និងទទួលសារជាអក្សរ និងប្រើកម្មវិធីមួយចំនួនតាមផ្កាយរណបដោយប្រើគណនី <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ដែលមានសិទ្ធិ"</string>
+    <string name="description_about_satellite_setting" msgid="8212911110428998767">"អ្នកអាចផ្ញើ និងទទួលសារជាអក្សរតាមផ្កាយរណបដោយប្រើគណនី <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ដែលមានសិទ្ធិ"</string>
     <string name="category_title_your_satellite_plan" msgid="8169426217950247126">"គណនី <xliff:g id="CARRIER_NAME">%1$s</xliff:g> របស់អ្នក"</string>
-    <string name="title_have_satellite_plan" msgid="2048372355699977947">"ការ​ផ្ញើ​សារតាមផ្កាយរណបត្រូវបានរួមបញ្ចូលជាមួយគណនីរបស់អ្នក"</string>
-    <string name="title_no_satellite_plan" msgid="2876056203035197505">"ការ​ផ្ញើ​សារតាមផ្កាយរណបមិនត្រូវបានរួមបញ្ចូលជាមួយគណនីរបស់អ្នកទេ"</string>
+    <string name="title_have_satellite_plan" msgid="857337944804101443">"ការ​ផ្ញើ​សារត្រូវបានរួមបញ្ចូលជាមួយគណនីរបស់អ្នក"</string>
+    <string name="title_no_satellite_plan" msgid="7255726881685672846">"ការ​ផ្ញើ​សារមិនត្រូវបានរួមបញ្ចូលជាមួយគណនីរបស់អ្នកទេ"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"ស្វែងយល់បន្ថែម"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"របៀបដែលវាដំណើរការ"</string>
-    <string name="title_satellite_connection_guide" msgid="3294802307913609072">"នៅពេលអ្នកមិនមានបណ្ដាញ​ទូរសព្ទ​ចល័ត"</string>
+    <string name="title_satellite_connection_guide" msgid="4730763872034574368">"នៅពេលអ្នកមិនមានបណ្ដាញទូរសព្ទចល័ត ឬ Wi-Fi"</string>
     <string name="title_satellite_connection_guide_for_manual_type" msgid="7223875100977941341">"ផ្ញើសារ​ជាអក្សរទៅលេខទូរសព្ទ"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"ទូរសព្ទរបស់អ្នកនឹងភ្ជាប់ទៅផ្កាយរណបដោយស្វ័យប្រវត្តិ។ ដើម្បីទទួលបានការតភ្ជាប់ល្អបំផុត សូមស្ថិតនៅកន្លែងមើលឃើញផ្ទៃមេឃច្បាស់។"</string>
-    <string name="summary_satellite_connection_guide_for_manual_type" msgid="5075149380084376662">"ប្រសិនបើអ្នកមិនមានបណ្ដាញ​ទូរសព្ទ​ចល័តទេ អ្នកនឹងមើលឃើញជម្រើស ដើម្បីប្រើប្រាស់ការ​ផ្ញើ​សារតាមផ្កាយរណប។"</string>
+    <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"ប្រសិនបើអ្នកមិនមានបណ្ដាញ​ទូរសព្ទ​ចល័តទេ អ្នកនឹងមើលឃើញជម្រើសប្រើប្រាស់ផ្កាយរណប។"</string>
     <string name="title_supported_service" msgid="4275535165812691571">"បន្ទាប់ពីទូរសព្ទរបស់អ្នកភ្ជាប់ទៅផ្កាយរណប"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"អនុវត្តតាមជំហាន ដើម្បីភ្ជាប់ជាមួយផ្កាយរណប"</string>
-    <string name="summary_supported_service" msgid="4320535903444834786">"អ្នកអាចផ្ញើសារជាអក្សរទៅអ្នកណាក៏បាន រួមទាំងសេវាសង្គ្រោះបន្ទាន់។ ទូរសព្ទរបស់អ្នកនឹងភ្ជាប់ឡើងវិញ នៅពេលមានបណ្ដាញ​ទូរសព្ទ​ចល័ត។"</string>
+    <string name="summary_supported_service" msgid="6380533552383355977">"អ្នកអាចផ្ញើសារជាអក្សរទៅអ្នកណាក៏បាន រួមទាំងសេវាសង្គ្រោះបន្ទាន់ និងប្រើប្រាស់​ទិន្នន័យ​មាន​កំណត់នៅលើកម្មវិធីមួយចំនួន។ ទូរសព្ទរបស់អ្នកនឹងភ្ជាប់ជាមួយបណ្ដាញ​ទូរសព្ទ​ចល័តឡើងវិញ នៅពេលមាន។"</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"បន្ទាប់ពីទូរសព្ទរបស់អ្នកបានភ្ជាប់ អ្នកអាចផ្ញើសារជាអក្សរទៅអ្នកណាក៏បាន រួមទាំងសេវាសង្គ្រោះបន្ទាន់។"</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"សូមចងចាំ"</string>
     <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"ការតភ្ជាប់ផ្កាយរណបអាចចំណាយពេលកាន់តែយូរ និងអាចប្រើបាននៅក្នុងតំបន់មួយចំនួនតែប៉ុណ្ណោះ។"</string>
     <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"អាកាសធាតុ និងរចនាសម្ព័ន្ធមួយចំនួនអាចប៉ះពាល់ដល់ការតភ្ជាប់ផ្កាយរណបរបស់អ្នក។"</string>
-    <string name="satellite_footer_content_section_3" msgid="4652426135622555607">"មិនអាចធ្វើការហៅទូរសព្ទតាមផ្កាយរណបបានទេ។"</string>
+    <string name="satellite_footer_content_section_3" msgid="4686525535095321485">"មិនអាចធ្វើការហៅទូរសព្ទតាមផ្កាយរណបបានទេ។"</string>
     <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"ការហៅទៅលេខសង្គ្រោះបន្ទាន់នៅតែអាចភ្ជាប់បានដដែល។"</string>
-    <string name="satellite_footer_content_section_5" msgid="3053256489735265540">"តម្រូវឱ្យមានបណ្ដាញ Wi‑Fi ឬបណ្ដាញទូរសព្ទចល័ត ដើម្បីមើលតំណខាងក្រៅ។"</string>
+    <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"តម្រូវឱ្យភ្ជាប់បណ្ដាញទូរសព្ទ​ចល័ត ឬ Wi-Fi ដើម្បីមើលតំណខាងក្រៅ។"</string>
     <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"ការផ្ញើសារ​ជា​អក្សរដោយប្រើសេវាសង្គ្រោះបន្ទាន់ប្រហែលជាមិនអាចប្រើបាននៅក្នុងតំបន់ទាំងអស់ទេ។"</string>
     <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"អាចចំណាយពេលមួយចំនួន ដើម្បីឱ្យការផ្លាស់ប្ដូរគណនីបង្ហាញនៅក្នុងការកំណត់។ សូម​ទាក់ទង <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ដើម្បី​ទទួលបានព័ត៌មានលម្អិត។"</string>
     <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"ច្រើនទៀតអំពីការតភ្ជាប់ផ្កាយរណប"</string>
@@ -5094,7 +5102,7 @@
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"ការ​ផ្ញើ​សារតាមផ្កាយរណប"</string>
     <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"ការប្រើប្រាស់ទិន្នន័យត្រូវបានរួមបញ្ចូលជាមួយគណនីរបស់អ្នក"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"កម្មវិធី​ដែលអាច​ប្រើបាននៅលើទូរសព្ទរបស់អ្នក"</string>
-    <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"មើលកម្មវិធីទាំងអស់"</string>
+    <string name="title_satellite_supported_app_list_entry" msgid="891155574898209245">"មើល​កម្មវិធីទាំងអស់​ដែលអាចប្រើប្រាស់ដោយផ្កាយរណប"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"កម្មវិធី​ដែលអាច​ប្រើបាននៅលើទូរសព្ទរបស់អ្នក"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"មិនអាចបញ្ចូលស៊ីមបានទេ"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"បញ្ចប់ការតភ្ជាប់ផ្កាយរណប មុនពេលអ្នកបញ្ចូលស៊ីម"</string>

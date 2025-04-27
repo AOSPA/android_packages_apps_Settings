@@ -62,10 +62,10 @@ import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragm
 import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.IllustrationPreference;
+import com.android.settingslib.widget.SettingsThemeHelper;
 import com.android.settingslib.widget.TopIntroPreference;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
-import com.google.android.setupdesign.util.ThemeHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -378,7 +378,7 @@ public abstract class ToggleFeaturePreferenceFragment extends BaseSupportFragmen
             @Override
             public void onBindViewHolder(PreferenceViewHolder holder) {
                 super.onBindViewHolder(holder);
-                if (ThemeHelper.shouldApplyGlifExpressiveStyle(getContext())
+                if (SettingsThemeHelper.isExpressiveTheme(getContext())
                         && isAnySetupWizard()) {
                     View illustrationFrame = holder.findViewById(R.id.illustration_frame);
                     final ViewGroup.LayoutParams lp = illustrationFrame.getLayoutParams();

@@ -15,6 +15,8 @@
  */
 package com.android.settings.display;
 
+import static com.android.systemui.shared.Flags.ambientAod;
+
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.display.AmbientDisplayConfiguration;
@@ -45,9 +47,14 @@ public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreference
         super(context, key);
     }
 
+    protected boolean ambientAodMigration() {
+        return !ambientAod();
+    }
+
     @Override
     public int getAvailabilityStatus() {
-        return isAvailable(getConfig())
+        return ambientAodMigration()
+                && isAvailable(getConfig())
                 && !SystemProperties.getBoolean(PROP_AWARE_AVAILABLE, false) ?
                 AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }

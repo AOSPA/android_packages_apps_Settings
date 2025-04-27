@@ -344,10 +344,8 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Включено. Доступ к данным о местоположении есть у # приложения.}one{Включено. Доступ к данным о местоположении есть у # приложения.}few{Включено. Доступ к данным о местоположении есть у # приложений.}many{Включено. Доступ к данным о местоположении есть у # приложений.}other{Включено. Доступ к данным о местоположении есть у # приложения.}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Загрузка…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Приложения, у которых есть разрешение \"Устройства поблизости\", могут определять относительное местоположение подключенных устройств."</string>
-    <!-- no translation found for location_settings_footer_location_off_with_telephony (5600725945541382556) -->
-    <skip />
-    <!-- no translation found for location_settings_footer_location_off_no_telephony (2709958040008816610) -->
-    <skip />
+    <string name="location_settings_footer_location_off_with_telephony" msgid="5600725945541382556">"Доступ к информации о местоположении отключен для приложений и сервисов. Однако если вы свяжетесь с экстренной службой, геоданные вашего устройства могут быть переданы спасателям."</string>
+    <string name="location_settings_footer_location_off_no_telephony" msgid="2709958040008816610">"Доступ к информации о местоположении отключен для приложений и сервисов."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Подробнее о настройках местоположения…"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Чтобы внести изменения, выберите \"Настройки ChromeOS &gt; Конфиденциальность и безопасность &gt; Настройки конфиденциальности &gt; Доступ к геоданным\""</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Аккаунты"</string>
@@ -457,6 +455,8 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Отмена"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"Не сейчас"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Принять"</string>
+    <!-- no translation found for security_settings_fingerprint_rename_description (6301505700382531086) -->
+    <skip />
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Не настраивать отпечатки?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Сканирование отпечатков пальцев займет 1–2 минуты. Вы можете добавить их позже в настройках устройства."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Если вы видите этот значок, значит вы можете подтвердить личность с помощью отпечатка пальца, например для входа в приложение или одобрения покупки."</string>
@@ -808,7 +808,7 @@
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"Графический ключ"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="9028659554829888373">"PIN-код"</string>
     <string name="unlock_set_unlock_mode_password" msgid="8810609692771987513">"Пароль"</string>
-    <string name="unlock_disable_frp_warning_title" msgid="2545569051372893686">"Отключить все способы разблокировки устройства?"</string>
+    <string name="unlock_disable_frp_warning_title" msgid="2545569051372893686">"Отключить все?"</string>
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"Отключить защиту профиля?"</string>
     <string name="unlock_disable_frp_warning_content_pattern" msgid="6246242612158828147">"Графический ключ защитит данные на телефоне в случае его потери или кражи."</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2259825377085781801">"Графический ключ защитит данные на телефоне в случае его потери или кражи.<xliff:g id="EMPTY_LINE">
@@ -865,7 +865,7 @@
 </xliff:g>Бесконтактная оплата будет недоступна.<xliff:g id="EMPTY_LINE_1">
 
 </xliff:g>Платежные и другие приложения, для использования которых требуется аутентификация (например, кошельки), могут работать неправильно."</string>
-    <string name="unlock_disable_frp_warning_content_face_fingerprint_authbound_keys" msgid="1574263040292024543">"Блокировка экрана, фейсконтроль и разблокировка по отпечатку пальца будут отключены.<xliff:g id="EMPTY_LINE_0">
+    <string name="unlock_disable_frp_warning_content_face_fingerprint_authbound_keys" msgid="1574263040292024543">"Ваш способ разблокировки экрана, фейсконтроль и разблокировка по отпечатку пальца будут отключены.<xliff:g id="EMPTY_LINE_0">
 
 </xliff:g>Бесконтактная оплата будет недоступна.<xliff:g id="EMPTY_LINE_1">
 
@@ -1443,8 +1443,10 @@
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Во время зарядки"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"На док-станции"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Никогда"</string>
-    <string name="screensaver_settings_summary_postured" msgid="1184119124847691954">"В вертикальном положении"</string>
-    <string name="screensaver_settings_summary_postured_and_charging" msgid="1952047156927637506">"В вертикальном положении на зарядке"</string>
+    <!-- no translation found for screensaver_settings_summary_postured (6346392320858994892) -->
+    <skip />
+    <!-- no translation found for screensaver_settings_summary_postured_and_charging (5111797042509819055) -->
+    <skip />
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"Включено/<xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Отключено"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Когда запускать"</string>
@@ -1614,8 +1616,10 @@
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Когда показывать автоматически"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Никогда"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Во время зарядки"</string>
-    <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"Во время зарядки в вертикальном положении"</string>
-    <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"На док-станции"</string>
+    <!-- no translation found for when_to_show_hubmode_charging_and_upright (537039046490426922) -->
+    <skip />
+    <!-- no translation found for when_to_show_hubmode_docked (8876633401873168284) -->
+    <skip />
     <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"Только при беспроводной зарядке"</string>
     <string name="apn_settings" msgid="4295467389400441299">"Точки доступа"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Изменить точку доступа"</string>
@@ -2313,6 +2317,12 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Перемещать экран, когда курсор касается его краев"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Лупа при вводе текста"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Перемещать лупу по мере ввода текста"</string>
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_title (8804501318161774285) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_summary (3054371947104552843) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_unavailable_summary (2248787024685382054) -->
+    <skip />
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Не отключать при смене приложений"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"Лупа остается включенной. Масштаб уменьшается при переключении приложений."</string>
     <string name="accessibility_screen_magnification_always_on_unavailable_summary" msgid="3844732482037416038">"Недоступно при увеличении только части экрана"</string>
@@ -2347,7 +2357,7 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Увеличение с помощью кнопки"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Увеличение с помощью кнопки и по тройному нажатию"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"О функции \"<xliff:g id="SERVICE">%1$s</xliff:g>\""</string>
-    <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Масштаб экрана и текст"</string>
+    <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Текст и масштаб изображения"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Отображение текста"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Тема: Дизайн воздушного шара"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"От: Борис"</string>
@@ -2422,7 +2432,7 @@
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Для этого жеста задана команда \"<xliff:g id="SERVICE">%1$s</xliff:g>\". Чтобы увеличить масштаб, проведите двумя пальцами снизу вверх и задержите их на экране. Затем выберите пункт \"Увеличение\"."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="8866765674372344850">"Кнопки громкости для быстр. доступа"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Настройки быстрого запуска"</string>
-    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"Кнопки громк. для быстр. доступа на заблок. экране"</string>
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"Кнопки громкости для доступа на заблок. экране"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Включать специальную функцию с заблокированного экрана, нажимая и удерживая обе кнопки регулировки громкости в течение нескольких секунд"</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Кнопка специальных возможностей"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Кнопка спец. возможностей и жесты"</string>
@@ -2566,6 +2576,7 @@
     <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Быстрый запуск слухового аппарата"</string>
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Поддержка слуховых аппаратов"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Улучшить совместимость со слуховыми аппаратами и уменьшить нежелательный шум"</string>
+    <string name="hac_disclaimer_message" msgid="5279579026956312543"></string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"О слуховых аппаратах"</string>
     <string name="accessibility_hearing_device_footer_summary" msgid="5513620078219951077">"Чтобы найти слуховые аппараты, которые не поддерживают ASHA и LE Audio, нажмите &lt;b&gt;Добавить устройство&lt;/b&gt; &gt; &lt;b&gt;Другие устройства&lt;/b&gt;."</string>
     <string name="accessibility_hearing_device_footer_summary_tts" msgid="955527026890456959">"Чтобы найти слуховые аппараты, которые не поддерживают ASHA и LE Audio, нажмите "<b>"Добавить устройство"</b>", а затем "<b>"Другие устройства"</b></string>
@@ -2863,7 +2874,7 @@
     <string name="battery_usage_total_less_than_one_minute" msgid="951460680288855780">"Итого: меньше минуты"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="267133882897827276">"Фоновый режим: меньше минуты"</string>
     <string name="battery_usage_screen_time_less_than_one_minute" msgid="578511021578427369">"Активное использование: меньше минуты"</string>
-    <string name="power_usage_time_less_than_one_minute" msgid="1599706998204418081">"меньше минуты"</string>
+    <string name="power_usage_time_less_than_one_minute" msgid="1599706998204418081">"Меньше минуты"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Всего: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"В фоновом режиме: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_time" msgid="3973865893520804115">"Время использования: <xliff:g id="TIME">%s</xliff:g>"</string>
@@ -3651,7 +3662,7 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Уменьшать яркость обоев"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"уменьшать яркость обоев"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Менять яркость обоев"</string>
-    <string name="mode_dark_theme_title" msgid="8099007897943513209">"Использовать темную тему"</string>
+    <string name="mode_dark_theme_title" msgid="8099007897943513209">"Использовать тёмную тему"</string>
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"использовать темную тему"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Переключить тему устройства, чтобы использовать темный фон, который более комфортен для глаз"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Нет изменений в настройках экрана}=1{{effect_1}}=2{{effect_1} и {effect_2}}=3{{effect_1}, {effect_2} и {effect_3}}one{{effect_1}, {effect_2} и ещё # изменение}few{{effect_1}, {effect_2} и ещё # изменения}many{{effect_1}, {effect_2} и ещё # изменений}other{{effect_1}, {effect_2} и ещё # изменения}}"</string>
@@ -4159,7 +4170,7 @@
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"Включить"</string>
     <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Настройте режим, который работает по расписанию"</string>
     <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"Настройте синхронизацию режима с мероприятиями из календаря и ответами на приглашения"</string>
-    <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"Создайте успокаивающую программу для подготовки ко сну. Настройте будильники, понижение яркости экрана и блокировку уведомлений."</string>
+    <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"Включите специальный режим для подготовки ко сну. Настройте будильники, понижение яркости экрана и блокировку уведомлений."</string>
     <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"Не отвлекайтесь на устройство, чтобы полностью сфокусироваться на дороге"</string>
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Заблокируйте то, что отвлекает, чтобы сфокусироваться на важном"</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Добейтесь тишины, заблокировав все отвлекающие факторы"</string>
@@ -4663,9 +4674,9 @@
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Открыть Кошелек"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"Заменить действие для быстрого запуска при заблокированном экране?"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"\"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g>\" также используется для быстрого включения специальной возможности при заблокированном экране. Хотите заменить действие?"</string>
-    <!-- no translation found for double_tap_power_wallet_footer_title (5417023303339032410) -->
+    <!-- no translation found for double_tap_power_wallet_footer_title (4626950875173822614) -->
     <skip />
-    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (1267822422365445657) -->
+    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (4871482943751760132) -->
     <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Переключение на фронтальную камеру"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
@@ -4846,7 +4857,7 @@
     <string name="autofill_app" msgid="7595308061826307921">"Автозаполнение"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Сервис автозаполнения по умолчанию"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Пароли"</string>
-    <string name="credman_chosen_app_title" msgid="7735183808067729319">"Предпочитаемый сервис"</string>
+    <string name="credman_chosen_app_title" msgid="7735183808067729319">"Приоритетный сервис"</string>
     <string name="credman_credentials" msgid="2620352336624160642">"Дополнительные сервисы"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# пароль}one{# пароль}few{# пароля}many{# паролей}other{# пароля}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"автозаполнение, автоматически, заполнение, пароль"</string>
@@ -4869,7 +4880,7 @@
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"Изменить"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"Можно указать не более пяти сервисов"</string>
     <string name="credman_limit_error_msg" msgid="2521803280130310063">"Чтобы добавить сервис, отключите хотя бы один из уже выбранных."</string>
-    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"Выберите предпочтительный сервис, который будет сохранять учетные данные и предлагать подсказки для автозаполнения. Вы также можете включить дополнительные сервисы подсказок."</string>
+    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"Выберите приоритетный сервис, который будет сохранять учетные данные и предлагать подсказки для автозаполнения. Можно включить дополнительные сервисы, если хотите, чтобы они тоже показывали вам подсказки."</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s анализирует содержимое экрана и находит поля, которые можно заполнить автоматически."</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"Выбрано слишком много сервисов"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"Одновременно можно использовать не более пяти сервисов для хранения паролей, ключей доступа и данных. Чтобы добавить сервис, отключите один из уже выбранных."</string>
@@ -5062,31 +5073,41 @@
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"Информацию о тарифах вы можете получить у интернет-провайдера."</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Недопустимый режим сети (<xliff:g id="NETWORKMODEID">%1$d</xliff:g>). Не используется."</string>
     <string name="satellite_setting" msgid="4650503806634496443">"Спутниковая связь"</string>
-    <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Обмен текстовыми сообщениями по спутниковой связи включен для вашего аккаунта."</string>
-    <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Обмен текстовыми сообщениями по спутниковой связи. Недоступен для вашего аккаунта."</string>
-    <string name="satellite_setting_summary_without_entitlement" msgid="5284998840770992554">"Обмен текстовыми сообщениями по спутниковой связи. За подробными сведениями обращайтесь к своему оператору связи."</string>
+    <!-- no translation found for satellite_setting_enabled_summary (2114544331827193266) -->
+    <skip />
+    <!-- no translation found for satellite_setting_disabled_summary (8193743637158939283) -->
+    <skip />
+    <!-- no translation found for satellite_setting_summary_without_entitlement (7010003955751606421) -->
+    <skip />
     <string name="keywords_satellite_setting" msgid="613553612424945946">"спутниковый обмен сообщениями, обмен данными со спутником"</string>
     <string name="category_name_about_satellite_connectivity" msgid="3971142716898783631">"О спутниковой связи"</string>
-    <string name="description_about_satellite_setting" msgid="5539359064330584941">"Чтобы отправлять и принимать сообщения, а также использовать некоторые приложения при помощи спутниковой связи, аккаунт оператора \"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>\" должен соответствовать требованиям."</string>
+    <!-- no translation found for description_about_satellite_setting (8212911110428998767) -->
+    <skip />
     <string name="category_title_your_satellite_plan" msgid="8169426217950247126">"Ваш аккаунт <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
-    <string name="title_have_satellite_plan" msgid="2048372355699977947">"В вашем аккаунте есть возможность обмениваться сообщениями по спутниковой связи"</string>
-    <string name="title_no_satellite_plan" msgid="2876056203035197505">"В вашем аккаунте нет возможности обмениваться сообщениями по спутниковой связи"</string>
+    <string name="title_have_satellite_plan" msgid="857337944804101443">"В вашем аккаунте есть возможность обмениваться сообщениями"</string>
+    <!-- no translation found for title_no_satellite_plan (7255726881685672846) -->
+    <skip />
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Подробнее"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Как это работает"</string>
-    <string name="title_satellite_connection_guide" msgid="3294802307913609072">"Если нет мобильной сети"</string>
+    <!-- no translation found for title_satellite_connection_guide (4730763872034574368) -->
+    <skip />
     <string name="title_satellite_connection_guide_for_manual_type" msgid="7223875100977941341">"Отправляйте текстовые сообщения"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Ваш телефон автоматически подключится к спутниковой связи. Для оптимального качества соединения найдите место, где хорошо видно небо."</string>
-    <string name="summary_satellite_connection_guide_for_manual_type" msgid="5075149380084376662">"Если мобильная сеть не работает, появится предложение использовать спутниковый обмен сообщениями."</string>
+    <!-- no translation found for summary_satellite_connection_guide_for_manual_type (2106091974353287661) -->
+    <skip />
     <string name="title_supported_service" msgid="4275535165812691571">"После подключения телефона к спутниковой связи"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Подключитесь к спутнику, следуя инструкциям"</string>
-    <string name="summary_supported_service" msgid="4320535903444834786">"Вы можете отправлять текстовые сообщения кому угодно, в том числе экстренным службам. Ваш телефон повторно подключится к мобильной сети, когда она станет доступна."</string>
+    <!-- no translation found for summary_supported_service (6380533552383355977) -->
+    <skip />
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"После подключения к спутнику вы сможете отправлять текстовые сообщения кому угодно, в том числе экстренным службам."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Важно!"</string>
     <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"Обмен данными по спутниковой связи может занять больше времени и доступен только в некоторых регионах."</string>
     <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"Иногда качество соединения снижается из-за погодных условий или внешних препятствий."</string>
-    <string name="satellite_footer_content_section_3" msgid="4652426135622555607">"Звонки по спутниковой связи недоступны."</string>
+    <!-- no translation found for satellite_footer_content_section_3 (4686525535095321485) -->
+    <skip />
     <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"Однако могут работать экстренные вызовы."</string>
-    <string name="satellite_footer_content_section_5" msgid="3053256489735265540">"Чтобы просматривать внешние ссылки, подключитесь к мобильному интернету или сети Wi-Fi."</string>
+    <!-- no translation found for satellite_footer_content_section_5 (2466353040832630785) -->
+    <skip />
     <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"Обмен текстовыми сообщениями с экстренными службами может быть доступен не во всех регионах."</string>
     <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"Изменения в аккаунте могут отразиться в настройках не сразу. За дополнительной информацией обратитесь к оператору \"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>\"."</string>
     <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"Подробнее о спутниковой связи…"</string>
@@ -5098,7 +5119,8 @@
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"Спутниковый обмен сообщениями"</string>
     <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"В вашем аккаунте есть возможность передавать данные"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Совместимые приложения на устройстве"</string>
-    <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"Показать все приложения"</string>
+    <!-- no translation found for title_satellite_supported_app_list_entry (891155574898209245) -->
+    <skip />
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Совместимые приложения на устройстве"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Не удалось добавить SIM-карту"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Прежде чем добавить SIM-карту, отключите спутниковую связь."</string>
@@ -5752,7 +5774,7 @@
     <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Пароль должен содержать от 4 до 16 знаков. Можно использовать только буквы, цифры и символы."</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Сканер QR-кодов"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Нужна помощь?"</annotation></string>
-    <string name="homepage_search" msgid="6759334912284663559">"Поиск по настройкам"</string>
+    <string name="homepage_search" msgid="6759334912284663559">"Поиск настроек"</string>
     <string name="keywords_contacts_storage" msgid="9061213057165337893">"контакты, хранилище, аккаунт"</string>
     <string name="contacts_storage_settings_title" msgid="1574030546525203810">"Контакты"</string>
     <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"Только на устройстве"</string>

@@ -100,11 +100,10 @@ public class AudioSharingReceiver extends BroadcastReceiver {
                     //       isLeAudioBroadcastAssistantSupported() always return FEATURE_SUPPORTED
                     //       or FEATURE_NOT_SUPPORTED when BT and BLE off
                     cancelSharingNotification(context, AUDIO_SHARING_NOTIFICATION_ID);
+                    cancelSharingNotification(context, ADD_SOURCE_NOTIFICATION_ID);
                     metricsFeatureProvider.action(
                             context, SettingsEnums.ACTION_CANCEL_AUDIO_SHARING_NOTIFICATION,
                             LocalBluetoothLeBroadcast.ACTION_LE_AUDIO_SHARING_STATE_CHANGE);
-                    cancelSharingNotification(context, ADD_SOURCE_NOTIFICATION_ID);
-                    // TODO: add metric
                 } else {
                     Log.w(
                             TAG,
@@ -156,6 +155,8 @@ public class AudioSharingReceiver extends BroadcastReceiver {
                     LocalBluetoothManager manager = Utils.getLocalBtManager(context);
                     if (!validToAddSource(device, action, manager).isEmpty()) {
                         showAddSourceNotification(context, device);
+                        metricsFeatureProvider.action(
+                                context, SettingsEnums.ACTION_SHOW_ADD_SOURCE_NOTIFICATION);
                     }
                 }
                 break;
@@ -172,11 +173,22 @@ public class AudioSharingReceiver extends BroadcastReceiver {
                 ImmutableList<BluetoothDevice> sinksToAdd = validToAddSource(sink, action, manager);
                 AudioSharingUtils.addSourceToTargetSinks(sinksToAdd, manager);
                 cancelSharingNotification(context, ADD_SOURCE_NOTIFICATION_ID);
+                if (!sinksToAdd.isEmpty()) {
+                    metricsFeatureProvider.action(context,
+                            SettingsEnums.ACTION_AUDIO_SHARING_ADD_SOURCE,
+                            AudioSharingUtils.buildAddSourceEventData(
+                                    SettingsEnums.ACTION_SHOW_ADD_SOURCE_NOTIFICATION,
+                                    /* userTriggered= */ false));
+                }
                 break;
             case ACTION_LE_AUDIO_SHARING_CANCEL_NOTIF:
                 int notifId = intent.getIntExtra(EXTRA_NOTIF_ID, -1);
                 if (notifId != -1) {
                     cancelSharingNotification(context, notifId);
+                    if (notifId == ADD_SOURCE_NOTIFICATION_ID) {
+                        metricsFeatureProvider.action(
+                                context, SettingsEnums.ACTION_CANCEL_ADD_SOURCE_NOTIFICATION);
+                    }
                 }
                 break;
             default:

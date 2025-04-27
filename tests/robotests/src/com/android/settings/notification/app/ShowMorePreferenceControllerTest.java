@@ -45,7 +45,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(RobolectricTestRunner.class)
-@EnableFlags(Flags.FLAG_NOTIFICATION_HIDE_UNUSED_CHANNELS)
 public class ShowMorePreferenceControllerTest {
 
     private Context mContext;

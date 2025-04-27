@@ -473,9 +473,8 @@ public class AudioStreamMediaService extends Service {
                         .setSmallIcon(com.android.settingslib.R.drawable.ic_bt_le_audio_sharing)
                         .setStyle(mediaStyle)
                         .setContentText(getString(
-                                (isAnyDeviceReceiverPaused() || isAllDeviceHysteresis())
-                                        ? BROADCAST_STREAM_PAUSED_TEXT
-                                        : BROADCAST_LISTENING_NOW_TEXT))
+                                isAnyDeviceStreaming() ? BROADCAST_LISTENING_NOW_TEXT
+                                        : BROADCAST_STREAM_PAUSED_TEXT))
                         .setSilent(true);
         return notificationBuilder.build();
     }

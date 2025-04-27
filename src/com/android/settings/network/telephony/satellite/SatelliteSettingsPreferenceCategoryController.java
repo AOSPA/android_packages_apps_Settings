@@ -64,6 +64,7 @@ public class SatelliteSettingsPreferenceCategoryController extends
 
     public SatelliteSettingsPreferenceCategoryController(Context context, String key) {
         super(context, key);
+        mCarrierConfigCache = CarrierConfigCache.getInstance(mContext);
     }
 
     /**
@@ -74,7 +75,6 @@ public class SatelliteSettingsPreferenceCategoryController extends
     public void init(int subId) {
         Log.d(TAG, "init(), subId=" + subId);
         mSubId = subId;
-        mCarrierConfigCache = CarrierConfigCache.getInstance(mContext);
         mSatelliteManager = mContext.getSystemService(SatelliteManager.class);
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
         requestIsSatelliteSupported();

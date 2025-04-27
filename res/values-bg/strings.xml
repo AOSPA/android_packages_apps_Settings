@@ -344,10 +344,8 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Включено/# приложение има достъп до местоположението}other{Включено/# приложения имат достъп до местоположението}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Зарежда се…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Приложенията с разрешението за устройства в близост могат да определят относителната позиция на свързаните устройства."</string>
-    <!-- no translation found for location_settings_footer_location_off_with_telephony (5600725945541382556) -->
-    <skip />
-    <!-- no translation found for location_settings_footer_location_off_no_telephony (2709958040008816610) -->
-    <skip />
+    <string name="location_settings_footer_location_off_with_telephony" msgid="5600725945541382556">"Достъпът до местоположението е изключен за приложенията и услугите. Местоположението на устройството ви пак може да се изпраща до службите за спешни случаи, когато се свържете с номер за спешни случаи."</string>
+    <string name="location_settings_footer_location_off_no_telephony" msgid="2709958040008816610">"Достъпът до местоположението е изключен за приложенията и услугите."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Научете повече за настройките за местоположението"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"За промяна отворете настройките на ChromeOS &gt; „Поверителност и сигурност &gt; Контроли за поверителност &gt; Достъп до местоположението“"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Профили"</string>
@@ -457,6 +455,8 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Отказ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"Не сега"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Приемам"</string>
+    <!-- no translation found for security_settings_fingerprint_rename_description (6301505700382531086) -->
+    <skip />
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Да се пропусне ли отпечатъкът?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Настройването на отпечатък отнема само една или две минути. Ако пропуснете тази стъпка, можете да добавите отпечатъка си по-късно от настройките."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Когато видите тази икона, използвайте отпечатъка си за удостоверяване – например при влизане в прилож. или одобряване на покупка"</string>
@@ -470,7 +470,7 @@
     <string name="fingerprint_check_enroll_touch_sensor" msgid="5010063281557456236">"Докоснете сензора за отпечатъци"</string>
     <string name="fingerprint_check_enroll_not_recognized" msgid="2779520550437394431">"Отпечатъкът не е разпознат"</string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Отключване чрез часовника"</string>
-    <string name="security_settings_activeunlock" msgid="8922823742770802651">"Гледане"</string>
+    <string name="security_settings_activeunlock" msgid="8922823742770802651">"Часовник"</string>
     <string name="biometric_settings_intro_with_activeunlock" msgid="5032953826653108646">"Когато носите маска или се намирате на тъмно място и сте настроили функциите „Отключване с лице“ и „Отключване с отпечатък“, телефонът ви ще поиска да използвате отпечатъка си.\n\nФункцията за отключване чрез часовника е друг удобен начин да отключвате телефона си, например когато пръстите ви са мокри или лицето ви не бъде разпознато."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="5881355884547769337">"Функцията за отключване чрез часовника е друг удобен начин да отключвате телефона си, например когато отпечатъкът ви не бъде разпознат."</string>
     <string name="biometric_settings_intro_with_face" msgid="7671919122230588521">"Функцията за отключване чрез часовника е друг удобен начин да отключвате телефона си, например когато лицето ви не бъде разпознато."</string>
@@ -1443,8 +1443,10 @@
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"При зареждане"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"При свързване с докинг станция"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Никога"</string>
-    <string name="screensaver_settings_summary_postured" msgid="1184119124847691954">"При позициониране"</string>
-    <string name="screensaver_settings_summary_postured_and_charging" msgid="1952047156927637506">"При зареждане и позициониране"</string>
+    <!-- no translation found for screensaver_settings_summary_postured (6346392320858994892) -->
+    <skip />
+    <!-- no translation found for screensaver_settings_summary_postured_and_charging (5111797042509819055) -->
+    <skip />
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"Вкл./<xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Изкл."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Кога да стартира функцията"</string>
@@ -1614,8 +1616,10 @@
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Кога да се показва автоматично"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Никога"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"При зареждане"</string>
-    <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"При зареждане и изправено положение"</string>
-    <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"При свързване с докинг станция"</string>
+    <!-- no translation found for when_to_show_hubmode_charging_and_upright (537039046490426922) -->
+    <skip />
+    <!-- no translation found for when_to_show_hubmode_docked (8876633401873168284) -->
+    <skip />
     <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"Ограничаване до безжично зареждане"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Редакт. на точка за достъп"</string>
@@ -2313,6 +2317,12 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Преместване на екрана, когато мишката докосне краищата му"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Увеличаване при въвеждане на текст"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Лупата следва текста, докато въвеждате"</string>
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_title (8804501318161774285) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_summary (3054371947104552843) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_unavailable_summary (2248787024685382054) -->
+    <skip />
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Да остане включена при превключване на приложенията"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"Лупата остава включена и намалява мащаба, когато превключвате между приложения"</string>
     <string name="accessibility_screen_magnification_always_on_unavailable_summary" msgid="3844732482037416038">"Не е налице, когато се увеличава само част от екрана"</string>
@@ -2566,6 +2576,7 @@
     <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Пряк път за слухов апарат"</string>
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Съвместимост със слухови апарати"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Подобрява съвместимостта със слуховите апарати с телебобина и намалява нежелания шум"</string>
+    <string name="hac_disclaimer_message" msgid="5279579026956312543"></string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"Всичко за слуховите апарати"</string>
     <string name="accessibility_hearing_device_footer_summary" msgid="5513620078219951077">"За да намерите други слухови апарати, които не се поддържат от протокола ASHA или LE Audio, докоснете &lt;b&gt;Сдвояване на ново устройство&lt;/b&gt; &gt; &lt;b&gt;Вижте още устройства&lt;/b&gt;"</string>
     <string name="accessibility_hearing_device_footer_summary_tts" msgid="955527026890456959">"За да намерите други слухови апарати, които не се поддържат от протокола ASHA или LE Audio, докоснете "<b>"Сдвояване на ново устройство"</b>", след което "<b>"Вижте още устройства"</b></string>
@@ -4640,7 +4651,7 @@
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Деакт. на времето за изчакване за упълном. на adb"</string>
     <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"Деактивиране на автоматичната отмяна на упълномощаванията на adb за системи, които не са установили повторна връзка в рамките на стандартния период (7 дни) или този, конфигуриран от потребителя (най-малко 1 ден)."</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Сензорите са изключени"</string>
-    <string name="managed_profile_settings_title" msgid="3400923723423564217">"Настройки за служебния потребителски профил"</string>
+    <string name="managed_profile_settings_title" msgid="3400923723423564217">"Настройки за служебния потр. профил"</string>
     <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"Търсене на контакти от служебния указател в личните приложения"</string>
     <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"Търсенията и входящите ви обаждания може да са видими за системния ви администратор"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Календар за няколко потребителски профила"</string>
@@ -4665,9 +4676,9 @@
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Отваряне на Wallet"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"Да се промени ли прекият път на заключения екран?"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> е и пряк път на заключения екран. Искате ли да го промените?"</string>
-    <!-- no translation found for double_tap_power_wallet_footer_title (5417023303339032410) -->
+    <!-- no translation found for double_tap_power_wallet_footer_title (4626950875173822614) -->
     <skip />
-    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (1267822422365445657) -->
+    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (4871482943751760132) -->
     <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Обръщане на камерата за селфи"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
@@ -5064,31 +5075,41 @@
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"За цени се обърнете към оператора си."</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Невалиден мрежов режим <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Пренебрегване."</string>
     <string name="satellite_setting" msgid="4650503806634496443">"Свързване със сателит"</string>
-    <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Изпращайте и получавайте текстови съобщения чрез сателит. Услугата е включена с профила ви."</string>
-    <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Изпращайте и получавайте текстови съобщения чрез сателит. Услугата не се предлага с профила ви."</string>
-    <string name="satellite_setting_summary_without_entitlement" msgid="5284998840770992554">"Изпращайте и получавайте текстови съобщения чрез сателит. За подробности се обърнете към оператора си."</string>
+    <!-- no translation found for satellite_setting_enabled_summary (2114544331827193266) -->
+    <skip />
+    <!-- no translation found for satellite_setting_disabled_summary (8193743637158939283) -->
+    <skip />
+    <!-- no translation found for satellite_setting_summary_without_entitlement (7010003955751606421) -->
+    <skip />
     <string name="keywords_satellite_setting" msgid="613553612424945946">"Сателитни съобщения, свързване със сателит"</string>
     <string name="category_name_about_satellite_connectivity" msgid="3971142716898783631">"Всичко за свързването със сателит"</string>
-    <string name="description_about_satellite_setting" msgid="5539359064330584941">"Можете да изпращате и получавате текстови съобщения и да използвате някои приложения чрез сателит, ако имате отговарящ на условията профил в(ъв) <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for description_about_satellite_setting (8212911110428998767) -->
+    <skip />
     <string name="category_title_your_satellite_plan" msgid="8169426217950247126">"Вашият профил в(ъв) <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
-    <string name="title_have_satellite_plan" msgid="2048372355699977947">"Услугата за сателитни съобщения е включена с профила ви"</string>
-    <string name="title_no_satellite_plan" msgid="2876056203035197505">"Услугата за сателитни съобщения не е включена с профила ви"</string>
+    <string name="title_have_satellite_plan" msgid="857337944804101443">"Услугата за съобщения е включена за профила ви"</string>
+    <!-- no translation found for title_no_satellite_plan (7255726881685672846) -->
+    <skip />
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Научете повече"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Начин на работа"</string>
-    <string name="title_satellite_connection_guide" msgid="3294802307913609072">"Когато нямате достъп до мобилна мрежа"</string>
+    <!-- no translation found for title_satellite_connection_guide (4730763872034574368) -->
+    <skip />
     <string name="title_satellite_connection_guide_for_manual_type" msgid="7223875100977941341">"Изпращане на текстово съобщение до телефонен номер"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Телефонът ви ще се свърже автоматично със сателит. За оптимална връзка трябва да сте на място с ясен изглед към небето."</string>
-    <string name="summary_satellite_connection_guide_for_manual_type" msgid="5075149380084376662">"Ако нямате мобилна мрежа, ще видите опция да използвате функцията „Сателитни съобщения“."</string>
+    <!-- no translation found for summary_satellite_connection_guide_for_manual_type (2106091974353287661) -->
+    <skip />
     <string name="title_supported_service" msgid="4275535165812691571">"След като телефонът ви се свърже със сателит"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Изпълнете стъпките за свързване със сателита"</string>
-    <string name="summary_supported_service" msgid="4320535903444834786">"Можете да изпращате текстови съобщения на когото пожелаете, включително на службите за спешни случаи. Телефонът ви ще се свърже отново с мобилна мрежа, когато е възможно."</string>
+    <!-- no translation found for summary_supported_service (6380533552383355977) -->
+    <skip />
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"След като телефонът ви се свърже, можете да изпращате текстови съобщения на когото пожелаете, включително на службите за спешни случаи."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Имайте предвид следното"</string>
     <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"Свързването със сателит може да отнеме по-дълго време. Услугата се предлага само в някои райони"</string>
     <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"и сателитната връзка може да бъде повлияна от времето и определени структури."</string>
-    <string name="satellite_footer_content_section_3" msgid="4652426135622555607">"Не се поддържат обаждания чрез сателит,"</string>
+    <!-- no translation found for satellite_footer_content_section_3 (4686525535095321485) -->
+    <skip />
     <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"но е възможно спешните обаждания да бъдат извършени."</string>
-    <string name="satellite_footer_content_section_5" msgid="3053256489735265540">"За преглед на външните връзки се изисква мобилна или Wi‑Fi мрежа."</string>
+    <!-- no translation found for satellite_footer_content_section_5 (2466353040832630785) -->
+    <skip />
     <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"Обменът на текстови съобщения със службите за спешни случаи може да не е налице във всички райони."</string>
     <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"Може да мине известно време, докато промените в профила ви се покажат в настройките. За подробности се обърнете към <xliff:g id="CARRIER_NAME">%1$s</xliff:g>."</string>
     <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"Още за свързването със сателит"</string>
@@ -5100,7 +5121,8 @@
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"сателитни съобщения"</string>
     <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"Използването на данни е включено за профила ви"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Поддържани приложения на телефона ви"</string>
-    <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"вижте всички приложения"</string>
+    <!-- no translation found for title_satellite_supported_app_list_entry (891155574898209245) -->
+    <skip />
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Поддържани приложения на телефона ви"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Не може да бъде добавена SIM карта"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Прекратете сателитната връзка, преди да добавите SIM карта"</string>

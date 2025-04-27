@@ -28,10 +28,10 @@ import android.view.WindowManager;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.LabeledSeekBarPreference;
 import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.ButtonPreference;
+import com.android.settingslib.widget.SliderPreference;
 
 /**
  * A fragment to include all the settings related to Gesture Navigation mode.
@@ -80,8 +80,8 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
         mBackGestureInsetScales = getFloatArray(res.obtainTypedArray(
                 com.android.internal.R.array.config_backGestureInsetScales));
 
-        initSeekBarPreference(LEFT_EDGE_SEEKBAR_KEY);
-        initSeekBarPreference(RIGHT_EDGE_SEEKBAR_KEY);
+        initSliderPreference(LEFT_EDGE_SEEKBAR_KEY);
+        initSliderPreference(RIGHT_EDGE_SEEKBAR_KEY);
         initTutorialButton();
     }
 
@@ -141,9 +141,9 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
                 && mLaunchTutorialIntent.resolveActivity(context.getPackageManager()) != null;
     }
 
-    private void initSeekBarPreference(final String key) {
-        final LabeledSeekBarPreference pref = getPreferenceScreen().findPreference(key);
-        pref.setContinuousUpdates(true);
+    private void initSliderPreference(final String key) {
+        final SliderPreference pref = getPreferenceScreen().findPreference(key);
+        pref.setUpdatesContinuously(true);
         pref.setHapticFeedbackMode(SeekBarPreference.HAPTIC_FEEDBACK_MODE_ON_TICKS);
 
         final String settingsKey = key == LEFT_EDGE_SEEKBAR_KEY
@@ -162,7 +162,7 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
                 minDistanceIndex = i;
             }
         }
-        pref.setProgress(minDistanceIndex);
+        pref.setValue(minDistanceIndex);
 
         pref.setOnPreferenceChangeListener((p, v) -> {
             final int width = (int) (mDefaultBackGestureInset * mBackGestureInsetScales[(int) v]);
@@ -170,7 +170,7 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
             return true;
         });
 
-        pref.setOnPreferenceChangeStopListener((p, v) -> {
+        pref.setOnPreferenceChangeListener((p, v) -> {
             mIndicatorView.setIndicatorWidth(0, key == LEFT_EDGE_SEEKBAR_KEY);
             final float scale = mBackGestureInsetScales[(int) v];
             Settings.Secure.putFloat(getContext().getContentResolver(), settingsKey, scale);

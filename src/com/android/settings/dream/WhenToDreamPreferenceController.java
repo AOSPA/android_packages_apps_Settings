@@ -16,6 +16,8 @@
 
 package com.android.settings.dream;
 
+import static android.service.dreams.Flags.dreamsV2;
+
 import android.annotation.StringRes;
 import android.content.Context;
 
@@ -65,6 +67,10 @@ public class WhenToDreamPreferenceController extends BasePreferenceController im
         super.updateState(preference);
 
         preference.setSummary(getSummaryResId());
+        if (dreamsV2()) {
+            // Move the pref to the top (under the main switch).
+            preference.setOrder(50);
+        }
     }
 
     @Override

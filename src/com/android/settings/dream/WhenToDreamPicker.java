@@ -40,6 +40,7 @@ public class WhenToDreamPicker extends RadioButtonPickerFragment {
     private Context mContext;
     private DreamBackend mBackend;
     private boolean mDreamsSupportedOnBattery;
+    private boolean mShowRestrictToWirelessCharging;
     private RadioButtonPickerExtraSwitchController mRestrictToWirelessChargingController;
 
     private final RadioButtonPickerExtraSwitchController.PreferenceAccessor
@@ -64,6 +65,8 @@ public class WhenToDreamPicker extends RadioButtonPickerFragment {
         mBackend = DreamBackend.getInstance(context);
         mDreamsSupportedOnBattery = getResources().getBoolean(
                 com.android.internal.R.bool.config_dreamsEnabledOnBattery);
+        mShowRestrictToWirelessCharging =
+                getResources().getBoolean(R.bool.config_show_restrict_to_wireless_charging);
     }
 
     @Override
@@ -104,7 +107,7 @@ public class WhenToDreamPicker extends RadioButtonPickerFragment {
             return;
         }
 
-        if (mRestrictToWirelessChargingController == null) {
+        if (mShowRestrictToWirelessCharging && mRestrictToWirelessChargingController == null) {
             mRestrictToWirelessChargingController =
                     new RadioButtonPickerExtraSwitchController(
                             mContext,
