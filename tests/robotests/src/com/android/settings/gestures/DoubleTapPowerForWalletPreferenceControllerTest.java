@@ -16,6 +16,8 @@
 
 package com.android.settings.gestures;
 
+import static android.content.pm.PackageManager.FEATURE_NFC;
+
 import static com.android.settings.gestures.DoubleTapPowerSettingsUtils.DOUBLE_TAP_POWER_DISABLED_MODE;
 import static com.android.settings.gestures.DoubleTapPowerSettingsUtils.DOUBLE_TAP_POWER_MULTI_TARGET_MODE;
 
@@ -26,6 +28,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.service.quickaccesswallet.QuickAccessWalletClient;
 
@@ -52,12 +55,15 @@ public class DoubleTapPowerForWalletPreferenceControllerTest {
     private DoubleTapPowerForWalletPreferenceController mController;
     private SelectorWithWidgetPreference mPreference;
 
+    private final PackageManager mPackageManager = mock(PackageManager.class);
 
     @Before
     public void setUp() {
         mContext = spy(ApplicationProvider.getApplicationContext());
         mResources = mock(Resources.class);
         when(mContext.getResources()).thenReturn(mResources);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        when(mPackageManager.hasSystemFeature(FEATURE_NFC)).thenReturn(true);
         when(mQuickAccessWalletClient.isWalletServiceAvailable()).thenReturn(true);
 
         mController = new DoubleTapPowerForWalletPreferenceController(mContext, KEY,
@@ -139,6 +145,17 @@ public class DoubleTapPowerForWalletPreferenceControllerTest {
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.DISABLED_DEPENDENT_SETTING);
+    }
+
+    @Test
+    public void getAvailabilityStatus_notSupportNFC_preferenceDisabled() {
+        when(mPackageManager.hasSystemFeature(FEATURE_NFC)).thenReturn(false);
+        when(mResources.getInteger(R.integer.config_doubleTapPowerGestureMode)).thenReturn(
+                DOUBLE_TAP_POWER_MULTI_TARGET_MODE);
+        DoubleTapPowerSettingsUtils.setDoubleTapPowerButtonGestureEnabled(mContext, true);
+
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test

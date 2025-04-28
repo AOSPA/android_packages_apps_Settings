@@ -33,6 +33,10 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -54,6 +58,9 @@ public class FaceStatusUtilsTest {
 
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     private static final ComponentName COMPONENT_NAME =
             new ComponentName("package", "class");
@@ -173,7 +180,7 @@ public class FaceStatusUtilsTest {
     }
 
     @Test
-    @DisableFlags(com.android.settings.flags.Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
+    @RequiresFlagsDisabled(com.android.settings.flags.Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
     public void getSummary_whenNotEnrolled_flagOff_returnsSummaryNone() {
         when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(false);
 
@@ -184,7 +191,7 @@ public class FaceStatusUtilsTest {
     }
 
     @Test
-    @EnableFlags(com.android.settings.flags.Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
+    @RequiresFlagsEnabled(com.android.settings.flags.Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
     public void getSummary_whenNotEnrolled_flagOn_returnsSummaryNone() {
         when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(false);
 

@@ -46,6 +46,7 @@ import androidx.preference.PreferenceViewHolder;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.GearPreference;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -449,14 +450,21 @@ Pair<Drawable, String> pair = mCachedDevice.getDrawableWithDescription();
             mCachedDevice.connect();
         } else if (bondState == BluetoothDevice.BOND_NONE) {
             var unused = ThreadUtils.postOnBackgroundThread(() -> {
-                if (Flags.enableTemporaryBondDevicesUi() && Utils.shouldBlockPairingInAudioSharing(
-                        mLocalBtManager)) {
-                    // TODO: collect metric
-                    context.getMainExecutor().execute(() ->
-                            mBlockPairingDialog =
-                                    Utils.showBlockPairingDialog(context, mBlockPairingDialog,
-                                            mLocalBtManager));
-                    return;
+                if (Flags.enableTemporaryBondDevicesUi()) {
+                    if (BluetoothUtils.isBroadcasting(mLocalBtManager)) {
+                        metricsFeatureProvider.action(context,
+                                SettingsEnums.ACTION_SETTINGS_BLUETOOTH_PAIR_IN_AUDIO_SHARING);
+                    }
+                    if (Utils.shouldBlockPairingInAudioSharing(mLocalBtManager)) {
+                        context.getMainExecutor().execute(() ->
+                                mBlockPairingDialog =
+                                        Utils.showBlockPairingDialog(context, mBlockPairingDialog,
+                                                mLocalBtManager));
+                        metricsFeatureProvider.action(context,
+                                SettingsEnums
+                                        .ACTION_SETTINGS_BLUETOOTH_PAIR_BLOCKED_IN_AUDIO_SHARING);
+                        return;
+                    }
                 }
                 metricsFeatureProvider.action(context,
                         SettingsEnums.ACTION_SETTINGS_BLUETOOTH_PAIR);

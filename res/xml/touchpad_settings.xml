@@ -61,10 +61,13 @@
         settings:controller="com.android.settings.inputmethod.TouchpadAccelerationPreferenceController"
         android:order="38"/>
 
-    <com.android.settings.widget.LabeledSeekBarPreference
+    <com.android.settingslib.widget.SliderPreference
         android:key="touchpad_pointer_speed"
         android:title="@string/trackpad_pointer_speed"
+        settings:seekBarIncrement="1"
         android:order="40"
+        settings:iconEnd="@drawable/ic_add_24dp"
+        settings:iconStart="@drawable/ic_remove_24dp"
         android:selectable="false"
         settings:controller="com.android.settings.inputmethod.TouchpadPointerSpeedPreferenceController"/>
 
@@ -80,6 +83,9 @@
     <com.android.settingslib.widget.ButtonPreference
         android:key="touchpad_touch_gesture"
         android:title="@string/trackpad_touch_gesture"
+        android:icon="@drawable/ic_settings_gestures"
+        settings:buttonPreferenceSize="large"
+        settings:buttonPreferenceType="filled"
         settings:controller="com.android.settings.inputmethod.TouchpadGesturesTutorialButtonPreferenceController"/>
 
     <com.android.settingslib.widget.FooterPreference

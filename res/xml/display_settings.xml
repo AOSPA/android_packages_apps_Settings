@@ -54,6 +54,15 @@
             settings:keywords="@string/keywords_ambient_display_screen"
             settings:controller="com.android.settings.security.screenlock.LockScreenPreferenceController"/>
 
+        <com.android.settingslib.PrimarySwitchPreference
+            android:key="ambient_display_always_on_screen"
+            android:title="@string/doze_always_on_title"
+            android:summary="@string/doze_always_on_summary"
+            android:fragment="com.android.settings.display.AmbientPreferenceFragment"
+            settings:keywords="@string/keywords_always_show_time_info"
+            settings:controller="com.android.settings.display.AmbientDisplayAlwaysOnPreferenceScreenController"
+            settings:userRestriction="no_ambient_display" />
+
         <com.android.settingslib.RestrictedPreference
             android:fragment="com.android.settings.display.FoldLockBehaviorSettings"
             android:key="fold_lock_behavior"

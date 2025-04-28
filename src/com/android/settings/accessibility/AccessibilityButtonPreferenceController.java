@@ -87,12 +87,6 @@ public class AccessibilityButtonPreferenceController extends BasePreferenceContr
     }
 
     private int getPreferenceTitleResource() {
-        if (android.provider.Flags.a11yStandaloneGestureEnabled()) {
-            return R.string.accessibility_button_title;
-        } else {
-            return AccessibilityUtil.isGestureNavigateEnabled(mContext)
-                    ? R.string.accessibility_button_gesture_title
-                    : R.string.accessibility_button_title;
-        }
+        return R.string.accessibility_button_title;
     }
 }

@@ -616,16 +616,18 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                     handleSourceFromQrCodeIfExists();
                     Map<BluetoothDevice, List<BluetoothLeBroadcastReceiveState>> sources =
                             mAudioStreamsHelper.getAllSourcesByDevice();
-                    getStreamSourcesByDevice(sources).forEach(
-                            (device, stateList) ->
-                                    stateList.forEach(
-                                            state -> handleSourceStreaming(device, state)));
                     if (mHysteresisModeFixAvailable) {
                         getPausedSourcesByDevice(sources).forEach(
                                 (device, stateList) ->
                                         stateList.forEach(
                                                 state -> handleSourcePaused(device, state)));
                     }
+                    // If a source is streaming in one device and paused in another, we handle the
+                    // source as it's streaming
+                    getStreamSourcesByDevice(sources).forEach(
+                            (device, stateList) ->
+                                    stateList.forEach(
+                                            state -> handleSourceStreaming(device, state)));
                     if (DEBUG) {
                         Log.d(TAG, "startScanning()");
                     }

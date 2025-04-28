@@ -131,13 +131,14 @@ class ShortcutFragmentTest {
     }
 }
 
+private const val FAKE_FEATURE_NAME = "Fake feature"
 private const val SHORTCUT_KEY = "shortcut_preference"
 private const val SHORTCUT_LABEL = "Fake shortcut"
 private val FAKE_COMPONENT = ComponentName("FakePkg", "FakeClass")
 
 /** [ShortcutFragment] used in test. */
 class TestShortcutFragment : ShortcutFragment() {
-    override fun getShortcutLabel(): CharSequence = SHORTCUT_LABEL
+    override fun getFeatureName(): CharSequence = FAKE_FEATURE_NAME
 
     override fun getFeatureComponentName() = FAKE_COMPONENT
 

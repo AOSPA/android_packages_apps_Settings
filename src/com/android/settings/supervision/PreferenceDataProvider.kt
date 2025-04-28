@@ -16,7 +16,6 @@
 package com.android.settings.supervision
 
 import com.android.settings.supervision.ipc.PreferenceData
-import kotlinx.coroutines.Deferred
 
 /**
  * Interface for providing preference data.
@@ -36,5 +35,5 @@ interface PreferenceDataProvider {
      * @return A map where the keys are the requested keys, and the values are the corresponding
      *   [PreferenceData] objects.
      */
-    suspend fun getPreferenceData(keys: List<String>): Deferred<Map<String, PreferenceData>>
+    suspend fun getPreferenceData(keys: List<String>): Map<String, PreferenceData>
 }

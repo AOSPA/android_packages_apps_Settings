@@ -55,6 +55,7 @@
         <Preference
             android:key="phone_number"
             android:order="3"
+            android:selectable="false"
             android:title="@string/status_number"
             android:summary="@string/summary_placeholder"
             settings:isPreferenceVisible="@bool/config_show_sim_info"

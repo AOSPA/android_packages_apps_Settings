@@ -344,10 +344,8 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{已開啟/# 個應用程式可存取位置資訊}other{已開啟/# 個應用程式可存取位置資訊}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"載入中…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"如果應用程式具有鄰近裝置權限，就能判斷連結裝置的相對位置。"</string>
-    <!-- no translation found for location_settings_footer_location_off_with_telephony (5600725945541382556) -->
-    <skip />
-    <!-- no translation found for location_settings_footer_location_off_no_telephony (2709958040008816610) -->
-    <skip />
+    <string name="location_settings_footer_location_off_with_telephony" msgid="5600725945541382556">"應用程式和服務的位置存取權已關閉。你撥打緊急電話號碼時，裝置位置資訊仍會傳送給緊急應變人員。"</string>
+    <string name="location_settings_footer_location_off_no_telephony" msgid="2709958040008816610">"應用程式和服務的位置存取權已關閉。"</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"進一步瞭解位置資訊設定"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"如要變更，請前往 ChromeOS 設定 &gt;「隱私權和安全性」&gt;「隱私權控制項」&gt;「位置資訊存取權」"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"帳戶"</string>
@@ -457,6 +455,8 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"取消"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"暫時不要"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"我同意"</string>
+    <!-- no translation found for security_settings_fingerprint_rename_description (6301505700382531086) -->
+    <skip />
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"要略過指紋設定程序嗎？"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"指紋設定只需一兩分鐘即可完成。如果選擇略過，之後可以在「設定」中新增指紋。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"看到這個圖示時，請使用你的指紋驗證身分，以便執行特定操作，例如登入應用程式或核准購買交易"</string>
@@ -1443,8 +1443,10 @@
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"充電時"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"安置於座架上時"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"永遠不要"</string>
-    <string name="screensaver_settings_summary_postured" msgid="1184119124847691954">"閒置時"</string>
-    <string name="screensaver_settings_summary_postured_and_charging" msgid="1952047156927637506">"閒置和充電時"</string>
+    <!-- no translation found for screensaver_settings_summary_postured (6346392320858994892) -->
+    <skip />
+    <!-- no translation found for screensaver_settings_summary_postured_and_charging (5111797042509819055) -->
+    <skip />
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"開啟/<xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"關閉"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"啟用時機"</string>
@@ -1614,8 +1616,10 @@
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"自動顯示時機"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"一律不要"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"充電時"</string>
-    <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"裝置直立充電時"</string>
-    <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"在座架充電時"</string>
+    <!-- no translation found for when_to_show_hubmode_charging_and_upright (537039046490426922) -->
+    <skip />
+    <!-- no translation found for when_to_show_hubmode_docked (8876633401873168284) -->
+    <skip />
     <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"僅限無線充電"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"編輯存取點"</string>
@@ -1871,7 +1875,7 @@
     <string name="lockpattern_change_lock_pin_label" msgid="7327409886587802756">"變更解鎖 PIN"</string>
     <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"畫出解鎖圖案"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"請按 [Menu] 以取得說明。"</string>
-    <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"完成時請移開手指"</string>
+    <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"完成後請移開手指"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"圖案至少需連接 <xliff:g id="NUMBER">%d</xliff:g> 點，請再試一次。"</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"圖案已記錄"</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"請再畫一次剛剛的圖案，以完成確認程序"</string>
@@ -2313,6 +2317,12 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"滑鼠游標碰觸畫面邊緣時移動畫面"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"放大目前輸入的內容"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"放大輸入的文字"</string>
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_title (8804501318161774285) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_summary (3054371947104552843) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_unavailable_summary (2248787024685382054) -->
+    <skip />
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"切換應用程式時保持開啟"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"切換應用程式時，放大鏡功能會保持開啟狀態但不放大畫面內容"</string>
     <string name="accessibility_screen_magnification_always_on_unavailable_summary" msgid="3844732482037416038">"無法用於只放大部分畫面"</string>
@@ -2483,7 +2493,7 @@
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"自動點選 (停留時間)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"關於自動點選 (停留時間)"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"進一步瞭解自動點選 (停留時間)"</string>
-    <string name="accessibility_autoclick_intro_text" msgid="8959680635470639347">"連接滑鼠後，你可以設定當游標停留一段時間未移動時，滑鼠會自動做出點按動作"</string>
+    <string name="accessibility_autoclick_intro_text" msgid="8959680635470639347">"你可以透過設定，讓連接的滑鼠在游標停留特定時間後自動點按"</string>
     <string name="accessibility_autoclick_description" msgid="6695732131412361101">"不方便按滑鼠時可以使用自動點選功能"</string>
     <string name="accessibility_autoclick_default_title" msgid="2024730028293793490">"關閉自動點選"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"短"</string>
@@ -2566,6 +2576,7 @@
     <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"助聽器捷徑"</string>
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"助聽器相容性"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"提升與電話線圈的相容程度，減少惱人噪音"</string>
+    <string name="hac_disclaimer_message" msgid="5279579026956312543"></string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"關於助聽器"</string>
     <string name="accessibility_hearing_device_footer_summary" msgid="5513620078219951077">"如要查看 ASHA 或 LE Audio 不支援的其他助聽器，請依序輕觸「配對新裝置」&lt;b&gt;&lt;/b&gt;&gt;「查看更多裝置」&lt;b&gt;&lt;/b&gt;"</string>
     <string name="accessibility_hearing_device_footer_summary_tts" msgid="955527026890456959">"如要查看 ASHA 或 LE Audio 不支援的其他助聽器，請依序輕觸「配對新裝置」"<b></b>"和「查看更多裝置」"<b></b></string>
@@ -2887,7 +2898,7 @@
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"按系統查看"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"少於 <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_cycle_count_footer" msgid="3642121059800373545">"送貨前會進行品質檢測，因此初次使用時，電池循環次數可能不是零"</string>
+    <string name="battery_cycle_count_footer" msgid="3642121059800373545">"送貨前會進行品質檢測，因此初次使用時，週期數可能不是零"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"處理程序統計資料"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"執行中處理程序的相關完善統計資料"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"記憶體用量"</string>
@@ -3133,7 +3144,7 @@
     <string name="data_usage_restrict_denied_dialog" msgid="8599940395497268584">"你必須先設定行動數據用量上限，才能限制背景資料。"</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2048411447974361181">"開啟資料自動同步功能？"</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="1783917145440587470">"關閉資料自動同步功能？"</string>
-    <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"這樣可以節省數據用量和電池用量，但你必須手動同步處理每個帳戶才能收集最新資訊。此外，你也不會收到最新動態的通知。"</string>
+    <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"可節省數據和電池用量，但你必須手動同步每個帳戶才能收集最新資訊，而且也不會收到最新動態的通知。"</string>
     <string name="data_usage_cycle_editor_title" msgid="2019035830921480941">"用量週期重設日期"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="1026234456777365545">"每月固定日期："</string>
     <string name="data_usage_cycle_editor_positive" msgid="6110165528024717527">"儲存設定"</string>
@@ -3273,7 +3284,7 @@
     <string name="user_category_title" msgid="4368580529662699083">"使用者"</string>
     <string name="other_user_category_title" msgid="7089976887307643217">"其他使用者"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"刪除訪客活動"</string>
-    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"離開訪客模式時刪除所有訪客應用程式和資料"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"離開訪客模式時，刪除所有訪客應用程式和資料"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"要刪除訪客活動嗎？"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"系統將立即刪除這個訪客工作階段中的應用程式和資料，日後只要你離開訪客模式，系統都會將該次訪客活動全部刪除"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"刪除, 訪客, 活動, 移除, 資料, 清除"</string>
@@ -3593,7 +3604,7 @@
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"建立自己的模式"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"僅接收重要聯絡人和應用程式的通知"</string>
     <string name="zen_mode_select_schedule" msgid="663163931596092952">"設定時間表"</string>
-    <string name="zen_mode_select_schedule_title" msgid="4260344424438327309">"依據以下時間表："</string>
+    <string name="zen_mode_select_schedule_title" msgid="4260344424438327309">"根據以下資料安排時間表"</string>
     <string name="zen_mode_select_schedule_time" msgid="1951968104691941146">"星期幾和時間"</string>
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"「平日上午 9 點 - 下午 5 點」"</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"日曆活動"</string>
@@ -3653,7 +3664,7 @@
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"變更桌布亮度"</string>
     <string name="mode_dark_theme_title" msgid="8099007897943513209">"啟用深色主題"</string>
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"啟用深色主題"</string>
-    <string name="mode_dark_theme_summary" msgid="2808149708986602464">"將裝置主題切換成深色背景，讓眼睛輕鬆不吃力"</string>
+    <string name="mode_dark_theme_summary" msgid="2808149708986602464">"將裝置主題切換成深色背景，減輕雙眼負擔"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{沒有顯示變更}=1{{effect_1}}=2{{effect_1}和{effect_2}}=3{{effect_1}、{effect_2}和{effect_3}}other{{effect_1}、{effect_2}和另外 # 個設定}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"允許所有通知"</string>
     <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"可接受來自使用者、應用程式和音效的干擾"</string>
@@ -4159,12 +4170,12 @@
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"啟用"</string>
     <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"設定按照固定時段啟用的模式"</string>
     <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"設定可同步處理日曆活動和邀請回覆的模式"</string>
-    <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"設計能平靜身心的日常休眠安排，包括設定鬧鐘、調暗螢幕及封鎖通知。"</string>
-    <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"優先考量行車安全，在駕駛時保持專注且不受干擾"</string>
+    <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"設定鬧鐘、調暗螢幕並封鎖通知，透過日常睡眠安排來平靜身心。"</string>
+    <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"以行車安全為重，開車時專注不受干擾"</string>
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"封鎖來自裝置的干擾，保持專注"</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"消除所有干擾，打造安靜的環境"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"為不同使用者打造個人化裝置體驗及調整設定"</string>
-    <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"僅允許重要的人和應用程式與你聯絡，盡量減少干擾"</string>
+    <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"僅允許來自重要聯絡人和應用程式的通知，盡量減少干擾"</string>
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"設定按照固定時段啟用的模式"</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"讓裝置與當天活動保持同步"</string>
     <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"精神飽滿地醒來"</string>
@@ -4645,7 +4656,7 @@
     <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"IT 管理員或許可以看到你搜尋的內容和來電資訊"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"跨個人資料日曆"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"在你的個人日曆中顯示工作相關活動"</string>
-    <string name="managed_profile_settings_footer" msgid="996500759305118103">"工作應用程式關閉時將暫停運作，且無法存取或向你傳送通知"</string>
+    <string name="managed_profile_settings_footer" msgid="996500759305118103">"工作應用程式關閉時，將暫停運作且不能開啟，也無法向你傳送通知"</string>
     <string name="automatic_storage_manager_settings" msgid="519158151463974656">"管理儲存空間"</string>
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"儲存空間管理工具會將已備份的相片和影片從裝置中移除，藉此釋出儲存空間。"</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"移除相片和影片"</string>
@@ -4663,9 +4674,9 @@
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"開啟 Google 錢包"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"要變更螢幕鎖定快速鍵嗎？"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g>也是螢幕鎖定快速鍵。要變更嗎？"</string>
-    <!-- no translation found for double_tap_power_wallet_footer_title (5417023303339032410) -->
+    <!-- no translation found for double_tap_power_wallet_footer_title (4626950875173822614) -->
     <skip />
-    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (1267822422365445657) -->
+    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (4871482943751760132) -->
     <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"翻轉相機切換自拍模式"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
@@ -5062,31 +5073,41 @@
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"請向你的網路供應商洽詢定價。"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"網路模式 <xliff:g id="NETWORKMODEID">%1$d</xliff:g> 無效。忽略。"</string>
     <string name="satellite_setting" msgid="4650503806634496443">"衛星連線"</string>
-    <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"透過衛星收發訊息。你的帳戶支援這項功能。"</string>
-    <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"透過衛星收發訊息 (你的帳戶不支援這項功能)。"</string>
-    <string name="satellite_setting_summary_without_entitlement" msgid="5284998840770992554">"透過衛星收發訊息。詳情請與你的電信業者聯絡。"</string>
+    <!-- no translation found for satellite_setting_enabled_summary (2114544331827193266) -->
+    <skip />
+    <!-- no translation found for satellite_setting_disabled_summary (8193743637158939283) -->
+    <skip />
+    <!-- no translation found for satellite_setting_summary_without_entitlement (7010003955751606421) -->
+    <skip />
     <string name="keywords_satellite_setting" msgid="613553612424945946">"衛星訊息, 衛星連線"</string>
     <string name="category_name_about_satellite_connectivity" msgid="3971142716898783631">"關於衛星連線"</string>
-    <string name="description_about_satellite_setting" msgid="5539359064330584941">"如果「<xliff:g id="CARRIER_NAME">%1$s</xliff:g>」帳戶符合資格，就能透過衛星連線收發訊息及使用部分應用程式"</string>
+    <!-- no translation found for description_about_satellite_setting (8212911110428998767) -->
+    <skip />
     <string name="category_title_your_satellite_plan" msgid="8169426217950247126">"你的「<xliff:g id="CARRIER_NAME">%1$s</xliff:g>」帳戶"</string>
-    <string name="title_have_satellite_plan" msgid="2048372355699977947">"你的帳戶支援衛星訊息"</string>
-    <string name="title_no_satellite_plan" msgid="2876056203035197505">"你的帳戶不支援衛星訊息"</string>
+    <string name="title_have_satellite_plan" msgid="857337944804101443">"你的帳戶支援訊息功能"</string>
+    <!-- no translation found for title_no_satellite_plan (7255726881685672846) -->
+    <skip />
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"瞭解詳情"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"運作方式"</string>
-    <string name="title_satellite_connection_guide" msgid="3294802307913609072">"沒有行動網路時"</string>
+    <!-- no translation found for title_satellite_connection_guide (4730763872034574368) -->
+    <skip />
     <string name="title_satellite_connection_guide_for_manual_type" msgid="7223875100977941341">"傳送訊息到某個電話號碼"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"手機會自動連上衛星。為獲得最佳連線品質，請在沒有物體遮住天空的地方使用。"</string>
-    <string name="summary_satellite_connection_guide_for_manual_type" msgid="5075149380084376662">"如果沒有行動網路，你會看到使用衛星訊息的選項。"</string>
+    <!-- no translation found for summary_satellite_connection_guide_for_manual_type (2106091974353287661) -->
+    <skip />
     <string name="title_supported_service" msgid="4275535165812691571">"手機連上衛星後"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"按照步驟連上衛星"</string>
-    <string name="summary_supported_service" msgid="4320535903444834786">"你可以傳送訊息給任何人，包括緊急救援服務。如果有可用的行動網路，手機就會重新連線。"</string>
+    <!-- no translation found for summary_supported_service (6380533552383355977) -->
+    <skip />
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"手機連線後，你可以傳送訊息給任何人，包括緊急救援服務。"</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"注意事項"</string>
     <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"衛星連線的作業時間可能較長，而且僅支援部分地區。"</string>
     <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"天氣和特定結構可能會影響衛星連線的品質。"</string>
-    <string name="satellite_footer_content_section_3" msgid="4652426135622555607">"系統不支援衛星電話。"</string>
+    <!-- no translation found for satellite_footer_content_section_3 (4686525535095321485) -->
+    <skip />
     <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"你或許仍可撥打緊急電話。"</string>
-    <string name="satellite_footer_content_section_5" msgid="3053256489735265540">"如要查看外部連結，必須連上 Wi‑Fi 或行動網路。"</string>
+    <!-- no translation found for satellite_footer_content_section_5 (2466353040832630785) -->
+    <skip />
     <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"在某些地區可能無法用來傳送訊息給緊急救援服務。"</string>
     <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"「設定」頁面可能要一段時間後才會顯示帳戶變動，詳情請洽「<xliff:g id="CARRIER_NAME">%1$s</xliff:g>」。"</string>
     <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"進一步瞭解衛星連線"</string>
@@ -5098,7 +5119,8 @@
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"衛星訊息"</string>
     <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"你的帳戶可透過衛星傳送資料"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"手機支援的應用程式"</string>
-    <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"查看所有應用程式"</string>
+    <!-- no translation found for title_satellite_supported_app_list_entry (891155574898209245) -->
+    <skip />
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"手機支援的應用程式"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"無法新增 SIM 卡"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"請先結束衛星連線再新增 SIM 卡"</string>
@@ -5778,7 +5800,7 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"刪除 PIN 碼"</string>
     <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"這項操作會重設所有監護設定"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"網路內容篩選器"</string>
-    <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome 和網路"</string>
+    <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome 和網站"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"嘗試封鎖內容情色露骨的網站"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_summary" msgid="1477766506765966613">"雖然篩選器無法滴水不漏，但仍有助於隱藏內容情色露骨的網站"</string>
     <string name="supervision_web_content_filters_browser_allow_all_sites_title" msgid="3909739592466381845">"允許瀏覽所有網站"</string>

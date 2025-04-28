@@ -22,7 +22,11 @@ import android.app.backup.BackupRestoreEventLogger;
 import android.app.backup.BlobBackupHelper;
 import android.content.Context;
 import android.content.pm.IPackageManager;
+import android.os.HandlerThread;
+import android.os.Process;
 import android.util.Slog;
+
+import java.time.Clock;
 
 /** A {@link BlobBackupHelper} that handles backup and restore of user aspect ratio settings.*/
 public class UserAspectRatioBackupHelper extends BlobBackupHelper {
@@ -45,9 +49,16 @@ public class UserAspectRatioBackupHelper extends BlobBackupHelper {
     public UserAspectRatioBackupHelper(@NonNull Context context,
             @NonNull IPackageManager packageManager, @NonNull BackupRestoreEventLogger logger) {
         super(BLOB_VERSION, KEY_USER_ASPECT_RATIO);
-        mUserAspectRatioBackupManager = new UserAspectRatioBackupManager(context, packageManager,
-                context.getPackageManager());
         setLogger(logger);
+
+        // Handler for package updates.
+        HandlerThread broadcastHandlerThread = new HandlerThread(TAG,
+                Process.THREAD_PRIORITY_BACKGROUND);
+        broadcastHandlerThread.start();
+
+        mUserAspectRatioBackupManager = new UserAspectRatioBackupManager(context, packageManager,
+                context.getPackageManager(), getLogger(), broadcastHandlerThread.getThreadHandler(),
+                Clock.systemUTC());
     }
 
     @Override
@@ -58,7 +69,7 @@ public class UserAspectRatioBackupHelper extends BlobBackupHelper {
         }
         byte[] newPayload = null;
         if (KEY_USER_ASPECT_RATIO.equals(key)) {
-            newPayload = mUserAspectRatioBackupManager.getBackupPayload(getLogger());
+            newPayload = mUserAspectRatioBackupManager.getBackupPayload();
             getLogger().logItemsBackedUp(DATA_TYPE_USER_ASPECT_RATIO, /* count= */ 1);
         } else {
             Slog.w(TAG, "Unexpected backup key " + key);
@@ -77,8 +88,12 @@ public class UserAspectRatioBackupHelper extends BlobBackupHelper {
             if (payload == null) {
                 return;
             }
-            mUserAspectRatioBackupManager.stageAndApplyRestoredPayload(payload, getLogger());
-            getLogger().logItemsRestored(DATA_TYPE_USER_ASPECT_RATIO, /* count= */ 1);
+            try {
+                mUserAspectRatioBackupManager.stageAndApplyRestoredPayload(payload);
+                getLogger().logItemsRestored(DATA_TYPE_USER_ASPECT_RATIO, /* count= */ 1);
+            } catch (Exception e) {
+                Slog.e(TAG, "Error restoring user aspect ratio ", e);
+            }
         } else {
             Slog.w(TAG, "Unexpected restore key " + key);
             getLogger().logItemsRestoreFailed(DATA_TYPE_USER_ASPECT_RATIO, /* count= */ 1,

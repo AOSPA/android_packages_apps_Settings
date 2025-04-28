@@ -88,7 +88,7 @@ public class AmbientVolumePreferenceTest {
         mPreference = new AmbientVolumePreference(mContext);
         mPreference.setKey(KEY_AMBIENT_VOLUME);
         mPreference.setListener(mListener);
-        mPreference.setExpandable(true);
+        mPreference.setControlExpandable(true);
         mPreference.setMutable(true);
         preferenceScreen.addPreference(mPreference);
 
@@ -123,29 +123,29 @@ public class AmbientVolumePreferenceTest {
     }
 
     @Test
-    public void setExpandable_expandable_expandIconVisible() {
-        mPreference.setExpandable(true);
+    public void setControlExpandable_expandable_expandIconVisible() {
+        mPreference.setControlExpandable(true);
 
         assertThat(mExpandIcon.getVisibility()).isEqualTo(View.VISIBLE);
     }
 
     @Test
-    public void setExpandable_notExpandable_expandIconGone() {
-        mPreference.setExpandable(false);
+    public void setControlExpandable_notExpandable_expandIconGone() {
+        mPreference.setControlExpandable(false);
 
         assertThat(mExpandIcon.getVisibility()).isEqualTo(View.GONE);
     }
 
     @Test
-    public void setExpanded_expanded_assertControlUiCorrect() {
-        mPreference.setExpanded(true);
+    public void setControlExpanded_expanded_assertControlUiCorrect() {
+        mPreference.setControlExpanded(true);
 
         assertControlUiCorrect();
     }
 
     @Test
-    public void setExpanded_notExpanded_assertControlUiCorrect() {
-        mPreference.setExpanded(false);
+    public void setControlExpanded_notExpanded_assertControlUiCorrect() {
+        mPreference.setControlExpanded(false);
 
         assertControlUiCorrect();
     }
@@ -181,7 +181,7 @@ public class AmbientVolumePreferenceTest {
     @Test
     public void updateLayout_unmuteAndExpanded_volumeIconIsCorrect() {
         mPreference.setMuted(false);
-        mPreference.setExpanded(true);
+        mPreference.setControlExpanded(true);
         mPreference.updateLayout();
 
         int expectedLevel = calculateVolumeLevel(TEST_LEFT_VOLUME_LEVEL, TEST_RIGHT_VOLUME_LEVEL);
@@ -191,7 +191,7 @@ public class AmbientVolumePreferenceTest {
     @Test
     public void updateLayout_unmuteAndNotExpanded_volumeIconIsCorrect() {
         mPreference.setMuted(false);
-        mPreference.setExpanded(false);
+        mPreference.setControlExpanded(false);
         mPreference.updateLayout();
 
         int expectedLevel = calculateVolumeLevel(TEST_UNIFIED_VOLUME_LEVEL,
@@ -201,7 +201,7 @@ public class AmbientVolumePreferenceTest {
 
     @Test
     public void setSliderEnabled_expandedAndLeftIsDisabled_volumeIconIcCorrect() {
-        mPreference.setExpanded(true);
+        mPreference.setControlExpanded(true);
         mPreference.setSliderEnabled(SIDE_LEFT, false);
 
         int expectedLevel = calculateVolumeLevel(0, TEST_RIGHT_VOLUME_LEVEL);
@@ -210,7 +210,7 @@ public class AmbientVolumePreferenceTest {
 
     @Test
     public void setSliderValue_expandedAndLeftValueChanged_volumeIconIcCorrect() {
-        mPreference.setExpanded(true);
+        mPreference.setControlExpanded(true);
         mPreference.setSliderValue(SIDE_LEFT, 4);
 
         int expectedLevel = calculateVolumeLevel(4, TEST_RIGHT_VOLUME_LEVEL);
@@ -222,7 +222,7 @@ public class AmbientVolumePreferenceTest {
     }
 
     private void assertControlUiCorrect() {
-        final boolean expanded = mPreference.isExpanded();
+        final boolean expanded = mPreference.isControlExpanded();
         Map<Integer, SliderPreference> sliders = mPreference.getSliders();
         assertThat(sliders.get(SIDE_UNIFIED).isVisible()).isEqualTo(!expanded);
         assertThat(sliders.get(SIDE_LEFT).isVisible()).isEqualTo(expanded);

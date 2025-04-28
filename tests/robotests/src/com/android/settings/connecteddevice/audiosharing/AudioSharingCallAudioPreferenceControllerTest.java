@@ -48,6 +48,7 @@ import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
+import android.util.Pair;
 import android.view.View;
 import android.widget.CheckedTextView;
 
@@ -784,13 +785,16 @@ public class AudioSharingCallAudioPreferenceControllerTest {
         mShadowBluetoothAdapter.setMostRecentlyConnectedDevices(
                 List.of(mDevice1, mDevice2, mDevice3));
         mController.logCallAudioDeviceChange(TEST_DEVICE_GROUP_ID1, mCachedDevice3);
-        verify(mFeatureFactory.metricsFeatureProvider)
-                .action(
-                        mContext,
-                        SettingsEnums.ACTION_AUDIO_SHARING_CHANGE_CALL_AUDIO,
+        Pair<Integer, Object>[] eventData = new Pair[]{
+                Pair.create(
+                        AudioSharingUtils.MetricKey.METRIC_KEY_DEVICE_CONNECTION_TYPE.getId(),
                         AudioSharingCallAudioPreferenceController.ChangeCallAudioType
                                 .CONNECTED_EARLIER
-                                .ordinal());
+                                .getName()),
+                Pair.create(AudioSharingUtils.MetricKey.METRIC_KEY_DEVICE_IS_TEMP_BOND.getId(), 0)
+        };
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_AUDIO_SHARING_CHANGE_CALL_AUDIO, eventData);
     }
 
     @Test
@@ -798,25 +802,31 @@ public class AudioSharingCallAudioPreferenceControllerTest {
         mShadowBluetoothAdapter.setMostRecentlyConnectedDevices(
                 List.of(mDevice1, mDevice2, mDevice3));
         mController.logCallAudioDeviceChange(TEST_DEVICE_GROUP_ID2, mCachedDevice1);
-        verify(mFeatureFactory.metricsFeatureProvider)
-                .action(
-                        mContext,
-                        SettingsEnums.ACTION_AUDIO_SHARING_CHANGE_CALL_AUDIO,
+        Pair<Integer, Object>[] eventData = new Pair[]{
+                Pair.create(
+                        AudioSharingUtils.MetricKey.METRIC_KEY_DEVICE_CONNECTION_TYPE.getId(),
                         AudioSharingCallAudioPreferenceController.ChangeCallAudioType
                                 .CONNECTED_LATER
-                                .ordinal());
+                                .getName()),
+                Pair.create(AudioSharingUtils.MetricKey.METRIC_KEY_DEVICE_IS_TEMP_BOND.getId(), 0)
+        };
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_AUDIO_SHARING_CHANGE_CALL_AUDIO, eventData);
     }
 
     @Test
     public void logCallAudioDeviceChange_deviceNotFoundInRecentList_unknownChangeType() {
         mShadowBluetoothAdapter.setMostRecentlyConnectedDevices(List.of(mDevice1, mDevice2));
         mController.logCallAudioDeviceChange(TEST_DEVICE_GROUP_ID1, mCachedDevice3);
-        verify(mFeatureFactory.metricsFeatureProvider)
-                .action(
-                        mContext,
-                        SettingsEnums.ACTION_AUDIO_SHARING_CHANGE_CALL_AUDIO,
+        Pair<Integer, Object>[] eventData = new Pair[]{
+                Pair.create(
+                        AudioSharingUtils.MetricKey.METRIC_KEY_DEVICE_CONNECTION_TYPE.getId(),
                         AudioSharingCallAudioPreferenceController.ChangeCallAudioType.UNKNOWN
-                                .ordinal());
+                                .getName()),
+                Pair.create(AudioSharingUtils.MetricKey.METRIC_KEY_DEVICE_IS_TEMP_BOND.getId(), 0)
+        };
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_AUDIO_SHARING_CHANGE_CALL_AUDIO, eventData);
     }
 
     @Test

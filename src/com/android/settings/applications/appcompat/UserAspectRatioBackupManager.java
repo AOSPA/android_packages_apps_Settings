@@ -29,9 +29,13 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
+import android.os.Handler;
 import android.os.RemoteException;
+import android.os.UserHandle;
 import android.util.Slog;
 
+import com.android.internal.annotations.VisibleForTesting;
+import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
 
 import java.io.ByteArrayInputStream;
@@ -40,6 +44,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.charset.StandardCharsets;
+import java.time.InstantSource;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -76,20 +81,55 @@ public class UserAspectRatioBackupManager {
     private final PackageManager mPackageManager;
     @NonNull
     private final Set<Integer> mAvailableUserMinAspectRatioSet;
+    @NonNull
+    private final UserAspectRatioRestoreStorage mStorage;
 
     @UserIdInt
     private final int mUserId;
+    @NonNull
+    private final BackupRestoreEventLogger mLogger;
+
+
+    /**
+     * Helper to monitor package states for the purpose of restoring user aspect ratios.
+     *
+     * <p>This package monitor also keeps the backed-up and restored data up-to-date when a package
+     * is removed.
+     */
+    @VisibleForTesting
+    final PackageMonitor mPackageMonitor = new PackageMonitor() {
+        @Override
+        public void onPackageAdded(String packageName, int uid) {
+            final int aspectRatio = mStorage.getAndRemoveUserAspectRatioForPackage(packageName);
+            if (aspectRatio != USER_MIN_ASPECT_RATIO_UNSET) {
+                checkExistingAspectRatioAndApplyRestore(packageName, aspectRatio);
+            }
+        }
+
+        @Override
+        public void onPackageRemoved(@NonNull String packageName, int uid) {
+            // Just in case, but the user aspect ratio should be restored and removed as soon as an
+            // app is installed. Therefore there should not be anything to clean up here.
+            mStorage.getAndRemoveUserAspectRatioForPackage(packageName);
+        }
+    };
 
     public UserAspectRatioBackupManager(@NonNull Context context,
-            @NonNull IPackageManager iPackageManager, @NonNull PackageManager packageManager) {
+            @NonNull IPackageManager iPackageManager, @NonNull PackageManager packageManager,
+            @NonNull BackupRestoreEventLogger logger, @NonNull Handler handler,
+            @NonNull InstantSource instantSource) {
         mIPackageManager = iPackageManager;
         mPackageManager = packageManager;
         mUserId = mPackageManager.getUserId();
+        mStorage = new UserAspectRatioRestoreStorage(context, mUserId, instantSource);
+        mLogger = logger;
+
+        mPackageMonitor.register(context, UserHandle.of(UserHandle.USER_ALL), handler);
 
         final int[] userAspectRatioResourceValues = context.getResources().getIntArray(
                 R.array.config_userAspectRatioOverrideValues);
-        mAvailableUserMinAspectRatioSet = Arrays.stream(
-                userAspectRatioResourceValues).boxed().collect(Collectors.toSet());
+        mAvailableUserMinAspectRatioSet = Arrays.stream(userAspectRatioResourceValues).boxed()
+                .collect(Collectors.toSet());
         // App Default is not in the set above, but is always offered. Users can also specify this
         // value, for example if there is an OEM override to some other value.
         mAvailableUserMinAspectRatioSet.add(USER_MIN_ASPECT_RATIO_APP_DEFAULT);
@@ -99,8 +139,8 @@ public class UserAspectRatioBackupManager {
      * Returns the per-app user aspect ratio settings to be backed up as a data-blob.
      */
     @Nullable
-    public byte[] getBackupPayload(@NonNull BackupRestoreEventLogger logger) {
-        final Map<String, Integer> aspectRatioStates = getAllUserAspectRatios(logger);
+    public byte[] getBackupPayload() {
+        final Map<String, Integer> aspectRatioStates = getAllUserAspectRatios(mLogger);
 
         if (DEBUG) {
             Slog.d(TAG, "User aspect ratio states to backup =" + aspectRatioStates);
@@ -110,8 +150,8 @@ public class UserAspectRatioBackupManager {
                 new ObjectOutputStream(bos)) {
             oos.writeObject(aspectRatioStates);
             return bos.toByteArray();
-        } catch (IOException e) {
-            logger.logItemsBackupFailed(KEY_USER_ASPECT_RATIO, /* count= */ 1,
+        } catch (Exception e) {
+            mLogger.logItemsBackupFailed(KEY_USER_ASPECT_RATIO, /* count= */ 1,
                     ERROR_SERIALIZE_FAILED);
             Slog.e(TAG, "Could not serialize payload.", e);
             return null;
@@ -142,8 +182,7 @@ public class UserAspectRatioBackupManager {
     }
 
     @Nullable
-    private static Map<String, Integer> readFromByteArray(@NonNull byte[] payload,
-            @NonNull BackupRestoreEventLogger logger) {
+    private Map<String, Integer> readFromByteArray(@NonNull byte[] payload) {
         Object readObject = null;
         try (ByteArrayInputStream bis = new ByteArrayInputStream(payload); ObjectInputStream ois =
                 new ObjectInputStream(bis)) {
@@ -152,12 +191,12 @@ public class UserAspectRatioBackupManager {
             // type is incorrect.
             return (Map<String, Integer>) readObject;
         } catch (ClassCastException e) {
-            logger.logItemsRestoreFailed(KEY_USER_ASPECT_RATIO, /* count= */ 1,
+            mLogger.logItemsRestoreFailed(KEY_USER_ASPECT_RATIO, /* count= */ 1,
                     ERROR_TYPE_CAST_FAILED);
             Slog.e(TAG, "Could not cast to Map<String, Integer>: " + readObject, e);
             return null;
         } catch (IOException | ClassNotFoundException e) {
-            logger.logItemsRestoreFailed(KEY_USER_ASPECT_RATIO, /* count= */ 1,
+            mLogger.logItemsRestoreFailed(KEY_USER_ASPECT_RATIO, /* count= */ 1,
                     ERROR_DESERIALIZE_FAILED);
             Slog.e(TAG, "Could not read payload for backup", e);
             return null;
@@ -171,9 +210,8 @@ public class UserAspectRatioBackupManager {
      * which are present on the device. It will stage the aspect ratio data for the apps which are
      * not installed at the time this is called, to be referenced later when the app is installed.
      */
-    public void stageAndApplyRestoredPayload(@NonNull byte[] payload,
-            @NonNull BackupRestoreEventLogger logger) {
-        final Map<String, Integer> userAspectRatioStates = readFromByteArray(payload, logger);
+    public void stageAndApplyRestoredPayload(@NonNull byte[] payload) {
+        final Map<String, Integer> userAspectRatioStates = readFromByteArray(payload);
         if (userAspectRatioStates == null || userAspectRatioStates.isEmpty()) {
             Slog.d(TAG, "StageAndApplyRestoredPayload: payload is empty.");
             return;
@@ -190,25 +228,32 @@ public class UserAspectRatioBackupManager {
                         + pkgName);
                 continue;
             }
-            if (isPackageInstalled(pkgName, logger)) {
+            if (isPackageInstalled(pkgName)) {
                 Slog.d(TAG, "StageAndApplyRestoredPayload Found package: " + pkgName);
-                checkExistingAspectRatioAndApplyRestore(pkgName, aspectRatio, logger);
+                checkExistingAspectRatioAndApplyRestore(pkgName, aspectRatio);
             } else {
-                // TODO(b/405902444): Support lazy restore when package is installed.
                 Slog.d(TAG, "StageAndApplyRestoredPayload package not installed: " + pkgName);
+                mStorage.storePackageAndUserAspectRatio(pkgName, aspectRatio);
             }
         }
+        mStorage.restoreCompleted();
     }
 
-    private boolean isPackageInstalled(String packageName,
-            @NonNull BackupRestoreEventLogger logger) {
+    private boolean isPackageInstalled(@NonNull String packageName) {
         try {
             return mPackageManager.getPackageInfo(packageName, /* flags= */ 0) != null;
         } catch (PackageManager.NameNotFoundException e) {
-            logger.logItemsRestoreFailed(KEY_USER_ASPECT_RATIO, /* count= */ 1,
+            // It is common that the package is not installed during setup. Restore will be retried
+            // when the package is installed.
+            if (DEBUG) {
+                Slog.d(TAG, "Could not get package info for " + packageName);
+            }
+            return false;
+        } catch (Exception e) {
+            mLogger.logItemsRestoreFailed(KEY_USER_ASPECT_RATIO, /* count= */ 1,
                     ERROR_QUERY_PACKAGE_FAILED);
             if (DEBUG) {
-                Slog.d(TAG, "Could not get package info for " + packageName, e);
+                Slog.e(TAG, "Could not get package info for " + packageName, e);
             }
             return false;
         }
@@ -216,8 +261,7 @@ public class UserAspectRatioBackupManager {
 
     /** Applies the restore for per-app user set min aspect ratio. */
     private void checkExistingAspectRatioAndApplyRestore(@NonNull String pkgName,
-            @PackageManager.UserMinAspectRatio int aspectRatio,
-            @NonNull BackupRestoreEventLogger logger) {
+            @PackageManager.UserMinAspectRatio int aspectRatio) {
         try {
             final int existingUserAspectRatio = mIPackageManager.getUserMinAspectRatio(pkgName,
                     mUserId);
@@ -237,7 +281,7 @@ public class UserAspectRatioBackupManager {
                 }
             }
         } catch (RemoteException | IllegalArgumentException e) {
-            logger.logItemsRestoreFailed(KEY_USER_ASPECT_RATIO, /* count= */ 1,
+            mLogger.logItemsRestoreFailed(KEY_USER_ASPECT_RATIO, /* count= */ 1,
                     ERROR_ASPECT_RATIO_FAILED);
             Slog.e(TAG, "Could not restore user aspect ratio for package " + pkgName, e);
         }

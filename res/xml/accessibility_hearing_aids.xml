@@ -56,6 +56,12 @@
             android:fragment="com.android.settings.accessibility.AccessibilityAudioRoutingFragment"
             settings:controller="com.android.settings.accessibility.HearingAidAudioRoutingPreferenceController"/>
 
+        <com.android.settings.accessibility.ShortcutPreference
+            android:key="hearing_aids_shortcut_preference"
+            android:title="@string/accessibility_hearing_device_shortcut_title"
+            android:persistent="false"
+            settings:controller="com.android.settings.accessibility.ToggleShortcutPreferenceController"/>
+
         <SwitchPreferenceCompat
             android:key="hearing_aid_compatibility"
             android:order="30"

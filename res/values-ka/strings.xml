@@ -455,6 +455,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"გაუქმება"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"ახლა არა"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"თანახმა ვარ"</string>
+    <string name="security_settings_fingerprint_rename_description" msgid="6301505700382531086">"ორმაგად შეეხეთ გადასარქმევად"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"გსურთ თითის ანაბეჭდის დაყენების გამოტოვება?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"თითის ანაბეჭდის დაყენებას მხოლოდ რამდენიმე წუთი სჭირდება. თუ ამ ეტაპს გამოტოვებთ, თითის ანაბეჭდის მოგვიანებით დამატებას პარამეტრებში შეძლებთ."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"ამ ხატულის დანახვისას გამოიყენეთ თქვენი თითის ანაბეჭდი ავტორიზაციისთვის, მაგალითად, ისეთ შემთხვევებში, როცა აპებში შედიხართ ან შეძენას ადასტურებთ"</string>
@@ -1441,8 +1442,8 @@
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"დატენვისას"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"სანამ ჩამაგრებულია"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"არასოდეს"</string>
-    <string name="screensaver_settings_summary_postured" msgid="1184119124847691954">"პოზიციაში ყოფნისას"</string>
-    <string name="screensaver_settings_summary_postured_and_charging" msgid="1952047156927637506">"პოზიციაში ყოფნისას და დატენვისას"</string>
+    <string name="screensaver_settings_summary_postured" msgid="6346392320858994892">"ვერტიკალურ პოზიციაში ყოფნისას"</string>
+    <string name="screensaver_settings_summary_postured_and_charging" msgid="5111797042509819055">"ვერტიკალურ პოზიციაში და დატენისას"</string>
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"ჩართულია / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"გამორთული"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"გაშვების დრო"</string>
@@ -1612,8 +1613,8 @@
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"ავტომატურად ჩვენების გარემოებები"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"არასოდეს"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"დატენისას"</string>
-    <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"დატენისას და ვერტიკალურ პოზიციაში"</string>
-    <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"სანამ ჩამაგრებულია"</string>
+    <string name="when_to_show_hubmode_charging_and_upright" msgid="537039046490426922">"ვერტიკალურ პოზიციაში და დატენისას"</string>
+    <string name="when_to_show_hubmode_docked" msgid="8876633401873168284">"ჩამაგრებისას და დატენისას"</string>
     <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"უსადენო დატენაზე შეზღუდვა"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN-ები"</string>
     <string name="apn_edit" msgid="2003683641840248741">"წვდომის წერტილის რედაქტირება"</string>
@@ -2311,6 +2312,12 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"ეკრანის გადაადგილება, როცა მაუსი ეკრანის კიდეებს ეხება"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"ტექსტის აკრეფის გადიდება"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"გამადიდებელი მოგყვებათ ტექსტის აკრეფისას"</string>
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_title (8804501318161774285) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_summary (3054371947104552843) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_unavailable_summary (2248787024685382054) -->
+    <skip />
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"დარჩეს ჩართული აპების გადართვისას"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"გამადიდებელი დარჩება ჩართული და მასშტაბს შეამცირებს როდესაც აპებს გადართავთ"</string>
     <string name="accessibility_screen_magnification_always_on_unavailable_summary" msgid="3844732482037416038">"მიუწვდომელია ეკრანის მხოლოდ ნაწილის გადიდებისას"</string>
@@ -2564,6 +2571,7 @@
     <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"სმენის აპარატის ხატულა"</string>
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"სმენის აპარატებთან თავსებადობა"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"აუმჯობესებს თავსებადობას გადამცემებთან და ამცირებს არასასურველ ხმაურს"</string>
+    <string name="hac_disclaimer_message" msgid="5279579026956312543"></string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"სმენის მოწყობილობების შესახებ"</string>
     <string name="accessibility_hearing_device_footer_summary" msgid="5513620078219951077">"სხვა ისეთი სმენის აპარატების საპოვნელად, რომლებიც ASHA-ს ან LE-აუდიოს მიერ არ არის მხარდაჭერილი, შეეხეთ: &lt;b&gt;ახალი მოწყობილობის დაწყვილება&lt;/b&gt; &gt; &lt;b&gt;მეტი მოწყობილობის ნახვა&lt;/b&gt;"</string>
     <string name="accessibility_hearing_device_footer_summary_tts" msgid="955527026890456959">"სხვა ისეთი სმენის აპარატების საპოვნელად, რომლებიც ASHA-ს ან LE-აუდიოს მიერ არ არის მხარდაჭერილი, შეეხეთ: "<b>"ახალი მოწყობილობის დაწყვილება"</b>" და "<b>"მეტი მოწყობილობების ნახვა"</b></string>
@@ -4661,8 +4669,8 @@
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"საფულის გახსნა"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"გსურთ ჩაკეტილი ეკრანის მალსახმობის შეცვლა?"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> თქვენი ჩაკეტილი ეკრანის მალსახმობიცაა. გსურთ მისი შეცვლა?"</string>
-    <string name="double_tap_power_wallet_footer_title" msgid="5417023303339032410">"საფულე არ არის ხელმისაწვდომი. თქვენი მიმდინარე ნაგულისხმევი საფულის აპი არ უჭერს მხარს ჟესტს."</string>
-    <string name="double_tap_power_wallet_footer_learn_more_text" msgid="1267822422365445657">"შეეხეთ აქ, რათა შეცვალოთ."</string>
+    <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"ეს ჟესტი არ არის მხარდაჭერილი თქვენი მიმდინარე ნაგულისხმევი საფულის აპის მიერ"</string>
+    <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"შეცვალეთ ნაგულისხმევი საფულე"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"კამერის ამობრუნება სელფისთვის"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"ნავიგაციის რეჟიმი"</string>
@@ -5058,31 +5066,31 @@
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"ფასები შეამოწმეთ თქვენს ოპერატორთან."</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"ქსელის რეჟიმი (<xliff:g id="NETWORKMODEID">%1$d</xliff:g>) არასწორია. იგნორირება."</string>
     <string name="satellite_setting" msgid="4650503806634496443">"სატელიტური კავშირი"</string>
-    <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"მიიღეთ და გაგზავნეთ ტექსტური შეტყობინებები სატელიტის მეშვეობით. არ შედის თქვენს ანგარიშში."</string>
-    <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"მიიღეთ და გაგზავნეთ ტექსტური შეტყობინებები სატელიტის მეშვეობით. არ შედის თქვენს ანგარიშში."</string>
-    <string name="satellite_setting_summary_without_entitlement" msgid="5284998840770992554">"მიიღეთ და გაგზავნეთ ტექსტური შეტყობინებები სატელიტის მეშვეობით. დეტალური ინფორმაციისთვის მიმართეთ ოპერატორს."</string>
+    <string name="satellite_setting_enabled_summary" msgid="2114544331827193266">"მიიღეთ და გააგზავნეთ ტექსტური შეტყობინებები სატელიტის მეშვეობით. შედის თქვენს ანგარიშში."</string>
+    <string name="satellite_setting_disabled_summary" msgid="8193743637158939283">"მიიღეთ და გააგზავნეთ ტექსტური შეტყობინებები სატელიტის მეშვეობით. არ შედის თქვენს ანგარიშში."</string>
+    <string name="satellite_setting_summary_without_entitlement" msgid="7010003955751606421">"მიიღეთ და გააგზავნეთ ტექსტური შეტყობინებები სატელიტის მეშვეობით. დეტალური ინფორმაციისთვის მიმართეთ ოპერატორს."</string>
     <string name="keywords_satellite_setting" msgid="613553612424945946">"შეტყობინებების სატელიტური მიმოცვლა, სატელიტური კავშირი"</string>
     <string name="category_name_about_satellite_connectivity" msgid="3971142716898783631">"სატელიტური კავშირის შესახებ"</string>
-    <string name="description_about_satellite_setting" msgid="5539359064330584941">"შეგიძლიათ, გაგზავნოთ და მიიღოთ ტექსტური შეტყობინებები და გამოიყენოთ ზოგიერთი აპი სატელიტის საშუალებით, სათანადო <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-ის ანგარიშით"</string>
+    <string name="description_about_satellite_setting" msgid="8212911110428998767">"შეგიძლიათ გააგზავნოთ და მიიღოთ ტექსტური შეტყობინებები სატელიტის საშუალებით სათანადო <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-ის ანგარიშით"</string>
     <string name="category_title_your_satellite_plan" msgid="8169426217950247126">"თქვენი <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-ის ანგარიში"</string>
-    <string name="title_have_satellite_plan" msgid="2048372355699977947">"შეტყობინებების სატელიტური მიმოცვლის ფუნქცია შედის თქვენს ანგარიშში"</string>
-    <string name="title_no_satellite_plan" msgid="2876056203035197505">"შეტყობინებების სატელიტური მიმოცვლის ფუნქცია არ შედის თქვენს ანგარიშში"</string>
+    <string name="title_have_satellite_plan" msgid="857337944804101443">"თქვენი ანგარიში მოიცავს შეტყობინებების მიმოცვლას"</string>
+    <string name="title_no_satellite_plan" msgid="7255726881685672846">"შეტყობინებების მიმოცვლის ფუნქცია არ შედის თქვენს ანგარიშში"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"შეიტყვეთ მეტი"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"მუშაობის პრინციპი"</string>
-    <string name="title_satellite_connection_guide" msgid="3294802307913609072">"მობილური ქსელის არ ქონის შემთხვევაში"</string>
+    <string name="title_satellite_connection_guide" msgid="4730763872034574368">"როცა არ გაქვთ მობილური ან Wi-Fi ქსელი"</string>
     <string name="title_satellite_connection_guide_for_manual_type" msgid="7223875100977941341">"ტელეფონის ნომრის გაგზავნა"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"თქვენი ტელეფონი ავტომატურად დაუკავშირდება სატელიტს. საუკეთესო კავშირისთვის იყავთ ისეთ ადგილას, სადაც ცის ნათელი ხედია."</string>
-    <string name="summary_satellite_connection_guide_for_manual_type" msgid="5075149380084376662">"თუ მობილური ქსელი არ გაქვთ, დაინახავთ შეტყობინებების სატელიტური მიმოცვლის გამოყენების ვარიანტს."</string>
+    <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"თუ მობილური ქსელი არ გაქვთ, დაინახავთ სატელიტის გამოყენების ვარიანტს."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"თქვენი ტელეფონის სატელიტთან დაკავშირების შემდეგ"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"სატელიტთან დასაკავშირებელი ნაბიჯები"</string>
-    <string name="summary_supported_service" msgid="4320535903444834786">"შეტყობინების ყველგან გაგზავნა შეგიძლიათ, მათ შორის გადაუდებელი დახმარების სამსახურებში. თქვენი ტელეფონი დაუკავშირდება მობილური ქსელს, მისი ხელმისაწვდომობის შემთხვევაში."</string>
+    <string name="summary_supported_service" msgid="6380533552383355977">"შეგიძლიათ, გააგზავნოთ შეტყობინება ყველგან, მათ შორის, გადაუდებელი დახმარების სამსახურებში, და გამოიყენოთ შეზღუდული მონაცემები ზოგიერთ აპზე. თქვენი ტელეფონი ხელახლა დაუკავშირდება მობილურ ქსელს, მისი ხელმისაწვდომობის შემთხვევაში."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"ტელეფონის დაკავშირების შემდეგ შეგიძლიათ ტექსტური შეტყობინების გაგზავნა ნებისმიერთან, მათ შორის, გადაუდებელი დახმარების სამსახურებში."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"გაითვალისწინეთ"</string>
     <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"სატელიტურ კავშირს, შესაძლოა, უფრო მეტი დრო დასჭირდეს და მხოლოდ გარკვეულ ტერიტორიაზეა ხელმისაწვდომი."</string>
     <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"გარკვეულმა ნაგებობებმა და ამინდმა, შესაძლოა, გავლენა მოახდინოს თქვენს სატელიტთან კავშირზე."</string>
-    <string name="satellite_footer_content_section_3" msgid="4652426135622555607">"სატელიტით დარეკვა მიუწვდომელია."</string>
+    <string name="satellite_footer_content_section_3" msgid="4686525535095321485">"სატელიტით დარეკვა მიუწვდომელია."</string>
     <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"გადაუდებელი ზარების კავშირი ისევ ხელმისაწვდომია."</string>
-    <string name="satellite_footer_content_section_5" msgid="3053256489735265540">"გარე ბმულების სანახავად საჭიროა მობილური ან Wi-Fi ქსელი."</string>
+    <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"გარე ბმულების სანახავად საჭიროა მობილური ან Wi-Fi ქსელი."</string>
     <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"გადაუდებელი დახმარების სამსახურებთან ტექსტური შეტყობინების გაგზავნა ყველა სივრცეში, შესაძლოა, არ იყოს ხელმისაწვდომი."</string>
     <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"პარამეტრებში ასახვამდე ანგარიშის ცვლილებებს, შესაძლოა, გარკვეული დრო დასჭირდეს. დეტალებისთვის დაუკავშირდით: <xliff:g id="CARRIER_NAME">%1$s</xliff:g>."</string>
     <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"დამატებითი ინფორმაცია სატელიტური კავშირის შესახებ"</string>
@@ -5094,7 +5102,7 @@
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"შეტყობინებების სატელიტური მიმოცვლა"</string>
     <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"თქვენი ანგარიში მოიცავს მონაცემების გამოყენებას"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"მხარდაჭერილი აპები თქვენს ტელეფონზე"</string>
-    <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"ყველა აპის ნახვა"</string>
+    <string name="title_satellite_supported_app_list_entry" msgid="891155574898209245">"სატელიტის მიერ მხარდაჭერილი ყველა აპის ნახვა"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"მხარდაჭერილი აპები თქვენს ტელეფონზე"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"SIM-ის დამატება ვერ ხერხდება"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"დაასრულეთ სატელიტური კავშირი, სანამ დაამატებთ SIM-ს"</string>

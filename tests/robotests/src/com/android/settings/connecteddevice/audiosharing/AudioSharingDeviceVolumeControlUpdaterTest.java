@@ -258,8 +258,10 @@ public class AudioSharingDeviceVolumeControlUpdaterTest {
 
         verify(mDevicePreferenceCallback).onDeviceAdded(captor.capture());
         assertThat(captor.getValue() instanceof AudioSharingDeviceVolumePreference).isTrue();
-        assertThat(((AudioSharingDeviceVolumePreference) captor.getValue()).getCachedDevice())
-                .isEqualTo(mCachedDevice);
+        AudioSharingDeviceVolumePreference preference =
+                (AudioSharingDeviceVolumePreference) captor.getValue();
+        assertThat(preference.getCachedDevice()).isEqualTo(mCachedDevice);
+        assertThat(preference.getTitle().toString()).isEqualTo(TEST_DEVICE_NAME);
     }
 
     @Test
@@ -275,9 +277,10 @@ public class AudioSharingDeviceVolumeControlUpdaterTest {
         shadowOf(Looper.getMainLooper()).idle();
 
         verify(mDevicePreferenceCallback).onDeviceAdded(captor.capture());
-        assertThat(captor.getValue() instanceof AudioSharingDeviceVolumePreference).isTrue();
-        assertThat(((AudioSharingDeviceVolumePreference) captor.getValue()).getCachedDevice())
-                .isEqualTo(mCachedDevice);
+        AudioSharingDeviceVolumePreference preference =
+                (AudioSharingDeviceVolumePreference) captor.getValue();
+        assertThat(preference.getCachedDevice()).isEqualTo(mCachedDevice);
+        assertThat(preference.getTitle().toString()).isEqualTo(TEST_DEVICE_NAME);
     }
 
     @Test

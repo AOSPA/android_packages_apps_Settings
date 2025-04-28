@@ -41,6 +41,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.flags.Flags;
 
 /**
  * A dialogFragment used by {@link BluetoothPairingDialog} to create an appropriately styled dialog
@@ -345,8 +346,7 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
         TextView pairingViewCaption = (TextView) view.findViewById(R.id.pairing_caption);
         TextView pairingViewContent = (TextView) view.findViewById(R.id.pairing_subhead);
         TextView messagePairing = (TextView) view.findViewById(R.id.pairing_code_message);
-        CompoundButton contactSharing =
-                view.findViewById(R.id.phonebook_sharing_message_confirm_pin);
+        CompoundButton contactSharing = getContactSharingSwitch(view);
         view.findViewById(R.id.phonebook_sharing).setVisibility(
                 mPairingController.isContactSharingVisible() ? View.VISIBLE : View.GONE);
         mPairingController.setContactSharingState();
@@ -370,5 +370,21 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
 
         messagePairingSet.setVisibility(setPairingMessage ? View.VISIBLE : View.GONE);
         return view;
+    }
+
+    private CompoundButton getContactSharingSwitch(View container) {
+        CompoundButton legacySwitch =
+                container.findViewById(R.id.phonebook_sharing_message_confirm_pin);
+        CompoundButton expressiveSwitch =
+                container.findViewById(R.id.phonebook_sharing_message_confirm_pin_expressive);
+        if (Flags.enableBluetoothSettingsExpressiveDesign()) {
+            legacySwitch.setVisibility(View.GONE);
+            expressiveSwitch.setVisibility(View.VISIBLE);
+            return expressiveSwitch;
+        } else {
+            legacySwitch.setVisibility(View.VISIBLE);
+            expressiveSwitch.setVisibility(View.GONE);
+            return legacySwitch;
+        }
     }
 }

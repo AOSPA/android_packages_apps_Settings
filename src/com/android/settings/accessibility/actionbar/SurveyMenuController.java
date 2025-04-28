@@ -16,15 +16,21 @@
 
 package com.android.settings.accessibility.actionbar;
 
+import static com.android.settings.accessibility.notification.NotificationConstants.EXTRA_DISMISS_NOTIFICATION;
+import static com.android.settings.accessibility.notification.NotificationConstants.EXTRA_PAGE_ID;
+
 import android.content.Context;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.notification.SurveyNotificationService;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SurveyFeatureProvider;
@@ -49,6 +55,7 @@ public class SurveyMenuController implements LifecycleObserver, OnCreateOptionsM
     private final SurveyFeatureProvider mSurveyFeatureProvider;
     @NonNull
     private final String mFeedbackKey;
+    private final int mPageId;
 
     /**
      * Initializes the controller to add the survey menu to the given Settings fragment.
@@ -57,12 +64,14 @@ public class SurveyMenuController implements LifecycleObserver, OnCreateOptionsM
      * @param host The Settings fragment to add the menu to.
      * @param context The current context.
      * @param feedbackKey Unique identifier for the survey.
+     * @return A new instance of SurveyMenuController that manages the survey menu.
      */
-    public static void init(@NonNull InstrumentedPreferenceFragment host, @NonNull Context context,
-            @NonNull String feedbackKey) {
-        init(host,
+    @NonNull
+    public static SurveyMenuController init(@NonNull InstrumentedPreferenceFragment host,
+            @NonNull Context context, @NonNull String feedbackKey, int pageId) {
+        return init(host,
                 FeatureFactory.getFeatureFactory().getSurveyFeatureProvider(context),
-                feedbackKey);
+                feedbackKey, pageId);
     }
 
     /**
@@ -71,11 +80,16 @@ public class SurveyMenuController implements LifecycleObserver, OnCreateOptionsM
      * @param host The Settings fragment.
      * @param surveyFeatureProvider Custom survey provider.
      * @param feedbackKey Survey identifier.
+     * @return A new instance of SurveyMenuController that manages the survey menu.
      */
-    public static void init(@NonNull InstrumentedPreferenceFragment host,
-            @Nullable SurveyFeatureProvider surveyFeatureProvider, @NonNull String feedbackKey) {
-        host.getSettingsLifecycle().addObserver(
-                new SurveyMenuController(host, surveyFeatureProvider, feedbackKey));
+    @NonNull
+    public static SurveyMenuController init(@NonNull InstrumentedPreferenceFragment host,
+            @Nullable SurveyFeatureProvider surveyFeatureProvider, @NonNull String feedbackKey,
+            int pageId) {
+        final SurveyMenuController controller =
+                new SurveyMenuController(host, surveyFeatureProvider, feedbackKey, pageId);
+        host.getSettingsLifecycle().addObserver(controller);
+        return controller;
     }
 
     @Override
@@ -93,19 +107,42 @@ public class SurveyMenuController implements LifecycleObserver, OnCreateOptionsM
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem menuItem) {
         if (menuItem.getItemId() == MENU_SEND_SURVEY) {
-            if (mSurveyFeatureProvider != null) {
-                mSurveyFeatureProvider.sendActivityIfAvailable(mFeedbackKey);
+            startSurvey();
+            // Prevent repeated feedback triggers.
+            menuItem.setVisible(false);
+
+            // Remove Survey Notification
+            FragmentActivity activity = mHost.getActivity();
+            if (activity != null) {
+                final Intent dismissServiceIntent = new Intent(activity,
+                        SurveyNotificationService.class);
+                dismissServiceIntent.putExtra(EXTRA_DISMISS_NOTIFICATION, true);
+                dismissServiceIntent.putExtra(EXTRA_PAGE_ID, mPageId);
+                activity.startService(dismissServiceIntent);
             }
             return true;
         }
         return false;
     }
 
+    /**
+     * Triggers the survey sending process using the provided SurveyFeatureProvider.
+     *
+     * <p>If a SurveyFeatureProvider is available, it initiates the survey activity using the
+     * feedback key. If the provider is null, this method does nothing.
+     */
+    public void startSurvey() {
+        if (mSurveyFeatureProvider != null) {
+            mSurveyFeatureProvider.sendActivityIfAvailable(mFeedbackKey);
+        }
+    }
+
     private SurveyMenuController(@NonNull InstrumentedPreferenceFragment host,
             @Nullable SurveyFeatureProvider surveyFeatureProvider,
-            @NonNull String feedbackKey) {
+            @NonNull String feedbackKey, int pageId) {
         mHost = host;
         mFeedbackKey = feedbackKey;
         mSurveyFeatureProvider = surveyFeatureProvider;
+        mPageId = pageId;
     }
 }

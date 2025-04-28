@@ -267,7 +267,7 @@
     <string name="us_measurement_system" msgid="8406695347890345490">"EE. UU."</string>
     <string name="uk_measurement_system" msgid="1814065008707689505">"Reino Unido"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"Preferencias adicionales"</string>
-    <string name="terms_of_address_title" msgid="7338630812197476808">"Elegir formas de dirigirse a ti"</string>
+    <string name="terms_of_address_title" msgid="7338630812197476808">"Elegir cómo se dirige a ti"</string>
     <string name="terms_of_address_summary" msgid="7802443422612600620">"Tu dispositivo puede personalizar la forma de dirigirse a ti"</string>
     <string name="terms_of_address_intro_title" msgid="1533951542181569335">"Este ajuste permite personalizar la forma en la que la mayoría de las aplicaciones del sistema se dirigen a ti, pero no sirve para las aplicaciones que instales."</string>
     <string name="terms_of_address_not_specified" msgid="4439257779351251973">"Sin especificar"</string>
@@ -334,20 +334,18 @@
     <string name="lock_after_timeout" msgid="8682769000437403444">"Bloquear tras tiempo de espera de la pantalla"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> después del tiempo de espera"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Inmediatamente después del tiempo de espera (salvo si <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> mantiene el dispositivo desbloqueado)"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> después de agotarse el tiempo de espera de la pantalla, salvo si <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> mantiene el dispositivo desbloqueado"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> tras agotarse el tiempo, salvo si <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> mantiene el dispositivo desbloqueado"</string>
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Añadir texto a pantalla de bloqueo"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Ninguno"</string>
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"P. ej., Android de Juan."</string>
     <string name="location_settings_title" msgid="8375074508036087178">"Ubicación"</string>
-    <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Usar ubicación"</string>
+    <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Usar Ubicación"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Desactivado"</string>
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Activada / # aplicación tiene acceso a la ubicación}other{Activada / # aplicaciones tienen acceso a la ubicación}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Cargando…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Las aplicaciones que tengan permiso para detectar dispositivos cercanos podrán determinar la posición relativa de los dispositivos conectados."</string>
-    <!-- no translation found for location_settings_footer_location_off_with_telephony (5600725945541382556) -->
-    <skip />
-    <!-- no translation found for location_settings_footer_location_off_no_telephony (2709958040008816610) -->
-    <skip />
+    <string name="location_settings_footer_location_off_with_telephony" msgid="5600725945541382556">"Las aplicaciones y los servicios no pueden acceder a la ubicación. Aun así, la ubicación de tu dispositivo puede enviarse a los servicios de emergencias si te pones en contacto con un número de emergencia."</string>
+    <string name="location_settings_footer_location_off_no_telephony" msgid="2709958040008816610">"Las aplicaciones y los servicios no pueden acceder a la ubicación."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Más información sobre los ajustes de ubicación"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Para cambiarlo, ve a Ajustes de ChromeOS &gt; Privacidad y seguridad &gt; Controles de privacidad &gt; Acceso a la ubicación"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Cuentas"</string>
@@ -457,6 +455,8 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Cancelar"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"Ahora no"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Acepto"</string>
+    <!-- no translation found for security_settings_fingerprint_rename_description (6301505700382531086) -->
+    <skip />
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"¿Saltar la configuración de huella digital?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Solo tardarás un par de minutos en configurar la huella digital. Si te saltas este paso, puedes añadir tu huella digital en otro momento desde los ajustes."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Cuando veas este icono, usa tu huella para autenticarte, como al iniciar sesión en aplicaciones o aprobar compras"</string>
@@ -519,7 +519,7 @@
     <string name="security_settings_remoteauth_enroll_introduction_youre_in_control_title" msgid="7974976673323638524">"Tú tienes el control"</string>
     <string name="security_settings_remoteauth_enroll_introduction_info_remove_watch" msgid="1888318677088986801">"Puedes quitar tu smartwatch de Desbloqueo con reloj en cualquier momento desde Ajustes"</string>
     <string name="security_settings_remoteauth_enroll_introduction_animation_tap_notification" msgid="1597397399097952974">"Toca una notificación"</string>
-    <string name="security_settings_remoteauth_enroll_introduction_animation_swipe_up" msgid="2129230804324634653">"Desliza hacia arriba en la pantalla de bloqueo"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_animation_swipe_up" msgid="2129230804324634653">"Deslizar hacia arriba en la pantalla de bloqueo"</string>
     <string name="security_settings_remoteauth_enroll_enrolling_title" msgid="313016997943607675">"Elige tu reloj"</string>
     <string name="security_settings_remoteauth_enroll_enrolling_list_heading" msgid="8227585438932911013">"Relojes disponibles"</string>
     <string name="security_settings_remoteauth_enroll_enrolling_disagree" msgid="1670201454188049863">"Cancelar"</string>
@@ -528,7 +528,7 @@
     <string name="security_settings_remoteauth_enroll_finish_description" msgid="4876209907275244653">"Ahora puedes usar tu reloj para desbloquear este teléfono cuando deslices hacia arriba en la pantalla de bloqueo o toques una notificación"</string>
     <string name="security_settings_remoteauth_enroll_finish_btn_next" msgid="8072138423143889592">"Hecho"</string>
     <string name="security_settings_remoteauth_settings_title" msgid="1564912618737165129">"Desbloqueo con reloj"</string>
-    <string name="security_settings_remoteauth_settings_description" msgid="2758239650119457964">"Puedes usar tu reloj para desbloquear este teléfono cuando deslices hacia arriba en la pantalla de bloqueo o toques una notificación"</string>
+    <string name="security_settings_remoteauth_settings_description" msgid="2758239650119457964">"Puedes usar tu reloj para desbloquear este teléfono cuando deslices hacia arriba en la pantalla de bloqueo o toques una notificación."</string>
     <string name="security_settings_remoteauth_settings_info_footer" msgid="795894033901478120">"Para usar Desbloqueo con reloj, tu reloj debe estar desbloqueado, en tu muñeca, dentro del alcance y conectado a este teléfono. Si se interrumpe la conexión, tendrás que desbloquear el teléfono para usar Desbloqueo con reloj.\n\nNota:\nNo puedes tener más de un reloj configurado a la vez. Para añadir otro reloj, primero quita el anterior."</string>
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Más información sobre Desbloqueo con reloj"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Añadir reloj"</string>
@@ -865,7 +865,7 @@
 </xliff:g>El pago sin contacto no estará disponible.<xliff:g id="EMPTY_LINE_1">
 
 </xliff:g>Las aplicaciones de cartera, pagos y otras que requieran autenticación pueden no funcionar correctamente."</string>
-    <string name="unlock_disable_frp_warning_content_face_fingerprint_authbound_keys" msgid="1574263040292024543">"Tu bloqueo de pantalla, Desbloqueo facial y Desbloqueo con huella digital se eliminarán.<xliff:g id="EMPTY_LINE_0">
+    <string name="unlock_disable_frp_warning_content_face_fingerprint_authbound_keys" msgid="1574263040292024543">"Tu bloqueo de pantalla, Desbloqueo facial y Desbloqueo con huella digital se quitarán del dispositivo.<xliff:g id="EMPTY_LINE_0">
 
 </xliff:g>El pago sin contacto no estará disponible.<xliff:g id="EMPTY_LINE_1">
 
@@ -1443,8 +1443,10 @@
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Durante la carga"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Con el dispositivo en una base"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Nunca"</string>
-    <string name="screensaver_settings_summary_postured" msgid="1184119124847691954">"Cuando está en vertical"</string>
-    <string name="screensaver_settings_summary_postured_and_charging" msgid="1952047156927637506">"Cuando está en vertical y cargándose"</string>
+    <!-- no translation found for screensaver_settings_summary_postured (6346392320858994892) -->
+    <skip />
+    <!-- no translation found for screensaver_settings_summary_postured_and_charging (5111797042509819055) -->
+    <skip />
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"Activado/<xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Desactivado"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Cuándo empezar a mostrarlo"</string>
@@ -1614,8 +1616,10 @@
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Cuándo mostrar automáticamente"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Nunca"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Durante la carga"</string>
-    <string name="when_to_show_hubmode_charging_and_upright" msgid="6293947459712755814">"Mientras esté vertical y cargándose"</string>
-    <string name="when_to_show_hubmode_docked" msgid="7107631545009933891">"Con el dispositivo en una base"</string>
+    <!-- no translation found for when_to_show_hubmode_charging_and_upright (537039046490426922) -->
+    <skip />
+    <!-- no translation found for when_to_show_hubmode_docked (8876633401873168284) -->
+    <skip />
     <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"Solo durante la carga inalámbrica"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APNs"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Editar punto de acceso"</string>
@@ -2313,6 +2317,12 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Mover la pantalla cuando el cursor toque los bordes"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Ampliar escritura"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"La lupa sigue el texto a medida que escribes"</string>
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_title (8804501318161774285) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_summary (3054371947104552843) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_unavailable_summary (2248787024685382054) -->
+    <skip />
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Mantener activada al cambiar de aplicaciones"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"La lupa permanece activada, pero no se aplica al cambiar de aplicación"</string>
     <string name="accessibility_screen_magnification_always_on_unavailable_summary" msgid="3844732482037416038">"No disponible cuando se amplía solo parte de la pantalla"</string>
@@ -2504,7 +2514,7 @@
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Llamadas"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Notificaciones y alarmas"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Vibración interactiva"</string>
-    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Usar vibración y vibración al pulsar"</string>
+    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Usar Vibración y vibración al pulsar"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Vibración de alarmas"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Vibración de contenido multimedia"</string>
     <string name="accessibility_keyboard_vibration_title" msgid="7559967730626765441">"Vibración del teclado"</string>
@@ -2566,6 +2576,7 @@
     <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Acceso directo de audífono"</string>
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Compatibilidad con audífonos"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Mejora la compatibilidad con las telebobinas y reduce el ruido no deseado"</string>
+    <string name="hac_disclaimer_message" msgid="5279579026956312543"></string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"Acerca de los audífonos"</string>
     <string name="accessibility_hearing_device_footer_summary" msgid="5513620078219951077">"Para buscar otros audífonos que no sean compatibles con ASHA o LE Audio, toca &lt;b&gt;Emparejar uno nuevo&lt;/b&gt; &gt; &lt;b&gt;Ver más dispositivos&lt;/b&gt;"</string>
     <string name="accessibility_hearing_device_footer_summary_tts" msgid="955527026890456959">"Para buscar otros audífonos que no sean compatibles con ASHA o LE Audio, toca "<b>"Emparejar uno nuevo"</b>" y, a continuación, "<b>"Ver más dispositivos"</b></string>
@@ -3260,7 +3271,7 @@
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"¿Eliminarte a ti mismo?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"¿Eliminar este usuario?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"¿Quitar este perfil?"</string>
-    <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"¿Quitar perfil de trabajo?"</string>
+    <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"¿Eliminar perfil de trabajo?"</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"Se eliminarán todas las aplicaciones y datos."</string>
     <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"Si continúas, se eliminarán todas las aplicaciones y datos."</string>
     <string name="user_profile_confirm_remove_message" msgid="3641289528179850718">"Se eliminarán todas las aplicaciones y datos."</string>
@@ -4642,7 +4653,7 @@
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Sensores desactivados"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"Ajustes del perfil de trabajo"</string>
     <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"Buscar contactos del directorio de trabajo en aplicaciones personales"</string>
-    <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"Es posible que tu administrador de TI vea tus búsquedas y tus llamadas entrantes"</string>
+    <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"Tu administrador de TI podría ver tus búsquedas y tus llamadas entrantes"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Calendario con varios perfiles"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Mostrar eventos de trabajo en tu calendario personal"</string>
     <string name="managed_profile_settings_footer" msgid="996500759305118103">"Cuando las aplicaciones de trabajo están desactivadas, se ponen en pausa y no pueden enviarte notificaciones ni puedes acceder a ellas"</string>
@@ -4665,9 +4676,9 @@
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Abrir Wallet"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"¿Cambiar acceso directo de la pantalla de bloqueo?"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> también es tu acceso directo de la pantalla de bloqueo. ¿Quieres cambiarlo?"</string>
-    <!-- no translation found for double_tap_power_wallet_footer_title (5417023303339032410) -->
+    <!-- no translation found for double_tap_power_wallet_footer_title (4626950875173822614) -->
     <skip />
-    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (1267822422365445657) -->
+    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (4871482943751760132) -->
     <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Cambiar de cámara para hacer selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
@@ -4699,7 +4710,7 @@
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"navegación por gestos, sensibilidad del gesto para volver, gesto para volver"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"navegación, botón de inicio"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"Modo Una mano"</string>
-    <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Usar modo Una mano"</string>
+    <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Usar Modo Una mano"</string>
     <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"Acceso directo al modo Una mano"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"fácil alcance"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Desliza hacia abajo para"</string>
@@ -4856,7 +4867,7 @@
     <string name="credman_autofill_keywords" msgid="701180623776848914">"automático, completar, autocompletar, datos, llave de acceso, contraseña"</string>
     <string name="credman_button_change" msgid="4072629639218503790">"Cambiar"</string>
     <string name="credman_button_open" msgid="7519871964170816850">"Abrir"</string>
-    <string name="credman_app_list_preference_none" msgid="2509646651254971448">"No hay nada seleccionado"</string>
+    <string name="credman_app_list_preference_none" msgid="2509646651254971448">"Ninguno seleccionado"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Asegúrate de que confías en esta aplicación&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Autocompletar de Google&gt;%1$s&lt;/xliff:g&gt; utiliza el contenido que se muestra en la pantalla para determinar el texto que se puede autocompletar."</string>
     <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;¿Usar &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Las nuevas contraseñas, llaves de acceso y otra información se guardarán aquí a partir de ahora. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; puede usar el contenido que hay en tu pantalla para determinar qué se puede autocompletar."</string>
     <string name="credman_picker_title" msgid="8442086614222006564">"Servicio preferido para contraseñas, llaves de acceso y autocompletar"</string>
@@ -5064,31 +5075,41 @@
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"Ponte en contacto con tu proveedor de red para consultar el precio."</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"El modo de red <xliff:g id="NETWORKMODEID">%1$d</xliff:g> no es válido. Ignorar."</string>
     <string name="satellite_setting" msgid="4650503806634496443">"Conectividad por satélite"</string>
-    <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Envía y recibe mensajes de texto por satélite. Incluido con tu cuenta."</string>
-    <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Envía y recibe mensajes de texto por satélite. No incluido con tu cuenta."</string>
-    <string name="satellite_setting_summary_without_entitlement" msgid="5284998840770992554">"Envía y recibe mensajes de texto por satélite. Ponte en contacto con tu operador para obtener más información al respecto."</string>
+    <!-- no translation found for satellite_setting_enabled_summary (2114544331827193266) -->
+    <skip />
+    <!-- no translation found for satellite_setting_disabled_summary (8193743637158939283) -->
+    <skip />
+    <!-- no translation found for satellite_setting_summary_without_entitlement (7010003955751606421) -->
+    <skip />
     <string name="keywords_satellite_setting" msgid="613553612424945946">"Mensajes por satélite, conectividad por satélite"</string>
     <string name="category_name_about_satellite_connectivity" msgid="3971142716898783631">"Acerca de la conectividad por satélite"</string>
-    <string name="description_about_satellite_setting" msgid="5539359064330584941">"Puedes enviar y recibir mensajes de texto y usar algunas aplicaciones por satélite con una cuenta de <xliff:g id="CARRIER_NAME">%1$s</xliff:g> apta"</string>
+    <!-- no translation found for description_about_satellite_setting (8212911110428998767) -->
+    <skip />
     <string name="category_title_your_satellite_plan" msgid="8169426217950247126">"Tu cuenta de <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
-    <string name="title_have_satellite_plan" msgid="2048372355699977947">"Los mensajes por satélite están incluidos en tu cuenta"</string>
-    <string name="title_no_satellite_plan" msgid="2876056203035197505">"Los mensajes por satélite no están incluidos en tu cuenta"</string>
+    <string name="title_have_satellite_plan" msgid="857337944804101443">"Los mensajes están incluidos en tu cuenta"</string>
+    <!-- no translation found for title_no_satellite_plan (7255726881685672846) -->
+    <skip />
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Más información"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Cómo funciona"</string>
-    <string name="title_satellite_connection_guide" msgid="3294802307913609072">"Cuando no tengas conexión de red móvil"</string>
+    <!-- no translation found for title_satellite_connection_guide (4730763872034574368) -->
+    <skip />
     <string name="title_satellite_connection_guide_for_manual_type" msgid="7223875100977941341">"Enviar mensaje de texto a un número de teléfono"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Tu teléfono se conectará automáticamente a un satélite. Para obtener la mejor conexión, debes estar en una zona en la que se vea bien el cielo."</string>
-    <string name="summary_satellite_connection_guide_for_manual_type" msgid="5075149380084376662">"Si no tienes conexión a una red móvil, verás una opción para usar mensajes por satélite."</string>
+    <!-- no translation found for summary_satellite_connection_guide_for_manual_type (2106091974353287661) -->
+    <skip />
     <string name="title_supported_service" msgid="4275535165812691571">"Cuando tu teléfono se conecte a un satélite"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Sigue los pasos para conectarte al satélite"</string>
-    <string name="summary_supported_service" msgid="4320535903444834786">"Puedes intercambiar mensajes de texto con cualquiera, incluidos los servicios de emergencias. Tu teléfono se volverá a conectar a una red móvil cuando esté disponible."</string>
+    <!-- no translation found for summary_supported_service (6380533552383355977) -->
+    <skip />
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"Cuando tu teléfono se conecte, podrás enviar mensajes de texto a cualquier persona, incluidos los servicios de emergencias."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Importante"</string>
     <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"La conectividad por satélite puede tardar más y solo está disponible en ciertas zonas."</string>
     <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"Las condiciones meteorológicas y algunas estructuras pueden afectar a tu conexión por satélite."</string>
-    <string name="satellite_footer_content_section_3" msgid="4652426135622555607">"Las llamadas por satélite no están disponibles."</string>
+    <!-- no translation found for satellite_footer_content_section_3 (4686525535095321485) -->
+    <skip />
     <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"Es posible que las llamadas de emergencia sigan estando disponibles."</string>
-    <string name="satellite_footer_content_section_5" msgid="3053256489735265540">"Se necesita una red móvil o Wi-Fi para ver enlaces externos."</string>
+    <!-- no translation found for satellite_footer_content_section_5 (2466353040832630785) -->
+    <skip />
     <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"Puede que no se puedan intercambiar mensajes de texto con los servicios de emergencias en determinadas zonas."</string>
     <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"Los cambios en tu cuenta pueden tardar un poco en aparecer en Ajustes. Contacta con <xliff:g id="CARRIER_NAME">%1$s</xliff:g> para saber más."</string>
     <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"Más información sobre la conectividad por satélite"</string>
@@ -5100,7 +5121,8 @@
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"mensajes por satélite"</string>
     <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"El uso de datos está incluido en tu cuenta"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Aplicaciones compatibles en tu teléfono"</string>
-    <string name="title_satellite_supported_app_list_entry" msgid="3227843312488003028">"ver todas las aplicaciones"</string>
+    <!-- no translation found for title_satellite_supported_app_list_entry (891155574898209245) -->
+    <skip />
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Aplicaciones compatibles en tu teléfono"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"No se puede añadir una SIM"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Finaliza la conexión por satélite antes de añadir una SIM"</string>
@@ -5738,7 +5760,7 @@
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Contraseña: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Para escuchar <xliff:g id="STREAM_NAME">%1$s</xliff:g>, otra persona puede conectar auriculares compatibles a su dispositivo Android. Después, podrá escanear este código QR."</string>
     <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"Escuchar emisión de Auracast"</string>
-    <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"Desactiva la función para compartir audio para encontrar emisiones de audio"</string>
+    <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"Desactiva Compartir audio para encontrar emisiones de audio"</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Encontrar una emisión de audio"</string>
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Escucha el audio compartido de un dispositivo o una emisión de Auracast cercana"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"Tu dispositivo de audio"</string>

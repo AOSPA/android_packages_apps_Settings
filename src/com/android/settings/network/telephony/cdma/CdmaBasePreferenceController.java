@@ -30,6 +30,7 @@ import com.android.settings.network.telephony.TelephonyBasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+import com.android.settingslib.widget.SettingsTitlelessPreferenceCategory;
 
 /**
  * Preference controller related to CDMA category
@@ -97,8 +98,17 @@ public abstract class CdmaBasePreferenceController extends TelephonyBasePreferen
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
+        if (mPreference == null) {
+            return;
+        }
         if (mPreference instanceof CdmaListPreference) {
             ((CdmaListPreference) mPreference).setSubId(mSubId);
+        }
+        if (isAvailable()) {
+            Preference parentPreference = mPreference.getParent();
+            if (parentPreference instanceof SettingsTitlelessPreferenceCategory) {
+                parentPreference.setVisible(true);
+            }
         }
     }
 }

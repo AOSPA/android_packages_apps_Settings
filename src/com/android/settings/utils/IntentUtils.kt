@@ -19,7 +19,7 @@ package com.android.settings.utils
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import com.android.settings.SettingsActivity
+import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
 
 /**
  * Returns the [Intent] to start given settings activity and locate the preference.
@@ -29,6 +29,9 @@ import com.android.settings.SettingsActivity
  * @param key preference key to locate
  */
 fun makeLaunchIntent(context: Context, activityClass: Class<out Activity>, key: String?) =
-    Intent(context, activityClass).apply {
-        if (key != null) putExtra(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key)
-    }
+    Intent(context, activityClass).apply { highlightPreference(key) }
+
+/** Sets the intent extra to highlight given preference. */
+fun Intent.highlightPreference(key: String?) {
+    if (key != null) putExtra(EXTRA_FRAGMENT_ARG_KEY, key)
+}

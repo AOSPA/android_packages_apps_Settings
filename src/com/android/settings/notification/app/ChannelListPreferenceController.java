@@ -18,7 +18,6 @@ package com.android.settings.notification.app;
 
 import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
-import static com.android.server.notification.Flags.notificationHideUnusedChannels;
 
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
@@ -98,16 +97,13 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... unused) {
-                if (notificationHideUnusedChannels()) {
-                    if (mAppRow.showAllChannels) {
-                        mChannelGroupList = mBackend.getGroups(mAppRow.pkg, mAppRow.uid).getList();
-                    } else {
-                        mChannelGroupList = mBackend.getGroupsWithRecentBlockedFilter(mAppRow.pkg,
-                                mAppRow.uid).getList();
-                    }
-                } else {
+                if (mAppRow.showAllChannels) {
                     mChannelGroupList = mBackend.getGroups(mAppRow.pkg, mAppRow.uid).getList();
+                } else {
+                    mChannelGroupList = mBackend.getGroupsWithRecentBlockedFilter(mAppRow.pkg,
+                            mAppRow.uid).getList();
                 }
+
                 mChannelCount = mBackend.getChannelCount(mAppRow.pkg, mAppRow.uid);
                 Collections.sort(mChannelGroupList, CHANNEL_GROUP_COMPARATOR);
                 return null;

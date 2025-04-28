@@ -45,7 +45,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -91,31 +90,6 @@ public final class AccessibilityShortcutsTutorial {
 
     private static final DialogInterface.OnClickListener ON_CLICK_LISTENER =
             (DialogInterface dialog, int which) -> dialog.dismiss();
-
-    /**
-     * Displays a dialog that guides users to use accessibility features with accessibility
-     * gestures under system gesture navigation mode.
-     */
-    public static AlertDialog showGestureNavigationTutorialDialog(Context context,
-            DialogInterface.OnDismissListener onDismissListener) {
-        final LayoutInflater inflater = context.getSystemService(LayoutInflater.class);
-        View content = inflater.inflate(
-                R.layout.tutorial_dialog_launch_by_gesture_navigation_settings, null);
-        setupGestureNavigationTextWithImage(context, content);
-
-
-        final AlertDialog alertDialog = new AlertDialog.Builder(context)
-                .setView(content)
-                .setPositiveButton(R.string.accessibility_tutorial_dialog_button, ON_CLICK_LISTENER)
-                .setOnDismissListener(onDismissListener)
-                .create();
-
-        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        alertDialog.setCanceledOnTouchOutside(false);
-        alertDialog.show();
-
-        return alertDialog;
-    }
 
     private static AlertDialog createAccessibilityTutorialDialog(
             @NonNull Context context, int shortcutTypes, @NonNull CharSequence featureName) {
@@ -182,22 +156,6 @@ public final class AccessibilityShortcutsTutorial {
         alertDialog.setView(createShortcutNavigationContentView(context, tutorialPages, null));
 
         return alertDialog;
-    }
-
-    private static void setupGestureNavigationTextWithImage(Context context, View view) {
-        final boolean isTouchExploreEnabled = AccessibilityUtil.isTouchExploreEnabled(context);
-
-        final ImageView imageView = view.findViewById(R.id.image);
-        final int gestureSettingsImageResId =
-                isTouchExploreEnabled
-                        ? R.drawable.accessibility_shortcut_type_gesture_preview_touch_explore_on
-                        : R.drawable.accessibility_shortcut_type_gesture_preview;
-        imageView.setImageResource(gestureSettingsImageResId);
-
-        final TextView textView = view.findViewById(R.id.gesture_tutorial_message);
-        textView.setText(isTouchExploreEnabled
-                ? R.string.accessibility_tutorial_dialog_message_gesture_settings_talkback
-                : R.string.accessibility_tutorial_dialog_message_gesture_settings);
     }
 
     private static class TutorialPagerAdapter extends PagerAdapter {

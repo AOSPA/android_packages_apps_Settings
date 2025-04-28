@@ -32,7 +32,7 @@ import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
-import com.android.settingslib.preference.MainSwitchPreferenceBinding
+import com.android.settingslib.widget.MainSwitchPreferenceBinding
 
 /** Accessibility settings for vibration. */
 // LINT.IfChange

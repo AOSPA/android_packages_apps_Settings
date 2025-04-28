@@ -33,10 +33,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settingslib.Utils;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupdesign.GlifPreferenceLayout;
-import com.google.android.setupdesign.util.ThemeHelper;
 
 /**
  * A {@link androidx.preference.PreferenceFragmentCompat} that displays the settings page related
@@ -100,7 +100,7 @@ public class TextReadingPreferenceFragmentForSetupWizard extends TextReadingPref
 
     @Override
     protected RecyclerView.Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
-        if (ThemeHelper.shouldApplyGlifExpressiveStyle(getContext())) {
+        if (SettingsThemeHelper.isExpressiveTheme(requireContext())) {
             return new PreferenceAdapterInSuw(preferenceScreen);
         }
         return super.onCreateAdapter(preferenceScreen);

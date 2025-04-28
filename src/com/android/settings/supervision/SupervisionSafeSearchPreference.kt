@@ -33,6 +33,7 @@ import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.preference.forEachRecursively
+import com.android.settingslib.supervision.SupervisionIntentProvider
 import com.android.settingslib.widget.SelectorWithWidgetPreference
 
 /** Base class of web content filters SafeSearch preferences. */
@@ -75,8 +76,11 @@ sealed class SupervisionSafeSearchPreference(
     }
 
     override fun onRadioButtonClicked(emiter: SelectorWithWidgetPreference) {
-        val intent = Intent(lifeCycleContext, ConfirmSupervisionCredentialsActivity::class.java)
-        supervisionCredentialLauncher.launch(intent)
+        val intent =
+            SupervisionIntentProvider.getConfirmSupervisionCredentialsIntent(lifeCycleContext)
+        if (intent != null) {
+            supervisionCredentialLauncher.launch(intent)
+        }
     }
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {

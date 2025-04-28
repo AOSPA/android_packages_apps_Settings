@@ -20,6 +20,7 @@ import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.settings.accessibility.actionbar.FeedbackMenuController;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
@@ -32,7 +33,7 @@ import com.android.settings.dashboard.RestrictedDashboardFragment;
  */
 public abstract class BaseRestrictedSupportFragment extends RestrictedDashboardFragment {
 
-    public BaseRestrictedSupportFragment(@NonNull String restrictionKey) {
+    public BaseRestrictedSupportFragment(@Nullable String restrictionKey) {
         super(restrictionKey);
     }
 

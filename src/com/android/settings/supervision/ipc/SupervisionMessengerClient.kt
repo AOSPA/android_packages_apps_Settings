@@ -18,11 +18,10 @@ package com.android.settings.supervision.ipc
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import com.android.internal.R
 import com.android.settings.supervision.PreferenceDataProvider
+import com.android.settings.supervision.SupervisionHelper
 import com.android.settingslib.ipc.MessengerServiceClient
-import kotlinx.coroutines.CompletableDeferred
-import kotlinx.coroutines.Deferred
+import com.android.settingslib.supervision.SupervisionLog
 
 /**
  * A specialized [MessengerServiceClient] for interacting with the system supervision service.
@@ -36,13 +35,12 @@ import kotlinx.coroutines.Deferred
 class SupervisionMessengerClient(context: Context) :
     MessengerServiceClient(context), PreferenceDataProvider {
 
-    // TODO(b/399497788): get the package name from RoleManager and do pre-check before calling the
-    //  messenger service
-    private val supervisionPackageName: String =
-        context.getResources().getString(R.string.config_systemSupervision)
-
     override val serviceIntentFactory: () -> Intent
         get() = { Intent(SUPERVISION_MESSENGER_SERVICE_BIND_ACTION) }
+
+    private val supervisionPackageName: String? by lazy {
+        SupervisionHelper.getInstance(context).getSupervisionPackageName()
+    }
 
     /**
      * Retrieves preference data from the system supervision app.
@@ -55,14 +53,15 @@ class SupervisionMessengerClient(context: Context) :
      * @return A map of preference data, where the keys are the preference keys and the values are
      *   [PreferenceData] objects, or an empty map if an error occurs.
      */
-    override suspend fun getPreferenceData(
-        keys: List<String>
-    ): Deferred<Map<String, PreferenceData>> =
+    override suspend fun getPreferenceData(keys: List<String>): Map<String, PreferenceData> =
         try {
-            invoke(supervisionPackageName, PreferenceDataApi(), PreferenceDataRequest(keys = keys))
+            val targetPackageName = supervisionPackageName ?: return mapOf()
+
+            invoke(targetPackageName, PreferenceDataApi(), PreferenceDataRequest(keys = keys))
+                .await()
         } catch (e: Exception) {
-            Log.e("MessengerService", "Error fetching Preference data from supervision app", e)
-            CompletableDeferred(mapOf())
+            Log.e(SupervisionLog.TAG, "Error fetching Preference data from supervision app", e)
+            mapOf()
         }
 
     companion object {

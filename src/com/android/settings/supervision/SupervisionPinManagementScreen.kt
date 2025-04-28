@@ -15,16 +15,24 @@
  */
 package com.android.settings.supervision
 
+import android.app.supervision.SupervisionManager
+import android.app.supervision.flags.Flags
 import android.content.Context
 import com.android.settings.R
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceIconProvider
+import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
 /** Pin Management landing page (Settings > Supervision > Manage Pin). */
 @ProvidePreferenceScreen(SupervisionPinManagementScreen.KEY)
-class SupervisionPinManagementScreen : PreferenceScreenCreator, PreferenceAvailabilityProvider {
+class SupervisionPinManagementScreen :
+    PreferenceScreenCreator,
+    PreferenceAvailabilityProvider,
+    PreferenceSummaryProvider,
+    PreferenceIconProvider {
     override val key: String
         get() = KEY
 
@@ -34,18 +42,48 @@ class SupervisionPinManagementScreen : PreferenceScreenCreator, PreferenceAvaila
     override val title: Int
         get() = R.string.supervision_pin_management_preference_title
 
-    // TODO(b/391994031): dynamically update the summary according to PIN status.
-    override val summary: Int
-        get() = R.string.supervision_pin_management_preference_summary_add
+    override fun getSummary(context: Context): CharSequence? {
+        if (!Flags.enableSupervisionPinRecoveryScreen()) {
+            return null
+        }
+        val recoveryInfo =
+            context.getSystemService(SupervisionManager::class.java)?.supervisionRecoveryInfo
+        return when {
+            recoveryInfo == null ||
+                (recoveryInfo.email.isNullOrEmpty() && recoveryInfo.id.isNullOrEmpty()) -> {
+                context.getString(R.string.supervision_pin_management_preference_summary_add)
+            }
+            recoveryInfo.id.isNullOrEmpty() -> {
+                context.getString(
+                    R.string.supervision_pin_management_preference_summary_verify_recovery
+                )
+            }
+            else -> null
+        }
+    }
 
-    // TODO(b/391994031): dynamically update the icon according to PIN status.
-    override val icon: Int
-        get() = R.drawable.ic_pin_outline
+    // TODO(b/409837094): get icon with dynamic color.
+    override fun getIcon(context: Context): Int {
+        if (Flags.enableSupervisionPinRecoveryScreen()) {
+            val recoveryInfo =
+                context.getSystemService(SupervisionManager::class.java)?.supervisionRecoveryInfo
+            if (
+                recoveryInfo == null ||
+                    recoveryInfo.email.isNullOrEmpty() ||
+                    recoveryInfo.id.isNullOrEmpty()
+            ) {
+                // if recovery is not fully setup.
+                return R.drawable.exclamation_icon
+            }
+        }
+        return R.drawable.ic_pin_outline
+    }
 
     override fun fragmentClass() = SupervisionPinManagementFragment::class.java
 
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(context, this) {
+            +SupervisionAddRecoveryPreference()
             +TitlelessPreferenceGroup(GROUP_KEY) += {
                 +SupervisionPinRecoveryPreference()
                 // TODO(b/391992481) implement the screen.

@@ -39,6 +39,7 @@ import androidx.preference.PreferenceViewHolder;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.AmbientVolumeUi;
+import com.android.settingslib.widget.Expandable;
 import com.android.settingslib.widget.SettingsThemeHelper;
 import com.android.settingslib.widget.SliderPreference;
 
@@ -55,7 +56,8 @@ import java.util.Map;
  * separated control for devices in the same set. Toggle the expand icon will make the UI switch
  * between unified and separated control.
  */
-public class AmbientVolumePreference extends PreferenceGroup implements AmbientVolumeUi {
+public class AmbientVolumePreference extends PreferenceGroup implements AmbientVolumeUi,
+        Expandable {
 
     private static final int ORDER_AMBIENT_VOLUME_CONTROL_UNIFIED = 0;
     private static final int ORDER_AMBIENT_VOLUME_CONTROL_SEPARATED = 1;
@@ -98,10 +100,13 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
 
     public AmbientVolumePreference(@NonNull Context context) {
         super(context, null);
-        int resId = SettingsThemeHelper.isExpressiveTheme(context)
-                ? R.layout.preference_ambient_volume_expressive
-                : R.layout.preference_ambient_volume;
-        setLayoutResource(resId);
+        if (SettingsThemeHelper.isExpressiveTheme(context)) {
+            setLayoutResource(R.layout.preference_ambient_volume_expressive);
+            setWidgetLayoutResource(com.android.settingslib.widget.preference.expandable
+                    .R.layout.settingslib_widget_expandable_icon);
+        } else {
+            setLayoutResource(R.layout.preference_ambient_volume);
+        }
         setIcon(com.android.settingslib.R.drawable.ic_ambient_volume);
         setTitle(R.string.bluetooth_ambient_volume_control);
         setSelectable(false);
@@ -135,7 +140,7 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
 
         mExpandIcon = holder.itemView.requireViewById(R.id.expand_icon);
         mExpandIcon.setOnClickListener(v -> {
-            setExpanded(!mExpanded);
+            setControlExpanded(!mExpanded);
             logMetrics(METRIC_KEY_AMBIENT_EXPAND, mExpanded ? 1 : 0);
             if (mListener != null) {
                 mListener.onExpandIconClick();
@@ -145,21 +150,21 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
     }
 
     @Override
-    public void setExpandable(boolean expandable) {
+    public void setControlExpandable(boolean expandable) {
         mExpandable = expandable;
         if (!mExpandable) {
-            setExpanded(false);
+            setControlExpanded(false);
         }
         updateExpandIcon();
     }
 
     @Override
-    public boolean isExpandable() {
+    public boolean isControlExpandable() {
         return mExpandable;
     }
 
     @Override
-    public void setExpanded(boolean expanded) {
+    public void setControlExpanded(boolean expanded) {
         if (!mExpandable && expanded) {
             return;
         }
@@ -169,7 +174,7 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
     }
 
     @Override
-    public boolean isExpanded() {
+    public boolean isControlExpanded() {
         return mExpanded;
     }
 
@@ -371,5 +376,14 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
     private void logMetrics(String key, int value) {
         FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().changed(
                 getMetricsCategory(), key, value);
+    }
+
+    @Override
+    public boolean isExpanded() {
+        // isExpanded() is different from isControlExpanded(), this is at the point of view if a
+        // preference group shows any of its child preference.
+        // Should always return true for AmbientVolumePreference as it always shows at least one
+        // child preference no matter in collapsed or expanded mode.
+        return true;
     }
 }

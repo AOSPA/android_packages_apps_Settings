@@ -10,3 +10,10 @@ flag {
         purpose: PURPOSE_BUGFIX
     }
 }
+
+flag {
+    name: "hide_user_list_for_non_admins"
+    namespace: "desktop_users_and_accounts"
+    description: "Controls whether to hide the user list in Settings for non-admins."
+    bug: "406686772"
+}

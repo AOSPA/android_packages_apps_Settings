@@ -125,7 +125,7 @@ public class ToggleAutoclickPreferenceController extends BasePreferenceControlle
                 : AUTOCLICK_OFF_MODE;
         final int mode = getAutoclickModeToKeyMap().get(mDelayModePref.getKey());
         mDelayModePref.setChecked(currentUiAutoClickMode == mode);
-        if (mode == AUTOCLICK_CUSTOM_MODE) {
+        if (mode == AUTOCLICK_CUSTOM_MODE && !Flags.enableAutoclickIndicator()) {
             mSeekBerPreference.setVisible(mDelayModePref.isChecked());
         }
     }

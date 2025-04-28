@@ -16,23 +16,26 @@
 package com.android.settings.supervision
 
 import android.app.Activity
+import android.app.ActivityManager
 import android.app.role.RoleManager
 import android.content.pm.UserInfo
 import android.os.Build
 import android.os.Process
+import android.os.UserHandle
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import android.os.UserManager.USER_TYPE_PROFILE_TEST
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito.any
+import org.mockito.kotlin.argumentCaptor
+import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.spy
+import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
-import org.mockito.kotlin.whenever
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
@@ -42,6 +45,7 @@ import org.robolectric.shadows.ShadowBinder
 class ConfirmSupervisionCredentialsActivityTest {
     private val mockRoleManager = mock<RoleManager>()
     private val mockUserManager = mock<UserManager>()
+    private val mockActivityManager = mock<ActivityManager>()
 
     private lateinit var mActivity: ConfirmSupervisionCredentialsActivity
 
@@ -56,24 +60,45 @@ class ConfirmSupervisionCredentialsActivityTest {
             ) {
                 on { getSystemService(RoleManager::class.java) } doReturn mockRoleManager
                 on { getSystemService(UserManager::class.java) } doReturn mockUserManager
+                on { getSystemService(ActivityManager::class.java) } doReturn mockActivityManager
                 on { callingPackage } doReturn callingPackage
             }
     }
 
     @Test
     fun onCreate_callerHasSupervisionRole_doesNotFinish() {
-        whenever(mockRoleManager.getRoleHolders(any())).thenReturn(listOf(callingPackage))
-        whenever(mockUserManager.users).thenReturn(listOf(SUPERVISING_USER_INFO))
+        mockRoleManager.stub { on { getRoleHolders(any()) } doReturn listOf(callingPackage) }
+        mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
+        mockActivityManager.stub { on { startProfile(any()) } doReturn true }
 
         mActivity.onCreate(null)
 
         verify(mActivity, never()).finish()
+
+        // Ensure that the supervising profile is started
+        val userCaptor = argumentCaptor<UserHandle>()
+        verify(mockActivityManager).startProfile(userCaptor.capture())
+        assert(userCaptor.lastValue.identifier == SUPERVISING_USER_ID)
+    }
+
+    @Test
+    fun onCreate_failsToStartSupervisingProfile_finish() {
+        mockRoleManager.stub { on { getRoleHolders(any()) } doReturn listOf(callingPackage) }
+        mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
+        mockActivityManager.stub { on { startProfile(any()) } doReturn false }
+
+        mActivity.onCreate(null)
+
+        verify(mActivity).setResult(Activity.RESULT_CANCELED)
+        verify(mActivity).finish()
     }
 
     @Test
     fun onCreate_callerNotHasSupervisionRole_finish() {
         val otherPackage = "com.example.other"
-        whenever(mockRoleManager.getRoleHolders(any())).thenReturn(listOf(otherPackage))
+        mockRoleManager.stub { on { getRoleHolders(any()) } doReturn listOf(otherPackage) }
+        mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
+        mockActivityManager.stub { on { startProfile(any()) } doReturn true }
 
         mActivity.onCreate(null)
 
@@ -85,7 +110,8 @@ class ConfirmSupervisionCredentialsActivityTest {
     @Config(sdk = [Build.VERSION_CODES.BAKLAVA])
     fun onCreate_callerIsSystemUid_doesNotFinish() {
         ShadowBinder.setCallingUid(Process.SYSTEM_UID)
-        whenever(mockUserManager.users).thenReturn(listOf(SUPERVISING_USER_INFO))
+        mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
+        mockActivityManager.stub { on { startProfile(any()) } doReturn true }
 
         mActivity.onCreate(null)
 
@@ -96,6 +122,8 @@ class ConfirmSupervisionCredentialsActivityTest {
     @Config(sdk = [Build.VERSION_CODES.BAKLAVA])
     fun onCreate_callerIsUnknownUid_finish() {
         ShadowBinder.setCallingUid(Process.NOBODY_UID)
+        mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
+        mockActivityManager.stub { on { startProfile(any()) } doReturn true }
 
         mActivity.onCreate(null)
 
@@ -105,8 +133,9 @@ class ConfirmSupervisionCredentialsActivityTest {
 
     @Test
     fun onCreate_noSupervisingCredential_finish() {
-        whenever(mockRoleManager.getRoleHolders(any())).thenReturn(listOf(callingPackage))
-        whenever(mockUserManager.users).thenReturn(listOf(TESTING_USER_INFO))
+        mockRoleManager.stub { on { getRoleHolders(any()) } doReturn listOf(callingPackage) }
+        mockUserManager.stub { on { users } doReturn listOf(TESTING_USER_INFO) }
+        mockActivityManager.stub { on { startProfile(any()) } doReturn true }
 
         mActivity.onCreate(null)
 

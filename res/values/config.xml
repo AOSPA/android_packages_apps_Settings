@@ -722,11 +722,18 @@
     <!-- Whether the dream setup activity should be enabled as part of setupwizard -->
     <bool name="dream_setup_supported">false</bool>
 
+    <!-- The minimum number of spans (columns) to show in the dream picker preference. -->
+    <integer name="config_dream_picker_min_span_count">2</integer>
+
     <!-- Whether to show communal settings at the top level. -->
     <bool name="config_show_communal_settings">false</bool>
 
     <!-- Whether to show communal settings at the top level on mobile. -->
     <bool name="config_show_communal_settings_mobile">false</bool>
+
+    <!-- Whether to show a "restrict to wireless charging" settings option in screensaver and hub
+         mode settings (false by default). -->
+    <bool name="config_show_restrict_to_wireless_charging">false</bool>
 
     <!-- The extra value for battery tip -->
     <integer name="config_battery_extra_tip_value">12</integer>

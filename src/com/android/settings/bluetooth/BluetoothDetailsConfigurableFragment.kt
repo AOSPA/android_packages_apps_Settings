@@ -342,7 +342,12 @@ abstract class BluetoothDetailsConfigurableFragment : RestrictedDashboardFragmen
                 summary = context.getString(
                     R.string.bluetooth_device_more_settings_preference_summary
                 )
-                icon = context.getDrawable(R.drawable.ic_chevron_right_24dp)
+                icon = context.getDrawable(
+                    if (Flags.enableBluetoothSettingsExpressiveDesign()) {
+                        R.drawable.ic_bluetooth_more_vert
+                    } else {
+                        R.drawable.ic_chevron_right_24dp
+                    })
                 onPreferenceClickListener = Preference.OnPreferenceClickListener {
                     logItemClick(prefKey, EVENT_CLICK_PRIMARY)
                     SubSettingLauncher(context).setDestination(

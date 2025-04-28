@@ -213,18 +213,28 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 && hasMouse();
     }
 
+    private static boolean isMagnificationKeyboardFollowingSupported() {
+        return android.view.accessibility.Flags.requestRectangleWithSource();
+    }
+
+    private static boolean isMagnificationMagnifyNavAndImeSupported() {
+        return com.android.server.accessibility.Flags.enableMagnificationMagnifyNavBarAndIme();
+    }
+
     @Override
     protected void initSettingsPreference() {
         final PreferenceCategory generalCategory = findPreference(KEY_GENERAL_CATEGORY);
         if (isWindowMagnificationSupported(getContext())) {
             // LINT.IfChange(preference_list)
             addMagnificationModeSetting(generalCategory);
+            addMagnifyNavAndImeSetting(generalCategory);
             addFollowTypingSetting(generalCategory);
             addOneFingerPanningSetting(generalCategory);
             addAlwaysOnSetting(generalCategory);
             addJoystickSetting(generalCategory);
             // LINT.ThenChange(:search_data)
         }
+        addFollowKeyboardSetting(generalCategory);
         addCursorFollowingSetting(generalCategory);
     }
 
@@ -274,6 +284,29 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         }
 
         super.onProcessArguments(arguments);
+    }
+
+    private static Preference createMagnifyNavAndImePreference(Context context) {
+        var pref = new SwitchPreferenceCompat(context);
+        pref.setTitle(R.string.accessibility_screen_magnification_nav_ime_title);
+        pref.setSummary(R.string.accessibility_screen_magnification_nav_ime_summary);
+        pref.setKey(MagnifyNavAndImePreferenceController.PREF_KEY);
+        return pref;
+    }
+
+    private void addMagnifyNavAndImeSetting(PreferenceCategory generalCategory) {
+        if (!Flags.enableMagnificationMagnifyNavBarAndIme()) {
+            return;
+        }
+
+        generalCategory.addPreference(createMagnifyNavAndImePreference(getPrefContext()));
+
+        var magnifyNavAndImePreferenceController =
+                new MagnifyNavAndImePreferenceController(getContext(),
+                        MagnifyNavAndImePreferenceController.PREF_KEY);
+        getSettingsLifecycle().addObserver(magnifyNavAndImePreferenceController);
+        magnifyNavAndImePreferenceController.displayPreference(getPreferenceScreen());
+        addPreferenceController(magnifyNavAndImePreferenceController);
     }
 
     private static Preference createMagnificationModePreference(Context context) {
@@ -341,6 +374,29 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         followTypingPreferenceController.setInSetupWizard(mInSetupWizard);
         followTypingPreferenceController.displayPreference(getPreferenceScreen());
         addPreferenceController(followTypingPreferenceController);
+    }
+
+    private static Preference createFollowKeyboardPreference(Context context) {
+        final Preference pref = new SwitchPreferenceCompat(context);
+        pref.setTitle(R.string.accessibility_screen_magnification_follow_keyboard_title);
+        pref.setSummary(R.string.accessibility_screen_magnification_follow_keyboard_summary);
+        pref.setKey(MagnificationFollowKeyboardPreferenceController.PREF_KEY);
+        return pref;
+    }
+
+    private void addFollowKeyboardSetting(PreferenceCategory generalCategory) {
+        if (!isMagnificationKeyboardFollowingSupported()) {
+            return;
+        }
+
+        generalCategory.addPreference(createFollowKeyboardPreference(getPrefContext()));
+
+        var followKeyboardPreferenceController = new
+                MagnificationFollowKeyboardPreferenceController(getContext(),
+                MagnificationFollowKeyboardPreferenceController.PREF_KEY);
+        followKeyboardPreferenceController.setInSetupWizard(mInSetupWizard);
+        followKeyboardPreferenceController.displayPreference(getPreferenceScreen());
+        addPreferenceController(followKeyboardPreferenceController);
     }
 
     private static boolean isAlwaysOnSupported(Context context) {
@@ -450,6 +506,8 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
         var keysToObserve = List.of(
                 Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED,
+                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_KEYBOARD_ENABLED,
+                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MAGNIFY_NAV_AND_IME,
                 Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED,
                 Settings.Secure.ACCESSIBILITY_MAGNIFICATION_JOYSTICK_ENABLED
         );
@@ -701,9 +759,11 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                     Stream.of(
                                     createMagnificationModePreference(context),
                                     createFollowTypingPreference(context),
+                                    createFollowKeyboardPreference(context),
                                     createOneFingerPanningPreference(context),
                                     createAlwaysOnPreference(context),
                                     createJoystickPreference(context),
+                                    createMagnifyNavAndImePreference(context),
                                     createCursorFollowingPreference(context)
                             )
                             .forEach(pref ->
@@ -717,11 +777,16 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                     final List<String> niks = super.getNonIndexableKeys(context);
                     if (!isWindowMagnificationSupported(context)) {
                         niks.add(MagnificationModePreferenceController.PREF_KEY);
+                        niks.add(MagnifyNavAndImePreferenceController.PREF_KEY);
                         niks.add(MagnificationFollowTypingPreferenceController.PREF_KEY);
                         niks.add(MagnificationOneFingerPanningPreferenceController.PREF_KEY);
                         niks.add(MagnificationAlwaysOnPreferenceController.PREF_KEY);
                         niks.add(MagnificationJoystickPreferenceController.PREF_KEY);
                     } else {
+                        if (!isMagnificationMagnifyNavAndImeSupported()) {
+                            niks.add(MagnifyNavAndImePreferenceController.PREF_KEY);
+                        }
+
                         if (!isAlwaysOnSupported(context)
                                 // This preference's title "Keep on while switching apps" does not
                                 // mention magnification so it may confuse users who search a term
@@ -737,6 +802,10 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                         if (!isJoystickSupported()) {
                             niks.add(MagnificationJoystickPreferenceController.PREF_KEY);
                         }
+                    }
+
+                    if (!isMagnificationKeyboardFollowingSupported()) {
+                        niks.add(MagnificationFollowKeyboardPreferenceController.PREF_KEY);
                     }
 
                     if (!isMagnificationCursorFollowingModeDialogSupported()) {

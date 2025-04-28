@@ -61,7 +61,7 @@ class VibrationIntensityScreen : PreferenceScreenCreator, PreferenceAvailability
         +VibrationMainSwitchPreference()
         // The preferences below are migrated behind a different flag from the screen migration.
         // They should only be declared in this screen hierarchy if their migration is enabled.
-        if (Flags.catalystVibrationIntensityScreen25q4()) {
+        if (Flags.catalystVibrationIntensityScreen25q4() || Flags.deviceState()) {
             +CallVibrationPreferenceCategory() += {
                 +RingVibrationIntensitySliderPreference()
             }

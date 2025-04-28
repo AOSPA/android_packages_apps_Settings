@@ -42,6 +42,7 @@ import com.android.settings.datausage.lib.DataUsageFormatter;
 import com.android.settingslib.Utils;
 import com.android.settingslib.spaprivileged.framework.common.BytesFormatter;
 import com.android.settingslib.utils.StringUtil;
+import com.android.settingslib.widget.GroupSectionDividerMixin;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -52,7 +53,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Provides a summary of data usage.
  */
-public class DataUsageSummaryPreference extends Preference {
+public class DataUsageSummaryPreference extends Preference implements GroupSectionDividerMixin {
     private static final long MILLIS_IN_A_DAY = TimeUnit.DAYS.toMillis(1);
     private static final long WARNING_AGE = TimeUnit.HOURS.toMillis(6L);
     @VisibleForTesting

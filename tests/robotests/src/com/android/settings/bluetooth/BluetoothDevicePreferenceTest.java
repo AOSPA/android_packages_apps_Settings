@@ -26,6 +26,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
@@ -261,6 +262,11 @@ public class BluetoothDevicePreferenceTest {
         verify(mMetricsFeatureProvider, never())
                 .action(mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR);
         verify(mCachedBluetoothDevice, never()).startPairing();
+        verify(mMetricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_SETTINGS_BLUETOOTH_PAIR_IN_AUDIO_SHARING);
+        verify(mMetricsFeatureProvider)
+                .action(mContext,
+                        SettingsEnums.ACTION_SETTINGS_BLUETOOTH_PAIR_BLOCKED_IN_AUDIO_SHARING);
     }
 
     @Test

@@ -520,10 +520,10 @@ public class SettingsActivity extends SettingsBaseActivity
     @Override
     public Theme getTheme() {
         Theme theme = super.getTheme();
-        theme.applyStyle(
-                SettingsThemeHelper.isExpressiveTheme(this)
-                        ? R.style.Theme_SubSettings_Expressive
-                        : R.style.Theme_SubSettings, true);
+        if (!WizardManagerHelper.isAnySetupWizard(getIntent())
+                && SettingsThemeHelper.isExpressiveTheme(this)) {
+            theme.applyStyle(R.style.Theme_SubSettings_Expressive, true);
+        }
         return theme;
     }
 

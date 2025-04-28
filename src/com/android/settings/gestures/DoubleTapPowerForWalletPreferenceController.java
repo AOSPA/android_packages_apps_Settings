@@ -19,6 +19,7 @@ package com.android.settings.gestures;
 import android.app.role.OnRoleHoldersChangedListener;
 import android.app.role.RoleManager;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
@@ -44,6 +45,9 @@ public class DoubleTapPowerForWalletPreferenceController extends BasePreferenceC
     @Nullable private final RoleManager mRoleManager;
     @NonNull private QuickAccessWalletClient mQuickAccessWalletClient;
     @Nullable private SelectorWithWidgetPreference mPreference;
+
+    private final PackageManager mPackageManager;
+
     private final ContentObserver mSettingsObserver =
             new ContentObserver(new Handler(Looper.getMainLooper())) {
                 @Override
@@ -78,6 +82,7 @@ public class DoubleTapPowerForWalletPreferenceController extends BasePreferenceC
             @NonNull Context context, @NonNull String preferenceKey) {
         super(context, preferenceKey);
         mRoleManager = mContext.getSystemService(RoleManager.class);
+        mPackageManager = mContext.getPackageManager();
         mQuickAccessWalletClient = QuickAccessWalletClient.create(context);
     }
 
@@ -87,6 +92,7 @@ public class DoubleTapPowerForWalletPreferenceController extends BasePreferenceC
             @NonNull QuickAccessWalletClient quickAccessWalletClient) {
         super(context, preferenceKey);
         mRoleManager = mContext.getSystemService(RoleManager.class);
+        mPackageManager = mContext.getPackageManager();
         mQuickAccessWalletClient = quickAccessWalletClient;
     }
 
@@ -94,6 +100,9 @@ public class DoubleTapPowerForWalletPreferenceController extends BasePreferenceC
     public int getAvailabilityStatus() {
         if (!DoubleTapPowerSettingsUtils
                 .isMultiTargetDoubleTapPowerButtonGestureAvailable(mContext)) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+        if (!mPackageManager.hasSystemFeature(PackageManager.FEATURE_NFC)) {
             return UNSUPPORTED_ON_DEVICE;
         }
         return isPreferenceEnabled()
@@ -133,6 +142,7 @@ public class DoubleTapPowerForWalletPreferenceController extends BasePreferenceC
 
     @Override
     public void onStart() {
+        mQuickAccessWalletClient = QuickAccessWalletClient.create(mContext);
         DoubleTapPowerSettingsUtils.registerObserver(mContext, mSettingsObserver);
         if (mRoleManager != null) {
             mRoleManager.addOnRoleHoldersChangedListenerAsUser(mContext.getMainExecutor(),

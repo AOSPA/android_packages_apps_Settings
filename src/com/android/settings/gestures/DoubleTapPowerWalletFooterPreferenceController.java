@@ -125,6 +125,9 @@ public class DoubleTapPowerWalletFooterPreferenceController extends BasePreferen
 
     @Override
     public void onStart() {
+        // Update to the latest wallet client when the controller starts again in case the wallet
+        // role holder might change between onStop() and onStart() time period.
+        mQuickAccessWalletClient = QuickAccessWalletClient.create(mContext);
         final ContentResolver resolver = mContext.getContentResolver();
         resolver.registerContentObserver(
                 DOUBLE_TAP_POWER_BUTTON_GESTURE_ENABLED_URI, true, mSettingsObserver);

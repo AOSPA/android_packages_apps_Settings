@@ -33,7 +33,6 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settingslib.widget.LottieColorUtils;
-import com.android.settingslib.widget.SettingsThemeHelper;
 
 import com.airbnb.lottie.LottieAnimationView;
 
@@ -75,11 +74,7 @@ public class ShortcutOptionPreference extends CheckBoxPreference {
     }
 
     private void init() {
-        if (SettingsThemeHelper.isExpressiveTheme(getContext())) {
-            setLayoutResource(R.layout.accessibility_shortcut_option_checkable_expressive);
-        } else {
-            setLayoutResource(R.layout.accessibility_shortcut_option_checkable);
-        }
+        setLayoutResource(R.layout.accessibility_shortcut_option_checkable);
     }
 
     @Override

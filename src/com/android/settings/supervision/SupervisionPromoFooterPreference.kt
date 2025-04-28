@@ -17,71 +17,97 @@ package com.android.settings.supervision
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.Icon
+import androidx.preference.Preference
+import com.android.settings.supervision.ipc.PreferenceData
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
-import com.android.settingslib.metadata.PreferenceSummaryProvider
-import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.CardPreference
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /** A bottom banner promoting other supervision features offered by the supervision app. */
-class SupervisionPromoFooterPreference(private val preferenceDataProvider: PreferenceDataProvider) :
-    PreferenceMetadata,
-    PreferenceBinding,
-    PreferenceLifecycleProvider,
-    PreferenceTitleProvider,
-    PreferenceSummaryProvider {
+class SupervisionPromoFooterPreference(
+    private val preferenceDataProvider: PreferenceDataProvider,
+    private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO,
+) : PreferenceMetadata, PreferenceBinding, PreferenceLifecycleProvider {
 
-    // Operation to be performed when the preference is clicked
-    private var intent: Intent? = null
+    /** Whether [preferenceData] holds an initialized value. */
+    private var initialized = false
 
-    // TODO(b/399497788): Remove this and get title from supervision app
-    override fun getTitle(context: Context) = "Full parental controls"
-
-    // TODO(b/399497788): Remove this and get summary from supervision app
-    override fun getSummary(context: Context) =
-        "Set up an account for your kid & help them manage it (required for kids under [AOC])"
-
-    override fun intent(context: Context): Intent? = intent
+    private var preferenceData: PreferenceData? = null
 
     override val key: String
         get() = KEY
 
     override fun createWidget(context: Context) = CardPreference(context)
 
-    override fun onResume(context: PreferenceLifecycleContext) {
-        super.onResume(context)
-        val preference = context.findPreference<CardPreference>(KEY)
-        if (preference != null) {
-            context.lifecycleScope.launch {
-                // TODO(b/399497788) Get title & summary from supervision app.
-                val preferenceData =
-                    preferenceDataProvider.getPreferenceData(listOf(KEY)).await()[KEY]
-                intent = intent ?: Intent()
-                intent?.setAction(preferenceData?.action)
-                intent?.setPackage(preferenceData?.targetPackage)
-                // Hide the preference if the target package can not respond to the action
-                if (!canTargetPackageRespondToAction(preference.context)) {
-                    preference.isVisible = false
+    override fun bind(preference: Preference, metadata: PreferenceMetadata) {
+        super.bind(preference, metadata)
+
+        var intent: Intent? = null
+        if (initialized) {
+            val targetIntent =
+                Intent(preferenceData?.action).apply {
+                    `package` = preferenceData?.targetPackage
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+            intent = if (targetIntent.isValid(preference.context)) targetIntent else null
+
+            val leadingIconResId = preferenceData?.icon
+            val leadingIcon =
+                leadingIconResId?.let {
+                    val resourcePackage =
+                        SupervisionHelper.getInstance(preference.context)
+                            .getSupervisionPackageName()
+                    val icon = Icon.createWithResource(resourcePackage, leadingIconResId)
+                    icon.loadDrawable(preference.context)
+                }
+
+            preference.intent = intent
+            preference.title = preferenceData?.title ?: preference.title
+            preference.summary = preferenceData?.summary ?: preference.summary
+            preference.icon = leadingIcon ?: preference.icon
+            val trailingIcon: Int? = preferenceData?.trailingIcon
+            if (trailingIcon != null) {
+                (preference as CardPreference).setAdditionalAction(
+                    trailingIcon,
+                    // TODO(b/411279121): add content description once we have the finalized string.
+                    contentDescription = "",
+                ) {
+                    it.performClick()
                 }
             }
         }
+
+        // Icon, Title, Summary may be null but at least one of title or summary must be valid
+        // and the action has to be valid for the preference to be visible.
+        preference.isVisible =
+            intent != null && (preferenceData?.title != null || preferenceData?.summary != null)
     }
 
-    private fun canTargetPackageRespondToAction(context: Context): Boolean {
-        if (intent?.action == null || intent?.`package` == null) {
-            return false
+    override fun onResume(context: PreferenceLifecycleContext) {
+        context.lifecycleScope.launch {
+            preferenceData =
+                withContext(coroutineDispatcher) {
+                    preferenceDataProvider.getPreferenceData(listOf(KEY))[KEY]
+                }
+            initialized = true
+
+            context.notifyPreferenceChange(KEY)
         }
-
-        intent!!.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        val activities =
-            context.packageManager.queryIntentActivitiesAsUser(intent!!, 0, context.userId)
-        return activities.isNotEmpty()
     }
+
+    private fun Intent.isValid(context: Context) =
+        action != null &&
+            `package` != null &&
+            context.packageManager.queryIntentActivitiesAsUser(this, 0, context.userId).isNotEmpty()
 
     companion object {
-        const val KEY = "supervision_promo_footer"
+        const val KEY = "promo_footer"
     }
 }

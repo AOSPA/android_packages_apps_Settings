@@ -70,7 +70,13 @@ public class AmbientDisplayAlwaysOnPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         mContentResolver = mContext.getContentResolver();
-        mController = new AmbientDisplayAlwaysOnPreferenceController(mContext, "key");
+        mController = new AmbientDisplayAlwaysOnPreferenceController(mContext, "key") {
+            @Override
+            protected boolean ambientAodMigration() {
+                // Always return true in order to make the preference available
+                return true;
+            }
+        };
         mController.setConfig(mConfig);
 
         mApplicationInfo.uid = 1;

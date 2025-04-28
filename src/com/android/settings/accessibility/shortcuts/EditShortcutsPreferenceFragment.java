@@ -70,11 +70,11 @@ import com.android.settings.accessibility.PreferredShortcuts;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.GlifPreferenceLayout;
-import com.google.android.setupdesign.util.ThemeHelper;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -252,7 +252,7 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
 
     @Override
     protected RecyclerView.Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
-        if (ThemeHelper.shouldApplyGlifExpressiveStyle(getContext())
+        if (SettingsThemeHelper.isExpressiveTheme(requireContext())
                 && WizardManagerHelper.isAnySetupWizard(getIntent())) {
             return new PreferenceAdapterInSuw(preferenceScreen);
         }

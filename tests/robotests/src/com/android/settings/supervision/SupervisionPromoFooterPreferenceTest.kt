@@ -15,220 +15,221 @@
  */
 package com.android.settings.supervision
 
+import android.app.role.RoleManager
 import android.content.Context
-import android.content.Intent
+import android.content.ContextWrapper
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
-import androidx.lifecycle.LifecycleCoroutineScope
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.testing.TestLifecycleOwner
 import androidx.preference.Preference
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
+import com.android.settings.supervision.SupervisionPromoFooterPreference.Companion.KEY
 import com.android.settings.supervision.ipc.PreferenceData
 import com.android.settingslib.metadata.PreferenceLifecycleContext
-import com.android.settingslib.metadata.getPreferenceSummary
-import com.android.settingslib.metadata.getPreferenceTitle
 import com.android.settingslib.widget.CardPreference
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.CompletableDeferred
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
-import kotlinx.coroutines.test.setMain
-import org.junit.After
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.junit.MockitoJUnit
-import org.mockito.junit.MockitoRule
 import org.mockito.kotlin.any
+import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
-import org.mockito.kotlin.spy
+import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
-import org.mockito.kotlin.whenever
 
-@OptIn(ExperimentalCoroutinesApi::class)
+@ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 class SupervisionPromoFooterPreferenceTest {
+    private val mockPackageManager: PackageManager = mock()
+    private val context: Context =
+        object : ContextWrapper(ApplicationProvider.getApplicationContext()) {
+            override fun getSystemService(name: String): Any? =
+                when (name) {
+                    ROLE_SERVICE -> mockRoleManager
+                    else -> super.getSystemService(name)
+                }
 
-    @get:Rule val mocks: MockitoRule = MockitoJUnit.rule()
+            override fun getPackageManager(): PackageManager {
+                return mockPackageManager
+            }
+        }
+    private val mockRoleManager =
+        mock<RoleManager> { on { getRoleHolders(any()) } doReturn listOf("test.package") }
+    private val preference = CardPreference(context)
+
+    private var preferenceData: PreferenceData? = null
 
     private val testDispatcher = UnconfinedTestDispatcher()
     private val testScope = TestScope(testDispatcher)
-    private lateinit var preference: CardPreference
-    private lateinit var context: Context
-    private lateinit var lifecycleCoroutineScope: LifecycleCoroutineScope
 
-    @Mock private lateinit var preferenceLifecycleContext: PreferenceLifecycleContext
-
-    @Mock private lateinit var preferenceDataProvider: PreferenceDataProvider
-
-    @Mock private lateinit var mockPackageManager: PackageManager
+    private val preferenceLifecycleContext: PreferenceLifecycleContext = mock {
+        on { lifecycleScope }.thenReturn(testScope)
+        on { packageManager }.thenReturn(mockPackageManager)
+        on { findPreference<Preference>(any()) }.thenReturn(preference)
+    }
+    private val preferenceDataProvider: PreferenceDataProvider = mock {
+        onBlocking { getPreferenceData(any()) }
+            .thenAnswer {
+                when (preferenceData) {
+                    null -> mapOf<String, PreferenceData>()
+                    else -> mapOf(KEY to preferenceData)
+                }
+            }
+    }
 
     @Before
-    fun setup() {
-        context = spy(InstrumentationRegistry.getInstrumentation().context)
-        whenever(context.packageManager).thenReturn(mockPackageManager)
-        preference = CardPreference(context)
-        lifecycleCoroutineScope = TestLifecycleOwner().lifecycleScope
-        whenever(preferenceLifecycleContext.findPreference<Preference>(any()))
-            .thenReturn(preference)
-        whenever(preferenceLifecycleContext.lifecycleScope).thenReturn(lifecycleCoroutineScope)
-        Dispatchers.setMain(testDispatcher)
-    }
-
-    @After
-    fun tearDown() {
-        Dispatchers.resetMain()
+    fun setUp() {
+        SupervisionHelper.sInstance = null
     }
 
     @Test
-    fun getTitle_returnsCorrectTitle() {
-        val supervisionPromoFooterPreference =
-            SupervisionPromoFooterPreference(preferenceDataProvider)
-        assertThat(supervisionPromoFooterPreference.getPreferenceTitle(context))
-            .isEqualTo("Full parental controls")
-    }
+    fun onResume_setTitle() =
+        testScope.runTest {
+            val title = "test title"
+            preferenceData = PreferenceData(title = title)
+
+            val promoPreference =
+                SupervisionPromoFooterPreference(preferenceDataProvider, testDispatcher)
+
+            promoPreference.onResume(preferenceLifecycleContext)
+            verify(preferenceLifecycleContext).notifyPreferenceChange(KEY)
+            promoPreference.bind(preference, mock())
+
+            assertThat(preference.title).isEqualTo(title)
+        }
 
     @Test
-    fun getSummary_returnsCorrectSummary() {
-        val supervisionPromoFooterPreference =
-            SupervisionPromoFooterPreference(preferenceDataProvider)
-        assertThat(supervisionPromoFooterPreference.getPreferenceSummary(context))
-            .isEqualTo(
-                "Set up an account for your kid & help them manage it (required for " +
-                    "kids under [AOC])"
-            )
-    }
+    fun onResume_setSummary() =
+        testScope.runTest {
+            val summary = "test summary"
+            preferenceData = PreferenceData(summary = summary)
+
+            val promoPreference =
+                SupervisionPromoFooterPreference(preferenceDataProvider, testDispatcher)
+
+            promoPreference.onResume(preferenceLifecycleContext)
+            verify(preferenceLifecycleContext).notifyPreferenceChange(KEY)
+            promoPreference.bind(preference, mock())
+
+            assertThat(preference.summary).isEqualTo(summary)
+        }
+
+    @Test
+    fun onResume_loadingIconSetFromSupervisionPackage() =
+        testScope.runTest {
+            preferenceData = PreferenceData(icon = 123)
+            SupervisionHelper.sInstance = SupervisionHelper.getInstance(context)
+            val promoPreference =
+                SupervisionPromoFooterPreference(preferenceDataProvider, testDispatcher)
+
+            promoPreference.onResume(preferenceLifecycleContext)
+            verify(preferenceLifecycleContext).notifyPreferenceChange(KEY)
+            promoPreference.bind(preference, mock())
+
+            verify(mockRoleManager).getRoleHolders(RoleManager.ROLE_SYSTEM_SUPERVISION)
+        }
 
     @Test
     fun onResume_actionIsNull_preferenceIsHidden() =
         testScope.runTest {
-            val promoPreference = SupervisionPromoFooterPreference(preferenceDataProvider)
-            promoPreference.bind(preference, mock())
-
-            whenever(preferenceDataProvider.getPreferenceData(any())).thenAnswer {
-                CompletableDeferred(
-                    mapOf(
-                        SupervisionPromoFooterPreference.KEY to
-                            PreferenceData(targetPackage = "test.package")
-                    )
-                )
-            }
+            val promoPreference =
+                SupervisionPromoFooterPreference(preferenceDataProvider, testDispatcher)
+            preferenceData = PreferenceData(targetPackage = "test.package")
 
             promoPreference.onResume(preferenceLifecycleContext)
 
-            assertFalse(preference.isVisible)
+            verify(preferenceLifecycleContext).notifyPreferenceChange(KEY) // will trigger binding
+            promoPreference.bind(preference, mock())
+
+            assertThat(preference.isVisible).isFalse()
             verify(mockPackageManager, never())
-                .queryIntentActivitiesAsUser(any<Intent>(), any<Int>(), any<Int>())
+                .queryIntentActivitiesAsUser(any(), any<Int>(), any<Int>())
         }
 
     @Test
     fun onResume_packageIsNull_preferenceIsHidden() =
         testScope.runTest {
-            val promoPreference = SupervisionPromoFooterPreference(preferenceDataProvider)
-            promoPreference.bind(preference, mock())
-
-            whenever(preferenceDataProvider.getPreferenceData(any())).thenAnswer {
-                CompletableDeferred(
-                    mapOf(
-                        SupervisionPromoFooterPreference.KEY to
-                            PreferenceData(action = "Test Action")
-                    )
-                )
-            }
+            val promoPreference =
+                SupervisionPromoFooterPreference(preferenceDataProvider, testDispatcher)
+            preferenceData = PreferenceData(action = "Test Action")
 
             promoPreference.onResume(preferenceLifecycleContext)
 
-            assertFalse(preference.isVisible)
+            verify(preferenceLifecycleContext).notifyPreferenceChange(KEY) // will trigger binding
+            promoPreference.bind(preference, mock())
+
+            assertThat(preference.isVisible).isFalse()
             verify(mockPackageManager, never())
-                .queryIntentActivitiesAsUser(any<Intent>(), any<Int>(), any<Int>())
+                .queryIntentActivitiesAsUser(any(), any<Int>(), any<Int>())
         }
 
     @Test
     fun onResume_emptyPreferenceData_preferenceIsHidden() =
         testScope.runTest {
-            val promoPreference = SupervisionPromoFooterPreference(preferenceDataProvider)
-            promoPreference.bind(preference, mock())
-
-            whenever(preferenceDataProvider.getPreferenceData(any())).thenAnswer {
-                CompletableDeferred(mapOf<String, PreferenceData>())
-            }
+            val promoPreference =
+                SupervisionPromoFooterPreference(preferenceDataProvider, testDispatcher)
+            preferenceData = null
 
             promoPreference.onResume(preferenceLifecycleContext)
 
-            assertFalse(preference.isVisible)
+            verify(preferenceLifecycleContext).notifyPreferenceChange(KEY) // will trigger binding
+            promoPreference.bind(preference, mock())
+
+            assertThat(preference.isVisible).isFalse()
             verify(mockPackageManager, never())
-                .queryIntentActivitiesAsUser(any<Intent>(), any<Int>(), any<Int>())
+                .queryIntentActivitiesAsUser(any(), any<Int>(), any<Int>())
         }
 
     @Test
     fun onResume_noActivitiesCanHandleIntent_preferenceIsHidden() =
         testScope.runTest {
-            val promoPreference = SupervisionPromoFooterPreference(preferenceDataProvider)
-            promoPreference.bind(preference, mock())
+            val promoPreference =
+                SupervisionPromoFooterPreference(preferenceDataProvider, testDispatcher)
+            preferenceData = PreferenceData(action = "Test Action", targetPackage = "test.package")
 
-            whenever(preferenceDataProvider.getPreferenceData(any())).thenAnswer {
-                CompletableDeferred(
-                    mapOf(
-                        SupervisionPromoFooterPreference.KEY to
-                            PreferenceData(action = "Test Action", targetPackage = "test.package")
-                    )
-                )
+            mockPackageManager.stub {
+                on { queryIntentActivitiesAsUser(any(), any<Int>(), any<Int>()) }
+                    .thenReturn(emptyList())
             }
-
-            whenever(
-                    mockPackageManager.queryIntentActivitiesAsUser(
-                        any<Intent>(),
-                        any<Int>(),
-                        any<Int>(),
-                    )
-                )
-                .thenReturn(emptyList())
 
             promoPreference.onResume(preferenceLifecycleContext)
 
-            assertFalse(preference.isVisible)
+            verify(preferenceLifecycleContext).notifyPreferenceChange(KEY) // will trigger binding
+            promoPreference.bind(preference, mock())
+
+            assertThat(preference.isVisible).isFalse()
         }
 
     @Test
     fun onResume_validIntent_hasActivityToHandleIntent_preferenceIsVisible_validIntentCreated() =
         testScope.runTest {
-            val promoPreference = SupervisionPromoFooterPreference(preferenceDataProvider)
-            promoPreference.bind(preference, mock())
-
-            whenever(preferenceDataProvider.getPreferenceData(any())).thenAnswer {
-                CompletableDeferred(
-                    mapOf(
-                        SupervisionPromoFooterPreference.KEY to
-                            PreferenceData(action = "Test Action", targetPackage = "test.package")
-                    )
+            val promoPreference =
+                SupervisionPromoFooterPreference(preferenceDataProvider, testDispatcher)
+            preferenceData =
+                PreferenceData(
+                    title = "Test Title",
+                    action = "Test Action",
+                    targetPackage = "test.package",
                 )
+
+            mockPackageManager.stub {
+                on { queryIntentActivitiesAsUser(any(), any<Int>(), any<Int>()) }
+                    .thenReturn(listOf(ResolveInfo()))
             }
-
-            whenever(
-                    mockPackageManager.queryIntentActivitiesAsUser(
-                        any<Intent>(),
-                        any<Int>(),
-                        any<Int>(),
-                    )
-                )
-                .thenReturn(listOf(ResolveInfo()))
 
             promoPreference.onResume(preferenceLifecycleContext)
 
-            assertTrue(preference.isVisible)
-            assertEquals("Test Action", promoPreference.intent(context)?.action)
-            assertEquals("test.package", promoPreference.intent(context)?.`package`)
+            verify(preferenceLifecycleContext).notifyPreferenceChange(KEY) // will trigger binding
+            promoPreference.bind(preference, mock())
+
+            assertThat(preference.isVisible).isTrue()
+            val intent = preference.intent!!
+            assertThat(intent.action).isEqualTo("Test Action")
+            assertThat(intent.`package`).isEqualTo("test.package")
         }
 }

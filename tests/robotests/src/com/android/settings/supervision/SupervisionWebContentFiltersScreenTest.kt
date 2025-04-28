@@ -17,7 +17,9 @@ package com.android.settings.supervision
 
 import android.app.Activity
 import android.app.supervision.flags.Flags
+import android.content.ComponentName
 import android.content.Context
+import android.content.IntentFilter
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
@@ -32,6 +34,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Shadows.shadowOf
+import org.robolectric.shadows.ShadowPackageManager
 
 @RunWith(AndroidJUnit4::class)
 class SupervisionWebContentFiltersScreenTest {
@@ -39,8 +42,20 @@ class SupervisionWebContentFiltersScreenTest {
     private val context: Context = ApplicationProvider.getApplicationContext()
     private lateinit var supervisionWebContentFiltersScreen: SupervisionWebContentFiltersScreen
 
+    private lateinit var shadowPackageManager: ShadowPackageManager
+
     @Before
     fun setUp() {
+        shadowPackageManager = shadowOf(context.packageManager)
+        val intentFilter =
+            IntentFilter("android.app.supervision.action.CONFIRM_SUPERVISION_CREDENTIALS")
+        val componentName =
+            ComponentName(
+                "com.android.settings",
+                ConfirmSupervisionCredentialsActivity::class.java.name,
+            )
+        shadowPackageManager.addActivityIfNotPresent(componentName)
+        shadowPackageManager.addIntentFilterForActivity(componentName, intentFilter)
         supervisionWebContentFiltersScreen = SupervisionWebContentFiltersScreen()
     }
 

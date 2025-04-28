@@ -22,11 +22,9 @@ import static com.android.internal.accessibility.common.ShortcutConstants.UserSh
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TRIPLETAP;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TWOFINGER_DOUBLETAP;
-import static com.android.settings.accessibility.AccessibilityShortcutsTutorial.showGestureNavigationTutorialDialog;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.verify;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Dialog;
@@ -449,18 +447,6 @@ public final class AccessibilityShortcutsTutorialTest {
                 .isEqualTo(AccessibilityButtonFragment.class.getName());
         assertThat(intent.getIntExtra(MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY, -1))
                 .isEqualTo(SettingsEnums.SWITCH_SHORTCUT_DIALOG_ACCESSIBILITY_BUTTON_SETTINGS);
-    }
-
-    @Test
-    public void performClickOnPositiveButton_turnOnGestureShortcut_callOnDismissListener() {
-        final AlertDialog alertDialog =
-                showGestureNavigationTutorialDialog(mContext, mOnDismissListener);
-
-        alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick();
-        ShadowLooper.idleMainLooper();
-
-        assertThat(alertDialog.isShowing()).isFalse();
-        verify(mOnDismissListener).onDismiss(alertDialog);
     }
 
     private void setTouchExplorationEnabled(boolean enable) {

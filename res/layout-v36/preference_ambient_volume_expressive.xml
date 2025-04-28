@@ -28,17 +28,14 @@
 
     <include layout="@layout/settingslib_expressive_preference_icon_frame"/>
     <include layout="@layout/settingslib_expressive_preference_text_frame" />
-    <ImageView
-        android:id="@+id/expand_icon"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:contentDescription="@null"
-        android:tint="@androidprv:color/materialColorOnPrimaryContainer"
-        android:src="@drawable/ic_keyboard_arrow_down"
-        android:background="@drawable/ambient_expand_icon_background_expressive" />
+    <!-- Preference should place its actual preference widget here. -->
+    <LinearLayout
+        android:id="@android:id/widget_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="end|center_vertical"
+        android:paddingStart="@dimen/settingslib_expressive_space_small1"
+        android:paddingEnd="0dp"
+        android:orientation="vertical"/>
 
 </LinearLayout>

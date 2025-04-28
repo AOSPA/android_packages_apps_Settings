@@ -45,6 +45,7 @@ import androidx.annotation.UiThread;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
@@ -85,6 +86,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
         BluetoothCallback {
     private static final String TAG = "AudioSharingSwitchCtlr";
     private static final String PREF_KEY = "audio_sharing_main_switch";
+    private static final String EXTRA_SOURCE_METRICS = ":settings:source_metrics";
 
     interface OnAudioSharingStateChangedListener {
         /**
@@ -120,7 +122,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
     private List<AudioSharingDeviceItem> mDeviceItemsForSharing = new ArrayList<>();
     private final AtomicBoolean mCallbacksRegistered = new AtomicBoolean(false);
     private AtomicInteger mIntentHandleStage =
-            new AtomicInteger(StartIntentHandleStage.TO_HANDLE.ordinal());
+            new AtomicInteger(StartIntentHandleStage.TO_HANDLE.getId());
     // The sinks in adding source process. We show the progress dialog based on this list.
     private CopyOnWriteArrayList<BluetoothDevice> mSinksInAdding = new CopyOnWriteArrayList<>();
     // The primary/active sinks in adding source process.
@@ -280,7 +282,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                             Pair<Integer, Object>[] eventData =
                                     AudioSharingUtils.buildAudioSharingDialogEventData(
                                             SettingsEnums.AUDIO_SHARING_SETTINGS,
-                                            SettingsEnums.DIALOG_AUDIO_SHARING_ADD_DEVICE,
+                                            SettingsEnums.DIALOG_AUDIO_SHARING_MAIN,
                                             /* userTriggered= */ false,
                                             /* deviceCountInSharing= */ 1,
                                             /* candidateDeviceCount= */ 0);
@@ -379,8 +381,8 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
             return;
         }
         if (mIntentHandleStage.compareAndSet(
-                StartIntentHandleStage.TO_HANDLE.ordinal(),
-                StartIntentHandleStage.HANDLE_AUTO_ADD.ordinal())) {
+                StartIntentHandleStage.TO_HANDLE.getId(),
+                StartIntentHandleStage.HANDLE_AUTO_ADD.getId())) {
             Log.d(TAG, "onStart: handleStartAudioSharingFromIntent");
             handleStartAudioSharingFromIntent();
         }
@@ -462,8 +464,8 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                 mProfileManager.removeServiceListener(this);
             }
             if (mIntentHandleStage.compareAndSet(
-                    StartIntentHandleStage.TO_HANDLE.ordinal(),
-                    StartIntentHandleStage.HANDLE_AUTO_ADD.ordinal())) {
+                    StartIntentHandleStage.TO_HANDLE.getId(),
+                    StartIntentHandleStage.HANDLE_AUTO_ADD.getId())) {
                 Log.d(TAG, "onServiceConnected: handleStartAudioSharingFromIntent");
                 handleStartAudioSharingFromIntent();
             }
@@ -505,7 +507,9 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
         if (cachedDevice != null && mBroadcast != null) {
             Log.d(TAG, "handleAutoAddSourceAfterPair, device = " + device.getAnonymizedAddress());
             addSourceToTargetSinks(ImmutableList.of(device), cachedDevice.getName(),
-                    mBroadcast.getLatestBluetoothLeBroadcastMetadata());
+                    mBroadcast.getLatestBluetoothLeBroadcastMetadata(),
+                    AudioSharingUtils.buildAddSourceEventData(
+                            SettingsEnums.BLUETOOTH_PAIRING, /* userTriggered= */true));
         }
     }
 
@@ -577,10 +581,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                     () -> AudioSharingProgressDialogFragment.show(mFragment,
                             mContext.getString(
                                     R.string.audio_sharing_progress_dialog_start_stream_content)));
-            mMetricsFeatureProvider.action(
-                    mContext,
-                    SettingsEnums.ACTION_AUDIO_SHARING_MAIN_SWITCH_ON,
-                    deviceItems.size());
+            logStartBroadcast(deviceItems.size());
         }
     }
 
@@ -651,14 +652,17 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
         Pair<Integer, Object>[] eventData =
                 AudioSharingUtils.buildAudioSharingDialogEventData(
                         SettingsEnums.AUDIO_SHARING_SETTINGS,
-                        SettingsEnums.DIALOG_AUDIO_SHARING_ADD_DEVICE,
+                        SettingsEnums.DIALOG_AUDIO_SHARING_MAIN,
                         /* userTriggered= */ false,
                         /* deviceCountInSharing= */ targetActiveSinks.isEmpty() ? 0 : 1,
                         /* candidateDeviceCount= */ mDeviceItemsForSharing.size());
         // Auto add primary/active sinks w/o user interactions.
         if (!targetActiveSinks.isEmpty() && mTargetActiveItem != null) {
             Log.d(TAG, "handleOnBroadcastReady: automatically add source to active sinks.");
-            addSourceToTargetSinks(targetActiveSinks, mTargetActiveItem.getName(), metadata);
+            addSourceToTargetSinks(targetActiveSinks, mTargetActiveItem.getName(), metadata,
+                    AudioSharingUtils.buildAddSourceEventData(
+                            SettingsEnums.ACTION_AUTO_JOIN_AUDIO_SHARING,
+                            /* userTriggered= */false));
             // To avoid users advance to share then pair flow before the primary/active sinks
             // successfully join the audio sharing, save the primary/active sinks in mSinksToWaitFor
             // and popup dialog till adding source complete for these sinks.
@@ -666,29 +670,30 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                 mSinksToWaitFor.clear();
                 mSinksToWaitFor.addAll(targetActiveSinks);
             }
-            mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_AUTO_JOIN_AUDIO_SHARING);
             mTargetActiveItem = null;
             // When audio sharing page is brought up by intent with EXTRA_START_LE_AUDIO_SHARING
             // == true, plus there is one active lea headset and one connected lea headset, we
             // should auto add these sinks without user interactions.
             if (mIntentHandleStage.compareAndSet(
-                    StartIntentHandleStage.HANDLE_AUTO_ADD.ordinal(),
-                    StartIntentHandleStage.HANDLED.ordinal())
+                    StartIntentHandleStage.HANDLE_AUTO_ADD.getId(),
+                    StartIntentHandleStage.HANDLED.getId())
                     && mDeviceItemsForSharing.size() == 1) {
                 Log.d(TAG, "handleOnBroadcastReady: auto add source to the second device");
                 AudioSharingDeviceItem target = mDeviceItemsForSharing.get(0);
                 List<BluetoothDevice> targetSinks = mGroupedConnectedDevices.getOrDefault(
                         target.getGroupId(), ImmutableList.of());
-                addSourceToTargetSinks(targetSinks, target.getName(), metadata);
+                addSourceToTargetSinks(targetSinks, target.getName(), metadata,
+                        AudioSharingUtils.buildAddSourceEventData(
+                                SettingsEnums.ACTION_AUTO_JOIN_AUDIO_SHARING,
+                                /* userTriggered= */true));
                 cleanUpStatesForStartSharing();
-                // TODO: Add metric for auto add by intent
                 return;
             }
         }
         // Still mark intent as handled if early returned due to preconditions not met
         mIntentHandleStage.compareAndSet(
-                StartIntentHandleStage.HANDLE_AUTO_ADD.ordinal(),
-                StartIntentHandleStage.HANDLED.ordinal());
+                StartIntentHandleStage.HANDLE_AUTO_ADD.getId(),
+                StartIntentHandleStage.HANDLED.getId());
         if (mFragment == null) {
             Log.d(TAG, "handleOnBroadcastReady: dialog fail to show due to null fragment.");
             // Clean up states before early return.
@@ -723,7 +728,10 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                     public void onItemClick(@NonNull AudioSharingDeviceItem item) {
                         List<BluetoothDevice> targetSinks = mGroupedConnectedDevices.getOrDefault(
                                 item.getGroupId(), ImmutableList.of());
-                        addSourceToTargetSinks(targetSinks, item.getName(), metadata);
+                        addSourceToTargetSinks(targetSinks, item.getName(), metadata,
+                                AudioSharingUtils.buildAddSourceEventData(
+                                        SettingsEnums.DIALOG_AUDIO_SHARING_MAIN,
+                                        /* userTriggered= */true));
                         cleanUpStatesForStartSharing();
                     }
 
@@ -812,25 +820,27 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                             if (!shouldStart) {
                                 Log.d(TAG, "Skip handleStartAudioSharingFromIntent, arg false");
                                 mIntentHandleStage.compareAndSet(
-                                        StartIntentHandleStage.HANDLE_AUTO_ADD.ordinal(),
-                                        StartIntentHandleStage.HANDLED.ordinal());
+                                        StartIntentHandleStage.HANDLE_AUTO_ADD.getId(),
+                                        StartIntentHandleStage.HANDLED.getId());
                                 return;
                             }
                             if (BluetoothUtils.isBroadcasting(mBtManager)) {
                                 Log.d(TAG, "Skip handleStartAudioSharingFromIntent, in broadcast");
                                 mIntentHandleStage.compareAndSet(
-                                        StartIntentHandleStage.HANDLE_AUTO_ADD.ordinal(),
-                                        StartIntentHandleStage.HANDLED.ordinal());
+                                        StartIntentHandleStage.HANDLE_AUTO_ADD.getId(),
+                                        StartIntentHandleStage.HANDLED.getId());
                                 return;
                             }
                             Log.d(TAG, "HandleStartAudioSharingFromIntent, start broadcast");
+                            //
                             AudioSharingUtils.postOnMainThread(
                                     mContext, () -> mSwitchBar.setChecked(true));
                         });
     }
 
     private void addSourceToTargetSinks(List<BluetoothDevice> targetGroupedSinks,
-            @NonNull String targetSinkName, @Nullable BluetoothLeBroadcastMetadata metadata) {
+            @NonNull String targetSinkName, @Nullable BluetoothLeBroadcastMetadata metadata,
+            Pair<Integer, Object>[] eventData) {
         if (targetGroupedSinks.isEmpty()) {
             Log.d(TAG, "Skip addSourceToTargetSinks, no sinks.");
             return;
@@ -850,6 +860,8 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
         for (BluetoothDevice sink : targetGroupedSinks) {
             mAssistant.addSource(sink, metadata, /* isGroupOp= */ false);
         }
+        mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_AUDIO_SHARING_ADD_SOURCE,
+                eventData);
     }
 
     private void showProgressDialog(@NonNull String progressMessage) {
@@ -869,9 +881,54 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
         mDeviceItemsForSharing.clear();
     }
 
+    private void logStartBroadcast(int candidateDeviceCount) {
+        int sourceMetric = SettingsEnums.PAGE_UNKNOWN;
+        String callingPackage = "";
+        if (mIntentHandleStage.get() != StartIntentHandleStage.HANDLE_AUTO_ADD.getId()) {
+            // Sharing is started by toggle
+            sourceMetric = SettingsEnums.AUDIO_SHARING_SETTINGS;
+            callingPackage = mContext.getPackageName();
+        } else if (mFragment != null && mFragment.getActivity() != null) {
+            // Sharing is started by intent
+            FragmentActivity activity = mFragment.getActivity();
+            Intent intent = activity.getIntent();
+            if (intent != null) {
+                sourceMetric = intent.getIntExtra(EXTRA_SOURCE_METRICS,
+                        SettingsEnums.PAGE_UNKNOWN);
+            }
+            if (activity instanceof SettingsActivity settingsActivity) {
+                callingPackage = settingsActivity.getInitialCallingPackage();
+            }
+        }
+        Pair<Integer, Object>[] eventData = new Pair[]{
+                Pair.create(AudioSharingUtils.MetricKey.METRIC_KEY_SOURCE_PAGE_ID.getId(),
+                        sourceMetric),
+                Pair.create(
+                        AudioSharingUtils.MetricKey.METRIC_KEY_SOURCE_PACKAGE_NAME.getId(),
+                        callingPackage),
+                Pair.create(
+                        AudioSharingUtils.MetricKey.METRIC_KEY_CANDIDATE_DEVICE_COUNT.getId(),
+                        candidateDeviceCount)
+        };
+        mMetricsFeatureProvider.action(
+                mContext,
+                SettingsEnums.ACTION_AUDIO_SHARING_MAIN_SWITCH_ON,
+                eventData);
+    }
+
     private enum StartIntentHandleStage {
-        TO_HANDLE,
-        HANDLE_AUTO_ADD,
-        HANDLED,
+        TO_HANDLE(0),
+        HANDLE_AUTO_ADD(1),
+        HANDLED(2);
+
+        private final int mId;
+
+        StartIntentHandleStage(int id) {
+            this.mId = id;
+        }
+
+        public int getId() {
+            return mId;
+        }
     }
 }
