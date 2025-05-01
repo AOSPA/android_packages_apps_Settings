@@ -640,7 +640,10 @@
     </integer-array>
 
     <!-- App aspect ratio settings screen, user aspect ratio override options. Must be the same
-         length and order as config_userAspectRatioOverrideValues below. -->
+         length and order as config_userAspectRatioOverrideValues below.
+
+         If changed, also update the Backup & Restore logic for choosing the closest value in
+         com/android/settings/applications/appcompat/UserAspectRatioBackupManager.java -->
     <string-array name="config_userAspectRatioOverrideEntries" translatable="false">
         <item>@string/user_aspect_ratio_app_default</item>
         <item>@string/user_aspect_ratio_fullscreen</item>
@@ -653,7 +656,10 @@
 
     <!-- App aspect ratio settings screen, user aspect ratio override options. Must be the same
          length and order as config_userAspectRatioOverrideEntries above. The values must
-         correspond to PackageManager.UserMinAspectRatio -->
+         correspond to PackageManager.UserMinAspectRatio.
+
+         If changed, also update the Backup & Restore logic for choosing the closest value in
+         com/android/settings/applications/appcompat/UserAspectRatioBackupManager.java -->
     <integer-array name="config_userAspectRatioOverrideValues" translatable="false">
         <item>0</item> <!-- USER_MIN_ASPECT_RATIO_UNSET -->
         <item>6</item> <!-- USER_MIN_ASPECT_RATIO_FULLSCREEN -->

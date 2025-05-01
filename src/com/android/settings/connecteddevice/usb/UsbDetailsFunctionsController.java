@@ -32,6 +32,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.flags.Flags;
+import com.android.settingslib.RestrictedSelectorWithWidgetPreference;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import java.util.LinkedHashMap;
@@ -82,13 +83,11 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
                 /* powerRole */ 0, /* dataRole */ 0);
     }
 
-    /**
-     * Gets a switch preference for the particular option, creating it if needed.
-     */
-    private SelectorWithWidgetPreference getProfilePreference(String key, int titleId) {
-        SelectorWithWidgetPreference pref = mProfilesContainer.findPreference(key);
+    /** Gets a switch preference for the particular option, creating it if needed. */
+    private RestrictedSelectorWithWidgetPreference getProfilePreference(String key, int titleId) {
+        RestrictedSelectorWithWidgetPreference pref = mProfilesContainer.findPreference(key);
         if (pref == null) {
-            pref = new SelectorWithWidgetPreference(mProfilesContainer.getContext());
+            pref = new RestrictedSelectorWithWidgetPreference(mProfilesContainer.getContext());
             pref.setKey(key);
             pref.setTitle(titleId);
             pref.setSingleLineTitle(false);
@@ -110,10 +109,11 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
             // Functions are only available in device mode
             mProfilesContainer.setEnabled(true);
         }
-        SelectorWithWidgetPreference pref;
+        RestrictedSelectorWithWidgetPreference pref;
         for (long option : FUNCTIONS_MAP.keySet()) {
             int title = FUNCTIONS_MAP.get(option);
             pref = getProfilePreference(UsbBackend.usbFunctionsToString(option), title);
+            checkUserRestrictions(option, pref);
             // Only show supported options
             if (mUsbBackend.areFunctionsSupported(option)) {
                 if (isAccessoryMode(functions)) {
@@ -151,10 +151,11 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
                 && !isClickEventIgnored(function, previousFunction)) {
             mPreviousFunction = previousFunction;
 
-            //Update the UI in advance to make it looks smooth
-            final SelectorWithWidgetPreference prevPref =
-                    (SelectorWithWidgetPreference) mProfilesContainer.findPreference(
-                            UsbBackend.usbFunctionsToString(mPreviousFunction));
+            // Update the UI in advance to make it looks smooth
+            final RestrictedSelectorWithWidgetPreference prevPref =
+                    (RestrictedSelectorWithWidgetPreference)
+                            mProfilesContainer.findPreference(
+                                    UsbBackend.usbFunctionsToString(mPreviousFunction));
             if (prevPref != null) {
                 prevPref.setChecked(false);
                 preference.setChecked(true);
@@ -187,6 +188,14 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
 
     private boolean isAccessoryMode(long function) {
         return (function & UsbManager.FUNCTION_ACCESSORY) != 0;
+    }
+
+    private void checkUserRestrictions(long option, RestrictedSelectorWithWidgetPreference pref) {
+        String userRestriction = UsbBackend.maybeGetUserRestriction(option);
+        if (userRestriction == null) {
+            return;
+        }
+        pref.checkRestrictionAndSetDisabled(userRestriction);
     }
 
     @Override

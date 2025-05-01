@@ -16,8 +16,14 @@
 
 package com.android.settings.applications.appcompat;
 
+import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_16_9;
+import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_3_2;
+import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_4_3;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_APP_DEFAULT;
+import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_FULLSCREEN;
+import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_SPLIT_SCREEN;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_UNSET;
+import static android.hardware.display.DisplayManager.DISPLAY_CATEGORY_BUILT_IN_DISPLAYS;
 
 import static com.android.settings.applications.appcompat.UserAspectRatioBackupHelper.KEY_USER_ASPECT_RATIO;
 
@@ -29,10 +35,14 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
+import android.graphics.Rect;
+import android.hardware.display.DisplayManager;
 import android.os.Handler;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.Slog;
+import android.view.Display;
+import android.view.DisplayInfo;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.content.PackageMonitor;
@@ -52,12 +62,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/**
- * Manager class for performing Backup & Restore for per-app user aspect ratio override.
- *
- * @hide
- */
-public class UserAspectRatioBackupManager {
+/** Manager class for performing Backup & Restore for per-app user aspect ratio override. */
+class UserAspectRatioBackupManager {
     private static final String TAG = "UserAspRatioBackupMngr";   // must be < 23 chars
     private static final boolean DEBUG = false;
 
@@ -76,11 +82,14 @@ public class UserAspectRatioBackupManager {
     private static final String ERROR_ASPECT_RATIO_FAILED = "aspect_ratio_failed";
 
     @NonNull
+    private final Context mContext;
+    @NonNull
     private final IPackageManager mIPackageManager;
     @NonNull
     private final PackageManager mPackageManager;
+    @VisibleForTesting
     @NonNull
-    private final Set<Integer> mAvailableUserMinAspectRatioSet;
+    private Set<Integer> mAvailableUserMinAspectRatioSet;
     @NonNull
     private final UserAspectRatioRestoreStorage mStorage;
 
@@ -89,6 +98,7 @@ public class UserAspectRatioBackupManager {
     @NonNull
     private final BackupRestoreEventLogger mLogger;
 
+    private final Map<Integer, Float> mUserAspectRatiosPerSettingMap = new HashMap<>();
 
     /**
      * Helper to monitor package states for the purpose of restoring user aspect ratios.
@@ -118,6 +128,7 @@ public class UserAspectRatioBackupManager {
             @NonNull IPackageManager iPackageManager, @NonNull PackageManager packageManager,
             @NonNull BackupRestoreEventLogger logger, @NonNull Handler handler,
             @NonNull InstantSource instantSource) {
+        mContext = context;
         mIPackageManager = iPackageManager;
         mPackageManager = packageManager;
         mUserId = mPackageManager.getUserId();
@@ -126,13 +137,67 @@ public class UserAspectRatioBackupManager {
 
         mPackageMonitor.register(context, UserHandle.of(UserHandle.USER_ALL), handler);
 
-        final int[] userAspectRatioResourceValues = context.getResources().getIntArray(
-                R.array.config_userAspectRatioOverrideValues);
+
+        populateAvailableUserAspectRatioSettingOptions(mContext.getResources().getIntArray(
+                R.array.config_userAspectRatioOverrideValues));
+    }
+
+    @VisibleForTesting
+    void populateAvailableUserAspectRatioSettingOptions(
+            @NonNull int[] userAspectRatioResourceValues) {
         mAvailableUserMinAspectRatioSet = Arrays.stream(userAspectRatioResourceValues).boxed()
                 .collect(Collectors.toSet());
         // App Default is not in the set above, but is always offered. Users can also specify this
         // value, for example if there is an OEM override to some other value.
         mAvailableUserMinAspectRatioSet.add(USER_MIN_ASPECT_RATIO_APP_DEFAULT);
+
+        final Rect displaySize = getSizeOfLargestDisplay();
+        if (displaySize == null || displaySize.isEmpty()) {
+            return;
+        }
+        // Always >= 1.
+        final float currentLargestInternalDisplayAspectRatio = getAspectRatioForRect(displaySize);
+
+        mUserAspectRatiosPerSettingMap.clear();
+        for (int aspectRatioEnum : userAspectRatioResourceValues) {
+            float aspectRatio = getAspectRatioForSetting(aspectRatioEnum,
+                    currentLargestInternalDisplayAspectRatio);
+            // Values that cannot be used as target aspect ratios will return -1.
+            if (aspectRatio > 0) {
+                mUserAspectRatiosPerSettingMap.put(aspectRatioEnum, aspectRatio);
+            }
+        }
+    }
+
+    /**
+     * Returns the real aspect ratio that the given setting represents.
+     *
+     * <p>Possible values:
+     * <ul>
+     *    <li> Concrete user aspect ratios (e.g. 16/9): value >= 1.
+     *    <li> Split screen aspect ratio: displayAspectRatio / 2, also >= 1.
+     *    <li> Fullscreen: 0.5
+     *    <li> Settings that will not be chosen: -1.
+     * </ul>
+     */
+    private float getAspectRatioForSetting(int userAspectRatioSetting, float displayAspectRatio) {
+        return switch (userAspectRatioSetting) {
+            case USER_MIN_ASPECT_RATIO_3_2 ->  3 / 2f;
+            case USER_MIN_ASPECT_RATIO_4_3 -> 4 / 3f;
+            case USER_MIN_ASPECT_RATIO_16_9 -> 16 / 9f;
+            case USER_MIN_ASPECT_RATIO_SPLIT_SCREEN -> makeFloatHigherOrEqualTo1(
+                    displayAspectRatio / 2);
+            // Fullscreen should always result in the largest area, this means the smallest aspect
+            // ratio. Special value of 0.5f is used, to allow user aspect ratio setting of 1 in the
+            // future.
+            case USER_MIN_ASPECT_RATIO_FULLSCREEN -> 0.5f;
+            // Other values, like APP_DEFAULT, will not be chosen as "closest larger".
+            default -> -1;
+        };
+    }
+
+    private static float makeFloatHigherOrEqualTo1(float number) {
+        return number < 1 ? 1f / number : number;
     }
 
     /**
@@ -271,13 +336,14 @@ public class UserAspectRatioBackupManager {
                         + pkgName + " as it is already set to " + existingUserAspectRatio + ".");
                 return;
             }
-            // TODO(b/407738654): Implement: when an aspect ratio option is unavailable, fallback to
-            //  the closest aspect ratio option that results in bigger app bounds.
-            if (mAvailableUserMinAspectRatioSet.contains(aspectRatio)) {
-                mIPackageManager.setUserMinAspectRatio(pkgName, mUserId, aspectRatio);
+
+            final int mostSuitableAspectRatio = getSameOrClosestBiggerAspectRatio(aspectRatio);
+            if (mostSuitableAspectRatio != USER_MIN_ASPECT_RATIO_UNSET) {
+                mIPackageManager.setUserMinAspectRatio(pkgName, mUserId, mostSuitableAspectRatio);
                 if (DEBUG) {
-                    Slog.d(TAG, "Restored user aspect ratio=" + aspectRatio + " for package="
-                            + pkgName);
+                    Slog.d(TAG, "Restored user aspect ratio=" + mostSuitableAspectRatio
+                            + " for package=" + pkgName + " . Backed-up aspect ratio was "
+                            + aspectRatio);
                 }
             }
         } catch (RemoteException | IllegalArgumentException e) {
@@ -286,4 +352,106 @@ public class UserAspectRatioBackupManager {
             Slog.e(TAG, "Could not restore user aspect ratio for package " + pkgName, e);
         }
     }
+
+    private float getAspectRatioForRect(@NonNull Rect rect) {
+        return makeFloatHigherOrEqualTo1((float) rect.width() / rect.height());
+    }
+
+    /**
+     * Returns the most fitting aspect ratio available on this device.
+     *
+     * <p> If the exact aspect ratio is not available, choose the next closest one that produces a
+     * bigger app surface. The goal is to produce similar UX, but also to favor bigger app area.
+     * Users have already changed the user aspect ratio on their previous device, so they should be
+     * able to change it again if the new aspect ratio is not ideal.
+     *
+     * <p>Aspect ratio is chosen in this order of priority, if available:
+     * <ol>
+     *     <li>Same aspect ratio setting,
+     *     <li>The closest bigger available setting,
+     *     <li>{@link PackageManager#USER_MIN_ASPECT_RATIO_FULLSCREEN},
+     *     <li>{@link PackageManager#USER_MIN_ASPECT_RATIO_UNSET}.
+     * </ol>
+     */
+    private int getSameOrClosestBiggerAspectRatio(int aspectRatioSetting) {
+        if (mAvailableUserMinAspectRatioSet.contains(aspectRatioSetting)) {
+            return aspectRatioSetting;
+        }
+
+        // TODO(b/413007174): this assumes that the size of the backed up display is similar to this
+        //  device. Backup device dimensions too to calculate the exact aspect ratio that the user
+        //  has set.
+        final Rect displaySize = getSizeOfLargestDisplay();
+        if (displaySize == null || displaySize.isEmpty()) {
+            return USER_MIN_ASPECT_RATIO_UNSET;
+        }
+        float realRestoredAspectRatio = getAspectRatioForSetting(aspectRatioSetting,
+                getAspectRatioForRect(displaySize));
+
+        // Bigger aspect ratio means smaller area, so the goal is to find the closest aspect ratio
+        // float value that is less than the restored aspect ratio. Fullscreen has the aspect ratio
+        // equal to 0.5 (smallest value), so the result will gravitate towards fullscreen.
+        int bestSetting = 0;
+        float closestSmallerAspectRatioValue = 0;
+        for (Integer setting : mUserAspectRatiosPerSettingMap.keySet()) {
+            float aspectRatio = mUserAspectRatiosPerSettingMap.get(setting);
+            // Bigger area (goal) results in a smaller aspect ratio (closer to 1), so bigger value
+            // does not work. Fullscreen has a special value of 0.5f, to allow min aspect ratio
+            // setting of 1 in the future.
+            // Values < 0 are not applicable for this comparison.
+            if (aspectRatio > realRestoredAspectRatio || aspectRatio < 0) {
+                continue;
+            }
+            // If current value is smaller than the restored, make sure it is the closest so far.
+            if (aspectRatio > closestSmallerAspectRatioValue) {
+                closestSmallerAspectRatioValue = aspectRatio;
+                bestSetting = setting;
+            }
+        }
+        if (bestSetting == 0) {
+            // This device is smaller than the real aspect ratio of the new device. Choose
+            // fullscreen if possible.
+            if (mAvailableUserMinAspectRatioSet.contains(USER_MIN_ASPECT_RATIO_FULLSCREEN)) {
+                return USER_MIN_ASPECT_RATIO_FULLSCREEN;
+            } else {
+                Slog.w(TAG, "Unable to find a suitable aspect ratio for restored: "
+                        + aspectRatioSetting);
+                return USER_MIN_ASPECT_RATIO_UNSET;
+            }
+        }
+
+        return bestSetting;
+    }
+
+    // Visible for testing because DisplayManager cannot be mocked, so using the real implementation
+    // in the test and making sure it is well tested.
+
+    /**
+     * Returns the dimensions of the largest built-in display, even if inactive or disabled.
+     *
+     * <p>This method assumes that the largest display will be the one to measure aspect ratio by,
+     * as it is unable to check whether {@code ignoreOrientationRequest == true}.
+     */
+    @VisibleForTesting
+    @Nullable
+    Rect getSizeOfLargestDisplay() {
+        final DisplayManager displayManager = mContext.getSystemService(DisplayManager.class);
+        if (displayManager == null) {
+            return null;
+        }
+        final Display[] displays = displayManager.getDisplays(
+                /* flags= */ DISPLAY_CATEGORY_BUILT_IN_DISPLAYS);
+        final Rect maxDimensions = new Rect();
+        for (Display display: displays) {
+            final DisplayInfo outDisplayInfo = new DisplayInfo();
+            display.getDisplayInfo(outDisplayInfo);
+            final int width = outDisplayInfo.getNaturalWidth();
+            final int height = outDisplayInfo.getNaturalHeight();
+            if (width * height > maxDimensions.width() * maxDimensions.height())  {
+                maxDimensions.set(0 , 0, width, height);
+            }
+        }
+        return maxDimensions;
+    }
+
 }

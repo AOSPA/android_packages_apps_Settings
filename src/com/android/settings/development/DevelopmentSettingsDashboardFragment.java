@@ -825,6 +825,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new AutofillCategoryController(context, lifecycle));
         controllers.add(new AutofillLoggingLevelPreferenceController(context, lifecycle));
         controllers.add(new AutofillResetOptionsPreferenceController(context));
+        controllers.add(new PrintVerboseLoggingController(context));
         controllers.add(
                 new BluetoothCodecListPreferenceController(
                         context, lifecycle, bluetoothA2dpConfigStore, fragment));

@@ -78,13 +78,4 @@ public class SummarizationPreferenceControllerTest {
         mSetFlagsRule.disableFlags(Flags.FLAG_NM_SUMMARIZATION_UI);
         assertThat(mController.isAvailable()).isFalse();
     }
-
-    @Test
-    public void getSummary() throws Exception {
-        when(mInm.getAllowedAssistantAdjustments(any())).thenReturn(List.of(KEY_SUMMARIZATION));
-        assertThat(mController.getSummary()).isEqualTo("On");
-
-        when(mInm.getAllowedAssistantAdjustments(any())).thenReturn(List.of(KEY_IMPORTANCE));
-        assertThat(mController.getSummary()).isEqualTo("Off");
-    }
 }

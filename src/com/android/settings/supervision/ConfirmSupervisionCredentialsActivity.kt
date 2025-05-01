@@ -33,7 +33,7 @@ import androidx.annotation.RequiresPermission
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import com.android.settings.R
-import com.android.settingslib.supervision.SupervisionLog
+import com.android.settingslib.supervision.SupervisionLog.TAG
 
 /**
  * Activity for confirming supervision credentials using device credential authentication.
@@ -60,10 +60,7 @@ open class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
             @RequiresPermission(anyOf = [INTERACT_ACROSS_USERS_FULL, MANAGE_USERS])
             override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                 tryStopProfile()
-                Log.w(
-                    SupervisionLog.TAG,
-                    "onAuthenticationError(errorCode=$errorCode, errString=$errString)",
-                )
+                Log.w(TAG, "onAuthenticationError(errorCode=$errorCode, errString=$errString)")
                 setResult(RESULT_CANCELED)
                 finish()
             }
@@ -92,18 +89,17 @@ open class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
             return
         }
 
-        val supervisingUser = SupervisionHelper.getInstance(this).getSupervisingUserHandle()
+        val supervisingUser = supervisingUserHandle
         if (supervisingUser == null) {
-            Log.w(SupervisionLog.TAG, "No supervising user exists, cannot verify credentials.")
+            Log.w(TAG, "No supervising user exists, cannot verify credentials.")
             setResult(RESULT_CANCELED)
             finish()
             return
         }
 
         val activityManager = getSystemService(ActivityManager::class.java)
-        if(!activityManager.startProfile(supervisingUser)) {
-            Log.w(SupervisionLog.TAG,
-                "Unable to start supervising user, cannot verify credentials.")
+        if (!activityManager.startProfile(supervisingUser)) {
+            Log.w(TAG, "Unable to start supervising user, cannot verify credentials.")
             setResult(RESULT_CANCELED)
             finish()
             return
@@ -123,14 +119,14 @@ open class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
             CancellationSignal(),
             ContextCompat.getMainExecutor(this),
             mAuthenticationCallback,
-            userId
+            userId,
         )
     }
 
     private fun callerHasSupervisionRole(): Boolean {
         val roleManager = getSystemService(RoleManager::class.java)
         if (roleManager == null) {
-            Log.w(SupervisionLog.TAG, "null RoleManager")
+            Log.w(TAG, "null RoleManager")
             return false
         }
         return roleManager
@@ -141,7 +137,7 @@ open class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
     private fun callerIsSystemUid(): Boolean {
         val callingUid = Binder.getCallingUid()
         if (callingUid != Process.SYSTEM_UID) {
-            Log.w(SupervisionLog.TAG, "callingUid: $callingUid is not SYSTEM_UID")
+            Log.w(TAG, "callingUid: $callingUid is not SYSTEM_UID")
             return false
         }
         return true
@@ -149,14 +145,14 @@ open class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
 
     @RequiresPermission(anyOf = [INTERACT_ACROSS_USERS_FULL, MANAGE_USERS])
     private fun tryStopProfile() {
-        val supervisingUser = SupervisionHelper.getInstance(this).getSupervisingUserHandle()
-        val activityManager = getSystemService(ActivityManager::class.java)
+        val supervisingUser = supervisingUserHandle
         if (supervisingUser == null) {
-            Log.w(SupervisionLog.TAG, "Cannot stop supervising profile because it does not exist.")
+            Log.w(TAG, "Cannot stop supervising profile because it does not exist.")
             return
         }
+        val activityManager = getSystemService(ActivityManager::class.java)
         if (!activityManager.stopProfile(supervisingUser)) {
-            Log.w(SupervisionLog.TAG, "Could not stop the supervising profile.")
+            Log.w(TAG, "Could not stop the supervising profile.")
         }
     }
 }

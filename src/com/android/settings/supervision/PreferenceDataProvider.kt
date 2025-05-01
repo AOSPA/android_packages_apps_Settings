@@ -26,6 +26,9 @@ import com.android.settings.supervision.ipc.PreferenceData
  */
 interface PreferenceDataProvider {
 
+    /** Package of preference data provider. */
+    val packageName: String?
+
     /**
      * Retrieves preference data for the specified keys.
      *

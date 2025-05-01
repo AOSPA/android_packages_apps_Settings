@@ -218,6 +218,11 @@
             android:summary="@string/enable_verbose_vendor_logging_summary" />
 
         <SwitchPreferenceCompat
+            android:key="verbose_printer_logging"
+            android:summary="@string/verbose_printer_logging_summary"
+            android:title="@string/verbose_printer_logging_title" />
+
+        <SwitchPreferenceCompat
             android:key="automatic_system_server_heap_dumps"
             android:title="@string/automatic_system_heap_dump_title"
             android:summary="@string/automatic_system_heap_dump_summary" />

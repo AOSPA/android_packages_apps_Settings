@@ -29,8 +29,7 @@ class TopLevelSupervisionPreferenceController(
     private val context: Context,
     private val key: String,
 ) : BasePreferenceController(context, key) {
-    private val supervisionPackage =
-        SupervisionHelper.getInstance(context).getSupervisionPackageName()
+    private val supervisionPackage = context.supervisionPackageName
 
     private var missingAppStoreLink = false
 

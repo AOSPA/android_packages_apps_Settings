@@ -43,13 +43,13 @@ class SupervisionWebContentFiltersScreen : PreferenceScreenCreator, PreferenceSu
 
     override fun getSummary(context: Context): CharSequence? {
         val dataStore = SettingsSecureStore.get(context)
-        return if (dataStore.getBoolean(BROWSER_CONTENT_FILTERS_ENABLED) == true) {
-            if (dataStore.getBoolean(SEARCH_CONTENT_FILTERS_ENABLED) == true) {
+        return if (dataStore.getInt(BROWSER_CONTENT_FILTERS_ENABLED) == 1) {
+            if (dataStore.getInt(SEARCH_CONTENT_FILTERS_ENABLED) == 1) {
                 context.getString(R.string.supervision_web_content_filters_summary_both_on)
             } else {
                 context.getString(R.string.supervision_web_content_filters_summary_chrome_on)
             }
-        } else if (dataStore.getBoolean(SEARCH_CONTENT_FILTERS_ENABLED) == true) {
+        } else if (dataStore.getInt(SEARCH_CONTENT_FILTERS_ENABLED) == 1) {
             context.getString(R.string.supervision_web_content_filters_summary_search_on)
         } else {
             context.getString(R.string.supervision_web_content_filters_summary_both_off)

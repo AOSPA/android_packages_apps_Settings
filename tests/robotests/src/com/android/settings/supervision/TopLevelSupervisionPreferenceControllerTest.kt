@@ -28,8 +28,8 @@ import com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE
 import com.android.settings.supervision.TopLevelSupervisionPreferenceController.Companion.SETTINGS_REDIRECT_ACTION
 import com.android.settings.supervision.ipc.SupervisionMessengerClient.Companion.SUPERVISION_MESSENGER_SERVICE_BIND_ACTION
 import com.google.common.truth.Truth.assertThat
-import kotlin.test.Test
 import org.junit.Before
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
 import org.mockito.kotlin.argThat
@@ -55,7 +55,6 @@ class TopLevelSupervisionPreferenceControllerTest {
 
     @Before
     fun setUp() {
-        SupervisionHelper.sInstance = null
         preference.key = PREFERENCE_KEY
     }
 

@@ -43,6 +43,7 @@ import com.android.settings.network.MobileNetworkIntentConverter;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settings.security.SecuritySettingsFeatureProvider;
+import com.android.settings.system.ShadePanelsPreferenceController;
 import com.android.settings.wifi.WifiUtils;
 
 import com.google.android.setupdesign.util.ThemeHelper;
@@ -153,6 +154,16 @@ public class Settings extends SettingsActivity {
     public static class KeyboardSettingsActivity extends SettingsActivity { /* empty */ }
     /** Activity for the navigation mode settings. */
     public static class NavigationModeSettingsActivity extends SettingsActivity { /* empty */ }
+    /** Activity for the notifications and quick settings panels settings. */
+    public static class ShadeSettingsActivity extends SettingsActivity {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            if (!ShadePanelsPreferenceController.isDualShadeAvailable(this)) {
+                finish();
+            }
+        }
+    }
     public static class UserDictionarySettingsActivity extends SettingsActivity { /* empty */ }
     public static class DarkThemeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DisplaySettingsActivity extends SettingsActivity { /* empty */ }

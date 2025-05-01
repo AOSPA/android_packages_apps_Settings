@@ -32,7 +32,6 @@ import static org.robolectric.shadows.ShadowLooper.shadowMainLooper;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothStatusCodes;
 import android.content.ComponentName;
 import android.content.Context;
@@ -50,6 +49,7 @@ import com.android.settings.R;
 import com.android.settings.connecteddevice.audiosharing.audiostreams.testshadows.ShadowAudioStreamsHelper;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -69,9 +69,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(
@@ -104,7 +101,7 @@ public class AudioStreamConfirmDialogTest {
     @Mock
     private VolumeControlProfile mVolumeControl;
     @Mock
-    private BluetoothDevice mBluetoothDevice;
+    private CachedBluetoothDevice mCachedBluetoothDevice;
     private AudioStreamConfirmDialog mDialogFragment;
 
     @Before
@@ -133,6 +130,7 @@ public class AudioStreamConfirmDialogTest {
     @After
     public void tearDown() {
         ShadowBluetoothUtils.reset();
+        ShadowAudioStreamsHelper.reset();
         mDialogFragment.dismiss();
     }
 
@@ -231,10 +229,9 @@ public class AudioStreamConfirmDialogTest {
 
     @Test
     public void showDialog_noMetadata() {
-        List<BluetoothDevice> devices = new ArrayList<>();
-        devices.add(mBluetoothDevice);
-        when(mAssistant.getAllConnectedDevices()).thenReturn(devices);
-        when(mBluetoothDevice.getAlias()).thenReturn(DEVICE_NAME);
+        ShadowAudioStreamsHelper.setCachedBluetoothDeviceInSharingOrLeConnected(
+                mCachedBluetoothDevice);
+        when(mCachedBluetoothDevice.getName()).thenReturn(DEVICE_NAME);
 
         FragmentController.setupFragment(
                 mDialogFragment,
@@ -279,10 +276,9 @@ public class AudioStreamConfirmDialogTest {
 
     @Test
     public void showDialog_invalidMetadata() {
-        List<BluetoothDevice> devices = new ArrayList<>();
-        devices.add(mBluetoothDevice);
-        when(mAssistant.getAllConnectedDevices()).thenReturn(devices);
-        when(mBluetoothDevice.getAlias()).thenReturn(DEVICE_NAME);
+        ShadowAudioStreamsHelper.setCachedBluetoothDeviceInSharingOrLeConnected(
+                mCachedBluetoothDevice);
+        when(mCachedBluetoothDevice.getName()).thenReturn(DEVICE_NAME);
 
         Intent intent = new Intent();
         intent.putExtra(KEY_BROADCAST_METADATA, "invalid");
@@ -330,10 +326,9 @@ public class AudioStreamConfirmDialogTest {
 
     @Test
     public void showDialog_confirmListen() {
-        List<BluetoothDevice> devices = new ArrayList<>();
-        devices.add(mBluetoothDevice);
-        when(mAssistant.getAllConnectedDevices()).thenReturn(devices);
-        when(mBluetoothDevice.getAlias()).thenReturn("");
+        ShadowAudioStreamsHelper.setCachedBluetoothDeviceInSharingOrLeConnected(
+                mCachedBluetoothDevice);
+        when(mCachedBluetoothDevice.getName()).thenReturn("");
 
         Intent intent = new Intent();
         intent.putExtra(KEY_BROADCAST_METADATA, VALID_METADATA);
@@ -389,10 +384,9 @@ public class AudioStreamConfirmDialogTest {
 
     @Test
     public void showDialog_turnOffTalkback() {
-        List<BluetoothDevice> devices = new ArrayList<>();
-        devices.add(mBluetoothDevice);
-        when(mAssistant.getAllConnectedDevices()).thenReturn(devices);
-        when(mBluetoothDevice.getAlias()).thenReturn("");
+        ShadowAudioStreamsHelper.setCachedBluetoothDeviceInSharingOrLeConnected(
+                mCachedBluetoothDevice);
+        when(mCachedBluetoothDevice.getName()).thenReturn("");
         ShadowAudioStreamsHelper.setEnabledScreenReaderService(new ComponentName("pkg", "class"));
 
         Intent intent = new Intent();
@@ -449,10 +443,9 @@ public class AudioStreamConfirmDialogTest {
 
     @Test
     public void showDialog_getDataStringFromIntent_confirmListen() {
-        List<BluetoothDevice> devices = new ArrayList<>();
-        devices.add(mBluetoothDevice);
-        when(mAssistant.getAllConnectedDevices()).thenReturn(devices);
-        when(mBluetoothDevice.getAlias()).thenReturn("");
+        ShadowAudioStreamsHelper.setCachedBluetoothDeviceInSharingOrLeConnected(
+                mCachedBluetoothDevice);
+        when(mCachedBluetoothDevice.getName()).thenReturn("");
 
         Intent intent = new Intent();
         intent.setData(Uri.parse(VALID_METADATA_LOWERCASE));

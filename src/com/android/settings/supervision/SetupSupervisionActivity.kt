@@ -19,7 +19,6 @@ import android.Manifest.permission.CREATE_USERS
 import android.Manifest.permission.INTERACT_ACROSS_USERS
 import android.Manifest.permission.INTERACT_ACROSS_USERS_FULL
 import android.Manifest.permission.MANAGE_USERS
-import android.app.Activity
 import android.app.ActivityManager
 import android.app.KeyguardManager
 import android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PASSWORD
@@ -69,11 +68,10 @@ class SetupSupervisionActivity : FragmentActivity() {
 
     @RequiresPermission(anyOf = [CREATE_USERS, MANAGE_USERS])
     private fun enableSupervision() {
-        val supervisionHelper = SupervisionHelper.getInstance(this)
-        var supervisingUser = supervisionHelper.getSupervisingUserHandle()
+        val userManager = getSystemService(UserManager::class.java)
+        var supervisingUser = userManager.supervisingUserHandle
         // If a supervising profile does not already exist on the device, create one
         if (supervisingUser == null) {
-            val userManager = getSystemService(UserManager::class.java)
             val userInfo =
                 userManager.createUser("Supervising", USER_TYPE_PROFILE_SUPERVISING, /* flags= */ 0)
             if (userInfo != null) {
@@ -120,8 +118,7 @@ class SetupSupervisionActivity : FragmentActivity() {
     }
 
     private fun handleSetLockResult(resultCode: Int) {
-        val supervisionHelper = SupervisionHelper.getInstance(this)
-        val supervisingUser = supervisionHelper.getSupervisingUserHandle()
+        val supervisingUser = supervisingUserHandle
         if (supervisingUser == null) {
             Log.w(SupervisionLog.TAG, "No supervising user handle found after lock setup.")
             setResult(RESULT_CANCELED)
@@ -147,7 +144,7 @@ class SetupSupervisionActivity : FragmentActivity() {
     }
 
     private fun handlePinRecoveryResult(resultCode: Int) {
-        if (resultCode == Activity.RESULT_CANCELED) {
+        if (resultCode == RESULT_CANCELED) {
             Log.i(SupervisionLog.TAG, "PIN recovery setup was skipped by the user.")
         }
         setResult(RESULT_OK)

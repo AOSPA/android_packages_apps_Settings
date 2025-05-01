@@ -54,6 +54,16 @@ public class PowerBackgroundUsageDetail extends DashboardFragment {
     public static final String EXTRA_LABEL = "extra_label";
     public static final String EXTRA_POWER_USAGE_AMOUNT = "extra_power_usage_amount";
     public static final String EXTRA_ICON_ID = "extra_icon_id";
+    public static final String EXTRA_LAUNCH_SOURCE = "extra_launch_source";
+
+    /** Launch Source type of current fragment. */
+    public enum LaunchSourceType {
+        UNKNOWN,
+        BATTERY_TIP,
+        APP_BATTERY_USAGE_PAGE,
+        INTENT,
+    }
+
     private static final String KEY_PREF_HEADER = "header_view";
     private static final String KEY_FOOTER_PREFERENCE = "app_usage_footer_preference";
     private static final String KEY_BATTERY_OPTIMIZATION_MODE_CATEGORY =
@@ -65,6 +75,7 @@ public class PowerBackgroundUsageDetail extends DashboardFragment {
     @VisibleForTesting ApplicationsState.AppEntry mAppEntry;
     @VisibleForTesting BatteryOptimizeUtils mBatteryOptimizeUtils;
     @VisibleForTesting StringBuilder mLogStringBuilder;
+    @VisibleForTesting LaunchSourceType mLaunchSourceType = LaunchSourceType.UNKNOWN;
 
     @VisibleForTesting @BatteryOptimizeUtils.OptimizationMode
     int mOptimizationMode = BatteryOptimizeUtils.MODE_UNKNOWN;
@@ -76,6 +87,9 @@ public class PowerBackgroundUsageDetail extends DashboardFragment {
         final Bundle bundle = getArguments();
         final int uid = bundle.getInt(EXTRA_UID, 0);
         final String packageName = bundle.getString(EXTRA_PACKAGE_NAME);
+        mLaunchSourceType =
+                LaunchSourceType.valueOf(
+                        bundle.getString(EXTRA_LAUNCH_SOURCE, LaunchSourceType.UNKNOWN.name()));
         mBatteryOptimizeUtils = new BatteryOptimizeUtils(getContext(), uid, packageName);
         mState = ApplicationsState.getInstance(getActivity().getApplication());
         if (packageName != null) {
@@ -112,6 +126,14 @@ public class PowerBackgroundUsageDetail extends DashboardFragment {
                             BatteryOptimizeLogUtils.getPackageNameWithUserId(
                                     mBatteryOptimizeUtils.getPackageName(), UserHandle.myUserId()),
                             mLogStringBuilder.toString());
+                    if (mLaunchSourceType == LaunchSourceType.BATTERY_TIP
+                            && mOptimizationMode == BatteryOptimizeUtils.MODE_UNRESTRICTED
+                            && currentOptimizeMode == BatteryOptimizeUtils.MODE_OPTIMIZED) {
+                        BatteryOptimizationActionLogUtils.writeLog(
+                                applicationContext,
+                                mBatteryOptimizeUtils.getPackageName(),
+                                Action.BATTERY_TIP_ACCEPT);
+                    }
                 });
         Log.d(TAG, "Leave with mode: " + currentOptimizeMode);
     }

@@ -31,7 +31,6 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.google.common.truth.Truth.assertThat
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -58,11 +57,6 @@ class SupervisionPinManagementScreenTest {
         }
 
     private val supervisionPinManagementScreen = SupervisionPinManagementScreen()
-
-    @Before
-    fun setup() {
-        SupervisionHelper.sInstance = null
-    }
 
     @Test
     fun key() {

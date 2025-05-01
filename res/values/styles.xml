@@ -784,10 +784,16 @@
     </style>
 
     <style name="AccessibilityTextReadingPreviewTitle"
-        parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title" >
+        parent="@style/TextAppearance.SettingsLib.BodySmall" >
+        <item name="android:textColor">@color/settingslib_materialColorOnPrimaryContainer</item>
         <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:padding">6dp</item>
-        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="AccessibilityTextReadingPreviewPageTitle"
+        parent="@style/TextAppearance.SettingsLib.TitleMedium" >
+        <item name="android:textColor">@color/settingslib_materialColorOnPrimaryContainer</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:paddingBottom">@dimen/settingslib_expressive_space_extrasmall4</item>
     </style>
 
     <style name="AutoclickDialogRadioButton">

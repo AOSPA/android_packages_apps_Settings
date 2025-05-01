@@ -80,16 +80,15 @@
     <!-- Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radioInfo_unknown">Unknown</string>
 
-    <!-- Content description for preview pager. [CHAR LIMIT=NONE] -->
-    <string name="preview_pager_content_description">Preview</string>
-    <!-- Content description for home screen preview. [CHAR LIMIT=NONE] -->
-    <string name="preview_pager_home_content_description">Home screen preview</string>
-    <!-- Content description for message preview. [CHAR LIMIT=NONE] -->
-    <string name="preview_pager_message_content_description">Message preview</string>
-    <!-- Content description for email preview. [CHAR LIMIT=NONE] -->
-    <string name="preview_pager_email_content_description">Email preview</string>
     <!-- Content description for qrcode image. [CHAR LIMIT=none]-->
     <string name="qr_code_content_description">QR code</string>
+
+    <!-- Title for the accessibility Display size and text preview page showing the home screen (app grid) preview. [CHAR LIMIT=40] -->
+    <string name="preview_pager_home_title">Home screen</string>
+    <!-- Title for the accessibility Display size and text preview page showing the text message preview. [CHAR LIMIT=40] -->
+    <string name="preview_pager_message_title">Message</string>
+    <!-- Title for the accessibility Display size and text preview page showing the email preview. [CHAR LIMIT=40] -->
+    <string name="preview_pager_email_title">Email</string>
     <!-- Previous button for preview pager. [CHAR LIMIT=NONE] -->
     <string name="preview_pager_previous_button">Previous preview</string>
     <!-- Next button for preview pager. [CHAR LIMIT=NONE] -->
@@ -2158,6 +2157,10 @@
     <!-- Title of item to let user know the bluetooth key is missing [CHAR LIMIT=NONE]-->
     <string name="device_details_key_missing_title">Try restarting <xliff:g id="device_name">%1$s</xliff:g>. If that doesn’t work, forget the device. For your security, only pair it again when you aren’t in a public space.\n\nIf this device isn’t nearby, you don’t need to do anything.</string>
 
+    <!-- Title for a toggle that enables additional logs for printing [CHAR LIMIT=NONE]-->
+    <string name="verbose_printer_logging_title">Verbose print logging</string>
+    <!-- Summary for a toggle that enables additional logs for printing [CHAR LIMIT=NONE]-->
+    <string name="verbose_printer_logging_summary">Additional debug logs, including Internet Printing Protocol (IPP) that may contain private information.</string>
 
     <!--  Bluetooth device details. In the confirmation dialog for unpairing a paired device, this is the label on the button that will complete the unpairing action. -->
     <string name="bluetooth_unpair_dialog_forget_confirm_button">Forget device</string>
@@ -3418,6 +3421,10 @@
     <string name="title_font_size">Font size</string>
     <!-- Summary for Font size. Lets the user know that this will make text larger or smaller. Appears in the accessibility portion of setup wizard. [CHAR LIMIT=NONE] -->
     <string name="short_summary_font_size">Make text bigger or smaller</string>
+    <!-- [CHAR LIMIT=NONE] Title for the group of settings that change the system display size and font size. -->
+    <string name="category_title_display_text_size">Size options</string>
+    <!-- [CHAR LIMIT=NONE] Title for the group of font settings that apply different font styles. -->
+    <string name="category_title_text_style">Style options</string>
 
     <!-- SIM lock settings title  [CHAR LIMIT=40] -->
     <string name="sim_lock_settings">SIM lock settings</string>
@@ -9228,15 +9235,14 @@ Data usage charges may apply.</string>
     <string name="notification_badging_title">Notification dot on app icon</string>
 
     <!-- App Info > Notifications: Title for section where notifications bundles can be configured [CHAR LIMIT=80]-->
-    <string name="notification_bundles">Notification bundles</string>
+    <string name="notification_bundles">Notification organizer</string>
 
     <!-- App Info > Notifications: Title for section where notifications summaries can be configured [CHAR LIMIT=80]-->
     <string name="notification_summarization_title">Notification summaries</string>
-    <string name="notification_summarization_on">On</string>
-    <string name="notification_summarization_off">Off</string>
+    <string name="notification_summarization_summary">Get quick recaps of longer messages</string>
     <string name="notification_summarization_main_control_title">Use notification summaries</string>
-    <string name="notification_summarization_description">Automatically summarize conversation notifications from apps</string>
-    <string name="notification_summarization_excluded_description">Conversation notifications from these apps will not be summarized</string>
+    <string name="notification_summarization_description">Summarize long messages and group conversations to get quick recaps. Summaries are AI-powered and may contain errors.</string>
+    <string name="notification_summarization_excluded_description">Notifications from these apps will not be summarized</string>
     <string name="notification_summarization_manage_excluded_apps">Manage apps</string>
     <string name="notification_summarization_manage_excluded_apps_title">Allow notification summaries for apps</string>
     <string name="notification_excluded_apps">App exceptions</string>
@@ -9659,15 +9665,14 @@ Data usage charges may apply.</string>
     <string name="notification_polite_work_summary">Apply to work profile apps</string>
 
     <!-- Title for Bundled Notifications setting  [CHAR LIMIT=45]-->
-    <string name="notification_bundle_title">Bundled notifications</string>
-    <string name="notification_bundle_on">On</string>
-    <string name="notification_bundle_off">Off</string>
-    <string name="notification_bundle_main_control_title">Use notification bundling</string>
-    <string name="notification_bundle_description">Notifications with similar themes will be silenced and grouped together for a quieter experience. Bundling will override an app\'s own notification settings.</string>
+    <string name="notification_bundle_title">Notification organizer</string>
+    <string name="notification_bundle_summary">Bundle and silence lower priority notifications</string>
+    <string name="notification_bundle_main_control_title">Use Notification organizer</string>
+    <string name="notification_bundle_description">Choose notification types you want to silence and bundle together to minimize interruptions. Bundling is AI-powered and may contain errors.</string>
 
     <string name="notification_app_level_bundle_title">Bundle notifications</string>
     <string name="notification_app_level_bundle_subtext">Notifications with similar themes will be silenced and grouped together for a quieter experience</string>
-    <string name="notification_bundle_excluded_description">Notifications from these apps will not be bundled</string>
+    <string name="notification_bundle_excluded_description">Notifications from these apps won\’t be bundled</string>
     <string name="notification_bundle_manage_excluded_apps_title">Allow notification bundling for apps</string>
 
     <!-- Title for managing VR (virtual reality) helper services. [CHAR LIMIT=50] -->
@@ -11790,6 +11795,30 @@ Data usage charges may apply.</string>
     <string name="swipe_up_to_switch_apps_title">2-button navigation</string>
     <!-- Summary text for swipe up to switch apps  [CHAR LIMIT=250] -->
     <string name="swipe_up_to_switch_apps_summary">To switch apps, swipe up on the Home button. To see all apps, swipe up again. To go back, tap the back button.</string>
+
+    <!-- Title text for system panels showing notifications and quick settings [CHAR LIMIT=60] -->
+    <string name="shade_panels_title">Notifications &amp; Quick Settings</string>
+
+    <!-- Search keywords for system panels settings. [CHAR_LIMIT=NONE]-->
+    <string name="keywords_shade_panels">shade, panels, notifications, quick settings, qs, separate, combined, dual, single</string>
+
+    <!-- Category for system panels showing notifications and Quick Settings. [CHAR LIMIT=NONE]-->
+    <string name="shade_panels_category">Panels</string>
+
+    <!-- Title text for the separate panels mode. In this mode, notifications and Quick Settings are shown in separate panels, each opened by swiping down on a different side of the top edge of the screen. [CHAR_LIMIT=60] -->
+    <string name="shade_panels_separate_title">Separate</string>
+
+    <!-- Summary text for the separate panels mode. In this mode, notifications and Quick Settings are shown in separate panels, each opened by swiping down on a different side of the top edge of the screen. [CHAR_LIMIT=250] -->
+    <string name="shade_panels_separate_summary">Swipe down from the top right to open Quick Settings. Swipe down from the top left to open notifications.</string>
+
+    <!-- Title text for the combined panels mode. In this mode, notifications and Quick Settings are shown a single panel, opened by swiping down from the top edge of the screen. In the past this used to be the only mode, so it is also referred to as "classic" mode. [CHAR_LIMIT=60] -->
+    <string name="shade_panels_combined_title">Combined (classic)</string>
+
+    <!-- Summary text for the combined panels mode. In this mode, notifications and Quick Settings are shown a single panel, opened by swiping down from the top edge of the screen. In the past this used to be the only mode, so it is also referred to as "classic" mode. [CHAR_LIMIT=NONE] -->
+    <string name="shade_panels_combined_summary">Swipe down from the top of your screen to access the classic panel that combines notifications and Quick Settings.</string>
+
+    <!-- Informational message shown to users of foldable devices, explaining that the combined shade view is only available on the outer (narrow) screen of their device. [CHAR LIMIT=200]-->
+    <string name="shade_panels_foldables_footer_message">Combined (classic) view is limited to the outer screen of your foldable device</string>
 
     <!-- Preference title for "Safety & emergency" settings page [CHAR LIMIT=60]-->
     <string name="emergency_settings_preference_title">Safety &amp; emergency</string>

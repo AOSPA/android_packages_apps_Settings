@@ -108,7 +108,14 @@ class DeviceStateAppFunctionService : AppFunctionService() {
         val perScreenDeviceStatesList: MutableList<PerScreenDeviceStates> = ArrayList()
         coroutineScope {
             val deferredList = screenKeyList.map { screenKey ->
-                async { buildPerScreenDeviceStates(screenKey, requestCategory) }
+                async {
+                    try {
+                        buildPerScreenDeviceStates(screenKey, requestCategory)
+                    } catch (e: Exception) {
+                        Log.e(TAG, "error building $screenKey", e)
+                        null
+                    }
+                }
             }
             deferredList.awaitAll().forEach {
                 if (it != null) {

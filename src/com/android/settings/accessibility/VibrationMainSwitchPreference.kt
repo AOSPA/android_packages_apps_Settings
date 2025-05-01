@@ -39,8 +39,7 @@ import com.android.settingslib.widget.MainSwitchPreferenceBinding
 class VibrationMainSwitchPreference :
     BooleanValuePreference,
     MainSwitchPreferenceBinding,
-    PreferenceActionMetricsProvider,
-    Preference.OnPreferenceChangeListener {
+    PreferenceActionMetricsProvider {
 
     override val key
         get() = KEY
@@ -71,19 +70,6 @@ class VibrationMainSwitchPreference :
     override val sensitivityLevel: Int
         get() = SensitivityLevel.NO_SENSITIVITY
 
-    override fun bind(preference: Preference, metadata: PreferenceMetadata) {
-        super.bind(preference, metadata)
-        preference.onPreferenceChangeListener = this
-    }
-
-    override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {
-        if (newValue as Boolean) {
-            // Play a haptic as preview for the main toggle only when touch feedback is enabled.
-            preference.context.playVibrationSettingsPreview(VibrationAttributes.USAGE_TOUCH)
-        }
-        return true
-    }
-
     companion object {
         const val KEY = Settings.System.VIBRATE_ON
     }
@@ -91,12 +77,19 @@ class VibrationMainSwitchPreference :
 
 /** Provides SettingsStore for vibration main switch with custom default value. */
 class VibrationMainSwitchStore(
-    context: Context,
+    private val context: Context,
     override val keyValueStoreDelegate: KeyValueStore = SettingsSystemStore.get(context),
 ) : KeyValueStoreDelegate {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : Any> getDefaultValue(key: String, valueType: Class<T>) = DEFAULT_VALUE as T
+
+    override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
+        keyValueStoreDelegate.setValue(key, valueType, value)
+        if (value == true) {
+            context.playVibrationSettingsPreview(VibrationAttributes.USAGE_TOUCH)
+        }
+    }
 
     companion object {
         private const val DEFAULT_VALUE = true

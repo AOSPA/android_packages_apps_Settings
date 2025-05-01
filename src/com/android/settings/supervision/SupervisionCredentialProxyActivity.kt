@@ -18,7 +18,6 @@ package com.android.settings.supervision
 import android.Manifest.permission.INTERACT_ACROSS_USERS_FULL
 import android.Manifest.permission.MANAGE_USERS
 import android.annotation.RequiresPermission
-import android.app.Activity
 import android.app.ActivityManager
 import android.app.ComponentCaller
 import android.content.Intent
@@ -28,7 +27,7 @@ import androidx.annotation.OpenForTesting
 import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.FragmentActivity
 import com.android.settings.password.ChooseLockGeneric
-import com.android.settingslib.supervision.SupervisionLog
+import com.android.settingslib.supervision.SupervisionLog.TAG
 
 /**
  * An Activity that acts as a proxy to set the supervising user's credentials.
@@ -47,7 +46,7 @@ open class SupervisionCredentialProxyActivity : FragmentActivity() {
     @VisibleForTesting
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val supervisingUser = SupervisionHelper.getInstance(this).getSupervisingUserHandle()
+        val supervisingUser = supervisingUserHandle
         if (supervisingUser == null) {
             errorHandler("SupervisingUserHandle is null")
             return
@@ -77,7 +76,7 @@ open class SupervisionCredentialProxyActivity : FragmentActivity() {
             errorHandler("Unexpected request code: $requestCode")
             return
         }
-        val supervisingUser = SupervisionHelper.getInstance(this).getSupervisingUserHandle()
+        val supervisingUser = supervisingUserHandle
         if (supervisingUser == null) {
             errorHandler("Cannot stop supervising profile because it does not exist.")
             return
@@ -92,8 +91,8 @@ open class SupervisionCredentialProxyActivity : FragmentActivity() {
     }
 
     private fun errorHandler(errStr: String) {
-        Log.w(SupervisionLog.TAG, errStr)
-        setResult(Activity.RESULT_CANCELED)
+        Log.w(TAG, errStr)
+        setResult(RESULT_CANCELED)
         finish()
     }
 

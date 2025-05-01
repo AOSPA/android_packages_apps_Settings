@@ -34,6 +34,8 @@ import android.app.KeyguardManager;
 import android.content.Context;
 import android.hardware.usb.UsbManager;
 import android.net.TetheringManager;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
@@ -44,6 +46,8 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.flags.Flags;
+import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
@@ -67,6 +71,8 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         com.android.settings.testutils.shadow.ShadowFragment.class,
+        ShadowUserManager.class,
+        ShadowDevicePolicyManager.class,
 })
 public class UsbDetailsFunctionsControllerTest {
 
@@ -193,6 +199,34 @@ public class UsbDetailsFunctionsControllerTest {
     }
 
     @Test
+    public void displayRefresh_fileTransferRestricted_shouldDisablePref() {
+        when(mUsbBackend.areFunctionsSupported(anyLong())).thenReturn(true);
+        setUserRestriction(UserManager.DISALLOW_USB_FILE_TRANSFER);
+
+        mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_MTP, POWER_ROLE_SINK,
+                DATA_ROLE_DEVICE);
+        List<SelectorWithWidgetPreference> prefs = getRadioPreferences();
+
+        assertThat(prefs.get(0).getKey())
+                .isEqualTo(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_MTP));
+        assertThat(prefs.get(0).isEnabled()).isFalse();
+    }
+
+    @Test
+    public void displayRefresh_tetheringRestricted_shouldDisablePref() {
+        when(mUsbBackend.areFunctionsSupported(anyLong())).thenReturn(true);
+        setUserRestriction(UserManager.DISALLOW_CONFIG_TETHERING);
+
+        mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_NCM, POWER_ROLE_SINK,
+                DATA_ROLE_DEVICE);
+        List<SelectorWithWidgetPreference> prefs = getRadioPreferences();
+
+        assertThat(prefs.get(1).getKey())
+                .isEqualTo(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_RNDIS));
+        assertThat(prefs.get(1).isEnabled()).isFalse();
+    }
+
+    @Test
     public void onClickMtp_noneEnabled_shouldEnableMtp() {
         when(mUsbBackend.areFunctionsSupported(anyLong())).thenReturn(true);
 
@@ -263,6 +297,18 @@ public class UsbDetailsFunctionsControllerTest {
             result.add((SelectorWithWidgetPreference) mPreferenceCategory.getPreference(i));
         }
         return result;
+    }
+
+    private void setUserRestriction(String userRestriction) {
+        // For RestrictedLockUtils.checkIfRestrictionEnforced
+        final int userId = UserHandle.myUserId();
+        List<UserManager.EnforcingUser> enforcingUsers = new ArrayList<>();
+        enforcingUsers.add(
+                new UserManager.EnforcingUser(userId, UserManager.RESTRICTION_SOURCE_DEVICE_OWNER));
+        ShadowUserManager.getShadow().setUserRestrictionSources(
+                userRestriction,
+                UserHandle.of(userId),
+                enforcingUsers);
     }
 
     @Test

@@ -16,6 +16,9 @@
 
 package com.android.settings.applications.appcompat;
 
+import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_16_9;
+import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_3_2;
+import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_4_3;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_FULLSCREEN;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_SPLIT_SCREEN;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_UNSET;
@@ -108,6 +111,10 @@ public class UserAspectRatioBackupManagerTest {
         mBackupManager = new UserAspectRatioBackupManager(mContext, mMockIPackageManager,
                 mMockPackageManager, mLogger, broadcastHandlerThread.getThreadHandler(),
                 new FakeInstantSource());
+        mBackupManager.populateAvailableUserAspectRatioSettingOptions(new int[] {
+                USER_MIN_ASPECT_RATIO_FULLSCREEN,
+                USER_MIN_ASPECT_RATIO_SPLIT_SCREEN,
+                USER_MIN_ASPECT_RATIO_4_3});
     }
 
     @Test
@@ -228,6 +235,76 @@ public class UserAspectRatioBackupManagerTest {
         // User aspect ratio is restored.
         verify(mMockIPackageManager).setUserMinAspectRatio(DEFAULT_PACKAGE_NAME,
                 DEFAULT_USER_ID, USER_MIN_ASPECT_RATIO_FULLSCREEN);
+    }
+
+    @Test
+    public void testRestoredNotAvailable_3_2_to_4_3() throws Exception {
+        final byte[] out = writeTestPayload(Map.of(DEFAULT_PACKAGE_NAME,
+                USER_MIN_ASPECT_RATIO_3_2));
+        setUpInstalledPackages(List.of(DEFAULT_PACKAGE_NAME));
+        mBackupManager.populateAvailableUserAspectRatioSettingOptions(new int[] {
+                USER_MIN_ASPECT_RATIO_4_3,
+                USER_MIN_ASPECT_RATIO_16_9,
+                USER_MIN_ASPECT_RATIO_FULLSCREEN
+        });
+        mBackupManager.stageAndApplyRestoredPayload(out);
+
+        // User aspect ratio 4/3 is restored, as that is the first bigger one (1.5 -> 1.33).
+        verify(mMockIPackageManager).setUserMinAspectRatio(DEFAULT_PACKAGE_NAME,
+                DEFAULT_USER_ID, USER_MIN_ASPECT_RATIO_4_3);
+    }
+
+    @Test
+    public void testRestoredNotAvailable_16_9_to_3_2() throws Exception {
+        final byte[] out = writeTestPayload(Map.of(DEFAULT_PACKAGE_NAME,
+                USER_MIN_ASPECT_RATIO_16_9));
+        setUpInstalledPackages(List.of(DEFAULT_PACKAGE_NAME));
+        mBackupManager.populateAvailableUserAspectRatioSettingOptions(new int[] {
+                USER_MIN_ASPECT_RATIO_3_2,
+                USER_MIN_ASPECT_RATIO_4_3,
+                USER_MIN_ASPECT_RATIO_FULLSCREEN
+        });
+        mBackupManager.stageAndApplyRestoredPayload(out);
+
+        // User aspect ratio 3/2 is restored, as that is the first bigger one (1.78 -> 1.5).
+        verify(mMockIPackageManager).setUserMinAspectRatio(DEFAULT_PACKAGE_NAME,
+                DEFAULT_USER_ID, USER_MIN_ASPECT_RATIO_3_2);
+    }
+
+    @Test
+    public void testRestoredNotAvailable_4_3_to_fullscreen() throws Exception {
+        final byte[] out = writeTestPayload(Map.of(DEFAULT_PACKAGE_NAME,
+                USER_MIN_ASPECT_RATIO_4_3));
+        setUpInstalledPackages(List.of(DEFAULT_PACKAGE_NAME));
+        mBackupManager.populateAvailableUserAspectRatioSettingOptions(new int[] {
+                USER_MIN_ASPECT_RATIO_3_2,
+                USER_MIN_ASPECT_RATIO_16_9,
+                USER_MIN_ASPECT_RATIO_FULLSCREEN
+        });
+        mBackupManager.stageAndApplyRestoredPayload(out);
+
+        // Fullscreen is restored, as that is the first bigger one (1.33 -> 1.0).
+        verify(mMockIPackageManager).setUserMinAspectRatio(DEFAULT_PACKAGE_NAME,
+                DEFAULT_USER_ID, USER_MIN_ASPECT_RATIO_FULLSCREEN);
+    }
+
+    @Test
+    public void testRestored_splitScreenToSplitScreenWhenDimensionsAreTheSame() throws Exception {
+        final byte[] out = writeTestPayload(Map.of(DEFAULT_PACKAGE_NAME,
+                USER_MIN_ASPECT_RATIO_SPLIT_SCREEN));
+        setUpInstalledPackages(List.of(DEFAULT_PACKAGE_NAME));
+        mBackupManager.populateAvailableUserAspectRatioSettingOptions(new int[] {
+                USER_MIN_ASPECT_RATIO_3_2,
+                USER_MIN_ASPECT_RATIO_4_3,
+                USER_MIN_ASPECT_RATIO_16_9,
+                USER_MIN_ASPECT_RATIO_SPLIT_SCREEN,
+                USER_MIN_ASPECT_RATIO_FULLSCREEN
+        });
+        mBackupManager.stageAndApplyRestoredPayload(out);
+
+        // Half screen maps to itself when the device dimensions are the same.
+        verify(mMockIPackageManager).setUserMinAspectRatio(DEFAULT_PACKAGE_NAME,
+                DEFAULT_USER_ID, USER_MIN_ASPECT_RATIO_SPLIT_SCREEN);
     }
 
     /**

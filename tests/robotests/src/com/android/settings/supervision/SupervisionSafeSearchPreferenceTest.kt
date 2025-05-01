@@ -153,7 +153,7 @@ class SupervisionSafeSearchPreferenceTest {
 
     @Test
     fun clickFilterOn_enablesFilter() {
-        Settings.Secure.putInt(context.getContentResolver(), SEARCH_CONTENT_FILTERS_ENABLED, 0)
+        Settings.Secure.putInt(context.getContentResolver(), SEARCH_CONTENT_FILTERS_ENABLED, -1)
         val filterOnWidget = getFilterOnWidget()
         assertThat(filterOnWidget.isChecked).isFalse()
 

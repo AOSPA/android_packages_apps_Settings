@@ -15,7 +15,6 @@
  */
 package com.android.settings.supervision
 
-import android.app.role.RoleManager
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.pm.PackageManager
@@ -32,7 +31,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
@@ -48,18 +46,8 @@ class SupervisionPromoFooterPreferenceTest {
     private val mockPackageManager: PackageManager = mock()
     private val context: Context =
         object : ContextWrapper(ApplicationProvider.getApplicationContext()) {
-            override fun getSystemService(name: String): Any? =
-                when (name) {
-                    ROLE_SERVICE -> mockRoleManager
-                    else -> super.getSystemService(name)
-                }
-
-            override fun getPackageManager(): PackageManager {
-                return mockPackageManager
-            }
+            override fun getPackageManager() = mockPackageManager
         }
-    private val mockRoleManager =
-        mock<RoleManager> { on { getRoleHolders(any()) } doReturn listOf("test.package") }
     private val preference = CardPreference(context)
 
     private var preferenceData: PreferenceData? = null
@@ -80,11 +68,6 @@ class SupervisionPromoFooterPreferenceTest {
                     else -> mapOf(KEY to preferenceData)
                 }
             }
-    }
-
-    @Before
-    fun setUp() {
-        SupervisionHelper.sInstance = null
     }
 
     @Test
@@ -123,15 +106,13 @@ class SupervisionPromoFooterPreferenceTest {
     fun onResume_loadingIconSetFromSupervisionPackage() =
         testScope.runTest {
             preferenceData = PreferenceData(icon = 123)
-            SupervisionHelper.sInstance = SupervisionHelper.getInstance(context)
+            preferenceDataProvider.stub { on { packageName } doReturn "test.package" }
             val promoPreference =
                 SupervisionPromoFooterPreference(preferenceDataProvider, testDispatcher)
 
             promoPreference.onResume(preferenceLifecycleContext)
             verify(preferenceLifecycleContext).notifyPreferenceChange(KEY)
             promoPreference.bind(preference, mock())
-
-            verify(mockRoleManager).getRoleHolders(RoleManager.ROLE_SYSTEM_SUPERVISION)
         }
 
     @Test

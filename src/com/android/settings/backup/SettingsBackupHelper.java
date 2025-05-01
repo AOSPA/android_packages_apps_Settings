@@ -21,6 +21,7 @@ import android.app.backup.BackupAgentHelper;
 import android.util.Log;
 
 import com.android.settings.applications.appcompat.UserAspectRatioBackupHelper;
+import com.android.settings.applications.appcompat.UserAspectRatioManager;
 import com.android.settings.flags.Flags;
 import com.android.settings.onboarding.OnboardingFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
@@ -58,13 +59,16 @@ public class SettingsBackupHelper extends BackupAgentHelper {
             }
         }
 
-        // Since the aconfig flag below is read-only, this class would not compile, and tests would
-        // fail to find the class, even if they are testing only code beyond the flag-guarded code.
-        final UserAspectRatioBackupHelper userAspectRatioBackupHelper =
-                new UserAspectRatioBackupHelper(this, AppGlobals.getPackageManager(),
-                        getBackupRestoreEventLogger());
-        if (com.android.window.flags.Flags.backupAndRestoreForUserAspectRatioSettings()) {
-            addHelper(USER_ASPECT_RATIO_BACKUP_HELPER, userAspectRatioBackupHelper);
+        if (UserAspectRatioManager.isFeatureEnabled(getApplicationContext())) {
+            // Since the aconfig flag below is read-only, this class would not compile, and tests
+            // would fail to find the class, even if they are testing only code beyond the
+            // flag-guarded code.
+            final UserAspectRatioBackupHelper userAspectRatioBackupHelper =
+                    new UserAspectRatioBackupHelper(this, AppGlobals.getPackageManager(),
+                            getBackupRestoreEventLogger());
+            if (com.android.window.flags.Flags.backupAndRestoreForUserAspectRatioSettings()) {
+                addHelper(USER_ASPECT_RATIO_BACKUP_HELPER, userAspectRatioBackupHelper);
+            }
         }
     }
 

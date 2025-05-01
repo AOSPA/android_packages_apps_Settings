@@ -21,7 +21,6 @@ import android.os.Vibrator
 import androidx.annotation.CallSuper
 import androidx.annotation.StringRes
 import androidx.preference.Preference
-import androidx.preference.Preference.OnPreferenceChangeListener
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.IntRangeValuePreference
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -47,7 +46,7 @@ open class VibrationIntensitySliderPreference(
     @Usage val vibrationUsage: Int,
     @StringRes override val title: Int = 0,
     @StringRes override val summary: Int = 0,
-) : IntRangeValuePreference, SliderPreferenceBinding, OnPreferenceChangeListener {
+) : IntRangeValuePreference, SliderPreferenceBinding {
 
     private var storage: VibrationIntensitySettingsStore? = null
 
@@ -71,19 +70,11 @@ open class VibrationIntensitySliderPreference(
     @CallSuper
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
-        preference.onPreferenceChangeListener = this
         (preference as SliderPreference).apply {
             // Haptics previews played by the Settings app don't bypass user settings to be played.
             // The sliders continuously updates the intensity value so the previews can apply them.
             updatesContinuously = true
         }
-    }
-
-    override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {
-        if (newValue as Int != Vibrator.VIBRATION_INTENSITY_OFF) {
-            preference.context.playVibrationSettingsPreview(vibrationUsage)
-        }
-        return true
     }
 
     @CallSuper

@@ -51,7 +51,6 @@ class SupervisionCredentialProxyActivityTest {
 
     @Before
     fun setUp() {
-        SupervisionHelper.sInstance = null
         mActivity =
             spy(Robolectric.buildActivity(SupervisionCredentialProxyActivity::class.java).get()) {
                 on { getSystemService(UserManager::class.java) } doReturn mockUserManager
