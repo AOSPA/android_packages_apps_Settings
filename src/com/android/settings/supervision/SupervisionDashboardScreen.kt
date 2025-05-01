@@ -57,12 +57,13 @@ class SupervisionDashboardScreen : PreferenceScreenCreator {
 
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(context, this) {
-            +SupervisionMainSwitchPreference(context, SupervisionMessengerClient(context))
-            +TitlelessPreferenceGroup(SUPERVISION_DYNAMIC_GROUP_1) += {
-                +SupervisionWebContentFiltersScreen.KEY
+            +SupervisionMainSwitchPreference(context, SupervisionMessengerClient(context)) order
+                -200
+            +TitlelessPreferenceGroup(SUPERVISION_DYNAMIC_GROUP_1) order -100 += {
+                +SupervisionWebContentFiltersScreen.KEY order 100
             }
-            +SupervisionPinManagementScreen.KEY
-            +SupervisionPromoFooterPreference(SupervisionMessengerClient(context))
+            +SupervisionPinManagementScreen.KEY order 100
+            +SupervisionPromoFooterPreference(SupervisionMessengerClient(context)) order 300
         }
 
     companion object {

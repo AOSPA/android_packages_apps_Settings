@@ -30,7 +30,6 @@ import com.android.settings.applications.AppStateOverlayBridge
 import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.flags.Flags
-import com.android.settings.utils.highlightPreference
 import com.android.settingslib.applications.ApplicationsState
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
@@ -105,7 +104,7 @@ class AppInfoDisplayOverOtherAppsScreen(context: Context, override val arguments
             }
         }
 
-        private fun ApplicationInfo.hasOverlayPermission(context: Context): Boolean =
+        fun ApplicationInfo.hasOverlayPermission(context: Context): Boolean =
             try {
                 val packageInfo: PackageInfo =
                     context.packageManager.getPackageInfo(

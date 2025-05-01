@@ -30,7 +30,6 @@ import com.android.settings.applications.AppStateManageExternalStorageBridge
 import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.flags.Flags
-import com.android.settings.utils.highlightPreference
 import com.android.settingslib.applications.ApplicationsState
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
@@ -104,7 +103,7 @@ class AppInfoAllFilesAccessScreen(context: Context, override val arguments: Bund
             }
         }
 
-        private fun ApplicationInfo.hasExternalStoragePermission(context: Context): Boolean =
+        fun ApplicationInfo.hasExternalStoragePermission(context: Context): Boolean =
             try {
                 val packageInfo: PackageInfo =
                     context.packageManager.getPackageInfo(

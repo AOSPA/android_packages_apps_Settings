@@ -47,8 +47,14 @@ import com.android.settings.notification.modes.devicestate.ZenModeDndDisplayScre
 import com.android.settings.notification.modes.devicestate.ZenModeDndScreen
 import com.android.settings.security.LockScreenPreferenceScreen
 import com.android.settings.spa.app.catalyst.AllAppsScreen
+import com.android.settings.spa.app.catalyst.AppInfoAllFilesAccessScreen
+import com.android.settings.spa.app.catalyst.AppInfoDisplayOverOtherAppsScreen
+import com.android.settings.spa.app.catalyst.AppInfoFullScreenIntentScreen
 import com.android.settings.spa.app.catalyst.AppInfoStorageScreen
 import com.android.settings.spa.app.catalyst.AppStorageAppListScreen
+import com.android.settings.spa.app.catalyst.AppsAllFilesAccessAppListScreen
+import com.android.settings.spa.app.catalyst.AppsDisplayOverOtherAppsAppListScreen
+import com.android.settings.spa.app.catalyst.AppsFullScreenIntentAppListScreen
 import com.android.settings.supervision.SupervisionDashboardScreen
 import com.android.settings.supervision.SupervisionPinManagementScreen
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -127,6 +133,21 @@ fun getScreenConfigs() =
         PerScreenConfig(
             enabled = true,
             screenKey = LocationScreen.KEY,
+            category = setOf(DeviceStateCategory.PERMISSION),
+        ),
+        PerScreenConfig(
+            enabled = true,
+            screenKey = AppsAllFilesAccessAppListScreen.KEY,
+            category = setOf(DeviceStateCategory.PERMISSION),
+        ),
+        PerScreenConfig(
+            enabled = true,
+            screenKey = AppsDisplayOverOtherAppsAppListScreen.KEY,
+            category = setOf(DeviceStateCategory.PERMISSION),
+        ),
+        PerScreenConfig(
+            enabled = true,
+            screenKey = AppsFullScreenIntentAppListScreen.KEY,
             category = setOf(DeviceStateCategory.PERMISSION),
         ),
         PerScreenConfig(
@@ -514,11 +535,32 @@ fun getDeviceStateItemList() =
         ),
         DeviceStateItemConfig(
             enabled = true,
+            settingKey = ZenModeButtonPreference.KEY,
+            settingScreenKey = ZenModeBedtimeScreen.KEY,
+        ),
+        DeviceStateItemConfig(
+            enabled = true,
             settingKey = AppInfoStorageScreen.KEY,
             settingScreenKey = AppStorageAppListScreen.KEY,
             hintText = { context, metadata ->
                 metadata.extras(context)?.getString(AppInfoStorageScreen.KEY_EXTRA_PACKAGE_NAME)
             },
+        ),
+        // AppList summaries for each permission types
+        DeviceStateItemConfig(
+            enabled = true,
+            settingKey = AppInfoAllFilesAccessScreen.KEY,
+            settingScreenKey = AppsAllFilesAccessAppListScreen.KEY,
+        ),
+        DeviceStateItemConfig(
+            enabled = true,
+            settingKey = AppInfoDisplayOverOtherAppsScreen.KEY,
+            settingScreenKey = AppsDisplayOverOtherAppsAppListScreen.KEY,
+        ),
+        DeviceStateItemConfig(
+            enabled = true,
+            settingKey = AppInfoFullScreenIntentScreen.KEY,
+            settingScreenKey = AppsFullScreenIntentAppListScreen.KEY,
         ),
         DeviceStateItemConfig(
             enabled = true,

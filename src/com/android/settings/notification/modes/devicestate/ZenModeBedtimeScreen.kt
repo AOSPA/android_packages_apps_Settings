@@ -67,7 +67,9 @@ class ZenModeBedtimeScreen :
                 .putExtra(EXTRA_AUTOMATIC_ZEN_RULE_ID, context.getBedtimeMode()?.id)
         else null
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {}
+    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {
+        +ZenModeButtonPreference(context.getBedtimeMode()!!)
+    }
 
     companion object {
         const val KEY = "device_state_bedtime_mode_screen" // only for device state.

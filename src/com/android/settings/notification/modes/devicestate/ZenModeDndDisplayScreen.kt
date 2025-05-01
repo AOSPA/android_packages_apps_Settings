@@ -16,7 +16,6 @@
 
 package com.android.settings.notification.modes.devicestate
 
-import android.annotation.FlaggedApi
 import android.app.Flags as AppFlags
 import android.content.Context
 import android.content.Intent
@@ -66,7 +65,6 @@ class ZenModeDndDisplayScreen :
         return summaryHelper.getDisplayEffectsSummary(context.getDndMode()!!)
     }
 
-    @FlaggedApi(AppFlags.FLAG_MODES_UI)
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? =
         if (AppFlags.modesUi()) {
             Intent(context, ModeDisplaySettingsActivity::class.java)
