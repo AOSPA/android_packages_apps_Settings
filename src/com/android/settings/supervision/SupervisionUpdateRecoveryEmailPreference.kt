@@ -17,6 +17,7 @@ package com.android.settings.supervision
 
 import android.app.Activity
 import android.app.supervision.SupervisionManager
+import android.app.supervision.SupervisionRecoveryInfo.STATE_VERIFIED
 import android.app.supervision.flags.Flags
 import android.content.Context
 import android.content.Intent
@@ -52,7 +53,7 @@ class SupervisionUpdateRecoveryEmailPreference :
         return context
             .getSystemService(SupervisionManager::class.java)
             ?.getSupervisionRecoveryInfo()
-            ?.email
+            ?.accountName
             ?.asMaskedEmail()
     }
 
@@ -63,7 +64,7 @@ class SupervisionUpdateRecoveryEmailPreference :
         return context
             .getSystemService(SupervisionManager::class.java)
             ?.getSupervisionRecoveryInfo()
-            ?.let { !it.email.isNullOrEmpty() && !it.id.isNullOrEmpty() } ?: false
+            ?.state == STATE_VERIFIED
     }
 
     override fun onCreate(context: PreferenceLifecycleContext) {

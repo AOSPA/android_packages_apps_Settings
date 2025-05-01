@@ -18,6 +18,8 @@ package com.android.settings.supervision
 import android.app.KeyguardManager
 import android.app.supervision.SupervisionManager
 import android.app.supervision.SupervisionRecoveryInfo
+import android.app.supervision.SupervisionRecoveryInfo.STATE_PENDING
+import android.app.supervision.SupervisionRecoveryInfo.STATE_VERIFIED
 import android.app.supervision.flags.Flags
 import android.content.Context
 import android.content.ContextWrapper
@@ -108,22 +110,14 @@ class SupervisionPinManagementScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN)
-    fun getDescription_recoveryInfoEmpty_addPinRecovery() {
-        whenever(mockSupervisionManager.supervisionRecoveryInfo)
-            .thenReturn(SupervisionRecoveryInfo())
-
-        assertThat(supervisionPinManagementScreen.getSummary(context))
-            .isEqualTo(
-                context.getString(R.string.supervision_pin_management_preference_summary_add)
+    fun getDescription_recoveryNotVerified_verifyPinRecovery() {
+        val recoveryInfo =
+            SupervisionRecoveryInfo(
+                /* accountName */ "email",
+                /* accountType */ "default",
+                /* state */ STATE_PENDING,
+                /* accountData */ null,
             )
-        assertThat(supervisionPinManagementScreen.getIcon(context))
-            .isEqualTo(R.drawable.exclamation_icon)
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN)
-    fun getDescription_recoveryIdMissing_verifyPinRecovery() {
-        val recoveryInfo = SupervisionRecoveryInfo().apply { email = "email" }
         whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
 
         assertThat(supervisionPinManagementScreen.getSummary(context))
@@ -150,10 +144,12 @@ class SupervisionPinManagementScreenTest {
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN)
     fun getDescription_recoverySetup_noSummary() {
         val recoveryInfo =
-            SupervisionRecoveryInfo().apply {
-                email = "email"
-                id = "id"
-            }
+            SupervisionRecoveryInfo(
+                /* accountName */ "email",
+                /* accountType */ "default",
+                /* state */ STATE_VERIFIED,
+                /* accountData */ null,
+            )
         whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
 
         assertThat(supervisionPinManagementScreen.getSummary(context)).isNull()

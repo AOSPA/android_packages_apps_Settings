@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,6 +17,8 @@ package com.android.settings.supervision
 
 import android.app.supervision.SupervisionManager
 import android.app.supervision.SupervisionRecoveryInfo
+import android.app.supervision.SupervisionRecoveryInfo.STATE_PENDING
+import android.app.supervision.SupervisionRecoveryInfo.STATE_VERIFIED
 import android.app.supervision.flags.Flags
 import android.content.Context
 import android.content.ContextWrapper
@@ -73,17 +75,29 @@ class SupervisionPinRecoveryPreferenceTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN)
-    fun flagEnabled_recoveryInfoEmpty_notAvailable() {
-        whenever(mockSupervisionManager.supervisionRecoveryInfo)
-            .thenReturn(SupervisionRecoveryInfo())
+    fun flagEnabled_recoveryInfoExist_isAvailable() {
+        val recoveryInfo =
+            SupervisionRecoveryInfo(
+                /* accountName */ "email",
+                /* accountType */ "default",
+                /* state */ STATE_PENDING,
+                /* accountData */ null,
+            )
+        whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
 
-        assertThat(preference.isAvailable(mContext)).isFalse()
+        assertThat(preference.isAvailable(mContext)).isTrue()
     }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN)
-    fun flagEnabled_recoveryEmailExist_isAvailable() {
-        val recoveryInfo = SupervisionRecoveryInfo().apply { email = "email" }
+    fun flagEnabled_recoveryVerified_isAvailable() {
+        val recoveryInfo =
+            SupervisionRecoveryInfo(
+                /* accountName */ "email",
+                /* accountType */ "default",
+                /* state */ STATE_VERIFIED,
+                /* accountData */ null,
+            )
         whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
 
         assertThat(preference.isAvailable(mContext)).isTrue()
@@ -92,7 +106,13 @@ class SupervisionPinRecoveryPreferenceTest {
     @Test
     @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN)
     fun flagDisabled_recoveryInfoExist_notAvailable() {
-        val recoveryInfo = SupervisionRecoveryInfo().apply { email = "email" }
+        val recoveryInfo =
+            SupervisionRecoveryInfo(
+                /* accountName */ "email",
+                /* accountType */ "default",
+                /* state */ STATE_VERIFIED,
+                /* accountData */ null,
+            )
         whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
 
         assertThat(preference.isAvailable(mContext)).isFalse()

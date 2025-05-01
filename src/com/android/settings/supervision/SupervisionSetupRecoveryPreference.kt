@@ -18,6 +18,7 @@ package com.android.settings.supervision
 import android.annotation.DrawableRes
 import android.app.Activity
 import android.app.supervision.SupervisionManager
+import android.app.supervision.SupervisionRecoveryInfo.STATE_PENDING
 import android.app.supervision.flags.Flags
 import android.content.Context
 import android.content.Intent
@@ -54,7 +55,7 @@ class SupervisionSetupRecoveryPreference :
         get() = KEY
 
     override fun getTitle(context: Context): CharSequence {
-        return if (hasEmailToVerify(context)) {
+        return if (hasAccountNameToVerify(context)) {
             context.getString(R.string.supervision_verify_pin_recovery_title)
         } else {
             context.getString(R.string.supervision_add_pin_recovery_title)
@@ -62,7 +63,7 @@ class SupervisionSetupRecoveryPreference :
     }
 
     override fun getSummary(context: Context): CharSequence? {
-        return emailToVerify(context)?.asMaskedEmail()
+        return accountNameToVerify(context)?.asMaskedEmail()
     }
 
     // TODO(b/409837094): get icon with dynamic color.
@@ -76,8 +77,7 @@ class SupervisionSetupRecoveryPreference :
         return context
             .getSystemService(SupervisionManager::class.java)
             ?.getSupervisionRecoveryInfo()
-            ?.id
-            ?.isEmpty() ?: true
+            ?.let { it.state == STATE_PENDING } ?: true
     }
 
     override fun onCreate(context: PreferenceLifecycleContext) {
@@ -107,7 +107,7 @@ class SupervisionSetupRecoveryPreference :
 
     override fun onPreferenceClick(preference: Preference): Boolean {
         val intent = Intent(lifeCycleContext, SupervisionPinRecoveryActivity::class.java)
-        if (hasEmailToVerify(lifeCycleContext)) {
+        if (hasAccountNameToVerify(lifeCycleContext)) {
             intent.action = SupervisionPinRecoveryActivity.ACTION_POST_SETUP_VERIFY
         } else {
             intent.action = SupervisionPinRecoveryActivity.ACTION_SETUP_VERIFIED
@@ -116,15 +116,15 @@ class SupervisionSetupRecoveryPreference :
         return true
     }
 
-    private fun emailToVerify(context: Context): String? {
+    private fun accountNameToVerify(context: Context): String? {
         return context
             .getSystemService(SupervisionManager::class.java)
             ?.supervisionRecoveryInfo
-            ?.email
+            ?.accountName
     }
 
-    private fun hasEmailToVerify(context: Context): Boolean {
-        return !emailToVerify(context).isNullOrEmpty()
+    private fun hasAccountNameToVerify(context: Context): Boolean {
+        return !accountNameToVerify(context).isNullOrEmpty()
     }
 
     companion object {

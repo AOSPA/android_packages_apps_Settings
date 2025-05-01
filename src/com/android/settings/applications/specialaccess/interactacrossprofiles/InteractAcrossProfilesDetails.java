@@ -368,7 +368,7 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         return isInteractAcrossProfilesEnabled(mContext, mPackageName);
     }
 
-    static boolean isInteractAcrossProfilesEnabled(
+    public static boolean isInteractAcrossProfilesEnabled(
             Context context, String packageName) {
         UserManager userManager = context.getSystemService(UserManager.class);
         UserHandle workProfile = InteractAcrossProfilesSettings.getWorkProfile(userManager);

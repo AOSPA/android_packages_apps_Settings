@@ -21,6 +21,7 @@ import android.app.KeyguardManager
 import android.app.role.RoleManager
 import android.app.supervision.SupervisionManager
 import android.app.supervision.SupervisionRecoveryInfo
+import android.app.supervision.SupervisionRecoveryInfo.STATE_PENDING
 import android.content.pm.UserInfo
 import android.hardware.biometrics.BiometricManager
 import android.hardware.biometrics.PromptContentViewWithMoreOptionsButton
@@ -163,7 +164,7 @@ class ConfirmSupervisionCredentialsActivityTest {
 
     @Test
     fun getBiometricPrompt_recoveryEmailExist_showMoreOptionsButton() {
-        val recoveryInfo = SupervisionRecoveryInfo().apply { email = "email" }
+        val recoveryInfo = SupervisionRecoveryInfo("email", "default", STATE_PENDING, null)
         whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
 
         val biometricPrompt = mActivity.getBiometricPrompt()
@@ -178,8 +179,7 @@ class ConfirmSupervisionCredentialsActivityTest {
     }
 
     fun getBiometricPrompt_recoveryInfoEmpty_noMoreOptionsButton() {
-        whenever(mockSupervisionManager.supervisionRecoveryInfo)
-            .thenReturn(SupervisionRecoveryInfo())
+        whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(null)
 
         val biometricPrompt = mActivity.getBiometricPrompt()
 

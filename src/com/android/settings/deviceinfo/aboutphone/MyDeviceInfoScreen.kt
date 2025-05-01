@@ -20,7 +20,10 @@ import android.content.Context
 import android.os.Build
 import android.provider.Settings
 import com.android.settings.R
+import com.android.settings.deviceinfo.imei.ImeiPreference
 import com.android.settings.flags.Flags
+import com.android.settings.wifi.utils.activeModemCount
+import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -53,7 +56,17 @@ class MyDeviceInfoScreen :
 
     override fun fragmentClass() = MyDeviceInfoFragment::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {}
+    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {
+        +PreferenceCategory(
+            "device_detail_category",
+            R.string.my_device_info_device_details_category_title,
+        ) += {
+            val activeModemCount = context.activeModemCount
+            for (i in 0 until activeModemCount) {
+                +ImeiPreference(context, i, activeModemCount) order (i + 33)
+            }
+        }
+    }
 
     override fun hasCompleteHierarchy() = false
 

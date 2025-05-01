@@ -2949,6 +2949,24 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".Settings$SupervisionDashboardActivity"
+            android:label="@string/supervision_settings_title"
+            android:exported="true"
+            android:featureFlag="android.app.supervision.flags.enable_supervision_settings_screen">
+            <intent-filter>
+                <action android:name="android.settings.SUPERVISION_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <meta-data
+                android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.supervision.SupervisionDashboardFragment" />
+            <meta-data
+                android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_supervision" />
+        </activity>
+
         <activity android:name=".supervision.ConfirmSupervisionCredentialsActivity"
             android:exported="true"
             android:featureFlag="android.app.supervision.flags.supervision_manager_apis">

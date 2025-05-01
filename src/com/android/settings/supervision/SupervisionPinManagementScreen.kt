@@ -16,6 +16,7 @@
 package com.android.settings.supervision
 
 import android.app.supervision.SupervisionManager
+import android.app.supervision.SupervisionRecoveryInfo.STATE_PENDING
 import android.app.supervision.flags.Flags
 import android.content.Context
 import com.android.settings.R
@@ -48,11 +49,10 @@ class SupervisionPinManagementScreen :
         val recoveryInfo =
             context.getSystemService(SupervisionManager::class.java)?.supervisionRecoveryInfo
         return when {
-            recoveryInfo == null ||
-                (recoveryInfo.email.isNullOrEmpty() && recoveryInfo.id.isNullOrEmpty()) -> {
+            recoveryInfo == null -> {
                 context.getString(R.string.supervision_pin_management_preference_summary_add)
             }
-            recoveryInfo.id.isNullOrEmpty() -> {
+            recoveryInfo.state == STATE_PENDING -> {
                 context.getString(
                     R.string.supervision_pin_management_preference_summary_verify_recovery
                 )
@@ -66,11 +66,7 @@ class SupervisionPinManagementScreen :
         if (Flags.enableSupervisionPinRecoveryScreen()) {
             val recoveryInfo =
                 context.getSystemService(SupervisionManager::class.java)?.supervisionRecoveryInfo
-            if (
-                recoveryInfo == null ||
-                    recoveryInfo.email.isNullOrEmpty() ||
-                    recoveryInfo.id.isNullOrEmpty()
-            ) {
+            if (recoveryInfo == null || recoveryInfo.state == STATE_PENDING) {
                 // if recovery is not fully setup.
                 return R.drawable.exclamation_icon
             }

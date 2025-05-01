@@ -143,12 +143,10 @@ open class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
                 .setConfirmationRequired(true)
                 .setAllowedAuthenticators(BiometricManager.Authenticators.DEVICE_CREDENTIAL)
 
-        val supportSuprevisionRecovery =
-            getSystemService(SupervisionManager::class.java)?.getSupervisionRecoveryInfo()?.let {
-                !it.email.isNullOrEmpty() || !it.id.isNullOrEmpty()
-            } ?: false
+        val supportSupervisionRecovery =
+            getSystemService(SupervisionManager::class.java)?.getSupervisionRecoveryInfo() != null
 
-        if (!supportSuprevisionRecovery) {
+        if (!supportSupervisionRecovery) {
             return builder.build()
         }
 

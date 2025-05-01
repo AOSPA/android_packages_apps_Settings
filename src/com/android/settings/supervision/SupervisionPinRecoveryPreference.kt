@@ -34,10 +34,8 @@ class SupervisionPinRecoveryPreference : PreferenceMetadata, PreferenceAvailabil
         if (!Flags.enableSupervisionPinRecoveryScreen()) {
             return false
         }
-        return context
-            .getSystemService(SupervisionManager::class.java)
-            ?.getSupervisionRecoveryInfo()
-            ?.let { !it.email.isNullOrEmpty() || !it.id.isNullOrEmpty() } ?: false
+        return context.getSystemService(SupervisionManager::class.java)?.supervisionRecoveryInfo !=
+            null
     }
 
     override fun intent(context: Context): Intent? =

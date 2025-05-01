@@ -18,11 +18,26 @@
 
 package com.android.settings.wifi.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.TetheringManager
 import android.net.wifi.WifiManager
+import android.os.UserManager
+import android.telephony.TelephonyManager
+
+/**
+ * Gets the {@link android.os.UserManager} system service.
+ *
+ * Use application context to get system services to avoid memory leaks.
+ */
+val Context.userManager: UserManager?
+    get() = applicationContext.getSystemService(UserManager::class.java)
+
+/** Return true if the context user is an admin user. */
+val Context.isAdminUser
+    get() = userManager?.isAdminUser
 
 /**
  * Gets the {@link android.net.wifi.WifiManager} system service.
@@ -46,6 +61,19 @@ var Context.isWifiEnabled: Boolean
     set(value) {
         wifiManager?.isWifiEnabled = value
     }
+
+/**
+ * Gets the {@link android.telephony.TelephonyManager} system service.
+ *
+ * Use application context to get system services to avoid memory leaks.
+ */
+@get:SuppressLint("MissingPermission")
+val Context.telephonyManager: TelephonyManager?
+    get() = applicationContext.getSystemService(TelephonyManager::class.java)
+
+/** Returns the number of logical modems currently configured to be activated. */
+val Context.activeModemCount
+    get() = telephonyManager?.activeModemCount ?: 0
 
 /**
  * Gets the {@link android.net.TetheringManager} system service.

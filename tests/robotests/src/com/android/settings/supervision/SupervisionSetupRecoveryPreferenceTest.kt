@@ -17,6 +17,8 @@ package com.android.settings.supervision
 
 import android.app.supervision.SupervisionManager
 import android.app.supervision.SupervisionRecoveryInfo
+import android.app.supervision.SupervisionRecoveryInfo.STATE_PENDING
+import android.app.supervision.SupervisionRecoveryInfo.STATE_VERIFIED
 import android.app.supervision.flags.Flags
 import android.content.Context
 import android.content.ContextWrapper
@@ -87,7 +89,13 @@ class SupervisionSetupRecoveryPreferenceTest {
 
     @Test
     fun getTitle_verifyRecovery() {
-        val recoveryInfo = SupervisionRecoveryInfo().apply { email = "email" }
+        val recoveryInfo =
+            SupervisionRecoveryInfo(
+                /* accountName */ "email",
+                /* accountType */ "default",
+                /* state */ STATE_PENDING,
+                /* accountData */ null,
+            )
         whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
 
         assertThat(preference.getTitle(context))
@@ -103,7 +111,13 @@ class SupervisionSetupRecoveryPreferenceTest {
 
     @Test
     fun getSummary_verifyRecovery() {
-        val recoveryInfo = SupervisionRecoveryInfo().apply { email = "test@gmail.com" }
+        val recoveryInfo =
+            SupervisionRecoveryInfo(
+                /* accountName */ "test@gmail.com",
+                /* accountType */ "default",
+                /* state */ STATE_PENDING,
+                /* accountData */ null,
+            )
         whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
 
         assertThat(preference.getSummary(context)).isEqualTo("t••t@gmail.com")
@@ -119,17 +133,14 @@ class SupervisionSetupRecoveryPreferenceTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN)
-    fun flagEnabled_recoveryInfoEmpty_isAvailable() {
-        whenever(mockSupervisionManager.supervisionRecoveryInfo)
-            .thenReturn(SupervisionRecoveryInfo())
-
-        assertThat(preference.isAvailable(context)).isTrue()
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN)
-    fun flagEnabled_recoveryEmailExist_isAvailable() {
-        val recoveryInfo = SupervisionRecoveryInfo().apply { email = "email" }
+    fun flagEnabled_recoveryExistNotVerified_isAvailable() {
+        val recoveryInfo =
+            SupervisionRecoveryInfo(
+                /* accountName */ "email",
+                /* accountType */ "default",
+                /* state */ STATE_PENDING,
+                /* accountData */ null,
+            )
         whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
 
         assertThat(preference.isAvailable(context)).isTrue()
@@ -137,12 +148,14 @@ class SupervisionSetupRecoveryPreferenceTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN)
-    fun flagEnabled_recoveryIdExist_NotAvailable() {
+    fun flagEnabled_recoveryVerified_NotAvailable() {
         val recoveryInfo =
-            SupervisionRecoveryInfo().apply {
-                email = "email"
-                id = "id"
-            }
+            SupervisionRecoveryInfo(
+                /* accountName */ "email",
+                /* accountType */ "default",
+                /* state */ STATE_VERIFIED,
+                /* accountData */ null,
+            )
         whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
 
         assertThat(preference.isAvailable(context)).isFalse()
@@ -158,8 +171,7 @@ class SupervisionSetupRecoveryPreferenceTest {
 
     @Test
     fun addRecovery_onClick_triggersPinRecoveryActivity() {
-        whenever(mockSupervisionManager.supervisionRecoveryInfo)
-            .thenReturn(SupervisionRecoveryInfo())
+        whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(null)
         val widget: Preference = preference.createAndBindWidget(context)
 
         mockLifeCycleContext.stub {
@@ -174,7 +186,13 @@ class SupervisionSetupRecoveryPreferenceTest {
 
     @Test
     fun verifyRecovery_onClick_triggersPinRecoveryActivity() {
-        val recoveryInfo = SupervisionRecoveryInfo().apply { email = "test@gmail.com" }
+        val recoveryInfo =
+            SupervisionRecoveryInfo(
+                /* accountName */ "email",
+                /* accountType */ "default",
+                /* state */ STATE_PENDING,
+                /* accountData */ null,
+            )
         whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
         val widget: Preference = preference.createAndBindWidget(context)
 
