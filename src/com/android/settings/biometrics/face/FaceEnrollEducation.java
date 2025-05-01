@@ -121,6 +121,10 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
 
         mIllustrationDefault = findViewById(R.id.illustration_default);
         mIllustrationLottie = findViewById(R.id.illustration_lottie);
+        if (BiometricUtils.useExpressiveStyle(this, getIntent())) {
+            BiometricUtils.applyIllustrationLottieThemeColor(
+                    getApplicationContext(), mIllustrationLottie);
+        }
         mIllustrationAccessibility = findViewById(R.id.illustration_accessibility);
 
         mIsUsingLottie = getResources().getBoolean(R.bool.config_face_education_use_lottie);

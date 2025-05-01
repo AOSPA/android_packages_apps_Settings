@@ -73,7 +73,6 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.flags.Flags;
 import com.android.settingslib.utils.ThreadUtils;
 
-import java.util.Locale;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -147,13 +146,6 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
                             mContext,
                             SettingsEnums.ACTION_AUDIO_SHARING_JOIN_FAILED,
                             SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY);
-                    AudioSharingUtils.toastMessage(
-                            mContext,
-                            String.format(
-                                    Locale.US,
-                                    "Fail to add source to %s reason %d",
-                                    sink.getAddress(),
-                                    reason));
                 }
 
                 @Override
@@ -180,13 +172,6 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
                             mContext,
                             SettingsEnums.ACTION_AUDIO_SHARING_LEAVE_FAILED,
                             SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY);
-                    AudioSharingUtils.toastMessage(
-                            mContext,
-                            String.format(
-                                    Locale.US,
-                                    "Fail to remove source from %s reason %d",
-                                    sink.getAddress(),
-                                    reason));
                 }
 
                 @Override

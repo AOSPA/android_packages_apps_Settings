@@ -51,6 +51,7 @@
             <!-- Animation res MUST be set in code, gated by config_face_education_use_lottie. -->
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/illustration_lottie"
+                style="@style/SudContentIllustration"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/illustration_lottie_height"
                 android:layout_marginTop="@dimen/lottie_animation_view_margin_top"
