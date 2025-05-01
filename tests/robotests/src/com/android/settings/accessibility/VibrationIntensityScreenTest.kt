@@ -41,7 +41,7 @@ import org.robolectric.annotation.Config
 @RunWith(AndroidJUnit4::class)
 @Config(shadows = [ShadowAudioManager::class])
 class VibrationIntensityScreenTest : CatalystScreenTestCase() {
-    private lateinit var mockVibrator: Vibrator
+    private lateinit var vibratorMock: Vibrator
 
     private val resourcesSpy: Resources =
         spy((ApplicationProvider.getApplicationContext() as Context).resources)
@@ -50,7 +50,7 @@ class VibrationIntensityScreenTest : CatalystScreenTestCase() {
         object : ContextWrapper(ApplicationProvider.getApplicationContext()) {
             override fun getSystemService(name: String): Any? =
                 when {
-                    name == VIBRATOR_SERVICE -> mockVibrator
+                    name == VIBRATOR_SERVICE -> vibratorMock
                     else -> super.getSystemService(name)
                 }
 
@@ -74,7 +74,7 @@ class VibrationIntensityScreenTest : CatalystScreenTestCase() {
 
     @Test
     fun isAvailable_noVibrator_unavailable() {
-        mockVibrator = mock { on { hasVibrator() } doReturn false }
+        vibratorMock = mock { on { hasVibrator() } doReturn false }
         resourcesSpy.stub {
             on { getInteger(R.integer.config_vibration_supported_intensity_levels) } doReturn 3
         }
@@ -83,7 +83,7 @@ class VibrationIntensityScreenTest : CatalystScreenTestCase() {
 
     @Test
     fun isAvailable_hasVibratorAndSingleIntensityLevel_unavailable() {
-        mockVibrator = mock { on { hasVibrator() } doReturn true }
+        vibratorMock = mock { on { hasVibrator() } doReturn true }
         resourcesSpy.stub {
             on { getInteger(R.integer.config_vibration_supported_intensity_levels) } doReturn 1
         }
@@ -92,7 +92,7 @@ class VibrationIntensityScreenTest : CatalystScreenTestCase() {
 
     @Test
     fun isAvailable_hasVibratorAndMultipleIntensityLevels_available() {
-        mockVibrator = mock { on { hasVibrator() } doReturn true }
+        vibratorMock = mock { on { hasVibrator() } doReturn true }
         resourcesSpy.stub {
             on { getInteger(R.integer.config_vibration_supported_intensity_levels) } doReturn 2
         }

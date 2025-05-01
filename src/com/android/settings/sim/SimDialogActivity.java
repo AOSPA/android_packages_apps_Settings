@@ -49,6 +49,7 @@ import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.network.telephony.SubscriptionActionDialogActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 import java.util.List;
 
@@ -89,6 +90,10 @@ public class SimDialogActivity extends FragmentActivity {
             finish();
             return;
         }
+        int themeId = SettingsThemeHelper.isExpressiveTheme(this)
+                ? R.style.Theme_SubSettings_Expressive : R.style.Theme_SubSettings;
+        setTheme(themeId);
+
         SimDialogProhibitService.supportDismiss(this);
 
         mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();

@@ -24,7 +24,9 @@ import androidx.core.content.getSystemService
 import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
 import com.android.settingslib.datastore.SettingsSystemStore
+import com.android.settingslib.preference.PreferenceBindingFactory
 import com.android.settingslib.preference.createAndBindWidget
+import com.android.settingslib.widget.MainSwitchPreference
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.mockito.kotlin.any
@@ -38,6 +40,7 @@ import org.mockito.kotlin.verify
 // LINT.IfChange
 abstract class VibrationIntensitySwitchPreferenceTestCase {
     protected abstract val preference: VibrationIntensitySwitchPreference
+    protected val mainSwitchPreference = VibrationMainSwitchPreference()
 
     protected val vibratorSpy: Vibrator =
         spy(ApplicationProvider.getApplicationContext<Context>().getSystemService<Vibrator>()!!)
@@ -75,6 +78,18 @@ abstract class VibrationIntensitySwitchPreferenceTestCase {
         val widget = createWidget()
 
         assertThat(widget.isEnabled).isTrue()
+        assertThat(widget.isChecked).isFalse()
+    }
+
+    @Test
+    fun state_valueTrueAndMainSwitchFalse_disabledAndUnchecked() {
+        setMainSwitchValue(false)
+        setValue(true)
+        val widget = createWidget()
+        val mainSwitchWidget = createMainSwitchWidget()
+
+        assertThat(mainSwitchWidget.isChecked).isFalse()
+        assertThat(widget.isEnabled).isFalse()
         assertThat(widget.isChecked).isFalse()
     }
 
@@ -135,13 +150,123 @@ abstract class VibrationIntensitySwitchPreferenceTestCase {
         verify(vibratorSpy).vibrate(any<VibrationEffect>(), any<VibrationAttributes>())
     }
 
+    @Test
+    fun click_withMainSwitchFalse_doesNothing() {
+        setMainSwitchValue(false)
+        setValue(true)
+        val widget = createWidget()
+        val mainSwitchWidget = createMainSwitchWidget()
+
+        assertThat(mainSwitchWidget.isChecked).isFalse()
+        assertThat(widget.isEnabled).isFalse()
+        assertThat(widget.isChecked).isFalse()
+
+        widget.performClick()
+
+        assertThat(mainSwitchWidget.isChecked).isFalse()
+        assertThat(widget.isChecked).isFalse()
+        verify(vibratorSpy, never()).vibrate(any<VibrationEffect>(), any<VibrationAttributes>())
+    }
+
+    @Test
+    fun mainSwitchClick_withValueTrue_updateCheckedStateAndRestoreOriginal() {
+        setMainSwitchValue(true)
+        setValue(true)
+        val widget = createWidget()
+        val mainSwitchWidget = createMainSwitchWidget()
+
+        assertThat(mainSwitchWidget.isChecked).isTrue()
+        assertThat(widget.isEnabled).isTrue()
+        assertThat(widget.isChecked).isTrue()
+
+        mainSwitchWidget.performClick()
+        updatePreferenceBinding(widget)
+
+        assertThat(mainSwitchWidget.isChecked).isFalse()
+        assertThat(widget.isEnabled).isFalse()
+        assertThat(widget.isChecked).isFalse()
+
+        mainSwitchWidget.performClick()
+        updatePreferenceBinding(widget)
+
+        assertThat(mainSwitchWidget.isChecked).isTrue()
+        assertThat(widget.isEnabled).isTrue()
+        assertThat(widget.isChecked).isTrue()
+    }
+
+    @Test
+    fun mainSwitchClick_withValueFalse_doesNotChangeCheckedState() {
+        setMainSwitchValue(true)
+        setValue(false)
+        val widget = createWidget()
+        val mainSwitchWidget = createMainSwitchWidget()
+
+        assertThat(mainSwitchWidget.isChecked).isTrue()
+        assertThat(widget.isEnabled).isTrue()
+        assertThat(widget.isChecked).isFalse()
+
+        mainSwitchWidget.performClick()
+        updatePreferenceBinding(widget)
+
+        assertThat(mainSwitchWidget.isChecked).isFalse()
+        assertThat(widget.isEnabled).isFalse()
+        assertThat(widget.isChecked).isFalse()
+
+        mainSwitchWidget.performClick()
+        updatePreferenceBinding(widget)
+
+        assertThat(mainSwitchWidget.isChecked).isTrue()
+        assertThat(widget.isEnabled).isTrue()
+        assertThat(widget.isChecked).isFalse()
+    }
+
+    @Test
+    fun mainSwitchClick_withDefaultIntensity_doesNotUpdateStoredValue() {
+        val defaultIntensity = Vibrator.VIBRATION_INTENSITY_HIGH
+        vibratorSpy.stub {
+            on { getDefaultVibrationIntensity(preference.vibrationUsage) } doReturn defaultIntensity
+        }
+        setMainSwitchValue(true)
+        setValue(true)
+        val widget = createWidget()
+        val mainSwitchWidget = createMainSwitchWidget()
+
+        assertThat(getRawStoredValue()).isEqualTo(defaultIntensity)
+        assertThat(mainSwitchWidget.isChecked).isTrue()
+        assertThat(widget.isChecked).isTrue()
+
+        mainSwitchWidget.performClick()
+        updatePreferenceBinding(widget)
+
+        assertThat(getRawStoredValue()).isEqualTo(defaultIntensity)
+        assertThat(mainSwitchWidget.isChecked).isFalse()
+        assertThat(widget.isChecked).isFalse()
+
+        mainSwitchWidget.performClick()
+        updatePreferenceBinding(widget)
+
+        assertThat(getRawStoredValue()).isEqualTo(defaultIntensity)
+        assertThat(mainSwitchWidget.isChecked).isTrue()
+        assertThat(widget.isChecked).isTrue()
+    }
+
     private fun getRawStoredValue() =
         SettingsSystemStore.get(context).getInt(preference.key)
+
+    private fun setMainSwitchValue(value: Boolean?) =
+        SettingsSystemStore.get(context).setBoolean(mainSwitchPreference.key, value)
 
     private fun setValue(value: Boolean?) =
         preference.storage(context).setBoolean(preference.key, value)
 
     private fun createWidget(): SwitchPreferenceCompat =
         preference.createAndBindWidget(context)
+
+    private fun createMainSwitchWidget(): MainSwitchPreference =
+        mainSwitchPreference.createAndBindWidget(context)
+
+    private fun updatePreferenceBinding(widget: SwitchPreferenceCompat) =
+        PreferenceBindingFactory.defaultFactory.getPreferenceBinding(preference)!!
+            .bind(widget, preference)
 }
 // LINT.ThenChange(VibrationTogglePreferenceControllerTest.java)

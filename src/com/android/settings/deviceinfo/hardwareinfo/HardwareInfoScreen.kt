@@ -61,6 +61,7 @@ class HardwareInfoScreen :
 
     override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {
         +DeviceModelPreference()
+        +HardwareVersionPreference()
     }
 
     companion object {

@@ -18,6 +18,7 @@ package com.android.settings.accessibility
 import android.content.Context
 import android.os.VibrationAttributes.Usage
 import android.os.Vibrator
+import android.provider.Settings
 import com.android.settings.R
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyValueStoreDelegate
@@ -33,11 +34,20 @@ class VibrationIntensitySettingsStore(
     private val supportedIntensityLevels: Int = context.getSupportedVibrationIntensityLevels(),
 ) : KeyValueStoreDelegate {
 
+    /** Returns true if the settings key should be enabled, false otherwise. */
+    fun isPreferenceEnabled() =
+        keyValueStoreDelegate.getBoolean(Settings.System.VIBRATE_ON) ?: true
+
     override fun <T : Any> getDefaultValue(key: String, valueType: Class<T>) =
         intensityToValue(valueType, defaultIntensity)
 
     override fun <T : Any> getValue(key: String, valueType: Class<T>) =
-        intensityToValue(valueType, keyValueStoreDelegate.getInt(key) ?: defaultIntensity)
+        if (isPreferenceEnabled()) {
+            intensityToValue(valueType, keyValueStoreDelegate.getInt(key) ?: defaultIntensity)
+        } else {
+            // Preference must show intensity off when disabled, but value stored must be preserved.
+            intensityToValue(valueType, Vibrator.VIBRATION_INTENSITY_OFF)
+        }
 
     override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) =
         keyValueStoreDelegate.setInt(key, value?.let { valueToIntensity(valueType, it) })

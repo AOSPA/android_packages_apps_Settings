@@ -65,7 +65,7 @@ class SupervisionMessengerClient(context: Context) :
         }
 
     companion object {
-        private const val SUPERVISION_MESSENGER_SERVICE_BIND_ACTION =
+        const val SUPERVISION_MESSENGER_SERVICE_BIND_ACTION =
             "android.app.supervision.action.SUPERVISION_MESSENGER_SERVICE"
     }
 }

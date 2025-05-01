@@ -16,8 +16,8 @@
 
 package com.android.settings.accessibility.actionbar;
 
-import static com.android.settings.accessibility.notification.NotificationConstants.EXTRA_DISMISS_NOTIFICATION;
-import static com.android.settings.accessibility.notification.NotificationConstants.EXTRA_PAGE_ID;
+import static com.android.internal.accessibility.common.NotificationConstants.ACTION_SURVEY_NOTIFICATION_DISMISSED;
+import static com.android.internal.accessibility.common.NotificationConstants.EXTRA_PAGE_ID;
 
 import android.content.Context;
 import android.content.Intent;
@@ -30,7 +30,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
-import com.android.settings.accessibility.notification.SurveyNotificationService;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SurveyFeatureProvider;
@@ -114,11 +113,11 @@ public class SurveyMenuController implements LifecycleObserver, OnCreateOptionsM
             // Remove Survey Notification
             FragmentActivity activity = mHost.getActivity();
             if (activity != null) {
-                final Intent dismissServiceIntent = new Intent(activity,
-                        SurveyNotificationService.class);
-                dismissServiceIntent.putExtra(EXTRA_DISMISS_NOTIFICATION, true);
-                dismissServiceIntent.putExtra(EXTRA_PAGE_ID, mPageId);
-                activity.startService(dismissServiceIntent);
+                final Intent intent = new Intent(ACTION_SURVEY_NOTIFICATION_DISMISSED)
+                        .setPackage(activity.getPackageName())
+                        .putExtra(EXTRA_PAGE_ID, mPageId);
+                activity.sendBroadcastAsUser(intent, activity.getUser(),
+                        android.Manifest.permission.MANAGE_ACCESSIBILITY);
             }
             return true;
         }

@@ -19,29 +19,40 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.content.res.Resources
 import android.media.AudioManager
+import android.os.VibrationAttributes
+import android.os.VibrationEffect
 import android.os.Vibrator
+import android.platform.test.annotations.EnableFlags
 import androidx.core.content.getSystemService
+import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settings.testutils.shadow.ShadowAudioManager
+import com.android.settingslib.datastore.SettingsSystemStore
 import com.android.settingslib.preference.CatalystScreenTestCase
+import com.android.settingslib.widget.MainSwitchPreference
 import com.google.common.truth.Truth.assertThat
+import com.google.common.truth.Truth.assertWithMessage
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
+import org.mockito.kotlin.verify
 import org.robolectric.annotation.Config
+import org.robolectric.shadows.ShadowLooper
 
 // LINT.IfChange
 @RunWith(AndroidJUnit4::class)
 @Config(shadows = [ShadowAudioManager::class])
 class VibrationScreenTest : CatalystScreenTestCase() {
-    private lateinit var mockVibrator: Vibrator
+    private lateinit var vibratorMock: Vibrator
 
     private val resourcesSpy: Resources =
         spy((ApplicationProvider.getApplicationContext() as Context).resources)
@@ -50,7 +61,7 @@ class VibrationScreenTest : CatalystScreenTestCase() {
         object : ContextWrapper(appContext) {
             override fun getSystemService(name: String): Any? =
                 when {
-                    name == VIBRATOR_SERVICE -> mockVibrator
+                    name == VIBRATOR_SERVICE -> vibratorMock
                     else -> super.getSystemService(name)
                 }
 
@@ -74,7 +85,7 @@ class VibrationScreenTest : CatalystScreenTestCase() {
 
     @Test
     fun isAvailable_noVibrator_unavailable() {
-        mockVibrator = mock { on { hasVibrator() } doReturn false }
+        vibratorMock = mock { on { hasVibrator() } doReturn false }
         resourcesSpy.stub {
             on { getInteger(R.integer.config_vibration_supported_intensity_levels) } doReturn 1
         }
@@ -83,7 +94,7 @@ class VibrationScreenTest : CatalystScreenTestCase() {
 
     @Test
     fun isAvailable_hasVibratorAndMultipleIntensityLevels_unavailable() {
-        mockVibrator = mock { on { hasVibrator() } doReturn true }
+        vibratorMock = mock { on { hasVibrator() } doReturn true }
         resourcesSpy.stub {
             on { getInteger(R.integer.config_vibration_supported_intensity_levels) } doReturn 3
         }
@@ -92,11 +103,88 @@ class VibrationScreenTest : CatalystScreenTestCase() {
 
     @Test
     fun isAvailable_hasVibratorAndSingleIntensityLevel_available() {
-        mockVibrator = mock { on { hasVibrator() } doReturn true }
+        vibratorMock = mock { on { hasVibrator() } doReturn true }
         resourcesSpy.stub {
             on { getInteger(R.integer.config_vibration_supported_intensity_levels) } doReturn 1
         }
         assertThat(preferenceScreenCreator.isAvailable(context)).isTrue()
+    }
+
+    @EnableFlags(Flags.FLAG_CATALYST_VIBRATION_INTENSITY_SCREEN_25Q4)
+    @Test
+    fun mainSwitchClick_withIntensitiesSet_disablesAndUnchecksAllIntensitiesAndPreservesStorage() {
+        val intensityKeys = findVibrationIntensitySwitchPreferences()
+        assertThat(intensityKeys).isNotEmpty()
+
+        // Setup initial vibration intensities.
+        val originalIntensity = Vibrator.VIBRATION_INTENSITY_HIGH
+        intensityKeys.forEach { key -> setStoredIntensity(key, originalIntensity) }
+
+        testOnFragment { fragment ->
+            val intensitySwitches = intensityKeys.stream()
+                .map { key -> fragment.findPreference<SwitchPreferenceCompat>(key)!! }
+                .toList()
+            val mainSwitch: MainSwitchPreference =
+                fragment.findPreference(VibrationMainSwitchPreference.KEY)!!
+
+            // Check all intensity switches are enabled and checked.
+            assertThat(mainSwitch.isChecked).isTrue()
+            intensitySwitches.forEach { switch ->
+                assertWithSwitch(switch).that(switch.isEnabled).isTrue()
+                assertWithSwitch(switch).that(switch.isChecked).isTrue()
+            }
+
+            // Turn main switch off.
+            mainSwitch.performClick()
+            ShadowLooper.idleMainLooper();
+
+            // Check all intensities are disabled and unchecked, and stored value is preserved.
+            assertThat(mainSwitch.isChecked).isFalse()
+            intensitySwitches.forEach { switch ->
+                assertWithSwitch(switch).that(switch.isEnabled).isFalse()
+                assertWithSwitch(switch).that(switch.isChecked).isFalse()
+                assertWithSwitch(switch).that(getStoredIntensity(switch.key))
+                    .isEqualTo(originalIntensity)
+            }
+
+            // Turn main switch on.
+            mainSwitch.performClick()
+            ShadowLooper.idleMainLooper();
+
+            // Check all intensity switches restored.
+            assertThat(mainSwitch.isChecked).isTrue()
+            intensitySwitches.forEach { switch ->
+                assertWithSwitch(switch).that(switch.isEnabled).isTrue()
+                assertWithSwitch(switch).that(switch.isChecked).isTrue()
+                assertWithSwitch(switch).that(getStoredIntensity(switch.key))
+                    .isEqualTo(originalIntensity)
+            }
+        }
+    }
+
+    private fun assertWithSwitch(switch: SwitchPreferenceCompat) =
+        assertWithMessage("On switch with key %s", switch.key)
+
+    private fun setStoredIntensity(settingsKey: String, value: Int?) =
+        SettingsSystemStore.get(context).setInt(settingsKey, value)
+
+    private fun getStoredIntensity(settingsKey: String) =
+        SettingsSystemStore.get(context).getInt(settingsKey)
+
+    private fun testOnFragment(action: (PreferenceFragmentCompat) -> Unit) {
+        @Suppress("UNCHECKED_CAST")
+        val clazz = preferenceScreenCreator.fragmentClass() as Class<PreferenceFragmentCompat>
+        launchFragment(clazz) { fragment -> action.invoke(fragment) }
+    }
+
+    private fun findVibrationIntensitySwitchPreferences(): List<String> {
+        val switches = ArrayList<String>()
+        preferenceScreenCreator.getPreferenceHierarchy(context).forEachRecursively { child ->
+            if (child.metadata is VibrationIntensitySwitchPreference) {
+                switches.add(child.metadata.key)
+            }
+        }
+        return switches
     }
 
     private fun setRingerMode(ringerMode: Int) {

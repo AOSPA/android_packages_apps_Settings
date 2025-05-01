@@ -31,6 +31,12 @@ import com.android.settingslib.preference.SwitchPreferenceBinding
  *
  * This implementation uses VibrationIntensitySettingsStore to save the device default vibration
  * intensity value when the switch is turned on, also playing a haptic preview.
+ *
+ * This preference observes the state of the VibrationMainSwitchPreference in this fragment,
+ * disabling and unchecking this switch when the main switch is unchecked. This "unchecked" state
+ * should not be persisted, as the original user settings value must be preserved and restored once
+ * the main switch is turned back on. This behavior reflects the actual system behavior that
+ * restricts all vibrations when the main switch is off.
  */
 // LINT.IfChange
 open class VibrationIntensitySwitchPreference(
@@ -42,8 +48,16 @@ open class VibrationIntensitySwitchPreference(
     OnPreferenceChangeListener,
     SwitchPreferenceBinding {
 
-    override fun storage(context: Context): KeyValueStore =
-        VibrationIntensitySettingsStore(context, vibrationUsage)
+    private var storage: VibrationIntensitySettingsStore? = null
+
+    override fun storage(context: Context): KeyValueStore {
+        if (storage == null) {
+            storage = VibrationIntensitySettingsStore(context, vibrationUsage)
+        }
+        return storage!!
+    }
+
+    override fun dependencies(context: Context) = arrayOf(VibrationMainSwitchPreference.KEY)
 
     @CallSuper
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
@@ -57,5 +71,8 @@ open class VibrationIntensitySwitchPreference(
         }
         return true
     }
+
+    @CallSuper
+    override fun isEnabled(context: Context) = storage?.isPreferenceEnabled() ?: true
 }
 // LINT.ThenChange(VibrationTogglePreferenceController.java)

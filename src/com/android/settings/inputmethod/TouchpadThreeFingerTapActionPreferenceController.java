@@ -16,8 +16,13 @@
 
 package com.android.settings.inputmethod;
 
+import static com.android.settings.flags.Flags.touchpadSettingsDesignUpdate;
+
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.hardware.input.InputGestureData;
 import android.hardware.input.InputManager;
@@ -26,6 +31,8 @@ import android.hardware.input.KeyGestureEvent;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.Settings;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,6 +43,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
@@ -48,12 +56,15 @@ import com.android.settingslib.widget.SelectorWithWidgetPreference;
 public class TouchpadThreeFingerTapActionPreferenceController extends BasePreferenceController
         implements LifecycleEventObserver, SelectorWithWidgetPreference.OnClickListener {
 
+    private static final String TAG = "ThreeFingerTapAction";
+    private static final String ASSISTANT_KEY = "launch_gemini";
+
     private final InputManager mInputManager;
     private final ContentResolver mContentResolver;
+    private PackageManager mPackageManager;
 
     @Nullable
     private SelectorWithWidgetPreference mPreference;
-
 
     private ContentObserver mObserver =
             new ContentObserver(new Handler(Looper.getMainLooper())) {
@@ -73,14 +84,17 @@ public class TouchpadThreeFingerTapActionPreferenceController extends BasePrefer
         super(context, key);
         mInputManager = context.getSystemService(InputManager.class);
         mContentResolver = context.getContentResolver();
+        mPackageManager = context.getPackageManager();
     }
 
     @VisibleForTesting
     TouchpadThreeFingerTapActionPreferenceController(@NonNull Context context,
             @NonNull String key,
-            ContentObserver contentObserver) {
+            ContentObserver contentObserver,
+            PackageManager packageManager) {
         this(context, key);
         mObserver = contentObserver;
+        mPackageManager = packageManager;
     }
 
     @Override
@@ -94,9 +108,38 @@ public class TouchpadThreeFingerTapActionPreferenceController extends BasePrefer
     public void displayPreference(@NonNull PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(mPreferenceKey);
+
         if (mPreference != null) {
             mPreference.setOnClickListener(this);
+            if (touchpadSettingsDesignUpdate() && mPreferenceKey.equals(ASSISTANT_KEY)) {
+                updateDefaultAssistant(mPreference);
+            }
         }
+    }
+
+    private void updateDefaultAssistant(@NonNull Preference preference) {
+        String flattened = Settings.Secure.getString(mContentResolver,
+                Settings.Secure.ASSISTANT);
+        if (flattened != null) {
+            ComponentName componentName = ComponentName.unflattenFromString(flattened);
+            CharSequence label = getLabelFromPackageName(componentName);
+            String title = mContext.getString(
+                    R.string.three_finger_tap_launch_default_assistant, label);
+            preference.setTitle(title);
+        }
+    }
+
+    private CharSequence getLabelFromPackageName(@Nullable ComponentName componentName) {
+        if (componentName != null) {
+            try {
+                ApplicationInfo appInfo = mPackageManager.getApplicationInfo(
+                        componentName.getPackageName(), /* flags = */ 0);
+                return appInfo.loadLabel(mPackageManager);
+            } catch (PackageManager.NameNotFoundException e) {
+                Log.e(TAG, "Package not found: " + componentName.getPackageName(), e);
+            }
+        }
+        return mContext.getString(R.string.three_finger_tap_launch_generic_assistant_name);
     }
 
     @Override

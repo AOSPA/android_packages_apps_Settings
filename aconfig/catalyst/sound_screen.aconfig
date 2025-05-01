@@ -16,6 +16,13 @@ flag {
 }
 
 flag {
+    name: "catalyst_sound_screen_25q4"
+    namespace: "android_settings"
+    description: "Flag for Sound & vibration in 25Q4"
+    bug: "405344827"
+}
+
+flag {
     name: "catalyst_media_controls"
     namespace: "android_settings"
     description: "Flag for Media"
@@ -39,6 +46,6 @@ flag {
 flag {
     name: "catalyst_spatial_audio"
     namespace: "android_settings"
-    description: "Flag for Spatial audio in 25Q3"
-    bug: "352179685"
+    description: "Flag for Spatial audio in 25Q4"
+    bug: "405344827"
 }

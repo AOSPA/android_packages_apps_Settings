@@ -16,8 +16,8 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settings.accessibility.notification.NotificationConstants.EXTRA_SOURCE;
-import static com.android.settings.accessibility.notification.NotificationConstants.SOURCE_START_SURVEY;
+import static com.android.internal.accessibility.common.NotificationConstants.EXTRA_SOURCE;
+import static com.android.internal.accessibility.common.NotificationConstants.SOURCE_START_SURVEY;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;

@@ -34,6 +34,12 @@ import kotlin.math.min
  *
  * This implementation uses VibrationIntensitySettingsStore to save the vibration intensity value,
  * also playing a haptic preview on slider changes.
+ *
+ * This preference observes the state of the VibrationMainSwitchPreference in this fragment,
+ * disabling and displaying intensity OFF this slider when the main switch is unchecked. This "off"
+ * state should not be persisted, as the original user settings value must be preserved and restored
+ * once the main switch is turned back on. This behavior reflects the actual system behavior that
+ * restricts all vibrations when the main switch is off.
  */
 // LINT.IfChange
 open class VibrationIntensitySliderPreference(
@@ -43,6 +49,8 @@ open class VibrationIntensitySliderPreference(
     @StringRes override val summary: Int = 0,
 ) : IntRangeValuePreference, SliderPreferenceBinding, OnPreferenceChangeListener {
 
+    private var storage: VibrationIntensitySettingsStore? = null
+
     override fun getMinValue(context: Context) = Vibrator.VIBRATION_INTENSITY_OFF
 
     override fun getMaxValue(context: Context) =
@@ -50,8 +58,15 @@ open class VibrationIntensitySliderPreference(
 
     override fun getIncrementStep(context: Context) = 1
 
-    override fun storage(context: Context): KeyValueStore =
-        VibrationIntensitySettingsStore(context, vibrationUsage)
+    override fun storage(context: Context): KeyValueStore {
+        if (storage == null) {
+            storage = VibrationIntensitySettingsStore(context, vibrationUsage)
+        }
+        return storage!!
+    }
+
+
+    override fun dependencies(context: Context) = arrayOf(VibrationMainSwitchPreference.KEY)
 
     @CallSuper
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
@@ -70,5 +85,8 @@ open class VibrationIntensitySliderPreference(
         }
         return true
     }
+
+    @CallSuper
+    override fun isEnabled(context: Context) = storage?.isPreferenceEnabled() ?: true
 }
 // LINT.ThenChange(VibrationIntensityPreferenceController.java)
