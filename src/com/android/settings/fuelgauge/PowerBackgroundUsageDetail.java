@@ -55,6 +55,8 @@ public class PowerBackgroundUsageDetail extends DashboardFragment {
     public static final String EXTRA_POWER_USAGE_AMOUNT = "extra_power_usage_amount";
     public static final String EXTRA_ICON_ID = "extra_icon_id";
     public static final String EXTRA_LAUNCH_SOURCE = "extra_launch_source";
+    public static final String EXTRA_HINT_PREF_KEY = "extra_hint_pref_key";
+    public static final String EXTRA_HINT_TEXT = "extra_hint_text";
 
     /** Launch Source type of current fragment. */
     public enum LaunchSourceType {
@@ -145,10 +147,18 @@ public class PowerBackgroundUsageDetail extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        final Bundle bundle = getArguments();
+        final String hintPrefKey = bundle.getString(EXTRA_HINT_PREF_KEY);
+        final String hintText = bundle.getString(EXTRA_HINT_TEXT);
+
         final List<AbstractPreferenceController> controllers = new ArrayList<>(1);
         controllers.add(
                 new BatteryOptimizationModePreferenceController(
-                        context, KEY_BATTERY_OPTIMIZATION_MODE_CATEGORY, mBatteryOptimizeUtils));
+                        context,
+                        KEY_BATTERY_OPTIMIZATION_MODE_CATEGORY,
+                        mBatteryOptimizeUtils,
+                        hintPrefKey,
+                        hintText));
 
         return controllers;
     }

@@ -32,12 +32,12 @@
             android:key="background_usage_allowability_switch"
             android:title="@string/manager_battery_usage_allow_background_usage_title"/>
 
-        <com.android.settingslib.widget.SelectorWithWidgetPreference
+        <com.android.settings.fuelgauge.WarningFrameSelectorPreference
             android:key="optimized_preference"
             android:title="@string/manager_battery_usage_optimized_title"
             android:summary="@string/manager_battery_usage_optimized_summary"/>
 
-        <com.android.settingslib.widget.SelectorWithWidgetPreference
+        <com.android.settings.fuelgauge.WarningFrameSelectorPreference
             android:key="unrestricted_preference"
             android:title="@string/manager_battery_usage_unrestricted_title"
             android:summary="@string/manager_battery_usage_unrestricted_summary"/>

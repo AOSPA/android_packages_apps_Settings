@@ -105,11 +105,13 @@ message BannerButtonInfo {
   }
 }
 
-// Next id: 4
+// Next id: 6
 message ViewSettings {
   optional string settings_destination = 1;
   optional int32 source_metrics_category = 2;
   optional string source_highlight_key = 3;
+  optional string hint_pref_key = 4;
+  optional string hint_text = 5;
 }
 
 // Next id: 2
