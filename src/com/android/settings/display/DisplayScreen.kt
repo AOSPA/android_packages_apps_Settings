@@ -32,6 +32,7 @@ import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 import com.android.systemui.shared.Flags.ambientAod
+import com.android.settingslib.metadata.PreferenceCategory as Category
 
 @ProvidePreferenceScreen(DisplayScreen.KEY)
 open class DisplayScreen :
@@ -57,17 +58,25 @@ open class DisplayScreen :
 
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(context, this) {
-            +BrightnessLevelPreference()
-            +AutoBrightnessScreen.KEY
-            +LockScreenPreferenceScreen.KEY
-            if (ambientAod()) {
-                +AmbientDisplayAlwaysOnPreferenceScreen.KEY
+            +Category("category_brightness", R.string.category_name_brightness) order -200 += {
+                +BrightnessLevelPreference()
+                +AutoBrightnessScreen.KEY
             }
-            +DarkModeScreen.KEY
-            if (Flags.catalystScreensaver()) {
-                +ScreensaverScreen.KEY
+            +Category("category_lock_display", R.string.category_name_lock_display) order -190 += {
+                +LockScreenPreferenceScreen.KEY
+                if (ambientAod()) {
+                    +AmbientDisplayAlwaysOnPreferenceScreen.KEY
+                }
             }
-            +PeakRefreshRateSwitchPreference()
+            +Category("category_key_appearance", R.string.category_name_appearance) order -180 += {
+                +DarkModeScreen.KEY
+            }
+            +Category("category_other", R.string.category_name_display_controls) order -150 += {
+                +PeakRefreshRateSwitchPreference()
+                if (Flags.catalystScreensaver()) {
+                    +ScreensaverScreen.KEY
+                }
+            }
         }
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =

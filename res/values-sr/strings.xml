@@ -40,11 +40,13 @@
     <string name="radioInfo_data_connected" msgid="8816467971633020141">"Повезано"</string>
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Обустављено"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Непознато"</string>
-    <string name="preview_pager_content_description" msgid="3762247188224576303">"Преглед"</string>
-    <string name="preview_pager_home_content_description" msgid="3961399947853424786">"Преглед почетног екрана"</string>
-    <string name="preview_pager_message_content_description" msgid="3018855090807833755">"Преглед порука"</string>
-    <string name="preview_pager_email_content_description" msgid="100055784235660338">"Преглед имејла"</string>
     <string name="qr_code_content_description" msgid="1852208464419291347">"QR кôд"</string>
+    <!-- no translation found for preview_pager_home_title (6102935625155194821) -->
+    <skip />
+    <!-- no translation found for preview_pager_message_title (5933499691147446486) -->
+    <skip />
+    <!-- no translation found for preview_pager_email_title (8767864657910457562) -->
+    <skip />
     <string name="preview_pager_previous_button" msgid="607771113300838313">"Претходни преглед"</string>
     <string name="preview_pager_next_button" msgid="8700907912508927271">"Следећи преглед"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Умањи"</string>
@@ -200,8 +202,7 @@
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Језик"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Жељени језик"</string>
     <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Језици апликација"</string>
-    <!-- no translation found for app_locale_picker_summary (616928580653613998) -->
-    <skip />
+    <string name="app_locale_picker_summary" msgid="616928580653613998">"Одаберите језик за сваку апликацију"</string>
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Језик апликације"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Предложени језици"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Сви језици"</string>
@@ -214,10 +215,8 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Подразумевани системски"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Избор језика за ову апликацију није доступан из Подешавања."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Језик може да се разликује од језика доступних у апликацији. Неке апликације можда не подржавају ово подешавање."</string>
-    <!-- no translation found for desc_app_locale_selection_supported (7363315876602221125) -->
-    <skip />
-    <!-- no translation found for desc_app_locale_selection_supported_with_disclaimer (7622217531143496788) -->
-    <skip />
+    <string name="desc_app_locale_selection_supported" msgid="7363315876602221125">"Одаберите језик за сваку апликацију."</string>
+    <string name="desc_app_locale_selection_supported_with_disclaimer" msgid="7622217531143496788">"Одаберите језик за сваку апликацију. Језик може да се разликује од језика доступних у апликацији. Неке апликације можда не подржавају ово подешавање."</string>
     <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Уређај, апликације и веб-сајтови користе први подржани језик са листе жељених језика.\n\nМноге апликације форматирају датуме, бројеве и јединице на основу региона жељеног језика. Да бисте променили регион, додајте језик, па изаберите жељени регион."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Да бисте изабрали језик за сваку апликацију, идите у подешавања језика апликације."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Сазнајте више о језицима апликација"</string>
@@ -277,7 +276,10 @@
     <string name="terms_of_address_masculine" msgid="983106046135098856">"Мушки род"</string>
     <string name="terms_of_address_neutral" msgid="5475414185543112478">"Неутрално"</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Желите ли да уклоните изабрани језик?}one{Желите ли да уклоните изабране језике?}few{Желите ли да уклоните изабране језике?}other{Желите ли да уклоните изабране језике?}}"</string>
-    <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Текст ће бити приказан на неком другом језику."</string>
+    <!-- no translation found for dlg_remove_system_locales_title (7626516786258866543) -->
+    <skip />
+    <!-- no translation found for dlg_remove_locales_message (6636637008013310242) -->
+    <skip />
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Није могуће уклонити све језике"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Задржите бар један жељени језик"</string>
     <string name="locale_not_translated" msgid="3071618135527110152">"Није доступно као језик система"</string>
@@ -694,7 +696,7 @@
     <string name="private_space_hide_dialog_message" msgid="618693520130744836">"За приступ приватном простору, унесите „приватан простор“ у траку за претрагу на листи апликација."</string>
     <string name="private_space_hide_dialog_button" msgid="4157191429310035457">"Важи"</string>
     <string name="private_space_category_system" msgid="1286843321867285700">"Систем"</string>
-    <string name="private_space_delete_title" msgid="636873505724100006">"Избриши приватни простор"</string>
+    <string name="private_space_delete_title" msgid="636873505724100006">"Избришите приватан простор"</string>
     <string name="private_space_delete_header" msgid="4594429153176776184">"Желите да избришете приватни простор?"</string>
     <string name="private_space_delete_summary" msgid="7507302208399543921">"Приватни простор ће бити трајно избрисан са уређаја. \n\nСве апликације у вашем простору и њихови подаци ће такође бити трајно избрисани из "<b>"интерне меморије"</b>" телефона."</string>
     <string name="private_space_accounts" msgid="1078277762792056395">"Следећи налози ће бити уклоњени из приватног простора:"</string>
@@ -718,7 +720,7 @@
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Имајте на уму"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Апликације се заустављају када закључате простор"</b>\n"Када закључате простор, апликације у њему се заустављају и не шаљу вам обавештења"</string>
     <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Приватни простори нису погодни за апликације које треба да раде у позадини или шаљу важна обавештења, попут медицинских апликација. Разлог је то што се обавештења и активности у позадини заустављају када је простор закључан.\n\nАпликације у приватном простору се неће приказивати у менаџеру дозвола, на контролној табли за приватност ни у другим подешавањима када је приватан простор закључан.\n\nПриватан простор не можете да преместите на нови уређај. Морате да подесите други приватан простор ако желите да га користите на другом уређају.\n\nСвако ко ваш уређај повеже са рачунаром или на њега инсталира штетне апликације, моћи ће да приступи вашем приватном простору."</string>
-    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Приватни простори нису погодни за апликације које треба да раде у позадини или шаљу важна обавештења, попут медицинских апликација. Разлог је то што се обавештења и активности у позадини заустављају када је простор закључан.\n\nАпликације у приватном простору се неће приказивати у менаџеру дозвола, на контролној табли за приватност ни у другим подешавањима када је приватан простор закључан.\n\nПриватан простор не можете да вратите на нови уређај. Морате да подесите други простор ако желите да га користите на другом уређају.\n\nСвако ко ваш уређај повеже са рачунаром или на њега инсталира злонамерне апликације, моћи ће да приступи вашем приватном простору."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Приватни простори нису погодни за апликације које треба да раде у позадини или шаљу важна обавештења, попут медицинских апликација. Разлог је то што се обавештења и активности у позадини заустављају када је простор закључан.\n\nАпликације у приватном простору се неће приказивати у менаџеру дозвола, на контролној табли за приватност ни у другим подешавањима када је приватан простор закључан.\n\nПриватан простор не можете да копирате на нови уређај. Морате да подесите други простор ако желите да га користите на другом уређају.\n\nСвако ко ваш уређај повеже са рачунаром или на њега инсталира злонамерне апликације, моћи ће да приступи вашем приватном простору."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Сазнајте више о приватном простору"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"Потрајаће неколико тренутака"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Подешава се приватни простор…"</string>
@@ -745,8 +747,8 @@
     <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"Подесите PIN за приватни простор"</string>
     <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"Подесите лозинку за приватни простор"</string>
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Подесите образац за приватни простор"</string>
-    <string name="private_space_category_lock" msgid="1917657024358778169">"Закључај"</string>
-    <string name="private_space_category_hide" msgid="3236587591523126649">"Сакриј"</string>
+    <string name="private_space_category_lock" msgid="1917657024358778169">"Закључавање"</string>
+    <string name="private_space_category_hide" msgid="3236587591523126649">"Сакривање"</string>
     <string name="private_space_confirm_your_pattern_header" msgid="449382220134788771">"Потврдите шаблон за приватан простор"</string>
     <string name="private_space_confirm_your_pin_header" msgid="4543332157470087796">"Поново унесите PIN за приватан простор"</string>
     <string name="private_space_confirm_your_password_header" msgid="9202308075814307169">"Поново унесите лозинку за приватан простор"</string>
@@ -965,6 +967,10 @@
     <string name="device_details_battery" msgid="5466987755790847884">"Батерија"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"Батерија се пуни"</string>
     <string name="device_details_key_missing_title" msgid="3568401701538114387">"Покушајте да рестартујете уређај <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Ако то не успе, заборавите га. Ради ваше безбедности, поново га упарите када не будете на јавном месту.\n\nАко овај уређај није у близини, не морате ништа да предузмете."</string>
+    <!-- no translation found for verbose_printer_logging_title (6525634245166402031) -->
+    <skip />
+    <!-- no translation found for verbose_printer_logging_summary (6558076303223667013) -->
+    <skip />
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Заборави уређај"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Прекини везу са апликацијом"</string>
     <string name="device_details_more_settings" msgid="950302792331611271">"Још подешавања"</string>
@@ -1019,7 +1025,7 @@
     <string name="wifi_ask_enable" msgid="6860056048266810769">"<xliff:g id="REQUESTER">%s</xliff:g> жели да укључи WiFi"</string>
     <string name="wifi_ask_disable" msgid="1663208096020309639">"<xliff:g id="REQUESTER">%s</xliff:g> жели да искључи WiFi"</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"Потврди бинарни кôд апликација из којих могу да се отклоне грешке"</string>
-    <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"Дозволи да ART потврди бинарни кôд апликација из којих могу да се отклоне грешке"</string>
+    <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"Дозвољава да ART потврди бинарни кôд апликација из којих могу да се отклоне грешке"</string>
     <string name="show_refresh_rate" msgid="5742688821872354973">"Прикажи учесталост освежавања"</string>
     <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Приказује актуелну учесталост освежавања екрана"</string>
     <string name="show_hdr_sdr_ratio" msgid="4188007289024955585">"Прикажи HDR или SDR размеру"</string>
@@ -1357,7 +1363,7 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Искључено"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Баланс беле екрана"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <string name="fold_lock_behavior_title" msgid="786228803694268449">"Настави са коришћењем апл. по затварању"</string>
+    <string name="fold_lock_behavior_title" msgid="786228803694268449">"Настави са коришћењем апликација по затварању"</string>
     <string name="disable_game_default_frame_rate_title" msgid="3712908601744143753">"Онемогући подразумевану брзину кадрова"</string>
     <string name="disable_game_default_frame_rate_summary" msgid="4436762704707434225">"Онемогућите ограничавање максималне брзине кадрова за игре на <xliff:g id="FRAME_RATE">%1$d</xliff:g> Hz."</string>
     <string name="peak_refresh_rate_title" msgid="2056355754210341011">"Течни приказ"</string>
@@ -1448,8 +1454,7 @@
     <string name="screensaver_settings_summary_postured_and_charging" msgid="5111797042509819055">"Док је усправан и пуни се"</string>
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"Укључено / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Искључено"</string>
-    <!-- no translation found for screensaver_settings_when_to_dream (7756170756065029160) -->
-    <skip />
+    <string name="screensaver_settings_when_to_dream" msgid="7756170756065029160">"Када да се приказује"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Подигни за активацију"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Ограничи на бежично пуњење"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Амбијентални екран"</string>
@@ -1457,24 +1462,21 @@
     <string name="doze_title" msgid="1523090408230862316">"Пробуди екран због обавештења"</string>
     <string name="doze_summary" msgid="8252867381522942804">"Када је екран таман, укључује се амбијентални екран за нова обавештења"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"Увек приказуј време и податке"</string>
-    <!-- no translation found for doze_always_on_title2 (6806855871175589465) -->
-    <skip />
+    <string name="doze_always_on_title2" msgid="6806855871175589465">"Увек укључен екран"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"Потрошња батерије је повећана"</string>
-    <!-- no translation found for doze_always_on_summary_with_wallpaper (7193043498368623388) -->
-    <skip />
-    <!-- no translation found for doze_always_on_summary_without_wallpaper (2461602415293603846) -->
-    <skip />
-    <!-- no translation found for doze_always_on_summary_long (9198713049143867176) -->
-    <skip />
-    <!-- no translation found for doze_always_on_wallpaper_options (6089727555294626960) -->
-    <skip />
-    <!-- no translation found for doze_always_on_wallpaper_title (975186604007325364) -->
-    <skip />
-    <!-- no translation found for doze_always_on_wallpaper_description (7797570713499410605) -->
-    <skip />
+    <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"Приказује позадину закључаног екрана када је екран искључен"</string>
+    <string name="doze_always_on_summary_without_wallpaper" msgid="2461602415293603846">"Сакрива позадину закључаног екрана када је екран искључен"</string>
+    <string name="doze_always_on_summary_long" msgid="9198713049143867176">"Увек укључен екран приказује време, датум и друго када је екран искључен"</string>
+    <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"Опције позадине"</string>
+    <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"Приказујте позадину за закључани екран"</string>
+    <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"Позадина за закључани екран је видљива када је омогућен увек укључен екран"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"Подебљан текст"</string>
     <string name="title_font_size" msgid="570613010306330622">"Величина фонта"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Увећајте или умањите текст"</string>
+    <!-- no translation found for category_title_display_text_size (4234285020731751694) -->
+    <skip />
+    <!-- no translation found for category_title_text_style (5905015084935695611) -->
+    <skip />
     <string name="sim_lock_settings" msgid="7331982427303002613">"Подешавања закључавања SIM-а"</string>
     <string name="sim_lock_settings_category" msgid="6475255139493877786">"Закључавање SIM-а"</string>
     <string name="sim_pin_toggle" msgid="6814489621760857328">"Закључај SIM"</string>
@@ -1697,7 +1699,7 @@
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Подешавања мреже су ресетована"</string>
     <string name="reset_esim_error_title" msgid="6516110227665862295">"Брисање eSIM картица није успело"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"Дошло је до грешке и eSIM картице нису избрисане.\n\nРестартујте уређај и пробајте поново."</string>
-    <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Избриши приватан простор"</string>
+    <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Избришите приватан простор"</string>
     <string name="reset_private_space_delete_dialog" msgid="2325106559507364385">"Ако на уређају имате приватни простор, биће трајно избрисан, а Google налог који је додат у простор ће бити уклоњен. \n\nСве апликације у вашем простору и њихови подаци ће такође бити трајно избрисани из "<b>"интерне меморије"</b>" телефона."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Обриши све податке (фабричка подешавања)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Обриши све податке (фабричка подешавања)"</string>
@@ -2121,6 +2123,8 @@
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"Скроловање"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"Контролисано скроловање"</string>
     <string name="mouse_scrolling_speed" msgid="3999483025392860903">"Брзина скроловања"</string>
+    <string name="mouse_pointer_speed_make_faster_desc" msgid="7665912663672314461">"Убрзава показивач"</string>
+    <string name="mouse_pointer_speed_make_slower_desc" msgid="116802579827902188">"Успорава показивач"</string>
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"Замени примарно дугме миша"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Користите леви тастер миша као десни"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"Убрзавање курсора"</string>
@@ -2144,7 +2148,7 @@
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Брзина показивача, покрети"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Додирните да бисте кликнули"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Додирните и превуците за премештање"</string>
-    <string name="trackpad_tap_dragging_summary" msgid="2935498183201422245">"Двапут додирните, задржите при 2. додиру, па превуците за премештање"</string>
+    <string name="trackpad_tap_dragging_summary" msgid="5605534150661601073">"Двапут додирните и померајте објекте превлачењем по тачпеду"</string>
     <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"Покрети за тачпед"</string>
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Прилагодите индивидуалне покрете за кретање по тачпеду"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Обрнуто скроловање"</string>
@@ -2152,6 +2156,8 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Клик доле десно"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"За више опција, кликните на доњи десни угао тачпеда"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Брзина показивача"</string>
+    <string name="trackpad_pointer_speed_make_faster_desc" msgid="2855950278314583596">"Убрзава показивач"</string>
+    <string name="trackpad_pointer_speed_make_slower_desc" msgid="6577850228762978827">"Успорава показивач"</string>
     <string name="three_finger_tap_preference_title" msgid="1836080810837854140">"Користите додир помоћу три прста"</string>
     <string name="touchpad_acceleration_title" msgid="176627555191021888">"Убрзавање тачпеда"</string>
     <string name="touchpad_acceleration_summary" msgid="8057075483967535793">"Брже кретање по тачпеду ће померати курсор даље"</string>
@@ -2171,6 +2177,10 @@
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"десни клик, додир"</string>
     <string name="three_finger_tap_middle_click" msgid="7898931632908866867">"Средњи тастер миша"</string>
     <string name="three_finger_tap_launch_gemini" msgid="4030401656711588982">"Покрени Помоћник"</string>
+    <!-- no translation found for three_finger_tap_launch_default_assistant (7947939159617292478) -->
+    <skip />
+    <!-- no translation found for three_finger_tap_launch_generic_assistant_name (1893057235983949817) -->
+    <skip />
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Иди на почетни екран"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"Назад"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"Прикажи недавне апликације"</string>
@@ -2204,8 +2214,12 @@
     <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Лепљиви тастери, дужи одзив тастера, тастери миша"</string>
     <string name="keyboard_repeat_keys_title" msgid="6346877755243280735">"Понављање тастера"</string>
     <string name="keyboard_repeat_keys_timeout_title" msgid="3411871149974652293">"Одлагање пре понављања"</string>
-    <string name="keyboard_repeat_keys_delay_title" msgid="7323531750483922943">"Брзина понављања"</string>
+    <string name="keyboard_repeat_keys_increase_delay_desc" msgid="9131810864682287872">"Повећава кашњење"</string>
+    <string name="keyboard_repeat_keys_decrease_delay_desc" msgid="6762794746507398346">"Смањује кашњење"</string>
+    <string name="keyboard_repeat_keys_delay_title" msgid="5954595732341624638">"Брзина понављања"</string>
     <string name="keyboard_repeat_keys_summary" msgid="8972905345211768313">"Притисните и задржите тастер да бисте понављали унос знака све док не пустите тастер"</string>
+    <string name="keyboard_repeat_keys_increase_rate_desc" msgid="1745229237083808184">"Повећава брзину понављања"</string>
+    <string name="keyboard_repeat_keys_decrease_rate_desc" msgid="31236959764168589">"Смањује брзину понављања"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"Распоред <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Подразумевано"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Аутоматски: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2302,14 +2316,10 @@
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Системске контроле"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Пошаљите повратне информације"</string>
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Оцените нас"</string>
-    <!-- no translation found for accessibility_send_survey_notification_channel (6136555229886306184) -->
-    <skip />
-    <!-- no translation found for dark_theme_survey_notification_title (4035183263314404750) -->
-    <skip />
-    <!-- no translation found for dark_theme_survey_notification_summary (801472177955048195) -->
-    <skip />
-    <!-- no translation found for dark_theme_survey_notification_action (7693304950750954402) -->
-    <skip />
+    <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Анкета о приступачности"</string>
+    <string name="dark_theme_survey_notification_title" msgid="4035183263314404750">"Свиђа вам се тамна тема у више апликација?"</string>
+    <string name="dark_theme_survey_notification_summary" msgid="801472177955048195">"Делите повратне информације"</string>
+    <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"Попуните анкету"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Преузете апликације"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Експериментално"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Ознаке функција"</string>
@@ -2337,10 +2347,8 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Померај екран када миш додирне ивице екрана"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Увећавај унети текст"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Лупа аутоматски прати текст док га уносите"</string>
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_title (7342198645736402048) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_summary (9091733229413835358) -->
-    <skip />
+    <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="7342198645736402048">"Увећај фокус тастатуре"</string>
+    <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="9091733229413835358">"Лупа прати фокус тастатуре"</string>
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"Увећај тастатуру"</string>
     <string name="accessibility_screen_magnification_nav_ime_summary" msgid="3054371947104552843">"Тастатура је увећана са садржајем"</string>
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"Недост. док се увећава део екрана"</string>
@@ -2393,7 +2401,7 @@
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Увећајте приказ на екрану"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Додирните 3 пута да бисте зумирали"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Додирните дугме да бисте зумирали"</string>
-    <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Брзо увећајте екран да би садржај био већи"</string>
+    <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Брзо зумирајте на екрану да би садржај био већи"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Да бисте увећали:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Користите пречицу да бисте покренули увећање&lt;br/&gt; {1,number,integer}. Додирните екран&lt;br/&gt; {2,number,integer}. Превлачите помоћу 2 прста да бисте се кретали по екрану&lt;br/&gt; {3,number,integer}. Скупите 2 прста да бисте прилагодили зумирање&lt;br/&gt; {4,number,integer}. Користите пречицу да бисте зауставили увећање&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Да бисте привремено увећали:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Уверите се да је тип увећања подешен на цео екран&lt;br/&gt; {1,number,integer}. Користите пречицу да бисте покренули увећање&lt;br/&gt; {2,number,integer}. Додирните и задржите било који део екрана&lt;br/&gt; {3,number,integer}. Превлачите прст да бисте се кретали по екрану&lt;br/&gt; {4,number,integer}. Подигните прст да бисте зауставили увећање"</string>
     <string name="accessibility_screen_magnification_keyboard_summary" msgid="2504303274186294767">"&lt;b&gt;Да бисте зумирали помоћу тастатуре:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Користите пречицу да бисте покренули увећање&lt;br/&gt; {1,number,integer}. Притисните и задржите &lt;xliff:g id=meta1&gt;%1$s&lt;/xliff:g&gt; и &lt;xliff:g id=alt1&gt;%2$s&lt;/xliff:g&gt; и притисните + или - да бисте увећали или умањили&lt;br/&gt; {2,number,integer}. Притисните и задржите &lt;xliff:g id=meta2&gt;%3$s&lt;/xliff:g&gt; и &lt;xliff:g id=alt2&gt;%4$s&lt;/xliff:g&gt; и притисните тастере са стрелицама да бисте се кретали по екрану&lt;br/&gt; {3,number,integer}. Користите пречицу да бисте зауставили увећање"</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;Да бисте увећали:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Користите пречицу да бисте покренули увећање&lt;br/&gt; {1,number,integer}. Додирните екран&lt;br/&gt; {2,number,integer}. Превлачите помоћу 2 прста да бисте се кретали по екрану&lt;br/&gt; {3,number,integer}. Скупите 2 прста да бисте прилагодили зумирање&lt;br/&gt; {4,number,integer}. Користите пречицу да бисте зауставили увећање&lt;br/&gt;&lt;br/&gt; Можете привремено да зумирате и друго."</string>
@@ -3514,8 +3522,7 @@
     <string name="keywords_wallet" msgid="3757421969956996972">"новчаник"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"платите, додирните, плаћања"</string>
     <string name="keywords_backup" msgid="707735920706667685">"резервна копија, правити резервну копију"</string>
-    <!-- no translation found for keywords_fingerprint_unlock (522579721745187402) -->
-    <skip />
+    <string name="keywords_fingerprint_unlock" msgid="522579721745187402">"отисак прста, откључавање, потврда идентитета, пријављивање"</string>
     <string name="keywords_face_unlock" msgid="545338452730885392">"лице, откључавање, потврда идентитета, пријављивање"</string>
     <string name="keywords_biometric_unlock" msgid="8569545388717753692">"лице, откључавање, ауторизација, пријављивање, отисак прста, биометрија"</string>
     <string name="keywords_imei_info" msgid="8848791606402333514">"imei, meid, мин, верзија prl-a, imei sv"</string>
@@ -3791,13 +3798,16 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"отварање обавештења"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Омогући одлагање обавештења"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Тачка за обавештења на икони апликације"</string>
-    <string name="notification_bundles" msgid="3614044525822580826">"Скупови обавештења"</string>
+    <!-- no translation found for notification_bundles (496852738958148317) -->
+    <skip />
     <string name="notification_summarization_title" msgid="1516039882005781529">"Резимеи обавештења"</string>
-    <string name="notification_summarization_on" msgid="5692758038788359790">"Укључено"</string>
-    <string name="notification_summarization_off" msgid="4660131515915234037">"Искључено"</string>
+    <!-- no translation found for notification_summarization_summary (1963425736716175590) -->
+    <skip />
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Користи резимее обавештења"</string>
-    <string name="notification_summarization_description" msgid="8787422238462516765">"Аутоматски резимира обавештења о конверзацијама из апликација"</string>
-    <string name="notification_summarization_excluded_description" msgid="3772411462994322275">"Обавештења о конверзацијама из ових апликација неће бити резимирана"</string>
+    <!-- no translation found for notification_summarization_description (341128754705513791) -->
+    <skip />
+    <!-- no translation found for notification_summarization_excluded_description (5819160700526641394) -->
+    <skip />
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Управљајте апликацијама"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="1299744594788208296">"Дозволите резимее обавештења за апликације"</string>
     <string name="notification_excluded_apps" msgid="6648267716069216826">"Изузеци за апликације"</string>
@@ -3955,14 +3965,18 @@
     <string name="notification_polite_description" msgid="6137533404978878957">"Када примите много обавештења у кратком периоду, уређај ће утишати звук и смањити број упозорења на највише минут. То не утиче на позиве, аларме ни приоритетне конверзације. \n\nОбавештења која добијете током утишавања можете да пронађете повлачењем надоле од врха екрана."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Примени на пословне профиле"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Примените на апликације пословног профила"</string>
-    <string name="notification_bundle_title" msgid="460988459835922719">"Груписана обавештења"</string>
-    <string name="notification_bundle_on" msgid="1596327200778050642">"Укључено"</string>
-    <string name="notification_bundle_off" msgid="1550261372988157377">"Искључено"</string>
-    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"Користи груписање обавештења"</string>
-    <string name="notification_bundle_description" msgid="3896142878395333784">"Звук се искључује за обавештења са сличним темама и она се групишу ради тишег доживљаја. Груписање замењује подешавања обавештења саме апликације."</string>
+    <!-- no translation found for notification_bundle_title (6679586974995981433) -->
+    <skip />
+    <!-- no translation found for notification_bundle_summary (8924550009829960969) -->
+    <skip />
+    <!-- no translation found for notification_bundle_main_control_title (2632661768990540295) -->
+    <skip />
+    <!-- no translation found for notification_bundle_description (8439963475488583612) -->
+    <skip />
     <string name="notification_app_level_bundle_title" msgid="8917807675495480483">"Групишите обавештења"</string>
     <string name="notification_app_level_bundle_subtext" msgid="7330731485247761388">"Звук се искључује за обавештења са сличним темама и она се групишу ради тишег доживљаја"</string>
-    <string name="notification_bundle_excluded_description" msgid="7249934130756103812">"Обавештења из ових апликација неће бити груписана"</string>
+    <!-- no translation found for notification_bundle_excluded_description (2667461772332132250) -->
+    <skip />
     <string name="notification_bundle_manage_excluded_apps_title" msgid="7019831234073590293">"Дозволите груписање обавештења за апликације"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Услуге помагача за виртуелну реалност"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ниједна инсталирана апликација није захтевала да се покрене као услуга помагача за виртуелну реалност."</string>
@@ -4698,6 +4712,22 @@
     <string name="system_navigation_title" msgid="4890381153527184636">"Режим навигације"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"Навигација помоћу 2 дугмета"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Да бисте прешли са једне апликације на другу, превуците нагоре на дугмету Почетак. Да бисте видели све апликације, поново превуците нагоре. Да бисте се вратили, додирните дугме Назад."</string>
+    <!-- no translation found for shade_panels_title (6816157397029469997) -->
+    <skip />
+    <!-- no translation found for keywords_shade_panels (6181844937287087945) -->
+    <skip />
+    <!-- no translation found for shade_panels_category (3262351355390846546) -->
+    <skip />
+    <!-- no translation found for shade_panels_separate_title (7839124123668116363) -->
+    <skip />
+    <!-- no translation found for shade_panels_separate_summary (4879360492042964895) -->
+    <skip />
+    <!-- no translation found for shade_panels_combined_title (2812149031368941984) -->
+    <skip />
+    <!-- no translation found for shade_panels_combined_summary (5884627562590432068) -->
+    <skip />
+    <!-- no translation found for shade_panels_foldables_footer_message (3974376428811063936) -->
+    <skip />
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Лична безбедност и хитни случајеви"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"Хитна помоћ, медицинске информације, обавештења"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Навигација помоћу покрета"</string>
@@ -4930,7 +4960,7 @@
     <string name="angle_enabled_app_not_set" msgid="4472572224881726067">"Није подешена апликација омогућена за ANGLE"</string>
     <string name="angle_enabled_app_set" msgid="7811829383833353021">"Апликација омогућена за ANGLE: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="graphics_driver_dashboard_title" msgid="5661084817492587796">"Подешавања управљачког програма за графику"</string>
-    <string name="graphics_driver_dashboard_summary" msgid="6348759885315793654">"Измена подешавања управљачког програма за графику"</string>
+    <string name="graphics_driver_dashboard_summary" msgid="6348759885315793654">"Измените подешавања управљачког програма за графику"</string>
     <string name="graphics_driver_footer_text" msgid="5123754522284046790">"Када постоји више управљачких програма за графику, можете да изаберете да користите ажурирани управљачки програм за графику за апликације инсталиране на уређају."</string>
     <string name="graphics_driver_all_apps_preference_title" msgid="1343065382898127360">"Омогући за све апликације"</string>
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"Изаберите управљачки програм за графику"</string>
@@ -4990,8 +5020,7 @@
     <string name="network_connected" msgid="7637745547242487795">"Повезано"</string>
     <string name="network_connecting" msgid="6856124847029124041">"Повезује се…"</string>
     <string name="network_could_not_connect" msgid="676574629319069922">"Повезивање није успело"</string>
-    <!-- no translation found for empty_networks_list (7263167074321380983) -->
-    <skip />
+    <string name="empty_networks_list" msgid="7263167074321380983">"Није пронађена ниједна мрежа"</string>
     <string name="network_query_error" msgid="6406348372070035274">"Нисмо успели да пронађемо мреже. Пробајте поново."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(забрањено)"</string>
     <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
@@ -5240,7 +5269,7 @@
     <string name="enable_desktop_experience_features" msgid="7389235241021706660">"Омогући функције доживљаја на рачунару"</string>
     <string name="enable_desktop_experience_features_summary_with_desktop" msgid="8586716390362684564">"Омогућава прозорски приказ на уређају и на секундарним екранима."</string>
     <string name="enable_desktop_experience_features_summary_without_desktop" msgid="7567963048658976895">"Омогућава приказ рачунарских прозора на секундарним екранима."</string>
-    <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Омогући прозоре произв. формата на секунд. екрану"</string>
+    <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Омогући прозоре произвољног формата на секундарном екрану"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Омогући апликације непромењиве величине у више прозора"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Омогућава да апликације непромењиве величине буду у више прозора"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Замени функцију наметања тамне теме"</string>
@@ -5297,7 +5326,7 @@
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Подешавањима управља ИТ администратор"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
     <string name="enable_16k_pages" msgid="1758111531461408337">"Укључи уз величину страница 16 kB"</string>
-    <string name="enable_16k_pages_summary" msgid="1937836453571509085">"Укључи уређај уз језгро подржано за странице 16 kB"</string>
+    <string name="enable_16k_pages_summary" msgid="1937836453571509085">"Укључи уређај уз језгро подржано за странице величине 16 kB"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"Пређите са режима од 4 kB на режим од 16 kB"</string>
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"Користите режим независан од величине странице са језгром од 4 kB, а прелазите на режим од 16 kB. У овом режиму не може да се гарантује интегритет софтвера, па могу бити угрожени подаци који сe чувају на телефону док је покретачки програм откључан. Овим ћете рестартовати уређај. Неке функције су онемогућене у овим режимима, што значи да неке апликације можда неће радити. Да бисте уређај вратили на производни режим, треба да га вратите на режим од 4 kB и закључате покретачки програм, што ће ресетовати уређај на фабричка подешавања. Када се на уређају укључи Android, онемогућите OEM откључавање у Опцијама за програмера."</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"Пређите са режима од 4 kB на режим од 16 kB"</string>
@@ -5726,8 +5755,7 @@
     <string name="audio_sharing_block_pairing_dialog_content" msgid="6352030314206654722">"Да бисте упарили нови уређај, прво искључите Дељење звука."</string>
     <string name="audio_sharing_turn_off_button_label" msgid="1934956352475393641">"Искључи"</string>
     <string name="share_audio_notification_title" msgid="5201976754820387782">"Делите звук са: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for audio_sharing_device_volume_description (3218967346006222765) -->
-    <skip />
+    <string name="audio_sharing_device_volume_description" msgid="3218967346006222765">"Јачина звука уређаја <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Повежите се са LE Audio стримом"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Аудио стримови у близини"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Аудио стримови"</string>
@@ -5778,8 +5806,7 @@
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Скенирајте QR кôд аудио стрима да бисте слушали помоћу: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Лозинка не може да се мења током дељења. Да бисте променили лозинку, прво искључите дељење звука."</string>
     <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Лозинка мора да садржи од 4 до 16 знакова и може да садржи само слова, бројеве и симболе"</string>
-    <!-- no translation found for audio_streams_main_page_name_dialog_format_alert (6797839340871206774) -->
-    <skip />
+    <string name="audio_streams_main_page_name_dialog_format_alert" msgid="6797839340871206774">"Назив аудио стрима мора да садржи од 4 до 32 знака и може да садржи само слова, бројеве и симболе"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Скенер QR кода"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Треба вам помоћ?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Претражите подешавања"</string>
@@ -5797,25 +5824,29 @@
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Претрага заокруживањем"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Додирните и задржите дугме Почетак или маркер за кретање да бисте претраживали помоћу садржаја на екрану."</string>
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Конфигуришите детаље о уређају."</string>
-    <!-- no translation found for supervision_settings_title (8507163323870367711) -->
-    <skip />
+    <string name="supervision_settings_title" msgid="8507163323870367711">"Родитељски надзор"</string>
     <string name="supervision_settings_summary" msgid="5020634300370322741">"Ограничења садржаја и друга ограничења"</string>
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Користи надзор уређаја"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Подесите PIN да бисте започели"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"надзор, родитељски надзор, родитељска контрола"</string>
     <string name="supervision_pin_management_preference_title" msgid="961680798581006465">"Управљајте PIN-ом"</string>
-    <!-- no translation found for supervision_pin_management_preference_summary_add (8061713645550514683) -->
-    <skip />
-    <!-- no translation found for supervision_pin_management_preference_summary_verify_recovery (2156782778845060114) -->
-    <skip />
+    <string name="supervision_pin_management_preference_summary_add" msgid="8061713645550514683">"Додаје метод опоравка PIN-ом"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="2156782778845060114">"Верификује метод опоравка PIN-ом"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Промени PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Заборавио/ла сам PIN"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Ажурирајте имејл за враћање приступа налогу"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Избришите PIN"</string>
     <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Тиме ћете ресетовати сва подешавања надзора"</string>
-    <!-- no translation found for supervision_add_pin_recovery_title (5584523084706797399) -->
-    <skip />
+    <string name="supervision_add_pin_recovery_title" msgid="5584523084706797399">"Додирните да бисте додали метод опоравка"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Филтери веб-садржаја"</string>
+    <!-- no translation found for supervision_web_content_filters_summary_both_on (8668754911140483798) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_summary_chrome_on (5999295548020086617) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_summary_search_on (6866676094401450305) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_summary_both_off (6735949158065982622) -->
+    <skip />
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome и Web"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Покушајте да блокирате експлицитне сајтове"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_summary" msgid="1477766506765966613">"Ниједан филтер није савршен, али ово би требало да блокира приказивање сексуално експлицитних сајтова"</string>
@@ -5825,12 +5856,11 @@
     <string name="supervision_web_content_filters_search_filter_on_summary" msgid="1162258144140293269">"Помаже у филтрирању експлицитних слика, текста и линкова из резултата претраге на овом уређају"</string>
     <string name="supervision_web_content_filters_search_filter_off_title" msgid="6049461395304222346">"Филтрирање Сигурне претраге је искључено"</string>
     <string name="supervision_web_content_filters_search_filter_off_summary" msgid="3834238970190924433">"Подешавања налога и даље могу да филтрирају или замагљују експлицитне резултате"</string>
+    <!-- no translation found for supervision_web_content_filters_footer_content (3532535288142541994) -->
+    <skip />
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Унесите PIN за надзор"</string>
-    <!-- no translation found for supervision_lock_setup_title (7581682893583645713) -->
-    <skip />
-    <!-- no translation found for supervision_lock_setup_description (6931450348200992733) -->
-    <skip />
-    <!-- no translation found for supervision_pin_reset_success_toast (4663259412030769718) -->
-    <skip />
+    <string name="supervision_lock_setup_title" msgid="7581682893583645713">"Одаберите закључавање за надзор"</string>
+    <string name="supervision_lock_setup_description" msgid="6931450348200992733">"Помоћу овог кода можете да откључате подешавања надзора"</string>
+    <string name="supervision_pin_reset_success_toast" msgid="4663259412030769718">"PIN за родитељски надзор је ресетован"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Анимација за: <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
 </resources>

@@ -113,16 +113,22 @@ public class AdjustmentKeyPreferenceControllerTest {
     @EnableFlags({Flags.FLAG_NM_SUMMARIZATION, Flags.FLAG_NM_SUMMARIZATION_UI,
             Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI})
     public void testChecked_adjustmentAllowed() {
-        when(mBackend.getAllowedAssistantAdjustments(mAppRow.pkg)).thenReturn(
-                List.of(KEY_TYPE, KEY_IMPORTANCE));
+        when(mBackend.getAdjustmentDeniedPackages(KEY_TYPE)).thenReturn(
+                List.of("not this"));
         mPrefController.onResume(mAppRow, null, null, null, null, null, null);
 
         mPrefController.updateState(mSwitch);
         assertThat(mSwitch.isChecked()).isTrue();
+    }
 
-        when(mBackend.getAllowedAssistantAdjustments(mAppRow.pkg)).thenReturn(
-                List.of(KEY_SUMMARIZATION, KEY_IMPORTANCE));
+    @Test
+    @EnableFlags({Flags.FLAG_NM_SUMMARIZATION, Flags.FLAG_NM_SUMMARIZATION_UI,
+            Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI})
+    public void testChecked_adjustmentNotAllowed() {
+        when(mBackend.getAdjustmentDeniedPackages(KEY_TYPE)).thenReturn(
+                List.of(mAppRow.pkg));
         mPrefController.onResume(mAppRow, null, null, null, null, null, null);
+
         mPrefController.updateState(mSwitch);
         assertThat(mSwitch.isChecked()).isFalse();
     }
@@ -131,8 +137,8 @@ public class AdjustmentKeyPreferenceControllerTest {
     @EnableFlags({Flags.FLAG_NM_SUMMARIZATION, Flags.FLAG_NM_SUMMARIZATION_UI,
             Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI})
     public void testOnPreferenceChange_changeOnAndOff() {
-        when(mBackend.getAllowedAssistantAdjustments(mAppRow.pkg)).thenReturn(
-                List.of(KEY_TYPE, KEY_IMPORTANCE));
+        when(mBackend.getAdjustmentDeniedPackages(KEY_TYPE)).thenReturn(
+                List.of("not this"));
         mPrefController.onResume(mAppRow, null, null, null, null, null, null);
 
         // when the switch value changes to false

@@ -40,11 +40,13 @@
     <string name="radioInfo_data_connected" msgid="8816467971633020141">"Gekoppel"</string>
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Afgelas"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Onbekend"</string>
-    <string name="preview_pager_content_description" msgid="3762247188224576303">"Voorskou"</string>
-    <string name="preview_pager_home_content_description" msgid="3961399947853424786">"Tuisskermvoorskou"</string>
-    <string name="preview_pager_message_content_description" msgid="3018855090807833755">"Boodskapvoorskou"</string>
-    <string name="preview_pager_email_content_description" msgid="100055784235660338">"E-posvoorskou"</string>
     <string name="qr_code_content_description" msgid="1852208464419291347">"QR-kode"</string>
+    <!-- no translation found for preview_pager_home_title (6102935625155194821) -->
+    <skip />
+    <!-- no translation found for preview_pager_message_title (5933499691147446486) -->
+    <skip />
+    <!-- no translation found for preview_pager_email_title (8767864657910457562) -->
+    <skip />
     <string name="preview_pager_previous_button" msgid="607771113300838313">"Vorige voorskou"</string>
     <string name="preview_pager_next_button" msgid="8700907912508927271">"Volgende voorskou"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Maak kleiner"</string>
@@ -133,7 +135,7 @@
     <string name="bluetooth_off_footer" msgid="76578735660216295">"Skakel Bluetooth aan om aan ander toestelle te koppel."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Jou toestelle"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"Bind nuwe toestel saam"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Deaktiveer Bluetooth-A2DP-hardeware-aflaai"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Deaktiveer Bluetooth A2DP-hardeware-oordrag"</string>
     <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Deaktiveer Bluetooth LE Audio-hardewareoordrag"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Herbegin toestel?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Jy moet jou toestel herbegin om hierdie instelling te verander."</string>
@@ -200,8 +202,7 @@
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Taal"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Voorkeurtaal"</string>
     <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Apptale"</string>
-    <!-- no translation found for app_locale_picker_summary (616928580653613998) -->
-    <skip />
+    <string name="app_locale_picker_summary" msgid="616928580653613998">"Kies die taal vir elke app"</string>
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Programtaal"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Voorgestelde tale"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Alle tale"</string>
@@ -214,10 +215,8 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Stelselverstek"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Taalkeuse vir hierdie app is nie in Instellings beskikbaar nie."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Taal kan verskil van tale wat in die app beskikbaar is. Sommige apps steun dalk nie hierdie instelling nie."</string>
-    <!-- no translation found for desc_app_locale_selection_supported (7363315876602221125) -->
-    <skip />
-    <!-- no translation found for desc_app_locale_selection_supported_with_disclaimer (7622217531143496788) -->
-    <skip />
+    <string name="desc_app_locale_selection_supported" msgid="7363315876602221125">"Kies die taal vir elke app."</string>
+    <string name="desc_app_locale_selection_supported_with_disclaimer" msgid="7622217531143496788">"Kies die taal vir elke app. Taal kan dalk verskil van tale wat in die app beskikbaar is. Sekere apps kan dalk nie hierdie instelling steun nie."</string>
     <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Jou toestel, apps en webwerwe gebruik die eerste gesteunde taal uit jou voorkeurtaallys.\n\nBaie apps sal ook die streek van jou voorkeurtaal gebruik om datums, getalle en eenhede te formateer. Voeg ’n taal by en kies dan jou voorkeurstreek as jy jou streek wil verander."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Gaan na apptaalinstellings vir elke app om ’n taal te kies."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Meer inligting oor apptale"</string>
@@ -277,7 +276,10 @@
     <string name="terms_of_address_masculine" msgid="983106046135098856">"Manlik"</string>
     <string name="terms_of_address_neutral" msgid="5475414185543112478">"Neutraal"</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Verwyder geselekteerde taal?}other{Verwyder geselekteerde tale?}}"</string>
-    <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Teks sal in \'n ander taal gewys word."</string>
+    <!-- no translation found for dlg_remove_system_locales_title (7626516786258866543) -->
+    <skip />
+    <!-- no translation found for dlg_remove_locales_message (6636637008013310242) -->
+    <skip />
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Kan nie alle tale verwyder nie"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Hou minstens een voorkeurtaal"</string>
     <string name="locale_not_translated" msgid="3071618135527110152">"Nie beskikbaar as stelseltaal nie"</string>
@@ -416,7 +418,7 @@
     <string name="security_settings_face_footer_description_class3" msgid="2639208414351635622"></string>
     <string name="security_settings_face_footer_learn_more_description" msgid="1418112576619086897"></string>
     <string name="security_settings_face_settings_face_category" msgid="60058016983772899">"Gesig"</string>
-    <string name="security_settings_face_settings_use_face_to_category" msgid="3349153603335284583">"Gebruik gesig om"</string>
+    <string name="security_settings_face_settings_use_face_to_category" msgid="3349153603335284583">"Gebruik gesig vir die volgende:"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Wanneer jy Gesigslot gebruik"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Vereis dat oë oop moet wees"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Jou oë moet oop wees om die foon te ontsluit"</string>
@@ -733,7 +735,7 @@
     <string name="private_space_set_lock_label" msgid="1790408277477408475">"Kies nuwe slot"</string>
     <string name="private_space_wait_screen_title" msgid="1535431437075585381">"Net ’n oomblik …"</string>
     <string name="private_space_success_title" msgid="4351904015352046118">"Gereed!"</string>
-    <string name="private_space_access_text" msgid="4433988836344567888">"Gaan na jou appslys en rollees af om jou privaat ruimte te kry"</string>
+    <string name="private_space_access_text" msgid="4433988836344567888">"Gaan na jou applys en rollees af om jou privaat ruimte te kry"</string>
     <string name="private_space_done_label" msgid="1020482651595246071">"Klaar"</string>
     <string name="private_space_scrolldown_to_access" msgid="4820954877349434545">"Rollees af om privaat ruimte te vind"</string>
     <string name="private_space_retry_signin_title" msgid="8090276618867918844">"Meld aan"</string>
@@ -965,12 +967,16 @@
     <string name="device_details_battery" msgid="5466987755790847884">"Battery"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"Battery laai tans"</string>
     <string name="device_details_key_missing_title" msgid="3568401701538114387">"Probeer om <xliff:g id="DEVICE_NAME">%1$s</xliff:g> te herbegin. As dit nie werk nie, vergeet die toestel. Vir jou sekuriteit, moet jy dit net weer saambind wanneer jy nie in ’n publieke ruimte is nie.\n\nAs hierdie toestel nie naby is nie, hoef jy niks te doen nie."</string>
+    <!-- no translation found for verbose_printer_logging_title (6525634245166402031) -->
+    <skip />
+    <!-- no translation found for verbose_printer_logging_summary (6558076303223667013) -->
+    <skip />
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Vergeet toestel"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Ontkoppel app"</string>
     <string name="device_details_more_settings" msgid="950302792331611271">"Nog instellings"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maks. gekoppelde Bluetooth-oudiotoestelle"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Kies maksimum aantal gekoppelde Bluetooth-oudiotoestelle"</string>
-    <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"NFC- woordryke verkoperontfoutingloglêer"</string>
+    <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"NFC- gedetailleerde verkoperontfoutingloglêer"</string>
     <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Sluit bykomende toestelspesifieke verkoperloglêers by foutverslae in, wat privaat inligting kan bevat."</string>
     <string name="nfc_snoop_log_title" msgid="1576197495976952388">"NFC NCI-loglêer sonder filters"</string>
     <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Vang gedetailleerde NFC-pakkette, wat privaat inligting kan bevat, vas."</string>
@@ -1448,8 +1454,7 @@
     <string name="screensaver_settings_summary_postured_and_charging" msgid="5111797042509819055">"Terwyl dit regop is en laai"</string>
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"Aan/<xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Af"</string>
-    <!-- no translation found for screensaver_settings_when_to_dream (7756170756065029160) -->
-    <skip />
+    <string name="screensaver_settings_when_to_dream" msgid="7756170756065029160">"Wanneer om te wys"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Lig op om wakker te maak"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Beperk tot draadlose batterylaai"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Stemmingvertoning"</string>
@@ -1475,6 +1480,10 @@
     <string name="force_bold_text" msgid="4620929631102086716">"Teks in vetdruk"</string>
     <string name="title_font_size" msgid="570613010306330622">"Lettertipegrootte"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Maak teks groter of kleiner"</string>
+    <!-- no translation found for category_title_display_text_size (4234285020731751694) -->
+    <skip />
+    <!-- no translation found for category_title_text_style (5905015084935695611) -->
+    <skip />
     <string name="sim_lock_settings" msgid="7331982427303002613">"SIM-slotinstellings"</string>
     <string name="sim_lock_settings_category" msgid="6475255139493877786">"SIM-slot"</string>
     <string name="sim_pin_toggle" msgid="6814489621760857328">"Sluit SIM"</string>
@@ -2121,6 +2130,10 @@
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"Rollees"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"Beheerde rollees"</string>
     <string name="mouse_scrolling_speed" msgid="3999483025392860903">"Rolleesspoed"</string>
+    <!-- no translation found for mouse_pointer_speed_make_faster_desc (7665912663672314461) -->
+    <skip />
+    <!-- no translation found for mouse_pointer_speed_make_slower_desc (116802579827902188) -->
+    <skip />
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"Ruil primêre muisknoppie"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Gebruik die muis se linkerknoppie as jou regterknoppie"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"Skermpyltjieversnelling"</string>
@@ -2144,7 +2157,8 @@
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Wyserspoed, gebare"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Tik om te klik"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Tik en sleep om items te skuif"</string>
-    <string name="trackpad_tap_dragging_summary" msgid="2935498183201422245">"Dubbeltik ’n item, hou met die tweede tik in en sleep dan die item om dit te skuif"</string>
+    <!-- no translation found for trackpad_tap_dragging_summary (5605534150661601073) -->
+    <skip />
     <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"Raakpaneelgebare"</string>
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Pasmaak individuele raakpaneelnavigasiegebare"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Omgekeerde rollees"</string>
@@ -2152,6 +2166,10 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Klik onder regs"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Klik op die raakpaneel se hoek onder regs vir meer opsies"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Wyserspoed"</string>
+    <!-- no translation found for trackpad_pointer_speed_make_faster_desc (2855950278314583596) -->
+    <skip />
+    <!-- no translation found for trackpad_pointer_speed_make_slower_desc (6577850228762978827) -->
+    <skip />
     <string name="three_finger_tap_preference_title" msgid="1836080810837854140">"Gebruik drievingertik"</string>
     <string name="touchpad_acceleration_title" msgid="176627555191021888">"Raakpaneelversnelling"</string>
     <string name="touchpad_acceleration_summary" msgid="8057075483967535793">"Vinniger bewegings op jou raakpaneel sal die skermpyltjie verder beweeg"</string>
@@ -2171,6 +2189,10 @@
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"regsklik, tik"</string>
     <string name="three_finger_tap_middle_click" msgid="7898931632908866867">"Middelmuisknoppie"</string>
     <string name="three_finger_tap_launch_gemini" msgid="4030401656711588982">"Begin Assistent"</string>
+    <!-- no translation found for three_finger_tap_launch_default_assistant (7947939159617292478) -->
+    <skip />
+    <!-- no translation found for three_finger_tap_launch_generic_assistant_name (1893057235983949817) -->
+    <skip />
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Gaan na tuisskerm"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"Gaan terug"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"Bekyk onlangse apps"</string>
@@ -2204,8 +2226,17 @@
     <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Taaisleutels, bonssleutels, muissleutels"</string>
     <string name="keyboard_repeat_keys_title" msgid="6346877755243280735">"Herhaalsleutels"</string>
     <string name="keyboard_repeat_keys_timeout_title" msgid="3411871149974652293">"Vertraging voor herhaling"</string>
-    <string name="keyboard_repeat_keys_delay_title" msgid="7323531750483922943">"Herhaalkoers"</string>
+    <!-- no translation found for keyboard_repeat_keys_increase_delay_desc (9131810864682287872) -->
+    <skip />
+    <!-- no translation found for keyboard_repeat_keys_decrease_delay_desc (6762794746507398346) -->
+    <skip />
+    <!-- no translation found for keyboard_repeat_keys_delay_title (5954595732341624638) -->
+    <skip />
     <string name="keyboard_repeat_keys_summary" msgid="8972905345211768313">"Hou ’n sleutel in om sy karakter te herhaal totdat die sleutel gelos word"</string>
+    <!-- no translation found for keyboard_repeat_keys_increase_rate_desc (1745229237083808184) -->
+    <skip />
+    <!-- no translation found for keyboard_repeat_keys_decrease_rate_desc (31236959764168589) -->
+    <skip />
     <string name="ime_label_title" msgid="8994569521516807168">"<xliff:g id="IME_LABEL">%s</xliff:g>-uitleg"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Verstek"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Outomaties: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2302,14 +2333,10 @@
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Stelselkontroles"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Stuur terugvoer"</string>
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Gradeer ons"</string>
-    <!-- no translation found for accessibility_send_survey_notification_channel (6136555229886306184) -->
-    <skip />
-    <!-- no translation found for dark_theme_survey_notification_title (4035183263314404750) -->
-    <skip />
-    <!-- no translation found for dark_theme_survey_notification_summary (801472177955048195) -->
-    <skip />
-    <!-- no translation found for dark_theme_survey_notification_action (7693304950750954402) -->
-    <skip />
+    <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Toeganklikheidsopname"</string>
+    <string name="dark_theme_survey_notification_title" msgid="4035183263314404750">"Geniet jy donkertema in nog apps?"</string>
+    <string name="dark_theme_survey_notification_summary" msgid="801472177955048195">"Deel jou terugvoer"</string>
+    <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"Neem deel aan opname"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Afgelaaide apps"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Eksperimenteel"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Kenmerkvlae"</string>
@@ -2321,7 +2348,7 @@
     <string name="bt_hci_snoop_log_filter_pbap_title" msgid="1735427364451634823">"Bluetooth HCI-snuffelloglêerfiltrering van PBAP"</string>
     <string name="bt_hci_snoop_log_filter_map_title" msgid="180092480793945544">"Bluetooth HCI-snuffelloglêerfiltrering van MAP"</string>
     <string name="bt_hci_snoop_log_filter_summary" msgid="7217091930762522599">"Stel filtreermodus. (Deaktiveer en aktiveer Bluetooth sodat die veranderinge in werking kan tree)"</string>
-    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary" msgid="8824952559433361848">"Stel Bluetooth HCI-oorsendingloglêermodus op Filter Geaktiveer om hierdie opsie te verander"</string>
+    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary" msgid="8824952559433361848">"Stel Bluetooth HCI-snuffelloglêermodus op Filter Geaktiveer om hierdie opsie te verander"</string>
     <string name="talkback_title" msgid="8756080454514251327">"TalkBack"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Skermleser hoofsaaklik vir mense wat blind of swaksiende is"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Tik op items op jou skerm om te hoor hoe hulle hardop gelees word"</string>
@@ -3514,8 +3541,7 @@
     <string name="keywords_wallet" msgid="3757421969956996972">"Wallet"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"betaal, tik, betalings"</string>
     <string name="keywords_backup" msgid="707735920706667685">"rugsteun, rugsteun"</string>
-    <!-- no translation found for keywords_fingerprint_unlock (522579721745187402) -->
-    <skip />
+    <string name="keywords_fingerprint_unlock" msgid="522579721745187402">"vingerafdruk, ontsluit, magtig, meld aan"</string>
     <string name="keywords_face_unlock" msgid="545338452730885392">"gesig, ontsluit, stawing, meld aan"</string>
     <string name="keywords_biometric_unlock" msgid="8569545388717753692">"gesig, ontsluit, stawing, aanmelding, vingerafdruk, biometries"</string>
     <string name="keywords_imei_info" msgid="8848791606402333514">"imei, meid, min, prl-weergawe, imei sv"</string>
@@ -3791,13 +3817,16 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"maak kennisgewing oop"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Laat toe dat kennisgewings gesluimer word"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Kennisgewingkol op appikoon"</string>
-    <string name="notification_bundles" msgid="3614044525822580826">"Kennisgewingbondels"</string>
+    <!-- no translation found for notification_bundles (496852738958148317) -->
+    <skip />
     <string name="notification_summarization_title" msgid="1516039882005781529">"Kennisgewingopsommings"</string>
-    <string name="notification_summarization_on" msgid="5692758038788359790">"Aan"</string>
-    <string name="notification_summarization_off" msgid="4660131515915234037">"Af"</string>
+    <!-- no translation found for notification_summarization_summary (1963425736716175590) -->
+    <skip />
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Gebruik kennisgewingopsommings"</string>
-    <string name="notification_summarization_description" msgid="8787422238462516765">"Som outomaties gesprekkennisgewings vanaf apps op"</string>
-    <string name="notification_summarization_excluded_description" msgid="3772411462994322275">"Gesprekkennisgewings vanaf hierdie apps sal nie opgesom word nie"</string>
+    <!-- no translation found for notification_summarization_description (341128754705513791) -->
+    <skip />
+    <!-- no translation found for notification_summarization_excluded_description (5819160700526641394) -->
+    <skip />
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Bestuur apps"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="1299744594788208296">"Laat kennisgewingopsommings vir apps toe"</string>
     <string name="notification_excluded_apps" msgid="6648267716069216826">"Appuitsonderings"</string>
@@ -3955,14 +3984,18 @@
     <string name="notification_polite_description" msgid="6137533404978878957">"Wanneer jy binne ’n kort tydperk baie kennisgewings kry, sal jou toestel vir tot 1 minuut die volume sagter stel en waarskuwings minimeer. Oproepe, wekkers en prioriteitgesprekke word nie geraak nie. \n\nKennisgewings wat jy tydens demping ontvang, kan gekry word deur van die bokant van die skerm af te trek."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Pas toe op werkprofiele"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Pas toe op werkprofielapps"</string>
-    <string name="notification_bundle_title" msgid="460988459835922719">"Gebondelde kennisgewings"</string>
-    <string name="notification_bundle_on" msgid="1596327200778050642">"Aan"</string>
-    <string name="notification_bundle_off" msgid="1550261372988157377">"Af"</string>
-    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"Gebruik kennisgewingbondeling"</string>
-    <string name="notification_bundle_description" msgid="3896142878395333784">"Kennisgewings met soortgelyke temas sal gedemp en saam gegroepeer word vir ’n stiller ervaring. Bondeling sal ’n app se eie kennisgewinginstellings tersydestel."</string>
+    <!-- no translation found for notification_bundle_title (6679586974995981433) -->
+    <skip />
+    <!-- no translation found for notification_bundle_summary (8924550009829960969) -->
+    <skip />
+    <!-- no translation found for notification_bundle_main_control_title (2632661768990540295) -->
+    <skip />
+    <!-- no translation found for notification_bundle_description (8439963475488583612) -->
+    <skip />
     <string name="notification_app_level_bundle_title" msgid="8917807675495480483">"Bondelkennisgewings"</string>
     <string name="notification_app_level_bundle_subtext" msgid="7330731485247761388">"Kennisgewings met soortgelyke temas sal gedemp en saamgegroepeer word vir ’n stiller ervaring"</string>
-    <string name="notification_bundle_excluded_description" msgid="7249934130756103812">"Kennisgewings vanaf hierdie apps sal nie gebondel word nie"</string>
+    <!-- no translation found for notification_bundle_excluded_description (2667461772332132250) -->
+    <skip />
     <string name="notification_bundle_manage_excluded_apps_title" msgid="7019831234073590293">"Laat kennisgewingbondeling vir apps toe"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR-helperdienste"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Geen geïnstalleerde apps het versoek om as VR-helperdienste te werk nie."</string>
@@ -4666,7 +4699,7 @@
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Help om batterylewe te verleng"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Kitsinstellings-ontwikkelaarteëls"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Deaktiveer uitteltyd vir ADB-magtiging"</string>
-    <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"Deaktiveer outomatiese herroeping van ADB-magtigings vir stelsels wat nie binne die verstek- (7 dae) of gebruikeropgstelde (minimum 1 dag) tydperk herkoppel het nie."</string>
+    <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"Deaktiveer outomatiese herroeping van ADB-magtigings vir stelsels wat nie binne die verstek- (7 dae) of gebruikeropgestelde (minimum 1 dag) tydperk herkoppel het nie."</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Sensors Af"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"Werkprofielinstellings"</string>
     <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"Soek werkgidskontakte in persoonlike apps"</string>
@@ -4698,6 +4731,22 @@
     <string name="system_navigation_title" msgid="4890381153527184636">"Navigasiemodus"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"2-knoppienavigasie"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Swiep op op die tuisknoppie om programme te wissel. Swiep weer op om alle programme te sien. Tik op die terugknoppie om terug te gaan."</string>
+    <!-- no translation found for shade_panels_title (6816157397029469997) -->
+    <skip />
+    <!-- no translation found for keywords_shade_panels (6181844937287087945) -->
+    <skip />
+    <!-- no translation found for shade_panels_category (3262351355390846546) -->
+    <skip />
+    <!-- no translation found for shade_panels_separate_title (7839124123668116363) -->
+    <skip />
+    <!-- no translation found for shade_panels_separate_summary (4879360492042964895) -->
+    <skip />
+    <!-- no translation found for shade_panels_combined_title (2812149031368941984) -->
+    <skip />
+    <!-- no translation found for shade_panels_combined_summary (5884627562590432068) -->
+    <skip />
+    <!-- no translation found for shade_panels_foldables_footer_message (3974376428811063936) -->
+    <skip />
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Veiligheid en noodgeval"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"Nood-SOS, mediese inligting, waarskuwings"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Gebaarnavigasie"</string>
@@ -4990,8 +5039,7 @@
     <string name="network_connected" msgid="7637745547242487795">"Gekoppel"</string>
     <string name="network_connecting" msgid="6856124847029124041">"Koppel tans …"</string>
     <string name="network_could_not_connect" msgid="676574629319069922">"Kon nie koppel nie"</string>
-    <!-- no translation found for empty_networks_list (7263167074321380983) -->
-    <skip />
+    <string name="empty_networks_list" msgid="7263167074321380983">"Geen netwerke gevind nie"</string>
     <string name="network_query_error" msgid="6406348372070035274">"Kon nie netwerke kry nie. Probeer weer."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(verbode)"</string>
     <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
@@ -5242,7 +5290,7 @@
     <string name="enable_desktop_experience_features_summary_without_desktop" msgid="7567963048658976895">"Aktiveer werkskermvensters op sekondêre skerms."</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Aktiveer vryevormvensters op sekondêre skerm"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Aktiveer nieveranderbare grootte in multivenster"</string>
-    <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Laat programme met nieveranderbare grootte toe in multivenster"</string>
+    <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Laat apps met nieveranderbare grootte toe in multivenster"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Ignoreer gedwonge donkermodus"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"Ignoreer die gedwonge donkermoduskenmerk om altyd aan te wees"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Privaatheid"</string>
@@ -5365,11 +5413,11 @@
     <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"Skakel VoLTE af?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"Dit skakel ook jou 5G-verbinding af.\nJy kan nie die iternet tydens stemoproepe gebruik nie en sekere programme kan dalk nie werk nie."</string>
-    <string name="cached_apps_freezer" msgid="1057519579761550350">"Skort uitvoering van gekaste programme op"</string>
+    <string name="cached_apps_freezer" msgid="1057519579761550350">"Skort uitvoering van gekaste apps op"</string>
     <string name="blob_never_expires_text" msgid="7293376386620106623">"Verval nooit nie."</string>
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"Huurtyd verval nooit nie."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Laat skermoorleggers op Instellings toe"</string>
-    <string name="overlay_settings_summary" msgid="2745336273786148166">"Laat programme wat oor ander programme kan wys toe om Instellings-skerms te oorlê"</string>
+    <string name="overlay_settings_summary" msgid="2745336273786148166">"Laat apps wat oor ander apps kan wys toe om Instellings-skerms te oorlê"</string>
     <string name="allow_mock_modem" msgid="3832264806530479214">"Laat skynmodem toe"</string>
     <string name="allow_mock_modem_summary" msgid="9097416612748005374">"Laat hierdie toestel toe om skymodemdiens vir instrumenttoetse te gebruik. Moenie dit tydens normale gebruik van die foon aktiveer nie"</string>
     <string name="disable_screen_share_protections_for_apps_and_notifications" msgid="4987116103699222633">"Deaktiveer skermdelingbeskerming"</string>
@@ -5725,8 +5773,7 @@
     <string name="audio_sharing_block_pairing_dialog_content" msgid="6352030314206654722">"Skakel eers oudiodeling af om ’n nuwe toestel saam te bind."</string>
     <string name="audio_sharing_turn_off_button_label" msgid="1934956352475393641">"Skakel af"</string>
     <string name="share_audio_notification_title" msgid="5201976754820387782">"Deel oudio met <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for audio_sharing_device_volume_description (3218967346006222765) -->
-    <skip />
+    <string name="audio_sharing_device_volume_description" msgid="3218967346006222765">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> se volume"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Koppel aan ’n LE-oudiostroom"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Oudiostrome naby"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Oudiostrome"</string>
@@ -5777,8 +5824,7 @@
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Skandeer ’n oudiostroom-QR-kode om op <xliff:g id="DEVICE_NAME">%1$s</xliff:g> te luister"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Kan nie wagwoord wysig terwyl daar gedeel word nie. Skakel eers oudiodeling af om die wagwoord te verander."</string>
     <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Jou wagwoord moet 4-16 karakters bevat en net letters, syfers en simbole gebruik"</string>
-    <!-- no translation found for audio_streams_main_page_name_dialog_format_alert (6797839340871206774) -->
-    <skip />
+    <string name="audio_streams_main_page_name_dialog_format_alert" msgid="6797839340871206774">"Jou oudiostroomnaam moet 4-32 karakters bevat en slegs letters, syfers en simbole gebruik"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR-kodeskandeerder"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Het jy hulp nodig?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Soekinstellings"</string>
@@ -5815,6 +5861,14 @@
     <!-- no translation found for supervision_add_pin_recovery_title (5584523084706797399) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Webinhoudfilters"</string>
+    <!-- no translation found for supervision_web_content_filters_summary_both_on (8668754911140483798) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_summary_chrome_on (5999295548020086617) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_summary_search_on (6866676094401450305) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_summary_both_off (6735949158065982622) -->
+    <skip />
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome en web"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Probeer om eksplisiete werwe te blokkeer"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_summary" msgid="1477766506765966613">"Geen filter is perfek nie, maar dit behoort te help om seksueel eksplisiete webwerwe te versteek"</string>
@@ -5824,6 +5878,8 @@
     <string name="supervision_web_content_filters_search_filter_on_summary" msgid="1162258144140293269">"Help om eksplisiete prente, teks en skakels uit soekresultate op hierdie toestel uit te filtreer"</string>
     <string name="supervision_web_content_filters_search_filter_off_title" msgid="6049461395304222346">"Veiligsoek-filtrering is AF"</string>
     <string name="supervision_web_content_filters_search_filter_off_summary" msgid="3834238970190924433">"Rekeninginstellings kan steeds eksplisiete resultate filtreer of wasig maak"</string>
+    <!-- no translation found for supervision_web_content_filters_footer_content (3532535288142541994) -->
+    <skip />
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Voer toesig-PIN in"</string>
     <!-- no translation found for supervision_lock_setup_title (7581682893583645713) -->
     <skip />

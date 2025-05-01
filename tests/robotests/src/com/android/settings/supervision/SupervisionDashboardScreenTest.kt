@@ -46,9 +46,8 @@ class SupervisionDashboardScreenTest {
 
     @get:Rule
     val serviceRule =
-        MessengerServiceRule(
-            TestSupervisionMessengerService::class.java,
-            SupervisionMessengerClient(context),
+        MessengerServiceRule<SupervisionMessengerClient>(
+            TestSupervisionMessengerService::class.java
         )
 
     @Test

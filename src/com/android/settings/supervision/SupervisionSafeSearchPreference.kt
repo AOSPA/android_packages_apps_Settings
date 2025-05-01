@@ -36,7 +36,7 @@ import com.android.settingslib.preference.forEachRecursively
 import com.android.settingslib.supervision.SupervisionIntentProvider
 import com.android.settingslib.widget.SelectorWithWidgetPreference
 
-/** Base class of web content filters SafeSearch preferences. */
+/** Base class of web content filters Search filter preferences. */
 sealed class SupervisionSafeSearchPreference(
     protected val dataStore: SupervisionSafeSearchDataStore
 ) :
@@ -131,9 +131,6 @@ class SupervisionSearchFilterOffPreference(dataStore: SupervisionSafeSearchDataS
 
     override val title
         get() = R.string.supervision_web_content_filters_search_filter_off_title
-
-    override val summary
-        get() = R.string.supervision_web_content_filters_search_filter_off_summary
 
     companion object {
         const val KEY = "web_content_filters_search_filter_off"

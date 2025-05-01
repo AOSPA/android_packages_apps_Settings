@@ -40,11 +40,13 @@
     <string name="radioInfo_data_connected" msgid="8816467971633020141">"დაკავშირებულია"</string>
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"შეჩერებული"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"უცნობია"</string>
-    <string name="preview_pager_content_description" msgid="3762247188224576303">"გადახედვა"</string>
-    <string name="preview_pager_home_content_description" msgid="3961399947853424786">"მთავარი ეკრანის წინასწარი ვერსია"</string>
-    <string name="preview_pager_message_content_description" msgid="3018855090807833755">"შეტყობინების გადახედვა"</string>
-    <string name="preview_pager_email_content_description" msgid="100055784235660338">"ელფოსტის წინასწარი ვერსია"</string>
     <string name="qr_code_content_description" msgid="1852208464419291347">"QR კოდი"</string>
+    <!-- no translation found for preview_pager_home_title (6102935625155194821) -->
+    <skip />
+    <!-- no translation found for preview_pager_message_title (5933499691147446486) -->
+    <skip />
+    <!-- no translation found for preview_pager_email_title (8767864657910457562) -->
+    <skip />
     <string name="preview_pager_previous_button" msgid="607771113300838313">"წინას გადახედვა"</string>
     <string name="preview_pager_next_button" msgid="8700907912508927271">"შემდეგის გადახედვა"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"დაპატარავება"</string>
@@ -200,8 +202,7 @@
     <string name="app_locale_preference_title" msgid="5513627099300360232">"ენა"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"უპირატესი ენა"</string>
     <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"აპის ენები"</string>
-    <!-- no translation found for app_locale_picker_summary (616928580653613998) -->
-    <skip />
+    <string name="app_locale_picker_summary" msgid="616928580653613998">"აირჩიეთ ენა თითოეული აპისთვის"</string>
     <string name="app_locale_picker_title" msgid="2431448962911301366">"აპის ენა"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"შემოთავაზებული ენები"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"ყველა ენა"</string>
@@ -214,10 +215,8 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"სისტემის ნაგულისხმევი"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"ამ აპისთვის ენის არჩევა პარამეტრებიდან მიუწვდომელია."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"ენა, შესაძლოა, განსხვავდებოდეს აპში ხელმისაწვდომი ენებისგან. ზოგიერთ აპს, შესაძლოა, არ ჰქონდეს ამ პარამეტრის მხარდაჭერა."</string>
-    <!-- no translation found for desc_app_locale_selection_supported (7363315876602221125) -->
-    <skip />
-    <!-- no translation found for desc_app_locale_selection_supported_with_disclaimer (7622217531143496788) -->
-    <skip />
+    <string name="desc_app_locale_selection_supported" msgid="7363315876602221125">"აირჩიეთ ენა თითოეული აპისთვის."</string>
+    <string name="desc_app_locale_selection_supported_with_disclaimer" msgid="7622217531143496788">"აირჩიეთ ენა თითოეული აპისთვის. ენა შეიძლება განსხვავდებოდეს აპში ხელმისაწვდომი ენებისგან. ეს პარამეტრი შეიძლება არ იყოს მხარდაჭერილი ზოგიერთი აპის მიერ."</string>
     <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"თქვენი მოწყობილობა, აპები და ვებსაიტები იყენებს პირველ მხარდაჭერილ ენას თქვენი უპირატესი ენებიდან.\n\nმრავალი აპი ასევე გამოიყენებს რეგიონს თქვენი უპირატესი ენიდან თარიღების, რიცხვებისა და ერთეულების დასაფორმატებლად. თქვენი რეგიონის შესაცვლელად დაამატეთ ენა, შემდეგ აირჩიეთ სასურველი რეგიონი."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"თითოეული აპისთვის ენის ასარჩევად, გადადით აპის ენების პარამეტრებში."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"შეიტყვეთ მეტი აპის ენების შესახებ"</string>
@@ -277,7 +276,10 @@
     <string name="terms_of_address_masculine" msgid="983106046135098856">"მამრობითი"</string>
     <string name="terms_of_address_neutral" msgid="5475414185543112478">"ნეიტრალური"</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{ამოიშალოს არჩეული ენა?}other{ამოიშალოს არჩეული ენები?}}"</string>
-    <string name="dlg_remove_locales_message" msgid="8110560091134252067">"ტექსტი სხვა ენაზე იქნება ნაჩვენები."</string>
+    <!-- no translation found for dlg_remove_system_locales_title (7626516786258866543) -->
+    <skip />
+    <!-- no translation found for dlg_remove_locales_message (6636637008013310242) -->
+    <skip />
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"ყველა ენის ამოშლა ვერ მოხერხდება"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"შეინარჩუნეთ მინიმუმ ერთი სასურველი ენა"</string>
     <string name="locale_not_translated" msgid="3071618135527110152">"მიუწვდომელია როგორც სისტემის ენა"</string>
@@ -965,6 +967,10 @@
     <string name="device_details_battery" msgid="5466987755790847884">"ბატარეა"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"ბატარეა, დატენა"</string>
     <string name="device_details_key_missing_title" msgid="3568401701538114387">"ცადეთ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>-ის გადატვირთვა. თუ ამან არ იმუშავა, დაივიწყეთ მოწყობილობა. თქვენივე უსაფრთხოებისთვის მოწყობილობა ხელახლა დააწყვილეთ მხოლოდ მაშინ, როდესაც საჯარო სივრცეში არ იქნებით.\n\nთუ ეს მოწყობილობა ახლომახლო არ არის, თქვენგან რაიმე მოქმედების შესრულება საჭირო არ არის."</string>
+    <!-- no translation found for verbose_printer_logging_title (6525634245166402031) -->
+    <skip />
+    <!-- no translation found for verbose_printer_logging_summary (6558076303223667013) -->
+    <skip />
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"მოწყობილობის დავიწყება"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"აპთან კავშირის გაწყვეტა"</string>
     <string name="device_details_more_settings" msgid="950302792331611271">"დამატებითი პარამეტრები"</string>
@@ -1448,8 +1454,7 @@
     <string name="screensaver_settings_summary_postured_and_charging" msgid="5111797042509819055">"ვერტიკალურ პოზიციაში და დატენისას"</string>
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"ჩართულია / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"გამორთული"</string>
-    <!-- no translation found for screensaver_settings_when_to_dream (7756170756065029160) -->
-    <skip />
+    <string name="screensaver_settings_when_to_dream" msgid="7756170756065029160">"ჩვენების დრო"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"გაღვიძება აწევისას"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"უსადენო დატენაზე შეზღუდვა"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"ემბიენტური ეკრანი"</string>
@@ -1457,24 +1462,21 @@
     <string name="doze_title" msgid="1523090408230862316">"ეკრ. გაღვიძება შეტყობინებაზე"</string>
     <string name="doze_summary" msgid="8252867381522942804">"როცა ეკრანი მუქია, ის ჩაირთვება ახალი შეტყობინებებისთვის"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"ყოველთვის ჩანდეს დრო და ინფო"</string>
-    <!-- no translation found for doze_always_on_title2 (6806855871175589465) -->
-    <skip />
+    <string name="doze_always_on_title2" msgid="6806855871175589465">"ყოველთვის ჩართული ეკრანი"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"ბატარეის მოხმარება გაიზრდება"</string>
-    <!-- no translation found for doze_always_on_summary_with_wallpaper (7193043498368623388) -->
-    <skip />
-    <!-- no translation found for doze_always_on_summary_without_wallpaper (2461602415293603846) -->
-    <skip />
-    <!-- no translation found for doze_always_on_summary_long (9198713049143867176) -->
-    <skip />
-    <!-- no translation found for doze_always_on_wallpaper_options (6089727555294626960) -->
-    <skip />
-    <!-- no translation found for doze_always_on_wallpaper_title (975186604007325364) -->
-    <skip />
-    <!-- no translation found for doze_always_on_wallpaper_description (7797570713499410605) -->
-    <skip />
+    <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"ჩაკეტილი ეკრანის ფონის ჩვენება, როდესაც ეკრანი გამორთულია"</string>
+    <string name="doze_always_on_summary_without_wallpaper" msgid="2461602415293603846">"ჩაკეტილი ეკრანის ფონის დამალვა, როდესაც ეკრანი გამორთულია"</string>
+    <string name="doze_always_on_summary_long" msgid="9198713049143867176">"ყოველთვის ჩართული ეკრანი აჩვენებს დროს, თარიღს და მეტს, როდესაც ეკრანი გამორთულია"</string>
+    <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"ფონის ვარიანტები"</string>
+    <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"ჩაკეტილი ეკრანის ფონის ჩვენება"</string>
+    <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"ჩაკეტილი ეკრანის ფონი ხილულია ყოველთვის ჩართული ეკრანით"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"მუქი ტექსტი"</string>
     <string name="title_font_size" msgid="570613010306330622">"შრიფტის ზომა"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"ტექსტის გადიდება ან დაპატარავება"</string>
+    <!-- no translation found for category_title_display_text_size (4234285020731751694) -->
+    <skip />
+    <!-- no translation found for category_title_text_style (5905015084935695611) -->
+    <skip />
     <string name="sim_lock_settings" msgid="7331982427303002613">"SIM-ის ჩაკეტვის პარამეტრები"</string>
     <string name="sim_lock_settings_category" msgid="6475255139493877786">"SIM-ის ჩაკეტვა"</string>
     <string name="sim_pin_toggle" msgid="6814489621760857328">"SIM-ის ჩაკეტვა"</string>
@@ -2121,6 +2123,8 @@
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"გადაადგილება"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"მართული გადაადგილება"</string>
     <string name="mouse_scrolling_speed" msgid="3999483025392860903">"გადაადგილების სიჩქარე"</string>
+    <string name="mouse_pointer_speed_make_faster_desc" msgid="7665912663672314461">"მანიშნებლის აჩქარება"</string>
+    <string name="mouse_pointer_speed_make_slower_desc" msgid="116802579827902188">"მანიშნებლის შენელება"</string>
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"მაუსის ძირითადი ღილაკის შეცვლა"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"გამოიყენეთ მაუსის მარცხენა ღილაკი მარჯვენის ფუნქციით"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"კურსორის დაჩქარება"</string>
@@ -2144,7 +2148,7 @@
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"კურსორის სიჩქარე, ჟესტები"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"შეხებით დაწკაპუნება"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"ფაილების გადატანა შეხებითა და ჩავლებით"</string>
-    <string name="trackpad_tap_dragging_summary" msgid="2935498183201422245">"ერთეულის გადასატანად საჭიროა მასზე ორმაგად შეხება, მეორე შეხებაზე შეყოვნება და შემდეგ ერთეულის ჩავლებით გადატანა"</string>
+    <string name="trackpad_tap_dragging_summary" msgid="5605534150661601073">"ობიექტ. გადასატანად, სენს. პანელზე ორმაგად შეეხეთ და ჩაავლეთ"</string>
     <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"სენსორული პანელის ჟესტები"</string>
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"დააყენეთ სენსორული პანელით ნავიგაციის ინდივიდუალური ჟესტები"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"უკუგადაადგილება"</string>
@@ -2152,6 +2156,8 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"ქვედა მარჯვენა დაწკაპუნება"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"დამატებითი ვარიანტებისთვის დააწკაპუნეთ სენსორული პანელის ქვედა მარჯვენა კუთხეში"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"მანიშნებლის სიჩქარე"</string>
+    <string name="trackpad_pointer_speed_make_faster_desc" msgid="2855950278314583596">"მანიშნებლის აჩქარება"</string>
+    <string name="trackpad_pointer_speed_make_slower_desc" msgid="6577850228762978827">"მანიშნებლის შენელება"</string>
     <string name="three_finger_tap_preference_title" msgid="1836080810837854140">"სამი თითით შეხების გამოყენება"</string>
     <string name="touchpad_acceleration_title" msgid="176627555191021888">"სენსორული პანელის აჩქარება"</string>
     <string name="touchpad_acceleration_summary" msgid="8057075483967535793">"სენსორული პანელზე უფრო სწრაფი მოძრაობები კურსორს უფრო შორს გადასწევს"</string>
@@ -2171,6 +2177,10 @@
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"მარჯვენა დაწკაპუნება, შეხება"</string>
     <string name="three_finger_tap_middle_click" msgid="7898931632908866867">"მაუსის შუა ღილაკი"</string>
     <string name="three_finger_tap_launch_gemini" msgid="4030401656711588982">"ასისტენტის გაშვება"</string>
+    <!-- no translation found for three_finger_tap_launch_default_assistant (7947939159617292478) -->
+    <skip />
+    <!-- no translation found for three_finger_tap_launch_generic_assistant_name (1893057235983949817) -->
+    <skip />
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"მთავარზე გადასვლა"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"უკან დაბრუნება"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"ბოლო აპების ნახვა"</string>
@@ -2204,8 +2214,12 @@
     <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"კლავიშების ფიქსაცია, მრავალჯერადი დაჭერის შეზღუდვა კლავიშებზე, მაუსის კლავიშები"</string>
     <string name="keyboard_repeat_keys_title" msgid="6346877755243280735">"განმეორებადი კლავიშები"</string>
     <string name="keyboard_repeat_keys_timeout_title" msgid="3411871149974652293">"დაყოვნება განმეორებამდე"</string>
-    <string name="keyboard_repeat_keys_delay_title" msgid="7323531750483922943">"გამეორების სიხშირე"</string>
+    <string name="keyboard_repeat_keys_increase_delay_desc" msgid="9131810864682287872">"დაყოვნების გაზრდა"</string>
+    <string name="keyboard_repeat_keys_decrease_delay_desc" msgid="6762794746507398346">"დაყოვნების შემცირება"</string>
+    <string name="keyboard_repeat_keys_delay_title" msgid="5954595732341624638">"გამეორების სიხშირე"</string>
     <string name="keyboard_repeat_keys_summary" msgid="8972905345211768313">"ხანგრძლივად დააჭირეთ კლავიშზე, რათა განმეორებით აიკრიფოს სიმბოლო, სანამ კლავიშიდან თითს აიღებთ"</string>
+    <string name="keyboard_repeat_keys_increase_rate_desc" msgid="1745229237083808184">"გამეორების სიხშირის გაზრდა"</string>
+    <string name="keyboard_repeat_keys_decrease_rate_desc" msgid="31236959764168589">"გამეორების სიხშირის შემცირება"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"<xliff:g id="IME_LABEL">%s</xliff:g> განლაგება"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"ნაგულისხმევი"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"ავტომატური: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2302,14 +2316,10 @@
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"სისტემის მართვის საშუალებები"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"გამოხმაურება"</string>
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"შეგვაფასეთ"</string>
-    <!-- no translation found for accessibility_send_survey_notification_channel (6136555229886306184) -->
-    <skip />
-    <!-- no translation found for dark_theme_survey_notification_title (4035183263314404750) -->
-    <skip />
-    <!-- no translation found for dark_theme_survey_notification_summary (801472177955048195) -->
-    <skip />
-    <!-- no translation found for dark_theme_survey_notification_action (7693304950750954402) -->
-    <skip />
+    <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"მარტივი წვდომის გამოკითხვა"</string>
+    <string name="dark_theme_survey_notification_title" msgid="4035183263314404750">"მუქი თემა სხვა აპებში"</string>
+    <string name="dark_theme_survey_notification_summary" msgid="801472177955048195">"გაგვიზიარეთ გამოხმაურება"</string>
+    <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"გამოკითხვაში მონაწილეობის მიღება"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"ჩამოტვირთული აპები"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"ექსპერიმენტული"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"ფუნქციების ალმები"</string>
@@ -2337,10 +2347,8 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"ეკრანის გადაადგილება, როცა მაუსი ეკრანის კიდეებს ეხება"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"ტექსტის აკრეფის გადიდება"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"გამადიდებელი მოგყვებათ ტექსტის აკრეფისას"</string>
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_title (7342198645736402048) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_summary (9091733229413835358) -->
-    <skip />
+    <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="7342198645736402048">"კლავიატურის ფოკუსის გადიდება"</string>
+    <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="9091733229413835358">"ლუპა მიჰყვება კლავიატურის ფოკუსს"</string>
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"კლავიატურის გადიდება"</string>
     <string name="accessibility_screen_magnification_nav_ime_summary" msgid="3054371947104552843">"კლავიატურა გადიდებულია თქვენს კონტენტთან ერთად"</string>
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"მიუწვდომელია ეკრანის მხოლოდ ნაწილის გადიდებისას"</string>
@@ -3514,8 +3522,7 @@
     <string name="keywords_wallet" msgid="3757421969956996972">"საფულე"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"გადახდა, შეხება, გადახდები"</string>
     <string name="keywords_backup" msgid="707735920706667685">"სარეზერვო ასლი, სარეზერვო ასლის შექმნა"</string>
-    <!-- no translation found for keywords_fingerprint_unlock (522579721745187402) -->
-    <skip />
+    <string name="keywords_fingerprint_unlock" msgid="522579721745187402">"თითის ანაბეჭდი, განბლოკვა, ავტორიზაცია, შესვლა"</string>
     <string name="keywords_face_unlock" msgid="545338452730885392">"სახე, განბლოკვა, ავტორიზაცია, შესვლა"</string>
     <string name="keywords_biometric_unlock" msgid="8569545388717753692">"სახე, განბლოკვა, ავტორიზაცია, სისტემაში შესვლა, თითის ანაბეჭდი, ბიომეტრიული"</string>
     <string name="keywords_imei_info" msgid="8848791606402333514">"IMEI, MEID, MIN, PRL ვერსია, IMEI SV"</string>
@@ -3791,13 +3798,16 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"შეტყობინების გახსნა"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"შეტყობინებების ჩაჩუმების დაშვება"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"შეტყობ. ნიშნული აპის ხატულაზე"</string>
-    <string name="notification_bundles" msgid="3614044525822580826">"შეტყობინების ნაკრებები"</string>
+    <!-- no translation found for notification_bundles (496852738958148317) -->
+    <skip />
     <string name="notification_summarization_title" msgid="1516039882005781529">"შეტყობინების შეჯამებები"</string>
-    <string name="notification_summarization_on" msgid="5692758038788359790">"ჩართული"</string>
-    <string name="notification_summarization_off" msgid="4660131515915234037">"გამორთული"</string>
+    <!-- no translation found for notification_summarization_summary (1963425736716175590) -->
+    <skip />
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"შეტყობინების შეჯამებების გამოყენება"</string>
-    <string name="notification_summarization_description" msgid="8787422238462516765">"აპებიდან საუბრის შეტყობინებების ავტომატური შეჯამება"</string>
-    <string name="notification_summarization_excluded_description" msgid="3772411462994322275">"საუბრის შეტყობინებები ამ აპებიდან არ შეჯამდება"</string>
+    <!-- no translation found for notification_summarization_description (341128754705513791) -->
+    <skip />
+    <!-- no translation found for notification_summarization_excluded_description (5819160700526641394) -->
+    <skip />
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"აპების მართვა"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="1299744594788208296">"აპებისთვის შეტყობინების შეჯამებების დაშვება"</string>
     <string name="notification_excluded_apps" msgid="6648267716069216826">"აპების გამონაკლისები"</string>
@@ -3955,14 +3965,18 @@
     <string name="notification_polite_description" msgid="6137533404978878957">"როცა მცირე დროის განმავლობაში ბევრ შეტყობინებას იღებთ, თქვენი მოწყობილობა ხმას დაუწევს და მინიმალურამდე შეამცირებს გაფრთხილებებს ერთ წუთამდე დროის განმავლობაში. ზარებზე, მაღვიძარებსა და პრიორიტეტულ საუბრებზე ეს გავლენას არ ახდენს. \n\nგანტვირთვის პერიოდის განმავლობაში მიღებული შეტყობინებების ნახვა შესაძლებელია ეკრანის ზემოდან ქვემოთ ჩამოწევით."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"გავრცელდეს სამსახურის პროფილზე"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"სამსახურის პროფილის აპებზე გავრცელება"</string>
-    <string name="notification_bundle_title" msgid="460988459835922719">"დაჯგუფებული შეტყობინებები"</string>
-    <string name="notification_bundle_on" msgid="1596327200778050642">"ჩართული"</string>
-    <string name="notification_bundle_off" msgid="1550261372988157377">"გამორთული"</string>
-    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"შეტყობინებების დაჯგუფების გამოყენება"</string>
-    <string name="notification_bundle_description" msgid="3896142878395333784">"მსგავსი თემატიკის შეტყობინებები დადუმდება და დაჯგუფდება, რათა ნაკლებად შეწუხდეთ. დაჯგუფება უგულებელყოფს უშუალოდ აპის შეტყობინების პარამეტრებს."</string>
+    <!-- no translation found for notification_bundle_title (6679586974995981433) -->
+    <skip />
+    <!-- no translation found for notification_bundle_summary (8924550009829960969) -->
+    <skip />
+    <!-- no translation found for notification_bundle_main_control_title (2632661768990540295) -->
+    <skip />
+    <!-- no translation found for notification_bundle_description (8439963475488583612) -->
+    <skip />
     <string name="notification_app_level_bundle_title" msgid="8917807675495480483">"შეტყობინებათა ნაკრები"</string>
     <string name="notification_app_level_bundle_subtext" msgid="7330731485247761388">"მსგავსი თემატიკის შეტყობინებები დადუმდება და დაჯგუფდება, რათა ნაკლებად შეწუხდეთ"</string>
-    <string name="notification_bundle_excluded_description" msgid="7249934130756103812">"შეტყობინებები ამ აპიდან არ დაჯგუფდება"</string>
+    <!-- no translation found for notification_bundle_excluded_description (2667461772332132250) -->
+    <skip />
     <string name="notification_bundle_manage_excluded_apps_title" msgid="7019831234073590293">"აპებისთვის შეტყობინებების დაჯგუფების დაშვება"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"ვირტ. რეალობის დამხმარე სერვისები"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"ვირტუალური რეალობის დამხმარე სერვისად გაშვება არცერთ დაინსტალირებულ აპს არ მოუთხოვია."</string>
@@ -4698,6 +4712,22 @@
     <string name="system_navigation_title" msgid="4890381153527184636">"ნავიგაციის რეჟიმი"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"2-ღილაკიანი ნავიგაცია"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"აპების გადასართავად, გადაფურცლეთ ზემოთ მთავარ ეკრანზე გადასვლის ღილაკზე. ყველა აპის სანახავად კიდევ გადაფურცლეთ. უკან გადასასვლელად, შეეხეთ უკან გადასვლის ღილაკს."</string>
+    <!-- no translation found for shade_panels_title (6816157397029469997) -->
+    <skip />
+    <!-- no translation found for keywords_shade_panels (6181844937287087945) -->
+    <skip />
+    <!-- no translation found for shade_panels_category (3262351355390846546) -->
+    <skip />
+    <!-- no translation found for shade_panels_separate_title (7839124123668116363) -->
+    <skip />
+    <!-- no translation found for shade_panels_separate_summary (4879360492042964895) -->
+    <skip />
+    <!-- no translation found for shade_panels_combined_title (2812149031368941984) -->
+    <skip />
+    <!-- no translation found for shade_panels_combined_summary (5884627562590432068) -->
+    <skip />
+    <!-- no translation found for shade_panels_foldables_footer_message (3974376428811063936) -->
+    <skip />
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"უსაფრთხოება და საგანგებო სიტუაცია"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"გადაუდებელი დახმარება, SOS, სამედიცინო ინფო, გაფრთხილებები"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"ჟესტით ნავიგაცია"</string>
@@ -4990,8 +5020,7 @@
     <string name="network_connected" msgid="7637745547242487795">"დაკავშირებულია"</string>
     <string name="network_connecting" msgid="6856124847029124041">"მიმდინარეობს დაკავშირება…"</string>
     <string name="network_could_not_connect" msgid="676574629319069922">"დაკავშირება ვერ მოხერხდა"</string>
-    <!-- no translation found for empty_networks_list (7263167074321380983) -->
-    <skip />
+    <string name="empty_networks_list" msgid="7263167074321380983">"ქსელები ვერ მოიძებნა"</string>
     <string name="network_query_error" msgid="6406348372070035274">"ქსელები ვერ მოიძებნა. ცადეთ ხელახლა."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(აკრძალული)"</string>
     <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
@@ -5725,8 +5754,7 @@
     <string name="audio_sharing_block_pairing_dialog_content" msgid="6352030314206654722">"ახალი მოწყობილობის დასაწყვილებლად, პირველ რიგში, გამორთეთ აუდიოს გაზიარება."</string>
     <string name="audio_sharing_turn_off_button_label" msgid="1934956352475393641">"გამორთვა"</string>
     <string name="share_audio_notification_title" msgid="5201976754820387782">"აუდიოს გაზიარება <xliff:g id="DEVICE_NAME">%1$s</xliff:g>-თან"</string>
-    <!-- no translation found for audio_sharing_device_volume_description (3218967346006222765) -->
-    <skip />
+    <string name="audio_sharing_device_volume_description" msgid="3218967346006222765">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>-ის ხმა"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"დაუკავშირდით LE-აუდიო ნაკადს"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"ახლომახლო აუდიო ნაკადები"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"აუდიო ნაკადები"</string>
@@ -5777,8 +5805,7 @@
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"დაასკანირეთ აუდიო ნაკადის QR კოდი<xliff:g id="DEVICE_NAME">%1$s</xliff:g> მოწყობილობასთან ერთად მოსასმენად"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"გაზიარების დროს შეუძლებელია პაროლის რედაქტირება. პაროლის შესაცვლელად, პირველ რიგში, გამორთეთ აუდიოს გაზიარება."</string>
     <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"თქვენი პაროლი უნდა შეიცავდეს 4-16 სიმბოლოს და გამოყენებული იყოს მხოლოდ ასოები, ციფრები და სიმბოლოები"</string>
-    <!-- no translation found for audio_streams_main_page_name_dialog_format_alert (6797839340871206774) -->
-    <skip />
+    <string name="audio_streams_main_page_name_dialog_format_alert" msgid="6797839340871206774">"თქვენი აუდიონაკადის სახელი უნდა შეიცავდეს 4-32 სიმბოლოს, რომელიც შეიცავს მხოლოდ ასოებს, ციფრებსა და სპეციალურ სიმბოლოებს"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR კოდის სკანერი"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"დახმარება გჭირდებათ?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"ძიების პარამეტრები"</string>
@@ -5796,25 +5823,29 @@
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"ძიება წრის მოხაზვით"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"ეკრანზე არსებული კონტენტის გამოყენებით ძიებისთვის ხანგრძლივად შეეხეთ მთავარი ეკრანის ღილაკს ან ნავიგაციის ზოლს."</string>
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. მოწყობილობის დეტალის კონფიგურაცია."</string>
-    <!-- no translation found for supervision_settings_title (8507163323870367711) -->
-    <skip />
+    <string name="supervision_settings_title" msgid="8507163323870367711">"მშობელთა კონტროლი"</string>
     <string name="supervision_settings_summary" msgid="5020634300370322741">"კონტენტის შეზღუდვები და სხვა ლიმიტები"</string>
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"მოწყობილობის ზედამხედველობის გამოყენება"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"დასაწყებად დააყენეთ PIN-კოდი"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"ზედამხედველობა, მშობლის ზედამხედველობა, მშობელთა კონტროლი"</string>
     <string name="supervision_pin_management_preference_title" msgid="961680798581006465">"PIN-კოდის მართვა"</string>
-    <!-- no translation found for supervision_pin_management_preference_summary_add (8061713645550514683) -->
-    <skip />
-    <!-- no translation found for supervision_pin_management_preference_summary_verify_recovery (2156782778845060114) -->
-    <skip />
+    <string name="supervision_pin_management_preference_summary_add" msgid="8061713645550514683">"PIN-კოდის აღდგენის დამატება"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="2156782778845060114">"PIN-კოდის აღდგენის დადასტურება"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"PIN-კოდის შეცვლა"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"PIN-კოდი დამავიწყდა"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"აღდგენის ელფოსტის განახლება"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"PIN-კოდის წაშლა"</string>
     <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"ეს გადააყენებს ზედამხედველობის ყველა პარამეტრს"</string>
-    <!-- no translation found for supervision_add_pin_recovery_title (5584523084706797399) -->
-    <skip />
+    <string name="supervision_add_pin_recovery_title" msgid="5584523084706797399">"შეეხეთ აღდგენის დასამატებლად"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"ვებკონტენტის ფილტრები"</string>
+    <!-- no translation found for supervision_web_content_filters_summary_both_on (8668754911140483798) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_summary_chrome_on (5999295548020086617) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_summary_search_on (6866676094401450305) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_summary_both_off (6735949158065982622) -->
+    <skip />
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome და ვები"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"გამოკვეთილად სექსუალური ხასიათის საიტების დაბლოკვის ცდა"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_summary" msgid="1477766506765966613">"იდეალური ფილტრი არ არსებობს, თუმცა ეს კონკრეტული ფილტრი გამოკვეთილად სექსუალური ხასიათის შემცველი საიტების დამალვაში უნდა დაგეხმაროთ."</string>
@@ -5824,12 +5855,11 @@
     <string name="supervision_web_content_filters_search_filter_on_summary" msgid="1162258144140293269">"გეხმარებათ ამ მოწყობილობის ძიების შედეგებში უცენზურო სურათების, ტექსტისა და ბმულების გაფილტვრაში"</string>
     <string name="supervision_web_content_filters_search_filter_off_title" msgid="6049461395304222346">"SafeSearch-ის ფილტრის გამორთვა"</string>
     <string name="supervision_web_content_filters_search_filter_off_summary" msgid="3834238970190924433">"ანგარიშის პარამეტრებმა შეიძლება მაინც გაფილტროს ან გააბუნდოვანოს უცენზურო შედეგები"</string>
+    <!-- no translation found for supervision_web_content_filters_footer_content (3532535288142541994) -->
+    <skip />
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"შეიყვანეთ ზედამხედველობის PIN-კოდი"</string>
-    <!-- no translation found for supervision_lock_setup_title (7581682893583645713) -->
-    <skip />
-    <!-- no translation found for supervision_lock_setup_description (6931450348200992733) -->
-    <skip />
-    <!-- no translation found for supervision_pin_reset_success_toast (4663259412030769718) -->
-    <skip />
+    <string name="supervision_lock_setup_title" msgid="7581682893583645713">"ზედამხედველობისთვის ჩაკეტვის არჩევა"</string>
+    <string name="supervision_lock_setup_description" msgid="6931450348200992733">"ზედამხედველობის პარამეტრების განბლოკვა ამ კოდით შეგიძლიათ"</string>
+    <string name="supervision_pin_reset_success_toast" msgid="4663259412030769718">"მშობელთა კონტროლის PIN-კოდის გადაყენება"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> ანიმაცია"</string>
 </resources>

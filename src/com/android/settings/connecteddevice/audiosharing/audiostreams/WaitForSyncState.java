@@ -18,12 +18,12 @@ package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsScanQrCodeController.REQUEST_SCAN_BT_BROADCAST_QR_CODE;
 
-import android.app.AlertDialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;

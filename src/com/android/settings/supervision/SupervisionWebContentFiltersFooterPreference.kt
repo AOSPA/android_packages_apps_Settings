@@ -15,15 +15,11 @@
  */
 package com.android.settings.supervision
 
-import com.android.settings.R
 import com.android.settings.widget.FooterPreferenceMetadata
 
 class SupervisionWebContentFiltersFooterPreference : FooterPreferenceMetadata {
     override val key: String
         get() = KEY
-
-    override val title: Int
-        get() = R.string.supervision_web_content_filters_footer_content
 
     // TODO(b/411104868): Add learn more link once help article link is retrieved.
 

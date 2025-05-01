@@ -56,7 +56,11 @@ public class RegionZonePicker extends BaseTimeZoneInfoPicker {
     private @Nullable String mRegionName;
 
     public RegionZonePicker() {
-        super(R.string.date_time_set_timezone_title, R.string.search_settings, true, false);
+        super(
+                R.string.date_time_set_timezone_title,
+                R.string.date_time_search_time_zone,
+                true,
+                false);
     }
 
     @Override

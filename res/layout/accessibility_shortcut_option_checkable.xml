@@ -25,8 +25,8 @@
     android:gravity="center_vertical"
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:paddingBottom="@dimen/settingslib_expressive_space_small4"
-    android:paddingEnd="@dimen/settingslib_expressive_space_small1"
-    android:paddingStart="@dimen/settingslib_expressive_space_small1"
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
     android:paddingTop="@dimen/settingslib_expressive_space_extrasmall6">
 
     <CheckBox

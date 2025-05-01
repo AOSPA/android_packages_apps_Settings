@@ -217,6 +217,7 @@ public final class AccessibilityShortcutsTutorial {
         // Follow the Motion Stoppable requirement by using a finite animation.
         lottieView.setRepeatCount(0);
         LottieColorUtils.applyDynamicColors(context, lottieView);
+        LottieColorUtils.applyMaterialColor(context, lottieView);
         lottieView.playAnimation();
 
         return illustrationFrame;

@@ -92,12 +92,6 @@ class SupervisionSafeSearchPreferenceTest {
     }
 
     @Test
-    fun getSummary_filterOff() {
-        assertThat(searchFilterOffPreference.summary)
-            .isEqualTo(R.string.supervision_web_content_filters_search_filter_off_summary)
-    }
-
-    @Test
     fun filterOffIsChecked_whenNoValueIsSet() {
         assertThrows(SettingNotFoundException::class.java) {
             Settings.Secure.getInt(context.getContentResolver(), SEARCH_CONTENT_FILTERS_ENABLED)

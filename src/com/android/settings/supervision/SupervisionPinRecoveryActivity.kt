@@ -140,7 +140,15 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
                             SupervisionIntentProvider.PinRecoveryAction.POST_SETUP_VERIFY,
                         )
                     if (postSetupVerifyIntent != null) {
-                        verificationLauncher.launch(postSetupVerifyIntent)
+                        val supervisionManager =
+                            applicationContext.getSystemService(SupervisionManager::class.java)
+                        val recoveryInfo = supervisionManager?.getSupervisionRecoveryInfo()
+                        postSetupVerifyIntent.apply {
+                            // TODO(b/409805806): will expose the parcelable as system API and pass
+                            // it instead.
+                            recoveryInfo?.email?.let { putExtra(EXTRA_RECOVERY_EMAIL, it) }
+                            verificationLauncher.launch(postSetupVerifyIntent)
+                        }
                     } else {
                         handleError("No activity found for post setup PIN recovery verify.")
                     }

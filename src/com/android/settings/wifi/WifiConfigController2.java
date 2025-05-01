@@ -63,6 +63,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -206,6 +207,8 @@ public class WifiConfigController2 implements TextWatcher,
     private TextView mDns1View;
     private TextView mDns2View;
 
+    private Switch mSharedSwitch;
+    private Switch mEditConfigurationSwitch;
     private Spinner mProxySettingsSpinner;
     @Nullable
     private Spinner mMeteredSettingsSpinner;
@@ -335,10 +338,20 @@ public class WifiConfigController2 implements TextWatcher,
                         ? View.GONE
                         : View.VISIBLE);
         mSecurityInPosition = new Integer[WifiEntry.NUM_SECURITY_TYPES];
+        mSharedSwitch = (Switch) mView.findViewById(R.id.share_wifi_network);
+        mEditConfigurationSwitch =
+            (Switch) mView.findViewById(R.id.edit_wifi_network_configuration);
 
         if (mWifiEntry == null) { // new network
             configureSecuritySpinner();
             mConfigUi.setSubmitButton(res.getString(R.string.wifi_save));
+            if (com.android.settings.connectivity.Flags.wifiMultiuser()) {
+                mSharedSwitch.setOnCheckedChangeListener(this);
+                mView.findViewById(R.id.sharing_toggle_fields).setVisibility(View.VISIBLE);
+                mEditConfigurationSwitch.setEnabled(false);
+                mView.findViewById(R.id.edit_wifi_network_configuration_fields)
+                        .setVisibility(View.VISIBLE);
+            }
         } else {
             mConfigUi.setTitle(mWifiEntry.getTitle());
 
@@ -603,6 +616,9 @@ public class WifiConfigController2 implements TextWatcher,
             config.SSID = "\"" + mSsidInputGroup.getText() + "\"";
             // If the user adds a network manually, assume that it is hidden.
             config.hiddenSSID = mHiddenSettingsSpinner.getSelectedItemPosition() == HIDDEN_NETWORK;
+            if (com.android.settings.connectivity.Flags.wifiMultiuser()) {
+                config.shared = mSharedSwitch.isChecked();
+            }
         } else if (mWifiEntry.isSaved()) {
             config = new WifiConfiguration(mWifiEntry.getWifiConfiguration());
         } else {
@@ -610,7 +626,9 @@ public class WifiConfigController2 implements TextWatcher,
             config.SSID = "\"" + mWifiEntry.getTitle() + "\"";
         }
 
-        config.shared = mSharedCheckBox.isChecked();
+        if (!com.android.settings.connectivity.Flags.wifiMultiuser()) {
+            config.shared = mSharedCheckBox.isChecked();
+        }
 
         switch (mWifiEntrySecurity) {
             case WifiEntry.SECURITY_NONE:
@@ -1722,6 +1740,11 @@ public class WifiConfigController2 implements TextWatcher,
             hideSoftKeyboard(mView.getWindowToken());
             view.setVisibility(View.GONE);
             mView.findViewById(R.id.wifi_advanced_fields).setVisibility(View.VISIBLE);
+        } else if (view.getId() == R.id.share_wifi_network) {
+            mEditConfigurationSwitch.setEnabled(isChecked);
+            if (!isChecked) {
+                mEditConfigurationSwitch.setChecked(false);
+            }
         }
     }
 

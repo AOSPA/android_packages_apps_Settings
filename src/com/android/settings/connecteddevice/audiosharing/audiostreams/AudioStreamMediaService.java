@@ -79,6 +79,7 @@ public class AudioStreamMediaService extends Service {
     static final String BROADCAST_TITLE = "audio_stream_media_service_broadcast_title";
     static final String DEVICES = "audio_stream_media_service_devices";
     private static final String TAG = "AudioStreamMediaService";
+    private static final String DEFAULT_BROADCAST_NAME = "Broadcast";
     private static final int NOTIFICATION_ID = R.string.audio_streams_title;
     private static final int BROADCAST_LISTENING_NOW_TEXT = R.string.audio_streams_listening_now;
     private static final int BROADCAST_STREAM_PAUSED_TEXT = R.string.audio_streams_present_now;
@@ -89,7 +90,7 @@ public class AudioStreamMediaService extends Service {
     private static final int STATIC_PLAYBACK_DURATION = 100;
     private static final int STATIC_PLAYBACK_POSITION = 30;
     private static final int ZERO_PLAYBACK_SPEED = 0;
-    private final PlaybackState.Builder mPlayStatePlayingBuilder =
+    @VisibleForTesting final PlaybackState.Builder mPlayStatePlayingBuilder =
             new PlaybackState.Builder()
                     .setActions(PlaybackState.ACTION_PLAY_PAUSE | PlaybackState.ACTION_SEEK_TO)
                     .setState(
@@ -100,7 +101,17 @@ public class AudioStreamMediaService extends Service {
                             LEAVE_BROADCAST_ACTION,
                             LEAVE_BROADCAST_TEXT,
                             com.android.settings.R.drawable.ic_clear);
-    private final PlaybackState.Builder mPlayStatePausedByReceiverBuilder =
+    @VisibleForTesting final PlaybackState.Builder mPlayStatePlayingNoActionBuilder =
+            new PlaybackState.Builder()
+                    .setState(
+                            PlaybackState.STATE_PLAYING,
+                            STATIC_PLAYBACK_POSITION,
+                            ZERO_PLAYBACK_SPEED)
+                    .addCustomAction(
+                            LEAVE_BROADCAST_ACTION,
+                            LEAVE_BROADCAST_TEXT,
+                            com.android.settings.R.drawable.ic_clear);
+    @VisibleForTesting final PlaybackState.Builder mPlayStatePausedBuilder =
             new PlaybackState.Builder()
                     .setActions(PlaybackState.ACTION_PLAY_PAUSE | PlaybackState.ACTION_SEEK_TO)
                     .setState(
@@ -111,7 +122,7 @@ public class AudioStreamMediaService extends Service {
                             LEAVE_BROADCAST_ACTION,
                             LEAVE_BROADCAST_TEXT,
                             com.android.settings.R.drawable.ic_clear);
-    private final PlaybackState.Builder mPlayStatePausedByHostBuilder =
+    @VisibleForTesting final PlaybackState.Builder mPlayStatePausedNoActionBuilder =
             new PlaybackState.Builder()
                     .setState(
                             PlaybackState.STATE_PAUSED,
@@ -238,7 +249,11 @@ public class AudioStreamMediaService extends Service {
                                 mBroadcastAssistantCallback);
                     }
                     if (mVolumeControl != null && mVolumeControlCallback != null) {
-                        mVolumeControl.unregisterCallback(mVolumeControlCallback);
+                        try {
+                            mVolumeControl.unregisterCallback(mVolumeControlCallback);
+                        } catch (IllegalArgumentException e) {
+                            Log.w(TAG, "VolumeControl unregister failed. " + e.getMessage());
+                        }
                     }
                 });
         mHandlerThread.quitSafely();
@@ -410,25 +425,46 @@ public class AudioStreamMediaService extends Service {
         return mLocalSession.getSessionToken();
     }
 
-    private PlaybackState getPlaybackState() {
+    @VisibleForTesting
+    PlaybackState getPlaybackState() {
         if (Flags.audioStreamPlayPauseByModifySource()) {
-            if (isAnyDeviceStreaming()) {
-                return mPlayStatePlayingBuilder.build();
+            List<BluetoothDevice> deviceStreaming = getDeviceStreaming();
+            if (!deviceStreaming.isEmpty()) {
+                // Only if any LE headset's source was added by this phone, we can potentially
+                // retrieve the selected channel and perform play/pause actions. Otherwise, we hide
+                // action buttons (this could happen during multi-point).
+                boolean canPlayPause = deviceStreaming.stream().anyMatch(
+                        mSelectedChannelCacheByDevice::containsKey);
+                return canPlayPause ? mPlayStatePlayingBuilder.build()
+                        : mPlayStatePlayingNoActionBuilder.build();
             }
-            if (isAnyDeviceReceiverPaused()) {
-                return mPlayStatePausedByReceiverBuilder.build();
+            List<BluetoothDevice> deviceReceiverPaused = getDeviceReceiverPaused();
+            if (!deviceReceiverPaused.isEmpty()) {
+                // Similarly, only if any paused LE headset's source was added by this phone,
+                // we can potentially perform play/pause actions. Otherwise, we hide action buttons.
+                boolean canPlayPause = deviceReceiverPaused.stream().anyMatch(
+                        mSelectedChannelCacheByDevice::containsKey);
+                return canPlayPause ? mPlayStatePausedBuilder.build()
+                        : mPlayStatePausedNoActionBuilder.build();
             }
             if (isAllDeviceHysteresis()) {
-                return mPlayStatePausedByHostBuilder.build();
+                return mPlayStatePausedNoActionBuilder.build();
             }
             Log.w(TAG, "getPlaybackState() : devices in unexpected state: " + mStateByDevice);
-            return mPlayStatePausedByHostBuilder.build();
+            return mPlayStatePausedNoActionBuilder.build();
         }
         if (isAllDeviceHysteresis()) {
-            return mPlayStatePausedByHostBuilder.build();
+            return mPlayStatePausedNoActionBuilder.build();
         }
-        return mIsMuted ? mPlayStatePausedByReceiverBuilder.build()
-                : mPlayStatePlayingBuilder.build();
+        return mIsMuted ? mPlayStatePausedBuilder.build() : mPlayStatePlayingBuilder.build();
+    }
+
+    private List<BluetoothDevice> getDeviceStreaming() {
+        if (mStateByDevice == null || mStateByDevice.isEmpty()) {
+            return emptyList();
+        }
+        return mStateByDevice.entrySet().stream().filter(
+                entry -> STREAMING.equals(entry.getValue())).map(Map.Entry::getKey).toList();
     }
 
     private boolean isAnyDeviceStreaming() {
@@ -436,9 +472,13 @@ public class AudioStreamMediaService extends Service {
                 && mStateByDevice.values().stream().anyMatch(v -> v == STREAMING);
     }
 
-    private boolean isAnyDeviceReceiverPaused() {
-        return mStateByDevice != null
-                && mStateByDevice.values().stream().anyMatch(v -> v == PAUSED_BY_RECEIVER);
+    private List<BluetoothDevice> getDeviceReceiverPaused() {
+        if (mStateByDevice == null || mStateByDevice.isEmpty()) {
+            return emptyList();
+        }
+        return mStateByDevice.entrySet().stream().filter(
+                entry -> PAUSED_BY_RECEIVER.equals(entry.getValue())).map(
+                Map.Entry::getKey).toList();
     }
 
     private boolean isAllDeviceHysteresis() {
@@ -501,9 +541,13 @@ public class AudioStreamMediaService extends Service {
         var metadata = mLeBroadcastAssistant.getSourceMetadata(sink, sourceId);
         if (metadata == null || metadata.getBroadcastId() != mBroadcastId
                 || metadata.getBroadcastName() == null || metadata.getBroadcastName().isEmpty()) {
-            Log.d(TAG, "getBroadcastName(): source metadata not found, using programInfo: "
-                    + programInfo);
-            return programInfo;
+            if (!programInfo.isEmpty()) {
+                Log.d(TAG, "getBroadcastName(): source metadata not found, using programInfo: "
+                        + programInfo);
+                return programInfo;
+            }
+            Log.d(TAG, "getBroadcastName(): programInfo empty, using default.");
+            return DEFAULT_BROADCAST_NAME;
         }
         return metadata.getBroadcastName();
     }

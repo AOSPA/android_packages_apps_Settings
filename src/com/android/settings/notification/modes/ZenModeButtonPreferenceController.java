@@ -37,6 +37,8 @@ import java.time.Duration;
 class ZenModeButtonPreferenceController extends AbstractZenModePreferenceController {
     private static final String TAG = "ZenModeButtonPrefController";
 
+    static final String KEY = "activate";
+
     private Button mZenButton;
     private final Fragment mParent;
     private final ManualDurationHelper mDurationHelper;

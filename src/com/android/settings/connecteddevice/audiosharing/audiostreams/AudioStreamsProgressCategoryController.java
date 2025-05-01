@@ -26,7 +26,6 @@ import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssista
 
 import static java.util.stream.Collectors.toMap;
 
-import android.app.AlertDialog;
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -39,6 +38,7 @@ import android.util.Log;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;

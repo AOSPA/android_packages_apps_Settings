@@ -401,6 +401,53 @@
                   android:orientation="vertical"
                   android:visibility="gone">
 
+        <LinearLayout
+            android:id="@+id/sharing_toggle_fields"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            style="@style/wifi_item"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/share_wifi_network"
+                style="@style/wifi_item_label"/>
+
+            <Switch
+                android:id="@+id/share_wifi_network"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:summary="@string/share_wifi_network_summary"
+                android:gravity="center_vertical" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/edit_wifi_network_configuration_fields"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            style="@style/wifi_item"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/edit_wifi_network_configuration"
+                style="@style/wifi_item_label"/>
+
+            <Switch
+                android:id="@+id/edit_wifi_network_configuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical" />
+        </LinearLayout>
+
         <LinearLayout android:id="@+id/hidden_settings_field"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"

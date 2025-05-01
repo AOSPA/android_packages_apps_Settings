@@ -98,7 +98,7 @@ public class AdjustmentExcludedAppsPreferenceControllerTest {
     @Test
     public void testUpdateAppList() throws Exception {
         when(mBackend.getAdjustmentDeniedPackages(KEY_SUMMARIZATION)).thenReturn(
-                new String[] {"cannot", "cannot2"});
+                List.of("cannot", "cannot2"));
 
         // GIVEN there are four apps, and two have KEY_SUMMARIZATION off
         ApplicationsState.AppEntry canSummarize =

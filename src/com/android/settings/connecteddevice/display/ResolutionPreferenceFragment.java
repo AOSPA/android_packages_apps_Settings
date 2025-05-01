@@ -43,7 +43,6 @@ import com.android.internal.util.ToBooleanFunction;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragmentBase;
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DisplayListener;
-import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.Injector;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import java.util.ArrayList;
@@ -62,7 +61,7 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
     static final String DISPLAY_MODE_LIMIT_OVERRIDE_PROP = "persist.sys.com.android.server.display"
             + ".feature.flags.enable_mode_limit_for_external_display-override";
     @Nullable
-    private Injector mInjector;
+    private ConnectedDisplayInjector mInjector;
     @Nullable
     private PreferenceCategory mTopOptionsPreference;
     @Nullable
@@ -95,7 +94,7 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
     @Override
     public void onCreateCallback(@Nullable Bundle icicle) {
         if (mInjector == null) {
-            mInjector = new Injector(getPrefContext());
+            mInjector = new ConnectedDisplayInjector(getPrefContext());
         }
         addPreferencesFromResource(EXTERNAL_DISPLAY_RESOLUTION_SETTINGS_RESOURCE);
         updateDisplayModeLimits(mInjector.getContext());
@@ -137,7 +136,7 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
     public ResolutionPreferenceFragment() {}
 
     @VisibleForTesting
-    ResolutionPreferenceFragment(@NonNull Injector injector) {
+    ResolutionPreferenceFragment(@NonNull ConnectedDisplayInjector injector) {
         mInjector = injector;
     }
 

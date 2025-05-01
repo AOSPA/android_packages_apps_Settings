@@ -15,23 +15,18 @@
  */
 package com.android.settings.supervision
 
-import android.content.Context
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settings.R
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class SupervisionWebContentFiltersFooterPreferenceTest {
-    private val context: Context = ApplicationProvider.getApplicationContext()
-
     private val footerPreference = SupervisionWebContentFiltersFooterPreference()
 
     @Test
     fun getTitle() {
         assertThat(footerPreference.title)
-            .isEqualTo(R.string.supervision_web_content_filters_footer_content)
+            .isEqualTo(0)
     }
 }

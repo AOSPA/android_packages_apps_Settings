@@ -146,7 +146,9 @@ public class WhenToDreamPicker extends RadioButtonPickerFragment {
     protected void onSelectionPerformed(boolean success) {
         super.onSelectionPerformed(success);
 
-        getActivity().finish();
+        if (!dreamsV2()) {
+            getActivity().finish();
+        }
     }
 
     private final class WhenToDreamCandidateInfo extends CandidateInfo {

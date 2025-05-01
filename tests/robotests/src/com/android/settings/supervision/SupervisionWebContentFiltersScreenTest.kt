@@ -23,9 +23,6 @@ import android.content.IntentFilter
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
-import android.provider.Settings
-import android.provider.Settings.Secure.BROWSER_CONTENT_FILTERS_ENABLED
-import android.provider.Settings.Secure.SEARCH_CONTENT_FILTERS_ENABLED
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -73,36 +70,6 @@ class SupervisionWebContentFiltersScreenTest {
     fun getTitle() {
         assertThat(supervisionWebContentFiltersScreen.title)
             .isEqualTo(R.string.supervision_web_content_filters_title)
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN)
-    fun getSummary() {
-        // Filters are default off.
-        assertThat(supervisionWebContentFiltersScreen.getSummary(context))
-            .isEqualTo(context.getString(R.string.supervision_web_content_filters_summary_both_off))
-
-        // Enable browser filters.
-        Settings.Secure.putInt(context.getContentResolver(), BROWSER_CONTENT_FILTERS_ENABLED, 1)
-
-        assertThat(supervisionWebContentFiltersScreen.getSummary(context))
-            .isEqualTo(
-                context.getString(R.string.supervision_web_content_filters_summary_chrome_on)
-            )
-
-        // Enable search filters.
-        Settings.Secure.putInt(context.getContentResolver(), SEARCH_CONTENT_FILTERS_ENABLED, 1)
-
-        assertThat(supervisionWebContentFiltersScreen.getSummary(context))
-            .isEqualTo(context.getString(R.string.supervision_web_content_filters_summary_both_on))
-
-        // Disable browser filters.
-        Settings.Secure.putInt(context.getContentResolver(), BROWSER_CONTENT_FILTERS_ENABLED, 0)
-
-        assertThat(supervisionWebContentFiltersScreen.getSummary(context))
-            .isEqualTo(
-                context.getString(R.string.supervision_web_content_filters_summary_search_on)
-            )
     }
 
     @Test

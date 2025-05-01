@@ -139,7 +139,7 @@ public class AdjustmentExcludedAppsPreferenceController extends BasePreferenceCo
             return;
         }
 
-        List<String> excludedApps = List.of(mBackend.getAdjustmentDeniedPackages(mAdjustmentKey));
+        List<String> excludedApps = mBackend.getAdjustmentDeniedPackages(mAdjustmentKey);
 
         for (ApplicationsState.AppEntry app : apps) {
             String pkg = app.info.packageName;
@@ -157,6 +157,7 @@ public class AdjustmentExcludedAppsPreferenceController extends BasePreferenceCo
                     pref.setKey(key);
                     pref.setTitle(BidiFormatter.getInstance().unicodeWrap(app.label));
                     updateIcon(pref, app);
+                    pref.setSelectable(false);
                     mPreferenceCategory.addPreference(pref);
                 }
             } else if (!doesAppPassCriteria) {

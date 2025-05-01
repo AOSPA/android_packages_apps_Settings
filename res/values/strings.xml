@@ -734,6 +734,8 @@
     <string name="date_time_set_timezone_title">Time zone</string>
     <!-- Date & time setting screen setting option title -->
     <string name="date_time_set_timezone">Select time zone</string>
+    <!-- Text hint to search time zone in time zone setting screen -->
+    <string name="date_time_search_time_zone">Search time zone</string>
     <!-- Date & time setting screen setting option title [CHAR LIMIT=30] -->
     <string name="date_time_set_date_title">Date</string>
     <!-- Text hint to search region in time zone setting screen -->
@@ -741,7 +743,7 @@
     <!-- Setting option title to select region in time zone setting screen [CHAR LIMIT=30] -->
     <string name="date_time_select_region">Region</string>
     <!-- Setting option title in time zone setting screen [CHAR LIMIT=30] -->
-    <string name="date_time_select_fixed_offset_time_zones">Select UTC offset</string>
+    <string name="date_time_select_fixed_offset_time_zones">GMT offset</string>
     <!-- Label describing a exemplar location and time zone offset[CHAR LIMIT=NONE] -->
     <string name="zone_info_exemplar_location_and_offset"><xliff:g id="exemplar_location" example="Los Angeles">%1$s</xliff:g> (<xliff:g id="offset" example="GMT-08:00">%2$s</xliff:g>)</string>
     <!-- Label describing a time zone offset and name[CHAR LIMIT=NONE] -->
@@ -759,7 +761,7 @@
     <!-- The menu item to switch to selecting a time zone by region (default) [CHAR LIMIT=30] -->
     <string name="zone_menu_by_region">Select by region</string>
     <!-- The menu item to switch to selecting a time zone with a fixed offset (such as UTC or GMT+0200) [CHAR LIMIT=30] -->
-    <string name="zone_menu_by_offset">Select by UTC offset</string>
+    <string name="zone_menu_by_offset">Select by GMT offset</string>
 
     <!-- The settings category title containing the feedback button [CHAR LIMIT=30] -->
     <string name="time_feedback_category_title">Feedback</string>
@@ -2627,6 +2629,11 @@
     <string name="wifi_scan_always_confirm_deny">Deny</string>
     <!-- Error message displayed below the Wi-Fi EditText when the filed is required. [CHAR LIMIT=NONE] -->
     <string name="wifi_field_required">*required</string>
+    <!-- Label for the share wifi network toggle. [CHAR LIMIT=250] -->
+    <string name="share_wifi_network">Share this network with other device users</string>
+    <!-- Label for the share wifi network summary. [CHAR LIMIT=NONE] -->
+    <string name="share_wifi_network_summary">All users on this device can view and connect to a shared network. Administrators can delete a shared network. Learn more</string>
+    <string name="edit_wifi_network_configuration">Allow other users to edit network configuration</string>
 
     <!-- Dialog text to tell the user that the selected network does not have Internet access. -->
     <string name="no_internet_access_text">This network has no internet access. Stay connected?</string>
@@ -4968,6 +4975,8 @@
     <string name="mouse_keys">Mouse keys</string>
     <!-- Title for a toggle switch for 'mouse' keys under mouse key main page,  an accessibility setting that allows the mouse pointer to be controlled using certain keys on a physical keyboard if keyboard is connected. [CHAR LIMIT=35] -->
     <string name="mouse_keys_main_title">Use mouse keys</string>
+    <!-- Title for the toggle button that turns on/off the mouse keys shortcut. [CHAR_LIMIT=NONE] -->
+    <string name="accessibility_mouse_keys_shortcut_title">Mouse keys shortcut</string>
     <!-- Summary text for the accessibility setting 'Mouse keys' preference sub-screen. [CHAR LIMIT=100] -->
     <string name="mouse_keys_summary">Use your keyboard to control the pointer</string>
     <!-- Title for the 'Mouse reverse scrolling' preference switch, which reverses the direction of mouse scroll wheels so that moving the wheel up scrolls the content down. [CHAR LIMIT=60] -->
@@ -7089,6 +7098,12 @@ Data usage charges may apply.</string>
     <string name="cellular_security_notifications_controller_title">Network notifications</string>
     <!-- Summary of Cellular security notifications toggle [CHAR LIMIT=NONE]-->
     <string name="cellular_security_notifications_controller_summary">Get notified when your device connects to an unencrypted network, or when a network records your unique device or SIM ID</string>
+    <!-- Header of Cellular security page 2G network protection [CHAR LIMIT=NONE]-->
+    <string name="cellular_security_2G_network_generation_header">Network generation</string>
+    <!-- Summary of Cellular security page 2G network protection [CHAR LIMIT=NONE]-->
+    <string name="cellular_security_2G_network_generation_summary">2G network protection avoids 2G networks, which are less secure. This may limit connectivity in some places. Emergency calling is always allowed.</string>
+    <!-- Title of Cellular security page 2G network protection [CHAR LIMIT=NONE]-->
+    <string name="cellular_security_2G_network_generation_title">2G network protection</string>
 
     <!--Cellular encryption -->
     <!--Cellular encryption title [CHAR LIMIT=60] -->
@@ -14741,36 +14756,26 @@ Data usage charges may apply.</string>
     <string name="supervision_delete_pin_preference_summary">This will reset all your supervision settings</string>
     <!-- Title for adding supervision PIN recovery setting entry [CHAR LIMIT=NONE] -->
     <string name="supervision_add_pin_recovery_title">Tap to add recovery</string>
+    <!-- Title for adding supervision PIN recovery setting entry [CHAR LIMIT=NONE] -->
+    <string name="supervision_verify_pin_recovery_title">Tap to verify recovery</string>
     <!-- Title for web content filters entry [CHAR LIMIT=60] -->
     <string name="supervision_web_content_filters_title">Web content filters</string>
-    <!-- Summary for web content filters entry both on case [CHAR LIMIT=60] -->
-    <string name="supervision_web_content_filters_summary_both_on">ON / Chrome &amp; Search filters set</string>
-    <!-- Summary for web content filters entry chrome on [CHAR LIMIT=60] -->
-    <string name="supervision_web_content_filters_summary_chrome_on">ON / Chrome filter set</string>
-    <!-- Summary for web content filters entry chrome on [CHAR LIMIT=60] -->
-    <string name="supervision_web_content_filters_summary_search_on">ON / Search filter set</string>
-    <!-- Summary for web content filters entry chrome on [CHAR LIMIT=60] -->
-    <string name="supervision_web_content_filters_summary_both_off">No filters set</string>
     <!-- Title for web content filters browser category [CHAR LIMIT=60] -->
-    <string name="supervision_web_content_filters_browser_title">Google Chrome and Web</string>
+    <string name="supervision_web_content_filters_browser_title">Websites</string>
     <!-- Title for web content filters browser category block explicit sites option [CHAR LIMIT=60] -->
-    <string name="supervision_web_content_filters_browser_block_explicit_sites_title">Try to block explicit sites</string>
+    <string name="supervision_web_content_filters_browser_block_explicit_sites_title">Block explicit web content</string>
     <!-- Summary for web content filters browser category block explicit sites option [CHAR LIMIT=NONE] -->
-    <string name="supervision_web_content_filters_browser_block_explicit_sites_summary">No filter is perfect, but this should help hide sexually explicit sites</string>
+    <string name="supervision_web_content_filters_browser_block_explicit_sites_summary">For browsers on this device</string>
     <!-- Title for web content filters browser category allow all sites option [CHAR LIMIT=60] -->
     <string name="supervision_web_content_filters_browser_allow_all_sites_title">Allow all sites</string>
     <!-- Title for web content filters search category [CHAR LIMIT=60] -->
-    <string name="supervision_web_content_filters_search_title">Google Search</string>
+    <string name="supervision_web_content_filters_search_title">Search results</string>
     <!-- Title for web content filters search category filter on option [CHAR LIMIT=60] -->
-    <string name="supervision_web_content_filters_search_filter_on_title">SafeSearch filtering ON</string>
+    <string name="supervision_web_content_filters_search_filter_on_title">Block explicit search result</string>
     <!-- Summary for web content filters search category filter on option [CHAR LIMIT=NONE] -->
-    <string name="supervision_web_content_filters_search_filter_on_summary">Helps filter out explicit images, text, and links from search results on this device</string>
+    <string name="supervision_web_content_filters_search_filter_on_summary">For search engines on this device</string>
     <!-- Title for web content filters search category filter off option [CHAR LIMIT=60] -->
-    <string name="supervision_web_content_filters_search_filter_off_title">SafeSearch filtering OFF</string>
-    <!-- Summary for web content filters search category filter off option [CHAR LIMIT=NONE] -->
-    <string name="supervision_web_content_filters_search_filter_off_summary">Account settings may still filter or blur explicit results</string>
-    <!-- Content of web content filters footer [CHAR LIMIT=NONE] -->
-    <string name="supervision_web_content_filters_footer_content">These filters only apply to this device when you visit sites using Chrome and in some Android apps, or use Search.</string>
+    <string name="supervision_web_content_filters_search_filter_off_title">Filter off</string>
     <!-- Generic content description that is attached to the preview illustration at the top of an Accessibility feature toggle page. [CHAR LIMIT=NONE] -->
     <!-- Title for supervision PIN verification screen [CHAR LIMIT=60] -->
     <string name="supervision_full_screen_pin_verification_title">Enter supervision PIN</string>

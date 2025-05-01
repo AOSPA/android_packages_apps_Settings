@@ -70,6 +70,7 @@ import androidx.test.core.app.ApplicationProvider;
 import com.android.settings.R;
 import com.android.settings.connecteddevice.audiosharing.audiostreams.testshadows.ShadowAudioStreamScanHelper;
 import com.android.settings.connecteddevice.audiosharing.audiostreams.testshadows.ShadowAudioStreamsHelper;
+import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settings.testutils.shadow.ShadowThreadUtils;
@@ -94,7 +95,6 @@ import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
-import org.robolectric.shadows.ShadowAlertDialog;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 import java.util.ArrayList;
@@ -108,7 +108,7 @@ import java.util.Map;
             ShadowAudioStreamsHelper.class,
             ShadowAudioStreamScanHelper.class,
             ShadowThreadUtils.class,
-            ShadowAlertDialog.class,
+            ShadowAlertDialogCompat.class,
             ShadowBluetoothAdapter.class,
         })
 public class AudioStreamsProgressCategoryControllerTest {
@@ -145,6 +145,7 @@ public class AudioStreamsProgressCategoryControllerTest {
 
     @Before
     public void setUp() {
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
         ShadowBluetoothAdapter shadowBluetoothAdapter =
                 Shadow.extract(BluetoothAdapter.getDefaultAdapter());
         shadowBluetoothAdapter.setEnabled(true);
@@ -176,6 +177,7 @@ public class AudioStreamsProgressCategoryControllerTest {
     public void tearDown() {
         ShadowBluetoothUtils.reset();
         ShadowAudioStreamsHelper.reset();
+        ShadowAlertDialogCompat.reset();
     }
 
     @Test
@@ -233,7 +235,7 @@ public class AudioStreamsProgressCategoryControllerTest {
         verify(mPreference).removeAudioStreamPreferences();
         verify(mLeBroadcastAssistant).unregisterServiceCallBack(any());
 
-        var dialog = ShadowAlertDialog.getLatestAlertDialog();
+        var dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNotNull();
         assertThat(dialog.isShowing()).isTrue();
 
@@ -279,7 +281,7 @@ public class AudioStreamsProgressCategoryControllerTest {
         verify(mAudioStreamScanHelper).stopScanning();
         verify(mLeBroadcastAssistant).unregisterServiceCallBack(any());
 
-        var dialog = ShadowAlertDialog.getLatestAlertDialog();
+        var dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNotNull();
         assertThat(dialog.isShowing()).isTrue();
 
@@ -337,7 +339,7 @@ public class AudioStreamsProgressCategoryControllerTest {
         verify(mLeBroadcastAssistant).registerServiceCallBack(any(), any());
         verify(mAudioStreamScanHelper).startScanning();
 
-        var dialog = ShadowAlertDialog.getLatestAlertDialog();
+        var dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNull();
 
         verify(mController, never()).moveToState(any(), any());
@@ -359,7 +361,7 @@ public class AudioStreamsProgressCategoryControllerTest {
 
         verify(mAudioStreamScanHelper).startScanning();
 
-        var dialog = ShadowAlertDialog.getLatestAlertDialog();
+        var dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNull();
 
         verify(mController, never()).moveToState(any(), any());

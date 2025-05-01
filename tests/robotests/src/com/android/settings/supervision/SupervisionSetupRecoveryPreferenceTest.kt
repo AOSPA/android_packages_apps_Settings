@@ -24,6 +24,8 @@ import android.content.Intent
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.preference.Preference
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -35,23 +37,25 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.any
 import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.doReturn
-import org.mockito.kotlin.eq
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
 @RunWith(AndroidJUnit4::class)
-class SupervisionAddRecoveryPreferenceTest {
+class SupervisionSetupRecoveryPreferenceTest {
 
     private val appContext: Context = ApplicationProvider.getApplicationContext()
     private val mockLifeCycleContext = mock<PreferenceLifecycleContext>()
     private val mockSupervisionManager = mock<SupervisionManager>()
 
+    private val mockActivityResultLauncher = mock<ActivityResultLauncher<Intent>>()
+
     @get:Rule val setFlagsRule = SetFlagsRule()
-    private var preference = SupervisionAddRecoveryPreference()
+    private var preference = SupervisionSetupRecoveryPreference()
     private val context =
         object : ContextWrapper(appContext) {
             override fun getSystemService(name: String): Any =
@@ -63,12 +67,46 @@ class SupervisionAddRecoveryPreferenceTest {
 
     @Before
     fun setUp() {
+        whenever(
+                mockLifeCycleContext.registerForActivityResult(
+                    any<ActivityResultContracts.StartActivityForResult>(),
+                    any(),
+                )
+            )
+            .thenReturn(mockActivityResultLauncher)
         preference.onCreate(mockLifeCycleContext)
     }
 
     @Test
-    fun getTitle() {
-        assertThat(preference.title).isEqualTo(R.string.supervision_add_pin_recovery_title)
+    fun getTitle_addRecovery() {
+        whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(null)
+
+        assertThat(preference.getTitle(context))
+            .isEqualTo(context.getString(R.string.supervision_add_pin_recovery_title))
+    }
+
+    @Test
+    fun getTitle_verifyRecovery() {
+        val recoveryInfo = SupervisionRecoveryInfo().apply { email = "email" }
+        whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
+
+        assertThat(preference.getTitle(context))
+            .isEqualTo(context.getString(R.string.supervision_verify_pin_recovery_title))
+    }
+
+    @Test
+    fun getSummary_addRecovery() {
+        whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(null)
+
+        assertThat(preference.getSummary(context)).isNull()
+    }
+
+    @Test
+    fun getSummary_verifyRecovery() {
+        val recoveryInfo = SupervisionRecoveryInfo().apply { email = "test@gmail.com" }
+        whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
+
+        assertThat(preference.getSummary(context)).isEqualTo("t••t@gmail.com")
     }
 
     @Test
@@ -90,8 +128,21 @@ class SupervisionAddRecoveryPreferenceTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN)
-    fun flagEnabled_recoveryExist_notAvailable() {
+    fun flagEnabled_recoveryEmailExist_isAvailable() {
         val recoveryInfo = SupervisionRecoveryInfo().apply { email = "email" }
+        whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
+
+        assertThat(preference.isAvailable(context)).isTrue()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN)
+    fun flagEnabled_recoveryIdExist_NotAvailable() {
+        val recoveryInfo =
+            SupervisionRecoveryInfo().apply {
+                email = "email"
+                id = "id"
+            }
         whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
 
         assertThat(preference.isAvailable(context)).isFalse()
@@ -106,31 +157,45 @@ class SupervisionAddRecoveryPreferenceTest {
     }
 
     @Test
-    fun onClick_triggersPinRecoveryActivity() {
+    fun addRecovery_onClick_triggersPinRecoveryActivity() {
+        whenever(mockSupervisionManager.supervisionRecoveryInfo)
+            .thenReturn(SupervisionRecoveryInfo())
         val widget: Preference = preference.createAndBindWidget(context)
 
         mockLifeCycleContext.stub {
-            on { findPreference<Preference>(SupervisionUpdateRecoveryEmailPreference.KEY) } doReturn
+            on { findPreference<Preference>(SupervisionSetupRecoveryPreference.KEY) } doReturn
                 widget
+            on { getSystemService(SupervisionManager::class.java) } doReturn mockSupervisionManager
+        }
+        widget.performClick()
+
+        verifyPinRecoveryActivityStarted(SupervisionPinRecoveryActivity.ACTION_SETUP_VERIFIED)
+    }
+
+    @Test
+    fun verifyRecovery_onClick_triggersPinRecoveryActivity() {
+        val recoveryInfo = SupervisionRecoveryInfo().apply { email = "test@gmail.com" }
+        whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
+        val widget: Preference = preference.createAndBindWidget(context)
+
+        mockLifeCycleContext.stub {
+            on { findPreference<Preference>(SupervisionSetupRecoveryPreference.KEY) } doReturn
+                widget
+            on { getSystemService(SupervisionManager::class.java) } doReturn mockSupervisionManager
         }
 
         widget.performClick()
 
-        verifyPinRecoveryActivityStarted()
+        verifyPinRecoveryActivityStarted(SupervisionPinRecoveryActivity.ACTION_POST_SETUP_VERIFY)
     }
 
-    private fun verifyPinRecoveryActivityStarted() {
+    private fun verifyPinRecoveryActivityStarted(expectedAction: String) {
         val intentCaptor = argumentCaptor<Intent>()
-        verify(mockLifeCycleContext)
-            .startActivityForResult(
-                intentCaptor.capture(),
-                eq(SupervisionAddRecoveryPreference.ADD_RECOVERY_REQUEST_CODE),
-                eq(null),
-            )
+        verify(mockActivityResultLauncher).launch(intentCaptor.capture())
         assertThat(intentCaptor.allValues.size).isEqualTo(1)
-        assertThat(intentCaptor.firstValue.component?.className)
+        val intent = intentCaptor.firstValue
+        assertThat(intent.component?.className)
             .isEqualTo(SupervisionPinRecoveryActivity::class.java.name)
-        assertThat(intentCaptor.firstValue.action)
-            .isEqualTo(SupervisionPinRecoveryActivity.ACTION_SETUP_VERIFIED)
+        assertThat(intent.action).isEqualTo(expectedAction)
     }
 }
