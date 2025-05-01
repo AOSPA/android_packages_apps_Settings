@@ -51,8 +51,6 @@
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Förstora"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Alltid"</string>
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Främre skärmen slås på när du viker enheten"</string>
-    <string name="selective_stay_awake_title" msgid="7887645333447645168">"Endast spel, videor med mera"</string>
-    <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Främre skärmen slås på för appar som förhindrar att skärmen inaktiveras"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Svep uppåt för att fortsätta"</string>
     <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"Vik telefonen och svep uppåt på den främre skärmen för att fortsätta använda appen, eller vänta i några sekunder tills skärmen låses. Spel och videoappar fortsätter automatiskt."</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Aldrig"</string>
@@ -202,7 +200,8 @@
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Språk"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Önskat språk"</string>
     <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Appspråk"</string>
-    <string name="app_locale_picker_summary" msgid="6742557329924446252">"Ställ in språket för varje app"</string>
+    <!-- no translation found for app_locale_picker_summary (616928580653613998) -->
+    <skip />
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Appspråk"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Föreslagna språk"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Alla språk"</string>
@@ -215,7 +214,10 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Systemets standardinställning"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Det går inte att välja språk för den här appen i Inställningar."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Alla språk kanske inte är tillgängliga i appen. Vissa appar kanske inte har stöd för denna inställning."</string>
-    <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Ställ in språket för varje app."</string>
+    <!-- no translation found for desc_app_locale_selection_supported (7363315876602221125) -->
+    <skip />
+    <!-- no translation found for desc_app_locale_selection_supported_with_disclaimer (7622217531143496788) -->
+    <skip />
     <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Enheten, appar och webbplatser använder det första språket som stöds från din lista över föredragna språk.\n\nI många appar används även regionen för det önskade språket för att formatera datum, tal och enheter. Om du vill ändra region lägger du till ett språk och väljer sedan region."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Gå till en apps inställningar för att välja språk i den."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Läs mer om appspråk"</string>
@@ -455,8 +457,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Avbryt"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"Inte nu"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Jag godkänner"</string>
-    <!-- no translation found for security_settings_fingerprint_rename_description (6301505700382531086) -->
-    <skip />
+    <string name="security_settings_fingerprint_rename_description" msgid="6301505700382531086">"Tryck snabbt två gånger för att byta namn"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Vill du hoppa över fingeravtryck?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Det tar bara ett par minuter att konfigurera fingeravtrycket. Hoppar du över det kan du lägga till fingeravtryck i inställningarna senare."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"När du ser ikonen kan du autentisera med fingeravtrycket, t.ex. när du loggar in i appar eller godkänner köp"</string>
@@ -494,17 +495,17 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Ansikte och <xliff:g id="WATCH">%s</xliff:g> har lagts till"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Ansikte, fingeravtryck och <xliff:g id="WATCH">%s</xliff:g> har lagts till"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Ansikte, fingeravtryck och <xliff:g id="WATCH">%s</xliff:g> har lagts till"</string>
-    <string name="mandatory_biometrics_prompt_description" msgid="6790144699440050735">"Identitetskontroll är aktiverad så biometrisk data krävs"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="6790144699440050735">"Identitetskoll är aktiverad så biometrisk data krävs"</string>
     <string name="go_to_settings" msgid="4394928396153474179">"Öppna inställningarna"</string>
-    <string name="identity_check_lockout_error_title" msgid="7486409651908283892">"Identitetskontroll är aktiverad och din identitet kan inte verifieras"</string>
+    <string name="identity_check_lockout_error_title" msgid="7486409651908283892">"Identitetskoll är aktiverad och din identitet kan inte verifieras"</string>
     <string name="identity_check_lockout_error_description_1" msgid="4882147327291296884">"Biometri misslyckades för många gånger. Lås och lås upp enheten för att försöka igen."</string>
     <string name="identity_check_lockout_error_two_factor_auth_description_1" msgid="8369894114882274736">"Biometri misslyckades för många gånger. Försök igen."</string>
-    <string name="identity_check_lockout_error_description_2" msgid="5512321457771307067">"Du kan hantera identitetskontrollen i inställningarna för stöldskydd. Öppna inställningarna"</string>
+    <string name="identity_check_lockout_error_description_2" msgid="5512321457771307067">"Du kan hantera identitetskollen i inställningarna för stöldskydd. Öppna inställningarna"</string>
     <string name="identity_check_general_error_title" msgid="5073929400896102674">"Biometri krävs för att fortsätta"</string>
-    <string name="identity_check_general_error_description_1" msgid="5260846996256699095">"Identitetskontrollen är aktiverad och kräver biometri, men ansikts- eller fingeravtryckssensorn är inte tillgänglig\n"<ul><li>"Kontrollera att kameran är på och försök igen"</li>\n<li>"Du kan inaktivera identitetskontroll med ditt Google-konto"</li></ul></string>
+    <string name="identity_check_general_error_description_1" msgid="5260846996256699095">"Identitetskollen är aktiverad och kräver biometri, men ansikts- eller fingeravtryckssensorn är inte tillgänglig\n"<ul><li>"Kontrollera att kameran är på och försök igen"</li>\n<li>"Du kan inaktivera identitetskoll med ditt Google-konto"</li></ul></string>
     <string name="identity_check_biometric_error_cancel" msgid="3353689146211669291">"Avbryt"</string>
     <string name="identity_check_biometric_error_ok" msgid="4535306787363107304">"OK"</string>
-    <string name="go_to_identity_check" msgid="5215846637575231800">"Gå till identitetskontrollen"</string>
+    <string name="go_to_identity_check" msgid="5215846637575231800">"Gå till identitetskollen"</string>
     <string name="identity_check_lockout_error_lock_screen" msgid="3021787511681444051">"Låsskärm"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Upplåsning med fjärrverifierare"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Klockan har lagts till"</string>
@@ -1443,13 +1444,12 @@
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Vid laddning"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Vid dockning"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Aldrig"</string>
-    <!-- no translation found for screensaver_settings_summary_postured (6346392320858994892) -->
-    <skip />
-    <!-- no translation found for screensaver_settings_summary_postured_and_charging (5111797042509819055) -->
-    <skip />
+    <string name="screensaver_settings_summary_postured" msgid="6346392320858994892">"I upprätt läge"</string>
+    <string name="screensaver_settings_summary_postured_and_charging" msgid="5111797042509819055">"Vid laddning i upprätt läge"</string>
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"På/<xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Av"</string>
-    <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Startas"</string>
+    <!-- no translation found for screensaver_settings_when_to_dream (7756170756065029160) -->
+    <skip />
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Gå ur viloläget vid lyft"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Bara vid trådlös laddning"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Aktiv låsskärm"</string>
@@ -1457,7 +1457,21 @@
     <string name="doze_title" msgid="1523090408230862316">"Aktivera skärmen för aviseringar"</string>
     <string name="doze_summary" msgid="8252867381522942804">"Skärmen väcks vid nya aviseringar"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"Visa alltid klocka och info"</string>
+    <!-- no translation found for doze_always_on_title2 (6806855871175589465) -->
+    <skip />
     <string name="doze_always_on_summary" msgid="509097829739647852">"Batterianvändningen ökar"</string>
+    <!-- no translation found for doze_always_on_summary_with_wallpaper (7193043498368623388) -->
+    <skip />
+    <!-- no translation found for doze_always_on_summary_without_wallpaper (2461602415293603846) -->
+    <skip />
+    <!-- no translation found for doze_always_on_summary_long (9198713049143867176) -->
+    <skip />
+    <!-- no translation found for doze_always_on_wallpaper_options (6089727555294626960) -->
+    <skip />
+    <!-- no translation found for doze_always_on_wallpaper_title (975186604007325364) -->
+    <skip />
+    <!-- no translation found for doze_always_on_wallpaper_description (7797570713499410605) -->
+    <skip />
     <string name="force_bold_text" msgid="4620929631102086716">"Fetstil"</string>
     <string name="title_font_size" msgid="570613010306330622">"Teckenstorlek"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Gör text större eller mindre"</string>
@@ -1616,10 +1630,8 @@
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"När de ska visas automatiskt"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Aldrig"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Vid laddning"</string>
-    <!-- no translation found for when_to_show_hubmode_charging_and_upright (537039046490426922) -->
-    <skip />
-    <!-- no translation found for when_to_show_hubmode_docked (8876633401873168284) -->
-    <skip />
+    <string name="when_to_show_hubmode_charging_and_upright" msgid="537039046490426922">"Vid laddning i upprätt läge"</string>
+    <string name="when_to_show_hubmode_docked" msgid="8876633401873168284">"Vid laddning när den är dockad"</string>
     <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"Bara vid trådlös laddning"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN:er"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Redigera åtkomstpunkt"</string>
@@ -2139,7 +2151,7 @@
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Innehållet flyttas uppåt när du scrollar nedåt"</string>
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Klicka nere till höger"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Klicka i högra hörnet på styrplattan för fler alternativ"</string>
-    <string name="trackpad_pointer_speed" msgid="5672221910698079303">"Markörhastighet"</string>
+    <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Markörens hastighet"</string>
     <string name="three_finger_tap_preference_title" msgid="1836080810837854140">"Använd tryck med tre fingrar"</string>
     <string name="touchpad_acceleration_title" msgid="176627555191021888">"Acceleration för styrplattan"</string>
     <string name="touchpad_acceleration_summary" msgid="8057075483967535793">"Snabbare rörelser på styrplattan flyttar markören längre"</string>
@@ -2290,6 +2302,14 @@
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Systeminställningar"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Skicka feedback"</string>
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Betygsätt oss"</string>
+    <!-- no translation found for accessibility_send_survey_notification_channel (6136555229886306184) -->
+    <skip />
+    <!-- no translation found for dark_theme_survey_notification_title (4035183263314404750) -->
+    <skip />
+    <!-- no translation found for dark_theme_survey_notification_summary (801472177955048195) -->
+    <skip />
+    <!-- no translation found for dark_theme_survey_notification_action (7693304950750954402) -->
+    <skip />
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Nedladdade appar"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimentella"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Funktionsflaggor"</string>
@@ -2317,12 +2337,13 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Flytta skärmen när muspekaren når skärmens kanter"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Förstora texten du skriver"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Förstoraren följer texten medan du skriver"</string>
-    <!-- no translation found for accessibility_screen_magnification_nav_ime_title (8804501318161774285) -->
+    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_title (7342198645736402048) -->
     <skip />
-    <!-- no translation found for accessibility_screen_magnification_nav_ime_summary (3054371947104552843) -->
+    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_summary (9091733229413835358) -->
     <skip />
-    <!-- no translation found for accessibility_screen_magnification_nav_ime_unavailable_summary (2248787024685382054) -->
-    <skip />
+    <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"Förstora tangentbordet"</string>
+    <string name="accessibility_screen_magnification_nav_ime_summary" msgid="3054371947104552843">"Tangentbord förstoras med ditt innehåll"</string>
+    <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"Inte tillgängligt när bara förstoringsdelen av skärmen visas"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Behåll på när du byter app"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"Förstoraren är på och zoomar ut när du byter app"</string>
     <string name="accessibility_screen_magnification_always_on_unavailable_summary" msgid="3844732482037416038">"Inte tillgänglig när bara förstoringsdelen av skärmen visas"</string>
@@ -2385,7 +2406,6 @@
     <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="5749704453829390283">"Kortkommando med två snabba tryck med %1$d fingrar"</string>
     <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Genväg till Snabbinställningar"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"Kortkommando med tillgänglighetsrörelsen"</string>
-    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Använda tillgänglighetsrörelser"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="8977286776192770246">"Tryck på tillgänglighetsknappen <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> längst ned på skärmen för använda denna funktion.\n\nTryck länge på tillgänglighetsknappen för att byta funktion."</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="6631371483819355514">"Tryck på tillgänglighetsknappen på skärmen för att använda denna funktion"</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="3785791536286606664">"Håll båda volymknapparna nedtryckta för att använda den här funktionen"</string>
@@ -2397,8 +2417,6 @@
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Svep uppåt med två fingrar från skärmens nederkant om du vill använda den här funktionen.\n\nByt funktion genom att svepa uppåt med två fingrar och hålla kvar dem."</string>
     <string name="accessibility_tutorial_dialog_gesture_shortcut_instruction" msgid="7349950768250852308">"{count,plural, =1{Svep uppåt från skärmens nederkant för att använda denna funktion}other{Svep uppåt med # fingrar från skärmens nederkant för att använda denna funktion}}"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Svep uppåt med tre fingrar från skärmens nederkant om du vill använda den här funktionen.\n\nByt funktion genom att svepa uppåt med tre fingrar och hålla kvar dem."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Svep uppåt med två fingrar från skärmens nederkant om du vill använda en tillgänglighetsfunktion.\n\nByt funktion genom att svepa uppåt med två fingrar och hålla kvar dem."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Svep uppåt med tre fingrar från skärmens nederkant om du vill använda en tillgänglighetsfunktion.\n\nByt funktion genom att svepa uppåt med tre fingrar och hålla kvar dem."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
     <string name="accessibility_tutorial_dialog_link_button" msgid="13364319079385020">"Anpassa knappen"</string>
     <string name="accessibility_tutorial_dialog_configure_software_shortcut_type" msgid="8041105223988170653">"Fler alternativ"</string>
@@ -2435,16 +2453,13 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"Kortkommando med volymknapparna på låsskärmen"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Tillåt att genvägen för funktionen aktiveras från låsskärmen. Håll båda volymknapparna nedtryckta i ett par sekunder."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Tillgänglighetsknapp"</string>
-    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Tillgänglighetsknapp och rörelse"</string>
     <string name="accessibility_button_intro_text" msgid="80993874471745687">"Kom snabbt åt tillgänglighetsfunktioner från alla skärmar"</string>
     <string name="accessibility_button_about_title" msgid="3581116105084067926">"Om tillgänglighetsknappen"</string>
     <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"Om tillgänglighetsknappen och tillgänglighetsrörelsen"</string>
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Läs mer om tillgänglighetsknappen och tillgänglighetsrörelsen"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Använda tillgänglighetsknappen. Rörelsen är inte tillgänglig med navigering med tre knappar."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Kom snabbt åt tillgänglighetsfunktioner"</string>
-    <string name="accessibility_button_gesture_description" msgid="1141723096904904336">"&lt;b&gt;Så här kommer du igång&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Öppna tillgänglighetsinställningarna&lt;br/&gt; {1,number,integer}. Välj en funktion och tryck på genvägen&lt;br/&gt; {2,number,integer}. Välj om du vill använda en knapp eller en rörelse för att komma åt funktionen&lt;br/&gt;"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Så här kommer du igång&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Öppna tillgänglighetsinställningarna&lt;br/&gt; {1,number,integer}. Välj en funktion och tryck på genvägen&lt;br/&gt; {2,number,integer}. Välj den knapp du vill använda för att komma åt funktionen&lt;br/&gt;"</string>
-    <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Använda knapp eller rörelse"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Läge"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Storlek"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Tona ut när den inte används"</string>
@@ -3499,6 +3514,8 @@
     <string name="keywords_wallet" msgid="3757421969956996972">"Wallet"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"betala, tryck, betalningar"</string>
     <string name="keywords_backup" msgid="707735920706667685">"säkerhetskopia, säkerhets kopia"</string>
+    <!-- no translation found for keywords_fingerprint_unlock (522579721745187402) -->
+    <skip />
     <string name="keywords_face_unlock" msgid="545338452730885392">"ansikte, upplåsning, auktorisering, inloggning"</string>
     <string name="keywords_biometric_unlock" msgid="8569545388717753692">"ansikte, låsa upp, auktorisera, logga in, fingeravtryck, biometri"</string>
     <string name="keywords_imei_info" msgid="8848791606402333514">"imei-kod, meid, min, prl-version, imei-kod sv"</string>
@@ -4674,10 +4691,8 @@
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Öppna Wallet"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"Vill du ändra genvägen på låsskärmen?"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> är även genvägen på låsskärmen. Vill du ändra den?"</string>
-    <!-- no translation found for double_tap_power_wallet_footer_title (4626950875173822614) -->
-    <skip />
-    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (4871482943751760132) -->
-    <skip />
+    <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"Din nuvarande standardplånboksapp har inte stöd för rörelsen."</string>
+    <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"Ändra standardplånbok"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Vänd kameran för att ta en selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Navigeringsläge"</string>
@@ -4975,7 +4990,8 @@
     <string name="network_connected" msgid="7637745547242487795">"Ansluten"</string>
     <string name="network_connecting" msgid="6856124847029124041">"Ansluter …"</string>
     <string name="network_could_not_connect" msgid="676574629319069922">"Det gick inte att ansluta"</string>
-    <string name="empty_networks_list" msgid="6519489879480673428">"Inga nätverk hittades."</string>
+    <!-- no translation found for empty_networks_list (7263167074321380983) -->
+    <skip />
     <string name="network_query_error" msgid="6406348372070035274">"Det gick inte att hitta nätverk. Försök igen."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(förbjudet)"</string>
     <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
@@ -5073,41 +5089,31 @@
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"Kontakta din nätoperatör för priser."</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Ogiltigt nätverksläge: <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignorera."</string>
     <string name="satellite_setting" msgid="4650503806634496443">"Satellitanslutning"</string>
-    <!-- no translation found for satellite_setting_enabled_summary (2114544331827193266) -->
-    <skip />
-    <!-- no translation found for satellite_setting_disabled_summary (8193743637158939283) -->
-    <skip />
-    <!-- no translation found for satellite_setting_summary_without_entitlement (7010003955751606421) -->
-    <skip />
+    <string name="satellite_setting_enabled_summary" msgid="2114544331827193266">"Skicka och ta emot sms via satellit. Ingår i kontot."</string>
+    <string name="satellite_setting_disabled_summary" msgid="8193743637158939283">"Skicka och ta emot sms via satellit. Ingår inte i kontot."</string>
+    <string name="satellite_setting_summary_without_entitlement" msgid="7010003955751606421">"Skicka och ta emot sms via satellit. Kontakta operatören för mer information."</string>
     <string name="keywords_satellite_setting" msgid="613553612424945946">"Satellitmeddelanden, satellitanslutning"</string>
     <string name="category_name_about_satellite_connectivity" msgid="3971142716898783631">"Om satellitanslutning"</string>
-    <!-- no translation found for description_about_satellite_setting (8212911110428998767) -->
-    <skip />
+    <string name="description_about_satellite_setting" msgid="8212911110428998767">"Du kan skicka och ta emot sms via satellit med ett kvalificerat <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-konto"</string>
     <string name="category_title_your_satellite_plan" msgid="8169426217950247126">"Ditt <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-konto"</string>
     <string name="title_have_satellite_plan" msgid="857337944804101443">"Sms ingår i ditt konto"</string>
-    <!-- no translation found for title_no_satellite_plan (7255726881685672846) -->
-    <skip />
+    <string name="title_no_satellite_plan" msgid="7255726881685672846">"Meddelanden ingår inte i kontot"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Läs mer"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Så fungerar det"</string>
-    <!-- no translation found for title_satellite_connection_guide (4730763872034574368) -->
-    <skip />
+    <string name="title_satellite_connection_guide" msgid="4730763872034574368">"När du inte har något mobil- eller wifi-nätverk"</string>
     <string name="title_satellite_connection_guide_for_manual_type" msgid="7223875100977941341">"Skicka sms till ett telefonnummer"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Telefonen ansluter automatiskt till en satellit. Den bästa anslutningen får du utomhus under bar himmel."</string>
-    <!-- no translation found for summary_satellite_connection_guide_for_manual_type (2106091974353287661) -->
-    <skip />
+    <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"Om du inte har något mobilnätverk visas alternativet att använda satellit."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"När telefonen ansluter till en satellit"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Följ stegen för att ansluta till satelliten"</string>
-    <!-- no translation found for summary_supported_service (6380533552383355977) -->
-    <skip />
+    <string name="summary_supported_service" msgid="6380533552383355977">"Du kan skicka sms till vem som helst, inklusive räddningstjänsten, och använda begränsad data i vissa appar. Telefonen återansluter till ett mobilnätverk när det finns ett tillgängligt."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"När telefonen är ansluten kan du sms:a vem som helst, inklusive räddningstjänsten."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Viktigt att tänka på"</string>
     <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"En satellitanslutning kan ta längre tid och är bara tillgänglig i vissa områden."</string>
     <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"Väder och vissa byggnader kan påverka din satellitanslutning."</string>
-    <!-- no translation found for satellite_footer_content_section_3 (4686525535095321485) -->
-    <skip />
+    <string name="satellite_footer_content_section_3" msgid="4686525535095321485">"Du kan inte ringa samtal via satellit."</string>
     <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"Nödsamtal kanske fortfarande går fram."</string>
-    <!-- no translation found for satellite_footer_content_section_5 (2466353040832630785) -->
-    <skip />
+    <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"Ett mobil- eller wifi-nätverk krävs för att visa externa länkar."</string>
     <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"Det kanske inte är möjligt att skicka meddelanden till räddningstjänsten i alla områden."</string>
     <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"Det kan ta en stund innan kontoändringar dyker upp i inställningarna. Kontakta <xliff:g id="CARRIER_NAME">%1$s</xliff:g> för mer information."</string>
     <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"Mer om satellitanslutning"</string>
@@ -5119,8 +5125,7 @@
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"satellitmeddelanden"</string>
     <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"Dataanvändning ingår i ditt konto"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Appar som stöds på telefonen"</string>
-    <!-- no translation found for title_satellite_supported_app_list_entry (891155574898209245) -->
-    <skip />
+    <string name="title_satellite_supported_app_list_entry" msgid="891155574898209245">"Visa alla appar som stöds via satellit"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Appar som stöds på telefonen"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Det går inte att lägga till ett SIM-kort"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Avsluta satellitanslutningen innan du lägger till ett SIM-kort"</string>
@@ -5720,6 +5725,8 @@
     <string name="audio_sharing_block_pairing_dialog_content" msgid="6352030314206654722">"Om du vill parkoppla en ny enhet måste du först stänga av ljuddelning."</string>
     <string name="audio_sharing_turn_off_button_label" msgid="1934956352475393641">"Stäng av"</string>
     <string name="share_audio_notification_title" msgid="5201976754820387782">"Dela ljud med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for audio_sharing_device_volume_description (3218967346006222765) -->
+    <skip />
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Ansut till en LE Audio-stream"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Ljudstreamar i närheten"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Ljudstreamar"</string>
@@ -5770,6 +5777,8 @@
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Skanna QR-koden för en ljudstream om du vill lyssna med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Det går inte att redigera lösenordet medan delning pågår. Om du vill byta lösenord måste du först stänga av ljuddelningen."</string>
     <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Lösenordet måste innehålla 4–16 tecken och endast bokstäver, siffror och symboler"</string>
+    <!-- no translation found for audio_streams_main_page_name_dialog_format_alert (6797839340871206774) -->
+    <skip />
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR-skanner"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Behöver du hjälp?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Sök i inställningar"</string>
@@ -5787,18 +5796,24 @@
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Circle to Search"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Tryck länge på hemknappen eller navigeringshandtaget för att söka med innehållet på skärmen."</string>
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Konfigurera enhetsinformation."</string>
-    <string name="supervision_settings_title" msgid="8383827215386872736">"Kontroll"</string>
+    <!-- no translation found for supervision_settings_title (8507163323870367711) -->
+    <skip />
     <string name="supervision_settings_summary" msgid="5020634300370322741">"Innehållsbegränsningar och andra begränsningar"</string>
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Använd enhetskontroll"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Ställ in en pinkod för att komma igång"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"kontroll, föräldrakontroll, föräldrakontroller"</string>
     <string name="supervision_pin_management_preference_title" msgid="961680798581006465">"Hantera pinkod"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"Lägg till en pinkod för återställning"</string>
+    <!-- no translation found for supervision_pin_management_preference_summary_add (8061713645550514683) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_verify_recovery (2156782778845060114) -->
+    <skip />
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Byt pinkod"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Glömt pinkoden"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Uppdatera återställningsadressen"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Radera pinkod"</string>
     <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Detta återställer alla dina kontrollinställningar"</string>
+    <!-- no translation found for supervision_add_pin_recovery_title (5584523084706797399) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Webbinnehållsfilter"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome och webben"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Försök att blockera webbplatser med explicit innehåll"</string>
@@ -5810,5 +5825,11 @@
     <string name="supervision_web_content_filters_search_filter_off_title" msgid="6049461395304222346">"SafeSearch-filtrering AV"</string>
     <string name="supervision_web_content_filters_search_filter_off_summary" msgid="3834238970190924433">"Explicita resultat kan filtreras bort eller göras oskarpa utifrån kontoinställningarna"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Ange pinkod för kontroll"</string>
+    <!-- no translation found for supervision_lock_setup_title (7581682893583645713) -->
+    <skip />
+    <!-- no translation found for supervision_lock_setup_description (6931450348200992733) -->
+    <skip />
+    <!-- no translation found for supervision_pin_reset_success_toast (4663259412030769718) -->
+    <skip />
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animering för <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
 </resources>

@@ -51,8 +51,6 @@
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Zmadho"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Gjithmonë"</string>
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Ekrani i përparmë ndizet kur palos pajisjen"</string>
-    <string name="selective_stay_awake_title" msgid="7887645333447645168">"Vetëm lojëra, video etj."</string>
-    <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Ekrani i përparmë ndizet për aplikacionet që e ndalojë ekranin që të kalojë në gjendje joaktive"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Rrëshqit shpejt lart për të vazhduar"</string>
     <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"Palos telefonin dhe rrëshqit shpejt lart në ekranin e parmë për të vazhduar të përdorësh aplikacionin ose prit disa sekonda që të kyçet ekrani. Aplikacionet e lojërave dhe videove do të vazhdojnë automatikisht."</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Asnjëherë"</string>
@@ -202,7 +200,8 @@
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Gjuha"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Gjuha e preferuar"</string>
     <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Gjuhët e aplikacioneve"</string>
-    <string name="app_locale_picker_summary" msgid="6742557329924446252">"Cakto gjuhën për secilin aplikacion"</string>
+    <!-- no translation found for app_locale_picker_summary (616928580653613998) -->
+    <skip />
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Gjuha e aplikacionit"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Gjuhët e sugjeruara"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Të gjitha gjuhët"</string>
@@ -215,7 +214,10 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Parazgjedhja e sistemit"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Zgjedhja e gjuhës për këtë aplikacion nuk ofrohet nga \"Cilësimet\"."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Gjuha mund të ndryshojë nga gjuhët që ofrohen në aplikacion. Disa aplikacione mund të mos e mbështetin këtë cilësim."</string>
-    <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Cakto gjuhën për secilin aplikacion."</string>
+    <!-- no translation found for desc_app_locale_selection_supported (7363315876602221125) -->
+    <skip />
+    <!-- no translation found for desc_app_locale_selection_supported_with_disclaimer (7622217531143496788) -->
+    <skip />
     <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Pajisja jote, aplikacionet dhe uebsajtet përdorin gjuhën e parë të mbështetur nga lista e gjuhëve të tua të preferuara.\n\nShumë aplikacione do të përdorin gjithashtu rajonin nga gjuha jote e preferuar për formatimin e datave, numrave dhe njësive. Për të ndryshuar rajonin, shto një gjuhë dhe më pas zgjidh rajonin tënd të preferuar."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Për të zgjedhur një gjuhë për çdo aplikacion, shko te cilësimet e gjuhës së aplikacionit."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Mëso më shumë për gjuhët e aplikacionit"</string>
@@ -455,8 +457,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Anulo"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"Jo tani"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Pranoj"</string>
-    <!-- no translation found for security_settings_fingerprint_rename_description (6301505700382531086) -->
-    <skip />
+    <string name="security_settings_fingerprint_rename_description" msgid="6301505700382531086">"Trokit dy herë për ta riemërtuar"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Të kapërcehet gjurma e gishtit?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Konfigurimi i gjurmës së gishtit zgjat vetëm një ose dy minuta. Nëse e kapërcen këtë, mund ta shtosh gjurmën tënde të gishtit më vonë te \"Cilësimet\"."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Kur të shikosh këtë ikonë, përdor gjurmën tënde të gishtit për vërtetim, p.sh. kur të identifikohesh në aplikacione ose për të miratuar një blerje"</string>
@@ -1443,13 +1444,12 @@
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Gjatë karikimit"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Kur vendoset në stacion"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Asnjëherë"</string>
-    <!-- no translation found for screensaver_settings_summary_postured (6346392320858994892) -->
-    <skip />
-    <!-- no translation found for screensaver_settings_summary_postured_and_charging (5111797042509819055) -->
-    <skip />
+    <string name="screensaver_settings_summary_postured" msgid="6346392320858994892">"Kur është vertikal"</string>
+    <string name="screensaver_settings_summary_postured_and_charging" msgid="5111797042509819055">"Kur është vertikal dhe në karikim"</string>
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"Aktiv / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Çaktivizuar"</string>
-    <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Kur të fillojë"</string>
+    <!-- no translation found for screensaver_settings_when_to_dream (7756170756065029160) -->
+    <skip />
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Ngrije për ta zgjuar"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Kufizo në karikimin wireless"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Shfaqja e ambientit"</string>
@@ -1457,7 +1457,21 @@
     <string name="doze_title" msgid="1523090408230862316">"Zgjo ekranin për njoftimet"</string>
     <string name="doze_summary" msgid="8252867381522942804">"Kur ekrani është i errët, ai aktivizohet për njoftimet e reja"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"Shfaq gjithmonë orën dhe info."</string>
+    <!-- no translation found for doze_always_on_title2 (6806855871175589465) -->
+    <skip />
     <string name="doze_always_on_summary" msgid="509097829739647852">"Përdorimi i rritur i baterisë"</string>
+    <!-- no translation found for doze_always_on_summary_with_wallpaper (7193043498368623388) -->
+    <skip />
+    <!-- no translation found for doze_always_on_summary_without_wallpaper (2461602415293603846) -->
+    <skip />
+    <!-- no translation found for doze_always_on_summary_long (9198713049143867176) -->
+    <skip />
+    <!-- no translation found for doze_always_on_wallpaper_options (6089727555294626960) -->
+    <skip />
+    <!-- no translation found for doze_always_on_wallpaper_title (975186604007325364) -->
+    <skip />
+    <!-- no translation found for doze_always_on_wallpaper_description (7797570713499410605) -->
+    <skip />
     <string name="force_bold_text" msgid="4620929631102086716">"Tekst i trashë"</string>
     <string name="title_font_size" msgid="570613010306330622">"Madhësia e shkrimit"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Zmadho ose zvogëlo tekstin"</string>
@@ -1616,10 +1630,8 @@
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Kur të shfaqen automatikisht"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Asnjëherë"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Gjatë karikimit"</string>
-    <!-- no translation found for when_to_show_hubmode_charging_and_upright (537039046490426922) -->
-    <skip />
-    <!-- no translation found for when_to_show_hubmode_docked (8876633401873168284) -->
-    <skip />
+    <string name="when_to_show_hubmode_charging_and_upright" msgid="537039046490426922">"Kur është vertikal dhe në karikim"</string>
+    <string name="when_to_show_hubmode_docked" msgid="8876633401873168284">"Kur është në stacion dhe në karikim"</string>
     <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"Kufizo në karikimin wireless"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN-të"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Redakto pikën e qasjes"</string>
@@ -1670,7 +1682,7 @@
     <string name="reset_mobile_network_settings_title" msgid="5616713931258506842">"Rivendos cilësimet e rrjetit celular"</string>
     <string name="reset_mobile_network_settings_desc" msgid="7292636387692165727">"Kjo do të rivendosë të gjitha cilësimet e rrjetit celular"</string>
     <string name="reset_mobile_network_settings_confirm_title" msgid="7510965634669511241">"Rivendos cilësimet e rrjetit?"</string>
-    <string name="reset_bluetooth_wifi_title" msgid="4113071322344697317">"Rivendos Bluetooth dhe Wi‑Fi"</string>
+    <string name="reset_bluetooth_wifi_title" msgid="4113071322344697317">"Rivendos Bluetooth-in dhe Wi‑Fi"</string>
     <string name="reset_bluetooth_wifi_desc" msgid="4030295669083059711">"Kjo do të rivendosë të gjitha cilësimet e Wi‑Fi dhe Bluetooth. Nuk mund ta zhbësh këtë veprim."</string>
     <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"Rivendos"</string>
     <string name="reset_bluetooth_wifi_complete_toast" msgid="5893439291030574365">"Bluetooth dhe Wi‑Fi janë rivendosur"</string>
@@ -2139,7 +2151,7 @@
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Përmbajtja zhvendoset lart kur ti lëviz poshtë"</string>
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Klikimi në këndin poshtë djathtas"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Kliko te këndi poshtë djathtas i bllokut me prekje për më shumë opsione"</string>
-    <string name="trackpad_pointer_speed" msgid="5672221910698079303">"Shpejtësia e kursorit"</string>
+    <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Shpejtësia e treguesit"</string>
     <string name="three_finger_tap_preference_title" msgid="1836080810837854140">"Përdor trokitjen me tre gishta"</string>
     <string name="touchpad_acceleration_title" msgid="176627555191021888">"Përshpejtimi i bllokut të prekjes"</string>
     <string name="touchpad_acceleration_summary" msgid="8057075483967535793">"Lëvizjet më të shpejta në bllokun e prekjes do ta zhvendosin më larg kursorin"</string>
@@ -2290,6 +2302,14 @@
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Kontrollet e sistemit"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Dërgo komente"</string>
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Na vlerëso"</string>
+    <!-- no translation found for accessibility_send_survey_notification_channel (6136555229886306184) -->
+    <skip />
+    <!-- no translation found for dark_theme_survey_notification_title (4035183263314404750) -->
+    <skip />
+    <!-- no translation found for dark_theme_survey_notification_summary (801472177955048195) -->
+    <skip />
+    <!-- no translation found for dark_theme_survey_notification_action (7693304950750954402) -->
+    <skip />
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Aplikacionet e shkarkuara"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Eksperimentale"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Raportimet e veçorive"</string>
@@ -2317,12 +2337,13 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Lëvize ekranin kur miu prek skajet e ekranit"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Zmadho shkrimin"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Zmadhuesi ndjek tekstin ndërsa shkruan"</string>
-    <!-- no translation found for accessibility_screen_magnification_nav_ime_title (8804501318161774285) -->
+    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_title (7342198645736402048) -->
     <skip />
-    <!-- no translation found for accessibility_screen_magnification_nav_ime_summary (3054371947104552843) -->
+    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_summary (9091733229413835358) -->
     <skip />
-    <!-- no translation found for accessibility_screen_magnification_nav_ime_unavailable_summary (2248787024685382054) -->
-    <skip />
+    <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"Zmadho tastierën"</string>
+    <string name="accessibility_screen_magnification_nav_ime_summary" msgid="3054371947104552843">"Tastiera u zmadhua me përmbajtjen tënde"</string>
+    <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"Nuk ofrohet kur zmadhohet vetëm një pjesë e ekranit"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Mbaje aktive ndërkohë që ndërron aplikacionet"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"Zmadhuesi qëndron aktiv dhe zvogëlohet kur ndërron aplikacionet"</string>
     <string name="accessibility_screen_magnification_always_on_unavailable_summary" msgid="3844732482037416038">"Nuk ofrohet kur zmadhohet vetëm një pjesë e ekranit"</string>
@@ -2385,7 +2406,6 @@
     <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="5749704453829390283">"Shkurtorja e dy trokitjeve me %1$d gishta"</string>
     <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Shkurtorja e \"Cilësimeve të shpejta\""</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"Shkurtorja e gjestit të qasshmërisë"</string>
-    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Përdor gjestin e qasshmërisë"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="8977286776192770246">"Për ta përdorur këtë veçori, trokit te butoni i qasshmërisë <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> në fund të ekranit.\n\nPër të ndërruar mes veçorive, mbaj të shtypur butonin e qasshmërisë."</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="6631371483819355514">"Për të përdorur këtë veçori, trokit te butoni i qasshmërisë në ekranin tënd"</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="3785791536286606664">"Për ta përdorur këtë veçori, mbaj shtypur të dyja tastet e volumit"</string>
@@ -2397,8 +2417,6 @@
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Për ta përdorur këtë veçori, rrëshqit shpejt lart nga fundi i ekranit me 2 gishta.\n\nPër të ndërruar mes veçorive, rrëshqit shpejt lart me 2 gishta dhe mbaje të shtypur."</string>
     <string name="accessibility_tutorial_dialog_gesture_shortcut_instruction" msgid="7349950768250852308">"{count,plural, =1{Për të përdorur këtë veçori, rrëshqit shpejt lart nga fundi i ekranit}other{Për të përdorur këtë veçori, rrëshqit shpejt lart me # gishta nga fundi i ekranit}}"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Për ta përdorur këtë veçori, rrëshqit shpejt lart nga fundi i ekranit me 3 gishta.\n\nPër të ndërruar mes veçorive, rrëshqit shpejt lart me 3 gishta dhe mbaje të shtypur."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Për të përdorur një veçori të qasshmërisë, rrëshqit shpejt lart nga fundi i ekranit me 2 gishta.\n\nPër të ndërruar mes veçorive, rrëshqit shpejt lart me 2 gishta dhe mbaje të shtypur."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Për të përdorur një veçori të qasshmërisë, rrëshqit shpejt lart nga fundi i ekranit me 3 gishta.\n\nPër të ndërruar mes veçorive, rrëshqit shpejt lart me 3 gishta dhe mbaje të shtypur."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"E kuptova"</string>
     <string name="accessibility_tutorial_dialog_link_button" msgid="13364319079385020">"Personalizo butonin"</string>
     <string name="accessibility_tutorial_dialog_configure_software_shortcut_type" msgid="8041105223988170653">"Opsione të tjera"</string>
@@ -2435,16 +2453,13 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"Shkurtorja e tasteve të volumit nga ekrani i kyçjes"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Lejo që shkurtorja e veçorisë të aktivizohet nga ekrani i kyçjes. Mbaji të dy çelësat e volumit për disa sekonda."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Butoni i qasshmërisë"</string>
-    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Butoni dhe gjesti i qasshmërisë"</string>
     <string name="accessibility_button_intro_text" msgid="80993874471745687">"Qasu me shpejtësi në veçoritë e qasshmërisë nga çdo ekran"</string>
     <string name="accessibility_button_about_title" msgid="3581116105084067926">"Rreth butonit të qasshmërisë"</string>
     <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"Rreth butonin dhe gjestit të qasshmërisë"</string>
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Mëso më shumë rreth butonit dhe gjestit të qasshmërisë"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Përdorimi i butonit të qasshmërisë. Gjesti nuk ofrohet me navigimin me 3 butona."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Qasu me shpejtësi te veçoritë e qasshmërisë"</string>
-    <string name="accessibility_button_gesture_description" msgid="1141723096904904336">"&lt;b&gt;Për të filluar&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Shko te cilësimet e qasshmërisë&lt;br/&gt; {1,number,integer}. Zgjidh një veçori dhe trokit shkurtoren&lt;br/&gt; {2,number,integer}. Zgjidh nëse dëshiron të përdorësh një buton ose gjest për t\'u qasur te veçoria&lt;br/&gt;"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Për të filluar&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Shko te cilësimet e qasshmërisë&lt;br/&gt; {1,number,integer}. Zgjidh një veçori dhe trokit shkurtoren&lt;br/&gt; {2,number,integer}. Zgjidh butonin për t\'u qasur te veçoria&lt;br/&gt;"</string>
-    <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Përdor butonin ose gjestin"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Vendndodhja"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Madhësia"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Zbehe kur nuk është në përdorim"</string>
@@ -3499,6 +3514,8 @@
     <string name="keywords_wallet" msgid="3757421969956996972">"portofoli"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"paguaj, trokit, pagesa"</string>
     <string name="keywords_backup" msgid="707735920706667685">"rezervim, rezervo"</string>
+    <!-- no translation found for keywords_fingerprint_unlock (522579721745187402) -->
+    <skip />
     <string name="keywords_face_unlock" msgid="545338452730885392">"fytyrë, shkyçje, autorizim, identifikim"</string>
     <string name="keywords_biometric_unlock" msgid="8569545388717753692">"fytyrë, shkyç, vërtetim, identifikim, gjurmë gishti, biometrik"</string>
     <string name="keywords_imei_info" msgid="8848791606402333514">"imei, meid, min, versioni prl, imei sv"</string>
@@ -4170,8 +4187,8 @@
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"Aktivizo"</string>
     <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Cakto një modalitet që ndjek një program të rregullt"</string>
     <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"Cakto një modalitet për ta sinkronizuar me ngjarjet e kalendarit dhe përgjigjet e ftesave"</string>
-    <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"Projekto një rutinë gjumi qetësuese. Cakto alarmet, errëso ekranin dhe blloko njoftimet."</string>
-    <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"Jepi përparësi sigurisë në rrugë për një udhëtim të me fokus dhe pa shpërqendrime"</string>
+    <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"Projekto një rutinë gjumi qetësuese. Cakto alarmet, zbeh ekranin dhe blloko njoftimet."</string>
+    <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"Jepi përparësi sigurisë në rrugë për një drejtim të fokusuar dhe pa shpërqendrime të automjetit"</string>
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Blloko shpërqendrimet ose ndërprerjet nga pajisja jote për t\'u fokusuar"</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Elimino të gjitha shpërqendrimet për një mjedis të heshtur"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Personalizo përvojat e pajisjes dhe cilësimet për përdorues të ndryshëm"</string>
@@ -4674,10 +4691,8 @@
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Hap \"Portofolin\""</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"Të ndryshohet shkurtorja e ekranit të kyçjes?"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> është gjithashtu shkurtorja e ekranit tënd të kyçjes. Dëshiron që ta ndryshosh?"</string>
-    <!-- no translation found for double_tap_power_wallet_footer_title (4626950875173822614) -->
-    <skip />
-    <!-- no translation found for double_tap_power_wallet_footer_learn_more_text (4871482943751760132) -->
-    <skip />
+    <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"Aplikacioni yt i aktual i parazgjedhur i portofolit nuk e mbështet këtë gjest"</string>
+    <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"Ndrysho portofolin e parazgjedhur"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Përmbys kamerën për selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Modaliteti i navigimit"</string>
@@ -4975,7 +4990,8 @@
     <string name="network_connected" msgid="7637745547242487795">"Lidhur"</string>
     <string name="network_connecting" msgid="6856124847029124041">"Po lidhet…"</string>
     <string name="network_could_not_connect" msgid="676574629319069922">"Nuk mund të lidhej"</string>
-    <string name="empty_networks_list" msgid="6519489879480673428">"Nuk u gjetën rrjete."</string>
+    <!-- no translation found for empty_networks_list (7263167074321380983) -->
+    <skip />
     <string name="network_query_error" msgid="6406348372070035274">"Rrjetet nuk mund të gjendeshin. Provo përsëri."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(ndalohet)"</string>
     <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
@@ -5073,41 +5089,31 @@
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"Kontakto me operatorin celular të rrjetit për çmimin."</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Regjim i pavlefshëm i rrjetit <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Shpërfille."</string>
     <string name="satellite_setting" msgid="4650503806634496443">"Lidhja satelitore"</string>
-    <!-- no translation found for satellite_setting_enabled_summary (2114544331827193266) -->
-    <skip />
-    <!-- no translation found for satellite_setting_disabled_summary (8193743637158939283) -->
-    <skip />
-    <!-- no translation found for satellite_setting_summary_without_entitlement (7010003955751606421) -->
-    <skip />
+    <string name="satellite_setting_enabled_summary" msgid="2114544331827193266">"Dërgo dhe merr mesazhe me tekst nëpërmjet satelitit. Përfshihet me llogarinë tënde."</string>
+    <string name="satellite_setting_disabled_summary" msgid="8193743637158939283">"Dërgo dhe merr mesazhe me tekst nëpërmjet satelitit. Nuk përfshihet me llogarinë tënde."</string>
+    <string name="satellite_setting_summary_without_entitlement" msgid="7010003955751606421">"Dërgo dhe merr mesazhe me tekst nëpërmjet satelitit. Kontakto me operatorin celular për detaje."</string>
     <string name="keywords_satellite_setting" msgid="613553612424945946">"Shkëmbimi i mesazheve nëpërmjet satelitit, lidhja satelitore"</string>
     <string name="category_name_about_satellite_connectivity" msgid="3971142716898783631">"Rreth lidhjes satelitore"</string>
-    <!-- no translation found for description_about_satellite_setting (8212911110428998767) -->
-    <skip />
+    <string name="description_about_satellite_setting" msgid="8212911110428998767">"Mund të dërgosh dhe të marrësh mesazhe me tekst nëpërmjet satelitit me një llogari të kualifikueshme të <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="category_title_your_satellite_plan" msgid="8169426217950247126">"Llogaria jote e <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="title_have_satellite_plan" msgid="857337944804101443">"Mesazhet janë të përfshira me llogarinë tënde"</string>
-    <!-- no translation found for title_no_satellite_plan (7255726881685672846) -->
-    <skip />
+    <string name="title_no_satellite_plan" msgid="7255726881685672846">"Shkëmbimi i mesazheve nuk përfshihet me llogarinë tënde"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Mëso më shumë"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Si funksionon"</string>
-    <!-- no translation found for title_satellite_connection_guide (4730763872034574368) -->
-    <skip />
+    <string name="title_satellite_connection_guide" msgid="4730763872034574368">"Kur nuk ke një rrjet celular ose Wi-Fi"</string>
     <string name="title_satellite_connection_guide_for_manual_type" msgid="7223875100977941341">"Dërgoji mesazhi me tekst një numri telefoni"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Telefoni yt do të lidhet automatikisht me një satelit. Për lidhjen më të mirë, qëndro në pamje të pastër të qiellit."</string>
-    <!-- no translation found for summary_satellite_connection_guide_for_manual_type (2106091974353287661) -->
-    <skip />
+    <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"Nëse nuk ke një rrjet celular, do të shikosh një opsion për të përdorur satelitin."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"Pasi telefoni yt të lidhet me një satelit"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Ndiq hapat për t\'u lidhur me satelitin"</string>
-    <!-- no translation found for summary_supported_service (6380533552383355977) -->
-    <skip />
+    <string name="summary_supported_service" msgid="6380533552383355977">"Mund t\'i dërgosh mesazh me tekst kujtdo, duke përfshirë shërbimeve të urgjencës, dhe mund të përdorësh të dhëna të kufizuara në disa aplikacione. Telefoni yt do të rilidhet me një rrjet celular kur disponohet."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"Pasi telefoni të jetë lidhur, mund t\'i dërgosh mesazh me tekst kujtdo, duke përfshirë shërbimet e urgjencës."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Ki parasysh"</string>
     <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"Lidhja satelitore mund të kërkojë më shumë kohë dhe ofrohet vetëm në disa zona."</string>
     <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"Moti dhe disa struktura të caktuara mund të ndikojnë në lidhjen tënde satelitore."</string>
-    <!-- no translation found for satellite_footer_content_section_3 (4686525535095321485) -->
-    <skip />
+    <string name="satellite_footer_content_section_3" msgid="4686525535095321485">"Telefonatat nëpërmjet satelitit nuk ofrohen."</string>
     <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"Telefonatat e urgjencës mund të lidhen përsëri."</string>
-    <!-- no translation found for satellite_footer_content_section_5 (2466353040832630785) -->
-    <skip />
+    <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"Kërkohet një rrjet celular ose Wi-Fi për të parë lidhjet e jashtme."</string>
     <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"Shkëmbimi i mesazheve me tekst me shërbimet e urgjencës mund të mos ofrohet në të gjitha zonat."</string>
     <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"Mund të duhet pak kohë që ndryshimet e llogarisë të shfaqen te \"Cilësimet\". Kontakto me <xliff:g id="CARRIER_NAME">%1$s</xliff:g> për detaje."</string>
     <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"Më shumë rreth lidhjes satelitore"</string>
@@ -5119,8 +5125,7 @@
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"shkëmbimi i mesazheve nëpërmjet satelitit"</string>
     <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"Përdorimi i të dhënave është i përfshirë me llogarinë tënde"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Aplikacionet e mbështetura në telefonin tënd"</string>
-    <!-- no translation found for title_satellite_supported_app_list_entry (891155574898209245) -->
-    <skip />
+    <string name="title_satellite_supported_app_list_entry" msgid="891155574898209245">"Shiko të gjitha aplikacionet e mbështetura nga sateliti"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Aplikacionet e mbështetura në telefonin tënd"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Nuk mund të shtohet kartë SIM"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Përfundo lidhjen satelitore para se të shtosh një kartë SIM"</string>
@@ -5720,6 +5725,8 @@
     <string name="audio_sharing_block_pairing_dialog_content" msgid="6352030314206654722">"Për të çiftuar një pajisje të re, në fillim çaktivizo \"Ndarjen e audios\"."</string>
     <string name="audio_sharing_turn_off_button_label" msgid="1934956352475393641">"Çaktivizo"</string>
     <string name="share_audio_notification_title" msgid="5201976754820387782">"Ndaj audion me <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for audio_sharing_device_volume_description (3218967346006222765) -->
+    <skip />
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Lidh me një transmetim audio LE"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Transmetimet audio në afërsi"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Transmetimet audio"</string>
@@ -5770,6 +5777,8 @@
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Skano një kod QR të transmetimit audio për të dëgjuar me <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Fjalëkalimi nuk mund të modifikohet gjatë ndarjes. Për të ndryshuar fjalëkalimin, në fillim çaktivizo ndarjen e audios."</string>
     <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Fjalëkalimi yt duhet të përfshijë 4-16 karaktere dhe të përdorë vetëm shkronja, numra dhe simbole"</string>
+    <!-- no translation found for audio_streams_main_page_name_dialog_format_alert (6797839340871206774) -->
+    <skip />
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Skaneri i kodeve QR"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Ke nevojë për ndihmë?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Kërko te cilësimet"</string>
@@ -5787,18 +5796,24 @@
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Qarko për të kërkuar"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Prek dhe mbaj shtypur butonin \"Kreu\" ose emërtimin e navigimit për të kërkuar duke përdorur përmbajtjen në ekranin tënd."</string>
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Konfiguro detajet e pajisjes."</string>
-    <string name="supervision_settings_title" msgid="8383827215386872736">"Mbikëqyrja"</string>
+    <!-- no translation found for supervision_settings_title (8507163323870367711) -->
+    <skip />
     <string name="supervision_settings_summary" msgid="5020634300370322741">"Kufizimet e përmbajtjet dhe kufizime të tjera"</string>
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Përdor mbikëqyrjen e pajisjes"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Konfiguro kodin PIN për të filluar"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"mbikëqyrja, mbikëqyrja prindërore, kontrollet prindërore"</string>
     <string name="supervision_pin_management_preference_title" msgid="961680798581006465">"Menaxho kodin PIN"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"Shto një mënyrë rikuperimi me kod PIN"</string>
+    <!-- no translation found for supervision_pin_management_preference_summary_add (8061713645550514683) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_verify_recovery (2156782778845060114) -->
+    <skip />
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Ndrysho kodin PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Harrova kodin PIN"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Përditëso email-in e rikuperimit"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Fshi kodin PIN"</string>
     <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Kjo do të rivendosë të gjitha cilësimet e mbikëqyrjes"</string>
+    <!-- no translation found for supervision_add_pin_recovery_title (5584523084706797399) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filtrat e përmbajtjeve të uebit"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome dhe Web"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Provo të bllokosh sajtet me përmbajtje të papërshtatshme"</string>
@@ -5810,5 +5825,11 @@
     <string name="supervision_web_content_filters_search_filter_off_title" msgid="6049461395304222346">"Filtrimi i SafeSearch është JOAKTIV"</string>
     <string name="supervision_web_content_filters_search_filter_off_summary" msgid="3834238970190924433">"Cilësimet e llogarisë mund të filtrojnë ose të turbullojnë akoma rezultatet e papërshtatshme"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Fut kodin PIN të mbikëqyrjes"</string>
+    <!-- no translation found for supervision_lock_setup_title (7581682893583645713) -->
+    <skip />
+    <!-- no translation found for supervision_lock_setup_description (6931450348200992733) -->
+    <skip />
+    <!-- no translation found for supervision_pin_reset_success_toast (4663259412030769718) -->
+    <skip />
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animacioni i \"<xliff:g id="FEATURE">%1$s</xliff:g>\""</string>
 </resources>

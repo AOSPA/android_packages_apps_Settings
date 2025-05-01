@@ -59,7 +59,9 @@ class HardwareInfoScreen :
         return super.createWidget(context).apply { isCopyingEnabled = true }
     }
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {}
+    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {
+        +DeviceModelPreference()
+    }
 
     companion object {
         const val KEY = "device_model"

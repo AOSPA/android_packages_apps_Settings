@@ -35,6 +35,8 @@
         settings:seekBarIncrement="1"
         settings:iconEnd="@drawable/ic_add_24dp"
         settings:iconStart="@drawable/ic_remove_24dp"
+        settings:iconEndContentDescription="@string/mouse_pointer_speed_make_faster_desc"
+        settings:iconStartContentDescription="@string/mouse_pointer_speed_make_slower_desc"
         settings:controller="com.android.settings.inputmethod.MousePointerSpeedPreferenceController"/>
 
     <SwitchPreferenceCompat

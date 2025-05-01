@@ -17,15 +17,19 @@ package com.android.settings.supervision
 
 import android.app.supervision.flags.Flags
 import android.content.Context
+import android.provider.Settings.Secure.BROWSER_CONTENT_FILTERS_ENABLED
+import android.provider.Settings.Secure.SEARCH_CONTENT_FILTERS_ENABLED
 import com.android.settings.R
+import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PreferenceCategory
+import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
 /** Web content filters landing page (Settings > Supervision > Web content filters). */
 @ProvidePreferenceScreen(SupervisionWebContentFiltersScreen.KEY)
-class SupervisionWebContentFiltersScreen : PreferenceScreenCreator {
+class SupervisionWebContentFiltersScreen : PreferenceScreenCreator, PreferenceSummaryProvider {
     override fun isFlagEnabled(context: Context) = Flags.enableWebContentFiltersScreen()
 
     override val key: String
@@ -34,9 +38,23 @@ class SupervisionWebContentFiltersScreen : PreferenceScreenCreator {
     override val title: Int
         get() = R.string.supervision_web_content_filters_title
 
-    // TODO(b/395134536) update the summary once the string is finalized.
     override val icon: Int
         get() = R.drawable.ic_globe
+
+    override fun getSummary(context: Context): CharSequence? {
+        val dataStore = SettingsSecureStore.get(context)
+        return if (dataStore.getBoolean(BROWSER_CONTENT_FILTERS_ENABLED) == true) {
+            if (dataStore.getBoolean(SEARCH_CONTENT_FILTERS_ENABLED) == true) {
+                context.getString(R.string.supervision_web_content_filters_summary_both_on)
+            } else {
+                context.getString(R.string.supervision_web_content_filters_summary_chrome_on)
+            }
+        } else if (dataStore.getBoolean(SEARCH_CONTENT_FILTERS_ENABLED) == true) {
+            context.getString(R.string.supervision_web_content_filters_summary_search_on)
+        } else {
+            context.getString(R.string.supervision_web_content_filters_summary_both_off)
+        }
+    }
 
     override fun fragmentClass() = SupervisionWebContentFiltersFragment::class.java
 
@@ -60,6 +78,7 @@ class SupervisionWebContentFiltersScreen : PreferenceScreenCreator {
                     +SupervisionSearchFilterOnPreference(dataStore)
                     +SupervisionSearchFilterOffPreference(dataStore)
                 }
+            +SupervisionWebContentFiltersFooterPreference()
         }
 
     companion object {

@@ -205,26 +205,28 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
             return;
         }
         mCachedDevice.registerCallback(this);
-        Set<BluetoothDevice> errorDevices = new HashSet<>();
-        mBluetoothDevices.forEach(bd -> {
-            try {
-                boolean isSuccess = mBluetoothAdapter.addOnMetadataChangedListener(bd,
-                        mContext.getMainExecutor(), mMetadataListener);
-                if (!isSuccess) {
-                    Log.e(TAG, bd.getAnonymizedAddress() + ": add into Listener failed");
+        if (!refactorBatteryLevelDisplay()) {
+            Set<BluetoothDevice> errorDevices = new HashSet<>();
+            mBluetoothDevices.forEach(bd -> {
+                try {
+                    boolean isSuccess = mBluetoothAdapter.addOnMetadataChangedListener(bd,
+                            mContext.getMainExecutor(), mMetadataListener);
+                    if (!isSuccess) {
+                        Log.e(TAG, bd.getAnonymizedAddress() + ": add into Listener failed");
+                        errorDevices.add(bd);
+                    }
+                } catch (NullPointerException e) {
                     errorDevices.add(bd);
+                    Log.e(TAG, bd.getAnonymizedAddress() + ":" + e.toString());
+                } catch (IllegalArgumentException e) {
+                    errorDevices.add(bd);
+                    Log.e(TAG, bd.getAnonymizedAddress() + ":" + e.toString());
                 }
-            } catch (NullPointerException e) {
-                errorDevices.add(bd);
-                Log.e(TAG, bd.getAnonymizedAddress() + ":" + e.toString());
-            } catch (IllegalArgumentException e) {
-                errorDevices.add(bd);
-                Log.e(TAG, bd.getAnonymizedAddress() + ":" + e.toString());
+            });
+            for (BluetoothDevice errorDevice : errorDevices) {
+                mBluetoothDevices.remove(errorDevice);
+                Log.d(TAG, "mBluetoothDevices remove " + errorDevice.getAnonymizedAddress());
             }
-        });
-        for (BluetoothDevice errorDevice : errorDevices) {
-            mBluetoothDevices.remove(errorDevice);
-            Log.d(TAG, "mBluetoothDevices remove " + errorDevice.getAnonymizedAddress());
         }
     }
 
@@ -238,15 +240,17 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
             return;
         }
         mCachedDevice.unregisterCallback(this);
-        mBluetoothDevices.forEach(bd -> {
-            try {
-                mBluetoothAdapter.removeOnMetadataChangedListener(bd, mMetadataListener);
-            } catch (NullPointerException e) {
-                Log.e(TAG, bd.getAnonymizedAddress() + ":" + e.toString());
-            } catch (IllegalArgumentException e) {
-                Log.e(TAG, bd.getAnonymizedAddress() + ":" + e.toString());
-            }
-        });
+        if (!refactorBatteryLevelDisplay()) {
+            mBluetoothDevices.forEach(bd -> {
+                try {
+                    mBluetoothAdapter.removeOnMetadataChangedListener(bd, mMetadataListener);
+                } catch (NullPointerException e) {
+                    Log.e(TAG, bd.getAnonymizedAddress() + ":" + e.toString());
+                } catch (IllegalArgumentException e) {
+                    Log.e(TAG, bd.getAnonymizedAddress() + ":" + e.toString());
+                }
+            });
+        }
         mBluetoothDevices.clear();
     }
 

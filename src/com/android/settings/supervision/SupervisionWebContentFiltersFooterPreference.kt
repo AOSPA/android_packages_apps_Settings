@@ -1,0 +1,33 @@
+/*
+ * Copyright (C) 2025 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.android.settings.supervision
+
+import com.android.settings.R
+import com.android.settings.widget.FooterPreferenceMetadata
+
+class SupervisionWebContentFiltersFooterPreference : FooterPreferenceMetadata {
+    override val key: String
+        get() = KEY
+
+    override val title: Int
+        get() = R.string.supervision_web_content_filters_footer_content
+
+    // TODO(b/411104868): Add learn more link once help article link is retrieved.
+
+    companion object {
+        const val KEY = "web_content_filters_footer"
+    }
+}

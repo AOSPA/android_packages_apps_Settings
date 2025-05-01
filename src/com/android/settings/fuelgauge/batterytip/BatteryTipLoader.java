@@ -24,7 +24,6 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batterytip.detectors.BatteryDefenderDetector;
-import com.android.settings.fuelgauge.batterytip.detectors.HighUsageDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.IncompatibleChargerDetector;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.overlay.FeatureFactory;

@@ -51,8 +51,6 @@
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Make larger"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Always"</string>
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Front display turns on when you fold your device"</string>
-    <string name="selective_stay_awake_title" msgid="7887645333447645168">"Only games, videos, and more"</string>
-    <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Front display turns on for apps that stop your screen going idle"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Swipe up to continue"</string>
     <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"Fold your phone and swipe up on the front display to continue using the app, or wait a few seconds for the screen to lock. Games and video apps will continue automatically."</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Never"</string>
@@ -202,7 +200,7 @@
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Language"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Preferred Language"</string>
     <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"App languages"</string>
-    <string name="app_locale_picker_summary" msgid="6742557329924446252">"Set the language for each app"</string>
+    <string name="app_locale_picker_summary" msgid="616928580653613998">"Choose the language for each app"</string>
     <string name="app_locale_picker_title" msgid="2431448962911301366">"App language"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Suggested languages"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"All languages"</string>
@@ -215,7 +213,8 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"System default"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Language selection for this app isn’t available from Settings."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Language may differ from languages available in the app. Some apps may not support this setting."</string>
-    <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Set the language for each app."</string>
+    <string name="desc_app_locale_selection_supported" msgid="7363315876602221125">"Choose the language for each app."</string>
+    <string name="desc_app_locale_selection_supported_with_disclaimer" msgid="7622217531143496788">"Choose the language for each app. Language may differ from languages available in the app. Some apps may not support this setting."</string>
     <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Your device, apps, and websites use the first supported language from your preferred language list.\n\nMany apps will also use the region from your preferred language to format dates, numbers, and units. To change your region, add a language, then choose your preferred region."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"To select a language for each app, go to app language settings."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Learn more about app languages"</string>
@@ -1446,7 +1445,7 @@
     <string name="screensaver_settings_summary_postured_and_charging" msgid="5111797042509819055">"While upright and charging"</string>
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"On / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Off"</string>
-    <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"When to start"</string>
+    <string name="screensaver_settings_when_to_dream" msgid="7756170756065029160">"When to show"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Lift to wake"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Restrict to wireless charging"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Ambient display"</string>
@@ -1454,7 +1453,21 @@
     <string name="doze_title" msgid="1523090408230862316">"Wake screen for notifications"</string>
     <string name="doze_summary" msgid="8252867381522942804">"When screen is dark, it turns on for new notifications"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"Always show time and info"</string>
+    <!-- no translation found for doze_always_on_title2 (6806855871175589465) -->
+    <skip />
     <string name="doze_always_on_summary" msgid="509097829739647852">"Increased battery usage"</string>
+    <!-- no translation found for doze_always_on_summary_with_wallpaper (7193043498368623388) -->
+    <skip />
+    <!-- no translation found for doze_always_on_summary_without_wallpaper (2461602415293603846) -->
+    <skip />
+    <!-- no translation found for doze_always_on_summary_long (9198713049143867176) -->
+    <skip />
+    <!-- no translation found for doze_always_on_wallpaper_options (6089727555294626960) -->
+    <skip />
+    <!-- no translation found for doze_always_on_wallpaper_title (975186604007325364) -->
+    <skip />
+    <!-- no translation found for doze_always_on_wallpaper_description (7797570713499410605) -->
+    <skip />
     <string name="force_bold_text" msgid="4620929631102086716">"Bold text"</string>
     <string name="title_font_size" msgid="570613010306330622">"Font size"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Make text bigger or smaller"</string>
@@ -2134,7 +2147,7 @@
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Content moves up when you scroll down"</string>
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Bottom-right click"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Click in the bottom right corner of the touchpad for more options"</string>
-    <string name="trackpad_pointer_speed" msgid="5672221910698079303">"Cursor speed"</string>
+    <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Pointer speed"</string>
     <string name="three_finger_tap_preference_title" msgid="1836080810837854140">"Use three-finger tap"</string>
     <string name="touchpad_acceleration_title" msgid="176627555191021888">"Touchpad acceleration"</string>
     <string name="touchpad_acceleration_summary" msgid="8057075483967535793">"Faster movements on your touchpad will move the cursor farther"</string>
@@ -2285,6 +2298,10 @@
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"System controls"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Send feedback"</string>
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Rate us"</string>
+    <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Accessibility Survey"</string>
+    <string name="dark_theme_survey_notification_title" msgid="4035183263314404750">"Enjoying Dark theme in more apps?"</string>
+    <string name="dark_theme_survey_notification_summary" msgid="801472177955048195">"Share your feedback"</string>
+    <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"Take survey"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Downloaded apps"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimental"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Feature flags"</string>
@@ -2312,6 +2329,10 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Move screen when mouse touches edges of screen"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Magnify typing"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Magnifier follows text as you type"</string>
+    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_title (7342198645736402048) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_summary (9091733229413835358) -->
+    <skip />
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"Magnify keyboard"</string>
     <string name="accessibility_screen_magnification_nav_ime_summary" msgid="3054371947104552843">"Keyboard is magnified with your content"</string>
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"Unavailable while only magnifying part of the screen"</string>
@@ -2377,7 +2398,6 @@
     <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="5749704453829390283">"%1$d-finger double tap shortcut"</string>
     <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Quick Settings shortcut"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"Accessibility gesture shortcut"</string>
-    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Use accessibility gesture"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="8977286776192770246">"To use this feature, tap the accessibility button <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> at the bottom of your screen.\n\nTo switch between features, touch &amp; hold the accessibility button."</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="6631371483819355514">"To use this feature, tap the accessibility button on your screen"</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="3785791536286606664">"To use this feature, press &amp; hold both volume keys"</string>
@@ -2389,8 +2409,6 @@
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"To use this feature, swipe up from the bottom of the screen with 2 fingers.\n\nTo switch between features, swipe up with 2 fingers and hold."</string>
     <string name="accessibility_tutorial_dialog_gesture_shortcut_instruction" msgid="7349950768250852308">"{count,plural, =1{To use this feature, swipe up from the bottom of your screen}other{To use this feature, swipe up with # fingers from the bottom of your screen}}"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"To use this feature, swipe up from the bottom of the screen with 3 fingers.\n\nTo switch between features, swipe up with 3 fingers and hold."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"To use an accessibility feature, swipe up from the bottom of the screen with 2 fingers.\n\nTo switch between features, swipe up with 2 fingers and hold."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"To use an accessibility feature, swipe up from the bottom of the screen with 3 fingers.\n\nTo switch between features, swipe up with 3 fingers and hold."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Got it"</string>
     <string name="accessibility_tutorial_dialog_link_button" msgid="13364319079385020">"Customize button"</string>
     <string name="accessibility_tutorial_dialog_configure_software_shortcut_type" msgid="8041105223988170653">"More options"</string>
@@ -2427,16 +2445,13 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"Volume keys shortcut from lock screen"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Allow feature shortcut to turn on from the lock screen. Hold both volume keys for a few seconds."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Accessibility button"</string>
-    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Accessibility button &amp; gesture"</string>
     <string name="accessibility_button_intro_text" msgid="80993874471745687">"Quickly access accessibility features from any screen"</string>
     <string name="accessibility_button_about_title" msgid="3581116105084067926">"About accessibility button"</string>
     <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"About accessibility button &amp; gesture"</string>
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Learn more about accessibility button &amp; gesture"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Using the accessibility button. The gesture isn\'t available with three-button navigation"</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Quickly access accessibility features"</string>
-    <string name="accessibility_button_gesture_description" msgid="1141723096904904336">"&lt;b&gt;To get started&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Go to accessibility settings&lt;br/&gt; {1,number,integer}. Select a feature and tap the shortcut&lt;br/&gt; {2,number,integer}. Choose whether you want to use a button or gesture to access the feature&lt;br/&gt;"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;To get started&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Go to accessibility settings&lt;br/&gt; {1,number,integer}. Select a feature and tap the shortcut&lt;br/&gt; {2,number,integer}. Choose the button to access the feature&lt;br/&gt;"</string>
-    <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Use button or gesture"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Location"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Size"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Fade when not in use"</string>
@@ -3491,6 +3506,7 @@
     <string name="keywords_wallet" msgid="3757421969956996972">"wallet"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"pay, tap, payments"</string>
     <string name="keywords_backup" msgid="707735920706667685">"backup, back up"</string>
+    <string name="keywords_fingerprint_unlock" msgid="522579721745187402">"fingerprint, unlock, auth, sign in"</string>
     <string name="keywords_face_unlock" msgid="545338452730885392">"face, unlock, auth, sign in"</string>
     <string name="keywords_biometric_unlock" msgid="8569545388717753692">"face, unlock, auth, sign in, fingerprint, biometric"</string>
     <string name="keywords_imei_info" msgid="8848791606402333514">"imei, meid, min, prl version, imei sv"</string>
@@ -4965,7 +4981,7 @@
     <string name="network_connected" msgid="7637745547242487795">"Connected"</string>
     <string name="network_connecting" msgid="6856124847029124041">"Connecting…"</string>
     <string name="network_could_not_connect" msgid="676574629319069922">"Couldn’t connect"</string>
-    <string name="empty_networks_list" msgid="6519489879480673428">"No networks found."</string>
+    <string name="empty_networks_list" msgid="7263167074321380983">"No networks found"</string>
     <string name="network_query_error" msgid="6406348372070035274">"Couldn’t find networks. Try again."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(forbidden)"</string>
     <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
@@ -5699,6 +5715,7 @@
     <string name="audio_sharing_block_pairing_dialog_content" msgid="6352030314206654722">"To pair a new device, turn off Audio Sharing first."</string>
     <string name="audio_sharing_turn_off_button_label" msgid="1934956352475393641">"Turn off"</string>
     <string name="share_audio_notification_title" msgid="5201976754820387782">"Share audio with <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_device_volume_description" msgid="3218967346006222765">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> volume"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Connect to a LE audio stream"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Nearby audio streams"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Audio streams"</string>
@@ -5749,6 +5766,7 @@
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Scan an audio stream QR code to listen with <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Can\'t edit password while sharing. To change the password, first turn off audio sharing."</string>
     <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Your password must contain 4-16 characters and use only letters, numbers and symbols"</string>
+    <string name="audio_streams_main_page_name_dialog_format_alert" msgid="6797839340871206774">"Your audio stream name must contain 4-32 characters and use only letters, numbers and symbols"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR code scanner"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Need help?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Search Settings"</string>
@@ -5766,18 +5784,24 @@
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Circle to Search"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Touch and hold the Home button or the navigation handle to search using the content on your screen."</string>
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Configure device detail."</string>
-    <string name="supervision_settings_title" msgid="8383827215386872736">"Supervision"</string>
+    <!-- no translation found for supervision_settings_title (8507163323870367711) -->
+    <skip />
     <string name="supervision_settings_summary" msgid="5020634300370322741">"Content restrictions &amp; other limits"</string>
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Use device supervision"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Set up PIN to get started"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"supervision, parental supervision, parental controls"</string>
     <string name="supervision_pin_management_preference_title" msgid="961680798581006465">"Manage PIN"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"Add a PIN recovery method"</string>
+    <!-- no translation found for supervision_pin_management_preference_summary_add (8061713645550514683) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_verify_recovery (2156782778845060114) -->
+    <skip />
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Change PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Forgot PIN"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Update recovery email"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Delete PIN"</string>
     <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"This will reset all your supervision settings"</string>
+    <!-- no translation found for supervision_add_pin_recovery_title (5584523084706797399) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Web content filters"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome and Web"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Try to block explicit sites"</string>
@@ -5789,5 +5813,11 @@
     <string name="supervision_web_content_filters_search_filter_off_title" msgid="6049461395304222346">"SafeSearch filtering OFF"</string>
     <string name="supervision_web_content_filters_search_filter_off_summary" msgid="3834238970190924433">"Account settings may still filter or blur explicit results"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Enter supervision PIN"</string>
+    <!-- no translation found for supervision_lock_setup_title (7581682893583645713) -->
+    <skip />
+    <!-- no translation found for supervision_lock_setup_description (6931450348200992733) -->
+    <skip />
+    <!-- no translation found for supervision_pin_reset_success_toast (4663259412030769718) -->
+    <skip />
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> animation"</string>
 </resources>

@@ -130,7 +130,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 .authority(getPrefContext().getPackageName())
                 .appendPath(String.valueOf(useExpressiveTheme
                         ? R.raw.accessibility_magnification_banner_expressive
-                        : R.raw.a11y_magnification_banner))
+                        : R.raw.accessibility_magnification_banner))
                 .build();
         mTouchExplorationStateChangeListener = isTouchExplorationEnabled -> {
             mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));

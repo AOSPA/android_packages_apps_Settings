@@ -89,13 +89,14 @@ class SupervisionMainSwitchPreference(
             supervisionMainSwitchStorage.getBoolean(KEY)!!,
         )
 
-        val preferenceKeys = buildList<String> {
-            mainSwitchPreference?.parent?.forEachRecursively {
-                if (it.parent?.key == SupervisionDashboardScreen.SUPERVISION_DYNAMIC_GROUP_1) {
-                    add(it.key)
+        val preferenceKeys =
+            buildList<String> {
+                mainSwitchPreference?.parent?.forEachRecursively {
+                    if (it.parent?.key == SupervisionDashboardScreen.SUPERVISION_DYNAMIC_GROUP_1) {
+                        add(it.key)
+                    }
                 }
             }
-        }
         context.lifecycleScope.launch {
             preferenceDataMap =
                 withContext(coroutineDispatcher) {

@@ -35,17 +35,15 @@ import com.android.settingslib.supervision.SupervisionLog
 class SupervisionPinRecoveryActivity : FragmentActivity() {
     // ActivityResultLaunchers
     private val contract = ActivityResultContracts.StartActivityForResult()
-    private val confirmPinLauncher: ActivityResultLauncher<Intent> by lazy {
+    private val confirmPinLauncher: ActivityResultLauncher<Intent> =
         registerForActivityResult(contract) { result -> onPinConfirmed(result.resultCode) }
-    }
-    private val verificationLauncher: ActivityResultLauncher<Intent> by lazy {
+
+    private val verificationLauncher: ActivityResultLauncher<Intent> =
         registerForActivityResult(contract) { result ->
             onVerification(result.resultCode, result.data)
         }
-    }
-    private val setPinLauncher: ActivityResultLauncher<Intent> by lazy {
+    private val setPinLauncher: ActivityResultLauncher<Intent> =
         registerForActivityResult(contract) { result -> onPinSet(result.resultCode) }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -24,6 +24,7 @@ import static com.android.settingslib.fuelgauge.BatteryStatus.BATTERY_LEVEL_UNKN
 import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageEvents;
 import android.app.usage.UsageEvents.Event;
+import android.app.usage.UsageEventsQuery;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -1047,9 +1048,16 @@ public final class DataProcessor {
         final long start = System.currentTimeMillis();
         UsageEvents events = null;
         try {
-            events =
-                    usageStatsManager.queryEventsForUser(
-                            startTime, endTime, userId, callingPackage);
+            final UsageEventsQuery usageEventsQuery =
+                    new UsageEventsQuery.Builder(startTime, endTime)
+                            .setUserId(userId)
+                            .setEventTypes(
+                                    Event.ACTIVITY_RESUMED,
+                                    Event.ACTIVITY_STOPPED,
+                                    Event.DEVICE_SHUTDOWN
+                            )
+                            .build();
+            events = usageStatsManager.queryEventsWithFilter(usageEventsQuery, callingPackage);
         } catch (RemoteException e) {
             Log.e(TAG, "Error fetching usage events: ", e);
         }
