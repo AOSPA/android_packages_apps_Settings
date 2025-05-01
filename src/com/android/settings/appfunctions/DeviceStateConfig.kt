@@ -52,11 +52,13 @@ import com.android.settings.spa.app.catalyst.AllAppsScreen
 import com.android.settings.spa.app.catalyst.AppInfoAllFilesAccessScreen
 import com.android.settings.spa.app.catalyst.AppInfoDisplayOverOtherAppsScreen
 import com.android.settings.spa.app.catalyst.AppInfoFullScreenIntentScreen
+import com.android.settings.spa.app.catalyst.AppInfoPictureInPictureScreen
 import com.android.settings.spa.app.catalyst.AppInfoStorageScreen
-import com.android.settings.spa.app.catalyst.AppStorageAppListScreen
 import com.android.settings.spa.app.catalyst.AppsAllFilesAccessAppListScreen
 import com.android.settings.spa.app.catalyst.AppsDisplayOverOtherAppsAppListScreen
 import com.android.settings.spa.app.catalyst.AppsFullScreenIntentAppListScreen
+import com.android.settings.spa.app.catalyst.AppPictureInPictureAppListScreen
+import com.android.settings.spa.app.catalyst.AppStorageAppListScreen
 import com.android.settings.supervision.SupervisionDashboardScreen
 import com.android.settings.supervision.SupervisionPinManagementScreen
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -210,6 +212,11 @@ fun getScreenConfigs() =
             enabled = true,
             screenKey = ZenModeBedtimeScreen.KEY,
             category = setOf(DeviceStateCategory.UNCATEGORIZED),
+        ),
+        PerScreenConfig(
+            enabled = true,
+            screenKey = AppPictureInPictureAppListScreen.KEY,
+            category = setOf(DeviceStateCategory.PERMISSION),
         ),
     )
 
@@ -646,5 +653,15 @@ fun getDeviceStateItemList() =
             settingKey = StoragePreferenceScreen.KEY_PREF_TEMP,
             settingScreenKey = StoragePreferenceScreen.KEY,
             hintText = { _, _ -> "Total device storage used by temporary system files" },
+        ),
+        DeviceStateItemConfig(
+            enabled = true,
+            settingKey = AppInfoPictureInPictureScreen.KEY,
+            settingScreenKey = AppPictureInPictureAppListScreen.KEY,
+            hintText = { context, metadata ->
+                metadata
+                    .extras(context)
+                    ?.getString(AppInfoPictureInPictureScreen.KEY_EXTRA_PACKAGE_NAME)
+            },
         ),
     )

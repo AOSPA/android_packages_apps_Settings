@@ -64,6 +64,7 @@ public class AddSourceWaitForResponseStateTest {
     @Mock private AudioStreamPreference mMockPreference;
     @Mock private AudioStreamsProgressCategoryController mMockController;
     @Mock private AudioStreamsHelper mMockHelper;
+    @Mock private AudioStreamScanHelper mScanHelper;
     @Mock private BluetoothLeBroadcastMetadata mMockMetadata;
     @Mock private AudioStreamsRepository mMockRepository;
     private FakeFeatureFactory mFeatureFactory;
@@ -108,7 +109,7 @@ public class AddSourceWaitForResponseStateTest {
     public void testPerformAction_metadataIsNull_doNothing() {
         when(mMockPreference.getAudioStreamMetadata()).thenReturn(null);
 
-        mInstance.performAction(mMockPreference, mMockController, mMockHelper);
+        mInstance.onEnter(mMockPreference, mMockController, mMockHelper, mScanHelper);
 
         verify(mMockHelper, never()).addSource(any());
     }
@@ -120,7 +121,7 @@ public class AddSourceWaitForResponseStateTest {
                 .thenReturn(SourceOriginForLogging.QR_CODE_SCAN_SETTINGS);
         mInstance.setAudioStreamsRepositoryForTesting(mMockRepository);
 
-        mInstance.performAction(mMockPreference, mMockController, mMockHelper);
+        mInstance.onEnter(mMockPreference, mMockController, mMockHelper, mScanHelper);
 
         verify(mMockHelper).addSource(mMockMetadata);
         verify(mFeatureFactory.metricsFeatureProvider)
@@ -143,7 +144,7 @@ public class AddSourceWaitForResponseStateTest {
         when(mMockController.getFragment()).thenReturn(mock(AudioStreamsDashboardFragment.class));
         mInstance.setAudioStreamsRepositoryForTesting(mMockRepository);
 
-        mInstance.performAction(mMockPreference, mMockController, mMockHelper);
+        mInstance.onEnter(mMockPreference, mMockController, mMockHelper, mScanHelper);
         ShadowLooper.idleMainLooper(ADD_SOURCE_WAIT_FOR_RESPONSE_TIMEOUT_MILLIS, TimeUnit.SECONDS);
 
         verify(mMockHelper).addSource(mMockMetadata);

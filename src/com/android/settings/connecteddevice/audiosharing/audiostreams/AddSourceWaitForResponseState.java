@@ -47,10 +47,11 @@ class AddSourceWaitForResponseState extends AudioStreamStateHandler {
     }
 
     @Override
-    void performAction(
+    void onEnter(
             AudioStreamPreference preference,
             AudioStreamsProgressCategoryController controller,
-            AudioStreamsHelper helper) {
+            AudioStreamsHelper helper,
+            AudioStreamScanHelper scanHelper) {
         mHandler.removeCallbacksAndMessages(preference);
         var metadata = preference.getAudioStreamMetadata();
         if (metadata != null) {

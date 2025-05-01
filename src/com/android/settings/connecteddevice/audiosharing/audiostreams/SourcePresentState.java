@@ -43,14 +43,6 @@ class SourcePresentState extends AudioStreamStateHandler {
     }
 
     @Override
-    void performAction(
-            AudioStreamPreference preference,
-            AudioStreamsProgressCategoryController controller,
-            AudioStreamsHelper helper) {
-        // nothing to do
-    }
-
-    @Override
     int getSummary() {
         return AUDIO_STREAM_SOURCE_PRESENT_STATE_SUMMARY;
     }

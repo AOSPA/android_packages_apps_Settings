@@ -20,6 +20,7 @@ import static com.android.settings.connecteddevice.audiosharing.audiostreams.Aud
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryController.AudioStreamState.ADD_SOURCE_FAILED;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryController.AudioStreamState.ADD_SOURCE_WAIT_FOR_RESPONSE;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryController.AudioStreamState.SOURCE_ADDED;
+import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryController.AudioStreamState.SOURCE_LOST;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryController.AudioStreamState.SOURCE_PRESENT;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryController.AudioStreamState.SYNCED;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryController.AudioStreamState.WAIT_FOR_SYNC;
@@ -67,6 +68,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.connecteddevice.audiosharing.audiostreams.testshadows.ShadowAudioStreamScanHelper;
 import com.android.settings.connecteddevice.audiosharing.audiostreams.testshadows.ShadowAudioStreamsHelper;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
@@ -104,6 +106,7 @@ import java.util.Map;
         shadows = {
             ShadowBluetoothUtils.class,
             ShadowAudioStreamsHelper.class,
+            ShadowAudioStreamScanHelper.class,
             ShadowThreadUtils.class,
             ShadowAlertDialog.class,
             ShadowBluetoothAdapter.class,
@@ -129,6 +132,7 @@ public class AudioStreamsProgressCategoryControllerTest {
     private AccessibilityManager mAccessibilityManager;
     @Mock private PreferenceScreen mScreen;
     @Mock private AudioStreamsHelper mAudioStreamsHelper;
+    @Mock private AudioStreamScanHelper mAudioStreamScanHelper;
     @Mock private LocalBluetoothLeBroadcastAssistant mLeBroadcastAssistant;
     @Mock private BluetoothLeBroadcastMetadata mMetadata;
     @Mock private CachedBluetoothDevice mDevice;
@@ -149,13 +153,13 @@ public class AudioStreamsProgressCategoryControllerTest {
         shadowBluetoothAdapter.setIsLeAudioBroadcastAssistantSupported(
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
         ShadowAudioStreamsHelper.setUseMock(mAudioStreamsHelper);
+        ShadowAudioStreamScanHelper.setUseMock(mAudioStreamScanHelper);
         when(mAudioStreamsHelper.getLeBroadcastAssistant()).thenReturn(mLeBroadcastAssistant);
         when(mAudioStreamsHelper.getAllSourcesByDevice()).thenReturn(emptyMap());
         mSetFlagsRule.disableFlags(FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
 
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBtManager;
         when(mLocalBtManager.getEventManager()).thenReturn(mBluetoothEventManager);
-        when(mLeBroadcastAssistant.isSearchInProgress()).thenReturn(false);
         when(mContext.getSystemService(AccessibilityManager.class)).thenReturn(
                 mAccessibilityManager);
 
@@ -191,7 +195,7 @@ public class AudioStreamsProgressCategoryControllerTest {
     @Test
     public void testSetScanning() {
         mController.displayPreference(mScreen);
-        mController.setScanning(true);
+        mController.setScanningIconSpinning(true);
 
         verify(mPreference).setProgress(true);
     }
@@ -218,8 +222,6 @@ public class AudioStreamsProgressCategoryControllerTest {
 
     @Test
     public void testOnStart_initNoDevice_showDialog() {
-        when(mLeBroadcastAssistant.isSearchInProgress()).thenReturn(true);
-
         FragmentController.setupFragment(mFragment);
         mController.setFragment(mFragment);
         mController.displayPreference(mScreen);
@@ -229,7 +231,6 @@ public class AudioStreamsProgressCategoryControllerTest {
         // Called twice, once in displayPreference, the other in init()
         verify(mPreference, times(2)).setVisible(anyBoolean());
         verify(mPreference).removeAudioStreamPreferences();
-        verify(mLeBroadcastAssistant).stopSearchingForSources();
         verify(mLeBroadcastAssistant).unregisterServiceCallBack(any());
 
         var dialog = ShadowAlertDialog.getLatestAlertDialog();
@@ -265,7 +266,6 @@ public class AudioStreamsProgressCategoryControllerTest {
         ShadowAudioStreamsHelper.setCachedBluetoothDeviceInSharingOrLeConnected(mDevice);
         // Enable a screen reader service
         ShadowAudioStreamsHelper.setEnabledScreenReaderService(new ComponentName("pkg", "class"));
-        when(mLeBroadcastAssistant.isSearchInProgress()).thenReturn(true);
 
         FragmentController.setupFragment(mFragment);
         mController.setFragment(mFragment);
@@ -276,7 +276,7 @@ public class AudioStreamsProgressCategoryControllerTest {
         // Called twice, once in displayPreference, the other in init()
         verify(mPreference, times(2)).setVisible(anyBoolean());
         verify(mPreference).removeAudioStreamPreferences();
-        verify(mLeBroadcastAssistant).stopSearchingForSources();
+        verify(mAudioStreamScanHelper).stopScanning();
         verify(mLeBroadcastAssistant).unregisterServiceCallBack(any());
 
         var dialog = ShadowAlertDialog.getLatestAlertDialog();
@@ -335,26 +335,7 @@ public class AudioStreamsProgressCategoryControllerTest {
         shadowOf(Looper.getMainLooper()).idle();
 
         verify(mLeBroadcastAssistant).registerServiceCallBack(any(), any());
-        verify(mLeBroadcastAssistant).startSearchingForSources(any());
-
-        var dialog = ShadowAlertDialog.getLatestAlertDialog();
-        assertThat(dialog).isNull();
-
-        verify(mController, never()).moveToState(any(), any());
-    }
-
-    @Test
-    public void testOnStart_initHasDevice_scanningInProgress() {
-        // Setup a device
-        ShadowAudioStreamsHelper.setCachedBluetoothDeviceInSharingOrLeConnected(mDevice);
-        when(mLeBroadcastAssistant.isSearchInProgress()).thenReturn(true);
-
-        mController.onStart(mLifecycleOwner);
-        shadowOf(Looper.getMainLooper()).idle();
-
-        verify(mLeBroadcastAssistant).registerServiceCallBack(any(), any());
-        verify(mLeBroadcastAssistant).stopSearchingForSources();
-        verify(mLeBroadcastAssistant).startSearchingForSources(any());
+        verify(mAudioStreamScanHelper).startScanning();
 
         var dialog = ShadowAlertDialog.getLatestAlertDialog();
         assertThat(dialog).isNull();
@@ -376,7 +357,7 @@ public class AudioStreamsProgressCategoryControllerTest {
         mController.onStart(mLifecycleOwner);
         shadowOf(Looper.getMainLooper()).idle();
 
-        verify(mLeBroadcastAssistant).startSearchingForSources(any());
+        verify(mAudioStreamScanHelper).startScanning();
 
         var dialog = ShadowAlertDialog.getLatestAlertDialog();
         assertThat(dialog).isNull();
@@ -468,19 +449,19 @@ public class AudioStreamsProgressCategoryControllerTest {
         mController.setSourceFromQrCode(
                 metadataWithNoIdAndSameName, SourceOriginForLogging.UNKNOWN);
 
+        // Handle both source from qr code and already connected source in onStart
+        mController.displayPreference(mScreen);
+        mController.onStart(mLifecycleOwner);
+        shadowOf(Looper.getMainLooper()).idle();
+
         // Setup a connected source with name BROADCAST_NAME_1 and id
         BluetoothLeBroadcastReceiveState connected =
                 createConnectedMock(ALREADY_CONNECTED_BROADCAST_ID);
         var data = mock(BluetoothLeAudioContentMetadata.class);
         when(connected.getSubgroupMetadata()).thenReturn(ImmutableList.of(data));
         when(data.getProgramInfo()).thenReturn(BROADCAST_NAME_1);
-        when(mAudioStreamsHelper.getAllSourcesByDevice())
-                .thenReturn(Map.of(mSourceDevice, ImmutableList.of(connected)));
-
-        // Handle both source from qr code and already connected source in onStart
-        mController.displayPreference(mScreen);
-        mController.onStart(mLifecycleOwner);
-        shadowOf(Looper.getMainLooper()).idle();
+        when(mDevice.getDevice()).thenReturn(mSourceDevice);
+        mController.handleSourceStreaming(mSourceDevice, connected);
 
         // Verify two preferences created, one moved to state WAIT_FOR_SYNC, one to SOURCE_ADDED.
         // Both has ALREADY_CONNECTED_BROADCAST_ID as the UNSET_ID is updated to match.
@@ -672,7 +653,7 @@ public class AudioStreamsProgressCategoryControllerTest {
     }
 
     @Test
-    public void testHandleSourceLost_removed() {
+    public void testHandleSourceLost_updateMetadataAndState() {
         // Setup a device
         ShadowAudioStreamsHelper.setCachedBluetoothDeviceInSharingOrLeConnected(mDevice);
 
@@ -688,25 +669,27 @@ public class AudioStreamsProgressCategoryControllerTest {
         mController.handleSourceLost(NEWLY_FOUND_BROADCAST_ID);
         shadowOf(Looper.getMainLooper()).idle();
 
-        ArgumentCaptor<AudioStreamPreference> preferenceToAdd =
-                ArgumentCaptor.forClass(AudioStreamPreference.class);
-        ArgumentCaptor<AudioStreamPreference> preferenceToRemove =
+        ArgumentCaptor<AudioStreamPreference> preference =
                 ArgumentCaptor.forClass(AudioStreamPreference.class);
         ArgumentCaptor<AudioStreamsProgressCategoryController.AudioStreamState> state =
                 ArgumentCaptor.forClass(
                         AudioStreamsProgressCategoryController.AudioStreamState.class);
 
-        // Verify a new preference is created with state SYNCED.
-        verify(mController).moveToState(preferenceToAdd.capture(), state.capture());
-        assertThat(preferenceToAdd.getValue()).isNotNull();
-        assertThat(preferenceToAdd.getValue().getAudioStreamBroadcastId())
-                .isEqualTo(NEWLY_FOUND_BROADCAST_ID);
-        assertThat(state.getValue()).isEqualTo(SYNCED);
+        verify(mController, times(2)).moveToState(preference.capture(), state.capture());
+        List<AudioStreamPreference> preferences = preference.getAllValues();
+        assertThat(preferences.size()).isEqualTo(2);
+        List<AudioStreamsProgressCategoryController.AudioStreamState> states = state.getAllValues();
+        assertThat(states.size()).isEqualTo(2);
 
-        // Verify the preference with NEWLY_FOUND_BROADCAST_ID is removed.
-        verify(mPreference).removePreference(preferenceToRemove.capture());
-        assertThat(preferenceToRemove.getValue().getAudioStreamBroadcastId())
+        // Verify a new preference is created with state SYNCED.
+        assertThat(preferences.get(0).getAudioStreamBroadcastId())
                 .isEqualTo(NEWLY_FOUND_BROADCAST_ID);
+        assertThat(states.get(0)).isEqualTo(SYNCED);
+
+        // Verify the new source is updated to state SOURCE_LOST
+        assertThat(preferences.get(1).getAudioStreamBroadcastId())
+                .isEqualTo(NEWLY_FOUND_BROADCAST_ID);
+        assertThat(states.get(1)).isEqualTo(SOURCE_LOST);
     }
 
     @Test
@@ -766,25 +749,27 @@ public class AudioStreamsProgressCategoryControllerTest {
         mController.handleSourceRemoved();
         shadowOf(Looper.getMainLooper()).idle();
 
-        ArgumentCaptor<AudioStreamPreference> preferenceToAdd =
-                ArgumentCaptor.forClass(AudioStreamPreference.class);
-        ArgumentCaptor<AudioStreamPreference> preferenceToRemove =
+        ArgumentCaptor<AudioStreamPreference> preference =
                 ArgumentCaptor.forClass(AudioStreamPreference.class);
         ArgumentCaptor<AudioStreamsProgressCategoryController.AudioStreamState> state =
                 ArgumentCaptor.forClass(
                         AudioStreamsProgressCategoryController.AudioStreamState.class);
 
-        // Verify a new preference is created with state SOURCE_ADDED.
-        verify(mController).moveToState(preferenceToAdd.capture(), state.capture());
-        assertThat(preferenceToAdd.getValue()).isNotNull();
-        assertThat(preferenceToAdd.getValue().getAudioStreamBroadcastId())
-                .isEqualTo(ALREADY_CONNECTED_BROADCAST_ID);
-        assertThat(state.getValue()).isEqualTo(SOURCE_ADDED);
+        verify(mController, times(2)).moveToState(preference.capture(), state.capture());
+        List<AudioStreamPreference> preferences = preference.getAllValues();
+        assertThat(preferences.size()).isEqualTo(2);
+        List<AudioStreamsProgressCategoryController.AudioStreamState> states = state.getAllValues();
+        assertThat(states.size()).isEqualTo(2);
 
-        // Verify the preference with ALREADY_CONNECTED_BROADCAST_ID is removed.
-        verify(mPreference).removePreference(preferenceToRemove.capture());
-        assertThat(preferenceToRemove.getValue().getAudioStreamBroadcastId())
+        // Verify the connected preference is created with state SOURCE_ADDED.
+        assertThat(preferences.get(0).getAudioStreamBroadcastId())
                 .isEqualTo(ALREADY_CONNECTED_BROADCAST_ID);
+        assertThat(states.get(0)).isEqualTo(SOURCE_ADDED);
+
+        // Verify the connected preference is updated to state SOURCE_LOST
+        assertThat(preferences.get(1).getAudioStreamBroadcastId())
+                .isEqualTo(ALREADY_CONNECTED_BROADCAST_ID);
+        assertThat(states.get(1)).isEqualTo(SOURCE_LOST);
     }
 
     @Test

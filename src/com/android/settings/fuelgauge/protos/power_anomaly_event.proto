@@ -17,14 +17,16 @@ message PowerAnomalyEvent {
   oneof info {
     WarningBannerInfo warning_banner_info = 6;
     WarningItemInfo warning_item_info = 7;
+    BatteryTipInfo battery_tip_info = 9;
   }
   optional string dismiss_record_key = 8;
 }
 
-// Next id: 2
-enum PowerAnomalyType{
+// Next id: 3
+enum PowerAnomalyType {
   TYPE_SETTINGS_BANNER = 0;
   TYPE_APPS_ITEM = 1;
+  TYPE_BATTERY_TIP = 2;
 }
 
 // Next id: 14
@@ -46,7 +48,7 @@ enum PowerAnomalyKey {
 }
 
 // Next id: 3
-enum DetectRequestSourceType{
+enum DetectRequestSourceType {
   TYPE_UNKNOWN_SOURCE = 0;
   TYPE_USAGE_UI = 1;
   TYPE_DATA_LOADER = 2;
@@ -80,4 +82,36 @@ message WarningItemInfo {
   optional string item_key = 8;
   optional string warning_info_string = 9;
   optional string anomaly_hint_pref_key = 10;
+}
+
+// Next id: 8
+message BatteryTipInfo {
+  optional string title_string = 1;
+  optional string description_string = 2;
+  optional BannerButtonInfo positive_button = 3;
+  optional BannerButtonInfo negative_button = 4;
+  optional bool hide_dismiss_button = 5;
+  optional int32 uid = 6;
+  optional string package_name = 7;
+}
+
+// Next id: 4
+message BannerButtonInfo {
+  optional string text = 1;
+  oneof action_info {
+    ViewSettings view_settings = 2;
+    UpdateOptimizationMode update_optimization_mode = 3;
+  }
+}
+
+// Next id: 4
+message ViewSettings {
+  optional string settings_destination = 1;
+  optional int32 source_metrics_category = 2;
+  optional string source_highlight_key = 3;
+}
+
+// Next id: 2
+message UpdateOptimizationMode {
+  optional string feedback_string = 1;
 }

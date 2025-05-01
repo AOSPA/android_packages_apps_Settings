@@ -395,13 +395,18 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
             return;
         }
 
-        final String title = StringUtil.getIcuPluralsString(getContext(), checkedCount,
+        String title = StringUtil.getIcuPluralsString(getContext(), checkedCount,
                 R.string.dlg_remove_locales_title);
+        int buttonResId = R.string.locale_remove_menu;
         mShowingRemoveDialog = true;
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         if (mAdapter.isFirstLocaleChecked()) {
-            builder.setMessage(R.string.dlg_remove_locales_message);
+            title = getContext().getString(R.string.dlg_remove_system_locales_title,
+                    mAdapter.getFeedItemList().get(1).getFullNameNative());
+            builder.setMessage(getContext().getString(R.string.dlg_remove_locales_message,
+                            mAdapter.getFeedItemList().get(0).getFullNameNative()));
+            buttonResId = R.string.button_label_confirmation_of_system_locale_change;
         }
 
         builder.setTitle(title)
@@ -411,7 +416,7 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
                         setRemoveMode(false);
                     }
                 })
-                .setPositiveButton(R.string.locale_remove_menu,
+                .setPositiveButton(buttonResId,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(@NonNull DialogInterface dialog, int which) {

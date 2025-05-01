@@ -28,6 +28,7 @@ import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settingslib.flags.Flags;
 import com.android.settingslib.utils.ThreadUtils;
 
 class WaitForSyncState extends AudioStreamStateHandler {
@@ -50,12 +51,16 @@ class WaitForSyncState extends AudioStreamStateHandler {
     }
 
     @Override
-    void performAction(
+    void onEnter(
             AudioStreamPreference preference,
             AudioStreamsProgressCategoryController controller,
-            AudioStreamsHelper helper) {
+            AudioStreamsHelper helper,
+            AudioStreamScanHelper scanHelper) {
         var metadata = preference.getAudioStreamMetadata();
         if (metadata != null) {
+            if (Flags.audioStreamScanWithFilter()) {
+                scanHelper.startScanningWithFilter(metadata);
+            }
             mHandler.postDelayed(
                     () -> {
                         if (preference.isShown()
@@ -78,6 +83,13 @@ class WaitForSyncState extends AudioStreamStateHandler {
                         }
                     },
                     WAIT_FOR_SYNC_TIMEOUT_MILLIS);
+        }
+    }
+
+    @Override
+    void onExit(AudioStreamScanHelper scanHelper) {
+        if (Flags.audioStreamScanWithFilter()) {
+            scanHelper.restartScanningWithoutFilter();
         }
     }
 

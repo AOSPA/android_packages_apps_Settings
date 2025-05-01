@@ -646,9 +646,11 @@
         =1      {Remove selected language?}
         other   {Remove selected languages?}
         }</string>
+    <!-- The title of the confirmation dialog shown when the user selects system languages and tries to remove it [CHAR LIMIT=60] -->
+    <string name="dlg_remove_system_locales_title">Change system language to %s?</string>
 
     <!-- The text of the confirmation dialog shown when the user selects several languages and tries to remove them [CHAR LIMIT=NONE] -->
-    <string name="dlg_remove_locales_message">Text will be displayed in another language.</string>
+    <string name="dlg_remove_locales_message"><xliff:g id="Language" example="English (United States)">%s</xliff:g> will be removed from your preferred languages</string>
 
     <!-- The title of the error dialog shown when the user selects all the languages and tries to remove them [CHAR LIMIT=60] -->
     <string name="dlg_remove_locales_error_title">Can’t remove all languages</string>

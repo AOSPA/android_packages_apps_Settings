@@ -31,6 +31,8 @@ import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_KEY_CHAL
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -66,6 +68,7 @@ import android.widget.ImeAwareEditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
@@ -1479,9 +1482,21 @@ public class FingerprintSettings extends SubSettings {
             mVibrator.vibrate(SUCCESS_VIBRATION_EFFECT);
             String prefName = genKey(fpId);
             FingerprintPreference fpref = (FingerprintPreference) findPreference(prefName);
+            if (fpref == null) {
+                return;
+            }
+            if (isUdfps()) {
+                clearAllFingerprintPreferenceHighlight();
+                fpref.startHighlight();
+            } else {
+                highlightForSfps(fpref);
+            }
+        }
+
+        private void highlightForSfps(FingerprintPreference preference) {
             final Drawable highlight = getHighlightDrawable();
-            if (highlight != null && fpref != null) {
-                final View view = fpref.getView();
+            if (highlight != null && preference != null) {
+                final View view = preference.getView();
                 if (view == null) {
                     // FingerprintPreference is not bound to UI yet, so view is null.
                     return;
@@ -1498,6 +1513,17 @@ public class FingerprintSettings extends SubSettings {
                         view.setBackground(null);
                     }
                 }, RESET_HIGHLIGHT_DELAY_MS);
+            }
+        }
+
+        private void clearAllFingerprintPreferenceHighlight() {
+            if (mFingerprintsEnrolledCategory != null) {
+                for (int i = 0; i < mFingerprintsEnrolledCategory.getPreferenceCount(); i++) {
+                    Preference preference = mFingerprintsEnrolledCategory.getPreference(i);
+                    if (preference instanceof FingerprintPreference) {
+                        ((FingerprintPreference) preference).clearHighlight();
+                    }
+                }
             }
         }
 
@@ -1980,11 +2006,19 @@ public class FingerprintSettings extends SubSettings {
 
     public static class FingerprintPreference extends TwoTargetPreference {
 
+        private static final long HIGHLIGHT_DURATION = 200L;
+        private static final long RESET_HIGHLIGHT_DURATION = 15000L;
+
         private final OnDeleteClickListener mOnDeleteClickListener;
 
         private Fingerprint mFingerprint;
         private View mView;
         private View mDeleteView;
+
+        @Nullable
+        private ValueAnimator mHighlightAnimator;
+
+        private final Runnable mClearHighlightRunnable = this::clearHighlight;
 
         public interface OnDeleteClickListener {
             void onDeleteClick(FingerprintPreference p);
@@ -2005,6 +2039,67 @@ public class FingerprintSettings extends SubSettings {
 
         public Fingerprint getFingerprint() {
             return mFingerprint;
+        }
+
+
+        /** Start the highlight animation */
+        public void startHighlight() {
+            if (mView == null) {
+                return;
+            }
+            clearHighlight();
+            final int backgroundFrom = getBackgroundRes(false /* isHighlighted */);
+            final int backgroundTo = getBackgroundRes(true /* isHighlighted */);
+            mHighlightAnimator = ValueAnimator.ofObject(
+                    new ArgbEvaluator(), backgroundFrom, backgroundTo);
+            mHighlightAnimator.setDuration(HIGHLIGHT_DURATION);
+            mHighlightAnimator.addUpdateListener(
+                    animator -> mView.setBackgroundResource((int) animator.getAnimatedValue()));
+            mHighlightAnimator.setRepeatMode(ValueAnimator.REVERSE);
+            mHighlightAnimator.setRepeatCount(4);
+            mHighlightAnimator.start();
+            mView.postDelayed(mClearHighlightRunnable, RESET_HIGHLIGHT_DURATION);
+        }
+
+        /** Clear the highlight effect */
+        public void clearHighlight() {
+            if (mHighlightAnimator != null && mHighlightAnimator.isRunning()) {
+                mHighlightAnimator.cancel();
+                mHighlightAnimator = null;
+            }
+            mView.removeCallbacks(mClearHighlightRunnable);
+            mView.setBackgroundResource(getBackgroundRes(false /* isHighlighted */));
+        }
+
+        private boolean isTopItemInParent() {
+            final PreferenceGroup parent = getParent();
+            if (parent != null && parent.getPreferenceCount() > 0) {
+                return this == parent.getPreference(0);
+            }
+            return false;
+        }
+
+        private @DrawableRes int getBackgroundRes(boolean isHighlighted) {
+            final boolean isTop = isTopItemInParent();
+            if (SettingsThemeHelper.isExpressiveTheme(getContext())) {
+                if (isTop) {
+                    return isHighlighted
+                            ? com.android.settingslib.widget.theme.R.drawable
+                            .settingslib_round_background_top_highlighted
+                            : com.android.settingslib.widget.theme.R.drawable
+                                    .settingslib_round_background_top;
+                } else {
+                    return isHighlighted
+                            ? com.android.settingslib.widget.theme.R.drawable
+                            .settingslib_round_background_center_highlighted
+                            :  com.android.settingslib.widget.theme.R.drawable
+                                    .settingslib_round_background_center;
+                }
+            } else {
+                return isHighlighted
+                        ? R.drawable.preference_background_highlighted
+                        : R.drawable.preference_background;
+            }
         }
 
         @Override

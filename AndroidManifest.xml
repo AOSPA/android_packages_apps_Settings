@@ -2932,6 +2932,8 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             android:name=".supervision.SupervisionPinRecoveryActivity"
             android:exported="false" />
 
+        <activity android:name=".supervision.SupervisionCredentialProxyActivity" android:exported="false"/>
+
         <activity android:name=".SetupRedactionInterstitial"
             android:enabled="false"
             android:exported="true"
