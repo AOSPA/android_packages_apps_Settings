@@ -84,7 +84,7 @@ public class AdjustmentKeyPreferenceController extends
         if (pref != null && mAppRow != null) {
             pref.setDisabledByAdmin(mAdmin);
             pref.setEnabled(!pref.isDisabledByAdmin());
-            pref.setChecked(mBackend.getAllowedAssistantAdjustments(mAppRow.pkg).contains(mKey));
+            pref.setChecked(!mBackend.getAdjustmentDeniedPackages(mKey).contains(mAppRow.pkg));
             pref.setOnPreferenceChangeListener(this);
         }
     }

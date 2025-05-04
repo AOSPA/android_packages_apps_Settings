@@ -16,8 +16,10 @@
 
 package com.android.settings.accessibility.actionbar;
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 import static com.android.settings.accessibility.actionbar.SurveyMenuController.MENU_SEND_SURVEY;
-import static com.android.settings.accessibility.notification.NotificationConstants.EXTRA_DISMISS_NOTIFICATION;
+import static com.android.internal.accessibility.common.NotificationConstants.ACTION_SURVEY_NOTIFICATION_DISMISSED;
+import static com.android.internal.accessibility.common.NotificationConstants.EXTRA_PAGE_ID;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -26,11 +28,11 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.robolectric.Shadows.shadowOf;
 
 import android.content.Intent;
 import android.view.Menu;
@@ -41,7 +43,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.testing.EmptyFragmentActivity;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
-import com.android.settings.accessibility.notification.SurveyNotificationService;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.overlay.SurveyFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -51,6 +52,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
@@ -140,6 +142,9 @@ public class SurveyMenuControllerTest {
 
     @Test
     public void onOptionsItemSelected_surveyMenuAdded_shouldStartAndHideSurveyEntry() {
+        FragmentActivity mockActivity = mock(FragmentActivity.class);
+        when(mockActivity.getPackageName()).thenReturn(SETTINGS_PACKAGE_NAME);
+        when(mHost.getActivity()).thenReturn(mockActivity);
         when(mMenuItem.getItemId()).thenReturn(MENU_SEND_SURVEY);
         SurveyMenuController.init(mHost, mSurveyFeatureProvider, TEST_SURVEY_TRIGGER_KEY,
                 TEST_PAGE_ID);
@@ -150,11 +155,14 @@ public class SurveyMenuControllerTest {
         verify(mSurveyFeatureProvider).sendActivityIfAvailable(TEST_SURVEY_TRIGGER_KEY);
         // Verify that menu is hidden
         verify(mMenuItem).setVisible(false);
-        // Verify notification dismissal service started
-        Intent intent = shadowOf(mActivity).getNextStartedService();
-        assertThat(intent.getComponent().getClassName()).isEqualTo(
-                SurveyNotificationService.class.getName());
-        assertThat(intent.getBooleanExtra(EXTRA_DISMISS_NOTIFICATION, false)).isTrue();
+        // Verify notification dismissal broadcast was sent
+        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        verify(mockActivity).sendBroadcastAsUser(intentCaptor.capture(),
+                any(), eq(android.Manifest.permission.MANAGE_ACCESSIBILITY));
+        assertThat(intentCaptor.getValue().getAction()).isEqualTo(
+                ACTION_SURVEY_NOTIFICATION_DISMISSED);
+        assertThat(intentCaptor.getValue().getPackage()).isEqualTo(SETTINGS_PACKAGE_NAME);
+        assertThat(intentCaptor.getValue().getIntExtra(EXTRA_PAGE_ID, -1)).isEqualTo(TEST_PAGE_ID);
     }
 
     @Test

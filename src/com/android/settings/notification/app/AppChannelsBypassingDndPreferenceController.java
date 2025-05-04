@@ -148,14 +148,12 @@ public class AppChannelsBypassingDndPreferenceController extends NotificationPre
                     for (NotificationChannel channel : channelGroup.getChannels()) {
                         if (!isConversation(channel)) {
                             newChannelList.add(channel);
-                            if (Flags.dedupeDndSettingsChannels()) {
-                                mChannelGroupNames.put(channel, channelGroup.getName().toString());
-                                // Check if channel name is unique on this page; if not, save it.
-                                if (allChannelNames.contains(channel.getName())) {
-                                    mDuplicateChannelNames.add(channel.getName().toString());
-                                } else {
-                                    allChannelNames.add(channel.getName().toString());
-                                }
+                            mChannelGroupNames.put(channel, channelGroup.getName().toString());
+                            // Check if channel name is unique on this page; if not, save it.
+                            if (allChannelNames.contains(channel.getName())) {
+                                mDuplicateChannelNames.add(channel.getName().toString());
+                            } else {
+                                allChannelNames.add(channel.getName().toString());
                             }
                         }
                     }
@@ -190,16 +188,14 @@ public class AppChannelsBypassingDndPreferenceController extends NotificationPre
                             && isChannelConfigurable(channel)
                             && showNotification(channel));
             channelPreference.setTitle(BidiFormatter.getInstance().unicodeWrap(channel.getName()));
-            if (Flags.dedupeDndSettingsChannels()) {
-                // If the channel shares its name with another channel, set group name as summary
-                // to disambiguate in the list.
-                if (mDuplicateChannelNames.contains(channel.getName().toString())
-                        && mChannelGroupNames.containsKey(channel)
-                        && mChannelGroupNames.get(channel) != null
-                        && !mChannelGroupNames.get(channel).isEmpty()) {
-                    channelPreference.setSummary(BidiFormatter.getInstance().unicodeWrap(
-                            mChannelGroupNames.get(channel)));
-                }
+            // If the channel shares its name with another channel, set group name as summary
+            // to disambiguate in the list.
+            if (mDuplicateChannelNames.contains(channel.getName().toString())
+                    && mChannelGroupNames.containsKey(channel)
+                    && mChannelGroupNames.get(channel) != null
+                    && !mChannelGroupNames.get(channel).isEmpty()) {
+                channelPreference.setSummary(BidiFormatter.getInstance().unicodeWrap(
+                        mChannelGroupNames.get(channel)));
             }
             channelPreference.setChecked(showNotificationInDnd(channel));
             channelPreference.setOnPreferenceChangeListener(

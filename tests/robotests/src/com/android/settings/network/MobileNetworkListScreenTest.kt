@@ -15,14 +15,20 @@
  */
 package com.android.settings.network
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
+import android.content.Context
+import android.platform.test.annotations.DisableFlags
+import android.telephony.SubscriptionInfo
+import android.telephony.SubscriptionManager
+import androidx.test.core.app.ApplicationProvider
 import com.android.settings.flags.Flags
 import com.android.settingslib.preference.CatalystScreenTestCase
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
-import org.junit.runner.RunWith
+import org.mockito.kotlin.mock
+import org.robolectric.Shadows.shadowOf
+import org.robolectric.annotation.Config
+import org.robolectric.shadows.ShadowSubscriptionManager
 
-@RunWith(AndroidJUnit4::class)
 class MobileNetworkListScreenTest : CatalystScreenTestCase() {
     override val preferenceScreenCreator = MobileNetworkListScreen()
 
@@ -32,5 +38,16 @@ class MobileNetworkListScreenTest : CatalystScreenTestCase() {
     @Test
     fun key() {
         assertThat(preferenceScreenCreator.key).isEqualTo(MobileNetworkListScreen.KEY)
+    }
+
+    @DisableFlags(Flags.FLAG_IS_DUAL_SIM_ONBOARDING_ENABLED)
+    @Config(shadows = [ShadowSubscriptionManager::class])
+    override fun migration() {
+        val context: Context = ApplicationProvider.getApplicationContext()
+        val subscriptionManager =
+            shadowOf(context.getSystemService(SubscriptionManager::class.java))
+        val subscriptionInfo: SubscriptionInfo = mock()
+        subscriptionManager.setAvailableSubscriptionInfos(subscriptionInfo)
+        super.migration()
     }
 }

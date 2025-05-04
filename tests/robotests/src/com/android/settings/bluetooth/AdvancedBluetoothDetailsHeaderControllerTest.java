@@ -455,6 +455,7 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     }
 
     @Test
+    @DisableFlags(FLAG_REFACTOR_BATTERY_LEVEL_DISPLAY)
     public void onStart_isAvailable_registerCallback() {
         when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
                 .thenReturn("true".getBytes());
@@ -472,6 +473,7 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     }
 
     @Test
+    @DisableFlags(FLAG_REFACTOR_BATTERY_LEVEL_DISPLAY)
     public void onStart_notAvailable_notNeedToRegisterCallback() {
         when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
                 .thenReturn("false".getBytes());
@@ -484,6 +486,7 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     }
 
     @Test
+    @DisableFlags(FLAG_REFACTOR_BATTERY_LEVEL_DISPLAY)
     public void onStart_isAvailableButNoBluetoothDevice_notNeedToRegisterCallback() {
         when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
                 .thenReturn("true".getBytes());
@@ -499,6 +502,7 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     }
 
     @Test
+    @DisableFlags(FLAG_REFACTOR_BATTERY_LEVEL_DISPLAY)
     public void onStop_availableAndHasBluetoothDevice_unregisterCallback() {
         onStart_isAvailable_registerCallback();
 
@@ -510,6 +514,7 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     }
 
     @Test
+    @DisableFlags(FLAG_REFACTOR_BATTERY_LEVEL_DISPLAY)
     public void onStop_noBluetoothDevice_noNeedToUnregisterCallback() {
         when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
                 .thenReturn("true".getBytes());

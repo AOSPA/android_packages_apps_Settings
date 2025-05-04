@@ -125,8 +125,6 @@ public class AudioSharingDialogHandler {
                                 mContext,
                                 SettingsEnums.ACTION_AUDIO_SHARING_STOP_FAILED,
                                 mHostMetricsCategory);
-                        AudioSharingUtils.toastMessage(
-                                mContext, "Fail to stop broadcast, reason " + reason);
                         mIsStoppingBroadcast = false;
                     }
                 }

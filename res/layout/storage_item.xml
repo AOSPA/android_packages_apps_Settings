@@ -65,7 +65,8 @@
                 app:layout_constraintBaseline_toBaselineOf="@android:id/title"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-            <ProgressBar
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:theme="@style/Theme.Material3.DynamicColors.DayNight"
                 android:id="@android:id/progress"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/settingslib_expressive_space_extrasmall2"
@@ -74,8 +75,9 @@
                 android:max="100"
                 android:layout_below="@android:id/title"
                 app:layout_constraintTop_toBottomOf="@android:id/title"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:progressDrawable="@drawable/storage_progress_bar" />
+                app:trackThickness="@dimen/settingslib_expressive_space_extrasmall2"
+                app:indicatorTrackGapSize="@dimen/settingslib_expressive_space_extrasmall2"
+                style="@style/SettingsLibProgressBarStyle.Linear.Expressive" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </LinearLayout>

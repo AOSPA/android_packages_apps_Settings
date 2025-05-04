@@ -24,23 +24,25 @@ import android.graphics.Color
 import android.graphics.PointF
 import android.graphics.RectF
 import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.LayerDrawable
-import android.widget.Button
+import android.view.View
+import android.widget.FrameLayout
 
 import androidx.annotation.VisibleForTesting
 
 /** Represents a draggable block in the topology pane. */
-class DisplayBlock(context : Context) : Button(context) {
-    @VisibleForTesting var mSelectedImage: Drawable = ColorDrawable(Color.BLACK)
-    @VisibleForTesting var mUnselectedImage: Drawable = ColorDrawable(Color.BLACK)
+class DisplayBlock(context : Context) : FrameLayout(context) {
+    @VisibleForTesting
+    val mHighlightPx = context.resources.getDimensionPixelSize(
+            R.dimen.display_block_highlight_width)
 
-    private val mSelectedBg = context.getDrawable(
-            R.drawable.display_block_selection_marker_background)!!
-    private val mUnselectedBg = context.getDrawable(
-            R.drawable.display_block_unselected_background)!!
-    private val mInsetPx = context.resources.getDimensionPixelSize(R.dimen.display_block_padding)
+    val mWallpaperView = View(context)
+    private val mBackgroundView = View(context).apply {
+        background = context.getDrawable(R.drawable.display_block_background)
+    }
+    @VisibleForTesting
+    val mSelectionMarkerView = View(context).apply {
+        background = context.getDrawable(R.drawable.display_block_selection_marker_background)
+    }
 
     init {
         isScrollContainer = false
@@ -49,27 +51,33 @@ class DisplayBlock(context : Context) : Button(context) {
 
         // Prevents shadow from appearing around edge of button.
         stateListAnimator = null
-    }
 
-    /** Sets position of the block given unpadded coordinates. */
-    fun place(topLeft: PointF) {
-        x = topLeft.x
-        y = topLeft.y
+        addView(mWallpaperView)
+        addView(mBackgroundView)
+        addView(mSelectionMarkerView)
     }
 
     fun setWallpaper(wallpaper: Bitmap?) {
-        val wallpaperDrawable = BitmapDrawable(context.resources, wallpaper ?: return)
-
-        fun framedBy(bg: Drawable): Drawable =
-            LayerDrawable(arrayOf(wallpaperDrawable, bg)).apply {
-                setLayerInsetRelative(0, mInsetPx, mInsetPx, mInsetPx, mInsetPx)
-            }
-        mSelectedImage = framedBy(mSelectedBg)
-        mUnselectedImage = framedBy(mUnselectedBg)
+        mWallpaperView.background = BitmapDrawable(context.resources, wallpaper ?: return)
     }
 
+    /**
+     * The coordinates of the upper-left corner of the block in pane coordinates, not including the
+     * highlight border.
+     */
+    var positionInPane: PointF
+        get() = PointF(x + mHighlightPx, y + mHighlightPx)
+        set(value: PointF) {
+            x = value.x - mHighlightPx
+            y = value.y - mHighlightPx
+        }
+
     fun setHighlighted(value: Boolean) {
-        background = if (value) mSelectedImage else mUnselectedImage
+        mSelectionMarkerView.visibility = if (value) View.VISIBLE else View.INVISIBLE
+
+        // The highlighted block must be draw last so that its highlight shows over the borders of
+        // other displays.
+        z = if (value) 2f else 1f
     }
 
     /** Sets position and size of the block given unpadded bounds. */
@@ -77,9 +85,28 @@ class DisplayBlock(context : Context) : Button(context) {
         val topLeft = scale.displayToPaneCoor(bounds.left, bounds.top)
         val bottomRight = scale.displayToPaneCoor(bounds.right, bounds.bottom)
         val layout = layoutParams
-        layout.width = (bottomRight.x - topLeft.x).toInt()
-        layout.height = (bottomRight.y - topLeft.y).toInt()
+        val newWidth = (bottomRight.x - topLeft.x).toInt()
+        val newHeight = (bottomRight.y - topLeft.y).toInt()
+        layout.width = newWidth + 2*mHighlightPx
+        layout.height = newHeight + 2*mHighlightPx
         layoutParams = layout
-        place(topLeft)
+        positionInPane = topLeft
+
+        // The highlight is the outermost border. The highlight is shown outside of the parent
+        // FrameLayout so that it consumes the padding between the blocks.
+        mWallpaperView.layoutParams.let {
+            it.width = newWidth
+            it.height = newHeight
+            if (it is MarginLayoutParams) {
+                it.leftMargin = mHighlightPx
+                it.topMargin = mHighlightPx
+                it.bottomMargin = mHighlightPx
+                it.topMargin = mHighlightPx
+            }
+            mWallpaperView.layoutParams = it
+        }
+
+        // The other two child views are MATCH_PARENT by default so will resize to fill up the
+        // FrameLayout.
     }
 }

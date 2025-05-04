@@ -17,23 +17,30 @@ package com.android.settings.supervision
 
 import android.Manifest.permission.INTERACT_ACROSS_USERS_FULL
 import android.Manifest.permission.MANAGE_USERS
+import android.Manifest.permission.SET_BIOMETRIC_DIALOG_ADVANCED
 import android.Manifest.permission.USE_BIOMETRIC_INTERNAL
 import android.app.ActivityManager
 import android.app.role.RoleManager
+import android.app.supervision.SupervisionManager
+import android.content.DialogInterface
+import android.content.Intent
 import android.hardware.biometrics.BiometricManager
 import android.hardware.biometrics.BiometricPrompt
 import android.hardware.biometrics.BiometricPrompt.AuthenticationCallback
+import android.hardware.biometrics.PromptContentViewWithMoreOptionsButton
 import android.os.Binder
 import android.os.Bundle
 import android.os.CancellationSignal
 import android.os.Process
 import android.util.Log
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.OpenForTesting
 import androidx.annotation.RequiresPermission
+import androidx.annotation.VisibleForTesting
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import com.android.settings.R
-import com.android.settingslib.supervision.SupervisionLog
+import com.android.settingslib.supervision.SupervisionLog.TAG
 
 /**
  * Activity for confirming supervision credentials using device credential authentication.
@@ -60,10 +67,7 @@ open class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
             @RequiresPermission(anyOf = [INTERACT_ACROSS_USERS_FULL, MANAGE_USERS])
             override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                 tryStopProfile()
-                Log.w(
-                    SupervisionLog.TAG,
-                    "onAuthenticationError(errorCode=$errorCode, errString=$errString)",
-                )
+                Log.w(TAG, "onAuthenticationError(errorCode=$errorCode, errString=$errString)")
                 setResult(RESULT_CANCELED)
                 finish()
             }
@@ -83,54 +87,87 @@ open class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
             }
         }
 
-    @RequiresPermission(anyOf = [INTERACT_ACROSS_USERS_FULL, MANAGE_USERS])
+    private val supervisionPinRecoveryLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            setResult(result.resultCode)
+            finish()
+        }
+
+    @RequiresPermission(
+        allOf = [USE_BIOMETRIC_INTERNAL, SET_BIOMETRIC_DIALOG_ADVANCED, INTERACT_ACROSS_USERS_FULL]
+    )
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (!callerHasSupervisionRole() && !callerIsSystemUid()) {
-            setResult(RESULT_CANCELED)
-            finish()
+            errorHandler()
             return
         }
 
-        val supervisingUser = SupervisionHelper.getInstance(this).getSupervisingUserHandle()
+        val supervisingUser = supervisingUserHandle
         if (supervisingUser == null) {
-            Log.w(SupervisionLog.TAG, "No supervising user exists, cannot verify credentials.")
-            setResult(RESULT_CANCELED)
-            finish()
+            errorHandler("No supervising user exists, cannot verify credentials.")
+            return
+        }
+
+        if (!isSupervisingCredentialSet) {
+            errorHandler("No supervising credential set, cannot verify credentials.")
             return
         }
 
         val activityManager = getSystemService(ActivityManager::class.java)
-        if(!activityManager.startProfile(supervisingUser)) {
-            Log.w(SupervisionLog.TAG,
-                "Unable to start supervising user, cannot verify credentials.")
-            setResult(RESULT_CANCELED)
-            finish()
+        if (!activityManager.startProfile(supervisingUser)) {
+            errorHandler("Unable to start supervising user, cannot verify credentials.")
             return
         }
+
         showBiometricPrompt(supervisingUser.identifier)
     }
 
-    @RequiresPermission(USE_BIOMETRIC_INTERNAL)
+    @RequiresPermission(allOf = [USE_BIOMETRIC_INTERNAL, SET_BIOMETRIC_DIALOG_ADVANCED])
     fun showBiometricPrompt(userId: Int) {
-        val biometricPrompt =
+        getBiometricPrompt()
+            .authenticateUser(
+                CancellationSignal(),
+                ContextCompat.getMainExecutor(this),
+                mAuthenticationCallback,
+                userId,
+            )
+    }
+
+    @RequiresPermission(value = SET_BIOMETRIC_DIALOG_ADVANCED)
+    @VisibleForTesting
+    fun getBiometricPrompt(): BiometricPrompt {
+        val builder =
             BiometricPrompt.Builder(this)
                 .setTitle(getString(R.string.supervision_full_screen_pin_verification_title))
                 .setConfirmationRequired(true)
                 .setAllowedAuthenticators(BiometricManager.Authenticators.DEVICE_CREDENTIAL)
-                .build()
-        biometricPrompt.authenticateUser(
-            CancellationSignal(),
-            ContextCompat.getMainExecutor(this),
-            mAuthenticationCallback,
-            userId
-        )
+
+        val supportSupervisionRecovery =
+            getSystemService(SupervisionManager::class.java)?.getSupervisionRecoveryInfo() != null
+
+        if (!supportSupervisionRecovery) {
+            return builder.build()
+        }
+
+        val intent =
+            Intent(this, SupervisionPinRecoveryActivity::class.java).apply {
+                action = SupervisionPinRecoveryActivity.ACTION_RECOVERY
+            }
+        val listener =
+            DialogInterface.OnClickListener { _: DialogInterface?, _: Int ->
+                supervisionPinRecoveryLauncher.launch(intent)
+            }
+        val moreOptionsButtonBuilder =
+            PromptContentViewWithMoreOptionsButton.Builder()
+                .setMoreOptionsButtonListener(ContextCompat.getMainExecutor(this), listener)
+        return builder.setContentView(moreOptionsButtonBuilder.build()).build()
     }
 
     private fun callerHasSupervisionRole(): Boolean {
         val roleManager = getSystemService(RoleManager::class.java)
         if (roleManager == null) {
-            Log.w(SupervisionLog.TAG, "null RoleManager")
+            Log.w(TAG, "null RoleManager")
             return false
         }
         return roleManager
@@ -141,7 +178,7 @@ open class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
     private fun callerIsSystemUid(): Boolean {
         val callingUid = Binder.getCallingUid()
         if (callingUid != Process.SYSTEM_UID) {
-            Log.w(SupervisionLog.TAG, "callingUid: $callingUid is not SYSTEM_UID")
+            Log.w(TAG, "callingUid: $callingUid is not SYSTEM_UID")
             return false
         }
         return true
@@ -149,14 +186,20 @@ open class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
 
     @RequiresPermission(anyOf = [INTERACT_ACROSS_USERS_FULL, MANAGE_USERS])
     private fun tryStopProfile() {
-        val supervisingUser = SupervisionHelper.getInstance(this).getSupervisingUserHandle()
-        val activityManager = getSystemService(ActivityManager::class.java)
+        val supervisingUser = supervisingUserHandle
         if (supervisingUser == null) {
-            Log.w(SupervisionLog.TAG, "Cannot stop supervising profile because it does not exist.")
+            Log.w(TAG, "Cannot stop supervising profile because it does not exist.")
             return
         }
+        val activityManager = getSystemService(ActivityManager::class.java)
         if (!activityManager.stopProfile(supervisingUser)) {
-            Log.w(SupervisionLog.TAG, "Could not stop the supervising profile.")
+            Log.w(TAG, "Could not stop the supervising profile.")
         }
+    }
+
+    private fun errorHandler(errStr: String? = null) {
+        errStr?.let { Log.w(TAG, it) }
+        setResult(RESULT_CANCELED)
+        finish()
     }
 }

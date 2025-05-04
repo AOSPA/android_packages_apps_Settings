@@ -132,6 +132,7 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
     @Mock private PreferenceScreen mScreen;
     @Mock private AudioSharingDeviceVolumePreference mPreference1;
     @Mock private AudioSharingDeviceVolumePreference mPreference2;
+    @Mock private AudioSharingDeviceVolumeSliderPreference mSliderPreference1;
     @Mock private AudioManager mAudioManager;
     @Mock private PreferenceManager mPreferenceManager;
     @Mock private ContentResolver mContentResolver;
@@ -181,6 +182,7 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
         doReturn(ImmutableSet.of()).when(mCachedDevice1).getMemberDevice();
         when(mCachedDeviceManager.findDevice(mDevice1)).thenReturn(mCachedDevice1);
         when(mPreference1.getCachedDevice()).thenReturn(mCachedDevice1);
+        when(mSliderPreference1.getCachedDevice()).thenReturn(mCachedDevice1);
         doReturn(TEST_DEVICE_NAME2).when(mCachedDevice2).getName();
         doReturn(TEST_DEVICE_GROUP_ID2).when(mCachedDevice2).getGroupId();
         doReturn(mDevice2).when(mCachedDevice2).getDevice();
@@ -233,9 +235,12 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
         verify(mDeviceUpdater).registerCallback();
         verify(mVolumeControl)
                 .registerCallback(any(Executor.class), any(BluetoothVolumeControl.Callback.class));
-        verify(mContentResolver).registerContentObserver(
-                Settings.Secure.getUriFor(BluetoothUtils.getPrimaryGroupIdUriForBroadcast()), false,
-                mContentObserver);
+        verify(mContentResolver)
+                .registerContentObserver(
+                        Settings.Secure.getUriFor(
+                                BluetoothUtils.getPrimaryGroupIdUriForBroadcast()),
+                        false,
+                        mContentObserver);
         verify(mLeAudio, never()).registerCallback(any(), any(BluetoothLeAudio.Callback.class));
     }
 
@@ -260,8 +265,10 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
     }
 
     @Test
-    @EnableFlags({Flags.FLAG_ENABLE_LE_AUDIO_SHARING,
-            Flags.FLAG_ADOPT_PRIMARY_GROUP_MANAGEMENT_API_V2})
+    @EnableFlags({
+        Flags.FLAG_ENABLE_LE_AUDIO_SHARING,
+        Flags.FLAG_ADOPT_PRIMARY_GROUP_MANAGEMENT_API_V2
+    })
     public void onAudioSharingProfilesConnected_flagOn_registerCallbacksIncludingLeAudioProfile() {
         mController.onAudioSharingProfilesConnected();
         verify(mAssistant)
@@ -321,8 +328,10 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
     }
 
     @Test
-    @EnableFlags({Flags.FLAG_ENABLE_LE_AUDIO_SHARING,
-            Flags.FLAG_ADOPT_PRIMARY_GROUP_MANAGEMENT_API_V2})
+    @EnableFlags({
+        Flags.FLAG_ENABLE_LE_AUDIO_SHARING,
+        Flags.FLAG_ADOPT_PRIMARY_GROUP_MANAGEMENT_API_V2
+    })
     public void onStop_flagOn_callbacksRegistered_unregisterCallbacksIncludingLeAudioProfile() {
         mController.setCallbacksRegistered(true);
         mController.onStop(mLifecycleOwner);
@@ -356,6 +365,7 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
     }
 
     @Test
+    @DisableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_BLUETOOTH_SETTINGS_EXPRESSIVE_DESIGN)
     public void onDeviceAdded_firstDevice_updateVisibility() {
         when(mPreference1.getProgress()).thenReturn(TEST_VOLUME_VALUE);
         mController.setPreferenceGroup(mPreferenceGroup);
@@ -368,6 +378,7 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ADOPT_PRIMARY_GROUP_MANAGEMENT_API_V2)
+    @DisableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_BLUETOOTH_SETTINGS_EXPRESSIVE_DESIGN)
     public void onDeviceAdded_adoptApi_rankFallbackDeviceOnTop() {
         LeAudioProfile leAudioProfile = mock(LeAudioProfile.class);
         when(leAudioProfile.getBroadcastToUnicastFallbackGroup()).thenReturn(TEST_DEVICE_GROUP_ID2);
@@ -384,10 +395,14 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ADOPT_PRIMARY_GROUP_MANAGEMENT_API_V2)
+    @DisableFlags({
+        Flags.FLAG_ADOPT_PRIMARY_GROUP_MANAGEMENT_API_V2,
+        com.android.settings.flags.Flags.FLAG_ENABLE_BLUETOOTH_SETTINGS_EXPRESSIVE_DESIGN
+    })
     public void onDeviceAdded_rankFallbackDeviceOnTop() {
         Settings.Secure.putInt(
-                mContentResolver, BluetoothUtils.getPrimaryGroupIdUriForBroadcast(),
+                mContentResolver,
+                BluetoothUtils.getPrimaryGroupIdUriForBroadcast(),
                 TEST_DEVICE_GROUP_ID2);
         when(mPreference1.getProgress()).thenReturn(TEST_VOLUME_VALUE);
         when(mPreference2.getProgress()).thenReturn(TEST_VOLUME_VALUE);
@@ -401,6 +416,7 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
     }
 
     @Test
+    @DisableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_BLUETOOTH_SETTINGS_EXPRESSIVE_DESIGN)
     public void onDeviceAdded_setVolumeFromVolumeControlService() {
         when(mPreference1.getProgress()).thenReturn(TEST_INVALID_VOLUME_VALUE);
         mController.setVolumeMap(ImmutableMap.of(TEST_DEVICE_GROUP_ID1, TEST_VOLUME_VALUE));
@@ -412,6 +428,19 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
     }
 
     @Test
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_BLUETOOTH_SETTINGS_EXPRESSIVE_DESIGN)
+    public void onDeviceAdded_enableSliderPreference_setVolumeFromVolumeControlService() {
+        when(mSliderPreference1.getValue()).thenReturn(TEST_INVALID_VOLUME_VALUE);
+        mController.setVolumeMap(ImmutableMap.of(TEST_DEVICE_GROUP_ID1, TEST_VOLUME_VALUE));
+        mController.setPreferenceGroup(mPreferenceGroup);
+        mController.onDeviceAdded(mSliderPreference1);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        verify(mSliderPreference1).setValue(eq(TEST_VOLUME_VALUE));
+    }
+
+    @Test
+    @DisableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_BLUETOOTH_SETTINGS_EXPRESSIVE_DESIGN)
     public void onDeviceAdded_setVolumeFromAudioManager() {
         when(mPreference1.getProgress()).thenReturn(TEST_INVALID_VOLUME_VALUE);
         mController.setPreferenceGroup(mPreferenceGroup);
@@ -422,6 +451,18 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
     }
 
     @Test
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_BLUETOOTH_SETTINGS_EXPRESSIVE_DESIGN)
+    public void onDeviceAdded_enableSliderPreference_setVolumeFromAudioManager() {
+        when(mSliderPreference1.getValue()).thenReturn(TEST_INVALID_VOLUME_VALUE);
+        mController.setPreferenceGroup(mPreferenceGroup);
+        mController.onDeviceAdded(mSliderPreference1);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        verify(mSliderPreference1).setValue(eq(26));
+    }
+
+    @Test
+    @DisableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_BLUETOOTH_SETTINGS_EXPRESSIVE_DESIGN)
     public void onDeviceRemoved_notLastDevice_isVisible() {
         mPreferenceGroup.addPreference(mPreference2);
         mPreferenceGroup.addPreference(mPreference1);
@@ -432,6 +473,7 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
     }
 
     @Test
+    @DisableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_BLUETOOTH_SETTINGS_EXPRESSIVE_DESIGN)
     public void onDeviceRemoved_lastDevice_updateVisibility() {
         mPreferenceGroup.addPreference(mPreference1);
         mController.setPreferenceGroup(mPreferenceGroup);
@@ -499,6 +541,7 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ADOPT_PRIMARY_GROUP_MANAGEMENT_API_V2)
+    @DisableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_BLUETOOTH_SETTINGS_EXPRESSIVE_DESIGN)
     public void onBroadcastToUnicastFallbackGroupChanged_adoptApi_updatePreferenceOrder() {
         when(mLeAudio.getBroadcastToUnicastFallbackGroup()).thenReturn(TEST_DEVICE_GROUP_ID2);
         when(mPreference1.getProgress()).thenReturn(TEST_VOLUME_VALUE);
@@ -507,7 +550,6 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
         mController.onDeviceAdded(mPreference1);
         mController.onDeviceAdded(mPreference2);
         shadowOf(Looper.getMainLooper()).idle();
-
 
         when(mLeAudio.getBroadcastToUnicastFallbackGroup()).thenReturn(TEST_DEVICE_GROUP_ID1);
         mController.mLeAudioCallback.onBroadcastToUnicastFallbackGroupChanged(
@@ -519,10 +561,14 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ADOPT_PRIMARY_GROUP_MANAGEMENT_API_V2)
+    @DisableFlags({
+        Flags.FLAG_ADOPT_PRIMARY_GROUP_MANAGEMENT_API_V2,
+        com.android.settings.flags.Flags.FLAG_ENABLE_BLUETOOTH_SETTINGS_EXPRESSIVE_DESIGN
+    })
     public void settingsObserverOnChange_updatePreferenceOrder() {
         Settings.Secure.putInt(
-                mContentResolver, BluetoothUtils.getPrimaryGroupIdUriForBroadcast(),
+                mContentResolver,
+                BluetoothUtils.getPrimaryGroupIdUriForBroadcast(),
                 TEST_DEVICE_GROUP_ID2);
         when(mPreference1.getProgress()).thenReturn(TEST_VOLUME_VALUE);
         when(mPreference2.getProgress()).thenReturn(TEST_VOLUME_VALUE);
@@ -531,7 +577,9 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
         mController.onDeviceAdded(mPreference2);
         shadowOf(Looper.getMainLooper()).idle();
 
-        Settings.Secure.putInt(mContentResolver, BluetoothUtils.getPrimaryGroupIdUriForBroadcast(),
+        Settings.Secure.putInt(
+                mContentResolver,
+                BluetoothUtils.getPrimaryGroupIdUriForBroadcast(),
                 TEST_DEVICE_GROUP_ID1);
         mContentObserver.onChange(true);
         shadowOf(Looper.getMainLooper()).idle();
@@ -541,6 +589,7 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
     }
 
     @Test
+    @DisableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_BLUETOOTH_SETTINGS_EXPRESSIVE_DESIGN)
     public void onDeviceVolumeChanged_updatePreference() {
         when(mPreference1.getProgress()).thenReturn(TEST_MAX_VOLUME_VALUE);
         mController.setPreferenceGroup(mPreferenceGroup);
@@ -555,10 +604,25 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
     }
 
     @Test
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_BLUETOOTH_SETTINGS_EXPRESSIVE_DESIGN)
+    public void onDeviceVolumeChanged_enableSliderPreference_updatePreference() {
+        when(mSliderPreference1.getValue()).thenReturn(TEST_MAX_VOLUME_VALUE);
+        mController.setPreferenceGroup(mPreferenceGroup);
+        mController.onDeviceAdded(mSliderPreference1);
+        shadowOf(Looper.getMainLooper()).idle();
+        assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(1);
+
+        mController.mVolumeControlCallback.onDeviceVolumeChanged(mDevice1, TEST_VOLUME_VALUE);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        verify(mSliderPreference1).setValue(TEST_VOLUME_VALUE);
+    }
+
+    @Test
     public void testBluetoothLeBroadcastAssistantCallbacks_updateGroup() {
         // onSourceAdded will update group preference
-        mController.mBroadcastAssistantCallback.onSourceAdded(mDevice1, /* sourceId= */
-                1, /* reason= */ 1);
+        mController.mBroadcastAssistantCallback.onSourceAdded(
+                mDevice1, /* sourceId= */ 1, /* reason= */ 1);
         verify(mDeviceUpdater).forceUpdate();
 
         // onSourceRemoved will update group preference
@@ -578,8 +642,8 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
         when(mState.getBisSyncState()).thenReturn(bisSyncState);
         when(mBroadcast.getLatestBroadcastId()).thenReturn(1);
         when(mState.getBroadcastId()).thenReturn(1);
-        mController.mBroadcastAssistantCallback.onReceiveStateChanged(mDevice1, /* sourceId= */ 1,
-                mState);
+        mController.mBroadcastAssistantCallback.onReceiveStateChanged(
+                mDevice1, /* sourceId= */ 1, mState);
         mController.mBroadcastAssistantCallback.onSourceAddFailed(
                 mDevice1, mSource, /* reason= */ 1);
         mController.mBroadcastAssistantCallback.onSourceRemoveFailed(

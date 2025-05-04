@@ -27,6 +27,7 @@ import androidx.fragment.app.testing.FragmentScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settingslib.widget.FooterPreference
 import com.android.settingslib.widget.SelectorWithWidgetPreference
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
@@ -208,6 +209,20 @@ class SupervisionWebContentFiltersScreenTest {
 
                 assertThat(searchFilterOnPreference.isChecked).isFalse()
                 assertThat(searchFilterOffPreference.isChecked).isTrue()
+            }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN)
+    fun footerPreferenceExists() {
+        FragmentScenario.launchInContainer(supervisionWebContentFiltersScreen.fragmentClass())
+            .onFragment { fragment ->
+                val footerPreference =
+                    fragment.findPreference<FooterPreference>(
+                        SupervisionWebContentFiltersFooterPreference.KEY
+                    )!!
+
+                assertThat(footerPreference).isNotNull()
             }
     }
 }

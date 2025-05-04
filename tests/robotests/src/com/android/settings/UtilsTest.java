@@ -19,7 +19,10 @@ package com.android.settings;
 import static android.hardware.biometrics.SensorProperties.STRENGTH_CONVENIENCE;
 import static android.hardware.biometrics.SensorProperties.STRENGTH_STRONG;
 import static android.hardware.biometrics.SensorProperties.STRENGTH_WEAK;
+import static android.hardware.devicestate.DeviceState.PROPERTY_FOLDABLE_DISPLAY_CONFIGURATION_INNER_PRIMARY;
+import static android.hardware.devicestate.DeviceState.PROPERTY_FOLDABLE_DISPLAY_CONFIGURATION_OUTER_PRIMARY;
 
+import static com.android.internal.hidden_from_bootclasspath.android.hardware.devicestate.feature.flags.Flags.FLAG_DEVICE_STATE_PROPERTY_MIGRATION;
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 import static com.android.settings.password.ConfirmDeviceCredentialActivity.BIOMETRIC_PROMPT_AUTHENTICATORS;
 import static com.android.settings.password.ConfirmDeviceCredentialActivity.BIOMETRIC_PROMPT_HIDE_BACKGROUND;
@@ -39,16 +42,19 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import static java.util.Collections.emptyList;
+import static java.util.Collections.singletonList;
+
 import android.app.ActionBar;
 import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
-import android.app.admin.DevicePolicyResourcesManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -56,6 +62,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.VectorDrawable;
 import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.Flags;
+import android.hardware.devicestate.DeviceState;
+import android.hardware.devicestate.DeviceStateManager;
 import android.hardware.face.FaceManager;
 import android.hardware.face.FaceSensorProperties;
 import android.hardware.face.FaceSensorPropertiesInternal;
@@ -70,6 +78,7 @@ import android.os.UserManager;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
+import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.util.IconDrawableFactory;
@@ -102,6 +111,7 @@ import org.robolectric.shadows.ShadowBinder;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
@@ -123,8 +133,6 @@ public class UtilsTest {
     @Mock
     private DevicePolicyManager mDevicePolicyManager;
     @Mock
-    private DevicePolicyResourcesManager mDevicePolicyResourcesManager;
-    @Mock
     private UserManager mMockUserManager;
     @Mock
     private PackageManager mPackageManager;
@@ -136,18 +144,17 @@ public class UtilsTest {
     private BiometricManager mBiometricManager;
     @Mock
     private Fragment mFragment;
+    @Mock
+    private DeviceStateManager mMockDeviceStateManager;
 
     private Context mContext;
-    private UserManager mUserManager;
-    private static final int FLAG_SYSTEM = 0x00000000;
-    private static final int FLAG_MAIN = 0x00004000;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
-        mUserManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+        doReturn(mMockDeviceStateManager).when(mContext).getSystemService(DeviceStateManager.class);
         when(mContext.getSystemService(WifiManager.class)).thenReturn(wifiManager);
         when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
                 .thenReturn(connectivityManager);
@@ -526,6 +533,125 @@ public class UtilsTest {
     public void isFaceNotConvenienceBiometric_faceManagerNull_shouldReturnFalse() {
         when(mContext.getSystemService(Context.FACE_SERVICE)).thenReturn(null);
         assertThat(Utils.isFaceNotConvenienceBiometric(mContext)).isFalse();
+    }
+
+    @Test
+    @EnableFlags(FLAG_DEVICE_STATE_PROPERTY_MIGRATION)
+    public void isDeviceFoldable_v31_deviceStateManagerIsNull_returnsFalse() {
+        when(mContext.getSystemService(DeviceStateManager.class)).thenReturn(null);
+        assertThat(Utils.isDeviceFoldable(mContext)).isFalse();
+    }
+
+    @Test
+    @EnableFlags(FLAG_DEVICE_STATE_PROPERTY_MIGRATION)
+    public void isDeviceFoldable_v31_supportedStatesIsNull_returnsFalse() {
+        when(mMockDeviceStateManager.getSupportedDeviceStates()).thenReturn(null);
+        assertThat(Utils.isDeviceFoldable(mContext)).isFalse();
+    }
+
+    @Test
+    @EnableFlags(FLAG_DEVICE_STATE_PROPERTY_MIGRATION)
+    public void isDeviceFoldable_v31_noSupportedStates_returnsFalse() {
+        when(mMockDeviceStateManager.getSupportedDeviceStates()).thenReturn(emptyList());
+        assertThat(Utils.isDeviceFoldable(mContext)).isFalse();
+    }
+
+    @Test
+    @EnableFlags(FLAG_DEVICE_STATE_PROPERTY_MIGRATION)
+    public void isDeviceFoldable_v31_noFoldablePropertiesInStates_returnsFalse() {
+        DeviceState mockDeviceStateWithoutFoldableProperties = mock(DeviceState.class);
+        when(mMockDeviceStateManager.getSupportedDeviceStates())
+                .thenReturn(singletonList(mockDeviceStateWithoutFoldableProperties));
+
+        assertThat(Utils.isDeviceFoldable(mContext)).isFalse();
+    }
+
+    @Test
+    @EnableFlags(FLAG_DEVICE_STATE_PROPERTY_MIGRATION)
+    public void isDeviceFoldable_v31_stateWithOuterProperty_returnsTrue() {
+        DeviceState mockDeviceStateWithoutFoldableProperties = mock(DeviceState.class);
+        when(mockDeviceStateWithoutFoldableProperties.hasProperty(
+                PROPERTY_FOLDABLE_DISPLAY_CONFIGURATION_OUTER_PRIMARY)).thenReturn(false);
+        when(mockDeviceStateWithoutFoldableProperties.hasProperty(
+                PROPERTY_FOLDABLE_DISPLAY_CONFIGURATION_INNER_PRIMARY)).thenReturn(false);
+
+        DeviceState mockDeviceStateWithOuterProperty = mock(DeviceState.class);
+        when(mockDeviceStateWithOuterProperty.hasProperty(
+                PROPERTY_FOLDABLE_DISPLAY_CONFIGURATION_OUTER_PRIMARY)).thenReturn(true);
+        when(mockDeviceStateWithOuterProperty.hasProperty(
+                PROPERTY_FOLDABLE_DISPLAY_CONFIGURATION_INNER_PRIMARY)).thenReturn(false);
+
+        when(mMockDeviceStateManager.getSupportedDeviceStates()).thenReturn(
+                Arrays.asList(mockDeviceStateWithoutFoldableProperties,
+                        mockDeviceStateWithOuterProperty));
+
+        assertThat(Utils.isDeviceFoldable(mContext)).isTrue();
+    }
+
+    @Test
+    @EnableFlags(FLAG_DEVICE_STATE_PROPERTY_MIGRATION)
+    public void isDeviceFoldable_v31_stateWithInnerProperty_returnsTrue() {
+        DeviceState mockDeviceStateWithInnerProperty = mock(DeviceState.class);
+        when(mockDeviceStateWithInnerProperty.hasProperty(
+                PROPERTY_FOLDABLE_DISPLAY_CONFIGURATION_OUTER_PRIMARY)).thenReturn(false);
+        when(mockDeviceStateWithInnerProperty.hasProperty(
+                PROPERTY_FOLDABLE_DISPLAY_CONFIGURATION_INNER_PRIMARY)).thenReturn(true);
+
+        DeviceState mockDeviceStateWithoutFoldableProperties = mock(DeviceState.class);
+        when(mockDeviceStateWithoutFoldableProperties.hasProperty(
+                PROPERTY_FOLDABLE_DISPLAY_CONFIGURATION_OUTER_PRIMARY)).thenReturn(false);
+        when(mockDeviceStateWithoutFoldableProperties.hasProperty(
+                PROPERTY_FOLDABLE_DISPLAY_CONFIGURATION_INNER_PRIMARY)).thenReturn(false);
+
+        when(mMockDeviceStateManager.getSupportedDeviceStates()).thenReturn(
+                Arrays.asList(mockDeviceStateWithoutFoldableProperties,
+                        mockDeviceStateWithInnerProperty));
+
+        assertThat(Utils.isDeviceFoldable(mContext)).isTrue();
+    }
+
+    @Test
+    @DisableFlags(FLAG_DEVICE_STATE_PROPERTY_MIGRATION)
+    public void isDeviceFoldable_legacy_resourceNotFound_returnsFalse() {
+        Resources mockResources = mock(Resources.class);
+        when(mContext.getResources()).thenReturn(mockResources);
+        when(mockResources.getIntArray(eq(com.android.internal.R.array.config_foldedDeviceStates)))
+                .thenThrow(new Resources.NotFoundException("Test: Resource not found"));
+
+        assertThat(Utils.isDeviceFoldable(mContext)).isFalse();
+    }
+
+    @Test
+    @DisableFlags(FLAG_DEVICE_STATE_PROPERTY_MIGRATION)
+    public void isDeviceFoldable_legacy_emptyResourceArray_returnsFalse() {
+        Resources mockResources = mock(Resources.class);
+        when(mContext.getResources()).thenReturn(mockResources);
+        when(mockResources.getIntArray(eq(com.android.internal.R.array.config_foldedDeviceStates)))
+                .thenReturn(new int[0]);
+
+        assertThat(Utils.isDeviceFoldable(mContext)).isFalse();
+    }
+
+    @Test
+    @DisableFlags(FLAG_DEVICE_STATE_PROPERTY_MIGRATION)
+    public void isDeviceFoldable_legacy_nonEmptyResourceArray_returnsTrue() {
+        Resources mockResources = mock(Resources.class);
+        when(mContext.getResources()).thenReturn(mockResources);
+        when(mockResources.getIntArray(eq(com.android.internal.R.array.config_foldedDeviceStates)))
+                .thenReturn(new int[]{1, 2});
+
+        assertThat(Utils.isDeviceFoldable(mContext)).isTrue();
+    }
+
+    @Test
+    @DisableFlags(FLAG_DEVICE_STATE_PROPERTY_MIGRATION)
+    public void isDeviceFoldable_legacy_unexpectedExceptionAccessingResource_returnsFalse() {
+        Resources mockResources = mock(Resources.class);
+        when(mContext.getResources()).thenReturn(mockResources);
+        when(mockResources.getIntArray(eq(com.android.internal.R.array.config_foldedDeviceStates)))
+                .thenThrow(new RuntimeException("Test: Unexpected resource access error"));
+
+        assertThat(Utils.isDeviceFoldable(mContext)).isFalse();
     }
 
     @Test

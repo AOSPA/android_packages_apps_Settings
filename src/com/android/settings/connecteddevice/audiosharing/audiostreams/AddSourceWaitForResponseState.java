@@ -16,12 +16,12 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
-import android.app.AlertDialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
@@ -47,10 +47,11 @@ class AddSourceWaitForResponseState extends AudioStreamStateHandler {
     }
 
     @Override
-    void performAction(
+    void onEnter(
             AudioStreamPreference preference,
             AudioStreamsProgressCategoryController controller,
-            AudioStreamsHelper helper) {
+            AudioStreamsHelper helper,
+            AudioStreamScanHelper scanHelper) {
         mHandler.removeCallbacksAndMessages(preference);
         var metadata = preference.getAudioStreamMetadata();
         if (metadata != null) {

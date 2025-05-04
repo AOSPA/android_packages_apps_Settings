@@ -25,6 +25,9 @@ import android.util.Log;
 
 import androidx.fragment.app.FragmentActivity;
 
+import com.android.settings.R;
+import com.android.settingslib.widget.SettingsThemeHelper;
+
 /** The base class for subscription action dialogs */
 public class SubscriptionActionDialogActivity extends FragmentActivity {
 
@@ -42,7 +45,9 @@ public class SubscriptionActionDialogActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        int themeId = SettingsThemeHelper.isExpressiveTheme(this)
+                ? R.style.Theme_SubSettings_Expressive : R.style.Theme_SubSettings;
+        setTheme(themeId);
         mSubscriptionManager = getSystemService(SubscriptionManager.class)
                 .createForAllUserProfiles();
         setProgressState(PROGRESS_IS_NOT_SHOWING);

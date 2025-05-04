@@ -55,7 +55,7 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
     @IntDef({
         TipType.SUMMARY,
         TipType.BATTERY_SAVER,
-        TipType.HIGH_DEVICE_USAGE,
+        TipType.BATTERY_ANOMALY,
         TipType.SMART_BATTERY_MANAGER,
         TipType.APP_RESTRICTION,
         TipType.REDUCED_BATTERY,
@@ -70,7 +70,7 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
     public @interface TipType {
         int SMART_BATTERY_MANAGER = 0;
         int APP_RESTRICTION = 1;
-        int HIGH_DEVICE_USAGE = 2;
+        int BATTERY_ANOMALY = 2;
         int BATTERY_SAVER = 3;
         int REDUCED_BATTERY = 4;
         int LOW_BATTERY = 5;
@@ -93,8 +93,8 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
         TIP_ORDER.append(TipType.BATTERY_DEFENDER, 3);
         TIP_ORDER.append(TipType.DOCK_DEFENDER, 4);
         TIP_ORDER.append(TipType.INCOMPATIBLE_CHARGER, 5);
-        TIP_ORDER.append(TipType.APP_RESTRICTION, 6);
-        TIP_ORDER.append(TipType.HIGH_DEVICE_USAGE, 7);
+        TIP_ORDER.append(TipType.BATTERY_ANOMALY, 6);
+        TIP_ORDER.append(TipType.APP_RESTRICTION, 7);
         TIP_ORDER.append(TipType.SUMMARY, 8);
         TIP_ORDER.append(TipType.SMART_BATTERY_MANAGER, 9);
         TIP_ORDER.append(TipType.REDUCED_BATTERY, 10);

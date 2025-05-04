@@ -24,6 +24,8 @@ import android.app.KeyguardManager
 import android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PASSWORD
 import android.app.admin.DevicePolicyManager.EXTRA_PASSWORD_COMPLEXITY
 import android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_LOW
+import android.app.supervision.SupervisionManager
+import android.app.supervision.flags.Flags
 import android.content.Intent
 import android.os.Bundle
 import android.os.UserHandle
@@ -38,13 +40,17 @@ import com.android.settingslib.supervision.SupervisionLog
 /**
  * This activity starts the flow for setting up device supervision.
  *
- * Three things are required for device supervision: a supervising profile must be created, a lock
- * must be set up for this profile, and `SupervisionManager.isSupervisionEnabled()` must be set.
- * This activity handles the first two, while the third is managed by
- * `SupervisionMainSwitchPreference`.
+ * The flow involves three essential steps:
+ * 1. Creating a dedicated supervising user profile.
+ * 2. Setting up a secure lock (e.g., PIN, password) for this profile.
+ * 3. Enabling device supervision using `SupervisionManager.isSupervisionEnabled()`.
  *
- * Returns `Activity.RESULT_OK` if all steps of setup succeed, and `Activity.RESULT_CANCELED` if
- * any step fails, or the user does not finish setting up the lock for the supervising profile.
+ * After completing these steps, the activity prompts the user to set up PIN recovery. The result of
+ * the PIN recovery setup does not affect the activity's overall result.
+ *
+ * The activity returns:
+ * - `Activity.RESULT_OK` if steps 1-3 are successful.
+ * - `Activity.RESULT_CANCELED` if any of steps 1-3 fail, or if the user cancels lock setup.
  *
  * Usage:
  * 1. Start this activity using `startActivityForResult()`.
@@ -62,11 +68,10 @@ class SetupSupervisionActivity : FragmentActivity() {
 
     @RequiresPermission(anyOf = [CREATE_USERS, MANAGE_USERS])
     private fun enableSupervision() {
-        val supervisionHelper = SupervisionHelper.getInstance(this)
-        var supervisingUser = supervisionHelper.getSupervisingUserHandle()
+        val userManager = getSystemService(UserManager::class.java)
+        var supervisingUser = userManager.supervisingUserHandle
         // If a supervising profile does not already exist on the device, create one
         if (supervisingUser == null) {
-            val userManager = getSystemService(UserManager::class.java)
             val userInfo =
                 userManager.createUser("Supervising", USER_TYPE_PROFILE_SUPERVISING, /* flags= */ 0)
             if (userInfo != null) {
@@ -94,18 +99,26 @@ class SetupSupervisionActivity : FragmentActivity() {
     private fun startChooseLockActivity(userHandle: UserHandle) {
         // TODO(b/389712273) Intent directly to PIN selection screen to avoid giving the user
         //  the options for password/pattern during the initial setup flow
-        val intent = Intent(ACTION_SET_NEW_PASSWORD).apply {
-            putExtra(EXTRA_PASSWORD_COMPLEXITY, PASSWORD_COMPLEXITY_LOW)
-            putExtra(EXTRA_KEY_FINGERPRINT_ENROLLMENT_ONLY, true)
-        }
+        val intent =
+            Intent(ACTION_SET_NEW_PASSWORD).apply {
+                putExtra(EXTRA_PASSWORD_COMPLEXITY, PASSWORD_COMPLEXITY_LOW)
+                putExtra(EXTRA_KEY_FINGERPRINT_ENROLLMENT_ONLY, true)
+            }
         startActivityForResultAsUser(intent, REQUEST_CODE_SET_SUPERVISION_LOCK, userHandle)
     }
 
     @RequiresPermission(anyOf = [INTERACT_ACROSS_USERS_FULL, MANAGE_USERS])
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        val supervisionHelper = SupervisionHelper.getInstance(this)
-        val supervisingUser = supervisionHelper.getSupervisingUserHandle()
+
+        when (requestCode) {
+            REQUEST_CODE_SET_SUPERVISION_LOCK -> handleSetLockResult(resultCode)
+            REQUEST_CODE_SET_PIN_RECOVERY -> handlePinRecoveryResult(resultCode)
+        }
+    }
+
+    private fun handleSetLockResult(resultCode: Int) {
+        val supervisingUser = supervisingUserHandle
         if (supervisingUser == null) {
             Log.w(SupervisionLog.TAG, "No supervising user handle found after lock setup.")
             setResult(RESULT_CANCELED)
@@ -121,8 +134,36 @@ class SetupSupervisionActivity : FragmentActivity() {
             finish()
             return
         }
+
+        // Enable device supervision
+        val supervisionManager = getSystemService(SupervisionManager::class.java)
+        supervisionManager?.setSupervisionEnabled(true)
+
+        // Start PIN recovery setup
+        startPinRecoveryActivity()
+    }
+
+    private fun handlePinRecoveryResult(resultCode: Int) {
+        if (resultCode == RESULT_CANCELED) {
+            Log.i(SupervisionLog.TAG, "PIN recovery setup was skipped by the user.")
+        }
         setResult(RESULT_OK)
         finish()
+    }
+
+    private fun startPinRecoveryActivity() {
+        // prompt user to setup pin recovery if flag is enabled
+        if (!Flags.enableSupervisionPinRecoveryScreen()) {
+            Log.d(SupervisionLog.TAG, "PIN recovery setup is not enabled.")
+            setResult(RESULT_OK)
+            finish()
+        }
+
+        val intent =
+            Intent(this, SupervisionPinRecoveryActivity::class.java).apply {
+                action = SupervisionPinRecoveryActivity.ACTION_SETUP
+            }
+        startActivityForResult(intent, REQUEST_CODE_SET_PIN_RECOVERY, null)
     }
 
     @RequiresPermission(anyOf = [INTERACT_ACROSS_USERS_FULL, MANAGE_USERS])
@@ -134,6 +175,6 @@ class SetupSupervisionActivity : FragmentActivity() {
 
     companion object {
         private const val REQUEST_CODE_SET_SUPERVISION_LOCK = 0
+        private const val REQUEST_CODE_SET_PIN_RECOVERY = 1
     }
-
 }

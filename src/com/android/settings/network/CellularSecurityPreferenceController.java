@@ -128,9 +128,14 @@ public class CellularSecurityPreferenceController extends BasePreferenceControll
         if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
             return super.handlePreferenceTreeClick(preference);
         }
-        if (!isSafetyCenterSupported()) {
-            // Realistically, it's unlikely to end up in handlePreferenceTreeClick with SafetyCenter
-            // being not supported on the device.
+        if (mTelephonyManager == null) {
+            Log.w(LOG_TAG, "Telephony manager not yet initialized");
+            return false;
+        }
+        if (!isSafetyCenterSupported() && !mTelephonyManager.isRadioInterfaceCapabilitySupported(
+                mTelephonyManager.CAPABILITY_USES_ALLOWED_NETWORK_TYPES_BITMASK)) {
+            // Realistically, it's unlikely to end up in handlePreferenceTreeClick if SafetyCenter
+            // isn't supported on the device and the IRadio version is below 1.6.
             return false;
         }
         Log.v(LOG_TAG, "Load mobile network security screen.");

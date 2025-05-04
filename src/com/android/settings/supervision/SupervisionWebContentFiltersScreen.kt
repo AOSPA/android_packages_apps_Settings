@@ -34,7 +34,6 @@ class SupervisionWebContentFiltersScreen : PreferenceScreenCreator {
     override val title: Int
         get() = R.string.supervision_web_content_filters_title
 
-    // TODO(b/395134536) update the summary once the string is finalized.
     override val icon: Int
         get() = R.drawable.ic_globe
 
@@ -60,6 +59,7 @@ class SupervisionWebContentFiltersScreen : PreferenceScreenCreator {
                     +SupervisionSearchFilterOnPreference(dataStore)
                     +SupervisionSearchFilterOffPreference(dataStore)
                 }
+            +SupervisionWebContentFiltersFooterPreference()
         }
 
     companion object {

@@ -1106,6 +1106,18 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                        android:value="com.android.settings.localepicker.AppLocalePickerFragment"/>
         </activity>
 
+        <activity
+            android:name=".localepicker.AppLocalePickerActivity"
+            android:label="@string/app_locale_picker_title"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.settings.APP_LOCALE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".localepicker.NotificationActionActivity"
             android:excludeFromRecents="true"
             android:theme="@android:style/Theme.NoDisplay">
@@ -1145,6 +1157,22 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                 android:value="com.android.settings.gestures.SystemNavigationGestureSettings"/>
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                 android:value="@string/menu_key_system"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true"/>
+        </activity>
+
+        <activity
+            android:name=".Settings$ShadeSettingsActivity"
+            android:label="@string/shade_panels_title"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.settings.SHADE_SETTINGS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.system.ShadePanelsFragment"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_notifications"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true"/>
         </activity>
@@ -2608,11 +2636,15 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                        android:value="@string/menu_key_security"/>
         </activity>
 
-        <service
-            android:name=".accessibility.notification.SurveyNotificationService"
-            android:enabled="true"
-            android:exported="false"
-            android:permission="android.permission.POST_NOTIFICATIONS"/>
+        <receiver
+            android:name=".accessibility.notification.SurveyNotificationReceiver"
+            android:permission="android.permission.MANAGE_ACCESSIBILITY"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.settings.ACCESSIBILITY_SURVEY_NOTIFICATION_SHOWN"/>
+                <action android:name="android.settings.ACCESSIBILITY_SURVEY_NOTIFICATION_DISMISSED"/>
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name="Settings$AccessibilitySettingsActivity"
@@ -2917,6 +2949,24 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".Settings$SupervisionDashboardActivity"
+            android:label="@string/supervision_settings_title"
+            android:exported="true"
+            android:featureFlag="android.app.supervision.flags.enable_supervision_settings_screen">
+            <intent-filter>
+                <action android:name="android.settings.SUPERVISION_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <meta-data
+                android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.supervision.SupervisionDashboardFragment" />
+            <meta-data
+                android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_supervision" />
+        </activity>
+
         <activity android:name=".supervision.ConfirmSupervisionCredentialsActivity"
             android:exported="true"
             android:featureFlag="android.app.supervision.flags.supervision_manager_apis">
@@ -2931,6 +2981,8 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
         <activity
             android:name=".supervision.SupervisionPinRecoveryActivity"
             android:exported="false" />
+
+        <activity android:name=".supervision.SupervisionCredentialProxyActivity" android:exported="false"/>
 
         <activity android:name=".SetupRedactionInterstitial"
             android:enabled="false"

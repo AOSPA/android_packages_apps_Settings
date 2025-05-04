@@ -125,6 +125,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         if (invisibleProfiles != null) {
             mInvisibleProfiles = Set.copyOf(invisibleProfiles);
         }
+        mProfilesContainer.setVisible(false);
         refresh();
     }
 
@@ -542,7 +543,6 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
      */
     @Override
     protected void refresh() {
-        mProfilesContainer.setVisible(false);
         ThreadUtils.postOnBackgroundThread(
                 () -> {
                     mAdditionalInvisibleProfiles.set(

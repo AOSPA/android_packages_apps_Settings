@@ -49,7 +49,7 @@ class ScreensaverScreen(fooContext: Context) :
         override fun dreamOn(context: Context, activeDreamName: CharSequence) =
             context.resources.getString(
                 R.string.screensaver_settings_summary_on,
-                dreamBackend.activeDreamName
+                activeDreamName
             )
 
         override fun dreamOffBedtime(context: Context) =
@@ -103,7 +103,10 @@ class ScreensaverScreen(fooContext: Context) :
 
     private fun getSummaryTextWithDreamName(context: Context): CharSequence {
         return if (dreamBackend.isEnabled) {
-            summaryStringsProvider.dreamOn(context, dreamBackend.activeDreamName)
+            // In practice, activeDreamName would not be null, but it can be in tests and in that
+            // case it needs to have the same behavior as the corresponding method in
+            // DreamSettings (see b/411793272).
+            summaryStringsProvider.dreamOn(context, dreamBackend.activeDreamName ?: "null")
         } else {
             summaryStringsProvider.dreamOff(context)
         }

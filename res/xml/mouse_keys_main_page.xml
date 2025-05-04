@@ -26,6 +26,12 @@
         android:title="@string/mouse_keys_main_title"
         settings:controller="com.android.settings.inputmethod.KeyboardAccessibilityMouseKeysController"/>
 
+    <com.android.settings.accessibility.ShortcutPreference
+        android:key="mouse_keys_shortcut_preference"
+        android:title="@string/accessibility_mouse_keys_shortcut_title"
+        android:persistent="false"
+        settings:controller="com.android.settings.inputmethod.KeyboardAccessibilityMouseKeysShortcutController"/>
+
     <com.android.settingslib.widget.LayoutPreference
         android:key="mouse_keys_list"
         android:layout="@layout/mouse_keys_image_list"/>

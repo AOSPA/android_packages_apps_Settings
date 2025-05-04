@@ -89,13 +89,14 @@ class SupervisionMainSwitchPreference(
             supervisionMainSwitchStorage.getBoolean(KEY)!!,
         )
 
-        val preferenceKeys = buildList<String> {
-            mainSwitchPreference?.parent?.forEachRecursively {
-                if (it.parent?.key == SupervisionDashboardScreen.SUPERVISION_DYNAMIC_GROUP_1) {
-                    add(it.key)
+        val preferenceKeys =
+            buildList<String> {
+                mainSwitchPreference?.parent?.forEachRecursively {
+                    if (it.parent?.key == SupervisionDashboardScreen.SUPERVISION_DYNAMIC_GROUP_1) {
+                        add(it.key)
+                    }
                 }
             }
-        }
         context.lifecycleScope.launch {
             preferenceDataMap =
                 withContext(coroutineDispatcher) {
@@ -137,11 +138,10 @@ class SupervisionMainSwitchPreference(
 
     override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {
         if (newValue !is Boolean) return true
-        val supervisionHelper = SupervisionHelper.getInstance(preference.context)
 
         // If supervision is being enabled but either the supervising profile hasn't been created
         // or the credentials aren't set, launch SetupSupervisionActivity.
-        if (newValue && !supervisionHelper.isSupervisingCredentialSet()) {
+        if (newValue && !preference.context.isSupervisingCredentialSet) {
             val intent = Intent(lifeCycleContext, SetupSupervisionActivity::class.java)
             lifeCycleContext.startActivityForResult(intent, REQUEST_CODE_SET_UP_SUPERVISION, null)
             return false

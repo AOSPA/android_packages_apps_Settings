@@ -69,6 +69,15 @@
         <item name="android:scrollbarStyle">outsideOverlay</item>
     </style>
 
+    <style name="Dialog.Spinner" parent="@style/SettingslibSpinnerStyle.Expressive">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">40dp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:dropDownVerticalOffset">@dimen/min_tap_target_size</item>
+    </style>
+
     <style name="Theme.Network" parent="@style/Theme.Material3.DynamicColors.DayNight">
         <item name="textInputStyle">@style/Widget.Network.TextInputLayout</item>
     </style>
@@ -245,6 +254,10 @@
     <style name="vpn_label">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:minHeight">@dimen/min_tap_target_size</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:gravity">bottom</item>
         <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
     </style>
 
@@ -256,6 +269,11 @@
         <item name="android:textAlignment">viewStart</item>
         <item name="android:minHeight">@dimen/min_tap_target_size</item>
         <item name="android:textColorHint">?android:attr/textColorSecondary</item>
+    </style>
+
+    <style name="vpn_spinner" parent="@style/Dialog.Spinner">
+        <item name="android:singleLine">true</item>
+        <item name="android:textAlignment">viewStart</item>
     </style>
 
     <style name="vpn_input_label" parent="vpn_label">
@@ -784,10 +802,16 @@
     </style>
 
     <style name="AccessibilityTextReadingPreviewTitle"
-        parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title" >
+        parent="@style/TextAppearance.SettingsLib.BodySmall" >
+        <item name="android:textColor">@color/settingslib_materialColorOnPrimaryContainer</item>
         <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:padding">6dp</item>
-        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="AccessibilityTextReadingPreviewPageTitle"
+        parent="@style/TextAppearance.SettingsLib.TitleMedium" >
+        <item name="android:textColor">@color/settingslib_materialColorOnPrimaryContainer</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:paddingBottom">@dimen/settingslib_expressive_space_extrasmall4</item>
     </style>
 
     <style name="AutoclickDialogRadioButton">

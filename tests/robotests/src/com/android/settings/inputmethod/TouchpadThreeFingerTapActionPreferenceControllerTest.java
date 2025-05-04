@@ -23,6 +23,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.hardware.input.KeyGestureEvent;
 
@@ -64,6 +65,8 @@ public class TouchpadThreeFingerTapActionPreferenceControllerTest {
     private SelectorWithWidgetPreference mMockPref;
     @Mock
     private ContentObserver mMockContentObserver;
+    @Mock
+    private PackageManager mMockPackageManager;
 
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private ContentResolver mContentResolver;
@@ -73,7 +76,7 @@ public class TouchpadThreeFingerTapActionPreferenceControllerTest {
     public void setup() {
         mContentResolver = mContext.getContentResolver();
         mController = new TouchpadThreeFingerTapActionPreferenceController(
-                mContext, PREF_KEY, mMockContentObserver);
+                mContext, PREF_KEY, mMockContentObserver, mMockPackageManager);
         when(mMockScreen.findPreference(mController.getPreferenceKey())).thenReturn(mMockPref);
         when(mMockPref.getKey()).thenReturn(PREF_KEY);
         mController.displayPreference(mMockScreen);

@@ -36,11 +36,12 @@ class SupervisionSafeSitesDataStore(
             key == SupervisionAllowAllSitesPreference.KEY
 
     override fun <T : Any> getValue(key: String, valueType: Class<T>): T? {
-        val settingValue = (settingsStore.getBoolean(BROWSER_CONTENT_FILTERS_ENABLED) == true)
+        val settingValue = settingsStore.getInt(BROWSER_CONTENT_FILTERS_ENABLED)
+        val isFilterOff: Boolean = settingValue == null || settingValue <= 0
         return when (key) {
-            SupervisionAllowAllSitesPreference.KEY -> !settingValue
+            SupervisionAllowAllSitesPreference.KEY -> isFilterOff
 
-            SupervisionBlockExplicitSitesPreference.KEY -> settingValue
+            SupervisionBlockExplicitSitesPreference.KEY -> !isFilterOff
 
             else -> null
         }

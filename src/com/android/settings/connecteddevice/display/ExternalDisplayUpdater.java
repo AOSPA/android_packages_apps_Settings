@@ -28,7 +28,6 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DisplayListener;
-import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.Injector;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
@@ -49,7 +48,7 @@ public class ExternalDisplayUpdater {
     @Nullable
     private RestrictedPreference mPreference;
     @Nullable
-    private Injector mInjector;
+    private ConnectedDisplayInjector mInjector;
     private final DisplayListener mListener =  new DisplayListener() {
         @Override
         public void update(int displayId) {
@@ -67,11 +66,11 @@ public class ExternalDisplayUpdater {
      * Set the context to generate the {@link Preference}, so it could get the correct theme.
      */
     public void initPreference(@NonNull Context context) {
-        initPreference(context, new Injector(context));
+        initPreference(context, new ConnectedDisplayInjector(context));
     }
 
     @VisibleForTesting
-    void initPreference(@NonNull Context context, Injector injector) {
+    void initPreference(@NonNull Context context, ConnectedDisplayInjector injector) {
         mInjector = injector;
         mPreference = new RestrictedPreference(context, null /* AttributeSet */);
         mPreference.setTitle(R.string.external_display_settings_title);

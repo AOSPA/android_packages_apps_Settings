@@ -798,12 +798,12 @@ public class NotificationBackend {
         }
     }
 
-    public @NonNull String[] getAdjustmentDeniedPackages(String key) {
+    public @NonNull List<String> getAdjustmentDeniedPackages(String key) {
         try {
-            return sINM.getAdjustmentDeniedPackages(key);
+            return List.of(sINM.getAdjustmentDeniedPackages(key));
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
-            return new String[]{};
+            return new ArrayList<>();
         }
     }
 

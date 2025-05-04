@@ -19,7 +19,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import com.android.settings.supervision.PreferenceDataProvider
-import com.android.settings.supervision.SupervisionHelper
+import com.android.settings.supervision.supervisionPackageName
 import com.android.settingslib.ipc.MessengerServiceClient
 import com.android.settingslib.supervision.SupervisionLog
 
@@ -35,12 +35,9 @@ import com.android.settingslib.supervision.SupervisionLog
 class SupervisionMessengerClient(context: Context) :
     MessengerServiceClient(context), PreferenceDataProvider {
 
-    override val serviceIntentFactory: () -> Intent
-        get() = { Intent(SUPERVISION_MESSENGER_SERVICE_BIND_ACTION) }
+    override val serviceIntentFactory = { Intent(SUPERVISION_MESSENGER_SERVICE_BIND_ACTION) }
 
-    private val supervisionPackageName: String? by lazy {
-        SupervisionHelper.getInstance(context).getSupervisionPackageName()
-    }
+    override val packageName = context.supervisionPackageName
 
     /**
      * Retrieves preference data from the system supervision app.
@@ -55,7 +52,7 @@ class SupervisionMessengerClient(context: Context) :
      */
     override suspend fun getPreferenceData(keys: List<String>): Map<String, PreferenceData> =
         try {
-            val targetPackageName = supervisionPackageName ?: return mapOf()
+            val targetPackageName = packageName ?: return mapOf()
 
             invoke(targetPackageName, PreferenceDataApi(), PreferenceDataRequest(keys = keys))
                 .await()
@@ -65,7 +62,7 @@ class SupervisionMessengerClient(context: Context) :
         }
 
     companion object {
-        private const val SUPERVISION_MESSENGER_SERVICE_BIND_ACTION =
+        const val SUPERVISION_MESSENGER_SERVICE_BIND_ACTION =
             "android.app.supervision.action.SUPERVISION_MESSENGER_SERVICE"
     }
 }

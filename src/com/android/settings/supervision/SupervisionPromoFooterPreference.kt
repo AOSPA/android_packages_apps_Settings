@@ -15,6 +15,7 @@
  */
 package com.android.settings.supervision
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Icon
@@ -51,21 +52,20 @@ class SupervisionPromoFooterPreference(
 
         var intent: Intent? = null
         if (initialized) {
+            val context = preference.context
             val targetIntent =
                 Intent(preferenceData?.action).apply {
                     `package` = preferenceData?.targetPackage
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 }
-            intent = if (targetIntent.isValid(preference.context)) targetIntent else null
+            intent = if (targetIntent.isValid(context)) targetIntent else null
 
             val leadingIconResId = preferenceData?.icon
             val leadingIcon =
                 leadingIconResId?.let {
-                    val resourcePackage =
-                        SupervisionHelper.getInstance(preference.context)
-                            .getSupervisionPackageName()
-                    val icon = Icon.createWithResource(resourcePackage, leadingIconResId)
-                    icon.loadDrawable(preference.context)
+                    val resourcePackage = preferenceDataProvider.packageName
+                    val icon = Icon.createWithResource(resourcePackage, it)
+                    icon.loadDrawable(context)
                 }
 
             preference.intent = intent
@@ -79,6 +79,7 @@ class SupervisionPromoFooterPreference(
                     // TODO(b/411279121): add content description once we have the finalized string.
                     contentDescription = "",
                 ) {
+                    @SuppressLint("RestrictedApi")
                     it.performClick()
                 }
             }

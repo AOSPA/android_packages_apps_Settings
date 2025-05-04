@@ -55,8 +55,6 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         private final TextView mSummaryView;
         private final ImageView mPreviewView;
         private final ImageView mPreviewPlaceholderView;
-        private final Button mCustomizeButton;
-        private final View mPreviewButton;
         private final Context mContext;
         private final float mDisabledAlphaValue;
 
@@ -67,12 +65,6 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             mPreviewPlaceholderView = view.findViewById(R.id.preview_placeholder);
             mTitleView = view.findViewById(R.id.title_text);
             mSummaryView = view.findViewById(R.id.summary_text);
-
-            final int customizeButtonResId =
-                    dreamsV2() ? R.id.customize_button_new : R.id.customize_button;
-            mCustomizeButton = view.findViewById(customizeButtonResId);
-
-            mPreviewButton = view.findViewById(R.id.preview_button);
             mDisabledAlphaValue = ColorUtil.getDisabledAlpha(context);
         }
 
@@ -141,22 +133,40 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 configureNewPreviewButton(item);
             }
 
-            mCustomizeButton.setVisibility(
-                    item.allowCustomization() && mEnabled ? View.VISIBLE : View.GONE);
-            setupCustomizeButtonListeners(item);
+            configureCustomizeButton(item);
         }
 
         private void configureNewPreviewButton(IDreamItem item) {
+            final View previewButton = itemView.findViewById(R.id.preview_button);
+            if (previewButton == null) {
+                // Do nothing if the button is null (it can be null when the grid of dreams is
+                // presented during dock setup; see b/412208020 for more info).
+                return;
+            }
+
             // Show preview button if dream is active and enabled
-            mPreviewButton.setVisibility(item.isActive() && mEnabled ? View.VISIBLE : View.GONE);
-            mPreviewButton.setSelected(false);
-            mPreviewButton.setOnClickListener(v -> item.onPreviewClicked());
+            previewButton.setVisibility(
+                    item.isActive() && mEnabled ? View.VISIBLE : View.GONE);
+            previewButton.setSelected(false);
+            previewButton.setOnClickListener(v -> item.onPreviewClicked());
         }
 
-        private void setupCustomizeButtonListeners(IDreamItem item) {
-            mCustomizeButton.setOnClickListener(v -> item.onCustomizeClicked());
-            mCustomizeButton.setSelected(false);
-            mCustomizeButton.setContentDescription(
+        private void configureCustomizeButton(IDreamItem item) {
+            final int customizeButtonResId =
+                    dreamsV2() ? R.id.customize_button_new : R.id.customize_button;
+            final Button customizeButton = itemView.findViewById(customizeButtonResId);
+            if (customizeButton == null) {
+                // Do nothing if the button is null (it can be null when the grid of dreams is
+                // presented during dock setup; see b/412208020 for more info).
+                return;
+            }
+
+            customizeButton.setVisibility(
+                    item.allowCustomization() && mEnabled ? View.VISIBLE : View.GONE);
+
+            customizeButton.setOnClickListener(v -> item.onCustomizeClicked());
+            customizeButton.setSelected(false);
+            customizeButton.setContentDescription(
                     mContext.getResources().getString(R.string.customize_button_description,
                             item.getTitle()));
         }

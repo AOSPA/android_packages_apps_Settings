@@ -20,7 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -192,7 +192,7 @@ public final class DataProcessManagerTest {
         events.add(event2);
         doReturn(getUsageEvents(events))
                 .when(mUsageStatsManager)
-                .queryEventsForUser(anyLong(), anyLong(), anyInt(), any());
+                .queryEventsWithFilter(any(), anyString());
         doReturn(true).when(mUserManager).isUserUnlocked(anyInt());
         // Assign current user id.
         doReturn(1).when(mContext).getUserId();
@@ -322,7 +322,7 @@ public final class DataProcessManagerTest {
         events.add(event);
         doReturn(getUsageEvents(events))
                 .when(mUsageStatsManager)
-                .queryEventsForUser(anyLong(), anyLong(), anyInt(), any());
+                .queryEventsWithFilter(any(), anyString());
         doReturn(true).when(mUserIdsSeries).isCurrentUserLocked();
         final MatrixCursor cursor =
                 new MatrixCursor(

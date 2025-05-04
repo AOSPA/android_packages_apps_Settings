@@ -68,6 +68,8 @@
         android:order="40"
         settings:iconEnd="@drawable/ic_add_24dp"
         settings:iconStart="@drawable/ic_remove_24dp"
+        settings:iconEndContentDescription="@string/trackpad_pointer_speed_make_faster_desc"
+        settings:iconStartContentDescription="@string/trackpad_pointer_speed_make_slower_desc"
         android:selectable="false"
         settings:controller="com.android.settings.inputmethod.TouchpadPointerSpeedPreferenceController"/>
 

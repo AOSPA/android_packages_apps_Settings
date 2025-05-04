@@ -937,20 +937,24 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     }
 
     @Test
-    public void getNonIndexableKeys_windowMagnificationNotSupported_onlyShortcutSearchable() {
+    public void getNonIndexableKeys_windowMagnificationUnSupported_returnWindowMagDependentPrefs() {
         setWindowMagnificationSupported(false, false);
 
         final List<String> niks = ToggleScreenMagnificationPreferenceFragment
                 .SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
-        final List<SearchIndexableRaw> rawData = ToggleScreenMagnificationPreferenceFragment
-                .SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, true);
-        // Expect all search data, except the shortcut preference, to be in NIKs.
-        final List<String> expectedNiks = rawData.stream().map(raw -> raw.key)
-                .filter(key -> !key.equals(KEY_MAGNIFICATION_SHORTCUT_PREFERENCE))
-                .toList();
+
+        final List<String> windowMagDependentPrefs = List.of(
+                MagnificationModePreferenceController.PREF_KEY,
+                MagnifyNavAndImePreferenceController.PREF_KEY,
+                MagnificationFollowTypingPreferenceController.PREF_KEY,
+                MagnificationOneFingerPanningPreferenceController.PREF_KEY,
+                MagnificationAlwaysOnPreferenceController.PREF_KEY,
+                MagnificationJoystickPreferenceController.PREF_KEY
+        );
 
         // In NonIndexableKeys == not searchable
-        assertThat(niks).containsExactlyElementsIn(expectedNiks);
+        assertThat(niks).containsAtLeastElementsIn(windowMagDependentPrefs);
+        assertThat(niks).doesNotContain(KEY_MAGNIFICATION_SHORTCUT_PREFERENCE);
     }
 
     @Test

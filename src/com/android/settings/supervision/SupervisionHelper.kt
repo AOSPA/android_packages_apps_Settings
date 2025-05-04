@@ -22,56 +22,34 @@ import android.os.UserHandle
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import android.util.Log
-import androidx.annotation.VisibleForTesting
+import com.android.settingslib.supervision.SupervisionLog.TAG
 
-/** Convenience methods for interacting with the supervising user profile. */
-open class SupervisionHelper private constructor(private val context: Context) {
-    private val mUserManager = context.getSystemService(UserManager::class.java)
-    private val mKeyguardManager = context.getSystemService(KeyguardManager::class.java)
-
-    fun getSupervisingUserHandle(): UserHandle? {
-        for (user in (mUserManager?.users ?: emptyList())) {
-            if (user.userType.equals(USER_TYPE_PROFILE_SUPERVISING)) {
-                return user.userHandle
-            }
-        }
-        return null
+val Context.isSupervisingCredentialSet: Boolean
+    get() {
+        val supervisingUserId = supervisingUserHandle?.identifier ?: return false
+        return getSystemService(KeyguardManager::class.java)?.isDeviceSecure(supervisingUserId) ==
+            true
     }
 
-    fun isSupervisingCredentialSet(): Boolean {
-        val supervisingUserId = getSupervisingUserHandle()?.identifier ?: return false
-        return mKeyguardManager?.isDeviceSecure(supervisingUserId) ?: false
-    }
+val Context.supervisingUserHandle: UserHandle?
+    get() = getSystemService(UserManager::class.java).supervisingUserHandle
 
-    /**
-     * Retrieves the package name of the system supervision app.
-     *
-     * @return The package name of the system supervision app, or null if not found.
-     */
-    fun getSupervisionPackageName(): String? {
-        val roleManager = context.getSystemService(RoleManager::class.java)
+val UserManager?.supervisingUserHandle: UserHandle?
+    get() = this?.users?.firstOrNull { it.userType == USER_TYPE_PROFILE_SUPERVISING }?.userHandle
+
+/** Returns the package name of the system supervision app, or null if not found. */
+val Context.supervisionPackageName: String?
+    get() {
+        val roleManager = getSystemService(RoleManager::class.java)
         if (roleManager == null) {
             Log.w(TAG, "RoleManager service not available.")
             return null
         }
 
-        val roleHolders = roleManager.getRoleHolders(RoleManager.ROLE_SYSTEM_SUPERVISION)
+        val roleHolders =
+            roleManager.getRoleHolders(RoleManager.ROLE_SYSTEM_SUPERVISION) ?: emptyList<String>()
         if (roleHolders.isEmpty()) Log.w(TAG, "No package holding the system supervision role.")
 
         // supervision role is exclusive, only one app may hold this role in a user
         return roleHolders.firstOrNull()
     }
-
-    companion object {
-        private const val TAG = "SupervisionSettings"
-
-        @Volatile @VisibleForTesting var sInstance: SupervisionHelper? = null
-
-        fun getInstance(context: Context): SupervisionHelper {
-            return sInstance
-                ?: synchronized(this) {
-                    sInstance ?: SupervisionHelper(context).also { sInstance = it }
-                }
-        }
-    }
-}

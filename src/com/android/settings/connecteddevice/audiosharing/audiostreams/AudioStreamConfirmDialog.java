@@ -24,7 +24,6 @@ import static com.android.settingslib.bluetooth.BluetoothBroadcastUtils.SCHEME_B
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
-import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.content.Context;
 import android.content.Intent;
@@ -42,7 +41,7 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.bluetooth.BluetoothLeBroadcastMetadataExt;
 import com.android.settingslib.bluetooth.BluetoothUtils;
-import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.utils.ThreadUtils;
 
 public class AudioStreamConfirmDialog extends InstrumentedDialogFragment {
@@ -58,7 +57,7 @@ public class AudioStreamConfirmDialog extends InstrumentedDialogFragment {
     @Nullable
     private BluetoothLeBroadcastMetadata mBroadcastMetadata;
     @Nullable
-    private BluetoothDevice mConnectedDevice;
+    private CachedBluetoothDevice mConnectedDevice;
     private int mAudioStreamConfirmDialogId = SettingsEnums.PAGE_UNKNOWN;
 
     @Override
@@ -281,23 +280,18 @@ public class AudioStreamConfirmDialog extends InstrumentedDialogFragment {
     }
 
     @Nullable
-    private BluetoothDevice getConnectedDevice() {
+    private CachedBluetoothDevice getConnectedDevice() {
         var localBluetoothManager = Utils.getLocalBluetoothManager(getActivity());
         if (localBluetoothManager == null) {
             return null;
         }
-        LocalBluetoothLeBroadcastAssistant assistant =
-                localBluetoothManager.getProfileManager().getLeAudioBroadcastAssistantProfile();
-        if (assistant == null) {
-            return null;
-        }
-        var devices = assistant.getAllConnectedDevices();
-        return devices.isEmpty() ? null : devices.get(0);
+        return AudioStreamsHelper.getCachedBluetoothDeviceInSharingOrLeConnected(
+                localBluetoothManager).orElse(null);
     }
 
     private String getConnectedDeviceName() {
         if (mConnectedDevice != null) {
-            String alias = mConnectedDevice.getAlias();
+            String alias = mConnectedDevice.getName();
             return TextUtils.isEmpty(alias) ? getString(DEFAULT_DEVICE_NAME) : alias;
         }
         Log.w(TAG, "getConnectedDeviceName : no connected device!");

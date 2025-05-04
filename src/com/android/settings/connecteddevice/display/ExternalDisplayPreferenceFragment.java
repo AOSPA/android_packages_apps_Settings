@@ -46,7 +46,6 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragmentBase;
 import com.android.settings.accessibility.TextReadingPreferenceFragment;
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DisplayListener;
-import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.Injector;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.IllustrationPreference;
@@ -141,7 +140,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     @Nullable
     private Preference mBuiltinDisplaySizeAndTextPreference;
     @Nullable
-    private Injector mInjector;
+    private ConnectedDisplayInjector mInjector;
     @Nullable
     private String[] mRotationEntries;
     @Nullable
@@ -158,7 +157,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     public ExternalDisplayPreferenceFragment() {}
 
     @VisibleForTesting
-    ExternalDisplayPreferenceFragment(@NonNull Injector injector) {
+    ExternalDisplayPreferenceFragment(@NonNull ConnectedDisplayInjector injector) {
         mInjector = injector;
     }
 
@@ -175,7 +174,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     @Override
     public void onCreateCallback(@Nullable Bundle icicle) {
         if (mInjector == null) {
-            mInjector = new Injector(getPrefContext());
+            mInjector = new ConnectedDisplayInjector(getPrefContext());
         }
         addPreferencesFromResource(EXTERNAL_DISPLAY_SETTINGS_RESOURCE);
     }
@@ -328,9 +327,9 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         return mBuiltinDisplaySizeAndTextPreference;
     }
 
-    @NonNull Preference getDisplayTopologyPreference(@NonNull Context context) {
+    @NonNull Preference getDisplayTopologyPreference() {
         if (mDisplayTopologyPreference == null) {
-            mDisplayTopologyPreference = new DisplayTopologyPreference(context);
+            mDisplayTopologyPreference = new DisplayTopologyPreference(mInjector);
             PrefBasics.DISPLAY_TOPOLOGY.apply(mDisplayTopologyPreference, /* nth= */ null);
         }
         return mDisplayTopologyPreference;
@@ -374,8 +373,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     }
 
     private void updateScreen(final PrefRefresh screen, Context context) {
-        final var displaysToShow = mInjector == null
-                ? List.<DisplayDevice>of() : mInjector.getConnectedDisplays();
+        final var displaysToShow = mInjector.getConnectedDisplays();
 
         if (displaysToShow.isEmpty()) {
             showTextWhenNoDisplaysToShow(screen, context, /* position= */ 0);
@@ -450,7 +448,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
 
     private void maybeAddV2Components(Context context, PrefRefresh screen) {
         if (isTopologyPaneEnabled(mInjector)) {
-            screen.addPreference(getDisplayTopologyPreference(context));
+            screen.addPreference(getDisplayTopologyPreference());
             addMirrorPreference(context, screen);
 
             // If topology is shown, we also show a preference for the built-in display for

@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,8 +19,11 @@ import android.app.Activity
 import android.app.admin.DevicePolicyManager
 import android.app.supervision.SupervisionManager
 import android.app.supervision.SupervisionRecoveryInfo
+import android.app.supervision.SupervisionRecoveryInfo.STATE_PENDING
+import android.app.supervision.SupervisionRecoveryInfo.STATE_VERIFIED
 import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -35,17 +38,15 @@ import com.android.settingslib.supervision.SupervisionLog
 class SupervisionPinRecoveryActivity : FragmentActivity() {
     // ActivityResultLaunchers
     private val contract = ActivityResultContracts.StartActivityForResult()
-    private val confirmPinLauncher: ActivityResultLauncher<Intent> by lazy {
+    private val confirmPinLauncher: ActivityResultLauncher<Intent> =
         registerForActivityResult(contract) { result -> onPinConfirmed(result.resultCode) }
-    }
-    private val verificationLauncher: ActivityResultLauncher<Intent> by lazy {
+
+    private val verificationLauncher: ActivityResultLauncher<Intent> =
         registerForActivityResult(contract) { result ->
             onVerification(result.resultCode, result.data)
         }
-    }
-    private val setPinLauncher: ActivityResultLauncher<Intent> by lazy {
+    private val setPinLauncher: ActivityResultLauncher<Intent> =
         registerForActivityResult(contract) { result -> onPinSet(result.resultCode) }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,9 +98,9 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
 
             recoveryIntent.apply {
                 // Pass along any available recovery information.
-                // TODO(b/409805806): will expose the parcelable as system API and pass it instead.
-                recoveryInfo?.email?.let { putExtra(EXTRA_RECOVERY_EMAIL, it) }
-                recoveryInfo?.id?.let { putExtra(EXTRA_RECOVERY_ID, it) }
+                // TODO(b/409805806): will pass the parcelable once the system API is available.
+                recoveryInfo?.accountName?.let { putExtra(EXTRA_RECOVERY_EMAIL, it) }
+                recoveryInfo?.accountData?.getString("id")?.let { putExtra(EXTRA_RECOVERY_ID, it) }
                 verificationLauncher.launch(this)
             }
         } else {
@@ -142,7 +143,15 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
                             SupervisionIntentProvider.PinRecoveryAction.POST_SETUP_VERIFY,
                         )
                     if (postSetupVerifyIntent != null) {
-                        verificationLauncher.launch(postSetupVerifyIntent)
+                        val supervisionManager =
+                            applicationContext.getSystemService(SupervisionManager::class.java)
+                        val recoveryInfo = supervisionManager?.getSupervisionRecoveryInfo()
+                        postSetupVerifyIntent.apply {
+                            // TODO(b/409805806): will use the parcelable once the system API is
+                            // available.
+                            recoveryInfo?.accountName?.let { putExtra(EXTRA_RECOVERY_EMAIL, it) }
+                            verificationLauncher.launch(postSetupVerifyIntent)
+                        }
                     } else {
                         handleError("No activity found for post setup PIN recovery verify.")
                     }
@@ -166,9 +175,20 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
                     if (data != null) {
                         val supervisionManager =
                             applicationContext.getSystemService(SupervisionManager::class.java)
-                        val recoveryInfo = SupervisionRecoveryInfo()
-                        recoveryInfo.email = data.getStringExtra(EXTRA_RECOVERY_EMAIL)
-                        recoveryInfo.id = data.getStringExtra(EXTRA_RECOVERY_ID)
+                        // TODO(b/409805806): will directly get the parcelable from intent once the
+                        // system API is available.
+                        val recoveryInfo =
+                            data.getStringExtra(EXTRA_RECOVERY_EMAIL)?.let {
+                                SupervisionRecoveryInfo(
+                                    /* accountName */ it,
+                                    /* accountType */ "default",
+                                    /* state */ if (action == ACTION_SETUP) STATE_PENDING
+                                    else STATE_VERIFIED,
+                                    /* accountData */ PersistableBundle().apply {
+                                        putString("id", data.getStringExtra(EXTRA_RECOVERY_ID))
+                                    },
+                                )
+                            }
                         supervisionManager?.setSupervisionRecoveryInfo(recoveryInfo)
                         handleSuccess()
                     } else {

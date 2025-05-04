@@ -45,6 +45,28 @@ class VibrationIntensitySettingsStoreTest {
     )
 
     @Test
+    fun isPreferenceEnabled_returnsVibrateOnSettingOrTrue() {
+        settingsStore.setBoolean(Settings.System.VIBRATE_ON, null)
+        assertThat(store.isPreferenceEnabled()).isTrue()
+
+        settingsStore.setBoolean(Settings.System.VIBRATE_ON, true)
+        assertThat(store.isPreferenceEnabled()).isTrue()
+
+        settingsStore.setBoolean(Settings.System.VIBRATE_ON, false)
+        assertThat(store.isPreferenceEnabled()).isFalse()
+    }
+
+    @Test
+    fun getValue_preferenceDisabledByMainSwitch_returnsIntensityOffAndPreservesValue() {
+        settingsStore.setBoolean(Settings.System.VIBRATE_ON, false)
+        setIntValue(Vibrator.VIBRATION_INTENSITY_HIGH)
+
+        assertThat(settingsStore.getInt(KEY)).isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH)
+        assertThat(store.getBoolean(KEY)).isFalse()
+        assertThat(store.getInt(KEY)).isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF)
+    }
+
+    @Test
     fun getValue_valueNull_returnDefaultIntensity() {
         setIntValue(null)
 
@@ -94,6 +116,16 @@ class VibrationIntensitySettingsStoreTest {
         setIntValue(Vibrator.VIBRATION_INTENSITY_OFF)
 
         assertThat(settingsStore.getInt(KEY)).isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF)
+        assertThat(store.getBoolean(KEY)).isFalse()
+        assertThat(store.getInt(KEY)).isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF)
+    }
+
+    @Test
+    fun getValue_preferenceDisabled_returnOffAndPreservesValue() {
+        settingsStore.setBoolean(Settings.System.VIBRATE_ON, false)
+        setBooleanValue(true)
+
+        assertThat(settingsStore.getInt(KEY)).isEqualTo(DEFAULT_INTENSITY)
         assertThat(store.getBoolean(KEY)).isFalse()
         assertThat(store.getInt(KEY)).isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF)
     }

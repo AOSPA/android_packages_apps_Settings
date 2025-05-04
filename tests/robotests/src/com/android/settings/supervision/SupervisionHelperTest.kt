@@ -21,7 +21,6 @@ import android.content.ContextWrapper
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
@@ -32,61 +31,44 @@ import org.mockito.kotlin.verify
 @RunWith(AndroidJUnit4::class)
 class SupervisionHelperTest {
 
-    private lateinit var context: Context
     private val mockRoleManager = mock<RoleManager>()
-    private lateinit var supervisionHelper: SupervisionHelper
-
-    @Before
-    fun setUp() {
-        context = contextOfRoleManager(mockRoleManager)
-        SupervisionHelper.sInstance = null
-    }
+    private var context = contextOfRoleManager(mockRoleManager)
 
     @Test
-    fun getSupervisionPackageName_roleManagerReturnsPackageName_shouldReturnPackageName() {
+    fun supervisionPackageName_roleManagerReturnsPackageName_shouldReturnPackageName() {
         val testPackageName = "com.android.supervision"
         mockRoleManager.stub {
             on { getRoleHolders(RoleManager.ROLE_SYSTEM_SUPERVISION) } doReturn
                 listOf(testPackageName)
         }
 
-        supervisionHelper = SupervisionHelper.getInstance(context)
-        val result = supervisionHelper.getSupervisionPackageName()
-
-        assertThat(result).isEqualTo(testPackageName)
+        assertThat(context.supervisionPackageName).isEqualTo(testPackageName)
         verify(mockRoleManager).getRoleHolders(RoleManager.ROLE_SYSTEM_SUPERVISION)
     }
 
     @Test
-    fun getSupervisionPackageName_roleManagerReturnsEmptyList_shouldReturnNull() {
+    fun supervisionPackageName_roleManagerReturnsEmptyList_shouldReturnNull() {
         mockRoleManager.stub {
             on { getRoleHolders(RoleManager.ROLE_SYSTEM_SUPERVISION) } doReturn emptyList()
         }
 
-        supervisionHelper = SupervisionHelper.getInstance(context)
-        val result = supervisionHelper.getSupervisionPackageName()
-
-        assertThat(result).isNull()
+        assertThat(context.supervisionPackageName).isNull()
         verify(mockRoleManager).getRoleHolders(RoleManager.ROLE_SYSTEM_SUPERVISION)
     }
 
     @Test
-    fun getSupervisionPackageName_roleManagerReturnsNull_shouldReturnNull() {
+    fun supervisionPackageName_roleManagerReturnsNull_shouldReturnNull() {
         context = contextOfRoleManager(null)
 
-        supervisionHelper = SupervisionHelper.getInstance(context)
-        val result = supervisionHelper.getSupervisionPackageName()
-
-        assertThat(result).isNull()
+        assertThat(context.supervisionPackageName).isNull()
     }
 
-    private fun contextOfRoleManager(roleManager: RoleManager?): Context {
-        return object : ContextWrapper(ApplicationProvider.getApplicationContext()) {
+    private fun contextOfRoleManager(roleManager: RoleManager?): Context =
+        object : ContextWrapper(ApplicationProvider.getApplicationContext()) {
             override fun getSystemService(name: String): Any? =
                 when (name) {
                     ROLE_SERVICE -> roleManager
                     else -> super.getSystemService(name)
                 }
         }
-    }
 }

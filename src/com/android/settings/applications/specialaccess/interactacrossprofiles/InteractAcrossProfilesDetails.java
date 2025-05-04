@@ -69,9 +69,9 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.AppStoreUtil;
-import com.android.settings.widget.CardPreference;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.widget.CardPreference;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.widget.SettingsThemeHelper;
@@ -368,7 +368,7 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         return isInteractAcrossProfilesEnabled(mContext, mPackageName);
     }
 
-    static boolean isInteractAcrossProfilesEnabled(
+    public static boolean isInteractAcrossProfilesEnabled(
             Context context, String packageName) {
         UserManager userManager = context.getSystemService(UserManager.class);
         UserHandle workProfile = InteractAcrossProfilesSettings.getWorkProfile(userManager);

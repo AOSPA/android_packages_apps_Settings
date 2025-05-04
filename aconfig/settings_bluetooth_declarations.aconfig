@@ -72,3 +72,14 @@ flag {
       purpose: PURPOSE_BUGFIX
   }
 }
+
+flag {
+  name: "enable_bluetooth_settings_expressive_design_read_only"
+  namespace: "cross_device_experiences"
+  description: "Enable Bluetooth Settings expressive design UI changes, read only flag."
+  bug: "399532172"
+  metadata {
+      purpose: PURPOSE_BUGFIX
+  }
+  is_fixed_read_only: true
+}

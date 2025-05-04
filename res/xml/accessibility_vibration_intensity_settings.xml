@@ -26,7 +26,7 @@
         app:controller="com.android.settings.accessibility.VibrationMainSwitchPreferenceController"/>
 
     <PreferenceCategory
-        android:key="vibration_intensity_category_call"
+        android:key="vibration_category_call"
         android:title="@string/accessibility_call_vibration_category_title">
 
         <com.android.settingslib.widget.SliderPreference
@@ -44,7 +44,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="vibration_intensity_category_notification_alarm"
+        android:key="vibration_category_notification_alarm"
         android:title="@string/accessibility_notification_alarm_vibration_category_title">
 
         <com.android.settingslib.widget.SliderPreference
@@ -62,7 +62,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="vibration_intensity_category_haptics"
+        android:key="vibration_category_haptics"
         android:title="@string/accessibility_interactive_haptics_category_title">
 
         <com.android.settingslib.widget.SliderPreference

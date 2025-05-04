@@ -18,6 +18,8 @@ package com.android.settings;
 
 import static android.content.Intent.EXTRA_USER;
 import static android.content.Intent.EXTRA_USER_ID;
+import static android.hardware.devicestate.DeviceState.PROPERTY_FOLDABLE_DISPLAY_CONFIGURATION_INNER_PRIMARY;
+import static android.hardware.devicestate.DeviceState.PROPERTY_FOLDABLE_DISPLAY_CONFIGURATION_OUTER_PRIMARY;
 import static android.os.UserManager.USER_TYPE_FULL_SYSTEM;
 import static android.os.UserManager.USER_TYPE_PROFILE_MANAGED;
 import static android.os.UserManager.USER_TYPE_PROFILE_PRIVATE;
@@ -62,6 +64,8 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
 import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.SensorProperties;
+import android.hardware.devicestate.DeviceState;
+import android.hardware.devicestate.DeviceStateManager;
 import android.hardware.face.Face;
 import android.hardware.face.FaceManager;
 import android.hardware.face.FaceSensorPropertiesInternal;
@@ -995,6 +999,62 @@ public final class Utils extends com.android.settingslib.Utils {
             }
         }
         return false;
+    }
+
+    /**
+     * Returns {@code true} if the device is potentially a foldable device, {@code false} otherwise.
+     * Note: Relies on device state properties (newer APIs) or internal resources (older fallback,
+     * less reliable).
+     *
+     * @param context The application or activity context.
+     * @return {@code true} if the device appears to be foldable, {@code false} otherwise.
+     */
+    public static boolean isDeviceFoldable(@NonNull Context context) {
+        if (android.hardware.devicestate.feature.flags.Flags.deviceStatePropertyMigration()) {
+            return isDeviceFoldablePostMigration(context);
+        } else {
+            return isDeviceFoldableLegacy(context);
+        }
+    }
+
+    private static boolean isDeviceFoldablePostMigration(Context context) {
+        DeviceStateManager deviceStateManager = context.getSystemService(DeviceStateManager.class);
+        if (deviceStateManager == null) {
+            Log.w(TAG, "DeviceStateManager is not available.");
+            return false;
+        }
+
+        List<DeviceState> supportedStates = deviceStateManager.getSupportedDeviceStates();
+        if (supportedStates == null) {
+            Log.w(TAG, "getSupportedDeviceStates returned null.");
+            return false; // Should not happen, but defensive check
+        }
+
+        for (DeviceState state : supportedStates) {
+            boolean hasOuterProperty =
+                    state.hasProperty(PROPERTY_FOLDABLE_DISPLAY_CONFIGURATION_OUTER_PRIMARY);
+            boolean hasInnerProperty =
+                    state.hasProperty(PROPERTY_FOLDABLE_DISPLAY_CONFIGURATION_INNER_PRIMARY);
+
+            if (hasOuterProperty || hasInnerProperty) {
+                return true;
+            }
+        }
+
+        return false; // No foldable state properties found
+    }
+
+    private static boolean isDeviceFoldableLegacy(Context context) {
+        try {
+            return context.getResources().getIntArray(
+                    com.android.internal.R.array.config_foldedDeviceStates).length > 0;
+        } catch (Resources.NotFoundException e) {
+            Log.e(TAG, "Error accessing internal resource config_foldedDeviceStates.", e);
+            return false;
+        } catch (Exception e) {
+            Log.e(TAG, "Unexpected error checking legacy foldable state.", e);
+            return false;
+        }
     }
 
     /**

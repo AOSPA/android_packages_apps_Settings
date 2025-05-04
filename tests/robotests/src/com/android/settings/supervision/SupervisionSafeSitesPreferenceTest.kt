@@ -156,7 +156,7 @@ class SupervisionSafeSitesPreferenceTest {
 
     @Test
     fun clickBlockExplicitSites_enablesFilter() {
-        Settings.Secure.putInt(context.getContentResolver(), BROWSER_CONTENT_FILTERS_ENABLED, 0)
+        Settings.Secure.putInt(context.getContentResolver(), BROWSER_CONTENT_FILTERS_ENABLED, -1)
         val blockExplicitSitesWidget = getBlockExplicitSitesWidget()
         assertThat(blockExplicitSitesWidget.isChecked).isFalse()
 

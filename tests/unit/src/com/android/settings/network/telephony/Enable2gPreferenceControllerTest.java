@@ -31,6 +31,7 @@ import android.os.Looper;
 import android.os.PersistableBundle;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.telephony.CarrierConfigManager;
+import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
@@ -51,6 +52,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RunWith(AndroidJUnit4.class)
 public final class Enable2gPreferenceControllerTest {
     @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
@@ -64,6 +68,8 @@ public final class Enable2gPreferenceControllerTest {
     private TelephonyManager mTelephonyManager;
     @Mock
     private TelephonyManager mInvalidTelephonyManager;
+    @Mock
+    private SubscriptionManager mSubscriptionManager;
 
     private RestrictedSwitchPreference mPreference;
     private PreferenceScreen mPreferenceScreen;
@@ -83,6 +89,8 @@ public final class Enable2gPreferenceControllerTest {
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         CarrierConfigCache.setTestInstance(mContext, mCarrierConfigCache);
+
+        when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
 
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
         doReturn(mInvalidTelephonyManager).when(mTelephonyManager).createForSubscriptionId(
@@ -213,6 +221,24 @@ public final class Enable2gPreferenceControllerTest {
         mController.updateState((Preference) mPreference);
 
         assertThat(mPreference.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void updateState_simNameAsSummary() {
+        String simName = "SIM1";
+        SubscriptionInfo subscriptionInfo = new SubscriptionInfo.Builder()
+                .setId(SUB_ID)
+                .setDisplayName(simName)
+                .build();
+        List<SubscriptionInfo> subInfos = new ArrayList();
+        subInfos.add(subscriptionInfo);
+        when(mSubscriptionManager.getAllSubscriptionInfoList()).thenReturn(subInfos);
+        mController.init(SUB_ID, true);
+
+        mController.updateState((Preference) mPreference);
+
+        assertThat(mPreference.isEnabled()).isTrue();
+        assertThat(mPreference.getSummary().toString()).isEqualTo(simName);
     }
 
     private void when2gIsEnabledForReasonEnable2g() {

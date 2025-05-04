@@ -80,16 +80,15 @@
     <!-- Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radioInfo_unknown">Unknown</string>
 
-    <!-- Content description for preview pager. [CHAR LIMIT=NONE] -->
-    <string name="preview_pager_content_description">Preview</string>
-    <!-- Content description for home screen preview. [CHAR LIMIT=NONE] -->
-    <string name="preview_pager_home_content_description">Home screen preview</string>
-    <!-- Content description for message preview. [CHAR LIMIT=NONE] -->
-    <string name="preview_pager_message_content_description">Message preview</string>
-    <!-- Content description for email preview. [CHAR LIMIT=NONE] -->
-    <string name="preview_pager_email_content_description">Email preview</string>
     <!-- Content description for qrcode image. [CHAR LIMIT=none]-->
     <string name="qr_code_content_description">QR code</string>
+
+    <!-- Title for the accessibility Display size and text preview page showing the home screen (app grid) preview. [CHAR LIMIT=40] -->
+    <string name="preview_pager_home_title">Home screen</string>
+    <!-- Title for the accessibility Display size and text preview page showing the text message preview. [CHAR LIMIT=40] -->
+    <string name="preview_pager_message_title">Message</string>
+    <!-- Title for the accessibility Display size and text preview page showing the email preview. [CHAR LIMIT=40] -->
+    <string name="preview_pager_email_title">Email</string>
     <!-- Previous button for preview pager. [CHAR LIMIT=NONE] -->
     <string name="preview_pager_previous_button">Previous preview</string>
     <!-- Next button for preview pager. [CHAR LIMIT=NONE] -->
@@ -646,9 +645,11 @@
         =1      {Remove selected language?}
         other   {Remove selected languages?}
         }</string>
+    <!-- The title of the confirmation dialog shown when the user selects system languages and tries to remove it [CHAR LIMIT=60] -->
+    <string name="dlg_remove_system_locales_title">Change system language to %s?</string>
 
     <!-- The text of the confirmation dialog shown when the user selects several languages and tries to remove them [CHAR LIMIT=NONE] -->
-    <string name="dlg_remove_locales_message">Text will be displayed in another language.</string>
+    <string name="dlg_remove_locales_message"><xliff:g id="Language" example="English (United States)">%s</xliff:g> will be removed from your preferred languages</string>
 
     <!-- The title of the error dialog shown when the user selects all the languages and tries to remove them [CHAR LIMIT=60] -->
     <string name="dlg_remove_locales_error_title">Can’t remove all languages</string>
@@ -733,6 +734,8 @@
     <string name="date_time_set_timezone_title">Time zone</string>
     <!-- Date & time setting screen setting option title -->
     <string name="date_time_set_timezone">Select time zone</string>
+    <!-- Text hint to search time zone in time zone setting screen -->
+    <string name="date_time_search_time_zone">Search time zone</string>
     <!-- Date & time setting screen setting option title [CHAR LIMIT=30] -->
     <string name="date_time_set_date_title">Date</string>
     <!-- Text hint to search region in time zone setting screen -->
@@ -740,7 +743,7 @@
     <!-- Setting option title to select region in time zone setting screen [CHAR LIMIT=30] -->
     <string name="date_time_select_region">Region</string>
     <!-- Setting option title in time zone setting screen [CHAR LIMIT=30] -->
-    <string name="date_time_select_fixed_offset_time_zones">Select UTC offset</string>
+    <string name="date_time_select_fixed_offset_time_zones">GMT offset</string>
     <!-- Label describing a exemplar location and time zone offset[CHAR LIMIT=NONE] -->
     <string name="zone_info_exemplar_location_and_offset"><xliff:g id="exemplar_location" example="Los Angeles">%1$s</xliff:g> (<xliff:g id="offset" example="GMT-08:00">%2$s</xliff:g>)</string>
     <!-- Label describing a time zone offset and name[CHAR LIMIT=NONE] -->
@@ -758,7 +761,7 @@
     <!-- The menu item to switch to selecting a time zone by region (default) [CHAR LIMIT=30] -->
     <string name="zone_menu_by_region">Select by region</string>
     <!-- The menu item to switch to selecting a time zone with a fixed offset (such as UTC or GMT+0200) [CHAR LIMIT=30] -->
-    <string name="zone_menu_by_offset">Select by UTC offset</string>
+    <string name="zone_menu_by_offset">Select by GMT offset</string>
 
     <!-- The settings category title containing the feedback button [CHAR LIMIT=30] -->
     <string name="time_feedback_category_title">Feedback</string>
@@ -2156,6 +2159,10 @@
     <!-- Title of item to let user know the bluetooth key is missing [CHAR LIMIT=NONE]-->
     <string name="device_details_key_missing_title">Try restarting <xliff:g id="device_name">%1$s</xliff:g>. If that doesn’t work, forget the device. For your security, only pair it again when you aren’t in a public space.\n\nIf this device isn’t nearby, you don’t need to do anything.</string>
 
+    <!-- Title for a toggle that enables additional logs for printing [CHAR LIMIT=NONE]-->
+    <string name="verbose_printer_logging_title">Verbose print logging</string>
+    <!-- Summary for a toggle that enables additional logs for printing [CHAR LIMIT=NONE]-->
+    <string name="verbose_printer_logging_summary">Additional debug logs, including Internet Printing Protocol (IPP) that may contain private information.</string>
 
     <!--  Bluetooth device details. In the confirmation dialog for unpairing a paired device, this is the label on the button that will complete the unpairing action. -->
     <string name="bluetooth_unpair_dialog_forget_confirm_button">Forget device</string>
@@ -2622,6 +2629,11 @@
     <string name="wifi_scan_always_confirm_deny">Deny</string>
     <!-- Error message displayed below the Wi-Fi EditText when the filed is required. [CHAR LIMIT=NONE] -->
     <string name="wifi_field_required">*required</string>
+    <!-- Label for the share wifi network toggle. [CHAR LIMIT=250] -->
+    <string name="share_wifi_network">Share this network with other device users</string>
+    <!-- Label for the share wifi network summary. [CHAR LIMIT=NONE] -->
+    <string name="share_wifi_network_summary">All users on this device can view and connect to a shared network. Administrators can delete a shared network. Learn more</string>
+    <string name="edit_wifi_network_configuration">Allow other users to edit network configuration</string>
 
     <!-- Dialog text to tell the user that the selected network does not have Internet access. -->
     <string name="no_internet_access_text">This network has no internet access. Stay connected?</string>
@@ -3416,6 +3428,10 @@
     <string name="title_font_size">Font size</string>
     <!-- Summary for Font size. Lets the user know that this will make text larger or smaller. Appears in the accessibility portion of setup wizard. [CHAR LIMIT=NONE] -->
     <string name="short_summary_font_size">Make text bigger or smaller</string>
+    <!-- [CHAR LIMIT=NONE] Title for the group of settings that change the system display size and font size. -->
+    <string name="category_title_display_text_size">Size options</string>
+    <!-- [CHAR LIMIT=NONE] Title for the group of font settings that apply different font styles. -->
+    <string name="category_title_text_style">Style options</string>
 
     <!-- SIM lock settings title  [CHAR LIMIT=40] -->
     <string name="sim_lock_settings">SIM lock settings</string>
@@ -4959,6 +4975,8 @@
     <string name="mouse_keys">Mouse keys</string>
     <!-- Title for a toggle switch for 'mouse' keys under mouse key main page,  an accessibility setting that allows the mouse pointer to be controlled using certain keys on a physical keyboard if keyboard is connected. [CHAR LIMIT=35] -->
     <string name="mouse_keys_main_title">Use mouse keys</string>
+    <!-- Title for the toggle button that turns on/off the mouse keys shortcut. [CHAR_LIMIT=NONE] -->
+    <string name="accessibility_mouse_keys_shortcut_title">Mouse keys shortcut</string>
     <!-- Summary text for the accessibility setting 'Mouse keys' preference sub-screen. [CHAR LIMIT=100] -->
     <string name="mouse_keys_summary">Use your keyboard to control the pointer</string>
     <!-- Title for the 'Mouse reverse scrolling' preference switch, which reverses the direction of mouse scroll wheels so that moving the wheel up scrolls the content down. [CHAR LIMIT=60] -->
@@ -4971,6 +4989,10 @@
     <string name="mouse_scrolling_acceleration">Controlled scrolling</string>
     <!-- Title for the 'Scrolling speed' slider seekbar, which controls how fast content scrolls when the user moves the scroll wheel. [CHAR LIMIT=60]-->
     <string name="mouse_scrolling_speed">Scrolling speed</string>
+    <!-- Description for the button that makes mouse pointer speed faster. [CHAR_LIMIT=NONE] -->
+    <string name="mouse_pointer_speed_make_faster_desc">Make pointer faster</string>
+    <!-- Description for the button that makes mouse pointer speed slower. [CHAR_LIMIT=NONE] -->
+    <string name="mouse_pointer_speed_make_slower_desc">Make pointer slower</string>
     <!-- Title for the 'Swap buttons' preference switch, which swaps the left and right buttons of connected mice so that right click will be the primary action button and left clicking will be the secondary action, for example showing the context menu. [CHAR LIMIT=60] -->
     <string name="mouse_swap_primary_button">Swap primary mouse button</string>
     <!-- Summary text for the 'Swap buttons' preference switch indicating to users that when this switch is enabled, their left click will behave as though it is the right click (secondary action) and that the right click will be the primary action. [CHAR LIMIT=NONE] -->
@@ -5021,7 +5043,7 @@
     <!-- Title text for 'Tap dragging', a touchpad setting which allows dragging of UI elements by tapping the touchpad with a single finger and then moving it. [CHAR LIMIT=35] -->
     <string name="trackpad_tap_dragging_title">Tap and drag to move items</string>
     <!-- Summary text for 'Tap dragging', a touchpad setting which allows dragging of UI elements by tapping the touchpad with a single finger and then moving it. [CHAR LIMIT=60] -->
-    <string name="trackpad_tap_dragging_summary">Double-tap an item, hold down on the second tap, and then drag the item to move it</string>
+    <string name="trackpad_tap_dragging_summary">Double-tap and drag your finger on the touchpad to move objects</string>
     <!-- Title text for 'Touchpad gestures' [CHAR LIMIT=35] -->
     <string name="trackpad_touchpad_gesture_title">Touchpad gestures</string>
     <!-- Summary text for 'Touchpad gestures' [CHAR LIMIT=60] -->
@@ -5036,6 +5058,10 @@
     <string name="trackpad_bottom_right_tap_summary">Click in the bottom right corner of the touchpad for more options</string>
     <!-- Title text for 'Pointer speed'. [CHAR LIMIT=35] -->
     <string name="trackpad_pointer_speed">Pointer speed</string>
+    <!-- Description for the button that makes touchpad pointer speed faster. [CHAR_LIMIT=NONE] -->
+    <string name="trackpad_pointer_speed_make_faster_desc">Make pointer faster</string>
+    <!-- Description for the button that makes touchpad pointer speed slower. [CHAR_LIMIT=NONE] -->
+    <string name="trackpad_pointer_speed_make_slower_desc">Make pointer slower</string>
     <!-- Title text for 'Three finger tap' touchpad preference. This preference allows the user to select an action that will trigger when they tap three fingers on a touchpad. [CHAR LIMIT=60] -->
     <string name="three_finger_tap_preference_title">Use three-finger tap</string>
     <!-- Title for the 'Touchpad acceleration' preference switch, which dynamically adjusts cursor movement based on speed. [CHAR LIMIT=60] -->
@@ -5077,6 +5103,10 @@
     <string name="three_finger_tap_middle_click">Middle mouse button</string>
     <!-- Radio button text for 'launch assistant' action. This is one of multiple actions the user can select from the three finger tap customization radio group. The action if selected will launch the Assistant when a three-finger tap is performed on a touchpad. [CHAR LIMIT=35] -->
     <string name="three_finger_tap_launch_gemini">Launch Assistant</string>
+    <!-- Radio button text for 'launch <default assistant>' action. This is one of multiple actions the user can select from the three finger tap customization radio group. The action if selected will launch the Assistant when a three-finger tap is performed on a touchpad. [CHAR LIMIT=35] -->
+    <string name="three_finger_tap_launch_default_assistant">Launch <xliff:g id="app_name" example="Assistant">%s</xliff:g></string>
+    <!-- The generic assistant name when no app is chosen. [CHAR LIMIT=35] -->
+    <string name="three_finger_tap_launch_generic_assistant_name">Assistant</string>
     <!-- Radio button text for 'Go home' action. This is one of multiple actions the user can select from the three finger tap customization radio group. The action if selected will take the user home when a three-finger tap is performed on a touchpad. [CHAR LIMIT=35] -->
     <string name="three_finger_tap_go_home">Go home</string>
     <!-- Radio button text for 'Go back' action. This is one of multiple actions the user can select from the three finger tap customization radio group. The action if selected will initiate a back gesture when a three-finger tap is performed on a touchpad. [CHAR LIMIT=35] -->
@@ -5158,10 +5188,18 @@
     <string name="keyboard_repeat_keys_title">Repeat Keys</string>
     <!-- Title for the keyboard repeat key timeout option. [CHAR LIMIT=60] -->
     <string name="keyboard_repeat_keys_timeout_title">Delay before repeat</string>
+    <!-- Description for the button that increase repeat key delay. [CHAR_LIMIT=NONE] -->
+    <string name="keyboard_repeat_keys_increase_delay_desc">Increase delay</string>
+    <!-- Description for the button that decrease repeat key delay. [CHAR_LIMIT=NONE] -->
+    <string name="keyboard_repeat_keys_decrease_delay_desc">Decrease delay</string>
     <!-- Title for the keyboard repeat key delay option. [CHAR LIMIT=60] -->
-    <string name="keyboard_repeat_keys_delay_title">Repeat Rate</string>
+    <string name="keyboard_repeat_keys_delay_title">Repeat rate</string>
     <!-- Summary for the keyboard repeat key option. [CHAR LIMIT=NONE] -->
     <string name="keyboard_repeat_keys_summary">Hold down a key to repeat its character until the key is released</string>
+    <!-- Description for the button that increase repeat rate. [CHAR_LIMIT=NONE] -->
+    <string name="keyboard_repeat_keys_increase_rate_desc">Increase repeat rate</string>
+    <!-- Description for the button that decrease repeat rate. [CHAR_LIMIT=NONE] -->
+    <string name="keyboard_repeat_keys_decrease_rate_desc">Decrease repeat rate</string>
 
     <!-- Title text for per IME subtype keyboard layout. [CHAR LIMIT=35] -->
     <string name="ime_label_title"><xliff:g id="ime_label" example="Gboard">%s</xliff:g> layout</string>
@@ -7060,6 +7098,12 @@ Data usage charges may apply.</string>
     <string name="cellular_security_notifications_controller_title">Network notifications</string>
     <!-- Summary of Cellular security notifications toggle [CHAR LIMIT=NONE]-->
     <string name="cellular_security_notifications_controller_summary">Get notified when your device connects to an unencrypted network, or when a network records your unique device or SIM ID</string>
+    <!-- Header of Cellular security page 2G network protection [CHAR LIMIT=NONE]-->
+    <string name="cellular_security_2G_network_generation_header">Network generation</string>
+    <!-- Summary of Cellular security page 2G network protection [CHAR LIMIT=NONE]-->
+    <string name="cellular_security_2G_network_generation_summary">2G network protection avoids 2G networks, which are less secure. This may limit connectivity in some places. Emergency calling is always allowed.</string>
+    <!-- Title of Cellular security page 2G network protection [CHAR LIMIT=NONE]-->
+    <string name="cellular_security_2G_network_generation_title">2G network protection</string>
 
     <!--Cellular encryption -->
     <!--Cellular encryption title [CHAR LIMIT=60] -->
@@ -9206,15 +9250,14 @@ Data usage charges may apply.</string>
     <string name="notification_badging_title">Notification dot on app icon</string>
 
     <!-- App Info > Notifications: Title for section where notifications bundles can be configured [CHAR LIMIT=80]-->
-    <string name="notification_bundles">Notification bundles</string>
+    <string name="notification_bundles">Notification organizer</string>
 
     <!-- App Info > Notifications: Title for section where notifications summaries can be configured [CHAR LIMIT=80]-->
     <string name="notification_summarization_title">Notification summaries</string>
-    <string name="notification_summarization_on">On</string>
-    <string name="notification_summarization_off">Off</string>
+    <string name="notification_summarization_summary">Get quick recaps of longer messages</string>
     <string name="notification_summarization_main_control_title">Use notification summaries</string>
-    <string name="notification_summarization_description">Automatically summarize conversation notifications from apps</string>
-    <string name="notification_summarization_excluded_description">Conversation notifications from these apps will not be summarized</string>
+    <string name="notification_summarization_description">Summarize long messages and group conversations to get quick recaps. Summaries are AI-powered and may contain errors.</string>
+    <string name="notification_summarization_excluded_description">Notifications from these apps will not be summarized</string>
     <string name="notification_summarization_manage_excluded_apps">Manage apps</string>
     <string name="notification_summarization_manage_excluded_apps_title">Allow notification summaries for apps</string>
     <string name="notification_excluded_apps">App exceptions</string>
@@ -9637,15 +9680,14 @@ Data usage charges may apply.</string>
     <string name="notification_polite_work_summary">Apply to work profile apps</string>
 
     <!-- Title for Bundled Notifications setting  [CHAR LIMIT=45]-->
-    <string name="notification_bundle_title">Bundled notifications</string>
-    <string name="notification_bundle_on">On</string>
-    <string name="notification_bundle_off">Off</string>
-    <string name="notification_bundle_main_control_title">Use notification bundling</string>
-    <string name="notification_bundle_description">Notifications with similar themes will be silenced and grouped together for a quieter experience. Bundling will override an app\'s own notification settings.</string>
+    <string name="notification_bundle_title">Notification organizer</string>
+    <string name="notification_bundle_summary">Bundle and silence lower priority notifications</string>
+    <string name="notification_bundle_main_control_title">Use Notification organizer</string>
+    <string name="notification_bundle_description">Choose notification types you want to silence and bundle together to minimize interruptions. Bundling is AI-powered and may contain errors.</string>
 
     <string name="notification_app_level_bundle_title">Bundle notifications</string>
     <string name="notification_app_level_bundle_subtext">Notifications with similar themes will be silenced and grouped together for a quieter experience</string>
-    <string name="notification_bundle_excluded_description">Notifications from these apps will not be bundled</string>
+    <string name="notification_bundle_excluded_description">Notifications from these apps won\’t be bundled</string>
     <string name="notification_bundle_manage_excluded_apps_title">Allow notification bundling for apps</string>
 
     <!-- Title for managing VR (virtual reality) helper services. [CHAR LIMIT=50] -->
@@ -11768,6 +11810,30 @@ Data usage charges may apply.</string>
     <string name="swipe_up_to_switch_apps_title">2-button navigation</string>
     <!-- Summary text for swipe up to switch apps  [CHAR LIMIT=250] -->
     <string name="swipe_up_to_switch_apps_summary">To switch apps, swipe up on the Home button. To see all apps, swipe up again. To go back, tap the back button.</string>
+
+    <!-- Title text for system panels showing notifications and quick settings [CHAR LIMIT=60] -->
+    <string name="shade_panels_title">Notifications &amp; Quick Settings</string>
+
+    <!-- Search keywords for system panels settings. [CHAR_LIMIT=NONE]-->
+    <string name="keywords_shade_panels">shade, panels, notifications, quick settings, qs, separate, combined, dual, single</string>
+
+    <!-- Category for system panels showing notifications and Quick Settings. [CHAR LIMIT=NONE]-->
+    <string name="shade_panels_category">Panels</string>
+
+    <!-- Title text for the separate panels mode. In this mode, notifications and Quick Settings are shown in separate panels, each opened by swiping down on a different side of the top edge of the screen. [CHAR_LIMIT=60] -->
+    <string name="shade_panels_separate_title">Separate</string>
+
+    <!-- Summary text for the separate panels mode. In this mode, notifications and Quick Settings are shown in separate panels, each opened by swiping down on a different side of the top edge of the screen. [CHAR_LIMIT=250] -->
+    <string name="shade_panels_separate_summary">Swipe down from the top right to open Quick Settings. Swipe down from the top left to open notifications.</string>
+
+    <!-- Title text for the combined panels mode. In this mode, notifications and Quick Settings are shown a single panel, opened by swiping down from the top edge of the screen. In the past this used to be the only mode, so it is also referred to as "classic" mode. [CHAR_LIMIT=60] -->
+    <string name="shade_panels_combined_title">Combined (classic)</string>
+
+    <!-- Summary text for the combined panels mode. In this mode, notifications and Quick Settings are shown a single panel, opened by swiping down from the top edge of the screen. In the past this used to be the only mode, so it is also referred to as "classic" mode. [CHAR_LIMIT=NONE] -->
+    <string name="shade_panels_combined_summary">Swipe down from the top of your screen to access the classic panel that combines notifications and Quick Settings.</string>
+
+    <!-- Informational message shown to users of foldable devices, explaining that the combined shade view is only available on the outer (narrow) screen of their device. [CHAR LIMIT=200]-->
+    <string name="shade_panels_foldables_footer_message">Combined (classic) view is limited to the outer screen of your foldable device</string>
 
     <!-- Preference title for "Safety & emergency" settings page [CHAR LIMIT=60]-->
     <string name="emergency_settings_preference_title">Safety &amp; emergency</string>
@@ -14690,26 +14756,26 @@ Data usage charges may apply.</string>
     <string name="supervision_delete_pin_preference_summary">This will reset all your supervision settings</string>
     <!-- Title for adding supervision PIN recovery setting entry [CHAR LIMIT=NONE] -->
     <string name="supervision_add_pin_recovery_title">Tap to add recovery</string>
+    <!-- Title for adding supervision PIN recovery setting entry [CHAR LIMIT=NONE] -->
+    <string name="supervision_verify_pin_recovery_title">Tap to verify recovery</string>
     <!-- Title for web content filters entry [CHAR LIMIT=60] -->
     <string name="supervision_web_content_filters_title">Web content filters</string>
     <!-- Title for web content filters browser category [CHAR LIMIT=60] -->
-    <string name="supervision_web_content_filters_browser_title">Google Chrome and Web</string>
+    <string name="supervision_web_content_filters_browser_title">Websites</string>
     <!-- Title for web content filters browser category block explicit sites option [CHAR LIMIT=60] -->
-    <string name="supervision_web_content_filters_browser_block_explicit_sites_title">Try to block explicit sites</string>
+    <string name="supervision_web_content_filters_browser_block_explicit_sites_title">Block explicit web content</string>
     <!-- Summary for web content filters browser category block explicit sites option [CHAR LIMIT=NONE] -->
-    <string name="supervision_web_content_filters_browser_block_explicit_sites_summary">No filter is perfect, but this should help hide sexually explicit sites</string>
+    <string name="supervision_web_content_filters_browser_block_explicit_sites_summary">For browsers on this device</string>
     <!-- Title for web content filters browser category allow all sites option [CHAR LIMIT=60] -->
     <string name="supervision_web_content_filters_browser_allow_all_sites_title">Allow all sites</string>
     <!-- Title for web content filters search category [CHAR LIMIT=60] -->
-    <string name="supervision_web_content_filters_search_title">Google Search</string>
+    <string name="supervision_web_content_filters_search_title">Search results</string>
     <!-- Title for web content filters search category filter on option [CHAR LIMIT=60] -->
-    <string name="supervision_web_content_filters_search_filter_on_title">SafeSearch filtering ON</string>
+    <string name="supervision_web_content_filters_search_filter_on_title">Block explicit search result</string>
     <!-- Summary for web content filters search category filter on option [CHAR LIMIT=NONE] -->
-    <string name="supervision_web_content_filters_search_filter_on_summary">Helps filter out explicit images, text, and links from search results on this device</string>
+    <string name="supervision_web_content_filters_search_filter_on_summary">For search engines on this device</string>
     <!-- Title for web content filters search category filter off option [CHAR LIMIT=60] -->
-    <string name="supervision_web_content_filters_search_filter_off_title">SafeSearch filtering OFF</string>
-    <!-- Summary for web content filters search category filter off option [CHAR LIMIT=NONE] -->
-    <string name="supervision_web_content_filters_search_filter_off_summary">Account settings may still filter or blur explicit results</string>
+    <string name="supervision_web_content_filters_search_filter_off_title">Filter off</string>
     <!-- Generic content description that is attached to the preview illustration at the top of an Accessibility feature toggle page. [CHAR LIMIT=NONE] -->
     <!-- Title for supervision PIN verification screen [CHAR LIMIT=60] -->
     <string name="supervision_full_screen_pin_verification_title">Enter supervision PIN</string>

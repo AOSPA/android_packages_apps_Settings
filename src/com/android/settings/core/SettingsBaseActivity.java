@@ -99,6 +99,18 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
         if (isAnySetupWizard) {
             TransitionHelper.applyForwardTransition(this);
             TransitionHelper.applyBackwardTransition(this);
+
+            // Apply SetupWizard light theme during setup flow. This is for SubSettings pages.
+            if (this instanceof SubSettings) {
+                // setTheme needs to be called before inflating any views (e.g. before calling
+                // super.onCreate)
+                if (SettingsThemeHelper.isExpressiveTheme(this)) {
+                    setTheme(R.style.SettingsPreferenceTheme_SetupWizard_Expressive);
+                } else {
+                    setTheme(R.style.SettingsPreferenceTheme_SetupWizard);
+                }
+                ThemeHelper.trySetSuwTheme(this);
+            }
         }
         super.onCreate(savedInstanceState);
         if (isFinishing()) {
@@ -122,11 +134,6 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
         final TypedArray theme = getTheme().obtainStyledAttributes(android.R.styleable.Theme);
         if (!theme.getBoolean(android.R.styleable.Theme_windowNoTitle, false)) {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
-        }
-        // Apply SetupWizard light theme during setup flow. This is for SubSettings pages.
-        if (isAnySetupWizard && this instanceof SubSettings) {
-            setTheme(R.style.SettingsPreferenceTheme_SetupWizard);
-            ThemeHelper.trySetSuwTheme(this);
         }
 
         if (isToolbarEnabled() && !isAnySetupWizard) {

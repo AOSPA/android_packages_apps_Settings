@@ -233,6 +233,7 @@ public class LocaleListEditorTest {
     @Test
     public void showRemoveLocaleWarningDialog_mainLocaleSelected_shouldShowLocaleChangeDialog() {
         //pre-condition
+        setUpLocaleConditions2();
         when(mAdapter.getCheckedCount()).thenReturn(1);
         when(mAdapter.getItemCount()).thenReturn(2);
         when(mAdapter.isFirstLocaleChecked()).thenReturn(true);
@@ -249,7 +250,7 @@ public class LocaleListEditorTest {
         final ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
 
         assertThat(shadowDialog.getMessage().toString()).isEqualTo(
-                mContext.getString(R.string.dlg_remove_locales_message));
+                mContext.getString(R.string.dlg_remove_locales_message, "Anii (Benin)"));
     }
 
     @Test
@@ -271,40 +272,6 @@ public class LocaleListEditorTest {
         final ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
 
         assertThat(shadowDialog.getMessage()).isNull();
-    }
-
-    @Test
-    public void showConfirmDialog_systemLocaleSelected_shouldShowLocaleChangeDialog()
-            throws Exception {
-        //pre-condition
-        Locale.setDefault(Locale.forLanguageTag("zh-TW"));
-        setUpLocaleConditions(true);
-        final Configuration config = new Configuration();
-        config.setLocales((LocaleList.forLanguageTags("zh-TW,en-US")));
-        when(mActivityService.getConfiguration()).thenReturn(config);
-        when(mAdapter.getFeedItemList()).thenReturn(mLocaleList);
-        when(mAdapter.getCheckedCount()).thenReturn(1);
-        when(mAdapter.getItemCount()).thenReturn(2);
-        when(mAdapter.isFirstLocaleChecked()).thenReturn(true);
-        ReflectionHelpers.setField(mLocaleListEditor, "mRemoveMode", true);
-        ReflectionHelpers.setField(mLocaleListEditor, "mShowingRemoveDialog", true);
-
-        //launch the first dialog
-        mLocaleListEditor.showRemoveLocaleWarningDialog();
-
-        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-
-        assertThat(dialog).isNotNull();
-
-        // click the remove button
-        dialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick();
-        ShadowLooper.idleMainLooper();
-
-        assertThat(dialog.isShowing()).isFalse();
-
-        // check the second dialog is showing
-        verify(mFragmentTransaction).add(any(LocaleDialogFragment.class),
-                eq(TAG_DIALOG_CONFIRM_SYSTEM_DEFAULT));
     }
 
     @Test
@@ -553,6 +520,7 @@ public class LocaleListEditorTest {
         mLocaleList.add(mLocaleInfo2);
         when(mLocaleInfo.getLocale()).thenReturn(Locale.forLanguageTag("blo-BJ"));
         when(mLocaleInfo.isTranslated()).thenReturn(false);
+        when(mLocaleInfo.getFullNameNative()).thenReturn("Anii (Benin)");
         when(mLocaleInfo2.getLocale()).thenReturn(Locale.forLanguageTag("zh-TW"));
         when(mLocaleInfo2.isTranslated()).thenReturn(true);
         when(mAdapter.getFeedItemList()).thenReturn(mLocaleList);

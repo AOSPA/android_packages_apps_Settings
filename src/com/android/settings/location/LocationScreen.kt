@@ -16,14 +16,22 @@
 package com.android.settings.location
 
 import android.content.Context
+import android.content.Intent
 import android.location.LocationManager
 import com.android.settings.R
 import com.android.settings.flags.Flags
+import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.datastore.NoOpKeyedObservable
+import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceIconProvider
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
+import com.android.settingslib.widget.MainSwitchPreferenceBinding
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 
 @ProvidePreferenceScreen(LocationScreen.KEY)
@@ -36,6 +44,10 @@ class LocationScreen : PreferenceScreenCreator, PreferenceSummaryProvider, Prefe
 
     override val keywords: Int
         get() = R.string.keywords_location
+
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? {
+        return Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+    }
 
     override fun getSummary(context: Context): CharSequence? {
         var locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -53,15 +65,55 @@ class LocationScreen : PreferenceScreenCreator, PreferenceSummaryProvider, Prefe
             else -> R.drawable.ic_settings_location
         }
 
-    override fun isFlagEnabled(context: Context) = Flags.catalystLocationSettings()
+    override fun isFlagEnabled(context: Context) =
+        Flags.catalystLocationSettings() || Flags.deviceState()
 
     override fun hasCompleteHierarchy() = false
 
     override fun fragmentClass() = LocationSettings::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {}
+    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {
+        +LocationMainSwitch()
+        // TODO(b/406567024): recent location access
+    }
 
     companion object {
         const val KEY = "location_settings"
+    }
+}
+
+private class LocationMainSwitch : BooleanValuePreference, MainSwitchPreferenceBinding {
+
+    override val key: String
+        get() = KEY
+
+    override val title: Int
+        get() = R.string.location_settings_primary_switch_title
+
+    override val sensitivityLevel = SensitivityLevel.HIGH_SENSITIVITY
+
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.DISALLOW
+
+    override fun storage(context: Context) = LocationStorage(context)
+
+    companion object {
+        const val KEY = "location_main_switch"
+    }
+}
+
+private class LocationStorage(context: Context) : NoOpKeyedObservable<String>(), KeyValueStore {
+
+    private val locationManager = context.getSystemService(LocationManager::class.java)
+
+    override fun contains(key: String): Boolean = true
+
+    override fun <T : Any> getValue(key: String, valueType: Class<T>): T? {
+        return locationManager.isLocationEnabled as T
+    }
+
+    override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
+        // Not implemented. This is a very sensitive setting which needs to be thoughtfully handled
+        // if ever exposed to set through this API.
     }
 }

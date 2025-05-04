@@ -24,6 +24,9 @@ import com.android.settings.connecteddevice.BluetoothDashboardScreen
 import com.android.settings.datausage.DataSaverScreen
 import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoScreen
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionScreen
+import com.android.settings.deviceinfo.hardwareinfo.DeviceModelPreference
+import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoScreen
+import com.android.settings.deviceinfo.hardwareinfo.HardwareVersionPreference
 import com.android.settings.deviceinfo.legal.LegalSettingsScreen
 import com.android.settings.deviceinfo.legal.ModuleLicensesScreen
 import com.android.settings.deviceinfo.storage.StoragePreferenceScreen
@@ -47,8 +50,18 @@ import com.android.settings.notification.modes.devicestate.ZenModeDndDisplayScre
 import com.android.settings.notification.modes.devicestate.ZenModeDndScreen
 import com.android.settings.security.LockScreenPreferenceScreen
 import com.android.settings.spa.app.catalyst.AllAppsScreen
+import com.android.settings.spa.app.catalyst.AppInfoAllFilesAccessScreen
+import com.android.settings.spa.app.catalyst.AppInfoDisplayOverOtherAppsScreen
+import com.android.settings.spa.app.catalyst.AppInfoFullScreenIntentScreen
+import com.android.settings.spa.app.catalyst.AppInfoInteractAcrossProfilesScreen
+import com.android.settings.spa.app.catalyst.AppInfoPictureInPictureScreen
 import com.android.settings.spa.app.catalyst.AppInfoStorageScreen
+import com.android.settings.spa.app.catalyst.AppInteractAcrossProfilesAppListScreen
+import com.android.settings.spa.app.catalyst.AppPictureInPictureAppListScreen
 import com.android.settings.spa.app.catalyst.AppStorageAppListScreen
+import com.android.settings.spa.app.catalyst.AppsAllFilesAccessAppListScreen
+import com.android.settings.spa.app.catalyst.AppsDisplayOverOtherAppsAppListScreen
+import com.android.settings.spa.app.catalyst.AppsFullScreenIntentAppListScreen
 import com.android.settings.supervision.SupervisionDashboardScreen
 import com.android.settings.supervision.SupervisionPinManagementScreen
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -131,6 +144,21 @@ fun getScreenConfigs() =
         ),
         PerScreenConfig(
             enabled = true,
+            screenKey = AppsAllFilesAccessAppListScreen.KEY,
+            category = setOf(DeviceStateCategory.PERMISSION),
+        ),
+        PerScreenConfig(
+            enabled = true,
+            screenKey = AppsDisplayOverOtherAppsAppListScreen.KEY,
+            category = setOf(DeviceStateCategory.PERMISSION),
+        ),
+        PerScreenConfig(
+            enabled = true,
+            screenKey = AppsFullScreenIntentAppListScreen.KEY,
+            category = setOf(DeviceStateCategory.PERMISSION),
+        ),
+        PerScreenConfig(
+            enabled = true,
             screenKey = MobileNetworkListScreen.KEY,
             category = setOf(DeviceStateCategory.MOBILE_DATA),
         ),
@@ -187,6 +215,16 @@ fun getScreenConfigs() =
             enabled = true,
             screenKey = ZenModeBedtimeScreen.KEY,
             category = setOf(DeviceStateCategory.UNCATEGORIZED),
+        ),
+        PerScreenConfig(
+            enabled = true,
+            screenKey = AppPictureInPictureAppListScreen.KEY,
+            category = setOf(DeviceStateCategory.PERMISSION),
+        ),
+        PerScreenConfig(
+            enabled = true,
+            screenKey = AppInteractAcrossProfilesAppListScreen.KEY,
+            category = setOf(DeviceStateCategory.PERMISSION),
         ),
     )
 
@@ -514,11 +552,42 @@ fun getDeviceStateItemList() =
         ),
         DeviceStateItemConfig(
             enabled = true,
+            settingKey = ZenModeButtonPreference.KEY,
+            settingScreenKey = ZenModeBedtimeScreen.KEY,
+        ),
+        DeviceStateItemConfig(
+            enabled = true,
+            settingKey = DeviceModelPreference.KEY,
+            settingScreenKey = HardwareInfoScreen.KEY,
+        ),
+        DeviceStateItemConfig(
+            enabled = true,
+            settingKey = HardwareVersionPreference.KEY,
+            settingScreenKey = HardwareInfoScreen.KEY,
+        ),
+        DeviceStateItemConfig(
+            enabled = true,
             settingKey = AppInfoStorageScreen.KEY,
             settingScreenKey = AppStorageAppListScreen.KEY,
             hintText = { context, metadata ->
                 metadata.extras(context)?.getString(AppInfoStorageScreen.KEY_EXTRA_PACKAGE_NAME)
             },
+        ),
+        // AppList summaries for each permission types
+        DeviceStateItemConfig(
+            enabled = true,
+            settingKey = AppInfoAllFilesAccessScreen.KEY,
+            settingScreenKey = AppsAllFilesAccessAppListScreen.KEY,
+        ),
+        DeviceStateItemConfig(
+            enabled = true,
+            settingKey = AppInfoDisplayOverOtherAppsScreen.KEY,
+            settingScreenKey = AppsDisplayOverOtherAppsAppListScreen.KEY,
+        ),
+        DeviceStateItemConfig(
+            enabled = true,
+            settingKey = AppInfoFullScreenIntentScreen.KEY,
+            settingScreenKey = AppsFullScreenIntentAppListScreen.KEY,
         ),
         DeviceStateItemConfig(
             enabled = true,
@@ -597,5 +666,25 @@ fun getDeviceStateItemList() =
             settingKey = StoragePreferenceScreen.KEY_PREF_TEMP,
             settingScreenKey = StoragePreferenceScreen.KEY,
             hintText = { _, _ -> "Total device storage used by temporary system files" },
+        ),
+        DeviceStateItemConfig(
+            enabled = true,
+            settingKey = AppInfoPictureInPictureScreen.KEY,
+            settingScreenKey = AppPictureInPictureAppListScreen.KEY,
+            hintText = { context, metadata ->
+                metadata
+                    .extras(context)
+                    ?.getString(AppInfoPictureInPictureScreen.KEY_EXTRA_PACKAGE_NAME)
+            },
+        ),
+        DeviceStateItemConfig(
+            enabled = true,
+            settingKey = AppInfoInteractAcrossProfilesScreen.KEY,
+            settingScreenKey = AppInteractAcrossProfilesAppListScreen.KEY,
+            hintText = { context, metadata ->
+                metadata
+                    .extras(context)
+                    ?.getString(AppInfoInteractAcrossProfilesScreen.KEY_EXTRA_PACKAGE_NAME)
+            },
         ),
     )

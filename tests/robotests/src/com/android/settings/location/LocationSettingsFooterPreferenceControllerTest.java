@@ -100,12 +100,7 @@ public class LocationSettingsFooterPreferenceControllerTest {
 
     @Test
     public void isAvailable_hasValidFooter_returnsTrue() {
-        final List<ResolveInfo> testResolveInfos = new ArrayList<>();
-        testResolveInfos.add(
-                getTestResolveInfo(/*isSystemApp*/ true, /*hasRequiredMetadata*/ true));
-        when(mPackageManager.queryBroadcastReceivers(any(Intent.class), anyInt()))
-                .thenReturn(testResolveInfos);
-
+        setUpFooterPreference(/*isSystemApp*/ true, /*hasRequiredMetaData*/ true);
         assertThat(mController.isAvailable()).isTrue();
     }
 
@@ -114,11 +109,7 @@ public class LocationSettingsFooterPreferenceControllerTest {
      */
     @Test
     public void isAvailable_noSystemApp_returnsTrue() {
-        final List<ResolveInfo> testResolveInfos = new ArrayList<>();
-        testResolveInfos.add(
-                getTestResolveInfo(/*isSystemApp*/ false, /*hasRequiredMetadata*/ true));
-        when(mPackageManager.queryBroadcastReceivers(any(Intent.class), anyInt()))
-                .thenReturn(testResolveInfos);
+        setUpFooterPreference(/*isSystemApp*/ false, /*hasRequiredMetaData*/ true);
         assertThat(mController.isAvailable()).isTrue();
     }
 
@@ -127,22 +118,15 @@ public class LocationSettingsFooterPreferenceControllerTest {
      */
     @Test
     public void isAvailable_noRequiredMetadata_returnsTrue() {
-        final List<ResolveInfo> testResolveInfos = new ArrayList<>();
-        testResolveInfos.add(
-                getTestResolveInfo(/*isSystemApp*/ true, /*hasRequiredMetadata*/ false));
-        when(mPackageManager.queryBroadcastReceivers(any(Intent.class), anyInt()))
-                .thenReturn(testResolveInfos);
+        setUpFooterPreference(/*isSystemApp*/ true, /*hasRequiredMetaData*/ false);
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     public void updateState_setTitle() {
-        final List<ResolveInfo> testResolveInfos = new ArrayList<>();
-        testResolveInfos.add(
-                getTestResolveInfo(/*isSystemApp*/ true, /*hasRequiredMetadata*/ true));
-        when(mPackageManager.queryBroadcastReceivers(any(Intent.class), anyInt()))
-                .thenReturn(testResolveInfos);
+        setUpFooterPreference(/*isSystemApp*/ true, /*hasRequiredMetaData*/ true);
         mController.updateState(mFooterPreference);
+
         ArgumentCaptor<CharSequence> title = ArgumentCaptor.forClass(CharSequence.class);
         verify(mFooterPreference).setTitle(title.capture());
         assertThat(title.getValue()).isNotNull();
@@ -153,7 +137,8 @@ public class LocationSettingsFooterPreferenceControllerTest {
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_TELEPHONY_MESSAGING))
                 .thenReturn(true);
 
-        setUpLocationModeChanged(false);
+        setUpFooterPreference(/*isSystemApp*/ true, /*hasRequiredMetaData*/ true);
+        setUpLocationModeChanged(/*locationEnabled*/ false, /*shouldFooterTitleChange*/ true);
         assertLocationFooter(R.string.location_settings_footer_location_off_with_telephony);
     }
 
@@ -162,7 +147,8 @@ public class LocationSettingsFooterPreferenceControllerTest {
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_TELEPHONY_CALLING))
                 .thenReturn(true);
 
-        setUpLocationModeChanged(false);
+        setUpFooterPreference(/*isSystemApp*/ true, /*hasRequiredMetaData*/ true);
+        setUpLocationModeChanged(/*locationEnabled*/ false, /*shouldFooterTitleChange*/ true);
         assertLocationFooter(R.string.location_settings_footer_location_off_with_telephony);
     }
 
@@ -171,13 +157,15 @@ public class LocationSettingsFooterPreferenceControllerTest {
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_TELEPHONY))
                 .thenReturn(false);
 
-        setUpLocationModeChanged(false);
+        setUpFooterPreference(/*isSystemApp*/ true, /*hasRequiredMetaData*/ true);
+        setUpLocationModeChanged(/*locationEnabled*/ false, /*shouldFooterTitleChange*/ true);
         assertLocationFooter(R.string.location_settings_footer_location_off_no_telephony);
     }
 
     @Test
     public void onLocationModeChanged_on_setTitle() {
-        setUpLocationModeChanged(true);
+        setUpFooterPreference(/*isSystemApp*/ true, /*hasRequiredMetaData*/ true);
+        setUpLocationModeChanged(/*locationEnabled*/ true, /*shouldFooterTitleChange*/ true);
 
         ArgumentCaptor<CharSequence> title = ArgumentCaptor.forClass(CharSequence.class);
         verify(mFooterPreference, times(2)).setTitle(title.capture());
@@ -192,14 +180,8 @@ public class LocationSettingsFooterPreferenceControllerTest {
 
     @Test
     public void onLocationModeChanged_on_withoutInjectedString_setTitle() {
-        final List<ResolveInfo> testResolveInfos = new ArrayList<>();
-        testResolveInfos.add(
-                getTestResolveInfo(/*isSystemApp*/ false, /*hasRequiredMetadata*/ true));
-        when(mPackageManager.queryBroadcastReceivers(any(Intent.class), anyInt()))
-                .thenReturn(testResolveInfos);
-        assertThat(mController.isAvailable()).isTrue();
-        mController.updateState(mFooterPreference);
-        mController.onLocationModeChanged(1, /* restricted= */ false);
+        setUpFooterPreference(/*isSystemApp*/ false, /*hasRequiredMetaData*/ true);
+        setUpLocationModeChanged(/*locationEnabled*/ true, /*shouldFooterTitleChange*/ false);
 
         ArgumentCaptor<CharSequence> title = ArgumentCaptor.forClass(CharSequence.class);
         verify(mFooterPreference, times(1)).setTitle(title.capture());
@@ -211,11 +193,7 @@ public class LocationSettingsFooterPreferenceControllerTest {
 
     @Test
     public void updateState_notSystemApp_ignore() {
-        final List<ResolveInfo> testResolveInfos = new ArrayList<>();
-        testResolveInfos.add(
-                getTestResolveInfo(/*isSystemApp*/ false, /*hasRequiredMetadata*/ true));
-        when(mPackageManager.queryBroadcastReceivers(any(Intent.class), anyInt()))
-                .thenReturn(testResolveInfos);
+        setUpFooterPreference(/*isSystemApp*/ false, /*hasRequiredMetaData*/ true);
         mController.updateState(mFooterPreference);
         verify(mFooterPreference, never()).setTitle(anyChar());
     }
@@ -246,22 +224,37 @@ public class LocationSettingsFooterPreferenceControllerTest {
     }
 
     /**
-     * Sets up the location mode to the given status.
-     * @param locationEnabled Whether the location mode is on or off.
+     * Sets up the footer preference.
+     *
+     * @param isSystemApp If true, the application is a system app.
+     * @param hasRequiredMetaData If true, the broadcast receiver has a valid value for
+     *                            {@link LocationManager#METADATA_SETTINGS_FOOTER_STRING}
      */
-    private void setUpLocationModeChanged(boolean locationEnabled) {
+    private void setUpFooterPreference(boolean isSystemApp, boolean hasRequiredMetaData) {
         final List<ResolveInfo> testResolveInfos = new ArrayList<>();
-        testResolveInfos.add(
-                getTestResolveInfo(/*isSystemApp*/ true, /*hasRequiredMetadata*/ true));
+        testResolveInfos.add(getTestResolveInfo(isSystemApp, hasRequiredMetaData));
         when(mPackageManager.queryBroadcastReceivers(any(Intent.class), anyInt()))
                 .thenReturn(testResolveInfos);
-        mController.updateState(mFooterPreference);
-        verify(mFooterPreference).setTitle(any());
-        mController.onLocationModeChanged(locationEnabled ? 1 : 0, /* restricted= */ false);
     }
 
     /**
-     * Asserts that the location footer exists and contains the given string.
+     * Sets up the location mode to the given status.
+     *
+     * @param locationEnabled Whether the location mode is on or off.
+     * @param shouldFooterTitleChange Whether the footer title should change.
+     */
+    private void setUpLocationModeChanged(
+            boolean locationEnabled, boolean shouldFooterTitleChange) {
+        assertThat(mController.isAvailable()).isTrue();
+        mController.updateState(mFooterPreference);
+        if (shouldFooterTitleChange) {
+            verify(mFooterPreference).setTitle(any());
+        }
+        mController.onLocationModeChanged(locationEnabled ? 1 : 0, /*restricted*/ false);
+    }
+
+    /**
+     * Asserts that the location footer exists and is equal to the expected string.
      * @param footerStringId The string resource id to assert.
      */
     private void assertLocationFooter(int footerStringId) {

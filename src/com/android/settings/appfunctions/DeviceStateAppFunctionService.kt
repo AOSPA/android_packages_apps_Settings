@@ -23,7 +23,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.ApplicationInfoFlags
 import android.content.res.Configuration
-import android.content.res.Resources
 import android.os.CancellationSignal
 import android.os.OutcomeReceiver
 import android.os.ServiceManager
@@ -35,6 +34,7 @@ import com.android.extensions.appfunctions.ExecuteAppFunctionRequest
 import com.android.extensions.appfunctions.ExecuteAppFunctionResponse
 import com.android.settings.utils.getLocale
 import com.android.settingslib.metadata.PersistentPreference
+import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceHierarchy
 import com.android.settingslib.metadata.PreferenceScreenCoordinate
 import com.android.settingslib.metadata.PreferenceHierarchyGenerator
@@ -108,7 +108,14 @@ class DeviceStateAppFunctionService : AppFunctionService() {
         val perScreenDeviceStatesList: MutableList<PerScreenDeviceStates> = ArrayList()
         coroutineScope {
             val deferredList = screenKeyList.map { screenKey ->
-                async { buildPerScreenDeviceStates(screenKey, requestCategory) }
+                async {
+                    try {
+                        buildPerScreenDeviceStates(screenKey, requestCategory)
+                    } catch (e: Exception) {
+                        Log.e(TAG, "error building $screenKey", e)
+                        null
+                    }
+                }
             }
             deferredList.awaitAll().forEach {
                 if (it != null) {
@@ -140,6 +147,10 @@ class DeviceStateAppFunctionService : AppFunctionService() {
                 applicationContext,
                 PreferenceScreenCoordinate(screenKey, null),
             ) ?: return null
+        if (screenMetaData is PreferenceAvailabilityProvider &&
+            !screenMetaData.isAvailable(applicationContext)) {
+            return null
+        }
         val deviceStateItemList: MutableList<DeviceStateItem> = ArrayList()
         // TODO if child node is PreferenceScreen, recursively process it
         screenMetaData.getPreferenceHierarchy().forEachRecursively {

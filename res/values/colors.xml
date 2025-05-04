@@ -41,7 +41,7 @@
     <color name="message_bubble_outgoing">#C7C8B7</color>
     <color name="message_icon_background_incoming">#E6F451</color>
     <color name="message_icon_background_outgoing">#FBBC04</color>
-    <color name="message_icon_color">#DADADA</color>
+    <color name="message_icon_color">@android:color/black</color>
 
     <color name="usage_graph_dots">#B0BEC5</color>
 
@@ -202,6 +202,13 @@
     <color name="sfps_enrollment_progress_bar_bg_color">#E8EAED</color> <!-- Gray 200 -->
     <color name="sfps_enrollment_progress_bar_fill_color">#1a73e8</color> <!-- Blue 600 -->
     <color name="sfps_enrollment_progress_bar_error_color">#d93025</color> <!-- Red 600 -->
+
+    <!-- Side fingerprint sensor guided enrollment fill colors for expressive style -->
+    <color name="sfps_enrollment_fp_captured_color_expressive">@android:color/system_primary_light</color>
+    <color name="sfps_enrollment_fp_error_color_expressive">@android:color/system_on_error_container_light</color>
+    <color name="sfps_enrollment_progress_bar_bg_color_expressive">@android:color/system_primary_container_light</color>
+    <color name="sfps_enrollment_progress_bar_fill_color_expressive">@android:color/system_primary_light</color>
+    <color name="sfps_enrollment_progress_bar_error_color_expressive">@android:color/system_error_container_light</color>
 
     <!-- Material inverse ripple color, useful for inverted backgrounds. -->
     <color name="ripple_material_inverse">@*android:color/ripple_material_dark</color>

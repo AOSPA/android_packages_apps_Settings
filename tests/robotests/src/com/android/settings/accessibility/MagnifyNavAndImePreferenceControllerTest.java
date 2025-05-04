@@ -40,12 +40,14 @@ import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.server.accessibility.Flags;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowContentResolver;
 
@@ -180,5 +182,29 @@ public class MagnifyNavAndImePreferenceControllerTest {
 
         mController.updateState(mSwitchPreference);
         assertThat(mSwitchPreference.isEnabled()).isTrue();
+    }
+
+    @Test
+    @Config(shadows = SettingsShadowResources.class)
+    public void isChecked_defaultValueOn() {
+        Settings.Secure.clearProviderForTest();
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.bool.config_magnification_magnify_keyboard_default,
+                true);
+
+        mController.updateState(mSwitchPreference);
+        assertThat(mSwitchPreference.isChecked()).isTrue();
+    }
+
+    @Test
+    @Config(shadows = SettingsShadowResources.class)
+    public void isChecked_defaultValueOff() {
+        Settings.Secure.clearProviderForTest();
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.bool.config_magnification_magnify_keyboard_default,
+                false);
+
+        mController.updateState(mSwitchPreference);
+        assertThat(mSwitchPreference.isChecked()).isFalse();
     }
 }

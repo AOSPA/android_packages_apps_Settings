@@ -72,7 +72,6 @@ class SupervisionMainSwitchPreferenceTest {
 
     @Before
     fun setUp() {
-        SupervisionHelper.sInstance = null
         preference.onCreate(mockLifeCycleContext)
     }
 

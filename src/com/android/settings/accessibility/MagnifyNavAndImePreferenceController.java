@@ -33,6 +33,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.accessibility.util.AccessibilityUtils;
 import com.android.server.accessibility.Flags;
 import com.android.settings.R;
 import com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode;
@@ -92,7 +93,9 @@ public class MagnifyNavAndImePreferenceController extends MagnificationTogglePre
     @Override
     public boolean isChecked() {
         return Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MAGNIFY_NAV_AND_IME, OFF) == ON;
+                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MAGNIFY_NAV_AND_IME,
+                AccessibilityUtils.getMagnificationMagnifyKeyboardDefaultValue(mContext)
+        ) == ON;
     }
 
     @Override

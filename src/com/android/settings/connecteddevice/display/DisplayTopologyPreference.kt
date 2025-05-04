@@ -24,10 +24,8 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.PointF
 import android.graphics.RectF
-import android.hardware.display.DisplayManager
 import android.hardware.display.DisplayTopology
 import android.util.DisplayMetrics
-import android.view.DisplayInfo
 import android.view.MotionEvent
 import android.view.ViewTreeObserver
 import android.widget.FrameLayout
@@ -45,13 +43,12 @@ import kotlin.math.abs
  * DisplayTopologyPreference allows the user to change the display topology
  * when there is one or more extended display attached.
  */
-class DisplayTopologyPreference(context : Context)
-        : Preference(context), ViewTreeObserver.OnGlobalLayoutListener, GroupSectionDividerMixin {
+class DisplayTopologyPreference(val injector: ConnectedDisplayInjector)
+        : Preference(injector.context!!), ViewTreeObserver.OnGlobalLayoutListener,
+          GroupSectionDividerMixin {
     @VisibleForTesting lateinit var mPaneContent : FrameLayout
     @VisibleForTesting lateinit var mPaneHolder : FrameLayout
     @VisibleForTesting lateinit var mTopologyHint : TextView
-
-    @VisibleForTesting var injector : Injector
 
     /**
      * How many physical pixels to move in pane coordinates (Pythagorean distance) before a drag is
@@ -84,8 +81,6 @@ class DisplayTopologyPreference(context : Context)
         isPersistent = false
 
         isCopyingEnabled = false
-
-        injector = Injector(context)
     }
 
     override fun onBindViewHolder(holder: PreferenceViewHolder) {
@@ -122,44 +117,6 @@ class DisplayTopologyPreference(context : Context)
         if (mPaneNeedsRefresh) {
             mPaneNeedsRefresh = false
             refreshPane()
-        }
-    }
-
-    open class Injector(val context : Context) {
-        /**
-         * Lazy property for Display Manager, to prevent eagerly getting the service in unit tests.
-         */
-        private val displayManager : DisplayManager by lazy {
-            context.getSystemService(Context.DISPLAY_SERVICE) as DisplayManager
-        }
-
-        open var displayTopology : DisplayTopology?
-            get() = displayManager.displayTopology
-            set(value) { displayManager.displayTopology = value }
-
-        open val wallpaper: Bitmap?
-            get() = WallpaperManager.getInstance(context).bitmap
-
-        /**
-         * This density is the density of the current display (showing the topology pane). It is
-         * necessary to use this density here because the topology pane coordinates are in physical
-         * pixels, and the display coordinates are in density-independent pixels.
-         */
-        open val densityDpi: Int by lazy {
-            val info = DisplayInfo()
-            if (context.display.getDisplayInfo(info)) {
-                info.logicalDensityDpi
-            } else {
-                DisplayMetrics.DENSITY_DEFAULT
-            }
-        }
-
-        open fun registerTopologyListener(listener: Consumer<DisplayTopology>) {
-            displayManager.registerTopologyListener(context.mainExecutor, listener)
-        }
-
-        open fun unregisterTopologyListener(listener: Consumer<DisplayTopology>) {
-            displayManager.unregisterTopologyListener(listener)
         }
     }
 
@@ -311,9 +268,10 @@ class DisplayTopologyPreference(context : Context)
         // We have to use rawX and rawY for the coordinates since the view receiving the event is
         // also the view that is moving. We need coordinates relative to something that isn't
         // moving, and the raw coordinates are relative to the screen.
+        val initialTopLeft = block.positionInPane
         mDrag = BlockDrag(
                 stationaryDisps.toList(), block, displayId, displayPos.width(), displayPos.height(),
-                initialBlockX = block.x, initialBlockY = block.y,
+                initialBlockX = initialTopLeft.x, initialBlockY = initialTopLeft.y,
                 initialTouchX = ev.rawX, initialTouchY = ev.rawY,
                 startTimeMs = ev.eventTime,
         )
@@ -335,7 +293,7 @@ class DisplayTopologyPreference(context : Context)
                 dispDragCoor.x + drag.displayWidth, dispDragCoor.y + drag.displayHeight)
         val snapRect = clampPosition(drag.stationaryDisps.map { it.second }, dispDragRect)
 
-        drag.display.place(topology.scaling.displayToPaneCoor(snapRect.left, snapRect.top))
+        drag.display.positionInPane = topology.scaling.displayToPaneCoor(snapRect.left, snapRect.top)
 
         return true
     }
@@ -346,18 +304,17 @@ class DisplayTopologyPreference(context : Context)
         mPaneContent.requestDisallowInterceptTouchEvent(false)
         drag.display.setHighlighted(false)
 
+        val dropTopLeft = drag.display.positionInPane
         val netPxDragged = Math.hypot(
-                (drag.initialBlockX - drag.display.x).toDouble(),
-                (drag.initialBlockY - drag.display.y).toDouble())
+                (drag.initialBlockX - dropTopLeft.x).toDouble(),
+                (drag.initialBlockY - dropTopLeft.y).toDouble())
         val timeDownMs = ev.eventTime - drag.startTimeMs
         if (netPxDragged < accidentalDragDistancePx && timeDownMs < accidentalDragTimeLimitMs) {
-            drag.display.x = drag.initialBlockX
-            drag.display.y = drag.initialBlockY
+            drag.display.positionInPane = PointF(drag.initialBlockX, drag.initialBlockY)
             return true
         }
 
-        val newCoor = topology.scaling.paneToDisplayCoor(
-                drag.display.x, drag.display.y)
+        val newCoor = topology.scaling.paneToDisplayCoor(dropTopLeft.x, dropTopLeft.y)
         val newTopology = topology.topology.copy()
         val newPositions = drag.stationaryDisps.map { (id, pos) -> id to PointF(pos.left, pos.top) }
                 .plus(drag.displayId to newCoor)

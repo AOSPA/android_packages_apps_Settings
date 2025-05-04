@@ -26,7 +26,9 @@ import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
 import com.android.settingslib.datastore.SettingsSystemStore
+import com.android.settingslib.preference.PreferenceBindingFactory
 import com.android.settingslib.preference.createAndBindWidget
+import com.android.settingslib.widget.MainSwitchPreference
 import com.android.settingslib.widget.SliderPreference
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
@@ -41,6 +43,7 @@ import org.mockito.kotlin.verify
 // LINT.IfChange
 abstract class VibrationIntensitySliderPreferenceTestCase {
     protected abstract val preference: VibrationIntensitySliderPreference
+    protected val mainSwitchPreference = VibrationMainSwitchPreference()
 
     protected val resourcesSpy: Resources =
         spy(ApplicationProvider.getApplicationContext<Context>().resources)
@@ -132,6 +135,20 @@ abstract class VibrationIntensitySliderPreferenceTestCase {
     }
 
     @Test
+    fun state_valueOnAndMainSwitchFalse_disabledAndValueOff() {
+        setMainSwitchValue(false)
+        setSupportedLevels(3)
+        setDefaultIntensity(Vibrator.VIBRATION_INTENSITY_MEDIUM)
+        setValue(Vibrator.VIBRATION_INTENSITY_LOW)
+        val widget = createWidget()
+        val mainSwitchWidget = createMainSwitchWidget()
+
+        assertThat(mainSwitchWidget.isChecked).isFalse()
+        assertThat(widget.isEnabled).isFalse()
+        assertThat(widget.value).isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF)
+    }
+
+    @Test
     fun setValue_supportedValues_storesIntensityValues() {
         setSupportedLevels(3)
         setDefaultIntensity(Vibrator.VIBRATION_INTENSITY_MEDIUM)
@@ -192,6 +209,90 @@ abstract class VibrationIntensitySliderPreferenceTestCase {
         assertThat(getRawStoredValue()).isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH)
     }
 
+    @Test
+    fun mainSwitchClick_withValueOn_updateSliderStateAndRestoreOriginalIntensity() {
+        setMainSwitchValue(true)
+        setSupportedLevels(3)
+        setDefaultIntensity(Vibrator.VIBRATION_INTENSITY_MEDIUM)
+        setValue(Vibrator.VIBRATION_INTENSITY_HIGH)
+        val widget = createWidget()
+        val mainSwitchWidget = createMainSwitchWidget()
+
+        assertThat(mainSwitchWidget.isChecked).isTrue()
+        assertThat(widget.isEnabled).isTrue()
+        assertThat(widget.value).isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH)
+
+        mainSwitchWidget.performClick()
+        updatePreferenceBinding(widget)
+
+        assertThat(mainSwitchWidget.isChecked).isFalse()
+        assertThat(widget.isEnabled).isFalse()
+        assertThat(widget.value).isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF)
+
+        mainSwitchWidget.performClick()
+        updatePreferenceBinding(widget)
+
+        assertThat(mainSwitchWidget.isChecked).isTrue()
+        assertThat(widget.isEnabled).isTrue()
+        assertThat(widget.value).isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH)
+    }
+
+    @Test
+    fun mainSwitchClick_withValueFalse_doesNotChangeCheckedState() {
+        setMainSwitchValue(true)
+        setSupportedLevels(3)
+        setDefaultIntensity(Vibrator.VIBRATION_INTENSITY_MEDIUM)
+        setValue(Vibrator.VIBRATION_INTENSITY_OFF)
+        val widget = createWidget()
+        val mainSwitchWidget = createMainSwitchWidget()
+
+        assertThat(mainSwitchWidget.isChecked).isTrue()
+        assertThat(widget.isEnabled).isTrue()
+        assertThat(widget.value).isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF)
+
+        mainSwitchWidget.performClick()
+        updatePreferenceBinding(widget)
+
+        assertThat(mainSwitchWidget.isChecked).isFalse()
+        assertThat(widget.isEnabled).isFalse()
+        assertThat(widget.value).isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF)
+
+        mainSwitchWidget.performClick()
+        updatePreferenceBinding(widget)
+
+        assertThat(mainSwitchWidget.isChecked).isTrue()
+        assertThat(widget.isEnabled).isTrue()
+        assertThat(widget.value).isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF)
+    }
+
+    @Test
+    fun mainSwitchClick_withIntensitySet_doesNotUpdateStoredValue() {
+        setMainSwitchValue(true)
+        setSupportedLevels(3)
+        setDefaultIntensity(Vibrator.VIBRATION_INTENSITY_MEDIUM)
+        setValue(Vibrator.VIBRATION_INTENSITY_LOW)
+        val widget = createWidget()
+        val mainSwitchWidget = createMainSwitchWidget()
+
+        assertThat(getRawStoredValue()).isEqualTo(Vibrator.VIBRATION_INTENSITY_LOW)
+        assertThat(mainSwitchWidget.isChecked).isTrue()
+        assertThat(widget.value).isEqualTo(Vibrator.VIBRATION_INTENSITY_LOW)
+
+        mainSwitchWidget.performClick()
+        updatePreferenceBinding(widget)
+
+        assertThat(getRawStoredValue()).isEqualTo(Vibrator.VIBRATION_INTENSITY_LOW)
+        assertThat(mainSwitchWidget.isChecked).isFalse()
+        assertThat(widget.value).isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF)
+
+        mainSwitchWidget.performClick()
+        updatePreferenceBinding(widget)
+
+        assertThat(getRawStoredValue()).isEqualTo(Vibrator.VIBRATION_INTENSITY_LOW)
+        assertThat(mainSwitchWidget.isChecked).isTrue()
+        assertThat(widget.value).isEqualTo(Vibrator.VIBRATION_INTENSITY_LOW)
+    }
+
     protected fun setSupportedLevels(levels: Int) {
         resourcesSpy.stub {
             on { getInteger(R.integer.config_vibration_supported_intensity_levels) } doReturn levels
@@ -207,10 +308,20 @@ abstract class VibrationIntensitySliderPreferenceTestCase {
     private fun getRawStoredValue() =
         SettingsSystemStore.get(context).getInt(preference.key)
 
+    private fun setMainSwitchValue(value: Boolean?) =
+        SettingsSystemStore.get(context).setBoolean(mainSwitchPreference.key, value)
+
     private fun setValue(value: Int?) =
         preference.storage(context).setInt(preference.key, value)
 
     private fun createWidget(): SliderPreference =
         preference.createAndBindWidget(context)
+
+    private fun createMainSwitchWidget(): MainSwitchPreference =
+        mainSwitchPreference.createAndBindWidget(context)
+
+    private fun updatePreferenceBinding(widget: SliderPreference) =
+        PreferenceBindingFactory.defaultFactory.getPreferenceBinding(preference)!!
+            .bind(widget, preference)
 }
 // LINT.ThenChange(VibrationTogglePreferenceControllerTest.java)

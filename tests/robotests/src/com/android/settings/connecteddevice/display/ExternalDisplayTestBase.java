@@ -54,7 +54,7 @@ public class ExternalDisplayTestBase {
     static final int OVERLAY_DISPLAY_ID = 2;
 
     @Mock
-    ExternalDisplaySettingsConfiguration.Injector mMockedInjector;
+    ConnectedDisplayInjector mMockedInjector;
     @Mock
     Resources mResources;
     FakeFeatureFlagsImpl mFlags = new FakeFeatureFlagsImpl();
