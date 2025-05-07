@@ -41,4 +41,14 @@ class DesktopExperienceFlags(private val featureFlagsImpl: FeatureFlags) : Featu
 
     override fun displaySizeConnectedDisplaySetting(): Boolean =
         displaySizeConnectedDisplaySettingFlag.isTrue
+
+    private val resolutionAndEnableConnectedDisplaySettingFlag =
+        DesktopExperienceFlag(
+            featureFlagsImpl::resolutionAndEnableConnectedDisplaySetting,
+            /* shouldOverrideByDevOption= */ true,
+            Flags.FLAG_RESOLUTION_AND_ENABLE_CONNECTED_DISPLAY_SETTING,
+        )
+
+    override fun resolutionAndEnableConnectedDisplaySetting(): Boolean =
+        resolutionAndEnableConnectedDisplaySettingFlag.isTrue
 }

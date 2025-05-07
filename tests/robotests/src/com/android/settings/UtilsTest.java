@@ -61,7 +61,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.VectorDrawable;
 import android.hardware.biometrics.BiometricManager;
-import android.hardware.biometrics.Flags;
 import android.hardware.devicestate.DeviceState;
 import android.hardware.devicestate.DeviceStateManager;
 import android.hardware.face.FaceManager;
@@ -655,7 +654,6 @@ public class UtilsTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
     public void testRequestBiometricAuthentication_biometricManagerNull_shouldReturnNotActive() {
         when(mContext.getSystemService(BiometricManager.class)).thenReturn(null);
         assertThat(Utils.requestBiometricAuthenticationForMandatoryBiometrics(mContext,
@@ -664,7 +662,6 @@ public class UtilsTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
     public void testRequestBiometricAuthentication_biometricManagerReturnsSuccess_shouldReturnOk() {
         when(mBiometricManager.canAuthenticate(USER_ID,
                 BiometricManager.Authenticators.IDENTITY_CHECK))
@@ -677,7 +674,6 @@ public class UtilsTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
     public void testRequestBiometricAuthentication_biometricManagerReturnsError_shouldReturnError() {
         when(mBiometricManager.canAuthenticate(anyInt(),
                 eq(BiometricManager.Authenticators.IDENTITY_CHECK)))
@@ -688,7 +684,6 @@ public class UtilsTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
     public void testRequestBiometricAuthentication_biometricManagerReturnsSuccessForDifferentUser_shouldReturnError() {
         when(mContext.getSystemService(UserManager.class)).thenReturn(mMockUserManager);
         when(mMockUserManager.getCredentialOwnerProfile(USER_ID)).thenReturn(USER_ID);
@@ -704,7 +699,6 @@ public class UtilsTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
     public void testLaunchBiometricPrompt_checkIntentValues() {
         when(mFragment.getContext()).thenReturn(mContext);
         when(mContext.getSystemService(UserManager.class)).thenReturn(mMockUserManager);

@@ -276,10 +276,8 @@
     <string name="terms_of_address_masculine" msgid="983106046135098856">"Masculin"</string>
     <string name="terms_of_address_neutral" msgid="5475414185543112478">"Neutre"</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Retirer la langue sélectionnée ?}one{Retirer la langue sélectionnée ?}other{Retirer les langues sélectionnées ?}}"</string>
-    <!-- no translation found for dlg_remove_system_locales_title (7626516786258866543) -->
-    <skip />
-    <!-- no translation found for dlg_remove_locales_message (6636637008013310242) -->
-    <skip />
+    <string name="dlg_remove_system_locales_title" msgid="7626516786258866543">"Sélectionner %s comme langue du système ?"</string>
+    <string name="dlg_remove_locales_message" msgid="6636637008013310242">"<xliff:g id="LANGUAGE">%s</xliff:g> sera supprimé de vos langues préférées"</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Impossible de supprimer toutes les langues"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Conservez au moins une langue prioritaire."</string>
     <string name="locale_not_translated" msgid="3071618135527110152">"Non disponible comme langue du système"</string>
@@ -318,10 +316,13 @@
     <string name="time_format_category_title" msgid="7108616745509689991">"Format de l\'heure"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"Fuseau horaire"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"Définir le fuseau horaire"</string>
+    <!-- no translation found for date_time_search_time_zone (7373967602009974399) -->
+    <skip />
     <string name="date_time_set_date_title" msgid="7624166157167528407">"Date"</string>
     <string name="date_time_search_region" msgid="1364133854952610919">"Rechercher une zone géographique"</string>
     <string name="date_time_select_region" msgid="5449345333305056072">"Zone géographique"</string>
-    <string name="date_time_select_fixed_offset_time_zones" msgid="594848300882055361">"Sélectionner le décalage UTC"</string>
+    <!-- no translation found for date_time_select_fixed_offset_time_zones (2130108030162342594) -->
+    <skip />
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Fuseau horaire : <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
@@ -330,7 +331,8 @@
     <string name="zone_time_type_dst" msgid="9189689342265305808">"Heure d\'été"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Heure standard"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Sélectionner par zone géo."</string>
-    <string name="zone_menu_by_offset" msgid="1257702747474426745">"Sélectionner le décalage UTC"</string>
+    <!-- no translation found for zone_menu_by_offset (543648951618438204) -->
+    <skip />
     <string name="time_feedback_category_title" msgid="5942621686512255208">"Commentaires"</string>
     <string name="keywords_time_feedback_category" msgid="4553921538559830393">"commentaires, bug, heure, zone, fuseau horaire"</string>
     <string name="time_feedback_title" msgid="7720948068042783614">"Envoyer des commentaires sur l\'heure"</string>
@@ -767,7 +769,7 @@
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Sécuriser votre téléphone"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"Ajouter empreinte digitale pour déverrouiller"</string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Verrouillage de l\'écran"</string>
-    <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Choisissez comment déverrouiller l\'écran"</string>
+    <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Méthode de déverrouillage de l\'écran"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Choisir un nouveau type de verrouillage"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Choisir un mode de verrouillage pour les applis pro"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Choisir une autre méthode de déverrouillage du profil pro"</string>
@@ -1176,6 +1178,12 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Autoriser"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Refuser"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"* obligatoire"</string>
+    <!-- no translation found for share_wifi_network (4064997404339571584) -->
+    <skip />
+    <!-- no translation found for share_wifi_network_summary (4316236421149769333) -->
+    <skip />
+    <!-- no translation found for edit_wifi_network_configuration (5712989655083072417) -->
+    <skip />
     <string name="no_internet_access_text" msgid="3611993143350310936">"Ce réseau ne dispose d\'aucun accès à Internet. Rester connecté ?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Connectivité limitée. Des services et applications peuvent ne pas fonctionner. Utiliser quand même ?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Ne plus demander pour ce réseau"</string>
@@ -1462,21 +1470,14 @@
     <string name="doze_title" msgid="1523090408230862316">"Activer l\'écran si notifications"</string>
     <string name="doze_summary" msgid="8252867381522942804">"Quand l\'écran est éteint, il se rallume en cas de nouvelles notifications"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"Toujours afficher heure et infos"</string>
-    <!-- no translation found for doze_always_on_title2 (6806855871175589465) -->
-    <skip />
+    <string name="doze_always_on_title2" msgid="6806855871175589465">"Mode Always-on"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"Batterie davantage sollicitée"</string>
-    <!-- no translation found for doze_always_on_summary_with_wallpaper (7193043498368623388) -->
-    <skip />
-    <!-- no translation found for doze_always_on_summary_without_wallpaper (2461602415293603846) -->
-    <skip />
-    <!-- no translation found for doze_always_on_summary_long (9198713049143867176) -->
-    <skip />
-    <!-- no translation found for doze_always_on_wallpaper_options (6089727555294626960) -->
-    <skip />
-    <!-- no translation found for doze_always_on_wallpaper_title (975186604007325364) -->
-    <skip />
-    <!-- no translation found for doze_always_on_wallpaper_description (7797570713499410605) -->
-    <skip />
+    <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"Afficher le fond d\'écran de l\'écran de verrouillage lorsqu\'il est éteint"</string>
+    <string name="doze_always_on_summary_without_wallpaper" msgid="2461602415293603846">"Masquer le fond d\'écran de l\'écran de verrouillage lorsqu\'il est éteint"</string>
+    <string name="doze_always_on_summary_long" msgid="9198713049143867176">"Le mode Always-on affiche l\'heure, la date et plus encore lorsque l\'écran est éteint"</string>
+    <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"Options du fond d\'écran"</string>
+    <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"Afficher le fond d\'écran de l\'écran de verrouillage"</string>
+    <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"Le fond d\'écran de l\'écran de verrouillage est visible avec le mode Always-on"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"Texte en gras"</string>
     <string name="title_font_size" msgid="570613010306330622">"Taille de la police"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Agrandir ou réduire le texte"</string>
@@ -2124,16 +2125,16 @@
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Pour les raccourcis, appuyer sur une touche à la fois au lieu de maintenir les touches enfoncées"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Touches pour la souris"</string>
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"Utiliser les touches pour la souris"</string>
+    <!-- no translation found for accessibility_mouse_keys_shortcut_title (7621635104533584115) -->
+    <skip />
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Utilisez le clavier pour contrôler le pointeur"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Inverser le défilement"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Faire défiler vers le haut pour déplacer la page vers le bas"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"Défilement"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"Défilement contrôlé"</string>
     <string name="mouse_scrolling_speed" msgid="3999483025392860903">"Vitesse du défilement"</string>
-    <!-- no translation found for mouse_pointer_speed_make_faster_desc (7665912663672314461) -->
-    <skip />
-    <!-- no translation found for mouse_pointer_speed_make_slower_desc (116802579827902188) -->
-    <skip />
+    <string name="mouse_pointer_speed_make_faster_desc" msgid="7665912663672314461">"Accélérer le pointeur"</string>
+    <string name="mouse_pointer_speed_make_slower_desc" msgid="116802579827902188">"Ralentir le pointeur"</string>
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"Inverser le bouton principal de la souris"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Utiliser le bouton gauche de la souris comme bouton droit"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"Accélération du curseur"</string>
@@ -2157,8 +2158,7 @@
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Vitesse du pointeur, gestes"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Taper pour cliquer"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Appuyer/faire glisser pour déplacer"</string>
-    <!-- no translation found for trackpad_tap_dragging_summary (5605534150661601073) -->
-    <skip />
+    <string name="trackpad_tap_dragging_summary" msgid="5605534150661601073">"Déplacez des objets en appuyant deux fois et en faisant glisser votre doigt sur le pavé tactile"</string>
     <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"Gestes au pavé tactile"</string>
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Personnalisez les gestes individuels au pavé tactile"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Inverser le défilement"</string>
@@ -2166,10 +2166,8 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Clic en bas à droite"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Pour plus d\'options, cliquez en bas à droite du pavé tactile"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Vitesse du pointeur"</string>
-    <!-- no translation found for trackpad_pointer_speed_make_faster_desc (2855950278314583596) -->
-    <skip />
-    <!-- no translation found for trackpad_pointer_speed_make_slower_desc (6577850228762978827) -->
-    <skip />
+    <string name="trackpad_pointer_speed_make_faster_desc" msgid="2855950278314583596">"Accélérer le pointeur"</string>
+    <string name="trackpad_pointer_speed_make_slower_desc" msgid="6577850228762978827">"Ralentir le pointeur"</string>
     <string name="three_finger_tap_preference_title" msgid="1836080810837854140">"Appuyer avec trois doigts"</string>
     <string name="touchpad_acceleration_title" msgid="176627555191021888">"Accélération du pavé tactile"</string>
     <string name="touchpad_acceleration_summary" msgid="8057075483967535793">"Les mouvements plus rapides sur le pavé tactile déplaceront le curseur plus loin"</string>
@@ -2189,10 +2187,8 @@
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"clic droit, appuyer"</string>
     <string name="three_finger_tap_middle_click" msgid="7898931632908866867">"Bouton central de la souris"</string>
     <string name="three_finger_tap_launch_gemini" msgid="4030401656711588982">"Lancer l\'Assistant"</string>
-    <!-- no translation found for three_finger_tap_launch_default_assistant (7947939159617292478) -->
-    <skip />
-    <!-- no translation found for three_finger_tap_launch_generic_assistant_name (1893057235983949817) -->
-    <skip />
+    <string name="three_finger_tap_launch_default_assistant" msgid="7947939159617292478">"Lancer <xliff:g id="APP_NAME">%s</xliff:g>"</string>
+    <string name="three_finger_tap_launch_generic_assistant_name" msgid="1893057235983949817">"Assistant"</string>
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Retour à l\'accueil"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"Retour"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"Afficher les applis récentes"</string>
@@ -2226,17 +2222,12 @@
     <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Touches rémanentes, touches filtres, touches pour la souris"</string>
     <string name="keyboard_repeat_keys_title" msgid="6346877755243280735">"Répétition des touches"</string>
     <string name="keyboard_repeat_keys_timeout_title" msgid="3411871149974652293">"Délai avant répétition"</string>
-    <!-- no translation found for keyboard_repeat_keys_increase_delay_desc (9131810864682287872) -->
-    <skip />
-    <!-- no translation found for keyboard_repeat_keys_decrease_delay_desc (6762794746507398346) -->
-    <skip />
-    <!-- no translation found for keyboard_repeat_keys_delay_title (5954595732341624638) -->
-    <skip />
+    <string name="keyboard_repeat_keys_increase_delay_desc" msgid="9131810864682287872">"Augmenter le délai"</string>
+    <string name="keyboard_repeat_keys_decrease_delay_desc" msgid="6762794746507398346">"Réduire le délai"</string>
+    <string name="keyboard_repeat_keys_delay_title" msgid="5954595732341624638">"Fréquence de répétition"</string>
     <string name="keyboard_repeat_keys_summary" msgid="8972905345211768313">"Maintenez une touche enfoncée pour répéter le caractère correspondant jusqu\'à ce que vous la relâchiez"</string>
-    <!-- no translation found for keyboard_repeat_keys_increase_rate_desc (1745229237083808184) -->
-    <skip />
-    <!-- no translation found for keyboard_repeat_keys_decrease_rate_desc (31236959764168589) -->
-    <skip />
+    <string name="keyboard_repeat_keys_increase_rate_desc" msgid="1745229237083808184">"Augmenter la fréquence de répétition"</string>
+    <string name="keyboard_repeat_keys_decrease_rate_desc" msgid="31236959764168589">"Diminuer la fréquence de répétition"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"Mise en page <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Par défaut"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Automatique : <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2364,10 +2355,8 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Déplacer l\'écran quand le pointeur touche les bords"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Agrandir la saisie"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"La loupe suit le texte à mesure que vous tapez"</string>
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_title (7342198645736402048) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_summary (9091733229413835358) -->
-    <skip />
+    <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="7342198645736402048">"Loupe selon la sélection au clavier"</string>
+    <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="9091733229413835358">"Loupe en fonction de la sélection au clavier"</string>
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"Agrandir le clavier"</string>
     <string name="accessibility_screen_magnification_nav_ime_summary" msgid="3054371947104552843">"Le clavier est agrandi avec votre contenu"</string>
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"Indisponible lors de l\'agrandissement d\'une partie de l\'écran uniquement"</string>
@@ -3018,6 +3007,12 @@
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Notifications"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Notifications relatives aux réseaux"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Recevez une notification quand votre appareil se connecte à un réseau non chiffré ou lorsqu\'un réseau enregistre l\'identifiant unique de votre appareil ou de votre carte SIM."</string>
+    <!-- no translation found for cellular_security_2G_network_generation_header (2892850064192939887) -->
+    <skip />
+    <!-- no translation found for cellular_security_2G_network_generation_summary (979187530909112413) -->
+    <skip />
+    <!-- no translation found for cellular_security_2G_network_generation_title (706766676947606951) -->
+    <skip />
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Chiffrement"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Générations de réseaux"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Vous pouvez configurer chaque carte SIM installée afin qu\'elle ne se connecte qu\'aux réseaux compatibles avec la 3G, la 4G et la 5G. La carte SIM ne se connectera pas aux réseaux 2G plus anciens et non sécurisés. Ce paramètre peut limiter votre connectivité si le seul réseau disponible est un réseau 2G. En cas d\'urgence, la 2G peut être utilisée."</string>
@@ -5842,50 +5837,41 @@
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Entourer pour chercher"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Appuyer de manière prolongée sur le bouton d\'accueil ou la barre de navigation permet d\'effectuer une recherche basée sur le contenu de l\'écran."</string>
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Configurez les détails de l\'appareil."</string>
-    <!-- no translation found for supervision_settings_title (8507163323870367711) -->
-    <skip />
+    <string name="supervision_settings_title" msgid="8507163323870367711">"Contrôle parental"</string>
     <string name="supervision_settings_summary" msgid="5020634300370322741">"Restrictions de contenu et autres limites"</string>
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Utiliser la supervision de l\'appareil"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Configurez un code pour commencer"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"supervision, supervision parentale, contrôle parental"</string>
     <string name="supervision_pin_management_preference_title" msgid="961680798581006465">"Gérer le code"</string>
-    <!-- no translation found for supervision_pin_management_preference_summary_add (8061713645550514683) -->
-    <skip />
-    <!-- no translation found for supervision_pin_management_preference_summary_verify_recovery (2156782778845060114) -->
-    <skip />
+    <string name="supervision_pin_management_preference_summary_add" msgid="8061713645550514683">"Ajouter la récupération du code"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="2156782778845060114">"Valider la récupération du code"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Modifier le code"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Code oublié"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Mettre à jour l\'adresse e-mail de récupération"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Supprimer le code"</string>
     <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Tous vos paramètres de supervision seront réinitialisés"</string>
-    <!-- no translation found for supervision_add_pin_recovery_title (5584523084706797399) -->
+    <string name="supervision_add_pin_recovery_title" msgid="5584523084706797399">"Appuyer pour ajouter la récupération"</string>
+    <!-- no translation found for supervision_verify_pin_recovery_title (7953090772633001442) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filtres de contenu Web"</string>
-    <!-- no translation found for supervision_web_content_filters_summary_both_on (8668754911140483798) -->
+    <!-- no translation found for supervision_web_content_filters_browser_title (8737341514264129889) -->
     <skip />
-    <!-- no translation found for supervision_web_content_filters_summary_chrome_on (5999295548020086617) -->
+    <!-- no translation found for supervision_web_content_filters_browser_block_explicit_sites_title (1786398287521485576) -->
     <skip />
-    <!-- no translation found for supervision_web_content_filters_summary_search_on (6866676094401450305) -->
+    <!-- no translation found for supervision_web_content_filters_browser_block_explicit_sites_summary (1427357961145247788) -->
     <skip />
-    <!-- no translation found for supervision_web_content_filters_summary_both_off (6735949158065982622) -->
-    <skip />
-    <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome et Web"</string>
-    <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Essayer de bloquer les sites au contenu explicite"</string>
-    <string name="supervision_web_content_filters_browser_block_explicit_sites_summary" msgid="1477766506765966613">"Aucun filtre n\'est parfait, mais celui-ci devrait contribuer à masquer les sites à caractère sexuel explicite"</string>
     <string name="supervision_web_content_filters_browser_allow_all_sites_title" msgid="3909739592466381845">"Autoriser tous les sites"</string>
-    <string name="supervision_web_content_filters_search_title" msgid="726335318009305564">"Recherche Google"</string>
-    <string name="supervision_web_content_filters_search_filter_on_title" msgid="4855846261141136285">"Filtrage SafeSearch activé"</string>
-    <string name="supervision_web_content_filters_search_filter_on_summary" msgid="1162258144140293269">"Permet de filtrer les images, textes et liens au contenu explicite dans les résultats de recherche sur cet appareil"</string>
-    <string name="supervision_web_content_filters_search_filter_off_title" msgid="6049461395304222346">"Filtrage SafeSearch désactivé"</string>
-    <string name="supervision_web_content_filters_search_filter_off_summary" msgid="3834238970190924433">"Les paramètres de compte peuvent toujours filtrer ou flouter les résultats explicites"</string>
-    <!-- no translation found for supervision_web_content_filters_footer_content (3532535288142541994) -->
+    <!-- no translation found for supervision_web_content_filters_search_title (8608480392956106029) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_search_filter_on_title (1136440775294190806) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_search_filter_on_summary (6797184284369033101) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_search_filter_off_title (7171966260908166395) -->
     <skip />
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Saisir le code de supervision"</string>
-    <!-- no translation found for supervision_lock_setup_title (7581682893583645713) -->
-    <skip />
-    <!-- no translation found for supervision_lock_setup_description (6931450348200992733) -->
-    <skip />
-    <!-- no translation found for supervision_pin_reset_success_toast (4663259412030769718) -->
-    <skip />
+    <string name="supervision_lock_setup_title" msgid="7581682893583645713">"Choisir un moyen de verrouillage pour la supervision"</string>
+    <string name="supervision_lock_setup_description" msgid="6931450348200992733">"Vous pouvez déverrouiller les paramètres de supervision avec ce code"</string>
+    <string name="supervision_pin_reset_success_toast" msgid="4663259412030769718">"Réinitialisation du code du contrôle parental"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animation <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
 </resources>

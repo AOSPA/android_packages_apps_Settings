@@ -18,16 +18,19 @@ package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.connecteddevice.audiosharing.AudioSharingUtils;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 public class AudioStreamConfirmDialogActivity extends SettingsActivity
         implements LocalBluetoothProfileManager.ServiceListener {
@@ -47,6 +50,15 @@ public class AudioStreamConfirmDialogActivity extends SettingsActivity
         mProfileManager =
                 localBluetoothManager == null ? null : localBluetoothManager.getProfileManager();
         super.onCreate(savedState);
+    }
+
+    @Override
+    public Resources.Theme getTheme() {
+        var theme = super.getTheme();
+        theme.applyStyle(
+                SettingsThemeHelper.isExpressiveTheme(this)
+                        ? R.style.Transparent_Expressive : R.style.Transparent, true);
+        return theme;
     }
 
     @Override

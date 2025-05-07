@@ -26,6 +26,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.doThrow
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 
@@ -58,6 +59,15 @@ class ImeiPreferenceTest {
             on { getImei(1) } doReturn IMEI_2
         }
         preference = ImeiPreference(context, 0, 1)
+    }
+
+    @Test
+    fun init_getPrimaryImeiThrowException_doNotCrash() {
+        mockTelephonyManager.stub {
+            on { primaryImei } doThrow(IllegalStateException())
+        }
+
+        preference = ImeiPreference(context, 0, 2)
     }
 
     @Test

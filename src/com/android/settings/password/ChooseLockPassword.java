@@ -25,6 +25,7 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.REENTER_W
 import static android.app.admin.DevicePolicyResources.Strings.Settings.SET_WORK_PROFILE_PASSWORD_HEADER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.SET_WORK_PROFILE_PIN_HEADER;
 import static android.app.admin.DevicePolicyResources.UNDEFINED;
+import static android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING;
 import static android.view.View.ACCESSIBILITY_LIVE_REGION_ASSERTIVE;
 import static android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE;
 
@@ -74,6 +75,7 @@ import android.view.WindowManager;
 import android.view.accessibility.AccessibilityManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImeAwareEditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -96,8 +98,11 @@ import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.notification.RedactionInterstitial;
+import com.android.settings.widget.ImeAwareTextInputEditText;
 import com.android.settingslib.utils.StringUtil;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
@@ -119,6 +124,8 @@ public class ChooseLockPassword extends SettingsActivity {
     public Intent getIntent() {
         Intent modIntent = new Intent(super.getIntent());
         modIntent.putExtra(EXTRA_SHOW_FRAGMENT, getFragmentClass().getName());
+        modIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_USE_EXPRESSIVE_STYLE,
+                SettingsThemeHelper.isExpressiveDesignEnabled());
         return modIntent;
     }
 
@@ -129,6 +136,8 @@ public class ChooseLockPassword extends SettingsActivity {
         public IntentBuilder(Context context) {
             mIntent = new Intent(context, ChooseLockPassword.class);
             mIntent.putExtra(ChooseLockGeneric.CONFIRM_CREDENTIALS, false);
+            mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_USE_EXPRESSIVE_STYLE,
+                    SettingsThemeHelper.isExpressiveDesignEnabled());
         }
 
         /**
@@ -244,7 +253,8 @@ public class ChooseLockPassword extends SettingsActivity {
         private LockscreenCredential mChosenPassword;
         private boolean mRequestGatekeeperPassword;
         private boolean mRequestWriteRepairModePassword;
-        private ImeAwareEditText mPasswordEntry;
+
+        private EditText mPasswordEntry;
         private TextViewInputDisabler mPasswordEntryInputDisabler;
 
         // Minimum password metrics enforced by admins.
@@ -281,12 +291,14 @@ public class ChooseLockPassword extends SettingsActivity {
         private static final int CONFIRM_EXISTING_REQUEST = 58;
         static final int RESULT_FINISHED = RESULT_FIRST_USER;
         private boolean mIsErrorTooShort = true;
+        private boolean mIsExpressiveStyle = false;
 
         /** Used to store the profile type for which pin/password is being set */
         protected enum ProfileType {
             None,
             Managed,
             Private,
+            Supervising,
             Other
         };
         protected ProfileType mProfileType;
@@ -311,6 +323,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     R.string.lockpassword_choose_your_pin_header_for_face,
                     R.string.lockpassword_choose_your_pin_header_for_biometrics,
                     R.string.private_space_choose_your_pin_header, // private space pin
+                    R.string.supervision_choose_your_pin_header, // supervision pin
                     R.string.lock_settings_picker_biometrics_added_security_message,
                     R.string.lock_settings_picker_biometrics_added_security_message,
                     R.string.next_label),
@@ -330,6 +343,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     R.string.lockpassword_confirm_your_pin_header,
                     R.string.lockpassword_confirm_your_pin_header,
                     R.string.lockpassword_confirm_your_pin_header,
+                    R.string.supervision_confirm_your_pin_header,
                     0,
                     0,
                     R.string.lockpassword_confirm_label),
@@ -344,6 +358,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     R.string.lockpassword_confirm_passwords_dont_match,
                     R.string.lockpassword_confirm_pins_dont_match,
                     UNDEFINED,
+                    R.string.lockpassword_confirm_pins_dont_match,
                     R.string.lockpassword_confirm_pins_dont_match,
                     R.string.lockpassword_confirm_pins_dont_match,
                     R.string.lockpassword_confirm_pins_dont_match,
@@ -367,6 +382,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     int hintInNumericForFace,
                     int hintInNumericForBiometrics,
                     int hintInNumericForPrivateProfile,
+                    int hintInNumericForSupervisingProfile,
                     int messageInAlphaForBiometrics,
                     int messageInNumericForBiometrics,
                     int nextButtonText) {
@@ -386,6 +402,7 @@ public class ChooseLockPassword extends SettingsActivity {
                 this.numericHintForFace = hintInNumericForFace;
                 this.numericHintForBiometrics = hintInNumericForBiometrics;
                 this.numericHintForPrivateProfile = hintInNumericForPrivateProfile;
+                this.numericHintForSupervisingProfile = hintInNumericForSupervisingProfile;
 
                 this.alphaMessageForBiometrics = messageInAlphaForBiometrics;
                 this.numericMessageForBiometrics = messageInNumericForBiometrics;
@@ -410,6 +427,7 @@ public class ChooseLockPassword extends SettingsActivity {
             // PIN header
             public final int numericHint;
             public final int numericHintForPrivateProfile;
+            public final int numericHintForSupervisingProfile;
             public final String numericHintOverrideForProfile;
             public final int numericHintForManagedProfile;
             public final int numericHintForFingerprint;
@@ -448,6 +466,9 @@ public class ChooseLockPassword extends SettingsActivity {
                             && android.multiuser.Flags.enablePrivateSpaceFeatures()
                             && profile.equals(ProfileType.Private)) {
                         return context.getString(numericHintForPrivateProfile);
+                    } else if (android.multiuser.Flags.allowSupervisingProfile()
+                            && profile.equals(ProfileType.Supervising)) {
+                        return context.getString(numericHintForSupervisingProfile);
                     } else if (type == TYPE_FINGERPRINT) {
                         return context.getString(numericHintForFingerprint);
                     } else if (type == TYPE_FACE) {
@@ -499,6 +520,8 @@ public class ChooseLockPassword extends SettingsActivity {
             mForFace = intent.getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, false);
             mForBiometrics = intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, false);
+            mIsExpressiveStyle = intent.getBooleanExtra(
+                    ChooseLockSettingsHelper.EXTRA_KEY_USE_EXPRESSIVE_STYLE, false);
 
             mPasswordType = intent.getIntExtra(
                     LockPatternUtils.PASSWORD_TYPE_KEY, PASSWORD_QUALITY_NUMERIC);
@@ -515,7 +538,9 @@ public class ChooseLockPassword extends SettingsActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.choose_lock_password, container, false);
+            return mIsExpressiveStyle
+                    ? inflater.inflate(R.layout.choose_lock_password_expressive, container, false)
+                    : inflater.inflate(R.layout.choose_lock_password, container, false);
         }
 
         @Override
@@ -563,6 +588,15 @@ public class ChooseLockPassword extends SettingsActivity {
 
             mPasswordRestrictionView.setLayoutManager(new LinearLayoutManager(getActivity()));
             mPasswordRestrictionView.setAccessibilityLiveRegion(ACCESSIBILITY_LIVE_REGION_POLITE);
+            final TextInputLayout passwordEntryLayout = view.findViewById(
+                    R.id.password_entry_layout);
+            if (mIsExpressiveStyle && passwordEntryLayout != null) {
+                final int textEntryLayoutHintId = mIsAlphaMode
+                        ? R.string.unlock_set_unlock_mode_password
+                        : R.string.unlock_set_unlock_mode_pin;
+                passwordEntryLayout.setHint(textEntryLayoutHintId);
+                passwordEntryLayout.setHintEnabled(true);
+            }
             mPasswordEntry = view.findViewById(R.id.password_entry);
             mPasswordEntry.setOnEditorActionListener(this);
             mPasswordEntry.addTextChangedListener(this);
@@ -720,7 +754,15 @@ public class ChooseLockPassword extends SettingsActivity {
                 mSaveAndFinishWorker.setListener(this);
             } else {
                 mPasswordEntry.requestFocus();
-                mPasswordEntry.scheduleShowSoftInput();
+                if (mPasswordEntry instanceof ImeAwareEditText) {
+                    ((ImeAwareEditText) mPasswordEntry).scheduleShowSoftInput();
+                } else if (mPasswordEntry instanceof ImeAwareTextInputEditText) {
+                    ((ImeAwareTextInputEditText) mPasswordEntry).scheduleShowSoftInput();
+                } else {
+                    Log.w(TAG,
+                            "mPasswordEntry neither ImeAwareEditText nor "
+                                    + "ImeAwareTextInputEditText");
+                }
             }
         }
 
@@ -761,7 +803,13 @@ public class ChooseLockPassword extends SettingsActivity {
             }
         }
 
+        @Nullable
         protected Intent getRedactionInterstitialIntent(Context context) {
+            // The supervising profile does not have its own lock screen, and thus can skip the
+            // redaction interstitial.
+            if (isSupervisingProfile()) {
+                return null;
+            }
             return RedactionInterstitial.createStartIntent(context, mUserId);
         }
 
@@ -1023,7 +1071,10 @@ public class ChooseLockPassword extends SettingsActivity {
                     || mAutoPinConfirmOption == null) {
                 return;
             }
-            if (enabled && !mIsAlphaMode && isAutoPinConfirmPossible(length)) {
+            if (enabled
+                    && !mIsAlphaMode
+                    && isAutoPinConfirmPossible(length)
+                    && !isSupervisingProfile()) {
                 mAutoPinConfirmOption.setVisibility(View.VISIBLE);
                 mAutoConfirmSecurityMessage.setVisibility(View.VISIBLE);
                 if (!mIsAutoPinConfirmOptionSetManually) {
@@ -1184,10 +1235,18 @@ public class ChooseLockPassword extends SettingsActivity {
                     && android.multiuser.Flags.enablePrivateSpaceFeatures()
                     && userManager.isPrivateProfile()) {
                 return ProfileType.Private;
+            } else if (android.multiuser.Flags.allowSupervisingProfile()
+                    && userManager.isUserOfType(USER_TYPE_PROFILE_SUPERVISING)) {
+                return ProfileType.Supervising;
             } else if (userManager.isProfile()) {
                 return ProfileType.Other;
             }
             return ProfileType.None;
+        }
+
+        private boolean isSupervisingProfile() {
+            return android.multiuser.Flags.allowSupervisingProfile()
+                    && mProfileType.equals(ProfileType.Supervising);
         }
     }
 }

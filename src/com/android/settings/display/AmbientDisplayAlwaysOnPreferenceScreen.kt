@@ -36,6 +36,8 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceLifecycleContext
+import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ReadWritePermit
@@ -58,6 +60,7 @@ class AmbientDisplayAlwaysOnPreferenceScreen :
     PrimarySwitchPreferenceBinding,
     PreferenceAvailabilityProvider,
     PreferenceRestrictionMixin,
+    PreferenceLifecycleProvider,
     PreferenceSummaryProvider {
 
     private val ambientWallpaperPreference = AmbientWallpaperPreference()
@@ -103,6 +106,10 @@ class AmbientDisplayAlwaysOnPreferenceScreen :
                 R.string.doze_always_on_summary
             }
         )
+
+    override fun onStart(context: PreferenceLifecycleContext) {
+        context.notifyPreferenceChange(KEY)
+    }
 
     override fun fragmentClass() = AmbientPreferenceFragment::class.java
 

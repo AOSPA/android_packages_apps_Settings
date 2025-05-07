@@ -92,6 +92,9 @@ android_robolectric_test {
         "resources",
     ],
 
+    // Required for TestParameterInjector
+    javacflags: ["-parameters"],
+
     instrumentation_for: "SettingsRoboTestStub",
 
     test_options: {

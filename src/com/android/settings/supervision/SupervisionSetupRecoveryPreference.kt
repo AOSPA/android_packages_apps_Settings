@@ -100,7 +100,6 @@ class SupervisionSetupRecoveryPreference :
                 notifyPreferenceChange(KEY)
                 notifyPreferenceChange(SupervisionPinRecoveryPreference.KEY)
                 notifyPreferenceChange(SupervisionUpdateRecoveryEmailPreference.KEY)
-                notifyPreferenceChange(SupervisionPinManagementScreen.KEY)
             }
         }
     }

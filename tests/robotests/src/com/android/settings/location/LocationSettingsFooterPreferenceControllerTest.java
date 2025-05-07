@@ -36,12 +36,14 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.text.Html;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.FooterPreference;
 
@@ -53,11 +55,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {SettingsShadowResources.class})
 public class LocationSettingsFooterPreferenceControllerTest {
 
     private static final int TEST_RES_ID = 1234;
@@ -75,6 +79,8 @@ public class LocationSettingsFooterPreferenceControllerTest {
     @Mock
     private PackageManager mPackageManager;
     @Mock
+    private TelephonyManager mTelephonyManager;
+    @Mock
     private Resources mResources;
 
     @Before
@@ -82,6 +88,12 @@ public class LocationSettingsFooterPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
+
+        // Telephony features are enabled by default.
+        mockTelephonyService();
+        when(mTelephonyManager.isDeviceSmsCapable()).thenReturn(true);
+        when(mTelephonyManager.isDeviceVoiceCapable()).thenReturn(true);
+        setConfigShowSimInfo(true);
 
         LifecycleOwner lifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(lifecycleOwner);
@@ -133,9 +145,29 @@ public class LocationSettingsFooterPreferenceControllerTest {
     }
 
     @Test
-    public void onLocationModeChanged_off_withTelephonyMessagingOn_setTitle() {
-        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_TELEPHONY_MESSAGING))
-                .thenReturn(true);
+    public void onLocationModeChanged_off_telephonyEnabled_setTitle() {
+        // Calling and SMS messaging capabilities are enabled by default in test setup.
+        setUpFooterPreference(/*isSystemApp*/ true, /*hasRequiredMetaData*/ true);
+        setUpLocationModeChanged(/*locationEnabled*/ false, /*shouldFooterTitleChange*/ true);
+        assertLocationFooter(R.string.location_settings_footer_location_off_with_telephony);
+    }
+
+    /**
+     * Test that the correct footer string shows when location is off and telephony is disabled by
+     * the config boolean.
+     */
+    @Test
+    public void onLocationModeChanged_off_telephonyDisabled_setTitle() {
+        setConfigShowSimInfo(false);
+
+        setUpFooterPreference(/*isSystemApp*/ true, /*hasRequiredMetaData*/ true);
+        setUpLocationModeChanged(/*locationEnabled*/ false, /*shouldFooterTitleChange*/ true);
+        assertLocationFooter(R.string.location_settings_footer_location_off_no_telephony);
+    }
+
+    @Test
+    public void onLocationModeChanged_off_noSmsMessaging_setTitle() {
+        when(mTelephonyManager.isDeviceSmsCapable()).thenReturn(false);
 
         setUpFooterPreference(/*isSystemApp*/ true, /*hasRequiredMetaData*/ true);
         setUpLocationModeChanged(/*locationEnabled*/ false, /*shouldFooterTitleChange*/ true);
@@ -143,9 +175,8 @@ public class LocationSettingsFooterPreferenceControllerTest {
     }
 
     @Test
-    public void onLocationModeChanged_off_withTelephonyCallingOn_setTitle() {
-        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_TELEPHONY_CALLING))
-                .thenReturn(true);
+    public void onLocationModeChanged_off_noCalling_setTitle() {
+        when(mTelephonyManager.isDeviceVoiceCapable()).thenReturn(false);
 
         setUpFooterPreference(/*isSystemApp*/ true, /*hasRequiredMetaData*/ true);
         setUpLocationModeChanged(/*locationEnabled*/ false, /*shouldFooterTitleChange*/ true);
@@ -153,9 +184,9 @@ public class LocationSettingsFooterPreferenceControllerTest {
     }
 
     @Test
-    public void onLocationModeChanged_off_noTelephony_setTitle() {
-        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_TELEPHONY))
-                .thenReturn(false);
+    public void onLocationModeChanged_off_noCallingOrMessaging_setTitle() {
+        when(mTelephonyManager.isDeviceSmsCapable()).thenReturn(false);
+        when(mTelephonyManager.isDeviceVoiceCapable()).thenReturn(false);
 
         setUpFooterPreference(/*isSystemApp*/ true, /*hasRequiredMetaData*/ true);
         setUpLocationModeChanged(/*locationEnabled*/ false, /*shouldFooterTitleChange*/ true);
@@ -265,5 +296,15 @@ public class LocationSettingsFooterPreferenceControllerTest {
                         Html.fromHtml(mContext.getString(footerStringId)).toString()
                                 + "\n\n"
                                 + mContext.getString(R.string.location_settings_footer_general));
+    }
+
+    private void mockTelephonyService() {
+        when(mContext.getSystemServiceName(TelephonyManager.class))
+                .thenReturn(Context.TELEPHONY_SERVICE);
+        when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
+    }
+
+    private void setConfigShowSimInfo(boolean enabled) {
+        SettingsShadowResources.overrideResource(R.bool.config_show_sim_info, enabled);
     }
 }

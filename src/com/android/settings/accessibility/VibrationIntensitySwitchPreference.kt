@@ -20,6 +20,7 @@ import android.os.VibrationAttributes.Usage
 import androidx.annotation.CallSuper
 import androidx.annotation.StringRes
 import androidx.preference.Preference
+import androidx.preference.TwoStatePreference
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.SwitchPreference
@@ -39,25 +40,37 @@ import com.android.settingslib.preference.SwitchPreferenceBinding
  */
 // LINT.IfChange
 open class VibrationIntensitySwitchPreference(
+    context: Context,
     key: String,
     @Usage val vibrationUsage: Int,
     @StringRes title: Int = 0,
     @StringRes summary: Int = 0,
-) : SwitchPreference(key, title, summary),
-    SwitchPreferenceBinding {
+) :
+    SwitchPreference(key, title, summary),
+    SwitchPreferenceBinding,
+    Preference.OnPreferenceChangeListener {
 
-    private var storage: VibrationIntensitySettingsStore? = null
+    private val storage by lazy { VibrationIntensitySettingsStore(context, vibrationUsage) }
 
-    override fun storage(context: Context): KeyValueStore {
-        if (storage == null) {
-            storage = VibrationIntensitySettingsStore(context, vibrationUsage)
-        }
-        return storage!!
-    }
-
+    override fun storage(context: Context): KeyValueStore =storage
     override fun dependencies(context: Context) = arrayOf(VibrationMainSwitchPreference.KEY)
 
     @CallSuper
-    override fun isEnabled(context: Context) = storage?.isPreferenceEnabled() ?: true
+    override fun bind(preference: Preference, metadata: PreferenceMetadata) {
+        super.bind(preference, metadata)
+        preference.onPreferenceChangeListener = this
+    }
+
+    override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {
+        val isChecked = newValue as Boolean
+        // must make new value effective before preview
+        (preference as TwoStatePreference).setChecked(isChecked)
+        if (isChecked) {
+            preference.context.playVibrationSettingsPreview(vibrationUsage)
+        }
+        return false // value has been updated
+    }
+
+    @CallSuper override fun isEnabled(context: Context) = storage.isPreferenceEnabled()
 }
 // LINT.ThenChange(VibrationTogglePreferenceController.java)

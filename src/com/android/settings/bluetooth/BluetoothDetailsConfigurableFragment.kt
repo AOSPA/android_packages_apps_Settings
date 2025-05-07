@@ -42,7 +42,6 @@ import androidx.preference.PreferenceGroup
 import androidx.preference.PreferenceViewHolder
 import androidx.preference.SwitchPreferenceCompat
 import androidx.preference.TwoStatePreference
-import com.android.settings.flags.Flags
 import com.android.settings.R
 import com.android.settings.bluetooth.ui.composable.MultiTogglePreference
 import com.android.settings.bluetooth.ui.model.DeviceSettingPreferenceModel
@@ -51,6 +50,7 @@ import com.android.settings.bluetooth.ui.view.DeviceDetailsMoreSettingsFragment
 import com.android.settings.bluetooth.ui.viewmodel.BluetoothDeviceDetailsViewModel
 import com.android.settings.core.SubSettingLauncher
 import com.android.settings.dashboard.RestrictedDashboardFragment
+import com.android.settings.flags.Flags
 import com.android.settings.overlay.FeatureFactory
 import com.android.settings.spa.preference.ComposePreference
 import com.android.settingslib.PrimarySwitchPreference
@@ -63,15 +63,21 @@ import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSetti
 import com.android.settingslib.spa.widget.ui.LinearLoadingBar
 import com.android.settingslib.widget.CardPreference
 import com.android.settingslib.widget.FooterPreference
+import com.android.settingslib.widget.SegmentedButtonPreference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.dropWhile
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.withIndex
 import kotlinx.coroutines.launch
 
 /** Base class for bluetooth settings which makes the preference visibility/order configurable. */
-abstract class BluetoothDetailsConfigurableFragment : RestrictedDashboardFragment(UserManager.DISALLOW_CONFIG_BLUETOOTH) {
+abstract class BluetoothDetailsConfigurableFragment :
+    RestrictedDashboardFragment(UserManager.DISALLOW_CONFIG_BLUETOOTH) {
     protected lateinit var localBluetoothManager: LocalBluetoothManager
     protected lateinit var deviceAddress: String
     protected lateinit var cachedDevice: CachedBluetoothDevice
@@ -84,52 +90,58 @@ abstract class BluetoothDetailsConfigurableFragment : RestrictedDashboardFragmen
     private lateinit var viewModel: BluetoothDeviceDetailsViewModel
 
     private val invisiblePrefCategory: PreferenceGroup by lazy {
-        preferenceScreen.findPreference<PreferenceGroup>(INVISIBLE_CATEGORY) ?: run {
-            PreferenceCategory(requireContext()).apply {
-                key = INVISIBLE_CATEGORY
-                isVisible = false
-                isOrderingAsAdded = true
-            }.also {
-                preferenceScreen.addPreference(it)
-                it.addPreference(ComposePreference(requireContext()).apply {
-                    key = LOADING_PREF
-                    setContent {
-                        LinearLoadingBar(isLoading = true)
+        preferenceScreen.findPreference<PreferenceGroup>(INVISIBLE_CATEGORY)
+            ?: run {
+                PreferenceCategory(requireContext())
+                    .apply {
+                        key = INVISIBLE_CATEGORY
+                        isVisible = false
+                        isOrderingAsAdded = true
                     }
-                })
+                    .also {
+                        preferenceScreen.addPreference(it)
+                        it.addPreference(
+                            ComposePreference(requireContext()).apply {
+                                key = LOADING_PREF
+                                setContent { LinearLoadingBar(isLoading = true) }
+                            }
+                        )
+                    }
             }
-        }
     }
 
     override fun onAttach(context: Context) {
         localBluetoothManager = Utils.getLocalBtManager(context)
         deviceAddress =
-            arguments?.getString(KEY_DEVICE_ADDRESS) ?: run {
-                Log.w(TAG, "onAttach() address is null!")
-                finish()
-                return
-            }
-        cachedDevice = getCachedDevice(deviceAddress) ?: run {
-            Log.w(TAG, "onAttach() CachedDevice is null!")
-            finish()
-            return
-        }
+            arguments?.getString(KEY_DEVICE_ADDRESS)
+                ?: run {
+                    Log.w(TAG, "onAttach() address is null!")
+                    finish()
+                    return
+                }
+        cachedDevice =
+            getCachedDevice(deviceAddress)
+                ?: run {
+                    Log.w(TAG, "onAttach() CachedDevice is null!")
+                    finish()
+                    return
+                }
         super.onAttach(context)
-        viewModel = ViewModelProvider(
-            this,
-            BluetoothDeviceDetailsViewModel.Factory(
-                requireActivity().application,
-                cachedDevice,
-                Dispatchers.IO,
-            ),
-        ).get(BluetoothDeviceDetailsViewModel::class.java)
+        viewModel =
+            ViewModelProvider(
+                    this,
+                    BluetoothDeviceDetailsViewModel.Factory(
+                        requireActivity().application,
+                        cachedDevice,
+                        Dispatchers.IO,
+                    ),
+                )
+                .get(BluetoothDeviceDetailsViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        originalDisplayOrder = preferenceScreen.getAllChildren().map {
-            it.key
-        }
+        originalDisplayOrder = preferenceScreen.getAllChildren().map { it.key }
         updatePreferenceOrder()
     }
 
@@ -146,14 +158,17 @@ abstract class BluetoothDetailsConfigurableFragment : RestrictedDashboardFragmen
     }
 
     private suspend fun updateLayoutInternal(fragmentType: FragmentTypeModel) {
-        val items = viewModel.getItems(fragmentType) ?: run {
-            displayOrder = originalDisplayOrder
-            updatePreferenceOrder()
-            return
-        }
+        val items =
+            viewModel.getItems(fragmentType)
+                ?: run {
+                    displayOrder = originalDisplayOrder
+                    updatePreferenceOrder()
+                    return
+                }
 
         val prefKeyToSettingId =
-            items.filterIsInstance<DeviceSettingConfigItemModel.BuiltinItem>()
+            items
+                .filterIsInstance<DeviceSettingConfigItemModel.BuiltinItem>()
                 .associateBy({ it.preferenceKey }, { it.settingId })
 
         val settingIdToPreferences: MutableMap<Int, Preference> = HashMap()
@@ -170,52 +185,63 @@ abstract class BluetoothDetailsConfigurableFragment : RestrictedDashboardFragmen
             val settingId = settingItem.settingId
 
             val existingPrefKey = settingIdToPreferences[settingId]?.key
-            configDisplayOrder.add(
-                existingPrefKey ?: getPreferenceKey(
-                    settingId
-                )
-            )
+            configDisplayOrder.add(existingPrefKey ?: getPreferenceKey(settingId))
             if (existingPrefKey != null) {
                 continue
             }
 
             val prefKey = getPreferenceKey(settingId)
-
-            viewModel.getDeviceSetting(cachedDevice, settingId)
+            val deviceSetting =
+                viewModel.getDeviceSetting(cachedDevice, settingId).dropWhile { it == null }
+            deviceSetting
                 .onEach { logItemShown(prefKey, it != null) }
                 .launchIn(lifecycleScope)
                 .also { uiJobs.add(it) }
-            if (settingId == DeviceSettingId.DEVICE_SETTING_ID_ANC) {
-                // TODO(b/399316980): replace it with SegmentedButtonPreference once it's ready.
-                val pref = ComposePreference(requireContext()).apply {
-                    key = prefKey
-                    order = row
-                }.also { pref ->
-                    pref.setContent {
-                        buildComposePreference(cachedDevice, settingId, prefKey)
-                    }
-                }
+            if (
+                settingId == DeviceSettingId.DEVICE_SETTING_ID_ANC &&
+                    !Flags.enableBluetoothSettingsExpressiveDesign()
+            ) {
+                val pref =
+                    ComposePreference(requireContext())
+                        .apply {
+                            key = prefKey
+                            order = row
+                        }
+                        .also { pref ->
+                            pref.setContent {
+                                buildComposePreference(cachedDevice, settingId, prefKey)
+                            }
+                        }
                 preferenceScreen.addPreference(pref)
             } else {
-                viewModel.getDeviceSetting(cachedDevice, settingId).onEach {
-                    val existedPref = preferenceScreen.findPreference<Preference>(
-                        prefKey
-                    )
-                    val item = it ?: run {
-                        existedPref?.let {
-                            preferenceScreen.removePreference(
-                                existedPref
-                            )
+                deviceSetting
+                    .withIndex()
+                    .debounce {
+                        // Debounce here otherwise ANC toggle may flicker after user clicks.
+                        if (
+                            it.index > 0 &&
+                                it.value is DeviceSettingPreferenceModel.MultiTogglePreference
+                        ) {
+                            200
+                        } else {
+                            0
                         }
-                        return@onEach
                     }
-                    buildPreference(
-                        existedPref, item, prefKey, settingItem.highlighted
-                    )?.apply {
-                        key = prefKey
-                        order = row
-                    }?.also { preferenceScreen.addPreference(it) }
-                }.launchIn(lifecycleScope).also { uiJobs.add(it) }
+                    .map { it.value }
+                    .onEach {
+                        val existedPref = preferenceScreen.findPreference<Preference>(prefKey)
+                        val item =
+                            it
+                                ?: run {
+                                    existedPref?.let {
+                                        preferenceScreen.removePreference(existedPref)
+                                    }
+                                    return@onEach
+                                }
+                        addPreference(existedPref, row, item, prefKey, settingItem.highlighted)
+                    }
+                    .launchIn(lifecycleScope)
+                    .also { uiJobs.add(it) }
             }
         }
 
@@ -225,7 +251,10 @@ abstract class BluetoothDetailsConfigurableFragment : RestrictedDashboardFragmen
             settingIdToPreferences[settingId]?.let { pref ->
                 if (settingId == DeviceSettingId.DEVICE_SETTING_ID_BLUETOOTH_PROFILES) {
                     use(BluetoothDetailsProfilesController::class.java)?.run {
-                        if (settingItem is DeviceSettingConfigItemModel.BuiltinItem.BluetoothProfilesItem) {
+                        if (
+                            settingItem
+                                is DeviceSettingConfigItemModel.BuiltinItem.BluetoothProfilesItem
+                        ) {
                             setInvisibleProfiles(settingItem.invisibleProfiles)
                         }
                     }
@@ -237,150 +266,246 @@ abstract class BluetoothDetailsConfigurableFragment : RestrictedDashboardFragmen
         updatePreferenceOrder()
     }
 
-    private fun buildPreference(
+    private fun addPreference(
         existedPref: Preference?,
+        prefOrder: Int,
         model: DeviceSettingPreferenceModel,
         prefKey: String,
         highlighted: Boolean,
-    ): Preference? = when (model) {
-        is DeviceSettingPreferenceModel.PlainPreference -> {
-            val pref = existedPref ?: run {
-                if (highlighted) {
-                    if (Flags.enableBluetoothSettingsExpressiveDesign()) {
-                        CardPreference(requireContext())
-                    } else {
-                        SpotlightPreference(requireContext())
-                    }
-                } else {
-                    Preference(requireContext())
-                }
-            }
-            pref.apply {
-                title = model.title
-                summary = model.summary
-                icon = getDrawable(model.icon)
-                onPreferenceClickListener = Preference.OnPreferenceClickListener {
-                    logItemClick(prefKey, EVENT_CLICK_PRIMARY)
-                    model.action?.let { triggerAction(it) }
-                    true
-                }
-            }
-        }
-
-        is DeviceSettingPreferenceModel.SwitchPreference -> if (model.action == null) {
-            val pref =
-                existedPref as? SwitchPreferenceCompat ?: SwitchPreferenceCompat(requireContext())
-            pref.apply {
-                title = model.title
-                summary = model.summary
-                icon = getDrawable(model.icon)
-                isChecked = model.checked
-                isEnabled = !model.disabled
-                onPreferenceChangeListener = object : Preference.OnPreferenceChangeListener {
-                    override fun onPreferenceChange(
-                        p: Preference,
-                        value: Any?,
-                    ): Boolean {
-                        (p as? TwoStatePreference)?.let { newState ->
-                            val newState = value as? Boolean ?: return false
-                            logItemClick(
-                                prefKey,
-                                if (newState) EVENT_SWITCH_ON else EVENT_SWITCH_OFF,
-                            )
-                            model.onCheckedChange.invoke(newState)
+    ) =
+        when (model) {
+            is DeviceSettingPreferenceModel.PlainPreference -> {
+                val pref =
+                    existedPref
+                        ?: run {
+                            if (highlighted) {
+                                if (Flags.enableBluetoothSettingsExpressiveDesign()) {
+                                    CardPreference(requireContext())
+                                } else {
+                                    SpotlightPreference(requireContext())
+                                }
+                            } else {
+                                Preference(requireContext())
+                            }
                         }
-                        return false
-                    }
+                pref.apply {
+                    key = prefKey
+                    order = prefOrder
+                    title = model.title
+                    summary = model.summary
+                    icon = getDrawable(model.icon)
+                    onPreferenceClickListener =
+                        Preference.OnPreferenceClickListener {
+                            logItemClick(prefKey, EVENT_CLICK_PRIMARY)
+                            model.action?.let { triggerAction(it) }
+                            true
+                        }
                 }
+                preferenceScreen.addPreference(pref)
             }
-        } else {
-            val pref =
-                existedPref as? PrimarySwitchPreference ?: PrimarySwitchPreference(requireContext())
-            pref.apply {
-                title = model.title
-                summary = model.summary
-                icon = getDrawable(model.icon)
-                isChecked = model.checked
-                isEnabled = !model.disabled
-                isSwitchEnabled = !model.disabled
-                onPreferenceClickListener = Preference.OnPreferenceClickListener {
-                    logItemClick(prefKey, EVENT_CLICK_PRIMARY)
-                    triggerAction(model.action)
-                    true
-                }
-                onPreferenceChangeListener = object : Preference.OnPreferenceChangeListener {
-                    override fun onPreferenceChange(
-                        p: Preference,
-                        value: Any?,
-                    ): Boolean {
-                        val newState = value as? Boolean ?: return false
-                        logItemClick(
-                            prefKey,
-                            if (newState) EVENT_SWITCH_ON else EVENT_SWITCH_OFF,
-                        )
-                        model.onCheckedChange.invoke(newState)
-                        return false
+
+            is DeviceSettingPreferenceModel.SwitchPreference ->
+                if (model.action == null) {
+                    val pref =
+                        existedPref as? SwitchPreferenceCompat
+                            ?: SwitchPreferenceCompat(requireContext())
+                    pref.apply {
+                        key = prefKey
+                        order = prefOrder
+                        title = model.title
+                        summary = model.summary
+                        icon = getDrawable(model.icon)
+                        isChecked = model.checked
+                        isEnabled = !model.disabled
+                        onPreferenceChangeListener =
+                            object : Preference.OnPreferenceChangeListener {
+                                override fun onPreferenceChange(
+                                    p: Preference,
+                                    value: Any?,
+                                ): Boolean {
+                                    (p as? TwoStatePreference)?.let { newState ->
+                                        val newState = value as? Boolean ?: return false
+                                        logItemClick(
+                                            prefKey,
+                                            if (newState) EVENT_SWITCH_ON else EVENT_SWITCH_OFF,
+                                        )
+                                        model.onCheckedChange.invoke(newState)
+                                    }
+                                    return false
+                                }
+                            }
                     }
+                    preferenceScreen.addPreference(pref)
+                } else {
+                    val pref =
+                        existedPref as? PrimarySwitchPreference
+                            ?: PrimarySwitchPreference(requireContext())
+                    pref.apply {
+                        key = prefKey
+                        order = prefOrder
+                        title = model.title
+                        summary = model.summary
+                        icon = getDrawable(model.icon)
+                        isChecked = model.checked
+                        isEnabled = !model.disabled
+                        isSwitchEnabled = !model.disabled
+                        onPreferenceClickListener =
+                            Preference.OnPreferenceClickListener {
+                                logItemClick(prefKey, EVENT_CLICK_PRIMARY)
+                                triggerAction(model.action)
+                                true
+                            }
+                        onPreferenceChangeListener =
+                            object : Preference.OnPreferenceChangeListener {
+                                override fun onPreferenceChange(
+                                    p: Preference,
+                                    value: Any?,
+                                ): Boolean {
+                                    val newState = value as? Boolean ?: return false
+                                    logItemClick(
+                                        prefKey,
+                                        if (newState) EVENT_SWITCH_ON else EVENT_SWITCH_OFF,
+                                    )
+                                    model.onCheckedChange.invoke(newState)
+                                    return false
+                                }
+                            }
+                    }
+                    preferenceScreen.addPreference(pref)
                 }
-            }
-        }
 
-        is DeviceSettingPreferenceModel.MultiTogglePreference -> {
-            // TODO(b/399316980): implement it with SegmentedButtonPreference once it's ready.
-            null
-        }
-
-        is DeviceSettingPreferenceModel.FooterPreference -> {
-            val pref = existedPref as? FooterPreference ?: FooterPreference(requireContext())
-            pref.apply { title = model.footerText }
-        }
-
-        is DeviceSettingPreferenceModel.MoreSettingsPreference -> {
-            val pref = existedPref ?: Preference(requireContext())
-            pref.apply {
-                title = context.getString(R.string.bluetooth_device_more_settings_preference_title)
-                summary = context.getString(
-                    R.string.bluetooth_device_more_settings_preference_summary
-                )
-                icon = context.getDrawable(
-                    if (Flags.enableBluetoothSettingsExpressiveDesign()) {
-                        R.drawable.ic_bluetooth_more_vert
+            is DeviceSettingPreferenceModel.MultiTogglePreference -> {
+                val prefCategory =
+                    existedPref as? PreferenceCategory ?: PreferenceCategory(requireContext())
+                prefCategory.apply {
+                    title = model.title
+                    key = prefKey
+                    order = prefOrder
+                }
+                preferenceScreen.addPreference(prefCategory)
+                val pref =
+                    if (prefCategory.preferenceCount == 0) {
+                        SegmentedButtonPreference(requireContext()).also {
+                            prefCategory.addPreference(it)
+                        }
                     } else {
-                        R.drawable.ic_chevron_right_24dp
-                    })
-                onPreferenceClickListener = Preference.OnPreferenceClickListener {
-                    logItemClick(prefKey, EVENT_CLICK_PRIMARY)
-                    SubSettingLauncher(context).setDestination(
-                        DeviceDetailsMoreSettingsFragment::class.java.name
-                    ).setSourceMetricsCategory(
-                        getMetricsCategory()
-                    ).setArguments(
-                        Bundle().apply {
-                            putString(KEY_DEVICE_ADDRESS, cachedDevice.address)
-                        }).launch()
-                    true
+                        prefCategory.getPreference(0) as SegmentedButtonPreference
+                    }
+                pref.apply {
+                    for (idx in 0..3) {
+                        if (idx >= model.toggles.size) {
+                            pref.setButtonVisibility(idx, false)
+                            continue
+                        }
+                        pref.setButtonVisibility(idx, true)
+                        pref.setButtonEnabled(idx, model.isAllowedChangingState)
+                        getDrawable(model.toggles[idx].icon)?.let {
+                            pref.setUpButton(idx, model.toggles[idx].label, it)
+                        }
+                        pref.setCheckedIndex(model.selectedIndex)
+                        pref.setOnButtonClickListener { _, checkedId, isChecked ->
+                            val checkedIndex =
+                                when (checkedId) {
+                                    com.android.settingslib.widget.preference.segmentedbutton.R.id
+                                        .button_1 -> {
+                                        0
+                                    }
+
+                                    com.android.settingslib.widget.preference.segmentedbutton.R.id
+                                        .button_2 -> {
+                                        1
+                                    }
+
+                                    com.android.settingslib.widget.preference.segmentedbutton.R.id
+                                        .button_3 -> {
+                                        2
+                                    }
+
+                                    com.android.settingslib.widget.preference.segmentedbutton.R.id
+                                        .button_4 -> {
+                                        3
+                                    }
+
+                                    else -> {
+                                        return@setOnButtonClickListener
+                                    }
+                                }
+                            if (isChecked) {
+                                for (idx in 0..3) {
+                                    pref.setButtonEnabled(idx, false)
+                                }
+                                model.onSelectedChange(checkedIndex)
+                            }
+                        }
+                    }
                 }
             }
-        }
 
-        is DeviceSettingPreferenceModel.HelpPreference -> {
-            null
+            is DeviceSettingPreferenceModel.FooterPreference -> {
+                val pref = existedPref as? FooterPreference ?: FooterPreference(requireContext())
+                pref.apply {
+                    key = prefKey
+                    order = prefOrder
+                    title = model.footerText
+                }
+                preferenceScreen.addPreference(pref)
+            }
+
+            is DeviceSettingPreferenceModel.MoreSettingsPreference -> {
+                val pref = existedPref ?: Preference(requireContext())
+                pref.apply {
+                    key = prefKey
+                    order = prefOrder
+                    title =
+                        context.getString(R.string.bluetooth_device_more_settings_preference_title)
+                    summary =
+                        context.getString(
+                            R.string.bluetooth_device_more_settings_preference_summary
+                        )
+                    icon =
+                        context.getDrawable(
+                            if (Flags.enableBluetoothSettingsExpressiveDesign()) {
+                                R.drawable.ic_bluetooth_more_vert
+                            } else {
+                                R.drawable.ic_chevron_right_24dp
+                            }
+                        )
+                    onPreferenceClickListener =
+                        Preference.OnPreferenceClickListener {
+                            logItemClick(prefKey, EVENT_CLICK_PRIMARY)
+                            SubSettingLauncher(context)
+                                .setDestination(DeviceDetailsMoreSettingsFragment::class.java.name)
+                                .setSourceMetricsCategory(getMetricsCategory())
+                                .setArguments(
+                                    Bundle().apply {
+                                        putString(KEY_DEVICE_ADDRESS, cachedDevice.address)
+                                    }
+                                )
+                                .launch()
+                            true
+                        }
+                }
+                preferenceScreen.addPreference(pref)
+            }
+
+            is DeviceSettingPreferenceModel.HelpPreference -> {}
         }
-    }
 
     private fun getPreferenceKey(settingId: Int) = "DEVICE_SETTING_${settingId}"
 
     private fun getDrawable(deviceSettingIcon: DeviceSettingIcon?): Drawable? =
         when (deviceSettingIcon) {
-            is DeviceSettingIcon.BitmapIcon -> deviceSettingIcon.bitmap.toDrawable(requireContext().resources)
-
+            is DeviceSettingIcon.BitmapIcon ->
+                deviceSettingIcon.bitmap.toDrawable(requireContext().resources)
             is DeviceSettingIcon.ResourceIcon -> context?.getDrawable(deviceSettingIcon.resId)
             null -> null
         }?.apply {
             setTint(
-                requireContext().getColor(
-                    com.android.settingslib.widget.theme.R.color.settingslib_materialColorOnSurfaceVariant
-                )
+                requireContext()
+                    .getColor(
+                        com.android.settingslib.widget.theme.R.color
+                            .settingslib_materialColorOnSurfaceVariant
+                    )
             )
         }
 
@@ -390,11 +515,9 @@ abstract class BluetoothDetailsConfigurableFragment : RestrictedDashboardFragmen
         settingId: Int,
         prefKey: String,
     ) {
-        val contents by remember(settingId) {
-            viewModel.getDeviceSetting(
-                cachedDevice, settingId
-            )
-        }.collectAsStateWithLifecycle(initialValue = null)
+        val contents by
+            remember(settingId) { viewModel.getDeviceSetting(cachedDevice, settingId) }
+                .collectAsStateWithLifecycle(initialValue = null)
 
         val settings = contents
         AnimatedVisibility(visible = settings != null, enter = fadeIn(), exit = fadeOut()) {
@@ -414,7 +537,8 @@ abstract class BluetoothDetailsConfigurableFragment : RestrictedDashboardFragmen
                 onSelectedChange = { newState ->
                     logItemClick(prefKey, newState)
                     pref.onSelectedChange(newState)
-                })
+                }
+            )
         )
     }
 
@@ -426,17 +550,21 @@ abstract class BluetoothDetailsConfigurableFragment : RestrictedDashboardFragmen
         if (!visible && !prefVisibility.containsKey(preferenceKey)) {
             return
         }
-        prefVisibility.computeIfAbsent(preferenceKey) {
-            MutableStateFlow(true).also { visibilityFlow ->
-                visibilityFlow.onEach {
-                    logAction(
-                        preferenceKey,
-                        SettingsEnums.ACTION_BLUETOOTH_DEVICE_DETAILS_ITEM_SHOWN,
-                        if (it) EVENT_VISIBLE else EVENT_INVISIBLE,
-                    )
-                }.launchIn(lifecycleScope)
+        prefVisibility
+            .computeIfAbsent(preferenceKey) {
+                MutableStateFlow(true).also { visibilityFlow ->
+                    visibilityFlow
+                        .onEach {
+                            logAction(
+                                preferenceKey,
+                                SettingsEnums.ACTION_BLUETOOTH_DEVICE_DETAILS_ITEM_SHOWN,
+                                if (it) EVENT_VISIBLE else EVENT_INVISIBLE,
+                            )
+                        }
+                        .launchIn(lifecycleScope)
+                }
             }
-        }.value = visible
+            .value = visible
     }
 
     private fun logAction(preferenceKey: String, action: Int, value: Int) {
@@ -452,9 +580,10 @@ abstract class BluetoothDetailsConfigurableFragment : RestrictedDashboardFragmen
 
             is DeviceSettingActionModel.PendingIntentAction -> {
                 val options =
-                    ActivityOptions.makeBasic().setPendingIntentBackgroundActivityStartMode(
-                        ActivityOptions.MODE_BACKGROUND_ACTIVITY_START_ALLOW_ALWAYS
-                    )
+                    ActivityOptions.makeBasic()
+                        .setPendingIntentBackgroundActivityStartMode(
+                            ActivityOptions.MODE_BACKGROUND_ACTIVITY_START_ALLOW_ALWAYS
+                        )
                 action.pendingIntent.send(options.toBundle())
             }
         }
@@ -466,9 +595,9 @@ abstract class BluetoothDetailsConfigurableFragment : RestrictedDashboardFragmen
             return
         }
         val allPrefs =
-            (invisiblePrefCategory.getAndRemoveAllChildren() + preferenceScreen.getAndRemoveAllChildren()).filter {
-                it != invisiblePrefCategory
-            }
+            (invisiblePrefCategory.getAndRemoveAllChildren() +
+                    preferenceScreen.getAndRemoveAllChildren())
+                .filter { it != invisiblePrefCategory }
         val visiblePrefs = allPrefs.filter { order.contains(it.key) }
         visiblePrefs.forEach { it.order = order.indexOf(it.key) }
         val invisiblePrefs = allPrefs.filter { !order.contains(it.key) }
@@ -518,9 +647,7 @@ abstract class BluetoothDetailsConfigurableFragment : RestrictedDashboardFragmen
         if (cachedDevice != null) {
             return cachedDevice
         }
-        Log.i(
-            TAG, "Add device to cached device manager: " + remoteDevice.anonymizedAddress
-        )
+        Log.i(TAG, "Add device to cached device manager: " + remoteDevice.anonymizedAddress)
         return localBluetoothManager.cachedDeviceManager.addDevice(remoteDevice)
     }
 

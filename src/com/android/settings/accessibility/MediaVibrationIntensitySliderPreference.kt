@@ -23,12 +23,15 @@ import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 
 /** Accessibility settings for media vibration, as a slider. */
 // LINT.IfChange
-class MediaVibrationIntensitySliderPreference :
+class MediaVibrationIntensitySliderPreference(context: Context) :
     VibrationIntensitySliderPreference(
+        context = context,
         key = KEY,
         vibrationUsage = VibrationAttributes.USAGE_MEDIA,
         title = R.string.accessibility_media_vibration_title,
-    ), PreferenceAvailabilityProvider {
+    ),
+    PreferenceAvailabilityProvider {
+
     override val keywords: Int
         get() = R.string.keywords_media_vibration
 

@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.server.accessibility.Flags;
 import com.android.settings.accessibility.actionbar.FeedbackMenuController;
@@ -43,7 +44,7 @@ import com.android.settings.overlay.SurveyFeatureProvider;
 public abstract class BaseSupportFragment extends DashboardFragment {
 
     @Override
-    public void onCreate(@NonNull Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         handleFeedbackFlow();
 

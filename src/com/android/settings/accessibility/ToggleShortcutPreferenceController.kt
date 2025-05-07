@@ -22,9 +22,7 @@ import android.content.Intent
 import android.database.ContentObserver
 import android.os.Handler
 import android.os.Looper
-import android.provider.Settings
 import android.view.accessibility.AccessibilityManager
-import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.preference.Preference
@@ -45,7 +43,9 @@ open class ToggleShortcutPreferenceController(context: Context, key: String) :
     BasePreferenceController(context, key), DefaultLifecycleObserver,
     ShortcutPreference.OnClickCallback {
     private val settingsContentObserver =
-        AccessibilitySettingsContentObserver(Handler(Looper.getMainLooper()))
+        AccessibilitySettingsContentObserver(
+            Looper.myLooper()?.run { Handler(/* async= */ true)}
+        )
     protected var shortcutPreference: ShortcutPreference? = null
     protected var componentName: ComponentName? = null
     protected var featureName: CharSequence? = null

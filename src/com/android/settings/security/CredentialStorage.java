@@ -47,6 +47,7 @@ import com.android.settings.R;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.vpn2.VpnUtils;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 /**
  * CredentialStorage handles resetting and installing keys into KeyStore.
@@ -158,7 +159,15 @@ public final class CredentialStorage extends FragmentActivity {
         private boolean mResetConfirmed;
 
         private ResetDialog() {
-            final AlertDialog dialog = new AlertDialog.Builder(CredentialStorage.this)
+            final AlertDialog.Builder dialogBuilder;
+            if (SettingsThemeHelper.isExpressiveTheme(getApplicationContext())) {
+                dialogBuilder = new AlertDialog.Builder(CredentialStorage.this,
+                        com.android.settingslib.widget.theme.R.style
+                                .Theme_AlertDialog_SettingsLib_Expressive);
+            } else {
+                dialogBuilder = new AlertDialog.Builder(CredentialStorage.this);
+            }
+            final AlertDialog dialog = dialogBuilder
                     .setTitle(android.R.string.dialog_alert_title)
                     .setMessage(R.string.credentials_reset_hint)
                     .setPositiveButton(android.R.string.ok, this)

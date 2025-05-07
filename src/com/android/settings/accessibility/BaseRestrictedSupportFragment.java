@@ -19,7 +19,6 @@ package com.android.settings.accessibility;
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.settings.accessibility.actionbar.FeedbackMenuController;
@@ -38,7 +37,7 @@ public abstract class BaseRestrictedSupportFragment extends RestrictedDashboardF
     }
 
     @Override
-    public void onCreate(@NonNull Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         int feedbackCategory = getFeedbackCategory();
         if (feedbackCategory != SettingsEnums.PAGE_UNKNOWN) {

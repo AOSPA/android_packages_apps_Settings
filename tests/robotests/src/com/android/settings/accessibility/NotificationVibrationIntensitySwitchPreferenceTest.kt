@@ -15,14 +15,10 @@
  */
 package com.android.settings.accessibility
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.junit.runner.RunWith
-
 // LINT.IfChange
-@RunWith(AndroidJUnit4::class)
 class NotificationVibrationIntensitySwitchPreferenceTest :
     VibrationIntensitySwitchPreferenceTestCase() {
 
-    override val preference = NotificationVibrationIntensitySwitchPreference()
+    override val preference = NotificationVibrationIntensitySwitchPreference(context)
 }
 // LINT.ThenChange(NotificationVibrationTogglePreferenceControllerTest.java)

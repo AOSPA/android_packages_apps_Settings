@@ -31,7 +31,6 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.widget.PopupWindow;
-import android.widget.SeekBar;
 
 import androidx.fragment.app.testing.EmptyFragmentActivity;
 import androidx.preference.PreferenceManager;
@@ -45,6 +44,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settingslib.testutils.shadow.ShadowInteractionJankMonitor;
 
+import com.google.android.material.slider.Slider;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import org.junit.Before;
@@ -53,6 +53,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
@@ -61,31 +62,30 @@ import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.shadows.ShadowLooper;
 
 /**
- * Tests for {@link PreviewSizeSeekBarController}.
+ * Tests for {@link PreviewSizeSliderController}.
  */
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowInteractionJankMonitor.class})
-public class PreviewSizeSeekBarControllerTest {
+public class PreviewSizeSliderControllerTest {
 
     @Rule
     public ActivityScenarioRule<EmptyFragmentActivity> rule =
             new ActivityScenarioRule<>(EmptyFragmentActivity.class);
     private static final String FONT_SIZE_KEY = "font_size";
-    private static final String KEY_SAVED_QS_TOOLTIP_RESHOW = "qs_tooltip_reshow";
     private Activity mContext;
-    private PreviewSizeSeekBarController mSeekBarController;
+    private PreviewSizeSliderController mSliderController;
     private FontSizeData mFontSizeData;
-    private AccessibilitySeekBarPreference mSeekBarPreference;
+    private TooltipSliderPreference mSliderPreference;
 
     private PreferenceScreen mPreferenceScreen;
     private TestFragment mFragment;
     private PreferenceViewHolder mHolder;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceManager mPreferenceManager;
-    private SeekBar mSeekBar;
+    private Slider mSlider;
 
     @Mock
-    private PreviewSizeSeekBarController.ProgressInteractionListener mInteractionListener;
+    private PreviewSizeSliderController.ProgressInteractionListener mInteractionListener;
 
     private static PopupWindow getLatestPopupWindow() {
         final ShadowApplication shadowApplication =
@@ -107,21 +107,22 @@ public class PreviewSizeSeekBarControllerTest {
         mPreferenceScreen = spy(new PreferenceScreen(mContext, /* attrs= */ null));
         when(mPreferenceScreen.getPreferenceManager()).thenReturn(mPreferenceManager);
         doReturn(mPreferenceScreen).when(mFragment).getPreferenceScreen();
-        mSeekBarPreference = spy(new AccessibilitySeekBarPreference(mContext, /* attrs= */ null));
-        mSeekBarPreference.setKey(FONT_SIZE_KEY);
+        mSliderPreference = new TooltipSliderPreference(mContext, /* attrs= */ null);
+        mSliderPreference.setKey(FONT_SIZE_KEY);
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         mHolder = spy(PreferenceViewHolder.createInstanceForTests(inflater.inflate(
                 R.layout.preference_labeled_slider, null)));
-        mSeekBar = spy(new SeekBar(mContext));
-        doReturn(mSeekBar).when(mHolder).findViewById(com.android.internal.R.id.seekbar);
-        mSeekBarPreference.onBindViewHolder(mHolder);
+        mSlider = Mockito.mock(Slider.class);
+        doReturn(mSlider).when(mHolder).findViewById(
+                com.android.settingslib.widget.preference.slider.R.id.slider);
+        mSliderPreference.onBindViewHolder(mHolder);
 
-        when(mPreferenceScreen.findPreference(anyString())).thenReturn(mSeekBarPreference);
+        when(mPreferenceScreen.findPreference(anyString())).thenReturn(mSliderPreference);
 
         mFontSizeData = new FontSizeData(mContext);
-        mSeekBarController =
-                new PreviewSizeSeekBarController(mContext, FONT_SIZE_KEY, mFontSizeData) {
+        mSliderController =
+                new PreviewSizeSliderController(mContext, FONT_SIZE_KEY, mFontSizeData) {
                     @Override
                     ComponentName getTileComponentName() {
                         return FONT_SIZE_COMPONENT_NAME;
@@ -133,58 +134,56 @@ public class PreviewSizeSeekBarControllerTest {
                                 R.string.accessibility_font_scaling_auto_added_qs_tooltip_content);
                     }
                 };
-        mSeekBarController.setInteractionListener(mInteractionListener);
-        when(mPreferenceScreen.findPreference(mSeekBarController.getPreferenceKey())).thenReturn(
-                mSeekBarPreference);
+        mSliderController.setInteractionListener(mInteractionListener);
+        when(mPreferenceScreen.findPreference(mSliderController.getPreferenceKey())).thenReturn(
+                mSliderPreference);
     }
 
     @Test
     public void initMax_matchResult() {
-        when(mPreferenceScreen.findPreference(anyString())).thenReturn(mSeekBarPreference);
+        when(mPreferenceScreen.findPreference(anyString())).thenReturn(mSliderPreference);
 
-        mSeekBarController.displayPreference(mPreferenceScreen);
+        mSliderController.displayPreference(mPreferenceScreen);
 
-        assertThat(mSeekBarPreference.getMax()).isEqualTo(
+        assertThat(mSliderPreference.getMax()).isEqualTo(
                 mFontSizeData.getValues().size() - 1);
     }
 
     @Test
     public void initProgress_matchResult() {
-        when(mPreferenceScreen.findPreference(anyString())).thenReturn(mSeekBarPreference);
+        when(mPreferenceScreen.findPreference(anyString())).thenReturn(mSliderPreference);
 
-        mSeekBarController.displayPreference(mPreferenceScreen);
+        mSliderController.displayPreference(mPreferenceScreen);
 
-        verify(mSeekBarPreference).setProgress(mFontSizeData.getInitialIndex());
+        assertThat(mSliderPreference.getValue()).isEqualTo(mFontSizeData.getInitialIndex());
     }
 
     @Test
     public void resetToDefaultState_matchResult() {
         final int defaultProgress =
                 mFontSizeData.getValues().indexOf(mFontSizeData.getDefaultValue());
-        when(mPreferenceScreen.findPreference(anyString())).thenReturn(mSeekBarPreference);
+        when(mPreferenceScreen.findPreference(anyString())).thenReturn(mSliderPreference);
 
-        mSeekBarController.displayPreference(mPreferenceScreen);
-        mSeekBarPreference.setProgress(defaultProgress + 1);
-        mSeekBarController.resetState();
+        mSliderController.displayPreference(mPreferenceScreen);
+        mSliderPreference.setValue(defaultProgress + 1);
+        mSliderController.resetState();
 
-        assertThat(mSeekBarPreference.getProgress()).isEqualTo(defaultProgress);
+        assertThat(mSliderPreference.getValue()).isEqualTo(defaultProgress);
     }
 
     @Test
     public void resetState_verifyOnProgressChanged() {
-        mSeekBarController.displayPreference(mPreferenceScreen);
-        mSeekBarController.resetState();
+        mSliderController.displayPreference(mPreferenceScreen);
+        mSliderController.resetState();
 
         verify(mInteractionListener).onProgressChanged();
     }
 
     @Test
     public void onProgressChanged_verifyNotifyPreferenceChanged() {
-        mSeekBarController.displayPreference(mPreferenceScreen);
+        mSliderController.displayPreference(mPreferenceScreen);
 
-        mSeekBarPreference.setProgress(mSeekBarPreference.getMax());
-        mSeekBarPreference.onProgressChanged(new SeekBar(mContext), /* progress= */
-                0, /* fromUser= */ false);
+        changeSliderValue(mSliderPreference.getMax());
         ShadowLooper.idleMainLooper();
 
         verify(mInteractionListener).onProgressChanged();
@@ -192,14 +191,10 @@ public class PreviewSizeSeekBarControllerTest {
 
     @Test
     public void onProgressChanged_showTooltipView() {
-        mSeekBarController.displayPreference(mPreferenceScreen);
+        mSliderController.displayPreference(mPreferenceScreen);
 
         // Simulate changing the progress for the first time
-        int newProgress = (mSeekBarPreference.getProgress() != 0) ? 0 : mSeekBarPreference.getMax();
-        mSeekBarPreference.setProgress(newProgress);
-        mSeekBarPreference.onProgressChanged(new SeekBar(mContext),
-                newProgress,
-                /* fromUser= */ false);
+        changeSliderValue(mSliderPreference.getMax());
 
         assertThat(getLatestPopupWindow().isShowing()).isTrue();
     }
@@ -209,35 +204,23 @@ public class PreviewSizeSeekBarControllerTest {
         Intent intent = mContext.getIntent();
         intent.putExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, true);
         mContext.setIntent(intent);
-        mSeekBarController.displayPreference(mPreferenceScreen);
+        mSliderController.displayPreference(mPreferenceScreen);
 
         // Simulate changing the progress for the first time
-        int newProgress = (mSeekBarPreference.getProgress() != 0) ? 0 : mSeekBarPreference.getMax();
-        mSeekBarPreference.setProgress(newProgress);
-        mSeekBarPreference.onProgressChanged(new SeekBar(mContext),
-                newProgress,
-                /* fromUser= */ false);
+        changeSliderValue(mSliderPreference.getMax());
 
         assertThat(getLatestPopupWindow()).isNull();
     }
 
     @Test
     public void onProgressChanged_tooltipViewHasBeenShown_notShowTooltipView() {
-        mSeekBarController.displayPreference(mPreferenceScreen);
+        mSliderController.displayPreference(mPreferenceScreen);
         // Simulate changing the progress for the first time
-        int newProgress = (mSeekBarPreference.getProgress() != 0) ? 0 : mSeekBarPreference.getMax();
-        mSeekBarPreference.setProgress(newProgress);
-        mSeekBarPreference.onProgressChanged(new SeekBar(mContext),
-                newProgress,
-                /* fromUser= */ false);
+        changeSliderValue(mSliderPreference.getMax());
         getLatestPopupWindow().dismiss();
 
         // Simulate progress changing for the second time
-        newProgress = (mSeekBarPreference.getProgress() != 0) ? 0 : mSeekBarPreference.getMax();
-        mSeekBarPreference.setProgress(newProgress);
-        mSeekBarPreference.onProgressChanged(new SeekBar(mContext),
-                newProgress,
-                /* fromUser= */ false);
+        changeSliderValue(mSliderPreference.getMin());
 
         assertThat(getLatestPopupWindow().isShowing()).isFalse();
     }
@@ -245,10 +228,10 @@ public class PreviewSizeSeekBarControllerTest {
     @Test
     @Config(shadows = ShadowFragment.class)
     public void enabledNeedsQSTooltipReshow_showTooltipView() {
-        mSeekBarPreference.setNeedsQSTooltipReshow(true);
+        mSliderPreference.setNeedsQSTooltipReshow(true);
 
-        mSeekBarController.displayPreference(mPreferenceScreen);
-        mSeekBarController.onStart();
+        mSliderController.displayPreference(mPreferenceScreen);
+        mSliderController.onStart(null);
         ShadowLooper.idleMainLooper();
 
         assertThat(getLatestPopupWindow().isShowing()).isTrue();
@@ -257,17 +240,19 @@ public class PreviewSizeSeekBarControllerTest {
     @Test
     public void onProgressChanged_setCorrespondingCustomizedStateDescription() {
         String[] stateLabels = new String[]{"1", "2", "3", "4", "5"};
-        mSeekBarController.setProgressStateLabels(stateLabels);
-        mSeekBarController.displayPreference(mPreferenceScreen);
+        mSliderController.setProgressStateLabels(stateLabels);
+        mSliderController.displayPreference(mPreferenceScreen);
 
         int progress = 3;
-        mSeekBarPreference.setProgress(progress);
-        mSeekBarPreference.onProgressChanged(mSeekBar,
-                progress,
-                /* fromUser= */ false);
+        changeSliderValue(progress);
 
-        verify(mSeekBarPreference).setSeekBarStateDescription(stateLabels[progress]);
-        assertThat(mSeekBar.getStateDescription().toString()).isEqualTo(stateLabels[progress]);
+        verify(mSlider).setStateDescription(stateLabels[progress]);
+    }
+
+    private void changeSliderValue(int newValue) {
+        mSliderPreference.setValue(newValue);
+        mSliderController.getSliderChangeListener().onValueChange(
+                mSlider, newValue, /* fromUser= */ false);
     }
 
     private static class TestFragment extends SettingsPreferenceFragment {

@@ -21,6 +21,7 @@ import android.os.Build
 import android.provider.Settings
 import com.android.settings.R
 import com.android.settings.deviceinfo.imei.ImeiPreference
+import com.android.settings.deviceinfo.simstatus.SimEidPreference
 import com.android.settings.flags.Flags
 import com.android.settings.wifi.utils.activeModemCount
 import com.android.settingslib.metadata.PreferenceCategory
@@ -61,6 +62,7 @@ class MyDeviceInfoScreen :
             "device_detail_category",
             R.string.my_device_info_device_details_category_title,
         ) += {
+            +SimEidPreference(context) order 31
             val activeModemCount = context.activeModemCount
             for (i in 0 until activeModemCount) {
                 +ImeiPreference(context, i, activeModemCount) order (i + 33)

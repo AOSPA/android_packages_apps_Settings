@@ -17,15 +17,26 @@ package com.android.settings.supervision
 
 import android.app.supervision.flags.Flags
 import android.content.Context
+import androidx.preference.Preference
+import androidx.preference.PreferenceScreen
 import com.android.settings.R
+import com.android.settings.supervision.ipc.SupervisionMessengerClient
 import com.android.settingslib.metadata.PreferenceCategory
+import com.android.settingslib.metadata.PreferenceLifecycleContext
+import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
+import com.android.settingslib.preference.forEachRecursively
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /** Web content filters landing page (Settings > Supervision > Web content filters). */
 @ProvidePreferenceScreen(SupervisionWebContentFiltersScreen.KEY)
-class SupervisionWebContentFiltersScreen : PreferenceScreenCreator {
+class SupervisionWebContentFiltersScreen : PreferenceScreenCreator, PreferenceLifecycleProvider {
+    private var supervisionClient: SupervisionMessengerClient? = null
+
     override fun isFlagEnabled(context: Context) = Flags.enableWebContentFiltersScreen()
 
     override val key: String
@@ -38,6 +49,15 @@ class SupervisionWebContentFiltersScreen : PreferenceScreenCreator {
         get() = R.drawable.ic_globe
 
     override fun fragmentClass() = SupervisionWebContentFiltersFragment::class.java
+
+    override fun onCreate(context: PreferenceLifecycleContext) {
+        supervisionClient = getSupervisionClient(context)
+        updatePreferenceData(context)
+    }
+
+    override fun onDestroy(context: PreferenceLifecycleContext) {
+        supervisionClient?.close()
+    }
 
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(context, this) {
@@ -61,6 +81,34 @@ class SupervisionWebContentFiltersScreen : PreferenceScreenCreator {
                 }
             +SupervisionWebContentFiltersFooterPreference()
         }
+
+    private fun updatePreferenceData(context: PreferenceLifecycleContext) {
+        val preferenceScreen = context.findPreference<Preference>(key)
+        if (preferenceScreen is PreferenceScreen) {
+            val preferenceKeys =
+                buildList<String> { preferenceScreen.forEachRecursively { add(it.key) } }
+            context.lifecycleScope.launch {
+                val preferenceDataMap =
+                    withContext(Dispatchers.IO) {
+                        supervisionClient?.getPreferenceData(preferenceKeys)
+                    }
+                preferenceScreen.forEachRecursively {
+                    val preferenceData = preferenceDataMap?.get(it.key)
+                    val newTitle = preferenceData?.title
+                    if (newTitle != null) {
+                        it.title = newTitle
+                    }
+                    val newSummary = preferenceData?.summary
+                    if (newSummary != null) {
+                        it.summary = newSummary
+                    }
+                }
+            }
+        }
+    }
+
+    private fun getSupervisionClient(context: Context) =
+        supervisionClient ?: SupervisionMessengerClient(context).also { supervisionClient = it }
 
     companion object {
         const val KEY = "supervision_web_content_filters"

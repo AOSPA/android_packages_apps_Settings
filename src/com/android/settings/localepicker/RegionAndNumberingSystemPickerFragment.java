@@ -109,6 +109,7 @@ public class RegionAndNumberingSystemPickerFragment extends DashboardFragment im
     private String mPackageName;
     @Nullable
     private CharSequence mPreviousSearch = null;
+    private boolean mIsSearchChanged;
 
     @Override
     public void onCreate(@NonNull Bundle icicle) {
@@ -215,6 +216,7 @@ public class RegionAndNumberingSystemPickerFragment extends DashboardFragment im
                 results.values = mOriginalLocaleInfos;
                 results.count = mOriginalLocaleInfos.size();
             } else {
+                mIsSearchChanged = true;
                 // TODO: decide if we should use the string's locale
                 List<LocaleStore.LocaleInfo> newList = new ArrayList<>(mOriginalLocaleInfos);
                 List<LocaleStore.LocaleInfo> suggestedList = TextUtils.isEmpty(mPackageName)
@@ -247,6 +249,11 @@ public class RegionAndNumberingSystemPickerFragment extends DashboardFragment im
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
+            if (!mIsSearchChanged) {
+                Log.d(TAG, "Do not update UI if search is not changed.");
+                return;
+            }
+
             mLocaleOptions = (ArrayList<LocaleStore.LocaleInfo>) results.values;
             // TODO: Need to scroll to first preference when searching.
             if (mRecyclerView != null) {

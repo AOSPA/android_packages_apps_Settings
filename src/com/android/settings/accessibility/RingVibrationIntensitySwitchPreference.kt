@@ -15,14 +15,16 @@
  */
 package com.android.settings.accessibility
 
+import android.content.Context
 import android.os.VibrationAttributes
 import android.provider.Settings
 import com.android.settings.R
 
 /** Accessibility settings for ring vibration, using a switch toggle. */
 // LINT.IfChange
-class RingVibrationIntensitySwitchPreference :
+class RingVibrationIntensitySwitchPreference(context: Context) :
     VibrationIntensitySwitchPreference(
+        context = context,
         key = KEY,
         vibrationUsage = VibrationAttributes.USAGE_RINGTONE,
         title = R.string.accessibility_ring_vibration_title,

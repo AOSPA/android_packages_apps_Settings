@@ -4979,6 +4979,12 @@
     <string name="accessibility_mouse_keys_shortcut_title">Mouse keys shortcut</string>
     <!-- Summary text for the accessibility setting 'Mouse keys' preference sub-screen. [CHAR LIMIT=100] -->
     <string name="mouse_keys_summary">Use your keyboard to control the pointer</string>
+    <!-- Title for the mouse keys max speed slider preference under mouse key main page, an accessibility mouse keys setting that controls how fast the mouse key can move. [CHAR LIMIT=35] -->
+    <string name="mouse_keys_max_speed_title">Maximum speed</string>
+    <!-- Description for the button that decreases the seekbar in mouse keys settings page. [CHAR_LIMIT=NONE] -->
+    <string name="mouse_keys_seek_bar_decrease_button_description">Decrease</string>
+    <!-- Description for the button that increases the seekbar in mouse keys settings page. [CHAR_LIMIT=NONE] -->
+    <string name="mouse_keys_seek_bar_increase_button_description">Increase</string>
     <!-- Title for the 'Mouse reverse scrolling' preference switch, which reverses the direction of mouse scroll wheels so that moving the wheel up scrolls the content down. [CHAR LIMIT=60] -->
     <string name="mouse_reverse_vertical_scrolling">Reverse scrolling</string>
     <!-- Summary text for the 'Mouse reverse scrolling' preference switch indicating to users that when the setting is enabled that scrolling up with their mouse wheel will move the page content down. [CHAR LIMIT=NONE] -->
@@ -5015,6 +5021,12 @@
     <string name="mouse_keys_toggle_scroll_summary">Use the \"<xliff:g id="release_label_1" example=".">%1$s</xliff:g>\" key to toggle scroll mode. This will make the \"<xliff:g id="release_label_2" example="8, k, o, u">%2$s</xliff:g>\" keys scroll the view top, down, left or right</string>
     <!-- Summary text for Mouse keys click secondary button image. [CHAR LIMIT=NONE] -->
     <string name="mouse_keys_release2_summary">Use the \"<xliff:g id="release_2_label" example="/">%s</xliff:g>\" key to click the secondary mouse button</string>
+
+    <!-- TODO(b/411206889): finalize this string and mark it translatable. -->
+    <!-- Title for the mouse keys acceleration seekbar -->
+    <string name="mouse_keys_acceleration_seekbar_title" translatable="false">Acceleration</string>
+    <string name="mouse_keys_acceleration_fast_icon_desc" translatable="false">Fast</string>
+    <string name="mouse_keys_acceleration_slow_icon_desc" translatable="false">Slow</string>
 
     <!-- Title for the button to trigger the 'keyboard shortcuts helper' dialog. [CHAR LIMIT=35] -->
     <string name="keyboard_shortcuts_helper">View keyboard shortcuts</string>
@@ -6569,10 +6581,6 @@
 
     <!-- Title for the battery summary tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_summary_title">Apps are running normally</string>
-    <!-- Title for the battery replacement tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_replacement_title">Battery replacement recommended</string>
-    <!-- Summary for the battery replacement tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_replacement_summary">Battery capacity and charging performance are reduced, and battery replacement is recommended.</string>
     <!-- Title for the low battery tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_low_battery_title">Battery level low</string>
     <!-- Summary for the low battery tip [CHAR LIMIT=NONE] -->
@@ -7801,6 +7809,8 @@ Data usage charges may apply.</string>
     <string name="user_confirm_remove_message">All apps and data will be deleted.</string>
     <!-- Work profile removal confirmation message [CHAR LIMIT=none] -->
     <string name="work_profile_confirm_remove_message">All apps and data in this profile will be deleted if you continue.</string>
+    <!-- Work profile removal confirmation message mentioning eSIM [CHAR LIMIT=none] -->
+    <string name="work_profile_confirm_remove_message_with_esim">All apps and data in this profile, including work eSIMs, will be deleted if you continue.</string>
     <!-- User profile removal confirmation message [CHAR LIMIT=none] -->
     <string name="user_profile_confirm_remove_message">All apps and data will be deleted.</string>
     <!-- Setting label to show that a new user is being added [CHAR LIMIT=30] -->
@@ -8021,8 +8031,6 @@ Data usage charges may apply.</string>
     <string name="help_url_battery" translatable="false"></string>
     <!-- Help URL, Battery Defender [DO NOT TRANSLATE] -->
     <string name="help_url_battery_defender" translatable="false"></string>
-    <!-- Help URL, Battery Replacement [DO NOT TRANSLATE] -->
-    <string name="help_url_battery_replacement" translatable="false"></string>
     <!-- Help URL, Dock Defender [DO NOT TRANSLATE] -->
     <string name="help_url_dock_defender" translatable="false"></string>
     <!-- Help URL, Incompatible charging [DO NOT TRANSLATE] -->
@@ -14645,6 +14653,10 @@ Data usage charges may apply.</string>
     <string name="audio_streams_dialog_turn_off_talkback_subtitle">Talkback cannot be used when listening to audio streams. Turn off talkback to start listening.</string>
     <!-- Le audio streams turn off talkback dialog button [CHAR LIMIT=NONE] -->
     <string name="audio_streams_dialog_turn_off_talkback_button">Turn off</string>
+    <!-- Le audio streams turn off audio sharing dialog title [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_turn_off_audio_sharing_title">Can\u0027t listen to audio streams while sharing</string>
+    <!-- Le audio streams turn off audio sharing dialog subtitle [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_turn_off_audio_sharing_subtitle">To listen to this stream, turn off audio sharing.</string>
     <!-- Le audio streams no le device dialog button [CHAR LIMIT=NONE] -->
     <string name="audio_streams_dialog_no_le_device_button">Connect a device</string>
     <!-- Le audio streams detail page title [CHAR LIMIT=NONE] -->
@@ -14735,15 +14747,17 @@ Data usage charges may apply.</string>
     <!-- Title of toggle to enable or disable device supervision [CHAR LIMIT=60] -->
     <string name="device_supervision_switch_title">Use device supervision</string>
     <!-- Description of device supervision toggle when PIN has never been set up [CHAR LIMIT=NONE] -->
-    <string name="device_supervision_switch_no_pin_summary">Set up PIN to get started</string>
+    <string name="device_supervision_switch_no_pin_summary">Set up PIN</string>
+    <!-- Description of device supervision toggle when PIN is set up but supervision is not enabled [CHAR LIMIT=NONE] -->
+    <string name="device_supervision_switch_paused_summary">Paused</string>
     <!-- Search keywords for supervision settings [CHAR LIMIT=NONE] -->
     <string name="keywords_supervision_settings">supervision, parental supervision, parental controls</string>
     <!-- Title for supervision PIN management settings entry [CHAR LIMIT=60] -->
-    <string name="supervision_pin_management_preference_title">Manage PIN</string>
+    <string name="supervision_pin_management_preference_title">Manage your PIN</string>
     <!-- Description for supervision PIN management settings entry, in the case of adding a PIN recovery method[CHAR LIMIT=NONE] -->
-    <string name="supervision_pin_management_preference_summary_add">Add PIN recovery</string>
+    <string name="supervision_pin_management_preference_summary_add">Add recovery email</string>
     <!-- Description for supervision PIN management settings entry, in the case of verifying the PIN recovery method[CHAR LIMIT=NONE] -->
-    <string name="supervision_pin_management_preference_summary_verify_recovery">Verify PIN recovery</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery">Verify recovery email</string>
     <!-- Title for supervision change PIN setting entry [CHAR LIMIT=60] -->
     <string name="supervision_change_pin_preference_title">Change PIN</string>
     <!-- Title for supervision forgot PIN setting entry [CHAR LIMIT=60] -->
@@ -14755,9 +14769,9 @@ Data usage charges may apply.</string>
     <!-- Summary for supervision delete pin setting entry [CHAR LIMIT=NONE] -->
     <string name="supervision_delete_pin_preference_summary">This will reset all your supervision settings</string>
     <!-- Title for adding supervision PIN recovery setting entry [CHAR LIMIT=NONE] -->
-    <string name="supervision_add_pin_recovery_title">Tap to add recovery</string>
+    <string name="supervision_add_pin_recovery_title">Add recovery email</string>
     <!-- Title for adding supervision PIN recovery setting entry [CHAR LIMIT=NONE] -->
-    <string name="supervision_verify_pin_recovery_title">Tap to verify recovery</string>
+    <string name="supervision_verify_pin_recovery_title">Verify your email</string>
     <!-- Title for web content filters entry [CHAR LIMIT=60] -->
     <string name="supervision_web_content_filters_title">Web content filters</string>
     <!-- Title for web content filters browser category [CHAR LIMIT=60] -->
@@ -14779,11 +14793,10 @@ Data usage charges may apply.</string>
     <!-- Generic content description that is attached to the preview illustration at the top of an Accessibility feature toggle page. [CHAR LIMIT=NONE] -->
     <!-- Title for supervision PIN verification screen [CHAR LIMIT=60] -->
     <string name="supervision_full_screen_pin_verification_title">Enter supervision PIN</string>
-    <!-- Title on activity to choose lock for supervision setup [CHAR LIMIT=NONE] -->
-    <string name="supervision_lock_setup_title">Choose lock for supervision</string>
-    <!-- description on activity to choose lock supervision setup [CHAR LIMIT=NONE] -->
-    <string name="supervision_lock_setup_description">You can unlock supervision settings with this code</string>
-    <string name ="supervision_pin_reset_success_toast">Parental control PIN reset</string>
+    <!-- Title on activity to choose PIN for supervision setup [CHAR LIMIT=NONE] -->
+    <string name="supervision_choose_your_pin_header">Set a parental controls PIN</string>
+    <string name="supervision_confirm_your_pin_header">Confirm PIN</string>
+    <string name="supervision_pin_reset_success_toast">PIN updated</string>
     <string name="accessibility_illustration_content_description"><xliff:g id="feature" example="Select to Speak">%1$s</xliff:g> animation</string>
 
     <!-- Light theme customization for lottie illustration. Not translatable. -->

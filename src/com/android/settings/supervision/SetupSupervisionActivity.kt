@@ -21,9 +21,6 @@ import android.Manifest.permission.INTERACT_ACROSS_USERS_FULL
 import android.Manifest.permission.MANAGE_USERS
 import android.app.ActivityManager
 import android.app.KeyguardManager
-import android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PASSWORD
-import android.app.admin.DevicePolicyManager.EXTRA_PASSWORD_COMPLEXITY
-import android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_LOW
 import android.app.supervision.SupervisionManager
 import android.app.supervision.flags.Flags
 import android.content.Intent
@@ -34,7 +31,7 @@ import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import android.util.Log
 import androidx.annotation.RequiresPermission
 import androidx.fragment.app.FragmentActivity
-import com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_FINGERPRINT_ENROLLMENT_ONLY
+import com.android.settings.password.ChooseLockPassword
 import com.android.settingslib.supervision.SupervisionLog
 
 /**
@@ -97,13 +94,7 @@ class SetupSupervisionActivity : FragmentActivity() {
 
     @RequiresPermission(anyOf = [INTERACT_ACROSS_USERS_FULL, INTERACT_ACROSS_USERS])
     private fun startChooseLockActivity(userHandle: UserHandle) {
-        // TODO(b/389712273) Intent directly to PIN selection screen to avoid giving the user
-        //  the options for password/pattern during the initial setup flow
-        val intent =
-            Intent(ACTION_SET_NEW_PASSWORD).apply {
-                putExtra(EXTRA_PASSWORD_COMPLEXITY, PASSWORD_COMPLEXITY_LOW)
-                putExtra(EXTRA_KEY_FINGERPRINT_ENROLLMENT_ONLY, true)
-            }
+        val intent = Intent(this, ChooseLockPassword::class.java)
         startActivityForResultAsUser(intent, REQUEST_CODE_SET_SUPERVISION_LOCK, userHandle)
     }
 

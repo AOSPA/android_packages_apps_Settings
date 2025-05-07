@@ -32,6 +32,7 @@ import android.os.Binder
 import android.os.Bundle
 import android.os.CancellationSignal
 import android.os.Process
+import android.os.UserHandle
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.OpenForTesting
@@ -87,7 +88,7 @@ open class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
             }
         }
 
-    private val supervisionPinRecoveryLauncher =
+    private val getResultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             setResult(result.resultCode)
             finish()
@@ -99,7 +100,9 @@ open class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (!callerHasSupervisionRole() && !callerIsSystemUid()) {
-            errorHandler()
+            errorHandler(
+                "Calling uid ${Binder.getCallingUid()} is not supervision role holder or SYSTEM_UID."
+            )
             return
         }
 
@@ -110,7 +113,9 @@ open class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
         }
 
         if (!isSupervisingCredentialSet) {
-            errorHandler("No supervising credential set, cannot verify credentials.")
+            // Redirects to the setup supervision flow when credential is not set.
+            val setupIntent = Intent(this, SetupSupervisionActivity::class.java)
+            getResultLauncher.launch(setupIntent)
             return
         }
 
@@ -156,7 +161,7 @@ open class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
             }
         val listener =
             DialogInterface.OnClickListener { _: DialogInterface?, _: Int ->
-                supervisionPinRecoveryLauncher.launch(intent)
+                getResultLauncher.launch(intent)
             }
         val moreOptionsButtonBuilder =
             PromptContentViewWithMoreOptionsButton.Builder()
@@ -177,11 +182,7 @@ open class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
 
     private fun callerIsSystemUid(): Boolean {
         val callingUid = Binder.getCallingUid()
-        if (callingUid != Process.SYSTEM_UID) {
-            Log.w(TAG, "callingUid: $callingUid is not SYSTEM_UID")
-            return false
-        }
-        return true
+        return UserHandle.getAppId(callingUid) == Process.SYSTEM_UID
     }
 
     @RequiresPermission(anyOf = [INTERACT_ACROSS_USERS_FULL, MANAGE_USERS])
@@ -198,7 +199,7 @@ open class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
     }
 
     private fun errorHandler(errStr: String? = null) {
-        errStr?.let { Log.w(TAG, it) }
+        errStr?.let { Log.e(TAG, it) }
         setResult(RESULT_CANCELED)
         finish()
     }

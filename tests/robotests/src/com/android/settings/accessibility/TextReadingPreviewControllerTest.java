@@ -53,8 +53,8 @@ public class TextReadingPreviewControllerTest {
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private TextReadingPreviewController mPreviewController;
     private TextReadingPreviewPreference mPreviewPreference;
-    private AccessibilitySeekBarPreference mFontSizePreference;
-    private AccessibilitySeekBarPreference mDisplaySizePreference;
+    private TooltipSliderPreference mFontSizePreference;
+    private TooltipSliderPreference mDisplaySizePreference;
 
     @Mock
     private DisplaySizeData mDisplaySizeData;
@@ -72,8 +72,8 @@ public class TextReadingPreviewControllerTest {
         mPreviewPreference = spy(new TextReadingPreviewPreference(mContext, /* attr= */ null));
         mPreviewController = new TextReadingPreviewController(mContext, PREVIEW_KEY, fontSizeData,
                 mDisplaySizeData);
-        mFontSizePreference = new AccessibilitySeekBarPreference(mContext, /* attr= */ null);
-        mDisplaySizePreference = new AccessibilitySeekBarPreference(mContext, /* attr= */ null);
+        mFontSizePreference = new TooltipSliderPreference(mContext, /* attr= */ null);
+        mDisplaySizePreference = new TooltipSliderPreference(mContext, /* attr= */ null);
     }
 
     @Test

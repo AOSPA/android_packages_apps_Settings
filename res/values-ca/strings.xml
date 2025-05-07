@@ -276,10 +276,8 @@
     <string name="terms_of_address_masculine" msgid="983106046135098856">"Masculí"</string>
     <string name="terms_of_address_neutral" msgid="5475414185543112478">"Neutre"</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Vols suprimir l\'idioma seleccionat?}other{Vols suprimir els idiomes seleccionats?}}"</string>
-    <!-- no translation found for dlg_remove_system_locales_title (7626516786258866543) -->
-    <skip />
-    <!-- no translation found for dlg_remove_locales_message (6636637008013310242) -->
-    <skip />
+    <string name="dlg_remove_system_locales_title" msgid="7626516786258866543">"Vols canviar l\'idioma del sistema a %s?"</string>
+    <string name="dlg_remove_locales_message" msgid="6636637008013310242">"<xliff:g id="LANGUAGE">%s</xliff:g> se suprimirà dels idiomes preferits"</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"No es poden suprimir tots els idiomes"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Conserva almenys un idioma preferit"</string>
     <string name="locale_not_translated" msgid="3071618135527110152">"No disponible com a idioma del sistema"</string>
@@ -318,10 +316,13 @@
     <string name="time_format_category_title" msgid="7108616745509689991">"Format d\'hora"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"Zona horària"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"Selecciona la zona horària"</string>
+    <!-- no translation found for date_time_search_time_zone (7373967602009974399) -->
+    <skip />
     <string name="date_time_set_date_title" msgid="7624166157167528407">"Data"</string>
     <string name="date_time_search_region" msgid="1364133854952610919">"Cerca la regió"</string>
     <string name="date_time_select_region" msgid="5449345333305056072">"Regió"</string>
-    <string name="date_time_select_fixed_offset_time_zones" msgid="594848300882055361">"Selecciona compensació d\'UTC"</string>
+    <!-- no translation found for date_time_select_fixed_offset_time_zones (2130108030162342594) -->
+    <skip />
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Utilitza <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
@@ -330,7 +331,8 @@
     <string name="zone_time_type_dst" msgid="9189689342265305808">"Horari d\'estiu"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Hora estàndard"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Selecciona per regió"</string>
-    <string name="zone_menu_by_offset" msgid="1257702747474426745">"Selecciona per compensació UTC"</string>
+    <!-- no translation found for zone_menu_by_offset (543648951618438204) -->
+    <skip />
     <string name="time_feedback_category_title" msgid="5942621686512255208">"Suggeriments"</string>
     <string name="keywords_time_feedback_category" msgid="4553921538559830393">"suggeriments, error, hora, zona, zona horària"</string>
     <string name="time_feedback_title" msgid="7720948068042783614">"Envia suggeriments sobre l\'hora"</string>
@@ -1176,6 +1178,12 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Permet"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Denega"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"* obligatori"</string>
+    <!-- no translation found for share_wifi_network (4064997404339571584) -->
+    <skip />
+    <!-- no translation found for share_wifi_network_summary (4316236421149769333) -->
+    <skip />
+    <!-- no translation found for edit_wifi_network_configuration (5712989655083072417) -->
+    <skip />
     <string name="no_internet_access_text" msgid="3611993143350310936">"Aquesta xarxa no té accés a Internet. Vols mantenir-hi la connexió?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Alguns serveis i aplicacions poden no funcionar amb una connectivitat limitada. Utilitzar igualment?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"No ho tornis a preguntar en aquesta xarxa"</string>
@@ -2117,6 +2125,8 @@
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Prem una tecla cada vegada per a les dreceres en lloc de mantenir premudes les tecles alhora"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Tecles del ratolí"</string>
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"Utilitza les tecles del ratolí"</string>
+    <!-- no translation found for accessibility_mouse_keys_shortcut_title (7621635104533584115) -->
+    <skip />
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Utilitza el teclat per controlar el punter"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Desplaçament invers"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Desplaça\'t cap amunt per moure la pàgina cap avall"</string>
@@ -3001,6 +3011,12 @@
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Notificacions"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Notificacions de la xarxa"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Rep notificacions quan el dispositiu es connecti a una xarxa sense encriptació o quan una xarxa registri l\'identificador únic del dispositiu o de la SIM"</string>
+    <!-- no translation found for cellular_security_2G_network_generation_header (2892850064192939887) -->
+    <skip />
+    <!-- no translation found for cellular_security_2G_network_generation_summary (979187530909112413) -->
+    <skip />
+    <!-- no translation found for cellular_security_2G_network_generation_title (706766676947606951) -->
+    <skip />
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Encriptació"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Generacions de xarxes"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Pots configurar cada targeta SIM instal·lada perquè es connecti només a xarxes que admetin 3G, 4G i 5G. La SIM no es connectarà a xarxes 2G antigues i no segures. Aquesta opció de configuració pot limitar la teva connectivitat en cas que l\'única xarxa disponible sigui 2G. En cas d\'emergència, es pot utilitzar 2G."</string>
@@ -3287,7 +3303,7 @@
     <string name="user_owner" msgid="2079206733011361994">"Propietari"</string>
     <string name="user_admin" msgid="4024553191395768119">"Administrador"</string>
     <string name="user_you" msgid="3070562015202859996">"Tu (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <string name="user_add_max_count" msgid="3328539978480663740">"No pots afegir cap altre usuari. Suprimeix un usuari per afegir-ne un."</string>
+    <string name="user_add_max_count" msgid="3328539978480663740">"No pots afegir més usuaris. Suprimeix un usuari per afegir-ne un altre."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Els perfils restringits no poden afegir comptes."</string>
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Suprimeix <xliff:g id="USER_NAME">%1$s</xliff:g> del dispositiu"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Configuració de la pantalla de bloqueig"</string>
@@ -4443,7 +4459,7 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Notificacions de pantalla completa"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Permet les notificacions de pantalla completa d\'aquesta aplicació"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Permet que aquesta aplicació mostri notificacions que ocupen tota la pantalla quan el dispositiu està bloquejat. Les aplicacions poden utilitzar aquesta opció per destacar alarmes, trucades entrants o altres notificacions urgents."</string>
-    <string name="write_system_preferences_page_title" msgid="4775435310385611055">"Escriure les preferències del sistema"</string>
+    <string name="write_system_preferences_page_title" msgid="4775435310385611055">"Escriu les preferències del sistema"</string>
     <string name="write_system_preferences_switch_title" msgid="213522354119233085">"Permet que aquesta aplicació modifiqui les preferències del sistema en nom teu"</string>
     <string name="write_system_preferences_footer_description" msgid="8645052087619752514">"Aquest permís permet que una aplicació modifiqui les preferències principals del sistema."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Aplicacions de gestió multimèdia"</string>
@@ -5839,25 +5855,23 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Suprimeix el PIN"</string>
     <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Es restabliran totes les opcions de configuració de supervisió"</string>
     <string name="supervision_add_pin_recovery_title" msgid="5584523084706797399">"Toca per afegir la recuperació"</string>
+    <!-- no translation found for supervision_verify_pin_recovery_title (7953090772633001442) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filtres de contingut web"</string>
-    <!-- no translation found for supervision_web_content_filters_summary_both_on (8668754911140483798) -->
+    <!-- no translation found for supervision_web_content_filters_browser_title (8737341514264129889) -->
     <skip />
-    <!-- no translation found for supervision_web_content_filters_summary_chrome_on (5999295548020086617) -->
+    <!-- no translation found for supervision_web_content_filters_browser_block_explicit_sites_title (1786398287521485576) -->
     <skip />
-    <!-- no translation found for supervision_web_content_filters_summary_search_on (6866676094401450305) -->
+    <!-- no translation found for supervision_web_content_filters_browser_block_explicit_sites_summary (1427357961145247788) -->
     <skip />
-    <!-- no translation found for supervision_web_content_filters_summary_both_off (6735949158065982622) -->
-    <skip />
-    <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome i Web"</string>
-    <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Prova de bloquejar els llocs web explícits"</string>
-    <string name="supervision_web_content_filters_browser_block_explicit_sites_summary" msgid="1477766506765966613">"No hi ha cap filtre perfecte, però aquest és útil per amagar els llocs web amb contingut sexualment explícit"</string>
     <string name="supervision_web_content_filters_browser_allow_all_sites_title" msgid="3909739592466381845">"Permet tots els llocs web"</string>
-    <string name="supervision_web_content_filters_search_title" msgid="726335318009305564">"Cerca de Google"</string>
-    <string name="supervision_web_content_filters_search_filter_on_title" msgid="4855846261141136285">"Filtre de SafeSearch activat"</string>
-    <string name="supervision_web_content_filters_search_filter_on_summary" msgid="1162258144140293269">"Ajuda a filtrar les imatges, el text i els enllaços amb contingut explícit dels resultats de la cerca en aquest dispositiu"</string>
-    <string name="supervision_web_content_filters_search_filter_off_title" msgid="6049461395304222346">"Filtre de SafeSearch desactivat"</string>
-    <string name="supervision_web_content_filters_search_filter_off_summary" msgid="3834238970190924433">"És possible que la configuració del compte filtri o desenfoqui els resultats explícits"</string>
-    <!-- no translation found for supervision_web_content_filters_footer_content (3532535288142541994) -->
+    <!-- no translation found for supervision_web_content_filters_search_title (8608480392956106029) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_search_filter_on_title (1136440775294190806) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_search_filter_on_summary (6797184284369033101) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_search_filter_off_title (7171966260908166395) -->
     <skip />
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Introdueix el PIN de supervisió"</string>
     <string name="supervision_lock_setup_title" msgid="7581682893583645713">"Tria un bloqueig per a la supervisió"</string>

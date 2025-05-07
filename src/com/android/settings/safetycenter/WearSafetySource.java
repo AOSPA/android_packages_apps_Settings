@@ -20,6 +20,7 @@ import static com.android.settings.biometrics.combination.BiometricsSettingsBase
 
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.os.UserManager;
 import android.safetycenter.SafetyEvent;
 
@@ -91,13 +92,19 @@ public final class WearSafetySource {
                 summary = getSummaryFromContentProvider(context, authority);
             }
 
+            Intent activeUnlockIntent = activeUnlockStatusUtils.getIntent();
+            if (activeUnlockIntent == null) {
+                sendNullData(context, safetyEvent);
+                return;
+            }
+
             BiometricSourcesUtils.setBiometricSafetySourceData(
                     SAFETY_SOURCE_ID,
                     context,
                     activeUnlockStatusUtils.getTitleForActiveUnlockOnly(),
                     summary,
                     PendingIntent.getActivity(context, ACTIVE_UNLOCK_REQUEST,
-                            activeUnlockStatusUtils.getIntent(),
+                            activeUnlockIntent,
                             PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT),
                     /* enabled= */ true,
                     hasEnrolled,

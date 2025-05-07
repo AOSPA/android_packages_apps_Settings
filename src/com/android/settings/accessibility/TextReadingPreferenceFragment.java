@@ -162,7 +162,7 @@ public class TextReadingPreferenceFragment extends BaseSupportFragment {
         mPreviewController.setEntryPoint(mEntryPoint);
         controllers.add(mPreviewController);
 
-        final PreviewSizeSeekBarController fontSizeController = new PreviewSizeSeekBarController(
+        final PreviewSizeSliderController fontSizeController = new PreviewSizeSliderController(
                 context, FONT_SIZE_KEY, fontSizeData) {
             @Override
             ComponentName getTileComponentName() {
@@ -188,7 +188,7 @@ public class TextReadingPreferenceFragment extends BaseSupportFragment {
         getSettingsLifecycle().addObserver(fontSizeController);
         controllers.add(fontSizeController);
 
-        final PreviewSizeSeekBarController displaySizeController = new PreviewSizeSeekBarController(
+        final PreviewSizeSliderController displaySizeController = new PreviewSizeSliderController(
                 context, DISPLAY_SIZE_KEY, displaySizeData) {
             @Override
             ComponentName getTileComponentName() {

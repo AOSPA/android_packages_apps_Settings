@@ -15,14 +15,16 @@
  */
 package com.android.settings.accessibility
 
+import android.content.Context
 import android.os.VibrationAttributes
 import android.provider.Settings
 import com.android.settings.R
 
 /** Accessibility settings for notification vibration, using an intensity slider. */
 // LINT.IfChange
-class NotificationVibrationIntensitySliderPreference :
+class NotificationVibrationIntensitySliderPreference(context: Context) :
     VibrationIntensitySliderPreference(
+        context = context,
         key = KEY,
         vibrationUsage = VibrationAttributes.USAGE_NOTIFICATION,
         title = R.string.accessibility_notification_vibration_title,

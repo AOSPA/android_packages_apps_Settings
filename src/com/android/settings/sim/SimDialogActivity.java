@@ -90,9 +90,10 @@ public class SimDialogActivity extends FragmentActivity {
             finish();
             return;
         }
-        int themeId = SettingsThemeHelper.isExpressiveTheme(this)
-                ? R.style.Theme_SubSettings_Expressive : R.style.Theme_SubSettings;
-        setTheme(themeId);
+
+        if (SettingsThemeHelper.isExpressiveTheme(this)) {
+            setTheme(R.style.Theme_SubSettings_Expressive);
+        }
 
         SimDialogProhibitService.supportDismiss(this);
 

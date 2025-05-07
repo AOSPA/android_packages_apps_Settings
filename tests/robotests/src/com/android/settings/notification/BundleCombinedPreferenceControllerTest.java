@@ -18,8 +18,8 @@ package com.android.settings.notification;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -121,7 +121,7 @@ public class BundleCombinedPreferenceControllerTest {
     @EnableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI)
     public void updatePrefValues_reflectsSettings() {
         // bundling is enabled globally
-        when(mBackend.isNotificationBundlingEnabled(any())).thenReturn(true);
+        when(mBackend.isNotificationBundlingEnabled(anyInt())).thenReturn(true);
 
         // allowed key types are promos & news
         when(mBackend.getAllowedBundleTypes()).thenReturn(Set.of(Adjustment.TYPE_PROMOTION,
@@ -138,7 +138,7 @@ public class BundleCombinedPreferenceControllerTest {
     @Test
     @EnableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI)
     public void updatePrefValues_typesGoneWhenGlobalOff() {
-        when(mBackend.isNotificationBundlingEnabled(any())).thenReturn(false);
+        when(mBackend.isNotificationBundlingEnabled(anyInt())).thenReturn(false);
         when(mBackend.getAllowedBundleTypes()).thenReturn(Set.of(Adjustment.TYPE_PROMOTION,
                 Adjustment.TYPE_NEWS));
 
@@ -154,16 +154,16 @@ public class BundleCombinedPreferenceControllerTest {
     @EnableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI)
     public void turnOffGlobalSwitch_updatesBackendAndTypeSwitches() {
         // Initial state: global allowed + some types set
-        when(mBackend.isNotificationBundlingEnabled(any())).thenReturn(true);
+        when(mBackend.isNotificationBundlingEnabled(anyInt())).thenReturn(true);
         when(mBackend.getAllowedBundleTypes()).thenReturn(Set.of(Adjustment.TYPE_PROMOTION,
                 Adjustment.TYPE_NEWS));
         mController.updatePrefValues();
 
         // Simulate the global switch turning off. This also requires telling the mock backend to
         // start returning false before the click listener updates pref values
-        when(mBackend.isNotificationBundlingEnabled(any())).thenReturn(false);
+        when(mBackend.isNotificationBundlingEnabled(anyInt())).thenReturn(false);
         mGlobalSwitch.getOnPreferenceChangeListener().onPreferenceChange(mGlobalSwitch, false);
-        verify(mBackend, times(1)).setNotificationBundlingEnabled(false);
+        verify(mBackend, times(1)).setNotificationBundlingEnabled(mContext.getUserId(), false);
 
         // All individual type checkboxes should now not be visible.
         assertThat(mPromoCheckbox.isVisible()).isFalse();
@@ -175,14 +175,14 @@ public class BundleCombinedPreferenceControllerTest {
     @Test
     @EnableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI)
     public void turnOnGlobalSwitch_updatesBackendAndTypeSwitches() {
-        when(mBackend.isNotificationBundlingEnabled(any())).thenReturn(false);
+        when(mBackend.isNotificationBundlingEnabled(anyInt())).thenReturn(false);
         when(mBackend.getAllowedBundleTypes()).thenReturn(Set.of(Adjustment.TYPE_PROMOTION,
                 Adjustment.TYPE_NEWS));
         mController.updatePrefValues();
 
-        when(mBackend.isNotificationBundlingEnabled(any())).thenReturn(true);
+        when(mBackend.isNotificationBundlingEnabled(anyInt())).thenReturn(true);
         mGlobalSwitch.getOnPreferenceChangeListener().onPreferenceChange(mGlobalSwitch, true);
-        verify(mBackend, times(1)).setNotificationBundlingEnabled(true);
+        verify(mBackend, times(1)).setNotificationBundlingEnabled(mContext.getUserId(), true);
 
         // type checkboxes should now exist & be checked accordingly to their state
         assertThat(mPromoCheckbox.isChecked()).isTrue();
@@ -194,7 +194,7 @@ public class BundleCombinedPreferenceControllerTest {
     @Test
     @EnableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI)
     public void turnOnTypeBundle_updatesBackend_doesNotChangeGlobalSwitch() {
-        when(mBackend.isNotificationBundlingEnabled(any())).thenReturn(true);
+        when(mBackend.isNotificationBundlingEnabled(anyInt())).thenReturn(true);
         when(mBackend.getAllowedBundleTypes()).thenReturn(Set.of(Adjustment.TYPE_SOCIAL_MEDIA));
         mController.updatePrefValues();
 
@@ -202,13 +202,13 @@ public class BundleCombinedPreferenceControllerTest {
 
         // recs bundle setting should be updated in the backend, and global switch unchanged
         verify(mBackend).setBundleTypeState(Adjustment.TYPE_CONTENT_RECOMMENDATION, true);
-        verify(mBackend, never()).setNotificationBundlingEnabled(anyBoolean());
+        verify(mBackend, never()).setNotificationBundlingEnabled(anyInt(), anyBoolean());
     }
 
     @Test
     @EnableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI)
     public void turnOffTypeBundle_lastOneChangesGlobalSwitch() {
-        when(mBackend.isNotificationBundlingEnabled(any())).thenReturn(true);
+        when(mBackend.isNotificationBundlingEnabled(anyInt())).thenReturn(true);
         when(mBackend.getAllowedBundleTypes()).thenReturn(Set.of(Adjustment.TYPE_SOCIAL_MEDIA,
                 Adjustment.TYPE_CONTENT_RECOMMENDATION));
         mController.updatePrefValues();
@@ -224,6 +224,6 @@ public class BundleCombinedPreferenceControllerTest {
         verify(mBackend).setBundleTypeState(Adjustment.TYPE_SOCIAL_MEDIA, false);
 
         // This update should trigger a call to turn off the global switch
-        verify(mBackend).setNotificationBundlingEnabled(false);
+        verify(mBackend).setNotificationBundlingEnabled(mContext.getUserId(), false);
     }
 }

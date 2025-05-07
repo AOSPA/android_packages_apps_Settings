@@ -50,10 +50,9 @@ constructor(
     private var subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID
     private var preference: TwoStatePreference? = null
     private var callingPreferenceCategoryController: CallingPreferenceCategoryController? = null
-
+    private var isVisible = false
     private var videoCallEditable = false
     private var isInCall = false
-    private var isEnabled = false
 
     /** Init instance of VideoCallingPreferenceController. */
     fun init(
@@ -67,14 +66,15 @@ constructor(
     }
 
     // Availability is controlled in onViewCreated() and VideoCallingSearchItem.
-    override fun getAvailabilityStatus(): Int {
-        return if (isEnabled) AVAILABLE else CONDITIONALLY_UNAVAILABLE
-    }
+    override fun getAvailabilityStatus() = if (isVisible) AVAILABLE else CONDITIONALLY_UNAVAILABLE
 
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
         preference = screen.findPreference(preferenceKey)
-        Log.d(TAG, "init ui")
+        Log.d(
+            TAG,
+            "displayPreference: isVisible: $isVisible, videoCallEditable: $videoCallEditable"
+        )
     }
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
@@ -82,9 +82,13 @@ constructor(
         callingPreferenceCategoryController?.updateChildVisible(preferenceKey, false)
         videoCallingRepository.isVideoCallReadyFlow(subId)
             .collectLatestWithLifecycle(viewLifecycleOwner) { isReady ->
-                Log.d(TAG, "isVideoCallReadyFlow: update visible isReady = $isReady")
-                isEnabled = isReady
-                updatePreference()
+                Log.d(TAG, "isVideoCallReadyFlow: update visible: $isReady")
+                isVisible = isReady
+                preference?.let{
+                    it.isVisible = isVisible
+                    updateState(it)
+                }
+                callingPreferenceCategoryController?.updateChildVisible(preferenceKey, isReady)
             }
         callStateRepository.callStateFlow(subId).collectLatestWithLifecycle(viewLifecycleOwner) {
             callState ->
@@ -95,14 +99,13 @@ constructor(
 
     override fun updateState(preference: Preference) {
         super.updateState(preference)
+        videoCallEditable =
+            queryVoLteState(subId).isEnabledByUser && queryImsState(subId).isAllowUserControl
+        Log.d(TAG, "updateState: update videoCallEditable: $videoCallEditable")
         updatePreference()
     }
 
     private fun updatePreference() {
-        preference?.isVisible = isEnabled
-        callingPreferenceCategoryController?.updateChildVisible(preferenceKey, isEnabled)
-        videoCallEditable = isEnabled &&
-            queryVoLteState(subId).isEnabledByUser && queryImsState(subId).isAllowUserControl
         preference?.isEnabled = videoCallEditable && !isInCall
         preference?.isChecked = videoCallEditable && isChecked
     }

@@ -194,10 +194,10 @@ public class MyDeviceInfoFragment extends DashboardFragment
             imeiInfoList.accept(ImeiInfoPreferenceController.DEFAULT_KEY);
         }
 
-        for (int slotIndex = 0; slotIndex < slotSimStatus.size(); slotIndex ++) {
+        for (int slotIndex = 0; slotIndex < slotSimStatus.size(); slotIndex++) {
             SimStatusPreferenceController slotRecord =
                     new SimStatusPreferenceController(context,
-                    slotSimStatus.getPreferenceKey(slotIndex));
+                            slotSimStatus.getPreferenceKey(slotIndex));
             slotRecord.init(fragment, slotSimStatus);
             controllers.add(slotRecord);
 
@@ -221,10 +221,13 @@ public class MyDeviceInfoFragment extends DashboardFragment
             }
         }
 
-        EidStatus eidStatus = new EidStatus(slotSimStatus, context, executor);
-        SimEidPreferenceController simEid = new SimEidPreferenceController(context, KEY_EID_INFO);
-        simEid.init(slotSimStatus, eidStatus);
-        controllers.add(simEid);
+        if (!Flags.catalystMyDeviceInfoPrefScreen()) {
+            EidStatus eidStatus = new EidStatus(slotSimStatus, context, executor);
+            SimEidPreferenceController simEid = new SimEidPreferenceController(context,
+                    KEY_EID_INFO);
+            simEid.init(slotSimStatus, eidStatus);
+            controllers.add(simEid);
+        }
 
         if (executor != null) {
             executor.shutdown();

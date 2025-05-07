@@ -79,7 +79,7 @@ public class BundleListPreferenceController extends NotificationPreferenceContro
         if (mAppRow == null) {
             return false;
         }
-        if (!mBackend.getAllowedAssistantAdjustments(mAppRow.pkg).contains(KEY_TYPE)) {
+        if (!mBackend.getAllowedAssistantAdjustments().contains(KEY_TYPE)) {
             return false;
         }
         if (mAppRow.banned || mAppRow.lockedImportance || mAppRow.systemApp) {

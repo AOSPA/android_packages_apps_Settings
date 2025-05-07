@@ -29,7 +29,7 @@
         android:key="display_text_size"
         android:title="@string/category_title_display_text_size">
 
-        <com.android.settings.accessibility.AccessibilitySeekBarPreference
+        <com.android.settings.accessibility.TooltipSliderPreference
             android:key="font_size"
             android:summary="@string/short_summary_font_size"
             android:title="@string/title_font_size"
@@ -39,7 +39,7 @@
             settings:iconStartContentDescription="@string/font_size_make_smaller_desc"
             settings:keywords="@string/keywords_font_size" />
 
-        <com.android.settings.accessibility.AccessibilitySeekBarPreference
+        <com.android.settings.accessibility.TooltipSliderPreference
             android:key="display_size"
             android:summary="@string/screen_zoom_short_summary"
             android:title="@string/screen_zoom_title"

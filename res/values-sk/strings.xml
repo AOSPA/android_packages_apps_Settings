@@ -276,10 +276,8 @@
     <string name="terms_of_address_masculine" msgid="983106046135098856">"Mužský rod"</string>
     <string name="terms_of_address_neutral" msgid="5475414185543112478">"Neutrálne"</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Chcete vybraný jazyk odstrániť?}few{Chcete vybrané jazyky odstrániť?}many{Remove selected languages?}other{Chcete vybrané jazyky odstrániť?}}"</string>
-    <!-- no translation found for dlg_remove_system_locales_title (7626516786258866543) -->
-    <skip />
-    <!-- no translation found for dlg_remove_locales_message (6636637008013310242) -->
-    <skip />
+    <string name="dlg_remove_system_locales_title" msgid="7626516786258866543">"Chcete zmeniť jazyk systému na jazyk %s?"</string>
+    <string name="dlg_remove_locales_message" msgid="6636637008013310242">"Jazyk <xliff:g id="LANGUAGE">%s</xliff:g> bude odstránený z vašich preferovaných jazykov"</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Nie je možné odstrániť všetky jazyky"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Ponechajte aspoň jeden preferovaný jazyk"</string>
     <string name="locale_not_translated" msgid="3071618135527110152">"Nie je k dispozícii ako jazyk systému"</string>
@@ -318,10 +316,13 @@
     <string name="time_format_category_title" msgid="7108616745509689991">"Formát času"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"Časové pásmo"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"Časové pásmo"</string>
+    <!-- no translation found for date_time_search_time_zone (7373967602009974399) -->
+    <skip />
     <string name="date_time_set_date_title" msgid="7624166157167528407">"Dátum"</string>
     <string name="date_time_search_region" msgid="1364133854952610919">"Vyhľadať oblasť"</string>
     <string name="date_time_select_region" msgid="5449345333305056072">"Oblasť"</string>
-    <string name="date_time_select_fixed_offset_time_zones" msgid="594848300882055361">"Vybrať časový posun"</string>
+    <!-- no translation found for date_time_select_fixed_offset_time_zones (2130108030162342594) -->
+    <skip />
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Používa <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
@@ -330,7 +331,8 @@
     <string name="zone_time_type_dst" msgid="9189689342265305808">"Letný čas"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Štandardný čas"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Vybrať podľa oblasti"</string>
-    <string name="zone_menu_by_offset" msgid="1257702747474426745">"Vybrať podľa čas. posunu UTC"</string>
+    <!-- no translation found for zone_menu_by_offset (543648951618438204) -->
+    <skip />
     <string name="time_feedback_category_title" msgid="5942621686512255208">"Spätná väzba"</string>
     <string name="keywords_time_feedback_category" msgid="4553921538559830393">"spätná väzba, chyba, čas, pásmo, časové pásmo"</string>
     <string name="time_feedback_title" msgid="7720948068042783614">"Odoslať spätnú väzbu k času"</string>
@@ -959,7 +961,7 @@
     <string name="bluetooth_device_tip_support" msgid="6072338493592606897">"Tipy a podpora"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Adresa Bluetooth zariadenia: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Adresa zariadenia Bluetooth:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
-    <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Zabudnúť zariadenie?"</string>
+    <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Chcete zariadenie zabudnúť?"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"Odstrániť spojenie"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Chcete aplikáciu odpojiť?"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"<xliff:g id="APP_NAME">%1$s</xliff:g> sa už nebude pripájať k zariadeniu <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
@@ -1176,6 +1178,12 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Povoliť"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Zamietnuť"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"* povinné"</string>
+    <!-- no translation found for share_wifi_network (4064997404339571584) -->
+    <skip />
+    <!-- no translation found for share_wifi_network_summary (4316236421149769333) -->
+    <skip />
+    <!-- no translation found for edit_wifi_network_configuration (5712989655083072417) -->
+    <skip />
     <string name="no_internet_access_text" msgid="3611993143350310936">"Táto sieť nemá prístup k internetu. Zachovať pripojenie?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Niektoré aplikácie a služby nemusia fungovať z dôvodu obmedzeného pripojenia. Chcete sieť napriek tomu použiť?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Nabudúce sa na túto sieť nepýtať"</string>
@@ -2117,6 +2125,8 @@
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Namiesto stlačenia viacerých klávesov súčasne aktivovať skratky postupným stlačením jednotlivých klávesov"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Myš klávesnicou"</string>
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"Používať tlačidlá na ovládanie myši"</string>
+    <!-- no translation found for accessibility_mouse_keys_shortcut_title (7621635104533584115) -->
+    <skip />
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Ovládajte kurzor pomocou klávesnice"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Obrátené posúvanie"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Prechádzajte po stránke nadol posúvaním myši nahor"</string>
@@ -2177,10 +2187,8 @@
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"kliknúť pravým tlačidlom, klepnúť"</string>
     <string name="three_finger_tap_middle_click" msgid="7898931632908866867">"Stredné tlačidlo myši"</string>
     <string name="three_finger_tap_launch_gemini" msgid="4030401656711588982">"Spustiť Asistenta"</string>
-    <!-- no translation found for three_finger_tap_launch_default_assistant (7947939159617292478) -->
-    <skip />
-    <!-- no translation found for three_finger_tap_launch_generic_assistant_name (1893057235983949817) -->
-    <skip />
+    <string name="three_finger_tap_launch_default_assistant" msgid="7947939159617292478">"Spustiť <xliff:g id="APP_NAME">%s</xliff:g>"</string>
+    <string name="three_finger_tap_launch_generic_assistant_name" msgid="1893057235983949817">"Asistent"</string>
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Prejdenie na plochu"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"Prejsť späť"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"Zobraziť nedávne aplikácie"</string>
@@ -2999,6 +3007,12 @@
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Upozornenia"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Upozornenia týkajúce sa siete"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Dostávať upozornenia, keď sa zariadenie pripojí k nešifrovanej sieti alebo sieť zaznamená jedinečný identifikátor vášho zariadenia či SIM karty"</string>
+    <!-- no translation found for cellular_security_2G_network_generation_header (2892850064192939887) -->
+    <skip />
+    <!-- no translation found for cellular_security_2G_network_generation_summary (979187530909112413) -->
+    <skip />
+    <!-- no translation found for cellular_security_2G_network_generation_title (706766676947606951) -->
+    <skip />
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Šifrovanie"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Generácie sietí"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Každú nainštalovanú SIM kartu môžete nakonfigurovať, aby sa pripájala iba k sieťam podporujúcim 3G, 4G a 5G. SIM karta sa nepripojí k starším nezabezpečeným sieťam 2G. Toto nastavenie môže obmedziť vaše pripojenie v prípade, že jediná dostupná sieť je 2G. V prípade tiesne sa môže použiť 2G."</string>
@@ -5839,25 +5853,23 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Odstránenie kódu PIN"</string>
     <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Týmto resetujete všetky nastavenia dohľadu"</string>
     <string name="supervision_add_pin_recovery_title" msgid="5584523084706797399">"Klepnutím pridajte možnosť obnovenia"</string>
+    <!-- no translation found for supervision_verify_pin_recovery_title (7953090772633001442) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filtre webového obsahu"</string>
-    <!-- no translation found for supervision_web_content_filters_summary_both_on (8668754911140483798) -->
+    <!-- no translation found for supervision_web_content_filters_browser_title (8737341514264129889) -->
     <skip />
-    <!-- no translation found for supervision_web_content_filters_summary_chrome_on (5999295548020086617) -->
+    <!-- no translation found for supervision_web_content_filters_browser_block_explicit_sites_title (1786398287521485576) -->
     <skip />
-    <!-- no translation found for supervision_web_content_filters_summary_search_on (6866676094401450305) -->
+    <!-- no translation found for supervision_web_content_filters_browser_block_explicit_sites_summary (1427357961145247788) -->
     <skip />
-    <!-- no translation found for supervision_web_content_filters_summary_both_off (6735949158065982622) -->
-    <skip />
-    <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome a internet"</string>
-    <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Pokúsiť sa blokovať explicitné weby"</string>
-    <string name="supervision_web_content_filters_browser_block_explicit_sites_summary" msgid="1477766506765966613">"Žiadny filter nie je dokonalý, no malo by to pomôcť skrývať weby so sexuálne explicitným obsahom"</string>
     <string name="supervision_web_content_filters_browser_allow_all_sites_title" msgid="3909739592466381845">"Povoliť všetky weby"</string>
-    <string name="supervision_web_content_filters_search_title" msgid="726335318009305564">"Vyhľadávanie Google"</string>
-    <string name="supervision_web_content_filters_search_filter_on_title" msgid="4855846261141136285">"Filtrovanie Bezpečného vyhľadávania je ZAPNUTÉ"</string>
-    <string name="supervision_web_content_filters_search_filter_on_summary" msgid="1162258144140293269">"Pomáha odfiltrovať explicitné obrázky, text a odkazy z výsledkov vyhľadávania v tomto zariadení"</string>
-    <string name="supervision_web_content_filters_search_filter_off_title" msgid="6049461395304222346">"Filtrovanie Bezpečného vyhľadávania je VYPNUTÉ"</string>
-    <string name="supervision_web_content_filters_search_filter_off_summary" msgid="3834238970190924433">"Nastavenia účtu môžu naďalej filtrovať alebo rozmazávať explicitné výsledky"</string>
-    <!-- no translation found for supervision_web_content_filters_footer_content (3532535288142541994) -->
+    <!-- no translation found for supervision_web_content_filters_search_title (8608480392956106029) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_search_filter_on_title (1136440775294190806) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_search_filter_on_summary (6797184284369033101) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_search_filter_off_title (7171966260908166395) -->
     <skip />
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Zadajte kód PIN dohľadu"</string>
     <string name="supervision_lock_setup_title" msgid="7581682893583645713">"Vyberte zámku pre dohľad"</string>

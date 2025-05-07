@@ -74,7 +74,7 @@ public class BundleListPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = ApplicationProvider.getApplicationContext();
 
-        when(mBackend.getAllowedAssistantAdjustments(anyString())).thenReturn(List.of(KEY_TYPE));
+        when(mBackend.getAllowedAssistantAdjustments()).thenReturn(List.of(KEY_TYPE));
         when(mBackend.isNotificationBundlingSupported()).thenReturn(true);
 
         mAppRow = new NotificationBackend.AppRow();
@@ -112,7 +112,7 @@ public class BundleListPreferenceControllerTest {
 
     @Test
     public void isAvailable_featureOffForPackage() {
-        when(mBackend.getAllowedAssistantAdjustments(anyString())).thenReturn(List.of());
+        when(mBackend.getAllowedAssistantAdjustments()).thenReturn(List.of());
         assertThat(mController.isAvailable()).isFalse();
     }
 

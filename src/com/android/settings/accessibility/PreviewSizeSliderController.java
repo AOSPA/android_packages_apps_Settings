@@ -20,67 +20,73 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.Handler;
-import android.widget.SeekBar;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnDestroy;
-import com.android.settingslib.core.lifecycle.events.OnStart;
-import com.android.settingslib.core.lifecycle.events.OnStop;
 
+import com.google.android.material.slider.Slider;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.Optional;
 
 /**
- * The controller of {@link AccessibilitySeekBarPreference} that listens to display size and font
- * size settings changes and updates preview size threshold smoothly.
+ * The controller of the display size and font size sliders that listens to
+ * changes and updates preview size threshold smoothly.
  */
-abstract class PreviewSizeSeekBarController extends BasePreferenceController implements
-        TextReadingResetController.ResetStateListener, LifecycleObserver, OnStart, OnStop,
-        OnDestroy {
+abstract class PreviewSizeSliderController extends BasePreferenceController implements
+        TextReadingResetController.ResetStateListener, DefaultLifecycleObserver {
     private final PreviewSizeData<? extends Number> mSizeData;
     private boolean mSeekByTouch;
     private Optional<ProgressInteractionListener> mInteractionListener = Optional.empty();
-    private AccessibilitySeekBarPreference mSeekBarPreference;
-    private int mLastProgress;
+    @Nullable
+    private TooltipSliderPreference mSliderPreference;
+    private int mLastValue;
     private final Handler mHandler;
 
     private String[] mStateLabels = null;
 
-    private final SeekBar.OnSeekBarChangeListener mSeekBarChangeListener =
-            new SeekBar.OnSeekBarChangeListener() {
+    private final Slider.OnChangeListener mSliderChangeListener = new Slider.OnChangeListener() {
+        @Override
+        public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
+            setSliderStateDescription(value);
+
+            if (mInteractionListener.isEmpty()) {
+                return;
+            }
+
+            final ProgressInteractionListener interactionListener = mInteractionListener.get();
+            // Avoid timing issues to update the corresponding preview fail when clicking
+            // the increase/decrease button.
+            slider.post(interactionListener::notifyPreferenceChanged);
+            if (!mSeekByTouch) {
+                interactionListener.onProgressChanged();
+                onProgressFinalized();
+            }
+        }
+    };
+
+    @VisibleForTesting
+    @NonNull
+    public Slider.OnChangeListener getSliderChangeListener() {
+        return mSliderChangeListener;
+    }
+
+    private final Slider.OnSliderTouchListener mSliderTouchListener =
+            new Slider.OnSliderTouchListener() {
                 @Override
-                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                    setSeekbarStateDescription(progress);
-
-                    if (mInteractionListener.isEmpty()) {
-                        return;
-                    }
-
-                    final ProgressInteractionListener interactionListener =
-                            mInteractionListener.get();
-                    // Avoid timing issues to update the corresponding preview fail when clicking
-                    // the increase/decrease button.
-                    seekBar.post(interactionListener::notifyPreferenceChanged);
-
-                    if (!mSeekByTouch) {
-                        interactionListener.onProgressChanged();
-                        onProgressFinalized();
-                    }
-                }
-
-                @Override
-                public void onStartTrackingTouch(SeekBar seekBar) {
+                public void onStartTrackingTouch(@NonNull Slider slider) {
                     mSeekByTouch = true;
                 }
 
                 @Override
-                public void onStopTrackingTouch(SeekBar seekBar) {
+                public void onStopTrackingTouch(@NonNull Slider slider) {
                     mSeekByTouch = false;
 
                     mInteractionListener.ifPresent(ProgressInteractionListener::onEndTrackingTouch);
@@ -88,7 +94,7 @@ abstract class PreviewSizeSeekBarController extends BasePreferenceController imp
                 }
             };
 
-    PreviewSizeSeekBarController(Context context, String preferenceKey,
+    PreviewSizeSliderController(@NonNull Context context, @NonNull String preferenceKey,
             @NonNull PreviewSizeData<? extends Number> sizeData) {
         super(context, preferenceKey);
         mSizeData = sizeData;
@@ -96,21 +102,23 @@ abstract class PreviewSizeSeekBarController extends BasePreferenceController imp
     }
 
     @Override
-    public void onStart() {
-        if (mSeekBarPreference.getNeedsQSTooltipReshow()) {
+    public void onStart(@NonNull LifecycleOwner owner) {
+        if (mSliderPreference != null && mSliderPreference.getNeedsQSTooltipReshow()) {
             mHandler.post(this::showQuickSettingsTooltipIfNeeded);
         }
     }
 
     @Override
-    public void onStop() {
+    public void onStop(@NonNull LifecycleOwner owner) {
         // all the messages/callbacks will be removed.
         mHandler.removeCallbacksAndMessages(null);
     }
 
     @Override
-    public void onDestroy() {
-        mSeekBarPreference.dismissTooltip();
+    public void onDestroy(@NonNull LifecycleOwner owner) {
+        if (mSliderPreference != null) {
+            mSliderPreference.dismissTooltip();
+        }
     }
 
     void setInteractionListener(ProgressInteractionListener interactionListener) {
@@ -128,19 +136,27 @@ abstract class PreviewSizeSeekBarController extends BasePreferenceController imp
 
         final int dataSize = mSizeData.getValues().size();
         final int initialIndex = mSizeData.getInitialIndex();
-        mLastProgress = initialIndex;
-        mSeekBarPreference = screen.findPreference(getPreferenceKey());
-        mSeekBarPreference.setMax(dataSize - 1);
-        mSeekBarPreference.setProgress(initialIndex);
-        mSeekBarPreference.setContinuousUpdates(true);
-        mSeekBarPreference.setOnSeekBarChangeListener(mSeekBarChangeListener);
-        setSeekbarStateDescription(mSeekBarPreference.getProgress());
+        mLastValue = initialIndex;
+        mSliderPreference = screen.findPreference(getPreferenceKey());
+        if (mSliderPreference == null) {
+            return;
+        }
+        mSliderPreference.setMax(dataSize - 1);
+        mSliderPreference.setSliderIncrement(1);
+        mSliderPreference.setValue(initialIndex);
+        mSliderPreference.setUpdatesContinuously(true);
+        mSliderPreference.setTickVisible(true);
+        mSliderPreference.setExtraChangeListener(mSliderChangeListener);
+        mSliderPreference.setExtraTouchListener(mSliderTouchListener);
+        setSliderStateDescription(mSliderPreference.getValue());
     }
 
     @Override
     public void resetState() {
-        final int defaultProgress = mSizeData.getValues().indexOf(mSizeData.getDefaultValue());
-        mSeekBarPreference.setProgress(defaultProgress);
+        final int defaultValue = mSizeData.getValues().indexOf(mSizeData.getDefaultValue());
+        if (mSliderPreference != null) {
+            mSliderPreference.setValue(defaultValue);
+        }
 
         // Immediately take the effect of updating the progress to avoid waiting for receiving
         // the event to delay update.
@@ -154,11 +170,11 @@ abstract class PreviewSizeSeekBarController extends BasePreferenceController imp
      * @param labels The state descriptions to be announced for each progress.
      */
     public void setProgressStateLabels(String[] labels) {
-        mStateLabels = labels;
-        if (mStateLabels == null) {
+        if (labels == null) {
             return;
         }
-        updateState(mSeekBarPreference);
+        mStateLabels = labels;
+        updateState(mSliderPreference);
     }
 
     /**
@@ -166,11 +182,12 @@ abstract class PreviewSizeSeekBarController extends BasePreferenceController imp
      * corresponding to the index of the string array. If the progress is larger than or equals
      * to the length of the array, the state description is set to an empty string.
      */
-    private void setSeekbarStateDescription(int index) {
-        if (mStateLabels == null) {
+    private void setSliderStateDescription(float value) {
+        if (mStateLabels == null || mSliderPreference == null) {
             return;
         }
-        mSeekBarPreference.setSeekBarStateDescription(
+        int index = (int) value;
+        mSliderPreference.setSliderStateDescription(
                 (index < mStateLabels.length)
                         ? mStateLabels[index] : "");
     }
@@ -179,14 +196,20 @@ abstract class PreviewSizeSeekBarController extends BasePreferenceController imp
         // Using progress in SeekBarPreference since the progresses in
         // SeekBarPreference and seekbar are not always the same.
         // See {@link androidx.preference.Preference#callChangeListener(Object)}
-        int seekBarPreferenceProgress = mSeekBarPreference.getProgress();
-        if (seekBarPreferenceProgress != mLastProgress) {
-            showQuickSettingsTooltipIfNeeded();
-            mLastProgress = seekBarPreferenceProgress;
+        if (mSliderPreference != null) {
+            int value = mSliderPreference.getValue();
+            if (value != mLastValue) {
+                showQuickSettingsTooltipIfNeeded();
+                mLastValue = value;
+            }
         }
     }
 
     private void showQuickSettingsTooltipIfNeeded() {
+        if (mSliderPreference == null) {
+            return;
+        }
+
         final ComponentName tileComponentName = getTileComponentName();
         if (tileComponentName == null) {
             // Returns if no tile service assigned.
@@ -199,7 +222,7 @@ abstract class PreviewSizeSeekBarController extends BasePreferenceController imp
             return;
         }
 
-        if (!mSeekBarPreference.getNeedsQSTooltipReshow()
+        if (!mSliderPreference.getNeedsQSTooltipReshow()
                 && AccessibilityQuickSettingUtils.hasValueInSharedPreferences(
                 mContext, tileComponentName)) {
             // Returns if quick settings tooltip only show once.
@@ -211,16 +234,16 @@ abstract class PreviewSizeSeekBarController extends BasePreferenceController imp
         // null check on seekbar is a temporary solution for the case that seekbar view
         // is not ready when we would like to show the tooltip.  If the seekbar is not ready,
         // we give up showing the tooltip and also do not reshow it in the future.
-        if (mSeekBarPreference.getSeekbar() != null) {
+        if (mSliderPreference.getSlider() != null) {
             final AccessibilityQuickSettingsTooltipWindow tooltipWindow =
-                    mSeekBarPreference.createTooltipWindow();
+                    mSliderPreference.createTooltipWindow();
             tooltipWindow.setup(getTileTooltipContent(),
                     R.drawable.accessibility_auto_added_qs_tooltip_illustration);
-            tooltipWindow.showAtTopCenter(mSeekBarPreference.getSeekbar());
+            tooltipWindow.showAtTopCenter(mSliderPreference.getSlider());
         }
         AccessibilityQuickSettingUtils.optInValueToSharedPreferences(mContext,
                 tileComponentName);
-        mSeekBarPreference.setNeedsQSTooltipReshow(false);
+        mSliderPreference.setNeedsQSTooltipReshow(false);
     }
 
     /** Returns the accessibility Quick Settings tile component name. */

@@ -87,13 +87,14 @@ public class BundleCombinedPreferenceController extends BasePreferenceController
     }
 
     void updatePrefValues() {
-        boolean isBundlingEnabled = mBackend.isNotificationBundlingEnabled(mContext);
+        // TODO: b/412433475 - update for profile users (add a work profile switch).
+        boolean isBundlingEnabled = mBackend.isNotificationBundlingEnabled(mContext.getUserId());
         Set<Integer> allowedTypes = mBackend.getAllowedBundleTypes();
 
         // State check: if bundling is globally enabled, but there are no allowed bundle types,
         // disable the global bundling state from here before proceeding.
         if (isBundlingEnabled && allowedTypes.size() == 0) {
-            mBackend.setNotificationBundlingEnabled(false);
+            mBackend.setNotificationBundlingEnabled(mContext.getUserId(), false);
             isBundlingEnabled = false;
         }
 
@@ -113,7 +114,7 @@ public class BundleCombinedPreferenceController extends BasePreferenceController
 
     private Preference.OnPreferenceChangeListener mGlobalPrefListener = (p, val) -> {
         boolean checked = (boolean) val;
-        mBackend.setNotificationBundlingEnabled(checked);
+        mBackend.setNotificationBundlingEnabled(mContext.getUserId(), checked);
         // update state to hide or show preferences for individual types
         updatePrefValues();
         return true;

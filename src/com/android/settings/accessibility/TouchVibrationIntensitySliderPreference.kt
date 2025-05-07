@@ -15,14 +15,16 @@
  */
 package com.android.settings.accessibility
 
+import android.content.Context
 import android.os.VibrationAttributes
 import android.provider.Settings
 import com.android.settings.R
 
 /** Accessibility settings for touch haptic feedback, as a slider. */
 // LINT.IfChange
-class TouchVibrationIntensitySliderPreference :
+class TouchVibrationIntensitySliderPreference(context: Context) :
     VibrationIntensitySliderPreference(
+        context = context,
         key = KEY,
         vibrationUsage = VibrationAttributes.USAGE_TOUCH,
         title = R.string.accessibility_touch_vibration_title,

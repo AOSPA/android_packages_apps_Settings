@@ -41,8 +41,8 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.server.accessibility.Flags;
-import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.SliderPreference;
 
 import org.junit.After;
 import org.junit.Before;
@@ -51,18 +51,19 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
-/** Tests for {@link DaltonizerSaturationSeekbarPreferenceController}. */
+/** Tests for {@link DaltonizerSaturationSliderPreferenceController}. */
 @RunWith(RobolectricTestRunner.class)
-public class DaltonizerSaturationSeekbarPreferenceControllerTest {
+public class DaltonizerSaturationSliderPreferenceControllerTest {
 
+    private static final String PREF_KEY = "testPrefKey";
     private ContentResolver mContentResolver;
-    private DaltonizerSaturationSeekbarPreferenceController mController;
+    private DaltonizerSaturationSliderPreferenceController mController;
 
     private PreferenceScreen mScreen;
     private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
 
-    private SeekBarPreference mPreference;
+    private SliderPreference mPreference;
 
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
@@ -72,16 +73,16 @@ public class DaltonizerSaturationSeekbarPreferenceControllerTest {
         Context context = ApplicationProvider.getApplicationContext();
         mContentResolver = context.getContentResolver();
 
-        mPreference = new SeekBarPreference(context);
-        mPreference.setKey(ToggleDaltonizerPreferenceFragment.KEY_SATURATION);
+        mPreference = new SliderPreference(context);
+        mPreference.setKey(PREF_KEY);
         mScreen = new PreferenceManager(context).createPreferenceScreen(context);
         mScreen.addPreference(mPreference);
 
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
-        mController = new DaltonizerSaturationSeekbarPreferenceController(
+        mController = new DaltonizerSaturationSliderPreferenceController(
                 context,
-                ToggleDaltonizerPreferenceFragment.KEY_SATURATION);
+                PREF_KEY);
     }
 
     @After
@@ -180,7 +181,7 @@ public class DaltonizerSaturationSeekbarPreferenceControllerTest {
         assertThat(mPreference.isEnabled()).isTrue();
         assertThat(mPreference.getMax()).isEqualTo(10);
         assertThat(mPreference.getMin()).isEqualTo(1);
-        assertThat(mPreference.getProgress()).isEqualTo(7);
+        assertThat(mPreference.getValue()).isEqualTo(7);
         assertThat(mPreference.isVisible()).isTrue();
         assertThat(mPreference.getOnPreferenceChangeListener()).isEqualTo(mController);
     }
@@ -194,7 +195,7 @@ public class DaltonizerSaturationSeekbarPreferenceControllerTest {
         assertThat(mPreference.isEnabled()).isFalse();
         assertThat(mPreference.getMax()).isEqualTo(10);
         assertThat(mPreference.getMin()).isEqualTo(1);
-        assertThat(mPreference.getProgress()).isEqualTo(7);
+        assertThat(mPreference.getValue()).isEqualTo(7);
         assertThat(mPreference.isVisible()).isTrue();
         assertThat(mPreference.getOnPreferenceChangeListener()).isEqualTo(mController);
     }

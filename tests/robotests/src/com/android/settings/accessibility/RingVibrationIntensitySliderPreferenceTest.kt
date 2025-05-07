@@ -15,12 +15,8 @@
  */
 package com.android.settings.accessibility
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.junit.runner.RunWith
-
 // LINT.IfChange
-@RunWith(AndroidJUnit4::class)
 class RingVibrationIntensitySliderPreferenceTest : VibrationIntensitySliderPreferenceTestCase() {
-    override val preference = RingVibrationIntensitySliderPreference()
+    override val preference = RingVibrationIntensitySliderPreference(context)
 }
 // LINT.ThenChange(RingVibrationIntensityPreferenceControllerTest.java)

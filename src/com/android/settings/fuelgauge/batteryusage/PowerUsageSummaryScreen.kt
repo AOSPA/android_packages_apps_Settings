@@ -21,6 +21,7 @@ import com.android.settings.display.BatteryPercentageSwitchPreference
 import com.android.settings.flags.Flags
 import com.android.settings.fuelgauge.BatteryHeaderPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
@@ -58,7 +59,9 @@ class PowerUsageSummaryScreen :
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(context, this) {
             +BatteryHeaderPreference()
-            +BatteryPercentageSwitchPreference()
+            +PreferenceCategory("percentage_category", 0) += {
+                +BatteryPercentageSwitchPreference()
+            }
         }
 
     companion object {

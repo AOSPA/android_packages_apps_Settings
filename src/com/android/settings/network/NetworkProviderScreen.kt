@@ -22,6 +22,7 @@ import com.android.settings.flags.Flags
 import com.android.settings.restriction.PreferenceRestrictionMixin
 import com.android.settings.wifi.WifiSwitchPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
@@ -56,7 +57,11 @@ class NetworkProviderScreen :
     override fun fragmentClass() = NetworkProviderSettings::class.java
 
     override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) { +WifiSwitchPreference() }
+        preferenceHierarchy(context, this) {
+            +PreferenceCategory("wifi_category", R.string.wifi_settings) += {
+                +WifiSwitchPreference()
+            }
+        }
 
     companion object {
         const val KEY = "internet_settings"
