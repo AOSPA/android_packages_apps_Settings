@@ -20,7 +20,7 @@
     android:key="connected_devices_screen"
     android:title="@string/connected_devices_dashboard_title">
 
-    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+    <com.android.settingslib.widget.UntitledPreferenceCategory>
       <com.android.settings.slices.SlicePreference
           android:key="bt_nearby_slice"
           android:title="@string/summary_placeholder"
@@ -34,7 +34,7 @@
           android:title="@string/audio_sharing_title"
           settings:controller="com.android.settings.connecteddevice.audiosharing.AudioSharingPreferenceController"
           settings:searchable="false" />
-    </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+    </com.android.settingslib.widget.UntitledPreferenceCategory>
 
     <PreferenceCategory
         android:key="audio_sharing_device_list"
@@ -52,7 +52,7 @@
         android:title="@string/connected_device_other_device_title"
         settings:controller="com.android.settings.connecteddevice.ConnectedDeviceGroupController" />
 
-    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+    <com.android.settingslib.widget.UntitledPreferenceCategory>
       <com.android.settingslib.RestrictedPreference
           android:fragment="com.android.settings.bluetooth.BluetoothPairingDetail"
           android:icon="@drawable/ic_add_24dp"
@@ -63,7 +63,7 @@
           settings:keywords="@string/keywords_add_bt_device"
           settings:useAdminDisabledSummary="true"
           settings:userRestriction="no_config_bluetooth" />
-    </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+    </com.android.settingslib.widget.UntitledPreferenceCategory>
 
 
     <PreferenceCategory
@@ -97,7 +97,7 @@
             settings:searchable="false" />
     </PreferenceCategory>
 
-    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+    <com.android.settingslib.widget.UntitledPreferenceCategory>
       <Preference
           android:fragment="com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment"
           android:key="connection_preferences"
@@ -105,7 +105,7 @@
           android:title="@string/connected_device_connections_title"
           settings:allowDividerAbove="true"
           settings:controller="com.android.settings.connecteddevice.AdvancedConnectedDeviceController" />
-    </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+    </com.android.settingslib.widget.UntitledPreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference
         android:key="discoverable_footer"

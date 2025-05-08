@@ -766,7 +766,7 @@
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"画面ロックを選択"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"新しい画面ロックを選択"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"仕事用アプリのロックの選択"</string>
-    <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"新しい仕事用ロックの選択"</string>
+    <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"新しい仕事用ロックを選択"</string>
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"セキュリティ強化のため、予備の画面ロックを設定してください"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"予備の画面ロック方式を選択してください"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"画面ロックを忘れるとIT管理者もリセットできません。"</string>
@@ -2114,6 +2114,9 @@
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"マウスキーを使用する"</string>
     <string name="accessibility_mouse_keys_shortcut_title" msgid="7621635104533584115">"マウスキーのショートカット"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"キーボードを使用してポインタを操作します"</string>
+    <string name="mouse_keys_max_speed_title" msgid="1788751803245422659">"最大速度"</string>
+    <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"小さくする"</string>
+    <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"大きくする"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"逆スクロール"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"上にスクロールすると、ページ下部に移動します"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"スクロール"</string>
@@ -2776,8 +2779,6 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"消費電力の調整"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"含まれているパッケージ"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"アプリは正常に実行されています"</string>
-    <string name="battery_tip_replacement_title" msgid="3932335880485957919">"バッテリーの交換をおすすめします"</string>
-    <string name="battery_tip_replacement_summary" msgid="7892640031317153349">"バッテリー容量と充電性能が低下しているため、バッテリーの交換をおすすめします。"</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"バッテリー残量が少なくなっています"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"バッテリー セーバーを ON にしてバッテリーを長持ちさせます"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"バッテリー寿命の改善"</string>
@@ -3000,11 +3001,11 @@
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"ネットワークの世代"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"挿入した SIM カードごとに、3G、4G、5G 対応のネットワークにのみ接続するように設定できます。旧式の安全でない 2G ネットワークには接続できなくなります。この設定により、2G ネットワークしか利用できない場合に接続が制限されることがあります。緊急の場合は 2G が使用されることがあります。"</string>
     <string name="credentials_title" msgid="7535942196886123656">"認証情報ストレージ"</string>
-    <string name="credentials_install" msgid="3933218407598415827">"証明書のインストール"</string>
-    <string name="credentials_reset" msgid="4246628389366452655">"認証情報の消去"</string>
+    <string name="credentials_install" msgid="3933218407598415827">"証明書をインストール"</string>
+    <string name="credentials_reset" msgid="4246628389366452655">"認証情報を消去"</string>
     <string name="credentials_reset_summary" msgid="5400585520572874255">"証明書をすべて削除する"</string>
     <string name="trusted_credentials" msgid="2522784976058244683">"信頼できる認証情報"</string>
-    <string name="trusted_credentials_summary" msgid="345822338358409468">"信頼できるCA証明書を表示する"</string>
+    <string name="trusted_credentials_summary" msgid="345822338358409468">"信頼できる CA 証明書を表示する"</string>
     <string name="user_credentials" msgid="4044405430790970775">"ユーザー認証情報"</string>
     <string name="user_credentials_summary" msgid="686471637627271856">"保存されている認証情報の表示と変更"</string>
     <string name="advanced_security_title" msgid="7117581975877192652">"詳細設定"</string>
@@ -3294,6 +3295,8 @@
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"仕事用プロファイルの削除"</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"すべてのアプリとデータが削除されます。"</string>
     <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"続行すると、このプロファイル内のアプリとデータはすべて削除されます。"</string>
+    <!-- no translation found for work_profile_confirm_remove_message_with_esim (1169605178915445183) -->
+    <skip />
     <string name="user_profile_confirm_remove_message" msgid="3641289528179850718">"すべてのアプリとデータが削除されます。"</string>
     <string name="user_adding_new_user" msgid="7439602720177181412">"新しいユーザーを追加中…"</string>
     <string name="user_delete_user_description" msgid="7764153465503821011">"ユーザーを削除"</string>
@@ -4586,7 +4589,7 @@
     <string name="battery_saver_off_scheduled_summary" msgid="2193875981740829819">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> で ON になります"</string>
     <string name="battery_saver_off_summary" msgid="4411561435493109261">"OFF"</string>
     <string name="app_battery_usage_title" msgid="346558380609793334">"アプリのバッテリー使用量"</string>
-    <string name="app_battery_usage_summary" msgid="6349965904306339539">"アプリのバッテリー使用量の設定"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"アプリのバッテリー使用量を設定します"</string>
     <string name="battery_tips_card_action_button" msgid="4897793527424711648">"設定を表示"</string>
     <string name="battery_tips_card_action_button_check" msgid="1535140204105479318">"確認"</string>
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"OK"</string>
@@ -5767,11 +5770,13 @@
     <string name="audio_streams_dialog_turn_off_talkback_title" msgid="6824585115302786690">"TalkBack を一時的に OFF にする"</string>
     <string name="audio_streams_dialog_turn_off_talkback_subtitle" msgid="2394295776096273919">"音声ストリームの再生中は TalkBack を使用できません。聞き取りを開始するには、TalkBack を OFF にしてください。"</string>
     <string name="audio_streams_dialog_turn_off_talkback_button" msgid="8049097689955037626">"OFF にする"</string>
+    <string name="audio_streams_dialog_turn_off_audio_sharing_title" msgid="1017164439467110153">"共有中は音声ストリームを聴くことができません"</string>
+    <string name="audio_streams_dialog_turn_off_audio_sharing_subtitle" msgid="5856842223436525336">"このストリームを聴くには、音声の共有を OFF にしてください。"</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"デバイスを接続"</string>
     <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"音声ストリームの詳細"</string>
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"音声ストリームの QR コード"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"パスワード: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
-    <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"他の人が<xliff:g id="STREAM_NAME">%1$s</xliff:g>を聴くためには、対応するヘッドフォンを Android デバイスに接続して、この QR コードをスキャンしてもらいます。"</string>
+    <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"対応するヘッドフォンを Android デバイスに接続して、この QR コードをスキャンした人は、誰でも <xliff:g id="STREAM_NAME">%1$s</xliff:g> を聴くことができます。"</string>
     <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"Auracast ブロードキャストを聴く"</string>
     <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"音声ストリームを検出するには、音声の共有を OFF にしてください"</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"音声ストリームを探す"</string>
@@ -5806,18 +5811,26 @@
     <string name="supervision_settings_title" msgid="8507163323870367711">"保護者による使用制限"</string>
     <string name="supervision_settings_summary" msgid="5020634300370322741">"コンテンツの制限とその他の制限"</string>
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"デバイスの管理機能を使用する"</string>
-    <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"最初に PIN を設定してください"</string>
+    <!-- no translation found for device_supervision_switch_no_pin_summary (4869563544571033220) -->
+    <skip />
+    <!-- no translation found for device_supervision_switch_paused_summary (1014381188739295656) -->
+    <skip />
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"管理機能, 保護者向け管理ツール, 保護者による使用制限"</string>
-    <string name="supervision_pin_management_preference_title" msgid="961680798581006465">"PIN の管理"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="8061713645550514683">"PIN の復元方法を追加します"</string>
-    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="2156782778845060114">"PIN の復元方法を確認します"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (7721501202320841845) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (2247921267270577374) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_verify_recovery (5072554239108915119) -->
+    <skip />
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"PIN を変更する"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"PIN を忘れた場合"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"再設定用のメールアドレスを更新する"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"PIN を削除する"</string>
     <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"管理機能の設定がすべてリセットされます"</string>
-    <string name="supervision_add_pin_recovery_title" msgid="5584523084706797399">"復元方法を追加するにはタップしてください"</string>
-    <string name="supervision_verify_pin_recovery_title" msgid="7953090772633001442">"復元を確認するにはタップしてください"</string>
+    <!-- no translation found for supervision_add_pin_recovery_title (3487098027604685794) -->
+    <skip />
+    <!-- no translation found for supervision_verify_pin_recovery_title (3166602415814821497) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"ウェブ コンテンツ フィルタ"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"ウェブサイト"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="1786398287521485576">"露骨な表現を含むウェブ コンテンツをブロックする"</string>
@@ -5828,8 +5841,9 @@
     <string name="supervision_web_content_filters_search_filter_on_summary" msgid="6797184284369033101">"このデバイスの検索エンジン用"</string>
     <string name="supervision_web_content_filters_search_filter_off_title" msgid="7171966260908166395">"フィルタ OFF"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"管理機能用の PIN を入力"</string>
-    <string name="supervision_lock_setup_title" msgid="7581682893583645713">"管理機能のロックを選択"</string>
-    <string name="supervision_lock_setup_description" msgid="6931450348200992733">"このコードで管理機能の設定のロックを解除できます"</string>
-    <string name="supervision_pin_reset_success_toast" msgid="4663259412030769718">"保護者による使用制限の PIN のリセット"</string>
+    <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"保護者による使用制限の PIN を設定する"</string>
+    <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"PIN の確認"</string>
+    <!-- no translation found for supervision_pin_reset_success_toast (9163550161698311831) -->
+    <skip />
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> のアニメーション"</string>
 </resources>

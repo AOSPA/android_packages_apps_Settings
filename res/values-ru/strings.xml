@@ -41,12 +41,9 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Приостановлено"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Неизвестно"</string>
     <string name="qr_code_content_description" msgid="1852208464419291347">"QR-код"</string>
-    <!-- no translation found for preview_pager_home_title (6102935625155194821) -->
-    <skip />
-    <!-- no translation found for preview_pager_message_title (5933499691147446486) -->
-    <skip />
-    <!-- no translation found for preview_pager_email_title (8767864657910457562) -->
-    <skip />
+    <string name="preview_pager_home_title" msgid="6102935625155194821">"Главный экран"</string>
+    <string name="preview_pager_message_title" msgid="5933499691147446486">"Сообщение"</string>
+    <string name="preview_pager_email_title" msgid="8767864657910457562">"Электронная почта"</string>
     <string name="preview_pager_previous_button" msgid="607771113300838313">"Назад"</string>
     <string name="preview_pager_next_button" msgid="8700907912508927271">"Далее"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Уменьшить"</string>
@@ -316,13 +313,11 @@
     <string name="time_format_category_title" msgid="7108616745509689991">"Формат времени"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"Часовой пояс"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"Часовой пояс"</string>
-    <!-- no translation found for date_time_search_time_zone (7373967602009974399) -->
-    <skip />
+    <string name="date_time_search_time_zone" msgid="7373967602009974399">"Поиск часового пояса"</string>
     <string name="date_time_set_date_title" msgid="7624166157167528407">"Дата"</string>
     <string name="date_time_search_region" msgid="1364133854952610919">"Поиск по регионам"</string>
     <string name="date_time_select_region" msgid="5449345333305056072">"Регион"</string>
-    <!-- no translation found for date_time_select_fixed_offset_time_zones (2130108030162342594) -->
-    <skip />
+    <string name="date_time_select_fixed_offset_time_zones" msgid="2130108030162342594">"Разница с GMT"</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Часовой пояс: <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
@@ -331,8 +326,7 @@
     <string name="zone_time_type_dst" msgid="9189689342265305808">"Летнее время"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Стандартное время"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Регион"</string>
-    <!-- no translation found for zone_menu_by_offset (543648951618438204) -->
-    <skip />
+    <string name="zone_menu_by_offset" msgid="543648951618438204">"Выбрать по разнице с GMT"</string>
     <string name="time_feedback_category_title" msgid="5942621686512255208">"Отзыв"</string>
     <string name="keywords_time_feedback_category" msgid="4553921538559830393">"отзыв, ошибка, время, пояс, часовой пояс"</string>
     <string name="time_feedback_title" msgid="7720948068042783614">"Отправить отзыв о времени"</string>
@@ -352,7 +346,7 @@
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Приложения, у которых есть разрешение \"Устройства поблизости\", могут определять относительное местоположение подключенных устройств."</string>
     <string name="location_settings_footer_location_off_with_telephony" msgid="5600725945541382556">"Доступ к информации о местоположении отключен для приложений и сервисов. Однако если вы свяжетесь с экстренной службой, геоданные вашего устройства могут быть переданы спасателям."</string>
     <string name="location_settings_footer_location_off_no_telephony" msgid="2709958040008816610">"Доступ к информации о местоположении отключен для приложений и сервисов."</string>
-    <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Подробнее о настройках местоположения…"</string>
+    <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Подробнее о настройках геолокации…"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Чтобы внести изменения, выберите \"Настройки ChromeOS &gt; Конфиденциальность и безопасность &gt; Настройки конфиденциальности &gt; Доступ к геоданным\""</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Аккаунты"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Безопасность"</string>
@@ -969,10 +963,8 @@
     <string name="device_details_battery" msgid="5466987755790847884">"Батарея"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"Батарея, идет зарядка"</string>
     <string name="device_details_key_missing_title" msgid="3568401701538114387">"Перезагрузите устройство \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\". Если это не поможет, удалите его из списка. Чтобы не подвергать устройство опасности, не следует заново подключать его в общественном месте.\n\nЕсли этого устройства поблизости нет, никаких действий не требуется."</string>
-    <!-- no translation found for verbose_printer_logging_title (6525634245166402031) -->
-    <skip />
-    <!-- no translation found for verbose_printer_logging_summary (6558076303223667013) -->
-    <skip />
+    <string name="verbose_printer_logging_title" msgid="6525634245166402031">"Ведение подробных журналов печати"</string>
+    <string name="verbose_printer_logging_summary" msgid="6558076303223667013">"Дополнительные журналы отладки, в том числе Internet Printing Protocol (IPP), могут содержать конфиденциальную информацию"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Удалить устройство"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Отключение приложения"</string>
     <string name="device_details_more_settings" msgid="950302792331611271">"Дополнительные настройки"</string>
@@ -1178,12 +1170,9 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Разрешить"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Отклонить"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"* Обязательное поле."</string>
-    <!-- no translation found for share_wifi_network (4064997404339571584) -->
-    <skip />
-    <!-- no translation found for share_wifi_network_summary (4316236421149769333) -->
-    <skip />
-    <!-- no translation found for edit_wifi_network_configuration (5712989655083072417) -->
-    <skip />
+    <string name="share_wifi_network" msgid="4064997404339571584">"Поделиться сетью с другими пользователями устройства"</string>
+    <string name="share_wifi_network_summary" msgid="4316236421149769333">"Она станет доступна для подключения всем пользователям устройства. Удалить эту сеть сможет администратор. Подробнее…"</string>
+    <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"Разрешить другим пользователям изменять конфигурацию сети"</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Эта сеть Wi-Fi не подключена к Интернету. Использовать ее?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Некоторые приложения и сервисы могут не работать, так как подключение к сети ограничено. Продолжить?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Больше не спрашивать для этой сети"</string>
@@ -1481,10 +1470,8 @@
     <string name="force_bold_text" msgid="4620929631102086716">"Полужирный шрифт"</string>
     <string name="title_font_size" msgid="570613010306330622">"Размер шрифта"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Изменение размера шрифта"</string>
-    <!-- no translation found for category_title_display_text_size (4234285020731751694) -->
-    <skip />
-    <!-- no translation found for category_title_text_style (5905015084935695611) -->
-    <skip />
+    <string name="category_title_display_text_size" msgid="4234285020731751694">"Параметры размера"</string>
+    <string name="category_title_text_style" msgid="5905015084935695611">"Параметры стилей"</string>
     <string name="sim_lock_settings" msgid="7331982427303002613">"Настройки блокировки SIM-карты"</string>
     <string name="sim_lock_settings_category" msgid="6475255139493877786">"Блокировка SIM-карты"</string>
     <string name="sim_pin_toggle" msgid="6814489621760857328">"Блокировать SIM-карту"</string>
@@ -2125,9 +2112,14 @@
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Вводить сочетания клавиш не одновременными нажатиями, а последовательными"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Клавиши управления указателем"</string>
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"Управлять указателем с помощью клавиш"</string>
-    <!-- no translation found for accessibility_mouse_keys_shortcut_title (7621635104533584115) -->
-    <skip />
+    <string name="accessibility_mouse_keys_shortcut_title" msgid="7621635104533584115">"Сочетания клавиш управления указателем"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Управлять указателем с помощью клавиатуры"</string>
+    <!-- no translation found for mouse_keys_max_speed_title (1788751803245422659) -->
+    <skip />
+    <!-- no translation found for mouse_keys_seek_bar_decrease_button_description (9077624857206032509) -->
+    <skip />
+    <!-- no translation found for mouse_keys_seek_bar_increase_button_description (2721662400858172203) -->
+    <skip />
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Прокрутка в обратную сторону"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Если прокрутить вверх, страница прокрутится вниз"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"Прокрутка"</string>
@@ -2790,8 +2782,6 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Режим энергопотребления"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Пакеты"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Приложения работают нормально"</string>
-    <string name="battery_tip_replacement_title" msgid="3932335880485957919">"Рекомендуем заменить батарею"</string>
-    <string name="battery_tip_replacement_summary" msgid="7892640031317153349">"Емкость батареи и эффективность зарядки снижены. Советуем заменить батарею."</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Низкий уровень заряда батареи"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Включите режим энергосбережения, чтобы увеличить время работы от батареи."</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Продлите время работы от батареи"</string>
@@ -3007,12 +2997,9 @@
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Уведомления"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Уведомления о сетях"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Получать уведомления, когда устройство подключается к незашифрованной сети или когда сеть записывает уникальный идентификатор устройства/SIM-карты"</string>
-    <!-- no translation found for cellular_security_2G_network_generation_header (2892850064192939887) -->
-    <skip />
-    <!-- no translation found for cellular_security_2G_network_generation_summary (979187530909112413) -->
-    <skip />
-    <!-- no translation found for cellular_security_2G_network_generation_title (706766676947606951) -->
-    <skip />
+    <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"Поколение сети"</string>
+    <string name="cellular_security_2G_network_generation_summary" msgid="979187530909112413">"Когда включена защита от сетей 2G, устройство не подключается к ним, поскольку они менее безопасны. В результате использование мобильных сетей в некоторых местах может быть ограничено. Экстренные вызовы доступны всегда."</string>
+    <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"Защита от сетей 2G"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Шифрование"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Поколения сетей"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Вы можете настроить каждую из установленных SIM-карт так, что она будет подключаться только к сетям, поддерживающим 3G, 4G и 5G. Подключение к старым небезопасным 2G-сетям станет невозможным. Если единственная доступная сеть поддерживает только 2G, обмен данными может быть ограничен. Технология 2G может быть использована в экстренных случаях."</string>
@@ -3311,6 +3298,8 @@
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"Удалить рабочий профиль?"</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"Все приложения и данные будут удалены."</string>
     <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"Все приложения и данные, находящиеся в этом профиле, будут удалены."</string>
+    <!-- no translation found for work_profile_confirm_remove_message_with_esim (1169605178915445183) -->
+    <skip />
     <string name="user_profile_confirm_remove_message" msgid="3641289528179850718">"Все приложения и данные будут удалены."</string>
     <string name="user_adding_new_user" msgid="7439602720177181412">"Добавление…"</string>
     <string name="user_delete_user_description" msgid="7764153465503821011">"Удалить пользователя"</string>
@@ -3812,16 +3801,12 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"Открыть уведомление"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Разрешить откладывать уведомления"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Значок уведомления на значке приложения"</string>
-    <!-- no translation found for notification_bundles (496852738958148317) -->
-    <skip />
+    <string name="notification_bundles" msgid="496852738958148317">"Менеджер уведомлений"</string>
     <string name="notification_summarization_title" msgid="1516039882005781529">"Краткие пересказы уведомлений"</string>
-    <!-- no translation found for notification_summarization_summary (1963425736716175590) -->
-    <skip />
+    <string name="notification_summarization_summary" msgid="1963425736716175590">"Получайте краткие пересказы длинных сообщений"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Использовать краткие пересказы уведомлений"</string>
-    <!-- no translation found for notification_summarization_description (341128754705513791) -->
-    <skip />
-    <!-- no translation found for notification_summarization_excluded_description (5819160700526641394) -->
-    <skip />
+    <string name="notification_summarization_description" msgid="341128754705513791">"Получайте краткие пересказы длинных сообщений и групповых чатов. Функция работает на основе ИИ и может содержать ошибки."</string>
+    <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Вы не будете получать краткие пересказы уведомлений из этих приложений"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Управление приложениями"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="1299744594788208296">"Получать сводку уведомлений от приложений"</string>
     <string name="notification_excluded_apps" msgid="6648267716069216826">"Исключения для приложений"</string>
@@ -3979,18 +3964,13 @@
     <string name="notification_polite_description" msgid="6137533404978878957">"Если вам будет поступать много уведомлений за короткое время, то устройство на одну минуту понизит уровень громкости и станет сворачивать оповещения. Это не распространяется на звонки, будильники и важные разговоры. \n\nЧтобы увидеть уведомления, полученные в этом режиме, проведите пальцем вниз от верхнего края экрана."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Применить к рабочим профилям"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Применить для приложений в рабочем профиле"</string>
-    <!-- no translation found for notification_bundle_title (6679586974995981433) -->
-    <skip />
-    <!-- no translation found for notification_bundle_summary (8924550009829960969) -->
-    <skip />
-    <!-- no translation found for notification_bundle_main_control_title (2632661768990540295) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (8439963475488583612) -->
-    <skip />
+    <string name="notification_bundle_title" msgid="6679586974995981433">"Менеджер уведомлений"</string>
+    <string name="notification_bundle_summary" msgid="8924550009829960969">"Сгруппируйте уведомления с низким приоритетом и отключите их звук"</string>
+    <string name="notification_bundle_main_control_title" msgid="2632661768990540295">"Использовать менеджер уведомлений"</string>
+    <string name="notification_bundle_description" msgid="8439963475488583612">"Выберите типы уведомлений, для которых нужно отключить звук, и сгруппируйте их. Это поможет меньше отвлекаться. Функция работает на основе ИИ и может содержать ошибки."</string>
     <string name="notification_app_level_bundle_title" msgid="8917807675495480483">"Группировать уведомления"</string>
     <string name="notification_app_level_bundle_subtext" msgid="7330731485247761388">"Группировать и показывать без звука похожие уведомления"</string>
-    <!-- no translation found for notification_bundle_excluded_description (2667461772332132250) -->
-    <skip />
+    <string name="notification_bundle_excluded_description" msgid="2667461772332132250">"Уведомления от этих приложений не будут сгруппированы"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="7019831234073590293">"Группировать уведомления от приложений"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Вспомогательные VR-сервисы"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Установленные приложения не запрашивали доступ для работы в качестве вспомогательного VR-сервиса."</string>
@@ -4726,22 +4706,14 @@
     <string name="system_navigation_title" msgid="4890381153527184636">"Режим навигации"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"Навигация с помощью двух кнопок"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Чтобы переключиться между приложениями, проведите вверх по кнопке главного экрана. Чтобы увидеть все приложения, снова проведите вверх. Для возврата к предыдущему экрану нажмите кнопку \"Назад\"."</string>
-    <!-- no translation found for shade_panels_title (6816157397029469997) -->
-    <skip />
-    <!-- no translation found for keywords_shade_panels (6181844937287087945) -->
-    <skip />
-    <!-- no translation found for shade_panels_category (3262351355390846546) -->
-    <skip />
-    <!-- no translation found for shade_panels_separate_title (7839124123668116363) -->
-    <skip />
-    <!-- no translation found for shade_panels_separate_summary (4879360492042964895) -->
-    <skip />
-    <!-- no translation found for shade_panels_combined_title (2812149031368941984) -->
-    <skip />
-    <!-- no translation found for shade_panels_combined_summary (5884627562590432068) -->
-    <skip />
-    <!-- no translation found for shade_panels_foldables_footer_message (3974376428811063936) -->
-    <skip />
+    <string name="shade_panels_title" msgid="6816157397029469997">"Уведомления и быстрые настройки"</string>
+    <string name="keywords_shade_panels" msgid="6181844937287087945">"панель уведомлений, панели, уведомления, быстрые настройки, раздельно, вместе, совмещенный, раздельный"</string>
+    <string name="shade_panels_category" msgid="3262351355390846546">"Панели"</string>
+    <string name="shade_panels_separate_title" msgid="7839124123668116363">"Раздельный режим"</string>
+    <string name="shade_panels_separate_summary" msgid="4879360492042964895">"Проведите вниз от правого верхнего угла экрана, чтобы открыть быстрые настройки. Проведите вниз от левого верхнего угла экрана, чтобы открыть уведомления."</string>
+    <string name="shade_panels_combined_title" msgid="2812149031368941984">"Совмещенный режим (классическая панель)"</string>
+    <string name="shade_panels_combined_summary" msgid="5884627562590432068">"Проведите по экрану сверху вниз, чтобы открыть классическую панель с уведомлениями и быстрыми настройками"</string>
+    <string name="shade_panels_foldables_footer_message" msgid="3974376428811063936">"Панель с уведомлениями и быстрыми настройками доступна только на внешнем экране складного устройства."</string>
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Безопасность и экстренные случаи"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"Экстренные вызовы, медицинские данные, оповещения"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Навигация жестами"</string>
@@ -5803,11 +5775,15 @@
     <string name="audio_streams_dialog_turn_off_talkback_title" msgid="6824585115302786690">"Временно отключите TalkBack"</string>
     <string name="audio_streams_dialog_turn_off_talkback_subtitle" msgid="2394295776096273919">"Слушать аудиотрансляцию и одновременно использовать TalkBack невозможно. Чтобы начать прослушивание, отключите TalkBack."</string>
     <string name="audio_streams_dialog_turn_off_talkback_button" msgid="8049097689955037626">"Отключить"</string>
+    <!-- no translation found for audio_streams_dialog_turn_off_audio_sharing_title (1017164439467110153) -->
+    <skip />
+    <!-- no translation found for audio_streams_dialog_turn_off_audio_sharing_subtitle (5856842223436525336) -->
+    <skip />
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Подключить устройство"</string>
     <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Информация об аудиопотоке"</string>
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"QR-код аудиопотока"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Пароль: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
-    <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Чтобы слушать аудиопоток \"<xliff:g id="STREAM_NAME">%1$s</xliff:g>\", другие пользователи могут подключить совместимые наушники к своим устройствам Android, отсканировав QR-код."</string>
+    <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Чтобы слушать аудиопоток \"<xliff:g id="STREAM_NAME">%1$s</xliff:g>\", другие пользователи могут подключить совместимые наушники к своим устройствам Android, а затем отсканировать QR-код."</string>
     <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"Послушать трансляцию Auracast"</string>
     <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"Чтобы начать поиск аудиопотоков, отключите передачу аудио"</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Поиск аудиопотока"</string>
@@ -5842,38 +5818,41 @@
     <string name="supervision_settings_title" msgid="8507163323870367711">"Родительский контроль"</string>
     <string name="supervision_settings_summary" msgid="5020634300370322741">"Ограничения на контент и не только"</string>
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Включить родительский контроль за устройством"</string>
-    <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Сначала установите PIN-код"</string>
+    <!-- no translation found for device_supervision_switch_no_pin_summary (4869563544571033220) -->
+    <skip />
+    <!-- no translation found for device_supervision_switch_paused_summary (1014381188739295656) -->
+    <skip />
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"родительский контроль"</string>
-    <string name="supervision_pin_management_preference_title" msgid="961680798581006465">"Управление PIN-кодом"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="8061713645550514683">"Добавить способ восстановления PIN-кода"</string>
-    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="2156782778845060114">"Проверить способ восстановления PIN-кода"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (7721501202320841845) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (2247921267270577374) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_verify_recovery (5072554239108915119) -->
+    <skip />
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Изменить PIN-код"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Забыли PIN-код?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Обновить резервный адрес электронной почты"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Удалить PIN-код"</string>
     <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Будут сброшены все настройки родительского контроля"</string>
-    <string name="supervision_add_pin_recovery_title" msgid="5584523084706797399">"Нажмите, чтобы добавить способ восстановления"</string>
-    <!-- no translation found for supervision_verify_pin_recovery_title (7953090772633001442) -->
+    <!-- no translation found for supervision_add_pin_recovery_title (3487098027604685794) -->
+    <skip />
+    <!-- no translation found for supervision_verify_pin_recovery_title (3166602415814821497) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Фильтры веб-контента"</string>
-    <!-- no translation found for supervision_web_content_filters_browser_title (8737341514264129889) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_browser_block_explicit_sites_title (1786398287521485576) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_browser_block_explicit_sites_summary (1427357961145247788) -->
-    <skip />
+    <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"Сайты"</string>
+    <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="1786398287521485576">"Блокировать веб-контент для взрослых"</string>
+    <string name="supervision_web_content_filters_browser_block_explicit_sites_summary" msgid="1427357961145247788">"В браузерах на этом устройстве"</string>
     <string name="supervision_web_content_filters_browser_allow_all_sites_title" msgid="3909739592466381845">"Разрешить доступ ко всем сайтам"</string>
-    <!-- no translation found for supervision_web_content_filters_search_title (8608480392956106029) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_on_title (1136440775294190806) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_on_summary (6797184284369033101) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_off_title (7171966260908166395) -->
-    <skip />
+    <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"Результаты поиска"</string>
+    <string name="supervision_web_content_filters_search_filter_on_title" msgid="1136440775294190806">"Блокировать результаты поиска с контентом для взрослых"</string>
+    <string name="supervision_web_content_filters_search_filter_on_summary" msgid="6797184284369033101">"В поисковых системах на этом устройстве"</string>
+    <string name="supervision_web_content_filters_search_filter_off_title" msgid="7171966260908166395">"Не использовать фильтры"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Ввести PIN-код родительского контроля"</string>
-    <string name="supervision_lock_setup_title" msgid="7581682893583645713">"Выбрать способ блокировки для родительского контроля"</string>
-    <string name="supervision_lock_setup_description" msgid="6931450348200992733">"С помощью этого кода можно разблокировать настройки родительского контроля"</string>
-    <string name="supervision_pin_reset_success_toast" msgid="4663259412030769718">"PIN-код для родительского контроля сброшен."</string>
+    <!-- no translation found for supervision_choose_your_pin_header (3872062168986738629) -->
+    <skip />
+    <!-- no translation found for supervision_confirm_your_pin_header (8236956712482718354) -->
+    <skip />
+    <!-- no translation found for supervision_pin_reset_success_toast (9163550161698311831) -->
+    <skip />
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> (анимация)"</string>
 </resources>

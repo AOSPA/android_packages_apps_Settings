@@ -1518,7 +1518,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
         </activity>
 
         <activity
-            android:name="Settings$ModeDisplaySettingsActivity"
+            android:name="Settings$DndModeDisplaySettingsActivity"
             android:exported="true"
             android:featureFlag="android.app.modes_ui">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -4719,7 +4719,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
         </activity>
 
         <activity android:name=".enterprise.ActionDisabledByAdminDialog"
-                  android:theme="@style/Theme.AlertDialog.SettingsLib"
+                  android:theme="@style/Theme.AlertDialog"
                 android:taskAffinity="com.android.settings.enterprise"
                 android:excludeFromRecents="true"
                 android:exported="true"

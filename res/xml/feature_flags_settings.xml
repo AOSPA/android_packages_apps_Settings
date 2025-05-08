@@ -19,7 +19,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/feature_flags_dashboard_title">
-    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
+    <com.android.settingslib.widget.UntitledPreferenceCategory
         android:key="feature_flag_category"
         android:title="@string/summary_placeholder"
         settings:controller="com.android.settings.development.featureflags.FeatureFlagsPreferenceController" />

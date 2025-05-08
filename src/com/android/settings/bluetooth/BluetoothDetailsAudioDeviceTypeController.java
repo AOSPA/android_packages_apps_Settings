@@ -128,8 +128,8 @@ public class BluetoothDetailsAudioDeviceTypeController extends BluetoothDetailsC
         mProfilesContainer = screen.findPreference(getPreferenceKey());
         if (Flags.enableBluetoothSettingsExpressiveDesign()) {
             mProfilesContainer.setLayoutResource(
-                    com.android.settingslib.widget.theme.R.layout
-                            .settingslib_expressive_preference_category_no_title);
+                    com.android.settingslib.widget.category.R.layout
+                            .settingslib_expressive_untitled_preference_category);
         } else if (Flags.enableBluetoothDeviceDetailsPolish()) {
             mProfilesContainer.setLayoutResource(R.layout.preference_category_bluetooth_no_padding);
         }

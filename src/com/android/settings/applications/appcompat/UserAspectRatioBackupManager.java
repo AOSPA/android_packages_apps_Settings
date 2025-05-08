@@ -47,6 +47,7 @@ import android.view.DisplayInfo;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
+import com.android.window.flags.Flags;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -135,8 +136,9 @@ class UserAspectRatioBackupManager {
         mStorage = new UserAspectRatioRestoreStorage(context, mUserId, instantSource);
         mLogger = logger;
 
-        mPackageMonitor.register(context, UserHandle.of(UserHandle.USER_ALL), handler);
-
+        if (!Flags.restoreUserAspectRatioSettingsUsingService()) {
+            mPackageMonitor.register(context, UserHandle.of(UserHandle.USER_ALL), handler);
+        }
 
         populateAvailableUserAspectRatioSettingOptions(mContext.getResources().getIntArray(
                 R.array.config_userAspectRatioOverrideValues));
@@ -293,7 +295,9 @@ class UserAspectRatioBackupManager {
                         + pkgName);
                 continue;
             }
-            if (isPackageInstalled(pkgName)) {
+            // If restoring via service is enabled, try to set the user aspect ratio even if the
+            // package is not installed - this would be restored later by a system service.
+            if (isPackageInstalled(pkgName) || Flags.restoreUserAspectRatioSettingsUsingService()) {
                 Slog.d(TAG, "StageAndApplyRestoredPayload Found package: " + pkgName);
                 checkExistingAspectRatioAndApplyRestore(pkgName, aspectRatio);
             } else {
@@ -453,5 +457,4 @@ class UserAspectRatioBackupManager {
         }
         return maxDimensions;
     }
-
 }

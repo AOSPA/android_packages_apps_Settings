@@ -25,7 +25,7 @@
         android:key="dashboard_tile_placeholder" />
 
     <!-- Main security section - for trust agents added in code. -->
-    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
+    <com.android.settingslib.widget.UntitledPreferenceCategory
         android:order="210"
         android:key="security_category" />
 
@@ -38,7 +38,7 @@
         settings:keywords="@string/content_protection_preference_title"
         settings:controller="com.android.settings.security.ContentProtectionPreferenceController" />
 
-    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
+    <com.android.settingslib.widget.UntitledPreferenceCategory
         android:order="240"
         android:key="security_settings_device_admin_category">
 
@@ -72,7 +72,7 @@
             settings:controller="com.android.settings.devicelock.DeviceLockPreferenceController">
             <intent android:action="com.android.devicelockcontroller.action.DEVICE_INFO_SETTINGS"/>
         </Preference>
-    </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+    </com.android.settingslib.widget.UntitledPreferenceCategory>
 
     <Preference
         android:order="250"

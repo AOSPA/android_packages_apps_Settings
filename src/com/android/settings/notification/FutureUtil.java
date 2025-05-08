@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 The Android Open Source Project
+ * Copyright (C) 2025 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.notification.modes;
+package com.android.settings.notification;
 
 import android.util.Log;
 
@@ -28,11 +28,11 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-class FutureUtil {
+public class FutureUtil {
 
-    private static final String TAG = "ZenFutureUtil";
+    private static final String TAG = "FutureUtil";
 
-    static <V> void whenDone(ListenableFuture<V> future, Consumer<V> consumer, Executor executor) {
+    public static <V> void whenDone(ListenableFuture<V> future, Consumer<V> consumer, Executor executor) {
         whenDone(future, consumer, executor, "Error in future");
     }
 

@@ -183,10 +183,12 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
             createDialogWithSuwTheme();
         } else {
             if (mIsWifiTrackerLib || mUseWifiDialog2ForAddNetwork) {
+                final int mode = isAtLoginScreen()
+                        ? WifiConfigUiBase2.MODE_LOGIN_SCREEN : WifiConfigUiBase2.MODE_CONNECT;
                 mDialog2 = new WifiDialog2(this, this,
                         mNetworkDetailsTracker == null
                                 ? null : mNetworkDetailsTracker.getWifiEntry(),
-                        WifiConfigUiBase2.MODE_CONNECT, 0 /* style */,
+                                mode, 0 /* style */,
                         false /* hideSubmitButton */, false /* hideMeteredAndPrivacy */,
                         Utils.SYSTEMUI_PACKAGE_NAME.equals(getLaunchedFromPackage()));
             } else {
@@ -404,6 +406,16 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
             }
             finish();
         }
+    }
+
+    @VisibleForTesting
+    boolean isAtLoginScreen() {
+        if (!Flags.wifiMultiuser()) {
+            return false;
+        }
+        UserManager userManager = getSystemService(UserManager.class);
+        return userManager != null
+                && userManager.isHeadlessSystemUserMode() && userManager.isSystemUser();
     }
 
     @VisibleForTesting

@@ -865,7 +865,7 @@ public class NotificationBackend {
         public int userId;
         public int blockedChannelCount;
         public int channelCount;
-        public Map<String, NotificationsSentState> sentByChannel;
+        public Map<String, NotificationsSentState> sentByChannel = new HashMap<>();
         public NotificationsSentState sentByApp;
         public boolean showAllChannels = true;
         public boolean canBePromoted;

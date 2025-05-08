@@ -19,7 +19,7 @@
         xmlns:settings="http://schemas.android.com/apk/res-auto"
         android:title="@string/adb_wireless_settings">
 
-    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+    <com.android.settingslib.widget.UntitledPreferenceCategory>
         <!-- ADB device name -->
         <Preference
             android:key="adb_device_name_pref"
@@ -36,10 +36,10 @@
             android:summary="@string/summary_placeholder"
             android:selectable="false"
             settings:enableCopying="true"/>
-    </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+    </com.android.settingslib.widget.UntitledPreferenceCategory>
 
     <!-- Pairing methods category -->
-    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
+    <com.android.settingslib.widget.UntitledPreferenceCategory
         android:key="adb_pairing_methods_category"
         settings:allowDividerAbove="true">
         <!-- qrcode scanner -->
@@ -54,7 +54,7 @@
             android:icon="@drawable/ic_password_adb_wireless"
             android:title="@string/adb_pair_method_code_title"
             android:summary="@string/adb_pair_method_code_summary"/>
-    </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+    </com.android.settingslib.widget.UntitledPreferenceCategory>
 
     <!-- Paired devices list -->
     <PreferenceCategory
@@ -63,7 +63,7 @@
         settings:allowDividerAbove="true"/>
 
     <!-- Off message: Shown only in the off state -->
-    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
+    <com.android.settingslib.widget.UntitledPreferenceCategory
         android:key="adb_wireless_footer_category"
         settings:allowDividerAbove="false"/>
 

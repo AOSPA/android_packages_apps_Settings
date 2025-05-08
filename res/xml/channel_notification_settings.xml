@@ -115,13 +115,13 @@
         android:key="block_desc"
         android:order="110"/>
 
-    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
+    <com.android.settingslib.widget.UntitledPreferenceCategory
         android:key="external"
         android:order="18">
         <Preference
             android:key="app_link"
             android:title="@string/app_settings_link"
             android:icon="@drawable/ic_settings_24dp"/>
-    </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+    </com.android.settingslib.widget.UntitledPreferenceCategory>
 
 </PreferenceScreen>

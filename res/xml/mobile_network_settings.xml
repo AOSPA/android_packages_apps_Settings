@@ -32,7 +32,7 @@
         android:visibility="gone"
         android:selectable="false"/>
 
-    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
+    <com.android.settingslib.widget.UntitledPreferenceCategory
         android:key="enabled_state_container"
         android:title="@string/summary_placeholder"
         settings:controller="com.android.settings.network.telephony.DisabledSubscriptionController">
@@ -273,7 +273,7 @@
 
         </PreferenceCategory>
 
-        <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
+        <com.android.settingslib.widget.UntitledPreferenceCategory
             settings:isPreferenceVisible="false">
 
           <com.android.settings.network.telephony.cdma.CdmaListPreference
@@ -293,7 +293,7 @@
               android:entryValues="@array/cdma_subscription_values"
               android:dialogTitle="@string/cdma_subscription_dialogtitle"
              settings:controller="com.android.settings.network.telephony.cdma.CdmaSubscriptionPreferenceController"/>
-        </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+        </com.android.settingslib.widget.UntitledPreferenceCategory>
 
         <PreferenceCategory
             android:key="network_operators_category_key"
@@ -317,7 +317,7 @@
                 settings:controller="com.android.settings.network.telephony.gsm.OpenNetworkSelectPagePreferenceController"/>
         </PreferenceCategory>
 
-        <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+        <com.android.settingslib.widget.UntitledPreferenceCategory>
           <!--We want separate APN setting from reset of settings because we want user to change it with caution-->
           <com.android.settingslib.RestrictedPreference
               android:key="telephony_apn_key"
@@ -360,10 +360,10 @@
               android:key="nr_advanced_calling"
               settings:searchable="false"
               settings:controller="com.android.settings.network.telephony.NrAdvancedCallingPreferenceController"/>
-        </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
-    </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+        </com.android.settingslib.widget.UntitledPreferenceCategory>
+    </com.android.settingslib.widget.UntitledPreferenceCategory>
 
-    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+    <com.android.settingslib.widget.UntitledPreferenceCategory>
       <Preference
           android:key="convert_to_esim"
           android:persistent="false"
@@ -382,7 +382,7 @@
           android:title="@string/mobile_network_erase_sim"
           settings:allowDividerBelow="true"
           settings:controller="com.android.settings.network.telephony.DeleteSimProfilePreferenceController"/>
-    </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+    </com.android.settingslib.widget.UntitledPreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference
         android:key="disable_sim_explanation"

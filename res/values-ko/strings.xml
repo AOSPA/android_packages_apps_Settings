@@ -41,12 +41,9 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"일시 정지됨"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"알 수 없음"</string>
     <string name="qr_code_content_description" msgid="1852208464419291347">"QR 코드"</string>
-    <!-- no translation found for preview_pager_home_title (6102935625155194821) -->
-    <skip />
-    <!-- no translation found for preview_pager_message_title (5933499691147446486) -->
-    <skip />
-    <!-- no translation found for preview_pager_email_title (8767864657910457562) -->
-    <skip />
+    <string name="preview_pager_home_title" msgid="6102935625155194821">"홈 화면"</string>
+    <string name="preview_pager_message_title" msgid="5933499691147446486">"메시지"</string>
+    <string name="preview_pager_email_title" msgid="8767864657910457562">"이메일"</string>
     <string name="preview_pager_previous_button" msgid="607771113300838313">"이전 미리보기"</string>
     <string name="preview_pager_next_button" msgid="8700907912508927271">"다음 미리보기"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"축소"</string>
@@ -316,13 +313,11 @@
     <string name="time_format_category_title" msgid="7108616745509689991">"시간 형식"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"시간대"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"표준시간대 선택"</string>
-    <!-- no translation found for date_time_search_time_zone (7373967602009974399) -->
-    <skip />
+    <string name="date_time_search_time_zone" msgid="7373967602009974399">"시간대 검색"</string>
     <string name="date_time_set_date_title" msgid="7624166157167528407">"날짜"</string>
     <string name="date_time_search_region" msgid="1364133854952610919">"지역 검색"</string>
     <string name="date_time_select_region" msgid="5449345333305056072">"지역"</string>
-    <!-- no translation found for date_time_select_fixed_offset_time_zones (2130108030162342594) -->
-    <skip />
+    <string name="date_time_select_fixed_offset_time_zones" msgid="2130108030162342594">"GMT 오프셋"</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g>(<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g>(<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>을 사용합니다. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
@@ -331,8 +326,7 @@
     <string name="zone_time_type_dst" msgid="9189689342265305808">"일광 절약 시간"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"표준 시간"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"지역별로 선택"</string>
-    <!-- no translation found for zone_menu_by_offset (543648951618438204) -->
-    <skip />
+    <string name="zone_menu_by_offset" msgid="543648951618438204">"GMT 오프셋으로 선택"</string>
     <string name="time_feedback_category_title" msgid="5942621686512255208">"의견"</string>
     <string name="keywords_time_feedback_category" msgid="4553921538559830393">"의견, 버그, 시간, 영역, 시간대"</string>
     <string name="time_feedback_title" msgid="7720948068042783614">"시간에 대한 의견 보내기"</string>
@@ -969,10 +963,8 @@
     <string name="device_details_battery" msgid="5466987755790847884">"배터리"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"배터리, 충전 중"</string>
     <string name="device_details_key_missing_title" msgid="3568401701538114387">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> 기기를 다시 시작해 보세요. 그래도 문제가 해결되지 않으면 기기를 삭제하세요. 보안을 위해 공공장소가 아닌 곳에서만 다시 페어링하세요\n\n기기가 근처에 있지 않다면 아무 조치도 취할 필요가 없습니다"</string>
-    <!-- no translation found for verbose_printer_logging_title (6525634245166402031) -->
-    <skip />
-    <!-- no translation found for verbose_printer_logging_summary (6558076303223667013) -->
-    <skip />
+    <string name="verbose_printer_logging_title" msgid="6525634245166402031">"상세 인쇄 로깅"</string>
+    <string name="verbose_printer_logging_summary" msgid="6558076303223667013">"개인 정보가 포함될 수 있는 인터넷 인쇄 프로토콜(IPP)을 포함한 추가 디버그 로그입니다."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"기기 지우기"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"앱 연결 해제"</string>
     <string name="device_details_more_settings" msgid="950302792331611271">"설정 더보기"</string>
@@ -1178,12 +1170,9 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"허용"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"거부"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*필수 입력란"</string>
-    <!-- no translation found for share_wifi_network (4064997404339571584) -->
-    <skip />
-    <!-- no translation found for share_wifi_network_summary (4316236421149769333) -->
-    <skip />
-    <!-- no translation found for edit_wifi_network_configuration (5712989655083072417) -->
-    <skip />
+    <string name="share_wifi_network" msgid="4064997404339571584">"다른 기기 사용자와 이 네트워크 공유"</string>
+    <string name="share_wifi_network_summary" msgid="4316236421149769333">"이 기기의 모든 사용자가 공유 네트워크를 보고 연결할 수 있습니다. 관리자는 공유 네트워크를 삭제할 수 있습니다. 자세히 알아보기"</string>
+    <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"다른 사용자가 네트워크 구성을 수정하도록 허용"</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"이 네트워크에는 인터넷이 연결되어 있지 않습니다. 연결 상태를 유지하시겠습니까?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"제한된 연결로 인해 일부 앱과 서비스가 작동하지 않을 수 있습니다. 계속 사용하시겠습니까?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"이 네트워크를 다시 요청하지 마세요."</string>
@@ -1481,10 +1470,8 @@
     <string name="force_bold_text" msgid="4620929631102086716">"텍스트 굵게 표시"</string>
     <string name="title_font_size" msgid="570613010306330622">"글꼴 크기"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"텍스트를 확대 또는 축소"</string>
-    <!-- no translation found for category_title_display_text_size (4234285020731751694) -->
-    <skip />
-    <!-- no translation found for category_title_text_style (5905015084935695611) -->
-    <skip />
+    <string name="category_title_display_text_size" msgid="4234285020731751694">"크기 옵션"</string>
+    <string name="category_title_text_style" msgid="5905015084935695611">"스타일 옵션"</string>
     <string name="sim_lock_settings" msgid="7331982427303002613">"SIM 잠금 설정"</string>
     <string name="sim_lock_settings_category" msgid="6475255139493877786">"SIM 잠금"</string>
     <string name="sim_pin_toggle" msgid="6814489621760857328">"SIM 잠금"</string>
@@ -2125,9 +2112,14 @@
     <string name="sticky_keys_summary" msgid="1844953803625480623">"단축키를 사용할 때 키를 함께 누르지 않고 한 번에 하나씩 누릅니다"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"마우스 키"</string>
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"마우스 키 사용"</string>
-    <!-- no translation found for accessibility_mouse_keys_shortcut_title (7621635104533584115) -->
-    <skip />
+    <string name="accessibility_mouse_keys_shortcut_title" msgid="7621635104533584115">"마우스 키 단축키"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"키보드를 사용하여 포인터를 제어합니다."</string>
+    <!-- no translation found for mouse_keys_max_speed_title (1788751803245422659) -->
+    <skip />
+    <!-- no translation found for mouse_keys_seek_bar_decrease_button_description (9077624857206032509) -->
+    <skip />
+    <!-- no translation found for mouse_keys_seek_bar_increase_button_description (2721662400858172203) -->
+    <skip />
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"역방향 스크롤"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"위로 스크롤하여 페이지 아래로 이동합니다."</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"스크롤"</string>
@@ -2790,8 +2782,6 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"전원 사용 조절"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"포함된 패키지"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"앱이 정상적으로 작동 중"</string>
-    <string name="battery_tip_replacement_title" msgid="3932335880485957919">"배터리 교체 권장"</string>
-    <string name="battery_tip_replacement_summary" msgid="7892640031317153349">"배터리 용량과 충전 성능이 저하되어 배터리 교체가 권장됩니다."</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"배터리 잔량 부족"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"절전 모드를 사용 설정하여 배터리 수명을 늘리세요"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"배터리 수명 개선"</string>
@@ -3007,12 +2997,9 @@
     <string name="cellular_security_notifications" msgid="4619728340612184944">"알림"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"네트워크 알림"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"기기가 암호화되지 않은 네트워크에 연결되거나 네트워크가 고유 기기 또는 SIM ID를 기록하면 알림을 받습니다."</string>
-    <!-- no translation found for cellular_security_2G_network_generation_header (2892850064192939887) -->
-    <skip />
-    <!-- no translation found for cellular_security_2G_network_generation_summary (979187530909112413) -->
-    <skip />
-    <!-- no translation found for cellular_security_2G_network_generation_title (706766676947606951) -->
-    <skip />
+    <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"네트워크 생성"</string>
+    <string name="cellular_security_2G_network_generation_summary" msgid="979187530909112413">"2G 네트워크 보호는 보안 수준이 낮은 2G 네트워크를 사용하지 않습니다. 이로 인해 일부 지역에서 연결이 제한될 수 있습니다. 긴급 전화는 항상 허용됩니다."</string>
+    <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"2G 네트워크 보호"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"암호화"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"네트워크 생성"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"설치된 각 SIM 카드를 3G, 4G, 5G를 지원하는 네트워크에만 연결하도록 구성할 수 있습니다. 해당 SIM은 오래되고 안전하지 않은 2G 네트워크에 연결되지 않습니다. 이 설정으로 인해 사용할 수 있는 네트워크가 2G뿐인 경우 연결이 제한될 수 있습니다. 응급 상황에서는 2G가 사용될 수 있습니다."</string>
@@ -3311,6 +3298,8 @@
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"직장 프로필을 삭제하시겠습니까?"</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"모든 앱과 데이터가 삭제됩니다."</string>
     <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"계속하면 프로필의 모든 앱과 데이터가 삭제됩니다."</string>
+    <!-- no translation found for work_profile_confirm_remove_message_with_esim (1169605178915445183) -->
+    <skip />
     <string name="user_profile_confirm_remove_message" msgid="3641289528179850718">"모든 앱과 데이터가 삭제됩니다."</string>
     <string name="user_adding_new_user" msgid="7439602720177181412">"새 사용자 추가 중..."</string>
     <string name="user_delete_user_description" msgid="7764153465503821011">"사용자 삭제"</string>
@@ -3812,16 +3801,12 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"알림 열기"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"다시 알림 허용"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"앱 아이콘에 알림 표시 점 사용"</string>
-    <!-- no translation found for notification_bundles (496852738958148317) -->
-    <skip />
+    <string name="notification_bundles" msgid="496852738958148317">"알림 정리 도구"</string>
     <string name="notification_summarization_title" msgid="1516039882005781529">"알림 요약"</string>
-    <!-- no translation found for notification_summarization_summary (1963425736716175590) -->
-    <skip />
+    <string name="notification_summarization_summary" msgid="1963425736716175590">"긴 메시지의 요약을 빠르게 확인할 수 있습니다."</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"알림 요약 사용"</string>
-    <!-- no translation found for notification_summarization_description (341128754705513791) -->
-    <skip />
-    <!-- no translation found for notification_summarization_excluded_description (5819160700526641394) -->
-    <skip />
+    <string name="notification_summarization_description" msgid="341128754705513791">"긴 메시지와 그룹 대화를 요약하여 빠르게 내용을 확인하세요. 요약은 AI를 기반으로 생성되며 오류가 포함될 수 있습니다."</string>
+    <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"이 앱의 알림은 요약되지 않습니다."</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"앱 관리"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="1299744594788208296">"앱의 알림 요약 허용"</string>
     <string name="notification_excluded_apps" msgid="6648267716069216826">"앱 예외"</string>
@@ -3979,18 +3964,13 @@
     <string name="notification_polite_description" msgid="6137533404978878957">"짧은 시간 내에 많은 알림을 받으면 최대 1분간 기기에서 볼륨을 낮추고 알림을 최소화합니다. 통화, 알람, 우선순위 대화는 영향을 받지 않습니다. \n\n쿨다운 중에 받은 알림은 화면 상단에서 아래로 당겨서 확인할 수 있습니다."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"직장 프로필에 적용"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"직장 프로필 앱에 적용"</string>
-    <!-- no translation found for notification_bundle_title (6679586974995981433) -->
-    <skip />
-    <!-- no translation found for notification_bundle_summary (8924550009829960969) -->
-    <skip />
-    <!-- no translation found for notification_bundle_main_control_title (2632661768990540295) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (8439963475488583612) -->
-    <skip />
+    <string name="notification_bundle_title" msgid="6679586974995981433">"알림 정리 도구"</string>
+    <string name="notification_bundle_summary" msgid="8924550009829960969">"우선순위가 낮은 알림을 번들로 묶고 음소거합니다."</string>
+    <string name="notification_bundle_main_control_title" msgid="2632661768990540295">"알림 정리 도구 사용"</string>
+    <string name="notification_bundle_description" msgid="8439963475488583612">"알림을 무음 처리하고 함께 번들로 묶어 방해를 최소화하세요. 번들링은 AI 기반이며 오류가 포함될 수 있습니다."</string>
     <string name="notification_app_level_bundle_title" msgid="8917807675495480483">"번들 알림"</string>
     <string name="notification_app_level_bundle_subtext" msgid="7330731485247761388">"비슷한 테마의 알림은 음소거되고 함께 그룹화되어 더 조용한 환경을 제공합니다."</string>
-    <!-- no translation found for notification_bundle_excluded_description (2667461772332132250) -->
-    <skip />
+    <string name="notification_bundle_excluded_description" msgid="2667461772332132250">"이 앱의 알림은 번들로 묶이지 않습니다."</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="7019831234073590293">"앱의 알림 번들로 묶기 허용"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR 도우미 서비스"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"설치된 앱 중에서 VR 도우미 서비스로 실행되도록 요청한 앱이 없습니다."</string>
@@ -4726,22 +4706,14 @@
     <string name="system_navigation_title" msgid="4890381153527184636">"탐색 모드"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"2버튼 탐색"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"앱을 전환하려면 홈 버튼에서 위로 스와이프합니다. 모든 앱을 보려면 다시 위로 스와이프합니다. 뒤로 돌아가려면 뒤로 버튼을 탭합니다."</string>
-    <!-- no translation found for shade_panels_title (6816157397029469997) -->
-    <skip />
-    <!-- no translation found for keywords_shade_panels (6181844937287087945) -->
-    <skip />
-    <!-- no translation found for shade_panels_category (3262351355390846546) -->
-    <skip />
-    <!-- no translation found for shade_panels_separate_title (7839124123668116363) -->
-    <skip />
-    <!-- no translation found for shade_panels_separate_summary (4879360492042964895) -->
-    <skip />
-    <!-- no translation found for shade_panels_combined_title (2812149031368941984) -->
-    <skip />
-    <!-- no translation found for shade_panels_combined_summary (5884627562590432068) -->
-    <skip />
-    <!-- no translation found for shade_panels_foldables_footer_message (3974376428811063936) -->
-    <skip />
+    <string name="shade_panels_title" msgid="6816157397029469997">"알림 및 빠른 설정"</string>
+    <string name="keywords_shade_panels" msgid="6181844937287087945">"셰이드, 패널, 알림, 빠른 설정, qs, 분리, 결합, 이중, 단일"</string>
+    <string name="shade_panels_category" msgid="3262351355390846546">"패널"</string>
+    <string name="shade_panels_separate_title" msgid="7839124123668116363">"별도"</string>
+    <string name="shade_panels_separate_summary" msgid="4879360492042964895">"빠른 설정을 열려면 오른쪽 상단에서 아래로 스와이프하세요. 알림을 열려면 왼쪽 상단에서 아래로 스와이프하세요."</string>
+    <string name="shade_panels_combined_title" msgid="2812149031368941984">"결합(기존)"</string>
+    <string name="shade_panels_combined_summary" msgid="5884627562590432068">"화면 상단에서 아래로 스와이프하여 알림과 빠른 설정이 결합된 기존 패널에 액세스하세요."</string>
+    <string name="shade_panels_foldables_footer_message" msgid="3974376428811063936">"결합(기존) 보기는 폴더블 기기의 외부 화면으로 제한됩니다."</string>
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"안전 및 긴급 상황"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"긴급 SOS, 의료 정보, 알림"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"동작 탐색"</string>
@@ -5801,6 +5773,10 @@
     <string name="audio_streams_dialog_turn_off_talkback_title" msgid="6824585115302786690">"TalkBack 일시적으로 사용 중지"</string>
     <string name="audio_streams_dialog_turn_off_talkback_subtitle" msgid="2394295776096273919">"오디오 스트림을 들을 때는 TalkBack을 사용할 수 없습니다. 듣기를 시작하려면 TalkBack을 사용 중지하세요"</string>
     <string name="audio_streams_dialog_turn_off_talkback_button" msgid="8049097689955037626">"사용 중지"</string>
+    <!-- no translation found for audio_streams_dialog_turn_off_audio_sharing_title (1017164439467110153) -->
+    <skip />
+    <!-- no translation found for audio_streams_dialog_turn_off_audio_sharing_subtitle (5856842223436525336) -->
+    <skip />
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"기기 연결"</string>
     <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"오디오 스트림 세부정보"</string>
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"오디오 스트림 QR 코드"</string>
@@ -5840,38 +5816,41 @@
     <string name="supervision_settings_title" msgid="8507163323870367711">"자녀 보호 기능"</string>
     <string name="supervision_settings_summary" msgid="5020634300370322741">"콘텐츠 제한 및 기타 제한"</string>
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"기기 감독 기능 사용"</string>
-    <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"시작하려면 PIN을 설정하세요."</string>
+    <!-- no translation found for device_supervision_switch_no_pin_summary (4869563544571033220) -->
+    <skip />
+    <!-- no translation found for device_supervision_switch_paused_summary (1014381188739295656) -->
+    <skip />
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"감독, 부모 감독 기능, 자녀 보호 기능"</string>
-    <string name="supervision_pin_management_preference_title" msgid="961680798581006465">"PIN 관리"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="8061713645550514683">"PIN 복구 추가"</string>
-    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="2156782778845060114">"PIN 복구 인증"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (7721501202320841845) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (2247921267270577374) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_verify_recovery (5072554239108915119) -->
+    <skip />
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"PIN 변경"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"PIN 찾기"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"복구 이메일 업데이트"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"PIN 삭제"</string>
     <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"이렇게 하면 모든 감독 설정이 재설정됩니다."</string>
-    <string name="supervision_add_pin_recovery_title" msgid="5584523084706797399">"탭하여 복구 추가"</string>
-    <!-- no translation found for supervision_verify_pin_recovery_title (7953090772633001442) -->
+    <!-- no translation found for supervision_add_pin_recovery_title (3487098027604685794) -->
+    <skip />
+    <!-- no translation found for supervision_verify_pin_recovery_title (3166602415814821497) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"웹 콘텐츠 필터"</string>
-    <!-- no translation found for supervision_web_content_filters_browser_title (8737341514264129889) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_browser_block_explicit_sites_title (1786398287521485576) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_browser_block_explicit_sites_summary (1427357961145247788) -->
-    <skip />
+    <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"웹사이트"</string>
+    <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="1786398287521485576">"선정적인 웹 콘텐츠 차단"</string>
+    <string name="supervision_web_content_filters_browser_block_explicit_sites_summary" msgid="1427357961145247788">"이 기기의 브라우저"</string>
     <string name="supervision_web_content_filters_browser_allow_all_sites_title" msgid="3909739592466381845">"모든 사이트 허용"</string>
-    <!-- no translation found for supervision_web_content_filters_search_title (8608480392956106029) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_on_title (1136440775294190806) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_on_summary (6797184284369033101) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_off_title (7171966260908166395) -->
-    <skip />
+    <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"검색 결과"</string>
+    <string name="supervision_web_content_filters_search_filter_on_title" msgid="1136440775294190806">"선정적인 검색 결과 차단"</string>
+    <string name="supervision_web_content_filters_search_filter_on_summary" msgid="6797184284369033101">"이 기기의 검색엔진"</string>
+    <string name="supervision_web_content_filters_search_filter_off_title" msgid="7171966260908166395">"필터 사용 중지"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"감독 PIN 입력"</string>
-    <string name="supervision_lock_setup_title" msgid="7581682893583645713">"감독을 위한 잠금 선택"</string>
-    <string name="supervision_lock_setup_description" msgid="6931450348200992733">"이 코드로 감독 설정을 잠금 해제할 수 있습니다."</string>
-    <string name="supervision_pin_reset_success_toast" msgid="4663259412030769718">"자녀 보호 기능 PIN 재설정"</string>
+    <!-- no translation found for supervision_choose_your_pin_header (3872062168986738629) -->
+    <skip />
+    <!-- no translation found for supervision_confirm_your_pin_header (8236956712482718354) -->
+    <skip />
+    <!-- no translation found for supervision_pin_reset_success_toast (9163550161698311831) -->
+    <skip />
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> 애니메이션"</string>
 </resources>

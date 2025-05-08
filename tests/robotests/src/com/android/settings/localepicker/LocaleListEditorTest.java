@@ -343,7 +343,7 @@ public class LocaleListEditorTest {
         mLocaleListEditor.onActivityResult(REQUEST_CONFIRM_SYSTEM_DEFAULT, Activity.RESULT_CANCELED,
                 mIntent);
 
-        verify(mAdapter).notifyListChanged(mLocaleInfo);
+        verify(mAdapter).notifyListChanged();
     }
 
     @Test

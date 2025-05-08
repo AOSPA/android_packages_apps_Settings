@@ -344,7 +344,7 @@
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Uključeno / # aplikacija ima pristup lokaciji}one{Uključeno / # aplikacija ima pristup lokaciji}few{Uključeno / # aplikacije imaju pristup lokaciji}other{Uključeno / # aplikacija ima pristup lokaciji}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Učitava se…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Aplikacije sa dozvolom za uređaje u blizini mogu da odrede približni položaj povezanih uređaja."</string>
-    <string name="location_settings_footer_location_off_with_telephony" msgid="5600725945541382556">"Pristup lokaciji je isključen za aplikacije i usluge. Lokacija uređaja može i dalje da se šalje ekipama hitnih službi kada se obratite broju za hitne slučajeve."</string>
+    <string name="location_settings_footer_location_off_with_telephony" msgid="5600725945541382556">"Pristup lokaciji je isključen za aplikacije i usluge. Lokacija uređaja može i dalje da se šalje ekipama hitnih službi kada pozovete broj za hitne slučajeve."</string>
     <string name="location_settings_footer_location_off_no_telephony" msgid="2709958040008816610">"Pristup lokaciji je isključen za aplikacije i usluge."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Saznajte više o podešavanjima lokacije"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Da biste to promenili, na ChromeOS-u otvorite Podešavanja &gt; Bezbednost i privatnost &gt; Kontrole privatnosti &gt; Pristup lokaciji"</string>
@@ -766,7 +766,7 @@
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Odaberite otključavanje ekrana"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Izaberite novo otključavanje ekrana"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Odaberite tip otključavanja za poslovne aplikacije"</string>
-    <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Novo poslovno zaključavanje"</string>
+    <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Novo poslovno otključavanje"</string>
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Radi dodatne bezbednosti podesite rezervni način za otključavanje ekrana"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Odaberite rezervni način za otključavanje ekrana"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Ako zaboravite otključavanje ekrana, administrator ne može da ga resetuje."</string>
@@ -2114,6 +2114,12 @@
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"Koristite tastere miša"</string>
     <string name="accessibility_mouse_keys_shortcut_title" msgid="7621635104533584115">"Prečica za tastere miša"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Kontrolišite pokazivač pomoću tastature"</string>
+    <!-- no translation found for mouse_keys_max_speed_title (1788751803245422659) -->
+    <skip />
+    <!-- no translation found for mouse_keys_seek_bar_decrease_button_description (9077624857206032509) -->
+    <skip />
+    <!-- no translation found for mouse_keys_seek_bar_increase_button_description (2721662400858172203) -->
+    <skip />
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Obrnuto skrolovanje"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Skrolujte nagore da biste pomerili stranicu nadole"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"Skrolovanje"</string>
@@ -2776,8 +2782,6 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Prilagođavanje korišćenja napajanja"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Sadržani paketi"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Aplikacije rade uobičajeno"</string>
-    <string name="battery_tip_replacement_title" msgid="3932335880485957919">"Preporučujemo zamenu baterije"</string>
-    <string name="battery_tip_replacement_summary" msgid="7892640031317153349">"Kapacitet baterije i učinak punjenja su smanjeni i preporučujemo zamenu baterije."</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Nizak nivo napunjenosti baterije"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Uključite uštedu baterije da biste produžili trajanje baterije"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Produžite trajanje baterije"</string>
@@ -3294,6 +3298,8 @@
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"Uklanjate poslovni profil?"</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"Sve aplikacije i podaci će biti izbrisani."</string>
     <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"Sve aplikacije i podaci sa ovog profila biće izbrisani ako nastavite."</string>
+    <!-- no translation found for work_profile_confirm_remove_message_with_esim (1169605178915445183) -->
+    <skip />
     <string name="user_profile_confirm_remove_message" msgid="3641289528179850718">"Sve aplikacije i podaci će biti izbrisani."</string>
     <string name="user_adding_new_user" msgid="7439602720177181412">"Dodavanje novog korisnika..."</string>
     <string name="user_delete_user_description" msgid="7764153465503821011">"Brisanje korisnika"</string>
@@ -5155,7 +5161,7 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"Isključite <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"Isključivanje SIM kartice neće otkazati uslugu"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="8144175623622669136">"SIM se aktivira…"</string>
-    <string name="sim_action_switch_sub_dialog_progress" msgid="697127154780501304">"Prelazite na <xliff:g id="CARRIER_NAME">%1$s</xliff:g>…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="697127154780501304">"Prelazite na: <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="2718084141744769701">"Promena SIM-a nije uspela"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="8332742656111984482">"Došlo je do greške. Promena SIM-a nije uspela."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Želite da isključite uslugu <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
@@ -5768,6 +5774,10 @@
     <string name="audio_streams_dialog_turn_off_talkback_title" msgid="6824585115302786690">"Privremeno isključite TalkBack"</string>
     <string name="audio_streams_dialog_turn_off_talkback_subtitle" msgid="2394295776096273919">"Ne možete da koristite TalkBack kada slušate audio strimove. Isključite TalkBack da biste počeli da slušate."</string>
     <string name="audio_streams_dialog_turn_off_talkback_button" msgid="8049097689955037626">"Isključi"</string>
+    <!-- no translation found for audio_streams_dialog_turn_off_audio_sharing_title (1017164439467110153) -->
+    <skip />
+    <!-- no translation found for audio_streams_dialog_turn_off_audio_sharing_subtitle (5856842223436525336) -->
+    <skip />
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Poveži uređaj"</string>
     <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Detalji audio strima"</string>
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"QR kôd audio strima"</string>
@@ -5807,18 +5817,26 @@
     <string name="supervision_settings_title" msgid="8507163323870367711">"Roditeljski nadzor"</string>
     <string name="supervision_settings_summary" msgid="5020634300370322741">"Ograničenja sadržaja i druga ograničenja"</string>
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Koristi nadzor uređaja"</string>
-    <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Podesite PIN da biste započeli"</string>
+    <!-- no translation found for device_supervision_switch_no_pin_summary (4869563544571033220) -->
+    <skip />
+    <!-- no translation found for device_supervision_switch_paused_summary (1014381188739295656) -->
+    <skip />
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"nadzor, roditeljski nadzor, roditeljska kontrola"</string>
-    <string name="supervision_pin_management_preference_title" msgid="961680798581006465">"Upravljajte PIN-om"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="8061713645550514683">"Dodaje metod oporavka PIN-om"</string>
-    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="2156782778845060114">"Verifikuje metod oporavka PIN-om"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (7721501202320841845) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (2247921267270577374) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_verify_recovery (5072554239108915119) -->
+    <skip />
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Promeni PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Zaboravio/la sam PIN"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Ažurirajte imejl za vraćanje pristupa nalogu"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Izbrišite PIN"</string>
     <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Time ćete resetovati sva podešavanja nadzora"</string>
-    <string name="supervision_add_pin_recovery_title" msgid="5584523084706797399">"Dodirnite da biste dodali metod oporavka"</string>
-    <string name="supervision_verify_pin_recovery_title" msgid="7953090772633001442">"Dodirnite da biste verifikovali metod oporavka"</string>
+    <!-- no translation found for supervision_add_pin_recovery_title (3487098027604685794) -->
+    <skip />
+    <!-- no translation found for supervision_verify_pin_recovery_title (3166602415814821497) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filteri veb-sadržaja"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"Veb-sajtovi"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="1786398287521485576">"Blokiraj eksplicitan veb-sadržaj"</string>
@@ -5829,8 +5847,11 @@
     <string name="supervision_web_content_filters_search_filter_on_summary" msgid="6797184284369033101">"Za pretraživače na ovom uređaju"</string>
     <string name="supervision_web_content_filters_search_filter_off_title" msgid="7171966260908166395">"Filter je isključen"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Unesite PIN za nadzor"</string>
-    <string name="supervision_lock_setup_title" msgid="7581682893583645713">"Odaberite zaključavanje za nadzor"</string>
-    <string name="supervision_lock_setup_description" msgid="6931450348200992733">"Pomoću ovog koda možete da otključate podešavanja nadzora"</string>
-    <string name="supervision_pin_reset_success_toast" msgid="4663259412030769718">"PIN za roditeljski nadzor je resetovan"</string>
+    <!-- no translation found for supervision_choose_your_pin_header (3872062168986738629) -->
+    <skip />
+    <!-- no translation found for supervision_confirm_your_pin_header (8236956712482718354) -->
+    <skip />
+    <!-- no translation found for supervision_pin_reset_success_toast (9163550161698311831) -->
+    <skip />
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animacija za: <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
 </resources>

@@ -134,8 +134,8 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         mProfilesContainer = (PreferenceCategory) screen.findPreference(getPreferenceKey());
         if (Flags.enableBluetoothSettingsExpressiveDesign()) {
             mProfilesContainer.setLayoutResource(
-                    com.android.settingslib.widget.theme.R.layout
-                            .settingslib_expressive_preference_category_no_title);
+                    com.android.settingslib.widget.category.R.layout
+                            .settingslib_expressive_untitled_preference_category);
         } else {
             mProfilesContainer.setLayoutResource(R.layout.preference_bluetooth_profile_category);
         }

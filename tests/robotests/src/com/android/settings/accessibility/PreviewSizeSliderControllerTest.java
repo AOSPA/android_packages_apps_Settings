@@ -48,6 +48,7 @@ import com.google.android.material.slider.Slider;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -227,6 +228,7 @@ public class PreviewSizeSliderControllerTest {
 
     @Test
     @Config(shadows = ShadowFragment.class)
+    @Ignore("b/414851104")
     public void enabledNeedsQSTooltipReshow_showTooltipView() {
         mSliderPreference.setNeedsQSTooltipReshow(true);
 

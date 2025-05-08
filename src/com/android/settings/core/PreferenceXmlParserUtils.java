@@ -51,6 +51,7 @@ public class PreferenceXmlParserUtils {
     private static final List<String> SUPPORTED_PREF_TYPES = Arrays.asList(
             "Preference", "PreferenceCategory", "PreferenceScreen", "SwitchPreferenceCompat",
             "com.android.settings.widget.WorkOnlyCategory",
+            "com.android.settingslib.widget.UntitledPreferenceCategory",
             "com.android.settingslib.widget.SettingsTitlelessPreferenceCategory");
     public static final int PREPEND_VALUE = 0;
     public static final int APPEND_VALUE = 1;

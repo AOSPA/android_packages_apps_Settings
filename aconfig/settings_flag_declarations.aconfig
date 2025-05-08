@@ -97,3 +97,10 @@ flag {
   description: "Use three finger tap to open a custom app"
   bug: "399645334"
 }
+
+flag {
+  name: "action_corner_customization"
+  namespace: "android_settings"
+  description: "Use action corners to trigger a chosen action"
+  bug: "412558312"
+}

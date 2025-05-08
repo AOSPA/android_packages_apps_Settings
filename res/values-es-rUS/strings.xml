@@ -1443,7 +1443,7 @@
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"No disponible cuando se activa modo hora de dormir"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Usar protector de pantalla"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Mientras se carga o está conectado"</string>
-    <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Mientras está conectado y cargando"</string>
+    <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Mientras se carga en la estación"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Mientras se carga"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Cuando está conectado"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Nunca"</string>
@@ -1628,7 +1628,7 @@
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Nunca"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Mientras se carga"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="537039046490426922">"Mientras está vertical y cargándose"</string>
-    <string name="when_to_show_hubmode_docked" msgid="8876633401873168284">"Mientras está conectado y cargándose"</string>
+    <string name="when_to_show_hubmode_docked" msgid="8876633401873168284">"Mientras está cargándose en la estación"</string>
     <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"Restringir a la carga inalámbrica"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Editar punto de acceso"</string>
@@ -1813,12 +1813,12 @@
     <string name="settings_license_activity_loading" msgid="1653151990366578827">"Cargando…"</string>
     <string name="settings_safetylegal_activity_loading" msgid="1757860124583063395">"Cargando…"</string>
     <string name="lockpassword_choose_your_password_header" msgid="2407205113298094824">"Establece una contraseña"</string>
-    <string name="lockpassword_choose_your_profile_password_header" msgid="7038997227611893312">"Establecer una contraseña de trabajo"</string>
+    <string name="lockpassword_choose_your_profile_password_header" msgid="7038997227611893312">"Establece una contraseña de trabajo"</string>
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"Establece un PIN"</string>
-    <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Establecer un PIN de trabajo"</string>
+    <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Establece un PIN de trabajo"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Establece un patrón"</string>
     <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"Para mayor seguridad, establece un patrón para desbloquear el dispositivo"</string>
-    <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Establecer un patrón de trabajo"</string>
+    <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Establece un patrón de trabajo"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Configura la contraseña de respaldo"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Para usar tu huella, configura un patrón"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Por motivos de seguridad, establece un PIN"</string>
@@ -2114,6 +2114,12 @@
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"Usar teclas del mouse"</string>
     <string name="accessibility_mouse_keys_shortcut_title" msgid="7621635104533584115">"Combinación de teclas del mouse"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Usa el teclado para controlar el puntero"</string>
+    <!-- no translation found for mouse_keys_max_speed_title (1788751803245422659) -->
+    <skip />
+    <!-- no translation found for mouse_keys_seek_bar_decrease_button_description (9077624857206032509) -->
+    <skip />
+    <!-- no translation found for mouse_keys_seek_bar_increase_button_description (2721662400858172203) -->
+    <skip />
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Desplazamiento invertido"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Desplázate hacia arriba para bajar la página"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"Desplazamiento"</string>
@@ -2402,12 +2408,12 @@
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Para acercar, haz lo siguiente:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Usa el atajo para comenzar la ampliación.&lt;br/&gt; {1,number,integer}. Presiona la pantalla.&lt;br/&gt; {2,number,integer}. Arrastra con 1 o 2 dedos para moverte por la pantalla.&lt;br/&gt; {3,number,integer}. Pellizca con 2 dedos para ajustar el zoom.&lt;br/&gt; {4,number,integer}. Usa el atajo para detener la ampliación.&lt;br/&gt;&lt;br/&gt; También puedes acercar temporalmente y realizar otras acciones."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Cuando la ampliación esté activada, podrás acercar el contenido en pantalla.\n\n"<b>"Para usar el zoom"</b>", inicia la ampliación y, luego, presiona cualquier parte de la pantalla.\n"<ul><li>"Arrastra 2 o más dedos para desplazarte."</li>\n<li>"Pellizca con 2 o más dedos para ajustar el zoom."</li></ul>\n\n<b>"Para hacer zoom de manera temporal"</b>", inicia la ampliación y, luego, mantén presionada cualquier parte de la pantalla.\n"<ul><li>"Arrastra el dedo para moverte por la pantalla."</li>\n<li>"Levanta el dedo para alejar el contenido."</li></ul>\n\n"No puedes acercar con el teclado ni en la barra de navegación."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Página <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> de <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
-    <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Acceso directo al botón de accesibilidad"</string>
+    <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Combinación con el botón de accesibilidad"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="1032323517963429981">"Combinación con teclas de volumen"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="5529704884360240365">"Combinación de triple toque"</string>
     <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="5749704453829390283">"Combinación de doble toque con %1$d dedos"</string>
     <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Acceso directo a Configuración rápida"</string>
-    <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"Acceso directo al gesto de accesibilidad"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"Combinación con el gesto de accesibilidad"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="8977286776192770246">"Para usar esta función, presiona el botón de accesibilidad <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> ubicado en la parte inferior de la pantalla.\n\nPara cambiar entre funciones, mantén presionado el botón de accesibilidad."</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="6631371483819355514">"Para usar esta función, presiona el botón de accesibilidad en la pantalla"</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="3785791536286606664">"Para usar esta función, mantén presionadas las dos teclas de volumen"</string>
@@ -2776,8 +2782,6 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Ajustar el uso de energía"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Paquetes incluidos"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Las apps se ejecutan con normalidad"</string>
-    <string name="battery_tip_replacement_title" msgid="3932335880485957919">"Se recomienda reemplazar la batería"</string>
-    <string name="battery_tip_replacement_summary" msgid="7892640031317153349">"Se redujo la capacidad de la batería y el rendimiento de carga, y se recomienda reemplazarla."</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Nivel de batería bajo"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Activa el Ahorro de batería para extender la duración de la batería"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Mejora la duración de la batería"</string>
@@ -3294,6 +3298,8 @@
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"¿Eliminar perfil de trabajo?"</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"Se borrarán todas las aplicaciones y todos los datos."</string>
     <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"Si continúas, se borrarán todas las aplicaciones y los datos en este perfil."</string>
+    <!-- no translation found for work_profile_confirm_remove_message_with_esim (1169605178915445183) -->
+    <skip />
     <string name="user_profile_confirm_remove_message" msgid="3641289528179850718">"Se borrarán todas las aplicaciones y todos los datos."</string>
     <string name="user_adding_new_user" msgid="7439602720177181412">"Agregando usuario nuevo..."</string>
     <string name="user_delete_user_description" msgid="7764153465503821011">"Borrar usuario"</string>
@@ -3438,12 +3444,12 @@
     <string name="network_dashboard_summary_no_mobile" msgid="4022575916334910790">"Wi‑Fi y hotspot"</string>
     <string name="connected_devices_dashboard_title" msgid="19868275519754895">"Dispositivos conectados"</string>
     <string name="connected_devices_dashboard_default_summary" msgid="7211769956193710397">"Bluetooth, vinculación"</string>
-    <string name="connected_devices_dashboard_summary" msgid="6927727617078296491">"Bluetooth, En automóvil, NFC"</string>
-    <string name="connected_devices_dashboard_no_nfc_summary" msgid="8424794257586524040">"Bluetooth, En automóvil"</string>
+    <string name="connected_devices_dashboard_summary" msgid="6927727617078296491">"Bluetooth, modo Conducción, NFC"</string>
+    <string name="connected_devices_dashboard_no_nfc_summary" msgid="8424794257586524040">"Bluetooth, modo Conducción"</string>
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"Bluetooth"</string>
-    <string name="connected_devices_dashboard_android_auto_summary" msgid="8179090809275818804">"Bluetooth, Android Auto, modo en automóvil, NFC"</string>
-    <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"Bluetooth, Android Auto, modo en automóvil"</string>
+    <string name="connected_devices_dashboard_android_auto_summary" msgid="8179090809275818804">"Bluetooth, Android Auto, modo Conducción, NFC"</string>
+    <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"Bluetooth, Android Auto, modo Conducción"</string>
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"No disponible porque NFC está desactivada"</string>
@@ -3856,7 +3862,7 @@
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"No mostrar notificaciones"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6326229471276829730">"¿Qué quieres que muestre tu pantalla de bloqueo?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"Pantalla de bloqueo"</string>
-    <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Mostrar el contenido de notificaciones de trabajo"</string>
+    <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Muestra el contenido de notificaciones de trabajo"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Ocultar contenido de trabajo confidencial"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"¿Cómo deseas ver las notificaciones de perfil cuando esté bloqueado el dispositivo?"</string>
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"Qué mostrar en la pantalla de bloqueo"</string>
@@ -3981,7 +3987,7 @@
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"Permite que esta app cree una ventana pantalla en pantalla mientras esté abierta o después de que hayas salido de ella (por ejemplo, para seguir viendo un video). Esta ventana se muestra sobre otras apps que estés usando."</string>
     <string name="interact_across_profiles_title" msgid="7285906999927669971">"Apps personales y de trabajo conectadas"</string>
     <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"Conectada"</string>
-    <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"No conectadas"</string>
+    <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"No conectada"</string>
     <string name="interact_across_profiles_empty_text" msgid="419061031064397168">"No hay apps conectadas"</string>
     <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"apps personales y de trabajo conectadas al perfil sincronizado"</string>
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Conectadas"</string>
@@ -5302,7 +5308,7 @@
     <string name="sim_combination_warning_notification_title" msgid="1365401631492986487">"Problema con la combinación de SIM"</string>
     <string name="dual_cdma_sim_warning_notification_summary" msgid="2826474790710586487">"Si usas <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g>, podría limitarse la funcionalidad. Presiona para obtener más información."</string>
     <string name="dual_cdma_sim_warning_notification_channel_title" msgid="1049161096896074364">"Combinación de SIM"</string>
-    <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Información sobre la política de tu trabajo"</string>
+    <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Información sobre las políticas de trabajo"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Configuración gestionada por tu administrador de TI"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
     <string name="enable_16k_pages" msgid="1758111531461408337">"Iniciar en tamaño de página 16 KB"</string>
@@ -5767,11 +5773,15 @@
     <string name="audio_streams_dialog_turn_off_talkback_title" msgid="6824585115302786690">"Desactivar TalkBack temporalmente"</string>
     <string name="audio_streams_dialog_turn_off_talkback_subtitle" msgid="2394295776096273919">"No se puede usar TalkBack cuando se escuchan reproducciones de audio. Desactiva TalkBack para comenzar a escuchar."</string>
     <string name="audio_streams_dialog_turn_off_talkback_button" msgid="8049097689955037626">"Desactivar"</string>
+    <!-- no translation found for audio_streams_dialog_turn_off_audio_sharing_title (1017164439467110153) -->
+    <skip />
+    <!-- no translation found for audio_streams_dialog_turn_off_audio_sharing_subtitle (5856842223436525336) -->
+    <skip />
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Conectar un dispositivo"</string>
     <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Detalles de la reproducción de audio"</string>
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"Código QR de la reproducción de audio"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Contraseña: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
-    <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Para escuchar <xliff:g id="STREAM_NAME">%1$s</xliff:g>, otras personas pueden conectar auriculares compatibles a su dispositivo Android. Luego, pueden escanear este código QR."</string>
+    <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Para escuchar contenido de <xliff:g id="STREAM_NAME">%1$s</xliff:g>, otras personas pueden conectar auriculares compatibles a su dispositivo Android. Luego, pueden escanear este código QR."</string>
     <string name="audio_streams_preference_subtitle" msgid="4098552511880220046">"Escuchar transmisión de Auracast"</string>
     <string name="audio_streams_preference_subtitle_audio_sharing_on" msgid="2382924714414148028">"Desactiva el uso compartido de audio para encontrar reproducción de audio"</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Encuentra una reproducción de audio"</string>
@@ -5806,18 +5816,26 @@
     <string name="supervision_settings_title" msgid="8507163323870367711">"Controles parentales"</string>
     <string name="supervision_settings_summary" msgid="5020634300370322741">"Restricciones de contenido y otras restricciones"</string>
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Usar la supervisión de dispositivos"</string>
-    <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Configurar un PIN para comenzar"</string>
+    <!-- no translation found for device_supervision_switch_no_pin_summary (4869563544571033220) -->
+    <skip />
+    <!-- no translation found for device_supervision_switch_paused_summary (1014381188739295656) -->
+    <skip />
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"supervisión, supervisión parental, controles parentales"</string>
-    <string name="supervision_pin_management_preference_title" msgid="961680798581006465">"Administra tu PIN"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="8061713645550514683">"Agregar recuperación de PIN"</string>
-    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="2156782778845060114">"Verificar la recuperación del PIN"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (7721501202320841845) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (2247921267270577374) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_verify_recovery (5072554239108915119) -->
+    <skip />
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Cambia el PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"¿Olvidaste tu PIN?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Actualiza el correo de recuperación"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Borrar PIN"</string>
     <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Se restablecerá toda la configuración de supervisión"</string>
-    <string name="supervision_add_pin_recovery_title" msgid="5584523084706797399">"Presiona para agregar recuperación"</string>
-    <string name="supervision_verify_pin_recovery_title" msgid="7953090772633001442">"Presiona para verificar la recuperación"</string>
+    <!-- no translation found for supervision_add_pin_recovery_title (3487098027604685794) -->
+    <skip />
+    <!-- no translation found for supervision_verify_pin_recovery_title (3166602415814821497) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filtros de contenido web"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"Sitios web"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="1786398287521485576">"Bloquear contenido web explícito"</string>
@@ -5828,8 +5846,11 @@
     <string name="supervision_web_content_filters_search_filter_on_summary" msgid="6797184284369033101">"Para los motores de búsqueda en este dispositivo"</string>
     <string name="supervision_web_content_filters_search_filter_off_title" msgid="7171966260908166395">"Filtro desactivado"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Ingresa el PIN de supervisión"</string>
-    <string name="supervision_lock_setup_title" msgid="7581682893583645713">"Elige un bloqueo para la supervisión"</string>
-    <string name="supervision_lock_setup_description" msgid="6931450348200992733">"Puedes desbloquear la configuración de supervisión con este código"</string>
-    <string name="supervision_pin_reset_success_toast" msgid="4663259412030769718">"Restablecimiento del PIN de control parental"</string>
+    <!-- no translation found for supervision_choose_your_pin_header (3872062168986738629) -->
+    <skip />
+    <!-- no translation found for supervision_confirm_your_pin_header (8236956712482718354) -->
+    <skip />
+    <!-- no translation found for supervision_pin_reset_success_toast (9163550161698311831) -->
+    <skip />
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animación de <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
 </resources>

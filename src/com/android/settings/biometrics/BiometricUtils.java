@@ -54,16 +54,11 @@ import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.SetupChooseLockGeneric;
 import com.android.settingslib.widget.SettingsThemeHelper;
 
-import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.setupcompat.util.WizardManagerHelper;
-import com.google.android.setupdesign.util.LottieAnimationHelper;
 import com.google.android.setupdesign.util.ThemeHelper;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Common biometric utilities.
@@ -566,19 +561,6 @@ public class BiometricUtils {
         } else {
             return SettingsThemeHelper.isExpressiveTheme(context);
         }
-    }
-
-    /**
-     * Apply illustration theme color for LottieAnimationView view.
-     * @param context that for applying theme color of LottieAnimationView
-     * @param illustrationView the LottieAnimationView
-     */
-    public static void applyIllustrationLottieThemeColor(@NonNull Context context,
-            @NonNull LottieAnimationView illustrationView) {
-        List<String> colorResult = new ArrayList<>();
-        Collections.addAll(colorResult, context.getResources().getStringArray(
-                com.android.settings.R.array.va_animation_customization));
-        LottieAnimationHelper.get().applyColor(context, illustrationView, colorResult);
     }
 
     private static String capitalize(final String input) {

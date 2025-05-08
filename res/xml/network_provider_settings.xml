@@ -36,7 +36,7 @@
         android:layout="@layout/airplane_mode_message_preference"
         settings:allowDividerBelow="true"/>
 
-    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
+    <com.android.settingslib.widget.UntitledPreferenceCategory
         android:key="ethernet_interfaces"
         settings:isPreferenceVisible="false">
         <com.android.settingslib.RestrictedSwitchPreference
@@ -44,9 +44,9 @@
             android:title="@string/ethernet"
             settings:restrictedSwitchSummary="@string/not_allowed_by_ent"
             settings:allowDividerAbove="true"/>
-    </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+    </com.android.settingslib.widget.UntitledPreferenceCategory>
 
-    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
+    <com.android.settingslib.widget.UntitledPreferenceCategory
         android:key="connected_ethernet_category"
         settings:isPreferenceVisible="false">
         <Preference
@@ -54,7 +54,7 @@
             android:title="@string/ethernet"
             android:summary="@string/to_switch_networks_disconnect_ethernet"
             android:icon="@drawable/ic_settings_ethernet"/>
-    </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+    </com.android.settingslib.widget.UntitledPreferenceCategory>
 
     <PreferenceCategory
         android:key="provider_model_mobile_network"
@@ -83,7 +83,7 @@
     </PreferenceCategory>
 
 
-    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+    <com.android.settingslib.widget.UntitledPreferenceCategory>
       <Preference
           android:key="configure_network_settings"
           android:title="@string/network_and_internet_preferences_title"
@@ -98,7 +98,7 @@
       <com.android.settings.datausage.DataUsagePreference
           android:key="non_carrier_data_usage"
           android:title="@string/non_carrier_data_usage"/>
-    </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+    </com.android.settingslib.widget.UntitledPreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference
         android:key="wifi_status_message_footer"

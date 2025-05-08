@@ -25,11 +25,19 @@ import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertNull;
 import static junit.framework.TestCase.assertTrue;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
+
 import android.app.Instrumentation;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.ParceledListSlice;
 
+import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
@@ -45,9 +53,13 @@ import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.NotificationsSentState;
 import com.android.settingslib.PrimarySwitchPreference;
 
+import com.google.common.util.concurrent.MoreExecutors;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,22 +68,30 @@ import java.util.List;
 @SmallTest
 public class ChannelListPreferenceControllerTest {
     private Context mContext;
+    @Mock
     private NotificationBackend mBackend;
     private NotificationBackend.AppRow mAppRow;
     private ChannelListPreferenceController mController;
     private PreferenceManager mPreferenceManager;
     private PreferenceScreen mPreferenceScreen;
     private PreferenceCategory mGroupList;
+    @Mock
+    private NotificationSettings.DependentFieldListener mDependentFieldListener;
 
     @Before
     public void setUp() throws Exception {
+        MockitoAnnotations.initMocks(this);
         mContext = ApplicationProvider.getApplicationContext();
         Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
         instrumentation.runOnMainSync(() -> {
-            mBackend = new NotificationBackend();
+            when(mBackend.loadAppRow(any(), any(), any(ApplicationInfo.class)))
+                    .thenCallRealMethod();
             mAppRow = mBackend.loadAppRow(mContext,
                     mContext.getPackageManager(), mContext.getApplicationInfo());
-            mController = new ChannelListPreferenceController(mContext, mBackend);
+            mController = new ChannelListPreferenceController(
+                    mContext, mDependentFieldListener, mBackend);
+            mController.setExecutors(MoreExecutors.newDirectExecutorService(),
+                    MoreExecutors.directExecutor());
             mController.onResume(mAppRow, null, null, null, null, null, null);
             mPreferenceManager = new PreferenceManager(mContext);
             mPreferenceScreen = mPreferenceManager.createPreferenceScreen(mContext);
@@ -82,10 +102,13 @@ public class ChannelListPreferenceControllerTest {
 
     @Test
     @UiThreadTest
-    public void testUpdateFullList_incrementalUpdates() {
+    public void testUpdateState_incrementalUpdates() {
         // Start by testing the case with no groups or channels
         List<NotificationChannelGroup> inGroups = new ArrayList<>();
-        mController.updateFullList(mGroupList, inGroups);
+        when(mBackend.getChannelCount(anyString(), anyInt())).thenReturn(0);
+        when(mBackend.getGroupsWithRecentBlockedFilter(anyString(), anyInt()))
+                .thenReturn(new ParceledListSlice<>(inGroups));
+        mController.updateState(mGroupList);
         {
             assertEquals(1, mGroupList.getPreferenceCount());
             assertEquals("zeroCategories", mGroupList.getPreference(0).getKey());
@@ -93,17 +116,21 @@ public class ChannelListPreferenceControllerTest {
 
         // Test the case with no groups but hidden channels
         inGroups = new ArrayList<>();
-        mController.mChannelCount = 1;
-        mController.updateFullList(mGroupList, inGroups);
+        when(mBackend.getChannelCount(anyString(), anyInt())).thenReturn(1);
+        mController.updateState(mGroupList);
         {
-            assertEquals(0, mGroupList.getPreferenceCount());
+            assertEquals(1, mGroupList.getPreferenceCount());
+            assertEquals("show_more", mGroupList.getPreference(0).getKey());
         }
 
-        // Test that adding a group clears the zero category and adds everything
+        // Test that adding a group clears the zero category and 'show more' and adds everything
         NotificationChannelGroup inGroup1 = new NotificationChannelGroup("group1", "Group 1");
         inGroup1.addChannel(new NotificationChannel("ch1a", "Channel 1A", IMPORTANCE_DEFAULT));
         inGroups.add(inGroup1);
-        mController.updateFullList(mGroupList, inGroups);
+        when(mBackend.getChannelCount(anyString(), anyInt())).thenReturn(1);
+        when(mBackend.getGroupsWithRecentBlockedFilter(anyString(), anyInt()))
+                .thenReturn(new ParceledListSlice<>(inGroups));
+        mController.updateState(mGroupList);
         {
             assertEquals(1, mGroupList.getPreferenceCount());
             PreferenceGroup group1 = (PreferenceGroup) mGroupList.getPreference(0);
@@ -118,7 +145,10 @@ public class ChannelListPreferenceControllerTest {
 
         // Test that adding a channel works -- no dupes or omissions
         inGroup1.addChannel(new NotificationChannel("ch1b", "Channel 1B", IMPORTANCE_DEFAULT));
-        mController.updateFullList(mGroupList, inGroups);
+        when(mBackend.getChannelCount(anyString(), anyInt())).thenReturn(2);
+        when(mBackend.getGroupsWithRecentBlockedFilter(anyString(), anyInt()))
+                .thenReturn(new ParceledListSlice<>(inGroups));
+        mController.updateState(mGroupList);
         {
             assertEquals(1, mGroupList.getPreferenceCount());
             PreferenceGroup group1 = (PreferenceGroup) mGroupList.getPreference(0);
@@ -135,7 +165,7 @@ public class ChannelListPreferenceControllerTest {
 
         // Test that renaming a channel does in fact rename the preferences
         inGroup1.getChannels().get(1).setName("Channel 1B - Renamed");
-        mController.updateFullList(mGroupList, inGroups);
+        mController.updateState(mGroupList);
         {
             assertEquals(1, mGroupList.getPreferenceCount());
             PreferenceGroup group1 = (PreferenceGroup) mGroupList.getPreference(0);
@@ -153,9 +183,12 @@ public class ChannelListPreferenceControllerTest {
         // Test that adding a group works and results in the correct sorting.
         NotificationChannelGroup inGroup0 = new NotificationChannelGroup("group0", "Group 0");
         inGroup0.addChannel(new NotificationChannel("ch0b", "Channel 0B", IMPORTANCE_DEFAULT));
-        // NOTE: updateFullList takes a List which has been sorted, so we insert at 0 for this check
+        // NOTE: updateState takes a List which has been sorted, so we insert at 0 for this check
         inGroups.add(0, inGroup0);
-        mController.updateFullList(mGroupList, inGroups);
+        when(mBackend.getChannelCount(anyString(), anyInt())).thenReturn(3);
+        when(mBackend.getGroupsWithRecentBlockedFilter(anyString(), anyInt()))
+                .thenReturn(new ParceledListSlice<>(inGroups));
+        mController.updateState(mGroupList);
         {
             assertEquals(2, mGroupList.getPreferenceCount());
             PreferenceGroup group0 = (PreferenceGroup) mGroupList.getPreference(0);
@@ -179,9 +212,12 @@ public class ChannelListPreferenceControllerTest {
         }
 
         // Test that adding a channel that comes before another works and has correct ordering.
-        // NOTE: the channels within a group are sorted inside updateFullList.
+        // NOTE: the channels within a group are sorted inside updateState.
         inGroup0.addChannel(new NotificationChannel("ch0a", "Channel 0A", IMPORTANCE_DEFAULT));
-        mController.updateFullList(mGroupList, inGroups);
+        when(mBackend.getChannelCount(anyString(), anyInt())).thenReturn(4);
+        when(mBackend.getGroupsWithRecentBlockedFilter(anyString(), anyInt()))
+                .thenReturn(new ParceledListSlice<>(inGroups));
+        mController.updateState(mGroupList);
         {
             assertEquals(2, mGroupList.getPreferenceCount());
             PreferenceGroup group0 = (PreferenceGroup) mGroupList.getPreference(0);
@@ -213,7 +249,10 @@ public class ChannelListPreferenceControllerTest {
         inGroupOther.addChannel(new NotificationChannel("chXa", "Other A", IMPORTANCE_DEFAULT));
         inGroupOther.addChannel(new NotificationChannel("chXb", "Other B", IMPORTANCE_DEFAULT));
         inGroups.add(inGroupOther);
-        mController.updateFullList(mGroupList, inGroups);
+        when(mBackend.getChannelCount(anyString(), anyInt())).thenReturn(4);
+        when(mBackend.getGroupsWithRecentBlockedFilter(anyString(), anyInt()))
+                .thenReturn(new ParceledListSlice<>(inGroups));
+        mController.updateState(mGroupList);
         {
             assertEquals(2, mGroupList.getPreferenceCount());
             PreferenceGroup group1 = (PreferenceGroup) mGroupList.getPreference(0);
@@ -237,7 +276,10 @@ public class ChannelListPreferenceControllerTest {
 
         // Test that the removal of a channel works.
         inGroupOther.getChannels().remove(0);
-        mController.updateFullList(mGroupList, inGroups);
+        when(mBackend.getChannelCount(anyString(), anyInt())).thenReturn(3);
+        when(mBackend.getGroupsWithRecentBlockedFilter(anyString(), anyInt()))
+                .thenReturn(new ParceledListSlice<>(inGroups));
+        mController.updateState(mGroupList);
         {
             assertEquals(2, mGroupList.getPreferenceCount());
             PreferenceGroup group1 = (PreferenceGroup) mGroupList.getPreference(0);
@@ -258,9 +300,11 @@ public class ChannelListPreferenceControllerTest {
         }
 
         // Test that we go back to the empty state when clearing all groups and channels.
-        mController.mChannelCount = 0;
         inGroups.clear();
-        mController.updateFullList(mGroupList, inGroups);
+        when(mBackend.getChannelCount(anyString(), anyInt())).thenReturn(0);
+        when(mBackend.getGroupsWithRecentBlockedFilter(anyString(), anyInt()))
+                .thenReturn(new ParceledListSlice<>(inGroups));
+        mController.updateState(mGroupList);
         {
             assertEquals(1, mGroupList.getPreferenceCount());
             assertEquals("zeroCategories", mGroupList.getPreference(0).getKey());
@@ -270,15 +314,19 @@ public class ChannelListPreferenceControllerTest {
 
     @Test
     @UiThreadTest
-    public void testUpdateFullList_groupBlockedChange() {
+    public void testupdateState_groupBlockedChange() {
         List<NotificationChannelGroup> inGroups = new ArrayList<>();
         NotificationChannelGroup inGroup = new NotificationChannelGroup("group", "My Group");
         inGroup.addChannel(new NotificationChannel("channelA", "Channel A", IMPORTANCE_DEFAULT));
         inGroup.addChannel(new NotificationChannel("channelB", "Channel B", IMPORTANCE_NONE));
         inGroups.add(inGroup);
 
+        when(mBackend.getChannelCount(anyString(), anyInt())).thenReturn(2);
+        when(mBackend.getGroupsWithRecentBlockedFilter(anyString(), anyInt()))
+                .thenReturn(new ParceledListSlice<>(inGroups));
+
         // Test that the group is initially showing all preferences
-        mController.updateFullList(mGroupList, inGroups);
+        mController.updateState(mGroupList);
         {
             assertEquals(1, mGroupList.getPreferenceCount());
             PreferenceGroup group = (PreferenceGroup) mGroupList.getPreference(0);
@@ -300,7 +348,7 @@ public class ChannelListPreferenceControllerTest {
 
         // Test that when a group is blocked, the list removes its individual channel preferences
         inGroup.setBlocked(true);
-        mController.updateFullList(mGroupList, inGroups);
+        mController.updateState(mGroupList);
         {
             assertEquals(1, mGroupList.getPreferenceCount());
             PreferenceGroup group = (PreferenceGroup) mGroupList.getPreference(0);
@@ -314,7 +362,7 @@ public class ChannelListPreferenceControllerTest {
 
         // Test that when a group is unblocked, the list adds its individual channel preferences
         inGroup.setBlocked(false);
-        mController.updateFullList(mGroupList, inGroups);
+        mController.updateState(mGroupList);
         {
             assertEquals(1, mGroupList.getPreferenceCount());
             PreferenceGroup group = (PreferenceGroup) mGroupList.getPreference(0);
@@ -337,7 +385,7 @@ public class ChannelListPreferenceControllerTest {
 
     @Test
     @UiThreadTest
-    public void testUpdateFullList_channelUpdates() {
+    public void testupdateState_channelUpdates() {
         List<NotificationChannelGroup> inGroups = new ArrayList<>();
         NotificationChannelGroup inGroup = new NotificationChannelGroup("group", "Group");
         NotificationChannel channelA =
@@ -356,8 +404,12 @@ public class ChannelListPreferenceControllerTest {
         sentB.avgSentWeekly = 2;
         mAppRow.sentByChannel.put("channelA", sentA);
 
+        when(mBackend.getChannelCount(anyString(), anyInt())).thenReturn(2);
+        when(mBackend.getGroupsWithRecentBlockedFilter(anyString(), anyInt()))
+                .thenReturn(new ParceledListSlice<>(inGroups));
+
         // Test that the channels' properties are reflected in the preference
-        mController.updateFullList(mGroupList, inGroups);
+        mController.updateState(mGroupList);
         {
             assertEquals(1, mGroupList.getPreferenceCount());
             PreferenceGroup group = (PreferenceGroup) mGroupList.getPreference(0);
@@ -385,7 +437,7 @@ public class ChannelListPreferenceControllerTest {
         mAppRow.sentByChannel.put("channelB", sentB);
 
         // Test that changing the channels' properties correctly updates the preference
-        mController.updateFullList(mGroupList, inGroups);
+        mController.updateState(mGroupList);
         {
             assertEquals(1, mGroupList.getPreferenceCount());
             PreferenceGroup group = (PreferenceGroup) mGroupList.getPreference(0);
