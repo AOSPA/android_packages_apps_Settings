@@ -87,3 +87,6 @@
 
 # Keep the device state AppFunction schema
 -keep class com.google.android.appfunctions.schema.common.v1.devicestate.** { *; }
+
+# Keep AOSPA settings classes
+-keep public class co.aospa.settings.** { *; }
