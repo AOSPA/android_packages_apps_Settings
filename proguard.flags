@@ -79,3 +79,6 @@
 
 # Keep the com.android.settings.media_drm.FakeFeatureFlagsImpl
 -keep class com.android.settings.media_drm.FakeFeatureFlagsImpl { *; }
+
+# Keep AOSPA settings classes
+-keep public class co.aospa.settings.** { *; }
