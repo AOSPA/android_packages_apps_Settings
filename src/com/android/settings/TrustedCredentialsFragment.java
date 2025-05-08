@@ -60,6 +60,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -69,6 +70,9 @@ import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.TrustedCredentialsSettings.Tab;
 import com.android.settingslib.core.lifecycle.ObservableFragment;
+import com.android.settingslib.widget.SettingsThemeHelper;
+
+import com.google.android.material.materialswitch.MaterialSwitch;
 
 import java.security.cert.CertificateEncodingException;
 import java.security.cert.X509Certificate;
@@ -467,7 +471,19 @@ public class TrustedCredentialsFragment extends ObservableFragment
                         convertView.findViewById(R.id.trusted_credential_subject_primary);
                 holder.mSubjectSecondaryView =
                         convertView.findViewById(R.id.trusted_credential_subject_secondary);
-                holder.mSwitch = convertView.findViewById(R.id.trusted_credential_status);
+
+                MaterialSwitch expressiveSwitch = convertView.requireViewById(
+                        R.id.trusted_credential_status_expressive);
+                Switch nonExpressiveSwitch = convertView.requireViewById(
+                        R.id.trusted_credential_status);
+                if (SettingsThemeHelper.isExpressiveTheme(requireContext())) {
+                    holder.mSwitch = expressiveSwitch;
+                    nonExpressiveSwitch.setVisibility(View.GONE);
+                    expressiveSwitch.setVisibility(View.INVISIBLE);
+                } else {
+                    holder.mSwitch = nonExpressiveSwitch;
+                    expressiveSwitch.setVisibility(View.GONE);
+                }
                 holder.mSwitch.setOnClickListener(view -> {
                     removeOrInstallCert((CertHolder) view.getTag());
                 });

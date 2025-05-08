@@ -23,6 +23,7 @@ import static com.android.settings.connecteddevice.audiosharing.audiostreams.Aud
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -439,6 +440,59 @@ public class AudioStreamConfirmDialogTest {
         rightButton.callOnClick();
         assertThat(dialog.isShowing()).isFalse();
         verify(mDialogFragment.mActivity, times(2)).finish();
+    }
+
+    @Test
+    public void showDialog_turnOffAudioSharing() {
+        ShadowAudioStreamsHelper.setCachedBluetoothDeviceInSharingOrLeConnected(
+                mCachedBluetoothDevice);
+        when(mCachedBluetoothDevice.getName()).thenReturn("");
+        when(mBroadcast.isEnabled(any())).thenReturn(true);
+
+        Intent intent = new Intent();
+        intent.putExtra(KEY_BROADCAST_METADATA, VALID_METADATA);
+        FragmentController.of(mDialogFragment, intent)
+                .create(/* containerViewId= */ 0, /* bundle= */ null)
+                .start()
+                .resume()
+                .visible()
+                .get();
+        shadowMainLooper().idle();
+
+        assertThat(mDialogFragment.getMetricsCategory())
+                .isEqualTo(SettingsEnums.DIALOG_AUDIO_STREAM_CONFIRM_TURN_OFF_AUDIO_SHARING);
+        assertThat(mDialogFragment.mActivity).isNotNull();
+        mDialogFragment.mActivity = spy(mDialogFragment.mActivity);
+
+        var dialog = mDialogFragment.getDialog();
+        assertThat(dialog).isNotNull();
+        assertThat(dialog.isShowing()).isTrue();
+
+        TextView title = dialog.findViewById(R.id.dialog_title);
+        assertThat(title).isNotNull();
+        assertThat(title.getText())
+                .isEqualTo(mContext.getString(
+                        R.string.audio_streams_dialog_turn_off_audio_sharing_title));
+        TextView subtitle1 = dialog.findViewById(R.id.dialog_subtitle);
+        assertThat(subtitle1).isNotNull();
+        assertThat(subtitle1.getVisibility()).isEqualTo(View.VISIBLE);
+        TextView subtitle2 = dialog.findViewById(R.id.dialog_subtitle_2);
+        assertThat(subtitle2).isNotNull();
+        assertThat(subtitle2.getText())
+                .isEqualTo(mContext.getString(
+                        R.string.audio_streams_dialog_turn_off_audio_sharing_subtitle));
+        View leftButton = dialog.findViewById(R.id.left_button);
+        assertThat(leftButton).isNotNull();
+        assertThat(leftButton.getVisibility()).isEqualTo(View.GONE);
+        assertThat(leftButton.hasOnClickListeners()).isFalse();
+        View rightButton = dialog.findViewById(R.id.right_button);
+        assertThat(rightButton).isNotNull();
+        assertThat(rightButton.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(rightButton.hasOnClickListeners()).isTrue();
+
+        rightButton.callOnClick();
+        assertThat(dialog.isShowing()).isFalse();
+        verify(mDialogFragment.mActivity).finish();
     }
 
     @Test

@@ -33,6 +33,7 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.notification.NotificationBackend;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.LayoutPreference;
@@ -44,8 +45,9 @@ public class ConversationHeaderPreferenceController extends NotificationPreferen
     private EntityHeaderController mHeaderController;
     private boolean mStarted = false;
 
-    public ConversationHeaderPreferenceController(Context context, DashboardFragment fragment) {
-        super(context, null);
+    public ConversationHeaderPreferenceController(Context context, DashboardFragment fragment,
+            NotificationBackend backend) {
+        super(context, backend);
         mFragment = fragment;
     }
 
@@ -99,20 +101,20 @@ public class ConversationHeaderPreferenceController extends NotificationPreferen
     @Override
     public CharSequence getSummary() {
         if (mChannel != null && !isDefaultChannel()) {
+            CharSequence parentChannelLabel = mBackend.getChannel(mAppRow.pkg, mAppRow.uid,
+                    mChannel.getParentChannelId()).getName();
             if (mChannelGroup != null
                     && !TextUtils.isEmpty(mChannelGroup.getName())) {
                 final SpannableStringBuilder summary = new SpannableStringBuilder();
                 BidiFormatter bidi = BidiFormatter.getInstance();
-                summary.append(bidi.unicodeWrap(mAppRow.label.toString()));
+                summary.append(bidi.unicodeWrap(parentChannelLabel));
                 summary.append(bidi.unicodeWrap(mContext.getText(
                         R.string.notification_header_divider_symbol_with_spaces)));
                 summary.append(bidi.unicodeWrap(mChannelGroup.getName().toString()));
                 return summary.toString();
             } else {
-                return mAppRow.label.toString();
+                return parentChannelLabel;
             }
-        } else if (mChannelGroup != null) {
-            return mAppRow.label.toString();
         } else {
             return "";
         }

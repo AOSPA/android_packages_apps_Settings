@@ -27,6 +27,8 @@ import androidx.fragment.app.testing.FragmentScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settings.supervision.ipc.SupervisionMessengerClient
+import com.android.settingslib.ipc.MessengerServiceRule
 import com.android.settingslib.widget.FooterPreference
 import com.android.settingslib.widget.SelectorWithWidgetPreference
 import com.google.common.truth.Truth.assertThat
@@ -35,15 +37,23 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Shadows.shadowOf
+import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowPackageManager
 
 @RunWith(AndroidJUnit4::class)
+@LooperMode(LooperMode.Mode.INSTRUMENTATION_TEST)
 class SupervisionWebContentFiltersScreenTest {
-    @get:Rule val setFlagsRule = SetFlagsRule()
     private val context: Context = ApplicationProvider.getApplicationContext()
     private lateinit var supervisionWebContentFiltersScreen: SupervisionWebContentFiltersScreen
-
     private lateinit var shadowPackageManager: ShadowPackageManager
+
+    @get:Rule val setFlagsRule = SetFlagsRule()
+
+    @get:Rule
+    val serviceRule =
+        MessengerServiceRule<SupervisionMessengerClient>(
+            TestSupervisionMessengerService::class.java
+        )
 
     @Before
     fun setUp() {

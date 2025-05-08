@@ -18,12 +18,10 @@ package com.android.settings.accessibility
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.res.Resources
-import android.os.VibrationAttributes
-import android.os.VibrationEffect
 import android.os.Vibrator
 import androidx.core.content.getSystemService
-import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settingslib.datastore.SettingsSystemStore
 import com.android.settingslib.preference.PreferenceBindingFactory
@@ -32,15 +30,14 @@ import com.android.settingslib.widget.MainSwitchPreference
 import com.android.settingslib.widget.SliderPreference
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
-import org.mockito.kotlin.any
+import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
-import org.mockito.kotlin.never
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
-import org.mockito.kotlin.verify
 
 /** Test case for vibration slider preferences. */
 // LINT.IfChange
+@RunWith(AndroidJUnit4::class)
 abstract class VibrationIntensitySliderPreferenceTestCase {
     protected abstract val preference: VibrationIntensitySliderPreference
     protected val mainSwitchPreference = VibrationMainSwitchPreference()
@@ -54,6 +51,7 @@ abstract class VibrationIntensitySliderPreferenceTestCase {
     protected val context: Context =
         object : ContextWrapper(ApplicationProvider.getApplicationContext()) {
             override fun getResources(): Resources = resourcesSpy
+
             override fun getSystemService(name: String): Any? =
                 when {
                     name == getSystemServiceName(Vibrator::class.java) -> vibratorSpy
@@ -305,23 +303,21 @@ abstract class VibrationIntensitySliderPreferenceTestCase {
         }
     }
 
-    private fun getRawStoredValue() =
-        SettingsSystemStore.get(context).getInt(preference.key)
+    private fun getRawStoredValue() = SettingsSystemStore.get(context).getInt(preference.key)
 
     private fun setMainSwitchValue(value: Boolean?) =
         SettingsSystemStore.get(context).setBoolean(mainSwitchPreference.key, value)
 
-    private fun setValue(value: Int?) =
-        preference.storage(context).setInt(preference.key, value)
+    private fun setValue(value: Int?) = preference.storage(context).setInt(preference.key, value)
 
-    private fun createWidget(): SliderPreference =
-        preference.createAndBindWidget(context)
+    private fun createWidget(): SliderPreference = preference.createAndBindWidget(context)
 
     private fun createMainSwitchWidget(): MainSwitchPreference =
         mainSwitchPreference.createAndBindWidget(context)
 
     private fun updatePreferenceBinding(widget: SliderPreference) =
-        PreferenceBindingFactory.defaultFactory.getPreferenceBinding(preference)!!
+        PreferenceBindingFactory.defaultFactory
+            .getPreferenceBinding(preference)!!
             .bind(widget, preference)
 }
 // LINT.ThenChange(VibrationTogglePreferenceControllerTest.java)

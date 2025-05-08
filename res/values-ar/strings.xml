@@ -276,10 +276,8 @@
     <string name="terms_of_address_masculine" msgid="983106046135098856">"صيغة مخاطبة مذكّرة"</string>
     <string name="terms_of_address_neutral" msgid="5475414185543112478">"صيغة مخاطبة محايدة"</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{هل تريد إزالة اللغة المحددة؟}zero{هل تريد إزالة اللغات المحددة؟}two{هل تريد إزالة اللغتَين المحددتَين؟}few{هل تريد إزالة اللغات المحددة؟}many{هل تريد إزالة اللغات المحددة؟}other{هل تريد إزالة اللغات المحددة؟}}"</string>
-    <!-- no translation found for dlg_remove_system_locales_title (7626516786258866543) -->
-    <skip />
-    <!-- no translation found for dlg_remove_locales_message (6636637008013310242) -->
-    <skip />
+    <string name="dlg_remove_system_locales_title" msgid="7626516786258866543">"‏هل المطلوب تغيير لغة النظام إلى %s؟"</string>
+    <string name="dlg_remove_locales_message" msgid="6636637008013310242">"ستتم إزالة <xliff:g id="LANGUAGE">%s</xliff:g> من لغاتك المفضّلة"</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"تتعذر إزالة كل اللغات"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"يجب الاحتفاظ بلغة واحدة مفضَّلة على الأقل."</string>
     <string name="locale_not_translated" msgid="3071618135527110152">"غير متاحة كلغة للنظام."</string>
@@ -318,10 +316,13 @@
     <string name="time_format_category_title" msgid="7108616745509689991">"تنسيق الوقت"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"المنطقة الزمنية"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"اختيار المنطقة الزمنية"</string>
+    <!-- no translation found for date_time_search_time_zone (7373967602009974399) -->
+    <skip />
     <string name="date_time_set_date_title" msgid="7624166157167528407">"التاريخ"</string>
     <string name="date_time_search_region" msgid="1364133854952610919">"البحث عن منطقة"</string>
     <string name="date_time_select_region" msgid="5449345333305056072">"المنطقة"</string>
-    <string name="date_time_select_fixed_offset_time_zones" msgid="594848300882055361">"‏اختيار فارق الوقت عن UTC"</string>
+    <!-- no translation found for date_time_select_fixed_offset_time_zones (2130108030162342594) -->
+    <skip />
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"يتم استخدام <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
@@ -330,7 +331,8 @@
     <string name="zone_time_type_dst" msgid="9189689342265305808">"التوقيت الصيفي"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"التوقيت الرسمي"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"تحديد حسب المنطقة"</string>
-    <string name="zone_menu_by_offset" msgid="1257702747474426745">"‏الاختيار حسب فارق الوقت عن UTC"</string>
+    <!-- no translation found for zone_menu_by_offset (543648951618438204) -->
+    <skip />
     <string name="time_feedback_category_title" msgid="5942621686512255208">"الملاحظات"</string>
     <string name="keywords_time_feedback_category" msgid="4553921538559830393">"ملاحظات، خلل، وقت، منطقة، منطقة زمنية"</string>
     <string name="time_feedback_title" msgid="7720948068042783614">"إرسال ملاحظات حول الوقت"</string>
@@ -1176,6 +1178,12 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"سماح"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"رفض"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*مطلوب"</string>
+    <!-- no translation found for share_wifi_network (4064997404339571584) -->
+    <skip />
+    <!-- no translation found for share_wifi_network_summary (4316236421149769333) -->
+    <skip />
+    <!-- no translation found for edit_wifi_network_configuration (5712989655083072417) -->
+    <skip />
     <string name="no_internet_access_text" msgid="3611993143350310936">"لا توفِّر هذه الشبكة اتصالاً بالإنترنت. هل تريد متابعة الاتصال؟"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"قد لا تعمل بعض التطبيقات والخدمات بسبب قيود على إمكانية الاتصال. هل تريد استخدامها على أي حال؟"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"عدم السؤال مرة أخرى لهذه الشبكة"</string>
@@ -1901,7 +1909,7 @@
     <string name="lockpattern_settings_title" msgid="9223165804553269083">"نقش فتح القفل"</string>
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"النقش مطلوب"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"يجب رسم نقش لإلغاء قفل الشاشة"</string>
-    <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"جعل النقش مرئيًا"</string>
+    <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"إظهار النقش"</string>
     <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"تحسين خصوصية رقم التعريف الشخصي"</string>
     <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"إيقاف الصور المتحركة أثناء إدخال رقم التعريف الشخصي"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"إظهار نقش الملف الشخصي"</string>
@@ -2117,6 +2125,8 @@
     <string name="sticky_keys_summary" msgid="1844953803625480623">"اضغط على مفتاح واحد في كل مرة للحصول على الاختصارات بدلاً من الضغط باستمرار على المفاتيح معًا"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"مفاتيح الماوس"</string>
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"استخدام مفاتيح الماوس"</string>
+    <!-- no translation found for accessibility_mouse_keys_shortcut_title (7621635104533584115) -->
+    <skip />
     <string name="mouse_keys_summary" msgid="7030731235143286467">"يمكنك استخدام لوحة المفاتيح للتحكّم في المؤشر"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"عكس اتجاه التنقّل"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"يمكنك الانتقال للأعلى لتحريك محتوى الصفحة للأسفل"</string>
@@ -2177,10 +2187,8 @@
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"النقر بزر الماوس الأيمن، النقر"</string>
     <string name="three_finger_tap_middle_click" msgid="7898931632908866867">"زر الماوس الأوسط"</string>
     <string name="three_finger_tap_launch_gemini" msgid="4030401656711588982">"‏تشغيل \"مساعد Google\""</string>
-    <!-- no translation found for three_finger_tap_launch_default_assistant (7947939159617292478) -->
-    <skip />
-    <!-- no translation found for three_finger_tap_launch_generic_assistant_name (1893057235983949817) -->
-    <skip />
+    <string name="three_finger_tap_launch_default_assistant" msgid="7947939159617292478">"تشغيل \"<xliff:g id="APP_NAME">%s</xliff:g>\""</string>
+    <string name="three_finger_tap_launch_generic_assistant_name" msgid="1893057235983949817">"‏مساعد Google"</string>
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"الانتقال إلى الشاشة الرئيسية"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"رجوع"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"عرض التطبيقات المستخدَمة مؤخرًا"</string>
@@ -2999,6 +3007,12 @@
     <string name="cellular_security_notifications" msgid="4619728340612184944">"الإشعارات"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"إشعارات الشبكة"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"‏تلقّي إشعارات عندما يتصل جهازك بشبكة غير مشفَّرة أو عندما ترصد شبكة أرقام التعريف الفريدة للجهاز أو شريحة SIM"</string>
+    <!-- no translation found for cellular_security_2G_network_generation_header (2892850064192939887) -->
+    <skip />
+    <!-- no translation found for cellular_security_2G_network_generation_summary (979187530909112413) -->
+    <skip />
+    <!-- no translation found for cellular_security_2G_network_generation_title (706766676947606951) -->
+    <skip />
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"التشفير"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"أجيال الشبكات"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"‏يمكنك ضبط كل شريحة SIM مثبَّتة على الاتصال فقط بشبكات الجيل الثالث والرابع والخامس. لن تتصل شريحة SIM بشبكات الجيل الثاني القديمة وغير الآمنة. قد يحدّ هذا الإعداد من إمكانية اتصالك إذا كانت الشبكة الوحيدة المتوفّرة من الجيل الثاني. وقد يتم استخدام شبكات الجيل الثاني في حالات الطوارئ."</string>
@@ -5841,25 +5855,23 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"حذف رقم التعريف الشخصي"</string>
     <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"سيؤدي هذا الإجراء إلى إعادة ضبط كل إعدادات الإشراف"</string>
     <string name="supervision_add_pin_recovery_title" msgid="5584523084706797399">"النقر لإضافة رقم تعريف شخصي احتياطي مخصَّص للاسترداد"</string>
+    <!-- no translation found for supervision_verify_pin_recovery_title (7953090772633001442) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"فلاتر محتوى الويب"</string>
-    <!-- no translation found for supervision_web_content_filters_summary_both_on (8668754911140483798) -->
+    <!-- no translation found for supervision_web_content_filters_browser_title (8737341514264129889) -->
     <skip />
-    <!-- no translation found for supervision_web_content_filters_summary_chrome_on (5999295548020086617) -->
+    <!-- no translation found for supervision_web_content_filters_browser_block_explicit_sites_title (1786398287521485576) -->
     <skip />
-    <!-- no translation found for supervision_web_content_filters_summary_search_on (6866676094401450305) -->
+    <!-- no translation found for supervision_web_content_filters_browser_block_explicit_sites_summary (1427357961145247788) -->
     <skip />
-    <!-- no translation found for supervision_web_content_filters_summary_both_off (6735949158065982622) -->
-    <skip />
-    <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"‏‫Google Chrome والويب"</string>
-    <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"محاولة حظر المواقع التي تتضمَّن محتوى فاضحًا"</string>
-    <string name="supervision_web_content_filters_browser_block_explicit_sites_summary" msgid="1477766506765966613">"لا يوجد فلتر يعمل بدقة متناهية، ولكن من المفترض أن يساعد هذا الخيار في إخفاء المواقع الإلكترونية التي تعرض محتوى جنسيًا فاضحًا"</string>
     <string name="supervision_web_content_filters_browser_allow_all_sites_title" msgid="3909739592466381845">"السماح بجميع المواقع الإلكترونية"</string>
-    <string name="supervision_web_content_filters_search_title" msgid="726335318009305564">"‏بحث Google"</string>
-    <string name="supervision_web_content_filters_search_filter_on_title" msgid="4855846261141136285">"تفعيل الفلترة باستخدام \"البحث الآمن\""</string>
-    <string name="supervision_web_content_filters_search_filter_on_summary" msgid="1162258144140293269">"يساعد هذا الخيار في فلترة الصور والنصوص والروابط الفاضحة من نتائج البحث على هذا الجهاز"</string>
-    <string name="supervision_web_content_filters_search_filter_off_title" msgid="6049461395304222346">"إيقاف الفلترة باستخدام \"البحث الآمن\""</string>
-    <string name="supervision_web_content_filters_search_filter_off_summary" msgid="3834238970190924433">"قد تستمر فلترة أو تمويه النتائج الفاضحة من خلال إعدادات الحساب"</string>
-    <!-- no translation found for supervision_web_content_filters_footer_content (3532535288142541994) -->
+    <!-- no translation found for supervision_web_content_filters_search_title (8608480392956106029) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_search_filter_on_title (1136440775294190806) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_search_filter_on_summary (6797184284369033101) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_search_filter_off_title (7171966260908166395) -->
     <skip />
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"إدخال رقم التعريف الشخصي للمشرف"</string>
     <string name="supervision_lock_setup_title" msgid="7581682893583645713">"اختيار قفل لإعدادات الإشراف"</string>

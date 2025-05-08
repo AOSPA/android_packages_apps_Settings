@@ -15,14 +15,16 @@
  */
 package com.android.settings.accessibility
 
+import android.content.Context
 import android.os.VibrationAttributes
 import android.provider.Settings
 import com.android.settings.R
 
 /** Accessibility settings for alarm vibration, as a switch toggle. */
 // LINT.IfChange
-class AlarmVibrationIntensitySwitchPreference :
+class AlarmVibrationIntensitySwitchPreference(context: Context) :
     VibrationIntensitySwitchPreference(
+        context = context,
         key = KEY,
         vibrationUsage = VibrationAttributes.USAGE_ALARM,
         title = R.string.accessibility_alarm_vibration_title,

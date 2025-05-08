@@ -76,6 +76,30 @@ class SupervisionMainSwitchPreferenceTest {
     }
 
     @Test
+    fun getSummary_noPinSet_returnsNoPinSummary() {
+        setSupervisionEnabled(false)
+        setSupervisingProfileCreated(false)
+
+        assertThat(preference.getSummary(context)).isEqualTo("Set up PIN")
+    }
+
+    @Test
+    fun getSummary_disabled_pinSet_returnsPausedSummary() {
+        setSupervisionEnabled(false)
+        setSupervisingProfileCreated(true)
+
+        assertThat(preference.getSummary(context)).isEqualTo("Paused")
+    }
+
+    @Test
+    fun getSummary_enabled_pinSet_returnsOnSummary() {
+        setSupervisionEnabled(true)
+        setSupervisingProfileCreated(true)
+
+        assertThat(preference.getSummary(context)).isEqualTo("On")
+    }
+
+    @Test
     fun checked_supervisionEnabled_returnTrue() {
         setSupervisionEnabled(true)
 

@@ -51,11 +51,9 @@ import android.app.admin.PasswordPolicy;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.biometrics.BiometricManager;
-import android.hardware.biometrics.Flags;
 import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
-import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings.Global;
 import android.widget.TextView;
@@ -309,7 +307,6 @@ public class ChooseLockGenericTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
     public void onActivityResult_requestcode100_shouldLaunchBiometricPrompt() {
         initActivity(null);
         mShadowBiometricManager.setCanAuthenticate(true);

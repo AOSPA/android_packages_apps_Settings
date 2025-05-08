@@ -76,7 +76,6 @@ public class ToggleAutoclickPreferenceFragmentTest {
     @Before
     public void setUp() {
         mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
-        launchFragment();
     }
 
     @After
@@ -89,6 +88,7 @@ public class ToggleAutoclickPreferenceFragmentTest {
     @DisableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_AUTOCLICK_INDICATOR)
     @Test
     public void verifyFragmentUI_flagOff_doesNotContainShortcutToggle() {
+        launchFragment();
         Preference pref = mFragment.findPreference(KEY_AUTOCLICK_SHORTCUT_PREFERENCE);
         assertThat(pref).isNotNull();
         assertThat(pref.isVisible()).isFalse();
@@ -97,6 +97,7 @@ public class ToggleAutoclickPreferenceFragmentTest {
     @EnableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_AUTOCLICK_INDICATOR)
     @Test
     public void verifyFragmentUI_containsShortcutToggle() {
+        launchFragment();
         Preference pref = mFragment.findPreference(KEY_AUTOCLICK_SHORTCUT_PREFERENCE);
         assertThat(pref).isNotNull();
         assertThat(pref.isVisible()).isTrue();
@@ -152,6 +153,7 @@ public class ToggleAutoclickPreferenceFragmentTest {
     @EnableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_AUTOCLICK_INDICATOR)
     @Test
     public void clickShortcutSettings_showEditShortcutsScreenWithoutChangingShortcutToggleState() {
+        launchFragment();
         ShortcutPreference pref = mFragment.findPreference(KEY_AUTOCLICK_SHORTCUT_PREFERENCE);
         assertThat(pref).isNotNull();
         final boolean shortcutToggleState = pref.isChecked();
@@ -163,23 +165,27 @@ public class ToggleAutoclickPreferenceFragmentTest {
 
     @Test
     public void getMetricsCategory_returnsCorrectCategory() {
+        launchFragment();
         assertThat(mFragment.getMetricsCategory()).isEqualTo(
                 SettingsEnums.ACCESSIBILITY_TOGGLE_AUTOCLICK);
     }
 
     @Test
     public void getPreferenceScreenResId_returnsCorrectXml() {
+        launchFragment();
         assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(
                 R.xml.accessibility_autoclick_settings);
     }
 
     @Test
     public void getHelpResource_returnsCorrectHelpResource() {
+        launchFragment();
         assertThat(mFragment.getHelpResource()).isEqualTo(R.string.help_url_autoclick);
     }
 
     @Test
     public void getLogTag_returnsCorrectTag() {
+        launchFragment();
         assertThat(mFragment.getLogTag()).isEqualTo("AutoclickPrefFragment");
     }
 

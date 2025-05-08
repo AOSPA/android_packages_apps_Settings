@@ -18,7 +18,11 @@ package com.android.settings.accessibility
 
 import android.content.ComponentName
 import android.content.Context
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.preference.Preference
+import androidx.recyclerview.widget.RecyclerView
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment
 import com.google.android.setupcompat.util.WizardManagerHelper
 
@@ -68,5 +72,15 @@ abstract class ShortcutFragment(restrictionKey: String? = null) :
     override fun onAttach(context: Context) {
         super.onAttach(context)
         getShortcutPreferenceController().initialize(getFeatureComponentName())
+    }
+
+    override fun onCreateRecyclerView(
+        inflater: LayoutInflater,
+        parent: ViewGroup,
+        savedInstanceState: Bundle?
+    ): RecyclerView {
+        val recyclerView =
+            super.onCreateRecyclerView(inflater, parent, savedInstanceState)
+        return AccessibilityFragmentUtils.addCollectionInfoToAccessibilityDelegate(recyclerView)
     }
 }

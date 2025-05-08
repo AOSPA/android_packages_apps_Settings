@@ -38,11 +38,9 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.biometrics.BiometricManager;
-import android.hardware.biometrics.Flags;
 import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
-import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.util.AndroidRuntimeException;
 import android.view.LayoutInflater;
@@ -177,7 +175,6 @@ public class CombinedBiometricProfileSettingsTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
     public void testLaunchBiometricPrompt_onCreateFragment() {
         ArgumentCaptor<Intent> intentArgumentCaptor = ArgumentCaptor.forClass(Intent.class);
         doNothing().when(mFragment).startActivityForResult(any(), anyInt());

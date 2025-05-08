@@ -16,6 +16,7 @@
 
 package com.android.settings.gestures;
 
+import static android.app.contextualsearch.ContextualSearchManager.FEATURE_CONTEXTUAL_SEARCH;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_2BUTTON_OVERLAY;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON_OVERLAY;
 
@@ -59,6 +60,12 @@ public class ButtonNavigationSettingsFragment extends DashboardFragment {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
+                    /*  Hide button navigation settings from search when contextual search is
+                     *   enable to match button navigation preferences logic.
+                     */
+                    if (context.getPackageManager().hasSystemFeature(FEATURE_CONTEXTUAL_SEARCH)) {
+                        return false;
+                    }
                     return SystemNavigationPreferenceController.isOverlayPackageAvailable(context,
                             NAV_BAR_MODE_2BUTTON_OVERLAY)
                             || SystemNavigationPreferenceController.isOverlayPackageAvailable(

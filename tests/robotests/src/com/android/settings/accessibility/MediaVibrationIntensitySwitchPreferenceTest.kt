@@ -19,19 +19,16 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.content.res.Resources
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
-import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
 
 // LINT.IfChange
-@RunWith(AndroidJUnit4::class)
 class MediaVibrationIntensitySwitchPreferenceTest : VibrationIntensitySwitchPreferenceTestCase() {
-    override val preference = MediaVibrationIntensitySwitchPreference()
+    override val preference = MediaVibrationIntensitySwitchPreference(context)
 
     private val resourcesSpy: Resources =
         spy(ApplicationProvider.getApplicationContext<Context>().resources)

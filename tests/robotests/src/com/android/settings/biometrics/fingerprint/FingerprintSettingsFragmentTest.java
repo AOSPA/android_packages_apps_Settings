@@ -47,7 +47,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.ComponentInfoInternal;
-import android.hardware.biometrics.Flags;
 import android.hardware.biometrics.SensorProperties;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
@@ -194,7 +193,6 @@ public class FingerprintSettingsFragmentTest {
 
     @Test
     @Ignore("b/353706169")
-    @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
     public void testLaunchBiometricPromptForFingerprint() {
         when(mBiometricManager.canAuthenticate(PRIMARY_USER_ID,
                 BiometricManager.Authenticators.IDENTITY_CHECK))

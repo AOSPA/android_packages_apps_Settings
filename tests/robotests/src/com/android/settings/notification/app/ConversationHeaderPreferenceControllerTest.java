@@ -70,6 +70,8 @@ public class ConversationHeaderPreferenceControllerTest {
     private LayoutPreference mPreference;
     @Mock
     private View mView;
+    @Mock
+    private NotificationBackend mBackend;
 
     @Before
     public void setUp() {
@@ -83,7 +85,7 @@ public class ConversationHeaderPreferenceControllerTest {
         FragmentActivity activity = mock(FragmentActivity.class);
         when(activity.getApplicationContext()).thenReturn(mContext);
         when(fragment.getActivity()).thenReturn(activity);
-        mController = spy(new ConversationHeaderPreferenceController(mContext, fragment));
+        mController = spy(new ConversationHeaderPreferenceController(mContext, fragment, mBackend));
         when(mPreference.findViewById(anyInt())).thenReturn(mView);
     }
 
@@ -134,22 +136,28 @@ public class ConversationHeaderPreferenceControllerTest {
     @Test
     public void testGetSummary() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.pkg = "pkg";
+        appRow.uid = 123456;
         appRow.label = "bananas";
+        when(mBackend.getChannel(appRow.pkg, appRow.uid, "parent")).thenReturn(
+                new NotificationChannel("parent", "PARENT", 2));
+
         mController.onResume(appRow, null, null, null, null, null, null);
         assertEquals("", mController.getSummary());
 
         NotificationChannelGroup group = new NotificationChannelGroup("id", "name");
         mController.onResume(appRow, null, group, null, null, null, null);
-        assertEquals(appRow.label, mController.getSummary());
+        assertEquals("", mController.getSummary());
 
         NotificationChannel channel = new NotificationChannel("cid", "cname", IMPORTANCE_NONE);
+        channel.setConversationId("parent", "convo");
         mController.onResume(appRow, channel, group, null, null, null, null);
         assertTrue(mController.getSummary().toString().contains(group.getName()));
-        assertTrue(mController.getSummary().toString().contains(appRow.label));
+        assertTrue(mController.getSummary().toString().contains("PARENT"));
 
         mController.onResume(appRow, channel, null, null, null, null, null);
         assertFalse(mController.getSummary().toString().contains(group.getName()));
-        assertTrue(mController.getSummary().toString().contains(appRow.label));
+        assertTrue(mController.getSummary().toString().contains("PARENT"));
 
         NotificationChannel defaultChannel = new NotificationChannel(
                 NotificationChannel.DEFAULT_CHANNEL_ID, "", IMPORTANCE_NONE);

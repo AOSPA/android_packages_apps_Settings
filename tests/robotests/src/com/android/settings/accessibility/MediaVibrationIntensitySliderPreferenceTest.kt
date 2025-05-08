@@ -15,18 +15,15 @@
  */
 package com.android.settings.accessibility
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
-import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.stub
 
 // LINT.IfChange
-@RunWith(AndroidJUnit4::class)
 class MediaVibrationIntensitySliderPreferenceTest : VibrationIntensitySliderPreferenceTestCase() {
-    override val preference = MediaVibrationIntensitySliderPreference()
+    override val preference = MediaVibrationIntensitySliderPreference(context)
 
     @Test
     fun isAvailable_mediaPreferenceNotSupported_unavailable() {

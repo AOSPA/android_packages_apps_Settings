@@ -41,12 +41,9 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"強制停止"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"不明"</string>
     <string name="qr_code_content_description" msgid="1852208464419291347">"QR コード"</string>
-    <!-- no translation found for preview_pager_home_title (6102935625155194821) -->
-    <skip />
-    <!-- no translation found for preview_pager_message_title (5933499691147446486) -->
-    <skip />
-    <!-- no translation found for preview_pager_email_title (8767864657910457562) -->
-    <skip />
+    <string name="preview_pager_home_title" msgid="6102935625155194821">"ホーム画面"</string>
+    <string name="preview_pager_message_title" msgid="5933499691147446486">"メッセージ"</string>
+    <string name="preview_pager_email_title" msgid="8767864657910457562">"メール"</string>
     <string name="preview_pager_previous_button" msgid="607771113300838313">"前のプレビュー"</string>
     <string name="preview_pager_next_button" msgid="8700907912508927271">"次のプレビュー"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"縮小"</string>
@@ -316,10 +313,11 @@
     <string name="time_format_category_title" msgid="7108616745509689991">"時刻の表示形式"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"タイムゾーン"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"タイムゾーンの選択"</string>
+    <string name="date_time_search_time_zone" msgid="7373967602009974399">"タイムゾーンを検索"</string>
     <string name="date_time_set_date_title" msgid="7624166157167528407">"日付"</string>
     <string name="date_time_search_region" msgid="1364133854952610919">"地域を検索します"</string>
     <string name="date_time_select_region" msgid="5449345333305056072">"地域"</string>
-    <string name="date_time_select_fixed_offset_time_zones" msgid="594848300882055361">"UTC オフセットの選択"</string>
+    <string name="date_time_select_fixed_offset_time_zones" msgid="2130108030162342594">"GMT オフセット"</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g>（<xliff:g id="OFFSET">%2$s</xliff:g>）"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g>（<xliff:g id="OFFSET">%1$s</xliff:g>）"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> を使用します。<xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
@@ -328,7 +326,7 @@
     <string name="zone_time_type_dst" msgid="9189689342265305808">"夏時間"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"標準時間"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"地域で選択"</string>
-    <string name="zone_menu_by_offset" msgid="1257702747474426745">"UTC オフセットで選択"</string>
+    <string name="zone_menu_by_offset" msgid="543648951618438204">"GMT オフセットで選択"</string>
     <string name="time_feedback_category_title" msgid="5942621686512255208">"フィードバック"</string>
     <string name="keywords_time_feedback_category" msgid="4553921538559830393">"フィードバック, バグ, 時間, ゾーン, タイムゾーン"</string>
     <string name="time_feedback_title" msgid="7720948068042783614">"時間関連のフィードバックを送信"</string>
@@ -665,7 +663,7 @@
     <string name="private_space_fingerprint_enroll_introduction_message" msgid="9092068873421435300">"指紋認証を使用して、プライベート スペースのロック解除や本人確認（アプリへのログインや購入の承認など）を行えます"</string>
     <string name="private_space_fingerprint_enroll_introduction_footer_message" msgid="7125255484447984854">"あなたの指にスマートフォンを近づけられた場合など、意図せずプライベート スペースのロックが解除されることがあります。"</string>
     <string name="private_space_fingerprint_enroll_finish_message" msgid="4754797926493316965">"指紋認証を使用して、プライベート スペースのロック解除や購入の承認を行えるようになりました"</string>
-    <string name="private_space_face_enroll_introduction_title" msgid="3717541082520006032">"プライベート スペースの顔認証の設定"</string>
+    <string name="private_space_face_enroll_introduction_title" msgid="3717541082520006032">"プライベート スペースの顔認証を設定"</string>
     <string name="private_space_face_enroll_introduction_message" msgid="250239418499081821">"顔認証を使用して、プライベート スペースのロック解除や本人確認（アプリへのログインや購入の承認など）を行えます"</string>
     <string name="private_space_face_enroll_introduction_info_looking" msgid="5694757845303924042">"スマートフォンに無意識に顔を向けても、プライベート スペースのロックが解除されることがあります。双子など、あなたによく似た人であったり、あなたの顔にデバイスを近づけられたりした場合も、ロックが解除されることがあります。"</string>
     <string name="private_space_face_enroll_introduction_info_less_secure" msgid="8460719783943533172">"顔認証によるプライベート スペースのロック解除は、複雑なパターン、PIN、安全なパスワードよりも安全面で劣る可能性があります"</string>
@@ -765,7 +763,7 @@
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"スマートフォンの保護"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"ロック解除に使う指紋を追加"</string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"画面ロックを選択"</string>
-    <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"画面ロックの選択"</string>
+    <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"画面ロックを選択"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"新しい画面ロックを選択"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"仕事用アプリのロックの選択"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"新しい仕事用ロックの選択"</string>
@@ -965,10 +963,8 @@
     <string name="device_details_battery" msgid="5466987755790847884">"バッテリー"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"バッテリー、充電中"</string>
     <string name="device_details_key_missing_title" msgid="3568401701538114387">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> を再起動してみてください。それでも問題が解決しない場合は、デバイスを削除してください。セキュリティ保護のため、公共の場所以外でペア設定をやり直してください。\n\nこのデバイスが近くにない場合は、何もする必要はありません。"</string>
-    <!-- no translation found for verbose_printer_logging_title (6525634245166402031) -->
-    <skip />
-    <!-- no translation found for verbose_printer_logging_summary (6558076303223667013) -->
-    <skip />
+    <string name="verbose_printer_logging_title" msgid="6525634245166402031">"出力の詳細ログ"</string>
+    <string name="verbose_printer_logging_summary" msgid="6558076303223667013">"追加のデバッグログ（個人情報が含まれる可能性がある Internet Printing Protocol（IPP）を含む）。"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"このデバイスとのペア設定を解除"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"アプリの接続を解除する"</string>
     <string name="device_details_more_settings" msgid="950302792331611271">"その他の設定"</string>
@@ -1174,6 +1170,9 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"許可する"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"許可しない"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*必須"</string>
+    <string name="share_wifi_network" msgid="4064997404339571584">"このネットワークを他のデバイス ユーザーと共有する"</string>
+    <string name="share_wifi_network_summary" msgid="4316236421149769333">"このデバイスのすべてのユーザーが共有ネットワークの確認と接続を行えます。管理者は共有ネットワークを削除できます。詳細"</string>
+    <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"他のユーザーにネットワーク構成の編集を許可する"</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"このネットワークはインターネットに接続していません。接続を維持しますか？"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"接続制限のため、一部のアプリやサービスが使用できなくなることがあります。このまま使用しますか？"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"このネットワークについて次回から表示しない"</string>
@@ -1471,11 +1470,9 @@
     <string name="force_bold_text" msgid="4620929631102086716">"テキストを太字にする"</string>
     <string name="title_font_size" msgid="570613010306330622">"フォントサイズ"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"文字のサイズを変更します"</string>
-    <!-- no translation found for category_title_display_text_size (4234285020731751694) -->
-    <skip />
-    <!-- no translation found for category_title_text_style (5905015084935695611) -->
-    <skip />
-    <string name="sim_lock_settings" msgid="7331982427303002613">"SIM ロックの設定"</string>
+    <string name="category_title_display_text_size" msgid="4234285020731751694">"サイズ オプション"</string>
+    <string name="category_title_text_style" msgid="5905015084935695611">"スタイル オプション"</string>
+    <string name="sim_lock_settings" msgid="7331982427303002613">"SIM ロックを設定"</string>
     <string name="sim_lock_settings_category" msgid="6475255139493877786">"SIM ロック"</string>
     <string name="sim_pin_toggle" msgid="6814489621760857328">"SIM をロックする"</string>
     <string name="sim_pin_change" msgid="5978881209990507379">"SIM PIN を変更"</string>
@@ -2115,6 +2112,7 @@
     <string name="sticky_keys_summary" msgid="1844953803625480623">"ショートカットで複数のキーを同時に押すのではなく 1 つずつ押します"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"マウスキー"</string>
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"マウスキーを使用する"</string>
+    <string name="accessibility_mouse_keys_shortcut_title" msgid="7621635104533584115">"マウスキーのショートカット"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"キーボードを使用してポインタを操作します"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"逆スクロール"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"上にスクロールすると、ページ下部に移動します"</string>
@@ -2995,6 +2993,9 @@
     <string name="cellular_security_notifications" msgid="4619728340612184944">"通知"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"ネットワークに関する通知"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"デバイスが暗号化されていないネットワークに接続された場合や、一意のデバイス ID や SIM ID がネットワークで記録された場合に、お知らせします"</string>
+    <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"ネットワークの世代"</string>
+    <string name="cellular_security_2G_network_generation_summary" msgid="979187530909112413">"2G ネットワークの保護により、安全性の低い 2G ネットワークは使用されません。一部の地域では接続が制限される場合があります。緊急通報は常に利用可能です。"</string>
+    <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"2G ネットワークの保護"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"暗号化"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"ネットワークの世代"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"挿入した SIM カードごとに、3G、4G、5G 対応のネットワークにのみ接続するように設定できます。旧式の安全でない 2G ネットワークには接続できなくなります。この設定により、2G ネットワークしか利用できない場合に接続が制限されることがあります。緊急の場合は 2G が使用されることがあります。"</string>
@@ -3043,7 +3044,7 @@
     <string name="privacy_settings_title" msgid="6437057228255974577">"バックアップ"</string>
     <string name="backup_section_title" msgid="6539706829848457794">"バックアップと復元"</string>
     <string name="personal_data_section_title" msgid="6368610168625722682">"個人データ"</string>
-    <string name="backup_data_title" msgid="507663517227498525">"データのバックアップ"</string>
+    <string name="backup_data_title" msgid="507663517227498525">"データをバックアップ"</string>
     <string name="backup_data_summary" msgid="8054551085241427531">"アプリのデータ、Wi-Fiパスワード、その他の設定をGoogleサーバーにバックアップする"</string>
     <string name="backup_configure_account_title" msgid="8574055186903658842">"バックアップアカウント"</string>
     <string name="backup_data_management_title" msgid="6596830198441939702">"バックアップ アカウントの管理"</string>
@@ -3794,16 +3795,12 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"通知を開く"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"通知のスヌーズを許可する"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"アプリアイコン上の通知ドット"</string>
-    <!-- no translation found for notification_bundles (496852738958148317) -->
-    <skip />
+    <string name="notification_bundles" msgid="496852738958148317">"通知オーガナイザー"</string>
     <string name="notification_summarization_title" msgid="1516039882005781529">"通知の要約"</string>
-    <!-- no translation found for notification_summarization_summary (1963425736716175590) -->
-    <skip />
+    <string name="notification_summarization_summary" msgid="1963425736716175590">"長いメッセージをすばやく要約できます"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"通知の要約を使用する"</string>
-    <!-- no translation found for notification_summarization_description (341128754705513791) -->
-    <skip />
-    <!-- no translation found for notification_summarization_excluded_description (5819160700526641394) -->
-    <skip />
+    <string name="notification_summarization_description" msgid="341128754705513791">"長いメッセージやグループ会話を要約して、内容をすばやく確認できます。要約は AI が生成するため、エラーが含まれている可能性があります。"</string>
+    <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"これらのアプリの会話の通知は要約されません"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"アプリの管理"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="1299744594788208296">"アプリの通知の要約を許可する"</string>
     <string name="notification_excluded_apps" msgid="6648267716069216826">"アプリの除外"</string>
@@ -3899,7 +3896,7 @@
     <string name="notification_importance_high_title" msgid="394129291760607808">"ポップアップ"</string>
     <string name="notification_silence_title" msgid="4085829874452944989">"サイレント"</string>
     <string name="notification_alert_title" msgid="1632401211722199217">"デフォルト"</string>
-    <string name="allow_interruption" msgid="5237201780159482716">"割り込みの許可"</string>
+    <string name="allow_interruption" msgid="5237201780159482716">"割り込みを許可"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"音やバイブレーションによる通知、または画面のポップアップ通知をアプリに許可します"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"優先"</string>
     <string name="notification_channel_summary_priority" msgid="7225362351439076913">"会話セクションの一番上にバブルとして表示され、プロフィール写真がロック画面に表示されます"</string>
@@ -3961,18 +3958,13 @@
     <string name="notification_polite_description" msgid="6137533404978878957">"短時間の間に通知が多く届いた場合に、最大 1 分間、デバイスが音量を下げて通知を最小限に抑えます。通話、アラーム、優先度の高い会話には影響しません。\n\nクールダウンの間に受信した通知は、画面上部から下にスワイプすると確認できます。"</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"仕事用プロファイルに適用する"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"仕事用プロファイルのアプリに適用する"</string>
-    <!-- no translation found for notification_bundle_title (6679586974995981433) -->
-    <skip />
-    <!-- no translation found for notification_bundle_summary (8924550009829960969) -->
-    <skip />
-    <!-- no translation found for notification_bundle_main_control_title (2632661768990540295) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (8439963475488583612) -->
-    <skip />
+    <string name="notification_bundle_title" msgid="6679586974995981433">"通知オーガナイザー"</string>
+    <string name="notification_bundle_summary" msgid="8924550009829960969">"優先度の低い通知をまとめてミュートします"</string>
+    <string name="notification_bundle_main_control_title" msgid="2632661768990540295">"通知オーガナイザーを使用する"</string>
+    <string name="notification_bundle_description" msgid="8439963475488583612">"作業の妨げにならないよう、ミュートする通知の種類を選択してまとめます。まとめの処理は AI が行うため、エラーが含まれている可能性があります。"</string>
     <string name="notification_app_level_bundle_title" msgid="8917807675495480483">"バンドル通知"</string>
     <string name="notification_app_level_bundle_subtext" msgid="7330731485247761388">"静かな場所でも利用できるよう、似たテーマの通知はサイレントになり、まとめて表示されるようになります"</string>
-    <!-- no translation found for notification_bundle_excluded_description (2667461772332132250) -->
-    <skip />
+    <string name="notification_bundle_excluded_description" msgid="2667461772332132250">"これらのアプリの通知はまとめられません"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="7019831234073590293">"アプリの通知のバンドルを許可する"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR ヘルパー サービス"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"VR ヘルパー サービスとしての実行権限をリクエストしたインストール済みアプリはありません。"</string>
@@ -4708,22 +4700,14 @@
     <string name="system_navigation_title" msgid="4890381153527184636">"ナビゲーション モード"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"2 ボタン ナビゲーション"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"アプリを切り替えるには、ホームボタンを上にスワイプします。すべてのアプリを表示するには、もう一度上にスワイプします。戻るには、[戻る] ボタンをタップします。"</string>
-    <!-- no translation found for shade_panels_title (6816157397029469997) -->
-    <skip />
-    <!-- no translation found for keywords_shade_panels (6181844937287087945) -->
-    <skip />
-    <!-- no translation found for shade_panels_category (3262351355390846546) -->
-    <skip />
-    <!-- no translation found for shade_panels_separate_title (7839124123668116363) -->
-    <skip />
-    <!-- no translation found for shade_panels_separate_summary (4879360492042964895) -->
-    <skip />
-    <!-- no translation found for shade_panels_combined_title (2812149031368941984) -->
-    <skip />
-    <!-- no translation found for shade_panels_combined_summary (5884627562590432068) -->
-    <skip />
-    <!-- no translation found for shade_panels_foldables_footer_message (3974376428811063936) -->
-    <skip />
+    <string name="shade_panels_title" msgid="6816157397029469997">"通知とクイック設定"</string>
+    <string name="keywords_shade_panels" msgid="6181844937287087945">"シェード, パネル, 通知, クイック設定, クイック, 設定, 個別, 統合, デュアル, シングル"</string>
+    <string name="shade_panels_category" msgid="3262351355390846546">"パネル"</string>
+    <string name="shade_panels_separate_title" msgid="7839124123668116363">"個別"</string>
+    <string name="shade_panels_separate_summary" msgid="4879360492042964895">"クイック設定を開くには、右上から下にスワイプします。通知を開くには、左上から下にスワイプします。"</string>
+    <string name="shade_panels_combined_title" msgid="2812149031368941984">"統合（クラシック）"</string>
+    <string name="shade_panels_combined_summary" msgid="5884627562590432068">"画面を上から下にスワイプすると、通知とクイック設定が組み合わされたクラシック パネルにアクセスできます。"</string>
+    <string name="shade_panels_foldables_footer_message" msgid="3974376428811063936">"統合（クラシック）ビューは、折りたたみ式デバイスの外側画面でのみ利用できます"</string>
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"安全性と緊急情報"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"緊急 SOS、医療情報、アラート"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"ジェスチャー ナビゲーション"</string>
@@ -5669,9 +5653,9 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"インストールしたアプリにデバイス名が表示されます。また、Bluetooth デバイスや Wi-Fi ネットワークに接続したり、Wi-Fi アクセス ポイントを設定したりすると、他のユーザーにもデバイス名が表示されます。"</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"文法性"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"文法性の選択"</string>
-    <string name="content_protection_preference_title" msgid="5069260032659193074">"虚偽の振る舞いをするアプリをスキャンする"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"不正な動作をするアプリを検出する"</string>
     <string name="content_protection_preference_summary" msgid="2252393849408445391">"フィッシングに関するアプリのアクティビティを確認する"</string>
-    <string name="content_protection_preference_user_consent_switch_title" msgid="1797782616799594426">"虚偽の振る舞いをするアプリを検出する"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="1797782616799594426">"不正な動作をするアプリを検出する"</string>
     <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"虚偽の振る舞いをする仕事用アプリを検出する"</string>
     <string name="content_protection_preference_subpage_summary" msgid="3595621220981703364"></string>
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
@@ -5833,21 +5817,16 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"PIN を削除する"</string>
     <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"管理機能の設定がすべてリセットされます"</string>
     <string name="supervision_add_pin_recovery_title" msgid="5584523084706797399">"復元方法を追加するにはタップしてください"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="7953090772633001442">"復元を確認するにはタップしてください"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"ウェブ コンテンツ フィルタ"</string>
-    <string name="supervision_web_content_filters_summary_both_on" msgid="8668754911140483798">"ON / Chrome と Google 検索のフィルタを設定"</string>
-    <string name="supervision_web_content_filters_summary_chrome_on" msgid="5999295548020086617">"ON / Chrome のフィルタを設定"</string>
-    <string name="supervision_web_content_filters_summary_search_on" msgid="6866676094401450305">"ON / Google 検索のフィルタを設定"</string>
-    <string name="supervision_web_content_filters_summary_both_off" msgid="6735949158065982622">"フィルタが設定されていません"</string>
-    <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome とウェブ"</string>
-    <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"露骨な表現を含むサイトを可能な限りブロックする"</string>
-    <string name="supervision_web_content_filters_browser_block_explicit_sites_summary" msgid="1477766506765966613">"フィルタを使っても完全に除外できるわけではありませんが、露骨な性表現を含むサイトが表示されにくくなります"</string>
+    <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"ウェブサイト"</string>
+    <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="1786398287521485576">"露骨な表現を含むウェブ コンテンツをブロックする"</string>
+    <string name="supervision_web_content_filters_browser_block_explicit_sites_summary" msgid="1427357961145247788">"このデバイスのブラウザ用"</string>
     <string name="supervision_web_content_filters_browser_allow_all_sites_title" msgid="3909739592466381845">"すべてのサイトを許可"</string>
-    <string name="supervision_web_content_filters_search_title" msgid="726335318009305564">"Google 検索"</string>
-    <string name="supervision_web_content_filters_search_filter_on_title" msgid="4855846261141136285">"セーフサーチ フィルタリング: ON"</string>
-    <string name="supervision_web_content_filters_search_filter_on_summary" msgid="1162258144140293269">"このデバイスで検索結果から露骨な表現を含む画像、テキスト、リンクを除外できます"</string>
-    <string name="supervision_web_content_filters_search_filter_off_title" msgid="6049461395304222346">"セーフサーチ フィルタリング: OFF"</string>
-    <string name="supervision_web_content_filters_search_filter_off_summary" msgid="3834238970190924433">"アカウント設定によって、引き続き、露骨な表現を含む検索結果が除外されたり、ぼかしが入ったりする場合があります"</string>
-    <string name="supervision_web_content_filters_footer_content" msgid="3532535288142541994">"Chrome と一部の Android アプリを使用してサイトにアクセスする場合、または Google 検索を使用する場合にのみ、これらのフィルタがこのデバイスに適用されます。"</string>
+    <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"検索結果"</string>
+    <string name="supervision_web_content_filters_search_filter_on_title" msgid="1136440775294190806">"露骨な表現を含む検索結果をブロックする"</string>
+    <string name="supervision_web_content_filters_search_filter_on_summary" msgid="6797184284369033101">"このデバイスの検索エンジン用"</string>
+    <string name="supervision_web_content_filters_search_filter_off_title" msgid="7171966260908166395">"フィルタ OFF"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"管理機能用の PIN を入力"</string>
     <string name="supervision_lock_setup_title" msgid="7581682893583645713">"管理機能のロックを選択"</string>
     <string name="supervision_lock_setup_description" msgid="6931450348200992733">"このコードで管理機能の設定のロックを解除できます"</string>

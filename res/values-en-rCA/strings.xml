@@ -41,12 +41,9 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Suspended"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Unknown"</string>
     <string name="qr_code_content_description" msgid="1852208464419291347">"QR code"</string>
-    <!-- no translation found for preview_pager_home_title (6102935625155194821) -->
-    <skip />
-    <!-- no translation found for preview_pager_message_title (5933499691147446486) -->
-    <skip />
-    <!-- no translation found for preview_pager_email_title (8767864657910457562) -->
-    <skip />
+    <string name="preview_pager_home_title" msgid="6102935625155194821">"Home screen"</string>
+    <string name="preview_pager_message_title" msgid="5933499691147446486">"Message"</string>
+    <string name="preview_pager_email_title" msgid="8767864657910457562">"Email"</string>
     <string name="preview_pager_previous_button" msgid="607771113300838313">"Previous preview"</string>
     <string name="preview_pager_next_button" msgid="8700907912508927271">"Next preview"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Make smaller"</string>
@@ -316,10 +313,11 @@
     <string name="time_format_category_title" msgid="7108616745509689991">"Time format"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"Time zone"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"Select time zone"</string>
+    <string name="date_time_search_time_zone" msgid="7373967602009974399">"Search time zone"</string>
     <string name="date_time_set_date_title" msgid="7624166157167528407">"Date"</string>
     <string name="date_time_search_region" msgid="1364133854952610919">"Search region"</string>
     <string name="date_time_select_region" msgid="5449345333305056072">"Region"</string>
-    <string name="date_time_select_fixed_offset_time_zones" msgid="594848300882055361">"Select UTC offset"</string>
+    <string name="date_time_select_fixed_offset_time_zones" msgid="2130108030162342594">"GMT offset"</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Uses <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
@@ -328,7 +326,7 @@
     <string name="zone_time_type_dst" msgid="9189689342265305808">"Daylight savings time"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Standard time"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Select by region"</string>
-    <string name="zone_menu_by_offset" msgid="1257702747474426745">"Select by UTC offset"</string>
+    <string name="zone_menu_by_offset" msgid="543648951618438204">"Select by GMT offset"</string>
     <string name="time_feedback_category_title" msgid="5942621686512255208">"Feedback"</string>
     <string name="keywords_time_feedback_category" msgid="4553921538559830393">"feedback, bug, time, zone, timezone"</string>
     <string name="time_feedback_title" msgid="7720948068042783614">"Send feedback about time"</string>
@@ -1172,6 +1170,9 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Allow"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Deny"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*required"</string>
+    <string name="share_wifi_network" msgid="4064997404339571584">"Share this network with other device users"</string>
+    <string name="share_wifi_network_summary" msgid="4316236421149769333">"All users on this device can view and connect to a shared network. Administrators can delete a shared network. Learn more"</string>
+    <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"Allow other users to edit network configuration"</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"This network has no internet access. Stay connected?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Some apps and services may not work due to limited connectivity. Use anyway?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Don’t ask again for this network"</string>
@@ -1469,10 +1470,8 @@
     <string name="force_bold_text" msgid="4620929631102086716">"Bold text"</string>
     <string name="title_font_size" msgid="570613010306330622">"Font size"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Make text bigger or smaller"</string>
-    <!-- no translation found for category_title_display_text_size (4234285020731751694) -->
-    <skip />
-    <!-- no translation found for category_title_text_style (5905015084935695611) -->
-    <skip />
+    <string name="category_title_display_text_size" msgid="4234285020731751694">"Size options"</string>
+    <string name="category_title_text_style" msgid="5905015084935695611">"Style options"</string>
     <string name="sim_lock_settings" msgid="7331982427303002613">"SIM lock settings"</string>
     <string name="sim_lock_settings_category" msgid="6475255139493877786">"SIM lock"</string>
     <string name="sim_pin_toggle" msgid="6814489621760857328">"Lock SIM"</string>
@@ -2113,6 +2112,7 @@
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Press one key at a time for shortcuts instead of holding keys down together"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Mouse keys"</string>
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"Use mouse keys"</string>
+    <string name="accessibility_mouse_keys_shortcut_title" msgid="7621635104533584115">"Mouse keys shortcut"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Use your keyboard to control the pointer"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Reverse scrolling"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Scroll up to move the page down"</string>
@@ -2993,6 +2993,9 @@
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Notifications"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Network notifications"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Get notified when your device connects to an unencrypted network, or when a network records your unique device or SIM ID"</string>
+    <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"Network generation"</string>
+    <string name="cellular_security_2G_network_generation_summary" msgid="979187530909112413">"2G network protection avoids 2G networks, which are less secure. This may limit connectivity in some places. Emergency calling is always allowed."</string>
+    <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"2G network protection"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Encryption"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Network generations"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"You can configure each installed SIM card to only connect to networks that support 3G, 4G, and 5G. The SIM will not connect to older, insecure 2G networks. This setting may limit your connectivity in case the only available network is 2G. In case of an emergency, 2G may be used."</string>
@@ -5814,21 +5817,16 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Delete PIN"</string>
     <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"This will reset all your supervision settings"</string>
     <string name="supervision_add_pin_recovery_title" msgid="5584523084706797399">"Tap to add recovery"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="7953090772633001442">"Tap to verify recovery"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Web content filters"</string>
-    <string name="supervision_web_content_filters_summary_both_on" msgid="8668754911140483798">"ON / Chrome &amp; Search filters set"</string>
-    <string name="supervision_web_content_filters_summary_chrome_on" msgid="5999295548020086617">"ON / Chrome filter set"</string>
-    <string name="supervision_web_content_filters_summary_search_on" msgid="6866676094401450305">"ON / Search filter set"</string>
-    <string name="supervision_web_content_filters_summary_both_off" msgid="6735949158065982622">"No filters set"</string>
-    <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome and Web"</string>
-    <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Try to block explicit sites"</string>
-    <string name="supervision_web_content_filters_browser_block_explicit_sites_summary" msgid="1477766506765966613">"No filter is perfect, but this should help hide sexually explicit sites"</string>
+    <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"Websites"</string>
+    <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="1786398287521485576">"Block explicit web content"</string>
+    <string name="supervision_web_content_filters_browser_block_explicit_sites_summary" msgid="1427357961145247788">"For browsers on this device"</string>
     <string name="supervision_web_content_filters_browser_allow_all_sites_title" msgid="3909739592466381845">"Allow all sites"</string>
-    <string name="supervision_web_content_filters_search_title" msgid="726335318009305564">"Google Search"</string>
-    <string name="supervision_web_content_filters_search_filter_on_title" msgid="4855846261141136285">"SafeSearch filtering ON"</string>
-    <string name="supervision_web_content_filters_search_filter_on_summary" msgid="1162258144140293269">"Helps filter out explicit images, text, and links from search results on this device"</string>
-    <string name="supervision_web_content_filters_search_filter_off_title" msgid="6049461395304222346">"SafeSearch filtering OFF"</string>
-    <string name="supervision_web_content_filters_search_filter_off_summary" msgid="3834238970190924433">"Account settings may still filter or blur explicit results"</string>
-    <string name="supervision_web_content_filters_footer_content" msgid="3532535288142541994">"These filters only apply to this device when you visit sites using Chrome and in some Android apps, or use Search."</string>
+    <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"Search results"</string>
+    <string name="supervision_web_content_filters_search_filter_on_title" msgid="1136440775294190806">"Block explicit search result"</string>
+    <string name="supervision_web_content_filters_search_filter_on_summary" msgid="6797184284369033101">"For search engines on this device"</string>
+    <string name="supervision_web_content_filters_search_filter_off_title" msgid="7171966260908166395">"Filter off"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Enter supervision PIN"</string>
     <string name="supervision_lock_setup_title" msgid="7581682893583645713">"Choose lock for supervision"</string>
     <string name="supervision_lock_setup_description" msgid="6931450348200992733">"You can unlock supervision settings with this code"</string>

@@ -312,6 +312,25 @@ class AppNotificationRepositoryTest {
         assertThat(summary).isEqualTo("About 3 notifications per week")
     }
 
+    @Test
+    fun hasSentMessageNotification_yesValid() {
+        whenever(notificationManager.hasSentValidMsg(APP.packageName, APP.uid)).thenReturn(true)
+
+        assertThat(repository.hasSentMessageNotification(APP)).isTrue()
+    }
+
+    @Test
+    fun hasSentMessageNotification_yesInvalid() {
+        whenever(notificationManager.isInInvalidMsgState(APP.packageName, APP.uid)).thenReturn(true)
+
+        assertThat(repository.hasSentMessageNotification(APP)).isTrue()
+    }
+
+    @Test
+    fun hasSentMessageNotification_no() {
+        assertThat(repository.hasSentMessageNotification(APP)).isFalse()
+    }
+
     private companion object {
         const val USER_ID = 0
         const val PACKAGE_NAME = "package.name"

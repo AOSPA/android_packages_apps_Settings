@@ -117,7 +117,7 @@
             settings:controller="com.android.settings.deviceinfo.HardwareInfoPreferenceController"/>
 
         <!-- EID -->
-        <com.android.settingslib.CustomDialogPreferenceCompat
+        <com.android.settings.deviceinfo.simstatus.SimEidInfoPreference
             android:key="eid_info"
             android:order="31"
             android:title="@string/status_eid"

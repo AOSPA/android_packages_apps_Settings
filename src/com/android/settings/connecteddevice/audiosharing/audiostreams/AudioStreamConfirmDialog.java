@@ -90,6 +90,8 @@ public class AudioStreamConfirmDialog extends InstrumentedDialogFragment {
             case SettingsEnums.DIALOG_AUDIO_STREAM_CONFIRM_NO_LE_DEVICE -> getNoLeDeviceDialog();
             case SettingsEnums.DIALOG_AUDIO_STREAM_CONFIRM_TURN_OFF_TALKBACK ->
                     getTurnOffTalkbackDialog();
+            case SettingsEnums.DIALOG_AUDIO_STREAM_CONFIRM_TURN_OFF_AUDIO_SHARING ->
+                    getTurnOffAudioSharingDialog();
             case SettingsEnums.DIALOG_AUDIO_STREAM_CONFIRM_LISTEN -> getConfirmDialog();
             default -> getErrorDialog();
         };
@@ -202,6 +204,26 @@ public class AudioStreamConfirmDialog extends InstrumentedDialogFragment {
                 .build();
     }
 
+    private Dialog getTurnOffAudioSharingDialog() {
+        return new AudioStreamsDialogFragment.DialogBuilder(getActivity())
+                .setTitle(getString(R.string.audio_streams_dialog_turn_off_audio_sharing_title))
+                .setSubTitle1(
+                        mBroadcastMetadata != null
+                                ? AudioStreamsHelper.getBroadcastName(mBroadcastMetadata)
+                                : "")
+                .setSubTitle2(
+                        getString(R.string.audio_streams_dialog_turn_off_audio_sharing_subtitle))
+                .setRightButtonText(getString(R.string.audio_streams_dialog_close))
+                .setRightButtonOnClickListener(
+                        unused -> {
+                            dismiss();
+                            if (mActivity != null) {
+                                mActivity.finish();
+                            }
+                        })
+                .build();
+    }
+
     private Dialog getNoLeDeviceDialog() {
         return new AudioStreamsDialogFragment.DialogBuilder(getActivity())
                 .setTitle(getString(R.string.audio_streams_dialog_no_le_device_title))
@@ -270,6 +292,9 @@ public class AudioStreamConfirmDialog extends InstrumentedDialogFragment {
             }
             if (!getEnabledScreenReaderServices(mContext).isEmpty()) {
                 return SettingsEnums.DIALOG_AUDIO_STREAM_CONFIRM_TURN_OFF_TALKBACK;
+            }
+            if (BluetoothUtils.isBroadcasting(Utils.getLocalBluetoothManager(mContext))) {
+                return SettingsEnums.DIALOG_AUDIO_STREAM_CONFIRM_TURN_OFF_AUDIO_SHARING;
             }
             return hasMetadata
                     ? SettingsEnums.DIALOG_AUDIO_STREAM_CONFIRM_LISTEN

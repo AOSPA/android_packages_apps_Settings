@@ -26,6 +26,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.BluetoothUtils;
@@ -76,6 +77,7 @@ public class AudioSharingDeviceVolumeSliderPreference extends SliderPreference {
                     return true;
                 }
         );
+        refreshPreference();
     }
 
     @Override
@@ -105,9 +107,17 @@ public class AudioSharingDeviceVolumeSliderPreference extends SliderPreference {
     }
 
     void onPreferenceAttributesChanged() {
+        refreshPreference();
+    }
+
+    private void refreshPreference() {
         var unused = ThreadUtils.postOnBackgroundThread(() -> {
             String name = mCachedDevice.getName();
-            AudioSharingUtils.postOnMainThread(mContext, () -> setTitle(name));
+            AudioSharingUtils.postOnMainThread(mContext, () -> {
+                setTitle(name);
+                setSliderContentDescription(
+                        mContext.getString(R.string.audio_sharing_device_volume_description, name));
+            });
         });
     }
 

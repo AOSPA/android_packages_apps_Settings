@@ -276,10 +276,8 @@
     <string name="terms_of_address_masculine" msgid="983106046135098856">"মহাশয়"</string>
     <string name="terms_of_address_neutral" msgid="5475414185543112478">"নিরপেক্ষ"</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{বেছে নেওয়া ভাষা মুছে দিতে চান?}one{বেছে নেওয়া ভাষা মুছে দিতে চান?}other{বেছে নেওয়া ভাষা মুছে দিতে চান?}}"</string>
-    <!-- no translation found for dlg_remove_system_locales_title (7626516786258866543) -->
-    <skip />
-    <!-- no translation found for dlg_remove_locales_message (6636637008013310242) -->
-    <skip />
+    <string name="dlg_remove_system_locales_title" msgid="7626516786258866543">"সিস্টেমের ভাষা %s-তে পরিবর্তন করতে চান?"</string>
+    <string name="dlg_remove_locales_message" msgid="6636637008013310242">"<xliff:g id="LANGUAGE">%s</xliff:g> আপনার পছন্দের ভাষা থেকে সরিয়ে দেওয়া হবে"</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"সমস্ত ভাষা সরানো যাবে না"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"অন্তত পক্ষে একটি পছন্দের ভাষা রাখুন"</string>
     <string name="locale_not_translated" msgid="3071618135527110152">"সিস্টেমের ভাষা হিসেবে উপলভ্য নয়"</string>
@@ -318,10 +316,13 @@
     <string name="time_format_category_title" msgid="7108616745509689991">"সময়ের ফর্ম্যাট"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"টাইম জোন"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"টাইম জোন বেছে নিন"</string>
+    <!-- no translation found for date_time_search_time_zone (7373967602009974399) -->
+    <skip />
     <string name="date_time_set_date_title" msgid="7624166157167528407">"তারিখ"</string>
     <string name="date_time_search_region" msgid="1364133854952610919">"অঞ্চল খুঁজুন"</string>
     <string name="date_time_select_region" msgid="5449345333305056072">"অঞ্চল"</string>
-    <string name="date_time_select_fixed_offset_time_zones" msgid="594848300882055361">"UTC অফসেট বেছে নিন"</string>
+    <!-- no translation found for date_time_select_fixed_offset_time_zones (2130108030162342594) -->
+    <skip />
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> ব্যবহার করে। <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
@@ -330,7 +331,8 @@
     <string name="zone_time_type_dst" msgid="9189689342265305808">"ডেলাইট সেভিং সময়"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"স্ট্যান্ডার্ড টাইম"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"অঞ্চল অনুযায়ী বেছে নিন"</string>
-    <string name="zone_menu_by_offset" msgid="1257702747474426745">"UTC অফসেট অনুযায়ী বেছে নিন"</string>
+    <!-- no translation found for zone_menu_by_offset (543648951618438204) -->
+    <skip />
     <string name="time_feedback_category_title" msgid="5942621686512255208">"মতামত"</string>
     <string name="keywords_time_feedback_category" msgid="4553921538559830393">"মতামত, সমস্যা, সময়, জোন, টাইম জোন"</string>
     <string name="time_feedback_title" msgid="7720948068042783614">"সময় সম্পর্কে মতামত জানান"</string>
@@ -1176,6 +1178,12 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"অনুমতি দিন"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"অস্বীকার করুন"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*প্রয়োজন"</string>
+    <!-- no translation found for share_wifi_network (4064997404339571584) -->
+    <skip />
+    <!-- no translation found for share_wifi_network_summary (4316236421149769333) -->
+    <skip />
+    <!-- no translation found for edit_wifi_network_configuration (5712989655083072417) -->
+    <skip />
     <string name="no_internet_access_text" msgid="3611993143350310936">"এই নেটওয়ার্কে ইন্টারনেট অ্যাক্সেস নেই৷ এতে কানেক্ট থাকতে চান?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"সীমিত কানেক্টিভিটির জন্য কিছু অ্যাপ এবং পরিষেবা নাও কাজ করতে পারে। তবুও ব্যবহার করতে চান?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"এই নেটওয়ার্কের জন্য আবার জিজ্ঞাসা করবেন না"</string>
@@ -2117,6 +2125,8 @@
     <string name="sticky_keys_summary" msgid="1844953803625480623">"শর্টকাটের জন্য কীগুলি একসাথে ধরে রাখার পরিবর্তে একবারে একটি কী প্রেস করুন"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"মাউস \'কী\'"</string>
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"মাউস \'কী\' ব্যবহার করুন"</string>
+    <!-- no translation found for accessibility_mouse_keys_shortcut_title (7621635104533584115) -->
+    <skip />
     <string name="mouse_keys_summary" msgid="7030731235143286467">"পয়েন্টার নিয়ন্ত্রণ করতে আপনার কীবোর্ড ব্যবহার করুন"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"উল্টো দিকে স্ক্রল করা"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"পৃষ্ঠা নিচের দিকে নামাতে উপরের দিকে স্ক্রল করুন"</string>
@@ -2177,10 +2187,8 @@
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"ডানদিকের বোতামে ক্লিক, ট্যাপ"</string>
     <string name="three_finger_tap_middle_click" msgid="7898931632908866867">"মাউসের মাঝখানে ক্লিক করার বোতাম"</string>
     <string name="three_finger_tap_launch_gemini" msgid="4030401656711588982">"Assistant চালু করুন"</string>
-    <!-- no translation found for three_finger_tap_launch_default_assistant (7947939159617292478) -->
-    <skip />
-    <!-- no translation found for three_finger_tap_launch_generic_assistant_name (1893057235983949817) -->
-    <skip />
+    <string name="three_finger_tap_launch_default_assistant" msgid="7947939159617292478">"<xliff:g id="APP_NAME">%s</xliff:g> চালু করুন"</string>
+    <string name="three_finger_tap_launch_generic_assistant_name" msgid="1893057235983949817">"অ্যাসিস্ট্যান্ট"</string>
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"হোমে যান"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"ফিরে যান"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"সম্প্রতি ব্যবহার করা অ্যাপ দেখুন"</string>
@@ -2416,7 +2424,7 @@
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"অ্যাক্সেসিবিলিটি জেসচারের শর্টকার্ট"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="8977286776192770246">"এই ফিচারটি ব্যবহার করার জন্য, স্ক্রিনের নিচে অ্যাক্সেসিবিলিটি বোতামে <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> ট্যাপ করুন।\n\nএকটি ফিচার থেকে অন্যটিতে পাল্টে নিতে, অ্যাক্সেসিবিলিটি বোতাম টাচ করে ধরে থাকুন।"</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="6631371483819355514">"এই ফিচার ব্যবহার করতে, আপনার স্ক্রিনে অ্যাক্সেসিবিলিটি বোতামে ট্যাপ করুন"</string>
-    <string name="accessibility_tutorial_dialog_message_volume" msgid="3785791536286606664">"এই ফিচার ব্যবহার করতে, দুটি ভলিউম কী প্রেস &amp; করে ধরে থাকুন"</string>
+    <string name="accessibility_tutorial_dialog_message_volume" msgid="3785791536286606664">"এই ফিচার ব্যবহার করতে, দুটি ভলিউম কী প্রেস করে ধরে থাকুন"</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"ম্যাগনিফিকেশন চালু বা বন্ধ করতে, স্ক্রিনের যেকোনও জায়গায় ট্রিপল ট্যাপ করুন।"</string>
     <string name="accessibility_tutorial_dialog_tripletap_instruction" msgid="7549293553589934">"বড় করে দেখা চালু ও বন্ধ করতে, স্ক্রিনে দ্রুত %1$d বার ট্যাপ করুন"</string>
     <string name="accessibility_tutorial_dialog_twofinger_doubletap_instruction" msgid="1007756360115974649">"বড় করে দেখা চালু ও বন্ধ করতে, স্ক্রিনে দ্রুত %1$dটি আঙুল দিয়ে দুবার ট্যাপ করুন"</string>
@@ -2999,6 +3007,12 @@
     <string name="cellular_security_notifications" msgid="4619728340612184944">"বিজ্ঞপ্তি"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"নেটওয়ার্ক সম্পর্কিত বিজ্ঞপ্তি"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"নেটওয়ার্ক আপনার অনন্য ডিভাইস বা সিম কার্ড আইডি রেকর্ড করলে অথবা এনক্রিপটেড নয় এমন নেটওয়ার্কের সাথে আপনার ডিভাইস কানেক্ট হলে বিজ্ঞপ্তি পান"</string>
+    <!-- no translation found for cellular_security_2G_network_generation_header (2892850064192939887) -->
+    <skip />
+    <!-- no translation found for cellular_security_2G_network_generation_summary (979187530909112413) -->
+    <skip />
+    <!-- no translation found for cellular_security_2G_network_generation_title (706766676947606951) -->
+    <skip />
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"এনক্রিপশন"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"নেটওয়ার্ক জেনারেশন"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"যে নেটওয়ার্কে 3G, 4G ও 5G কাজ করে শুধুমাত্র সেই নেটওয়ার্কে কানেক্ট করার জন্য প্রত্যেকটি ইনস্টল করা সিম কার্ড কনফিগার করতে পারবেন। সিম কার্ডটি পুরনো, নিরাপদ নয় এমন 2G নেটওয়ার্কের সাথে কানেক্ট করতে পারবে না। শুধুমাত্র 2G উপলভ্য হলে এই সেটিং আপনার কানেক্টিভিটি সীমিত করতে পারে। জরুরি পরিস্থিতির ক্ষেত্রে, 2G ব্যবহার করা যেতে পারে।"</string>
@@ -5837,25 +5851,23 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"পিন মুছুন"</string>
     <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"এর ফলে আপনার তত্ত্বাবধান সম্পর্কিত সব সেটিংস রিসেট হয়ে যাবে"</string>
     <string name="supervision_add_pin_recovery_title" msgid="5584523084706797399">"আগের অবস্থায় ফেরানোর সেটিং যোগ করতে ট্যাপ করুন"</string>
+    <!-- no translation found for supervision_verify_pin_recovery_title (7953090772633001442) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"ওয়েব কন্টেন্টের ফিল্টার"</string>
-    <!-- no translation found for supervision_web_content_filters_summary_both_on (8668754911140483798) -->
+    <!-- no translation found for supervision_web_content_filters_browser_title (8737341514264129889) -->
     <skip />
-    <!-- no translation found for supervision_web_content_filters_summary_chrome_on (5999295548020086617) -->
+    <!-- no translation found for supervision_web_content_filters_browser_block_explicit_sites_title (1786398287521485576) -->
     <skip />
-    <!-- no translation found for supervision_web_content_filters_summary_search_on (6866676094401450305) -->
+    <!-- no translation found for supervision_web_content_filters_browser_block_explicit_sites_summary (1427357961145247788) -->
     <skip />
-    <!-- no translation found for supervision_web_content_filters_summary_both_off (6735949158065982622) -->
-    <skip />
-    <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome ও ওয়েব"</string>
-    <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"অনুপযুক্ত সাইট ব্লক করে দেখুন"</string>
-    <string name="supervision_web_content_filters_browser_block_explicit_sites_summary" msgid="1477766506765966613">"কোনও ফিল্টারই নিখুঁত নয়, তবে এটি যৌনতাপূর্ণ অনুপযুক্ত সাইট লুকাতে সহায়তা করবে"</string>
     <string name="supervision_web_content_filters_browser_allow_all_sites_title" msgid="3909739592466381845">"সমস্ত সাইটকে অনুমতি দিন"</string>
-    <string name="supervision_web_content_filters_search_title" msgid="726335318009305564">"Google Search"</string>
-    <string name="supervision_web_content_filters_search_filter_on_title" msgid="4855846261141136285">"\'নিরাপদ সার্চ\'-এর মাধ্যমে ফিল্টার করার সুবিধা চালু করা আছে"</string>
-    <string name="supervision_web_content_filters_search_filter_on_summary" msgid="1162258144140293269">"এই ডিভাইসে সার্চ ফলাফল থেকে অনুপযুক্ত ছবি, টেক্সট ও লিঙ্ক ফিল্টার করে বের করে দিতে সাহায্য করে"</string>
-    <string name="supervision_web_content_filters_search_filter_off_title" msgid="6049461395304222346">"\'নিরাপদ সার্চ\'-এর মাধ্যমে ফিল্টার করার সুবিধা বন্ধ করা আছে"</string>
-    <string name="supervision_web_content_filters_search_filter_off_summary" msgid="3834238970190924433">"অ্যাকাউন্ট সেটিংস এখনও অনুপযুক্ত ফলাফল ফিল্টার বা অস্পষ্ট করতে পারে"</string>
-    <!-- no translation found for supervision_web_content_filters_footer_content (3532535288142541994) -->
+    <!-- no translation found for supervision_web_content_filters_search_title (8608480392956106029) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_search_filter_on_title (1136440775294190806) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_search_filter_on_summary (6797184284369033101) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_search_filter_off_title (7171966260908166395) -->
     <skip />
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"তত্ত্বাবধান সম্পর্কিত পিন লিখুন"</string>
     <string name="supervision_lock_setup_title" msgid="7581682893583645713">"তত্ত্বাবধানের জন্য লক বেছে নিন"</string>

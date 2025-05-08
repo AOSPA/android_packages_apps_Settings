@@ -22,6 +22,7 @@ import android.os.VibrationAttributes.Usage
 import android.os.Vibrator
 import android.provider.Settings
 import androidx.preference.Preference
+import androidx.preference.TwoStatePreference
 import com.android.settings.R
 import com.android.settings.contract.KEY_VIBRATION_HAPTICS
 import com.android.settings.metrics.PreferenceActionMetricsProvider
@@ -39,7 +40,8 @@ import com.android.settingslib.widget.MainSwitchPreferenceBinding
 class VibrationMainSwitchPreference :
     BooleanValuePreference,
     MainSwitchPreferenceBinding,
-    PreferenceActionMetricsProvider {
+    PreferenceActionMetricsProvider,
+    Preference.OnPreferenceChangeListener {
 
     override val key
         get() = KEY
@@ -70,6 +72,22 @@ class VibrationMainSwitchPreference :
     override val sensitivityLevel: Int
         get() = SensitivityLevel.NO_SENSITIVITY
 
+    override fun bind(preference: Preference, metadata: PreferenceMetadata) {
+        super.bind(preference, metadata)
+        preference.onPreferenceChangeListener = this
+    }
+
+    override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {
+        val isChecked = newValue as Boolean
+        // must make new value effective before preview
+        (preference as TwoStatePreference).setChecked(isChecked)
+        if (isChecked) {
+            // Play a haptic as preview for the main toggle only when touch feedback is enabled.
+            preference.context.playVibrationSettingsPreview(VibrationAttributes.USAGE_TOUCH)
+        }
+        return false // value has been updated
+    }
+
     companion object {
         const val KEY = Settings.System.VIBRATE_ON
     }
@@ -77,19 +95,12 @@ class VibrationMainSwitchPreference :
 
 /** Provides SettingsStore for vibration main switch with custom default value. */
 class VibrationMainSwitchStore(
-    private val context: Context,
+    context: Context,
     override val keyValueStoreDelegate: KeyValueStore = SettingsSystemStore.get(context),
 ) : KeyValueStoreDelegate {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : Any> getDefaultValue(key: String, valueType: Class<T>) = DEFAULT_VALUE as T
-
-    override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
-        keyValueStoreDelegate.setValue(key, valueType, value)
-        if (value == true) {
-            context.playVibrationSettingsPreview(VibrationAttributes.USAGE_TOUCH)
-        }
-    }
 
     companion object {
         private const val DEFAULT_VALUE = true

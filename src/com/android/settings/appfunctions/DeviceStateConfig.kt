@@ -54,6 +54,7 @@ import com.android.settings.spa.app.catalyst.AppInfoAllFilesAccessScreen
 import com.android.settings.spa.app.catalyst.AppInfoDisplayOverOtherAppsScreen
 import com.android.settings.spa.app.catalyst.AppInfoFullScreenIntentScreen
 import com.android.settings.spa.app.catalyst.AppInfoInteractAcrossProfilesScreen
+import com.android.settings.spa.app.catalyst.AppInfoNotificationAccessScreen
 import com.android.settings.spa.app.catalyst.AppInfoPictureInPictureScreen
 import com.android.settings.spa.app.catalyst.AppInfoStorageScreen
 import com.android.settings.spa.app.catalyst.AppInteractAcrossProfilesAppListScreen
@@ -62,6 +63,7 @@ import com.android.settings.spa.app.catalyst.AppStorageAppListScreen
 import com.android.settings.spa.app.catalyst.AppsAllFilesAccessAppListScreen
 import com.android.settings.spa.app.catalyst.AppsDisplayOverOtherAppsAppListScreen
 import com.android.settings.spa.app.catalyst.AppsFullScreenIntentAppListScreen
+import com.android.settings.spa.app.catalyst.AppsNotificationAccessScreen
 import com.android.settings.supervision.SupervisionDashboardScreen
 import com.android.settings.supervision.SupervisionPinManagementScreen
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -224,6 +226,11 @@ fun getScreenConfigs() =
         PerScreenConfig(
             enabled = true,
             screenKey = AppInteractAcrossProfilesAppListScreen.KEY,
+            category = setOf(DeviceStateCategory.PERMISSION),
+        ),
+        PerScreenConfig(
+            enabled = true,
+            screenKey = AppsNotificationAccessScreen.KEY,
             category = setOf(DeviceStateCategory.PERMISSION),
         ),
     )
@@ -685,6 +692,16 @@ fun getDeviceStateItemList() =
                 metadata
                     .extras(context)
                     ?.getString(AppInfoInteractAcrossProfilesScreen.KEY_EXTRA_PACKAGE_NAME)
+            },
+        ),
+        DeviceStateItemConfig(
+            enabled = true,
+            settingKey = AppInfoNotificationAccessScreen.KEY,
+            settingScreenKey = AppsNotificationAccessScreen.KEY,
+            hintText = { context, metadata ->
+                metadata
+                    .extras(context)
+                    ?.getString(AppInfoNotificationAccessScreen.KEY_EXTRA_PACKAGE_NAME)
             },
         ),
     )

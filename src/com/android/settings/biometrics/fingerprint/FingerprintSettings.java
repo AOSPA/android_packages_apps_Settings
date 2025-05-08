@@ -943,11 +943,11 @@ public class FingerprintSettings extends SubSettings {
             final PreferenceCategory category =
                     findPreference(KEY_BIOMETRICS_USE_FINGERPRINT_TO_CATEGORY);
             category.setVisible(true);
-
             // Setup use fingerprint to unlock preference
             final FingerprintSettingsKeyguardUnlockPreferenceController fpUnlockController =
                     use(FingerprintSettingsKeyguardUnlockPreferenceController.class);
             fpUnlockController.setUserId(mUserId);
+            fpUnlockController.displayPreference(getPreferenceScreen());
             findPreference(fpUnlockController.getPreferenceKey())
                     .setOnPreferenceChangeListener(fpUnlockController);
 
@@ -955,6 +955,7 @@ public class FingerprintSettings extends SubSettings {
             final FingerprintSettingsAppsPreferenceController fingerprintAppController =
                     use(FingerprintSettingsAppsPreferenceController.class);
             fingerprintAppController.setUserId(mUserId);
+            fingerprintAppController.displayPreference(getPreferenceScreen());
             findPreference(fingerprintAppController.getPreferenceKey())
                     .setOnPreferenceChangeListener(fingerprintAppController);
         }

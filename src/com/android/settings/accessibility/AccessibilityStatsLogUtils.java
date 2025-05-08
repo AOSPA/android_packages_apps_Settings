@@ -44,7 +44,8 @@ public final class AccessibilityStatsLogUtils {
      * @param componentName component name of the service
      * @param enabled       {@code true} if the service is enabled
      */
-    static void logAccessibilityServiceEnabled(ComponentName componentName, boolean enabled) {
+    public static void logAccessibilityServiceEnabled(
+            ComponentName componentName, boolean enabled) {
         SettingsStatsLog.write(SettingsStatsLog.ACCESSIBILITY_SERVICE_REPORTED,
                 componentName.flattenToString(), convertToLoggingServiceEnabled(enabled));
     }

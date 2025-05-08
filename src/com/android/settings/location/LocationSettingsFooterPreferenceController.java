@@ -31,6 +31,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.widget.FooterPreference;
 
@@ -99,9 +100,7 @@ public class LocationSettingsFooterPreferenceController extends LocationBasePref
                 footerString.append(Html.escapeHtml(mInjectedFooterString) + PARAGRAPH_SEPARATOR);
             }
         } else {
-            if (mPackageManager.hasSystemFeature(PackageManager.FEATURE_TELEPHONY_CALLING)
-                    || mPackageManager.hasSystemFeature(
-                            PackageManager.FEATURE_TELEPHONY_MESSAGING)) {
+            if (Utils.isVoiceCapable(mContext) || Utils.isSmsMessagingCapable(mContext)) {
                 footerString.append(
                         mContext.getString(
                                 R.string.location_settings_footer_location_off_with_telephony));

@@ -36,7 +36,7 @@ internal class TextReadingDisplaySizePreference : PreferenceMetadata, Preference
         get() = R.string.keywords_display_size
 
     override fun createWidget(context: Context) =
-        AccessibilitySeekBarPreference(context, /* attrs= */ null).apply {
+        TooltipSliderPreference(context, /* attrs= */ null).apply {
             setIconStart(R.drawable.ic_remove_24dp)
             setIconStartContentDescription(R.string.screen_zoom_make_smaller_desc)
             setIconEnd(R.drawable.ic_add_24dp)

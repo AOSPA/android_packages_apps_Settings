@@ -17,12 +17,15 @@
 package com.android.settings.connecteddevice.audiosharing;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.flags.Flags;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 public class AudioSharingJoinHandlerActivity extends SettingsActivity {
     private static final String TAG = "AudioSharingJoinHandlerActivity";
@@ -51,6 +54,15 @@ public class AudioSharingJoinHandlerActivity extends SettingsActivity {
                             frag -> ((AudioSharingJoinHandlerDashboardFragment) frag)
                                     .handleDeviceConnectedFromIntent(intent));
         }
+    }
+
+    @Override
+    public Resources.Theme getTheme() {
+        var theme = super.getTheme();
+        theme.applyStyle(
+                SettingsThemeHelper.isExpressiveTheme(this)
+                        ? R.style.Transparent_Expressive : R.style.Transparent, true);
+        return theme;
     }
 
     @Override

@@ -24,8 +24,9 @@ import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 
 /** Accessibility settings for media vibration, as a switch toggle. */
 // LINT.IfChange
-class MediaVibrationIntensitySwitchPreference :
+class MediaVibrationIntensitySwitchPreference(context: Context) :
     VibrationIntensitySwitchPreference(
+        context = context,
         key = KEY,
         vibrationUsage = VibrationAttributes.USAGE_MEDIA,
         title = R.string.accessibility_media_vibration_title,

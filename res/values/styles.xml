@@ -130,8 +130,8 @@
         <item name="android:minHeight">@dimen/min_tap_target_size</item>
     </style>
 
-    <style name="wifi_item_spinner" parent="wifi_item_content">
-        <item name="android:minHeight">48dp</item>
+    <style name="wifi_item_spinner" parent="@style/Dialog.Spinner">
+        <item name="android:textAlignment">viewStart</item>
     </style>
 
     <style name="wifi_advanced_toggle" parent="wifi_item_content">

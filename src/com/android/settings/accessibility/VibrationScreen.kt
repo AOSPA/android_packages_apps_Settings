@@ -26,9 +26,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
-/**
- * Accessibility settings for vibration.
- */
+/** Accessibility settings for vibration. */
 // LINT.IfChange
 @ProvidePreferenceScreen(VibrationScreen.KEY)
 class VibrationScreen : PreferenceScreenCreator, PreferenceAvailabilityProvider {
@@ -42,7 +40,7 @@ class VibrationScreen : PreferenceScreenCreator, PreferenceAvailabilityProvider 
         get() = R.string.keywords_vibration
 
     override fun isAvailable(context: Context) =
-        context.isVibratorAvailable() && context.getSupportedVibrationIntensityLevels() == 1
+        context.hasVibrator && context.getSupportedVibrationIntensityLevels() == 1
 
     override fun isFlagEnabled(context: Context): Boolean = Flags.catalystVibrationIntensityScreen()
 
@@ -50,24 +48,25 @@ class VibrationScreen : PreferenceScreenCreator, PreferenceAvailabilityProvider 
 
     override fun fragmentClass(): Class<out Fragment>? = VibrationSettings::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {
-        +VibrationMainSwitchPreference()
-        // The preferences below are migrated behind a different flag from the screen migration.
-        // They should only be declared in this screen hierarchy if their migration is enabled.
-        if (Flags.catalystVibrationIntensityScreen25q4()) {
-            +CallVibrationPreferenceCategory() += {
-                +RingVibrationIntensitySwitchPreference()
-            }
-            +NotificationAlarmVibrationPreferenceCategory() += {
-                +NotificationVibrationIntensitySwitchPreference()
-                +AlarmVibrationIntensitySwitchPreference()
-            }
-            +InteractiveHapticsPreferenceCategory() += {
-                +TouchVibrationIntensitySwitchPreference()
-                +MediaVibrationIntensitySwitchPreference()
+    override fun getPreferenceHierarchy(context: Context) =
+        preferenceHierarchy(context, this) {
+            +VibrationMainSwitchPreference()
+            // The preferences below are migrated behind a different flag from the screen migration.
+            // They should only be declared in this screen hierarchy if their migration is enabled.
+            if (Flags.catalystVibrationIntensityScreen25q4()) {
+                +CallVibrationPreferenceCategory() += {
+                    +RingVibrationIntensitySwitchPreference(context)
+                }
+                +NotificationAlarmVibrationPreferenceCategory() += {
+                    +NotificationVibrationIntensitySwitchPreference(context)
+                    +AlarmVibrationIntensitySwitchPreference(context)
+                }
+                +InteractiveHapticsPreferenceCategory() += {
+                    +TouchVibrationIntensitySwitchPreference(context)
+                    +MediaVibrationIntensitySwitchPreference(context)
+                }
             }
         }
-    }
 
     companion object {
         const val KEY = "vibration_screen"
@@ -96,7 +95,7 @@ class InteractiveHapticsPreferenceCategory :
     )
 
 /** Returns true if the device has a system vibrator, false otherwise. */
-fun Context.isVibratorAvailable(): Boolean =
-    getSystemService(Vibrator::class.java).hasVibrator()
+val Context.hasVibrator: Boolean
+    get() = getSystemService(Vibrator::class.java)?.hasVibrator() == true
 
 // LINT.ThenChange(VibrationPreferenceController.java)

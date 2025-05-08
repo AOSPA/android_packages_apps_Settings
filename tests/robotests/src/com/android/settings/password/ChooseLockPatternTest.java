@@ -19,6 +19,7 @@ package com.android.settings.password;
 import static android.view.WindowManager.LayoutParams.FLAG_SECURE;
 
 import static com.android.settings.password.ChooseLockPattern.ChooseLockPatternFragment.KEY_UI_STAGE;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_USE_EXPRESSIVE_STYLE;
 
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
@@ -28,6 +29,8 @@ import static org.robolectric.RuntimeEnvironment.application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.view.View;
 
 import com.android.internal.widget.LockPatternUtils;
@@ -36,9 +39,11 @@ import com.android.settings.R;
 import com.android.settings.password.ChooseLockPattern.ChooseLockPatternFragment;
 import com.android.settings.password.ChooseLockPattern.IntentBuilder;
 import com.android.settings.testutils.shadow.ShadowUtils;
+import com.android.settingslib.widget.theme.flags.Flags;
 
 import com.google.android.setupdesign.GlifLayout;
 
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -48,6 +53,8 @@ import org.robolectric.annotation.Config;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowUtils.class)
 public class ChooseLockPatternTest {
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Test
     public void activityCreationTest() {
@@ -71,6 +78,19 @@ public class ChooseLockPatternTest {
                 .isEqualTo(createPattern("1234"));
         assertWithMessage("EXTRA_USER_ID").that(intent.getIntExtra(Intent.EXTRA_USER_ID, 0))
                 .isEqualTo(123);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_IS_EXPRESSIVE_DESIGN_ENABLED)
+    public void intentBuilder_setPattern_shouldAddExtras_withExpressiveDesign() {
+        Intent intent = new IntentBuilder(application)
+                .setPattern(createPattern("1234"))
+                .setUserId(123)
+                .build();
+
+        assertWithMessage("EXTRA_KEY_USE_EXPRESSIVE_STYLE").that(
+                        intent.getBooleanExtra(EXTRA_KEY_USE_EXPRESSIVE_STYLE, false))
+                .isTrue();
     }
 
     @Test

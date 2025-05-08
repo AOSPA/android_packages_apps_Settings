@@ -35,12 +35,12 @@ import androidx.preference.PreferenceScreen;
 import com.android.server.accessibility.Flags;
 import com.android.settings.R;
 import com.android.settings.core.SliderPreferenceController;
-import com.android.settings.widget.SeekBarPreference;
+import com.android.settingslib.widget.SliderPreference;
 
 /**
  * The controller of the seekbar preference for the saturation level of color correction.
  */
-public class DaltonizerSaturationSeekbarPreferenceController
+public class DaltonizerSaturationSliderPreferenceController
         extends SliderPreferenceController
         implements DefaultLifecycleObserver {
 
@@ -52,7 +52,7 @@ public class DaltonizerSaturationSeekbarPreferenceController
     private final ContentResolver mContentResolver;
 
     @Nullable
-    private SeekBarPreference mPreference;
+    private SliderPreference mPreference;
 
     public final ContentObserver mContentObserver = new ContentObserver(
             new Handler(Looper.getMainLooper())) {
@@ -64,8 +64,8 @@ public class DaltonizerSaturationSeekbarPreferenceController
         }
     };
 
-    public DaltonizerSaturationSeekbarPreferenceController(Context context,
-            String preferenceKey) {
+    public DaltonizerSaturationSliderPreferenceController(@NonNull Context context,
+            @NonNull String preferenceKey) {
         super(context, preferenceKey);
         mContentResolver = context.getContentResolver();
         mSliderPosition = Settings.Secure.getInt(
@@ -101,12 +101,12 @@ public class DaltonizerSaturationSeekbarPreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        SeekBarPreference preference = screen.findPreference(getPreferenceKey());
+        SliderPreference preference = screen.findPreference(getPreferenceKey());
         mPreference = preference;
         preference.setMax(getMax());
         preference.setMin(getMin());
-        preference.setProgress(mSliderPosition);
-        preference.setContinuousUpdates(true);
+        preference.setValue(mSliderPosition);
+        preference.setUpdatesContinuously(true);
     }
 
     @Override

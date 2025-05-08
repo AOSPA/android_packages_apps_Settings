@@ -2096,7 +2096,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             android:name=".fuelgauge.RequestIgnoreBatteryOptimizations"
             android:label="@string/high_power_apps"
             android:exported="true"
-            android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight">
+            android:theme="@style/Transparent">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
                 <category android:name="android.intent.category.DEFAULT" />

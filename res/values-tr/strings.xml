@@ -276,10 +276,8 @@
     <string name="terms_of_address_masculine" msgid="983106046135098856">"Erkek"</string>
     <string name="terms_of_address_neutral" msgid="5475414185543112478">"Normal"</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Seçilen dil kaldırılsın mı?}other{Seçilen diller kaldırılsın mı?}}"</string>
-    <!-- no translation found for dlg_remove_system_locales_title (7626516786258866543) -->
-    <skip />
-    <!-- no translation found for dlg_remove_locales_message (6636637008013310242) -->
-    <skip />
+    <string name="dlg_remove_system_locales_title" msgid="7626516786258866543">"Sistem dili %s olarak değiştirilsin mi?"</string>
+    <string name="dlg_remove_locales_message" msgid="6636637008013310242">"<xliff:g id="LANGUAGE">%s</xliff:g>, tercih ettiğiniz dillerden kaldırılacak"</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Tüm diller kaldırılamaz"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Tercih edilen en az dil bırakın"</string>
     <string name="locale_not_translated" msgid="3071618135527110152">"Sistem dili olarak mevcut değil"</string>
@@ -318,10 +316,13 @@
     <string name="time_format_category_title" msgid="7108616745509689991">"Saat biçimi"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"Saat dilimi"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"Saat dilimi seç"</string>
+    <!-- no translation found for date_time_search_time_zone (7373967602009974399) -->
+    <skip />
     <string name="date_time_set_date_title" msgid="7624166157167528407">"Tarih"</string>
     <string name="date_time_search_region" msgid="1364133854952610919">"Bölge ara"</string>
     <string name="date_time_select_region" msgid="5449345333305056072">"Bölge"</string>
-    <string name="date_time_select_fixed_offset_time_zones" msgid="594848300882055361">"UTC farkını seçin"</string>
+    <!-- no translation found for date_time_select_fixed_offset_time_zones (2130108030162342594) -->
+    <skip />
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> kullanılır. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
@@ -330,7 +331,8 @@
     <string name="zone_time_type_dst" msgid="9189689342265305808">"Yaz saati uygulaması"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Standart saat"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Bölgeye göre seç"</string>
-    <string name="zone_menu_by_offset" msgid="1257702747474426745">"UTC farkına göre seç"</string>
+    <!-- no translation found for zone_menu_by_offset (543648951618438204) -->
+    <skip />
     <string name="time_feedback_category_title" msgid="5942621686512255208">"Geri bildirim"</string>
     <string name="keywords_time_feedback_category" msgid="4553921538559830393">"geri bildirim, hata, saat, bölge, saat dilimi"</string>
     <string name="time_feedback_title" msgid="7720948068042783614">"Saat geri bildirimi gönder"</string>
@@ -1176,6 +1178,12 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"İzin ver"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Reddet"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*zorunlu"</string>
+    <!-- no translation found for share_wifi_network (4064997404339571584) -->
+    <skip />
+    <!-- no translation found for share_wifi_network_summary (4316236421149769333) -->
+    <skip />
+    <!-- no translation found for edit_wifi_network_configuration (5712989655083072417) -->
+    <skip />
     <string name="no_internet_access_text" msgid="3611993143350310936">"Bu ağda internet erişimi yok. Bağlı kalınsın mı?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Bazı uygulamalar ve hizmetler, sınırlı bağlantı nedeniyle çalışmayabilir. Yine de kullanılsın mı?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Bu ağ için bir daha sorma"</string>
@@ -1462,21 +1470,14 @@
     <string name="doze_title" msgid="1523090408230862316">"Bildirimlerde ekranı uyandır"</string>
     <string name="doze_summary" msgid="8252867381522942804">"Ekran karanlıkken yeni bildirimler için açılır"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"Saati ve bilgiyi daima göster"</string>
-    <!-- no translation found for doze_always_on_title2 (6806855871175589465) -->
-    <skip />
+    <string name="doze_always_on_title2" msgid="6806855871175589465">"Her zaman açık ekran"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"Yüksek pil kullanımı"</string>
-    <!-- no translation found for doze_always_on_summary_with_wallpaper (7193043498368623388) -->
-    <skip />
-    <!-- no translation found for doze_always_on_summary_without_wallpaper (2461602415293603846) -->
-    <skip />
-    <!-- no translation found for doze_always_on_summary_long (9198713049143867176) -->
-    <skip />
-    <!-- no translation found for doze_always_on_wallpaper_options (6089727555294626960) -->
-    <skip />
-    <!-- no translation found for doze_always_on_wallpaper_title (975186604007325364) -->
-    <skip />
-    <!-- no translation found for doze_always_on_wallpaper_description (7797570713499410605) -->
-    <skip />
+    <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"Ekran kapalıyken kilit ekranı duvar kağıdını göster"</string>
+    <string name="doze_always_on_summary_without_wallpaper" msgid="2461602415293603846">"Ekran kapalıyken kilit ekranı duvar kağıdını gizle"</string>
+    <string name="doze_always_on_summary_long" msgid="9198713049143867176">"Her zaman açık ekran, ekran kapalıyken saati, tarihi ve diğer bilgileri gösterir"</string>
+    <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"Duvar kağıdı seçenekleri"</string>
+    <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"Kilit ekranı duvar kağıdını göster"</string>
+    <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"Kilit ekranı duvar kağıdı, her zaman açık ekranda görünür"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"Kalın metin"</string>
     <string name="title_font_size" msgid="570613010306330622">"Yazı tipi boyutu"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Metni daha büyük veya daha küçük yapın"</string>
@@ -2124,16 +2125,16 @@
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Tuşları aynı anda basılı tutmak yerine kısayollar için tek seferde bir tuşa basın"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Fare tuşları"</string>
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"Fare tuşlarını kullan"</string>
+    <!-- no translation found for accessibility_mouse_keys_shortcut_title (7621635104533584115) -->
+    <skip />
     <string name="mouse_keys_summary" msgid="7030731235143286467">"İşaretçiyi kontrol etmek için klavyenizi kullanın"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Ters kaydırma"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Sayfayı aşağı taşımak için yukarı kaydırın"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"Kaydırma"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"Kontrollü kaydırma"</string>
     <string name="mouse_scrolling_speed" msgid="3999483025392860903">"Kaydırma hızı"</string>
-    <!-- no translation found for mouse_pointer_speed_make_faster_desc (7665912663672314461) -->
-    <skip />
-    <!-- no translation found for mouse_pointer_speed_make_slower_desc (116802579827902188) -->
-    <skip />
+    <string name="mouse_pointer_speed_make_faster_desc" msgid="7665912663672314461">"İşaretçiyi hızlandır"</string>
+    <string name="mouse_pointer_speed_make_slower_desc" msgid="116802579827902188">"İşaretçiyi yavaşlat"</string>
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"Birincil fare düğmesini değiştir"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Sol fare düğmesini sağ fare düğmesi olarak kullanın"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"İmleç hızlandırması"</string>
@@ -2157,8 +2158,7 @@
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"İşaretçi hızı, hareketler"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Tıklamak için dokunma"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Öğeleri taşımak için dokunup sürükle"</string>
-    <!-- no translation found for trackpad_tap_dragging_summary (5605534150661601073) -->
-    <skip />
+    <string name="trackpad_tap_dragging_summary" msgid="5605534150661601073">"Nesneleri taşımak için dokunmatik alana iki kez dokunup parmağınızı sürükleyin"</string>
     <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"Dokunmatik alan hareketleri"</string>
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Dokunmatik alan gezinme hareketlerini ayrı ayrı özelleştirin"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Ters kaydırma"</string>
@@ -2166,10 +2166,8 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Sağ alt tarafı tıkla"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Seçenekler için dokunmatik alanın sağ alt köşesini tıklayın"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"İşaretçi hızı"</string>
-    <!-- no translation found for trackpad_pointer_speed_make_faster_desc (2855950278314583596) -->
-    <skip />
-    <!-- no translation found for trackpad_pointer_speed_make_slower_desc (6577850228762978827) -->
-    <skip />
+    <string name="trackpad_pointer_speed_make_faster_desc" msgid="2855950278314583596">"İşaretçiyi hızlandır"</string>
+    <string name="trackpad_pointer_speed_make_slower_desc" msgid="6577850228762978827">"İşaretçiyi yavaşlat"</string>
     <string name="three_finger_tap_preference_title" msgid="1836080810837854140">"Üç parmakla dokunmayı kullanın"</string>
     <string name="touchpad_acceleration_title" msgid="176627555191021888">"Dokunmatik alan hızlandırması"</string>
     <string name="touchpad_acceleration_summary" msgid="8057075483967535793">"Dokunmatik alanınızda daha hızlı hareket etmeniz, imleci daha uzağa taşır"</string>
@@ -2189,10 +2187,8 @@
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"sağ tıklama, dokunma"</string>
     <string name="three_finger_tap_middle_click" msgid="7898931632908866867">"Orta fare düğmesi"</string>
     <string name="three_finger_tap_launch_gemini" msgid="4030401656711588982">"Asistan\'ı başlat"</string>
-    <!-- no translation found for three_finger_tap_launch_default_assistant (7947939159617292478) -->
-    <skip />
-    <!-- no translation found for three_finger_tap_launch_generic_assistant_name (1893057235983949817) -->
-    <skip />
+    <string name="three_finger_tap_launch_default_assistant" msgid="7947939159617292478">"<xliff:g id="APP_NAME">%s</xliff:g> uygulamasını başlat"</string>
+    <string name="three_finger_tap_launch_generic_assistant_name" msgid="1893057235983949817">"Asistan"</string>
     <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Ana sayfaya git"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"Geri dön"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"Son uygulamaları göster"</string>
@@ -2226,17 +2222,12 @@
     <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Yapışkan tuşlar, geri sekme tuşları, fare tuşları"</string>
     <string name="keyboard_repeat_keys_title" msgid="6346877755243280735">"Tuşları tekrarla"</string>
     <string name="keyboard_repeat_keys_timeout_title" msgid="3411871149974652293">"Tekrardan önce geciktir"</string>
-    <!-- no translation found for keyboard_repeat_keys_increase_delay_desc (9131810864682287872) -->
-    <skip />
-    <!-- no translation found for keyboard_repeat_keys_decrease_delay_desc (6762794746507398346) -->
-    <skip />
-    <!-- no translation found for keyboard_repeat_keys_delay_title (5954595732341624638) -->
-    <skip />
+    <string name="keyboard_repeat_keys_increase_delay_desc" msgid="9131810864682287872">"Gecikmeyi artır"</string>
+    <string name="keyboard_repeat_keys_decrease_delay_desc" msgid="6762794746507398346">"Gecikmeyi azalt"</string>
+    <string name="keyboard_repeat_keys_delay_title" msgid="5954595732341624638">"Tekrarlama hızı"</string>
     <string name="keyboard_repeat_keys_summary" msgid="8972905345211768313">"Aynı karakteri tekrarlamak için ilgili tuşu basılı tutun. Tuş basılı tutulduğu sürece karakter tekrarlanır"</string>
-    <!-- no translation found for keyboard_repeat_keys_increase_rate_desc (1745229237083808184) -->
-    <skip />
-    <!-- no translation found for keyboard_repeat_keys_decrease_rate_desc (31236959764168589) -->
-    <skip />
+    <string name="keyboard_repeat_keys_increase_rate_desc" msgid="1745229237083808184">"Tekrarlama hızını artır"</string>
+    <string name="keyboard_repeat_keys_decrease_rate_desc" msgid="31236959764168589">"Tekrarlama hızını azalt"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"<xliff:g id="IME_LABEL">%s</xliff:g> düzeni"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Varsayılan"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Otomatik: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2364,10 +2355,8 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Fare ekranın kenarlarına dokunduğunda ekranı taşı"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Yazma sırasında büyütme"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Büyüteç siz yazarken metni takip eder"</string>
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_title (7342198645736402048) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_summary (9091733229413835358) -->
-    <skip />
+    <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="7342198645736402048">"Klavye odağını büyüt"</string>
+    <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="9091733229413835358">"Büyüteç, klavye odağını takip eder"</string>
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"Klavyeyi büyüt"</string>
     <string name="accessibility_screen_magnification_nav_ime_summary" msgid="3054371947104552843">"Klavye, içeriğinizle birlikte büyütülür"</string>
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"Ekranın yalnızca bir kısmını büyütürken kullanılamaz"</string>
@@ -3019,6 +3008,12 @@
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Bildirimler"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Ağ bildirimleri"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Cihazınız, şifrelenmemiş ağa bağlandığında veya bir ağ, benzersiz cihaz ya da SIM kimliğinizi kaydettiğinde bildirim alın"</string>
+    <!-- no translation found for cellular_security_2G_network_generation_header (2892850064192939887) -->
+    <skip />
+    <!-- no translation found for cellular_security_2G_network_generation_summary (979187530909112413) -->
+    <skip />
+    <!-- no translation found for cellular_security_2G_network_generation_title (706766676947606951) -->
+    <skip />
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Şifreleme"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Ağ nesilleri"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Takılan her SIM kartı yalnızca 3G, 4G ve 5G\'yi destekleyen ağlara bağlanacak şekilde yapılandırabilirsiniz. SIM, eski ve güvenli olmayan 2G ağlara bağlanmaz. Bu ayar, kullanılabilen tek ağ türü 2G olursa bağlantınızı sınırlayabilir. Acil durumlarda 2G kullanılabilir."</string>
@@ -4451,7 +4446,7 @@
     <string name="system_alert_window_settings" msgid="6458633954424862521">"Diğer uygulamaların üzerinde göster"</string>
     <string name="permit_draw_overlay" msgid="4468994037192804075">"Diğer uygulamalar üzerinde gösterime izin ver"</string>
     <string name="allow_overlay_description" msgid="1607235723669496298">"Bu uygulamaya, kullandığınız diğer uygulamaların üzerinde gösterim izni verir. Bu uygulama, ekranda nereye dokunduğunuzu görebilecek veya ekranda görüntülenenleri değiştirebilecek."</string>
-    <string name="media_routing_control_title" msgid="6402800638960066807">"Medya çıkışını değiştir"</string>
+    <string name="media_routing_control_title" msgid="6402800638960066807">"Medya çıkışını değiştirme"</string>
     <string name="allow_media_routing_control" msgid="4907036637509360616">"Uygulamanın, medya çıkışını değiştirmesine izin verin"</string>
     <string name="allow_media_routing_description" msgid="8343709701298051207">"Bu uygulamanın, diğer uygulamalardan ses veya video oynatabilecek bağlı cihazı seçmesine izin verin. İzin verildiği takdirde bu uygulama, kulaklık ve hoparlör gibi kullanılabilir cihazların listesine erişip ses veya video akışı ya da yayını için kullanılacak çıkış cihazını seçebilir."</string>
     <string name="manage_external_storage_title" msgid="8024521099838816100">"Tüm dosyalara erişim"</string>
@@ -4474,7 +4469,7 @@
     <string name="app_permission_summary_allowed" msgid="1155115629167757278">"İzin veriliyor"</string>
     <string name="app_permission_summary_not_allowed" msgid="2673793662439097900">"İzin verilmiyor"</string>
     <string name="keywords_install_other_apps" msgid="563895867658775580">"uygulamalar yükleme bilinmeyen kaynaklar"</string>
-    <string name="write_settings" msgid="6864794401614425894">"Sistem ayarlarını değiştir"</string>
+    <string name="write_settings" msgid="6864794401614425894">"Sistem ayarlarını değiştirme"</string>
     <string name="keywords_write_settings" msgid="6908708078855507813">"yazma değiştirme sistem ayarları"</string>
     <string name="filter_install_sources_apps" msgid="6930762738519588431">"Diğer uygulamaları yükleyebilir"</string>
     <string name="filter_write_settings_apps" msgid="4754994984909024093">"Sistem ayarlarını değiştirebilir"</string>
@@ -5843,50 +5838,41 @@
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Seçerek Arat"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Ekranınızdaki içerikleri kullanarak arama yapmak için ana sayfa düğmesine veya gezinme tutma yerine dokunup basılı tutun."</string>
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Cihaz ayrıntılarını yapılandırın."</string>
-    <!-- no translation found for supervision_settings_title (8507163323870367711) -->
-    <skip />
+    <string name="supervision_settings_title" msgid="8507163323870367711">"Ebeveyn denetimleri"</string>
     <string name="supervision_settings_summary" msgid="5020634300370322741">"İçerik kısıtlamaları ve diğer sınırlamalar"</string>
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Cihaz gözetimi kullan"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Başlamak için PIN ayarlayın"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"gözetim, ebeveyn gözetimi, ebeveyn denetimleri"</string>
     <string name="supervision_pin_management_preference_title" msgid="961680798581006465">"PIN\'i yönetin"</string>
-    <!-- no translation found for supervision_pin_management_preference_summary_add (8061713645550514683) -->
-    <skip />
-    <!-- no translation found for supervision_pin_management_preference_summary_verify_recovery (2156782778845060114) -->
-    <skip />
+    <string name="supervision_pin_management_preference_summary_add" msgid="8061713645550514683">"PIN kurtarma yöntemi ekle"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="2156782778845060114">"PIN kurtarma yöntemini doğrula"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"PIN\'i değiştir"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"PIN\'i unuttum"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Kurtarma e-postasını güncelleme"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"PIN\'i silme"</string>
     <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Bu işlem tüm gözetim ayarlarınızı sıfırlar"</string>
-    <!-- no translation found for supervision_add_pin_recovery_title (5584523084706797399) -->
+    <string name="supervision_add_pin_recovery_title" msgid="5584523084706797399">"Kurtarma yöntemi eklemek için dokunun"</string>
+    <!-- no translation found for supervision_verify_pin_recovery_title (7953090772633001442) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Web içeriği filtreleri"</string>
-    <!-- no translation found for supervision_web_content_filters_summary_both_on (8668754911140483798) -->
+    <!-- no translation found for supervision_web_content_filters_browser_title (8737341514264129889) -->
     <skip />
-    <!-- no translation found for supervision_web_content_filters_summary_chrome_on (5999295548020086617) -->
+    <!-- no translation found for supervision_web_content_filters_browser_block_explicit_sites_title (1786398287521485576) -->
     <skip />
-    <!-- no translation found for supervision_web_content_filters_summary_search_on (6866676094401450305) -->
+    <!-- no translation found for supervision_web_content_filters_browser_block_explicit_sites_summary (1427357961145247788) -->
     <skip />
-    <!-- no translation found for supervision_web_content_filters_summary_both_off (6735949158065982622) -->
-    <skip />
-    <string name="supervision_web_content_filters_browser_title" msgid="979037187423952892">"Google Chrome ve Web"</string>
-    <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="7923982596891796260">"Uygunsuz siteleri engellemeye çalış"</string>
-    <string name="supervision_web_content_filters_browser_block_explicit_sites_summary" msgid="1477766506765966613">"Filtrelerin hiçbiri kusursuz sonuç vermez. Bununla birlikte, müstehcen siteleri gizlemek için bu filtreyi kullanabilirsiniz."</string>
     <string name="supervision_web_content_filters_browser_allow_all_sites_title" msgid="3909739592466381845">"Tüm sitelere izin ver"</string>
-    <string name="supervision_web_content_filters_search_title" msgid="726335318009305564">"Google Arama"</string>
-    <string name="supervision_web_content_filters_search_filter_on_title" msgid="4855846261141136285">"Güvenli Arama filtresi AÇIK"</string>
-    <string name="supervision_web_content_filters_search_filter_on_summary" msgid="1162258144140293269">"Bu cihazdaki arama sonuçlarında yer alan uygunsuz görsellerin, metinlerin ve bağlantıların filtrelenmesini sağlar"</string>
-    <string name="supervision_web_content_filters_search_filter_off_title" msgid="6049461395304222346">"Güvenli Arama filtresi KAPALI"</string>
-    <string name="supervision_web_content_filters_search_filter_off_summary" msgid="3834238970190924433">"Hesap ayarları, uygunsuz sonuçları filtrelemeye veya bulanıklaştırmaya devam edebilir"</string>
-    <!-- no translation found for supervision_web_content_filters_footer_content (3532535288142541994) -->
+    <!-- no translation found for supervision_web_content_filters_search_title (8608480392956106029) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_search_filter_on_title (1136440775294190806) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_search_filter_on_summary (6797184284369033101) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_search_filter_off_title (7171966260908166395) -->
     <skip />
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Gözetim PIN\'ini girin"</string>
-    <!-- no translation found for supervision_lock_setup_title (7581682893583645713) -->
-    <skip />
-    <!-- no translation found for supervision_lock_setup_description (6931450348200992733) -->
-    <skip />
-    <!-- no translation found for supervision_pin_reset_success_toast (4663259412030769718) -->
-    <skip />
+    <string name="supervision_lock_setup_title" msgid="7581682893583645713">"Gözetim kilidi seçin"</string>
+    <string name="supervision_lock_setup_description" msgid="6931450348200992733">"Gözetim ayarlarının kilidini bu kodla açabilirsiniz"</string>
+    <string name="supervision_pin_reset_success_toast" msgid="4663259412030769718">"Ebeveyn denetimi PIN\'ini sıfırlama"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> animasyonu"</string>
 </resources>

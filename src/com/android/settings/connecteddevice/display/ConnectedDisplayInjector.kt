@@ -18,7 +18,6 @@ package com.android.settings.connecteddevice.display
 
 import android.app.WallpaperManager
 import android.content.Context
-import android.content.Context.DISPLAY_SERVICE
 import android.graphics.Bitmap
 import android.hardware.display.DisplayManager
 import android.hardware.display.DisplayManager.DISPLAY_CATEGORY_ALL_INCLUDING_DISABLED
@@ -39,17 +38,14 @@ import android.view.Display.INVALID_DISPLAY
 import android.view.DisplayInfo
 import android.view.IWindowManager
 import android.view.WindowManagerGlobal
-
 import com.android.server.display.feature.flags.Flags.enableModeLimitForExternalDisplay
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.VIRTUAL_DISPLAY_PACKAGE_NAME_SYSTEM_PROPERTY
-import com.android.settings.flags.FeatureFlags
 import com.android.settings.flags.FeatureFlagsImpl
-
 import java.util.function.Consumer
 
 open class ConnectedDisplayInjector(open val context: Context?) {
 
-    open val flags: FeatureFlags by lazy { DesktopExperienceFlags(FeatureFlagsImpl()) }
+    open val flags: DesktopExperienceFlags by lazy { DesktopExperienceFlags(FeatureFlagsImpl()) }
     open val handler: Handler by lazy { Handler(Looper.getMainLooper()) }
 
     /**

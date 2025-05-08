@@ -41,7 +41,7 @@ import java.util.Objects;
  * options.
  */
 class TextReadingPreviewController extends BasePreferenceController implements
-        PreviewSizeSeekBarController.ProgressInteractionListener {
+        PreviewSizeSliderController.ProgressInteractionListener {
     private static final String TAG = "TextReadingPreviewCtrl";
     private static final int LAYER_INITIAL_INDEX = 0;
     private static final int FRAME_INITIAL_INDEX = 0;
@@ -53,12 +53,12 @@ class TextReadingPreviewController extends BasePreferenceController implements
     private static final long CHANGE_BY_BUTTON_DELAY_MS = 300;
     private final FontSizeData mFontSizeData;
     private final DisplaySizeData mDisplaySizeData;
-    private int mLastFontProgress;
+    private int mLastFontValue;
     private int mLastDisplayProgress;
     private long mLastCommitTime;
     private TextReadingPreviewPreference mPreviewPreference;
-    private AccessibilitySeekBarPreference mFontSizePreference;
-    private AccessibilitySeekBarPreference mDisplaySizePreference;
+    private TooltipSliderPreference mFontSizePreference;
+    private TooltipSliderPreference mDisplaySizePreference;
 
     @EntryPoint
     private int mEntryPoint;
@@ -97,7 +97,7 @@ class TextReadingPreviewController extends BasePreferenceController implements
                 /* message= */ "Display size preference is null, the preview controller"
                         + " couldn't get the info");
 
-        mLastFontProgress = mFontSizeData.getInitialIndex();
+        mLastFontValue = mFontSizeData.getInitialIndex();
         mLastDisplayProgress = mDisplaySizeData.getInitialIndex();
 
         final Configuration origConfig = mContext.getResources().getConfiguration();
@@ -111,7 +111,7 @@ class TextReadingPreviewController extends BasePreferenceController implements
                 isLayoutRtl ? previewSamples.length - 1 : FRAME_INITIAL_INDEX);
 
         final int initialPagerIndex =
-                mLastFontProgress * mDisplaySizeData.getValues().size() + mLastDisplayProgress;
+                mLastFontValue * mDisplaySizeData.getValues().size() + mLastDisplayProgress;
         mPreviewPreference.setLastLayerIndex(initialPagerIndex);
         pagerAdapter.setPreviewLayer(initialPagerIndex, LAYER_INITIAL_INDEX,
                 FRAME_INITIAL_INDEX, /* animate= */ false);
@@ -190,8 +190,8 @@ class TextReadingPreviewController extends BasePreferenceController implements
 
     private int getPagerIndex() {
         final int displayDataSize = mDisplaySizeData.getValues().size();
-        final int fontSizeProgress = mFontSizePreference.getProgress();
-        final int displaySizeProgress = mDisplaySizePreference.getProgress();
+        final int fontSizeProgress = mFontSizePreference.getValue();
+        final int displaySizeProgress = mDisplaySizePreference.getValue();
 
         // To be consistent with the {@link PreviewPagerAdapter#setPreviewLayer(int, int, int,
         // boolean)} behavior, here also needs the same design. In addition, please also refer to
@@ -200,25 +200,25 @@ class TextReadingPreviewController extends BasePreferenceController implements
     }
 
     private void tryCommitFontSizeConfig() {
-        final int fontProgress = mFontSizePreference.getProgress();
-        if (fontProgress != mLastFontProgress) {
-            mFontSizeData.commit(fontProgress);
-            mLastFontProgress = fontProgress;
+        final int fontValue = mFontSizePreference.getValue();
+        if (fontValue != mLastFontValue) {
+            mFontSizeData.commit(fontValue);
+            mLastFontValue = fontValue;
 
             if (Log.isLoggable(TAG, Log.DEBUG)) {
-                Log.d(TAG, "Font size: " + fontProgress);
+                Log.d(TAG, "Font size: " + fontValue);
             }
 
             SettingsStatsLog.write(
                     SettingsStatsLog.ACCESSIBILITY_TEXT_READING_OPTIONS_CHANGED,
                     AccessibilityStatsLogUtils.convertToItemKeyName(mFontSizePreference.getKey()),
-                    fontProgress,
+                    fontValue,
                     AccessibilityStatsLogUtils.convertToEntryPoint(mEntryPoint));
         }
     }
 
     private void tryCommitDisplaySizeConfig() {
-        final int displayProgress = mDisplaySizePreference.getProgress();
+        final int displayProgress = mDisplaySizePreference.getValue();
         if (displayProgress != mLastDisplayProgress) {
             mDisplaySizeData.commit(displayProgress);
             mLastDisplayProgress = displayProgress;

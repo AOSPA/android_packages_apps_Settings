@@ -18,7 +18,9 @@ package com.android.settings.accessibility;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
@@ -34,13 +36,15 @@ public class AccessibilityFooterPreferenceController extends BasePreferenceContr
     private String mLearnMoreText;
     private String mIntroductionTitle;
 
+    private CharSequence mSummary;
+
     public AccessibilityFooterPreferenceController(Context context, String key) {
         super(context, key);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return AVAILABLE_UNSEARCHABLE;
     }
 
     @Override
@@ -99,6 +103,13 @@ public class AccessibilityFooterPreferenceController extends BasePreferenceContr
         return mIntroductionTitle;
     }
 
+    /**
+     * Overrides ths summary of {@link AccessibilityFooterPreference}
+     */
+    protected void setSummary(@NonNull CharSequence summary) {
+        mSummary = summary;
+    }
+
     private void updateFooterPreferences(AccessibilityFooterPreference footerPreference) {
         final StringBuffer sb = new StringBuffer();
         sb.append(getIntroductionTitle()).append("\n\n").append(footerPreference.getTitle());
@@ -123,7 +134,18 @@ public class AccessibilityFooterPreferenceController extends BasePreferenceContr
             footerPreference.setLinkEnabled(false);
         }
 
+        if (!TextUtils.isEmpty(mSummary)) {
+            footerPreference.setSummary(mSummary);
+        }
+
         // Grouping subcomponents to make more accessible.
         footerPreference.setSelectable(false);
+
+        if (TextUtils.isEmpty(footerPreference.getTitle())
+                && TextUtils.isEmpty(footerPreference.getSummary())) {
+            footerPreference.setVisible(false);
+        } else {
+            footerPreference.setVisible(true);
+        }
     }
 }

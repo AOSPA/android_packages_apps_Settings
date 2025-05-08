@@ -294,7 +294,11 @@ public class FaceSettings extends DashboardFragment {
                     findPreference(PREF_KEY_USE_FACE_TO_CATEGORY);
             category.setVisible(true);
             use(FaceSettingsKeyguardUnlockPreferenceController.class).setUserId(mUserId);
+            use(FaceSettingsKeyguardUnlockPreferenceController.class)
+                    .displayPreference(getPreferenceScreen());
             use(FaceSettingsAppsPreferenceController.class).setUserId(mUserId);
+            use(FaceSettingsAppsPreferenceController.class)
+                    .displayPreference(getPreferenceScreen());
         }
     }
 

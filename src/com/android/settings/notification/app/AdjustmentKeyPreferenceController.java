@@ -15,6 +15,8 @@
  */
 package com.android.settings.notification.app;
 
+import static android.service.notification.Adjustment.KEY_TYPE;
+
 import android.app.Flags;
 import android.content.Context;
 import android.service.notification.Adjustment;
@@ -66,6 +68,9 @@ public class AdjustmentKeyPreferenceController extends
                 || mBackend.isInInvalidMsgState(mAppRow.pkg, mAppRow.uid))) {
             return false;
         }
+        if (!mBackend.getAllowedAssistantAdjustments().contains(mKey)) {
+            return false;
+        }
         return super.isAvailable();
     }
 
@@ -84,7 +89,8 @@ public class AdjustmentKeyPreferenceController extends
         if (pref != null && mAppRow != null) {
             pref.setDisabledByAdmin(mAdmin);
             pref.setEnabled(!pref.isDisabledByAdmin());
-            pref.setChecked(!mBackend.getAdjustmentDeniedPackages(mKey).contains(mAppRow.pkg));
+            pref.setChecked(
+                    mBackend.isAdjustmentSupportedForPackage(mAppRow.userId, mKey, mAppRow.pkg));
             pref.setOnPreferenceChangeListener(this);
         }
     }
@@ -92,7 +98,7 @@ public class AdjustmentKeyPreferenceController extends
     @Override
     public boolean onPreferenceChange(@NonNull Preference preference, @NonNull Object newValue) {
         final boolean allowedForPkg = (Boolean) newValue;
-        mBackend.setAdjustmentSupportedForPackage(mKey, mAppRow.pkg, allowedForPkg);
+        mBackend.setAdjustmentSupportedForPackage(mAppRow.userId, mKey, mAppRow.pkg, allowedForPkg);
         return true;
     }
 }

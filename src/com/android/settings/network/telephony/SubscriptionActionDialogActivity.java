@@ -45,9 +45,10 @@ public class SubscriptionActionDialogActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int themeId = SettingsThemeHelper.isExpressiveTheme(this)
-                ? R.style.Theme_SubSettings_Expressive : R.style.Theme_SubSettings;
-        setTheme(themeId);
+        if (SettingsThemeHelper.isExpressiveTheme(this)) {
+            setTheme(R.style.Transparent_Expressive);
+        }
+
         mSubscriptionManager = getSystemService(SubscriptionManager.class)
                 .createForAllUserProfiles();
         setProgressState(PROGRESS_IS_NOT_SHOWING);

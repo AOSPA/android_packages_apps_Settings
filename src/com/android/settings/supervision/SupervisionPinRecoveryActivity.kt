@@ -15,8 +15,8 @@
  */
 package com.android.settings.supervision
 
+import android.Manifest
 import android.app.Activity
-import android.app.admin.DevicePolicyManager
 import android.app.supervision.SupervisionManager
 import android.app.supervision.SupervisionRecoveryInfo
 import android.app.supervision.SupervisionRecoveryInfo.STATE_PENDING
@@ -24,13 +24,16 @@ import android.app.supervision.SupervisionRecoveryInfo.STATE_VERIFIED
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.os.UserManager
+import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresPermission
+import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.FragmentActivity
 import com.android.settings.R
-import com.android.settings.password.ChooseLockSettingsHelper
 import com.android.settingslib.supervision.SupervisionIntentProvider
 import com.android.settingslib.supervision.SupervisionLog
 
@@ -164,10 +167,10 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
     }
 
     private fun onVerification(resultCode: Int, data: Intent?) {
-        if (resultCode == Activity.RESULT_OK) {
+        if (resultCode == RESULT_OK) {
             val action = intent.action
             when (action) {
-                ACTION_RECOVERY -> startResetPinActivity() // Continue to set PIN after verification
+                ACTION_RECOVERY -> startResetPinActivity() // reset PIN after verification
                 ACTION_SETUP,
                 ACTION_UPDATE,
                 ACTION_SETUP_VERIFIED,
@@ -220,24 +223,15 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
     }
 
     /** Starts the reset supervision PIN activity for the supervising user. */
+    @RequiresPermission(
+        anyOf = [Manifest.permission.CREATE_USERS, Manifest.permission.MANAGE_USERS]
+    )
     private fun startResetPinActivity() {
-        // TODO(b/407064075): reset the user or use other activity to skip entering current PIN.
-        val intent =
-            Intent(DevicePolicyManager.ACTION_SET_NEW_PASSWORD).apply {
-                putExtra(
-                    DevicePolicyManager.EXTRA_PASSWORD_COMPLEXITY,
-                    DevicePolicyManager.PASSWORD_COMPLEXITY_LOW,
-                )
-                putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FINGERPRINT_ENROLLMENT_ONLY, true)
-                putExtra(
-                    ChooseLockSettingsHelper.EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE,
-                    getString(R.string.supervision_lock_setup_title),
-                )
-                putExtra(
-                    ChooseLockSettingsHelper.EXTRA_KEY_CHOOSE_LOCK_SCREEN_DESCRIPTION,
-                    getString(R.string.supervision_lock_setup_description),
-                )
-            }
+        if (!resetSupervisionUser()) {
+            handleError("Failed to reset supervision user.")
+            return
+        }
+        val intent = Intent(this, SupervisionCredentialProxyActivity::class.java)
         setPinLauncher.launch(intent)
     }
 
@@ -254,6 +248,32 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
         finish()
     }
 
+    /**
+     * Resets the supervision user by removing the existing one and creating a new one.
+     *
+     * This method first retrieves the current supervising user handle. If it exists, the user is
+     * removed. Then, a new supervising user is created.
+     *
+     * @return True if the reset was successful, false otherwise.
+     *
+     * TODO(b/407064075): use better approach to reset the supervision user.
+     */
+    @RequiresPermission(
+        anyOf = [Manifest.permission.CREATE_USERS, Manifest.permission.MANAGE_USERS]
+    )
+    private fun resetSupervisionUser(): Boolean {
+        val userManager = getSystemService(UserManager::class.java)
+        supervisingUserHandle?.let { userManager.removeUser(it) }
+        val userInfo =
+            userManager.createUser("Supervising", USER_TYPE_PROFILE_SUPERVISING, /* flags= */ 0)
+        if (userInfo != null) {
+            return true
+        } else {
+            Log.e(SupervisionLog.TAG, "Unable to create supervising profile.")
+            return false
+        }
+    }
+
     companion object {
         // Action types for the PIN recovery activity.
         const val ACTION_SETUP = "android.app.supervision.action.SETUP_PIN_RECOVERY"
@@ -265,7 +285,7 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
             "android.app.supervision.action.POST_SETUP_VERIFY_PIN_RECOVERY"
 
         // Extra keys
-        private const val EXTRA_RECOVERY_EMAIL = "recoveryEmail"
-        private const val EXTRA_RECOVERY_ID = "recoveryId"
+        @VisibleForTesting const val EXTRA_RECOVERY_EMAIL = "recoveryEmail"
+        @VisibleForTesting const val EXTRA_RECOVERY_ID = "recoveryId"
     }
 }

@@ -493,6 +493,11 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
         }
 
         @Override
+        public Context getContext() {
+            return mContext;
+        }
+
+        @Override
         public PreferenceScreen getPreferenceScreen() {
             return mPreferenceScreen;
         }
@@ -523,13 +528,13 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
         }
 
         @Override
-        protected void launchResolutionSelector(@NonNull Context context, int displayId) {
+        protected void launchResolutionSelector(int displayId) {
             mResolutionSelectorDisplayId = displayId;
         }
 
         @Override
-        Preference newFooterPreference(Context context) {
-            return new Preference(context);
+        Preference newFooterPreference() {
+            return new Preference(mContext);
         }
 
         @Override

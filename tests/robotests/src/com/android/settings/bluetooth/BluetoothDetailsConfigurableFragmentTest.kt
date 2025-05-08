@@ -26,6 +26,7 @@ import android.platform.test.flag.junit.SetFlagsRule
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.testing.EmptyFragmentActivity
 import androidx.preference.Preference
+import androidx.preference.PreferenceGroup
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
@@ -45,6 +46,7 @@ import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSetti
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingStateModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.ToggleModel
 import com.android.settingslib.widget.CardPreference
+import com.android.settingslib.widget.SegmentedButtonPreference
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
@@ -61,8 +63,8 @@ import org.mockito.Mockito.any
 import org.mockito.Mockito.spy
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
-import org.mockito.kotlin.whenever
 import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
@@ -232,7 +234,44 @@ class BluetoothDetailsConfigurableFragmentTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_BLUETOOTH_SETTINGS_EXPRESSIVE_DESIGN)
-    fun setPreferenceDisplayOrderToMainFragment_highlight_useCardPreference() =
+    fun setPreferenceDisplayOrderToMainFragment_highlight_useCardPreference() = buildFragment {
+        testScope.runTest {
+            whenever(repository.getDeviceSettingsConfig(cachedDevice))
+                .thenReturn(
+                    DeviceSettingConfigModel(
+                        listOf(
+                            DeviceSettingConfigItemModel.AppProvidedItem(456, highlighted = true)
+                        ),
+                        listOf(),
+                        null,
+                    )
+                )
+            val intent = Intent("test_intent")
+            whenever(repository.getDeviceSetting(cachedDevice, 456))
+                .thenReturn(
+                    flowOf(
+                        DeviceSettingModel.ActionSwitchPreference(
+                            cachedDevice = cachedDevice,
+                            id = 456,
+                            title = "title",
+                            summary = "summary",
+                            icon = null,
+                            action = DeviceSettingActionModel.IntentAction(intent),
+                        )
+                    )
+                )
+
+            fragment.requestUpdateLayout(FragmentTypeModel.DeviceDetailsMainFragment)
+            runCurrent()
+
+            assertThat(getDisplayedKeys()).containsExactly("DEVICE_SETTING_456")
+            assertThat(getDisplayedPreferences()[0]).isInstanceOf(CardPreference::class.java)
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_BLUETOOTH_SETTINGS_EXPRESSIVE_DESIGN)
+    fun setPreferenceDisplayOrderToMainFragment_multiToggle_useSegmentedButtonPreference() =
         buildFragment {
             testScope.runTest {
                 whenever(repository.getDeviceSettingsConfig(cachedDevice))
@@ -241,7 +280,7 @@ class BluetoothDetailsConfigurableFragmentTest {
                             listOf(
                                 DeviceSettingConfigItemModel.AppProvidedItem(
                                     456,
-                                    highlighted = true,
+                                    highlighted = false,
                                 )
                             ),
                             listOf(),
@@ -252,13 +291,23 @@ class BluetoothDetailsConfigurableFragmentTest {
                 whenever(repository.getDeviceSetting(cachedDevice, 456))
                     .thenReturn(
                         flowOf(
-                            DeviceSettingModel.ActionSwitchPreference(
+                            DeviceSettingModel.MultiTogglePreference(
                                 cachedDevice = cachedDevice,
                                 id = 456,
                                 title = "title",
-                                summary = "summary",
-                                icon = null,
-                                action = DeviceSettingActionModel.IntentAction(intent),
+                                toggles =
+                                    listOf(
+                                        ToggleModel(
+                                            "label",
+                                            DeviceSettingIcon.BitmapIcon(
+                                                Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
+                                            ),
+                                        )
+                                    ),
+                                isActive = true,
+                                state = DeviceSettingStateModel.MultiTogglePreferenceState(0),
+                                isAllowedChangingState = true,
+                                updateState = {},
                             )
                         )
                     )
@@ -267,7 +316,8 @@ class BluetoothDetailsConfigurableFragmentTest {
                 runCurrent()
 
                 assertThat(getDisplayedKeys()).containsExactly("DEVICE_SETTING_456")
-                assertThat(getDisplayedPreferences()[0]).isInstanceOf(CardPreference::class.java)
+                assertThat((getDisplayedPreferences()[0] as PreferenceGroup).getPreference(0))
+                    .isInstanceOf(SegmentedButtonPreference::class.java)
             }
         }
 
@@ -349,7 +399,8 @@ class BluetoothDetailsConfigurableFragmentTest {
                                 summary = "summary",
                                 icon = null,
                                 action = null,
-                                switchState = DeviceSettingStateModel.ActionSwitchPreferenceState(true),
+                                switchState =
+                                    DeviceSettingStateModel.ActionSwitchPreferenceState(true),
                                 isAllowedChangingState = true,
                                 updateState = { updatedState = it },
                             )
@@ -361,7 +412,8 @@ class BluetoothDetailsConfigurableFragmentTest {
                 getDisplayedPreferences()[0].performClick()
 
                 assertThat(getDisplayedKeys()).containsExactly("DEVICE_SETTING_456")
-                assertThat(updatedState).isEqualTo(DeviceSettingStateModel.ActionSwitchPreferenceState(false))
+                assertThat(updatedState)
+                    .isEqualTo(DeviceSettingStateModel.ActionSwitchPreferenceState(false))
                 verify(featureFactory.metricsFeatureProvider)
                     .action(
                         SettingsEnums.PAGE_UNKNOWN,

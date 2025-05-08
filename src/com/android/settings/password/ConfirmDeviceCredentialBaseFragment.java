@@ -87,6 +87,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
 
     protected static final String FRAGMENT_TAG_REMOTE_LOCKSCREEN_VALIDATION =
             "remote_lockscreen_validation";
+    protected static final String FRAGMENT_TAG_SAVE_AND_FINISH = "save_and_finish_worker";
 
     protected boolean mReturnCredentials = false;
     protected boolean mReturnGatekeeperPassword = false;
@@ -113,6 +114,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     /** Credential saved so the credential can be set for device if remote validation passes */
     @Nullable protected RemoteLockscreenValidationClient mRemoteLockscreenValidationClient;
     protected RemoteLockscreenValidationFragment mRemoteLockscreenValidationFragment;
+    @Nullable protected SaveAndFinishWorker mSaveAndFinishWorker;
 
     private boolean isInternalActivity() {
         return (getActivity() instanceof ConfirmLockPassword.InternalActivity)
@@ -176,6 +178,9 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
                 getFragmentManager().beginTransaction().add(mRemoteLockscreenValidationFragment,
                         FRAGMENT_TAG_REMOTE_LOCKSCREEN_VALIDATION).commit();
             }
+
+            mSaveAndFinishWorker = (SaveAndFinishWorker) getFragmentManager()
+                    .findFragmentByTag(FRAGMENT_TAG_SAVE_AND_FINISH);
         }
 
         // Only take this argument into account if it belongs to the current profile.

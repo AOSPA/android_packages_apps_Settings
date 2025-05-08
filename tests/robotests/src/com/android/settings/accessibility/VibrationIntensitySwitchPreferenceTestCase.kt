@@ -23,12 +23,14 @@ import android.os.Vibrator
 import androidx.core.content.getSystemService
 import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settingslib.datastore.SettingsSystemStore
 import com.android.settingslib.preference.PreferenceBindingFactory
 import com.android.settingslib.preference.createAndBindWidget
 import com.android.settingslib.widget.MainSwitchPreference
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.never
@@ -38,6 +40,7 @@ import org.mockito.kotlin.verify
 
 /** Test case for vibration switch preferences. */
 // LINT.IfChange
+@RunWith(AndroidJUnit4::class)
 abstract class VibrationIntensitySwitchPreferenceTestCase {
     protected abstract val preference: VibrationIntensitySwitchPreference
     protected val mainSwitchPreference = VibrationMainSwitchPreference()

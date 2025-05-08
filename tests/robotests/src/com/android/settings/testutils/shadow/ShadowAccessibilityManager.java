@@ -141,7 +141,8 @@ public class ShadowAccessibilityManager extends org.robolectric.shadows.ShadowAc
         } else {
             for (int type : USER_SHORTCUT_TYPES) {
                 if ((type & shortcutTypes) == type) {
-                    List<String> modifiedTargets = new ArrayList<>(mShortcutTargets.get(type));
+                    List<String> modifiedTargets = mShortcutTargets.containsKey(type)
+                            ? new ArrayList<>(mShortcutTargets.get(type)) : new ArrayList<>();
                     modifiedTargets.removeAll(targets);
                     mShortcutTargets.put(type, List.copyOf(modifiedTargets));
                 }

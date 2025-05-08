@@ -426,6 +426,9 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             if (mRemoteLockscreenValidationFragment != null) {
                 mRemoteLockscreenValidationFragment.setListener(null, /* handler= */ null);
             }
+            if (mSaveAndFinishWorker != null) {
+                mSaveAndFinishWorker.setListener(null);
+            }
         }
 
         @Override
@@ -447,8 +450,12 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                         mLockPatternUtils.getCurrentFailedPasswordAttempts(mEffectiveUserId));
             }
             mCredentialCheckResultTracker.setListener(this);
+
             if (mRemoteLockscreenValidationFragment != null) {
                 mRemoteLockscreenValidationFragment.setListener(this, mHandler);
+            }
+            if (mSaveAndFinishWorker != null) {
+                mSaveAndFinishWorker.setListener(this);
             }
         }
 
@@ -642,14 +649,17 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                     if (mCheckBox.isChecked() && mRemoteLockscreenValidationFragment
                             .getLockscreenCredential() != null) {
                         Log.i(TAG, "Setting device screen lock to the other device's screen lock.");
-                        SaveAndFinishWorker saveAndFinishWorker = new SaveAndFinishWorker();
-                        getFragmentManager().beginTransaction().add(saveAndFinishWorker, null)
-                                .commit();
-                        getFragmentManager().executePendingTransactions();
-                        saveAndFinishWorker
-                                .setListener(this)
-                                .setRequestGatekeeperPasswordHandle(true);
-                        saveAndFinishWorker.start(
+                        if (mSaveAndFinishWorker == null) {
+                            mSaveAndFinishWorker = new SaveAndFinishWorker();
+                            getFragmentManager().beginTransaction().add(mSaveAndFinishWorker,
+                                            FRAGMENT_TAG_SAVE_AND_FINISH)
+                                    .commit();
+                            getFragmentManager().executePendingTransactions();
+                            mSaveAndFinishWorker
+                                    .setListener(this)
+                                    .setRequestGatekeeperPasswordHandle(true);
+                        }
+                        mSaveAndFinishWorker.start(
                                 mLockPatternUtils,
                                 mRemoteLockscreenValidationFragment.getLockscreenCredential(),
                                 /* currentCredential= */ null,

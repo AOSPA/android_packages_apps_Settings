@@ -33,6 +33,7 @@ import static org.mockito.Mockito.when;
 
 import android.Manifest;
 import android.app.AppOpsManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -43,6 +44,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.PowerManager;
 
+import com.android.settings.fuelgauge.RequestIgnoreBatteryOptimizations.RequestStatus;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 
@@ -58,6 +61,7 @@ import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
@@ -66,28 +70,38 @@ public class RequestIgnoreBatteryOptimizationsTest {
     private static final int UID = 12345;
     private static final String PACKAGE_NAME = "com.android.app";
     private static final String UNKNOWN_PACKAGE_NAME = "com.android.unknown";
+    private static final String METRICS_KEY = "RequestIgnoreBatteryOptimizations";
     private static final String PACKAGE_LABEL = "app";
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     private Context mContext;
+    private FakeFeatureFactory mFeatureFactory;
     private RequestIgnoreBatteryOptimizations mActivity;
     private BatteryOptimizeUtils mBatteryOptimizeUtils;
     private PowerAllowlistBackend mPowerAllowlistBackend;
+    private ActivityController<RequestIgnoreBatteryOptimizations> mActivityController;
 
     @Mock private PowerManager mMockPowerManager;
     @Mock private PackageManager mMockPackageManager;
     @Mock private ApplicationInfo mMockApplicationInfo;
     @Mock private BatteryUtils mMockBatteryUtils;
+    @Mock private DialogInterface mMockDialog;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        mActivity = spy(Robolectric.setupActivity(RequestIgnoreBatteryOptimizations.class));
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
+        mActivityController = Robolectric.buildActivity(RequestIgnoreBatteryOptimizations.class);
+        mActivity = spy(mActivityController.get());
         mBatteryOptimizeUtils = spy(new BatteryOptimizeUtils(mContext, UID, PACKAGE_NAME));
         mPowerAllowlistBackend = spy(PowerAllowlistBackend.getInstance(mContext));
         mBatteryOptimizeUtils.mPowerAllowListBackend = mPowerAllowlistBackend;
         mBatteryOptimizeUtils.mBatteryUtils = mMockBatteryUtils;
+        mActivity.mApplicationInfo = mMockApplicationInfo;
+        mActivity.mMetricsFeatureProvider = mFeatureFactory.metricsFeatureProvider;
+        mMockApplicationInfo.uid = UID;
+        doNothing().when(mMockDialog).dismiss();
         RequestIgnoreBatteryOptimizations.sTestBatteryOptimizeUtils = mBatteryOptimizeUtils;
 
         when(mActivity.getApplicationContext()).thenReturn(mContext);
@@ -126,6 +140,7 @@ public class RequestIgnoreBatteryOptimizationsTest {
         mActivity.onCreate(new Bundle());
 
         verify(mActivity, never()).finish();
+        assertDialogMetrics(SettingsEnums.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZE_SHOW, UID);
     }
 
     @Test
@@ -135,6 +150,9 @@ public class RequestIgnoreBatteryOptimizationsTest {
         mActivity.onCreate(new Bundle());
 
         verify(mActivity).finish();
+        assertDialogMetrics(
+                SettingsEnums.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZE_FAIL_SHOW,
+                RequestStatus.PACKAGE_NOT_EXIST.value);
     }
 
     @Test
@@ -144,6 +162,9 @@ public class RequestIgnoreBatteryOptimizationsTest {
         mActivity.onCreate(new Bundle());
 
         verify(mActivity).finish();
+        assertDialogMetrics(
+                SettingsEnums.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZE_FAIL_SHOW,
+                RequestStatus.PACKAGE_NOT_EXIST.value);
     }
 
     @Test
@@ -154,6 +175,9 @@ public class RequestIgnoreBatteryOptimizationsTest {
         mActivity.onCreate(new Bundle());
 
         verify(mActivity).finish();
+        assertDialogMetrics(
+                SettingsEnums.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZE_FAIL_SHOW,
+                RequestStatus.ALREADY_PROMPTED.value);
     }
 
     @Test
@@ -167,6 +191,9 @@ public class RequestIgnoreBatteryOptimizationsTest {
         mActivity.onCreate(new Bundle());
 
         verify(mActivity).finish();
+        assertDialogMetrics(
+                SettingsEnums.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZE_FAIL_SHOW,
+                RequestStatus.NO_PERMISSION.value);
     }
 
     @Test
@@ -176,20 +203,26 @@ public class RequestIgnoreBatteryOptimizationsTest {
         mActivity.onCreate(new Bundle());
 
         verify(mActivity).finish();
+        assertDialogMetrics(
+                SettingsEnums.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZE_FAIL_SHOW,
+                RequestStatus.PACKAGE_NOT_EXIST.value);
     }
 
     @Test
     public void onClick_clickNegativeButton_doNothing() {
-        mActivity.onClick(null, DialogInterface.BUTTON_NEGATIVE);
+        mActivity.onClick(mMockDialog, DialogInterface.BUTTON_NEGATIVE);
 
         verifyNoInteractions(mBatteryOptimizeUtils);
+        assertDialogMetrics(
+                SettingsEnums.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZE_DENY, UID);
+        verify(mMockDialog).dismiss();
     }
 
     @Test
     public void onClick_clickPositiveButtonWithUnrestrictedMode_addAllowlist() {
         when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(MODE_UNRESTRICTED);
 
-        mActivity.onClick(null, DialogInterface.BUTTON_POSITIVE);
+        mActivity.onClick(mMockDialog, DialogInterface.BUTTON_POSITIVE);
 
         verify(mBatteryOptimizeUtils)
                 .setAppUsageState(
@@ -198,6 +231,9 @@ public class RequestIgnoreBatteryOptimizationsTest {
                         /* forceMode= */ true);
         verify(mPowerAllowlistBackend).addApp(PACKAGE_NAME, UID);
         verify(mMockBatteryUtils).setForceAppStandby(UID, PACKAGE_NAME, AppOpsManager.MODE_ALLOWED);
+        assertDialogMetrics(
+                SettingsEnums.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZE_ALLOW, UID);
+        verify(mMockDialog).dismiss();
     }
 
     @Test
@@ -205,7 +241,7 @@ public class RequestIgnoreBatteryOptimizationsTest {
         when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(MODE_RESTRICTED);
         doNothing().when(mMockBatteryUtils).setForceAppStandby(anyInt(), anyString(), anyInt());
 
-        mActivity.onClick(null, DialogInterface.BUTTON_POSITIVE);
+        mActivity.onClick(mMockDialog, DialogInterface.BUTTON_POSITIVE);
 
         verify(mBatteryOptimizeUtils)
                 .setAppUsageState(
@@ -214,11 +250,24 @@ public class RequestIgnoreBatteryOptimizationsTest {
                         /* forceMode= */ true);
         verify(mPowerAllowlistBackend).addApp(PACKAGE_NAME, UID);
         verify(mMockBatteryUtils).setForceAppStandby(UID, PACKAGE_NAME, AppOpsManager.MODE_ALLOWED);
+        assertDialogMetrics(
+                SettingsEnums.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZE_ALLOW, UID);
+        verify(mMockDialog).dismiss();
     }
 
     private Intent createIntent(String packageName) {
         final Intent intent = new Intent();
         intent.setData(new Uri.Builder().scheme("package").opaquePart(packageName).build());
         return intent;
+    }
+
+    private void assertDialogMetrics(final int action, final int value) {
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        SettingsEnums.DIALOG_REQUEST_IGNORE_BATTERY_OPTIMIZE,
+                        action,
+                        SettingsEnums.DIALOG_REQUEST_IGNORE_BATTERY_OPTIMIZE,
+                        METRICS_KEY,
+                        value);
     }
 }

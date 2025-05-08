@@ -72,16 +72,17 @@ class SupervisionPromoFooterPreference(
             preference.title = preferenceData?.title ?: preference.title
             preference.summary = preferenceData?.summary ?: preference.summary
             preference.icon = leadingIcon ?: preference.icon
-            val trailingIcon: Int? = preferenceData?.trailingIcon
-            if (trailingIcon != null) {
-                (preference as CardPreference).setAdditionalAction(
-                    trailingIcon,
-                    // TODO(b/411279121): add content description once we have the finalized string.
-                    contentDescription = "",
-                ) {
-                    @SuppressLint("RestrictedApi")
-                    it.performClick()
+            val trailingIcon =
+                preferenceData?.trailingIcon?.let {
+                    val resourcePackage = preferenceDataProvider.packageName
+                    Icon.createWithResource(resourcePackage, it).loadDrawable(context)
                 }
+            (preference as CardPreference).setAdditionalAction(
+                trailingIcon,
+                // TODO(b/411279121): add content description once we have the finalized string.
+                contentDescription = "",
+            ) {
+                @SuppressLint("RestrictedApi") it.performClick()
             }
         }
 

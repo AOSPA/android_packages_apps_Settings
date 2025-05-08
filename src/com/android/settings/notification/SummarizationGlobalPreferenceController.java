@@ -44,12 +44,12 @@ public class SummarizationGlobalPreferenceController extends TogglePreferenceCon
 
     @Override
     public boolean isChecked() {
-        return mBackend.isNotificationSummarizationEnabled(mContext);
+        return mBackend.isNotificationSummarizationEnabled(mContext.getUserId());
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        mBackend.setNotificationSummarizationEnabled(isChecked);
+        mBackend.setNotificationSummarizationEnabled(mContext.getUserId(), isChecked);
         return true;
     }
 

@@ -91,6 +91,7 @@ public class SystemLocalePickerFragment extends DashboardFragment implements
     private RecyclerView mRecyclerView;
     private Activity mActivity;
     private boolean mExpandSearch;
+    private boolean mIsSearchChanged;
     private CharSequence mPreviousSearch = null;
 
     @Override
@@ -202,6 +203,7 @@ public class SystemLocalePickerFragment extends DashboardFragment implements
                 results.values = mOriginalLocaleInfos;
                 results.count = mOriginalLocaleInfos.size();
             } else {
+                mIsSearchChanged = true;
                 // TODO: decide if we should use the string's locale
                 Locale locale = Locale.getDefault();
                 String prefixString = LocaleHelper.normalizeForSearch(prefix.toString(), locale);
@@ -234,6 +236,11 @@ public class SystemLocalePickerFragment extends DashboardFragment implements
             if (mSystemLocaleAllListPreferenceController == null
                     || mSuggestedListPreferenceController == null) {
                 Log.d(TAG, "publishResults(), can not get preference.");
+                return;
+            }
+
+            if (!mIsSearchChanged) {
+                Log.d(TAG, "Do not update UI if search is not changed.");
                 return;
             }
 

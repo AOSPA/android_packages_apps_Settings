@@ -42,6 +42,7 @@ import android.widget.SeekBar;
 
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
@@ -124,10 +125,18 @@ public class AudioSharingDeviceVolumeSliderPreferenceTest {
 
     @Test
     public void initialize_setupMaxMin() {
+        mPreference = spy(mPreference);
+        mPreference.initialize();
+        shadowOf(Looper.getMainLooper()).idle();
+
         assertThat(mPreference.getMax())
                 .isEqualTo(AudioSharingDeviceVolumeSliderPreference.MAX_VOLUME);
         assertThat(mPreference.getMin())
                 .isEqualTo(AudioSharingDeviceVolumeSliderPreference.MIN_VOLUME);
+        assertThat(mPreference.getTitle().toString()).isEqualTo(TEST_DEVICE_NAME);
+        verify(mPreference).setSliderContentDescription(
+                mContext.getString(R.string.audio_sharing_device_volume_description,
+                        TEST_DEVICE_NAME));
     }
 
     @Test
@@ -252,10 +261,13 @@ public class AudioSharingDeviceVolumeSliderPreferenceTest {
 
     @Test
     public void onPreferenceAttributesChanged_nameChanged_updatePreference() {
+        mPreference = spy(mPreference);
         when(mCachedDevice.getName()).thenReturn("new");
         mPreference.onPreferenceAttributesChanged();
         shadowOf(Looper.getMainLooper()).idle();
 
         assertThat(mPreference.getTitle().toString()).isEqualTo("new");
+        verify(mPreference).setSliderContentDescription(
+                mContext.getString(R.string.audio_sharing_device_volume_description, "new"));
     }
 }

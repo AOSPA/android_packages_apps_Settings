@@ -238,15 +238,7 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
                 boolean showNotTranslatedDialog = data.getBooleanExtra(
                         LocaleDialogFragment.ARG_SHOW_DIALOG_FOR_NOT_TRANSLATED, true);
                 if (showNotTranslatedDialog && !localeInfo.isTranslated()) {
-                    Bundle args = new Bundle();
-                    args.putInt(LocaleDialogFragment.ARG_DIALOG_TYPE,
-                            LocaleDialogFragment.DIALOG_NOT_AVAILABLE_LOCALE);
-                    args.putSerializable(LocaleDialogFragment.ARG_TARGET_LOCALE, localeInfo);
-                    LocaleDialogFragment localeDialogFragment = LocaleDialogFragment.newInstance();
-                    localeDialogFragment.setArguments(args);
-                    localeDialogFragment.show(mFragmentManager, TAG_DIALOG_NOT_AVAILABLE);
-                    mMetricsFeatureProvider.action(getContext(),
-                            SettingsEnums.ACTION_NOT_SUPPORTED_SYSTEM_LANGUAGE);
+                    showUnavailableDialog(localeInfo);
                 }
             } else {
                 mAdapter.notifyListChanged(localeInfo);
@@ -402,13 +394,16 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         if (mAdapter.isFirstLocaleChecked()) {
+            LocaleStore.LocaleInfo nextUncheckedLocale = mAdapter.getFeedItemList().stream().filter(
+                    i -> !i.getChecked()).findFirst().orElse(null);
             title = getContext().getString(R.string.dlg_remove_system_locales_title,
-                    mAdapter.getFeedItemList().get(1).getFullNameNative());
+                    nextUncheckedLocale.getFullNameNative());
             builder.setMessage(getContext().getString(R.string.dlg_remove_locales_message,
-                            mAdapter.getFeedItemList().get(0).getFullNameNative()));
+                    mAdapter.getFeedItemList().get(0).getFullNameNative()));
             buttonResId = R.string.button_label_confirmation_of_system_locale_change;
         }
 
+        final Locale defaultBeforeRemoval = Locale.getDefault();
         builder.setTitle(title)
                 .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
@@ -434,11 +429,14 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
                                 // to remove.
                                 mRemoveMode = false;
                                 mShowingRemoveDialog = false;
-                                Locale defaultBeforeRemoval = Locale.getDefault();
                                 mAdapter.removeChecked();
-                                showConfirmDialog(mAdapter.getFeedItemList().get(0),
-                                        defaultBeforeRemoval);
+                                LocaleStore.LocaleInfo defaultAfterRemoval =
+                                        mAdapter.getFeedItemList().get(0);
+                                showConfirmDialog(defaultAfterRemoval, defaultBeforeRemoval);
                                 setRemoveMode(false);
+                                if (!defaultAfterRemoval.isTranslated()) {
+                                    showUnavailableDialog(defaultAfterRemoval);
+                                }
                             }
                         })
                 .setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -519,7 +517,7 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
             if (Locale.getDefault().equals(localeInfo.getLocale())) {
                 mAdapter.doTheUpdate();
             } else {
-                displayDialogFragment(localeInfo, true);
+                displaySystemDialogFragment(localeInfo, true);
             }
         } else {
             if (!localeInfo.isTranslated()) {
@@ -551,7 +549,7 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
         }
         if (oldLocale != null && !newLocale.getLocale().equals(
                 oldLocale.getLocale())) {
-            displayDialogFragment(newLocale, false);
+            displaySystemDialogFragment(newLocale, false);
         }
     }
 
@@ -562,11 +560,11 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
         LocaleStore.LocaleInfo currentDefault = mAdapter.getFeedItemList().stream().filter(
                 i -> i.isTranslated()).findFirst().orElse(null);
         if (currentDefault != null && !preDefault.equals(currentDefault.getLocale())) {
-            displayDialogFragment(currentDefault, false);
+            displaySystemDialogFragment(currentDefault, false);
         }
     }
 
-    private void displayDialogFragment(LocaleStore.LocaleInfo localeInfo,
+    private void displaySystemDialogFragment(LocaleStore.LocaleInfo localeInfo,
             boolean showDialogForNotTranslated) {
         final LocaleDialogFragment localeDialogFragment = LocaleDialogFragment.newInstance();
         Bundle args = new Bundle();
@@ -576,6 +574,18 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
         args.putSerializable(LocaleDialogFragment.ARG_TARGET_LOCALE, localeInfo);
         localeDialogFragment.setArguments(args);
         localeDialogFragment.show(mFragmentManager, TAG_DIALOG_CONFIRM_SYSTEM_DEFAULT);
+    }
+
+    private void showUnavailableDialog(LocaleStore.LocaleInfo localeInfo) {
+            Bundle args = new Bundle();
+            args.putInt(LocaleDialogFragment.ARG_DIALOG_TYPE,
+                    LocaleDialogFragment.DIALOG_NOT_AVAILABLE_LOCALE);
+            args.putSerializable(LocaleDialogFragment.ARG_TARGET_LOCALE, localeInfo);
+            LocaleDialogFragment localeDialogFragment = LocaleDialogFragment.newInstance();
+            localeDialogFragment.setArguments(args);
+            localeDialogFragment.show(mFragmentManager, TAG_DIALOG_NOT_AVAILABLE);
+            mMetricsFeatureProvider.action(getContext(),
+                    SettingsEnums.ACTION_NOT_SUPPORTED_SYSTEM_LANGUAGE);
     }
 
     // Hide the "Remove" menu if there is only one locale in the list, show it otherwise

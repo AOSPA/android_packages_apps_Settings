@@ -21,7 +21,7 @@ import static android.service.notification.Adjustment.KEY_SUMMARIZATION;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -82,19 +82,21 @@ public class SummarizationGlobalPreferenceControllerTest {
 
     @Test
     public void isChecked() throws Exception {
-        when(mInm.getAllowedAssistantAdjustments(any())).thenReturn(List.of(KEY_SUMMARIZATION));
+        when(mInm.getAllowedAssistantAdjustmentsForUser(anyInt())).thenReturn(
+                List.of(KEY_SUMMARIZATION));
         assertThat(mController.isChecked()).isTrue();
 
-        when(mInm.getAllowedAssistantAdjustments(any())).thenReturn(List.of(KEY_IMPORTANCE));
+        when(mInm.getAllowedAssistantAdjustmentsForUser(anyInt())).thenReturn(
+                List.of(KEY_IMPORTANCE));
         assertThat(mController.isChecked()).isFalse();
     }
 
     @Test
     public void setChecked() throws Exception {
         mController.setChecked(false);
-        verify(mInm).disallowAssistantAdjustment(KEY_SUMMARIZATION);
+        verify(mInm).disallowAssistantAdjustment(mContext.getUserId(), KEY_SUMMARIZATION);
 
         mController.setChecked(true);
-        verify(mInm).allowAssistantAdjustment(KEY_SUMMARIZATION);
+        verify(mInm).allowAssistantAdjustment(mContext.getUserId(), KEY_SUMMARIZATION);
     }
 }

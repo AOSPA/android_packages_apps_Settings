@@ -42,9 +42,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.hardware.biometrics.BiometricManager;
-import android.hardware.biometrics.Flags;
 import android.os.UserManager;
-import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.view.LayoutInflater;
@@ -371,7 +369,6 @@ public class MainClearTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
     public void testOnActivityResultInternal_keyguardRequestTriggeringBiometricPrompt() {
         when(mContext.getResources()).thenReturn(mResources);
         when(mMockActivity.getSystemService(BiometricManager.class)).thenReturn(mBiometricManager);
@@ -395,7 +392,6 @@ public class MainClearTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
     public void testOnActivityResultInternal_keyguardRequestNotTriggeringBiometricPrompt_lockoutError() {
         final ArgumentCaptor<IdentityCheckBiometricErrorDialog> argumentCaptor =
                 ArgumentCaptor.forClass(IdentityCheckBiometricErrorDialog.class);
