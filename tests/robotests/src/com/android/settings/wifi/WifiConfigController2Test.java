@@ -42,6 +42,7 @@ import android.net.wifi.WifiEnterpriseConfig.Eap;
 import android.net.wifi.WifiEnterpriseConfig.Phase2;
 import android.net.wifi.WifiManager;
 import android.os.Looper;
+import android.os.UserManager;
 import android.platform.test.annotations.EnableFlags;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -99,6 +100,8 @@ public class WifiConfigController2Test {
     @Mock
     private WifiManager mWifiManager;
     @Mock
+    private UserManager mUserManager;
+    @Mock
     Spinner mEapMethodSimSpinner;
     private View mView;
     private Spinner mHiddenSettingsSpinner;
@@ -142,6 +145,7 @@ public class WifiConfigController2Test {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(eq(WifiManager.class))).thenReturn(mWifiManager);
+        when(mContext.getSystemService(eq(UserManager.class))).thenReturn(mUserManager);
         when(mWifiManager.isConnectedMacRandomizationSupported()).thenReturn(true);
         when(mConfigUiBase.getContext()).thenReturn(mContext);
         when(mWifiEntry.getSecurity()).thenReturn(WifiEntry.SECURITY_PSK);
@@ -249,6 +253,21 @@ public class WifiConfigController2Test {
         shadowOf(Looper.getMainLooper()).idle();
 
         assertThat(editConfigurationSwitch.isEnabled()).isTrue();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    public void checkSharingFieldsVisibility() {
+        when(mUserManager.getUserCount()).thenReturn(1);
+        createController(null, WifiConfigUiBase2.MODE_CONNECT, false);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        final View sharingFields = mView.findViewById(R.id.sharing_toggle_fields);
+        final View editConfigFields =
+                mView.findViewById(R.id.edit_wifi_network_configuration_fields);
+
+        assertThat(sharingFields.getVisibility()).isEqualTo(View.GONE);
+        assertThat(editConfigFields.getVisibility()).isEqualTo(View.GONE);
     }
 
     @Test
@@ -633,13 +652,17 @@ public class WifiConfigController2Test {
     }
 
     @Test
-    public void getSharingSettingsPosition_whenAdvancedToggled_shouldBeFirst() {
-        final LinearLayout advancedFieldsLayout = mView.findViewById(R.id.wifi_advanced_fields);
-        final LinearLayout shareSettingLayout = mView.findViewById(R.id.sharing_toggle_fields);
+    public void loginScreenMode() {
+        createController(mWifiEntry, WifiConfigUiBase2.MODE_LOGIN_SCREEN, false);
+        assertThat(mView.findViewById(R.id.shared_network_login_screen_warning).getVisibility())
+                .isEqualTo(View.VISIBLE);
+        assertThat(mView.findViewById(R.id.sharing_toggle_fields).getVisibility())
+                .isEqualTo(View.GONE);
+        assertThat(mView.findViewById(R.id.edit_wifi_network_configuration_fields).getVisibility())
+                .isEqualTo(View.GONE);
 
-        final LinearLayout firstChild = (LinearLayout) advancedFieldsLayout.getChildAt(0);
-
-        assertThat(firstChild).isEqualTo(shareSettingLayout);
+        WifiConfiguration wifiConfiguration = mController.getConfig();
+        assertThat(wifiConfiguration.shared).isTrue();
     }
 
     @Test

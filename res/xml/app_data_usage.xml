@@ -32,7 +32,7 @@
         android:key="app_data_usage_summary"
         settings:controller="com.android.settings.datausage.AppDataUsageSummaryController"/>
 
-    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
+    <com.android.settingslib.widget.UntitledPreferenceCategory
         android:key="app_data_usage_settings_category"
         settings:isPreferenceVisible="@bool/config_show_sim_info">
 
@@ -55,7 +55,7 @@
             settings:useAdditionalSummary="true"
             settings:restrictedSwitchSummary="@string/disabled_by_admin" />
 
-    </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+    </com.android.settingslib.widget.UntitledPreferenceCategory>
 
     <PreferenceCategory
         android:key="app_list"

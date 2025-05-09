@@ -413,7 +413,7 @@ public class Settings extends SettingsActivity {
     @FlaggedApi(Flags.FLAG_MODES_UI)
     public static class ModesSettingsActivity extends SettingsActivity { /* empty */ }
     @FlaggedApi(Flags.FLAG_MODES_UI)
-    public static class ModeDisplaySettingsActivity extends SettingsActivity {
+    public static class DndModeDisplaySettingsActivity extends SettingsActivity {
         @Override
         protected void onCreate(Bundle savedState) {
             super.onCreate(savedState);

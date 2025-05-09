@@ -101,13 +101,13 @@
             settings:controller="com.android.settings.language.UserDictionaryPreferenceController" />
     </PreferenceCategory>
 
-    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
+    <com.android.settingslib.widget.UntitledPreferenceCategory
         android:key="pointer_category">
         <com.android.settings.PointerSpeedPreference
             android:key="pointer_speed"
             android:title="@string/pointer_speed"
             android:dialogTitle="@string/pointer_speed" />
-    </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+    </com.android.settingslib.widget.UntitledPreferenceCategory>
 
     <SwitchPreferenceCompat
         android:key="vibrate_input_devices"

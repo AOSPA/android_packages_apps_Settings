@@ -24,6 +24,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
+import com.android.settingslib.widget.UntitledPreferenceCategoryMetadata
 
 /**
  * Supervision settings landing page (Settings > Supervision).
@@ -70,7 +71,7 @@ class SupervisionDashboardScreen : PreferenceScreenCreator, PreferenceLifecycleP
         preferenceHierarchy(context, this) {
             val supervisionClient = getSupervisionClient(context)
             +SupervisionMainSwitchPreference(context, supervisionClient) order -200
-            +TitlelessPreferenceGroup(SUPERVISION_DYNAMIC_GROUP_1) order -100 += {
+            +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_1) order -100 += {
                 +SupervisionWebContentFiltersScreen.KEY order 100
             }
             +SupervisionPinManagementScreen.KEY order 100

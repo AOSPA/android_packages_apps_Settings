@@ -49,12 +49,7 @@
     <!-- Channels/Channel groups added here -->
     <PreferenceCategory
         android:key="channels"
-        android:layout="@layout/empty_view" />
-
-    <Preference
-        android:key="more"
-        android:title="@string/no_recent_channels"
-        android:icon="@drawable/ic_expand"/>
+        android:title="@string/notification_channels" />
 
     <PreferenceCategory
         android:key="pre_channels_fields"

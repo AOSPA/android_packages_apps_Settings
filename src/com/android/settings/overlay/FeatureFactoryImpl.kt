@@ -157,7 +157,9 @@ open class FeatureFactoryImpl : FeatureFactory() {
         BiometricsFeatureProviderImpl()
     }
 
-    override val faceFeatureProvider: FaceFeatureProvider by lazy { FaceFeatureProviderImpl() }
+    override val faceFeatureProvider: FaceFeatureProvider by lazy {
+        FaceFeatureProviderImpl(appContext)
+    }
 
     override val fingerprintFeatureProvider: FingerprintFeatureProvider by lazy {
         FingerprintFeatureProviderImpl()

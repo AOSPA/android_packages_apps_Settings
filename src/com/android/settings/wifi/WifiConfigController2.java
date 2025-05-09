@@ -33,6 +33,7 @@ import android.net.wifi.WifiEnterpriseConfig;
 import android.net.wifi.WifiEnterpriseConfig.Eap;
 import android.net.wifi.WifiEnterpriseConfig.Phase2;
 import android.net.wifi.WifiManager;
+import android.os.UserManager;
 import android.security.keystore.KeyProperties;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -203,6 +204,7 @@ public class WifiConfigController2 implements TextWatcher,
     private TextView mDns1View;
     private TextView mDns2View;
 
+    private LinearLayout mSharedNetworkLoginScreenWarning;
     private Switch mSharedSwitch;
     private Switch mEditConfigurationSwitch;
     private Spinner mProxySettingsSpinner;
@@ -279,6 +281,8 @@ public class WifiConfigController2 implements TextWatcher,
                 wifiEntry.getSecurity();
         mIsTrustOnFirstUseSupported = mWifiManager.isTrustOnFirstUseSupported();
 
+        UserManager mUserManager = mContext.getSystemService(UserManager.class);
+
         final Resources res = mContext.getResources();
 
         mLevels = res.getStringArray(R.array.wifi_signal);
@@ -346,17 +350,22 @@ public class WifiConfigController2 implements TextWatcher,
         mSharedSwitch = (Switch) mView.findViewById(R.id.share_wifi_network);
         mEditConfigurationSwitch =
             (Switch) mView.findViewById(R.id.edit_wifi_network_configuration);
+        mSharedNetworkLoginScreenWarning =
+            (LinearLayout) mView.findViewById(R.id.shared_network_login_screen_warning);
+
+        if (com.android.settings.connectivity.Flags.wifiMultiuser()) {
+            int userCount = mUserManager.getUserCount();
+            mSharedSwitch.setOnCheckedChangeListener(this);
+            mView.findViewById(R.id.sharing_toggle_fields)
+                    .setVisibility(userCount > 1 ? View.VISIBLE : View.GONE);
+            mEditConfigurationSwitch.setEnabled(false);
+            mView.findViewById(R.id.edit_wifi_network_configuration_fields)
+                    .setVisibility(userCount > 1 ? View.VISIBLE : View.GONE);
+        }
 
         if (mWifiEntry == null) { // new network
             configureSecuritySpinner();
             mConfigUi.setSubmitButton(res.getString(R.string.wifi_save));
-            if (com.android.settings.connectivity.Flags.wifiMultiuser()) {
-                mSharedSwitch.setOnCheckedChangeListener(this);
-                mView.findViewById(R.id.sharing_toggle_fields).setVisibility(View.VISIBLE);
-                mEditConfigurationSwitch.setEnabled(false);
-                mView.findViewById(R.id.edit_wifi_network_configuration_fields)
-                        .setVisibility(View.VISIBLE);
-            }
         } else {
             mConfigUi.setTitle(mWifiEntry.getTitle());
 
@@ -435,6 +444,12 @@ public class WifiConfigController2 implements TextWatcher,
                 mConfigUi.setSubmitButton(res.getString(R.string.wifi_save));
             } else if (mMode == WifiConfigUiBase2.MODE_CONNECT) {
                 mConfigUi.setSubmitButton(res.getString(R.string.wifi_connect));
+            } else if (mMode == WifiConfigUiBase2.MODE_LOGIN_SCREEN) {
+                mConfigUi.setSubmitButton(res.getString(R.string.wifi_connect));
+                mSharedNetworkLoginScreenWarning.setVisibility(View.VISIBLE);
+                mView.findViewById(R.id.sharing_toggle_fields).setVisibility(View.GONE);
+                mView.findViewById(R.id.edit_wifi_network_configuration_fields)
+                        .setVisibility(View.GONE);
             } else {
                 final String signalLevel = getSignalString();
 
@@ -619,6 +634,11 @@ public class WifiConfigController2 implements TextWatcher,
         } else {
             config = new WifiConfiguration();
             config.SSID = "\"" + mWifiEntry.getTitle() + "\"";
+        }
+
+        if (mMode == WifiConfigUiBase2.MODE_LOGIN_SCREEN) {
+            config.shared = true;
+            // TODO: set allowEditConfig once the API is ready.
         }
 
         if (!com.android.settings.connectivity.Flags.wifiMultiuser()) {

@@ -550,16 +550,6 @@ public class WifiConfigControllerTest {
     }
 
     @Test
-    public void getSharingSettingsPosition_whenAdvancedToggled_shouldBeFirst() {
-        final LinearLayout advancedFieldsLayout = mView.findViewById(R.id.wifi_advanced_fields);
-        final LinearLayout shareSettingLayout = mView.findViewById(R.id.sharing_toggle_fields);
-
-        final LinearLayout firstChild = (LinearLayout) advancedFieldsLayout.getChildAt(0);
-
-        assertThat(firstChild).isEqualTo(shareSettingLayout);
-    }
-
-    @Test
     public void getAdvancedOptionContentDescription_whenViewInitialed_shouldBeCorrect() {
         final LinearLayout advLayout = mView.findViewById(R.id.advanced_options_layout);
 

@@ -312,8 +312,10 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                     .getInteger(R.integer.suw_max_faces_enrollable);
             if (!faceProperties.isEmpty()) {
                 final FaceSensorPropertiesInternal props = faceProperties.get(0);
-                final int maxEnrolls =
-                        isSetupWizard ? maxFacesEnrollableIfSUW : props.maxEnrollmentsPerUser;
+                final int maxEnrolls = isSetupWizard
+                                ? maxFacesEnrollableIfSUW
+                                : FeatureFactory.getFeatureFactory().getFaceFeatureProvider()
+                                        .getMaxEnrollableCount(getApplicationContext());
                 final boolean isFaceStrong =
                         props.sensorStrength == SensorProperties.STRENGTH_STRONG;
                 mIsFaceEnrollable =
@@ -529,9 +531,10 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     private void handleOnActivityResultWhileEnrolling(
             int requestCode, int resultCode, Intent data) {
 
-        Log.d(TAG, "handleOnActivityResultWhileEnrolling, request = " + requestCode + ""
+        Log.d(TAG, "handleOnActivityResultWhileEnrolling, request = " + requestCode
                 + ", resultCode = " + resultCode + ", launchFaceEnrollFirst="
-                + mLaunchFaceEnrollFirst);
+                + mLaunchFaceEnrollFirst + ", mIsFingerprintEnrollable="
+                + mIsFingerprintEnrollable + ", mIsFaceEnrollable=" + mIsFaceEnrollable);
         updateOnboardingEventList(data);
         switch (requestCode) {
             case REQUEST_HANDOFF_PARENT:
@@ -563,10 +566,12 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                 break;
             case REQUEST_SINGLE_ENROLL_FINGERPRINT:
                 mIsSingleEnrolling = false;
-                if (resultCode == BiometricEnrollBase.RESULT_FINISHED) {
+                if (resultCode == BiometricEnrollBase.RESULT_FINISHED
+                        || resultCode == Activity.RESULT_CANCELED) {
                     // FingerprintEnrollIntroduction's visibility is determined by
                     // mIsFingerprintEnrollable. Keep this value up-to-date after a successful
-                    // enrollment.
+                    // enrollment. Also update it when result code is cancel for the case that user
+                    // triggers back key in confirmation page.
                     updateFingerprintEnrollable(WizardManagerHelper.isAnySetupWizard(getIntent()));
                 }
                 if ((resultCode == BiometricEnrollBase.RESULT_SKIP
@@ -589,9 +594,12 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                 break;
             case REQUEST_SINGLE_ENROLL_FACE:
                 mIsSingleEnrolling = false;
-                if (resultCode == BiometricEnrollBase.RESULT_FINISHED) {
+                if (resultCode == BiometricEnrollBase.RESULT_FINISHED
+                        || resultCode == Activity.RESULT_CANCELED) {
                     // FaceEnrollIntroduction's visibility is determined by mIsFaceEnrollable.
-                    // Keep this value up-to-date after a successful enrollment.
+                    // Keep this value up-to-date after a successful enrollment. Also update it when
+                    // result code is cancel for the case that user triggers back key in
+                    // confirmation page.
                     updateFaceEnrollable(WizardManagerHelper.isAnySetupWizard(getIntent()));
                 }
                 if ((resultCode == BiometricEnrollBase.RESULT_SKIP

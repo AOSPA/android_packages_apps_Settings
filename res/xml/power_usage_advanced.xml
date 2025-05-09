@@ -21,7 +21,7 @@
     android:title="@string/advanced_battery_title"
     settings:keywords="@string/keywords_battery_usage">
 
-    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
+    <com.android.settingslib.widget.UntitledPreferenceCategory
         android:key="battery_tips_category">
 
         <com.android.settingslib.widget.BannerMessagePreference
@@ -30,7 +30,7 @@
                 "com.android.settings.fuelgauge.batteryusage.BatteryTipsController"
             settings:isPreferenceVisible="false" />
 
-    </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+    </com.android.settingslib.widget.UntitledPreferenceCategory>
 
     <com.android.settings.fuelgauge.batteryusage.BatteryHistoryPreference
         android:key="battery_chart"

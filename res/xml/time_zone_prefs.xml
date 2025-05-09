@@ -19,7 +19,7 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/date_time_set_timezone">
 
-    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
+    <com.android.settingslib.widget.UntitledPreferenceCategory
         android:key="time_zone_region_preference_category">
         <com.android.settingslib.RestrictedPreference
             android:key="region"
@@ -32,13 +32,13 @@
         <com.android.settingslib.widget.FooterPreference
             android:key="timezone_footer"
             settings:controller="com.android.settings.datetime.timezone.TimeZoneInfoPreferenceController" />
-    </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+    </com.android.settingslib.widget.UntitledPreferenceCategory>
 
-    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
+    <com.android.settingslib.widget.UntitledPreferenceCategory
         android:key="time_zone_fixed_offset_preference_category">
         <com.android.settingslib.RestrictedPreference
             android:key="fixed_offset"
             android:title="@string/date_time_select_fixed_offset_time_zones"
             android:summary="@string/summary_placeholder" />
-    </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+    </com.android.settingslib.widget.UntitledPreferenceCategory>
 </PreferenceScreen>

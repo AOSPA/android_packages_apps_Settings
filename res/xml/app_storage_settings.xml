@@ -64,7 +64,7 @@
 
     </PreferenceCategory>
 
-    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
+    <com.android.settingslib.widget.UntitledPreferenceCategory
         android:key="uri_category"
         settings:allowDividerAbove="false"
         settings:allowDividerBelow="false">
@@ -72,6 +72,6 @@
             android:key="clear_uri_button"
             android:layout="@layout/single_button_panel"
             android:selectable="false" />
-    </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+    </com.android.settingslib.widget.UntitledPreferenceCategory>
 
 </PreferenceScreen>

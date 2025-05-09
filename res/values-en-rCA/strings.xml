@@ -2114,6 +2114,9 @@
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"Use mouse keys"</string>
     <string name="accessibility_mouse_keys_shortcut_title" msgid="7621635104533584115">"Mouse keys shortcut"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Use your keyboard to control the pointer"</string>
+    <string name="mouse_keys_max_speed_title" msgid="1788751803245422659">"Maximum speed"</string>
+    <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"Decrease"</string>
+    <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"Increase"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Reverse scrolling"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Scroll up to move the page down"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"Scrolling"</string>
@@ -2776,8 +2779,6 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Adjust power use"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Included packages"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Apps are running normally"</string>
-    <string name="battery_tip_replacement_title" msgid="3932335880485957919">"Battery replacement recommended"</string>
-    <string name="battery_tip_replacement_summary" msgid="7892640031317153349">"Battery capacity and charging performance are reduced, and battery replacement is recommended."</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Battery level low"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Turn on Battery Saver to extend battery life"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Improve battery life"</string>
@@ -3294,6 +3295,7 @@
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"Remove work profile?"</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"All apps and data will be deleted."</string>
     <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"All apps and data in this profile will be deleted if you continue."</string>
+    <string name="work_profile_confirm_remove_message_with_esim" msgid="1169605178915445183">"All apps and data in this profile, including work eSIMs, will be deleted if you continue."</string>
     <string name="user_profile_confirm_remove_message" msgid="3641289528179850718">"All apps and data will be deleted."</string>
     <string name="user_adding_new_user" msgid="7439602720177181412">"Adding new user…"</string>
     <string name="user_delete_user_description" msgid="7764153465503821011">"Delete user"</string>
@@ -5767,6 +5769,8 @@
     <string name="audio_streams_dialog_turn_off_talkback_title" msgid="6824585115302786690">"Turn off Talkback temporarily"</string>
     <string name="audio_streams_dialog_turn_off_talkback_subtitle" msgid="2394295776096273919">"Talkback cannot be used when listening to audio streams. Turn off talkback to start listening."</string>
     <string name="audio_streams_dialog_turn_off_talkback_button" msgid="8049097689955037626">"Turn off"</string>
+    <string name="audio_streams_dialog_turn_off_audio_sharing_title" msgid="1017164439467110153">"Can\'t listen to audio streams while sharing"</string>
+    <string name="audio_streams_dialog_turn_off_audio_sharing_subtitle" msgid="5856842223436525336">"To listen to this stream, turn off audio sharing."</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Connect a device"</string>
     <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Audio stream details"</string>
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"Audio stream QR code"</string>
@@ -5806,18 +5810,21 @@
     <string name="supervision_settings_title" msgid="8507163323870367711">"Parental controls"</string>
     <string name="supervision_settings_summary" msgid="5020634300370322741">"Content restrictions &amp; other limits"</string>
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Use device supervision"</string>
-    <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Set up PIN to get started"</string>
+    <!-- no translation found for device_supervision_switch_no_pin_summary (4869563544571033220) -->
+    <skip />
+    <!-- no translation found for device_supervision_switch_paused_summary (1014381188739295656) -->
+    <skip />
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"supervision, parental supervision, parental controls"</string>
-    <string name="supervision_pin_management_preference_title" msgid="961680798581006465">"Manage PIN"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="8061713645550514683">"Add PIN recovery"</string>
-    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="2156782778845060114">"Verify PIN recovery"</string>
+    <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Manage your PIN"</string>
+    <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Add recovery email"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"Verify recovery email"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Change PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Forgot PIN"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Update recovery email"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Delete PIN"</string>
     <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"This will reset all your supervision settings"</string>
-    <string name="supervision_add_pin_recovery_title" msgid="5584523084706797399">"Tap to add recovery"</string>
-    <string name="supervision_verify_pin_recovery_title" msgid="7953090772633001442">"Tap to verify recovery"</string>
+    <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Add recovery email"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Verify your email"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Web content filters"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"Websites"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="1786398287521485576">"Block explicit web content"</string>
@@ -5828,8 +5835,8 @@
     <string name="supervision_web_content_filters_search_filter_on_summary" msgid="6797184284369033101">"For search engines on this device"</string>
     <string name="supervision_web_content_filters_search_filter_off_title" msgid="7171966260908166395">"Filter off"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Enter supervision PIN"</string>
-    <string name="supervision_lock_setup_title" msgid="7581682893583645713">"Choose lock for supervision"</string>
-    <string name="supervision_lock_setup_description" msgid="6931450348200992733">"You can unlock supervision settings with this code"</string>
-    <string name="supervision_pin_reset_success_toast" msgid="4663259412030769718">"Parental control PIN reset"</string>
+    <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Set a parental controls PIN"</string>
+    <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"Confirm PIN"</string>
+    <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN updated"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> animation"</string>
 </resources>

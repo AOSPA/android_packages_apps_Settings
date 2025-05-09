@@ -41,12 +41,9 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Atlikts"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Nezināms"</string>
     <string name="qr_code_content_description" msgid="1852208464419291347">"Kvadrātkods"</string>
-    <!-- no translation found for preview_pager_home_title (6102935625155194821) -->
-    <skip />
-    <!-- no translation found for preview_pager_message_title (5933499691147446486) -->
-    <skip />
-    <!-- no translation found for preview_pager_email_title (8767864657910457562) -->
-    <skip />
+    <string name="preview_pager_home_title" msgid="6102935625155194821">"Sākuma ekrāns"</string>
+    <string name="preview_pager_message_title" msgid="5933499691147446486">"Ziņojums"</string>
+    <string name="preview_pager_email_title" msgid="8767864657910457562">"E-pasts"</string>
     <string name="preview_pager_previous_button" msgid="607771113300838313">"Iepriekšējais priekšskatījums"</string>
     <string name="preview_pager_next_button" msgid="8700907912508927271">"Nākamais priekšskatījums"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Samazināt"</string>
@@ -316,13 +313,11 @@
     <string name="time_format_category_title" msgid="7108616745509689991">"Laika formāts"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"Laika josla"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"Laika josla"</string>
-    <!-- no translation found for date_time_search_time_zone (7373967602009974399) -->
-    <skip />
+    <string name="date_time_search_time_zone" msgid="7373967602009974399">"Meklēt laika joslu"</string>
     <string name="date_time_set_date_title" msgid="7624166157167528407">"Datums"</string>
     <string name="date_time_search_region" msgid="1364133854952610919">"Meklēšanas reģions"</string>
     <string name="date_time_select_region" msgid="5449345333305056072">"Reģions"</string>
-    <!-- no translation found for date_time_select_fixed_offset_time_zones (2130108030162342594) -->
-    <skip />
+    <string name="date_time_select_fixed_offset_time_zones" msgid="2130108030162342594">"GMT novirze"</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Izmantotā laika josla: <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
@@ -331,8 +326,7 @@
     <string name="zone_time_type_dst" msgid="9189689342265305808">"Vasaras laiks"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Standarta laiks"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Atlasīt pēc reģiona"</string>
-    <!-- no translation found for zone_menu_by_offset (543648951618438204) -->
-    <skip />
+    <string name="zone_menu_by_offset" msgid="543648951618438204">"Atlasīt pēc GMT nobīdes"</string>
     <string name="time_feedback_category_title" msgid="5942621686512255208">"Atsauksmes"</string>
     <string name="keywords_time_feedback_category" msgid="4553921538559830393">"atsauksmes, kļūda, laiks, josla, laika josla"</string>
     <string name="time_feedback_title" msgid="7720948068042783614">"Sūtīt atsauksmes par laiku"</string>
@@ -772,7 +766,7 @@
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Ekrāna bloķēšanas veids"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Jauns ekr. bloķēšanas veids"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Darba lietotņu bloķēšana"</string>
-    <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Jauns bloķēš. veids darbam"</string>
+    <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Bloķēšana darba profilam"</string>
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Papildu drošībai iestatiet rezerves ekrāna bloķēšanu"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Izvēlieties ekrāna bloķēšanas rezerves metodi"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Ja aizmirsīsiet savu ekrāna bloķēšanas opciju, IT administrators nevarēs to atiestatīt."</string>
@@ -969,10 +963,8 @@
     <string name="device_details_battery" msgid="5466987755790847884">"Akumulators"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"Akumulators, uzlāde"</string>
     <string name="device_details_key_missing_title" msgid="3568401701538114387">"Restartējiet ierīci “<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”. Ja tādējādi problēma netiek novērsta, iestatījumos izvēlieties aizmirst ierīci. Drošības nolūkos atkārtoti savienojiet ierīci pārī tikai tad, ja neesat publiskā vietā.\n\nJa šī ierīce neatrodas tuvumā, jums nav jāveic nekādas darbības."</string>
-    <!-- no translation found for verbose_printer_logging_title (6525634245166402031) -->
-    <skip />
-    <!-- no translation found for verbose_printer_logging_summary (6558076303223667013) -->
-    <skip />
+    <string name="verbose_printer_logging_title" msgid="6525634245166402031">"Detalizēti drukas žurnāli"</string>
+    <string name="verbose_printer_logging_summary" msgid="6558076303223667013">"Papildu atkļūdošanas žurnāli, tostarp Internet Printing Protocol (IPP), kas var ietvert privātu informāciju."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Aizmirst ierīci"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Lietotnes atvienošana"</string>
     <string name="device_details_more_settings" msgid="950302792331611271">"Citi iestatījumi"</string>
@@ -1178,12 +1170,9 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Atļaut"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Noraidīt"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"* obligāti"</string>
-    <!-- no translation found for share_wifi_network (4064997404339571584) -->
-    <skip />
-    <!-- no translation found for share_wifi_network_summary (4316236421149769333) -->
-    <skip />
-    <!-- no translation found for edit_wifi_network_configuration (5712989655083072417) -->
-    <skip />
+    <string name="share_wifi_network" msgid="4064997404339571584">"Koplietot šo tīklu ar citiem ierīces lietotājiem"</string>
+    <string name="share_wifi_network_summary" msgid="4316236421149769333">"Visi šīs ierīces lietotāji var skatīt koplietoto tīklu un izveidot savienojumu ar to. Administratori var dzēst koplietotu tīklu. Uzziniet vairāk."</string>
+    <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"Atļaut citiem lietotājiem rediģēt tīkla konfigurāciju"</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Šim tīklam nav interneta piekļuves. Vai turpināt savienojumu?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Ierobežotas savienojamības dēļ dažas lietotnes un pakalpojumi var nedarboties. Vai tomēr lietot?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Vairs nejautāt par šo tīklu"</string>
@@ -1481,10 +1470,8 @@
     <string name="force_bold_text" msgid="4620929631102086716">"Teksts treknrakstā"</string>
     <string name="title_font_size" msgid="570613010306330622">"Fonta lielums"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Palieliniet vai samaziniet tekstu"</string>
-    <!-- no translation found for category_title_display_text_size (4234285020731751694) -->
-    <skip />
-    <!-- no translation found for category_title_text_style (5905015084935695611) -->
-    <skip />
+    <string name="category_title_display_text_size" msgid="4234285020731751694">"Izmēru opcijas"</string>
+    <string name="category_title_text_style" msgid="5905015084935695611">"Stilu opcijas"</string>
     <string name="sim_lock_settings" msgid="7331982427303002613">"SIM kartes bloķēšanas iestatījumi"</string>
     <string name="sim_lock_settings_category" msgid="6475255139493877786">"SIM kartes bloķēšana"</string>
     <string name="sim_pin_toggle" msgid="6814489621760857328">"SIM kartes bloķēšana"</string>
@@ -2125,9 +2112,14 @@
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Izmantojot īsinājumtaustiņus, vienlaikus nospiediet tikai vienu taustiņu, nevis turiet nospiestus vairākus taustiņus."</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Peles taustiņi"</string>
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"Izmantot peles taustiņus"</string>
-    <!-- no translation found for accessibility_mouse_keys_shortcut_title (7621635104533584115) -->
-    <skip />
+    <string name="accessibility_mouse_keys_shortcut_title" msgid="7621635104533584115">"Peles taustiņu saīsne"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Izmantojiet tastatūru, lai kontrolētu rādītāju."</string>
+    <!-- no translation found for mouse_keys_max_speed_title (1788751803245422659) -->
+    <skip />
+    <!-- no translation found for mouse_keys_seek_bar_decrease_button_description (9077624857206032509) -->
+    <skip />
+    <!-- no translation found for mouse_keys_seek_bar_increase_button_description (2721662400858172203) -->
+    <skip />
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Ritināšana pretējā virzienā"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Ritiniet augšup, lai pārvietotu lapu uz leju"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"Ritināšana"</string>
@@ -2790,8 +2782,6 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Noregulēt strāvas patēriņu"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Iekļautās pakotnes"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Lietotnes darbojas normāli"</string>
-    <string name="battery_tip_replacement_title" msgid="3932335880485957919">"Ieteicams nomainīt akumulatoru"</string>
-    <string name="battery_tip_replacement_summary" msgid="7892640031317153349">"Akumulatora ietilpība un uzlādes veiktspēja ir samazinājusies, un ir ieteicams nomainīt akumulatoru."</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Zems akumulatora uzlādes līmenis"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Lai paildzinātu akumulatora darbību, ieslēdziet akumulatora enerģijas taupīšanas režīmu"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Akumulatora darbības paildzināšana"</string>
@@ -3007,12 +2997,9 @@
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Paziņojumi"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Tīkla paziņojumi"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Saņemiet paziņojumu, ja ierīcē tiek izveidots savienojums ar nešifrētu tīklu vai ja tīklā tiek reģistrēts jūsu ierīces vai SIM unikālais ID."</string>
-    <!-- no translation found for cellular_security_2G_network_generation_header (2892850064192939887) -->
-    <skip />
-    <!-- no translation found for cellular_security_2G_network_generation_summary (979187530909112413) -->
-    <skip />
-    <!-- no translation found for cellular_security_2G_network_generation_title (706766676947606951) -->
-    <skip />
+    <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"Tīkla paaudze"</string>
+    <string name="cellular_security_2G_network_generation_summary" msgid="979187530909112413">"Izmantojot aizsardzību 2G tīklā, ierīces izvairās no savienojuma izveides ar 2G tīkliem, kas ir mazāk droši. Tādējādi dažās vietās var tikt ierobežota savienojamība. Ārkārtas izsaukumi vienmēr ir atļauti."</string>
+    <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"Aizsardzība 2G tīklā"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Šifrēšana"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Tīklu paaudzes"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Jūs varat konfigurēt katru instalēto SIM karti, lai tā savienotos tikai ar tādiem tīkliem, kas atbalsta 3G, 4G vai 5G tehnoloģiju. SIM karte nesavienosies ar vecākas paaudzes, nedrošiem 2G tīkliem. Šis iestatījums var ierobežot savienojamību, ja vienīgais pieejamais tīkls ir 2G tīkls. Ārkārtas situācijā var tikt izmantots 2G tīkls."</string>
@@ -3311,6 +3298,8 @@
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"Vai noņemt darba profilu?"</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"Visas lietotnes un dati tiks dzēsti."</string>
     <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"Ja turpināsiet, visas lietotnes un dati šajā profilā tiks dzēsti."</string>
+    <!-- no translation found for work_profile_confirm_remove_message_with_esim (1169605178915445183) -->
+    <skip />
     <string name="user_profile_confirm_remove_message" msgid="3641289528179850718">"Visas lietotnes un dati tiks dzēsti."</string>
     <string name="user_adding_new_user" msgid="7439602720177181412">"Jauna lietotāja pievienošana…"</string>
     <string name="user_delete_user_description" msgid="7764153465503821011">"Dzēst lietotāju"</string>
@@ -3812,16 +3801,12 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"atvērt paziņojumu"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Atļaut paziņojumu atlikšanu"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Paziņojuma punkts lietotnes ikonā"</string>
-    <!-- no translation found for notification_bundles (496852738958148317) -->
-    <skip />
+    <string name="notification_bundles" msgid="496852738958148317">"Paziņojumu kārtotājs"</string>
     <string name="notification_summarization_title" msgid="1516039882005781529">"Paziņojumu apkopojumi"</string>
-    <!-- no translation found for notification_summarization_summary (1963425736716175590) -->
-    <skip />
+    <string name="notification_summarization_summary" msgid="1963425736716175590">"Saņemiet īsus kopsavilkumus par garākiem ziņojumiem."</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Izmantot paziņojumu apkopojumus"</string>
-    <!-- no translation found for notification_summarization_description (341128754705513791) -->
-    <skip />
-    <!-- no translation found for notification_summarization_excluded_description (5819160700526641394) -->
-    <skip />
+    <string name="notification_summarization_description" msgid="341128754705513791">"Apkopojiet garus ziņojumus un grupu sarunas, lai iegūtu īsus kopsavilkumus. Apkopojumi tiek ģenerēti, izmantojot MI, un var ietvert kļūdas."</string>
+    <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Paziņojumi no šīm lietotnēm netiks apkopoti."</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Lietotņu pārvaldība"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="1299744594788208296">"Atļaujiet lietotņu paziņojumu apkopojumus"</string>
     <string name="notification_excluded_apps" msgid="6648267716069216826">"Lietotņu izņēmumi"</string>
@@ -3979,18 +3964,13 @@
     <string name="notification_polite_description" msgid="6137533404978878957">"Ja īsā laika posmā saņemsiet daudz paziņojumu, ierīce samazinās skaļumu un brīdinājumu rādīšanu līdz pat vienai minūtei. Tas neattiecas uz zvaniem, signāliem un prioritārām sarunām. \n\nNogaidīšanas perioda laikā saņemtos paziņojumus var atrast, pavelkot lejup no ekrāna augšdaļas."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Lietot darba profiliem"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Lietot darba profila lietotnēm"</string>
-    <!-- no translation found for notification_bundle_title (6679586974995981433) -->
-    <skip />
-    <!-- no translation found for notification_bundle_summary (8924550009829960969) -->
-    <skip />
-    <!-- no translation found for notification_bundle_main_control_title (2632661768990540295) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (8439963475488583612) -->
-    <skip />
+    <string name="notification_bundle_title" msgid="6679586974995981433">"Paziņojumu kārtotājs"</string>
+    <string name="notification_bundle_summary" msgid="8924550009829960969">"Grupējiet zemākas prioritātes paziņojumus un izslēdziet tiem skaņu."</string>
+    <string name="notification_bundle_main_control_title" msgid="2632661768990540295">"Izmantojiet paziņojumu kārtotāju"</string>
+    <string name="notification_bundle_description" msgid="8439963475488583612">"Izvēlieties to paziņojumu veidus, kuriem vēlaties izslēgt skaņu un kurus vēlaties sagrupēt, lai samazinātu pārtraukumus. Paziņojumi tiek grupēti, izmantojot MI, un var ietvert kļūdas."</string>
     <string name="notification_app_level_bundle_title" msgid="8917807675495480483">"Paziņojumu grupēšana"</string>
     <string name="notification_app_level_bundle_subtext" msgid="7330731485247761388">"Paziņojumi ar līdzīgām tēmām tiks izslēgti un grupēti, lai samazinātu traucēkļus."</string>
-    <!-- no translation found for notification_bundle_excluded_description (2667461772332132250) -->
-    <skip />
+    <string name="notification_bundle_excluded_description" msgid="2667461772332132250">"Paziņojumi no šīm lietotnēm netiks grupēti."</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="7019831234073590293">"Atļaujiet lietotņu paziņojumu grupēšanu"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR palīga pakalpojumi"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Nevienai instalētajai lietotnei nav pieprasīta palaišana kā VR palīga pakalpojumam."</string>
@@ -4726,22 +4706,14 @@
     <string name="system_navigation_title" msgid="4890381153527184636">"Navigācijas režīms"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"2 pogu navigācija"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Lai pārslēgtu lietotnes, velciet augšup pogu Sākums. Lai skatītu visas lietotnes, vēlreiz velciet augšup. Lai pārietu atpakaļ, pieskarieties pogai Atpakaļ."</string>
-    <!-- no translation found for shade_panels_title (6816157397029469997) -->
-    <skip />
-    <!-- no translation found for keywords_shade_panels (6181844937287087945) -->
-    <skip />
-    <!-- no translation found for shade_panels_category (3262351355390846546) -->
-    <skip />
-    <!-- no translation found for shade_panels_separate_title (7839124123668116363) -->
-    <skip />
-    <!-- no translation found for shade_panels_separate_summary (4879360492042964895) -->
-    <skip />
-    <!-- no translation found for shade_panels_combined_title (2812149031368941984) -->
-    <skip />
-    <!-- no translation found for shade_panels_combined_summary (5884627562590432068) -->
-    <skip />
-    <!-- no translation found for shade_panels_foldables_footer_message (3974376428811063936) -->
-    <skip />
+    <string name="shade_panels_title" msgid="6816157397029469997">"Paziņojumi un ātrie iestatījumi"</string>
+    <string name="keywords_shade_panels" msgid="6181844937287087945">"ēna, paneļi, paziņojumi, ātri iestatījumi, atsevišķs, apvienots, divkāršs, vienkāršs"</string>
+    <string name="shade_panels_category" msgid="3262351355390846546">"Paneļi"</string>
+    <string name="shade_panels_separate_title" msgid="7839124123668116363">"Atsevišķi"</string>
+    <string name="shade_panels_separate_summary" msgid="4879360492042964895">"Velciet lejup no augšējā labā stūra, lai atvērtu ātro iestatījumu izvēlni. Velciet lejup no augšējā kreisā stūra, lai atvērtu paziņojumu paneli."</string>
+    <string name="shade_panels_combined_title" msgid="2812149031368941984">"Apvienotais (klasiskais)"</string>
+    <string name="shade_panels_combined_summary" msgid="5884627562590432068">"Velciet lejup no ekrāna augšdaļas, lai piekļūtu klasiskajam panelim, kurā ir apvienoti paziņojumi un ātri iestatījumi."</string>
+    <string name="shade_panels_foldables_footer_message" msgid="3974376428811063936">"Apvienotais (klasiskais) skats ir pieejams tikai salokāmas ierīces ārējā ekrānā."</string>
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Drošība un ārkārtas situācijas"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"Ārkārtas zvans, medicīniskā informācija, brīdinājumi"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Žestu navigācija"</string>
@@ -5802,6 +5774,10 @@
     <string name="audio_streams_dialog_turn_off_talkback_title" msgid="6824585115302786690">"TalkBack īslaicīga izslēgšana"</string>
     <string name="audio_streams_dialog_turn_off_talkback_subtitle" msgid="2394295776096273919">"Funkciju TalkBack nevar izmantot, klausoties audio straumes. Lai sāktu tās klausīties, izslēdziet funkciju TalkBack."</string>
     <string name="audio_streams_dialog_turn_off_talkback_button" msgid="8049097689955037626">"Izslēgt"</string>
+    <!-- no translation found for audio_streams_dialog_turn_off_audio_sharing_title (1017164439467110153) -->
+    <skip />
+    <!-- no translation found for audio_streams_dialog_turn_off_audio_sharing_subtitle (5856842223436525336) -->
+    <skip />
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Izveidot savienojumu ar ierīci"</string>
     <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Informācija par audio straumi"</string>
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"Audio straumes kvadrātkods"</string>
@@ -5841,38 +5817,41 @@
     <string name="supervision_settings_title" msgid="8507163323870367711">"Vecāku kontrole"</string>
     <string name="supervision_settings_summary" msgid="5020634300370322741">"Satura ierobežojumi un citi ierobežojumi"</string>
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Izmantot ierīces uzraudzību"</string>
-    <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Lai sāktu darbu, iestatiet PIN."</string>
+    <!-- no translation found for device_supervision_switch_no_pin_summary (4869563544571033220) -->
+    <skip />
+    <!-- no translation found for device_supervision_switch_paused_summary (1014381188739295656) -->
+    <skip />
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"uzraudzība, uzraudzība vecākiem, vecāku kontrole"</string>
-    <string name="supervision_pin_management_preference_title" msgid="961680798581006465">"PIN pārvaldība"</string>
-    <string name="supervision_pin_management_preference_summary_add" msgid="8061713645550514683">"Pievienot PIN atkopšanas metodi"</string>
-    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="2156782778845060114">"Verificēt PIN atkopšanu"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (7721501202320841845) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (2247921267270577374) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_verify_recovery (5072554239108915119) -->
+    <skip />
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Mainīt PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Esmu aizmirsis PIN"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Atjaunināt atkopšanas e-pasta adresi"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Dzēst PIN"</string>
     <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Tādējādi tiks atiestatīti visi jūsu uzraudzības iestatījumi."</string>
-    <string name="supervision_add_pin_recovery_title" msgid="5584523084706797399">"Pieskarieties, lai pievienotu atkopšanas iestatījumu"</string>
-    <!-- no translation found for supervision_verify_pin_recovery_title (7953090772633001442) -->
+    <!-- no translation found for supervision_add_pin_recovery_title (3487098027604685794) -->
+    <skip />
+    <!-- no translation found for supervision_verify_pin_recovery_title (3166602415814821497) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Tīmekļa satura filtri"</string>
-    <!-- no translation found for supervision_web_content_filters_browser_title (8737341514264129889) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_browser_block_explicit_sites_title (1786398287521485576) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_browser_block_explicit_sites_summary (1427357961145247788) -->
-    <skip />
+    <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"Vietnes"</string>
+    <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="1786398287521485576">"Bloķēt necenzētu tīmekļa saturu"</string>
+    <string name="supervision_web_content_filters_browser_block_explicit_sites_summary" msgid="1427357961145247788">"Pārlūkprogrammām šajā ierīcē"</string>
     <string name="supervision_web_content_filters_browser_allow_all_sites_title" msgid="3909739592466381845">"Atļaut visas vietnes"</string>
-    <!-- no translation found for supervision_web_content_filters_search_title (8608480392956106029) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_on_title (1136440775294190806) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_on_summary (6797184284369033101) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_search_filter_off_title (7171966260908166395) -->
-    <skip />
+    <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"Meklēšanas rezultāti"</string>
+    <string name="supervision_web_content_filters_search_filter_on_title" msgid="1136440775294190806">"Bloķēt necenzētus meklēšanas rezultātus"</string>
+    <string name="supervision_web_content_filters_search_filter_on_summary" msgid="6797184284369033101">"Meklētājprogrammām šajā ierīcē"</string>
+    <string name="supervision_web_content_filters_search_filter_off_title" msgid="7171966260908166395">"Filtrs ir izslēgts"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Ievadiet uzraudzības funkcijas PIN"</string>
-    <string name="supervision_lock_setup_title" msgid="7581682893583645713">"Izvēlieties uzraudzības bloķēšanas metodi"</string>
-    <string name="supervision_lock_setup_description" msgid="6931450348200992733">"Izmantojot šo kodu, varat atbloķēt uzraudzības iestatījumus"</string>
-    <string name="supervision_pin_reset_success_toast" msgid="4663259412030769718">"Vecāku kontroles PIN atiestatīšana"</string>
+    <!-- no translation found for supervision_choose_your_pin_header (3872062168986738629) -->
+    <skip />
+    <!-- no translation found for supervision_confirm_your_pin_header (8236956712482718354) -->
+    <skip />
+    <!-- no translation found for supervision_pin_reset_success_toast (9163550161698311831) -->
+    <skip />
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g>: animācija"</string>
 </resources>

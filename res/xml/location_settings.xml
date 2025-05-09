@@ -27,7 +27,7 @@
         settings:controller=
             "com.android.settings.location.RecentLocationAccessPreferenceController"/>
 
-    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+    <com.android.settingslib.widget.UntitledPreferenceCategory>
       <Preference
           android:key="recent_location_access_see_all_button"
           android:title="@string/location_recent_location_access_see_all"
@@ -35,7 +35,7 @@
           android:fragment="com.android.settings.location.RecentLocationAccessSeeAllFragment"
           settings:controller="com.android.settings.location.RecentLocationAccessSeeAllButtonPreferenceController"
           settings:searchable="false"/>
-    </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+    </com.android.settingslib.widget.UntitledPreferenceCategory>
 
 <CheckBoxPreference
         android:key="assisted_gps"
@@ -44,7 +44,7 @@
         android:summaryOff="@string/assisted_gps_disabled"
         settings:controller="com.android.settings.location.AgpsPreferenceController"/>
 
-    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
+    <com.android.settingslib.widget.UntitledPreferenceCategory
         android:key="location_advanced_settings">
 
         <!-- This preference gets removed if there is no managed profile -->
@@ -77,7 +77,7 @@
             android:title="@string/location_services_preference_title"
             settings:controller="com.android.settings.location.LocationServicesPreferenceController"/>
 
-    </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+    </com.android.settingslib.widget.UntitledPreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference
         android:title="@string/location_settings_footer_general"

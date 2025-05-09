@@ -51,4 +51,7 @@ public interface FaceFeatureProvider {
     default FaceSettingsFeatureProvider getFaceSettingsFeatureProvider() {
         return FaceSettingsFeatureProvider.getInstance();
     }
+
+    /** Returns the max enrollable count. */
+    int getMaxEnrollableCount(@NonNull Context context);
 }

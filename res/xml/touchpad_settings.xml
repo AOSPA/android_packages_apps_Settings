@@ -52,6 +52,14 @@
         android:key="three_finger_tap"
         android:title="@string/three_finger_tap_preference_title"
         settings:controller="com.android.settings.inputmethod.TouchpadThreeFingerTapPreferenceController"
+        android:order="36"/>
+
+    <Preference
+        android:fragment="com.android.settings.inputmethod.ActionCornersFragment"
+        android:key="action_corners"
+        android:title="@string/action_corners_title"
+        android:summary="@string/action_corners_summary"
+        android:featureFlag="com.android.settings.flags.action_corner_customization"
         android:order="37"/>
 
     <SwitchPreferenceCompat

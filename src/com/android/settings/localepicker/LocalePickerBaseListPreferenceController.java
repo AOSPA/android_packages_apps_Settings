@@ -65,7 +65,6 @@ public abstract class LocalePickerBaseListPreferenceController extends
     private Set<LocaleStore.LocaleInfo> mLocaleList;
     private List<LocaleStore.LocaleInfo> mLocaleOptions;
     private Map<String, Preference> mPreferences;
-    private String mPackageName;
     private FragmentManager mFragmentManager;
     private boolean mIsCountryMode;
     @Nullable
@@ -174,6 +173,9 @@ public abstract class LocalePickerBaseListPreferenceController extends
                     mContext.getString(R.string.all_supported_numbering_system_title));
         }
 
+        // Remove the locale which is added into system language's list already.
+        List<LocaleStore.LocaleInfo> localeList = getUserLocaleList();
+        localeInfoList.removeIf(localeInfo -> localeList.contains(localeInfo));
         localeInfoList.stream().forEach(locale ->
         {
             Preference pref = existingPreferences.remove(locale.getId());
@@ -212,10 +214,6 @@ public abstract class LocalePickerBaseListPreferenceController extends
 
     @Nullable
     protected abstract LocaleList getExplicitLocaleList();
-
-    protected String getPackageName() {
-        return mPackageName;
-    }
 
     protected List<LocaleStore.LocaleInfo> getSuggestedLocaleList() {
         setupLocaleList();

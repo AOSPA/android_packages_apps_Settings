@@ -20,7 +20,7 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/bt_hci_snoop_log_filters_dashboard_title" >
 
-    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
+    <com.android.settingslib.widget.UntitledPreferenceCategory
         android:key="snoop_logger_filters_category"
         android:title="@string/bt_hci_snoop_log_filters_dashboard_summary"
         settings:controller=

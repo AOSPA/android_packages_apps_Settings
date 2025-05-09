@@ -25,7 +25,7 @@
         android:title="@string/regional_preferences_option_page_sub_title"
         android:persistent="false" />
 
-    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
+    <com.android.settingslib.widget.UntitledPreferenceCategory
         android:key="temperature_unit_category"
         android:title="@string/summary_placeholder"
         settings:controller="com.android.settings.regionalpreferences.TemperatureUnitCategoryController"/>

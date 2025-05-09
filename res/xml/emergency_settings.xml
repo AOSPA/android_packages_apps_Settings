@@ -33,7 +33,7 @@
         android:order="100"
         android:fragment="com.android.settings.emergency.EmergencyGestureSettings"
         settings:controller="com.android.settings.emergency.EmergencyGestureEntrypointPreferenceController" />
-    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
+    <com.android.settingslib.widget.UntitledPreferenceCategory
         android:order="170"
         settings:allowDividerAbove="true"/>
     <com.android.settingslib.RestrictedPreference

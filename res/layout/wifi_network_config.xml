@@ -51,6 +51,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="24dp"
             style="@style/wifi_item">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -410,6 +411,28 @@
                   android:layout_marginEnd="@dimen/settingslib_expressive_space_small1"
                   android:orientation="vertical"
                   android:visibility="gone">
+
+        <LinearLayout android:id="@+id/shared_network_login_screen_warning"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      android:gravity="center_vertical"
+                      android:visibility="gone"
+                      style="@style/wifi_item">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_info_outline_24dp"
+                android:tint="?android:attr/textColorTertiary"
+                android:contentDescription="@string/wifi_shared_network_login_screen_warning"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="8dp"
+                android:text="@string/wifi_shared_network_login_screen_warning"
+                style="@style/wifi_item_label"/>
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/sharing_toggle_fields"

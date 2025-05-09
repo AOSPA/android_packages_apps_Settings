@@ -22,6 +22,7 @@ import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_4_3;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_FULLSCREEN;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_SPLIT_SCREEN;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_UNSET;
+import static android.platform.test.flag.junit.SetFlagsRule.DefaultInitValueType.DEVICE_DEFAULT;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -47,14 +48,21 @@ import android.content.pm.PackageManager;
 import android.os.HandlerThread;
 import android.os.Process;
 import android.os.RemoteException;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.testutils.FakeInstantSource;
 import com.android.settings.testutils.FakeSharedPreferences;
+import com.android.window.flags.Flags;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -76,6 +84,10 @@ import java.util.Map;
  */
 @RunWith(AndroidJUnit4.class)
 public class UserAspectRatioBackupManagerTest {
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule(DEVICE_DEFAULT);
     private static final String DEFAULT_PACKAGE_NAME = "com.android.testapp";
     private static final String OTHER_PACKAGE_NAME = "com.android.anotherapp";
 
@@ -185,6 +197,7 @@ public class UserAspectRatioBackupManagerTest {
     }
 
     @Test
+    @RequiresFlagsDisabled(Flags.FLAG_RESTORE_USER_ASPECT_RATIO_SETTINGS_USING_SERVICE)
     public void testRestore_appNotInstalled_aspectRatioStored() throws Exception {
         final byte[] out = writeTestPayload(DEFAULT_PACKAGE_ASPECT_RATIO_MAP);
         // Backed up app is not installed on the restore device.
@@ -195,6 +208,19 @@ public class UserAspectRatioBackupManagerTest {
         verifyNothingRestored();
         assertEquals(USER_MIN_ASPECT_RATIO_FULLSCREEN, mFakeSharedPreferences.getInt(
                 DEFAULT_PACKAGE_NAME, USER_MIN_ASPECT_RATIO_UNSET));
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_RESTORE_USER_ASPECT_RATIO_SETTINGS_USING_SERVICE)
+    public void testRestore_appNotInstalled_delegateRestoreToService() throws Exception {
+        final byte[] out = writeTestPayload(DEFAULT_PACKAGE_ASPECT_RATIO_MAP);
+        // Backed up app is not installed on the restore device.
+        setUpInstalledPackages(List.of());
+
+        mBackupManager.stageAndApplyRestoredPayload(out);
+
+        verify(mMockIPackageManager).setUserMinAspectRatio(DEFAULT_PACKAGE_NAME,
+                DEFAULT_USER_ID, USER_MIN_ASPECT_RATIO_FULLSCREEN);
     }
 
     @Test
@@ -222,6 +248,7 @@ public class UserAspectRatioBackupManagerTest {
     }
 
     @Test
+    @RequiresFlagsDisabled(Flags.FLAG_RESTORE_USER_ASPECT_RATIO_SETTINGS_USING_SERVICE)
     public void testPackageAdded_aspectRatioRestored() throws Exception {
         final byte[] out = writeTestPayload(DEFAULT_PACKAGE_ASPECT_RATIO_MAP);
         // Backed up app is not installed on the restore device.

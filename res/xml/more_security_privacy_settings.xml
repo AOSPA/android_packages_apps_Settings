@@ -147,7 +147,7 @@
         settings:keywords="@string/content_protection_preference_title"
         settings:controller="com.android.settings.security.ContentProtectionPreferenceController" />
 
-    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
+    <com.android.settingslib.widget.UntitledPreferenceCategory
         android:order="240"
         android:key="security_settings_device_admin_category">
 
@@ -182,7 +182,7 @@
             <intent android:action="com.android.devicelockcontroller.action.DEVICE_INFO_SETTINGS"
                     android:targetPackage="@string/config_device_lock_controller_package_name"/>
         </Preference>
-    </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+    </com.android.settingslib.widget.UntitledPreferenceCategory>
 
     <Preference
         android:order="250"

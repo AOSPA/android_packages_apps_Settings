@@ -111,7 +111,7 @@
             android:summary="@string/wifi_subscription_summary"/>
     </PreferenceCategory>
 
-    <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+    <com.android.settingslib.widget.UntitledPreferenceCategory>
       <SwitchPreferenceCompat
           android:key="auto_connect"
           android:title="@string/wifi_auto_connect_title"
@@ -126,7 +126,7 @@
           android:key="add_device_to_network"
           android:title="@string/wifi_dpp_add_device"
           android:summary="@string/wifi_dpp_connect_network_using_qr_code"/>
-    </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+    </com.android.settingslib.widget.UntitledPreferenceCategory>
 
     <!-- Network Details -->
     <PreferenceCategory

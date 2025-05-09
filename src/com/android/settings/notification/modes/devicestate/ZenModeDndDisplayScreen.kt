@@ -21,7 +21,7 @@ import android.content.Context
 import android.content.Intent
 import android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID
 import com.android.settings.R
-import com.android.settings.Settings.ModeDisplaySettingsActivity
+import com.android.settings.Settings.DndModeDisplaySettingsActivity
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.flags.Flags
 import com.android.settings.notification.modes.ZenHelperBackend
@@ -67,7 +67,7 @@ class ZenModeDndDisplayScreen :
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? =
         if (AppFlags.modesUi()) {
-            Intent(context, ModeDisplaySettingsActivity::class.java)
+            Intent(context, DndModeDisplaySettingsActivity::class.java)
                 .putExtra(EXTRA_AUTOMATIC_ZEN_RULE_ID, context.getDndMode()?.id)
         } else null
 
