@@ -464,8 +464,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
 
         @Override
         public void onClick() {
-            if (Flags.protectScreenTimeoutWithAuth()
-                    && !mScreenTimeoutSettings.isUserAuthenticated()
+            if (!mScreenTimeoutSettings.isUserAuthenticated()
                     && !isChecked()
                     && mTimeoutMs > getTimeoutFromKey(mScreenTimeoutSettings.getDefaultKey())) {
                 WifiDppUtils.showLockScreen(

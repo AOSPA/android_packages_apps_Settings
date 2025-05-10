@@ -28,6 +28,7 @@ class RingVibrationIntensitySliderPreference(context: Context) :
         key = KEY,
         vibrationUsage = VibrationAttributes.USAGE_RINGTONE,
         title = R.string.accessibility_ring_vibration_title,
+        hasRingerModeDependency = true,
     ) {
     override val keywords: Int
         get() = R.string.keywords_ring_vibration

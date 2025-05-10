@@ -2228,7 +2228,7 @@
     <string name="external_display_mirroring_title">Mirror built-in display</string>
 
     <!-- Wifi Display settings. The title of the screen. [CHAR LIMIT=40] -->
-    <string name="wifi_display_settings_title">Cast</string>
+    <string name="wifi_display_settings_title">Google Cast</string>
     <!-- Wifi Display settings. The keywords of the setting. [CHAR LIMIT=NONE] -->
     <string name="keywords_wifi_display_settings">mirror</string>
     <!-- Wifi Display settings. The title of a menu item to enable wireless display [CHAR LIMIT=40] -->
@@ -6011,6 +6011,12 @@
     <!-- Title for the switch setting to toggle on/off the revert to left click after action. [CHAR LIMIT=NONE] -->
     <string name="autoclick_revert_to_left_click_title">Revert to left click after action</string>
     <!-- Title for preference screen for configuring vibrations. [CHAR LIMIT=NONE] -->
+    <!-- TODO(b/394683600): Update string to translatable once approved by UXW. -->
+    <!-- Title for autoclick navigation recommendation dialog [CHAR LIMIT=NONE] -->
+    <string name="accessibility_autoclick_navigation_title">Autoclick works best with 3-button navigation</string>
+    <!-- TODO(b/394683600): Update string to translatable once approved by UXW. -->
+    <!-- Message for autoclick navigation recommendation dialog [CHAR LIMIT=NONE] -->
+    <string name="accessibility_autoclick_navigation_message">Enable 3-button navigation in settings so that you can use autoclick to go home, go back, and open recent apps.</string>
     <string name="accessibility_vibration_settings_title">Vibration &amp; haptics</string>
     <!-- Summary for preference screen for configuring vibrations. [CHAR LIMIT=NONE] -->
     <string name="accessibility_vibration_settings_summary">Control the vibration strength for different usages</string>
@@ -8620,7 +8626,7 @@ Data usage charges may apply.</string>
     <string name="media_volume_option_title">Media volume</string>
 
     <!-- Sound: Title for the option managing remote media volume. [CHAR LIMIT=30] -->
-    <string name="remote_media_volume_option_title">Cast volume</string>
+    <string name="remote_media_volume_option_title">Google Cast volume</string>
 
     <!-- Sound: Title for the option managing call volume. [CHAR LIMIT=30] -->
     <string name="call_volume_option_title">Call volume</string>
@@ -9456,8 +9462,11 @@ Data usage charges may apply.</string>
     <!-- Notification Settings > Notifications on lock screen > Title for showing notifications on the lock screen. [CHAR LIMIT=100] -->
     <string name="lockscreen_notification_what_to_show_title">What to show on lock screen</string>
 
-    <!-- Notification Settings > Notifications on lock screen > Title for showing seen notifications toggle. [CHAR LIMIT=60] -->
-    <string name="lock_screen_notification_show_seen_title">Show seen notifications</string>
+    <!-- Notification Settings > Notifications on lock screen > Title for showing viewed notifications toggle at full list mode. [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_notification_show_viewed_notifs">Show viewed notifications</string>
+
+    <!-- Notification Settings > Notifications on lock screen > Title for showing seen notifications toggle at compact mode. [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_notification_show_viewed_notif_icons">Show viewed notification icons</string>
 
     <!-- Notification Settings > Notifications on lock screen > Title for hiding silent notifications toggle. [CHAR LIMIT=60] -->
     <string name="lock_screen_notification_show_silent_title">Show silent notifications</string>
@@ -11825,7 +11834,7 @@ Data usage charges may apply.</string>
     <!-- Title text for tip suggesting user to modify lockscreen shortcut. [CHAR LIMIT=100] -->
     <string name="double_tap_power_lockscreen_shortcut_tip_title">Change lock screen shortcut?</string>
     <!-- Description text for tip suggesting user to modify lockscreen shortcut. [CHAR LIMIT=200]-->
-    <string name="double_tap_power_lockscreen_shortcut_tip_description"><xliff:g id="double_tap_power_target_action" example="Camera">%1$s</xliff:g> is also your lock screen shortcut. Want to change it?</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_description"><xliff:g id="double_tap_power_target_action" example="Camera">%1$s</xliff:g> is also your lock screen shortcut. Tap to change it.</string>
     <!-- Title for footer explaining why wallet is not available for the double tap power gesture. [CHAR LIMIT=200]-->
     <string name="double_tap_power_wallet_footer_title">Your current default wallet app does not support this gesture</string>
     <!-- Summary for footer explaining why wallet is not available for the double tap power gesture. [CHAR LIMIT=100]-->
@@ -14815,6 +14824,8 @@ Data usage charges may apply.</string>
     <string name="supervision_web_content_filters_search_filter_on_title">Block explicit search result</string>
     <!-- Summary for web content filters search category filter on option [CHAR LIMIT=NONE] -->
     <string name="supervision_web_content_filters_search_filter_on_summary">For search engines on this device</string>
+    <!-- Learn more link for web content filters footer. [CHAR LIMIT=NONE]-->
+    <string name="supervision_web_content_filters_learn_more_link" translatable="false">https://support.google.com/android?p=device_supervision_web_filters</string>
     <!-- Title for web content filters search category filter off option [CHAR LIMIT=60] -->
     <string name="supervision_web_content_filters_search_filter_off_title">Filter off</string>
     <!-- Generic content description that is attached to the preview illustration at the top of an Accessibility feature toggle page. [CHAR LIMIT=NONE] -->
@@ -14826,13 +14837,15 @@ Data usage charges may apply.</string>
     <string name="supervision_pin_reset_success_toast">PIN updated</string>
     <string name="accessibility_illustration_content_description"><xliff:g id="feature" example="Select to Speak">%1$s</xliff:g> animation</string>
 
-    <!-- Light theme customization for Face Education lottie illustration. Not translatable. -->
-    <string-array name="fac_education_illustration" translatable="false">
+    <!-- Light theme customization for lottie illustration. Not translatable. -->
+    <string-array name="va_animation_customization" translatable="false">
         <item>.surfaceContainer:@sud_system_surface_container_light</item>
         <item>.primary:@sud_system_primary_light</item>
         <item>.primaryContainer:@sud_system_primary_container_light</item>
-        <item>.outline:@sud_system_outline_light</item>
-        <item>.onSecondaryContainer:@sud_system_secondary_container_light</item>
+        <item>.onPrimary:@sud_system_on_primary_light</item>
+        <item>.sContainerLowest:@sud_system_surface_container_lowest_light</item>
+        <item>.secondaryContainer:@sud_system_secondary_container_light</item>
+        <item>.onSecondary:@sud_system_on_secondary_light</item>
         <item>.tertiary:@sud_system_tertiary_light</item>
         <item>.inversePrimary:@sud_system_primary_inverse_light</item>
     </string-array>

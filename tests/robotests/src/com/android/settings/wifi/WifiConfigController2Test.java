@@ -232,7 +232,6 @@ public class WifiConfigController2Test {
         final Switch sharedSwitch = mView.findViewById(R.id.share_wifi_network);
         assertThat(sharedSwitch).isNotNull();
         assertThat(sharedSwitch.getVisibility()).isEqualTo(View.VISIBLE);
-        sharedSwitch.setChecked(true);
 
         WifiConfiguration config = mController.getConfig();
 

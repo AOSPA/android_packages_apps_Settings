@@ -17,6 +17,7 @@ package com.android.settings.accessibility
 
 // LINT.IfChange
 class TouchVibrationIntensitySwitchPreferenceTest : VibrationIntensitySwitchPreferenceTestCase() {
+    override val hasRingerModeDependency = false
     override val preference = TouchVibrationIntensitySwitchPreference(context)
 }
 // LINT.ThenChange(HapticFeedbackTogglePreferenceControllerTest.java)

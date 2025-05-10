@@ -233,6 +233,8 @@ class SupervisionWebContentFiltersScreenTest {
                     )!!
 
                 assertThat(footerPreference).isNotNull()
+
+                //TODO(b/415843744): Add tests for learn more link clicks.
             }
     }
 }

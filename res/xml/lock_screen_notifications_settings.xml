@@ -50,9 +50,8 @@
         settings:controller="com.android.settings.notification.LockScreenWhatToShowController">
 
         <SwitchPreferenceCompat
-            android:key="lock_screen_notification_show_seen_toggle"
-            android:title="@string/lock_screen_notification_show_seen_title"
-            settings:controller="com.android.settings.notification.LockScreenNotificationShowSeenController" />
+            android:key="lock_screen_notification_show_viewed_toggle"
+            settings:controller="com.android.settings.notification.LockScreenNotificationShowViewedController" />
 
         <SwitchPreferenceCompat
             android:key="lock_screen_notification_show_silent_toggle"

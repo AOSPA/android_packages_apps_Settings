@@ -21,6 +21,7 @@ import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_FULLSCREEN
 
 import static com.android.settings.applications.appcompat.UserAspectRatioRestoreStorage.ASPECT_RATIO_STAGED_DATA_PREFS;
 import static com.android.settings.applications.appcompat.UserAspectRatioRestoreStorage.KEY_STAGED_DATA_TIME;
+import static com.android.window.flags.Flags.FLAG_RESTORE_USER_ASPECT_RATIO_SETTINGS_USING_SERVICE;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -31,6 +32,9 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -39,6 +43,7 @@ import com.android.settings.testutils.FakeInstantSource;
 import com.android.settings.testutils.FakeSharedPreferences;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -53,6 +58,9 @@ import java.time.Duration;
  */
 @RunWith(AndroidJUnit4.class)
 public class UserAspectRatioRestoreStorageTest {
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
+
     private static final String DEFAULT_PACKAGE_NAME = "com.android.testapp";
     private static final String OTHER_PACKAGE_NAME = "com.android.anotherapp";
 
@@ -74,6 +82,7 @@ public class UserAspectRatioRestoreStorageTest {
     }
 
     @Test
+    @RequiresFlagsDisabled(FLAG_RESTORE_USER_ASPECT_RATIO_SETTINGS_USING_SERVICE)
     public void testCreateRestoreStorage_sharedPreferencesCreated() {
         verify(mContext).createDeviceProtectedStorageContext();
         ArgumentCaptor<File> fileCaptor = ArgumentCaptor.forClass(File.class);
@@ -83,6 +92,7 @@ public class UserAspectRatioRestoreStorageTest {
     }
 
     @Test
+    @RequiresFlagsDisabled(FLAG_RESTORE_USER_ASPECT_RATIO_SETTINGS_USING_SERVICE)
     public void testRestoreCompleted_currentTimeStoredInSharedPreferences() {
         mRestoreStorage.restoreCompleted();
 
@@ -91,6 +101,7 @@ public class UserAspectRatioRestoreStorageTest {
     }
 
     @Test
+    @RequiresFlagsDisabled(FLAG_RESTORE_USER_ASPECT_RATIO_SETTINGS_USING_SERVICE)
     public void testStorePackageAndUserAspectRatio() {
         mRestoreStorage.storePackageAndUserAspectRatio(DEFAULT_PACKAGE_NAME,
                 USER_MIN_ASPECT_RATIO_FULLSCREEN);
@@ -100,6 +111,7 @@ public class UserAspectRatioRestoreStorageTest {
     }
 
     @Test
+    @RequiresFlagsDisabled(FLAG_RESTORE_USER_ASPECT_RATIO_SETTINGS_USING_SERVICE)
     public void testGetAndRemoveUserAspectRatioForPackage_dataLessThanAWeekOld_dataReturned() {
         mRestoreStorage.storePackageAndUserAspectRatio(DEFAULT_PACKAGE_NAME,
                 USER_MIN_ASPECT_RATIO_FULLSCREEN);
@@ -113,6 +125,7 @@ public class UserAspectRatioRestoreStorageTest {
     }
 
     @Test
+    @RequiresFlagsDisabled(FLAG_RESTORE_USER_ASPECT_RATIO_SETTINGS_USING_SERVICE)
     public void testGetAndRemoveUserAspectRatioForPackage_weekOldDataCleanedUpAndNothingReturned() {
         mRestoreStorage.storePackageAndUserAspectRatio(DEFAULT_PACKAGE_NAME,
                 USER_MIN_ASPECT_RATIO_FULLSCREEN);

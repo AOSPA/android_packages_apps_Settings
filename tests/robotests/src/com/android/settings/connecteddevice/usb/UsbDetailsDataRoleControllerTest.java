@@ -33,7 +33,6 @@ import android.app.KeyguardManager;
 import android.content.Context;
 import android.hardware.usb.UsbManager;
 import android.os.Handler;
-import android.platform.test.annotations.RequiresFlagsEnabled;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceCategory;
@@ -41,7 +40,6 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.flags.Flags;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
@@ -214,7 +212,6 @@ public class UsbDetailsDataRoleControllerTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_AUTH_CHALLENGE_FOR_USB_PREFERENCES)
     public void onRadioButtonClicked_userAuthenticated() {
         SelectorWithWidgetPreference preference = getRadioPreference(DATA_ROLE_DEVICE);
         setAuthPassesAutomatically();

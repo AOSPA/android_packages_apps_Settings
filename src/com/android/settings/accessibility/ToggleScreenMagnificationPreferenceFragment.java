@@ -35,7 +35,6 @@ import android.os.Bundle;
 import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.text.TextUtils;
-import android.view.InputDevice;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +56,7 @@ import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums;
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
+import com.android.settings.inputmethod.InputPeripheralsSettingsUtils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.Indexable;
@@ -210,11 +210,12 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     private static boolean isMagnificationCursorFollowingModeDialogSupported() {
         return com.android.settings.accessibility.Flags.enableMagnificationCursorFollowingDialog()
-                && hasMouse();
+                && InputPeripheralsSettingsUtils.isMouse();
     }
 
     private static boolean isMagnificationKeyboardFollowingSupported() {
-        return android.view.accessibility.Flags.requestRectangleWithSource();
+        return android.view.accessibility.Flags.requestRectangleWithSource()
+                && InputPeripheralsSettingsUtils.isHardKeyboard();
     }
 
     private static boolean isMagnificationMagnifyNavAndImeSupported() {
@@ -256,7 +257,8 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 && !Flags.enableMagnificationOneFingerPanningGesture()) {
             String summary = "";
             boolean hasTouchscreen = hasTouchscreen();
-            if (Flags.enableMagnificationKeyboardControl() && hasHardKeyboard()) {
+            if (Flags.enableMagnificationKeyboardControl()
+                    && InputPeripheralsSettingsUtils.isHardKeyboard()) {
                 // Include the keyboard summary when a keyboard is plugged in.
                 final String meta = context.getString(R.string.modifier_keys_meta);
                 final String alt = context.getString(R.string.modifier_keys_alt);
@@ -704,34 +706,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     protected int getUserPreferredShortcutTypes() {
         return PreferredShortcuts.retrieveUserShortcutType(
                 getPrefContext(), MAGNIFICATION_CONTROLLER_NAME);
-    }
-
-    /**
-     * Returns if a mouse is attached.
-     */
-    private static boolean hasMouse() {
-        final int[] devices = InputDevice.getDeviceIds();
-        for (int i = 0; i < devices.length; i++) {
-            InputDevice device = InputDevice.getDevice(devices[i]);
-            if (device != null && (device.getSources() & InputDevice.SOURCE_MOUSE)
-                    == InputDevice.SOURCE_MOUSE) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean hasHardKeyboard() {
-        final int[] devices = InputDevice.getDeviceIds();
-        for (int i = 0; i < devices.length; i++) {
-            InputDevice device = InputDevice.getDevice(devices[i]);
-            if (device == null || device.isVirtual() || !device.isFullKeyboard()) {
-                continue;
-            }
-
-            return true;
-        }
-        return false;
     }
 
     private boolean hasTouchscreen() {

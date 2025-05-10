@@ -23,6 +23,7 @@ import org.mockito.kotlin.stub
 
 // LINT.IfChange
 class MediaVibrationIntensitySliderPreferenceTest : VibrationIntensitySliderPreferenceTestCase() {
+    override val hasRingerModeDependency = false
     override val preference = MediaVibrationIntensitySliderPreference(context)
 
     @Test

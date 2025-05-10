@@ -18,7 +18,7 @@ package com.android.settings.accessibility
 // LINT.IfChange
 class NotificationVibrationIntensitySwitchPreferenceTest :
     VibrationIntensitySwitchPreferenceTestCase() {
-
+    override val hasRingerModeDependency = true
     override val preference = NotificationVibrationIntensitySwitchPreference(context)
 }
 // LINT.ThenChange(NotificationVibrationTogglePreferenceControllerTest.java)

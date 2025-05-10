@@ -389,7 +389,6 @@ public class UsbDetailsFunctionsControllerTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_AUTH_CHALLENGE_FOR_USB_PREFERENCES)
     public void onRadioButtonClicked_userAuthenticated() {
         mRadioButtonPreference.setKey(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_PTP));
         doReturn(UsbManager.FUNCTION_MTP).when(mUsbBackend).getCurrentFunctions();
