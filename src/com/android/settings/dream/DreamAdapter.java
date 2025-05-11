@@ -93,6 +93,10 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             if (dreamsV2()) {
                 mTitleView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
                 mTitleView.setSingleLine();
+
+                final int drawablePadding = mContext.getResources().getDimensionPixelSize(
+                        R.dimen.dream_item_icon_padding_new);
+                mTitleView.setCompoundDrawablePadding(drawablePadding);
             }
 
             itemView.setOnClickListener(v -> {

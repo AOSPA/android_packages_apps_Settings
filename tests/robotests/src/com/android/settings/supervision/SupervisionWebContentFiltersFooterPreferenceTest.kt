@@ -15,18 +15,44 @@
  */
 package com.android.settings.supervision
 
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.TextView
+import androidx.preference.PreferenceViewHolder
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settingslib.preference.createAndBindWidget
+import com.android.settingslib.widget.FooterPreference
+import com.android.settingslib.widget.preference.footer.R
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class SupervisionWebContentFiltersFooterPreferenceTest {
+    private val context: Context = ApplicationProvider.getApplicationContext()
     private val footerPreference = SupervisionWebContentFiltersFooterPreference()
 
     @Test
     fun getTitle() {
-        assertThat(footerPreference.title)
-            .isEqualTo(0)
+        assertThat(footerPreference.title).isEqualTo(0)
+    }
+
+    @Test
+    fun learnMoreTextExists() {
+        footerPreference.createAndBindWidget<FooterPreference>(context).also {
+            val holder =
+                PreferenceViewHolder.createInstanceForTests(
+                    LayoutInflater.from(context)
+                        .inflate(R.layout.preference_footer, /* root= */ null)
+                )
+            it.onBindViewHolder(holder)
+            val learnMoreView = holder.itemView.findViewById<TextView?>(R.id.settingslib_learn_more)
+            assertThat(learnMoreView).isNotNull()
+            assertThat(learnMoreView?.visibility).isEqualTo(View.VISIBLE)
+            assertThat(learnMoreView?.text.toString())
+                .isEqualTo(context.getString(R.string.settingslib_learn_more_text))
+        }
     }
 }

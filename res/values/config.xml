@@ -879,4 +879,10 @@
 
     <!-- Whether the Gaze is enabled -->
     <bool name="config_gazeEnabled">false</bool>
+
+    <!-- Whether to share the WiFi network by default. -->
+    <bool name="config_share_network_by_default">true</bool>
+
+    <!-- Whether to allow other device users to edit network configuration of a shared network by default. -->
+    <bool name="config_allow_edit_network_configuration_by_default">true</bool>
 </resources>

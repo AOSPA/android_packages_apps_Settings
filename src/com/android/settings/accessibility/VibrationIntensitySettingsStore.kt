@@ -15,27 +15,50 @@
  */
 package com.android.settings.accessibility
 
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.media.AudioManager
 import android.os.VibrationAttributes.Usage
 import android.os.Vibrator
 import com.android.settings.R
+import com.android.settingslib.datastore.AbstractKeyedDataObservable
+import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyValueStore
-import com.android.settingslib.datastore.KeyValueStoreDelegate
+import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSystemStore
+import com.android.settingslib.metadata.PreferenceChangeReason
 import kotlin.math.min
 
 /** SettingsStore for vibration intensity preferences with custom default value. */
 class VibrationIntensitySettingsStore(
-    context: Context,
+    private val context: Context,
     @Usage vibrationUsage: Int,
-    override val keyValueStoreDelegate: KeyValueStore = SettingsSystemStore.get(context),
+    private val hasRingerModeDependency: Boolean,
+    private val key: String,
+    private val keyValueStoreDelegate: KeyValueStore = SettingsSystemStore.get(context),
     private val defaultIntensity: Int = context.getDefaultVibrationIntensity(vibrationUsage),
     private val supportedIntensityLevels: Int = context.getSupportedVibrationIntensityLevels(),
-) : KeyValueStoreDelegate {
+) : AbstractKeyedDataObservable<String>(), KeyedObserver<String>, KeyValueStore {
+
+    private lateinit var ringerModeBroadcastReceiver: BroadcastReceiver
 
     /** Returns true if the settings key should be enabled, false otherwise. */
-    fun isPreferenceEnabled() =
-        keyValueStoreDelegate.getBoolean(VibrationMainSwitchPreference.KEY) != false // default true
+    fun isPreferenceEnabled(): Boolean {
+        if (keyValueStoreDelegate.getBoolean(VibrationMainSwitchPreference.KEY) == false) {
+            return false
+        }
+
+        return !isDisabledByRingerMode()
+    }
+
+    fun isDisabledByRingerMode(): Boolean {
+        return (keyValueStoreDelegate.getBoolean(VibrationMainSwitchPreference.KEY) != false) &&
+                (hasRingerModeDependency && context.isRingerModeSilent())
+    }
+
+    override fun contains(key: String) = keyValueStoreDelegate.contains(key)
 
     override fun <T : Any> getDefaultValue(key: String, valueType: Class<T>) =
         intensityToValue(valueType, defaultIntensity)
@@ -50,6 +73,40 @@ class VibrationIntensitySettingsStore(
 
     override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) =
         keyValueStoreDelegate.setInt(key, value?.let { valueToIntensity(valueType, it) })
+
+    override fun onFirstObserverAdded() {
+        ringerModeBroadcastReceiver = object : BroadcastReceiver() {
+            override fun onReceive(broadcastContext: Context?, intent: Intent?) {
+                notifyChange(PreferenceChangeReason.STATE)
+            }
+        }
+        val intentFilter = IntentFilter(AudioManager.INTERNAL_RINGER_MODE_CHANGED_ACTION)
+        context.registerReceiver(
+            ringerModeBroadcastReceiver,
+            intentFilter,
+            Context.RECEIVER_NOT_EXPORTED
+        )
+
+        keyValueStoreDelegate.addObserver(key, this, HandlerExecutor.main)
+    }
+
+    override fun onKeyChanged(key: String, reason: Int) = notifyChange(key, reason)
+
+    override fun onLastObserverRemoved() {
+        context.unregisterReceiver(ringerModeBroadcastReceiver)
+        keyValueStoreDelegate.removeObserver(key, this)
+    }
+
+    fun dependencies() = arrayOf(VibrationMainSwitchPreference.KEY)
+
+    fun getSummary(): CharSequence? =
+        // Only display summary if ringer mode silent is the one disabling this preference.
+        if (isDisabledByRingerMode()) {
+            context.getString(
+                R.string.accessibility_vibration_setting_disabled_for_silent_mode_summary)
+        } else {
+            null
+        }
 
     @Suppress("UNCHECKED_CAST")
     private fun <T : Any> intensityToValue(valueType: Class<T>, intensity: Int): T? =
@@ -99,3 +156,11 @@ private fun Context.getDefaultVibrationIntensity(@Usage vibrationUsage: Int): In
 /** Returns the number of vibration intensity levels supported by this device. */
 fun Context.getSupportedVibrationIntensityLevels(): Int =
     resources.getInteger(R.integer.config_vibration_supported_intensity_levels)
+
+/** Returns true if the device ringer mode is silent. */
+private fun Context.isRingerModeSilent() =
+    // AudioManager.isSilentMode() also returns true when ringer mode is RINGER_MODE_VIBRATE.
+    // The vibration preferences are only disabled when the ringer mode is RINGER_MODE_SILENT.
+    // Use getRingerModeInternal() method to check the actual ringer mode.
+    getSystemService(AudioManager::class.java)
+        ?.ringerModeInternal == AudioManager.RINGER_MODE_SILENT

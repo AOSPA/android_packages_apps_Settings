@@ -16,7 +16,10 @@
 
 package com.android.settings.notification;
 
+import static android.provider.Settings.Secure.LOCK_SCREEN_NOTIFICATION_MINIMALISM;
 import static android.provider.Settings.Secure.LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS;
+
+import static com.android.settings.notification.lockscreen.MinimalismPreferenceController.LS_MINIMALISM_ON;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -35,13 +38,14 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.server.notification.Flags;
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 /**
  * Controls the toggle that determines whether to hide seen notifications from the lock screen.
  * Toggle for setting: Settings.Secure.LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS
  */
-public class LockScreenNotificationShowSeenController extends TogglePreferenceController
+public class LockScreenNotificationShowViewedController extends TogglePreferenceController
         implements LifecycleEventObserver {
 
     // 0 is the default value for phones, we treat 0 as off as usage
@@ -60,7 +64,7 @@ public class LockScreenNotificationShowSeenController extends TogglePreferenceCo
         }
     };
 
-    public LockScreenNotificationShowSeenController(@NonNull Context context,
+    public LockScreenNotificationShowViewedController(@NonNull Context context,
             @NonNull String preferenceKey) {
         super(context, preferenceKey);
         mContentResolver = context.getContentResolver();
@@ -70,6 +74,9 @@ public class LockScreenNotificationShowSeenController extends TogglePreferenceCo
     public void displayPreference(@NonNull PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
+        if (mPreference != null) {
+            mPreference.setTitle(getTitleResForState());
+        }
     }
 
     @Override
@@ -85,6 +92,11 @@ public class LockScreenNotificationShowSeenController extends TogglePreferenceCo
                     /* notifyForDescendants= */ false,
                     mContentObserver
             );
+            mContentResolver.registerContentObserver(
+                    Settings.Secure.getUriFor(LOCK_SCREEN_NOTIFICATION_MINIMALISM),
+                    /* notifyForDescendants= */ false,
+                    mContentObserver
+            );
         } else if (event == Lifecycle.Event.ON_PAUSE) {
             mContentResolver.unregisterContentObserver(mContentObserver);
         }
@@ -95,6 +107,24 @@ public class LockScreenNotificationShowSeenController extends TogglePreferenceCo
         super.updateState(preference);
         setChecked(lockScreenShowSeenNotifications());
         preference.setVisible(isAvailable());
+        preference.setTitle(getTitleResForState());
+    }
+
+    private int getTitleResForState() {
+        if (lockScreenMinimalism()) {
+            return R.string.lock_screen_notification_show_viewed_notif_icons;
+        } else {
+            return R.string.lock_screen_notification_show_viewed_notifs;
+        }
+    }
+
+    /**
+     * @return whether to show seen notifications on lockscreen
+     */
+    private boolean lockScreenMinimalism() {
+        if (!Flags.notificationMinimalism()) return false;
+        return Settings.Secure.getInt(mContext.getContentResolver(),
+                LOCK_SCREEN_NOTIFICATION_MINIMALISM, LS_MINIMALISM_ON) == LS_MINIMALISM_ON;
     }
 
     @Override

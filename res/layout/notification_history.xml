@@ -28,6 +28,8 @@
         <com.android.settingslib.widget.MainSwitchBar
             android:id="@+id/main_switch_bar"
             android:visibility="invisible"
+            android:layout_marginStart="?android:attr/listPreferredItemPaddingStart"
+            android:layout_marginEnd="?android:attr/listPreferredItemPaddingEnd"
             android:layout_height="wrap_content"
             android:layout_width="match_parent" />
 

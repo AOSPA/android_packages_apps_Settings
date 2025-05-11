@@ -73,7 +73,6 @@ enum class DeviceStateCategory(val functionId: String) {
     UNCATEGORIZED("getUncategorizedDeviceState"),
     STORAGE("getStorageDeviceState"),
     BATTERY("getBatteryDeviceState"),
-    PERMISSION("getPermissionsDeviceState"),
     MOBILE_DATA("getMobileDataUsageDeviceState");
 
     companion object {
@@ -142,22 +141,22 @@ fun getScreenConfigs() =
         PerScreenConfig(
             enabled = true,
             screenKey = LocationScreen.KEY,
-            category = setOf(DeviceStateCategory.PERMISSION),
+            category = setOf(DeviceStateCategory.UNCATEGORIZED),
         ),
         PerScreenConfig(
             enabled = true,
             screenKey = AppsAllFilesAccessAppListScreen.KEY,
-            category = setOf(DeviceStateCategory.PERMISSION),
+            category = setOf(DeviceStateCategory.UNCATEGORIZED),
         ),
         PerScreenConfig(
             enabled = true,
             screenKey = AppsDisplayOverOtherAppsAppListScreen.KEY,
-            category = setOf(DeviceStateCategory.PERMISSION),
+            category = setOf(DeviceStateCategory.UNCATEGORIZED),
         ),
         PerScreenConfig(
             enabled = true,
             screenKey = AppsFullScreenIntentAppListScreen.KEY,
-            category = setOf(DeviceStateCategory.PERMISSION),
+            category = setOf(DeviceStateCategory.UNCATEGORIZED),
         ),
         PerScreenConfig(
             enabled = true,
@@ -221,17 +220,17 @@ fun getScreenConfigs() =
         PerScreenConfig(
             enabled = true,
             screenKey = AppPictureInPictureAppListScreen.KEY,
-            category = setOf(DeviceStateCategory.PERMISSION),
+            category = setOf(DeviceStateCategory.UNCATEGORIZED),
         ),
         PerScreenConfig(
             enabled = true,
             screenKey = AppInteractAcrossProfilesAppListScreen.KEY,
-            category = setOf(DeviceStateCategory.PERMISSION),
+            category = setOf(DeviceStateCategory.UNCATEGORIZED),
         ),
         PerScreenConfig(
             enabled = true,
             screenKey = AppsNotificationAccessScreen.KEY,
-            category = setOf(DeviceStateCategory.PERMISSION),
+            category = setOf(DeviceStateCategory.UNCATEGORIZED),
         ),
     )
 

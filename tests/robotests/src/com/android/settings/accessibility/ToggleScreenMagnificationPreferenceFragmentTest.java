@@ -76,6 +76,7 @@ import com.android.settingslib.search.SearchIndexableRaw;
 
 import com.google.common.truth.Correspondence;
 
+import org.bouncycastle.util.Arrays;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -140,6 +141,9 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
             Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MAGNIFY_NAV_AND_IME;
     private static final String KEY_FOLLOW_KEYBOARD =
             Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_KEYBOARD_ENABLED;
+
+    private static final int SHADOW_MOUSE_DEVICE_ID = 1;
+    private static final int SHADOW_KEYBOARD_DEVICE_ID = 2;
 
     private FragmentController<ToggleScreenMagnificationPreferenceFragment> mFragController;
     private Context mContext;
@@ -372,10 +376,21 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         assertThat(switchPreference.isChecked()).isFalse();
     }
 
+    @Test
+    @EnableFlags(android.view.accessibility.Flags.FLAG_REQUEST_RECTANGLE_WITH_SOURCE)
+    public void onResume_noKeyboardAttached_noFollowKeyboardPreference() {
+        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
+
+        final TwoStatePreference switchPreference = mFragController.get().findPreference(
+                MagnificationFollowKeyboardPreferenceController.PREF_KEY);
+        assertThat(switchPreference).isNull();
+    }
 
     @Test
     @EnableFlags(android.view.accessibility.Flags.FLAG_REQUEST_RECTANGLE_WITH_SOURCE)
+    @Config(shadows = ShadowInputDevice.class)
     public void onResume_defaultStateForFollowingKeyboard_switchPreferenceShouldReturnFalse() {
+        addKeyboardDevice();
         setKeyFollowKeyboardEnabled(false);
 
         mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
@@ -388,7 +403,9 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
     @Test
     @EnableFlags(android.view.accessibility.Flags.FLAG_REQUEST_RECTANGLE_WITH_SOURCE)
+    @Config(shadows = ShadowInputDevice.class)
     public void onResume_enableFollowingKeyboard_switchPreferenceShouldReturnTrue() {
+        addKeyboardDevice();
         setKeyFollowKeyboardEnabled(true);
 
         mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
@@ -790,10 +807,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_KEYBOARD_CONTROL)
     @Config(shadows = ShadowInputDevice.class)
     public void getCurrentHtmlDescription_includesKeyboardInfoIfKeyboardAttached() {
-        int deviceId = 1;
-        ShadowInputDevice.sDeviceIds = new int[]{deviceId};
-        InputDevice device = ShadowInputDevice.makeFullKeyboardInputDevicebyId(deviceId);
-        ShadowInputDevice.addDevice(deviceId, device);
+        addKeyboardDevice();
 
         ToggleScreenMagnificationPreferenceFragment fragment =
                 mFragController.create(
@@ -971,6 +985,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         setAlwaysOnSupported(true);
         setJoystickSupported(true);
         addMouseDevice();
+        addKeyboardDevice();
 
         final List<String> niks = ToggleScreenMagnificationPreferenceFragment
                 .SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
@@ -1081,13 +1096,31 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
                 enabled ? ON : OFF);
     }
 
-    private void addMouseDevice() {
-        int deviceId = 1;
-        ShadowInputDevice.sDeviceIds = new int[]{deviceId};
-        InputDevice device = ShadowInputDevice.makeInputDevicebyIdWithSources(deviceId,
-                InputDevice.SOURCE_MOUSE);
-        ShadowInputDevice.addDevice(deviceId, device);
+    private static void addShadowInputDeviceId(int deviceId) {
+        if (ShadowInputDevice.sDeviceIds == null) {
+            ShadowInputDevice.sDeviceIds = new int[]{deviceId};
+        } else {
+            int curLength = ShadowInputDevice.sDeviceIds.length;
+            ShadowInputDevice.sDeviceIds = Arrays.copyOf(ShadowInputDevice.sDeviceIds,
+                    curLength + 1);
+            ShadowInputDevice.sDeviceIds[curLength] = deviceId;
+        }
     }
+
+    private static void addMouseDevice() {
+        addShadowInputDeviceId(SHADOW_MOUSE_DEVICE_ID);
+        InputDevice device = ShadowInputDevice
+                .makeInputDevicebyIdWithSources(SHADOW_MOUSE_DEVICE_ID, InputDevice.SOURCE_MOUSE);
+        ShadowInputDevice.addDevice(SHADOW_MOUSE_DEVICE_ID, device);
+    }
+
+    private static void addKeyboardDevice() {
+        addShadowInputDeviceId(SHADOW_KEYBOARD_DEVICE_ID);
+        InputDevice device = ShadowInputDevice
+                .makeFullKeyboardInputDevicebyId(SHADOW_KEYBOARD_DEVICE_ID);
+        ShadowInputDevice.addDevice(SHADOW_KEYBOARD_DEVICE_ID, device);
+    }
+
     private void setWindowMagnificationSupported(boolean magnificationAreaSupported,
             boolean windowMagnificationSupported) {
         when(mSpyResources.getBoolean(

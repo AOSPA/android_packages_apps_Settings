@@ -17,6 +17,7 @@ package com.android.settings.accessibility
 
 import android.content.Context
 import android.content.ContextWrapper
+import android.media.AudioManager
 import android.os.VibrationAttributes
 import android.os.VibrationEffect
 import android.os.Vibrator
@@ -24,11 +25,16 @@ import androidx.core.content.getSystemService
 import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.R
+import com.android.settings.testutils.shadow.ShadowAudioManager
 import com.android.settingslib.datastore.SettingsSystemStore
 import com.android.settingslib.preference.PreferenceBindingFactory
 import com.android.settingslib.preference.createAndBindWidget
 import com.android.settingslib.widget.MainSwitchPreference
 import com.google.common.truth.Truth.assertThat
+import org.junit.Assume.assumeFalse
+import org.junit.Assume.assumeTrue
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
@@ -37,11 +43,14 @@ import org.mockito.kotlin.never
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
+import org.robolectric.annotation.Config
 
 /** Test case for vibration switch preferences. */
 // LINT.IfChange
+@Config(shadows = [ShadowAudioManager::class])
 @RunWith(AndroidJUnit4::class)
 abstract class VibrationIntensitySwitchPreferenceTestCase {
+    protected abstract val hasRingerModeDependency: Boolean
     protected abstract val preference: VibrationIntensitySwitchPreference
     protected val mainSwitchPreference = VibrationMainSwitchPreference()
 
@@ -56,6 +65,11 @@ abstract class VibrationIntensitySwitchPreferenceTestCase {
                     else -> super.getSystemService(name)
                 }
         }
+
+    @Before
+    fun setUp() {
+        setRingerMode(AudioManager.RINGER_MODE_NORMAL)
+    }
 
     @Test
     fun state_valueUnset_enabledAndChecked() {
@@ -94,6 +108,92 @@ abstract class VibrationIntensitySwitchPreferenceTestCase {
         assertThat(mainSwitchWidget.isChecked).isFalse()
         assertThat(widget.isEnabled).isFalse()
         assertThat(widget.isChecked).isFalse()
+    }
+
+    @Test
+    fun state_ringerModeNormal_enabledAndChecked() {
+        setRingerMode(AudioManager.RINGER_MODE_NORMAL)
+        setValue(true)
+        val widget = createWidget()
+
+        assertThat(widget.isEnabled).isTrue()
+        assertThat(widget.isChecked).isTrue()
+    }
+
+    @Test
+    fun state_ringerModeVibrate_enabledAndChecked() {
+        setRingerMode(AudioManager.RINGER_MODE_VIBRATE)
+        setValue(true)
+        val widget = createWidget()
+
+        assertThat(widget.isEnabled).isTrue()
+        assertThat(widget.isChecked).isTrue()
+    }
+
+    @Test
+    fun state_ringerModeSilentWithoutDependency_enabledAndChecked() {
+        assumeFalse(hasRingerModeDependency)
+        setRingerMode(AudioManager.RINGER_MODE_SILENT)
+        setValue(true)
+        val widget = createWidget()
+
+        assertThat(widget.isEnabled).isTrue()
+        assertThat(widget.isChecked).isTrue()
+    }
+
+    @Test
+    fun state_ringerModeSilentWithDependency_disabledAndUncheckedAndPreservesStoredValue() {
+        assumeTrue(hasRingerModeDependency)
+        setRingerMode(AudioManager.RINGER_MODE_SILENT)
+        val defaultIntensity = Vibrator.VIBRATION_INTENSITY_HIGH
+        vibratorSpy.stub {
+            on { getDefaultVibrationIntensity(any()) } doReturn defaultIntensity
+        }
+        setValue(true)
+        val widget = createWidget()
+
+        assertThat(widget.isEnabled).isFalse()
+        assertThat(widget.isChecked).isFalse()
+        assertThat(getRawStoredValue()).isEqualTo(defaultIntensity)
+    }
+
+    @Test
+    fun summary_preferenceEnabled_isNull() {
+        setValue(true)
+        val widget = createWidget()
+
+        assertThat(widget.isEnabled).isTrue()
+        assertThat(widget.summary).isNull()
+    }
+
+    @Test
+    fun summary_preferenceDisabledByMainSwitch_isNull() {
+        setMainSwitchValue(false)
+        setRingerMode(AudioManager.RINGER_MODE_SILENT)
+        setValue(true)
+        val widget = createWidget()
+        val mainSwitchWidget = createMainSwitchWidget()
+
+        assertThat(mainSwitchWidget.isChecked).isFalse()
+        assertThat(widget.isEnabled).isFalse()
+        assertThat(widget.summary).isNull()
+    }
+
+    @Test
+    fun summary_preferenceDisabledByRingerModeSilent_isSilentModeMessage() {
+        assumeTrue(hasRingerModeDependency)
+        setRingerMode(AudioManager.RINGER_MODE_SILENT)
+        val expectedSummary = context.getString(
+            R.string.accessibility_vibration_setting_disabled_for_silent_mode_summary
+        )
+        setMainSwitchValue(true)
+        setValue(true)
+        val widget = createWidget()
+        val mainSwitchWidget = createMainSwitchWidget()
+
+        assertThat(mainSwitchWidget.isChecked).isTrue()
+        assertThat(widget.isEnabled).isFalse()
+        assertThat(widget.summary).isEqualTo(expectedSummary)
     }
 
     @Test
@@ -227,7 +327,7 @@ abstract class VibrationIntensitySwitchPreferenceTestCase {
     fun mainSwitchClick_withDefaultIntensity_doesNotUpdateStoredValue() {
         val defaultIntensity = Vibrator.VIBRATION_INTENSITY_HIGH
         vibratorSpy.stub {
-            on { getDefaultVibrationIntensity(preference.vibrationUsage) } doReturn defaultIntensity
+            on { getDefaultVibrationIntensity(any()) } doReturn defaultIntensity
         }
         setMainSwitchValue(true)
         setValue(true)
@@ -251,6 +351,12 @@ abstract class VibrationIntensitySwitchPreferenceTestCase {
         assertThat(getRawStoredValue()).isEqualTo(defaultIntensity)
         assertThat(mainSwitchWidget.isChecked).isTrue()
         assertThat(widget.isChecked).isTrue()
+    }
+
+    private fun setRingerMode(ringerMode: Int) {
+        val audioManager = context.getSystemService<AudioManager>()
+        audioManager?.ringerModeInternal = ringerMode
+        assertThat(audioManager?.ringerModeInternal).isEqualTo(ringerMode)
     }
 
     private fun getRawStoredValue() =

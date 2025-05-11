@@ -60,7 +60,7 @@ constructor(
                 .collectAsStateWithLifecycle(initialValue = false)
         val isVoNrEnabled by
             remember { voNrRepository.isVoNrEnabledFlow(subId) }
-                .collectAsStateWithLifecycle(initialValue = false)
+                .collectAsStateWithLifecycle(null)
         val coroutineScope = rememberCoroutineScope()
         SwitchPreference(
             object : SwitchPreferenceModel {

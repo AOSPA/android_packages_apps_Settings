@@ -355,12 +355,23 @@ public class WifiConfigController2 implements TextWatcher,
 
         if (com.android.settings.connectivity.Flags.wifiMultiuser()) {
             int userCount = mUserManager.getUserCount();
-            mSharedSwitch.setOnCheckedChangeListener(this);
             mView.findViewById(R.id.sharing_toggle_fields)
                     .setVisibility(userCount > 1 ? View.VISIBLE : View.GONE);
             mEditConfigurationSwitch.setEnabled(false);
             mView.findViewById(R.id.edit_wifi_network_configuration_fields)
                     .setVisibility(userCount > 1 ? View.VISIBLE : View.GONE);
+
+            boolean sharedDefault =
+                    mContext.getResources().getBoolean(R.bool.config_share_network_by_default);
+            boolean editConfigDefault =
+                    mContext.getResources()
+                        .getBoolean(R.bool.config_allow_edit_network_configuration_by_default);
+
+            mSharedSwitch.setChecked(sharedDefault);
+            mEditConfigurationSwitch.setEnabled(sharedDefault);
+            mEditConfigurationSwitch.setChecked(editConfigDefault);
+
+            mSharedSwitch.setOnCheckedChangeListener(this);
         }
 
         if (mWifiEntry == null) { // new network

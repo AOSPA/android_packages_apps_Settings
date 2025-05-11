@@ -21,8 +21,8 @@ import androidx.annotation.CallSuper
 import androidx.annotation.StringRes
 import androidx.preference.Preference
 import androidx.preference.TwoStatePreference
-import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.SwitchPreference
 import com.android.settingslib.preference.SwitchPreferenceBinding
 
@@ -45,15 +45,27 @@ open class VibrationIntensitySwitchPreference(
     @Usage val vibrationUsage: Int,
     @StringRes title: Int = 0,
     @StringRes summary: Int = 0,
+    val hasRingerModeDependency: Boolean = false,
 ) :
     SwitchPreference(key, title, summary),
     SwitchPreferenceBinding,
+    PreferenceSummaryProvider,
     Preference.OnPreferenceChangeListener {
 
-    private val storage by lazy { VibrationIntensitySettingsStore(context, vibrationUsage) }
+    private val storage by lazy {
+        VibrationIntensitySettingsStore(
+            context,
+            vibrationUsage,
+            hasRingerModeDependency,
+            key
+        )
+    }
 
-    override fun storage(context: Context): KeyValueStore =storage
-    override fun dependencies(context: Context) = arrayOf(VibrationMainSwitchPreference.KEY)
+    override fun storage(context: Context) = storage
+
+    override fun dependencies(context: Context) = storage.dependencies()
+
+    override fun getSummary(context: Context) = storage.getSummary()
 
     @CallSuper
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {

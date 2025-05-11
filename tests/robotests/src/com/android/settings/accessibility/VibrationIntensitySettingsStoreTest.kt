@@ -16,20 +16,26 @@
 package com.android.settings.accessibility
 
 import android.content.Context
+import android.media.AudioManager
 import android.os.VibrationAttributes
 import android.os.Vibrator
 import android.provider.Settings
+import androidx.core.content.getSystemService
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.testutils.shadow.ShadowAudioManager
 import com.android.settingslib.datastore.SettingsSystemStore
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
+@Config(shadows = [ShadowAudioManager::class])
 class VibrationIntensitySettingsStoreTest {
     private companion object {
         const val KEY: String = Settings.System.HAPTIC_FEEDBACK_INTENSITY
+        const val VIBRATION_USAGE: Int = VibrationAttributes.USAGE_TOUCH
         const val DEFAULT_INTENSITY: Int = Vibrator.VIBRATION_INTENSITY_MEDIUM
         const val SUPPORTED_INTENSITIES: Int = Vibrator.VIBRATION_INTENSITY_HIGH
     }
@@ -38,7 +44,9 @@ class VibrationIntensitySettingsStoreTest {
     private val settingsStore = SettingsSystemStore.get(context)
     private val store = VibrationIntensitySettingsStore(
         context = context,
-        vibrationUsage = VibrationAttributes.USAGE_RINGTONE,
+        vibrationUsage = VIBRATION_USAGE,
+        hasRingerModeDependency = false,
+        key = KEY,
         keyValueStoreDelegate = settingsStore,
         defaultIntensity = DEFAULT_INTENSITY,
         supportedIntensityLevels = SUPPORTED_INTENSITIES,
@@ -57,6 +65,84 @@ class VibrationIntensitySettingsStoreTest {
     }
 
     @Test
+    fun isPreferenceEnabled_noRingerModeDependency_ignoresRingerMode() {
+        val testStore = VibrationIntensitySettingsStore(
+            context = context,
+            vibrationUsage = VIBRATION_USAGE,
+            hasRingerModeDependency = false,
+            key = KEY,
+            keyValueStoreDelegate = settingsStore,
+            defaultIntensity = DEFAULT_INTENSITY,
+            supportedIntensityLevels = SUPPORTED_INTENSITIES,
+        )
+
+        setRingerMode(AudioManager.RINGER_MODE_SILENT)
+        testStore.setInt(KEY, Vibrator.VIBRATION_INTENSITY_HIGH)
+
+        assertThat(testStore.isPreferenceEnabled()).isTrue()
+        assertThat(settingsStore.getInt(KEY)).isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH)
+        assertThat(testStore.getBoolean(KEY)).isTrue()
+        assertThat(testStore.getInt(KEY)).isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH)
+    }
+
+    @Test
+    fun isPreferenceEnabled_withRingerModeDependency_returnsDisabledWhenRingerModeSilent() {
+        val testStore = VibrationIntensitySettingsStore(
+            context = context,
+            vibrationUsage = VIBRATION_USAGE,
+            hasRingerModeDependency = true,
+            key = KEY,
+            keyValueStoreDelegate = settingsStore,
+            defaultIntensity = DEFAULT_INTENSITY,
+            supportedIntensityLevels = SUPPORTED_INTENSITIES,
+        )
+
+        setRingerMode(AudioManager.RINGER_MODE_VIBRATE)
+        testStore.setInt(KEY, Vibrator.VIBRATION_INTENSITY_HIGH)
+
+        assertThat(testStore.isPreferenceEnabled()).isTrue()
+        assertThat(settingsStore.getInt(KEY)).isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH)
+        assertThat(testStore.getBoolean(KEY)).isTrue()
+        assertThat(testStore.getInt(KEY)).isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH)
+
+        setRingerMode(AudioManager.RINGER_MODE_SILENT)
+
+        assertThat(testStore.isPreferenceEnabled()).isFalse()
+        assertThat(settingsStore.getInt(KEY)).isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH)
+        assertThat(testStore.getBoolean(KEY)).isFalse()
+        assertThat(testStore.getInt(KEY)).isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF)
+    }
+
+    @Test
+    fun isDisabledByRingerMode_returnsWhenRingerModeSilentAndMainSwitchOn() {
+        val testStore = VibrationIntensitySettingsStore(
+            context = context,
+            vibrationUsage = VIBRATION_USAGE,
+            hasRingerModeDependency = true,
+            key = KEY,
+            keyValueStoreDelegate = settingsStore,
+            defaultIntensity = DEFAULT_INTENSITY,
+            supportedIntensityLevels = SUPPORTED_INTENSITIES,
+        )
+
+        settingsStore.setBoolean(Settings.System.VIBRATE_ON, false)
+        setRingerMode(AudioManager.RINGER_MODE_SILENT)
+        assertThat(testStore.isDisabledByRingerMode()).isFalse()
+
+        settingsStore.setBoolean(Settings.System.VIBRATE_ON, false)
+        setRingerMode(AudioManager.RINGER_MODE_VIBRATE)
+        assertThat(testStore.isDisabledByRingerMode()).isFalse()
+
+        settingsStore.setBoolean(Settings.System.VIBRATE_ON, true)
+        setRingerMode(AudioManager.RINGER_MODE_VIBRATE)
+        assertThat(testStore.isDisabledByRingerMode()).isFalse()
+
+        settingsStore.setBoolean(Settings.System.VIBRATE_ON, true)
+        setRingerMode(AudioManager.RINGER_MODE_SILENT)
+        assertThat(testStore.isDisabledByRingerMode()).isTrue()
+    }
+
+    @Test
     fun getValue_preferenceDisabledByMainSwitch_returnsIntensityOffAndPreservesValue() {
         settingsStore.setBoolean(Settings.System.VIBRATE_ON, false)
         setIntValue(Vibrator.VIBRATION_INTENSITY_HIGH)
@@ -64,6 +150,26 @@ class VibrationIntensitySettingsStoreTest {
         assertThat(settingsStore.getInt(KEY)).isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH)
         assertThat(store.getBoolean(KEY)).isFalse()
         assertThat(store.getInt(KEY)).isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF)
+    }
+
+    @Test
+    fun getValue_preferenceDisabledByRingerMode_returnsIntensityOffAndPreservesValue() {
+        settingsStore.setBoolean(Settings.System.VIBRATE_ON, true)
+        setRingerMode(AudioManager.RINGER_MODE_SILENT)
+        val testStore = VibrationIntensitySettingsStore(
+            context = context,
+            vibrationUsage = VIBRATION_USAGE,
+            hasRingerModeDependency = true,
+            key = KEY,
+            keyValueStoreDelegate = settingsStore,
+            defaultIntensity = DEFAULT_INTENSITY,
+            supportedIntensityLevels = SUPPORTED_INTENSITIES,
+        )
+        setIntValue(Vibrator.VIBRATION_INTENSITY_HIGH)
+
+        assertThat(settingsStore.getInt(KEY)).isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH)
+        assertThat(testStore.getBoolean(KEY)).isFalse()
+        assertThat(testStore.getInt(KEY)).isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF)
     }
 
     @Test
@@ -170,7 +276,9 @@ class VibrationIntensitySettingsStoreTest {
     fun supportsOneLevel_usesDefaultIntensity() {
         val testStore = VibrationIntensitySettingsStore(
             context = context,
-            vibrationUsage = VibrationAttributes.USAGE_RINGTONE,
+            vibrationUsage = VIBRATION_USAGE,
+            hasRingerModeDependency = false,
+            key = KEY,
             keyValueStoreDelegate = settingsStore,
             defaultIntensity = Vibrator.VIBRATION_INTENSITY_MEDIUM,
             supportedIntensityLevels = 1,
@@ -193,7 +301,9 @@ class VibrationIntensitySettingsStoreTest {
     fun supportsTwoLevels_usesLowAndHighIntensities() {
         val testStore = VibrationIntensitySettingsStore(
             context = context,
-            vibrationUsage = VibrationAttributes.USAGE_RINGTONE,
+            vibrationUsage = VibrationAttributes.USAGE_TOUCH,
+            hasRingerModeDependency = false,
+            key = KEY,
             keyValueStoreDelegate = settingsStore,
             defaultIntensity = Vibrator.VIBRATION_INTENSITY_MEDIUM,
             supportedIntensityLevels = 2,
@@ -216,6 +326,12 @@ class VibrationIntensitySettingsStoreTest {
         assertThat(settingsStore.getInt(KEY)).isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH)
         assertThat(testStore.getBoolean(KEY)).isTrue()
         assertThat(testStore.getInt(KEY)).isEqualTo(2)
+    }
+
+    private fun setRingerMode(ringerMode: Int) {
+        val audioManager = context.getSystemService<AudioManager>()
+        audioManager?.ringerModeInternal = ringerMode
+        assertThat(audioManager?.ringerModeInternal).isEqualTo(ringerMode)
     }
 
     private fun setIntValue(value: Int?) =

@@ -78,7 +78,12 @@ public class ToggleAutoclickPreferenceFragment extends ShortcutFragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
+
+        // Set up delay controller.
         use(ToggleAutoclickDelayBeforeClickController.class).setFragment(this);
+
+        // Set up the main switch controller.
+        use(ToggleAutoclickMainSwitchPreferenceController.class).setFragment(this);
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

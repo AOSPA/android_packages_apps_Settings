@@ -54,7 +54,6 @@ import com.android.settings.privatespace.PrivateSpaceMaintainer.ErrorDeletingPri
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -241,7 +240,6 @@ public class PrivateSpaceMaintainerTest {
      * Tests that {@link PrivateSpaceMaintainer#lockPrivateSpace()} when PS exists and is running
      * locks the private profile.
      */
-    @Ignore("Flaky pre-submit b/378392936")
     @Test
     public void lockPrivateSpace_psExistsAndPrivateProfileRunning_locksCreatedPrivateSpace() {
         mSetFlagsRule.enableFlags(
@@ -261,7 +259,6 @@ public class PrivateSpaceMaintainerTest {
      * Tests that {@link PrivateSpaceMaintainer#lockPrivateSpace()} when PS exist and private
      * profile not running returns false.
      */
-    @Ignore("Flaky pre-submit b/378392936")
     @Test
     public void lockPrivateSpace_psExistsAndPrivateProfileNotRunning_returnsFalse() {
         mSetFlagsRule.enableFlags(
