@@ -21,12 +21,14 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.service.dreams.DreamService;
+import android.widget.CompoundButton;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
@@ -37,6 +39,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settingslib.dream.DreamBackend;
 import com.android.settingslib.dream.DreamBackend.WhenToDream;
+import com.android.settingslib.widget.MainSwitchPreference;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -89,15 +92,21 @@ public class DreamSettingsTest {
     };
 
     @Mock
+    private MainSwitchPreference mMainSwitchPreference;
+    @Mock
     private Preference mDreamPickerPref;
     @Mock
     private Preference mComplicationsTogglePref;
     @Mock
     private Preference mHomeControllerTogglePref;
     @Mock
+    private LowLightModePreference mLowLightModeTogglePref;
+    @Mock
     private DreamPickerController mDreamPickerController;
     @Mock
     private DreamHomeControlsPreferenceController mDreamHomeControlsPreferenceController;
+    @Mock
+    private LowLightModePreferenceController mLowLightModePreferenceController;
     @Captor
     private ArgumentCaptor<DreamPickerController.Callback> mDreamPickerCallbackCaptor;
 
@@ -290,7 +299,6 @@ public class DreamSettingsTest {
         final Context context = ApplicationProvider.getApplicationContext();
         final DreamSettings dreamSettings = prepareDreamSettings(context);
 
-
         // Active dream does not support complications
         final DreamBackend.DreamInfo activeDream = new DreamBackend.DreamInfo();
         activeDream.dreamCategory = DreamService.DREAM_CATEGORY_DEFAULT;
@@ -315,7 +323,6 @@ public class DreamSettingsTest {
         final Context context = ApplicationProvider.getApplicationContext();
         final DreamSettings dreamSettings = prepareDreamSettings(context);
 
-
         // Active dream does not support complications
         final DreamBackend.DreamInfo activeDream = new DreamBackend.DreamInfo();
         activeDream.dreamCategory = DreamService.DREAM_CATEGORY_HOME_PANEL;
@@ -328,33 +335,88 @@ public class DreamSettingsTest {
         verify(mHomeControllerTogglePref).setEnabled(false);
         verify(mDreamPickerController).addCallback(mDreamPickerCallbackCaptor.capture());
 
+        when(mMainSwitchPreference.isChecked()).thenReturn(true);
         activeDream.dreamCategory = DreamService.DREAM_CATEGORY_DEFAULT;
         mDreamPickerCallbackCaptor.getValue().onActiveDreamChanged();
         verify(mHomeControllerTogglePref).setEnabled(true);
     }
 
+    @Test
+    public void lowLightModeToggle_disabledWhenMainSwitchDisabled() {
+        MockitoAnnotations.initMocks(this);
+
+        final Context context = ApplicationProvider.getApplicationContext();
+        final DreamSettings dreamSettings = prepareDreamSettings(context);
+
+        final DreamBackend.DreamInfo activeDream = new DreamBackend.DreamInfo();
+        activeDream.dreamCategory = DreamService.DREAM_CATEGORY_DEFAULT;
+        when(mDreamPickerController.getActiveDreamInfo()).thenReturn(activeDream);
+
+        dreamSettings.onAttach(context);
+        dreamSettings.onCreate(Bundle.EMPTY);
+        reset(mLowLightModeTogglePref);
+
+        // DreamSettings ignores the button, but we need something to pass into onCheckedChanged.
+        final CompoundButton mockButton = mock(CompoundButton.class);
+        dreamSettings.onCheckedChanged(mockButton, false);
+        verify(mLowLightModeTogglePref).setEnabled(false);
+    }
+
+    @Test
+    public void lowLightModeToggle_enabledWhenMainSwitchEnabled() {
+        MockitoAnnotations.initMocks(this);
+
+        final Context context = ApplicationProvider.getApplicationContext();
+        final DreamSettings dreamSettings = prepareDreamSettings(context);
+
+        final DreamBackend.DreamInfo activeDream = new DreamBackend.DreamInfo();
+        activeDream.dreamCategory = DreamService.DREAM_CATEGORY_DEFAULT;
+        when(mDreamPickerController.getActiveDreamInfo()).thenReturn(activeDream);
+
+        dreamSettings.onAttach(context);
+        dreamSettings.onCreate(Bundle.EMPTY);
+        reset(mLowLightModeTogglePref);
+
+        // DreamSettings ignores the button, but we need something to pass into onCheckedChanged.
+        final CompoundButton mockButton = mock(CompoundButton.class);
+        dreamSettings.onCheckedChanged(mockButton, true);
+        verify(mLowLightModeTogglePref).setEnabled(true);
+    }
+
     private DreamSettings prepareDreamSettings(Context context) {
         final TestDreamSettings dreamSettings = new TestDreamSettings(context);
+        final Bundle extras = new Bundle();
+
         when(mDreamPickerController.getPreferenceKey()).thenReturn(DreamPickerController.PREF_KEY);
         when(mDreamHomeControlsPreferenceController.getPreferenceKey())
                 .thenReturn(DreamHomeControlsPreferenceController.PREF_KEY);
-        when(mDreamPickerPref.getExtras()).thenReturn(new Bundle());
+        when(mDreamPickerPref.getExtras()).thenReturn(extras);
         when(mDreamPickerPref.getKey()).thenReturn(DreamPickerController.PREF_KEY);
         when(mComplicationsTogglePref.getKey()).thenReturn(
                 DreamComplicationPreferenceController.PREF_KEY);
-        when(mHomeControllerTogglePref.getExtras()).thenReturn(new Bundle());
+        when(mHomeControllerTogglePref.getExtras()).thenReturn(extras);
         when(mHomeControllerTogglePref.getKey()).thenReturn(
                 DreamHomeControlsPreferenceController.PREF_KEY);
         when(mDreamHomeControlsPreferenceController.getAvailabilityStatus())
                 .thenReturn(mDreamHomeControlsPreferenceController.AVAILABLE);
+        when(mLowLightModeTogglePref.getExtras()).thenReturn(extras);
+        when(mLowLightModeTogglePref.getKey())
+                .thenReturn(LowLightModePreferenceController.PREF_KEY);
+        when(mLowLightModePreferenceController.getPreferenceKey())
+                .thenReturn(LowLightModePreferenceController.PREF_KEY);
+        dreamSettings.addPreference(
+                DreamMainSwitchPreferenceController.MAIN_SWITCH_PREF_KEY, mMainSwitchPreference);
         dreamSettings.addPreference(DreamPickerController.PREF_KEY, mDreamPickerPref);
         dreamSettings.addPreference(DreamComplicationPreferenceController.PREF_KEY,
                 mComplicationsTogglePref);
         dreamSettings.addPreference(DreamHomeControlsPreferenceController.PREF_KEY,
                 mHomeControllerTogglePref);
+        dreamSettings.addPreference(LowLightModePreferenceController.PREF_KEY,
+                mLowLightModeTogglePref);
         dreamSettings.setDreamPickerController(mDreamPickerController);
         dreamSettings
                 .setDreamHomeControlsPreferenceController(mDreamHomeControlsPreferenceController);
+        dreamSettings.setLowLightModePreferenceController(mLowLightModePreferenceController);
 
         return dreamSettings;
     }

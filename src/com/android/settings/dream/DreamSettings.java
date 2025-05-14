@@ -39,6 +39,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -70,9 +71,12 @@ public class DreamSettings extends DashboardFragment implements OnCheckedChangeL
 
     private DreamPickerController mDreamPickerController;
     private DreamHomeControlsPreferenceController mDreamHomeControlsPreferenceController;
+    private LowLightModePreferenceController mLowLightModePreferenceController;
 
-    private final DreamPickerController.Callback mCallback =
-            this::updateComplicationsToggleVisibility;
+    /** A callback that is invoked whenever the selected dream changes. */
+    private final DreamPickerController.Callback mCallback = () ->
+            updateSelectedDreamSettingsState(
+                    mMainSwitchPreference != null ? mMainSwitchPreference.isChecked() : false);
 
     @WhenToDream
     static int getSettingFromPrefKey(String key) {
@@ -157,12 +161,20 @@ public class DreamSettings extends DashboardFragment implements OnCheckedChangeL
         if (mDreamPickerController == null) {
             mDreamPickerController = new DreamPickerController(context);
         }
+
+        DreamBackend backend = DreamBackend.getInstance(context);
         if (mDreamHomeControlsPreferenceController == null) {
-            mDreamHomeControlsPreferenceController = new DreamHomeControlsPreferenceController(
-                    context, DreamBackend.getInstance(getContext()));
+            mDreamHomeControlsPreferenceController =
+                    new DreamHomeControlsPreferenceController(context, backend);
         }
+        if (mLowLightModePreferenceController == null) {
+            mLowLightModePreferenceController =
+                    new LowLightModePreferenceController(context, backend);
+        }
+
         controllers.add(mDreamPickerController);
         controllers.add(mDreamHomeControlsPreferenceController);
+        controllers.add(mLowLightModePreferenceController);
         controllers.add(new WhenToDreamPreferenceController(context));
         return controllers;
     }
@@ -193,6 +205,11 @@ public class DreamSettings extends DashboardFragment implements OnCheckedChangeL
         mDreamHomeControlsPreferenceController = dreamHomeControlsPreferenceController;
     }
 
+    @VisibleForTesting
+    void setLowLightModePreferenceController(LowLightModePreferenceController controller) {
+        mLowLightModePreferenceController = controller;
+    }
+
     private void setAllPreferencesEnabled(boolean isEnabled) {
         getPreferenceControllers().forEach(controllers -> {
             controllers.forEach(controller -> {
@@ -210,7 +227,8 @@ public class DreamSettings extends DashboardFragment implements OnCheckedChangeL
                 }
             });
         });
-        updateComplicationsToggleVisibility();
+
+        updateSelectedDreamSettingsState(isEnabled);
     }
 
     @Override
@@ -275,14 +293,16 @@ public class DreamSettings extends DashboardFragment implements OnCheckedChangeL
         return mRecyclerView;
     }
 
-    private void updateComplicationsToggleVisibility() {
+    /**
+     * Updates the visibility and enabled state of preferences that depend on the currently selected
+     * dream.
+     */
+    private void updateSelectedDreamSettingsState(boolean dreamsEnabled) {
         if (mDreamPickerController == null) {
             return;
         }
+
         final DreamBackend.DreamInfo activeDream = mDreamPickerController.getActiveDreamInfo();
-
-        final DreamBackend dreamBackend = DreamBackend.getInstance(getContext());
-
 
         if (mComplicationsTogglePreference != null) {
             mComplicationsTogglePreference.setVisible(
@@ -290,13 +310,12 @@ public class DreamSettings extends DashboardFragment implements OnCheckedChangeL
         }
 
         if (mHomeControllerTogglePreference != null) {
-            boolean isEnabled = dreamBackend.isEnabled()
+            boolean isEnabled = dreamsEnabled
                                 && (activeDream == null
                                 || (activeDream.dreamCategory
                                 & DreamService.DREAM_CATEGORY_HOME_PANEL) == 0)
                                 && mDreamHomeControlsPreferenceController
-                                    .getAvailabilityStatus()
-                                    == mDreamHomeControlsPreferenceController.AVAILABLE;
+                                    .getAvailabilityStatus() == BasePreferenceController.AVAILABLE;
             mHomeControllerTogglePreference.setEnabled(isEnabled);
         }
     }

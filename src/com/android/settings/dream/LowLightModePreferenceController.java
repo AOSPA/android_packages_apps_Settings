@@ -33,14 +33,16 @@ import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.dream.DreamBackend;
 
 public class LowLightModePreferenceController extends TogglePreferenceController {
+    public static final String PREF_KEY = "low_light_mode";
+
     private final DreamBackend mBackend;
     @Nullable
     private Preference mPreference;
 
-    public LowLightModePreferenceController(@NonNull Context context, @NonNull String key) {
-        super(context, key);
+    public LowLightModePreferenceController(@NonNull Context context, DreamBackend dreamBackend) {
+        super(context, PREF_KEY);
 
-        mBackend = DreamBackend.getInstance(context);
+        mBackend = dreamBackend;
     }
 
     @Override

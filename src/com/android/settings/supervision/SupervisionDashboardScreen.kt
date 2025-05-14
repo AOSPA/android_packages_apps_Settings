@@ -76,6 +76,7 @@ class SupervisionDashboardScreen : PreferenceScreenCreator, PreferenceLifecycleP
             }
             +SupervisionPinManagementScreen.KEY order 100
             +SupervisionPromoFooterPreference(supervisionClient) order 300
+            +SupervisionAocFooterPreference(supervisionClient) order 400
         }
 
     private fun getSupervisionClient(context: Context) =
