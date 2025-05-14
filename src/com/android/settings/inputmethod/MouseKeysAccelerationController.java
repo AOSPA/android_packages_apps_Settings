@@ -15,30 +15,31 @@
  */
 
 package com.android.settings.inputmethod;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.hardware.input.InputSettings;
 import android.provider.Settings;
-import android.widget.ImageView;
-import android.widget.SeekBar;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.server.accessibility.Flags;
-import com.android.settings.R;
-import com.android.settings.core.BasePreferenceController;
-import com.android.settingslib.widget.LayoutPreference;
+import com.android.settings.core.SliderPreferenceController;
+import com.android.settingslib.widget.SliderPreference;
 
-import java.util.Objects;
+/** Controller class that controls mouse keys acceleration slider settings. */
+public class MouseKeysAccelerationController extends SliderPreferenceController implements
+        Preference.OnPreferenceChangeListener {
 
-/** Controller class that controls mouse keys acceleration seekbar settings. */
-public class MouseKeysAccelerationController extends BasePreferenceController  {
-    private static final float ACCELERATION_STEP = 0.1f;
+    private static final int MAX_ACCELERATION_POSITION = 10;
+    private static final int MIN_ACCELERATION_POSITION = 0;
+
+    static final float ACCELERATION_STEP = 0.1f;
 
     private final ContentResolver mContentResolver;
-    @SuppressWarnings("NullAway")
-    private SeekBar mSeekBar;
 
     public MouseKeysAccelerationController(@NonNull Context context,
             @NonNull String preferenceKey) {
@@ -49,71 +50,35 @@ public class MouseKeysAccelerationController extends BasePreferenceController  {
     @Override
     public void displayPreference(@NonNull PreferenceScreen screen) {
         super.displayPreference(screen);
-        final LayoutPreference preference = screen.findPreference(getPreferenceKey());
+        final SliderPreference preference = screen.findPreference(getPreferenceKey());
         if (preference == null) {
             return;
         }
 
-        final float accelerationFromSettings = getAccelerationFromSettings();
-        mSeekBar = Objects.requireNonNull(
-                preference.findViewById(R.id.mouse_keys_acceleration_seekbar));
+        preference.setTickVisible(true);
+        updateState(preference);
+    }
 
-        // Scale the float acceleration value to the SeekBar's integer range.
-        mSeekBar.setProgress(convertAccelerationToProgress(accelerationFromSettings));
-
-        mSeekBar.setOnSeekBarChangeListener(
-                new SeekBar.OnSeekBarChangeListener() {
-                    @Override
-                    public void onProgressChanged(@NonNull SeekBar seekBar, int progress,
-                            boolean fromUser) {
-                        // Convert the SeekBar's integer progress back to a float value
-                        float acceleration = convertProgressToAcceleration(progress);
-                        updateAccelerationValue(acceleration);
-                    }
-
-                    @Override
-                    public void onStartTrackingTouch(@NonNull SeekBar seekBar) {
-                        // Nothing to do.
-                    }
-
-                    @Override
-                    public void onStopTrackingTouch(@NonNull SeekBar seekBar) {
-                        // Nothing to do.
-                    }
-                });
-
-        ImageView slow = preference.findViewById(R.id.fast_icon);
-        ImageView fast = preference.findViewById(R.id.slow_icon);
-        if (slow == null || fast == null) {
-            return;
+    @Override
+    public boolean setSliderPosition(int position) {
+        if (position < getMin() || position > getMax()) {
+            return false;
         }
-        slow.setOnClickListener(v -> increaseAccelerationByImageView());
-        fast.setOnClickListener(v -> decreaseAccelerationByImageView());
+
+        float acceleration = convertProgressToAcceleration(position);
+        updateAccelerationValue(acceleration);
+        return true;
+    }
+
+    @Override
+    public int getSliderPosition() {
+        final float accelerationFromSettings = getAccelerationFromSettings();
+        return convertAccelerationToProgress(accelerationFromSettings);
     }
 
     private void updateAccelerationValue(float acceleration) {
         Settings.Secure.putFloat(mContentResolver,
                 Settings.Secure.ACCESSIBILITY_MOUSE_KEYS_ACCELERATION, acceleration);
-    }
-
-    private void decreaseAccelerationByImageView() {
-        float currentAcceleration = convertProgressToAcceleration(mSeekBar.getProgress());
-        if (currentAcceleration > mSeekBar.getMin()) {
-            float newAcceleration = Math.max(mSeekBar.getMin(),
-                    currentAcceleration - ACCELERATION_STEP);
-            mSeekBar.setProgress(convertAccelerationToProgress(newAcceleration));
-            updateAccelerationValue(newAcceleration);
-        }
-    }
-
-    private void increaseAccelerationByImageView() {
-        float currentAcceleration = convertProgressToAcceleration(mSeekBar.getProgress());
-        if (currentAcceleration < mSeekBar.getMax()) {
-            float newAcceleration = Math.min(mSeekBar.getMax(),
-                    currentAcceleration + ACCELERATION_STEP);
-            mSeekBar.setProgress(convertAccelerationToProgress(newAcceleration));
-            updateAccelerationValue(newAcceleration);
-        }
     }
 
     private float getAccelerationFromSettings() {
@@ -127,13 +92,24 @@ public class MouseKeysAccelerationController extends BasePreferenceController  {
         return Flags.enableMouseKeyEnhancement() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
-    /** Helper function to convert float acceleration to SeekBar integer progress */
-    private int convertAccelerationToProgress(float acceleration) {
-        return Math.round((acceleration - mSeekBar.getMin()) / ACCELERATION_STEP);
+    @Override
+    public int getMin() {
+        return MIN_ACCELERATION_POSITION;
     }
 
-    /** Helper function to convert SeekBar integer progress back to float acceleration */
+    @Override
+    public int getMax() {
+        return MAX_ACCELERATION_POSITION;
+    }
+
+    /** Helper function to convert float acceleration to integer progress */
+    @VisibleForTesting
+    int convertAccelerationToProgress(float acceleration) {
+        return Math.round((acceleration - getMin()) / ACCELERATION_STEP);
+    }
+
+    /** Helper function to convert integer progress back to float acceleration */
     private float convertProgressToAcceleration(int progress) {
-        return mSeekBar.getMin() + (progress * ACCELERATION_STEP);
+        return getMin() + (progress * ACCELERATION_STEP);
     }
 }

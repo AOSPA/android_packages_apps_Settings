@@ -32,9 +32,16 @@
         android:persistent="false"
         settings:controller="com.android.settings.inputmethod.KeyboardAccessibilityMouseKeysShortcutController"/>
 
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="mouse_keys_acceleration_seekbar"
-        android:layout="@layout/mouse_keys_acceleration_seekbar"
+    <com.android.settingslib.widget.SliderPreference
+        android:key="mouse_keys_acceleration_slider"
+        android:title="@string/mouse_keys_acceleration_seekbar_title"
+        android:min="0"
+        android:max="10"
+        settings:seekBarIncrement="1"
+        settings:iconEnd="@drawable/ic_add_24dp"
+        settings:iconEndContentDescription="@string/screen_zoom_make_larger_desc"
+        settings:iconStart="@drawable/ic_remove_24dp"
+        settings:iconStartContentDescription="@string/screen_zoom_make_smaller_desc"
         settings:controller="com.android.settings.inputmethod.MouseKeysAccelerationController"/>
 
     <com.android.settingslib.widget.LayoutPreference

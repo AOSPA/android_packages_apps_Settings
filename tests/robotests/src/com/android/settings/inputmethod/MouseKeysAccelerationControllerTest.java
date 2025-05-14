@@ -21,28 +21,18 @@ import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_U
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.doReturn;
-
 import android.content.Context;
+import android.hardware.input.InputSettings;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
-import android.provider.Settings;
-import android.widget.ImageView;
-import android.widget.SeekBar;
 
-import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
-
-import com.android.settings.R;
-import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
@@ -51,30 +41,17 @@ import org.robolectric.RobolectricTestRunner;
 @RunWith(RobolectricTestRunner.class)
 public class MouseKeysAccelerationControllerTest {
 
-    private static final String KEY_CUSTOM_SEEKBAR = "mouse_keys_acceleration_seekbar";
+    private static final String KEY_CUSTOM_SLIDER = "mouse_keys_acceleration_slider";
 
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
     @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
-    @Mock private PreferenceScreen mScreen;
-    @Mock private LayoutPreference mLayoutPreference;
-    @Spy private Context mContext = ApplicationProvider.getApplicationContext();
-    private ImageView mSlow;
-    private ImageView mFast;
-    private SeekBar mSeekBar;
+
     private MouseKeysAccelerationController mController;
+    Context mContext = ApplicationProvider.getApplicationContext();
 
     @Before
     public void setUp() {
-        mSlow = new ImageView(mContext);
-        mFast = new ImageView(mContext);
-        mSeekBar = new SeekBar(mContext);
-        mController = new MouseKeysAccelerationController(mContext, KEY_CUSTOM_SEEKBAR);
-        doReturn(mLayoutPreference).when(mScreen).findPreference(KEY_CUSTOM_SEEKBAR);
-        doReturn(mSeekBar)
-                .when(mLayoutPreference)
-                .findViewById(R.id.mouse_keys_acceleration_seekbar);
-        doReturn(mSlow).when(mLayoutPreference).findViewById(R.id.slow_icon);
-        doReturn(mFast).when(mLayoutPreference).findViewById(R.id.fast_icon);
+        mController = new MouseKeysAccelerationController(mContext, KEY_CUSTOM_SLIDER);
     }
 
     @Test
@@ -90,86 +67,37 @@ public class MouseKeysAccelerationControllerTest {
     }
 
     @Test
-    public void displayPreference_initSeekBar() {
-        Settings.Secure.putFloat(
-                mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_MOUSE_KEYS_ACCELERATION,
-                .5f);
-        mController.displayPreference(mScreen);
+    public void setSliderPosition_accelerationValue_shouldReturnTrue() {
+        int position = 3;
 
-        assertThat(mSeekBar.getProgress()).isEqualTo(5);
+        boolean result = mController.setSliderPosition(position);
+
+        assertThat(result).isTrue();
+        assertThat(mController.getSliderPosition())
+                .isEqualTo(position);
     }
 
     @Test
-    public void onSettingsChanged_updateAccelerationValue() {
-        Settings.Secure.putFloat(
-                mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_MOUSE_KEYS_ACCELERATION,
-                .5f);
+    public void setSliderPosition_accelerationValueOverMaxValue_shouldReturnFalse() {
+        int position = mController.getMax() + 1;
 
-        mController.displayPreference(mScreen);
-        final float actualAccelerationValue =
-                Settings.Secure.getFloat(
-                        mContext.getContentResolver(),
-                        Settings.Secure.ACCESSIBILITY_MOUSE_KEYS_ACCELERATION,
-                        /* def= */ 0.0f);
+        boolean result = mController.setSliderPosition(position);
 
-        assertThat(mSeekBar.getProgress()).isEqualTo(5);
-        assertThat(actualAccelerationValue).isEqualTo(.5f);
+        assertThat(result).isFalse();
+        assertThat(mController.getSliderPosition())
+                .isEqualTo(mController.convertAccelerationToProgress(
+                        InputSettings.DEFAULT_MOUSE_KEYS_ACCELERATION));
     }
 
     @Test
-    public void onSeekBarProgressChanged_updateAccelerationValue() {
-        Settings.Secure.putFloat(
-                mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_MOUSE_KEYS_ACCELERATION,
-                .5f);
-        mController.displayPreference(mScreen);
-        mSeekBar.setProgress(8);
-        final float actualAccelerationValue =
-                Settings.Secure.getFloat(
-                        mContext.getContentResolver(),
-                        Settings.Secure.ACCESSIBILITY_MOUSE_KEYS_ACCELERATION,
-                        /* def= */ 0.0f);
+    public void setSliderPosition_accelerationValueBelowMinValue_shouldReturnFalse() {
+        int position = mController.getMin() - 1;
 
-        assertThat(mSeekBar.getProgress()).isEqualTo(8);
-        assertThat(actualAccelerationValue).isEqualTo(.8f);
-    }
+        boolean result = mController.setSliderPosition(position);
 
-    @Test
-    public void onDecreaseClicked_updateAccelerationValue() {
-        Settings.Secure.putFloat(
-                mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_MOUSE_KEYS_ACCELERATION,
-                .5f);
-        mController.displayPreference(mScreen);
-        mSlow.callOnClick();
-        final float actualAccelerationValue =
-                Settings.Secure.getFloat(
-                        mContext.getContentResolver(),
-                        Settings.Secure.ACCESSIBILITY_MOUSE_KEYS_ACCELERATION,
-                        /* def= */ 0.0f);
-
-        assertThat(mSeekBar.getProgress()).isEqualTo(4);
-        assertThat(actualAccelerationValue).isEqualTo(.4f);
-    }
-
-    @Test
-    public void onIncreaseClicked_updateAccelerationValue() {
-        Settings.Secure.putFloat(
-                mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_MOUSE_KEYS_ACCELERATION,
-                .5f);
-
-        mController.displayPreference(mScreen);
-        mFast.callOnClick();
-        final float actualAccelerationValue =
-                Settings.Secure.getFloat(
-                        mContext.getContentResolver(),
-                        Settings.Secure.ACCESSIBILITY_MOUSE_KEYS_ACCELERATION,
-                        /* def= */ 0.0f);
-
-        assertThat(mSeekBar.getProgress()).isEqualTo(6);
-        assertThat(actualAccelerationValue).isEqualTo(.6f);
+        assertThat(result).isFalse();
+        assertThat(mController.getSliderPosition())
+                .isEqualTo(mController.convertAccelerationToProgress(
+                        InputSettings.DEFAULT_MOUSE_KEYS_ACCELERATION));
     }
 }

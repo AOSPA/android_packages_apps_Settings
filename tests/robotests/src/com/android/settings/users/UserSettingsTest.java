@@ -17,8 +17,6 @@
 package com.android.settings.users;
 
 import static android.os.UserManager.SWITCHABILITY_STATUS_OK;
-import static android.os.UserManager.SWITCHABILITY_STATUS_USER_IN_CALL;
-import static android.os.UserManager.SWITCHABILITY_STATUS_USER_SWITCH_DISALLOWED;
 
 import static com.android.settings.flags.Flags.FLAG_HIDE_USER_LIST_FOR_NON_ADMINS;
 import static com.android.settings.users.UserSettings.DIALOG_CONFIRM_REMOVE;
@@ -60,7 +58,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
-import android.platform.test.annotations.RequiresFlagsDisabled;
 import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
@@ -536,24 +533,6 @@ public class UserSettingsTest {
     }
 
     @Test
-    @RequiresFlagsDisabled({Flags.FLAG_NEW_MULTIUSER_SETTINGS_UX})
-    public void updateUserList_cannotSwitchUser_shouldDisableAddUser() {
-        mUserCapabilities.mCanAddUser = true;
-        doReturn(true).when(mUserManager).canAddMoreUsers(anyString());
-        doReturn(true).when(mAddUserPreference).isEnabled();
-        doReturn(SWITCHABILITY_STATUS_USER_SWITCH_DISALLOWED)
-                .when(mUserManager).getUserSwitchability();
-
-        mFragment.updateUserList();
-
-        verify(mAddUserPreference).setVisible(true);
-        verify(mAddUserPreference).setSummary(null);
-        verify(mAddUserPreference).setEnabled(false);
-        verify(mAddUserPreference).setSelectable(true);
-    }
-
-    @Test
-    @RequiresFlagsEnabled({Flags.FLAG_NEW_MULTIUSER_SETTINGS_UX})
     public void updateUserList_disallowAddUser_shouldDisableAddUserAndAddGuest() {
         mUserCapabilities.mDisallowAddUserSetByAdmin = true;
         doReturn(true).when(mUserManager).canAddMoreUsers(anyString());
@@ -584,22 +563,6 @@ public class UserSettingsTest {
     }
 
     @Test
-    @RequiresFlagsDisabled({Flags.FLAG_NEW_MULTIUSER_SETTINGS_UX})
-    public void updateUserList_cannotSwitchUser_shouldDisableAddGuest() {
-        mUserCapabilities.mCanAddGuest = true;
-        doReturn(true)
-                .when(mUserManager).canAddMoreUsers(eq(UserManager.USER_TYPE_FULL_GUEST));
-        doReturn(SWITCHABILITY_STATUS_USER_IN_CALL).when(mUserManager).getUserSwitchability();
-
-        mFragment.updateUserList();
-
-        verify(mAddGuestPreference).setVisible(true);
-        verify(mAddGuestPreference).setEnabled(false);
-        verify(mAddGuestPreference).setSelectable(true);
-    }
-
-    @Test
-    @RequiresFlagsEnabled({Flags.FLAG_NEW_MULTIUSER_SETTINGS_UX})
     public void updateUserList_cannotSwitchUser_shouldKeepPreferencesVisibleAndEnabled() {
         givenUsers(getAdminUser(true));
         mUserCapabilities.mCanAddGuest = true;
@@ -619,7 +582,6 @@ public class UserSettingsTest {
     }
 
     @Test
-    @RequiresFlagsEnabled({Flags.FLAG_NEW_MULTIUSER_SETTINGS_UX})
     public void updateUserList_disallowAddUser_shouldShowButDisableAddActions() {
         givenUsers(getAdminUser(true));
         mUserCapabilities.mCanAddGuest = true;
@@ -646,23 +608,6 @@ public class UserSettingsTest {
     }
 
     @Test
-    @RequiresFlagsDisabled({Flags.FLAG_NEW_MULTIUSER_SETTINGS_UX})
-    public void updateUserList_addUserDisallowedByAdmin_shouldNotShowAddUser() {
-        RestrictedLockUtils.EnforcedAdmin enforcedAdmin = mock(
-                RestrictedLockUtils.EnforcedAdmin.class);
-        mUserCapabilities.mEnforcedAdmin = enforcedAdmin;
-        mUserCapabilities.mCanAddUser = false;
-        mUserCapabilities.mDisallowAddUser = true;
-        mUserCapabilities.mDisallowAddUserSetByAdmin = true;
-        doReturn(true).when(mAddUserPreference).isEnabled();
-
-        mFragment.updateUserList();
-
-        verify(mAddUserPreference).setVisible(false);
-    }
-
-    @Test
-    @RequiresFlagsEnabled({Flags.FLAG_NEW_MULTIUSER_SETTINGS_UX})
     public void updateUserList_addUserDisallowedByAdmin_shouldShowPrefDisabledByAdmin() {
         RestrictedLockUtils.EnforcedAdmin enforcedAdmin = mock(
                 RestrictedLockUtils.EnforcedAdmin.class);
@@ -896,32 +841,6 @@ public class UserSettingsTest {
         assertThat(userPref.getKey()).isEqualTo("id=" + INACTIVE_RESTRICTED_USER_ID);
         assertThat(userPref.getSummary()).isEqualTo("Not set up - Restricted profile");
         assertThat(userPref.isEnabled()).isEqualTo(true);
-        assertThat(userPref.isSelectable()).isEqualTo(true);
-        assertThat(userPref.getOnPreferenceClickListener()).isSameInstanceAs(mFragment);
-    }
-
-    @Test
-    @RequiresFlagsDisabled({Flags.FLAG_NEW_MULTIUSER_SETTINGS_UX})
-    public void updateUserList_uninitializedUserAndCanNotSwitchUser_shouldDisablePref() {
-        UserInfo uninitializedUser = getSecondaryUser(false);
-        removeFlag(uninitializedUser, UserInfo.FLAG_INITIALIZED);
-        givenUsers(getAdminUser(true), uninitializedUser);
-        doReturn(SWITCHABILITY_STATUS_USER_SWITCH_DISALLOWED)
-                .when(mUserManager).getUserSwitchability();
-        mUserCapabilities.mDisallowSwitchUser = false;
-
-        mFragment.updateUserList();
-
-        ArgumentCaptor<UserPreference> captor = ArgumentCaptor.forClass(UserPreference.class);
-        verify(mFragment.mUserListCategory, times(2))
-                .addPreference(captor.capture());
-        UserPreference userPref = captor.getAllValues().get(1);
-        assertThat(userPref.getUserId()).isEqualTo(INACTIVE_SECONDARY_USER_ID);
-        assertThat(userPref.getTitle()).isEqualTo(SECONDARY_USER_NAME);
-        assertThat(userPref.getIcon()).isNotNull();
-        assertThat(userPref.getKey()).isEqualTo("id=" + INACTIVE_SECONDARY_USER_ID);
-        assertThat(userPref.getSummary()).isEqualTo("Not set up");
-        assertThat(userPref.isEnabled()).isEqualTo(false);
         assertThat(userPref.isSelectable()).isEqualTo(true);
         assertThat(userPref.getOnPreferenceClickListener()).isSameInstanceAs(mFragment);
     }

@@ -434,7 +434,7 @@
     <string name="security_settings_fingerprint" msgid="6387775386189204201">"Empreinte digitale"</string>
     <string name="security_settings_fingerprint_title" msgid="7564944192711394896">"Empreintes digitales"</string>
     <string name="security_settings_fingerprint_description" msgid="629796299137157167"></string>
-    <string name="security_settings_category_use_fingerprint" msgid="4273932435979772330">"Utiliser l\'empreinte digitale pour"</string>
+    <string name="security_settings_category_use_fingerprint" msgid="4273932435979772330">"Utilité de l\'empreinte digitale"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Empreintes digitales"</string>
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Quand le Déverrouillage par empreinte digitale est utilisé"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Empreinte digitale pour le travail"</string>
@@ -461,8 +461,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Si vous voyez cette icône, utilisez votre empreinte pour vous authentifier (comme pour vous connecter à des applis ou approuver un achat)"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"Gardez à l\'esprit"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Fonctionnement"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Le Déverrouillage par empreinte digitale crée un modèle unique de votre empreinte digitale pour vérifier qu\'il s\'agit bien de vous. Pour créer ce modèle durant la configuration, l\'appareil vous demandera de capturer des images de votre empreinte digitale dans différentes positions."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Le déverrouillage par empreinte digitale crée un modèle unique de l\'empreinte digitale de votre enfant pour vérifier qu\'il s\'agit bien de lui. Pour créer ce modèle durant la configuration, l\'appareil lui demandera de capturer des images de son empreinte digitale dans différentes positions."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Le Déverrouillage par empreinte digitale crée un modèle unique de votre empreinte digitale pour confirmer qu\'il s\'agit bien de vous. Pour créer ce modèle durant la configuration, l\'appareil vous demandera de capturer des images de votre empreinte digitale dans différentes positions."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Le déverrouillage par empreinte digitale crée un modèle unique de l\'empreinte digitale de votre enfant pour confirmer qu\'il s\'agit bien de lui. Pour créer ce modèle durant la configuration, l\'appareil lui demandera de capturer des images de son empreinte digitale dans différentes positions."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Pour obtenir des résultats optimaux, utilisez un protecteur d\'écran certifié Fait pour Google. Vos empreintes digitales peuvent ne pas être reconnues avec d\'autres protecteurs d\'écran."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Pour obtenir des résultats optimaux, utilisez un protecteur d\'écran certifié Fait pour Google. Les empreintes digitales de votre enfant peuvent ne pas être reconnues avec d\'autres protecteurs d\'écran."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
@@ -669,7 +669,7 @@
     <string name="private_space_face_enroll_introduction_info_less_secure" msgid="8460719783943533172">"L\'utilisation de votre visage pour déverrouiller votre espace privé peut être moins sûre qu\'un schéma, un NIP ou un mot de passe robuste"</string>
     <string name="private_space_face_settings_require_attention_details" msgid="2799569069549999689">"Pour déverrouiller l\'espace privé, vous devez avoir les yeux ouverts. Pour obtenir des résultats optimaux, retirez les lunettes de soleil."</string>
     <string name="private_space_face_settings_footer" msgid="7722256209563543711">"Utilisez votre visage pour déverrouiller votre espace privé.\n\nGardez à l\'esprit :\nUn seul visage peut être configuré à la fois. Pour ajouter un autre visage, supprimez le visage actuel.\n\nVous pourriez déverrouiller le téléphone en le regardant, même si vous ne cherchiez pas à le faire.\n\nUne autre personne pourrait déverrouiller votre espace privé en tenant l\'appareil devant votre visage.\n\nVotre espace privé pourrait être déverrouillé par une personne qui vous ressemble beaucoup, comme un jumeau identique."</string>
-    <string name="private_space_face_settings_require_confirmation_details" msgid="5406498664903812249">"Toujours exiger la confirmation pour utiliser le Déverrouillage par reconnaissance faciale"</string>
+    <string name="private_space_face_settings_require_confirmation_details" msgid="5406498664903812249">"Exigez toujours une confirmation pour utiliser le Déverrouillage par reconnaissance faciale"</string>
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"Méthodes de déverrouillage"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Identique au verrouillage de l\'écran de l\'appareil"</string>
     <string name="private_space_new_lock_title" msgid="9056139964133004094">"Choisir un nouveau verrouillage pour l\'espace privé?"</string>
@@ -1170,6 +1170,8 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Autoriser"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Refuser"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"* obligatoire"</string>
+    <!-- no translation found for wifi_shared_network_login_screen_warning (7611029233083731552) -->
+    <skip />
     <string name="share_wifi_network" msgid="4064997404339571584">"Partager ce réseau avec d\'autres utilisateurs d\'appareils"</string>
     <string name="share_wifi_network_summary" msgid="4316236421149769333">"Tous les utilisateurs de cet appareil peuvent afficher un réseau partagé et s\'y connecter. Les administrateurs peuvent supprimer un réseau partagé. En savoir plus"</string>
     <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"Autoriser les autres utilisateurs à modifier la configuration du réseau"</string>
@@ -1452,8 +1454,26 @@
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"Activé : <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Désactivé"</string>
     <string name="screensaver_settings_when_to_dream" msgid="7756170756065029160">"Quand afficher"</string>
+    <!-- no translation found for screensaver_settings_low_light_mode (271972828076673743) -->
+    <skip />
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Soulever pour activer"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Limiter à la recharge sans fil"</string>
+    <!-- no translation found for low_light_display_behavior_main_switch_title (7138165032358139627) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_subtitle (1833984014035605413) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_screen_off (4203092158668290404) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_low_light_clock_dream (2235561363691252383) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_summary_on (4218678742261840224) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_summary_off (4565368094992120316) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_screen_off_full_summary (6671607843870561892) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_low_light_clock_dream_full_summary (1145914465090731721) -->
+    <skip />
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Affichage en mode Veille"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Activation du mode Veille"</string>
     <string name="doze_title" msgid="1523090408230862316">"Activer écran si notifications"</string>
@@ -2097,7 +2117,7 @@
     <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"Sélecteur de disposition des touches du clavier physique"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Touches non répétées"</string>
     <string name="bounce_keys_summary" msgid="8890925059943636911">"Ignorez les appuis répétés rapidement sur la même touche"</string>
-    <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"Délai des touches répétées"</string>
+    <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"Délai des touches non répétées"</string>
     <string name="bounce_keys_dialog_subtitle" msgid="6804676895876861863">"Choisissez la durée pendant laquelle le clavier ignore les frappes répétées"</string>
     <string name="input_setting_keys_dialog_option_200" msgid="2785528287150314940">"0,2 seconde"</string>
     <string name="input_setting_keys_dialog_option_400" msgid="91571674179896177">"0,4 seconde"</string>
@@ -2114,13 +2134,12 @@
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"Utiliser les touches de souris"</string>
     <string name="accessibility_mouse_keys_shortcut_title" msgid="7621635104533584115">"Raccourcis-clavier des touches de souris"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Utilisez votre clavier pour contrôler le pointeur"</string>
-    <!-- no translation found for mouse_keys_max_speed_title (1788751803245422659) -->
-    <skip />
-    <!-- no translation found for mouse_keys_seek_bar_decrease_button_description (9077624857206032509) -->
-    <skip />
-    <!-- no translation found for mouse_keys_seek_bar_increase_button_description (2721662400858172203) -->
-    <skip />
+    <string name="mouse_keys_max_speed_title" msgid="1788751803245422659">"Vitesse maximale"</string>
+    <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"Diminuer"</string>
+    <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"Augmenter"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Défilement inversé"</string>
+    <!-- no translation found for mouse_keys_use_primary_keys_title (525897583406210252) -->
+    <skip />
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Faites défiler l\'écran vers le haut pour déplacer la page vers le bas"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"Faire défiler"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"Défilement contrôlé"</string>
@@ -2150,11 +2169,11 @@
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Vitesse du pointeur, gestes"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Toucher pour cliquer"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Toucher et faire glisser pour déplacer des éléments"</string>
-    <string name="trackpad_tap_dragging_summary" msgid="5605534150661601073">"Touchez deux fois et faites glisser votre doigt sur le pavé tactile pour déplacer des objets"</string>
+    <string name="trackpad_tap_dragging_summary" msgid="5605534150661601073">"Touchez deux fois le pavé tactile et faites glisser votre doigt dessus pour déplacer des objets"</string>
     <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"Gestes du pavé tactile"</string>
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Personna. les gestes individuels de navigation du pavé tactile"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Défilement inversé"</string>
-    <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Le contenu remonte lorsque la page défile vers le bas"</string>
+    <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Le contenu remonte lorsque vous balayez l\'écran vers le bas"</string>
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Clic en bas à droite"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Cliquez dans le coin inférieur droit du pavé tactile pour plus d\'options"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Vitesse du pointeur"</string>
@@ -2200,6 +2219,20 @@
     <string name="gesture_button_next" msgid="695288092704187356">"Suivant"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"Redémarrer"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"OK"</string>
+    <!-- no translation found for action_corners_title (8971354126563421646) -->
+    <skip />
+    <!-- no translation found for action_corners_summary (4245089615854251124) -->
+    <skip />
+    <!-- no translation found for action_corners_intro (4384209411870086502) -->
+    <skip />
+    <!-- no translation found for action_corners_bottom_left_title (8677233546610832717) -->
+    <skip />
+    <!-- no translation found for action_corners_bottom_right_title (2155948558861306738) -->
+    <skip />
+    <!-- no translation found for action_corners_top_left_title (6604149810499060560) -->
+    <skip />
+    <!-- no translation found for action_corners_top_right_title (583996793984142329) -->
+    <skip />
     <string name="modifier_keys_settings" msgid="2537108435032034683">"Touches de modification"</string>
     <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Modifiez le comportement des touches"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"Tout réinitialiser"</string>
@@ -2367,7 +2400,7 @@
     <string name="accessibility_magnification_mode_dialog_title" msgid="9151027667059878578">"Choisir le mode d\'agrandissement"</string>
     <string name="accessibility_magnification_mode_dialog_option_full_screen" msgid="4892487869954032029">"Agrandir la totalité de l\'écran"</string>
     <string name="accessibility_magnification_mode_dialog_option_window" msgid="4492443201099153362">"Agrandir une partie de l\'écran"</string>
-    <string name="accessibility_magnification_mode_dialog_option_switch" msgid="561043521011229424">"Alternez entre le plein écran et l\'écran partiel"</string>
+    <string name="accessibility_magnification_mode_dialog_option_switch" msgid="561043521011229424">"Alterner entre le plein écran et l\'écran partiel"</string>
     <string name="accessibility_magnification_area_settings_mode_switch_summary" msgid="2885238806099080966">"Touchez le bouton du commutateur pour passer d\'une option à l\'autre"</string>
     <string name="accessibility_magnification_switch_shortcut_title" msgid="3671432048806533079">"Passer au bouton d\'accessibilité?"</string>
     <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"L\'utilisation du triple toucher pour agrandir une partie de l\'écran a pour effet de retarder l\'entrée et les autres actions.\n\nLe bouton d\'accessibilité flotte sur votre écran par-dessus les autres applis. Touchez-le pour l\'agrandir."</string>
@@ -2402,7 +2435,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Touchez trois fois pour zoomer vers l\'avant"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Touchez un bouton pour zoomer"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Zoomez rapidement pour agrandir le contenu"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Pour zoomer :&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Utilisez le raccourci pour commencer l\'agrandissement&lt;br/&gt; {1,number,integer}. Touchez l\'écran&lt;br/&gt; {2,number,integer}. Faites glisser deux doigts pour naviguer dans l\'écran&lt;br/&gt; {3,number,integer}. Pincez l\'écran avec deux doigts pour ajuster le zoom&lt;br/&gt; {4,number,integer}. Utilisez le raccourci pour arrêter l\'agrandissement&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Pour zoomer temporairement :&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Assurez-vous que le type d\'agrandissement est défini à plein écran&lt;br/&gt; {1,number,integer}. Utilisez le raccourci pour commencer l\'agrandissement&lt;br/&gt; {2,number,integer}. Maintenez le doigt sur une zone de l\'écran&lt;br/&gt; {3,number,integer}. Faites glisser un doigt pour naviguer dans l\'écran&lt;br/&gt; {4,number,integer}. Levez le doigt pour arrêter l\'agrandissement"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Pour zoomer, procédez comme suit :&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Utilisez le raccourci pour commencer l\'agrandissement.&lt;br/&gt; {1,number,integer}. Touchez l\'écran.&lt;br/&gt; {2,number,integer}. Faites glisser deux doigts pour naviguer dans l\'écran.&lt;br/&gt; {3,number,integer}. Pincez l\'écran avec deux doigts pour ajuster le zoom.&lt;br/&gt; {4,number,integer}. Utilisez le raccourci pour arrêter l\'agrandissement.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Pour zoomer temporairement, procédez comme suit :&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Assurez-vous que le type d\'agrandissement est défini à plein écran.&lt;br/&gt; {1,number,integer}. Utilisez le raccourci pour commencer l\'agrandissement.&lt;br/&gt; {2,number,integer}. Maintenez le doigt sur une zone de l\'écran.&lt;br/&gt; {3,number,integer}. Faites glisser un doigt pour naviguer dans l\'écran.&lt;br/&gt; {4,number,integer}. Levez le doigt pour arrêter l\'agrandissement."</string>
     <string name="accessibility_screen_magnification_keyboard_summary" msgid="2504303274186294767">"&lt;b&gt;Pour zoomer avec le clavier :&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Utilisez le raccourci pour commencer l\'agrandissement&lt;br/&gt; {1,number,integer}. Maintenez les touches &lt;xliff:g id=meta1&gt;%1$s&lt;/xliff:g&gt; et &lt;xliff:g id=alt1&gt;%2$s&lt;/xliff:g&gt; enfoncées et appuyez sur + ou - pour zoomer ou dézoomer&lt;br/&gt; {2,number,integer}. Maintenez les touches &lt;xliff:g id=meta2&gt;%3$s&lt;/xliff:g&gt; et &lt;xliff:g id=alt2&gt;%4$s&lt;/xliff:g&gt; enfoncées et appuyez sur les touches fléchées pour vous déplacer sur l\'écran&lt;br/&gt; {3,number,integer}. Utilisez le raccourci pour arrêter l\'agrandissement"</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;Pour zoomer, procédez comme suit :&lt;/b&gt;&lt;br/&gt; {0,number,integer} Utilisez le raccourci pour commencer l\'agrandissement&lt;br/&gt; {1,number,integer}. Touchez l\'écran&lt;br/&gt; {2,number,integer}. Faites glisser deux doigts pour naviguer dans l\'écran&lt;br/&gt; {3,number,integer}. Pincez l\'écran avec deux doigts pour ajuster le zoom&lt;br/&gt; {4,number,integer}. Utilisez le raccourci pour arrêter l\'aggrandissement&lt;br/&gt;&lt;br/&gt; Vous pouvez aussi zoomer temporairement et plus."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Pour zoomer, procédez comme suit :&lt;/b&gt;&lt;br/&gt; {0,number,integer} Utilisez le raccourci pour commencer l\'agrandissement&lt;br/&gt; {1,number,integer}. Touchez l\'écran&lt;br/&gt; {2,number,integer}. Faites glisser un ou deux doigts pour naviguer dans l\'écran&lt;br/&gt; {3,number,integer}. Pincez l\'écran avec deux doigts pour ajuster le zoom&lt;br/&gt; {4,number,integer}. Utilisez le raccourci pour arrêter l\'aggrandissement&lt;br/&gt;&lt;br/&gt; Vous pouvez aussi zoomer temporairement et plus."</string>
@@ -2449,7 +2482,7 @@
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Maintenez les deux touches de volume enfoncées"</string>
     <string name="accessibility_shortcut_edit_screen_title_two_finger_double_tap" msgid="8952595692906527694">"Toucher deux fois avec %1$d doigts"</string>
     <string name="accessibility_shortcut_edit_screen_summary_two_finger_double_tap" msgid="385404127425496362">"Touchez rapidement l\'écran deux fois avec %1$d doigts"</string>
-    <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"Toucher trois fois"</string>
+    <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"Touchez trois fois"</string>
     <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"Touchez rapidement l\'écran %1$d fois. Cela pourrait ralentir votre appareil."</string>
     <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"toucher deux fois avec %1$d doigts"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"toucher trois fois"</string>
@@ -2491,7 +2524,7 @@
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Retirer les animations"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Réduisez les mouvements sur l\'écran"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Audio mono"</string>
-    <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Combiner les chaînes lors de la lecture audio"</string>
+    <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Combiner les canaux lors de la lecture audio"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Équilibre sonore"</string>
     <string name="accessibility_toggle_primary_balance_left_label" msgid="6415750010517682014">"Gauche"</string>
     <string name="accessibility_toggle_primary_balance_right_label" msgid="2987443495390104935">"Droite"</string>
@@ -2529,6 +2562,36 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Plus court"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Plus long"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Durée du clic automatique"</string>
+    <!-- no translation found for accessibility_autoclick_main_switch_title (1968409462935503999) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_shortcut_title (5337438503429302081) -->
+    <skip />
+    <!-- no translation found for autoclick_delay_before_click_title (4625722241966706931) -->
+    <skip />
+    <!-- no translation found for autoclick_delay_before_click_summary (3685183305849901339) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_title (8988239939645854279) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_summary (6993249143332791469) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_extra_large (3802014133363801617) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_large (1115930762484519488) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_default (4934363711068310028) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_small (3987901922883658043) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_extra_small (6056674574040448864) -->
+    <skip />
+    <!-- no translation found for autoclick_ignore_minor_cursor_movement_title (5038721995720529808) -->
+    <skip />
+    <!-- no translation found for autoclick_revert_to_left_click_title (9213418243482609005) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_navigation_title (2580632445700896655) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_navigation_message (8007946937334710898) -->
+    <skip />
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibrations et effets tactiles"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Contrôler la force des vibrations pour différentes utilisations"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"Activés"</string>
@@ -3298,8 +3361,7 @@
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"Retirer le profil professionnel?"</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"L\'ensemble des applis et des données seront supprimées."</string>
     <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"Toutes les applis et les données de ce profil seront supprimées si vous continuez."</string>
-    <!-- no translation found for work_profile_confirm_remove_message_with_esim (1169605178915445183) -->
-    <skip />
+    <string name="work_profile_confirm_remove_message_with_esim" msgid="1169605178915445183">"Toutes les applis et données de ce profil, y compris les cartes eSIM professionnelles, seront supprimées si vous continuez."</string>
     <string name="user_profile_confirm_remove_message" msgid="3641289528179850718">"L\'ensemble des applis et des données seront supprimées."</string>
     <string name="user_adding_new_user" msgid="7439602720177181412">"Ajout de l\'utilisateur en cours…"</string>
     <string name="user_delete_user_description" msgid="7764153465503821011">"Supprimer l\'utilisateur"</string>
@@ -3866,7 +3928,10 @@
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Masquez le contenu professionnel sensible"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Lorsque votre appareil est verrouillé, comment voulez-vous que les notifications de profil s\'affichent?"</string>
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"Éléments à afficher sur l\'écran de verrouillage"</string>
-    <string name="lock_screen_notification_show_seen_title" msgid="1407033848315515970">"Afficher les notifications vues"</string>
+    <!-- no translation found for lock_screen_notification_show_viewed_notifs (4104703346314965171) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_show_viewed_notif_icons (1197681203638927375) -->
+    <skip />
     <string name="lock_screen_notification_show_silent_title" msgid="9177971841517814916">"Afficher les notifications silencieuses"</string>
     <string name="lock_screen_notification_show_sensitive_content_title" msgid="3184973371036065258">"Afficher le contenu de nature délicate"</string>
     <string name="lock_screen_notification_show_sensitive_work_content_title" msgid="532300440507441426">"Afficher le contenu de nature délicate du profil professionnel"</string>
@@ -4365,7 +4430,7 @@
     <string name="usb_control_device" msgid="527916783743021577">"Cet appareil"</string>
     <string name="usb_switching" msgid="3654709188596609354">"Changement en cours…"</string>
     <string name="usb_switching_failed" msgid="5721262697715454137">"Impossible de changer de mode"</string>
-    <string name="usb_summary_charging_only" msgid="678095599403565146">"Chargement de l\'appareil"</string>
+    <string name="usb_summary_charging_only" msgid="678095599403565146">"Recharge de l\'appareil"</string>
     <string name="usb_summary_power_only" msgid="4901734938857822887">"Chargement de l\'appareil connecté"</string>
     <string name="usb_summary_file_transfers" msgid="5498487271972556431">"Transfert de fichiers"</string>
     <string name="usb_summary_tether" msgid="2554569836525075702">"Partage de connexion par USB"</string>
@@ -4698,7 +4763,8 @@
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Portefeuille"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Ouvrez Portefeuille"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"Modifier le raccourci de l\'écran de verrouillage?"</string>
-    <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> est également votre raccourci d\'écran de verrouillage. Voulez-vous le changer?"</string>
+    <!-- no translation found for double_tap_power_lockscreen_shortcut_tip_description (7572626485518591928) -->
+    <skip />
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"Votre appli de portefeuille par défaut actuelle ne prend pas en charge ce geste"</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"Changer le portefeuille par défaut"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Changer d\'appareil photo pour prendre un égoportrait"</string>
@@ -5681,7 +5747,7 @@
     <string name="audio_sharing_description" msgid="1660255584523640628">"Laissez les gens écouter votre contenu multimédia en même temps que vous. Les auditeurs doivent disposer de leurs propres écouteurs LE Audio."</string>
     <string name="audio_sharing_device_group_title" msgid="3019780581643956943">"Appareils de diffusion multimédia actifs"</string>
     <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"Audio des appels"</string>
-    <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"Faire jouer uniquement sur <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"Lecture sur <xliff:g id="DEVICE_NAME">%1$s</xliff:g> uniquement"</string>
     <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"Tester l\'audio"</string>
     <string name="audio_sharing_test_sound_description" msgid="4072462502371937399">"Tous les auditeurs devraient l\'entendre"</string>
     <string name="audio_sharing_stream_settings_title" msgid="1374391898689242036">"Paramètres du flux audio"</string>
@@ -5773,10 +5839,8 @@
     <string name="audio_streams_dialog_turn_off_talkback_title" msgid="6824585115302786690">"Désactiver temporairement la fonctionnalité Talkback"</string>
     <string name="audio_streams_dialog_turn_off_talkback_subtitle" msgid="2394295776096273919">"La fonctionnalité Talkback ne peut pas être utilisée lors de l\'écoute de flux audio. Désactivez la fonctionnalité Talkback pour commencer à écouter du contenu."</string>
     <string name="audio_streams_dialog_turn_off_talkback_button" msgid="8049097689955037626">"Désactiver"</string>
-    <!-- no translation found for audio_streams_dialog_turn_off_audio_sharing_title (1017164439467110153) -->
-    <skip />
-    <!-- no translation found for audio_streams_dialog_turn_off_audio_sharing_subtitle (5856842223436525336) -->
-    <skip />
+    <string name="audio_streams_dialog_turn_off_audio_sharing_title" msgid="1017164439467110153">"Impossible d\'écouter les flux audio pendant le partage"</string>
+    <string name="audio_streams_dialog_turn_off_audio_sharing_subtitle" msgid="5856842223436525336">"Pour écouter ce flux, désactivez le partage audio."</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Connecter un appareil"</string>
     <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Détails du flux audio"</string>
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"Code QR du flux audio"</string>
@@ -5821,21 +5885,16 @@
     <!-- no translation found for device_supervision_switch_paused_summary (1014381188739295656) -->
     <skip />
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"supervision, supervision parentale, contrôles parentaux"</string>
-    <!-- no translation found for supervision_pin_management_preference_title (7721501202320841845) -->
-    <skip />
-    <!-- no translation found for supervision_pin_management_preference_summary_add (2247921267270577374) -->
-    <skip />
-    <!-- no translation found for supervision_pin_management_preference_summary_verify_recovery (5072554239108915119) -->
-    <skip />
+    <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Gérer votre NIP"</string>
+    <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Ajoutez une adresse courriel de récupération"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"Validez l\'adresse courriel de récupération"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Modifier le NIP"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"NIP oublié"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Mettre à jour l\'adresse courriel de récupération"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Supprimer le NIP"</string>
     <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Cela réinitialisera tous vos paramètres de supervision"</string>
-    <!-- no translation found for supervision_add_pin_recovery_title (3487098027604685794) -->
-    <skip />
-    <!-- no translation found for supervision_verify_pin_recovery_title (3166602415814821497) -->
-    <skip />
+    <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Ajouter une adresse courriel de récupération"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Valider votre adresse courriel"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filtres de contenu Web"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"Sites Web"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="1786398287521485576">"Bloquer le contenu Web explicite"</string>
@@ -5846,11 +5905,8 @@
     <string name="supervision_web_content_filters_search_filter_on_summary" msgid="6797184284369033101">"Pour les moteurs de recherche sur cet appareil"</string>
     <string name="supervision_web_content_filters_search_filter_off_title" msgid="7171966260908166395">"Filtre désactivé"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Entrez le NIP de supervision"</string>
-    <!-- no translation found for supervision_choose_your_pin_header (3872062168986738629) -->
-    <skip />
-    <!-- no translation found for supervision_confirm_your_pin_header (8236956712482718354) -->
-    <skip />
-    <!-- no translation found for supervision_pin_reset_success_toast (9163550161698311831) -->
-    <skip />
+    <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Définir un NIP de contrôles parentaux"</string>
+    <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"Confirmer le NIP"</string>
+    <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"Le NIP a été mis à jour"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animation <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
 </resources>

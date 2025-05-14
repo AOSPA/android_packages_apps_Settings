@@ -42,15 +42,9 @@ public class AddUserWhenLockedPreferenceController extends TogglePreferenceContr
         if (!isAvailable()) {
             restrictedSwitchPreference.setVisible(false);
         } else {
-            if (android.multiuser.Flags.newMultiuserSettingsUx()) {
-                restrictedSwitchPreference.setVisible(true);
-                if (mUserCaps.mDisallowAddUserSetByAdmin) {
-                    restrictedSwitchPreference.setDisabledByAdmin(mUserCaps.mEnforcedAdmin);
-                }
-            } else {
-                restrictedSwitchPreference.setDisabledByAdmin(
-                        mUserCaps.disallowAddUser() ? mUserCaps.getEnforcedAdmin() : null);
-                restrictedSwitchPreference.setVisible(mUserCaps.mUserSwitcherEnabled);
+            restrictedSwitchPreference.setVisible(true);
+            if (mUserCaps.mDisallowAddUserSetByAdmin) {
+                restrictedSwitchPreference.setDisabledByAdmin(mUserCaps.mEnforcedAdmin);
             }
         }
     }
@@ -59,16 +53,10 @@ public class AddUserWhenLockedPreferenceController extends TogglePreferenceContr
     public int getAvailabilityStatus() {
         if (!mUserCaps.isAdmin()) {
             return DISABLED_FOR_USER;
-        } else if (android.multiuser.Flags.newMultiuserSettingsUx()) {
-            if (mUserCaps.mDisallowAddUser && !mUserCaps.mDisallowAddUserSetByAdmin) {
-                return DISABLED_FOR_USER;
-            } else {
-                return AVAILABLE;
-            }
-        } else if (mUserCaps.disallowAddUser() || mUserCaps.disallowAddUserSetByAdmin()) {
+        } else if (mUserCaps.mDisallowAddUser && !mUserCaps.mDisallowAddUserSetByAdmin) {
             return DISABLED_FOR_USER;
         } else {
-            return mUserCaps.mUserSwitcherEnabled ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+            return AVAILABLE;
         }
     }
 

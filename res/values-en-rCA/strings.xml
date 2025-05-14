@@ -1170,6 +1170,7 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Allow"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Deny"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*required"</string>
+    <string name="wifi_shared_network_login_screen_warning" msgid="7611029233083731552">"This is a shared network. You can change this setting once logged in."</string>
     <string name="share_wifi_network" msgid="4064997404339571584">"Share this network with other device users"</string>
     <string name="share_wifi_network_summary" msgid="4316236421149769333">"All users on this device can view and connect to a shared network. Administrators can delete a shared network. Learn more"</string>
     <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"Allow other users to edit network configuration"</string>
@@ -1452,8 +1453,17 @@
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"On / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Off"</string>
     <string name="screensaver_settings_when_to_dream" msgid="7756170756065029160">"When to show"</string>
+    <string name="screensaver_settings_low_light_mode" msgid="271972828076673743">"Low light mode"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Lift to wake"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Restrict to wireless charging"</string>
+    <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"Use Low Light mode"</string>
+    <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"Choose what to show in Low Light mode"</string>
+    <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"Screen off"</string>
+    <string name="low_light_display_behavior_low_light_clock_dream" msgid="2235561363691252383">"Low light clock"</string>
+    <string name="low_light_display_behavior_summary_on" msgid="4218678742261840224">"On / <xliff:g id="LOW_LIGHT_MODE">%1$s</xliff:g>"</string>
+    <string name="low_light_display_behavior_summary_off" msgid="4565368094992120316">"Off"</string>
+    <string name="low_light_display_behavior_screen_off_full_summary" msgid="6671607843870561892">"Screen will turn off when your environment is dark"</string>
+    <string name="low_light_display_behavior_low_light_clock_dream_full_summary" msgid="1145914465090731721">"Low Light Clock will show when your environment is dark"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Ambient display"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"When to show"</string>
     <string name="doze_title" msgid="1523090408230862316">"Wake screen for notifications"</string>
@@ -2118,6 +2128,7 @@
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"Decrease"</string>
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"Increase"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Reverse scrolling"</string>
+    <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"Use primary keys"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Scroll up to move the page down"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"Scrolling"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"Controlled scrolling"</string>
@@ -2197,6 +2208,13 @@
     <string name="gesture_button_next" msgid="695288092704187356">"Next"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"Restart"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"Done"</string>
+    <string name="action_corners_title" msgid="8971354126563421646">"Customize action corners"</string>
+    <string name="action_corners_summary" msgid="4245089615854251124">"Use cursors to navigate the system"</string>
+    <string name="action_corners_intro" msgid="4384209411870086502">"Choose the following areas to customize action corners"</string>
+    <string name="action_corners_bottom_left_title" msgid="8677233546610832717">"Bottom-left corner"</string>
+    <string name="action_corners_bottom_right_title" msgid="2155948558861306738">"Bottom-right corner"</string>
+    <string name="action_corners_top_left_title" msgid="6604149810499060560">"Top-left corner"</string>
+    <string name="action_corners_top_right_title" msgid="583996793984142329">"Top-right corner"</string>
     <string name="modifier_keys_settings" msgid="2537108435032034683">"Modifier keys"</string>
     <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Change the behaviour of keys"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"Reset all"</string>
@@ -2526,6 +2544,21 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Shorter"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Longer"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Auto click time"</string>
+    <string name="accessibility_autoclick_main_switch_title" msgid="1968409462935503999">"Use autoclick (dwell timing)"</string>
+    <string name="accessibility_autoclick_shortcut_title" msgid="5337438503429302081">"Autoclick shortcut"</string>
+    <string name="autoclick_delay_before_click_title" msgid="4625722241966706931">"Delay before click"</string>
+    <string name="autoclick_delay_before_click_summary" msgid="3685183305849901339">"Set the length of time it takes to click after the cursor stops moving"</string>
+    <string name="autoclick_cursor_area_size_title" msgid="8988239939645854279">"Click area"</string>
+    <string name="autoclick_cursor_area_size_summary" msgid="6993249143332791469">"If the cursor moves outside of the click area, autoclick is cancelled"</string>
+    <string name="autoclick_cursor_area_size_dialog_option_extra_large" msgid="3802014133363801617">"Extra large"</string>
+    <string name="autoclick_cursor_area_size_dialog_option_large" msgid="1115930762484519488">"Large"</string>
+    <string name="autoclick_cursor_area_size_dialog_option_default" msgid="4934363711068310028">"Default"</string>
+    <string name="autoclick_cursor_area_size_dialog_option_small" msgid="3987901922883658043">"Small"</string>
+    <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"Extra small"</string>
+    <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"Ignore minor cursor movement"</string>
+    <string name="autoclick_revert_to_left_click_title" msgid="9213418243482609005">"Revert to left click after action"</string>
+    <string name="accessibility_autoclick_navigation_title" msgid="2580632445700896655">"Autoclick works best with 3-button navigation"</string>
+    <string name="accessibility_autoclick_navigation_message" msgid="8007946937334710898">"Enable 3-button navigation in settings so that you can use autoclick to go home, go back, and open recent apps."</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibration and haptics"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Control the vibration strength for different usages"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"On"</string>
@@ -3862,7 +3895,8 @@
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Hide sensitive work content"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"When your device is locked, how do you want profile notifications to show?"</string>
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"What to show on lock screen"</string>
-    <string name="lock_screen_notification_show_seen_title" msgid="1407033848315515970">"Show seen notifications"</string>
+    <string name="lock_screen_notification_show_viewed_notifs" msgid="4104703346314965171">"Show viewed notifications"</string>
+    <string name="lock_screen_notification_show_viewed_notif_icons" msgid="1197681203638927375">"Show viewed notification icons"</string>
     <string name="lock_screen_notification_show_silent_title" msgid="9177971841517814916">"Show silent notifications"</string>
     <string name="lock_screen_notification_show_sensitive_content_title" msgid="3184973371036065258">"Show sensitive content"</string>
     <string name="lock_screen_notification_show_sensitive_work_content_title" msgid="532300440507441426">"Show sensitive work profile content"</string>
@@ -4694,7 +4728,7 @@
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Wallet"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Open Wallet"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"Change lock screen shortcut?"</string>
-    <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> is also your lock screen shortcut. Want to change it?"</string>
+    <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="7572626485518591928">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> is also your lock screen shortcut. Tap to change it."</string>
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"Your current default wallet app does not support this gesture"</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"Change default wallet"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Flip camera for selfie"</string>
@@ -5810,10 +5844,8 @@
     <string name="supervision_settings_title" msgid="8507163323870367711">"Parental controls"</string>
     <string name="supervision_settings_summary" msgid="5020634300370322741">"Content restrictions &amp; other limits"</string>
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Use device supervision"</string>
-    <!-- no translation found for device_supervision_switch_no_pin_summary (4869563544571033220) -->
-    <skip />
-    <!-- no translation found for device_supervision_switch_paused_summary (1014381188739295656) -->
-    <skip />
+    <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Set up PIN"</string>
+    <string name="device_supervision_switch_paused_summary" msgid="1014381188739295656">"Paused"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"supervision, parental supervision, parental controls"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Manage your PIN"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Add recovery email"</string>

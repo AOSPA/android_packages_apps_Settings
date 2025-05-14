@@ -17,7 +17,6 @@
 package com.android.settings.users;
 
 import android.content.Context;
-import android.multiuser.Flags;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -87,9 +86,6 @@ public class MultiUserSwitchBarController implements SwitchWidgetController.OnSw
         Log.d(TAG, "Toggling multi-user feature enabled state to: " + isChecked);
         final boolean success = Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.USER_SWITCHER_ENABLED, isChecked ? 1 : 0);
-        if (success && mListener != null && !Flags.newMultiuserSettingsUx()) {
-            mListener.onMultiUserSwitchChanged(isChecked);
-        }
         return success;
     }
 }

@@ -786,7 +786,7 @@
     <string name="unlock_set_unlock_off_title" msgid="2831957685685921667">"بدون قفل"</string>
     <string name="unlock_set_unlock_none_title" msgid="2844029875174409728">"التمرير السريع"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="8224895208452995332">"نقش"</string>
-    <string name="unlock_set_unlock_pin_title" msgid="5283636759362880407">"رقم التعريف الشخصي"</string>
+    <string name="unlock_set_unlock_pin_title" msgid="5283636759362880407">"رقم تعريف شخصي"</string>
     <string name="unlock_set_unlock_password_title" msgid="2559842616268607041">"كلمة مرور"</string>
     <string name="unlock_set_do_later_title" msgid="6565575303676064364">"ليس الآن"</string>
     <string name="current_screen_lock" msgid="1367883977261098017">"قفل الشاشة الحالي"</string>
@@ -1170,6 +1170,8 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"سماح"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"رفض"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*مطلوب"</string>
+    <!-- no translation found for wifi_shared_network_login_screen_warning (7611029233083731552) -->
+    <skip />
     <string name="share_wifi_network" msgid="4064997404339571584">"مشاركة هذه الشبكة مع مستخدمي الجهاز الآخرين"</string>
     <string name="share_wifi_network_summary" msgid="4316236421149769333">"يمكن لجميع المستخدمين على هذا الجهاز الاطّلاع على الشبكات المشترَكة والاتصال بها. يمكن للمشرفين حذف الشبكات المشترَكة. مزيد من المعلومات"</string>
     <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"السماح للمستخدمين الآخرين بتعديل إعدادات الشبكة"</string>
@@ -1452,8 +1454,26 @@
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"مفعّلة / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"إيقاف"</string>
     <string name="screensaver_settings_when_to_dream" msgid="7756170756065029160">"وقت العرض"</string>
+    <!-- no translation found for screensaver_settings_low_light_mode (271972828076673743) -->
+    <skip />
     <string name="lift_to_wake_title" msgid="8994218158737714046">"الرفع لتنبيه الجهاز"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"البدء فقط عند الشحن لاسلكيًا"</string>
+    <!-- no translation found for low_light_display_behavior_main_switch_title (7138165032358139627) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_subtitle (1833984014035605413) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_screen_off (4203092158668290404) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_low_light_clock_dream (2235561363691252383) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_summary_on (4218678742261840224) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_summary_off (4565368094992120316) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_screen_off_full_summary (6671607843870561892) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_low_light_clock_dream_full_summary (1145914465090731721) -->
+    <skip />
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"العرض على الشاشة"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"وقت العرض"</string>
     <string name="doze_title" msgid="1523090408230862316">"تنشيط الشاشة لعرض الإشعارات"</string>
@@ -1628,7 +1648,7 @@
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"أبدًا"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"أثناء الشحن"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="537039046490426922">"أثناء الشحن في وضع عمودي"</string>
-    <string name="when_to_show_hubmode_docked" msgid="8876633401873168284">"أثناء الإرساء والشحن"</string>
+    <string name="when_to_show_hubmode_docked" msgid="8876633401873168284">"أثناء الشحن في وضع الإرساء"</string>
     <string name="hub_restrict_to_wireless_charging_title" msgid="2234080978449692163">"البدء فقط عند الشحن لاسلكيًا"</string>
     <string name="apn_settings" msgid="4295467389400441299">"أسماء نقاط الوصول"</string>
     <string name="apn_edit" msgid="2003683641840248741">"تعديل نقطة الوصول"</string>
@@ -2114,13 +2134,12 @@
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"استخدام مفاتيح الماوس"</string>
     <string name="accessibility_mouse_keys_shortcut_title" msgid="7621635104533584115">"اختصار مفاتيح الماوس"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"يمكنك استخدام لوحة المفاتيح للتحكّم في المؤشر"</string>
-    <!-- no translation found for mouse_keys_max_speed_title (1788751803245422659) -->
-    <skip />
-    <!-- no translation found for mouse_keys_seek_bar_decrease_button_description (9077624857206032509) -->
-    <skip />
-    <!-- no translation found for mouse_keys_seek_bar_increase_button_description (2721662400858172203) -->
-    <skip />
+    <string name="mouse_keys_max_speed_title" msgid="1788751803245422659">"السرعة القصوى"</string>
+    <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"خفض"</string>
+    <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"زيادة"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"عكس اتجاه التنقّل"</string>
+    <!-- no translation found for mouse_keys_use_primary_keys_title (525897583406210252) -->
+    <skip />
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"يمكنك الانتقال للأعلى لتحريك محتوى الصفحة للأسفل"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"الانتقال"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"الانتقال المتناسب مع سرعة دوران العجلة"</string>
@@ -2132,11 +2151,11 @@
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"تسريع المؤشر"</string>
     <string name="mouse_pointer_acceleration_summary" msgid="6954407061360045792">"تؤدي الحركات السريعة باستخدام الماوس إلى تحريك المؤشر بعيدًا"</string>
     <string name="mouse_key_main_page_title" msgid="8051692181770475257">"مفاتيح الماوس في \"<xliff:g id="KEYBOARD_NAME">%s</xliff:g>\""</string>
-    <string name="mouse_keys_directional_summary" msgid="2215425656757420699">"يمكن استخدام مفاتيح \"<xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g>\" لتحريك مؤشّر الماوس"</string>
+    <string name="mouse_keys_directional_summary" msgid="2215425656757420699">"‏يمكن استخدام مفاتيح \"‎<xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g>\" لتحريك مؤشّر الماوس"</string>
     <string name="mouse_keys_click_summary" msgid="8271700153598258484">"يمكن استخدام مفتاح \"<xliff:g id="CLICK_LABEL">%s</xliff:g>\" للنقر على الزر الأساسي للماوس"</string>
     <string name="mouse_keys_press_hold_summary" msgid="112969663769147732">"يمكن استخدام مفتاح \"<xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g>\" للضغط مع الاستمرار على الزر الأساسي للماوس"</string>
     <string name="mouse_keys_release_summary" msgid="7209370896835993434">"يمكن استخدام مفتاح \"<xliff:g id="RELEASE_LABEL">%s</xliff:g>\" لتحرير الزر الأساسي للماوس"</string>
-    <string name="mouse_keys_toggle_scroll_summary" msgid="7492663135290108272">"يمكن استخدام مفتاح \"<xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g>\" لتبديل وضع التمرير، ما سيجعل مفاتيح \"<xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g>\" تؤدي إلى الانتقال للأعلى أو الأسفل أو اليسار أو اليمين"</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="7492663135290108272">"‏يمكن استخدام مفتاح \"<xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g>\" لتبديل وضع التمرير، ما سيجعل مفاتيح \"‎<xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g>\" تؤدي إلى الانتقال للأعلى أو الأسفل أو اليسار أو اليمين"</string>
     <string name="mouse_keys_release2_summary" msgid="5504548339731577210">"يمكن استخدام مفتاح \"<xliff:g id="RELEASE_2_LABEL">%s</xliff:g>\" للنقر على الزر الثانوي للماوس"</string>
     <string name="keyboard_shortcuts_helper" msgid="6934420811737731188">"عرض اختصارات لوحة المفاتيح"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"إظهار قائمة الاختصارات"</string>
@@ -2200,6 +2219,20 @@
     <string name="gesture_button_next" msgid="695288092704187356">"التالي"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"إعادة تشغيل"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"تم"</string>
+    <!-- no translation found for action_corners_title (8971354126563421646) -->
+    <skip />
+    <!-- no translation found for action_corners_summary (4245089615854251124) -->
+    <skip />
+    <!-- no translation found for action_corners_intro (4384209411870086502) -->
+    <skip />
+    <!-- no translation found for action_corners_bottom_left_title (8677233546610832717) -->
+    <skip />
+    <!-- no translation found for action_corners_bottom_right_title (2155948558861306738) -->
+    <skip />
+    <!-- no translation found for action_corners_top_left_title (6604149810499060560) -->
+    <skip />
+    <!-- no translation found for action_corners_top_right_title (583996793984142329) -->
+    <skip />
     <string name="modifier_keys_settings" msgid="2537108435032034683">"مفاتيح التعديل"</string>
     <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"تغيير سلوك المفاتيح"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"إعادة ضبط الكل"</string>
@@ -2335,7 +2368,7 @@
     <string name="talkback_title" msgid="8756080454514251327">"Talkback"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"هو قارئ شاشة مُصمَّم في الأساس للأشخاص الذين يعانون فقدان البصر أو ضعفه."</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"يمكنك النقر على عناصر على شاشتك لتتم قراءتها بصوت عالٍ"</string>
-    <string name="accessibility_captioning_title" msgid="4561871958958925225">"الإعدادات المفضّلة للشرح"</string>
+    <string name="accessibility_captioning_title" msgid="4561871958958925225">"الإعدادات المفضّلة للترجمة والشرح"</string>
     <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"لمحة عن الإعدادات المفضّلة للشرح"</string>
     <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"مزيد من المعلومات حول الإعدادات المفضّلة للشرح"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"التكبير"</string>
@@ -2529,6 +2562,36 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"أقصر"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"أطول"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"وقت النقر التلقائي"</string>
+    <!-- no translation found for accessibility_autoclick_main_switch_title (1968409462935503999) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_shortcut_title (5337438503429302081) -->
+    <skip />
+    <!-- no translation found for autoclick_delay_before_click_title (4625722241966706931) -->
+    <skip />
+    <!-- no translation found for autoclick_delay_before_click_summary (3685183305849901339) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_title (8988239939645854279) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_summary (6993249143332791469) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_extra_large (3802014133363801617) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_large (1115930762484519488) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_default (4934363711068310028) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_small (3987901922883658043) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_extra_small (6056674574040448864) -->
+    <skip />
+    <!-- no translation found for autoclick_ignore_minor_cursor_movement_title (5038721995720529808) -->
+    <skip />
+    <!-- no translation found for autoclick_revert_to_left_click_title (9213418243482609005) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_navigation_title (2580632445700896655) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_navigation_message (8007946937334710898) -->
+    <skip />
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"الاهتزاز واللمس"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"التحكّم في قوة الاهتزاز للاستخدامات المختلفة"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"الميزة مفعّلة"</string>
@@ -2569,7 +2632,7 @@
     <string name="captioning_appearance_title" msgid="3128792092290011408">"حجم نص الترجمة والشرح ونمطه"</string>
     <string name="captioning_appearance_summary" msgid="4620682807315588019">"حجم النص <xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"خيارات أكثر"</string>
-    <string name="accessibility_captioning_preference_intro" msgid="8995427146374031134">"تخصيص حجم الشرح ونمطه لتسهيل قراءته"</string>
+    <string name="accessibility_captioning_preference_intro" msgid="8995427146374031134">"تخصيص حجم نص الترجمة والشرح ونمطه لتسهيل قراءته"</string>
     <string name="accessibility_captioning_preference_summary" msgid="8335768472978374255">"هذه الإعدادات المفضّلة للترجمة والشرح غير متوافقة مع بعض تطبيقات الموسيقى"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"زر تسهيل الاستخدام"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"التمرير سريعًا بإصبعين إلى أعلى الشاشة من أسفلها"</string>
@@ -3298,8 +3361,7 @@
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"هل تريد إزالة ملف العمل؟"</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"سيتم حذف جميع التطبيقات والبيانات."</string>
     <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"في حال المتابعة، سيتم حذف جميع التطبيقات والبيانات في ملف العمل هذا."</string>
-    <!-- no translation found for work_profile_confirm_remove_message_with_esim (1169605178915445183) -->
-    <skip />
+    <string name="work_profile_confirm_remove_message_with_esim" msgid="1169605178915445183">"‏في حال المتابعة، سيتم حذف جميع التطبيقات والبيانات في هذا الملف الشخصي، بما في ذلك شرائح eSIM الخاصة بالعمل."</string>
     <string name="user_profile_confirm_remove_message" msgid="3641289528179850718">"سيتم حذف جميع التطبيقات والبيانات."</string>
     <string name="user_adding_new_user" msgid="7439602720177181412">"جارٍ إضافة مستخدم جديد..."</string>
     <string name="user_delete_user_description" msgid="7764153465503821011">"حذف مستخدم"</string>
@@ -3866,7 +3928,10 @@
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"إخفاء محتوى العمل الحساس"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"كيف تريد أن يتم عرض إشعارات الملف الشخصي عندما يكون الجهاز مقفلاً؟"</string>
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"الإشعارات التي سيتم عرضها على شاشة القفل"</string>
-    <string name="lock_screen_notification_show_seen_title" msgid="1407033848315515970">"إظهار الإشعارات التي تم الاطّلاع عليها"</string>
+    <!-- no translation found for lock_screen_notification_show_viewed_notifs (4104703346314965171) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_show_viewed_notif_icons (1197681203638927375) -->
+    <skip />
     <string name="lock_screen_notification_show_silent_title" msgid="9177971841517814916">"إظهار الإشعارات الصامتة"</string>
     <string name="lock_screen_notification_show_sensitive_content_title" msgid="3184973371036065258">"إظهار المحتوى الحسّاس"</string>
     <string name="lock_screen_notification_show_sensitive_work_content_title" msgid="532300440507441426">"إظهار المحتوى الحسّاس بملف العمل"</string>
@@ -4698,7 +4763,8 @@
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"‏محفظة Google"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"‏فتح \"محفظة Google\""</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"هل المطلوب تغيير الاختصار على شاشة القفل؟"</string>
-    <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"‫<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> أيضًا من اختصاراتك على شاشة القفل. هل المطلوب تغيير ذلك؟"</string>
+    <!-- no translation found for double_tap_power_lockscreen_shortcut_tip_description (7572626485518591928) -->
+    <skip />
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"لا يتيح تطبيق المحفظة التلقائي الحالي هذه الإيماءة"</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"تغيير المحفظة التلقائية"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"قلب الكاميرا لالتقاط سيلفي"</string>
@@ -5777,10 +5843,8 @@
     <string name="audio_streams_dialog_turn_off_talkback_title" msgid="6824585115302786690">"‏إيقاف TalkBack مؤقتًا"</string>
     <string name="audio_streams_dialog_turn_off_talkback_subtitle" msgid="2394295776096273919">"‏لا يمكن استخدام ميزة TalkBack أثناء الاستماع إلى البث الصوتي. يُرجى إيقاف ميزة TalkBack لبدء الاستماع."</string>
     <string name="audio_streams_dialog_turn_off_talkback_button" msgid="8049097689955037626">"إيقاف"</string>
-    <!-- no translation found for audio_streams_dialog_turn_off_audio_sharing_title (1017164439467110153) -->
-    <skip />
-    <!-- no translation found for audio_streams_dialog_turn_off_audio_sharing_subtitle (5856842223436525336) -->
-    <skip />
+    <string name="audio_streams_dialog_turn_off_audio_sharing_title" msgid="1017164439467110153">"يتعذّر الاستماع إلى البث الصوتي أثناء المشاركة"</string>
+    <string name="audio_streams_dialog_turn_off_audio_sharing_subtitle" msgid="5856842223436525336">"للاستماع إلى هذا البث، عليك إيقاف ميزة \"مشاركة الصوت\"."</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"ربط جهاز"</string>
     <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"تفاصيل البث الصوتي"</string>
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"‏رمز QR للبث الصوتي"</string>
@@ -5825,21 +5889,16 @@
     <!-- no translation found for device_supervision_switch_paused_summary (1014381188739295656) -->
     <skip />
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"إشراف، إشراف الأهل، أدوات رقابة الأهل"</string>
-    <!-- no translation found for supervision_pin_management_preference_title (7721501202320841845) -->
-    <skip />
-    <!-- no translation found for supervision_pin_management_preference_summary_add (2247921267270577374) -->
-    <skip />
-    <!-- no translation found for supervision_pin_management_preference_summary_verify_recovery (5072554239108915119) -->
-    <skip />
+    <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"إدارة رقم التعريف الشخصي"</string>
+    <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"إضافة عنوان البريد الإلكتروني المخصّص لاسترداد الحساب"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"تأكيد عنوان البريد الإلكتروني المخصّص لاسترداد الحساب"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"تغيير رقم التعريف الشخصي"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"نسيتُ رقم التعريف الشخصي"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"تعديل عنوان البريد الإلكتروني المخصّص لاسترداد الحساب"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"حذف رقم التعريف الشخصي"</string>
     <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"سيؤدي هذا الإجراء إلى إعادة ضبط كل إعدادات الإشراف"</string>
-    <!-- no translation found for supervision_add_pin_recovery_title (3487098027604685794) -->
-    <skip />
-    <!-- no translation found for supervision_verify_pin_recovery_title (3166602415814821497) -->
-    <skip />
+    <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"إضافة عنوان البريد الإلكتروني المخصّص لاسترداد الحساب"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"تأكيد عنوان البريد الإلكتروني"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"فلاتر محتوى الويب"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"المواقع الإلكترونية"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="1786398287521485576">"حظر المحتوى الفاضح على الويب"</string>
@@ -5850,11 +5909,8 @@
     <string name="supervision_web_content_filters_search_filter_on_summary" msgid="6797184284369033101">"لمحركات البحث على هذا الجهاز"</string>
     <string name="supervision_web_content_filters_search_filter_off_title" msgid="7171966260908166395">"إيقاف الفلتر"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"إدخال رقم التعريف الشخصي للمشرف"</string>
-    <!-- no translation found for supervision_choose_your_pin_header (3872062168986738629) -->
-    <skip />
-    <!-- no translation found for supervision_confirm_your_pin_header (8236956712482718354) -->
-    <skip />
-    <!-- no translation found for supervision_pin_reset_success_toast (9163550161698311831) -->
-    <skip />
+    <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"ضبط رقم تعريف شخصي لأدوات رقابة الأهل"</string>
+    <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"تأكيد رقم التعريف الشخصي"</string>
+    <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"تم تعديل رقم التعريف الشخصي"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"صورة متحركة لميزة \"<xliff:g id="FEATURE">%1$s</xliff:g>\""</string>
 </resources>

@@ -1170,6 +1170,7 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"許可する"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"許可しない"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*必須"</string>
+    <string name="wifi_shared_network_login_screen_warning" msgid="7611029233083731552">"これは共有ネットワークです。この設定はログイン後に変更できます。"</string>
     <string name="share_wifi_network" msgid="4064997404339571584">"このネットワークを他のデバイス ユーザーと共有する"</string>
     <string name="share_wifi_network_summary" msgid="4316236421149769333">"このデバイスのすべてのユーザーが共有ネットワークの確認と接続を行えます。管理者は共有ネットワークを削除できます。詳細"</string>
     <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"他のユーザーにネットワーク構成の編集を許可する"</string>
@@ -1452,8 +1453,17 @@
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"ON / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"OFF"</string>
     <string name="screensaver_settings_when_to_dream" msgid="7756170756065029160">"表示するタイミング"</string>
+    <string name="screensaver_settings_low_light_mode" msgid="271972828076673743">"ローライト モード"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"指を離してスリープ状態から復帰"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"ワイヤレス充電の場合のみ"</string>
+    <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"ローライト モードを使用する"</string>
+    <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"ローライト モードで表示する項目を選択する"</string>
+    <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"画面 OFF"</string>
+    <string name="low_light_display_behavior_low_light_clock_dream" msgid="2235561363691252383">"ローライト クロック"</string>
+    <string name="low_light_display_behavior_summary_on" msgid="4218678742261840224">"ON / <xliff:g id="LOW_LIGHT_MODE">%1$s</xliff:g>"</string>
+    <string name="low_light_display_behavior_summary_off" msgid="4565368094992120316">"OFF"</string>
+    <string name="low_light_display_behavior_screen_off_full_summary" msgid="6671607843870561892">"周囲が暗くなると画面が OFF になります"</string>
+    <string name="low_light_display_behavior_low_light_clock_dream_full_summary" msgid="1145914465090731721">"周囲が暗くなるとローライト クロックが表示されます"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"アンビエント表示"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"表示するタイミング"</string>
     <string name="doze_title" msgid="1523090408230862316">"通知で画面を ON にする"</string>
@@ -2118,6 +2128,7 @@
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"小さくする"</string>
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"大きくする"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"逆スクロール"</string>
+    <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"メインキーを使用する"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"上にスクロールすると、ページ下部に移動します"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"スクロール"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"制御付きスクロール"</string>
@@ -2171,7 +2182,7 @@
     <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"白"</string>
     <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"黒"</string>
     <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"なし"</string>
-    <string name="trackpad_touch_gesture" msgid="8641725062131922497">"タッチパッド ジェスチャーを学ぶ"</string>
+    <string name="trackpad_touch_gesture" msgid="8641725062131922497">"タッチパッド ジェスチャーの使い方"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"トラックパッド, マウス, カーソル, スクロール, スワイプ, 右クリック, クリック, ポインタ"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"右クリック, タップ"</string>
     <string name="three_finger_tap_middle_click" msgid="7898931632908866867">"マウスの中央のボタン"</string>
@@ -2197,6 +2208,13 @@
     <string name="gesture_button_next" msgid="695288092704187356">"次へ"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"再開"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"完了"</string>
+    <string name="action_corners_title" msgid="8971354126563421646">"アクション コーナーのカスタマイズ"</string>
+    <string name="action_corners_summary" msgid="4245089615854251124">"カーソルを使用してシステムを操作します"</string>
+    <string name="action_corners_intro" msgid="4384209411870086502">"アクション コーナーをカスタマイズするには、次の領域を選択します"</string>
+    <string name="action_corners_bottom_left_title" msgid="8677233546610832717">"左下の角"</string>
+    <string name="action_corners_bottom_right_title" msgid="2155948558861306738">"右下の角"</string>
+    <string name="action_corners_top_left_title" msgid="6604149810499060560">"左上の角"</string>
+    <string name="action_corners_top_right_title" msgid="583996793984142329">"右上の角"</string>
     <string name="modifier_keys_settings" msgid="2537108435032034683">"修飾キー"</string>
     <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"キーの動作を変更します"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"すべてリセット"</string>
@@ -2399,10 +2417,10 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"ズームするには 3 回タップします"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"ボタンをタップしてズームします"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"画面をすばやくズームインして、コンテンツを拡大できます"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;ズームインするには:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ショートカットを使って拡大を開始します&lt;br/&gt; {1,number,integer}. 画面をタップします&lt;br/&gt; {2,number,integer}. 2 本の指でドラッグして画面上を移動します&lt;br/&gt; {3,number,integer}. 2 本の指でピンチ操作してズームを調整します&lt;br/&gt; {4,number,integer}. ショートカットを使って拡大を停止します&lt;br/&gt;&lt;br/&gt; &lt;b&gt;一時的にズームインするには:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 拡大の種類が全画面に設定されていることを確認します&lt;br/&gt; {1,number,integer}. ショートカットを使って拡大を開始します&lt;br/&gt; {2,number,integer}. 画面を長押しします&lt;br/&gt; {3,number,integer}. 指をドラッグして画面上を移動します&lt;br/&gt; {4,number,integer}. 指を離して拡大を停止します"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;ズームインする:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ショートカットを使って拡大を開始&lt;br/&gt; {1,number,integer}. 画面をタップ&lt;br/&gt; {2,number,integer}. 2 本の指でドラッグして画面上を移動&lt;br/&gt; {3,number,integer}. 2 本の指でピンチ操作してズームを調整&lt;br/&gt; {4,number,integer}. ショートカットを使って拡大を停止&lt;br/&gt;&lt;br/&gt; &lt;b&gt;一時的にズームインする:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 拡大の種類が全画面に設定されていることを確認&lt;br/&gt; {1,number,integer}. ショートカットを使って拡大を開始&lt;br/&gt; {2,number,integer}. 画面を長押し&lt;br/&gt; {3,number,integer}. 指をドラッグして画面上を移動&lt;br/&gt; {4,number,integer}. 指を離して拡大を停止"</string>
     <string name="accessibility_screen_magnification_keyboard_summary" msgid="2504303274186294767">"&lt;b&gt;キーボードでズームするには:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ショートカットを使って拡大を開始します&lt;br/&gt; {1,number,integer}. &lt;xliff:g id=meta1&gt;%1$s&lt;/xliff:g&gt; と &lt;xliff:g id=alt1&gt;%2$s&lt;/xliff:g&gt; を長押して [+] または [-] を押すと、拡大 / 縮小できます&lt;br/&gt; {2,number,integer}. &lt;xliff:g id=meta2&gt;%3$s&lt;/xliff:g&gt; と &lt;xliff:g id=alt2&gt;%4$s&lt;/xliff:g&gt; を長押しして矢印キーを押すと、画面上を移動できます&lt;br/&gt; {3,number,integer}. ショートカットを使って、拡大を終了します"</string>
-    <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;ズームインするには:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ショートカットを使って拡大を開始します&lt;br/&gt; {1,number,integer}. 画面をタップします&lt;br/&gt; {2,number,integer}. 2 本の指でドラッグして画面上を移動します&lt;br/&gt; {3,number,integer}. 2 本の指でピンチ操作してズームを調整します&lt;br/&gt; {4,number,integer}. ショートカットを使って拡大を停止します&lt;br/&gt;&lt;br/&gt; 一時的にズームインするなどの操作もできます。"</string>
-    <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;ズームインするには:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ショートカットを使って拡大を開始します&lt;br/&gt; {1,number,integer}. 画面をタップします&lt;br/&gt; {2,number,integer}. 1 本または 2 本の指でドラッグして画面上を移動します&lt;br/&gt; {3,number,integer}. 2 本の指でピンチ操作してズームを調整します&lt;br/&gt; {4,number,integer}. ショートカットを使って拡大を停止します&lt;br/&gt;&lt;br/&gt; 一時的にズームインするなどの操作もできます。"</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;ズームインする:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ショートカットを使って拡大を開始&lt;br/&gt; {1,number,integer}. 画面をタップ&lt;br/&gt; {2,number,integer}. 2 本の指でドラッグして画面上を移動&lt;br/&gt; {3,number,integer}. 2 本の指でピンチ操作してズームを調整&lt;br/&gt; {4,number,integer}. ショートカットを使って拡大を停止&lt;br/&gt;&lt;br/&gt; 一時的にズームインするなどの操作もできます。"</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;ズームインする:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ショートカットを使って拡大を開始&lt;br/&gt; {1,number,integer}. 画面をタップ&lt;br/&gt; {2,number,integer}. 1 本または 2 本の指でドラッグして画面上を移動&lt;br/&gt; {3,number,integer}. 2 本の指でピンチ操作してズームを調整&lt;br/&gt; {4,number,integer}. ショートカットを使って拡大を停止&lt;br/&gt;&lt;br/&gt; 一時的にズームインするなどの操作もできます。"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"[拡大] を ON にすると、画面で拡大操作を行えます。\n\n"<b>"ズーム"</b>"するには、[拡大] を ON にして画面をタップします。\n"<ul><li>"2 本以上の指をドラッグしてスクロール"</li>\n<li>"2 本以上の指でピンチ操作して拡大率を調節"</li></ul>\n\n<b>"一時的にズーム"</b>"するには、[拡大] を ON にして画面を長押しします。\n"<ul><li>"ドラッグで画面上を移動"</li>\n<li>"指を放してズームアウト"</li></ul>\n\n"キーボードやナビゲーション バーでは拡大操作は行えません。"</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"<xliff:g id="CURRENT_PAGE">%1$d</xliff:g>/<xliff:g id="NUM_PAGES">%2$d</xliff:g> ページ目"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"ユーザー補助機能ボタンのショートカット"</string>
@@ -2526,6 +2544,36 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"短い"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"長い"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"自動クリックの時間"</string>
+    <!-- no translation found for accessibility_autoclick_main_switch_title (1968409462935503999) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_shortcut_title (5337438503429302081) -->
+    <skip />
+    <!-- no translation found for autoclick_delay_before_click_title (4625722241966706931) -->
+    <skip />
+    <!-- no translation found for autoclick_delay_before_click_summary (3685183305849901339) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_title (8988239939645854279) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_summary (6993249143332791469) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_extra_large (3802014133363801617) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_large (1115930762484519488) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_default (4934363711068310028) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_small (3987901922883658043) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_extra_small (6056674574040448864) -->
+    <skip />
+    <!-- no translation found for autoclick_ignore_minor_cursor_movement_title (5038721995720529808) -->
+    <skip />
+    <!-- no translation found for autoclick_revert_to_left_click_title (9213418243482609005) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_navigation_title (2580632445700896655) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_navigation_message (8007946937334710898) -->
+    <skip />
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"バイブレーションとハプティクス"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"用途に合わせてバイブレーションの強さを調整します"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"ON"</string>
@@ -3295,8 +3343,7 @@
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"仕事用プロファイルの削除"</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"すべてのアプリとデータが削除されます。"</string>
     <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"続行すると、このプロファイル内のアプリとデータはすべて削除されます。"</string>
-    <!-- no translation found for work_profile_confirm_remove_message_with_esim (1169605178915445183) -->
-    <skip />
+    <string name="work_profile_confirm_remove_message_with_esim" msgid="1169605178915445183">"続行すると、このプロファイル内のアプリとデータはすべて削除されます（仕事用の eSIM を含む）。"</string>
     <string name="user_profile_confirm_remove_message" msgid="3641289528179850718">"すべてのアプリとデータが削除されます。"</string>
     <string name="user_adding_new_user" msgid="7439602720177181412">"新しいユーザーを追加中…"</string>
     <string name="user_delete_user_description" msgid="7764153465503821011">"ユーザーを削除"</string>
@@ -3637,7 +3684,7 @@
     <string name="zen_mode_active_text" msgid="5002406772481439437">"ON"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"未設定"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"無効"</string>
-    <string name="zen_mode_new_title" msgid="4934720193004330740">"モードの作成"</string>
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"モードを作成"</string>
     <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"カスタム"</string>
     <string name="zen_mode_action_activate" msgid="4832626715234966484">"今すぐ ON にする"</string>
     <string name="zen_mode_action_deactivate" msgid="5922468877447186921">"OFF にする"</string>
@@ -3863,7 +3910,10 @@
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"機密性の高い仕事の内容を非表示"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"デバイスがロックされている場合、プロファイル通知をどのように表示しますか？"</string>
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"ロック画面に表示する内容"</string>
-    <string name="lock_screen_notification_show_seen_title" msgid="1407033848315515970">"表示済みの通知を表示"</string>
+    <!-- no translation found for lock_screen_notification_show_viewed_notifs (4104703346314965171) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_show_viewed_notif_icons (1197681203638927375) -->
+    <skip />
     <string name="lock_screen_notification_show_silent_title" msgid="9177971841517814916">"サイレント通知を表示"</string>
     <string name="lock_screen_notification_show_sensitive_content_title" msgid="3184973371036065258">"センシティブなコンテンツを表示"</string>
     <string name="lock_screen_notification_show_sensitive_work_content_title" msgid="532300440507441426">"機密性の高い仕事用プロファイルのコンテンツを表示"</string>
@@ -4173,7 +4223,7 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"<xliff:g id="FORMATTEDTIME">%1$s</xliff:g>までアラームのみに変更します"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"常に割り込みに変更します"</string>
     <string name="zen_mode_rename_title" msgid="8146882272966214558">"モードを編集"</string>
-    <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"モードの作成"</string>
+    <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"モードを作成"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"カスタムモード"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"モード名"</string>
     <string name="zen_mode_edit_name_empty_error" msgid="5788063278827188275">"モード名を指定してください"</string>
@@ -4490,7 +4540,7 @@
     <string name="admin_financed_message" msgid="1156197630834947884">"デバイスの管理者がこのデバイスに関連するデータにアクセスし、アプリを管理し、デバイスの設定を変更できる可能性があります。"</string>
     <string name="disabled_by_advanced_protection_title" msgid="9051476417559262469">"高度な保護機能により制限されています"</string>
     <string name="disabled_by_advanced_protection_setting_is_on_message" msgid="4242986779932956593">"セキュリティ保護のため、この設定は高度な保護機能で ON にしておく必要があります"</string>
-    <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"セキュリティ保護のため、この設定は高度な保護機能で OFF にしておく必要があります"</string>
+    <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"高度な保護機能によるセキュリティ保護のため、この設定は ON にできません"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"セキュリティ保護のため、この設定は高度な保護機能により制限されています"</string>
     <string name="disabled_by_advanced_protection_wep_action_message" msgid="239574547298386495">"このネットワークでは WEP が使用されていますが、これは古い暗号化方式であり、データが危険にさらされる恐れがあります。WEP 接続は、高度な保護機能によってブロックされています。"</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"設定"</string>
@@ -4695,7 +4745,8 @@
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"ウォレット"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"ウォレットを開く"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"ロック画面のショートカットを変更しますか？"</string>
-    <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g>はロック画面のショートカットでもあります。変更しますか？"</string>
+    <!-- no translation found for double_tap_power_lockscreen_shortcut_tip_description (7572626485518591928) -->
+    <skip />
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"現在のデフォルトのウォレット アプリは、このジェスチャーに対応していません。"</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"デフォルトのウォレットを変更する"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"フリップしてカメラを切り替え"</string>
@@ -5723,7 +5774,7 @@
     <string name="audio_sharing_stop_dialog_with_more_content" msgid="5262441138981618703">"接続されているヘッドフォンとの音声の共有を停止します"</string>
     <string name="audio_sharing_connect_button_label" msgid="4241911519063029982">"接続"</string>
     <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"音声の共有を停止済み"</string>
-    <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"対応デバイスの接続"</string>
+    <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"対応デバイスを接続"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"音声の共有を開始するには、まず LE Audio 対応のヘッドフォンをスマートフォンに接続します"</string>
     <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>に切り替える"</string>
     <string name="audio_sharing_progress_dialog_start_stream_content" msgid="1152386358063502897">"音声ストリームを開始しています…"</string>
@@ -5811,26 +5862,19 @@
     <string name="supervision_settings_title" msgid="8507163323870367711">"保護者による使用制限"</string>
     <string name="supervision_settings_summary" msgid="5020634300370322741">"コンテンツの制限とその他の制限"</string>
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"デバイスの管理機能を使用する"</string>
-    <!-- no translation found for device_supervision_switch_no_pin_summary (4869563544571033220) -->
-    <skip />
-    <!-- no translation found for device_supervision_switch_paused_summary (1014381188739295656) -->
-    <skip />
+    <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"PIN を設定"</string>
+    <string name="device_supervision_switch_paused_summary" msgid="1014381188739295656">"一時停止中"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"管理機能, 保護者向け管理ツール, 保護者による使用制限"</string>
-    <!-- no translation found for supervision_pin_management_preference_title (7721501202320841845) -->
-    <skip />
-    <!-- no translation found for supervision_pin_management_preference_summary_add (2247921267270577374) -->
-    <skip />
-    <!-- no translation found for supervision_pin_management_preference_summary_verify_recovery (5072554239108915119) -->
-    <skip />
+    <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"PIN の管理"</string>
+    <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"再設定用のメールアドレスの追加"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"再設定用のメールアドレスの検証"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"PIN を変更する"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"PIN を忘れた場合"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"再設定用のメールアドレスを更新する"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"PIN を削除する"</string>
     <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"管理機能の設定がすべてリセットされます"</string>
-    <!-- no translation found for supervision_add_pin_recovery_title (3487098027604685794) -->
-    <skip />
-    <!-- no translation found for supervision_verify_pin_recovery_title (3166602415814821497) -->
-    <skip />
+    <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"再設定用のメールアドレスの追加"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"メールアドレスの確認"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"ウェブ コンテンツ フィルタ"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"ウェブサイト"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="1786398287521485576">"露骨な表現を含むウェブ コンテンツをブロックする"</string>
@@ -5843,7 +5887,6 @@
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"管理機能用の PIN を入力"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"保護者による使用制限の PIN を設定する"</string>
     <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"PIN の確認"</string>
-    <!-- no translation found for supervision_pin_reset_success_toast (9163550161698311831) -->
-    <skip />
+    <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN を更新しました"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> のアニメーション"</string>
 </resources>
