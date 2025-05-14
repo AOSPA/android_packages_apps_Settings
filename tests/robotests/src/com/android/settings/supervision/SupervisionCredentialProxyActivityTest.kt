@@ -59,7 +59,7 @@ class SupervisionCredentialProxyActivityTest {
     }
 
     @Test
-    fun onCreate_supervisingUserNotNull_canStartProfile_startSetPinActivity() {
+    fun onCreate_supervisingUser_canStartProfile_startSetPinActivity() {
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
         mockActivityManager.stub { on { startProfile(any()) } doReturn true }
 
@@ -84,7 +84,7 @@ class SupervisionCredentialProxyActivityTest {
             .isEqualTo(ChooseLockGeneric::class.java.name)
     }
 
-   @Test
+    @Test
     fun onCreate_callerNotHasSupervisionRole_setPinActivityNotStarted() {
         mockUserManager.stub { on { users } doReturn listOf(TESTING_USER_INFO) }
         mockActivityManager.stub { on { startProfile(any()) } doReturn true }

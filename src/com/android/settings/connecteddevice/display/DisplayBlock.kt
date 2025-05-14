@@ -22,20 +22,71 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.PointF
-import android.graphics.RectF
-import android.graphics.drawable.BitmapDrawable
+import android.util.Log
+import android.view.SurfaceControl
+import android.view.SurfaceHolder
+import android.view.SurfaceView
 import android.view.View
 import android.widget.FrameLayout
 
 import androidx.annotation.VisibleForTesting
 
 /** Represents a draggable block in the topology pane. */
-class DisplayBlock(context : Context) : FrameLayout(context) {
+class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injector.context!!) {
     @VisibleForTesting
     val mHighlightPx = context.resources.getDimensionPixelSize(
             R.dimen.display_block_highlight_width)
 
-    val mWallpaperView = View(context)
+    private var mDisplayId: Int? = null
+
+    /** Scale of the mirrored wallpaper to the actual wallpaper size. */
+    private var mSurfaceScale: Float? = null
+
+    val displayId: Int?
+        get() = mDisplayId
+
+    // These are surfaces which must be removed from the display block hierarchy and released once
+    // the new surface is put in place. This list can have more than one item because we may get
+    // two reset calls before we get a single surfaceChange callback.
+    private val mOldSurfaces = mutableListOf<SurfaceControl>()
+    private var mWallpaperSurface: SurfaceControl? = null
+
+    private val mUpdateSurfaceView = Runnable { updateSurfaceView() }
+
+    @VisibleForTesting fun updateSurfaceView() {
+        val displayId = mDisplayId ?: return
+
+        if (parent == null) {
+            Log.i(TAG, "View for display $displayId has no parent - cancelling update")
+            return
+        }
+
+        var surface = mWallpaperSurface
+        if (surface == null) {
+            surface = injector.wallpaper(displayId)
+            if (surface == null) {
+                injector.handler.postDelayed(mUpdateSurfaceView, /* delayMillis= */ 500)
+                return
+            }
+            mWallpaperSurface = surface
+        }
+
+        val surfaceScale = mSurfaceScale ?: return
+        injector.updateSurfaceView(mOldSurfaces, surface, mWallpaperView, surfaceScale)
+        mOldSurfaces.clear()
+    }
+
+    private val mHolderCallback = object : SurfaceHolder.Callback {
+        override fun surfaceCreated(h: SurfaceHolder) {}
+
+        override fun surfaceChanged(h: SurfaceHolder, format: Int, newWidth: Int, newHeight: Int) {
+            updateSurfaceView()
+        }
+
+        override fun surfaceDestroyed(h: SurfaceHolder) {}
+    }
+
+    val mWallpaperView = SurfaceView(context)
     private val mBackgroundView = View(context).apply {
         background = context.getDrawable(R.drawable.display_block_background)
     }
@@ -55,10 +106,8 @@ class DisplayBlock(context : Context) : FrameLayout(context) {
         addView(mWallpaperView)
         addView(mBackgroundView)
         addView(mSelectionMarkerView)
-    }
 
-    fun setWallpaper(wallpaper: Bitmap?) {
-        mWallpaperView.background = BitmapDrawable(context.resources, wallpaper ?: return)
+        mWallpaperView.holder.addCallback(mHolderCallback)
     }
 
     /**
@@ -80,17 +129,45 @@ class DisplayBlock(context : Context) : FrameLayout(context) {
         z = if (value) 2f else 1f
     }
 
-    /** Sets position and size of the block given unpadded bounds. */
-    fun placeAndSize(bounds : RectF, scale : TopologyScale) {
-        val topLeft = scale.displayToPaneCoor(bounds.left, bounds.top)
-        val bottomRight = scale.displayToPaneCoor(bounds.right, bounds.bottom)
-        val layout = layoutParams
+    /**
+     * Sets position and size of the block given coordinates in pane space.
+     *
+     * @param displayId ID of display this block represents, needed for fetching wallpaper
+     * @param topLeft coordinates of top left corner of the block, not including highlight border
+     * @param bottomRight coordinates of bottom right corner of the block, not including highlight
+     *                    border
+     * @param surfaceScale scale in pixels of the size of the wallpaper mirror to the actual
+     *                     wallpaper on the screen - should be less than one to indicate scaling to
+     *                     smaller size
+     */
+    fun reset(displayId: Int, topLeft: PointF, bottomRight: PointF, surfaceScale: Float) {
+        mWallpaperSurface?.let { mOldSurfaces.add(it) }
+        injector.handler.removeCallbacks(mUpdateSurfaceView)
+        mWallpaperSurface = null
+        setHighlighted(false)
+        positionInPane = topLeft
+
+        mDisplayId = displayId
+        mSurfaceScale = surfaceScale
+
         val newWidth = (bottomRight.x - topLeft.x).toInt()
         val newHeight = (bottomRight.y - topLeft.y).toInt()
-        layout.width = newWidth + 2*mHighlightPx
-        layout.height = newHeight + 2*mHighlightPx
-        layoutParams = layout
-        positionInPane = topLeft
+
+        val paddedWidth = newWidth + 2*mHighlightPx
+        val paddedHeight = newHeight + 2*mHighlightPx
+
+        if (width == paddedWidth && height == paddedHeight) {
+            // Will not receive a surfaceChanged callback, so in case the wallpaper is different,
+            // apply it.
+            updateSurfaceView()
+            return
+        }
+
+        layoutParams.let {
+            it.width = paddedWidth
+            it.height = paddedHeight
+            layoutParams = it
+        }
 
         // The highlight is the outermost border. The highlight is shown outside of the parent
         // FrameLayout so that it consumes the padding between the blocks.
@@ -108,5 +185,9 @@ class DisplayBlock(context : Context) : FrameLayout(context) {
 
         // The other two child views are MATCH_PARENT by default so will resize to fill up the
         // FrameLayout.
+    }
+
+    private companion object {
+        private const val TAG = "DisplayBlock"
     }
 }

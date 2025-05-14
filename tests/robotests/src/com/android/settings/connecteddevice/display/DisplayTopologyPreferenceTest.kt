@@ -21,13 +21,14 @@ import android.hardware.display.DisplayTopology.TreeNode.POSITION_LEFT
 import android.hardware.display.DisplayTopology.TreeNode.POSITION_TOP
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.RectF
 import android.hardware.display.DisplayTopology
 import android.util.DisplayMetrics
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
+import android.view.ViewManager
 import android.widget.FrameLayout
 import androidx.preference.PreferenceViewHolder
 import androidx.test.core.app.ApplicationProvider
@@ -51,25 +52,24 @@ class DisplayTopologyPreferenceTest {
     val preference = DisplayTopologyPreference(injector)
     val rootView = View.inflate(context, preference.layoutResource, /*parent=*/ null)
     val holder = PreferenceViewHolder.createInstanceForTests(rootView)
-    val wallpaper = Bitmap.createBitmap(
-            intArrayOf(Color.MAGENTA), /*width=*/ 1, /*height=*/ 1, Bitmap.Config.RGB_565)
 
     init {
-        injector.systemWallpaper = wallpaper
         preference.onBindViewHolder(holder)
     }
 
     class TestInjector(context : Context) : ConnectedDisplayInjector(context) {
         var topology: DisplayTopology? = null
-        var systemWallpaper: Bitmap? = null
+
         var topologyListener: Consumer<DisplayTopology>? = null
 
         override var displayTopology : DisplayTopology?
             get() = topology
             set(value) { topology = value }
 
-        override val wallpaper: Bitmap?
-            get() = systemWallpaper!!
+        /**
+         * A log of events related to wallpaper revealing.
+         */
+        val revealLog = mutableListOf<String>()
 
         override val densityDpi = DisplayMetrics.DENSITY_DEFAULT
 
@@ -86,6 +86,31 @@ class DisplayTopologyPreferenceTest {
                 throw IllegalStateException("no such listener registered: ${listener}")
             }
             topologyListener = null
+        }
+
+        override fun revealWallpaper(displayId: Int): RevealedWallpaper? {
+            val childView = View(context)
+            val viewManager = object : ViewManager {
+                override fun addView(view: View, params: ViewGroup.LayoutParams) {
+                    revealLog.add("unexpected invocation of addView")
+                }
+
+                override fun updateViewLayout(view: View, params: ViewGroup.LayoutParams) {
+                    revealLog.add("unexpected invocation of updateViewLayout")
+                }
+
+                override fun removeView(view: View) {
+                    if (childView === view) {
+                        revealLog.add("removed wallpaper revealer for display $displayId")
+                    } else {
+                        revealLog.add("invalid invocation of removeView")
+                    }
+                }
+            }
+
+            revealLog.add("revealWallpaper invoked for display $displayId")
+
+            return RevealedWallpaper(displayId, childView, viewManager)
         }
     }
 
@@ -241,6 +266,12 @@ class DisplayTopologyPreferenceTest {
         val (leftBlock, rightBlock) = setupTwoDisplays()
         val leftBounds = virtualBounds(leftBlock)
 
+        assertThat(injector.revealLog).containsExactly(
+                "revealWallpaper invoked for display 1",
+                "revealWallpaper invoked for display 42")
+
+        injector.revealLog.clear()
+
         preference.mTimesRefreshedBlocks = 0
 
         val downEvent = MotionEventBuilder.newBuilder()
@@ -262,6 +293,8 @@ class DisplayTopologyPreferenceTest {
         rightBlock.dispatchTouchEvent(downEvent)
         rightBlock.dispatchTouchEvent(moveEvent)
         rightBlock.dispatchTouchEvent(upEvent)
+
+        assertThat(injector.revealLog).isEmpty()
 
         val rootChildren = injector.topology!!.root!!.children
         assertThat(rootChildren).hasSize(1)
@@ -309,14 +342,27 @@ class DisplayTopologyPreferenceTest {
     @Test
     fun keepOriginalViewsWhenAddingMore() {
         setupTwoDisplays()
+        assertThat(injector.revealLog).containsExactly(
+                "revealWallpaper invoked for display 1",
+                "revealWallpaper invoked for display 42")
+        injector.revealLog.clear()
         val childrenBefore = getPaneChildren()
         injector.topology!!.addDisplay(/* displayId= */ 101, 320, 240, /* logicalDensity= */ 160)
         preference.refreshPane()
+        assertThat(injector.revealLog).containsExactly("revealWallpaper invoked for display 101")
+        injector.revealLog.clear()
         val childrenAfter = getPaneChildren()
 
         assertThat(childrenBefore).hasSize(2)
         assertThat(childrenAfter).hasSize(3)
         assertThat(childrenAfter.subList(0, 2)).isEqualTo(childrenBefore)
+
+        assertThat(injector.topology!!.removeDisplay(42)).isTrue()
+        assertThat(injector.topology!!.removeDisplay(101)).isTrue()
+        preference.refreshPane()
+        assertThat(injector.revealLog).containsExactly(
+                "removed wallpaper revealer for display 42",
+                "removed wallpaper revealer for display 101")
     }
 
     @Test

@@ -97,6 +97,7 @@ open class SupervisionCredentialProxyActivity : FragmentActivity() {
     }
 
     companion object {
-        @VisibleForTesting const val REQUEST_CODE_SUPERVISION_CREDENTIALS_PROXY = 10
+        @VisibleForTesting
+        const val REQUEST_CODE_SUPERVISION_CREDENTIALS_PROXY = 10
     }
 }

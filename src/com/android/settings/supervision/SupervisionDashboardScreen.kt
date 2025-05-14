@@ -63,10 +63,6 @@ class SupervisionDashboardScreen : PreferenceScreenCreator, PreferenceLifecycleP
         supervisionClient?.close()
     }
 
-    override fun onResume(context: PreferenceLifecycleContext) {
-        context.notifyPreferenceChange(SupervisionPinManagementScreen.KEY)
-    }
-
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(context, this) {
             val supervisionClient = getSupervisionClient(context)

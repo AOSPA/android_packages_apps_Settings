@@ -96,11 +96,7 @@ class SupervisionSetupRecoveryPreference :
 
     fun updateRecoveryInfo(result: ActivityResult) {
         if (result.resultCode == Activity.RESULT_OK) {
-            lifeCycleContext.apply {
-                notifyPreferenceChange(KEY)
-                notifyPreferenceChange(SupervisionPinRecoveryPreference.KEY)
-                notifyPreferenceChange(SupervisionUpdateRecoveryEmailPreference.KEY)
-            }
+            lifeCycleContext.notifyPreferenceChange(KEY)
         }
     }
 

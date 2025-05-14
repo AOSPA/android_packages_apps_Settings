@@ -1,0 +1,237 @@
+/*
+ * Copyright (C) 2025 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.android.settings.supervision
+
+import android.app.Activity.RESULT_CANCELED
+import android.app.Activity.RESULT_OK
+import android.app.ActivityManager
+import android.app.Application
+import android.app.KeyguardManager
+import android.app.supervision.SupervisionManager
+import android.app.supervision.flags.Flags
+import android.content.Context
+import android.content.pm.UserInfo
+import android.os.UserManager
+import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
+import android.platform.test.annotations.EnableFlags
+import androidx.lifecycle.Lifecycle
+import androidx.test.core.app.ActivityScenario
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.password.ChooseLockPassword
+import com.google.common.truth.Truth.assertThat
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.kotlin.any
+import org.mockito.kotlin.argThat
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.never
+import org.mockito.kotlin.stub
+import org.mockito.kotlin.verify
+import org.robolectric.Shadows.shadowOf
+import org.robolectric.shadow.api.Shadow
+import org.robolectric.shadows.ShadowActivity
+import org.robolectric.shadows.ShadowContextImpl
+import org.robolectric.shadows.ShadowKeyguardManager
+
+@RunWith(AndroidJUnit4::class)
+class SetupSupervisionActivityTest {
+    private val context = ApplicationProvider.getApplicationContext<Context>()
+
+    private val mockActivityManager = mock<ActivityManager>()
+    private val mockSupervisionManager = mock<SupervisionManager>()
+    private val mockUserManager = mock<UserManager>()
+
+    private lateinit var shadowActivity: ShadowActivity
+    private lateinit var shadowKeyguardManager: ShadowKeyguardManager
+
+    @Before
+    fun setUp() {
+        shadowKeyguardManager = shadowOf(context.getSystemService(KeyguardManager::class.java))
+        Shadow.extract<ShadowContextImpl>((context as Application).baseContext).apply {
+            setSystemService(Context.ACTIVITY_SERVICE, mockActivityManager)
+            setSystemService(Context.SUPERVISION_SERVICE, mockSupervisionManager)
+            setSystemService(Context.USER_SERVICE, mockUserManager)
+        }
+
+        mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
+        mockActivityManager.stub { on { startProfile(any()) } doReturn true }
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
+    }
+
+    @Test
+    fun onCreate_noSupervisingUser_createAndStartProfile_startSetPinActivity() {
+        mockUserManager.stub {
+            on { users } doReturn emptyList()
+            on { createUser(any(), any(), any()) } doReturn SUPERVISING_USER_INFO
+        }
+
+        ActivityScenario.launch(SetupSupervisionActivity::class.java).use { scenario ->
+            scenario.onActivity { activity ->
+                assertThat(shadowOf(activity).nextStartedActivity.component?.className)
+                    .isEqualTo(ChooseLockPassword::class.java.name)
+
+                assertThat(activity.isFinishing).isFalse()
+            }
+        }
+
+        verify(mockUserManager)
+            .createUser("Supervising", USER_TYPE_PROFILE_SUPERVISING, /* flags= */ 0)
+        verify(mockActivityManager).startProfile(argThat { identifier == SUPERVISING_USER_ID })
+    }
+
+    @Test
+    fun onCreate_existingSupervisingUser_canStartProfile_startSetPinActivity() {
+        ActivityScenario.launch(SetupSupervisionActivity::class.java).use { scenario ->
+            scenario.onActivity { activity ->
+                assertThat(shadowOf(activity).nextStartedActivity.component?.className)
+                    .isEqualTo(ChooseLockPassword::class.java.name)
+
+                assertThat(activity.isFinishing).isFalse()
+            }
+        }
+
+        verify(mockUserManager, never()).createUser(any(), any(), any())
+        verify(mockActivityManager).startProfile(argThat { identifier == SUPERVISING_USER_ID })
+    }
+
+    @Test
+    fun onCreate_createUserFails_canceled() {
+        mockUserManager.stub {
+            on { users } doReturn emptyList()
+            on { createUser(any(), any(), any()) } doReturn null
+        }
+
+        ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
+            scenario ->
+            assertThat(scenario.state).isEqualTo(Lifecycle.State.DESTROYED)
+            assertThat(scenario.result.resultCode).isEqualTo(RESULT_CANCELED)
+        }
+    }
+
+    @Test
+    fun onCreate_startProfileFails_canceled() {
+        mockActivityManager.stub { on { startProfile(any()) } doReturn false }
+
+        ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
+            scenario ->
+            assertThat(scenario.state).isEqualTo(Lifecycle.State.DESTROYED)
+            assertThat(scenario.result.resultCode).isEqualTo(RESULT_CANCELED)
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN)
+    fun onSetLockResult_startsRecoveryActivity() {
+        ActivityScenario.launch(SetupSupervisionActivity::class.java).use { scenario ->
+            scenario.onActivity { activity ->
+                val shadowActivity = shadowOf(activity)
+                shadowActivity.receiveResult(
+                    shadowActivity.nextStartedActivityForResult.intent,
+                    RESULT_OK,
+                    null,
+                )
+
+                assertThat(shadowActivity.nextStartedActivity.component?.className)
+                    .isEqualTo(SupervisionPinRecoveryActivity::class.java.name)
+                assertThat(activity.isFinishing).isFalse()
+            }
+        }
+        verify(mockSupervisionManager).setSupervisionEnabled(true)
+    }
+
+    @Test
+    fun onSetLockResult_supervisingUserNull_canceled() {
+        ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
+            scenario ->
+            scenario.onActivity { activity ->
+                mockUserManager.stub { on { users } doReturn emptyList() }
+
+                val shadowActivity = shadowOf(activity)
+                shadowActivity.receiveResult(
+                    shadowActivity.nextStartedActivityForResult.intent,
+                    RESULT_OK,
+                    null,
+                )
+
+                assertThat(activity.isFinishing).isTrue()
+            }
+            assertThat(scenario.result.resultCode).isEqualTo(RESULT_CANCELED)
+        }
+        verify(mockSupervisionManager, never()).setSupervisionEnabled(any())
+    }
+
+    @Test
+    fun onSetLockResult_supervisingUserNotSecure_canceled() {
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
+
+        ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
+            scenario ->
+            scenario.onActivity { activity ->
+                val shadowActivity = shadowOf(activity)
+                shadowActivity.receiveResult(
+                    shadowActivity.nextStartedActivityForResult.intent,
+                    RESULT_OK,
+                    null,
+                )
+
+                assertThat(activity.isFinishing).isTrue()
+            }
+            assertThat(scenario.result.resultCode).isEqualTo(RESULT_CANCELED)
+        }
+        verify(mockSupervisionManager, never()).setSupervisionEnabled(any())
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN)
+    fun onPinRecoveryResult_finishesOk() {
+        ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
+            scenario ->
+            scenario.onActivity { activity ->
+                val shadowActivity = shadowOf(activity)
+                // Set PIN result.
+                shadowActivity.receiveResult(
+                    shadowActivity.nextStartedActivityForResult.intent,
+                    RESULT_OK,
+                    null,
+                )
+                // PIN recovery result.
+                shadowActivity.receiveResult(
+                    shadowActivity.nextStartedActivityForResult.intent,
+                    RESULT_OK,
+                    null,
+                )
+
+                assertThat(activity.isFinishing).isTrue()
+            }
+            assertThat(scenario.result.resultCode).isEqualTo(RESULT_OK)
+        }
+    }
+
+    private companion object {
+        const val SUPERVISING_USER_ID = 5
+        val SUPERVISING_USER_INFO =
+            UserInfo(
+                SUPERVISING_USER_ID,
+                /* name */ "supervising",
+                /* iconPath */ "",
+                /* flags */ 0,
+                USER_TYPE_PROFILE_SUPERVISING,
+            )
+    }
+}

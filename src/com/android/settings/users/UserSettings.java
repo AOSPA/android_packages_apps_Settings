@@ -609,7 +609,7 @@ public class UserSettings extends SettingsPreferenceFragment
             if (resultCode != Activity.RESULT_CANCELED && hasLockscreenSecurity()) {
                 addUserNow(USER_TYPE_RESTRICTED_PROFILE);
             }
-        } else if (Flags.placeAddUserDialogWithinActivity() && requestCode == REQUEST_ADD_USER) {
+        } else if (requestCode == REQUEST_ADD_USER) {
             if (resultCode == Activity.RESULT_OK) {
                 mPendingUserName = data.getStringExtra(CreateUserActivity.EXTRA_USER_NAME);
                 mPendingUserIsAdmin = data.getBooleanExtra(CreateUserActivity.EXTRA_IS_ADMIN,
@@ -1149,7 +1149,7 @@ public class UserSettings extends SettingsPreferenceFragment
                 }
 
                 Future<?> unusedSettingIconFuture = ThreadUtils.postOnBackgroundThread(() -> {
-                    if (Flags.placeAddUserDialogWithinActivity() && mPendingUserIconPath != null) {
+                    if (mPendingUserIconPath != null) {
                         Bitmap bitmap = BitmapFactory.decodeFile(mPendingUserIconPath);
                         mUserManager.setUserIcon(user.id, bitmap);
                         new File(mPendingUserIconPath).delete();
@@ -1747,13 +1747,9 @@ public class UserSettings extends SettingsPreferenceFragment
             if (mUserCaps.mCanAddRestrictedProfile) {
                 showDialog(DIALOG_CHOOSE_USER_TYPE);
             } else {
-                if (Flags.placeAddUserDialogWithinActivity()) {
-                    startActivityForResult(CreateUserActivity.createIntentForStart(getActivity(),
-                                    canCreateAdminUser(), Utils.FILE_PROVIDER_AUTHORITY),
-                            REQUEST_ADD_USER);
-                } else {
-                    onAddUserClicked(USER_TYPE_USER);
-                }
+                startActivityForResult(CreateUserActivity.createIntentForStart(getActivity(),
+                                canCreateAdminUser(), Utils.FILE_PROVIDER_AUTHORITY),
+                        REQUEST_ADD_USER);
             }
             return true;
         } else if (pref == mAddSupervisedUser) {
