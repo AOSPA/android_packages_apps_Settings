@@ -25,6 +25,10 @@
         android:title="@string/user_settings_footer_text"
         settings:controller="com.android.settings.users.MultiUserTopIntroPreferenceController"/>
 
+    <com.android.settings.widget.SettingsMainSwitchPreference
+        android:key="multiple_users_main_switch"
+        android:title="@string/multiple_users_main_switch_title"/>
+
     <PreferenceCategory
         android:key="guest_category"
         android:title="@string/guest_category_title"

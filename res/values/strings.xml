@@ -691,6 +691,8 @@
     <string name="add">Add</string>
     <!-- Button label for remove action [CHAR LIMIT=20] -->
     <string name="remove">Remove</string>
+    <!-- Button label for generic process action [CHAR LIMIT=20] -->
+    <string name="process">Process</string>
 
     <!-- Title of the Settings activity shown within the application itself. -->
     <string name="settings_label">Settings</string>
@@ -5538,9 +5540,9 @@
     <!-- Option title of cursor following edge mode in the mode selection dialog. [CHAR LIMIT=none] -->
     <string name="accessibility_magnification_cursor_following_edge">Move screen when mouse touches edges of screen</string>
     <!-- Title for accessibility follow typing preference for magnification. [CHAR LIMIT=35] -->
-    <string name="accessibility_screen_magnification_follow_typing_title">Magnify typing</string>
+    <string name="accessibility_screen_magnification_follow_typing_title">Follow typing</string>
     <!-- Summary for accessibility follow typing preference for magnification. [CHAR LIMIT=none] -->
-    <string name="accessibility_screen_magnification_follow_typing_summary">Magnifier follows text as you type</string>
+    <string name="accessibility_screen_magnification_follow_typing_summary">The magnifier follows text as you type</string>
     <!-- Title for focus following keyboard focus preference for magnification. [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_follow_keyboard_title">Magnify keyboard focus</string>
     <!-- Title for focus following keyboard focus preference for magnification. [CHAR LIMIT=none] -->
@@ -5548,13 +5550,13 @@
     <!-- Title for accessibility magnifier preference allowing the magnification of navigation bar and IME. [CHAR LIMIT=35] -->
     <string name="accessibility_screen_magnification_nav_ime_title">Magnify keyboard</string>
     <!-- Summary for accessibility magnifier preference allowing the magnification of navigation bar and IME. [CHAR LIMIT=35] -->
-    <string name="accessibility_screen_magnification_nav_ime_summary">Keyboard is magnified with your content</string>
+    <string name="accessibility_screen_magnification_nav_ime_summary">Zoom into the keyboard to see emojis and letters when using full-screen magnification</string>
     <!-- Summary for accessibility magnifier preference allowing the magnification of navigation bar and IME. [CHAR LIMIT=35] -->
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary">Unavailable while only magnifying part of the screen</string>
     <!-- Title for accessibility magnifier preference where the magnifier never turns off while switching apps. [CHAR LIMIT=60] -->
     <string name="accessibility_screen_magnification_always_on_title">Keep on while switching apps</string>
     <!-- Summary for accessibility magnifier preference where the magnifier never turns off while switching apps. [CHAR LIMIT=none] -->
-    <string name="accessibility_screen_magnification_always_on_summary">Magnifier stays on and zooms out when you switch apps</string>
+    <string name="accessibility_screen_magnification_always_on_summary">The magnifier stays on and zooms out when you switch apps</string>
     <!-- Summary for accessibility magnifier preference where the always on toggle is unavailable while partial-only capability. [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_always_on_unavailable_summary">Unavailable while only magnifying part of the screen</string>
     <!-- Title for accessibility on-screen joystick controller preference that controls magnification position. [CHAR LIMIT=35] -->
@@ -11195,6 +11197,11 @@ Data usage charges may apply.</string>
 
     <!-- Content description for condition footer button. In talkback mode, double tapping will cause condition list to collapse [CHAR LIMIT=NONE]-->
     <string name="homepage_condition_footer_content_description">Collapse</string>
+
+    <!-- Content description for alert indicator on the homepage. [CHAR LIMIT=NONE] -->
+    <string name="homepage_unnumbered_alert_description">This item has an alert</string>
+    <!-- Content description for alert indicator on the homepage when there is more than one alert. [CHAR LIMIT=NONE] -->
+    <string name="homepage_numbered_alert_description">This item has <xliff:g id="alert_count" example="2">%1$s</xliff:g> alerts</string>
 
     <!-- Name of the setting to change the display's color temperature -->
     <string name="color_temperature">Cool color temperature</string>

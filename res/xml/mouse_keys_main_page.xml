@@ -44,10 +44,16 @@
         settings:iconStartContentDescription="@string/screen_zoom_make_smaller_desc"
         settings:controller="com.android.settings.inputmethod.MouseKeysAccelerationController"/>
 
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="mouse_keys_max_speed_seekbar"
-        android:layout="@layout/mouse_keys_max_speed_seekbar"
-        android:selectable="false"
+    <com.android.settingslib.widget.SliderPreference
+        android:key="mouse_keys_max_speed_slider"
+        android:title="@string/mouse_keys_max_speed_title"
+        android:min="1"
+        android:max="10"
+        settings:seekBarIncrement="1"
+        settings:iconEnd="@drawable/ic_add_24dp"
+        settings:iconEndContentDescription="@string/screen_zoom_make_larger_desc"
+        settings:iconStart="@drawable/ic_remove_24dp"
+        settings:iconStartContentDescription="@string/screen_zoom_make_smaller_desc"
         settings:controller="com.android.settings.inputmethod.MouseKeysMaxSpeedController"/>
 
     <SwitchPreferenceCompat

@@ -5498,7 +5498,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
         <activity android:name=".spa.SpaAppBridgeActivity" android:exported="false"/>
 
         <activity
-            android:name=".spa.search.SpaSearchLandingActivity"
+            android:name=".spa.search.SettingsSpaSearchLandingActivity"
             android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.SPA_SEARCH_LANDING" />

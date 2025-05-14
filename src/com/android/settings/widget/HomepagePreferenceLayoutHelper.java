@@ -92,11 +92,15 @@ public class HomepagePreferenceLayoutHelper {
                 if (value == 1 || value > 9) {
                     mAlertNumberedFrame.setVisibility(View.GONE);
                     mAlertUnnumbered.setVisibility(View.VISIBLE);
+                    mAlertFrame.setContentDescription(mAlertFrame.getResources()
+                            .getString(R.string.homepage_unnumbered_alert_description));
                 } else if (value > 1) {
                     mAlertUnnumbered.setVisibility(View.GONE);
                     mAlertNumberedFrame.setVisibility(View.VISIBLE);
                     mAlertNumberText.setVisibility(View.VISIBLE);
                     mAlertNumberText.setText(String.valueOf(value));
+                    mAlertFrame.setContentDescription(mAlertFrame.getResources()
+                            .getString(R.string.homepage_numbered_alert_description, value));
                 }
             }
         }

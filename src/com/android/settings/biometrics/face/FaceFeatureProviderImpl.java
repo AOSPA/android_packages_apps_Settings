@@ -97,4 +97,16 @@ public class FaceFeatureProviderImpl implements FaceFeatureProvider {
         }
         return mMaxEnrollableCount;
     }
+
+    @NonNull
+    @Override
+    public Class<? extends FaceEnrollParentalConsent> getParentalConsentPage() {
+        return FaceEnrollParentalConsent.class;
+    }
+
+    @NonNull
+    @Override
+    public int[] getParentalConsentStringRes() {
+        return  FaceEnrollParentalConsent.CONSENT_STRING_RESOURCES;
+    }
 }

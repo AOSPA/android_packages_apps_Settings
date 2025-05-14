@@ -22,15 +22,15 @@ import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
 import com.android.settings.search.SearchIndexableResourcesFactory.createSearchIndexableResources
-import com.android.settings.spa.search.SpaSearchRepository
+import com.android.settings.spa.search.SettingsSpaSearchRepository
 import com.android.settingslib.search.SearchIndexableResources
 
 /** FeatureProvider for the refactored search code. */
 open class SearchFeatureProviderImpl : SearchFeatureProvider {
     private val lazySearchIndexableResources by lazy {
         createSearchIndexableResources().apply {
-            for (searchIndexableData in SpaSearchRepository().getSearchIndexableDataList()) {
-                addIndex(searchIndexableData)
+            for (indexableData in SettingsSpaSearchRepository().getSearchIndexableDataList()) {
+                addIndex(indexableData)
             }
         }
     }

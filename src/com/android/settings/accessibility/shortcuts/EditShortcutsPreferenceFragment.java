@@ -206,6 +206,16 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
 
+        // Expand to show the Triple Tap shortcut if the user already has that shortcut enabled.
+        // This shortcut affects touch responsiveness so we want to ensure that the user sees that
+        // the shortcut is enabled without requiring them to manually expand it.
+        TripleTapShortcutOptionController tripleTapShortcutOptionController =
+                use(TripleTapShortcutOptionController.class);
+        if (tripleTapShortcutOptionController.isShortcutAvailable()
+                && tripleTapShortcutOptionController.isChecked()) {
+            onExpanded();
+        }
+
         Activity activity = getActivity();
         final Preference descriptionPref = findPreference(getString(
                 R.string.accessibility_shortcut_description_pref));

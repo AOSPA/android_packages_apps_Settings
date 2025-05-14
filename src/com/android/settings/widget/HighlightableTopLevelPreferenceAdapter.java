@@ -17,6 +17,7 @@
 package com.android.settings.widget;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
@@ -248,8 +249,10 @@ public class HighlightableTopLevelPreferenceAdapter extends RoundCornerPreferenc
             if (SettingsThemeHelper.isExpressiveTheme(context)) {
                 TextView title = v.findViewById(android.R.id.title);
                 if (title != null) {
+                    ColorStateList currentColor = title.getTextColors();
                     title.setTextAppearance(context, com.android.settingslib.widget.theme.R.style
                             .TextAppearance_SettingsLib_TitleMedium_Emphasized);
+                    title.setTextColor(currentColor);
                 }
             }
         } else {
@@ -272,8 +275,10 @@ public class HighlightableTopLevelPreferenceAdapter extends RoundCornerPreferenc
             if (SettingsThemeHelper.isExpressiveTheme(context)) {
                 TextView title = v.findViewById(android.R.id.title);
                 if (title != null) {
+                    ColorStateList currentColor = title.getTextColors();
                     title.setTextAppearance(context, com.android.settingslib.widget.theme.R.style
                             .TextAppearance_SettingsLib_TitleMedium);
+                    title.setTextColor(currentColor);
                 }
             }
         } else {

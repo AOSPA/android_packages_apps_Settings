@@ -23,13 +23,16 @@ import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_F
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_IS_SUW;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_USE_EXPRESSIVE_STYLE;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
@@ -57,7 +60,7 @@ public class SetupSkipDialog extends InstrumentedDialogFragment
 
     public static SetupSkipDialog newInstance(@LockPatternUtils.CredentialType int credentialType,
             boolean isFrpSupported, boolean forFingerprint, boolean forFace,
-            boolean forBiometrics, boolean isSuw) {
+            boolean forBiometrics, boolean isSuw, boolean isExpressiveStyle) {
         SetupSkipDialog dialog = new SetupSkipDialog();
         Bundle args = new Bundle();
         args.putInt(ARG_LOCK_CREDENTIAL_TYPE, credentialType);
@@ -66,6 +69,7 @@ public class SetupSkipDialog extends InstrumentedDialogFragment
         args.putBoolean(EXTRA_KEY_FOR_FACE, forFace);
         args.putBoolean(EXTRA_KEY_FOR_BIOMETRICS, forBiometrics);
         args.putBoolean(EXTRA_KEY_IS_SUW, isSuw);
+        args.putBoolean(EXTRA_KEY_USE_EXPRESSIVE_STYLE, isExpressiveStyle);
         dialog.setArguments(args);
         return dialog;
     }
@@ -82,7 +86,7 @@ public class SetupSkipDialog extends InstrumentedDialogFragment
 
     private AlertDialog.Builder getBiometricsBuilder(
             @LockPatternUtils.CredentialType int credentialType, boolean isSuw, boolean hasFace,
-            boolean hasFingerprint) {
+            boolean hasFingerprint, boolean isExpressiveStyle) {
         final boolean isFaceSupported = hasFace && (!isSuw || BiometricUtils.isFaceSupportedInSuw(
                 getContext()));
         final int msgResId;
@@ -102,7 +106,7 @@ public class SetupSkipDialog extends InstrumentedDialogFragment
                 msgResId = getPinSkipMessageRes(hasFace && isFaceSupported, hasFingerprint);
                 break;
         }
-        return new AlertDialog.Builder(getContext())
+        return new AlertDialog.Builder(isExpressiveStyle ? getExpressiveContext() : getContext())
                 .setPositiveButton(R.string.skip_lock_screen_dialog_button_label, this)
                 .setNegativeButton(R.string.cancel_lock_screen_dialog_button_label, this)
                 .setTitle(getSkipSetupTitle(screenLockResId, hasFingerprint,
@@ -110,10 +114,15 @@ public class SetupSkipDialog extends InstrumentedDialogFragment
                 .setMessage(msgResId);
     }
 
+    private Context getExpressiveContext() {
+        return new ContextThemeWrapper(getContext(), R.style.Theme_LockSettings_Expressive);
+    }
+
     @NonNull
     public AlertDialog.Builder onCreateDialogBuilder() {
         Bundle args = getArguments();
         final boolean isSuw = args.getBoolean(EXTRA_KEY_IS_SUW);
+        final boolean isExpressiveStyle = args.getBoolean(EXTRA_KEY_USE_EXPRESSIVE_STYLE);
         final boolean forBiometrics = args.getBoolean(EXTRA_KEY_FOR_BIOMETRICS);
         final boolean forFace = args.getBoolean(EXTRA_KEY_FOR_FACE);
         final boolean forFingerprint = args.getBoolean(EXTRA_KEY_FOR_FINGERPRINT);
@@ -123,10 +132,11 @@ public class SetupSkipDialog extends InstrumentedDialogFragment
         if (forFace || forFingerprint || forBiometrics) {
             final boolean hasFace = Utils.hasFaceHardware(getContext());
             final boolean hasFingerprint = Utils.hasFingerprintHardware(getContext());
-            return getBiometricsBuilder(credentialType, isSuw, hasFace, hasFingerprint);
+            return getBiometricsBuilder(credentialType, isSuw, hasFace, hasFingerprint,
+                    isExpressiveStyle);
         }
 
-        return new AlertDialog.Builder(getContext())
+        return new AlertDialog.Builder(isExpressiveStyle ? getExpressiveContext() : getContext())
                 .setPositiveButton(R.string.skip_anyway_button_label, this)
                 .setNegativeButton(R.string.go_back_button_label, this)
                 .setTitle(R.string.lock_screen_intro_skip_title)

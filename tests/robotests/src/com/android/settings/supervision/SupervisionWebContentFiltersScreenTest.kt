@@ -19,13 +19,22 @@ import android.app.Activity
 import android.app.supervision.flags.Flags
 import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import android.content.IntentFilter
+import android.net.Uri
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
+import android.provider.Settings.Global
+import android.text.Spanned
+import android.text.style.ClickableSpan
+import android.view.View
+import android.widget.TextView
 import androidx.fragment.app.testing.FragmentScenario
+import androidx.preference.PreferenceGroupAdapter
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
 import com.android.settings.R
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
 import com.android.settingslib.ipc.MessengerServiceRule
@@ -44,7 +53,7 @@ import org.robolectric.shadows.ShadowPackageManager
 @LooperMode(LooperMode.Mode.INSTRUMENTATION_TEST)
 class SupervisionWebContentFiltersScreenTest {
     private val context: Context = ApplicationProvider.getApplicationContext()
-    private lateinit var supervisionWebContentFiltersScreen: SupervisionWebContentFiltersScreen
+    private val supervisionWebContentFiltersScreen = SupervisionWebContentFiltersScreen()
     private lateinit var shadowPackageManager: ShadowPackageManager
 
     @get:Rule val setFlagsRule = SetFlagsRule()
@@ -67,7 +76,6 @@ class SupervisionWebContentFiltersScreenTest {
             )
         shadowPackageManager.addActivityIfNotPresent(componentName)
         shadowPackageManager.addIntentFilterForActivity(componentName, intentFilter)
-        supervisionWebContentFiltersScreen = SupervisionWebContentFiltersScreen()
     }
 
     @Test
@@ -224,17 +232,50 @@ class SupervisionWebContentFiltersScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN)
-    fun footerPreferenceExists() {
+    fun footerPreference() {
         FragmentScenario.launchInContainer(supervisionWebContentFiltersScreen.fragmentClass())
             .onFragment { fragment ->
-                val footerPreference =
-                    fragment.findPreference<FooterPreference>(
-                        SupervisionWebContentFiltersFooterPreference.KEY
-                    )!!
+                val footerPreference: FooterPreference =
+                    fragment.findPreference(SupervisionWebContentFiltersFooterPreference.KEY)!!
+                val context = footerPreference.context
+                val learnMoreLink =
+                    context.getString(R.string.supervision_web_content_filters_learn_more_link)
 
-                assertThat(footerPreference).isNotNull()
+                // setup for HelpUtils.getHelpIntent
+                Global.putInt(context.contentResolver, Global.DEVICE_PROVISIONED, 1)
+                shadowOf(context.packageManager).apply {
+                    val componentName = ComponentName(context, "browser")
+                    val intentFilter =
+                        IntentFilter(Intent.ACTION_VIEW).apply {
+                            addCategory(Intent.CATEGORY_DEFAULT)
+                            addDataScheme(Uri.parse(learnMoreLink).scheme)
+                        }
+                    addActivityIfNotPresent(componentName)
+                    addIntentFilterForActivity(componentName, intentFilter)
+                }
 
-                //TODO(b/415843744): Add tests for learn more link clicks.
+                // ensure the footer preference is visible
+                val recyclerView = fragment.listView
+                val adapter = recyclerView.adapter as PreferenceGroupAdapter
+                val position = adapter.getPreferenceAdapterPosition(footerPreference)
+                recyclerView.scrollToPosition(position)
+                InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+                val viewHolder = recyclerView.findViewHolderForAdapterPosition(position)!!
+                val learnMoreView =
+                    viewHolder.itemView.findViewById<TextView>(
+                        com.android.settingslib.widget.preference.footer.R.id.settingslib_learn_more
+                    )
+                assertThat(learnMoreView.visibility).isEqualTo(View.VISIBLE)
+
+                val text = learnMoreView.text
+                (text as Spanned).getSpans(0, text.length, ClickableSpan::class.java).apply {
+                    assertThat(this).hasLength(1)
+                    get(0).onClick(learnMoreView)
+                }
+
+                val intent = shadowOf(fragment.activity).nextStartedActivity
+                assertThat(intent.dataString).isEqualTo(learnMoreLink)
+                assertThat(intent.action).isEqualTo(Intent.ACTION_VIEW)
             }
     }
 }

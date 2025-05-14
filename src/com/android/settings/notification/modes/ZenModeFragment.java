@@ -34,6 +34,7 @@ import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.notification.modes.ZenIconLoader;
 import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +50,9 @@ public class ZenModeFragment extends ZenModeFragmentBase {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.modes_rule_settings;
+        return SettingsThemeHelper.isExpressiveTheme(requireContext())
+                ? R.xml.modes_rule_settings_expressive
+                : R.xml.modes_rule_settings;
     }
 
     @Override

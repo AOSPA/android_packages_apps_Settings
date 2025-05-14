@@ -49,3 +49,10 @@ flag {
     description: "Flag for Spatial audio in 25Q4"
     bug: "405344827"
 }
+
+flag {
+  name: "deeplink_sound_and_vibration_25q4"
+  namespace: "android_settings"
+  description: "Flag using for all common deeplink migration in 25Q4"
+  bug: "405344827"
+}

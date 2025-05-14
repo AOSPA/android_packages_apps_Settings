@@ -89,4 +89,12 @@ public interface FingerprintFeatureProvider {
     default List<ChallengeGeneratedInvoker> getChallengeGeneratedInvokers() {
         return Collections.emptyList();
     }
+
+    /** Returns the parental consent page. */
+    @NonNull
+    Class<? extends FingerprintEnrollParentalConsent> getParentalConsentPage();
+
+    /** Returns the string resources of the parental consent page. */
+    @NonNull
+    int[] getParentalConsentStringRes();
 }

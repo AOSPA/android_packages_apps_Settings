@@ -421,11 +421,14 @@ public class HighlightablePreferenceGroupAdapter extends SettingsPreferenceGroup
     }
 
     private @DrawableRes int getBackgroundRes(int position, boolean isHighlighted) {
+        int backgroundRes = (isHighlighted) ? mHighlightBackgroundRes : mNormalBackgroundRes;
         if (SettingsThemeHelper.isExpressiveTheme(mContext)) {
             Log.d(TAG, "[Expressive Theme] get rounded background, highlight = " + isHighlighted);
-            return getRoundCornerDrawableRes(position, false, isHighlighted);
-        } else {
-            return (isHighlighted) ? mHighlightBackgroundRes : mNormalBackgroundRes;
+            int roundCornerResId = getRoundCornerDrawableRes(position, false, isHighlighted);
+            if (roundCornerResId != 0) {
+                return roundCornerResId;
+            }
         }
+        return backgroundRes;
     }
 }

@@ -97,4 +97,15 @@ public class FaceFeatureProviderImplTest {
     public void getMaxEnrollableCount_callbackNotCalled() {
         assertThat(mProvider.getMaxEnrollableCount(mContext)).isEqualTo(0);
     }
+
+    @Test
+    public void test_getParentalConsentPage() {
+        assertThat(mProvider.getParentalConsentPage()).isEqualTo(FaceEnrollParentalConsent.class);
+    }
+
+    @Test
+    public void test_getParentalConsentStringRes() {
+        assertThat(mProvider.getParentalConsentStringRes())
+                .isEqualTo(FaceEnrollParentalConsent.CONSENT_STRING_RESOURCES);
+    }
 }

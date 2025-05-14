@@ -80,6 +80,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
@@ -193,6 +194,10 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (SettingsThemeHelper.isExpressiveTheme(this)) {
+            setTheme(R.style.Theme_Settings_Home_Expressive);
+        }
 
         // Ensure device is provisioned in order to access Settings home
         // TODO(b/331254029): This should later be replaced in favor of an allowlist

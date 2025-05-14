@@ -52,4 +52,16 @@ class FingerprintFeatureProviderImplTest {
         assertThat(mFingerprintFeatureProviderImpl.getSfpsRestToUnlockFeature(mContext))
             .isInstanceOf(SfpsRestToUnlockFeatureImpl::class.java)
     }
+
+    @Test
+    fun test_getParentalConsentPage() {
+        assertThat(mFingerprintFeatureProviderImpl.parentalConsentPage)
+            .isEqualTo(FingerprintEnrollParentalConsent::class.java)
+    }
+
+    @Test
+    fun test_getParentalConsentStringRes() {
+        assertThat(mFingerprintFeatureProviderImpl.parentalConsentStringRes)
+            .isEqualTo(FingerprintEnrollParentalConsent.CONSENT_STRING_RESOURCES)
+    }
 }
