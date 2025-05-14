@@ -19,7 +19,6 @@ package com.android.settings.slices;
 import static com.android.settings.bluetooth.BluetoothSliceBuilder.ACTION_BLUETOOTH_SLICE_CHANGED;
 import static com.android.settings.network.telephony.Enhanced4gLteSliceHelper.ACTION_ENHANCED_4G_LTE_CHANGED;
 import static com.android.settings.notification.modes.DndModeSliceBuilder.ACTION_DND_MODE_SLICE_CHANGED;
-import static com.android.settings.notification.zen.ZenModeSliceBuilder.ACTION_ZEN_MODE_SLICE_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.ACTION_SLIDER_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.ACTION_TOGGLE_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_KEY;
@@ -42,7 +41,6 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SliderPreferenceController;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.notification.modes.DndModeSliceBuilder;
-import com.android.settings.notification.zen.ZenModeSliceBuilder;
 import com.android.settings.overlay.FeatureFactory;
 
 /**
@@ -85,13 +83,8 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
                         .getNewWifiCallingSliceHelper(context)
                         .handleWifiCallingChanged(intent);
                 break;
-            case ACTION_ZEN_MODE_SLICE_CHANGED:
-                if (!android.app.Flags.modesUi()) {
-                    ZenModeSliceBuilder.handleUriChange(context, intent);
-                }
-                break;
             case ACTION_DND_MODE_SLICE_CHANGED:
-                if (android.app.Flags.modesUi() && android.app.Flags.modesUiDndSlice()) {
+                if (android.app.Flags.modesUiDndSlice()) {
                     DndModeSliceBuilder.handleUriChange(context, intent);
                 }
                 break;

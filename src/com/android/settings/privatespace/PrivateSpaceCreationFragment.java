@@ -166,7 +166,7 @@ public class PrivateSpaceCreationFragment extends InstrumentedFragment {
 
     private void showPrivateSpaceErrorScreen(int errorCode) {
         if (errorCode == UserManager.USER_OPERATION_ERROR_USER_RESTRICTED
-                || errorCode == UserManager.USER_OPERATION_ERROR_PRIVATE_PROFILE) {
+                || errorCode == UserManager.USER_OPERATION_ERROR_FEATURE_UNSUPPORTED) {
             NavHostFragment.findNavController(PrivateSpaceCreationFragment.this)
                     .navigate(R.id.action_create_profile_error_restrict);
         } else {

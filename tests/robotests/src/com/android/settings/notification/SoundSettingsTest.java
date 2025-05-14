@@ -28,7 +28,6 @@ import android.media.AudioManager;
 import android.os.UserManager;
 import android.preference.SeekBarVolumizer;
 
-import com.android.settings.R;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowAudioHelper;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
@@ -66,7 +65,6 @@ public class SoundSettingsTest {
         SoundSettings settings = new SoundSettings();
         final int xmlId = settings.getPreferenceScreenResId();
         final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, xmlId);
-        keys.addAll(XmlTestUtils.getKeysFromPreferenceXml(context, R.xml.zen_mode_settings));
         // Add keys with hidden resources
         keys.add("alarm_volume");
         keys.add("separate_ring_volume");

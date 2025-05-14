@@ -104,3 +104,10 @@ flag {
   description: "Use action corners to trigger a chosen action"
   bug: "412558312"
 }
+
+flag {
+  name: "homepage_tile_alert"
+  namespace: "android_settings"
+  description: "Enables alert indicator on homepage tiles"
+  bug: "403326850"
+}

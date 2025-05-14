@@ -17,7 +17,6 @@ package com.android.settings.notification.modes;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import android.app.Flags;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.ViewGroup;
@@ -56,11 +55,6 @@ abstract class AbstractZenModeHeaderController extends AbstractZenModePreference
         super(context, key);
         mFragment = fragment;
         mIconLoader = iconLoader;
-    }
-
-    @Override
-    public boolean isAvailable() {
-        return Flags.modesUi();
     }
 
     protected void setUpHeader(PreferenceScreen screen, int iconSizePx) {

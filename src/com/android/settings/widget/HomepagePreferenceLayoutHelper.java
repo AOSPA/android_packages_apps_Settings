@@ -17,6 +17,7 @@
 package com.android.settings.widget;
 
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
@@ -30,9 +31,14 @@ public class HomepagePreferenceLayoutHelper {
 
     private View mIcon;
     private View mText;
+    private View mAlertFrame;
+    private View mAlertUnnumbered;
+    private View mAlertNumberedFrame;
+    private TextView mAlertNumberText;
     private boolean mIconVisible = true;
     private int mIconPaddingStart = -1;
     private int mTextPaddingStart = -1;
+    private int mAlertValue = -1;
 
     /** The interface for managing preference layouts on homepage */
     public interface HomepagePreferenceLayout {
@@ -75,11 +81,37 @@ public class HomepagePreferenceLayoutHelper {
         }
     }
 
+    /** Sets the alert value and view */
+    public void setAlert(int value) {
+        if (Flags.homepageTileAlert()) {
+            mAlertValue = value;
+            if (mAlertFrame != null && mAlertUnnumbered != null
+                    && mAlertNumberedFrame != null && mAlertNumberText != null) {
+                mAlertFrame.setVisibility((value > 0) ? View.VISIBLE : View.GONE);
+                // only display number if it's single digit, more than 1
+                if (value == 1 || value > 9) {
+                    mAlertNumberedFrame.setVisibility(View.GONE);
+                    mAlertUnnumbered.setVisibility(View.VISIBLE);
+                } else if (value > 1) {
+                    mAlertUnnumbered.setVisibility(View.GONE);
+                    mAlertNumberedFrame.setVisibility(View.VISIBLE);
+                    mAlertNumberText.setVisibility(View.VISIBLE);
+                    mAlertNumberText.setText(String.valueOf(value));
+                }
+            }
+        }
+    }
+
     void onBindViewHolder(PreferenceViewHolder holder) {
         mIcon = holder.findViewById(R.id.icon_frame);
         mText = holder.findViewById(R.id.text_frame);
+        mAlertFrame = holder.findViewById(R.id.alert_frame);
+        mAlertUnnumbered = holder.findViewById(R.id.alert_unnumbered);
+        mAlertNumberedFrame = holder.findViewById(R.id.alert_numbered_frame);
+        mAlertNumberText = (TextView) holder.findViewById(R.id.alert_number_fg);
         setIconVisible(mIconVisible);
         setIconPaddingStart(mIconPaddingStart);
         setTextPaddingStart(mTextPaddingStart);
+        setAlert(mAlertValue);
     }
 }

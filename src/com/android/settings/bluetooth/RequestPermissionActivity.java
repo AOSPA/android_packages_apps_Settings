@@ -83,9 +83,7 @@ public class RequestPermissionActivity extends Activity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (SettingsThemeHelper.isExpressiveTheme(this)) {
-            setTheme(
-                    com.android.settingslib.widget.theme.R.style
-                            .Theme_AlertDialog_SettingsLib_Expressive);
+            setTheme(R.style.Transparent_Expressive);
         }
 
         getWindow().addSystemFlags(SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);

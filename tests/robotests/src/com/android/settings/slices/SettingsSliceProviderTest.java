@@ -132,7 +132,7 @@ public class SettingsSliceProviderTest {
     );
 
     private static final List<Uri> SPECIAL_CASE_OEM_URIS =
-        android.app.Flags.modesUi() && !android.app.Flags.modesUiDndSlice()
+        !android.app.Flags.modesUiDndSlice()
             ? Arrays.asList(
                     CustomSliceRegistry.FLASHLIGHT_SLICE_URI,
                     CustomSliceRegistry.MOBILE_DATA_SLICE_URI,

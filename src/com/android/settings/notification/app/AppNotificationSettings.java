@@ -135,6 +135,7 @@ public class AppNotificationSettings extends NotificationSettings {
                 Adjustment.KEY_SUMMARIZATION));
         mControllers.add(new AdjustmentKeyPreferenceController(context, mBackend,
                 Adjustment.KEY_TYPE));
+        mControllers.add(new AiCategoryPreferenceController(context, mBackend));
         return new ArrayList<>(mControllers);
     }
 }

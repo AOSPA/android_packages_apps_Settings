@@ -18,6 +18,8 @@ package com.android.settings.dashboard;
 
 import static android.content.Intent.EXTRA_USER;
 
+import static com.android.settingslib.drawer.EntriesProvider.EXTRA_ALERT_VALUE;
+import static com.android.settingslib.drawer.EntriesProvider.METHOD_GET_ALERT;
 import static com.android.settingslib.drawer.SwitchesProvider.EXTRA_SWITCH_CHECKED_STATE;
 import static com.android.settingslib.drawer.SwitchesProvider.EXTRA_SWITCH_SET_CHECKED_ERROR;
 import static com.android.settingslib.drawer.SwitchesProvider.EXTRA_SWITCH_SET_CHECKED_ERROR_MESSAGE;
@@ -26,6 +28,7 @@ import static com.android.settingslib.drawer.SwitchesProvider.METHOD_GET_DYNAMIC
 import static com.android.settingslib.drawer.SwitchesProvider.METHOD_GET_PROVIDER_ICON;
 import static com.android.settingslib.drawer.SwitchesProvider.METHOD_IS_CHECKED;
 import static com.android.settingslib.drawer.SwitchesProvider.METHOD_ON_CHECKED_CHANGED;
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_ALERT_URI;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_ICON_URI;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_SUMMARY;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_SUMMARY_URI;
@@ -70,6 +73,7 @@ import com.android.settings.flags.Flags;
 import com.android.settings.homepage.TopLevelHighlightMixin;
 import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.widget.HomepagePreference;
 import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.drawer.ActivityTile;
@@ -193,6 +197,10 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         if (observer != null) {
             outObservers.add(observer);
         }
+        observer = bindAlertAndGetObserver(pref, tile);
+        if (observer != null) {
+            outObservers.add(observer);
+        }
         bindIcon(pref, tile, forceRoundedIcon);
 
         if (tile.hasPendingIntent()) {
@@ -296,6 +304,9 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                     case METHOD_IS_CHECKED:
                         refreshSwitch(uri, pref, this);
                         break;
+                    case METHOD_GET_ALERT:
+                        refreshAlert(uri, pref, this);
+                        break;
                 }
             }
         };
@@ -360,6 +371,33 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             if (!TextUtils.equals(summaryFromUri, preference.getSummary())) {
                 observer.post(() -> preference.setSummary(summaryFromUri));
             }
+        });
+    }
+
+    @Nullable
+    private DynamicDataObserver bindAlertAndGetObserver(Preference preference, Tile tile) {
+        if (!Flags.homepageTileAlert() || !(preference instanceof HomepagePreference)) {
+            return null;
+        }
+        if (tile.getMetaData() != null
+                && tile.getMetaData().containsKey(META_DATA_PREFERENCE_ALERT_URI)) {
+            final Uri uri = TileUtils.getCompleteUri(tile, META_DATA_PREFERENCE_ALERT_URI,
+                    METHOD_GET_ALERT);
+            return createDynamicDataObserver(METHOD_GET_ALERT, uri, preference);
+        }
+
+        return null;
+    }
+
+    private void refreshAlert(Uri uri, Preference preference, DynamicDataObserver observer) {
+        if (!Flags.homepageTileAlert() || !(preference instanceof HomepagePreference)) {
+            return;
+        }
+        var unused = ThreadUtils.postOnBackgroundThread(() -> {
+            Map<String, IContentProvider> providerMap = new ArrayMap<>();
+            int valueFromUri = TileUtils.getIntFromUri(mContext, uri, providerMap,
+                    EXTRA_ALERT_VALUE);
+            observer.post(() -> ((HomepagePreference) preference).setAlert(valueFromUri));
         });
     }
 

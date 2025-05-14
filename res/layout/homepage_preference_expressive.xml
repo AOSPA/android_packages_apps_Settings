@@ -83,4 +83,50 @@
             android:lineBreakWordStyle="phrase"
             style="@style/PreferenceSummaryTextStyle"/>
     </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/alert_frame"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:visibility="gone"
+        android:layout_gravity="center|end"
+        android:layout_marginEnd="16dp">
+
+        <ImageView
+            android:id="@+id/alert_unnumbered"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:scaleType="fitCenter"
+            android:layout_gravity="center"
+            android:src="@drawable/circle"
+            android:contentDescription="@null"
+            android:tint="@color/settingslib_materialColorPrimaryContainer"/>
+
+        <FrameLayout
+            android:id="@+id/alert_numbered_frame"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center">
+
+            <!-- TODO(b/403326850): color and sizing adjustments -->
+            <ImageView
+                android:id="@+id/alert_number_bg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:layout_gravity="center"
+                android:src="@drawable/circle"
+                android:contentDescription="@null"
+                android:tint="@color/settingslib_materialColorSecondaryContainer"/>
+
+            <TextView
+                android:id="@+id/alert_number_fg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/settingslib_materialColorOnSecondaryContainer"
+                style="@style/TextAppearance.SettingsLib.TitleMedium" />
+        </FrameLayout>
+
+    </FrameLayout>
 </LinearLayout>

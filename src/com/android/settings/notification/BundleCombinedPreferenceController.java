@@ -18,19 +18,21 @@ package com.android.settings.notification;
 
 import android.app.Flags;
 import android.content.Context;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.service.notification.Adjustment;
-import android.util.ArrayMap;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.TwoStatePreference;
 
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -39,6 +41,8 @@ import java.util.Set;
 public class BundleCombinedPreferenceController extends BasePreferenceController {
 
     static final String GLOBAL_KEY = "global_pref";
+    static final String WORK_PREF_KEY = "work_profile_pref";
+    static final String TYPE_CATEGORY_KEY = "enabled_classification_types";
     static final String PROMO_KEY = "promotions";
     static final String NEWS_KEY = "news";
     static final String SOCIAL_KEY = "social";
@@ -47,14 +51,32 @@ public class BundleCombinedPreferenceController extends BasePreferenceController
     static final List<String> ALL_PREF_TYPES = List.of(PROMO_KEY, NEWS_KEY, SOCIAL_KEY, RECS_KEY);
 
     @NonNull NotificationBackend mBackend;
+    private @Nullable UserHandle mManagedProfile;
 
     private @Nullable TwoStatePreference mGlobalPref;
-    private Map<String, TwoStatePreference> mTypePrefs = new ArrayMap<>();
+    private @Nullable TwoStatePreference mWorkPref;
+    private @Nullable PreferenceCategory mTypesPrefCategory;
 
     public BundleCombinedPreferenceController(@NonNull Context context, @NonNull String prefKey,
             @NonNull NotificationBackend backend) {
         super(context, prefKey);
         mBackend = backend;
+
+        // will be null if no profile is present or enabled
+        mManagedProfile = Utils.getManagedProfile(UserManager.get(mContext));
+    }
+
+    private boolean hasManagedProfile() {
+        return mManagedProfile != null;
+    }
+
+    private int managedProfileId() {
+        return mManagedProfile != null ? mManagedProfile.getIdentifier() : UserHandle.USER_NULL;
+    }
+
+    @VisibleForTesting
+    void setManagedProfile(UserHandle profile) {
+        mManagedProfile = profile;
     }
 
     @Override
@@ -75,11 +97,20 @@ public class BundleCombinedPreferenceController extends BasePreferenceController
         if (mGlobalPref != null) {
             mGlobalPref.setOnPreferenceChangeListener(mGlobalPrefListener);
         }
-        for (String key : ALL_PREF_TYPES) {
-            TwoStatePreference typePref = category.findPreference(key);
-            if (typePref != null) {
-                mTypePrefs.put(key, typePref);
-                typePref.setOnPreferenceChangeListener(getListenerForType(key));
+
+        mWorkPref = category.findPreference(WORK_PREF_KEY);
+        if (mWorkPref != null) {
+            mWorkPref.setVisible(hasManagedProfile());
+            mWorkPref.setOnPreferenceChangeListener(mWorkPrefListener);
+        }
+
+        mTypesPrefCategory = category.findPreference(TYPE_CATEGORY_KEY);
+        if (mTypesPrefCategory != null) {
+            for (String key : ALL_PREF_TYPES) {
+                TwoStatePreference typePref = mTypesPrefCategory.findPreference(key);
+                if (typePref != null) {
+                    typePref.setOnPreferenceChangeListener(getListenerForType(key));
+                }
             }
         }
 
@@ -87,7 +118,6 @@ public class BundleCombinedPreferenceController extends BasePreferenceController
     }
 
     void updatePrefValues() {
-        // TODO: b/412433475 - update for profile users (add a work profile switch).
         boolean isBundlingEnabled = mBackend.isNotificationBundlingEnabled(mContext.getUserId());
         Set<Integer> allowedTypes = mBackend.getAllowedBundleTypes();
 
@@ -102,12 +132,23 @@ public class BundleCombinedPreferenceController extends BasePreferenceController
             mGlobalPref.setChecked(isBundlingEnabled);
         }
 
-        for (String key : mTypePrefs.keySet()) {
-            TwoStatePreference typePref = mTypePrefs.get(key);
-            // checkboxes for individual types should only be active if the global switch is on
-            typePref.setVisible(isBundlingEnabled);
+        if (mWorkPref != null && hasManagedProfile()) {
+            // profile preference should only be active if the global switch is on
+            mWorkPref.setVisible(isBundlingEnabled);
             if (isBundlingEnabled) {
-                typePref.setChecked(allowedTypes.contains(getBundleTypeForKey(key)));
+                mWorkPref.setChecked(mBackend.isNotificationBundlingEnabled(managedProfileId()));
+            }
+        }
+
+        // if global switch is off hide the whole category
+        if (mTypesPrefCategory != null) {
+            mTypesPrefCategory.setVisible(isBundlingEnabled);
+            if (isBundlingEnabled) {
+                // checkboxes for individual types should only be active if the global switch is on
+                for (String key : ALL_PREF_TYPES) {
+                    TwoStatePreference typePref = mTypesPrefCategory.findPreference(key);
+                    typePref.setChecked(allowedTypes.contains(getBundleTypeForKey(key)));
+                }
             }
         }
     }
@@ -117,6 +158,14 @@ public class BundleCombinedPreferenceController extends BasePreferenceController
         mBackend.setNotificationBundlingEnabled(mContext.getUserId(), checked);
         // update state to hide or show preferences for individual types
         updatePrefValues();
+        return true;
+    };
+
+    private Preference.OnPreferenceChangeListener mWorkPrefListener = (p, val) -> {
+        boolean checked = (boolean) val;
+        if (hasManagedProfile()) {
+            mBackend.setNotificationBundlingEnabled(managedProfileId(), checked);
+        }
         return true;
     };
 

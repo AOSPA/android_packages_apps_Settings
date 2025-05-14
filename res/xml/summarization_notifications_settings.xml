@@ -32,10 +32,18 @@
         settings:searchable="false"
         android:title="@string/notification_summarization_description"/>
 
-    <com.android.settingslib.widget.MainSwitchPreference
-        android:key="global_pref"
-        android:title="@string/notification_summarization_main_control_title"
-        settings:controller="com.android.settings.notification.SummarizationGlobalPreferenceController" />
+    <PreferenceCategory
+        android:key="enabled_settings">
+
+        <com.android.settingslib.widget.MainSwitchPreference
+            android:key="global_pref"
+            android:title="@string/notification_summarization_main_control_title" />
+
+        <SwitchPreferenceCompat
+            android:key="work_profile_pref"
+            android:title="@string/notification_adjustment_work_switch_title" />
+
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:key="notification_summarization_excluded_apps_list"

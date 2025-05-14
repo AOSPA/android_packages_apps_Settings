@@ -29,8 +29,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentActivity;
 
+import com.android.settings.R;
 import com.android.settingslib.widget.SettingsThemeHelper;
-import com.android.settingslib.widget.theme.R;
 
 /**
  * BluetoothPairingDialog asks the user to enter a PIN / Passkey / simple confirmation
@@ -70,7 +70,7 @@ public class BluetoothPairingDialog extends FragmentActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (SettingsThemeHelper.isExpressiveTheme(this)) {
-            setTheme(R.style.Theme_AlertDialog_SettingsLib_Expressive);
+            setTheme(R.style.Transparent_Expressive);
         }
 
         getWindow().addSystemFlags(SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);

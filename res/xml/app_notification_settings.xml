@@ -30,6 +30,22 @@
     <Preference
         android:key="block_desc" />
 
+    <PreferenceCategory
+        android:key="ai_features"
+        android:title="@string/notification_ai_features_title"
+        settings:isPreferenceVisible="false">
+
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="key_summarization"
+            android:title="@string/notification_app_level_summarize_title"
+            android:summary="@string/notification_app_level_summarize_subtext" />
+
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="key_type"
+            android:title="@string/notification_app_level_bundle_title"
+            android:summary="@string/notification_app_level_bundle_subtext" />
+    </PreferenceCategory>
+
     <!-- Conversations added here -->
     <PreferenceCategory
         android:title="@string/conversations_category_title"
@@ -38,13 +54,6 @@
         android:layout="@layout/empty_view" >
 
     </PreferenceCategory>
-
-    <!-- Bundles added here -->
-    <PreferenceCategory
-        android:key="bundles"
-        android:title="@string/notification_bundles"
-        android:visibility="gone"
-        android:layout="@layout/empty_view" />
 
     <!-- Channels/Channel groups added here -->
     <PreferenceCategory
@@ -83,16 +92,6 @@
             android:key="promoted_switch"
             android:title="@string/live_notifications_switch"
             android:summary="@string/live_notifications_desc" />
-
-        <com.android.settingslib.RestrictedSwitchPreference
-            android:key="key_summarization"
-            android:title="@string/notification_app_level_summarize_title"
-            android:summary="@string/notification_app_level_summarize_subtext" />
-
-        <com.android.settingslib.RestrictedSwitchPreference
-            android:key="key_type"
-            android:title="@string/notification_app_level_bundle_title"
-            android:summary="@string/notification_app_level_bundle_subtext" />
 
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="invalid_conversation_switch"
